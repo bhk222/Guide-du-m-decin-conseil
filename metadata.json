@@ -1,0 +1,8 @@
+{
+  "name": "Guide du médecin conseil",
+  "description": "Une application experte 4-en-1 : 1. Estimer le taux d'incapacité (IPP) avec un assistant IA. 2. Obtenir des informations sur la législation algérienne via un guide conversationnel. 3. Consulter une base de données détaillée sur les maladies professionnelles. 4. Accéder à des outils pratiques pour les professionnels de santé. Cet outil est à titre informatif et ne remplace pas une expertise médicale ou légale.",
+  "requestFramePermissions": [
+    "camera"
+  ],
+  "prompt": ""
+}

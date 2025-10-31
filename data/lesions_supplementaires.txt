@@ -1,0 +1,360 @@
+// LÉSIONS SUPPLÉMENTAIRES À AJOUTER - BARÈME COMPLET AT-MP
+
+// SECTION: Troubles Endocriniens et Métaboliques
+{
+  name: "Séquelles Endocriniennes et Métaboliques",
+  subcategories: [
+    {
+      name: "Diabète Post-Traumatique",
+      injuries: [
+        { 
+          name: "Diabète post-traumatique ou post-pancréatique - Type 1 (insulinodépendant)", 
+          rate: [30, 60], 
+          description: "Diabète de type 1 survenu après un traumatisme pancréatique grave (pancréatectomie partielle ou totale, pancréatite nécrosante).",
+          rateCriteria: { 
+            low: "Diabète bien équilibré par insulinothérapie (HbA1c < 7%), sans complication micro ou macrovasculaire, autonomie conservée pour les injections et l'autosurveillance.", 
+            medium: "Diabète avec équilibre fragile (HbA1c 7-9%), hypoglycémies fréquentes ou hyperglycémies récurrentes, début de complications microvasculaires (rétinopathie non proliférante, microalbuminurie).",
+            high: "Diabète instable avec complications sévères (rétinopathie proliférante, néphropathie avec insuffisance rénale, neuropathie invalidante, artériopathie), hypoglycémies sévères fréquentes."
+          } 
+        },
+        { 
+          name: "Diabète post-traumatique - Type 2 (non insulinodépendant)", 
+          rate: [10, 30], 
+          description: "Diabète de type 2 apparu ou décompensé de façon certaine après un traumatisme grave ou une corticothérapie au long cours.",
+          rateCriteria: { 
+            low: "Diabète bien contrôlé par régime et antidiabétiques oraux (HbA1c < 7%), sans complication.", 
+            medium: "Diabète nécessitant une insulinothérapie, équilibre modéré (HbA1c 7-8%), début de complications.",
+            high: "Diabète compliqué (rétinopathie, néphropathie, neuropathie, artériopathie), équilibre difficile."
+          } 
+        },
+      ]
+    },
+    {
+      name: "Troubles Thyroïdiens",
+      injuries: [
+        { 
+          name: "Hypothyroïdie post-traumatique ou post-radiothérapie", 
+          rate: [10, 25], 
+          description: "Insuffisance thyroïdienne apparue après un traumatisme cervical grave, une chirurgie thyroïdienne ou une radiothérapie cervicale.",
+          rateCriteria: { 
+            low: "Hypothyroïdie bien substituée par lévothyroxine, asymptomatique, TSH normalisée.", 
+            medium: "Hypothyroïdie avec difficulté d'équilibration, symptômes résiduels (asthénie, frilosité, prise de poids) malgré le traitement.",
+            high: "Hypothyroïdie sévère avec complications (myxœdème, insuffisance cardiaque), équilibre difficile, nécessité de doses élevées de substitution."
+          } 
+        },
+        { 
+          name: "Hyperthyroïdie post-traumatique (maladie de Basedow ou nodule toxique)", 
+          rate: [15, 35], 
+          description: "Hyperthyroïdie apparue après un traumatisme cervical ou un stress important.",
+          rateCriteria: { 
+            low: "Hyperthyroïdie contrôlée par antithyroïdiens de synthèse, rémission stable.", 
+            medium: "Hyperthyroïdie nécessitant un traitement chirurgical (thyroïdectomie) ou une iode radioactif, avec hypothyroïdie secondaire bien substituée.",
+            high: "Hyperthyroïdie compliquée (ophtalmopathie basedowienne sévère, cardiothyréose avec fibrillation auriculaire, amaigrissement majeur), rebelle au traitement médical."
+          } 
+        },
+      ]
+    },
+    {
+      name: "Troubles des Glandes Surrénales",
+      injuries: [
+        { 
+          name: "Insuffisance surrénalienne post-traumatique (maladie d'Addison secondaire)", 
+          rate: [40, 70], 
+          description: "Insuffisance surrénalienne après un traumatisme crânien avec atteinte hypophysaire, une hémorragie surrénalienne bilatérale ou une corticothérapie prolongée.",
+          rateCriteria: { 
+            low: "Insuffisance surrénalienne bien substituée (hydrocortisone + fludrocortisone), vie normale sous traitement, pas de crise aiguë.", 
+            medium: "Insuffisance surrénalienne avec crises d'insuffisance surrénalienne aiguë occasionnelles malgré le traitement, nécessité d'augmentation des doses en cas de stress.",
+            high: "Insuffisance surrénalienne sévère avec crises fréquentes, décompensations à répétition nécessitant des hospitalisations, retentissement majeur sur la qualité de vie."
+          } 
+        },
+      ]
+    }
+  ]
+},
+
+// SECTION: Maladies Infectieuses Post-Traumatiques
+{
+  name: "Séquelles de Maladies Infectieuses Post-Traumatiques",
+  subcategories: [
+    {
+      name: "Infections Osseuses et Articulaires",
+      injuries: [
+        { 
+          name: "Ostéomyélite chronique post-traumatique", 
+          rate: [20, 60], 
+          description: "Infection chronique de l'os après une fracture ouverte, une intervention chirurgicale ou une contamination traumatique.",
+          rateCriteria: { 
+            low: "Ostéomyélite en rémission après traitement antibiotique prolongé et chirurgie d'assainissement, séquelles fonctionnelles modérées (raideur, douleurs occasionnelles).", 
+            medium: "Ostéomyélite chronique récidivante avec épisodes de réactivation, nécessitant des antibiothérapies prolongées et/ou des reprises chirurgicales, fistules cutanées intermittentes.",
+            high: "Ostéomyélite chronique rebelle avec fistules permanentes, ostéolyse extensive, nécessité d'une amputation ou d'une arthrodèse, invalidité majeure."
+          } 
+        },
+        { 
+          name: "Arthrite septique chronique post-traumatique", 
+          rate: [25, 70], 
+          description: "Infection articulaire chronique après un traumatisme articulaire ouvert, une fracture articulaire ou une chirurgie.",
+          rateCriteria: { 
+            low: "Arthrite guérie après traitement, arthrose post-infectieuse modérée, mobilité articulaire conservée > 50%.", 
+            medium: "Arthrose post-infectieuse sévère avec douleurs chroniques, raideur articulaire majeure, mobilité < 50%.",
+            high: "Destruction articulaire complète nécessitant une arthrodèse ou une arthroplastie (prothèse), ou ankylose en mauvaise position, invalidité majeure."
+          } 
+        },
+      ]
+    },
+    {
+      name: "Infections des Parties Molles",
+      injuries: [
+        { 
+          name: "Fasciite nécrosante séquellaire", 
+          rate: [30, 80], 
+          description: "Séquelles d'une infection nécrosante sévère des tissus mous (fascia, muscles) ayant nécessité une chirurgie extensive (débridements larges, amputations).",
+          rateCriteria: { 
+            low: "Séquelles cicatricielles étendues avec raideurs articulaires modérées et troubles trophiques, nécessité de greffes cutanées.", 
+            medium: "Pertes de substance majeures avec séquelles fonctionnelles sévères (amputation partielle, raideurs articulaires majeures), douleurs chroniques neuropathiques.",
+            high: "Amputation de membre, polyhandicap avec dépendance partielle ou totale, complications chroniques (insuffisance rénale post-syndrome de choc toxique)."
+          } 
+        },
+      ]
+    },
+    {
+      name: "Tétanos",
+      injuries: [
+        { 
+          name: "Séquelles de tétanos post-traumatique", 
+          rate: [20, 80], 
+          description: "Séquelles neurologiques, musculaires ou respiratoires après un tétanos survenu sur une plaie traumatique.",
+          rateCriteria: { 
+            low: "Séquelles mineures : raideurs musculaires résiduelles, douleurs chroniques, sans limitation fonctionnelle majeure.", 
+            medium: "Séquelles modérées : faiblesse musculaire persistante, troubles de la déglutition, dyspnée d'effort par séquelles respiratoires.",
+            high: "Séquelles sévères : tétraparésie spastique, dépendance respiratoire (trachéotomie, ventilation), troubles de la déglutition sévères (gastrostomie), état végétatif ou pauci-relationnel."
+          } 
+        },
+      ]
+    }
+  ]
+},
+
+// SECTION: Séquelles Hématologiques
+{
+  name: "Séquelles Hématologiques",
+  subcategories: [
+    {
+      name: "Anémie Post-Traumatique",
+      injuries: [
+        { 
+          name: "Anémie chronique post-hémorragique sévère", 
+          rate: [10, 40], 
+          description: "Anémie chronique persistante après un traumatisme avec hémorragie massive, ou après splénectomie.",
+          rateCriteria: { 
+            low: "Anémie modérée (Hb 10-12 g/dL) bien compensée, asympomatique ou asthénie légère, pas de nécessité de transfusions.", 
+            medium: "Anémie modérée à sévère (Hb 8-10 g/dL) avec asthénie marquée, dyspnée d'effort, nécessité de supplémentation martiale au long cours.",
+            high: "Anémie sévère (Hb < 8 g/dL) réfractaire au traitement, nécessité de transfusions régulières, dyspnée au moindre effort, retentissement cardiaque."
+          } 
+        },
+      ]
+    },
+    {
+      name: "Troubles de la Coagulation",
+      injuries: [
+        { 
+          name: "Syndrome hémorragique post-traumatique (coagulopathie de consommation séquellaire)", 
+          rate: [30, 60], 
+          description: "Troubles de la coagulation persistants après un traumatisme grave avec coagulopathie de consommation (CIVD), ou après transfusions massives.",
+          rateCriteria: { 
+            low: "Troubles mineurs de la coagulation avec risque hémorragique modéré, nécessité d'éviter certains traitements (anti-agrégants, anticoagulants).", 
+            medium: "Syndrome hémorragique modéré avec hémorragies spontanées occasionnelles (épistaxis, ecchymoses), nécessité de traitement substitutif ponctuel.",
+            high: "Syndrome hémorragique sévère avec hémorragies spontanées fréquentes et graves (digestives, cérébrales), nécessité de transfusions régulières de plasma ou de facteurs de coagulation."
+          } 
+        },
+      ]
+    }
+  ]
+},
+
+// SECTION: Séquelles Dermatologiques Étendues
+{
+  name: "Séquelles Dermatologiques Étendues",
+  subcategories: [
+    {
+      name: "Cicatrices Chéloïdes et Hypertrophiques",
+      injuries: [
+        { 
+          name: "Cicatrices chéloïdes multiples étendues", 
+          rate: [10, 40], 
+          description: "Cicatrices chéloïdes (prolifération excessive de tissu cicatriciel) étendues et invalidantes, sur plusieurs zones du corps.",
+          rateCriteria: { 
+            low: "Cicatrices chéloïdes localisées, gêne esthétique et prurit modérés, réponse partielle au traitement (corticoïdes locaux, compression).", 
+            medium: "Cicatrices chéloïdes étendues avec prurit intense, douleurs, rétraction limitant les mouvements articulaires.",
+            high: "Cicatrices chéloïdes majeures et défigurantes, rebelles à tous les traitements (chirurgie, laser, radiothérapie), retentissement psychologique majeur."
+          } 
+        },
+      ]
+    },
+    {
+      name: "Troubles Pigmentaires Post-Traumatiques",
+      injuries: [
+        { 
+          name: "Vitiligo post-traumatique étendu", 
+          rate: [5, 20], 
+          description: "Dépigmentation cutanée (vitiligo) apparue après un traumatisme cutané sévère (brûlure, dermabrasion extensive).",
+          rateCriteria: { 
+            low: "Vitiligo localisé (< 10% de la surface corporelle), zones couvertes, pas de retentissement psychologique majeur.", 
+            medium: "Vitiligo étendu (10-30%) touchant des zones visibles (visage, mains), retentissement esthétique et psychologique.",
+            high: "Vitiligo généralisé (> 30%) avec atteinte du visage et des mains, retentissement psycho-social majeur, échec des traitements de repigmentation."
+          } 
+        },
+      ]
+    }
+  ]
+},
+
+// SECTION: Complications de la Grossesse et Séquelles Obstétricales
+{
+  name: "Séquelles Obstétricales et Gynécologiques Post-Traumatiques",
+  subcategories: [
+    {
+      name: "Traumatismes Obstétricaux",
+      injuries: [
+        { 
+          name: "Déchirure périnéale complète (3e ou 4e degré) post-accouchement traumatique", 
+          rate: [15, 40], 
+          description: "Déchirure périnéale sévère avec atteinte du sphincter anal (3e degré) ou de la muqueuse rectale (4e degré) lors d'un accouchement difficile.",
+          rateCriteria: { 
+            low: "Déchirure réparée chirurgicalement avec bonne cicatrisation, continence anale et fécale conservée, dyspareunie légère.", 
+            medium: "Séquelles avec incontinence anale aux gaz et/ou selles liquides, dyspareunie modérée à sévère, nécessité d'adaptations (protections).",
+            high: "Incontinence fécale complète (gaz et selles solides), fistule recto-vaginale persistante, dyspareunie intolérable, retentissement psycho-social majeur."
+          } 
+        },
+        { 
+          name: "Prolapsus génital post-traumatique sévère", 
+          rate: [20, 40], 
+          description: "Descente d'organes pelviens (vessie, utérus, rectum) après un accouchement difficile ou un traumatisme pelvien.",
+          rateCriteria: { 
+            low: "Prolapsus de stade II (descente jusqu'à l'orifice vaginal), gêne modérée, amélioré par la rééducation périnéale.", 
+            medium: "Prolapsus de stade III (extériorisation partielle), nécessité d'un pessaire ou d'une chirurgie, incontinence urinaire d'effort associée.",
+            high: "Prolapsus de stade IV (extériorisation complète), échec chirurgical ou récidive, incontinence urinaire et/ou fécale majeure, retentissement majeur sur la qualité de vie."
+          } 
+        },
+      ]
+    }
+  ]
+},
+
+// SECTION: Amputations et Appareillages
+{
+  name: "Amputations Multiples et Polyhandicap",
+  subcategories: [
+    {
+      name: "Amputations Multiples",
+      injuries: [
+        { 
+          name: "Amputation de deux membres supérieurs", 
+          rate: 100, 
+          description: "Perte des deux membres supérieurs (bras, avant-bras ou mains), entraînant une dépendance totale pour les actes de la vie quotidienne."
+        },
+        { 
+          name: "Amputation de deux membres inférieurs", 
+          rate: 100, 
+          description: "Perte des deux membres inférieurs (cuisses, jambes ou pieds), entraînant une impossibilité de marcher et une dépendance en fauteuil roulant."
+        },
+        { 
+          name: "Amputation d'un membre supérieur et d'un membre inférieur", 
+          rate: 100, 
+          description: "Amputation d'un bras (ou avant-bras/main) et d'une jambe (ou cuisse/pied), polyhandicap majeur."
+        },
+        { 
+          name: "Amputation de trois membres", 
+          rate: 100, 
+          description: "Perte de trois membres (combinaison de membres supérieurs et inférieurs), dépendance totale."
+        },
+        { 
+          name: "Amputation des quatre membres (tétra-amputation)", 
+          rate: 100, 
+          description: "Perte des quatre membres, dépendance absolue pour tous les actes de la vie quotidienne."
+        },
+      ]
+    }
+  ]
+},
+
+// SECTION: Complications Psychiatriques Spécifiques
+{
+  name: "Séquelles Psychiatriques Sévères et Spécifiques",
+  subcategories: [
+    {
+      name: "Psychose Post-Traumatique",
+      injuries: [
+        { 
+          name: "Psychose hallucinatoire chronique post-traumatique", 
+          rate: [50, 80], 
+          description: "Psychose avec hallucinations (auditives, visuelles) et délire chronique apparue après un traumatisme crânien grave.",
+          rateCriteria: { 
+            low: "Psychose stabilisée par un traitement antipsychotique, hallucinations rares et non angoissantes, maintien d'une vie sociale minimale.", 
+            medium: "Psychose avec hallucinations fréquentes et délire, nécessitant un traitement antipsychotique au long cours, retentissement socio-professionnel majeur, isolement social.",
+            high: "Psychose chronique sévère avec hallucinations permanentes et délire structuré, résistance au traitement, dangerosité pour soi ou autrui, nécessité d'hospitalisations répétées, perte d'autonomie."
+          } 
+        },
+        { 
+          name: "Schizophrénie post-traumatique", 
+          rate: [60, 100], 
+          description: "Schizophrénie déclenchée par un traumatisme crânien grave ou un stress post-traumatique majeur.",
+          rateCriteria: { 
+            low: "Schizophrénie paranoïde avec symptômes positifs (délire) contrôlés par le traitement, autonomie partielle conservée.", 
+            medium: "Schizophrénie avec symptômes négatifs majeurs (apathie, retrait social, aboulie), dépendance partielle pour les actes de la vie quotidienne.",
+            high: "Schizophrénie désorganisée ou catatonique, syndrome déficitaire sévère, dépendance totale, institutionnalisation."
+          } 
+        },
+      ]
+    },
+    {
+      name: "Dépression et Troubles de l'Humeur",
+      injuries: [
+        { 
+          name: "Dépression majeure post-traumatique chronique résistante", 
+          rate: [30, 70], 
+          description: "Dépression sévère et persistante après un traumatisme grave, résistante aux traitements antidépresseurs.",
+          rateCriteria: { 
+            low: "Dépression majeure avec épisodes récurrents, répondant partiellement aux antidépresseurs, retentissement socio-professionnel modéré.", 
+            medium: "Dépression résistante nécessitant des antidépresseurs + thymorégulateurs ou antipsychotiques, désinsertion professionnelle, tentatives de suicide antérieures.",
+            high: "Dépression mélancolique sévère avec risque suicidaire élevé, dépendance pour les actes de la vie quotidienne, hospitalisations prolongées ou répétées, échec de l'électroconvulsivothérapie (ECT)."
+          } 
+        },
+        { 
+          name: "Trouble bipolaire post-traumatique", 
+          rate: [40, 80], 
+          description: "Trouble de l'humeur avec alternance d'épisodes maniaques et dépressifs, déclenché par un traumatisme crânien ou un stress post-traumatique.",
+          rateCriteria: { 
+            low: "Trouble bipolaire de type II (hypomanie) bien contrôlé par un thymorégulateur, épisodes rares et peu sévères.", 
+            medium: "Trouble bipolaire de type I avec épisodes maniaques et dépressifs fréquents, nécessitant une poly-médication, hospitalisations occasionnelles.",
+            high: "Trouble bipolaire sévère avec cycles rapides, résistance au traitement, hospitalisations fréquentes, mise en danger de soi ou d'autrui lors des épisodes maniaques, désinsertion socio-professionnelle totale."
+          } 
+        },
+      ]
+    },
+    {
+      name: "Troubles Anxieux Sévères",
+      injuries: [
+        { 
+          name: "Trouble obsessionnel-compulsif (TOC) post-traumatique invalidant", 
+          rate: [20, 60], 
+          description: "TOC sévère avec obsessions et compulsions envahissantes, apparu ou aggravé de façon certaine après un traumatisme.",
+          rateCriteria: { 
+            low: "TOC avec obsessions et compulsions quotidiennes mais contrôlées par le traitement (ISRS + TCC), retentissement modéré sur la vie quotidienne (perte de temps < 3h/jour).", 
+            medium: "TOC sévère avec rituels chronophages (> 3h/jour), retentissement majeur sur la vie socio-professionnelle, désinsertion partielle.",
+            high: "TOC très sévère avec rituels quasi-permanents, impossibilité de sortir du domicile, dépendance pour les actes de la vie quotidienne, résistance au traitement médical et à la TCC."
+          } 
+        },
+        { 
+          name: "Trouble panique avec agoraphobie post-traumatique sévère", 
+          rate: [20, 50], 
+          description: "Attaques de panique répétées avec évitement phobique sévère des lieux publics, apparues après un traumatisme.",
+          rateCriteria: { 
+            low: "Attaques de panique occasionnelles, agoraphobie modérée (évitement de certaines situations), réponse partielle au traitement (ISRS + TCC).", 
+            medium: "Attaques de panique fréquentes, agoraphobie sévère avec impossibilité de sortir seul(e), retentissement socio-professionnel majeur.",
+            high: "Attaques de panique quasi-quotidiennes, agoraphobie totale avec confinement au domicile, dépendance pour les sorties, résistance au traitement, dépression associée."
+          } 
+        },
+      ]
+    }
+  ]
+},

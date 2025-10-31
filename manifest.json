@@ -1,0 +1,46 @@
+{
+  "short_name": "Guide AT/MP",
+  "name": "Calculateur & Guide sur les Accidents du Travail",
+  "description": "Une application experte 4-en-1 : 1. Estimer le taux d'incapacité (IPP) avec un assistant IA. 2. Obtenir des informations sur la législation algérienne via un guide conversationnel. 3. Consulter une base de données détaillée sur les maladies professionnelles. 4. Accéder à des outils pratiques pour les professionnels de santé. Cet outil est à titre informatif et ne remplace pas une expertise médicale ou légale.",
+  "icons": [
+    {
+      "src": "/icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "theme_color": "#0d1a38",
+  "background_color": "#0d1a38",
+  "categories": ["medical", "health", "productivity", "utilities"],
+  "lang": "fr-DZ",
+  "dir": "ltr",
+  "prefer_related_applications": false,
+  "shortcuts": [
+    {
+      "name": "Calculateur IPP",
+      "short_name": "Calculateur",
+      "description": "Accéder directement au calculateur d'IPP",
+      "url": "/",
+      "icons": [{ "src": "/icons/icon-192x192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Outils",
+      "short_name": "Outils",
+      "description": "Accéder aux outils médicaux",
+      "url": "/?page=tools",
+      "icons": [{ "src": "/icons/icon-192x192.png", "sizes": "192x192" }]
+    }
+  ],
+  "screenshots": []
+}
