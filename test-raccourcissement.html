@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Raccourcissement - IA Locale</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .test-container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #e74c3c;
+            margin-top: 30px;
+        }
+        .test-case {
+            background: #ecf0f1;
+            padding: 20px;
+            border-left: 4px solid #3498db;
+            margin: 20px 0;
+        }
+        .test-input {
+            background: #fff;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: monospace;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+        }
+        .expected {
+            background: #d5f4e6;
+            padding: 15px;
+            border-radius: 5px;
+            border-left: 4px solid #27ae60;
+            margin: 10px 0;
+        }
+        .result {
+            background: #fff3cd;
+            padding: 15px;
+            border-radius: 5px;
+            border-left: 4px solid #ffc107;
+            margin: 10px 0;
+        }
+        .success {
+            background: #d4edda;
+            border-left-color: #28a745;
+        }
+        .failure {
+            background: #f8d7da;
+            border-left-color: #dc3545;
+        }
+        button {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            font-size: 16px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 10px 5px;
+        }
+        button:hover {
+            background: #2980b9;
+        }
+        .instruction {
+            background: #fff9e6;
+            padding: 20px;
+            border-radius: 5px;
+            border-left: 4px solid #f39c12;
+            margin: 20px 0;
+        }
+        .status {
+            font-weight: bold;
+            font-size: 18px;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+            text-align: center;
+        }
+        .code {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 15px;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="test-container">
+        <h1>🧪 TEST AUTOMATISÉ - Détection Raccourcissement v2.7</h1>
+        
+        <div class="instruction">
+            <h3>📋 Instructions :</h3>
+            <ol>
+                <li>Ouvrez l'application : <a href="http://localhost:3000/" target="_blank">http://localhost:3000/</a></li>
+                <li>Cliquez sur les boutons ci-dessous pour copier chaque cas de test</li>
+                <li>Collez dans l'application et analysez</li>
+                <li>Comparez avec les résultats attendus</li>
+            </ol>
+        </div>
+
+        <h2>🎯 CAS TEST 1 : Raccourcissement 4 cm (Critique)</h2>
+        <div class="test-case">
+            <h3>📝 Description à tester :</h3>
+            <div class="test-input" id="test1">
+Fracture du fémur consolidée avec raccourcissement de 4 cm. Description clinique : atrophie musculaire modérée, marche possible avec compensation.
+            </div>
+            <button onclick="copyTest('test1')">📋 Copier ce test</button>
+            
+            <h3>✅ Résultat attendu :</h3>
+            <div class="expected">
+                <strong>Rubrique détectée :</strong> "Fracture diaphysaire du fémur" [10-30%]<br>
+                <strong>Sévérité :</strong> ÉLEVÉE (détection automatique du raccourcissement 4 cm)<br>
+                <strong>IPP proposé :</strong> 25-30%<br>
+                <strong>Justification doit contenir :</strong>
+                <ul>
+                    <li>✅ "Raccourcissement membre : 4 cm"</li>
+                    <li>✅ "Sévérité élevée" ou "partie haute fourchette"</li>
+                    <li>✅ Mention du retentissement fonctionnel</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2>🎯 CAS TEST 2 : Raccourcissement 2 cm (Modéré)</h2>
+        <div class="test-case">
+            <h3>📝 Description à tester :</h3>
+            <div class="test-input" id="test2">
+Fracture diaphysaire fémorale consolidée. Raccourcissement de 2 cm. Boiterie légère. Pas de limitation majeure.
+            </div>
+            <button onclick="copyTest('test2')">📋 Copier ce test</button>
+            
+            <h3>✅ Résultat attendu :</h3>
+            <div class="expected">
+                <strong>Rubrique :</strong> "Fracture diaphysaire du fémur" [10-30%]<br>
+                <strong>Sévérité :</strong> MOYENNE (2 cm = seuil limite)<br>
+                <strong>IPP proposé :</strong> 15-20%<br>
+                <strong>Justification doit contenir :</strong> "Raccourcissement membre : 2 cm"
+            </div>
+        </div>
+
+        <h2>🎯 CAS TEST 3 : Raccourcissement 1 cm (Léger)</h2>
+        <div class="test-case">
+            <h3>📝 Description à tester :</h3>
+            <div class="test-input" id="test3">
+Fracture col fémoral consolidée. Inégalité de longueur des membres inférieurs de 1 cm. Mobilité conservée.
+            </div>
+            <button onclick="copyTest('test3')">📋 Copier ce test</button>
+            
+            <h3>✅ Résultat attendu :</h3>
+            <div class="expected">
+                <strong>Rubrique :</strong> "Fracture du col du fémur - Bonne consolidation" [5-15%]<br>
+                <strong>Sévérité :</strong> FAIBLE à MOYENNE<br>
+                <strong>IPP proposé :</strong> 8-12%<br>
+                <strong>Justification doit contenir :</strong> "Raccourcissement membre : 1 cm"
+            </div>
+        </div>
+
+        <h2>🎯 CAS TEST 4 : Raccourcissement 5 cm (Sévère)</h2>
+        <div class="test-case">
+            <h3>📝 Description à tester :</h3>
+            <div class="test-input" id="test4">
+Fracture complexe du fémur avec raccourcissement de 5 cm. Boiterie importante. Nécessité de semelle orthopédique. Atrophie musculaire sévère.
+            </div>
+            <button onclick="copyTest('test4')">📋 Copier ce test</button>
+            
+            <h3>✅ Résultat attendu :</h3>
+            <div class="expected">
+                <strong>Rubrique :</strong> "Fracture diaphysaire du fémur" [10-30%]<br>
+                <strong>Sévérité :</strong> ÉLEVÉE (> 4 cm)<br>
+                <strong>IPP proposé :</strong> 28-30% (maximum fourchette)<br>
+                <strong>Justification doit contenir :</strong>
+                <ul>
+                    <li>✅ "Raccourcissement membre : 5 cm"</li>
+                    <li>✅ "Sévérité élevée"</li>
+                    <li>✅ Mention appareillage orthopédique</li>
+                </ul>
+            </div>
+        </div>
+
+        <h2>🎯 CAS TEST 5 : Sans raccourcissement (Témoin)</h2>
+        <div class="test-case">
+            <h3>📝 Description à tester :</h3>
+            <div class="test-input" id="test5">
+Fracture du fémur consolidée. Bonne évolution. Pas de raccourcissement. Mobilité normale.
+            </div>
+            <button onclick="copyTest('test5')">📋 Copier ce test</button>
+            
+            <h3>✅ Résultat attendu :</h3>
+            <div class="expected">
+                <strong>Rubrique :</strong> "Fracture diaphysaire du fémur" [10-30%]<br>
+                <strong>Sévérité :</strong> FAIBLE<br>
+                <strong>IPP proposé :</strong> 10-15%<br>
+                <strong>Justification :</strong> NE DOIT PAS contenir "raccourcissement"
+            </div>
+        </div>
+
+        <h2>📊 Grille d'évaluation</h2>
+        <div class="test-case">
+            <table style="width:100%; border-collapse: collapse;">
+                <tr style="background:#3498db; color:white;">
+                    <th style="padding:10px; border:1px solid #ddd;">Test</th>
+                    <th style="padding:10px; border:1px solid #ddd;">Raccourcissement</th>
+                    <th style="padding:10px; border:1px solid #ddd;">Sévérité attendue</th>
+                    <th style="padding:10px; border:1px solid #ddd;">IPP attendu</th>
+                    <th style="padding:10px; border:1px solid #ddd;">Statut</th>
+                </tr>
+                <tr>
+                    <td style="padding:10px; border:1px solid #ddd;">Test 1</td>
+                    <td style="padding:10px; border:1px solid #ddd;">4 cm</td>
+                    <td style="padding:10px; border:1px solid #ddd;">ÉLEVÉE</td>
+                    <td style="padding:10px; border:1px solid #ddd;">25-30%</td>
+                    <td style="padding:10px; border:1px solid #ddd;">⬜ À tester</td>
+                </tr>
+                <tr>
+                    <td style="padding:10px; border:1px solid #ddd;">Test 2</td>
+                    <td style="padding:10px; border:1px solid #ddd;">2 cm</td>
+                    <td style="padding:10px; border:1px solid #ddd;">MOYENNE</td>
+                    <td style="padding:10px; border:1px solid #ddd;">15-20%</td>
+                    <td style="padding:10px; border:1px solid #ddd;">⬜ À tester</td>
+                </tr>
+                <tr>
+                    <td style="padding:10px; border:1px solid #ddd;">Test 3</td>
+                    <td style="padding:10px; border:1px solid #ddd;">1 cm</td>
+                    <td style="padding:10px; border:1px solid #ddd;">FAIBLE</td>
+                    <td style="padding:10px; border:1px solid #ddd;">8-12%</td>
+                    <td style="padding:10px; border:1px solid #ddd;">⬜ À tester</td>
+                </tr>
+                <tr>
+                    <td style="padding:10px; border:1px solid #ddd;">Test 4</td>
+                    <td style="padding:10px; border:1px solid #ddd;">5 cm</td>
+                    <td style="padding:10px; border:1px solid #ddd;">ÉLEVÉE</td>
+                    <td style="padding:10px; border:1px solid #ddd;">28-30%</td>
+                    <td style="padding:10px; border:1px solid #ddd;">⬜ À tester</td>
+                </tr>
+                <tr>
+                    <td style="padding:10px; border:1px solid #ddd;">Test 5</td>
+                    <td style="padding:10px; border:1px solid #ddd;">0 cm</td>
+                    <td style="padding:10px; border:1px solid #ddd;">FAIBLE</td>
+                    <td style="padding:10px; border:1px solid #ddd;">10-15%</td>
+                    <td style="padding:10px; border:1px solid #ddd;">⬜ À tester</td>
+                </tr>
+            </table>
+        </div>
+
+        <h2>🔍 Code de détection implémenté</h2>
+        <div class="code">
+// Fonction extractTemporalityAndIntensity() - Ligne ~450
+const shorteningMatch = /raccourcissement.*?(\d+)\s*cm|inégalité.*?(\d+)\s*cm|membre.*?court.*?(\d+)\s*cm/i.exec(text);
+if (shorteningMatch) {
+    const cm = parseInt(shorteningMatch[1] || shorteningMatch[2] || shorteningMatch[3]);
+    shortening = cm;
+    console.log(`🔍 Raccourcissement détecté: ${cm} cm`);
+}
+
+// Fonction determineSeverity() - Ligne ~1650
+if (shortening !== undefined) {
+    if (shortening >= 4) {
+        return { 
+            level: 'élevé', 
+            signs: [`Raccourcissement membre : ${shortening} cm (sévère)`], 
+            isDefault: false 
+        };
+    } else if (shortening >= 2) {
+        return { 
+            level: 'moyen', 
+            signs: [`Raccourcissement membre : ${shortening} cm (modéré)`], 
+            isDefault: false 
+        };
+    } else if (shortening >= 1) {
+        return { 
+            level: 'faible', 
+            signs: [`Raccourcissement membre : ${shortening} cm (léger)`], 
+            isDefault: false 
+        };
+    }
+}
+        </div>
+
+        <div class="instruction" style="margin-top: 30px;">
+            <h3>✅ Critères de validation :</h3>
+            <ul>
+                <li>✅ La détection doit fonctionner avec "raccourcissement de X cm"</li>
+                <li>✅ La détection doit fonctionner avec "inégalité de X cm"</li>
+                <li>✅ La sévérité doit s'ajuster automatiquement selon le nombre de cm</li>
+                <li>✅ Le taux IPP doit être dans la partie correspondante de la fourchette</li>
+                <li>✅ La justification doit mentionner explicitement le raccourcissement</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        function copyTest(id) {
+            const text = document.getElementById(id).innerText.trim();
+            navigator.clipboard.writeText(text).then(() => {
+                alert('✅ Texte copié ! Collez-le dans l\'application : http://localhost:3000/');
+            });
+        }
+    </script>
+</body>
+</html>

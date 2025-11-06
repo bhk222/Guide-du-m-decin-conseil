@@ -1,0 +1,2466 @@
+{
+  "timestamp": "2025-11-04T19:58:24.542Z",
+  "statistics": {
+    "totalInjuries": 915,
+    "rateRanges": 716,
+    "fixedRates": 78
+  },
+  "issues": {
+    "errors": 2,
+    "warnings": 34,
+    "missing": 450,
+    "suggestions": 5
+  },
+  "details": [
+    {
+      "type": "AVERTISSEMENT",
+      "message": "Fourchette très large: [5, 60] (écart: 55%)",
+      "line": 12
+    },
+    {
+      "type": "AVERTISSEMENT",
+      "message": "Fourchette très large: [5, 60] (écart: 55%)",
+      "line": 13
+    },
+    {
+      "type": "AVERTISSEMENT",
+      "message": "Fourchette très large: [30, 100] (écart: 70%)",
+      "line": 16
+    },
+    {
+      "type": "AVERTISSEMENT",
+      "message": "Fourchette très large: [10, 80] (écart: 70%)",
+      "line": 29
+    },
+    {
+      "type": "AVERTISSEMENT",
+      "message": "Fourchette très large: [10, 75] (écart: 65%)",
+      "line": 30
+    },
+    {
+      "type": "AVERTISSEMENT",
+      "message": "Fourchette très large: [30, 100] (écart: 70%)",
+      "line": 31
+    },
+    {
+      "type": "AVERTISSEMENT",
+      "message": "Fourchette très large: [10, 100] (écart: 90%)",
+      "line": 32
+    },
+    {
+      "type": "AVERTISSEMENT",
+      "message": "Fourchette très large: [20, 80] (écart: 60%)",
+      "line": 40
+    },
+    {
+      "type": "AVERTISSEMENT",
+      "message": "Fourchette très large: [30, 90] (écart: 60%)",
+      "line": 56
+    },
+    {
+      "type": "AVERTISSEMENT",
+      "message": "Fourchette très large: [20, 80] (écart: 60%)",
+      "line": 89
+    },
+    {
+      "type": "AVERTISSEMENT",
+      "message": "Fourchette très large: [10, 80] (écart: 70%)",
+      "line": 103
+    },
+    {
+      "type": "AVERTISSEMENT",
+      "message": "Fourchette très large: [10, 80] (écart: 70%)",
+      "line": 106
+    },
+    {
+      "type": "AVERTISSEMENT",
+      "message": "Fourchette très large: [10, 75] (écart: 65%)",
+      "line": 107
+    },
+    {
+      "type": "AVERTISSEMENT",
+      "message": "Fourchette très large: [5, 60] (écart: 55%)",
+      "line": 143
+    },
+    {
+      "type": "AVERTISSEMENT",
+      "message": "Fourchette très large: [10, 80] (écart: 70%)",
+      "line": 208
+    },
+    {
+      "type": "AVERTISSEMENT",
+      "message": "Fourchette très large: [20, 80] (écart: 60%)",
+      "line": 228
+    },
+    {
+      "type": "AVERTISSEMENT",
+      "message": "Fourchette très large: [0, 100] (écart: 100%)",
+      "line": 246
+    },
+    {
+      "type": "AVERTISSEMENT",
+      "message": "Fourchette très large: [40, 100] (écart: 60%)",
+      "line": 252
+    },
+    {
+      "type": "AVERTISSEMENT",
+      "message": "Fourchette très large: [0, 100] (écart: 100%)",
+      "line": 265
+    },
+    {
+      "type": "AVERTISSEMENT",
+      "message": "Fourchette très large: [10, 100] (écart: 90%)",
+      "line": 266
+    },
+    {
+      "type": "AVERTISSEMENT",
+      "message": "Fourchette très large: [0, 100] (écart: 100%)",
+      "line": 267
+    },
+    {
+      "type": "AVERTISSEMENT",
+      "message": "Fourchette très large: [0, 100] (écart: 100%)",
+      "line": 268
+    },
+    {
+      "type": "AVERTISSEMENT",
+      "message": "Fourchette très large: [20, 80] (écart: 60%)",
+      "line": 273
+    },
+    {
+      "type": "AVERTISSEMENT",
+      "message": "Fourchette très large: [0, 70] (écart: 70%)",
+      "line": 297
+    },
+    {
+      "type": "AVERTISSEMENT",
+      "message": "Fourchette très large: [20, 100] (écart: 80%)",
+      "line": 317
+    },
+    {
+      "type": "AVERTISSEMENT",
+      "message": "Fourchette très large: [20, 100] (écart: 80%)",
+      "line": 319
+    },
+    {
+      "type": "AVERTISSEMENT",
+      "message": "Fourchette très large: [10, 100] (écart: 90%)",
+      "line": 332
+    },
+    {
+      "type": "AVERTISSEMENT",
+      "message": "Fourchette très large: [20, 80] (écart: 60%)",
+      "line": 334
+    },
+    {
+      "type": "AVERTISSEMENT",
+      "message": "Fourchette très large: [30, 90] (écart: 60%)",
+      "line": 339
+    },
+    {
+      "type": "AVERTISSEMENT",
+      "message": "Fourchette très large: [10, 90] (écart: 80%)",
+      "line": 369
+    },
+    {
+      "type": "AVERTISSEMENT",
+      "message": "Fourchette très large: [10, 100] (écart: 90%)",
+      "line": 395
+    },
+    {
+      "type": "ERREUR CRITIQUE",
+      "message": "Fourchette inversée: [90, 80]",
+      "line": 458
+    },
+    {
+      "type": "ERREUR CRITIQUE",
+      "message": "Fourchette inversée: [95, 85]",
+      "line": 459
+    },
+    {
+      "type": "AVERTISSEMENT",
+      "message": "Fourchette très large: [20, 100] (écart: 80%)",
+      "line": 690
+    },
+    {
+      "type": "AVERTISSEMENT",
+      "message": "Fourchette très large: [30, 100] (écart: 70%)",
+      "line": 691
+    },
+    {
+      "type": "AVERTISSEMENT",
+      "message": "Fourchette très large: [20, 80] (écart: 60%)",
+      "line": 704
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Perte de cheveux post-traumatique (si gêne le travail)\" : fourchette sans critères de gravité",
+      "line": 3
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Syndrome subjectif isolé (céphalées et étourdissements)\" : fourchette sans critères de gravité",
+      "line": 11
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Crises convulsives généralisées rares\" : fourchette sans critères de gravité",
+      "line": 17
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Équivalents épileptiques (absences, vertiges) - 1 à 3 fois par an\" : fourchette sans critères de gravité",
+      "line": 18
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Équivalents épileptiques - une fois par mois\" : fourchette sans critères de gravité",
+      "line": 19
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Équivalents épileptiques - une fois par semaine\" : fourchette sans critères de gravité",
+      "line": 20
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Équivalents épileptiques - trois fois par semaine\" : fourchette sans critères de gravité",
+      "line": 21
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Équivalents épileptiques - très fréquents avec manifestations graves\" : fourchette sans critères de gravité",
+      "line": 22
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Crises jacksoniennes limitées - jusqu\" : fourchette sans critères de gravité",
+      "line": 23
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Crises jacksoniennes limitées - jusqu\" : fourchette sans critères de gravité",
+      "line": 24
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Crises jacksoniennes limitées - plusieurs fois par semaine\" : fourchette sans critères de gravité",
+      "line": 25
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Crises jacksoniennes étendues - jusqu\" : fourchette sans critères de gravité",
+      "line": 26
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Crises jacksoniennes étendues - jusqu\" : fourchette sans critères de gravité",
+      "line": 27
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Crises jacksoniennes étendues - plusieurs fois par semaine\" : fourchette sans critères de gravité",
+      "line": 28
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Syndromes Neurologiques Spécifiques\" : fourchette sans critères de gravité",
+      "line": 29
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Syndrome Cérébelleux Unilatéral (Côté Gauche)\" : fourchette sans critères de gravité",
+      "line": 30
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Syndrome Cérébelleux Bilatéral\" : fourchette sans critères de gravité",
+      "line": 31
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Syndrome de Parkinson Post-Traumatique\" : fourchette sans critères de gravité",
+      "line": 32
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Torticolis Traumatique\" : fourchette sans critères de gravité",
+      "line": 34
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Hémiplégie complète avec contracture (Côté Droit)\" : fourchette sans critères de gravité",
+      "line": 41
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Hémiplégie complète avec contracture (Côté Gauche)\" : fourchette sans critères de gravité",
+      "line": 42
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Hémiplégie complète avec troubles sphinctériens\" : fourchette sans critères de gravité",
+      "line": 43
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Hémiplégie incomplète (Côté Droit)\" : fourchette sans critères de gravité",
+      "line": 44
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Hémiplégie incomplète (Côté Gauche)\" : fourchette sans critères de gravité",
+      "line": 45
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Monoplégie complète - Membre supérieur droit\" : fourchette sans critères de gravité",
+      "line": 46
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Monoplégie complète - Membre supérieur gauche\" : fourchette sans critères de gravité",
+      "line": 47
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Monoplégie incomplète - Membre supérieur droit\" : fourchette sans critères de gravité",
+      "line": 48
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Monoplégie incomplète - Membre supérieur gauche\" : fourchette sans critères de gravité",
+      "line": 49
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Monoplégie incomplète - Membre inférieur (lésion corticale)\" : fourchette sans critères de gravité",
+      "line": 50
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Aphasie avec difficulté d\" : fourchette sans critères de gravité",
+      "line": 51
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Aphasie sensorielle avec altération du langage intérieur\" : fourchette sans critères de gravité",
+      "line": 54
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Aphasie avec impossibilité de correspondre (mutisme)\" : fourchette sans critères de gravité",
+      "line": 55
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Diplégie cérébrale (marche possible)\" : fourchette sans critères de gravité",
+      "line": 56
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Psychoses et Névroses Post-Traumatiques\" : fourchette sans critères de gravité",
+      "line": 57
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Névrose post-traumatique - États neuro-psychasthéniques (signes fonctionnels)\" : fourchette sans critères de gravité",
+      "line": 58
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Névrose post-traumatique - États neuro-psychasthéniques (signes somatiques)\" : fourchette sans critères de gravité",
+      "line": 59
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Névrose post-traumatique - Signes psychiques (fatigabilité cérébrale)\" : fourchette sans critères de gravité",
+      "line": 60
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Névrose post-traumatique - Symptômes vago-sympathiques\" : fourchette sans critères de gravité",
+      "line": 61
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Névrose post-traumatique - Syndromes anxieux\" : fourchette sans critères de gravité",
+      "line": 62
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Névrose post-traumatique - Syndromes moteurs fonctionnels\" : fourchette sans critères de gravité",
+      "line": 63
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Fracture des apophyses transverses\" : fourchette sans critères de gravité",
+      "line": 81
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Raideur rachidienne post-immobilisation, sans douleurs\" : fourchette sans critères de gravité",
+      "line": 82
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Raideur rachidienne avec douleurs ostéo-articulaires\" : fourchette sans critères de gravité",
+      "line": 83
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Raideur rachidienne avec douleurs névralgiques\" : fourchette sans critères de gravité",
+      "line": 84
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Raideur rachidienne avec déviation très prononcée\" : fourchette sans critères de gravité",
+      "line": 85
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Ankylose vertébrale post-traumatique (Spondylite, Kummel-Verneuil, Cyphose)\" : fourchette sans critères de gravité",
+      "line": 89
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Spondylolisthésis modifié par traumatisme\" : fourchette sans critères de gravité",
+      "line": 90
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Rhumatisme vertébral (lombalgie, cervicalgie) avec raideur\" : fourchette sans critères de gravité",
+      "line": 91
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Spondylose rhizomélique (atteinte lombaire)\" : fourchette sans critères de gravité",
+      "line": 92
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Spondylose rhizomélique (atteinte de tout le rachis et hanches)\" : fourchette sans critères de gravité",
+      "line": 93
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Séquelles d\" : fourchette sans critères de gravité",
+      "line": 94
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Bassin - Lésions Osseuses\" : fourchette sans critères de gravité",
+      "line": 95
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Fracture du cotyle sans déplacement, hanche congruente\" : fourchette sans critères de gravité",
+      "line": 96
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Fracture du cotyle avec arthrose post-traumatique\" : fourchette sans critères de gravité",
+      "line": 97
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Fracture du sacrum avec troubles neurologiques (radiculalgie S1)\" : fourchette sans critères de gravité",
+      "line": 99
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Troubles Nerveux d\" : fourchette sans critères de gravité",
+      "line": 103
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Quadriplégie incomplète (marche possible)\" : fourchette sans critères de gravité",
+      "line": 104
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Syndrome de Brown-Séquard\" : fourchette sans critères de gravité",
+      "line": 105
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Hémiplégie médullaire incomplète (Côté Droit)\" : fourchette sans critères de gravité",
+      "line": 106
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Hémiplégie médullaire incomplète (Côté Gauche)\" : fourchette sans critères de gravité",
+      "line": 107
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Majoration pour douleurs radiculo-médullaires\" : fourchette sans critères de gravité",
+      "line": 109
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Atrophie musculaire médullaire - Main (droite)\" : fourchette sans critères de gravité",
+      "line": 112
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Atrophie musculaire médullaire - Main (gauche)\" : fourchette sans critères de gravité",
+      "line": 113
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Atrophie musculaire médullaire - Avant-bras (droit)\" : fourchette sans critères de gravité",
+      "line": 114
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Atrophie musculaire médullaire - Avant-bras (gauche)\" : fourchette sans critères de gravité",
+      "line": 115
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Atrophie musculaire médullaire - Bras (droit)\" : fourchette sans critères de gravité",
+      "line": 116
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Atrophie musculaire médullaire - Bras (gauche)\" : fourchette sans critères de gravité",
+      "line": 117
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Atrophie musculaire médullaire - Épaule/Ceinture scapulaire (droite)\" : fourchette sans critères de gravité",
+      "line": 118
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Atrophie musculaire médullaire - Épaule/Ceinture scapulaire (gauche)\" : fourchette sans critères de gravité",
+      "line": 119
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Atrophie musculaire médullaire - Pied\" : fourchette sans critères de gravité",
+      "line": 120
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Atrophie musculaire médullaire - Jambe\" : fourchette sans critères de gravité",
+      "line": 121
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Atrophie musculaire médullaire - Cuisse\" : fourchette sans critères de gravité",
+      "line": 122
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Atrophie musculaire médullaire - Ceinture pelvienne\" : fourchette sans critères de gravité",
+      "line": 123
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Troubles de la sensibilité d\" : fourchette sans critères de gravité",
+      "line": 124
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Rétention fécale corrigible\" : fourchette sans critères de gravité",
+      "line": 125
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Rétention fécale rebelle\" : fourchette sans critères de gravité",
+      "line": 126
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Incontinence fécale incomplète ou rare\" : fourchette sans critères de gravité",
+      "line": 127
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Incontinence fécale complète et fréquente\" : fourchette sans critères de gravité",
+      "line": 128
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Abolition des érections\" : fourchette sans critères de gravité",
+      "line": 129
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Priapisme incoercible\" : fourchette sans critères de gravité",
+      "line": 130
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Syringomyélie - Formes frustes ou lentes\" : fourchette sans critères de gravité",
+      "line": 131
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Syringomyélie - Formes progressives\" : fourchette sans critères de gravité",
+      "line": 132
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Syringomyélie - Formes graves\" : fourchette sans critères de gravité",
+      "line": 133
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Séquelles des Nerfs Crâniens et Périphériques\" : fourchette sans critères de gravité",
+      "line": 134
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Névralgie du Trijumeau (V) - Algie avec ou sans anesthésie\" : fourchette sans critères de gravité",
+      "line": 135
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Névralgie du Trijumeau (V) - Algie du type continu sympathalgique\" : fourchette sans critères de gravité",
+      "line": 136
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Paralysie du Nerf Facial (VII) - Paralysie totale et définitive\" : fourchette sans critères de gravité",
+      "line": 137
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Paralysie du Nerf Facial (VII) - Paralysie partielle et définitive\" : fourchette sans critères de gravité",
+      "line": 138
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Paralysie du Nerf Facial (VII) - Paralysie bilatérale totale\" : fourchette sans critères de gravité",
+      "line": 139
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Paralysie du Nerf Facial (VII) - Contracture post-paralytique\" : fourchette sans critères de gravité",
+      "line": 140
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Paralysie du Nerf Facial (VII) - Spasmes (hémispasme facial)\" : fourchette sans critères de gravité",
+      "line": 141
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Paralysie du Nerf Facial (VII) - Spasmes avec crises répétées\" : fourchette sans critères de gravité",
+      "line": 142
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Atteinte du Nerf auditif (VIII) - Surdité, acouphènes, vertiges\" : fourchette sans critères de gravité",
+      "line": 143
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Atteinte du Nerf glosso-pharyngien (IX) - Paralysie bilatérale\" : fourchette sans critères de gravité",
+      "line": 144
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Atteinte du Nerf spinal externe (XI) - Atrophie du trapèze et sterno-cléido-mastoïdien\" : fourchette sans critères de gravité",
+      "line": 145
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Atteinte du Nerf hypoglosse (XII) - Bilatérale (exceptionnelle)\" : fourchette sans critères de gravité",
+      "line": 146
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Paralysies multiples des nerfs crâniens\" : fourchette sans critères de gravité",
+      "line": 147
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Nerfs Périphériques - Membre Supérieur\" : fourchette sans critères de gravité",
+      "line": 148
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Paralysie complète du plexus brachial (gauche)\" : fourchette sans critères de gravité",
+      "line": 149
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Paralysie totale du membre supérieur (droite)\" : fourchette sans critères de gravité",
+      "line": 150
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Paralysie totale du membre supérieur (gauche)\" : fourchette sans critères de gravité",
+      "line": 151
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Paralysie radiculaire supérieure (Duchenne-Erb) (droite)\" : fourchette sans critères de gravité",
+      "line": 152
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Paralysie radiculaire supérieure (Duchenne-Erb) (gauche)\" : fourchette sans critères de gravité",
+      "line": 153
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Paralysie radiculaire inférieure (Klumpke) (droite)\" : fourchette sans critères de gravité",
+      "line": 154
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Paralysie radiculaire inférieure (Klumpke) (gauche)\" : fourchette sans critères de gravité",
+      "line": 155
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Paralysie isolée du nerf sous-scapulaire (droite)\" : fourchette sans critères de gravité",
+      "line": 158
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Paralysie isolée du nerf sous-scapulaire (gauche)\" : fourchette sans critères de gravité",
+      "line": 159
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Paralysie du nerf circonflexe (droite)\" : fourchette sans critères de gravité",
+      "line": 160
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Paralysie du nerf circonflexe (gauche)\" : fourchette sans critères de gravité",
+      "line": 161
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Paralysie du nerf musculo-cutané (droite)\" : fourchette sans critères de gravité",
+      "line": 162
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Paralysie du nerf musculo-cutané (gauche)\" : fourchette sans critères de gravité",
+      "line": 163
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Paralysie du nerf médian - Au bras (droite)\" : fourchette sans critères de gravité",
+      "line": 164
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Paralysie du nerf médian - Au bras (gauche)\" : fourchette sans critères de gravité",
+      "line": 165
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Paralysie du nerf médian - Au poignet (droite)\" : fourchette sans critères de gravité",
+      "line": 166
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Paralysie du nerf médian - Au poignet (gauche)\" : fourchette sans critères de gravité",
+      "line": 167
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Paralysie du nerf cubital - Au bras (droite)\" : fourchette sans critères de gravité",
+      "line": 170
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Paralysie du nerf cubital - Au bras (gauche)\" : fourchette sans critères de gravité",
+      "line": 171
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Paralysie du nerf cubital - Au poignet (droite)\" : fourchette sans critères de gravité",
+      "line": 172
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Paralysie du nerf cubital - Au poignet (gauche)\" : fourchette sans critères de gravité",
+      "line": 173
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Paralysie du nerf radial - Lésion au-dessus de la branche du triceps (droite)\" : fourchette sans critères de gravité",
+      "line": 174
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Paralysie du nerf radial - Lésion au-dessus de la branche du triceps (gauche)\" : fourchette sans critères de gravité",
+      "line": 175
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Paralysie du nerf radial - Lésion au-dessous de la branche du triceps (droite)\" : fourchette sans critères de gravité",
+      "line": 176
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Paralysie du nerf radial - Lésion au-dessous de la branche du triceps (gauche)\" : fourchette sans critères de gravité",
+      "line": 177
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Paralysie associée du médian et du cubital (droite)\" : fourchette sans critères de gravité",
+      "line": 178
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Paralysie associée du médian et du cubital (gauche)\" : fourchette sans critères de gravité",
+      "line": 179
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Nerfs Périphériques - Membre Inférieur\" : fourchette sans critères de gravité",
+      "line": 181
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Paralysie complète du nerf sciatique\" : fourchette sans critères de gravité",
+      "line": 182
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Paralysie du nerf crural\" : fourchette sans critères de gravité",
+      "line": 185
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Paralysie du nerf obturateur\" : fourchette sans critères de gravité",
+      "line": 186
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Névrites, Névralgies et Syndromes Douloureux\" : fourchette sans critères de gravité",
+      "line": 189
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Névrite avec algies (membre supérieur gauche)\" : fourchette sans critères de gravité",
+      "line": 190
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Séquelles névritiques (pied varus équin)\" : fourchette sans critères de gravité",
+      "line": 191
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Névralgie sciatique légère (confirmée, sans troubles graves)\" : fourchette sans critères de gravité",
+      "line": 192
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Névralgie sciatique d\" : fourchette sans critères de gravité",
+      "line": 193
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Névralgie sciatique grave (travail et marche impossibles)\" : fourchette sans critères de gravité",
+      "line": 194
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Névralgie sciatique compliquée (causalgie, rétentissement général)\" : fourchette sans critères de gravité",
+      "line": 195
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Réaction névritique (douleurs, raideurs) - membre supérieur\" : fourchette sans critères de gravité",
+      "line": 196
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Réaction névritique (douleurs, raideurs) - membre inférieur\" : fourchette sans critères de gravité",
+      "line": 197
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Causalgie (majoration) - membre supérieur\" : fourchette sans critères de gravité",
+      "line": 198
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Causalgie (majoration) - membre inférieur\" : fourchette sans critères de gravité",
+      "line": 199
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Troubles Trophiques et Sympathiques\" : fourchette sans critères de gravité",
+      "line": 200
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Syndrome d\" : fourchette sans critères de gravité",
+      "line": 201
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Ulcérations persistantes, troubles trophiques cutanés (majoration)\" : fourchette sans critères de gravité",
+      "line": 202
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Œdème dur traumatique\" : fourchette sans critères de gravité",
+      "line": 203
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Séquelles Maxillo-Faciales, ORL et Ophtalmologiques\" : fourchette sans critères de gravité",
+      "line": 204
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Mutilation - Perte d\" : fourchette sans critères de gravité",
+      "line": 205
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Mutilation - Perte d\" : fourchette sans critères de gravité",
+      "line": 206
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Mutilation - Perte d\" : fourchette sans critères de gravité",
+      "line": 207
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Consolidation vicieuse - Mobilité totale du maxillaire supérieur\" : fourchette sans critères de gravité",
+      "line": 209
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Consolidation vicieuse - Mobilité partielle du maxillaire supérieur\" : fourchette sans critères de gravité",
+      "line": 210
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Consolidation vicieuse - Troubles sérieux de l\" : fourchette sans critères de gravité",
+      "line": 211
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Consolidation vicieuse - Trouble léger de l\" : fourchette sans critères de gravité",
+      "line": 212
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Perte de substance de la voûte palatine\" : fourchette sans critères de gravité",
+      "line": 213
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Perte de substance de la voûte avec communication bucco-nasale\" : fourchette sans critères de gravité",
+      "line": 214
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Perte de substance partielle de l\" : fourchette sans critères de gravité",
+      "line": 215
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Fracture du maxillaire inférieur - Consolidation vicieuse avec trouble grave de l\" : fourchette sans critères de gravité",
+      "line": 216
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Fracture du maxillaire inférieur - Consolidation vicieuse avec trouble léger de l\" : fourchette sans critères de gravité",
+      "line": 217
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Pseudarthrose lâche de la mandibule\" : fourchette sans critères de gravité",
+      "line": 218
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Pseudarthrose serrée de la branche ascendante\" : fourchette sans critères de gravité",
+      "line": 219
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Pseudarthrose lâche de la branche ascendante\" : fourchette sans critères de gravité",
+      "line": 220
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Pseudarthrose serrée de la branche horizontale\" : fourchette sans critères de gravité",
+      "line": 221
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Pseudarthrose lâche de la branche horizontale\" : fourchette sans critères de gravité",
+      "line": 222
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Pseudarthrose serrée de la région symphysaire\" : fourchette sans critères de gravité",
+      "line": 223
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Perte de substance partielle de l\" : fourchette sans critères de gravité",
+      "line": 224
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Ankylose temporo-maxillaire osseuse\" : fourchette sans critères de gravité",
+      "line": 225
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Luxation irréductible temporo-maxillaire\" : fourchette sans critères de gravité",
+      "line": 226
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Luxation récidivante temporo-maxillaire\" : fourchette sans critères de gravité",
+      "line": 227
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Constriction des mâchoires (écartement < 10 mm)\" : fourchette sans critères de gravité",
+      "line": 228
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Constriction des mâchoires (écartement 10 à 30 mm)\" : fourchette sans critères de gravité",
+      "line": 229
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Constriction des mâchoires avec troubles salivaires, etc.\" : fourchette sans critères de gravité",
+      "line": 230
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Amputation partielle de la langue (gêne légère)\" : fourchette sans critères de gravité",
+      "line": 236
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Amputation étendue de la langue (gêne fonctionnelle)\" : fourchette sans critères de gravité",
+      "line": 237
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Gêne de la déglutition par cicatrice pharyngée\" : fourchette sans critères de gravité",
+      "line": 238
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Perte de la vision d\" : fourchette sans critères de gravité",
+      "line": 244
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Ablation ou altération du globe avec prothèse possible\" : fourchette sans critères de gravité",
+      "line": 245
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Ablation ou altération du globe sans prothèse possible\" : fourchette sans critères de gravité",
+      "line": 246
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Diminution de la vision des deux yeux (selon tableau à double entrée)\" : fourchette sans critères de gravité",
+      "line": 247
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Yeux - Champ Visuel et Vision Binoculaire\" : fourchette sans critères de gravité",
+      "line": 248
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Rétrécissement concentrique à 30° (deux yeux)\" : fourchette sans critères de gravité",
+      "line": 249
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Rétrécissement concentrique à 10° (un oeil)\" : fourchette sans critères de gravité",
+      "line": 250
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Rétrécissement concentrique à 10° (deux yeux)\" : fourchette sans critères de gravité",
+      "line": 251
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Scotomes centraux (un oeil)\" : fourchette sans critères de gravité",
+      "line": 252
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Scotomes centraux (deux yeux)\" : fourchette sans critères de gravité",
+      "line": 253
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Hémianopsie homonyme droite ou gauche\" : fourchette sans critères de gravité",
+      "line": 254
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Hémianopsie hétéronyme nasale\" : fourchette sans critères de gravité",
+      "line": 255
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Hémianopsie hétéronyme bitemporale\" : fourchette sans critères de gravité",
+      "line": 256
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Hémianopsie horizontale supérieure\" : fourchette sans critères de gravité",
+      "line": 257
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Hémianopsie horizontale inférieure\" : fourchette sans critères de gravité",
+      "line": 258
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Hémianopsie en quadrant supérieure\" : fourchette sans critères de gravité",
+      "line": 259
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Hémianopsie en quadrant inférieure\" : fourchette sans critères de gravité",
+      "line": 260
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Hémianopsie chez un borgne - Nasale\" : fourchette sans critères de gravité",
+      "line": 261
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Hémianopsie chez un borgne - Inférieure\" : fourchette sans critères de gravité",
+      "line": 262
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Hémianopsie chez un borgne - Temporale\" : fourchette sans critères de gravité",
+      "line": 263
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Diplopie\" : fourchette sans critères de gravité",
+      "line": 264
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Diplopie dans la partie inférieure du champ\" : fourchette sans critères de gravité",
+      "line": 265
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Yeux - Lésions Spécifiques et Annexes\" : fourchette sans critères de gravité",
+      "line": 266
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Cataracte (selon acuité et complications)\" : fourchette sans critères de gravité",
+      "line": 267
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Hémorragies du vitré\" : fourchette sans critères de gravité",
+      "line": 268
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Décollement de la rétine post-traumatique\" : fourchette sans critères de gravité",
+      "line": 269
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Paralysie de l\" : fourchette sans critères de gravité",
+      "line": 276
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Paralysie de l\" : fourchette sans critères de gravité",
+      "line": 277
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Paralysie du sphincter irien - Mydriase existant seule unilatérale\" : fourchette sans critères de gravité",
+      "line": 278
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Paralysie du sphincter irien - Mydriase existant seule bilatérale\" : fourchette sans critères de gravité",
+      "line": 279
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Voies lacrymales - Larmoiement ou fistules (un oeil)\" : fourchette sans critères de gravité",
+      "line": 280
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Voies lacrymales - Larmoiement ou fistules (chaque oeil)\" : fourchette sans critères de gravité",
+      "line": 281
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Orbite - Paralysie d\" : fourchette sans critères de gravité",
+      "line": 283
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Orbite - Névrites, névralgies du nerf V (trijumeau)\" : fourchette sans critères de gravité",
+      "line": 284
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Orbite - Altérations vasculaires (anévrisme, etc.)\" : fourchette sans critères de gravité",
+      "line": 285
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Paupières - Déviation des bords palpébraux (entropion, ectropion, cicatrices vicieuses)\" : fourchette sans critères de gravité",
+      "line": 286
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Paupières - Ptosis ou blépharospasme (un oeil)\" : fourchette sans critères de gravité",
+      "line": 287
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Paupières - Ptosis ou blépharospasme (deux yeux)\" : fourchette sans critères de gravité",
+      "line": 288
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Oreilles - Lésions Externes et Moyennes\" : fourchette sans critères de gravité",
+      "line": 289
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Sténose du conduit auditif unilatérale\" : fourchette sans critères de gravité",
+      "line": 291
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Sténose du conduit auditif bilatérale\" : fourchette sans critères de gravité",
+      "line": 292
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Otorrhée traumatique unilatérale\" : fourchette sans critères de gravité",
+      "line": 293
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Otorrhée tubaire unilatérale\" : fourchette sans critères de gravité",
+      "line": 294
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Otorrhée chronique avec ostéite unilatérale\" : fourchette sans critères de gravité",
+      "line": 295
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Otorrhée chronique avec ostéite bilatérale\" : fourchette sans critères de gravité",
+      "line": 296
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Bourdonnements d\" : fourchette sans critères de gravité",
+      "line": 297
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Oreilles - Diminution de l\" : fourchette sans critères de gravité",
+      "line": 298
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Oreilles - Vertiges et Troubles de l\" : fourchette sans critères de gravité",
+      "line": 299
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Vertiges - 1er degré (pas de trouble objectif)\" : fourchette sans critères de gravité",
+      "line": 300
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Vertiges - 2ème degré (hyper-excitabilité aux épreuves)\" : fourchette sans critères de gravité",
+      "line": 301
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Vertiges - 3ème degré (troubles objectifs)\" : fourchette sans critères de gravité",
+      "line": 302
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Voies Respiratoires Supérieures\" : fourchette sans critères de gravité",
+      "line": 303
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Sténose nasale unilatérale avec formation de croûtes\" : fourchette sans critères de gravité",
+      "line": 304
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Sténose nasale unilatérale avec sinusite\" : fourchette sans critères de gravité",
+      "line": 305
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Sténose nasale bilatérale légère\" : fourchette sans critères de gravité",
+      "line": 306
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Sténose nasale bilatérale accentuée\" : fourchette sans critères de gravité",
+      "line": 307
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Sténose nasale bilatérale serrée\" : fourchette sans critères de gravité",
+      "line": 308
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Anosmie (perte de l\" : fourchette sans critères de gravité",
+      "line": 309
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Anosmie avec nécessité de changement de profession\" : fourchette sans critères de gravité",
+      "line": 310
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Troubles esthétiques par mutilation nasale\" : fourchette sans critères de gravité",
+      "line": 312
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Sinusite traumatique\" : fourchette sans critères de gravité",
+      "line": 313
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Rhinites croûteuses post-traumatiques\" : fourchette sans critères de gravité",
+      "line": 314
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Troubles vocaux (dysphonie, aphonie)\" : fourchette sans critères de gravité",
+      "line": 316
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Troubles respiratoires (dyspnée laryngée)\" : fourchette sans critères de gravité",
+      "line": 320
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Séquelles Thoraciques, Abdominales, Pelviennes et Cardio-vasculaires\" : fourchette sans critères de gravité",
+      "line": 321
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Fracture isolée du sternum - avec enfoncement\" : fourchette sans critères de gravité",
+      "line": 322
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Fracture de côtes non compliquée (selon gêne et nombre)\" : fourchette sans critères de gravité",
+      "line": 323
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Grand fracas du thorax\" : fourchette sans critères de gravité",
+      "line": 325
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Hernie irréductible du poumon\" : fourchette sans critères de gravité",
+      "line": 326
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Thorax - Plèvre et Poumons\" : fourchette sans critères de gravité",
+      "line": 327
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Hémothorax, adhérences et rétractions thoraciques\" : fourchette sans critères de gravité",
+      "line": 328
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Pyothorax (empyème)\" : fourchette sans critères de gravité",
+      "line": 329
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Tuberculose pulmonaire post-traumatique (si incapacité permanente)\" : fourchette sans critères de gravité",
+      "line": 333
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Appareil Circulatoire\" : fourchette sans critères de gravité",
+      "line": 334
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Troubles cardiaques fonctionnels - Avec troubles fonctionnels caractérisés\" : fourchette sans critères de gravité",
+      "line": 335
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Troubles cardiaques fonctionnels - Avec asystolie confirmée\" : fourchette sans critères de gravité",
+      "line": 336
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Ruptures traumatiques de valvules\" : fourchette sans critères de gravité",
+      "line": 339
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Affections cardiovasculaires consécutives à une maladie infectieuse\" : fourchette sans critères de gravité",
+      "line": 340
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Anévrisme de l\" : fourchette sans critères de gravité",
+      "line": 341
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Névrose cardiaque post-traumatique (tachycardie, palpitations, anxiété)\" : fourchette sans critères de gravité",
+      "line": 344
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Lésions des gros vaisseaux (hors aorte) avec troubles hémodynamiques\" : fourchette sans critères de gravité",
+      "line": 345
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Cicatrices (sans éventration) très larges et adhérentes\" : fourchette sans critères de gravité",
+      "line": 357
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Cicatrices avec éventration post-opératoire\" : fourchette sans critères de gravité",
+      "line": 358
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Cicatrice avec éventration après laparotomie (appareillage ou non)\" : fourchette sans critères de gravité",
+      "line": 359
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Rupture isolée du grand droit de l\" : fourchette sans critères de gravité",
+      "line": 361
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Hernie ou éventration consécutive à des ruptures musculaires\" : fourchette sans critères de gravité",
+      "line": 363
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Éventration hypogastrique\" : fourchette sans critères de gravité",
+      "line": 364
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Hernie inguinale réductible bien maintenue\" : fourchette sans critères de gravité",
+      "line": 366
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Hernies bilatérales\" : fourchette sans critères de gravité",
+      "line": 367
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Hernie inguinale irréductible\" : fourchette sans critères de gravité",
+      "line": 368
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Hernie crurale, ombilicale, ligne blanche épigastrique\" : fourchette sans critères de gravité",
+      "line": 369
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Abdomen - Tube Digestif et Organes\" : fourchette sans critères de gravité",
+      "line": 370
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Fistules intestinales - Étroites\" : fourchette sans critères de gravité",
+      "line": 375
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Fistules intestinales - Larges, bas situées\" : fourchette sans critères de gravité",
+      "line": 376
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Fistules intestinales - Larges, haut situées\" : fourchette sans critères de gravité",
+      "line": 377
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Fistules stercorales - Ne livrant que du gaz\" : fourchette sans critères de gravité",
+      "line": 378
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Fistules stercorales - Livrant une certaine quantité de matières\" : fourchette sans critères de gravité",
+      "line": 379
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Anus contre nature livrant passage à la presque totalité du contenu intestinal\" : fourchette sans critères de gravité",
+      "line": 380
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Prolapsus du rectum\" : fourchette sans critères de gravité",
+      "line": 381
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Fistules anales\" : fourchette sans critères de gravité",
+      "line": 382
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Appendicite (si imputable et opérée)\" : fourchette sans critères de gravité",
+      "line": 383
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Incontinence ou rétention fécale par lésions du sphincter anal\" : fourchette sans critères de gravité",
+      "line": 384
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Séquelles de contusion hépatique (douleurs, troubles digestifs)\" : fourchette sans critères de gravité",
+      "line": 385
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Fistules biliaires ou purulentes (Contusion du foie)\" : fourchette sans critères de gravité",
+      "line": 386
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Splénectomie (Ablation de la rate)\" : fourchette sans critères de gravité",
+      "line": 387
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Néphrectomie avec azotémie irréductible de 0,60 à 1 gramme\" : fourchette sans critères de gravité",
+      "line": 393
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Néphrectomie avec azotémie irréductible supérieure à 1 gramme\" : fourchette sans critères de gravité",
+      "line": 394
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Éventration lombo-abdominale après néphrectomie\" : fourchette sans critères de gravité",
+      "line": 395
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Contusions et ruptures du rein (séquelles)\" : fourchette sans critères de gravité",
+      "line": 396
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Hydronéphrose traumatique\" : fourchette sans critères de gravité",
+      "line": 397
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Modification d\" : fourchette sans critères de gravité",
+      "line": 398
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Rupture d\" : fourchette sans critères de gravité",
+      "line": 399
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Pyélonéphrite post-traumatique ascendante (unilatérale)\" : fourchette sans critères de gravité",
+      "line": 401
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Pyélonéphrite post-traumatique ascendante (bilatérale)\" : fourchette sans critères de gravité",
+      "line": 402
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Phlegmon périnéphrétique après traumatisme\" : fourchette sans critères de gravité",
+      "line": 403
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Tuberculose rénale (modification par traumatisme)\" : fourchette sans critères de gravité",
+      "line": 404
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Atrophie ou destruction d\" : fourchette sans critères de gravité",
+      "line": 405
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Atrophie ou destruction des deux testicules (selon l\" : fourchette sans critères de gravité",
+      "line": 406
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Emasculation totale\" : fourchette sans critères de gravité",
+      "line": 407
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Hématocèle et hydrocèle post-traumatique\" : fourchette sans critères de gravité",
+      "line": 408
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Séquelles de contusion du testicule ou torsion\" : fourchette sans critères de gravité",
+      "line": 409
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Tuberculose épididymo-testiculaire modifiée par traumatisme\" : fourchette sans critères de gravité",
+      "line": 411
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Éventration hypogastrique après cystostomie\" : fourchette sans critères de gravité",
+      "line": 412
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Fistule hypogastrique persistante\" : fourchette sans critères de gravité",
+      "line": 413
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Cystite chronique persistante\" : fourchette sans critères de gravité",
+      "line": 414
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Avec infection rénale (unilatérale)\" : fourchette sans critères de gravité",
+      "line": 415
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Avec infection rénale (bilatérale)\" : fourchette sans critères de gravité",
+      "line": 416
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Rétention d\" : fourchette sans critères de gravité",
+      "line": 417
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Rétention d\" : fourchette sans critères de gravité",
+      "line": 418
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Incontinence d\" : fourchette sans critères de gravité",
+      "line": 420
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Rétrécissement de l\" : fourchette sans critères de gravité",
+      "line": 421
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Rétrécissement de l\" : fourchette sans critères de gravité",
+      "line": 422
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Rétrécissement de l\" : fourchette sans critères de gravité",
+      "line": 423
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Rétrécissement de l\" : fourchette sans critères de gravité",
+      "line": 424
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Rétrécissement de l\" : fourchette sans critères de gravité",
+      "line": 425
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Autoplastie cutanée ou autre de l\" : fourchette sans critères de gravité",
+      "line": 426
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Fistule urinaire persistante avec rétrécissement\" : fourchette sans critères de gravité",
+      "line": 427
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Destruction totale de l\" : fourchette sans critères de gravité",
+      "line": 428
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Prolapsus utérin post-traumatique\" : fourchette sans critères de gravité",
+      "line": 429
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Stérilité féminine post-traumatique (selon l\" : fourchette sans critères de gravité",
+      "line": 430
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Troubles menstruels post-traumatiques graves et persistants\" : fourchette sans critères de gravité",
+      "line": 431
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Séquelles de traumatisme ovarien (douleurs chroniques, troubles hormonaux)\" : fourchette sans critères de gravité",
+      "line": 432
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Membres Supérieurs\" : fourchette sans critères de gravité",
+      "line": 434
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Cicatrices de l\" : fourchette sans critères de gravité",
+      "line": 435
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Cicatrices de l\" : fourchette sans critères de gravité",
+      "line": 436
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Cicatrices de l\" : fourchette sans critères de gravité",
+      "line": 437
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Cicatrices de l\" : fourchette sans critères de gravité",
+      "line": 438
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Cicatrices de l\" : fourchette sans critères de gravité",
+      "line": 439
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Cicatrices de l\" : fourchette sans critères de gravité",
+      "line": 440
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Cicatrices de l\" : fourchette sans critères de gravité",
+      "line": 441
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Ceinture Scapulaire - Fractures et Lésions Musculaires\" : fourchette sans critères de gravité",
+      "line": 442
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Fracture Clavicule - Bien consolidée sans raideur (Main Non Dominante)\" : fourchette sans critères de gravité",
+      "line": 443
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Épaule - Fractures de l\" : fourchette sans critères de gravité",
+      "line": 461
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Fracture de la tête humérale avec blocage et impotence fonctionnelle quasi totale (Main Non Dominante)\" : fourchette sans critères de gravité",
+      "line": 462
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Fracture de la tête humérale avec raideur importante de l\" : fourchette sans critères de gravité",
+      "line": 463
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Fracture de la tête humérale avec raideur importante de l\" : fourchette sans critères de gravité",
+      "line": 464
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Fracture du col chirurgical avec cal vicieux important et abduction limitée (Main Dominante)\" : fourchette sans critères de gravité",
+      "line": 465
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Fracture du col chirurgical avec cal vicieux important et abduction limitée (Main Non Dominante)\" : fourchette sans critères de gravité",
+      "line": 466
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Fracture du col chirurgical avec raccourcissement et gêne modérée (Main Dominante)\" : fourchette sans critères de gravité",
+      "line": 467
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Fracture du col chirurgical avec raccourcissement et gêne modérée (Main Non Dominante)\" : fourchette sans critères de gravité",
+      "line": 468
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Fracture du trochiter avec limitation de l\" : fourchette sans critères de gravité",
+      "line": 469
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Fracture du trochiter avec limitation de l\" : fourchette sans critères de gravité",
+      "line": 470
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Fracture du trochin avec limitation de la rotation interne (Main Dominante)\" : fourchette sans critères de gravité",
+      "line": 471
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Fracture du trochin avec limitation de la rotation interne (Main Non Dominante)\" : fourchette sans critères de gravité",
+      "line": 472
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Rupture du triceps totale (Main Dominante)\" : fourchette sans critères de gravité",
+      "line": 510
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Rupture du triceps totale (Main Non Dominante)\" : fourchette sans critères de gravité",
+      "line": 511
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Coude - Fractures et Pseudarthroses\" : fourchette sans critères de gravité",
+      "line": 514
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Fracture de l\" : fourchette sans critères de gravité",
+      "line": 515
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Fracture de l\" : fourchette sans critères de gravité",
+      "line": 516
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Fracture de l\" : fourchette sans critères de gravité",
+      "line": 517
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Fracture de l\" : fourchette sans critères de gravité",
+      "line": 518
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Fracture de l\" : fourchette sans critères de gravité",
+      "line": 519
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Cicatrices du coude entravant l\" : fourchette sans critères de gravité",
+      "line": 520
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Cicatrices du coude entravant l\" : fourchette sans critères de gravité",
+      "line": 521
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Cicatrices du coude entravant l\" : fourchette sans critères de gravité",
+      "line": 522
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Cicatrices du coude entravant l\" : fourchette sans critères de gravité",
+      "line": 523
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Pseudarthrose coude - Mobile (coude ballant) (Main Dominante)\" : fourchette sans critères de gravité",
+      "line": 524
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Pseudarthrose coude - Mobile (coude ballant) (Main Non Dominante)\" : fourchette sans critères de gravité",
+      "line": 525
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Pseudarthrose coude - Avec ankylose (Main Dominante)\" : fourchette sans critères de gravité",
+      "line": 526
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Pseudarthrose coude - Avec ankylose (Main Non Dominante)\" : fourchette sans critères de gravité",
+      "line": 527
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Coude - Raideurs et Ankyloses\" : fourchette sans critères de gravité",
+      "line": 528
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Ankylose complète du coude - Bras en pronation (Main Non Dominante)\" : fourchette sans critères de gravité",
+      "line": 529
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Ankylose complète du coude - Bras en supination (Main Dominante)\" : fourchette sans critères de gravité",
+      "line": 530
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Ankylose complète du coude - Bras en supination (Main Non Dominante)\" : fourchette sans critères de gravité",
+      "line": 531
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Ankylose complète du coude - Bras entre pronation et supination (Main Dominante)\" : fourchette sans critères de gravité",
+      "line": 532
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Ankylose complète du coude - Bras entre pronation et supination (Main Non Dominante)\" : fourchette sans critères de gravité",
+      "line": 533
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Limitation de la pronation (Main Dominante)\" : fourchette sans critères de gravité",
+      "line": 538
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Limitation de la pronation (Main Non Dominante)\" : fourchette sans critères de gravité",
+      "line": 539
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Limitation de la supination (Main Dominante)\" : fourchette sans critères de gravité",
+      "line": 540
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Limitation de la supination (Main Non Dominante)\" : fourchette sans critères de gravité",
+      "line": 541
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Hygroma chronique du coude (Main Dominante)\" : fourchette sans critères de gravité",
+      "line": 546
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Hygroma chronique du coude (Main Non Dominante)\" : fourchette sans critères de gravité",
+      "line": 547
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Avant-bras - Fractures et Pseudarthroses\" : fourchette sans critères de gravité",
+      "line": 554
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Fracture des deux os de l\" : fourchette sans critères de gravité",
+      "line": 555
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Fracture des deux os de l\" : fourchette sans critères de gravité",
+      "line": 558
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Fracture des deux os de l\" : fourchette sans critères de gravité",
+      "line": 559
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Fracture isolée du radius (Main Dominante)\" : fourchette sans critères de gravité",
+      "line": 560
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Fracture isolée du radius (Main Non Dominante)\" : fourchette sans critères de gravité",
+      "line": 561
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Fracture isolée du cubitus (Main Dominante)\" : fourchette sans critères de gravité",
+      "line": 562
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Fracture isolée du cubitus (Main Non Dominante)\" : fourchette sans critères de gravité",
+      "line": 563
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Pseudarthrose des deux os de l\" : fourchette sans critères de gravité",
+      "line": 564
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Pseudarthrose des deux os de l\" : fourchette sans critères de gravité",
+      "line": 565
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Pseudarthrose des deux os de l\" : fourchette sans critères de gravité",
+      "line": 566
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Pseudarthrose des deux os de l\" : fourchette sans critères de gravité",
+      "line": 567
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Pseudarthrose du radius (Main Dominante)\" : fourchette sans critères de gravité",
+      "line": 568
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Pseudarthrose du radius (Main Non Dominante)\" : fourchette sans critères de gravité",
+      "line": 569
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Pseudarthrose du cubitus (Main Dominante)\" : fourchette sans critères de gravité",
+      "line": 570
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Pseudarthrose du cubitus (Main Non Dominante)\" : fourchette sans critères de gravité",
+      "line": 571
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Poignet - Désarticulation\" : fourchette sans critères de gravité",
+      "line": 578
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Désarticulation du poignet (Main Non Dominante)\" : fourchette sans critères de gravité",
+      "line": 579
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Poignet - Fractures\" : fourchette sans critères de gravité",
+      "line": 580
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Fracture de l\" : fourchette sans critères de gravité",
+      "line": 581
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Fracture de l\" : fourchette sans critères de gravité",
+      "line": 582
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Fracture de l\" : fourchette sans critères de gravité",
+      "line": 583
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Fracture de l\" : fourchette sans critères de gravité",
+      "line": 584
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Fracture de l\" : fourchette sans critères de gravité",
+      "line": 585
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Fracture du scaphoïde carpien - Avec raideur simple (Main Dominante)\" : fourchette sans critères de gravité",
+      "line": 586
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Fracture du scaphoïde carpien - Avec raideur simple (Main Non Dominante)\" : fourchette sans critères de gravité",
+      "line": 587
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Poignet - Raideurs et Ankyloses\" : fourchette sans critères de gravité",
+      "line": 590
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Ankylose du poignet - Rectiligne (Main Non Dominante)\" : fourchette sans critères de gravité",
+      "line": 591
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Ankylose du poignet - En flexion ou extension (Main Dominante)\" : fourchette sans critères de gravité",
+      "line": 592
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Ankylose du poignet - En flexion ou extension (Main Non Dominante)\" : fourchette sans critères de gravité",
+      "line": 593
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Main - Amputations\" : fourchette sans critères de gravité",
+      "line": 596
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Amputation de la main (Main Non Dominante)\" : fourchette sans critères de gravité",
+      "line": 597
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Amputation de tous les doigts de la main (Main Dominante)\" : fourchette sans critères de gravité",
+      "line": 598
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Amputation de tous les doigts de la main (Main Non Dominante)\" : fourchette sans critères de gravité",
+      "line": 599
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Perte des cinq métacarpiens (Main Dominante)\" : fourchette sans critères de gravité",
+      "line": 600
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Perte des cinq métacarpiens (Main Non Dominante)\" : fourchette sans critères de gravité",
+      "line": 601
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Perte d\" : fourchette sans critères de gravité",
+      "line": 602
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Main - Raideurs et Ankyloses\" : fourchette sans critères de gravité",
+      "line": 603
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Ankylose de tous les doigts de la main (Main Non Dominante)\" : fourchette sans critères de gravité",
+      "line": 604
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Main bote, creuse, etc. (Main Dominante)\" : fourchette sans critères de gravité",
+      "line": 605
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Main bote, creuse, etc. (Main Non Dominante)\" : fourchette sans critères de gravité",
+      "line": 606
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Séquelles de fracture de métacarpien (cal vicieux, raideur) (Main Dominante)\" : fourchette sans critères de gravité",
+      "line": 609
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Séquelles de fracture de métacarpien (cal vicieux, raideur) (Main Non Dominante)\" : fourchette sans critères de gravité",
+      "line": 610
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Ankylose carpo-métacarpienne du pouce (Main Dominante)\" : fourchette sans critères de gravité",
+      "line": 611
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Raideur d\" : fourchette sans critères de gravité",
+      "line": 612
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Ankylose carpo-métacarpienne du pouce (Main Non Dominante)\" : fourchette sans critères de gravité",
+      "line": 613
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Raideur d\" : fourchette sans critères de gravité",
+      "line": 614
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Raideur d\" : fourchette sans critères de gravité",
+      "line": 615
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Raideur d\" : fourchette sans critères de gravité",
+      "line": 616
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Raideur d\" : fourchette sans critères de gravité",
+      "line": 617
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Raideur d\" : fourchette sans critères de gravité",
+      "line": 618
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Raideur d\" : fourchette sans critères de gravité",
+      "line": 619
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Raideur d\" : fourchette sans critères de gravité",
+      "line": 620
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Raideur d\" : fourchette sans critères de gravité",
+      "line": 621
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Raideur d\" : fourchette sans critères de gravité",
+      "line": 622
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Hanche - Fractures\" : fourchette sans critères de gravité",
+      "line": 624
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Pseudarthrose du col du fémur\" : fourchette sans critères de gravité",
+      "line": 625
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Fracture du massif trochantérien - Cal vicieux et raideur\" : fourchette sans critères de gravité",
+      "line": 626
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Fracture de l\" : fourchette sans critères de gravité",
+      "line": 632
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Pseudarthrose du fémur\" : fourchette sans critères de gravité",
+      "line": 633
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Genou - Lésions Osseuses et Articulaires\" : fourchette sans critères de gravité",
+      "line": 634
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Fracture des plateaux tibiaux - Avec déviation et/ou raideur\" : fourchette sans critères de gravité",
+      "line": 635
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Fracture des condyles fémoraux - Avec déviation et/ou raideur\" : fourchette sans critères de gravité",
+      "line": 636
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Hydarthrose chronique du genou\" : fourchette sans critères de gravité",
+      "line": 637
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Séquelles de rupture du ligament croisé antérieur (LCA)\" : fourchette sans critères de gravité",
+      "line": 641
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Séquelles de rupture du ligament croisé postérieur (LCP)\" : fourchette sans critères de gravité",
+      "line": 642
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Séquelles de méniscectomie (douleurs, hydarthrose)\" : fourchette sans critères de gravité",
+      "line": 643
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Jambe - Fractures\" : fourchette sans critères de gravité",
+      "line": 646
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Fracture des deux os de la jambe - Avec cal vicieux et troubles trophiques\" : fourchette sans critères de gravité",
+      "line": 647
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Fracture isolée du tibia\" : fourchette sans critères de gravité",
+      "line": 648
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Fracture isolée du péroné\" : fourchette sans critères de gravité",
+      "line": 649
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Pseudarthrose des deux os de la jambe\" : fourchette sans critères de gravité",
+      "line": 650
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Pseudarthrose du tibia\" : fourchette sans critères de gravité",
+      "line": 651
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Cheville (Cou-de-pied) - Fractures\" : fourchette sans critères de gravité",
+      "line": 653
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Fracture du pilon tibial\" : fourchette sans critères de gravité",
+      "line": 656
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Pied - Fractures\" : fourchette sans critères de gravité",
+      "line": 660
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Fracture du calcanéum - Avec douleurs et boiterie\" : fourchette sans critères de gravité",
+      "line": 661
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Fracture des métatarsiens - Avec douleurs à la marche\" : fourchette sans critères de gravité",
+      "line": 662
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Pied - Raideurs et Ankyloses\" : fourchette sans critères de gravité",
+      "line": 663
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Pied plat ou pied creux post-traumatique\" : fourchette sans critères de gravité",
+      "line": 664
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Orteils - Lésions\" : fourchette sans critères de gravité",
+      "line": 665
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Amputation d\" : fourchette sans critères de gravité",
+      "line": 666
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Ankylose ou raideur du gros orteil (Hallux rigidus)\" : fourchette sans critères de gravité",
+      "line": 667
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Troubles trophiques, œdème chronique, varices\" : fourchette sans critères de gravité",
+      "line": 669
+    },
+    {
+      "type": "MANQUE",
+      "message": "Lésion \"Boiterie (sans raccourcissement)\" : fourchette sans critères de gravité",
+      "line": 670
+    },
+    {
+      "type": "SUGGESTION",
+      "message": "Lésion courante potentiellement manquante: \"Fracture tassement vertébral\" (Rachis)"
+    },
+    {
+      "type": "SUGGESTION",
+      "message": "Lésion courante potentiellement manquante: \"Entorse grave cheville\" (Cheville)"
+    },
+    {
+      "type": "SUGGESTION",
+      "message": "Lésion courante potentiellement manquante: \"Rupture ligament croisé\" (Genou)"
+    },
+    {
+      "type": "SUGGESTION",
+      "message": "Lésion courante potentiellement manquante: \"Fracture scaphoïde\" (Poignet)"
+    },
+    {
+      "type": "SUGGESTION",
+      "message": "Lésion courante potentiellement manquante: \"Syndrome canal carpien\" (Poignet)"
+    }
+  ]
+}

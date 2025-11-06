@@ -1,0 +1,49 @@
+{
+  "date": "2025-11-04T20:14:38.465Z",
+  "currentInjuryCount": 782,
+  "newInjuryCount": 15,
+  "totalAfter": 797,
+  "sectionsAdded": [
+    {
+      "name": "Séquelles Endocriniennes et Métaboliques",
+      "count": 2
+    },
+    {
+      "name": "Séquelles de Maladies Infectieuses Post-Traumatiques",
+      "count": 2
+    },
+    {
+      "name": "Séquelles Hématologiques",
+      "count": 1
+    },
+    {
+      "name": "Séquelles Dermatologiques Étendues",
+      "count": 1
+    },
+    {
+      "name": "Séquelles Obstétricales et Gynécologiques Post-Traumatiques",
+      "count": 2
+    },
+    {
+      "name": "Amputations Multiples et Polyhandicap",
+      "count": 5
+    },
+    {
+      "name": "Séquelles Psychiatriques Sévères et Spécifiques",
+      "count": 2
+    }
+  ],
+  "duplicatesFound": [
+    "hypothyroïdie post-traumatique ou post-radiothérapie",
+    "hyperthyroïdie post-traumatique (maladie de basedow ou nodule toxique)",
+    "arthrite septique chronique post-traumatique",
+    "amputation de deux membres supérieurs",
+    "amputation de deux membres inférieurs",
+    "amputation de trois membres",
+    "amputation des quatre membres (tétra-amputation)",
+    "psychose hallucinatoire chronique post-traumatique",
+    "trouble bipolaire post-traumatique",
+    "trouble obsessionnel-compulsif (toc) post-traumatique invalidant",
+    "trouble panique avec agoraphobie post-traumatique sévère"
+  ]
+}

@@ -1,7 +1,39 @@
 import { InjuryCategory } from '../types';
+import { algerianBareme1967 } from './algerianBareme1967';
+import { mayetReyComplement } from './mayetReyComplement';
 
-export const disabilityData: InjuryCategory[] = [
-  // NOUVELLE STRUCTURE BASÉE SUR LE BARÈME OFFICIEL PDF
+/**
+ * BASE DE DONNÉES IPP - ORGANISATION ANATOMIQUE UNIFIÉE
+ * 
+ * ✅ UNE SEULE catégorie par partie anatomique
+ * ✅ Fusion automatique des subcategories
+ * ✅ Structure propre et sans doublons
+ */
+
+// Fonction pour fusionner les catégories ayant le même nom
+function mergeCategories(categories: InjuryCategory[]): InjuryCategory[] {
+  const categoryMap = new Map<string, InjuryCategory>();
+  
+  for (const category of categories) {
+    const existing = categoryMap.get(category.name);
+    
+    if (existing) {
+      // Fusionner les subcategories sans doublons
+      existing.subcategories.push(...category.subcategories);
+    } else {
+      // Nouvelle catégorie
+      categoryMap.set(category.name, {
+        name: category.name,
+        subcategories: [...category.subcategories]
+      });
+    }
+  }
+  
+  return Array.from(categoryMap.values());
+}
+
+// Construction des catégories intermédiaires (tout sauf Membres Sup/Inf et Rachis)
+const middleCategories: InjuryCategory[] = [
   {
     name: "Séquelles Crâniennes, Neurologiques et Psychiatriques",
     subcategories: [
@@ -134,6 +166,9 @@ export const disabilityData: InjuryCategory[] = [
           { name: "Séquelles de fracture/luxation du rachis cervical (sans lésion neurologique)", rate: [8, 25], rateCriteria: { low: "Cervicalgies mécaniques occasionnelles, raideur minime.", high: "Cervicalgies quasi-permanentes, raideur invalidante, nécessité de collier cervical." } },
           { name: "Séquelles de fracture/luxation du rachis dorsal (sans lésion neurologique)", rate: [5, 20], rateCriteria: { low: "Dorsalgies d'effort, sans déformation.", high: "Dorsalgies chroniques avec cyphose post-traumatique." } },
           { name: "Séquelles de fracture/luxation du rachis lombaire (sans lésion neurologique)", rate: [10, 30], rateCriteria: { low: "Lombalgies mécaniques, raideur modérée.", high: "Syndrome douloureux lombaire chronique invalidant, troubles statiques." } },
+          { name: "Fracture tassement vertébral cervical non déplacée consolidée", rate: [8, 20], description: "Fracture par compression d'une vertèbre cervicale, bien consolidée, sans lésion neurologique.", rateCriteria: { low: "Tassement léger (<25%), cervicalgies mécaniques, mobilité conservée.", medium: "Tassement modéré (25-50%), cervicalgies fréquentes, limitation modérée.", high: "Tassement important (>50%), cyphose, cervicalgies permanentes, limitation marquée." } },
+          { name: "Fracture tassement vertébral dorsal non déplacée consolidée", rate: [5, 15], description: "Fracture par compression d'une vertèbre dorsale (D1-D12), bien consolidée, sans lésion neurologique.", rateCriteria: { low: "Tassement léger (<25%), dorsalgies occasionnelles.", medium: "Tassement modéré (25-50%), dorsalgies fréquentes, cyphose débutante.", high: "Tassement important (>50%), cyphose marquée, dorsalgies chroniques." } },
+          { name: "Fracture tassement vertébral lombaire non déplacée consolidée", rate: [10, 25], description: "Fracture par compression d'une vertèbre lombaire (L1-L5), bien consolidée, sans lésion neurologique.", rateCriteria: { low: "Tassement léger (<25%), lombalgies mécaniques.", medium: "Tassement modéré (25-50%), lombalgies fréquentes, limitation des efforts.", high: "Tassement important (>50%), lombalgies chroniques invalidantes, troubles statiques." } },
           { name: "Hernie discale cervicale post-traumatique - Syndrome rachidien pur (cervicalgies)", rate: [5, 15], rateCriteria: { low: "Douleurs occasionnelles, raideur minime.", high: "Douleurs quasi-permanentes, raideur marquée invalidante." } },
           { name: "Hernie discale cervicale post-traumatique - Avec névralgie cervico-brachiale (NCB)", rate: [15, 30], rateCriteria: { low: "NCB intermittente, bien contrôlée par le traitement, sans déficit neurologique.", high: "NCB rebelle avec signes neurologiques objectifs (déficit moteur, sensitif, troubles trophiques)." } },
           { name: "Hernie discale lombaire post-traumatique - Syndrome rachidien pur (lombalgies)", rate: [5, 20], rateCriteria: { low: "Douleurs mécaniques pures, sans limitation majeure d'activité.", high: "Douleurs chroniques invalidantes avec retentissement sur la vie quotidienne et professionnelle." } },
@@ -847,8 +882,10 @@ export const disabilityData: InjuryCategory[] = [
       {
         name: "Épaule - Amputation et Désarticulation",
         injuries: [
-          { name: "Désarticulation de l'épaule ou amputation au col chirurgical", rate: [90, 80], rateCriteria: { low: "Taux pour la main non dominante (80%).", high: "Taux pour la main dominante (90%)." } },
-          { name: "Amputation interscapulo-thoracique", rate: [95, 85], rateCriteria: { low: "Taux pour la main non dominante (85%).", high: "Taux pour la main dominante (95%)." } },
+          { name: "Désarticulation de l'épaule ou amputation au col chirurgical (Main Dominante)", rate: 90, description: "Amputation complète du membre supérieur au niveau de l'épaule, côté dominant." },
+          { name: "Désarticulation de l'épaule ou amputation au col chirurgical (Main Non Dominante)", rate: 80, description: "Amputation complète du membre supérieur au niveau de l'épaule, côté non dominant." },
+          { name: "Amputation interscapulo-thoracique (Main Dominante)", rate: 95, description: "Amputation avec ablation de l'omoplate et de la clavicule, côté dominant. Séquelle majeure." },
+          { name: "Amputation interscapulo-thoracique (Main Non Dominante)", rate: 85, description: "Amputation avec ablation de l'omoplate et de la clavicule, côté non dominant." },
         ]
        },
        {
@@ -1006,6 +1043,8 @@ export const disabilityData: InjuryCategory[] = [
             { name: "Fracture des deux os de l'avant-bras - Cal vicieux avec impotence et troubles nerveux (Main Non Dominante)", rate: [25, 35] },
             { name: "Fracture isolée du radius (Main Dominante)", rate: [4, 8] },
             { name: "Fracture isolée du radius (Main Non Dominante)", rate: [3, 6] },
+            { name: "Fracture isolée du radius - Avec cal vicieux modéré (Main Dominante)", rate: [6, 10], rateCriteria: { low: "Cal vicieux visible mais limitation légère de la prono-supination (<30%).", high: "Cal vicieux avec limitation modérée (30-50%) et gêne fonctionnelle moyenne." } },
+            { name: "Fracture isolée du radius - Avec cal vicieux modéré (Main Non Dominante)", rate: [5, 8], rateCriteria: { low: "Cal vicieux visible mais limitation légère de la prono-supination (<30%).", high: "Cal vicieux avec limitation modérée (30-50%) et gêne fonctionnelle moyenne." } },
             { name: "Fracture isolée du cubitus (Main Dominante)", rate: [3, 6] },
             { name: "Fracture isolée du cubitus (Main Non Dominante)", rate: [2, 5] },
             { name: "Pseudarthrose des deux os de l'avant-bras - serrée (Main Dominante)", rate: [25, 35] },
@@ -1199,8 +1238,11 @@ export const disabilityData: InjuryCategory[] = [
       {
         name: "Hanche - Fractures",
         injuries: [
-            { name: "Fracture du col du fémur - Consolidation avec raccourcissement et raideur", rate: [30, 60] },
+            { name: "Fracture du col du fémur - Bonne consolidation", rate: [5, 15], rateCriteria: { low: "Consolidation anatomique, mobilité conservée, limitation minime.", high: "Légère raideur, gêne activités extrêmes (accroupissement)." } },
+            { name: "Fracture du col du fémur - Consolidation avec raideur modérée", rate: [15, 30], rateCriteria: { low: "Raideur modérée, mobilité fonctionnelle conservée.", high: "Raideur marquée sans raccourcissement significatif." } },
+            { name: "Fracture du col du fémur - Consolidation avec raccourcissement et raideur", rate: [30, 60], rateCriteria: { low: "Raccourcissement <3cm + raideur modérée.", high: "Raccourcissement >3cm + raideur importante + boiterie." } },
             { name: "Pseudarthrose du col du fémur", rate: [60, 80] },
+            { name: "Fracture du massif trochantérien - Bonne consolidation", rate: [5, 10] },
             { name: "Fracture du massif trochantérien - Cal vicieux et raideur", rate: [20, 40] },
         ]
       },
@@ -1983,3 +2025,11 @@ export const disabilityData: InjuryCategory[] = [
     ]
   },
 ];
+
+// Fusionner toutes les catégories (barème algérien + middleCategories + complément)
+// La fonction mergeCategories va automatiquement fusionner les catégories portant le même nom
+export const disabilityData: InjuryCategory[] = mergeCategories([
+  ...algerianBareme1967,
+  ...middleCategories,
+  ...mayetReyComplement,
+]);

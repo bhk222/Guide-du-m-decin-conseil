@@ -1,36 +1,35 @@
-import { GoogleGenAI } from "@google/genai";
-
-// This check is to ensure that the environment variable is available.
-if (!process.env.API_KEY) {
-  throw new Error("API_KEY environment variable not set");
-}
-
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+// Service désactivé - Application 100% OFFLINE
+// L'IA locale dans AiAnalyzer.tsx gère tout le traitement
 
 /**
- * Uses Gemini to correct typos and extract key medical terms from a user's query.
+ * Fonction désactivée - L'application fonctionne maintenant 100% en local
+ * sans connexion Internet requise
  * @param query The user's clinical description.
- * @returns A promise that resolves to an array of cleaned-up keywords.
+ * @returns A promise that resolves to an array of keywords from local processing.
  */
 export const enhanceQueryWithAI = async (query: string): Promise<string[]> => {
-  try {
-    const prompt = `You are a medical terminology expert specializing in French. A user has described a clinical condition. Your task is to correct any spelling mistakes and extract the most important clinical keywords from the following text. Return only a comma-separated list of these keywords. Do not add any explanation, preamble, or markdown.
-
-User text: "${query}"`;
-
-    const response = await ai.models.generateContent({
-      model: 'gemini-2.5-flash',
-      contents: prompt,
+  // Traitement local uniquement - pas d'appel API externe
+  console.log("🔒 Mode OFFLINE : Traitement local uniquement");
+  
+  // Extraction locale des mots-clés médicaux
+  const medicalTerms = query
+    .toLowerCase()
+    .replace(/[^\w\s]/g, ' ') // Supprimer ponctuation
+    .split(/\s+/) // Séparer par espaces
+    .filter(word => word.length > 2) // Mots > 2 caractères
+    .filter(word => {
+      // Filtrer mots médicaux pertinents
+      const medicalKeywords = [
+        'fracture', 'luxation', 'entorse', 'rupture', 'lesion',
+        'genou', 'epaule', 'poignet', 'cheville', 'hanche', 'rachis',
+        'tibial', 'femoral', 'humeral', 'radial', 'ulnaire',
+        'douleur', 'raideur', 'limitation', 'instabilite', 'laxite',
+        'plateau', 'diaphyse', 'col', 'malleole', 'rotule',
+        'vertebre', 'doigt', 'main', 'pied', 'jambe', 'cuisse'
+      ];
+      return medicalKeywords.some(kw => word.includes(kw));
     });
-    
-    const text = response.text.trim();
-    
-    // Return keywords as an array, filtering out any empty strings
-    return text.split(',').map(kw => kw.trim().toLowerCase()).filter(kw => kw.length > 0);
-
-  } catch (error) {
-    console.error("Error enhancing query with AI:", error);
-    // Fallback: return keywords from original query on error
-    return query.toLowerCase().split(' ').filter(w => w.length > 2);
-  }
+  
+  return medicalTerms.length > 0 ? medicalTerms : query.split(' ').slice(0, 5);
 };
+

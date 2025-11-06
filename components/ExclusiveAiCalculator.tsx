@@ -116,7 +116,8 @@ export const ExclusiveAiCalculator: React.FC<ExclusiveAiCalculatorProps> = ({
     const messagesEndRef = useRef<HTMLDivElement>(null);
     
     useEffect(() => {
-        messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+        // Scroll automatique à chaque nouveau message ou changement de loading
+        messagesEndRef.current?.scrollIntoView({ behavior: "smooth", block: "end" });
     }, [messages, isLoading]);
 
     const processAndDisplayAnalysis = useCallback((text: string) => {
@@ -251,22 +252,55 @@ export const ExclusiveAiCalculator: React.FC<ExclusiveAiCalculatorProps> = ({
             return;
         }
         
-        // Smart merging of sequela keywords
-        const sequelaKeywords = new Set(['raccourcissement', 'raideur', 'douleur', 'instabilite', 'laxite', 'gêne', 'gene', 'limitation', 'deviation', 'atrophie', 'amyotrophie', 'cal vicieux', 'troubles trophiques']);
+        // Filtrer les segments non-médicaux (profession, contexte) et états antérieurs
+        const contextKeywords = /\b(profession|de profession|travaille?\s+comme|femme de menage|ouvrier|agriculteur|maçon|chauffeur|infirmier|enseignant|médecin|ingénieur|comptable|secrétaire|électricien|plombier|soudeur|peintre|menuisier|patient|patiente|homme|femme|âge|agé|agée)\b/i;
+        const preexistingKeywords = /\b(état\s+antérieur|antécédent|ancien|préexistant|pré-existant|déjà\s+indemnisé|indemnisation\s+antérieure|taux\s+antérieur)\b/i;
+        
         const initialDescriptions = textToSend.split(/;|\s*\+\s*/i).map(s => s.trim()).filter(Boolean);
+        
+        // Filtrer les segments pour ne garder que les vraies lésions post-traumatiques
+        const medicalDescriptions = initialDescriptions.filter(desc => {
+            const normalized = desc.toLowerCase();
+            // Exclure si c'est uniquement du contexte
+            if (contextKeywords.test(desc) && !/(fracture|luxation|rupture|tassement|entorse|plaie|amputation|brûlure|lésion)/i.test(desc)) {
+                return false;
+            }
+            // Exclure si c'est un état antérieur explicite
+            if (preexistingKeywords.test(desc)) {
+                return false;
+            }
+            // Inclure si contient des termes médicaux de lésion
+            return /(fracture|luxation|rupture|tassement|entorse|plaie|amputation|brûlure|lésion|douleur|raideur|ankylose|limitation|qui\s+presente|presente)/i.test(desc);
+        });
+        
+        // Si aucune lésion médicale trouvée, envoyer tout à l'IA pour analyse complète
+        if (medicalDescriptions.length === 0) {
+            processAndDisplayAnalysis(textToSend);
+            return;
+        }
+        
+        // Smart merging of sequela keywords
+        const primaryLesionKeywords = /\b(fracture|luxation|rupture|lesion|brulure|mutilation|contusion|plaie|section|amputation|ecrasement|entorse|tassement)\b/i;
+        const sequelaKeywords = new Set(['raccourcissement', 'raideur', 'douleur', 'instabilite', 'laxite', 'gêne', 'gene', 'limitation', 'deviation', 'atrophie', 'amyotrophie', 'cal vicieux', 'troubles trophiques', 'severe', 'sévère', 'modérée', 'moderee', 'légère', 'legere']);
         const descriptions: string[] = [];
         
-        if (initialDescriptions.length > 0) {
-            let currentDescription = initialDescriptions[0];
-            for (let i = 1; i < initialDescriptions.length; i++) {
-                const part = initialDescriptions[i];
-                const partWords = part.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").split(' ').filter(w => !['et', 'avec', 'du', 'de', 'la'].includes(w));
+        if (medicalDescriptions.length > 0) {
+            let currentDescription = medicalDescriptions[0];
+            const hasPrimaryLesion = primaryLesionKeywords.test(currentDescription);
+            
+            for (let i = 1; i < medicalDescriptions.length; i++) {
+                const part = medicalDescriptions[i];
+                const partNormalized = part.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+                const partWords = partNormalized.split(' ').filter(w => !['et', 'avec', 'du', 'de', 'la', 'le', 'qui', 'presente', 'genou', 'hanche', 'epaule', 'coude', 'poignet', 'cheville', 'rachis'].includes(w));
                 
-                const isPureSequela = partWords.length > 0 && partWords.every(word => sequelaKeywords.has(word));
-
-                if (isPureSequela && partWords.length < 3) { // Only merge short, pure sequela descriptions
-                    currentDescription += ` avec ${part}`;
+                // Si la partie actuelle est une séquelle fonctionnelle ET qu'on a déjà une lésion primaire
+                const isPureSequela = partWords.some(word => sequelaKeywords.has(word)) && !primaryLesionKeywords.test(part);
+                
+                if (hasPrimaryLesion && isPureSequela) {
+                    // Fusionner avec la lésion primaire
+                    currentDescription += ` + ${part}`;
                 } else {
+                    // Nouvelle lésion indépendante
                     descriptions.push(currentDescription);
                     currentDescription = part;
                 }
@@ -281,7 +315,7 @@ export const ExclusiveAiCalculator: React.FC<ExclusiveAiCalculatorProps> = ({
             setMessages(prev => [...prev, {
                 id: crypto.randomUUID(),
                 role: 'model',
-                text: `J'ai identifié **${descriptions.length} lésions distinctes**. Commençons par la première: **"${descriptions[0]}"**.`
+                text: `J'ai identifié **${descriptions.length} séquelles post-traumatiques**. Commençons par la première: **"${descriptions[0]}"**.`
             }]);
             processAndDisplayAnalysis(descriptions[0]);
         } else {
