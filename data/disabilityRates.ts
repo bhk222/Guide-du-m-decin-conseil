@@ -568,45 +568,6 @@ const middleCategories: InjuryCategory[] = [
       {
         name: "Oreilles - Diminution de l'Acuité Auditive (Surdité)",
         injuries: [
-          // ⭐ LÉSIONS SPÉCIFIQUES (ajoutées pour améliorer reconnaissance IA)
-          { 
-            name: "Surdité unilatérale profonde", 
-            description: "Surdité complète ou quasi-complète (≥90 dB) d'une seule oreille.", 
-            rate: 15,
-            keywords: ["surdite", "unilaterale", "profonde", "complete", "totale", "oreille", "gauche", "droite", "od", "og", "90", "db", "decibel", "cophose", "audition", "perte", "entend", "plus", "rien", "sourde", "sourd"]
-          },
-          { 
-            name: "Surdité bilatérale totale", 
-            description: "Cophose bilatérale (perte auditive complète des deux oreilles).", 
-            rate: 60,
-            keywords: ["surdite", "bilaterale", "totale", "complete", "deux", "oreilles", "cophose", "audition", "nulle", "entend", "rien", "sourde", "sourd", "muet", "totalement", "absolue"]
-          },
-          { 
-            name: "Déficit auditif 40-50 dB unilatéral", 
-            description: "Surdité légère à moyenne unilatérale (40-50 dB de perte).", 
-            rate: [8, 10],
-            keywords: ["deficit", "auditif", "40", "45", "50", "db", "decibel", "unilateral", "oreille", "legere", "moyenne", "moderee", "surdite", "perte", "audition", "diminution", "acuite", "entend", "mal", "difficilement"]
-          },
-          { 
-            name: "Déficit auditif 60-70 dB unilatéral", 
-            description: "Surdité moyenne à sévère unilatérale (60-70 dB de perte).", 
-            rate: [12, 15],
-            keywords: ["deficit", "auditif", "60", "65", "70", "db", "decibel", "unilateral", "oreille", "moyenne", "severe", "importante", "surdite", "perte", "audition", "diminution", "acuite", "entend", "tres", "mal", "difficile"]
-          },
-          { 
-            name: "Déficit auditif 70-80 dB unilatéral", 
-            description: "Surdité sévère à profonde unilatérale (70-80 dB de perte).", 
-            rate: [15, 20],
-            keywords: ["deficit", "auditif", "70", "75", "80", "db", "decibel", "unilateral", "oreille", "severe", "profonde", "majeure", "tres", "importante", "surdite", "perte", "audition", "presque", "rien", "quasi", "sourde", "sourd"]
-          },
-          { 
-            name: "Déficit auditif 60-70 dB bilatéral", 
-            description: "Surdité moyenne à sévère bilatérale (60-70 dB de perte).", 
-            rate: [45, 55],
-            keywords: ["deficit", "auditif", "60", "65", "70", "db", "decibel", "bilateral", "deux", "oreilles", "moyenne", "severe", "importante", "surdite", "perte", "audition", "diminution", "acuite", "entend", "mal", "des", "deux", "cotes"]
-          },
-          
-          // ⭐ LÉSION GÉNÉRIQUE (fallback pour cas non spécifiques)
           { name: "Diminution de l'acuité auditive", description: "Le taux est calculé selon un tableau complexe (p.140 du PDF) basé sur la perte en décibels. Un outil dédié est recommandé.", rate: [0, 70] },
         ]
       },
@@ -1163,33 +1124,6 @@ const middleCategories: InjuryCategory[] = [
       {
         name: "Doigts - Pouce (Main Dominante)",
         injuries: [
-            // ⭐ LÉSIONS SPÉCIFIQUES (ajoutées pour améliorer reconnaissance IA)
-            { 
-              name: "Amputation du pouce (main dominante)", 
-              description: "Amputation complète du pouce main dominante.", 
-              rate: 25,
-              keywords: ["amputation", "pouce", "main", "dominante", "droite", "droit", "perte", "complete", "totale", "doigt", "pince", "opposition", "2", "deux", "phalanges"]
-            },
-            { 
-              name: "Amputation phalange P1 du pouce", 
-              description: "Amputation de la première phalange du pouce.", 
-              rate: 15,
-              keywords: ["amputation", "phalange", "p1", "premiere", "1ere", "pouce", "main", "dominante", "partielle", "doigt", "distale", "distal"]
-            },
-            { 
-              name: "Ankylose du pouce", 
-              description: "Ankylose d'une articulation du pouce.", 
-              rate: [5, 20],
-              keywords: ["ankylose", "pouce", "main", "dominante", "bloque", "rigide", "raide", "articulation", "flexion", "doigt", "ip", "mp", "cmc", "inter", "phalangien", "metacarpo"]
-            },
-            { 
-              name: "Raideur du pouce", 
-              description: "Raideur partielle d'une articulation du pouce.", 
-              rate: [3, 8],
-              keywords: ["raideur", "pouce", "main", "dominante", "limitation", "mobilite", "partielle", "abduction", "opposition", "doigt", "difficulte", "pince"]
-            },
-            
-            // ⭐ LÉSIONS ORIGINALES
             { name: "Perte du pouce (2 phalanges) (Main Dominante)", rate: 25 },
             { name: "Perte de la 2ème phalange du pouce (Main Dominante)", rate: 10 },
             { name: "Ankylose carpo-métacarpienne du pouce (Main Dominante)", rate: [15, 20] },
@@ -1212,33 +1146,6 @@ const middleCategories: InjuryCategory[] = [
       {
         name: "Doigts - Index (Main Dominante)",
         injuries: [
-            // ⭐ LÉSIONS SPÉCIFIQUES (ajoutées pour améliorer reconnaissance IA)
-            { 
-              name: "Amputation de l'index (main dominante)", 
-              description: "Amputation complète de l'index main dominante.", 
-              rate: 15,
-              keywords: ["amputation", "index", "main", "dominante", "droite", "droit", "perte", "complete", "totale", "doigt", "2eme", "deuxieme", "phalanges"]
-            },
-            { 
-              name: "Amputation phalange P2 index", 
-              description: "Amputation de la deuxième phalange de l'index.", 
-              rate: 10,
-              keywords: ["amputation", "phalange", "p2", "deuxieme", "2eme", "index", "main", "dominante", "partielle", "doigt", "mediane", "intermediaire"]
-            },
-            { 
-              name: "Ankylose de l'index", 
-              description: "Ankylose de l'index (totalité).", 
-              rate: 15,
-              keywords: ["ankylose", "index", "main", "dominante", "bloque", "rigide", "raide", "articulation", "flexion", "doigt", "ip", "ipp", "ipd", "metacarpo", "phalangien"]
-            },
-            { 
-              name: "Raideur de l'index", 
-              description: "Raideur d'une articulation de l'index.", 
-              rate: [2, 5],
-              keywords: ["raideur", "index", "main", "dominante", "limitation", "mobilite", "partielle", "flexion", "extension", "doigt", "difficulte"]
-            },
-            
-            // ⭐ LÉSIONS ORIGINALES
             { name: "Perte de l'index (3 phalanges) (Main Dominante)", rate: 15 },
             { name: "Perte de la 3ème phalange de l'index (Main Dominante)", rate: 5 },
             { name: "Perte des 2ème et 3ème phalanges de l'index (Main Dominante)", rate: 10 },
@@ -1259,27 +1166,6 @@ const middleCategories: InjuryCategory[] = [
       {
         name: "Doigts - Médius (Main Dominante)",
         injuries: [
-            // ⭐ LÉSIONS SPÉCIFIQUES (ajoutées pour améliorer reconnaissance IA)
-            { 
-              name: "Amputation du médius", 
-              description: "Amputation complète du médius.", 
-              rate: 12,
-              keywords: ["amputation", "medius", "majeur", "main", "dominante", "droite", "droit", "perte", "complete", "totale", "doigt", "3eme", "troisieme", "milieu", "phalanges"]
-            },
-            { 
-              name: "Ankylose du médius", 
-              description: "Ankylose du médius (totalité).", 
-              rate: 12,
-              keywords: ["ankylose", "medius", "majeur", "main", "dominante", "bloque", "rigide", "raide", "articulation", "flexion", "doigt", "milieu", "ip", "ipp", "ipd", "metacarpo"]
-            },
-            { 
-              name: "Raideur du médius", 
-              description: "Raideur d'une articulation du médius.", 
-              rate: [1, 4],
-              keywords: ["raideur", "medius", "majeur", "main", "dominante", "limitation", "mobilite", "partielle", "flexion", "extension", "doigt", "milieu", "difficulte"]
-            },
-            
-            // ⭐ LÉSIONS ORIGINALES
             { name: "Perte du médius (3 phalanges) (Main Dominante)", rate: 12 },
             { name: "Perte de la 3ème phalange du médius (Main Dominante)", rate: 4 },
             { name: "Perte des 2ème et 3ème phalanges du médius (Main Dominante)", rate: 8 },
@@ -1300,27 +1186,6 @@ const middleCategories: InjuryCategory[] = [
       {
         name: "Doigts - Annulaire (Main Dominante)",
         injuries: [
-            // ⭐ LÉSIONS SPÉCIFIQUES (ajoutées pour améliorer reconnaissance IA)
-            { 
-              name: "Amputation de l'annulaire", 
-              description: "Amputation complète de l'annulaire.", 
-              rate: 8,
-              keywords: ["amputation", "annulaire", "main", "dominante", "droite", "droit", "perte", "complete", "totale", "doigt", "4eme", "quatrieme", "phalanges", "bague"]
-            },
-            { 
-              name: "Ankylose de l'annulaire", 
-              description: "Ankylose de l'annulaire (totalité).", 
-              rate: 8,
-              keywords: ["ankylose", "annulaire", "main", "dominante", "bloque", "rigide", "raide", "articulation", "flexion", "doigt", "4eme", "ip", "ipp", "ipd", "metacarpo"]
-            },
-            { 
-              name: "Raideur de l'annulaire", 
-              description: "Raideur d'une articulation de l'annulaire.", 
-              rate: [1, 3],
-              keywords: ["raideur", "annulaire", "main", "dominante", "limitation", "mobilite", "partielle", "flexion", "extension", "doigt", "4eme", "difficulte"]
-            },
-            
-            // ⭐ LÉSIONS ORIGINALES
             { name: "Perte de l'annulaire (3 phalanges) (Main Dominante)", rate: 8 },
             { name: "Perte de la 3ème phalange de l'annulaire (Main Dominante)", rate: 3 },
             { name: "Perte des 2ème et 3ème phalanges de l'annulaire (Main Dominante)", rate: 6 },
@@ -1341,27 +1206,6 @@ const middleCategories: InjuryCategory[] = [
       {
         name: "Doigts - Auriculaire (Main Dominante)",
         injuries: [
-            // ⭐ LÉSIONS SPÉCIFIQUES (ajoutées pour améliorer reconnaissance IA)
-            { 
-              name: "Amputation de l'auriculaire", 
-              description: "Amputation complète de l'auriculaire.", 
-              rate: 10,
-              keywords: ["amputation", "auriculaire", "petit", "doigt", "main", "dominante", "droite", "droit", "perte", "complete", "totale", "5eme", "cinquieme", "phalanges", "minime", "minimum"]
-            },
-            { 
-              name: "Ankylose de l'auriculaire", 
-              description: "Ankylose de l'auriculaire (totalité).", 
-              rate: 10,
-              keywords: ["ankylose", "auriculaire", "petit", "doigt", "main", "dominante", "bloque", "rigide", "raide", "articulation", "flexion", "5eme", "ip", "ipp", "ipd", "metacarpo"]
-            },
-            { 
-              name: "Raideur de l'auriculaire", 
-              description: "Raideur d'une articulation de l'auriculaire.", 
-              rate: [1, 3],
-              keywords: ["raideur", "auriculaire", "petit", "doigt", "main", "dominante", "limitation", "mobilite", "partielle", "flexion", "extension", "5eme", "difficulte"]
-            },
-            
-            // ⭐ LÉSIONS ORIGINALES
             { name: "Perte de l'auriculaire (3 phalanges) (Main Dominante)", rate: 10 },
             { name: "Perte de la 3ème phalange de l'auriculaire (Main Dominante)", rate: 4 },
             { name: "Perte des 2ème et 3ème phalanges de l'auriculaire (Main Dominante)", rate: 7 },
@@ -1379,41 +1223,6 @@ const middleCategories: InjuryCategory[] = [
             { name: "Raideur d'une articulation de l'auriculaire (Main Non Dominante)", rate: [1, 2] },
         ]
       },
-      {
-        name: "Doigts - Amputations Multiples",
-        injuries: [
-            { 
-              name: "Amputation de deux doigts", 
-              description: "Amputation de deux doigts (hors pouce).", 
-              rate: [18, 25],
-              keywords: ["amputation", "deux", "2", "doigts", "main", "multiple", "perte", "index", "medius", "annulaire", "auriculaire", "phalanges"]
-            },
-            { 
-              name: "Amputation de trois doigts", 
-              description: "Amputation de trois doigts (hors pouce).", 
-              rate: [30, 40],
-              keywords: ["amputation", "trois", "3", "doigts", "main", "multiple", "perte", "index", "medius", "annulaire", "auriculaire", "phalanges"]
-            },
-            { 
-              name: "Amputation de quatre doigts", 
-              description: "Amputation de quatre doigts (hors pouce).", 
-              rate: [45, 50],
-              keywords: ["amputation", "quatre", "4", "doigts", "main", "multiple", "perte", "index", "medius", "annulaire", "auriculaire", "phalanges", "presque", "tous"]
-            },
-            { 
-              name: "Amputation de trois doigts dont le pouce", 
-              description: "Amputation de trois doigts incluant le pouce.", 
-              rate: [40, 50],
-              keywords: ["amputation", "trois", "3", "doigts", "pouce", "main", "multiple", "perte", "index", "medius", "dont", "incluant", "avec", "phalanges"]
-            },
-            { 
-              name: "Amputation totale des 5 doigts (main inutilisable)", 
-              description: "Amputation des cinq doigts rendant la main inutilisable.", 
-              rate: [55, 60],
-              keywords: ["amputation", "totale", "tous", "5", "cinq", "doigts", "main", "inutilisable", "complete", "entiere", "perte", "fonctionnelle", "metacarpiens"]
-            },
-        ]
-      },
     ]
   },
   {
@@ -1422,51 +1231,6 @@ const middleCategories: InjuryCategory[] = [
       {
         name: "Amputations",
         injuries: [
-            // ⭐ LÉSIONS SPÉCIFIQUES (ajoutées pour améliorer reconnaissance IA)
-            { 
-              name: "Amputation sous genou (moignon long)", 
-              description: "Amputation transtibiale avec moignon >10cm, bien appareillable.", 
-              rate: 70,
-              keywords: ["amputation", "sous", "genou", "moignon", "long", "transtibial", "jambe", "inferieur", "tiers", "tibia", "appareillable", "prothese"]
-            },
-            { 
-              name: "Désarticulation de la cheville", 
-              description: "Amputation de Syme au niveau de la cheville.", 
-              rate: [70, 73],
-              keywords: ["desarticulation", "cheville", "syme", "amputation", "niveau", "pied", "jambe", "tibio", "tarsienne", "inferieur"]
-            },
-            { 
-              name: "Désarticulation du genou", 
-              description: "Amputation au niveau du genou.", 
-              rate: [73, 75],
-              keywords: ["desarticulation", "genou", "amputation", "niveau", "articulation", "femoro", "tibiale", "jambe", "cuisse", "inferieur"]
-            },
-            { 
-              name: "Amputation cuisse tiers inférieur", 
-              description: "Amputation transfemorale tiers inférieur.", 
-              rate: [73, 75],
-              keywords: ["amputation", "cuisse", "tiers", "inferieur", "transfemoral", "femur", "distal", "bas", "pres", "genou", "membre", "inferieur"]
-            },
-            { 
-              name: "Amputation cuisse tiers moyen", 
-              description: "Amputation transfemorale tiers moyen.", 
-              rate: [75, 78],
-              keywords: ["amputation", "cuisse", "tiers", "moyen", "transfemoral", "femur", "milieu", "median", "diaphyse", "membre", "inferieur"]
-            },
-            { 
-              name: "Amputation cuisse tiers supérieur", 
-              description: "Amputation transfemorale tiers supérieur.", 
-              rate: [78, 80],
-              keywords: ["amputation", "cuisse", "tiers", "superieur", "transfemoral", "femur", "proximal", "haut", "pres", "hanche", "membre", "inferieur", "court", "moignon"]
-            },
-            { 
-              name: "Désarticulation de la hanche", 
-              description: "Amputation au niveau de l'articulation de la hanche.", 
-              rate: 80,
-              keywords: ["desarticulation", "hanche", "amputation", "niveau", "articulation", "coxo", "femorale", "bassin", "membre", "inferieur", "hemipelvectomie"]
-            },
-            
-            // ⭐ LÉSION GÉNÉRIQUE (fallback)
             { name: "Amputation d'un membre inférieur", rate: [70, 80], rateCriteria: { low: "Amputation sous le genou avec moignon long et bien appareillable.", high: "Désarticulation de la hanche ou amputation de cuisse avec moignon très court." } },
             { name: "Amputation des deux membres inférieurs", rate: 100 },
         ]
@@ -1580,63 +1344,6 @@ const middleCategories: InjuryCategory[] = [
       {
         name: "Orteils - Lésions",
         injuries: [
-            // ⭐ LÉSIONS SPÉCIFIQUES (ajoutées pour améliorer reconnaissance IA)
-            { 
-              name: "Amputation d'un orteil (sauf gros orteil)", 
-              description: "Amputation d'un orteil latéral (2ème, 3ème, 4ème ou 5ème).", 
-              rate: [1, 3],
-              keywords: ["amputation", "orteil", "deuxieme", "troisieme", "quatrieme", "cinquieme", "2eme", "3eme", "4eme", "5eme", "lateral", "pied", "doigt", "perte"]
-            },
-            { 
-              name: "Amputation de deux orteils", 
-              description: "Amputation de deux orteils (sauf gros orteil).", 
-              rate: [2, 5],
-              keywords: ["amputation", "deux", "2", "orteils", "doigts", "pied", "multiple", "perte"]
-            },
-            { 
-              name: "Amputation de trois orteils", 
-              description: "Amputation de trois orteils (sauf gros orteil).", 
-              rate: [3, 7],
-              keywords: ["amputation", "trois", "3", "orteils", "doigts", "pied", "multiple", "perte"]
-            },
-            { 
-              name: "Amputation de quatre orteils", 
-              description: "Amputation de quatre orteils (sauf gros orteil).", 
-              rate: [4, 9],
-              keywords: ["amputation", "quatre", "4", "orteils", "doigts", "pied", "multiple", "perte", "presque", "tous"]
-            },
-            { 
-              name: "Amputation de tous les orteils", 
-              description: "Amputation des 5 orteils du pied.", 
-              rate: [10, 15],
-              keywords: ["amputation", "tous", "5", "cinq", "orteils", "doigts", "pied", "totalite", "complete", "entier", "avant", "perte"]
-            },
-            { 
-              name: "Amputation bilatérale des gros orteils", 
-              description: "Perte des deux gros orteils.", 
-              rate: [12, 18],
-              keywords: ["amputation", "bilateral", "deux", "2", "gros", "orteils", "hallux", "pieds", "perte", "bilaterale"]
-            },
-            { 
-              name: "Ankylose du gros orteil", 
-              description: "Ankylose de l'articulation métatarso-phalangienne du gros orteil.", 
-              rate: [5, 10],
-              keywords: ["ankylose", "gros", "orteil", "hallux", "rigide", "rigidus", "bloque", "raide", "articulation", "metatarso", "phalangien", "mp"]
-            },
-            { 
-              name: "Ankylose d'un orteil", 
-              description: "Ankylose d'un orteil latéral.", 
-              rate: [1, 3],
-              keywords: ["ankylose", "orteil", "lateral", "bloque", "raide", "rigide", "doigt", "pied"]
-            },
-            { 
-              name: "Raideur du gros orteil", 
-              description: "Raideur partielle du gros orteil sans ankylose complète.", 
-              rate: [3, 7],
-              keywords: ["raideur", "gros", "orteil", "hallux", "limitation", "mobilite", "rigide", "partielle", "doigt", "pied"]
-            },
-            
-            // ⭐ LÉSIONS GÉNÉRIQUES (fallback)
             { name: "Amputation du gros orteil", rate: [5, 8], rateCriteria: { low: "Amputation distale (phalange distale), troubles propulsion minimes.", high: "Amputation complète gros orteil, troubles appui/propulsion nets, boiterie." } },
             { name: "Amputation d'un autre orteil", rate: [1, 3], rateCriteria: { low: "Amputation orteil latéral (4ème/5ème), gêne esthétique surtout.", high: "Amputation 2ème orteil, troubles appui modérés." } },
             { name: "Ankylose ou raideur du gros orteil (Hallux rigidus)", rate: [3, 10], rateCriteria: { low: "Raideur partielle IP, limitation légère déroulement pas.", medium: "Ankylose MP en position neutre, déroulement pas perturbé.", high: "Ankylose MP en flexion/extension pathologique, douleurs permanentes, troubles marche, nécessité chaussage orthopédique." } },
