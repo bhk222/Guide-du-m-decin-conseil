@@ -67,6 +67,23 @@ const GuidedRateSelector: React.FC<{
                     <span>{steps[steps.length - 1].rate}% (Max)</span>
                 </div>
             </div>
+            {(injury.name.toLowerCase().includes('cataracte') || 
+              injury.name.toLowerCase().includes('acuité') ||
+              injury.name.toLowerCase().includes('vision') ||
+              injury.name.toLowerCase().includes('auditive') ||
+              injury.name.toLowerCase().includes('audiométrie') ||
+              injury.name.toLowerCase().includes('décibel') ||
+              injury.name.toLowerCase().includes('abduction') ||
+              injury.name.toLowerCase().includes('flexion') ||
+              injury.name.toLowerCase().includes('extension') ||
+              injury.name.toLowerCase().includes('amplitude') ||
+              injury.name.toLowerCase().includes('mobilité')) && (
+                <div className="mt-3 mb-2 border border-blue-300 bg-blue-50 p-3 rounded-lg">
+                    <p className="text-xs text-blue-900 leading-relaxed">
+                        <span className="font-bold">💡 Astuce :</span> Pour une évaluation précise avec <span className="font-semibold">critères cliniques chiffrés</span> (acuité visuelle, audiométrie, amplitudes articulaires...), utilisez l'onglet <span className="font-bold text-blue-700">"Guide IA"</span> pour une analyse détaillée.
+                    </p>
+                </div>
+            )}
             <div className="mt-3 flex justify-end gap-2">
                 <Button variant="secondary" onClick={onCancel} className="!text-xs !py-1 !px-2">Annuler</Button>
                 <Button onClick={() => onAdd(activeStep.rate)} className="!text-xs !py-1 !px-2">Valider le Taux</Button>
@@ -198,6 +215,15 @@ export const AnalogCalculator: React.FC<AnalogCalculatorProps> = ({ onAddInjury 
                                                                         <span className="ml-2">{injury.rateCriteria.high}</span>
                                                                     </div>
                                                                 </div>
+                                                                {(injury.name.toLowerCase().includes('cataracte') || 
+                                                                  injury.name.toLowerCase().includes('acuité') ||
+                                                                  injury.name.toLowerCase().includes('vision')) && (
+                                                                    <div className="mt-2 pt-2 border-t border-blue-200 bg-blue-50 p-2 rounded">
+                                                                        <p className="text-xs text-blue-800">
+                                                                            <span className="font-bold">💡 Astuce :</span> Pour une évaluation précise avec acuité visuelle chiffrée (ex: 2/10), utilisez l'onglet <span className="font-semibold">"Guide IA"</span> pour une analyse clinique détaillée.
+                                                                        </p>
+                                                                    </div>
+                                                                )}
                                                             </div>
                                                         )}
                                                     </div>

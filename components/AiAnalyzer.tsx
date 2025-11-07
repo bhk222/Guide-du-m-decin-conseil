@@ -83,6 +83,36 @@ export const normalize = (str: string) => {
 };
 
 /**
+ * 🆕 Matching fuzzy pour accepter les variations de noms de lésions
+ * Exemples:
+ * - "Splénectomie totale" match "Splénectomie (Ablation de la rate)"
+ * - "Néphrectomie unilatérale" match "Néphrectomie (ablation d'un rein), avec rein restant sain"
+ * - "Cholécystectomie" match "Cholécystectomie"
+ */
+const fuzzyMatchInjuryName = (injuryName: string, searchText: string): boolean => {
+    const normalizedInjury = normalize(injuryName);
+    const normalizedSearch = normalize(searchText);
+    
+    // Match exact
+    if (normalizedInjury === normalizedSearch) return true;
+    
+    // Match si searchText est contenu dans injuryName (ex: "splenectomie" dans "splenectomie totale ablation rate")
+    if (normalizedInjury.includes(normalizedSearch)) return true;
+    
+    // Match si tous les mots de searchText sont dans injuryName
+    const searchWords = normalizedSearch.split(' ').filter(w => w.length > 2);
+    const injuryWords = normalizedInjury.split(' ').filter(w => w.length > 2);
+    
+    // Vérifier si au moins 60% des mots importants de searchText sont dans injuryName
+    const matchedWords = searchWords.filter(sw => 
+        injuryWords.some(iw => iw.includes(sw) || sw.includes(iw))
+    );
+    
+    // Si au moins 60% des mots matchent, c'est un match fuzzy
+    return matchedWords.length >= Math.ceil(searchWords.length * 0.6);
+};
+
+/**
  * Prétraite le texte pour transformer verbes d'action en substantifs médicaux
  * Ex: "présente une fracture" → "fracture"
  * Ex: "souffre d'une hernie" → "hernie"
@@ -2482,9 +2512,30 @@ export const findCandidateInjuries = (text: string, externalKeywords?: string[])
 
     const stopWords = ['de', 'du', 'la', 'le', 'les', 'un', 'une', 'et', 'avec', 'au', 'des', 'ou', 'a'];
 
-    const baseKeywords = externalKeywords 
-        ? [...new Set(externalKeywords.map(normalize))]
-        : [...new Set(normalizedText.split(' ').filter(w => w && !stopWords.includes(w)))];
+    // 🔥 CORRECTION CRITIQUE : Extraire n-grams (trigrams + bigrams + unigrams)
+    let baseKeywords: string[];
+    if (externalKeywords) {
+        baseKeywords = [...new Set(externalKeywords.map(normalize))];
+    } else {
+        // Extraire mots (sans stopwords)
+        const words = normalizedText.split(' ').filter(w => w && !stopWords.includes(w) && w.length > 2);
+        const ngrams: string[] = [];
+        
+        // Trigrams (3 mots consécutifs)
+        for (let i = 0; i < words.length - 2; i++) {
+            ngrams.push(`${words[i]} ${words[i+1]} ${words[i+2]}`);
+        }
+        
+        // Bigrams (2 mots consécutifs)
+        for (let i = 0; i < words.length - 1; i++) {
+            ngrams.push(`${words[i]} ${words[i+1]}`);
+        }
+        
+        // Unigrams (mots individuels)
+        ngrams.push(...words);
+        
+        baseKeywords = [...new Set(ngrams)];
+    }
         
     let keywords = [...new Set(baseKeywords)];
 
@@ -2595,6 +2646,18 @@ export const findCandidateInjuries = (text: string, externalKeywords?: string[])
                         currentScore += 800; // MEGA BONUS augmenté pour correspondance pathologie spécifique
                     }
                 });
+
+                // 🆕 MEGA BONUS pour matching fuzzy de noms de lésions (viscères, audition, amputations, etc.)
+                // Ex: "splénectomie totale" match "Splénectomie (Ablation de la rate)"
+                const fuzzyMatchBonus = 10000; // 🔥 AUGMENTÉ ×8 pour lésions spécifiques (était 1200)
+                if (fuzzyMatchInjuryName(injury.name, normalizedText)) {
+                    currentScore += fuzzyMatchBonus;
+                }
+                
+                // 🔥 NOUVEAU: Bonus MASSIF pour lésions spécifiques (description détaillée vs génériques)
+                if (injury.description && injury.description.length > 50) {
+                    currentScore += 8000; // Bonus énorme pour lésions spécifiques avec description
+                }
 
                 const queryBones = getBonesFromString(normalizedText);
                 const injuryBones = getBonesFromString(searchableText);
@@ -2874,7 +2937,23 @@ const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords?: stri
 
 
     // Check for vague query
-    const keywords = normalizedInputText.split(' ').filter(w => w.length > 2);
+    // 🔥 CORRECTION BUG: Extraire mots ET expressions multi-mots (bigrams, trigrams)
+    const words = normalizedInputText.split(' ').filter(w => w.length > 2);
+    const bigrams: string[] = [];
+    const trigrams: string[] = [];
+    
+    // Générer bigrams (2 mots consécutifs)
+    for (let i = 0; i < words.length - 1; i++) {
+        bigrams.push(`${words[i]} ${words[i+1]}`);
+    }
+    
+    // Générer trigrams (3 mots consécutifs)
+    for (let i = 0; i < words.length - 2; i++) {
+        trigrams.push(`${words[i]} ${words[i+1]} ${words[i+2]}`);
+    }
+    
+    // Combiner: trigrams (priorité) + bigrams + mots simples
+    const keywords = [...trigrams, ...bigrams, ...words];
     const queryBones = getBonesFromString(normalizedInputText);
 
     if (keywords.length <= 2 && queryBones.size === 0) {
@@ -3030,7 +3109,7 @@ const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords?: stri
     
     // --- AMBIGUITY CHECK ---
     const topScore = finalCandidate.score;
-    const similarCandidates = candidates.filter(c => c.injury.name !== finalCandidate!.injury.name && c.score > topScore * 0.85);
+    const similarCandidates = candidates.filter(c => c.injury.name !== finalCandidate!.injury.name && c.score > topScore * 0.50); // 🔥 MODIFIÉ: 0.85→0.50 (inclusion forcée lésions spécifiques)
 
     if (similarCandidates.length > 0) {
         const allCandidates = [finalCandidate, ...similarCandidates];

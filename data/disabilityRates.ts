@@ -511,7 +511,7 @@ const middleCategories: InjuryCategory[] = [
         name: "Yeux - Lésions Spécifiques et Annexes",
         injuries: [
           { name: "Taies de cornée (selon gêne visuelle)", description: "Le taux est évalué d'après le tableau d'acuité visuelle, avec un taux complémentaire basé sur le degré de vision obtenu après rétrécissement pupillaire. Voir p.128 du barème pour les conditions.", rate: [0, 100] },
-          { name: "Cataracte (selon acuité et complications)", description: "Le taux est basé sur l'acuité visuelle corrigée + majorations pour gêne ou impossibilité de porter un verre. Voir p.130-131 du barème pour les calculs complexes.", rate: [10, 100] },
+          { name: "Cataracte (selon acuité et complications)", description: "Le taux est basé sur l'acuité visuelle corrigée + majorations pour gêne ou impossibilité de porter un verre. Calcul complexe nécessitant l'acuité précise (ex: OD 3/10, OG 8/10). Utilisez le Guide IA pour saisir les critères cliniques détaillés.", rate: [10, 100], rateCriteria: { low: "Acuité visuelle OD ≥ 8/10 et OG ≥ 8/10 avec correction adaptée, aucune complication.", medium: "Acuité visuelle entre 3/10 et 7/10 sur au moins un œil, ou difficulté au port de correction.", high: "Acuité visuelle < 3/10 sur un ou deux yeux, ou impossibilité de porter une correction (aphaquie non opérée, intolérance aux verres)." } },
           { name: "Hémorragies du vitré", description: "L'incapacité est évaluée en fonction de la baisse d'acuité visuelle résiduelle, si elle ne se résorbe pas.", rate: [0, 100] },
           { name: "Décollement de la rétine post-traumatique", description: "L'incapacité est évaluée en fonction des séquelles sur l'acuité visuelle et le champ visuel.", rate: [0, 100] },
           { name: "Atrophie optique post-traumatique", rate: [30, 80], description: "Dégénérescence des fibres du nerf optique suite à un traumatisme crânien ou orbitaire, conduisant à une perte de vision progressive et irréversible.", rateCriteria: { low: "Atteinte unilatérale avec acuité visuelle corrigée > 2/10 et champ visuel modérément altéré.", high: "Atteinte bilatérale sévère avec acuité visuelle < 1/10 et/ou champ visuel tubulaire." } },
@@ -568,6 +568,45 @@ const middleCategories: InjuryCategory[] = [
       {
         name: "Oreilles - Diminution de l'Acuité Auditive (Surdité)",
         injuries: [
+          // ⭐ LÉSIONS SPÉCIFIQUES (ajoutées pour améliorer reconnaissance IA)
+          { 
+            name: "Surdité unilatérale profonde", 
+            description: "Surdité complète ou quasi-complète (≥90 dB) d'une seule oreille.", 
+            rate: 15,
+            keywords: ["surdite", "unilaterale", "profonde", "complete", "totale", "oreille", "gauche", "droite", "od", "og", "90", "db", "decibel", "cophose", "audition", "perte", "entend", "plus", "rien", "sourde", "sourd"]
+          },
+          { 
+            name: "Surdité bilatérale totale", 
+            description: "Cophose bilatérale (perte auditive complète des deux oreilles).", 
+            rate: 60,
+            keywords: ["surdite", "bilaterale", "totale", "complete", "deux", "oreilles", "cophose", "audition", "nulle", "entend", "rien", "sourde", "sourd", "muet", "totalement", "absolue"]
+          },
+          { 
+            name: "Déficit auditif 40-50 dB unilatéral", 
+            description: "Surdité légère à moyenne unilatérale (40-50 dB de perte).", 
+            rate: [8, 10],
+            keywords: ["deficit", "auditif", "40", "45", "50", "db", "decibel", "unilateral", "oreille", "legere", "moyenne", "moderee", "surdite", "perte", "audition", "diminution", "acuite", "entend", "mal", "difficilement"]
+          },
+          { 
+            name: "Déficit auditif 60-70 dB unilatéral", 
+            description: "Surdité moyenne à sévère unilatérale (60-70 dB de perte).", 
+            rate: [12, 15],
+            keywords: ["deficit", "auditif", "60", "65", "70", "db", "decibel", "unilateral", "oreille", "moyenne", "severe", "importante", "surdite", "perte", "audition", "diminution", "acuite", "entend", "tres", "mal", "difficile"]
+          },
+          { 
+            name: "Déficit auditif 70-80 dB unilatéral", 
+            description: "Surdité sévère à profonde unilatérale (70-80 dB de perte).", 
+            rate: [15, 20],
+            keywords: ["deficit", "auditif", "70", "75", "80", "db", "decibel", "unilateral", "oreille", "severe", "profonde", "majeure", "tres", "importante", "surdite", "perte", "audition", "presque", "rien", "quasi", "sourde", "sourd"]
+          },
+          { 
+            name: "Déficit auditif 60-70 dB bilatéral", 
+            description: "Surdité moyenne à sévère bilatérale (60-70 dB de perte).", 
+            rate: [45, 55],
+            keywords: ["deficit", "auditif", "60", "65", "70", "db", "decibel", "bilateral", "deux", "oreilles", "moyenne", "severe", "importante", "surdite", "perte", "audition", "diminution", "acuite", "entend", "mal", "des", "deux", "cotes"]
+          },
+          
+          // ⭐ LÉSION GÉNÉRIQUE (fallback pour cas non spécifiques)
           { name: "Diminution de l'acuité auditive", description: "Le taux est calculé selon un tableau complexe (p.140 du PDF) basé sur la perte en décibels. Un outil dédié est recommandé.", rate: [0, 70] },
         ]
       },
@@ -1124,6 +1163,33 @@ const middleCategories: InjuryCategory[] = [
       {
         name: "Doigts - Pouce (Main Dominante)",
         injuries: [
+            // ⭐ LÉSIONS SPÉCIFIQUES (ajoutées pour améliorer reconnaissance IA)
+            { 
+              name: "Amputation du pouce (main dominante)", 
+              description: "Amputation complète du pouce main dominante.", 
+              rate: 25,
+              keywords: ["amputation", "pouce", "main", "dominante", "droite", "droit", "perte", "complete", "totale", "doigt", "pince", "opposition", "2", "deux", "phalanges"]
+            },
+            { 
+              name: "Amputation phalange P1 du pouce", 
+              description: "Amputation de la première phalange du pouce.", 
+              rate: 15,
+              keywords: ["amputation", "phalange", "p1", "premiere", "1ere", "pouce", "main", "dominante", "partielle", "doigt", "distale", "distal"]
+            },
+            { 
+              name: "Ankylose du pouce", 
+              description: "Ankylose d'une articulation du pouce.", 
+              rate: [5, 20],
+              keywords: ["ankylose", "pouce", "main", "dominante", "bloque", "rigide", "raide", "articulation", "flexion", "doigt", "ip", "mp", "cmc", "inter", "phalangien", "metacarpo"]
+            },
+            { 
+              name: "Raideur du pouce", 
+              description: "Raideur partielle d'une articulation du pouce.", 
+              rate: [3, 8],
+              keywords: ["raideur", "pouce", "main", "dominante", "limitation", "mobilite", "partielle", "abduction", "opposition", "doigt", "difficulte", "pince"]
+            },
+            
+            // ⭐ LÉSIONS ORIGINALES
             { name: "Perte du pouce (2 phalanges) (Main Dominante)", rate: 25 },
             { name: "Perte de la 2ème phalange du pouce (Main Dominante)", rate: 10 },
             { name: "Ankylose carpo-métacarpienne du pouce (Main Dominante)", rate: [15, 20] },
@@ -1146,6 +1212,33 @@ const middleCategories: InjuryCategory[] = [
       {
         name: "Doigts - Index (Main Dominante)",
         injuries: [
+            // ⭐ LÉSIONS SPÉCIFIQUES (ajoutées pour améliorer reconnaissance IA)
+            { 
+              name: "Amputation de l'index (main dominante)", 
+              description: "Amputation complète de l'index main dominante.", 
+              rate: 15,
+              keywords: ["amputation", "index", "main", "dominante", "droite", "droit", "perte", "complete", "totale", "doigt", "2eme", "deuxieme", "phalanges"]
+            },
+            { 
+              name: "Amputation phalange P2 index", 
+              description: "Amputation de la deuxième phalange de l'index.", 
+              rate: 10,
+              keywords: ["amputation", "phalange", "p2", "deuxieme", "2eme", "index", "main", "dominante", "partielle", "doigt", "mediane", "intermediaire"]
+            },
+            { 
+              name: "Ankylose de l'index", 
+              description: "Ankylose de l'index (totalité).", 
+              rate: 15,
+              keywords: ["ankylose", "index", "main", "dominante", "bloque", "rigide", "raide", "articulation", "flexion", "doigt", "ip", "ipp", "ipd", "metacarpo", "phalangien"]
+            },
+            { 
+              name: "Raideur de l'index", 
+              description: "Raideur d'une articulation de l'index.", 
+              rate: [2, 5],
+              keywords: ["raideur", "index", "main", "dominante", "limitation", "mobilite", "partielle", "flexion", "extension", "doigt", "difficulte"]
+            },
+            
+            // ⭐ LÉSIONS ORIGINALES
             { name: "Perte de l'index (3 phalanges) (Main Dominante)", rate: 15 },
             { name: "Perte de la 3ème phalange de l'index (Main Dominante)", rate: 5 },
             { name: "Perte des 2ème et 3ème phalanges de l'index (Main Dominante)", rate: 10 },
@@ -1166,6 +1259,27 @@ const middleCategories: InjuryCategory[] = [
       {
         name: "Doigts - Médius (Main Dominante)",
         injuries: [
+            // ⭐ LÉSIONS SPÉCIFIQUES (ajoutées pour améliorer reconnaissance IA)
+            { 
+              name: "Amputation du médius", 
+              description: "Amputation complète du médius.", 
+              rate: 12,
+              keywords: ["amputation", "medius", "majeur", "main", "dominante", "droite", "droit", "perte", "complete", "totale", "doigt", "3eme", "troisieme", "milieu", "phalanges"]
+            },
+            { 
+              name: "Ankylose du médius", 
+              description: "Ankylose du médius (totalité).", 
+              rate: 12,
+              keywords: ["ankylose", "medius", "majeur", "main", "dominante", "bloque", "rigide", "raide", "articulation", "flexion", "doigt", "milieu", "ip", "ipp", "ipd", "metacarpo"]
+            },
+            { 
+              name: "Raideur du médius", 
+              description: "Raideur d'une articulation du médius.", 
+              rate: [1, 4],
+              keywords: ["raideur", "medius", "majeur", "main", "dominante", "limitation", "mobilite", "partielle", "flexion", "extension", "doigt", "milieu", "difficulte"]
+            },
+            
+            // ⭐ LÉSIONS ORIGINALES
             { name: "Perte du médius (3 phalanges) (Main Dominante)", rate: 12 },
             { name: "Perte de la 3ème phalange du médius (Main Dominante)", rate: 4 },
             { name: "Perte des 2ème et 3ème phalanges du médius (Main Dominante)", rate: 8 },
@@ -1186,6 +1300,27 @@ const middleCategories: InjuryCategory[] = [
       {
         name: "Doigts - Annulaire (Main Dominante)",
         injuries: [
+            // ⭐ LÉSIONS SPÉCIFIQUES (ajoutées pour améliorer reconnaissance IA)
+            { 
+              name: "Amputation de l'annulaire", 
+              description: "Amputation complète de l'annulaire.", 
+              rate: 8,
+              keywords: ["amputation", "annulaire", "main", "dominante", "droite", "droit", "perte", "complete", "totale", "doigt", "4eme", "quatrieme", "phalanges", "bague"]
+            },
+            { 
+              name: "Ankylose de l'annulaire", 
+              description: "Ankylose de l'annulaire (totalité).", 
+              rate: 8,
+              keywords: ["ankylose", "annulaire", "main", "dominante", "bloque", "rigide", "raide", "articulation", "flexion", "doigt", "4eme", "ip", "ipp", "ipd", "metacarpo"]
+            },
+            { 
+              name: "Raideur de l'annulaire", 
+              description: "Raideur d'une articulation de l'annulaire.", 
+              rate: [1, 3],
+              keywords: ["raideur", "annulaire", "main", "dominante", "limitation", "mobilite", "partielle", "flexion", "extension", "doigt", "4eme", "difficulte"]
+            },
+            
+            // ⭐ LÉSIONS ORIGINALES
             { name: "Perte de l'annulaire (3 phalanges) (Main Dominante)", rate: 8 },
             { name: "Perte de la 3ème phalange de l'annulaire (Main Dominante)", rate: 3 },
             { name: "Perte des 2ème et 3ème phalanges de l'annulaire (Main Dominante)", rate: 6 },
@@ -1206,6 +1341,27 @@ const middleCategories: InjuryCategory[] = [
       {
         name: "Doigts - Auriculaire (Main Dominante)",
         injuries: [
+            // ⭐ LÉSIONS SPÉCIFIQUES (ajoutées pour améliorer reconnaissance IA)
+            { 
+              name: "Amputation de l'auriculaire", 
+              description: "Amputation complète de l'auriculaire.", 
+              rate: 10,
+              keywords: ["amputation", "auriculaire", "petit", "doigt", "main", "dominante", "droite", "droit", "perte", "complete", "totale", "5eme", "cinquieme", "phalanges", "minime", "minimum"]
+            },
+            { 
+              name: "Ankylose de l'auriculaire", 
+              description: "Ankylose de l'auriculaire (totalité).", 
+              rate: 10,
+              keywords: ["ankylose", "auriculaire", "petit", "doigt", "main", "dominante", "bloque", "rigide", "raide", "articulation", "flexion", "5eme", "ip", "ipp", "ipd", "metacarpo"]
+            },
+            { 
+              name: "Raideur de l'auriculaire", 
+              description: "Raideur d'une articulation de l'auriculaire.", 
+              rate: [1, 3],
+              keywords: ["raideur", "auriculaire", "petit", "doigt", "main", "dominante", "limitation", "mobilite", "partielle", "flexion", "extension", "5eme", "difficulte"]
+            },
+            
+            // ⭐ LÉSIONS ORIGINALES
             { name: "Perte de l'auriculaire (3 phalanges) (Main Dominante)", rate: 10 },
             { name: "Perte de la 3ème phalange de l'auriculaire (Main Dominante)", rate: 4 },
             { name: "Perte des 2ème et 3ème phalanges de l'auriculaire (Main Dominante)", rate: 7 },
@@ -1223,6 +1379,41 @@ const middleCategories: InjuryCategory[] = [
             { name: "Raideur d'une articulation de l'auriculaire (Main Non Dominante)", rate: [1, 2] },
         ]
       },
+      {
+        name: "Doigts - Amputations Multiples",
+        injuries: [
+            { 
+              name: "Amputation de deux doigts", 
+              description: "Amputation de deux doigts (hors pouce).", 
+              rate: [18, 25],
+              keywords: ["amputation", "deux", "2", "doigts", "main", "multiple", "perte", "index", "medius", "annulaire", "auriculaire", "phalanges"]
+            },
+            { 
+              name: "Amputation de trois doigts", 
+              description: "Amputation de trois doigts (hors pouce).", 
+              rate: [30, 40],
+              keywords: ["amputation", "trois", "3", "doigts", "main", "multiple", "perte", "index", "medius", "annulaire", "auriculaire", "phalanges"]
+            },
+            { 
+              name: "Amputation de quatre doigts", 
+              description: "Amputation de quatre doigts (hors pouce).", 
+              rate: [45, 50],
+              keywords: ["amputation", "quatre", "4", "doigts", "main", "multiple", "perte", "index", "medius", "annulaire", "auriculaire", "phalanges", "presque", "tous"]
+            },
+            { 
+              name: "Amputation de trois doigts dont le pouce", 
+              description: "Amputation de trois doigts incluant le pouce.", 
+              rate: [40, 50],
+              keywords: ["amputation", "trois", "3", "doigts", "pouce", "main", "multiple", "perte", "index", "medius", "dont", "incluant", "avec", "phalanges"]
+            },
+            { 
+              name: "Amputation totale des 5 doigts (main inutilisable)", 
+              description: "Amputation des cinq doigts rendant la main inutilisable.", 
+              rate: [55, 60],
+              keywords: ["amputation", "totale", "tous", "5", "cinq", "doigts", "main", "inutilisable", "complete", "entiere", "perte", "fonctionnelle", "metacarpiens"]
+            },
+        ]
+      },
     ]
   },
   {
@@ -1231,6 +1422,51 @@ const middleCategories: InjuryCategory[] = [
       {
         name: "Amputations",
         injuries: [
+            // ⭐ LÉSIONS SPÉCIFIQUES (ajoutées pour améliorer reconnaissance IA)
+            { 
+              name: "Amputation sous genou (moignon long)", 
+              description: "Amputation transtibiale avec moignon >10cm, bien appareillable.", 
+              rate: 70,
+              keywords: ["amputation", "sous", "genou", "moignon", "long", "transtibial", "jambe", "inferieur", "tiers", "tibia", "appareillable", "prothese"]
+            },
+            { 
+              name: "Désarticulation de la cheville", 
+              description: "Amputation de Syme au niveau de la cheville.", 
+              rate: [70, 73],
+              keywords: ["desarticulation", "cheville", "syme", "amputation", "niveau", "pied", "jambe", "tibio", "tarsienne", "inferieur"]
+            },
+            { 
+              name: "Désarticulation du genou", 
+              description: "Amputation au niveau du genou.", 
+              rate: [73, 75],
+              keywords: ["desarticulation", "genou", "amputation", "niveau", "articulation", "femoro", "tibiale", "jambe", "cuisse", "inferieur"]
+            },
+            { 
+              name: "Amputation cuisse tiers inférieur", 
+              description: "Amputation transfemorale tiers inférieur.", 
+              rate: [73, 75],
+              keywords: ["amputation", "cuisse", "tiers", "inferieur", "transfemoral", "femur", "distal", "bas", "pres", "genou", "membre", "inferieur"]
+            },
+            { 
+              name: "Amputation cuisse tiers moyen", 
+              description: "Amputation transfemorale tiers moyen.", 
+              rate: [75, 78],
+              keywords: ["amputation", "cuisse", "tiers", "moyen", "transfemoral", "femur", "milieu", "median", "diaphyse", "membre", "inferieur"]
+            },
+            { 
+              name: "Amputation cuisse tiers supérieur", 
+              description: "Amputation transfemorale tiers supérieur.", 
+              rate: [78, 80],
+              keywords: ["amputation", "cuisse", "tiers", "superieur", "transfemoral", "femur", "proximal", "haut", "pres", "hanche", "membre", "inferieur", "court", "moignon"]
+            },
+            { 
+              name: "Désarticulation de la hanche", 
+              description: "Amputation au niveau de l'articulation de la hanche.", 
+              rate: 80,
+              keywords: ["desarticulation", "hanche", "amputation", "niveau", "articulation", "coxo", "femorale", "bassin", "membre", "inferieur", "hemipelvectomie"]
+            },
+            
+            // ⭐ LÉSION GÉNÉRIQUE (fallback)
             { name: "Amputation d'un membre inférieur", rate: [70, 80], rateCriteria: { low: "Amputation sous le genou avec moignon long et bien appareillable.", high: "Désarticulation de la hanche ou amputation de cuisse avec moignon très court." } },
             { name: "Amputation des deux membres inférieurs", rate: 100 },
         ]
@@ -1241,9 +1477,9 @@ const middleCategories: InjuryCategory[] = [
             { name: "Fracture du col du fémur - Bonne consolidation", rate: [5, 15], rateCriteria: { low: "Consolidation anatomique, mobilité conservée, limitation minime.", high: "Légère raideur, gêne activités extrêmes (accroupissement)." } },
             { name: "Fracture du col du fémur - Consolidation avec raideur modérée", rate: [15, 30], rateCriteria: { low: "Raideur modérée, mobilité fonctionnelle conservée.", high: "Raideur marquée sans raccourcissement significatif." } },
             { name: "Fracture du col du fémur - Consolidation avec raccourcissement et raideur", rate: [30, 60], rateCriteria: { low: "Raccourcissement <3cm + raideur modérée.", high: "Raccourcissement >3cm + raideur importante + boiterie." } },
-            { name: "Pseudarthrose du col du fémur", rate: [60, 80] },
-            { name: "Fracture du massif trochantérien - Bonne consolidation", rate: [5, 10] },
-            { name: "Fracture du massif trochantérien - Cal vicieux et raideur", rate: [20, 40] },
+            { name: "Pseudarthrose du col du fémur", rate: [60, 80], rateCriteria: { low: "Pseudarthrose stable avec mobilité conservée, douleurs modérées.", high: "Pseudarthrose instable avec raccourcissement >3cm, douleurs permanentes, impotence fonctionnelle majeure nécessitant canne." } },
+            { name: "Fracture du massif trochantérien - Bonne consolidation", rate: [5, 10], rateCriteria: { low: "Consolidation anatomique sans séquelle, gêne minime.", high: "Consolidation avec légère raideur et douleurs mécaniques." } },
+            { name: "Fracture du massif trochantérien - Cal vicieux et raideur", rate: [20, 40], rateCriteria: { low: "Cal vicieux avec raideur modérée de hanche, boiterie discrète.", medium: "Cal vicieux important avec limitation flexion/abduction 50%, douleurs fréquentes.", high: "Cal vicieux majeur avec raccourcissement >2cm, quasi-ankylose, boiterie permanente nécessitant canne." } },
         ]
       },
       {
@@ -1259,17 +1495,17 @@ const middleCategories: InjuryCategory[] = [
         name: "Cuisse - Fractures",
         injuries: [
             { name: "Fracture diaphysaire du fémur", rate: [10, 30], description: "Séquelles d'une fracture de la diaphyse fémorale.", rateCriteria: { low: "Consolidation sans séquelle majeure, gêne discrète.", medium: "Cal vicieux avec raccourcissement < 2cm et/ou raideur modérée du genou/hanche.", high: "Cal vicieux important avec boiterie, raideur et/ou troubles neurologiques." } },
-            { name: "Fracture de l'extrémité inférieure du fémur - Avec raideur du genou", rate: [15, 30] },
-            { name: "Pseudarthrose du fémur", rate: [60, 80] },
+            { name: "Fracture de l'extrémité inférieure du fémur - Avec raideur du genou", rate: [15, 30], rateCriteria: { low: "Raideur légère genou (flexion >100°), douleurs mécaniques.", medium: "Raideur modérée (flexion 60-100°), douleurs fréquentes.", high: "Raideur sévère (flexion <60°), cal vicieux articulaire, arthrose débutante." } },
+            { name: "Pseudarthrose du fémur", rate: [60, 80], rateCriteria: { low: "Pseudarthrose stable du tiers moyen, mobilité conservée hanche/genou, douleurs modérées.", high: "Pseudarthrose instable avec raccourcissement majeur >5cm, quasi-impotence fonctionnelle, nécessité 2 cannes ou fauteuil." } },
         ]
       },
        {
         name: "Genou - Lésions Osseuses et Articulaires",
         injuries: [
-            { name: "Fracture de la rotule - Avec gêne fonctionnelle", rate: [5, 15] },
-            { name: "Fracture des plateaux tibiaux - Avec déviation et/ou raideur", rate: [10, 30] },
-            { name: "Fracture des condyles fémoraux - Avec déviation et/ou raideur", rate: [10, 30] },
-            { name: "Hydarthrose chronique du genou", rate: [5, 15] },
+            { name: "Fracture de la rotule - Avec gêne fonctionnelle", rate: [5, 15], rateCriteria: { low: "Fracture consolidée, gêne à la flexion complète (accroupissement), douleurs mécaniques.", medium: "Cal vicieux avec craquements, limitation flexion à 90°, douleurs fréquentes.", high: "Patellectomie ou pseudarthrose, perte d'extension active, faiblesse quadriceps majeure." } },
+            { name: "Fracture des plateaux tibiaux - Avec déviation et/ou raideur", rate: [10, 30], rateCriteria: { low: "Déviation axiale minime (<5°), raideur légère (flexion >120°), douleurs mécaniques modérées.", medium: "Déviation modérée (5-10°), raideur moyenne (flexion 90-120°), douleurs fréquentes.", high: "Déviation importante (>10° valgus/varus), raideur sévère (flexion <90°), instabilité, douleurs permanentes." } },
+            { name: "Fracture des condyles fémoraux - Avec déviation et/ou raideur", rate: [10, 30], rateCriteria: { low: "Déviation minime, raideur légère (flexion >120°), douleurs mécaniques modérées.", medium: "Déviation modérée, raideur moyenne (flexion 90-120°), douleurs fréquentes.", high: "Déviation importante, raideur sévère (flexion <90°), instabilité, douleurs permanentes." } },
+            { name: "Hydarthrose chronique du genou", rate: [5, 15], rateCriteria: { low: "Épanchements rares (1-2/an), drainage ponctuel.", medium: "Épanchements récidivants (mensulres), gonflement permanent modéré.", high: "Hydarthrose permanente volumineuse, ponctions fréquentes, limitation mobilité, synovectomie envisagée." } },
             { name: "Arthrose fémoro-patellaire ou fémoro-tibiale post-traumatique", rate: [10, 30], rateCriteria: { low: "Douleurs mécaniques, pincement radiologique modéré.", high: "Arthrose sévère avec déviation axiale et raideur." } },
             { name: "Séquelles de prothèse totale de genou", rate: [15, 40], rateCriteria: { low: "Prothèse indolore, mobilité > 90°, marche sans aide.", high: "Douleurs, instabilité, raideur, nécessité de cannes." } },
         ]
@@ -1278,9 +1514,9 @@ const middleCategories: InjuryCategory[] = [
         name: "Genou - Lésions Ligamentaires et Méniscales",
         injuries: [
             { name: "Laxité chronique du genou (séquelle d'entorse)", rate: [5, 20], rateCriteria: { low: "Laxité modérée sans instabilité fonctionnelle.", high: "Instabilité majeure avec dérobements fréquents." } },
-            { name: "Séquelles de rupture du ligament croisé antérieur (LCA)", rate: [10, 25] },
-            { name: "Séquelles de rupture du ligament croisé postérieur (LCP)", rate: [10, 25] },
-            { name: "Séquelles de méniscectomie (douleurs, hydarthrose)", rate: [5, 15] },
+            { name: "Séquelles de rupture du ligament croisé antérieur (LCA)", rate: [10, 25], rateCriteria: { low: "Laxité modérée, sans dérobements, activités quotidiennes normales, sports sans pivot/contact.", medium: "Laxité importante avec dérobements occasionnels, nécessité attelle pour activités.", high: "Laxité sévère avec dérobements fréquents (escaliers, marche irrégulière), arthrose débutante, activités limitées." } },
+            { name: "Séquelles de rupture du ligament croisé postérieur (LCP)", rate: [10, 25], rateCriteria: { low: "Laxité modérée, gêne en descente escaliers/pentes.", medium: "Laxité importante avec faiblesse quadriceps, douleurs antérieures.", high: "Laxité sévère avec instabilité postérieure majeure, arthrose fémoro-tibiale, limitation périmètre marche." } },
+            { name: "Séquelles de méniscectomie (douleurs, hydarthrose)", rate: [5, 15], rateCriteria: { low: "Méniscectomie partielle, gêne minime, pas d'épanchement.", medium: "Méniscectomie totale avec hydarthrose récidivante, douleurs mécaniques.", high: "Complications post-méniscectomie : arthrose précoce, chondropathie fémoro-tibiale, douleurs permanentes." } },
         ]
       },
       {
@@ -1293,19 +1529,19 @@ const middleCategories: InjuryCategory[] = [
       {
         name: "Jambe - Fractures",
         injuries: [
-            { name: "Fracture des deux os de la jambe - Bonne consolidation", rate: [5, 10] },
-            { name: "Fracture des deux os de la jambe - Avec cal vicieux et troubles trophiques", rate: [15, 40] },
-            { name: "Fracture isolée du tibia", rate: [5, 20] },
-            { name: "Fracture isolée du péroné", rate: [2, 5] },
-            { name: "Pseudarthrose des deux os de la jambe", rate: [40, 60] },
-            { name: "Pseudarthrose du tibia", rate: [30, 50] },
+            { name: "Fracture des deux os de la jambe - Bonne consolidation", rate: [5, 10], rateCriteria: { low: "Consolidation anatomique sans cal vicieux, gêne minime.", medium: "Légère atrophie mollet, douleurs mécaniques occasionnelles.", high: "Consolidation avec cal palpable, raideur cheville modérée, douleurs à la marche prolongée." } },
+            { name: "Fracture des deux os de la jambe - Avec cal vicieux et troubles trophiques", rate: [15, 40], rateCriteria: { low: "Cal vicieux angulaire <10°, troubles trophiques modérés (œdème discret).", medium: "Cal vicieux 10-20°, troubles trophiques nets (œdème chronique, peau fragile), boiterie.", high: "Cal vicieux >20° avec déviation majeure, troubles trophiques sévères (ulcères récidivants, varices), raideur cheville, périmètre marche limité <500m." } },
+            { name: "Fracture isolée du tibia", rate: [5, 20], rateCriteria: { low: "Fracture consolidée sans séquelle, gêne minime.", medium: "Cal vicieux tibia, douleurs mécaniques, léger œdème.", high: "Cal vicieux angulaire tibia, raideur cheville, troubles trophiques, boiterie." } },
+            { name: "Fracture isolée du péroné", rate: [2, 5], rateCriteria: { low: "Consolidation sans séquelle, gêne discrète.", high: "Cal vicieux péroné avec conflit tibiofibulaire, douleurs latérales cheville." } },
+            { name: "Pseudarthrose des deux os de la jambe", rate: [40, 60], rateCriteria: { low: "Pseudarthrose stable avec appareillage orthopédique efficace, marche possible >1km.", high: "Pseudarthrose instable, membre quasi-inutilisable, nécessité fauteuil roulant ou amputation envisagée." } },
+            { name: "Pseudarthrose du tibia", rate: [30, 50], rateCriteria: { low: "Pseudarthrose stable du tiers moyen tibia, appareillage, marche limitée mais autonome.", high: "Pseudarthrose instable avec cal fibulaire hypertrophique, douleurs permanentes, impotence fonctionnelle majeure." } },
             { name: "Syndrome des loges chronique d'effort de la jambe", rate: [10, 25], description: "Douleurs musculaires à l'effort par augmentation de pression dans les loges musculaires.", rateCriteria: { low: "Douleurs apparaissant à l'effort intense, calmées par le repos.", high: "Douleurs invalidantes pour des efforts modérés, avec signes neurologiques." } },
         ]
       },
       {
         name: "Cheville (Cou-de-pied) - Fractures",
         injuries: [
-            { name: "Fracture malléolaire ou bi-malléolaire - Bonne consolidation", rate: [3, 8] },
+            { name: "Fracture malléolaire ou bi-malléolaire - Bonne consolidation", rate: [3, 8], rateCriteria: { low: "Consolidation anatomique sans séquelle, gêne minime (fatigue cheville prolongée).", medium: "Légère raideur cheville, douleurs mécaniques occasionnelles.", high: "Consolidation avec raideur modérée (déficit 25% amplitudes), douleurs fréquentes, œdème discret." } },
             { name: "Fracture malléolaire ou bi-malléolaire - Avec raideur modérée", rate: [10, 20], rateCriteria: { low: "Cal vicieux léger, raideur limitant les activités sportives.", high: "Raideur marquée avec douleurs chroniques à la marche." } },
             { 
               name: "Fracture bi-malléolaire - Avec cal vicieux important, déformation et troubles trophiques", 
@@ -1315,7 +1551,7 @@ const middleCategories: InjuryCategory[] = [
                   high: "Déformation majeure, instabilité, troubles trophiques sévères et boiterie importante nécessitant une aide à la marche (canne)." 
               } 
             },
-            { name: "Fracture du pilon tibial", rate: [15, 40] },
+            { name: "Fracture du pilon tibial", rate: [15, 40], rateCriteria: { low: "Fracture articulaire consolidée avec raideur modérée cheville, douleurs mécaniques.", medium: "Raideur importante (flexion-extension <30°), arthrose débutante, boiterie, périmètre marche limité.", high: "Quasi-ankylose cheville, arthrose sévère, douleurs permanentes, troubles trophiques, nécessité canne permanente." } },
         ]
       },
       {
@@ -1329,24 +1565,81 @@ const middleCategories: InjuryCategory[] = [
       {
         name: "Pied - Fractures",
         injuries: [
-            { name: "Fracture de l'astragale (Talus) - Avec cal vicieux", rate: [10, 25] },
-            { name: "Fracture du calcanéum - Avec douleurs et boiterie", rate: [10, 30] },
-            { name: "Fracture des métatarsiens - Avec douleurs à la marche", rate: [3, 10] },
+            { name: "Fracture de l'astragale (Talus) - Avec cal vicieux", rate: [10, 25], rateCriteria: { low: "Cal vicieux minime, raideur sous-astragalienne modérée, douleurs mécaniques.", medium: "Cal vicieux important, raideur sévère arrière-pied, boiterie.", high: "Pseudarthrose ou nécrose astragale, arthrose tibio-tarsienne et sous-astragalienne, douleurs permanentes, marche très limitée." } },
+            { name: "Fracture du calcanéum - Avec douleurs et boiterie", rate: [10, 30], rateCriteria: { low: "Fracture extra-articulaire consolidée, douleurs mécaniques à la marche prolongée, boiterie discrète.", medium: "Fracture thalamique avec enfoncement thalamus, raideur sous-astragalienne, boiterie nette, douleurs fréquentes.", high: "Cal vicieux calcanéum avec élargissement majeur, arthrose sous-astragalienne sévère, douleurs permanentes, marche <500m, nécessité canne." } },
+            { name: "Fracture des métatarsiens - Avec douleurs à la marche", rate: [3, 10], rateCriteria: { low: "Fracture 1 métatarsien consolidée, douleurs mécaniques légères, port chaussures normal.", medium: "Fractures multiples métatarsiens avec cal vicieux, métatarsalgies d'appui, nécessité semelles orthopédiques.", high: "Cals vicieux multiples avec avant-pied élargi/déformé, troubles statiques sévères, douleurs permanentes, chaussage orthopédique obligatoire." } },
         ]
       },
       {
         name: "Pied - Raideurs et Ankyloses",
         injuries: [
-            { name: "Ankylose d'une articulation du tarse", rate: [10, 20] },
-            { name: "Pied plat ou pied creux post-traumatique", rate: [5, 20] },
+            { name: "Ankylose d'une articulation du tarse", rate: [10, 20], rateCriteria: { low: "Ankylose sous-astragalienne, adaptation possible, boiterie discrète.", medium: "Ankylose médio-tarsienne avec raideur globale arrière-pied.", high: "Ankyloses multiples tarse, pied rigide, troubles statiques, boiterie majeure." } },
+            { name: "Pied plat ou pied creux post-traumatique", rate: [5, 20], rateCriteria: { low: "Déformation modérée, douleurs mécaniques, correction semelles efficace.", medium: "Déformation importante, métatarsalgies/talalgies fréquentes, chaussage orthopédique.", high: "Déformation sévère irréductible, troubles statiques majeurs, douleurs permanentes, périmètre marche très limité." } },
         ]
       },
       {
         name: "Orteils - Lésions",
         injuries: [
-            { name: "Amputation du gros orteil", rate: [5, 8] },
-            { name: "Amputation d'un autre orteil", rate: [1, 3] },
-            { name: "Ankylose ou raideur du gros orteil (Hallux rigidus)", rate: [3, 10] },
+            // ⭐ LÉSIONS SPÉCIFIQUES (ajoutées pour améliorer reconnaissance IA)
+            { 
+              name: "Amputation d'un orteil (sauf gros orteil)", 
+              description: "Amputation d'un orteil latéral (2ème, 3ème, 4ème ou 5ème).", 
+              rate: [1, 3],
+              keywords: ["amputation", "orteil", "deuxieme", "troisieme", "quatrieme", "cinquieme", "2eme", "3eme", "4eme", "5eme", "lateral", "pied", "doigt", "perte"]
+            },
+            { 
+              name: "Amputation de deux orteils", 
+              description: "Amputation de deux orteils (sauf gros orteil).", 
+              rate: [2, 5],
+              keywords: ["amputation", "deux", "2", "orteils", "doigts", "pied", "multiple", "perte"]
+            },
+            { 
+              name: "Amputation de trois orteils", 
+              description: "Amputation de trois orteils (sauf gros orteil).", 
+              rate: [3, 7],
+              keywords: ["amputation", "trois", "3", "orteils", "doigts", "pied", "multiple", "perte"]
+            },
+            { 
+              name: "Amputation de quatre orteils", 
+              description: "Amputation de quatre orteils (sauf gros orteil).", 
+              rate: [4, 9],
+              keywords: ["amputation", "quatre", "4", "orteils", "doigts", "pied", "multiple", "perte", "presque", "tous"]
+            },
+            { 
+              name: "Amputation de tous les orteils", 
+              description: "Amputation des 5 orteils du pied.", 
+              rate: [10, 15],
+              keywords: ["amputation", "tous", "5", "cinq", "orteils", "doigts", "pied", "totalite", "complete", "entier", "avant", "perte"]
+            },
+            { 
+              name: "Amputation bilatérale des gros orteils", 
+              description: "Perte des deux gros orteils.", 
+              rate: [12, 18],
+              keywords: ["amputation", "bilateral", "deux", "2", "gros", "orteils", "hallux", "pieds", "perte", "bilaterale"]
+            },
+            { 
+              name: "Ankylose du gros orteil", 
+              description: "Ankylose de l'articulation métatarso-phalangienne du gros orteil.", 
+              rate: [5, 10],
+              keywords: ["ankylose", "gros", "orteil", "hallux", "rigide", "rigidus", "bloque", "raide", "articulation", "metatarso", "phalangien", "mp"]
+            },
+            { 
+              name: "Ankylose d'un orteil", 
+              description: "Ankylose d'un orteil latéral.", 
+              rate: [1, 3],
+              keywords: ["ankylose", "orteil", "lateral", "bloque", "raide", "rigide", "doigt", "pied"]
+            },
+            { 
+              name: "Raideur du gros orteil", 
+              description: "Raideur partielle du gros orteil sans ankylose complète.", 
+              rate: [3, 7],
+              keywords: ["raideur", "gros", "orteil", "hallux", "limitation", "mobilite", "rigide", "partielle", "doigt", "pied"]
+            },
+            
+            // ⭐ LÉSIONS GÉNÉRIQUES (fallback)
+            { name: "Amputation du gros orteil", rate: [5, 8], rateCriteria: { low: "Amputation distale (phalange distale), troubles propulsion minimes.", high: "Amputation complète gros orteil, troubles appui/propulsion nets, boiterie." } },
+            { name: "Amputation d'un autre orteil", rate: [1, 3], rateCriteria: { low: "Amputation orteil latéral (4ème/5ème), gêne esthétique surtout.", high: "Amputation 2ème orteil, troubles appui modérés." } },
+            { name: "Ankylose ou raideur du gros orteil (Hallux rigidus)", rate: [3, 10], rateCriteria: { low: "Raideur partielle IP, limitation légère déroulement pas.", medium: "Ankylose MP en position neutre, déroulement pas perturbé.", high: "Ankylose MP en flexion/extension pathologique, douleurs permanentes, troubles marche, nécessité chaussage orthopédique." } },
         ]
       },
       {

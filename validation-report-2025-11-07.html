@@ -1,0 +1,5433 @@
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Rapport Validation IA Médico-Légale</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; background: #f5f5f5; }
+    .container { max-width: 1200px; margin: 0 auto; background: white; padding: 30px; border-radius: 10px; }
+    h1 { color: #1976D2; border-bottom: 3px solid #1976D2; padding-bottom: 10px; }
+    h2 { color: #424242; margin-top: 30px; }
+    .metric-box { display: inline-block; padding: 20px; margin: 10px; border-radius: 8px; min-width: 200px; text-align: center; }
+    .metric-value { font-size: 32px; font-weight: bold; }
+    .metric-label { font-size: 14px; color: #666; }
+    .success { background: #C8E6C9; color: #2E7D32; }
+    .warning { background: #FFE082; color: #F57C00; }
+    .error { background: #FFCDD2; color: #C62828; }
+    .test-result { margin: 15px 0; padding: 15px; border-left: 4px solid #ccc; background: #fafafa; }
+    .test-result.pass { border-color: #4CAF50; }
+    .test-result.fail { border-color: #F44336; }
+    .recommendation { padding: 15px; margin: 10px 0; border-left: 4px solid #FF9800; background: #FFF3E0; }
+    table { width: 100%; border-collapse: collapse; margin: 20px 0; }
+    th, td { padding: 12px; text-align: left; border-bottom: 1px solid #ddd; }
+    th { background: #1976D2; color: white; }
+    tr:hover { background: #f5f5f5; }
+    .code { background: #263238; color: #00FF00; padding: 15px; border-radius: 5px; overflow-x: auto; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>⚠️ Rapport de Validation - IA Médico-Légale</h1>
+    <p><strong>Date:</strong> 07/11/2025 03:03:26</p>
+    
+    <h2>📊 Métriques Globales</h2>
+    <div>
+      <div class="metric-box error">
+        <div class="metric-value">4.7%</div>
+        <div class="metric-label">Reconnaissance Lésions</div>
+        <div class="metric-label">(Seuil: 95%)</div>
+      </div>
+      
+      <div class="metric-box warning">
+        <div class="metric-value">1.0%</div>
+        <div class="metric-label">Précision Taux IPP</div>
+        <div class="metric-label">(Seuil: 90%)</div>
+      </div>
+      
+      <div class="metric-box success">
+        <div class="metric-value">156ms</div>
+        <div class="metric-label">Temps Réponse Moyen</div>
+        <div class="metric-label">(Seuil: 500ms)</div>
+      </div>
+      
+      <div class="metric-box error">
+        <div class="metric-value">10/297</div>
+        <div class="metric-label">Cas Réussis</div>
+        <div class="metric-label">(3.4%)</div>
+      </div>
+    </div>
+    
+    
+    <h2>💡 Recommandations d'Amélioration</h2>
+    <div class="recommendation">⚠️ Taux reconnaissance (4.7%) < seuil 95% → Améliorer keywords/synonymes</div><div class="recommendation">⚠️ Précision taux (1.0%) < seuil 90% → Affiner critères gravité</div><div class="recommendation">🔴 Catégorie "Membres Supérieurs - Épaule" : 3 échecs → Réviser mots-clés/patterns spécifiques</div><div class="recommendation">🔴 Catégorie "Membres Supérieurs - Main" : 3 échecs → Réviser mots-clés/patterns spécifiques</div><div class="recommendation">🔴 Catégorie "Variations Langage" : 4 échecs → Réviser mots-clés/patterns spécifiques</div><div class="recommendation">🔴 Catégorie "Rachis et Bassin - Bassin" : 3 échecs → Réviser mots-clés/patterns spécifiques</div><div class="recommendation">🔴 Catégorie "Audition" : 17 échecs → Réviser mots-clés/patterns spécifiques</div><div class="recommendation">🔴 Catégorie "Doigts" : 25 échecs → Réviser mots-clés/patterns spécifiques</div><div class="recommendation">🔴 Catégorie "Orteils" : 13 échecs → Réviser mots-clés/patterns spécifiques</div><div class="recommendation">🔴 Catégorie "Amputations" : 14 échecs → Réviser mots-clés/patterns spécifiques</div><div class="recommendation">🔴 Catégorie "Viscères" : 15 échecs → Réviser mots-clés/patterns spécifiques</div><div class="recommendation">🔴 Catégorie "Vision" : 13 échecs → Réviser mots-clés/patterns spécifiques</div><div class="recommendation">🔴 Catégorie "Membre Supérieur" : 26 échecs → Réviser mots-clés/patterns spécifiques</div><div class="recommendation">🔴 Catégorie "Membre Inférieur" : 20 échecs → Réviser mots-clés/patterns spécifiques</div><div class="recommendation">🔴 Catégorie "Rachis" : 6 échecs → Réviser mots-clés/patterns spécifiques</div><div class="recommendation">🔴 Catégorie "Cumuls" : 20 échecs → Réviser mots-clés/patterns spécifiques</div><div class="recommendation">🔴 Catégorie "Polytraumatisme" : 20 échecs → Réviser mots-clés/patterns spécifiques</div><div class="recommendation">🔴 Catégorie "État Antérieur" : 20 échecs → Réviser mots-clés/patterns spécifiques</div><div class="recommendation">🔴 Catégorie "Variations" : 20 échecs → Réviser mots-clés/patterns spécifiques</div><div class="recommendation">🔴 Catégorie "Cas Limites" : 20 échecs → Réviser mots-clés/patterns spécifiques</div>
+    
+    
+    <h2>📋 Résultats Détaillés par Cas</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Catégorie</th>
+          <th>Statut</th>
+          <th>Lésion Trouvée</th>
+          <th>Taux Trouvé</th>
+          <th>Écart</th>
+          <th>Temps</th>
+        </tr>
+      </thead>
+      <tbody>
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>vision-001</strong></td>
+          <td>Yeux - Lésions Spécifiques</td>
+          <td>❌ Échec</td>
+          <td>Cataracte (selon acuité et complications)</td>
+          <td>55%</td>
+          <td>20.0%</td>
+          <td>290ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Taux incorrect: trouvé 55%, attendu 35% (écart 20%)
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #E8F5E9;">
+          <td><strong>vision-002</strong></td>
+          <td>Yeux - Lésions Spécifiques</td>
+          <td>✅ Réussi</td>
+          <td><em>Non trouvée</em></td>
+          <td>-</td>
+          <td>-</td>
+          <td>143ms</td>
+        </tr>
+        
+        
+        <tr>
+          <td colspan="7" style="background: #FFF9C4; padding: 10px;">
+            <strong>⚠️ Avertissements:</strong><br>• Lésion attendue trouvée mais nécessite clarification (ambiguïté détectée)
+          </td>
+        </tr>
+        
+        
+        <tr style="background: #E8F5E9;">
+          <td><strong>vision-003</strong></td>
+          <td>Yeux - Lésions Spécifiques</td>
+          <td>✅ Réussi</td>
+          <td><em>Non trouvée</em></td>
+          <td>-</td>
+          <td>-</td>
+          <td>239ms</td>
+        </tr>
+        
+        
+        <tr>
+          <td colspan="7" style="background: #FFF9C4; padding: 10px;">
+            <strong>⚠️ Avertissements:</strong><br>• Lésion attendue trouvée mais nécessite clarification (ambiguïté détectée)
+          </td>
+        </tr>
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>genou-001</strong></td>
+          <td>Membres Inférieurs - Genou</td>
+          <td>❌ Échec</td>
+          <td>Fracture du cotyle avec arthrose post-traumatique</td>
+          <td>28%</td>
+          <td>-</td>
+          <td>249ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Fracture du cotyle avec arthrose post-traumatique" au lieu de "Séquelles de rupture du ligament croisé antérieur (LCA)"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>genou-002</strong></td>
+          <td>Membres Inférieurs - Genou</td>
+          <td>❌ Échec</td>
+          <td>Méniscectomie bilatérale (les 2 ménisques du même genou)</td>
+          <td>40%</td>
+          <td>-</td>
+          <td>133ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Méniscectomie bilatérale (les 2 ménisques du même genou)" au lieu de "Méniscectomie totale"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #E8F5E9;">
+          <td><strong>genou-003</strong></td>
+          <td>Membres Inférieurs - Genou</td>
+          <td>✅ Réussi</td>
+          <td><em>Non trouvée</em></td>
+          <td>-</td>
+          <td>-</td>
+          <td>316ms</td>
+        </tr>
+        
+        
+        <tr>
+          <td colspan="7" style="background: #FFF9C4; padding: 10px;">
+            <strong>⚠️ Avertissements:</strong><br>• Lésion attendue trouvée mais nécessite clarification (ambiguïté détectée)
+          </td>
+        </tr>
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>cheville-001</strong></td>
+          <td>Membres Inférieurs - Cheville</td>
+          <td>❌ Échec</td>
+          <td>Fracture du pilon tibial</td>
+          <td>28%</td>
+          <td>10.0%</td>
+          <td>126ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Taux incorrect: trouvé 28%, attendu 38% (écart 10%)
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>cheville-002</strong></td>
+          <td>Membres Inférieurs - Cheville</td>
+          <td>❌ Échec</td>
+          <td><em>Non trouvée</em></td>
+          <td>-</td>
+          <td>-</td>
+          <td>234ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion attendue "Fracture malléolaire ou bi-malléolaire - Avec raideur modérée" absente des 5 choix proposés
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #E8F5E9;">
+          <td><strong>pied-001</strong></td>
+          <td>Membres Inférieurs - Pied</td>
+          <td>✅ Réussi</td>
+          <td><em>Non trouvée</em></td>
+          <td>-</td>
+          <td>-</td>
+          <td>325ms</td>
+        </tr>
+        
+        
+        <tr>
+          <td colspan="7" style="background: #FFF9C4; padding: 10px;">
+            <strong>⚠️ Avertissements:</strong><br>• Lésion attendue trouvée mais nécessite clarification (ambiguïté détectée)
+          </td>
+        </tr>
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>rachis-001</strong></td>
+          <td>Rachis et Bassin - Lombaire</td>
+          <td>❌ Échec</td>
+          <td>Raideur importante du rachis dorso-lombaire</td>
+          <td>25%</td>
+          <td>-</td>
+          <td>229ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Raideur importante du rachis dorso-lombaire" au lieu de "Tassement d'une vertèbre lombaire - Avec cyphose et/ou raideur"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>rachis-002</strong></td>
+          <td>Rachis et Bassin - Cervical</td>
+          <td>❌ Échec</td>
+          <td>Séquelles d'arthrodèse vertébrale (fusion) avec raideur et douleurs résiduelles</td>
+          <td>28%</td>
+          <td>-</td>
+          <td>232ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Séquelles d'arthrodèse vertébrale (fusion) avec raideur et douleurs résiduelles" au lieu de "Syndrome cervical chronique post-traumatique"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>epaule-001</strong></td>
+          <td>Membres Supérieurs - Épaule</td>
+          <td>❌ Échec</td>
+          <td><em>Non trouvée</em></td>
+          <td>-</td>
+          <td>-</td>
+          <td>227ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion attendue "Fracture de la tête humérale" absente des 2 choix proposés
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>main-001</strong></td>
+          <td>Membres Supérieurs - Main</td>
+          <td>❌ Échec</td>
+          <td>Amputation de tous les doigts de la main (Main Dominante)</td>
+          <td>60%</td>
+          <td>-</td>
+          <td>121ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Amputation de tous les doigts de la main (Main Dominante)" au lieu de "Amputation du pouce (main dominante)"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>nerf-001</strong></td>
+          <td>Nerfs Périphériques</td>
+          <td>❌ Échec</td>
+          <td><em>Non trouvée</em></td>
+          <td>-</td>
+          <td>-</td>
+          <td>126ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion attendue "Paralysie du nerf radial" absente des 5 choix proposés
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>nerf-002</strong></td>
+          <td>Nerfs Périphériques</td>
+          <td>❌ Échec</td>
+          <td><em>Non trouvée</em></td>
+          <td>-</td>
+          <td>-</td>
+          <td>124ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion attendue "Sciatique chronique avec signes déficitaires" absente des 4 choix proposés
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #E8F5E9;">
+          <td><strong>complexe-001</strong></td>
+          <td>Cas Complexe</td>
+          <td>✅ Réussi</td>
+          <td>Fracture des plateaux tibiaux - Avec déviation et/ou raideur</td>
+          <td>30%</td>
+          <td>5.0%</td>
+          <td>229ms</td>
+        </tr>
+        
+        
+        <tr>
+          <td colspan="7" style="background: #FFF9C4; padding: 10px;">
+            <strong>⚠️ Avertissements:</strong><br>• Taux acceptable mais écart 5% (tolérance optimale ±3%)
+          </td>
+        </tr>
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>lang-001</strong></td>
+          <td>Variations Langage</td>
+          <td>❌ Échec</td>
+          <td>Cataracte (selon acuité et complications)</td>
+          <td>55%</td>
+          <td>10.0%</td>
+          <td>238ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Taux incorrect: trouvé 55%, attendu 45% (écart 10%)
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>lang-002</strong></td>
+          <td>Variations Langage</td>
+          <td>❌ Échec</td>
+          <td>Fracture du col du fémur - Consolidation avec raccourcissement et raideur</td>
+          <td>60%</td>
+          <td>-</td>
+          <td>238ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Fracture du col du fémur - Consolidation avec raccourcissement et raideur" au lieu de "Fracture de la diaphyse fémorale - Avec cal vicieux"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>epaule-002</strong></td>
+          <td>Membres Supérieurs - Épaule</td>
+          <td>❌ Échec</td>
+          <td><em>Non trouvée</em></td>
+          <td>-</td>
+          <td>-</td>
+          <td>150ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion attendue "Rupture complète de la coiffe des rotateurs" absente des 2 choix proposés
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>epaule-003</strong></td>
+          <td>Membres Supérieurs - Épaule</td>
+          <td>❌ Échec</td>
+          <td>Instabilité chronique antérieure de l'épaule (luxations récidivantes) (Dominante)</td>
+          <td>30%</td>
+          <td>-</td>
+          <td>258ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Instabilité chronique antérieure de l'épaule (luxations récidivantes) (Dominante)" au lieu de "Luxation récidivante de l'épaule"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>coude-001</strong></td>
+          <td>Membres Supérieurs - Coude</td>
+          <td>❌ Échec</td>
+          <td><em>Non trouvée</em></td>
+          <td>-</td>
+          <td>-</td>
+          <td>237ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion attendue "Fracture de l'olécrane - Avec raideur importante" absente des 5 choix proposés
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>coude-002</strong></td>
+          <td>Membres Supérieurs - Coude</td>
+          <td>❌ Échec</td>
+          <td>Ankylose complète du coude en extension</td>
+          <td>60%</td>
+          <td>-</td>
+          <td>128ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Ankylose complète du coude en extension" au lieu de "Ankylose du coude en position vicieuse"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>poignet-001</strong></td>
+          <td>Membres Supérieurs - Poignet</td>
+          <td>❌ Échec</td>
+          <td><em>Non trouvée</em></td>
+          <td>-</td>
+          <td>-</td>
+          <td>247ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion attendue "Fracture de l'extrémité inférieure du radius - Avec cal vicieux" absente des 2 choix proposés
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>poignet-002</strong></td>
+          <td>Membres Supérieurs - Poignet</td>
+          <td>❌ Échec</td>
+          <td><em>Non trouvée</em></td>
+          <td>-</td>
+          <td>-</td>
+          <td>237ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion attendue "Pseudarthrose du scaphoïde" absente des 4 choix proposés
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>main-002</strong></td>
+          <td>Membres Supérieurs - Main</td>
+          <td>❌ Échec</td>
+          <td>Perte du pouce (2 phalanges) (Main Dominante)</td>
+          <td>25%</td>
+          <td>-</td>
+          <td>120ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Perte du pouce (2 phalanges) (Main Dominante)" au lieu de "Amputation de l'index (main dominante)"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>main-003</strong></td>
+          <td>Membres Supérieurs - Main</td>
+          <td>❌ Échec</td>
+          <td>Raideur d'une articulation du médius (Main Dominante)</td>
+          <td>3%</td>
+          <td>-</td>
+          <td>123ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Raideur d'une articulation du médius (Main Dominante)" au lieu de "Section des tendons fléchisseurs d'un doigt long"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>hanche-001</strong></td>
+          <td>Membres Inférieurs - Hanche</td>
+          <td>❌ Échec</td>
+          <td>Coxarthrose post-traumatique (arthrose de hanche)</td>
+          <td>60%</td>
+          <td>-</td>
+          <td>246ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Coxarthrose post-traumatique (arthrose de hanche)" au lieu de "Prothèse totale de hanche"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>hanche-002</strong></td>
+          <td>Membres Inférieurs - Hanche</td>
+          <td>❌ Échec</td>
+          <td>Coxarthrose post-traumatique (arthrose de hanche)</td>
+          <td>45%</td>
+          <td>-</td>
+          <td>240ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Coxarthrose post-traumatique (arthrose de hanche)" au lieu de "Arthrose post-traumatique de la hanche"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>jambe-002</strong></td>
+          <td>Membres Inférieurs - Jambe</td>
+          <td>❌ Échec</td>
+          <td>Fracture des plateaux tibiaux - Avec déviation et/ou raideur</td>
+          <td>20%</td>
+          <td>-</td>
+          <td>236ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Fracture des plateaux tibiaux - Avec déviation et/ou raideur" au lieu de "Pseudarthrose de la diaphyse tibiale"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>rachis-003</strong></td>
+          <td>Rachis et Bassin - Dorsal</td>
+          <td>❌ Échec</td>
+          <td><em>Non trouvée</em></td>
+          <td>-</td>
+          <td>-</td>
+          <td>235ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion attendue "Tassement d'une vertèbre dorsale - Avec cyphose" absente des 5 choix proposés
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>bassin-001</strong></td>
+          <td>Rachis et Bassin - Bassin</td>
+          <td>❌ Échec</td>
+          <td>Coxarthrose post-traumatique (arthrose de hanche)</td>
+          <td>45%</td>
+          <td>-</td>
+          <td>237ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Coxarthrose post-traumatique (arthrose de hanche)" au lieu de "Fracture du cotyle - Avec séquelles articulaires"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>bassin-002</strong></td>
+          <td>Rachis et Bassin - Bassin</td>
+          <td>❌ Échec</td>
+          <td><em>Non trouvée</em></td>
+          <td>-</td>
+          <td>-</td>
+          <td>242ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion attendue "Fracture du sacrum" absente des 2 choix proposés
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>bassin-003</strong></td>
+          <td>Rachis et Bassin - Bassin</td>
+          <td>❌ Échec</td>
+          <td>Fracture du sacrum ou du coccyx avec douleurs chroniques (coccygodynie)</td>
+          <td>15%</td>
+          <td>-</td>
+          <td>328ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Fracture du sacrum ou du coccyx avec douleurs chroniques (coccygodynie)" au lieu de "Fracture du coccyx"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>thorax-001</strong></td>
+          <td>Thorax - Côtes</td>
+          <td>❌ Échec</td>
+          <td>Séquelles de volet costal mobile (thoracic flail chest)</td>
+          <td>28%</td>
+          <td>-</td>
+          <td>329ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Séquelles de volet costal mobile (thoracic flail chest)" au lieu de "Fractures multiples de côtes - Avec séquelles respiratoires"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>thorax-002</strong></td>
+          <td>Thorax - Sternum</td>
+          <td>❌ Échec</td>
+          <td><em>Non trouvée</em></td>
+          <td>-</td>
+          <td>-</td>
+          <td>321ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion attendue "Fracture du sternum" absente des 2 choix proposés
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>visceres-001</strong></td>
+          <td>Abdomen et Viscères</td>
+          <td>❌ Échec</td>
+          <td>Splénectomie (Ablation de la rate)</td>
+          <td>30%</td>
+          <td>-</td>
+          <td>232ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Splénectomie (Ablation de la rate)" au lieu de "Ablation de la rate (splénectomie)"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>visceres-002</strong></td>
+          <td>Abdomen et Viscères</td>
+          <td>❌ Échec</td>
+          <td>Névralgie pariétale post-traumatique ou post-chirurgicale (nerf ilio-inguinal, ilio-hypogastrique)</td>
+          <td>15%</td>
+          <td>-</td>
+          <td>239ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Névralgie pariétale post-traumatique ou post-chirurgicale (nerf ilio-inguinal, ilio-hypogastrique)" au lieu de "Éventration post-traumatique"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>audition-001</strong></td>
+          <td>Audition</td>
+          <td>❌ Échec</td>
+          <td><em>Non trouvée</em></td>
+          <td>-</td>
+          <td>-</td>
+          <td>123ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion attendue "Surdité unilatérale profonde" absente des 5 choix proposés
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>audition-002</strong></td>
+          <td>Audition</td>
+          <td>❌ Échec</td>
+          <td>Troubles du sommeil chroniques post-traumatiques (insomnie sévère)</td>
+          <td>15%</td>
+          <td>-</td>
+          <td>238ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Troubles du sommeil chroniques post-traumatiques (insomnie sévère)" au lieu de "Acouphènes post-traumatiques invalidants"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>dent-001</strong></td>
+          <td>Dents</td>
+          <td>❌ Échec</td>
+          <td>Parodontolyse post-traumatique (par dent avec mobilité anormale)</td>
+          <td>1%</td>
+          <td>-</td>
+          <td>124ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Parodontolyse post-traumatique (par dent avec mobilité anormale)" au lieu de "Perte de dents définitives"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>cicatrice-001</strong></td>
+          <td>Cicatrices</td>
+          <td>❌ Échec</td>
+          <td>Lésions du cuir chevelu avec phénomènes douloureux, sans brèche osseuse</td>
+          <td>15%</td>
+          <td>-</td>
+          <td>246ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Lésions du cuir chevelu avec phénomènes douloureux, sans brèche osseuse" au lieu de "Cicatrice vicieuse thorax antérieur"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>complexe-002</strong></td>
+          <td>Cas Complexe</td>
+          <td>❌ Échec</td>
+          <td>Cumul de 2 lésions (Formule de Balthazar)</td>
+          <td>0%</td>
+          <td>-</td>
+          <td>0ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Cumul de 2 lésions (Formule de Balthazar)" au lieu de "Séquelles multiples membres (cumul)"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>complexe-003</strong></td>
+          <td>Cas Complexe</td>
+          <td>❌ Échec</td>
+          <td>Paralysie du nerf sciatique poplité interne (SPI)</td>
+          <td>25%</td>
+          <td>-</td>
+          <td>125ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Paralysie du nerf sciatique poplité interne (SPI)" au lieu de "Séquelles multiples (neurologique + ortho)"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>lang-003</strong></td>
+          <td>Variations Langage</td>
+          <td>❌ Échec</td>
+          <td>Hydarthrose chronique du genou</td>
+          <td>10%</td>
+          <td>-</td>
+          <td>245ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Hydarthrose chronique du genou" au lieu de "Séquelles de rupture du ligament croisé antérieur (LCA)"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>lang-004</strong></td>
+          <td>Variations Langage</td>
+          <td>❌ Échec</td>
+          <td>Cataracte (selon acuité et complications)</td>
+          <td>55%</td>
+          <td>13.0%</td>
+          <td>236ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Taux incorrect: trouvé 55%, attendu 42% (écart 13%)
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n1-doigt-001</strong></td>
+          <td>Doigts</td>
+          <td>❌ Échec</td>
+          <td>Amputation de tous les doigts de la main (Main Dominante)</td>
+          <td>60%</td>
+          <td>-</td>
+          <td>118ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Amputation de tous les doigts de la main (Main Dominante)" au lieu de "Amputation du pouce (main dominante)"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n1-doigt-002</strong></td>
+          <td>Doigts</td>
+          <td>❌ Échec</td>
+          <td>Amputation de tous les doigts de la main (Main Non Dominante)</td>
+          <td>50%</td>
+          <td>-</td>
+          <td>117ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Amputation de tous les doigts de la main (Main Non Dominante)" au lieu de "Amputation de l'index"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n1-doigt-003</strong></td>
+          <td>Doigts</td>
+          <td>❌ Échec</td>
+          <td><em>Non trouvée</em></td>
+          <td>-</td>
+          <td>-</td>
+          <td>115ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion attendue "Amputation du médius" absente des 5 choix proposés
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n1-doigt-004</strong></td>
+          <td>Doigts</td>
+          <td>❌ Échec</td>
+          <td><em>Non trouvée</em></td>
+          <td>-</td>
+          <td>-</td>
+          <td>118ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion attendue "Amputation de l'annulaire" absente des 5 choix proposés
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n1-doigt-005</strong></td>
+          <td>Doigts</td>
+          <td>❌ Échec</td>
+          <td><em>Non trouvée</em></td>
+          <td>-</td>
+          <td>-</td>
+          <td>124ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion attendue "Amputation de l'auriculaire" absente des 5 choix proposés
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n1-doigt-006</strong></td>
+          <td>Doigts</td>
+          <td>❌ Échec</td>
+          <td><em>Non trouvée</em></td>
+          <td>-</td>
+          <td>-</td>
+          <td>115ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion attendue "Amputation phalange P1 du pouce" absente des 2 choix proposés
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n1-doigt-007</strong></td>
+          <td>Doigts</td>
+          <td>❌ Échec</td>
+          <td><em>Non trouvée</em></td>
+          <td>-</td>
+          <td>-</td>
+          <td>115ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion attendue "Amputation phalange P2 index" absente des 3 choix proposés
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n1-doigt-008</strong></td>
+          <td>Doigts</td>
+          <td>❌ Échec</td>
+          <td><em>Non trouvée</em></td>
+          <td>-</td>
+          <td>-</td>
+          <td>118ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion attendue "Amputation de deux doigts" absente des 3 choix proposés
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n1-doigt-009</strong></td>
+          <td>Doigts</td>
+          <td>❌ Échec</td>
+          <td>Amputation totale des 5 doigts (main inutilisable)</td>
+          <td>60%</td>
+          <td>-</td>
+          <td>114ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Amputation totale des 5 doigts (main inutilisable)" au lieu de "Amputation de trois doigts"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n1-doigt-010</strong></td>
+          <td>Doigts</td>
+          <td>❌ Échec</td>
+          <td>Amputation totale des 5 doigts (main inutilisable)</td>
+          <td>60%</td>
+          <td>-</td>
+          <td>113ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Amputation totale des 5 doigts (main inutilisable)" au lieu de "Amputation de quatre doigts"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n1-doigt-011</strong></td>
+          <td>Doigts</td>
+          <td>❌ Échec</td>
+          <td>Ankylose de tous les doigts de la main (Main Dominante)</td>
+          <td>55%</td>
+          <td>-</td>
+          <td>115ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Ankylose de tous les doigts de la main (Main Dominante)" au lieu de "Ankylose du pouce"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n1-doigt-012</strong></td>
+          <td>Doigts</td>
+          <td>❌ Échec</td>
+          <td>Ankylose de tous les doigts de la main (Main Dominante)</td>
+          <td>55%</td>
+          <td>-</td>
+          <td>114ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Ankylose de tous les doigts de la main (Main Dominante)" au lieu de "Ankylose de l'index"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n1-doigt-013</strong></td>
+          <td>Doigts</td>
+          <td>❌ Échec</td>
+          <td>Ankylose de tous les doigts de la main (Main Dominante)</td>
+          <td>55%</td>
+          <td>-</td>
+          <td>112ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Ankylose de tous les doigts de la main (Main Dominante)" au lieu de "Ankylose du médius"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n1-doigt-014</strong></td>
+          <td>Doigts</td>
+          <td>❌ Échec</td>
+          <td>Ankylose de tous les doigts de la main (Main Dominante)</td>
+          <td>55%</td>
+          <td>-</td>
+          <td>112ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Ankylose de tous les doigts de la main (Main Dominante)" au lieu de "Ankylose de l'annulaire"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n1-doigt-015</strong></td>
+          <td>Doigts</td>
+          <td>❌ Échec</td>
+          <td>Ankylose de tous les doigts de la main (Main Dominante)</td>
+          <td>55%</td>
+          <td>-</td>
+          <td>113ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Ankylose de tous les doigts de la main (Main Dominante)" au lieu de "Ankylose de l'auriculaire"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n1-doigt-016</strong></td>
+          <td>Doigts</td>
+          <td>❌ Échec</td>
+          <td>Raideur d'une articulation du pouce (Main Dominante)</td>
+          <td>6%</td>
+          <td>-</td>
+          <td>220ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Raideur d'une articulation du pouce (Main Dominante)" au lieu de "Raideur du pouce"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n1-doigt-017</strong></td>
+          <td>Doigts</td>
+          <td>❌ Échec</td>
+          <td>Raideur d'une articulation du pouce (Main Dominante)</td>
+          <td>6%</td>
+          <td>-</td>
+          <td>219ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Raideur d'une articulation du pouce (Main Dominante)" au lieu de "Raideur de l'index"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n1-doigt-018</strong></td>
+          <td>Doigts</td>
+          <td>❌ Échec</td>
+          <td>Raideur d'une articulation du pouce (Main Dominante)</td>
+          <td>6%</td>
+          <td>-</td>
+          <td>214ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Raideur d'une articulation du pouce (Main Dominante)" au lieu de "Raideur du médius"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n1-doigt-019</strong></td>
+          <td>Doigts</td>
+          <td>❌ Échec</td>
+          <td>Raideur d'une articulation du pouce (Main Dominante)</td>
+          <td>6%</td>
+          <td>-</td>
+          <td>217ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Raideur d'une articulation du pouce (Main Dominante)" au lieu de "Raideur de l'annulaire"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n1-doigt-020</strong></td>
+          <td>Doigts</td>
+          <td>❌ Échec</td>
+          <td>Raideur d'une articulation du pouce (Main Dominante)</td>
+          <td>6%</td>
+          <td>-</td>
+          <td>217ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Raideur d'une articulation du pouce (Main Dominante)" au lieu de "Raideur de l'auriculaire"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n1-doigt-021</strong></td>
+          <td>Doigts</td>
+          <td>❌ Échec</td>
+          <td>Amputation de l'index - Désarticulation métacarpo-phalangienne</td>
+          <td>15%</td>
+          <td>-</td>
+          <td>113ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Amputation de l'index - Désarticulation métacarpo-phalangienne" au lieu de "Amputation de trois doigts dont le pouce"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n1-doigt-022</strong></td>
+          <td>Doigts</td>
+          <td>❌ Échec</td>
+          <td>Perte du pouce (2 phalanges) (Main Dominante)</td>
+          <td>25%</td>
+          <td>-</td>
+          <td>111ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Perte du pouce (2 phalanges) (Main Dominante)" au lieu de "Amputation du pouce (main dominante)"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n1-doigt-023</strong></td>
+          <td>Doigts</td>
+          <td>❌ Échec</td>
+          <td>Amputation de l'index - Désarticulation métacarpo-phalangienne</td>
+          <td>15%</td>
+          <td>-</td>
+          <td>219ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Amputation de l'index - Désarticulation métacarpo-phalangienne" au lieu de "Raideur de l'index"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n1-doigt-024</strong></td>
+          <td>Doigts</td>
+          <td>❌ Échec</td>
+          <td>Amputation du pouce - Désarticulation métacarpo-phalangienne</td>
+          <td>28%</td>
+          <td>-</td>
+          <td>218ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Amputation du pouce - Désarticulation métacarpo-phalangienne" au lieu de "Raideur du pouce"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n1-doigt-025</strong></td>
+          <td>Doigts</td>
+          <td>❌ Échec</td>
+          <td>Ankylose complète de l'épaule en position favorable</td>
+          <td>40%</td>
+          <td>-</td>
+          <td>218ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Ankylose complète de l'épaule en position favorable" au lieu de "Paralysie du nerf radial"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #E8F5E9;">
+          <td><strong>n1-orteil-001</strong></td>
+          <td>Orteils</td>
+          <td>✅ Réussi</td>
+          <td>Amputation du gros orteil</td>
+          <td>7%</td>
+          <td>3.0%</td>
+          <td>6ms</td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n1-orteil-002</strong></td>
+          <td>Orteils</td>
+          <td>❌ Échec</td>
+          <td><em>Non trouvée</em></td>
+          <td>-</td>
+          <td>-</td>
+          <td>114ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion attendue "Amputation d'un orteil (sauf gros orteil)" absente des 2 choix proposés
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n1-orteil-003</strong></td>
+          <td>Orteils</td>
+          <td>❌ Échec</td>
+          <td>Amputation du gros orteil</td>
+          <td>8%</td>
+          <td>-</td>
+          <td>114ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Amputation du gros orteil" au lieu de "Amputation de deux orteils"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n1-orteil-004</strong></td>
+          <td>Orteils</td>
+          <td>❌ Échec</td>
+          <td>Amputation du gros orteil</td>
+          <td>8%</td>
+          <td>-</td>
+          <td>113ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Amputation du gros orteil" au lieu de "Amputation de trois orteils"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n1-orteil-005</strong></td>
+          <td>Orteils</td>
+          <td>❌ Échec</td>
+          <td>Amputation du gros orteil</td>
+          <td>8%</td>
+          <td>-</td>
+          <td>116ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Amputation du gros orteil" au lieu de "Amputation de quatre orteils"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n1-orteil-006</strong></td>
+          <td>Orteils</td>
+          <td>❌ Échec</td>
+          <td>Amputation du gros orteil</td>
+          <td>8%</td>
+          <td>-</td>
+          <td>116ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Amputation du gros orteil" au lieu de "Amputation de tous les orteils"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n1-orteil-007</strong></td>
+          <td>Orteils</td>
+          <td>❌ Échec</td>
+          <td>Ankylose ou raideur du gros orteil (Hallux rigidus)</td>
+          <td>10%</td>
+          <td>-</td>
+          <td>115ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Ankylose ou raideur du gros orteil (Hallux rigidus)" au lieu de "Ankylose du gros orteil"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n1-orteil-008</strong></td>
+          <td>Orteils</td>
+          <td>❌ Échec</td>
+          <td>Ankylose ou raideur du gros orteil (Hallux rigidus)</td>
+          <td>10%</td>
+          <td>-</td>
+          <td>116ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Ankylose ou raideur du gros orteil (Hallux rigidus)" au lieu de "Ankylose d'un orteil"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n1-orteil-009</strong></td>
+          <td>Orteils</td>
+          <td>❌ Échec</td>
+          <td>Ankylose ou raideur du gros orteil (Hallux rigidus)</td>
+          <td>7%</td>
+          <td>-</td>
+          <td>221ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Ankylose ou raideur du gros orteil (Hallux rigidus)" au lieu de "Raideur du gros orteil"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n1-orteil-010</strong></td>
+          <td>Orteils</td>
+          <td>❌ Échec</td>
+          <td>Amputation du gros orteil</td>
+          <td>8%</td>
+          <td>-</td>
+          <td>118ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Amputation du gros orteil" au lieu de "Amputation bilatérale des gros orteils"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n1-orteil-011</strong></td>
+          <td>Orteils</td>
+          <td>❌ Échec</td>
+          <td><em>Non trouvée</em></td>
+          <td>-</td>
+          <td>-</td>
+          <td>115ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion attendue "Amputation de l'avant-pied" absente des 5 choix proposés
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #E8F5E9;">
+          <td><strong>n1-orteil-012</strong></td>
+          <td>Orteils</td>
+          <td>✅ Réussi</td>
+          <td>Amputation du gros orteil</td>
+          <td>7%</td>
+          <td>3.0%</td>
+          <td>117ms</td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n1-orteil-013</strong></td>
+          <td>Orteils</td>
+          <td>❌ Échec</td>
+          <td><em>Non trouvée</em></td>
+          <td>-</td>
+          <td>-</td>
+          <td>219ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion attendue "Griffes des orteils" absente des 3 choix proposés
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n1-orteil-014</strong></td>
+          <td>Orteils</td>
+          <td>❌ Échec</td>
+          <td>Hallux valgus (oignon) post-traumatique symptomatique</td>
+          <td>15%</td>
+          <td>-</td>
+          <td>225ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Hallux valgus (oignon) post-traumatique symptomatique" au lieu de "Hallux valgus post-traumatique"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n1-orteil-015</strong></td>
+          <td>Orteils</td>
+          <td>❌ Échec</td>
+          <td>Fracture des métatarsiens - Avec douleurs à la marche</td>
+          <td>7%</td>
+          <td>-</td>
+          <td>223ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Fracture des métatarsiens - Avec douleurs à la marche" au lieu de "Cal vicieux d'un métatarsien"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n1-amputation-001</strong></td>
+          <td>Amputations</td>
+          <td>❌ Échec</td>
+          <td><em>Non trouvée</em></td>
+          <td>-</td>
+          <td>-</td>
+          <td>6ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Aucune lésion trouvée (type: no_result)
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n1-amputation-002</strong></td>
+          <td>Amputations</td>
+          <td>❌ Échec</td>
+          <td><em>Non trouvée</em></td>
+          <td>-</td>
+          <td>-</td>
+          <td>6ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Aucune lésion trouvée (type: no_result)
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n1-amputation-003</strong></td>
+          <td>Amputations</td>
+          <td>❌ Échec</td>
+          <td><em>Non trouvée</em></td>
+          <td>-</td>
+          <td>-</td>
+          <td>5ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Aucune lésion trouvée (type: no_result)
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n1-amputation-004</strong></td>
+          <td>Amputations</td>
+          <td>❌ Échec</td>
+          <td>Amputation du bras au tiers moyen ou inférieur (Main Dominante)</td>
+          <td>85%</td>
+          <td>-</td>
+          <td>126ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Amputation du bras au tiers moyen ou inférieur (Main Dominante)" au lieu de "Amputation de l'avant-bras au tiers moyen"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n1-amputation-005</strong></td>
+          <td>Amputations</td>
+          <td>❌ Échec</td>
+          <td>Amputation du bras au tiers supérieur (Main Dominante)</td>
+          <td>85%</td>
+          <td>-</td>
+          <td>132ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Amputation du bras au tiers supérieur (Main Dominante)" au lieu de "Amputation du bras au tiers supérieur"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n1-amputation-006</strong></td>
+          <td>Amputations</td>
+          <td>❌ Échec</td>
+          <td><em>Non trouvée</em></td>
+          <td>-</td>
+          <td>-</td>
+          <td>6ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Aucune lésion trouvée (type: no_result)
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #E8F5E9;">
+          <td><strong>n1-amputation-007</strong></td>
+          <td>Amputations</td>
+          <td>✅ Réussi</td>
+          <td>Désarticulation du genou</td>
+          <td>60%</td>
+          <td>5.0%</td>
+          <td>6ms</td>
+        </tr>
+        
+        
+        <tr>
+          <td colspan="7" style="background: #FFF9C4; padding: 10px;">
+            <strong>⚠️ Avertissements:</strong><br>• Taux acceptable mais écart 5% (tolérance optimale ±3%)
+          </td>
+        </tr>
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n1-amputation-008</strong></td>
+          <td>Amputations</td>
+          <td>❌ Échec</td>
+          <td><em>Non trouvée</em></td>
+          <td>-</td>
+          <td>-</td>
+          <td>6ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Aucune lésion trouvée (type: no_result)
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n1-amputation-009</strong></td>
+          <td>Amputations</td>
+          <td>❌ Échec</td>
+          <td><em>Non trouvée</em></td>
+          <td>-</td>
+          <td>-</td>
+          <td>118ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion attendue "Amputation de la jambe au tiers inférieur" absente des 5 choix proposés
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n1-amputation-010</strong></td>
+          <td>Amputations</td>
+          <td>❌ Échec</td>
+          <td><em>Non trouvée</em></td>
+          <td>-</td>
+          <td>-</td>
+          <td>116ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion attendue "Amputation de la cuisse au tiers moyen" absente des 2 choix proposés
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n1-amputation-011</strong></td>
+          <td>Amputations</td>
+          <td>❌ Échec</td>
+          <td>Perte des cinq métacarpiens (Main Dominante)</td>
+          <td>53%</td>
+          <td>-</td>
+          <td>115ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Perte des cinq métacarpiens (Main Dominante)" au lieu de "Désarticulation du poignet"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n1-amputation-012</strong></td>
+          <td>Amputations</td>
+          <td>❌ Échec</td>
+          <td>Pied plat ou pied creux post-traumatique</td>
+          <td>13%</td>
+          <td>-</td>
+          <td>116ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Pied plat ou pied creux post-traumatique" au lieu de "Désarticulation de la cheville"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n1-amputation-013</strong></td>
+          <td>Amputations</td>
+          <td>❌ Échec</td>
+          <td>Amputation de la main (Main Dominante)</td>
+          <td>65%</td>
+          <td>-</td>
+          <td>113ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Amputation de la main (Main Dominante)" au lieu de "Désarticulation du poignet"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n1-amputation-014</strong></td>
+          <td>Amputations</td>
+          <td>❌ Échec</td>
+          <td>Amputation de la main (Main Non Dominante)</td>
+          <td>55%</td>
+          <td>-</td>
+          <td>113ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Amputation de la main (Main Non Dominante)" au lieu de "Désarticulation du poignet"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n1-amputation-015</strong></td>
+          <td>Amputations</td>
+          <td>❌ Échec</td>
+          <td>Fracture des plateaux tibiaux - Avec déviation et/ou raideur</td>
+          <td>30%</td>
+          <td>-</td>
+          <td>112ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Fracture des plateaux tibiaux - Avec déviation et/ou raideur" au lieu de "Amputation de la jambe au tiers moyen"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n1-viscere-001</strong></td>
+          <td>Viscères</td>
+          <td>❌ Échec</td>
+          <td><em>Non trouvée</em></td>
+          <td>-</td>
+          <td>-</td>
+          <td>6ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Aucune lésion trouvée (type: no_result)
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n1-viscere-002</strong></td>
+          <td>Viscères</td>
+          <td>❌ Échec</td>
+          <td><em>Non trouvée</em></td>
+          <td>-</td>
+          <td>-</td>
+          <td>6ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Aucune lésion trouvée (type: no_result)
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n1-viscere-003</strong></td>
+          <td>Viscères</td>
+          <td>❌ Échec</td>
+          <td><em>Non trouvée</em></td>
+          <td>-</td>
+          <td>-</td>
+          <td>6ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Aucune lésion trouvée (type: no_result)
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n1-viscere-004</strong></td>
+          <td>Viscères</td>
+          <td>❌ Échec</td>
+          <td><em>Non trouvée</em></td>
+          <td>-</td>
+          <td>-</td>
+          <td>6ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Aucune lésion trouvée (type: no_result)
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n1-viscere-005</strong></td>
+          <td>Viscères</td>
+          <td>❌ Échec</td>
+          <td><em>Non trouvée</em></td>
+          <td>-</td>
+          <td>-</td>
+          <td>6ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Aucune lésion trouvée (type: no_result)
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n1-viscere-006</strong></td>
+          <td>Viscères</td>
+          <td>❌ Échec</td>
+          <td><em>Non trouvée</em></td>
+          <td>-</td>
+          <td>-</td>
+          <td>6ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Aucune lésion trouvée (type: no_result)
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n1-viscere-007</strong></td>
+          <td>Viscères</td>
+          <td>❌ Échec</td>
+          <td>Séquelles de colectomie partielle post-traumatique (hors stomie)</td>
+          <td>30%</td>
+          <td>-</td>
+          <td>229ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Séquelles de colectomie partielle post-traumatique (hors stomie)" au lieu de "Colectomie totale avec iléostomie"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n1-viscere-008</strong></td>
+          <td>Viscères</td>
+          <td>❌ Échec</td>
+          <td><em>Non trouvée</em></td>
+          <td>-</td>
+          <td>-</td>
+          <td>6ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Aucune lésion trouvée (type: no_result)
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n1-viscere-009</strong></td>
+          <td>Viscères</td>
+          <td>❌ Échec</td>
+          <td>Incontinence fécale incomplète ou rare</td>
+          <td>18%</td>
+          <td>-</td>
+          <td>229ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Incontinence fécale incomplète ou rare" au lieu de "Incontinence anale sphinctérienne"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n1-viscere-010</strong></td>
+          <td>Viscères</td>
+          <td>❌ Échec</td>
+          <td><em>Non trouvée</em></td>
+          <td>-</td>
+          <td>-</td>
+          <td>5ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Aucune lésion trouvée (type: no_result)
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n1-viscere-011</strong></td>
+          <td>Viscères</td>
+          <td>❌ Échec</td>
+          <td><em>Non trouvée</em></td>
+          <td>-</td>
+          <td>-</td>
+          <td>7ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Aucune lésion trouvée (type: no_result)
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n1-viscere-012</strong></td>
+          <td>Viscères</td>
+          <td>❌ Échec</td>
+          <td><em>Non trouvée</em></td>
+          <td>-</td>
+          <td>-</td>
+          <td>5ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Aucune lésion trouvée (type: no_result)
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n1-viscere-013</strong></td>
+          <td>Viscères</td>
+          <td>❌ Échec</td>
+          <td><em>Non trouvée</em></td>
+          <td>-</td>
+          <td>-</td>
+          <td>225ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Aucune lésion trouvée (type: no_result)
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n1-viscere-014</strong></td>
+          <td>Viscères</td>
+          <td>❌ Échec</td>
+          <td><em>Non trouvée</em></td>
+          <td>-</td>
+          <td>-</td>
+          <td>224ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Aucune lésion trouvée (type: no_result)
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n1-viscere-015</strong></td>
+          <td>Viscères</td>
+          <td>❌ Échec</td>
+          <td><em>Non trouvée</em></td>
+          <td>-</td>
+          <td>-</td>
+          <td>5ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Aucune lésion trouvée (type: no_result)
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n1-audio-001</strong></td>
+          <td>Audition</td>
+          <td>❌ Échec</td>
+          <td><em>Non trouvée</em></td>
+          <td>-</td>
+          <td>-</td>
+          <td>223ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion attendue "Surdité complète d'une oreille (l'autre étant normale)" absente des 2 choix proposés
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n1-audio-002</strong></td>
+          <td>Audition</td>
+          <td>❌ Échec</td>
+          <td><em>Non trouvée</em></td>
+          <td>-</td>
+          <td>-</td>
+          <td>116ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion attendue "Surdité partielle - 60 à 80 dB" absente des 5 choix proposés
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n1-audio-003</strong></td>
+          <td>Audition</td>
+          <td>❌ Échec</td>
+          <td><em>Non trouvée</em></td>
+          <td>-</td>
+          <td>-</td>
+          <td>5ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Aucune lésion trouvée (type: no_result)
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n1-audio-004</strong></td>
+          <td>Audition</td>
+          <td>❌ Échec</td>
+          <td>Fracture de côtes non compliquée (selon gêne et nombre)</td>
+          <td>30%</td>
+          <td>-</td>
+          <td>218ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Fracture de côtes non compliquée (selon gêne et nombre)" au lieu de "Surdité totale bilatérale"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n1-audio-005</strong></td>
+          <td>Audition</td>
+          <td>❌ Échec</td>
+          <td><em>Non trouvée</em></td>
+          <td>-</td>
+          <td>-</td>
+          <td>219ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Aucune lésion trouvée (type: no_result)
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n1-audio-006</strong></td>
+          <td>Audition</td>
+          <td>❌ Échec</td>
+          <td><em>Non trouvée</em></td>
+          <td>-</td>
+          <td>-</td>
+          <td>6ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Aucune lésion trouvée (type: no_result)
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n1-audio-007</strong></td>
+          <td>Audition</td>
+          <td>❌ Échec</td>
+          <td>Fracture du rocher avec complications (paralysie faciale, surdité, vertiges)</td>
+          <td>40%</td>
+          <td>-</td>
+          <td>217ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Fracture du rocher avec complications (paralysie faciale, surdité, vertiges)" au lieu de "Vertiges post-traumatiques"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n1-audio-008</strong></td>
+          <td>Audition</td>
+          <td>❌ Échec</td>
+          <td><em>Non trouvée</em></td>
+          <td>-</td>
+          <td>-</td>
+          <td>5ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Aucune lésion trouvée (type: no_result)
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n1-audio-009</strong></td>
+          <td>Audition</td>
+          <td>❌ Échec</td>
+          <td><em>Non trouvée</em></td>
+          <td>-</td>
+          <td>-</td>
+          <td>5ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Aucune lésion trouvée (type: no_result)
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n1-audio-010</strong></td>
+          <td>Audition</td>
+          <td>❌ Échec</td>
+          <td>Mutilations et cicatrices vicieuses de l'oreille externe</td>
+          <td>6%</td>
+          <td>-</td>
+          <td>223ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Mutilations et cicatrices vicieuses de l'oreille externe" au lieu de "Surdité partielle - 40 à 60 dB"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n1-audio-011</strong></td>
+          <td>Audition</td>
+          <td>❌ Échec</td>
+          <td><em>Non trouvée</em></td>
+          <td>-</td>
+          <td>-</td>
+          <td>5ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Aucune lésion trouvée (type: no_result)
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n1-audio-012</strong></td>
+          <td>Audition</td>
+          <td>❌ Échec</td>
+          <td><em>Non trouvée</em></td>
+          <td>-</td>
+          <td>-</td>
+          <td>222ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Aucune lésion trouvée (type: no_result)
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n1-audio-013</strong></td>
+          <td>Audition</td>
+          <td>❌ Échec</td>
+          <td><em>Non trouvée</em></td>
+          <td>-</td>
+          <td>-</td>
+          <td>6ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Aucune lésion trouvée (type: no_result)
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n1-audio-014</strong></td>
+          <td>Audition</td>
+          <td>❌ Échec</td>
+          <td>Perte totale du membre supérieur (désarticulation scapulo-humérale)</td>
+          <td>85%</td>
+          <td>-</td>
+          <td>114ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Perte totale du membre supérieur (désarticulation scapulo-humérale)" au lieu de "Surdité totale bilatérale"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n1-audio-015</strong></td>
+          <td>Audition</td>
+          <td>❌ Échec</td>
+          <td><em>Non trouvée</em></td>
+          <td>-</td>
+          <td>-</td>
+          <td>6ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Aucune lésion trouvée (type: no_result)
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n1-vision-016</strong></td>
+          <td>Vision</td>
+          <td>❌ Échec</td>
+          <td><em>Non trouvée</em></td>
+          <td>-</td>
+          <td>-</td>
+          <td>5ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Aucune lésion trouvée (type: no_result)
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n1-vision-017</strong></td>
+          <td>Vision</td>
+          <td>❌ Échec</td>
+          <td>Scotomes centraux (un oeil)</td>
+          <td>23%</td>
+          <td>-</td>
+          <td>221ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Scotomes centraux (un oeil)" au lieu de "Champ visuel et vision binoculaire - Rétrécissement du champ visuel"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #E8F5E9;">
+          <td><strong>n1-vision-018</strong></td>
+          <td>Vision</td>
+          <td>✅ Réussi</td>
+          <td>Glaucome post-traumatique</td>
+          <td>25%</td>
+          <td>5.0%</td>
+          <td>2ms</td>
+        </tr>
+        
+        
+        <tr>
+          <td colspan="7" style="background: #FFF9C4; padding: 10px;">
+            <strong>⚠️ Avertissements:</strong><br>• Taux acceptable mais écart 5% (tolérance optimale ±3%)
+          </td>
+        </tr>
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n1-vision-019</strong></td>
+          <td>Vision</td>
+          <td>❌ Échec</td>
+          <td>Décollement de la rétine post-traumatique</td>
+          <td>100%</td>
+          <td>-</td>
+          <td>224ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Décollement de la rétine post-traumatique" au lieu de "Décollement de rétine (selon résultat)"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n1-vision-020</strong></td>
+          <td>Vision</td>
+          <td>❌ Échec</td>
+          <td>Taies de cornée (selon gêne visuelle)</td>
+          <td>50%</td>
+          <td>-</td>
+          <td>222ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Taies de cornée (selon gêne visuelle)" au lieu de "Taie cornéenne"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n1-vision-021</strong></td>
+          <td>Vision</td>
+          <td>❌ Échec</td>
+          <td><em>Non trouvée</em></td>
+          <td>-</td>
+          <td>-</td>
+          <td>6ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Aucune lésion trouvée (type: no_result)
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n1-vision-022</strong></td>
+          <td>Vision</td>
+          <td>❌ Échec</td>
+          <td><em>Non trouvée</em></td>
+          <td>-</td>
+          <td>-</td>
+          <td>6ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Aucune lésion trouvée (type: no_result)
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n1-vision-023</strong></td>
+          <td>Vision</td>
+          <td>❌ Échec</td>
+          <td><em>Non trouvée</em></td>
+          <td>-</td>
+          <td>-</td>
+          <td>227ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Aucune lésion trouvée (type: no_result)
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n1-vision-024</strong></td>
+          <td>Vision</td>
+          <td>❌ Échec</td>
+          <td>Séquelles d'endophtalmie post-traumatique (infection intraoculaire)</td>
+          <td>23%</td>
+          <td>-</td>
+          <td>238ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Séquelles d'endophtalmie post-traumatique (infection intraoculaire)" au lieu de "Endophtalmie"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n1-vision-025</strong></td>
+          <td>Vision</td>
+          <td>❌ Échec</td>
+          <td><em>Non trouvée</em></td>
+          <td>-</td>
+          <td>-</td>
+          <td>6ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Aucune lésion trouvée (type: no_result)
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n1-vision-026</strong></td>
+          <td>Vision</td>
+          <td>❌ Échec</td>
+          <td><em>Non trouvée</em></td>
+          <td>-</td>
+          <td>-</td>
+          <td>252ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Aucune lésion trouvée (type: no_result)
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #E8F5E9;">
+          <td><strong>n1-vision-027</strong></td>
+          <td>Vision</td>
+          <td>✅ Réussi</td>
+          <td>Perte complète de la vision d'un oeil (l'autre étant normal)</td>
+          <td>30%</td>
+          <td>-</td>
+          <td>250ms</td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n1-vision-028</strong></td>
+          <td>Vision</td>
+          <td>❌ Échec</td>
+          <td><em>Non trouvée</em></td>
+          <td>-</td>
+          <td>-</td>
+          <td>7ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Aucune lésion trouvée (type: no_result)
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n1-vision-029</strong></td>
+          <td>Vision</td>
+          <td>❌ Échec</td>
+          <td>Fracture de côtes non compliquée (selon gêne et nombre)</td>
+          <td>16%</td>
+          <td>-</td>
+          <td>233ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Fracture de côtes non compliquée (selon gêne et nombre)" au lieu de "Cécité absolue"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n1-vision-030</strong></td>
+          <td>Vision</td>
+          <td>❌ Échec</td>
+          <td><em>Non trouvée</em></td>
+          <td>-</td>
+          <td>-</td>
+          <td>227ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Aucune lésion trouvée (type: no_result)
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n2-epaule-001</strong></td>
+          <td>Membre Supérieur</td>
+          <td>❌ Échec</td>
+          <td>Raideur de l'épaule (propulsion, abduction, rotation) (Main Dominante)</td>
+          <td>18%</td>
+          <td>-</td>
+          <td>258ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Raideur de l'épaule (propulsion, abduction, rotation) (Main Dominante)" au lieu de "Raideur de l'épaule - Abduction 60-90°"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n2-epaule-002</strong></td>
+          <td>Membre Supérieur</td>
+          <td>❌ Échec</td>
+          <td><em>Non trouvée</em></td>
+          <td>-</td>
+          <td>-</td>
+          <td>239ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion attendue "Raideur de l'épaule - Abduction 60-90°" absente des 5 choix proposés
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n2-epaule-003</strong></td>
+          <td>Membre Supérieur</td>
+          <td>❌ Échec</td>
+          <td><em>Non trouvée</em></td>
+          <td>-</td>
+          <td>-</td>
+          <td>234ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion attendue "Raideur de l'épaule - Abduction 60-90° + rotation" absente des 5 choix proposés
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n2-epaule-004</strong></td>
+          <td>Membre Supérieur</td>
+          <td>❌ Échec</td>
+          <td><em>Non trouvée</em></td>
+          <td>-</td>
+          <td>-</td>
+          <td>349ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion attendue "Raideur de l'épaule - Abduction 60-90°" absente des 16 choix proposés
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n2-epaule-005</strong></td>
+          <td>Membre Supérieur</td>
+          <td>❌ Échec</td>
+          <td>Raideur de l'épaule (propulsion, abduction, rotation) (Main Dominante)</td>
+          <td>18%</td>
+          <td>-</td>
+          <td>237ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Raideur de l'épaule (propulsion, abduction, rotation) (Main Dominante)" au lieu de "Raideur de l'épaule avec douleur"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n2-epaule-006</strong></td>
+          <td>Membre Supérieur</td>
+          <td>❌ Échec</td>
+          <td>Raideur de l'épaule (propulsion, abduction, rotation) (Main Dominante)</td>
+          <td>18%</td>
+          <td>-</td>
+          <td>242ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Raideur de l'épaule (propulsion, abduction, rotation) (Main Dominante)" au lieu de "Raideur de l'épaule - Limitation rotation"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n2-epaule-007</strong></td>
+          <td>Membre Supérieur</td>
+          <td>❌ Échec</td>
+          <td>Luxation récidivante de l'épaule (Main Dominante)</td>
+          <td>20%</td>
+          <td>-</td>
+          <td>258ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Luxation récidivante de l'épaule (Main Dominante)" au lieu de "Raideur + instabilité épaule"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n2-epaule-008</strong></td>
+          <td>Membre Supérieur</td>
+          <td>❌ Échec</td>
+          <td>Raideur de l'épaule (propulsion, abduction, rotation) (Main Dominante)</td>
+          <td>18%</td>
+          <td>-</td>
+          <td>237ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Raideur de l'épaule (propulsion, abduction, rotation) (Main Dominante)" au lieu de "Raideur de l'épaule - Abduction 60-90° + rotation"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n2-epaule-009</strong></td>
+          <td>Membre Supérieur</td>
+          <td>❌ Échec</td>
+          <td><em>Non trouvée</em></td>
+          <td>-</td>
+          <td>-</td>
+          <td>238ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion attendue "Raideur de l'épaule - Élévation limitée" absente des 5 choix proposés
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n2-epaule-010</strong></td>
+          <td>Membre Supérieur</td>
+          <td>❌ Échec</td>
+          <td>Amputation totale des 5 doigts (main inutilisable)</td>
+          <td>60%</td>
+          <td>-</td>
+          <td>241ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Amputation totale des 5 doigts (main inutilisable)" au lieu de "Raideur de l'épaule avec limitation fonctionnelle"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n2-coude-001</strong></td>
+          <td>Membre Supérieur</td>
+          <td>❌ Échec</td>
+          <td><em>Non trouvée</em></td>
+          <td>-</td>
+          <td>-</td>
+          <td>292ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion attendue "Raideur du coude - Flexion 90-130°" absente des 2 choix proposés
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n2-coude-002</strong></td>
+          <td>Membre Supérieur</td>
+          <td>❌ Échec</td>
+          <td>Désarticulation du coude (Main Non Dominante)</td>
+          <td>68%</td>
+          <td>-</td>
+          <td>248ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Désarticulation du coude (Main Non Dominante)" au lieu de "Raideur du coude - Flexion + pronosupination"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n2-coude-003</strong></td>
+          <td>Membre Supérieur</td>
+          <td>❌ Échec</td>
+          <td><em>Non trouvée</em></td>
+          <td>-</td>
+          <td>-</td>
+          <td>237ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion attendue "Raideur du coude - Flexion 90-130° + extension" absente des 5 choix proposés
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n2-coude-004</strong></td>
+          <td>Membre Supérieur</td>
+          <td>❌ Échec</td>
+          <td><em>Non trouvée</em></td>
+          <td>-</td>
+          <td>-</td>
+          <td>227ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion attendue "Raideur du coude post-fracture" absente des 5 choix proposés
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n2-coude-005</strong></td>
+          <td>Membre Supérieur</td>
+          <td>❌ Échec</td>
+          <td>Désarticulation du coude (Main Dominante)</td>
+          <td>78%</td>
+          <td>-</td>
+          <td>235ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Désarticulation du coude (Main Dominante)" au lieu de "Raideur du coude - Pronosupination limitée"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n2-coude-006</strong></td>
+          <td>Membre Supérieur</td>
+          <td>❌ Échec</td>
+          <td><em>Non trouvée</em></td>
+          <td>-</td>
+          <td>-</td>
+          <td>228ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion attendue "Raideur du coude - Limitation sévère" absente des 2 choix proposés
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n2-coude-007</strong></td>
+          <td>Membre Supérieur</td>
+          <td>❌ Échec</td>
+          <td>Séquelles de prothèse totale du coude (Main Non Dominante)</td>
+          <td>33%</td>
+          <td>-</td>
+          <td>232ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Séquelles de prothèse totale du coude (Main Non Dominante)" au lieu de "Raideur du coude avec douleur"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n2-coude-008</strong></td>
+          <td>Membre Supérieur</td>
+          <td>❌ Échec</td>
+          <td><em>Non trouvée</em></td>
+          <td>-</td>
+          <td>-</td>
+          <td>124ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion attendue "Raideur + déficit force coude" absente des 5 choix proposés
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n2-poignet-001</strong></td>
+          <td>Membre Supérieur</td>
+          <td>❌ Échec</td>
+          <td>Raideur du poignet (Main Dominante)</td>
+          <td>10%</td>
+          <td>-</td>
+          <td>230ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Raideur du poignet (Main Dominante)" au lieu de "Raideur du poignet - Flexion/extension limitée"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n2-poignet-002</strong></td>
+          <td>Membre Supérieur</td>
+          <td>❌ Échec</td>
+          <td>Désarticulation du poignet (Main Non Dominante)</td>
+          <td>58%</td>
+          <td>-</td>
+          <td>232ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Désarticulation du poignet (Main Non Dominante)" au lieu de "Raideur du poignet - Mobilité réduite"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n2-poignet-003</strong></td>
+          <td>Membre Supérieur</td>
+          <td>❌ Échec</td>
+          <td><em>Non trouvée</em></td>
+          <td>-</td>
+          <td>-</td>
+          <td>322ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion attendue "Raideur poignet + déficit force" absente des 10 choix proposés
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n2-poignet-004</strong></td>
+          <td>Membre Supérieur</td>
+          <td>❌ Échec</td>
+          <td>Désarticulation du poignet (Main Dominante)</td>
+          <td>68%</td>
+          <td>-</td>
+          <td>230ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Désarticulation du poignet (Main Dominante)" au lieu de "Raideur du poignet - Limitation sévère"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n2-poignet-005</strong></td>
+          <td>Membre Supérieur</td>
+          <td>❌ Échec</td>
+          <td>Raideur importante du poignet</td>
+          <td>18%</td>
+          <td>-</td>
+          <td>231ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Raideur importante du poignet" au lieu de "Raideur poignet avec douleur"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n2-poignet-006</strong></td>
+          <td>Membre Supérieur</td>
+          <td>❌ Échec</td>
+          <td>Synostose radio-cubitale post-traumatique (Main Dominante)</td>
+          <td>20%</td>
+          <td>-</td>
+          <td>243ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Synostose radio-cubitale post-traumatique (Main Dominante)" au lieu de "Raideur poignet - Inclinaisons limitées"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n2-poignet-007</strong></td>
+          <td>Membre Supérieur</td>
+          <td>❌ Échec</td>
+          <td>Séquelles de fracture de métacarpien (cal vicieux, raideur) (Main Dominante)</td>
+          <td>7%</td>
+          <td>-</td>
+          <td>231ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Séquelles de fracture de métacarpien (cal vicieux, raideur) (Main Dominante)" au lieu de "Raideur poignet main dominante"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n2-hanche-001</strong></td>
+          <td>Membre Inférieur</td>
+          <td>❌ Échec</td>
+          <td><em>Non trouvée</em></td>
+          <td>-</td>
+          <td>-</td>
+          <td>232ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion attendue "Raideur de la hanche - Flexion 90-120°" absente des 3 choix proposés
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n2-hanche-002</strong></td>
+          <td>Membre Inférieur</td>
+          <td>❌ Échec</td>
+          <td><em>Non trouvée</em></td>
+          <td>-</td>
+          <td>-</td>
+          <td>231ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion attendue "Raideur de la hanche avec limitation fonctionnelle" absente des 5 choix proposés
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n2-hanche-003</strong></td>
+          <td>Membre Supérieur</td>
+          <td>❌ Échec</td>
+          <td><em>Non trouvée</em></td>
+          <td>-</td>
+          <td>-</td>
+          <td>315ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion attendue "Raideur hanche post-fracture avec douleur" absente des 7 choix proposés
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n2-hanche-004</strong></td>
+          <td>Membre Inférieur</td>
+          <td>❌ Échec</td>
+          <td><em>Non trouvée</em></td>
+          <td>-</td>
+          <td>-</td>
+          <td>225ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion attendue "Raideur hanche avec limitation périmètre marche" absente des 5 choix proposés
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n2-hanche-005</strong></td>
+          <td>Membre Inférieur</td>
+          <td>❌ Échec</td>
+          <td>Fracture du massif trochantérien - Cal vicieux et raideur</td>
+          <td>40%</td>
+          <td>-</td>
+          <td>229ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Fracture du massif trochantérien - Cal vicieux et raideur" au lieu de "Raideur de la hanche - Limitation sévère"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n2-hanche-006</strong></td>
+          <td>Membre Inférieur</td>
+          <td>❌ Échec</td>
+          <td>Fracture du col du fémur - Consolidation avec raideur modérée</td>
+          <td>30%</td>
+          <td>-</td>
+          <td>224ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Fracture du col du fémur - Consolidation avec raideur modérée" au lieu de "Raideur hanche avec claudication"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n2-genou-001</strong></td>
+          <td>Membre Inférieur</td>
+          <td>❌ Échec</td>
+          <td>Fracture de l'extrémité inférieure du fémur - Avec raideur du genou</td>
+          <td>30%</td>
+          <td>-</td>
+          <td>226ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Fracture de l'extrémité inférieure du fémur - Avec raideur du genou" au lieu de "Raideur du genou - Flexion 90-130° + instabilité"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n2-genou-002</strong></td>
+          <td>Membre Inférieur</td>
+          <td>❌ Échec</td>
+          <td>Chondropathie fémoro-patellaire post-traumatique</td>
+          <td>20%</td>
+          <td>-</td>
+          <td>226ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Chondropathie fémoro-patellaire post-traumatique" au lieu de "Raideur genou + chondropathie"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n2-genou-003</strong></td>
+          <td>Membre Inférieur</td>
+          <td>❌ Échec</td>
+          <td><em>Non trouvée</em></td>
+          <td>-</td>
+          <td>-</td>
+          <td>307ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion attendue "Raideur genou post-fracture" absente des 8 choix proposés
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n2-genou-004</strong></td>
+          <td>Membre Inférieur</td>
+          <td>❌ Échec</td>
+          <td>Laxité chronique du genou (séquelle d'entorse)</td>
+          <td>13%</td>
+          <td>-</td>
+          <td>230ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Laxité chronique du genou (séquelle d'entorse)" au lieu de "Raideur genou + laxité + douleur"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n2-genou-005</strong></td>
+          <td>Membre Inférieur</td>
+          <td>❌ Échec</td>
+          <td>Fracture du massif trochantérien - Cal vicieux et raideur</td>
+          <td>30%</td>
+          <td>-</td>
+          <td>264ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Fracture du massif trochantérien - Cal vicieux et raideur" au lieu de "Raideur genou avec limitation fonctionnelle"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n2-genou-006</strong></td>
+          <td>Membre Inférieur</td>
+          <td>❌ Échec</td>
+          <td>Hydarthrose chronique du genou</td>
+          <td>10%</td>
+          <td>-</td>
+          <td>237ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Hydarthrose chronique du genou" au lieu de "Raideur genou + épanchement"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n2-genou-007</strong></td>
+          <td>Membre Inférieur</td>
+          <td>❌ Échec</td>
+          <td>Fracture des plateaux tibiaux - Avec déviation et/ou raideur</td>
+          <td>30%</td>
+          <td>-</td>
+          <td>123ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Fracture des plateaux tibiaux - Avec déviation et/ou raideur" au lieu de "Raideur genou post-méniscectomie + instabilité"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n2-genou-008</strong></td>
+          <td>Membre Inférieur</td>
+          <td>❌ Échec</td>
+          <td>Instabilité fémoro-patellaire (luxation récidivante de rotule)</td>
+          <td>23%</td>
+          <td>-</td>
+          <td>225ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Instabilité fémoro-patellaire (luxation récidivante de rotule)" au lieu de "Raideur genou + dérobements"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n2-cheville-001</strong></td>
+          <td>Membre Inférieur</td>
+          <td>❌ Échec</td>
+          <td>Raideur importante de la cheville</td>
+          <td>15%</td>
+          <td>-</td>
+          <td>231ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Raideur importante de la cheville" au lieu de "Raideur de la cheville - Dorsiflexion 0-10°"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n2-cheville-002</strong></td>
+          <td>Membre Inférieur</td>
+          <td>❌ Échec</td>
+          <td>Raideur modérée de la cheville</td>
+          <td>12%</td>
+          <td>-</td>
+          <td>225ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Raideur modérée de la cheville" au lieu de "Équin modéré de la cheville"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n2-cheville-003</strong></td>
+          <td>Membre Inférieur</td>
+          <td>❌ Échec</td>
+          <td>Fracture du pilon tibial</td>
+          <td>28%</td>
+          <td>-</td>
+          <td>218ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Fracture du pilon tibial" au lieu de "Raideur cheville post-pilon tibial avec douleur"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n2-cheville-004</strong></td>
+          <td>Membre Inférieur</td>
+          <td>❌ Échec</td>
+          <td>Instabilité chronique de la cheville (séquelle d'entorse)</td>
+          <td>15%</td>
+          <td>-</td>
+          <td>230ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Instabilité chronique de la cheville (séquelle d'entorse)" au lieu de "Raideur cheville + instabilité"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n2-cheville-005</strong></td>
+          <td>Membre Inférieur</td>
+          <td>❌ Échec</td>
+          <td>Fracture malléolaire ou bi-malléolaire - Avec raideur modérée</td>
+          <td>15%</td>
+          <td>-</td>
+          <td>228ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Fracture malléolaire ou bi-malléolaire - Avec raideur modérée" au lieu de "Raideur cheville avec limitation fonctionnelle"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n2-cheville-006</strong></td>
+          <td>Membre Inférieur</td>
+          <td>❌ Échec</td>
+          <td>Raideur importante de la cheville</td>
+          <td>15%</td>
+          <td>-</td>
+          <td>229ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Raideur importante de la cheville" au lieu de "Raideur cheville + sous-astragalienne"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n2-cheville-007</strong></td>
+          <td>Membre Inférieur</td>
+          <td>❌ Échec</td>
+          <td><em>Non trouvée</em></td>
+          <td>-</td>
+          <td>-</td>
+          <td>310ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion attendue "Raideur cheville post-bimalléolaire avec claudication" absente des 8 choix proposés
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n2-rachis-001</strong></td>
+          <td>Rachis</td>
+          <td>❌ Échec</td>
+          <td>Raideur importante du rachis dorso-lombaire</td>
+          <td>25%</td>
+          <td>-</td>
+          <td>222ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Raideur importante du rachis dorso-lombaire" au lieu de "Raideur rachis lombaire - DDS 20-40 cm"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n2-rachis-002</strong></td>
+          <td>Rachis</td>
+          <td>❌ Échec</td>
+          <td>Séquelles de fracture/luxation du rachis cervical (sans lésion neurologique)</td>
+          <td>17%</td>
+          <td>-</td>
+          <td>225ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Séquelles de fracture/luxation du rachis cervical (sans lésion neurologique)" au lieu de "Raideur rachis cervical - DMS 10-15 cm"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n2-rachis-003</strong></td>
+          <td>Rachis</td>
+          <td>❌ Échec</td>
+          <td><em>Non trouvée</em></td>
+          <td>-</td>
+          <td>-</td>
+          <td>236ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion attendue "Raideur rachis post-tassement avec douleur" absente des 2 choix proposés
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n2-rachis-004</strong></td>
+          <td>Rachis</td>
+          <td>❌ Échec</td>
+          <td><em>Non trouvée</em></td>
+          <td>-</td>
+          <td>-</td>
+          <td>241ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion attendue "Raideur rachis dorsolombaire - Limitation sévère" absente des 5 choix proposés
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n2-rachis-005</strong></td>
+          <td>Rachis</td>
+          <td>❌ Échec</td>
+          <td><em>Non trouvée</em></td>
+          <td>-</td>
+          <td>-</td>
+          <td>265ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion attendue "Raideur rachis cervical - DMS + inclinaisons" absente des 5 choix proposés
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n2-rachis-006</strong></td>
+          <td>Rachis</td>
+          <td>❌ Échec</td>
+          <td><em>Non trouvée</em></td>
+          <td>-</td>
+          <td>-</td>
+          <td>237ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion attendue "Raideur rachis avec limitation fonctionnelle" absente des 5 choix proposés
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n3-cumul-001</strong></td>
+          <td>Cumuls</td>
+          <td>❌ Échec</td>
+          <td>Fracture de l'extrémité inférieure du fémur - Avec raideur du genou</td>
+          <td>30%</td>
+          <td>-</td>
+          <td>234ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Fracture de l'extrémité inférieure du fémur - Avec raideur du genou" au lieu de "Raideur genou + instabilité LCA (cumul)"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n3-cumul-002</strong></td>
+          <td>Cumuls</td>
+          <td>❌ Échec</td>
+          <td>Fracture malléolaire ou bi-malléolaire - Avec raideur modérée</td>
+          <td>15%</td>
+          <td>-</td>
+          <td>233ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Fracture malléolaire ou bi-malléolaire - Avec raideur modérée" au lieu de "Raideur cheville + séquelles fracture (cumul)"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n3-cumul-003</strong></td>
+          <td>Cumuls</td>
+          <td>❌ Échec</td>
+          <td>Fracture de la tête humérale avec raideur importante de l'épaule (Main Dominante)</td>
+          <td>25%</td>
+          <td>-</td>
+          <td>234ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Fracture de la tête humérale avec raideur importante de l'épaule (Main Dominante)" au lieu de "Raideur épaule + rupture coiffe (cumul)"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n3-cumul-004</strong></td>
+          <td>Cumuls</td>
+          <td>❌ Échec</td>
+          <td><em>Non trouvée</em></td>
+          <td>-</td>
+          <td>-</td>
+          <td>227ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion attendue "Raideur poignet + fracture scaphoïde (cumul)" absente des 2 choix proposés
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n3-cumul-005</strong></td>
+          <td>Cumuls</td>
+          <td>❌ Échec</td>
+          <td><em>Non trouvée</em></td>
+          <td>-</td>
+          <td>-</td>
+          <td>120ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion attendue "Raideur coude + déficit nerf cubital (cumul)" absente des 4 choix proposés
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n3-cumul-006</strong></td>
+          <td>Cumuls</td>
+          <td>❌ Échec</td>
+          <td>Raideur d'une articulation du pouce (Main Dominante)</td>
+          <td>8%</td>
+          <td>-</td>
+          <td>118ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Raideur d'une articulation du pouce (Main Dominante)" au lieu de "Amputation index + raideur main (cumul)"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n3-cumul-007</strong></td>
+          <td>Cumuls</td>
+          <td>❌ Échec</td>
+          <td>Cumul de 2 lésions (Formule de Balthazar)</td>
+          <td>0%</td>
+          <td>-</td>
+          <td>0ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Cumul de 2 lésions (Formule de Balthazar)" au lieu de "Méniscectomie + chondropathie sévère (cumul)"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n3-cumul-008</strong></td>
+          <td>Cumuls</td>
+          <td>❌ Échec</td>
+          <td><em>Non trouvée</em></td>
+          <td>-</td>
+          <td>-</td>
+          <td>228ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion attendue "Raideur hanche + boiterie sévère (cumul)" absente des 3 choix proposés
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n3-cumul-009</strong></td>
+          <td>Cumuls</td>
+          <td>❌ Échec</td>
+          <td>Cumul de 4 lésions (Formule de Balthazar)</td>
+          <td>0%</td>
+          <td>-</td>
+          <td>0ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Cumul de 4 lésions (Formule de Balthazar)" au lieu de "Pilon tibial + raideur cheville + hallux (cumul)"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n3-cumul-010</strong></td>
+          <td>Cumuls</td>
+          <td>❌ Échec</td>
+          <td>Cumul de 3 lésions (Formule de Balthazar)</td>
+          <td>0%</td>
+          <td>-</td>
+          <td>0ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Cumul de 3 lésions (Formule de Balthazar)" au lieu de "Tassement + raideur rachis + sciatique (cumul)"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n3-cumul-011</strong></td>
+          <td>Cumuls</td>
+          <td>❌ Échec</td>
+          <td>Cumul de 3 lésions (Formule de Balthazar)</td>
+          <td>0%</td>
+          <td>-</td>
+          <td>0ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Cumul de 3 lésions (Formule de Balthazar)" au lieu de "Fracture radius + raideur + déficit force (cumul)"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n3-cumul-012</strong></td>
+          <td>Cumuls</td>
+          <td>❌ Échec</td>
+          <td>Cumul de 3 lésions (Formule de Balthazar)</td>
+          <td>0%</td>
+          <td>-</td>
+          <td>0ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Cumul de 3 lésions (Formule de Balthazar)" au lieu de "Luxation + instabilité + raideur épaule (cumul)"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n3-cumul-013</strong></td>
+          <td>Cumuls</td>
+          <td>❌ Échec</td>
+          <td>Cumul de 3 lésions (Formule de Balthazar)</td>
+          <td>0%</td>
+          <td>-</td>
+          <td>0ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Cumul de 3 lésions (Formule de Balthazar)" au lieu de "Plateaux tibiaux + raideur + arthrose (cumul)"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n3-cumul-014</strong></td>
+          <td>Cumuls</td>
+          <td>❌ Échec</td>
+          <td>Cumul de 3 lésions (Formule de Balthazar)</td>
+          <td>0%</td>
+          <td>-</td>
+          <td>0ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Cumul de 3 lésions (Formule de Balthazar)" au lieu de "Malléole + entorse + instabilité (cumul)"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n3-cumul-015</strong></td>
+          <td>Cumuls</td>
+          <td>❌ Échec</td>
+          <td>Ankylose de tous les doigts de la main (Main Non Dominante)</td>
+          <td>45%</td>
+          <td>-</td>
+          <td>120ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Ankylose de tous les doigts de la main (Main Non Dominante)" au lieu de "Amputation pouce + ankylose index (cumul)"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n3-cumul-016</strong></td>
+          <td>Cumuls</td>
+          <td>❌ Échec</td>
+          <td>Cumul de 3 lésions (Formule de Balthazar)</td>
+          <td>0%</td>
+          <td>-</td>
+          <td>0ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Cumul de 3 lésions (Formule de Balthazar)" au lieu de "Olécrane + raideur coude (cumul)"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n3-cumul-017</strong></td>
+          <td>Cumuls</td>
+          <td>❌ Échec</td>
+          <td>Cumul de 3 lésions (Formule de Balthazar)</td>
+          <td>0%</td>
+          <td>-</td>
+          <td>0ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Cumul de 3 lésions (Formule de Balthazar)" au lieu de "Calcanéum + raideur + troubles marche (cumul)"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n3-cumul-018</strong></td>
+          <td>Cumuls</td>
+          <td>❌ Échec</td>
+          <td>Cumul de 3 lésions (Formule de Balthazar)</td>
+          <td>0%</td>
+          <td>-</td>
+          <td>0ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Cumul de 3 lésions (Formule de Balthazar)" au lieu de "Syndrome cervical + raideur + névralgie (cumul)"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n3-cumul-019</strong></td>
+          <td>Cumuls</td>
+          <td>❌ Échec</td>
+          <td>Cumul de 3 lésions (Formule de Balthazar)</td>
+          <td>0%</td>
+          <td>-</td>
+          <td>0ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Cumul de 3 lésions (Formule de Balthazar)" au lieu de "Col fémur + raideur + raccourcissement (cumul)"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n3-cumul-020</strong></td>
+          <td>Cumuls</td>
+          <td>❌ Échec</td>
+          <td>Cumul de 3 lésions (Formule de Balthazar)</td>
+          <td>0%</td>
+          <td>-</td>
+          <td>0ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Cumul de 3 lésions (Formule de Balthazar)" au lieu de "LCA + méniscectomie + instabilité (cumul)"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n3-multi-001</strong></td>
+          <td>Polytraumatisme</td>
+          <td>❌ Échec</td>
+          <td>Cumul de 7 lésions (Formule de Balthazar)</td>
+          <td>0%</td>
+          <td>-</td>
+          <td>0ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Cumul de 7 lésions (Formule de Balthazar)" au lieu de "Polytraumatisme membre inférieur + supérieur"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n3-multi-002</strong></td>
+          <td>Polytraumatisme</td>
+          <td>❌ Échec</td>
+          <td>Cumul de 5 lésions (Formule de Balthazar)</td>
+          <td>0%</td>
+          <td>-</td>
+          <td>0ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Cumul de 5 lésions (Formule de Balthazar)" au lieu de "Polytraumatisme épaule + genou + rachis"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n3-multi-003</strong></td>
+          <td>Polytraumatisme</td>
+          <td>❌ Échec</td>
+          <td>Cumul de 3 lésions (Formule de Balthazar)</td>
+          <td>0%</td>
+          <td>-</td>
+          <td>0ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Cumul de 3 lésions (Formule de Balthazar)" au lieu de "Polytraumatisme crâne + thorax + hanche"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n3-multi-004</strong></td>
+          <td>Polytraumatisme</td>
+          <td>❌ Échec</td>
+          <td>Cumul de 4 lésions (Formule de Balthazar)</td>
+          <td>0%</td>
+          <td>-</td>
+          <td>0ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Cumul de 4 lésions (Formule de Balthazar)" au lieu de "Polytraumatisme main + 2 membres inférieurs"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n3-multi-005</strong></td>
+          <td>Polytraumatisme</td>
+          <td>❌ Échec</td>
+          <td>Cumul de 3 lésions (Formule de Balthazar)</td>
+          <td>0%</td>
+          <td>-</td>
+          <td>0ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Cumul de 3 lésions (Formule de Balthazar)" au lieu de "Polytraumatisme vision + audition + genou"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n3-multi-006</strong></td>
+          <td>Polytraumatisme</td>
+          <td>❌ Échec</td>
+          <td>Cumul de 4 lésions (Formule de Balthazar)</td>
+          <td>0%</td>
+          <td>-</td>
+          <td>0ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Cumul de 4 lésions (Formule de Balthazar)" au lieu de "Polytraumatisme bassin + 2 membres + rachis"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n3-multi-007</strong></td>
+          <td>Polytraumatisme</td>
+          <td>❌ Échec</td>
+          <td>Cumul de 4 lésions (Formule de Balthazar)</td>
+          <td>0%</td>
+          <td>-</td>
+          <td>0ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Cumul de 4 lésions (Formule de Balthazar)" au lieu de "Polytraumatisme 2 membres supérieurs + rachis"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n3-multi-008</strong></td>
+          <td>Polytraumatisme</td>
+          <td>❌ Échec</td>
+          <td>Cumul de 4 lésions (Formule de Balthazar)</td>
+          <td>0%</td>
+          <td>-</td>
+          <td>0ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Cumul de 4 lésions (Formule de Balthazar)" au lieu de "Polytraumatisme thorax + abdomen sévère"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n3-multi-009</strong></td>
+          <td>Polytraumatisme</td>
+          <td>❌ Échec</td>
+          <td>Cumul de 7 lésions (Formule de Balthazar)</td>
+          <td>0%</td>
+          <td>-</td>
+          <td>0ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Cumul de 7 lésions (Formule de Balthazar)" au lieu de "Polytraumatisme membre inférieur + supérieur droit complet"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n3-multi-010</strong></td>
+          <td>Polytraumatisme</td>
+          <td>❌ Échec</td>
+          <td>Cumul de 3 lésions (Formule de Balthazar)</td>
+          <td>0%</td>
+          <td>-</td>
+          <td>0ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Cumul de 3 lésions (Formule de Balthazar)" au lieu de "Polytraumatisme rachis triple étage"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n3-multi-011</strong></td>
+          <td>Polytraumatisme</td>
+          <td>❌ Échec</td>
+          <td>Cumul de 4 lésions (Formule de Balthazar)</td>
+          <td>0%</td>
+          <td>-</td>
+          <td>0ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Cumul de 4 lésions (Formule de Balthazar)" au lieu de "Polytraumatisme membre inférieur droit complet"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n3-multi-012</strong></td>
+          <td>Polytraumatisme</td>
+          <td>❌ Échec</td>
+          <td>Cumul de 4 lésions (Formule de Balthazar)</td>
+          <td>0%</td>
+          <td>-</td>
+          <td>0ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Cumul de 4 lésions (Formule de Balthazar)" au lieu de "Polytraumatisme membre supérieur gauche complet"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n3-multi-013</strong></td>
+          <td>Polytraumatisme</td>
+          <td>❌ Échec</td>
+          <td>Cumul de 3 lésions (Formule de Balthazar)</td>
+          <td>0%</td>
+          <td>-</td>
+          <td>0ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Cumul de 3 lésions (Formule de Balthazar)" au lieu de "Polytraumatisme sensoriel + rachis"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n3-multi-014</strong></td>
+          <td>Polytraumatisme</td>
+          <td>❌ Échec</td>
+          <td>Cumul de 4 lésions (Formule de Balthazar)</td>
+          <td>0%</td>
+          <td>-</td>
+          <td>0ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Cumul de 4 lésions (Formule de Balthazar)" au lieu de "Polytraumatisme bassin-rachis complexe"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n3-multi-015</strong></td>
+          <td>Polytraumatisme</td>
+          <td>❌ Échec</td>
+          <td>Cumul de 4 lésions (Formule de Balthazar)</td>
+          <td>0%</td>
+          <td>-</td>
+          <td>0ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Cumul de 4 lésions (Formule de Balthazar)" au lieu de "Polytraumatisme neurologique membre inférieur"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n3-multi-016</strong></td>
+          <td>Polytraumatisme</td>
+          <td>❌ Échec</td>
+          <td>Cumul de 4 lésions (Formule de Balthazar)</td>
+          <td>0%</td>
+          <td>-</td>
+          <td>0ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Cumul de 4 lésions (Formule de Balthazar)" au lieu de "Polytraumatisme viscères multiples"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n3-multi-017</strong></td>
+          <td>Polytraumatisme</td>
+          <td>❌ Échec</td>
+          <td>Cumul de 3 lésions (Formule de Balthazar)</td>
+          <td>0%</td>
+          <td>-</td>
+          <td>0ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Cumul de 3 lésions (Formule de Balthazar)" au lieu de "Polytraumatisme main dominante complète"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n3-multi-018</strong></td>
+          <td>Polytraumatisme</td>
+          <td>❌ Échec</td>
+          <td>Séquelles de rupture du ligament croisé postérieur (LCP)</td>
+          <td>18%</td>
+          <td>-</td>
+          <td>236ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Séquelles de rupture du ligament croisé postérieur (LCP)" au lieu de "Destruction genou (polytraumatisme intra-articulaire)"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n3-multi-019</strong></td>
+          <td>Polytraumatisme</td>
+          <td>❌ Échec</td>
+          <td>Cumul de 4 lésions (Formule de Balthazar)</td>
+          <td>0%</td>
+          <td>-</td>
+          <td>0ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Cumul de 4 lésions (Formule de Balthazar)" au lieu de "Destruction cheville-pied (polytraumatisme)"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n3-multi-020</strong></td>
+          <td>Polytraumatisme</td>
+          <td>❌ Échec</td>
+          <td>Raideur importante du rachis cervical</td>
+          <td>20%</td>
+          <td>-</td>
+          <td>229ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Raideur importante du rachis cervical" au lieu de "Raideur rachis global (polytraumatisme axial)"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n3-etat-001</strong></td>
+          <td>État Antérieur</td>
+          <td>❌ Échec</td>
+          <td>Cumul de 3 lésions (Formule de Balthazar)</td>
+          <td>0%</td>
+          <td>-</td>
+          <td>0ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Cumul de 3 lésions (Formule de Balthazar)" au lieu de "LCA sur état antérieur méniscectomie"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n3-etat-002</strong></td>
+          <td>État Antérieur</td>
+          <td>❌ Échec</td>
+          <td><em>Non trouvée</em></td>
+          <td>-</td>
+          <td>-</td>
+          <td>226ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion attendue "Tassement L4 sur état antérieur L3" absente des 5 choix proposés
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n3-etat-003</strong></td>
+          <td>État Antérieur</td>
+          <td>❌ Échec</td>
+          <td><em>Non trouvée</em></td>
+          <td>-</td>
+          <td>-</td>
+          <td>232ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion attendue "Luxation sur état antérieur fracture épaule" absente des 2 choix proposés
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n3-etat-004</strong></td>
+          <td>État Antérieur</td>
+          <td>❌ Échec</td>
+          <td><em>Non trouvée</em></td>
+          <td>-</td>
+          <td>-</td>
+          <td>315ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion attendue "Bimalléolaire sur état antérieur entorse" absente des 8 choix proposés
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n3-etat-005</strong></td>
+          <td>État Antérieur</td>
+          <td>❌ Échec</td>
+          <td><em>Non trouvée</em></td>
+          <td>-</td>
+          <td>-</td>
+          <td>227ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion attendue "Raideur poignet sur état antérieur fracture" absente des 2 choix proposés
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n3-etat-006</strong></td>
+          <td>État Antérieur</td>
+          <td>❌ Échec</td>
+          <td>Méniscectomie bilatérale (les 2 ménisques du même genou)</td>
+          <td>33%</td>
+          <td>-</td>
+          <td>121ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Méniscectomie bilatérale (les 2 ménisques du même genou)" au lieu de "Méniscectomie externe sur état antérieur interne"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n3-etat-007</strong></td>
+          <td>État Antérieur</td>
+          <td>❌ Échec</td>
+          <td><em>Non trouvée</em></td>
+          <td>-</td>
+          <td>-</td>
+          <td>116ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion attendue "Amputation pouce sur état antérieur index" absente des 5 choix proposés
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n3-etat-008</strong></td>
+          <td>État Antérieur</td>
+          <td>❌ Échec</td>
+          <td>Cumul de 2 lésions (Formule de Balthazar)</td>
+          <td>0%</td>
+          <td>-</td>
+          <td>0ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Cumul de 2 lésions (Formule de Balthazar)" au lieu de "Raideur sur prothèse hanche préexistante"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n3-etat-009</strong></td>
+          <td>État Antérieur</td>
+          <td>❌ Échec</td>
+          <td><em>Non trouvée</em></td>
+          <td>-</td>
+          <td>-</td>
+          <td>232ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion attendue "Glaucome sur état antérieur cataracte" absente des 2 choix proposés
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n3-etat-010</strong></td>
+          <td>État Antérieur</td>
+          <td>❌ Échec</td>
+          <td>Pseudarthrose coude - Avec ankylose (Main Non Dominante)</td>
+          <td>35%</td>
+          <td>-</td>
+          <td>121ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Pseudarthrose coude - Avec ankylose (Main Non Dominante)" au lieu de "Olécrane sur état antérieur ankylose coude"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n3-etat-011</strong></td>
+          <td>État Antérieur</td>
+          <td>❌ Échec</td>
+          <td>Séquelles de fracture/luxation du rachis cervical (sans lésion neurologique)</td>
+          <td>17%</td>
+          <td>-</td>
+          <td>226ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Séquelles de fracture/luxation du rachis cervical (sans lésion neurologique)" au lieu de "Syndrome cervical sur état antérieur"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n3-etat-012</strong></td>
+          <td>État Antérieur</td>
+          <td>❌ Échec</td>
+          <td><em>Non trouvée</em></td>
+          <td>-</td>
+          <td>-</td>
+          <td>229ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion attendue "Fracture métatarsiens sur état antérieur hallux" absente des 3 choix proposés
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n3-etat-013</strong></td>
+          <td>État Antérieur</td>
+          <td>❌ Échec</td>
+          <td><em>Non trouvée</em></td>
+          <td>-</td>
+          <td>-</td>
+          <td>5ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Aucune lésion trouvée (type: no_result)
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n3-etat-014</strong></td>
+          <td>État Antérieur</td>
+          <td>❌ Échec</td>
+          <td>Chondropathie fémoro-patellaire post-traumatique</td>
+          <td>20%</td>
+          <td>-</td>
+          <td>221ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Chondropathie fémoro-patellaire post-traumatique" au lieu de "LCA sur état antérieur chondropathie"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n3-etat-015</strong></td>
+          <td>État Antérieur</td>
+          <td>❌ Échec</td>
+          <td>Rupture de la coiffe des rotateurs post-traumatique (supra-épineux, etc.) (Main Dominante)</td>
+          <td>20%</td>
+          <td>-</td>
+          <td>236ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Rupture de la coiffe des rotateurs post-traumatique (supra-épineux, etc.) (Main Dominante)" au lieu de "Rupture coiffe sur état antérieur tendinopathie"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n3-etat-016</strong></td>
+          <td>État Antérieur</td>
+          <td>❌ Échec</td>
+          <td>Cumul de 3 lésions (Formule de Balthazar)</td>
+          <td>0%</td>
+          <td>-</td>
+          <td>0ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Cumul de 3 lésions (Formule de Balthazar)" au lieu de "Pilon tibial sur état antérieur entorses"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n3-etat-017</strong></td>
+          <td>État Antérieur</td>
+          <td>❌ Échec</td>
+          <td>Cicatrices vicieuses de la paume (Main Non Dominante)</td>
+          <td>20%</td>
+          <td>-</td>
+          <td>232ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Cicatrices vicieuses de la paume (Main Non Dominante)" au lieu de "Lésion tendons sur état antérieur cicatrice"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n3-etat-018</strong></td>
+          <td>État Antérieur</td>
+          <td>❌ Échec</td>
+          <td>Fracture tassement vertébral lombaire non déplacée consolidée</td>
+          <td>18%</td>
+          <td>-</td>
+          <td>229ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Fracture tassement vertébral lombaire non déplacée consolidée" au lieu de "Tassement L3 sur état antérieur discopathie"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n3-etat-019</strong></td>
+          <td>État Antérieur</td>
+          <td>❌ Échec</td>
+          <td>Névralgie pudendale post-traumatique (fracture du bassin)</td>
+          <td>25%</td>
+          <td>-</td>
+          <td>208ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Névralgie pudendale post-traumatique (fracture du bassin)" au lieu de "Cotyle sur état antérieur sacrum"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n3-etat-020</strong></td>
+          <td>État Antérieur</td>
+          <td>❌ Échec</td>
+          <td><em>Non trouvée</em></td>
+          <td>-</td>
+          <td>-</td>
+          <td>226ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion attendue "Sciatique S1 sur état antérieur L5" absente des 2 choix proposés
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n3-lang-001</strong></td>
+          <td>Variations</td>
+          <td>❌ Échec</td>
+          <td>Laxité importante du genou (rupture ligamentaire)</td>
+          <td>28%</td>
+          <td>-</td>
+          <td>231ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Laxité importante du genou (rupture ligamentaire)" au lieu de "Rupture LCA + lésion méniscale"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n3-lang-002</strong></td>
+          <td>Variations</td>
+          <td>❌ Échec</td>
+          <td>Raideur importante de la cheville</td>
+          <td>15%</td>
+          <td>-</td>
+          <td>234ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Raideur importante de la cheville" au lieu de "Fracture bimalléolaire + troubles marche"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n3-lang-003</strong></td>
+          <td>Variations</td>
+          <td>❌ Échec</td>
+          <td>Séquelles de contusion myocardique (troubles du rythme, insuffisance cardiaque)</td>
+          <td>33%</td>
+          <td>-</td>
+          <td>230ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Séquelles de contusion myocardique (troubles du rythme, insuffisance cardiaque)" au lieu de "Raideur rachis sévère DDS >40cm"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n3-lang-004</strong></td>
+          <td>Variations</td>
+          <td>❌ Échec</td>
+          <td>Désarticulation de l'épaule ou amputation au col chirurgical (Main Dominante)</td>
+          <td>90%</td>
+          <td>-</td>
+          <td>230ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Désarticulation de l'épaule ou amputation au col chirurgical (Main Dominante)" au lieu de "Raideur épaule abduction <90° + rotation"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n3-lang-005</strong></td>
+          <td>Variations</td>
+          <td>❌ Échec</td>
+          <td><em>Non trouvée</em></td>
+          <td>-</td>
+          <td>-</td>
+          <td>231ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion attendue "Amputation pouce main dominante" absente des 5 choix proposés
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n3-lang-006</strong></td>
+          <td>Variations</td>
+          <td>❌ Échec</td>
+          <td>Amputation de l'index - Désarticulation métacarpo-phalangienne</td>
+          <td>15%</td>
+          <td>-</td>
+          <td>226ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Amputation de l'index - Désarticulation métacarpo-phalangienne" au lieu de "Surdité totale bilatérale + acouphènes"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n3-lang-007</strong></td>
+          <td>Variations</td>
+          <td>❌ Échec</td>
+          <td>Paralysie du nerf sciatique poplité externe (SPE)</td>
+          <td>20%</td>
+          <td>-</td>
+          <td>229ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Paralysie du nerf sciatique poplité externe (SPE)" au lieu de "Pied tombant + steppage (paralysie nerf fibulaire)"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n3-lang-008</strong></td>
+          <td>Variations</td>
+          <td>❌ Échec</td>
+          <td><em>Non trouvée</em></td>
+          <td>-</td>
+          <td>-</td>
+          <td>225ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion attendue "Perte complète vision œil droit" absente des 2 choix proposés
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n3-lang-009</strong></td>
+          <td>Variations</td>
+          <td>❌ Échec</td>
+          <td>Cumul de 2 lésions (Formule de Balthazar)</td>
+          <td>0%</td>
+          <td>-</td>
+          <td>0ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Cumul de 2 lésions (Formule de Balthazar)" au lieu de "Raideur coude sévère flexion 90° extension -20°"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n3-lang-010</strong></td>
+          <td>Variations</td>
+          <td>❌ Échec</td>
+          <td><em>Non trouvée</em></td>
+          <td>-</td>
+          <td>-</td>
+          <td>227ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Aucune lésion trouvée (type: no_result)
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n3-lang-011</strong></td>
+          <td>Variations</td>
+          <td>❌ Échec</td>
+          <td>Cumul de 3 lésions (Formule de Balthazar)</td>
+          <td>0%</td>
+          <td>-</td>
+          <td>0ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Cumul de 3 lésions (Formule de Balthazar)" au lieu de "Destruction genou (ménisque+LCA+rotule)"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n3-lang-012</strong></td>
+          <td>Variations</td>
+          <td>❌ Échec</td>
+          <td><em>Non trouvée</em></td>
+          <td>-</td>
+          <td>-</td>
+          <td>231ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion attendue "Tassements L3+L4 + raideur lombaire sévère" absente des 5 choix proposés
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n3-lang-013</strong></td>
+          <td>Variations</td>
+          <td>❌ Échec</td>
+          <td>Cumul de 3 lésions (Formule de Balthazar)</td>
+          <td>0%</td>
+          <td>-</td>
+          <td>0ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Cumul de 3 lésions (Formule de Balthazar)" au lieu de "Polytraumatisme bassin (cotyle+sacrum+hanche)"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n3-lang-014</strong></td>
+          <td>Variations</td>
+          <td>❌ Échec</td>
+          <td><em>Non trouvée</em></td>
+          <td>-</td>
+          <td>-</td>
+          <td>231ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Aucune lésion trouvée (type: no_result)
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n3-lang-015</strong></td>
+          <td>Variations</td>
+          <td>❌ Échec</td>
+          <td>Séquelles de fracture de métacarpien (cal vicieux, raideur) (Main Dominante)</td>
+          <td>7%</td>
+          <td>-</td>
+          <td>121ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Séquelles de fracture de métacarpien (cal vicieux, raideur) (Main Dominante)" au lieu de "Raideur 5 doigts + ankylose poignet"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n3-lang-016</strong></td>
+          <td>Variations</td>
+          <td>❌ Échec</td>
+          <td><em>Non trouvée</em></td>
+          <td>-</td>
+          <td>-</td>
+          <td>231ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion attendue "Amputation gros orteil + 3 orteils" absente des 3 choix proposés
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n3-lang-017</strong></td>
+          <td>Variations</td>
+          <td>❌ Échec</td>
+          <td>Cumul de 3 lésions (Formule de Balthazar)</td>
+          <td>0%</td>
+          <td>-</td>
+          <td>0ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Cumul de 3 lésions (Formule de Balthazar)" au lieu de "Polytraumatisme thorax-abdomen (rate+poumon+côtes)"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n3-lang-018</strong></td>
+          <td>Variations</td>
+          <td>❌ Échec</td>
+          <td>Perte complète de la vision d'un oeil (l'autre étant normal)</td>
+          <td>30%</td>
+          <td>-</td>
+          <td>226ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Perte complète de la vision d'un oeil (l'autre étant normal)" au lieu de "Cataracte bilatérale (acuités faibles)"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n3-lang-019</strong></td>
+          <td>Variations</td>
+          <td>❌ Échec</td>
+          <td>Ankylose complète du rachis cervical en bonne position</td>
+          <td>28%</td>
+          <td>-</td>
+          <td>225ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Ankylose complète du rachis cervical en bonne position" au lieu de "Raideur rachis cervical sévère"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n3-lang-020</strong></td>
+          <td>Variations</td>
+          <td>❌ Échec</td>
+          <td>Cumul de 3 lésions (Formule de Balthazar)</td>
+          <td>0%</td>
+          <td>-</td>
+          <td>0ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Cumul de 3 lésions (Formule de Balthazar)" au lieu de "Sciatique L5 chronique + steppage + déficit force"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n3-limite-001</strong></td>
+          <td>Cas Limites</td>
+          <td>❌ Échec</td>
+          <td>Fracture de l'extrémité inférieure du fémur - Avec raideur du genou</td>
+          <td>23%</td>
+          <td>-</td>
+          <td>231ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Fracture de l'extrémité inférieure du fémur - Avec raideur du genou" au lieu de "Raideur genou limite haute (flexion 130°)"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n3-limite-002</strong></td>
+          <td>Cas Limites</td>
+          <td>❌ Échec</td>
+          <td><em>Non trouvée</em></td>
+          <td>-</td>
+          <td>-</td>
+          <td>234ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion attendue "Raideur épaule limite exacte (abduction 90°)" absente des 5 choix proposés
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n3-limite-003</strong></td>
+          <td>Cas Limites</td>
+          <td>❌ Échec</td>
+          <td>Raideur modérée de la cheville</td>
+          <td>9%</td>
+          <td>-</td>
+          <td>235ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Raideur modérée de la cheville" au lieu de "Raideur cheville limite (dorsiflexion 10°)"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n3-limite-004</strong></td>
+          <td>Cas Limites</td>
+          <td>❌ Échec</td>
+          <td><em>Non trouvée</em></td>
+          <td>-</td>
+          <td>-</td>
+          <td>232ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion attendue "Raideur rachis limite haute (DDS 40cm)" absente des 5 choix proposés
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n3-limite-005</strong></td>
+          <td>Cas Limites</td>
+          <td>❌ Échec</td>
+          <td><em>Non trouvée</em></td>
+          <td>-</td>
+          <td>-</td>
+          <td>120ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion attendue "Raideur coude sévère limite ankylose (90°)" absente des 5 choix proposés
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n3-limite-006</strong></td>
+          <td>Cas Limites</td>
+          <td>❌ Échec</td>
+          <td>Raideur importante du poignet</td>
+          <td>18%</td>
+          <td>-</td>
+          <td>233ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Raideur importante du poignet" au lieu de "Raideur poignet bipolaire limite"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n3-limite-007</strong></td>
+          <td>Cas Limites</td>
+          <td>❌ Échec</td>
+          <td><em>Non trouvée</em></td>
+          <td>-</td>
+          <td>-</td>
+          <td>222ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion attendue "Raideur hanche minime limite (flexion 120°)" absente des 3 choix proposés
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n3-limite-008</strong></td>
+          <td>Cas Limites</td>
+          <td>❌ Échec</td>
+          <td>Cataracte (selon acuité et complications)</td>
+          <td>55%</td>
+          <td>-</td>
+          <td>234ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Cataracte (selon acuité et complications)" au lieu de "Cataracte limite modérée/sévère (5/10 bilatéral)"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n3-limite-009</strong></td>
+          <td>Cas Limites</td>
+          <td>❌ Échec</td>
+          <td><em>Non trouvée</em></td>
+          <td>-</td>
+          <td>-</td>
+          <td>230ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Aucune lésion trouvée (type: no_result)
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n3-limite-010</strong></td>
+          <td>Cas Limites</td>
+          <td>❌ Échec</td>
+          <td><em>Non trouvée</em></td>
+          <td>-</td>
+          <td>-</td>
+          <td>119ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion attendue "Amputation pouce niveau incertain" absente des 5 choix proposés
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n3-limite-011</strong></td>
+          <td>Cas Limites</td>
+          <td>❌ Échec</td>
+          <td>Instabilité fémoro-patellaire (luxation récidivante de rotule)</td>
+          <td>15%</td>
+          <td>-</td>
+          <td>233ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Instabilité fémoro-patellaire (luxation récidivante de rotule)" au lieu de "Instabilité genou degré incertain"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n3-limite-012</strong></td>
+          <td>Cas Limites</td>
+          <td>❌ Échec</td>
+          <td><em>Non trouvée</em></td>
+          <td>-</td>
+          <td>-</td>
+          <td>122ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion attendue "Tassement L3 mesure imprécise" absente des 4 choix proposés
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n3-limite-013</strong></td>
+          <td>Cas Limites</td>
+          <td>❌ Échec</td>
+          <td>Rupture de la coiffe des rotateurs (partielle < 50%) (Dominante)</td>
+          <td>15%</td>
+          <td>-</td>
+          <td>238ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Rupture de la coiffe des rotateurs (partielle < 50%) (Dominante)" au lieu de "Rupture coiffe étendue incertaine"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n3-limite-014</strong></td>
+          <td>Cas Limites</td>
+          <td>❌ Échec</td>
+          <td>Chondropathie fémoro-patellaire post-traumatique</td>
+          <td>20%</td>
+          <td>-</td>
+          <td>238ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Chondropathie fémoro-patellaire post-traumatique" au lieu de "Chondropathie genou stade frontière"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n3-limite-015</strong></td>
+          <td>Cas Limites</td>
+          <td>❌ Échec</td>
+          <td>Séquelles de rupture du ligament croisé postérieur (LCP)</td>
+          <td>10%</td>
+          <td>-</td>
+          <td>233ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Séquelles de rupture du ligament croisé postérieur (LCP)" au lieu de "Limitation périmètre marche ~1km"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n3-limite-016</strong></td>
+          <td>Cas Limites</td>
+          <td>❌ Échec</td>
+          <td>Ankylose de tous les doigts de la main (Main Dominante)</td>
+          <td>55%</td>
+          <td>-</td>
+          <td>123ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Ankylose de tous les doigts de la main (Main Dominante)" au lieu de "Ankylose doigt position intermédiaire"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n3-limite-017</strong></td>
+          <td>Cas Limites</td>
+          <td>❌ Échec</td>
+          <td>Rupture du tendon quadricipital opérée</td>
+          <td>20%</td>
+          <td>-</td>
+          <td>275ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Rupture du tendon quadricipital opérée" au lieu de "Déficit force testing 2-3/5"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n3-limite-018</strong></td>
+          <td>Cas Limites</td>
+          <td>❌ Échec</td>
+          <td>Atteinte du Nerf auditif (VIII) - Surdité, acouphènes, vertiges</td>
+          <td>5%</td>
+          <td>-</td>
+          <td>238ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Atteinte du Nerf auditif (VIII) - Surdité, acouphènes, vertiges" au lieu de "Surdité ~50dB mesure fluctuante"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n3-limite-019</strong></td>
+          <td>Cas Limites</td>
+          <td>❌ Échec</td>
+          <td>Cataracte (selon acuité et complications)</td>
+          <td>55%</td>
+          <td>-</td>
+          <td>237ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Cataracte (selon acuité et complications)" au lieu de "Cataracte évolutive acuité variable"
+          </td>
+        </tr>
+        
+        
+        
+        <tr style="background: #FFEBEE;">
+          <td><strong>n3-limite-020</strong></td>
+          <td>Cas Limites</td>
+          <td>❌ Échec</td>
+          <td>Cumul de 2 lésions (Formule de Balthazar)</td>
+          <td>0%</td>
+          <td>-</td>
+          <td>0ms</td>
+        </tr>
+        
+        <tr>
+          <td colspan="7" style="background: #FFCDD2; padding: 10px;">
+            <strong>❌ Erreurs:</strong><br>• Lésion incorrecte: "Cumul de 2 lésions (Formule de Balthazar)" au lieu de "Cumul genou+cheville imputabilité incertaine"
+          </td>
+        </tr>
+        
+        
+        
+      </tbody>
+    </table>
+    
+    <h2>🎯 Actions Prioritaires</h2>
+    <ol>
+      <li><strong>Analyser 287 cas échoués</strong> et enrichir keywords/synonymes</li>
+      <li><strong>Améliorer reconnaissance</strong>: Ajouter variations linguistiques fréquentes</li>
+      <li><strong>Affiner critères gravité</strong>: Réviser rateCriteria pour lésions à fort écart</li>
+      
+      <li><strong>Tester en conditions réelles</strong>: Valider sur cas cliniques réels service médico-légal</li>
+    </ol>
+    
+    <div style="margin-top: 40px; padding: 20px; background: #E3F2FD; border-radius: 8px;">
+      <h3>📚 Prochaines Étapes</h3>
+      <ul>
+        <li>✅ Exécuter validation après chaque modification majeure</li>
+        <li>✅ Enrichir base d'entraînement avec cas réels (objectif: 100+ cas)</li>
+        <li>✅ Implémenter tests de régression automatiques</li>
+        <li>✅ Collecter feedback médecins experts pour amélioration continue</li>
+      </ul>
+    </div>
+  </div>
+</body>
+</html>
+  

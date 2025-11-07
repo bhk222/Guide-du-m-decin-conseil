@@ -1,7 +1,39 @@
 import { InjuryCategory } from '../types';
+import { algerianBareme1967 } from './algerianBareme1967';
+import { mayetReyComplement } from './mayetReyComplement';
 
-export const disabilityData: InjuryCategory[] = [
-  // NOUVELLE STRUCTURE BASÉE SUR LE BARÈME OFFICIEL PDF
+/**
+ * BASE DE DONNÉES IPP - ORGANISATION ANATOMIQUE UNIFIÉE
+ * 
+ * ✅ UNE SEULE catégorie par partie anatomique
+ * ✅ Fusion automatique des subcategories
+ * ✅ Structure propre et sans doublons
+ */
+
+// Fonction pour fusionner les catégories ayant le même nom
+function mergeCategories(categories: InjuryCategory[]): InjuryCategory[] {
+  const categoryMap = new Map<string, InjuryCategory>();
+  
+  for (const category of categories) {
+    const existing = categoryMap.get(category.name);
+    
+    if (existing) {
+      // Fusionner les subcategories sans doublons
+      existing.subcategories.push(...category.subcategories);
+    } else {
+      // Nouvelle catégorie
+      categoryMap.set(category.name, {
+        name: category.name,
+        subcategories: [...category.subcategories]
+      });
+    }
+  }
+  
+  return Array.from(categoryMap.values());
+}
+
+// Construction des catégories intermédiaires (tout sauf Membres Sup/Inf et Rachis)
+const middleCategories: InjuryCategory[] = [
   {
     name: "Séquelles Crâniennes, Neurologiques et Psychiatriques",
     subcategories: [
@@ -479,7 +511,7 @@ export const disabilityData: InjuryCategory[] = [
         name: "Yeux - Lésions Spécifiques et Annexes",
         injuries: [
           { name: "Taies de cornée (selon gêne visuelle)", description: "Le taux est évalué d'après le tableau d'acuité visuelle, avec un taux complémentaire basé sur le degré de vision obtenu après rétrécissement pupillaire. Voir p.128 du barème pour les conditions.", rate: [0, 100] },
-          { name: "Cataracte (selon acuité et complications)", description: "Le taux est basé sur l'acuité visuelle corrigée + majorations pour gêne ou impossibilité de porter un verre. Voir p.130-131 du barème pour les calculs complexes.", rate: [10, 100] },
+          { name: "Cataracte (selon acuité et complications)", description: "Le taux est basé sur l'acuité visuelle corrigée + majorations pour gêne ou impossibilité de porter un verre. Calcul complexe nécessitant l'acuité précise (ex: OD 3/10, OG 8/10). Utilisez le Guide IA pour saisir les critères cliniques détaillés.", rate: [10, 100], rateCriteria: { low: "Acuité visuelle OD ≥ 8/10 et OG ≥ 8/10 avec correction adaptée, aucune complication.", medium: "Acuité visuelle entre 3/10 et 7/10 sur au moins un œil, ou difficulté au port de correction.", high: "Acuité visuelle < 3/10 sur un ou deux yeux, ou impossibilité de porter une correction (aphaquie non opérée, intolérance aux verres)." } },
           { name: "Hémorragies du vitré", description: "L'incapacité est évaluée en fonction de la baisse d'acuité visuelle résiduelle, si elle ne se résorbe pas.", rate: [0, 100] },
           { name: "Décollement de la rétine post-traumatique", description: "L'incapacité est évaluée en fonction des séquelles sur l'acuité visuelle et le champ visuel.", rate: [0, 100] },
           { name: "Atrophie optique post-traumatique", rate: [30, 80], description: "Dégénérescence des fibres du nerf optique suite à un traumatisme crânien ou orbitaire, conduisant à une perte de vision progressive et irréversible.", rateCriteria: { low: "Atteinte unilatérale avec acuité visuelle corrigée > 2/10 et champ visuel modérément altéré.", high: "Atteinte bilatérale sévère avec acuité visuelle < 1/10 et/ou champ visuel tubulaire." } },
@@ -1011,6 +1043,8 @@ export const disabilityData: InjuryCategory[] = [
             { name: "Fracture des deux os de l'avant-bras - Cal vicieux avec impotence et troubles nerveux (Main Non Dominante)", rate: [25, 35] },
             { name: "Fracture isolée du radius (Main Dominante)", rate: [4, 8] },
             { name: "Fracture isolée du radius (Main Non Dominante)", rate: [3, 6] },
+            { name: "Fracture isolée du radius - Avec cal vicieux modéré (Main Dominante)", rate: [6, 10], rateCriteria: { low: "Cal vicieux visible mais limitation légère de la prono-supination (<30%).", high: "Cal vicieux avec limitation modérée (30-50%) et gêne fonctionnelle moyenne." } },
+            { name: "Fracture isolée du radius - Avec cal vicieux modéré (Main Non Dominante)", rate: [5, 8], rateCriteria: { low: "Cal vicieux visible mais limitation légère de la prono-supination (<30%).", high: "Cal vicieux avec limitation modérée (30-50%) et gêne fonctionnelle moyenne." } },
             { name: "Fracture isolée du cubitus (Main Dominante)", rate: [3, 6] },
             { name: "Fracture isolée du cubitus (Main Non Dominante)", rate: [2, 5] },
             { name: "Pseudarthrose des deux os de l'avant-bras - serrée (Main Dominante)", rate: [25, 35] },
@@ -1204,9 +1238,12 @@ export const disabilityData: InjuryCategory[] = [
       {
         name: "Hanche - Fractures",
         injuries: [
-            { name: "Fracture du col du fémur - Consolidation avec raccourcissement et raideur", rate: [30, 60] },
-            { name: "Pseudarthrose du col du fémur", rate: [60, 80] },
-            { name: "Fracture du massif trochantérien - Cal vicieux et raideur", rate: [20, 40] },
+            { name: "Fracture du col du fémur - Bonne consolidation", rate: [5, 15], rateCriteria: { low: "Consolidation anatomique, mobilité conservée, limitation minime.", high: "Légère raideur, gêne activités extrêmes (accroupissement)." } },
+            { name: "Fracture du col du fémur - Consolidation avec raideur modérée", rate: [15, 30], rateCriteria: { low: "Raideur modérée, mobilité fonctionnelle conservée.", high: "Raideur marquée sans raccourcissement significatif." } },
+            { name: "Fracture du col du fémur - Consolidation avec raccourcissement et raideur", rate: [30, 60], rateCriteria: { low: "Raccourcissement <3cm + raideur modérée.", high: "Raccourcissement >3cm + raideur importante + boiterie." } },
+            { name: "Pseudarthrose du col du fémur", rate: [60, 80], rateCriteria: { low: "Pseudarthrose stable avec mobilité conservée, douleurs modérées.", high: "Pseudarthrose instable avec raccourcissement >3cm, douleurs permanentes, impotence fonctionnelle majeure nécessitant canne." } },
+            { name: "Fracture du massif trochantérien - Bonne consolidation", rate: [5, 10], rateCriteria: { low: "Consolidation anatomique sans séquelle, gêne minime.", high: "Consolidation avec légère raideur et douleurs mécaniques." } },
+            { name: "Fracture du massif trochantérien - Cal vicieux et raideur", rate: [20, 40], rateCriteria: { low: "Cal vicieux avec raideur modérée de hanche, boiterie discrète.", medium: "Cal vicieux important avec limitation flexion/abduction 50%, douleurs fréquentes.", high: "Cal vicieux majeur avec raccourcissement >2cm, quasi-ankylose, boiterie permanente nécessitant canne." } },
         ]
       },
       {
@@ -1222,17 +1259,17 @@ export const disabilityData: InjuryCategory[] = [
         name: "Cuisse - Fractures",
         injuries: [
             { name: "Fracture diaphysaire du fémur", rate: [10, 30], description: "Séquelles d'une fracture de la diaphyse fémorale.", rateCriteria: { low: "Consolidation sans séquelle majeure, gêne discrète.", medium: "Cal vicieux avec raccourcissement < 2cm et/ou raideur modérée du genou/hanche.", high: "Cal vicieux important avec boiterie, raideur et/ou troubles neurologiques." } },
-            { name: "Fracture de l'extrémité inférieure du fémur - Avec raideur du genou", rate: [15, 30] },
-            { name: "Pseudarthrose du fémur", rate: [60, 80] },
+            { name: "Fracture de l'extrémité inférieure du fémur - Avec raideur du genou", rate: [15, 30], rateCriteria: { low: "Raideur légère genou (flexion >100°), douleurs mécaniques.", medium: "Raideur modérée (flexion 60-100°), douleurs fréquentes.", high: "Raideur sévère (flexion <60°), cal vicieux articulaire, arthrose débutante." } },
+            { name: "Pseudarthrose du fémur", rate: [60, 80], rateCriteria: { low: "Pseudarthrose stable du tiers moyen, mobilité conservée hanche/genou, douleurs modérées.", high: "Pseudarthrose instable avec raccourcissement majeur >5cm, quasi-impotence fonctionnelle, nécessité 2 cannes ou fauteuil." } },
         ]
       },
        {
         name: "Genou - Lésions Osseuses et Articulaires",
         injuries: [
-            { name: "Fracture de la rotule - Avec gêne fonctionnelle", rate: [5, 15] },
-            { name: "Fracture des plateaux tibiaux - Avec déviation et/ou raideur", rate: [10, 30] },
-            { name: "Fracture des condyles fémoraux - Avec déviation et/ou raideur", rate: [10, 30] },
-            { name: "Hydarthrose chronique du genou", rate: [5, 15] },
+            { name: "Fracture de la rotule - Avec gêne fonctionnelle", rate: [5, 15], rateCriteria: { low: "Fracture consolidée, gêne à la flexion complète (accroupissement), douleurs mécaniques.", medium: "Cal vicieux avec craquements, limitation flexion à 90°, douleurs fréquentes.", high: "Patellectomie ou pseudarthrose, perte d'extension active, faiblesse quadriceps majeure." } },
+            { name: "Fracture des plateaux tibiaux - Avec déviation et/ou raideur", rate: [10, 30], rateCriteria: { low: "Déviation axiale minime (<5°), raideur légère (flexion >120°), douleurs mécaniques modérées.", medium: "Déviation modérée (5-10°), raideur moyenne (flexion 90-120°), douleurs fréquentes.", high: "Déviation importante (>10° valgus/varus), raideur sévère (flexion <90°), instabilité, douleurs permanentes." } },
+            { name: "Fracture des condyles fémoraux - Avec déviation et/ou raideur", rate: [10, 30], rateCriteria: { low: "Déviation minime, raideur légère (flexion >120°), douleurs mécaniques modérées.", medium: "Déviation modérée, raideur moyenne (flexion 90-120°), douleurs fréquentes.", high: "Déviation importante, raideur sévère (flexion <90°), instabilité, douleurs permanentes." } },
+            { name: "Hydarthrose chronique du genou", rate: [5, 15], rateCriteria: { low: "Épanchements rares (1-2/an), drainage ponctuel.", medium: "Épanchements récidivants (mensulres), gonflement permanent modéré.", high: "Hydarthrose permanente volumineuse, ponctions fréquentes, limitation mobilité, synovectomie envisagée." } },
             { name: "Arthrose fémoro-patellaire ou fémoro-tibiale post-traumatique", rate: [10, 30], rateCriteria: { low: "Douleurs mécaniques, pincement radiologique modéré.", high: "Arthrose sévère avec déviation axiale et raideur." } },
             { name: "Séquelles de prothèse totale de genou", rate: [15, 40], rateCriteria: { low: "Prothèse indolore, mobilité > 90°, marche sans aide.", high: "Douleurs, instabilité, raideur, nécessité de cannes." } },
         ]
@@ -1241,9 +1278,9 @@ export const disabilityData: InjuryCategory[] = [
         name: "Genou - Lésions Ligamentaires et Méniscales",
         injuries: [
             { name: "Laxité chronique du genou (séquelle d'entorse)", rate: [5, 20], rateCriteria: { low: "Laxité modérée sans instabilité fonctionnelle.", high: "Instabilité majeure avec dérobements fréquents." } },
-            { name: "Séquelles de rupture du ligament croisé antérieur (LCA)", rate: [10, 25] },
-            { name: "Séquelles de rupture du ligament croisé postérieur (LCP)", rate: [10, 25] },
-            { name: "Séquelles de méniscectomie (douleurs, hydarthrose)", rate: [5, 15] },
+            { name: "Séquelles de rupture du ligament croisé antérieur (LCA)", rate: [10, 25], rateCriteria: { low: "Laxité modérée, sans dérobements, activités quotidiennes normales, sports sans pivot/contact.", medium: "Laxité importante avec dérobements occasionnels, nécessité attelle pour activités.", high: "Laxité sévère avec dérobements fréquents (escaliers, marche irrégulière), arthrose débutante, activités limitées." } },
+            { name: "Séquelles de rupture du ligament croisé postérieur (LCP)", rate: [10, 25], rateCriteria: { low: "Laxité modérée, gêne en descente escaliers/pentes.", medium: "Laxité importante avec faiblesse quadriceps, douleurs antérieures.", high: "Laxité sévère avec instabilité postérieure majeure, arthrose fémoro-tibiale, limitation périmètre marche." } },
+            { name: "Séquelles de méniscectomie (douleurs, hydarthrose)", rate: [5, 15], rateCriteria: { low: "Méniscectomie partielle, gêne minime, pas d'épanchement.", medium: "Méniscectomie totale avec hydarthrose récidivante, douleurs mécaniques.", high: "Complications post-méniscectomie : arthrose précoce, chondropathie fémoro-tibiale, douleurs permanentes." } },
         ]
       },
       {
@@ -1256,19 +1293,19 @@ export const disabilityData: InjuryCategory[] = [
       {
         name: "Jambe - Fractures",
         injuries: [
-            { name: "Fracture des deux os de la jambe - Bonne consolidation", rate: [5, 10] },
-            { name: "Fracture des deux os de la jambe - Avec cal vicieux et troubles trophiques", rate: [15, 40] },
-            { name: "Fracture isolée du tibia", rate: [5, 20] },
-            { name: "Fracture isolée du péroné", rate: [2, 5] },
-            { name: "Pseudarthrose des deux os de la jambe", rate: [40, 60] },
-            { name: "Pseudarthrose du tibia", rate: [30, 50] },
+            { name: "Fracture des deux os de la jambe - Bonne consolidation", rate: [5, 10], rateCriteria: { low: "Consolidation anatomique sans cal vicieux, gêne minime.", medium: "Légère atrophie mollet, douleurs mécaniques occasionnelles.", high: "Consolidation avec cal palpable, raideur cheville modérée, douleurs à la marche prolongée." } },
+            { name: "Fracture des deux os de la jambe - Avec cal vicieux et troubles trophiques", rate: [15, 40], rateCriteria: { low: "Cal vicieux angulaire <10°, troubles trophiques modérés (œdème discret).", medium: "Cal vicieux 10-20°, troubles trophiques nets (œdème chronique, peau fragile), boiterie.", high: "Cal vicieux >20° avec déviation majeure, troubles trophiques sévères (ulcères récidivants, varices), raideur cheville, périmètre marche limité <500m." } },
+            { name: "Fracture isolée du tibia", rate: [5, 20], rateCriteria: { low: "Fracture consolidée sans séquelle, gêne minime.", medium: "Cal vicieux tibia, douleurs mécaniques, léger œdème.", high: "Cal vicieux angulaire tibia, raideur cheville, troubles trophiques, boiterie." } },
+            { name: "Fracture isolée du péroné", rate: [2, 5], rateCriteria: { low: "Consolidation sans séquelle, gêne discrète.", high: "Cal vicieux péroné avec conflit tibiofibulaire, douleurs latérales cheville." } },
+            { name: "Pseudarthrose des deux os de la jambe", rate: [40, 60], rateCriteria: { low: "Pseudarthrose stable avec appareillage orthopédique efficace, marche possible >1km.", high: "Pseudarthrose instable, membre quasi-inutilisable, nécessité fauteuil roulant ou amputation envisagée." } },
+            { name: "Pseudarthrose du tibia", rate: [30, 50], rateCriteria: { low: "Pseudarthrose stable du tiers moyen tibia, appareillage, marche limitée mais autonome.", high: "Pseudarthrose instable avec cal fibulaire hypertrophique, douleurs permanentes, impotence fonctionnelle majeure." } },
             { name: "Syndrome des loges chronique d'effort de la jambe", rate: [10, 25], description: "Douleurs musculaires à l'effort par augmentation de pression dans les loges musculaires.", rateCriteria: { low: "Douleurs apparaissant à l'effort intense, calmées par le repos.", high: "Douleurs invalidantes pour des efforts modérés, avec signes neurologiques." } },
         ]
       },
       {
         name: "Cheville (Cou-de-pied) - Fractures",
         injuries: [
-            { name: "Fracture malléolaire ou bi-malléolaire - Bonne consolidation", rate: [3, 8] },
+            { name: "Fracture malléolaire ou bi-malléolaire - Bonne consolidation", rate: [3, 8], rateCriteria: { low: "Consolidation anatomique sans séquelle, gêne minime (fatigue cheville prolongée).", medium: "Légère raideur cheville, douleurs mécaniques occasionnelles.", high: "Consolidation avec raideur modérée (déficit 25% amplitudes), douleurs fréquentes, œdème discret." } },
             { name: "Fracture malléolaire ou bi-malléolaire - Avec raideur modérée", rate: [10, 20], rateCriteria: { low: "Cal vicieux léger, raideur limitant les activités sportives.", high: "Raideur marquée avec douleurs chroniques à la marche." } },
             { 
               name: "Fracture bi-malléolaire - Avec cal vicieux important, déformation et troubles trophiques", 
@@ -1278,7 +1315,7 @@ export const disabilityData: InjuryCategory[] = [
                   high: "Déformation majeure, instabilité, troubles trophiques sévères et boiterie importante nécessitant une aide à la marche (canne)." 
               } 
             },
-            { name: "Fracture du pilon tibial", rate: [15, 40] },
+            { name: "Fracture du pilon tibial", rate: [15, 40], rateCriteria: { low: "Fracture articulaire consolidée avec raideur modérée cheville, douleurs mécaniques.", medium: "Raideur importante (flexion-extension <30°), arthrose débutante, boiterie, périmètre marche limité.", high: "Quasi-ankylose cheville, arthrose sévère, douleurs permanentes, troubles trophiques, nécessité canne permanente." } },
         ]
       },
       {
@@ -1292,24 +1329,24 @@ export const disabilityData: InjuryCategory[] = [
       {
         name: "Pied - Fractures",
         injuries: [
-            { name: "Fracture de l'astragale (Talus) - Avec cal vicieux", rate: [10, 25] },
-            { name: "Fracture du calcanéum - Avec douleurs et boiterie", rate: [10, 30] },
-            { name: "Fracture des métatarsiens - Avec douleurs à la marche", rate: [3, 10] },
+            { name: "Fracture de l'astragale (Talus) - Avec cal vicieux", rate: [10, 25], rateCriteria: { low: "Cal vicieux minime, raideur sous-astragalienne modérée, douleurs mécaniques.", medium: "Cal vicieux important, raideur sévère arrière-pied, boiterie.", high: "Pseudarthrose ou nécrose astragale, arthrose tibio-tarsienne et sous-astragalienne, douleurs permanentes, marche très limitée." } },
+            { name: "Fracture du calcanéum - Avec douleurs et boiterie", rate: [10, 30], rateCriteria: { low: "Fracture extra-articulaire consolidée, douleurs mécaniques à la marche prolongée, boiterie discrète.", medium: "Fracture thalamique avec enfoncement thalamus, raideur sous-astragalienne, boiterie nette, douleurs fréquentes.", high: "Cal vicieux calcanéum avec élargissement majeur, arthrose sous-astragalienne sévère, douleurs permanentes, marche <500m, nécessité canne." } },
+            { name: "Fracture des métatarsiens - Avec douleurs à la marche", rate: [3, 10], rateCriteria: { low: "Fracture 1 métatarsien consolidée, douleurs mécaniques légères, port chaussures normal.", medium: "Fractures multiples métatarsiens avec cal vicieux, métatarsalgies d'appui, nécessité semelles orthopédiques.", high: "Cals vicieux multiples avec avant-pied élargi/déformé, troubles statiques sévères, douleurs permanentes, chaussage orthopédique obligatoire." } },
         ]
       },
       {
         name: "Pied - Raideurs et Ankyloses",
         injuries: [
-            { name: "Ankylose d'une articulation du tarse", rate: [10, 20] },
-            { name: "Pied plat ou pied creux post-traumatique", rate: [5, 20] },
+            { name: "Ankylose d'une articulation du tarse", rate: [10, 20], rateCriteria: { low: "Ankylose sous-astragalienne, adaptation possible, boiterie discrète.", medium: "Ankylose médio-tarsienne avec raideur globale arrière-pied.", high: "Ankyloses multiples tarse, pied rigide, troubles statiques, boiterie majeure." } },
+            { name: "Pied plat ou pied creux post-traumatique", rate: [5, 20], rateCriteria: { low: "Déformation modérée, douleurs mécaniques, correction semelles efficace.", medium: "Déformation importante, métatarsalgies/talalgies fréquentes, chaussage orthopédique.", high: "Déformation sévère irréductible, troubles statiques majeurs, douleurs permanentes, périmètre marche très limité." } },
         ]
       },
       {
         name: "Orteils - Lésions",
         injuries: [
-            { name: "Amputation du gros orteil", rate: [5, 8] },
-            { name: "Amputation d'un autre orteil", rate: [1, 3] },
-            { name: "Ankylose ou raideur du gros orteil (Hallux rigidus)", rate: [3, 10] },
+            { name: "Amputation du gros orteil", rate: [5, 8], rateCriteria: { low: "Amputation distale (phalange distale), troubles propulsion minimes.", high: "Amputation complète gros orteil, troubles appui/propulsion nets, boiterie." } },
+            { name: "Amputation d'un autre orteil", rate: [1, 3], rateCriteria: { low: "Amputation orteil latéral (4ème/5ème), gêne esthétique surtout.", high: "Amputation 2ème orteil, troubles appui modérés." } },
+            { name: "Ankylose ou raideur du gros orteil (Hallux rigidus)", rate: [3, 10], rateCriteria: { low: "Raideur partielle IP, limitation légère déroulement pas.", medium: "Ankylose MP en position neutre, déroulement pas perturbé.", high: "Ankylose MP en flexion/extension pathologique, douleurs permanentes, troubles marche, nécessité chaussage orthopédique." } },
         ]
       },
       {
@@ -1988,3 +2025,11 @@ export const disabilityData: InjuryCategory[] = [
     ]
   },
 ];
+
+// Fusionner toutes les catégories (barème algérien + middleCategories + complément)
+// La fonction mergeCategories va automatiquement fusionner les catégories portant le même nom
+export const disabilityData: InjuryCategory[] = mergeCategories([
+  ...algerianBareme1967,
+  ...middleCategories,
+  ...mayetReyComplement,
+]);

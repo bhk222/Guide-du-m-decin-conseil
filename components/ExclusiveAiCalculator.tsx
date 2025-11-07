@@ -123,32 +123,43 @@ export const ExclusiveAiCalculator: React.FC<ExclusiveAiCalculatorProps> = ({
     const processAndDisplayAnalysis = useCallback((text: string) => {
         setIsLoading(true);
         setTimeout(() => {
-            const result = localExpertAnalysis(text);
-            let modelMessage: ChatMessage;
+            try {
+                const result = localExpertAnalysis(text);
+                let modelMessage: ChatMessage;
 
-            switch (result.type) {
-                case 'proposal':
-                    modelMessage = {
-                        id: crypto.randomUUID(), role: 'model',
-                        text: "Voici mon analyse complète et ma proposition :",
-                        proposal: { ...result, status: 'pending' }
-                    };
-                    break;
-                 case 'ambiguity':
-                    modelMessage = {
-                        id: crypto.randomUUID(), role: 'model',
-                        text: result.text,
-                        choices: result.choices,
-                    };
-                    break;
-                case 'no_result':
-                default:
-                    modelMessage = { id: crypto.randomUUID(), role: 'model', text: result.text };
-                    break;
+                switch (result.type) {
+                    case 'proposal':
+                        modelMessage = {
+                            id: crypto.randomUUID(), role: 'model',
+                            text: "Voici mon analyse complète et ma proposition :",
+                            proposal: { ...result, status: 'pending' }
+                        };
+                        break;
+                     case 'ambiguity':
+                        modelMessage = {
+                            id: crypto.randomUUID(), role: 'model',
+                            text: result.text,
+                            choices: result.choices,
+                        };
+                        break;
+                    case 'no_result':
+                    default:
+                        modelMessage = { id: crypto.randomUUID(), role: 'model', text: result.text };
+                        break;
+                }
+                setMessages(prev => [...prev, modelMessage]);
+            } catch (error) {
+                console.error('Erreur analyse IA:', error);
+                const errorMessage = error instanceof Error ? error.message : String(error);
+                setMessages(prev => [...prev, { 
+                    id: crypto.randomUUID(), 
+                    role: 'model', 
+                    text: `Désolé, une erreur s'est produite lors de l'analyse.<br><br><em style="color: red; font-size: 11px;">Détails technique : ${errorMessage}</em><br><br>Pouvez-vous reformuler votre description ?` 
+                }]);
+            } finally {
+                setIsLoading(false);
             }
-            setMessages(prev => [...prev, modelMessage]);
-            setIsLoading(false);
-        }, 400 + Math.random() * 400);
+        }, 150);
     }, []);
 
     const processQueueOrPrompt = useCallback(() => {
@@ -317,7 +328,8 @@ export const ExclusiveAiCalculator: React.FC<ExclusiveAiCalculatorProps> = ({
                 role: 'model',
                 text: `J'ai identifié **${descriptions.length} séquelles post-traumatiques**. Commençons par la première: **"${descriptions[0]}"**.`
             }]);
-            processAndDisplayAnalysis(descriptions[0]);
+            setIsLoading(false); // ✅ Désactivation AVANT l'appel pour laisser la fonction gérer son propre loading
+            setTimeout(() => processAndDisplayAnalysis(descriptions[0]), 100);
         } else {
             processAndDisplayAnalysis(descriptions[0] || textToSend);
         }
