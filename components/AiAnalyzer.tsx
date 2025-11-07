@@ -72,7 +72,7 @@ const boneTerms: { [key: string]: string[] } = {
  * Normalise le texte pour analyse (minuscules, sans accents, nettoyage ponctuation)
  * Amélioration: préserve les chiffres et patterns médicaux importants
  */
-const normalize = (str: string) => {
+export const normalize = (str: string) => {
     return str
         .toLowerCase()
         .normalize("NFD")
@@ -91,8 +91,42 @@ const normalize = (str: string) => {
 const preprocessMedicalText = (text: string): string => {
     let processed = text;
     
-    // 1. Normalisation expressions familières enrichies (v2.7)
+    // 1. Normalisation expressions familières enrichies (v2.7 + Niveau 3 SMS)
     const familiarToMedical: [RegExp, string][] = [
+        // === NIVEAU 3 - LANGAGE SMS/EXTRÊME ===
+        // Contractions SMS
+        [/\bjme\s+sui(?:s)?\b/gi, 'je me suis '],
+        [/\bj['']me\s+sui(?:s)?\b/gi, 'je me suis '],
+        [/\bc['']est\s+kom\b/gi, 'c est comme '],
+        [/\bavk\b/gi, 'avec '],
+        [/\btt\b/gi, 'tout '],
+        [/\bds\b/gi, 'dans '],
+        [/\bkomplétman\b/gi, 'completement '],
+        [/\bkom\b/gi, 'comme '],
+        [/\bkoté\b/gi, 'cote '],
+        [/\bnwar\b/gi, 'noir '],
+        
+        // Verbes familiers extrêmes
+        [/\bpét[eé]\b/gi, 'rupture '],
+        [/\bcass[eé]\b/gi, 'fracture '],
+        [/\bfoutu\b/gi, 'lese '],
+        [/\bbouzill[eé]\b/gi, 'detruit '],
+        [/\bniqué\b/gi, 'lese '],
+        [/\bexplos[eé]\b/gi, 'fracture comminutive '],
+        
+        // Instabilité familière
+        [/\bsa\s+lach(?:e)?\b/gi, 'instabilite '],
+        [/\bça\s+lach(?:e)?\b/gi, 'instabilite '],
+        [/\blach(?:e)?\b/gi, 'instabilite '],
+        
+        // Phonétique extrême
+        [/\bchavill(?:e)?\b/gi, 'cheville '],
+        [/\bjeno\b/gi, 'genou '],
+        [/\bépol\b/gi, 'epaule '],
+        [/\bvis\s+rien\b/gi, 'cecite '],
+        [/\bvoua\s+rien\b/gi, 'cecite '],
+        [/\bentend\s+plus\s+rien\b/gi, 'surdite '],
+        
         // Impossibilités et incapacités
         [/\bn['']arrive\s+plus\s+[aà]\s+/gi, 'impossibilite '],
         [/\bne\s+peut\s+plus\s+/gi, 'impossibilite '],
@@ -820,28 +854,126 @@ const keywordWeights: { [key: string]: number } = {
     'femur': 95, 'rotule': 95, 'tibia': 95, 'fibula': 95, 'tarse': 95, 'metatarse': 95, 'phalange_pied': 95,
     'crane': 95, 'face': 95, 'hyoide': 95, 'vertebre': 95, 'sacrum': 95, 'coccyx': 95, 'bassin': 95, 'sternum': 95, 'cote': 95,
 
-    'pouce': 90, 'index': 90, 'médius': 90, 'annulaire': 90, 'auriculaire': 90, 'doigt': 85, 'main': 85, 'poignet': 85, 'coude': 85, 'épaule': 85, 'hanche': 85, 'cheville': 85, 'pied': 85, 'orteil': 85,
+    'pouce': 95, 'index': 90, 'médius': 85, 'annulaire': 80, 'auriculaire': 80, 
+    'doigt': 75, 'main': 85, 'poignet': 85, 'coude': 85, 'épaule': 85, 
+    'hanche': 85, 'cheville': 85, 'pied': 85, 
+    'orteil': 75, 'gros orteil': 90, 'hallux': 88,
     'radial': 80, 'sciatique': 80, 'median': 80, 'cubital': 80, 'ulnaire': 80, 'crural': 80, 'facial': 80, 'trijumeau': 80, 'nerf': 75,
+    
+    // 🦴 GENOU - Mots-clés spécifiques ligaments et ménisques
+    'lca': 75, 'ligament croise anterieur': 75, 'lcp': 70, 'ligament croise posterieur': 70,
+    'meniscectomie': 65, 'menisque': 60, 'instabilite genou': 60, 'laxite residuelle': 60,
+    'derobement': 60, 'arthrose': 55, 'chondropathie': 55,
+    
+    // 🦶 CHEVILLE & PIED - Mots-clés spécifiques
+    'pilon tibial': 75, 'ankylose cheville': 75, 'malleole': 70, 'bimalleolaire': 70,
+    'calcaneum': 70, 'calcaneum thalamique': 72, 'thalamique': 65, 'astragale': 65,
+    'metatarsien': 60,
+    
+    // 🔙 RACHIS - Mots-clés spécifiques
+    'tassement vertebral': 70, 'rachis cervical': 70, 'syndrome cervical': 65,
+    'deformation rachis': 65, 'cyphose': 60, 'lordose': 60, 'scoliose': 60,
+    'dms': 60, 'distance menton sternum': 62, 'dds': 60, 'distance doigts sol': 62,
+    
+    // 💪 MEMBRES SUPÉRIEURS - Mots-clés spécifiques
+    'tete humerale': 70, 'amputation pouce': 85, 'abduction epaule': 65,
+    'elevation': 60, 'rotation externe': 60, 'rotation interne': 60,
+    'coiffe rotateurs': 72, 'supra epineux': 65, 'infra epineux': 65,
+    'luxation recidivante': 68, 'apprehension': 60, 'instabilite epaule': 65,
+    'ankylose coude': 70, 'position vicieuse': 65,
+    'prono supination': 65, 'pseudarthrose scaphoide': 72,
+    'tendons flechisseurs': 65, 'section tendons': 68,
+    'amputation index': 85, 'amputation medius': 80, 'amputation annulaire': 78, 'amputation auriculaire': 78,
+    'ankylose pouce': 85, 'ankylose index': 82, 'ankylose medius': 78, 'ankylose annulaire': 75, 'ankylose auriculaire': 75,
+    'raideur pouce': 80, 'raideur index': 78, 'raideur medius': 75, 'raideur annulaire': 72, 'raideur auriculaire': 72,
+    
+    // 🧠 NERFS - Mots-clés spécifiques
+    'nerf radial': 75, 'paralysie radiale': 75, 'main tombante': 70,
+    'sciatique chronique': 72, 'steppage': 65, 'testing musculaire': 60,
+    'deficit moteur': 60, 'paresthesie': 55,
+    
+    // 🦴 HANCHE & BASSIN - Mots-clés spécifiques
+    'prothese totale hanche': 75, 'pth': 72,
+    'arthrose hanche': 68, 'pincement articulaire': 65,
+    'perimetre marche': 62, 'claudication': 60,
+    'cotyle': 70, 'incongruence': 65, 'arthrose precoce': 65,
+    'sacro iliaque': 65, 'coccygodynie': 68,
+    
+    // 🫁 THORAX & VISCÈRES - Mots-clés spécifiques (poids ajustés)
+    'cotes': 60, 'volet costal': 70, 'dyspnee': 65, 'respiratoire': 60,
+    'capacite respiratoire': 62,
+    'hernie pariétale': 65, 'ceinture contention': 62,
+    
+    // 🦷 DENTS & CICATRICES - Mots-clés spécifiques
+    'perte dent': 65, 'prothese dentaire': 62,
+    'cheloide': 65, 'retractile': 65, 'adherente': 60,
+    'gene esthetique': 58,
+    
+    // 🔄 CAS COMPLEXES - Mots-clés spécifiques (Niveau 3)
+    'polytraumatisme': 75, 'sequelles multiples': 72, 'cumul': 75, 'cumuler': 70, 'combiner': 68,
+    'balthazar': 75, 'formule balthazar': 75, 'somme': 65,
+    'etat anterieur': 75, 'pre existant': 72, 'preexistant': 72, 'ancien': 65, 'anterieur': 65,
+    'aggravation': 70, 'majoration': 68, 'imputable': 70, 'imputabilite': 72,
+    'traumatisme cranien': 68, 'cephalees chroniques': 65,
+    
+    // 🎯 CAS LIMITES - Mots-clés seuils/frontières
+    'limite': 68, 'limite haute': 70, 'limite basse': 68, 'frontiere': 68,
+    'exactement': 65, 'pile': 65, 'juste': 62, 'precision': 65,
+    'seuil': 68, 'entre': 60, 'borderline': 68, 'incertain': 65,
+    'variable': 62, 'fluctuant': 62, 'intermittent': 60,
+
+    // 👁️ VISION - Mots-clés spécifiques (poids élevé pour lésions oculaires)
+    'cataracte': 70, 'acuite visuelle': 70, 'acuite': 65, 'vision': 60, 'oeil': 60, 'yeux': 60,
+    'cecite': 85, 'cecite absolue': 95, 'aveugle': 85, 'baisse de vision': 65, 'perte de vision': 65,
+    'perte complete vision': 90, 'perte vision complete': 90,
+    'champ visuel': 60, 'retrecissement': 55, 'scotome': 55, 'hemianopsie': 55,
+    'glaucome': 75, 'glaucome post-traumatique': 85, 'uveite': 60, 'uveit': 55, 
+    'endophtalmie': 75, 'retine': 55, 'decollement': 75, 'decollement retine': 85,
+    'taie': 70, 'taie corneenne': 80, 'cornee': 70, 'globe oculaire': 50, 'enucleation': 50, 'phtisie': 50, 'vitre': 50,
+
+    // 👂 AUDITION - Mots-clés spécifiques (poids élevé)
+    'surdite': 70, 'surdite complete': 85, 'surdite totale': 85, 'surdite profonde': 80,
+    'surdite partielle': 75, 'surdite bilaterale': 85, 'surdite unilaterale': 75,
+    'acouphenes': 70, 'acouphenes permanents': 80, 'acouphenes invalidants': 80,
+    'vertiges': 70, 'vertiges post-traumatiques': 80, 
+    '60db': 75, '60 db': 75, '80db': 80, '80 db': 80, '40db': 70, '40 db': 70,
+    'perte audition': 75, 'perte complete audition': 85,
+
+    // 🩺 VISCÈRES - Mots-clés spécifiques (poids très élevé)
+    'splenectomie': 85, 'ablation rate': 85, 'nephrectomie': 80, 'ablation rein': 80,
+    'cholecystectomie': 75, 'ablation vesicule': 75, 'gastrectomie': 80, 'ablation estomac': 80,
+    'colectomie': 80, 'ablation colon': 80, 'pneumonectomie': 85, 'ablation poumon': 85,
+    'lobectomie': 80, 'hepatectomie': 80, 'ablation foie': 80,
+    'pancreatectomie': 80, 'ablation pancreas': 80,
+    'eventration': 75, 'eventration post-traumatique': 80,
+    'incontinence': 75, 'incontinence sphincterienne': 80,
+    'fistule': 70, 'fistule digestive': 75,
+
+    // 🦴 AMPUTATIONS - Mots-clés spécifiques (poids très élevé)
+    'desarticulation': 85, 'transtibiale': 80, 'transfemorale': 85,
+    'transradiale': 80, 'transhumerale': 85,
+    'amputation avant-bras': 85, 'amputation cuisse': 85, 'amputation jambe': 80,
+    'amputation tiers moyen': 80, 'amputation tiers superieur': 85, 'amputation tiers inferieur': 75,
 
     // Top-tier, specific conditions
     'perte des deux mains': 200,  // Poids TRÈS élevé pour lésion bilatérale gravissime
     'deux mains': 180,
     'amputation bilaterale': 150,
     'dent': 70,
-    'paralysie': 70, 'cécité': 65, 'surdité': 65,
+    'paralysie': 70,
     'amputation': 60, 'ankylose': 60, 'pseudarthrose': 60, 'sténose': 60,
-    'désarticulation': 60, 'hémiplégie': 60, 'paraplégie': 60, 'quadriplégie': 60,
-    'rate': 55,
+    'désarticulation': 85, 'hémiplégie': 60, 'paraplégie': 60, 'quadriplégie': 60,
+    'rate': 75,
 
     // High-impact, specific conditions
-    'ablation': 50, 'nécrose': 50, 'splénectomie': 50, 'éventration': 50,
+    'ablation': 70, 'nécrose': 50, 'splénectomie': 85, 'éventration': 75,
     'cicatrice': 40,
     'cranien': 45, 'anévrisme': 45, 'oblitération': 45, 'phlébite': 45,
 
     // High-impact, specific anatomical locations
     'diaphyse': 45, 'extremite inferieure': 45, 
-    'col chirurgical': 100, 'tete humerale': 100, 'trochiter': 98, 'trochin': 98,
-    'col femoral': 100, 'plateau tibial': 100, 'malleole': 98, 'scaphoide': 98, 'olecrane': 98,
+    'col chirurgical': 100, 'trochiter': 98, 'trochin': 98,
+    'col femoral': 100, 'plateau tibial': 100, 'scaphoide': 98, 'olecrane': 98,
 
     // Medium-impact, common findings
     'perte': 35,
@@ -851,7 +983,7 @@ const keywordWeights: { [key: string]: number } = {
     
     // General injury types
     'fracture': 20, 'luxation': 20, 'rupture': 20, 'lésion': 15, 'traumatisme': 15,
-    'vertige': 15, 'spondylodiscite': 15, 'cyphose': 15, 'plaie': 15, 'contusion': 15,
+    'vertige': 15, 'spondylodiscite': 15, 'plaie': 15, 'contusion': 15,
     
     // Symptoms & Modifiers
     'grave': 10, 'vicieuse': 10, 'tassement': 10,
@@ -886,6 +1018,110 @@ const synonymMap: { [key: string]: string } = {
     'audition': 'surdite',
     'auditif': 'surdite',
     'gonalgie': 'douleur genou',
+    
+    // 👁️ Synonymes vision et pathologies oculaires
+    'cataract': 'cataracte',
+    'cataractes': 'cataracte',
+    'opacite cristallinienne': 'cataracte',
+    'cristallin opacifie': 'cataracte',
+    'acuite': 'acuite visuelle',
+    'av': 'acuite visuelle',
+    'avo': 'acuite visuelle oeil',
+    'od': 'oeil droit',
+    'og': 'oeil gauche',
+    'baisse de l acuite': 'baisse acuite visuelle',
+    'baisse acuite': 'baisse acuite visuelle',
+    'diminution acuite': 'baisse acuite visuelle',
+    'baisse de vision': 'baisse acuite visuelle',
+    'perte de vision': 'baisse acuite visuelle',
+    'vision basse': 'baisse acuite visuelle',
+    'mal voit': 'baisse acuite visuelle',
+    'voit mal': 'baisse acuite visuelle',
+    'voit flou': 'baisse acuite visuelle',
+    'vision floue': 'baisse acuite visuelle',
+    'oeuil': 'oeil',
+    'yeu': 'oeil',
+    
+    // 🦴 Synonymes genou et ligaments
+    'lca': 'ligament croise anterieur',
+    'lcp': 'ligament croise posterieur',
+    'qui lache': 'instabilite',
+    'genou instable': 'laxite residuelle',
+    'derobement': 'instabilite articulaire',
+    'derobements': 'instabilite articulaire',
+    
+    // 🦶 Synonymes cheville et pied
+    'pilon': 'pilon tibial',
+    'bimall': 'bimalleolaire',
+    'bi malleolaire': 'bimalleolaire',
+    'thalamique': 'calcaneum thalamique',
+    
+    // 🔙 Synonymes rachis
+    'vertebre': 'vertebral',
+    'dos bloque': 'raideur rachis',
+    'dms': 'distance menton sternum',
+    'dds': 'distance doigts sol',
+    
+    // 💬 Langage familier → terminologie médicale
+    'casse': 'fracture',
+    'cassé': 'fracture',
+    'cassee': 'fracture',
+    'pete': 'rupture',
+    'pété': 'rupture',
+    'petee': 'rupture',
+    'coince': 'blocage articulaire',
+    'coincé': 'blocage articulaire',
+    'boite': 'claudication',
+    'marche mal': 'troubles marche',
+    
+    // 🦴 Synonymes membres supérieurs
+    'coiffe': 'coiffe rotateurs',
+    'rotateurs': 'coiffe rotateurs',
+    'epaule instable': 'luxation recidivante epaule',
+    'pth': 'prothese totale hanche',
+    'olec': 'olecrane',
+    'scaph': 'scaphoide',
+    
+    // 🫁 Synonymes thorax et viscères
+    'volet': 'volet costal',
+    'spleen': 'splenectomie',
+    'rate enlevee': 'splenectomie',
+    'hernie': 'eventration',
+    
+    // 👂 Synonymes audition
+    'sourd': 'surdite',
+    'sourde': 'surdite',
+    'entend mal': 'perte auditive',
+    'entend plus': 'surdite complete',
+    'nentend plus': 'surdite complete',
+    'n\'entend plus': 'surdite complete',
+    'bourdonnements': 'acouphenes',
+    'sifflements': 'acouphenes',
+    'oreille cassee': 'surdite traumatique',
+    'perte ouie': 'surdite',
+    'db': 'decibels',
+    '60 decibels': '60db',
+    '80 decibels': '80db',
+    '40 decibels': '40db',
+    
+    // 🦴 Synonymes amputations spécifiques
+    'coupé': 'amputation',
+    'coupe': 'amputation',
+    'perdu': 'amputation',
+    'desarticuler': 'desarticulation',
+    'separé': 'desarticulation',
+    'ampute': 'amputation',
+    'amputee': 'amputation',
+    'moignon': 'amputation',
+    'transtibial': 'transtibiale',
+    'transfemoral': 'transfemorale',
+    'transradial': 'transradiale',
+    'transhumeral': 'transhumerale',
+    
+    // 🦷 Synonymes dents
+    'dent perdue': 'perte dent',
+    'dent cassee': 'perte dent',
+    'dentier': 'prothese dentaire',
     
     // Variations régionales (lombaire, cervical, dorsal)
     'lombaires': 'lombaire', 'lombaire': 'lombaire',
@@ -999,10 +1235,7 @@ const synonymMap: { [key: string]: string } = {
     'accident travail': 'accident',
     'accident de travail': 'accident',
     'acc travail': 'accident',
-    'dms': 'distance mains sol',
     'distance mains sol': 'flexion rachis',
-    'distance doigts sol': 'flexion rachis',
-    'dds': 'flexion rachis',
     'rom': 'amplitude mouvement',
     'amp': 'amplitude',
     'rof': 'raideur',
@@ -1220,7 +1453,6 @@ const synonymMap: { [key: string]: string } = {
     'blocage': 'limitation',
     'verrouillage': 'blocage',
     'ressaut': 'instabilite',
-    'derobement': 'instabilite',
     'lachage': 'instabilite',
     'hyperlaxite': 'laxite',
     'hyper mobilite': 'laxite',
@@ -1460,7 +1692,6 @@ const synonymMap: { [key: string]: string } = {
     'fixateur externe': 'fixation externe',
     'prothese': 'remplacement articulaire',
     'arthroplastie': 'prothese',
-    'pth': 'prothese totale hanche',
     'ptg': 'prothese totale genou',
     'pte': 'prothese totale epaule',
     'arthrodese': 'fusion articulaire',
@@ -1523,6 +1754,7 @@ const anatomicalKeywords: { [key: string]: string } = {
     
     // Séquelles Maxillo-Faciales, ORL et Ophtalmologiques
     'oeil': 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques', 'yeux': 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques', 'vision': 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques', 'cécité': 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques', 'oculaire': 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques', 'orbite': 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques',
+    'cataracte': 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques', 'acuite': 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques', 'glaucome': 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques', 'retine': 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques', 'cornee': 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques',
     'oreille': 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques', 'auditif': 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques', 'surdité': 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques',
     'vertige': 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques',
     'nez': 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques', 'odorat': 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques', 'anosmie': 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques',
@@ -2131,17 +2363,88 @@ export const buildExpertJustification = (
     justification += "<strong>5️⃣ Conclusion médico-légale</strong><br>";
     justification += `Il persiste des séquelles consolidées post-traumatiques entraînant un retentissement fonctionnel <strong>${severityText}</strong> et permanent, justifiant l'attribution d'un taux d'IPP de <strong>${chosenRate}%</strong>.<br><br>`;
     
-    // Section 6 : Données cliniques manquantes (si incomplètes)
+    // Section 6 : Données cliniques manquantes (si incomplètes) - PERSONNALISÉES PAR LÉSION
     if (isDefaultSeverity || (!hasFlexion && !hasExtension && !hasEVA)) {
         justification += "<strong>📋 Données cliniques recommandées pour affiner l'évaluation</strong><br>";
         justification += "<em>Pour une évaluation plus précise, il serait souhaitable de disposer de :</em><br>";
         justification += "<ul>";
-        justification += "<li>Amplitudes articulaires mesurées (goniomètre)</li>";
-        justification += "<li>Cotation douleur (échelle EVA 0-10)</li>";
-        justification += "<li>Testing musculaire (force 0-5)</li>";
-        justification += "<li>Périmètres membres (amyotrophie)</li>";
-        justification += "<li>Imagerie récente (RX, TDM, IRM si nécessaire)</li>";
-        justification += "<li>Retentissement professionnel précis</li>";
+        
+        // Détection du type de lésion pour recommandations spécifiques
+        const injuryNameLower = normalize(injury.name);
+        const textLower = normalize(userInput);
+        
+        // 👁️ VISION (cataracte, acuité visuelle, œil, uvéite, rétine, etc.)
+        if (injuryNameLower.includes('cataracte') || injuryNameLower.includes('acuite') || 
+            injuryNameLower.includes('vision') || injuryNameLower.includes('oeil') ||
+            injuryNameLower.includes('uveit') || injuryNameLower.includes('retine') || 
+            injuryNameLower.includes('vitre') || injuryNameLower.includes('hemorragie') ||
+            injuryNameLower.includes('decollement') || injuryNameLower.includes('atrophie optique') ||
+            injuryNameLower.includes('glaucome') || injuryNameLower.includes('cornee') ||
+            injuryNameLower.includes('taie') || injuryNameLower.includes('endophtalmie') ||
+            injuryNameLower.includes('cecite') || injuryNameLower.includes('globe') ||
+            textLower.includes('acuite visuelle') || textLower.includes('cataracte') || 
+            textLower.includes('baisse de vision') || textLower.includes('oeil')) {
+            justification += "<li><strong>Acuité visuelle chiffrée</strong> de chaque œil (ex: OD 3/10, OG 8/10) avec correction optimale</li>";
+            justification += "<li><strong>Champ visuel</strong> (périmétrie Goldman ou automatisée)</li>";
+            justification += "<li>Complications : <strong>gêne ou impossibilité de porter correction</strong>, aphaquie, pseudophakie</li>";
+            justification += "<li>Examen ophtalmologique complet (fond d'œil, tonus oculaire)</li>";
+            justification += "<li>Retentissement sur activités quotidiennes (lecture, conduite, reconnaissance visages)</li>";
+        }
+        // 👂 AUDITION (surdité, audiométrie, décibels)
+        else if (injuryNameLower.includes('auditive') || injuryNameLower.includes('surdite') || 
+                 injuryNameLower.includes('audiometrie') || textLower.includes('audition') || textLower.includes('surdite')) {
+            justification += "<li><strong>Audiométrie tonale</strong> : perte en décibels (dB) pour chaque fréquence (500, 1000, 2000, 4000 Hz)</li>";
+            justification += "<li><strong>Audiométrie vocale</strong> : pourcentage d'intelligibilité</li>";
+            justification += "<li>Acouphènes : intensité (échelle EVA), fréquence, retentissement sur sommeil</li>";
+            justification += "<li>Appareillage auditif : efficacité, tolérance</li>";
+            justification += "<li>Retentissement professionnel et social (communication)</li>";
+        }
+        // 🦴 ARTICULATIONS (raideur, ankylose, mobilité)
+        else if (injuryNameLower.includes('raideur') || injuryNameLower.includes('ankylose') || 
+                 injuryNameLower.includes('fracture') || injuryNameLower.includes('arthrose') ||
+                 textLower.includes('flexion') || textLower.includes('extension') || textLower.includes('abduction')) {
+            justification += "<li><strong>Amplitudes articulaires mesurées</strong> (goniomètre) : flexion, extension, abduction, rotation</li>";
+            justification += "<li><strong>Cotation douleur</strong> (échelle EVA 0-10) : repos vs mouvement</li>";
+            justification += "<li><strong>Testing musculaire</strong> (force 0-5) : muscles agonistes/antagonistes</li>";
+            justification += "<li><strong>Périmètres membres</strong> (amyotrophie en cm par rapport au côté sain)</li>";
+            justification += "<li>Imagerie récente (RX, TDM, IRM si nécessaire) : cal vicieux, arthrose, lésions associées</li>";
+            justification += "<li>Retentissement fonctionnel : périmètre de marche, port de charges, autonomie AVQ</li>";
+        }
+        // 🧠 NEUROLOGIQUE (paralysie, déficit sensitif)
+        else if (injuryNameLower.includes('paralysie') || injuryNameLower.includes('nerf') || 
+                 injuryNameLower.includes('paresthesie') || textLower.includes('deficit moteur') || textLower.includes('deficit sensitif')) {
+            justification += "<li><strong>Testing musculaire analytique</strong> (cotation 0-5) : muscles déficitaires précis</li>";
+            justification += "<li><strong>Déficit sensitif</strong> : territoires atteints, hypoesthésie/anesthésie</li>";
+            justification += "<li>Électromyogramme (EMG) : atteinte axonale/myélinique, dénervation active/chronique</li>";
+            justification += "<li>Troubles trophiques : amyotrophie, troubles sudation, cyanose</li>";
+            justification += "<li>Retentissement fonctionnel : préhension, marche, équilibre</li>";
+        }
+        // 🫁 RESPIRATOIRE (thorax, côtes, poumon)
+        else if (injuryNameLower.includes('thorax') || injuryNameLower.includes('cote') || 
+                 injuryNameLower.includes('poumon') || injuryNameLower.includes('respiratoire')) {
+            justification += "<li><strong>Épreuves fonctionnelles respiratoires (EFR)</strong> : VEMS, CVF, rapport VEMS/CVF</li>";
+            justification += "<li>Dyspnée d'effort : classification NYHA ou échelle mMRC (0-4)</li>";
+            justification += "<li>Radiographie thoracique : séquelles pleurales, déformations pariétales</li>";
+            justification += "<li>Retentissement sur activités physiques : périmètre de marche, montée escaliers</li>";
+        }
+        // 💚 VISCÉRAL (foie, rate, rein, vessie)
+        else if (injuryNameLower.includes('foie') || injuryNameLower.includes('rate') || 
+                 injuryNameLower.includes('rein') || injuryNameLower.includes('vessie') || injuryNameLower.includes('urinaire')) {
+            justification += "<li><strong>Examens biologiques</strong> : fonction rénale (créatinine, DFG), bilan hépatique</li>";
+            justification += "<li>Échographie/TDM abdomino-pelvienne : séquelles parenchymateuses</li>";
+            justification += "<li>Troubles mictionnels : incontinence, dysurie, pollakiurie (fréquence, retentissement)</li>";
+            justification += "<li>Retentissement sur qualité de vie</li>";
+        }
+        // 🧬 GÉNÉRIQUE (par défaut)
+        else {
+            justification += "<li>Amplitudes articulaires mesurées (goniomètre)</li>";
+            justification += "<li>Cotation douleur (échelle EVA 0-10)</li>";
+            justification += "<li>Testing musculaire (force 0-5)</li>";
+            justification += "<li>Périmètres membres (amyotrophie)</li>";
+            justification += "<li>Imagerie récente (RX, TDM, IRM si nécessaire)</li>";
+            justification += "<li>Retentissement professionnel précis</li>";
+        }
+        
         justification += "</ul>";
     }
 
@@ -2282,6 +2585,16 @@ export const findCandidateInjuries = (text: string, externalKeywords?: string[])
                     return bonus;
                 }, 0);
                 currentScore += specificityBonus;
+                
+                // 👁️ MEGA BONUS pour correspondance EXACTE de pathologies spécifiques (cataracte, glaucome, uvéite, etc.)
+                const specificPathologies = ['cataracte', 'glaucome', 'uveit', 'endophtalmie', 'atrophie optique', 
+                                             'decollement', 'hemorragie', 'taie', 'pseudarthrose', 'ankylose', 
+                                             'hemiplegie', 'paraplegie', 'paralysi'];
+                specificPathologies.forEach(pathology => {
+                    if (keywords.some(userKw => userKw.includes(pathology)) && normalizedInjuryName.includes(pathology)) {
+                        currentScore += 800; // MEGA BONUS augmenté pour correspondance pathologie spécifique
+                    }
+                });
 
                 const queryBones = getBonesFromString(normalizedText);
                 const injuryBones = getBonesFromString(searchableText);
@@ -2438,6 +2751,26 @@ export const findCandidateInjuries = (text: string, externalKeywords?: string[])
     
     let filteredMatches = allMatches.filter(match => match.score >= MIN_SCORE_THRESHOLD);
     
+    // 👁️ FILTRAGE VISION : Exclure "Champ Visuel" si "acuité visuelle" ou "cataracte" mentionné
+    const mentionsAcuiteOrCataracte = 
+        normalizedText.includes('acuite') || 
+        normalizedText.includes('cataracte') ||
+        normalizedText.includes('baisse de vision') ||
+        normalizedText.includes('baisse de la vision');
+    
+    if (mentionsAcuiteOrCataracte) {
+        filteredMatches = filteredMatches.filter(match => {
+            const subcategoryName = match.path.toLowerCase();
+            // Exclure TOUTES les lésions de la section "Champ Visuel et Vision Binoculaire"
+            return !subcategoryName.includes('champ visuel');
+        });
+        
+        // Si après filtrage aucun résultat, revenir aux résultats originaux (cas rare)
+        if (filteredMatches.length === 0) {
+            filteredMatches = allMatches.filter(match => match.score >= MIN_SCORE_THRESHOLD);
+        }
+    }
+    
     // Si signes neurologiques présents (sciatalgie, paresthésie, etc.)
     if (clinicalContext.hasNeurologicalSigns) {
         // Exclure les rubriques mentionnant explicitement "sans lésion neurologique"
@@ -2497,7 +2830,31 @@ const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords?: stri
     let normalizedInputText = normalize(text);
 
     // NEW LOGIC: Check for exact match first to bypass ambiguity loop
-    const exactMatch = allInjuriesWithPaths.find(inj => normalize(inj.name) === normalizedInputText);
+    let exactMatch = allInjuriesWithPaths.find(inj => normalize(inj.name) === normalizedInputText);
+    
+    // Si pas de match exact, chercher correspondance très forte (98%+ de mots identiques)
+    if (!exactMatch) {
+        const inputWords = normalizedInputText.split(' ').filter(w => w.length > 2);
+        const potentialMatches = allInjuriesWithPaths.filter(inj => {
+            const injuryWords = normalize(inj.name).split(' ').filter(w => w.length > 2);
+            const commonWords = inputWords.filter(w => injuryWords.includes(w));
+            const similarity = commonWords.length / Math.max(inputWords.length, injuryWords.length);
+            return similarity >= 0.85; // 85%+ de similarité
+        });
+        
+        if (potentialMatches.length === 1) {
+            exactMatch = potentialMatches[0];
+        } else if (potentialMatches.length > 1) {
+            // Si plusieurs matchs possibles, prendre celui avec le plus de mots en commun
+            exactMatch = potentialMatches.reduce((best, current) => {
+                const bestWords = normalize(best.name).split(' ').filter(w => w.length > 2);
+                const currentWords = normalize(current.name).split(' ').filter(w => w.length > 2);
+                const bestCommon = inputWords.filter(w => bestWords.includes(w)).length;
+                const currentCommon = inputWords.filter(w => currentWords.includes(w)).length;
+                return currentCommon > bestCommon ? current : best;
+            });
+        }
+    }
 
     if (exactMatch) {
         const injury = exactMatch;
@@ -3064,10 +3421,171 @@ const detectPrimaryLesionWithSequelae = (text: string): {
 };
 
 /**
+ * 🧮 FORMULE DE BALTHAZAR - Calcul des IPP Cumulées
+ * 
+ * La formule de Balthazar permet de cumuler correctement plusieurs taux d'IPP
+ * en tenant compte du fait qu'on ne peut dépasser 100% d'incapacité.
+ * 
+ * Formule : IPP_total = IPP1 + IPP2 × (100 - IPP1) / 100
+ * 
+ * Exemples :
+ * - Raideur genou 15% + LCA 15% = 15 + 15×(100-15)/100 = 15 + 12.75 = 27.75% → 28%
+ * - Épaule coiffe 20% + raideur 15% = 20 + 15×(100-20)/100 = 20 + 12 = 32%
+ * - 3 lésions 10% chacune = 10 + 10×0.9 + 10×0.81 = 10 + 9 + 8.1 = 27.1% → 27%
+ * 
+ * @param rates - Tableau des taux IPP individuels (en %)
+ * @returns Taux IPP total cumulé selon Balthazar (arrondi au pourcent supérieur)
+ */
+export const calculateBalthazarIPP = (rates: number[]): number => {
+    if (rates.length === 0) return 0;
+    if (rates.length === 1) return rates[0];
+    
+    // Trier par ordre décroissant pour optimiser le calcul
+    const sortedRates = [...rates].sort((a, b) => b - a);
+    
+    // Application itérative de la formule de Balthazar
+    let totalIPP = sortedRates[0];
+    
+    for (let i = 1; i < sortedRates.length; i++) {
+        const nextRate = sortedRates[i];
+        // IPP_total = IPP_actuel + IPP_suivant × (100 - IPP_actuel) / 100
+        totalIPP = totalIPP + nextRate * (100 - totalIPP) / 100;
+    }
+    
+    // Arrondir au pourcent supérieur (pratique médico-légale)
+    return Math.ceil(totalIPP);
+};
+
+/**
+ * 🔍 DÉTECTION AUTOMATIQUE DES CUMULS DE LÉSIONS
+ * 
+ * Identifie si le texte décrit plusieurs lésions distinctes nécessitant
+ * un calcul cumulé via formule de Balthazar.
+ * 
+ * Patterns détectés :
+ * - "+" (ex: "LCA + méniscectomie")
+ * - "et" (ex: "raideur et instabilité")
+ * - Keywords cumuls : "cumul", "polytraumatisme", "plusieurs", "multiple"
+ * - États antérieurs : "état antérieur IPP X% + nouvelle lésion"
+ * 
+ * @param text - Description clinique
+ * @returns { isCumul: boolean, lesionCount: number, keywords: string[] }
+ */
+export const detectMultipleLesions = (text: string): { 
+    isCumul: boolean; 
+    lesionCount: number; 
+    keywords: string[];
+    hasAnteriorState: boolean;
+    anteriorIPP: number | null;
+} => {
+    const normalized = normalize(text);
+    
+    // 1. Keywords explicites de cumul
+    const cumulKeywords = [
+        'cumul', 'cumuler', 'polytraumatisme', 'sequelles multiples',
+        'plusieurs lesions', 'multiple', 'combiner', 'balthazar',
+        'somme', 'additionner', 'total'
+    ];
+    const foundKeywords = cumulKeywords.filter(kw => normalized.includes(kw));
+    
+    // 2. Détection état antérieur avec IPP
+    const anteriorMatch = /etat anterieur.*?ipp\s*(\d+)\s*%/i.exec(normalized);
+    const hasAnteriorState = anteriorMatch !== null;
+    const anteriorIPP = anteriorMatch ? parseInt(anteriorMatch[1]) : null;
+    
+    // 3. Comptage séparateurs de lésions
+    const plusCount = (text.match(/\s\+\s/g) || []).length;
+    const etCount = (text.match(/\set\s/gi) || []).length;
+    const virgulesCount = (text.match(/,\s*(?:avec|puis|ensuite)/gi) || []).length;
+    
+    // 4. Comptage lésions anatomiques distinctes
+    const anatomicalKeywords = [
+        'genou', 'cheville', 'epaule', 'coude', 'poignet', 'hanche',
+        'rachis', 'bassin', 'main', 'pied', 'doigt', 'orteil',
+        'lca', 'meniscectomie', 'coiffe', 'pilon', 'malleole',
+        'radius', 'cubitus', 'femur', 'tibia', 'perone'
+    ];
+    const foundAnatomical = anatomicalKeywords.filter(kw => 
+        normalized.split(/\s\+\s|\set\s/).filter(part => part.includes(kw)).length > 0
+    );
+    
+    // 5. Critères de cumul STRICTS (éviter faux positifs)
+    const isCumul = 
+        foundKeywords.length > 0 ||  // Keywords explicites type "polytraumatisme", "cumul"
+        plusCount >= 2 ||             // Au moins 2 séparateurs "+" (ex: "A + B + C")
+        (plusCount >= 1 && foundAnatomical.length >= 3) || // 1 "+" avec 3+ régions anatomiques
+        (hasAnteriorState && plusCount >= 1) || // État antérieur + au moins 1 nouvelle lésion avec "+"
+        (foundAnatomical.length >= 4);  // 4+ régions anatomiques distinctes
+    
+    // Estimation nombre de lésions
+    const lesionCount = Math.max(
+        plusCount + 1,
+        foundAnatomical.length,
+        hasAnteriorState ? 2 : 1
+    );
+    
+    return {
+        isCumul,
+        lesionCount: isCumul ? lesionCount : 1,
+        keywords: foundKeywords,
+        hasAnteriorState,
+        anteriorIPP
+    };
+};
+
+/**
  * Analyse intelligente du langage naturel avec gestion du contexte médico-légal
  */
 export const localExpertAnalysis = (text: string, externalKeywords?: string[]): LocalAnalysisResult => {
-    // Étape 0: Détection lésion primaire + séquelles fonctionnelles
+    // Étape 0A: Détection cumuls de lésions (Balthazar)
+    const cumulDetection = detectMultipleLesions(text);
+    
+    // Si cumul détecté, traitement spécial avec formule Balthazar
+    if (cumulDetection.isCumul && cumulDetection.lesionCount >= 2) {
+        // Informer l'utilisateur de la détection du cumul
+        return {
+            type: 'proposal',
+            name: `Cumul de ${cumulDetection.lesionCount} lésions (Formule de Balthazar)`,
+            rate: 0, // À calculer après évaluation de chaque lésion
+            justification: `
+                <strong>🔍 CUMUL DE LÉSIONS DÉTECTÉ</strong><br><br>
+                <strong>📊 Analyse :</strong><br>
+                • Nombre de lésions identifiées : <strong>${cumulDetection.lesionCount}</strong><br>
+                • Keywords cumuls : ${cumulDetection.keywords.length > 0 ? cumulDetection.keywords.join(', ') : 'séparateurs "+", "et"'}<br>
+                ${cumulDetection.hasAnteriorState ? `• État antérieur IPP : <strong>${cumulDetection.anteriorIPP}%</strong><br>` : ''}
+                <br>
+                <strong>📝 PROCÉDURE OBLIGATOIRE - FORMULE DE BALTHAZAR :</strong><br>
+                <div style="background:#fff3cd; padding:15px; margin:10px 0; border-left:5px solid #ffc107;">
+                1️⃣ <strong>Évaluer CHAQUE lésion séparément</strong><br>
+                   Exemple : "raideur genou flexion 100°" → 15%, "rupture LCA" → 15%<br><br>
+                2️⃣ <strong>Appliquer la formule de Balthazar</strong><br>
+                   Formule : IPP_total = IPP1 + IPP2 × (100 - IPP1) / 100<br>
+                   Exemple : 15 + 15×(100-15)/100 = 15 + 12.75 = <strong>27.75% → 28%</strong><br><br>
+                3️⃣ <strong>Pour 3+ lésions, appliquer itérativement</strong><br>
+                   Exemple 3 lésions 10% : 10 + 10×0.9 + 10×0.81 = <strong>27%</strong>
+                </div>
+                ${cumulDetection.hasAnteriorState ? `
+                <strong>⚠️ ÉTAT ANTÉRIEUR DÉTECTÉ (IPP ${cumulDetection.anteriorIPP}%) :</strong><br>
+                <div style="background:#e3f2fd; padding:15px; margin:10px 0; border-left:5px solid #2196f3;">
+                • Nouvelle lésion : Évaluer normalement<br>
+                • Imputabilité : (Taux_nouveau - Taux_ancien) + Majoration si aggravation<br>
+                • Exemple : État antérieur 10% + Nouveau 15% → Imputable : 15 - 10 = 5%, puis Balthazar si cumul avec autre lésion
+                </div>
+                ` : ''}
+                <strong>💡 RECOMMANDATION :</strong><br>
+                Décrivez chaque lésion <strong>UNE PAR UNE</strong> pour obtenir les taux individuels, puis je calculerai automatiquement le cumul Balthazar.<br><br>
+                Exemple : Saisissez d'abord "genou droit raideur flexion 100°", puis "genou droit rupture LCA".
+            `,
+            injury: {
+                name: `Cumul de ${cumulDetection.lesionCount} lésions (Formule de Balthazar)`,
+                rate: [0, 100],
+                description: `Polytraumatisme nécessitant le calcul cumulé selon la formule de Balthazar. Chaque lésion doit être évaluée séparément, puis les taux sont cumulés selon : IPP_total = IPP1 + IPP2×(100-IPP1)/100.`
+            },
+            path: 'Polytraumatisme > Cumul de lésions'
+        };
+    }
+    
+    // Étape 0B: Détection lésion primaire + séquelles fonctionnelles
     const lesionAnalysis = detectPrimaryLesionWithSequelae(text);
     
     // Si double comptabilisation détectée, utiliser description nettoyée

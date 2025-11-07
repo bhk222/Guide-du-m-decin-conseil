@@ -1,147 +1,144 @@
-const CACHE_NAME = 'at-mp-guide-cache-v42';
-const urlsToCache = [
-  // App Shell
+const CACHE_NAME = 'guide-medecin-conseil-v2-corrections-phase20';
+const DATA_CACHE_NAME = 'guide-medecin-conseil-data-v2-corrections-phase20';
+
+// Ressources essentielles à mettre en cache immédiatement
+const STATIC_CACHE_URLS = [
   '/',
   '/index.html',
   '/manifest.json',
   '/metadata.json',
-  '/index.tsx',
-  '/App.tsx',
-  '/types.ts',
-  '/css/index.css',
-  
-  // Icons
-  '/icons/icon-192x192.png',
-  '/icons/icon-512x512.png',
-  '/icons/apple-touch-icon.png',
-  
-  // Data
-  '/data/disabilityRates.ts',
-  '/data/professionalDiseases.ts',
-  '/data/civilCode.ts',
-  '/data/aldList.ts',
-  '/data/drugList.ts',
-  
-  // Services & Local AI
-  '/components/AiAnalyzer.tsx',
-  
-  // Main Components
-  '/components/GuidedCalculator.tsx',
-  '/components/ExclusiveAiCalculator.tsx',
-  '/components/AnalogCalculator.tsx',
-  '/components/LegislativeGuide.tsx',
-  '/components/ProfessionalDiseasesGuide.tsx',
-  '/components/ToolsPage.tsx',
-  '/components/BottomNav.tsx',
-  '/components/TopAppBar.tsx',
-  '/components/Login.tsx',
-  '/components/CalculationResult.tsx',
-  '/components/InjuryInfoModal.tsx',
-  '/components/CalculatorPage.tsx',
-
-  // UI Components
-  '/components/ui/Card.tsx',
-  '/components/ui/Button.tsx',
-  '/components/ui/Tabs.tsx',
-  '/components/ui/CnasLogo.tsx',
-  
-  // Tool Components
-  '/components/tools/ToolModal.tsx',
-  '/components/tools/InsulinCalculator.tsx',
-  '/components/tools/HearingDeficitCalculator.tsx',
-  '/components/tools/NorditropineCalculator.tsx',
-  '/components/tools/GfrCalculator.tsx',
-  '/components/tools/AldList.tsx',
-  '/components/tools/DrugDictionary.tsx',
-  '/components/tools/HandwritingDecipher.tsx',
-  '/components/tools/ReverseIppSearch.tsx',
-
-  // Modal Components
-  '/components/modals/SummaryModal.tsx',
-  
-  // External dependencies for offline-first experience
-  'https://cdn.tailwindcss.com',
-  'https://esm.sh/@google/genai@^1.11.0',
-  'https://esm.sh/react@^19.1.0',
-  'https://esm.sh/react@^19.1.0/jsx-runtime',
-  'https://esm.sh/react-dom@^19.1.0/client'
 ];
 
+// Installation du Service Worker
 self.addEventListener('install', event => {
+  console.log('📦 Service Worker: Installation en cours...');
+  
+  // Force le nouveau SW à remplacer l'ancien immédiatement
   self.skipWaiting();
+  
   event.waitUntil(
     caches.open(CACHE_NAME)
       .then(cache => {
-        console.log('Opened cache');
-        // Use addAll for atomic caching, but handle individual failures gracefully for debugging
-        const promises = urlsToCache.map(url => {
-            return cache.add(url).catch(err => {
-                console.warn(`Failed to cache ${url}:`, err);
-            });
-        });
-        return Promise.all(promises);
+        console.log('✅ Cache ouvert:', CACHE_NAME);
+        return cache.addAll(STATIC_CACHE_URLS);
+      })
+      .catch(error => {
+        console.error('❌ Erreur lors de la mise en cache initiale:', error);
       })
   );
 });
 
-self.addEventListener('fetch', event => {
-  if (event.request.method !== 'GET') {
-    return;
-  }
-
-  event.respondWith(
-    caches.match(event.request)
-      .then(response => {
-        // Cache hit - return response
-        if (response) {
-          return response;
-        }
-
-        // Clone the request to use it for both cache and network
-        const fetchRequest = event.request.clone();
-
-        return fetch(fetchRequest).then(
-          response => {
-            // Check if we received a valid response to cache.
-            if (!response || response.status !== 200) {
-              return response;
-            }
-            
-            // Do not cache Chrome extension requests
-            if(event.request.url.startsWith('chrome-extension://')) {
-                return response;
-            }
-
-            const responseToCache = response.clone();
-
-            caches.open(CACHE_NAME)
-              .then(cache => {
-                cache.put(event.request, responseToCache);
-              });
-
-            return response;
-          }
-        ).catch(error => {
-            console.error('Fetch failed; returning offline page instead.', error);
-            // You can return a fallback offline page here if needed
-            // For example: return caches.match('/offline.html');
-        });
-      })
-  );
-});
-
+// Activation du Service Worker
 self.addEventListener('activate', event => {
-  const cacheWhitelist = [CACHE_NAME];
+  console.log('🚀 Service Worker: Activation en cours...');
+  
   event.waitUntil(
     caches.keys().then(cacheNames => {
       return Promise.all(
         cacheNames.map(cacheName => {
-          if (cacheWhitelist.indexOf(cacheName) === -1) {
-            console.log('Deleting old cache:', cacheName);
+          // Supprimer les anciens caches
+          if (cacheName !== CACHE_NAME && cacheName !== DATA_CACHE_NAME) {
+            console.log('🗑️ Suppression de l\'ancien cache:', cacheName);
             return caches.delete(cacheName);
           }
         })
       );
-    }).then(() => self.clients.claim())
+    }).then(() => {
+      // Prendre le contrôle immédiatement
+      return self.clients.claim();
+    }).then(() => {
+      console.log('✅ Service Worker activé et en contrôle');
+    })
   );
+});
+
+// Stratégie Cache-First pour TOUT
+self.addEventListener('fetch', event => {
+  // Ignorer les requêtes non-GET
+  if (event.request.method !== 'GET') {
+    return;
+  }
+  
+  // Ignorer les requêtes Chrome extension
+  if (event.request.url.startsWith('chrome-extension://')) {
+    return;
+  }
+  
+  const url = new URL(event.request.url);
+  
+  // Stratégie Cache-First pour TOUTES les ressources
+  event.respondWith(
+    caches.match(event.request)
+      .then(cachedResponse => {
+        if (cachedResponse) {
+          // Retourner depuis le cache
+          console.log('📦 Depuis cache:', event.request.url);
+          return cachedResponse;
+        }
+        
+        // Si pas en cache, récupérer du réseau et mettre en cache
+        return fetch(event.request.clone())
+          .then(networkResponse => {
+            // Vérifier si la réponse est valide
+            if (!networkResponse || networkResponse.status !== 200 || networkResponse.type === 'error') {
+              return networkResponse;
+            }
+            
+            // Mettre en cache pour la prochaine fois
+            const responseToCache = networkResponse.clone();
+            
+            // Utiliser le cache approprié selon le type de ressource
+            const cacheName = url.pathname.startsWith('/data/') ? DATA_CACHE_NAME : CACHE_NAME;
+            
+            caches.open(cacheName)
+              .then(cache => {
+                cache.put(event.request, responseToCache);
+                console.log('💾 Mis en cache:', event.request.url);
+              });
+            
+            return networkResponse;
+          })
+          .catch(error => {
+            console.error('❌ Erreur réseau:', event.request.url, error);
+            
+            // Retourner une page offline personnalisée si disponible
+            if (event.request.mode === 'navigate') {
+              return caches.match('/index.html');
+            }
+            
+            // Pour les autres ressources, retourner une réponse vide
+            return new Response('Ressource non disponible hors ligne', {
+              status: 503,
+              statusText: 'Service Unavailable',
+              headers: new Headers({
+                'Content-Type': 'text/plain'
+              })
+            });
+          });
+      })
+  );
+});
+
+// Écouter les messages du client (pour forcer le rafraîchissement du cache)
+self.addEventListener('message', event => {
+  if (event.data && event.data.type === 'SKIP_WAITING') {
+    self.skipWaiting();
+  }
+  
+  if (event.data && event.data.type === 'CLEAR_CACHE') {
+    event.waitUntil(
+      caches.keys().then(cacheNames => {
+        return Promise.all(
+          cacheNames.map(cacheName => caches.delete(cacheName))
+        );
+      }).then(() => {
+        console.log('🗑️ Tous les caches supprimés');
+        return self.clients.matchAll();
+      }).then(clients => {
+        clients.forEach(client => {
+          client.postMessage({ type: 'CACHE_CLEARED' });
+        });
+      })
+    );
+  }
 });
