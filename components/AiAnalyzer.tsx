@@ -3683,6 +3683,26 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             priority: 95
         },
         
+        // === RÈGLES PLEXUS BRACHIAL SPÉCIFIQUES (V3.3.12) ===
+        {
+            pattern: /(?:atteinte|lésion|paralysie).*tronc\s+supérieur.*plexus\s+brachial|plexus\s+brachial.*tronc\s+supérieur/i,
+            context: /EMG|partielle|C5|C6|Duchenne|Erb|épaule|coude/i,
+            searchTerms: ['Paralysie radiculaire supérieure (Duchenne-Erb)'],
+            priority: 1002
+        },
+        {
+            pattern: /(?:atteinte|lésion|paralysie).*tronc\s+inférieur.*plexus\s+brachial|plexus\s+brachial.*tronc\s+inférieur/i,
+            context: /EMG|C8|T1|Klumpke|main|doigts|griffe/i,
+            searchTerms: ['Paralysie radiculaire inférieure (Klumpke)'],
+            priority: 1002
+        },
+        {
+            pattern: /paralysie.*complète.*plexus\s+brachial|plexus\s+brachial.*paralysie.*complète/i,
+            context: /totale|membre.*supérieur/i,
+            searchTerms: ['Paralysie complète du plexus brachial'],
+            priority: 1001
+        },
+        
         // === RÈGLES TRAUMATISMES CRÂNIENS ET NEUROLOGIQUES (V3.3.2) ===
         {
             pattern: /(?:hémiparésie|troubles?\s+cognitif|céphalées?|vertiges?)/i,
