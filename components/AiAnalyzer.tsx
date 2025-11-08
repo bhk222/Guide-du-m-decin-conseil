@@ -3740,7 +3740,13 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             negativeContext: /(?:associ[eé]|avec|et).*(?:amputation|fracture|luxation|s[eé]quelle)/i  // Désactiver si cumul détecté
         },
 
-        // === RÈGLES BRÛLURES MAINS (V3.3.3) ===
+        // === RÈGLES BRÛLURES (V3.3.3 + V3.3.17) ===
+        {
+            pattern: /brûlures?.*(?:visage|face|cou|t[eê]te)|(?:visage|face|cou|t[eê]te).*brûlures?/i,
+            context: /(?:cicatric|d[eé]figurant|esth[eé]tique|2.*3.*degr[eé]|profond|greffe|r[eé]traction|acide|chimique)/i,
+            searchTerms: ["Brûlures du visage et du cou avec cicatrices défigurantes"],
+            priority: 998
+        },
         {
             pattern: /brûlures?.*(?:main|avant.*bras|poignet)|(?:main|avant.*bras|poignet).*brûlures?/i,
             context: /(?:profondes?|2.*3.*degré|circonférentielle?|greffe|raideur.*doigt|cicatrice)/i,
@@ -4631,6 +4637,27 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
                         severityData = { level: 'élevé', signs: ['Brûlures circonférentielles avec séquelles fonctionnelles majeures'], isDefault: false };
                     } else if (severeFeatures >= 2) {
                         severityData = { level: 'moyen', signs: ['Brûlures avec séquelles fonctionnelles modérées'], isDefault: false };
+                    }
+                }
+                // CAS 2b: Brûlures du visage et du cou (V3.3.17)
+                else if (/brulures.*visage|brulures.*cou/i.test(normalize(directMatch.name))) {
+                    const severeFeatures = [
+                        /3.*degr[eé]|profondes?/i.test(normalizedInputText),
+                        /d[eé]figurant|d[eé]figuration/i.test(normalizedInputText),
+                        /greffe/i.test(normalizedInputText),
+                        /r[eé]traction/i.test(normalizedInputText),
+                        /trouble.*fonctionnel/i.test(normalizedInputText),
+                        /ectropion|entropion|microstomie|st[eé]nose/i.test(normalizedInputText),
+                        /alopécie/i.test(normalizedInputText),
+                        /trouble.*(?:anxieux|psychologique|d[eé]pres)/i.test(normalizedInputText)
+                    ].filter(Boolean).length;
+                    
+                    const hasMultipleAreas = /visage.*cou|cou.*visage|visage.*bras|bras.*visage/i.test(normalizedInputText);
+                    
+                    if (severeFeatures >= 4 || (severeFeatures >= 3 && hasMultipleAreas)) {
+                        severityData = { level: 'élevé', signs: ['Brûlures défigurantes majeures avec retentissement psychologique sévère'], isDefault: false };
+                    } else if (severeFeatures >= 2) {
+                        severityData = { level: 'moyen', signs: ['Brûlures défigurantes avec retentissement psychologique modéré'], isDefault: false };
                     }
                 }
                 // CAS 3: Atteinte nerf sciatique (V3.3.5)
