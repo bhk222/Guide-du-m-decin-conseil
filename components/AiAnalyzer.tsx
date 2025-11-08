@@ -4643,19 +4643,21 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
                 else if (/brulures.*visage|brulures.*cou/i.test(normalize(directMatch.name))) {
                     const severeFeatures = [
                         /3.*degr[eé]|profondes?/i.test(normalizedInputText),
-                        /d[eé]figurant|d[eé]figuration/i.test(normalizedInputText),
+                        /d[eé]figurant|d[eé]figuration|d[eé]formant/i.test(normalizedInputText),
                         /greffe/i.test(normalizedInputText),
                         /r[eé]traction/i.test(normalizedInputText),
                         /trouble.*fonctionnel/i.test(normalizedInputText),
                         /ectropion|entropion|microstomie|st[eé]nose/i.test(normalizedInputText),
                         /alopécie/i.test(normalizedInputText),
-                        /trouble.*(?:anxieux|psychologique|d[eé]pres)/i.test(normalizedInputText)
+                        /trouble.*(?:anxieux|psychologique|d[eé]pres)|anxieux|d[eé]pression|psychotrauma/i.test(normalizedInputText)
                     ].filter(Boolean).length;
                     
-                    const hasMultipleAreas = /visage.*cou|cou.*visage|visage.*bras|bras.*visage/i.test(normalizedInputText);
+                    const hasMultipleAreas = /visage.*cou|cou.*visage|visage.*bras|bras.*visage|cou.*bras|bras.*cou/i.test(normalizedInputText);
                     
                     if (severeFeatures >= 4 || (severeFeatures >= 3 && hasMultipleAreas)) {
                         severityData = { level: 'élevé', signs: ['Brûlures défigurantes majeures avec retentissement psychologique sévère'], isDefault: false };
+                    } else if (severeFeatures >= 2 && hasMultipleAreas) {
+                        severityData = { level: 'élevé', signs: ['Brûlures multiples avec séquelles cicatricielles déformantes et retentissement psychologique'], isDefault: false };
                     } else if (severeFeatures >= 2) {
                         severityData = { level: 'moyen', signs: ['Brûlures défigurantes avec retentissement psychologique modéré'], isDefault: false };
                     }
