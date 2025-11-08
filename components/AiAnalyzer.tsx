@@ -3683,24 +3683,33 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             priority: 95
         },
         
-        // === RÈGLES PLEXUS BRACHIAL SPÉCIFIQUES (V3.3.15) ===
+        // === RÈGLES PLEXUS BRACHIAL SPÉCIFIQUES (V3.3.16) ===
         // Note: Ces règles s'exécutent APRÈS preprocessing qui transforme "atteinte tronc supérieur" → "paralysie radiculaire supérieure Duchenne-Erb C5 C6"
         {
             pattern: /paralysie\s+radiculaire\s+sup[eé]rieure|Duchenne[-\s]?Erb|C5[-\s]?C6/i,
             context: /plexus\s+brachial|EMG|partielle?|[eé]paule|coude|bras/i,
-            searchTerms: ['Paralysie radiculaire supérieure (Duchenne-Erb)'],
+            searchTerms: [
+                'Paralysie radiculaire supérieure (Duchenne-Erb) (droite)',
+                'Paralysie radiculaire supérieure (Duchenne-Erb) (gauche)'
+            ],
             priority: 1002
         },
         {
             pattern: /paralysie\s+radiculaire\s+inf[eé]rieure|Klumpke|C8[-\s]?T1/i,
             context: /plexus\s+brachial|EMG|main|doigts|griffe/i,
-            searchTerms: ['Paralysie radiculaire inférieure (Klumpke)'],
+            searchTerms: [
+                'Paralysie radiculaire inférieure (Klumpke) (droite)',
+                'Paralysie radiculaire inférieure (Klumpke) (gauche)'
+            ],
             priority: 1002
         },
         {
             pattern: /paralysie\s+compl[eè]te.*plexus\s+brachial|plexus\s+brachial.*paralysie\s+compl[eè]te/i,
             context: /totale?|membre\s+sup[eé]rieur/i,
-            searchTerms: ['Paralysie complète du plexus brachial'],
+            searchTerms: [
+                'Paralysie complète du plexus brachial (droite)',
+                'Paralysie complète du plexus brachial (gauche)'
+            ],
             priority: 1001
         },
         
