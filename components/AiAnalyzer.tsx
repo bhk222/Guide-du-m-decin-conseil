@@ -2256,7 +2256,39 @@ const determineSeverity = (
     // 🔥 NOUVEAU : Analyse contexte clinique avancé PRIORITAIRE
     const clinicalContext = analyzeAdvancedClinicalContext(normalizedText);
     
-    // � CRITÈRE SPÉCIFIQUE AUDITION : Détection dB (décibels)
+    // 🦿 CRITÈRE SPÉCIFIQUE AMPUTATIONS : Niveau anatomique prime sur symptômes fonctionnels
+    // Pour les amputations, la sévérité est déterminée par le siège anatomique, PAS par boiterie/marche difficile
+    if (/amputation|d[eé]sarticulation/i.test(normalizedText)) {
+        // Niveau BAS (sous le genou / jambe) → FAIBLE (70%)
+        const isBelowKnee = /(?:amputation|amput[eé]).*(?:sous.*genou|jambe)|(?:sous.*genou|jambe).*(?:amputation|amput[eé])|moignon.*(?:long|bien.*appareillable)/i.test(normalizedText);
+        
+        // Niveau HAUT (cuisse/hanche/désarticulation) → ÉLEVÉ (80%)
+        const isAboveKnee = /(?:amputation|amput[eé]|d[eé]sarticulation).*(?:cuisse|hanche)|(?:cuisse|hanche).*(?:amputation|amput[eé]|d[eé]sarticulation)|moignon.*(?:tr[eè]s\s+court|court(?!\s+terme))/i.test(normalizedText);
+        
+        if (isBelowKnee) {
+            return { 
+                level: 'faible', 
+                signs: ['🦿 Amputation sous le genou (moignon long et bien appareillable)'], 
+                isDefault: false 
+            };
+        } else if (isAboveKnee) {
+            return { 
+                level: 'élevé', 
+                signs: ['🦿 Désarticulation hanche ou amputation cuisse (moignon très court)'], 
+                isDefault: false 
+            };
+        }
+        // Si siège non précisé mais appareillage satisfaisant → bon pronostic
+        if (/proth[eè]se.*(?:adapt[eé]e|fonctionnelle)|appareillage.*satisfaisant/i.test(normalizedText)) {
+            return { 
+                level: 'faible', 
+                signs: ['🦿 Amputation avec appareillage satisfaisant'], 
+                isDefault: false 
+            };
+        }
+    }
+    
+    // 🔊 CRITÈRE SPÉCIFIQUE AUDITION : Détection dB (décibels)
     const dbMatch = normalizedText.match(/(\d+)\s*(?:db|decibels)/i);
     if (dbMatch) {
         const db = parseInt(dbMatch[1]);
