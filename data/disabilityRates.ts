@@ -1293,7 +1293,7 @@ const middleCategories: InjuryCategory[] = [
         name: "Amputations",
         injuries: [
             { 
-                name: "Amputation de jambe (tiers supérieur)", 
+                name: "Amputation de jambe sous le genou (tiers supérieur)", 
                 rate: 55, 
                 description: "Amputation sous le genou au tiers supérieur (amputation jambe proximale, amputation tibiale haute) avec moignon long et bien appareillable, prothèse fonctionnelle."
             },
