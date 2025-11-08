@@ -2500,12 +2500,33 @@ const determineSeverity = (
     const hasLimitationLegere = /limitation\s+(?:legere|minime|discrete)|legere?\s+(?:raideur|limitation|gene)|gene\s+(?:legere|minime)|flexion\s+(?:90|100|110)/i.test(normalizedText);
     const hasBonneConsolidation = /bonne\s+consolidation|consolidation\s+(?:anatomique|favorable)|sans\s+(?:raccourcissement|complication)|mobilite\s+conservee/i.test(normalizedText);
 
+    // 🩺 CRITÈRE CONTEXTUEL : Analyse "impossibilité" avec contexte
+    const hasPartialImpossibility = /impossibilit[eé].*(?:port.*charges?|soulever|porter).*(?:>|plus\s+de|sup[eé]rieur)/i.test(normalizedText);
+    const hasTotalImpossibility = /impossibilit[eé].*(?:marche|d[eé]placement|debout|station|autonomie)/i.test(normalizedText);
+    
+    // 🚶 CRITÈRE CONTEXTUEL : Analyse "claudication" avec périmètre marche
+    const claudicationMatch = normalizedText.match(/claudication.*(?:apr[eè]s|à)\s*(\d+)\s*(?:m|m[eè]tres?)/i);
+    const hasClaudicationImmediate = /claudication\s+(?:imm[eé]diate|d[eè]s\s+les?\s+premiers?\s+pas|permanente)/i.test(normalizedText);
+    const hasClaudicationModerate = claudicationMatch && parseInt(claudicationMatch[1]) >= 300; // ≥300m = modéré
+    const hasClaudicationSevere = claudicationMatch && parseInt(claudicationMatch[1]) < 300; // <300m = sévère
+    
+    // 🏥 CRITÈRE CONTEXTUEL : Analyse "opéré" avec type intervention
+    const hasSimpleSurgery = /(?:discectomie|m[eé]niscectomie|arthroscopie|suture\s+simple)/i.test(normalizedText);
+    const hasComplexSurgery = /(?:arthrод[eè]se|ost[eé]osynth[eè]se|proth[eè]se|reconstruction|greffe)/i.test(normalizedText);
+    
+    // 💼 CRITÈRE CONTEXTUEL : Analyse contexte professionnel
+    const hasPhysicalJob = /(?:manutentionnaire|ouvrier|b[aâ]timent|chantier|agriculteur|m[eé]canicien)/i.test(normalizedText);
+    
     // 1️⃣ Critères quantitatifs prioritaires (EVA, limitations)
     // EVA ≥ 7 → élevé, EVA 4-6 → moyen, EVA ≤ 3 → faible
     if (painIntensity !== undefined) {
         if (painIntensity >= 7) {
             return { level: 'élevé', signs: [`EVA ${painIntensity}/10 (douleur forte)`], isDefault: false };
         } else if (painIntensity >= 4) {
+            // 🆕 EVA 4-6 + Contexte professionnel physique + Impossibilité partielle → Peut justifier MOYEN-HAUT
+            if (painIntensity === 6 && hasPhysicalJob && hasPartialImpossibility) {
+                return { level: 'moyen', signs: [`EVA ${painIntensity}/10 (douleur modérée)`, 'Contexte professionnel physique', 'Limitation capacité port charges'], isDefault: false };
+            }
             return { level: 'moyen', signs: [`EVA ${painIntensity}/10 (douleur modérée)`], isDefault: false };
         } else if (painIntensity <= 3) {
             return { level: 'faible', signs: [`EVA ${painIntensity}/10 (douleur faible)`], isDefault: false };
@@ -2554,16 +2575,38 @@ const determineSeverity = (
     let signs = severityKeywords.faible.filter(kw => normalizedText.includes(kw));
     if (signs.length > 0) return { level: 'faible', signs: [...new Set(signs)], isDefault: false };
 
-    // 3️⃣ Check for "high" keywords, but only if they are not negated
+    // 🆕 3️⃣ Analyse contextuelle AVANT détection mots-clés "élevé"
+    // Si claudication modérée (≥300m) OU impossibilité partielle (charges) OU chirurgie simple → Ne pas forcer ÉLEVÉ
+    const hasModerateContext = hasClaudicationModerate || hasPartialImpossibility || hasSimpleSurgery;
+    
+    // 3️⃣ Check for "high" keywords, but only if they are not negated AND not in moderate context
     const highSigns = severityKeywords.élevé.filter(kw => {
         if (normalizedText.includes(kw)) {
             // Build a regex to check for negation words before the keyword
             // This looks for "negation_word [optional_word] keyword"
             const regex = new RegExp(`(?:${negationWords.join('|')})\\s*(?:\\w+\\s+)?${kw}`, 'i');
-            return !regex.test(normalizedText);
+            if (regex.test(normalizedText)) return false; // Négation détectée
+            
+            // 🆕 Filtrage contextuel pour mots-clés ambigus
+            if (kw === 'impossibilite' && hasPartialImpossibility && !hasTotalImpossibility) return false; // Impossibilité partielle ≠ élevé
+            if (kw === 'claudication' && hasClaudicationModerate) return false; // Claudication modérée ≠ élevé
+            if ((kw === 'opere' || kw === 'opéré' || kw === 'operee' || kw === 'opérée') && hasSimpleSurgery && !hasComplexSurgery) return false; // Chirurgie simple ≠ élevé
+            
+            return true;
         }
         return false;
     });
+
+    // 🆕 Si signes "élevé" filtrés mais contexte modéré présent → Retourner MOYEN avec justification
+    if (hasModerateContext && highSigns.length === 0) {
+        const contextSigns = [];
+        if (hasClaudicationModerate) contextSigns.push(`Claudication après ${claudicationMatch![1]}m (périmètre marche acceptable)`);
+        if (hasPartialImpossibility) contextSigns.push('Impossibilité port charges lourdes uniquement');
+        if (hasSimpleSurgery) contextSigns.push('Chirurgie standard (discectomie/arthroscopie)');
+        if (hasPhysicalJob) contextSigns.push('⚠️ Contexte professionnel physique (majoration légitime)');
+        
+        return { level: 'moyen', signs: contextSigns, isDefault: false };
+    }
 
     if (highSigns.length > 0) return { level: 'élevé', signs: [...new Set(highSigns)], isDefault: false };
     
