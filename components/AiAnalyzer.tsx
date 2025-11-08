@@ -2256,6 +2256,41 @@ const determineSeverity = (
     // 🔥 NOUVEAU : Analyse contexte clinique avancé PRIORITAIRE
     const clinicalContext = analyzeAdvancedClinicalContext(normalizedText);
     
+    // ⚽ CRITÈRE SPÉCIFIQUE CONTEXTE SPORTIF/PROFESSIONNEL : Impossibilité reprise activité → ÉLEVÉ
+    const hasSportContext = /footballeur|sportif|athl[eè]te|joueur|rugbyman|basketteur|coureur|tennismen/i.test(normalizedText);
+    const hasImpossibilityResumeActivity = /impossibilit[eé].*(?:reprendre|reprise|retour).*(?:sport|activit[eé]|jeu|comp[eé]tition)|arr[eê]t\s+(?:d[eé]finitif|sport)|fin\s+carri[eè]re|reconversion/i.test(normalizedText);
+    const hasInstabilityChronique = /instabilit[eé]\s+chronique|laxité\s+(?:chronique|permanente|r[eé]siduelle)|instabilit[eé].*malgr[eé].*r[eé][eé]ducation/i.test(normalizedText);
+    const hasFailedRehabilitation = /malgr[eé]\s+(?:r[eé][eé]ducation|kin[eé]|traitement)|[eé]chec.*r[eé][eé]ducation|r[eé][eé]ducation.*inefficace/i.test(normalizedText);
+    const hasBoiterieChronique = /boiterie(?:\s+permanente|\s+chronique|\s+persistante)?|claudication(?:\s+permanente|\s+chronique)?/i.test(normalizedText);
+    
+    // Combinaison SPORT + IMPOSSIBILITÉ REPRISE + INSTABILITÉ → ÉLEVÉ (haut de fourchette)
+    if (hasSportContext && hasImpossibilityResumeActivity && (hasInstabilityChronique || hasBoiterieChronique)) {
+        return {
+            level: 'élevé',
+            signs: [
+                '⚽ Contexte sportif professionnel/intensif',
+                '⚠️ Impossibilité définitive de reprendre le sport',
+                hasInstabilityChronique ? 'Instabilité chronique malgré rééducation' : 'Boiterie permanente',
+                '🚫 Perte capacité fonctionnelle majeure pour activité principale'
+            ],
+            isDefault: false
+        };
+    }
+    
+    // INSTABILITÉ CHRONIQUE + ÉCHEC RÉÉDUCATION → ÉLEVÉ (même sans contexte sportif)
+    if (hasInstabilityChronique && hasFailedRehabilitation && hasBoiterieChronique) {
+        return {
+            level: 'élevé',
+            signs: [
+                '⚠️ Instabilité chronique séquellaire',
+                'Échec rééducation → Caractère définitif',
+                'Boiterie permanente',
+                'Retentissement fonctionnel majeur'
+            ],
+            isDefault: false
+        };
+    }
+    
     // 🦿 CRITÈRE SPÉCIFIQUE AMPUTATIONS : Niveau anatomique prime sur symptômes fonctionnels
     // Pour les amputations, la sévérité est déterminée par le siège anatomique, PAS par boiterie/marche difficile
     if (/amputation|d[eé]sarticulation/i.test(normalizedText)) {
@@ -2390,15 +2425,22 @@ const determineSeverity = (
         élevé: [
             // Impossibilité et perte fonction totale
             'impossible', 'impossibilite', 'impotence', 'incapacite totale',
+            // 🆕 Contexte sportif/professionnel
+            'arret definitif', 'fin carriere', 'reconversion professionnelle',
+            'impossibilite reprendre sport', 'impossibilite reprise', 'sport impossible',
+            'activite impossible', 'retour impossible',
             // Intensité forte
             'severe', 'sevère', 'majeur', 'majeure', 'grave', 'important', 'importante', 'considerable',
             'intense', 'tres douloureux', 'tres important',
             // Persistance et chronicité
             'persistante', 'permanent', 'chronique severe', 'invalidant',
+            // 🆕 Échec thérapeutique
+            'malgre reeducation', 'echec reeducation', 'reeducation inefficace',
+            'malgre kine', 'malgre traitement', 'sans amelioration',
             // Signes objectifs graves
-            'instabilite', 'instabilité', 'laxite importante', 'derobement',
+            'instabilite', 'instabilité', 'instabilite chronique', 'laxite importante', 'derobement',
             'raideur severe', 'raideur importante', 'ankylose',
-            'boiterie', 'claudication', 'marche impossible',
+            'boiterie', 'boiterie permanente', 'claudication', 'marche impossible',
             'paralysie', 'parésie', 'deficit moteur',
             // Interventions lourdes
             'chirurgie', 'opere', 'opéré', 'operee', 'opérée', 'intervention',
@@ -3690,6 +3732,20 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             priority: 95
         },
         
+        // === RÈGLE FRACTURE POUTEAU-COLLES (V3.3.26) ===
+        // Pouteau-Colles = fracture spécifique extrémité inférieure radius (poignet)
+        {
+            pattern: /Pouteau[-\s]?Colles/i,
+            context: /poignet|radius|chute|fracture/i,
+            searchTerms: [
+                'Fracture de l\'extrémité inférieure du radius - Avec limitation des mouvements (Main Dominante)',
+                'Fracture de l\'extrémité inférieure du radius - Avec limitation des mouvements (Main Non Dominante)',
+                'Fracture de l\'extrémité inférieure du radius - Avec raideur, déformation et troubles nerveux (Main Dominante)',
+                'Fracture de l\'extrémité inférieure du radius - Avec raideur, déformation et troubles nerveux (Main Non Dominante)'
+            ],
+            priority: 1005
+        },
+        
         // === RÈGLES PLEXUS BRACHIAL SPÉCIFIQUES (V3.3.16) ===
         // Note: Ces règles s'exécutent APRÈS preprocessing qui transforme "atteinte tronc supérieur" → "paralysie radiculaire supérieure Duchenne-Erb C5 C6"
         {
@@ -4913,8 +4969,19 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
         normalizedInputText.includes('coude') ? 'coude' :
         normalizedInputText.includes('poignet') ? 'poignet' : null;
     
+    // 🆕 DÉTECTION ENTRÉE BARÈME SPÉCIFIQUE (V3.3.24)
+    // Si le texte correspond à une entrée précise du barème (ex: sélection utilisateur), ne pas redemander
+    const isSpecificBaremeEntry = allInjuriesWithPaths.some(inj => {
+        const normName = normalize(inj.name);
+        // Check si 90%+ des mots du nom de lésion sont présents dans le texte
+        const injuryWords = normName.split(' ').filter(w => w.length > 2);
+        const matchingWords = injuryWords.filter(w => normalizedInputText.includes(w));
+        return matchingWords.length / injuryWords.length >= 0.9;
+    });
+    
     // Si fracture consolidée + séquelles fonctionnelles → IGNORER le module d'ambiguïté fracture
-    const shouldSkipFractureAmbiguity = hasConsolidationContext && hasSequelaKeywords;
+    // OU si entrée barème spécifique détectée (l'utilisateur a déjà choisi)
+    const shouldSkipFractureAmbiguity = (hasConsolidationContext && hasSequelaKeywords) || isSpecificBaremeEntry;
     
     if (isFractureQuery && queryBones.size === 1 && !shouldSkipFractureAmbiguity) {
         const bone = Array.from(queryBones)[0];
@@ -4940,6 +5007,17 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
                     filteredFractures = uniqueFractures.filter(f => 
                         !/(consolidation\s+parfaite|bonne\s+consolidation|sans\s+trouble)/i.test(normalize(f.name))
                     );
+                }
+                
+                // 🆕 Si "pas de raideur" / "sans raideur" → exclure entrées avec raideur (V3.3.25)
+                if (/(pas\s+de|sans)\s+(raideur|limitation|gene)/i.test(normalizedInputText)) {
+                    filteredFractures = uniqueFractures.filter(f => {
+                        const fname = normalize(f.name);
+                        // Garder seulement celles explicitement "sans raideur" ET sans features problématiques
+                        const hasSansRaideur = /sans\s+raideur/i.test(fname);
+                        const hasProblematicFeatures = /(cal\s+saillant|double|difforme|compression)/i.test(fname);
+                        return hasSansRaideur && !hasProblematicFeatures;
+                    });
                 }
                 
                 // Si "consolidation parfaite" mentionnée → exclure "cal vicieux"
@@ -4985,10 +5063,11 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
                     }
                 }
                 
+                // 🆕 V3.3.25: Retourner filteredFractures au lieu de uniqueFractures
                 return {
                     type: 'ambiguity',
                     text: `Votre description "${text.trim()}" est générale. Une fracture de l'os "${bone}" peut correspondre à plusieurs localisations (ex: diaphyse, extrémité articulaire). Laquelle correspond le mieux à l'état du patient ?`,
-                    choices: uniqueFractures
+                    choices: filteredFractures.length > 0 ? filteredFractures : uniqueFractures
                 };
             }
         }
@@ -5045,7 +5124,50 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
         const allCandidates = [finalCandidate, ...similarCandidates];
         const topPart = finalCandidate.path.split('>')[1]?.trim();
         if (topPart && allCandidates.every(c => c.path.split('>')[1]?.trim() === topPart)) {
-            const choices = [...new Map(allCandidates.map(item => [item.injury.name, item.injury])).values()];
+            let choices = [...new Map(allCandidates.map(item => [item.injury.name, item.injury])).values()];
+            
+            // 🆕 V3.3.25: Filtrage intelligent des choix selon description utilisateur
+            const normalizedInput = normalize(text);
+            
+            // Si "pas de raideur" / "sans raideur" → Filtrer les options
+            if (/(pas\s+de|sans)\s+(raideur|limitation|gene)/i.test(normalizedInput)) {
+                const filteredChoices = choices.filter(c => {
+                    const cname = normalize(c.name);
+                    // Exclure toutes les options avec raideur SAUF celles explicitement "sans raideur"
+                    const hasSansRaideur = /sans\s+raideur/i.test(cname);
+                    const hasAvecRaideur = /(avec\s+raideur|cal\s+saillant.*raideur|raideurs\s+des\s+epaules)/i.test(cname);
+                    const hasProblematicFeatures = /(cal\s+saillant|double|difforme|compression)/i.test(cname);
+                    
+                    // Garder seulement si "sans raideur" ET pas de features problématiques
+                    return hasSansRaideur && !hasProblematicFeatures;
+                });
+                if (filteredChoices.length > 0) {
+                    choices = filteredChoices;
+                }
+            }
+            
+            // Si "cal vicieux" / "cal saillant" → Garder seulement les entrées avec cal
+            if (/(cal\s+vicieux|cal\s+saillant)/i.test(normalizedInput)) {
+                const filteredChoices = choices.filter(c => {
+                    const cname = normalize(c.name);
+                    return /cal\s+(vicieux|saillant|difforme)/i.test(cname);
+                });
+                if (filteredChoices.length > 0) {
+                    choices = filteredChoices;
+                }
+            }
+            
+            // Si "compression" / "troubles nerveux" → Garder seulement les entrées neurologiques
+            if (/(compression|trouble.*nerveux|nevralgie)/i.test(normalizedInput)) {
+                const filteredChoices = choices.filter(c => {
+                    const cname = normalize(c.name);
+                    return /(compression|nerveu)/i.test(cname);
+                });
+                if (filteredChoices.length > 0) {
+                    choices = filteredChoices;
+                }
+            }
+            
             if (choices.length > 1 && choices.length <= 5) { // Maximum 5 choix
                 return {
                     type: 'ambiguity',
@@ -5080,8 +5202,78 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
     const { rom, occupationalConstraints, familiarExpressions, cleanedText: textWithoutArticular } = 
         extractArticularAndOccupational(textWithoutTemporal);
     
-    // Détermination sévérité avec critères quantitatifs prioritaires (v2.7: ajout shortening)
-    const severityInfo = determineSeverity(textWithoutArticular, painIntensity, functionalLimitation, shortening);
+    // 🆕 CAS SPÉCIAL CATARACTE: Calcul basé sur acuité visuelle mesurée (V3.3.23)
+    let severityInfo: { level: string; signs: string[]; isDefault: boolean };
+    
+    if (/cataracte/i.test(normalize(injury.name))) {
+        // Extraction acuités visuelles OD et OG
+        const odMatch = /od\s*[:\s]*(\d+)\s*\/\s*(\d+)/i.exec(normalizedInputText);
+        const ogMatch = /og\s*[:\s]*(\d+)\s*\/\s*(\d+)/i.exec(normalizedInputText);
+        
+        if (odMatch || ogMatch) {
+            const odAcuity = odMatch ? parseInt(odMatch[1]) / parseInt(odMatch[2]) : 1.0;
+            const ogAcuity = ogMatch ? parseInt(ogMatch[1]) / parseInt(ogMatch[2]) : 1.0;
+            const worstEye = Math.min(odAcuity, ogAcuity);
+            const bestEye = Math.max(odAcuity, ogAcuity);
+            
+            // Classification sévérité selon barème cataracte
+            if (worstEye < 0.3) {
+                // <3/10 sur œil le plus atteint → ÉLEVÉ (100%)
+                severityInfo = {
+                    level: 'élevé',
+                    signs: [
+                        `Acuité visuelle OD: ${odMatch ? odMatch[0].toUpperCase() : '10/10'} (${(odAcuity * 10).toFixed(1)}/10)`,
+                        `Acuité visuelle OG: ${ogMatch ? ogMatch[0].toUpperCase() : '10/10'} (${(ogAcuity * 10).toFixed(1)}/10)`,
+                        `Œil le plus atteint: ${(worstEye * 10).toFixed(1)}/10 (<3/10 = déficience visuelle sévère)`,
+                        `Retentissement majeur sur autonomie et activités quotidiennes`
+                    ],
+                    isDefault: false
+                };
+            } else if (bestEye >= 0.8 && worstEye >= 0.5) {
+                // Meilleur œil ≥8/10 ET pire œil ≥5/10 → FAIBLE (15-20%)
+                severityInfo = {
+                    level: 'faible',
+                    signs: [
+                        `Acuité visuelle OD: ${odMatch ? odMatch[0].toUpperCase() : '10/10'} (${(odAcuity * 10).toFixed(1)}/10)`,
+                        `Acuité visuelle OG: ${ogMatch ? ogMatch[0].toUpperCase() : '10/10'} (${(ogAcuity * 10).toFixed(1)}/10)`,
+                        `Meilleur œil: ${(bestEye * 10).toFixed(1)}/10 (≥8/10)`,
+                        `Vision binoculaire fonctionnelle préservée, gêne minime`
+                    ],
+                    isDefault: false
+                };
+            } else if (worstEye >= 0.8 && bestEye >= 0.8) {
+                // Les deux yeux ≥8/10 → TRÈS FAIBLE (10%)
+                severityInfo = {
+                    level: 'faible',
+                    signs: [
+                        `Acuité visuelle OD: ${odMatch ? odMatch[0].toUpperCase() : '10/10'} (${(odAcuity * 10).toFixed(1)}/10)`,
+                        `Acuité visuelle OG: ${ogMatch ? ogMatch[0].toUpperCase() : '10/10'} (${(ogAcuity * 10).toFixed(1)}/10)`,
+                        `Vision bilatérale excellente (≥8/10 aux deux yeux)`,
+                        `Impact fonctionnel négligeable`
+                    ],
+                    isDefault: false
+                };
+            } else {
+                // Cas intermédiaires (3-7/10) → MOYEN (55%)
+                severityInfo = {
+                    level: 'moyen',
+                    signs: [
+                        `Acuité visuelle OD: ${odMatch ? odMatch[0].toUpperCase() : '10/10'} (${(odAcuity * 10).toFixed(1)}/10)`,
+                        `Acuité visuelle OG: ${ogMatch ? ogMatch[0].toUpperCase() : '10/10'} (${(ogAcuity * 10).toFixed(1)}/10)`,
+                        `Déficience visuelle modérée (acuité entre 3/10 et 7/10)`,
+                        `Retentissement fonctionnel significatif sur précision visuelle`
+                    ],
+                    isDefault: false
+                };
+            }
+        } else {
+            // Pas d'acuité mesurée → utiliser determineSeverity par défaut
+            severityInfo = determineSeverity(textWithoutArticular, painIntensity, functionalLimitation, shortening);
+        }
+    } else {
+        // Autre lésion → Détermination sévérité standard (v2.7: ajout shortening)
+        severityInfo = determineSeverity(textWithoutArticular, painIntensity, functionalLimitation, shortening);
+    }
     
     if (Array.isArray(injury.rate)) {
         const [min, max] = injury.rate;
@@ -5093,7 +5285,15 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
         }
         
         // Enrichissement justification avec données temporelles et contexte demande
-        let justification = buildExpertJustification(text, injury, chosenRate, path, severityInfo.level, severityInfo.signs, severityInfo.isDefault);
+        let justification = buildExpertJustification(
+            text, 
+            injury, 
+            chosenRate, 
+            path, 
+            severityInfo.level as "moyen" | "faible" | "élevé" | "fixe", 
+            severityInfo.signs, 
+            severityInfo.isDefault
+        );
         
         // 🆕 Section contexte médico-légal (v2.5)
         if (requestType === 'revision') {

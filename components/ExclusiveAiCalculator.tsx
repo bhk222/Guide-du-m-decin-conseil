@@ -3,6 +3,7 @@ import { SelectedInjury, Injury } from '../types';
 import { localExpertAnalysis, LocalAnalysisResult } from './AiAnalyzer';
 import { Card } from './ui/Card';
 import { Button } from './ui/Button';
+import { HistoryModal, saveToHistory } from './HistoryModal';
 
 // --- TYPES ---
 interface Proposal {
@@ -112,6 +113,7 @@ export const ExclusiveAiCalculator: React.FC<ExclusiveAiCalculatorProps> = ({
     ]);
     const [userInput, setUserInput] = useState('');
     const [isLoading, setIsLoading] = useState(false);
+    const [isHistoryOpen, setIsHistoryOpen] = useState(false);
     const analysisQueueRef = useRef<string[]>([]);
     const messagesEndRef = useRef<HTMLDivElement>(null);
     
@@ -205,13 +207,29 @@ export const ExclusiveAiCalculator: React.FC<ExclusiveAiCalculatorProps> = ({
         ));
 
         if (accepted) {
-            onAddInjury({
+            const selectedInjury = {
                 ...respondedProposal.injury,
                 id: `ai-${crypto.randomUUID()}`,
                 chosenRate: respondedProposal.rate,
                 category: respondedProposal.path,
                 justification: respondedProposal.justification,
-            });
+            };
+            
+            onAddInjury(selectedInjury);
+            
+            // Sauvegarder dans l'historique
+            saveToHistory(
+                'ia-exclusive',
+                respondedProposal.name,
+                [{
+                    name: respondedProposal.name,
+                    rate: respondedProposal.rate,
+                    path: respondedProposal.path
+                }],
+                respondedProposal.rate,
+                victimInfo
+            );
+            
             setTimeout(() => {
                 processQueueOrPrompt();
             }, 500);
@@ -336,39 +354,62 @@ export const ExclusiveAiCalculator: React.FC<ExclusiveAiCalculatorProps> = ({
     }, [isLoading, processAndDisplayAnalysis, selectedInjuries, totalRate, hasPreexisting, messages, onAddInjury, processQueueOrPrompt]);
     
     return (
-        <Card className="flex flex-col h-full">
-            <div className="flex-1 overflow-y-auto custom-scrollbar p-2 space-y-4 bg-slate-100 rounded-lg min-h-[400px]">
-                {messages.map((msg) => (
-                    <MessageBubble 
-                        key={msg.id} 
-                        message={msg} 
-                        onAccept={() => handleProposalResponse(msg.id, true)} 
-                        onReject={() => handleProposalResponse(msg.id, false)}
-                        onChoiceSelect={(choiceText) => handleSend(choiceText, true)}
-                    />
-                ))}
-                {isLoading && <TypingIndicator />}
-                <div ref={messagesEndRef}></div>
-            </div>
-            <div className="mt-4 pt-4 border-t border-slate-200">
-                <div className="flex items-start gap-2">
-                    <textarea
-                        value={userInput}
-                        onChange={(e) => setUserInput(e.target.value)}
-                        onKeyPress={(e) => {if(e.key === 'Enter' && !e.shiftKey) {e.preventDefault(); handleSend(userInput);}}}
-                        placeholder="Décrivez les séquelles ou demandez le calcul..."
-                        className="flex-1 w-full p-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary-500/50 text-black placeholder:text-slate-400 bg-white resize-none"
-                        aria-label="Décrire les séquelles cliniques ou demander le calcul"
-                        disabled={isLoading}
-                        rows={3}
-                    />
-                    <Button onClick={() => handleSend(userInput)} disabled={isLoading || !userInput.trim()} className="!p-3 self-stretch">
-                        <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+        <>
+            <Card className="flex flex-col h-full">
+                {/* Header avec bouton historique */}
+                <div className="flex items-center justify-between mb-2 pb-2 border-b border-slate-200">
+                    <h3 className="text-sm font-semibold text-slate-700">Chat Expert IA</h3>
+                    <button
+                        onClick={() => setIsHistoryOpen(true)}
+                        className="flex items-center gap-2 px-3 py-1.5 text-xs font-medium text-primary-700 bg-primary-50 hover:bg-primary-100 rounded-lg transition-colors"
+                        title="Voir l'historique des calculs"
+                    >
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
-                    </Button>
+                        Historique
+                    </button>
                 </div>
-            </div>
-        </Card>
+                
+                <div className="flex-1 overflow-y-auto custom-scrollbar p-2 space-y-4 bg-slate-100 rounded-lg min-h-[400px]">
+                    {messages.map((msg) => (
+                        <MessageBubble 
+                            key={msg.id} 
+                            message={msg} 
+                            onAccept={() => handleProposalResponse(msg.id, true)} 
+                            onReject={() => handleProposalResponse(msg.id, false)}
+                            onChoiceSelect={(choiceText) => handleSend(choiceText, true)}
+                        />
+                    ))}
+                    {isLoading && <TypingIndicator />}
+                    <div ref={messagesEndRef}></div>
+                </div>
+                <div className="mt-4 pt-4 border-t border-slate-200">
+                    <div className="flex items-start gap-2">
+                        <textarea
+                            value={userInput}
+                            onChange={(e) => setUserInput(e.target.value)}
+                            onKeyPress={(e) => {if(e.key === 'Enter' && !e.shiftKey) {e.preventDefault(); handleSend(userInput);}}}
+                            placeholder="Décrivez les séquelles ou demandez le calcul..."
+                            className="flex-1 w-full p-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary-500/50 text-black placeholder:text-slate-400 bg-white resize-none"
+                            aria-label="Décrire les séquelles cliniques ou demander le calcul"
+                            disabled={isLoading}
+                            rows={3}
+                        />
+                        <Button onClick={() => handleSend(userInput)} disabled={isLoading || !userInput.trim()} className="!p-3 self-stretch">
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+                            </svg>
+                        </Button>
+                    </div>
+                </div>
+            </Card>
+            
+            <HistoryModal 
+                isOpen={isHistoryOpen}
+                onClose={() => setIsHistoryOpen(false)}
+                calculatorType="ia-exclusive"
+            />
+        </>
     );
 };

@@ -3,6 +3,7 @@ import { SelectedInjury, Injury } from '../types';
 import { disabilityData } from '../data/disabilityRates';
 import { Card } from './ui/Card';
 import { Button } from './ui/Button';
+import { HistoryModal, saveToHistory } from './HistoryModal';
 
 // --- Types ---
 interface LesionState {
@@ -134,6 +135,7 @@ export const GuidedCalculator: React.FC<GuidedCalculatorProps> = ({
     onAccidentTypeChange
 }) => {
     const [lesions, setLesions] = useState<LesionState[]>([{ id: crypto.randomUUID(), siege: '', partieCorps: '', siegePrecis: '', severity: null, selectedInjury: null }]);
+    const [isHistoryOpen, setIsHistoryOpen] = useState(false);
 
     const handleVictimInfoChange = (field: keyof typeof victimInfo, value: string) => {
         onVictimInfoChange({ ...victimInfo, [field]: value });
@@ -198,12 +200,27 @@ export const GuidedCalculator: React.FC<GuidedCalculatorProps> = ({
                 }
 
                 if (isComplete) {
+                    const category = `${siege} > ${partieCorps}${siegePrecis ? ` (${siegePrecis})` : ''}`;
+                    
                     onAddInjury({
                         ...selectedInjury,
                         id: id,
                         chosenRate: chosenRate,
-                        category: `${siege} > ${partieCorps}${siegePrecis ? ` (${siegePrecis})` : ''}`,
+                        category: category,
                     });
+                    
+                    // Sauvegarder dans l'historique
+                    saveToHistory(
+                        'guide-ia',
+                        selectedInjury.name,
+                        [{
+                            name: selectedInjury.name,
+                            rate: chosenRate,
+                            path: category
+                        }],
+                        chosenRate,
+                        victimInfo
+                    );
                 }
             }
         });
@@ -351,11 +368,27 @@ export const GuidedCalculator: React.FC<GuidedCalculatorProps> = ({
     };
 
     return (
-        <Card>
-            <div className="space-y-4">
-                {/* --- Section 1: Informations générales --- */}
-                <div>
-                    <h3 className="text-lg font-bold text-slate-800 border-b pb-2 mb-3">1. Informations sur la victime</h3>
+        <>
+            <Card>
+                {/* Header avec bouton historique */}
+                <div className="flex items-center justify-between mb-4 pb-3 border-b border-slate-200">
+                    <h2 className="text-xl font-bold text-slate-800">Calculateur Guidé</h2>
+                    <button
+                        onClick={() => setIsHistoryOpen(true)}
+                        className="flex items-center gap-2 px-3 py-2 text-sm font-medium text-primary-700 bg-primary-50 hover:bg-primary-100 rounded-lg transition-colors"
+                        title="Voir l'historique des calculs"
+                    >
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        Historique
+                    </button>
+                </div>
+                
+                <div className="space-y-4">
+                    {/* --- Section 1: Informations générales --- */}
+                    <div>
+                        <h3 className="text-lg font-bold text-slate-800 border-b pb-2 mb-3">1. Informations sur la victime</h3>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                         <Input label="Âge" type="number" value={victimInfo.age} onChange={e => handleVictimInfoChange('age', e.target.value)} placeholder="ex: 45" />
                         <Select label="Sexe" value={victimInfo.gender} onChange={e => handleVictimInfoChange('gender', e.target.value)}>
@@ -400,6 +433,13 @@ export const GuidedCalculator: React.FC<GuidedCalculatorProps> = ({
                 </div>
             </div>
         </Card>
+            
+            <HistoryModal 
+                isOpen={isHistoryOpen}
+                onClose={() => setIsHistoryOpen(false)}
+                calculatorType="guide-ia"
+            />
+        </>
     );
 };
 
