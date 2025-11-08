@@ -4690,6 +4690,33 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
                         severityData = { level: 'moyen', signs: ['Brûlures défigurantes avec retentissement psychologique modéré'], isDefault: false };
                     }
                 }
+                // CAS 2c: Cataracte avec acuité visuelle chiffrée (V3.3.21)
+                else if (/cataracte/i.test(normalize(directMatch.name))) {
+                    // Extraction des acuités visuelles OD et OG
+                    const odMatch = /od\s*[:\s]*(\d+)\s*\/\s*(\d+)/i.exec(normalizedInputText);
+                    const ogMatch = /og\s*[:\s]*(\d+)\s*\/\s*(\d+)/i.exec(normalizedInputText);
+                    
+                    if (odMatch || ogMatch) {
+                        const odAcuity = odMatch ? parseInt(odMatch[1]) / parseInt(odMatch[2]) : 1.0;
+                        const ogAcuity = ogMatch ? parseInt(ogMatch[1]) / parseInt(ogMatch[2]) : 1.0;
+                        
+                        // Calcul de la sévérité selon acuité visuelle (barème CNAS)
+                        const worstEye = Math.min(odAcuity, ogAcuity);
+                        const bestEye = Math.max(odAcuity, ogAcuity);
+                        
+                        // Critères barème: Low (≥8/10 bilatéral), Medium (3-7/10), High (<3/10)
+                        if (worstEye < 0.3 || (odAcuity < 0.3 && ogAcuity < 0.3)) {
+                            // Acuité <3/10 sur un ou deux yeux → ÉLEVÉ (proche 100%)
+                            severityData = { level: 'élevé', signs: [`Cataracte sévère: OD ${odMatch?.[1]}/${odMatch?.[2]}, OG ${ogMatch?.[1]}/${ogMatch?.[2]} - Acuité visuelle très basse (<3/10)`], isDefault: false };
+                        } else if (worstEye >= 0.8 && bestEye >= 0.8) {
+                            // Acuité ≥8/10 bilatérale → FAIBLE (proche 10%)
+                            severityData = { level: 'faible', signs: [`Cataracte légère: OD ${odMatch?.[1]}/${odMatch?.[2]}, OG ${ogMatch?.[1]}/${ogMatch?.[2]} - Acuité visuelle conservée (≥8/10)`], isDefault: false };
+                        } else {
+                            // Acuité 3-7/10 → MOYEN (proche 55%)
+                            severityData = { level: 'moyen', signs: [`Cataracte modérée: OD ${odMatch?.[1]}/${odMatch?.[2]}, OG ${ogMatch?.[1]}/${ogMatch?.[2]} - Acuité visuelle intermédiaire (3-7/10)`], isDefault: false };
+                        }
+                    }
+                }
                 // CAS 3: Atteinte nerf sciatique (V3.3.5)
                 else if (/paralysie.*nerf.*sciatique|nevralgie.*sciatique/i.test(normalize(directMatch.name))) {
                     const severityIndicators = [
