@@ -3641,6 +3641,58 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             searchTerms: ['Séquelles de méniscectomie (douleurs, hydarthrose)'],
             priority: 95
         },
+        
+        // === RÈGLES TRAUMATISMES CRÂNIENS ET NEUROLOGIQUES (V3.3.2) ===
+        {
+            pattern: /(?:hémiparésie|troubles?\s+cognitif|céphalées?|vertiges?)/i,
+            context: /(?:hémiparésie.*troubles|troubles.*hémiparésie|hémiparésie.*céphal|céphal.*hémiparésie|troubles.*céphal|céphal.*troubles|vertiges.*hémiparésie|hémiparésie.*vertiges|vertiges.*troubles|troubles.*vertiges|vertiges.*céphal|céphal.*vertiges)/is,
+            searchTerms: ["Commotion cérébro-spinale prolongée (syndrome complet)"],
+            priority: 1001
+        },
+        {
+            pattern: /hémiparésie/i,
+            context: /gauche|droite|légère|modérée|sévère|membre/i,
+            searchTerms: ["Contusions cérébrales avec signes de localisation (hémiparésie, aphasie...)"],
+            priority: 1000
+        },
+        {
+            pattern: /troubles?\s+cognitif/i,
+            context: /persistant|chronique|séquelle|traumatisme|accident|mémoire|attention|concentration/i,
+            searchTerms: ["Déficits cognitifs post-traumatiques (mémoire, attention, fonctions exécutives)"],
+            priority: 999
+        },
+        {
+            pattern: /céphalées?/i,
+            context: /chronique|persistant|post.*traumatique|fréquent/i,
+            searchTerms: ["Céphalées post-traumatiques chroniques"],
+            priority: 998,
+            negativeContext: /(?:associ[eé]|avec|et).*(?:amputation|fracture|luxation|s[eé]quelle)/i  // Désactiver si cumul détecté
+        },
+
+        // === RÈGLES BRÛLURES MAINS (V3.3.3) ===
+        {
+            pattern: /brûlures?.*(?:main|avant.*bras|poignet)|(?:main|avant.*bras|poignet).*brûlures?/i,
+            context: /(?:profondes?|2.*3.*degré|circonférentielle?|greffe|raideur.*doigt|cicatrice)/i,
+            searchTerms: ["Brûlures des mains avec séquelles fonctionnelles (Main Dominante)"],
+            priority: 997,
+            negativeContext: /non.*dominante|gauche.*droitier|main.*gauche.*droitier/i
+        },
+        
+        // === RÈGLES ATTEINTES NERVEUSES (V3.3.5) ===
+        {
+            pattern: /atteinte\s+(?:du\s+)?nerf\s+sciatique/i,
+            context: /(?:station.*debout|marche|boiterie|reconversion|paralysie|pied.*tombant|impossibilit[eé]|s[eé]v[eè]re|compl[eè]te|majeur)/i,
+            searchTerms: ["Paralysie complète du nerf sciatique"],
+            priority: 996,
+            negativeContext: /l[eé]g[eè]re|minime|mod[eé]r[eé]e(?!.*s[eé]v[eè]re)/i
+        },
+        {
+            pattern: /atteinte\s+(?:du\s+)?nerf\s+sciatique/i,
+            context: /nerf|sciatique|bassin|hanche/i,
+            searchTerms: ["Névralgie sciatique post-traumatique", "Paralysie du nerf sciatique poplité externe (SPE)", "Paralysie du nerf sciatique poplité interne (SPI)"],
+            priority: 995
+        },
+        
         {
             pattern: /amputation\s+(?:de\s+l[''])?index/i,
             context: /index|doigt/i,
@@ -4459,7 +4511,86 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             );
             
             if (directMatch) {
-                const severityData = determineSeverity(normalizedInputText);
+                // 🧠 DÉTECTION SÉVÉRITÉ SPÉCIFIQUE NEUROLOGIQUE, BRÛLURES ET ATTEINTES NERVEUSES (V3.3.2/V3.3.3/V3.3.5)
+                let severityData;
+                
+                // CAS 1: Séquelles neurologiques (V3.3.2)
+                if (/commotion.*prolongee.*syndrome|contusions.*cerebrales|deficits.*cognitifs/i.test(normalize(directMatch.name))) {
+                    const neuroSymptoms = [
+                        /hémiparésie/i.test(normalizedInputText),
+                        /troubles?\s+cognitif/i.test(normalizedInputText),
+                        /céphalées?\s+chronique/i.test(normalizedInputText),
+                        /vertiges?/i.test(normalizedInputText)
+                    ].filter(Boolean).length;
+                    
+                    const hasInvalidatingSymptoms = /(?:invalidant|sévère|résistant|majeur|quasi.*quotidien)/i.test(normalizedInputText);
+                    const hasObjectiveDeficits = /(?:hémiparésie|aphasie|troubles.*mémoire|troubles.*attention|ralentissement)/i.test(normalizedInputText);
+                    
+                    if (neuroSymptoms >= 3 || (hasInvalidatingSymptoms && hasObjectiveDeficits)) {
+                        severityData = { level: 'élevé', signs: ['Syndrome neurologique multiple et invalidant'], isDefault: false };
+                    } else if (neuroSymptoms >= 2 || hasObjectiveDeficits) {
+                        severityData = { level: 'moyen', signs: ['Syndrome neurologique modéré'], isDefault: false };
+                    }
+                }
+                // CAS 1b: Céphalées seules (détection plus conservative)
+                else if (/cephalees.*post.*traumatiques.*chroniques/i.test(normalize(directMatch.name))) {
+                    // Pour céphalées isolées, ne considérer "élevé" que si explicitement invalidantes + résistantes au traitement
+                    const isInvalidating = /(?:invalidant|sévère|résistant.*traitement|majeur)/i.test(normalizedInputText);
+                    const hasMultipleSymptoms = /(?:vertiges?|troubles|nausées)/i.test(normalizedInputText);
+                    
+                    if (isInvalidating && hasMultipleSymptoms) {
+                        severityData = { level: 'élevé', signs: ['Céphalées invalidantes résistantes au traitement'], isDefault: false };
+                    } // Sinon laisser severityData undefined pour utiliser determineSeverity standard
+                }
+                // CAS 2: Brûlures de la main (V3.3.3)
+                else if (/brulures.*mains?.*sequelles.*fonctionnelles/i.test(normalize(directMatch.name))) {
+                    const severeFeatures = [
+                        /circonférentielle?/i.test(normalizedInputText),
+                        /profondes?/i.test(normalizedInputText),
+                        /2.*3.*degr[eé]/i.test(normalizedInputText),
+                        /greffe/i.test(normalizedInputText),
+                        /raideur/i.test(normalizedInputText),
+                        /avant.*bras.*main|main.*avant.*bras/i.test(normalizedInputText),
+                        /troubles?\s+sensitif/i.test(normalizedInputText)
+                    ].filter(Boolean).length;
+                    
+                    const hasDeformity = /(?:griffe|retraction|bride|cicatrice.*vicieuse)/i.test(normalizedInputText);
+                    
+                    if (severeFeatures >= 3 || (severeFeatures >= 2 && hasDeformity)) {
+                        severityData = { level: 'élevé', signs: ['Brûlures circonférentielles avec séquelles fonctionnelles majeures'], isDefault: false };
+                    } else if (severeFeatures >= 2) {
+                        severityData = { level: 'moyen', signs: ['Brûlures avec séquelles fonctionnelles modérées'], isDefault: false };
+                    }
+                }
+                // CAS 3: Atteinte nerf sciatique (V3.3.5)
+                else if (/paralysie.*nerf.*sciatique|nevralgie.*sciatique/i.test(normalize(directMatch.name))) {
+                    const severityIndicators = [
+                        /(?:station.*debout|debout).*(?:impossible|compromise|difficile|prolongee.*impossible)|compromet.*station.*debout/i.test(normalizedInputText),
+                        /marche.*(?:impossible|compromise|difficile)|compromet.*marche/i.test(normalizedInputText),
+                        /boiterie.*(?:permanente|importante|majeure)/i.test(normalizedInputText),
+                        /reconversion.*(?:professionnelle|obligatoire)|reconversion\s+obligatoire/i.test(normalizedInputText),
+                        /pied.*tombant/i.test(normalizedInputText),
+                        /paralysie.*compl[eè]te/i.test(normalizedInputText),
+                        /(?:s[eé]v[eè]re|majeur|invalidant)/i.test(normalizedInputText)
+                    ].filter(Boolean).length;
+                    
+                    const hasMinorWording = /(?:l[eé]g[eè]re|minime)\s+atteinte/i.test(normalizedInputText);
+                    
+                    // Si c'est "Paralysie complète" dans le nom ET indicateurs fonctionnels sévères → élevé
+                    if (/paralysie.*complete/i.test(normalize(directMatch.name)) && severityIndicators >= 2) {
+                        severityData = { level: 'élevé', signs: ['Paralysie complète avec retentissement fonctionnel majeur (station debout/marche compromises)'], isDefault: false };
+                    } else if (severityIndicators >= 3) {
+                        severityData = { level: 'élevé', signs: ['Atteinte nerveuse sévère avec retentissement fonctionnel majeur'], isDefault: false };
+                    } else if (severityIndicators >= 1 && !hasMinorWording) {
+                        severityData = { level: 'moyen', signs: ['Atteinte nerveuse avec retentissement fonctionnel modéré'], isDefault: false };
+                    }
+                }
+                
+                // Si pas de sévérité spécifique détectée, utiliser la méthode standard
+                if (!severityData) {
+                    severityData = determineSeverity(normalizedInputText);
+                }
+                
                 let chosenRate: number;
                 if (Array.isArray(directMatch.rate)) {
                     const [minRate, maxRate] = directMatch.rate;
