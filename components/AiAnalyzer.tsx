@@ -2588,9 +2588,10 @@ const determineSeverity = (
             if (regex.test(normalizedText)) return false; // Négation détectée
             
             // 🆕 Filtrage contextuel pour mots-clés ambigus
-            if (kw === 'impossibilite' && hasPartialImpossibility && !hasTotalImpossibility) return false; // Impossibilité partielle ≠ élevé
-            if (kw === 'claudication' && hasClaudicationModerate) return false; // Claudication modérée ≠ élevé
-            if ((kw === 'opere' || kw === 'opéré' || kw === 'operee' || kw === 'opérée') && hasSimpleSurgery && !hasComplexSurgery) return false; // Chirurgie simple ≠ élevé
+            const normalizedKw = kw; // kw est déjà normalisé car vient de normalizedText.includes()
+            if (normalizedKw.includes('impossibilit') && hasPartialImpossibility && !hasTotalImpossibility) return false; // Impossibilité partielle ≠ élevé
+            if (normalizedKw.includes('claudication') && hasClaudicationModerate) return false; // Claudication modérée ≠ élevé
+            if ((normalizedKw.includes('opere') || normalizedKw.includes('operee') || normalizedKw.includes('intervention')) && hasSimpleSurgery && !hasComplexSurgery) return false; // Chirurgie simple ≠ élevé
             
             return true;
         }
