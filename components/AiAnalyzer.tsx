@@ -2502,7 +2502,7 @@ const determineSeverity = (
 
     // 🩺 CRITÈRE CONTEXTUEL : Analyse "impossibilité" avec contexte
     const hasPartialImpossibility = /impossibilit[eé].*(?:port|soulever|porter).*(?:charges?|poids|lourdes?)/i.test(normalizedText);
-    const hasTotalImpossibility = /impossibilit[eé].*(?:marche|d[eé]placement|debout|station|autonomie)/i.test(normalizedText);
+    const hasTotalImpossibility = /impossibilit[eé]\s+(?:de\s+(?:la\s+)?)?(?:marche|d[eé]placement|debout|station|autonomie)/i.test(normalizedText);
     
     // 🚶 CRITÈRE CONTEXTUEL : Analyse "claudication" avec périmètre marche
     const claudicationMatch = normalizedText.match(/claudication.*(?:apr[eè]s|à)\s*(\d+)\s*(?:m|m[eè]tres?)/i);
@@ -2518,19 +2518,14 @@ const determineSeverity = (
     const hasPhysicalJob = /(?:manutentionnaire|ouvrier|b[aâ]timent|chantier|agriculteur|m[eé]canicien)/i.test(normalizedText);
     
     // 1️⃣ Critères quantitatifs prioritaires (EVA, limitations)
-    // EVA ≥ 7 → élevé, EVA 4-6 → moyen, EVA ≤ 3 → faible
+    // EVA ≥ 7 → élevé (RETOUR IMMÉDIAT), EVA 4-6 → moyen (mais peut être overridé par mots-clés), EVA ≤ 3 → faible (RETOUR IMMÉDIAT)
     if (painIntensity !== undefined) {
         if (painIntensity >= 7) {
             return { level: 'élevé', signs: [`EVA ${painIntensity}/10 (douleur forte)`], isDefault: false };
-        } else if (painIntensity >= 4) {
-            // 🆕 EVA 4-6 + Contexte professionnel physique + Impossibilité partielle → Peut justifier MOYEN-HAUT
-            if (painIntensity === 6 && hasPhysicalJob && hasPartialImpossibility) {
-                return { level: 'moyen', signs: [`EVA ${painIntensity}/10 (douleur modérée)`, 'Contexte professionnel physique', 'Limitation capacité port charges'], isDefault: false };
-            }
-            return { level: 'moyen', signs: [`EVA ${painIntensity}/10 (douleur modérée)`], isDefault: false };
         } else if (painIntensity <= 3) {
             return { level: 'faible', signs: [`EVA ${painIntensity}/10 (douleur faible)`], isDefault: false };
         }
+        // EVA 4-6 : Ne pas retourner immédiatement, laisser les mots-clés décider (peuvent overrider en élevé)
     }
     
     // Limitation fonctionnelle > 60% → élevé, 30-60% → moyen, < 30% → faible
