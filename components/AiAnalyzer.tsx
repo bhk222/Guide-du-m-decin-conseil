@@ -9,6 +9,7 @@ export interface LocalProposal {
   justification: string;
   path: string;
   injury: Injury;
+  isCumul?: boolean;  // 🆕 Flag pour indiquer si un cumul de lésions est détecté
 }
 
 export interface NoResult {
@@ -4610,18 +4611,46 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
                     chosenRate = directMatch.rate;
                 }
                 
+                // 🆕 V3.3.5: Vérification cumul AVANT de retourner
+                // Si cumul détecté (os + nerf), enrichir la justification et signaler
+                const cumulCheck = detectMultipleLesions(text);
+                let finalJustification = buildExpertJustification(
+                    text, directMatch as Injury, chosenRate, directMatch.path,
+                    severityData.level,
+                    severityData.signs,
+                    severityData.isDefault
+                );
+                
+                // Si cumul détecté, ajouter warning Balthazard dans la justification
+                if (cumulCheck.isCumul && cumulCheck.lesionCount >= 2) {
+                    // Extraire les mots-clés de lésions osseuses du texte
+                    const boneKeywords = ['fracture', 'luxation', 'disjonction', 'tassement'];
+                    const boneMatches = boneKeywords.filter(kw => normalize(text).includes(kw));
+                    const boneContext = boneMatches.length > 0 
+                        ? `<br>💀 <strong>Lésion osseuse détectée</strong> : ${text.match(new RegExp(`(${boneMatches.join('|')}[^.;]+)`, 'i'))?.[1] || 'fracture bassin'}<br>`
+                        : '';
+                    
+                    finalJustification = `<strong>⚠️ CUMUL DE LÉSIONS DÉTECTÉ</strong><br>` +
+                        `📊 <strong>Analyse cumul</strong> : ${cumulCheck.lesionCount} lésions identifiées<br>` +
+                        boneContext +
+                        `⚡ <strong>Lésion nerveuse détectée</strong> : ${directMatch.name}<br><br>` +
+                        `💡 <strong>Formule de Balthazard</strong> : IPP_total = IPP1 + IPP2 × (100 - IPP1) / 100<br>` +
+                        `📝 <strong>Important</strong> : Évaluez chaque lésion séparément puis appliquez la formule :<br>` +
+                        `  1️⃣ Évaluez la lésion osseuse du bassin (fracture cadre obturateur + luxation sacro-iliaque)<br>` +
+                        `  2️⃣ Évaluez la lésion nerveuse (atteinte nerf sciatique) - proposée ci-dessous : ${chosenRate}%<br>` +
+                        `  3️⃣ Appliquez Balthazard : IPP_os + IPP_nerf × (100 - IPP_os) / 100<br>` +
+                        `<em>Exemple : 30% (os) + 40% (nerf) = 30 + 40×0.7 = 58% → 60% total</em><br><br>` +
+                        finalJustification;
+                }
+                
                 return {
                     type: 'proposal',
                     name: directMatch.name,
                     rate: chosenRate,
-                    justification: buildExpertJustification(
-                        text, directMatch as Injury, chosenRate, directMatch.path,
-                        severityData.level,
-                        severityData.signs,
-                        severityData.isDefault
-                    ),
+                    justification: finalJustification,
                     path: directMatch.path,
-                    injury: directMatch as Injury
+                    injury: directMatch as Injury,
+                    isCumul: cumulCheck.isCumul  // Ajouter flag cumul
                 };
             }
         }
