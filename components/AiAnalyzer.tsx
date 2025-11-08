@@ -3916,11 +3916,14 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             priority: 96
         },
         {
-            pattern: /rupture\s+(?:de\s+la\s+)?coiffe\s+(?:des\s+)?rotateurs/i,
-            context: /[eé]paule|abduction|rotateurs|supra/i,
+            pattern: /rupture\s+(?:de\s+la\s+)?coiffe\s+(?:des\s+)?rotateurs|rupture.*(?:sus|supra|sous|infra)[- ]?[eéè]pineux|(?:sus|supra|sous|infra)[- ]?[eéè]pineux.*rupture|transfixiante.*(?:sus|supra|sous|infra)[- ]?[eéè]pineux/i,
+            context: /[eé]paule|abduction|rotateurs|supra|sus.*[eé]pineux|sous.*[eé]pineux/i,
             negativeContext: /complète/i,
-            searchTerms: ['Rupture de la coiffe des rotateurs post-traumatique'],
-            priority: 95
+            searchTerms: [
+                'Rupture de la coiffe des rotateurs post-traumatique (supra-épineux, etc.) (Main Dominante)',
+                'Rupture de la coiffe des rotateurs post-traumatique (supra-épineux, etc.) (Main Non Dominante)'
+            ],
+            priority: 999
         },
         {
             pattern: /fracture\s+(?:du\s+)?pilon\s+tibial/i,
@@ -4724,8 +4727,23 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
                 // 🧠 DÉTECTION SÉVÉRITÉ SPÉCIFIQUE NEUROLOGIQUE, BRÛLURES ET ATTEINTES NERVEUSES (V3.3.2/V3.3.3/V3.3.5)
                 let severityData;
                 
+                // CAS 0: Rupture coiffe rotateurs (V3.3.33 - FIX CAS 8)
+                if (/rupture.*coiffe.*rotateurs.*post.*traumatique/i.test(normalize(directMatch.name))) {
+                    const hasTransfixing = /transfixiante?|transfixe/i.test(normalizedInputText);
+                    const hasMassive = /massive|irr[eé]parable|pseudo.*paralytique/i.test(normalizedInputText);
+                    const hasSevereLimit = /(?:impossibilit[eé]|impossibles?)\s+(?:de\s+)?(?:[eé]l[eé]vation|abduction|rotation)|(?:[eé]l[eé]vation|abduction|rotation)\s+(?:impossibles?|abolie)/i.test(normalizedInputText);
+                    const hasSignificantLoss = /perte.*force.*importante|amyotrophie.*marqu[eé]e|testing.*[0-2]|force.*diminu[eé]e/i.test(normalizedInputText);
+                    
+                    if (hasMassive || hasSevereLimit) {
+                        severityData = { level: 'élevé', signs: ['Rupture massive de la coiffe des rotateurs, épaule pseudo-paralytique'], isDefault: false };
+                    } else if (hasTransfixing || hasSignificantLoss) {
+                        severityData = { level: 'moyen', signs: ['Rupture transfixiante de la coiffe des rotateurs, perte de force'], isDefault: false };
+                    } else {
+                        severityData = { level: 'faible', signs: ['Rupture partielle de la coiffe des rotateurs'], isDefault: false };
+                    }
+                }
                 // CAS 1: Séquelles neurologiques (V3.3.2)
-                if (/commotion.*prolongee.*syndrome|contusions.*cerebrales|deficits.*cognitifs/i.test(normalize(directMatch.name))) {
+                else if (/commotion.*prolongee.*syndrome|contusions.*cerebrales|deficits.*cognitifs/i.test(normalize(directMatch.name))) {
                     const neuroSymptoms = [
                         /hémiparésie/i.test(normalizedInputText),
                         /troubles?\s+cognitif/i.test(normalizedInputText),
