@@ -1292,6 +1292,32 @@ const middleCategories: InjuryCategory[] = [
       {
         name: "Amputations",
         injuries: [
+            { 
+                name: "Amputation de jambe (tiers supérieur)", 
+                rate: 55, 
+                description: "Amputation sous le genou au tiers supérieur (amputation jambe proximale, amputation tibiale haute) avec moignon long et bien appareillable, prothèse fonctionnelle."
+            },
+            { 
+                name: "Amputation de jambe (tiers moyen)", 
+                rate: 60, 
+                description: "Amputation de jambe au tiers moyen (amputation jambe milieu, amputation tibiale moyenne)."
+            },
+            { 
+                name: "Amputation de jambe (tiers inférieur)", 
+                rate: 50, 
+                description: "Amputation de jambe au tiers inférieur proche de la cheville (amputation jambe distale, amputation jambe basse)."
+            },
+            { 
+                name: "Amputation de cuisse", 
+                rate: [70, 80], 
+                rateCriteria: { low: "Amputation de cuisse avec moignon long (amputation fémorale).", high: "Amputation de cuisse avec moignon très court, difficilement appareillable." },
+                description: "Amputation de cuisse (amputation fémorale), au-dessus du genou."
+            },
+            { 
+                name: "Désarticulation de la hanche", 
+                rate: 80, 
+                description: "Désarticulation de la hanche (exarticulation hanche), amputation la plus proximale du membre inférieur."
+            },
             { name: "Amputation d'un membre inférieur", rate: [70, 80], rateCriteria: { low: "Amputation sous le genou avec moignon long et bien appareillable.", high: "Désarticulation de la hanche ou amputation de cuisse avec moignon très court." } },
             { name: "Amputation des deux membres inférieurs", rate: 100 },
         ]
