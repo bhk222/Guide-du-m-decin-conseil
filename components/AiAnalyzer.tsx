@@ -2602,9 +2602,10 @@ export const buildExpertJustification = (
     const hasLimitation = /limitation/i.test(normalized);
     const hasInstabilite = /instabilité|instabilite|laxité|laxite/i.test(normalized);
     const hasDouleur = /douleur|douloureuse|gonalgie|coxalgie|brachialgie/i.test(normalized);
+    const hasTroublePsychologique = /trouble.*(?:anxieux|psychologique|d[eé]press)|anxieux|d[eé]pression|psychotrauma|stress.*post.*traumatique|ptsd/i.test(normalized);
     
     // Analyse détaillée selon critères objectifs
-    if (hasFlexion || hasExtension || hasEVA || clinicalSigns.length > 0) {
+    if (hasFlexion || hasExtension || hasEVA || hasTroublePsychologique || clinicalSigns.length > 0) {
         justification += "Éléments cliniques objectifs identifiés :<br>";
         justification += "<ul>";
         
@@ -2688,6 +2689,12 @@ export const buildExpertJustification = (
             justification += `<li><strong>Instabilité articulaire</strong><br>`;
             justification += `→ Lésion ligamentaire séquellaire<br>`;
             justification += `→ Risque : Dérobements, chutes, arthrose précoce</li>`;
+        }
+        
+        if (hasTroublePsychologique) {
+            justification += `<li><strong>Trouble psychologique post-traumatique</strong><br>`;
+            justification += `→ Retentissement psychique : Anxiété, stress post-traumatique<br>`;
+            justification += `→ Impact : Qualité de vie, réinsertion professionnelle/sociale</li>`;
         }
         
         justification += "</ul>";
