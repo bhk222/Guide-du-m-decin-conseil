@@ -1318,7 +1318,15 @@ const middleCategories: InjuryCategory[] = [
                 rate: 80, 
                 description: "Désarticulation de la hanche (exarticulation hanche), amputation la plus proximale du membre inférieur."
             },
-            { name: "Amputation d'un membre inférieur", rate: [70, 80], rateCriteria: { low: "Amputation sous le genou avec moignon long et bien appareillable.", high: "Désarticulation de la hanche ou amputation de cuisse avec moignon très court." } },
+            { 
+                name: "Amputation d'un membre inférieur (non spécifiée)", 
+                rate: [70, 80], 
+                rateCriteria: { 
+                    low: "Amputation avec moignon long et bien appareillable.", 
+                    high: "Amputation avec moignon très court, difficilement appareillable." 
+                },
+                description: "Amputation de membre inférieur dont le niveau anatomique n'est pas précisé. Utiliser les entrées spécifiques (jambe, cuisse, hanche) si le niveau est connu."
+            },
             { name: "Amputation des deux membres inférieurs", rate: 100 },
         ]
       },
