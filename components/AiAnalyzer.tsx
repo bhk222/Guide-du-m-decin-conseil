@@ -2501,7 +2501,7 @@ const determineSeverity = (
     const hasBonneConsolidation = /bonne\s+consolidation|consolidation\s+(?:anatomique|favorable)|sans\s+(?:raccourcissement|complication)|mobilite\s+conservee/i.test(normalizedText);
 
     // 🩺 CRITÈRE CONTEXTUEL : Analyse "impossibilité" avec contexte
-    const hasPartialImpossibility = /impossibilit[eé].*(?:port.*charges?|soulever|porter).*(?:>|plus\s+de|sup[eé]rieur)/i.test(normalizedText);
+    const hasPartialImpossibility = /impossibilit[eé].*(?:port|soulever|porter).*(?:charges?|poids|lourdes?)/i.test(normalizedText);
     const hasTotalImpossibility = /impossibilit[eé].*(?:marche|d[eé]placement|debout|station|autonomie)/i.test(normalizedText);
     
     // 🚶 CRITÈRE CONTEXTUEL : Analyse "claudication" avec périmètre marche
