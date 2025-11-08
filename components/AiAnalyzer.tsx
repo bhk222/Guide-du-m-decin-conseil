@@ -5184,6 +5184,11 @@ export const detectMultipleLesions = (text: string): {
     const hasAnteriorState = anteriorMatch !== null;
     const anteriorIPP = anteriorMatch ? parseInt(anteriorMatch[1]) : null;
     
+    // 2b. Détection cumul lésion osseuse + atteinte nerveuse (pattern traumatologique fréquent)
+    const hasBoneLesion = /fracture|luxation|disjonction|tassement|enfoncement/i.test(normalized);
+    const hasNerveLesion = /(?:atteinte|lesion|paralysie|nevralgie).*nerf|nerf.*(?:atteinte|lesion|paralysie)/i.test(normalized);
+    const hasBoneAndNerve = hasBoneLesion && hasNerveLesion;
+    
     // 3. Comptage séparateurs de lésions - PLUS STRICTE
     const plusCount = (text.match(/\s\+\s/g) || []).length;
     
@@ -5212,12 +5217,14 @@ export const detectMultipleLesions = (text: string): {
     const isCumul = 
         foundKeywords.length > 0 ||  // Keywords TRÈS explicites type "polytraumatisme"
         plusCount >= 3 ||             // Au moins 3 séparateurs "+" (ex: "A + B + C + D")
-        (plusCount >= 2 && distinctRegions >= 3); // 2+ "+" avec 3+ régions anatomiques DIFFÉRENTES
+        (plusCount >= 2 && distinctRegions >= 3) ||  // 2+ "+" avec 3+ régions anatomiques DIFFÉRENTES
+        hasBoneAndNerve;              // Lésion osseuse + atteinte nerveuse (pattern traumatologique)
     
     // Estimation nombre de lésions
     const lesionCount = Math.max(
         plusCount + 1,
         distinctRegions,
+        hasBoneAndNerve ? 2 : 1,      // Si os + nerf, au moins 2 lésions
         hasAnteriorState ? 2 : 1
     );
     
