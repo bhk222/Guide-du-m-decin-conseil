@@ -4704,13 +4704,16 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
                         const worstEye = Math.min(odAcuity, ogAcuity);
                         const bestEye = Math.max(odAcuity, ogAcuity);
                         
-                        // Critères barème: Low (≥8/10 bilatéral), Medium (3-7/10), High (<3/10)
-                        if (worstEye < 0.3 || (odAcuity < 0.3 && ogAcuity < 0.3)) {
-                            // Acuité <3/10 sur un ou deux yeux → ÉLEVÉ (proche 100%)
+                        // Critères barème: Low (bon œil ≥8/10), Medium (3-7/10), High (<3/10)
+                        if (worstEye < 0.3) {
+                            // Acuité <3/10 sur le pire œil → ÉLEVÉ (proche 100%)
                             severityData = { level: 'élevé', signs: [`Cataracte sévère: OD ${odMatch?.[1]}/${odMatch?.[2]}, OG ${ogMatch?.[1]}/${ogMatch?.[2]} - Acuité visuelle très basse (<3/10)`], isDefault: false };
+                        } else if (bestEye >= 0.8 && worstEye >= 0.5) {
+                            // Meilleur œil ≥8/10 ET pire œil ≥5/10 → FAIBLE (proche 15-20%)
+                            severityData = { level: 'faible', signs: [`Cataracte légère: OD ${odMatch?.[1]}/${odMatch?.[2]}, OG ${ogMatch?.[1]}/${ogMatch?.[2]} - Bon œil préservé (≥8/10), vision fonctionnelle`], isDefault: false };
                         } else if (worstEye >= 0.8 && bestEye >= 0.8) {
-                            // Acuité ≥8/10 bilatérale → FAIBLE (proche 10%)
-                            severityData = { level: 'faible', signs: [`Cataracte légère: OD ${odMatch?.[1]}/${odMatch?.[2]}, OG ${ogMatch?.[1]}/${ogMatch?.[2]} - Acuité visuelle conservée (≥8/10)`], isDefault: false };
+                            // Acuité ≥8/10 bilatérale → TRÈS FAIBLE (proche 10%)
+                            severityData = { level: 'faible', signs: [`Cataracte minime: OD ${odMatch?.[1]}/${odMatch?.[2]}, OG ${ogMatch?.[1]}/${ogMatch?.[2]} - Acuité visuelle excellente (≥8/10 bilatéral)`], isDefault: false };
                         } else {
                             // Acuité 3-7/10 → MOYEN (proche 55%)
                             severityData = { level: 'moyen', signs: [`Cataracte modérée: OD ${odMatch?.[1]}/${odMatch?.[2]}, OG ${ogMatch?.[1]}/${ogMatch?.[2]} - Acuité visuelle intermédiaire (3-7/10)`], isDefault: false };
