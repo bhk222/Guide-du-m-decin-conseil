@@ -5050,7 +5050,7 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
                 
                 // 🆕 Si "pas de raideur" / "sans raideur" → exclure entrées avec raideur (V3.3.25)
                 if (/(pas\s+de|sans)\s+(raideur|limitation|gene)/i.test(normalizedInputText)) {
-                    filteredFractures = uniqueFractures.filter(f => {
+                    filteredFractures = filteredFractures.filter(f => {
                         const fname = normalize(f.name);
                         // Garder seulement celles explicitement "sans raideur" ET sans features problématiques
                         const hasSansRaideur = /sans\s+raideur/i.test(fname);
@@ -5061,19 +5061,46 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
                 
                 // Si "consolidation parfaite" mentionnée → exclure "cal vicieux"
                 if (/(?:consolidation|bonne)\s+(?:parfaite|anatomique)|sans\s+trouble/i.test(normalizedInputText)) {
-                    filteredFractures = uniqueFractures.filter(f => 
-                        !/cal\s+vicieux|limitation|raideur|deformation/i.test(normalize(f.name))
-                    );
+                    filteredFractures = filteredFractures.filter(f => {
+                        const fname = normalize(f.name);
+                        // Exclure cal vicieux/limitation/déformation SAUF si c'est "sans raideur"
+                        if (/sans\s+raideur/i.test(fname)) return true;  // Garder "sans raideur"
+                        return !/cal\s+vicieux|limitation|raideur|deformation/i.test(fname);
+                    });
                 }
                 
                 // Si "limitation légère/modérée" → exclure sévères et parfaites
                 if (/(?:limitation|gene)\s+(?:legere|moderee|moyenne)|sans\s+perte\s+majeure/i.test(normalizedInputText)) {
-                    filteredFractures = uniqueFractures.filter(f => {
+                    filteredFractures = filteredFractures.filter(f => {
                         const fname = normalize(f.name);
                         return !/(consolidation\s+parfaite|severe|importante|troubles\s+nerveux)/i.test(fname);
                     });
                 }
 
+                // 🆕 Auto-sélection Main Dominante vs Non Dominante (V3.3.31)
+                if (filteredFractures.length === 2) {
+                    const hasDominante = filteredFractures.find(f => /main\s+dominante/i.test(f.name));
+                    const hasNonDominante = filteredFractures.find(f => /main\s+non\s+dominante/i.test(f.name));
+                    
+                    if (hasDominante && hasNonDominante) {
+                        // Les 2 seules différences sont Dominante/Non Dominante
+                        // Vérifier le texte original pour latéralité
+                        const textNormalized = normalizedInputText.toLowerCase();
+                        
+                        if (/(?:gauche|non\s+dominante)\s*[^\w]*(?:\(|$)/i.test(text) || 
+                            /\(.*non\s+dominante.*\)/i.test(text) ||
+                            /gaucher/i.test(text)) {
+                            // "gauche (non dominante)" ou "(non dominante)" ou "gaucher"
+                            filteredFractures = [hasNonDominante];
+                        } else if (/(?:droit|droite|dominante)\s*[^\w]*(?:\(|$)/i.test(text) || 
+                                   /\(.*dominante.*\)/i.test(text) ||
+                                   /droitier/i.test(text)) {
+                            // "droit (dominante)" ou "(dominante)" ou "droitier"
+                            filteredFractures = [hasDominante];
+                        }
+                    }
+                }
+                
                 if (filteredFractures.length > 1) {
                     return {
                         type: 'ambiguity',
