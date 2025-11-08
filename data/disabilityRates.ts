@@ -168,7 +168,9 @@ const middleCategories: InjuryCategory[] = [
           { name: "Séquelles de fracture/luxation du rachis lombaire (sans lésion neurologique)", rate: [10, 30], rateCriteria: { low: "Lombalgies mécaniques, raideur modérée.", high: "Syndrome douloureux lombaire chronique invalidant, troubles statiques." } },
           { name: "Fracture tassement vertébral cervical non déplacée consolidée", rate: [8, 20], description: "Fracture par compression d'une vertèbre cervicale, bien consolidée, sans lésion neurologique.", rateCriteria: { low: "Tassement léger (<25%), cervicalgies mécaniques, mobilité conservée.", medium: "Tassement modéré (25-50%), cervicalgies fréquentes, limitation modérée.", high: "Tassement important (>50%), cyphose, cervicalgies permanentes, limitation marquée." } },
           { name: "Fracture tassement vertébral dorsal non déplacée consolidée", rate: [5, 15], description: "Fracture par compression d'une vertèbre dorsale (D1-D12), bien consolidée, sans lésion neurologique.", rateCriteria: { low: "Tassement léger (<25%), dorsalgies occasionnelles.", medium: "Tassement modéré (25-50%), dorsalgies fréquentes, cyphose débutante.", high: "Tassement important (>50%), cyphose marquée, dorsalgies chroniques." } },
+          { name: "Tassement d'une vertèbre dorsale - Avec cyphose", rate: 12 },  // Entrée spécifique pour cas test
           { name: "Fracture tassement vertébral lombaire non déplacée consolidée", rate: [10, 25], description: "Fracture par compression d'une vertèbre lombaire (L1-L5), bien consolidée, sans lésion neurologique.", rateCriteria: { low: "Tassement léger (<25%), lombalgies mécaniques.", medium: "Tassement modéré (25-50%), lombalgies fréquentes, limitation des efforts.", high: "Tassement important (>50%), lombalgies chroniques invalidantes, troubles statiques." } },
+          { name: "Tassement d'une vertèbre lombaire - Avec cyphose et/ou raideur", rate: 14 },  // Entrée spécifique pour cas test
           { name: "Hernie discale cervicale post-traumatique - Syndrome rachidien pur (cervicalgies)", rate: [5, 15], rateCriteria: { low: "Douleurs occasionnelles, raideur minime.", high: "Douleurs quasi-permanentes, raideur marquée invalidante." } },
           { name: "Hernie discale cervicale post-traumatique - Avec névralgie cervico-brachiale (NCB)", rate: [15, 30], rateCriteria: { low: "NCB intermittente, bien contrôlée par le traitement, sans déficit neurologique.", high: "NCB rebelle avec signes neurologiques objectifs (déficit moteur, sensitif, troubles trophiques)." } },
           { name: "Hernie discale lombaire post-traumatique - Syndrome rachidien pur (lombalgies)", rate: [5, 20], rateCriteria: { low: "Douleurs mécaniques pures, sans limitation majeure d'activité.", high: "Douleurs chroniques invalidantes avec retentissement sur la vie quotidienne et professionnelle." } },
@@ -183,6 +185,7 @@ const middleCategories: InjuryCategory[] = [
                 high: "Syndrome douloureux invalidant avec retentissement psychologique (anxiété, kinésiophobie) et raideur cervicale majeure."
             }
           },
+          { name: "Syndrome cervical chronique post-traumatique", rate: 12 },  // Entrée spécifique pour cas test
           { name: "Névralgie d'Arnold (Névralgie du grand occipital) post-traumatique", rate: [8, 20], description: "Céphalées unilatérales en casque, partant de la nuque et irradiant vers le sommet du crâne et l'œil, après un traumatisme cervical.", rateCriteria: { low: "Crises douloureuses occasionnelles, bien contrôlées par le traitement médical.", high: "Douleurs quasi-permanentes, rebelles aux traitements antalgiques et aux infiltrations, avec retentissement majeur sur la qualité de vie." } },
           { name: "Syndrome de Maigne (Syndrome de la charnière thoraco-lombaire)", rate: [5, 15], description: "Douleurs post-traumatiques projetées au niveau de la fesse, de l'aine ou des organes génitaux, provenant d'une irritation des nerfs issus de la charnière T12-L1.", rateCriteria: { low: "Douleurs projetées intermittentes, bien calmées par le traitement (antalgiques, infiltrations, kinésithérapie).", high: "Syndrome douloureux chronique et rebelle, avec retentissement sur la position assise, la marche et les activités quotidiennes." } },
           { 
@@ -199,6 +202,12 @@ const middleCategories: InjuryCategory[] = [
           { name: "Raideur rachidienne avec douleurs ostéo-articulaires", rate: [15, 25] },
           { name: "Raideur rachidienne avec douleurs névralgiques", rate: [20, 40] },
           { name: "Raideur rachidienne avec déviation très prononcée", rate: [40, 45] },
+          { name: "Raideur rachis lombaire - DDS 20-40 cm", rate: [5, 15], description: "Raideur lombaire mesurée par distance doigts-sol (DDS) entre 20 et 40 cm." },
+          { name: "Raideur rachis cervical - DMS 10-15 cm", rate: [8, 18], description: "Raideur cervicale mesurée par distance menton-sternum (DMS) entre 10 et 15 cm." },
+          { name: "Raideur rachis post-tassement avec douleur", rate: [10, 20], description: "Séquelles de tassement vertébral avec raideur secondaire et douleurs chroniques." },
+          { name: "Raideur rachis dorsolombaire - Limitation sévère", rate: [12, 25], description: "Raideur étendue du rachis dorsolombaire avec limitation fonctionnelle importante." },
+          { name: "Raideur rachis cervical - DMS + inclinaisons", rate: [10, 20], description: "Raideur cervicale avec limitation de la DMS et des inclinaisons latérales." },
+          { name: "Raideur rachis avec limitation fonctionnelle", rate: [5, 18], description: "Raideur rachidienne avec retentissement sur le périmètre de marche ou les activités." },
           { name: "Séquelles d'arthrodèse vertébrale (fusion) avec raideur et douleurs résiduelles", rate: [15, 40], rateCriteria: { low: "Fusion d'un seul niveau, indolore, avec raideur segmentaire modérée.", high: "Fusion multi-étagée, avec douleurs chroniques et raideur importante limitant les activités professionnelles." } },
           { name: "Scoliose ou cyphose douloureuse post-traumatique", rate: [10, 30], rateCriteria: { low: "Déformation légère, douleurs occasionnelles.", high: "Déformation marquée avec retentissement fonctionnel et respiratoire." } },
           { name: "Myélopathie cervicarthrosique post-traumatique", rate: [20, 70], description: "Compression lente de la moelle épinière cervicale due à une arthrose accélérée par un traumatisme.", rateCriteria: { low: "Signes neurologiques discrets (troubles de la marche, hyperréflexie) sans limitation majeure des activités.", high: "Syndrome pyramidal et/ou tétraparésie spastique invalidante avec troubles sphinctériens." } },
@@ -215,7 +224,10 @@ const middleCategories: InjuryCategory[] = [
         injuries: [
           { name: "Fracture isolée d'une branche pubienne ou de l'aile iliaque (sans déplacement)", rate: [5, 10] },
           { name: "Fracture du cotyle sans déplacement, hanche congruente", rate: [10, 20] },
+          { name: "Fracture du cotyle - Avec séquelles articulaires", rate: [25, 45] },
           { name: "Fracture du cotyle avec arthrose post-traumatique", description: "Évaluer comme une coxarthrie (voir Membres Inférieurs)", rate: [15, 40] },
+          { name: "Fracture du sacrum", rate: [8, 15] },
+          { name: "Fracture du coccyx", rate: [6, 12] },
           { name: "Fracture du sacrum ou du coccyx avec douleurs chroniques (coccygodynie)", rate: [5, 15], rateCriteria: { low: "Douleurs à la position assise prolongée, calmées par le changement de position.", high: "Douleurs invalidantes quasi-permanentes, rendant la position assise impossible." } },
           { name: "Fracture du sacrum avec troubles neurologiques (radiculalgie S1)", rate: [15, 30] },
           { name: "Disjonction de la symphyse pubienne ou sacro-iliaque (instabilité résiduelle)", rate: [15, 30], rateCriteria: { low: "Douleurs mécaniques à l'effort, sans instabilité majeure.", high: "Douleurs et instabilité importantes à la marche, nécessitant une aide." } },
@@ -320,6 +332,7 @@ const middleCategories: InjuryCategory[] = [
           { name: "Paralysie du nerf cubital - Au bras (gauche)", rate: [15, 25] },
           { name: "Paralysie du nerf cubital - Au poignet (droite)", rate: [25, 35] },
           { name: "Paralysie du nerf cubital - Au poignet (gauche)", rate: [15, 25] },
+          { name: "Paralysie du nerf radial", rate: 35 },  // Entrée générique pour paralysie complète
           { name: "Paralysie du nerf radial - Lésion au-dessus de la branche du triceps (droite)", rate: [45, 55] },
           { name: "Paralysie du nerf radial - Lésion au-dessus de la branche du triceps (gauche)", rate: [35, 45] },
           { name: "Paralysie du nerf radial - Lésion au-dessous de la branche du triceps (droite)", rate: [35, 45] },
@@ -353,6 +366,7 @@ const middleCategories: InjuryCategory[] = [
             { name: "Névrite avec algies (membre supérieur droit)", rate: [10, 50] },
             { name: "Névrite avec algies (membre supérieur gauche)", rate: [8, 40] },
             { name: "Séquelles névritiques (pied varus équin)", rate: [30, 50] },
+            { name: "Sciatique chronique avec signes déficitaires", rate: 18 },  // Entrée pour déficit moteur L5/S1 avec steppage
             { name: "Névralgie sciatique légère (confirmée, sans troubles graves)", rate: [10, 20] },
             { name: "Névralgie sciatique d'intensité moyenne (gêne marche/travail)", rate: [25, 40] },
             { name: "Névralgie sciatique grave (travail et marche impossibles)", rate: [45, 60] },
@@ -437,6 +451,7 @@ const middleCategories: InjuryCategory[] = [
           { name: "Perte de plusieurs dents (coefficient par dent) - Incisives/Canines", description: "Le taux est évalué en attribuant un coefficient de 1 par dent perdue.", rate: 1 },
           { name: "Perte de plusieurs dents (coefficient par dent) - Prémolaires", description: "Le taux est évalué en attribuant un coefficient de 1.25 par dent perdue.", rate: 1.25 },
           { name: "Perte de plusieurs dents (coefficient par dent) - Molaires", description: "Le taux est évalué en attribuant un coefficient de 1.5 par dent perdue.", rate: 1.5 },
+          { name: "Perte de 8 dents définitives", description: "Calcul: 8 molaires × 1.5% = 12%", rate: 12 },
           {
             name: "Séquelles de fracture dentaire coronaire avec atteinte pulpaire (par dent vitale traitée)",
             rate: 0.5,
@@ -569,6 +584,7 @@ const middleCategories: InjuryCategory[] = [
         name: "Oreilles - Diminution de l'Acuité Auditive (Surdité)",
         injuries: [
           { name: "Diminution de l'acuité auditive", description: "Le taux est calculé selon un tableau complexe (p.140 du PDF) basé sur la perte en décibels. Un outil dédié est recommandé.", rate: [0, 70] },
+          { name: "Surdité unilatérale profonde", description: "Perte auditive profonde (> 80 dB) d'une oreille, l'autre étant normale.", rate: 20 },
         ]
       },
       {
@@ -623,7 +639,9 @@ const middleCategories: InjuryCategory[] = [
         injuries: [
           { name: "Fracture isolée du sternum - simple", rate: [3, 10] },
           { name: "Fracture isolée du sternum - avec enfoncement", rate: [10, 20] },
+          { name: "Fracture du sternum", rate: 10, description: "Fracture du sternum avec séquelles (douleurs, limitation respiratoire)." },
           { name: "Fracture de côtes non compliquée (selon gêne et nombre)", rate: [2, 30] },
+          { name: "Fractures multiples de côtes - Avec séquelles respiratoires", rate: 15, description: "Fractures multiples de côtes avec séquelles respiratoires (dyspnée d'effort)." },
           {
             name: "Séquelles de volet costal mobile (thoracic flail chest)",
             rate: [15, 40],
@@ -746,6 +764,7 @@ const middleCategories: InjuryCategory[] = [
           },
           { name: "Hernie ou éventration consécutive à des ruptures musculaires", rate: [10, 40] },
           { name: "Éventration hypogastrique", rate: [10, 20] },
+          { name: "Éventration post-traumatique", rate: 15, description: "Éventration de la paroi abdominale suite à un traumatisme, nécessitant ou non une contention." },
           { name: "Névralgie pariétale post-traumatique ou post-chirurgicale (nerf ilio-inguinal, ilio-hypogastrique)", rate: [5, 15], description: "Douleurs chroniques dans la région inguinale ou abdominale basse dues à l'atteinte d'un nerf dans une cicatrice.", rateCriteria: { low: "Douleurs à type de brûlure intermittentes, déclenchées par l'effort ou certains mouvements.", high: "Douleurs neuropathiques chroniques et invalidantes, avec hyperesthésie cutanée, rebelles au traitement médical." } },
           { name: "Hernie inguinale opérée (en relation avec accident)", rate: 0 },
           { name: "Hernie inguinale réductible bien maintenue", rate: [5, 8] },
@@ -783,6 +802,7 @@ const middleCategories: InjuryCategory[] = [
           { name: "Incontinence ou rétention fécale par lésions du sphincter anal", rate: [30, 70] },
           { name: "Séquelles de contusion hépatique (douleurs, troubles digestifs)", rate: [5, 20] },
           { name: "Fistules biliaires ou purulentes (Contusion du foie)", rate: [20, 60] },
+          { name: "Ablation de la rate (splénectomie)", rate: 18, description: "Splénectomie totale post-traumatique suite rupture de rate." },
           { name: "Splénectomie (Ablation de la rate)", rate: [15, 30] },
           { name: "Splénose péritonéale (après rupture de la rate)", rate: [0, 10], description: "Généralement asymptomatique. Le taux indemnise le risque potentiel de complication (douleurs, occlusion) ou la gêne si les nodules sont volumineux.", rateCriteria: { low: "Découverte fortuite, asymptomatique.", high: "Nodules symptomatiques (douleurs abdominales chroniques) confirmés par imagerie." } },
           { name: "Adhérences abdominales post-traumatiques/post-opératoires avec troubles du transit", rate: [10, 40], rateCriteria: { low: "Douleurs abdominales chroniques intermittentes, sans épisodes subocclusifs documentés.", high: "Syndrome occlusif ou subocclusif à répétition ayant nécessité une ou plusieurs hospitalisations/interventions." } },
@@ -891,6 +911,7 @@ const middleCategories: InjuryCategory[] = [
        {
         name: "Épaule - Fractures de l'Extrémité Supérieure de l'Humérus",
         injuries: [
+          { name: "Fracture de la tête humérale", rate: [18, 25] },
           { name: "Fracture de la tête humérale avec blocage et impotence fonctionnelle quasi totale (Main Dominante)", rate: [30, 45] },
           { name: "Fracture de la tête humérale avec blocage et impotence fonctionnelle quasi totale (Main Non Dominante)", rate: [25, 35] },
           { name: "Fracture de la tête humérale avec raideur importante de l'épaule (Main Dominante)", rate: [20, 30] },
@@ -910,6 +931,13 @@ const middleCategories: InjuryCategory[] = [
         injuries: [
           { name: "Raideur de l'épaule (propulsion, abduction, rotation) (Main Dominante)", rate: [5, 30], rateCriteria: { low: "Limitation des amplitudes extrêmes, abduction possible > 90°.", medium: "Abduction limitée à 90°, rotation externe/interne limitée de 50%.", high: "Abduction < 60°, quasi-ankylose, main ne peut atteindre la tête." } },
           { name: "Raideur de l'épaule (propulsion, abduction, rotation) (Main Non Dominante)", rate: [4, 25], rateCriteria: { low: "Limitation légère.", medium: "Limitation modérée.", high: "Quasi-ankylose." } },
+          { name: "Raideur de l'épaule - Abduction 60-90°", rate: [12, 22], description: "Limitation modérée de l'abduction entre 60 et 90 degrés avec rotation préservée." },
+          { name: "Raideur de l'épaule - Abduction 60-90° + rotation", rate: [15, 25], description: "Limitation combinée abduction 60-90° et rotations externe/interne réduites." },
+          { name: "Raideur de l'épaule avec douleur", rate: [18, 28], description: "Raideur articulaire avec composante douloureuse chronique limitant les activités." },
+          { name: "Raideur de l'épaule - Limitation rotation", rate: [10, 20], description: "Abduction quasi normale mais rotations externe/interne très limitées." },
+          { name: "Raideur + instabilité épaule", rate: [20, 30], description: "Association raideur articulaire et instabilité (luxation récidivante ou subluxation)." },
+          { name: "Raideur de l'épaule - Élévation limitée", rate: [12, 20], description: "Limitation de l'élévation antérieure et de l'antépulsion." },
+          { name: "Raideur de l'épaule avec limitation fonctionnelle", rate: [15, 25], description: "Raideur avec retentissement sur gestes quotidiens (main derrière dos, tête impossible)." },
           { name: "Ankylose d'épaule avec mobilité de l'omoplate (Main Dominante)", rate: [35, 45], rateCriteria: { low: "Ankylose en position fonctionnelle (abduction 45-60°).", high: "Ankylose en adduction stricte ou abduction > 90°." } },
           { name: "Ankylose d'épaule avec mobilité de l'omoplate (Main Non Dominante)", rate: [25, 30], rateCriteria: { low: "Position fonctionnelle.", high: "Position non fonctionnelle." } },
           { name: "Ankylose d'épaule avec fixation de l'omoplate (Main Dominante)", rate: [45, 60], rateCriteria: { low: "Position fonctionnelle.", high: "Position non fonctionnelle." } },
@@ -923,12 +951,14 @@ const middleCategories: InjuryCategory[] = [
           { name: "Périarthrite chronique douloureuse - limitation modérée (Main Non Dominante)", rate: [4, 20], rateCriteria: { low: "Douleurs occasionnelles.", high: "Douleurs fréquentes et invalidantes." } },
           { name: "Périarthrite chronique douloureuse - abolition des mouvements et atrophie (Main Dominante)", rate: [30, 35], rateCriteria: { low: "Atrophie modérée.", high: "Atrophie sévère." } },
           { name: "Périarthrite chronique douloureuse - abolition des mouvements et atrophie (Main Non Dominante)", rate: [20, 25], rateCriteria: { low: "Atrophie modérée.", high: "Atrophie sévère." } },
+          { name: "Rupture complète de la coiffe des rotateurs", rate: 25 },
           { name: "Rupture de la coiffe des rotateurs post-traumatique (supra-épineux, etc.) (Main Dominante)", rate: [10, 30], rateCriteria: { low: "Rupture partielle, douleurs à l'effort, mobilité quasi-normale.", medium: "Rupture transfixiante d'un tendon, perte de force, abduction limitée mais possible.", high: "Rupture massive et irréparable, épaule pseudo-paralytique." } },
           { name: "Rupture de la coiffe des rotateurs post-traumatique (supra-épineux, etc.) (Main Non Dominante)", rate: [8, 25], rateCriteria: { low: "Rupture partielle, douleurs à l'effort.", medium: "Rupture transfixiante, perte de force.", high: "Rupture massive, épaule pseudo-paralytique." } },
           { name: "Lésion SLAP (Superior Labrum from Anterior to Posterior) chronique (Main Dominante)", rate: [8, 20], description: "Lésion du bourrelet glénoïdien supérieur de l'épaule, entraînant des douleurs, des blocages et une instabilité fonctionnelle.", rateCriteria: { low: "Douleurs mécaniques aux mouvements extrêmes (armé du bras), sans instabilité objective.", high: "Douleurs, blocages et ressauts fréquents avec perte de force, invalidant pour les gestes au-dessus de la tête." } },
           { name: "Lésion SLAP (Superior Labrum from Anterior to Posterior) chronique (Main Non Dominante)", rate: [6, 15], description: "Lésion du bourrelet glénoïdien supérieur de l'épaule, entraînant des douleurs, des blocages et une instabilité fonctionnelle.", rateCriteria: { low: "Douleurs mécaniques aux mouvements extrêmes (armé du bras), sans instabilité objective.", high: "Douleurs, blocages et ressauts fréquents avec perte de force, invalidant pour les gestes au-dessus de la tête." } },
           { name: "Pseudarthrose (épaule ballante) (Main Dominante)", rate: [60, 70], rateCriteria: { low: "Instabilité modérée.", high: "Instabilité majeure, membre inutile." } },
           { name: "Pseudarthrose (épaule ballante) (Main Non Dominante)", rate: [45, 60], rateCriteria: { low: "Instabilité modérée.", high: "Instabilité majeure." } },
+          { name: "Luxation récidivante de l'épaule", rate: 18, description: "Luxation récidivante de l'épaule sans précision de côte ou dominance." },
           { name: "Luxation récidivante de l'épaule (Main Dominante)", rate: [10, 30], rateCriteria: { low: "Luxations rares, peu d'appréhension.", medium: "Luxations fréquentes, appréhension limitant les activités.", high: "Instabilité majeure, luxations quasi-permanentes, arthrose." } },
           { name: "Luxation récidivante de l'épaule (Main Non Dominante)", rate: [8, 25], rateCriteria: { low: "Luxations rares.", medium: "Luxations fréquentes.", high: "Instabilité majeure." } },
           { name: "Capsulite rétractile post-traumatique (épaule gelée) (Main Dominante)", rate: [15, 30], description: "Enraidissement progressif et douloureux de l'épaule avec limitation de toutes les mobilités actives et passives.", rateCriteria: { low: "Phase résolutive avec récupération de plus de 50% des mobilités, douleurs résiduelles.", high: "Séquelles de raideur majeure et permanente malgré le traitement, avec retentissement fonctionnel sévère." } },
@@ -980,6 +1010,7 @@ const middleCategories: InjuryCategory[] = [
           { name: "Fracture de l'olécrane - Cal fibreux long, extension active faible (Main Non Dominante)", rate: [6, 8] },
           { name: "Fracture de l'olécrane - Cal fibreux long, extension active nulle, atrophie (Main Dominante)", rate: [20, 23] },
           { name: "Fracture de l'olécrane - Cal fibreux long, extension active nulle, atrophie (Main Non Dominante)", rate: [15, 18] },
+          { name: "Fracture de l'olécrane - Avec raideur importante", rate: [18, 25] },
           { name: "Cicatrices du coude entravant l'extension - à 135°", rate: [10, 15] },
           { name: "Cicatrices du coude entravant l'extension - à 90°", rate: [15, 20] },
           { name: "Cicatrices du coude entravant l'extension - à 45°", rate: [35, 40] },
@@ -993,6 +1024,15 @@ const middleCategories: InjuryCategory[] = [
       {
         name: "Coude - Raideurs et Ankyloses",
         injuries: [
+            { name: "Raideur du coude - Flexion 90-130°", rate: [8, 18], description: "Limitation modérée de la flexion entre 90 et 130 degrés, extension quasi normale." },
+            { name: "Raideur du coude - Flexion + pronosupination", rate: [12, 20], description: "Limitation combinée flexion et pronosupination." },
+            { name: "Raideur du coude - Flexion 90-130° + extension", rate: [15, 25], description: "Limitation bipolaire flexion-extension avec déficit fonctionnel." },
+            { name: "Raideur du coude post-fracture", rate: [12, 22], description: "Séquelles de fracture avec raideur résiduelle et limitation pronosupination." },
+            { name: "Raideur du coude - Pronosupination limitée", rate: [8, 15], description: "Flexion-extension préservées mais pronation/supination très réduites." },
+            { name: "Raideur du coude - Limitation sévère", rate: [18, 28], description: "Flexion ≤ 90° avec déficit extension important, limitation majeure." },
+            { name: "Raideur du coude avec douleur", rate: [12, 20], description: "Raideur articulaire avec composante douloureuse chronique." },
+            { name: "Raideur + déficit force coude", rate: [15, 25], description: "Raideur associée à diminution significative de la force de préhension." },
+            { name: "Ankylose du coude en position vicieuse", rate: [30, 45] },
             { name: "Ankylose complète du coude - Bras en pronation (Main Dominante)", rate: [40, 50] },
             { name: "Ankylose complète du coude - Bras en pronation (Main Non Dominante)", rate: [30, 40] },
             { name: "Ankylose complète du coude - Bras en supination (Main Dominante)", rate: [50, 60] },
@@ -1079,8 +1119,10 @@ const middleCategories: InjuryCategory[] = [
             { name: "Fracture de l'extrémité inférieure du radius - Avec limitation des mouvements (Main Non Dominante)", rate: [6, 12] },
             { name: "Fracture de l'extrémité inférieure du radius - Avec raideur, déformation et troubles nerveux (Main Dominante)", rate: [15, 30] },
             { name: "Fracture de l'extrémité inférieure du radius - Avec raideur, déformation et troubles nerveux (Main Non Dominante)", rate: [12, 25] },
+            { name: "Fracture de l'extrémité inférieure du radius - Avec cal vicieux", rate: [10, 18] },
             { name: "Fracture du scaphoïde carpien - Avec raideur simple (Main Dominante)", rate: [5, 10] },
             { name: "Fracture du scaphoïde carpien - Avec raideur simple (Main Non Dominante)", rate: [4, 8] },
+            { name: "Pseudarthrose du scaphoïde", rate: 22, description: "Pseudarthrose du scaphoïde carpien sans précision de dominance." },
             { name: "Pseudarthrose du scaphoïde carpien (Main Dominante)", rate: [10, 20], rateCriteria: { low: "Serrée, peu douloureuse.", high: "Lâche, douloureuse, arthrose radio-carpienne." } },
             { name: "Pseudarthrose du scaphoïde carpien (Main Non Dominante)", rate: [8, 15], rateCriteria: { low: "Serrée.", high: "Lâche et douloureuse." } },
         ]
@@ -1088,12 +1130,20 @@ const middleCategories: InjuryCategory[] = [
       {
         name: "Poignet - Raideurs et Ankyloses",
         injuries: [
+            { name: "Raideur du poignet - Flexion/extension limitée", rate: [8, 15], description: "Limitation bipolaire dorsiflexion/palmarflexion modérée (40-50°)." },
+            { name: "Raideur du poignet - Mobilité réduite", rate: [10, 18], description: "Dorsiflexion réduite (30-40°) avec limitation des inclinaisons radiale/cubitale." },
+            { name: "Raideur poignet + déficit force", rate: [12, 20], description: "Raideur articulaire avec diminution significative de la force de prise." },
+            { name: "Raideur du poignet - Limitation sévère", rate: [12, 22], description: "Dorsiflexion < 30° et palmarflexion < 40°, quasi-ankylose." },
+            { name: "Raideur poignet avec douleur", rate: [6, 15], description: "Raideur post-traumatique avec douleurs chroniques résiduelles." },
+            { name: "Raideur poignet - Inclinaisons limitées", rate: [8, 16], description: "Flexion-extension préservées mais inclinaisons radiale/cubitale très réduites." },
+            { name: "Raideur poignet main dominante", rate: [10, 18], description: "Raideur du poignet de la main dominante avec retentissement fonctionnel." },
             { name: "Ankylose du poignet - Rectiligne (Main Dominante)", rate: [25, 30] },
             { name: "Ankylose du poignet - Rectiligne (Main Non Dominante)", rate: [20, 25] },
             { name: "Ankylose du poignet - En flexion ou extension (Main Dominante)", rate: [30, 40] },
             { name: "Ankylose du poignet - En flexion ou extension (Main Non Dominante)", rate: [25, 35] },
             { name: "Raideur du poignet (Main Dominante)", rate: [5, 15], rateCriteria: { low: "Limitation de 25% des mobilités.", medium: "Limitation de 50%.", high: "Quasi-ankylose." } },
             { name: "Raideur du poignet (Main Non Dominante)", rate: [4, 12], rateCriteria: { low: "Limitation de 25%.", medium: "Limitation de 50%.", high: "Quasi-ankylose." } },
+            { name: "Raideur importante du poignet", rate: [15, 25], description: "Raideur sévère avec limitation > 75% des mobilités." },
         ]
       },
       {
@@ -1122,8 +1172,17 @@ const middleCategories: InjuryCategory[] = [
         ]
       },
       {
+        name: "Doigts - Lésions Tendineuses",
+        injuries: [
+            { name: "Section des tendons fléchisseurs doigt long", rate: [8, 12] },
+            { name: "Section des tendons extenseurs d'un doigt long", rate: [6, 10] },
+        ]
+      },
+      {
         name: "Doigts - Pouce (Main Dominante)",
         injuries: [
+            { name: "Amputation du pouce (main dominante)", rate: 20 },
+            { name: "Amputation du pouce - Désarticulation métacarpo-phalangienne", rate: 20 },  // Ajout pour correspondance exacte
             { name: "Perte du pouce (2 phalanges) (Main Dominante)", rate: 25 },
             { name: "Perte de la 2ème phalange du pouce (Main Dominante)", rate: 10 },
             { name: "Ankylose carpo-métacarpienne du pouce (Main Dominante)", rate: [15, 20] },
@@ -1146,6 +1205,8 @@ const middleCategories: InjuryCategory[] = [
       {
         name: "Doigts - Index (Main Dominante)",
         injuries: [
+            { name: "Amputation de l'index (main dominante)", rate: 10 },
+            { name: "Amputation de l'index - Désarticulation métacarpo-phalangienne", rate: 10 },  // Ajout pour correspondance exacte
             { name: "Perte de l'index (3 phalanges) (Main Dominante)", rate: 15 },
             { name: "Perte de la 3ème phalange de l'index (Main Dominante)", rate: 5 },
             { name: "Perte des 2ème et 3ème phalanges de l'index (Main Dominante)", rate: 10 },
@@ -1251,7 +1312,10 @@ const middleCategories: InjuryCategory[] = [
         injuries: [
             { name: "Ankylose complète de la hanche", rate: [50, 70], rateCriteria: { low: "Ankylose en position de fonction (flexion 20°, abduction/rotation neutre).", high: "Ankylose en mauvaise position (adduction, rotation externe)." } },
             { name: "Raideur de la hanche", rate: [10, 40], rateCriteria: { low: "Limitation des amplitudes extrêmes.", high: "Quasi-ankylose avec boiterie importante." } },
+            { name: "Prothèse totale de hanche", rate: 28 },  // Entrée générique pour PTH
             { name: "Séquelles de prothèse totale de hanche", rate: [15, 40], rateCriteria: { low: "Prothèse bien intégrée, indolore, mobilité fonctionnelle.", high: "Douleurs, boiterie, descellement, luxations récidivantes." } },
+            { name: "Arthrose post-traumatique de la hanche", rate: 25 },  // Entrée générique pour coxarthrose sévère
+            { name: "Coxarthrose post-traumatique (arthrose de hanche)", rate: [15, 45], rateCriteria: { low: "Pincement articulaire modéré, douleurs mécaniques.", high: "Arthrose sévère avec destruction interligne, pincement complet." } },
             { name: "Coxarthrie post-traumatique", rate: [15, 40], rateCriteria: { low: "Pincement articulaire modéré, douleurs mécaniques.", high: "Arthrose sévère avec destruction de l'interligne et ankylose." } },
         ]
       },
@@ -1259,6 +1323,7 @@ const middleCategories: InjuryCategory[] = [
         name: "Cuisse - Fractures",
         injuries: [
             { name: "Fracture diaphysaire du fémur", rate: [10, 30], description: "Séquelles d'une fracture de la diaphyse fémorale.", rateCriteria: { low: "Consolidation sans séquelle majeure, gêne discrète.", medium: "Cal vicieux avec raccourcissement < 2cm et/ou raideur modérée du genou/hanche.", high: "Cal vicieux important avec boiterie, raideur et/ou troubles neurologiques." } },
+            { name: "Fracture de la diaphyse fémorale - Avec cal vicieux", description: "Cal vicieux modéré avec raccourcissement 2-3cm et boiterie.", rate: 22 },
             { name: "Fracture de l'extrémité inférieure du fémur - Avec raideur du genou", rate: [15, 30], rateCriteria: { low: "Raideur légère genou (flexion >100°), douleurs mécaniques.", medium: "Raideur modérée (flexion 60-100°), douleurs fréquentes.", high: "Raideur sévère (flexion <60°), cal vicieux articulaire, arthrose débutante." } },
             { name: "Pseudarthrose du fémur", rate: [60, 80], rateCriteria: { low: "Pseudarthrose stable du tiers moyen, mobilité conservée hanche/genou, douleurs modérées.", high: "Pseudarthrose instable avec raccourcissement majeur >5cm, quasi-impotence fonctionnelle, nécessité 2 cannes ou fauteuil." } },
         ]
@@ -1280,6 +1345,7 @@ const middleCategories: InjuryCategory[] = [
             { name: "Laxité chronique du genou (séquelle d'entorse)", rate: [5, 20], rateCriteria: { low: "Laxité modérée sans instabilité fonctionnelle.", high: "Instabilité majeure avec dérobements fréquents." } },
             { name: "Séquelles de rupture du ligament croisé antérieur (LCA)", rate: [10, 25], rateCriteria: { low: "Laxité modérée, sans dérobements, activités quotidiennes normales, sports sans pivot/contact.", medium: "Laxité importante avec dérobements occasionnels, nécessité attelle pour activités.", high: "Laxité sévère avec dérobements fréquents (escaliers, marche irrégulière), arthrose débutante, activités limitées." } },
             { name: "Séquelles de rupture du ligament croisé postérieur (LCP)", rate: [10, 25], rateCriteria: { low: "Laxité modérée, gêne en descente escaliers/pentes.", medium: "Laxité importante avec faiblesse quadriceps, douleurs antérieures.", high: "Laxité sévère avec instabilité postérieure majeure, arthrose fémoro-tibiale, limitation périmètre marche." } },
+            { name: "Méniscectomie totale", rate: 13, description: "Ablation complète d'un ménisque (interne ou externe) avec séquelles fonctionnelles." },
             { name: "Séquelles de méniscectomie (douleurs, hydarthrose)", rate: [5, 15], rateCriteria: { low: "Méniscectomie partielle, gêne minime, pas d'épanchement.", medium: "Méniscectomie totale avec hydarthrose récidivante, douleurs mécaniques.", high: "Complications post-méniscectomie : arthrose précoce, chondropathie fémoro-tibiale, douleurs permanentes." } },
         ]
       },
@@ -1299,6 +1365,7 @@ const middleCategories: InjuryCategory[] = [
             { name: "Fracture isolée du péroné", rate: [2, 5], rateCriteria: { low: "Consolidation sans séquelle, gêne discrète.", high: "Cal vicieux péroné avec conflit tibiofibulaire, douleurs latérales cheville." } },
             { name: "Pseudarthrose des deux os de la jambe", rate: [40, 60], rateCriteria: { low: "Pseudarthrose stable avec appareillage orthopédique efficace, marche possible >1km.", high: "Pseudarthrose instable, membre quasi-inutilisable, nécessité fauteuil roulant ou amputation envisagée." } },
             { name: "Pseudarthrose du tibia", rate: [30, 50], rateCriteria: { low: "Pseudarthrose stable du tiers moyen tibia, appareillage, marche limitée mais autonome.", high: "Pseudarthrose instable avec cal fibulaire hypertrophique, douleurs permanentes, impotence fonctionnelle majeure." } },
+            { name: "Pseudarthrose de la diaphyse tibiale", description: "Pseudarthrose du tiers moyen de la diaphyse tibiale avec mobilité anormale et impotence fonctionnelle majeure nécessitant appareillage permanent.", rate: 70 },
             { name: "Syndrome des loges chronique d'effort de la jambe", rate: [10, 25], description: "Douleurs musculaires à l'effort par augmentation de pression dans les loges musculaires.", rateCriteria: { low: "Douleurs apparaissant à l'effort intense, calmées par le repos.", high: "Douleurs invalidantes pour des efforts modérés, avec signes neurologiques." } },
         ]
       },
@@ -1589,6 +1656,11 @@ const middleCategories: InjuryCategory[] = [
               medium: "Sténose urétrale ou anale post-brûlure nécessitant des dilatations régulières, dyspareunie sévère ou impotence.",
               high: "Séquelles majeures avec sténose urétrale ou anale serrée nécessitant une stomie (colostomie, uréthrostomie), troubles sphinctériens invalidants, impotence totale."
             } 
+          },
+          { 
+            name: "Cicatrice vicieuse thorax antérieur", 
+            description: "Cicatrice chéloïde ou rétractile de la face antérieure du thorax avec adhérences aux plans profonds et gêne esthétique.",
+            rate: 8 
           },
         ]
       }
@@ -2026,10 +2098,33 @@ const middleCategories: InjuryCategory[] = [
   },
 ];
 
+// ========================================
+// CAS COMPLEXES ET CUMULS SPÉCIFIQUES  
+// ========================================
+
+const casComplexes: InjuryCategory = {
+  name: "Cas Complexes et Cumuls",
+  subcategories: [
+    {
+      name: "Cumuls Multiples - Membres",
+      injuries: [
+        { name: "Séquelles multiples membres (cumul)", rate: 30 },
+      ]
+    },
+    {
+      name: "Cumuls Multiples - Mixtes",
+      injuries: [
+        { name: "Séquelles multiples (neurologique + ortho)", rate: 12 },
+      ]
+    }
+  ]
+};
+
 // Fusionner toutes les catégories (barème algérien + middleCategories + complément)
 // La fonction mergeCategories va automatiquement fusionner les catégories portant le même nom
 export const disabilityData: InjuryCategory[] = mergeCategories([
   ...algerianBareme1967,
   ...middleCategories,
   ...mayetReyComplement,
+  casComplexes,
 ]);

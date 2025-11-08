@@ -1,0 +1,42 @@
+# Tests
+test-*.ts
+*.test.ts
+test-*.js
+__tests__/
+
+# Documentation
+*.md
+!README.md
+docs/
+
+# Rapports
+audit_reports/
+rapport-*.ts
+validation-report-*.html
+
+# Extracted data (temporaire)
+extracted_bareme/
+*_extracted_*.txt
+*_extracted_*.json
+
+# Scripts de développement
+scripts/
+
+# Node modules (déjà exclus par défaut mais pour clarté)
+node_modules/
+
+# Fichiers système
+.DS_Store
+Thumbs.db
+*.log
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Environnement
+.env
+.env.local
+.env.*.local

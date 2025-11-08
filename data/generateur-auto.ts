@@ -70,9 +70,7 @@ const templates_niveau3 = [
   { desc: "amputation pouce + index main dominante", injuries: ["Amputation pouce", "Amputation index"], rates: [20, 10], cumul: 28 },
   { desc: "surdité bilatérale + acouphènes", injuries: ["Surdité bilatérale 60 dB", "Acouphènes permanents"], rates: [30, 5], cumul: 34 },
   { desc: "cataracte bilatérale + glaucome", injuries: ["Cataracte bilatérale", "Glaucome"], rates: [40, 20], cumul: 52 },
-  { desc: "paraplé
-
-gie complète + troubles sphincters", injuries: ["Paraplégie complète", "Incontinence sphinctérienne"], rates: [80, 30], cumul: 86 },
+  { desc: "paraplégie complète + troubles sphincters", injuries: ["Paraplégie complète", "Incontinence sphinctérienne"], rates: [80, 30], cumul: 86 },
   { desc: "hémiplégie complète + aphasie", injuries: ["Hémiplégie complète", "Aphasie totale"], rates: [70, 40], cumul: 82 }
 ];
 
