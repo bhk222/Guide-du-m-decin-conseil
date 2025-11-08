@@ -3393,6 +3393,14 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
     // 🆕 PREPROCESSING MÉDICAL ENRICHI - Transformer descriptions vagues en termes détectables
     // Ceci enrichit le texte AVANT toute analyse
     const medicalEnrichment: [RegExp, string][] = [
+        // Plexus brachial et nerfs périphériques → Pathologies neurologiques spécifiques
+        [/atteinte\s+(?:du\s+)?tronc\s+sup[eé]rieur\s+(?:du\s+)?plexus\s+brachial/gi, 'paralysie radiculaire supérieure Duchenne-Erb plexus brachial C5 C6'],
+        [/atteinte\s+(?:du\s+)?tronc\s+inf[eé]rieur\s+(?:du\s+)?plexus\s+brachial/gi, 'paralysie radiculaire inférieure Klumpke plexus brachial C8 T1'],
+        [/atteinte\s+(?:du\s+)?plexus\s+brachial/gi, 'paralysie plexus brachial'],
+        [/l[eé]sion\s+(?:du\s+)?plexus\s+brachial/gi, 'paralysie plexus brachial'],
+        [/paralysie\s+(?:du\s+)?plexus\s+brachial/gi, 'paralysie complète plexus brachial'],
+        [/paralysie\s+partielle\s+(?:du\s+)?membre\s+sup[eé]rieur/gi, 'paralysie radiculaire plexus brachial'],
+        
         // Douleurs rachis → Pathologies détectables
         [/\bmal\s+(?:au\s+)?dos\b/gi, 'mal dos rachialgie traumatique vertèbre lombaire'],
         [/\bmal\s+(?:en\s+)?bas\s+(?:du\s+)?dos\b/gi, 'mal bas dos lombalgie traumatique vertèbre lombaire'],
