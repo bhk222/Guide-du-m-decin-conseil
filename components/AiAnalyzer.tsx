@@ -4307,11 +4307,12 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             searchTerms: ["Perte complète de la vision d'un oeil (l'autre étant normal)"],
             priority: 999
         },
-        // Cataracte post-traumatique
+        // Cataracte post-traumatique - Nécessite OBLIGATOIREMENT l'acuité visuelle (V3.3.20)
         {
-            pattern: /cataracte.*(?:post[-\s]?traumatique|traumatique|suite.*traumatisme|apres.*traumatisme)|traumatisme.*cataracte/i,
+            pattern: /cataracte.*(?:post[-\s]?traumatique|traumatique|suite.*traumatisme|apres.*traumatisme)|traumatisme.*cataracte|cataracte/i,
             context: /oeil|vision|acuit[eé]|visuel|cataracte|traumatique|traumatisme/i,
-            searchTerms: ['Cataracte (selon acuité et complications)'],
+            negativeContext: /(?:acuit[eé].*visuelle?|vision).*(?:\d+\/\d+|od.*\d+\/\d+|og.*\d+\/\d+)/i,  // SAUF si acuité chiffrée présente
+            searchTerms: ['__DONNEES_INSUFFISANTES_CATARACTE__'],
             priority: 999
         },
         // Règles viscères (PRIORITÉ MAXIMALE)
@@ -4584,6 +4585,26 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
                           `La fracture est consolidée <strong>sans séquelle résiduelle</strong>.<br><br>` +
                           `📊 <strong>Taux IPP = 0%</strong> (guérison ad integrum)<br><br>` +
                           `Aucune incapacité permanente partielle n'est à retenir.`
+                };
+            }
+            
+            // 🎯 CAS SPÉCIAL: Cataracte SANS acuité visuelle = Données insuffisantes (V3.3.20)
+            if (rule.searchTerms.includes("__DONNEES_INSUFFISANTES_CATARACTE__")) {
+                return {
+                    type: 'no_result',
+                    text: `⚠️ <strong>DONNÉES CLINIQUES INSUFFISANTES POUR ÉVALUATION IPP</strong><br><br>` +
+                          `La <strong>cataracte post-traumatique</strong> a été identifiée, mais son évaluation nécessite <strong>obligatoirement</strong> les données suivantes :<br><br>` +
+                          `<strong>📋 Informations cliniques requises :</strong><br>` +
+                          `<ul>` +
+                          `<li>🔍 <strong>Acuité visuelle chiffrée</strong> de chaque œil (ex: OD 5/10, OG 8/10)</li>` +
+                          `<li>👓 <strong>Avec correction optimale</strong> (lunettes ou lentilles adaptées)</li>` +
+                          `<li>⚠️ <strong>Complications éventuelles</strong> : aphaquie, pseudophakie, intolérance aux verres, etc.</li>` +
+                          `</ul><br>` +
+                          `<strong>📊 Barème applicable</strong> : "Cataracte (selon acuité et complications)" [10-100%]<br><br>` +
+                          `<strong>Exemples de formulation complète :</strong><br>` +
+                          `• "Cataracte post-traumatique OD. Acuité visuelle OD 3/10, OG 10/10 avec correction."<br>` +
+                          `• "Cataracte bilatérale. Acuité visuelle OD 5/10, OG 6/10 sous correction. Pseudophakie."<br><br>` +
+                          `<strong>⚠️ Sans ces données, aucun taux IPP ne peut être proposé de manière fiable.</strong>`
                 };
             }
             
