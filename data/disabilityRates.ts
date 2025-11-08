@@ -306,14 +306,38 @@ const middleCategories: InjuryCategory[] = [
       {
         name: "Nerfs Périphériques - Membre Supérieur",
         injuries: [
-          { name: "Paralysie complète du plexus brachial (droite)", rate: [70, 80] },
-          { name: "Paralysie complète du plexus brachial (gauche)", rate: [60, 70] },
+          { 
+              name: "Paralysie complète du plexus brachial (droite)", 
+              rate: [70, 80],
+              description: "Atteinte complète du plexus brachial, paralysie totale du membre supérieur droit avec troubles sensitifs et douleurs neuropathiques."
+          },
+          { 
+              name: "Paralysie complète du plexus brachial (gauche)", 
+              rate: [60, 70],
+              description: "Atteinte complète du plexus brachial, paralysie totale du membre supérieur gauche avec troubles sensitifs et douleurs neuropathiques."
+          },
           { name: "Paralysie totale du membre supérieur (droite)", rate: [70, 80] },
           { name: "Paralysie totale du membre supérieur (gauche)", rate: [60, 70] },
-          { name: "Paralysie radiculaire supérieure (Duchenne-Erb) (droite)", rate: [45, 55] },
-          { name: "Paralysie radiculaire supérieure (Duchenne-Erb) (gauche)", rate: [35, 45] },
-          { name: "Paralysie radiculaire inférieure (Klumpke) (droite)", rate: [55, 65] },
-          { name: "Paralysie radiculaire inférieure (Klumpke) (gauche)", rate: [45, 55] },
+          { 
+              name: "Paralysie radiculaire supérieure (Duchenne-Erb) (droite)", 
+              rate: [45, 55],
+              description: "Atteinte du tronc supérieur du plexus brachial (racines C5-C6), paralysie partielle proximale : épaule, coude. Clinique : impossibilité d'abduction de l'épaule, flexion du coude limitée, main fonctionnelle. EMG confirmant l'atteinte radiculaire supérieure."
+          },
+          { 
+              name: "Paralysie radiculaire supérieure (Duchenne-Erb) (gauche)", 
+              rate: [35, 45],
+              description: "Atteinte du tronc supérieur du plexus brachial (racines C5-C6), paralysie partielle proximale : épaule, coude. Main fonctionnelle conservée."
+          },
+          { 
+              name: "Paralysie radiculaire inférieure (Klumpke) (droite)", 
+              rate: [55, 65],
+              description: "Atteinte du tronc inférieur du plexus brachial (racines C8-T1), paralysie distale : main, doigts. Clinique : main en griffe, troubles sensitifs cubital. EMG confirmant l'atteinte radiculaire inférieure."
+          },
+          { 
+              name: "Paralysie radiculaire inférieure (Klumpke) (gauche)", 
+              rate: [45, 55],
+              description: "Atteinte du tronc inférieur du plexus brachial (racines C8-T1), paralysie distale : main, doigts. Main en griffe, troubles sensitifs."
+          },
           { name: "Paralysie du nerf du grand dentelé (Serratus anterior) (Main Dominante)", rate: [10, 25], description: "Atteinte du nerf thoracique long entraînant une paralysie du muscle grand dentelé et un décollement de l'omoplate ('scapula alata').", rateCriteria: { low: "Décollement partiel de l'omoplate, gêne modérée dans les mouvements d'élévation au-dessus de 90°.", high: "Décollement complet, perte de force majeure, limitation sévère de l'antépulsion et de l'abduction de l'épaule." } },
           { name: "Paralysie du nerf du grand dentelé (Serratus anterior) (Main Non Dominante)", rate: [8, 20], description: "Atteinte du nerf thoracique long entraînant une paralysie du muscle grand dentelé et un décollement de l'omoplate ('scapula alata').", rateCriteria: { low: "Décollement partiel de l'omoplate, gêne modérée.", high: "Décollement complet, perte de force et limitation sévère des mouvements de l'épaule." } },
           { name: "Paralysie isolée du nerf sous-scapulaire (droite)", rate: [10, 20] },
