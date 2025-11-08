@@ -3055,7 +3055,13 @@ export const findCandidateInjuries = (text: string, externalKeywords?: string[])
                 if (userMentionsHighImpactSequela && !injuryMentionsHighImpactSequela) {
                      // If user mentions a severe sequela, penalize entries that don't have it.
                      const sequelaKeywordsInName = functionalDeficitKeywords.some(kw => normalizedInjuryName.includes(kw));
-                     if(!sequelaKeywordsInName) return; 
+                     
+                     // 🆕 EXCEPTION: Lésions ophtalmologiques (V3.3.32) - acuité visuelle est le critère principal
+                     const isOphthalmologicalInjury = /cataracte|glaucome|retine|cornee|acuite.*visuelle|vision|oeil/i.test(normalizedInjuryName);
+                     
+                     if(!sequelaKeywordsInName && !isOphthalmologicalInjury) {
+                         return;
+                     }
                 }
 
                 // 🚨 EXCLUSION ANTI-DÉSARTICULATION/AMPUTATION si raideur détectée
@@ -3102,9 +3108,13 @@ export const findCandidateInjuries = (text: string, externalKeywords?: string[])
                     if (isGenouQuery && isOeilInjury) return true;
                     
                     // Vision vs Membres
-                    const isVisionQuery = normalizedText.includes('vision') || normalizedText.includes('oeil') || normalizedText.includes('cataracte');
+                    const isVisionQuery = normalizedText.includes('vision') || normalizedText.includes('oeil') || normalizedText.includes('cataracte') || normalizedText.includes('acuite visuelle');
                     const isMembreInjury = normalize(category.name).includes('membres') || normalizedInjuryName.includes('fracture') || normalizedInjuryName.includes('amputation');
                     if (isVisionQuery && isMembreInjury) return true;
+                    
+                    // 🆕 Vision vs Dentaire (V3.3.32) - Bloquer arcade/dent quand contexte oculaire
+                    const isDentaireInjury = normalizedInjuryName.includes('dent') || normalizedInjuryName.includes('arcade') || normalizedInjuryName.includes('molaire') || normalizedInjuryName.includes('incisive');
+                    if (isVisionQuery && isDentaireInjury) return true;
                     
                     // Audition vs Autres
                     const isAuditionQuery = normalizedText.includes('surdite') || normalizedText.includes('audition') || normalizedText.includes('oreille');
