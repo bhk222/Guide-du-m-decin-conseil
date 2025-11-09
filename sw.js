@@ -1,5 +1,5 @@
-const CACHE_NAME = 'guide-medecin-conseil-v2-corrections-phase20';
-const DATA_CACHE_NAME = 'guide-medecin-conseil-data-v2-corrections-phase20';
+const CACHE_NAME = 'guide-medecin-conseil-v3-offline-full';
+const DATA_CACHE_NAME = 'guide-medecin-conseil-data-v3-offline-full';
 
 // Ressources essentielles à mettre en cache immédiatement
 const STATIC_CACHE_URLS = [
@@ -7,6 +7,11 @@ const STATIC_CACHE_URLS = [
   '/index.html',
   '/manifest.json',
   '/metadata.json',
+  '/css/index.css',
+  '/fonts/Roboto-Regular.woff2',
+  '/fonts/Roboto-Medium.woff2',
+  '/fonts/Roboto-Bold.woff2',
+  '/fonts/Roboto-Black.woff2',
 ];
 
 // Installation du Service Worker
