@@ -252,12 +252,13 @@ export const App: React.FC = () => {
         }
     };
 
-    if (!isAuthenticated) {
-        return <Login onLoginSuccess={() => {
-            setIsAuthenticated(true);
-            localStorage.setItem('isAuthenticated', 'true');
-        }} />;
-    }
+    // DÉSACTIVÉ: Authentification retirée pour accès direct
+    // if (!isAuthenticated) {
+    //     return <Login onLoginSuccess={() => {
+    //         setIsAuthenticated(true);
+    //         localStorage.setItem('isAuthenticated', 'true');
+    //     }} />;
+    // }
 
     return (
         <div className="relative min-h-screen bg-background text-slate-800 flex flex-col font-sans">
