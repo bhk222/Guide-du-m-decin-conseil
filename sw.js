@@ -1,5 +1,5 @@
-const CACHE_NAME = 'guide-medecin-conseil-v3-offline-full';
-const DATA_CACHE_NAME = 'guide-medecin-conseil-data-v3-offline-full';
+const CACHE_NAME = 'guide-medecin-conseil-v4-true-offline';
+const DATA_CACHE_NAME = 'guide-medecin-conseil-data-v4-true-offline';
 
 // Ressources essentielles à mettre en cache immédiatement
 const STATIC_CACHE_URLS = [
