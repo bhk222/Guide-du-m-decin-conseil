@@ -22,7 +22,10 @@ const tabTitles: { [key: string]: string } = {
 };
 
 export const App: React.FC = () => {
-    const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [isAuthenticated, setIsAuthenticated] = useState(() => {
+        const saved = localStorage.getItem('isAuthenticated');
+        return saved === 'true';
+    });
     const [activeTab, setActiveTab] = useState('calculator');
     const [selectedInjuries, setSelectedInjuries] = useState<SelectedInjury[]>([]);
     const [totalRate, setTotalRate] = useState(0);
@@ -250,7 +253,10 @@ export const App: React.FC = () => {
     };
 
     if (!isAuthenticated) {
-        return <Login onLoginSuccess={() => setIsAuthenticated(true)} />;
+        return <Login onLoginSuccess={() => {
+            setIsAuthenticated(true);
+            localStorage.setItem('isAuthenticated', 'true');
+        }} />;
     }
 
     return (
@@ -259,6 +265,10 @@ export const App: React.FC = () => {
                 title={tabTitles[activeTab]} 
                 onInstallClick={handleInstallClick} 
                 isInstallable={!!installPrompt}
+                onLogout={() => {
+                    setIsAuthenticated(false);
+                    localStorage.removeItem('isAuthenticated');
+                }}
             />
 
             {/* Indicateur de statut hors ligne */}
