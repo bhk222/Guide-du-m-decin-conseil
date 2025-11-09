@@ -1087,9 +1087,8 @@ export const appareillageDatabase: Appareillage[] = [
     "categorie": "Fauteuils roulants",
     "description": "Fauteuil pliable acier/alu, propulsion manuelle.",
     "indications": [
-      "Incapacité permanente marche",
-      "Paraplégie",
-      "Hémiplégie sévère"
+      "Déficits moteurs permanents des membres inférieurs avec atteintes graves et irréversibles entrainant une incapacité de marche, à titre d'exemples : La Paraplégie ; L'amputation bilatérale des membres inférieurs non appareillable ; Les affections chroniques à un stade avancé telles que les Myopathies, la Sclérose En Plaque (S.E.P) et les polyradiculonévrites ; Diplégie séquelle de poliomyélite (Note DCM/N°374/2025)",
+      "Troubles graves de la marche non compensables (affection qui ne peut être levée par un autre appareillage) : affections neurologiques, orthopédiques ou rhumatologiques rendant la marche très limitée ou dangereuse, et justifiant l'attribution permanente d'un fauteuil roulant ordinaire, à titre d'exemples : Polyarthrite rhumatoïde évolutive avec destruction articulaire sévère ; Séquelles d'AVC avec hémiplégie stabilisée définitive et/ou instabilité posturale majeure malgré les aides à la marche ; Maladie de Parkinson à un stade avancé ; Spondylarthrite ankylosante à un stade avancé (Note DCM/N°374/2025)"
     ],
     "criteres_conformite": [
       "Pliable",
@@ -1190,7 +1189,7 @@ export const appareillageDatabase: Appareillage[] = [
     "categorie": "Fauteuils roulants",
     "description": "Fauteuil à propulsion par moteur électrique avec batterie et commande joystick. Réservé aux patients avec atteinte motrice sévère des 4 membres.",
     "indications": [
-      "Le fauteuil roulant à propulsion par moteur électrique est réservé aux malades qui présentent simultanément une atteinte motrice définitive des membres inférieurs et d'au moins un membre supérieur les mettant dans l'incapacité de marcher ou d'utiliser efficacement un fauteuil roulant ordinaire",
+      "Ce dernier est pris en charge chez les personnes qui sont dans l'incapacité de marcher à cause d'une atteinte motrice définitive des deux (02) membres inférieurs, ne pouvant pas manipuler un fauteuil roulant à propulsion manuelle à cause d'une atteinte motrice définitive d'au moins un membre supérieur, mais pouvant manipuler le joystick (Note DCM/N°374/2025)",
       "Aucune contre-indication à la conduite dans la voie publique",
       "Conditions administratives : Note DG 2218/2015"
     ],
@@ -1212,7 +1211,7 @@ export const appareillageDatabase: Appareillage[] = [
     "categorie": "Fauteuils roulants",
     "description": "Scooter électrique 3 ou 4 roues pour personnes à mobilité réduite. Usage intérieur et extérieur. Nécessite capacité de transfert autonome.",
     "indications": [
-      "Les Voiturettes À Moteur (VAM) sont indiquées chez les personnes présentant un handicap lourd des 02 membres inférieurs avec aucune contre-indication à la conduite dans la voie publique",
+      "Cette dernière est attribuée aux personnes présentant un handicap lourd aux deux membres inférieurs, entrainant une incapacité fonctionnelle totale et définitive, les mettant dans l'impossibilité d'utiliser seules, sans l'aide d'une tierce personne, les moyens de transport collectifs tel que le bus, train, métro, taxi afin d'effectuer des trajets impossibles à faire sur fauteuil roulant (Note DCM/N°374/2025)",
       "Conditions administratives décrites dans la note DG 2218/2015",
       "Capacité de transfert autonome maintenue"
     ],
