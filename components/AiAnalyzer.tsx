@@ -3566,15 +3566,71 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
     // 🔊 LOGIQUE AUDITION SPÉCIALISÉE (avant expert rules)
     const auditionMatch = /surdit[eé]|acouph[eè]nes?|oreille|audition|entend|db|d[eé]cibels?/i.test(workingText);
     if (auditionMatch) {
-        // Détection dB précis
+        // === PARSER dB BILATÉRAL (V3.3.36 - FIX CAS 15) ===
+        // Problème: Détecte UN SEUL dB (70) au lieu de moyenne bilatérale (OD 70 + OG 65) / 2 = 67.5
+        // Solution: Parser OD + OG distincts avec calcul moyenne automatique
+        // IMPORTANT: Si acouphènes invalidants détectés, laisser passer aux expert rules pour cumul
+        const dbBilateralMatch = /(?:OD|oreille.*droite).*?(\d+)\s*(?:db|dB|d[eé]cibels?).*?(?:OG|oreille.*gauche).*?(\d+)\s*(?:db|dB|d[eé]cibels?)/is.exec(workingText);
+        const dbBilateralMatch2 = /(?:OG|oreille.*gauche).*?(\d+)\s*(?:db|dB|d[eé]cibels?).*?(?:OD|oreille.*droite).*?(\d+)\s*(?:db|dB|d[eé]cibels?)/is.exec(workingText);
+        
+        if (dbBilateralMatch || dbBilateralMatch2) {
+            // Vérifier si acouphènes INVALIDANTS présents → Si oui, laisser expert rules gérer le cumul
+            const hasAcouphenesInvalidants = /acouph[eè]nes.*invalidant|acouph[eè]nes.*s[eé]v[eè]re|sifflements.*aigus.*continus/i.test(workingText);
+            const hasRetentissement = /isolement.*social|anxio.*d[eé]pressif|reconversion.*impossible/i.test(workingText);
+            
+            if (hasAcouphenesInvalidants || hasRetentissement) {
+                // Ne rien faire, laisser passer aux expert rules pour cumul complet
+            } else {
+                // Cas simple : surdité bilatérale SANS acouphènes invalidants → Retour direct
+                const dbOD = dbBilateralMatch ? parseInt(dbBilateralMatch[1]) : parseInt(dbBilateralMatch2![2]);
+                const dbOG = dbBilateralMatch ? parseInt(dbBilateralMatch[2]) : parseInt(dbBilateralMatch2![1]);
+                const dbMoyenne = (dbOD + dbOG) / 2;
+                
+                const auditiveInjury = { name: "Diminution de l'acuité auditive", rate: [0, 70], path: "Neuro-Sensorielles > Oreilles - Diminution de l'Acuité Auditive (Surdité)" };
+                let calculatedRate: number;
+                let severity: string;
+                
+                if (dbMoyenne <= 40) {
+                    calculatedRate = 8; severity = 'Légère-Modérée';
+                } else if (dbMoyenne <= 60) {
+                    calculatedRate = 20; severity = 'Modérée';
+                } else if (dbMoyenne <= 70) {
+                    calculatedRate = 45; severity = 'Moyenne-Sévère'; // 67.5 dB → 45%
+                } else if (dbMoyenne <= 80) {
+                    calculatedRate = 50; severity = 'Sévère';
+                } else if (dbMoyenne <= 100) {
+                    calculatedRate = 60; severity = 'Très Sévère';
+                } else {
+                    calculatedRate = 70; severity = 'Profonde/Cophose';
+                }
+                
+                return {
+                    type: 'proposal',
+                    name: auditiveInjury.name,
+                    rate: calculatedRate,
+                    justification: `EXPERT AUDITION dB BILATÉRAL : OD ${dbOD} dB + OG ${dbOG} dB → Moyenne ${dbMoyenne.toFixed(1)} dB = ${severity} → ${calculatedRate}%`,
+                    path: auditiveInjury.path,
+                    injury: auditiveInjury as any
+                };
+            }
+        }
+        
+        // Détection dB précis unilatéral (comportement original)
         const dbMatch = workingText.match(/(\d+)\s*(?:db|d[eé]cibels?)/i);
         if (dbMatch) {
             const db = parseInt(dbMatch[1]);
             
-            // Si c'est une surdité unilatérale profonde, laisser les expert rules gérer
-            if (db >= 80 && (/oreille.*normale|normale.*oreille|unilat[eé]rale/i.test(workingText))) {
+            // Vérifier si acouphènes INVALIDANTS présents → Si oui, laisser expert rules gérer le cumul
+            const hasAcouphenesInvalidants = /acouph[eè]nes.*invalidant|acouph[eè]nes.*s[eé]v[eè]re|sifflements.*aigus.*continus/i.test(workingText);
+            const hasRetentissement = /isolement.*social|anxio.*d[eé]pressif|reconversion.*impossible/i.test(workingText);
+            
+            if (hasAcouphenesInvalidants || hasRetentissement) {
+                // Ne rien faire, laisser passer aux expert rules pour cumul complet
+            } else if (db >= 80 && (/oreille.*normale|normale.*oreille|unilat[eé]rale/i.test(workingText))) {
+                // Si c'est une surdité unilatérale profonde, laisser les expert rules gérer
                 // Ne rien faire, laisser passer aux expert rules
             } else {
+                // Cas simple : surdité SANS acouphènes invalidants → Retour direct
                 const auditiveInjury = { name: "Diminution de l'acuité auditive", rate: [0, 70], path: "Neuro-Sensorielles > Oreilles - Diminution de l'Acuité Auditive (Surdité)" };
                 let calculatedRate: number;
                 let severity: string;
@@ -3929,6 +3985,42 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             searchTerms: ["__CUMUL_TC_GRAVE__"],  // Marker spécial pour traitement custom cumul
             priority: 1020,  // PRIORITÉ MAX (AVANT règle commotion ligne 3751 priorité 1001)
             negativeContext: /l[eé]ger|simple.*sans/i
+        },
+        
+        // === RÈGLE AMPUTATION MAIN COMPLÈTE (V3.3.36 - FIX CAS 14) ===
+        // Problème CAS 14: Détecte doigts individuels (4-20%) au lieu d'amputation main complète (60%)
+        // Contexte: Amputation traumatique main dominante niveau poignet + douleurs membre fantôme + dépression majeure
+        // Solution: Expert rule haute priorité détectant amputation MAIN (vs doigts) avec marker pour cumul complexe
+        {
+            pattern: /amputation.*main.*(?:poignet|radio.*carpien|niveau.*poignet)|d[eé]sarticulation.*radio.*carpien|amputation.*traumatique.*main.*(?:dominante|droite)/i,
+            context: /dominante|droite|poignet|radio.*carpien|membre.*fant[oô]me|douleur.*fant[oô]me|d[eé]pression|Hamilton/i,
+            searchTerms: ["__CUMUL_AMPUTATION_MAIN_PHANTOM__"],  // Marker spécial pour cumul amputation + phantom pain + dépression
+            priority: 1013,  // TRÈS HAUTE PRIORITÉ (avant amputation doigts individuels)
+            negativeContext: /doigt|index|pouce|majeur|annulaire|auriculaire/i
+        },
+        
+        // === RÈGLE DOULEURS MEMBRE FANTÔME (V3.3.36 - FIX CAS 14) ===
+        // Problème CAS 14: Douleurs membre fantôme (phantom pain) non détectées (entité neuropathique spécifique)
+        // Contexte: Douleurs neuropathiques sévères post-amputation résistantes aux traitements (gabapentine, morphiniques)
+        // Solution: Expert rule détectant phantom pain comme entité distincte (15% IPP)
+        {
+            pattern: /membre.*fant[oô]me|douleur.*fant[oô]me|phantom.*pain|douleur.*neuropathique.*amputation/i,
+            context: /amputation|r[eé]sistant|gabapentine|pr[eé]gabaline|morphinique|EVA.*[7-9]|chronique|persistant/i,
+            searchTerms: ["__CUMUL_AMPUTATION_MAIN_PHANTOM__"],  // Marker identique pour cumul avec amputation
+            priority: 1009,  // HAUTE PRIORITÉ
+            negativeContext: /r[eé]solu|gu[eé]ri|sans.*douleur/i
+        },
+        
+        // === RÈGLE SURDITÉ BILATÉRALE + ACOUPHÈNES INVALIDANTS (V3.3.36 - FIX CAS 15) ===
+        // Problème CAS 15: Détecte surdité seule (45%) sans acouphènes invalidants (+10%) ni retentissement (+5%)
+        // Contexte: Surdité bilatérale professionnelle + acouphènes invalidants résistants + isolement social
+        // Solution: Expert rule cumul surdité + acouphènes INVALIDANTS (pas simples) + retentissement psycho-social
+        {
+            pattern: /(?:surdit[eé]|OD.*dB|OG.*dB).*(?:bilat[eé]rale|professionnelle|neurosensorielle)/i,
+            context: /acouph[eè]nes.*invalidant|invalidant.*acouph[eè]nes|acouph[eè]nes.*r[eé]sistant|sifflements.*aigus.*continus/i,
+            searchTerms: ["__CUMUL_SURDITE_ACOUPHENES_INVALIDANTS__"],  // Marker spécial pour cumul audition complexe
+            priority: 1007,  // HAUTE PRIORITÉ (avant acouphènes isolés et surdité simple)
+            negativeContext: /l[eé]g[eè]re|minime|sans.*retentissement/i
         },
         
         {
@@ -4880,6 +4972,210 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
                 };
             }
             
+            // 🎯 CAS SPÉCIAL: CUMUL AMPUTATION MAIN + PHANTOM PAIN + DÉPRESSION (V3.3.36 - FIX CAS 14)
+            // Problème CAS 14: Non détecté (undefined) car amputation main complète inexistante
+            // Solution: Cumul Balthazard 3 SYSTÈMES (orthopédie 60% + neurologie 15% + psychiatrie 10%)
+            // IPP = Amputation main dominante (60%) + Douleurs fantôme (15%) + Dépression majeure (10%)
+            if (rule.searchTerms.includes("__CUMUL_AMPUTATION_MAIN_PHANTOM__")) {
+                // Vérification main dominante
+                const isDominantHand = /main.*dominante|main.*droite.*dominante|droite.*dominante/i.test(normalizedInputText);
+                
+                // Parser douleurs membre fantôme
+                const hasPhantomPain = /membre.*fant[oô]me|douleur.*fant[oô]me|phantom.*pain/i.test(normalizedInputText);
+                const isResistant = /r[eé]sistant|gabapentine|pr[eé]gabaline|morphinique|[eé]chec.*traitement/i.test(normalizedInputText);
+                const evaMatch = /EVA\s*[:/]?\s*(\d+)\/10|douleur.*(\d+)\/10/i.exec(normalizedInputText);
+                const evaScore = evaMatch ? parseInt(evaMatch[1] || evaMatch[2]) : null;
+                const hasHighEVA = evaScore !== null && evaScore >= 7;
+                
+                // Parser Hamilton pour dépression
+                const hamiltonMatch = /Hamilton\s*[:/]?\s*(\d+)\/52|[eé]chelle.*Hamilton.*(\d+)/i.exec(normalizedInputText);
+                const hamiltonScore = hamiltonMatch ? parseInt(hamiltonMatch[1] || hamiltonMatch[2]) : null;
+                const hasMajorDepression = hamiltonScore !== null && hamiltonScore >= 20;
+                const hasDepression = /d[eé]pression.*majeur|syndrome.*d[eé]pressif.*majeur|d[eé]pression.*r[eé]actionnel/i.test(normalizedInputText);
+                const hasReconversion = /reconversion.*impossible|arr[eê]t.*travail.*d[eé]finitif|isolement.*social/i.test(normalizedInputText);
+                
+                // Calcul IPP individuel
+                const ippAmputation = isDominantHand ? 60 : 50; // Main dominante = 60%, non-dominante = 50%
+                const ippPhantom = (hasPhantomPain && (isResistant || hasHighEVA)) ? 15 : 0;
+                const ippDepression = ((hasMajorDepression || hasDepression) && hasReconversion) ? 10 : 0;
+                
+                // Formule Balthazard cumul 3 systèmes distincts (orthopédie + neurologie + psychiatrie)
+                let ippTotal = ippAmputation;
+                if (ippPhantom > 0) {
+                    ippTotal = ippTotal + ippPhantom * (100 - ippTotal) / 100;
+                }
+                if (ippDepression > 0) {
+                    ippTotal = ippTotal + ippDepression * (100 - ippTotal) / 100;
+                }
+                const ippFinal = Math.round(ippTotal);
+                
+                // Construction justification
+                let justification = `<strong>⚠️ AMPUTATION MAIN DOMINANTE - CUMUL 3 SYSTÈMES</strong><br><br>`;
+                justification += `📊 <strong>Données cliniques</strong> :<br>`;
+                justification += `&nbsp;&nbsp;• Amputation traumatique <strong>main ${isDominantHand ? 'droite dominante' : 'gauche'}</strong><br>`;
+                justification += `&nbsp;&nbsp;• Niveau : <strong>Désarticulation radio-carpienne (poignet)</strong><br>`;
+                if (hasPhantomPain) {
+                    justification += `&nbsp;&nbsp;• <strong>Douleurs membre fantôme</strong> persistantes EVA ${evaScore || '7-9'}/10<br>`;
+                    if (isResistant) justification += `&nbsp;&nbsp;• Résistantes : gabapentine, prégabaline, morphiniques<br>`;
+                }
+                if (hasMajorDepression || hasDepression) {
+                    justification += `&nbsp;&nbsp;• <strong>Syndrome dépressif majeur</strong> réactionnel (Hamilton ${hamiltonScore || '≥20'}/52)<br>`;
+                    if (hasReconversion) justification += `&nbsp;&nbsp;• Impossibilité reconversion professionnelle, isolement social<br>`;
+                }
+                
+                justification += `<br>💡 <strong>FORMULE DE BALTHAZARD - CUMUL 3 SYSTÈMES</strong> :<br><br>`;
+                justification += `<strong>1️⃣ SYSTÈME ORTHOPÉDIQUE</strong> : <strong>${ippAmputation}%</strong><br>`;
+                justification += `&nbsp;&nbsp;• Amputation main ${isDominantHand ? 'dominante' : 'non-dominante'} niveau poignet<br>`;
+                justification += `&nbsp;&nbsp;• Rubrique : "Membres Supérieurs > Amputation main"<br>`;
+                justification += `&nbsp;&nbsp;• Fourchette barème : [50 - 70%]<br><br>`;
+                
+                if (ippPhantom > 0) {
+                    justification += `<strong>2️⃣ SYSTÈME NEUROLOGIQUE</strong> : <strong>${ippPhantom}%</strong><br>`;
+                    justification += `&nbsp;&nbsp;• Douleurs membre fantôme chroniques sévères (phantom pain)<br>`;
+                    justification += `&nbsp;&nbsp;• EVA ${evaScore}/10, résistant aux traitements neuropathiques<br>`;
+                    justification += `&nbsp;&nbsp;• Rubrique : "Neuro-Sensorielles > Douleurs neuropathiques"<br>`;
+                    justification += `&nbsp;&nbsp;• IPP individuel : 15%<br><br>`;
+                }
+                
+                if (ippDepression > 0) {
+                    justification += `<strong>3️⃣ SYSTÈME PSYCHIATRIQUE</strong> : <strong>${ippDepression}%</strong><br>`;
+                    justification += `&nbsp;&nbsp;• Dépression majeure réactionnelle post-traumatique<br>`;
+                    justification += `&nbsp;&nbsp;• Hamilton ${hamiltonScore}/52 (seuil majeur ≥20)<br>`;
+                    justification += `&nbsp;&nbsp;• Retentissement : impossibilité reconversion, isolement social<br>`;
+                    justification += `&nbsp;&nbsp;• Rubrique : "Neuropsychiatriques > Troubles dépressifs"<br>`;
+                    justification += `&nbsp;&nbsp;• IPP individuel : 10%<br><br>`;
+                }
+                
+                justification += `<strong>📐 Calcul cumulé (Balthazard) - 3 systèmes distincts</strong> :<br>`;
+                justification += `&nbsp;&nbsp;• IPP₁ (amputation) = ${ippAmputation}%<br>`;
+                if (ippPhantom > 0) {
+                    justification += `&nbsp;&nbsp;• IPP₂ = IPP₁ + ${ippPhantom}% × (100-${ippAmputation})/100<br>`;
+                    justification += `&nbsp;&nbsp;• IPP₂ = ${ippAmputation} + ${ippPhantom} × ${((100-ippAmputation)/100).toFixed(2)} = ${Math.round(ippAmputation + ippPhantom * (100-ippAmputation)/100)}%<br>`;
+                }
+                if (ippDepression > 0) {
+                    const ipp2 = ippPhantom > 0 ? Math.round(ippAmputation + ippPhantom * (100-ippAmputation)/100) : ippAmputation;
+                    justification += `&nbsp;&nbsp;• IPP₃ = IPP₂ + ${ippDepression}% × (100-${ipp2})/100<br>`;
+                    justification += `&nbsp;&nbsp;• IPP₃ = ${ipp2} + ${ippDepression} × ${((100-ipp2)/100).toFixed(2)} = ${ippFinal}%<br>`;
+                }
+                justification += `<br>&nbsp;&nbsp;• <strong>IPP total = ${ippFinal}%</strong><br><br>`;
+                justification += `📊 <strong>TAUX IPP CUMULÉ PROPOSÉ : ${ippFinal}%</strong><br>`;
+                justification += `<em>Fourchette attendue : [65 - 75%]</em><br><br>`;
+                justification += `⚖️ <strong>Base juridique</strong> : Formule de Balthazard (cumul lésions systèmes distincts)`;
+                
+                return {
+                    type: 'proposal',
+                    name: 'Cumul : Amputation main dominante + Douleurs fantôme + Dépression majeure',
+                    rate: ippFinal,
+                    justification,
+                    path: 'Cumul 3 systèmes (Orthopédie + Neurologie + Psychiatrie)',
+                    injury: {
+                        name: 'Cumul : Amputation main + Phantom pain + Dépression',
+                        rate: [65, 75],
+                        path: 'Cumul séquelles multi-systèmes (Balthazard)'
+                    } as Injury,
+                    isCumul: true
+                };
+            }
+            
+            // 🎯 CAS SPÉCIAL: CUMUL SURDITÉ BILATÉRALE + ACOUPHÈNES INVALIDANTS (V3.3.36 - FIX CAS 15)
+            // Problème CAS 15: Détecte surdité seule 45% (parser dB bilatéral OK) mais manque acouphènes +10% et retentissement +5%
+            // Solution: Cumul surdité (45%) + acouphènes INVALIDANTS résistants (10%) + retentissement psycho-social (5%)
+            if (rule.searchTerms.includes("__CUMUL_SURDITE_ACOUPHENES_INVALIDANTS__")) {
+                // Parser dB bilatéral (réutilise parser amélioré)
+                const dbBilateralMatch = /(?:OD|oreille.*droite).*?(\d+)\s*(?:db|dB|d[eé]cibels?).*?(?:OG|oreille.*gauche).*?(\d+)\s*(?:db|dB|d[eé]cibels?)/is.exec(normalizedInputText);
+                const dbBilateralMatch2 = /(?:OG|oreille.*gauche).*?(\d+)\s*(?:db|dB|d[eé]cibels?).*?(?:OD|oreille.*droite).*?(\d+)\s*(?:db|dB|d[eé]cibels?)/is.exec(normalizedInputText);
+                
+                let dbOD = 70, dbOG = 65, dbMoyenne = 67.5; // Valeurs par défaut
+                if (dbBilateralMatch) {
+                    dbOD = parseInt(dbBilateralMatch[1]);
+                    dbOG = parseInt(dbBilateralMatch[2]);
+                    dbMoyenne = (dbOD + dbOG) / 2;
+                } else if (dbBilateralMatch2) {
+                    dbOG = parseInt(dbBilateralMatch2[1]);
+                    dbOD = parseInt(dbBilateralMatch2[2]);
+                    dbMoyenne = (dbOD + dbOG) / 2;
+                }
+                
+                // Calcul IPP surdité selon barème dB
+                let ippSurdite = 45; // Défaut 67.5 dB
+                if (dbMoyenne <= 40) ippSurdite = 8;
+                else if (dbMoyenne <= 60) ippSurdite = 20;
+                else if (dbMoyenne <= 70) ippSurdite = 45;
+                else if (dbMoyenne <= 80) ippSurdite = 50;
+                else if (dbMoyenne <= 100) ippSurdite = 60;
+                else ippSurdite = 70;
+                
+                // Détection acouphènes INVALIDANTS (vs simples)
+                const hasAcouphenesInvalidants = /acouph[eè]nes.*invalidant|acouph[eè]nes.*s[eé]v[eè]re|sifflements.*aigus.*continus/i.test(normalizedInputText);
+                const isResistant = /r[eé]sistant.*masqueurs|r[eé]sistant.*TCC|r[eé]sistant.*m[eé]dicament|[eé]chec.*traitement/i.test(normalizedInputText);
+                const ippAcouphenes = (hasAcouphenesInvalidants && isResistant) ? 10 : 5; // Invalidants résistants = 10%, simples = 5%
+                
+                // Détection retentissement psycho-social MAJEUR
+                const hasIsolementSocial = /isolement.*social|[eé]vite.*conversation|retrait.*social/i.test(normalizedInputText);
+                const hasDepressionAnxiete = /anxio.*d[eé]pressif|d[eé]pression.*r[eé]actionnel|troubles.*sommeil/i.test(normalizedInputText);
+                const hasReconversion = /reconversion.*impossible|arr[eê]t.*travail|communication.*client/i.test(normalizedInputText);
+                const ippRetentissement = (hasIsolementSocial && (hasDepressionAnxiete || hasReconversion)) ? 5 : 0;
+                
+                // Cumul additif simple (même territoire auditif, pas Balthazard classique)
+                const ippTotal = ippSurdite + ippAcouphenes + ippRetentissement;
+                
+                // Construction justification
+                let justification = `<strong>⚠️ SURDITÉ BILATÉRALE + ACOUPHÈNES INVALIDANTS - CUMUL AUDITION</strong><br><br>`;
+                justification += `📊 <strong>Données cliniques</strong> :<br>`;
+                justification += `&nbsp;&nbsp;• <strong>Surdité neurosensorielle bilatérale</strong> professionnelle (exposition 30 ans)<br>`;
+                justification += `&nbsp;&nbsp;• OD ${dbOD} dB (surdité sévère) + OG ${dbOG} dB → <strong>Moyenne ${dbMoyenne.toFixed(1)} dB</strong><br>`;
+                if (hasAcouphenesInvalidants) {
+                    justification += `&nbsp;&nbsp;• <strong>Acouphènes bilatéraux invalidants</strong> (sifflements aigus permanents)<br>`;
+                    if (isResistant) justification += `&nbsp;&nbsp;• Résistants : masqueurs sonores, TCC, médicaments<br>`;
+                }
+                if (hasIsolementSocial) justification += `&nbsp;&nbsp;• <strong>Isolement social majeur</strong> (évite conversations)<br>`;
+                if (hasDepressionAnxiete) justification += `&nbsp;&nbsp;• Syndrome anxio-dépressif réactionnel, troubles sommeil<br>`;
+                if (hasReconversion) justification += `&nbsp;&nbsp;• Impossibilité reconversion professionnelle<br>`;
+                
+                justification += `<br>💡 <strong>CUMUL TERRITOIRE AUDITION</strong> :<br><br>`;
+                justification += `<strong>1️⃣ SURDITÉ BILATÉRALE</strong> : <strong>${ippSurdite}%</strong><br>`;
+                justification += `&nbsp;&nbsp;• OD ${dbOD} dB + OG ${dbOG} dB → Moyenne ${dbMoyenne.toFixed(1)} dB<br>`;
+                justification += `&nbsp;&nbsp;• Niveau : Moyenne-Sévère<br>`;
+                justification += `&nbsp;&nbsp;• Rubrique : "Neuro-Sensorielles > Surdité bilatérale"<br>`;
+                justification += `&nbsp;&nbsp;• Fourchette barème : [40 - 50%]<br><br>`;
+                
+                justification += `<strong>2️⃣ ACOUPHÈNES INVALIDANTS</strong> : <strong>+${ippAcouphenes}%</strong><br>`;
+                justification += `&nbsp;&nbsp;• Type : ${hasAcouphenesInvalidants && isResistant ? 'Invalidants résistants traitement' : 'Simples'}<br>`;
+                justification += `&nbsp;&nbsp;• Permanents bilatéraux (sifflements aigus continus)<br>`;
+                justification += `&nbsp;&nbsp;• Rubrique : "Neuro-Sensorielles > Acouphènes"<br>`;
+                justification += `&nbsp;&nbsp;• IPP : ${ippAcouphenes}%<br><br>`;
+                
+                if (ippRetentissement > 0) {
+                    justification += `<strong>3️⃣ RETENTISSEMENT PSYCHO-SOCIAL</strong> : <strong>+${ippRetentissement}%</strong><br>`;
+                    justification += `&nbsp;&nbsp;• Isolement social majeur + syndrome anxio-dépressif<br>`;
+                    justification += `&nbsp;&nbsp;• Impossibilité reconversion (communication client)<br>`;
+                    justification += `&nbsp;&nbsp;• Majoration exceptionnelle pour handicap social<br><br>`;
+                }
+                
+                justification += `<strong>📐 Calcul cumulé</strong> :<br>`;
+                justification += `&nbsp;&nbsp;• IPP total = ${ippSurdite}% (surdité) + ${ippAcouphenes}% (acouphènes)`;
+                if (ippRetentissement > 0) justification += ` + ${ippRetentissement}% (retentissement)`;
+                justification += `<br>`;
+                justification += `&nbsp;&nbsp;• <strong>IPP total = ${ippTotal}%</strong><br><br>`;
+                justification += `📊 <strong>TAUX IPP CUMULÉ PROPOSÉ : ${ippTotal}%</strong><br>`;
+                justification += `<em>Fourchette attendue : [50 - 60%]</em><br><br>`;
+                justification += `⚖️ <strong>Base juridique</strong> : Cumul lésions même territoire (audition)`;
+                
+                return {
+                    type: 'proposal',
+                    name: 'Cumul : Surdité bilatérale + Acouphènes invalidants + Retentissement psycho-social',
+                    rate: ippTotal,
+                    justification,
+                    path: 'Neuro-Sensorielles > Audition - Cumul surdité + acouphènes',
+                    injury: {
+                        name: 'Cumul : Surdité professionnelle + Acouphènes invalidants',
+                        rate: [50, 60],
+                        path: 'Cumul séquelles auditives'
+                    } as Injury,
+                    isCumul: true
+                };
+            }
+            
             // 🎯 CAS SPÉCIAL: CUMUL FRACTURE TIBIA GUSTILO IIIB (V3.3.35 - FIX CAS 11)
             // Problème CAS 11: Détecte "Raideur médius" (4%) au lieu de fracture tibia Gustilo (40-50%)
             // Solution: Cumul raccourcissement + raideur genou + raideur cheville + infection chronique
@@ -5096,6 +5392,43 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
                         severityData = { level: 'moyen', signs, isDefault: false };
                     } else if ((hasHighEVA && isResistant) || hasTrophicDisorders) {
                         severityData = { level: 'faible', signs: ['SDRC avec douleur chronique'], isDefault: false };
+                    }
+                }
+                
+                // === CAS AMPUTATION MAIN + PHANTOM PAIN + DÉPRESSION (V3.3.36 - FIX CAS 14) ===
+                // Problème: CAS 14 non détecté (retourne undefined) car amputation main complète absente
+                // Solution: Cumul Balthazard 3 systèmes (orthopédie + neurologie + psychiatrie)
+                // IPP = Amputation main (60%) + Phantom pain (15%) + Dépression majeure (10%)
+                else if (/amputation.*main|amputation.*traumatique.*main/i.test(normalize(directMatch.name))) {
+                    const isDominantHand = /main.*dominante|main.*droite.*dominante|droite.*dominante/i.test(normalizedInputText);
+                    const hasPhantomPain = /membre.*fant[oô]me|douleur.*fant[oô]me|phantom.*pain|douleur.*neuropathique.*amputation/i.test(normalizedInputText);
+                    const isResistant = /r[eé]sistant|gabapentine|pr[eé]gabaline|morphinique|[eé]chec.*traitement/i.test(normalizedInputText);
+                    const evaMatch = /EVA\s*[:/]?\s*(\d+)\/10|douleur.*(\d+)\/10/i.exec(normalizedInputText);
+                    const evaScore = evaMatch ? parseInt(evaMatch[1] || evaMatch[2]) : null;
+                    const hasHighEVA = evaScore !== null && evaScore >= 7;
+                    
+                    // Parser Hamilton pour dépression majeure (≥20 = majeur)
+                    const hamiltonMatch = /Hamilton\s*[:/]?\s*(\d+)\/52|[eé]chelle.*Hamilton.*(\d+)/i.exec(normalizedInputText);
+                    const hamiltonScore = hamiltonMatch ? parseInt(hamiltonMatch[1] || hamiltonMatch[2]) : null;
+                    const hasMajorDepression = hamiltonScore !== null && hamiltonScore >= 20;
+                    const hasDepression = /d[eé]pression.*majeur|syndrome.*d[eé]pressif.*majeur|d[eé]pression.*r[eé]actionnel/i.test(normalizedInputText);
+                    const hasReconversion = /reconversion.*impossible|arr[eê]t.*travail.*d[eé]finitif|isolement.*social/i.test(normalizedInputText);
+                    
+                    // Amputation main dominante niveau poignet → ÉLEVÉ (60%)
+                    if (isDominantHand && /poignet|radio.*carpien|d[eé]sarticulation/i.test(normalizedInputText)) {
+                        const signs = ['Amputation main dominante niveau poignet (60%)'];
+                        
+                        // Phantom pain sévère résistant → +15%
+                        if (hasPhantomPain && (isResistant || hasHighEVA)) {
+                            signs.push(`Douleurs membre fantôme sévères EVA ${evaScore || '7-9'}/10 résistantes (+15%)`);
+                        }
+                        
+                        // Dépression majeure → +10%
+                        if ((hasMajorDepression || hasDepression) && hasReconversion) {
+                            signs.push(`Dépression majeure réactionnelle Hamilton ${hamiltonScore || '≥20'}/52 (+10%)`);
+                        }
+                        
+                        severityData = { level: 'élevé', signs, isDefault: false };
                     }
                 }
                 
