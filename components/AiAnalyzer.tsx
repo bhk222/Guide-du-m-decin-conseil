@@ -1052,6 +1052,16 @@ const getBonesFromString = (normalizedText: string): Set<string> => {
             foundBones.add(bone);
         }
     }
+    
+    // EXCLUSION SPÉCIALE: "face" anatomique vs "face" (visage)
+    // Exclure "face" si c'est dans le contexte "face interne/externe de jambe/bras/cuisse"
+    if (foundBones.has('face')) {
+        const faceAnatomicalContext = /(?:face\s+(?:interne|externe).*(?:jambe|bras|cuisse|avant-bras|membre))|(?:(?:interne|externe).*face.*(?:jambe|bras|cuisse|avant-bras|membre))/i;
+        if (faceAnatomicalContext.test(normalizedText)) {
+            foundBones.delete('face');
+        }
+    }
+    
     // Special cases for "deux os"
     if (normalizedText.includes("deux os de l'avant-bras") || (normalizedText.includes('radius') && (normalizedText.includes('cubitus') || normalizedText.includes('ulna')))) {
         foundBones.add('radius');
