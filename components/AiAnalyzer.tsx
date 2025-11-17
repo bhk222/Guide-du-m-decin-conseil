@@ -2104,12 +2104,14 @@ const getAnatomicalCategory = (keyword: string, normalizedText: string): string 
 };
 
 // Fonction pour filtrer les mots-clés selon le contexte anatomique
+// VERSION 3.3.45 - EXCLUSION FACE ANATOMIQUE DIRECTIONNELLE
 const getContextualKeywordWeight = (keyword: string, normalizedText: string): number => {
-    // EXCLUSION SPÉCIALE: "face" dans contexte anatomique directionnel
+    // EXCLUSION CRITIQUE: "face" en contexte anatomique directionnel (face interne/externe de jambe/bras)
+    // Pattern: "face interne de la jambe" ou "interne... face... jambe"
     if (keyword === 'face') {
-        const faceAnatomicalContext = /(?:face\s+(?:interne|externe).*(?:jambe|bras|cuisse|avant-bras|membre))|(?:(?:interne|externe).*face.*(?:jambe|bras|cuisse|avant-bras|membre))/i;
-        if (faceAnatomicalContext.test(normalizedText)) {
-            // Dans contexte anatomique directionnel, poids = 0 (exclu du scoring)
+        const faceDirectionalPattern = /(?:face\s+(?:interne|externe).*(?:jambe|bras|cuisse|avant-bras|membre))|(?:(?:interne|externe).*face.*(?:jambe|bras|cuisse|avant-bras|membre))/i;
+        if (faceDirectionalPattern.test(normalizedText)) {
+            // Retourner 0 pour exclure "face" du scoring (ce n'est pas le visage, c'est une direction anatomique)
             return 0;
         }
     }
