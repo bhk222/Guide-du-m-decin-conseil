@@ -1062,12 +1062,15 @@ const getBonesFromString = (normalizedText: string): Set<string> => {
         }
     }
     
-    // Special cases for "deux os"
-    if (normalizedText.includes("deux os de l avant bras") || normalizedText.includes("2 os de l avant bras") || (normalizedText.includes('radius') && (normalizedText.includes('cubitus') || normalizedText.includes('ulna')))) {
+    // Special cases for "deux os" (support different number formats)
+    const deuxOsAvantBras = /(?:2|deux)\s+os.*(?:avant[\s-]?bras|forearm)/i;
+    const deuxOsJambe = /(?:2|deux)\s+os.*jambe/i;
+    
+    if (deuxOsAvantBras.test(normalizedText) || (normalizedText.includes('radius') && (normalizedText.includes('cubitus') || normalizedText.includes('ulna')))) {
         foundBones.add('radius');
         foundBones.add('ulna');
     }
-    if (normalizedText.includes("deux os de la jambe") || normalizedText.includes("2 os de la jambe") || (normalizedText.includes('tibia') && (normalizedText.includes('perone') || normalizedText.includes('fibula')))) {
+    if (deuxOsJambe.test(normalizedText) || (normalizedText.includes('tibia') && (normalizedText.includes('perone') || normalizedText.includes('fibula')))) {
         foundBones.add('tibia');
         foundBones.add('fibula');
     }
@@ -2031,6 +2034,7 @@ const synonymMap: { [key: string]: string } = {
 
 
 // Map anatomical keywords to their main category name (must match disabilityData.ts names EXACTLY)
+// EXCLUSION CONTEXTUELLE pour "face" traitée dans getAnatomicalCategory
 const anatomicalKeywords: { [key: string]: string } = {
     // Membres Supérieurs
     'doigt': 'Membres Supérieurs', 'pouce': 'Membres Supérieurs', 'index': 'Membres Supérieurs', 'médius': 'Membres Supérieurs', 'annulaire': 'Membres Supérieurs', 'auriculaire': 'Membres Supérieurs',
@@ -2084,6 +2088,19 @@ const anatomicalKeywords: { [key: string]: string } = {
     'coeur': 'Séquelles Thoraciques, Abdominales, Pelviennes et Cardio-vasculaires', 'cardiaque': 'Séquelles Thoraciques, Abdominales, Pelviennes et Cardio-vasculaires',
 
     'cicatrice': 'Membres Supérieurs', // Cicatrices are spread out, default to a common category
+};
+
+// Fonction pour obtenir la catégorie anatomique avec exclusion contextuelle
+const getAnatomicalCategory = (keyword: string, normalizedText: string): string | undefined => {
+    // EXCLUSION SPÉCIALE: "face" anatomique vs "face" (visage)
+    if (keyword === 'face') {
+        const faceAnatomicalContext = /(?:face\s+(?:interne|externe).*(?:jambe|bras|cuisse|avant-bras|membre))|(?:(?:interne|externe).*face.*(?:jambe|bras|cuisse|avant-bras|membre))/i;
+        if (faceAnatomicalContext.test(normalizedText)) {
+            // Dans contexte anatomique directionnel, ne pas mapper à Maxillo-Facial
+            return undefined;
+        }
+    }
+    return anatomicalKeywords[keyword];
 };
 
 const subPartKeywords: { [key: string]: string[] } = {
@@ -2996,8 +3013,10 @@ export const findCandidateInjuries = (text: string, externalKeywords?: string[])
     keywords.forEach(keyword => {
         for (const anatomicalKey in anatomicalKeywords) {
             if (keyword.includes(anatomicalKey)) {
-                const categoryName = anatomicalKeywords[anatomicalKey];
-                categoryScores[categoryName] = (categoryScores[categoryName] || 0) + 1;
+                const categoryName = getAnatomicalCategory(anatomicalKey, normalizedText);
+                if (categoryName) { // Seules les catégories non exclues sont comptées
+                    categoryScores[categoryName] = (categoryScores[categoryName] || 0) + 1;
+                }
             }
         }
     });
