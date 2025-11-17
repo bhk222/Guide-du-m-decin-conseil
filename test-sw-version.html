@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diagnostic Service Worker</title>
+    <style>
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 20px;
+            background: #0f172a;
+            color: #e2e8f0;
+        }
+        .panel {
+            background: #1e293b;
+            padding: 24px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #334155;
+        }
+        h1 { color: #60a5fa; margin-top: 0; }
+        h2 { color: #a78bfa; font-size: 18px; }
+        .btn {
+            background: #3b82f6;
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            margin-right: 10px;
+            margin-bottom: 10px;
+        }
+        .btn:hover { background: #2563eb; }
+        .btn-danger { background: #ef4444; }
+        .btn-danger:hover { background: #dc2626; }
+        .btn-success { background: #10b981; }
+        .btn-success:hover { background: #059669; }
+        pre {
+            background: #0f172a;
+            padding: 16px;
+            border-radius: 8px;
+            overflow-x: auto;
+            border: 1px solid #334155;
+        }
+        .alert {
+            padding: 16px;
+            border-radius: 8px;
+            margin: 16px 0;
+            border-left: 4px solid;
+        }
+        .alert-info {
+            background: #1e3a5f;
+            border-color: #3b82f6;
+        }
+        .alert-warning {
+            background: #713f12;
+            border-color: #f59e0b;
+        }
+        .alert-success {
+            background: #064e3b;
+            border-color: #10b981;
+        }
+        .alert-error {
+            background: #7f1d1d;
+            border-color: #ef4444;
+        }
+        .status {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 14px;
+            font-weight: 600;
+        }
+        .status-old { background: #7f1d1d; color: #fecaca; }
+        .status-new { background: #064e3b; color: #86efac; }
+        code {
+            background: #334155;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+        }
+    </style>
+</head>
+<body>
+    <div class="panel">
+        <h1>🔍 Diagnostic Service Worker & Cache</h1>
+        <p>Cette page permet de diagnostiquer pourquoi l'ancienne version de l'IA persiste.</p>
+    </div>
+
+    <div class="panel">
+        <h2>📍 Informations de déploiement</h2>
+        <div id="urlInfo"></div>
+    </div>
+
+    <div class="panel">
+        <h2>🔧 Service Worker actif</h2>
+        <div id="swInfo"></div>
+        <button class="btn btn-danger" onclick="unregisterSW()">🗑️ Désinscrire le Service Worker</button>
+        <button class="btn" onclick="checkSW()">🔄 Vérifier à nouveau</button>
+    </div>
+
+    <div class="panel">
+        <h2>💾 Caches stockés</h2>
+        <div id="cacheInfo"></div>
+        <button class="btn btn-danger" onclick="clearAllCaches()">🗑️ Vider tous les caches</button>
+        <button class="btn" onclick="checkCaches()">🔄 Vérifier à nouveau</button>
+    </div>
+
+    <div class="panel">
+        <h2>🧹 Nettoyage complet</h2>
+        <div class="alert alert-warning">
+            <strong>⚠️ Attention:</strong> Ceci va supprimer tous les caches et Service Workers de l'application.
+        </div>
+        <button class="btn btn-danger" onclick="fullCleanup()">🔥 NETTOYAGE COMPLET</button>
+    </div>
+
+    <div class="panel">
+        <h2>📋 Instructions de test</h2>
+        <div class="alert alert-info">
+            <strong>Après le nettoyage:</strong>
+            <ol>
+                <li>Fermez cette page</li>
+                <li>Fermez TOUS les onglets de l'application</li>
+                <li>Rouvrez l'application avec cette URL: <code>https://guide-medecin-conseil-17zrntk4z-bhk222s-projects.vercel.app</code></li>
+                <li>Testez avec le cas de fracture de jambe</li>
+            </ol>
+        </div>
+    </div>
+
+    <script>
+        function log(id, html) {
+            document.getElementById(id).innerHTML = html;
+        }
+
+        // Vérifier l'URL actuelle
+        function checkURL() {
+            const url = window.location.href;
+            const isLatest = url.includes('17zrntk4z');
+            const isOld = url.includes('g1tp3e1vv') || url.includes('5hh53ki4u');
+            
+            let html = `<p><strong>URL actuelle:</strong> <code>${url}</code></p>`;
+            
+            if (isLatest) {
+                html += '<div class="alert alert-success">✅ Vous êtes sur la <strong>dernière version (V3.3.41)</strong></div>';
+            } else if (isOld) {
+                html += `<div class="alert alert-error">
+                    ❌ Vous êtes sur une <strong>ancienne version</strong> !<br>
+                    Utilisez plutôt: <code>https://guide-medecin-conseil-17zrntk4z-bhk222s-projects.vercel.app</code>
+                </div>`;
+            } else {
+                html += '<div class="alert alert-warning">⚠️ Impossible de déterminer la version</div>';
+            }
+            
+            log('urlInfo', html);
+        }
+
+        // Vérifier les Service Workers
+        async function checkSW() {
+            if (!navigator.serviceWorker) {
+                log('swInfo', '<div class="alert alert-info">ℹ️ Les Service Workers ne sont pas supportés</div>');
+                return;
+            }
+
+            try {
+                const registrations = await navigator.serviceWorker.getRegistrations();
+                
+                if (registrations.length === 0) {
+                    log('swInfo', '<div class="alert alert-success">✅ Aucun Service Worker inscrit</div>');
+                    return;
+                }
+
+                let html = `<p>Service Workers trouvés: <strong>${registrations.length}</strong></p>`;
+                
+                registrations.forEach((reg, i) => {
+                    const sw = reg.active || reg.waiting || reg.installing;
+                    html += `<div class="alert alert-warning">
+                        <strong>SW ${i+1}:</strong><br>
+                        Scope: <code>${reg.scope}</code><br>
+                        État: ${reg.active ? '🟢 Actif' : reg.waiting ? '🟡 En attente' : '🔵 Installation'}
+                    </div>`;
+                });
+
+                html += '<div class="alert alert-error">⚠️ Des Service Workers sont actifs et peuvent cacher l\'ancienne version !</div>';
+                
+                log('swInfo', html);
+            } catch (err) {
+                log('swInfo', `<div class="alert alert-error">❌ Erreur: ${err.message}</div>`);
+            }
+        }
+
+        // Désinscrire les Service Workers
+        async function unregisterSW() {
+            if (!navigator.serviceWorker) {
+                alert('Les Service Workers ne sont pas supportés');
+                return;
+            }
+
+            try {
+                const registrations = await navigator.serviceWorker.getRegistrations();
+                
+                for (const reg of registrations) {
+                    await reg.unregister();
+                }
+                
+                log('swInfo', '<div class="alert alert-success">✅ Tous les Service Workers ont été supprimés</div>');
+            } catch (err) {
+                log('swInfo', `<div class="alert alert-error">❌ Erreur: ${err.message}</div>`);
+            }
+        }
+
+        // Vérifier les caches
+        async function checkCaches() {
+            if (!window.caches) {
+                log('cacheInfo', '<div class="alert alert-info">ℹ️ L\'API Cache n\'est pas supportée</div>');
+                return;
+            }
+
+            try {
+                const cacheNames = await caches.keys();
+                
+                if (cacheNames.length === 0) {
+                    log('cacheInfo', '<div class="alert alert-success">✅ Aucun cache stocké</div>');
+                    return;
+                }
+
+                let html = `<p>Caches trouvés: <strong>${cacheNames.length}</strong></p>`;
+                
+                for (const name of cacheNames) {
+                    const isOld = name.includes('v4-true-offline');
+                    const isNew = name.includes('v4.1-face-fix');
+                    
+                    const cache = await caches.open(name);
+                    const keys = await cache.keys();
+                    
+                    html += `<div class="alert ${isOld ? 'alert-error' : isNew ? 'alert-success' : 'alert-warning'}">
+                        <strong>${name}</strong>
+                        ${isOld ? '<span class="status status-old">ANCIEN CACHE</span>' : ''}
+                        ${isNew ? '<span class="status status-new">NOUVEAU CACHE</span>' : ''}
+                        <br>Fichiers en cache: ${keys.length}
+                    </div>`;
+                }
+
+                if (cacheNames.some(n => n.includes('v4-true-offline'))) {
+                    html += '<div class="alert alert-error">⚠️ L\'ancien cache est toujours présent ! Supprimez-le.</div>';
+                }
+                
+                log('cacheInfo', html);
+            } catch (err) {
+                log('cacheInfo', `<div class="alert alert-error">❌ Erreur: ${err.message}</div>`);
+            }
+        }
+
+        // Vider tous les caches
+        async function clearAllCaches() {
+            if (!window.caches) {
+                alert('L\'API Cache n\'est pas supportée');
+                return;
+            }
+
+            try {
+                const cacheNames = await caches.keys();
+                
+                for (const name of cacheNames) {
+                    await caches.delete(name);
+                }
+                
+                log('cacheInfo', '<div class="alert alert-success">✅ Tous les caches ont été supprimés</div>');
+            } catch (err) {
+                log('cacheInfo', `<div class="alert alert-error">❌ Erreur: ${err.message}</div>`);
+            }
+        }
+
+        // Nettoyage complet
+        async function fullCleanup() {
+            if (!confirm('⚠️ Êtes-vous sûr de vouloir tout supprimer (Service Workers + Caches) ?')) {
+                return;
+            }
+
+            await unregisterSW();
+            await clearAllCaches();
+            
+            alert('✅ Nettoyage complet effectué !\n\n📋 Instructions:\n1. Fermez cette page\n2. Fermez TOUS les onglets de l\'application\n3. Rouvrez avec l\'URL: https://guide-medecin-conseil-17zrntk4z-bhk222s-projects.vercel.app');
+            
+            // Recharger après 2 secondes
+            setTimeout(() => {
+                window.location.reload();
+            }, 2000);
+        }
+
+        // Vérifications au chargement
+        window.addEventListener('load', () => {
+            checkURL();
+            checkSW();
+            checkCaches();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test IA - Version du Code</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        .card {
+            background: white;
+            border-radius: 16px;
+            padding: 32px;
+            margin-bottom: 24px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+        }
+        h1 {
+            color: #667eea;
+            margin-bottom: 24px;
+            font-size: 32px;
+        }
+        h2 {
+            color: #764ba2;
+            margin-bottom: 16px;
+            font-size: 24px;
+        }
+        .url-section {
+            background: #f8fafc;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            border-left: 4px solid #667eea;
+        }
+        .url-display {
+            font-family: monospace;
+            background: #1e293b;
+            color: #10b981;
+            padding: 12px;
+            border-radius: 8px;
+            word-break: break-all;
+            margin: 10px 0;
+        }
+        .btn-group {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin: 16px 0;
+        }
+        button {
+            padding: 14px 28px;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(102, 126, 234, 0.4);
+        }
+        .btn-danger {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+        }
+        .btn-danger:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(245, 87, 108, 0.4);
+        }
+        .status-badge {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 700;
+            font-size: 14px;
+            margin: 8px 4px;
+        }
+        .badge-old {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            animation: pulse 2s infinite;
+        }
+        .badge-new {
+            background: linear-gradient(135deg, #5ee7df 0%, #b490ca 100%);
+            color: white;
+        }
+        .badge-unknown {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            color: #333;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        .info-box {
+            background: #eff6ff;
+            border: 2px solid #3b82f6;
+            padding: 20px;
+            border-radius: 12px;
+            margin: 16px 0;
+        }
+        .warning-box {
+            background: #fef3c7;
+            border: 2px solid #f59e0b;
+            padding: 20px;
+            border-radius: 12px;
+            margin: 16px 0;
+        }
+        .success-box {
+            background: #d1fae5;
+            border: 2px solid #10b981;
+            padding: 20px;
+            border-radius: 12px;
+            margin: 16px 0;
+        }
+        .error-box {
+            background: #fee2e2;
+            border: 2px solid #ef4444;
+            padding: 20px;
+            border-radius: 12px;
+            margin: 16px 0;
+        }
+        pre {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 16px;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-size: 14px;
+        }
+        .result-section {
+            margin-top: 24px;
+        }
+        ol, ul {
+            margin-left: 24px;
+            line-height: 1.8;
+        }
+        .highlight {
+            background: #fef3c7;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+        .loader {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #667eea;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="card">
+            <h1>🔬 Testeur de Version de l'IA</h1>
+            
+            <div class="url-section">
+                <h2>📍 URL actuelle</h2>
+                <div class="url-display" id="currentUrl"></div>
+                <div id="urlStatus"></div>
+            </div>
+
+            <div class="btn-group">
+                <button class="btn-primary" onclick="checkVersion()">🔍 Vérifier la version du code</button>
+                <button class="btn-danger" onclick="clearEverything()">🧹 Nettoyer cache + SW</button>
+            </div>
+
+            <div id="result" class="result-section"></div>
+        </div>
+
+        <div class="card">
+            <h2>📋 URLs de déploiement</h2>
+            <div class="info-box">
+                <strong>✅ Dernière version (V3.3.41):</strong><br>
+                <div class="url-display">https://guide-medecin-conseil-17zrntk4z-bhk222s-projects.vercel.app</div>
+            </div>
+            <div class="warning-box">
+                <strong>⚠️ Versions anciennes (NE PAS UTILISER):</strong><br>
+                <div class="url-display">https://guide-medecin-conseil-g1tp3e1vv-bhk222s-projects.vercel.app</div>
+                <div class="url-display">https://guide-medecin-conseil-5hh53ki4u-bhk222s-projects.vercel.app</div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>🎯 Instructions de test</h2>
+            <div class="info-box">
+                <ol>
+                    <li>Cliquez sur <span class="highlight">"Nettoyer cache + SW"</span></li>
+                    <li>Fermez <strong>TOUS</strong> les onglets de l'application</li>
+                    <li>Ouvrez cette URL dans un nouvel onglet:<br>
+                        <div class="url-display">https://guide-medecin-conseil-17zrntk4z-bhk222s-projects.vercel.app</div>
+                    </li>
+                    <li>Testez avec le cas:<br>
+                        <pre>agé de 72 victime d'un at survenue le 12 mars 2010 a l'origine de fracture des 2 os de la jambe droite ; sequelles : saillie osseuse au niveau de la face interne de la jambe droite avec un genou valgum droit</pre>
+                    </li>
+                    <li>Résultat attendu: <strong>Fracture des deux os de la jambe</strong> (PAS fracture du nez)</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Afficher l'URL actuelle
+        document.getElementById('currentUrl').textContent = window.location.href;
+
+        // Détection de la version
+        const url = window.location.href;
+        let statusHTML = '';
+        
+        if (url.includes('17zrntk4z')) {
+            statusHTML = '<div class="success-box"><span class="badge-new">✅ VERSION 3.3.41 (CORRECTE)</span><br>Vous êtes sur la bonne version avec les corrections !</div>';
+        } else if (url.includes('g1tp3e1vv') || url.includes('5hh53ki4u')) {
+            statusHTML = '<div class="error-box"><span class="badge-old">❌ VERSION OBSOLÈTE</span><br>Cette URL contient l\'ancienne version SANS les corrections !</div>';
+        } else {
+            statusHTML = '<div class="warning-box"><span class="badge-unknown">⚠️ VERSION INCONNUE</span></div>';
+        }
+        
+        document.getElementById('urlStatus').innerHTML = statusHTML;
+
+        // Vérification de la version du code
+        async function checkVersion() {
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = '<div class="loader"></div><p style="text-align: center;">Vérification en cours...</p>';
+
+            let report = '<h2>📊 Rapport de diagnostic</h2>';
+
+            // 1. Vérifier l'URL
+            report += '<h3>1️⃣ URL actuelle</h3>';
+            if (url.includes('17zrntk4z')) {
+                report += '<div class="success-box">✅ Vous êtes sur la dernière URL (V3.3.41)</div>';
+            } else {
+                report += '<div class="error-box">❌ Vous n\'êtes PAS sur la dernière URL !<br>Utilisez: https://guide-medecin-conseil-17zrntk4z-bhk222s-projects.vercel.app</div>';
+            }
+
+            // 2. Vérifier les Service Workers
+            report += '<h3>2️⃣ Service Workers</h3>';
+            if (navigator.serviceWorker) {
+                try {
+                    const regs = await navigator.serviceWorker.getRegistrations();
+                    if (regs.length === 0) {
+                        report += '<div class="success-box">✅ Aucun Service Worker actif</div>';
+                    } else {
+                        report += `<div class="warning-box">⚠️ ${regs.length} Service Worker(s) actif(s)<br>Ceux-ci peuvent cacher l'ancienne version !</div>`;
+                    }
+                } catch (e) {
+                    report += `<div class="error-box">❌ Erreur: ${e.message}</div>`;
+                }
+            } else {
+                report += '<div class="info-box">ℹ️ Service Workers non supportés</div>';
+            }
+
+            // 3. Vérifier les caches
+            report += '<h3>3️⃣ Caches</h3>';
+            if (window.caches) {
+                try {
+                    const cacheNames = await caches.keys();
+                    if (cacheNames.length === 0) {
+                        report += '<div class="success-box">✅ Aucun cache stocké</div>';
+                    } else {
+                        const hasOld = cacheNames.some(n => n.includes('v4-true-offline'));
+                        const hasNew = cacheNames.some(n => n.includes('v4.1-face-fix'));
+                        
+                        report += `<div class="info-box">Caches trouvés: ${cacheNames.length}<br><ul>`;
+                        cacheNames.forEach(name => {
+                            const isOld = name.includes('v4-true-offline');
+                            const isNew = name.includes('v4.1-face-fix');
+                            report += `<li>${name} ${isOld ? '<span class="badge-old">ANCIEN</span>' : ''} ${isNew ? '<span class="badge-new">NOUVEAU</span>' : ''}</li>`;
+                        });
+                        report += '</ul></div>';
+
+                        if (hasOld) {
+                            report += '<div class="error-box">❌ L\'ancien cache est présent ! Nettoyez-le.</div>';
+                        }
+                    }
+                } catch (e) {
+                    report += `<div class="error-box">❌ Erreur: ${e.message}</div>`;
+                }
+            } else {
+                report += '<div class="info-box">ℹ️ Cache API non supportée</div>';
+            }
+
+            // 4. Conclusion
+            report += '<h3>4️⃣ Conclusion</h3>';
+            const problems = [];
+            if (!url.includes('17zrntk4z')) problems.push('URL obsolète');
+            
+            if (navigator.serviceWorker) {
+                const regs = await navigator.serviceWorker.getRegistrations();
+                if (regs.length > 0) problems.push('Service Workers actifs');
+            }
+            
+            if (window.caches) {
+                const cacheNames = await caches.keys();
+                if (cacheNames.some(n => n.includes('v4-true-offline'))) {
+                    problems.push('Ancien cache présent');
+                }
+            }
+
+            if (problems.length === 0) {
+                report += '<div class="success-box"><strong>✅ Tout est OK !</strong><br>L\'application devrait utiliser la dernière version.</div>';
+            } else {
+                report += `<div class="error-box"><strong>❌ Problèmes détectés:</strong><ul>`;
+                problems.forEach(p => {
+                    report += `<li>${p}</li>`;
+                });
+                report += '</ul><br><strong>Solution:</strong> Cliquez sur "Nettoyer cache + SW" puis rechargez.</div>';
+            }
+
+            resultDiv.innerHTML = report;
+        }
+
+        // Nettoyage complet
+        async function clearEverything() {
+            if (!confirm('⚠️ Confirmer le nettoyage complet (Service Workers + Caches) ?')) {
+                return;
+            }
+
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = '<div class="loader"></div><p style="text-align: center;">Nettoyage en cours...</p>';
+
+            let report = '<h2>🧹 Résultat du nettoyage</h2>';
+
+            // Désinscrire les Service Workers
+            if (navigator.serviceWorker) {
+                try {
+                    const regs = await navigator.serviceWorker.getRegistrations();
+                    for (const reg of regs) {
+                        await reg.unregister();
+                    }
+                    report += `<div class="success-box">✅ ${regs.length} Service Worker(s) supprimé(s)</div>`;
+                } catch (e) {
+                    report += `<div class="error-box">❌ Erreur SW: ${e.message}</div>`;
+                }
+            }
+
+            // Vider les caches
+            if (window.caches) {
+                try {
+                    const cacheNames = await caches.keys();
+                    for (const name of cacheNames) {
+                        await caches.delete(name);
+                    }
+                    report += `<div class="success-box">✅ ${cacheNames.length} cache(s) supprimé(s)</div>`;
+                } catch (e) {
+                    report += `<div class="error-box">❌ Erreur Cache: ${e.message}</div>`;
+                }
+            }
+
+            report += `<div class="warning-box">
+                <strong>⚠️ Étapes suivantes:</strong><br>
+                <ol>
+                    <li>Fermez cette page</li>
+                    <li>Fermez <strong>TOUS</strong> les onglets de l'application</li>
+                    <li>Ouvrez cette URL dans un nouvel onglet:<br>
+                        <div class="url-display">https://guide-medecin-conseil-17zrntk4z-bhk222s-projects.vercel.app</div>
+                    </li>
+                    <li>Testez le cas de fracture de jambe</li>
+                </ol>
+                <p style="margin-top: 16px;"><strong>Cette page va se recharger dans 3 secondes...</strong></p>
+            </div>`;
+
+            resultDiv.innerHTML = report;
+
+            setTimeout(() => {
+                window.location.reload();
+            }, 3000);
+        }
+
+        // Vérifier automatiquement au chargement
+        window.addEventListener('load', () => {
+            checkVersion();
+        });
+    </script>
+</body>
+</html>
