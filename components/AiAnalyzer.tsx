@@ -4333,10 +4333,23 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             priority: 93
         },
         {
-            pattern: /fracture.*(?:deux\s+os|both\s+bones).*avant-bras|fracture.*radius.*ulna/i,
+            pattern: /fracture.*(?:deux\s+os.*(?:avant-bras|forearm)|both\s+bones.*(?:avant-bras|forearm))|fracture.*radius.*(?:ulna|cubitus)/i,
             context: /avant-bras|prono|supination|rotation|cal\s+vicieux/i,
             searchTerms: ['Fracture des deux os de l\'avant-bras - Cal vicieux avec limitation de la prono-supination (Main Dominante)'],
             priority: 94
+        },
+        {
+            pattern: /fracture.*(?:deux\s+os.*(?:jambe|leg)|both\s+bones.*(?:jambe|leg))|fracture.*tibia.*(?:p[eé]ron[eé]|fibula)/i,
+            context: /jambe|saillie.*osseus|cal\s+vicieux|genou\s+valgum|troubles?\s+trophiques?/i,
+            searchTerms: ['Fracture des deux os de la jambe - Avec cal vicieux et troubles trophiques'],
+            priority: 95
+        },
+        {
+            pattern: /fracture.*(?:deux\s+os.*(?:jambe|leg)|both\s+bones.*(?:jambe|leg))|fracture.*tibia.*(?:p[eé]ron[eé]|fibula)/i,
+            context: /jambe|bonne\s+consolidation|consolidation.*anatomique/i,
+            negativeContext: /cal\s+vicieux|troubles?\s+trophiques?|saillie.*osseus|genou\s+valgum/i,
+            searchTerms: ['Fracture des deux os de la jambe - Bonne consolidation'],
+            priority: 93
         },
         {
             pattern: /fracture.*radius/i,
