@@ -3051,6 +3051,13 @@ export const findCandidateInjuries = (text: string, externalKeywords?: string[])
         const catName = normalize(category.name);
         const subName = normalize(subcategory.name);
         
+        // 🆕 EXCLUSION CRITIQUE: Maxillo-Facial vs Membres si "face interne/externe" détecté
+        const hasDirectionalFaceContext = /(?:face\s+(?:interne|externe).*(?:jambe|bras|cuisse|avant-bras|membre))|(?:(?:interne|externe).*face.*(?:jambe|bras|cuisse|avant-bras|membre))/i.test(normalizedText);
+        const isMaxilloFacialCat = catName.includes('maxillo') || catName.includes('facial') || subName.includes('face') || subName.includes('machoire');
+        if (hasDirectionalFaceContext && isMaxilloFacialCat) {
+            return false; // Bloquer TOUTES les séquelles maxillo-faciales si contexte directionnel détecté
+        }
+        
         // Membres Supérieurs vs Inférieurs - Blocage strict croisé
         const isMembreSupQuery = normalizedText.includes('epaule') || normalizedText.includes('coiffe') || 
                                   normalizedText.includes('bras') || normalizedText.includes('coude') ||
