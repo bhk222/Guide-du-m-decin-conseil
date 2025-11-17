@@ -1063,11 +1063,11 @@ const getBonesFromString = (normalizedText: string): Set<string> => {
     }
     
     // Special cases for "deux os"
-    if (normalizedText.includes("deux os de l'avant-bras") || (normalizedText.includes('radius') && (normalizedText.includes('cubitus') || normalizedText.includes('ulna')))) {
+    if (normalizedText.includes("deux os de l avant bras") || normalizedText.includes("2 os de l avant bras") || (normalizedText.includes('radius') && (normalizedText.includes('cubitus') || normalizedText.includes('ulna')))) {
         foundBones.add('radius');
         foundBones.add('ulna');
     }
-    if (normalizedText.includes("deux os de la jambe") || (normalizedText.includes('tibia') && (normalizedText.includes('perone') || normalizedText.includes('fibula')))) {
+    if (normalizedText.includes("deux os de la jambe") || normalizedText.includes("2 os de la jambe") || (normalizedText.includes('tibia') && (normalizedText.includes('perone') || normalizedText.includes('fibula')))) {
         foundBones.add('tibia');
         foundBones.add('fibula');
     }
