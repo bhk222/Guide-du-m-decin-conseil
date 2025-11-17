@@ -2103,6 +2103,19 @@ const getAnatomicalCategory = (keyword: string, normalizedText: string): string 
     return anatomicalKeywords[keyword];
 };
 
+// Fonction pour filtrer les mots-clés selon le contexte anatomique
+const getContextualKeywordWeight = (keyword: string, normalizedText: string): number => {
+    // EXCLUSION SPÉCIALE: "face" dans contexte anatomique directionnel
+    if (keyword === 'face') {
+        const faceAnatomicalContext = /(?:face\s+(?:interne|externe).*(?:jambe|bras|cuisse|avant-bras|membre))|(?:(?:interne|externe).*face.*(?:jambe|bras|cuisse|avant-bras|membre))/i;
+        if (faceAnatomicalContext.test(normalizedText)) {
+            // Dans contexte anatomique directionnel, poids = 0 (exclu du scoring)
+            return 0;
+        }
+    }
+    return keywordWeights[keyword] || 1;
+};
+
 const subPartKeywords: { [key: string]: string[] } = {
     // MS
     'Doigts': ['doigt', 'pouce', 'index', 'médius', 'annulaire', 'auriculaire', 'phalange'],
@@ -3113,14 +3126,15 @@ export const findCandidateInjuries = (text: string, externalKeywords?: string[])
 
                 keywords.forEach(userKeyword => {
                     if (searchableText.includes(userKeyword)) {
-                        const weight = keywordWeights[userKeyword] || 1;
+                        const weight = getContextualKeywordWeight(userKeyword, normalizedText);
                         currentScore += weight;
                     }
                 });
 
                 const specificityBonus = keywords.reduce((bonus, userKw) => {
                     if (normalizedInjuryName.includes(userKw)) { 
-                        if (keywordWeights[userKw] && keywordWeights[userKw] >= 15) {
+                        const contextualWeight = getContextualKeywordWeight(userKw, normalizedText);
+                        if (contextualWeight >= 15) {
                             return bonus + 80;
                         }
                         return bonus + 10;
