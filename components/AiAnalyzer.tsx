@@ -3054,6 +3054,17 @@ export const findCandidateInjuries = (text: string, externalKeywords?: string[])
         // 🆕 EXCLUSION CRITIQUE: Maxillo-Facial vs Membres si "face interne/externe" détecté
         const hasDirectionalFaceContext = /(?:face\s+(?:interne|externe).*(?:jambe|bras|cuisse|avant-bras|membre))|(?:(?:interne|externe).*face.*(?:jambe|bras|cuisse|avant-bras|membre))/i.test(normalizedText);
         const isMaxilloFacialCat = catName.includes('maxillo') || catName.includes('facial') || subName.includes('face') || subName.includes('machoire');
+        
+        // DEBUG: Log en production
+        if (isMaxilloFacialCat && hasDirectionalFaceContext) {
+            console.log('🚫 BLOCAGE Maxillo-Facial détecté:', {
+                category: category.name,
+                subcategory: subcategory.name,
+                hasDirectionalContext: hasDirectionalFaceContext,
+                normalizedText: normalizedText.substring(0, 200)
+            });
+        }
+        
         if (hasDirectionalFaceContext && isMaxilloFacialCat) {
             return false; // Bloquer TOUTES les séquelles maxillo-faciales si contexte directionnel détecté
         }
@@ -3534,9 +3545,18 @@ export const findCandidateInjuries = (text: string, externalKeywords?: string[])
         }).filter(match => match.score >= MIN_SCORE_THRESHOLD * 0.5); // Recalculer seuil
     }
     
-    return filteredMatches
+    // DEBUG: Log des top matches avant retour
+    const topResults = filteredMatches
         .sort((a, b) => b.score - a.score)
         .slice(0, 5);
+    
+    console.log('🎯 TOP 5 RÉSULTATS:', topResults.map(m => ({
+        name: m.injury.name,
+        score: m.score,
+        path: m.path
+    })));
+    
+    return topResults;
 };
 
 export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords?: string[]): LocalAnalysisResult => {
