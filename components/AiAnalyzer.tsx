@@ -1085,6 +1085,7 @@ const keywordWeights: { [key: string]: number } = {
     'clavicule': 95, 'omoplate': 95, 'humerus': 95, 'radius': 95, 'ulna': 95, 'carpe': 95, 'metacarpe': 95, 'phalange_main': 95,
     'femur': 95, 'rotule': 95, 'tibia': 95, 'fibula': 95, 'tarse': 95, 'metatarse': 95, 'phalange_pied': 95,
     'crane': 95, 'face': 95, 'hyoide': 95, 'vertebre': 95, 'sacrum': 95, 'coccyx': 95, 'bassin': 95, 'sternum': 95, 'cote': 95,
+    'maxillaire': 95, 'maxillaire inferieur': 95, 'maxillaire superieur': 95, 'mandibule': 95, 'mandibulaire': 95, 'machoire': 95,
 
     'pouce': 95, 'index': 90, 'médius': 85, 'annulaire': 80, 'auriculaire': 80, 
     'doigt': 75, 'main': 85, 'poignet': 85, 'coude': 85, 'épaule': 85, 
@@ -1434,6 +1435,14 @@ const synonymMap: { [key: string]: string } = {
     'dent perdue': 'perte dent',
     'dent cassee': 'perte dent',
     'dentier': 'prothese dentaire',
+    
+    // 🦴 Synonymes maxillo-faciaux (mandibule = maxillaire inférieur)
+    'mandibule': 'maxillaire inferieur',
+    'mandibulaire': 'maxillaire inferieur',
+    'fracture mandibule': 'fracture maxillaire inferieur',
+    'fracture mandibulaire': 'fracture maxillaire inferieur',
+    'double fracture mandibulaire': 'fracture maxillaire inferieur',
+    'double fracture mandibule': 'fracture maxillaire inferieur',
     
     // Variations régionales (lombaire, cervical, dorsal)
     'lombaires': 'lombaire', 'lombaire': 'lombaire',
