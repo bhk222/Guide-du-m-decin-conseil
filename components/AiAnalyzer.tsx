@@ -6665,13 +6665,25 @@ export const detectMultipleLesions = (text: string): {
     // 🆕 5. Détection FRACTURES MULTIPLES sur le même os (ex: "fracture trochanter et diaphyse fémorale")
     const multipleFracturesSameBone = /fracture.*(?:et|,).*fracture|(?:trochanter|col|diaphyse|pilon|plateau).*(?:et|,).*(?:diaphyse|pilon|plateau|trochanter|col)/i.test(normalized);
     
+    // 🆕 5B. Détection lésions multiples avec "avec" ou "et" (ex: "fracture ... avec fracture ... et rupture ...")
+    const multipleLesionsWithConnectors = /(?:fracture|luxation|rupture|lesion).*(?:avec|et).*(?:fracture|luxation|rupture|lesion)/i.test(normalized);
+    
+    // Compter le nombre de types de lésions différents (fracture, rupture, luxation, etc.)
+    const lesionTypes = [];
+    if (/fracture/i.test(normalized)) lesionTypes.push('fracture');
+    if (/rupture/i.test(normalized)) lesionTypes.push('rupture');
+    if (/luxation/i.test(normalized)) lesionTypes.push('luxation');
+    if (/lesion/i.test(normalized) && !/fracture|rupture|luxation/i.test(normalized)) lesionTypes.push('lesion');
+    const hasMultipleLesionTypes = lesionTypes.length >= 2;
+    
     // 6. Critères de cumul TRÈS STRICTS (éviter faux positifs)
     const isCumul = 
         foundKeywords.length > 0 ||  // Keywords TRÈS explicites type "polytraumatisme"
         plusCount >= 3 ||             // Au moins 3 séparateurs "+" (ex: "A + B + C + D")
         (plusCount >= 2 && distinctRegions >= 3) ||  // 2+ "+" avec 3+ régions anatomiques DIFFÉRENTES
         hasBoneAndNerve ||            // Lésion osseuse + atteinte nerveuse (pattern traumatologique)
-        multipleFracturesSameBone;    // Plusieurs fractures sur le même os (ex: trochanter + diaphyse ou trochanter, diaphyse)
+        multipleFracturesSameBone ||  // Plusieurs fractures sur le même os (ex: trochanter + diaphyse ou trochanter, diaphyse)
+        (multipleLesionsWithConnectors && hasMultipleLesionTypes);  // "avec"/"et" + types différents (fracture + rupture)
     
     // Estimation nombre de lésions
     const lesionCount = Math.max(
@@ -6679,7 +6691,8 @@ export const detectMultipleLesions = (text: string): {
         distinctRegions,
         hasBoneAndNerve ? 2 : 1,      // Si os + nerf, au moins 2 lésions
         hasAnteriorState ? 2 : 1,
-        multipleFracturesSameBone ? 2 : 1  // Au moins 2 fractures si pattern détecté
+        multipleFracturesSameBone ? 2 : 1,  // Au moins 2 fractures si pattern détecté
+        lesionTypes.length  // Nombre de types de lésions différents
     );
     
     return {
@@ -6736,6 +6749,17 @@ const extractIndividualLesions = (text: string): string[] => {
         lesions.push(bonePart.trim());
         if (nervePart) lesions.push(`paralysie ${nervePart[1]}`.trim());
         return lesions;
+    }
+    
+    // Pattern 5: Lésions mixtes avec "avec" (ex: "fracture malléole avec fracture astragale et rupture tendon")
+    const mixedLesionsPattern = /(?:fracture|luxation|rupture|lesion).*?avec.*?(?:fracture|luxation|rupture|lesion)/i;
+    if (mixedLesionsPattern.test(normalized)) {
+        // Séparer par "avec" puis par "et"
+        const parts = normalized.split(/\s*(?:avec|et)\s*/i);
+        const filteredParts = parts.filter(p => p.length > 5 && /fracture|luxation|rupture|lesion/i.test(p));
+        if (filteredParts.length >= 2) {
+            return filteredParts;
+        }
     }
     
     // Si aucun pattern détecté, retourner le texte original
