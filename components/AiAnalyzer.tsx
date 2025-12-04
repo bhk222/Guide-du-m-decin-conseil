@@ -6779,10 +6779,17 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[]): 
     }
 
     // 🆕 Étape 3B: SI CUMUL DÉTECTÉ → Analyser chaque lésion séparément (V3.3.52)
+    console.log('🔍 isCumulDetected:', isCumulDetected, 'lesionCount:', cumulDetection.lesionCount);
+    
     if (isCumulDetected && cumulDetection.lesionCount >= 2) {
         console.log('🔍 CUMUL DÉTECTÉ - Extraction des lésions individuelles');
-        const individualLesions = extractIndividualLesions(finalCleanedText);
-        console.log('📋 Lésions extraites:', individualLesions);
+        console.log('📝 text original:', text);
+        console.log('📝 finalCleanedText:', finalCleanedText);
+        
+        // ⚠️ IMPORTANT: Utiliser le texte ORIGINAL pour extraction, pas finalCleanedText
+        // Car finalCleanedText peut avoir été trop nettoyé et perdre les marqueurs de cumul
+        const individualLesions = extractIndividualLesions(text);
+        console.log('📋 Lésions extraites:', individualLesions, 'Nombre:', individualLesions.length);
         
         // Si on a réussi à extraire 2+ lésions distinctes, les analyser séparément
         if (individualLesions.length >= 2) {
