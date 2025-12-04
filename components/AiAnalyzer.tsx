@@ -6867,8 +6867,29 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[]): 
                     const bestChoice = lesionResult.choices[0];
                     console.log(`   → Ambiguïté résolue auto: ${bestChoice.name}`);
                     console.log(`   → Rate: ${bestChoice.rate}`);
+                    
+                    // 🆕 V3.3.57: Si intervalle, orienter le taux selon sévérité du texte original
+                    let finalRate = bestChoice.rate;
+                    if (Array.isArray(bestChoice.rate)) {
+                        const [minRate, maxRate] = bestChoice.rate;
+                        const severityData = determineSeverity(normalize(processedLesion));
+                        console.log(`   → Sévérité détectée: ${severityData.level} (signs: ${severityData.signs.join(', ')})`);
+                        
+                        if (severityData.level === 'élevé') {
+                            finalRate = maxRate;
+                        } else if (severityData.level === 'faible') {
+                            finalRate = minRate;
+                        } else {
+                            finalRate = Math.round((minRate + maxRate) / 2);
+                        }
+                        console.log(`   → Taux final orienté: ${finalRate}% (intervalle [${minRate}-${maxRate}])`);
+                    }
+                    
                     lesionProposals.push({
-                        injury: bestChoice,
+                        injury: {
+                            ...bestChoice,
+                            rate: finalRate  // 🔑 Utiliser le taux orienté, pas l'intervalle brut
+                        },
                         description: lesion,
                         justification: `<strong>Choix automatique parmi ${lesionResult.choices.length} options</strong><br>${lesionResult.text}`
                     });
