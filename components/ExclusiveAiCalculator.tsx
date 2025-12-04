@@ -78,7 +78,7 @@ const MessageBubble: React.FC<{
     message: ChatMessage; 
     onAccept: () => void; 
     onReject: () => void; 
-    onChoiceSelect: (choiceText: string) => void;
+    onChoiceSelect: (choice: Injury) => void;
     onCumulAccept?: (lesionId: string) => void;
     onCumulReject?: (lesionId: string) => void;
 }> = ({ message, onAccept, onReject, onChoiceSelect, onCumulAccept, onCumulReject }) => {
@@ -100,7 +100,7 @@ const MessageBubble: React.FC<{
                                 <button
                                     key={index}
                                     className="w-full text-left p-2 bg-slate-100 hover:bg-primary-100 rounded-md transition-colors"
-                                    onClick={() => onChoiceSelect(choice.name)}
+                                    onClick={() => onChoiceSelect(choice)}
                                 >
                                     <span className="text-sm font-semibold text-primary-800">{choice.name}</span>
                                     <span className="text-xs text-slate-600 block">Taux : {rateText}</span>
@@ -355,6 +355,40 @@ export const ExclusiveAiCalculator: React.FC<ExclusiveAiCalculatorProps> = ({
         }
     }, [messages, onAddInjury, processQueueOrPrompt]);
 
+    // 🆕 V3.3.64: Handler pour choix direct depuis liste d'ambiguïté (évite boucle infinie)
+    const handleDirectChoice = useCallback((chosenInjury: Injury) => {
+        const userMessage: ChatMessage = { 
+            id: crypto.randomUUID(), 
+            role: 'user', 
+            text: chosenInjury.name 
+        };
+        setMessages(prev => [...prev, userMessage]);
+
+        const rateText = Array.isArray(chosenInjury.rate) 
+            ? `entre ${chosenInjury.rate[0]}% et ${chosenInjury.rate[1]}%`
+            : `${chosenInjury.rate}%`;
+
+        const proposal: Proposal = {
+            name: chosenInjury.name,
+            rate: Array.isArray(chosenInjury.rate) ? chosenInjury.rate[0] : chosenInjury.rate,
+            justification: `Taux IPP : ${rateText}`,
+            path: chosenInjury.path || '',
+            injury: chosenInjury,
+            status: 'pending'
+        };
+
+        const responseText = `D'accord, pour **${chosenInjury.name}**, je retiens un taux IPP de **${rateText}**. Confirmez-vous cette évaluation ?`;
+        
+        setTimeout(() => {
+            setMessages(prev => [...prev, { 
+                id: crypto.randomUUID(), 
+                role: 'model', 
+                text: responseText,
+                proposal
+            }]);
+        }, 400);
+    }, []);
+
 
     const handleSend = useCallback(async (text: string, isClarification: boolean = false) => {
         const textToSend = text.trim();
@@ -492,7 +526,7 @@ export const ExclusiveAiCalculator: React.FC<ExclusiveAiCalculatorProps> = ({
                             message={msg} 
                             onAccept={() => handleProposalResponse(msg.id, true)} 
                             onReject={() => handleProposalResponse(msg.id, false)}
-                            onChoiceSelect={(choiceText) => handleSend(choiceText, true)}
+                            onChoiceSelect={(choice) => handleDirectChoice(choice)}
                             onCumulAccept={(lesionId) => handleCumulResponse(msg.id, lesionId, true)}
                             onCumulReject={(lesionId) => handleCumulResponse(msg.id, lesionId, false)}
                         />
