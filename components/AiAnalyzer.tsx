@@ -6628,19 +6628,24 @@ export const detectMultipleLesions = (text: string): {
         }
     }
     
-    // 5. Critères de cumul TRÈS STRICTS (éviter faux positifs)
+    // 🆕 5. Détection FRACTURES MULTIPLES sur le même os (ex: "fracture trochanter et diaphyse fémorale")
+    const multipleFracturesSameBone = /fracture.*(?:et|,).*fracture|(?:trochanter|col|diaphyse|pilon|plateau).*(?:et|,).*(?:diaphyse|pilon|plateau|trochanter|col)/i.test(normalized);
+    
+    // 6. Critères de cumul TRÈS STRICTS (éviter faux positifs)
     const isCumul = 
         foundKeywords.length > 0 ||  // Keywords TRÈS explicites type "polytraumatisme"
         plusCount >= 3 ||             // Au moins 3 séparateurs "+" (ex: "A + B + C + D")
         (plusCount >= 2 && distinctRegions >= 3) ||  // 2+ "+" avec 3+ régions anatomiques DIFFÉRENTES
-        hasBoneAndNerve;              // Lésion osseuse + atteinte nerveuse (pattern traumatologique)
+        hasBoneAndNerve ||            // Lésion osseuse + atteinte nerveuse (pattern traumatologique)
+        multipleFracturesSameBone;    // Plusieurs fractures sur le même os (ex: trochanter + diaphyse ou trochanter, diaphyse)
     
     // Estimation nombre de lésions
     const lesionCount = Math.max(
         plusCount + 1,
         distinctRegions,
         hasBoneAndNerve ? 2 : 1,      // Si os + nerf, au moins 2 lésions
-        hasAnteriorState ? 2 : 1
+        hasAnteriorState ? 2 : 1,
+        multipleFracturesSameBone ? 2 : 1  // Au moins 2 fractures si pattern détecté
     );
     
     return {
