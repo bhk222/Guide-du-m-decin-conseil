@@ -3069,6 +3069,20 @@ export const findCandidateInjuries = (text: string, externalKeywords?: string[])
             return false; // Bloquer TOUTES les séquelles maxillo-faciales si contexte directionnel détecté
         }
         
+        // 🆕 EXCLUSION CRITIQUE V3.3.50: Mandibulaire vs Clavicule - Bloquer Ceinture Scapulaire si mandibule explicitement mentionnée
+        const hasMandibularContext = /mandibul(aire|e)|m[âa]choire/i.test(normalizedText);
+        const isScapulaireCat = subName.includes('ceinture scapulaire') || subName.includes('clavicule') || subName.includes('omoplate');
+        
+        if (hasMandibularContext && isScapulaireCat) {
+            console.log('🚫 BLOCAGE Ceinture Scapulaire/Clavicule détecté (mandibulaire explicite):', {
+                category: category.name,
+                subcategory: subcategory.name,
+                hasMandibularContext,
+                normalizedText: normalizedText.substring(0, 200)
+            });
+            return false; // Bloquer TOUTES les séquelles de clavicule si mandibulaire explicitement mentionné
+        }
+        
         // Membres Supérieurs vs Inférieurs - Blocage strict croisé
         const isMembreSupQuery = normalizedText.includes('epaule') || normalizedText.includes('coiffe') || 
                                   normalizedText.includes('bras') || normalizedText.includes('coude') ||
