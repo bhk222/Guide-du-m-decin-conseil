@@ -2627,7 +2627,13 @@ const determineSeverity = (
         } else if (hasCalVicieux && calSevere) {
             return { level: 'élevé', signs: ['cal vicieux important', 'limitation sévère'], isDefault: false };
         } else if (hasCalVicieux) {
-            return { level: 'moyen', signs: ['cal vicieux'], isDefault: false };
+            // ⚠️ IMPORTANT: Ne retourner "moyen" que si pas de mots-clés élevé (arrachement, comminutive, etc)
+            const hasHighSeverityKeyword = severityKeywords.élevé.some(kw => 
+                normalizedText.includes(kw) && !['opere', 'opéré', 'operee', 'opérée', 'chirurgie', 'intervention'].includes(kw)
+            );
+            if (!hasHighSeverityKeyword) {
+                return { level: 'moyen', signs: ['cal vicieux'], isDefault: false };
+            }
         }
     }
 
