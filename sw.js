@@ -1,5 +1,5 @@
-const CACHE_NAME = 'guide-medecin-conseil-v4.2-FINAL-FIX';
-const DATA_CACHE_NAME = 'guide-medecin-conseil-data-v4.2-FINAL-FIX';
+const CACHE_NAME = 'guide-medecin-conseil-v4.3-CUMUL-FIX';
+const DATA_CACHE_NAME = 'guide-medecin-conseil-data-v4.3-CUMUL-FIX';
 
 // Ressources essentielles à mettre en cache immédiatement
 const STATIC_CACHE_URLS = [
