@@ -6803,16 +6803,25 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[]): 
                 const lesionResult = comprehensiveSingleLesionAnalysis(processedLesion, externalKeywords);
                 
                 console.log(`   → Type: ${lesionResult.type}`);
+                
+                // ✅ ACCEPTER proposal ET ambiguity
                 if (lesionResult.type === 'proposal') {
                     console.log(`   → Injury: ${lesionResult.injury.name}`);
                     console.log(`   → Rate: ${lesionResult.injury.rate}`);
-                }
-                
-                if (lesionResult.type === 'proposal') {
                     lesionProposals.push({
                         injury: lesionResult.injury,
                         description: lesion,
                         justification: lesionResult.justification
+                    });
+                } else if (lesionResult.type === 'ambiguity' && lesionResult.choices && lesionResult.choices.length > 0) {
+                    // 🆕 Pour ambiguïté : choisir automatiquement la PREMIÈRE option (meilleur score)
+                    const bestChoice = lesionResult.choices[0];
+                    console.log(`   → Ambiguïté résolue auto: ${bestChoice.name}`);
+                    console.log(`   → Rate: ${bestChoice.rate}`);
+                    lesionProposals.push({
+                        injury: bestChoice,
+                        description: lesion,
+                        justification: `<strong>Choix automatique parmi ${lesionResult.choices.length} options</strong><br>${lesionResult.text}`
                     });
                 } else {
                     console.warn(`   ⚠️ Lésion ignorée (type=${lesionResult.type})`);
