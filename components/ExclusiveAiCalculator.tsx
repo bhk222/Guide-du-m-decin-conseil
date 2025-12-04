@@ -168,7 +168,11 @@ export const ExclusiveAiCalculator: React.FC<ExclusiveAiCalculatorProps> = ({
         setIsLoading(true);
         setTimeout(() => {
             try {
+                console.log('🚀 Appel localExpertAnalysis avec:', text);
                 const result = localExpertAnalysis(text);
+                console.log('📦 Résultat reçu, type:', result.type);
+                console.log('📦 Résultat complet:', result);
+                
                 let modelMessage: ChatMessage;
 
                 switch (result.type) {
