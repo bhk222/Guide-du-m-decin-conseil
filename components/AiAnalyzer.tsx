@@ -6780,15 +6780,20 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[]): 
 
     // 🆕 Étape 3B: SI CUMUL DÉTECTÉ → Analyser chaque lésion séparément (V3.3.52)
     if (isCumulDetected && cumulDetection.lesionCount >= 2) {
+        console.log('🔍 CUMUL DÉTECTÉ - Extraction des lésions individuelles');
         const individualLesions = extractIndividualLesions(finalCleanedText);
+        console.log('📋 Lésions extraites:', individualLesions);
         
         // Si on a réussi à extraire 2+ lésions distinctes, les analyser séparément
         if (individualLesions.length >= 2) {
+            console.log('✅ Au moins 2 lésions → Analyse séparée');
             const lesionProposals: any[] = [];
             
             for (const lesion of individualLesions) {
                 const processedLesion = lesion.replace(/([A-ZCSLT])\s*(\d)/gi, '$1$2');
                 const lesionResult = comprehensiveSingleLesionAnalysis(processedLesion, externalKeywords);
+                
+                console.log(`🔎 Analyse lésion "${lesion}":`, lesionResult.type);
                 
                 if (lesionResult.type === 'proposal') {
                     lesionProposals.push({
@@ -6799,8 +6804,11 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[]): 
                 }
             }
             
+            console.log(`📊 ${lesionProposals.length} propositions générées`);
+            
             // Si on a au moins 2 propositions, retourner un résultat spécial "cumul_proposals"
             if (lesionProposals.length >= 2) {
+                console.log('✅ Retour type cumul_proposals');
                 const cumulHeader = '<strong>⚠️ CUMUL DE LÉSIONS DÉTECTÉ</strong><br>';
                 const cumulDetails = `
                     <div style="background:#fff3cd; padding:15px; margin:10px 0; border-left:5px solid #ffc107;">
