@@ -2494,6 +2494,9 @@ const determineSeverity = (
             // Intensité forte
             'severe', 'sevère', 'majeur', 'majeure', 'grave', 'important', 'importante', 'considerable',
             'intense', 'tres douloureux', 'tres important',
+            // 🆕 V3.3.54: Types de fractures graves
+            'arrachement', 'comminutive', 'eclatement', 'explose', 'plurifragmentaire',
+            'deplacement important', 'deplacement majeur', 'fortement deplacee',
             // Persistance et chronicité
             'persistante', 'permanent', 'chronique severe', 'invalidant',
             // 🆕 Échec thérapeutique
