@@ -6797,8 +6797,21 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[]): 
             const lesionProposals: any[] = [];
             
             for (const lesion of individualLesions) {
-                const processedLesion = lesion.replace(/([A-ZCSLT])\s*(\d)/gi, '$1$2');
-                console.log(`🔎 Analyse lésion "${lesion}" (processed: "${processedLesion}")`);
+                // 🆕 Enrichir la description pour améliorer le matching
+                let enrichedLesion = lesion;
+                
+                // Si "trochanter" sans contexte, ajouter "trochantérienne"
+                if (/trochanter(?!\w)/i.test(lesion) && !/trochanter(ien|ienne)/i.test(lesion)) {
+                    enrichedLesion = lesion.replace(/trochanter/i, 'fracture trochanterienne');
+                }
+                
+                // Si "diaphyse" sans "diaphysaire", ajouter
+                if (/diaphyse(?!\w)/i.test(lesion) && !/diaphysaire/i.test(lesion)) {
+                    enrichedLesion = enrichedLesion.replace(/diaphyse/i, 'diaphysaire');
+                }
+                
+                const processedLesion = enrichedLesion.replace(/([A-ZCSLT])\s*(\d)/gi, '$1$2');
+                console.log(`🔎 Analyse lésion "${lesion}" → enrichi: "${enrichedLesion}" (processed: "${processedLesion}")`);
                 
                 const lesionResult = comprehensiveSingleLesionAnalysis(processedLesion, externalKeywords);
                 

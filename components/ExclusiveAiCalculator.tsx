@@ -74,7 +74,14 @@ const ProposalBubble: React.FC<{ proposal: Proposal; onAccept: () => void; onRej
 };
 
 
-const MessageBubble: React.FC<{ message: ChatMessage; onAccept: () => void; onReject: () => void; onChoiceSelect: (choiceText: string) => void; }> = ({ message, onAccept, onReject, onChoiceSelect }) => {
+const MessageBubble: React.FC<{ 
+    message: ChatMessage; 
+    onAccept: () => void; 
+    onReject: () => void; 
+    onChoiceSelect: (choiceText: string) => void;
+    onCumulAccept?: (lesionId: string) => void;
+    onCumulReject?: (lesionId: string) => void;
+}> = ({ message, onAccept, onReject, onChoiceSelect, onCumulAccept, onCumulReject }) => {
     const isUser = message.role === 'user';
     const textHtml = message.text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
 
@@ -121,8 +128,8 @@ const MessageBubble: React.FC<{ message: ChatMessage; onAccept: () => void; onRe
                                     <p className="text-xs text-slate-700 font-medium">{cumul.injury.name}</p>
                                     {cumul.status === 'pending' && (
                                         <div className="mt-2 flex gap-2 justify-end">
-                                            <Button variant="secondary" onClick={onReject} className="!text-xs !py-1 !px-2">Refuser</Button>
-                                            <Button onClick={onAccept} className="!text-xs !py-1 !px-2">Accepter</Button>
+                                            <Button variant="secondary" onClick={() => onCumulReject?.(cumul.id)} className="!text-xs !py-1 !px-2">Refuser</Button>
+                                            <Button onClick={() => onCumulAccept?.(cumul.id)} className="!text-xs !py-1 !px-2">Accepter</Button>
                                         </div>
                                     )}
                                     {cumul.status === 'accepted' && (
@@ -252,6 +259,49 @@ export const ExclusiveAiCalculator: React.FC<ExclusiveAiCalculatorProps> = ({
         }
     }, [processAndDisplayAnalysis]);
 
+    // 🆕 V3.3.52: Handler pour réponse cumul de lésions
+    const handleCumulResponse = useCallback((messageId: string, lesionId: string, accepted: boolean) => {
+        const messageToUpdate = messages.find(msg => msg.id === messageId && msg.cumulProposals);
+        if (!messageToUpdate || !messageToUpdate.cumulProposals) {
+            return;
+        }
+
+        // Mettre à jour le statut de la lésion spécifique
+        setMessages(prev => prev.map(msg =>
+            msg.id === messageId
+                ? { 
+                    ...msg, 
+                    cumulProposals: msg.cumulProposals?.map(cumul =>
+                        cumul.id === lesionId
+                            ? { ...cumul, status: accepted ? 'accepted' : 'rejected' }
+                            : cumul
+                    )
+                }
+                : msg
+        ));
+
+        if (accepted) {
+            const lesionToAdd = messageToUpdate.cumulProposals.find(c => c.id === lesionId);
+            if (lesionToAdd) {
+                const selectedInjury = {
+                    ...lesionToAdd.injury,
+                    id: `ai-cumul-${crypto.randomUUID()}`,
+                    source: 'ai-cumul' as const,
+                    customRate: Array.isArray(lesionToAdd.injury.rate) 
+                        ? Math.round((lesionToAdd.injury.rate[0] + lesionToAdd.injury.rate[1]) / 2)
+                        : lesionToAdd.injury.rate,
+                };
+                onAddInjury(selectedInjury);
+
+                const confirmMessage: ChatMessage = { 
+                    id: crypto.randomUUID(), 
+                    role: 'model', 
+                    text: `✅ Lésion ${lesionToAdd.lesionNumber} ajoutée : **${lesionToAdd.injury.name}** (${selectedInjury.customRate}%).` 
+                };
+                setMessages(prev => [...prev, confirmMessage]);
+            }
+        }
+    }, [messages, onAddInjury]);
 
     const handleProposalResponse = useCallback((messageId: string, accepted: boolean) => {
         const messageToUpdate = messages.find(msg => msg.id === messageId && msg.proposal?.status === 'pending');
@@ -440,6 +490,8 @@ export const ExclusiveAiCalculator: React.FC<ExclusiveAiCalculatorProps> = ({
                             onAccept={() => handleProposalResponse(msg.id, true)} 
                             onReject={() => handleProposalResponse(msg.id, false)}
                             onChoiceSelect={(choiceText) => handleSend(choiceText, true)}
+                            onCumulAccept={(lesionId) => handleCumulResponse(msg.id, lesionId, true)}
+                            onCumulReject={(lesionId) => handleCumulResponse(msg.id, lesionId, false)}
                         />
                     ))}
                     {isLoading && <TypingIndicator />}
