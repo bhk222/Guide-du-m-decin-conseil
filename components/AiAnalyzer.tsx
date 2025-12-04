@@ -2639,6 +2639,8 @@ const determineSeverity = (
 
     // 2️⃣ First, check for explicit "faible" keywords
     let signs = severityKeywords.faible.filter(kw => normalizedText.includes(kw));
+    console.log('🔍 [determineSeverity] Text:', normalizedText.substring(0, 100));
+    console.log('🔍 [determineSeverity] Faible signs:', signs);
     if (signs.length > 0) return { level: 'faible', signs: [...new Set(signs)], isDefault: false };
 
     // 🆕 3️⃣ Analyse contextuelle AVANT détection mots-clés "élevé"
@@ -2675,6 +2677,7 @@ const determineSeverity = (
         return { level: 'moyen', signs: contextSigns, isDefault: false };
     }
 
+    console.log('🔍 [determineSeverity] High signs:', highSigns);
     if (highSigns.length > 0) return { level: 'élevé', signs: [...new Set(highSigns)], isDefault: false };
     
     // 4️⃣ Then, check for "moyen" keywords
