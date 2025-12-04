@@ -111,15 +111,7 @@ const preprocessMedicalText = (text: string): string => {
         [/\bmp\b(?!\s*\d)/gi, 'maladie professionnelle '], // Évite MP3, MP4...
         
         // === ANATOMIE - MEMBRES ===
-        // Phalanges (AVANT doigts/orteils pour priorité)
-        [/\b([pP])1\b/gi, 'phalange proximale P1 '],
-        [/\b([pP])2\b/gi, 'phalange moyenne P2 '],
-        [/\b([pP])3\b/gi, 'phalange distale P3 '],
-        [/\bphalange\s+prox\b/gi, 'phalange proximale '],
-        [/\bphalange\s+moy\b/gi, 'phalange moyenne '],
-        [/\bphalange\s+dist\b/gi, 'phalange distale '],
-        
-        // 🆕 V3.3.61: Doigts et orteils - Améliorer détection o1-o5 et d1-d5 avec contexte AVANT ou APRÈS
+        // 🆕 V3.3.61: Doigts et orteils - AVANT phalanges génériques pour priorité sur p1 o4, p2 d5, etc.
         [/\b([dD])([1-5])\b(?=\s*(?:de|du|mg|md|main|gauche|droite|fracture|amputation|ecrasement|arrachement|consolid|avec|raideur|ankylose|douleur|séquelle))/gi, (match, d, num) => {
             const doigts = ['', 'pouce', 'index', 'médius', 'annulaire', 'auriculaire'];
             return `${d.toLowerCase() === 'd' ? 'doigt' : 'Doigt'} ${doigts[parseInt(num)]} `;
@@ -138,6 +130,14 @@ const preprocessMedicalText = (text: string): string => {
             const phalanges = { '1': 'première phalange', '2': 'deuxième phalange', '3': 'troisième phalange' };
             return `fracture ${phalanges[phalange]} orteil ${orteils[parseInt(num)]} `;
         }],
+        
+        // Phalanges génériques (APRÈS doigts/orteils spécifiques)
+        [/\b([pP])1\b/gi, 'phalange proximale P1 '],
+        [/\b([pP])2\b/gi, 'phalange moyenne P2 '],
+        [/\b([pP])3\b/gi, 'phalange distale P3 '],
+        [/\bphalange\s+prox\b/gi, 'phalange proximale '],
+        [/\bphalange\s+moy\b/gi, 'phalange moyenne '],
+        [/\bphalange\s+dist\b/gi, 'phalange distale '],
         
         // Latéralité
         [/\bmg\b/gi, 'main gauche '],
