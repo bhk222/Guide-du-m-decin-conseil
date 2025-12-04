@@ -6814,52 +6814,58 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
         console.log('🔍 Recherche exacte activée pour:', text);
         const normalizedSearchText = normalize(text);
         
-        // Parcourir toutes les catégories pour trouver une correspondance exacte
-        for (const category of disabilityData.categories) {
-            for (const subcategory of category.subcategories) {
-                for (const injury of subcategory.injuries) {
-                    const normalizedInjuryName = normalize(injury.name);
-                    
-                    // Correspondance exacte du nom
-                    if (normalizedInjuryName === normalizedSearchText) {
-                        console.log('✅ Correspondance exacte trouvée:', injury.name);
+        // Vérification sécurité
+        if (!disabilityData || !disabilityData.categories || !Array.isArray(disabilityData.categories)) {
+            console.error('❌ disabilityData.categories invalide:', disabilityData);
+            // Continuer avec analyse normale
+        } else {
+            // Parcourir toutes les catégories pour trouver une correspondance exacte
+            for (const category of disabilityData.categories) {
+                for (const subcategory of category.subcategories) {
+                    for (const injury of subcategory.injuries) {
+                        const normalizedInjuryName = normalize(injury.name);
                         
-                        // Déterminer le taux
-                        let chosenRate: number;
-                        if (Array.isArray(injury.rate)) {
-                            // Prendre le milieu de l'intervalle par défaut
-                            const [min, max] = injury.rate;
-                            chosenRate = Math.round((min + max) / 2);
-                        } else {
-                            chosenRate = injury.rate;
+                        // Correspondance exacte du nom
+                        if (normalizedInjuryName === normalizedSearchText) {
+                            console.log('✅ Correspondance exacte trouvée:', injury.name);
+                            
+                            // Déterminer le taux
+                            let chosenRate: number;
+                            if (Array.isArray(injury.rate)) {
+                                // Prendre le milieu de l'intervalle par défaut
+                                const [min, max] = injury.rate;
+                                chosenRate = Math.round((min + max) / 2);
+                            } else {
+                                chosenRate = injury.rate;
+                            }
+                            
+                            const path = `${category.name} > ${subcategory.name}`;
+                            const justification = buildExpertJustification(
+                                text, 
+                                injury, 
+                                chosenRate, 
+                                path,
+                                'moyen',
+                                [],
+                                true
+                            );
+                            
+                            return {
+                                type: 'proposal',
+                                name: injury.name,
+                                rate: chosenRate,
+                                justification,
+                                path,
+                                injury
+                            };
                         }
-                        
-                        const path = `${category.name} > ${subcategory.name}`;
-                        const justification = buildExpertJustification(
-                            text, 
-                            injury, 
-                            chosenRate, 
-                            path,
-                            'moyen',
-                            [],
-                            true
-                        );
-                        
-                        return {
-                            type: 'proposal',
-                            name: injury.name,
-                            rate: chosenRate,
-                            justification,
-                            path,
-                            injury
-                        };
                     }
                 }
             }
+            
+            // Si aucune correspondance exacte, continuer avec l'analyse normale
+            console.log('⚠️ Aucune correspondance exacte, analyse normale...');
         }
-        
-        // Si aucune correspondance exacte, continuer avec l'analyse normale
-        console.log('⚠️ Aucune correspondance exacte, analyse normale...');
     }
     
     // Étape 0A: Détection cumuls de lésions (Balthazar) - mais continuer l'analyse normale
