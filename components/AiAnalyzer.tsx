@@ -3115,19 +3115,6 @@ export const findCandidateInjuries = (text: string, externalKeywords?: string[])
             return false; // Bloquer TOUTES les séquelles de clavicule si mandibulaire explicitement mentionné
         }
         
-        // 🆕 V3.3.58: EXCLUSION Tendon Jambier vs Tendon Rotulien
-        const hasJambierContext = /tendon.*jambier|jambier.*tendon|tibial.*(?:anterieur|posterieur)/i.test(normalizedText);
-        const isRotulienInjury = /rotulien|rotule/i.test(injuryName);
-        
-        if (hasJambierContext && isRotulienInjury) {
-            console.log('🚫 BLOCAGE Tendon Rotulien détecté (jambier/tibial explicite):', {
-                injury: injuryName,
-                hasJambierContext,
-                normalizedText: normalizedText.substring(0, 100)
-            });
-            return false; // Bloquer tendon rotulien si jambier/tibial mentionné
-        }
-        
         // Membres Supérieurs vs Inférieurs - Blocage strict croisé
         const isMembreSupQuery = normalizedText.includes('epaule') || normalizedText.includes('coiffe') || 
                                   normalizedText.includes('bras') || normalizedText.includes('coude') ||
@@ -3171,6 +3158,19 @@ export const findCandidateInjuries = (text: string, externalKeywords?: string[])
             subcategory.injuries.forEach(injury => {
                 const normalizedInjuryName = normalize(injury.name);
                 const searchableText = createSearchableString(category, subcategory, injury);
+
+                // 🆕 V3.3.58: EXCLUSION Tendon Jambier vs Tendon Rotulien
+                const hasJambierContext = /tendon.*jambier|jambier.*tendon|tibial.*(?:anterieur|posterieur)/i.test(normalizedText);
+                const isRotulienInjury = /rotulien|rotule/i.test(normalizedInjuryName);
+                
+                if (hasJambierContext && isRotulienInjury) {
+                    console.log('🚫 BLOCAGE Tendon Rotulien détecté (jambier/tibial explicite):', {
+                        injury: injury.name,
+                        hasJambierContext,
+                        normalizedText: normalizedText.substring(0, 100)
+                    });
+                    return; // Skip cette injury
+                }
 
                 const injuryMentionsHighImpactSequela = highImpactKeywords.some(kw => searchableText.includes(kw));
                 
