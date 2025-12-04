@@ -3646,6 +3646,11 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
     // 🆕 PREPROCESSING MÉDICAL ENRICHI - Transformer descriptions vagues en termes détectables
     // Ceci enrichit le texte AVANT toute analyse
     const medicalEnrichment: [RegExp, string][] = [
+        // 🆕 V3.3.66: Fractures phalanges orteils → Séquelles avec raideur (termes barème)
+        [/fracture.*?(?:premi[eè]re\s+)?phalange.*?(?:gros\s+orteil|hallux)/gi, 'fracture consolidée phalange gros orteil avec raideur'],
+        [/fracture.*?(?:premi[eè]re\s+)?phalange.*?(?:deuxi[eè]me|troisi[eè]me|quatri[eè]me|cinqui[eè]me)\s+orteil/gi, 'fracture consolidée phalange autre orteil avec raideur'],
+        [/fracture.*?(?:premi[eè]re\s+)?phalange.*?orteil/gi, 'fracture consolidée phalange autre orteil avec raideur'],
+        
         // Plexus brachial et nerfs périphériques → Pathologies neurologiques spécifiques
         [/atteinte\s+(?:du\s+)?tronc\s+sup[eé]rieur\s+(?:du\s+)?plexus\s+brachial/gi, 'paralysie radiculaire supérieure Duchenne-Erb plexus brachial C5 C6'],
         [/atteinte\s+(?:du\s+)?tronc\s+inf[eé]rieur\s+(?:du\s+)?plexus\s+brachial/gi, 'paralysie radiculaire inférieure Klumpke plexus brachial C8 T1'],

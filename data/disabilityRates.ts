@@ -1472,6 +1472,8 @@ const middleCategories: InjuryCategory[] = [
             { name: "Amputation du gros orteil", rate: [5, 8], rateCriteria: { low: "Amputation distale (phalange distale), troubles propulsion minimes.", high: "Amputation complète gros orteil, troubles appui/propulsion nets, boiterie." } },
             { name: "Amputation d'un autre orteil", rate: [1, 3], rateCriteria: { low: "Amputation orteil latéral (4ème/5ème), gêne esthétique surtout.", high: "Amputation 2ème orteil, troubles appui modérés." } },
             { name: "Ankylose ou raideur du gros orteil (Hallux rigidus)", rate: [3, 10], rateCriteria: { low: "Raideur partielle IP, limitation légère déroulement pas.", medium: "Ankylose MP en position neutre, déroulement pas perturbé.", high: "Ankylose MP en flexion/extension pathologique, douleurs permanentes, troubles marche, nécessité chaussage orthopédique." } },
+            { name: "Fracture consolidée phalange gros orteil avec raideur", rate: [2, 5], rateCriteria: { low: "Fracture phalange distale, cal vicieux minime, raideur IP discrète.", medium: "Fracture phalange proximale ou moyenne, raideur MP partielle.", high: "Cal vicieux avec déformation, raideur importante, douleurs résiduelles." } },
+            { name: "Fracture consolidée phalange autre orteil avec raideur", rate: [1, 3], rateCriteria: { low: "Fracture phalange orteil latéral (3ème-5ème), raideur minime, gêne au chaussage seulement.", medium: "Fracture 2ème orteil avec raideur et douleurs mécaniques.", high: "Cal vicieux important, déformation en griffe, douleurs appui." } },
         ]
       },
       {
