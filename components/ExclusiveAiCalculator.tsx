@@ -283,20 +283,23 @@ export const ExclusiveAiCalculator: React.FC<ExclusiveAiCalculatorProps> = ({
         if (accepted) {
             const lesionToAdd = messageToUpdate.cumulProposals.find(c => c.id === lesionId);
             if (lesionToAdd) {
+                const medianRate = Array.isArray(lesionToAdd.injury.rate) 
+                    ? Math.round((lesionToAdd.injury.rate[0] + lesionToAdd.injury.rate[1]) / 2)
+                    : lesionToAdd.injury.rate;
+                
                 const selectedInjury = {
                     ...lesionToAdd.injury,
                     id: `ai-cumul-${crypto.randomUUID()}`,
-                    source: 'ai-cumul' as const,
-                    customRate: Array.isArray(lesionToAdd.injury.rate) 
-                        ? Math.round((lesionToAdd.injury.rate[0] + lesionToAdd.injury.rate[1]) / 2)
-                        : lesionToAdd.injury.rate,
+                    chosenRate: medianRate,
+                    category: `Cumul Lésion ${lesionToAdd.lesionNumber}`,
+                    justification: lesionToAdd.justification,
                 };
                 onAddInjury(selectedInjury);
 
                 const confirmMessage: ChatMessage = { 
                     id: crypto.randomUUID(), 
                     role: 'model', 
-                    text: `✅ Lésion ${lesionToAdd.lesionNumber} ajoutée : **${lesionToAdd.injury.name}** (${selectedInjury.customRate}%).` 
+                    text: `✅ Lésion ${lesionToAdd.lesionNumber} ajoutée : **${lesionToAdd.injury.name}** (${medianRate}%).` 
                 };
                 setMessages(prev => [...prev, confirmMessage]);
             }
