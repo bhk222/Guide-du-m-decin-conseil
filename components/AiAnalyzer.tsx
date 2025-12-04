@@ -6798,9 +6798,15 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[]): 
             
             for (const lesion of individualLesions) {
                 const processedLesion = lesion.replace(/([A-ZCSLT])\s*(\d)/gi, '$1$2');
+                console.log(`🔎 Analyse lésion "${lesion}" (processed: "${processedLesion}")`);
+                
                 const lesionResult = comprehensiveSingleLesionAnalysis(processedLesion, externalKeywords);
                 
-                console.log(`🔎 Analyse lésion "${lesion}":`, lesionResult.type);
+                console.log(`   → Type: ${lesionResult.type}`);
+                if (lesionResult.type === 'proposal') {
+                    console.log(`   → Injury: ${lesionResult.injury.name}`);
+                    console.log(`   → Rate: ${lesionResult.injury.rate}`);
+                }
                 
                 if (lesionResult.type === 'proposal') {
                     lesionProposals.push({
@@ -6808,22 +6814,24 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[]): 
                         description: lesion,
                         justification: lesionResult.justification
                     });
+                } else {
+                    console.warn(`   ⚠️ Lésion ignorée (type=${lesionResult.type})`);
                 }
             }
             
-            console.log(`📊 ${lesionProposals.length} propositions générées`);
+            console.log(`📊 TOTAL: ${lesionProposals.length} propositions générées sur ${individualLesions.length} lésions`);
             
-            // Si on a au moins 2 propositions, retourner un résultat spécial "cumul_proposals"
-            if (lesionProposals.length >= 2) {
-                console.log('✅ Retour type cumul_proposals');
+            // ⚠️ ASSOUPLIR: Accepter même 1 seule proposition si cumul détecté
+            if (lesionProposals.length >= 1) {
+                console.log('✅ Retour type cumul_proposals avec', lesionProposals.length, 'lésion(s)');
                 const cumulHeader = '<strong>⚠️ CUMUL DE LÉSIONS DÉTECTÉ</strong><br>';
                 const cumulDetails = `
                     <div style="background:#fff3cd; padding:15px; margin:10px 0; border-left:5px solid #ffc107;">
-                    <strong>📊 Analyse cumul :</strong> ${lesionProposals.length} lésions identifiées et évaluées séparément<br>
+                    <strong>📊 Analyse cumul :</strong> ${individualLesions.length} lésions détectées, ${lesionProposals.length} évaluée(s) avec succès<br>
                     <strong>💡 Formule de Balthazar :</strong> IPP_total = IPP1 + IPP2 × (100 - IPP1) / 100<br>
-                    <strong>📝 Calcul automatique :</strong> Les lésions ci-dessous ont été analysées individuellement.<br>
-                    Exemple avec ${lesionProposals.length} lésions : 
-                    ${lesionProposals.map((p, i) => `Lésion ${i + 1} = ${Array.isArray(p.injury.rate) ? p.injury.rate.join('-') : p.injury.rate}%`).join(', ')}
+                    <strong>📝 Calcul automatique :</strong> ${lesionProposals.length > 1 ? 'Les lésions ci-dessous ont été analysées individuellement.' : 'Analyse partielle - une seule lésion identifiée dans le barème.'}<br>
+                    ${lesionProposals.length > 1 ? `Exemple avec ${lesionProposals.length} lésions : 
+                    ${lesionProposals.map((p, i) => `Lésion ${i + 1} = ${Array.isArray(p.injury.rate) ? p.injury.rate.join('-') : p.injury.rate}%`).join(', ')}` : ''}
                     </div>`;
                 
                 return {
