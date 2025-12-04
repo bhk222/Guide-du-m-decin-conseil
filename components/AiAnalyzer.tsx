@@ -3108,11 +3108,24 @@ export const findCandidateInjuries = (text: string, externalKeywords?: string[])
         if (hasMandibularContext && isScapulaireCat) {
             console.log('🚫 BLOCAGE Ceinture Scapulaire/Clavicule détecté (mandibulaire explicite):', {
                 category: category.name,
-                subcategory: subcategory.name,
+                subcategory: subName,
                 hasMandibularContext,
                 normalizedText: normalizedText.substring(0, 200)
             });
             return false; // Bloquer TOUTES les séquelles de clavicule si mandibulaire explicitement mentionné
+        }
+        
+        // 🆕 V3.3.58: EXCLUSION Tendon Jambier vs Tendon Rotulien
+        const hasJambierContext = /tendon.*jambier|jambier.*tendon|tibial.*(?:anterieur|posterieur)/i.test(normalizedText);
+        const isRotulienInjury = /rotulien|rotule/i.test(injuryName);
+        
+        if (hasJambierContext && isRotulienInjury) {
+            console.log('🚫 BLOCAGE Tendon Rotulien détecté (jambier/tibial explicite):', {
+                injury: injuryName,
+                hasJambierContext,
+                normalizedText: normalizedText.substring(0, 100)
+            });
+            return false; // Bloquer tendon rotulien si jambier/tibial mentionné
         }
         
         // Membres Supérieurs vs Inférieurs - Blocage strict croisé
