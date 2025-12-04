@@ -3682,23 +3682,33 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
         [/\bmp\b(?!\s*\d)/gi, 'maladie professionnelle '],
         
         // === ANATOMIE - MEMBRES ===
-        // Phalanges (AVANT doigts/orteils pour priorité)
+        // 🆕 V3.3.63: Doigts et orteils spécifiques AVANT phalanges génériques (priorité pour p1 o4, p2 d5)
+        [/\b([dD])([1-5])\b(?=\s*(?:de|du|mg|md|main|gauche|droite|fracture|amputation|ecrasement|arrachement|consolid|avec|raideur|ankylose|douleur|s[eé]quelle))/gi, (match, d, num) => {
+            const doigts = ['', 'pouce', 'index', 'médius', 'annulaire', 'auriculaire'];
+            return `${d.toLowerCase() === 'd' ? 'doigt' : 'Doigt'} ${doigts[parseInt(num)]} `;
+        }],
+        [/(?:fracture|amputation|lesion|trauma|ecrasement|arrachement|consolidation|sequelle|raideur|ankylose)\s+(?:de\s+)?(?:la\s+)?p([1-3])\s+([dD])([1-5])\b/gi, (match, phalange, d, num) => {
+            const doigts = ['', 'pouce', 'index', 'médius', 'annulaire', 'auriculaire'];
+            const phalanges = { '1': 'première phalange', '2': 'deuxième phalange', '3': 'troisième phalange' };
+            return `fracture ${phalanges[phalange]} doigt ${doigts[parseInt(num)]} `;
+        }],
+        [/\b([oO])([1-5])\b(?=\s*(?:de|du|pg|pd|pied|gauche|droite|fracture|amputation|consolid|avec|raideur|ankylose|douleur|s[eé]quelle))/gi, (match, o, num) => {
+            const orteils = ['', 'hallux', 'deuxième orteil', 'troisième orteil', 'quatrième orteil', 'cinquième orteil'];
+            return `${o.toLowerCase() === 'o' ? 'orteil' : 'Orteil'} ${orteils[parseInt(num)]} `;
+        }],
+        [/(?:fracture|amputation|lesion|trauma|ecrasement|arrachement|consolidation|sequelle|raideur|ankylose)\s+(?:de\s+)?(?:la\s+)?p([1-3])\s+([oO])([1-5])\b/gi, (match, phalange, o, num) => {
+            const orteils = ['', 'hallux', 'deuxième orteil', 'troisième orteil', 'quatrième orteil', 'cinquième orteil'];
+            const phalanges = { '1': 'première phalange', '2': 'deuxième phalange', '3': 'troisième phalange' };
+            return `fracture ${phalanges[phalange]} orteil ${orteils[parseInt(num)]} `;
+        }],
+        
+        // Phalanges génériques (APRÈS doigts/orteils spécifiques)
         [/\b([pP])1\b/gi, 'phalange proximale P1 '],
         [/\b([pP])2\b/gi, 'phalange moyenne P2 '],
         [/\b([pP])3\b/gi, 'phalange distale P3 '],
         [/\bphalange\s+prox\b/gi, 'phalange proximale '],
         [/\bphalange\s+moy\b/gi, 'phalange moyenne '],
         [/\bphalange\s+dist\b/gi, 'phalange distale '],
-        
-        // Doigts et orteils - Plus précis avec contexte
-        [/\b([dD])([1-5])\b(?=\s*(?:de|du|mg|md|main|gauche|droite|fracture|amputation|ecrasement|arrachement|consolid|avec|raideur|ankylose|douleur|s[eé]quelle))/gi, (match, d, num) => {
-            const doigts = ['', 'pouce', 'index', 'médius', 'annulaire', 'auriculaire'];
-            return `${d.toLowerCase() === 'd' ? 'doigt' : 'Doigt'} ${doigts[parseInt(num)]} `;
-        }],
-        [/\b([oO])([1-5])\b(?=\s*(?:de|du|pg|pd|pied|gauche|droite|fracture|amputation|consolid|avec|raideur|ankylose|douleur|s[eé]quelle))/gi, (match, o, num) => {
-            const orteils = ['', 'hallux', 'deuxième orteil', 'troisième orteil', 'quatrième orteil', 'cinquième orteil'];
-            return `${o.toLowerCase() === 'o' ? 'orteil' : 'Orteil'} ${orteils[parseInt(num)]} `;
-        }],
         
         // === CONSOLIDATION ET SÉQUELLES ===
         [/\bs[eé]quelle\s+douleureuse/gi, 'raideur avec douleur '],
