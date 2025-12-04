@@ -171,12 +171,12 @@ export const ExclusiveAiCalculator: React.FC<ExclusiveAiCalculatorProps> = ({
         messagesEndRef.current?.scrollIntoView({ behavior: "smooth", block: "end" });
     }, [messages, isLoading]);
 
-    const processAndDisplayAnalysis = useCallback((text: string) => {
+    const processAndDisplayAnalysis = useCallback((text: string, isExactMatch: boolean = false) => {
         setIsLoading(true);
         setTimeout(() => {
             try {
-                console.log('🚀 Appel localExpertAnalysis avec:', text);
-                const result = localExpertAnalysis(text);
+                console.log('🚀 Appel localExpertAnalysis avec:', text, 'isExactMatch:', isExactMatch);
+                const result = localExpertAnalysis(text, undefined, isExactMatch);
                 console.log('📦 Résultat reçu, type:', result.type);
                 console.log('📦 Résultat complet:', result);
                 
@@ -365,7 +365,7 @@ export const ExclusiveAiCalculator: React.FC<ExclusiveAiCalculatorProps> = ({
         setUserInput('');
         
         if (isClarification) {
-             processAndDisplayAnalysis(textToSend);
+             processAndDisplayAnalysis(textToSend, true); // 🔑 isExactMatch=true pour éviter boucle ambiguïté
              return;
         }
 

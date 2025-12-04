@@ -6793,8 +6793,65 @@ const extractIndividualLesions = (text: string): string[] => {
 
 /**
  * Analyse intelligente du langage naturel avec gestion du contexte médico-légal
+ * @param text - Texte à analyser
+ * @param externalKeywords - Mots-clés externes optionnels
+ * @param isExactMatch - Si true, cherche une correspondance exacte par nom (pour résoudre ambiguïté)
  */
-export const localExpertAnalysis = (text: string, externalKeywords?: string[]): LocalAnalysisResult => {
+export const localExpertAnalysis = (text: string, externalKeywords?: string[], isExactMatch: boolean = false): LocalAnalysisResult => {
+    
+    // 🆕 V3.3.60: Si isExactMatch, chercher l'injury exacte par nom pour éviter boucle d'ambiguïté
+    if (isExactMatch) {
+        console.log('🔍 Recherche exacte activée pour:', text);
+        const normalizedSearchText = normalize(text);
+        
+        // Parcourir toutes les catégories pour trouver une correspondance exacte
+        for (const category of disabilityData.categories) {
+            for (const subcategory of category.subcategories) {
+                for (const injury of subcategory.injuries) {
+                    const normalizedInjuryName = normalize(injury.name);
+                    
+                    // Correspondance exacte du nom
+                    if (normalizedInjuryName === normalizedSearchText) {
+                        console.log('✅ Correspondance exacte trouvée:', injury.name);
+                        
+                        // Déterminer le taux
+                        let chosenRate: number;
+                        if (Array.isArray(injury.rate)) {
+                            // Prendre le milieu de l'intervalle par défaut
+                            const [min, max] = injury.rate;
+                            chosenRate = Math.round((min + max) / 2);
+                        } else {
+                            chosenRate = injury.rate;
+                        }
+                        
+                        const path = `${category.name} > ${subcategory.name}`;
+                        const justification = buildExpertJustification(
+                            text, 
+                            injury, 
+                            chosenRate, 
+                            path,
+                            'moyen',
+                            [],
+                            true
+                        );
+                        
+                        return {
+                            type: 'proposal',
+                            name: injury.name,
+                            rate: chosenRate,
+                            justification,
+                            path,
+                            injury
+                        };
+                    }
+                }
+            }
+        }
+        
+        // Si aucune correspondance exacte, continuer avec l'analyse normale
+        console.log('⚠️ Aucune correspondance exacte, analyse normale...');
+    }
+    
     // Étape 0A: Détection cumuls de lésions (Balthazar) - mais continuer l'analyse normale
     const cumulDetection = detectMultipleLesions(text);
     const isCumulDetected = cumulDetection.isCumul && cumulDetection.lesionCount >= 2;
