@@ -21,6 +21,14 @@ interface ChatMessage {
   text: string;
   proposal?: Proposal;
   choices?: Injury[];
+  cumulProposals?: Array<{
+    id: string;
+    lesionNumber: number;
+    description: string;
+    injury: Injury;
+    justification: string;
+    status: 'pending' | 'accepted' | 'rejected';
+  }>;
 }
 
 interface ExclusiveAiCalculatorProps {
@@ -94,6 +102,40 @@ const MessageBubble: React.FC<{ message: ChatMessage; onAccept: () => void; onRe
                         })}
                     </div>
                 )}
+                {/* 🆕 V3.3.52: Affichage cumul de lésions multiples */}
+                {message.cumulProposals && (
+                    <div className="p-3 border-t border-slate-200 space-y-3">
+                        {message.cumulProposals.map((cumul) => {
+                            const rateText = Array.isArray(cumul.injury.rate) ? `[${cumul.injury.rate[0]}-${cumul.injury.rate[1]}]%` : `${cumul.injury.rate}%`;
+                            return (
+                                <div key={cumul.id} className="p-3 bg-slate-50 border border-slate-200 rounded-lg">
+                                    <div className="flex items-start justify-between mb-2">
+                                        <span className="inline-block px-2 py-1 bg-primary-600 text-white text-xs font-bold rounded">
+                                            Lésion {cumul.lesionNumber}
+                                        </span>
+                                        <span className="text-sm font-semibold text-primary-800">{rateText}</span>
+                                    </div>
+                                    <p className="text-xs text-slate-600 mb-2">
+                                        <strong>Description :</strong> {cumul.description}
+                                    </p>
+                                    <p className="text-xs text-slate-700 font-medium">{cumul.injury.name}</p>
+                                    {cumul.status === 'pending' && (
+                                        <div className="mt-2 flex gap-2 justify-end">
+                                            <Button variant="secondary" onClick={onReject} className="!text-xs !py-1 !px-2">Refuser</Button>
+                                            <Button onClick={onAccept} className="!text-xs !py-1 !px-2">Accepter</Button>
+                                        </div>
+                                    )}
+                                    {cumul.status === 'accepted' && (
+                                        <p className="mt-2 text-xs font-semibold text-green-600 text-right">✓ Accepté</p>
+                                    )}
+                                    {cumul.status === 'rejected' && (
+                                        <p className="mt-2 text-xs font-semibold text-red-600 text-right">✗ Refusé</p>
+                                    )}
+                                </div>
+                            )
+                        })}
+                    </div>
+                )}
             </div>
         </div>
     );
@@ -135,6 +177,21 @@ export const ExclusiveAiCalculator: React.FC<ExclusiveAiCalculatorProps> = ({
                             id: crypto.randomUUID(), role: 'model',
                             text: "Voici mon analyse complète et ma proposition :",
                             proposal: { ...result, status: 'pending' }
+                        };
+                        break;
+                    case 'cumul_proposals':
+                        // 🆕 V3.3.52: Afficher plusieurs propositions pour cumul de lésions
+                        modelMessage = {
+                            id: crypto.randomUUID(), role: 'model',
+                            text: result.text + "<br><br><strong>📋 Évaluations individuelles :</strong>",
+                            cumulProposals: result.proposals.map((p: any, index: number) => ({
+                                id: crypto.randomUUID(),
+                                lesionNumber: index + 1,
+                                description: p.description,
+                                injury: p.injury,
+                                justification: p.justification,
+                                status: 'pending'
+                            }))
                         };
                         break;
                      case 'ambiguity':

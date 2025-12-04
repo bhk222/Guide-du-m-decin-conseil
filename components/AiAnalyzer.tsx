@@ -23,7 +23,18 @@ export interface AmbiguityClarification {
   choices: Injury[];
 }
 
-export type LocalAnalysisResult = LocalProposal | NoResult | AmbiguityClarification;
+export interface CumulProposals {
+  type: 'cumul_proposals';
+  text: string;
+  proposals: Array<{
+    injury: Injury;
+    description: string;
+    justification: string;
+  }>;
+  lesionCount: number;
+}
+
+export type LocalAnalysisResult = LocalProposal | NoResult | AmbiguityClarification | CumulProposals;
 
 const allInjuriesWithPaths = disabilityData.flatMap(cat => 
     cat.subcategories.flatMap(sub => 
@@ -6681,6 +6692,57 @@ export const detectMultipleLesions = (text: string): {
 };
 
 /**
+ * 🆕 V3.3.52: Extraction des lésions individuelles à partir d'une description de cumul
+ * Décompose "fracture trochanter et diaphyse fémorale" en ["fracture trochanter fémur", "fracture diaphyse fémur"]
+ */
+const extractIndividualLesions = (text: string): string[] => {
+    const normalized = normalize(text);
+    const lesions: string[] = [];
+    
+    // Pattern 1: Fractures multiples sur même os (trochanter et diaphyse)
+    const sameBonePattern = /fracture.*?(trochanter|col|diaphyse|pilon|plateau|condyle|epicondyle).*?(?:et|,).*?(trochanter|col|diaphyse|pilon|plateau|condyle|epicondyle)/i;
+    const sameBoneMatch = sameBonePattern.exec(normalized);
+    
+    if (sameBoneMatch) {
+        const part1 = sameBoneMatch[1];
+        const part2 = sameBoneMatch[2];
+        const boneContext = normalized.includes('femur') || normalized.includes('femorale') ? 'femur' : 
+                          normalized.includes('tibia') || normalized.includes('tibiale') ? 'tibia' :
+                          normalized.includes('humer') ? 'humerus' : '';
+        
+        lesions.push(`fracture ${part1} ${boneContext}`.trim());
+        lesions.push(`fracture ${part2} ${boneContext}`.trim());
+        return lesions;
+    }
+    
+    // Pattern 2: Séparation par "+" (ex: "fracture humérus + entorse genou")
+    if (normalized.includes(' + ')) {
+        const parts = normalized.split(/\s*\+\s*/);
+        return parts.filter(p => p.length > 5);
+    }
+    
+    // Pattern 3: Séparation par "et" entre deux fractures distinctes
+    const twoFracturesPattern = /fracture.*?(?:et|,)\s*fracture/i;
+    if (twoFracturesPattern.test(normalized)) {
+        const parts = normalized.split(/\s*(?:et|,)\s*(?=fracture)/i);
+        return parts.filter(p => p.length > 5);
+    }
+    
+    // Pattern 4: Os + Nerf (ex: "fracture humérus avec paralysie radiale")
+    const boneNervePattern = /fracture.*?(avec|et).*?(paralysie|nerf|atteinte)/i;
+    if (boneNervePattern.test(normalized)) {
+        const bonePart = normalized.split(/(?:avec|et).*?(?:paralysie|nerf|atteinte)/i)[0];
+        const nervePart = normalized.match(/(?:paralysie|atteinte).*?(?:nerf\s+)?(\w+)/i);
+        lesions.push(bonePart.trim());
+        if (nervePart) lesions.push(`paralysie ${nervePart[1]}`.trim());
+        return lesions;
+    }
+    
+    // Si aucun pattern détecté, retourner le texte original
+    return [normalized];
+};
+
+/**
  * Analyse intelligente du langage naturel avec gestion du contexte médico-légal
  */
 export const localExpertAnalysis = (text: string, externalKeywords?: string[]): LocalAnalysisResult => {
@@ -6716,7 +6778,50 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[]): 
         contextInfo = `<br><br><em>⚠️ <strong>État antérieur identifié</strong> (antécédents médicaux AVANT l'accident du travail) : ${preexisting.join(', ')}.<br>Ces antécédents ne sont PAS à évaluer comme nouvelles lésions. Ils seront pris en compte dans le calcul final selon l'Article 12 (méthode de la capacité restante) si un taux antérieur existe.</em>`;
     }
 
-    // Étape 4: Analyse de la lésion principale
+    // 🆕 Étape 3B: SI CUMUL DÉTECTÉ → Analyser chaque lésion séparément (V3.3.52)
+    if (isCumulDetected && cumulDetection.lesionCount >= 2) {
+        const individualLesions = extractIndividualLesions(finalCleanedText);
+        
+        // Si on a réussi à extraire 2+ lésions distinctes, les analyser séparément
+        if (individualLesions.length >= 2) {
+            const lesionProposals: any[] = [];
+            
+            for (const lesion of individualLesions) {
+                const processedLesion = lesion.replace(/([A-ZCSLT])\s*(\d)/gi, '$1$2');
+                const lesionResult = comprehensiveSingleLesionAnalysis(processedLesion, externalKeywords);
+                
+                if (lesionResult.type === 'proposal') {
+                    lesionProposals.push({
+                        injury: lesionResult.injury,
+                        description: lesion,
+                        justification: lesionResult.justification
+                    });
+                }
+            }
+            
+            // Si on a au moins 2 propositions, retourner un résultat spécial "cumul_proposals"
+            if (lesionProposals.length >= 2) {
+                const cumulHeader = '<strong>⚠️ CUMUL DE LÉSIONS DÉTECTÉ</strong><br>';
+                const cumulDetails = `
+                    <div style="background:#fff3cd; padding:15px; margin:10px 0; border-left:5px solid #ffc107;">
+                    <strong>📊 Analyse cumul :</strong> ${lesionProposals.length} lésions identifiées et évaluées séparément<br>
+                    <strong>💡 Formule de Balthazar :</strong> IPP_total = IPP1 + IPP2 × (100 - IPP1) / 100<br>
+                    <strong>📝 Calcul automatique :</strong> Les lésions ci-dessous ont été analysées individuellement.<br>
+                    Exemple avec ${lesionProposals.length} lésions : 
+                    ${lesionProposals.map((p, i) => `Lésion ${i + 1} = ${Array.isArray(p.injury.rate) ? p.injury.rate.join('-') : p.injury.rate}%`).join(', ')}
+                    </div>`;
+                
+                return {
+                    type: 'cumul_proposals',
+                    text: cumulHeader + cumulDetails,
+                    proposals: lesionProposals,
+                    lesionCount: lesionProposals.length
+                } as any;
+            }
+        }
+    }
+
+    // Étape 4: Analyse de la lésion principale (flux normal si pas de cumul)
     const processedText = finalCleanedText.replace(/([A-ZCSLT])\s*(\d)/gi, '$1$2');
     const result = comprehensiveSingleLesionAnalysis(processedText, externalKeywords);
 
