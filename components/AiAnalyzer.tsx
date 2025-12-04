@@ -3114,8 +3114,10 @@ export const findCandidateInjuries = (text: string, externalKeywords?: string[])
                 const searchableText = createSearchableString(category, subcategory, injury);
 
                 const injuryMentionsHighImpactSequela = highImpactKeywords.some(kw => searchableText.includes(kw));
+                
+                // 🆕 LOGIQUE BIDIRECTIONNELLE pour séquelles graves
+                // Si user mentionne séquelle grave → pénaliser les séquelles sans gravité
                 if (userMentionsHighImpactSequela && !injuryMentionsHighImpactSequela) {
-                     // If user mentions a severe sequela, penalize entries that don't have it.
                      const sequelaKeywordsInName = functionalDeficitKeywords.some(kw => normalizedInjuryName.includes(kw));
                      
                      // 🆕 EXCEPTION: Lésions ophtalmologiques (V3.3.32) - acuité visuelle est le critère principal
@@ -3124,6 +3126,18 @@ export const findCandidateInjuries = (text: string, externalKeywords?: string[])
                      if(!sequelaKeywordsInName && !isOphthalmologicalInjury) {
                          return;
                      }
+                }
+                
+                // 🚨 LOGIQUE INVERSE: Si user NE mentionne PAS de séquelle grave → EXCLURE les complications graves
+                // Exception: "consolidée" indique explicitement une consolidation (pas de pseudarthrose)
+                const userExcludesComplications = normalizedText.includes('consolidee') || 
+                                                 normalizedText.includes('consolide') ||
+                                                 (!userMentionsHighImpactSequela);
+                
+                if (userExcludesComplications && injuryMentionsHighImpactSequela) {
+                    // L'utilisateur décrit une fracture simple consolidée, pas une complication
+                    // Exclure pseudarthrose, nécrose, etc.
+                    return; // Skip cette injury
                 }
 
                 // 🚨 EXCLUSION ANTI-DÉSARTICULATION/AMPUTATION si raideur détectée
