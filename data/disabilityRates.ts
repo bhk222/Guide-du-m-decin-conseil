@@ -1467,6 +1467,41 @@ const middleCategories: InjuryCategory[] = [
         ]
       },
       {
+        name: "Pied - Amputations Partielles",
+        injuries: [
+            { 
+                name: "Désarticulation tarso-métatarsienne (amputation de Lisfranc)", 
+                rate: [25, 40], 
+                description: "Amputation de l'avant-pied au niveau de l'articulation de Lisfranc (entre tarse et métatarsiens). Perte de tous les métatarsiens et orteils.",
+                rateCriteria: { 
+                    low: "Moignon d'appui satisfaisant, chaussage orthopédique bien toléré, déambulation autonome >1km, activités quotidiennes préservées.", 
+                    medium: "Troubles statiques modérés, boiterie nette, nécessité semelle de compensation, périmètre marche 500m-1km, douleurs mécaniques fréquentes.",
+                    high: "Moignon douloureux avec troubles trophiques, déséquilibre postural majeur, marche limitée <500m, nécessité canne, chaussage très difficile, retentissement professionnel majeur." 
+                }
+            },
+            { 
+                name: "Désarticulation médio-tarsienne (amputation de Chopart)", 
+                rate: [30, 45], 
+                description: "Amputation du pied au niveau de l'articulation médio-tarsienne (entre arrière-pied et avant-pied). Conservation de l'astragale et du calcanéum.",
+                rateCriteria: { 
+                    low: "Moignon satisfaisant avec prothèse partielle efficace, marche autonome, troubles statiques modérés.", 
+                    medium: "Équinisme résiduel, appui difficile, boiterie importante, douleurs appui talon, marche limitée.",
+                    high: "Moignon très court douloureux, équinisme majeur, troubles trophiques cutanés, déambulation très limitée avec aide technique permanente." 
+                }
+            },
+            { 
+                name: "Amputation trans-métatarsienne", 
+                rate: [20, 35], 
+                description: "Amputation au niveau des métatarsiens (conservation partielle des métatarsiens, perte de tous les orteils).",
+                rateCriteria: { 
+                    low: "Amputation distale (niveau tête métatarsiens), bon appui antérieur, chaussage adapté bien toléré, marche autonome.", 
+                    medium: "Amputation métatarsienne moyenne, troubles propulsion, boiterie modérée, douleurs mécaniques, marche limitée 1km.",
+                    high: "Amputation métatarsienne proximale, perte appui antérieur majeure, moignon douloureux, marche très limitée <500m, nécessité aide à la marche." 
+                }
+            },
+        ]
+      },
+      {
         name: "Orteils - Lésions",
         injuries: [
             { name: "Amputation du gros orteil", rate: [5, 8], rateCriteria: { low: "Amputation distale (phalange distale), troubles propulsion minimes.", high: "Amputation complète gros orteil, troubles appui/propulsion nets, boiterie." } },
