@@ -3890,6 +3890,13 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             searchTerms: ["Amputation trans-métatarsienne"],
             priority: 10001
         },
+        // 🆕 V3.3.69: Perte de tous les orteils = trans-métatarsienne (pas Lisfranc qui inclut métatarsiens)
+        {
+            pattern: /(?:perte|amputation).*(?:tous|5|cinq).*orteils|(?:tous|5|cinq).*orteils.*(?:perte|amputation)/i,
+            context: /.*/i,
+            searchTerms: ["Amputation trans-métatarsienne"],
+            priority: 10002  // Priorité supérieure à Lisfranc
+        },
         
         // === RÈGLE SPÉCIALE: CONSOLIDATION SANS SÉQUELLE = 0% IPP ===
         {
