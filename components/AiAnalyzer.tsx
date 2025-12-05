@@ -3871,6 +3871,26 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
 
     // �🎯 SYSTÈME DE RÈGLES EXPERTES - Court-circuite l'algorithme pour cas fréquents
     const expertRules = [
+        // === 🆕 V3.3.68: RÈGLES AMPUTATIONS PARTIELLES DU PIED ===
+        {
+            pattern: /(?:d[eé]sarticulation|amputation).*(?:lisfranc|tarso.*m[eé]tatarsien)/i,
+            context: /.*/i,
+            searchTerms: ["Désarticulation tarso-métatarsienne (amputation de Lisfranc)"],
+            priority: 10001
+        },
+        {
+            pattern: /(?:d[eé]sarticulation|amputation).*(?:chopart|m[eé]dio.*tarsien)/i,
+            context: /.*/i,
+            searchTerms: ["Désarticulation médio-tarsienne (amputation de Chopart)"],
+            priority: 10001
+        },
+        {
+            pattern: /amputation.*trans.*m[eé]tatarsien/i,
+            context: /.*/i,
+            searchTerms: ["Amputation trans-métatarsienne"],
+            priority: 10001
+        },
+        
         // === RÈGLE SPÉCIALE: CONSOLIDATION SANS SÉQUELLE = 0% IPP ===
         {
             pattern: /fracture.*(?:sans|consolidé)|consolidé.*fracture/i,  // Ajouté "sans" pour détecter "fracture...sans séquelle"
