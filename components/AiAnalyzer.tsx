@@ -3871,7 +3871,25 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
 
     // �🎯 SYSTÈME DE RÈGLES EXPERTES - Court-circuite l'algorithme pour cas fréquents
     const expertRules = [
-        // === 🆕 V3.3.68: RÈGLES AMPUTATIONS PARTIELLES DU PIED ===
+        // === 🆕 V3.3.68-70: RÈGLES AMPUTATIONS PARTIELLES DU PIED ===
+        {
+            pattern: /(?:amputation|op[eé]ration).*syme|d[eé]sarticulation.*tibio.*tarsien/i,
+            context: /.*/i,
+            searchTerms: ["Amputation de Syme (désarticulation tibio-tarsienne)"],
+            priority: 10003
+        },
+        {
+            pattern: /(?:amputation|op[eé]ration).*pirogoff/i,
+            context: /.*/i,
+            searchTerms: ["Opération de Pirogoff"],
+            priority: 10003
+        },
+        {
+            pattern: /(?:amputation|op[eé]ration).*ricard|amputation.*inter.*tibio.*calcan[eé]/i,
+            context: /.*/i,
+            searchTerms: ["Opération de Ricard (amputation inter-tibio-calcanéenne)"],
+            priority: 10003
+        },
         {
             pattern: /(?:d[eé]sarticulation|amputation).*(?:lisfranc|tarso.*m[eé]tatarsien)/i,
             context: /.*/i,
@@ -3884,18 +3902,18 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             searchTerms: ["Désarticulation médio-tarsienne (amputation de Chopart)"],
             priority: 10001
         },
-        {
-            pattern: /amputation.*trans.*m[eé]tatarsien/i,
-            context: /.*/i,
-            searchTerms: ["Amputation trans-métatarsienne"],
-            priority: 10001
-        },
         // 🆕 V3.3.69: Perte de tous les orteils = trans-métatarsienne (pas Lisfranc qui inclut métatarsiens)
         {
             pattern: /(?:perte|amputation).*(?:tous|5|cinq).*orteils|(?:tous|5|cinq).*orteils.*(?:perte|amputation)/i,
             context: /.*/i,
-            searchTerms: ["Amputation trans-métatarsienne"],
+            searchTerms: ["Amputation trans-métatarsienne (perte des cinq orteils)"],
             priority: 10002  // Priorité supérieure à Lisfranc
+        },
+        {
+            pattern: /amputation.*trans.*m[eé]tatarsien/i,
+            context: /.*/i,
+            searchTerms: ["Amputation trans-métatarsienne (perte des cinq orteils)"],
+            priority: 10001
         },
         
         // === RÈGLE SPÉCIALE: CONSOLIDATION SANS SÉQUELLE = 0% IPP ===

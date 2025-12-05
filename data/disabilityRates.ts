@@ -1318,7 +1318,7 @@ const middleCategories: InjuryCategory[] = [
         injuries: [
             { 
                 name: "Amputation de jambe sous le genou (tiers supérieur)", 
-                rate: 55, 
+                rate: 65, 
                 description: "Amputation sous le genou au tiers supérieur (amputation jambe proximale, amputation tibiale haute) avec moignon long et bien appareillable, prothèse fonctionnelle."
             },
             { 
@@ -1328,7 +1328,7 @@ const middleCategories: InjuryCategory[] = [
             },
             { 
                 name: "Amputation de jambe (tiers inférieur)", 
-                rate: 50, 
+                rate: 60, 
                 description: "Amputation de jambe au tiers inférieur proche de la cheville (amputation jambe distale, amputation jambe basse)."
             },
             { 
@@ -1470,32 +1470,40 @@ const middleCategories: InjuryCategory[] = [
         name: "Pied - Amputations Partielles",
         injuries: [
             { 
+                name: "Amputation de Syme (désarticulation tibio-tarsienne)", 
+                rate: 50, 
+                description: "Désarticulation tibio-tarsienne avec conservation du calcanéum. Amputation au niveau de la cheville conservant le talon pour l'appui."
+            },
+            { 
+                name: "Opération de Pirogoff", 
+                rate: 50, 
+                description: "Amputation du pied avec conservation partielle du calcanéum fixé sous le tibia. Technique d'amputation conservant l'appui calcanéen."
+            },
+            { 
+                name: "Opération de Ricard (amputation inter-tibio-calcanéenne)", 
+                rate: 45, 
+                description: "Amputation inter-tibio-calcanéenne. Technique d'amputation partielle du pied."
+            },
+            { 
+                name: "Désarticulation médio-tarsienne (amputation de Chopart)", 
+                rate: 45, 
+                description: "Amputation du pied au niveau de l'articulation médio-tarsienne (entre arrière-pied et avant-pied). Conservation de l'astragale et du calcanéum. Équivalent aux opérations de Syme, Pirogoff, Ricard (désarticulation tibio-tarsienne et amputation inter-tibio-calcanéenne)."
+            },
+            { 
                 name: "Désarticulation tarso-métatarsienne (amputation de Lisfranc)", 
-                rate: [25, 40], 
+                rate: [35, 40], 
                 description: "Amputation de l'avant-pied au niveau de l'articulation de Lisfranc (entre tarse et métatarsiens). Perte de tous les métatarsiens et orteils.",
                 rateCriteria: { 
                     low: "Moignon d'appui satisfaisant, chaussage orthopédique bien toléré, déambulation autonome >1km, activités quotidiennes préservées.", 
-                    medium: "Troubles statiques modérés, boiterie nette, nécessité semelle de compensation, périmètre marche 500m-1km, douleurs mécaniques fréquentes.",
                     high: "Moignon douloureux avec troubles trophiques, déséquilibre postural majeur, marche limitée <500m, nécessité canne, chaussage très difficile, retentissement professionnel majeur." 
                 }
             },
             { 
-                name: "Désarticulation médio-tarsienne (amputation de Chopart)", 
-                rate: [30, 45], 
-                description: "Amputation du pied au niveau de l'articulation médio-tarsienne (entre arrière-pied et avant-pied). Conservation de l'astragale et du calcanéum.",
-                rateCriteria: { 
-                    low: "Moignon satisfaisant avec prothèse partielle efficace, marche autonome, troubles statiques modérés.", 
-                    medium: "Équinisme résiduel, appui difficile, boiterie importante, douleurs appui talon, marche limitée.",
-                    high: "Moignon très court douloureux, équinisme majeur, troubles trophiques cutanés, déambulation très limitée avec aide technique permanente." 
-                }
-            },
-            { 
-                name: "Amputation trans-métatarsienne", 
-                rate: [20, 35], 
+                name: "Amputation trans-métatarsienne (perte des cinq orteils)", 
+                rate: [25, 30], 
                 description: "Amputation au niveau des métatarsiens (conservation partielle des métatarsiens, perte de tous les orteils).",
                 rateCriteria: { 
                     low: "Amputation distale (niveau tête métatarsiens), bon appui antérieur, chaussage adapté bien toléré, marche autonome.", 
-                    medium: "Amputation métatarsienne moyenne, troubles propulsion, boiterie modérée, douleurs mécaniques, marche limitée 1km.",
                     high: "Amputation métatarsienne proximale, perte appui antérieur majeure, moignon douloureux, marche très limitée <500m, nécessité aide à la marche." 
                 }
             },
