@@ -2176,7 +2176,7 @@ const subPartKeywords: { [key: string]: string[] } = {
     // Thorax, Abdomen, Pelvis
     'Thorax': ['thorax', 'thoracique', 'côte', 'cote', 'costal', 'costale', 'sternum'],
     'Plèvre et Poumons': ['pneumothorax', 'hémothorax', 'plèvre', 'pleural', 'pleurale', 'poumon', 'pulmonaire'],
-    'Abdomen': ['abdomen', 'abdominal', 'estomac', 'hernie', 'splénectomie', 'laparotomie', 'rate', 'splenique'],
+    'Abdomen': ['abdomen', 'abdominal', 'estomac', 'hernie', 'splénectomie', 'laparotomie', 'rate', 'splenique', 'fistule', 'intestinal', 'digestif'],
     'Séquelles Uro-génitales': ['urètre', 'urétral', 'uretère', 'vessie', 'incontinence'],
     // Sensoriel
     'Vision': ['oeil', 'yeux', 'vision', 'visuel', 'cécité', 'hémianopsie', 'oculaire', 'occulaire'],
@@ -3914,6 +3914,20 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             context: /.*/i,
             searchTerms: ["Amputation trans-métatarsienne (perte des cinq orteils)"],
             priority: 10001
+        },
+        
+        // === 🆕 V3.3.71: RÈGLES FISTULES ===
+        {
+            pattern: /fistules?.*(?:[eé]troites?|intestinales?.*[eé]troites?)/i,
+            context: /.*/i,
+            searchTerms: ["Fistules intestinales - Étroites"],
+            priority: 9500
+        },
+        {
+            pattern: /fistules?.*(?:larges?|intestinales?.*larges?|bas\s+situ[eé]es?)/i,
+            context: /.*/i,
+            searchTerms: ["Fistules intestinales - Larges, bas situées"],
+            priority: 9500
         },
         
         // === RÈGLE SPÉCIALE: CONSOLIDATION SANS SÉQUELLE = 0% IPP ===

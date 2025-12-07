@@ -1,5 +1,5 @@
-const CACHE_NAME = 'guide-medecin-conseil-v4.3.70-BAREME-OFFICIEL';
-const DATA_CACHE_NAME = 'guide-medecin-conseil-data-v4.3.70-BAREME-OFFICIEL';
+const CACHE_NAME = 'guide-medecin-conseil-v4.3.71-FISTULES';
+const DATA_CACHE_NAME = 'guide-medecin-conseil-data-v4.3.71-FISTULES';
 
 // Ressources essentielles à mettre en cache immédiatement
 const STATIC_CACHE_URLS = [
