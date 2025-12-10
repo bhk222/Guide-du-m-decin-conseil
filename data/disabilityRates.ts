@@ -1448,6 +1448,7 @@ const middleCategories: InjuryCategory[] = [
             { name: "Pseudarthrose des deux os de la jambe", rate: [40, 60], rateCriteria: { low: "Pseudarthrose stable avec appareillage orthopédique efficace, marche possible >1km.", high: "Pseudarthrose instable, membre quasi-inutilisable, nécessité fauteuil roulant ou amputation envisagée." } },
             { name: "Pseudarthrose du tibia", rate: [30, 50], rateCriteria: { low: "Pseudarthrose stable du tiers moyen tibia, appareillage, marche limitée mais autonome.", high: "Pseudarthrose instable avec cal fibulaire hypertrophique, douleurs permanentes, impotence fonctionnelle majeure." } },
             { name: "Pseudarthrose de la diaphyse tibiale", description: "Pseudarthrose du tiers moyen de la diaphyse tibiale avec mobilité anormale et impotence fonctionnelle majeure nécessitant appareillage permanent.", rate: 70 },
+            { name: "Pseudarthrose du péroné", rate: [15, 30], rateCriteria: { low: "Pseudarthrose stable péroné, gêne modérée, marche possible.", high: "Pseudarthrose instable avec conflit tibiofibulaire, douleurs cheville, boiterie." } },
             { name: "Syndrome des loges chronique d'effort de la jambe", rate: [10, 25], description: "Douleurs musculaires à l'effort par augmentation de pression dans les loges musculaires.", rateCriteria: { low: "Douleurs apparaissant à l'effort intense, calmées par le repos.", high: "Douleurs invalidantes pour des efforts modérés, avec signes neurologiques." } },
         ]
       },

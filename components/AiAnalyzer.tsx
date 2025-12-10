@@ -5130,7 +5130,7 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
         // ========== CAS COMPLEXES (CUMULS SPÉCIFIQUES) ==========
         // 🆕 V3.3.95: CUMUL MEMBRE INFÉRIEUR - Pseudarthrose + Raccourcissement + Amyotrophie
         {
-            pattern: /(?:fracture.*(?:f[eé]mur|tibia|jambe)|pseudarthrose.*tibia).*(?:avec|et).*(?:raccourcissement|in[eé]galit[eé]|amyotrophie|boiterie)/i,
+            pattern: /(?:fracture.*(?:f[eé]mur|tibia|jambe)|pseudarthrose.*(?:tibia|p[eé]ron[eé]|fibula)).*(?:avec|et).*(?:raccourcissement|in[eé]galit[eé]|amyotrophie|boiterie)/i,
             context: /pseudarthrose|raccourcissement.*\d+\s*cm|amyotrophie.*(?:cuisse|jambe)|boiterie|marche.*difficile/i,
             searchTerms: ["__CUMUL_MEMBRE_INF_PSEUDARTHROSE_RACCOURCISSEMENT__"],
             priority: 10600,
@@ -5582,16 +5582,16 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
                 // Détection séquelles
                 const hasFemurFracture = /fracture.*(?:f[eé]mur|f[eé]moral|cuisse)/i.test(normalizedInputText);
                 const hasTibiaFracture = /fracture.*(?:tibia|deux.*os.*jambe|jambe)/i.test(normalizedInputText);
-                const hasPseudarthrose = /pseudarthrose.*tibia/i.test(normalizedInputText);
+                const hasPseudarthrose = /pseudarthrose.*(?:tibia|p[eé]ron[eé]|fibula)/i.test(normalizedInputText);
                 const hasAmyotrophie = /amyotrophie.*(?:cuisse|jambe)|fonte.*musculaire/i.test(normalizedInputText);
                 const hasBoiterie = /boiterie|claudication|marche.*difficile/i.test(normalizedInputText);
                 
                 // Calcul IPP base pseudarthrose tibia
                 let ippPseudarthrose = 0;
                 if (hasPseudarthrose) {
-                    // Pseudarthrose diaphyse tibiale: [25-45%] → Utiliser barème
+                    // Pseudarthrose tibia/péroné: chercher entrée dans barème
                     const pseudarthroseEntry = allInjuriesWithPaths.find(item => 
-                        /pseudarthrose.*diaphyse.*tibiale/i.test(item.name)
+                        /pseudarthrose.*(?:diaphyse.*tibiale|tibia|p[eé]ron[eé])/i.test(item.name)
                     );
                     if (pseudarthroseEntry && Array.isArray(pseudarthroseEntry.rate)) {
                         ippPseudarthrose = Math.round((pseudarthroseEntry.rate[0] + pseudarthroseEntry.rate[1]) / 2);
@@ -5631,8 +5631,9 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
                 if (hasBoiterie) justification += `&nbsp;&nbsp;• Boiterie persistante à la marche<br>`;
                 
                 justification += `<br>💡 <strong>FORMULE DE BALTHAZARD - CUMUL SÉQUELLES</strong> :<br><br>`;
-                justification += `<strong>1️⃣ Pseudarthrose diaphyse tibiale</strong> : <strong>${ippPseudarthrose}%</strong><br>`;
-                justification += `&nbsp;&nbsp;• Rubrique : "Membres Inférieurs > Pseudarthrose diaphyse tibiale"<br>`;
+                const pseudarthroseType = /pseudarthrose.*tibia/i.test(normalizedInputText) ? 'tibia' : 'péroné';
+                justification += `<strong>1️⃣ Pseudarthrose ${pseudarthroseType}</strong> : <strong>${ippPseudarthrose}%</strong><br>`;
+                justification += `&nbsp;&nbsp;• Rubrique : "Membres Inférieurs > Pseudarthrose ${pseudarthroseType}"<br>`;
                 justification += `&nbsp;&nbsp;• Fourchette barème : [25 - 45%] (gravité MOYENNE)<br><br>`;
                 
                 if (ippRaccourcissement > 0) {
