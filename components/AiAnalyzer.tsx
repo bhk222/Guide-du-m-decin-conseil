@@ -4842,10 +4842,10 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             searchTerms: ['Raideur d\'une articulation de l\'annulaire (Main Dominante)'],
             priority: 93
         },
-        // 🆕 V3.3.102: Cécité totale d'un œil
+        // 🆕 V3.3.102: Cécité totale d'un œil (V3.3.103: contexte plus flexible)
         {
             pattern: /c[eé]cit[eé].*(?:totale|compl[eè]te).*œil|perte.*(?:totale|compl[eè]te).*vision.*œil|œil.*(?:perdu|aveugle|c[eé]cit[eé])/i,
-            context: /accident|traumatisme|s[eé]quelle|œil.*(?:gauche|droit)/i,
+            context: /accident|traumatisme|s[eé]quelle|œil.*(?:gauche|droit)|suite|victime|cons[eé]cutif/i,  // Contexte plus large
             searchTerms: ['Perte complète de la vision d\'un oeil (l\'autre étant normal)'],
             priority: 11000,
             negativeContext: /deux\s+yeux|bilat[eé]ral|c[eé]cit[eé]\s+compl[eè]te(?!.*œil)/i  // Exclure cécité complète (100%) ou bilatérale
