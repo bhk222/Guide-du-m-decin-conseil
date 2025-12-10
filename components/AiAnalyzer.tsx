@@ -2153,7 +2153,7 @@ const subPartKeywords: { [key: string]: string[] } = {
     'Doigts': ['doigt', 'pouce', 'index', 'médius', 'annulaire', 'auriculaire', 'phalange'],
     'Main': ['main', 'métacarpe', 'metacarpien', 'benett'],
     'Poignet': ['poignet', 'scaphoïde', 'semi-lunaire', 'carpe'],
-    'Avant-bras': ['avant-bras', 'radius', 'cubitus', 'ulna'],
+    'Avant-bras': ['avant-bras', 'radius', 'cubitus', 'ulna', 'pseudarthrose', 'radial', 'cubital'],
     'Coude': ['coude', 'olécrane', 'olecrane'],
     'Bras': ['bras', 'humérus', 'humeral', 'humerale'],
     'Épaule': ['épaule', 'epaule', 'deltoïde', 'deltoide'],
@@ -3646,6 +3646,18 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
     // 🆕 PREPROCESSING MÉDICAL ENRICHI - Transformer descriptions vagues en termes détectables
     // Ceci enrichit le texte AVANT toute analyse
     const medicalEnrichment: [RegExp, string][] = [
+        // 🆕 V3.3.90: Semi-lunaire (lunatum) → enrichissement
+        [/(?:luxation|fracture).*semi.*lunaire|semi.*lunaire|lunatum/gi, 'luxation-fracture semi-lunaire lunatum os carpe poignet'],
+        
+        // 🆕 V3.3.86: Fracture Monteggia → enrichissement explicite
+        [/fracture.*monteggia|monteggia/gi, 'fracture-luxation monteggia séquelles coude cubitus tête radiale'],
+        
+        // 🆕 V3.3.77: Fractures olécrane → Détection avec contexte clinique
+        [/fractures?\s+(?:de\s+)?l'?olecrane.*?cal\s+osseux\s+court/gi, 'fracture olécrane cal osseux court bonne extension'],
+        [/fractures?\s+(?:de\s+)?l'?olecrane.*?cal\s+fibreux\s+long.*?extension.*?faible/gi, 'fracture olécrane cal fibreux long extension active faible'],
+        [/fractures?\s+(?:de\s+)?l'?olecrane.*?cal\s+fibreux\s+long.*?extension.*?nulle/gi, 'fracture olécrane cal fibreux long extension active nulle atrophie'],
+        [/fractures?\s+(?:de\s+)?l'?olecrane.*?raideur\s+importante/gi, 'fracture olécrane avec raideur importante'],
+        
         // 🆕 V3.3.66: Fractures phalanges orteils → Séquelles avec raideur (termes barème)
         [/fracture.*?(?:premi[eè]re\s+)?phalange.*?(?:gros\s+orteil|hallux)/gi, 'fracture consolidée phalange gros orteil avec raideur'],
         [/fracture.*?(?:premi[eè]re\s+)?phalange.*?(?:deuxi[eè]me|troisi[eè]me|quatri[eè]me|cinqui[eè]me)\s+orteil/gi, 'fracture consolidée phalange autre orteil avec raideur'],
@@ -3927,6 +3939,115 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             pattern: /fistules?.*(?:larges?|intestinales?.*larges?|bas\s+situ[eé]es?)/i,
             context: /.*/i,
             searchTerms: ["Fistules intestinales - Larges, bas situées"],
+            priority: 9500
+        },
+        
+        // === 🆕 V3.3.85: RÈGLE STYLOÏDE CUBITALE ===
+        {
+            pattern: /fractures?.*(?:de\s+)?(?:la\s+)?stylo[iï]de.*(?:cubitale?|ulnaire?)|(?:cubitale?|ulnaire?).*stylo[iï]de/i,
+            context: /poignet|avant.*bras|cubitus|ulna/i,
+            searchTerms: ["Fracture de la styloïde cubitale (Main Dominante)"],
+            priority: 10500
+        },
+        
+        // === 🆕 V3.3.86: RÈGLE MONTEGGIA (sans context restrictif) ===
+        {
+            pattern: /(?:fracture|s[eé]quelles?).*monteggia|monteggia/i,
+            context: /.*/i,  // Accept tout contexte
+            searchTerms: ["Séquelles de fracture-luxation de Monteggia (Main Dominante)"],
+            priority: 10500
+        },
+        
+        // === 🆕 V3.3.89: RÈGLE CUPULE/TÊTE RADIALE ===
+        // Limitation minime
+        {
+            pattern: /fracture.*(?:cupule|t[eê]te).*radial|(?:cupule|t[eê]te).*radial.*fracture/i,
+            context: /coude|limitation.*(?:minime|mod[eé]r[eé]e|l[eé]g[eè]re)|prono.*supination/i,
+            searchTerms: ["Fracture de la tête radiale (cupule radiale) - Consolidation avec limitation minime (Main Dominante)"],
+            priority: 10500
+        },
+        // Limitation importante
+        {
+            pattern: /fracture.*(?:cupule|t[eê]te).*radial|(?:cupule|t[eê]te).*radial.*fracture/i,
+            context: /limitation.*(?:importante|s[eé]v[eè]re|majeure)|g[eê]ne.*flexion.*extension|prono.*supination.*(?:limit|r[eé]duit)/i,
+            searchTerms: ["Fracture de la tête radiale (cupule radiale) - Avec limitation importante prono-supination (Main Dominante)"],
+            priority: 10500
+        },
+        
+        // === 🆕 V3.3.91: RÈGLE SEMI-LUNAIRE (LUNATUM) - auto-détection MD/MND ===
+        {
+            pattern: /(?:luxation|fracture).*semi.*lunaire|semi.*lunaire.*(?:luxation|fracture)|lunatum/i,
+            context: /.*/i,  // Accept tout contexte
+            searchTerms: [
+                "Luxation-fracture du semi-lunaire (lunatum) (Main Dominante)",
+                "Luxation-fracture du semi-lunaire (lunatum) (Main Non Dominante)"
+            ],
+            priority: 10500
+        },
+        
+        // === RÈGLES FRACTURES OLÉCRANE ===
+        // Cal osseux court avec bonne extension (PRIORITÉ MAXIMALE)
+        {
+            pattern: /fractures?.*(?:de\s+)?(?:l[''\s]+)?ol[eé]cr[aâ]ne/i,
+            context: /cal.*osseux|bonne.*extension|flexion.*(?:peu\s+)?limit/i,
+            searchTerms: ["Fracture de l'olécrane - Cal osseux court, bonne extension (Main Dominante)"],
+            priority: 10500
+        },
+        // Cal fibreux long avec extension active faible
+        {
+            pattern: /fractures?.*(?:de\s+)?(?:l[''\s]+)?ol[eé]cr[aâ]ne/i,
+            context: /cal.*fibreux.*long|extension.*(?:active\s+)?faible/i,
+            searchTerms: ["Fracture de l'olécrane - Cal fibreux long, extension active faible (Main Dominante)"],
+            priority: 10500
+        },
+        // Cal fibreux long avec extension active nulle
+        {
+            pattern: /fractures?.*(?:de\s+)?(?:l[''\s]+)?ol[eé]cr[aâ]ne/i,
+            context: /extension.*(?:active\s+)?nulle|atrophie/i,
+            searchTerms: ["Fracture de l'olécrane - Cal fibreux long, extension active nulle, atrophie (Main Dominante)"],
+            priority: 10500
+        },
+        // Avec raideur importante (fallback générique)
+        {
+            pattern: /fractures?.*(?:de\s+)?(?:l[''\s]+)?ol[eé]cr[aâ]ne/i,
+            context: /raideur.*importante/i,
+            searchTerms: ["Fracture de l'olécrane - Avec raideur importante"],
+            priority: 10500
+        },
+        // Fallback: fracture olécrane sans contexte spécifique → cal osseux court par défaut
+        {
+            pattern: /fractures?.*(?:de\s+)?(?:l[''\s]+)?ol[eé]cr[aâ]ne/i,
+            context: /.*/i,
+            searchTerms: ["Fracture de l'olécrane - Cal osseux court, bonne extension (Main Dominante)"],
+            priority: 10000
+        },
+        
+        // === RÈGLES PSEUDARTHROSE AVANT-BRAS ===
+        // Pseudarthrose radiale isolée
+        {
+            pattern: /pseudarthrose.*(?:radiale?|radius)/i,
+            context: /.*/i,
+            searchTerms: ["Pseudarthrose du radius (Main Dominante)"],
+            priority: 9500
+        },
+        // Pseudarthrose cubitale isolée
+        {
+            pattern: /pseudarthrose.*(?:cubitale?|cubitus|ulnaire?|ulna)/i,
+            context: /.*/i,
+            searchTerms: ["Pseudarthrose du cubitus (Main Dominante)"],
+            priority: 9500
+        },
+        // Pseudarthrose double ou avant-bras ballant (instable/lâche)
+        {
+            pattern: /(?:pseudarthrose.*(?:double|deux\s+os)|avant.*bras.*ballant)/i,
+            context: /avant.*bras/i,
+            searchTerms: ["Pseudarthrose des deux os de l'avant-bras - lâche (Main Dominante)"],
+            priority: 9500
+        },
+        {
+            pattern: /pseudarthrose.*(?:deux\s+os|double).*avant.*bras/i,
+            context: /serr[eé]e/i,
+            searchTerms: ["Pseudarthrose des deux os de l'avant-bras - serrée (Main Dominante)"],
             priority: 9500
         },
         
@@ -4667,6 +4788,31 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             searchTerms: ['Raideur d\'une articulation de l\'annulaire (Main Dominante)'],
             priority: 93
         },
+        // 🆕 V3.3.83: Amputation P2 seule (détection "P2 D2/D3/D4/D5" ou "phalange moyenne seule")
+        {
+            pattern: /(?:amputation|perte).*(?:p2|phalange\s+moyenne).*(?:index|d2)(?!\s*(?:et|avec|p3|d3))/i,
+            context: /doigt|main/i,
+            searchTerms: ['Perte de la 2ème phalange seule de l\'index (P2 seule) (Main Dominante)'],
+            priority: 9800
+        },
+        {
+            pattern: /(?:amputation|perte).*(?:p2|phalange\s+moyenne).*(?:m[eé]dius|majeur|d3)(?!\s*(?:et|avec|p3|d4))/i,
+            context: /doigt|main/i,
+            searchTerms: ['Perte de la 2ème phalange seule du médius (P2 seule) (Main Dominante)'],
+            priority: 9800
+        },
+        {
+            pattern: /(?:amputation|perte).*(?:p2|phalange\s+moyenne).*(?:annulaire|d4)(?!\s*(?:et|avec|p3|d5))/i,
+            context: /doigt|main/i,
+            searchTerms: ['Perte de la 2ème phalange seule de l\'annulaire (P2 seule) (Main Dominante)'],
+            priority: 9800
+        },
+        {
+            pattern: /(?:amputation|perte).*(?:p2|phalange\s+moyenne).*(?:auriculaire|d5)(?!\s*(?:et|avec|p3))/i,
+            context: /doigt|main/i,
+            searchTerms: ['Perte de la 2ème phalange seule de l\'auriculaire (P2 seule) (Main Dominante)'],
+            priority: 9800
+        },
         {
             pattern: /amputation.*m[eé]dius/i,
             context: /doigt|main/i,
@@ -4982,6 +5128,14 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
         },
         
         // ========== CAS COMPLEXES (CUMULS SPÉCIFIQUES) ==========
+        // 🆕 V3.3.95: CUMUL MEMBRE INFÉRIEUR - Pseudarthrose + Raccourcissement + Amyotrophie
+        {
+            pattern: /(?:fracture.*(?:f[eé]mur|tibia|jambe)|pseudarthrose.*tibia).*(?:avec|et).*(?:raccourcissement|in[eé]galit[eé]|amyotrophie|boiterie)/i,
+            context: /pseudarthrose|raccourcissement.*\d+\s*cm|amyotrophie.*(?:cuisse|jambe)|boiterie|marche.*difficile/i,
+            searchTerms: ["__CUMUL_MEMBRE_INF_PSEUDARTHROSE_RACCOURCISSEMENT__"],
+            priority: 10600,
+            negativeContext: /consolid[eé].*parfaite|sans.*s[eé]quelle/i
+        },
         {
             pattern: /fracture.*plateaux.*tibiaux.*avec.*rupture.*LCA.*opérée/i,
             context: /raideur.*flexion|flexion.*limitée|instabilité|dérobement/i,  // Context pour LCA
@@ -5418,6 +5572,104 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
                 };
             }
             
+            // 🎯 V3.3.95: CAS SPÉCIAL: CUMUL POLYTRAUMA MEMBRE INFÉRIEUR
+            // Fracture fémur + tibia + Pseudarthrose + Raccourcissement + Amyotrophie + Boiterie
+            if (rule.searchTerms.includes("__CUMUL_MEMBRE_INF_PSEUDARTHROSE_RACCOURCISSEMENT__")) {
+                // Parser raccourcissement
+                const shorteningMatch = /raccourcissement.*(\d+(?:\.\d+)?)\s*cm/i.exec(normalizedInputText);
+                const shorteningCm = shorteningMatch ? parseFloat(shorteningMatch[1]) : 0;
+                
+                // Détection séquelles
+                const hasFemurFracture = /fracture.*(?:f[eé]mur|f[eé]moral|cuisse)/i.test(normalizedInputText);
+                const hasTibiaFracture = /fracture.*(?:tibia|deux.*os.*jambe|jambe)/i.test(normalizedInputText);
+                const hasPseudarthrose = /pseudarthrose.*tibia/i.test(normalizedInputText);
+                const hasAmyotrophie = /amyotrophie.*(?:cuisse|jambe)|fonte.*musculaire/i.test(normalizedInputText);
+                const hasBoiterie = /boiterie|claudication|marche.*difficile/i.test(normalizedInputText);
+                
+                // Calcul IPP base pseudarthrose tibia
+                let ippPseudarthrose = 0;
+                if (hasPseudarthrose) {
+                    // Pseudarthrose diaphyse tibiale: [25-45%] → Utiliser barème
+                    const pseudarthroseEntry = allInjuriesWithPaths.find(item => 
+                        /pseudarthrose.*diaphyse.*tibiale/i.test(item.name)
+                    );
+                    if (pseudarthroseEntry && Array.isArray(pseudarthroseEntry.rate)) {
+                        ippPseudarthrose = Math.round((pseudarthroseEntry.rate[0] + pseudarthroseEntry.rate[1]) / 2);
+                    } else {
+                        ippPseudarthrose = 35; // Défaut moyen fourchette [25-45%]
+                    }
+                }
+                
+                // Calcul IPP raccourcissement
+                let ippRaccourcissement = 0;
+                if (shorteningCm >= 5) ippRaccourcissement = 15; // Haut fourchette [5-25%]
+                else if (shorteningCm >= 3) ippRaccourcissement = 10; // Moyen-haut
+                else if (shorteningCm >= 2) ippRaccourcissement = 7; // Moyen
+                else if (shorteningCm >= 1) ippRaccourcissement = 5; // Bas
+                
+                // Bonus amyotrophie + boiterie (facteur gravité cumulé)
+                let bonusAmyotrophie = 0;
+                if (hasAmyotrophie && hasBoiterie) bonusAmyotrophie = 5;
+                else if (hasAmyotrophie || hasBoiterie) bonusAmyotrophie = 3;
+                
+                // Formule Balthazard: IPP_total = IPP1 + IPP2 × (100 - IPP1) / 100
+                let ippTotal = ippPseudarthrose;
+                if (ippRaccourcissement > 0) {
+                    ippTotal = ippPseudarthrose + ippRaccourcissement * (100 - ippPseudarthrose) / 100;
+                }
+                ippTotal += bonusAmyotrophie;
+                const ippFinal = Math.round(ippTotal);
+                
+                // Construction justification
+                let justification = `<strong>⚠️ POLYTRAUMATISME MEMBRE INFÉRIEUR - CUMUL SÉQUELLES MULTIPLES</strong><br><br>`;
+                justification += `📊 <strong>Données cliniques</strong> :<br>`;
+                if (hasFemurFracture) justification += `&nbsp;&nbsp;• Fracture fémur consolidée<br>`;
+                if (hasTibiaFracture) justification += `&nbsp;&nbsp;• Fracture deux os de la jambe consolidée<br>`;
+                if (hasPseudarthrose) justification += `&nbsp;&nbsp;• <strong>Pseudarthrose de la diaphyse tibiale</strong> (séquelle majeure)<br>`;
+                if (shorteningCm > 0) justification += `&nbsp;&nbsp;• Raccourcissement membre inférieur : <strong>${shorteningCm} cm</strong><br>`;
+                if (hasAmyotrophie) justification += `&nbsp;&nbsp;• Amyotrophie cuisse et jambe (fonte musculaire)<br>`;
+                if (hasBoiterie) justification += `&nbsp;&nbsp;• Boiterie persistante à la marche<br>`;
+                
+                justification += `<br>💡 <strong>FORMULE DE BALTHAZARD - CUMUL SÉQUELLES</strong> :<br><br>`;
+                justification += `<strong>1️⃣ Pseudarthrose diaphyse tibiale</strong> : <strong>${ippPseudarthrose}%</strong><br>`;
+                justification += `&nbsp;&nbsp;• Rubrique : "Membres Inférieurs > Pseudarthrose diaphyse tibiale"<br>`;
+                justification += `&nbsp;&nbsp;• Fourchette barème : [25 - 45%] (gravité MOYENNE)<br><br>`;
+                
+                if (ippRaccourcissement > 0) {
+                    justification += `<strong>2️⃣ Raccourcissement ${shorteningCm}cm</strong> : <strong>${ippRaccourcissement}%</strong><br>`;
+                    justification += `&nbsp;&nbsp;• Rubrique : "Membres Inférieurs > Raccourcissement d'un membre inférieur"<br>`;
+                    justification += `&nbsp;&nbsp;• Fourchette barème : [5 - 25%] (selon gravité)<br><br>`;
+                }
+                
+                if (bonusAmyotrophie > 0) {
+                    justification += `<strong>3️⃣ Majoration troubles trophiques</strong> : <strong>+${bonusAmyotrophie}%</strong><br>`;
+                    justification += `&nbsp;&nbsp;• Amyotrophie cuisse/jambe + Boiterie persistante<br><br>`;
+                }
+                
+                justification += `<strong>📐 Calcul cumulé (Balthazard)</strong> :<br>`;
+                justification += `&nbsp;&nbsp;• IPP_total = ${ippPseudarthrose}% + ${ippRaccourcissement}% × (100 - ${ippPseudarthrose}) / 100`;
+                if (bonusAmyotrophie > 0) justification += ` + ${bonusAmyotrophie}%`;
+                justification += `<br>`;
+                justification += `&nbsp;&nbsp;• <strong>IPP total = ${ippFinal}%</strong><br><br>`;
+                justification += `📊 <strong>TAUX IPP CUMULÉ PROPOSÉ : ${ippFinal}%</strong><br>`;
+                justification += `<em>Fourchette attendue : [40 - 55%] selon gravité cumulée</em><br><br>`;
+                justification += `⚖️ <strong>Base juridique</strong> : Cumul lésions même membre (Balthazard)`;
+                
+                return {
+                    type: 'proposal',
+                    name: 'Cumul : Pseudarthrose tibia + Raccourcissement + Troubles trophiques',
+                    rate: ippFinal,
+                    justification,
+                    path: 'Membres Inférieurs > Cumul polytrauma',
+                    injury: {
+                        name: 'Cumul : Pseudarthrose + Raccourcissement + Amyotrophie',
+                        rate: [40, 55],
+                        path: 'Cumul séquelles membre inférieur'
+                    } as Injury,
+                    isCumul: true
+                };
+            }
+            
             // 🎯 CAS SPÉCIAL: CUMUL FRACTURE TIBIA GUSTILO IIIB (V3.3.35 - FIX CAS 11)
             // Problème CAS 11: Détecte "Raideur médius" (4%) au lieu de fracture tibia Gustilo (40-50%)
             // Solution: Cumul raccourcissement + raideur genou + raideur cheville + infection chronique
@@ -5533,11 +5785,32 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             }
             
             // Recherche directe dans les données (égalité exacte pour expert rules)
-            const directMatch = allInjuriesWithPaths.find(item => 
+            // 🆕 V3.3.93: Trouver TOUTES les correspondances (MD + MND) puis filtrer par latéralité
+            const directMatches = allInjuriesWithPaths.filter(item => 
                 rule.searchTerms.some(term => 
                     normalize(item.name) === normalize(term)
                 )
             );
+            
+            // Si plusieurs correspondances (ex: MD + MND), filtrer par latéralité
+            let directMatch = null;
+            if (directMatches.length === 2) {
+                const hasDominante = directMatches.find(f => /main\s+dominante/i.test(f.name));
+                const hasNonDominante = directMatches.find(f => /main\s+non\s+dominante/i.test(f.name));
+                
+                if (hasDominante && hasNonDominante) {
+                    if (/main\s+non\s+dominante|gauche|gaucher|non\s+dominante/i.test(text)) {
+                        directMatch = hasNonDominante;
+                    } else if (/main\s+dominante|droite?|droitier/i.test(text)) {
+                        directMatch = hasDominante;
+                    } else {
+                        // Par défaut MD si pas de mention explicite
+                        directMatch = hasDominante;
+                    }
+                }
+            } else if (directMatches.length === 1) {
+                directMatch = directMatches[0];
+            }
             
             if (directMatch) {
                 // 🧠 DÉTECTION SÉVÉRITÉ SPÉCIFIQUE NEUROLOGIQUE, BRÛLURES ET ATTEINTES NERVEUSES (V3.3.2/V3.3.3/V3.3.5)
@@ -6052,7 +6325,7 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
                     });
                 }
 
-                // 🆕 Auto-sélection Main Dominante vs Non Dominante (V3.3.31)
+                // 🆕 Auto-sélection Main Dominante vs Non Dominante (V3.3.92 - simplification regex)
                 if (filteredFractures.length === 2) {
                     const hasDominante = filteredFractures.find(f => /main\s+dominante/i.test(f.name));
                     const hasNonDominante = filteredFractures.find(f => /main\s+non\s+dominante/i.test(f.name));
@@ -6062,15 +6335,11 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
                         // Vérifier le texte original pour latéralité
                         const textNormalized = normalizedInputText.toLowerCase();
                         
-                        if (/(?:gauche|non\s+dominante)\s*[^\w]*(?:\(|$)/i.test(text) || 
-                            /\(.*non\s+dominante.*\)/i.test(text) ||
-                            /gaucher/i.test(text)) {
-                            // "gauche (non dominante)" ou "(non dominante)" ou "gaucher"
+                        if (/main\s+non\s+dominante|gauche|gaucher|non\s+dominante/i.test(text)) {
+                            // "main non dominante" ou "gauche" ou "gaucher" ou "non dominante"
                             filteredFractures = [hasNonDominante];
-                        } else if (/(?:droit|droite|dominante)\s*[^\w]*(?:\(|$)/i.test(text) || 
-                                   /\(.*dominante.*\)/i.test(text) ||
-                                   /droitier/i.test(text)) {
-                            // "droit (dominante)" ou "(dominante)" ou "droitier"
+                        } else if (/main\s+dominante|droite?|droitier/i.test(text)) {
+                            // "main dominante" ou "droit" ou "droite" ou "droitier"
                             filteredFractures = [hasDominante];
                         }
                     }
@@ -6777,11 +7046,18 @@ export const detectMultipleLesions = (text: string): {
     // 🆕 5B. Détection lésions multiples avec "avec" ou "et" (ex: "fracture ... avec fracture ... et rupture ...")
     const multipleLesionsWithConnectors = /(?:fracture|luxation|rupture|lesion).*(?:avec|et).*(?:fracture|luxation|rupture|lesion)/i.test(normalized);
     
-    // Compter le nombre de types de lésions différents (fracture, rupture, luxation, etc.)
+    // 🆕 5C. Détection pseudarthrose + amputation/perte phalange (lésions distinctes même membre)
+    const hasPseudarthrose = /pseudarthrose/i.test(normalized);
+    const hasAmputation = /amputation|perte.*(?:phalange|doigt|orteil)|p[123].*d[1-5]|p[123].*o[1-5]/i.test(normalized);
+    const hasPseudarthroseAndAmputation = hasPseudarthrose && hasAmputation;
+    
+    // Compter le nombre de types de lésions différents (fracture, rupture, luxation, pseudarthrose, amputation, etc.)
     const lesionTypes = [];
     if (/fracture/i.test(normalized)) lesionTypes.push('fracture');
     if (/rupture/i.test(normalized)) lesionTypes.push('rupture');
     if (/luxation/i.test(normalized)) lesionTypes.push('luxation');
+    if (/pseudarthrose/i.test(normalized)) lesionTypes.push('pseudarthrose');
+    if (/amputation|perte.*(?:phalange|doigt|orteil)/i.test(normalized)) lesionTypes.push('amputation');
     if (/lesion/i.test(normalized) && !/fracture|rupture|luxation/i.test(normalized)) lesionTypes.push('lesion');
     const hasMultipleLesionTypes = lesionTypes.length >= 2;
     
@@ -6792,6 +7068,7 @@ export const detectMultipleLesions = (text: string): {
         (plusCount >= 2 && distinctRegions >= 3) ||  // 2+ "+" avec 3+ régions anatomiques DIFFÉRENTES
         hasBoneAndNerve ||            // Lésion osseuse + atteinte nerveuse (pattern traumatologique)
         multipleFracturesSameBone ||  // Plusieurs fractures sur le même os (ex: trochanter + diaphyse ou trochanter, diaphyse)
+        hasPseudarthroseAndAmputation ||  // Pseudarthrose + amputation phalange (lésions distinctes)
         (multipleLesionsWithConnectors && hasMultipleLesionTypes);  // "avec"/"et" + types différents (fracture + rupture)
     
     // Estimation nombre de lésions
@@ -6868,6 +7145,33 @@ const extractIndividualLesions = (text: string): string[] => {
         const filteredParts = parts.filter(p => p.length > 5 && /fracture|luxation|rupture|lesion/i.test(p));
         if (filteredParts.length >= 2) {
             return filteredParts;
+        }
+    }
+    
+    // Pattern 5B: Fracture olécrane + Amputation (ex: "fracture olécrane; cal ... avec amputation p1 d3")
+    const olecraneAmputationPattern = /fracture.*ol[eé]cr[aâ]ne.*?(?:avec|et).*?(?:amputation|perte.*phalange|p[123].*d[1-5])/i;
+    if (olecraneAmputationPattern.test(normalized)) {
+        // Extraire partie olécrane (tout jusqu'à "avec/et amputation")
+        const olecranePart = normalized.match(/fracture.*ol[eé]cr[aâ]ne.*?(?=(?:avec|et)\s*(?:amputation|perte|p[123]))/i)?.[0] || '';
+        const amputationPart = normalized.match(/(?:avec|et)\s*(amputation.*|perte.*phalange.*|p[123].*d[1-5].*main.*)/i)?.[1] || '';
+        
+        if (olecranePart && amputationPart) {
+            lesions.push(olecranePart.trim());
+            lesions.push(amputationPart.trim());
+            return lesions;
+        }
+    }
+    
+    // Pattern 6: Pseudarthrose + Amputation (ex: "pseudarthrose cubitale avec amputation p2 d5")
+    const pseudarthroseAmputationPattern = /pseudarthrose.*?(?:avec|et).*?(?:amputation|perte.*phalange|p[123].*d[1-5])/i;
+    if (pseudarthroseAmputationPattern.test(normalized)) {
+        const pseudarthrosePart = normalized.match(/pseudarthrose.*?(?=(?:avec|et))/i)?.[0] || '';
+        const amputationPart = normalized.match(/(?:avec|et)\s*(amputation.*|perte.*phalange.*|p[123].*d[1-5].*)/i)?.[1] || '';
+        
+        if (pseudarthrosePart && amputationPart) {
+            lesions.push(pseudarthrosePart.trim());
+            lesions.push(amputationPart.trim());
+            return lesions;
         }
     }
     

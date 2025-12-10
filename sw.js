@@ -1,5 +1,5 @@
-const CACHE_NAME = 'guide-medecin-conseil-v4.3.71-FISTULES';
-const DATA_CACHE_NAME = 'guide-medecin-conseil-data-v4.3.71-FISTULES';
+const CACHE_NAME = 'guide-medecin-conseil-v4.3.95-CUMUL-POLYTRAUMA';
+const DATA_CACHE_NAME = 'guide-medecin-conseil-data-v4.3.95-CUMUL-POLYTRAUMA';
 
 // Ressources essentielles à mettre en cache immédiatement
 const STATIC_CACHE_URLS = [

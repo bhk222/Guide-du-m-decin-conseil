@@ -1030,6 +1030,10 @@ const middleCategories: InjuryCategory[] = [
         injuries: [
           { name: "Fracture de l'olécrane - Cal osseux court, bonne extension (Main Dominante)", rate: [3, 5] },
           { name: "Fracture de l'olécrane - Cal osseux court, bonne extension (Main Non Dominante)", rate: [2, 4] },
+          { name: "Fracture de la tête radiale (cupule radiale) - Consolidation avec limitation minime (Main Dominante)", rate: [5, 10], description: "Fracture parcellaire ou complète de la tête du radius au coude avec limitation modérée de la prono-supination." },
+          { name: "Fracture de la tête radiale (cupule radiale) - Consolidation avec limitation minime (Main Non Dominante)", rate: [4, 8], description: "Fracture parcellaire ou complète de la tête du radius au coude avec limitation modérée de la prono-supination." },
+          { name: "Fracture de la tête radiale (cupule radiale) - Avec limitation importante prono-supination (Main Dominante)", rate: [10, 18], description: "Fracture tête radiale avec limitation sévère de la prono-supination et gêne flexion-extension." },
+          { name: "Fracture de la tête radiale (cupule radiale) - Avec limitation importante prono-supination (Main Non Dominante)", rate: [8, 15], description: "Fracture tête radiale avec limitation sévère de la prono-supination et gêne flexion-extension." },
           { name: "Fracture de l'olécrane - Cal fibreux long, extension active faible (Main Dominante)", rate: [8, 10] },
           { name: "Fracture de l'olécrane - Cal fibreux long, extension active faible (Main Non Dominante)", rate: [6, 8] },
           { name: "Fracture de l'olécrane - Cal fibreux long, extension active nulle, atrophie (Main Dominante)", rate: [20, 23] },
@@ -1119,8 +1123,8 @@ const middleCategories: InjuryCategory[] = [
             { name: "Pseudarthrose du radius (Main Non Dominante)", rate: [15, 20] },
             { name: "Pseudarthrose du cubitus (Main Dominante)", rate: [15, 20] },
             { name: "Pseudarthrose du cubitus (Main Non Dominante)", rate: [12, 18] },
-            { name: "Séquelles de fracture-luxation de Monteggia (Main Dominante)", rate: [10, 30], rateCriteria: { low: "Consolidation sans limitation majeure.", high: "Raideur et instabilité du coude, limitation prono-supination." } },
-            { name: "Séquelles de fracture-luxation de Monteggia (Main Non Dominante)", rate: [8, 25], rateCriteria: { low: "Consolidation sans limitation majeure.", high: "Raideur et instabilité." } },
+            { name: "Séquelles de fracture-luxation de Monteggia (Main Dominante)", rate: [15, 30], rateCriteria: { low: "Consolidation sans limitation majeure.", high: "Raideur et instabilité du coude, limitation prono-supination." } },
+            { name: "Séquelles de fracture-luxation de Monteggia (Main Non Dominante)", rate: [10, 25], rateCriteria: { low: "Consolidation sans limitation majeure.", high: "Raideur et instabilité." } },
             { name: "Séquelles de fracture-luxation de Galeazzi (Main Dominante)", rate: [10, 25], rateCriteria: { low: "Consolidation sans limitation majeure.", high: "Limitation prono-supination, instabilité radio-cubitale." } },
             { name: "Séquelles de fracture-luxation de Galeazzi (Main Non Dominante)", rate: [8, 20], rateCriteria: { low: "Consolidation sans limitation majeure.", high: "Limitation et instabilité." } },
             { name: "Synostose radio-cubitale post-traumatique (Main Dominante)", rate: [15, 25], description: "Fusion osseuse anormale entre le radius et le cubitus, bloquant la prono-supination.", rateCriteria: { low: "Blocage en position neutre ou de fonction.", high: "Blocage en pronation complète." } },
@@ -1139,6 +1143,8 @@ const middleCategories: InjuryCategory[] = [
         injuries: [
             { name: "Fracture de l'extrémité inférieure du radius - Consolidation parfaite (Main Dominante)", rate: [3, 5] },
             { name: "Fracture de l'extrémité inférieure du radius - Consolidation parfaite (Main Non Dominante)", rate: [2, 4] },
+            { name: "Fracture de la styloïde cubitale (Main Dominante)", rate: [2, 5], description: "Fracture de l'apophyse styloïde du cubitus (ulna) au poignet." },
+            { name: "Fracture de la styloïde cubitale (Main Non Dominante)", rate: [2, 4], description: "Fracture de l'apophyse styloïde du cubitus (ulna) au poignet." },
             { name: "Fracture de l'extrémité inférieure du radius - Avec limitation des mouvements (Main Dominante)", rate: [8, 15] },
             { name: "Fracture de l'extrémité inférieure du radius - Avec limitation des mouvements (Main Non Dominante)", rate: [6, 12] },
             { name: "Fracture de l'extrémité inférieure du radius - Avec raideur, déformation et troubles nerveux (Main Dominante)", rate: [15, 30] },
@@ -1146,6 +1152,8 @@ const middleCategories: InjuryCategory[] = [
             { name: "Fracture de l'extrémité inférieure du radius - Avec cal vicieux", rate: [10, 18] },
             { name: "Fracture du scaphoïde carpien - Avec raideur simple (Main Dominante)", rate: [5, 10] },
             { name: "Fracture du scaphoïde carpien - Avec raideur simple (Main Non Dominante)", rate: [4, 8] },
+            { name: "Luxation-fracture du semi-lunaire (lunatum) (Main Dominante)", rate: [8, 15], description: "Fracture et/ou luxation de l'os semi-lunaire (lunatum) avec raideur et limitation du poignet." },
+            { name: "Luxation-fracture du semi-lunaire (lunatum) (Main Non Dominante)", rate: [6, 12], description: "Fracture et/ou luxation de l'os semi-lunaire (lunatum) avec raideur et limitation du poignet." },
             { name: "Pseudarthrose du scaphoïde", rate: 22, description: "Pseudarthrose du scaphoïde carpien sans précision de dominance." },
             { name: "Pseudarthrose du scaphoïde carpien (Main Dominante)", rate: [10, 20], rateCriteria: { low: "Serrée, peu douloureuse.", high: "Lâche, douloureuse, arthrose radio-carpienne." } },
             { name: "Pseudarthrose du scaphoïde carpien (Main Non Dominante)", rate: [8, 15], rateCriteria: { low: "Serrée.", high: "Lâche et douloureuse." } },
@@ -1233,6 +1241,8 @@ const middleCategories: InjuryCategory[] = [
             { name: "Amputation de l'index - Désarticulation métacarpo-phalangienne", rate: 10 },  // Ajout pour correspondance exacte
             { name: "Perte de l'index (3 phalanges) (Main Dominante)", rate: 15 },
             { name: "Perte de la 3ème phalange de l'index (Main Dominante)", rate: 5 },
+            { name: "Perte de la 2ème phalange seule de l'index (P2 seule) (Main Dominante)", rate: 5 },
+            { name: "Perte de la 2ème phalange de l'index (Main Dominante)", rate: 5 },
             { name: "Perte des 2ème et 3ème phalanges de l'index (Main Dominante)", rate: 10 },
             { name: "Ankylose de l'index (totalité) (Main Dominante)", rate: 15 },
             { name: "Raideur d'une articulation de l'index (Main Dominante)", rate: [2, 5] },
@@ -1243,6 +1253,8 @@ const middleCategories: InjuryCategory[] = [
         injuries: [
             { name: "Perte de l'index (3 phalanges) (Main Non Dominante)", rate: 12 },
             { name: "Perte de la 3ème phalange de l'index (Main Non Dominante)", rate: 4 },
+            { name: "Perte de la 2ème phalange seule de l'index (P2 seule) (Main Non Dominante)", rate: 4 },
+            { name: "Perte de la 2ème phalange de l'index (Main Non Dominante)", rate: 4 },
             { name: "Perte des 2ème et 3ème phalanges de l'index (Main Non Dominante)", rate: 8 },
             { name: "Ankylose de l'index (totalité) (Main Non Dominante)", rate: 12 },
             { name: "Raideur d'une articulation de l'index (Main Non Dominante)", rate: [1, 4] },
@@ -1253,6 +1265,8 @@ const middleCategories: InjuryCategory[] = [
         injuries: [
             { name: "Perte du médius (3 phalanges) (Main Dominante)", rate: 12 },
             { name: "Perte de la 3ème phalange du médius (Main Dominante)", rate: 4 },
+            { name: "Perte de la 2ème phalange seule du médius (P2 seule) (Main Dominante)", rate: 4 },
+            { name: "Perte de la 2ème phalange du médius (Main Dominante)", rate: 4 },
             { name: "Perte des 2ème et 3ème phalanges du médius (Main Dominante)", rate: 8 },
             { name: "Ankylose du médius (totalité) (Main Dominante)", rate: 12 },
             { name: "Raideur d'une articulation du médius (Main Dominante)", rate: [1, 4] },
@@ -1263,6 +1277,8 @@ const middleCategories: InjuryCategory[] = [
         injuries: [
             { name: "Perte du médius (3 phalanges) (Main Non Dominante)", rate: 10 },
             { name: "Perte de la 3ème phalange du médius (Main Non Dominante)", rate: 3 },
+            { name: "Perte de la 2ème phalange seule du médius (P2 seule) (Main Non Dominante)", rate: 3 },
+            { name: "Perte de la 2ème phalange du médius (Main Non Dominante)", rate: 3 },
             { name: "Perte des 2ème et 3ème phalanges du médius (Main Non Dominante)", rate: 6 },
             { name: "Ankylose du médius (totalité) (Main Non Dominante)", rate: 10 },
             { name: "Raideur d'une articulation du médius (Main Non Dominante)", rate: [1, 3] },
@@ -1273,6 +1289,8 @@ const middleCategories: InjuryCategory[] = [
         injuries: [
             { name: "Perte de l'annulaire (3 phalanges) (Main Dominante)", rate: 8 },
             { name: "Perte de la 3ème phalange de l'annulaire (Main Dominante)", rate: 3 },
+            { name: "Perte de la 2ème phalange seule de l'annulaire (P2 seule) (Main Dominante)", rate: 3 },
+            { name: "Perte de la 2ème phalange de l'annulaire (Main Dominante)", rate: 3 },
             { name: "Perte des 2ème et 3ème phalanges de l'annulaire (Main Dominante)", rate: 6 },
             { name: "Ankylose de l'annulaire (totalité) (Main Dominante)", rate: 8 },
             { name: "Raideur d'une articulation de l'annulaire (Main Dominante)", rate: [1, 3] },
@@ -1283,6 +1301,8 @@ const middleCategories: InjuryCategory[] = [
         injuries: [
             { name: "Perte de l'annulaire (3 phalanges) (Main Non Dominante)", rate: 6 },
             { name: "Perte de la 3ème phalange de l'annulaire (Main Non Dominante)", rate: 2 },
+            { name: "Perte de la 2ème phalange seule de l'annulaire (P2 seule) (Main Non Dominante)", rate: 2 },
+            { name: "Perte de la 2ème phalange de l'annulaire (Main Non Dominante)", rate: 2 },
             { name: "Perte des 2ème et 3ème phalanges de l'annulaire (Main Non Dominante)", rate: 4 },
             { name: "Ankylose de l'annulaire (totalité) (Main Non Dominante)", rate: 6 },
             { name: "Raideur d'une articulation de l'annulaire (Main Non Dominante)", rate: [1, 2] },
@@ -1293,6 +1313,8 @@ const middleCategories: InjuryCategory[] = [
         injuries: [
             { name: "Perte de l'auriculaire (3 phalanges) (Main Dominante)", rate: 10 },
             { name: "Perte de la 3ème phalange de l'auriculaire (Main Dominante)", rate: 4 },
+            { name: "Perte de la 2ème phalange seule de l'auriculaire (P2 seule) (Main Dominante)", rate: 3 },
+            { name: "Perte de la 2ème phalange de l'auriculaire (Main Dominante)", rate: 3 },
             { name: "Perte des 2ème et 3ème phalanges de l'auriculaire (Main Dominante)", rate: 7 },
             { name: "Ankylose de l'auriculaire (totalité) (Main Dominante)", rate: 10 },
             { name: "Raideur d'une articulation de l'auriculaire (Main Dominante)", rate: [1, 3] },
@@ -1303,6 +1325,8 @@ const middleCategories: InjuryCategory[] = [
         injuries: [
             { name: "Perte de l'auriculaire (3 phalanges) (Main Non Dominante)", rate: 8 },
             { name: "Perte de la 3ème phalange de l'auriculaire (Main Non Dominante)", rate: 3 },
+            { name: "Perte de la 2ème phalange seule de l'auriculaire (P2 seule) (Main Non Dominante)", rate: 2 },
+            { name: "Perte de la 2ème phalange de l'auriculaire (Main Non Dominante)", rate: 2 },
             { name: "Perte des 2ème et 3ème phalanges de l'auriculaire (Main Non Dominante)", rate: 5 },
             { name: "Ankylose de l'auriculaire (totalité) (Main Non Dominante)", rate: 8 },
             { name: "Raideur d'une articulation de l'auriculaire (Main Non Dominante)", rate: [1, 2] },
