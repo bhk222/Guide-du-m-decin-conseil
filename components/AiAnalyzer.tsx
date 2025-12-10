@@ -2328,6 +2328,43 @@ const determineSeverity = (
     // 🔥 NOUVEAU : Analyse contexte clinique avancé PRIORITAIRE
     const clinicalContext = analyzeAdvancedClinicalContext(normalizedText);
     
+    // 🦴 V3.3.98: CRITÈRE SPÉCIFIQUE FRACTURE COTYLE - Appui mono-podal instable
+    const hasCotyleFracture = /fracture.*cotyle|cotyle.*fracture/i.test(normalizedText);
+    const hasAMPInstable = /amp.*instable|appui.*mono[\s-]?podal.*instable|appui.*unipodal.*instable/i.test(normalizedText);
+    const hasLimitationHanche = /limitation.*(?:hanche|coxo[\s-]?f[eé]morale)|mouvement.*hanche.*limit[eé]|mobilit[eé].*hanche.*(?:limit[eé]e|r[eé]duite)/i.test(normalizedText);
+    const hasAccroupissementDifficile = /accroupissement.*difficile|rel[eè]vement.*difficile|difficult[eé].*(?:s.accroupir|se\s+relever)/i.test(normalizedText);
+    const hasBoiterieLegere = /boiterie\s+(?:l[eé]g[eè]re|mod[eé]r[eé]e|discrète)|l[eé]g[eè]re\s+boiterie/i.test(normalizedText);
+    const hasBoiterieMajeure = /boiterie\s+(?:importante|s[eé]v[eè]re|marqu[eé]e|permanente)|impossibilit[eé].*marche|quasi[\s-]?impotence/i.test(normalizedText);
+    
+    // COTYLE + AMP INSTABLE + LIMITATION MOBILITÉ → MOYEN (38%)
+    if (hasCotyleFracture && hasAMPInstable && hasLimitationHanche) {
+        // Si boiterie majeure ou quasi-impotence → ÉLEVÉ
+        if (hasBoiterieMajeure || /quasi[\s-]?impotence|impotence.*fonctionnelle.*majeure/i.test(normalizedText)) {
+            return {
+                level: 'élevé',
+                signs: [
+                    '🦴 Fracture cotyle avec séquelles articulaires majeures',
+                    '⚠️ Appui mono-podal instable (instabilité hanche)',
+                    'Limitation sévère mobilité hanche',
+                    hasBoiterieMajeure ? 'Boiterie marquée/permanente' : 'Quasi-impotence fonctionnelle'
+                ],
+                isDefault: false
+            };
+        }
+        // Sinon critères medium présents → MOYEN
+        return {
+            level: 'moyen',
+            signs: [
+                '🦴 Fracture cotyle avec séquelles articulaires',
+                '⚠️ Appui mono-podal instable',
+                'Limitation mobilité hanche',
+                hasAccroupissementDifficile ? 'Accroupissement/relèvement difficile' : '',
+                hasBoiterieLegere ? 'Boiterie légère' : ''
+            ].filter(s => s),
+            isDefault: false
+        };
+    }
+    
     // ⚽ CRITÈRE SPÉCIFIQUE CONTEXTE SPORTIF/PROFESSIONNEL : Impossibilité reprise activité → ÉLEVÉ
     const hasSportContext = /footballeur|sportif|athl[eè]te|joueur|rugbyman|basketteur|coureur|tennismen/i.test(normalizedText);
     const hasImpossibilityResumeActivity = /impossibilit[eé].*(?:reprendre|reprise|retour).*(?:sport|activit[eé]|jeu|comp[eé]tition)|arr[eê]t\s+(?:d[eé]finitif|sport)|fin\s+carri[eè]re|reconversion/i.test(normalizedText);

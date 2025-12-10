@@ -1,5 +1,5 @@
-const CACHE_NAME = 'guide-medecin-conseil-v4.3.97-COTYLE-CRITERIA';
-const DATA_CACHE_NAME = 'guide-medecin-conseil-data-v4.3.97-COTYLE-CRITERIA';
+const CACHE_NAME = 'guide-medecin-conseil-v4.3.98-COTYLE-AUTO-CALC';
+const DATA_CACHE_NAME = 'guide-medecin-conseil-data-v4.3.98-COTYLE-AUTO-CALC';
 
 // Ressources essentielles à mettre en cache immédiatement
 const STATIC_CACHE_URLS = [
