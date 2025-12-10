@@ -1,5 +1,5 @@
-const CACHE_NAME = 'guide-medecin-conseil-v4.3.101-RADIUS-DIAPHYSE';
-const DATA_CACHE_NAME = 'guide-medecin-conseil-data-v4.3.101-RADIUS-DIAPHYSE';
+const CACHE_NAME = 'guide-medecin-conseil-v4.3.102-CECITE-OEIL';
+const DATA_CACHE_NAME = 'guide-medecin-conseil-data-v4.3.102-CECITE-OEIL';
 
 // Ressources essentielles à mettre en cache immédiatement
 const STATIC_CACHE_URLS = [

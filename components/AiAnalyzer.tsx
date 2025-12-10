@@ -3683,6 +3683,11 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
     // 🆕 PREPROCESSING MÉDICAL ENRICHI - Transformer descriptions vagues en termes détectables
     // Ceci enrichit le texte AVANT toute analyse
     const medicalEnrichment: [RegExp, string][] = [
+        // 🆕 V3.3.102: Cécité totale œil
+        [/c[eé]cit[eé].*(?:totale|compl[eè]te).*œil.*(?:gauche|droit)/gi, 'cécité totale perte complète vision œil unilatéral'],
+        [/perte.*(?:totale|compl[eè]te).*vision.*œil.*(?:gauche|droit)/gi, 'perte complète vision œil cécité unilatérale'],
+        [/œil.*(?:gauche|droit).*(?:perdu|aveugle|c[eé]cit[eé])/gi, 'cécité totale œil perte vision unilatérale'],
+        
         // 🆕 V3.3.101: Fracture radius avec luxation radio-cubitale
         [/fracture.*(?:m[eé]dio[\s-]?diaphysaire|diaphyse).*radius/gi, 'fracture diaphyse radius avant-bras os radius limitation supination pronation'],
         [/luxation.*radio[\s-]?cubitale|radio[\s-]?cubitale.*luxation/gi, 'luxation radio-cubitale articulation radius cubitus limitation supination pronation'],
@@ -4836,6 +4841,14 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             context: /doigt|main|fracture|phalange/i,
             searchTerms: ['Raideur d\'une articulation de l\'annulaire (Main Dominante)'],
             priority: 93
+        },
+        // 🆕 V3.3.102: Cécité totale d'un œil
+        {
+            pattern: /c[eé]cit[eé].*(?:totale|compl[eè]te).*œil|perte.*(?:totale|compl[eè]te).*vision.*œil|œil.*(?:perdu|aveugle|c[eé]cit[eé])/i,
+            context: /accident|traumatisme|s[eé]quelle|œil.*(?:gauche|droit)/i,
+            searchTerms: ['Perte complète de la vision d\'un oeil (l\'autre étant normal)'],
+            priority: 11000,
+            negativeContext: /deux\s+yeux|bilat[eé]ral|c[eé]cit[eé]\s+compl[eè]te(?!.*œil)/i  // Exclure cécité complète (100%) ou bilatérale
         },
         // 🆕 V3.3.101: Fracture médio-diaphysaire radius avec limitation supination
         {
