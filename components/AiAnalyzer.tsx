@@ -3683,6 +3683,10 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
     // 🆕 PREPROCESSING MÉDICAL ENRICHI - Transformer descriptions vagues en termes détectables
     // Ceci enrichit le texte AVANT toute analyse
     const medicalEnrichment: [RegExp, string][] = [
+        // 🆕 V3.3.101: Fracture radius avec luxation radio-cubitale
+        [/fracture.*(?:m[eé]dio[\s-]?diaphysaire|diaphyse).*radius/gi, 'fracture diaphyse radius avant-bras os radius limitation supination pronation'],
+        [/luxation.*radio[\s-]?cubitale|radio[\s-]?cubitale.*luxation/gi, 'luxation radio-cubitale articulation radius cubitus limitation supination pronation'],
+        
         // 🆕 V3.3.100: Rupture jambier postérieur
         [/rupture.*jambier.*post[eé]rieur|jambier.*post[eé]rieur.*rompu/gi, 'rupture tendon jambier postérieur pied varus cheville limitation mobilité'],
         [/pied\s+varus.*amyotrophie.*jambe/gi, 'pied varus séquelle rupture jambier postérieur amyotrophie mollet boiterie'],
@@ -4832,6 +4836,14 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             context: /doigt|main|fracture|phalange/i,
             searchTerms: ['Raideur d\'une articulation de l\'annulaire (Main Dominante)'],
             priority: 93
+        },
+        // 🆕 V3.3.101: Fracture médio-diaphysaire radius avec limitation supination
+        {
+            pattern: /fracture.*(?:m[eé]dio[\s-]?diaphysaire|diaphyse).*radius/i,
+            context: /supination.*limit[eé]|limitation.*supination|pronation.*limit[eé]|cal\s+(?:osseux|vicieux).*radius/i,
+            searchTerms: ['Fracture isolée du radius - Avec cal vicieux modéré (Main Dominante)'],
+            priority: 10900,
+            negativeContext: /sans.*s[eé]quelle|consolidation.*parfaite/i
         },
         // 🆕 V3.3.100: Rupture jambier postérieur avec pied varus
         {
