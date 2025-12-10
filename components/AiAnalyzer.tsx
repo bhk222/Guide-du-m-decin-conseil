@@ -3683,10 +3683,12 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
     // 🆕 PREPROCESSING MÉDICAL ENRICHI - Transformer descriptions vagues en termes détectables
     // Ceci enrichit le texte AVANT toute analyse
     const medicalEnrichment: [RegExp, string][] = [
-        // 🆕 V3.3.102: Cécité totale œil (V3.3.104: support "oeil" et "œil")
-        [/c[eé]cit[eé].*(?:totale|compl[eè]te).*[oœ]eil.*(?:gauche|droit)/gi, 'cécité totale perte complète vision œil unilatéral'],
-        [/perte.*(?:totale|compl[eè]te).*vision.*[oœ]eil.*(?:gauche|droit)/gi, 'perte complète vision œil cécité unilatérale'],
-        [/[oœ]eil.*(?:gauche|droit).*(?:perdu|aveugle|c[eé]cit[eé])/gi, 'cécité totale œil perte vision unilatérale'],
+        // 🆕 V3.3.102: Cécité totale œil (V3.3.108: enrichissement plus agressif)
+        [/c[eé]cit[eé].*(?:totale|compl[eè]te|absolue).{0,30}[oœ]eil/gi, 'cécité totale perte complète vision œil unilatéral yeux'],
+        [/perte.{0,20}(?:totale|compl[eè]te).{0,20}vision.{0,30}[oœ]eil/gi, 'perte complète vision œil cécité unilatérale yeux'],
+        [/[oœ]eil.{0,30}(?:perdu|aveugle|c[eé]cit[eé]|perte)/gi, 'cécité totale œil perte vision unilatérale yeux'],
+        [/(?:gauche|droit).{0,30}[oœ]eil.{0,30}c[eé]cit[eé]/gi, 'œil gauche cécité totale perte vision yeux'],
+        [/[oœ]eil.{0,30}(?:gauche|droit).{0,30}(?:c[eé]cit[eé]|perdu|aveugle)/gi, 'œil gauche cécité totale perte vision yeux'],
         
         // 🆕 V3.3.101: Fracture radius avec luxation radio-cubitale
         [/fracture.*(?:m[eé]dio[\s-]?diaphysaire|diaphyse).*radius/gi, 'fracture diaphyse radius avant-bras os radius limitation supination pronation'],
@@ -4842,13 +4844,13 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             searchTerms: ['Raideur d\'une articulation de l\'annulaire (Main Dominante)'],
             priority: 93
         },
-        // 🆕 V3.3.102: Cécité totale d'un œil (V3.3.107: pattern simplifié pour texte normalisé)
+        // 🆕 V3.3.102: Cécité totale d'un œil (V3.3.108: pattern ultra-permissif)
         {
-            pattern: /cecite.{0,20}totale.{0,20}oeil|totale.{0,20}cecite.{0,20}oeil|perte.{0,20}vision.{0,20}oeil|oeil.{1,15}(?:gauche|droit).{0,20}(?:cecite|perdu|aveugle|perte)|(?:cecite|perte).{0,20}oeil.{0,15}(?:gauche|droit)/i,
-            context: /accident|traumatisme|sequelle|oeil|suite|victime|consecutif|vision/i,
+            pattern: /cecite.*oeil|oeil.*cecite|perte.*vision.*oeil|oeil.*(?:perdu|aveugle)|vision.*oeil.*(?:perdu|perte)/i,
+            context: /oeil|yeux|vision/i,
             searchTerms: ['Perte complète de la vision d\'un oeil (l\'autre étant normal)'],
-            priority: 11000,
-            negativeContext: /deux\s+yeux|bilateral|maxillaire|machoire|dent/i  // Exclure maxillaire/mâchoire
+            priority: 12000,
+            negativeContext: /deux\s+yeux|bilateral|les\s+yeux|maxillaire|machoire|dent|fracture/i  // Exclure maxillaire/mâchoire/fracture
         },
         // 🆕 V3.3.101: Fracture médio-diaphysaire radius avec limitation supination
         {
