@@ -1,5 +1,5 @@
-const CACHE_NAME = 'guide-medecin-conseil-v4.3.96-PERONE-FIX';
-const DATA_CACHE_NAME = 'guide-medecin-conseil-data-v4.3.96-PERONE-FIX';
+const CACHE_NAME = 'guide-medecin-conseil-v4.3.97-COTYLE-CRITERIA';
+const DATA_CACHE_NAME = 'guide-medecin-conseil-data-v4.3.97-COTYLE-CRITERIA';
 
 // Ressources essentielles à mettre en cache immédiatement
 const STATIC_CACHE_URLS = [

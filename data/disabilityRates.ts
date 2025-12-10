@@ -224,7 +224,7 @@ const middleCategories: InjuryCategory[] = [
         injuries: [
           { name: "Fracture isolée d'une branche pubienne ou de l'aile iliaque (sans déplacement)", rate: [5, 10] },
           { name: "Fracture du cotyle sans déplacement, hanche congruente", rate: [10, 20] },
-          { name: "Fracture du cotyle - Avec séquelles articulaires", rate: [25, 45] },
+          { name: "Fracture du cotyle - Avec séquelles articulaires", rate: [25, 45], rateCriteria: { low: "Limitation mobilité légère, pas de boiterie, autonomie complète.", medium: "Limitation mobilité modérée, boiterie légère, appui mono-podal instable, accroupissement difficile.", high: "Limitation mobilité sévère, boiterie marquée, instabilité majeure, quasi-impotence fonctionnelle." } },
           { name: "Fracture du cotyle avec arthrose post-traumatique", description: "Évaluer comme une coxarthrie (voir Membres Inférieurs)", rate: [15, 40] },
           { name: "Fracture du sacrum", rate: [8, 15] },
           { name: "Fracture du coccyx", rate: [6, 12] },
