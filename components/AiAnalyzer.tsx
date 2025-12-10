@@ -89,6 +89,7 @@ export const normalize = (str: string) => {
         .toLowerCase()
         .normalize("NFD")
         .replace(/[\u0300-\u036f]/g, "") // Supprimer accents
+        .replace(/œ/g, 'oe')              // V3.3.109: Remplacer ligature œ par oe
         .replace(/[-']/g, ' ')            // Remplacer tirets et apostrophes par espaces
         .replace(/\s+/g, ' ')             // Normaliser espaces multiples
         .trim();
@@ -4844,7 +4845,7 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             searchTerms: ['Raideur d\'une articulation de l\'annulaire (Main Dominante)'],
             priority: 93
         },
-        // 🆕 V3.3.102: Cécité totale d'un œil (V3.3.108: pattern ultra-permissif)
+        // 🆕 V3.3.102: Cécité totale d'un œil (V3.3.109: œ→oe dans normalize)
         {
             pattern: /cecite.*oeil|oeil.*cecite|perte.*vision.*oeil|oeil.*(?:perdu|aveugle)|vision.*oeil.*(?:perdu|perte)/i,
             context: /oeil|yeux|vision/i,
