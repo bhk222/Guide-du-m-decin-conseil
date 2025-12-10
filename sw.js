@@ -1,5 +1,5 @@
-const CACHE_NAME = 'guide-medecin-conseil-v4.3.99-ANKYLOSE-POUCE';
-const DATA_CACHE_NAME = 'guide-medecin-conseil-data-v4.3.99-ANKYLOSE-POUCE';
+const CACHE_NAME = 'guide-medecin-conseil-v4.3.100-JAMBIER-POST';
+const DATA_CACHE_NAME = 'guide-medecin-conseil-data-v4.3.100-JAMBIER-POST';
 
 // Ressources essentielles à mettre en cache immédiatement
 const STATIC_CACHE_URLS = [

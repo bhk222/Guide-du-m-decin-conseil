@@ -3683,6 +3683,10 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
     // 🆕 PREPROCESSING MÉDICAL ENRICHI - Transformer descriptions vagues en termes détectables
     // Ceci enrichit le texte AVANT toute analyse
     const medicalEnrichment: [RegExp, string][] = [
+        // 🆕 V3.3.100: Rupture jambier postérieur
+        [/rupture.*jambier.*post[eé]rieur|jambier.*post[eé]rieur.*rompu/gi, 'rupture tendon jambier postérieur pied varus cheville limitation mobilité'],
+        [/pied\s+varus.*amyotrophie.*jambe/gi, 'pied varus séquelle rupture jambier postérieur amyotrophie mollet boiterie'],
+        
         // 🆕 V3.3.99: Ankylose pouce + amyotrophie thénar (rupture extenseur)
         [/(?:rupture|section).*(?:extenseur|long\s+extenseur).*pouce/gi, 'rupture extenseur pouce ankylose pouce amyotrophie thénar éminence thénar'],
         [/ankylose.*pouce.*amyotrophie.*th[eé]nar/gi, 'ankylose pouce amyotrophie éminence thénar perte fonctionnelle pouce'],
@@ -4828,6 +4832,14 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             context: /doigt|main|fracture|phalange/i,
             searchTerms: ['Raideur d\'une articulation de l\'annulaire (Main Dominante)'],
             priority: 93
+        },
+        // 🆕 V3.3.100: Rupture jambier postérieur avec pied varus
+        {
+            pattern: /rupture.*jambier.*post[eé]rieur|jambier.*post[eé]rieur.*(?:rompu|rupture)/i,
+            context: /pied\s+varus|boiterie|amp.*impossible|amyotrophie.*jambe|limitation.*cheville/i,
+            searchTerms: ['Rupture du jambier postérieur avec pied varus'],
+            priority: 10800,
+            negativeContext: /sans.*s[eé]quelle|gu[eé]rison.*compl[eè]te/i
         },
         // 🆕 V3.3.99: Ankylose pouce + amyotrophie thénar (rupture extenseur)
         {

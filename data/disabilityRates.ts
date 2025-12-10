@@ -1474,6 +1474,7 @@ const middleCategories: InjuryCategory[] = [
             { name: "Ankylose de la cheville", rate: [20, 30], rateCriteria: { low: "Position à angle droit.", high: "En équin ou talus." } },
             { name: "Raideur de la cheville", rate: [5, 15], rateCriteria: { low: "Limitation modérée de la flexion-extension.", high: "Quasi-ankylose." } },
             { name: "Instabilité chronique de la cheville (séquelle d'entorse)", rate: [5, 15], rateCriteria: { low: "Entorses rares.", high: "Entorses à répétition, arthrose." } },
+            { name: "Rupture du jambier postérieur avec pied varus", rate: [25, 45], rateCriteria: { low: "Pied varus modéré, limitation mobilité cheville, boiterie légère, marche possible.", medium: "Pied varus marqué, appui mono-podal impossible, boiterie importante, amyotrophie jambe.", high: "Pied varus sévère en équin, quasi-impotence fonctionnelle, nécessité orthèse permanente, périmètre marche <200m." } },
         ]
       },
       {
