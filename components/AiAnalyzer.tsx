@@ -4845,13 +4845,13 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             searchTerms: ['Raideur d\'une articulation de l\'annulaire (Main Dominante)'],
             priority: 93
         },
-        // 🆕 V3.3.102: Cécité totale d'un œil (V3.3.109: œ→oe dans normalize)
+        // 🆕 V3.3.102: Cécité totale d'un œil (V3.3.111: fix negativeContext \b)
         {
             pattern: /cecite.*oeil|oeil.*cecite|perte.*vision.*oeil|oeil.*(?:perdu|aveugle)|vision.*oeil.*(?:perdu|perte)/i,
             context: /oeil|yeux|vision/i,
             searchTerms: ['Perte complète de la vision d\'un oeil (l\'autre étant normal)'],
             priority: 12000,
-            negativeContext: /deux\s+yeux|bilateral|les\s+yeux|maxillaire|machoire|dent|fracture/i  // Exclure maxillaire/mâchoire/fracture
+            negativeContext: /deux\s+yeux|bilateral|les\s+yeux|maxillaire|machoire|\bdent\b|fracture.*maxillaire/i  // \b = word boundary
         },
         // 🆕 V3.3.101: Fracture médio-diaphysaire radius avec limitation supination
         {
@@ -5323,17 +5323,8 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
     // Vérifier si une règle experte s'applique (UTILISER workingText transformé par abréviations)
     for (const rule of sortedExpertRules) {
         if (rule.pattern.test(workingText) && rule.context.test(workingText)) {
-            // 🆕 V3.3.110: Debug logging pour cécité
-            if (rule.priority === 12000) {
-                console.log('🔍 V3.3.110 DEBUG: Expert rule cécité matched!');
-                console.log('  Pattern test:', rule.pattern.test(workingText));
-                console.log('  Context test:', rule.context.test(workingText));
-                console.log('  SearchTerms:', rule.searchTerms);
-            }
-            
             // Vérifier negativeContext si présent
             if (rule.negativeContext && rule.negativeContext.test(workingText)) {
-                console.log('  ❌ Negative context matched, skipping');
                 continue; // Ignorer cette règle si le contexte négatif est détecté
             }
             
@@ -5904,14 +5895,6 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
                     normalize(item.name) === normalize(term)
                 )
             );
-            
-            // 🆕 V3.3.110: Debug logging
-            if (rule.priority === 12000) {
-                console.log('  DirectMatches found:', directMatches.length);
-                if (directMatches.length > 0) {
-                    console.log('  Match names:', directMatches.map(m => m.name));
-                }
-            }
             
             // Si plusieurs correspondances (ex: MD + MND), filtrer par latéralité
             let directMatch = null;
