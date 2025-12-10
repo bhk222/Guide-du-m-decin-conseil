@@ -1,5 +1,5 @@
-const CACHE_NAME = 'guide-medecin-conseil-v4.3.105-TOTAL-KEYWORD-FIX';
-const DATA_CACHE_NAME = 'guide-medecin-conseil-data-v4.3.105-TOTAL-KEYWORD-FIX';
+const CACHE_NAME = 'guide-medecin-conseil-v4.3.106-CECITE-PATTERN-FIX';
+const DATA_CACHE_NAME = 'guide-medecin-conseil-data-v4.3.106-CECITE-PATTERN-FIX';
 
 // Ressources essentielles à mettre en cache immédiatement
 const STATIC_CACHE_URLS = [

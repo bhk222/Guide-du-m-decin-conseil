@@ -4842,13 +4842,13 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             searchTerms: ['Raideur d\'une articulation de l\'annulaire (Main Dominante)'],
             priority: 93
         },
-        // 🆕 V3.3.102: Cécité totale d'un œil (V3.3.104: support "oeil" et "œil")
+        // 🆕 V3.3.102: Cécité totale d'un œil (V3.3.106: pattern renforcé)
         {
-            pattern: /c[eé]cit[eé].*(?:totale|compl[eè]te).*[oœ]eil|perte.*(?:totale|compl[eè]te).*vision.*[oœ]eil|[oœ]eil.*(?:perdu|aveugle|c[eé]cit[eé])/i,
-            context: /accident|traumatisme|s[eé]quelle|[oœ]eil.*(?:gauche|droit)|suite|victime|cons[eé]cutif/i,
+            pattern: /(?:c[eé]cit[eé].*(?:totale|compl[eè]te)|(?:totale|compl[eè]te).*c[eé]cit[eé]).*[oœ]eil|perte.*(?:totale|compl[eè]te).*vision.*[oœ]eil|[oœ]eil.*(?:perdu|aveugle|c[eé]cit[eé])|[oœ]eil.*(?:gauche|droit).*(?:c[eé]cit[eé]|perte.*vision)/i,
+            context: /accident|traumatisme|s[eé]quelle|[oœ]eil|suite|victime|cons[eé]cutif|vision/i,
             searchTerms: ['Perte complète de la vision d\'un oeil (l\'autre étant normal)'],
             priority: 11000,
-            negativeContext: /deux\s+yeux|bilat[eé]ral|c[eé]cit[eé]\s+compl[eè]te(?!.*[oœ]eil)/i
+            negativeContext: /deux\s+yeux|bilat[eé]ral|(?:c[eé]cit[eé]\s+compl[eè]te(?!.*[oœ]eil))|maxillaire|m[aâ]choire|dent/i  // Exclure aussi maxillaire/mâchoire
         },
         // 🆕 V3.3.101: Fracture médio-diaphysaire radius avec limitation supination
         {
