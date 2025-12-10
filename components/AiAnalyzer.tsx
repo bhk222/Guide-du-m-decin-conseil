@@ -3683,6 +3683,10 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
     // 🆕 PREPROCESSING MÉDICAL ENRICHI - Transformer descriptions vagues en termes détectables
     // Ceci enrichit le texte AVANT toute analyse
     const medicalEnrichment: [RegExp, string][] = [
+        // 🆕 V3.3.99: Ankylose pouce + amyotrophie thénar (rupture extenseur)
+        [/(?:rupture|section).*(?:extenseur|long\s+extenseur).*pouce/gi, 'rupture extenseur pouce ankylose pouce amyotrophie thénar éminence thénar'],
+        [/ankylose.*pouce.*amyotrophie.*th[eé]nar/gi, 'ankylose pouce amyotrophie éminence thénar perte fonctionnelle pouce'],
+        
         // 🆕 V3.3.90: Semi-lunaire (lunatum) → enrichissement
         [/(?:luxation|fracture).*semi.*lunaire|semi.*lunaire|lunatum/gi, 'luxation-fracture semi-lunaire lunatum os carpe poignet'],
         
@@ -4824,6 +4828,28 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             context: /doigt|main|fracture|phalange/i,
             searchTerms: ['Raideur d\'une articulation de l\'annulaire (Main Dominante)'],
             priority: 93
+        },
+        // 🆕 V3.3.99: Ankylose pouce + amyotrophie thénar (rupture extenseur)
+        {
+            pattern: /(?:rupture.*extenseur.*pouce|extenseur.*pouce.*rompu).*ankylose.*pouce|ankylose.*pouce.*(?:rupture.*extenseur|extenseur.*rompu)/i,
+            context: /amyotrophie.*th[eé]nar|[eé]minence.*th[eé]nar.*atrophi[eé]e/i,
+            searchTerms: ['Ankylose carpo-métacarpienne du pouce (Main Dominante)'],
+            priority: 10700,
+            negativeContext: /sans.*s[eé]quelle|consolidation.*parfaite/i
+        },
+        {
+            pattern: /ankylose.*pouce.*(?:gauche|main\s+gauche)/i,
+            context: /droitier|main\s+dominante.*droite|amyotrophie.*th[eé]nar/i,
+            searchTerms: ['Ankylose carpo-métacarpienne du pouce (Main Non Dominante)'],
+            priority: 10700,
+            negativeContext: /sans.*s[eé]quelle/i
+        },
+        {
+            pattern: /ankylose.*pouce.*(?:droite|main\s+droite)/i,
+            context: /gaucher|main\s+dominante.*gauche|amyotrophie.*th[eé]nar/i,
+            searchTerms: ['Ankylose carpo-métacarpienne du pouce (Main Non Dominante)'],
+            priority: 10700,
+            negativeContext: /sans.*s[eé]quelle/i
         },
         // 🆕 V3.3.83: Amputation P2 seule (détection "P2 D2/D3/D4/D5" ou "phalange moyenne seule")
         {
