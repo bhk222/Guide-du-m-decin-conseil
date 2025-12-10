@@ -5323,8 +5323,17 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
     // Vérifier si une règle experte s'applique (UTILISER workingText transformé par abréviations)
     for (const rule of sortedExpertRules) {
         if (rule.pattern.test(workingText) && rule.context.test(workingText)) {
+            // 🆕 V3.3.110: Debug logging pour cécité
+            if (rule.priority === 12000) {
+                console.log('🔍 V3.3.110 DEBUG: Expert rule cécité matched!');
+                console.log('  Pattern test:', rule.pattern.test(workingText));
+                console.log('  Context test:', rule.context.test(workingText));
+                console.log('  SearchTerms:', rule.searchTerms);
+            }
+            
             // Vérifier negativeContext si présent
             if (rule.negativeContext && rule.negativeContext.test(workingText)) {
+                console.log('  ❌ Negative context matched, skipping');
                 continue; // Ignorer cette règle si le contexte négatif est détecté
             }
             
@@ -5895,6 +5904,14 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
                     normalize(item.name) === normalize(term)
                 )
             );
+            
+            // 🆕 V3.3.110: Debug logging
+            if (rule.priority === 12000) {
+                console.log('  DirectMatches found:', directMatches.length);
+                if (directMatches.length > 0) {
+                    console.log('  Match names:', directMatches.map(m => m.name));
+                }
+            }
             
             // Si plusieurs correspondances (ex: MD + MND), filtrer par latéralité
             let directMatch = null;

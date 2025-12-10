@@ -1,5 +1,5 @@
-const CACHE_NAME = 'guide-medecin-conseil-v4.3.109-CECITE-LIGATURE-FIX';
-const DATA_CACHE_NAME = 'guide-medecin-conseil-data-v4.3.109-CECITE-LIGATURE-FIX';
+const CACHE_NAME = 'guide-medecin-conseil-v4.3.110-CECITE-DEBUG';
+const DATA_CACHE_NAME = 'guide-medecin-conseil-data-v4.3.110-CECITE-DEBUG';
 
 // Ressources essentielles à mettre en cache immédiatement
 const STATIC_CACHE_URLS = [
