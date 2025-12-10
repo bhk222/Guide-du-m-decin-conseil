@@ -403,7 +403,7 @@ export const ExclusiveAiCalculator: React.FC<ExclusiveAiCalculatorProps> = ({
              return;
         }
 
-        const calculationKeywords = ["calcul", "calcule", "total", "résultat", "c'est tout", "fini", "terminé"];
+        const calculationKeywords = ["calcul", "calcule", "ipp total", "résultat", "c'est tout", "fini", "terminé", "total ipp"];
         if (calculationKeywords.some(kw => textToSend.toLowerCase().includes(kw))) {
              setIsLoading(true);
              await new Promise(res => setTimeout(res, 400));
