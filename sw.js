@@ -1,5 +1,5 @@
-const CACHE_NAME = 'guide-medecin-conseil-v4.3.103-CECITE-CONTEXT-FIX';
-const DATA_CACHE_NAME = 'guide-medecin-conseil-data-v4.3.103-CECITE-CONTEXT-FIX';
+const CACHE_NAME = 'guide-medecin-conseil-v4.3.104-OEIL-SUPPORT';
+const DATA_CACHE_NAME = 'guide-medecin-conseil-data-v4.3.104-OEIL-SUPPORT';
 
 // Ressources essentielles à mettre en cache immédiatement
 const STATIC_CACHE_URLS = [
