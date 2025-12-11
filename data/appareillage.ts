@@ -585,19 +585,22 @@ export const appareillageDatabase: Appareillage[] = [
     "reference": "CASQUE.T3",
     "nom": "Casque orthopédique déformations crâne bébé",
     "categorie": "Orthèses du crâne",
-    "description": "Casque moulé personnalisé correction déformations crâne nourrisson.",
+    "description": "Casque moulé personnalisé correction déformations crâne nourrisson. ATTENTION : Peut être prescrit mais NON remboursé par la CNAS.",
     "indications": [
-      "Plagiocéphalie positionnelle",
-      "Brachycéphalie",
-      "Déformations crâniennes"
+      "Plagiocéphalie positionnelle (tête plate)",
+      "Brachycéphalie (crâne court et large)",
+      "Scaphocéphalie (crâne long et étroit)",
+      "Déformations crâniennes du nourrisson"
     ],
     "criteres_conformite": [
-      "Moulage personnalisé",
-      "Matériaux légers",
-      "Ajustement progressif"
+      "Moulage personnalisé sur mesure",
+      "Matériaux légers et respirants",
+      "Ajustement progressif selon croissance",
+      "⚠️ NON PRIS EN CHARGE par la CNAS",
+      "Prescription possible mais frais à la charge du patient"
     ],
-    "remboursement": "100%",
-    "type": "Grand appareillage"
+    "remboursement": "NON REMBOURSÉ - 0%",
+    "type": "Non pris en charge CNAS"
   },
   {
     "reference": "COL.CERV.S",
@@ -752,14 +755,19 @@ export const appareillageDatabase: Appareillage[] = [
     "reference": "CORSET.TLS",
     "nom": "Corset maintien thoraco-lombaire",
     "categorie": "Orthèses du tronc - Corsets",
-    "description": "Maintien sans correction",
+    "description": "Corset de maintien thoraco-lombaire sans correction. Maintient le patient dans une position correcte et soulage les douleurs.",
     "indications": [
-      "Lombalgie chronique sévère",
-      "Post-op colonne"
+      "Atteintes vertébrales d'origine TRAUMATIQUE : tassement dorsolombaire, fracture dorsolombaire",
+      "Atteintes vertébrales d'origine ORTHOPÉDIQUE : discopathie, spondylolisthésis dorsolombaire",
+      "Atteintes vertébrales d'origine INFLAMMATOIRE : hernie discale inopérable",
+      "Atteintes vertébrales d'origine INFECTIEUSE : spondylodiscite dorsolombaire (Mal de Pott)",
+      "Atteintes vertébrales d'origine NEUROMUSCULAIRE : Myopathie",
+      "Atteintes vertébrales d'origine NEUROLOGIQUE : IMC (lutter contre l'effondrement du tronc)"
     ],
     "criteres_conformite": [
       "Réalisé sur mesure",
-      "Ajustement progressif"
+      "Ajustement progressif",
+      "Maintien sans correction"
     ],
     "remboursement": "100%",
     "type": "Grand appareillage"
@@ -3742,25 +3750,41 @@ Prise en charge selon procédure DCM/903/2015 du 24 Juin 2015.`,
   // ========== PRODUITS ADDITIONNELS AVEC RÉFÉRENCES PDF EXACTES ==========
   {
     reference: "TR 59 N 50",
-    nom: "Corset thoraco-lombo-sacré (CTLS)",
+    nom: "Corset thoraco-lombo-sacré (CTLS) - Corset de maintien thoraco-lombaire",
     categorie: "Orthèses du tronc - Corsets",
     description: "Coque en polyéthylène sans armature mono valve sans appui ni de contre appui, avec ouverture antérieure. Consiste à maintenir le patient dans une position correcte et soulager les douleurs.",
-    indications: ["Atteinte vertébrale d'origine traumatique (tassement, fracture)", "Atteinte vertébrale d'origine infectieuse (spondylodiscite, mal de Pott)", "Atteinte vertébrale d'origine tumorale (métastase, myélome)", "Atteinte vertébrale d'origine dégénérative (arthrose sévère)", "Atteinte vertébrale d'origine malformative (scoliose, cyphose)", "Post-opératoire de chirurgie du rachis (arthrodèse)"],
+    indications: [
+      "Atteintes vertébrales d'origine TRAUMATIQUE : tassement dorsolombaire, fracture dorsolombaire",
+      "Atteintes vertébrales d'origine ORTHOPÉDIQUE : discopathie, spondylolisthésis dorsolombaire",
+      "Atteintes vertébrales d'origine INFLAMMATOIRE : hernie discale inopérable",
+      "Atteintes vertébrales d'origine INFECTIEUSE : spondylodiscite dorsolombaire (Mal de Pott)",
+      "Atteintes vertébrales d'origine NEUROMUSCULAIRE : Myopathie",
+      "Atteintes vertébrales d'origine NEUROLOGIQUE : IMC (lutter contre l'effondrement du tronc)",
+      "Atteintes vertébrales d'origine TUMORALE : métastase vertébrale, myélome",
+      "Atteintes vertébrales d'origine MALFORMATIVE : scoliose, cyphose",
+      "Post-opératoire de chirurgie du rachis (arthrodèse)"
+    ],
     criteres_conformite: ["Coque polyéthylène mono-valve", "Ouverture antérieure", "Maintien thoraco-lombo-sacré", "Réalisé sur mesure après moulage"],
     remboursement: "100%",
     type: "Grand appareillage",
-    references_composees: ["TR 59 N 50", "TR59N50", "CORSET.TLS", "CTLS", "Corset thoraco-lombo-sacré"]
+    references_composees: ["TR 59 N 50", "TR59N50", "CORSET.TLS", "CTLS", "Corset thoraco-lombo-sacré", "Corset maintien thoraco-lombaire"]
   },
   {
     reference: "TR 79 N 35",
     nom: "Corselet de maintien lombaire",
     categorie: "Orthèses du tronc - Corsets",
     description: "Corset de maintien ou appelé aussi corselet, c'est une coque en polyéthylène sans armature mono valve avec ouverture antérieure. Consiste à maintenir le patient dans une position correcte avec un soutien lombaire spécifique.",
-    indications: ["Traumatisme lombaire (fracture, tassement vertébral lombaire)", "Discopathie lombaire sévère (hernie discale L4-L5, L5-S1)", "Lombalgie chronique invalidante résistante au traitement médical", "Post-opératoire chirurgie lombaire (laminectomie, arthrodèse)", "Diplégie quelque soit son origine : Le corselet se porte avec un Grand Appareil de Marche (GAM) ; c'est le Phelps"],
-    criteres_conformite: ["Coque polyéthylène mono-valve", "Ouverture antérieure", "Niveau lombaire spécifique", "Compatible avec GAM pour diplégie"],
+    indications: [
+      "Atteintes vertébrales d'origine TRAUMATIQUE : tassement lombaire, fracture lombaire",
+      "Atteintes vertébrales d'origine ORTHOPÉDIQUE : discopathie, spondylolisthésis lombaire",
+      "Atteintes vertébrales d'origine INFLAMMATOIRE : hernie discale inopérable",
+      "Atteintes vertébrales d'origine INFECTIEUSE : spondylodiscite lombaire (Mal de Pott)",
+      "Diplégie quelque soit son origine : Le corselet se porte avec un Grand Appareil de Marche (GAM) ; c'est le Phelps"
+    ],
+    criteres_conformite: ["Coque polyéthylène mono-valve", "Ouverture antérieure", "Niveau lombaire spécifique", "Compatible avec GAM pour diplégie (Phelps)", "Réalisé sur mesure après moulage"],
     remboursement: "100%",
     type: "Grand appareillage",
-    references_composees: ["TR 79 N 35", "TR79N35", "CEINTURE.LOMB", "Corselet lombaire", "Maintien lombaire"]
+    references_composees: ["TR 79 N 35", "TR79N35", "CEINTURE.LOMB", "Corselet lombaire", "Maintien lombaire", "Phelps"]
   },
   {
     reference: "TR 29 N 36",
@@ -4317,9 +4341,17 @@ Prise en charge selon procédure DCM/903/2015 du 24 Juin 2015.`,
     description: `Casque en résine polyester stratifié.
 • Comportant un capitonnage intérieur en matière cellulaire avec garnissage en peau avec fixation selon la nécessité.
 • Il est peu fréquent et difficile à réaliser.
-• Doit couvrir entièrement la tête jusqu'au front en épousant bien sa forme et en libérant les deux oreilles.`,
+• Doit couvrir entièrement la tête jusqu'au front en épousant bien sa forme et en libérant les deux oreilles.
+
+⚠️ IMPORTANT : Le casque pour les déformations crâniennes (brachycéphalie, plagiocéphalie, scaphocéphalie) du bébé peut être prescrit mais il N'EST PAS PRIS EN CHARGE par la CNAS.`,
     indications: ["Trépanation", "Ostéotomie partielle du crâne", "Protection d'un crâne découvert après chirurgie"],
-    remarque: "Le casque pour les déformations crâniennes (brachycéphalie, plagiocéphalie, scaphocéphalie) du bébé peut être prescrit mais il n'est pas pris en charge.",
+    criteres_conformite: [
+      "Casque en résine polyester stratifié",
+      "Capitonnage intérieur en matière cellulaire avec garnissage en peau",
+      "Doit couvrir entièrement la tête jusqu'au front",
+      "Libère les deux oreilles",
+      "⚠️ ATTENTION : Le casque pour déformations crâniennes du bébé (brachycéphalie, plagiocéphalie, scaphocéphalie) peut être prescrit mais N'EST PAS PRIS EN CHARGE par la CNAS"
+    ],
     type: "Grand appareillage",
     remboursement: "100%",
     references_composees: ["TR 12 S 25"]

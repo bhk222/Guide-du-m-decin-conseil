@@ -143,9 +143,11 @@ export const AppareillageSearch: React.FC = () => {
             <span className={`inline-flex items-center px-3 py-1 rounded-full text-sm font-medium ${
               product.remboursement === '100%' 
                 ? 'bg-green-100 text-green-800' 
+                : product.remboursement?.includes('NON REMBOURSÉ') || product.remboursement === '0%'
+                ? 'bg-red-100 text-red-800'
                 : 'bg-blue-100 text-blue-800'
             }`}>
-              {product.remboursement} remboursé
+              {product.remboursement || 'Non spécifié'}
             </span>
             {product.type && (
               <p className="text-xs text-gray-500 mt-1">{product.type}</p>
