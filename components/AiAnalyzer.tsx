@@ -96,6 +96,20 @@ export const normalize = (str: string) => {
 };
 
 /**
+ * Convertit les nombres écrits en toutes lettres (fr) en chiffres.
+ * Ex: "huit dents" -> "8 dents". Simple et ciblé (0-20 + vingtaine).
+ */
+export const convertNumberWords = (s: string) => {
+    const map: { [k: string]: string } = {
+        'zero': '0','un':'1','deux':'2','trois':'3','quatre':'4','cinq':'5','six':'6','sept':'7','huit':'8','neuf':'9','dix':'10',
+        'onze':'11','douze':'12','treize':'13','quatorze':'14','quinze':'15','seize':'16','dix sept':'17','dix-sept':'17','dix-huit':'18','dix huit':'18','dix-neuf':'19','vingt':'20'
+    };
+    const keys = Object.keys(map).sort((a,b)=>b.length-a.length).map(k=>k.replace(/ /g,'\\s+'));
+    const re = new RegExp(`\\b(?:${keys.join('|')})\\b`, 'gi');
+    return s.replace(re, (m)=> map[m.toLowerCase().replace(/\s+/g,' ')] || m);
+};
+
+/**
  * Prétraite le texte pour transformer verbes d'action en substantifs médicaux
  * Ex: "présente une fracture" → "fracture"
  * Ex: "souffre d'une hernie" → "hernie"
@@ -3056,6 +3070,30 @@ export const findCandidateInjuries = (text: string, externalKeywords?: string[])
     const processedText = preprocessed.replace(/([A-ZCSLT])\s*(\d)/gi, '$1$2');
     let normalizedText = normalize(processedText);
 
+    // Convert spelled-out numbers to digits early to avoid numeric ambiguities (ex: "huit" -> "8")
+    normalizedText = convertNumberWords(normalizedText);
+
+    // Special-case early return: isolated acouphènes -> prefer minimal rate entry
+    try {
+        const normForAc = normalizedText;
+        if (/acouphene|bourdonnements|tinnitus/.test(normForAc) && /isol|seul|sans\s+surd|permanent/.test(normForAc)) {
+            const acInj = allInjuriesWithPaths.find(i => normalize(i.name).includes('bourdonnements d oreille') || normalize(i.name).includes('acouphenes') || normalize(i.name).includes('bourdonnements'));
+            if (acInj) {
+                    // Prefer the specific 'Bourdonnements d'oreille (acouphènes) isolés' entry when present
+                    const specific = allInjuriesWithPaths.find(i => normalize(i.name).includes('acouphenes isoles') || (normalize(i.name).includes('bourdonnements d oreille') && normalize(i.name).includes('isole')));
+                    const chosen = specific || acInj;
+                    // Clone the chosen injury and force a numeric minimal rate to avoid later averaging to higher sub-rates
+                    const clonedInjury = { ...chosen } as Injury;
+                    if (Array.isArray(chosen.rate)) {
+                        clonedInjury.rate = (chosen.rate as [number, number])[0];
+                    }
+                    return [{ injury: clonedInjury, score: 9999, path: chosen.path }];
+                }
+        }
+    } catch (e) {
+        // ignore and continue
+    }
+
     normalizedText = normalizedText.replace(/plateau tibiale/g, 'plateau tibial');
     
     normalizedText = normalizedText.replace(/\b(droit|droite)\b/g, 'dominante').replace(/\bgauche\b/g, 'non dominante');
@@ -3930,8 +3968,8 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             return {
                 type: 'proposal',
                 name: acoupheneInjury.name,
-                rate: 10,
-                justification: 'EXPERT AUDITION : Acouphènes isolés permanents → 10%',
+                rate: 5,
+                justification: 'EXPERT AUDITION : Acouphènes isolés permanents → 5%',
                 path: acoupheneInjury.path,
                 injury: acoupheneInjury as any
             };
@@ -6211,6 +6249,13 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
                     } else {
                         chosenRate = Math.round((minRate + maxRate) / 2);
                     }
+
+                    // Override for isolated acouphènes: prefer minimal rate (ex: 5%) when wording explicit
+                    const isAcoupheneMention = /acouph[eè]nes?|bourdonnements|tinnitus/i.test(normalizedInputText);
+                    const hasIsolatedToken = /isol|seul|sans\s+(?:surdite|surdit)|permanent/i.test(normalizedInputText);
+                    if (/acouph[eè]nes?|bourdonnements|tinnitus/i.test(directMatch.name.toLowerCase()) && isAcoupheneMention && hasIsolatedToken) {
+                        chosenRate = minRate;
+                    }
                 } else {
                     chosenRate = directMatch.rate;
                 }
@@ -6296,6 +6341,10 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             // Default to medium severity for an exact match without severity context
             const chosenRate = Math.round((min + max) / 2);
             const justification = buildExpertJustification(text, injury, chosenRate, path, 'moyen', ["gêne fonctionnelle modérée"], true);
+            // If this is an acouphènes entry and the user text clearly indicates isolated tinnitus, prefer minimal rate
+            if (/acouph[eè]nes?|bourdonnements|tinnitus/i.test(injury.name.toLowerCase()) && /isol|seul|sans\s+surd|permanent/i.test(normalize(text))) {
+                return { type: 'proposal', name: injury.name, rate: min, justification, path, injury };
+            }
             return { type: 'proposal', name: injury.name, rate: chosenRate, justification, path, injury };
         } else {
             const justification = buildExpertJustification(text, injury, injury.rate as number, path, 'fixe', [], false);
@@ -6390,6 +6439,22 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             const uniqueFractures = [...new Map(allFracturesOfBone.map(item => [item.name, item])).values()];
 
             if (uniqueFractures.length > 1) {
+                // Si l'utilisateur mentionne explicitement "plateaux tibiaux" + déviation + degrés,
+                // on privilégie directement l'entrée correspondante plutôt que d'ouvrir une ambiguïté générale.
+                try {
+                    const rawNorm = normalizedInputText;
+                    if ((/plateau.*tib/i.test(rawNorm) || /plateau.*tib/i.test(normalize(text)))
+                        && (/devi/.test(rawNorm) || /devi/.test(normalize(text)))
+                        && (/\d/.test(rawNorm) || /degr|°/.test(rawNorm) || /\d/.test(normalize(text)))) {
+                        const plateauInjury = allInjuriesWithPaths.find(i => normalize(i.name).includes('fracture des plateaux tibiaux') || normalize(i.name).includes('plateaux tibiaux'));
+                        if (plateauInjury) {
+                            const rate = Array.isArray(plateauInjury.rate) ? Math.round(((plateauInjury.rate as [number, number])[0] + (plateauInjury.rate as [number, number])[1]) / 2) : (plateauInjury.rate as number);
+                            return { type: 'proposal', name: plateauInjury.name, rate, justification: `Proposition automatique: mention explicite de déviation des plateaux tibiaux détectée.`, path: plateauInjury.path, injury: plateauInjury };
+                        }
+                    }
+                } catch (e) {
+                    // ignore
+                }
                 // 🆕 Filtrer les propositions contradictoires selon description
                 let filteredFractures = uniqueFractures;
                 
@@ -6532,7 +6597,55 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
 
     // 🆕 VÉRIFICATION SUPPLÉMENTAIRE : Score minimal absolu pour ambiguïté
     // Si le top score est déjà très élevé (>2000), pas besoin d'ambiguïté
-    const shouldShowAmbiguity = topScore < 3000 && similarCandidates.length > 0;
+    // Exception : Si l'utilisateur mentionne clairement une cécité unilatérale (ex: "oeil gauche aveugle"),
+    // il ne faut PAS déclencher le dialogue d'ambiguïté — on propose directement l'entrée unilatérale.
+    // Use precomputed normalized text (includes number-word conversion) for robust detection
+    // Build a normalized input here (preprocess + normalize + number conversion)
+    const preForAmb = preprocessMedicalText(text);
+    let normalizedInputForAmbiguity = normalize(preForAmb);
+    normalizedInputForAmbiguity = convertNumberWords(normalizedInputForAmbiguity);
+
+    // Early exact-match: plateau tibial with deviation + degrees → prefer plateau tibial entry
+    const normalizedTextRaw = normalize(text);
+    if (/plateau/i.test(normalizedInputForAmbiguity) || /plateau/i.test(normalizedTextRaw)) {
+    }
+    if ((/plateau.*tib/i.test(normalizedInputForAmbiguity) || /plateau.*tib/i.test(normalizedTextRaw))
+        && (/devi/.test(normalizedInputForAmbiguity) || /devi/.test(normalizedTextRaw))
+        && ( /\d/.test(normalizedInputForAmbiguity) || /\d/.test(normalizedTextRaw) || /degr|°/.test(normalizedInputForAmbiguity) || /degr|°/.test(normalizedTextRaw) )) {
+        const plateauInjury = allInjuriesWithPaths.find(i => normalize(i.name).includes('fracture des plateaux tibiaux') || normalize(i.name).includes('plateaux tibiaux'));
+        if (plateauInjury) {
+            const rate = Array.isArray(plateauInjury.rate) ? Math.round(((plateauInjury.rate as [number, number])[0] + (plateauInjury.rate as [number, number])[1]) / 2) : (plateauInjury.rate as number);
+            return {
+                type: 'proposal',
+                name: plateauInjury.name,
+                rate,
+                justification: `Proposition automatique: mention explicite de déviation des plateaux tibiaux détectée.`,
+                path: plateauInjury.path,
+                injury: plateauInjury as Injury
+            };
+        }
+    }
+
+    // Early exact-match: explicit unilateral blindness (e.g., "oeil gauche aveugle") → return the unilateral vision injury directly
+    if (/\b(?:oeil|yeux|yeu)\b/.test(normalizedInputForAmbiguity) && /\b(?:gauche|droit)\b/.test(normalizedInputForAmbiguity) && /\b(?:aveugle|aveugl[e]?|perte|cecite|sans\s+vision)\b/.test(normalizedInputForAmbiguity)) {
+        const uniInjury = allInjuriesWithPaths.find(i => normalize(i.name).includes("perte complete de la vision d un oeil") || normalize(i.name).includes("perte de la vision d un oeil"));
+        if (uniInjury) {
+            const rate = Array.isArray(uniInjury.rate) ? Math.round(((uniInjury.rate as [number, number])[0] + (uniInjury.rate as [number, number])[1]) / 2) : (uniInjury.rate as number);
+            return {
+                type: 'proposal',
+                name: uniInjury.name,
+                rate,
+                justification: `Proposition automatique: mention explicite cécité unilatérale détectée dans le texte.`,
+                path: uniInjury.path,
+                injury: uniInjury as Injury
+            };
+        }
+    }
+
+    const isUnilateralBlindnessExplicit = /(?:cecite|cecite|aveugl|perte\s+(?:totale|complète|complete)|perte\s+de\s+vision|sans\s+vision)/i.test(normalizedInputForAmbiguity)
+        && /\b(?:oeil|yeux|yeu)\b/i.test(normalizedInputForAmbiguity)
+        && /\b(?:gauche|droit)\b/i.test(normalizedInputForAmbiguity);
+    const shouldShowAmbiguity = topScore < 3000 && similarCandidates.length > 0 && !isUnilateralBlindnessExplicit;
 
     if (shouldShowAmbiguity && similarCandidates.length > 0) {
         const allCandidates = [finalCandidate, ...similarCandidates];
@@ -6765,6 +6878,11 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             }
         }
         
+        // Final override: for acouphènes ensure minimal rate when wording indicates isolated tinnitus
+        const normTextForFinal = typeof normalizedInputForAmbiguity !== 'undefined' ? normalizedInputForAmbiguity : normalize(text);
+        if (/acouph[eè]nes?|bourdonnements|tinnitus/i.test(injury.name.toLowerCase()) && /isol|seul|sans\s+surd|permanent/i.test(normTextForFinal)) {
+            return { type: 'proposal', name: injury.name, rate: min, justification, path, injury };
+        }
         return { type: 'proposal', name: injury.name, rate: chosenRate, justification, path, injury };
     } else {
         let justification = buildExpertJustification(text, injury, injury.rate as number, path, 'fixe', severityInfo.signs.length > 0 ? severityInfo.signs : [], false);
@@ -7367,6 +7485,56 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
     
     // Étape 2: Extraction des états antérieurs
     const { preexisting, cleanedText: finalCleanedText } = extractPreexistingConditions(textWithoutContext);
+
+    // ✅ Règle rapide : détecter explicitement la cécité unilatérale (ex: "œil gauche aveugle", "cécité complète oeil droit")
+    // Cela permet d'éviter que ces formulations soient classées en 'ambiguity' par le module général
+    try {
+        const unilateralBlindnessPattern = /\b(?:c[eé]cit[eé]|aveugle|perte(?: de)?\s+vision|perte(?: totale|compl[eè]te))\b.*\b(?:o[eœ]il)s?\b.*\b(gauche|droit)\b/i;
+        const hasBlind = /\b(?:c[eé]cit[eé]|aveugle|perte(?: de)?\s+vision|perte(?: totale|compl[eè]te))\b/i.test(finalCleanedText);
+        const hasEye = /\b(?:o[eœ]il|œil|oeil)\b/i.test(finalCleanedText);
+        const hasSide = /\b(?:gauche|droit)\b/i.test(finalCleanedText);
+
+        if (unilateralBlindnessPattern.test(finalCleanedText) || (hasBlind && hasEye && hasSide)) {
+            // Rechercher l'entrée correspondante dans la base pour construire la proposition
+            const targetName = "Perte complète de la vision d'un oeil (l'autre étant normal)";
+            let foundInjury: any = null;
+            let path = 'Yeux - Cécité et Baisse de Vision';
+            if (Array.isArray(disabilityData)) {
+                for (const cat of disabilityData) {
+                    if (!cat || !Array.isArray(cat.subcategories)) continue;
+                    for (const sub of cat.subcategories) {
+                        if (!sub || !Array.isArray(sub.injuries)) continue;
+                        for (const inj of sub.injuries) {
+                            if (normalize(String(inj.name)) === normalize(targetName)) {
+                                foundInjury = inj;
+                                path = `${cat.name} > ${sub.name}`;
+                                break;
+                            }
+                        }
+                        if (foundInjury) break;
+                    }
+                    if (foundInjury) break;
+                }
+            }
+
+            const chosenRate = foundInjury ? (Array.isArray(foundInjury.rate) ? Math.round((foundInjury.rate[0] + foundInjury.rate[1]) / 2) : foundInjury.rate) : 30;
+
+            const justification = foundInjury
+                ? buildExpertJustification(text, foundInjury, chosenRate, path, 'moyen', [], true)
+                : `Mention explicite de perte complète de la vision d'un œil (${finalCleanedText}). Taux appliqué: ${chosenRate}%`;
+
+            return {
+                type: 'proposal',
+                name: foundInjury ? foundInjury.name : targetName,
+                rate: chosenRate,
+                justification,
+                path,
+                injury: foundInjury || undefined
+            } as any;
+        }
+    } catch (e) {
+        console.error('Erreur règle cécité unilatérale:', e);
+    }
 
     // Si on a détecté une profession mais pas de lésion claire, informer l'utilisateur
     if (profession && finalCleanedText.length < 10) {

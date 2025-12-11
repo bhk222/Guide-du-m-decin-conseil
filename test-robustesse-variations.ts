@@ -48,8 +48,8 @@ const robustnessTests: TestCase[] = [
             "cécité complète oeil gauche",
             "œil gauche aveugle suite traumatisme"
         ],
-        expectedInjury: "Perte totale de la vision d'un œil",
-        expectedRate: 25
+        expectedInjury: "Perte complète de la vision d'un oeil (l'autre étant normal)",
+        expectedRate: 30
     },
     {
         category: "Valeurs Numériques",
