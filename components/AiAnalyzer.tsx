@@ -790,6 +790,70 @@ const checkConsolidationDelay = (
 };
 
 /**
+ * Estime l'IPP d'une pathologie antérieure (état avant accident)
+ * V3.3.121: Estimation automatique pour calcul Article 12
+ */
+const estimatePreviousIPP = (condition: string): number => {
+    const normalized = normalize(condition);
+    
+    // Pathologies rachidiennes
+    if (/discopathie|discarthr[oa]se|protrusion/i.test(condition)) {
+        if (/severe|grave|importante|majeure/i.test(condition)) return 10;
+        if (/moderee|moyenne/i.test(condition)) return 7;
+        return 5; // Discopathie simple/légère
+    }
+    
+    // Hernie discale ancienne opérée
+    if (/hernie.*(?:operee|discectomie|laminectomie)/i.test(condition)) {
+        return 10; // Hernie opérée = séquelle chirurgicale
+    }
+    
+    // Lombalgie/cervicalgie chronique
+    if (/lombalgie|cervicalgie|dorsalgie.*chronique/i.test(condition)) {
+        return 5;
+    }
+    
+    // Tendinopathies
+    if (/tendinopathie|tendinite.*chronique/i.test(condition)) {
+        if (/coiffe.*rotateurs|epaule/i.test(condition)) return 6;
+        if (/achille|rotulien/i.test(condition)) return 5;
+        return 4;
+    }
+    
+    // Arthrose
+    if (/arthrose|coxarthrose|gonarthrose/i.test(condition)) {
+        if (/severe|stade\s+[34]/i.test(condition)) return 12;
+        if (/moderee|stade\s+2/i.test(condition)) return 8;
+        return 5; // Arthrose débutante
+    }
+    
+    // Canal carpien
+    if (/canal.*carpien/i.test(condition)) {
+        if (/opere|chirurgie/i.test(condition)) return 4;
+        return 3;
+    }
+    
+    // Épicondylite
+    if (/epicondylite|epitrochleite/i.test(condition)) {
+        return 3;
+    }
+    
+    // Pathologie genou (entorse ancienne, laxité)
+    if (/entorse.*(?:ancienne|chronique)|laxite.*genou/i.test(condition)) {
+        return 5;
+    }
+    
+    // Pathologie épaule
+    if (/capsulite|periarth[ro]ite|bursite.*epaule/i.test(condition)) {
+        return 4;
+    }
+    
+    // Par défaut : pathologie mineure
+    console.log(`⚠️ Pathologie antérieure non reconnue, estimation par défaut: ${condition}`);
+    return 5;
+};
+
+/**
  * Calcule l'IPP imputable selon l'Article 12 (méthode de la capacité restante)
  * V3.3.121: Gestion état antérieur + aggravation traumatique
  * 
@@ -830,7 +894,7 @@ const calculateImputability = (params: {
     const calculation = `(${totalIPP}% - ${previousIPP}%) / (100 - ${previousIPP}%) × 100 = ${imputableIPP}%`;
     
     const explanation = `
-<strong>État antérieur</strong>: ${preexistingCondition} (${previousIPP}% IPP présumé)<br>
+<strong>État antérieur</strong>: ${preexistingCondition} (${previousIPP}% IPP estimé)<br>
 <strong>État actuel total</strong>: ${newLesion} (${totalIPP}% IPP)<br>
 <strong>Capacité restante</strong>: ${capaciteRestante}%<br>
 <strong>IPP imputable à l'accident</strong>: <span style="font-size: 1.2em; color: #d32f2f;"><strong>${imputableIPP}%</strong></span><br><br>
@@ -7984,10 +8048,16 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
         };
     }
 
-    // Étape 3: Informer sur les états antérieurs détectés si présents
+    // Étape 3: Informer sur les états antérieurs détectés si présents + Estimation IPP
     let contextInfo = '';
+    let estimatedPreviousIPP = 0;
+    
     if (preexisting.length > 0) {
-        contextInfo = `<br><br><em>⚠️ <strong>État antérieur identifié</strong> (antécédents médicaux AVANT l'accident du travail) : ${preexisting.join(', ')}.<br>Ces antécédents ne sont PAS à évaluer comme nouvelles lésions. Ils seront pris en compte dans le calcul final selon l'Article 12 (méthode de la capacité restante) si un taux antérieur existe.</em>`;
+        // 🆕 V3.3.121: Estimation automatique IPP antérieur
+        estimatedPreviousIPP = estimatePreviousIPP(preexisting[0]);
+        console.log(`💡 IPP antérieur estimé: ${estimatedPreviousIPP}% pour "${preexisting[0]}"`);
+        
+        contextInfo = `<br><br><em>⚠️ <strong>État antérieur identifié</strong> (antécédents médicaux AVANT l'accident du travail) : ${preexisting.join(', ')}.<br>Ces antécédents ne sont PAS à évaluer comme nouvelles lésions. Ils seront pris en compte dans le calcul final selon l'Article 12 (méthode de la capacité restante).<br><strong>IPP antérieur estimé : ${estimatedPreviousIPP}%</strong></em>`;
     }
 
     // 🆕 Étape 3B: SI CUMUL DÉTECTÉ → Analyser chaque lésion séparément (V3.3.52)
@@ -8133,6 +8203,28 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
         // Ajouter note sur état antérieur
         if (contextInfo) {
             enrichedJustification += contextInfo;
+        }
+
+        // 🆕 V3.3.121: Appliquer calcul Article 12 si état antérieur détecté
+        if (estimatedPreviousIPP > 0 && result.type === 'proposal' && result.rate) {
+            const totalIPP = result.rate;
+            const imputabilityResult = calculateImputability({
+                previousIPP: estimatedPreviousIPP,
+                totalIPP,
+                preexistingCondition: preexisting[0],
+                newLesion: result.description || 'lésion post-traumatique'
+            });
+            
+            // Ajouter le détail du calcul Article 12
+            enrichedJustification += `<br><br><strong>📊 Détail du calcul (Art. 12)</strong><br>`;
+            enrichedJustification += `• Taux antérieur: ${estimatedPreviousIPP}% (capacité résiduelle: ${100 - estimatedPreviousIPP}%)<br>`;
+            enrichedJustification += `• Taux nouvelles lésions (Balthazard): ${totalIPP.toFixed(2)}%<br>`;
+            enrichedJustification += `• Taux global théorique: ${(estimatedPreviousIPP + imputabilityResult.imputableIPP * (100 - estimatedPreviousIPP) / 100).toFixed(2)}%<br>`;
+            enrichedJustification += `• Capacité avant accident: ${(100 - estimatedPreviousIPP).toFixed(2)}%<br>`;
+            enrichedJustification += `• Capacité après accident: ${(100 - estimatedPreviousIPP - imputabilityResult.imputableIPP * (100 - estimatedPreviousIPP) / 100).toFixed(2)}%<br>`;
+            enrichedJustification += `• Taux attribuable à l'accident actuel: <strong>${imputabilityResult.imputableIPP}%</strong><br>`;
+            
+            console.log(`📊 Calcul Article 12 appliqué: ${estimatedPreviousIPP}% + ${imputabilityResult.imputableIPP}% = ${totalIPP}%`);
         }
 
         return { ...result, justification: enrichedJustification };
