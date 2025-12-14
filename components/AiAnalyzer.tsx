@@ -790,8 +790,59 @@ const checkConsolidationDelay = (
 };
 
 /**
+ * Calcule l'IPP imputable selon l'Article 12 (méthode de la capacité restante)
+ * V3.3.121: Gestion état antérieur + aggravation traumatique
+ * 
+ * Formule: IPP_imputable = (IPP_total - IPP_antérieur) / (100 - IPP_antérieur) × 100
+ * 
+ * Exemple: Tendinopathie ancienne 5% + Rupture post-traumatique → IPP total 20%
+ * → IPP_imputable = (20 - 5) / (100 - 5) × 100 = 15.79% ≈ 16%
+ */
+const calculateImputability = (params: {
+    previousIPP: number;
+    totalIPP: number;
+    preexistingCondition: string;
+    newLesion: string;
+}): {
+    imputableIPP: number;
+    calculation: string;
+    explanation: string;
+} => {
+    const { previousIPP, totalIPP, preexistingCondition, newLesion } = params;
+    
+    // Validation
+    if (previousIPP < 0 || previousIPP >= 100) {
+        throw new Error('IPP antérieur invalide (doit être entre 0 et 99%)');
+    }
+    if (totalIPP <= previousIPP) {
+        return {
+            imputableIPP: 0,
+            calculation: `IPP total (${totalIPP}%) ≤ IPP antérieur (${previousIPP}%)`,
+            explanation: `Aucune aggravation imputable à l'accident du travail. L'état actuel est équivalent ou inférieur à l'état antérieur.`
+        };
+    }
+    
+    // Formule Article 12
+    const capaciteRestante = 100 - previousIPP;
+    const difference = totalIPP - previousIPP;
+    const imputableIPP = Math.round((difference / capaciteRestante) * 100);
+    
+    const calculation = `(${totalIPP}% - ${previousIPP}%) / (100 - ${previousIPP}%) × 100 = ${imputableIPP}%`;
+    
+    const explanation = `
+<strong>État antérieur</strong>: ${preexistingCondition} (${previousIPP}% IPP présumé)<br>
+<strong>État actuel total</strong>: ${newLesion} (${totalIPP}% IPP)<br>
+<strong>Capacité restante</strong>: ${capaciteRestante}%<br>
+<strong>IPP imputable à l'accident</strong>: <span style="font-size: 1.2em; color: #d32f2f;"><strong>${imputableIPP}%</strong></span><br><br>
+<em>Calcul Article 12 (capacité restante):</em> ${calculation}
+    `.trim();
+    
+    return { imputableIPP, calculation, explanation };
+};
+
+/**
  * Détecte le type de demande : attribution initiale vs révision
- * Amélioration v2.5: différenciation contexte médico-légal
+ * V3.3.121: Logique améliorée pour attribution/révision/aggravation/rechute
  */
 const detectRequestType = (text: string): { 
     requestType: 'attribution' | 'revision'; 
@@ -805,28 +856,15 @@ const detectRequestType = (text: string): {
     let previousRate: number | undefined;
     let cleanedText = text;
     
-    // Détection révision - mots-clés explicites
-    const revisionPatterns = [
-        { pattern: /\b(?:révision|revision|réexamen|réévaluation|reevaluation)\b/i, reason: 'reevaluation' as const },
-        { pattern: /\b(?:aggravation|aggravé|aggravée|détérioration|dégradation|péjoration)\b/i, reason: 'aggravation' as const },
-        { pattern: /\b(?:rechute|récidive|reprise évolutive|nouvel épisode)\b/i, reason: 'rechute' as const },
-        { pattern: /\b(?:amélioration|amélioré|améliorée|régression|diminution)\b/i, reason: 'amelioration' as const }
-    ];
+    console.log('🔍 [detectRequestType] Début analyse...');
     
-    for (const { pattern, reason } of revisionPatterns) {
-        if (pattern.test(normalized)) {
-            requestType = 'revision';
-            revisionReason = reason;
-            break;
-        }
-    }
-    
-    // Détection IPP antérieur
+    // 🆕 ÉTAPE 1 : Détection IPP antérieur (PRIORITÉ HAUTE - preuve formelle révision)
     const previousRatePatterns = [
-        /\bipp\s+(?:antérieure?|précédente?|initial)\s*[=:de]?\s*(\d{1,3})\s*%/i,
-        /\b(?:attribué|accordé|reconnu)\s+(\d{1,3})\s*%\s+(?:ipp|d'ipp)/i,
+        /\bipp\s+(?:antérieure?|précédente?|initiale?)\s*[=:de]?\s*(\d{1,3})\s*%/i,
+        /\b(?:attribué|accordé|reconnu|fixé)\s+(?:à\s+)?(\d{1,3})\s*%\s+(?:d'?ipp)/i,
         /\btaux\s+(?:antérieur|initial|précédent)\s*[=:de]?\s*(\d{1,3})\s*%/i,
-        /\b(\d{1,3})\s*%\s+(?:ipp\s+)?(?:initialement?|au\s+départ|en\s+\d{4})/i
+        /\b(\d{1,3})\s*%\s+(?:d'?ipp\s+)?(?:initialement?|au\s+départ|précédemment|en\s+\d{4})/i,
+        /\bavec\s+(?:un\s+)?ipp\s+(?:de\s+)?(\d{1,3})\s*%\s+(?:attribué|accordé)/i
     ];
     
     for (const pattern of previousRatePatterns) {
@@ -835,29 +873,127 @@ const detectRequestType = (text: string): {
             const rate = parseInt(match[1], 10);
             if (rate >= 0 && rate <= 100) {
                 previousRate = rate;
-                requestType = 'revision'; // Si IPP antérieur mentionné = révision
+                requestType = 'revision'; // Preuve formelle de révision
                 cleanedText = cleanedText.replace(match[0], '').trim();
+                console.log(`✅ IPP antérieur détecté: ${rate}% → RÉVISION confirmée`);
                 break;
             }
         }
     }
     
-    // Détection implicite de révision par temporalité
-    const implicitRevisionPatterns = [
-        /\b(?:après|suite\s+à|depuis)\s+(?:consolidation|attribution|reconnaissance)\b/i,
-        /\b(?:nouvelle|nouvel)\s+(?:certificat|examen|consultation)\b/i,
-        /\b(?:état|séquelles)\s+(?:actuel|actuelles)\b/i
+    // 🆕 ÉTAPE 2 : Mots-clés EXPLICITES de révision (haute confiance)
+    const explicitRevisionPatterns = [
+        { pattern: /\b(?:révision|revision)\s+(?:de\s+)?(?:l'?ipp|du\s+taux|de\s+l'?incapacité)/i, reason: 'reevaluation' as const },
+        { pattern: /\b(?:demande\s+de\s+)?(?:réexamen|réévaluation|reevaluation)\s+(?:de\s+l'?ipp|du\s+dossier)/i, reason: 'reevaluation' as const },
+        { pattern: /\b(?:nouvelle\s+)?évaluation\s+(?:suite\s+à|après)\s+(?:aggravation|rechute|amélioration)/i, reason: 'reevaluation' as const }
     ];
     
-    if (requestType === 'attribution') {
-        for (const pattern of implicitRevisionPatterns) {
+    for (const { pattern, reason } of explicitRevisionPatterns) {
+        if (pattern.test(normalized)) {
+            requestType = 'revision';
+            revisionReason = reason;
+            console.log(`✅ Révision EXPLICITE détectée: ${reason}`);
+            break;
+        }
+    }
+    
+    // 🆕 ÉTAPE 3 : Détection AGGRAVATION (contexte médical strict)
+    const aggravationPatterns = [
+        /\b(?:aggravation|aggravé|aggravée)\s+(?:clinique|significative|importante|majeure)/i,
+        /\b(?:aggravation|aggravé)\s+(?:de\s+l'?état|des\s+séquelles|des\s+symptômes|du\s+handicap)/i,
+        /\b(?:détérioration|dégradation|péjoration)\s+(?:clinique|de\s+l'?état|progressive|évolutive)/i,
+        /\b(?:aggravation)\s+(?:justifiant|nécessitant|motivant)\s+(?:une\s+)?(?:révision|réévaluation)/i,
+        /\b(?:majoration|augmentation)\s+(?:des\s+douleurs|du\s+handicap|de\s+la\s+gêne\s+fonctionnelle)/i
+    ];
+    
+    for (const pattern of aggravationPatterns) {
+        if (pattern.test(normalized)) {
+            requestType = 'revision';
+            revisionReason = 'aggravation';
+            console.log(`✅ AGGRAVATION détectée (contexte médical)`);
+            break;
+        }
+    }
+    
+    // 🆕 ÉTAPE 4 : Détection RECHUTE (événements nouveaux)
+    const rechutePatterns = [
+        /\b(?:rechute|récidive)\s+(?:de\s+la\s+lésion|des\s+symptômes|clinique)/i,
+        /\b(?:reprise\s+évolutive|nouvel\s+épisode|nouvelle\s+poussée)/i,
+        /\b(?:réapparition|retour)\s+(?:des\s+symptômes|de\s+la\s+douleur|du\s+déficit)/i,
+        /\b(?:récurrence|réactivation)\s+(?:de\s+la\s+pathologie|des\s+troubles)/i
+    ];
+    
+    for (const pattern of rechutePatterns) {
+        if (pattern.test(normalized)) {
+            requestType = 'revision';
+            revisionReason = 'rechute';
+            console.log(`✅ RECHUTE détectée`);
+            break;
+        }
+    }
+    
+    // 🆕 ÉTAPE 5 : Détection AMÉLIORATION (baisse IPP potentielle)
+    const ameliorationPatterns = [
+        /\b(?:amélioration|amélioré|améliorée)\s+(?:clinique|significative|importante|majeure)/i,
+        /\b(?:amélioration|amélioré)\s+(?:de\s+l'?état|des\s+séquelles|des\s+symptômes)/i,
+        /\b(?:régression|diminution)\s+(?:clinique|des\s+symptômes|des\s+séquelles|du\s+handicap)/i,
+        /\b(?:récupération)\s+(?:fonctionnelle|motrice|partielle|progressive)/i
+    ];
+    
+    for (const pattern of ameliorationPatterns) {
+        if (pattern.test(normalized)) {
+            requestType = 'revision';
+            revisionReason = 'amelioration';
+            console.log(`✅ AMÉLIORATION détectée (contexte médical)`);
+            break;
+        }
+    }
+    
+    // 🆕 ÉTAPE 6 : Indicateurs ATTRIBUTION INITIALE (forte priorité - annule révision implicite)
+    const attributionIndicators = [
+        /\b(?:première|premier|initial)\s+(?:évaluation|expertise|examen|attribution)/i,
+        /\b(?:suite\s+à|après)\s+(?:l'?accident|le\s+traumatisme|la\s+lésion)\s+(?:survenu|du|de)/i,
+        /\ben\s+vue\s+(?:de\s+la\s+)?(?:détermination|fixation|attribution)\s+(?:d'?une?\s+)?(?:ipp|incapacité)/i,
+        /\b(?:consolidation)\s+(?:obtenue|acquise|réalisée)\b/i,
+        /\bl'?accident\s+(?:est\s+)?survenu\s+(?:le|sur|pendant)/i
+    ];
+    
+    // Si aucun IPP antérieur + indicateurs attribution → forcer attribution
+    if (!previousRate && requestType !== 'revision') {
+        for (const pattern of attributionIndicators) {
             if (pattern.test(normalized)) {
-                requestType = 'revision';
-                revisionReason = revisionReason || 'reevaluation';
+                requestType = 'attribution';
+                revisionReason = undefined;
+                console.log(`✅ ATTRIBUTION INITIALE confirmée (indicateurs formels)`);
                 break;
             }
         }
     }
+    
+    // 🆕 ÉTAPE 7 : Révision implicite (UNIQUEMENT si pas d'indicateur attribution)
+    const implicitRevisionPatterns = [
+        /\b(?:après|suite\s+à)\s+(?:attribution|reconnaissance)\s+(?:d'?un\s+)?(?:ipp|taux)/i,
+        /\b(?:depuis|après)\s+(?:la\s+)?(?:dernière\s+)?(?:évaluation|expertise|consolidation)\b/i,
+        /\b(?:état|séquelles)\s+(?:actuelles?|au\s+jour\s+d'?aujourd'?hui)\b/i
+    ];
+    
+    if (requestType === 'attribution' && !previousRate) {
+        for (const pattern of implicitRevisionPatterns) {
+            if (pattern.test(normalized)) {
+                // Ne pas forcer révision si attribution déjà confirmée
+                const hasStrongAttribution = attributionIndicators.some(p => p.test(normalized));
+                if (!hasStrongAttribution) {
+                    requestType = 'revision';
+                    revisionReason = revisionReason || 'reevaluation';
+                    console.log(`⚠️ Révision IMPLICITE détectée (sans IPP antérieur)`);
+                }
+                break;
+            }
+        }
+    }
+    
+    console.log(`📊 [detectRequestType] Résultat: ${requestType}${revisionReason ? ` (${revisionReason})` : ''}`);
+    if (previousRate) console.log(`   IPP antérieur: ${previousRate}%`);
     
     return { requestType, revisionReason, previousRate, cleanedText };
 };
@@ -4282,39 +4418,37 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             priority: 95
         },
         
-        // === RÈGLE FRACTURE POUTEAU-COLLES (V3.3.26) ===
-        // Pouteau-Colles = fracture spécifique extrémité inférieure radius (poignet)
+        // === RÈGLE CATARACTE AVEC ACUITÉ VISUELLE (V3.3.113 - FORCER CALCUL) ===
         {
-            pattern: /Pouteau[-\s]?Colles/i,
-            context: /poignet|radius|chute|fracture/i,
-            searchTerms: [
-                'Fracture de l\'extrémité inférieure du radius - Avec limitation des mouvements (Main Dominante)',
-                'Fracture de l\'extrémité inférieure du radius - Avec limitation des mouvements (Main Non Dominante)',
-                'Fracture de l\'extrémité inférieure du radius - Avec raideur, déformation et troubles nerveux (Main Dominante)',
-                'Fracture de l\'extrémité inférieure du radius - Avec raideur, déformation et troubles nerveux (Main Non Dominante)'
-            ],
+            pattern: /cataracte/i,
+            context: /acui|visuel|oeil.*\d+|vision|implant|pseudophakie|aphaquie|OD|OG|\d+\/\d+/i,
+            searchTerms: ['__CATARACTE_AVEC_ACUITE__'],
             priority: 1005
         },
         
-        // === RÈGLES PLEXUS BRACHIAL SPÉCIFIQUES (V3.3.16) ===
-        // Note: Ces règles s'exécutent APRÈS preprocessing qui transforme "atteinte tronc supérieur" → "paralysie radiculaire supérieure Duchenne-Erb C5 C6"
+        // === RÈGLE FRACTURE POUTEAU-COLLES (V3.3.111 - FORCER AMBIGUITÉ RADIUS) ===
+        // Pouteau-Colles = fracture spécifique extrémité inférieure radius (poignet)
+        // Retourner AMBIGUITÉ pour forcer choix séquelles radius uniquement
         {
-            pattern: /paralysie\s+radiculaire\s+sup[eé]rieure|Duchenne[-\s]?Erb|C5[-\s]?C6/i,
-            context: /plexus\s+brachial|EMG|partielle?|[eé]paule|coude|bras/i,
-            searchTerms: [
-                'Paralysie radiculaire supérieure (Duchenne-Erb) (droite)',
-                'Paralysie radiculaire supérieure (Duchenne-Erb) (gauche)'
-            ],
-            priority: 1002
+            pattern: /Pouteau[-\s]?Colles/i,
+            context: /poignet|radius|chute|fracture/i,
+            searchTerms: ['__POUTEAU_COLLES_AMBIGUITY__'],
+            priority: 1005
+        },
+        
+        // === RÈGLES PLEXUS BRACHIAL SPÉCIFIQUES (V3.3.112 - FORCER RETOUR IMMÉDIAT) ===
+        // Note: Retourner ambiguïté immédiate pour éviter confusion avec raideur épaule
+        {
+            pattern: /paralysie\s+radiculaire\s+sup[eé]rieure|Duchenne[-\s]?Erb|C5[-\s]?C6|tronc\s+sup[eé]rieur.*plexus/i,
+            context: /plexus\s+brachial|EMG|partielle?|[eé]paule|coude|bras|deltoi|biceps|C5|C6/i,
+            searchTerms: ['__DUCHENNE_ERB_AMBIGUITY__'],
+            priority: 1010  // PRIORITÉ MAX
         },
         {
-            pattern: /paralysie\s+radiculaire\s+inf[eé]rieure|Klumpke|C8[-\s]?T1/i,
-            context: /plexus\s+brachial|EMG|main|doigts|griffe/i,
-            searchTerms: [
-                'Paralysie radiculaire inférieure (Klumpke) (droite)',
-                'Paralysie radiculaire inférieure (Klumpke) (gauche)'
-            ],
-            priority: 1002
+            pattern: /paralysie\s+radiculaire\s+inf[eé]rieure|Klumpke|C8[-\s]?T1|tronc\s+inf[eé]rieur.*plexus/i,
+            context: /plexus\s+brachial|EMG|main|doigts|griffe|C8|T1/i,
+            searchTerms: ['__KLUMPKE_AMBIGUITY__'],
+            priority: 1010
         },
         {
             pattern: /paralysie\s+compl[eè]te.*plexus\s+brachial|plexus\s+brachial.*paralysie\s+compl[eè]te/i,
@@ -4380,15 +4514,13 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             negativeContext: /simple|sans.*complication|consolid[eé]e.*normale/i
         },
         
-        // === RÈGLE CUMUL FRACTURE BASSIN + NERF SCIATIQUE (V3.3.34 - FIX CAS 10) ===
-        // Problème CAS 10: Détecte "Névralgie pudendale" (25%) au lieu de cumuler bassin (20-30%) + nerf sciatique (30-45%)
-        // Formule Balthazard attendue: 30% + 40% × 0.7 = 58% ≈ 60% (fourchette [50-65%])
-        // Solution: Expert rule spécifique haute priorité qui détecte cumul AVANT règles individuelles
+        // === RÈGLE CUMUL FRACTURE BASSIN + NERF SCIATIQUE (V3.3.114 - ULTRA-SIMPLE) ===
+        // Problème: Doit détecter AVANT la division du texte par l'interface
         {
-            pattern: /fracture.*bassin.*(?:nerf|sciatique)|(?:nerf|sciatique).*fracture.*bassin|polytraumatisme.*bassin.*sciatique/i,
-            context: /(?:cadre.*obturateur|disjonction|sacro.*iliaque|ilium|pubis).*(?:sciatique|nerf|d[eé]ficit|steppage|paralysie)|(?:sciatique|nerf|d[eé]ficit|steppage|paralysie).*(?:cadre.*obturateur|disjonction|sacro.*iliaque|ilium|pubis)/i,
-            searchTerms: ["__CUMUL_BASSIN_NERF_SCIATIQUE__"],  // Marker spécial pour traitement custom
-            priority: 1010  // TRÈS HAUTE PRIORITÉ (avant règles individuelles)
+            pattern: /fracture.*bassin|bassin.*fracture/i,
+            context: /sciatique|nerf|steppage|d[eé]ficit.*moteur|paralysie.*pied/i,
+            searchTerms: ["__CUMUL_BASSIN_NERF_SCIATIQUE__"],
+            priority: 1020  // ULTRA HAUTE PRIORITÉ (la plus haute)
         },
         
         // === RÈGLES ATTEINTES NERVEUSES (V3.3.5) ===
@@ -5377,6 +5509,176 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
                 };
             }
             
+            // 🎯 CAS SPÉCIAL: CATARACTE AVEC ACUITÉ VISUELLE (V3.3.113)
+            if (rule.searchTerms.includes("__CATARACTE_AVEC_ACUITE__")) {
+                // Parser acuités visuelles OD et OG
+                const odMatch = /od\s*[:\s]*(\d+)\s*\/\s*(\d+)/i.exec(normalizedInputText);
+                const ogMatch = /og\s*[:\s]*(\d+)\s*\/\s*(\d+)/i.exec(normalizedInputText);
+                
+                if (odMatch && ogMatch) {
+                    const odNum = parseInt(odMatch[1]);
+                    const odDen = parseInt(odMatch[2]);
+                    const ogNum = parseInt(ogMatch[1]);
+                    const ogDen = parseInt(ogMatch[2]);
+                    const odAcuity = odNum / odDen;
+                    const ogAcuity = ogNum / ogDen;
+                    const worstEye = Math.min(odAcuity, ogAcuity);
+                    const bestEye = Math.max(odAcuity, ogAcuity);
+                    
+                    // Trouver la séquelle cataracte
+                    const cataractLesion = allInjuriesWithPaths.find(inj => 
+                        /cataracte.*selon.*acuite/i.test(normalize(inj.name))
+                    );
+                    
+                    if (cataractLesion) {
+                        const [min, max] = cataractLesion.rate as [number, number];
+                        let taux: number;
+                        let niveau: string;
+                        
+                        // Classification selon barème
+                        if (worstEye < 0.3) {
+                            // <3/10 sur œil le plus atteint → ÉLEVÉ (max)
+                            taux = max;
+                            niveau = 'Sévère (œil le plus atteint <3/10)';
+                        } else if (bestEye >= 0.8 && worstEye >= 0.5) {
+                            // Meilleur ≥8/10 ET pire ≥5/10 → FAIBLE
+                            taux = Math.round(min + (max - min) * 0.15);
+                            niveau = 'Légère (vision binoculaire fonctionnelle)';
+                        } else if (worstEye >= 0.8 && bestEye >= 0.8) {
+                            // Les deux ≥8/10 → TRÈS FAIBLE
+                            taux = min;
+                            niveau = 'Minime (vision excellente)';
+                        } else {
+                            // Cas intermédiaires (3-7/10) → MOYEN
+                            taux = Math.round((min + max) / 2);
+                            niveau = 'Modérée (acuité 3-7/10)';
+                        }
+                        
+                        return {
+                            type: 'proposal',
+                            name: cataractLesion.name,
+                            rate: taux,
+                            justification: `<strong>⚠️ CATARACTE BILATÉRALE AVEC ACUITÉ VISUELLE CHIFFRÉE</strong><br><br>` +
+                                `📊 <strong>Acuité visuelle mesurée</strong> :<br>` +
+                                `&nbsp;&nbsp;• OD : ${odNum}/${odDen} (${(odAcuity * 10).toFixed(1)}/10)<br>` +
+                                `&nbsp;&nbsp;• OG : ${ogNum}/${ogDen} (${(ogAcuity * 10).toFixed(1)}/10)<br>` +
+                                `&nbsp;&nbsp;• Meilleur œil : ${(bestEye * 10).toFixed(1)}/10<br>` +
+                                `&nbsp;&nbsp;• Œil le plus atteint : ${(worstEye * 10).toFixed(1)}/10<br><br>` +
+                                `📖 <strong>Référence barémique</strong> :<br>` +
+                                `&nbsp;&nbsp;• Rubrique : "Neuro-Sensorielles > Yeux"<br>` +
+                                `&nbsp;&nbsp;• Fourchette : [${min} - ${max}%]<br>` +
+                                `&nbsp;&nbsp;• Niveau : ${niveau}<br><br>` +
+                                `💡 <strong>Taux IPP proposé : ${taux}%</strong><br>` +
+                                `<em>Calcul basé sur l'acuité visuelle corrigée binoculaire.</em>`,
+                            path: cataractLesion.path,
+                            injury: cataractLesion as Injury
+                        };
+                    }
+                } else {
+                    // Pas d'acuité visuelle chiffrée → Message données insuffisantes
+                    return {
+                        type: 'no_result',
+                        text: `⚠️ <strong>DONNÉES CLINIQUES INSUFFISANTES</strong><br><br>` +
+                              `Cataracte détectée mais l'acuité visuelle chiffrée est manquante.<br><br>` +
+                              `📋 <strong>Information requise</strong> :<br>` +
+                              `• Acuité visuelle OD et OG avec correction (ex: OD 5/10, OG 6/10)<br><br>` +
+                              `<strong>Exemple de formulation complète :</strong><br>` +
+                              `"Cataracte bilatérale opérée. Acuité visuelle OD 5/10, OG 6/10 avec correction."`
+                    };
+                }
+            }
+            
+            // 🎯 CAS SPÉCIAL: FRACTURE POUTEAU-COLLES (V3.3.111 - FIX AMBIGUITÉ)
+            // Forcer affichage UNIQUEMENT des séquelles du radius (éviter confusion avec clavicule)
+            if (rule.searchTerms.includes("__POUTEAU_COLLES_AMBIGUITY__")) {
+                const isDominante = /main.*dominante|droite?.*dominante|poignet.*droit/i.test(normalizedInputText);
+                const radiusInjuries = allInjuriesWithPaths.filter(inj => 
+                    /fracture.*extrem.*inf.*radius/i.test(normalize(inj.name))
+                );
+                
+                // Filtrer par latéralité si précisée
+                const filteredInjuries = isDominante 
+                    ? radiusInjuries.filter(inj => /main.*dominante/i.test(inj.name))
+                    : radiusInjuries;
+                
+                if (filteredInjuries.length > 0) {
+                    return {
+                        type: 'ambiguity',
+                        text: `Votre description "<strong>${text.substring(0, 150)}...</strong>" correspond à une <strong>fracture de Pouteau-Colles</strong> (extrémité inférieure du radius/poignet).<br><br>Veuillez sélectionner la séquelle correspondant au mieux à l'état du patient :`,
+                        choices: filteredInjuries.map(inj => inj as Injury)
+                    };
+                }
+            }
+            
+            // 🎯 CAS SPÉCIAL: PARALYSIE DUCHENNE-ERB (V3.3.112 - FIX AMBIGUITÉ)
+            // Forcer proposition DIRECTE de la paralysie radiculaire supérieure
+            if (rule.searchTerms.includes("__DUCHENNE_ERB_AMBIGUITY__")) {
+                const isDroit = /droit|droite|membre.*superieur.*droit/i.test(normalizedInputText);
+                const targetName = isDroit 
+                    ? 'Paralysie radiculaire supérieure (Duchenne-Erb) (droite)'
+                    : 'Paralysie radiculaire supérieure (Duchenne-Erb) (gauche)';
+                
+                const duchenneLesion = allInjuriesWithPaths.find(inj => 
+                    normalize(inj.name) === normalize(targetName)
+                );
+                
+                if (duchenneLesion) {
+                    const [min, max] = duchenneLesion.rate as [number, number];
+                    const taux = max; // Toujours max car paralysie complète
+                    
+                    return {
+                        type: 'proposal',
+                        name: duchenneLesion.name,
+                        rate: taux,
+                        justification: `<strong>⚠️ PARALYSIE RADICULAIRE SUPÉRIEURE DÉTECTÉE</strong><br><br>` +
+                            `📊 <strong>Diagnostic</strong> : Paralysie Duchenne-Erb (C5-C6)<br>` +
+                            `&nbsp;&nbsp;• Atteinte tronc supérieur du plexus brachial<br>` +
+                            `&nbsp;&nbsp;• Déficit moteur : deltoïde + biceps<br>` +
+                            `&nbsp;&nbsp;• Limitation abduction épaule<br>` +
+                            `&nbsp;&nbsp;• Amyotrophie visible<br><br>` +
+                            `📖 <strong>Référence barémique</strong> :<br>` +
+                            `&nbsp;&nbsp;• Rubrique : "Membres Supérieurs > Paralysies nerveuses"<br>` +
+                            `&nbsp;&nbsp;• Fourchette : [${min} - ${max}%]<br><br>` +
+                            `💡 <strong>Taux proposé : ${taux}%</strong><br>` +
+                            `⚠️ <strong>Important</strong> : Il s'agit d'une paralysie nerveuse, PAS d'une simple raideur articulaire.`,
+                        path: duchenneLesion.path,
+                        injury: duchenneLesion as Injury
+                    };
+                }
+            }
+            
+            // 🎯 CAS SPÉCIAL: PARALYSIE KLUMPKE (V3.3.112 - FIX AMBIGUITÉ)
+            if (rule.searchTerms.includes("__KLUMPKE_AMBIGUITY__")) {
+                const isDroit = /droit|droite|membre.*superieur.*droit/i.test(normalizedInputText);
+                const targetName = isDroit 
+                    ? 'Paralysie radiculaire inférieure (Klumpke) (droite)'
+                    : 'Paralysie radiculaire inférieure (Klumpke) (gauche)';
+                
+                const klumpkeLesion = allInjuriesWithPaths.find(inj => 
+                    normalize(inj.name) === normalize(targetName)
+                );
+                
+                if (klumpkeLesion) {
+                    const [min, max] = klumpkeLesion.rate as [number, number];
+                    const taux = max;
+                    
+                    return {
+                        type: 'proposal',
+                        name: klumpkeLesion.name,
+                        rate: taux,
+                        justification: `<strong>⚠️ PARALYSIE RADICULAIRE INFÉRIEURE DÉTECTÉE</strong><br><br>` +
+                            `📊 <strong>Diagnostic</strong> : Paralysie Klumpke (C8-T1)<br>` +
+                            `&nbsp;&nbsp;• Atteinte tronc inférieur du plexus brachial<br>` +
+                            `&nbsp;&nbsp;• Déficit moteur main et doigts<br><br>` +
+                            `📖 <strong>Référence barémique</strong> :<br>` +
+                            `&nbsp;&nbsp;• Fourchette : [${min} - ${max}%]<br><br>` +
+                            `💡 <strong>Taux proposé : ${taux}%</strong>`,
+                        path: klumpkeLesion.path,
+                        injury: klumpkeLesion as Injury
+                    };
+                }
+            }
+            
             // 🎯 CAS SPÉCIAL: CUMUL Fracture Bassin + Nerf Sciatique (V3.3.34 - FIX CAS 10)
             if (rule.searchTerms.includes("__CUMUL_BASSIN_NERF_SCIATIQUE__")) {
                 // Retourner message explicatif avec formule Balthazard
@@ -5928,11 +6230,26 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             
             // Recherche directe dans les données (égalité exacte pour expert rules)
             // 🆕 V3.3.93: Trouver TOUTES les correspondances (MD + MND) puis filtrer par latéralité
-            const directMatches = allInjuriesWithPaths.filter(item => 
+            // 🆕 V3.3.110: Recherche FLOUE si égalité exacte échoue (pour Pouteau-Colles notamment)
+            let directMatches = allInjuriesWithPaths.filter(item => 
                 rule.searchTerms.some(term => 
                     normalize(item.name) === normalize(term)
                 )
             );
+            
+            // Si pas de match exact, essayer recherche floue (contient les mots-clés principaux)
+            if (directMatches.length === 0) {
+                directMatches = allInjuriesWithPaths.filter(item => 
+                    rule.searchTerms.some(term => {
+                        const termWords = normalize(term).split(' ').filter(w => w.length > 2);
+                        const itemWords = normalize(item.name).split(' ');
+                        const itemNormalized = normalize(item.name);
+                        // Match si au moins 70% des mots significatifs sont présents
+                        const commonWords = termWords.filter(w => itemNormalized.includes(w));
+                        return commonWords.length >= termWords.length * 0.7;
+                    })
+                );
+            }
             
             // Si plusieurs correspondances (ex: MD + MND), filtrer par latéralité
             let directMatch = null;
@@ -7044,52 +7361,70 @@ const extractPreexistingConditions = (text: string): { preexisting: string[]; cl
     // 🆕 Détection lésions primaires (fracture, luxation, etc.) dans le texte
     const primaryLesionPresent = /\b(fracture|luxation|rupture|entorse|lesion|traumatisme|trauma|plaie|section|amputation|ecrasement|contusion|brulure)/i.test(normalized);
 
-    // Patterns enrichis pour détecter antécédents médicaux
+    // 🆕 V3.3.121: Patterns enrichis pour détecter antécédents médicaux
     const preexistingPatterns = [
-        // Formulations explicites
-        /\b(?:état\s+antérieur|antécédent(?:s)?|état\s+ancien|ancien(?:ne)?\s+(?:lésion|pathologie|affection)|préexistant(?:e)?|pré-existant(?:e)?|existant\s+avant|en\s+dehors\s+de)\s*:?\s*([^;.]+?)(?:[;.]|qui\s+présente|avec|$)/gi,
+        // 🆕 PATTERN PRINCIPAL : "Il présente des antécédents médicaux connus de X, diagnostiquée Y ans auparavant, ayant donné lieu à..."
+        /\b(?:présente|présentait)\s+des\s+antécédents\s+médicaux\s+connus\s+de\s+([^.]+?),?\s+diagnostiquée?\s+(?:il\s+y\s+a\s+)?(\d+)\s+ans?\s+auparavant,?\s+ayant\s+donné\s+lieu\s+à\s+[^.]+?(?:sans\s+arrêt\s+de\s+travail[^.]*?|sans\s+IPP[^.]*?)(?:\.|L'événement)/gi,
         
-        // Indemnisation antérieure
+        // Formulations explicites d'état antérieur
+        /\b(?:état\s+antérieur|antécédent(?:s)?\s+médicaux?|état\s+ancien)\s*:?\s*([^;.]+?)(?:[;.]|L'événement|qui\s+présente|$)/gi,
+        
+        // Indemnisation antérieure (preuve formelle)
         /\b(?:déjà\s+indemnisé(?:e)?|indemnisation\s+antérieure|taux\s+antérieur|IPP\s+antérieur(?:e)?)\s*(?:à|de|:)?\s*(\d+\s*%?)/gi,
         
-        // Pathologies chroniques SEULEMENT si contexte "ancien" ou "depuis X ans"
-        /\b(hernie\s+discale|discopathie|arthrose|lombalgie|lombosciatalgie|cervicalgie|cervicarthrose|coxalgie|coxarthrose|tendinite|épicondylite|canal\s+carpien)(?:\s+(?:ancienne?|chronique\s+depuis|préexistante?|connue?\s+depuis|suivie?\s+depuis|traitée?\s+depuis))(?:\s+\d+\s+(?:ans?|années?))?/gi,
+        // Pathologies chroniques simples avec temporalité
+        /\b(tendinopathie|tendinite|arthrose|discopathie|hernie\s+discale)\s+(?:chronique|ancienne?)(?:\s+de\s+l'?épaule|\s+du\s+genou|\s+lombaire)?,?\s+(?:connue?|diagnostiquée?)\s+depuis\s+(\d+)\s+ans?/gi,
         
         // Formulations "avant l'accident"
-        /\bavant\s+(?:l'|l')?(?:accident|le\s+trauma|les?\s+faits?)\s*:?\s*([^;.]+?)(?:[;.]|$)/gi,
-        
-        // Formulations "en dehors de"
-        /\ben\s+dehors\s+(?:de\s+l'|de\s+l'|du)\s*(?:accident|travail|trauma)\s*[,:.]?\s*([^;.]+?)(?:[;.]|qui|avec|$)/gi
+        /\bavant\s+l'?accident\s*:?\s*([^;.]+?)(?:[;.]|$)/gi
     ];
+
+    const alreadyAdded = new Set<string>(); // 🆕 Éviter les doublons
 
     for (const pattern of preexistingPatterns) {
         let match;
         while ((match = pattern.exec(text)) !== null) {
-            const condition = (match[1] || match[0]).trim();
+            let condition = (match[1] || match[0]).trim();
+            
+            // Nettoyer la condition capturée
+            condition = condition
+                .replace(/,\s*$/, '') // Virgule finale
+                .replace(/\s+/g, ' ') // Espaces multiples
+                .trim();
+            
             const conditionNormalized = normalize(condition);
             
-            // 🆕 Vérifier si c'est une SÉQUELLE et non un antécédent
+            // 🆕 Vérifier doublons
+            if (alreadyAdded.has(conditionNormalized)) {
+                console.log(`⚠️ Doublon ignoré: ${condition}`);
+                continue;
+            }
+            
+            // 🆕 Vérifier si c'est une SÉQUELLE post-traumatique et non un antécédent
             const isSequela = sequelaKeywords.some(kw => conditionNormalized.includes(kw));
+            
+            // 🆕 Lésions TRAUMATIQUES RÉCENTES (rupture, fracture, déchirure suite à accident)
+            const isTraumaticLesion = /\b(rupture|fracture|dechirure|lesion|trauma|plaie|section|entorse|luxation)\s+(partielle?|complete?|totale?)?\s+(du|de\s+la|des)\s+(tendon|ligament|muscle|coiffe|menisque|os)/i.test(condition);
+            
+            // 🆕 Si lésion traumatique mentionnée avec "mis en évidence", "IRM", "examens" → c'est la lésion NOUVELLE
+            const textContext = text.substring(Math.max(0, match.index - 100), Math.min(text.length, match.index + match[0].length + 100));
+            const isNewDiagnosis = /(?:mis\s+en\s+évidence|révélé|objectivé|constaté|IRM|imagerie)/i.test(textContext) && isTraumaticLesion;
             
             // 🆕 Si lésion primaire présente ET symptôme proche, c'est probablement une séquelle
             const isLikelySequela = primaryLesionPresent && (
                 conditionNormalized.includes('douleur') ||
                 conditionNormalized.includes('raideur') ||
-                conditionNormalized.includes('limitation') ||
-                conditionNormalized.includes('gene') ||
-                conditionNormalized.includes('gonalgie') ||
-                conditionNormalized.includes('coxalgie') ||
-                conditionNormalized.includes('lombalgie') ||
-                conditionNormalized.includes('cervicalgie') ||
-                conditionNormalized.includes('instabilite') ||
-                conditionNormalized.includes('laxite') ||
-                conditionNormalized.includes('boiterie')
+                conditionNormalized.includes('limitation')
             );
             
-            // Ajouter UNIQUEMENT si ce n'est PAS une séquelle
-            if (condition.length > 5 && !isSequela && !isLikelySequela) {
+            // Ajouter UNIQUEMENT si c'est un VRAI antécédent
+            if (condition.length > 10 && !isSequela && !isLikelySequela && !isNewDiagnosis) {
                 preexisting.push(condition);
-                cleanedText = cleanedText.replace(match[0], '').trim();
+                alreadyAdded.add(conditionNormalized);
+                cleanedText = cleanedText.replace(match[0], ' ').trim(); // Remplacer par espace, pas vide
+                console.log(`✅ Antécédent détecté: ${condition}`);
+            } else if (isNewDiagnosis) {
+                console.log(`⚠️ Lésion NOUVELLE ignorée des antécédents: ${condition}`);
             }
         }
     }
@@ -7099,6 +7434,8 @@ const extractPreexistingConditions = (text: string): { preexisting: string[]; cl
         .replace(/\s*[;,]\s*/g, ' ')
         .replace(/\s+/g, ' ')
         .trim();
+
+    console.log(`📋 Antécédents extraits (${preexisting.length}):`, preexisting);
 
     return { preexisting, cleanedText };
 };
@@ -7221,6 +7558,21 @@ export const detectMultipleLesions = (text: string): {
 } => {
     const normalized = normalize(text);
     
+    // 🆕 V3.3.116: EXCEPTION BASSIN+SCIATIQUE - Retour anticipé pour forcer analyse globale
+    // Ce cas doit être traité comme une seule lésion complexe par la règle experte (priorité 1020)
+    const isBassinSciatique = /bassin.*fracture|fracture.*bassin|fracture.*complexe.*bassin/i.test(normalized) && 
+                              /sciatique|nerf.*sciatique|steppage|deficit.*moteur.*pied/i.test(normalized);
+    
+    if (isBassinSciatique) {
+        return {
+            isCumul: false,  // NE PAS splitter le texte
+            lesionCount: 1,  // Traiter comme une seule lésion complexe
+            keywords: [],
+            hasAnteriorState: false,
+            anteriorIPP: null
+        };
+    }
+    
     // 1. Keywords explicites de cumul - TRÈS RESTRICTIF
     const cumulKeywords = [
         'polytraumatisme', 'plusieurs lesions', 'sequelles multiples',
@@ -7245,7 +7597,7 @@ export const detectMultipleLesions = (text: string): {
     const parts = text.split(/\s\+\s/);
     const anatomicalKeywords = [
         'genou', 'cheville', 'epaule', 'coude', 'poignet', 'hanche',
-        'rachis', 'bassin', 'main', 'pied'
+        'rachis', 'bassin', 'main', 'pied', 'cervical', 'cervicale', 'cou'
     ];
     
     let distinctRegions = 0;
@@ -7261,6 +7613,15 @@ export const detectMultipleLesions = (text: string): {
             }
         }
     }
+    
+    // 🆕 4B. Détection RÉGIONS ANATOMIQUES MULTIPLES dans tout le texte (pas seulement avec "+")
+    const allRegionsInText = new Set<string>();
+    for (const kw of anatomicalKeywords) {
+        if (normalized.includes(kw)) {
+            allRegionsInText.add(kw);
+        }
+    }
+    const totalRegionsCount = allRegionsInText.size;
     
     // 🆕 5. Détection FRACTURES MULTIPLES sur le même os (ex: "fracture trochanter et diaphyse fémorale")
     const multipleFracturesSameBone = /fracture.*(?:et|,).*fracture|(?:trochanter|col|diaphyse|pilon|plateau).*(?:et|,).*(?:diaphyse|pilon|plateau|trochanter|col)/i.test(normalized);
@@ -7280,10 +7641,28 @@ export const detectMultipleLesions = (text: string): {
     if (/luxation/i.test(normalized)) lesionTypes.push('luxation');
     if (/pseudarthrose/i.test(normalized)) lesionTypes.push('pseudarthrose');
     if (/amputation|perte.*(?:phalange|doigt|orteil)/i.test(normalized)) lesionTypes.push('amputation');
+    if (/dechirure/i.test(normalized)) lesionTypes.push('dechirure');
+    if (/elongation/i.test(normalized)) lesionTypes.push('elongation');
+    if (/traumatisme.*cervical|coup.*lapin|whiplash/i.test(normalized) && /fracture.*(?:poignet|radius|humerus|femur|tibia)/i.test(normalized)) {
+        // Traumatisme cervical + fracture osseuse = 2 lésions distinctes
+        lesionTypes.push('traumatisme_rachis');
+    }
     if (/lesion/i.test(normalized) && !/fracture|rupture|luxation/i.test(normalized)) lesionTypes.push('lesion');
     const hasMultipleLesionTypes = lesionTypes.length >= 2;
     
-    // 6. Critères de cumul TRÈS STRICTS (éviter faux positifs)
+    // 🆕 V3.3.120: Détection intelligente de lésions OS + LIGAMENT + MUSCLE (traumatologie)
+    const hasOsLesion = /fracture/i.test(normalized);
+    const hasLigamentLesion = /(?:dechirure|lesion|rupture).*ligament|ligament.*(?:dechirure|lesion|rupture)/i.test(normalized);
+    const hasMuscleLesion = /(?:elongation|dechirure|rupture).*muscle|muscle.*(?:elongation|dechirure|rupture)|elongation.*quadriceps|quadriceps.*elongation/i.test(normalized);
+    const hasTripleLesion = hasOsLesion && hasLigamentLesion && hasMuscleLesion;
+    const hasDoubleLesion = (hasOsLesion && hasLigamentLesion) || (hasOsLesion && hasMuscleLesion) || (hasLigamentLesion && hasMuscleLesion);
+    
+    // 🆕 V3.3.120: Détection confusion "tiers distal tibia" ≠ "plateau tibial"
+    const hasTiersDistalTibia = /tiers.*(?:distal|inferieur).*tibia|tibia.*(?:distal|inferieur)/i.test(normalized);
+    const hasPlateauTibial = /plateau.*tibial|fracture.*plateau/i.test(normalized);
+    // Si "tiers distal" mentionné, forcer l'analyse à chercher "jambe" pas "genou"
+    
+    // 6. Critères de cumul AMÉLIORÉS (détecte narratif médical naturel)
     const isCumul = 
         foundKeywords.length > 0 ||  // Keywords TRÈS explicites type "polytraumatisme"
         plusCount >= 3 ||             // Au moins 3 séparateurs "+" (ex: "A + B + C + D")
@@ -7291,16 +7670,21 @@ export const detectMultipleLesions = (text: string): {
         hasBoneAndNerve ||            // Lésion osseuse + atteinte nerveuse (pattern traumatologique)
         multipleFracturesSameBone ||  // Plusieurs fractures sur le même os (ex: trochanter + diaphyse ou trochanter, diaphyse)
         hasPseudarthroseAndAmputation ||  // Pseudarthrose + amputation phalange (lésions distinctes)
-        (multipleLesionsWithConnectors && hasMultipleLesionTypes);  // "avec"/"et" + types différents (fracture + rupture)
+        (multipleLesionsWithConnectors && hasMultipleLesionTypes) ||  // "avec"/"et" + types différents (fracture + rupture)
+        totalRegionsCount >= 2 ||      // 🆕 2+ régions anatomiques distinctes dans TOUT le texte (narratif naturel)
+        hasTripleLesion ||             // 🆕 Os + ligament + muscle = 3 lésions distinctes
+        (hasDoubleLesion && totalRegionsCount >= 1);  // 🆕 2 types de lésions + au moins 1 région = cumul probable
     
     // Estimation nombre de lésions
     const lesionCount = Math.max(
         plusCount + 1,
         distinctRegions,
+        totalRegionsCount,             // 🆕 Nombre total de régions = estimation minimale du nombre de lésions
         hasBoneAndNerve ? 2 : 1,      // Si os + nerf, au moins 2 lésions
         hasAnteriorState ? 2 : 1,
         multipleFracturesSameBone ? 2 : 1,  // Au moins 2 fractures si pattern détecté
-        lesionTypes.length  // Nombre de types de lésions différents
+        lesionTypes.length,  // Nombre de types de lésions différents
+        hasTripleLesion ? 3 : (hasDoubleLesion ? 2 : 1)  // 🆕 Compter os+ligament+muscle
     );
     
     return {
@@ -7313,12 +7697,48 @@ export const detectMultipleLesions = (text: string): {
 };
 
 /**
- * 🆕 V3.3.52: Extraction des lésions individuelles à partir d'une description de cumul
- * Décompose "fracture trochanter et diaphyse fémorale" en ["fracture trochanter fémur", "fracture diaphyse fémur"]
+ * 🆕 V3.3.120: Extraction des lésions individuelles à partir d'une description de cumul (AMÉLIORÉ)
+ * Décompose narratif médical naturel en lésions séparées
+ * Ex1: "fracture poignet droit ainsi qu'un traumatisme cervical" → ["fracture poignet droit", "traumatisme cervical"]
+ * Ex2: "fracture tibia associée à déchirure ligament et élongation quadriceps" → 3 lésions
  */
 const extractIndividualLesions = (text: string): string[] => {
     const normalized = normalize(text);
     const lesions: string[] = [];
+    
+    console.log('🔍 extractIndividualLesions - texte d\'entrée:', text);
+    
+    // Pattern 0: Traumatisme cervical + fracture autre région (CAS 1)
+    // Ex: "fracture du poignet droit ainsi qu'un traumatisme cervical"
+    const cervicalFracturePattern = /(?:fracture.*(?:poignet|radius|humerus|femur|tibia|clavicule|scaphoide)).*?(?:ainsi\s+qu['\']un?|associee?\s+a|avec).*?traumatisme\s+cervical/i;
+    const fractureFromCervical = normalized.match(/fracture.*?(?:poignet|radius|humerus|femur|tibia|clavicule|scaphoide).*?(?=ainsi|associee|avec)/i);
+    const cervicalFromFracture = normalized.match(/(?:ainsi\s+qu['\']un?|associee?\s+a|avec).*?(traumatisme\s+cervical|cervicalgie|whiplash|coup\s+du\s+lapin).*?(?:douleurs?|persistant|chronique)?/i);
+    
+    if (cervicalFracturePattern.test(normalized) || (fractureFromCervical && cervicalFromFracture)) {
+        if (fractureFromCervical) {
+            lesions.push(fractureFromCervical[0].trim());
+        }
+        if (cervicalFromFracture) {
+            lesions.push(cervicalFromFracture[1].trim());
+        }
+        console.log('✅ Pattern 0 (cervical+fracture) détecté:', lesions);
+        if (lesions.length >= 2) return lesions;
+    }
+    
+    // Pattern 0B: Fracture + déchirure ligament + élongation muscle (CAS 2)
+    // Ex: "fracture tibia associée à déchirure ligament collatéral ainsi qu'une élongation quadriceps"
+    const multiTraumaPattern = /fracture.*?(?:tibia|femur|humerus).*?(?:associee?|avec).*?(?:dechirure|lesion).*?ligament.*?(?:ainsi|et|avec).*?elongation.*?(?:quadriceps|muscle)/i;
+    const fractureMatch = normalized.match(/fracture.*?(?:tibia|femur|humerus).*?(?=associee|avec)/i);
+    const ligamentMatch = normalized.match(/(?:dechirure|lesion).*?ligament.*?(?:collateral|croise|lateral).*?(?:genou|coude)?/i);
+    const muscleMatch = normalized.match(/elongation.*?(?:quadriceps|triceps|biceps|muscle)/i);
+    
+    if (multiTraumaPattern.test(normalized) || (fractureMatch && ligamentMatch && muscleMatch)) {
+        if (fractureMatch) lesions.push(fractureMatch[0].trim());
+        if (ligamentMatch) lesions.push(ligamentMatch[0].trim());
+        if (muscleMatch) lesions.push(muscleMatch[0].trim());
+        console.log('✅ Pattern 0B (os+ligament+muscle) détecté:', lesions);
+        if (lesions.length >= 2) return lesions;
+    }
     
     // Pattern 1: Fractures multiples sur même os (trochanter et diaphyse)
     const sameBonePattern = /fracture.*?(trochanter|col|diaphyse|pilon|plateau|condyle|epicondyle).*?(?:et|,).*?(trochanter|col|diaphyse|pilon|plateau|condyle|epicondyle)/i;
@@ -7333,12 +7753,14 @@ const extractIndividualLesions = (text: string): string[] => {
         
         lesions.push(`fracture ${part1} ${boneContext}`.trim());
         lesions.push(`fracture ${part2} ${boneContext}`.trim());
+        console.log('✅ Pattern 1 (même os) détecté:', lesions);
         return lesions;
     }
     
     // Pattern 2: Séparation par "+" (ex: "fracture humérus + entorse genou")
     if (normalized.includes(' + ')) {
         const parts = normalized.split(/\s*\+\s*/);
+        console.log('✅ Pattern 2 (séparateur +) détecté:', parts);
         return parts.filter(p => p.length > 5);
     }
     
@@ -7346,6 +7768,7 @@ const extractIndividualLesions = (text: string): string[] => {
     const twoFracturesPattern = /fracture.*?(?:et|,)\s*fracture/i;
     if (twoFracturesPattern.test(normalized)) {
         const parts = normalized.split(/\s*(?:et|,)\s*(?=fracture)/i);
+        console.log('✅ Pattern 3 (2 fractures) détecté:', parts);
         return parts.filter(p => p.length > 5);
     }
     
@@ -7356,6 +7779,7 @@ const extractIndividualLesions = (text: string): string[] => {
         const nervePart = normalized.match(/(?:paralysie|atteinte).*?(?:nerf\s+)?(\w+)/i);
         lesions.push(bonePart.trim());
         if (nervePart) lesions.push(`paralysie ${nervePart[1]}`.trim());
+        console.log('✅ Pattern 4 (os+nerf) détecté:', lesions);
         return lesions;
     }
     
@@ -7366,6 +7790,7 @@ const extractIndividualLesions = (text: string): string[] => {
         const parts = normalized.split(/\s*(?:avec|et)\s*/i);
         const filteredParts = parts.filter(p => p.length > 5 && /fracture|luxation|rupture|lesion/i.test(p));
         if (filteredParts.length >= 2) {
+            console.log('✅ Pattern 5 (lésions mixtes) détecté:', filteredParts);
             return filteredParts;
         }
     }
@@ -7380,6 +7805,7 @@ const extractIndividualLesions = (text: string): string[] => {
         if (olecranePart && amputationPart) {
             lesions.push(olecranePart.trim());
             lesions.push(amputationPart.trim());
+            console.log('✅ Pattern 5B (olécrane+amputation) détecté:', lesions);
             return lesions;
         }
     }
@@ -7393,11 +7819,13 @@ const extractIndividualLesions = (text: string): string[] => {
         if (pseudarthrosePart && amputationPart) {
             lesions.push(pseudarthrosePart.trim());
             lesions.push(amputationPart.trim());
+            console.log('✅ Pattern 6 (pseudarthrose+amputation) détecté:', lesions);
             return lesions;
         }
     }
     
     // Si aucun pattern détecté, retourner le texte original
+    console.log('⚠️ Aucun pattern de cumul détecté, retour texte original');
     return [normalized];
 };
 
@@ -7465,6 +7893,18 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
             
             // Si aucune correspondance exacte, continuer avec l'analyse normale
             console.log('⚠️ Aucune correspondance exacte, analyse normale...');
+        }
+    }
+    
+    // 🆕 ÉTAPE 0A-PRE: Détection cumul SPÉCIFIQUE bassin+sciatique (V3.3.114)
+    // Doit se faire AVANT la détection générale pour éviter division du texte
+    const hasBassinFracture = /fracture.*bassin|bassin.*fracture/i.test(text);
+    const hasSciaticNerve = /sciatique|nerf.*sciatique|steppage|d[eé]ficit.*moteur.*pied|paralysie.*pied/i.test(text);
+    if (hasBassinFracture && hasSciaticNerve) {
+        // Appeler directement comprehensiveSingleLesionAnalysis qui appliquera la règle experte
+        const result = comprehensiveSingleLesionAnalysis(text);
+        if (result.type === 'proposal') {
+            return result;
         }
     }
     

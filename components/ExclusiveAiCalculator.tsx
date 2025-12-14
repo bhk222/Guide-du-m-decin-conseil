@@ -429,11 +429,19 @@ export const ExclusiveAiCalculator: React.FC<ExclusiveAiCalculatorProps> = ({
             return;
         }
         
+        // 🆕 V3.3.116: EXCEPTION bassin+sciatique - NE PAS splitter sur "+"
+        const normalized = textToSend.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+        const isBassinSciatique = /bassin.*fracture|fracture.*bassin|fracture.*complexe.*bassin/i.test(normalized) && 
+                                  /sciatique|nerf.*sciatique|steppage|deficit.*moteur.*pied/i.test(normalized);
+        
         // Filtrer les segments non-médicaux (profession, contexte) et états antérieurs
         const contextKeywords = /\b(profession|de profession|travaille?\s+comme|femme de menage|ouvrier|agriculteur|maçon|chauffeur|infirmier|enseignant|médecin|ingénieur|comptable|secrétaire|électricien|plombier|soudeur|peintre|menuisier|patient|patiente|homme|femme|âge|agé|agée)\b/i;
         const preexistingKeywords = /\b(état\s+antérieur|antécédent|ancien|préexistant|pré-existant|déjà\s+indemnisé|indemnisation\s+antérieure|taux\s+antérieur)\b/i;
         
-        const initialDescriptions = textToSend.split(/;|\s*\+\s*/i).map(s => s.trim()).filter(Boolean);
+        // Si bassin+sciatique, ne PAS splitter sur "+" (traiter comme une seule lésion complexe)
+        const initialDescriptions = isBassinSciatique 
+            ? [textToSend]  // Ne pas splitter
+            : textToSend.split(/;|\s*\+\s*/i).map(s => s.trim()).filter(Boolean);
         
         // Filtrer les segments pour ne garder que les vraies lésions post-traumatiques
         const medicalDescriptions = initialDescriptions.filter(desc => {

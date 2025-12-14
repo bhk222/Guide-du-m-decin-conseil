@@ -5,8 +5,11 @@ const DATA_CACHE_NAME = 'guide-medecin-conseil-data-v2-corrections-phase20';
 const STATIC_CACHE_URLS = [
   '/',
   '/index.html',
-  '/manifest.json',
+  '/manifest.webmanifest',
   '/metadata.json',
+  '/icons/icon-192x192.png',
+  '/icons/icon-512x512.png',
+  '/icons/apple-touch-icon.png'
 ];
 
 // Installation du Service Worker

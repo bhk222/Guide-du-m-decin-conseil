@@ -1,0 +1,54 @@
+{
+  "short_name": "Guide Médecin",
+  "name": "Guide du Médecin Conseil - AT/MP CNAS",
+  "description": "Application experte pour les médecins conseil CNAS : Calculateur IPP intelligent, Guide législation AT/MP, Base maladies professionnelles, Dictionnaire médicaments, Appareillage CNAS. Mode hors-ligne disponible.",
+  "icons": [
+    {
+      "src": "/icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ],
+  "start_url": "/?source=pwa",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "theme_color": "#0d1a38",
+  "background_color": "#0d1a38",
+  "categories": ["medical", "health", "productivity", "utilities", "education"],
+  "lang": "fr-DZ",
+  "dir": "ltr",
+  "prefer_related_applications": false,
+  "related_applications": [],
+  "display_override": ["window-controls-overlay", "standalone", "minimal-ui"],
+  "shortcuts": [
+    {
+      "name": "Calculateur IPP",
+      "short_name": "Calculateur",
+      "description": "Accéder directement au calculateur d'IPP",
+      "url": "/",
+      "icons": [{ "src": "/icons/icon-192x192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Outils",
+      "short_name": "Outils",
+      "description": "Accéder aux outils médicaux",
+      "url": "/?page=tools",
+      "icons": [{ "src": "/icons/icon-192x192.png", "sizes": "192x192" }]
+    }
+  ],
+  "screenshots": []
+}
