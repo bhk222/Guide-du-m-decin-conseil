@@ -7363,8 +7363,8 @@ const extractPreexistingConditions = (text: string): { preexisting: string[]; cl
 
     // 🆕 V3.3.121: Patterns enrichis pour détecter antécédents médicaux
     const preexistingPatterns = [
-        // 🆕 PATTERN PRINCIPAL : "Il présente des antécédents médicaux connus de X, diagnostiquée Y ans auparavant, ayant donné lieu à..."
-        /\b(?:présente|présentait)\s+des\s+antécédents\s+médicaux\s+connus\s+de\s+([^.]+?),?\s+diagnostiquée?\s+(?:il\s+y\s+a\s+)?(\d+)\s+ans?\s+auparavant,?\s+ayant\s+donné\s+lieu\s+à\s+[^.]+?(?:sans\s+arrêt\s+de\s+travail[^.]*?|sans\s+IPP[^.]*?)(?:\.|L'événement)/gi,
+        // 🆕 PATTERN PRINCIPAL : "Il présente des antécédents médicaux connus de X, diagnostiquée Y ans auparavant"
+        /\b(?:présente|présentait)\s+des\s+antécédents\s+médicaux\s+connus\s+de\s+([^,]+?),\s+diagnostiquée?\s+(?:il\s+y\s+a\s+)?(\d+)\s+ans?\s+auparavant/gi,
         
         // Formulations explicites d'état antérieur
         /\b(?:état\s+antérieur|antécédent(?:s)?\s+médicaux?|état\s+ancien)\s*:?\s*([^;.]+?)(?:[;.]|L'événement|qui\s+présente|$)/gi,
