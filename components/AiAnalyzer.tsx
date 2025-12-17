@@ -10,6 +10,8 @@ export interface LocalProposal {
   path: string;
   injury: Injury;
   isCumul?: boolean;  // 🆕 Flag pour indiquer si un cumul de lésions est détecté
+  antecedents?: string[];  // 🆕 V3.3.123: Antécédents médicaux détectés
+  description?: string;  // 🆕 Description de la lésion
 }
 
 export interface NoResult {
@@ -4040,6 +4042,11 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
     const workingText = processedText;
     let normalizedInputText = normalize(workingText);
 
+    // 🆕 V3.3.123: EXTRACTION PRÉCOCE DES ANTÉCÉDENTS
+    // Extraire AVANT toute analyse pour garantir la disponibilité dans tous les chemins de retour
+    const { preexisting: preexistingEarly, cleanedText: workingTextCleaned } = extractPreexistingConditions(workingText);
+    console.log(`🔍 [EARLY] Antécédents détectés: ${preexistingEarly.length} - ${preexistingEarly.join(', ')}`);
+
     // 🔊 LOGIQUE AUDITION SPÉCIALISÉE (avant expert rules)
     const auditionMatch = /surdit[eé]|acouph[eè]nes?|oreille|audition|entend|db|d[eé]cibels?/i.test(workingText);
     if (auditionMatch) {
@@ -6680,7 +6687,8 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
                     justification: finalJustification,
                     path: directMatch.path,
                     injury: directMatch as Injury,
-                    isCumul: cumulCheck.isCumul  // Ajouter flag cumul
+                    isCumul: cumulCheck.isCumul,  // Ajouter flag cumul
+                antecedents: preexistingEarly  // 🆕 V3.3.123: Antécédents détectés
                 };
             }
         }
@@ -7907,12 +7915,12 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
         const normalizedSearchText = normalize(text);
         
         // Vérification sécurité
-        if (!disabilityData || !disabilityData.categories || !Array.isArray(disabilityData.categories)) {
-            console.error('❌ disabilityData.categories invalide:', disabilityData);
+        if (!disabilityData || !Array.isArray(disabilityData)) {
+            console.error('❌ disabilityData invalide:', disabilityData);
             // Continuer avec analyse normale
         } else {
             // Parcourir toutes les catégories pour trouver une correspondance exacte
-            for (const category of disabilityData.categories) {
+            for (const category of disabilityData) {
                 for (const subcategory of category.subcategories) {
                     for (const injury of subcategory.injuries) {
                         const normalizedInjuryName = normalize(injury.name);
