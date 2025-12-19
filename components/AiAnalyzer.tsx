@@ -4395,8 +4395,8 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
         
         // === RÈGLE SPÉCIALE: CONSOLIDATION SANS SÉQUELLE = 0% IPP ===
         {
-            pattern: /(?:fracture|arrachement|luxation|entorse|traumatisme|lesion).*(?:sans|consolidé|traité)/i,
-            context: /(?:sans|pas\s+de?|aucune?)\s+s[eé]quelles?/i,  // Détecte "sans séquelles", "pas de séquelles", "aucune séquelle"
+            pattern: /(?:fracture|arrachement|luxation|entorse|traumatisme|lesion|trauma)/i,  // Détecte simplement un traumatisme
+            context: /(?:sans|pas\s+d[e']?|aucune?)\s*s[eé]quelles?/i,  // ET "pas de séquelles" n'importe où
             searchTerms: ["__SANS_SEQUELLE__"],  // Marqueur spécial
             priority: 10000  // Priorité maximale absolue
         },
