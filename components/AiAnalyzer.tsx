@@ -5490,16 +5490,17 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             priority: 999,  // Augmenté à 999 pour priorité maximale
             negativeContext: /pied\s+plat|effondrement|voute.*plantaire/i  // Exclure pied plat
         },
-        // === RÈGLES ORTEILS - AUTO-SÉLECTION GROS ORTEIL VS AUTRES (V3.3.124) ===
+        // === RÈGLES ORTEILS - AUTO-SÉLECTION GROS ORTEIL VS AUTRES (V3.3.124.5) ===
         {
-            pattern: /fracture.*(?:phalange|p[1-3]).*(?:gros\s+orteil|hallux|o1|orteil\s+1)/i,
+            pattern: /fracture.*(?:phalange|p[1-3]).*(?:gros\s+orteil|hallux|\bo1\b|orteil\s+1)/i,
             context: /pied|orteil|raideur|consolid/i,
             searchTerms: ['Fracture consolidée phalange gros orteil avec raideur'],
             priority: 999
         },
         {
-            pattern: /fracture.*(?:phalange|p[1-3]).*(?:deuxi[eè]me|troisi[eè]me|quatri[eè]me|cinqui[eè]me|o[2-5]|orteil\s+[2-5]|2[eè]me|3[eè]me|4[eè]me|5[eè]me).*orteil/i,
-            context: /pied|orteil|raideur|consolid/i,
+            // 🔧 V3.3.124.5: Accepte "p1 o4" sans le mot "orteil" à la fin
+            pattern: /fracture.*(?:phalange|p[1-3]).*(?:deuxi[eè]me|troisi[eè]me|quatri[eè]me|cinqui[eè]me|\bo[2-5]\b|orteil\s+[2-5]|[2-5][eè]me)/i,
+            context: /pied|orteil|raideur|consolid|o[2-5]/i,  // Context élargi: accepte "o2", "o3", "o4", "o5"
             searchTerms: ['Fracture consolidée phalange autre orteil avec raideur'],
             priority: 999
         },
