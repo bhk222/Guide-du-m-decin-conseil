@@ -577,6 +577,9 @@ const preprocessMedicalText = (text: string): string => {
         .replace(/\s+/g, ' ')
         .trim();
     
+    // 🆕 V3.3.124: Normaliser nombres ordinaux avec espaces/tirets (ex: "5 -ème" → "5ème")
+    processed = processed.replace(/(\d+)\s*[-–—]\s*([eè]me)/gi, '$1$2');
+    
     return processed;
 };
 
@@ -5476,10 +5479,11 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
         },
         // === RÈGLES PIED ET MÉTATARSIENS (V3.3.124) ===
         {
-            pattern: /(?:fracture|arrachement).*(?:5.*eme|cinquieme|5eme|styloide).*metatars/i,
-            context: /pied|base|arrachement|douleur.*marche|douleur/i,
+            pattern: /(?:fracture|arrachement).*(?:5[\s\-]*[eè]?me|cinquieme|styloide).*m[eé]tatars/i,
+            context: /pied|base|arrachement|douleur|marche/i,
             searchTerms: ['Fracture des métatarsiens - Avec douleurs à la marche'],
-            priority: 998
+            priority: 999,  // Augmenté à 999 pour priorité maximale
+            negativeContext: /pied\s+plat|effondrement|voute.*plantaire/i  // Exclure pied plat
         },
         // === RÈGLES ORTEILS - AUTO-SÉLECTION GROS ORTEIL VS AUTRES (V3.3.124) ===
         {
