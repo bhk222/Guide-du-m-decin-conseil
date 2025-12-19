@@ -122,6 +122,10 @@ const preprocessMedicalText = (text: string): string => {
     
     // 0. ABRÉVIATIONS MÉDICALES PROFESSIONNELLES (pour médecins)
     const medicalAbbreviations: [RegExp, string | ((substring: string, ...args: any[]) => string)][] = [
+        // 🆕 V3.3.124.4: Séparer abréviations collées (ex: "p1o4" → "p1 o4", "d2p1" → "d2 p1")
+        [/\b([pP])([1-3])([oO])([1-5])\b/gi, '$1$2 $3$4'],  // p1o4 → p1 o4
+        [/\b([dD])([1-5])([pP])([1-3])\b/gi, '$1$2 $3$4'],  // d2p1 → d2 p1
+        
         // === CONTEXTE ACCIDENT ===
         [/\bat\b/gi, 'accident de travail '],
         [/\bavp\b/gi, 'accident de la voie publique '],
