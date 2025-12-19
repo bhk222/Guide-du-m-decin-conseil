@@ -248,6 +248,7 @@ const preprocessMedicalText = (text: string): string => {
         
         // 🆕 V3.3.124: Correction fautes orthographe courantes
         [/\brattachement\b/gi, 'arrachement '],  // Faute fréquente: rattachement → arrachement
+        [/\bsequelles?\b/gi, 'séquelles '],  // Correction: sequelles → séquelles
         
         // === MOBILITÉ ===
         [/\bflex\b(?!\s*$)/gi, 'flexion '],
@@ -4394,8 +4395,8 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
         
         // === RÈGLE SPÉCIALE: CONSOLIDATION SANS SÉQUELLE = 0% IPP ===
         {
-            pattern: /fracture.*(?:sans|consolidé)|consolidé.*fracture/i,  // Ajouté "sans" pour détecter "fracture...sans séquelle"
-            context: /sans.*s[eé]quelle/i,
+            pattern: /(?:fracture|arrachement|luxation|entorse|traumatisme|lesion).*(?:sans|consolidé|traité)/i,
+            context: /(?:sans|pas\s+de?|aucune?)\s+s[eé]quelles?/i,  // Détecte "sans séquelles", "pas de séquelles", "aucune séquelle"
             searchTerms: ["__SANS_SEQUELLE__"],  // Marqueur spécial
             priority: 10000  // Priorité maximale absolue
         },
