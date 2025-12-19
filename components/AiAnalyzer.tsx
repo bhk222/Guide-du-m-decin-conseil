@@ -142,6 +142,11 @@ const preprocessMedicalText = (text: string): string => {
             const orteils = ['', 'hallux', 'deuxième orteil', 'troisième orteil', 'quatrième orteil', 'cinquième orteil'];
             return `${o.toLowerCase() === 'o' ? 'orteil' : 'Orteil'} ${orteils[parseInt(num)]} `;
         }],
+        // 🆕 V3.3.124: Détecter "o[1-5]" même si après "fracture" (ex: "fracture p1 o4")
+        [/(?:fracture|amputation|lesion|trauma|ecrasement|arrachement|consolidation|sequelle|raideur|ankylose).*?\b([oO])([1-5])\b/gi, (match, o, num) => {
+            const orteils = ['', 'hallux', 'deuxième orteil', 'troisième orteil', 'quatrième orteil', 'cinquième orteil'];
+            return match.replace(/\b[oO][1-5]\b/, `orteil ${orteils[parseInt(num)]}`);
+        }],
         [/(?:fracture|amputation|lesion|trauma|ecrasement|arrachement|consolidation|sequelle|raideur|ankylose)\s+(?:de\s+)?(?:la\s+)?p([1-3])\s+([oO])([1-5])\b/gi, (match, phalange, o, num) => {
             const orteils = ['', 'hallux', 'deuxième orteil', 'troisième orteil', 'quatrième orteil', 'cinquième orteil'];
             const phalanges = { '1': 'première phalange', '2': 'deuxième phalange', '3': 'troisième phalange' };
@@ -240,6 +245,9 @@ const preprocessMedicalText = (text: string): string => {
         [/\bpseudart\b/gi, 'pseudarthrose '],
         [/\bs[eé]quelle\s+douleureuse/gi, 'raideur avec douleur '],
         [/\bs[eé]quelles\s+douloureuses/gi, 'raideur avec douleur '],
+        
+        // 🆕 V3.3.124: Correction fautes orthographe courantes
+        [/\brattachement\b/gi, 'arrachement '],  // Faute fréquente: rattachement → arrachement
         
         // === MOBILITÉ ===
         [/\bflex\b(?!\s*$)/gi, 'flexion '],
@@ -1298,6 +1306,13 @@ const getBonesFromString = (normalizedText: string): Set<string> => {
         if (faceAnatomicalContext.test(normalizedText)) {
             foundBones.delete('face');
         }
+        
+        // 🆕 V3.3.124: Exclure "face" si détecté via "dent" dans un mot plus long (ex: pertrochantérienne)
+        // Vérifier si "dent" apparaît comme sous-chaîne dans un mot anatomique (trochanter, pertrochanterienne, etc.)
+        if (!/\bdent(?:s|aire)?\b/.test(normalizedText) && 
+            !/\bmaxillaire\b|\bmandibule\b|\bmalaire\b|\bzygomatique\b|\borbite\b/i.test(normalizedText)) {
+            foundBones.delete('face');
+        }
     }
     
     // Special cases for "deux os" (support different number formats)
@@ -1472,7 +1487,7 @@ const keywordWeights: { [key: string]: number } = {
 
 const bonePartKeywords: { [key: string]: string[] } = {
     humerus: ['col chirurgical', 'tete humerale', 'trochiter', 'trochin', 'palette humerale', 'diaphyse'],
-    femur: ['col femoral', 'diaphyse femorale', 'condyle femoral', 'massif trochanterien', 'extremite inferieure'],
+    femur: ['col femoral', 'diaphyse femorale', 'condyle femoral', 'massif trochanterien', 'pertrochant', 'pertrochanter', 'pertrochanterien', 'pertrochanterienne', 'extremite inferieure'],
     tibia: ['plateau tibial', 'pilon tibial', 'epines tibiales', 'malleole interne', 'diaphyse'],
     radius: ['tete radiale', 'styloide radiale', 'extremite inferieure', 'diaphyse', 'isolee'],
     ulna: ['olecrane', 'coronoide', 'styloide cubitale', 'diaphyse', 'isolee'],
@@ -2548,10 +2563,31 @@ const determineSeverity = (
     // 🦴 V3.3.98: CRITÈRE SPÉCIFIQUE FRACTURE COTYLE - Appui mono-podal instable
     const hasCotyleFracture = /fracture.*cotyle|cotyle.*fracture/i.test(normalizedText);
     const hasAMPInstable = /amp.*instable|appui.*mono[\s-]?podal.*instable|appui.*unipodal.*instable/i.test(normalizedText);
-    const hasLimitationHanche = /limitation.*(?:hanche|coxo[\s-]?f[eé]morale)|mouvement.*hanche.*limit[eé]|mobilit[eé].*hanche.*(?:limit[eé]e|r[eé]duite)/i.test(normalizedText);
-    const hasAccroupissementDifficile = /accroupissement.*difficile|rel[eè]vement.*difficile|difficult[eé].*(?:s.accroupir|se\s+relever)/i.test(normalizedText);
+    const hasLimitationHanche = /limitation.*(?:hanche|coxo[\s-]?f[eé]morale)|mouvement.*hanche.*limit[eé]|mobilit[eé].*hanche.*(?:limit[eé]e|r[eé]duite)|(?:abduction|adduction|rotation).*limit[eé]|limit[eé].*(?:abduction|adduction|rotation)/i.test(normalizedText);
+    const hasAccroupissementDifficile = /accroupissement.*(?:difficile|douloureux|impossible)|rel[eè]vement.*difficile|difficult[eé].*(?:s.accroupir|se\s+relever)/i.test(normalizedText);
+    const hasAmyotrophie = /amyotrophie|atrophie.*(?:quadriceps|musculaire|cuisse)/i.test(normalizedText);
     const hasBoiterieLegere = /boiterie\s+(?:l[eé]g[eè]re|mod[eé]r[eé]e|discrète)|l[eé]g[eè]re\s+boiterie/i.test(normalizedText);
     const hasBoiterieMajeure = /boiterie\s+(?:importante|s[eé]v[eè]re|marqu[eé]e|permanente)|impossibilit[eé].*marche|quasi[\s-]?impotence/i.test(normalizedText);
+    
+    // COTYLE + SÉQUELLES FONCTIONNELLES MULTIPLES (V3.3.122)
+    // Limitations multiples (abduction+adduction+rotation) + amyotrophie → MOYEN/ÉLEVÉ
+    if (hasCotyleFracture && hasLimitationHanche) {
+        const multipleLimitations = (normalizedText.match(/(?:abduction|adduction|rotation.*externe|rotation.*interne).*limit[eé]/gi) || []).length >= 2;
+        
+        // Si limitations multiples + amyotrophie + accroupissement douloureux → MOYEN-HAUT
+        if (multipleLimitations && hasAmyotrophie && hasAccroupissementDifficile) {
+            return {
+                level: 'moyen',
+                signs: [
+                    '🦴 Fracture cotyle avec séquelles articulaires',
+                    'Limitations multiples (abduction, adduction, rotations)',
+                    'Amyotrophie quadriceps',
+                    'Accroupissement douloureux/difficile'
+                ],
+                isDefault: false
+            };
+        }
+    }
     
     // COTYLE + AMP INSTABLE + LIMITATION MOBILITÉ → MOYEN (38%)
     if (hasCotyleFracture && hasAMPInstable && hasLimitationHanche) {
@@ -4863,6 +4899,22 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             searchTerms: ['Raideur du coude - Flexion 90-130° + extension'],
             priority: 99
         },
+        // === RÈGLE FRACTURE CONDYLE EXTERNE + LUXATION ULNA (COUDE) - V3.3.121 ===
+        {
+            pattern: /fracture.*(?:condyle|epicondyle).*(?:externe|lateral).*(?:luxation|fracture).*(?:ulna|ulma|cubitus)|luxation.*(?:ulna|ulma|cubitus).*fracture.*condyle/i,
+            context: /coude|humer|articul|posterieur/i,
+            searchTerms: ['Raideur du coude post-fracture'],
+            priority: 997,
+            negativeContext: /radius|poignet/i  // Exclure confusion avec poignet
+        },
+        // === RÈGLE FRACTURE ARTICULAIRE COUDE (condyle externe seul) - V3.3.121 ===
+        {
+            pattern: /fracture.*(?:condyle|epicondyle).*(?:externe|lateral|humer)/i,
+            context: /coude|articul|raideur|legere?/i,
+            searchTerms: ['Raideur du coude post-fracture'],
+            priority: 95,
+            negativeContext: /radius|poignet/i
+        },
         {
             pattern: /(?:séquelle|suite).*(?:fracture|fx).*(?:olécrane|coude)/i,
             context: /raideur|flexion.*limit|supination/i,
@@ -4934,6 +4986,14 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             context: /(?:main.*dominante|dominant|droit.*dominant)/i,
             searchTerms: ['Raideur poignet main dominante'],
             priority: 94
+        },
+        // === RÈGLE RAIDEUR POIGNET POST-IMMOBILISATION (V3.3.121) ===
+        {
+            pattern: /raideur.*poignet.*(?:gauche|non.*dominante)/i,
+            context: /post.*immobilisation|sequelle|leger|sans.*fracture/i,
+            negativeContext: /fracture.*radius|fracture.*poignet/i,
+            searchTerms: ['Raideur du poignet - Mobilité réduite'],
+            priority: 85
         },
         {
             pattern: /arthrod[eè]se.*(?:lombaire|cervical|rachis|vert[eé]bral)/i,
@@ -5219,6 +5279,13 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             searchTerms: ['Fractures multiples de côtes - Avec séquelles respiratoires'],
             priority: 999
         },
+        // === RÈGLE FRACTURES MULTIPLES CÔTES (6+) - V3.3.121 ===
+        {
+            pattern: /fracture.*(?:5|six|5eme|6eme|7eme|8eme|9eme|10eme|cinquieme|sixieme|septieme|huitieme|neuvieme|dixieme).*c[oô]tes?/i,
+            context: /gene.*respiratoire|inspiration|cote|gauche/i,
+            searchTerms: ['Fracture de côtes non compliquée (selon gêne et nombre)'],
+            priority: 998
+        },
         // Règles langage familier - Membres inférieurs
         {
             pattern: /f[eé]mur.*cass[eé]|cass[eé].*f[eé]mur/i,
@@ -5407,7 +5474,55 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             searchTerms: ["Section des tendons fléchisseurs doigt long"],
             priority: 100
         },
+        // === RÈGLES PIED ET MÉTATARSIENS (V3.3.124) ===
+        {
+            pattern: /(?:fracture|arrachement).*(?:5.*eme|cinquieme|5eme|styloide).*metatars/i,
+            context: /pied|base|arrachement|douleur.*marche|douleur/i,
+            searchTerms: ['Fracture des métatarsiens - Avec douleurs à la marche'],
+            priority: 998
+        },
+        // === RÈGLES ORTEILS - AUTO-SÉLECTION GROS ORTEIL VS AUTRES (V3.3.124) ===
+        {
+            pattern: /fracture.*(?:phalange|p[1-3]).*(?:gros\s+orteil|hallux|o1|orteil\s+1)/i,
+            context: /pied|orteil|raideur|consolid/i,
+            searchTerms: ['Fracture consolidée phalange gros orteil avec raideur'],
+            priority: 999
+        },
+        {
+            pattern: /fracture.*(?:phalange|p[1-3]).*(?:deuxi[eè]me|troisi[eè]me|quatri[eè]me|cinqui[eè]me|o[2-5]|orteil\s+[2-5]|2[eè]me|3[eè]me|4[eè]me|5[eè]me).*orteil/i,
+            context: /pied|orteil|raideur|consolid/i,
+            searchTerms: ['Fracture consolidée phalange autre orteil avec raideur'],
+            priority: 999
+        },
         // === RÈGLES RACHIS ET BASSIN ===
+        // === RÈGLE FRACTURE PERTROCHANTÉRIENNE AVEC SÉQUELLES (V3.3.124) ===
+        {
+            pattern: /fracture.*(?:pertrochant|pertrochanteri|trochanter|massif.*trochant)/i,
+            context: /séquelles?.*douloureus|abduction.*limit[eé]|adduction.*limit[eé]|accroupissement.*(?:difficile|douloureux)|relèvement.*difficile|boiterie/i,
+            searchTerms: ['Fracture du massif trochantérien - Cal vicieux et raideur'],
+            priority: 999,
+            negativeContext: /bonne.*consolidation|sans.*sequelle/i
+        },
+        {
+            pattern: /fracture.*(?:pertrochant|pertrochanteri|trochanter|massif.*trochant).*(?:bonne.*consolidation|sans.*sequelle)/i,
+            context: /consolidation.*satisfaisante|sans.*raideur/i,
+            searchTerms: ['Fracture du massif trochantérien - Bonne consolidation'],
+            priority: 998
+        },
+        // === RÈGLE FRACTURE COTYLE AVEC SÉQUELLES (V3.3.122) ===
+        {
+            pattern: /fracture.*cotyle/i,
+            context: /(?:limitation|limit[eé]).*(?:abduction|adduction|rotation)|(?:abduction|adduction|rotation).*limit[eé]|amyotrophie|accroupissement.*douloureux/i,
+            searchTerms: ['Fracture du cotyle - Avec séquelles articulaires'],
+            priority: 999,
+            negativeContext: /sans.*deplacement.*congruente|bonne.*consolidation|sans.*sequelle/i
+        },
+        {
+            pattern: /fracture.*cotyle.*(?:sans.*deplacement|congruente)/i,
+            context: /hanche.*congruente|sans.*sequelle|bonne.*consolidation/i,
+            searchTerms: ['Fracture du cotyle sans déplacement, hanche congruente'],
+            priority: 998
+        },
         {
             pattern: /fracture.*cotyle.*incongruence|cotyle.*fracture.*arthrose/i,
             context: /arthrose.*précoce|séquelles.*articulaires|incongruence.*articulaire/i,
@@ -7695,6 +7810,11 @@ export const detectMultipleLesions = (text: string): {
     }
     const totalRegionsCount = allRegionsInText.size;
     
+    // 🆕 4C. Détection cheville + genou = 2 régions distinctes (jambe inférieure complète)
+    const hasCheville = /cheville/i.test(normalized);
+    const hasGenou = /genou/i.test(normalized);
+    const hasChevilleEtGenou = hasCheville && hasGenou;
+    
     // 🆕 5. Détection FRACTURES MULTIPLES sur le même os (ex: "fracture trochanter et diaphyse fémorale")
     const multipleFracturesSameBone = /fracture.*(?:et|,).*fracture|(?:trochanter|col|diaphyse|pilon|plateau).*(?:et|,).*(?:diaphyse|pilon|plateau|trochanter|col)/i.test(normalized);
     
@@ -7756,7 +7876,8 @@ export const detectMultipleLesions = (text: string): {
         hasAnteriorState ? 2 : 1,
         multipleFracturesSameBone ? 2 : 1,  // Au moins 2 fractures si pattern détecté
         lesionTypes.length,  // Nombre de types de lésions différents
-        hasTripleLesion ? 3 : (hasDoubleLesion ? 2 : 1)  // 🆕 Compter os+ligament+muscle
+        hasTripleLesion ? 3 : (hasDoubleLesion ? 2 : 1),  // 🆕 Compter os+ligament+muscle
+        hasChevilleEtGenou && (hasBoneLesion || hasLigamentLesion || hasNerveLesion) ? 3 : 1  // 🆕 Cheville + genou + lésion = au moins 3
     );
     
     return {
@@ -7794,6 +7915,18 @@ const extractIndividualLesions = (text: string): string[] => {
             lesions.push(cervicalFromFracture[1].trim());
         }
         console.log('✅ Pattern 0 (cervical+fracture) détecté:', lesions);
+        if (lesions.length >= 2) return lesions;
+    }
+    
+    // Pattern 0C: Fracture coude + fractures côtes (V3.3.121)
+    // Ex: "fracture condyle externe avec fracture côtes 5-10"
+    const coudesCotesPattern = /(?:fracture.*coude|fracture.*condyle|luxation.*ulna).*(?:avec|associee?|et).*fractures?.*cote|fractures?.*cote.*(?:avec|associee?|et).*(?:coude|condyle)/i;
+    if (coudesCotesPattern.test(normalized)) {
+        const coudeMatch = normalized.match(/fracture.*(?:condyle|coude|luxation.*ulna)[^;]*/i);
+        const cotesMatch = normalized.match(/fractures?.*(?:5|6|7|8|9|10|cinquieme|sixieme).*cote.*gauche/i);
+        if (coudeMatch) lesions.push(coudeMatch[0].trim());
+        if (cotesMatch) lesions.push(cotesMatch[0].trim());
+        console.log('✅ Pattern 0C (coude+côtes) détecté:', lesions);
         if (lesions.length >= 2) return lesions;
     }
     
