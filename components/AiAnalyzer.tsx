@@ -140,7 +140,8 @@ const preprocessMedicalText = (text: string): string => {
         [/(?:fracture|amputation|lesion|trauma|ecrasement|arrachement|consolidation|sequelle|raideur|ankylose)\s+(?:de\s+)?(?:la\s+)?p([1-3])\s+([dD])([1-5])\b/gi, (match, phalange, d, num) => {
             const doigts = ['', 'pouce', 'index', 'médius', 'annulaire', 'auriculaire'];
             const phalanges = { '1': 'première phalange', '2': 'deuxième phalange', '3': 'troisième phalange' };
-            return `fracture ${phalanges[phalange]} doigt ${doigts[parseInt(num)]} `;
+            const action = match.toLowerCase().startsWith('amputation') ? 'amputation' : 'fracture';
+            return `${action} ${phalanges[phalange]} doigt ${doigts[parseInt(num)]} `;
         }],
         [/\b([oO])([1-5])\b(?=\s*(?:de|du|pg|pd|pied|gauche|droite|fracture|amputation))/gi, (match, o, num) => {
             const orteils = ['', 'hallux', 'deuxième orteil', 'troisième orteil', 'quatrième orteil', 'cinquième orteil'];
@@ -5223,6 +5224,31 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             pattern: /(?:amputation|perte).*(?:p2|phalange\s+moyenne).*(?:auriculaire|d5)(?!\s*(?:et|avec|p3))/i,
             context: /doigt|main/i,
             searchTerms: ['Perte de la 2ème phalange seule de l\'auriculaire (P2 seule) (Main Dominante)'],
+            priority: 9800
+        },
+        // 🆕 V3.3.120: Amputation P3 seule (phalangette/phalange distale) - Fix "amputation p3 d5"
+        {
+            pattern: /(?:amputation|perte).*(?:p3|troisi[eè]me\s+phalange|3[eè]me\s+phalange|phalange\s+(?:distale|terminale)|phalangette).*(?:index|d2)(?!\s*(?:et|avec|p2))/i,
+            context: /doigt|main/i,
+            searchTerms: ['Perte de la 3ème phalange de l\'index (Main Dominante)'],
+            priority: 9800
+        },
+        {
+            pattern: /(?:amputation|perte).*(?:p3|troisi[eè]me\s+phalange|3[eè]me\s+phalange|phalange\s+(?:distale|terminale)|phalangette).*(?:m[eé]dius|majeur|d3)(?!\s*(?:et|avec|p2))/i,
+            context: /doigt|main/i,
+            searchTerms: ['Perte de la 3ème phalange du médius (Main Dominante)'],
+            priority: 9800
+        },
+        {
+            pattern: /(?:amputation|perte).*(?:p3|troisi[eè]me\s+phalange|3[eè]me\s+phalange|phalange\s+(?:distale|terminale)|phalangette).*(?:annulaire|d4)(?!\s*(?:et|avec|p2))/i,
+            context: /doigt|main/i,
+            searchTerms: ['Perte de la 3ème phalange de l\'annulaire (Main Dominante)'],
+            priority: 9800
+        },
+        {
+            pattern: /(?:amputation|perte).*(?:p3|troisi[eè]me\s+phalange|3[eè]me\s+phalange|phalange\s+(?:distale|terminale)|phalangette).*(?:auriculaire|d5)(?!\s*(?:et|avec|p2))/i,
+            context: /doigt|main/i,
+            searchTerms: ['Perte de la 3ème phalange de l\'auriculaire (Main Dominante)'],
             priority: 9800
         },
         {
