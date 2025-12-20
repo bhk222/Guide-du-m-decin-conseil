@@ -550,7 +550,9 @@ const middleCategories: InjuryCategory[] = [
       },
       {
         name: "Yeux - Lésions Spécifiques et Annexes",
-        injuries: [Taie cornéenne (opacité de la cornée)", description: "Cicatrice cornéenne post-traumatique ou infectieuse, réduisant l'acuité visuelle.", rate: [10, 80], rateCriteria: { low: "Taie périphérique sans impact sur l'acuité visuelle.", high: "Taie centrale dense causant une baisse d'acuité < 1/10." } },
+        injuries: [
+          { name: "Taies de cornée (selon gêne visuelle)", description: "Le taux est évalué d'après le tableau d'acuité visuelle, avec un taux complémentaire basé sur le degré de vision obtenu après rétrécissement pupillaire. Voir p.128 du barème pour les conditions.", rate: [0, 100] },
+          { name: "Taie cornéenne (opacité de la cornée)", description: "Cicatrice cornéenne post-traumatique ou infectieuse, réduisant l'acuité visuelle.", rate: [10, 80], rateCriteria: { low: "Taie périphérique sans impact sur l'acuité visuelle.", high: "Taie centrale dense causant une baisse d'acuité < 1/10." } },
           { name: "Cataracte (selon acuité et complications)", description: "Le taux est basé sur l'acuité visuelle corrigée + majorations pour gêne ou impossibilité de porter un verre. Calcul complexe nécessitant l'acuité précise (ex: OD 3/10, OG 8/10). Utilisez le Guide IA pour saisir les critères cliniques détaillés.", rate: [10, 100], rateCriteria: { low: "Acuité visuelle OD ≥ 8/10 et OG ≥ 8/10 avec correction adaptée, aucune complication.", medium: "Acuité visuelle entre 3/10 et 7/10 sur au moins un œil, ou difficulté au port de correction.", high: "Acuité visuelle < 3/10 sur un ou deux yeux, ou impossibilité de porter une correction (aphaquie non opérée, intolérance aux verres)." } },
           { name: "Hémorragies du vitré", description: "L'incapacité est évaluée en fonction de la baisse d'acuité visuelle résiduelle, si elle ne se résorbe pas.", rate: [0, 100] },
           { name: "Hémorragie du vitré persistante", description: "Hémorragie intraoculaire persistante après trauma, réduisant la transparence des milieux.", rate: [10, 80], rateCriteria: { low: "Hémorragie minime, acuité préservée.", high: "Hémorragie dense, acuité réduite < 1/10." } },
@@ -570,9 +572,7 @@ const middleCategories: InjuryCategory[] = [
             }
           },
           { name: "Endophtalmie post-traumatique (séquelles d'infection oculaire)", description: "Infection sévère de l'œil après plaie perforante.", rate: [10, 35], rateCriteria: { low: "Infection contrôlée, séquelles minimes.", high: "Phtisie du globe, énucléation." } },
-          { name: "Cécité absolue (deux yeux)", description: "Perte totale de la vision bilatérale.", rate: 100       high: "Complications sévères : douleurs chroniques, glaucome secondaire, phtisie du globe (atrophie de l'œil), nécessitant une énucléation."
-            }
-          },
+          { name: "Cécité absolue (deux yeux)", description: "Perte totale de la vision bilatérale.", rate: 100 },
           { name: "Ophtalmie sympathique",
             rate: [20, 80],
             description: "Inflammation auto-immune grave de l'œil sain (non traumatisé) après un traumatisme perforant de l'autre œil. Le taux dépend du retentissement visuel sur l'œil sympathisant.",
