@@ -3820,7 +3820,175 @@ export const aldData: AldItem[] = [
           </div>
         </div>`
             }, 
-            { code: "C08D02", name: "Epilepsie myoclonique progressive" }, 
+            { 
+              code: "C08D02", 
+              name: "Epilepsie myoclonique progressive",
+              tooltip: `<div class="space-y-3">
+        <h3 class="font-bold text-lg text-purple-700">🧠 ÉPILEPSIE MYOCLONIQUE PROGRESSIVE (EMP)</h3>
+        
+        <div class="bg-blue-50 p-3 rounded border-l-4 border-blue-500">
+          <h4 class="font-semibold text-blue-800 mb-2">1️⃣ DÉFINITION ET CONCEPT</h4>
+          <p class="mb-2"><strong>Syndrome clinique hétérogène</strong> - Pas une maladie unique, mais une association de :</p>
+          
+          <div class="bg-white p-2 rounded mt-2">
+            <p class="font-semibold text-purple-700 mb-1">🔺 Triade Clinique Classique :</p>
+            <ul class="list-disc ml-5 space-y-1">
+              <li><strong>Myoclonies</strong> : Fragmentaires, migratrices, multifocales
+                <ul class="list-circle ml-4 text-sm">
+                  <li>Aggravées par mouvement, stress, stimuli sensoriels (bruit, lumière, toucher)</li>
+                  <li>Souvent invalidantes</li>
+                </ul>
+              </li>
+              <li><strong>Épilepsie</strong> : CTCG (crises tonico-cloniques généralisées), absences ou crises toniques</li>
+              <li><strong>Détérioration Neurologique</strong> :
+                <ul class="list-circle ml-4 text-sm">
+                  <li>Déclin cognitif (démence progressive)</li>
+                  <li>Ataxie cérébelleuse (troubles équilibre)</li>
+                  <li>Troubles visuels</li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="bg-purple-50 p-3 rounded border-l-4 border-purple-500">
+          <h4 class="font-semibold text-purple-800 mb-2">2️⃣ ÉTIOLOGIES PRINCIPALES (Diagnostic Différentiel)</h4>
+          <p class="text-sm italic mb-2">⚠️ Détermination cruciale pour pronostic et conseil génétique</p>
+          
+          <div class="bg-white p-2 rounded text-sm">
+            <table class="w-full">
+              <thead class="bg-purple-100">
+                <tr>
+                  <th class="text-left p-1 border">Maladie</th>
+                  <th class="text-left p-1 border">Gène / Cause</th>
+                  <th class="text-left p-1 border">Caractéristiques</th>
+                  <th class="text-left p-1 border">Pronostic</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="border-b">
+                  <td class="p-1 border"><strong>Unverricht-Lundborg (EPM1)</strong></td>
+                  <td class="p-1 border">CSTB (Cystatine B)</td>
+                  <td class="p-1 border">Début 6-15 ans. Myoclonies action. Ataxie. Intellect préservé longtemps</td>
+                  <td class="p-1 border text-green-700">Lente. Espérance vie quasi normale</td>
+                </tr>
+                <tr class="border-b">
+                  <td class="p-1 border"><strong>Lafora (EPM2)</strong></td>
+                  <td class="p-1 border">EPM2A / NHLRC1</td>
+                  <td class="p-1 border">Début 10-18 ans. Hallucinations visuelles précoces. Démence rapide. Corps Lafora biopsie</td>
+                  <td class="p-1 border text-red-700"><strong>Sévère. Décès 2-10 ans</strong></td>
+                </tr>
+                <tr class="border-b">
+                  <td class="p-1 border"><strong>NCL (Céroïde-Lipofuscinose)</strong></td>
+                  <td class="p-1 border">Gènes CLN (CLN3)</td>
+                  <td class="p-1 border">Troubles visuels précoces (baisse acuité, rétinite). Démence</td>
+                  <td class="p-1 border">Variable (infantile → adulte)</td>
+                </tr>
+                <tr class="border-b">
+                  <td class="p-1 border"><strong>Sialidose Type I</strong></td>
+                  <td class="p-1 border">Déficit neuraminidase</td>
+                  <td class="p-1 border">Tache rouge cerise fond d'œil. Myoclonies massives. Pas démence</td>
+                  <td class="p-1 border">Variable</td>
+                </tr>
+                <tr class="border-b">
+                  <td class="p-1 border"><strong>MERRF (Mitochondrial)</strong></td>
+                  <td class="p-1 border">ADNmt (tRNALys)</td>
+                  <td class="p-1 border">"Ragged Red Fibers". Surdité, petite taille, lipomes, acidose lactique</td>
+                  <td class="p-1 border">Très variable</td>
+                </tr>
+                <tr class="border-b">
+                  <td class="p-1 border"><strong>Gaucher Type 3</strong></td>
+                  <td class="p-1 border">GBA</td>
+                  <td class="p-1 border">Splénomégalie, hépatomégalie, paralysie oculomotrice</td>
+                  <td class="p-1 border text-green-700">Traitable enzymothérapie</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="bg-yellow-50 p-3 rounded border-l-4 border-yellow-500">
+          <h4 class="font-semibold text-yellow-800 mb-2">3️⃣ DÉMARCHE DIAGNOSTIQUE</h4>
+          
+          <div class="space-y-2">
+            <div class="bg-white p-2 rounded">
+              <p class="font-semibold text-blue-700">A. Électroencéphalogramme (EEG)</p>
+              <ul class="list-disc ml-5 text-sm">
+                <li><strong>Fond</strong> : Ralentissement rythme de fond (≠ JME où fond normal)</li>
+                <li><strong>Anomalies</strong> : Polypointes-ondes généralisées, bouffées pointes-ondes rapides</li>
+                <li><strong>Photosensibilité</strong> : Souvent très marquée</li>
+              </ul>
+            </div>
+
+            <div class="bg-white p-2 rounded">
+              <p class="font-semibold text-purple-700">B. Examens Biologiques et Génétique</p>
+              <ul class="list-disc ml-5 text-sm">
+                <li><strong>Biologie standard</strong> : Lactates (MERRF), frottis sanguin (vacuoles pour NCL)</li>
+                <li><strong>Génétique (Standard actuel)</strong> : Panel séquençage NGS "Épilepsies myocloniques progressives"</li>
+                <li><strong>Biopsies</strong> (si génétique non conclusive) :
+                  <ul class="list-circle ml-4">
+                    <li><strong>Peau (axillaire)</strong> : Corps de Lafora (PAS+) ou inclusions NCL</li>
+                    <li><strong>Muscle</strong> : Ragged Red Fibers (MERRF)</li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+
+            <div class="bg-white p-2 rounded">
+              <p class="font-semibold text-orange-700">C. Ophtalmologie</p>
+              <ul class="list-disc ml-5 text-sm">
+                <li><strong>Fond d'œil</strong> : Tache rouge cerise (Sialidose) ou atrophie optique/rétinite (NCL)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-orange-50 p-3 rounded border-l-4 border-orange-500">
+          <h4 class="font-semibold text-orange-800 mb-2">4️⃣ PRISE EN CHARGE THÉRAPEUTIQUE</h4>
+          <p class="text-sm italic mb-2">⚠️ Traitement symptomatique - Pas de curatif pour la majorité des EMP</p>
+          
+          <div class="space-y-2">
+            <div class="bg-green-50 p-2 rounded">
+              <p class="font-semibold text-green-800 mb-1">✅ A. Molécules RECOMMANDÉES (Anti-Myocloniques)</p>
+              <ul class="list-disc ml-5 text-sm">
+                <li><strong>Valproate de Sodium (VPA)</strong> : 1ère intention (large spectre)</li>
+                <li><strong>Clonazépam (Rivotril)</strong> : Très efficace myoclonies (⚠️ sédation, tolérance)</li>
+                <li><strong>Lévétiracétam (Keppra)</strong> : Efficace myoclonies corticales</li>
+                <li><strong>Piracetam (Nootropyl)</strong> : Haute dose (jusqu'à 20g/j) pour myoclonies action sévères</li>
+                <li><strong>Zonisamide / Topiramate</strong> : En appoint</li>
+              </ul>
+            </div>
+
+            <div class="bg-red-50 p-2 rounded border-2 border-red-500">
+              <p class="font-semibold text-red-800 mb-1">⛔ B. Médicaments CONTRE-INDIQUÉS</p>
+              <p class="text-sm text-red-700 mb-2"><strong>⚠️ AGGRAVATION myoclonies et ataxie :</strong></p>
+              <ul class="list-disc ml-5 text-sm text-red-700">
+                <li><strong>Phénytoïne</strong></li>
+                <li><strong>Carbamazépine</strong></li>
+                <li><strong>Oxcarbazépine</strong></li>
+                <li><strong>Vigabatrin</strong></li>
+                <li><strong>Gabapentine / Prégabaline</strong> (inefficaces ou aggravants)</li>
+                <li><strong>Lamotrigine</strong> : Extrême prudence (aggrave Unverricht-Lundborg)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-pink-50 p-3 rounded border-l-4 border-pink-500">
+          <h4 class="font-semibold text-pink-800 mb-2">🎯 SYNTHÈSE POUR LA PRATIQUE</h4>
+          <div class="bg-red-100 p-2 rounded border border-red-400">
+            <p class="text-sm"><strong>⚠️ Point de Vigilance Critique :</strong></p>
+            <p class="text-sm mt-1">Tout patient diagnostiqué <strong>"Épilepsie Myoclonique Juvénile" (JME)</strong> qui devient :</p>
+            <ul class="list-disc ml-5 text-sm mt-1">
+              <li>Résistant au traitement</li>
+              <li>Développe troubles cognitifs</li>
+              <li>Développe troubles de l'équilibre</li>
+            </ul>
+            <p class="text-sm mt-2 font-bold text-red-700">➡️ Doit être RÉÉVALUÉ pour une EMP</p>
+          </div>
+        </div>
+      </div>`
+            }, 
             { code: "C08D03", name: "Epilepsie post-traumatique" }
           ]
         }
