@@ -5231,25 +5231,25 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
         {
             pattern: /(?:amputation|perte).*(?:p3|troisi[eè]me\s+phalange|3[eè]me\s+phalange|phalange\s+(?:distale|terminale)|phalangette).*(?:index|d2)(?!\s*(?:et|avec|p2))/i,
             context: /doigt|main/i,
-            searchTerms: ['Perte de la 3ème phalange de l\'index (Main Dominante)'],
+            searchTerms: ['Perte de la 3ème phalange de l\'index (Main Dominante)', 'Perte de la 3ème phalange de l\'index (Main Non Dominante)'],
             priority: 11000
         },
         {
             pattern: /(?:amputation|perte).*(?:p3|troisi[eè]me\s+phalange|3[eè]me\s+phalange|phalange\s+(?:distale|terminale)|phalangette).*(?:m[eé]dius|majeur|d3)(?!\s*(?:et|avec|p2))/i,
             context: /doigt|main/i,
-            searchTerms: ['Perte de la 3ème phalange du médius (Main Dominante)'],
+            searchTerms: ['Perte de la 3ème phalange du médius (Main Dominante)', 'Perte de la 3ème phalange du médius (Main Non Dominante)'],
             priority: 11000
         },
         {
             pattern: /(?:amputation|perte).*(?:p3|troisi[eè]me\s+phalange|3[eè]me\s+phalange|phalange\s+(?:distale|terminale)|phalangette).*(?:annulaire|d4)(?!\s*(?:et|avec|p2))/i,
             context: /doigt|main/i,
-            searchTerms: ['Perte de la 3ème phalange de l\'annulaire (Main Dominante)'],
+            searchTerms: ['Perte de la 3ème phalange de l\'annulaire (Main Dominante)', 'Perte de la 3ème phalange de l\'annulaire (Main Non Dominante)'],
             priority: 11000
         },
         {
             pattern: /(?:amputation|perte).*(?:p3|troisi[eè]me\s+phalange|3[eè]me\s+phalange|phalange\s+(?:distale|terminale)|phalangette).*(?:auriculaire|d5)(?!\s*(?:et|avec|p2))/i,
             context: /doigt|main/i,
-            searchTerms: ['Perte de la 3ème phalange de l\'auriculaire (Main Dominante)'],
+            searchTerms: ['Perte de la 3ème phalange de l\'auriculaire (Main Dominante)', 'Perte de la 3ème phalange de l\'auriculaire (Main Non Dominante)'],
             priority: 11000
         },
         {
