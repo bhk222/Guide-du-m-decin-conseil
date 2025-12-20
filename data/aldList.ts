@@ -4217,7 +4217,270 @@ export const aldData: AldItem[] = [
   {
     code: "C09",
     name: "Maladies musculaires ou neuromusculaires",
-    children: [{ code: "C09A", name: "Polynevrites", children: [{ code: "C09A01", name: "Polynévrite inflammatoires" }, { code: "C09A02", name: "Polynévrite diabétique" }, { code: "C09A03", name: "Autres polynévrites" }] }],
+    children: [
+      { 
+        code: "C09A", 
+        name: "Polynevrites",
+        tooltip: `<div class="space-y-3">
+        <h3 class="font-bold text-lg text-indigo-700">🦵 POLYNÉVRITES (POLYNEUROPATHIES PÉRIPHÉRIQUES)</h3>
+        
+        <div class="bg-blue-50 p-3 rounded border-l-4 border-blue-500">
+          <h4 class="font-semibold text-blue-800 mb-2">1️⃣ DÉFINITION ET CARACTÉRISTIQUES CLÉS</h4>
+          <p class="text-sm mb-2"><strong>Atteinte généralisée du système nerveux périphérique</strong></p>
+          
+          <div class="bg-white p-2 rounded">
+            <p class="font-semibold text-purple-700 mb-1">🔺 TRIADE DIAGNOSTIQUE :</p>
+            <ul class="list-disc ml-5 text-sm space-y-1">
+              <li><strong>Symétrie</strong> : Atteinte bilatérale</li>
+              <li><strong>Distalité</strong> : Début aux extrémités des membres inférieurs
+                <ul class="list-circle ml-4 text-xs">
+                  <li>"Longueur-dépendante" : fibres les plus longues touchées en premier</li>
+                </ul>
+              </li>
+              <li><strong>Synchronisme</strong> : Évolution progressive et simultanée (≠ multinévrite)</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="bg-purple-50 p-3 rounded border-l-4 border-purple-500">
+          <h4 class="font-semibold text-purple-800 mb-2">2️⃣ PHYSIOPATHOLOGIE</h4>
+          <p class="text-sm italic mb-2">⚡ <strong>ENMG</strong> (Électroneuromyogramme) permet la différenciation</p>
+          
+          <div class="bg-white p-2 rounded text-sm">
+            <table class="w-full">
+              <thead class="bg-purple-100">
+                <tr>
+                  <th class="text-left p-1 border">Type</th>
+                  <th class="text-left p-1 border">Mécanisme</th>
+                  <th class="text-left p-1 border">ENMG</th>
+                  <th class="text-left p-1 border">Causes Principales</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="border-b bg-yellow-50">
+                  <td class="p-1 border"><strong>Axonal</strong><br/>(80% cas)</td>
+                  <td class="p-1 border">Dégénérescence axone (Wallérienne)</td>
+                  <td class="p-1 border text-red-700"><strong>Amplitude ↓</strong><br/>Vitesse normale</td>
+                  <td class="p-1 border">Toxiques, Métaboliques</td>
+                </tr>
+                <tr class="border-b bg-blue-50">
+                  <td class="p-1 border"><strong>Démyélinisant</strong></td>
+                  <td class="p-1 border">Atteinte gaine myéline (Schwann)</td>
+                  <td class="p-1 border text-blue-700"><strong>Vitesse ↓</strong><br/>(&lt;38 m/s MS)</td>
+                  <td class="p-1 border">Génétiques, Dysimmunitaires</td>
+                </tr>
+                <tr class="border-b bg-pink-50">
+                  <td class="p-1 border"><strong>Neuronopathie</strong></td>
+                  <td class="p-1 border">Atteinte corps cellulaire (ganglion spinal)</td>
+                  <td class="p-1 border">Sensitive pure, ataxique<br/><strong>Non longueur-dépendante</strong></td>
+                  <td class="p-1 border">Paranéoplasique, Gougerot-Sjögren</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="bg-yellow-50 p-3 rounded border-l-4 border-yellow-500">
+          <h4 class="font-semibold text-yellow-800 mb-2">3️⃣ SÉMIOLOGIE CLINIQUE</h4>
+          <p class="text-sm italic mb-2">⏱️ Installation généralement progressive (mois/années)</p>
+          
+          <div class="space-y-2">
+            <div class="bg-orange-50 p-2 rounded">
+              <p class="font-semibold text-orange-700 mb-1">A. Signes Sensitifs (INAUGURAUX)</p>
+              <ul class="list-disc ml-5 text-sm">
+                <li><strong>Subjectifs</strong> :
+                  <ul class="list-circle ml-4 text-xs">
+                    <li>Paresthésies (fourmillements, picotements)</li>
+                    <li>Dysesthésies (brûlures, froid douloureux, décharges)</li>
+                  </ul>
+                </li>
+                <li><strong>Topographie</strong> : En <strong>"chaussettes"</strong> → remonte vers genoux → atteint mains (en <strong>"gants"</strong>)</li>
+                <li><strong>Objectifs</strong> : Hypoesthésie tactile, thermo-algique ou pallesthésique (diapason)</li>
+              </ul>
+            </div>
+
+            <div class="bg-red-50 p-2 rounded">
+              <p class="font-semibold text-red-700 mb-1">B. Signes Moteurs (SECONDAIRES)</p>
+              <ul class="list-disc ml-5 text-sm">
+                <li><strong>Déficit moteur distal</strong> : Releveurs du pied (Jambier antérieur) → <strong>Steppage</strong> à la marche</li>
+                <li>Difficulté à marcher sur les talons</li>
+                <li>Crampes nocturnes</li>
+                <li>Amyotrophie (fonte musculaire) tardive</li>
+              </ul>
+            </div>
+
+            <div class="bg-green-50 p-2 rounded">
+              <p class="font-semibold text-green-700 mb-1">C. Réflexes</p>
+              <ul class="list-disc ml-5 text-sm">
+                <li>❌ <strong>Abolition réflexes achilléens</strong> (signe précoce et quasi constant)</li>
+                <li>✅ Conservation réflexes rotuliens (tant que l'atteinte ne remonte pas)</li>
+              </ul>
+            </div>
+
+            <div class="bg-gray-50 p-2 rounded">
+              <p class="font-semibold text-gray-700 mb-1">D. Troubles Trophiques</p>
+              <ul class="list-disc ml-5 text-sm">
+                <li>Peau sèche, dépilation</li>
+                <li>Maux perforants plantaires (surtout diabète)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-teal-50 p-3 rounded border-l-4 border-teal-500">
+          <h4 class="font-semibold text-teal-800 mb-2">4️⃣ DIAGNOSTIC PARACLINIQUE</h4>
+          
+          <div class="space-y-2">
+            <div class="bg-white p-2 rounded">
+              <p class="font-semibold text-blue-700 mb-1">A. Électroneuromyogramme (ENMG)</p>
+              <p class="text-xs italic mb-1">⚡ Examen indispensable pour confirmer diagnostic et typer atteinte</p>
+              <ul class="list-disc ml-5 text-sm">
+                <li><strong>Forme Axonale</strong> : Vitesses normales, <strong>Amplitudes diminuées</strong></li>
+                <li><strong>Forme Démyélinisante</strong> :
+                  <ul class="list-circle ml-4 text-xs">
+                    <li><strong>Vitesses ralenties</strong> (&lt; 38 m/s au MS)</li>
+                    <li>Allongement latences distales</li>
+                    <li>Blocs de conduction</li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+
+            <div class="bg-white p-2 rounded">
+              <p class="font-semibold text-purple-700 mb-1">B. Bilan Biologique de 1ère Intention</p>
+              <p class="text-xs italic mb-1">Face à une polyneuropathie axonale symétrique distale :</p>
+              <ul class="list-disc ml-5 text-sm">
+                <li><strong>Diabète</strong> : Glycémie à jeun, HbA1c (Cause #1)</li>
+                <li><strong>Alcool/Carence</strong> : NFS (macrocytose), GGT, CDT, Vitamine B12, Folates (B9)</li>
+                <li><strong>Rénal/Hépatique</strong> : Créatinine, Transaminases</li>
+                <li><strong>Thyroïde</strong> : TSH</li>
+                <li><strong>Dysglobulinémie</strong> : Électrophorèse protéines sériques (Pic monoclonal?)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-orange-50 p-3 rounded border-l-4 border-orange-500">
+          <h4 class="font-semibold text-orange-800 mb-2">5️⃣ ÉTIOLOGIES (Les Causes)</h4>
+          <p class="text-sm italic mb-2">📊 Mnémotechnique : <strong>DANG THERAPIST</strong></p>
+          
+          <div class="bg-white p-2 rounded text-sm">
+            <table class="w-full">
+              <thead class="bg-orange-100">
+                <tr>
+                  <th class="text-left p-1 border">Catégorie</th>
+                  <th class="text-left p-1 border">Causes Principales</th>
+                  <th class="text-left p-1 border">Remarques</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="border-b bg-red-50">
+                  <td class="p-1 border"><strong>Métaboliques</strong></td>
+                  <td class="p-1 border"><strong>Diabète</strong> (30-50%), IRC, Hypothyroïdie</td>
+                  <td class="p-1 border">Neuropathie diabétique souvent mixte et douloureuse</td>
+                </tr>
+                <tr class="border-b bg-purple-50">
+                  <td class="p-1 border"><strong>Toxiques</strong></td>
+                  <td class="p-1 border">Alcool (+ carence B1), Chimio (Platines, Taxanes, Vincristine), Isoniazide, Amiodarone, Toxiques pro (Plomb, Arsenic)</td>
+                  <td class="p-1 border">Arrêt toxique stabilise, récupération lente/incomplète</td>
+                </tr>
+                <tr class="border-b bg-yellow-50">
+                  <td class="p-1 border"><strong>Carentielles</strong></td>
+                  <td class="p-1 border">Vit B12 (Biermer, végétaliens), B1 (Béri-béri), B6</td>
+                  <td class="p-1 border">⚠️ Post-chirurgie bariatrique</td>
+                </tr>
+                <tr class="border-b bg-blue-50">
+                  <td class="p-1 border"><strong>Infectieuses</strong></td>
+                  <td class="p-1 border">VIH (stade avancé), Hépatite C (cryoglobulinémie), Lyme (tertiaire)</td>
+                  <td class="p-1 border">-</td>
+                </tr>
+                <tr class="border-b bg-pink-50">
+                  <td class="p-1 border"><strong>Inflammatoires</strong></td>
+                  <td class="p-1 border">Vascularites (asymétriques début), Sarcoïdose, Gammapathies (IgM anti-MAG)</td>
+                  <td class="p-1 border">-</td>
+                </tr>
+                <tr class="border-b bg-green-50">
+                  <td class="p-1 border"><strong>Héréditaires</strong></td>
+                  <td class="p-1 border">Charcot-Marie-Tooth (CMT)</td>
+                  <td class="p-1 border">Pieds creux, ATCD familiaux, évolution très lente depuis enfance</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="bg-green-50 p-3 rounded border-l-4 border-green-500">
+          <h4 class="font-semibold text-green-800 mb-2">6️⃣ PRISE EN CHARGE THÉRAPEUTIQUE</h4>
+          
+          <div class="space-y-2">
+            <div class="bg-blue-100 p-2 rounded border-2 border-blue-500">
+              <p class="font-semibold text-blue-800 mb-1">A. Traitement Étiologique (PRIORITÉ)</p>
+              <ul class="list-disc ml-5 text-sm">
+                <li>Équilibre glycémique (diabète)</li>
+                <li>Sevrage alcoolique</li>
+                <li>Supplémentation vitaminique</li>
+              </ul>
+            </div>
+
+            <div class="bg-white p-2 rounded">
+              <p class="font-semibold text-red-700 mb-1">B. Traitement Symptomatique (Douleurs Neuropathiques)</p>
+              <p class="text-xs text-red-600 italic mb-1">⚠️ Antalgiques classiques (Paracétamol, AINS) <strong>INEFFICACES</strong></p>
+              
+              <p class="text-xs font-semibold mt-2 mb-1">💊 Co-analgésiques à utiliser :</p>
+              <ul class="list-disc ml-5 text-sm space-y-1">
+                <li><strong>Antiépileptiques</strong> :
+                  <ul class="list-circle ml-4 text-xs">
+                    <li>Prégabaline (Lyrica)</li>
+                    <li>Gabapentine (Neurontin)</li>
+                  </ul>
+                </li>
+                <li><strong>Antidépresseurs</strong> :
+                  <ul class="list-circle ml-4 text-xs">
+                    <li>Tricycliques : Amitriptyline (Laroxyl)</li>
+                    <li>IRSNA : Duloxétine (Cymbalta)</li>
+                  </ul>
+                </li>
+                <li><strong>Topiques</strong> (zones localisées) :
+                  <ul class="list-circle ml-4 text-xs">
+                    <li>Emplâtres Versatis (Lidocaïne)</li>
+                    <li>Capsaïcine (Qutenza)</li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+
+            <div class="bg-yellow-50 p-2 rounded">
+              <p class="font-semibold text-yellow-800 mb-1">C. Rééducation</p>
+              <ul class="list-disc ml-5 text-sm">
+                <li><strong>Kinésithérapie motrice</strong> : Lutte contre rétraction, releveurs</li>
+                <li><strong>Orthèses</strong> : Releveurs de pied si steppage</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-pink-50 p-3 rounded border-l-4 border-pink-500">
+          <h4 class="font-semibold text-pink-800 mb-2">🎯 POINTS CLÉS À RETENIR</h4>
+          <div class="bg-white p-2 rounded">
+            <ul class="list-disc ml-5 text-sm space-y-1">
+              <li>🔺 <strong>Triade</strong> : Symétrie + Distalité + Synchronisme</li>
+              <li>📍 <strong>Topographie</strong> : "Chaussettes" → "Gants"</li>
+              <li>⚡ <strong>ENMG</strong> indispensable : Typer atteinte (axonal vs démyélinisant)</li>
+              <li>🔬 <strong>Cause #1</strong> : Diabète (30-50%)</li>
+              <li>❌ <strong>ROT achilléens abolis</strong> = signe précoce constant</li>
+              <li>💊 <strong>Douleurs neuropathiques</strong> : Prégabaline, Duloxétine, Amitriptyline</li>
+              <li>🎯 <strong>Priorité</strong> : Traitement étiologique (équilibre diabète, sevrage alcool, vitamines)</li>
+            </ul>
+          </div>
+        </div>
+      </div>`,
+        children: [
+          { code: "C09A01", name: "Polynévrite inflammatoires" }, 
+          { code: "C09A02", name: "Polynévrite diabétique" }, 
+          { code: "C09A03", name: "Autres polynévrites" }
+        ] 
+      }
+    ],
   },
   {
     code: "C10",
