@@ -3989,7 +3989,227 @@ export const aldData: AldItem[] = [
         </div>
       </div>`
             }, 
-            { code: "C08D03", name: "Epilepsie post-traumatique" }
+            { 
+              code: "C08D03", 
+              name: "Epilepsie post-traumatique",
+              tooltip: `<div class="space-y-3">
+        <h3 class="font-bold text-lg text-indigo-700">🧠 ÉPILEPSIE POST-TRAUMATIQUE (EPT)</h3>
+        
+        <div class="bg-blue-50 p-3 rounded border-l-4 border-blue-500">
+          <h4 class="font-semibold text-blue-800 mb-2">1️⃣ DÉFINITIONS ET CLASSIFICATION TEMPORELLE</h4>
+          <p class="text-sm mb-2 italic">⚠️ Fondamental : Distinguer selon le délai d'apparition par rapport au Traumatisme Crânien (TC)</p>
+          
+          <div class="space-y-2">
+            <div class="bg-gray-100 p-2 rounded">
+              <p class="font-semibold text-gray-700">⚡ Crises Immédiates (Impact seizures) : <span class="text-red-600">&lt; 24h</span></p>
+              <ul class="list-disc ml-5 text-sm">
+                <li>Souvent réflexes</li>
+                <li><strong>Non prédictives d'épilepsie future</strong></li>
+              </ul>
+            </div>
+
+            <div class="bg-yellow-100 p-2 rounded">
+              <p class="font-semibold text-yellow-800">⚠️ Crises Précoces (Early seizures) : <span class="text-orange-600">&lt; 7 jours</span></p>
+              <ul class="list-disc ml-5 text-sm">
+                <li>Considérées comme <strong>crises symptomatiques aiguës</strong> (provoquées)</li>
+                <li>Témoignent de la souffrance cérébrale aiguë : œdème, hémorragie, excitotoxicité</li>
+              </ul>
+            </div>
+
+            <div class="bg-red-100 p-2 rounded border border-red-400">
+              <p class="font-semibold text-red-800">🔴 Crises Tardives (Late seizures) : <span class="text-red-700">&gt; 7 jours</span></p>
+              <ul class="list-disc ml-5 text-sm">
+                <li><strong>UNE SEULE crise tardive suffit pour poser le diagnostic EPT</strong></li>
+                <li>Risque récidive <strong>&gt; 80%</strong> (critère ILAE)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-purple-50 p-3 rounded border-l-4 border-purple-500">
+          <h4 class="font-semibold text-purple-800 mb-2">2️⃣ ÉPIDÉMIOLOGIE ET STRATIFICATION DU RISQUE</h4>
+          <p class="text-sm italic mb-2">📊 Incidence EPT corrélée à la sévérité (Classification d'Annegers)</p>
+          
+          <div class="bg-white p-2 rounded text-sm">
+            <table class="w-full">
+              <thead class="bg-purple-100">
+                <tr>
+                  <th class="text-left p-1 border">Sévérité TC</th>
+                  <th class="text-left p-1 border">Critères Cliniques/Radiologiques</th>
+                  <th class="text-left p-1 border">Risque EPT à 5 ans</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="border-b bg-green-50">
+                  <td class="p-1 border"><strong>Léger</strong></td>
+                  <td class="p-1 border">Pas de fracture, amnésie/PC &lt; 30 min</td>
+                  <td class="p-1 border text-green-700"><strong>~ 0.7%</strong> (proche pop. générale)</td>
+                </tr>
+                <tr class="border-b bg-yellow-50">
+                  <td class="p-1 border"><strong>Modéré</strong></td>
+                  <td class="p-1 border">Fracture crâne linéaire OU amnésie/PC 30 min - 24h</td>
+                  <td class="p-1 border text-orange-600"><strong>1.0 - 2.0%</strong></td>
+                </tr>
+                <tr class="border-b bg-red-50">
+                  <td class="p-1 border"><strong>Sévère</strong></td>
+                  <td class="p-1 border">Contusion cérébrale, hématome (sous-dural/intracérébral), embarrure, amnésie/PC &gt; 24h</td>
+                  <td class="p-1 border text-red-700"><strong>&gt; 15 - 30%</strong></td>
+                </tr>
+              </tbody>
+            </table>
+            <p class="mt-2 text-xs italic">⚠️ <strong>Plaies pénétrantes</strong> (balles, éclats) : risque <strong>&gt; 50%</strong></p>
+          </div>
+        </div>
+
+        <div class="bg-teal-50 p-3 rounded border-l-4 border-teal-500">
+          <h4 class="font-semibold text-teal-800 mb-2">3️⃣ PHYSIOPATHOLOGIE (Épileptogenèse)</h4>
+          <p class="text-sm mb-2">⏱️ <strong>Période silencieuse</strong> (latence) entre traumatisme et 1ère crise tardive : réorganisation réseaux neuronaux</p>
+          
+          <div class="bg-white p-2 rounded">
+            <ul class="list-disc ml-5 text-sm space-y-1">
+              <li><strong>Dépôts d'Hémosidérine</strong> : Fer issu hémolyse (hématomes) = puissant agent épileptogène
+                <ul class="list-circle ml-4">
+                  <li>Radicaux libres, péroxydation lipidique</li>
+                </ul>
+              </li>
+              <li><strong>Gliose réactionnelle</strong> : Cicatrices gliales perturbant connexions synaptiques</li>
+              <li><strong>Excitotoxicité</strong> : Relargage massif de Glutamate</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="bg-orange-50 p-3 rounded border-l-4 border-orange-500">
+          <h4 class="font-semibold text-orange-800 mb-2">4️⃣ PROPHYLAXIE (Prévention) : LE CONSENSUS ACTUEL</h4>
+          <p class="text-sm italic mb-2">⚠️ Point de confusion le plus fréquent - Recommandations AAN / Brain Trauma Foundation</p>
+          
+          <div class="space-y-2">
+            <div class="bg-green-50 p-2 rounded border-2 border-green-500">
+              <p class="font-semibold text-green-800 mb-1">✅ RÈGLE D'OR N°1</p>
+              <p class="text-sm"><strong>Prophylaxie des crises PRÉCOCES (&lt; 7 jours)</strong> : <span class="text-green-700 font-bold">OUI</span></p>
+              <ul class="list-disc ml-5 text-sm">
+                <li><strong>Indiquée</strong> en cas de TC sévère</li>
+                <li>Objectif : Éviter aggravation lésions secondaires (HTIC, hypoxie)</li>
+                <li><strong>Molécule</strong> : Lévétiracétam (ou Phénytoïne)</li>
+              </ul>
+            </div>
+
+            <div class="bg-red-50 p-2 rounded border-2 border-red-500">
+              <p class="font-semibold text-red-800 mb-1">⛔ RÈGLE D'OR N°2</p>
+              <p class="text-sm"><strong>Prophylaxie de l'épilepsie TARDIVE (au long cours)</strong> : <span class="text-red-700 font-bold">NON</span></p>
+              <ul class="list-disc ml-5 text-sm text-red-700">
+                <li><strong>Aucune étude</strong> n'a démontré qu'un traitement préventif bloque l'épileptogenèse</li>
+                <li>❌ On ne traite PAS "au cas où" après J7</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-yellow-50 p-3 rounded border-l-4 border-yellow-500">
+          <h4 class="font-semibold text-yellow-800 mb-2">5️⃣ DIAGNOSTIC ET BILAN</h4>
+          
+          <div class="space-y-2">
+            <div class="bg-white p-2 rounded">
+              <p class="font-semibold text-blue-700">A. Clinique</p>
+              <ul class="list-disc ml-5 text-sm">
+                <li>Crises <strong>majoritairement focales</strong> (± altération conscience)</li>
+                <li>Reflètent localisation lésion (souvent <strong>frontale ou temporale</strong>)</li>
+                <li>Peuvent généraliser secondairement (CTCB - Tonico-Cloniques Bilatérales)</li>
+              </ul>
+            </div>
+
+            <div class="bg-white p-2 rounded">
+              <p class="font-semibold text-purple-700">B. Imagerie (IRM Cérébrale)</p>
+              <p class="text-sm italic">📡 Examen de référence à distance du traumatisme</p>
+              <ul class="list-disc ml-5 text-sm">
+                <li><strong>Séquence clé</strong> : T2* (Gradient Écho) ou <strong>SWI</strong> (Susceptibility Weighted Imaging)</li>
+                <li><strong>Objectif</strong> :
+                  <ul class="list-circle ml-4">
+                    <li>Visualiser <strong>dépôts d'hémosidérine</strong> (hyposignaux noirs = traces anciennes contusions/saignements)</li>
+                    <li>Rechercher cicatrices cortico-sous-corticales (gliose)</li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+
+            <div class="bg-white p-2 rounded">
+              <p class="font-semibold text-orange-700">C. EEG</p>
+              <ul class="list-disc ml-5 text-sm">
+                <li>Souvent <strong>normal en intercritique</strong></li>
+                <li>Utile pour caractériser le foyer si anomalies présentes</li>
+                <li><strong>Indispensable</strong> si doute sur état de mal non convulsif (confusion persistante)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-green-50 p-3 rounded border-l-4 border-green-500">
+          <h4 class="font-semibold text-green-800 mb-2">6️⃣ PRISE EN CHARGE THÉRAPEUTIQUE (Curative)</h4>
+          <p class="text-sm italic mb-2">💊 Traitement de fond instauré dès la <strong>1ère crise tardive (&gt; J7)</strong></p>
+          
+          <div class="space-y-2">
+            <div class="bg-white p-2 rounded">
+              <p class="font-semibold text-blue-700 mb-1">A. Choix de la Molécule</p>
+              <p class="text-xs italic mb-2">Pas de supériorité nette - Choix selon effets secondaires et comorbidités</p>
+              
+              <ul class="list-disc ml-5 text-sm space-y-1">
+                <li><strong>Lévétiracétam (Keppra)</strong> : Souvent 1er choix
+                  <ul class="list-circle ml-4 text-xs">
+                    <li>✅ Pas d'induction enzymatique, titrage rapide</li>
+                    <li>⚠️ Effets psychiatriques fréquents (irritabilité) chez traumatisés crâniens</li>
+                  </ul>
+                </li>
+                <li><strong>Lamotrigine (Lamictal)</strong> : Très bon profil
+                  <ul class="list-circle ml-4 text-xs">
+                    <li>✅ Excellent profil cognitif et thymique (stabilisateur humeur)</li>
+                    <li>⚠️ Titrage lent</li>
+                  </ul>
+                </li>
+                <li><strong>Carbamazépine / Oxcarbazépine</strong> :
+                  <ul class="list-circle ml-4 text-xs">
+                    <li>✅ Efficaces</li>
+                    <li>⚠️ Inducteurs enzymatiques, effets cognitifs (somnolence, vertiges)</li>
+                  </ul>
+                </li>
+                <li><strong>Valproate (Dépakine)</strong> :
+                  <ul class="list-circle ml-4 text-xs">
+                    <li>✅ Efficace</li>
+                    <li>⚠️ Tremblements, prise de poids</li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+
+            <div class="bg-blue-50 p-2 rounded">
+              <p class="font-semibold text-blue-700 mb-1">B. Pronostic</p>
+              <ul class="list-disc ml-5 text-sm">
+                <li>✅ <strong>Rémission possible</strong> : ~ 50% des patients</li>
+                <li>⚠️ <strong>Pharmacorésistance</strong> : ~ 30%</li>
+                <li>🔄 <strong>Sevrage</strong> envisageable après 2 ans sans crise
+                  <ul class="list-circle ml-4 text-xs">
+                    <li>Mais risque rechute > épilepsies idiopathiques</li>
+                    <li>Surtout si lésion IRM persiste</li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-pink-50 p-3 rounded border-l-4 border-pink-500">
+          <h4 class="font-semibold text-pink-800 mb-2">🎯 POINTS CLÉS À RETENIR</h4>
+          <div class="bg-white p-2 rounded">
+            <ul class="list-disc ml-5 text-sm space-y-1">
+              <li>📅 <strong>&lt; 7 jours</strong> : Prophylaxie OUI (TC sévère)</li>
+              <li>📅 <strong>&gt; 7 jours</strong> : Traitement au long cours NON (sauf si crise)</li>
+              <li>🔴 <strong>1 seule crise tardive = EPT</strong> (récidive 80%)</li>
+              <li>🧲 <strong>IRM T2*/SWI</strong> : Visualiser hémosidérine (épileptogène)</li>
+              <li>💊 <strong>Lévétiracétam ou Lamotrigine</strong> : Choix fréquents</li>
+              <li>📊 <strong>Pronostic</strong> : 50% rémission, 30% résistance</li>
+            </ul>
+          </div>
+        </div>
+      </div>`
+            }
           ]
         }
     ],
