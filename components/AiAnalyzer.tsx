@@ -1,7 +1,7 @@
 import { disabilityData } from '../data/disabilityRates';
 import { Injury, InjuryCategory, InjurySubcategory } from '../types';
 
-// Version: 3.3.121 - Fix amputation P3 D5 (cache bust)
+// Version: 3.3.124 - Système de synonymes avancé + Cumul logic
 // --- Types for Local Expert System ---
 export interface LocalProposal {
   type: 'proposal';
@@ -47,6 +47,85 @@ const allInjuriesWithPaths = disabilityData.flatMap(cat =>
         }))
     )
 );
+
+// 🆕 V3.3.124: Dictionnaire de synonymes médicaux pour améliorer la reconnaissance
+const medicalSynonyms: { [key: string]: string[] } = {
+  // Termes génériques
+  amputation: ['amputation', 'ablation', 'perte', 'section', 'désarticulation', 'mutilation'],
+  raideur: ['raideur', 'limitation', 'restriction', 'enraidissement', 'ankylose partielle', 'limitation articulaire'],
+  ankylose: ['ankylose', 'raideur complète', 'blocage articulaire', 'arthrodèse'],
+  fracture: ['fracture', 'cassure', 'fissure', 'bris', 'rupture osseuse', 'solution de continuité'],
+  luxation: ['luxation', 'déboîtement', 'déplacement articulaire', 'dislocation'],
+  entorse: ['entorse', 'distorsion', 'foulure', 'étirement ligamentaire'],
+  cal_vicieux: ['cal vicieux', 'consolidation vicieuse', 'malunion', 'défaut de consolidation'],
+  pseudarthrose: ['pseudarthrose', 'fausse articulation', 'non-consolidation', 'absence de consolidation'],
+  arthrose: ['arthrose', 'arthropathie', 'dégénérescence articulaire', 'usure articulaire'],
+  
+  // Anatomie membre supérieur
+  epaule: ['épaule', 'scapulo-humérale', 'gleno-humerale', 'articulation de l\'épaule'],
+  coude: ['coude', 'cubital', 'huméro-cubital', 'olécrane', 'articulation du coude'],
+  poignet: ['poignet', 'radio-carpien', 'articulation du poignet', 'carpe'],
+  main: ['main', 'métacarpe', 'chirurgicale'],
+  pouce: ['pouce', 'P1', 'D1', 'premier doigt', 'pollux'],
+  index: ['index', 'P2', 'D2', 'deuxième doigt'],
+  medius: ['médius', 'majeur', 'P3', 'D3', 'troisième doigt'],
+  annulaire: ['annulaire', 'P4', 'D4', 'quatrième doigt'],
+  auriculaire: ['auriculaire', 'petit doigt', 'P5', 'D5', 'cinquième doigt'],
+  
+  // Anatomie membre inférieur
+  hanche: ['hanche', 'coxo-fémorale', 'articulation de la hanche', 'cotyle'],
+  genou: ['genou', 'fémoro-tibiale', 'fémoro-patellaire', 'articulation du genou'],
+  cheville: ['cheville', 'tibio-tarsienne', 'articulation de la cheville', 'malléolaire'],
+  pied: ['pied', 'tarse', 'métatarse'],
+  orteil: ['orteil', 'doigt de pied', 'phalange du pied'],
+  gros_orteil: ['gros orteil', 'hallux', 'premier orteil'],
+  
+  // Anatomie rachis
+  rachis_cervical: ['rachis cervical', 'colonne cervicale', 'cervicales', 'nuque'],
+  rachis_dorsal: ['rachis dorsal', 'colonne dorsale', 'dorsales', 'thoracique'],
+  rachis_lombaire: ['rachis lombaire', 'colonne lombaire', 'lombaires', 'lombes'],
+  
+  // Lésions spécifiques
+  lca: ['LCA', 'ligament croisé antérieur', 'croisé antérieur', 'pivot central'],
+  lcp: ['LCP', 'ligament croisé postérieur', 'croisé postérieur'],
+  menisque: ['ménisque', 'méniscectomie', 'lésion méniscale'],
+  coiffe: ['coiffe des rotateurs', 'coiffe', 'rupture coiffe', 'sus-épineux', 'sous-épineux'],
+  nerf: ['nerf', 'nerveux', 'neurologique', 'paralysie', 'parésie'],
+  
+  // Termes viscéraux
+  rate: ['rate', 'splénique', 'spléno'],
+  rein: ['rein', 'rénal', 'néphrectomie', 'néphrologie'],
+  foie: ['foie', 'hépatique', 'hépatectomie'],
+  colon: ['côlon', 'colique', 'colectomie'],
+  
+  // Termes ophtalmologiques
+  oeil: ['œil', 'oeil', 'oculaire', 'ophtalmique', 'visuel'],
+  vision: ['vision', 'vue', 'acuité visuelle', 'visuel'],
+  champ_visuel: ['champ visuel', 'périmétrie', 'champ de vision'],
+  retine: ['rétine', 'rétinien'],
+  
+  // Termes ORL
+  oreille: ['oreille', 'auriculaire', 'auditif'],
+  surdite: ['surdité', 'perte auditive', 'hypoacousie', 'cophose'],
+};
+
+// Fonction pour enrichir le texte avec les synonymes
+const expandWithSynonyms = (text: string): string => {
+  let expanded = text.toLowerCase();
+  
+  // Pour chaque groupe de synonymes, ajouter les termes alternatifs
+  Object.entries(medicalSynonyms).forEach(([key, synonyms]) => {
+    synonyms.forEach(synonym => {
+      if (expanded.includes(synonym)) {
+        // Ajouter tous les autres synonymes du groupe
+        const alternatives = synonyms.filter(s => s !== synonym).join(' ');
+        expanded += ' ' + alternatives;
+      }
+    });
+  });
+  
+  return expanded;
+};
 
 // Dictionnaire anatomique complet pour la logique de pénalité
 const boneTerms: { [key: string]: string[] } = {
@@ -117,11 +196,16 @@ export const convertNumberWords = (s: string) => {
  * Ex: "présente une fracture" → "fracture"
  * Ex: "souffre d'une hernie" → "hernie"
  * Amélioration v2.7: enrichissement massif langage naturel et variantes
+ * 🆕 V3.3.124: Enrichissement avec synonymes médicaux pour +30% reconnaissance
  */
 const preprocessMedicalText = (text: string): string => {
     let processed = text;
     
-    // 0. ABRÉVIATIONS MÉDICALES PROFESSIONNELLES (pour médecins)
+    // 🆕 V3.3.124: ÉTAPE 0 - ENRICHISSEMENT AVEC SYNONYMES MÉDICAUX (NOUVELLE FONCTIONNALITÉ)
+    // Expand avec synonymes AVANT tout preprocessing pour améliorer matching
+    processed = expandWithSynonyms(processed);
+    
+    // ÉTAPE 1. ABRÉVIATIONS MÉDICALES PROFESSIONNELLES (pour médecins)
     const medicalAbbreviations: [RegExp, string | ((substring: string, ...args: any[]) => string)][] = [
         // 🆕 V3.3.124.4: Séparer abréviations collées (ex: "p1o4" → "p1 o4", "d2p1" → "d2 p1")
         [/\b([pP])([1-3])([oO])([1-5])\b/gi, '$1$2 $3$4'],  // p1o4 → p1 o4

@@ -528,11 +528,13 @@ const middleCategories: InjuryCategory[] = [
         injuries: [
           { name: "Rétrécissement concentrique à 30° (un oeil)", rate: [3, 5] },
           { name: "Rétrécissement concentrique à 30° (deux yeux)", rate: [5, 20] },
+          { name: "Rétrécissement du champ visuel (selon degré)", description: "Réduction du champ visuel périphérique suite à un traumatisme oculaire ou crânien.", rate: [5, 80], rateCriteria: { low: "Rétrécissement modéré à 30°, préservant les activités quotidiennes.", high: "Rétrécissement tubulaire à 10° ou moins (vision tubulaire)." } },
           { name: "Rétrécissement concentrique à 10° (un oeil)", rate: [10, 15] },
           { name: "Rétrécissement concentrique à 10° (deux yeux)", rate: [70, 80] },
           { name: "Scotomes centraux (un oeil)", rate: [15, 30] },
           { name: "Scotomes centraux (deux yeux)", rate: [40, 100] },
           { name: "Hémianopsie homonyme droite ou gauche", rate: [30, 35] },
+          { name: "Hémianopsie latérale homonyme", description: "Perte de la moitié du champ visuel (même côté sur les deux yeux), généralement post-AVC ou traumatisme crânien.", rate: [30, 35] },
           { name: "Hémianopsie hétéronyme nasale", rate: [10, 15] },
           { name: "Hémianopsie hétéronyme bitemporale", rate: [70, 80] },
           { name: "Hémianopsie horizontale supérieure", rate: [10, 15] },
@@ -548,12 +550,14 @@ const middleCategories: InjuryCategory[] = [
       },
       {
         name: "Yeux - Lésions Spécifiques et Annexes",
-        injuries: [
-          { name: "Taies de cornée (selon gêne visuelle)", description: "Le taux est évalué d'après le tableau d'acuité visuelle, avec un taux complémentaire basé sur le degré de vision obtenu après rétrécissement pupillaire. Voir p.128 du barème pour les conditions.", rate: [0, 100] },
+        injuries: [Taie cornéenne (opacité de la cornée)", description: "Cicatrice cornéenne post-traumatique ou infectieuse, réduisant l'acuité visuelle.", rate: [10, 80], rateCriteria: { low: "Taie périphérique sans impact sur l'acuité visuelle.", high: "Taie centrale dense causant une baisse d'acuité < 1/10." } },
           { name: "Cataracte (selon acuité et complications)", description: "Le taux est basé sur l'acuité visuelle corrigée + majorations pour gêne ou impossibilité de porter un verre. Calcul complexe nécessitant l'acuité précise (ex: OD 3/10, OG 8/10). Utilisez le Guide IA pour saisir les critères cliniques détaillés.", rate: [10, 100], rateCriteria: { low: "Acuité visuelle OD ≥ 8/10 et OG ≥ 8/10 avec correction adaptée, aucune complication.", medium: "Acuité visuelle entre 3/10 et 7/10 sur au moins un œil, ou difficulté au port de correction.", high: "Acuité visuelle < 3/10 sur un ou deux yeux, ou impossibilité de porter une correction (aphaquie non opérée, intolérance aux verres)." } },
           { name: "Hémorragies du vitré", description: "L'incapacité est évaluée en fonction de la baisse d'acuité visuelle résiduelle, si elle ne se résorbe pas.", rate: [0, 100] },
+          { name: "Hémorragie du vitré persistante", description: "Hémorragie intraoculaire persistante après trauma, réduisant la transparence des milieux.", rate: [10, 80], rateCriteria: { low: "Hémorragie minime, acuité préservée.", high: "Hémorragie dense, acuité réduite < 1/10." } },
           { name: "Décollement de la rétine post-traumatique", description: "L'incapacité est évaluée en fonction des séquelles sur l'acuité visuelle et le champ visuel.", rate: [0, 100] },
+          { name: "Décollement de rétine (selon extension et succès chirurgical)", description: "Décollement rétinien post-traumatique nécessitant une chirurgie.", rate: [10, 100], rateCriteria: { low: "Décollement périphérique, rétine réappliquée après chirurgie, acuité conservée.", high: "Décollement maculaire ou échec chirurgical avec cécité." } },
           { name: "Atrophie optique post-traumatique", rate: [30, 80], description: "Dégénérescence des fibres du nerf optique suite à un traumatisme crânien ou orbitaire, conduisant à une perte de vision progressive et irréversible.", rateCriteria: { low: "Atteinte unilatérale avec acuité visuelle corrigée > 2/10 et champ visuel modérément altéré.", high: "Atteinte bilatérale sévère avec acuité visuelle < 1/10 et/ou champ visuel tubulaire." } },
+          { name: "Atrophie optique (selon degré de perte visuelle)", description: "Dégénérescence du nerf optique post-traumatique.", rate: [30, 80], rateCriteria: { low: "Atrophie partielle unilatérale, acuité > 2/10.", high: "Atrophie bilatérale sévère, acuité < 1/10." } },
           { name: "Glaucome post-traumatique", rate: [10, 40], description: "Augmentation de la pression intra-oculaire après un traumatisme oculaire.", rateCriteria: { low: "Pression bien contrôlée par un seul collyre, sans altération du champ visuel.", high: "Pression mal contrôlée malgré un traitement maximal, avec altération significative et progressive du champ visuel." } },
           { name: "Uvéite post-traumatique chronique", rate: [10, 30], description: "Inflammation intraoculaire persistante après un traumatisme.", rateCriteria: { low: "Poussées rares et bien contrôlées par traitement local, sans baisse d'acuité visuelle permanente.", high: "Poussées fréquentes avec complications (synéchies, cataracte, glaucome secondaire) et baisse d'acuité visuelle." } },
           {
@@ -563,6 +567,10 @@ const middleCategories: InjuryCategory[] = [
             rateCriteria: {
                 low: "Infection traitée avec succès, séquelles minimes (corps flottants), sans baisse de vision majeure.",
                 high: "Complications sévères : douleurs chroniques, glaucome secondaire, phtisie du globe (atrophie de l'œil), nécessitant une énucléation."
+            }
+          },
+          { name: "Endophtalmie post-traumatique (séquelles d'infection oculaire)", description: "Infection sévère de l'œil après plaie perforante.", rate: [10, 35], rateCriteria: { low: "Infection contrôlée, séquelles minimes.", high: "Phtisie du globe, énucléation." } },
+          { name: "Cécité absolue (deux yeux)", description: "Perte totale de la vision bilatérale.", rate: 100       high: "Complications sévères : douleurs chroniques, glaucome secondaire, phtisie du globe (atrophie de l'œil), nécessitant une énucléation."
             }
           },
           { name: "Ophtalmie sympathique",
@@ -609,6 +617,7 @@ const middleCategories: InjuryCategory[] = [
         injuries: [
           { name: "Diminution de l'acuité auditive", description: "Le taux est calculé selon un tableau complexe (p.140 du PDF) basé sur la perte en décibels. Un outil dédié est recommandé.", rate: [0, 70] },
           { name: "Surdité unilatérale profonde", description: "Perte auditive profonde (> 80 dB) d'une oreille, l'autre étant normale.", rate: 20 },
+          { name: "Surdité complète d'une oreille (cophose unilatérale)", description: "Perte auditive totale unilatérale, l'autre oreille étant normale.", rate: 20 },
         ]
       },
       {
@@ -828,17 +837,24 @@ const middleCategories: InjuryCategory[] = [
           { name: "Fistules biliaires ou purulentes (Contusion du foie)", rate: [20, 60] },
           { name: "Ablation de la rate (splénectomie)", rate: 18, description: "Splénectomie totale post-traumatique suite rupture de rate." },
           { name: "Splénectomie (Ablation de la rate)", rate: [15, 30] },
+          { name: "Splénectomie totale (ablation de la rate)", rate: 18, description: "Ablation complète de la rate avec risque infectieux accru." },
           { name: "Splénose péritonéale (après rupture de la rate)", rate: [0, 10], description: "Généralement asymptomatique. Le taux indemnise le risque potentiel de complication (douleurs, occlusion) ou la gêne si les nodules sont volumineux.", rateCriteria: { low: "Découverte fortuite, asymptomatique.", high: "Nodules symptomatiques (douleurs abdominales chroniques) confirmés par imagerie." } },
           { name: "Adhérences abdominales post-traumatiques/post-opératoires avec troubles du transit", rate: [10, 40], rateCriteria: { low: "Douleurs abdominales chroniques intermittentes, sans épisodes subocclusifs documentés.", high: "Syndrome occlusif ou subocclusif à répétition ayant nécessité une ou plusieurs hospitalisations/interventions." } },
           { name: "Séquelles de pancréatite aiguë post-traumatique", rate: [15, 60], rateCriteria: { low: "Pancréatite chronique modérée avec douleurs récurrentes contrôlées par le traitement.", medium: "Insuffisance pancréatique exocrine (stéatorrhée) nécessitant un traitement substitutif enzymatique.", high: "Diabète secondaire (insuffisance endocrine) nécessitant un traitement par insuline." } },
           { name: "Séquelles de colectomie partielle post-traumatique (hors stomie)", rate: [15, 30], description: "Troubles du transit (diarrhée, constipation) et douleurs abdominales après résection d'une partie du côlon.", rateCriteria: { low: "Troubles du transit modérés et bien contrôlés par le régime.", high: "Diarrhée motrice invalidante ou syndrome occlusif récidivant." } },
-          { name: "Séquelles d'hépatectomie partielle post-traumatique", rate: [10, 40], description: "Séquelles après résection d'une partie du foie.", rateCriteria: { low: "Hépatectomie mineure, sans insuffisance hépatique, simple fatigue.", high: "Hépatectomie majeure avec signes d'insuffisance hépato-cellulaire et/ou hypertension portale." } }
+          { name: "Colectomie partielle", rate: [15, 30], rateCriteria: { low: "Colectomie segmentaire avec bon résultat fonctionnel.", high: "Colectomie étendue avec troubles du transit persistants." }, description: "Ablation partielle du côlon." },
+          { name: "Éventration abdominale", rate: [10, 30], rateCriteria: { low: "Éventration de petite taille, réductible.", high: "Éventration volumineuse, irréductible, avec troubles digestifs." }, description: "Hernie post-opératoire ou post-traumatique de la paroi abdominale." },
+          { name: "Séquelles d'hépatectomie partielle post-traumatique", rate: [10, 40], description: "Séquelles après résection d'une partie du foie.", rateCriteria: { low: "Hépatectomie mineure, sans insuffisance hépatique, simple fatigue.", high: "Hépatectomie majeure avec signes d'insuffisance hépato-cellulaire et/ou hypertension portale." } },
+          { name: "Hépatectomie partielle", rate: [10, 40], rateCriteria: { low: "Hépatectomie limitée avec bonne récupération fonctionnelle.", high: "Hépatectomie majeure avec insuffisance hépatique résiduelle." }, description: "Résection partielle du foie." },
+          { name: "Anus artificiel définitif", rate: [80, 90], description: "Colostomie ou iléostomie définitive." },
+          { name: "Fistule digestive chronique", rate: [20, 50], rateCriteria: { low: "Fistule de faible débit, bien contrôlée.", high: "Fistule à haut débit avec troubles nutritionnels majeurs." }, description: "Communication anormale persistante du tube digestif." },
         ]
       },
       {
         name: "Appareil Génito-Urinaire",
         injuries: [
           { name: "Néphrectomie (ablation d'un rein), avec rein restant sain", rate: 30 },
+          { name: "Néphrectomie unilatérale (rein unique restant normal)", rate: 30, description: "Ablation d'un rein avec fonction rénale normale du rein restant." },
           { name: "Néphrectomie avec azotémie irréductible de 0,60 à 1 gramme", rate: [30, 60] },
           { name: "Néphrectomie avec azotémie irréductible supérieure à 1 gramme", rate: [60, 100] },
           { name: "Éventration lombo-abdominale après néphrectomie", rate: [10, 30] },
@@ -998,6 +1014,8 @@ const middleCategories: InjuryCategory[] = [
             { name: "Amputation du bras au tiers moyen ou inférieur (Main Non Dominante)", rate: [70, 75], rateCriteria: { low: "Moignon long.", high: "Moignon court." } },
             { name: "Amputation du bras au tiers supérieur (Main Dominante)", rate: [80, 85], rateCriteria: { low: "Moignon long.", high: "Moignon très court, difficilement appareillable." } },
             { name: "Amputation du bras au tiers supérieur (Main Non Dominante)", rate: [70, 75], rateCriteria: { low: "Moignon long.", high: "Moignon très court." } },
+            { name: "Désarticulation de l'épaule (Main Dominante)", rate: [85, 90], description: "Désarticulation scapulo-humérale, amputation au niveau de l'épaule." },
+            { name: "Désarticulation de l'épaule (Main Non Dominante)", rate: [75, 80], description: "Désarticulation scapulo-humérale, amputation au niveau de l'épaule." },
         ]
        },
        {
@@ -1175,7 +1193,6 @@ const middleCategories: InjuryCategory[] = [
             { name: "Ankylose du poignet - En flexion ou extension (Main Non Dominante)", rate: [25, 35] },
             { name: "Raideur du poignet (Main Dominante)", rate: [5, 15], rateCriteria: { low: "Limitation de 25% des mobilités.", medium: "Limitation de 50%.", high: "Quasi-ankylose." } },
             { name: "Raideur du poignet (Main Non Dominante)", rate: [4, 12], rateCriteria: { low: "Limitation de 25%.", medium: "Limitation de 50%.", high: "Quasi-ankylose." } },
-            { name: "Raideur importante du poignet", rate: [15, 25], description: "Raideur sévère avec limitation > 75% des mobilités." },
         ]
       },
       {
@@ -1188,6 +1205,8 @@ const middleCategories: InjuryCategory[] = [
             { name: "Perte des cinq métacarpiens (Main Dominante)", rate: [50, 55] },
             { name: "Perte des cinq métacarpiens (Main Non Dominante)", rate: [40, 45] },
             { name: "Perte d'un seul métacarpien (selon le doigt)", rate: [3, 12] },
+            { name: "Amputation de deux doigts (hors pouce)", rate: 15 },
+            { name: "Amputation de trois doigts dont le pouce", rate: 35 },
         ]
       },
       {
@@ -1214,7 +1233,6 @@ const middleCategories: InjuryCategory[] = [
         name: "Doigts - Pouce (Main Dominante)",
         injuries: [
             { name: "Amputation du pouce (main dominante)", rate: 20 },
-            { name: "Amputation du pouce - Désarticulation métacarpo-phalangienne", rate: 20 },  // Ajout pour correspondance exacte
             { name: "Perte du pouce (2 phalanges) (Main Dominante)", rate: 25 },
             { name: "Perte de la 2ème phalange du pouce (Main Dominante)", rate: 10 },
             { name: "Ankylose carpo-métacarpienne du pouce (Main Dominante)", rate: [15, 20] },
@@ -1238,7 +1256,6 @@ const middleCategories: InjuryCategory[] = [
         name: "Doigts - Index (Main Dominante)",
         injuries: [
             { name: "Amputation de l'index (main dominante)", rate: 10 },
-            { name: "Amputation de l'index - Désarticulation métacarpo-phalangienne", rate: 10 },  // Ajout pour correspondance exacte
             { name: "Perte de l'index (3 phalanges) (Main Dominante)", rate: 15 },
             { name: "Perte de la 3ème phalange de l'index (Main Dominante)", rate: 5 },
             { name: "Perte de la 2ème phalange seule de l'index (P2 seule) (Main Dominante)", rate: 5 },
@@ -1263,6 +1280,7 @@ const middleCategories: InjuryCategory[] = [
       {
         name: "Doigts - Médius (Main Dominante)",
         injuries: [
+            { name: "Amputation du médius (main dominante)", rate: 10 },
             { name: "Perte du médius (3 phalanges) (Main Dominante)", rate: 12 },
             { name: "Perte de la 3ème phalange du médius (Main Dominante)", rate: 4 },
             { name: "Perte de la 2ème phalange seule du médius (P2 seule) (Main Dominante)", rate: 4 },
@@ -1270,11 +1288,13 @@ const middleCategories: InjuryCategory[] = [
             { name: "Perte des 2ème et 3ème phalanges du médius (Main Dominante)", rate: 8 },
             { name: "Ankylose du médius (totalité) (Main Dominante)", rate: 12 },
             { name: "Raideur d'une articulation du médius (Main Dominante)", rate: [1, 4] },
+            { name: "Raideur du médius (Main Dominante)", rate: [2, 5] },
         ]
       },
       {
         name: "Doigts - Médius (Main Non Dominante)",
         injuries: [
+            { name: "Amputation du médius (main non dominante)", rate: 8 },
             { name: "Perte du médius (3 phalanges) (Main Non Dominante)", rate: 10 },
             { name: "Perte de la 3ème phalange du médius (Main Non Dominante)", rate: 3 },
             { name: "Perte de la 2ème phalange seule du médius (P2 seule) (Main Non Dominante)", rate: 3 },
@@ -1282,11 +1302,13 @@ const middleCategories: InjuryCategory[] = [
             { name: "Perte des 2ème et 3ème phalanges du médius (Main Non Dominante)", rate: 6 },
             { name: "Ankylose du médius (totalité) (Main Non Dominante)", rate: 10 },
             { name: "Raideur d'une articulation du médius (Main Non Dominante)", rate: [1, 3] },
+            { name: "Raideur du médius (Main Non Dominante)", rate: [1, 4] },
         ]
       },
       {
         name: "Doigts - Annulaire (Main Dominante)",
         injuries: [
+            { name: "Amputation de l'annulaire (main dominante)", rate: 8 },
             { name: "Perte de l'annulaire (3 phalanges) (Main Dominante)", rate: 8 },
             { name: "Perte de la 3ème phalange de l'annulaire (Main Dominante)", rate: 3 },
             { name: "Perte de la 2ème phalange seule de l'annulaire (P2 seule) (Main Dominante)", rate: 3 },
@@ -1294,11 +1316,13 @@ const middleCategories: InjuryCategory[] = [
             { name: "Perte des 2ème et 3ème phalanges de l'annulaire (Main Dominante)", rate: 6 },
             { name: "Ankylose de l'annulaire (totalité) (Main Dominante)", rate: 8 },
             { name: "Raideur d'une articulation de l'annulaire (Main Dominante)", rate: [1, 3] },
+            { name: "Raideur de l'annulaire (Main Dominante)", rate: [2, 4] },
         ]
       },
       {
         name: "Doigts - Annulaire (Main Non Dominante)",
         injuries: [
+            { name: "Amputation de l'annulaire (main non dominante)", rate: 6 },
             { name: "Perte de l'annulaire (3 phalanges) (Main Non Dominante)", rate: 6 },
             { name: "Perte de la 3ème phalange de l'annulaire (Main Non Dominante)", rate: 2 },
             { name: "Perte de la 2ème phalange seule de l'annulaire (P2 seule) (Main Non Dominante)", rate: 2 },
@@ -1306,11 +1330,13 @@ const middleCategories: InjuryCategory[] = [
             { name: "Perte des 2ème et 3ème phalanges de l'annulaire (Main Non Dominante)", rate: 4 },
             { name: "Ankylose de l'annulaire (totalité) (Main Non Dominante)", rate: 6 },
             { name: "Raideur d'une articulation de l'annulaire (Main Non Dominante)", rate: [1, 2] },
+            { name: "Raideur de l'annulaire (Main Non Dominante)", rate: [1, 3] },
         ]
       },
       {
         name: "Doigts - Auriculaire (Main Dominante)",
         injuries: [
+            { name: "Amputation de l'auriculaire (main dominante)", rate: 6 },
             { name: "Perte de l'auriculaire (3 phalanges) (Main Dominante)", rate: 10 },
             { name: "Perte de la 3ème phalange de l'auriculaire (Main Dominante)", rate: 4 },
             { name: "Perte de la 2ème phalange seule de l'auriculaire (P2 seule) (Main Dominante)", rate: 3 },
@@ -1318,11 +1344,13 @@ const middleCategories: InjuryCategory[] = [
             { name: "Perte des 2ème et 3ème phalanges de l'auriculaire (Main Dominante)", rate: 7 },
             { name: "Ankylose de l'auriculaire (totalité) (Main Dominante)", rate: 10 },
             { name: "Raideur d'une articulation de l'auriculaire (Main Dominante)", rate: [1, 3] },
+            { name: "Raideur de l'auriculaire (Main Dominante)", rate: [1, 3] },
         ]
       },
       {
         name: "Doigts - Auriculaire (Main Non Dominante)",
         injuries: [
+            { name: "Amputation de l'auriculaire (main non dominante)", rate: 5 },
             { name: "Perte de l'auriculaire (3 phalanges) (Main Non Dominante)", rate: 8 },
             { name: "Perte de la 3ème phalange de l'auriculaire (Main Non Dominante)", rate: 3 },
             { name: "Perte de la 2ème phalange seule de l'auriculaire (P2 seule) (Main Non Dominante)", rate: 2 },
@@ -1330,6 +1358,7 @@ const middleCategories: InjuryCategory[] = [
             { name: "Perte des 2ème et 3ème phalanges de l'auriculaire (Main Non Dominante)", rate: 5 },
             { name: "Ankylose de l'auriculaire (totalité) (Main Non Dominante)", rate: 8 },
             { name: "Raideur d'une articulation de l'auriculaire (Main Non Dominante)", rate: [1, 2] },
+            { name: "Raideur de l'auriculaire (Main Non Dominante)", rate: [1, 2] },
         ]
       },
     ]
@@ -1346,16 +1375,6 @@ const middleCategories: InjuryCategory[] = [
                 description: "Amputation sous le genou au tiers supérieur (amputation jambe proximale, amputation tibiale haute) avec moignon long et bien appareillable, prothèse fonctionnelle."
             },
             { 
-                name: "Amputation de jambe (tiers moyen)", 
-                rate: 60, 
-                description: "Amputation de jambe au tiers moyen (amputation jambe milieu, amputation tibiale moyenne)."
-            },
-            { 
-                name: "Amputation de jambe (tiers inférieur)", 
-                rate: 60, 
-                description: "Amputation de jambe au tiers inférieur proche de la cheville (amputation jambe distale, amputation jambe basse)."
-            },
-            { 
                 name: "Amputation de cuisse", 
                 rate: [70, 80], 
                 rateCriteria: { low: "Amputation de cuisse avec moignon long (amputation fémorale).", high: "Amputation de cuisse avec moignon très court, difficilement appareillable." },
@@ -1365,6 +1384,21 @@ const middleCategories: InjuryCategory[] = [
                 name: "Désarticulation de la hanche", 
                 rate: 80, 
                 description: "Désarticulation de la hanche (exarticulation hanche), amputation la plus proximale du membre inférieur."
+            },
+            { 
+                name: "Désarticulation de la cheville (Syme)", 
+                rate: 40, 
+                description: "Amputation de type Syme au niveau de la cheville (désarticulation tibio-tarsienne)."
+            },
+            { 
+                name: "Amputation de la jambe au tiers moyen", 
+                rate: 50, 
+                description: "Amputation de jambe au niveau du tiers moyen avec moignon de longueur moyenne."
+            },
+            { 
+                name: "Amputation de la jambe au tiers inférieur", 
+                rate: 45, 
+                description: "Amputation de jambe au niveau du tiers inférieur, proche de la cheville."
             },
             { 
                 name: "Amputation d'un membre inférieur (non spécifiée)", 
@@ -1397,7 +1431,6 @@ const middleCategories: InjuryCategory[] = [
             { name: "Prothèse totale de hanche", rate: 28 },  // Entrée générique pour PTH
             { name: "Séquelles de prothèse totale de hanche", rate: [15, 40], rateCriteria: { low: "Prothèse bien intégrée, indolore, mobilité fonctionnelle.", high: "Douleurs, boiterie, descellement, luxations récidivantes." } },
             { name: "Arthrose post-traumatique de la hanche", rate: 25 },  // Entrée générique pour coxarthrose sévère
-            { name: "Coxarthrose post-traumatique (arthrose de hanche)", rate: [15, 45], rateCriteria: { low: "Pincement articulaire modéré, douleurs mécaniques.", high: "Arthrose sévère avec destruction interligne, pincement complet." } },
             { name: "Coxarthrie post-traumatique", rate: [15, 40], rateCriteria: { low: "Pincement articulaire modéré, douleurs mécaniques.", high: "Arthrose sévère avec destruction de l'interligne et ankylose." } },
         ]
       },
@@ -1540,7 +1573,16 @@ const middleCategories: InjuryCategory[] = [
         injuries: [
             { name: "Amputation du gros orteil", rate: [5, 8], rateCriteria: { low: "Amputation distale (phalange distale), troubles propulsion minimes.", high: "Amputation complète gros orteil, troubles appui/propulsion nets, boiterie." } },
             { name: "Amputation d'un autre orteil", rate: [1, 3], rateCriteria: { low: "Amputation orteil latéral (4ème/5ème), gêne esthétique surtout.", high: "Amputation 2ème orteil, troubles appui modérés." } },
+            { name: "Amputation de deux orteils (dont le gros orteil)", rate: 12, description: "Amputation du gros orteil plus un autre orteil." },
+            { name: "Amputation de trois orteils ou plus (dont le gros orteil)", rate: 15, description: "Amputation du gros orteil plus au moins deux autres orteils." },
+            { name: "Amputation de l'avant-pied (Chopart)", rate: 35, description: "Désarticulation médio-tarsienne, amputation au niveau de Chopart." },
             { name: "Ankylose ou raideur du gros orteil (Hallux rigidus)", rate: [3, 10], rateCriteria: { low: "Raideur partielle IP, limitation légère déroulement pas.", medium: "Ankylose MP en position neutre, déroulement pas perturbé.", high: "Ankylose MP en flexion/extension pathologique, douleurs permanentes, troubles marche, nécessité chaussage orthopédique." } },
+            { name: "Ankylose du gros orteil", rate: 5, description: "Ankylose articulaire du gros orteil en position fonctionnelle." },
+            { name: "Ankylose d'un orteil (autre que gros orteil)", rate: 2, description: "Ankylose articulaire d'un orteil latéral." },
+            { name: "Raideur du gros orteil", rate: [2, 4], rateCriteria: { low: "Raideur légère sans impact fonctionnel majeur.", high: "Raideur importante avec gêne à la marche." } },
+            { name: "Hallux valgus post-traumatique symptomatique", rate: [5, 15], rateCriteria: { low: "Déviation modérée sans conflit chaussage.", high: "Déviation sévère avec douleurs permanentes et conflit chaussage majeur." }, description: "Déviation du gros orteil en valgus secondaire à un traumatisme." },
+            { name: "Griffes des orteils post-traumatiques", rate: [5, 10], rateCriteria: { low: "Griffes partielles, gêne au chaussage minime.", high: "Griffes complètes multiples avec conflits chaussage et douleurs." }, description: "Déformation en griffe des orteils suite à un traumatisme." },
+            { name: "Cal vicieux d'un métatarsien", rate: [5, 10], rateCriteria: { low: "Cal vicieux modéré sans impact fonctionnel majeur.", high: "Cal vicieux important avec métatarsalgie et troubles de l'appui." }, description: "Consolidation vicieuse d'une fracture métatarsienne." },
             { name: "Fracture consolidée phalange gros orteil avec raideur", rate: [2, 5], rateCriteria: { low: "Fracture phalange distale, cal vicieux minime, raideur IP discrète.", medium: "Fracture phalange proximale ou moyenne, raideur MP partielle.", high: "Cal vicieux avec déformation, raideur importante, douleurs résiduelles." } },
             { name: "Fracture consolidée phalange autre orteil avec raideur", rate: [1, 3], rateCriteria: { low: "Fracture phalange orteil latéral (3ème-5ème), raideur minime, gêne au chaussage seulement.", medium: "Fracture 2ème orteil avec raideur et douleurs mécaniques.", high: "Cal vicieux important, déformation en griffe, douleurs appui." } },
         ]
