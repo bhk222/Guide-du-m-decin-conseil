@@ -3661,7 +3661,169 @@ export const aldData: AldItem[] = [
           ] 
         },
         { code: "C08C", name: "Paralysies, hémiplégies", children: [{ code: "C08C01", name: "Hémiplégies" }, { code: "C08C02", name: "Paraplégies" }, { code: "C08C03", name: "Tétraplégies" }] },
-        { code: "C08D", name: "Epilepsies", children: [{ code: "C08D01", name: "Epilepsie du lobe temporal" }, { code: "C08D02", name: "Epilepsie myoclonique progressive" }, { code: "C08D03", name: "Epilepsie post-traumatique" }] }
+        { 
+          code: "C08D", 
+          name: "Epilepsies", 
+          children: [
+            { 
+              code: "C08D01", 
+              name: "Epilepsie du lobe temporal",
+              tooltip: `<div class="space-y-3">
+          <h3 class="font-bold text-lg text-red-700">🧠 ÉPILEPSIE DU LOBE TEMPORAL (ELT)</h3>
+          
+          <div>
+            <h4 class="font-semibold text-primary-600">🔹 1. Définition et Classification</h4>
+            <p class="text-sm">L'ELT est une <strong>épilepsie focale</strong> dont la zone épileptogène se situe dans le lobe temporal. Elle se divise en deux sous-types anatomocliniques distincts :</p>
+            
+            <div class="bg-blue-50 border border-blue-200 rounded p-3 mt-2 mb-2">
+              <p class="text-sm font-semibold text-blue-800">📍 ELT Mésiale (Interne) :</p>
+              <ul class="text-sm list-disc list-inside ml-2">
+                <li>Forme la plus courante (env. <strong>80% des cas</strong>)</li>
+                <li>Implique les structures limbiques (hippocampe, amygdale, gyrus parahipocampique)</li>
+                <li>Souvent associée à la <strong>Sclérose de l'Hippocampe</strong> (Sclérose Mésio-Temporale)</li>
+              </ul>
+            </div>
+            
+            <div class="bg-purple-50 border border-purple-200 rounded p-3 mb-2">
+              <p class="text-sm font-semibold text-purple-800">📍 ELT Latérale (Néocorticale) :</p>
+              <ul class="text-sm list-disc list-inside ml-2">
+                <li>Implique le néocortex temporal externe</li>
+                <li>Souvent liée à des <strong>lésions structurelles</strong> (dysplasie corticale, tumeurs, cavernomes) ou génétique</li>
+              </ul>
+            </div>
+          </div>
+
+          <div>
+            <h4 class="font-semibold text-primary-600">🔹 2. Sémiologie Clinique (Symptômes)</h4>
+            <p class="text-sm mb-2">La présentation clinique suit généralement une séquence stéréotypée :</p>
+            
+            <div class="bg-yellow-50 border border-yellow-200 rounded p-3 mb-2">
+              <p class="text-sm font-semibold text-yellow-900">A. L'Aura (Crise focale sans rupture de contact)</p>
+              <p class="text-xs text-yellow-700 mb-2">⚡ C'est le signe localisateur le plus fiable</p>
+              <ul class="text-sm list-disc list-inside ml-2">
+                <li><strong>Sensation épigastrique ascendante</strong> : Le symptôme le plus fréquent de l'ELT mésiale</li>
+                <li><strong>Phénomènes psychiques/mnésiques</strong> : Impression de "déjà-vu" ou "jamais-vu", états de rêve</li>
+                <li><strong>Hallucinations olfactives ou gustatives</strong> : Souvent désagréables (odeur de brûlé), typique de l'atteinte de l'uncus (crises uncinées)</li>
+                <li><strong>Peur soudaine</strong> : Activation de l'amygdale</li>
+              </ul>
+            </div>
+            
+            <div class="bg-orange-50 border border-orange-200 rounded p-3 mb-2">
+              <p class="text-sm font-semibold text-orange-900">B. Phase Ictale (Rupture de contact)</p>
+              <ul class="text-sm list-disc list-inside ml-2">
+                <li><strong>Arrêt comportemental</strong> : "Staring spell" (fixité du regard)</li>
+                <li><strong>Automatismes oro-alimentaires</strong> : Mâchonnement, déglutition, claquement de lèvres</li>
+                <li><strong>Automatismes gestuels</strong> : Grattage, manipulation d'objets (souvent ipsilatéral au foyer)</li>
+                <li><strong>Dystonie du membre supérieur</strong> : Souvent controlatérale au foyer épileptogène (signe localisateur important)</li>
+              </ul>
+            </div>
+            
+            <div class="bg-gray-50 border border-gray-200 rounded p-3 mb-2">
+              <p class="text-sm font-semibold text-gray-900">C. Phase Post-Ictale</p>
+              <ul class="text-sm list-disc list-inside ml-2">
+                <li>Confusion mentale progressive</li>
+                <li><strong>Aphasie</strong> : Suggère fortement une atteinte de l'hémisphère dominant (généralement gauche)</li>
+                <li>Fatigue, céphalées</li>
+              </ul>
+            </div>
+          </div>
+
+          <div>
+            <h4 class="font-semibold text-primary-600">🔹 3. Diagnostic Paraclinique</h4>
+            
+            <div class="bg-teal-50 border border-teal-200 rounded p-3 mb-2">
+              <p class="text-sm font-semibold text-teal-900">A. Électroencéphalogramme (EEG)</p>
+              <ul class="text-sm list-disc list-inside ml-2">
+                <li><strong>Intercritique</strong> (entre les crises) : Pointes ou ondes aiguës dans les régions temporales antérieures (électrodes F7/F8, T3/T4) ou basales</li>
+                <li>⚠️ L'EEG peut être normal dans 30 à 40% des cas de surface</li>
+                <li><strong>Vidéo-EEG (Gold Standard)</strong> : Indispensable pour corréler la clinique et l'activité électrique, surtout en pré-chirurgical</li>
+              </ul>
+            </div>
+            
+            <div class="bg-indigo-50 border border-indigo-200 rounded p-3 mb-2">
+              <p class="text-sm font-semibold text-indigo-900">B. Imagerie par Résonance Magnétique (IRM)</p>
+              <ul class="text-sm list-disc list-inside ml-2">
+                <li>Protocole épilepsie haute résolution (<strong>3 Tesla</strong>) requis</li>
+                <li><strong>Recherche de Sclérose de l'Hippocampe</strong> : Atrophie hippocampique et hypersignal en séquence T2/FLAIR</li>
+                <li><strong>Recherche de lésions</strong> : Tumeurs de bas grade (DNET, gangliogliome), dysplasies corticales focales</li>
+              </ul>
+            </div>
+            
+            <div class="bg-pink-50 border border-pink-200 rounded p-3 mb-2">
+              <p class="text-sm font-semibold text-pink-900">C. Neuropsychologie</p>
+              <ul class="text-sm list-disc list-inside ml-2">
+                <li>Mise en évidence de déficits mnésiques</li>
+                <li><strong>Mémoire verbale</strong> : Pour le lobe dominant</li>
+                <li><strong>Mémoire visuo-spatiale</strong> : Pour le lobe non-dominant</li>
+              </ul>
+            </div>
+          </div>
+
+          <div>
+            <h4 class="font-semibold text-primary-600">🔹 4. Prise en Charge Thérapeutique</h4>
+            
+            <div class="bg-green-50 border border-green-200 rounded p-3 mb-2">
+              <p class="text-sm font-semibold text-green-900">A. Traitement Pharmacologique</p>
+              <p class="text-xs text-green-700 mb-2">Le traitement vise la suppression des crises (monothérapie privilégiée)</p>
+              
+              <p class="text-sm font-semibold mt-2">💊 Molécules de 1ère ligne :</p>
+              <ul class="text-sm list-disc list-inside ml-2">
+                <li><strong>Lamotrigine</strong></li>
+                <li><strong>Lévétiracétam</strong></li>
+                <li><strong>Carbamazépine</strong> (attention aux interactions enzymatiques)</li>
+                <li><strong>Oxcarbazépine</strong></li>
+              </ul>
+              
+              <p class="text-sm font-semibold mt-2">💊 Molécules de 2ème ligne :</p>
+              <ul class="text-sm list-disc list-inside ml-2">
+                <li>Lacosamide</li>
+                <li>Topiramate</li>
+                <li>Zonisamide</li>
+                <li>Perampanel</li>
+              </ul>
+              
+              <div class="bg-yellow-100 border border-yellow-300 rounded p-2 mt-2">
+                <p class="text-xs font-semibold text-yellow-800">⚠️ Note importante :</p>
+                <p class="text-xs text-yellow-700">Environ <strong>30% à 40%</strong> des ELT sont pharmaco-résistantes (échec de deux molécules bien conduites)</p>
+              </div>
+            </div>
+            
+            <div class="bg-blue-50 border border-blue-200 rounded p-3 mb-2">
+              <p class="text-sm font-semibold text-blue-900">B. Traitement Chirurgical</p>
+              <div class="bg-blue-100 border border-blue-300 rounded p-2 mb-2">
+                <p class="text-xs font-semibold text-blue-800">🎯 L'ELT est la forme d'épilepsie qui répond le mieux à la chirurgie</p>
+                <p class="text-xs text-blue-700">Elle doit être envisagée rapidement en cas de pharmaco-résistance avérée</p>
+              </div>
+              
+              <p class="text-sm font-semibold mt-2">🔪 Procédures :</p>
+              <ul class="text-sm list-disc list-inside ml-2">
+                <li><strong>Lobectomie temporale antérieure</strong></li>
+                <li><strong>Amygdalo-hippocampectomie sélective</strong></li>
+              </ul>
+              
+              <p class="text-sm font-semibold mt-2">✅ Résultats :</p>
+              <ul class="text-sm list-disc list-inside ml-2">
+                <li><strong>60% à 80%</strong> des patients deviennent libres de crises (Classification Engel I)</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="bg-red-50 border border-red-200 rounded p-3">
+            <h4 class="font-semibold text-red-900">⚡ Points clés pour le médecin</h4>
+            <ul class="text-sm list-disc list-inside ml-2">
+              <li>🔑 L'aura est le <strong>signe localisateur le plus fiable</strong></li>
+              <li>🧠 Vidéo-EEG et IRM 3T sont <strong>indispensables</strong> au diagnostic</li>
+              <li>💊 30-40% de pharmaco-résistance → <strong>chirurgie à envisager précocement</strong></li>
+              <li>✅ Excellent pronostic chirurgical : 60-80% de guérison</li>
+              <li>🎯 Traitement précoce essentiel pour éviter complications cognitives et sociales</li>
+            </ul>
+          </div>
+        </div>`
+            }, 
+            { code: "C08D02", name: "Epilepsie myoclonique progressive" }, 
+            { code: "C08D03", name: "Epilepsie post-traumatique" }
+          ]
+        }
     ],
   },
   {
