@@ -130,7 +130,7 @@ const processQuery = (query: string): string => {
         consolidation: { keywords: ["qu'est-ce", 'consolidation'], law: 'loi_83_13', article: 24 },
         fixation_taux_incapacite: { keywords: ['comment', 'fixe', 'taux', 'incapacite'], law: 'loi_83_13', article: 42 },
         etat_anterieur: { keywords: ['prise en charge', 'etat anterieur'], law: 'loi_83_13', article: 10 },
-        tierce_personne: { keywords: ['conditions', 'attribution', 'tierce personne'], law: 'loi_83_13', article: 46 },
+        tierce_personne: { keywords: ['conditions', 'tierce personne'], law: 'loi_83_13', article: 46 },
         
         // Procédures et Recours
         procedure_expertise: { 
@@ -143,7 +143,105 @@ const processQuery = (query: string): string => {
             keywords: ['procedure', 'revision', 'taux'], 
             summary: "La révision d'une rente d'incapacité est possible en cas d'**aggravation ou d'atténuation** de l'état de santé de la victime, constatée après la date de consolidation initiale (Art. 58, Loi 83-13).\n\nLa demande de révision peut être faite par la victime ou par la CNAS. Des examens de contrôle peuvent avoir lieu :\n- Tous les **3 mois** durant les 2 premières années.\n- Tous les **ans** après ce délai de 2 ans (Art. 59, Loi 83-13)."
         },
+        definition_aggravation: { 
+            keywords: ['quoi', 'aggravation'],
+            summary: `Mon évaluation en tant qu'expert ne se fonde pas sur le ressenti subjectif de la victime, mais sur l'**application stricte des articles de loi** définissant les conditions de réouverture d'un dossier après consolidation.
+
+## 1. LE FONDEMENT LÉGAL DE L'AGGRAVATION : L'Article 58
+
+Le point de départ de toute expertise en matière de rechute est la définition légale de la révision du dossier. La loi impose une condition sine qua non pour qu'une aggravation soit reconnue.
+
+**Texte de référence : Article 58 de la Loi 83-13**
+
+« La rente peut faire l'objet d'une révision en cas d'aggravation [...] de l'infirmité de la victime. La procédure de révision est **limitée au cas de modification effective** de l'état de la victime, postérieurement à la date d'effet de la décision fixant la guérison ou la consolidation. »
+
+**Analyse expertale :** L'Article 58 introduit le concept clé de « **modification effective** ».
+
+Juridiquement, cela signifie que la simple persistance des douleurs ou des gênes, si elles étaient déjà présentes lors de la consolidation initiale, ne constitue pas une aggravation.
+
+Pour l'expert, l'aggravation n'existe que si une **différence objective** peut être démontrée entre l'état de santé "figé" au jour de la consolidation et l'état de santé au jour de la nouvelle demande.
+
+## 2. LA MÉTHODOLOGIE D'ÉVALUATION DE L'EXPERT
+
+En application de l'Article 58, mon examen clinique procède par une **méthode comparative stricte** pour rechercher cette "modification effective".
+
+### A. Le référentiel : L'état consolidé (T0)
+Je me base sur le rapport médical final ayant conduit à la consolidation de l'accident initial. Ce rapport décrit les séquelles stabilisées (ex: flexion du genou à 90°, cicatrices non inflammatoires, etc.). C'est l'état de référence.
+
+### B. L'examen actuel : La recherche de la modification (T+1)
+Je confronte l'état actuel à ce référentiel. La modification doit être objective. Les doléances subjectives (douleur seule) ne suffisent pas à caractériser une modification effective au sens de la loi.
+
+Je recherche des éléments nouveaux et mesurables, tels que :
+
+- **Cliniques :** Apparition d'un épanchement, réduction mesurable des amplitudes articulaires par rapport à la consolidation, amyotrophie nouvelle, signes neurologiques déficitaires nouveaux.
+
+- **Paracliniques (Imagerie) :** Apparition ou aggravation visible de lésions radiologiques (ex: pincement articulaire arthrosique, cal vicieux) qui n'existaient pas sur les clichés de fin de traitement initial.
+
+**Décision expertale découlant de l'Article 58 :**
+
+- Si l'examen clinique est superposable à celui de la consolidation : Je conclus à un **ÉTAT STATIONNAIRE**. Le critère de "modification effective" de l'Art. 58 n'est pas rempli. **Avis défavorable**.
+
+- Si l'examen objective une dégradation clinique ou radiologique nouvelle : Le critère de "modification effective" est rempli. **Avis favorable** sous réserve du point suivant.
+
+## 3. LA CONDITION DE PRISE EN CHARGE : L'Article 62
+
+Une fois la modification effective constatée (Art. 58), il faut déterminer si elle justifie une prise en charge au titre de la "rechute". La loi pose une seconde condition.
+
+**Texte de référence : Article 62 de la Loi 83-13**
+
+« En cas de rechute de la victime, entraînant la **nécessité d'un traitement médical**, qu'il y ait ou non nouvelle incapacité temporaire, l'organisme de sécurité sociale statue sur la prise en charge de la rechute. »
+
+**Analyse expertale :** L'Article 62 précise que l'aggravation doit être d'une importance clinique suffisante pour nécessiter des soins actifs.
+
+Une aggravation mineure qui ne requiert pas de thérapeutique (médicamenteuse, physique ou chirurgicale) ne relève pas de la rechute au sens de l'article 62.
+
+L'expert doit valider la **pertinence et la nécessité des soins** prescrits par le médecin traitant.`
+        },
         rechute: { keywords: ['gerer', 'rechute'], law: 'loi_83_13', article: 62 },
+        rejet_rechute: { 
+            keywords: ['rejet', 'rechute'],
+            summary: `Il existe deux types de rejet de la rechute :
+
+## 1. Le Rejet Administratif de la Rechute
+
+Ce rejet signifie que votre demande est **irrecevable pour des raisons de délais ou de procédure**, avant même l'examen médical. Il est basé sur l'**Article 59**.
+
+**L'Article de référence :** Article 59.
+
+**La Règle :** La loi impose des intervalles stricts pour demander une révision (rechute/aggravation) :
+- Durant les **2 premières années** après la guérison/consolidation : tous les **3 mois maximum**.
+- Après 2 ans : les demandes ne peuvent se faire qu'à des intervalles d'**au moins un (1) an**.
+
+**Le Motif du Rejet :** Si vous déposez une demande de rechute 6 mois après la dernière décision alors que vous êtes soumis à l'intervalle d'un an, la caisse rejette administrativement votre demande car le délai légal entre deux demandes n'est pas respecté.
+
+## 2. Le Rejet Médical de la Rechute
+
+Ce rejet intervient après l'avis du Médecin Conseil. Il signifie que votre état de santé ne remplit pas les critères de la loi. Il se base sur les **Articles 58 et 62**.
+
+### A. Motif : "État Stationnaire" (Pas de changement)
+
+**L'Article de référence :** Article 58.
+
+**La Règle :** La révision (prise en charge de la rechute) est « limitée au cas de **modification effective** de l'état de la victime ».
+
+**Le Motif du Rejet :** Le Médecin Conseil note "Rejet Médical" car il considère que votre état est le même qu'avant (stationnaire). Il n'y a pas de "modification effective" prouvée cliniquement.
+
+### B. Motif : "Soins non nécessaires"
+
+**L'Article de référence :** Article 62.
+
+**La Règle :** La rechute doit entraîner « la **nécessité d'un traitement médical** ».
+
+**Le Motif du Rejet :** Si vous avez des douleurs mais que cela ne nécessite pas, au sens médical, un nouveau traitement actif (médicaments, rééducation, etc.), le médecin rejette la rechute.
+
+## Tableau Récapitulatif
+
+| Type de Rejet | Ce que dit la loi (Motif) | Article à citer |
+|---------------|---------------------------|-----------------|
+| **Administratif** | Vous n'avez pas respecté l'intervalle de temps (ex: 1 an) entre deux demandes. | Art. 59 |
+| **Médical** | Il n'y a pas de "modification effective" de votre état (c'est pareil qu'avant). | Art. 58 |
+| **Médical** | Votre état ne nécessite pas de "traitement médical" actif. | Art. 62 |`
+        },
         recours_prealable_obligatoire: { keywords: ['recours prealable', 'obligatoire'], law: 'loi_08_08', article: 4 },
         composition_commission_invalidite: { keywords: ['composition', 'commission', 'invalidite'], law: 'loi_83_15', article: 32 },
 
