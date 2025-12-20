@@ -7975,6 +7975,11 @@ export const detectMultipleLesions = (text: string): {
     const hasPlateauTibial = /plateau.*tibial|fracture.*plateau/i.test(normalized);
     // Si "tiers distal" mentionné, forcer l'analyse à chercher "jambe" pas "genou"
     
+    // 🆕 V3.3.124: Amélioration détection cumuls doigts/orteils + viscères
+    const hasMultipleDigits = /(?:amputation|raideur|ankylose).*(?:medius|annulaire|auriculaire|p[2-5]|d[2-5]).*?(?:et|avec).*?(?:medius|annulaire|auriculaire|p[2-5]|d[2-5])/i.test(normalized);
+    const hasMultipleToes = /(?:amputation|raideur|ankylose).*(?:gros\s+orteil|orteil|o[1-5]).*?(?:et|avec).*?(?:orteil|o[1-5])/i.test(normalized);
+    const hasMultipleViscera = /(splenectomie|nephrectomie|colectomie|hepatectomie).*?(?:et|avec|associee).*?(splenectomie|nephrectomie|colectomie|hepatectomie)/i.test(normalized);
+    
     // 6. Critères de cumul AMÉLIORÉS (détecte narratif médical naturel)
     const isCumul = 
         foundKeywords.length > 0 ||  // Keywords TRÈS explicites type "polytraumatisme"
@@ -7986,7 +7991,10 @@ export const detectMultipleLesions = (text: string): {
         (multipleLesionsWithConnectors && hasMultipleLesionTypes) ||  // "avec"/"et" + types différents (fracture + rupture)
         totalRegionsCount >= 2 ||      // 🆕 2+ régions anatomiques distinctes dans TOUT le texte (narratif naturel)
         hasTripleLesion ||             // 🆕 Os + ligament + muscle = 3 lésions distinctes
-        (hasDoubleLesion && totalRegionsCount >= 1);  // 🆕 2 types de lésions + au moins 1 région = cumul probable
+        (hasDoubleLesion && totalRegionsCount >= 1) ||  // 🆕 2 types de lésions + au moins 1 région = cumul probable
+        hasMultipleDigits ||           // 🆕 V3.3.124: Cumul doigts (médius + annulaire, etc.)
+        hasMultipleToes ||             // 🆕 V3.3.124: Cumul orteils (gros orteil + 2ème, etc.)
+        hasMultipleViscera;            // 🆕 V3.3.124: Cumul viscères (splénectomie + néphrectomie, etc.)
     
     // Estimation nombre de lésions
     const lesionCount = Math.max(
