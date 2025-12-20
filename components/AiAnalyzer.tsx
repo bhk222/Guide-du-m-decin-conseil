@@ -5232,25 +5232,25 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             pattern: /(?:amputation|perte).*(?:p3|troisi[eè]me\s+phalange|3[eè]me\s+phalange|phalange\s+(?:distale|terminale)|phalangette).*(?:index|d2)(?!\s*(?:et|avec|p2))/i,
             context: /doigt|main/i,
             searchTerms: ['Perte de la 3ème phalange de l\'index (Main Dominante)'],
-            priority: 9800
+            priority: 11000
         },
         {
             pattern: /(?:amputation|perte).*(?:p3|troisi[eè]me\s+phalange|3[eè]me\s+phalange|phalange\s+(?:distale|terminale)|phalangette).*(?:m[eé]dius|majeur|d3)(?!\s*(?:et|avec|p2))/i,
             context: /doigt|main/i,
             searchTerms: ['Perte de la 3ème phalange du médius (Main Dominante)'],
-            priority: 9800
+            priority: 11000
         },
         {
             pattern: /(?:amputation|perte).*(?:p3|troisi[eè]me\s+phalange|3[eè]me\s+phalange|phalange\s+(?:distale|terminale)|phalangette).*(?:annulaire|d4)(?!\s*(?:et|avec|p2))/i,
             context: /doigt|main/i,
             searchTerms: ['Perte de la 3ème phalange de l\'annulaire (Main Dominante)'],
-            priority: 9800
+            priority: 11000
         },
         {
             pattern: /(?:amputation|perte).*(?:p3|troisi[eè]me\s+phalange|3[eè]me\s+phalange|phalange\s+(?:distale|terminale)|phalangette).*(?:auriculaire|d5)(?!\s*(?:et|avec|p2))/i,
             context: /doigt|main/i,
             searchTerms: ['Perte de la 3ème phalange de l\'auriculaire (Main Dominante)'],
-            priority: 9800
+            priority: 11000
         },
         {
             pattern: /amputation.*m[eé]dius/i,
