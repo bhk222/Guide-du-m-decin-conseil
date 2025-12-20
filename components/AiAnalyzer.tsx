@@ -1,6 +1,7 @@
 import { disabilityData } from '../data/disabilityRates';
 import { Injury, InjuryCategory, InjurySubcategory } from '../types';
 
+// Version: 3.3.121 - Fix amputation P3 D5 (cache bust)
 // --- Types for Local Expert System ---
 export interface LocalProposal {
   type: 'proposal';
