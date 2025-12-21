@@ -3949,21 +3949,35 @@ export const findCandidateInjuries = (text: string, externalKeywords?: string[])
 
                 // --- Métacarpiens : UN SEUL vs CINQ Logic (V3.3.124) ---
                 const queryMentionsMetacarpien = normalizedText.includes('metacarpien') || normalizedText.includes('metacarpienne');
+                
+                // Détection "un seul" avec TOUS les variants possibles (apostrophe normalisée en espace)
+                const hasSingleIndicator = 
+                    /\bd\s+un\s+seul\b/.test(normalizedText) ||      // "d'un seul" → "d un seul"
+                    /\bun\s+seul\b/.test(normalizedText) ||           // "un seul"
+                    /\bun\s+metacarpien\b/.test(normalizedText) ||    // "un métacarpien"
+                    /\b1\s+metacarpien\b/.test(normalizedText) ||     // "1 métacarpien"
+                    /\bseul\s+metacarpien\b/.test(normalizedText);    // "seul métacarpien"
+                
+                const hasMultipleIndicator = 
+                    /\bcinq\s+metacarpien/.test(normalizedText) ||    // "cinq métacarpiens"
+                    /\b5\s+metacarpien/.test(normalizedText) ||       // "5 métacarpiens"
+                    /\btous\s+les\s+metacarpien/.test(normalizedText) || // "tous les métacarpiens"
+                    /\bdes\s+cinq\s+metacarpien/.test(normalizedText);   // "des cinq métacarpiens"
+                
                 const queryMentionsSingleMetacarpien = 
-                    (normalizedText.includes('un seul') && queryMentionsMetacarpien) ||
-                    (normalizedText.includes('un metacarpien') && !normalizedText.includes('cinq')) ||
-                    (normalizedText.includes('1 metacarpien')) ||
+                    (hasSingleIndicator && queryMentionsMetacarpien) ||
                     normalizedText.includes('pouce') ||
                     normalizedText.includes('index') ||
                     normalizedText.includes('majeur') ||
                     normalizedText.includes('annulaire') ||
-                    normalizedText.includes('auriculaire');
+                    normalizedText.includes('auriculaire') ||
+                    normalizedText.includes('1er metacarpien') ||
+                    normalizedText.includes('2e metacarpien') ||
+                    normalizedText.includes('3e metacarpien') ||
+                    normalizedText.includes('4e metacarpien') ||
+                    normalizedText.includes('5e metacarpien');
                 
-                const queryMentionsMultipleMetacarpiens = 
-                    normalizedText.includes('cinq metacarpien') ||
-                    normalizedText.includes('5 metacarpien') ||
-                    normalizedText.includes('tous les metacarpien') ||
-                    normalizedText.includes('metacarpiens multiples');
+                const queryMentionsMultipleMetacarpiens = hasMultipleIndicator;
                 
                 if (queryMentionsMetacarpien) {
                     const injuryIsFiveMetacarpiens = 
