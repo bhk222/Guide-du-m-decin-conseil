@@ -8629,7 +8629,274 @@ export const aldData: AldItem[] = [
       </div>`,
           children: [{ code: "C19A01", name: "Adénome corticotrope hypophysaire" }, { code: "C19A02", name: "Syndrome de cushing paranéoplasique" }, { code: "C19A03", name: "Syndrome de cushing secondaire à une tumeur de la" }] 
         },
-        { code: "C19B", name: "Adénomes hypophysaires", children: [{ code: "C19B01", name: "Acromégalie et gigantisme (adénome somatotrop" }, { code: "C19B02", name: "Adénome à prolactine" }, { code: "C19B03", name: "Adénome gonadotrope" }, { code: "C19B04", name: "Adénome thyréotrope ou silencieux" }, { code: "C19B05", name: "Craniopharyngiome" }] },
+        { 
+          code: "C19B", 
+          name: "Adénomes hypophysaires",
+          tooltip: `<div class="space-y-3">
+        <h3 class="font-bold text-lg text-purple-700">🧠 ADÉNOMES HYPOPHYSAIRES</h3>
+        
+        <div class="bg-blue-50 p-3 rounded border-l-4 border-blue-500">
+          <h4 class="font-semibold text-blue-800 mb-2">1️⃣ DÉFINITION ET CLASSIFICATION</h4>
+          
+          <div class="bg-white p-2 rounded text-sm space-y-2 mb-2">
+            <div>
+              <p class="font-semibold text-purple-700">📋 Définition</p>
+              <p class="text-xs">Tumeurs développées aux dépens de l'<strong>anté-hypophyse</strong>. Presque toujours <strong>BÉNIGNES</strong> (carcinomes hypophysaires exceptionnels)</p>
+            </div>
+          </div>
+
+          <div class="space-y-2">
+            <div class="bg-orange-100 p-2 rounded">
+              <p class="font-semibold text-orange-800 text-xs mb-1">A. Classification Anatomique (Taille)</p>
+              <ul class="list-disc ml-5 text-xs">
+                <li><strong>Microadénome</strong> : Diamètre <strong>&lt; 10 mm</strong> (enclavé selle turcique)</li>
+                <li><strong>Macroadénome</strong> : Diamètre <strong>≥ 10 mm</strong> (risque extension suprasellaire + compression)</li>
+              </ul>
+            </div>
+
+            <div class="bg-teal-100 p-2 rounded">
+              <p class="font-semibold text-teal-800 text-xs mb-1">B. Classification Fonctionnelle (Sécrétion)</p>
+              <ul class="list-disc ml-5 text-xs space-y-1">
+                <li><strong>Fonctionnels (Sécrétants)</strong> : Prolactinome (+ fréquent), Somatotrope (GH), Corticotrope (ACTH), Thyréotrope (TSH très rare)</li>
+                <li><strong>Non Fonctionnels</strong> : Ne sécrètent pas hormone active (souvent gonadotropes "silencieux"). Révélés par syndrome tumoral</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-yellow-50 p-3 rounded border-l-4 border-yellow-500">
+          <h4 class="font-semibold text-yellow-800 mb-2">2️⃣ PRÉSENTATION CLINIQUE</h4>
+          <p class="text-sm italic mb-2">Tableau clinique résulte de 2 mécanismes : <strong>Masse tumorale</strong> + <strong>Sécrétion hormonale</strong></p>
+          
+          <div class="space-y-2">
+            <div class="bg-red-100 p-2 rounded border-2 border-red-500">
+              <p class="font-semibold text-red-800 text-xs mb-1">A. Syndrome Tumoral (Mécanique) - MACROADÉNOMES</p>
+              
+              <div class="space-y-1 text-xs">
+                <div class="bg-white p-1 rounded">
+                  <p class="font-semibold text-purple-700">💥 Céphalées</p>
+                  <p>Rétro-orbitaires ou bitemporales, <strong>résistantes aux antalgiques</strong></p>
+                </div>
+
+                <div class="bg-pink-50 p-2 rounded border-2 border-pink-500">
+                  <p class="font-semibold text-pink-800 mb-1">👁️ Troubles Visuels (Compression Chiasma Optique)</p>
+                  <p class="text-xs mb-1">Hypophyse située juste <strong>sous la décussation des nerfs optiques</strong> → Croissance vers le haut comprime les <strong>fibres nasales</strong> (qui voient le champ temporal)</p>
+                  <ul class="list-disc ml-5">
+                    <li class="font-bold text-red-700">🌟 Signe typique : <strong>HÉMIANOPSIE BITEMPORALE</strong></li>
+                    <li class="text-xs italic">("Patient ne voit pas sur les côtés, comme avec des œillères")</li>
+                    <li>Baisse d'acuité visuelle (stade tardif)</li>
+                  </ul>
+                </div>
+
+                <div class="bg-white p-1 rounded">
+                  <p class="font-semibold text-indigo-700">🔴 Atteinte Sinus Caverneux</p>
+                  <p>Paralysie nerfs oculomoteurs (III, IV, VI) → Diplopie, Ptosis</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-orange-100 p-2 rounded">
+              <p class="font-semibold text-orange-800 text-xs mb-1">B. Syndrome d'Insuffisance Antéhypophysaire</p>
+              <p class="text-xs italic mb-1">Compression tissu hypophysaire sain → "Panhypopituitarisme" si complet</p>
+              <ul class="list-disc ml-5 text-xs">
+                <li><strong>Axe Gonadotrope</strong> : Aménorrhée, impuissance, perte poils</li>
+                <li><strong>Axe Thyréotrope</strong> : Hypothyroïdie centrale (frilosité, asthénie, prise poids)</li>
+                <li><strong>Axe Corticotrope</strong> : Insuffisance surrénalienne (asthénie, hypotension, <strong>PÂLEUR</strong> ≠ Addison où patient bronzé)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-purple-50 p-3 rounded border-l-4 border-purple-500">
+          <h4 class="font-semibold text-purple-800 mb-2">3️⃣ LES PRINCIPAUX TYPES D'ADÉNOMES</h4>
+          
+          <div class="overflow-x-auto">
+            <table class="w-full text-xs border-collapse">
+              <thead>
+                <tr class="bg-purple-200">
+                  <th class="border border-purple-400 p-1 text-left">Type</th>
+                  <th class="border border-purple-400 p-1 text-left">Hormone</th>
+                  <th class="border border-purple-400 p-1 text-left">Signes Cliniques Spécifiques</th>
+                  <th class="border border-purple-400 p-1 text-left">Biologie</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="bg-pink-50">
+                  <td class="border border-purple-300 p-1"><strong>Prolactinome</strong><br/>(Le + fréquent)</td>
+                  <td class="border border-purple-300 p-1">Prolactine</td>
+                  <td class="border border-purple-300 p-1">
+                    <strong>Femme</strong> : Galactorrhée, Aménorrhée<br/>
+                    <strong>Homme</strong> : Baisse libido, Gynécomastie (souvent macroadénome tardif)
+                  </td>
+                  <td class="border border-purple-300 p-1"><strong>Prolactinémie &gt; 200 ng/mL</strong><br/>(Si &lt; 100 : penser à l'effet tige !)</td>
+                </tr>
+                <tr class="bg-blue-50">
+                  <td class="border border-purple-300 p-1"><strong>Somatotrope</strong><br/>(Acromégalie)</td>
+                  <td class="border border-purple-300 p-1">GH (Growth Hormone)</td>
+                  <td class="border border-purple-300 p-1">Syndrome dysmorphique (élargissement mains/pieds, prognathisme), Sueurs, HTA, Diabète</td>
+                  <td class="border border-purple-300 p-1"><strong>IGF-1 élevée</strong><br/>GH non freinée par HGPO</td>
+                </tr>
+                <tr class="bg-orange-50">
+                  <td class="border border-purple-300 p-1"><strong>Corticotrope</strong><br/>(Maladie Cushing)</td>
+                  <td class="border border-purple-300 p-1">ACTH</td>
+                  <td class="border border-purple-300 p-1">Obésité facio-tronculaire, vergetures pourpres, HTA, bosse de bison</td>
+                  <td class="border border-purple-300 p-1">ACTH normale ou haute<br/>Cortisol élevé non freiné</td>
+                </tr>
+                <tr class="bg-gray-100">
+                  <td class="border border-purple-300 p-1"><strong>Non Fonctionnel</strong><br/>(Gonadotrope)</td>
+                  <td class="border border-purple-300 p-1">(FSH/LH inactives)</td>
+                  <td class="border border-purple-300 p-1"><strong>Asymptomatique</strong> sur plan hormonal<br/>Découverte par troubles visuels</td>
+                  <td class="border border-purple-300 p-1">Hormones normales ou déficitaires (compression)</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="bg-teal-50 p-3 rounded border-l-4 border-teal-500">
+          <h4 class="font-semibold text-teal-800 mb-2">4️⃣ DIAGNOSTIC PARACLINIQUE</h4>
+          
+          <div class="space-y-2">
+            <div class="bg-blue-100 p-2 rounded border-2 border-blue-500">
+              <p class="font-semibold text-blue-800 text-xs mb-1">🔬 A. Imagerie : IRM Hypophysaire</p>
+              <p class="text-xs font-bold text-red-700 mb-1">🌟 C'est le <strong>GOLD STANDARD</strong>. Scanner inutile (trop d'artefacts osseux)</p>
+              
+              <div class="bg-white p-2 rounded text-xs space-y-1">
+                <div>
+                  <p class="font-semibold text-purple-700">📋 Protocole</p>
+                  <p>Coupes fines (2-3 mm) coronales et sagittales centrées selle turcique, pondération T1 avec/sans Gadolinium</p>
+                </div>
+                
+                <div class="bg-yellow-50 p-1 rounded">
+                  <p class="font-semibold text-yellow-800">Signes :</p>
+                  <ul class="list-disc ml-5">
+                    <li><strong>Microadénome</strong> : Hypo-signal T1 spontané, prend moins le contraste que hypophyse saine ("trou noir" dans glande blanche)</li>
+                    <li><strong>Macroadénome</strong> : Masse élargissant selle turcique, comblant citerne suprasellaire, refoulant tige pituitaire (signe indirect)</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-orange-100 p-2 rounded">
+              <p class="font-semibold text-orange-800 text-xs mb-1">👁️ B. Ophtalmologie</p>
+              <ul class="list-disc ml-5 text-xs">
+                <li><strong>Champ Visuel</strong> (Automatisé ou Goldmann) : Systématique devant tout macroadénome ou si contact chiasmatique à l'IRM</li>
+                <li><strong>Fond d'œil</strong> (plus rare) : Atrophie optique</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-red-50 p-3 rounded border-l-4 border-red-500">
+          <h4 class="font-semibold text-red-800 mb-2">5️⃣ DIAGNOSTIC DIFFÉRENTIEL "PIÈGE" : Hyperprolactinémie de Déconnexion</h4>
+          
+          <div class="bg-white p-2 rounded text-xs space-y-2">
+            <p class="font-semibold text-purple-700">🚨 Mécanisme</p>
+            <p>Une <strong>grosse tumeur NON prolactinique</strong> (ex: méningiome, craniopharyngiome) peut comprimer la <strong>tige pituitaire</strong></p>
+            <p>→ Empêche la <strong>Dopamine</strong> (qui freine la Prolactine) d'arriver à l'hypophyse</p>
+            
+            <div class="bg-yellow-100 p-2 rounded border-2 border-yellow-500">
+              <p class="font-semibold text-yellow-800 mb-1">⚠️ Résultat</p>
+              <p>Prolactine <strong>modérément élevée (30-100 ng/mL)</strong> SANS que ce soit un prolactinome</p>
+            </div>
+
+            <div class="bg-red-100 p-2 rounded border-2 border-red-500">
+              <p class="font-semibold text-red-800 mb-1">💥 Importance</p>
+              <p><strong>Ne PAS traiter par médicaments anti-prolactine</strong>, c'est une <strong>tumeur CHIRURGICALE !</strong></p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-green-50 p-3 rounded border-l-4 border-green-500">
+          <h4 class="font-semibold text-green-800 mb-2">6️⃣ STRATÉGIE THÉRAPEUTIQUE</h4>
+          
+          <div class="space-y-2">
+            <div class="bg-pink-100 p-2 rounded border-2 border-pink-500">
+              <p class="font-semibold text-pink-800 text-xs mb-1">💊 A. Traitement Médicamenteux</p>
+              <p class="text-xs font-bold text-purple-700 mb-1">🌟 Indication majeure : <strong>Le PROLACTINOME</strong></p>
+              <p class="text-xs bg-white p-1 rounded mb-1"><strong>C'est le SEUL adénome qui guérit ou fond avec des médicaments</strong></p>
+              <ul class="list-disc ml-5 text-xs">
+                <li><strong>Molécules</strong> : Agonistes dopaminergiques (Cabergoline/Dostinex, Bromocriptine)</li>
+                <li><strong>Efficacité</strong> : Normalisation prolactine + réduction tumorale dans <strong>80% des cas</strong></li>
+              </ul>
+            </div>
+
+            <div class="bg-blue-100 p-2 rounded border-2 border-blue-500">
+              <p class="font-semibold text-blue-800 text-xs mb-1">🔪 B. Traitement Chirurgical</p>
+              
+              <div class="bg-white p-2 rounded text-xs space-y-1">
+                <div>
+                  <p class="font-semibold text-purple-700">📋 Indications</p>
+                  <ul class="list-disc ml-5">
+                    <li><strong>Tous les adénomes NON-prolactinomes</strong> (Acromégalie, Cushing, Non-fonctionnels)</li>
+                    <li><strong>OU</strong> Prolactinomes résistants au traitement médical / complication visuelle aiguë</li>
+                  </ul>
+                </div>
+                
+                <div class="bg-teal-50 p-1 rounded">
+                  <p class="font-semibold text-teal-800">Technique :</p>
+                  <p><strong>Voie trans-sphénoïdale</strong> (par le nez), souvent sous endoscopie. <strong>Pas de cicatrice visible</strong></p>
+                </div>
+
+                <div class="bg-red-50 p-1 rounded">
+                  <p class="font-semibold text-red-700">Risques :</p>
+                  <p>Diabète insipide transitoire, fuite de LCR (rhinorrhée)</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-orange-100 p-2 rounded">
+              <p class="font-semibold text-orange-800 text-xs mb-1">📡 C. Radiothérapie</p>
+              <p class="text-xs">Réservée aux <strong>reliquats tumoraux post-chirurgicaux agressifs</strong> ou inopérables</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-red-100 p-3 rounded border-l-4 border-red-600">
+          <h4 class="font-semibold text-red-800 mb-2">⚠️ 7️⃣ COMPLICATION AIGUË : APOPLEXIE HYPOPHYSAIRE</h4>
+          
+          <div class="bg-white p-2 rounded text-xs space-y-2">
+            <div>
+              <p class="font-semibold text-purple-700">📋 Définition</p>
+              <p><strong>Infarctus ou hémorragie brutale</strong> dans l'adénome</p>
+            </div>
+            
+            <div class="bg-yellow-100 p-2 rounded border-2 border-yellow-600">
+              <p class="font-semibold text-yellow-800 mb-1">🚨 Clinique</p>
+              <ul class="list-disc ml-5">
+                <li>Céphalée <strong>"en coup de tonnerre"</strong> (comme hémorragie méningée)</li>
+                <li><strong>Cécité brutale</strong></li>
+                <li>Effondrement hormonal (insuffisance corticotrope aiguë)</li>
+              </ul>
+            </div>
+
+            <div class="bg-red-50 p-2 rounded border-2 border-red-600">
+              <p class="font-semibold text-red-800 mb-1">💥 Action</p>
+              <p><strong>URGENCE NEUROCHIRURGICALE</strong> et Réanimation (<strong>Hydrocortisone IV</strong>)</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-yellow-50 p-3 rounded border-l-4 border-yellow-500">
+          <h4 class="font-semibold text-yellow-800 mb-2">🎯 POINTS CLÉS À RETENIR</h4>
+          <div class="bg-white p-2 rounded">
+            <ul class="list-disc ml-5 text-sm space-y-1">
+              <li>🧠 <strong>Tumeurs bénignes</strong> de l'anté-hypophyse (carcinomes exceptionnels)</li>
+              <li>📏 <strong>Classification</strong> : Microadénome (&lt;10mm) vs Macroadénome (≥10mm)</li>
+              <li>🔴 <strong>Prolactinome = Le + fréquent</strong> (femme : galactorrhée/aménorrhée, homme : libido↓/gynécomastie)</li>
+              <li>👁️ <strong>Signe typique macroadénome</strong> : HÉMIANOPSIE BITEMPORALE (compression chiasma optique)</li>
+              <li>🔬 <strong>IRM hypophysaire = GOLD STANDARD</strong> (coupes fines 2-3mm T1 Gadolinium)</li>
+              <li>⚠️ <strong>Piège</strong> : Hyperprolactinémie déconnexion (30-100 ng/mL) → Tumeur chirurgicale, PAS prolactinome</li>
+              <li>💊 <strong>SEUL adénome traité médicalement</strong> : PROLACTINOME (Cabergoline/Dostinex 80% succès)</li>
+              <li>🔪 <strong>Chirurgie trans-sphénoïdale</strong> (par le nez) : Tous les autres adénomes</li>
+              <li>🚨 <strong>Apoplexie hypophysaire</strong> : Céphalée "coup de tonnerre" + Cécité brutale = URGENCE (Hydrocortisone IV)</li>
+              <li>📊 <strong>Bilan ophtalmologique</strong> : Champ visuel systématique si macroadénome ou contact chiasmatique</li>
+            </ul>
+          </div>
+        </div>
+      </div>`,
+          children: [{ code: "C19B01", name: "Acromégalie et gigantisme (adénome somatotrop" }, { code: "C19B02", name: "Adénome à prolactine" }, { code: "C19B03", name: "Adénome gonadotrope" }, { code: "C19B04", name: "Adénome thyréotrope ou silencieux" }, { code: "C19B05", name: "Craniopharyngiome" }] 
+        },
         { code: "C19C", name: "Insuffisance anté-hypophysaire primaire/secondaire", children: [{ code: "C19C01", name: "Hypopituitarisme" }, { code: "C19C02", name: "Syndrome de Sheehan" }] },
         { code: "C19D", name: "Insuffisance surrénalienne primaire/se...", children: [{ code: "C19D01", name: "Maladie d'Addison" }, { code: "C19D02", name: "Syndrome de Nelson" }] },
         { code: "C19E", name: "Déficit en hormone de croissance", children: [{ code: "C19E01", name: "Nanisme" }, { code: "C19E02", name: "Syndrome de Turner" }] },
