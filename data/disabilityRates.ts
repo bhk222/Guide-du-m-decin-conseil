@@ -1283,10 +1283,12 @@ const middleCategories: InjuryCategory[] = [
       {
         name: "Doigts - Index (Main Dominante)",
         injuries: [
-            { name: "Ablation moitié phalange unguéale de l'index (Main Dominante)", rate: [2, 3] },
-            { name: "Ablation phalange unguéale de l'index (Main Dominante)", rate: [5, 6] },
-            { name: "Ablation 2 phalanges de l'index (Main Dominante)", rate: [10, 12] },
-            { name: "Ablation 3 phalanges avec/sans tête métacarpien de l'index (Main Dominante)", rate: [14, 16] },
+            { name: "Ablation extrémité phalange unguéale de l'index (Main Dominante)", rate: 4 },
+            { name: "Ablation phalange unguéale de l'index (Main Dominante)", rate: 6 },
+            { name: "Ablation phalange unguéale + phalange intermédiaire de l'index (Main Dominante)", rate: 8 },
+            { name: "Ablation 2 phalanges de l'index (Main Dominante)", rate: 10 },
+            { name: "Ablation 3 phalanges de l'index (Main Dominante)", rate: 13 },
+            { name: "Ablation 3 phalanges + tête métacarpien de l'index (Main Dominante)", rate: 15 },
             { name: "Amputation de l'index (main dominante)", rate: 10 },
             { name: "Perte de l'index (3 phalanges) (Main Dominante)", rate: 15 },
             { name: "Perte de la 3ème phalange de l'index (Main Dominante)", rate: 5 },
@@ -1300,10 +1302,12 @@ const middleCategories: InjuryCategory[] = [
       {
         name: "Doigts - Index (Main Non Dominante)",
         injuries: [
-            { name: "Ablation moitié phalange unguéale de l'index (Main Non Dominante)", rate: [1, 2] },
-            { name: "Ablation phalange unguéale de l'index (Main Non Dominante)", rate: [4, 5] },
-            { name: "Ablation 2 phalanges de l'index (Main Non Dominante)", rate: [8, 10] },
-            { name: "Ablation 3 phalanges avec/sans tête métacarpien de l'index (Main Non Dominante)", rate: [11, 13] },
+            { name: "Ablation extrémité phalange unguéale de l'index (Main Non Dominante)", rate: 4 },
+            { name: "Ablation phalange unguéale de l'index (Main Non Dominante)", rate: 5 },
+            { name: "Ablation phalange unguéale + phalange intermédiaire de l'index (Main Non Dominante)", rate: 6 },
+            { name: "Ablation 2 phalanges de l'index (Main Non Dominante)", rate: 8 },
+            { name: "Ablation 3 phalanges de l'index (Main Non Dominante)", rate: 11 },
+            { name: "Ablation 3 phalanges + tête métacarpien de l'index (Main Non Dominante)", rate: 12 },
             { name: "Perte de l'index (3 phalanges) (Main Non Dominante)", rate: 12 },
             { name: "Perte de la 3ème phalange de l'index (Main Non Dominante)", rate: 4 },
             { name: "Perte de la 2ème phalange seule de l'index (P2 seule) (Main Non Dominante)", rate: 4 },
