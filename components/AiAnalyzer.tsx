@@ -7277,10 +7277,28 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
     const topScore = finalCandidate.score;
     // 🔧 SEUIL D'AMBIGUÏTÉ RÉDUIT : 0.95 au lieu de 0.85 pour éviter fausses ambiguïtés
     // Ne proposer plusieurs choix que si les scores sont VRAIMENT très proches (95%+)
-    const similarCandidates = candidates.filter(c => 
+    let similarCandidates = candidates.filter(c => 
         c.injury.name !== finalCandidate!.injury.name && 
         c.score > topScore * 0.95
     );
+    
+    // 🆕 V3.3.124c: Exception métacarpiens - inclure TOUS les métacarpiens individuels
+    const preForMeta = preprocessMedicalText(text);
+    const normalizedForMeta = convertNumberWords(normalize(preForMeta));
+    const isMetacarpienSingleQuery = /metacarpien/i.test(normalizedForMeta) && /\b(?:d\s+un\s+seul|un\s+seul|un\s+metacarpien|1\s+metacarpien|seul\s+metacarpien)\b/.test(normalizedForMeta);
+    
+    if (isMetacarpienSingleQuery) {
+        // Ajouter TOUS les métacarpiens individuels aux choix, même avec des scores différents
+        const allIndividualMetacarpiens = candidates.filter(c => 
+            /metacarpien/i.test(c.injury.name) && 
+            !/cinq/i.test(c.injury.name) && 
+            c.injury.name !== finalCandidate.injury.name
+        );
+        // Fusionner avec similarCandidates sans doublons
+        const existingNames = new Set(similarCandidates.map(c => c.injury.name));
+        const additionalMetacarpiens = allIndividualMetacarpiens.filter(c => !existingNames.has(c.injury.name));
+        similarCandidates = [...similarCandidates, ...additionalMetacarpiens];
+    }
 
     // 🆕 VÉRIFICATION SUPPLÉMENTAIRE : Score minimal absolu pour ambiguïté
     // Si le top score est déjà très élevé (>2000), pas besoin d'ambiguïté
@@ -7332,7 +7350,12 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
     const isUnilateralBlindnessExplicit = /(?:cecite|cecite|aveugl|perte\s+(?:totale|complète|complete)|perte\s+de\s+vision|sans\s+vision)/i.test(normalizedInputForAmbiguity)
         && /\b(?:oeil|yeux|yeu)\b/i.test(normalizedInputForAmbiguity)
         && /\b(?:gauche|droit)\b/i.test(normalizedInputForAmbiguity);
-    const shouldShowAmbiguity = topScore < 3000 && similarCandidates.length > 0 && !isUnilateralBlindnessExplicit;
+    
+    // 🆕 V3.3.124c: Cas spécial métacarpiens - afficher TOUS les doigts disponibles
+    const isMetacarpienQuery = /metacarpien/i.test(normalizedInputForAmbiguity) && /\b(?:d\s+un\s+seul|un\s+seul|un\s+metacarpien|1\s+metacarpien|seul\s+metacarpien)\b/.test(normalizedInputForAmbiguity);
+    const hasMultipleMetacarpienOptions = candidates.filter(c => /metacarpien/i.test(c.injury.name) && !/cinq/i.test(c.injury.name)).length >= 2;
+    
+    const shouldShowAmbiguity = (topScore < 3000 || (isMetacarpienQuery && hasMultipleMetacarpienOptions)) && similarCandidates.length > 0 && !isUnilateralBlindnessExplicit;
 
     if (shouldShowAmbiguity && similarCandidates.length > 0) {
         const allCandidates = [finalCandidate, ...similarCandidates];
@@ -7382,7 +7405,10 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
                 }
             }
             
-            if (choices.length > 1 && choices.length <= 5) { // Maximum 5 choix
+            // 🆕 V3.3.124c: Limite de choix adaptative - 7 pour métacarpiens, 5 pour autres
+            const maxChoices = isMetacarpienSingleQuery ? 7 : 5;
+            
+            if (choices.length > 1 && choices.length <= maxChoices) {
                 return {
                     type: 'ambiguity',
                     text: `Votre description "${text.trim()}" peut correspondre à plusieurs séquelles. Pour la région "${topPart}", laquelle correspond le mieux à l'état du patient ?`,
