@@ -10294,7 +10294,301 @@ export const aldData: AldItem[] = [
         },
         { code: "C19G", name: "L'hirsutisme", children: [{ code: "C19G01", name: "Hirsutisme par hyperplasie congénitale des surrénal" }] },
         { code: "C19H", name: "Puberté précoce centrale/périphérique", children: [{ code: "C19H01", name: "Puberté précoce d'origine centrale" }, { code: "C19H02", name: "Puberté précoce ovarienne ou testiculaire" }] },
-        { code: "C19I", name: "Affections thyroïdiennes", children: [{ code: "C19I01", name: "Maladie de Basedow (Hyperthyroïdie)" }, { code: "C19I02", name: "Goitre multinodulaire toxique (Hyperthyroïdie)" }, { code: "C19I03", name: "Nodule toxique (Hyperthyroïdie)" }, { code: "C19I04", name: "Autres Hyperthyroïdies" }, { code: "C19I05", name: "Thyroïdite auto-immune d'Hashimoto" }, { code: "C19I06", name: "Myxœdème idiopathique" }, { code: "C19I07", name: "Hypothiroïdies" }] },
+        { code: "C19I", name: "Affections thyroïdiennes",
+      tooltip: `<div class="space-y-3">
+        <h3 class="text-sm font-semibold text-gray-900 mb-2">🦋 Affections Thyroïdiennes - Vue d'Ensemble Complète</h3>
+        
+        <div class="bg-blue-50 border-l-4 border-blue-400 p-3 rounded">
+          <h4 class="font-semibold text-blue-900 text-xs mb-2">1️⃣ Physiologie et Bilan Biologique Standard</h4>
+          <div class="space-y-2 text-xs">
+            <div>
+              <span class="font-semibold text-blue-800">🔬 Fonction Thyroïdienne :</span>
+              <ul class="list-disc pl-5 mt-1 space-y-1">
+                <li><span class="font-medium">Hormones :</span> T3 (Tri-iodothyronine, <span class="underline">active</span>) et T4 (Thyroxine, pro-hormone convertie en T3)</li>
+                <li><span class="font-medium">Axe Thyréotrope :</span> Hypothalamus (TRH) → Hypophyse (TSH) → Thyroïde (T3/T4) → Rétrocontrôle négatif</li>
+                <li><span class="font-medium">Rôle :</span> Régulation métabolisme basal (croissance, thermogenèse, cœur, cerveau)</li>
+              </ul>
+            </div>
+            <div class="bg-blue-100 p-2 rounded">
+              <span class="font-semibold text-blue-900">📋 Stratégie Diagnostique "TSH FIRST" :</span>
+              <ul class="list-disc pl-5 mt-1">
+                <li><span class="font-medium">TSH ultra-sensible :</span> Examen de 1ère intention <span class="underline">UNIQUE</span></li>
+                <li><span class="font-medium">Si TSH normale (0.4-4.0 mUI/L) :</span> Arrêt investigations fonctionnelles</li>
+                <li><span class="font-medium">Si TSH anormale :</span> Doser T4 Libre (T4L)</li>
+                <li><span class="italic text-blue-700">Note :</span> T3L rarement utile, sauf hyperthyroïdie TSH basse et T4 normale</li>
+              </ul>
+            </div>
+            <div>
+              <span class="font-semibold text-blue-800">🎯 Anticorps (Étiologie) :</span>
+              <ul class="list-disc pl-5 mt-1">
+                <li><span class="font-medium">Anti-TPO (Thyroperoxydase) :</span> Marqueur auto-immunité (Hashimoto / Basedow)</li>
+                <li><span class="font-medium">Anti-Récepteur TSH (TRAb) :</span> Spécifiques Maladie de Basedow</li>
+                <li><span class="font-medium">Anti-Thyroglobuline :</span> Peu d'intérêt diagnostique, utile suivi cancer</li>
+                <li><span class="font-medium">Calcitonine :</span> Marqueur Cancer Médullaire Thyroïde (CMT)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-purple-50 border-l-4 border-purple-400 p-3 rounded">
+          <h4 class="font-semibold text-purple-900 text-xs mb-2">2️⃣ Hypothyroïdie (Le Ralentissement Métabolique)</h4>
+          <div class="space-y-2 text-xs">
+            <div class="bg-purple-100 p-2 rounded">
+              <span class="font-semibold text-purple-900">🔬 Diagnostic Biologique :</span>
+              <ul class="list-disc pl-5 mt-1">
+                <li><span class="font-medium">Hypothyroïdie PRIMAIRE/Périphérique :</span> TSH Élevée ↑ + T4L Basse ↓</li>
+                <li><span class="font-medium text-red-700">⚠️ PIÈGE Insuffisance Thyréotrope (Centrale/Hypophysaire) :</span> TSH Basse + T4L Basse (hypophyse ne stimule pas thyroïde)</li>
+              </ul>
+            </div>
+            <div>
+              <span class="font-semibold text-purple-800">🩺 Clinique :</span>
+              <ul class="list-disc pl-5 mt-1">
+                <li><span class="font-medium">Général :</span> Asthénie, prise de poids modérée, frilosité, constipation</li>
+                <li><span class="font-medium">Cardio :</span> Bradycardie, épanchements péricardiques</li>
+                <li><span class="font-medium">Cutané :</span> Peau sèche/froide/pâle, dépilation, macroglossie</li>
+                <li><span class="font-medium">Neuro :</span> Ralentissement psycho-moteur, dépression, syndrome du canal carpien</li>
+                <li><span class="font-medium text-red-700">⚡ COMA MYXŒDÉMATEUX :</span> Hypothermie, bradycardie extrême, hypoglycémie, hyponatrémie → URGENCE VITALE</li>
+              </ul>
+            </div>
+            <div>
+              <span class="font-semibold text-purple-800">🔍 Étiologies :</span>
+              <ul class="list-disc pl-5 mt-1">
+                <li><span class="font-medium">Thyroïdite de Hashimoto (N°1) :</span> Auto-immune. Goitre ferme ou atrophie. <span class="underline">Ac Anti-TPO POSITIFS</span></li>
+                <li><span class="font-medium">Iatrogène :</span> Post-thyroïdectomie, Iode radioactif (Irathérapie), Médicaments (Amiodarone, Lithium, Immunothérapies)</li>
+                <li><span class="font-medium">Carentielle :</span> Carence en Iode (rare pays développés grâce sel iodé)</li>
+                <li><span class="font-medium">Congénitale :</span> Dépistée J3 naissance systématiquement (Test de Guthrie)</li>
+              </ul>
+            </div>
+            <div class="bg-purple-100 p-2 rounded">
+              <span class="font-semibold text-purple-900">💊 Traitement :</span>
+              <ul class="list-disc pl-5 mt-1">
+                <li><span class="font-medium">Substitution À VIE :</span> Lévothyroxine (L-T4) comprimés</li>
+                <li><span class="font-medium">Cible TSH :</span> Normale 0.5-2.5 mUI/L (jeune/enceinte), jusqu'à 6-7 (grand âgé)</li>
+                <li><span class="font-medium">Prise :</span> À jeun, 30 min avant petit-déjeuner (absorption optimale)</li>
+                <li><span class="font-medium">Surveillance :</span> TSH 6-8 semaines après initiation/modification dose</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-yellow-50 border-l-4 border-yellow-400 p-3 rounded">
+          <h4 class="font-semibold text-yellow-900 text-xs mb-2">3️⃣ Hyperthyroïdie (L'Accélération Métabolique)</h4>
+          <div class="space-y-2 text-xs">
+            <div class="bg-yellow-100 p-2 rounded">
+              <span class="font-semibold text-yellow-900">🔬 Diagnostic Biologique :</span>
+              <ul class="list-disc pl-5 mt-1">
+                <li><span class="font-medium">TSH Effondrée :</span> < 0.05 mUI/L + T4L Élevée ↑</li>
+                <li><span class="font-medium">Parfois :</span> T3 toxicose isolée (T4 normale mais T3 élevée)</li>
+              </ul>
+            </div>
+            <div>
+              <span class="font-semibold text-yellow-800">🩺 Clinique (Thyrotoxicose) :</span>
+              <ul class="list-disc pl-5 mt-1">
+                <li><span class="font-medium">Général :</span> Amaigrissement avec appétit conservé/augmenté, thermophobie (chaleur), asthénie paradoxale</li>
+                <li><span class="font-medium">Cardio :</span> Tachycardie, palpitations, Fibrillation Auriculaire (FA)</li>
+                <li><span class="font-medium">Neuro :</span> Tremblements extrémités, irritabilité, insomnie, agitation</li>
+                <li><span class="font-medium">Digestif :</span> Diarrhée motrice</li>
+                <li><span class="font-medium text-red-700">⚡ CRISE AIGUË THYROTOXIQUE :</span> Fièvre, défaillance cardiaque, troubles conscience → URGENCE VITALE</li>
+              </ul>
+            </div>
+            <div>
+              <span class="font-semibold text-yellow-800">🔍 Étiologies Principales :</span>
+              <div class="mt-1 space-y-2">
+                <div class="bg-yellow-200 p-2 rounded">
+                  <span class="font-semibold">🎯 Maladie de Basedow (Graves' disease) :</span>
+                  <ul class="list-disc pl-5 mt-1">
+                    <li><span class="font-medium">Auto-immune stimulante :</span> Ac stimulent récepteur TSH</li>
+                    <li><span class="font-medium">TRIADE classique :</span> Goitre vasculaire (souffle) + Exophtalmie + Hyperthyroïdie</li>
+                    <li><span class="font-medium">Marqueur :</span> <span class="underline">Ac Anti-Récepteur TSH (TRAb) POSITIFS</span></li>
+                    <li><span class="font-medium">Scintigraphie :</span> Fixation diffuse et homogène</li>
+                  </ul>
+                </div>
+                <div>
+                  <span class="font-medium">🔴 Nodule Toxique / Goitre Multinodulaire Toxique :</span>
+                  <ul class="list-disc pl-5 mt-1">
+                    <li><span class="font-medium">Terrain :</span> Sujet âgé. Autonomie sécrétion nodules</li>
+                    <li><span class="font-medium">Scintigraphie :</span> Fixation focale ("Nodule chaud") avec extinction reste parenchyme</li>
+                  </ul>
+                </div>
+                <div>
+                  <span class="font-medium">🌡️ Thyroïdites (Phase initiale) :</span>
+                  <ul class="list-disc pl-5 mt-1">
+                    <li><span class="font-medium">Hashimoto :</span> Hashitoxicose transitoire (lyse cellulaire relargage hormones)</li>
+                    <li><span class="font-medium">De Quervain :</span> Virale, douloureuse, post-infection ORL</li>
+                    <li><span class="font-medium">Scintigraphie :</span> BLANCHE/éteinte (différence Basedow)</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="bg-yellow-100 p-2 rounded">
+              <span class="font-semibold text-yellow-900">💊 Traitement :</span>
+              <ul class="list-disc pl-5 mt-1">
+                <li><span class="font-medium">Symptomatique :</span> Bêta-bloquants (Propranolol) pour le cœur</li>
+                <li><span class="font-medium">Curatif - 3 options :</span></li>
+                <ul class="list-disc pl-8 mt-1">
+                  <li><span class="font-medium">ATS (Antithyroïdiens de Synthèse) :</span> Carbimazole, Propylthiouracile (PTU). Durée 12-18 mois Basedow</li>
+                  <li><span class="font-medium">Chirurgie :</span> Thyroïdectomie totale (nodules volumineux, cancer suspect)</li>
+                  <li><span class="font-medium">Iode radioactif (I-131) :</span> Irathérapie (nodules âgé, Basedow après échec médical)</li>
+                </ul>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-orange-50 border-l-4 border-orange-400 p-3 rounded">
+          <h4 class="font-semibold text-orange-900 text-xs mb-2">4️⃣ Pathologie Nodulaire et Morphologique</h4>
+          <div class="space-y-2 text-xs">
+            <div>
+              <span class="font-semibold text-orange-800">🔵 Goitre Simple :</span>
+              <ul class="list-disc pl-5 mt-1">
+                <li><span class="font-medium">Définition :</span> Augmentation volume thyroïdien (> 18ml femme, > 20ml homme) <span class="underline">SANS dysfonction hormonale ni inflammation</span></li>
+                <li><span class="font-medium">Étiologie :</span> Familial, carence iode ancien</li>
+                <li><span class="font-medium">Conduite :</span> Surveillance simple si pas compression (dysphagie/dyspnée)</li>
+              </ul>
+            </div>
+            <div>
+              <span class="font-semibold text-orange-800">⭕ Nodules Thyroïdiens :</span>
+              <ul class="list-disc pl-5 mt-1">
+                <li><span class="font-medium">Fréquence :</span> Très fréquents (50% > 60 ans à l'échographie). <span class="underline">95% sont BÉNINS</span></li>
+                <li><span class="font-medium">Examen clé :</span> <span class="font-semibold">Échographie Cervicale</span></li>
+              </ul>
+            </div>
+            <div class="bg-orange-100 p-2 rounded">
+              <span class="font-semibold text-orange-900">📊 Classification EU-TIRADS (Risque Malignité) :</span>
+              <ul class="list-disc pl-5 mt-1">
+                <li><span class="font-medium">TIRADS 2 :</span> Bénin (Kyste pur, aspect spongiforme)</li>
+                <li><span class="font-medium">TIRADS 3/4 :</span> Risque intermédiaire → Surveillance ou cytoponction selon taille</li>
+                <li><span class="font-medium text-red-700">TIRADS 5 :</span> Suspect → Hypoéchogène, contours irréguliers, microcalcifications, plus haut que large</li>
+              </ul>
+            </div>
+            <div>
+              <span class="font-semibold text-orange-800">💉 Cytoponction (FNA - Fine Needle Aspiration) :</span>
+              <ul class="list-disc pl-5 mt-1">
+                <li><span class="font-medium">Indication :</span> Nodules suspects (TIRADS 4/5) ou volumineux (> 20mm)</li>
+                <li><span class="font-medium">Classification BETHESDA :</span></li>
+                <ul class="list-disc pl-8 mt-1">
+                  <li>Bethesda I : Non diagnostique</li>
+                  <li><span class="font-medium">Bethesda II :</span> Bénin → Surveillance</li>
+                  <li>Bethesda III/IV : Indéterminé → Réévaluation / Chirurgie</li>
+                  <li>Bethesda V : Suspect de malignité</li>
+                  <li><span class="font-medium text-red-700">Bethesda VI :</span> Malin → Chirurgie</li>
+                </ul>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-red-50 border-l-4 border-red-400 p-3 rounded">
+          <h4 class="font-semibold text-red-900 text-xs mb-2">5️⃣ Cancers de la Thyroïde</h4>
+          <div class="space-y-2 text-xs">
+            <p class="text-red-800"><span class="font-semibold">Généralités :</span> Bon pronostic global (sauf anaplasique). Découverte souvent fortuite sur nodule.</p>
+            <div class="bg-red-100 p-2 rounded overflow-x-auto">
+              <table class="w-full text-xs border-collapse">
+                <thead>
+                  <tr class="bg-red-200">
+                    <th class="border border-red-300 p-1 text-left">Type</th>
+                    <th class="border border-red-300 p-1 text-left">Fréquence</th>
+                    <th class="border border-red-300 p-1 text-left">Origine</th>
+                    <th class="border border-red-300 p-1 text-left">Marqueur Suivi</th>
+                    <th class="border border-red-300 p-1 text-left">Caractéristiques</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="border border-red-300 p-1 font-medium">Papillaire</td>
+                    <td class="border border-red-300 p-1">85%</td>
+                    <td class="border border-red-300 p-1">Cellule folliculaire</td>
+                    <td class="border border-red-300 p-1">Thyroglobuline</td>
+                    <td class="border border-red-300 p-1"><span class="font-medium text-green-700">Bon pronostic.</span> Extension lymphatique (ganglions cervicaux)</td>
+                  </tr>
+                  <tr>
+                    <td class="border border-red-300 p-1 font-medium">Folliculaire</td>
+                    <td class="border border-red-300 p-1">10%</td>
+                    <td class="border border-red-300 p-1">Cellule folliculaire</td>
+                    <td class="border border-red-300 p-1">Thyroglobuline</td>
+                    <td class="border border-red-300 p-1">Extension hématogène (métastases os, poumons)</td>
+                  </tr>
+                  <tr>
+                    <td class="border border-red-300 p-1 font-medium">Médullaire (CMT)</td>
+                    <td class="border border-red-300 p-1">3-5%</td>
+                    <td class="border border-red-300 p-1">Cellule C (Parafolliculaire)</td>
+                    <td class="border border-red-300 p-1"><span class="font-semibold">Calcitonine</span></td>
+                    <td class="border border-red-300 p-1">Sécrète calcitonine. <span class="font-medium text-purple-700">25% formes familiales (NEM 2)</span></td>
+                  </tr>
+                  <tr>
+                    <td class="border border-red-300 p-1 font-medium text-red-700">Anaplasique</td>
+                    <td class="border border-red-300 p-1">< 2%</td>
+                    <td class="border border-red-300 p-1">Cellule folliculaire</td>
+                    <td class="border border-red-300 p-1">Aucun</td>
+                    <td class="border border-red-300 p-1"><span class="font-bold text-red-700">Très agressif.</span> Sujet âgé. Décès rapide (asphyxie locale)</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="bg-red-100 p-2 rounded">
+              <span class="font-semibold text-red-900">💊 Traitement Cancer Différencié (Papillaire/Folliculaire) :</span>
+              <ul class="list-disc pl-5 mt-1">
+                <li><span class="font-medium">1️⃣ Chirurgie :</span> Thyroïdectomie totale + Curage ganglionnaire si atteinte</li>
+                <li><span class="font-medium">2️⃣ Totalisation par Iode 131 (Irathérapie) :</span> Détruire reliquats thyroïdiens (selon risque récidive)</li>
+                <li><span class="font-medium">3️⃣ Hormonothérapie Frénatrice :</span> Lévothyroxine dose supra-physiologique pour garder TSH BASSE < 0.1 (éviter récidive stimulation TSH)</li>
+                <li><span class="font-medium">4️⃣ Surveillance :</span> Thyroglobuline + Échographie cervicale régulières</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-teal-50 border-l-4 border-teal-400 p-3 rounded">
+          <h4 class="font-semibold text-teal-900 text-xs mb-2">6️⃣ Situations Spécifiques</h4>
+          <div class="space-y-2 text-xs">
+            <div class="bg-teal-100 p-2 rounded">
+              <span class="font-semibold text-teal-900">🤰 Grossesse :</span>
+              <ul class="list-disc pl-5 mt-1">
+                <li><span class="font-medium">Besoins augmentés :</span> Hormones thyroïdiennes +30 à +50% (œstrogènes, TBG, passage fœto-placentaire)</li>
+                <li><span class="font-medium text-red-700">⚠️ Hypothyroïdie :</span> DANGEREUSE développement neuro-intellectuel fœtus
+                  <ul class="list-disc pl-5 mt-1">
+                    <li><span class="underline">Action :</span> Augmenter doses Lévothyroxine DÈS test grossesse positif (+25-50%)</li>
+                    <li><span class="font-medium">Cible TSH :</span> < 2.5 mUI/L (T1), < 3.0 (T2/T3)</li>
+                  </ul>
+                </li>
+                <li><span class="font-medium text-orange-700">⚠️ Hyperthyroïdie (Basedow) :</span> Risque passage TRAb au fœtus → Hyperthyroïdie néonatale
+                  <ul class="list-disc pl-5 mt-1">
+                    <li><span class="font-medium">Traitement :</span> Préférer PTU (Propylthiouracile) au 1er trimestre (tératogénicité moindre vs Carbimazole)</li>
+                    <li>Surveillance TRAb maternels + échographies fœtales</li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+            <div class="bg-teal-100 p-2 rounded">
+              <span class="font-semibold text-teal-900">💊 Thyroïde et Amiodarone (Cordarone®) :</span>
+              <p class="mt-1"><span class="font-medium">Contexte :</span> Médicament anti-arythmique TRÈS RICHE EN IODE → Dysthyroïdie 15-20% patients</p>
+              <div class="mt-2 space-y-2">
+                <div>
+                  <span class="font-medium text-orange-700">🔴 Type 1 (Effet Basedow-like) :</span>
+                  <ul class="list-disc pl-5 mt-1">
+                    <li><span class="font-medium">Mécanisme :</span> Surcharge iode sur thyroïde PATHOLOGIQUE (goitre nodulaire, Basedow latent)</li>
+                    <li><span class="font-medium">Traitement :</span> Antithyroïdiens de synthèse (ATS) - Carbimazole</li>
+                  </ul>
+                </div>
+                <div>
+                  <span class="font-medium text-purple-700">🟣 Type 2 (Thyroïdite destructrice) :</span>
+                  <ul class="list-disc pl-5 mt-1">
+                    <li><span class="font-medium">Mécanisme :</span> Toxicité directe sur thyroïde SAINE → Lyse cellulaire relargage hormones</li>
+                    <li><span class="font-medium">Traitement :</span> Corticoïdes (Prednisone)</li>
+                  </ul>
+                </div>
+                <div class="text-teal-800 italic">
+                  <span class="font-semibold">💡 Différenciation :</span> Scintigraphie (Type 1 fixation, Type 2 éteinte) + Échographie Doppler (Type 1 vascularisation, Type 2 avascularisation)
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-gray-100 border-l-4 border-gray-400 p-2 rounded mt-2">
+          <p class="text-xs text-gray-700"><span class="font-semibold">📌 Synthèse pour l'Expert :</span> La thyroïde = Thermostat métabolique. Stratégie TSH first simple et efficace. Basedow = TRIADE + TRAb. EU-TIRADS guide biopsie. Cancers différenciés excellent pronostic. Grossesse = Augmenter Lévothyroxine immédiatement. Amiodarone = Type 1 (ATS) vs Type 2 (Corticoïdes).</p>
+        </div>
+      </div>`,
+          children: [{ code: "C19I01", name: "Maladie de Basedow (Hyperthyroïdie)" }, { code: "C19I02", name: "Goitre multinodulaire toxique (Hyperthyroïdie)" }, { code: "C19I03", name: "Nodule toxique (Hyperthyroïdie)" }, { code: "C19I04", name: "Autres Hyperthyroïdies" }, { code: "C19I05", name: "Thyroïdite auto-immune d'Hashimoto" }, { code: "C19I06", name: "Myxœdème idiopathique" }, { code: "C19I07", name: "Hypothiroïdies" }] },
         { code: "C19J", name: "Affections para thyroïdiennes", children: [{ code: "C19J01", name: "Hyperparathyroïdie" }, { code: "C19J02", name: "Hypoparathyroïdie" }] },
         { code: "C19K", name: "Anomalies de la sécrétion pancréatique interne", children: [{ code: "C19K01", name: "Hyperinsulinisme" }, { code: "C19K02", name: "Hyperglycémie" }, { code: "C19K03", name: "Autres anomalies de la sécrétion pancréatique inter" }] }
     ],
