@@ -1208,6 +1208,12 @@ const middleCategories: InjuryCategory[] = [
         injuries: [
             { name: "Amputation de la main (Main Dominante)", rate: [60, 65] },
             { name: "Amputation de la main (Main Non Dominante)", rate: [50, 55] },
+            { name: "Perte de l'usage de la main - Perte complète tous doigts + poignet ankylosé (Main Dominante)", rate: 70, description: "Main réduite à la palette métacarpienne avec ankylose du poignet." },
+            { name: "Perte de l'usage de la main - Perte complète tous doigts + poignet ankylosé (Main Non Dominante)", rate: 65, description: "Main réduite à la palette métacarpienne avec ankylose du poignet." },
+            { name: "Perte de l'usage de la main - Immobilisation tous doigts en extension (Main Dominante)", rate: 70, description: "Tous les doigts immobilisés en extension, quel que soit l'état du poignet." },
+            { name: "Perte de l'usage de la main - Immobilisation tous doigts en extension (Main Non Dominante)", rate: 65, description: "Tous les doigts immobilisés en extension, quel que soit l'état du poignet." },
+            { name: "Perte de l'usage de la main - Immobilisation tous doigts en flexion (Main Dominante)", rate: 70, description: "Tous les doigts immobilisés en flexion ou incurvation (ankyloses, contractures)." },
+            { name: "Perte de l'usage de la main - Immobilisation tous doigts en flexion (Main Non Dominante)", rate: 65, description: "Tous les doigts immobilisés en flexion ou incurvation (ankyloses, contractures)." },
             { name: "Amputation de tous les doigts de la main (Main Dominante)", rate: [55, 60] },
             { name: "Amputation de tous les doigts de la main (Main Non Dominante)", rate: [45, 50] },
             { name: "Perte des cinq métacarpiens (Main Dominante)", rate: [50, 55] },
