@@ -5232,10 +5232,27 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             searchTerms: ['Pseudarthrose du scaphoïde'],
             priority: 999
         },
+        // 🆕 V3.3.124g: Fracture scaphoïde - Détection automatique forme grave
         {
             pattern: /fracture.*scapho[ïi]de/i,
-            context: /poignet|carpien|carpe|raideur/i,
-            searchTerms: ['Fracture du scaphoïde carpien - Avec raideur simple (Main Dominante)'],
+            context: /(?:raideur.*douleur|douleur.*raideur|douleurs.*accentu[eé]es|g[eê]ne.*fonctionnelle.*pouce|pouce.*g[eê]ne)/i,
+            searchTerms: ['Fracture du scaphoïde carpien - Forme grave (Main Dominante)'],
+            priority: 999,  // Priorité maximale pour forme grave
+            negativeContext: /l[eé]g[eè]re|insignifiant/i
+        },
+        // 🆕 V3.3.124g: Fracture scaphoïde - Forme moyenne
+        {
+            pattern: /fracture.*scapho[ïi]de/i,
+            context: /douleurs.*mod[eé]r[eé]es|faible.*limitation|limitation.*faible/i,
+            searchTerms: ['Fracture du scaphoïde carpien - Forme moyenne (Main Dominante)'],
+            priority: 998,  // Priorité haute pour forme moyenne
+            negativeContext: /grave|s[eé]v[eè]re|accentu[eé]/i
+        },
+        // 🆕 V3.3.124g: Fracture scaphoïde - Forme légère (par défaut)
+        {
+            pattern: /fracture.*scapho[ïi]de/i,
+            context: /poignet|carpien|carpe|l[eé]g[eè]re|insignifiant/i,
+            searchTerms: ['Fracture du scaphoïde carpien - Forme légère avec raideurs insignifiantes (Main Dominante)'],
             priority: 92
         },
         {
