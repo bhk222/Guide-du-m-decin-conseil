@@ -6992,53 +6992,6 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
         }
     }
 
-    // 🆕 V3.3.124d: CAS SPÉCIAL MÉTACARPIENS - Court-circuit pour "un seul métacarpien"
-    // Retourner DIRECTEMENT le dialogue de choix avec les 5 doigts
-    const normalizedForMetaCheck = convertNumberWords(normalize(preprocessMedicalText(text)));
-    const hasSpecificFinger = /\b(pouce|index|majeur|medius|annulaire|auriculaire|1er|2e|3e|4e|5e)\b/i.test(normalizedForMetaCheck);
-    const isMetacarpienSingleQueryDirect = /metacarpien/i.test(normalizedForMetaCheck) && 
-        /\b(?:d\s+un\s+seul|un\s+seul|un\s+metacarpien|1\s+metacarpien|seul\s+metacarpien|perte\s+(?:d\s+un|du|d\s+1|du\s+\d))\b/i.test(normalizedForMetaCheck) &&
-        !/cinq|5|tous|des\s+cinq/i.test(normalizedForMetaCheck) &&
-        !hasSpecificFinger;  // ⚠️ NE PAS déclencher si un doigt spécifique est mentionné
-    
-    if (isMetacarpienSingleQueryDirect) {
-        // Récupérer les 5 métacarpiens individuels
-        const metacarpienChoices = allInjuriesWithPaths.filter(inj => 
-            /metacarpien/i.test(inj.name) && 
-            !/cinq/i.test(inj.name) &&
-            /(?:pouce|index|majeur|annulaire|auriculaire|1er|2e|3e|4e|5e)/i.test(inj.name)
-        );
-        
-        if (metacarpienChoices.length >= 2) {
-            // Trier par ordre : Pouce, Index, Majeur, Annulaire, Auriculaire
-            const orderMap: { [key: string]: number } = {
-                'pouce': 1, '1er': 1,
-                'index': 2, '2e': 2,
-                'majeur': 3, '3e': 3,
-                'annulaire': 4, '4e': 4,
-                'auriculaire': 5, '5e': 5
-            };
-            
-            metacarpienChoices.sort((a, b) => {
-                const aOrder = Object.keys(orderMap).reduce((order, key) => {
-                    if (normalize(a.name).includes(key)) return orderMap[key];
-                    return order;
-                }, 999);
-                const bOrder = Object.keys(orderMap).reduce((order, key) => {
-                    if (normalize(b.name).includes(key)) return orderMap[key];
-                    return order;
-                }, 999);
-                return aOrder - bOrder;
-            });
-            
-            return {
-                type: 'ambiguity',
-                text: `Votre description "perte d'un seul métacarpien" peut correspondre à plusieurs séquelles. Pour la région "Main - Amputations", laquelle correspond le mieux à l'état du patient ?`,
-                choices: metacarpienChoices.slice(0, 5).map(c => c as Injury)
-            };
-        }
-    }
-
     // NEW LOGIC: Check for exact match first to bypass ambiguity loop
     let exactMatch = allInjuriesWithPaths.find(inj => normalize(inj.name) === normalizedInputText);
     
@@ -8305,6 +8258,56 @@ const extractIndividualLesions = (text: string): string[] => {
  * @param isExactMatch - Si true, cherche une correspondance exacte par nom (pour résoudre ambiguïté)
  */
 export const localExpertAnalysis = (text: string, externalKeywords?: string[], isExactMatch: boolean = false): LocalAnalysisResult => {
+    
+    // 🆕 V3.3.124e: CHECK MÉTACARPIENS EN PRIORITÉ ABSOLUE - AVANT TOUT AUTRE TRAITEMENT
+    // Si l'utilisateur tape "perte d'un seul métacarpien" SANS mentionner de doigt spécifique,
+    // on affiche IMMÉDIATEMENT le dialogue de choix avec les 5 doigts
+    const normalizedForMetaCheckEarly = convertNumberWords(normalize(preprocessMedicalText(text)));
+    const hasSpecificFingerEarly = /\b(pouce|index|majeur|medius|annulaire|auriculaire|1er|2e|3e|4e|5e)\b/i.test(normalizedForMetaCheckEarly);
+    const isMetacarpienSingleQueryEarly = /metacarpien/i.test(normalizedForMetaCheckEarly) && 
+        /\b(?:d\s+un\s+seul|un\s+seul|un\s+metacarpien|1\s+metacarpien|seul\s+metacarpien|perte\s+(?:d\s+un|du|d\s+1))\b/i.test(normalizedForMetaCheckEarly) &&
+        !/cinq|5|tous|des\s+cinq/i.test(normalizedForMetaCheckEarly) &&
+        !hasSpecificFingerEarly &&
+        !isExactMatch;  // Ne pas interrompre si l'utilisateur a déjà fait un choix
+    
+    if (isMetacarpienSingleQueryEarly) {
+        console.log('🔍 DÉTECTION MÉTACARPIENS: Dialogue de choix déclenché IMMÉDIATEMENT');
+        // Récupérer les 5 métacarpiens individuels
+        const metacarpienChoices = allInjuriesWithPaths.filter(inj => 
+            /metacarpien/i.test(inj.name) && 
+            !/cinq/i.test(inj.name) &&
+            /(?:pouce|index|majeur|annulaire|auriculaire|1er|2e|3e|4e|5e)/i.test(inj.name)
+        );
+        
+        if (metacarpienChoices.length >= 2) {
+            // Trier par ordre : Pouce, Index, Majeur, Annulaire, Auriculaire
+            const orderMap: { [key: string]: number } = {
+                'pouce': 1, '1er': 1,
+                'index': 2, '2e': 2,
+                'majeur': 3, '3e': 3,
+                'annulaire': 4, '4e': 4,
+                'auriculaire': 5, '5e': 5
+            };
+            
+            metacarpienChoices.sort((a, b) => {
+                const aOrder = Object.keys(orderMap).reduce((order, key) => {
+                    if (normalize(a.name).includes(key)) return orderMap[key];
+                    return order;
+                }, 999);
+                const bOrder = Object.keys(orderMap).reduce((order, key) => {
+                    if (normalize(b.name).includes(key)) return orderMap[key];
+                    return order;
+                }, 999);
+                return aOrder - bOrder;
+            });
+            
+            return {
+                type: 'ambiguity',
+                text: `Votre description "perte d'un seul métacarpien" peut correspondre à plusieurs séquelles. Pour la région "Main - Amputations", laquelle correspond le mieux à l'état du patient ?`,
+                choices: metacarpienChoices.slice(0, 5).map(c => c as Injury)
+            };
+        }
+    }
     
     // 🆕 V3.3.60: Si isExactMatch, chercher l'injury exacte par nom pour éviter boucle d'ambiguïté
     if (isExactMatch) {
