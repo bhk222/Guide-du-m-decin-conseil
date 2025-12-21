@@ -6992,6 +6992,51 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
         }
     }
 
+    // 🆕 V3.3.124d: CAS SPÉCIAL MÉTACARPIENS - Court-circuit pour "un seul métacarpien"
+    // Retourner DIRECTEMENT le dialogue de choix avec les 5 doigts
+    const normalizedForMetaCheck = convertNumberWords(normalize(preprocessMedicalText(text)));
+    const isMetacarpienSingleQueryDirect = /metacarpien/i.test(normalizedForMetaCheck) && 
+        /\b(?:d\s+un\s+seul|un\s+seul|un\s+metacarpien|1\s+metacarpien|seul\s+metacarpien|perte.*metacarpien)\b/.test(normalizedForMetaCheck) &&
+        !/cinq|5|tous/i.test(normalizedForMetaCheck);
+    
+    if (isMetacarpienSingleQueryDirect) {
+        // Récupérer les 5 métacarpiens individuels
+        const metacarpienChoices = allInjuriesWithPaths.filter(inj => 
+            /metacarpien/i.test(inj.name) && 
+            !/cinq/i.test(inj.name) &&
+            /(?:pouce|index|majeur|annulaire|auriculaire|1er|2e|3e|4e|5e)/i.test(inj.name)
+        );
+        
+        if (metacarpienChoices.length >= 2) {
+            // Trier par ordre : Pouce, Index, Majeur, Annulaire, Auriculaire
+            const orderMap: { [key: string]: number } = {
+                'pouce': 1, '1er': 1,
+                'index': 2, '2e': 2,
+                'majeur': 3, '3e': 3,
+                'annulaire': 4, '4e': 4,
+                'auriculaire': 5, '5e': 5
+            };
+            
+            metacarpienChoices.sort((a, b) => {
+                const aOrder = Object.keys(orderMap).reduce((order, key) => {
+                    if (normalize(a.name).includes(key)) return orderMap[key];
+                    return order;
+                }, 999);
+                const bOrder = Object.keys(orderMap).reduce((order, key) => {
+                    if (normalize(b.name).includes(key)) return orderMap[key];
+                    return order;
+                }, 999);
+                return aOrder - bOrder;
+            });
+            
+            return {
+                type: 'ambiguity',
+                text: `Quel doigt est concerné par la perte du métacarpien ?`,
+                choices: metacarpienChoices.slice(0, 5).map(c => c as Injury)
+            };
+        }
+    }
+
     // NEW LOGIC: Check for exact match first to bypass ambiguity loop
     let exactMatch = allInjuriesWithPaths.find(inj => normalize(inj.name) === normalizedInputText);
     
