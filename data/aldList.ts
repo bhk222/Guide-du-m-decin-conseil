@@ -8410,7 +8410,225 @@ export const aldData: AldItem[] = [
     code: "C19",
     name: "Les affections endocriniennes...",
     children: [
-        { code: "C19A", name: "Syndrome de Cushing", children: [{ code: "C19A01", name: "Adénome corticotrope hypophysaire" }, { code: "C19A02", name: "Syndrome de cushing paranéoplasique" }, { code: "C19A03", name: "Syndrome de cushing secondaire à une tumeur de la" }] },
+        { 
+          code: "C19A", 
+          name: "Syndrome de Cushing",
+          tooltip: `<div class="space-y-3">
+        <h3 class="font-bold text-lg text-orange-700">🔴 SYNDROME DE CUSHING</h3>
+        
+        <div class="bg-blue-50 p-3 rounded border-l-4 border-blue-500">
+          <h4 class="font-semibold text-blue-800 mb-2">1️⃣ DÉFINITION ET PHYSIOPATHOLOGIE</h4>
+          
+          <div class="bg-white p-2 rounded text-sm space-y-2">
+            <div>
+              <p class="font-semibold text-purple-700">📋 Définition</p>
+              <p class="text-xs">Ensemble manifestations cliniques/biologiques induites par <strong>exposition chronique à un excès de glucocorticoïdes (cortisol)</strong></p>
+            </div>
+            
+            <div class="bg-purple-50 p-2 rounded">
+              <p class="font-semibold text-purple-800 text-xs mb-1">🔬 Mécanisme</p>
+              <p class="text-xs mb-1">Cortisol = hormone <strong>catabolisante</strong>. Excès entraîne :</p>
+              <ul class="list-disc ml-5 text-xs">
+                <li>Fonte protéique (peau, muscles, os)</li>
+                <li>Redistribution des graisses</li>
+                <li>Rétention hydro-sodée</li>
+              </ul>
+            </div>
+            
+            <div class="bg-red-100 p-2 rounded border border-red-400">
+              <p class="font-semibold text-red-800 text-xs">⚠️ Cause la + fréquente : <strong>IATROGÈNE</strong> (prise prolongée corticoïdes exogènes)</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-yellow-50 p-3 rounded border-l-4 border-yellow-500">
+          <h4 class="font-semibold text-yellow-800 mb-2">2️⃣ PRÉSENTATION CLINIQUE ("Phénotype Cushingoïde")</h4>
+          <p class="text-sm italic mb-2">👁️ Diagnostic souvent suspecté sur l'<strong>INSPECTION</strong> ("Spot diagnosis")</p>
+          
+          <div class="space-y-2">
+            <div class="bg-red-100 p-2 rounded border-2 border-red-500">
+              <p class="font-semibold text-red-800 text-xs mb-1">A. Signes Morphologiques (SPÉCIFIQUES)</p>
+              <ul class="list-disc ml-5 text-xs space-y-1">
+                <li><strong>Obésité facio-tronculaire</strong> : Prise poids paradoxale (visage + tronc) avec <strong>membres fins</strong></li>
+                <li><strong>Faciès lunaire</strong> : Visage rond, rouge (érythrosique), bouffi</li>
+                <li><strong>Bosse de bison</strong> (Buffalo hump) : Amas graisseux nuque</li>
+                <li>Comblement creux sus-claviculaires</li>
+              </ul>
+            </div>
+
+            <div class="bg-purple-100 p-2 rounded border-2 border-purple-500">
+              <p class="font-semibold text-purple-800 text-xs mb-1">B. Signes Cutanés (HAUTE VALEUR DIAGNOSTIQUE)</p>
+              <ul class="list-disc ml-5 text-xs space-y-1">
+                <li class="bg-pink-50 p-1 rounded"><strong>Vergetures POURPRES</strong> : <strong>Larges (&gt;1cm), verticales, rouge-violacé</strong> (abdomen, cuisses, seins)
+                  <ul class="list-circle ml-4">
+                    <li>🌟 <strong>Signe le + DISCRIMINANT</strong></li>
+                  </ul>
+                </li>
+                <li><strong>Fragilité cutanée</strong> : Peau fine ("papier à cigarette"), ecchymoses au moindre choc (signe tablier)</li>
+                <li><strong>Hirsutisme et acné</strong> (excès androgènes associé)</li>
+              </ul>
+            </div>
+
+            <div class="bg-orange-100 p-2 rounded">
+              <p class="font-semibold text-orange-800 text-xs mb-1">C. Signes Musculo-Squelettiques (Catabolisme)</p>
+              <ul class="list-disc ml-5 text-xs space-y-1">
+                <li><strong>Amyotrophie proximale</strong> : Fonte quadriceps (<strong>"Signe du tabouret"</strong> : difficulté se lever sans les mains)</li>
+                <li><strong>Ostéoporose</strong> : Fractures pathologiques, tassements vertébraux</li>
+              </ul>
+            </div>
+
+            <div class="bg-blue-100 p-2 rounded">
+              <p class="font-semibold text-blue-800 text-xs mb-1">D. Complications Métaboliques et Vasculaires</p>
+              <ul class="list-disc ml-5 text-xs">
+                <li>Diabète secondaire (Insulino-résistance)</li>
+                <li>HTA</li>
+                <li>Troubles cycle menstruel (aménorrhée), baisse libido</li>
+                <li>Troubles psychiatriques (irritabilité, dépression, insomnie)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-teal-50 p-3 rounded border-l-4 border-teal-500">
+          <h4 class="font-semibold text-teal-800 mb-2">3️⃣ DÉMARCHE DIAGNOSTIQUE</h4>
+          <p class="text-sm font-bold text-purple-700 mb-2">⚡ 2 ÉTAPES STRICTES : 1. Confirmer hypercortisolisme, 2. Trouver cause</p>
+          
+          <div class="space-y-2">
+            <div class="bg-green-100 p-2 rounded border-2 border-green-500">
+              <p class="font-semibold text-green-800 text-xs mb-1">ÉTAPE 1 : Affirmation Hypercortisolisme (Dépistage)</p>
+              <p class="text-xs italic mb-1">⚠️ <strong>≥ 2 tests positifs</strong> parmi :</p>
+              <ul class="list-disc ml-5 text-xs space-y-1">
+                <li><strong>Cortisol Libre Urinaire (CLU) 24h</strong> : Augmenté</li>
+                <li><strong>Test de freinage minute (Nugent)</strong> :
+                  <ul class="list-circle ml-4">
+                    <li>1mg Dexaméthasone à minuit</li>
+                    <li>Cortisol plasmatique 8h <strong>&gt; 50 nmol/L</strong> (absence freinage)</li>
+                  </ul>
+                </li>
+                <li><strong>Cortisol salivaire nocturne</strong> : Augmenté (perte rythme nycthéméral)</li>
+              </ul>
+            </div>
+
+            <div class="bg-blue-100 p-2 rounded border-2 border-blue-500">
+              <p class="font-semibold text-blue-800 text-xs mb-1">ÉTAPE 2 : Diagnostic Étiologique (Mesure ACTH)</p>
+              <p class="text-xs">Une fois Cushing confirmé → <strong>Dosage ACTH plasmatique</strong> pour orienter l'enquête</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-purple-50 p-3 rounded border-l-4 border-purple-500">
+          <h4 class="font-semibold text-purple-800 mb-2">4️⃣ CLASSIFICATION ÉTIOLOGIQUE</h4>
+          
+          <div class="space-y-2">
+            <div class="bg-orange-100 p-2 rounded border-2 border-orange-500">
+              <p class="font-semibold text-orange-800 text-xs mb-1">A. Cushing ACTH-DÉPENDANT (ACTH élevée/normale inadaptée)</p>
+              <p class="text-xs italic mb-1">Hypophyse ou tumeur stimule les surrénales</p>
+              
+              <div class="space-y-1 text-xs">
+                <div class="bg-white p-1 rounded">
+                  <p class="font-semibold text-red-700"><strong>Maladie de Cushing (70%)</strong></p>
+                  <ul class="list-disc ml-5">
+                    <li><strong>Micro-adénome hypophysaire corticotrope</strong></li>
+                    <li>Touche surtout <strong>femme jeune</strong></li>
+                    <li>Répond au test freinage fort + stimulation CRH</li>
+                  </ul>
+                </div>
+
+                <div class="bg-white p-1 rounded">
+                  <p class="font-semibold text-pink-700">Sécrétion Ectopique d'ACTH (Paranéoplasique)</p>
+                  <ul class="list-disc ml-5">
+                    <li>Tumeur neuro-endocrine (Poumon petites cellules, carcinoïde bronchique)</li>
+                    <li>Cushing souvent <strong>brutal, intense</strong></li>
+                    <li><strong>Mélanodermie</strong> (peau bronzée) + <strong>Hypokaliémie sévère</strong></li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-blue-100 p-2 rounded border-2 border-blue-500">
+              <p class="font-semibold text-blue-800 text-xs mb-1">B. Cushing ACTH-INDÉPENDANT (ACTH effondrée/freinée)</p>
+              <p class="text-xs italic mb-1">Surrénale sécrète seule, hypophyse au repos (Feedback négatif)</p>
+              
+              <ul class="list-disc ml-5 text-xs">
+                <li><strong>Adénome surrénalien</strong> : Tumeur bénigne unilatérale</li>
+                <li><strong>Corticosurrénalome</strong> : Cancer surrénale (mauvais pronostic, virilisation marquée)</li>
+                <li><strong>Hyperplasie macronodulaire bilatérale</strong></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-orange-50 p-3 rounded border-l-4 border-orange-500">
+          <h4 class="font-semibold text-orange-800 mb-2">5️⃣ EXAMENS DE LOCALISATION</h4>
+          
+          <div class="bg-white p-2 rounded text-xs">
+            <ul class="list-disc ml-5 space-y-1">
+              <li><strong>Si ACTH Basse</strong> : <strong>Scanner (TDM) surrénales</strong></li>
+              <li><strong>Si ACTH Haute</strong> :
+                <ul class="list-circle ml-4">
+                  <li><strong>IRM Hypophysaire</strong> (recherche adénome)</li>
+                  <li>Si IRM normale : <strong>Cathétérisme sinus pétreux inférieurs</strong> (Gold Standard différencier hypophysaire vs ectopique)</li>
+                  <li><strong>Scanner TAP</strong> (Thoraco-Abdomino-Pelvien) : Recherche tumeur ectopique</li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="bg-green-50 p-3 rounded border-l-4 border-green-500">
+          <h4 class="font-semibold text-green-800 mb-2">6️⃣ TRAITEMENT</h4>
+          <p class="text-sm font-bold text-blue-700 mb-2">💉 Traitement avant tout <strong>CHIRURGICAL</strong></p>
+          
+          <div class="space-y-2">
+            <div class="bg-blue-100 p-2 rounded border-2 border-blue-500">
+              <p class="font-semibold text-blue-800 text-xs mb-1">🔪 Chirurgical</p>
+              <ul class="list-disc ml-5 text-xs space-y-1">
+                <li><strong>Maladie de Cushing</strong> : Résection adénome par voie <strong>trans-sphénoïdale</strong></li>
+                <li><strong>Tumeur Surrénalienne</strong> : Surrénalectomie unilatérale (cœlioscopie)</li>
+                <li><strong>Ectopique</strong> : Exérèse tumeur primitive</li>
+              </ul>
+            </div>
+
+            <div class="bg-white p-2 rounded">
+              <p class="font-semibold text-purple-700 text-xs mb-1">💊 Médical (Anticortisoliques de synthèse)</p>
+              <p class="text-xs italic mb-1">Indiqué en préparation chirurgie ou si échec/inopérabilité</p>
+              <ul class="list-disc ml-5 text-xs">
+                <li><strong>Molécules</strong> : Kétoconazole, Métyrapone, Osilodrostat, Mitotane (carcinome)</li>
+              </ul>
+            </div>
+
+            <div class="bg-yellow-50 p-2 rounded">
+              <p class="font-semibold text-yellow-800 text-xs mb-1">📡 Radiothérapie</p>
+              <p class="text-xs">Pour reliquats hypophysaires</p>
+            </div>
+
+            <div class="bg-red-100 p-2 rounded border-2 border-red-500">
+              <p class="font-semibold text-red-800 text-xs mb-1">⚠️ Surrénalectomie Bilatérale</p>
+              <p class="text-xs"><strong>Dernier recours</strong> → Nécessite traitement substitutif à vie + Risque syndrome de Nelson</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-pink-50 p-3 rounded border-l-4 border-pink-500">
+          <h4 class="font-semibold text-pink-800 mb-2">🎯 POINTS CLÉS À RETENIR</h4>
+          <div class="bg-white p-2 rounded">
+            <ul class="list-disc ml-5 text-sm space-y-1">
+              <li>🔴 <strong>Cause #1 : IATROGÈNE</strong> (corticoïdes exogènes)</li>
+              <li>👁️ <strong>"Spot diagnosis"</strong> : Obésité facio-tronculaire, faciès lunaire, bosse bison</li>
+              <li>🌟 <strong>Signe + discriminant</strong> : Vergetures POURPRES larges (&gt;1cm) rouge-violacé</li>
+              <li>💪 <strong>Amyotrophie proximale</strong> : "Signe du tabouret"</li>
+              <li>🔬 <strong>Diagnostic</strong> : ≥2 tests positifs (CLU 24h, Freinage Nugent, Cortisol salivaire nocturne)</li>
+              <li>📊 <strong>Étiologie</strong> : Dosage ACTH (élevée → Hypophyse/Ectopique, basse → Surrénale)</li>
+              <li>🏥 <strong>Maladie de Cushing (70%)</strong> : Micro-adénome hypophysaire, femme jeune</li>
+              <li>⚠️ <strong>Ectopique</strong> : Brutal + Mélanodermie + Hypokaliémie sévère</li>
+              <li>🔪 <strong>Traitement</strong> : Chirurgical (trans-sphénoïdal, surrénalectomie)</li>
+              <li>💊 <strong>Anticortisoliques</strong> : Kétoconazole, Métyrapone, Osilodrostat (préparation/échec)</li>
+            </ul>
+          </div>
+        </div>
+      </div>`,
+          children: [{ code: "C19A01", name: "Adénome corticotrope hypophysaire" }, { code: "C19A02", name: "Syndrome de cushing paranéoplasique" }, { code: "C19A03", name: "Syndrome de cushing secondaire à une tumeur de la" }] 
+        },
         { code: "C19B", name: "Adénomes hypophysaires", children: [{ code: "C19B01", name: "Acromégalie et gigantisme (adénome somatotrop" }, { code: "C19B02", name: "Adénome à prolactine" }, { code: "C19B03", name: "Adénome gonadotrope" }, { code: "C19B04", name: "Adénome thyréotrope ou silencieux" }, { code: "C19B05", name: "Craniopharyngiome" }] },
         { code: "C19C", name: "Insuffisance anté-hypophysaire primaire/secondaire", children: [{ code: "C19C01", name: "Hypopituitarisme" }, { code: "C19C02", name: "Syndrome de Sheehan" }] },
         { code: "C19D", name: "Insuffisance surrénalienne primaire/se...", children: [{ code: "C19D01", name: "Maladie d'Addison" }, { code: "C19D02", name: "Syndrome de Nelson" }] },
