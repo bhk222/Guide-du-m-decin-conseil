@@ -1105,7 +1105,11 @@ const middleCategories: InjuryCategory[] = [
             { name: "Amputation de tous les doigts de la main (Main Non Dominante)", rate: [45, 50] },
             { name: "Perte des cinq métacarpiens (Main Dominante)", rate: [50, 55] },
             { name: "Perte des cinq métacarpiens (Main Non Dominante)", rate: [40, 45] },
-            { name: "Perte d'un seul métacarpien (selon le doigt)", rate: [3, 12] },
+            { name: "Perte du 1er métacarpien (Pouce)", rate: [10, 12] },
+            { name: "Perte du 2e métacarpien (Index)", rate: [8, 10] },
+            { name: "Perte du 3e métacarpien (Majeur)", rate: [8, 10] },
+            { name: "Perte du 4e métacarpien (Annulaire)", rate: [5, 7] },
+            { name: "Perte du 5e métacarpien (Auriculaire)", rate: [3, 5] },
         ]
       },
       {
