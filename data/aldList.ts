@@ -9428,7 +9428,321 @@ export const aldData: AldItem[] = [
             }
           ] 
         },
-        { code: "C19D", name: "Insuffisance surrénalienne primaire/se...", children: [{ code: "C19D01", name: "Maladie d'Addison" }, { code: "C19D02", name: "Syndrome de Nelson" }] },
+        { 
+          code: "C19D", 
+          name: "Insuffisance surrénalienne primaire/se...", 
+          children: [
+            { 
+              code: "C19D01", 
+              name: "Maladie d'Addison",
+              tooltip: `<div class="space-y-3">
+        <h3 class="font-bold text-lg text-orange-700">🔥 MALADIE D'ADDISON (Insuffisance Surrénalienne Primitive)</h3>
+        
+        <div class="bg-blue-50 p-3 rounded border-l-4 border-blue-500">
+          <h4 class="font-semibold text-blue-800 mb-2">1️⃣ DÉFINITION ET PHYSIOPATHOLOGIE</h4>
+          
+          <div class="bg-white p-2 rounded text-sm space-y-2">
+            <div>
+              <p class="font-semibold text-purple-700">📋 Définition</p>
+              <p class="text-xs">Destruction lente et progressive (<strong>&gt; 90%</strong>) du cortex des <strong>deux glandes surrénales</strong></p>
+            </div>
+            
+            <div class="bg-red-100 p-2 rounded border-2 border-red-500">
+              <p class="font-semibold text-red-800 text-xs mb-1">🎯 Caractère "PRIMITIF"</p>
+              <p class="text-xs">La panne vient de la <strong>surrénale elle-même</strong> (périphérique)</p>
+              <p class="text-xs">L'hypophyse fonctionne et tente de "fouetter" la glande en produisant massivement de l'<strong>ACTH</strong></p>
+            </div>
+
+            <div class="bg-orange-100 p-2 rounded border-2 border-orange-500">
+              <p class="font-semibold text-orange-800 text-xs mb-1">⚡ Le Triple Déficit</p>
+              
+              <ul class="list-disc ml-5 text-xs space-y-1">
+                <li><strong>Glucocorticoïdes (Cortisol)</strong> : Asthénie, hypoglycémie, instabilité hémodynamique</li>
+                <li class="bg-pink-50 p-1 rounded"><strong>Minéralocorticoïdes (Aldostérone)</strong> : Fuite de sodium (sel), rétention de potassium
+                  <p class="italic text-red-700">🌟 C'est la <strong>différence majeure</strong> avec l'insuffisance centrale</p>
+                </li>
+                <li><strong>Androgènes (DHEA)</strong> : Perte de poils et baisse de libido chez la femme</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-yellow-50 p-3 rounded border-l-4 border-yellow-500">
+          <h4 class="font-semibold text-yellow-800 mb-2">2️⃣ PRÉSENTATION CLINIQUE (Chronique)</h4>
+          <p class="text-sm italic mb-2">Début insidieux. Diagnostic repose sur la <strong>TRIADE CLASSIQUE</strong></p>
+          
+          <div class="space-y-2">
+            <div class="bg-orange-100 p-2 rounded border-4 border-orange-500">
+              <p class="font-semibold text-orange-800 text-xs mb-1">🌟 A. MÉLANODERMIE (Hyperpigmentation)</p>
+              <p class="text-xs font-bold text-red-700 mb-1">Signe PATHOGNOMONIQUE de l'origine périphérique</p>
+              
+              <div class="bg-white p-2 rounded text-xs space-y-1">
+                <div>
+                  <p class="font-semibold text-purple-700">Mécanisme :</p>
+                  <p>Due à l'<strong>excès d'ACTH</strong> (stimule les mélanocytes car partage séquence avec MSH)</p>
+                </div>
+
+                <div class="bg-pink-50 p-2 rounded border-2 border-pink-500">
+                  <p class="font-semibold text-pink-800 mb-1">📍 Topographie</p>
+                  <ul class="list-disc ml-5">
+                    <li>Zones exposées au soleil</li>
+                    <li>Zones de frottement (coudes, genoux, bretelles)</li>
+                    <li>Cicatrices récentes</li>
+                    <li>Aréoles</li>
+                  </ul>
+                </div>
+
+                <div class="bg-red-100 p-2 rounded border-2 border-red-600">
+                  <p class="font-semibold text-red-800 mb-1">🌟 Spécificité HAUTE VALEUR</p>
+                  <p><strong>Tâches ardoisées sur les MUQUEUSES</strong> (face interne des joues, gencives)</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-blue-100 p-2 rounded">
+              <p class="font-semibold text-blue-800 text-xs mb-1">B. Asthénie Globale</p>
+              <ul class="list-disc ml-5 text-xs">
+                <li><strong>Physique, psychique et sexuelle</strong></li>
+                <li class="bg-white p-1 rounded"><strong>Caractéristique</strong> : S'aggrave au cours de la journée (maximum le soir)</li>
+              </ul>
+            </div>
+
+            <div class="bg-purple-100 p-2 rounded">
+              <p class="font-semibold text-purple-800 text-xs mb-1">C. Hypotension Artérielle et Amaigrissement</p>
+              <ul class="list-disc ml-5 text-xs">
+                <li>Tension basse (ex: <strong>90/60 mmHg</strong>) avec <strong>hypotension orthostatique</strong> marquée (chute de tension au lever)</li>
+                <li>Perte de poids constante, anorexie, <strong>"goût pour le sel"</strong></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-teal-50 p-3 rounded border-l-4 border-teal-500">
+          <h4 class="font-semibold text-teal-800 mb-2">3️⃣ BIOLOGIE STANDARD (Oriente le diagnostic)</h4>
+          <p class="text-sm font-bold text-purple-700 mb-2">⚡ Contrairement à l'insuffisance centrale (biochimiquement muette sur les ions), l'Addison présente des troubles ioniques évocateurs</p>
+          
+          <div class="bg-white p-2 rounded text-xs">
+            <ul class="list-disc ml-5 space-y-1">
+              <li class="bg-red-50 p-1 rounded"><strong>Hyponatrémie</strong> (par perte de sel urinaire)</li>
+              <li class="bg-orange-50 p-1 rounded"><strong>Hyperkaliémie</strong> (par carence en aldostérone)</li>
+              <li class="bg-yellow-50 p-1 rounded"><strong>Hypoglycémie à jeun</strong></li>
+              <li class="bg-blue-50 p-1 rounded"><strong>Hémoconcentration</strong> (déshydratation extracellulaire)</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="bg-purple-50 p-3 rounded border-l-4 border-purple-500">
+          <h4 class="font-semibold text-purple-800 mb-2">4️⃣ DIAGNOSTIC DE CERTITUDE (Hormonal)</h4>
+          
+          <div class="space-y-2">
+            <div class="bg-red-100 p-2 rounded border-4 border-red-600">
+              <p class="font-semibold text-red-800 text-xs mb-1">🔬 A. Le Couple Cortisol / ACTH (8h du matin)</p>
+              <p class="text-xs font-bold text-purple-700 mb-2">🌟 C'est la CLÉ du diagnostic différentiel</p>
+              
+              <div class="bg-white p-2 rounded text-xs space-y-2">
+                <div class="bg-blue-50 p-2 rounded border-2 border-blue-500">
+                  <p class="font-semibold text-blue-800">Cortisol BAS</p>
+                  <p><strong>&lt; 5 µg/dL</strong> ou <strong>&lt; 138 nmol/L</strong></p>
+                </div>
+
+                <div class="bg-orange-100 p-2 rounded border-2 border-orange-600">
+                  <p class="font-semibold text-orange-800">ACTH EXPLOSIVE</p>
+                  <p><strong>&gt; 100 pg/mL</strong>, souvent <strong>&gt; 500 ou 1000</strong></p>
+                </div>
+
+                <div class="bg-pink-100 p-2 rounded border-2 border-pink-500">
+                  <p class="font-semibold text-pink-800">💡 Interprétation</p>
+                  <p class="font-bold">La surrénale ne répond pas, l'hypophyse hurle</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-green-100 p-2 rounded border-2 border-green-500">
+              <p class="font-semibold text-green-800 text-xs mb-1">🔬 B. Test au Synacthen (Stimulation)</p>
+              
+              <div class="bg-white p-2 rounded text-xs">
+                <p class="mb-1"><strong>Protocole</strong> : Injection d'ACTH synthétique (250 µg)</p>
+                <div class="bg-red-50 p-2 rounded border-2 border-red-500">
+                  <p class="font-semibold text-red-800 mb-1">Résultat :</p>
+                  <p><strong>Aucune réponse</strong>. Le cortisol reste bas (<strong>"courbe plate"</strong>)</p>
+                  <p class="italic">→ La glande est détruite</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-orange-50 p-3 rounded border-l-4 border-orange-500">
+          <h4 class="font-semibold text-orange-800 mb-2">5️⃣ ENQUÊTE ÉTIOLOGIQUE</h4>
+          
+          <div class="space-y-2">
+            <div class="bg-pink-100 p-2 rounded border-4 border-pink-500">
+              <p class="font-semibold text-pink-800 text-xs mb-1">A. AUTO-IMMUNE (80% des cas - Maladie d'Addison vraie)</p>
+              
+              <div class="bg-white p-2 rounded text-xs space-y-1">
+                <div>
+                  <p class="font-semibold text-purple-700">Terrain :</p>
+                  <p>Femme, antécédents auto-immuns (Vitiligo, Hashimoto, Diabète Type 1)</p>
+                </div>
+
+                <div class="bg-blue-50 p-1 rounded">
+                  <p class="font-semibold text-blue-800">Marqueur :</p>
+                  <p><strong>Anticorps anti-21-hydroxylase</strong> positifs</p>
+                </div>
+
+                <div class="bg-green-50 p-1 rounded">
+                  <p class="font-semibold text-green-800">TDM Surrénales :</p>
+                  <p>Glandes <strong>atrophiées</strong> (rétractées, invisibles)</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-yellow-100 p-2 rounded border-2 border-yellow-500">
+              <p class="font-semibold text-yellow-800 text-xs mb-1">B. TUBERCULOSE Bilatérale (10-15% des cas)</p>
+              
+              <div class="bg-white p-2 rounded text-xs">
+                <p class="mb-1"><strong>Première cause</strong> dans les pays endémiques</p>
+                <div class="bg-orange-50 p-1 rounded">
+                  <p class="font-semibold text-orange-800">TDM Surrénales :</p>
+                  <p>Glandes <strong>augmentées de volume</strong> (au début) et <strong>calcifiées</strong></p>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-blue-100 p-2 rounded">
+              <p class="font-semibold text-blue-800 text-xs mb-1">C. Autres Causes (Rares)</p>
+              <ul class="list-disc ml-5 text-xs">
+                <li>VIH</li>
+                <li>Métastases bilatérales</li>
+                <li>Hémorragie bilatérale (SAPL, Anticoagulants)</li>
+                <li>Adrénoleucodystrophie (génétique, homme jeune)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-green-50 p-3 rounded border-l-4 border-green-500">
+          <h4 class="font-semibold text-green-800 mb-2">6️⃣ PRISE EN CHARGE THÉRAPEUTIQUE</h4>
+          <p class="text-sm font-bold text-purple-700 mb-2">💊 Traitement SUBSTITUTIF À VIE</p>
+          
+          <div class="space-y-2">
+            <div class="bg-red-100 p-2 rounded border-4 border-red-600">
+              <p class="font-semibold text-red-800 text-xs mb-1">💊 A. Glucocorticoïdes : HYDROCORTISONE</p>
+              
+              <div class="bg-white p-2 rounded text-xs space-y-1">
+                <div class="bg-blue-50 p-1 rounded">
+                  <p class="font-semibold text-blue-800">Molécule</p>
+                  <p>Identique au cortisol naturel</p>
+                </div>
+
+                <div class="bg-pink-50 p-1 rounded">
+                  <p class="font-semibold text-pink-800">Dose</p>
+                  <p><strong>15 à 25 mg/jour</strong></p>
+                </div>
+
+                <div class="bg-yellow-50 p-2 rounded border-2 border-yellow-500">
+                  <p class="font-semibold text-yellow-800 mb-1">Répartition : Mimétisme du cycle circadien</p>
+                  <p class="font-bold">La dose la + forte le matin</p>
+                  <p class="italic">Exemple : 10-15mg au réveil, 5-10mg le midi</p>
+                  <p class="text-xs text-red-700">(Éviter le soir pour ne pas gêner le sommeil)</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-pink-100 p-2 rounded border-4 border-pink-500">
+              <p class="font-semibold text-pink-800 text-xs mb-1">💊 B. Minéralocorticoïdes : FLUDROCORTISONE (Florinef)</p>
+              
+              <div class="bg-white p-2 rounded text-xs space-y-1">
+                <div class="bg-red-100 p-2 rounded border-2 border-red-500">
+                  <p class="font-bold text-red-700">🌟 INDISPENSABLE dans l'Addison</p>
+                  <p class="italic">(contrairement à l'insuffisance hypophysaire)</p>
+                </div>
+
+                <div class="bg-blue-50 p-1 rounded">
+                  <p class="font-semibold text-blue-800">Rôle</p>
+                  <p>Compense le manque d'aldostérone pour maintenir la tension et normaliser le potassium</p>
+                </div>
+
+                <div class="bg-green-50 p-1 rounded">
+                  <p class="font-semibold text-green-800">Surveillance</p>
+                  <p>Tension artérielle et Kaliémie</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-orange-100 p-2 rounded">
+              <p class="font-semibold text-orange-800 text-xs mb-1">💊 C. Androgènes : DHEA</p>
+              <p class="text-xs"><strong>Optionnel</strong>. Parfois prescrit chez la femme pour améliorer la libido et l'énergie si le traitement standard ne suffit pas</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-red-50 p-3 rounded border-l-4 border-red-600">
+          <h4 class="font-semibold text-red-800 mb-2">⚠️ 7️⃣ ÉDUCATION THÉRAPEUTIQUE (VITAL)</h4>
+          <p class="text-sm font-bold text-red-700 mb-2">💀 Le patient ne meurt pas de sa maladie chronique, mais d'une <strong>Insuffisance Surrénalienne Aiguë (ISA)</strong> lors d'un stress</p>
+          
+          <div class="space-y-2 text-xs">
+            <div class="bg-yellow-100 p-2 rounded border-4 border-yellow-600">
+              <p class="font-semibold text-yellow-800 mb-1">📋 La Carte d'Addisonien</p>
+              <p class="font-bold">Doit être portée EN PERMANENCE</p>
+            </div>
+
+            <div class="bg-blue-100 p-2 rounded">
+              <p class="font-semibold text-blue-800 mb-1">🧂 Régime</p>
+              <p><strong>Normosodé</strong> (ne jamais faire de régime sans sel !)</p>
+            </div>
+
+            <div class="bg-orange-100 p-2 rounded border-4 border-orange-600">
+              <p class="font-semibold text-orange-800 mb-1">🚨 Gestion du Stress ("Sick Day Rules")</p>
+              
+              <div class="bg-white p-2 rounded space-y-1">
+                <div class="bg-red-50 p-2 rounded border-2 border-red-500">
+                  <p class="font-semibold text-red-700 mb-1">Fièvre, infection, extraction dentaire, stress majeur :</p>
+                  <p class="font-bold"><strong>DOUBLER ou TRIPLER</strong> la dose d'hydrocortisone</p>
+                </div>
+
+                <div class="bg-pink-100 p-2 rounded border-2 border-pink-500">
+                  <p class="font-semibold text-pink-800 mb-1">Vomissements :</p>
+                  <p class="font-bold">Si le comprimé ne passe pas, <strong>INJECTION immédiate</strong></p>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-red-100 p-2 rounded border-4 border-red-600">
+              <p class="font-semibold text-red-800 mb-1">💉 Kit d'Urgence</p>
+              <div class="bg-white p-2 rounded">
+                <p class="font-bold mb-1">Le patient doit avoir chez lui :</p>
+                <ul class="list-disc ml-5">
+                  <li>Ampoule d'<strong>Hydrocortisone injectable (100mg)</strong></li>
+                  <li>Savoir se l'injecter (IM ou SC) en cas de malaise ou vomissements</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-pink-50 p-3 rounded border-l-4 border-pink-500">
+          <h4 class="font-semibold text-pink-800 mb-2">🎯 POINTS CLÉS À RETENIR</h4>
+          <div class="bg-white p-2 rounded">
+            <ul class="list-disc ml-5 text-sm space-y-1">
+              <li>🔥 <strong>Définition</strong> : Destruction &gt;90% cortex surrénalien bilatéral, insuffisance PRIMITIVE (périphérique)</li>
+              <li>⚡ <strong>Triple déficit</strong> : Glucocorticoïdes + Minéralocorticoïdes (différence majeure vs centrale) + Androgènes</li>
+              <li>🌟 <strong>TRIADE clinique</strong> : Mélanodermie (pathognomonique) + Asthénie (max soir) + Hypotension orthostatique</li>
+              <li>🎨 <strong>Mélanodermie spécifique</strong> : Tâches ardoisées MUQUEUSES (joues, gencives) - HAUTE VALEUR</li>
+              <li>🔬 <strong>Biologie</strong> : Hyponatrémie + Hyperkaliémie + Hypoglycémie (≠ insuffisance centrale muette)</li>
+              <li>💉 <strong>Diagnostic hormonal</strong> : Cortisol BAS (&lt;138 nmol/L) + ACTH EXPLOSIVE (&gt;100, souvent &gt;500 pg/mL)</li>
+              <li>📊 <strong>Test Synacthen</strong> : Aucune réponse, "courbe plate" (glande détruite)</li>
+              <li>🔍 <strong>Étiologie #1 (80%)</strong> : Auto-immune (Ac anti-21-hydroxylase +, surrénales atrophiées TDM)</li>
+              <li>💊 <strong>Traitement</strong> : Hydrocortisone 15-25mg/j (dose max matin) + Fludrocortisone INDISPENSABLE (≠ centrale)</li>
+              <li>⚠️ <strong>Éducation VITALE</strong> : Carte addisonien, DOUBLER/TRIPLER dose si stress, kit Hydrocortisone 100mg injectable</li>
+            </ul>
+          </div>
+        </div>
+      </div>`
+            }, 
+            { code: "C19D02", name: "Syndrome de Nelson" }
+          ] 
+        },
         { code: "C19E", name: "Déficit en hormone de croissance", children: [{ code: "C19E01", name: "Nanisme" }, { code: "C19E02", name: "Syndrome de Turner" }] },
         { code: "C19F", name: "Syndrome polyuro-polydipsique", children: [{ code: "C19F01", name: "Diabète insipide central" }, { code: "C19F02", name: "Diabète insipide néphrogénique" }] },
         { code: "C19G", name: "L'hirsutisme", children: [{ code: "C19G01", name: "Hirsutisme par hyperplasie congénitale des surrénal" }] },
