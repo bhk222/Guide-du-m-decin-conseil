@@ -6493,6 +6493,227 @@ export const aldData: AldItem[] = [
   {
     code: "C13",
     name: "Périartérite noueuse",
+    tooltip: `<div class="space-y-3">
+        <h3 class="font-bold text-lg text-red-700">🩸 PÉRIARTÉRITE NOUEUSE (PAN)</h3>
+        
+        <div class="bg-blue-50 p-3 rounded border-l-4 border-blue-500">
+          <h4 class="font-semibold text-blue-800 mb-2">1️⃣ DÉFINITION ET CLASSIFICATION</h4>
+          
+          <div class="bg-white p-2 rounded text-sm space-y-2">
+            <div>
+              <p class="font-semibold text-purple-700">📋 Définition</p>
+              <p class="text-xs"><strong>Vascularite nécrosante</strong> touchant artères de <strong>moyen calibre</strong> (viscérales) et <strong>petit calibre</strong></p>
+            </div>
+            
+            <div class="bg-green-50 p-2 rounded border border-green-400">
+              <p class="font-semibold text-green-800 text-xs mb-1">✅ Caractéristique Majeure (Chapel Hill 2012)</p>
+              <p class="text-xs"><strong>ÉPARGNE</strong> les glomérules rénaux et capillaires pulmonaires</p>
+              <p class="text-xs mt-1 text-green-700"><strong>→ PAS de glomérulonéphrite</strong> (≠ Polyangéite Microscopique)</p>
+            </div>
+            
+            <div class="bg-purple-50 p-2 rounded">
+              <p class="font-semibold text-purple-700 text-xs mb-1">🔬 Formes :</p>
+              <ul class="list-disc ml-5 text-xs space-y-1">
+                <li><strong>PAN Idiopathique</strong> : Forme la plus fréquente aujourd'hui</li>
+                <li><strong>PAN associée VHB</strong> (Hépatite B) : Forme historique (complexes immuns), devenue <strong>rare</strong> (vaccination)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-purple-50 p-3 rounded border-l-4 border-purple-500">
+          <h4 class="font-semibold text-purple-800 mb-2">2️⃣ PHYSIOPATHOLOGIE</h4>
+          <p class="text-sm mb-2"><strong>Inflammation transmurale</strong> de la paroi artérielle :</p>
+          
+          <div class="bg-white p-2 rounded text-xs">
+            <ul class="list-disc ml-5 space-y-1">
+              <li><strong>Nécrose fibrinoïde</strong> : Fragilisation paroi → Formation <strong>micro-anévrysmes</strong> (aspect noueux)</li>
+              <li><strong>Thrombose</strong> : Occlusion lumière → <strong>Ischémie et infarctus</strong> tissulaire en aval</li>
+              <li><strong>Cicatrisation</strong> : Fibrose et sténose</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="bg-yellow-50 p-3 rounded border-l-4 border-yellow-500">
+          <h4 class="font-semibold text-yellow-800 mb-2">3️⃣ PRÉSENTATION CLINIQUE</h4>
+          <p class="text-sm italic mb-2">⚠️ Tableau souvent <strong>BRUYANT</strong> : Fièvre + Amaigrissement important</p>
+          
+          <div class="space-y-2">
+            <div class="bg-red-100 p-2 rounded border-2 border-red-500">
+              <p class="font-semibold text-red-800 mb-1">A. Signes Neurologiques (60-70%) - SOUVENT RÉVÉLATEURS</p>
+              <p class="text-xs mb-1"><strong>Multinévrite (Mononeuropathy Multiplex)</strong> : Atteinte <strong>asymétrique, distale, déficitaire</strong></p>
+              <ul class="list-disc ml-5 text-xs">
+                <li><strong>Exemple typique</strong> : Déficit releveur pied (SPE) d'un côté → puis atteinte cubitale de l'autre</li>
+                <li>C'est souvent le <strong>symptôme qui amène au diagnostic</strong></li>
+              </ul>
+            </div>
+
+            <div class="bg-orange-100 p-2 rounded">
+              <p class="font-semibold text-orange-800 mb-1">B. Signes Cutanés (50%)</p>
+              <ul class="list-disc ml-5 text-xs space-y-1">
+                <li><strong>Nodules sous-cutanés</strong> : Petites boules dures, douloureuses, sur trajet artères (jambes, avant-bras)</li>
+                <li><strong>Livedo Racemosa</strong> : Mailles larges, ouvertes, "brisées" (membres/tronc)</li>
+                <li><strong>Gangrène distale</strong> : Orteils/doigts</li>
+              </ul>
+            </div>
+
+            <div class="bg-blue-100 p-2 rounded">
+              <p class="font-semibold text-blue-800 mb-1">C. Signes Rénaux (Vasculaires)</p>
+              <ul class="list-disc ml-5 text-xs space-y-1">
+                <li><strong>HTA</strong> : Souvent maligne/sévère (ischémie rénale → activation Rénine-Angiotensine)</li>
+                <li><strong>Insuffisance rénale</strong></li>
+                <li><strong>Infarctus rénal</strong> : Douleur lombaire brutale + hématurie macroscopique</li>
+                <li class="text-green-700 font-semibold">✅ Rappel : <strong>PAS de glomérulonéphrite</strong> (BU normale ou protéinurie faible)</li>
+              </ul>
+            </div>
+
+            <div class="bg-pink-100 p-2 rounded">
+              <p class="font-semibold text-pink-800 mb-1">D. Autres Atteintes</p>
+              <ul class="list-disc ml-5 text-xs space-y-1">
+                <li><strong>Digestives</strong> : "Angor intestinal" (douleurs post-prandiales), hémorragies digestives, perforations</li>
+                <li><strong>Orchite</strong> : Douleur testiculaire unilatérale (<strong>très évocatrice</strong> chez homme jeune)</li>
+                <li><strong>Arthromyalgies</strong></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-teal-50 p-3 rounded border-l-4 border-teal-500">
+          <h4 class="font-semibold text-teal-800 mb-2">4️⃣ DIAGNOSTIC PARACLINIQUE</h4>
+          
+          <div class="space-y-2">
+            <div class="bg-white p-2 rounded">
+              <p class="font-semibold text-orange-700 mb-1">A. Biologie</p>
+              <ul class="list-disc ml-5 text-sm space-y-1">
+                <li><strong>Syndrome inflammatoire franc</strong> : VS et CRP très élevées</li>
+                <li class="bg-green-50 p-1 rounded"><strong>ANCA</strong> (Anti-Neutrophil Cytoplasmic Antibodies) : <span class="text-green-700 font-bold">Typiquement NÉGATIFS</span>
+                  <ul class="list-circle ml-4 text-xs">
+                    <li>⚠️ Si ANCA+ (surtout anti-MPO) → Reconsidérer diagnostic vers <strong>Polyangéite Microscopique</strong></li>
+                  </ul>
+                </li>
+                <li><strong>Sérologies virales</strong> : VHB (Ag HBs), VHC, VIH <strong>SYSTÉMATIQUES</strong></li>
+              </ul>
+            </div>
+
+            <div class="bg-purple-100 p-2 rounded border-2 border-purple-500">
+              <p class="font-semibold text-purple-800 mb-1">B. Artériographie (Mésentérique et Rénale)</p>
+              <p class="text-xs italic mb-1">Indiquée si biopsie impossible ou négative</p>
+              <p class="text-xs"><strong>Image TYPIQUE</strong> : Multiples <strong>micro-anévrysmes</strong> (aspect en <strong>"chapelet"</strong> ou <strong>"collier de perles"</strong>) + sténoses artérielles</p>
+            </div>
+
+            <div class="bg-blue-100 p-2 rounded border-2 border-blue-500">
+              <p class="font-semibold text-blue-800 mb-1">C. Histologie (Biopsie) - GOLD STANDARD</p>
+              <ul class="list-disc ml-5 text-xs">
+                <li><strong>Site</strong> : Prélever site symptomatique (nodule cutané, muscle douloureux, nerf sural si neuropathie)</li>
+                <li><strong>Résultat</strong> : <strong>Vascularite nécrosante</strong> avec infiltrat inflammatoire <strong>pan-mural</strong> (toutes couches artère)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-orange-50 p-3 rounded border-l-4 border-orange-500">
+          <h4 class="font-semibold text-orange-800 mb-2">5️⃣ CRITÈRES ACR (1990)</h4>
+          <p class="text-sm italic mb-2">📊 Diagnostic si <strong>≥ 3 critères</strong> (Sensibilité 82%, Spécificité 86%)</p>
+          
+          <div class="bg-white p-2 rounded text-xs">
+            <ul class="list-disc ml-5 space-y-1">
+              <li>1. Perte de poids &gt; 4 kg</li>
+              <li>2. Livedo reticularis</li>
+              <li>3. Douleurs testiculaires</li>
+              <li>4. Myalgies ou faiblesse membres inférieurs</li>
+              <li>5. Mononeuropathie ou polyneuropathie</li>
+              <li>6. HTA diastolique &gt; 90 mmHg</li>
+              <li>7. Élévation créatinine ou urée</li>
+              <li>8. Virus Hépatite B (Ag ou Ac)</li>
+              <li>9. Anomalies artériographiques (Anévrysmes)</li>
+              <li>10. Biopsie (PMN dans paroi artérielle)</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="bg-pink-50 p-3 rounded border-l-4 border-pink-500">
+          <h4 class="font-semibold text-pink-800 mb-2">6️⃣ DIAGNOSTIC DIFFÉRENTIEL</h4>
+          
+          <div class="bg-white p-2 rounded text-sm">
+            <ul class="list-disc ml-5 space-y-1">
+              <li><strong>Polyangéite Microscopique (PAM)</strong> :
+                <ul class="list-circle ml-4 text-xs">
+                  <li>Petits vaisseaux, ANCA+ (p-ANCA), <strong>Glomérulonéphrite présente</strong></li>
+                </ul>
+              </li>
+              <li><strong>Granulomatose avec Polyangéite (Wegener)</strong> :
+                <ul class="list-circle ml-4 text-xs">
+                  <li>ANCA+ (c-ANCA), Atteinte ORL et pulmonaire</li>
+                </ul>
+              </li>
+              <li><strong>Embolies de Cholestérol</strong> :
+                <ul class="list-circle ml-4 text-xs">
+                  <li>Post-cathétérisme (sujet athéromateux)</li>
+                  <li>Orteils pourpres, IR, livedo</li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="bg-green-50 p-3 rounded border-l-4 border-green-500">
+          <h4 class="font-semibold text-green-800 mb-2">7️⃣ STRATÉGIE THÉRAPEUTIQUE</h4>
+          <p class="text-sm font-bold text-red-700 mb-2">⚠️ Traitement dépend IMPÉRATIVEMENT de l'étiologie (Virale vs Idiopathique)</p>
+          
+          <div class="space-y-2">
+            <div class="bg-blue-100 p-2 rounded border-2 border-blue-500">
+              <p class="font-semibold text-blue-800 mb-1">A. PAN Idiopathique (Non virale)</p>
+              <p class="text-xs italic mb-1">💊 Traitement immunosuppresseur classique</p>
+              
+              <ul class="list-disc ml-5 text-sm space-y-1">
+                <li><strong>Formes légères</strong> (sans facteur gravité) :
+                  <ul class="list-circle ml-4 text-xs">
+                    <li>Corticothérapie seule (Prednisone 1 mg/kg/j)</li>
+                  </ul>
+                </li>
+                <li><strong>Formes sévères</strong> (Score FFS ≥ 1) :
+                  <ul class="list-circle ml-4 text-xs">
+                    <li>Corticothérapie + Bolus <strong>Cyclophosphamide</strong> (Endoxan)</li>
+                    <li>OU <strong>Rituximab</strong></li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+
+            <div class="bg-yellow-100 p-2 rounded border-2 border-yellow-600">
+              <p class="font-semibold text-yellow-800 mb-1">B. PAN Associée VHB (Hépatite B)</p>
+              <p class="text-xs text-red-700 font-bold mb-1">⚠️ NE PAS donner immunosuppresseurs au long cours (risque flambée virale)</p>
+              
+              <div class="bg-white p-2 rounded mt-1">
+                <p class="text-xs font-semibold mb-1">🔺 Stratégie TRIPTYQUE :</p>
+                <ul class="list-disc ml-5 text-xs space-y-1">
+                  <li><strong>1. Corticothérapie courte</strong> : Contrôler inflammation aiguë</li>
+                  <li><strong>2. Échanges Plasmatiques (Plasmaphérèse)</strong> : Épurer complexes immuns circulants</li>
+                  <li><strong>3. Antiviral</strong> : Analogue nucléosidique (<strong>Entecavir</strong> ou <strong>Tenofovir</strong>) → Bloquer réplication virale</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-indigo-50 p-3 rounded border-l-4 border-indigo-500">
+          <h4 class="font-semibold text-indigo-800 mb-2">🎯 POINTS CLÉS À RETENIR</h4>
+          <div class="bg-white p-2 rounded">
+            <ul class="list-disc ml-5 text-sm space-y-1">
+              <li>🩸 <strong>Vascularite artères moyen calibre</strong> : ÉPARGNE glomérules (PAS de glomérulonéphrite)</li>
+              <li>🦵 <strong>Multinévrite</strong> (60-70%) : Symptôme révélateur (mononeuropathy multiplex asymétrique)</li>
+              <li>🔴 <strong>Livedo racemosa</strong> + Nodules sous-cutanés (50%)</li>
+              <li>💉 <strong>HTA sévère</strong> + IR (ischémie rénale) mais BU normale</li>
+              <li>🧪 <strong>ANCA NÉGATIFS</strong> (si +, penser Polyangéite Microscopique)</li>
+              <li>📸 <strong>Artériographie</strong> : Micro-anévrysmes "chapelet/collier de perles"</li>
+              <li>🔬 <strong>Biopsie</strong> : Gold standard (vascularite nécrosante pan-murale)</li>
+              <li>📋 <strong>Critères ACR</strong> : ≥3/10 critères (82% sensibilité)</li>
+              <li>💊 <strong>PAN Idiopathique</strong> : Corticoïdes ± Cyclophosphamide/Rituximab (FFS ≥1)</li>
+              <li>🦠 <strong>PAN VHB</strong> : Triptyque (Corticoïdes courts + Plasmaphérèse + Antiviraux)</li>
+            </ul>
+          </div>
+        </div>
+      </div>`,
     children: [
         { 
           code: "C13A", 
