@@ -8263,15 +8263,27 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
     // Si l'utilisateur tape "perte d'un seul métacarpien" SANS mentionner de doigt spécifique,
     // on affiche IMMÉDIATEMENT le dialogue de choix avec les 5 doigts
     const normalizedForMetaCheckEarly = convertNumberWords(normalize(preprocessMedicalText(text)));
+    console.log('🔍 DEBUG MÉTACARPIENS - Texte normalisé:', normalizedForMetaCheckEarly);
+    
     const hasSpecificFingerEarly = /\b(pouce|index|majeur|medius|annulaire|auriculaire|1er|2e|3e|4e|5e)\b/i.test(normalizedForMetaCheckEarly);
-    const isMetacarpienSingleQueryEarly = /metacarpien/i.test(normalizedForMetaCheckEarly) && 
-        /\b(?:d\s+un\s+seul|un\s+seul|un\s+metacarpien|1\s+metacarpien|seul\s+metacarpien|perte\s+(?:d\s+un|du|d\s+1))\b/i.test(normalizedForMetaCheckEarly) &&
-        !/cinq|5|tous|des\s+cinq/i.test(normalizedForMetaCheckEarly) &&
+    const hasMetacarpienWord = /metacarpien/i.test(normalizedForMetaCheckEarly);
+    const hasSingleIndicator = /(seul|un)\s+metacarpien|perte.*metacarpien|d\s+un\s+seul/i.test(normalizedForMetaCheckEarly);
+    const hasMultipleIndicator = /cinq|5|tous|des\s+cinq/i.test(normalizedForMetaCheckEarly);
+    
+    const isMetacarpienSingleQueryEarly = hasMetacarpienWord && 
+        hasSingleIndicator &&
+        !hasMultipleIndicator &&
         !hasSpecificFingerEarly &&
-        !isExactMatch;  // Ne pas interrompre si l'utilisateur a déjà fait un choix
+        !isExactMatch;
+    
+    console.log('🔍 DEBUG MÉTACARPIENS - hasMetacarpienWord:', hasMetacarpienWord);
+    console.log('🔍 DEBUG MÉTACARPIENS - hasSingleIndicator:', hasSingleIndicator);
+    console.log('🔍 DEBUG MÉTACARPIENS - hasMultipleIndicator:', hasMultipleIndicator);
+    console.log('🔍 DEBUG MÉTACARPIENS - hasSpecificFingerEarly:', hasSpecificFingerEarly);
+    console.log('🔍 DEBUG MÉTACARPIENS - isMetacarpienSingleQueryEarly:', isMetacarpienSingleQueryEarly);
     
     if (isMetacarpienSingleQueryEarly) {
-        console.log('🔍 DÉTECTION MÉTACARPIENS: Dialogue de choix déclenché IMMÉDIATEMENT');
+        console.log('✅ DÉTECTION MÉTACARPIENS: Dialogue de choix déclenché IMMÉDIATEMENT');
         // Récupérer les 5 métacarpiens individuels
         const metacarpienChoices = allInjuriesWithPaths.filter(inj => 
             /metacarpien/i.test(inj.name) && 
@@ -8301,6 +8313,7 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
                 return aOrder - bOrder;
             });
             
+            console.log('✅ Retour de', metacarpienChoices.length, 'choix métacarpiens');
             return {
                 type: 'ambiguity',
                 text: `Votre description "perte d'un seul métacarpien" peut correspondre à plusieurs séquelles. Pour la région "Main - Amputations", laquelle correspond le mieux à l'état du patient ?`,
