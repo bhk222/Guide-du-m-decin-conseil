@@ -1320,9 +1320,11 @@ const middleCategories: InjuryCategory[] = [
       {
         name: "Doigts - Médius (Main Dominante)",
         injuries: [
-            { name: "Ablation phalange unguéale du médius (Main Dominante)", rate: [3, 5] },
-            { name: "Ablation 2 phalanges du médius (Main Dominante)", rate: [7, 9] },
-            { name: "Ablation 3 phalanges du médius (Main Dominante)", rate: [10, 12] },
+            { name: "Ablation extrémité phalange unguéale du médius (Main Dominante)", rate: 1 },
+            { name: "Ablation phalange unguéale du médius (Main Dominante)", rate: 5 },
+            { name: "Ablation phalange unguéale + phalange intermédiaire du médius (Main Dominante)", rate: 6 },
+            { name: "Ablation 2 phalanges du médius (Main Dominante)", rate: 9 },
+            { name: "Ablation 3 phalanges du médius (Main Dominante)", rate: 12 },
             { name: "Amputation du médius (main dominante)", rate: 10 },
             { name: "Perte du médius (3 phalanges) (Main Dominante)", rate: 12 },
             { name: "Perte de la 3ème phalange du médius (Main Dominante)", rate: 4 },
@@ -1337,9 +1339,11 @@ const middleCategories: InjuryCategory[] = [
       {
         name: "Doigts - Médius (Main Non Dominante)",
         injuries: [
-            { name: "Ablation phalange unguéale du médius (Main Non Dominante)", rate: [2, 4] },
-            { name: "Ablation 2 phalanges du médius (Main Non Dominante)", rate: [5, 7] },
-            { name: "Ablation 3 phalanges du médius (Main Non Dominante)", rate: [8, 10] },
+            { name: "Ablation extrémité phalange unguéale du médius (Main Non Dominante)", rate: 1 },
+            { name: "Ablation phalange unguéale du médius (Main Non Dominante)", rate: 4 },
+            { name: "Ablation phalange unguéale + phalange intermédiaire du médius (Main Non Dominante)", rate: 5 },
+            { name: "Ablation 2 phalanges du médius (Main Non Dominante)", rate: 7 },
+            { name: "Ablation 3 phalanges du médius (Main Non Dominante)", rate: 10 },
             { name: "Amputation du médius (main non dominante)", rate: 8 },
             { name: "Perte du médius (3 phalanges) (Main Non Dominante)", rate: 10 },
             { name: "Perte de la 3ème phalange du médius (Main Non Dominante)", rate: 3 },
