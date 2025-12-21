@@ -4114,18 +4114,26 @@ export const findCandidateInjuries = (text: string, externalKeywords?: string[])
 
 export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords?: string[]): LocalAnalysisResult => {
     
-    // 🆕 V3.3.124f: CHECK MÉTACARPIENS EN PRIORITÉ ABSOLUE ICI AUSSI
-    // Car cette fonction est appelée DIRECTEMENT depuis l'interface
-    const normalizedForMetaCheckHere = convertNumberWords(normalize(preprocessMedicalText(text)));
-    const hasSpecificFingerHere = /\b(pouce|index|majeur|medius|annulaire|auriculaire|1er|2e|3e|4e|5e)\b/i.test(normalizedForMetaCheckHere);
-    const hasMetacarpienWordHere = /metacarpien/i.test(normalizedForMetaCheckHere);
-    const hasSingleIndicatorHere = /(seul|un)\s+metacarpien|perte.*metacarpien|d\s+un\s+seul/i.test(normalizedForMetaCheckHere);
-    const hasMultipleIndicatorHere = /cinq|5|tous|des\s+cinq/i.test(normalizedForMetaCheckHere);
+    // 🆕 V3.3.124f: CHECK MÉTACARPIENS ULTRA-SIMPLIFIÉ
+    const textLower = text.toLowerCase().replace(/'/g, ' ');
+    console.log('🔍 [MÉTACARPIENS] Input brut:', textLower);
     
-    if (hasMetacarpienWordHere && hasSingleIndicatorHere && !hasMultipleIndicatorHere && !hasSpecificFingerHere) {
-        console.log('✅ MÉTACARPIENS: Dialogue déclenché depuis comprehensiveSingleLesionAnalysis');
+    // Si contient "métacarpien" ET ("seul" OU "perte") ET PAS de doigt spécifique
+    const hasMetaWord = /m[eé]tacarpien/i.test(textLower);
+    const hasSingleOrPerte = /\bseul\b|\bperte\b/i.test(textLower);
+    const hasSpecificFinger = /\b(pouce|index|majeur|medius|annulaire|auriculaire)\b/i.test(textLower);
+    const hasCinq = /cinq|tous|5/i.test(textLower);
+    
+    console.log('🔍 [MÉTACARPIENS] hasMetaWord:', hasMetaWord);
+    console.log('🔍 [MÉTACARPIENS] hasSingleOrPerte:', hasSingleOrPerte);
+    console.log('🔍 [MÉTACARPIENS] hasSpecificFinger:', hasSpecificFinger);
+    console.log('🔍 [MÉTACARPIENS] hasCinq:', hasCinq);
+    
+    if (hasMetaWord && hasSingleOrPerte && !hasSpecificFinger && !hasCinq) {
+        console.log('✅ [MÉTACARPIENS] DIALOGUE DÉCLENCHÉ !');
+        
         const metacarpienChoices = allInjuriesWithPaths.filter(inj => 
-            /metacarpien/i.test(inj.name) && 
+            /m[eé]tacarpien/i.test(inj.name) && 
             !/cinq/i.test(inj.name) &&
             /(?:pouce|index|majeur|annulaire|auriculaire|1er|2e|3e|4e|5e)/i.test(inj.name)
         );
@@ -4145,6 +4153,8 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
                 return aOrder - bOrder;
             });
             
+            console.log('✅ [MÉTACARPIENS] Retour de', metacarpienChoices.length, 'choix');
+            
             return {
                 type: 'ambiguity',
                 text: `Votre description "perte d'un seul métacarpien" peut correspondre à plusieurs séquelles. Pour la région "Main - Amputations", laquelle correspond le mieux à l'état du patient ?`,
@@ -4152,6 +4162,8 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             };
         }
     }
+    
+    console.log('⚠️ [MÉTACARPIENS] Pas de dialogue - continuons analyse normale');
     
     // 🆕 PREPROCESSING MÉDICAL ENRICHI - Transformer descriptions vagues en termes détectables
     // Ceci enrichit le texte AVANT toute analyse
