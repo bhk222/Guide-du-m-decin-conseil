@@ -10875,6 +10875,244 @@ export const aldData: AldItem[] = [
   {
     code: "C20",
     name: "Rhumatisme Articulaire Aigu",
+    tooltip: `<div class="space-y-3">
+        <h3 class="text-sm font-semibold text-gray-900 mb-2">🦠 Rhumatisme Articulaire Aigu (RAA) - "Lèche les Articulations, Mord le Cœur"</h3>
+        
+        <div class="bg-blue-50 border-l-4 border-blue-400 p-3 rounded">
+          <h4 class="font-semibold text-blue-900 text-xs mb-2">1️⃣ Définition et Physiopathologie</h4>
+          <div class="space-y-2 text-xs">
+            <div class="bg-blue-100 p-2 rounded">
+              <span class="font-semibold text-blue-900">🎯 Définition :</span>
+              <p class="mt-1">Complication inflammatoire <span class="underline">retardée, non suppurative</span>, d'une infection des voies aériennes supérieures (angine/pharyngite) par le <span class="font-medium">Streptocoque Bêta-Hémolytique du Groupe A (SBHGA)</span></p>
+            </div>
+            <div>
+              <span class="font-semibold text-blue-800">🧬 Mécanisme - Mimétisme Moléculaire :</span>
+              <ul class="list-disc pl-5 mt-1 space-y-1">
+                <li><span class="font-medium">Protéine M du streptocoque</span> ressemble structurellement à protéines humaines (myosine cardiaque, lamine articulaire, antigènes noyaux gris centraux)</li>
+                <li><span class="font-medium">Maladie AUTO-IMMUNE :</span> Anticorps anti-streptocoque attaquent les tissus de l'hôte par erreur</li>
+                <li><span class="font-medium">⏱️ Délai latence :</span> <span class="underline">2 à 3 semaines APRÈS l'angine</span> (sauf chorée → mois)</li>
+              </ul>
+            </div>
+            <div class="bg-blue-100 p-2 rounded">
+              <span class="font-semibold text-blue-900">⚠️ Note Importante :</span>
+              <ul class="list-disc pl-5 mt-1">
+                <li><span class="font-medium">RAA suit UNIQUEMENT angine streptococcique</span> (voies aériennes supérieures)</li>
+                <li><span class="font-medium">NE suit PAS infections cutanées</span> streptocoque (impétigo → GNA Glomérulonéphrite)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-purple-50 border-l-4 border-purple-400 p-3 rounded">
+          <h4 class="font-semibold text-purple-900 text-xs mb-2">2️⃣ Critères Diagnostiques (Jones Révisés 2015)</h4>
+          <div class="space-y-2 text-xs">
+            <p class="font-semibold text-purple-800">📋 Diagnostic = Preuve infection streptococcique récente + Critères cliniques</p>
+            <div class="bg-purple-100 p-2 rounded">
+              <span class="font-semibold text-purple-900">🔬 Preuve Infection Streptococcique (OBLIGATOIRE) :</span>
+              <ul class="list-disc pl-5 mt-1">
+                <li>Scarlatine récente documentée</li>
+                <li>Culture gorge positive ou TDR (Test Rapide) positif</li>
+                <li><span class="font-medium">Élévation anticorps :</span> ASLO (Anti-Streptolysine O) ou Anti-DNAse B</li>
+              </ul>
+            </div>
+            <div class="bg-purple-100 p-2 rounded overflow-x-auto">
+              <table class="w-full text-xs border-collapse">
+                <thead>
+                  <tr class="bg-purple-200">
+                    <th class="border border-purple-300 p-1 text-left">Critères MAJEURS</th>
+                    <th class="border border-purple-300 p-1 text-left">Critères MINEURS</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="border border-purple-300 p-1">
+                      <ul class="list-disc pl-3 space-y-1">
+                        <li><span class="font-medium">1. Cardite</span> (Clinique ou Subclinique écho)</li>
+                        <li><span class="font-medium">2. Polyarthrite</span> (Migratrice)</li>
+                        <li><span class="font-medium">3. Chorée de Sydenham</span></li>
+                        <li><span class="font-medium">4. Érythème Marginé</span> (De Besnier)</li>
+                        <li><span class="font-medium">5. Nodules Sous-cutanés</span> (De Meynet)</li>
+                      </ul>
+                    </td>
+                    <td class="border border-purple-300 p-1">
+                      <ul class="list-disc pl-3 space-y-1">
+                        <li>Fièvre ≥ 38°C (ou 38.5°C selon risque)</li>
+                        <li>Arthralgies</li>
+                        <li>VS ou CRP élevées</li>
+                        <li>Allongement intervalle PR à l'ECG</li>
+                      </ul>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="bg-purple-100 p-2 rounded">
+              <span class="font-semibold text-purple-900">📐 RÈGLE Diagnostic :</span>
+              <ul class="list-disc pl-5 mt-1">
+                <li><span class="font-medium">1er épisode :</span> <span class="underline">2 Critères Majeurs</span> OU <span class="underline">1 Majeur + 2 Mineurs</span></li>
+                <li><span class="font-medium">Récidive :</span> 3 Critères Mineurs peuvent suffire (si atteinte cardiaque préexistante)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-yellow-50 border-l-4 border-yellow-400 p-3 rounded">
+          <h4 class="font-semibold text-yellow-900 text-xs mb-2">3️⃣ Clinique Détaillée</h4>
+          <div class="space-y-2 text-xs">
+            <div class="bg-yellow-100 p-2 rounded">
+              <span class="font-semibold text-yellow-900">🦴 A. L'Atteinte ARTICULAIRE (75% des cas) :</span>
+              <ul class="list-disc pl-5 mt-1 space-y-1">
+                <li><span class="font-medium">Type :</span> <span class="underline">POLYARTHRITE</span> des grosses articulations (genoux, chevilles, coudes, poignets)</li>
+                <li><span class="font-medium">Caractère pathognomonique :</span> <span class="font-semibold">MIGRATRICE</span> (passe d'une articulation à l'autre), <span class="font-semibold">FUGACE</span>, asymétrique</li>
+                <li><span class="font-medium">Signes :</span> Articulation rouge, chaude, tuméfiée, <span class="underline">extrêmement douloureuse</span> (impotence fonctionnelle totale)</li>
+                <li><span class="font-medium text-green-700">✅ Test Diagnostique :</span> Cède <span class="underline">spectaculairement aux Salicylés (Aspirine) en 24-48h</span> → Quasi-pathognomonique</li>
+                <li><span class="font-medium">⚠️ Ne laisse AUCUNE séquelle</span> (cartilage non détruit, contrairement polyarthrite rhumatoïde)</li>
+              </ul>
+            </div>
+            <div class="bg-yellow-100 p-2 rounded">
+              <span class="font-semibold text-yellow-900">❤️ B. L'Atteinte CARDIAQUE - PANCARDITE (50% des cas) :</span>
+              <p class="mt-1 text-red-700 font-semibold">⚡ C'EST LA SEULE ATTEINTE QUI LAISSE DES SÉQUELLES</p>
+              <p class="mt-1">Touche les <span class="underline">trois tuniques</span> du cœur :</p>
+              <ul class="list-disc pl-5 mt-1 space-y-1">
+                <li><span class="font-medium">1️⃣ ENDOCARDITE (Valvulite) :</span> <span class="underline">Lésion CLÉ</span>
+                  <ul class="list-disc pl-8 mt-1">
+                    <li><span class="font-medium">Valve Mitrale +++</span> (1ère touchée) puis Valve Aortique</li>
+                    <li><span class="font-medium">Phase aiguë :</span> Souffle d'insuffisance mitrale ou aortique</li>
+                    <li><span class="font-medium">Phase chronique :</span> Organisation fibreuse → <span class="underline">Rétrécissement Mitral (RM)</span> séquellaire</li>
+                  </ul>
+                </li>
+                <li><span class="font-medium">2️⃣ MYOCARDITE :</span>
+                  <ul class="list-disc pl-8 mt-1">
+                    <li>Tachycardie inexpliquée (disparition arythmie sinusale respiratoire)</li>
+                    <li>Insuffisance cardiaque</li>
+                    <li>BAV 1 (allongement PR à l'ECG)</li>
+                  </ul>
+                </li>
+                <li><span class="font-medium">3️⃣ PÉRICARDITE :</span>
+                  <ul class="list-disc pl-8 mt-1">
+                    <li>Douleur thoracique positionnelle</li>
+                    <li>Frottement péricardique à l'auscultation</li>
+                    <li>Épanchement péricardique à l'échographie</li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <span class="font-semibold text-yellow-800">🧠 C. L'Atteinte NEUROLOGIQUE - Chorée de Sydenham :</span>
+              <ul class="list-disc pl-5 mt-1 space-y-1">
+                <li><span class="font-medium">Apparition TARDIVE :</span> <span class="underline">1 à 6 mois post-infection</span> (délai le plus long)</li>
+                <li><span class="font-medium">Clinique :</span> Mouvements involontaires, brusques, désordonnés, <span class="underline">disparaissant au sommeil</span></li>
+                <li><span class="font-medium">Psycho :</span> Labilité émotionnelle</li>
+                <li><span class="font-medium">Évolution :</span> Guérison spontanée MAIS <span class="text-red-700">risque séquelles cardiaques associées</span> (valvulite silencieuse)</li>
+              </ul>
+            </div>
+            <div>
+              <span class="font-semibold text-yellow-800">🌺 D. Signes CUTANÉS (Rares < 5%) :</span>
+              <ul class="list-disc pl-5 mt-1">
+                <li><span class="font-medium">Érythème Marginé (De Besnier) :</span> Macules roses, centre pâle, contours serpentins, tronc, indolores, non prurigineuses</li>
+                <li><span class="font-medium">Nodules de Meynet :</span> Petits nodules fermes, indolores, roulant sous doigt, surfaces d'extension (coudes) ou colonne</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-orange-50 border-l-4 border-orange-400 p-3 rounded">
+          <h4 class="font-semibold text-orange-900 text-xs mb-2">4️⃣ Examens Complémentaires</h4>
+          <div class="space-y-2 text-xs">
+            <div>
+              <span class="font-semibold text-orange-800">🔬 Biologie :</span>
+              <ul class="list-disc pl-5 mt-1">
+                <li><span class="font-medium">Syndrome inflammatoire franc :</span> VS > 50 mm/h, CRP élevée</li>
+                <li><span class="font-medium">ASLO (Anti-Streptolysine O) :</span>
+                  <ul class="list-disc pl-8 mt-1">
+                    <li>Titre > 200 UI (souvent > 400 UI)</li>
+                    <li><span class="underline">Ascension sur 2 prélèvements espacés</span> plus significative (× 2 ou ×3)</li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <span class="font-semibold text-orange-800">📊 Électrocardiogramme (ECG) :</span>
+              <ul class="list-disc pl-5 mt-1">
+                <li><span class="font-medium">Recherche BAV 1 :</span> Allongement PR > 0.20s (critère mineur fréquent)</li>
+                <li>Autres : Troubles rythme, signes péricardite</li>
+              </ul>
+            </div>
+            <div class="bg-orange-100 p-2 rounded">
+              <span class="font-semibold text-orange-900">🫀 Échographie Doppler Cardiaque :</span>
+              <ul class="list-disc pl-5 mt-1">
+                <li><span class="font-medium text-red-700">⚠️ INDISPENSABLE</span> même si auscultation normale (recherche cardite subclinique)</li>
+                <li><span class="font-medium">Signes :</span> Régurgitation mitrale pathologique, nodules sur valves, épanchement péricardique, dysfonction VG</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-green-50 border-l-4 border-green-400 p-3 rounded">
+          <h4 class="font-semibold text-green-900 text-xs mb-2">5️⃣ Prise en Charge Thérapeutique</h4>
+          <div class="space-y-2 text-xs">
+            <p class="font-semibold text-red-700">🏥 HOSPITALISATION OBLIGATOIRE en phase aiguë</p>
+            <div class="bg-green-100 p-2 rounded">
+              <span class="font-semibold text-green-900">💊 A. Traitement CURATIF (Attaque) :</span>
+              <div class="mt-2 space-y-2">
+                <div>
+                  <span class="font-medium text-green-800">1️⃣ ANTIBIOTHÉRAPIE (Éradication germe) :</span>
+                  <ul class="list-disc pl-5 mt-1">
+                    <li><span class="font-medium">Pénicilline V (Oracilline®)</span> pendant 10 jours ou Amoxicilline</li>
+                    <li><span class="font-medium">Si allergie :</span> Macrolides (Azithromycine)</li>
+                    <li><span class="italic text-green-700">⚠️ But :</span> Éliminer foyer streptococcique résiduel (pas traiter RAA lui-même)</li>
+                  </ul>
+                </div>
+                <div>
+                  <span class="font-medium text-green-800">2️⃣ ANTI-INFLAMMATOIRES :</span>
+                  <ul class="list-disc pl-5 mt-1 space-y-1">
+                    <li><span class="font-medium">Formes articulaires PURES :</span>
+                      <ul class="list-disc pl-8 mt-1">
+                        <li><span class="font-semibold">Aspirine (Acide Acétylsalicylique)</span> forte dose</li>
+                        <li>Adulte : 3-4 g/j | Enfant : 80-100 mg/kg/j</li>
+                        <li>Réponse spectaculaire en 24-48h</li>
+                      </ul>
+                    </li>
+                    <li><span class="font-medium">Formes avec CARDITE :</span>
+                      <ul class="list-disc pl-8 mt-1">
+                        <li><span class="font-semibold">CORTICOTHÉRAPIE</span> (Prednisone 2 mg/kg/j) pendant 2-3 semaines</li>
+                        <li>Dégression lente puis relais par Aspirine (éviter rebond)</li>
+                      </ul>
+                    </li>
+                  </ul>
+                </div>
+                <div>
+                  <span class="font-medium text-green-800">3️⃣ REPOS AU LIT (Bed Rest) :</span>
+                  <ul class="list-disc pl-5 mt-1">
+                    <li>Strict tant que VS élevée ou signes insuffisance cardiaque</li>
+                    <li>But : Réduire travail du cœur</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="bg-green-100 p-2 rounded">
+              <span class="font-semibold text-green-900">🛡️ B. Traitement PROPHYLACTIQUE Secondaire :</span>
+              <p class="mt-1 text-red-700 font-semibold">⚡ PIERRE ANGULAIRE : Éviter récidives qui aggravent lésions valvulaires</p>
+              <ul class="list-disc pl-5 mt-2 space-y-1">
+                <li><span class="font-medium">Molécule :</span> <span class="underline">Benzathine-Benzyl-Pénicilline (Extencilline®)</span></li>
+                <li><span class="font-medium">Voie :</span> Intramusculaire (IM) profonde</li>
+                <li><span class="font-medium">Rythme :</span> Une injection toutes les <span class="underline">3 ou 4 semaines (STRICTEMENT)</span></li>
+                <li><span class="font-medium">Durée (Recommandations AHA/OMS) :</span>
+                  <ul class="list-disc pl-8 mt-1">
+                    <li><span class="font-medium">RAA SANS cardite :</span> 5 ans ou jusqu'à 21 ans (le plus long)</li>
+                    <li><span class="font-medium">RAA AVEC cardite (sans séquelles) :</span> 10 ans ou jusqu'à 21 ans</li>
+                    <li><span class="font-medium">RAA AVEC séquelles valvulaires :</span> 10 ans ou jusqu'à 40 ans (parfois À VIE)</li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-gray-100 border-l-4 border-gray-400 p-2 rounded mt-2">
+          <p class="text-xs text-gray-700"><span class="font-semibold">📌 Résumé pour l'Expert :</span> Le RAA = Maladie qui <span class="font-semibold">"lèche les articulations et mord le cœur"</span>. Devant polyarthrite fébrile enfant/jeune adulte → Penser RAA. ECG (PR long ?) + ASLO. Douleur articulaire répond en 24h à Aspirine = Test thérapeutique quasi-diagnostique. CARDITE = Seule séquelle (rétrécissement mitral). Prophylaxie secondaire Extencilline IM VITALE (éviter récidives). Échographie cardiaque SYSTÉMATIQUE même si auscultation normale.</p>
+        </div>
+      </div>`,
     children: [
         { code: "C20A", name: "Rhumatisme articulaire aigu, sans mention d'atteinte cardiaque", children: [{ code: "C20A01", name: "Rhumatisme articulaire aigu, sans mention d'atteinte" }] },
         { code: "C20B", name: "Rhumatisme articulaire aigu, avec atteinte cardiaque", children: [{ code: "C20B01", name: "Rhumatisme articulaire aigu, avec atteinte cardiaque" }] }
