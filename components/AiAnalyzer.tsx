@@ -4113,6 +4113,46 @@ export const findCandidateInjuries = (text: string, externalKeywords?: string[])
 };
 
 export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords?: string[]): LocalAnalysisResult => {
+    
+    // 🆕 V3.3.124f: CHECK MÉTACARPIENS EN PRIORITÉ ABSOLUE ICI AUSSI
+    // Car cette fonction est appelée DIRECTEMENT depuis l'interface
+    const normalizedForMetaCheckHere = convertNumberWords(normalize(preprocessMedicalText(text)));
+    const hasSpecificFingerHere = /\b(pouce|index|majeur|medius|annulaire|auriculaire|1er|2e|3e|4e|5e)\b/i.test(normalizedForMetaCheckHere);
+    const hasMetacarpienWordHere = /metacarpien/i.test(normalizedForMetaCheckHere);
+    const hasSingleIndicatorHere = /(seul|un)\s+metacarpien|perte.*metacarpien|d\s+un\s+seul/i.test(normalizedForMetaCheckHere);
+    const hasMultipleIndicatorHere = /cinq|5|tous|des\s+cinq/i.test(normalizedForMetaCheckHere);
+    
+    if (hasMetacarpienWordHere && hasSingleIndicatorHere && !hasMultipleIndicatorHere && !hasSpecificFingerHere) {
+        console.log('✅ MÉTACARPIENS: Dialogue déclenché depuis comprehensiveSingleLesionAnalysis');
+        const metacarpienChoices = allInjuriesWithPaths.filter(inj => 
+            /metacarpien/i.test(inj.name) && 
+            !/cinq/i.test(inj.name) &&
+            /(?:pouce|index|majeur|annulaire|auriculaire|1er|2e|3e|4e|5e)/i.test(inj.name)
+        );
+        
+        if (metacarpienChoices.length >= 2) {
+            const orderMap: { [key: string]: number } = {
+                'pouce': 1, '1er': 1, 'index': 2, '2e': 2,
+                'majeur': 3, '3e': 3, 'annulaire': 4, '4e': 4,
+                'auriculaire': 5, '5e': 5
+            };
+            
+            metacarpienChoices.sort((a, b) => {
+                const aOrder = Object.keys(orderMap).reduce((order, key) => 
+                    normalize(a.name).includes(key) ? orderMap[key] : order, 999);
+                const bOrder = Object.keys(orderMap).reduce((order, key) => 
+                    normalize(b.name).includes(key) ? orderMap[key] : order, 999);
+                return aOrder - bOrder;
+            });
+            
+            return {
+                type: 'ambiguity',
+                text: `Votre description "perte d'un seul métacarpien" peut correspondre à plusieurs séquelles. Pour la région "Main - Amputations", laquelle correspond le mieux à l'état du patient ?`,
+                choices: metacarpienChoices.slice(0, 5).map(c => c as Injury)
+            };
+        }
+    }
+    
     // 🆕 PREPROCESSING MÉDICAL ENRICHI - Transformer descriptions vagues en termes détectables
     // Ceci enrichit le texte AVANT toute analyse
     const medicalEnrichment: [RegExp, string][] = [
