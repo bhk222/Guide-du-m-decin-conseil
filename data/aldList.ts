@@ -7019,6 +7019,278 @@ export const aldData: AldItem[] = [
   {
     code: "C14",
     name: "Lupus érythémateux disséminé (LED)",
+    tooltip: `<div class="space-y-3">
+        <h3 class="font-bold text-lg text-purple-700">🦋 LUPUS ÉRYTHÉMATEUX DISSÉMINÉ (LED)</h3>
+        
+        <div class="bg-blue-50 p-3 rounded border-l-4 border-blue-500">
+          <h4 class="font-semibold text-blue-800 mb-2">1️⃣ DÉFINITION ET ÉPIDÉMIOLOGIE</h4>
+          
+          <div class="bg-white p-2 rounded text-sm space-y-2">
+            <div>
+              <p class="font-semibold text-purple-700">📋 Nature</p>
+              <p class="text-xs">Maladie <strong>auto-immune chronique non spécifique d'organe</strong> : Production anticorps antinucléaires + Dépôts complexes immuns</p>
+            </div>
+            
+            <div class="bg-pink-50 p-2 rounded border border-pink-400">
+              <p class="font-semibold text-pink-800 text-xs mb-1">👥 Épidémiologie</p>
+              <ul class="list-disc ml-5 text-xs space-y-1">
+                <li><strong>Terrain</strong> : Prédominance féminine <strong>MASSIVE</strong> (Sex-ratio <strong>9:1</strong>)</li>
+                <li><strong>Âge</strong> : Pic 15-45 ans (période activité ovarienne)</li>
+                <li><strong>Ethnie</strong> : Formes plus fréquentes et sévères (ascendance africaine, asiatique, hispanique)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-purple-50 p-3 rounded border-l-4 border-purple-500">
+          <h4 class="font-semibold text-purple-800 mb-2">2️⃣ PHYSIOPATHOLOGIE (Mécanismes Clés)</h4>
+          
+          <div class="bg-white p-2 rounded text-xs">
+            <ul class="list-disc ml-5 space-y-1">
+              <li><strong>Défaut clairance apoptose</strong> : Débris cellulaires (ADN, nucléosomes) non éliminés → Exposés au système immunitaire</li>
+              <li><strong>Rupture tolérance</strong> : Activation Lymphocytes B autoréactifs → Production auto-anticorps (AAN)</li>
+              <li><strong>Signature Interféron</strong> : Surproduction majeure <strong>Interféron type I</strong> (cytokine clé inflammation lupique)</li>
+              <li><strong>Dépôts complexes immuns</strong> : Petits vaisseaux (peau, rein, articulations) → Activation Complément → Lésions (Hypersensibilité type III)</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="bg-yellow-50 p-3 rounded border-l-4 border-yellow-500">
+          <h4 class="font-semibold text-yellow-800 mb-2">3️⃣ PRÉSENTATION CLINIQUE (Polymorphisme)</h4>
+          <p class="text-sm italic mb-2">⚠️ Peut toucher presque tous les organes - Évolution par <strong>poussées et rémissions</strong></p>
+          
+          <div class="space-y-2">
+            <div class="bg-gray-100 p-2 rounded">
+              <p class="font-semibold text-gray-800 text-xs mb-1">A. Signes Généraux</p>
+              <p class="text-xs">Fièvre inexpliquée, asthénie profonde, amaigrissement</p>
+            </div>
+
+            <div class="bg-red-100 p-2 rounded border-2 border-red-500">
+              <p class="font-semibold text-red-800 text-xs mb-1">B. Atteinte Dermatologique (80%)</p>
+              <ul class="list-disc ml-5 text-xs space-y-1">
+                <li><strong>Lupus Aigu</strong> : Érythème en <strong>"Vespertilio"</strong> (Ailes de papillon) sur visage, <strong>respectant sillons nasogéniens</strong>. <strong>Photosensibilité majeure</strong></li>
+                <li><strong>Lupus Subaigu</strong> : Lésions annulaires ou psoriasiformes (anti-SSA +)</li>
+                <li><strong>Lupus Chronique (Discoïde)</strong> : Plaques érythémato-squameuses avec atrophie cicatricielle centrale (peut exister sans LED systémique)</li>
+                <li>Ulcérations buccales/nasales <strong>indolores</strong></li>
+              </ul>
+            </div>
+
+            <div class="bg-blue-100 p-2 rounded">
+              <p class="font-semibold text-blue-800 text-xs mb-1">C. Atteinte Articulaire (90%)</p>
+              <ul class="list-disc ml-5 text-xs space-y-1">
+                <li>Arthralgies inflammatoires ou arthrites bilatérales et symétriques</li>
+                <li><strong>Rhumatisme de Jaccoud</strong> : Déformations doigts (coup vent cubital, cols cygne) <strong>RÉDUCTIBLES</strong> (pas destruction osseuse = laxité ligamentaire)</li>
+              </ul>
+            </div>
+
+            <div class="bg-orange-100 p-2 rounded border-2 border-orange-600">
+              <p class="font-semibold text-orange-800 text-xs mb-1">D. Atteinte Rénale (Néphropathie Lupique) - CONDITIONNE PRONOSTIC VITAL</p>
+              <ul class="list-disc ml-5 text-xs space-y-1">
+                <li>Survient chez <strong>30-50%</strong> des patients</li>
+                <li><strong>Signes appel</strong> : Protéinurie, hématurie microscopique, HTA, œdèmes</li>
+                <li><strong>⚠️ PBR (Ponction Biopsie Rénale) IMPÉRATIVE</strong> pour classification (voir section 6)</li>
+              </ul>
+            </div>
+
+            <div class="bg-green-100 p-2 rounded">
+              <p class="font-semibold text-green-800 text-xs mb-1">E. Atteintes Séreuses</p>
+              <p class="text-xs">Pleurésie, Péricardite (corticothérapie <strong>spectaculairement efficace</strong>)</p>
+            </div>
+
+            <div class="bg-pink-100 p-2 rounded">
+              <p class="font-semibold text-pink-800 text-xs mb-1">F. Neuro-Lupus</p>
+              <p class="text-xs">Convulsions, psychose (<strong>urgence</strong>), céphalées réfractaires, neuropathies périphériques</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-teal-50 p-3 rounded border-l-4 border-teal-500">
+          <h4 class="font-semibold text-teal-800 mb-2">4️⃣ DIAGNOSTIC BIOLOGIQUE</h4>
+          
+          <div class="space-y-2">
+            <div class="bg-blue-100 p-2 rounded border-2 border-blue-500">
+              <p class="font-semibold text-blue-800 text-xs mb-1">A. Immunologie (CLÉ DE VOÛTE)</p>
+              
+              <ul class="list-disc ml-5 text-xs space-y-1">
+                <li><strong>AAN</strong> (Anticorps Anti-Nucléaires) : Test dépistage. <strong>Sensibilité &gt; 98%</strong>
+                  <ul class="list-circle ml-4">
+                    <li>⚠️ Si <strong>négatifs</strong>, diagnostic LED <strong>quasi impossible</strong> (sauf rares exceptions)</li>
+                  </ul>
+                </li>
+                <li class="bg-yellow-50 p-1 rounded"><strong>Anti-ADN natif (dsDNA)</strong> : <strong>Très spécifiques</strong>. Taux corrélé à activité maladie (surtout rénale)</li>
+                <li class="bg-pink-50 p-1 rounded"><strong>Anti-Sm</strong> : <strong>PATHOGNOMONIQUES</strong> (spécificité 99%) mais peu sensibles (20%)</li>
+                <li><strong>Anti-SSA / Anti-SSB</strong> : Lupus cutané subaigu + Risque <strong>Lupus Néonatal</strong> (bloc cardiaque fœtus)</li>
+                <li><strong>Anticorps Anti-Phospholipides (aPL)</strong> : Anti-cardiolipine, Anti-β2GP1, Anticoagulant circulant
+                  <ul class="list-circle ml-4">
+                    <li>⚠️ Recherche <strong>SYSTÉMATIQUE</strong> (risque thrombotique)</li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+
+            <div class="bg-white p-2 rounded">
+              <p class="font-semibold text-purple-700 text-xs mb-1">B. Marqueurs d'Activité</p>
+              <p class="text-xs"><strong>Consommation Complément</strong> : Baisse <strong>C3 et C4</strong> (signe poussée active avec formation complexes immuns)</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-orange-50 p-3 rounded border-l-4 border-orange-500">
+          <h4 class="font-semibold text-orange-800 mb-2">5️⃣ CRITÈRES CLASSIFICATION (EULAR/ACR 2019)</h4>
+          <p class="text-sm italic mb-2">📊 Système à points (remplace anciens critères ARA)</p>
+          
+          <div class="bg-green-50 p-2 rounded border-2 border-green-500 mb-2">
+            <p class="font-semibold text-green-800 text-xs mb-1">✅ Critère d'entrée OBLIGATOIRE</p>
+            <p class="text-xs"><strong>AAN ≥ 1:80</strong> → Si positif, additionner les points → Score <strong>≥ 10</strong> pour classer LED</p>
+          </div>
+
+          <div class="bg-white p-2 rounded text-xs">
+            <p class="font-semibold mb-1">Exemples de points forts :</p>
+            <ul class="list-disc ml-5 space-y-1">
+              <li><strong>Biopsie rénale classe III ou IV</strong> : 10 pts (<strong>suffit à classer</strong>)</li>
+              <li><strong>Péricardite aiguë</strong> : 6 pts</li>
+              <li><strong>Anti-ADN natif ou Anti-Sm</strong> : 6 pts</li>
+              <li><strong>Arthrites</strong> : 6 pts</li>
+              <li><strong>Rash malaire</strong> : 6 pts</li>
+              <li>Alopécie non cicatricielle : 2 pts</li>
+              <li>Leucopénie ou Thrombopénie : 3-4 pts</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="bg-pink-50 p-3 rounded border-l-4 border-pink-500">
+          <h4 class="font-semibold text-pink-800 mb-2">6️⃣ CLASSIFICATION NÉPHROPATHIE LUPIQUE (OMS/ISN-RPS)</h4>
+          <p class="text-sm font-bold text-red-700 mb-2">⚠️ FONDAMENTALE pour choix thérapeutique</p>
+          
+          <div class="bg-white p-2 rounded text-xs">
+            <table class="w-full">
+              <thead class="bg-pink-100">
+                <tr>
+                  <th class="text-left p-1 border">Classe</th>
+                  <th class="text-left p-1 border">Type</th>
+                  <th class="text-left p-1 border">Attitude</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="border-b bg-green-50">
+                  <td class="p-1 border">I</td>
+                  <td class="p-1 border">Mésangiale minime</td>
+                  <td class="p-1 border">Abstention</td>
+                </tr>
+                <tr class="border-b">
+                  <td class="p-1 border">II</td>
+                  <td class="p-1 border">Mésangiale proliférative</td>
+                  <td class="p-1 border">Traitement si protéinurie</td>
+                </tr>
+                <tr class="border-b bg-orange-50">
+                  <td class="p-1 border"><strong>III</strong></td>
+                  <td class="p-1 border"><strong>Focale</strong></td>
+                  <td class="p-1 border text-red-700"><strong>URGENCE néphro</strong></td>
+                </tr>
+                <tr class="border-b bg-red-50">
+                  <td class="p-1 border"><strong>IV</strong></td>
+                  <td class="p-1 border"><strong>Diffuse</strong> (+ sévère et fréquente)</td>
+                  <td class="p-1 border text-red-700"><strong>URGENCE néphro</strong></td>
+                </tr>
+                <tr class="border-b bg-yellow-50">
+                  <td class="p-1 border">V</td>
+                  <td class="p-1 border">Extra-membraneuse</td>
+                  <td class="p-1 border">Syndrome néphrotique pur</td>
+                </tr>
+                <tr class="border-b bg-gray-200">
+                  <td class="p-1 border">VI</td>
+                  <td class="p-1 border">Sclérose terminale</td>
+                  <td class="p-1 border">-</td>
+                </tr>
+              </tbody>
+            </table>
+            <p class="mt-1 text-red-700 font-semibold">⚠️ Classes III et IV (prolifératives) = URGENCES → Immunosuppression lourde</p>
+          </div>
+        </div>
+
+        <div class="bg-green-50 p-3 rounded border-l-4 border-green-500">
+          <h4 class="font-semibold text-green-800 mb-2">7️⃣ PRISE EN CHARGE THÉRAPEUTIQUE</h4>
+          
+          <div class="space-y-2">
+            <div class="bg-blue-100 p-2 rounded border-2 border-blue-500">
+              <p class="font-semibold text-blue-800 text-xs mb-1">A. Traitement de Fond (POUR TOUS LES PATIENTS)</p>
+              <p class="text-xs"><strong>Hydroxychloroquine (Plaquenil)</strong> : 5 mg/kg/j</p>
+              <div class="bg-yellow-50 p-1 rounded mt-1">
+                <p class="text-xs font-bold">🌟 <strong>"ASSURANCE-VIE du lupique"</strong></p>
+                <ul class="list-disc ml-5 text-xs">
+                  <li>Réduit poussées, risque thrombotique, mortalité globale</li>
+                  <li>⚠️ Surveillance : Toxicité rétinienne (OCT + Champ visuel annuels)</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="bg-white p-2 rounded">
+              <p class="font-semibold text-orange-700 text-xs mb-1">B. Traitement des Poussées</p>
+              <ul class="list-disc ml-5 text-xs">
+                <li><strong>Corticothérapie</strong> : Prednisone (0.5-1 mg/kg/j selon sévérité)</li>
+                <li>Bolus Méthylprednisolone si atteinte viscérale grave</li>
+                <li><strong>Objectif</strong> : Sevrage ou dose minimale (&lt; 5 mg/j) le + vite possible</li>
+              </ul>
+            </div>
+
+            <div class="bg-purple-50 p-2 rounded">
+              <p class="font-semibold text-purple-700 text-xs mb-1">C. Immunosuppresseurs (Épargne Cortisonique)</p>
+              <ul class="list-disc ml-5 text-xs space-y-1">
+                <li><strong>Formes articulaires/cutanées réfractaires</strong> : Méthotrexate, Azathioprine, Belimumab (anti-BAFF/BLyS)</li>
+                <li><strong>Néphropathie (Induction/Entretien)</strong> : <strong>Mycophénolate Mofétil</strong> (Cellcept) ou <strong>Cyclophosphamide</strong> (Endoxan) IV</li>
+              </ul>
+            </div>
+
+            <div class="bg-pink-50 p-2 rounded">
+              <p class="font-semibold text-pink-800 text-xs mb-1">D. Nouveautés (Biothérapies Ciblées)</p>
+              <ul class="list-disc ml-5 text-xs">
+                <li><strong>Anifrolumab</strong> : Anticorps anti-récepteur Interféron type I (efficace cutané)</li>
+                <li><strong>Rituximab</strong> : Anti-CD20, sauvetage "off-label" (formes hématologiques/rénales réfractaires)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-indigo-50 p-3 rounded border-l-4 border-indigo-500">
+          <h4 class="font-semibold text-indigo-800 mb-2">8️⃣ GROSSESSE ET CONTRACEPTION</h4>
+          
+          <div class="space-y-2">
+            <div class="bg-red-100 p-2 rounded border-2 border-red-500">
+              <p class="font-semibold text-red-800 text-xs mb-1">⚠️ Contraception</p>
+              <ul class="list-disc ml-5 text-xs">
+                <li><strong>Œstro-progestatifs CONTRE-INDIQUÉS</strong> si Anticorps Anti-Phospholipides (risque thrombose)</li>
+                <li>✅ Privilégier : Progestatifs purs ou DIU</li>
+              </ul>
+            </div>
+
+            <div class="bg-green-100 p-2 rounded">
+              <p class="font-semibold text-green-800 text-xs mb-1">✅ Grossesse</p>
+              <p class="text-xs mb-1"><strong>Possible</strong> si maladie inactive ("Lupus éteint") depuis <strong>6 mois</strong></p>
+              <ul class="list-disc ml-5 text-xs space-y-1">
+                <li><strong>Autorisés</strong> : Corticoïdes, Hydroxychloroquine, Azathioprine</li>
+                <li><strong>⛔ INTERDITS (Tératogènes)</strong> : Méthotrexate, Mycophénolate, Cyclophosphamide</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-yellow-50 p-3 rounded border-l-4 border-yellow-500">
+          <h4 class="font-semibold text-yellow-800 mb-2">🎯 POINTS CLÉS À RETENIR</h4>
+          <div class="bg-white p-2 rounded">
+            <ul class="list-disc ml-5 text-sm space-y-1">
+              <li>🦋 <strong>Femme 9:1</strong>, 15-45 ans, poussées/rémissions</li>
+              <li>🔬 <strong>AAN &gt; 98%</strong> sensibilité (si négatif, diagnostic quasi impossible)</li>
+              <li>💎 <strong>Anti-Sm PATHOGNOMONIQUES</strong> (99% spécificité), Anti-ADN natif (activité rénale)</li>
+              <li>🎭 <strong>Clinique</strong> : Érythème "Vespertilio" (respecte sillons nasogéniens), Arthrites 90%, Néphropathie 30-50%</li>
+              <li>🏥 <strong>Néphropathie</strong> : PBR impérative, Classes III/IV = urgences (immunosuppression lourde)</li>
+              <li>📋 <strong>Critères EULAR/ACR 2019</strong> : AAN ≥1:80 + Score ≥10</li>
+              <li>💊 <strong>Hydroxychloroquine</strong> : "Assurance-vie" POUR TOUS (surveillance rétinienne)</li>
+              <li>⚠️ <strong>aPL</strong> : Recherche systématique (risque thrombose, contre-indication pilule œstroprogestative)</li>
+              <li>🤰 <strong>Grossesse possible</strong> si lupus éteint 6 mois (MTX/MMF/Cyclo tératogènes)</li>
+            </ul>
+          </div>
+        </div>
+      </div>`,
     children: [
         { code: "C14A", name: "LED spontanés", children: [{ code: "C14A01", name: "LED spontanés" }] },
         { code: "C14B", name: "LED induits", children: [{ code: "C14B01", name: "LED induits" }] }
