@@ -4132,9 +4132,11 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
     if (hasMetaWord && hasSingleOrPerte && !hasSpecificFinger && !hasCinq) {
         console.log('✅ [MÉTACARPIENS] DIALOGUE DÉCLENCHÉ !');
         
+        // Ne garder QUE les "Perte du Xe métacarpien" - EXCLURE ankyloses et autres
         const metacarpienChoices = allInjuriesWithPaths.filter(inj => 
-            /m[eé]tacarpien/i.test(inj.name) && 
+            /perte.*m[eé]tacarpien/i.test(inj.name) && 
             !/cinq/i.test(inj.name) &&
+            !/ankylose/i.test(inj.name) &&  // EXCLURE les ankyloses
             /(?:pouce|index|majeur|annulaire|auriculaire|1er|2e|3e|4e|5e)/i.test(inj.name)
         );
         
