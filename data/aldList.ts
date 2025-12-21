@@ -4670,7 +4670,260 @@ export const aldData: AldItem[] = [
           { code: "C10A01", name: "Maladie d'Alzheimer" }, 
           { code: "C10A02", name: "Démence à corps de Lewy" }, 
           { code: "C10A03", name: "Démence vasculaire" }, 
-          { code: "C10A04", name: "Démence de la maladie de Pick" }, 
+          { 
+            code: "C10A04", 
+            name: "Démence de la maladie de Pick",
+            tooltip: `<div class="space-y-3">
+        <h3 class="font-bold text-lg text-purple-700">🧠 DÉMENCE DE LA MALADIE DE PICK (DLFT - bvFTD)</h3>
+        
+        <div class="bg-blue-50 p-3 rounded border-l-4 border-blue-500">
+          <h4 class="font-semibold text-blue-800 mb-2">1️⃣ DÉFINITION ET NOSOLOGIE</h4>
+          
+          <div class="bg-white p-2 rounded text-sm space-y-2">
+            <div>
+              <p class="font-semibold text-gray-700">📜 Historique</p>
+              <p class="text-xs">Décrite par <strong>Arnold Pick</strong> en 1892</p>
+            </div>
+            
+            <div class="bg-yellow-50 p-2 rounded">
+              <p class="font-semibold text-yellow-800">⚠️ Terminologie Moderne</p>
+              <ul class="list-disc ml-5 text-xs">
+                <li><strong>"Maladie de Pick"</strong> : Réservé à la description <strong>neuropathologique</strong> (présence Corps de Pick à l'histologie)</li>
+                <li><strong>Correspondance clinique</strong> : <strong>Variante Comportementale de la DLFT</strong> (bvFTD - behavioral variant FrontoTemporal Dementia)</li>
+              </ul>
+            </div>
+            
+            <div>
+              <p class="font-semibold text-purple-700">🎯 Définition</p>
+              <p class="text-xs">Démence dégénérative <strong>focale</strong> touchant les <strong>lobes frontaux et temporaux</strong></p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-purple-50 p-3 rounded border-l-4 border-purple-500">
+          <h4 class="font-semibold text-purple-800 mb-2">2️⃣ ÉPIDÉMIOLOGIE</h4>
+          
+          <div class="bg-white p-2 rounded text-sm">
+            <ul class="list-disc ml-5 space-y-1">
+              <li><strong>Âge de début</strong> : Maladie <strong>présénile</strong> → Début précoce <strong>45-65 ans</strong> (+ jeune qu'Alzheimer)</li>
+              <li><strong>Fréquence</strong> : <span class="text-red-700 font-bold">2ème cause de démence dégénérative &lt; 65 ans</span> (après Alzheimer)</li>
+              <li><strong>Hérédité</strong> : Formes familiales fréquentes (<strong>30-50%</strong> des cas)
+                <ul class="list-circle ml-4 text-xs">
+                  <li>Mutations génétiques : <strong>MAPT, GRN, C9orf72</strong></li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="bg-teal-50 p-3 rounded border-l-4 border-teal-500">
+          <h4 class="font-semibold text-teal-800 mb-2">3️⃣ ANATOMOPATHOLOGIE</h4>
+          
+          <div class="space-y-2">
+            <div class="bg-white p-2 rounded text-sm">
+              <p class="font-semibold text-orange-700 mb-1">🔬 Macroscopie</p>
+              <ul class="list-disc ml-5 text-xs">
+                <li>Atrophie sévère <strong>"en lame de couteau"</strong></li>
+                <li>Localisée : <strong>Pôles frontaux et temporaux antérieurs</strong></li>
+                <li>Souvent <strong>asymétrique</strong></li>
+              </ul>
+            </div>
+
+            <div class="bg-pink-50 p-2 rounded text-sm border border-pink-400">
+              <p class="font-semibold text-pink-800 mb-1">🔬 Microscopie (Spécifique Maladie de Pick)</p>
+              <ul class="list-disc ml-5 text-xs space-y-1">
+                <li><strong>Corps de Pick</strong> : Inclusions intraneuronales argentophiles, sphériques</li>
+                <li><strong>Cellules de Pick</strong> : Neurones ballonnés (chromatolyse centrale)</li>
+                <li><strong>Protéinopathie</strong> : Accumulation protéine <strong>Tau</strong> (Tauopathie 3R)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-yellow-50 p-3 rounded border-l-4 border-yellow-500">
+          <h4 class="font-semibold text-yellow-800 mb-2">4️⃣ PRÉSENTATION CLINIQUE (Sémiologie)</h4>
+          <p class="text-sm italic mb-2">⚠️ <strong>≠ Alzheimer</strong> : Mémoire et orientation spatiale <strong>préservées au début</strong></p>
+          <p class="text-sm font-bold mb-2 text-red-700">Tableau dominé par : TROUBLES COMPORTEMENT et PERSONNALITÉ</p>
+          
+          <div class="bg-orange-50 p-2 rounded border border-orange-400 mb-2">
+            <p class="text-xs italic">📋 <strong>Critères de Rascovsky (2011)</strong> : Diagnostic probable si <strong>3 symptômes sur 6</strong></p>
+          </div>
+
+          <div class="space-y-2 text-sm">
+            <div class="bg-red-100 p-2 rounded">
+              <p class="font-semibold text-red-800">A. Désinhibition Comportementale Précoce</p>
+              <ul class="list-disc ml-5 text-xs">
+                <li>Conduites sociales inappropriées (grossièretés, familiarité excessive, impudeur)</li>
+                <li>Impulsivité, perte tact et bienséance</li>
+                <li>Actes délictueux (vols étalage) sans conscience du problème</li>
+              </ul>
+            </div>
+
+            <div class="bg-gray-100 p-2 rounded">
+              <p class="font-semibold text-gray-800">B. Apathie ou Inertie</p>
+              <ul class="list-disc ml-5 text-xs">
+                <li>Perte d'intérêt, manque d'initiative, retrait social</li>
+                <li>⚠️ Souvent confondu avec <strong>dépression</strong></li>
+              </ul>
+            </div>
+
+            <div class="bg-blue-100 p-2 rounded">
+              <p class="font-semibold text-blue-800">C. Perte de Sympathie et d'Empathie</p>
+              <ul class="list-disc ml-5 text-xs">
+                <li>Indifférence affective ("froideur") face aux problèmes des proches</li>
+                <li>Diminution réactivité émotionnelle</li>
+              </ul>
+            </div>
+
+            <div class="bg-purple-100 p-2 rounded">
+              <p class="font-semibold text-purple-800">D. Comportements Stéréotypés et Compulsifs</p>
+              <ul class="list-disc ml-5 text-xs">
+                <li>Rituels de vérification, déambulation, claquement de mains</li>
+                <li>Langage stéréotypé (répétition mêmes phrases)</li>
+              </ul>
+            </div>
+
+            <div class="bg-green-100 p-2 rounded">
+              <p class="font-semibold text-green-800">E. Hyperorality et Changements Alimentaires</p>
+              <ul class="list-disc ml-5 text-xs">
+                <li>Gloutonnerie, préférence marquée pour le sucré</li>
+                <li>Consommation excessive alcool/tabac (apparition ou reprise)</li>
+                <li>Exploration orale objets (tout mettre à la bouche comme enfant)</li>
+              </ul>
+            </div>
+
+            <div class="bg-indigo-100 p-2 rounded">
+              <p class="font-semibold text-indigo-800">F. Profil Neuropsychologique (Exécutif)</p>
+              <ul class="list-disc ml-5 text-xs">
+                <li><strong>Déficit fonctions exécutives</strong> : planification, jugement, flexibilité mentale</li>
+                <li>✅ <strong>Mémoire épisodique et visuo-spatiales relativement ÉPARGNÉES</strong></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-orange-50 p-3 rounded border-l-4 border-orange-500">
+          <h4 class="font-semibold text-orange-800 mb-2">5️⃣ DIAGNOSTIC PARACLINIQUE</h4>
+          
+          <div class="space-y-2">
+            <div class="bg-blue-100 p-2 rounded border-2 border-blue-500">
+              <p class="font-semibold text-blue-800 mb-1">A. Imagerie Structurelle (IRM Cérébrale) - EXAMEN CLÉ</p>
+              <ul class="list-disc ml-5 text-sm">
+                <li><strong>Signes</strong> : Atrophie corticale focale <strong>lobes frontaux et temporaux antérieurs</strong></li>
+                <li>Élargissement cornes frontales ventricules latéraux</li>
+                <li><strong>Aspect</strong> : Atrophie souvent très <strong>asymétrique</strong> (+ marquée gauche ou droite)</li>
+                <li><strong>Contraste majeur avec Alzheimer</strong> : <span class="text-green-700 font-bold">Lobes pariétal et occipital NORMAUX</span></li>
+              </ul>
+            </div>
+
+            <div class="bg-white p-2 rounded text-sm">
+              <p class="font-semibold text-purple-700 mb-1">B. Imagerie Fonctionnelle (TEP-scan FDG ou TEMP)</p>
+              <p class="text-xs italic mb-1">Indispensable si IRM peu contributive au début</p>
+              <ul class="list-disc ml-5 text-xs">
+                <li><strong>Signe</strong> : <strong>Hypométabolisme</strong> (baisse activité) fronto-temporal antérieur</li>
+              </ul>
+            </div>
+
+            <div class="bg-white p-2 rounded text-sm">
+              <p class="font-semibold text-teal-700 mb-1">C. Ponction Lombaire (Biomarqueurs)</p>
+              <p class="text-xs italic mb-1">⚠️ Sert surtout à <strong>éliminer</strong> une maladie d'Alzheimer</p>
+              <ul class="list-disc ml-5 text-xs">
+                <li><strong>DLFT pure</strong> : Marqueurs Amyloïde et Tau <strong>normaux</strong></li>
+                <li>Ou : Tau isolément élevée mais sans baisse d'Amyloïde</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-pink-50 p-3 rounded border-l-4 border-pink-500">
+          <h4 class="font-semibold text-pink-800 mb-2">6️⃣ DIAGNOSTIC DIFFÉRENTIEL</h4>
+          
+          <div class="bg-red-100 p-2 rounded border-2 border-red-500 mb-2">
+            <p class="font-semibold text-red-800 mb-1">🚨 Troubles Psychiatriques (LE PIÈGE N°1)</p>
+            <ul class="list-disc ml-5 text-sm">
+              <li>Dépression mélancolique</li>
+              <li>Trouble Bipolaire (phase maniaque)</li>
+              <li>Schizophrénie tardive</li>
+            </ul>
+            <p class="text-xs mt-1 text-red-700"><strong>⚠️ De nombreux patients traités en psychiatrie par ERREUR au début</strong></p>
+          </div>
+
+          <div class="bg-white p-2 rounded text-sm">
+            <ul class="list-disc ml-5 text-xs">
+              <li><strong>Maladie d'Alzheimer</strong> (Variante frontale) : Plus rare, mais peut débuter par troubles comportement</li>
+              <li><strong>Tumeurs cérébrales frontales</strong> : Méningiome olfactif, gliome</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="bg-green-50 p-3 rounded border-l-4 border-green-500">
+          <h4 class="font-semibold text-green-800 mb-2">7️⃣ PRISE EN CHARGE THÉRAPEUTIQUE</h4>
+          <p class="text-sm text-red-700 font-bold mb-2">⚠️ AUCUN TRAITEMENT CURATIF</p>
+          
+          <div class="space-y-2">
+            <div class="bg-white p-2 rounded">
+              <p class="font-semibold text-blue-700 mb-1">💊 Traitements Médicamenteux (Symptomatiques)</p>
+              
+              <div class="space-y-1 text-sm">
+                <div class="bg-green-50 p-1 rounded">
+                  <p class="font-semibold text-green-800 text-xs">✅ ISRS (Antidépresseurs sérotoninergiques)</p>
+                  <ul class="list-disc ml-5 text-xs">
+                    <li><strong>Trazodone, Citalopram</strong></li>
+                    <li>Efficaces pour : impulsivité, désinhibition, compulsions</li>
+                  </ul>
+                </div>
+
+                <div class="bg-yellow-50 p-1 rounded">
+                  <p class="font-semibold text-yellow-800 text-xs">⚠️ Neuroleptiques atypiques</p>
+                  <ul class="list-disc ml-5 text-xs">
+                    <li><strong>Quétiapine</strong> à faible dose si agitation sévère</li>
+                    <li>Prudence : sensibilité accrue aux effets secondaires</li>
+                  </ul>
+                </div>
+
+                <div class="bg-red-100 p-1 rounded border border-red-500">
+                  <p class="font-semibold text-red-800 text-xs">⛔ CONTRE-INDICATION RELATIVE</p>
+                  <ul class="list-disc ml-5 text-xs">
+                    <li><strong>Anticholinestérasiques</strong> (Donépézil/Aricept utilisés dans Alzheimer)</li>
+                    <li>❌ <strong>INEFFICACES</strong> et peuvent <strong>AGGRAVER l'agitation</strong> dans DLFT</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-blue-50 p-2 rounded">
+              <p class="font-semibold text-blue-700 mb-1">🏥 Prise en Charge Non Médicamenteuse</p>
+              <ul class="list-disc ml-5 text-sm">
+                <li><strong>Soutien aux aidants</strong> (fardeau très lourd dû aux troubles comportement)</li>
+                <li><strong>Orthophonie</strong> (si troubles langage associés)</li>
+                <li><strong>Protection juridique</strong> (Tutelle/Curatelle) <strong>RAPIDE</strong>
+                  <ul class="list-circle ml-4 text-xs">
+                    <li>En raison des troubles du jugement (dépenses inconsidérées)</li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-indigo-50 p-3 rounded border-l-4 border-indigo-500">
+          <h4 class="font-semibold text-indigo-800 mb-2">🎯 POINTS CLÉS À RETENIR</h4>
+          <div class="bg-white p-2 rounded">
+            <ul class="list-disc ml-5 text-sm space-y-1">
+              <li>🎂 <strong>Présénile</strong> : 45-65 ans (2ème cause démence &lt; 65 ans)</li>
+              <li>🧬 <strong>Hérédité fréquente</strong> : 30-50% (MAPT, GRN, C9orf72)</li>
+              <li>🧠 <strong>Atrophie</strong> : Frontale + Temporale antérieure ("lame de couteau", asymétrique)</li>
+              <li>🎭 <strong>Clinique</strong> : Troubles comportement/personnalité (≠ Alzheimer : mémoire préservée début)</li>
+              <li>📋 <strong>Critères Rascovsky</strong> : 3/6 symptômes (Désinhibition, Apathie, Perte empathie, Stéréotypies, Hyperorality, Déficit exécutif)</li>
+              <li>🧲 <strong>IRM clé</strong> : Pariétal/Occipital NORMAUX (vs Alzheimer)</li>
+              <li>🚨 <strong>Piège</strong> : Souvent traité en psychiatrie par erreur</li>
+              <li>💊 <strong>Traitement</strong> : ISRS (Trazodone, Citalopram), ⛔ Pas d'anticholinestérasiques</li>
+              <li>⚖️ <strong>Protection juridique RAPIDE</strong> (troubles jugement)</li>
+            </ul>
+          </div>
+        </div>
+      </div>`
+          }, 
           { code: "C10A05", name: "Démence de la maladie de Creutzfeldt-Jakob" }, 
           { code: "C10A06", name: "Démence de la maladie de Huntington" }, 
           { code: "C10A07", name: "Autres démences" }
