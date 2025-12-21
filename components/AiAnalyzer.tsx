@@ -6995,9 +6995,11 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
     // 🆕 V3.3.124d: CAS SPÉCIAL MÉTACARPIENS - Court-circuit pour "un seul métacarpien"
     // Retourner DIRECTEMENT le dialogue de choix avec les 5 doigts
     const normalizedForMetaCheck = convertNumberWords(normalize(preprocessMedicalText(text)));
+    const hasSpecificFinger = /\b(pouce|index|majeur|medius|annulaire|auriculaire|1er|2e|3e|4e|5e)\b/i.test(normalizedForMetaCheck);
     const isMetacarpienSingleQueryDirect = /metacarpien/i.test(normalizedForMetaCheck) && 
-        /\b(?:d\s+un\s+seul|un\s+seul|un\s+metacarpien|1\s+metacarpien|seul\s+metacarpien|perte.*metacarpien)\b/.test(normalizedForMetaCheck) &&
-        !/cinq|5|tous/i.test(normalizedForMetaCheck);
+        /\b(?:d\s+un\s+seul|un\s+seul|un\s+metacarpien|1\s+metacarpien|seul\s+metacarpien|perte\s+(?:d\s+un|du|d\s+1|du\s+\d))\b/i.test(normalizedForMetaCheck) &&
+        !/cinq|5|tous|des\s+cinq/i.test(normalizedForMetaCheck) &&
+        !hasSpecificFinger;  // ⚠️ NE PAS déclencher si un doigt spécifique est mentionné
     
     if (isMetacarpienSingleQueryDirect) {
         // Récupérer les 5 métacarpiens individuels
@@ -7031,7 +7033,7 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             
             return {
                 type: 'ambiguity',
-                text: `Quel doigt est concerné par la perte du métacarpien ?`,
+                text: `Votre description "perte d'un seul métacarpien" peut correspondre à plusieurs séquelles. Pour la région "Main - Amputations", laquelle correspond le mieux à l'état du patient ?`,
                 choices: metacarpienChoices.slice(0, 5).map(c => c as Injury)
             };
         }
