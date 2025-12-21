@@ -9994,7 +9994,304 @@ export const aldData: AldItem[] = [
           ] 
         },
         { code: "C19E", name: "Déficit en hormone de croissance", children: [{ code: "C19E01", name: "Nanisme" }, { code: "C19E02", name: "Syndrome de Turner" }] },
-        { code: "C19F", name: "Syndrome polyuro-polydipsique", children: [{ code: "C19F01", name: "Diabète insipide central" }, { code: "C19F02", name: "Diabète insipide néphrogénique" }] },
+        { 
+          code: "C19F", 
+          name: "Syndrome polyuro-polydipsique",
+          tooltip: `<div class="space-y-3">
+        <h3 class="font-bold text-lg text-blue-700">💧 SYNDROME POLYURO-POLYDIPSIQUE (SPP)</h3>
+        
+        <div class="bg-blue-50 p-3 rounded border-l-4 border-blue-500">
+          <h4 class="font-semibold text-blue-800 mb-2">1️⃣ DÉFINITIONS ET QUANTIFICATION</h4>
+          <p class="text-sm font-bold text-red-700 mb-2">⚠️ Confirmer le trouble AVANT de lancer des examens complexes</p>
+          
+          <div class="bg-white p-2 rounded text-sm space-y-2">
+            <div class="bg-pink-100 p-2 rounded border-2 border-pink-500">
+              <p class="font-semibold text-pink-800 text-xs mb-1">💦 Polyurie</p>
+              <p class="text-xs"><strong>Volume urinaire &gt; 3 litres / 24h</strong> (ou <strong>&gt; 50 ml/kg/j</strong>)</p>
+              
+              <div class="bg-yellow-100 p-2 rounded border border-yellow-500 mt-1">
+                <p class="font-semibold text-yellow-800 text-xs mb-1">⚠️ Ne pas confondre avec :</p>
+                <p class="text-xs"><strong>Pollakiurie</strong> : Envie fréquente d'uriner mais <strong>petits volumes</strong></p>
+                <p class="text-xs italic">(ex: cystite, adénome prostate)</p>
+              </div>
+            </div>
+
+            <div class="bg-blue-100 p-2 rounded border-2 border-blue-500">
+              <p class="font-semibold text-blue-800 text-xs mb-1">🥤 Polydipsie</p>
+              <p class="text-xs">Soif excessive entraînant une prise de boisson <strong>&gt; 3 litres / 24h</strong></p>
+            </div>
+
+            <div class="bg-teal-50 p-2 rounded">
+              <p class="font-semibold text-teal-800 text-xs mb-1">🔄 Le Mécanisme</p>
+              <p class="text-xs">La soif est le <strong>mécanisme de sécurité</strong> pour compenser les pertes urinaires et éviter la déshydratation</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-purple-50 p-3 rounded border-l-4 border-purple-500">
+          <h4 class="font-semibold text-purple-800 mb-2">2️⃣ PHYSIOPATHOLOGIE SIMPLIFIÉE</h4>
+          
+          <div class="bg-white p-2 rounded text-xs space-y-2">
+            <div class="bg-blue-100 p-2 rounded border-2 border-blue-500">
+              <p class="font-semibold text-blue-800 mb-1">💧 L'Homéostasie de l'Eau</p>
+              <p class="mb-1">Repose sur l'<strong>ADH</strong> (Hormone Anti-Diurétique ou Vasopressine) sécrétée par l'<strong>hypophyse postérieure</strong></p>
+              
+              <div class="space-y-1">
+                <div class="bg-orange-50 p-1 rounded">
+                  <p class="font-semibold text-orange-700">Si Osmolarité plasmatique ↑ (déshydratation) :</p>
+                  <p>Sécrétion d'ADH → Le rein réabsorbe l'eau pure → <strong>Urines concentrées</strong></p>
+                </div>
+
+                <div class="bg-green-50 p-1 rounded">
+                  <p class="font-semibold text-green-700">Si Osmolarité plasmatique ↓ (hyperhydratation) :</p>
+                  <p>Arrêt de l'ADH → Le rein élimine l'eau → <strong>Urines diluées</strong></p>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-red-100 p-2 rounded border-2 border-red-500">
+              <p class="font-semibold text-red-800 mb-1">⚡ Le SPP survient si :</p>
+              <ul class="list-disc ml-5 space-y-1">
+                <li>L'ADH est <strong>absente</strong> (Centrale)</li>
+                <li>Le rein <strong>ne répond pas</strong> à l'ADH (Néphrogénique)</li>
+                <li>L'apport d'eau est tel qu'il <strong>inhibe physiologiquement</strong> l'ADH (Potomanie)</li>
+                <li>Une substance entraîne l'eau par <strong>osmose</strong> (Diurèse Osmotique)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-yellow-50 p-3 rounded border-l-4 border-yellow-500">
+          <h4 class="font-semibold text-yellow-800 mb-2">3️⃣ L'ARBRE DÉCISIONNEL (La Clé du Diagnostic)</h4>
+          <p class="text-sm italic mb-2">Démarche étape par étape pour éliminer les causes évidentes</p>
+          
+          <div class="space-y-2">
+            <div class="bg-red-100 p-2 rounded border-4 border-red-600">
+              <p class="font-semibold text-red-800 text-xs mb-1">🔴 ÉTAPE 1 : Éliminer la cause la + FRÉQUENTE (Diurèse Osmotique)</p>
+              
+              <div class="bg-white p-2 rounded text-xs space-y-1">
+                <div class="bg-pink-50 p-1 rounded">
+                  <p class="font-semibold text-pink-700">Examen :</p>
+                  <p><strong>Bandelette Urinaire + Glycémie veineuse</strong></p>
+                </div>
+
+                <div class="bg-orange-100 p-2 rounded border-2 border-orange-500">
+                  <p class="font-semibold text-orange-800 mb-1">Diagnostic :</p>
+                  <p class="font-bold"><strong>Diabète Sucré</strong> (Type 1 ou 2)</p>
+                  <p class="italic">Le glucose "tire" l'eau dans les urines</p>
+                </div>
+
+                <div class="bg-blue-50 p-1 rounded">
+                  <p class="font-semibold text-blue-700">Autres causes osmotiques :</p>
+                  <p>Hypercalcémie sévère, Hypokaliémie sévère, levée d'obstacle urinaire</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-blue-100 p-2 rounded border-2 border-blue-500">
+              <p class="font-semibold text-blue-800 text-xs mb-1">ÉTAPE 2 : Caractériser la Diurèse Aqueuse (Urines claires)</p>
+              
+              <div class="bg-white p-2 rounded text-xs">
+                <p class="mb-1">Si la glycémie est normale → Face à une <strong>diurèse aqueuse</strong></p>
+                <div class="bg-teal-100 p-2 rounded border-2 border-teal-500">
+                  <p class="font-semibold text-teal-800 mb-1">Osmolarité Urinaire (Uosm) :</p>
+                  <p>Typiquement <strong>BASSE (&lt; 200-300 mOsm/kg)</strong></p>
+                  <p>Inférieure à l'osmolarité plasmatique</p>
+                  <p class="font-bold italic text-purple-700">Les urines sont "comme de l'eau"</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-purple-100 p-2 rounded border-4 border-purple-600">
+              <p class="font-semibold text-purple-800 text-xs mb-1">ÉTAPE 3 : Différencier Potomanie vs Diabète Insipide (DI)</p>
+              <p class="text-xs font-bold text-red-700 mb-2">🌟 C'est le CŒUR du problème</p>
+              
+              <div class="bg-white p-2 rounded text-xs space-y-2">
+                <div class="bg-green-100 p-2 rounded border-2 border-green-500">
+                  <p class="font-semibold text-green-800 mb-1">Potomanie (Polydipsie Primaire)</p>
+                  <p>Le patient <strong>boit trop</strong> (cause psy) → Son ADH est freinée</p>
+                  <p class="font-bold text-blue-700">S'il arrête de boire → Son ADH remonte et il concentre ses urines</p>
+                </div>
+
+                <div class="bg-red-100 p-2 rounded border-2 border-red-600">
+                  <p class="font-semibold text-red-800 mb-1">Diabète Insipide (DI)</p>
+                  <p>Le patient <strong>pisse trop</strong> (maladie) → Il boit pour compenser</p>
+                  <p class="font-bold text-purple-700">S'il arrête de boire → Continue de pisser dilué et se déshydrate gravement</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-teal-50 p-3 rounded border-l-4 border-teal-500">
+          <h4 class="font-semibold text-teal-800 mb-2">4️⃣ L'ÉPREUVE DE RESTRICTION HYDRIQUE (Hospitalière)</h4>
+          <p class="text-sm font-bold text-red-700 mb-2">🌟 GOLD STANDARD. Surveillance stricte obligatoire (risque déshydratation aiguë)</p>
+          
+          <div class="space-y-2">
+            <div class="bg-orange-100 p-2 rounded border-2 border-orange-500">
+              <p class="font-semibold text-orange-800 text-xs mb-1">📋 Protocole</p>
+              
+              <ul class="list-disc ml-5 text-xs space-y-1">
+                <li><strong>Arrêt total des boissons</strong></li>
+                <li><strong>Surveillance horaire</strong> : Poids, Tension Artérielle, Diurèse, Osmolarité Urinaire et Plasmatique</li>
+                <li class="bg-red-50 p-1 rounded"><strong>Arrêt du test si</strong> : Poids -5%, Hypotension, ou Osmolarité Urinaire qui se normalise (&gt; 600 mOsm/kg)</li>
+                <li class="bg-pink-100 p-2 rounded border-2 border-pink-500">Si les urines restent claires après plusieurs heures de soif → <strong>Injection de Minirin (Desmopressin)</strong> (ADH synthétique)</li>
+              </ul>
+            </div>
+
+            <div class="bg-white p-2 rounded">
+              <p class="font-semibold text-purple-700 text-xs mb-2">💡 Interprétation des Résultats :</p>
+              
+              <div class="overflow-x-auto">
+                <table class="w-full text-xs border-collapse">
+                  <thead>
+                    <tr class="bg-teal-200">
+                      <th class="border border-teal-400 p-1 text-left">Pathologie</th>
+                      <th class="border border-teal-400 p-1 text-left">Réponse à la Soif (Restriction)</th>
+                      <th class="border border-teal-400 p-1 text-left">Réponse au Minirin (ADH exogène)</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr class="bg-green-50">
+                      <td class="border border-teal-300 p-1"><strong>Potomanie</strong></td>
+                      <td class="border border-teal-300 p-1"><strong>Normalisation rapide</strong> des urines (deviennent foncées/concentrées). Le rein et l'hypophyse fonctionnent.</td>
+                      <td class="border border-teal-300 p-1">Non réalisé (test stoppé avant)</td>
+                    </tr>
+                    <tr class="bg-blue-50">
+                      <td class="border border-teal-300 p-1"><strong>DI Central</strong><br/>(Déficit ADH)</td>
+                      <td class="border border-teal-300 p-1"><strong>Pas de réponse</strong> (Urines restent claires). Le patient se déshydrate.</td>
+                      <td class="border border-teal-300 p-1 bg-pink-100"><strong>Normalisation spectaculaire</strong>. Le rein répond à l'ADH qu'on lui donne.</td>
+                    </tr>
+                    <tr class="bg-red-50">
+                      <td class="border border-teal-300 p-1"><strong>DI Néphrogénique</strong><br/>(Résistance)</td>
+                      <td class="border border-teal-300 p-1"><strong>Pas de réponse</strong></td>
+                      <td class="border border-teal-300 p-1"><strong>Pas de réponse</strong>. Le rein ne répond ni à la soif, ni au médicament.</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-orange-50 p-3 rounded border-l-4 border-orange-500">
+          <h4 class="font-semibold text-orange-800 mb-2">5️⃣ LES ÉTIOLOGIES DÉTAILLÉES</h4>
+          
+          <div class="space-y-2">
+            <div class="bg-blue-100 p-2 rounded border-4 border-blue-500">
+              <p class="font-semibold text-blue-800 text-xs mb-1">A. DIABÈTE INSIPIDE CENTRAL (Déficit en ADH)</p>
+              
+              <div class="bg-white p-2 rounded text-xs space-y-1">
+                <div>
+                  <p class="font-semibold text-purple-700 mb-1">Causes :</p>
+                  <ul class="list-disc ml-5">
+                    <li>Traumatisme crânien ou Neurochirurgie (transitoire ou définitif)</li>
+                    <li>Tumeurs (Craniopharyngiome, Métastases)</li>
+                    <li>Inflammations (Sarcoïdose, Hypophysite)</li>
+                    <li>Vasculaire (Syndrome de Sheehan)</li>
+                    <li>Idiopathique (parfois auto-immun)</li>
+                  </ul>
+                </div>
+
+                <div class="bg-green-100 p-2 rounded border-2 border-green-500">
+                  <p class="font-semibold text-green-800 mb-1">💊 Traitement :</p>
+                  <p class="font-bold"><strong>Desmopressine (Minirin) à VIE</strong> (nasal ou oral)</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-red-100 p-2 rounded border-4 border-red-500">
+              <p class="font-semibold text-red-800 text-xs mb-1">B. DIABÈTE INSIPIDE NÉPHROGÉNIQUE (Résistance Rénale)</p>
+              
+              <div class="bg-white p-2 rounded text-xs space-y-1">
+                <div>
+                  <p class="font-semibold text-purple-700 mb-1">Causes :</p>
+                  <ul class="list-disc ml-5">
+                    <li class="bg-pink-100 p-1 rounded"><strong>Médicamenteuse (N°1)</strong> : <strong>LITHIUM</strong> (trouble bipolaire)</li>
+                    <li>Métabolique : Hypercalcémie, Hypokaliémie</li>
+                    <li>Génétique (Mutation récepteur V2 - rare, enfant)</li>
+                  </ul>
+                </div>
+
+                <div class="bg-yellow-100 p-2 rounded border-2 border-yellow-500">
+                  <p class="font-semibold text-yellow-800 mb-1">💊 Traitement : DIFFICILE</p>
+                  <ul class="list-disc ml-5">
+                    <li>Arrêt du toxique (Lithium)</li>
+                    <li>Régime pauvre en sel</li>
+                    <li class="bg-white p-1 rounded"><strong>Paradoxalement</strong> : Diurétiques thiazidiques (diminuent le volume urinaire dans ce cas précis) ou AINS (Indométacine)</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-purple-100 p-2 rounded border-2 border-purple-500">
+              <p class="font-semibold text-purple-800 text-xs mb-1">C. POTOMANIE (Polydipsie Psychogène)</p>
+              
+              <div class="bg-white p-2 rounded text-xs space-y-1">
+                <div>
+                  <p class="font-semibold text-purple-700 mb-1">Causes :</p>
+                  <p>Schizophrénie, Névrose, prise de médicaments asséchant la bouche (anticholinergiques) incitant à boire</p>
+                </div>
+
+                <div class="bg-red-100 p-2 rounded border-2 border-red-600">
+                  <p class="font-semibold text-red-800 mb-1">⚠️ Risque :</p>
+                  <p><strong>Hyponatrémie de dilution</strong> (Intoxication par l'eau) → Convulsions, Coma</p>
+                </div>
+
+                <div class="bg-green-50 p-1 rounded">
+                  <p class="font-semibold text-green-700 mb-1">💊 Traitement :</p>
+                  <p>Psychothérapie, restriction hydrique progressive</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-green-50 p-3 rounded border-l-4 border-green-500">
+          <h4 class="font-semibold text-green-800 mb-2">💡 RÉSUMÉ POUR L'EXPERT</h4>
+          
+          <div class="bg-white p-2 rounded text-xs space-y-2">
+            <div class="bg-red-100 p-2 rounded border-2 border-red-500">
+              <p class="font-semibold text-red-800 mb-1">1️⃣ Éliminer le Diabète Sucré</p>
+              <p><strong>Bandelette urinaire</strong> (glycosurie)</p>
+            </div>
+
+            <div class="bg-blue-100 p-2 rounded border-2 border-blue-500">
+              <p class="font-semibold text-blue-800 mb-1">2️⃣ Si urines diluées, regarder l'Osmolarité Plasmatique (Posm) matinale :</p>
+              
+              <ul class="list-disc ml-5 space-y-1">
+                <li class="bg-orange-50 p-1 rounded"><strong>Posm Haute (&gt; 295) + Na+ Haut</strong> : Argument pour un <strong>Diabète Insipide</strong> (le patient perd de l'eau libre)</li>
+                <li class="bg-green-50 p-1 rounded"><strong>Posm Basse (&lt; 275) + Na+ Bas</strong> : Argument pour une <strong>Potomanie</strong> (le patient est dilué)</li>
+              </ul>
+            </div>
+
+            <div class="bg-purple-100 p-2 rounded border-4 border-purple-600">
+              <p class="font-semibold text-purple-800 mb-1">3️⃣ Restriction Hydrique pour trancher formellement</p>
+              <p class="font-bold">Gold Standard - Hospitalisation obligatoire</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-pink-50 p-3 rounded border-l-4 border-pink-500">
+          <h4 class="font-semibold text-pink-800 mb-2">🎯 POINTS CLÉS À RETENIR</h4>
+          <div class="bg-white p-2 rounded">
+            <ul class="list-disc ml-5 text-sm space-y-1">
+              <li>💧 <strong>Définitions</strong> : Polyurie &gt;3L/24h (&gt;50ml/kg/j) ≠ Pollakiurie (petits volumes fréquents)</li>
+              <li>🔄 <strong>Physiopathologie</strong> : ADH hypophyse postérieure → Régule réabsorption eau rénale</li>
+              <li>⚡ <strong>4 causes SPP</strong> : ADH absente (Central), Rein résistant (Néphrogénique), Apport excessif (Potomanie), Diurèse osmotique</li>
+              <li>🔴 <strong>ÉTAPE 1</strong> : Éliminer Diabète Sucré (cause + fréquente) - Bandelette + Glycémie</li>
+              <li>🔵 <strong>ÉTAPE 2</strong> : Diurèse aqueuse → Osmolarité Urinaire BASSE (&lt;200-300 mOsm/kg) "comme de l'eau"</li>
+              <li>🟣 <strong>ÉTAPE 3</strong> : Potomanie (boit trop, ADH freinée) vs DI (pisse trop, boit compense)</li>
+              <li>🌟 <strong>Gold Standard</strong> : Épreuve restriction hydrique hospitalière - Surveillance stricte poids/TA/Osm</li>
+              <li>📊 <strong>Interprétation</strong> : Potomanie (normalise vite), DI Central (pas réponse soif + normalise Minirin), DI Néphrogénique (aucune réponse)</li>
+              <li>💊 <strong>Étiologies #1</strong> : DI Central (trauma/neuroChx/tumeurs), DI Néphrogénique (LITHIUM cause N°1), Potomanie (schizophrénie)</li>
+              <li>💡 <strong>Aide rapide</strong> : Posm &gt;295 + Na+ haut = DI (perd eau), Posm &lt;275 + Na+ bas = Potomanie (dilué)</li>
+            </ul>
+          </div>
+        </div>
+      </div>`,
+          children: [{ code: "C19F01", name: "Diabète insipide central" }, { code: "C19F02", name: "Diabète insipide néphrogénique" }] 
+        },
         { code: "C19G", name: "L'hirsutisme", children: [{ code: "C19G01", name: "Hirsutisme par hyperplasie congénitale des surrénal" }] },
         { code: "C19H", name: "Puberté précoce centrale/périphérique", children: [{ code: "C19H01", name: "Puberté précoce d'origine centrale" }, { code: "C19H02", name: "Puberté précoce ovarienne ou testiculaire" }] },
         { code: "C19I", name: "Affections thyroïdiennes", children: [{ code: "C19I01", name: "Maladie de Basedow (Hyperthyroïdie)" }, { code: "C19I02", name: "Goitre multinodulaire toxique (Hyperthyroïdie)" }, { code: "C19I03", name: "Nodule toxique (Hyperthyroïdie)" }, { code: "C19I04", name: "Autres Hyperthyroïdies" }, { code: "C19I05", name: "Thyroïdite auto-immune d'Hashimoto" }, { code: "C19I06", name: "Myxœdème idiopathique" }, { code: "C19I07", name: "Hypothiroïdies" }] },
