@@ -8171,6 +8171,236 @@ export const aldData: AldItem[] = [
   {
     code: "C18",
     name: "Les cardiopathies congénitales",
+    tooltip: `<div class="space-y-3">
+        <h3 class="font-bold text-lg text-blue-700">❤️ CARDIOPATHIES CONGÉNITALES</h3>
+        
+        <div class="bg-blue-50 p-3 rounded border-l-4 border-blue-500">
+          <h4 class="font-semibold text-blue-800 mb-2">1️⃣ GÉNÉRALITÉS ET ÉPIDÉMIOLOGIE</h4>
+          
+          <div class="bg-white p-2 rounded text-sm space-y-2">
+            <div>
+              <p class="font-semibold text-purple-700">📊 Prévalence</p>
+              <p class="text-xs"><strong>8-10 pour 1000 naissances vivantes</strong> (~1%)</p>
+            </div>
+            
+            <div class="bg-purple-50 p-2 rounded">
+              <p class="font-semibold text-purple-800 text-xs mb-1">🧬 Étiologie</p>
+              <ul class="list-disc ml-5 text-xs space-y-1">
+                <li><strong>Multifactorielle (90%)</strong> : Interaction gènes/environnement</li>
+                <li><strong>Chromosomique</strong> :
+                  <ul class="list-circle ml-4">
+                    <li>Trisomie 21 → Canal atrio-ventriculaire</li>
+                    <li>Turner → Coarctation</li>
+                    <li>DiGeorge → Tronc artériel/Fallot</li>
+                  </ul>
+                </li>
+                <li><strong>Toxiques/Maternels</strong> : Rubéole, Alcool (SAF), Lithium, Diabète maternel</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-purple-50 p-3 rounded border-l-4 border-purple-500">
+          <h4 class="font-semibold text-purple-800 mb-2">2️⃣ CLASSIFICATION PHYSIOPATHOLOGIQUE</h4>
+          <p class="text-sm italic mb-2">⚡ 2 grands groupes selon présence/absence de cyanose</p>
+          
+          <div class="space-y-2">
+            <div class="bg-pink-100 p-2 rounded border-2 border-pink-500">
+              <p class="font-semibold text-pink-800 text-xs mb-1">A. CARDIOPATHIES ACYANOGÈNES (Sang rose)</p>
+              <p class="text-xs italic mb-2">Pas de mélange sang désaturé vers circulation systémique</p>
+              
+              <div class="space-y-1">
+                <div class="bg-white p-1 rounded">
+                  <p class="font-semibold text-blue-700 text-xs">1. Shunts Gauche-Droite (Hyperdébit pulmonaire)</p>
+                  <p class="text-xs mb-1">Sang oxygéné repasse vers cœur droit/poumons</p>
+                  <ul class="list-disc ml-5 text-xs">
+                    <li><strong>CIV</strong> (Communication Inter-Ventriculaire) : <strong>La + fréquente</strong></li>
+                    <li><strong>CIA</strong> (Communication Inter-Auriculaire)</li>
+                    <li><strong>PCA</strong> (Persistance Canal Artériel)</li>
+                    <li><strong>CAV</strong> (Canal Atrio-Ventriculaire)</li>
+                  </ul>
+                  <p class="text-xs mt-1 text-red-700"><strong>⚠️ Risque évolutif</strong> : IC, HTAP, syndrome d'Eisenmenger (inversion shunt → devient cyanogène)</p>
+                </div>
+
+                <div class="bg-white p-1 rounded">
+                  <p class="font-semibold text-orange-700 text-xs">2. Obstacles (Sténoses)</p>
+                  <ul class="list-disc ml-5 text-xs">
+                    <li><strong>Coarctation de l'Aorte</strong> : Rétrécissement isthme aortique</li>
+                    <li><strong>Sténose Valvulaire</strong> : Aortique ou Pulmonaire</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-blue-100 p-2 rounded border-2 border-blue-500">
+              <p class="font-semibold text-blue-800 text-xs mb-1">B. CARDIOPATHIES CYANOGÈNES (Sang bleu)</p>
+              <p class="text-xs italic mb-2">Shunt Droite-Gauche (sang désaturé part dans l'aorte) ou mélange complet</p>
+              
+              <div class="space-y-1">
+                <div class="bg-white p-1 rounded">
+                  <p class="font-semibold text-teal-700 text-xs">1. Débit pulmonaire DIMINUÉ (Poumon clair)</p>
+                  <ul class="list-disc ml-5 text-xs">
+                    <li><strong>Tétralogie de Fallot</strong> : <strong>+ fréquente des cyanogènes après 1 an</strong></li>
+                    <li><strong>Atrésie Pulmonaire</strong></li>
+                  </ul>
+                </div>
+
+                <div class="bg-white p-1 rounded">
+                  <p class="font-semibold text-indigo-700 text-xs">2. Débit pulmonaire AUGMENTÉ (Poumon chargé)</p>
+                  <ul class="list-disc ml-5 text-xs">
+                    <li><strong>TGV</strong> (Transposition Gros Vaisseaux) : <strong>URGENCE néonatale absolue</strong></li>
+                    <li><strong>Tronc Artériel Commun</strong></li>
+                    <li><strong>RVPAT</strong> (Retour Veineux Pulmonaire Anormal Total)</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-yellow-50 p-3 rounded border-l-4 border-yellow-500">
+          <h4 class="font-semibold text-yellow-800 mb-2">3️⃣ PATHOLOGIES CLÉS : Points de Repère</h4>
+          
+          <div class="bg-white p-2 rounded text-xs">
+            <table class="w-full">
+              <thead class="bg-yellow-100">
+                <tr>
+                  <th class="text-left p-1 border">Pathologie</th>
+                  <th class="text-left p-1 border">Clinique "Typique"</th>
+                  <th class="text-left p-1 border">Auscultation</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="border-b">
+                  <td class="p-1 border"><strong>CIV</strong></td>
+                  <td class="p-1 border">Asymptomatique si petite. IC (tétées difficiles, sueurs) si large</td>
+                  <td class="p-1 border">Souffle holosystolique intense "en rayon de roue" (bord sternal gauche)</td>
+                </tr>
+                <tr class="border-b bg-blue-50">
+                  <td class="p-1 border"><strong>CIA</strong></td>
+                  <td class="p-1 border">Asymptomatique enfance. Découverte fortuite ou âge adulte</td>
+                  <td class="p-1 border"><strong>Dédoublement fixe du B2</strong>. Souffle éjectionnel pulmonaire (hyperdébit, pas par trou)</td>
+                </tr>
+                <tr class="border-b bg-green-50">
+                  <td class="p-1 border"><strong>PCA</strong></td>
+                  <td class="p-1 border">Prématuré. <strong>Pouls bondissants</strong></td>
+                  <td class="p-1 border">Souffle <strong>continu</strong> (systolo-diastolique) sous-claviculaire gauche ("tunnelier")</td>
+                </tr>
+                <tr class="border-b bg-orange-50">
+                  <td class="p-1 border"><strong>Coarctation</strong></td>
+                  <td class="p-1 border"><strong>HTA membres supérieurs</strong>, pouls fémoraux abolis/faibles</td>
+                  <td class="p-1 border">Souffle systolique <strong>dans le dos</strong> (interscapulaire)</td>
+                </tr>
+                <tr class="border-b bg-purple-50">
+                  <td class="p-1 border"><strong>Tétralogie Fallot</strong></td>
+                  <td class="p-1 border">Cyanose progressive. Crises anoxiques (effort/pleurs). <strong>"Squatting"</strong> (accroupissement soulagement)</td>
+                  <td class="p-1 border">Souffle systolique éjectionnel (sténose pulmonaire)</td>
+                </tr>
+                <tr class="border-b bg-red-50">
+                  <td class="p-1 border"><strong>TGV</strong></td>
+                  <td class="p-1 border"><strong>Cyanose isolée réfractaire O₂</strong> dès naissance (gros bébé "rose qui bleuit")</td>
+                  <td class="p-1 border">Pas de souffle caractéristique. <strong>B2 unique et claqué</strong></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="bg-teal-50 p-3 rounded border-l-4 border-teal-500">
+          <h4 class="font-semibold text-teal-800 mb-2">4️⃣ DIAGNOSTIC</h4>
+          
+          <div class="space-y-2">
+            <div class="bg-white p-2 rounded">
+              <p class="font-semibold text-blue-700 text-xs mb-1">A. Circonstances de Découverte</p>
+              <ul class="list-disc ml-5 text-xs space-y-1">
+                <li><strong>Anténatal</strong> : Échographie fœtale (formes sévères)</li>
+                <li><strong>Néonatal</strong> : Cyanose, détresse respiratoire, abolition pouls fémoraux, souffle</li>
+                <li><strong>Nourrisson</strong> : Retard croissance (cassure pondérale), infections respiratoires répétition, dyspnée aux tétées</li>
+              </ul>
+            </div>
+
+            <div class="bg-white p-2 rounded">
+              <p class="font-semibold text-purple-700 text-xs mb-1">B. Examens Complémentaires</p>
+              <ul class="list-disc ml-5 text-xs space-y-1">
+                <li><strong>Radiographie Thoracique</strong> :
+                  <ul class="list-circle ml-4">
+                    <li>Taille cœur (Index Cardio-Thoracique)</li>
+                    <li>Vascularisation pulmonaire (Hypervascularisation = Shunt G-D / Hypovascularisation = Obstacle pulmonaire)</li>
+                    <li>Forme cœur (ex: "Cœur en sabot" dans Fallot)</li>
+                  </ul>
+                </li>
+                <li><strong>ECG</strong> : Axe du cœur, hypertrophies ventriculaires (HVD/HVG)</li>
+                <li class="bg-green-50 p-1 rounded"><strong>Échocardiographie Doppler</strong> : <strong>EXAMEN CLÉ</strong>. Confirme anatomie + quantifie shunts/gradients</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-green-50 p-3 rounded border-l-4 border-green-500">
+          <h4 class="font-semibold text-green-800 mb-2">5️⃣ PRINCIPES DE PRISE EN CHARGE</h4>
+          
+          <div class="space-y-2">
+            <div class="bg-white p-2 rounded">
+              <p class="font-semibold text-blue-700 text-xs mb-1">A. Médicale</p>
+              <ul class="list-disc ml-5 text-xs space-y-1">
+                <li><strong>Insuffisance Cardiaque</strong> : Diurétiques (Furosémide), IEC (Captopril)</li>
+                <li><strong>Fermeture Canal Artériel</strong> (Prématuré) : Ibuprofène ou Indométacine</li>
+                <li class="bg-yellow-50 p-1 rounded"><strong>Maintien Canal Artériel</strong> (Formes ducto-dépendantes) :
+                  <ul class="list-circle ml-4">
+                    <li><strong>VITAL</strong> dans certaines pathologies (TGV, Coarctation sévère, Atrésie pulmonaire)</li>
+                    <li>Assure mélange ou débit systémique en attendant chirurgie</li>
+                    <li><strong>Traitement</strong> : <strong>Prostaglandines (PGE1)</strong> en perfusion continue</li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+
+            <div class="bg-purple-50 p-2 rounded">
+              <p class="font-semibold text-purple-700 text-xs mb-1">B. Interventionnelle (Cathétérisme)</p>
+              <ul class="list-disc ml-5 text-xs">
+                <li><strong>Dilatation</strong> : Valvuloplastie (sténose pulmonaire/aortique), angioplastie (re-coarctation)</li>
+                <li><strong>Atrioseptostomie (Rashkind)</strong> : Geste sauvetage TGV (créer CIA pour mélanger sang)</li>
+                <li><strong>Fermeture</strong> : Prothèses (Amplatzer) pour CIA ou PCA</li>
+              </ul>
+            </div>
+
+            <div class="bg-orange-50 p-2 rounded">
+              <p class="font-semibold text-orange-700 text-xs mb-1">C. Chirurgicale</p>
+              <ul class="list-disc ml-5 text-xs">
+                <li><strong>Palliative</strong> : Anastomose de Blalock-Taussig (dérivation sang vers poumons, Fallot sévère)</li>
+                <li><strong>Curative</strong> : Fermeture communication (patch), "Switch" artériel (TGV), réparation valvulaire</li>
+              </ul>
+            </div>
+
+            <div class="bg-red-50 p-2 rounded border-2 border-red-500">
+              <p class="font-semibold text-red-800 text-xs mb-1">D. Prophylaxie Endocardite d'Osler</p>
+              <ul class="list-disc ml-5 text-xs">
+                <li><strong>INDISPENSABLE</strong> pour toutes cardiopathies congénitales (surtout cyanogènes ou avec matériel prothétique)</li>
+                <li>Hygiène bucco-dentaire <strong>stricte</strong></li>
+                <li>Antibioprophylaxie pour gestes à risque</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-indigo-50 p-3 rounded border-l-4 border-indigo-500">
+          <h4 class="font-semibold text-indigo-800 mb-2">🎯 POINTS CLÉS À RETENIR</h4>
+          <div class="bg-white p-2 rounded">
+            <ul class="list-disc ml-5 text-sm space-y-1">
+              <li>📊 <strong>1% naissances</strong> (8-10/1000), 90% multifactoriel</li>
+              <li>🎨 <strong>2 groupes</strong> : Acyanogènes (sang rose) vs Cyanogènes (sang bleu)</li>
+              <li>💗 <strong>CIV = la + fréquente</strong> (acyanogène)</li>
+              <li>💙 <strong>Tétralogie Fallot = + fréquente cyanogène</strong> (après 1 an)</li>
+              <li>🚨 <strong>TGV = URGENCE néonatale absolue</strong></li>
+              <li>🎵 <strong>Signes clés</strong> : CIA (dédoublement fixe B2), PCA (souffle continu), Coarctation (HTA MS + pouls fémoraux abolis)</li>
+              <li>⚠️ <strong>Shunt G-D</strong> : Risque Eisenmenger (inversion shunt → cyanose)</li>
+              <li>🔬 <strong>Échocardiographie Doppler = EXAMEN CLÉ</strong></li>
+              <li>💊 <strong>PGE1</strong> : Maintien canal artériel (formes ducto-dépendantes)</li>
+              <li>🦠 <strong>Prophylaxie endocardite d'Osler INDISPENSABLE</strong></li>
+            </ul>
+          </div>
+        </div>
+      </div>`,
     children: [
         { code: "C18A", name: "Cardiopathies congénitales non cyanogènes (CCNC)", children: [{ code: "C18A01", name: "Communication interventriculaire (CIV)" }, { code: "C18A02", name: "Communication interauriculaire (CIA)" }, { code: "C18A03", name: "Persistance du canal artériel" }, { code: "C18A04", name: "Canal atrio-ventriculaire Complet (CAV Complet)" }, { code: "C18A05", name: "Rétrécissement aortique (RAO)" }, { code: "C18A06", name: "Coarctation de l'aorte" }, { code: "C18A07", name: "Anomalies des arcs Aortiques" }, { code: "C18A08", name: "Rétrécissement mitral Congénital (RM)" }, { code: "C18A09", name: "Coeur triatrial" }, { code: "C18A10", name: "Canal Atrio-ventriculaire Partiel (CAV Partiel)" }, { code: "C18A11", name: "Autres cardiopathies congénitales non cyanogènes" }] },
         { code: "C18B", name: "Cardiopathies congénitales cyanogènes (CCC)", children: [{ code: "C18B01", name: "Sténose pulmonaire (AP)" }, { code: "C18B02", name: "Tétralogie de Fallot (T4F)" }, { code: "C18B03", name: "Trilogie de Fallot (T3F)" }, { code: "C18B04", name: "Atrésie de la tricuspide" }, { code: "C18B05", name: "Transposition des gros vaisseaux (TGV)" }, { code: "C18B06", name: "Ventricule droit à double issue (VDDI)" }, { code: "C18B07", name: "Retour veineux pulmonaire anormal (RVPA)" }, { code: "C18B08", name: "Ventricule unique" }, { code: "C18B09", name: "Autres cardiopathies congénitales cyanogènes" }] }
