@@ -10589,7 +10589,286 @@ export const aldData: AldItem[] = [
         </div>
       </div>`,
           children: [{ code: "C19I01", name: "Maladie de Basedow (Hyperthyroïdie)" }, { code: "C19I02", name: "Goitre multinodulaire toxique (Hyperthyroïdie)" }, { code: "C19I03", name: "Nodule toxique (Hyperthyroïdie)" }, { code: "C19I04", name: "Autres Hyperthyroïdies" }, { code: "C19I05", name: "Thyroïdite auto-immune d'Hashimoto" }, { code: "C19I06", name: "Myxœdème idiopathique" }, { code: "C19I07", name: "Hypothiroïdies" }] },
-        { code: "C19J", name: "Affections para thyroïdiennes", children: [{ code: "C19J01", name: "Hyperparathyroïdie" }, { code: "C19J02", name: "Hypoparathyroïdie" }] },
+        { code: "C19J", name: "Affections para thyroïdiennes",
+      tooltip: `<div class="space-y-3">
+        <h3 class="text-sm font-semibold text-gray-900 mb-2">🦴 Affections Parathyroïdiennes - Homéostasie Calcique</h3>
+        
+        <div class="bg-blue-50 border-l-4 border-blue-400 p-3 rounded">
+          <h4 class="font-semibold text-blue-900 text-xs mb-2">1️⃣ Rappel Physiologique - La Parathormone (PTH)</h4>
+          <div class="space-y-2 text-xs">
+            <div class="bg-blue-100 p-2 rounded">
+              <span class="font-semibold text-blue-900">🎯 Rôle PTH :</span> Hormone <span class="underline">HYPERCALCÉMIANTE</span> et <span class="underline">HYPOPHOSPHATÉMIANTE</span>
+            </div>
+            <div>
+              <span class="font-semibold text-blue-800">🔬 Mécanismes d'Action :</span>
+              <ul class="list-disc pl-5 mt-1 space-y-1">
+                <li><span class="font-medium">Sur l'Os :</span> Stimule la résorption osseuse → Libère Ca²⁺ dans le sang</li>
+                <li><span class="font-medium">Sur le Rein :</span> Réabsorbe Ca²⁺, Élimine Phosphates (PO₄³⁻), Active Vitamine D (1,25-OH-VitD)</li>
+                <li><span class="font-medium">Sur l'Intestin :</span> Augmente absorption Ca²⁺ (via Vitamine D active)</li>
+              </ul>
+            </div>
+            <div class="bg-blue-100 p-2 rounded">
+              <span class="font-semibold text-blue-900">📐 RÈGLE D'OR Biologique :</span>
+              <ul class="list-disc pl-5 mt-1">
+                <li><span class="underline">Toujours interpréter PTH en fonction de la Calcémie</span></li>
+                <li><span class="font-medium">Formule Ca corrigée :</span> Ca mesurée + 0.02 × (40 - Albumine g/L)</li>
+                <li><span class="italic text-blue-700">Raison :</span> 50% du calcium circulant est lié à l'albumine</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-purple-50 border-l-4 border-purple-400 p-3 rounded">
+          <h4 class="font-semibold text-purple-900 text-xs mb-2">2️⃣ Hyperparathyroïdie Primaire (HPT 1)</h4>
+          <div class="space-y-2 text-xs">
+            <p class="font-semibold text-purple-800">🔍 Définition : Cause N°1 d'hypercalcémie ambulatoire. Sécrétion excessive et AUTONOME de PTH, non freinée par l'hypercalcémie.</p>
+            <div>
+              <span class="font-semibold text-purple-800">🎯 Étiologies :</span>
+              <ul class="list-disc pl-5 mt-1">
+                <li><span class="font-medium">Adénome parathyroïdien unique (85%) :</span> Tumeur bénigne d'une glande</li>
+                <li><span class="font-medium">Hyperplasie diffuse (15%) :</span> Touche les 4 glandes (sporadique ou MEN1/MEN2)</li>
+                <li><span class="font-medium">Carcinome parathyroïdien (< 1%) :</span> Rare, hypercalcémie majeure, masse palpable</li>
+              </ul>
+            </div>
+            <div class="bg-purple-100 p-2 rounded">
+              <span class="font-semibold text-purple-900">🔬 Biologie - LE TRÉPIED DIAGNOSTIQUE :</span>
+              <ul class="list-disc pl-5 mt-1">
+                <li><span class="font-medium">1. Hypercalcémie :</span> Parfois fluctuante ou à limite supérieure</li>
+                <li><span class="font-medium">2. Hypophosphorémie :</span> Phosphates bas (PTH élimine PO₄)</li>
+                <li><span class="font-medium">3. PTH inadaptée :</span> <span class="underline">Élevée ou "Normal-Haut"</span> (alors qu'elle devrait être effondrée face hypercalcémie)</li>
+                <li><span class="font-medium">Autres :</span> Hypercalciurie (risque lithiase), 25-OH-VitD souvent basse</li>
+              </ul>
+            </div>
+            <div>
+              <span class="font-semibold text-purple-800">🩺 Clinique - "Bones, Stones, Groans and Moans" :</span>
+              <ul class="list-disc pl-5 mt-1 space-y-1">
+                <li><span class="font-medium">Souvent ASYMPTOMATIQUE aujourd'hui</span> (découverte fortuite)</li>
+                <li><span class="font-medium">🪨 STONES (Rénal) :</span> Lithiases rénales calciques, néphrocalcinose, insuffisance rénale</li>
+                <li><span class="font-medium">🦴 BONES (Osseux) :</span> Douleurs osseuses, ostéoporose (corticale radius+++), fracture pathologique, Forme historique = Ostéite fibrokystique Von Recklinghausen</li>
+                <li><span class="font-medium">😫 GROANS (Digestif) :</span> Nausées, constipation, pancréatite, ulcère gastro-duodénal</li>
+                <li><span class="font-medium">😞 MOANS (Neuro-psy) :</span> Asthénie, dépression, confusion ("Pseudo-démence")</li>
+              </ul>
+            </div>
+            <div>
+              <span class="font-semibold text-purple-800">📸 Bilan de Localisation (Pré-opératoire uniquement) :</span>
+              <ul class="list-disc pl-5 mt-1">
+                <li><span class="font-medium">Échographie Cervicale :</span> Opérateur-dépendant</li>
+                <li><span class="font-medium">Scintigraphie Sestamibi (MIBI) :</span> <span class="underline">Examen CLÉ</span> pour repérer adénome ectopique</li>
+                <li><span class="font-medium">Scanner 4D ou TEP-Choline :</span> 2ème intention si imagerie classique négative</li>
+              </ul>
+            </div>
+            <div class="bg-purple-100 p-2 rounded">
+              <span class="font-semibold text-purple-900">💊 Traitement :</span>
+              <ul class="list-disc pl-5 mt-1">
+                <li><span class="font-medium">CHIRURGICAL (Gold Standard) :</span> Parathyroïdectomie (ciblée si adénome localisé, ou exploration 4 sites)</li>
+                <li><span class="font-medium">Critères opératoires :</span> Âge < 50 ans, Ca > 2.85 mmol/L, Clairance créat < 60, Ostéoporose, ou Symptômes</li>
+                <li><span class="font-medium">Médical :</span> Cinacalcet (Mimpara®) - Calcimimétique qui "trompe" la glande pour baisser PTH (si chirurgie contre-indiquée)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-yellow-50 border-l-4 border-yellow-400 p-3 rounded">
+          <h4 class="font-semibold text-yellow-900 text-xs mb-2">3️⃣ HPT Secondaire (HPT 2) et Tertiaire (HPT 3)</h4>
+          <div class="space-y-2 text-xs">
+            <p class="italic text-yellow-800">⚠️ Ne pas confondre avec HPT primaire. Ici, les glandes sont saines au départ, elles réagissent à un problème extérieur.</p>
+            <div class="bg-yellow-100 p-2 rounded">
+              <span class="font-semibold text-yellow-900">📘 HPT SECONDAIRE (HPT 2) :</span>
+              <ul class="list-disc pl-5 mt-1 space-y-1">
+                <li><span class="font-medium">Définition :</span> Réponse <span class="underline">PHYSIOLOGIQUE</span> à une hypocalcémie chronique</li>
+                <li><span class="font-medium">Causes :</span> Insuffisance Rénale Chronique (IRC) +++, Carence sévère Vitamine D, Malabsorption intestinale</li>
+                <li><span class="font-medium">Biologie :</span>
+                  <ul class="list-disc pl-8 mt-1">
+                    <li>Calcémie : <span class="underline">BASSE ou NORMALE</span></li>
+                    <li>PTH : <span class="underline">Élevée</span> (Réactionnelle, appropriée)</li>
+                    <li>Phosphore : Élevé (IRC)</li>
+                  </ul>
+                </li>
+                <li><span class="font-medium">Traitement :</span> Corriger la cause (Vitamine D, Chélateurs phosphore). <span class="font-semibold text-red-700">PAS de chirurgie</span></li>
+              </ul>
+            </div>
+            <div class="bg-yellow-100 p-2 rounded">
+              <span class="font-semibold text-yellow-900">📕 HPT TERTIAIRE (HPT 3) :</span>
+              <ul class="list-disc pl-5 mt-1 space-y-1">
+                <li><span class="font-medium">Définition :</span> Complication HPT secondaire prolongée (dialysé, post-transplantation rénale). Glandes hyperplasiées deviennent <span class="underline">AUTONOMES</span> ("elles s'emballent")</li>
+                <li><span class="font-medium">Biologie :</span>
+                  <ul class="list-disc pl-8 mt-1">
+                    <li>Calcémie : <span class="underline">ÉLEVÉE</span> (hypercalcémie)</li>
+                    <li>PTH : <span class="underline">Très Élevée</span></li>
+                  </ul>
+                </li>
+                <li><span class="font-medium">Traitement :</span> Chirurgie (Parathyroïdectomie subtotale - laisser 1/2 glande)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-orange-50 border-l-4 border-orange-400 p-3 rounded">
+          <h4 class="font-semibold text-orange-900 text-xs mb-2">4️⃣ Hypoparathyroïdie</h4>
+          <div class="space-y-2 text-xs">
+            <div>
+              <span class="font-semibold text-orange-800">🔍 Étiologies :</span>
+              <ul class="list-disc pl-5 mt-1 space-y-1">
+                <li><span class="font-medium">Post-chirurgicale (N°1 fréquence) :</span> Après thyroïdectomie totale (lésion/dévascularisation parathyroïdes). Transitoire ou définitive</li>
+                <li><span class="font-medium">Auto-immune :</span> Syndrome polyendocrinien (APS type 1)</li>
+                <li><span class="font-medium">Génétique :</span> Syndrome de DiGeorge (microdélétion 22q11)</li>
+                <li><span class="font-medium">Infiltrative :</span> Hémochromatose, Wilson, Métastases</li>
+                <li><span class="font-medium text-red-700">⚠️ Hypomagnésémie sévère :</span> Magnésium nécessaire sécrétion PTH → Hypomagnésémie bloque PTH → Hypocalcémie</li>
+              </ul>
+            </div>
+            <div class="bg-orange-100 p-2 rounded">
+              <span class="font-semibold text-orange-900">🔬 Biologie :</span>
+              <ul class="list-disc pl-5 mt-1">
+                <li><span class="font-medium">Hypocalcémie</span></li>
+                <li><span class="font-medium">Hyperphosphorémie</span> (PTH n'élimine plus PO₄)</li>
+                <li><span class="font-medium">PTH Basse ou inadaptée</span> (normale-basse)</li>
+              </ul>
+            </div>
+            <div>
+              <span class="font-semibold text-orange-800">🩺 Clinique - Syndrome d'Hyperexcitabilité Neuromusculaire :</span>
+              <ul class="list-disc pl-5 mt-1 space-y-1">
+                <li><span class="font-medium">Paresthésies :</span> Fourmillements péribuccaux et des extrémités</li>
+                <li><span class="font-medium">TÉTANIE :</span> Contractures musculaires douloureuses ("Main d'accoucheur")</li>
+                <li><span class="font-medium">Signe de Chvostek :</span> Contraction lèvre à la percussion joue</li>
+                <li><span class="font-medium">Signe de Trousseau :</span> Main d'accoucheur après occlusion brassard tension (3 min)</li>
+                <li><span class="font-medium text-red-700">⚡ ECG :</span> Allongement QT (risque torsade de pointes)</li>
+                <li><span class="font-medium">Chronique :</span> Cataracte, calcifications cérébrales, dentition défectueuse</li>
+              </ul>
+            </div>
+            <div class="bg-orange-100 p-2 rounded">
+              <span class="font-semibold text-orange-900">💊 Traitement :</span>
+              <p class="mt-1 italic">🎯 <span class="font-semibold">But :</span> <span class="underline">NE PAS normaliser</span> la calcémie (risque lithiase par hypercalciurie), mais la maintenir <span class="underline">limite basse asymptomatique</span> (2.0-2.2 mmol/L)</p>
+              <ul class="list-disc pl-5 mt-1 space-y-1">
+                <li><span class="font-medium">Calcium :</span> Carbonate de calcium 1-3 g/j PO</li>
+                <li><span class="font-medium">Vitamine D ACTIVE :</span> Un-Alpha (Alfacalcidol) ou Rocaltrol (Calcitriol)
+                  <ul class="list-disc pl-8 mt-1">
+                    <li><span class="italic text-orange-700">Note :</span> Vitamine D native ne marche pas bien (pas de PTH pour l'activer rein)</li>
+                  </ul>
+                </li>
+                <li><span class="font-medium">Magnésium :</span> Si carence associée (Magnésium 0.5-1 g/j)</li>
+                <li><span class="font-medium">Surveillance :</span> Calcémie, calciurie 24h (éviter hypercalciurie > 7.5 mmol/24h)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-green-50 border-l-4 border-green-400 p-3 rounded">
+          <h4 class="font-semibold text-green-900 text-xs mb-2">5️⃣ Diagnostic Différentiel des Hypercalcémies (Tableau Expert)</h4>
+          <div class="space-y-2 text-xs">
+            <div class="bg-green-100 p-2 rounded overflow-x-auto">
+              <table class="w-full text-xs border-collapse">
+                <thead>
+                  <tr class="bg-green-200">
+                    <th class="border border-green-300 p-1 text-left">Pathologie</th>
+                    <th class="border border-green-300 p-1 text-left">Calcémie</th>
+                    <th class="border border-green-300 p-1 text-left">Phosphore</th>
+                    <th class="border border-green-300 p-1 text-left">PTH</th>
+                    <th class="border border-green-300 p-1 text-left">Particularités</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="border border-green-300 p-1 font-medium">HPT Primaire</td>
+                    <td class="border border-green-300 p-1">↑ Élevée</td>
+                    <td class="border border-green-300 p-1">↓ Bas</td>
+                    <td class="border border-green-300 p-1">↑ Élevée / Inadaptée</td>
+                    <td class="border border-green-300 p-1">Hypercalciurie. Imagerie : Adénome</td>
+                  </tr>
+                  <tr>
+                    <td class="border border-green-300 p-1 font-medium">HPT Secondaire</td>
+                    <td class="border border-green-300 p-1">↓ Basse / Nle</td>
+                    <td class="border border-green-300 p-1">↑ Élevé (IRC)</td>
+                    <td class="border border-green-300 p-1">↑ Élevée</td>
+                    <td class="border border-green-300 p-1">IRC. PTH réactionnelle</td>
+                  </tr>
+                  <tr>
+                    <td class="border border-green-300 p-1 font-medium">HPT Tertiaire</td>
+                    <td class="border border-green-300 p-1">↑ Élevée</td>
+                    <td class="border border-green-300 p-1">↑ Élevé</td>
+                    <td class="border border-green-300 p-1">↑↑ Très Élevée</td>
+                    <td class="border border-green-300 p-1">Post-dialyse. Autonomie glandes</td>
+                  </tr>
+                  <tr>
+                    <td class="border border-green-300 p-1 font-medium">Néoplasie (Paranéoplasique)</td>
+                    <td class="border border-green-300 p-1">↑ Élevée</td>
+                    <td class="border border-green-300 p-1">Nle / ↓ Bas</td>
+                    <td class="border border-green-300 p-1">↓↓ Effondrée (freinée)</td>
+                    <td class="border border-green-300 p-1">PTHrP élevée. Cancer (poumon, sein, rein)</td>
+                  </tr>
+                  <tr>
+                    <td class="border border-green-300 p-1 font-medium">Intoxication Vitamine D</td>
+                    <td class="border border-green-300 p-1">↑ Élevée</td>
+                    <td class="border border-green-300 p-1">↑ Élevé</td>
+                    <td class="border border-green-300 p-1">↓↓ Effondrée</td>
+                    <td class="border border-green-300 p-1">25-OH-VitD très élevée. Anamnèse</td>
+                  </tr>
+                  <tr>
+                    <td class="border border-green-300 p-1 font-medium text-red-700">FHH (Hypercalcémie Hypocalciurique Familiale)</td>
+                    <td class="border border-green-300 p-1">↑ Modérée</td>
+                    <td class="border border-green-300 p-1">Nle</td>
+                    <td class="border border-green-300 p-1">Nle / ↑ Légère</td>
+                    <td class="border border-green-300 p-1"><span class="font-bold">Calciurie BASSE < 0.01. NE JAMAIS OPÉRER !</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="bg-green-100 p-2 rounded">
+              <span class="font-semibold text-green-900">⚠️ Note sur FHH (Hypercalcémie Hypocalciurique Familiale) :</span>
+              <ul class="list-disc pl-5 mt-1">
+                <li><span class="font-medium">Génétique :</span> Mutation récepteur calcium (CaSR) → Glandes "insensibles"</li>
+                <li><span class="font-medium">Bénin :</span> Asymptomatique, découverte familiale</li>
+                <li><span class="font-medium">Diagnostic :</span> Clairance Ca/créat < 0.01 (calcium urinaire BAS)</li>
+                <li><span class="font-medium text-red-700">⛔ PIÈGE :</span> <span class="underline">NE JAMAIS OPÉRER</span> (ressemble HPT primaire mais bénin)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-red-50 border-l-4 border-red-400 p-3 rounded">
+          <h4 class="font-semibold text-red-900 text-xs mb-2">⚡ 6️⃣ URGENCE : Crise Aiguë Hypercalcémique</h4>
+          <div class="space-y-2 text-xs">
+            <div class="bg-red-100 p-2 rounded">
+              <span class="font-semibold text-red-900">🚨 Définition :</span> Calcémie > 3.5 mmol/L (140 mg/L) = URGENCE VITALE
+            </div>
+            <div>
+              <span class="font-semibold text-red-800">💀 Risques :</span>
+              <ul class="list-disc pl-5 mt-1">
+                <li><span class="font-medium">Arrêt cardiaque</span> (Fibrillation Ventriculaire)</li>
+                <li><span class="font-medium">Coma</span> hypercalcémique</li>
+                <li><span class="font-medium">Déshydratation aiguë</span> (polyurie osmotique)</li>
+                <li><span class="font-medium">Insuffisance rénale aiguë</span></li>
+              </ul>
+            </div>
+            <div class="bg-red-100 p-2 rounded">
+              <span class="font-semibold text-red-900">💊 Traitement URGENT :</span>
+              <ul class="list-disc pl-5 mt-1 space-y-1">
+                <li><span class="font-medium">1️⃣ RÉHYDRATATION MASSIVE :</span> Sérum Salé Isotonique (NaCl 0.9%) <span class="underline">4-6 Litres/24h</span>
+                  <ul class="list-disc pl-8 mt-1">
+                    <li>Compense la déshydratation + dilue la calcémie + augmente calciurie</li>
+                  </ul>
+                </li>
+                <li><span class="font-medium">2️⃣ BISPHOSPHONATES IV :</span> Zometa (Zolédronate 4 mg) ou Aredia (Pamidronate)
+                  <ul class="list-disc pl-8 mt-1">
+                    <li>Inhibent résorption osseuse</li>
+                    <li><span class="italic text-red-700">⏱️ Action retardée :</span> 24-48h pour effet maximal</li>
+                  </ul>
+                </li>
+                <li><span class="font-medium">3️⃣ FUROSÉMIDE (Lasilix) :</span> <span class="underline">UNIQUEMENT APRÈS réhydratation</span> (forcer calciurie)</li>
+                <li><span class="font-medium">4️⃣ DIALYSE :</span> Si insuffisance rénale ou pronostic vital immédiat engagé</li>
+                <li><span class="font-medium">Autres :</span> Calcitonine (action rapide mais brève), Corticoïdes (si granulomatoses/lymphomes)</li>
+              </ul>
+            </div>
+            <div>
+              <span class="font-semibold text-red-800">⚠️ Surveillance :</span> Calcémie répétée toutes les 4-6h, ECG continu, ionogramme, fonction rénale
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-gray-100 border-l-4 border-gray-400 p-2 rounded mt-2">
+          <p class="text-xs text-gray-700"><span class="font-semibold">📌 Synthèse pour l'Expert :</span> PTH = hypercalcémiante/hypophosphatémiante. HPT primaire = Trépied (Ca↑ PO₄↓ PTH inappropriée) "Bones Stones Groans Moans" chirurgie. HPT secondaire = Réponse IRC Ca basse traitement médical. HPT tertiaire = Autonomisation chirurgie. Hypoparathyroïdie post-op = Ca + VitD active (pas trop normaliser). FHH = NE PAS OPÉRER calciurie basse. Crise hypercalcémique > 3.5 = Réhydratation massive + Bisphosphonates.</p>
+        </div>
+      </div>`,
+          children: [{ code: "C19J01", name: "Hyperparathyroïdie" }, { code: "C19J02", name: "Hypoparathyroïdie" }] },
         { code: "C19K", name: "Anomalies de la sécrétion pancréatique interne", children: [{ code: "C19K01", name: "Hyperinsulinisme" }, { code: "C19K02", name: "Hyperglycémie" }, { code: "C19K03", name: "Autres anomalies de la sécrétion pancréatique inter" }] }
     ],
   },
