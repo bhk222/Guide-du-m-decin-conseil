@@ -9155,7 +9155,277 @@ export const aldData: AldItem[] = [
         </div>
       </div>`
             }, 
-            { code: "C19C02", name: "Syndrome de Sheehan" }
+            { 
+              code: "C19C02", 
+              name: "Syndrome de Sheehan",
+              tooltip: `<div class="space-y-3">
+        <h3 class="font-bold text-lg text-red-700">🩸 SYNDROME DE SHEEHAN</h3>
+        
+        <div class="bg-blue-50 p-3 rounded border-l-4 border-blue-500">
+          <h4 class="font-semibold text-blue-800 mb-2">1️⃣ DÉFINITION ET PHYSIOPATHOLOGIE</h4>
+          
+          <div class="bg-white p-2 rounded text-sm space-y-2">
+            <div>
+              <p class="font-semibold text-purple-700">📋 Définition</p>
+              <p class="text-xs"><strong>Nécrose ischémique de l'anté-hypophyse</strong> consécutive à un <strong>collapsus cardio-vasculaire</strong> (choc hémorragique) lors de l'accouchement</p>
+            </div>
+            
+            <div class="bg-pink-100 p-2 rounded border-2 border-pink-500">
+              <p class="font-semibold text-pink-800 text-xs mb-1">🤰 Le Terrain (Grossesse)</p>
+              <ul class="list-disc ml-5 text-xs">
+                <li>Durant la grossesse, l'hypophyse <strong>double de volume</strong> (hyperplasie cellules à Prolactine)</li>
+                <li>Vascularisation n'augmente PAS proportionnellement</li>
+                <li>→ Hypophyse extrêmement <strong>sensible à l'hypoxie</strong></li>
+              </ul>
+            </div>
+
+            <div class="bg-red-100 p-2 rounded border-2 border-red-500">
+              <p class="font-semibold text-red-800 text-xs mb-1">💥 L'Événement Déclenchant</p>
+              <p class="text-xs font-bold mb-1">Cascade pathologique :</p>
+              <ol class="list-decimal ml-5 text-xs">
+                <li><strong>Hémorragie de la délivrance sévère</strong></li>
+                <li>→ Hypotension profonde et prolongée</li>
+                <li>→ Vasospasme des artères hypophysaires</li>
+                <li>→ <strong>Infarctus (Nécrose) de la glande</strong></li>
+              </ol>
+            </div>
+
+            <div class="bg-teal-50 p-2 rounded">
+              <p class="font-semibold text-teal-800 text-xs mb-1">🔬 Spécificité Anatomique</p>
+              <p class="text-xs">La <strong>post-hypophyse</strong> (neuro-hypophyse) a une vascularisation différente et est souvent <strong>épargnée</strong></p>
+              <p class="text-xs italic">→ Donc PAS de diabète insipide en général</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-yellow-50 p-3 rounded border-l-4 border-yellow-500">
+          <h4 class="font-semibold text-yellow-800 mb-2">2️⃣ PRÉSENTATION CLINIQUE</h4>
+          <p class="text-sm italic mb-2">Diagnostic peut être précoce (post-partum) ou rétrospectif (des années plus tard)</p>
+          
+          <div class="space-y-2">
+            <div class="bg-red-100 p-2 rounded border-4 border-red-500">
+              <p class="font-semibold text-red-800 text-xs mb-1">🚨 A. Signes Précoces (Post-Partum Immédiat)</p>
+              <p class="text-xs font-bold text-purple-700 mb-1">🌟 TRIADE D'ALERTE après hémorragie :</p>
+              
+              <div class="space-y-1 text-xs">
+                <div class="bg-white p-2 rounded border-2 border-pink-500">
+                  <p class="font-bold text-pink-800">1. AGALACTIE</p>
+                  <p><strong>Absence totale de montée laiteuse</strong></p>
+                  <p class="text-xs italic">(Nécrose des cellules lactotropes)</p>
+                </div>
+
+                <div class="bg-white p-2 rounded border-2 border-orange-500">
+                  <p class="font-bold text-orange-800">2. Absence de Retour de Couches</p>
+                  <p><strong>Aménorrhée persistante</strong> après l'accouchement</p>
+                </div>
+
+                <div class="bg-white p-2 rounded border-2 border-yellow-600">
+                  <p class="font-bold text-yellow-800">3. Asthénie Majeure</p>
+                  <p>Souvent mise sur le compte de l'accouchement difficile ou de l'anémie</p>
+                  <p class="text-xs italic text-red-600">⚠️ Retarde le diagnostic</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-purple-100 p-2 rounded">
+              <p class="font-semibold text-purple-800 text-xs mb-1">B. Signes Tardifs (Panhypopituitarisme Chronique)</p>
+              <p class="text-xs italic mb-1">Si diagnostic non fait au début → Insuffisance anté-hypophysaire globale</p>
+              
+              <ul class="list-disc ml-5 text-xs space-y-1">
+                <li class="bg-white p-1 rounded"><strong>Signes cutanés caractéristiques</strong> :
+                  <ul class="list-circle ml-4">
+                    <li>Dépigmentation <strong>aréoles mammaires</strong> et organes génitaux</li>
+                    <li>Peau pâle, sèche et ridée (<strong>"Faciès vieillot"</strong>)</li>
+                    <li>Perte des poils axillaires et pubiens</li>
+                  </ul>
+                </li>
+                <li class="bg-white p-1 rounded"><strong>Signes thyroïdiens</strong> : Frilosité, constipation, apathie (Hypothyroïdie centrale)</li>
+                <li class="bg-white p-1 rounded"><strong>Signes surrénaliens</strong> : Hypotension, amaigrissement, faiblesse (Insuffisance corticotrope)</li>
+                <li class="bg-white p-1 rounded"><strong>Atrophie mammaire et génitale</strong></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-teal-50 p-3 rounded border-l-4 border-teal-500">
+          <h4 class="font-semibold text-teal-800 mb-2">3️⃣ DIAGNOSTIC BIOLOGIQUE</h4>
+          <p class="text-sm font-bold text-purple-700 mb-2">Profil = Panhypopituitarisme avec PARTICULARITÉ sur la Prolactine</p>
+          
+          <div class="space-y-2">
+            <div class="bg-white p-2 rounded text-xs">
+              <ul class="list-disc ml-5 space-y-1">
+                <li><strong>Insuffisance thyréotrope</strong> : T4L basse + TSH basse ou inadaptée</li>
+                <li><strong>Insuffisance corticotrope</strong> : Cortisol bas + ACTH basse ou inadaptée</li>
+                <li><strong>Insuffisance gonadotrope</strong> : Estradiol bas + FSH/LH basses</li>
+                <li><strong>Insuffisance somatotrope</strong> : IGF-1 effondrée</li>
+              </ul>
+            </div>
+
+            <div class="bg-pink-100 p-2 rounded border-4 border-pink-600">
+              <p class="font-semibold text-pink-800 text-xs mb-1">🌟 PROLACTINE : Le Signe Distinctif MAJEUR</p>
+              
+              <div class="bg-white p-2 rounded text-xs space-y-1">
+                <div class="flex items-start space-x-2">
+                  <span>❌</span>
+                  <div>
+                    <p class="font-bold">Dans la plupart des pathologies hypophysaires (tumeurs) :</p>
+                    <p>Prolactine HAUTE (par compression de la tige)</p>
+                  </div>
+                </div>
+                
+                <div class="flex items-start space-x-2 bg-red-50 p-2 rounded border-2 border-red-500">
+                  <span>✅</span>
+                  <div>
+                    <p class="font-bold text-red-700">Dans le Sheehan :</p>
+                    <p><strong>Prolactine BASSE ou indétectable</strong></p>
+                    <p class="text-xs italic">(Car les cellules qui la fabriquent sont mortes)</p>
+                    <p class="text-xs">Pas de réponse au test de stimulation au TRH</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-purple-50 p-3 rounded border-l-4 border-purple-500">
+          <h4 class="font-semibold text-purple-800 mb-2">4️⃣ IMAGERIE (IRM HYPOPHYSAIRE)</h4>
+          <p class="text-sm italic mb-2">Aspect radiologique évolue avec le temps (histoire naturelle de la nécrose)</p>
+          
+          <div class="space-y-2">
+            <div class="bg-red-100 p-2 rounded border-2 border-red-500">
+              <p class="font-semibold text-red-800 text-xs mb-1">📍 Stade Aigu (Post-Partum)</p>
+              <ul class="list-disc ml-5 text-xs">
+                <li>Hypophyse <strong>augmentée de volume</strong></li>
+                <li><strong>Hypersignal T1 spontané</strong> (signe hémorragie/infarctus)</li>
+                <li><strong>Ne prend PAS le contraste</strong></li>
+              </ul>
+            </div>
+
+            <div class="bg-blue-100 p-2 rounded border-2 border-blue-500">
+              <p class="font-semibold text-blue-800 text-xs mb-1">📍 Stade Chronique (Séquellaire)</p>
+              
+              <div class="space-y-1 text-xs">
+                <div class="bg-white p-1 rounded">
+                  <p class="font-semibold text-indigo-700">Atrophie sévère de la glande</p>
+                  <p>Glande devient <strong>invisible</strong></p>
+                </div>
+
+                <div class="bg-teal-50 p-2 rounded border-2 border-teal-500">
+                  <p class="font-semibold text-teal-800 mb-1">🌟 Aspect de <strong>SELLE TURCIQUE VIDE (Empty Sella)</strong></p>
+                  <ul class="list-disc ml-5">
+                    <li>Loge hypophysaire remplie de <strong>LCR</strong> (Liquide Céphalo-Rachidien)</li>
+                    <li>Hypophyse aplatie au fond (<strong>"Lamping" hypophysaire</strong>)</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-orange-50 p-3 rounded border-l-4 border-orange-500">
+          <h4 class="font-semibold text-orange-800 mb-2">5️⃣ DIAGNOSTIC DIFFÉRENTIEL</h4>
+          
+          <div class="space-y-2 text-xs">
+            <div class="bg-yellow-100 p-2 rounded border-2 border-yellow-500">
+              <p class="font-semibold text-yellow-800 mb-1">🔶 Hypophysite Lymphocytaire (Auto-immune)</p>
+              <p class="mb-1">Survient aussi en <strong>fin de grossesse/post-partum</strong></p>
+              
+              <div class="bg-white p-2 rounded">
+                <p class="font-semibold text-purple-700 mb-1">Différence :</p>
+                <ul class="list-disc ml-5">
+                  <li>À l'IRM : Hypophyse <strong>grosse et inflammatoire</strong> (pas nécrosée/atrophique au début)</li>
+                  <li>Récupération possible spontanément ou sous corticoïdes</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="bg-red-100 p-2 rounded">
+              <p class="font-semibold text-red-800 mb-1">🔶 Apoplexie d'un Adénome Préexistant</p>
+              <p>Hémorragie brutale dans un adénome méconnu</p>
+              <p class="font-semibold">Signes : Céphalées violentes + Troubles visuels (rares dans le Sheehan)</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-green-50 p-3 rounded border-l-4 border-green-500">
+          <h4 class="font-semibold text-green-800 mb-2">6️⃣ PRISE EN CHARGE THÉRAPEUTIQUE</h4>
+          <p class="text-sm font-bold text-purple-700 mb-2">💊 Traitement classique du <strong>Panhypopituitarisme DÉFINITIF</strong></p>
+          
+          <div class="space-y-2 text-xs">
+            <div class="bg-red-100 p-2 rounded border-4 border-red-600">
+              <p class="font-semibold text-red-800 mb-1">1️⃣ Substitution Corticotrope (LA PRIORITÉ)</p>
+              <p class="font-bold"><strong>Hydrocortisone (15-20 mg/j)</strong></p>
+              <p class="text-xs italic text-red-700">⚠️ Toujours débuter AVANT les hormones thyroïdiennes</p>
+            </div>
+
+            <div class="bg-blue-100 p-2 rounded">
+              <p class="font-semibold text-blue-800 mb-1">2️⃣ Substitution Thyréotrope</p>
+              <p><strong>Lévothyroxine</strong></p>
+            </div>
+
+            <div class="bg-pink-100 p-2 rounded border-2 border-pink-500">
+              <p class="font-semibold text-pink-800 mb-1">3️⃣ Substitution Gonadotrope (Estro-progestatifs)</p>
+              
+              <div class="bg-white p-1 rounded">
+                <ul class="list-disc ml-5">
+                  <li><strong>Indispensable chez la femme jeune</strong> :
+                    <ul class="list-circle ml-4">
+                      <li>Prévenir l'ostéoporose</li>
+                      <li>Maintenir trophicité génitale/qualité de vie</li>
+                    </ul>
+                  </li>
+                  <li>Arrêt vers l'âge théorique de la ménopause (50 ans)</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="bg-yellow-100 p-2 rounded">
+              <p class="font-semibold text-yellow-800 mb-1">4️⃣ Substitution en GH</p>
+              <p>Discutée selon la qualité de vie et les moyens financiers</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-indigo-50 p-3 rounded border-l-4 border-indigo-500">
+          <h4 class="font-semibold text-indigo-800 mb-2">💡 7️⃣ NOTE DE L'EXPERT</h4>
+          
+          <div class="bg-white p-2 rounded text-xs space-y-2">
+            <div class="bg-yellow-100 p-2 rounded border-2 border-yellow-500">
+              <p class="font-semibold text-yellow-800 mb-1">⚠️ Le Sheehan peut être PARTIEL</p>
+              <p>Certaines femmes :</p>
+              <ul class="list-disc ml-5">
+                <li>Gardent des <strong>cycles menstruels irréguliers</strong></li>
+                <li>Peuvent même avoir une <strong>grossesse ultérieure spontanée</strong></li>
+                <li>Mais décompensent une <strong>insuffisance surrénalienne aiguë</strong> lors d'un stress chirurgical ou infectieux <strong>des années plus tard</strong></li>
+              </ul>
+            </div>
+
+            <div class="bg-red-100 p-2 rounded border-4 border-red-600">
+              <p class="font-semibold text-red-800 mb-1">📋 RÈGLE CLINIQUE</p>
+              <p class="font-bold">Tout antécédent d'<strong>accouchement hémorragique avec transfusion</strong> impose une <strong>vigilance endocrinienne À VIE</strong></p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-pink-50 p-3 rounded border-l-4 border-pink-500">
+          <h4 class="font-semibold text-pink-800 mb-2">🎯 POINTS CLÉS À RETENIR</h4>
+          <div class="bg-white p-2 rounded">
+            <ul class="list-disc ml-5 text-sm space-y-1">
+              <li>🩸 <strong>Définition</strong> : Nécrose ischémique anté-hypophyse post-hémorragie délivrance sévère</li>
+              <li>🤰 <strong>Terrain</strong> : Hypophyse double volume grossesse (hyperplasie prolactine) + vascularisation insuffisante → Sensible hypoxie</li>
+              <li>🚨 <strong>TRIADE D'ALERTE post-partum</strong> : Agalactie + Absence retour de couches + Asthénie majeure</li>
+              <li>🌟 <strong>Signe distinctif MAJEUR</strong> : Prolactine BASSE/indétectable (cellules mortes) ≠ autres pathologies hypophysaires (prolactine haute)</li>
+              <li>📷 <strong>IRM aigu</strong> : Hypophyse augmentée, hypersignal T1, pas de contraste</li>
+              <li>📷 <strong>IRM chronique</strong> : SELLE TURCIQUE VIDE (Empty Sella) - Hypophyse aplatie, loge remplie LCR</li>
+              <li>🔬 <strong>Biologie</strong> : Panhypopituitarisme (T4L↓, Cortisol↓, Estradiol↓, IGF-1↓) + Prolactine BASSE</li>
+              <li>💊 <strong>Traitement</strong> : Hydrocortisone PRIORITÉ (15-20mg/j) PUIS Lévothyroxine + Estro-progestatifs</li>
+              <li>⚠️ <strong>Formes partielles</strong> : Cycles irréguliers possibles, décompensation surrénalienne stress des années après</li>
+              <li>📋 <strong>Règle d'or</strong> : Accouchement hémorragique + transfusion = Vigilance endocrinienne À VIE</li>
+            </ul>
+          </div>
+        </div>
+      </div>`
+            }
           ] 
         },
         { code: "C19D", name: "Insuffisance surrénalienne primaire/se...", children: [{ code: "C19D01", name: "Maladie d'Addison" }, { code: "C19D02", name: "Syndrome de Nelson" }] },
