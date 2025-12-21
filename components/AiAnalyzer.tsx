@@ -4039,9 +4039,9 @@ export const findCandidateInjuries = (text: string, externalKeywords?: string[])
     // DEBUG: Log des top matches avant retour
     const topResults = filteredMatches
         .sort((a, b) => b.score - a.score)
-        .slice(0, 5);
+        .slice(0, 10);
     
-    console.log('🎯 TOP 5 RÉSULTATS:', topResults.map(m => ({
+    console.log('🎯 TOP 10 RÉSULTATS:', topResults.map(m => ({
         name: m.injury.name,
         score: m.score,
         path: m.path
