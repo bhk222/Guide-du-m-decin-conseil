@@ -11137,6 +11137,274 @@ export const aldData: AldItem[] = [
   {
     code: "C23",
     name: "Cirrhoses du foie",
+    tooltip: `<div class="space-y-3">
+        <h3 class="text-sm font-semibold text-gray-900 mb-2">🫀 Cirrhoses du Foie - Insuffisance Hépatocellulaire et Hypertension Portale</h3>
+        
+        <div class="bg-blue-50 border-l-4 border-blue-400 p-3 rounded">
+          <h4 class="font-semibold text-blue-900 text-xs mb-2">1️⃣ Définition et Histologie</h4>
+          <div class="space-y-2 text-xs">
+            <p class="font-semibold text-blue-800">🔬 La cirrhose = Désorganisation diffuse de l'architecture hépatique caractérisée par :</p>
+            <div>
+              <ul class="list-disc pl-5 mt-1 space-y-1">
+                <li><span class="font-medium">1. Fibrose mutilante :</span> Dépôt excessif matrice extracellulaire (collagène)</li>
+                <li><span class="font-medium">2. Nodules de régénération :</span> Tentative inefficace foie se réparer, entourés par fibrose</li>
+                <li><span class="font-medium">3. Distorsion vasculaire :</span> Responsable <span class="underline">Hypertension Portale (HTP)</span></li>
+              </ul>
+            </div>
+            <div class="bg-blue-100 p-2 rounded">
+              <span class="font-semibold text-blue-900">⚠️ Conséquence :</span>
+              <ul class="list-disc pl-5 mt-1">
+                <li><span class="font-medium text-red-700">Processus IRRÉVERSIBLE</span> (sauf stades très précoces)</li>
+                <li><span class="font-medium">Conduit à 2 syndromes majeurs :</span>
+                  <ul class="list-disc pl-8 mt-1">
+                    <li><span class="underline">Insuffisance Hépatocellulaire (IHC)</span></li>
+                    <li><span class="underline">Hypertension Portale (HTP)</span></li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-purple-50 border-l-4 border-purple-400 p-3 rounded">
+          <h4 class="font-semibold text-purple-900 text-xs mb-2">2️⃣ Étiologies (Moyen mnémotechnique : "VAM H₂O")</h4>
+          <div class="space-y-2 text-xs">
+            <div class="bg-purple-100 p-2 rounded">
+              <ul class="list-disc pl-5 space-y-1">
+                <li><span class="font-medium">🦠 V - Virales :</span> Hépatites chroniques <span class="underline">B (et Delta)</span> et <span class="underline">C</span></li>
+                <li><span class="font-medium">🍷 A - Alcool :</span> Cirrhose alcoolique (<span class="font-semibold text-purple-900">1ère cause en France</span>)</li>
+                <li><span class="font-medium">⚖️ M - Métabolique :</span> MASLD/MASH (Stéatohépatite associée dysfonctionnement métabolique, ex-NASH)
+                  <ul class="list-disc pl-8 mt-1">
+                    <li><span class="italic text-purple-700">En forte augmentation</span> (Diabète, Obésité, Syndrome métabolique)</li>
+                  </ul>
+                </li>
+                <li><span class="font-medium">🧲 H - Hémochromatose génétique :</span> Surcharge en fer (Mutation C282Y)</li>
+                <li><span class="font-medium">🔬 H - Hépato-biliaires (Auto-immunes) :</span>
+                  <ul class="list-disc pl-8 mt-1">
+                    <li>Cholangite Biliaire Primitive (CBP)</li>
+                    <li>Cholangite Sclérosante Primitive (CSP)</li>
+                    <li>Hépatite Auto-immune</li>
+                  </ul>
+                </li>
+                <li><span class="font-medium">❓ O - Other (Autres) :</span> Wilson (Cuivre), Déficit Alpha-1 Antitrypsine, Budd-Chiari (Vasculaire), Médicaments (Méthotrexate)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-yellow-50 border-l-4 border-yellow-400 p-3 rounded">
+          <h4 class="font-semibold text-yellow-900 text-xs mb-2">3️⃣ Diagnostic Positif</h4>
+          <div class="space-y-2 text-xs">
+            <p class="italic text-yellow-800">📌 Diagnostic désormais souvent <span class="underline">NON-INVASIF</span>. Biopsie n'est plus systématique.</p>
+            <div>
+              <span class="font-semibold text-yellow-800">🩺 A. Clinique (Stigmates) :</span>
+              <ul class="list-disc pl-5 mt-1 space-y-1">
+                <li><span class="font-medium">Foie :</span> Bord inférieur tranchant, dur ("Foie de pierre"), surface irrégulière cloutée. Parfois atrophique</li>
+                <li><span class="font-medium">Signes IHC :</span> Angiomes stellaires (thorax), érythème palmaire, hippocratisme digital, ictère, asterixis (flapping tremor), fœtor hepaticus</li>
+                <li><span class="font-medium">Signes HTP :</span> Splénomégalie, Circulation Veineuse Collatérale (CVC) abdominale, Ascite</li>
+              </ul>
+            </div>
+            <div>
+              <span class="font-semibold text-yellow-800">🔬 B. Biologie :</span>
+              <ul class="list-disc pl-5 mt-1">
+                <li><span class="font-medium">IHC :</span> Baisse TP (Facteur V), Hypoalbuminémie, Hyperbilirubinémie</li>
+                <li><span class="font-medium">HTP :</span> <span class="underline">Thrombopénie < 150 G/L</span> par hypersplénisme (séquestration splénique)</li>
+                <li><span class="font-medium">Cytolyse :</span> Transaminases fluctuantes</li>
+                <li><span class="font-medium">Électrophorèse :</span> Bloc Bêta-Gamma</li>
+              </ul>
+            </div>
+            <div class="bg-yellow-100 p-2 rounded">
+              <span class="font-semibold text-yellow-900">📊 C. Évaluation de la Fibrose (Non-invasif) :</span>
+              <ul class="list-disc pl-5 mt-1 space-y-1">
+                <li><span class="font-medium">Tests sanguins :</span> FibroTest, FIB-4</li>
+                <li><span class="font-medium">Élastométrie impulsionnelle (Fibroscan®) :</span> Mesure dureté foie (kPa)
+                  <ul class="list-disc pl-8 mt-1">
+                    <li><span class="font-semibold">Seuil cirrhose :</span> Généralement <span class="underline">> 12.5 - 14.6 kPa</span> (selon étiologie)</li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <span class="font-semibold text-yellow-800">🖼️ D. Imagerie :</span>
+              <ul class="list-disc pl-5 mt-1">
+                <li><span class="font-medium">Échographie abdominale :</span> Dysmorphie hépatique (lobe gauche hypertrophié, contours bosselés), signes HTP (dilatation tronc porte, splénomégalie, ascite)</li>
+                <li><span class="font-medium">Scanner/IRM :</span> Dépistage Carcinome Hépatocellulaire (CHC)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-orange-50 border-l-4 border-orange-400 p-3 rounded">
+          <h4 class="font-semibold text-orange-900 text-xs mb-2">4️⃣ Scores Pronostiques</h4>
+          <div class="space-y-2 text-xs">
+            <div class="bg-orange-100 p-2 rounded">
+              <span class="font-semibold text-orange-900">📊 A. Score de Child-Pugh :</span>
+              <p class="mt-1">Estime survie à 1 an. Basé sur <span class="font-medium">5 critères</span> :</p>
+              <ul class="list-disc pl-5 mt-1">
+                <li>Encéphalopathie</li>
+                <li>Ascite</li>
+                <li>Bilirubine</li>
+                <li>Albumine</li>
+                <li>TP (ou INR)</li>
+              </ul>
+              <div class="mt-2 space-y-1">
+                <div><span class="font-semibold text-green-700">Child A (5-6 points) :</span> Compensée (Survie 100% à 1 an)</div>
+                <div><span class="font-semibold text-yellow-700">Child B (7-9 points) :</span> Intermédiaire (Survie 80%)</div>
+                <div><span class="font-semibold text-red-700">Child C (10-15 points) :</span> Décompensée (Survie 45%)</div>
+              </div>
+            </div>
+            <div class="bg-orange-100 p-2 rounded">
+              <span class="font-semibold text-orange-900">📈 B. Score MELD (Model for End-Stage Liver Disease) :</span>
+              <ul class="list-disc pl-5 mt-1">
+                <li><span class="font-medium">Usage :</span> <span class="underline">Prioriser transplantation hépatique</span></li>
+                <li><span class="font-medium">Calcule :</span> Risque mortalité à 3 mois basé sur :
+                  <ul class="list-disc pl-8 mt-1">
+                    <li>Bilirubine</li>
+                    <li>INR</li>
+                    <li>Créatinine</li>
+                    <li>(+ Sodium récemment ajouté)</li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-red-50 border-l-4 border-red-400 p-3 rounded">
+          <h4 class="font-semibold text-red-900 text-xs mb-2">5️⃣ Complications - La "DÉCOMPENSATION" (C'est ce qui tue le patient)</h4>
+          <div class="space-y-2 text-xs">
+            <div class="bg-red-100 p-2 rounded">
+              <span class="font-semibold text-red-900">🩸 1. Hémorragie Digestive (URGENCE ABSOLUE) :</span>
+              <ul class="list-disc pl-5 mt-1">
+                <li><span class="font-medium">Cause :</span> Rupture <span class="underline">Varices Œsophagiennes (VO)</span> ou gastriques</li>
+                <li><span class="font-medium">Gravité :</span> Hématémèse massive, choc hémorragique</li>
+                <li><span class="font-medium">Mortalité :</span> 15-20% à chaque épisode</li>
+              </ul>
+            </div>
+            <div>
+              <span class="font-semibold text-red-800">💧 2. Ascite et Infection du Liquide d'Ascite :</span>
+              <ul class="list-disc pl-5 mt-1 space-y-1">
+                <li><span class="font-medium">Ascite :</span> Épanchement liquidien intrapéritonéal (HTP + hypoalbuminémie)</li>
+                <li><span class="font-medium text-red-700">ISLA (Infection Spontanée Liquide Ascite) :</span>
+                  <ul class="list-disc pl-8 mt-1">
+                    <li>Mécanisme : Translocation bactérienne intestinale</li>
+                    <li><span class="font-semibold">Diagnostic :</span> Ponction exploratrice <span class="underline">SYSTÉMATIQUE si fièvre ou douleur</span> → <span class="underline">PNN > 250/mm³</span></li>
+                    <li>Traitement : Céphalosporines 3G (Céfotaxime) urgence</li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+            <div>
+              <span class="font-semibold text-red-800">🧠 3. Encéphalopathie Hépatique :</span>
+              <ul class="list-disc pl-5 mt-1">
+                <li><span class="font-medium">Cause :</span> Ammoniac (NH₃) non détoxifié par foie</li>
+                <li><span class="font-medium">Clinique :</span> Confusion, inversion rythme nycthéméral, asterixis, coma</li>
+                <li><span class="font-medium">Traitement :</span> Lactulose (acidification côlon), Rifaximine</li>
+              </ul>
+            </div>
+            <div>
+              <span class="font-semibold text-red-800">🫘 4. Syndrome Hépato-Rénal (SHR) :</span>
+              <ul class="list-disc pl-5 mt-1">
+                <li><span class="font-medium">Définition :</span> Insuffisance rénale fonctionnelle aiguë <span class="underline">réfractaire au remplissage</span></li>
+                <li><span class="font-medium">Mécanisme :</span> Vasoconstriction rénale extrême (malgré vasodilatation splanchnique)</li>
+                <li><span class="font-medium">Pronostic :</span> Très grave. Traitement : Terlipressine + Albumine, ± Dialyse, Transplantation</li>
+              </ul>
+            </div>
+            <div class="bg-red-100 p-2 rounded">
+              <span class="font-semibold text-red-900">🎗️ 5. Carcinome Hépatocellulaire (CHC) :</span>
+              <ul class="list-disc pl-5 mt-1 space-y-1">
+                <li><span class="font-medium">Définition :</span> Cancer primitif du foie</li>
+                <li><span class="font-medium text-red-700">⚠️ DÉPISTAGE OBLIGATOIRE :</span>
+                  <ul class="list-disc pl-8 mt-1">
+                    <li><span class="underline">Échographie hépatique tous les 6 mois</span> chez TOUT cirrhotique (Child A, B ou C)</li>
+                    <li>± AFP (Alpha-fœtoprotéine) tous les 6 mois</li>
+                  </ul>
+                </li>
+                <li><span class="font-medium">Incidence :</span> 2-5% par an chez cirrhotiques</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-green-50 border-l-4 border-green-400 p-3 rounded">
+          <h4 class="font-semibold text-green-900 text-xs mb-2">6️⃣ Prise en Charge Thérapeutique</h4>
+          <div class="space-y-2 text-xs">
+            <div>
+              <span class="font-semibold text-green-800">🛡️ A. Mesures Générales :</span>
+              <ul class="list-disc pl-5 mt-1">
+                <li><span class="font-medium text-red-700">Arrêt ABSOLU alcool</span> et agents hépatotoxiques</li>
+                <li><span class="font-medium">Vaccinations :</span> VHA, VHB, Grippe, Pneumocoque</li>
+                <li><span class="font-medium">Traitement étiologique :</span> Antiviraux VHC/VHB, Perte poids si MASH</li>
+              </ul>
+            </div>
+            <div class="bg-green-100 p-2 rounded">
+              <span class="font-semibold text-green-900">🫀 B. Gestion de l'Hypertension Portale :</span>
+              <ul class="list-disc pl-5 mt-1 space-y-1">
+                <li><span class="font-medium">Dépistage Varices :</span> <span class="underline">FOGD (Fibroscopie) systématique</span> au diagnostic cirrhose</li>
+                <li><span class="font-medium">Prophylaxie PRIMAIRE</span> (Si grosses varices SANS saignement) :
+                  <ul class="list-disc pl-8 mt-1">
+                    <li>Bêta-bloquants non cardiosélectifs (Propranolol, Carvedilol)</li>
+                    <li>OU Ligature élastique endoscopique</li>
+                  </ul>
+                </li>
+                <li><span class="font-medium">Prophylaxie SECONDAIRE</span> (APRÈS saignement) :
+                  <ul class="list-disc pl-8 mt-1">
+                    <li>Ligature + Bêta-bloquants (combinaison)</li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+            <div class="bg-green-100 p-2 rounded">
+              <span class="font-semibold text-green-900">💧 C. Gestion de l'Ascite :</span>
+              <ul class="list-disc pl-5 mt-1 space-y-1">
+                <li><span class="font-medium">Régime désodé :</span> < 2-4 g sel/jour</li>
+                <li><span class="font-medium">Diurétiques :</span>
+                  <ul class="list-disc pl-8 mt-1">
+                    <li><span class="underline">Spironolactone (Aldactone®)</span> en 1ère intention</li>
+                    <li>Associé Furosémide si besoin (ratio 100:40 mg)</li>
+                  </ul>
+                </li>
+                <li><span class="font-medium">Ascite réfractaire :</span>
+                  <ul class="list-disc pl-8 mt-1">
+                    <li>Ponctions évacuatrices itératives (+ compensation Albumine IV)</li>
+                    <li>TIPS (Shunt porto-systémique transjugulaire) cas réfractaires</li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+            <div class="bg-green-100 p-2 rounded">
+              <span class="font-semibold text-green-900">🏥 D. Traitement CURATIF :</span>
+              <ul class="list-disc pl-5 mt-1 space-y-1">
+                <li><span class="font-medium text-green-700">TRANSPLANTATION HÉPATIQUE :</span> <span class="underline">SEUL traitement curatif</span></li>
+                <li><span class="font-medium">Indications :</span>
+                  <ul class="list-disc pl-8 mt-1">
+                    <li>Cirrhose décompensée (Child B/C)</li>
+                    <li>CHC (Critères de Milan : nodule unique ≤ 5cm ou 3 nodules ≤ 3cm)</li>
+                    <li>Prurit intraitable (CBP)</li>
+                  </ul>
+                </li>
+                <li><span class="font-medium">Allocation :</span> Score MELD (priorité selon urgence)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-indigo-50 border-l-4 border-indigo-400 p-2 rounded">
+          <h4 class="font-semibold text-indigo-900 text-xs mb-2">💎 Critères de Baveno VII (Expert Note)</h4>
+          <div class="text-xs">
+            <p class="mb-1">Permet d'<span class="underline">éviter fibroscopie de dépistage</span> chez certains patients "Child A".</p>
+            <p class="font-semibold text-indigo-800">📐 Règle : Si <span class="underline">Plaquettes > 150 G/L</span> ET <span class="underline">Fibroscan < 20 kPa</span> :</p>
+            <ul class="list-disc pl-5 mt-1">
+              <li>→ Risque varices nécessitant traitement < 5%</li>
+              <li>→ Peut surseoir à la FOGD (surveillance non-invasive)</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="bg-gray-100 border-l-4 border-gray-400 p-2 rounded mt-2">
+          <p class="text-xs text-gray-700"><span class="font-semibold">📌 Synthèse pour l'Expert :</span> Cirrhose = Fibrose + Nodules + Distorsion vasculaire IRRÉVERSIBLE → IHC + HTP. Étiologies "VAM H₂O" (Alcool N°1 France, MASH augmentation). Diagnostic non-invasif (Fibroscan > 12.5 kPa, Thrombopénie < 150). Scores Child-Pugh (A/B/C survie) et MELD (transplantation). Complications TUENT : Hémorragie VO, ISLA (PNN > 250), Encéphalopathie, SHR, CHC (écho tous les 6 mois). Traitement : Étiologique + HTP (FOGD systématique, Bêta-bloquants/Ligature varices) + Ascite (Spironolactone) + Transplantation curatif. Baveno VII : Plaquettes > 150 + Fibroscan < 20 = Pas FOGD.</p>
+        </div>
+      </div>`,
     children: [
         { code: "C23A", name: "Cirrhose post-hépatite virale", children: [{ code: "C23A01", name: "Cirrhose post-hépatite virale" }] },
         { code: "C23B", name: "Cirrhose Médicamenteuse", children: [{ code: "C23B01", name: "Cirrhose Médicamenteuse" }] },
