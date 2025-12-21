@@ -8897,7 +8897,267 @@ export const aldData: AldItem[] = [
       </div>`,
           children: [{ code: "C19B01", name: "Acromégalie et gigantisme (adénome somatotrop" }, { code: "C19B02", name: "Adénome à prolactine" }, { code: "C19B03", name: "Adénome gonadotrope" }, { code: "C19B04", name: "Adénome thyréotrope ou silencieux" }, { code: "C19B05", name: "Craniopharyngiome" }] 
         },
-        { code: "C19C", name: "Insuffisance anté-hypophysaire primaire/secondaire", children: [{ code: "C19C01", name: "Hypopituitarisme" }, { code: "C19C02", name: "Syndrome de Sheehan" }] },
+        { 
+          code: "C19C", 
+          name: "Insuffisance anté-hypophysaire primaire/secondaire", 
+          children: [
+            { 
+              code: "C19C01", 
+              name: "Hypopituitarisme",
+              tooltip: `<div class="space-y-3">
+        <h3 class="font-bold text-lg text-indigo-700">🧬 HYPOPITUITARISME (Déficit Anté-Hypophysaire)</h3>
+        
+        <div class="bg-blue-50 p-3 rounded border-l-4 border-blue-500">
+          <h4 class="font-semibold text-blue-800 mb-2">1️⃣ DÉFINITION ET CHRONOLOGIE</h4>
+          
+          <div class="bg-white p-2 rounded text-sm space-y-2">
+            <div>
+              <p class="font-semibold text-purple-700">📋 Définition</p>
+              <p class="text-xs">Déficit <strong>partiel ou complet</strong> de la sécrétion des hormones de l'<strong>anté-hypophyse</strong></p>
+              <p class="text-xs"><strong>Panhypopituitarisme</strong> : Atteinte de TOUS les axes (GH, LH/FSH, TSH, ACTH) + souvent Prolactine</p>
+            </div>
+            
+            <div class="bg-orange-100 p-2 rounded border-2 border-orange-500">
+              <p class="font-semibold text-orange-800 text-xs mb-1">⏱️ Chronologie d'Apparition des Déficits</p>
+              <p class="text-xs italic mb-1">En cas de processus compressif progressif (ex: macroadénome), les axes tombent dans cet ordre :</p>
+              <ul class="list-decimal ml-5 text-xs space-y-1">
+                <li class="bg-white p-1 rounded"><strong>GH (Somatotrope)</strong> et <strong>LH/FSH (Gonadotrope)</strong> : Les + fragiles</li>
+                <li class="bg-white p-1 rounded"><strong>TSH (Thyréotrope)</strong></li>
+                <li class="bg-red-50 p-1 rounded border border-red-400"><strong>ACTH (Corticotrope)</strong> : Le + résistant <strong>"L'axe de la survie"</strong></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-purple-50 p-3 rounded border-l-4 border-purple-500">
+          <h4 class="font-semibold text-purple-800 mb-2">2️⃣ ÉTIOLOGIES : La Règle des "9 I"</h4>
+          <p class="text-sm italic mb-2">📝 Mnémotechnique pour ne rien oublier lors du bilan étiologique (TDM/IRM et contexte)</p>
+          
+          <div class="overflow-x-auto">
+            <table class="w-full text-xs border-collapse">
+              <thead>
+                <tr class="bg-purple-200">
+                  <th class="border border-purple-400 p-1 text-left">Catégorie</th>
+                  <th class="border border-purple-400 p-1 text-left">Pathologies</th>
+                  <th class="border border-purple-400 p-1 text-left">Remarques</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="bg-red-50">
+                  <td class="border border-purple-300 p-1"><strong>Invasif (Tumoral)</strong></td>
+                  <td class="border border-purple-300 p-1">Adénomes (Macroadénomes), Craniopharyngiome, Méningiome</td>
+                  <td class="border border-purple-300 p-1"><strong>Cause n°1</strong>. Compression glande ou tige</td>
+                </tr>
+                <tr class="bg-orange-50">
+                  <td class="border border-purple-300 p-1"><strong>Infarctus (Vasculaire)</strong></td>
+                  <td class="border border-purple-300 p-1"><strong>Syndrome de Sheehan</strong> (Post-partum), Apoplexie pituitaire (Hémorragie adénome)</td>
+                  <td class="border border-purple-300 p-1">Urgences. Sheehan : Absence montée laiteuse + aménorrhée</td>
+                </tr>
+                <tr class="bg-yellow-50">
+                  <td class="border border-purple-300 p-1"><strong>Iatrogène</strong></td>
+                  <td class="border border-purple-300 p-1">Chirurgie hypophysaire, Radiothérapie encéphalique</td>
+                  <td class="border border-purple-300 p-1">Déficit post-radique peut apparaître <strong>5 à 10 ans après</strong></td>
+                </tr>
+                <tr class="bg-blue-50">
+                  <td class="border border-purple-300 p-1"><strong>Infiltratif</strong></td>
+                  <td class="border border-purple-300 p-1">Sarcoïdose, Hémochromatose (fer), Histiocytose X</td>
+                  <td class="border border-purple-300 p-1">Souvent associé à <strong>Diabète Insipide</strong> (atteinte post-hypophyse)</td>
+                </tr>
+                <tr class="bg-pink-50">
+                  <td class="border border-purple-300 p-1"><strong>Injury (Trauma)</strong></td>
+                  <td class="border border-purple-300 p-1">Traumatisme Crânien grave</td>
+                  <td class="border border-purple-300 p-1">Section ou contusion tige pituitaire</td>
+                </tr>
+                <tr class="bg-teal-50">
+                  <td class="border border-purple-300 p-1"><strong>Immunologique</strong></td>
+                  <td class="border border-purple-300 p-1">Hypophysite lymphocytaire</td>
+                  <td class="border border-purple-300 p-1">Maladie auto-immune. Typique <strong>fin de grossesse/post-partum</strong>. Grosse hypophyse à l'IRM</td>
+                </tr>
+                <tr class="bg-green-50">
+                  <td class="border border-purple-300 p-1"><strong>Infection</strong></td>
+                  <td class="border border-purple-300 p-1">Tuberculose, Syphilis, Abcès</td>
+                  <td class="border border-purple-300 p-1">Rare</td>
+                </tr>
+                <tr class="bg-gray-100">
+                  <td class="border border-purple-300 p-1"><strong>Idiopathique</strong></td>
+                  <td class="border border-purple-300 p-1">Selle Turcique Vide primitive, causes génétiques (PROP1, POU1F1)</td>
+                  <td class="border border-purple-300 p-1">Hernie de l'arachnoïde dans la selle</td>
+                </tr>
+                <tr class="bg-indigo-50">
+                  <td class="border border-purple-300 p-1"><strong>Isolé</strong></td>
+                  <td class="border border-purple-300 p-1">Déficit congénital isolé</td>
+                  <td class="border border-purple-300 p-1">Ex: Nanisme par déficit GH pur</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="bg-yellow-50 p-3 rounded border-l-4 border-yellow-500">
+          <h4 class="font-semibold text-yellow-800 mb-2">3️⃣ CLINIQUE : Signes d'Appel Spécifiques</h4>
+          <p class="text-sm italic mb-2">👁️ Au-delà des signes d'insuffisance de chaque axe, recherchez :</p>
+          
+          <div class="space-y-1 text-xs">
+            <div class="bg-pink-100 p-2 rounded border-2 border-pink-500">
+              <p class="font-semibold text-pink-800 mb-1">👴 Le Faciès "Vieillot"</p>
+              <p>Peau fine, rides précoces autour des yeux et de la bouche</p>
+              <p class="text-xs italic">(Déficit GH + Gonadotrope)</p>
+            </div>
+
+            <div class="bg-orange-100 p-2 rounded border-2 border-orange-500">
+              <p class="font-semibold text-orange-800 mb-1">⚪ La Dépigmentation</p>
+              <p>Peau pâle, <strong>mamelons décolorés</strong>, absence de bronzage</p>
+              <p class="text-xs italic">(Déficit ACTH/MSH)</p>
+            </div>
+
+            <div class="bg-blue-100 p-2 rounded">
+              <p class="font-semibold text-blue-800 mb-1">🪒 La Dépilation</p>
+              <p>Perte des <strong>poils axillaires et pubiens</strong></p>
+              <p class="text-xs italic">(Déficit Androgènes surrénaliens et gonadiques)</p>
+            </div>
+
+            <div class="bg-red-100 p-2 rounded">
+              <p class="font-semibold text-red-800 mb-1">🔴 Signes Tumoraux</p>
+              <p>Céphalées, Hémianopsie bitemporale</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-red-50 p-3 rounded border-l-4 border-red-600">
+          <h4 class="font-semibold text-red-800 mb-2">⚠️ 4️⃣ COMPLICATION MAJEURE : LE COMA HYPOPHYSAIRE</h4>
+          <p class="text-sm font-bold text-red-700 mb-2">💀 Stade ultime de l'hypopituitarisme non traité ou décompensé par un stress (infection, froid, sédatifs)</p>
+          
+          <div class="bg-white p-2 rounded text-xs space-y-2">
+            <div class="bg-yellow-100 p-2 rounded border-2 border-yellow-600">
+              <p class="font-semibold text-yellow-800 mb-1">🚨 Clinique</p>
+              <p><strong>Coma calme</strong>, sans signe de localisation</p>
+            </div>
+            
+            <div class="bg-orange-100 p-2 rounded border-2 border-orange-600">
+              <p class="font-semibold text-orange-800 mb-1">🔬 Biologie d'Urgence</p>
+              <ul class="list-disc ml-5">
+                <li><strong>Hypoglycémie</strong> (Déficit GH + Cortisol)</li>
+                <li><strong>Hyponatrémie</strong> (Déficit Cortisol → SIADH relatif)</li>
+                <li><strong>Hypotension</strong></li>
+              </ul>
+            </div>
+
+            <div class="bg-red-100 p-2 rounded border-4 border-red-600">
+              <p class="font-semibold text-red-800 mb-1">💉 Traitement : URGENCE VITALE</p>
+              <ul class="list-disc ml-5 space-y-1">
+                <li class="font-bold text-red-700">Hémisuccinate d'<strong>Hydrocortisone (100mg IV)</strong></li>
+                <li>Réchauffement progressif</li>
+                <li>Correction prudente de l'hyponatrémie</li>
+              </ul>
+              <div class="bg-pink-50 p-2 rounded border-2 border-pink-600 mt-2">
+                <p class="font-bold text-pink-800">⛔ RÈGLE D'OR : <strong>Ne JAMAIS donner de Thyroxine (T4) AVANT l'Hydrocortisone</strong></p>
+                <p class="text-xs italic">(Risque de précipiter l'insuffisance coronarienne ou le choc)</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-teal-50 p-3 rounded border-l-4 border-teal-500">
+          <h4 class="font-semibold text-teal-800 mb-2">5️⃣ STRATÉGIE DIAGNOSTIQUE</h4>
+          
+          <div class="space-y-2">
+            <div class="bg-blue-100 p-2 rounded">
+              <p class="font-semibold text-blue-800 text-xs mb-1">A. Dosages Statiques (T0)</p>
+              <p class="text-xs italic mb-1">Suffisants si taux effondrés face à une clinique évidente</p>
+              <ul class="list-disc ml-5 text-xs">
+                <li><strong>IGF-1</strong> (Reflet GH)</li>
+                <li><strong>T4L</strong> (Sans TSH)</li>
+                <li><strong>Cortisol 8h</strong> (+ ACTH)</li>
+                <li><strong>Testostérone/Estradiol</strong> (+ FSH/LH)</li>
+                <li><strong>Prolactine</strong> (Souvent élevée par déconnexion, ou basse si nécrose massive type Sheehan)</li>
+              </ul>
+            </div>
+
+            <div class="bg-purple-100 p-2 rounded border-2 border-purple-500">
+              <p class="font-semibold text-purple-800 text-xs mb-1">B. Tests Dynamiques de Stimulation</p>
+              <p class="text-xs italic mb-1">Indispensables pour les déficits partiels ou dissociés</p>
+              <ul class="list-disc ml-5 text-xs space-y-1">
+                <li><strong>Hypoglycémie Insulinique (Gold Standard)</strong> : Stimule GH et ACTH. Risqué (surveillance médicale stricte)</li>
+                <li><strong>Test au Glucagon-Propranolol</strong> : Alternative si insuline contre-indiquée (cardiaques)</li>
+                <li><strong>Test à la Métopirone</strong> : Explore tout l'axe corticotrope</li>
+                <li><strong>Test GHRH-Arginine</strong> : Pour le déficit en GH</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-green-50 p-3 rounded border-l-4 border-green-500">
+          <h4 class="font-semibold text-green-800 mb-2">6️⃣ PRISE EN CHARGE THÉRAPEUTIQUE</h4>
+          <p class="text-sm font-bold text-purple-700 mb-2">💊 Traitement <strong>SUBSTITUTIF</strong>, à VIE, avec surveillance clinique et biologique régulière</p>
+          
+          <div class="overflow-x-auto">
+            <table class="w-full text-xs border-collapse">
+              <thead>
+                <tr class="bg-green-200">
+                  <th class="border border-green-400 p-1 text-left">Axe</th>
+                  <th class="border border-green-400 p-1 text-left">Molécule</th>
+                  <th class="border border-green-400 p-1 text-left">Surveillance</th>
+                  <th class="border border-green-400 p-1 text-left">Note Expert</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="bg-red-50">
+                  <td class="border border-green-300 p-1"><strong>Corticotrope</strong></td>
+                  <td class="border border-green-300 p-1"><strong>Hydrocortisone</strong> (15-25 mg/j)</td>
+                  <td class="border border-green-300 p-1">Clinique (Poids, TA, Asthénie). Pas de dosage utile</td>
+                  <td class="border border-green-300 p-1 font-bold text-red-700"><strong>PRIORITÉ ABSOLUE</strong>. Carte d'urgence. Augmenter dose si stress</td>
+                </tr>
+                <tr class="bg-blue-50">
+                  <td class="border border-green-300 p-1"><strong>Thyréotrope</strong></td>
+                  <td class="border border-green-300 p-1"><strong>Lévothyroxine</strong> (Lévothyrox)</td>
+                  <td class="border border-green-300 p-1">T4 Libre (Objectif : milieu/haut normale)</td>
+                  <td class="border border-green-300 p-1"><strong>Ne jamais doser la TSH</strong> pour le suivi (inutile). <strong>Introduire APRÈS l'hydrocortisone</strong></td>
+                </tr>
+                <tr class="bg-pink-50">
+                  <td class="border border-green-300 p-1"><strong>Gonadotrope</strong></td>
+                  <td class="border border-green-300 p-1"><strong>Homme</strong> : Testostérone (IM/Gel)<br/><strong>Femme</strong> : Estrogènes + Progestatifs</td>
+                  <td class="border border-green-300 p-1">Clinique (Libido, règles), PSA (homme), Densité osseuse</td>
+                  <td class="border border-green-300 p-1">Arrêt chez la femme vers l'âge théorique de la ménopause (50 ans)</td>
+                </tr>
+                <tr class="bg-yellow-50">
+                  <td class="border border-green-300 p-1"><strong>Somatotrope</strong></td>
+                  <td class="border border-green-300 p-1"><strong>GH Recombinante</strong> (Injections SC)</td>
+                  <td class="border border-green-300 p-1">IGF-1 (Normalisation)</td>
+                  <td class="border border-green-300 p-1"><strong>Indispensable chez l'enfant</strong>. Discuté chez l'adulte (si asthénie majeure et QoL altérée)</td>
+                </tr>
+                <tr class="bg-teal-50">
+                  <td class="border border-green-300 p-1"><strong>Diabète Insipide</strong></td>
+                  <td class="border border-green-300 p-1"><strong>Desmopressine</strong> (Minirin)</td>
+                  <td class="border border-green-300 p-1">Clinique (Soif, Diurèse), Natrémie</td>
+                  <td class="border border-green-300 p-1">Uniquement si atteinte <strong>post-hypophysaire</strong> associée</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="bg-pink-50 p-3 rounded border-l-4 border-pink-500">
+          <h4 class="font-semibold text-pink-800 mb-2">🎯 POINTS CLÉS À RETENIR</h4>
+          <div class="bg-white p-2 rounded">
+            <ul class="list-disc ml-5 text-sm space-y-1">
+              <li>🧬 <strong>Panhypopituitarisme</strong> : Déficit tous les axes (GH, LH/FSH, TSH, ACTH)</li>
+              <li>⏱️ <strong>Chronologie déficits</strong> : GH/LH/FSH (fragiles) → TSH → ACTH (résistant "axe survie")</li>
+              <li>📝 <strong>Étiologies "9 I"</strong> : Invasif (cause #1 macroadénome), Infarctus (Sheehan), Iatrogène, Infiltratif, Injury, Immunologique, Infection, Idiopathique, Isolé</li>
+              <li>👴 <strong>Triade clinique</strong> : Faciès vieillot + Dépigmentation (mamelons) + Dépilation (axillaire/pubien)</li>
+              <li>💀 <strong>Coma hypophysaire</strong> : Hypoglycémie + Hyponatrémie + Hypotension</li>
+              <li>💉 <strong>URGENCE</strong> : Hydrocortisone 100mg IV + ⛔ JAMAIS T4 avant Hydrocortisone</li>
+              <li>🔬 <strong>Diagnostic</strong> : Dosages statiques (IGF-1, T4L, Cortisol 8h, Testostérone/Estradiol) + Tests dynamiques (Hypoglycémie insulinique gold standard)</li>
+              <li>💊 <strong>Traitement substitutif à VIE</strong> : Ordre introduction = Hydrocortisone (15-25mg/j) PUIS Lévothyroxine</li>
+              <li>⚠️ <strong>Ne JAMAIS doser TSH</strong> pour le suivi (inutile en insuffisance centrale)</li>
+              <li>📋 <strong>Carte d'urgence</strong> : Patient doit porter carte insuffisance surrénalienne (augmenter dose si stress)</li>
+            </ul>
+          </div>
+        </div>
+      </div>`
+            }, 
+            { code: "C19C02", name: "Syndrome de Sheehan" }
+          ] 
+        },
         { code: "C19D", name: "Insuffisance surrénalienne primaire/se...", children: [{ code: "C19D01", name: "Maladie d'Addison" }, { code: "C19D02", name: "Syndrome de Nelson" }] },
         { code: "C19E", name: "Déficit en hormone de croissance", children: [{ code: "C19E01", name: "Nanisme" }, { code: "C19E02", name: "Syndrome de Turner" }] },
         { code: "C19F", name: "Syndrome polyuro-polydipsique", children: [{ code: "C19F01", name: "Diabète insipide central" }, { code: "C19F02", name: "Diabète insipide néphrogénique" }] },
