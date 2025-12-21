@@ -4246,6 +4246,16 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
         [/\bmp\b(?!\s*\d)/gi, 'maladie professionnelle '],
         
         // === ANATOMIE - MEMBRES ===
+        // 🆕 V3.3.127: Ablations partielles - expansions sémantiques
+        [/(?:ablation|amputation)\s+(?:de\s+)?(?:l[''])?(?:extr[eé]mit[eé]|bout|pulpe)\s+(?:de\s+)?(?:la\s+)?(?:phalange\s+)?(?:ungu[eé]ale|distale|terminale|P3)\s+(?:du|de\s+l['']?)\s+([dD])([1-5])\b/gi, (match, d, num) => {
+            const doigts = ['', 'pouce', 'index', 'médius', 'annulaire', 'auriculaire'];
+            return `ablation extrémité phalange unguéale du ${doigts[parseInt(num)]} `;
+        }],
+        [/(?:ablation|amputation)\s+(?:de\s+)?(?:la\s+)?(?:phalange\s+)?(?:ungu[eé]ale|distale|terminale|P3)\s+(?:du|de\s+l['']?)\s+([dD])([1-5])\b/gi, (match, d, num) => {
+            const doigts = ['', 'pouce', 'index', 'médius', 'annulaire', 'auriculaire'];
+            return `ablation phalange unguéale du ${doigts[parseInt(num)]} `;
+        }],
+        
         // 🆕 V3.3.63: Doigts et orteils spécifiques AVANT phalanges génériques (priorité pour p1 o4, p2 d5)
         [/\b([dD])([1-5])\b(?=\s*(?:de|du|mg|md|main|gauche|droite|fracture|amputation|ecrasement|arrachement|consolid|avec|raideur|ankylose|douleur|s[eé]quelle))/gi, (match, d, num) => {
             const doigts = ['', 'pouce', 'index', 'médius', 'annulaire', 'auriculaire'];
@@ -5472,6 +5482,167 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             context: /doigt|main/i,
             searchTerms: ['Perte de la 3ème phalange de l\'auriculaire (Main Dominante)', 'Perte de la 3ème phalange de l\'auriculaire (Main Non Dominante)'],
             priority: 11000
+        },
+
+        // 🆕 V3.3.127: ABLATIONS PARTIELLES DES DOIGTS (selon barème officiel Fig. 9-12)
+        // === POUCE ===
+        {
+            pattern: /(?:ablation|amputation).*(?:extr[eé]mit[eé]|bout|pulpe).*(?:phalange\s+)?(?:ungu[eé]ale|distale|terminale|P3).*(?:pouce|d1)/i,
+            context: /doigt|main/i,
+            searchTerms: ['Ablation moitié phalange unguéale du pouce (Main Dominante)', 'Ablation moitié phalange unguéale du pouce (Main Non Dominante)'],
+            priority: 15000
+        },
+        {
+            pattern: /(?:ablation|amputation).*(?:phalange\s+)?(?:ungu[eé]ale|distale|terminale|P3).*(?:enti[eè]re|compl[eè]te)?.*(?:pouce|d1)(?!.*(?:2\s*phalanges|deux\s*phalanges|m[eé]tacarpien))/i,
+            context: /doigt|main/i,
+            searchTerms: ['Ablation phalange unguéale entière du pouce (Main Dominante)', 'Ablation phalange unguéale entière du pouce (Main Non Dominante)'],
+            priority: 14500
+        },
+        {
+            pattern: /(?:ablation|amputation).*(?:2|deux)\s*phalanges.*(?:pouce|d1)(?!.*(?:t[eê]te|m[eé]tacarpien))/i,
+            context: /doigt|main/i,
+            searchTerms: ['Ablation 2 phalanges du pouce (Main Dominante)', 'Ablation 2 phalanges du pouce (Main Non Dominante)'],
+            priority: 14000
+        },
+        {
+            pattern: /(?:ablation|amputation).*(?:2|deux)\s*phalanges.*(?:avec|[+]).*(?:t[eê]te|col).*m[eé]tacarpien.*(?:pouce|d1)/i,
+            context: /doigt|main/i,
+            searchTerms: ['Ablation 2 phalanges + tête métacarpien du pouce (Main Dominante)', 'Ablation 2 phalanges + tête métacarpien du pouce (Main Non Dominante)'],
+            priority: 14100
+        },
+        {
+            pattern: /(?:ablation|amputation).*(?:2|deux)\s*phalanges.*(?:avec|[+]).*m[eé]tacarpien.*(?:entier|complet).*(?:pouce|d1)/i,
+            context: /doigt|main/i,
+            searchTerms: ['Ablation 2 phalanges + métacarpien entier du pouce (Main Dominante)', 'Ablation 2 phalanges + métacarpien entier du pouce (Main Non Dominante)'],
+            priority: 14200
+        },
+
+        // === INDEX ===
+        {
+            pattern: /(?:ablation|amputation).*(?:extr[eé]mit[eé]|bout|pulpe).*(?:phalange\s+)?(?:ungu[eé]ale|distale|terminale|P3).*(?:index|d2)/i,
+            context: /doigt|main/i,
+            searchTerms: ['Ablation extrémité phalange unguéale de l\'index (Main Dominante)', 'Ablation extrémité phalange unguéale de l\'index (Main Non Dominante)'],
+            priority: 15000
+        },
+        {
+            pattern: /(?:ablation|amputation).*(?:phalange\s+)?(?:ungu[eé]ale|distale|terminale|P3).*(?:enti[eè]re|compl[eè]te)?.*(?:index|d2)(?!.*(?:interm[eé]diaire|P2|2\s*phalanges|deux\s*phalanges|3\s*phalanges|trois\s*phalanges))/i,
+            context: /doigt|main/i,
+            searchTerms: ['Ablation phalange unguéale de l\'index (Main Dominante)', 'Ablation phalange unguéale de l\'index (Main Non Dominante)'],
+            priority: 14500
+        },
+        {
+            pattern: /(?:ablation|amputation).*(?:phalange\s+)?(?:ungu[eé]ale|distale|terminale|P3).*(?:[+]|et).*(?:phalange\s+)?(?:interm[eé]diaire|moyenne|P2).*(?:index|d2)/i,
+            context: /doigt|main/i,
+            searchTerms: ['Ablation phalange unguéale + phalange intermédiaire de l\'index (Main Dominante)', 'Ablation phalange unguéale + phalange intermédiaire de l\'index (Main Non Dominante)'],
+            priority: 14100
+        },
+        {
+            pattern: /(?:ablation|amputation).*(?:2|deux)\s*phalanges.*(?:index|d2)(?!.*(?:3\s*phalanges|trois\s*phalanges|t[eê]te|m[eé]tacarpien))/i,
+            context: /doigt|main/i,
+            searchTerms: ['Ablation 2 phalanges de l\'index (Main Dominante)', 'Ablation 2 phalanges de l\'index (Main Non Dominante)'],
+            priority: 14000
+        },
+        {
+            pattern: /(?:ablation|amputation).*(?:3|trois)\s*phalanges.*(?:index|d2)(?!.*(?:t[eê]te|m[eé]tacarpien))/i,
+            context: /doigt|main/i,
+            searchTerms: ['Ablation 3 phalanges de l\'index (Main Dominante)', 'Ablation 3 phalanges de l\'index (Main Non Dominante)'],
+            priority: 14050
+        },
+        {
+            pattern: /(?:ablation|amputation).*(?:3|trois)\s*phalanges.*(?:avec|[+]).*(?:t[eê]te|col).*m[eé]tacarpien.*(?:index|d2)/i,
+            context: /doigt|main/i,
+            searchTerms: ['Ablation 3 phalanges + tête métacarpien de l\'index (Main Dominante)', 'Ablation 3 phalanges + tête métacarpien de l\'index (Main Non Dominante)'],
+            priority: 14150
+        },
+
+        // === MÉDIUS ===
+        {
+            pattern: /(?:ablation|amputation).*(?:extr[eé]mit[eé]|bout|pulpe).*(?:phalange\s+)?(?:ungu[eé]ale|distale|terminale|P3).*(?:m[eé]dius|majeur|d3)/i,
+            context: /doigt|main/i,
+            searchTerms: ['Ablation extrémité phalange unguéale du médius (Main Dominante)', 'Ablation extrémité phalange unguéale du médius (Main Non Dominante)'],
+            priority: 15000
+        },
+        {
+            pattern: /(?:ablation|amputation).*(?:phalange\s+)?(?:ungu[eé]ale|distale|terminale|P3).*(?:enti[eè]re|compl[eè]te)?.*(?:m[eé]dius|majeur|d3)(?!.*(?:interm[eé]diaire|P2|2\s*phalanges|deux\s*phalanges|3\s*phalanges|trois\s*phalanges))/i,
+            context: /doigt|main/i,
+            searchTerms: ['Ablation phalange unguéale du médius (Main Dominante)', 'Ablation phalange unguéale du médius (Main Non Dominante)'],
+            priority: 14500
+        },
+        {
+            pattern: /(?:ablation|amputation).*(?:phalange\s+)?(?:ungu[eé]ale|distale|terminale|P3).*(?:[+]|et).*(?:phalange\s+)?(?:interm[eé]diaire|moyenne|P2).*(?:m[eé]dius|majeur|d3)/i,
+            context: /doigt|main/i,
+            searchTerms: ['Ablation phalange unguéale + phalange intermédiaire du médius (Main Dominante)', 'Ablation phalange unguéale + phalange intermédiaire du médius (Main Non Dominante)'],
+            priority: 14100
+        },
+        {
+            pattern: /(?:ablation|amputation).*(?:2|deux)\s*phalanges.*(?:m[eé]dius|majeur|d3)(?!.*(?:3\s*phalanges|trois\s*phalanges))/i,
+            context: /doigt|main/i,
+            searchTerms: ['Ablation 2 phalanges du médius (Main Dominante)', 'Ablation 2 phalanges du médius (Main Non Dominante)'],
+            priority: 14000
+        },
+        {
+            pattern: /(?:ablation|amputation).*(?:3|trois)\s*phalanges.*(?:m[eé]dius|majeur|d3)/i,
+            context: /doigt|main/i,
+            searchTerms: ['Ablation 3 phalanges du médius (Main Dominante)', 'Ablation 3 phalanges du médius (Main Non Dominante)'],
+            priority: 14050
+        },
+
+        // === ANNULAIRE ===
+        {
+            pattern: /(?:ablation|amputation).*(?:extr[eé]mit[eé]|bout|pulpe).*(?:phalange\s+)?(?:ungu[eé]ale|distale|terminale|P3).*(?:annulaire|d4)/i,
+            context: /doigt|main/i,
+            searchTerms: ['Ablation extrémité phalange unguéale de l\'annulaire (Main Dominante)', 'Ablation extrémité phalange unguéale de l\'annulaire (Main Non Dominante)'],
+            priority: 15000
+        },
+        {
+            pattern: /(?:ablation|amputation).*(?:phalange\s+)?(?:ungu[eé]ale|distale|terminale|P3).*(?:enti[eè]re|compl[eè]te)?.*(?:annulaire|d4)(?!.*(?:interm[eé]diaire|P2|2\s*phalanges|deux\s*phalanges|3\s*phalanges|trois\s*phalanges))/i,
+            context: /doigt|main/i,
+            searchTerms: ['Ablation phalange unguéale de l\'annulaire (Main Dominante)', 'Ablation phalange unguéale de l\'annulaire (Main Non Dominante)'],
+            priority: 14500
+        },
+        {
+            pattern: /(?:ablation|amputation).*(?:phalange\s+)?(?:ungu[eé]ale|distale|terminale|P3).*(?:[+]|et).*(?:phalange\s+)?(?:interm[eé]diaire|moyenne|P2).*(?:annulaire|d4)/i,
+            context: /doigt|main/i,
+            searchTerms: ['Ablation phalange unguéale + phalange intermédiaire de l\'annulaire (Main Dominante)', 'Ablation phalange unguéale + phalange intermédiaire de l\'annulaire (Main Non Dominante)'],
+            priority: 14100
+        },
+        {
+            pattern: /(?:ablation|amputation).*(?:2|deux)\s*phalanges.*(?:annulaire|d4)(?!.*(?:3\s*phalanges|trois\s*phalanges))/i,
+            context: /doigt|main/i,
+            searchTerms: ['Ablation 2 phalanges de l\'annulaire (Main Dominante)', 'Ablation 2 phalanges de l\'annulaire (Main Non Dominante)'],
+            priority: 14000
+        },
+        {
+            pattern: /(?:ablation|amputation).*(?:3|trois)\s*phalanges.*(?:annulaire|d4)/i,
+            context: /doigt|main/i,
+            searchTerms: ['Ablation 3 phalanges de l\'annulaire (Main Dominante)', 'Ablation 3 phalanges de l\'annulaire (Main Non Dominante)'],
+            priority: 14050
+        },
+
+        // === AURICULAIRE ===
+        {
+            pattern: /(?:ablation|amputation).*(?:extr[eé]mit[eé]|bout|pulpe).*(?:phalange\s+)?(?:ungu[eé]ale|distale|terminale|P3).*(?:auriculaire|d5)/i,
+            context: /doigt|main/i,
+            searchTerms: ['Ablation extrémité phalange unguéale de l\'auriculaire (Main Dominante)', 'Ablation extrémité phalange unguéale de l\'auriculaire (Main Non Dominante)'],
+            priority: 15000
+        },
+        {
+            pattern: /(?:ablation|amputation).*(?:phalange\s+)?(?:ungu[eé]ale|distale|terminale|P3).*(?:enti[eè]re|compl[eè]te)?.*(?:auriculaire|d5)(?!.*(?:interm[eé]diaire|P2|2\s*phalanges|deux\s*phalanges|3\s*phalanges|trois\s*phalanges))/i,
+            context: /doigt|main/i,
+            searchTerms: ['Ablation phalange unguéale de l\'auriculaire (Main Dominante)', 'Ablation phalange unguéale de l\'auriculaire (Main Non Dominante)'],
+            priority: 14500
+        },
+        {
+            pattern: /(?:ablation|amputation).*(?:2|deux)\s*phalanges.*(?:auriculaire|d5)(?!.*(?:3\s*phalanges|trois\s*phalanges))/i,
+            context: /doigt|main/i,
+            searchTerms: ['Ablation 2 phalanges de l\'auriculaire (Main Dominante)', 'Ablation 2 phalanges de l\'auriculaire (Main Non Dominante)'],
+            priority: 14000
+        },
+        {
+            pattern: /(?:ablation|amputation).*(?:3|trois)\s*phalanges.*(?:auriculaire|d5)/i,
+            context: /doigt|main/i,
+            searchTerms: ['Ablation 3 phalanges de l\'auriculaire (Main Dominante)', 'Ablation 3 phalanges de l\'auriculaire (Main Non Dominante)'],
+            priority: 14050
         },
         {
             pattern: /amputation.*m[eé]dius/i,
