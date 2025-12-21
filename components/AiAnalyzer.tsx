@@ -3947,6 +3947,54 @@ export const findCandidateInjuries = (text: string, externalKeywords?: string[])
                     }
                 }
 
+                // --- Métacarpiens : UN SEUL vs CINQ Logic (V3.3.124) ---
+                const queryMentionsMetacarpien = normalizedText.includes('metacarpien') || normalizedText.includes('metacarpienne');
+                const queryMentionsSingleMetacarpien = 
+                    (normalizedText.includes('un seul') && queryMentionsMetacarpien) ||
+                    (normalizedText.includes('un metacarpien') && !normalizedText.includes('cinq')) ||
+                    (normalizedText.includes('1 metacarpien')) ||
+                    normalizedText.includes('pouce') ||
+                    normalizedText.includes('index') ||
+                    normalizedText.includes('majeur') ||
+                    normalizedText.includes('annulaire') ||
+                    normalizedText.includes('auriculaire');
+                
+                const queryMentionsMultipleMetacarpiens = 
+                    normalizedText.includes('cinq metacarpien') ||
+                    normalizedText.includes('5 metacarpien') ||
+                    normalizedText.includes('tous les metacarpien') ||
+                    normalizedText.includes('metacarpiens multiples');
+                
+                if (queryMentionsMetacarpien) {
+                    const injuryIsFiveMetacarpiens = 
+                        normalizedInjuryName.includes('cinq metacarpien') ||
+                        normalizedInjuryName.includes('5 metacarpien') ||
+                        normalizedInjuryName.includes('tous les metacarpien');
+                    const injuryIsSingleMetacarpien = 
+                        (normalizedInjuryName.includes('metacarpien') && !injuryIsFiveMetacarpiens) ||
+                        normalizedInjuryName.includes('pouce') ||
+                        normalizedInjuryName.includes('index') ||
+                        normalizedInjuryName.includes('majeur') ||
+                        normalizedInjuryName.includes('annulaire') ||
+                        normalizedInjuryName.includes('auriculaire');
+                    
+                    // Si requête mentionne "UN SEUL" ou doigt spécifique → EXCLURE cinq métacarpiens
+                    if (queryMentionsSingleMetacarpien && injuryIsFiveMetacarpiens) {
+                        currentScore *= 0.001; // Pénalité MASSIVE pour éviter cinq quand un seul demandé
+                    } 
+                    // Si requête mentionne "UN SEUL" ou doigt → BOOST résultats d'un seul métacarpien
+                    else if (queryMentionsSingleMetacarpien && injuryIsSingleMetacarpien) {
+                        currentScore += 3000; // ÉNORME bonus pour correspondance un seul
+                    }
+                    // Si requête mentionne "CINQ" ou "TOUS" → BOOST cinq métacarpiens
+                    else if (queryMentionsMultipleMetacarpiens && injuryIsFiveMetacarpiens) {
+                        currentScore += 3000; // ÉNORME bonus pour correspondance cinq
+                    }
+                    // Si requête mentionne "CINQ" → EXCLURE un seul métacarpien
+                    else if (queryMentionsMultipleMetacarpiens && injuryIsSingleMetacarpien) {
+                        currentScore *= 0.001; // Pénalité MASSIVE pour éviter un seul quand cinq demandé
+                    }
+                }
 
                 if (currentScore > 0) {
                     allMatches.push({
