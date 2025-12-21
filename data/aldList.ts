@@ -4924,7 +4924,263 @@ export const aldData: AldItem[] = [
         </div>
       </div>`
           }, 
-          { code: "C10A05", name: "Démence de la maladie de Creutzfeldt-Jakob" }, 
+          { 
+            code: "C10A05", 
+            name: "Démence de la maladie de Creutzfeldt-Jakob",
+            tooltip: `<div class="space-y-3">
+        <h3 class="font-bold text-lg text-red-700">⚠️ MALADIE DE CREUTZFELDT-JAKOB (MCJ)</h3>
+        
+        <div class="bg-red-50 p-3 rounded border-l-4 border-red-500">
+          <h4 class="font-semibold text-red-800 mb-2">1️⃣ DÉFINITION ET PHYSIOPATHOLOGIE</h4>
+          <p class="text-sm mb-2"><strong>Maladie neurodégénérative RAPIDE et FATALE causée par un PRION</strong></p>
+          
+          <div class="bg-white p-2 rounded text-sm space-y-2">
+            <div class="bg-purple-50 p-2 rounded">
+              <p class="font-semibold text-purple-800 mb-1">🔬 Mécanisme Prion</p>
+              <ul class="list-disc ml-5 text-xs space-y-1">
+                <li><strong>PrP<sup>c</sup></strong> (cellulaire) : Protéine normale de l'hôte</li>
+                <li><strong>PrP<sup>sc</sup></strong> (scrapie) : Forme pathologique (changement conformation 3D)</li>
+                <li><strong>Cascade</strong> : PrP<sup>sc</sup> insoluble + résistante aux protéases → Induit conversion PrP<sup>c</sup> → PrP<sup>sc</sup> (réaction en chaîne)</li>
+              </ul>
+            </div>
+            
+            <div class="bg-red-100 p-2 rounded border border-red-400">
+              <p class="font-semibold text-red-800 mb-1">☠️ Conséquences</p>
+              <ul class="list-disc ml-5 text-xs">
+                <li>Accumulation protéique</li>
+                <li>Mort neuronale</li>
+                <li><strong>Vacuolisation tissu cérébral (SPONGIOSE)</strong></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-blue-50 p-3 rounded border-l-4 border-blue-500">
+          <h4 class="font-semibold text-blue-800 mb-2">2️⃣ CLASSIFICATION DES FORMES</h4>
+          
+          <div class="bg-white p-2 rounded text-sm">
+            <table class="w-full">
+              <thead class="bg-blue-100">
+                <tr>
+                  <th class="text-left p-1 border">Forme</th>
+                  <th class="text-left p-1 border">Fréquence</th>
+                  <th class="text-left p-1 border">Cause / Caractéristiques</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="border-b bg-yellow-50">
+                  <td class="p-1 border"><strong>Sporadique (sCJD)</strong></td>
+                  <td class="p-1 border text-red-700"><strong>85%</strong></td>
+                  <td class="p-1 border">Cause inconnue (conversion spontanée ou mutation somatique). Pic 60-70 ans</td>
+                </tr>
+                <tr class="border-b bg-purple-50">
+                  <td class="p-1 border"><strong>Génétique (gCJD)</strong></td>
+                  <td class="p-1 border"><strong>10-15%</strong></td>
+                  <td class="p-1 border">Mutation gène PRNP (ex: E200K)</td>
+                </tr>
+                <tr class="border-b bg-orange-50">
+                  <td class="p-1 border"><strong>Iatrogène (iCJD)</strong></td>
+                  <td class="p-1 border"><strong>&lt; 1%</strong></td>
+                  <td class="p-1 border">Contamination : greffes dure-mère, hormone de croissance extractive (avant 1988), instruments neurochirurgicaux</td>
+                </tr>
+                <tr class="border-b bg-pink-50">
+                  <td class="p-1 border"><strong>Variante (vCJD)</strong></td>
+                  <td class="p-1 border">Exceptionnelle</td>
+                  <td class="p-1 border">Liée à ESB ("Vache Folle"). Sujets plus jeunes</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div class="bg-yellow-50 p-3 rounded border-l-4 border-yellow-500">
+          <h4 class="font-semibold text-yellow-800 mb-2">3️⃣ PRÉSENTATION CLINIQUE</h4>
+          <p class="text-sm italic mb-2">⏱️ Évolution <strong>SUBAIGUË</strong> : Quelques semaines à quelques mois</p>
+          
+          <div class="bg-red-100 p-2 rounded border-2 border-red-500 mb-2">
+            <p class="font-semibold text-red-800 mb-1">🔺 TRIADE CLINIQUE ÉVOCATRICE</p>
+            <ul class="list-disc ml-5 text-sm space-y-1">
+              <li><strong>1. Démence rapidement progressive</strong>
+                <ul class="list-circle ml-4 text-xs">
+                  <li>Troubles mnésiques, désorientation</li>
+                  <li>Ralentissement idéatoire majeur</li>
+                </ul>
+              </li>
+              <li><strong>2. Myoclonies</strong>
+                <ul class="list-circle ml-4 text-xs">
+                  <li>Secousses musculaires involontaires</li>
+                  <li>Déclenchées par bruit/toucher (<strong>Sursaut inépuisable</strong>)</li>
+                </ul>
+              </li>
+              <li><strong>3. Signes neurologiques focaux associés</strong></li>
+            </ul>
+          </div>
+
+          <div class="space-y-2 text-sm">
+            <div class="bg-white p-2 rounded">
+              <p class="font-semibold text-blue-700 mb-1">Signes Neurologiques Focaux :</p>
+              <ul class="list-disc ml-5 text-xs">
+                <li><strong>Syndrome cérébelleux</strong> : Ataxie, troubles marche (fréquent au début)</li>
+                <li><strong>Troubles visuels</strong> : Cécité corticale, hallucinations (Variante Heidenhain)</li>
+                <li><strong>Signes pyramidaux et extrapyramidaux</strong> : Rigidité</li>
+              </ul>
+            </div>
+
+            <div class="bg-gray-200 p-2 rounded border-2 border-gray-600">
+              <p class="font-semibold text-gray-800 mb-1">⚰️ Stade Terminal</p>
+              <p class="text-xs"><strong>Mutisme akinétique</strong> (patient éveillé mais ne bouge plus, ne parle plus) → Décès</p>
+              <p class="text-xs mt-1 text-red-700"><strong>Médiane survie : 4-6 mois</strong> (forme sporadique)</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-purple-50 p-3 rounded border-l-4 border-purple-500">
+          <h4 class="font-semibold text-purple-800 mb-2">4️⃣ DÉMARCHE DIAGNOSTIQUE (Critères CDC/OMS)</h4>
+          <p class="text-sm italic mb-2">⚠️ Diagnostic de <strong>CERTITUDE</strong> = neuropathologique (autopsie)<br/>Diagnostic <strong>PROBABLE</strong> = faisceau d'arguments paracliniques</p>
+          
+          <div class="space-y-2">
+            <div class="bg-blue-100 p-2 rounded border-2 border-blue-500">
+              <p class="font-semibold text-blue-800 mb-1">A. IRM Cérébrale (Séquence Diffusion - DWI) - EXAMEN LE PLUS SENSIBLE</p>
+              <ul class="list-disc ml-5 text-sm">
+                <li><strong>Signes</strong> : <strong>Hypersignaux en Diffusion</strong> (et FLAIR)
+                  <ul class="list-circle ml-4 text-xs">
+                    <li><strong>Cortex</strong> : Aspect en <strong>"ruban cortical"</strong></li>
+                    <li><strong>Noyaux gris centraux</strong> : Noyau caudé + Putamen</li>
+                  </ul>
+                </li>
+                <li class="text-xs mt-1"><strong>⚠️ Variante vCJD</strong> : Hypersignal postérieur thalamus (<strong>"Signe Crosse de Hockey"</strong> ou <strong>"Pulvinar sign"</strong>)</li>
+              </ul>
+            </div>
+
+            <div class="bg-green-50 p-2 rounded">
+              <p class="font-semibold text-green-800 mb-1">B. Ponction Lombaire (LCR)</p>
+              <p class="text-xs italic mb-1">LCR généralement pauci-cellulaire (pas de méningite)</p>
+              <ul class="list-disc ml-5 text-sm space-y-1">
+                <li><strong>Protéine 14-3-3</strong> :
+                  <ul class="list-circle ml-4 text-xs">
+                    <li>Marqueur destruction neuronale rapide</li>
+                    <li>⚠️ Sensible mais <strong>PEU SPÉCIFIQUE</strong> (positif si AVC ou encéphalite)</li>
+                    <li>Valeur diagnostique remise en cause isolément</li>
+                  </ul>
+                </li>
+                <li class="bg-yellow-50 p-1 rounded"><strong>RT-QuIC</strong> (Real-Time Quaking-Induced Conversion) :
+                  <ul class="list-circle ml-4 text-xs">
+                    <li>🌟 <strong>RÉVOLUTION DIAGNOSTIQUE RÉCENTE</strong></li>
+                    <li>Détecte directement l'activité d'amplification du prion pathologique</li>
+                    <li><strong>Spécificité proche de 100%</strong></li>
+                  </ul>
+                </li>
+              </ul>
+            </div>
+
+            <div class="bg-white p-2 rounded">
+              <p class="font-semibold text-orange-700 mb-1">C. Électroencéphalogramme (EEG)</p>
+              <ul class="list-disc ml-5 text-sm">
+                <li><strong>Signe typique</strong> : <strong>Ondes lentes triphasiques périodiques</strong> (1-2 cycles/seconde)</li>
+                <li>⚠️ Apparaît souvent tardivement (après 3 mois d'évolution)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-orange-50 p-3 rounded border-l-4 border-orange-500">
+          <h4 class="font-semibold text-orange-800 mb-2">5️⃣ DIAGNOSTIC DIFFÉRENTIEL (Les "MCJ-like")</h4>
+          <p class="text-sm font-bold text-red-700 mb-2">⚠️ VITAL : Éliminer les causes CURABLES devant démence rapide</p>
+          
+          <div class="bg-white p-2 rounded text-sm">
+            <ul class="list-disc ml-5 space-y-1">
+              <li><strong>Encéphalites Auto-immunes</strong> :
+                <ul class="list-circle ml-4 text-xs">
+                  <li>Anti-NMDA, Anti-LGI1</li>
+                  <li>→ Faire panel anticorps dans LCR</li>
+                </ul>
+              </li>
+              <li><strong>Encéphalopathie d'Hashimoto</strong> :
+                <ul class="list-circle ml-4 text-xs">
+                  <li>Démence + Myoclonies + Anticorps antithyroïdiens très élevés</li>
+                  <li>✅ <strong>Répond aux CORTICOÏDES</strong></li>
+                </ul>
+              </li>
+              <li><strong>Lymphome cérébral intravasculaire</strong></li>
+              <li><strong>Toxiques</strong> : Encéphalopathie au Bismuth (historique), Lithium</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="bg-green-50 p-3 rounded border-l-4 border-green-500">
+          <h4 class="font-semibold text-green-800 mb-2">6️⃣ PRISE EN CHARGE ET BIOSÉCURITÉ</h4>
+          
+          <div class="space-y-2">
+            <div class="bg-red-100 p-2 rounded border-2 border-red-500">
+              <p class="font-semibold text-red-800 mb-1">A. Traitement</p>
+              <p class="text-sm text-red-700"><strong>❌ AUCUN TRAITEMENT CURATIF</strong></p>
+              <p class="text-xs mt-1">Prise en charge purement <strong>PALLIATIVE</strong> :</p>
+              <ul class="list-disc ml-5 text-xs">
+                <li>Benzodiazépines (myoclonies)</li>
+                <li>Soins de confort</li>
+                <li>Accompagnement fin de vie</li>
+              </ul>
+            </div>
+
+            <div class="bg-yellow-50 p-2 rounded border-2 border-yellow-600">
+              <p class="font-semibold text-yellow-800 mb-1">B. Risque de Transmission et Hygiène</p>
+              
+              <div class="space-y-1 text-sm">
+                <div class="bg-green-100 p-1 rounded">
+                  <p class="text-xs"><strong>✅ MCJ NON CONTAGIEUSE</strong> par contact social (toucher, air)</p>
+                </div>
+
+                <div class="bg-red-50 p-1 rounded">
+                  <p class="font-semibold text-red-700 text-xs mb-1">⚠️ Risque Transmission :</p>
+                  <ul class="list-disc ml-5 text-xs">
+                    <li>Tissu nerveux</li>
+                    <li>Cornée</li>
+                    <li>LCR</li>
+                  </ul>
+                </div>
+
+                <div class="bg-blue-50 p-1 rounded">
+                  <p class="font-semibold text-blue-700 text-xs mb-1">🛡️ Précautions :</p>
+                  <ul class="list-disc ml-5 text-xs space-y-1">
+                    <li><strong>Isolement standard</strong> en chambre</li>
+                    <li><strong>Procédure "Prion"</strong> au bloc ou pour PL :
+                      <ul class="list-circle ml-4">
+                        <li>⚠️ Prion résiste : autoclave 121°C standard, alcool</li>
+                      </ul>
+                    </li>
+                    <li><strong>Matériel à usage unique OBLIGATOIRE</strong> pour PL</li>
+                    <li><strong>Stérilisation spécifique</strong> (instruments métalliques réutilisables) :
+                      <ul class="list-circle ml-4">
+                        <li>Autoclave 134°C × 18 min</li>
+                        <li>OU Soude 1N</li>
+                      </ul>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-pink-50 p-3 rounded border-l-4 border-pink-500">
+          <h4 class="font-semibold text-pink-800 mb-2">🎯 POINTS CLÉS À RETENIR</h4>
+          <div class="bg-white p-2 rounded">
+            <ul class="list-disc ml-5 text-sm space-y-1">
+              <li>☠️ <strong>Maladie PRION</strong> : PrP<sup>sc</sup> → Spongiose cérébrale</li>
+              <li>📊 <strong>85% Sporadique</strong> (60-70 ans), 10-15% Génétique (PRNP)</li>
+              <li>🔺 <strong>TRIADE</strong> : Démence rapide + Myoclonies + Signes neurologiques focaux</li>
+              <li>⏱️ <strong>Survie médiane : 4-6 mois</strong> (mutisme akinétique)</li>
+              <li>🧲 <strong>IRM DWI</strong> : Hypersignaux "ruban cortical" + noyaux gris (EXAMEN CLÉ)</li>
+              <li>🌟 <strong>RT-QuIC</strong> : Révolution diagnostique (Spé ~100%)</li>
+              <li>⚡ <strong>EEG</strong> : Ondes triphasiques périodiques (tardif)</li>
+              <li>⚠️ <strong>Diagnostic différentiel</strong> : Encéphalites auto-immunes (CURABLES!)</li>
+              <li>❌ <strong>Aucun traitement curatif</strong> : Soins palliatifs</li>
+              <li>🛡️ <strong>Biosécurité</strong> : Prion résiste stérilisation standard → Autoclave 134°C × 18 min ou Soude 1N</li>
+            </ul>
+          </div>
+        </div>
+      </div>`
+          }, 
           { code: "C10A06", name: "Démence de la maladie de Huntington" }, 
           { code: "C10A07", name: "Autres démences" }
         ] 
