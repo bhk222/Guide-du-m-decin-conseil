@@ -9740,7 +9740,257 @@ export const aldData: AldItem[] = [
         </div>
       </div>`
             }, 
-            { code: "C19D02", name: "Syndrome de Nelson" }
+            { 
+              code: "C19D02", 
+              name: "Syndrome de Nelson",
+              tooltip: `<div class="space-y-3">
+        <h3 class="font-bold text-lg text-purple-700">⚡ SYNDROME DE NELSON</h3>
+        
+        <div class="bg-blue-50 p-3 rounded border-l-4 border-blue-500">
+          <h4 class="font-semibold text-blue-800 mb-2">1️⃣ DÉFINITION ET CONTEXTE</h4>
+          
+          <div class="bg-white p-2 rounded text-sm space-y-2">
+            <div>
+              <p class="font-semibold text-purple-700">📋 Définition</p>
+              <p class="text-xs">Apparition ou progression rapide d'un <strong>adénome hypophysaire corticotrope agressif</strong>, associée à une sécrétion massive d'ACTH et une mélanodermie, survenant <strong>après une surrénalectomie bilatérale totale</strong></p>
+            </div>
+            
+            <div class="bg-red-100 p-2 rounded border-2 border-red-500">
+              <p class="font-semibold text-red-800 text-xs mb-1">🎯 Terrain</p>
+              <p class="text-xs"><strong>EXCLUSIVEMENT</strong> chez les patients traités pour une <strong>Maladie de Cushing</strong> (origine hypophysaire) par ablation des deux surrénales, sans traitement efficace préalable de l'hypophyse</p>
+            </div>
+
+            <div class="bg-orange-100 p-2 rounded">
+              <p class="font-semibold text-orange-800 text-xs mb-1">📊 Fréquence</p>
+              <p class="text-xs">Survient chez <strong>15 à 25%</strong> des patients après surrénalectomie bilatérale (si pas de radiothérapie prophylactique)</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-purple-50 p-3 rounded border-l-4 border-purple-500">
+          <h4 class="font-semibold text-purple-800 mb-2">2️⃣ PHYSIOPATHOLOGIE (Le "Phénomène de Rebond")</h4>
+          
+          <div class="bg-white p-2 rounded text-xs space-y-2">
+            <div class="bg-blue-50 p-2 rounded">
+              <p class="font-semibold text-blue-800 mb-1">🔄 Situation Initiale (Maladie de Cushing)</p>
+              <p>Adénome hypophysaire sécrète trop d'ACTH → Cortisol monte</p>
+              <p class="italic">Le cortisol élevé exerce un <strong>frein (feedback négatif) partiel</strong> sur l'hypophyse, limitant un peu la croissance tumorale</p>
+            </div>
+
+            <div class="bg-red-100 p-2 rounded border-4 border-red-600">
+              <p class="font-semibold text-red-800 mb-1">💥 Mécanisme du Syndrome de Nelson</p>
+              
+              <ol class="list-decimal ml-5 space-y-1">
+                <li class="bg-white p-2 rounded">
+                  <p class="font-bold text-orange-700">1. Levée du Frein</p>
+                  <p>On retire les surrénales (organes cibles) pour guérir l'hypercortisolisme</p>
+                  <p>Cortisol chute (patient mis sous hydrocortisone à dose physiologique)</p>
+                </li>
+
+                <li class="bg-white p-2 rounded">
+                  <p class="font-bold text-pink-700">2. Explosion Tumorale</p>
+                  <p>L'adénome hypophysaire résiduel <strong>n'a plus aucun frein cortisolique</strong></p>
+                  <p class="font-bold">→ Prolifère de manière anarchique et rapide</p>
+                </li>
+
+                <li class="bg-white p-2 rounded">
+                  <p class="font-bold text-purple-700">3. Sécrétion Massive</p>
+                  <p>Cellules tumorales relâchent des quantités <strong>phénoménales d'ACTH</strong> et de ses précurseurs (POMC)</p>
+                </li>
+              </ol>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-yellow-50 p-3 rounded border-l-4 border-yellow-500">
+          <h4 class="font-semibold text-yellow-800 mb-2">3️⃣ PRÉSENTATION CLINIQUE</h4>
+          <p class="text-sm italic mb-2">Tableau associe signes tumoraux + cutanés, <strong>SANS signes d'hypercortisolisme</strong> (patient n'a plus de surrénales)</p>
+          
+          <div class="space-y-2">
+            <div class="bg-orange-100 p-2 rounded border-4 border-orange-600">
+              <p class="font-semibold text-orange-800 text-xs mb-1">🌟 A. MÉLANODERMIE (Signe Cardinal)</p>
+              
+              <div class="bg-white p-2 rounded text-xs space-y-2">
+                <div class="bg-pink-100 p-2 rounded border-2 border-pink-500">
+                  <p class="font-semibold text-pink-800 mb-1">Description</p>
+                  <p>Hyperpigmentation cutanée généralisée, <strong>TRÈS INTENSE</strong></p>
+                  <p class="italic">("Peau bronzée", "teint terreux")</p>
+                </div>
+
+                <div class="bg-blue-50 p-2 rounded">
+                  <p class="font-semibold text-blue-800 mb-1">🔬 Mécanisme</p>
+                  <p>L'ACTH est dérivée de la <strong>POMC</strong> (Pro-opiomélanocortine), précurseur commun avec la <strong>MSH</strong> (Melanocyte Stimulating Hormone)</p>
+                  <p class="font-bold">À des taux très élevés, l'ACTH stimule les mélanocytes</p>
+                </div>
+
+                <div class="bg-yellow-50 p-2 rounded">
+                  <p class="font-semibold text-yellow-800 mb-1">📍 Topographie</p>
+                  <ul class="list-disc ml-5">
+                    <li>Zones découvertes</li>
+                    <li><strong>Cicatrices</strong> (notamment celles de la surrénalectomie)</li>
+                    <li>Muqueuses</li>
+                    <li>Aréoles</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-red-100 p-2 rounded border-2 border-red-500">
+              <p class="font-semibold text-red-800 text-xs mb-1">B. Syndrome Tumoral Hypophysaire</p>
+              <p class="text-xs italic mb-1">L'adénome de Nelson est souvent <strong>AGRESSIF et INVASIF</strong></p>
+              
+              <ul class="list-disc ml-5 text-xs space-y-1">
+                <li><strong>Céphalées</strong> fréquentes</li>
+                <li class="bg-white p-1 rounded"><strong>Troubles visuels</strong> : Hémianopsie bitemporale ou quadranopsie par compression du chiasma optique (croissance vers le haut)</li>
+                <li class="bg-white p-1 rounded"><strong>Paralysie oculomotrice</strong> : Diplopie par envahissement des sinus caverneux (croissance latérale)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-teal-50 p-3 rounded border-l-4 border-teal-500">
+          <h4 class="font-semibold text-teal-800 mb-2">4️⃣ DIAGNOSTIC PARACLINIQUE</h4>
+          
+          <div class="space-y-2">
+            <div class="bg-red-100 p-2 rounded border-4 border-red-600">
+              <p class="font-semibold text-red-800 text-xs mb-1">🔬 A. Biologie (ACTH)</p>
+              
+              <div class="bg-white p-2 rounded text-xs space-y-1">
+                <div class="bg-orange-100 p-2 rounded border-2 border-orange-500">
+                  <p class="font-semibold text-orange-800 mb-1">Dosage ACTH plasmatique</p>
+                  <p class="font-bold">Taux <strong>EXTRÊMEMENT ÉLEVÉS</strong></p>
+                  <p>Souvent <strong>&gt; 500 ou 1000 ng/L</strong> (N &lt; 50)</p>
+                </div>
+
+                <div class="bg-yellow-100 p-2 rounded border-2 border-yellow-500">
+                  <p class="font-semibold text-yellow-800 mb-1">⚠️ Note</p>
+                  <p>Une <strong>élévation progressive de l'ACTH</strong> sur plusieurs dosages successifs = Signe d'alerte précoce</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-blue-100 p-2 rounded border-2 border-blue-500">
+              <p class="font-semibold text-blue-800 text-xs mb-1">📷 B. Imagerie (IRM Hypophysaire)</p>
+              <p class="text-xs font-bold text-purple-700 mb-1">Indispensable</p>
+              
+              <div class="bg-white p-2 rounded text-xs space-y-1">
+                <div class="bg-pink-50 p-1 rounded">
+                  <p class="font-semibold text-pink-800">Signes :</p>
+                  <ul class="list-disc ml-5">
+                    <li>Apparition d'un <strong>macroadénome</strong></li>
+                    <li>OU augmentation significative de la taille du reliquat tumoral par rapport à l'IRM pré-opératoire</li>
+                  </ul>
+                </div>
+
+                <div class="bg-red-50 p-2 rounded border border-red-400">
+                  <p class="font-semibold text-red-700">Caractère souvent <strong>INVASIF</strong></p>
+                  <p>Vers le sinus caverneux ou l'os sphénoïde</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-orange-50 p-3 rounded border-l-4 border-orange-500">
+          <h4 class="font-semibold text-orange-800 mb-2">5️⃣ FACTEURS DE RISQUE</h4>
+          <p class="text-sm italic mb-2">La probabilité de développer un syndrome de Nelson augmente si :</p>
+          
+          <div class="bg-white p-2 rounded">
+            <ul class="list-disc ml-5 text-xs space-y-1">
+              <li class="bg-pink-50 p-1 rounded"><strong>Âge jeune</strong> au moment de la surrénalectomie</li>
+              <li class="bg-red-50 p-1 rounded"><strong>Absence de radiothérapie hypophysaire</strong> préalable</li>
+              <li class="bg-yellow-50 p-1 rounded"><strong>Durée d'évolution</strong> de la maladie de Cushing avant la chirurgie</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="bg-green-50 p-3 rounded border-l-4 border-green-500">
+          <h4 class="font-semibold text-green-800 mb-2">6️⃣ STRATÉGIE THÉRAPEUTIQUE</h4>
+          <p class="text-sm font-bold text-red-700 mb-2">⚠️ Traitement difficile car ces tumeurs sont souvent volumineuses et fibreuses</p>
+          
+          <div class="space-y-2">
+            <div class="bg-blue-100 p-2 rounded border-2 border-blue-500">
+              <p class="font-semibold text-blue-800 text-xs mb-1">🔪 A. Chirurgie Hypophysaire</p>
+              
+              <div class="bg-white p-2 rounded text-xs space-y-1">
+                <p class="font-bold text-purple-700">Traitement de <strong>PREMIÈRE INTENTION</strong> si compression visuelle</p>
+                <ul class="list-disc ml-5">
+                  <li>Résection de l'adénome par voie <strong>trans-sphénoïdale</strong></li>
+                  <li class="bg-red-50 p-1 rounded">⚠️ Taux de récidive élevé</li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="bg-purple-100 p-2 rounded border-2 border-purple-500">
+              <p class="font-semibold text-purple-800 text-xs mb-1">📡 B. Radiothérapie (Préventive et Curative)</p>
+              
+              <div class="bg-white p-2 rounded text-xs space-y-2">
+                <div class="bg-green-50 p-2 rounded border border-green-500">
+                  <p class="font-semibold text-green-800 mb-1">Prophylactique :</p>
+                  <p>Certains centres proposent une <strong>radiothérapie stéréotaxique systématique</strong> sur l'hypophyse après une surrénalectomie bilatérale pour <strong>prévenir le Nelson</strong></p>
+                </div>
+
+                <div class="bg-orange-50 p-2 rounded border border-orange-500">
+                  <p class="font-semibold text-orange-800 mb-1">Curative :</p>
+                  <p>Utilisée si la chirurgie est incomplète ou impossible</p>
+                  <p class="font-bold">Gamma Knife ou Cyberknife</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="bg-pink-100 p-2 rounded">
+              <p class="font-semibold text-pink-800 text-xs mb-1">💊 C. Traitement Médical</p>
+              <p class="text-xs italic mb-1">Utilisé en appoint ou si échec chirurgie/radiothérapie</p>
+              
+              <ul class="list-disc ml-5 text-xs">
+                <li><strong>Analogues de la Somatostatine</strong> : Pasiréotide</li>
+                <li><strong>Agonistes dopaminergiques</strong> : Cabergoline (efficacité inconstante)</li>
+                <li><strong>Chimiothérapie</strong> : Témozolomide (pour les carcinomes ou tumeurs agressives réfractaires)</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-red-50 p-3 rounded border-l-4 border-red-600">
+          <h4 class="font-semibold text-red-800 mb-2">7️⃣ SYNTHÈSE POUR LA PRATIQUE</h4>
+          
+          <div class="bg-white p-2 rounded text-xs space-y-2">
+            <div class="bg-yellow-100 p-2 rounded border-4 border-yellow-600">
+              <p class="font-semibold text-yellow-800 mb-1">⚠️ Évolution de la Pratique</p>
+              <p>Aujourd'hui, la <strong>surrénalectomie bilatérale</strong> est devenue un <strong>traitement de DERNIER RECOURS</strong> pour la Maladie de Cushing</p>
+              <p class="font-bold text-red-700">Précisément à cause du risque de Syndrome de Nelson</p>
+            </div>
+
+            <div class="bg-pink-100 p-2 rounded border-4 border-pink-600">
+              <p class="font-semibold text-pink-800 mb-1">📋 RÈGLE DE SURVEILLANCE OBLIGATOIRE</p>
+              <p class="font-bold">Tout patient ayant subi une surrénalectomie bilatérale doit avoir un <strong>SUIVI À VIE</strong> :</p>
+              <ul class="list-disc ml-5 mt-1">
+                <li><strong>IRM hypophysaire</strong> annuelle</li>
+                <li><strong>Dosage ACTH</strong> annuel</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-indigo-50 p-3 rounded border-l-4 border-indigo-500">
+          <h4 class="font-semibold text-indigo-800 mb-2">🎯 POINTS CLÉS À RETENIR</h4>
+          <div class="bg-white p-2 rounded">
+            <ul class="list-disc ml-5 text-sm space-y-1">
+              <li>⚡ <strong>Définition</strong> : Adénome hypophysaire corticotrope agressif + ACTH massive + mélanodermie POST-surrénalectomie bilatérale</li>
+              <li>🎯 <strong>Terrain exclusif</strong> : Maladie de Cushing (hypophysaire) traitée par ablation surrénales sans traitement hypophyse préalable</li>
+              <li>📊 <strong>Fréquence</strong> : 15-25% après surrénalectomie bilatérale (si pas de radiothérapie prophylactique)</li>
+              <li>💥 <strong>Physiopathologie "rebond"</strong> : Levée frein cortisol → Explosion tumorale anarchique → Sécrétion ACTH phénoménale</li>
+              <li>🌟 <strong>Signe cardinal</strong> : MÉLANODERMIE très intense ("peau bronzée", cicatrices surrénalectomie), SANS hypercortisolisme</li>
+              <li>🔬 <strong>Mécanisme mélanodermie</strong> : ACTH dérivée POMC (précurseur commun MSH) → Stimule mélanocytes</li>
+              <li>🚨 <strong>Syndrome tumoral</strong> : Adénome agressif/invasif → Céphalées, hémianopsie bitemporale, diplopie (envahissement sinus caverneux)</li>
+              <li>💉 <strong>Diagnostic</strong> : ACTH extrêmement élevée (&gt;500-1000 ng/L), IRM macroadénome/croissance reliquat, caractère invasif</li>
+              <li>🔪 <strong>Traitement</strong> : Chirurgie trans-sphénoïdale 1ère intention (récidive élevée), Radiothérapie prophylactique/curative (Gamma Knife), Médical appoint (Pasiréotide, Témozolomide)</li>
+              <li>📋 <strong>Règle d'or</strong> : Surrénalectomie bilatérale = DERNIER RECOURS (risque Nelson) + Suivi À VIE (IRM + ACTH annuels)</li>
+            </ul>
+          </div>
+        </div>
+      </div>`
+            }
           ] 
         },
         { code: "C19E", name: "Déficit en hormone de croissance", children: [{ code: "C19E01", name: "Nanisme" }, { code: "C19E02", name: "Syndrome de Turner" }] },
