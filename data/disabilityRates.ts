@@ -1250,10 +1250,11 @@ const middleCategories: InjuryCategory[] = [
       {
         name: "Doigts - Pouce (Main Dominante)",
         injuries: [
-            { name: "Ablation moitié phalange unguéale du pouce (Main Dominante)", rate: [4, 5] },
-            { name: "Ablation phalange unguéale entière du pouce (Main Dominante)", rate: [10, 15] },
-            { name: "Ablation 2 phalanges avec/sans tête métacarpien du pouce (Main Dominante)", rate: [25, 30] },
-            { name: "Ablation 2 phalanges + métacarpien entier du pouce (Main Dominante)", rate: [30, 35] },
+            { name: "Ablation moitié phalange unguéale du pouce (Main Dominante)", rate: 5 },
+            { name: "Ablation phalange unguéale entière du pouce (Main Dominante)", rate: 15 },
+            { name: "Ablation 2 phalanges du pouce (Main Dominante)", rate: 25 },
+            { name: "Ablation 2 phalanges + tête métacarpien du pouce (Main Dominante)", rate: 27 },
+            { name: "Ablation 2 phalanges + métacarpien entier du pouce (Main Dominante)", rate: 30 },
             { name: "Amputation du pouce (main dominante)", rate: 20 },
             { name: "Perte du pouce (2 phalanges) (Main Dominante)", rate: 25 },
             { name: "Perte de la 2ème phalange du pouce (Main Dominante)", rate: 10 },
@@ -1266,10 +1267,11 @@ const middleCategories: InjuryCategory[] = [
       {
         name: "Doigts - Pouce (Main Non Dominante)",
         injuries: [
-            { name: "Ablation moitié phalange unguéale du pouce (Main Non Dominante)", rate: [3, 4] },
-            { name: "Ablation phalange unguéale entière du pouce (Main Non Dominante)", rate: [8, 12] },
-            { name: "Ablation 2 phalanges avec/sans tête métacarpien du pouce (Main Non Dominante)", rate: [20, 25] },
-            { name: "Ablation 2 phalanges + métacarpien entier du pouce (Main Non Dominante)", rate: [25, 30] },
+            { name: "Ablation moitié phalange unguéale du pouce (Main Non Dominante)", rate: 4 },
+            { name: "Ablation phalange unguéale entière du pouce (Main Non Dominante)", rate: 12 },
+            { name: "Ablation 2 phalanges du pouce (Main Non Dominante)", rate: [18, 20] },
+            { name: "Ablation 2 phalanges + tête métacarpien du pouce (Main Non Dominante)", rate: 23 },
+            { name: "Ablation 2 phalanges + métacarpien entier du pouce (Main Non Dominante)", rate: 26 },
             { name: "Perte du pouce (2 phalanges) (Main Non Dominante)", rate: 20 },
             { name: "Perte de la 2ème phalange du pouce (Main Non Dominante)", rate: 8 },
             { name: "Ankylose carpo-métacarpienne du pouce (Main Non Dominante)", rate: [12, 15] },
