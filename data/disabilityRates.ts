@@ -1250,6 +1250,10 @@ const middleCategories: InjuryCategory[] = [
       {
         name: "Doigts - Pouce (Main Dominante)",
         injuries: [
+            { name: "Ablation moitié phalange unguéale du pouce (Main Dominante)", rate: [4, 5] },
+            { name: "Ablation phalange unguéale entière du pouce (Main Dominante)", rate: [10, 15] },
+            { name: "Ablation 2 phalanges avec/sans tête métacarpien du pouce (Main Dominante)", rate: [25, 30] },
+            { name: "Ablation 2 phalanges + métacarpien entier du pouce (Main Dominante)", rate: [30, 35] },
             { name: "Amputation du pouce (main dominante)", rate: 20 },
             { name: "Perte du pouce (2 phalanges) (Main Dominante)", rate: 25 },
             { name: "Perte de la 2ème phalange du pouce (Main Dominante)", rate: 10 },
@@ -1262,6 +1266,10 @@ const middleCategories: InjuryCategory[] = [
       {
         name: "Doigts - Pouce (Main Non Dominante)",
         injuries: [
+            { name: "Ablation moitié phalange unguéale du pouce (Main Non Dominante)", rate: [3, 4] },
+            { name: "Ablation phalange unguéale entière du pouce (Main Non Dominante)", rate: [8, 12] },
+            { name: "Ablation 2 phalanges avec/sans tête métacarpien du pouce (Main Non Dominante)", rate: [20, 25] },
+            { name: "Ablation 2 phalanges + métacarpien entier du pouce (Main Non Dominante)", rate: [25, 30] },
             { name: "Perte du pouce (2 phalanges) (Main Non Dominante)", rate: 20 },
             { name: "Perte de la 2ème phalange du pouce (Main Non Dominante)", rate: 8 },
             { name: "Ankylose carpo-métacarpienne du pouce (Main Non Dominante)", rate: [12, 15] },
@@ -1273,6 +1281,10 @@ const middleCategories: InjuryCategory[] = [
       {
         name: "Doigts - Index (Main Dominante)",
         injuries: [
+            { name: "Ablation moitié phalange unguéale de l'index (Main Dominante)", rate: [2, 3] },
+            { name: "Ablation phalange unguéale de l'index (Main Dominante)", rate: [5, 6] },
+            { name: "Ablation 2 phalanges de l'index (Main Dominante)", rate: [10, 12] },
+            { name: "Ablation 3 phalanges avec/sans tête métacarpien de l'index (Main Dominante)", rate: [14, 16] },
             { name: "Amputation de l'index (main dominante)", rate: 10 },
             { name: "Perte de l'index (3 phalanges) (Main Dominante)", rate: 15 },
             { name: "Perte de la 3ème phalange de l'index (Main Dominante)", rate: 5 },
@@ -1286,6 +1298,10 @@ const middleCategories: InjuryCategory[] = [
       {
         name: "Doigts - Index (Main Non Dominante)",
         injuries: [
+            { name: "Ablation moitié phalange unguéale de l'index (Main Non Dominante)", rate: [1, 2] },
+            { name: "Ablation phalange unguéale de l'index (Main Non Dominante)", rate: [4, 5] },
+            { name: "Ablation 2 phalanges de l'index (Main Non Dominante)", rate: [8, 10] },
+            { name: "Ablation 3 phalanges avec/sans tête métacarpien de l'index (Main Non Dominante)", rate: [11, 13] },
             { name: "Perte de l'index (3 phalanges) (Main Non Dominante)", rate: 12 },
             { name: "Perte de la 3ème phalange de l'index (Main Non Dominante)", rate: 4 },
             { name: "Perte de la 2ème phalange seule de l'index (P2 seule) (Main Non Dominante)", rate: 4 },
@@ -1298,6 +1314,9 @@ const middleCategories: InjuryCategory[] = [
       {
         name: "Doigts - Médius (Main Dominante)",
         injuries: [
+            { name: "Ablation phalange unguéale du médius (Main Dominante)", rate: [3, 5] },
+            { name: "Ablation 2 phalanges du médius (Main Dominante)", rate: [7, 9] },
+            { name: "Ablation 3 phalanges du médius (Main Dominante)", rate: [10, 12] },
             { name: "Amputation du médius (main dominante)", rate: 10 },
             { name: "Perte du médius (3 phalanges) (Main Dominante)", rate: 12 },
             { name: "Perte de la 3ème phalange du médius (Main Dominante)", rate: 4 },
@@ -1312,6 +1331,9 @@ const middleCategories: InjuryCategory[] = [
       {
         name: "Doigts - Médius (Main Non Dominante)",
         injuries: [
+            { name: "Ablation phalange unguéale du médius (Main Non Dominante)", rate: [2, 4] },
+            { name: "Ablation 2 phalanges du médius (Main Non Dominante)", rate: [5, 7] },
+            { name: "Ablation 3 phalanges du médius (Main Non Dominante)", rate: [8, 10] },
             { name: "Amputation du médius (main non dominante)", rate: 8 },
             { name: "Perte du médius (3 phalanges) (Main Non Dominante)", rate: 10 },
             { name: "Perte de la 3ème phalange du médius (Main Non Dominante)", rate: 3 },
@@ -1326,6 +1348,9 @@ const middleCategories: InjuryCategory[] = [
       {
         name: "Doigts - Annulaire (Main Dominante)",
         injuries: [
+            { name: "Ablation phalange unguéale de l'annulaire (Main Dominante)", rate: [3, 4] },
+            { name: "Ablation 2 phalanges de l'annulaire (Main Dominante)", rate: [6, 8] },
+            { name: "Ablation 3 phalanges de l'annulaire (Main Dominante)", rate: [8, 10] },
             { name: "Amputation de l'annulaire (main dominante)", rate: 8 },
             { name: "Perte de l'annulaire (3 phalanges) (Main Dominante)", rate: 8 },
             { name: "Perte de la 3ème phalange de l'annulaire (Main Dominante)", rate: 3 },
@@ -1340,6 +1365,9 @@ const middleCategories: InjuryCategory[] = [
       {
         name: "Doigts - Annulaire (Main Non Dominante)",
         injuries: [
+            { name: "Ablation phalange unguéale de l'annulaire (Main Non Dominante)", rate: [2, 3] },
+            { name: "Ablation 2 phalanges de l'annulaire (Main Non Dominante)", rate: [4, 6] },
+            { name: "Ablation 3 phalanges de l'annulaire (Main Non Dominante)", rate: [6, 8] },
             { name: "Amputation de l'annulaire (main non dominante)", rate: 6 },
             { name: "Perte de l'annulaire (3 phalanges) (Main Non Dominante)", rate: 6 },
             { name: "Perte de la 3ème phalange de l'annulaire (Main Non Dominante)", rate: 2 },
@@ -1354,6 +1382,9 @@ const middleCategories: InjuryCategory[] = [
       {
         name: "Doigts - Auriculaire (Main Dominante)",
         injuries: [
+            { name: "Ablation phalange unguéale de l'auriculaire (Main Dominante)", rate: [2, 3] },
+            { name: "Ablation 2 phalanges de l'auriculaire (Main Dominante)", rate: [6, 7] },
+            { name: "Ablation 3 phalanges de l'auriculaire (Main Dominante)", rate: [6, 8] },
             { name: "Amputation de l'auriculaire (main dominante)", rate: 6 },
             { name: "Perte de l'auriculaire (3 phalanges) (Main Dominante)", rate: 10 },
             { name: "Perte de la 3ème phalange de l'auriculaire (Main Dominante)", rate: 4 },
@@ -1368,6 +1399,9 @@ const middleCategories: InjuryCategory[] = [
       {
         name: "Doigts - Auriculaire (Main Non Dominante)",
         injuries: [
+            { name: "Ablation phalange unguéale de l'auriculaire (Main Non Dominante)", rate: [1, 2] },
+            { name: "Ablation 2 phalanges de l'auriculaire (Main Non Dominante)", rate: [4, 5] },
+            { name: "Ablation 3 phalanges de l'auriculaire (Main Non Dominante)", rate: [4, 6] },
             { name: "Amputation de l'auriculaire (main non dominante)", rate: 5 },
             { name: "Perte de l'auriculaire (3 phalanges) (Main Non Dominante)", rate: 8 },
             { name: "Perte de la 3ème phalange de l'auriculaire (Main Non Dominante)", rate: 3 },
