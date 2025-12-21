@@ -4170,6 +4170,10 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
     // 🆕 PREPROCESSING MÉDICAL ENRICHI - Transformer descriptions vagues en termes détectables
     // Ceci enrichit le texte AVANT toute analyse
     const medicalEnrichment: [RegExp, string][] = [
+        // 🆕 V3.3.124h: Main réduite à palette métacarpienne = Amputation tous doigts
+        [/main.*r[eé]duite.*palette.*m[eé]tacarpienne|palette.*m[eé]tacarpienne/gi, 'amputation de tous les doigts de la main perte complète doigts'],
+        [/perte.*compl[eè]te.*tous.*doigts/gi, 'amputation de tous les doigts de la main'],
+        
         // 🆕 V3.3.102: Cécité totale œil (V3.3.108: enrichissement plus agressif)
         [/c[eé]cit[eé].*(?:totale|compl[eè]te|absolue).{0,30}[oœ]eil/gi, 'cécité totale perte complète vision œil unilatéral yeux'],
         [/perte.{0,20}(?:totale|compl[eè]te).{0,20}vision.{0,30}[oœ]eil/gi, 'perte complète vision œil cécité unilatérale yeux'],
