@@ -900,7 +900,7 @@ A - CONSULTATIONS ENTRE DEUX OMNlmAnalE~~
 - Visite en consultatIon avec un confrère
 - (pour chacun des deux méd~ins ).. V X 1
 - Consultation avec un confrère au cabinet d'un des dewll. méd~ifi$. f@w 8e ~d~""
-cin au cabinet duquel la consult ation a lieu.. C X 1 Pour 10 ~~ ~ete.
+cin au cabinet duquel la consultation a lieu.. C X 1 Pour 10 ~~ ~ete.
 V X 1.
 - Visite en consultation avec un confrère... VS X j ou VPSY X 1.
 - Consultation avec un e«mw@1@ 00 amne~ ~foo @H deux ee j~s, ~w §IR méde~
@@ -977,7 +977,7 @@ qui suit le jour de l'intervention. Cependant Si le médecin ayant effectué l'J
 estime pouvoir confier la poursuite de la surveillance post-opératoire à un autre médecin. ce
 dernier pourra recevoir des honoraires.. /....
 - 18
-3°/ Les actes d'anesthésie-réanimation ont ieur côtation indiql,Jée sur la nomenclature en regard de l'intervention qU'ils accompagnent.
+3°/ Les actes d'anesthésie-réanimation ont ieur côtation indiql,Jée sur la nomenclature en regard de l'intervention qu'ils accompagnent.
 les actes d'anesthésie-réanimation accompagnant les actes de diagnostic Q~
 de traitement qui. sur !a nomenclature ne comportant pas en regard la côtation propre il l'acte
 d'anesthésie sont côtés K. 25.
@@ -1569,7 +1569,7 @@ jours au plus} par séance... 10.... /....
 - 41--
 0182 Pose d'une bande adhésive réalisant la contention permanente inamovible d'au moins deux segments de membre~quelle queso.it la technique
 avec un maximum de deux par sernain... _.:.. _. _.:.. 5
-Curage ganglionnaire ' d'une région (inguinale. axillaire ' sous - ~iIlaire, cervicale, sus-claviculaire. mé:llTlmaire interne:.
+Curage ganglionnaire ' d'une région (inguinale. axillaire ' sous- ~iIlaire, cervicale, sus-claviculaire. mé:llTlmaire interne:.
 0183/1 Unilatéral... -... -... '..,..,.,.. 60 30
 U183/2 Bilatéral en un tem~s...:... '.. 10050
 Gotte côtation ne peut s'ajouter à celle de.l'acte d.'ex~rèse de la lésion
@@ -2050,7 +2050,7 @@ Prélèvement en vue d'examen de lab oratoire
 0450/1 D'une lésion intra-buccale de l'oropharynx... 5
 0450/2 D'une lésion intra-buccale de J'hypopharynx _ou du cavum... 10
 0451 Exérés~ d'une tumeur bénigne de la bouche... 15 25
-0452 Ablation par voie en do-buccale de fi stules et gros kystes congénitaux.. 80 30
+0452 Ablation par voie endobuccale de fistules et gros kystes congénitaux.. 80 30
 0453 Diathermo-coagulation d'une leucoplasie, d'un lupus ou d'une tumeur
 bénigne... 5
 0454 Réséction lingualp. f'!Jrtiel!e pour tum eur maligne de la partie mobile, de
@@ -3548,7 +3548,7 @@ la veine ombilicale. -.,1....
 par une sage-femme)... '.'..,....,... fo
 1002 Simple ou suture d'épisiotomie présentant un caract~re d'urgence
 exécutée par une sage-femme au cours de raccouchement '".. 10
-1003 Pour déchirure dû tJi~iic:ïç; périnéal et du vagin Us-olée, l'accouchement ' ).
+1003 Pour déchirure du tJi~iic:ïç; périnéal et du vagin Us-olée, l'accouchement ' ).
 ayant été fait par unesage-fernme).,..;..;.. 20
 1004 Pour déchirure complète lsphillc.tvi;:mnl)..,.,..,.,.. 40 2S
 100&.Pour déchirure intéressant sphincter et muqueuse rectale.. '.... 60 ~1
@@ -3678,7 +3678,7 @@ l'avant-pied:
 1050 Amputation ou désarticulation d'une phalange ou ' d'un orteil avec ou
 sans la tête du. mélartarsien... ','.. '...,0
 1051 Amputation d'un orteil avec tout son métatarsien... 30
-1052 Plastie c.utanée au niveau des orteils, quelle qu'en soit la technique.. 30
+1052 Plastie cutanée au niveau des orteils, quelle qu'en soit la technique.. 30
 ART. 2 - Autr~s actes porl:ilnt sur le pied
 1053 Amputation ou désarticulation du pied, de l'articulation tibiotarsienne
 à "interligne de lisfranc..,... 60 25
@@ -3696,7 +3696,7 @@ Aponêvrectomie plantaire Isolée... 50
 ~oçale ou par greffe...;...:... 60 25
 1059 Exérèse d'une ou plusieurs gaines synoviales.:...,.. •. 90 35
 1060 Suture d'un ligament tibio·tarsion ou sous astragalien pour rUQture traumatique récente.. 60 25
-1061 Plastie d'un ligament t!bio·tarslon ou sous astragalien, quelle qu'en soit la technique...:.;.. 8035
+1061 Plastie d'un ligament tibio·tarslon ou sous astragalien, quelle qu'en soit la technique...:.;.. 8035
 1062 Ablation d'un névrome de Morton...;.. •...,'..;;... 40
 1063 Arthrorise sous astragallenne ou média tarsienne..;.. '.. 40
 ART. 3 - Actes de pédicurie
@@ -3924,7 +3924,7 @@ d't.:n appareil..,..,.. '..,.. 7
 - 140 ---
 1143 Rééducation é!ü i>i,,":,;; de déambulation impossible _... 12
 1144 Rééducation des muscles du périnée...,.. 4
-ART. 3. - Traitement des conséquences motrices des affections neurologiques,.,.- Affection dû neurone moteur peripherique (poliomyélite antérieure,aigue, syn·
+ART. 3. - Traitement des conséquences motrices des affections neurologiques,.,.- Affection du neurone moteur peripherique (poliomyélite antérieure,aigue, syn·
 drôme de Guillain-barré', paraplégies non évolutives à la période ai gué:
 1145 Période des soins spéciaux (durée deux mois). traitement quotidien cc-mprenant l'ensemble des actes dispensés dans la journée. adaptation de petits appareils de contention et de rééducation et formation de l'entourage (durée 2h 30), par séance
 • • • • • • • • • •.., •, •• c..., •,,,..,,,,....,,, • • •, • •, •,.., • 12
@@ -3967,7 +3967,7 @@ AéédocatJon des troubles respiratoires chrol'liqdes #
 <
 1152/2 Ces gra'lee Gltjeçtw4S par les épreuves fonc:tlopnttllas (durée "5 min\lt.e,t
 séQJ\ce... Atrr. s. - Tractions vertéltralet (maximum 6 séances)
-1153 Traction cervicale. traction Iofl\ba,re saI" tab\e mécanlCiue... 4
+1153 Traction cervicale. traction lomba,re saI" tab\e mécanique... 4
 1154 Traction sur ta.bIe mécaniqOe 1Nfi'C massage des rég'lCt\S parave.rlébrales ·&
 ART. 6. - Manipulations vertébrales
 1155 La séance. avec un maxim\oo de 3 séances.. "FE
@@ -4359,7 +4359,7 @@ ART. 2. - Préparation du traitement.
 Repérage radiographique... Repérage gammagraphique.. 20 + films
 10 + filma
 1263/1 Lorsqu'il est fait usage d'un simulateur. en supplément.... 10
-1263/2 lorsqu'II est fait usage de la télévision, en supplément... 5
+1263/2 lorsqu'il est fait usage de la télévision, en supplément... 5
 ART. 3. - Etude physique et dosrmétrique.
 1264 Etude dosirnétrique comportant la description du ou des faisceaux, la dose
 absorbée par volume cible àl'isodose de référence... _ 20
@@ -4536,12 +4536,12 @@ B -Lorsque. l'acte est soumis à cetta formalité, le ma ad~ est tenu, préalabl
 réxécutlon da cet 'acte, d'adresser au contrôle médical une demande d'entente. p~éalable ·rem·
 plie et signée pat le biologiste qui doit 9ffectuer l'acte.
 lAS demandes d'entente préalable sont établies sur des imprimés conformes aux modèles
-arrêtés par la caisse nationale d'assurances maladie, accidents du' travHiLel--matadies profesalonneUes.
+arrêtés par la caisse nationale d'assurances maladie, accidents du travHiLel--matadies profesalonneUes.
 C - La date d'envol de ·Ia demande d'ententa préalable est attestée par le timbre daté
 de la poste..
 la réponse de la caisse de sécurité sociale doit être adressée au mala~ ou au biologiste, le cas· échéant, au plus tard le' dixième jour suivant l'envoi de la formule.
 Faute de réponse dans ce délaI,son ass~ntlment est réputé acquis.
-lorsqu'II y a urgence slgna~ée par le prescripteur sur sa demande d'examen, le biologiste
+lorsqu'il y a urgence slgna~ée par le prescripteur sur sa demande d'examen, le biologiste
 effeCtue l'acte mals remplit néanmoins ta formalité ci·dessus indiquée en portant la mention
 • -acte d'urgence ».
 ARTICLES
@@ -4555,7 +4555,7 @@ quel que soit le nombre d'examens demandés pour la même personne;Iorique ce su
 Sont considérés comme actes de nuit les actes effectués entre 20 heures et 8 heures,
 mais ils ne donnent lieu à un supplément que si l'appel au biologiste a été fait entre 19 heures
 et 7 heures.
-Ce -supplément n'est pas dû lorsque les analyses sont effectuées dans un laboratoire
+Ce -supplément n'est pas du lorsque les analyses sont effectuées dans un laboratoire
 implanté dans un établissement de soins.
 Article 7. - COTATION DES PRELEVEMENTS.
 ! """"'" Pour. les prélèvements effectués par les praticiens et auxilliaires médicaux, les lettres-clés et les cœfficients sont déterminés par application dt: la nomenclature générale des

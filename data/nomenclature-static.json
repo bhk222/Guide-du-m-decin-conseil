@@ -2,13 +2,13 @@
   "version": "1.0",
   "date": "2025-12-23",
   "source": "acte_extracted.txt",
-  "total": 808,
+  "total": 796,
   "categories": {
-    "Autre": 663,
+    "Autre": 650,
     "Orthopédie": 9,
     "Chirurgie": 48,
     "Soins": 20,
-    "Dermatologie": 8,
+    "Dermatologie": 9,
     "Ophtalmologie": 11,
     "Pédiatrie": 4,
     "ORL": 4,
@@ -491,14 +491,6 @@
       "libelle": "sans envahissement des vaisseaux et des nerfs",
       "tarif": 60,
       "coefficient": 60,
-      "lettreCle": "",
-      "categorie": "Autre"
-    },
-    {
-      "code": "0112/2",
-      "libelle": "avec envahissement des vaisseaux.. et des nerfs",
-      "tarif": 30,
-      "coefficient": 100,
       "lettreCle": "",
       "categorie": "Autre"
     },
@@ -1407,14 +1399,6 @@
       "categorie": "Autre"
     },
     {
-      "code": "0344",
-      "libelle": "frabeculotomie. trabéculectomie 90niotomie",
-      "tarif": 30,
-      "coefficient": 100,
-      "lettreCle": "",
-      "categorie": "Autre"
-    },
-    {
       "code": "0346",
       "libelle": "Sur oeil",
       "tarif": 30,
@@ -1695,14 +1679,6 @@
       "categorie": "Autre"
     },
     {
-      "code": "0402",
-      "libelle": "Traitement d'une oblitération choanale osseuse",
-      "tarif": 30,
-      "coefficient": 100,
-      "lettreCle": "",
-      "categorie": "Autre"
-    },
-    {
       "code": "0403",
       "libelle": "Traitement d'une oblitération choanale membraneuse unilatérale",
       "tarif": 20,
@@ -1888,7 +1864,7 @@
     },
     {
       "code": "0452",
-      "libelle": "Ablation par voie en do-buccale de fi stules et gros kystes congénitaux",
+      "libelle": "Ablation par voie endobuccale de fistules et gros kystes congénitaux",
       "tarif": 30,
       "coefficient": 80,
       "lettreCle": "",
@@ -1899,14 +1875,6 @@
       "libelle": "Diatherm.:--coagulatlon d'une tumeur maligne de la cavité buccale",
       "tarif": 25,
       "coefficient": 50,
-      "lettreCle": "",
-      "categorie": "Autre"
-    },
-    {
-      "code": "0455/2",
-      "libelle": "Avec électronécrose du maxillaire",
-      "tarif": 30,
-      "coefficient": 100,
       "lettreCle": "",
       "categorie": "Autre"
     },
@@ -2599,14 +2567,6 @@
       "categorie": "Autre"
     },
     {
-      "code": "0630/3",
-      "libelle": "3 doigts ou plus",
-      "tarif": 30,
-      "coefficient": 100,
-      "lettreCle": "",
-      "categorie": "Autre"
-    },
-    {
       "code": "0632/3",
       "libelle": "3 doigts ou plus",
       "tarif": 50,
@@ -2619,14 +2579,6 @@
       "libelle": "1 doigt",
       "tarif": 60,
       "coefficient": 60,
-      "lettreCle": "",
-      "categorie": "Autre"
-    },
-    {
-      "code": "0633/3",
-      "libelle": "3 doi]ts ou plus '... '",
-      "tarif": 30,
-      "coefficient": 100,
       "lettreCle": "",
       "categorie": "Autre"
     },
@@ -2699,14 +2651,6 @@
       "libelle": "Une commissure",
       "tarif": 25,
       "coefficient": 80,
-      "lettreCle": "",
-      "categorie": "Autre"
-    },
-    {
-      "code": "0644/2",
-      "libelle": "Deux comillissures",
-      "tarif": 30,
-      "coefficient": 100,
       "lettreCle": "",
       "categorie": "Autre"
     },
@@ -3359,14 +3303,6 @@
       "categorie": "Autre"
     },
     {
-      "code": "0814/1",
-      "libelle": "Pour kyste unique",
-      "tarif": 30,
-      "coefficient": 100,
-      "lettreCle": "",
-      "categorie": "Autre"
-    },
-    {
       "code": "0814/2",
       "libelle": "Pour-.kystes multiples",
       "tarif": 40,
@@ -3607,14 +3543,6 @@
       "categorie": "Autre"
     },
     {
-      "code": "0870",
-      "libelle": "Crél1ticn d'uno iistule artérÎo<veinsuse par anastomose directe",
-      "tarif": 30,
-      "coefficient": 100,
-      "lettreCle": "",
-      "categorie": "Autre"
-    },
-    {
       "code": "0884/2",
       "libelle": "Intervention itérative. 'en supplémentnt",
       "tarif": 10,
@@ -3847,26 +3775,10 @@
       "categorie": "Autre"
     },
     {
-      "code": "0946",
-      "libelle": "Traitement de l'Impuissance masculine...,.\\",
-      "tarif": 30,
-      "coefficient": 100,
-      "lettreCle": "",
-      "categorie": "Autre"
-    },
-    {
       "code": "0957",
       "libelle": "Exérèses d'une 9la1'<'::e de Bartholin",
       "tarif": 40,
       "coefficient": 40,
-      "lettreCle": "",
-      "categorie": "Autre"
-    },
-    {
-      "code": "0961",
-      "libelle": "Hystérectomie vaginale",
-      "tarif": 30,
-      "coefficient": 100,
       "lettreCle": "",
       "categorie": "Autre"
     },
@@ -4063,14 +3975,6 @@
       "categorie": "Autre"
     },
     {
-      "code": "1025",
-      "libelle": "D,ésinsertion du quadriceps pour ' raideur du genou",
-      "tarif": 30,
-      "coefficient": 100,
-      "lettreCle": "",
-      "categorie": "Autre"
-    },
-    {
       "code": "1030",
       "libelle": "Arthroplastie intéressant fémur et bas~in",
       "tarif": 110,
@@ -4184,11 +4088,11 @@
     },
     {
       "code": "1052",
-      "libelle": "Plastie c.utanée au niveau des orteils, quelle qu'en soit la technique",
+      "libelle": "Plastie cutanée au niveau des orteils, quelle qu'en soit la technique",
       "tarif": 30,
       "coefficient": 30,
       "lettreCle": "",
-      "categorie": "Autre"
+      "categorie": "Dermatologie"
     },
     {
       "code": "1056",
@@ -4224,7 +4128,7 @@
     },
     {
       "code": "1061",
-      "libelle": "Plastie d'un ligament t!bio·tarslon ou sous astragalien, quelle qu'en soit la technique",
+      "libelle": "Plastie d'un ligament tibio·tarslon ou sous astragalien, quelle qu'en soit la technique",
       "tarif": 8035,
       "coefficient": 8035,
       "lettreCle": "",
@@ -4720,7 +4624,7 @@
     },
     {
       "code": "1153",
-      "libelle": "Traction cervicale. traction Iofl\\ba,re saI\" tab\\e mécanlCiue",
+      "libelle": "Traction cervicale. traction lomba,re saI\" tab\\e mécanique",
       "tarif": 4,
       "coefficient": 4,
       "lettreCle": "",
@@ -4904,7 +4808,7 @@
     },
     {
       "code": "1263/2",
-      "libelle": "lorsqu'II est fait usage de la télévision, en supplément",
+      "libelle": "lorsqu'il est fait usage de la télévision, en supplément",
       "tarif": 5,
       "coefficient": 5,
       "lettreCle": "",
