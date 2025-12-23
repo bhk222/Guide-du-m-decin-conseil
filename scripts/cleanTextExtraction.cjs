@@ -7,7 +7,43 @@ function cleanText(text) {
     
     // Corrections des erreurs OCR communes
     const corrections = [
-        // Erreurs de caractères
+        // Erreurs de caractères spéciaux et symboles
+        [/!!/g, 'll'],
+        [/ues /g, 'des '],
+        [/dos /g, 'des '],
+        [/lIerts/g, 'nerfs'],
+        [/10i\)/g, '100'],
+        [/~:/g, 'que'],
+        [/~\./g, '.'],
+        [/~,/g, ','],
+        [/ch!m/g, 'chim'],
+        [/fiOttis/g, 'frottis'],
+        [/sécretlOIl/g, 'sécrétion'],
+        [/Etudfl/g, 'Étude'],
+        [/cytobactériologi~:/g, 'cytobactériologique'],
+        [/liquides de ponctions\.\. "/g, 'liquides de ponctions'],
+        [/It;gularis<ltion/g, 'régularisation'],
+        [/Apluchage/g, 'Épluchage'],
+        [/éventue!!e/g, 'éventuelle'],
+        [/géme!!e!!/g, 'gémellaire'],
+        [/de!! /g, 'des '],
+        [/f!!:/g, 'fi'],
+        [/iri~nn/g, 'ibrin'],
+        [/Jmmunoii!o~u!!/g, 'Immunoglobuli'],
+        [/électr~systoliQue/g, 'électrosystolique'],
+        [/polynucléaires/g, 'polynucléaires'],
+        [/\.\.\.\.,,,[;:]~S /g, ' des '],
+        [/\.\.\.\.,,,[;:]/g, ''],
+        [/~S /g, 'des '],
+        [/AldOtase/g, 'Aldolase'],
+        [/Chymotrypsi!le/g, 'Chymotrypsine'],
+        [/rhémog!obine/g, 'hémoglobine'],
+        [/Mucopolyssaccharldes/g, 'Mucopolysaccharides'],
+        [/10030/g, '100 30'], // Corriger nombre collé
+        [/jaïllbiére/g, 'jamibère'],
+        [/phtaleine/g, 'phtaléine'],
+        
+        // Erreurs de base
         [/ral:tiale/g, 'radiale'],
         [/l'~ktt:ë/g, "l'extrémité"],
         [/I·~ktt:ë/g, "l'extrémité"],
