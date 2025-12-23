@@ -9,6 +9,7 @@ interface ActeMedical {
     tarif: number;
     coefficient?: number;
     categorie?: string;
+    lettreCle?: string;
 }
 
 interface ActeSelectionne {
@@ -44,14 +45,31 @@ export const NomenclatureGenerale: React.FC = () => {
 
         setTimeout(() => {
             // Recherche dans la base de données intégrée
-            const query = searchQuery.toLowerCase();
+            const query = searchQuery.toLowerCase().trim();
             const queryWords = query.split(/\s+/);
 
+            // Détecter recherche par code lettre-clé (ex: "B 30", "E 15", "C 20")
+            const codeMatch = query.match(/^([A-Z])\s*(\d+)$/i);
+            
             const resultats = baseDeDonnees
                 .map(acte => {
                     let score = 0;
                     const libelleLower = acte.libelle.toLowerCase();
                     const codeLower = acte.code.toLowerCase();
+
+                    // Recherche par code lettre-clé (ex: "B 30")
+                    if (codeMatch) {
+                        const [, lettre, coef] = codeMatch;
+                        const lettreUpper = lettre.toUpperCase();
+                        const coefNum = parseInt(coef);
+                        
+                        // Vérifier si l'acte correspond à cette lettre et coefficient
+                        if (acte.lettreCle === lettreUpper && acte.coefficient === coefNum) {
+                            score += 200; // Score très élevé pour correspondance exacte lettre-clé
+                        } else if (acte.lettreCle === lettreUpper) {
+                            score += 100; // Même lettre-clé
+                        }
+                    }
 
                     // Code exact
                     if (codeLower === query) score += 100;
@@ -261,7 +279,7 @@ export const NomenclatureGenerale: React.FC = () => {
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
                         onKeyPress={(e) => e.key === 'Enter' && handleSearch()}
-                        placeholder="Ex: consultation, radiographie, chirurgie, échographie..."
+                        placeholder="Ex: consultation, radiographie, B 30, E 15, 0001..."
                         className="flex-1 px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
                     />
                     <button
@@ -274,7 +292,7 @@ export const NomenclatureGenerale: React.FC = () => {
                     </button>
                 </div>
                 <p className="text-xs text-slate-500 mt-2">
-                    💡 Utilisez des mots-clés naturels pour trouver rapidement les actes
+                    💡 Recherchez par code (B 30, E 15), numéro (0001) ou mots-clés (consultation, radio...)
                 </p>
             </Card>
 
@@ -296,6 +314,11 @@ export const NomenclatureGenerale: React.FC = () => {
                                             <span className="inline-block px-2 py-1 bg-primary-100 text-primary-700 text-xs rounded font-mono font-bold">
                                                 {acte.code}
                                             </span>
+                                            {acte.lettreCle && (
+                                                <span className="inline-block px-2 py-1 bg-green-100 text-green-700 text-xs rounded font-mono font-bold">
+                                                    {acte.lettreCle} {acte.coefficient}
+                                                </span>
+                                            )}
                                             <span className="text-xs text-slate-500">{acte.categorie}</span>
                                         </div>
                                         <p className="text-sm font-medium text-slate-800">{acte.libelle}</p>
