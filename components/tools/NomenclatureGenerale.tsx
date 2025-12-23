@@ -25,6 +25,7 @@ export const NomenclatureGenerale: React.FC = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [baseDeDonnees, setBaseDeDonnees] = useState<ActeMedical[]>([]);
     const [showStats, setShowStats] = useState(false);
+    const [codesRapides, setCodesRapides] = useState('');
 
     // Charger la base de données intégrée au démarrage
     useEffect(() => {
@@ -116,6 +117,49 @@ export const NomenclatureGenerale: React.FC = () => {
         setActesSelectionnes(actesSelectionnes.map(a =>
             a.id === id ? { ...a, quantite } : a
         ));
+    };
+
+    // Ajouter des actes par codes multiples
+    const ajouterParCodes = () => {
+        if (!codesRapides.trim()) return;
+        
+        // Séparer par virgules, espaces, points-virgules
+        const codes = codesRapides.split(/[,;|\s]+/).map(c => c.trim().toUpperCase()).filter(c => c);
+        
+        let actesAjoutes = 0;
+        codes.forEach(code => {
+            // Chercher par code exact
+            let acte = baseDeDonnees.find(a => a.code.toUpperCase() === code);
+            
+            // Si pas trouvé, chercher par lettre-clé (ex: "B30" ou "B 30")
+            if (!acte) {
+                const match = code.match(/^([A-Z])(\d+)$/);
+                if (match) {
+                    const [, lettre, coef] = match;
+                    const coefNum = parseInt(coef);
+                    acte = baseDeDonnees.find(a => 
+                        a.lettreCle === lettre && a.coefficient === coefNum
+                    );
+                }
+            }
+            
+            if (acte) {
+                const nouvelActe: ActeSelectionne = {
+                    id: `${Date.now()}-${Math.random()}`,
+                    acte: acte,
+                    quantite: 1
+                };
+                setActesSelectionnes(prev => [...prev, nouvelActe]);
+                actesAjoutes++;
+            }
+        });
+        
+        if (actesAjoutes > 0) {
+            setCodesRapides('');
+            alert(`✅ ${actesAjoutes} acte(s) ajouté(s) au calcul !`);
+        } else {
+            alert(`⚠️ Aucun acte trouvé pour les codes saisis.`);
+        }
     };
 
     // Calculer le total avec règles de cumul
@@ -294,6 +338,39 @@ export const NomenclatureGenerale: React.FC = () => {
                 <p className="text-xs text-slate-500 mt-2">
                     💡 Recherchez par code (B 30, E 15), numéro (0001) ou mots-clés (consultation, radio...)
                 </p>
+            </Card>
+
+            {/* Calcul rapide par codes multiples */}
+            <Card className="bg-gradient-to-r from-purple-50 to-pink-50">
+                <h3 className="text-lg font-semibold text-slate-800 mb-3 flex items-center gap-2">
+                    <Calculator size={20} className="text-purple-600" />
+                    ⚡ Calcul rapide par codes
+                </h3>
+                <div className="space-y-3">
+                    <p className="text-sm text-slate-600">
+                        Entrez plusieurs codes séparés par des virgules pour un calcul immédiat
+                    </p>
+                    <div className="flex gap-2">
+                        <input
+                            type="text"
+                            value={codesRapides}
+                            onChange={(e) => setCodesRapides(e.target.value)}
+                            onKeyPress={(e) => e.key === 'Enter' && ajouterParCodes()}
+                            placeholder="Ex: 1548, B30, 1406, E15, 0112/1..."
+                            className="flex-1 px-4 py-3 border border-purple-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent font-mono"
+                        />
+                        <button
+                            onClick={ajouterParCodes}
+                            className="px-6 py-3 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors font-medium flex items-center gap-2 whitespace-nowrap"
+                        >
+                            <Plus size={20} />
+                            Ajouter au calcul
+                        </button>
+                    </div>
+                    <p className="text-xs text-purple-600">
+                        💡 Formats acceptés: codes numériques (1548), lettres-clés (B30 ou B 30), codes avec slash (0112/1)
+                    </p>
+                </div>
             </Card>
 
             {/* Résultats de recherche */}
