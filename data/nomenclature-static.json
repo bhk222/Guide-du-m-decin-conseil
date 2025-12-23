@@ -2,18 +2,18 @@
   "version": "1.0",
   "date": "2025-12-23",
   "source": "acte_extracted.txt",
-  "total": 533,
+  "total": 516,
   "categories": {
-    "Autre": 422,
-    "Orthopédie": 7,
+    "Autre": 401,
+    "Orthopédie": 10,
+    "Chirurgie": 42,
     "Soins": 19,
-    "Chirurgie": 43,
-    "Dermatologie": 9,
+    "Dermatologie": 11,
     "Pédiatrie": 4,
     "Ophtalmologie": 8,
-    "ORL": 3,
+    "ORL": 2,
     "Visite": 1,
-    "Dentaire": 8,
+    "Dentaire": 9,
     "Biologie": 2,
     "Gastro-entérologie": 4,
     "Urologie": 2,
@@ -22,23 +22,87 @@
   "actes": [
     {
       "code": "0003",
-      "libelle": "Main, styloïdes ral:tiale au cubitale ............ . .. '\"",
+      "libelle": "Main, styloïdes radiale au cubitale... '\"",
       "tarif": 20,
+      "coefficient": 1,
+      "lettreCle": "",
+      "categorie": "Autre"
+    },
+    {
+      "code": "0006",
+      "libelle": "Humérus",
+      "tarif": 40,
+      "coefficient": 1,
+      "lettreCle": "",
+      "categorie": "Autre"
+    },
+    {
+      "code": "0007",
+      "libelle": "Clavicule...,.... \\",
+      "tarif": 20,
+      "coefficient": 1,
+      "lettreCle": "",
+      "categorie": "Autre"
+    },
+    {
+      "code": "0008",
+      "libelle": "Omoplate....,....,..•.,,.. '",
+      "tarif": 10,
+      "coefficient": 1,
+      "lettreCle": "",
+      "categorie": "Autre"
+    },
+    {
+      "code": "0009",
+      "libelle": "Avant-pied. tarse antérieur",
+      "tarif": 20,
+      "coefficient": 1,
+      "lettreCle": "",
+      "categorie": "Autre"
+    },
+    {
+      "code": "0010",
+      "libelle": "Astragale-calcanéum",
+      "tarif": 30,
       "coefficient": 1,
       "lettreCle": "",
       "categorie": "Autre"
     },
     {
       "code": "0011",
-      "libelle": "Une malléole ............ .. , . ... .. ...... .. . . .. ... .. , , . \"",
+      "libelle": "Une malléole...,...,,. \"",
       "tarif": 20,
       "coefficient": 1,
       "lettreCle": "",
       "categorie": "Autre"
     },
     {
+      "code": "0012",
+      "libelle": "Deux malléoles... '",
+      "tarif": 40,
+      "coefficient": 1,
+      "lettreCle": "",
+      "categorie": "Autre"
+    },
+    {
       "code": "0013",
-      "libelle": "Jambe ... . . . ...... , ..",
+      "libelle": "Jambe",
+      "tarif": 50,
+      "coefficient": 1,
+      "lettreCle": "",
+      "categorie": "Autre"
+    },
+    {
+      "code": "0014",
+      "libelle": "Rotule",
+      "tarif": 20,
+      "coefficient": 1,
+      "lettreCle": "",
+      "categorie": "Autre"
+    },
+    {
+      "code": "0016",
+      "libelle": "Rachis....,.. ~... \"",
       "tarif": 50,
       "coefficient": 1,
       "lettreCle": "",
@@ -69,32 +133,104 @@
       "categorie": "Orthopédie"
     },
     {
-      "code": "0025",
-      "libelle": ". Avant-pied, tarse antérieur, une malléole",
-      "tarif": 50,
+      "code": "0022/3",
+      "libelle": "Fracture articulaire de la palette humérale",
+      "tarif": 10035,
+      "coefficient": 1,
+      "lettreCle": "",
+      "categorie": "Orthopédie"
+    },
+    {
+      "code": "0026",
+      "libelle": "Astragale, calcanéum. fracture bi-malléolaire, tibia, ou tibia et péroné.. 80",
+      "tarif": 35,
+      "coefficient": 1,
+      "lettreCle": "",
+      "categorie": "Orthopédie"
+    },
+    {
+      "code": "0028/1",
+      "libelle": "Diaphyse 120",
+      "tarif": 60,
       "coefficient": 1,
       "lettreCle": "",
       "categorie": "Autre"
     },
     {
-      "code": "0027",
-      "libelle": "Rotule",
-      "tarif": 50,
+      "code": "0028/2",
+      "libelle": "Fractures des extrémités supérieures ou inférieures... \" 150",
+      "tarif": 60,
       "coefficient": 1,
       "lettreCle": "",
       "categorie": "Autre"
     },
     {
       "code": "0029/1",
-      "libelle": "Fractur0S parcellaires ........ . .............. .. .. \"",
+      "libelle": "Fractures parcellaires... \"",
       "tarif": 40,
       "coefficient": 1,
       "lettreCle": "",
       "categorie": "Autre"
     },
     {
+      "code": "0029/2",
+      "libelle": "Fractures du rebord cotyloïdien... 120",
+      "tarif": 50,
+      "coefficient": 1,
+      "lettreCle": "",
+      "categorie": "Autre"
+    },
+    {
+      "code": "0030",
+      "libelle": "Fractures transcotyloïdiennes...;.. 150",
+      "tarif": 60,
+      "coefficient": 1,
+      "lettreCle": "",
+      "categorie": "Autre"
+    },
+    {
+      "code": "0040",
+      "libelle": "Carpe, poignet, cou-de-pied... 60",
+      "tarif": 30,
+      "coefficient": 1,
+      "lettreCle": "",
+      "categorie": "Autre"
+    },
+    {
+      "code": "0041",
+      "libelle": "Coude, épaule, rotule, genou... 80",
+      "tarif": 30,
+      "coefficient": 1,
+      "lettreCle": "",
+      "categorie": "Autre"
+    },
+    {
+      "code": "0042",
+      "libelle": "Hanche.... -",
+      "tarif": 10040,
+      "coefficient": 1,
+      "lettreCle": "",
+      "categorie": "Autre"
+    },
+    {
+      "code": "0043",
+      "libelle": "Bassin (disjonction pubienne)...:.... 80",
+      "tarif": 30,
+      "coefficient": 1,
+      "lettreCle": "",
+      "categorie": "Autre"
+    },
+    {
+      "code": "0049/1",
+      "libelle": "Pour la It;gularis<ltion Apluchage et suture éventuelle des plans superficiels",
+      "tarif": 40,
+      "coefficient": 1,
+      "lettreCle": "",
+      "categorie": "Chirurgie"
+    },
+    {
       "code": "0050",
-      "libelle": "Evacuation chirurgicale et drainage des épanchements séro-hématiques des mem￾bres avec décollement cutané étendu",
+      "libelle": "Evacuation chirurgicale et drainage des épanchements séro-hématiques des membres avec décollement cutané étendu",
       "tarif": 40,
       "coefficient": 1,
       "lettreCle": "",
@@ -102,7 +238,7 @@
     },
     {
       "code": "0051/1",
-      "libelle": "Surface inférieure à 10% de l'a surface du corps .",
+      "libelle": "Surface inférieure à 10% de l'a surface du corps",
       "tarif": 15,
       "coefficient": 1,
       "lettreCle": "",
@@ -110,23 +246,23 @@
     },
     {
       "code": "0051/2",
-      "libelle": "Surface entre 10 et 20% .... . ... 0",
+      "libelle": "Surface entre 10 et 20%.. 0",
       "tarif": 40,
       "coefficient": 1,
       "lettreCle": "",
       "categorie": "Autre"
     },
     {
-      "code": "0052",
-      "libelle": "Extraction de corps étranger::> profonds des parties molles",
-      "tarif": 20,
+      "code": "0051",
+      "libelle": "/ 3 Surface supérieure à 20%... 60",
+      "tarif": 30,
       "coefficient": 1,
       "lettreCle": "",
       "categorie": "Autre"
     },
     {
       "code": "0053",
-      "libelle": "Impédencémétrie des tissus .. .... ..•..•. .... . , , .. , . , . , . . , •• \" . \"",
+      "libelle": "Impédencémétrie des tissus...,,..,.,.,.., •• \". \"",
       "tarif": 4,
       "coefficient": 1,
       "lettreCle": "",
@@ -134,7 +270,7 @@
     },
     {
       "code": "0054",
-      "libelle": "Injection sous-cutanée\", intra-dermique. , . , . ' .' , . . , , . . , . _, . , \" ... . . , \"",
+      "libelle": "Injection sous-cutanée\", intra-dermique.,.,. '.',..,,..,. _,., \".., \"",
       "tarif": 1,
       "coefficient": 1,
       "lettreCle": "",
@@ -142,7 +278,7 @@
     },
     {
       "code": "0056/1",
-      "libelle": "Pour les cinq premières ., , , , ., ..••..... _____ . _ . _ . . .. _ ........ _",
+      "libelle": "Pour les cinq premières.,,,,.,.. _____. _. _.... _.. _",
       "tarif": 7,
       "coefficient": 1,
       "lettreCle": "",
@@ -150,7 +286,7 @@
     },
     {
       "code": "0056/2",
-      "libelle": "Pour les suivantes .. ,. ,., ., ..•.••• , ..... __ .... , . __ , __ . _ , . , . , , .. _",
+      "libelle": "Pour les suivantes..,.,.,.,..,.. __....,. __, __. _,.,.,,.. _",
       "tarif": 5,
       "coefficient": 1,
       "lettreCle": "E",
@@ -158,7 +294,7 @@
     },
     {
       "code": "0058",
-      "libelle": "Désensibilisation par scarification dans les allergies polliniques .. _",
+      "libelle": "Désensibilisation par scarification dans les allergies polliniques.. _",
       "tarif": 4,
       "coefficient": 1,
       "lettreCle": "E",
@@ -166,7 +302,7 @@
     },
     {
       "code": "0060",
-      "libelle": "Inventaires allergologique comportant des tests cutanés effectués en injection intra￾dermiques avec compte rendu (maximum trois (03) séances) .... , . ,_",
+      "libelle": "Inventaires allergologique comportant des tests cutanés effectués en injection intradermiques avec compte rendu (maximum trois (03) séances)....,.,_",
       "tarif": 15,
       "coefficient": 1,
       "lettreCle": "",
@@ -174,7 +310,7 @@
     },
     {
       "code": "0062/2",
-      "libelle": "Les mêmes implants SOLIS une muqueuse ..... ' .. 0 •••••••••• 0 ••• 0 0",
+      "libelle": "Les mêmes implants SOLIS une muqueuse.. '.. 0... 0 ••• 0 0",
       "tarif": 20,
       "coefficient": 1,
       "lettreCle": "",
@@ -182,7 +318,7 @@
     },
     {
       "code": "0063",
-      "libelle": "Prélèvement aseptique cutané.., ou de sécrétions muqueuses pour examens cytologi￾ques, bactériologiques, mycologiques, virologiques ou parasitologiquesoo",
+      "libelle": "Prélèvement aseptique cutané.., ou de sécrétions muqueuses pour examens cytologiques, bactériologiques, mycologiques, virologiques ou parasitologiquesoo",
       "tarif": 1,
       "coefficient": 1,
       "lettreCle": "",
@@ -198,7 +334,7 @@
     },
     {
       "code": "0066",
-      "libelle": "Suture secondaire d'une plaie aprés avivement 00.00.0. 0 • o ... 0 0 0 000",
+      "libelle": "Suture secondaire d'une plaie après avivement 00.00.0. 0 • o... 0 0 0",
       "tarif": 10,
       "coefficient": 1,
       "lettreCle": "",
@@ -206,7 +342,7 @@
     },
     {
       "code": "0067/1",
-      "libelle": "Au dessous de 10 cm2 0.0 .......... 0 0 0.0 ...... 00.00000",
+      "libelle": "Au dessous de 10 cm2 0.0... 0 0 0.0.. 00.00000",
       "tarif": 15,
       "coefficient": 1,
       "lettreCle": "",
@@ -214,7 +350,7 @@
     },
     {
       "code": "0067/2",
-      "libelle": "De 10 cm2 à 50 cm2 '. 0 0 • 0 ••• 0 ........... 0 0 0 0 0 0 .... 0 .. 0 ..... ; •• 0",
+      "libelle": "De 10 cm2 à 50 cm2 '. 0 0 • 0 ••• 0... 0 0 0 0 0 0.... 0.. 0..; •• 0",
       "tarif": 30,
       "coefficient": 1,
       "lettreCle": "",
@@ -222,7 +358,7 @@
     },
     {
       "code": "0067/4",
-      "libelle": "Au dessus de 200 cm2 par multlple's de 200 cm2 en supplément .• o. 20",
+      "libelle": "Au dessus de 200 cm2 par multlple's de 200 cm2 en supplément.• o. 20",
       "tarif": 10,
       "coefficient": 1,
       "lettreCle": "",
@@ -230,7 +366,7 @@
     },
     {
       "code": "0068",
-      "libelle": "excision d'une cicatrice vicieuse suivie d,e suture .. 0 •••• 0 0 • 0",
+      "libelle": "excision d'une cicatrice vicieuse suivie d,e suture.. 0 •••• 0 0 • 0",
       "tarif": 20,
       "coefficient": 1,
       "lettreCle": "",
@@ -246,7 +382,7 @@
     },
     {
       "code": "0070",
-      "libelle": "Excision d'un anthrax .... ,,' ... ,'.. . .. 0 ••••• 0 ••• 0 0 • 0 •••••• 0",
+      "libelle": "Excision d'un anthrax....,,'...,'.. 0.. 0 ••• 0 0 • 0.. 0",
       "tarif": 10,
       "coefficient": 1,
       "lettreCle": "",
@@ -254,7 +390,7 @@
     },
     {
       "code": "0071",
-      "libelle": "Ponction d'abcés ou de ganglion .• \".\" .••• , ..•. , , , \"",
+      "libelle": "Ponction d'abcés ou de ganglion.• \".\".•••,..•.,,, \"",
       "tarif": 3,
       "coefficient": 1,
       "lettreCle": "",
@@ -294,7 +430,7 @@
     },
     {
       "code": "0086",
-      "libelle": "Ablation d'angiome ou delymp.hanglome volumineux.............. . . 40 E",
+      "libelle": "Ablation d'angiome ou delymp.hanglome volumineux... 40 E",
       "tarif": 30,
       "coefficient": 1,
       "lettreCle": "",
@@ -302,7 +438,7 @@
     },
     {
       "code": "0087",
-      "libelle": "Extirpation d'un anévrisme clrsolde .... .. . .. . . ... . . ; . .. . . . . .. . .. _ 80",
+      "libelle": "Extirpation d'un anévrisme clrsolde...;... _ 80",
       "tarif": 30,
       "coefficient": 1,
       "lettreCle": "",
@@ -325,32 +461,16 @@
       "categorie": "Autre"
     },
     {
-      "code": "0095",
-      "libelle": ".Epilation électrique, la séance de 20 mn ... ..... .",
-      "tarif": 8,
-      "coefficient": 1,
-      "lettreCle": "E",
-      "categorie": "Autre"
-    },
-    {
       "code": "0096/1",
-      "libelle": "Lésion de moins de 4 cm2 .. ... . ... .. ... .. . . ............ . ... .",
+      "libelle": "Lésion de moins de 4 cm2",
       "tarif": 10,
       "coefficient": 1,
       "lettreCle": "",
       "categorie": "Autre"
     },
     {
-      "code": "0096/2",
-      "libelle": "Lésion · de 4 cm2 ou plus",
-      "tarif": 30,
-      "coefficient": 1,
-      "lettreCle": "",
-      "categorie": "Autre"
-    },
-    {
       "code": "0098",
-      "libelle": "Puvathérapie ..... . . .. .. ... . ... .•... . . . . . ' ... '",
+      "libelle": "Puvathérapie... '... '",
       "tarif": 10,
       "coefficient": 1,
       "lettreCle": "",
@@ -363,6 +483,22 @@
       "coefficient": 1,
       "lettreCle": "",
       "categorie": "Autre"
+    },
+    {
+      "code": "0102",
+      "libelle": "Le même traitement av.ec nettoyage de peau et mil8 à plat ~8S collections;uppurées ou kystiquès, par séance",
+      "tarif": 15,
+      "coefficient": 1,
+      "lettreCle": "E",
+      "categorie": "Dermatologie"
+    },
+    {
+      "code": "0106",
+      "libelle": "Injection intra-musculairt",
+      "tarif": 107,
+      "coefficient": 1,
+      "lettreCle": "",
+      "categorie": "Soins"
     },
     {
       "code": "0111",
@@ -382,7 +518,7 @@
     },
     {
       "code": "0112/2",
-      "libelle": "avec envahissement dos vaisseaux .. et des lIerts o. . . . . . . . . . . . . . . .. 10i)",
+      "libelle": "avec envahissement dos vaisseaux.. et des lIerts... 10i)",
       "tarif": 30,
       "coefficient": 1,
       "lettreCle": "",
@@ -390,7 +526,7 @@
     },
     {
       "code": "0118/3",
-      "libelle": "trois tendons 'et plus ................ . ........ . . . ..... . . .. .. . .... 120",
+      "libelle": "trois tendons 'et plus... 120",
       "tarif": 50,
       "coefficient": 1,
       "lettreCle": "",
@@ -398,8 +534,8 @@
     },
     {
       "code": "0119",
-      "libelle": "Exérès~ d'une ou plusieurs gaines synoviales .. . ..... . ....... . ..... 100",
-      "tarif": 3,
+      "libelle": "Exérès~ d'une ou plusieurs gaines synoviales",
+      "tarif": 1003,
       "coefficient": 1,
       "lettreCle": "S",
       "categorie": "Autre"
@@ -414,7 +550,7 @@
     },
     {
       "code": "0127/2",
-      "libelle": "Fémur ............... . .... \" ........... ...... . . . . ... . ......... . . 150",
+      "libelle": "Fémur... \"... 150",
       "tarif": 60,
       "coefficient": 1,
       "lettreCle": "",
@@ -422,7 +558,7 @@
     },
     {
       "code": "0127/3",
-      "libelle": "Autres os ... ..... ............. , ... , . . ....... ..... ........ . ..... 120",
+      "libelle": "Autres os...,...,... 120",
       "tarif": 60,
       "coefficient": 1,
       "lettreCle": "",
@@ -446,7 +582,7 @@
     },
     {
       "code": "0134",
-      "libelle": "Mobilisation sous anésthèsie générale ... . ..............",
+      "libelle": "Mobilisation sous anésthèsie générale",
       "tarif": 10,
       "coefficient": 1,
       "lettreCle": "",
@@ -454,7 +590,7 @@
     },
     {
       "code": "0135",
-      "libelle": "Arthroscopie ........ . ....... . ..... .. .. .. . ; .... ... : ; . .. ,",
+      "libelle": "Arthroscopie",
       "tarif": 20,
       "coefficient": 1,
       "lettreCle": "",
@@ -470,7 +606,7 @@
     },
     {
       "code": "0136/2",
-      "libelle": "autres articulations ........ ~ .. . . ; . . ... . . ' ...",
+      "libelle": "autres articulations.. ~....;.. '",
       "tarif": 15,
       "coefficient": 1,
       "lettreCle": "",
@@ -478,7 +614,7 @@
     },
     {
       "code": "0137/1",
-      "libelle": "un ou plu~ieurs dOI~t8 ou orteils . . •.. ... ........ . : . .",
+      "libelle": "un ou plu~ieurs dOI~t8 ou orteils",
       "tarif": 20,
       "coefficient": 1,
       "lettreCle": "",
@@ -494,7 +630,7 @@
     },
     {
       "code": "0137/3",
-      "libelle": "épaule. genou à l'exclusion de la ménlsectomle",
+      "libelle": "épaule, genou à l'exclusion de la ménlsectomle",
       "tarif": 60,
       "coefficient": 1,
       "lettreCle": "",
@@ -518,7 +654,7 @@
     },
     {
       "code": "0141/1",
-      "libelle": "Hanche . , 0 , 0 , • • • • • 0 , 0 0 •••• • , ••• • 0 • , , • •• • •• • •••••• •• ••• • • • • • • , , . 140",
+      "libelle": "Hanche., 0, 0, • • • • • 0, 0 0 •••• •, ••• • 0 •,, • •• • •• •.. •• ••• • • • • • •,,. 140",
       "tarif": 60,
       "coefficient": 1,
       "lettreCle": "",
@@ -526,7 +662,7 @@
     },
     {
       "code": "0143/2",
-      "libelle": "d'une artère carotide •• •• ••• • \" ...... . , . l",
+      "libelle": "d'une artère carotide •• •• ••• • \"..,. l",
       "tarif": 50,
       "coefficient": 1,
       "lettreCle": "",
@@ -534,7 +670,7 @@
     },
     {
       "code": "0145",
-      "libelle": "Aortographie par ponction percutanée .\", . ... _, \" 1' \" .. ;,; .. ' . ' , . \"\"'\"",
+      "libelle": "Aortographie par ponction percutanée.\",.... _, \" 1' \"..;,;.. '. ',. \"\"'\"",
       "tarif": 50,
       "coefficient": 1,
       "lettreCle": "",
@@ -550,7 +686,7 @@
     },
     {
       "code": "0151",
-      "libelle": "Mesure de la pression veineuse périphérique . .... . . . . . , . _ .. . __",
+      "libelle": "Mesure de la pression veineuse périphérique...,. _... __",
       "tarif": 4,
       "coefficient": 1,
       "lettreCle": "",
@@ -558,7 +694,7 @@
     },
     {
       "code": "0152",
-      "libelle": "Mesure de résistance capillaire .' - . . .. - . .... , ___ . _ . . . . _ . _ ... . .. . _",
+      "libelle": "Mesure de résistance capillaire.' -.... -.., ___. _.... _. _.. _",
       "tarif": 4,
       "coefficient": 1,
       "lettreCle": "",
@@ -566,7 +702,7 @@
     },
     {
       "code": "0153",
-      "libelle": "Oscillographie ...... _ ... : .. •....... ; ... . ..... _ ....... . .. _ ..... _",
+      "libelle": "Oscillographie.. _...:....;.. _... _.. _",
       "tarif": 4,
       "coefficient": 1,
       "lettreCle": "",
@@ -574,7 +710,7 @@
     },
     {
       "code": "0154",
-      "libelle": "Exploration fluroscopique de la circulation artérielle des membres . . _",
+      "libelle": "Exploration fluroscopique de la circulation artérielle des membres.. _",
       "tarif": 8,
       "coefficient": 1,
       "lettreCle": "",
@@ -582,7 +718,7 @@
     },
     {
       "code": "0155",
-      "libelle": "Epreuve au bleu ... . .. . .......... __ . _ . _ ...... _ . , _ .. _ . . _ .. _ . _",
+      "libelle": "Epreuve au bleu... __. _. _.. _., _.. _.. _.. _. _",
       "tarif": 6,
       "coefficient": 1,
       "lettreCle": "",
@@ -590,7 +726,7 @@
     },
     {
       "code": "0156",
-      "libelle": "Piézographje, .... . .. .. . - _ . .... _ - .. . ..... . . _ ... . ... . . . ........ _ . _",
+      "libelle": "Piézographje,... - _.. _ -... _... _. _",
       "tarif": 4,
       "coefficient": 1,
       "lettreCle": "",
@@ -646,7 +782,7 @@
     },
     {
       "code": "0172/2",
-      "libelle": "2\" ....... . ........... , ......•..•........ . ... . . , ...... . . . .. . .. ' . _ 5Q'",
+      "libelle": "2\"...,...,... '. _ 5Q'",
       "tarif": 30,
       "coefficient": 1,
       "lettreCle": "",
@@ -654,7 +790,7 @@
     },
     {
       "code": "0173/1",
-      "libelle": "1° ... . . . .. . .... . ..... . ........ : . ... . ..... . . . . '. -....... -",
+      "libelle": "1°...:... '. -.. -",
       "tarif": 150,
       "coefficient": 1,
       "lettreCle": "",
@@ -662,23 +798,15 @@
     },
     {
       "code": "0174/1",
-      "libelle": "1° . . ..... ....... .. . : ........................................... '. 80",
+      "libelle": "1°...:... '. 80",
       "tarif": 30,
       "coefficient": 1,
       "lettreCle": "",
       "categorie": "Autre"
     },
     {
-      "code": "0174/2",
-      "libelle": "2° .. . .. . .. . ... . ... ........ ...... . . . ... ..... ... ... . ... , .. . . ...... 100",
-      "tarif": 50,
-      "coefficient": 1,
-      "lettreCle": "",
-      "categorie": "Autre"
-    },
-    {
       "code": "0175/2",
-      "libelle": "3° Ainsi que les vaisseaux du cou ............ . ....... . ....... , . .. 150",
+      "libelle": "3° Ainsi que les vaisseaux du cou...,... 150",
       "tarif": 90,
       "coefficient": 1,
       "lettreCle": "",
@@ -694,7 +822,7 @@
     },
     {
       "code": "0180/1",
-      "libelle": "Segmentaire .. . ....... .... . .. . ~ . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .. 80",
+      "libelle": "Segmentaire... ~... 80",
       "tarif": 30,
       "coefficient": 1,
       "lettreCle": "",
@@ -702,7 +830,7 @@
     },
     {
       "code": "0183/1",
-      "libelle": "Unilatéral .. . - . .. ... .. .......... . ... - ............ '. . , ........ , . , .. 60",
+      "libelle": "Unilatéral... -... -... '..,..,.,.. 60",
       "tarif": 30,
       "coefficient": 1,
       "lettreCle": "",
@@ -710,31 +838,15 @@
     },
     {
       "code": "0186",
-      "libelle": "Plasmaphérèse ' ....... ' .. . .. •.. . .. 1 •• .• • , . • •• ' , \" \"\" ;, .• , ~",
+      "libelle": "Plasmaphérèse '.. '.... 1 ••.• •,. • •• ', \" \"\";,.•, ~",
       "tarif": 8,
       "coefficient": 1,
       "lettreCle": "O",
       "categorie": "Autre"
     },
     {
-      "code": "0139",
-      "libelle": ". Angioplasti~ endo-Ivmina1e· ... . .. .. . : ' ... : . , ... ..... .. .• . ..",
-      "tarif": 100,
-      "coefficient": 1,
-      "lettreCle": "",
-      "categorie": "Autre"
-    },
-    {
-      "code": "0191",
-      "libelle": "Nerf trijumeau (trou ovale ou grand rond), nerf ophtalmique",
-      "tarif": 10,
-      "coefficient": 1,
-      "lettreCle": "",
-      "categorie": "Autre"
-    },
-    {
       "code": "0195",
-      "libelle": "Suture nerveuse primitive ....................... J. J",
+      "libelle": "Suture nerveuse primitive... J. J",
       "tarif": 60,
       "coefficient": 1,
       "lettreCle": "",
@@ -742,7 +854,7 @@
     },
     {
       "code": "0196",
-      "libelle": "Suture nerveuse t;6Colldaire ... \" 1 \" ... ... • ..... ......... .......... 70",
+      "libelle": "Suture nerveuse t;6Colldaire... \" 1 \" .. 70",
       "tarif": 30,
       "coefficient": 1,
       "lettreCle": "",
@@ -750,7 +862,7 @@
     },
     {
       "code": "0198",
-      "libelle": "Greffe nérveuse en un ou deux t~mp8 .............................. 120",
+      "libelle": "Greffe nérveuse en un ou deux t~mp8... 120",
       "tarif": 60,
       "coefficient": 1,
       "lettreCle": "",
@@ -758,7 +870,7 @@
     },
     {
       "code": "0199",
-      "libelle": "I-ibératlon d'un nerf corrtprlmé ...••... •. ','",
+      "libelle": "I-ibératlon d'un nerf corrtprlmé.. •. ','",
       "tarif": 50,
       "coefficient": 1,
       "lettreCle": "",
@@ -774,7 +886,7 @@
     },
     {
       "code": "0207",
-      "libelle": "Ponction lombaire ou sous-occipitale avec ou sans ir jection médicamen￾teuse, ~vec ou sans épreuve au manomètrè de Oueechenstatt Stockey",
+      "libelle": "Ponction lombaire ou sous-occipitale avec ou sans ir jection médicamenteuse, ~vec ou sans épreuve au manomètrè de Oueechenstatt Stockey",
       "tarif": 8,
       "coefficient": 1,
       "lettreCle": "",
@@ -782,7 +894,7 @@
     },
     {
       "code": "0209",
-      "libelle": "Myelographie gazeuse, enc~phalo9raphie totale par voie lombaire . . . . 30",
+      "libelle": "Myelographie gazeuse, enc~phalo9raphie totale par voie lombaire.... 30",
       "tarif": 25,
       "coefficient": 1,
       "lettreCle": "",
@@ -790,7 +902,7 @@
     },
     {
       "code": "0211/2",
-      "libelle": "Le même acte chez le nourrisson sans trépanatloll ...... ' .......... 15",
+      "libelle": "Le même acte chez le nourrisson sans trépanatloll.. '... 15",
       "tarif": 2,
       "coefficient": 1,
       "lettreCle": "S",
@@ -798,7 +910,7 @@
     },
     {
       "code": "0217",
-      "libelle": "Examen. èlectrocorticographique ............",
+      "libelle": "Examen. èlectrocorticographique",
       "tarif": 10,
       "coefficient": 1,
       "lettreCle": "",
@@ -806,7 +918,7 @@
     },
     {
       "code": "0218",
-      "libelle": "Ec.hoencéphaloqramme ........ . . . .. ........................ _'",
+      "libelle": "Ec.hoencéphaloqramme... _'",
       "tarif": 10,
       "coefficient": 1,
       "lettreCle": "",
@@ -814,7 +926,7 @@
     },
     {
       "code": "0219/1",
-      "libelle": "- Examen électrique garvano-faradique quels que soient le ou les territoi￾r88 examinés",
+      "libelle": "- Examen électrique garvano-faradique quels que soient le ou les territoir88 examinés",
       "tarif": 10,
       "coefficient": 1,
       "lettreCle": "",
@@ -829,16 +941,16 @@
       "categorie": "Autre"
     },
     {
-      "code": "0220/4",
-      "libelle": "Mesures de vitesse de conduction sensitive",
-      "tarif": 20,
+      "code": "0224",
+      "libelle": "Trous de trépans et ponction d'un abcès ou d'un hématome intra-crânien... ·.··· 80",
+      "tarif": 30,
       "coefficient": 1,
       "lettreCle": "",
-      "categorie": "Autre"
+      "categorie": "Soins"
     },
     {
       "code": "0226/2",
-      "libelle": "Avec greffe ou autoplastie ...... , .. .. . . . ........ . ..... . ..... . .... 80'",
+      "libelle": "Avec greffe ou autoplastie..,... 80'",
       "tarif": 30,
       "coefficient": 1,
       "lettreCle": "",
@@ -846,7 +958,7 @@
     },
     {
       "code": "0229",
-      "libelle": "Traitement p~r volet d'un hématome extra-durai ou d'un hell.dlOrne sous￾durai chronique . .. , . , . . . . . . . . . . . . . . . ...•.... . ... . .. ,. . . .. . ' . . . . -. .. 120",
+      "libelle": "Traitement p~r volet d'un hématome extra-durai ou d'un hell.dlOrne sousdurai chronique...,.,...,.. '.... -... 120",
       "tarif": 40,
       "coefficient": 1,
       "lettreCle": "",
@@ -854,103 +966,31 @@
     },
     {
       "code": "0231",
-      "libelle": "Mise en place d'un drainage ventriculaire externe ... . . . . . . . . . . . . . . 40",
+      "libelle": "Mise en place d'un drainage ventriculaire externe... 40",
       "tarif": 25,
       "coefficient": 1,
       "lettreCle": "",
       "categorie": "Autre"
     },
     {
-      "code": "0232",
-      "libelle": "Pinealomes, cranio-phélryngiomes. .chordoms s. . . . . . . . . . . . . . . . . . .. 300",
-      "tarif": 110,
-      "coefficient": 1,
-      "lettreCle": "",
-      "categorie": "Autre"
-    },
-    {
-      "code": "0234",
-      "libelle": "Neurmomes de l'angle ponto-cérébelleux ....... . ........ . .... . ... 300",
-      "tarif": 110,
-      "coefficient": 1,
-      "lettreCle": "",
-      "categorie": "Autre"
-    },
-    {
-      "code": "0235",
-      "libelle": "Tu.meurs intra-vt:otriculaires .. , . ,.... . .... . . . . .. . ....•. ... .. .. ... 300",
-      "tarif": 130,
-      "coefficient": 1,
-      "lettreCle": "",
-      "categorie": "Autre"
-    },
-    {
-      "code": "0236",
-      "libelle": "Tumeurs et abcés cérébraux à \"exclusion des précédents . . ... . . . .. 200",
-      "tarif": 110,
-      "coefficient": 1,
-      "lettreCle": "",
-      "categorie": "Autre"
-    },
-    {
-      "code": "0237",
-      "libelle": "Tumeurs de l'hypophyse, quel qu'ensoit l'abord . ..... . .... ... . .... . 200",
-      "tarif": 110,
-      "coefficient": 1,
-      "lettreCle": "",
-      "categorie": "Autre"
-    },
-    {
-      "code": "0238",
-      "libelle": "Tumeurs de l'orbite par vole Intra-crânienne .•.••................. 200",
-      "tarif": 110,
-      "coefficient": 1,
-      "lettreCle": "",
-      "categorie": "Autre"
-    },
-    {
       "code": "0239",
-      "libelle": "~mpyème sous-dural .•.. ;............... . ....................... 120",
+      "libelle": "~mpyème sous-dural.•..;... 120",
       "tarif": 60,
-      "coefficient": 1,
-      "lettreCle": "",
-      "categorie": "Autre"
-    },
-    {
-      "code": "0240",
-      "libelle": "MiJlformations v~cu aires cérébrales (anévrysme et angiomes) .....• 300",
-      "tarif": 130,
-      "coefficient": 1,
-      "lettreCle": "",
-      "categorie": "Autre"
-    },
-    {
-      "code": "0241",
-      "libelle": "Hémorragie ou hématome Intra-cérébral non traumatique .......... 200",
-      "tarif": 110,
       "coefficient": 1,
       "lettreCle": "",
       "categorie": "Autre"
     },
     {
       "code": "0243",
-      "libelle": "Cranioplastie ......•..•..•................•.............. . ....... 120",
+      "libelle": "Cranioplastie... 120",
       "tarif": 60,
       "coefficient": 1,
       "lettreCle": "",
       "categorie": "Autre"
     },
     {
-      "code": "0244",
-      "libelle": "Cranioplastie avec réparation de la voûte orbitaire 200",
-      "tarif": 110,
-      "coefficient": 1,
-      "lettreCle": "",
-      "categorie": "Autre"
-    },
-    {
       "code": "0245",
-      "libelle": "Lœotomie chimique ou physique. . . . . • . . . . . . . . . . . . . . . . . . . . . . . . . . . . 50",
+      "libelle": "Lœotomie chimique ou physique .. 50",
       "tarif": 25,
       "coefficient": 1,
       "lettreCle": "",
@@ -958,31 +998,15 @@
     },
     {
       "code": "0246",
-      "libelle": "lebotomle ou topectomle ........................................ 150",
+      "libelle": "lebotomle ou topectomle... 150",
       "tarif": 70,
       "coefficient": 1,
       "lettreCle": "",
       "categorie": "Autre"
     },
     {
-      "code": "0247",
-      "libelle": "Interventions stéréotaxlques avec répérages électro-physiologiques ., 300",
-      "tarif": 110,
-      "coefficient": 1,
-      "lettreCle": "",
-      "categorie": "Autre"
-    },
-    {
-      "code": "0249",
-      "libelle": "Exçision d'une 'zone épiléptogéne avec enregistrement corticographlque 200",
-      "tarif": 110,
-      "coefficient": 1,
-      "lettreCle": "",
-      "categorie": "Autre"
-    },
-    {
       "code": "0253",
-      "libelle": "' Section Intra-crânienne du trljumeau. de l'acoustique ou du glosso-pha￾r yngien ............•... ' ..... '. • • • • . • . . . • . . . . • . • . . • . . . . . . . • . . . . . . .. 150",
+      "libelle": "' Section Intra-crânienne du trljumeau. de l'acoustique ou du glosso-phar yngien... '.. '. • • • •. .. •. .. 150",
       "tarif": 70,
       "coefficient": 1,
       "lettreCle": "",
@@ -1006,7 +1030,7 @@
     },
     {
       "code": "0257",
-      "libelle": "Angiographie fluorescénique (clichés photographiques compris). . . , . \"",
+      "libelle": "Angiographie fluorescénique (clichés photographiques compris)...,. \"",
       "tarif": 30,
       "coefficient": 1,
       "lettreCle": "",
@@ -1046,7 +1070,7 @@
     },
     {
       "code": "0267",
-      "libelle": "Epreuves de provocation dans le glaucome . . ... ..... .. . . .",
+      "libelle": "Epreuves de provocation dans le glaucome",
       "tarif": 20,
       "coefficient": 1,
       "lettreCle": "",
@@ -1086,15 +1110,7 @@
     },
     {
       "code": "0274",
-      "libelle": "Potentiels évoqués visuels ..... . .. . . . . ' . .... . •.... . . , ..... .. .• . . '",
-      "tarif": 30,
-      "coefficient": 1,
-      "lettreCle": "",
-      "categorie": "Autre"
-    },
-    {
-      "code": "0275",
-      "libelle": "Electro oculogramme",
+      "libelle": "Potentiels évoqués visuels... '....,... '",
       "tarif": 30,
       "coefficient": 1,
       "lettreCle": "",
@@ -1102,7 +1118,7 @@
     },
     {
       "code": "0276",
-      "libelle": "Réfection palpébrale totale. quelle que soit la technique . . . . . . . ... 60",
+      "libelle": "Réfection palpébrale totale. quelle que soit la technique... 60",
       "tarif": 30,
       "coefficient": 1,
       "lettreCle": "",
@@ -1118,7 +1134,7 @@
     },
     {
       "code": "0279",
-      "libelle": "Traitement chirurgical ~u chalaziOfl et kystes des paupières. . ';.' . . . . . . 15",
+      "libelle": "Traitement chirurgical ~u chalaziOfl et kystes des paupières.. ';.'.. 15",
       "tarif": 2,
       "coefficient": 1,
       "lettreCle": "S",
@@ -1126,7 +1142,7 @@
     },
     {
       "code": "0260",
-      "libelle": "Trailement ch r~rg cal de l'entropion ou ectropion. du trichia$.Is ... . . . 40",
+      "libelle": "Trailement ch r~rg cal de l'entropion ou ectropion. du trichia$.Is.. 40",
       "tarif": 25,
       "coefficient": 1,
       "lettreCle": "",
@@ -1134,7 +1150,7 @@
     },
     {
       "code": "0282",
-      "libelle": "Cautérisations de granulations .... .. . ...... .. . .. . . . . ,., ...... .. _",
+      "libelle": "Cautérisations de granulations...,.,.. _",
       "tarif": 10,
       "coefficient": 1,
       "lettreCle": "",
@@ -1142,7 +1158,7 @@
     },
     {
       "code": "0283",
-      "libelle": "Expression de granulations trachomateuses . .. .. '.' , . . . .. _ .. \"",
+      "libelle": "Expression de granulations trachomateuses.. '.',.. _.. \"",
       "tarif": 10,
       "coefficient": 1,
       "lettreCle": "",
@@ -1150,7 +1166,7 @@
     },
     {
       "code": "0285",
-      "libelle": "Lésions multiples. el' une ou plusieurs séancl:s u~i ou bil :ltérale~",
+      "libelle": "Lésions multiples. el' une ou plusieurs séancl:s u~i ou bil:ltérale~",
       "tarif": 30,
       "coefficient": 1,
       "lettreCle": "",
@@ -1166,15 +1182,23 @@
     },
     {
       "code": "0291",
-      "libelle": "Tnutemcnt chirurgical du ptosis . . : ... .' .... .... . . .. . . .. : . ... . . . . .. 60",
+      "libelle": "Tnutemcnt chirurgical du ptosis..:....'...:... 60",
       "tarif": 25,
       "coefficient": 1,
       "lettreCle": "",
       "categorie": "Autre"
     },
     {
+      "code": "0237",
+      "libelle": "Cathétérisme des voies lacrymales avec anésthésie régionale.. 6298 Cathétérisme des ' voies lacrymales a vecintubatioti c~ntinu et lavage 'pendant",
+      "tarif": 20,
+      "coefficient": 1,
+      "lettreCle": "",
+      "categorie": "Autre"
+    },
+    {
       "code": "0299",
-      "libelle": "Ablation tOtaie ou, parttèile d'une glande lacrymale . '",
+      "libelle": "Ablation tOtaie ou, parttèile d'une glande lacrymale. '",
       "tarif": 20,
       "coefficient": 1,
       "lettreCle": "",
@@ -1182,7 +1206,7 @@
     },
     {
       "code": "0300",
-      "libelle": "AÎJÎation chirurgical du sac lacrymal . . . ... . ... ... . . . ....... ... . . .-",
+      "libelle": "AÎJÎation chirurgical du sac lacrymal... -",
       "tarif": 40,
       "coefficient": 1,
       "lettreCle": "",
@@ -1190,7 +1214,7 @@
     },
     {
       "code": "0301",
-      "libelle": "Oacryocystohinostomie ou lacodacrYostomie ...",
+      "libelle": "Oacryocystohinostomie ou lacodacrYostomie",
       "tarif": 100,
       "coefficient": 1,
       "lettreCle": "",
@@ -1198,7 +1222,7 @@
     },
     {
       "code": "0310",
-      "libelle": "Ablation chirurgicale ....... , .. , ....... , .. , . . . .... . ... . . ... .. . .",
+      "libelle": "Ablation chirurgicale",
       "tarif": 40,
       "coefficient": 1,
       "lettreCle": "",
@@ -1214,7 +1238,7 @@
     },
     {
       "code": "0313",
-      "libelle": "Avec pelage ... .. .. . ........ .. .. ........ , .. ...... .. . . ...",
+      "libelle": "Avec pelage",
       "tarif": 10,
       "coefficient": 1,
       "lettreCle": "",
@@ -1222,7 +1246,7 @@
     },
     {
       "code": "0315",
-      "libelle": "Traitement du décollement de la rétine ... . .•",
+      "libelle": "Traitement du décollement de la rétine",
       "tarif": 100,
       "coefficient": 1,
       "lettreCle": "",
@@ -1230,7 +1254,7 @@
     },
     {
       "code": "0316",
-      "libelle": "Indentat~on limitée à un quadrant ., . .. . •. ,,'",
+      "libelle": "Indentat~on limitée à un quadrant.,.... •.,,'",
       "tarif": 120,
       "coefficient": 1,
       "lettreCle": "",
@@ -1246,15 +1270,15 @@
     },
     {
       "code": "0318",
-      "libelle": "Vitrectomie et tamponnement interne avec rétinotomie . . .......... 200",
-      "tarif": 40,
+      "libelle": "Vitrectomie et tamponnement interne avec rétinotomie",
+      "tarif": 20040,
       "coefficient": 1,
       "lettreCle": "",
       "categorie": "Autre"
     },
     {
       "code": "0319",
-      "libelle": "Vitrectomie et tamponnement interne allee ou sans indentation . ... . . 180",
+      "libelle": "Vitrectomie et tamponnement interne allee ou sans indentation.. 180",
       "tarif": 40,
       "coefficient": 1,
       "lettreCle": "",
@@ -1262,7 +1286,7 @@
     },
     {
       "code": "0323",
-      "libelle": "Remplacement du vitré par voie postérieure ...... _",
+      "libelle": "Remplacement du vitré par voie postérieure.. _",
       "tarif": 70,
       "coefficient": 1,
       "lettreCle": "",
@@ -1270,7 +1294,7 @@
     },
     {
       "code": "0325",
-      "libelle": "Enucléation avec implant ... \" .. .. .......... .. .... \" .. ... ........ \" ... .. . . .. ... . . . . 50",
+      "libelle": "Enucléation avec implant... \"... \"... \"... 50",
       "tarif": 2,
       "coefficient": 1,
       "lettreCle": "S",
@@ -1286,15 +1310,15 @@
     },
     {
       "code": "0327",
-      "libelle": "Exentératlon de ,'orbite ... . . ...... .... ........ . ...... . . .... . ... .. . 100",
-      "tarif": 40,
+      "libelle": "Exentératlon de,'orbite",
+      "tarif": 10040,
       "coefficient": 1,
       "lettreCle": "",
       "categorie": "Autre"
     },
     {
       "code": "0328",
-      "libelle": "Greffe de la cornée .. . . .......... . .. . ....... .. ....... . ..... ... . 120",
+      "libelle": "Greffe de la cornée... 120",
       "tarif": 40,
       "coefficient": 1,
       "lettreCle": "",
@@ -1302,7 +1326,7 @@
     },
     {
       "code": "0329",
-      "libelle": "Pour un oeil . . . . .. .. ... .. ........ . . .. ..... .. '",
+      "libelle": "Pour un oeil... '",
       "tarif": 20,
       "coefficient": 1,
       "lettreCle": "",
@@ -1318,7 +1342,7 @@
     },
     {
       "code": "0331",
-      "libelle": "Kératotomie radiaire portant sur un oeil en une ou plusieurs séallces . . 50",
+      "libelle": "Kératotomie radiaire portant sur un oeil en une ou plusieurs séallces.. 50",
       "tarif": 25,
       "coefficient": 1,
       "lettreCle": "",
@@ -1326,15 +1350,15 @@
     },
     {
       "code": "0332",
-      "libelle": "Opélatio~ de la cataracte quelle que soit la technique sans implant . . 100",
-      "tarif": 40,
+      "libelle": "Opélatio~ de la cataracte quelle que soit la technique sans implant",
+      "tarif": 10040,
       "coefficient": 1,
       "lettreCle": "",
       "categorie": "Autre"
     },
     {
       "code": "0333",
-      "libelle": "Opération de la cataracte avec impla.îl cri stalinien . .... . .. . . ..... . 120",
+      "libelle": "Opération de la cataracte avec impla.îl cri stalinien... 120",
       "tarif": 40,
       "coefficient": 1,
       "lettreCle": "",
@@ -1350,7 +1374,7 @@
     },
     {
       "code": "0336",
-      "libelle": "Magnétique... ........ ... . . , ; . \"",
+      "libelle": "Magnétique...,;. \"",
       "tarif": 40,
       "coefficient": 1,
       "lettreCle": "",
@@ -1358,26 +1382,10 @@
     },
     {
       "code": "0337",
-      "libelle": "Non magnétique ..... . ........ . .. . . . .... . .. ... ... '. . . . . . . . . . . 60",
+      "libelle": "Non magnétique... '... 60",
       "tarif": 30,
       "coefficient": 1,
       "lettreCle": "",
-      "categorie": "Autre"
-    },
-    {
-      "code": "0338",
-      "libelle": "Magnétique . .. . ~ ..... . . .. .. . .... .",
-      "tarif": 80,
-      "coefficient": 1,
-      "lettreCle": "",
-      "categorie": "Autre"
-    },
-    {
-      "code": "0339",
-      "libelle": "Non magnétique. .. .... : ......... . . ...... . , . ... .... . .... . . . ... . 100",
-      "tarif": 4,
-      "coefficient": 1,
-      "lettreCle": "Q",
       "categorie": "Autre"
     },
     {
@@ -1406,15 +1414,15 @@
     },
     {
       "code": "0344",
-      "libelle": "frabeculotomie. trabéculectomie 90niotomie .... .. . ......... .. ...... 100",
-      "tarif": 30,
+      "libelle": "frabeculotomie. trabéculectomie 90niotomie",
+      "tarif": 10030,
       "coefficient": 1,
       "lettreCle": "",
       "categorie": "Autre"
     },
     {
       "code": "0346",
-      "libelle": "Sur oeil . .... ... ... . ..... .. ..... . ......... . ..... ..... .. . ......... 60",
+      "libelle": "Sur oeil... 60",
       "tarif": 30,
       "coefficient": 1,
       "lettreCle": "",
@@ -1430,7 +1438,7 @@
     },
     {
       "code": "0354",
-      "libelle": "Examen audiométrique tonal et voca! ...... . . ... .. . ....",
+      "libelle": "Examen audiométrique tonal et voca!",
       "tarif": 15,
       "coefficient": 1,
       "lettreCle": "",
@@ -1446,7 +1454,7 @@
     },
     {
       "code": "0358",
-      "libelle": "Examen électronystagmographique ... . .. : . .. .. ...",
+      "libelle": "Examen électronystagmographique",
       "tarif": 30,
       "coefficient": 1,
       "lettreCle": "",
@@ -1486,7 +1494,7 @@
     },
     {
       "code": "0365",
-      "libelle": "Ablation de corps étranger nécéssitant une opération sanglante . . . . .. 30",
+      "libelle": "Ablation de corps étranger nécéssitant une opération sanglante.. 30",
       "tarif": 25,
       "coefficient": 1,
       "lettreCle": "",
@@ -1494,7 +1502,7 @@
     },
     {
       "code": "0367",
-      "libelle": "Traitement par curetage d'un othématome important ....... '.'",
+      "libelle": "Traitement par curetage d'un othématome important.. '.'",
       "tarif": 15,
       "coefficient": 1,
       "lettreCle": "",
@@ -1502,7 +1510,7 @@
     },
     {
       "code": "0368",
-      "libelle": "Chirurgie corrective bilatérale des oreilles . ... . .. .......... . ...... 60 E",
+      "libelle": "Chirurgie corrective bilatérale des oreilles... 60 E",
       "tarif": 30,
       "coefficient": 1,
       "lettreCle": "",
@@ -1510,7 +1518,7 @@
     },
     {
       "code": "0370",
-      "libelle": "Résection simple d'une tumeur maligne de l'orei lle externe ...... . . 20",
+      "libelle": "Résection simple d'une tumeur maligne de l'orei lle externe.. 20",
       "tarif": 25,
       "coefficient": 1,
       "lettreCle": "",
@@ -1518,7 +1526,7 @@
     },
     {
       "code": "0371",
-      "libelle": "Résection large d'une tumeur maligne de l'oreilie externe .:, ...... . 60",
+      "libelle": "Résection large d'une tumeur maligne de l'oreilie externe.:,.. 60",
       "tarif": 25,
       "coefficient": 1,
       "lettreCle": "",
@@ -1526,7 +1534,7 @@
     },
     {
       "code": "0372",
-      "libelle": "Ablation d'une tumeur du conduit auditif par voie sus--pétreuse sous￾microscope .... .......",
+      "libelle": "Ablation d'une tumeur du conduit auditif par voie sus--pétreuse sousmicroscope",
       "tarif": 200,
       "coefficient": 1,
       "lettreCle": "",
@@ -1550,7 +1558,7 @@
     },
     {
       "code": "0375",
-      "libelle": "Injection transtympanique. avec maximum de quatre .... ... .'",
+      "libelle": "Injection transtympanique. avec maximum de quatre.. '",
       "tarif": 10,
       "coefficient": 1,
       "lettreCle": "",
@@ -1566,7 +1574,7 @@
     },
     {
       "code": "0378",
-      "libelle": "Mastoidectomie . .. ... . ........•..... . ... .. ..... .. ... ... ......... 8Q",
+      "libelle": "Mastoidectomie... 8Q",
       "tarif": 30,
       "coefficient": 1,
       "lettreCle": "",
@@ -1574,7 +1582,7 @@
     },
     {
       "code": "0379",
-      "libelle": "Evidement pétro-mastoïdien ............................. ; ... ; ... , 1 ~O",
+      "libelle": "Evidement pétro-mastoïdien...;...;..., 1 ~O",
       "tarif": 50,
       "coefficient": 1,
       "lettreCle": "",
@@ -1582,35 +1590,27 @@
     },
     {
       "code": "0380",
-      "libelle": "Exploration chirurgicale de l'oreille moyenne sous microscope ,. .. .. 80",
+      "libelle": "Exploration chirurgicale de l'oreille moyenne sous microscope,.. 80",
       "tarif": 30,
       "coefficient": 1,
       "lettreCle": "",
       "categorie": "ORL"
-    },
-    {
-      "code": "0381",
-      "libelle": "Myringoplastie simple ... -.. .... ..... .. .... ...... . . ..... . .. . . , . . . . 80",
-      "tarif": 30,
-      "coefficient": 1,
-      "lettreCle": "",
-      "categorie": "Autre"
     },
     {
       "code": "0382",
-      "libelle": "Mobilisation de l'étrier .... .. ... .. ..................... . ..... . ... 80",
+      "libelle": "Mobilisation de l'étrier... 80",
       "tarif": 30,
       "coefficient": 1,
       "lettreCle": "",
       "categorie": "Autre"
     },
     {
-      "code": "0385",
-      "libelle": "Résection du rocher pour tumeur de J'oreille moyenne . ........ .. ... 200",
-      "tarif": 110,
+      "code": "0384",
+      "libelle": "Tympanoplastie (y compris le temps osseux)quella que soit la technique... 150",
+      "tarif": 60,
       "coefficient": 1,
       "lettreCle": "",
-      "categorie": "ORL"
+      "categorie": "Autre"
     },
     {
       "code": "0387",
@@ -1622,7 +1622,7 @@
     },
     {
       "code": "0388",
-      "libelle": "Traitement du rhinophyma p'ar décortication. . . . . . . . . . . . . .. . . . . . . . .. 30",
+      "libelle": "Traitement du rhinophyma p'ar décortication... 30",
       "tarif": 25,
       "coefficient": 1,
       "lettreCle": "",
@@ -1630,7 +1630,7 @@
     },
     {
       "code": "0389",
-      "libelle": "Plastie narinaire ..................... .• _ ................ , . . . . . .. 80 E",
+      "libelle": "Plastie narinaire... _...,.. 80 E",
       "tarif": 30,
       "coefficient": 1,
       "lettreCle": "",
@@ -1638,35 +1638,19 @@
     },
     {
       "code": "0392",
-      "libelle": "Réduction d'une fracture récente du nez avec appareillage ....... , . , 20",
+      "libelle": "Réduction d'une fracture récente du nez avec appareillage..,., 20",
       "tarif": 25,
       "coefficient": 1,
       "lettreCle": "",
       "categorie": "ORL"
     },
     {
-      "code": "0393",
-      "libelle": ".Rhinoplastie post-traumatique, y compris le traitement de la cloison . . 100 E",
-      "tarif": 30,
-      "coefficient": 1,
-      "lettreCle": "",
-      "categorie": "Autre"
-    },
-    {
       "code": "0394",
-      "libelle": "Chirurgie réparatrice de la pyramide nasale avec greffe osseusè ou cartila￾gineuse. non compris les temps de préparation de lambeaux cutan\"'és .. 120 E",
+      "libelle": "Chirurgie réparatrice de la pyramide nasale avec greffe osseusè ou cartilagineuse. non compris les temps de préparation de lambeaux cutan\"'és.. 120 E",
       "tarif": 50,
       "coefficient": 1,
       "lettreCle": "",
       "categorie": "Autre"
-    },
-    {
-      "code": "0395",
-      "libelle": "Ablation d 'un corps étranger non sne lavé des fosses nasales",
-      "tarif": 5,
-      "coefficient": 1,
-      "lettreCle": "",
-      "categorie": "Chirurgie"
     },
     {
       "code": "0397",
@@ -1686,7 +1670,7 @@
     },
     {
       "code": "0399",
-      "libelle": "Résection de crête de cloison ............ . ... .. ...... . ......• , ... 15",
+      "libelle": "Résection de crête de cloison...,... 15",
       "tarif": 25,
       "coefficient": 1,
       "lettreCle": "",
@@ -1694,7 +1678,7 @@
     },
     {
       "code": "0400",
-      "libelle": "Résection ou reposition de la cloison . . . . . . . . . . . . . . . . • . . . . . . . . . • • •. 60",
+      "libelle": "Résection ou reposition de la cloison .. • • •. 60",
       "tarif": 25,
       "coefficient": 1,
       "lettreCle": "",
@@ -1710,8 +1694,8 @@
     },
     {
       "code": "0402",
-      "libelle": "Traitement d'une oblitération choanale osseuse . •........... . ...... 100",
-      "tarif": 30,
+      "libelle": "Traitement d'une oblitération choanale osseuse",
+      "tarif": 10030,
       "coefficient": 1,
       "lettreCle": "",
       "categorie": "Autre"
@@ -1750,8 +1734,8 @@
     },
     {
       "code": "0413",
-      "libelle": "Traitement chirurgical ' d'un ostéome ethmdidO-frontal 100",
-      "tarif": 40,
+      "libelle": "Traitement chirurgical ' d'un ostéome ethmdidO-frontal",
+      "tarif": 10040,
       "coefficient": 1,
       "lettreCle": "",
       "categorie": "Autre"
@@ -1766,16 +1750,8 @@
     },
     {
       "code": "0415",
-      "libelle": "Traitement chirurgical d'une tumeur maligne des sinus ...... . . . . . . 180",
+      "libelle": "Traitement chirurgical d'une tumeur maligne des sinus... 180",
       "tarif": 80,
-      "coefficient": 1,
-      "lettreCle": "",
-      "categorie": "Autre"
-    },
-    {
-      "code": "0422",
-      "libelle": "Réfection partielle d'une lèvre détruite par tumeur ou traumatisme.. 80",
-      "tarif": 30,
       "coefficient": 1,
       "lettreCle": "",
       "categorie": "Autre"
@@ -1806,15 +1782,15 @@
     },
     {
       "code": "0424/3",
-      "libelle": "Div~sion vélopalatine . . ~ . . . . . . . . . . . . . . . . . . ... . . .. -. . . . . . . ... . .. 100",
-      "tarif": 40,
+      "libelle": "Div~sion vélopalatine.. ~... -",
+      "tarif": 10040,
       "coefficient": 1,
       "lettreCle": "",
       "categorie": "Autre"
     },
     {
       "code": "0424/4",
-      "libelle": "Bec de lièvre avec division véJopalatine ... . ...... . ............... 120",
+      "libelle": "Bec de lièvre avec division véJopalatine... 120",
       "tarif": 50,
       "coefficient": 1,
       "lettreCle": "",
@@ -1822,7 +1798,7 @@
     },
     {
       "code": "0428",
-      "libelle": "Excision et suture d'une bride fibreuse ou du frein hypertrophié . ... \"",
+      "libelle": "Excision et suture d'une bride fibreuse ou du frein hypertrophié.... \"",
       "tarif": 10,
       "coefficient": 1,
       "lettreCle": "",
@@ -1830,7 +1806,7 @@
     },
     {
       "code": "0429",
-      "libelle": "Glossectomie partielle corrective ..... . ... . . , . . .... _ .... . .... , ..... , , 60",
+      "libelle": "Glossectomie partielle corrective...,.. _..,..,, 60",
       "tarif": 25,
       "coefficient": 1,
       "lettreCle": "",
@@ -1838,7 +1814,7 @@
     },
     {
       "code": "0431",
-      "libelle": "Excision par voie buccale d'un kyste du plancher de la bouche ,. .... 20",
+      "libelle": "Excision par voie buccale d'un kyste du plancher de la bouche,.. 20",
       "tarif": 2,
       "coefficient": 1,
       "lettreCle": "S",
@@ -1854,7 +1830,7 @@
     },
     {
       "code": "0434",
-      "libelle": "6.mygdalectomie isolée chez !'ei1f~ht _ . . . . ..... _ . , , . . _ .... ' , . . _ . _",
+      "libelle": "6.mygdalectomie isolée chez !'ei1f~ht _.. _.,,.. _.... ',.. _. _",
       "tarif": 30,
       "coefficient": 1,
       "lettreCle": "",
@@ -1862,7 +1838,7 @@
     },
     {
       "code": "0435",
-      "libelle": "Amygdalectomie totale ilez /'adl,lte (à partir de 15 ans) _ .. .. .. , . . \" 40",
+      "libelle": "Amygdalectomie totale ilez /'adl,lte (à partir de 15 ans) _..,.. \" 40",
       "tarif": 25,
       "coefficient": 1,
       "lettreCle": "",
@@ -1877,8 +1853,16 @@
       "categorie": "Chirurgie"
     },
     {
+      "code": "0446/2",
+      "libelle": "Ablation d'un calcul postérie~r par dissection complète du canal excréteur... • •• • •.• -.. •.. •• '.; ••. •• • ••• • •• • •.. • •• • r ••• \". 30",
+      "tarif": 25,
+      "coefficient": 1,
+      "lettreCle": "",
+      "categorie": "Chirurgie"
+    },
+    {
       "code": "0447",
-      "libelle": "Traitement opératoire d'une fistule $alivaire .cutanée . ..... . ....... 50",
+      "libelle": "Traitement opératoire d'une fistule $alivaire.cutanée... 50",
       "tarif": 25,
       "coefficient": 1,
       "lettreCle": "",
@@ -1886,7 +1870,7 @@
     },
     {
       "code": "0449/1",
-      "libelle": "Sans dissection du nerf facial . .. .. . .. . . .. . .. .. .. .. .. . . . .. .. .. . . . .. . .. .. .. .. .. .. .. .. .. .. 80",
+      "libelle": "Sans dissection du nerf facial... 80",
       "tarif": 30,
       "coefficient": 1,
       "lettreCle": "",
@@ -1918,7 +1902,7 @@
     },
     {
       "code": "0451",
-      "libelle": "Exérés~ d'une tumeur bénigne de la bouche ... .. .. . .. .... .......... 15",
+      "libelle": "Exérés~ d'une tumeur bénigne de la bouche... 15",
       "tarif": 25,
       "coefficient": 1,
       "lettreCle": "",
@@ -1926,7 +1910,7 @@
     },
     {
       "code": "0452",
-      "libelle": "Ablation par voie en do-buccale de fi stules et gros kystes congénitaux .. 80",
+      "libelle": "Ablation par voie en do-buccale de fi stules et gros kystes congénitaux.. 80",
       "tarif": 30,
       "coefficient": 1,
       "lettreCle": "",
@@ -1934,7 +1918,7 @@
     },
     {
       "code": "0455/1",
-      "libelle": "Diatherm.:--coagulatlon d'une tumeur maligne de la cavité buccale . . .. 50",
+      "libelle": "Diatherm.:--coagulatlon d'une tumeur maligne de la cavité buccale.... 50",
       "tarif": 25,
       "coefficient": 1,
       "lettreCle": "",
@@ -1942,15 +1926,15 @@
     },
     {
       "code": "0455/2",
-      "libelle": "Avec électronécrose du maxillaire ..................•.......... . .. 100",
-      "tarif": 30,
+      "libelle": "Avec électronécrose du maxillaire",
+      "tarif": 10030,
       "coefficient": 1,
       "lettreCle": "",
       "categorie": "Autre"
     },
     {
       "code": "0456/2",
-      "libelle": "Résection avec curage ganglionnaire...... . ... .. . . . .. .. . .... . . .. . . 150",
+      "libelle": "Résection avec curage ganglionnaire... 150",
       "tarif": 50,
       "coefficient": 1,
       "lettreCle": "",
@@ -1965,8 +1949,16 @@
       "categorie": "Autre"
     },
     {
+      "code": "0459",
+      "libelle": "Abi\",tion d'un& glande salivaire autre que la parotide pour tu'inel.1r maligne... '\"..,.'.. '.•. ~.. \" \"... '....,'.... 80",
+      "tarif": 35,
+      "coefficient": 1,
+      "lettreCle": "",
+      "categorie": "Autre"
+    },
+    {
       "code": "0464/2",
-      "libelle": "Avec déplacement ...................... ' . ... .......... . .. ; ... . , ... 120",
+      "libelle": "Avec déplacement... '...;....,... 120",
       "tarif": 50,
       "coefficient": 1,
       "lettreCle": "",
@@ -1990,7 +1982,7 @@
     },
     {
       "code": "0470",
-      "libelle": "Curetage et ablation des séquestres pour ostéite et nécrose des maxil￾laires circonscrites à la région alvéolaire",
+      "libelle": "Curetage et ablation des séquestres pour ostéite et nécrose des maxillaires circonscrites à la région alvéolaire",
       "tarif": 10,
       "coefficient": 1,
       "lettreCle": "",
@@ -2005,14 +1997,6 @@
       "categorie": "Autre"
     },
     {
-      "code": "0489/1",
-      "libelle": "Par période de six mols",
-      "tarif": 90,
-      "coefficient": 1,
-      "lettreCle": "",
-      "categorie": "Autre"
-    },
-    {
       "code": "0489/3",
       "libelle": "Séance de surveillance (au maximum de séances par semestre)",
       "tarif": 5,
@@ -2022,7 +2006,7 @@
     },
     {
       "code": "0482",
-      "libelle": "Traitement orthopédique de luxation uni ou bilatérale récente de la mandi￾bu le ......... a .. . .. .. ......... . ..... . . .. ............. .. .. . ...... .. .. 10",
+      "libelle": "Traitement orthopédique de luxation uni ou bilatérale récente de la mandibu le.. a... 10",
       "tarif": 5,
       "coefficient": 1,
       "lettreCle": "",
@@ -2030,7 +2014,7 @@
     },
     {
       "code": "0484",
-      "libelle": "ménisectomie uniiatérale., resection du la condyle .. ....... :..... ......... 80",
+      "libelle": "ménisectomie uniiatérale., resection du la condyle..:... 80",
       "tarif": 30,
       "coefficient": 1,
       "lettreCle": "",
@@ -2038,15 +2022,23 @@
     },
     {
       "code": "0485",
-      "libelle": "Réductit.'1 sanglante de la luxation tamporo-maxillaire . .... . ........ 80",
+      "libelle": "Réductit.'1 sanglante de la luxation tamporo-maxillaire... 80",
       "tarif": 30,
       "coefficient": 1,
       "lettreCle": "",
       "categorie": "Orthopédie"
     },
     {
+      "code": "0489/1",
+      "libelle": "Par période de six mois",
+      "tarif": 90,
+      "coefficient": 1,
+      "lettreCle": "",
+      "categorie": "Autre"
+    },
+    {
       "code": "0489/2",
-      "libelle": "Avec plafond de ............ . ...•.. .. .... . ....................",
+      "libelle": "Avec plafond de",
       "tarif": 540,
       "coefficient": 1,
       "lettreCle": "",
@@ -2062,35 +2054,27 @@
     },
     {
       "code": "0491/2",
-      "libelle": "De deux canines incluses .... ' \" . ........ '\"",
+      "libelle": "De deux canines incluses.... ' \".. '\"",
       "tarif": 200,
       "coefficient": 1,
       "lettreCle": "",
       "categorie": "Autre"
     },
     {
-      "code": "0498",
-      "libelle": ". Détartrage complet {deux séances au maximum). par séance",
-      "tarif": 5,
-      "coefficient": 1,
-      "lettreCle": "",
-      "categorie": "Autre"
-    },
-    {
       "code": "0500",
-      "libelle": "ligature mét~lIique dans les parodentopathies .. ',., . . ...... ',' .' .. , '",
+      "libelle": "ligature mét~lIique dans les parodentopathies.. ',.,.. ','.'.., '",
       "tarif": 8,
       "coefficient": 1,
       "lettreCle": "",
       "categorie": "Autre"
     },
     {
-      "code": "0501",
-      "libelle": "Attele ' métalique dans les paradonto pathies .... .. ............ , . . ~\"",
-      "tarif": 40,
+      "code": "0502",
+      "libelle": "Prothèse attelle de contention quel que soit fa nombre de dents ou de crochets... '\"... \". \"\"",
+      "tarif": 70,
       "coefficient": 1,
       "lettreCle": "E",
-      "categorie": "Autre"
+      "categorie": "Orthopédie"
     },
     {
       "code": "0503",
@@ -2110,7 +2094,7 @@
     },
     {
       "code": "0508",
-      "libelle": "Extractions d'une dent incluse ou enclavée ........................ 40",
+      "libelle": "Extractions d'une dent incluse ou enclavée... 40",
       "tarif": 25,
       "coefficient": 1,
       "lettreCle": "",
@@ -2118,23 +2102,23 @@
     },
     {
       "code": "0509",
-      "libelle": "Extraction d'une canine incluse ............... . .................. 50",
+      "libelle": "Extraction d'une canine incluse... 50",
       "tarif": 30,
       "coefficient": 1,
       "lettreCle": "",
       "categorie": "Autre"
     },
     {
-      "code": "0511",
-      "libelle": "Extraction d'une dt:'il en déslncltls!on non enclavée, dont la couronne est sous￾muqueuse . ..................................................... 20",
+      "code": "0510",
+      "libelle": "Extraction d'une odontoïde ou d'une dent surnuméraire incluse, ou enclavée... 40",
       "tarif": 25,
       "coefficient": 1,
       "lettreCle": "",
-      "categorie": "Autre"
+      "categorie": "Dentaire"
     },
     {
       "code": "0512",
-      "libelle": "Extraction d'une dent en désinclusion dont la couronne ast ~us-muqu use an posr￾tion palatine ou linguale .... .... .... : ...... . . c ... : ... !\" ........ .. .... ,. ................ ......... .. 50",
+      "libelle": "Extraction d'une dent en désinclusion dont la couronne ast ~us-muqu use an posrtion palatine ou linguale...:.. c...:... !\"...,... 50",
       "tarif": 30,
       "coefficient": 1,
       "lettreCle": "",
@@ -2142,7 +2126,7 @@
     },
     {
       "code": "0514/1",
-      "libelle": "D'une dent . ..... .. , ..... .. , .. .. , .. .. •.. ............ .. . .......• ...... 100 E",
+      "libelle": "D'une dent..,..,...., .. 100 E",
       "tarif": 30,
       "coefficient": 1,
       "lettreCle": "",
@@ -2150,7 +2134,7 @@
     },
     {
       "code": "0515/1",
-      "libelle": "Pour dent de sagesse ....... , . ... ,. ... ~ . ...... .... . .. .. ... ' .. . \" .......... .... .. .. : .. .. 40",
+      "libelle": "Pour dent de sagesse..,....,.... ~... '... \"...:.... 40",
       "tarif": 25,
       "coefficient": 1,
       "lettreCle": "",
@@ -2158,7 +2142,7 @@
     },
     {
       "code": "0519/2",
-      "libelle": "Efèndue à la crête d'un nemlrrli'\\xiHaire ou de canine à canine ... \"",
+      "libelle": "Efèndue à la crête d'un nemlrrli'\\xiHaire ou de canine à canine... \"",
       "tarif": 15,
       "coefficient": 1,
       "lettreCle": "E",
@@ -2166,7 +2150,7 @@
     },
     {
       "code": "0520",
-      "libelle": "Curetage péri-apical, .avec ou sans résection apicale (radiographie obligatoire, traite￾ment etobtur2tiof) du canal non compris)",
+      "libelle": "Curetage péri-apical,.avec ou sans résection apicale (radiographie obligatoire, traitement etobtur2tiof) du canal non compris)",
       "tarif": 15,
       "coefficient": 1,
       "lettreCle": "",
@@ -2181,8 +2165,16 @@
       "categorie": "Autre"
     },
     {
+      "code": "0522",
+      "libelle": "Kyste étendu aux apex da deux dents et necessitant une trépanation osseuse... ~... 30",
+      "tarif": 25,
+      "coefficient": 1,
+      "lettreCle": "",
+      "categorie": "Autre"
+    },
+    {
       "code": "0523",
-      "libelle": "Kyste étendu à un segment Important du maxillaire ................ . 50",
+      "libelle": "Kyste étendu à un segment Important du maxillaire... 50",
       "tarif": 30,
       "coefficient": 1,
       "lettreCle": "",
@@ -2190,7 +2182,7 @@
     },
     {
       "code": "0524",
-      "libelle": "Partielle .. . . '",
+      "libelle": "Partielle.... '",
       "tarif": 5,
       "coefficient": 1,
       "lettreCle": "",
@@ -2222,7 +2214,7 @@
     },
     {
       "code": "0528",
-      "libelle": "Greffe gingivale ....... '.' .•.... \" ••........ , .",
+      "libelle": "Greffe gingivale.. '.'.. \"",
       "tarif": 15,
       "coefficient": 1,
       "lettreCle": "",
@@ -2230,7 +2222,7 @@
     },
     {
       "code": "0529",
-      "libelle": "Greffe osseuse ...........................................",
+      "libelle": "Greffe osseuse",
       "tarif": 25,
       "coefficient": 1,
       "lettreCle": "",
@@ -2262,7 +2254,7 @@
     },
     {
       "code": "0535/1",
-      "libelle": "D'une à trois dents ..................................... '0",
+      "libelle": "D'une à trois dents... '0",
       "tarif": 30,
       "coefficient": 1,
       "lettreCle": "",
@@ -2270,7 +2262,7 @@
     },
     {
       "code": "0535/2",
-      "libelle": "De quatre dents .. _",
+      "libelle": "De quatre dents.. _",
       "tarif": 35,
       "coefficient": 1,
       "lettreCle": "",
@@ -2294,7 +2286,7 @@
     },
     {
       "code": "0545/1",
-      "libelle": "Premier éléfllertt .. ...... ...... 0 • • 0 •• ••• • ••• , ••••• 0",
+      "libelle": "Premier éléfllertt... 0 • • 0 •• ••• • •••,.. 0",
       "tarif": 10,
       "coefficient": 1,
       "lettreCle": "E",
@@ -2302,7 +2294,7 @@
     },
     {
       "code": "0545/2",
-      "libelle": "Les suivants, sur la même appareil \" ...................",
+      "libelle": "Les suivants, sur la même appareil \"",
       "tarif": 5,
       "coefficient": 1,
       "lettreCle": "E",
@@ -2310,7 +2302,7 @@
     },
     {
       "code": "0549",
-      "libelle": "Remp!acement de facette ou dent à tube , ....... .... . .",
+      "libelle": "Remp!acement de facette ou dent à tube",
       "tarif": 8,
       "coefficient": 1,
       "lettreCle": "E",
@@ -2326,7 +2318,7 @@
     },
     {
       "code": "0550/3",
-      "libelle": "- S'il s'agit d'une prothèse compléte .. . .......",
+      "libelle": "- S'il s'agit d'une prothèse compléte",
       "tarif": 80,
       "coefficient": 1,
       "lettreCle": "",
@@ -2334,7 +2326,7 @@
     },
     {
       "code": "0557/1",
-      "libelle": "Sur une arcade ......",
+      "libelle": "Sur une arcade",
       "tarif": 40,
       "coefficient": 1,
       "lettreCle": "",
@@ -2342,7 +2334,7 @@
     },
     {
       "code": "0557/2",
-      "libelle": "Sur dèux arcades ...... . . : .... .. .... , .......... . ........ _",
+      "libelle": "Sur dèux arcades..:...,... _",
       "tarif": 80,
       "coefficient": 1,
       "lettreCle": "",
@@ -2350,7 +2342,7 @@
     },
     {
       "code": "0565",
-      "libelle": "Incision., ,et drainage d'un ad~l.lophlogmon c,ervico-facial",
+      "libelle": "Incision.,,et drainage d'un ad~l.lophlogmon c,ervico-facial",
       "tarif": 20,
       "coefficient": 1,
       "lettreCle": "",
@@ -2358,7 +2350,7 @@
     },
     {
       "code": "0596/1",
-      "libelle": "Traitement ope~oire qu ~orticoliS par tenotomié sous cutanée .. ~",
+      "libelle": "Traitement ope~oire qu ~orticoliS par tenotomié sous cutanée.. ~",
       "tarif": 15,
       "coefficient": 1,
       "lettreCle": "",
@@ -2366,7 +2358,7 @@
     },
     {
       "code": "0566/2",
-      "libelle": "SUIvi de la confection d'un appareil platré .. ; .... \"",
+      "libelle": "SUIvi de la confection d'un appareil platré..;.... \"",
       "tarif": 40,
       "coefficient": 1,
       "lettreCle": "",
@@ -2374,7 +2366,7 @@
     },
     {
       "code": "0567",
-      "libelle": "Scalénotomie ' .... . .. ~ .............. . . .. ....... . ..... . . . . . . ''. . . . . . 40",
+      "libelle": "Scalénotomie '.. ~... ''.. 40",
       "tarif": 25,
       "coefficient": 1,
       "lettreCle": "",
@@ -2382,7 +2374,7 @@
     },
     {
       "code": "0568",
-      "libelle": "Ablation de fistules ,et gros kystes congénitaux 80",
+      "libelle": "Ablation de fistules,et gros kystes congénitaux 80",
       "tarif": 30,
       "coefficient": 1,
       "lettreCle": "",
@@ -2390,7 +2382,7 @@
     },
     {
       "code": "0571",
-      "libelle": "E~luchage du larynx sous laryngoscopie en suspension . ........... 50 E",
+      "libelle": "E~luchage du larynx sous laryngoscopie en suspension... 50 E",
       "tarif": 25,
       "coefficient": 1,
       "lettreCle": "",
@@ -2398,23 +2390,23 @@
     },
     {
       "code": "0572",
-      "libelle": "Dilatation laryngée, par séance ...•...... .",
+      "libelle": "Dilatation laryngée, par séance",
       "tarif": 10,
       "coefficient": 1,
       "lettreCle": "",
       "categorie": "Autre"
     },
     {
-      "code": "0573",
-      "libelle": "Cryothérapie des papillomes endolaryngés ... '",
-      "tarif": 1,
+      "code": "0574",
+      "libelle": "OlJverture d'une collection ando- ou péri-laryngée par les voies naturelles.. ~.. •.. •... ~...;,... '.. ~....;.. 0.. • • • • 1... '",
+      "tarif": 20,
       "coefficient": 1,
       "lettreCle": "",
       "categorie": "Autre"
     },
     {
       "code": "0576",
-      "libelle": "Extraction d'un corps étranger de l'hypopharynx ou du larynx : . . . . '",
+      "libelle": "Extraction d'un corps étranger de l'hypopharynx ou du larynx:.... '",
       "tarif": 20,
       "coefficient": 1,
       "lettreCle": "",
@@ -2422,7 +2414,7 @@
     },
     {
       "code": "0577",
-      "libelle": "Tubage du larynx pour obturation laryngée .. . ,., . ... . ...",
+      "libelle": "Tubage du larynx pour obturation laryngée",
       "tarif": 40,
       "coefficient": 1,
       "lettreCle": "",
@@ -2430,7 +2422,7 @@
     },
     {
       "code": "0578",
-      "libelle": "Traitement chirurgical par voie externe dessténose~ laryngo-trachéales et des para￾lysies laryngées .................... ,.. . ........................ 150",
+      "libelle": "Traitement chirurgical par voie externe dessténose~ laryngo-trachéales et des paralysies laryngées...,... 150",
       "tarif": 60,
       "coefficient": 1,
       "lettreCle": "",
@@ -2446,15 +2438,15 @@
     },
     {
       "code": "0580",
-      "libelle": "Laryngectomie partielle ..... , ... , .•. ' ............................ , .100",
-      "tarif": 40,
+      "libelle": "Laryngectomie partielle..,...,.•. '",
+      "tarif": 10040,
       "coefficient": 1,
       "lettreCle": "",
       "categorie": "Autre"
     },
     {
       "code": "0581",
-      "libelle": "Laryngectomie totale ou sus-glottique : .... -...... ....... > ....... '. . . . .. 180",
+      "libelle": "Laryngectomie totale ou sus-glottique:.... -... >.. '.. 180",
       "tarif": 80,
       "coefficient": 1,
       "lettreCle": "",
@@ -2462,16 +2454,8 @@
     },
     {
       "code": "0582",
-      "libelle": "Pharyngolaryngectomie avec curage ganglionnaire ..... \" .. . ... . .... 2!)O",
+      "libelle": "Pharyngolaryngectomie avec curage ganglionnaire.. \"... 2!)O",
       "tarif": 130,
-      "coefficient": 1,
-      "lettreCle": "",
-      "categorie": "Autre"
-    },
-    {
-      "code": "0586/1",
-      "libelle": "- Troubles d'articulation isolés chez les sujets ne présentant pas d'affection neuro￾logique, llar séance '., ... ~ ., . : .......• , ... : ' ... , .. ! • , •••• , ••••• , ••• , ,.",
-      "tarif": 5,
       "coefficient": 1,
       "lettreCle": "",
       "categorie": "Autre"
@@ -2486,7 +2470,7 @@
     },
     {
       "code": "0589",
-      "libelle": "Hémithyro·ldectomie totale . .. . ..... . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .. 80",
+      "libelle": "Hémithyro·ldectomie totale... 80",
       "tarif": 40,
       "coefficient": 1,
       "lettreCle": "",
@@ -2494,7 +2478,7 @@
     },
     {
       "code": "0590/1",
-      "libelle": "Thyroïdectomie totale. . . . . . . . . . . .. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . .. 120",
+      "libelle": "Thyroïdectomie totale... 120",
       "tarif": 50,
       "coefficient": 1,
       "lettreCle": "",
@@ -2510,15 +2494,15 @@
     },
     {
       "code": "0591",
-      "libelle": "Parathyroidectomie unilatérale 100",
-      "tarif": 40,
+      "libelle": "Parathyroidectomie unilatérale",
+      "tarif": 10040,
       "coefficient": 1,
       "lettreCle": "",
       "categorie": "Autre"
     },
     {
       "code": "0592",
-      "libelle": "Aspiration transtracheale ...... ... . ..• ~ . . •....... .....",
+      "libelle": "Aspiration transtracheale... ~",
       "tarif": 3,
       "coefficient": 1,
       "lettreCle": "",
@@ -2533,16 +2517,16 @@
       "categorie": "Autre"
     },
     {
-      "code": "0596",
-      "libelle": "Oesophagotomie, oesophagostomie, traitement chirurgical d'une fistule oesophagien￾ne .. .. . . ... ....... .......... •. .•.. . ....................... . ... 80",
-      "tarif": 30,
+      "code": "0595",
+      "libelle": "Trachéotomie, trachéostomie, traitement chirurgical d'une plaie de la trachée... * •••.,... 50",
+      "tarif": 25,
       "coefficient": 1,
       "lettreCle": "",
       "categorie": "Autre"
     },
     {
-      "code": "0597",
-      "libelle": "Résection d'un diverticule cervical de l'oesophage . . .. .. .. ... ..... . . 100",
+      "code": "0596",
+      "libelle": "Oesophagotomie, oesophagostomie, traitement chirurgical d'une fistule oesophagienne .. 80",
       "tarif": 30,
       "coefficient": 1,
       "lettreCle": "",
@@ -2558,7 +2542,7 @@
     },
     {
       "code": "0601/1",
-      "libelle": "Sans greffon ni ostéosynthèse .................... . .. ... . . ........ 150",
+      "libelle": "Sans greffon ni ostéosynthèse... 150",
       "tarif": 50,
       "coefficient": 1,
       "lettreCle": "",
@@ -2574,7 +2558,7 @@
     },
     {
       "code": "0604",
-      "libelle": "Traitement d'un spina bifida avec myeloméningocèle. tumeur congénitale sacro￾cocCygienne .. , _ ................ : . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 186",
+      "libelle": "Traitement d'un spina bifida avec myeloméningocèle. tumeur congénitale sacrococCygienne.., _...:... 186",
       "tarif": 90,
       "coefficient": 1,
       "lettreCle": "",
@@ -2582,15 +2566,7 @@
     },
     {
       "code": "0607",
-      "libelle": "Ablation d'une tumeur géante de la queue de cheval '\" ....... . .... . . . 250",
-      "tarif": 110,
-      "coefficient": 1,
-      "lettreCle": "",
-      "categorie": "Chirurgie"
-    },
-    {
-      "code": "0608",
-      "libelle": "Ablation d'une malformation artério-veineuse médullaire .......... 300",
+      "libelle": "Ablation d'une tumeur géante de la queue de cheval '\"... 250",
       "tarif": 110,
       "coefficient": 1,
       "lettreCle": "",
@@ -2622,7 +2598,7 @@
     },
     {
       "code": "0616",
-      "libelle": "Extirpation d'un os du carpe ........... . ....................... ~",
+      "libelle": "Extirpation d'un os du carpe... ~",
       "tarif": 40,
       "coefficient": 1,
       "lettreCle": "",
@@ -2646,7 +2622,7 @@
     },
     {
       "code": "0619",
-      "libelle": "Ablation de l'omoplate • .. • • • • ~ •• .1. • • • .. .. • .. • • .. .. • • .. .. .. .. .. .. .. .. • • .. .. • .. • • • • • 60",
+      "libelle": "Ablation de l'omoplate •.. • • • • ~ ••.1. • •.. •.. •.. •... •.. •.. • • • • • 60",
       "tarif": 25,
       "coefficient": 1,
       "lettreCle": "",
@@ -2654,7 +2630,7 @@
     },
     {
       "code": "0620",
-      "libelle": "Amputation inter-scapulo-thoracique .............................. 150",
+      "libelle": "Amputation inter-scapulo-thoracique... 150",
       "tarif": 60,
       "coefficient": 1,
       "lettreCle": "",
@@ -2662,7 +2638,7 @@
     },
     {
       "code": "0621",
-      "libelle": "Traitement chirurgical du syndrome de Volkmann. .............. ' .. : . J 120",
+      "libelle": "Traitement chirurgical du syndrome de Volkmann... '..:. J 120",
       "tarif": 50,
       "coefficient": 1,
       "lettreCle": "",
@@ -2686,7 +2662,7 @@
     },
     {
       "code": "0626",
-      "libelle": "Traitement chirurgical d'un .phlegmon profond de la main ............ 20 . '",
+      "libelle": "Traitement chirurgical d'un.phlegmon profond de la main... 20. '",
       "tarif": 1,
       "coefficient": 1,
       "lettreCle": "",
@@ -2702,7 +2678,7 @@
     },
     {
       "code": "0630/1",
-      "libelle": "1 doigt . .......... . .' ...................................... :.... 60",
+      "libelle": "1 doigt... '...:.... 60",
       "tarif": 25,
       "coefficient": 1,
       "lettreCle": "",
@@ -2710,7 +2686,7 @@
     },
     {
       "code": "0630/2",
-      "libelle": "2 doigts . . .......... . ' . ,' ...... , . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 80",
+      "libelle": "2 doigts... '.,'..,... 80",
       "tarif": 30,
       "coefficient": 1,
       "lettreCle": "",
@@ -2718,40 +2694,24 @@
     },
     {
       "code": "0630/3",
-      "libelle": "3 doigts ou plus ... .. ......... ......... . ........................ 100",
-      "tarif": 30,
+      "libelle": "3 doigts ou plus",
+      "tarif": 10030,
       "coefficient": 1,
       "lettreCle": "",
       "categorie": "Autre"
     },
     {
       "code": "0632/3",
-      "libelle": "3 doigts ou plus .. . ................................ . ....... . .... 150",
+      "libelle": "3 doigts ou plus... 150",
       "tarif": 50,
       "coefficient": 1,
       "lettreCle": "",
       "categorie": "Autre"
     },
     {
-      "code": "0633/2",
-      "libelle": ". 2 doigts ..... ..... ......................... .. . ........... ',' . . . . . 80",
-      "tarif": 25,
-      "coefficient": 1,
-      "lettreCle": "",
-      "categorie": "Autre"
-    },
-    {
       "code": "0633/3",
-      "libelle": "3 doi]ts ou plus ' . .. .. ... .... . ..... ' ....................... , . . . . .. 100",
-      "tarif": 30,
-      "coefficient": 1,
-      "lettreCle": "",
-      "categorie": "Autre"
-    },
-    {
-      "code": "0634/3",
-      "libelle": "3 doigts ou plus ............ . . ....... .. . .. . .................... . 120",
-      "tarif": 30,
+      "libelle": "3 doi]ts ou plus '... '",
+      "tarif": 10030,
       "coefficient": 1,
       "lettreCle": "",
       "categorie": "Autre"
@@ -2782,7 +2742,7 @@
     },
     {
       "code": "0638/3",
-      "libelle": "3 ligaments ou plus ................ . ..... . ............. . ..... ' . . . 70",
+      "libelle": "3 ligaments ou plus... '... 70",
       "tarif": 25,
       "coefficient": 1,
       "lettreCle": "",
@@ -2790,7 +2750,7 @@
     },
     {
       "code": "0641",
-      "libelle": "Arthrodèse Inter-métacarpienne , ........... , ............. ; ..... : . . 60",
+      "libelle": "Arthrodèse Inter-métacarpienne,...,...;..:.. 60",
       "tarif": 25,
       "coefficient": 1,
       "lettreCle": "",
@@ -2806,7 +2766,7 @@
     },
     {
       "code": "0643/1",
-      "libelle": "Traitement chirurgical des lésions palmaires ou digitales. aponévroti￾ques ou cutanées de la maladie de Dupuytren .... . ........ . ... . .. 120",
+      "libelle": "Traitement chirurgical des lésions palmaires ou digitales. aponévrotiques ou cutanées de la maladie de Dupuytren... 120",
       "tarif": 40,
       "coefficient": 1,
       "lettreCle": "",
@@ -2814,7 +2774,7 @@
     },
     {
       "code": "0643/2",
-      "libelle": "A l'exclusion de l'aponévrotomie simple .. . ...... ~ ..... . ... . .... '.'",
+      "libelle": "A l'exclusion de l'aponévrotomie simple.. ~... '.'",
       "tarif": 60,
       "coefficient": 1,
       "lettreCle": "",
@@ -2822,7 +2782,7 @@
     },
     {
       "code": "0644/1",
-      "libelle": "Une commissure . ... . ......... . ............... . ... . ... ,......... 80",
+      "libelle": "Une commissure...,.. 80",
       "tarif": 25,
       "coefficient": 1,
       "lettreCle": "",
@@ -2830,15 +2790,15 @@
     },
     {
       "code": "0644/2",
-      "libelle": "Deux comillissures .......... . ........... : ..... . .......... . ... ~ .. 100",
-      "tarif": 30,
+      "libelle": "Deux comillissures...:... ~",
+      "tarif": 10030,
       "coefficient": 1,
       "lettreCle": "",
       "categorie": "Autre"
     },
     {
       "code": "0645",
-      "libelle": "Phal~n9isation d'un _métacarpien ........ . . . ..... '....... . . .. . . ..... 80",
+      "libelle": "Phal~n9isation d'un _métacarpien... '... 80",
       "tarif": 30,
       "coefficient": 1,
       "lettreCle": "",
@@ -2846,7 +2806,7 @@
     },
     {
       "code": "0646",
-      "libelle": "Pollicisation d'un dOigL ..... . . . ... _.' ... _ ........... -: . . . . .. . . . . . . .. 180",
+      "libelle": "Pollicisation d'un dOigL... _.'... _... -:... 180",
       "tarif": 50,
       "coefficient": 1,
       "lettreCle": "",
@@ -2862,15 +2822,15 @@
     },
     {
       "code": "0650",
-      "libelle": "Plastie d'un sein pour hypertrophie ........ '. , .,. ' .... ' .,.'... . .. 100",
-      "tarif": 40,
+      "libelle": "Plastie d'un sein pour hypertrophie.. '.,.,. '.... '.,.'",
+      "tarif": 10040,
       "coefficient": 1,
       "lettreCle": "",
       "categorie": "Autre"
     },
     {
       "code": "0652",
-      "libelle": "Ablation d'une tumeur bénigne du sein ., .. , .. ' \" . , .. .. , ' , , ... ' . . . '",
+      "libelle": "Ablation d'une tumeur bénigne du sein.,..,.. ' \".,...., ',,... '... '",
       "tarif": 30,
       "coefficient": 1,
       "lettreCle": "",
@@ -2886,7 +2846,7 @@
     },
     {
       "code": "0654/2",
-      "libelle": "Même opération avec curage mammaire interne, en supplémeRt . ' , .. , 30",
+      "libelle": "Même opération avec curage mammaire interne, en supplémeRt. ',.., 30",
       "tarif": 15,
       "coefficient": 1,
       "lettreCle": "",
@@ -2910,7 +2870,7 @@
     },
     {
       "code": "0659",
-      "libelle": "Résection tO!3le ou partielle de la première côte ...... ;........... 60",
+      "libelle": "Résection tO!3le ou partielle de la première côte..;... 60",
       "tarif": 30,
       "coefficient": 1,
       "lettreCle": "",
@@ -2918,7 +2878,7 @@
     },
     {
       "code": "0661",
-      "libelle": "Myoplastie étendue avec mobilisations musculaires multiples . . .... 180",
+      "libelle": "Myoplastie étendue avec mobilisations musculaires multiples.. 180",
       "tarif": 70,
       "coefficient": 1,
       "lettreCle": "",
@@ -2926,8 +2886,8 @@
     },
     {
       "code": "01362",
-      "libelle": "Création d'une cavité pariétale pour pneumothorax ou plombage 100",
-      "tarif": 50,
+      "libelle": "Création d'une cavité pariétale pour pneumothorax ou plombage",
+      "tarif": 10050,
       "coefficient": 1,
       "lettreCle": "",
       "categorie": "Autre"
@@ -2942,7 +2902,7 @@
     },
     {
       "code": "0665",
-      "libelle": "Epreuve quantitative aux agents pharmaco-dynamiques ou de provoca￾tion aux allergènes comportant une mesure de seuil de réactivité",
+      "libelle": "Epreuve quantitative aux agents pharmaco-dynamiques ou de provocation aux allergènes comportant une mesure de seuil de réactivité",
       "tarif": 25,
       "coefficient": 1,
       "lettreCle": "",
@@ -2950,7 +2910,7 @@
     },
     {
       "code": "0668",
-      "libelle": "Mesure du transfert du CO en état stable, en- apnée, en Inspiration uni￾que ou en réinspiratlon",
+      "libelle": "Mesure du transfert du CO en état stable, en- apnée, en Inspiration unique ou en réinspiratlon",
       "tarif": 20,
       "coefficient": 1,
       "lettreCle": "",
@@ -2958,15 +2918,7 @@
     },
     {
       "code": "0671",
-      "libelle": "Oxymétrie et capnimétrie du 8ang artériel (ponctions et dosages com￾pris)",
-      "tarif": 30,
-      "coefficient": 1,
-      "lettreCle": "",
-      "categorie": "Autre"
-    },
-    {
-      "code": "0673/3",
-      "libelle": "30 - par la mesure de la résistance des voies aériennes, par l'inter￾ruption du courant .aérlen ou par oscillation",
+      "libelle": "Oxymétrie et capnimétrie du 8ang artériel (ponctions et dosages compris)",
       "tarif": 30,
       "coefficient": 1,
       "lettreCle": "",
@@ -3022,15 +2974,15 @@
     },
     {
       "code": "0683",
-      "libelle": "Pneumotomie, spéléotomie, en un ou ·plusleurs temps . . .. . . ...... 100",
-      "tarif": 50,
+      "libelle": "Pneumotomie, spéléotomie, en un ou ·plusleurs temps",
+      "tarif": 10050,
       "coefficient": 1,
       "lettreCle": "",
       "categorie": "Autre"
     },
     {
       "code": "0685",
-      "libelle": "Thoracolaparotomie .. ... . . ..... . ... . . \" ............ . .... .. ...... ' 120",
+      "libelle": "Thoracolaparotomie... \"... ' 120",
       "tarif": 60,
       "coefficient": 1,
       "lettreCle": "",
@@ -3038,7 +2990,7 @@
     },
     {
       "code": "0687",
-      "libelle": "Décortication pleurale . . . . . . . . . . . . . . . . . . . • . . . . . . . . . . . . . . . . . . . . . . .. 150",
+      "libelle": "Décortication pleurale .. 150",
       "tarif": 70,
       "coefficient": 1,
       "lettreCle": "",
@@ -3046,11 +2998,19 @@
     },
     {
       "code": "0689",
-      "libelle": "Ablation d'un segment ou d'un poumon ... ~ ............ , .. . ........ 150",
+      "libelle": "Ablation d'un segment ou d'un poumon... ~...,... 150",
       "tarif": 10,
       "coefficient": 1,
       "lettreCle": "",
       "categorie": "Chirurgie"
+    },
+    {
+      "code": "0694",
+      "libelle": "Pneumone~tomie élargie pour cancer. avec curage ganglionnaire · médias-.tinal... 250",
+      "tarif": 90,
+      "coefficient": 1,
+      "lettreCle": "",
+      "categorie": "Autre"
     },
     {
       "code": "0695",
@@ -3061,16 +3021,8 @@
       "categorie": "Autre"
     },
     {
-      "code": "0696/1",
-      "libelle": ". Médiastinoscopie. oesophagoscopie, oesofibroscopie. bronch~cOPie",
-      "tarif": 30,
-      "coefficient": 1,
-      "lettreCle": "",
-      "categorie": "Autre"
-    },
-    {
       "code": "0696/2",
-      "libelle": "Avec biopsie ........................... ; . . . . . . . . . . . . . . . . . . . . . . 40",
+      "libelle": "Avec biopsie...;... 40",
       "tarif": 25,
       "coefficient": 1,
       "lettreCle": "",
@@ -3086,7 +3038,7 @@
     },
     {
       "code": "0699",
-      "libelle": "Bronchofibroscopie ........................... , ................ :'",
+      "libelle": "Bronchofibroscopie...,...:'",
       "tarif": 40,
       "coefficient": 1,
       "lettreCle": "",
@@ -3094,7 +3046,7 @@
     },
     {
       "code": "0703",
-      "libelle": "fraitement c:hinJrgical des lésions médiastinales . .............. __ . 150",
+      "libelle": "fraitement c:hinJrgical des lésions médiastinales... __. 150",
       "tarif": 90,
       "coefficient": 1,
       "lettreCle": "",
@@ -3102,23 +3054,15 @@
     },
     {
       "code": "0704",
-      "libelle": "Réseçtion de l'innervation pulmonaire. cardiaque ou périvascula!re .. 120",
+      "libelle": "Réseçtion de l'innervation pulmonaire. cardiaque ou périvascula!re.. 120",
       "tarif": 50,
       "coefficient": 1,
       "lettreCle": "",
       "categorie": "Autre"
     },
     {
-      "code": "0707",
-      "libelle": ". Dilatation oesophagienne, par séance ............. - ... ..... _ ... _",
-      "tarif": 5,
-      "coefficient": 1,
-      "lettreCle": "",
-      "categorie": "Autre"
-    },
-    {
       "code": "0711",
-      "libelle": "Traitement de l'atrésie oesophagienne chez !e nouveau-né _. _ ..... _. 250",
+      "libelle": "Traitement de l'atrésie oesophagienne chez !e nouveau-né _. _.. _. 250",
       "tarif": 130,
       "coefficient": 1,
       "lettreCle": "",
@@ -3133,16 +3077,8 @@
       "categorie": "Autre"
     },
     {
-      "code": "0712/2",
-      "libelle": "Avec greffe 300",
-      "tarif": 130,
-      "coefficient": 1,
-      "lettreCle": "",
-      "categorie": "Autre"
-    },
-    {
       "code": "0113",
-      "libelle": "Traitement de hernie ou éventration diaphragmatique ~r voie thora- . ci que ou thraco-abdominale ....... ' ............•.................. 150",
+      "libelle": "Traitement de hernie ou éventration diaphragmatique ~r voie thora-. ci que ou thraco-abdominale.. '... 150",
       "tarif": 70,
       "coefficient": 1,
       "lettreCle": "",
@@ -3150,18 +3086,10 @@
     },
     {
       "code": "0717",
-      "libelle": "Epreuve d'effort sous E'.C.G ................................... .'",
+      "libelle": "Epreuve d'effort sous E'.C.G... '",
       "tarif": 40,
       "coefficient": 1,
       "lettreCle": "",
-      "categorie": "Autre"
-    },
-    {
-      "code": "0722",
-      "libelle": ". EI~ctrocardiogramme per-opératoire' en dehors de la chirurgie cardiaque",
-      "tarif": 30,
-      "coefficient": 1,
-      "lettreCle": "E",
       "categorie": "Autre"
     },
     {
@@ -3182,7 +3110,7 @@
     },
     {
       "code": "0733/1",
-      "libelle": "P~r équipe. par malade et par 24 heures ... ~ ....... , . ~ ............ ' . \"",
+      "libelle": "P~r équipe. par malade et par 24 heures... ~..,. ~... '. \"",
       "tarif": 30,
       "coefficient": 1,
       "lettreCle": "",
@@ -3190,15 +3118,23 @@
     },
     {
       "code": "0734/2",
-      "libelle": "Avec enregistrement dei sori, en supplément ...... : ..• ~; ...•. . \" •• \".\"",
+      "libelle": "Avec enregistrement dei sori, en supplément..:..• ~;.. \" •• \".\"",
       "tarif": 20,
       "coefficient": 1,
       "lettreCle": "",
       "categorie": "Autre"
     },
     {
+      "code": "0139",
+      "libelle": "Changement de boîtier",
+      "tarif": 50,
+      "coefficient": 1,
+      "lettreCle": "",
+      "categorie": "Autre"
+    },
+    {
       "code": "0740/1",
-      "libelle": "Avec prise et enregistrement de pression . .... .. .. , ~",
+      "libelle": "Avec prise et enregistrement de pression.., ~",
       "tarif": 30,
       "coefficient": 1,
       "lettreCle": "",
@@ -3206,7 +3142,7 @@
     },
     {
       "code": "0740/2",
-      "libelle": "Avec prise et enregistrement de pression et prélèvemènt d'échantil￾lons sanguine pour dosage . .. , ............... ~ .. , . , ..",
+      "libelle": "Avec prise et enregistrement de pression et prélèvemènt d'échantillons sanguine pour dosage...,... ~",
       "tarif": 40,
       "coefficient": 1,
       "lettreCle": "",
@@ -3222,7 +3158,7 @@
     },
     {
       "code": "0743",
-      "libelle": "Traitement des épanchements pérlcardiques perthoracotomies et dral￾nage '60",
+      "libelle": "Traitement des épanchements pérlcardiques perthoracotomies et dralnage '60",
       "tarif": 30,
       "coefficient": 1,
       "lettreCle": "",
@@ -3230,7 +3166,7 @@
     },
     {
       "code": "0745",
-      "libelle": "Péricardectomie .................................. . . .. . ~ . . . . . . .. ~-SO",
+      "libelle": "Péricardectomie... ~.. ~-SO",
       "tarif": 110,
       "coefficient": 1,
       "lettreCle": "",
@@ -3238,24 +3174,8 @@
     },
     {
       "code": "0746/2",
-      "libelle": "Changement de boitier .. ,....... . .... . .. . ......... .............. 50",
+      "libelle": "Changement de boitier..,... 50",
       "tarif": 25,
-      "coefficient": 1,
-      "lettreCle": "",
-      "categorie": "Autre"
-    },
-    {
-      "code": "0747",
-      "libelle": "Toutè intervention portant Sur un appareil valvulaire ................ 200",
-      "tarif": 110,
-      "coefficient": 1,
-      "lettreCle": "",
-      "categorie": "Autre"
-    },
-    {
-      "code": "0749/2",
-      "libelle": "Avec deux artères ................. :. .. ... .. .................... 300",
-      "tarif": 130,
       "coefficient": 1,
       "lettreCle": "",
       "categorie": "Autre"
@@ -3277,8 +3197,16 @@
       "categorie": "Autre"
     },
     {
+      "code": "0752/3",
+      "libelle": "Pour une troisiéme lésion, en supplément (par dérogation aux dispositionsgénérales Art. 12 B 1°).. L",
+      "tarif": 100,
+      "coefficient": 1,
+      "lettreCle": "",
+      "categorie": "Autre"
+    },
+    {
       "code": "0752/4",
-      "libelle": "Correction complète des cardiopathies congénitales en dehors des orifi￾ces et des défects septaux .. .. .. ... : ...... . .. -",
+      "libelle": "Correction complète des cardiopathies congénitales en dehors des orifices et des défects septaux..:.. -",
       "tarif": 300,
       "coefficient": 1,
       "lettreCle": "",
@@ -3310,7 +3238,7 @@
     },
     {
       "code": "0756",
-      "libelle": "Réal isation d'un rétropneumopéritoine ........ '",
+      "libelle": "Réal isation d'un rétropneumopéritoine.. '",
       "tarif": 15,
       "coefficient": 1,
       "lettreCle": "",
@@ -3342,7 +3270,7 @@
     },
     {
       "code": "0764",
-      "libelle": "Lipectomie antérieure .... \"! • • . • • • • • . . . . . . • . . • . • . . . • . . . . . . . . . . . . . . 80 E",
+      "libelle": "Lipectomie antérieure.... \"! • •. • • • •.. •.. •. .. 80 E",
       "tarif": 30,
       "coefficient": 1,
       "lettreCle": "",
@@ -3350,7 +3278,7 @@
     },
     {
       "code": "0765",
-      "libelle": "Upactomie totale ciréulaire . . . .. ................. . ... .... .. . ..... 100 E",
+      "libelle": "Upactomie totale ciréulaire... 100 E",
       "tarif": 40,
       "coefficient": 1,
       "lettreCle": "",
@@ -3358,7 +3286,7 @@
     },
     {
       "code": "0766/1",
-      "libelle": "Sans résection' intestinale . ........ < • • • • • • • • • • • • • • • • • • • • • • • • • • • • 60",
+      "libelle": "Sans résection' intestinale.. < • • • • • • • • • • • • • • • • • • • • • • • • • • • • 60",
       "tarif": 30,
       "coefficient": 1,
       "lettreCle": "",
@@ -3366,8 +3294,8 @@
     },
     {
       "code": "0766/2",
-      "libelle": "Avec résection de l'intestin ou de tout autre viscére 100",
-      "tarif": 60,
+      "libelle": "Avec résection de l'intestin ou de tout autre viscére",
+      "tarif": 10060,
       "coefficient": 1,
       "lettreCle": "",
       "categorie": "Gastro-entérologie"
@@ -3390,7 +3318,7 @@
     },
     {
       "code": "0770",
-      "libelle": "Dérivation péritonéo-veineusa selon la méthode de le Véen . . '",
+      "libelle": "Dérivation péritonéo-veineusa selon la méthode de le Véen.. '",
       "tarif": 150,
       "coefficient": 1,
       "lettreCle": "",
@@ -3438,7 +3366,7 @@
     },
     {
       "code": "0778/1",
-      "libelle": "Avec cliché radIographique ....... ~ ....... '\" .................. _",
+      "libelle": "Avec cliché radIographique.. ~.. '\"... _",
       "tarif": 80,
       "coefficient": 1,
       "lettreCle": "",
@@ -3453,16 +3381,8 @@
       "categorie": "Autre"
     },
     {
-      "code": "0778/3",
-      "libelle": "' Avec ablation d'un ou plusieurs polypes. en supplément",
-      "tarif": 20,
-      "coefficient": 1,
-      "lettreCle": "",
-      "categorie": "Chirurgie"
-    },
-    {
       "code": "0779",
-      "libelle": "Lavage d'eat~c, •.•••• . ' • : • • • .. • .. ... ,,,..... •• ' ........ ~ .... , ... . t .... ~",
+      "libelle": "Lavage d'eat~c,.. ' •: • • .. ,,,.. •• '.. ~....,.... t.... ~",
       "tarif": 10,
       "coefficient": 1,
       "lettreCle": "",
@@ -3478,7 +3398,7 @@
     },
     {
       "code": "0783",
-      "libelle": "Ouverture ou abouchement à la peau ((un viscère digestif . . ...... '. .60",
+      "libelle": "Ouverture ou abouchement à la peau ((un viscère digestif.. '..60",
       "tarif": 30,
       "coefficient": 1,
       "lettreCle": "",
@@ -3486,8 +3406,8 @@
     },
     {
       "code": "0785",
-      "libelle": "G<fs\"trectomie totale ......... : ......... ' . . . .. ... .......... . ... ... .. . . . .. 200",
-      "tarif": 11,
+      "libelle": "G<fs\"trectomie totale..:.. '",
+      "tarif": 20011,
       "coefficient": 1,
       "lettreCle": "G",
       "categorie": "Autre"
@@ -3502,16 +3422,24 @@
     },
     {
       "code": "0788",
-      "libelle": "Traitement chirurgical des -fistules cutanées des viscéres creux.. .. . .. 100",
-      "tarif": 3,
+      "libelle": "Traitement chirurgical des -fistules cutanées des viscéres creux",
+      "tarif": 1003,
       "coefficient": 1,
       "lettreCle": "S",
       "categorie": "Dermatologie"
     },
     {
+      "code": "0191",
+      "libelle": "Traitement chirUrgical de la sténose hypertrophique du pylore 80",
+      "tarif": 35,
+      "coefficient": 1,
+      "lettreCle": "",
+      "categorie": "Autre"
+    },
+    {
       "code": "0792",
-      "libelle": "Hésection segmentaire du grêle ....... . :.,........................ 100",
-      "tarif": 60,
+      "libelle": "Hésection segmentaire du grêle",
+      "tarif": 10060,
       "coefficient": 1,
       "lettreCle": "",
       "categorie": "Autre"
@@ -3526,7 +3454,7 @@
     },
     {
       "code": "0797",
-      "libelle": "Ablation du diverticule de Meckel .\"., .... ....... . , ......... , ... ,. 60",
+      "libelle": "Ablation du diverticule de Meckel.\".,...,..,...,. 60",
       "tarif": 30,
       "coefficient": 1,
       "lettreCle": "",
@@ -3534,23 +3462,15 @@
     },
     {
       "code": "0799",
-      "libelle": "Hémicblectomie élargie \".\" ..... . .......... . ... . . ......... , .1_ ••• \" 150",
+      "libelle": "Hémicblectomie élargie \".\"...,.1_ ••• \" 150",
       "tarif": 90,
       "coefficient": 1,
       "lettreCle": "",
       "categorie": "Autre"
     },
     {
-      "code": "0800",
-      "libelle": "Colectomie totale ., .. ,. , .. \" .. ' ................................ 250",
-      "tarif": 130,
-      "coefficient": 1,
-      "lettreCle": "",
-      "categorie": "Autre"
-    },
-    {
       "code": "0803",
-      "libelle": "Cholécystotomie ou cholécystostomie. . . . . . . . . . . . . . . . • • . . • . . . • . . . . . 60",
+      "libelle": "Cholécystotomie ou cholécystostomie... • •.. .. 60",
       "tarif": 30,
       "coefficient": 1,
       "lettreCle": "",
@@ -3558,7 +3478,7 @@
     },
     {
       "code": "0804",
-      "libelle": "Cholécystectomie ..............•.............•..••.•.••.•.. ~ • . . 80",
+      "libelle": "Cholécystectomie... ~ •.. 80",
       "tarif": 40,
       "coefficient": 1,
       "lettreCle": "",
@@ -3566,7 +3486,7 @@
     },
     {
       "code": "0805",
-      "libelle": "Cholédocotomie ou hépaticotomie avec ou sans cholécystectomie .... 150",
+      "libelle": "Cholédocotomie ou hépaticotomie avec ou sans cholécystectomie.... 150",
       "tarif": 90,
       "coefficient": 1,
       "lettreCle": "",
@@ -3574,7 +3494,7 @@
     },
     {
       "code": "0806",
-      "libelle": "Majoration pour Intervention itérative sur les voies biliaires ..... . 30",
+      "libelle": "Majoration pour Intervention itérative sur les voies biliaires.. 30",
       "tarif": 10,
       "coefficient": 1,
       "lettreCle": "",
@@ -3582,31 +3502,23 @@
     },
     {
       "code": "0812",
-      "libelle": "Chirurgie transduodénale dt! la papille et de l'ampoule de Vater . . .... 100",
-      "tarif": 60,
-      "coefficient": 1,
-      "lettreCle": "",
-      "categorie": "Autre"
-    },
-    {
-      "code": "0813",
-      "libelle": "Drainage d'un abcés du foie .. ;................... . ............. . . 60",
-      "tarif": 30,
+      "libelle": "Chirurgie transduodénale dt! la papille et de l'ampoule de Vater",
+      "tarif": 10060,
       "coefficient": 1,
       "lettreCle": "",
       "categorie": "Autre"
     },
     {
       "code": "0814/1",
-      "libelle": "Pour kyste unique .... , ....... . ,........................... . .... 100",
-      "tarif": 30,
+      "libelle": "Pour kyste unique",
+      "tarif": 10030,
       "coefficient": 1,
       "lettreCle": "",
       "categorie": "Autre"
     },
     {
       "code": "0814/2",
-      "libelle": "Pour-.kystes multiples ......................... .. . .. ... ... ......... 120",
+      "libelle": "Pour-.kystes multiples... 120",
       "tarif": 40,
       "coefficient": 1,
       "lettreCle": "",
@@ -3614,7 +3526,7 @@
     },
     {
       "code": "0816",
-      "libelle": "Résection segmentaire du foie .•.................................. 12C",
+      "libelle": "Résection segmentaire du foie... 12C",
       "tarif": 40,
       "coefficient": 1,
       "lettreCle": "",
@@ -3622,31 +3534,23 @@
     },
     {
       "code": "0817",
-      "libelle": "Hépatect\\Jmie réglée ....... ! •.• . .. ... .•. . ..• .. •••...... ... .• .. .. 250",
+      "libelle": "Hépatect\\Jmie réglée.. ! .. 250",
       "tarif": 130,
       "coefficient": 1,
       "lettreCle": "",
       "categorie": "Autre"
     },
     {
-      "code": "0821",
-      "libelle": "Duodéno-pancréactectomie.(v compris les anastomoses viscérales néces￾saires} . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 300",
-      "tarif": 150,
+      "code": "0818",
+      "libelle": "Traitement des lésions Io.calisées, enkystées oufistulisp.es du pancréas..,...,..,.. '... 150",
+      "tarif": 90,
       "coefficient": 1,
       "lettreCle": "",
       "categorie": "Autre"
     },
     {
-      "code": "0823",
-      "libelle": "Prélèvement par ponction biopsique du foie ou de la rate .pour examen",
-      "tarif": 10,
-      "coefficient": 1,
-      "lettreCle": "",
-      "categorie": "Soins"
-    },
-    {
       "code": "0826/2",
-      "libelle": "Avec biopsie ..... . ... . . . ..... . ................. . ... \"C",
+      "libelle": "Avec biopsie... \"C",
       "tarif": 15,
       "coefficient": 1,
       "lettreCle": "",
@@ -3654,7 +3558,7 @@
     },
     {
       "code": "0827",
-      "libelle": "Biopsie musculaire du rectum, rectotoffiu:; .. .....",
+      "libelle": "Biopsie musculaire du rectum, rectotoffiu",
       "tarif": 20,
       "coefficient": 1,
       "lettreCle": "",
@@ -3662,23 +3566,15 @@
     },
     {
       "code": "0828/1",
-      "libelle": "Par vole basse ................................... .. ... .. .. . .. . ... 80",
+      "libelle": "Par vole basse... 80",
       "tarif": 35,
       "coefficient": 1,
       "lettreCle": "",
       "categorie": "Autre"
     },
     {
-      "code": "0828/2",
-      "libelle": "Par voie haute ou combinée ... .. .. . ... , ...... \" .... . ..... . .. . .... 200",
-      "tarif": 110,
-      "coefficient": 1,
-      "lettreCle": "",
-      "categorie": "Autre"
-    },
-    {
       "code": "0829",
-      "libelle": "Resection d 'un prolapsus rectal . . . .....",
+      "libelle": "Resection d 'un prolapsus rectal",
       "tarif": 50,
       "coefficient": 1,
       "lettreCle": "",
@@ -3686,39 +3582,23 @@
     },
     {
       "code": "0830",
-      "libelle": "Traitement des prolapsus rectaux par voie haute et basse .......... 100",
-      "tarif": 60,
-      "coefficient": 1,
-      "lettreCle": "",
-      "categorie": "Autre"
-    },
-    {
-      "code": "0831",
-      "libelle": "Traitement chirurgical de mégacôlon par résection colique avec abais￾sement du bout proximal par voie périnéale ou transanale . . ... . .... 200",
-      "tarif": 110,
+      "libelle": "Traitement des prolapsus rectaux par voie haute et basse",
+      "tarif": 10060,
       "coefficient": 1,
       "lettreCle": "",
       "categorie": "Autre"
     },
     {
       "code": "0832/1",
-      "libelle": "Par 'Iole abdot11lnale. périnéale ou sacrée .. . . ..... . .. .. ...... . .... , 150",
+      "libelle": "Par 'Iole abdot11lnale. périnéale ou sacrée..., 150",
       "tarif": 75,
       "coefficient": 1,
       "lettreCle": "",
       "categorie": "Autre"
     },
     {
-      "code": "0832/2",
-      "libelle": "Par voies associées . . ................. . ........... . ....... , . . . ,. 200",
-      "tarif": 110,
-      "coefficient": 1,
-      "lettreCle": "",
-      "categorie": "Autre"
-    },
-    {
       "code": "0835",
-      "libelle": "Traitement 'des lésions traumatiques complexes du péri nés .......... 60",
+      "libelle": "Traitement 'des lésions traumatiques complexes du péri nés... 60",
       "tarif": 30,
       "coefficient": 1,
       "lettreCle": "",
@@ -3726,7 +3606,7 @@
     },
     {
       "code": "0837",
-      "libelle": "Sphincteropi~stie avec anoplastie muqueuse ...................... 50",
+      "libelle": "Sphincteropi~stie avec anoplastie muqueuse... 50",
       "tarif": 30,
       "coefficient": 1,
       "lettreCle": "",
@@ -3773,14 +3653,6 @@
       "categorie": "Autre"
     },
     {
-      "code": "0352",
-      "libelle": "Traitement de fa fissure anale par Injection sclérosantes (maximum",
-      "tarif": 3,
-      "coefficient": 1,
-      "lettreCle": "",
-      "categorie": "Soins"
-    },
-    {
       "code": "0854",
       "libelle": "Tr~itement de la fissur~ ~nale par dila~etlon anale",
       "tarif": 20,
@@ -3790,7 +3662,7 @@
     },
     {
       "code": "0856/1",
-      "libelle": "Chez la femme .. , ... . _ .........•..... '\"",
+      "libelle": "Chez la femme..,.... _... '\"",
       "tarif": 10,
       "coefficient": 1,
       "lettreCle": "",
@@ -3830,7 +3702,7 @@
     },
     {
       "code": "0859/2",
-      "libelle": "Chez l'homme et l'enfant ............. . .........",
+      "libelle": "Chez l'homme et l'enfant",
       "tarif": 50,
       "coefficient": 1,
       "lettreCle": "",
@@ -3846,7 +3718,7 @@
     },
     {
       "code": "0869/2",
-      "libelle": "Au delà du 15ème jour ...................................... _",
+      "libelle": "Au delà du 15ème jour... _",
       "tarif": 20,
       "coefficient": 1,
       "lettreCle": "",
@@ -3854,15 +3726,15 @@
     },
     {
       "code": "0870",
-      "libelle": "Crél1ticn d'uno iistule artérÎo<veinsuse par anastomose directe ... . 100",
-      "tarif": 30,
+      "libelle": "Crél1ticn d'uno iistule artérÎo<veinsuse par anastomose directe",
+      "tarif": 10030,
       "coefficient": 1,
       "lettreCle": "",
       "categorie": "Autre"
     },
     {
       "code": "0884/2",
-      "libelle": "Intervention itérative. 'en supplémentnt ... . . . . . . . . . . . . . . . . . . . . . . . .. 20",
+      "libelle": "Intervention itérative. 'en supplémentnt... 20",
       "tarif": 10,
       "coefficient": 1,
       "lettreCle": "",
@@ -3870,7 +3742,7 @@
     },
     {
       "code": "0885",
-      "libelle": "Section dé l'Isthme d'un rein en fer à cheval , avec ou sans néphrecto￾mie ... .. ; . .... . ....... . .....• \"' .... . . ... .. . . ...... . .. . .. . . . .. . . . . .. . 120",
+      "libelle": "Section dé l'Isthme d'un rein en fer à cheval, avec ou sans néphrectomie..;... \"'... 120",
       "tarif": 60,
       "coefficient": 1,
       "lettreCle": "",
@@ -3878,7 +3750,7 @@
     },
     {
       "code": "0886",
-      "libelle": "Injection per-opératoire dans les voies excrétrices d'un produit de con￾iraste pour prise de clichés, en supplément . . . . . . . . . •. . . . . . • . . . . . 20",
+      "libelle": "Injection per-opératoire dans les voies excrétrices d'un produit de coniraste pour prise de clichés, en supplément .. 20",
       "tarif": 10,
       "coefficient": 1,
       "lettreCle": "",
@@ -3886,7 +3758,7 @@
     },
     {
       "code": "0887",
-      "libelle": "Débimétrie .'",
+      "libelle": "Débimétrie.'",
       "tarif": 10,
       "coefficient": 1,
       "lettreCle": "",
@@ -3894,7 +3766,7 @@
     },
     {
       "code": "0888",
-      "libelle": "Urétérotomle lombaire, urétérolyse.. ... .. . ........ . . . .. ... ... ... .. 80",
+      "libelle": "Urétérotomle lombaire, urétérolyse... 80",
       "tarif": 40,
       "coefficient": 1,
       "lettreCle": "",
@@ -3902,7 +3774,7 @@
     },
     {
       "code": "0889",
-      "libelle": "Urétérostomié. . cutanée •. .•.... . ... ... . ..... . ..... ... .. . . .. . . .... 80",
+      "libelle": "Urétérostomié.. cutanée... 80",
       "tarif": 30,
       "coefficient": 1,
       "lettreCle": "",
@@ -3910,7 +3782,7 @@
     },
     {
       "code": "0890",
-      "libelle": "Urétérotomie pelvienne. urétérectomiesecondaire totale ... . \" . . . . . . 100",
+      "libelle": "Urétérotomie pelvienne. urétérectomiesecondaire totale.... \".. 100",
       "tarif": 50,
       "coefficient": 1,
       "lettreCle": "",
@@ -3918,7 +3790,7 @@
     },
     {
       "code": "0891",
-      "libelle": "Urétero-lithotomie itérative en supplément . . . . .. .. . . .. . . . ......... 20",
+      "libelle": "Urétero-lithotomie itérative en supplément... 20",
       "tarif": 10,
       "coefficient": 1,
       "lettreCle": "",
@@ -3926,39 +3798,47 @@
     },
     {
       "code": "0892",
-      "libelle": "Abouchement d'un uretère dans l'intestin en place . ..... . . . .. . . . ... 100",
-      "tarif": 50,
+      "libelle": "Abouchement d'un uretère dans l'intestin en place",
+      "tarif": 10050,
       "coefficient": 1,
       "lettreCle": "",
       "categorie": "Gastro-entérologie"
     },
     {
+      "code": "0893",
+      "libelle": "Urétérorraphle term!notcrminale cure d'une fistule cutanée de l'uretère... \"..,..;... '.. 100·",
+      "tarif": 40,
+      "coefficient": 1,
+      "lettreCle": "",
+      "categorie": "Dermatologie"
+    },
+    {
+      "code": "0895",
+      "libelle": "Urétérostomle cutané transintestine.le",
+      "tarif": 896,
+      "coefficient": 1,
+      "lettreCle": "",
+      "categorie": "Autre"
+    },
+    {
       "code": "0904/1",
-      "libelle": "Avec abouchement des uretères à la peau . . .... . . ... . . . . .... . . ... .. 200",
-      "tarif": 90,
+      "libelle": "Avec abouchement des uretères à la peau",
+      "tarif": 20090,
       "coefficient": 1,
       "lettreCle": "",
       "categorie": "Dermatologie"
     },
     {
       "code": "0904/2",
-      "libelle": "Avec réimplantation des uretères dans l'intestin .... . . .. . . ... . .. . , 2.50",
+      "libelle": "Avec réimplantation des uretères dans l'intestin..., 2.50",
       "tarif": 110,
       "coefficient": 1,
       "lettreCle": "",
       "categorie": "Gastro-entérologie"
     },
     {
-      "code": "0905",
-      "libelle": "Cystectomie totale avec remplacement par greffon intestinal ... . . . 300",
-      "tarif": 150,
-      "coefficient": 1,
-      "lettreCle": "",
-      "categorie": "Autre"
-    },
-    {
       "code": "0906",
-      "libelle": "Exérèse des diverticules vésicaux avec ou sans résection du col .. . . 150",
+      "libelle": "Exérèse des diverticules vésicaux avec ou sans résection du col.... 150",
       "tarif": 60,
       "coefficient": 1,
       "lettreCle": "",
@@ -3966,7 +3846,7 @@
     },
     {
       "code": "0908",
-      "libelle": "Intervention pour récidive, en slJpplément .......•................ 20",
+      "libelle": "Intervention pour récidive, en slJpplément... 20",
       "tarif": 10,
       "coefficient": 1,
       "lettreCle": "",
@@ -3974,7 +3854,7 @@
     },
     {
       "code": "0909",
-      "libelle": "Fermeture de fistule vésico-cutanée- •... . .............. ....... '",
+      "libelle": "Fermeture de fistule vésico-cutanée-... '",
       "tarif": 40,
       "coefficient": 1,
       "lettreCle": "",
@@ -3982,16 +3862,16 @@
     },
     {
       "code": "0911/1",
-      "libelle": "Ablation. ~imple de. la plaque vp.slcale ....... : ......... . . \" . . .. . . . .. 100",
-      "tarif": 35,
+      "libelle": "Ablation. ~imple de. la plaque vp.slcale..:... \"",
+      "tarif": 10035,
       "coefficient": 1,
       "lettreCle": "",
       "categorie": "Chirurgie"
     },
     {
       "code": "0911/2",
-      "libelle": "Reconstitution .simple de la vessie ................................ 100",
-      "tarif": 35,
+      "libelle": "Reconstitution.simple de la vessie",
+      "tarif": 10035,
       "coefficient": 1,
       "lettreCle": "",
       "categorie": "Urologie"
@@ -4006,7 +3886,7 @@
     },
     {
       "code": "0913",
-      "libelle": "Urétéro-entéro-cistoplastie .................................................. 250",
+      "libelle": "Urétéro-entéro-cistoplastie... 250",
       "tarif": 130,
       "coefficient": 1,
       "lettreCle": "",
@@ -4029,8 +3909,16 @@
       "categorie": "Soins"
     },
     {
+      "code": "0918",
+      "libelle": "Urétrotomie interne.. \"_ 0... \"",
+      "tarif": 20,
+      "coefficient": 1,
+      "lettreCle": "",
+      "categorie": "Autre"
+    },
+    {
       "code": "0919",
-      "libelle": "Urétrotomie externe ou urétrostomie ...........",
+      "libelle": "Urétrotomie externe ou urétrostomie",
       "tarif": 60,
       "coefficient": 1,
       "lettreCle": "",
@@ -4038,7 +3926,7 @@
     },
     {
       "code": "0921",
-      "libelle": "Traitement opératoire du phlegmon péri\"orétral ' diffus gangréneux (infil￾tration d'urine) .. ............ ,. ~ . . . . . . . . . . . . .• . . . . . . . . . . . . . . . . . . . 60",
+      "libelle": "Traitement opératoire du phlegmon péri\"orétral ' diffus gangréneux (infiltration d'urine)...,. ~... 60",
       "tarif": 30,
       "coefficient": 1,
       "lettreCle": "",
@@ -4046,7 +3934,7 @@
     },
     {
       "code": "0922",
-      "libelle": "Cure de fistule périnéale avec ou sans urétrectomie (dérivation com￾prise) .... .......... ......... . . ... ............ ~.~",
+      "libelle": "Cure de fistule périnéale avec ou sans urétrectomie (dérivation comprise)... ~.~",
       "tarif": 12050,
       "coefficient": 1,
       "lettreCle": "",
@@ -4054,7 +3942,7 @@
     },
     {
       "code": "0925/1",
-      "libelle": "Premier temps . ................ '.' ......... .. . . ..... _",
+      "libelle": "Premier temps... '.'... _",
       "tarif": 40,
       "coefficient": 1,
       "lettreCle": "",
@@ -4062,7 +3950,7 @@
     },
     {
       "code": "0925/2",
-      "libelle": "les autres ... . : -",
+      "libelle": "les autres....: -",
       "tarif": 25,
       "coefficient": 1,
       "lettreCle": "",
@@ -4086,7 +3974,7 @@
     },
     {
       "code": "0927/3",
-      "libelle": "Section ou plastie :chirurgicale du frein",
+      "libelle": "Section ou plastie:chirurgicale du frein",
       "tarif": 10,
       "coefficient": 1,
       "lettreCle": "",
@@ -4109,16 +3997,8 @@
       "categorie": "Chirurgie"
     },
     {
-      "code": "0939",
-      "libelle": "Ablati(ln des vésicules séminales chez l'adulte . . .............. . . . . 120",
-      "tarif": 50,
-      "coefficient": 1,
-      "lettreCle": "",
-      "categorie": "Autre"
-    },
-    {
       "code": "0943",
-      "libelle": "Cure op~ratoire de ia torsion du testicule ou de sés annexes, castra￾tion, orchidectomie, ou épididymectomie unilatérale",
+      "libelle": "Cure op~ratoire de ia torsion du testicule ou de sés annexes, castration, orchidectomie, ou épididymectomie unilatérale",
       "tarif": 40,
       "coefficient": 1,
       "lettreCle": "",
@@ -4126,8 +4006,8 @@
     },
     {
       "code": "0946",
-      "libelle": "Traitement de l'Impuissance masculine .................... . ,.\\ . . .. 100",
-      "tarif": 30,
+      "libelle": "Traitement de l'Impuissance masculine...,.\\",
+      "tarif": 10030,
       "coefficient": 1,
       "lettreCle": "",
       "categorie": "Autre"
@@ -4158,23 +4038,23 @@
     },
     {
       "code": "0961",
-      "libelle": "Hystérectomie vaginale . ........... . . . .. . ..... . .. . . . . . . . : ..... . .. 100",
-      "tarif": 30,
+      "libelle": "Hystérectomie vaginale",
+      "tarif": 10030,
       "coefficient": 1,
       "lettreCle": "",
       "categorie": "Autre"
     },
     {
       "code": "0962/2",
-      "libelle": "Avec curage ganglionnaire unilatéral ..... . .. .. .. . ...... .. ......... 100",
-      "tarif": 50,
+      "libelle": "Avec curage ganglionnaire unilatéral",
+      "tarif": 10050,
       "coefficient": 1,
       "lettreCle": "",
       "categorie": "Autre"
     },
     {
       "code": "0962/3",
-      "libelle": "A·.'ec curage ganglionnaire bilatéral .. .... .. ...... ' .. .. . . .. .. ...... i20",
+      "libelle": "A·.'ec curage ganglionnaire bilatéral... '... 120",
       "tarif": 70,
       "coefficient": 1,
       "lettreCle": "",
@@ -4189,16 +4069,8 @@
       "categorie": "Autre"
     },
     {
-      "code": "0965",
-      "libelle": "A l 'exception de triple opération type Manchester , ..... .. ... . , 100",
-      "tarif": 50,
-      "coefficient": 1,
-      "lettreCle": "",
-      "categorie": "Autre"
-    },
-    {
       "code": "0967",
-      "libelle": "Coelioscopie ........",
+      "libelle": "Coelioscopie",
       "tarif": 30,
       "coefficient": 1,
       "lettreCle": "",
@@ -4222,7 +4094,7 @@
     },
     {
       "code": "0970",
-      "libelle": "Toutes Interventions portant sur \"appareil génital féminin ........... ' . 80",
+      "libelle": "Toutes Interventions portant sur \"appareil génital féminin... '. 80",
       "tarif": 40,
       "coefficient": 1,
       "lettreCle": "",
@@ -4230,8 +4102,8 @@
     },
     {
       "code": "0976",
-      "libelle": "Cellulo-adénectomie abdominale isolée ..•......•. \",' .............. ;. 100",
-      "tarif": 50,
+      "libelle": "Cellulo-adénectomie abdominale isolée... \",'",
+      "tarif": 10050,
       "coefficient": 1,
       "lettreCle": "",
       "categorie": "Autre"
@@ -4245,16 +4117,8 @@
       "categorie": "Autre"
     },
     {
-      "code": "0978",
-      "libelle": "Eviscération ~Iyienne totale élargie avec ou sans périnéectomie .. , 300",
-      "tarif": 150,
-      "coefficient": 1,
-      "lettreCle": "",
-      "categorie": "Autre"
-    },
-    {
       "code": "0979",
-      "libelle": "liiterventions pour prolapsus .. .. .......... .. . : .. . . .... . . : . . . . . . . .. 120",
+      "libelle": "liiterventions pour prolapsus...:...:.. 120",
       "tarif": 40,
       "coefficient": 1,
       "lettreCle": "",
@@ -4270,7 +4134,7 @@
     },
     {
       "code": "0994",
-      "libelle": "Par un médecin appelé pour l'intervention ................ . . ',-.. , . . 50",
+      "libelle": "Par un médecin appelé pour l'intervention... ',-..,.. 50",
       "tarif": 25,
       "coefficient": 1,
       "lettreCle": "",
