@@ -49,6 +49,24 @@ export const NomenclatureGenerale: React.FC = () => {
             const query = searchQuery.toLowerCase().trim();
             const queryWords = query.split(/\s+/);
 
+            // Synonymes et suggestions pour termes modernes
+            const synonymes: { [key: string]: string[] } = {
+                'scanner': ['radiographie', 'radio', 'cliché', 'urographie', 'myélographie'],
+                'irm': ['radiographie', 'myélographie', 'angiographie'],
+                'échographie': ['radiographie', 'urographie'],
+                'tdm': ['radiographie', 'tomodensitométrie'],
+                'tomodensitométrie': ['radiographie']
+            };
+
+            let queryExpanded = query;
+            Object.keys(synonymes).forEach(terme => {
+                if (query.includes(terme)) {
+                    queryExpanded += ' ' + synonymes[terme].join(' ');
+                }
+            });
+
+            const queryWordsExpanded = queryExpanded.toLowerCase().split(/\s+/).filter(w => w.length > 2);
+
             // Détecter recherche par code lettre-clé (ex: "B 30", "E 15", "C 20")
             const codeMatch = query.match(/^([A-Z])\s*(\d+)$/i);
             
@@ -77,7 +95,7 @@ export const NomenclatureGenerale: React.FC = () => {
                     else if (codeLower.includes(query)) score += 50;
 
                     // Libellé
-                    queryWords.forEach(word => {
+                    queryWordsExpanded.forEach(word => {
                         if (libelleLower.includes(word)) score += 10;
                     });
 
@@ -520,7 +538,42 @@ export const NomenclatureGenerale: React.FC = () => {
             )}
 
             {/* Message si aucun acte */}
-            {actesSelectionnes.length === 0 && actesTrouves.length === 0 && !isLoading && (
+            {actesSelectionnes.length === 0 && actesTrouves.length === 0 && !isLoading && searchQuery && (
+                <Card className="bg-gradient-to-br from-amber-50 to-orange-50 border-2 border-amber-200">
+                    <div className="text-center py-8">
+                        <div className="text-5xl mb-3">🔍</div>
+                        <h3 className="text-lg font-semibold text-slate-800 mb-2">
+                            Aucun résultat pour "{searchQuery}"
+                        </h3>
+                        <p className="text-sm text-slate-600 mb-4">
+                            La nomenclature date des années 1970-1980 et ne contient pas certains termes modernes
+                        </p>
+                        <div className="bg-white rounded-lg p-4 border border-amber-200 max-w-2xl mx-auto">
+                            <p className="text-sm font-semibold text-slate-700 mb-2">💡 Suggestions de recherche :</p>
+                            <div className="grid grid-cols-2 gap-2 text-sm">
+                                <div className="bg-blue-50 px-3 py-2 rounded">
+                                    <span className="font-semibold">Scanner, IRM</span> → 
+                                    <button onClick={() => {setSearchQuery('radiographie'); handleSearch();}} className="ml-1 text-blue-600 underline">radiographie</button>
+                                </div>
+                                <div className="bg-blue-50 px-3 py-2 rounded">
+                                    <span className="font-semibold">Échographie</span> → 
+                                    <button onClick={() => {setSearchQuery('urographie'); handleSearch();}} className="ml-1 text-blue-600 underline">urographie</button>
+                                </div>
+                                <div className="bg-blue-50 px-3 py-2 rounded">
+                                    <span className="font-semibold">TDM</span> → 
+                                    <button onClick={() => {setSearchQuery('myélographie'); handleSearch();}} className="ml-1 text-blue-600 underline">myélographie</button>
+                                </div>
+                                <div className="bg-blue-50 px-3 py-2 rounded">
+                                    <span className="font-semibold">Imagerie</span> → 
+                                    <button onClick={() => {setSearchQuery('cliché'); handleSearch();}} className="ml-1 text-blue-600 underline">cliché</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </Card>
+            )}
+
+            {actesSelectionnes.length === 0 && actesTrouves.length === 0 && !isLoading && !searchQuery && (
                 <Card className="bg-gradient-to-br from-slate-50 to-slate-100 text-center py-12">
                     <div className="text-6xl mb-4">🔍</div>
                     <h3 className="text-xl font-semibold text-slate-800 mb-2">
