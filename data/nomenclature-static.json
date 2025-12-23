@@ -1,0 +1,104 @@
+{
+  "version": "1.0",
+  "date": "2025-12-23",
+  "source": "Base de données intégrée",
+  "total": 12,
+  "categories": {
+    "Consultation": 3,
+    "Visite": 1,
+    "Soins": 1,
+    "Imagerie": 2,
+    "Radiologie": 1,
+    "Chirurgie": 1,
+    "Technique": 2,
+    "Anesthésie": 1,
+    "Sage-femme": 1,
+    "Déplacement": 1
+  },
+  "actes": [
+    {
+      "code": "C",
+      "libelle": "Consultation au cabinet",
+      "tarif": 2500,
+      "coefficient": 1,
+      "categorie": "Consultation"
+    },
+    {
+      "code": "V",
+      "libelle": "Visite à domicile",
+      "tarif": 2500,
+      "coefficient": 1.5,
+      "categorie": "Visite"
+    },
+    {
+      "code": "CS",
+      "libelle": "Consultation spécialiste",
+      "tarif": 2800,
+      "coefficient": 1,
+      "categorie": "Consultation"
+    },
+    {
+      "code": "AMI4",
+      "libelle": "Acte médical infirmier niveau 4",
+      "tarif": 1500,
+      "coefficient": 2,
+      "categorie": "Soins"
+    },
+    {
+      "code": "KE",
+      "libelle": "Échographie",
+      "tarif": 3500,
+      "coefficient": 1,
+      "categorie": "Imagerie"
+    },
+    {
+      "code": "QZRB010",
+      "libelle": "Radiographie thorax de face",
+      "tarif": 2500,
+      "coefficient": 1.5,
+      "categorie": "Radiologie"
+    },
+    {
+      "code": "ADC",
+      "libelle": "Acte de chirurgie majeure",
+      "tarif": 10000,
+      "coefficient": 3,
+      "categorie": "Chirurgie"
+    },
+    {
+      "code": "K",
+      "libelle": "Acte technique simple",
+      "tarif": 2000,
+      "coefficient": 2,
+      "categorie": "Technique"
+    },
+    {
+      "code": "KC",
+      "libelle": "Acte technique complexe",
+      "tarif": 2000,
+      "coefficient": 4,
+      "categorie": "Technique"
+    },
+    {
+      "code": "ATM",
+      "libelle": "Anesthésie",
+      "tarif": 5000,
+      "coefficient": 2,
+      "categorie": "Anesthésie"
+    },
+    {
+      "code": "SF",
+      "libelle": "Sage-femme - Consultation",
+      "tarif": 2200,
+      "coefficient": 1,
+      "categorie": "Sage-femme"
+    },
+    {
+      "code": "IK",
+      "libelle": "Indemnité de déplacement",
+      "tarif": 500,
+      "coefficient": 1,
+      "categorie": "Déplacement"
+    }
+  ]
+}

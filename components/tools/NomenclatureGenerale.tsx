@@ -1,14 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Card } from '../ui/Card';
-import { Upload, Search, Plus, Calculator, FileText, Trash2, Download, X, Database, Info } from 'lucide-react';
-import {
-    extractPdfData,
-    rechercherActes,
-    sauvegarderBaseDeDonnees,
-    chargerBaseDeDonnees,
-    effacerBaseDeDonnees,
-    getStatistiques
-} from '../../services/pdfExtractor';
+import { Upload, Search, Plus, Calculator, FileText, Trash2, Download, X, Database, Info, RefreshCw } from 'lucide-react';
+import nomenclatureData from '../../data/nomenclature-static.json';
 
 interface ActeMedical {
     code: string;
@@ -30,52 +23,15 @@ export const NomenclatureGenerale: React.FC = () => {
     const [actesSelectionnes, setActesSelectionnes] = useState<ActeSelectionne[]>([]);
     const [isLoading, setIsLoading] = useState(false);
     const [baseDeDonnees, setBaseDeDonnees] = useState<ActeMedical[]>([]);
-    const [isExtracting, setIsExtracting] = useState(false);
-    const fileInputRef = useRef<HTMLInputElement>(null);
     const [showStats, setShowStats] = useState(false);
 
-    // Charger la base de données au démarrage
+    // Charger la base de données intégrée au démarrage
     useEffect(() => {
-        const dbExistante = chargerBaseDeDonnees();
-        if (dbExistante) {
-            setBaseDeDonnees(dbExistante);
+        if (nomenclatureData && nomenclatureData.actes) {
+            setBaseDeDonnees(nomenclatureData.actes);
+            console.log(`✅ Base de données chargée: ${nomenclatureData.actes.length} actes`);
         }
     }, []);
-
-    // Charger et extraire le PDF
-    const handlePdfUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
-        const file = event.target.files?.[0];
-        if (!file) return;
-
-        if (!file.name.toLowerCase().endsWith('.pdf')) {
-            alert('⚠️ Veuillez sélectionner un fichier PDF');
-            return;
-        }
-
-        setIsExtracting(true);
-        
-        try {
-            // Extraire les données du PDF
-            const actesExtraits = await extractPdfData(file);
-            
-            if (actesExtraits.length === 0) {
-                alert('⚠️ Aucun acte médical trouvé dans ce PDF. Vérifiez le format du fichier.');
-                setIsExtracting(false);
-                return;
-            }
-
-            // Sauvegarder dans la base de données
-            setBaseDeDonnees(actesExtraits);
-            sauvegarderBaseDeDonnees(actesExtraits);
-            
-            setIsExtracting(false);
-            alert(`✅ PDF extrait avec succès !\n\n${actesExtraits.length} actes médicaux enregistrés dans la base de données.`);
-        } catch (error) {
-            console.error('Erreur lors de l\'extraction du PDF:', error);
-            setIsExtracting(false);
-            alert('❌ Erreur lors de l\'extraction du PDF. Vérifiez que le fichier est bien lisible.');
-        }
-    };
 
     // Recherche sémantique dans les actes
     const handleSearch = () => {
@@ -87,30 +43,36 @@ export const NomenclatureGenerale: React.FC = () => {
         setIsLoading(true);
 
         setTimeout(() => {
-            // Utiliser la base de données si elle existe, sinon utiliser des exemples
-            if (baseDeDonnees.length > 0) {
-                const resultats = rechercherActes(baseDeDonnees, searchQuery);
-                setActesTrouves(resultats.slice(0, 20)); // Limiter à 20 résultats
-            } else {
-                // Base de données d'exemple si aucun PDF n'est chargé
-                const actesExemples: ActeMedical[] = [
-                    { code: 'C', libelle: 'Consultation au cabinet', tarif: 2500, coefficient: 1, categorie: 'Consultation' },
-                    { code: 'V', libelle: 'Visite à domicile', tarif: 2500, coefficient: 1.5, categorie: 'Visite' },
-                    { code: 'CS', libelle: 'Consultation spécialiste', tarif: 2800, coefficient: 1, categorie: 'Consultation' },
-                    { code: 'AMI4', libelle: 'Acte médical infirmier niveau 4', tarif: 1500, coefficient: 2, categorie: 'Soins' },
-                    { code: 'KE', libelle: 'Échographie', tarif: 3500, coefficient: 1, categorie: 'Imagerie' },
-                    { code: 'QZRB010', libelle: 'Radiographie thorax de face', tarif: 2500, coefficient: 1.5, categorie: 'Radiologie' },
-                    { code: 'ADC', libelle: 'Acte de chirurgie majeure', tarif: 10000, coefficient: 3, categorie: 'Chirurgie' },
-                    { code: 'K', libelle: 'Acte technique simple', tarif: 2000, coefficient: 2, categorie: 'Technique' },
-                    { code: 'KC', libelle: 'Acte technique complexe', tarif: 2000, coefficient: 4, categorie: 'Technique' },
-                    { code: 'ATM', libelle: 'Anesthésie', tarif: 5000, coefficient: 2, categorie: 'Anesthésie' },
-                    { code: 'SF', libelle: 'Sage-femme - Consultation', tarif: 2200, coefficient: 1, categorie: 'Sage-femme' },
-                    { code: 'IK', libelle: 'Indemnité de déplacement', tarif: 500, coefficient: 1, categorie: 'Déplacement' },
-                ];
+            // Recherche dans la base de données intégrée
+            const query = searchQuery.toLowerCase();
+            const queryWords = query.split(/\s+/);
 
-                const resultats = rechercherActes(actesExemples, searchQuery);
-                setActesTrouves(resultats);
-            }
+            const resultats = baseDeDonnees
+                .map(acte => {
+                    let score = 0;
+                    const libelleLower = acte.libelle.toLowerCase();
+                    const codeLower = acte.code.toLowerCase();
+
+                    // Code exact
+                    if (codeLower === query) score += 100;
+                    else if (codeLower.includes(query)) score += 50;
+
+                    // Libellé
+                    queryWords.forEach(word => {
+                        if (libelleLower.includes(word)) score += 10;
+                    });
+
+                    // Catégorie
+                    if (acte.categorie?.toLowerCase().includes(query)) score += 20;
+
+                    return { acte, score };
+                })
+                .filter(item => item.score > 0)
+                .sort((a, b) => b.score - a.score)
+                .slice(0, 20)
+                .map(item => item.acte);
+
+            setActesTrouves(resultats);
             setIsLoading(false);
         }, 300);
     };
@@ -186,7 +148,16 @@ export const NomenclatureGenerale: React.FC = () => {
     const { montantBrut, montantNet, regles } = calculerTotal();
 
     // Statistiques de la base de données
-    const stats = baseDeDonnees.length > 0 ? getStatistiques(baseDeDonnees) : null;
+    const stats = baseDeDonnees.length > 0 ? {
+        total: baseDeDonnees.length,
+        categories: baseDeDonnees.reduce((acc, acte) => {
+            const cat = acte.categorie || 'Autre';
+            acc[cat] = (acc[cat] || 0) + 1;
+            return acc;
+        }, {} as { [key: string]: number }),
+        tarifMoyen: baseDeDonnees.reduce((sum, acte) => 
+            sum + (acte.tarif * (acte.coefficient || 1)), 0) / baseDeDonnees.length
+    } : null;
 
     return (
         <div className="p-4 space-y-6 max-w-7xl mx-auto">
@@ -200,19 +171,22 @@ export const NomenclatureGenerale: React.FC = () => {
                 </p>
             </div>
 
-            {/* Upload PDF et gestion base de données */}
+            {/* Base de données intégrée */}
             <Card className="bg-gradient-to-r from-blue-50 to-indigo-50">
                 <div className="space-y-4">
                     <div className="flex items-center justify-between">
                         <div className="flex-1">
                             <h3 className="text-lg font-semibold text-slate-800 mb-2 flex items-center gap-2">
-                                <Database size={20} />
-                                Base de données Nomenclature
+                                <Database size={20} className="text-indigo-600" />
+                                Base de données Nomenclature Intégrée
                             </h3>
                             {baseDeDonnees.length > 0 ? (
                                 <div className="space-y-2">
-                                    <p className="text-sm text-green-700 font-medium">
-                                        ✅ Base de données active: {baseDeDonnees.length} actes médicaux
+                                    <p className="text-sm text-green-700 font-medium flex items-center gap-2">
+                                        ✅ Base de données active: <span className="font-bold text-green-800">{baseDeDonnees.length} actes médicaux</span>
+                                    </p>
+                                    <p className="text-xs text-slate-600">
+                                        📚 Source: {(nomenclatureData as any).source || 'acte.pdf'} • Version: {(nomenclatureData as any).version || '1.0'}
                                     </p>
                                     <div className="flex gap-2">
                                         <button
@@ -222,43 +196,17 @@ export const NomenclatureGenerale: React.FC = () => {
                                             <Info size={14} />
                                             {showStats ? 'Masquer stats' : 'Voir stats'}
                                         </button>
-                                        <button
-                                            onClick={() => {
-                                                if (confirm('Êtes-vous sûr de vouloir effacer la base de données ?')) {
-                                                    effacerBaseDeDonnees();
-                                                    setBaseDeDonnees([]);
-                                                    setActesTrouves([]);
-                                                    alert('🗑️ Base de données effacée');
-                                                }
-                                            }}
-                                            className="px-3 py-1 bg-red-600 text-white rounded text-xs font-medium hover:bg-red-700 flex items-center gap-1"
-                                        >
-                                            <Trash2 size={14} />
-                                            Effacer la BDD
-                                        </button>
                                     </div>
                                 </div>
                             ) : (
-                                <p className="text-sm text-slate-600">
-                                    Importez le PDF de la nomenclature pour créer votre base de données
+                                <p className="text-sm text-amber-700">
+                                    ⚠️ Base de données non chargée
                                 </p>
                             )}
                         </div>
-                        <button
-                            onClick={() => fileInputRef.current?.click()}
-                            disabled={isExtracting}
-                            className="px-6 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 disabled:opacity-50 transition-colors font-medium flex items-center gap-2"
-                        >
-                            <Upload size={20} />
-                            {isExtracting ? 'Extraction...' : baseDeDonnees.length > 0 ? 'Remplacer PDF' : 'Charger PDF'}
-                        </button>
-                        <input
-                            ref={fileInputRef}
-                            type="file"
-                            accept=".pdf"
-                            onChange={handlePdfUpload}
-                            className="hidden"
-                        />
+                        <div className="bg-indigo-100 rounded-full p-4">
+                            <Database size={32} className="text-indigo-600" />
+                        </div>
                     </div>
 
                     {/* Statistiques */}
@@ -299,14 +247,6 @@ export const NomenclatureGenerale: React.FC = () => {
                         </div>
                     )}
 
-                    {isExtracting && (
-                        <div className="bg-yellow-100 border border-yellow-300 text-yellow-800 rounded-lg p-3 text-sm">
-                            <div className="flex items-center gap-2">
-                                <div className="animate-spin h-4 w-4 border-2 border-yellow-600 border-t-transparent rounded-full"></div>
-                                <span>Extraction du PDF en cours... Veuillez patienter.</span>
-                            </div>
-                        </div>
-                    )}
                 </div>
             </Card>
 
