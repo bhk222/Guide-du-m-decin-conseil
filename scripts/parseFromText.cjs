@@ -9,21 +9,8 @@ function parseActesFromText(text) {
     
     console.log(`📝 Analyse de ${lines.length} lignes...\n`);
     
-    // Patterns optimisés pour la nomenclature algérienne
-    const patterns = [
-        // Format avec "o " au début: o 001 Description ... 25
-        /^[oO]\s+(\d{3,4}(?:\/\d)?)\s+(.{8,300}?)\s+[\.•\s]{2,}\s*(\d{1,6}(?:[.,]\d{1,2})?)\s*([A-Z])?\s*$/,
-        // Format principal: 0001 Description ... ... 25 ou 0001/1 Description ... 25 E
-        /^([Oo0][\dOo]{3,4}(?:\/\d)?)\s+(.{8,300}?)\s+[\.•o\s]{2,}\s*(\d{1,6}(?:[.,]\d{1,2})?)\s*([A-Z])?\s*$/,
-        // Format sans beaucoup de points: 0001 Description 25
-        /^([Oo0][\dOo]{3,4}(?:\/\d)?)\s+(.{10,200}?)\s{2,}(\d{2,6})\s*([A-Z])?\s*$/,
-        // Format court avec peu d'espace: 0054 Description...1
-        /^([Oo0][\dOo]{3,4}(?:\/\d)?)\s+(.{10,300}?)[\.•\s,;:]{1,}\s*(\d{1,6})\s*([A-Z])?\s*$/,
-    ];
-
     let count = 0;
     let ignored = 0;
-    let lastCode = null;
     
     for (let i = 0; i < lines.length; i++) {
         const line = lines[i].trim();
@@ -35,101 +22,108 @@ function parseActesFromText(text) {
             continue;
         }
         
-        let matched = false;
+        // Pattern simple : CODE au début de ligne (0XXX ou 1XXX ou codes avec /)
+        const codeMatch = line.match(/^([oO0-9][\dOo]{3,4}(?:\/\d)?)\s+(.+)$/);
+        if (!codeMatch) continue;
         
-        // Patterns principaux pour lignes avec codes
-        for (let p = 0; p < patterns.length; p++) {
-            const match = line.match(patterns[p]);
-            if (match) {
-                let rawCode, rawLibelle, rawTarif, lettreCle;
-                
-                if (p === 0) {
-                    // Format avec "o " au début
-                    [, rawCode, rawLibelle, rawTarif, lettreCle] = match;
-                    rawCode = '0' + rawCode;
-                } else {
-                    [, rawCode, rawLibelle, rawTarif, lettreCle] = match;
-                }
-                
-                // Nettoyer le code (convertir o/O en 0)
-                const code = rawCode.toUpperCase()
-                    .replace(/^[OoDd]/, '0')
-                    .replace(/[Oo]/g, '0')
-                    .replace(/\s/g, '')
-                    .trim();
-                
-                // Nettoyer le libellé
-                const libelle = rawLibelle.trim()
-                    .replace(/\s+/g, ' ')
-                    .replace(/[\.•o]{3,}$/g, '')
-                    .replace(/[\.•,;:]+$/g, '')
-                    .trim();
-                
-                // Convertir le tarif
-                const tarif = parseFloat(rawTarif.replace(',', '.').replace(/\s/g, ''));
-                
-                // Validation stricte
-                if (
-                    code.length >= 4 &&
-                    libelle.length >= 5 &&
-                    libelle.length <= 300 &&
-                    tarif > 0 &&
-                    tarif < 100000 &&
-                    !seenCodes.has(code) &&
-                    !/^[-\d\s\.•o]+$/.test(libelle) && // Pas uniquement des chiffres/points
-                    !/^[A-Z\s\.\-]{0,10}$/.test(libelle) // Pas uniquement des lettres courtes
-                ) {
-                    seenCodes.add(code);
-                    lastCode = code;
-                    
-                    // Catégorisation intelligente
-                    let categorie = 'Autre';
-                    const ll = libelle.toLowerCase();
-                    
-                    if (/\b(consult|avis médical)\b/i.test(ll)) categorie = 'Consultation';
-                    else if (/\b(visite|déplacement)\b/i.test(ll)) categorie = 'Visite';
-                    else if (/\b(chirurg|opérat|intervent|exérèse|suture|incision|extirpation|ablation|traitement sanglant)\b/i.test(ll)) categorie = 'Chirurgie';
-                    else if (/\b(radio|écho|scanner|irm|mammograph|tomograph|angiograph|artériograph)\b/i.test(ll)) categorie = 'Imagerie';
-                    else if (/\b(anesthé|analgés)\b/i.test(ll)) categorie = 'Anesthésie';
-                    else if (/\b(pansement|soin|injection|perfusion|drain|ponction)\b/i.test(ll)) categorie = 'Soins';
-                    else if (/\b(analys|biolog|labora|prélèv|sang|urine|dosage|numération)\b/i.test(ll)) categorie = 'Biologie';
-                    else if (/\b(kiné|rééduc|rééducat|massage|physiothérap)\b/i.test(ll)) categorie = 'Kinésithérapie';
-                    else if (/\b(accouchement|obstétric|césarienne|matern)\b/i.test(ll)) categorie = 'Obstétrique';
-                    else if (/\b(dentaire|dent|stomato|bucco|extrac.*dent)\b/i.test(ll)) categorie = 'Dentaire';
-                    else if (/\b(cardiolog|électrocard|ecg|échocardi|holter)\b/i.test(ll)) categorie = 'Cardiologie';
-                    else if (/\b(ophtalmolog|vue|vision|rétine|cornée|cataract|oeil|oculaire)\b/i.test(ll)) categorie = 'Ophtalmologie';
-                    else if (/\b(orl|oto|rhino|laryn|oreille|nez|gorge)\b/i.test(ll)) categorie = 'ORL';
-                    else if (/\b(dermato|peau|cutané)\b/i.test(ll)) categorie = 'Dermatologie';
-                    else if (/\b(gynéco|féminin|utérus|ovaire)\b/i.test(ll)) categorie = 'Gynécologie';
-                    else if (/\b(pédiatr|enfant|nourrisson)\b/i.test(ll)) categorie = 'Pédiatrie';
-                    else if (/\b(urolog|rein|vessie|prostat)\b/i.test(ll)) categorie = 'Urologie';
-                    else if (/\b(neurolog|cerveau|nerv|épileps)\b/i.test(ll)) categorie = 'Neurologie';
-                    else if (/\b(gastro|entéro|estomac|intestin|endoscop|coloscopie)\b/i.test(ll)) categorie = 'Gastro-entérologie';
-                    else if (/\b(orthopéd|os|fracture|arthros|prothèse|luxation)\b/i.test(ll)) categorie = 'Orthopédie';
-                    else if (/\b(psychiatr|psycholog|mental)\b/i.test(ll)) categorie = 'Psychiatrie';
-                    else if (/\b(ambulance|transport|urgence)\b/i.test(ll)) categorie = 'Transport';
-                    
-                    actes.push({
-                        code,
-                        libelle,
-                        tarif,
-                        coefficient: 1,
-                        lettreCle: lettreCle || '',
-                        categorie
-                    });
-                    
-                    count++;
-                    if (count % 200 === 0) {
-                        console.log(`   ✓ ${count} actes extraits...`);
-                    }
-                    
-                    matched = true;
-                    break;
-                }
-            }
+        let [, rawCode, reste] = codeMatch;
+        
+        // Nettoyer le code
+        const code = rawCode.toUpperCase()
+            .replace(/^[OoDd]/, '0')
+            .replace(/[Oo]/g, '0')
+            .replace(/\s/g, '')
+            .trim();
+        
+        if (seenCodes.has(code)) continue;
+        
+        // Extraire coefficient et lettre-clé à la fin
+        // Format: "LIBELLE LETTRE COEF" ou "LIBELLE COEF" ou "LIBELLE COEF TARIF"
+        const withLetter = reste.match(/\s+([A-Z])\s+(\d{1,4})(?:\s+(\d{1,4}))?\s*$/);
+        const withoutLetter = reste.match(/\s+(\d{1,4})(?:\s+(\d{1,4}))?\s*$/);
+        
+        let coefficient, lettreCle = '', tarif, numbersMatch;
+        
+        if (withLetter) {
+            // Format: LETTRE COEF [TARIF]
+            const [, lettre, num1, num2] = withLetter;
+            lettreCle = lettre;
+            coefficient = parseInt(num1);
+            tarif = num2 ? parseInt(num2) : coefficient;
+            numbersMatch = withLetter;
+        } else if (withoutLetter) {
+            // Format: COEF ou COEF TARIF
+            const [, num1, num2] = withoutLetter;
+            coefficient = parseInt(num1);
+            tarif = num2 ? parseInt(num2) : coefficient;
+            numbersMatch = withoutLetter;
+        } else {
+            continue;
         }
         
-        if (!matched && line.length > 30 && /\d{2,}/.test(line) && !/^[\d\s\.\-]+$/.test(line)) {
+        // Libellé = tout sauf le code et la fin
+        const libelle = reste.substring(0, reste.length - numbersMatch[0].length)
+            .trim()
+            .replace(/\s+/g, ' ')
+            .replace(/[\.•o]{3,}$/g, '')
+            .replace(/[\.•,;:]+$/g, '')
+            .trim();
+        
+        // Validation
+        if (
+            code.length >= 4 &&
+            libelle.length >= 5 &&
+            libelle.length <= 300 &&
+            tarif > 0 &&
+            tarif < 100000 &&
+            coefficient > 0 &&
+            coefficient < 10000 &&
+            !/^[-\d\s\.•o]+$/.test(libelle) &&
+            !/^[A-Z\s\.\-]{0,10}$/.test(libelle)
+        ) {
+            seenCodes.add(code);
+            
+            // Catégorisation intelligente
+            let categorie = 'Autre';
+            const ll = libelle.toLowerCase();
+            
+            if (/\b(consult|avis médical)\b/i.test(ll)) categorie = 'Consultation';
+            else if (/\b(visite|déplacement)\b/i.test(ll)) categorie = 'Visite';
+            else if (/\b(chirurg|opérat|intervent|exérèse|suture|incision|extirpation|ablation|traitement sanglant)\b/i.test(ll)) categorie = 'Chirurgie';
+            else if (/\b(radio|écho|scanner|irm|mammograph|tomograph|angiograph|artériograph)\b/i.test(ll)) categorie = 'Imagerie';
+            else if (/\b(anesthé|analgés)\b/i.test(ll)) categorie = 'Anesthésie';
+            else if (/\b(pansement|soin|injection|perfusion|drain|ponction)\b/i.test(ll)) categorie = 'Soins';
+            else if (/\b(analys|biolog|labora|prélèv|sang|urine|dosage|numération)\b/i.test(ll)) categorie = 'Biologie';
+            else if (/\b(kiné|rééduc|rééducat|massage|physiothérap)\b/i.test(ll)) categorie = 'Kinésithérapie';
+            else if (/\b(accouchement|obstétric|césarienne|matern)\b/i.test(ll)) categorie = 'Obstétrique';
+            else if (/\b(dentaire|dent|stomato|bucco|extrac.*dent)\b/i.test(ll)) categorie = 'Dentaire';
+            else if (/\b(cardiolog|électrocard|ecg|échocardi|holter)\b/i.test(ll)) categorie = 'Cardiologie';
+            else if (/\b(ophtalmolog|vue|vision|rétine|cornée|cataract|oeil|oculaire)\b/i.test(ll)) categorie = 'Ophtalmologie';
+            else if (/\b(orl|oto|rhino|laryn|oreille|nez|gorge)\b/i.test(ll)) categorie = 'ORL';
+            else if (/\b(dermato|peau|cutané)\b/i.test(ll)) categorie = 'Dermatologie';
+            else if (/\b(gynéco|féminin|utérus|ovaire)\b/i.test(ll)) categorie = 'Gynécologie';
+            else if (/\b(pédiatr|enfant|nourrisson)\b/i.test(ll)) categorie = 'Pédiatrie';
+            else if (/\b(urolog|rein|vessie|prostat)\b/i.test(ll)) categorie = 'Urologie';
+            else if (/\b(neurolog|cerveau|nerv|épileps)\b/i.test(ll)) categorie = 'Neurologie';
+            else if (/\b(gastro|entéro|estomac|intestin|endoscop|coloscopie)\b/i.test(ll)) categorie = 'Gastro-entérologie';
+            else if (/\b(orthopéd|os|fracture|arthros|prothèse|luxation)\b/i.test(ll)) categorie = 'Orthopédie';
+            else if (/\b(psychiatr|psycholog|mental)\b/i.test(ll)) categorie = 'Psychiatrie';
+            else if (/\b(ambulance|transport|urgence)\b/i.test(ll)) categorie = 'Transport';
+            
+            actes.push({
+                code,
+                libelle,
+                tarif,
+                coefficient,
+                lettreCle,
+                categorie
+            });
+            
+            count++;
+            if (count % 200 === 0) {
+                console.log(`   ✓ ${count} actes extraits...`);
+            }
+        } else {
             ignored++;
         }
     }
