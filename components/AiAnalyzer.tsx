@@ -4888,6 +4888,73 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             priority: 999
         },
         
+        // === RÈGLES CUMULS/POLYTRAUMATISMES V3.3.126 ===
+        // LCA + autre lésion genou
+        {
+            pattern: /(?:lca|ligament.*crois[eé].*ant[eé]rieur).*(?:\+|avec|et|ainsi|associee?).*(?:meniscectomie|menisque|chondropathie|fracture)/i,
+            context: /genou/i,
+            searchTerms: ["Rupture du ligament croisé antérieur (LCA)", "Méniscectomie totale"],
+            priority: 10500
+        },
+        {
+            pattern: /(?:meniscectomie|menisque).*(?:\+|avec|et|ainsi|associee?).*(?:lca|ligament.*crois[eé])/i,
+            context: /genou/i,
+            searchTerms: ["Méniscectomie totale", "Rupture du ligament croisé antérieur (LCA)"],
+            priority: 10500
+        },
+        // Fracture + lésion ligamentaire/nerveuse
+        {
+            pattern: /fracture.*(?:\+|avec|ainsi|associee?).*(?:nerf|paralysie|atteinte.*nerveus[e]?)/i,
+            context: /.*/i,
+            searchTerms: ["__CUMUL_DETECTED__"],
+            priority: 10400
+        },
+        {
+            pattern: /fracture.*(?:\+|avec|ainsi|associee?).*(?:rupture|lesion|dechirure).*(?:ligament|tendon)/i,
+            context: /.*/i,
+            searchTerms: ["__CUMUL_DETECTED__"],
+            priority: 10400
+        },
+        // Genou + cheville (membres inférieurs multiples)
+        {
+            pattern: /genou.*(?:\+|avec|et|ainsi|associee?).*cheville/i,
+            context: /fracture|lesion|rupture|raideur/i,
+            searchTerms: ["__CUMUL_DETECTED__"],
+            priority: 10400
+        },
+        {
+            pattern: /cheville.*(?:\+|avec|et|ainsi|associee?).*genou/i,
+            context: /fracture|lesion|rupture|raideur/i,
+            searchTerms: ["__CUMUL_DETECTED__"],
+            priority: 10400
+        },
+        // Épaule + coude/poignet (membres supérieurs multiples)
+        {
+            pattern: /epaule.*(?:\+|avec|et|ainsi|associee?).*(?:coude|poignet)/i,
+            context: /fracture|lesion|rupture|raideur/i,
+            searchTerms: ["__CUMUL_DETECTED__"],
+            priority: 10400
+        },
+        {
+            pattern: /(?:coude|poignet).*(?:\+|avec|et|ainsi|associee?).*epaule/i,
+            context: /fracture|lesion|rupture|raideur/i,
+            searchTerms: ["__CUMUL_DETECTED__"],
+            priority: 10400
+        },
+        // Rachis cervical + fracture membre
+        {
+            pattern: /(?:rachis|cervical|traumatisme.*cervical|whiplash).*(?:\+|avec|ainsi|associee?).*fracture/i,
+            context: /.*/i,
+            searchTerms: ["__CUMUL_DETECTED__"],
+            priority: 10400
+        },
+        {
+            pattern: /fracture.*(?:\+|avec|ainsi|associee?).*(?:rachis|cervical|traumatisme.*cervical|whiplash)/i,
+            context: /.*/i,
+            searchTerms: ["__CUMUL_DETECTED__"],
+            priority: 10400
+        },
+        
         // === RÈGLES VISCÈRES HAUTE PRIORITÉ ===
         // Splénectomie totale
         {
@@ -5232,6 +5299,71 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             context: /.*/i,
             searchTerms: ["Fracture diaphyse humérus - Consolidation"],
             priority: 10300
+        },
+        
+        // === RÈGLES RAIDEURS MEMBRES INFÉRIEURS V3.3.126 ===
+        // Raideur hanche (flexion, abduction, rotation)
+        {
+            pattern: /raideur.*hanche|hanche.*raideur|limitation.*flexion.*hanche/i,
+            context: /flexion\s+(?:90|95|100|105|110|115|120).*degr|boiterie|claudication|marche|perimetre/i,
+            searchTerms: ["Raideur de la hanche"],
+            priority: 10400
+        },
+        {
+            pattern: /hanche.*flexion\s+(?:90|95|100|105|110|115|120)/i,
+            context: /abduction|rotation|marche/i,
+            searchTerms: ["Raideur de la hanche"],
+            priority: 10350
+        },
+        // Raideur genou (flexion/extension)
+        {
+            pattern: /raideur.*genou|genou.*raideur|limitation.*flexion.*genou/i,
+            context: /flexion\s+(?:90|95|100|105|110|115|120|130).*degr|extension\s*-?\s*\d+|instabilite|laxite|epanchement|douleur/i,
+            searchTerms: ["Raideur du genou"],
+            priority: 10400
+        },
+        {
+            pattern: /genou.*flexion\s+(?:90|95|100|105|110|115|120)/i,
+            context: /extension|instabilite|chondropathie|meniscectomie|derobement/i,
+            searchTerms: ["Raideur du genou"],
+            priority: 10350
+        },
+        {
+            pattern: /sequelle.*fracture.*plateau.*tibial|fracture.*plateau.*tibial.*sequelle/i,
+            context: /flexion|extension|raideur/i,
+            searchTerms: ["Fracture des plateaux tibiaux"],
+            priority: 10350
+        },
+        // Raideur cheville (dorsiflexion)
+        {
+            pattern: /raideur.*cheville|cheville.*raideur|limitation.*dorsiflexion/i,
+            context: /dorsiflexion\s+\d+.*degr|equin|boiterie|claudication|marche/i,
+            searchTerms: ["Raideur de la cheville"],
+            priority: 10400
+        },
+        {
+            pattern: /cheville.*dorsiflexion\s+(?:0|3|5|8|10)/i,
+            context: /raideur|limitation|marche|instabilite/i,
+            searchTerms: ["Raideur de la cheville"],
+            priority: 10350
+        },
+        {
+            pattern: /equin.*cheville|cheville.*equin/i,
+            context: /\d+.*degr|boiterie|marche/i,
+            searchTerms: ["Raideur de la cheville"],
+            priority: 10350
+        },
+        {
+            pattern: /sequelle.*fracture.*pilon.*tibial|pilon.*tibial.*sequelle/i,
+            context: /dorsiflexion|raideur|douleur/i,
+            searchTerms: ["Fracture du pilon tibial"],
+            priority: 10400
+        },
+        {
+            pattern: /fracture.*bimalleolaire|bimalleolaire.*fracture/i,
+            context: /sequelle|post|raideur|dorsiflexion|claudication/i,
+            searchTerms: ["Fracture malléolaire ou bi-malléolaire - Bonne consolidation"],
+            priority: 10350
         },
         
         // === RÈGLES LANGAGE NATUREL AVANCÉES ===
