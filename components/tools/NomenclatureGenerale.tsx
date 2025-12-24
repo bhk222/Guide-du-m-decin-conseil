@@ -70,7 +70,15 @@ export const NomenclatureGenerale: React.FC = () => {
                 'diabète': ['glucose', 'sucre', 'hyperglycémie', 'glycosylée'],
                 'diabete': ['glucose', 'sucre', 'hyperglycémie', 'glycosylée'],
                 'hba1c': ['hémoglobine glycosylée', 'hemoglobine glycosylee'],
-                'hemoglobine glycosylee': ['glycosylée']
+                'hemoglobine glycosylee': ['glycosylée'],
+                'téléthorax': ['thorax', 'gril costal', 'sternum', 'hémithorax', 'poumon'],
+                'telethorax': ['thorax', 'gril costal', 'sternum', 'hémithorax', 'poumon'],
+                'radio thorax': ['thorax', 'gril costal', 'sternum', 'hémithorax', 'poumon'],
+                'radio poumon': ['thorax', 'gril costal', 'poumon', 'hémithorax'],
+                'radiographie thorax': ['thorax', 'gril costal', 'sternum', 'poumon'],
+                'radiographie poumon': ['thorax', 'poumon', 'gril costal'],
+                'rx thorax': ['thorax', 'gril costal', 'sternum', 'poumon'],
+                'rx poumon': ['thorax', 'poumon', 'gril costal']
             };
 
             let queryExpanded = query;
