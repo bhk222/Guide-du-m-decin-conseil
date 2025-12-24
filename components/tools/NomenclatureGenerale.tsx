@@ -56,11 +56,21 @@ export const NomenclatureGenerale: React.FC = () => {
                 'échographie': ['radiographie', 'urographie'],
                 'tdm': ['radiographie', 'tomodensitométrie'],
                 'tomodensitométrie': ['radiographie'],
-                'glycémie': ['glucose', 'sucre', 'hyperglycémie'],
-                'cholestérol': ['lipides'],
-                'créatinine': ['urée'],
-                'nfs': ['numération', 'hémogramme', 'formule sanguine'],
-                'hémogramme': ['numération', 'formule sanguine']
+                'glycémie': ['glucose', 'sucre', 'hyperglycémie', 'glycose'],
+                'glycemie': ['glucose', 'sucre', 'hyperglycémie', 'glycose'],
+                'cholestérol': ['lipides', 'cholesterol'],
+                'cholesterol': ['lipides'],
+                'créatinine': ['urée', 'creatinine'],
+                'creatinine': ['urée'],
+                'nfs': ['numération', 'hémogramme', 'formule sanguine', 'hemogramme'],
+                'hémogramme': ['numération', 'formule sanguine', 'hemogramme'],
+                'hemogramme': ['numération', 'formule sanguine'],
+                'prise de sang': ['numération', 'glucose', 'formule'],
+                'bilan sanguin': ['numération', 'glucose', 'urée', 'lipides'],
+                'diabète': ['glucose', 'sucre', 'hyperglycémie', 'glycosylée'],
+                'diabete': ['glucose', 'sucre', 'hyperglycémie', 'glycosylée'],
+                'hba1c': ['hémoglobine glycosylée', 'hemoglobine glycosylee'],
+                'hemoglobine glycosylee': ['glycosylée']
             };
 
             let queryExpanded = query;
