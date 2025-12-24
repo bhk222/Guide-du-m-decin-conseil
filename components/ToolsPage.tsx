@@ -83,7 +83,7 @@ const CalculatorPlusIcon = () => (
 const tools = [
     {
         id: "ngap",
-        title: "🏥 Recherche NGAP",
+        title: "📚 Nomenclature Générale",
         description: "Recherche sémantique d'actes médicaux pour trouver les codes NGAP. Ex: FNS → B30, consultation → C, injection → K2.",
         icon: <CalculatorPlusIcon />,
         component: <NGAPCalculateur />
