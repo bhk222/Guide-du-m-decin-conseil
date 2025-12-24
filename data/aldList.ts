@@ -4667,7 +4667,106 @@ export const aldData: AldItem[] = [
           </div>
         </div>`,
         children: [
-          { code: "C10A01", name: "Maladie d'Alzheimer" }, 
+          { 
+            code: "C10A01", 
+            name: "Maladie d'Alzheimer",
+            tooltip: `<div class="space-y-3">
+<p><strong>Définition</strong>: Maladie neurodégénérative progressive caractérisée par un déclin cognitif acquis prédominant sur la <span class="tooltip-term" title="Mémoire des événements vécus personnellement avec contexte spatio-temporel">mémoire épisodique</span>, associé à des troubles exécutifs et comportementaux, avec retentissement fonctionnel.</p>
+<p><strong>Neuropathologie</strong>: dépôts <span class="tooltip-term" title="Protéine bêta-amyloïde formant des plaques séniles extracellulaires">amyloïdes</span> extracellulaires et dégénérescence neurofibrillaire (<span class="tooltip-term" title="Protéine tau hyperphosphorylée formant des enchevêtrements intraneuronaux">tau</span>)</p>
+
+<p><strong>Facteurs de risque</strong>:</p>
+<ul class="list-disc pl-5">
+  <li><strong>Âge avancé</strong> (principal facteur)</li>
+  <li><strong>Antécédents familiaux / génétiques</strong> (<span class="tooltip-term" title="Apolipoprotéine E epsilon 4 - Allèle génétique augmentant le risque Alzheimer">APOE ε4</span>)</li>
+  <li>Faible niveau d'éducation, isolement social</li>
+  <li><strong>Facteurs vasculaires</strong>: HTA, diabète, dyslipidémie, tabac</li>
+  <li>Traumatisme crânien, dépression, sédentarité</li>
+</ul>
+
+<p><strong>Clinique (formes typiques)</strong>:</p>
+<ul class="list-disc pl-5">
+  <li><strong>Trouble de la mémoire épisodique</strong> (oubli faits récents, répétitions)</li>
+  <li><strong>Désorientation temporo-spatiale</strong></li>
+  <li><strong>Troubles du langage</strong> (<span class="tooltip-term" title="Difficulté à trouver les mots, manque du mot">anomie</span>), <span class="tooltip-term" title="Troubles des gestes volontaires">praxies</span>, <span class="tooltip-term" title="Troubles de la reconnaissance">gnosies</span></li>
+  <li><strong>Troubles exécutifs et attentionnels</strong></li>
+  <li><strong>Troubles du comportement</strong>: apathie, irritabilité, anxiété, dépression</li>
+  <li><strong>Retentissement fonctionnel progressif</strong> (<span class="tooltip-term" title="Activités de la Vie Quotidienne">AVQ</span>/<span class="tooltip-term" title="Activités Avancées Instrumentales">AAI</span>)</li>
+</ul>
+<p>👉 <strong>Formes atypiques</strong>: <span class="tooltip-term" title="Variante avec difficulté à trouver les mots et répétition de phrases">aphasie logopénique</span>, forme visuo-spatiale, forme frontale</p>
+
+<p><strong>Diagnostic</strong>:</p>
+
+<p><strong>A. Évaluation cognitive</strong>:</p>
+<ul class="list-disc pl-5">
+  <li><strong>Tests de dépistage</strong>: <span class="tooltip-term" title="Mini-Mental State Examination - Test cognitif sur 30 points">MMSE</span>, <span class="tooltip-term" title="Montreal Cognitive Assessment - Test cognitif plus sensible">MoCA</span></li>
+  <li><strong>Bilan neuropsychologique</strong> si doute ou formes atypiques</li>
+</ul>
+
+<p><strong>B. Examens complémentaires</strong>:</p>
+<ul class="list-disc pl-5">
+  <li><strong>IRM cérébrale</strong>: atrophie <span class="tooltip-term" title="Structure du lobe temporal interne essentielle à la mémoire">hippocampique</span> / temporo-médiane</li>
+  <li><strong>Biologie</strong>: bilan métabolique / carentiel / thyroïdien (diagnostic différentiel)</li>
+  <li><strong>± Biomarqueurs</strong>:
+    <ul class="list-disc pl-5 ml-3">
+      <li><span class="tooltip-term" title="Liquide Céphalo-Rachidien - Ponction lombaire">LCR</span>: <span class="tooltip-term" title="Peptide bêta-amyloïde 42 (diminué dans Alzheimer)">Aβ42</span>↓, <span class="tooltip-term" title="Protéine tau totale (augmentée)">tau</span>↑ / <span class="tooltip-term" title="Protéine tau phosphorylée (augmentée)">tau-P</span>↑</li>
+      <li><span class="tooltip-term" title="Tomographie par Émission de Positons - Imagerie fonctionnelle">TEP</span> amyloïde / tau selon disponibilité</li>
+    </ul>
+  </li>
+</ul>
+<p>👉 <strong>Diagnostic clinique avant tout</strong> — les biomarqueurs renforcent la probabilité</p>
+
+<p><strong>Diagnostic différentiel</strong>:</p>
+<ul class="list-disc pl-5">
+  <li>Démence vasculaire</li>
+  <li>Démence à corps de Lewy</li>
+  <li>Dégénérescence fronto-temporale</li>
+  <li>Troubles psychiatriques (dépression)</li>
+  <li>Causes métaboliques / toxiques / carentielles</li>
+</ul>
+
+<p><strong>Prise en charge thérapeutique</strong>:</p>
+
+<p><strong>A. Traitement symptomatique cognitif</strong>:</p>
+<ul class="list-disc pl-5">
+  <li><strong><span class="tooltip-term" title="Inhibiteurs de l'acétylcholinestérase - Médicaments augmentant la transmission cholinergique">Inhibiteurs de l'acétylcholinestérase</span></strong>: donepezil, rivastigmine, galantamine</li>
+  <li><strong><span class="tooltip-term" title="Antagoniste NMDA - Modulateur glutamatergique">Mémantine</span></strong>: formes modérées à sévères</li>
+</ul>
+
+<p><strong>B. Prise en charge non médicamenteuse (indispensable)</strong>:</p>
+<ul class="list-disc pl-5">
+  <li>Réhabilitation cognitive — orthophonie — ateliers mémoire</li>
+  <li>Activité physique adaptée — stimulation sociale</li>
+  <li>Aménagement du domicile, prévention des chutes</li>
+  <li>Soutien des aidants</li>
+</ul>
+
+<p><strong>C. Troubles psycho-comportementaux</strong>:</p>
+<ul class="list-disc pl-5">
+  <li>Approche non pharmacologique privilégiée</li>
+  <li>Psychotropes au cas par cas et à faible dose (surveillance stricte)</li>
+</ul>
+
+<p><strong>Évolution</strong>:</p>
+<ul class="list-disc pl-5">
+  <li>Progressive, étalée sur plusieurs années : <strong>Stade léger → modéré → sévère</strong></li>
+  <li>Perte d'autonomie, complications nutritionnelles et motrices</li>
+</ul>
+
+<p><strong>Prévention / réduction du risque</strong>:</p>
+<ul class="list-disc pl-5">
+  <li>Contrôle des facteurs vasculaires</li>
+  <li>Activité cognitive et sociale régulière</li>
+  <li>Exercice physique — sommeil — alimentation équilibrée</li>
+</ul>
+
+<p><strong>Suivi</strong>:</p>
+<ul class="list-disc pl-5">
+  <li>Consultation régulière (clinique + cognition + autonomie)</li>
+  <li>Réévaluation thérapeutique</li>
+  <li>Accompagnement médico-social et planification anticipée</li>
+</ul>
+</div>`
+          }, 
           { 
             code: "C10A02", 
             name: "Démence à corps de Lewy",
