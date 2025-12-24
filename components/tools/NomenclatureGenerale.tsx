@@ -55,7 +55,12 @@ export const NomenclatureGenerale: React.FC = () => {
                 'irm': ['radiographie', 'myélographie', 'angiographie'],
                 'échographie': ['radiographie', 'urographie'],
                 'tdm': ['radiographie', 'tomodensitométrie'],
-                'tomodensitométrie': ['radiographie']
+                'tomodensitométrie': ['radiographie'],
+                'glycémie': ['glucose', 'sucre', 'hyperglycémie'],
+                'cholestérol': ['lipides'],
+                'créatinine': ['urée'],
+                'nfs': ['numération', 'hémogramme', 'formule sanguine'],
+                'hémogramme': ['numération', 'formule sanguine']
             };
 
             let queryExpanded = query;
@@ -551,6 +556,14 @@ export const NomenclatureGenerale: React.FC = () => {
                         <div className="bg-white rounded-lg p-4 border border-amber-200 max-w-2xl mx-auto">
                             <p className="text-sm font-semibold text-slate-700 mb-2">💡 Suggestions de recherche :</p>
                             <div className="grid grid-cols-2 gap-2 text-sm">
+                                <div className="bg-blue-50 px-3 py-2 rounded">
+                                    <span className="font-semibold">Glycémie</span> → 
+                                    <button onClick={() => {setSearchQuery('glucose'); handleSearch();}} className="ml-1 text-blue-600 underline">glucose</button>
+                                </div>
+                                <div className="bg-blue-50 px-3 py-2 rounded">
+                                    <span className="font-semibold">NFS, Hémogramme</span> → 
+                                    <button onClick={() => {setSearchQuery('numération'); handleSearch();}} className="ml-1 text-blue-600 underline">numération</button>
+                                </div>
                                 <div className="bg-blue-50 px-3 py-2 rounded">
                                     <span className="font-semibold">Scanner, IRM</span> → 
                                     <button onClick={() => {setSearchQuery('radiographie'); handleSearch();}} className="ml-1 text-blue-600 underline">radiographie</button>
