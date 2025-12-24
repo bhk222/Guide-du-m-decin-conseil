@@ -6283,11 +6283,24 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             searchTerms: ['Uvéite post-traumatique chronique'],
             priority: 87
         },
+        // 🆕 V3.3.130: Fracture fémur proximal avec coxarthrose + raccourcissement (formulation large)
         {
-            pattern: /fracture\s+(?:du\s+)?col\s+(?:du\s+)?f[eé]mur.*raccourcissement/i,
-            context: /hanche|f[eé]mur|boiterie/i,
+            pattern: /fracture.*(?:extr[eé]mit[eé]|col).*(?:sup[eé]rieur|proximal).*f[eé]mur.*(?:coxarthrose|arthrose.*hanche).*raccor[cs]issement/i,
+            context: /hanche|raideur|boiterie/i,
             searchTerms: ['Fracture du col du fémur - Consolidation avec raccourcissement et raideur'],
-            priority: 95
+            priority: 999  // Priorité max pour détecter avant coxarthrose seule
+        },
+        {
+            pattern: /fracture.*f[eé]mur.*(?:coxarthrose|arthrose.*hanche).*raccor[cs]issement/i,
+            context: /hanche|raideur/i,
+            searchTerms: ['Fracture du col du fémur - Consolidation avec raccourcissement et raideur'],
+            priority: 998
+        },
+        {
+            pattern: /fracture\s+(?:du\s+)?col\s+(?:du\s+)?f[eé]mur.*raccor[cs]issement/i,
+            context: /hanche|f[eé]mur|boiterie|raideur/i,
+            searchTerms: ['Fracture du col du fémur - Consolidation avec raccourcissement et raideur'],
+            priority: 997
         },
         {
             pattern: /surdit[eé]\s+post-traumatique.*(?:60\s*db|60\s*d[eé]cibels)/i,
