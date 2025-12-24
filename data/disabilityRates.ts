@@ -1514,7 +1514,7 @@ const middleCategories: InjuryCategory[] = [
       {
         name: "Cuisse - Lésions Musculaires et Tendineuses",
         injuries: [
-            { name: "Tendinopathie quadricipitale (séquelles d'élongation/déchirure)", rate: [5, 20], rateCriteria: { low: "Élongation musculaire cicatrisée, gêne occasionnelle à l'effort intense, force conservée.", medium: "Déchirure partielle avec déficit de force modéré (faiblesse extension genou), douleurs à l'effort, limitation activités sportives.", high: "Déchirure complète ou rupture tendineuse avec déficit majeur d'extension active du genou, amyotrophie quadriceps, limitation marche/escaliers." } },
+            { name: "Tendinopathie quadricipitale / Élongation quadriceps (séquelles)", rate: [5, 20], rateCriteria: { low: "Élongation musculaire cicatrisée, gêne occasionnelle à l'effort intense, force conservée.", medium: "Déchirure partielle avec déficit de force modéré (faiblesse extension genou), douleurs à l'effort, limitation activités sportives.", high: "Déchirure complète ou rupture tendineuse avec déficit majeur d'extension active du genou, amyotrophie quadriceps, limitation marche/escaliers." } },
             { name: "Rupture du tendon quadricipital", rate: [15, 30], rateCriteria: { low: "Rupture partielle réparée chirurgicalement, récupération fonctionnelle satisfaisante, déficit de force modéré.", medium: "Rupture complète réparée avec séquelles : déficit extension active, amyotrophie, douleurs résiduelles.", high: "Rupture non réparée ou échec chirurgical, impossibilité extension active du genou, marche très limitée, nécessité aide technique." } },
         ]
       },
