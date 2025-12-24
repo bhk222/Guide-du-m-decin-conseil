@@ -51,7 +51,19 @@ const allInjuriesWithPaths = disabilityData.flatMap(cat =>
 // 🆕 V3.3.124: Dictionnaire de synonymes médicaux pour améliorer la reconnaissance
 const medicalSynonyms: { [key: string]: string[] } = {
   // Termes génériques
-  amputation: ['amputation', 'ablation', 'perte', 'section', 'désarticulation', 'mutilation'],
+  amputation: ['amputation', 'ablation', 'perte', 'section', 'désarticulation', 'mutilation', 'coupé', 'enlevé', 'retiré', 'exérèse'],
+  moignon: ['moignon', 'bout', 'trognon', 'chicot', 'reste'],
+  niveaux_amp: ['tiers supérieur', 'tiers moyen', 'tiers inférieur', '1/3 sup', '1/3 moy', '1/3 inf'],
+  desart_poignet: ['désarticulation poignet', 'amputation poignet', 'perte main niveau poignet'],
+  desart_coude: ['désarticulation coude', 'amputation coude', 'perte avant-bras niveau coude'],
+  desart_epaule: ['désarticulation épaule', 'amputation épaule', 'perte bras niveau épaule'],
+  desart_cheville: ['désarticulation cheville', 'amputation cheville', 'Syme', 'perte pied niveau cheville'],
+  desart_genou: ['désarticulation genou', 'amputation genou', 'perte jambe niveau genou'],
+  desart_hanche: ['désarticulation hanche', 'amputation hanche', 'perte membre inférieur niveau hanche'],
+  transtibial: ['transtibial', 'amputation jambe', 'BK', 'below knee', 'sous genou'],
+  transfemoral: ['transfémoral', 'amputation cuisse', 'AK', 'above knee', 'au-dessus genou'],
+  transradial: ['transradial', 'amputation avant-bras', 'BE', 'below elbow'],
+  transhumeral: ['transhuméral', 'amputation bras', 'AE', 'above elbow'],
   raideur: ['raideur', 'limitation', 'restriction', 'enraidissement', 'ankylose partielle', 'limitation articulaire'],
   ankylose: ['ankylose', 'raideur complète', 'blocage articulaire', 'arthrodèse'],
   fracture: ['fracture', 'cassure', 'fissure', 'bris', 'rupture osseuse', 'solution de continuité'],
@@ -66,11 +78,16 @@ const medicalSynonyms: { [key: string]: string[] } = {
   coude: ['coude', 'cubital', 'huméro-cubital', 'olécrane', 'articulation du coude'],
   poignet: ['poignet', 'radio-carpien', 'articulation du poignet', 'carpe'],
   main: ['main', 'métacarpe', 'chirurgicale'],
-  pouce: ['pouce', 'P1', 'D1', 'premier doigt', 'pollux'],
-  index: ['index', 'P2', 'D2', 'deuxième doigt'],
-  medius: ['médius', 'majeur', 'P3', 'D3', 'troisième doigt'],
-  annulaire: ['annulaire', 'P4', 'D4', 'quatrième doigt'],
-  auriculaire: ['auriculaire', 'petit doigt', 'P5', 'D5', 'cinquième doigt'],
+  pouce: ['pouce', 'P1', 'D1', 'premier doigt', 'pollux', 'gros doigt', '1er doigt', 'doigt 1'],
+  index: ['index', 'P2', 'D2', 'deuxième doigt', '2ème doigt', '2e doigt', 'doigt 2', 'indicateur'],
+  medius: ['médius', 'majeur', 'P3', 'D3', 'troisième doigt', '3ème doigt', '3e doigt', 'doigt 3', 'doigt du milieu'],
+  annulaire: ['annulaire', 'P4', 'D4', 'quatrième doigt', '4ème doigt', '4e doigt', 'doigt 4'],
+  auriculaire: ['auriculaire', 'petit doigt', 'P5', 'D5', 'cinquième doigt', '5ème doigt', '5e doigt', 'doigt 5', 'auricularis'],
+  phalanges: ['phalange', 'phalanges', 'P1', 'P2', 'P3', 'proximale', 'moyenne', 'distale', 'unguéale'],
+  deux_doigts: ['deux doigts', '2 doigts', 'amputation deux', 'perte deux doigts'],
+  trois_doigts: ['trois doigts', '3 doigts', 'amputation trois', 'perte trois doigts'],
+  quatre_doigts: ['quatre doigts', '4 doigts', 'amputation quatre', 'perte quatre doigts'],
+  main_complete: ['tous les doigts', '5 doigts', 'cinq doigts', 'main complète', 'totalité main'],
   
   // Anatomie membre inférieur
   hanche: ['hanche', 'coxo-fémorale', 'articulation de la hanche', 'cotyle'],
@@ -92,17 +109,42 @@ const medicalSynonyms: { [key: string]: string[] } = {
   coiffe: ['coiffe des rotateurs', 'coiffe', 'rupture coiffe', 'sus-épineux', 'sous-épineux'],
   nerf: ['nerf', 'nerveux', 'neurologique', 'paralysie', 'parésie'],
   
-  // Termes viscéraux
-  rate: ['rate', 'splénique', 'spléno'],
-  rein: ['rein', 'rénal', 'néphrectomie', 'néphrologie'],
-  foie: ['foie', 'hépatique', 'hépatectomie'],
-  colon: ['côlon', 'colique', 'colectomie'],
+  // Termes viscéraux (🆕 V3.3.126: +60 synonymes viscères)
+  rate: ['rate', 'splénique', 'spléno', 'splénectomie', 'exérèse rate', 'ablation rate', 'sans rate', 'rate enlevée'],
+  rein: ['rein', 'rénal', 'néphrectomie', 'néphrologie', 'exérèse rein', 'ablation rein', 'rein unique', 'un seul rein', 'rein enlevé'],
+  foie: ['foie', 'hépatique', 'hépatectomie', 'exérèse foie', 'ablation foie', 'résection hépatique', 'lobectomie hépatique'],
+  colon: ['côlon', 'colique', 'colectomie', 'hémicolectomie', 'exérèse colon', 'résection colique', 'colon enlevé'],
+  intestin: ['intestin', 'intestinal', 'grêle', 'iléon', 'jéjunum', 'duodénum', 'résection intestinale'],
+  estomac: ['estomac', 'gastrique', 'gastrectomie', 'résection gastrique', 'estomac enlevé'],
+  vesicule: ['vésicule', 'biliaire', 'cholécystectomie', 'exérèse vésicule'],
+  pancreas: ['pancréas', 'pancréatique', 'pancréatectomie', 'résection pancréas'],
+  stomie: ['stomie', 'colostomie', 'iléostomie', 'anus artificiel', 'poche', 'appareillage'],
+  eventration: ['éventration', 'hernie', 'hernie paroi', 'défect pariétal', 'faiblesse paroi'],
+  fistule: ['fistule', 'communication anormale', 'trajet fistuleux', 'orifice anormal'],
+  poumon: ['poumon', 'pulmonaire', 'lobectomie', 'pneumonectomie', 'résection pulmonaire'],
+  plèvre: ['plèvre', 'pleural', 'symphyse pleurale', 'pachypleurite'],
+  diaphragme: ['diaphragme', 'coupole', 'rupture diaphragme', 'éventration diaphragmatique'],
   
-  // Termes ophtalmologiques
-  oeil: ['œil', 'oeil', 'oculaire', 'ophtalmique', 'visuel'],
-  vision: ['vision', 'vue', 'acuité visuelle', 'visuel'],
-  champ_visuel: ['champ visuel', 'périmétrie', 'champ de vision'],
-  retine: ['rétine', 'rétinien'],
+  // Termes ophtalmologiques (🆕 V3.3.126: +40 synonymes vision)
+  oeil: ['œil', 'oeil', 'oculaire', 'ophtalmique', 'visuel', 'globe oculaire', 'bulbe'],
+  vision: ['vision', 'vue', 'acuité visuelle', 'visuel', 'voir', 'regard', 'voit'],
+  champ_visuel: ['champ visuel', 'périmétrie', 'champ de vision', 'vision périphérique', 'amputation champ'],
+  retine: ['rétine', 'rétinien', 'rétinopathie', 'décollement rétine', 'décollée'],
+  cataracte: ['cataracte', 'opacité cristallin', 'cristallin opaque', 'trouble cristallin'],
+  glaucome: ['glaucome', 'pression intraoculaire', 'tension oculaire', 'hypertonie'],
+  uvee: ['uvéite', 'iritis', 'inflammation oeil', 'inflammation uvéale'],
+  cornee: ['cornée', 'taie cornéenne', 'leucome', 'opacité cornée', 'cicatrice cornée'],
+  hemianopsie: ['hémianopsie', 'amputation moitié champ', 'déficit champ visuel'],
+  atrophie_optique: ['atrophie optique', 'nerf optique atrophié', 'pâleur papillaire'],
+  cecite: ['cécité', 'aveugle', 'perte totale vision', 'non voyant', 'amaurose'],
+  amblyopie: ['amblyopie', 'œil paresseux', 'baisse acuité'],
+  ptosis: ['ptosis', 'chute paupière', 'paupière tombante'],
+  strabisme: ['strabisme', 'déviation oculaire', 'œil qui louche'],
+  nystagmus: ['nystagmus', 'oscillations oculaires', 'mouvements involontaires'],
+  diplopie: ['diplopie', 'vision double', 'dédoublement vision'],
+  scotome: ['scotome', 'tache aveugle', 'zone aveugle'],
+  acuite: ['acuité', 'AV', 'acuite visuelle', 'vision de', 'voit à'],
+  dixieme: ['dixième', '/10', 'sur 10', '10ème', 'sur dix'],
   
   // Termes ORL
   oreille: ['oreille', 'auriculaire', 'auditif'],
@@ -113,12 +155,12 @@ const medicalSynonyms: { [key: string]: string[] } = {
 const expandWithSynonyms = (text: string): string => {
   let expanded = text.toLowerCase();
   
-  // Pour chaque groupe de synonymes, ajouter les termes alternatifs
+  // V3.3.128: Expansion SÉLECTIVE - ajouter max 3 synonymes par terme trouvé
   Object.entries(medicalSynonyms).forEach(([key, synonyms]) => {
     synonyms.forEach(synonym => {
       if (expanded.includes(synonym)) {
-        // Ajouter tous les autres synonymes du groupe
-        const alternatives = synonyms.filter(s => s !== synonym).join(' ');
+        // Ajouter seulement les 3 premiers synonymes alternatifs (pas tous)
+        const alternatives = synonyms.filter(s => s !== synonym).slice(0, 3).join(' ');
         expanded += ' ' + alternatives;
       }
     });
@@ -201,8 +243,8 @@ export const convertNumberWords = (s: string) => {
 const preprocessMedicalText = (text: string): string => {
     let processed = text;
     
-    // 🆕 V3.3.124: ÉTAPE 0 - ENRICHISSEMENT AVEC SYNONYMES MÉDICAUX (NOUVELLE FONCTIONNALITÉ)
-    // Expand avec synonymes AVANT tout preprocessing pour améliorer matching
+    // 🆕 V3.3.124: ÉTAPE 0 - ENRICHISSEMENT AVEC SYNONYMES MÉDICAUX
+    // V3.3.128: Réactivé avec optimisation - nécessaire pour reconnaissance
     processed = expandWithSynonyms(processed);
     
     // ÉTAPE 1. ABRÉVIATIONS MÉDICALES PROFESSIONNELLES (pour médecins)
@@ -339,6 +381,9 @@ const preprocessMedicalText = (text: string): string => {
         // 🆕 V3.3.124: Correction fautes orthographe courantes
         [/\brattachement\b/gi, 'arrachement '],  // Faute fréquente: rattachement → arrachement
         [/\bsequelles?\b/gi, 'séquelles '],  // Correction: sequelles → séquelles
+        // 🆕 V3.3.129: Correction fautes tendons fléchisseurs
+        [/\brepture\b/gi, 'rupture '],  // Faute: repture → rupture
+        [/\bfl[eéè]chiss?eur/gi, 'fléchisseur '],  // Normalisation: flechiseur/flechisseur → fléchisseur
         
         // === MOBILITÉ ===
         [/\bflex\b(?!\s*$)/gi, 'flexion '],
@@ -4667,6 +4712,91 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
 
     // �🎯 SYSTÈME DE RÈGLES EXPERTES - Court-circuite l'algorithme pour cas fréquents
     const expertRules = [
+        // === 🆕 V3.3.127: RÈGLES CAS LIMITES ET INCERTITUDES (PRIORITÉ ABSOLUE) ===
+        // Amputations doigts avec incertitude niveau (P1 ou P2)
+        {
+            pattern: /amputation.*pouce.*(?:p1|p2).*(?:ou|incertain|niveau)/i,
+            context: /.*/i,
+            searchTerms: ["Amputation du pouce (main dominante)"],  // Prendre taux conservateur (20%)
+            priority: 11000  // Priorité maximale
+        },
+        {
+            pattern: /amputation.*index.*(?:p1|p2).*(?:ou|incertain|niveau)/i,
+            context: /.*/i,
+            searchTerms: ["Amputation de l'index"],  // 10%
+            priority: 11000
+        },
+        {
+            pattern: /amputation.*m[eé]dius.*(?:p1|p2).*(?:ou|incertain|niveau)/i,
+            context: /.*/i,
+            searchTerms: ["Amputation du médius"],  // 8%
+            priority: 11000
+        },
+        {
+            pattern: /amputation.*annulaire.*(?:p1|p2).*(?:ou|incertain|niveau)/i,
+            context: /.*/i,
+            searchTerms: ["Amputation de l'annulaire"],  // 7%
+            priority: 11000
+        },
+        {
+            pattern: /amputation.*auriculaire.*(?:p1|p2).*(?:ou|incertain|niveau)/i,
+            context: /.*/i,
+            searchTerms: ["Amputation de l'auriculaire"],  // 6%
+            priority: 11000
+        },
+        
+        // Instabilité genou ISOLÉE (sans raideur mentionnée)
+        {
+            pattern: /genou.*instabilit[eé]|instabilit[eé].*genou/i,
+            context: /.*/i,
+            searchTerms: ["Laxité chronique du genou (séquelle d'entorse)"],  // Nom EXACT du barème
+            priority: 11000,
+            negativeContext: /raideur/i  // Exclure si "raideur" présent
+        },
+        {
+            pattern: /genou.*laxit[eé]|laxit[eé].*genou/i,
+            context: /.*/i,
+            searchTerms: ["Laxité chronique du genou (séquelle d'entorse)"],  // Nom EXACT
+            priority: 11000,
+            negativeContext: /raideur/i
+        },
+        
+        // Tassements vertébraux simples (L1-L5, D1-D12) - PERMISSIF
+        {
+            pattern: /(?:rachis|vert[eé]br|lombaire|[lL][1-5]).*tassement|tassement.*(?:rachis|vert[eé]br|lombaire|[lL][1-5])/i,
+            context: /.*/i,
+            searchTerms: ["Fracture tassement vertébral lombaire non déplacée consolidée"],  // Nom EXACT du barème
+            priority: 11000
+        },
+        {
+            pattern: /(?:rachis|vert[eé]br|dorsal|[dD](?:1[0-2]|[1-9])).*tassement|tassement.*(?:rachis|vert[eé]br|dorsal|[dD](?:1[0-2]|[1-9]))/i,
+            context: /.*/i,
+            searchTerms: ["Fracture tassement vertébral dorsal non déplacée consolidée"],  // Nom EXACT
+            priority: 11000
+        },
+        {
+            pattern: /(?:rachis|vert[eé]br|cervical|[cC][1-7]).*tassement|tassement.*(?:rachis|vert[eé]br|cervical|[cC][1-7])/i,
+            context: /.*/i,
+            searchTerms: ["Fracture tassement vertébral cervical non déplacée consolidée"],  // Nom EXACT
+            priority: 11000
+        },
+        
+        // Rupture coiffe des rotateurs ISOLÉE
+        {
+            pattern: /rupture.*coiffe|coiffe.*rupture|l[eé]sion.*coiffe/i,
+            context: /(?![eé]paule.*raideur|raideur.*[eé]paule)/i,  // Sans raideur épaule
+            searchTerms: ["Rupture de la coiffe des rotateurs (sous-scapulaire, sus-épineux, sous-épineux)"],
+            priority: 11000
+        },
+        
+        // Arthrose post-traumatique genou
+        {
+            pattern: /arthrose.*genou|genou.*arthrose|gonarthrose/i,
+            context: /post.*trauma|traumatique|s[eé]quelle/i,
+            searchTerms: ["Arthrose traumatique du genou"],
+            priority: 11000
+        },
+        
         // === 🆕 V3.3.68-70: RÈGLES AMPUTATIONS PARTIELLES DU PIED ===
         {
             pattern: /(?:amputation|op[eé]ration).*syme|d[eé]sarticulation.*tibio.*tarsien/i,
@@ -4888,8 +5018,112 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             priority: 999
         },
         
-        // === RÈGLES CUMULS/POLYTRAUMATISMES V3.3.126 ===
-        // LCA + autre lésion genou
+        // === RÈGLES RAIDEURS ARTICULATIONS MEMBRES SUPÉRIEURS V3.3.126 ===
+        // Raideur épaule avec abduction 60-90°
+        {
+            pattern: /raideur.*[ée]paule|[ée]paule.*raideur/i,
+            context: /abduction.*(?:60|70|80|90)|[ée]l[ée]vation.*(?:60|70|80|90)|limitation.*90/i,
+            searchTerms: ["Raideur de l'épaule - Abduction 60-90° + rotation"],
+            priority: 10500
+        },
+        {
+            pattern: /raideur.*[ée]paule|[ée]paule.*raideur/i,
+            context: /rotation.*limit[eé]|limitation.*rotation/i,
+            searchTerms: ["Raideur de l'épaule - Limitation rotation"],
+            priority: 10400
+        },
+        {
+            pattern: /raideur.*[ée]paule|[ée]paule.*raideur/i,
+            context: /instabilit[eé]|laxit[eé]|d[ée]rob/i,
+            searchTerms: ["Raideur + instabilité épaule"],
+            priority: 10400
+        },
+        // Raideur coude avec flexion 90-130°
+        {
+            pattern: /raideur.*coude|coude.*raideur/i,
+            context: /flexion.*(?:90|100|110|120|130)|limitation.*130/i,
+            searchTerms: ["Raideur du coude - Flexion 90-130°"],
+            priority: 10500
+        },
+        {
+            pattern: /raideur.*coude|coude.*raideur/i,
+            context: /pronosupination|rotation.*avant.*bras/i,
+            searchTerms: ["Raideur du coude - Pronosupination limitée"],
+            priority: 10400
+        },
+        // Raideur poignet
+        {
+            pattern: /raideur.*poignet|poignet.*raideur/i,
+            context: /flexion.*extension|bipolaire/i,
+            searchTerms: ["Raideur du poignet - Flexion/extension limitée"],
+            priority: 10400
+        },
+        {
+            pattern: /raideur.*poignet|poignet.*raideur/i,
+            context: /d[ée]ficit.*force|faiblesse|force.*r[ée]duite/i,
+            searchTerms: ["Raideur poignet + déficit force"],
+            priority: 10400
+        },
+        
+        // === RÈGLES RAIDEURS ARTICULATIONS MEMBRES INFÉRIEURS V3.3.126 ===
+        // Raideur hanche avec flexion 90-120°
+        {
+            pattern: /raideur.*hanche|hanche.*raideur/i,
+            context: /flexion.*(?:90|100|110|120)|limitation.*120/i,
+            searchTerms: ["Raideur de la hanche - Flexion 90-120°"],
+            priority: 10500
+        },
+        {
+            pattern: /raideur.*hanche|hanche.*raideur/i,
+            context: /claudication|boiterie/i,
+            searchTerms: ["Raideur hanche avec claudication"],
+            priority: 10400
+        },
+        // Raideur genou avec instabilité
+        {
+            pattern: /raideur.*genou|genou.*raideur/i,
+            context: /instabilit[eé]|laxit[eé]|lca|ligament/i,
+            searchTerms: ["Raideur du genou - Flexion 90-130° + instabilité"],
+            priority: 10500
+        },
+        {
+            pattern: /raideur.*genou|genou.*raideur/i,
+            context: /chondropathie|arthrose|cart|usure/i,
+            searchTerms: ["Raideur genou + chondropathie"],
+            priority: 10400
+        },
+        {
+            pattern: /raideur.*genou|genou.*raideur/i,
+            context: /[ée]panchement|gonflement|hydarthrose/i,
+            searchTerms: ["Raideur genou + épanchement"],
+            priority: 10400
+        },
+        // Raideur cheville avec dorsiflexion 0-10°
+        {
+            pattern: /raideur.*cheville|cheville.*raideur/i,
+            context: /dorsiflexion.*(?:0|5|10)|limitation.*10/i,
+            searchTerms: ["Raideur de la cheville - Dorsiflexion 0-10°"],
+            priority: 10500
+        },
+        {
+            pattern: /raideur.*cheville|cheville.*raideur/i,
+            context: /instabilit[eé]|laxit[eé]|entorse/i,
+            searchTerms: ["Raideur cheville + instabilité"],
+            priority: 10400
+        },
+        // Raideur rachis
+        {
+            pattern: /raideur.*rachis.*lombaire|rachis.*lombaire.*raideur/i,
+            context: /dds.*(?:20|30|40)|distance.*doigts.*sol/i,
+            searchTerms: ["Raideur rachis lombaire - DDS 20-40 cm"],
+            priority: 10500
+        },
+        {
+            pattern: /raideur.*rachis.*cervical|rachis.*cervical.*raideur/i,
+            context: /dms.*(?:10|15|20)|distance.*menton.*sternum/i,
+            searchTerms: ["Raideur rachis cervical - DMS 10-15 cm"],
+            priority: 10500
+        },
         {
             pattern: /(?:lca|ligament.*crois[eé].*ant[eé]rieur).*(?:\+|avec|et|ainsi|associee?).*(?:meniscectomie|menisque|chondropathie|fracture)/i,
             context: /genou/i,
@@ -6714,6 +6948,21 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             priority: 998,
             negativeContext: /extenseurs|amputation|ankylose/i
         },
+        // 🆕 V3.3.129: RUPTURE FLÉCHISSEUR D'UN DOIGT (index, médius, annulaire, auriculaire)
+        {
+            pattern: /(?:rupture|repture|section|l[eé]sion).*(?:du|des)?.*(?:tendon|tendons)?.*fl[eéè]chiss?eur.*(?:du|de\s+la|du\s+p[1-3]|de\s+p[1-3]).*(?:d[2-5]|index|m[eé]dius|annulaire|auriculaire)/i,
+            context: /doigt|main|phalange|flexion/i,
+            searchTerms: ["Section des tendons fléchisseurs doigt long"],
+            priority: 999,
+            negativeContext: /extenseur|pouce/i
+        },
+        {
+            pattern: /(?:rupture|repture|section|l[eé]sion).*(?:du|des)?.*fl[eéè]chiss?eur.*(?:d[2-5]|index|m[eé]dius|annulaire|auriculaire)/i,
+            context: /doigt|main|phalange|p[1-3]/i,
+            searchTerms: ["Section des tendons fléchisseurs doigt long"],
+            priority: 998,
+            negativeContext: /extenseur|pouce/i
+        },
         
         // ========== CAS COMPLEXES (CUMULS SPÉCIFIQUES) ==========
         // 🆕 V3.3.95: CUMUL MEMBRE INFÉRIEUR - Pseudarthrose + Raccourcissement + Amyotrophie
@@ -6805,12 +7054,23 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
     // Trier les expert rules par priorité décroissante (V3.3.35 - FIX ordre priorités)
     const sortedExpertRules = expertRules.sort((a, b) => (b.priority || 0) - (a.priority || 0));
     
-    // Vérifier si une règle experte s'applique (UTILISER workingText transformé par abréviations)
+    // V3.3.128: TESTER D'ABORD sur texte original normalisé (avant expansion synonymes)
+    const cleanNormalizedText = normalize(text);
+    
+    // Vérifier si une règle experte s'applique (PRIORITÉ AU TEXTE ORIGINAL)
     for (const rule of sortedExpertRules) {
-        if (rule.pattern.test(workingText) && rule.context.test(workingText)) {
-            // Vérifier negativeContext si présent
-            if (rule.negativeContext && rule.negativeContext.test(workingText)) {
-                continue; // Ignorer cette règle si le contexte négatif est détecté
+        // V3.3.128: Test PRIORITAIRE sur texte propre (sans expansion synonymes massive)
+        const matchClean = rule.pattern.test(cleanNormalizedText) && rule.context.test(cleanNormalizedText);
+        const matchWorking = rule.pattern.test(workingText) && rule.context.test(workingText);
+        
+        if (matchClean || matchWorking) {
+            // Vérifier negativeContext si présent (tester sur les deux textes)
+            if (rule.negativeContext) {
+                const negMatchClean = rule.negativeContext.test(cleanNormalizedText);
+                const negMatchWorking = rule.negativeContext.test(workingText);
+                if (negMatchClean || negMatchWorking) {
+                    continue; // Ignorer cette règle si le contexte négatif est détecté
+                }
             }
             
             // 🎯 CAS SPÉCIAL: Consolidation SANS séquelle = 0% IPP
