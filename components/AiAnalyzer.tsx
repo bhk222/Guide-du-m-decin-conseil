@@ -105,6 +105,8 @@ const medicalSynonyms: { [key: string]: string[] } = {
   // Lésions spécifiques
   lca: ['LCA', 'ligament croisé antérieur', 'croisé antérieur', 'pivot central'],
   lcp: ['LCP', 'ligament croisé postérieur', 'croisé postérieur'],
+  lli: ['LLI', 'ligament latéral interne', 'ligament collatéral médial', 'collatéral médial', 'collatéral interne'],
+  lle: ['LLE', 'ligament latéral externe', 'ligament collatéral latéral', 'collatéral latéral', 'collatéral externe'],
   menisque: ['ménisque', 'méniscectomie', 'lésion méniscale'],
   coiffe: ['coiffe des rotateurs', 'coiffe', 'rupture coiffe', 'sus-épineux', 'sous-épineux'],
   nerf: ['nerf', 'nerveux', 'neurologique', 'paralysie', 'parésie'],
@@ -329,6 +331,10 @@ const preprocessMedicalText = (text: string): string => {
         [/\blcp\b/gi, 'ligament croisé postérieur LCP '],
         [/\blli\b/gi, 'ligament latéral interne LLI '],
         [/\blle\b/gi, 'ligament latéral externe LLE '],
+        [/ligament\s+collat[eé]ral\s+m[eé]dial/gi, 'ligament latéral interne LLI '],
+        [/ligament\s+collat[eé]ral\s+lat[eé]ral/gi, 'ligament latéral externe LLE '],
+        [/ligament\s+collat[eé]ral\s+interne/gi, 'ligament latéral interne LLI '],
+        [/ligament\s+collat[eé]ral\s+externe/gi, 'ligament latéral externe LLE '],
         
         // === PATHOLOGIES COURANTES ===
         [/\bsadam\b/gi, 'syndrome algo-dysfonctionnel appareil manducateur SADAM '],
@@ -1504,6 +1510,8 @@ const keywordWeights: { [key: string]: number } = {
     
     // 🦴 GENOU - Mots-clés spécifiques ligaments et ménisques
     'lca': 75, 'ligament croise anterieur': 75, 'lcp': 70, 'ligament croise posterieur': 70,
+    'lli': 72, 'ligament lateral interne': 72, 'ligament collateral medial': 72, 'collateral medial': 72,
+    'lle': 72, 'ligament lateral externe': 72, 'ligament collateral lateral': 72, 'collateral lateral': 72,
     'meniscectomie': 85, 'menisque': 80, 'sequelles meniscectomie': 90,
     'hydarthrose': 70, 'hydarthrose chronique': 75, 'epanchement genou': 65, 'gonalgie': 60,
     'chondropathie rotulienne': 70, 'chondropathie femorale': 65, 'arthrose genou': 65,
@@ -1781,6 +1789,12 @@ const synonymMap: { [key: string]: string } = {
     // 🦴 Synonymes genou et ligaments
     'lca': 'ligament croise anterieur',
     'lcp': 'ligament croise posterieur',
+    'lli': 'ligament lateral interne',
+    'lle': 'ligament lateral externe',
+    'ligament collateral medial': 'ligament lateral interne',
+    'ligament collateral lateral': 'ligament lateral externe',
+    'collateral medial': 'ligament lateral interne',
+    'collateral lateral': 'ligament lateral externe',
     'qui lache': 'instabilite',
     'genou instable': 'laxite residuelle',
     'derobement': 'instabilite articulaire',
@@ -3986,6 +4000,16 @@ export const findCandidateInjuries = (text: string, externalKeywords?: string[])
                     'sequelles rupture lca': { bonus: 2900, context: ['genou'] },
                     'lcp': { bonus: 2500, context: ['genou'] },
                     'ligament croise posterieur': { bonus: 2500, context: ['genou'] },
+                    'lli': { bonus: 2500, context: ['genou'] },
+                    'ligament lateral interne': { bonus: 2500, context: ['genou'] },
+                    'ligament collateral medial': { bonus: 2500, context: ['genou'] },
+                    'collateral medial': { bonus: 2200, context: ['genou', 'ligament'] },
+                    'rupture lli': { bonus: 2700, context: ['genou'] },
+                    'dechirure ligament collateral medial': { bonus: 2700, context: ['genou'] },
+                    'lle': { bonus: 2500, context: ['genou'] },
+                    'ligament lateral externe': { bonus: 2500, context: ['genou'] },
+                    'ligament collateral lateral': { bonus: 2500, context: ['genou'] },
+                    'collateral lateral': { bonus: 2200, context: ['genou', 'ligament'] },
                     'meniscectomie': { bonus: 2000, context: ['genou', 'menisque'] },
                     'meniscectomie totale': { bonus: 2200, context: ['genou', 'menisque'] },
                     'meniscectomie interne': { bonus: 2100, context: ['genou', 'menisque', 'interne'] },
