@@ -89,13 +89,6 @@ const tools = [
         component: <NGAPCalculateur />
     },
     {
-        id: "nomenclature",
-        title: "📚 Nomenclature Générale",
-        description: "Recherche sémantique dans les PDFs de référence (Barème, AT-MP, Manuel) avec calculs automatiques selon les règles et lois.",
-        icon: <BookIcon />,
-        component: <NomenclatureGenerale />
-    },
-    {
         id: "ia-validator",
         title: "🔬 Validation IA Médico-Légale",
         description: "Testez automatiquement l'expertise de l'IA locale sur 297 cas cliniques de référence. Métriques: reconnaissance, précision IPP, temps réponse.",
