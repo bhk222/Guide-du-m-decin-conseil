@@ -336,6 +336,10 @@ const preprocessMedicalText = (text: string): string => {
         [/ligament\s+collat[eé]ral\s+interne/gi, 'ligament latéral interne LLI '],
         [/ligament\s+collat[eé]ral\s+externe/gi, 'ligament latéral externe LLE '],
         
+        // === MUSCLES & TENDONS ===
+        [/(?:élongation|elongation)\s+(?:musculaire\s+)?(?:du\s+)?quadriceps/gi, 'tendinopathie quadricipitale chronique '],
+        [/(?:élongation|elongation)\s+(?:muscle\s+)?quadricipital/gi, 'tendinopathie quadricipitale chronique '],
+        
         // === PATHOLOGIES COURANTES ===
         [/\bsadam\b/gi, 'syndrome algo-dysfonctionnel appareil manducateur SADAM '],
         [/\bsdrc\b/gi, 'syndrome douloureux régional complexe algodystrophie '],
@@ -1512,7 +1516,8 @@ const keywordWeights: { [key: string]: number } = {
     'lca': 75, 'ligament croise anterieur': 75, 'lcp': 68, 'ligament croise posterieur': 68,
     'lli': 75, 'ligament lateral interne': 75, 'ligament collateral medial': 75, 'collateral medial': 75,
     'lle': 75, 'ligament lateral externe': 75, 'ligament collateral lateral': 75, 'collateral lateral': 75,
-    'dechirure': 72, 'elongation': 70,
+    'dechirure': 72, 'elongation': 72, 'elongation musculaire': 74,
+    'quadriceps': 75, 'quadricipital': 75, 'tendinopathie quadricipitale': 80,
     'meniscectomie': 85, 'menisque': 80, 'sequelles meniscectomie': 90,
     'hydarthrose': 70, 'hydarthrose chronique': 75, 'epanchement genou': 65, 'gonalgie': 60,
     'chondropathie rotulienne': 70, 'chondropathie femorale': 65, 'arthrose genou': 65,
@@ -1794,6 +1799,9 @@ const synonymMap: { [key: string]: string } = {
     'lle': 'ligament lateral externe',
     'ligament collateral medial': 'ligament lateral interne',
     'ligament collateral lateral': 'ligament lateral externe',
+    'elongation quadriceps': 'tendinopathie quadricipitale',
+    'elongation musculaire quadriceps': 'tendinopathie quadricipitale',
+    'elongation muscle quadricipital': 'tendinopathie quadricipitale',
     'collateral medial': 'ligament lateral interne',
     'collateral lateral': 'ligament lateral externe',
     'qui lache': 'instabilite',
@@ -4014,6 +4022,10 @@ export const findCandidateInjuries = (text: string, externalKeywords?: string[])
                     'ligament lateral externe': { bonus: 2500, context: ['genou'] },
                     'ligament collateral lateral': { bonus: 2500, context: ['genou'] },
                     'collateral lateral': { bonus: 2200, context: ['genou', 'ligament'] },
+                    'elongation quadriceps': { bonus: 2500, context: ['genou', 'cuisse', 'quadriceps'] },
+                    'tendinopathie quadricipitale': { bonus: 2500, context: ['genou', 'quadriceps'] },
+                    'elongation musculaire quadriceps': { bonus: 2600, context: ['genou', 'quadriceps'] },
+                    'quadriceps': { bonus: 2000, context: ['genou', 'cuisse'] },
                     'meniscectomie': { bonus: 2000, context: ['genou', 'menisque'] },
                     'meniscectomie totale': { bonus: 2200, context: ['genou', 'menisque'] },
                     'meniscectomie interne': { bonus: 2100, context: ['genou', 'menisque', 'interne'] },
