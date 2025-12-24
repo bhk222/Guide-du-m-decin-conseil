@@ -3213,7 +3213,110 @@ export const aldData: AldItem[] = [
                 </div>
               </div>`
             }, 
-            { code: "C07A02", name: "Infarctus du myocarde" }, 
+            { code: "C07A02", name: "Infarctus du myocarde", info: `
+              <div class="space-y-3">
+                <div>
+                  <p><strong>1. Définition</strong></p>
+                  <p><span class="tooltip-term" title="Syndrome clinique lié à une ischémie coronaire aiguë">Syndrome coronarien aigu</span> correspondant à une <span class="tooltip-term" title="Mort cellulaire du tissu cardiaque par privation prolongée d'oxygène">nécrose myocardique</span> irréversible secondaire à une occlusion aiguë d'une <span class="tooltip-term" title="Artères vascularisant le muscle cardiaque (coronaires droite et gauche)">artère coronaire</span>, le plus souvent par <span class="tooltip-term" title="Formation d'un caillot sanguin obstruant la lumière artérielle">thrombose</span> sur <span class="tooltip-term" title="Dépôt lipidique dans la paroi artérielle pouvant se rompre">plaque athéroscléreuse</span> fissurée/rompue, objectivée par une élévation significative et dynamique des <span class="tooltip-term" title="Protéines cardiaques (cTnI/cTnT) libérées lors de lésion myocardique">troponines</span>.</p>
+                </div>
+                
+                <div>
+                  <p><strong>2. Classification</strong></p>
+                  <ul class="list-disc pl-5">
+                    <li><strong><span class="tooltip-term" title="ST Elevation Myocardial Infarction = IDM avec sus-décalage du segment ST">STEMI</span></strong> : <span class="tooltip-term" title="Élévation du segment ST à l'ECG traduisant une occlusion coronaire complète">sus-décalage ST</span> territorial ou <span class="tooltip-term" title="Bloc de branche gauche = retard de conduction dans le faisceau de His gauche">BBG</span> présumé récent + clinique compatible</li>
+                    <li><strong><span class="tooltip-term" title="Non-ST Elevation Myocardial Infarction = IDM sans sus-décalage ST">NSTEMI</span></strong> : élévation troponines sans sus-décalage ST</li>
+                    <li><strong>Angor instable</strong> : douleurs sans élévation troponines</li>
+                  </ul>
+                </div>
+
+                <div>
+                  <p><strong>3. Facteurs de risque cardiovasculaire</strong></p>
+                  <p><span class="tooltip-term" title="Hypertension artérielle = PAS ≥ 140 mmHg ou PAD ≥ 90 mmHg">HTA</span> — Diabète — <span class="tooltip-term" title="Excès de cholestérol LDL ou déficit HDL">Dyslipidémie</span> — Tabagisme — Obésité — Sédentarité — Age — Antécédents familiaux — <span class="tooltip-term" title="Association obésité abdominale + HTA + hyperglycémie + dyslipidémie">Syndrome métabolique</span>.</p>
+                </div>
+
+                <div>
+                  <p><strong>4. Présentation clinique</strong></p>
+                  <ul class="list-disc pl-5">
+                    <li>Douleur thoracique prolongée, constrictive, <span class="tooltip-term" title="Située derrière le sternum">rétrosternale</span></li>
+                    <li><strong>Irradiation</strong> : bras G, mandibule, dos</li>
+                    <li><strong>Signes associés</strong> : sueurs, dyspnée, nausées, malaise</li>
+                    <li><strong>Formes atypiques</strong> : sujets âgés, diabétiques, femmes (équivalents <span class="tooltip-term" title="Symptômes respiratoires">dyspnéiques</span>/digestifs)</li>
+                  </ul>
+                </div>
+
+                <div>
+                  <p><strong>5. Diagnostic</strong></p>
+                  <p><strong>ECG (urgence absolue)</strong></p>
+                  <ul class="list-disc pl-5">
+                    <li><strong>STEMI</strong> : sus-décalage ST ≥ 1 mm (<span class="tooltip-term" title="Dérivations précordiales V2 et V3">V2-V3</span> selon seuils) ou BBG récent + douleur</li>
+                    <li><strong>NSTEMI</strong> : sous-décalage ST, inversion T ou ECG non contributif</li>
+                  </ul>
+                  <p><strong>Biomarqueurs</strong></p>
+                  <ul class="list-disc pl-5">
+                    <li><span class="tooltip-term" title="cTnI ou cTnT = marqueurs spécifiques de la nécrose myocardique">Troponines cardiaques</span> élevées + <span class="tooltip-term" title="Élévation progressive sur plusieurs heures">cinétique ascendante</span></li>
+                  </ul>
+                  <p><strong>Imagerie / examens complémentaires</strong></p>
+                  <ul class="list-disc pl-5">
+                    <li><strong>Échocardiographie</strong> : <span class="tooltip-term" title="Anomalies de la contraction segmentaire = zones hypo/akinétiques">troubles cinétiques</span>, <span class="tooltip-term" title="Fraction d'éjection ventriculaire gauche = volume éjecté/volume diastolique">FE</span>, complications</li>
+                    <li><strong><span class="tooltip-term" title="Imagerie des artères coronaires avec injection de contraste">Coronarographie</span></strong> : diagnostic et traitement</li>
+                    <li>Bilan systémique biologique + Rx thorax selon contexte</li>
+                  </ul>
+                </div>
+
+                <div>
+                  <p><strong>6. Prise en charge en urgence (SCA confirmé ou suspect)</strong></p>
+                  <ul class="list-disc pl-5">
+                    <li>Monitorage, <span class="tooltip-term" title="Voie veineuse périphérique">VVP</span>, O₂ si <span class="tooltip-term" title="Saturation pulsée en oxygène mesurée par oxymètre de pouls">SpO₂</span> < 90 %, <span class="tooltip-term" title="Nil Per Os = à jeun, rien par voie orale">NPO</span></li>
+                    <li><strong>Aspirine</strong> 160–325 mg per os à croquer</li>
+                    <li><strong><span class="tooltip-term" title="Inhibiteurs du récepteur P2Y12 plaquettaire (ticagrelor/prasugrel/clopidogrel)">Anti-P2Y12</span></strong> (ticagrelor/clopidogrel selon contexte)</li>
+                    <li><strong>Anticoagulation</strong> (<span class="tooltip-term" title="Héparine non fractionnée = HNF intraveineuse">héparine non fractionnée</span> ou <span class="tooltip-term" title="Héparine de bas poids moléculaire = HBPM sous-cutanée (énoxaparine)">HBPM</span>)</li>
+                    <li><strong>Morphine</strong> si douleur persistante</li>
+                    <li><strong>Bêtabloquant</strong> si non contre-indiqué</li>
+                    <li><strong>Statine</strong> forte dose d'emblée</li>
+                  </ul>
+                  <p><strong>Réperfusion — STEMI</strong></p>
+                  <ul class="list-disc pl-5">
+                    <li><strong><span class="tooltip-term" title="Percutaneous Coronary Intervention = angioplastie avec stent coronaire">Angioplastie primaire (PCI)</span></strong> ≤ 120 min (objectif <span class="tooltip-term" title="Délai entre arrivée et dilatation de la coronaire par ballonnet">door-to-balloon</span>)</li>
+                    <li>Si PCI impossible dans les délais → <span class="tooltip-term" title="Médicaments dissolvant le thrombus (alteplase/tenecteplase)">fibrinolyse</span> (<span class="tooltip-term" title="Contre-indications = saignement actif, AVC récent, chirurgie récente">CI</span> évaluées) puis stratégie <span class="tooltip-term" title="Fibrinolyse suivie de coronarographie dans les 2-24h">pharmaco-invasive</span></li>
+                  </ul>
+                  <p><strong>NSTEMI / SCA SSST</strong></p>
+                  <ul class="list-disc pl-5">
+                    <li><span class="tooltip-term" title="Évaluation pronostique par score GRACE (mortalité à 6 mois)">Stratification du risque (GRACE)</span></li>
+                    <li>Stratégie invasive précoce selon risque et troponines</li>
+                  </ul>
+                </div>
+
+                <div>
+                  <p><strong>7. Complications</strong></p>
+                  <p>Troubles du rythme (<span class="tooltip-term" title="Tachycardie ventriculaire / Fibrillation ventriculaire = arythmies potentiellement létales">TV/FV</span>, <span class="tooltip-term" title="Bloc auriculo-ventriculaire = trouble de conduction">BAV</span>), <span class="tooltip-term" title="Défaillance pompe cardiaque avec hypotension et hypoperfusion périphérique">choc cardiogénique</span>, <span class="tooltip-term" title="Œdème pulmonaire et congestion aiguë">insuffisance cardiaque aiguë</span>, rupture septale ou <span class="tooltip-term" title="Rupture du muscle papillaire soutenant la valve mitrale">pilier mitral</span>, rupture libre, thrombus mural, embolie/AVC, <span class="tooltip-term" title="Inflammation péricardique survenant 1-6 semaines post-IDM">péricardite post-IDM (Dressler)</span>, récidive.</p>
+                </div>
+
+                <div>
+                  <p><strong>8. Traitement de fond (prévention secondaire)</strong></p>
+                  <ul class="list-disc pl-5">
+                    <li><strong><span class="tooltip-term" title="Bithérapie antiagrégante plaquettaire = aspirine + anti-P2Y12">DAPT</span></strong> (12 mois sauf contre-indication)</li>
+                    <li><strong>Bêtabloquant</strong></li>
+                    <li><strong><span class="tooltip-term" title="Inhibiteur de l'enzyme de conversion / Antagoniste des récepteurs de l'angiotensine II">IEC/ARA2</span></strong></li>
+                    <li><strong>Statine haute intensité</strong></li>
+                    <li>± <span class="tooltip-term" title="Anti-aldostérone (spironolactone/éplérénone) si FE < 40%">Antagoniste des récepteurs minéralocorticoïdes</span> si FE réduite</li>
+                    <li>Contrôle strict des facteurs de risque + <span class="tooltip-term" title="Programme de réentraînement à l'effort supervisé post-IDM">réadaptation cardiaque</span></li>
+                  </ul>
+                </div>
+
+                <div>
+                  <p><strong>9. Éducation & suivi</strong></p>
+                  <p>Arrêt du tabac, diététique, activité physique adaptée, observance thérapeutique, suivi cardiologique régulier.</p>
+                </div>
+
+                <div class="bg-yellow-50 border-l-4 border-yellow-500 p-2">
+                  <p class="text-sm"><strong>⚠️ URGENCE ABSOLUE</strong> : ECG + troponines + stratégie de reperfusion immédiate</p>
+                </div>
+
+                <div class="bg-blue-50 border-l-4 border-blue-500 p-2">
+                  <p class="text-sm"><strong>💊 Traitement à vie</strong> : DAPT (12 mois) puis aspirine + bêtabloquant + IEC + statine</p>
+                </div>
+              </div>`
+            }, 
             { code: "C07A03", name: "Pontage aorto-coronarien" }, 
             { code: "C07A04", name: "Valvulopathie décompensée" }, 
             { code: "C07A05", name: "Remplacement valvulaire prothétique" }, 
