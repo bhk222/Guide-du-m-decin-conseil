@@ -1,6 +1,7 @@
 # 🔧 CHANGELOG V3.3.129 - Correction Cas Complexes Multi-Lésions
 
 **Date** : 24 décembre 2025  
+**Version** : V3.3.129.1 (Fix final)  
 **Objectif** : Corriger la détection des cas avec plusieurs lésions distinctes sur doigts différents
 
 ---
@@ -23,7 +24,7 @@ L'analyse IA proposait :
 
 ## ✅ CORRECTIONS APPLIQUÉES
 
-### 1. Corrections orthographiques automatiques
+### 1. Corrections orthographiques automatiques (V3.3.129)
 
 **Fichier** : `components/AiAnalyzer.tsx` (lignes 383-386)
 
@@ -40,7 +41,7 @@ L'analyse IA proposait :
 
 ---
 
-### 2. Nouveaux patterns de détection - Rupture fléchisseur
+### 2. Nouveaux patterns de détection - Rupture fléchisseur (V3.3.129)
 
 **Fichier** : `components/AiAnalyzer.tsx` (après ligne 6944)
 
@@ -68,6 +69,49 @@ L'analyse IA proposait :
 - ✅ Détection avec phalange (P1/P2/P3)
 - ✅ Support tous les doigts longs (D2-D5)
 - ✅ Exclusion pouce et extenseurs
+
+---
+
+### 3. Patterns notation médicale exacte (V3.3.129.1) - FIX CRITIQUE
+
+**Fichier** : `components/AiAnalyzer.tsx` (lignes 6418-6440)
+
+**Problème identifié** : Le pattern générique pour "P3 D5" ne matchait pas car il cherchait trop de texte entre P3 et D5.
+
+**Solution** : Ajout de patterns spécifiques pour notation médicale exacte :
+
+```typescript
+// 🆕 V3.3.129: Patterns prioritaires pour notation médicale exacte "P3 D[2-5]"
+{
+    pattern: /(?:ablation|amputation).*\bP3\s+D2\b/i,
+    context: /doigt|main/i,
+    searchTerms: ['Ablation phalange unguéale de l\'index (Main Dominante)', 'Ablation phalange unguéale de l\'index (Main Non Dominante)'],
+    priority: 16000  // Priorité maximale pour notation exacte
+},
+{
+    pattern: /(?:ablation|amputation).*\bP3\s+D3\b/i,
+    context: /doigt|main/i,
+    searchTerms: ['Ablation phalange unguéale du médius (Main Dominante)', 'Ablation phalange unguéale du médius (Main Non Dominante)'],
+    priority: 16000
+},
+{
+    pattern: /(?:ablation|amputation).*\bP3\s+D4\b/i,
+    context: /doigt|main/i,
+    searchTerms: ['Ablation phalange unguéale de l\'annulaire (Main Dominante)', 'Ablation phalange unguéale de l\'annulaire (Main Non Dominante)'],
+    priority: 16000
+},
+{
+    pattern: /(?:ablation|amputation).*\bP3\s+D5\b/i,
+    context: /doigt|main/i,
+    searchTerms: ['Ablation phalange unguéale de l\'auriculaire (Main Dominante)', 'Ablation phalange unguéale de l\'auriculaire (Main Non Dominante)'],
+    priority: 16000
+}
+```
+
+**Impact** :
+- ✅ Détection immédiate de "P3 D2", "P3 D3", "P3 D4", "P3 D5"
+- ✅ Priorité maximale (16000) pour éviter tout conflit
+- ✅ Match exact avec `\b` (word boundaries)
 
 ---
 
