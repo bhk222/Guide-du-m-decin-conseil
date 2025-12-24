@@ -1511,6 +1511,13 @@ const middleCategories: InjuryCategory[] = [
             { name: "Pseudarthrose du fémur", rate: [60, 80], rateCriteria: { low: "Pseudarthrose stable du tiers moyen, mobilité conservée hanche/genou, douleurs modérées.", high: "Pseudarthrose instable avec raccourcissement majeur >5cm, quasi-impotence fonctionnelle, nécessité 2 cannes ou fauteuil." } },
         ]
       },
+      {
+        name: "Cuisse - Lésions Musculaires et Tendineuses",
+        injuries: [
+            { name: "Tendinopathie quadricipitale (séquelles d'élongation/déchirure)", rate: [5, 20], rateCriteria: { low: "Élongation musculaire cicatrisée, gêne occasionnelle à l'effort intense, force conservée.", medium: "Déchirure partielle avec déficit de force modéré (faiblesse extension genou), douleurs à l'effort, limitation activités sportives.", high: "Déchirure complète ou rupture tendineuse avec déficit majeur d'extension active du genou, amyotrophie quadriceps, limitation marche/escaliers." } },
+            { name: "Rupture du tendon quadricipital", rate: [15, 30], rateCriteria: { low: "Rupture partielle réparée chirurgicalement, récupération fonctionnelle satisfaisante, déficit de force modéré.", medium: "Rupture complète réparée avec séquelles : déficit extension active, amyotrophie, douleurs résiduelles.", high: "Rupture non réparée ou échec chirurgical, impossibilité extension active du genou, marche très limitée, nécessité aide technique." } },
+        ]
+      },
        {
         name: "Genou - Lésions Osseuses et Articulaires",
         injuries: [
@@ -1528,6 +1535,8 @@ const middleCategories: InjuryCategory[] = [
             { name: "Laxité chronique du genou (séquelle d'entorse)", rate: [5, 20], rateCriteria: { low: "Laxité modérée sans instabilité fonctionnelle.", high: "Instabilité majeure avec dérobements fréquents." } },
             { name: "Séquelles de rupture du ligament croisé antérieur (LCA)", rate: [10, 25], rateCriteria: { low: "Laxité modérée, sans dérobements, activités quotidiennes normales, sports sans pivot/contact.", medium: "Laxité importante avec dérobements occasionnels, nécessité attelle pour activités.", high: "Laxité sévère avec dérobements fréquents (escaliers, marche irrégulière), arthrose débutante, activités limitées." } },
             { name: "Séquelles de rupture du ligament croisé postérieur (LCP)", rate: [10, 25], rateCriteria: { low: "Laxité modérée, gêne en descente escaliers/pentes.", medium: "Laxité importante avec faiblesse quadriceps, douleurs antérieures.", high: "Laxité sévère avec instabilité postérieure majeure, arthrose fémoro-tibiale, limitation périmètre marche." } },
+            { name: "Séquelles de rupture/déchirure du ligament latéral interne (LLI) ou ligament collatéral médial", rate: [10, 20], rateCriteria: { low: "Déchirure partielle cicatrisée, laxité minime en valgus, pas d'instabilité fonctionnelle, gêne occasionnelle.", medium: "Déchirure complète avec laxité modérée en valgus, gêne dans les changements de direction, activités sportives limitées.", high: "Laxité sévère en valgus avec instabilité fonctionnelle, douleurs mécaniques fréquentes, limitation marche terrain irrégulier." } },
+            { name: "Séquelles de rupture/déchirure du ligament latéral externe (LLE) ou ligament collatéral latéral", rate: [10, 20], rateCriteria: { low: "Déchirure partielle cicatrisée, laxité minime en varus, pas d'instabilité fonctionnelle.", medium: "Déchirure complète avec laxité modérée en varus, gêne dans certaines activités.", high: "Laxité sévère en varus avec instabilité fonctionnelle, douleurs fréquentes, limitation activités." } },
             { name: "Méniscectomie totale", rate: 13, description: "Ablation complète d'un ménisque (interne ou externe) avec séquelles fonctionnelles." },
             { name: "Séquelles de méniscectomie (douleurs, hydarthrose)", rate: [5, 15], rateCriteria: { low: "Méniscectomie partielle, gêne minime, pas d'épanchement.", medium: "Méniscectomie totale avec hydarthrose récidivante, douleurs mécaniques.", high: "Complications post-méniscectomie : arthrose précoce, chondropathie fémoro-tibiale, douleurs permanentes." } },
         ]
