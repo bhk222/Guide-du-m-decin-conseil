@@ -2204,7 +2204,8 @@ const middleCategories: InjuryCategory[] = [
               low: "Déchirure réparée chirurgicalement avec bonne cicatrisation, continence anale et fécale conservée, dyspareunie légère.", 
               medium: "Séquelles avec incontinence anale aux gaz et/ou selles liquides, dyspareunie modérée à sévère, nécessité d'adaptations (protections).",
               high: "Incontinence fécale complète (gaz et selles solides), fistule recto-vaginale persistante, dyspareunie intolérable, retentissement psycho-social majeur."
-            } 
+            },
+            excludeContext: ['fracture', 'tibia', 'genou', 'femur', 'jambe', 'membre inferieur', 'ligament', 'menisque', 'rotule', 'cheville', 'pied']
           },
           { 
             name: "Prolapsus génital post-traumatique sévère", 
@@ -2214,7 +2215,8 @@ const middleCategories: InjuryCategory[] = [
               low: "Prolapsus de stade II (descente jusqu'à l'orifice vaginal), gêne modérée, amélioré par la rééducation périnéale.", 
               medium: "Prolapsus de stade III (extériorisation partielle), nécessité d'un pessaire ou d'une chirurgie, incontinence urinaire d'effort associée.",
               high: "Prolapsus de stade IV (extériorisation complète), échec chirurgical ou récidive, incontinence urinaire et/ou fécale majeure, retentissement majeur sur la qualité de vie."
-            } 
+            },
+            excludeContext: ['fracture', 'tibia', 'genou', 'femur', 'jambe', 'membre inferieur', 'ligament', 'menisque', 'rotule', 'cheville', 'pied']
           },
         ]
       }

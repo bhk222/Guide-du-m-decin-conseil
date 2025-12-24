@@ -3987,7 +3987,18 @@ export const findCandidateInjuries = (text: string, externalKeywords?: string[])
                     return; // Skip cette injury complètement
                 }
                 
-                // �👁️ MEGA BONUS pour correspondance EXACTE de pathologies spécifiques
+                // 🚫 EXCLUSION CONTEXTUELLE - Bloquer lésions obstétricales si contexte traumato
+                const injuryData = injury as any;
+                if (injuryData.excludeContext && Array.isArray(injuryData.excludeContext)) {
+                    const hasExcludedContext = injuryData.excludeContext.some((term: string) => 
+                        normalizedText.includes(term.toLowerCase())
+                    );
+                    if (hasExcludedContext) {
+                        return; // Skip cette injury (ex: déchirure périnéale si fracture tibia)
+                    }
+                }
+                
+                // 👁️ MEGA BONUS pour correspondance EXACTE de pathologies spécifiques
                 // ⚠️ IMPORTANT: Bonus appliqués SEULEMENT si cohérence anatomique
                 const specificPathologies = {
                     // 👁️ PATHOLOGIES OPHTALMOLOGIQUES - Contexte strict obligatoire
