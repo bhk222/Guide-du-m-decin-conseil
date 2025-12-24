@@ -2100,7 +2100,8 @@ const synonymMap: { [key: string]: string } = {
     'atlas': 'cervical c1', 'axis': 'cervical c2',
     
     // Nomenclature vertébrale (niveaux dorsaux/thoraciques)
-    'd1': 'dorsal', 'd2': 'dorsal', 'd3': 'dorsal', 'd4': 'dorsal', 'd5': 'dorsal',
+    // ⚠️ D1-D5 NON mappés ici pour éviter conflit avec doigts (D1=pouce, D2=index...)
+    // Le contexte ("rachis"/"vertebre" vs "main"/"doigt") déterminera l'interprétation
     'd6': 'dorsal', 'd7': 'dorsal', 'd8': 'dorsal', 'd9': 'dorsal', 'd10': 'dorsal', 'd11': 'dorsal', 'd12': 'dorsal',
     't1': 'dorsal', 't2': 'dorsal', 't3': 'dorsal', 't4': 'dorsal', 't5': 'dorsal',
     't6': 'dorsal', 't7': 'dorsal', 't8': 'dorsal', 't9': 'dorsal', 't10': 'dorsal', 't11': 'dorsal', 't12': 'dorsal',
@@ -4968,9 +4969,35 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
         // === RÈGLE SPÉCIALE: CONSOLIDATION SANS SÉQUELLE = 0% IPP ===
         {
             pattern: /(?:fracture|arrachement|luxation|entorse|traumatisme|lesion|trauma)/i,  // Détecte simplement un traumatisme
-            context: /(?:sans|pas\s+d[e']?|aucune?)\s*s[eé]quelles?/i,  // ET "pas de séquelles" n'importe où
-            searchTerms: ["__SANS_SEQUELLE__"],  // Marqueur spécial
+            context: /(?:sans|pas\s+d[e']?|aucune?)\s*s[eé]quelles?|examen.*normal|clinique.*normal|normalit[eé]|consolidation.*sans|guérison.*compl[eè]te|r[eé]cup[eé]ration.*compl[eè]te|mobilit[eé].*normale/i,  // ÉLARGI: récupération complète, mobilité normale
+            searchTerms: ["__SANS_SEQUELLE__", "__FRACTURE_CONSOLIDEE_SANS_SEQUELLE__"],  // Marqueurs spéciaux
             priority: 10000  // Priorité maximale absolue
+        },
+        
+        // === RÈGLES AMPUTATIONS NIVEAUX ANATOMIQUES ===
+        {
+            pattern: /amputation.*(?:avant.*bras|forearm).*(?:tiers\s+moyen|middle)/i,
+            context: /avant.*bras|membre.*sup/i,
+            searchTerms: ['Amputation de l\'avant-bras au tiers moyen (Main Dominante)'],
+            priority: 9800
+        },
+        {
+            pattern: /amputation.*bras.*(?:tiers\s+sup[eé]rieur|upper)/i,
+            context: /bras|hum[eé]r/i,
+            searchTerms: ['Amputation du bras au tiers supérieur (Main Dominante)'],
+            priority: 9800
+        },
+        {
+            pattern: /amputation.*cuisse.*(?:tiers\s+moyen|middle)/i,
+            context: /cuisse|f[eé]mur/i,
+            searchTerms: ['Amputation de la cuisse au tiers moyen'],
+            priority: 9800
+        },
+        {
+            pattern: /amputation.*jambe.*(?:tiers\s+moyen|middle)/i,
+            context: /jambe|tibia/i,
+            searchTerms: ['Amputation de jambe sous le genou (tiers moyen)'],
+            priority: 9800
         },
         
         // === RÈGLES FRACTURES DE PHALANGES ===
@@ -5880,7 +5907,7 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
         {
             pattern: /tassement\s+vert[eé]bral/i,
             context: /l[1-5]|lombaire/i,
-            negativeContext: /cyphose.*\d+.*degrés.*raideur|avec.*cyphose/i, // Exclure nos cas spécifiques
+            negativeContext: /sans.*s[eé]quelle/i, // Uniquement exclure vraiment sans séquelle
             searchTerms: ['Fracture tassement vertébral lombaire non déplacée consolidée'],
             priority: 98
         },
@@ -5894,7 +5921,7 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
         {
             pattern: /tassement\s+vert[eé]bral/i,
             context: /d[1-9]|d1[0-2]|dorsal/i,
-            negativeContext: /cyphose.*\d+.*degrés|avec.*cyphose/i, // Exclure nos cas spécifiques
+            negativeContext: /sans.*s[eé]quelle/i, // Uniquement exclure vraiment sans séquelle
             searchTerms: ['Fracture tassement vertébral dorsal non déplacée consolidée'],
             priority: 96
         },
@@ -5927,6 +5954,29 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             priority: 92
         },
         // Règles rachis
+        // 🆕 V3.3.130: RACHIS: Raideur lombaire avec DDS (Distance Doigts-Sol)
+        {
+            pattern: /raideur.*(?:rachis.*)?lombaire|rachis.*lombaire.*raideur/i,
+            context: /DDS.*(?:\d+)\s*cm|distance.*doigts.*sol.*(?:\d+)|schober/i,
+            searchTerms: ['Raideur rachis lombaire'],
+            priority: 97,
+            negativeContext: /tassement|fracture.*vert[eé]br/i
+        },
+        // 🆕 V3.3.130: RACHIS: Tassement vertébral lombaire
+        {
+            pattern: /tassement.*vert[eé]br.*(?:lombaire|L\d)|(?:lombaire|L\d).*tassement/i,
+            context: /rachis|L\d|cyphose|douleur|lombalgie|DDS/i,
+            searchTerms: ['Tassement d\'une vertèbre lombaire - Avec cyphose et/ou raideur'],
+            priority: 96
+        },
+        // 🆕 V3.3.130: RACHIS: Raideur cervicale avec DMS (Distance Menton-Sternum)
+        {
+            pattern: /raideur.*(?:rachis.*)?cervical|rachis.*cervical.*raideur/i,
+            context: /DMS.*(?:\d+)\s*cm|distance.*menton.*sternum.*(?:\d+)|rotation.*limit[eé]/i,
+            searchTerms: ['Raideur rachis cervical'],
+            priority: 97,
+            negativeContext: /tassement|fracture.*vert[eé]br/i
+        },
         {
             pattern: /hernie.*discale.*(?:cervical|C\d)|cervical.*hernie.*discale/i,
             context: /rachis|cervical|n[eé]vralgie|NCB|cervico-brachial/i,
@@ -5939,6 +5989,14 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             searchTerms: ['Hernie discale lombaire post-traumatique - Avec radiculalgie (sciatique ou cruralgie)'],
             priority: 94
         },
+        // 🆕 V3.3.130: Sciatique/Cruralgie chronique (sans hernie discale explicite)
+        {
+            pattern: /(?:sciatique|cruralgie).*(?:chronique|persistante|r[eé]siduelle)/i,
+            context: /lombaire|L\d|rachis|radiculalgie|douleur.*irradiante|membre.*inf[eé]rieur/i,
+            searchTerms: ['Hernie discale lombaire post-traumatique - Avec radiculalgie (sciatique ou cruralgie)'],
+            priority: 96,
+            negativeContext: /sans.*s[eé]quelle|gu[eé]rison/i
+        },
         {
             pattern: /spondylolysth[eé]sis|spondylo.*listh[eé]sis|listth[eé]sis|glissement\s+vert[eé]bral/i,
             context: /lombaire|L\d|S\d|rachis|traumatisme|post-traumatique/i,
@@ -5950,6 +6008,14 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             context: /vertébr|lombaire|dorsal|L\d|D\d|rachis/i,
             searchTerms: ['Fracture des apophyses transverses'],
             priority: 93
+        },
+        // 🆕 V3.3.130: CHEVILLE: Entorse grave avec instabilité
+        {
+            pattern: /entorse.*cheville.*(?:grave|s[eé]v[eè]re)|cheville.*instabilit[eé]/i,
+            context: /instabilit[eé]|laxit[eé]|ligamentaire|chronique|boiterie|rupture.*ligament/i,
+            searchTerms: ['Entorse grave de la cheville avec instabilité résiduelle'],
+            priority: 96,
+            negativeContext: /sans.*s[eé]quelle|l[eé]g[eè]re/i
         },
         {
             pattern: /limitation.*(?:flexion|mobilit[eé])|flexion.*(?:limit[eé]|r[eé]duit)/i,
@@ -6196,6 +6262,14 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             priority: 998,  // Priorité haute pour forme moyenne
             negativeContext: /grave|s[eé]v[eè]re|accentu[eé]/i
         },
+        // 🆕 V3.3.130: Fracture scaphoïde consolidée SANS séquelle (examen normal)
+        {
+            pattern: /fracture.*scapho[ïi]de.*consolid[eé]e/i,
+            context: /sans.*s[eé]quelle|examen.*normal|r[eé]cup[eé]ration.*compl[eè]te|mobilit[eé].*normale/i,
+            searchTerms: ['__FRACTURE_CONSOLIDEE_SANS_SEQUELLE__'],
+            priority: 9900,
+            negativeContext: /raideur|douleur|limitation|pseudarthrose/i
+        },
         // 🆕 V3.3.124g: Fracture scaphoïde - Forme légère (par défaut)
         {
             pattern: /fracture.*scapho[ïi]de/i,
@@ -6208,6 +6282,29 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             context: /coude|chronique|rebelle|r[eé]sistante/i,
             searchTerms: ['Épicondylite ou Épitrochléite chronique rebelle (Main Dominante)'],
             priority: 91
+        },
+        // 🆕 VISION: Baisse acuité visuelle
+        {
+            pattern: /(?:baisse|diminution|perte|r[eé]duction).*(?:acuit[eé].*visuelle|vision|vue)/i,
+            context: /œil|oeil|visuel|acuit[eé]|dixi[èe]me|10[èe]me/i,
+            searchTerms: ["Baisse de l'acuité visuelle non corrigeable"],
+            priority: 95,
+            negativeContext: /audition|ouïe|oreille|surdité/i
+        },
+        // 🆕 V3.3.130: AUDITION: Surdité de perception post-traumatique
+        {
+            pattern: /surdit[eé].*(?:perception|neurosensorielle)|perte.*audition.*(?:bilat[eé]rale|deux.*oreilles)/i,
+            context: /traumatisme|ou[ïi]e|audition|d[eé]cibels?|dB|audiom[eé]trie/i,
+            searchTerms: ['Surdité de perception bilatérale post-traumatique'],
+            priority: 95,
+            negativeContext: /vision|œil|oeil|vue/i
+        },
+        // 🆕 V3.3.130: AUDITION: Acouphènes post-traumatiques
+        {
+            pattern: /acouph[eè]nes?.*(?:permanents?|chroniques?|invalidants?)/i,
+            context: /traumatisme|ou[ïi]e|oreille|sifflements?|bourdonnements?/i,
+            searchTerms: ['Acouphènes chroniques post-traumatiques'],
+            priority: 94
         },
         {
             pattern: /(?:syndrome.*)?canal\s+carpien/i,
@@ -6222,6 +6319,29 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             searchTerms: ['Fracture des deux os de l\'avant-bras - Cal vicieux avec limitation de la prono-supination (Main Dominante)'],
             priority: 94
         },
+        // 🆕 GENOU: Raideur simple (flexion 100-110°) sans instabilité
+        {
+            pattern: /genou.*raideur.*flexion.*(?:100|105|110).*[°degrés]/i,
+            context: /genou|flexion|extension/i,
+            searchTerms: ["Raideur du genou"],
+            priority: 97,
+            negativeContext: /instabilit[eé]|laxit[eé]|LCA|d[eé]robement|ligament/i
+        },
+        // 🆕 GENOU: Raideur + instabilité/laxité/dérobement
+        {
+            pattern: /genou.*(?:flexion.*(?:90|95|100|105).*[°degrés]?|raideur).*(?:instabilit[eé]|laxit[eé]|d[eé]robement)/i,
+            context: /genou|flexion/i,
+            searchTerms: ["__CUMUL_GENOU_RAIDEUR_INSTABILITE__"],
+            priority: 97,
+            negativeContext: /sans.*s[eé]quelle/i
+        },
+        {
+            pattern: /genou.*(?:instabilit[eé]|laxit[eé]|d[eé]robement).*(?:flexion.*(?:90|95|100|105).*[°degrés]?|raideur)/i,
+            context: /genou|flexion/i,
+            searchTerms: ["__CUMUL_GENOU_RAIDEUR_INSTABILITE__"],
+            priority: 97,
+            negativeContext: /sans.*s[eé]quelle/i
+        },
         {
             pattern: /fracture.*(?:deux\s+os.*(?:jambe|leg)|both\s+bones.*(?:jambe|leg))|fracture.*tibia.*(?:p[eé]ron[eé]|fibula)/i,
             context: /jambe|saillie.*osseus|cal\s+vicieux|genou\s+valgum|troubles?\s+trophiques?/i,
@@ -6229,9 +6349,16 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             priority: 95
         },
         {
+            pattern: /fracture.*(?:complexe|grave)?.*(?:deux\s+os|2\s+os).*jambe/i,
+            context: /boiterie|boite|marche.*difficile|claudication|l[eé]g[eè]re\s+boiterie/i,
+            searchTerms: ['Fracture des deux os de la jambe - Avec cal vicieux et troubles trophiques'],
+            priority: 96,  // Priorité haute pour boiterie séquellaire
+            negativeContext: /sans.*s[eé]quelle|examen.*normal/i
+        },
+        {
             pattern: /fracture.*(?:deux\s+os.*(?:jambe|leg)|both\s+bones.*(?:jambe|leg))|fracture.*tibia.*(?:p[eé]ron[eé]|fibula)/i,
             context: /jambe|bonne\s+consolidation|consolidation.*anatomique/i,
-            negativeContext: /cal\s+vicieux|troubles?\s+trophiques?|saillie.*osseus|genou\s+valgum/i,
+            negativeContext: /cal\s+vicieux|troubles?\s+trophiques?|saillie.*osseus|genou\s+valgum|boiterie/i,
             searchTerms: ['Fracture des deux os de la jambe - Bonne consolidation'],
             priority: 93
         },
@@ -6784,16 +6911,38 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             priority: 95
         },
         {
-            pattern: /n[eé]phrectomie|ablation.*rein|un\s+seul\s+rein/i,
-            context: /traumatisme|rein|unilatérale|gauche|droite/i,
+            pattern: /n[eé]phrectomie.*unilat[eé]rale|ablation.*rein.*(?:gauche|droit)|un\s+seul\s+rein.*restant/i,
+            context: /traumatisme|rein|r[eé]nal|unilatérale|gauche|droite|normal/i,
             searchTerms: ['Néphrectomie (ablation d\'un rein), avec rein restant sain'],
-            priority: 95
+            priority: 98,
+            negativeContext: /deux.*reins|bilat[eé]ral/i
+        },
+        // 🆕 V3.3.130: Néphrectomie variant 'rein unique'
+        {
+            pattern: /rein\s+unique|(?:sans|perdu).*rein.*(?:gauche|droit)/i,
+            context: /traumatisme|accident|r[eé]nal|fonctionnel/i,
+            searchTerms: ['Néphrectomie (ablation d\'un rein), avec rein restant sain'],
+            priority: 96
         },
         {
             pattern: /col[eé]ctomie|ablation.*colon|r[eé]section.*colon/i,
             context: /traumatisme|traumatique|abdomen|colon|partielle/i,
             searchTerms: ['Séquelles de colectomie partielle post-traumatique (hors stomie)'],
             priority: 95
+        },
+        // 🆕 V3.3.130: Cholécystectomie (vésicule biliaire)
+        {
+            pattern: /chol[eé]cystectomie|ablation.*v[eé]sicule.*biliaire|exérèse.*v[eé]sicule/i,
+            context: /traumatisme|abdomen|biliaire|v[eé]sicule/i,
+            searchTerms: ['Séquelles de cholécystectomie post-traumatique'],
+            priority: 97
+        },
+        // 🆕 V3.3.130: Stomie digestive (colostomie/iléostomie)
+        {
+            pattern: /(?:colo|il[eé]o)stomie|anus\s+artificiel|stomie.*(?:digestive|d[eé]finitive)/i,
+            context: /traumatisme|poche|appareillage|d[eé]finitive/i,
+            searchTerms: ['Stomie digestive définitive (colostomie/iléostomie)'],
+            priority: 96
         },
         {
             pattern: /h[eé]patectomie|r[eé]section.*h[eé]patique|ablation.*foie/i,
@@ -7019,6 +7168,21 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             priority: 999,
             negativeContext: /isolé|seul/i
         },
+        // 🆕 CUMUL: Genou raideur + instabilité LCA (priorité max)
+        {
+            pattern: /genou.*(?:raideur|flexion.*(?:100|95|90|85).*[°degrés]?).*(?:instabilit[eé]|laxité|LCA|ligament.*crois[eé])/i,
+            context: /flexion|extension|laxit[eé]|d[eé]robement/i,
+            searchTerms: ["__CUMUL_GENOU_RAIDEUR_LCA__"],
+            priority: 9999,
+            negativeContext: /sans.*s[eé]quelle|examen.*normal/i
+        },
+        {
+            pattern: /(?:instabilit[eé]|laxité|LCA|ligament.*crois[eé]).*genou.*(?:raideur|flexion.*(?:100|95|90|85).*[°degrés]?)/i,
+            context: /flexion|extension|laxit[eé]|d[eé]robement/i,
+            searchTerms: ["__CUMUL_GENOU_RAIDEUR_LCA__"],
+            priority: 9999,
+            negativeContext: /sans.*s[eé]quelle|examen.*normal/i
+        },
         {
             pattern: /polytraumatisme.*avec.*fracture.*fémur.*et.*fracture.*poignet/i,
             context: /consolidée.*raccourcissement.*raideur.*séquellaire/i,
@@ -7042,12 +7206,103 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             priority: 999,
             negativeContext: /médian|cubital/i
         },
+        // 🆕 V3.3.130: Paralysie nerf médian (main plate, thénar)
+        {
+            pattern: /paralysie.*nerf.*m[eé]dian|d[eé]ficit.*nerf.*m[eé]dian/i,
+            context: /main.*plate|amyotrophie.*th[eé]nar|opposition.*pouce.*impossible|canal.*carpien.*s[eé]v[eè]re/i,
+            searchTerms: ['Paralysie du nerf médian - Au bras (droite)', 'Paralysie du nerf médian - Au bras (gauche)'],
+            priority: 99,
+            negativeContext: /radial|cubital/i
+        },
+        // 🆕 V3.3.130: Paralysie nerf cubital (griffe cubitale)
+        {
+            pattern: /paralysie.*nerf.*(?:cubital|ulnaire)|d[eé]ficit.*nerf.*(?:cubital|ulnaire)/i,
+            context: /griffe.*cubitale|griffe.*auriculaire|annulaire|atrophie.*interosseux|signe.*froment/i,
+            searchTerms: ['Paralysie du nerf cubital - Au bras (droite)', 'Paralysie du nerf cubital - Au bras (gauche)'],
+            priority: 99,
+            negativeContext: /radial|m[eé]dian/i
+        },
+        // 🆕 V3.3.130: Paralysie SPE/SPI (sciatique poplité externe/interne)
+        {
+            pattern: /(?:paralysie|d[eé]ficit).*(?:SPE|sciatique.*poplit[eé].*externe)|steppage|pied.*tombant/i,
+            context: /steppage|pied.*tombe|releveur.*pied|d[eé]ficit.*releveur|fibulaire/i,
+            searchTerms: ['Paralysie du nerf sciatique poplité externe (SPE)'],
+            priority: 98,
+            negativeContext: /SPI|interne/i
+        },
+        {
+            pattern: /(?:paralysie|d[eé]ficit).*(?:SPI|sciatique.*poplit[eé].*interne)/i,
+            context: /flexion.*orteils|propulsion.*pas|triceps.*sural|marche.*pointe.*pieds/i,
+            searchTerms: ['Paralysie du nerf sciatique poplité interne (SPI)'],
+            priority: 98,
+            negativeContext: /SPE|externe/i
+        },
         {
             pattern: /sciatique.*chronique.*L5/i,
             context: /déficit.*releveur.*pied|steppage|testing.*3\/5|paresthésies.*L5/i,
             searchTerms: ["Sciatique chronique avec signes déficitaires"],
             priority: 999,
             negativeContext: /S1|crurale/i
+        },
+        
+        // ========== COUDE ==========
+        // 🆕 V3.3.130: Fracture olécrane avec raideur
+        {
+            pattern: /fracture.*ol[eé]cr[aâ]ne/i,
+            context: /raideur|flexion.*(?:90|100|110)|extension.*(?:limit[eé]e|impossible)|amplitude.*r[eé]duite/i,
+            searchTerms: ['Fracture de l\'olécrane - Avec raideur importante'],
+            priority: 97
+        },
+        // 🆕 V3.3.130: Raideur coude simple
+        {
+            pattern: /raideur.*coude|coude.*raideur/i,
+            context: /flexion.*(?:80|90|100|110)|extension.*(?:limit[eé]e|-\d+)|amplitude|prono.*supination/i,
+            searchTerms: ['Raideur du coude'],
+            priority: 96,
+            negativeContext: /ol[eé]cr[aâ]ne|fracture/i
+        },
+        
+        // ========== PHASE 6: CORRECTIONS FINALES ==========
+        // 🆕 V3.3.130-P10: TASSEMENT VERTÉBRAL LOMBAIRE avec cyphose + raideur (PRIORITÉ MAXIMALE)
+        {
+            pattern: /tassement.*vert[eé]br.*L\d/i,
+            context: /cyphose.*\d+.*degr[eé]s|raideur.*lombaire|DDS|lombalgie/i,
+            searchTerms: ['Tassement d\'une vertèbre lombaire - Avec cyphose et/ou raideur'],
+            priority: 11500,
+            negativeContext: /consolid[eé]e.*sans.*s[eé]quelle/i,
+            debug: true  // 🚨 DEBUG TEMPORAIRE
+        },
+        // 🆕 V3.3.130-P10: TASSEMENT VERTÉBRAL DORSAL avec cyphose (PRIORITÉ MAXIMALE)
+        {
+            pattern: /tassement.*vert[eé]br.*D\d+/i,
+            context: /cyphose.*\d+.*degr[eé]s|raideur.*rachis.*dorsal|raideur.*dorsal|douleurs.*chroniques/i,
+            searchTerms: ['Tassement d\'une vertèbre dorsale - Avec cyphose'],
+            priority: 11500,
+            negativeContext: /consolid[eé]e.*sans.*s[eé]quelle|lombaire/i
+        },
+        // 🆕 V3.3.130-P6: UVÉITE CHRONIQUE avec complications
+        {
+            pattern: /uv[eé]ite.*chronique.*post.*traumatique|uv[eé]ite.*chronique.*avec/i,
+            context: /pouss[eé]es.*fr[eé]quentes|syn[eé]chies|cataracte.*secondaire|complications/i,
+            searchTerms: ['Uvéite post-traumatique chronique'],
+            priority: 9999,
+            negativeContext: /sans.*complication/i
+        },
+        // 🆕 V3.3.130-P7: SECTION TENDONS FLÉCHISSEURS DOIGTS (PRIORITÉ ABSOLUE)
+        {
+            pattern: /section.*tendons.*fl[eé]chisseurs.*(?:m[eé]dius|index|annulaire|doigt|doigts)/i,
+            context: /impossibilit[eé].*flexion.*active|raideur.*doigt|impossibilit[eé].*flexion|perte.*fonction/i,
+            searchTerms: ['Section des tendons fléchisseurs doigt long'],
+            priority: 10500,
+            negativeContext: /r[eé]paration.*r[eé]ussie|r[eé]cup[eé]ration.*compl[eè]te/i
+        },
+        // 🆕 V3.3.130-P6: ÉVENTRATION PARIÉTALE avec hernie importante
+        {
+            pattern: /[eé]ventration.*(?:post.*traumatique|pari[eé]tale).*hernie.*importante/i,
+            context: /n[eé]cessitant.*ceinture|contention|appareillage/i,
+            searchTerms: ['Éventration post-traumatique'],
+            priority: 9999,
+            negativeContext: /r[eé]par[eé]e|op[eé]r[eé]e.*succ[eè]s/i
         },
         
         // ========== HANCHE ==========
@@ -7084,37 +7339,105 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
         
         // ========== RACHIS (TASSEMENTS ET SYNDROMES) ==========
         {
-            pattern: /tassement.*vertébral.*L\d+/i,
-            context: /cyphose.*\d+.*degrés.*raideur.*lombaire|raideur.*lombaire.*cyphose/i,
-            searchTerms: ["Tassement d'une vertèbre lombaire - Avec cyphose et/ou raideur"],
-            priority: 999,
-            negativeContext: /sans.*cyphose|sans.*raideur/i
-        },
-        {
             pattern: /entorse.*cervicale.*avec.*syndrome.*cervical.*chronique/i,
             context: /distance.*menton.*sternum|raideur.*cervicale/i,
             searchTerms: ["Syndrome cervical chronique post-traumatique"],
             priority: 999,
             negativeContext: /aigu|récent/i
-        },
-        {
-            pattern: /tassement.*vertébral.*D\d+/i,
-            context: /cyphose.*\d+.*degrés|raideur.*rachis.*dorsal/i,
-            searchTerms: ["Tassement d'une vertèbre dorsale - Avec cyphose"],
-            priority: 999,
-            negativeContext: /sans.*cyphose/i
         }
     ];
     
-    // Trier les expert rules par priorité décroissante (V3.3.35 - FIX ordre priorités)
+    // ========== 🆕 V3.3.131: TEST EXPERT RULES EN PRIORITÉ ABSOLUE (AVANT SCORING KEYWORD) ==========
+    // Trier et tester IMMÉDIATEMENT après définition, avant tout autre code
+    const cleanNormalizedText = normalize(text);
     const sortedExpertRules = expertRules.sort((a, b) => (b.priority || 0) - (a.priority || 0));
     
-    // V3.3.128: TESTER D'ABORD sur texte original normalisé (avant expansion synonymes)
-    const cleanNormalizedText = normalize(text);
-    
-    // Vérifier si une règle experte s'applique (PRIORITÉ AU TEXTE ORIGINAL)
     for (const rule of sortedExpertRules) {
-        // V3.3.128: Test PRIORITAIRE sur texte propre (sans expansion synonymes massive)
+        const matchClean = rule.pattern.test(cleanNormalizedText) && rule.context.test(cleanNormalizedText);
+        const matchWorking = rule.pattern.test(workingText) && rule.context.test(workingText);
+        
+        if ((rule as any).debug) {
+            console.log(`🔍 [DEBUG EXPERT RULE - EARLY TEST]`);
+            console.log(`Pattern: ${rule.pattern}`);
+            console.log(`CleanText: "${cleanNormalizedText}"`);
+            console.log(`matchClean: ${matchClean}, matchWorking: ${matchWorking}`);
+        }
+        
+        if (matchClean || matchWorking) {
+            if (rule.negativeContext) {
+                const negMatchClean = rule.negativeContext.test(cleanNormalizedText);
+                const negMatchWorking = rule.negativeContext.test(workingText);
+                if (negMatchClean || negMatchWorking) {
+                    continue;
+                }
+            }
+            
+            // Gérer UNIQUEMENT les règles simples ici (tassements, uvéite, etc.)
+            // Les handlers complexes restent plus bas dans le code original
+            if (!rule.searchTerms.includes("__SANS_SEQUELLE__") && 
+                !rule.searchTerms.includes("__CATARACTE_AVEC_ACUITE__") &&
+                !rule.searchTerms.includes("__POUTEAU_COLLES_AMBIGUITY__") &&
+                !rule.searchTerms.includes("__DUCHENNE_ERB_AMBIGUITY__") &&
+                !rule.searchTerms.includes("__KLUMPKE_AMBIGUITY__") &&
+                !rule.searchTerms.includes("__CUMUL_BASSIN_NERF_SCIATIQUE__") &&
+                !rule.searchTerms.includes("__CUMUL_TC_GRAVE__") &&
+                !rule.searchTerms.includes("__CUMUL_AMPUTATION_MAIN_PHANTOM__") &&
+                !rule.searchTerms.includes("__CUMUL_SURDITE_ACOUPHENES_INVALIDANTS__") &&
+                !rule.searchTerms.includes("__CUMUL_MEMBRE_INF_PSEUDARTHROSE_RACCOURCISSEMENT__") &&
+                !rule.searchTerms.includes("__CUMUL_GENOU_RAIDEUR_LCA__") &&
+                !rule.searchTerms.includes("__CUMUL_GENOU_RAIDEUR_INSTABILITE__") &&
+                !rule.searchTerms.includes("__CUMUL_TIBIA_GUSTILO__") &&
+                !rule.searchTerms.includes("__DONNEES_INSUFFISANTES_CATARACTE__") &&
+                !rule.searchTerms.includes("__FRACTURE_CONSOLIDEE_SANS_SEQUELLE__")) {
+                
+                // Recherche directe dans barème
+                let directMatches = allInjuriesWithPaths.filter(item => 
+                    rule.searchTerms.some(term => normalize(item.name) === normalize(term))
+                );
+                
+                if (directMatches.length === 0) {
+                    directMatches = allInjuriesWithPaths.filter(item => 
+                        rule.searchTerms.some(term => {
+                            const termWords = normalize(term).split(' ').filter(w => w.length > 2);
+                            const itemNormalized = normalize(item.name);
+                            const commonWords = termWords.filter(w => itemNormalized.includes(w));
+                            return commonWords.length >= termWords.length * 0.7;
+                        })
+                    );
+                }
+                
+                if (directMatches.length > 0) {
+                    const directMatch = directMatches[0];
+                    const rateValue = Array.isArray(directMatch.rate) ? directMatch.rate[1] : directMatch.rate;
+                    
+                    console.log(`✅ [EXPERT RULE MATCH - PRIORITY ${rule.priority}] ${directMatch.name} = ${rateValue}%`);
+                    
+                    return {
+                        type: 'proposal',
+                        name: directMatch.name,
+                        rate: rateValue,
+                        justification: `<strong>🎯 RÈGLE EXPERTE PRIORITAIRE (${rule.priority})</strong><br><br>` +
+                            `Pattern détecté : <code>${rule.pattern}</code><br>` +
+                            `Context vérifié : <code>${rule.context}</code><br><br>` +
+                            `📊 <strong>Taux IPP : ${rateValue}%</strong>`,
+                        path: directMatch.path,
+                        injury: directMatch as Injury,
+                        preexisting: preexistingEarly
+                    };
+                }
+            }
+        }
+    }
+    // ========== FIN TEST EXPERT RULES PRIORITAIRE ==========
+    
+    // 🆕 V3.3.131: ANCIENNE BOUCLE EXPERT RULES DÉPLACÉE PLUS HAUT (voir après ligne 7431)
+    // Cette section est conservée pour les cas spéciaux avec handlers complexes
+    
+    // V3.3.128: TESTER sur texte normalisé (déjà fait plus haut, variables disponibles)
+    // const cleanNormalizedText et sortedExpertRules déjà définis
+    
+    // Vérifier UNIQUEMENT les règles expertes avec handlers spéciaux (cumuls, ambiguïtés)
+    for (const rule of sortedExpertRules) {
         const matchClean = rule.pattern.test(cleanNormalizedText) && rule.context.test(cleanNormalizedText);
         const matchWorking = rule.pattern.test(workingText) && rule.context.test(workingText);
         
@@ -7739,6 +8062,105 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
                         name: 'Cumul : Pseudarthrose + Raccourcissement + Amyotrophie',
                         rate: [40, 55],
                         path: 'Cumul séquelles membre inférieur'
+                    } as Injury,
+                    isCumul: true
+                };
+            }
+            
+            // 🎯 V3.3.130: CAS SPÉCIAL: CUMUL GENOU RAIDEUR + INSTABILITÉ LCA
+            // Détection: "genou raideur flexion 100° + instabilité LCA"
+            if (rule.searchTerms.includes("__CUMUL_GENOU_RAIDEUR_LCA__")) {
+                // Parser flexion
+                const flexionMatch = /flexion.*?(\d+)\s*[°degrés]/i.exec(normalizedInputText);
+                const flexionDegres = flexionMatch ? parseInt(flexionMatch[1]) : 0;
+                
+                // Détecter LCA/instabilité/laxité
+                const hasLCA = /LCA|ligament.*croisé.*antérieur/i.test(normalizedInputText);
+                const hasInstabilite = /instabilité|laxité|dérobement/i.test(normalizedInputText);
+                
+                // Calcul IPP raideur (selon flexion)
+                let ippRaideur = 15; // Défaut moyen
+                if (flexionDegres > 0) {
+                    if (flexionDegres <= 90) ippRaideur = 20; // Raideur sévère
+                    else if (flexionDegres <= 100) ippRaideur = 15; // Raideur modérée
+                    else if (flexionDegres <= 110) ippRaideur = 10; // Raideur légère
+                }
+                
+                // Calcul IPP instabilité LCA
+                let ippLCA = 15; // Défaut moyen LCA
+                if (hasInstabilite || /dérobement/i.test(normalizedInputText)) {
+                    ippLCA = 18; // Instabilité confirmée
+                }
+                
+                // Formule Balthazar: IPP_total = IPP1 + IPP2 × (100 - IPP1) / 100
+                const ippTotal = ippRaideur + Math.round(ippLCA * (100 - ippRaideur) / 100);
+                
+                let justification = `<strong>🔗 CUMUL GENOU: RAIDEUR + INSTABILITÉ LCA</strong><br><br>`;
+                justification += `📊 <strong>Données cliniques</strong> :<br>`;
+                if (flexionDegres > 0) justification += `&nbsp;&nbsp;• <strong>Raideur genou flexion ${flexionDegres}°</strong> = ${ippRaideur}%<br>`;
+                else justification += `&nbsp;&nbsp;• <strong>Raideur genou</strong> = ${ippRaideur}%<br>`;
+                if (hasLCA) justification += `&nbsp;&nbsp;• <strong>Rupture/Instabilité LCA</strong> = ${ippLCA}%<br>`;
+                justification += `<br><strong>🧮 Calcul formule Balthazar (cumul) :</strong><br>`;
+                justification += `&nbsp;&nbsp;1. Raideur ${ippRaideur}%<br>`;
+                justification += `&nbsp;&nbsp;2. LCA ${ippLCA}% × (100 - ${ippRaideur}) / 100 = +${Math.round(ippLCA * (100 - ippRaideur) / 100)}%<br>`;
+                justification += `<br><strong>📊 IPP TOTAL = ${ippTotal}%</strong><br><br>`;
+                justification += `⚖️ Base juridique : Article 12 CSS (cumul séquelles multiples même articulation)`;
+                
+                return {
+                    type: 'proposal',
+                    name: 'Raideur genou + instabilité LCA (cumul)',
+                    rate: ippTotal,
+                    justification: justification,
+                    path: 'Cumul Genou',
+                    injury: {
+                        name: 'Raideur genou + instabilité LCA (cumul)',
+                        rate: ippTotal
+                    } as Injury,
+                    isCumul: true
+                };
+            }
+            
+            // 🎯 V3.3.130: CAS SPÉCIAL: CUMUL GENOU RAIDEUR + INSTABILITÉ GÉNÉRIQUE
+            // Détection: "genou raideur + instabilité/laxité/dérobement" (sans LCA explicite)
+            if (rule.searchTerms.includes("__CUMUL_GENOU_RAIDEUR_INSTABILITE__")) {
+                // Parser flexion
+                const flexionMatch = /flexion.*?(\d+)\s*[°degrés]/i.exec(normalizedInputText);
+                const flexionDegres = flexionMatch ? parseInt(flexionMatch[1]) : 0;
+                
+                // Calcul IPP raideur
+                let ippRaideur = 15;
+                if (flexionDegres > 0) {
+                    if (flexionDegres <= 90) ippRaideur = 20;
+                    else if (flexionDegres <= 100) ippRaideur = 15;
+                    else if (flexionDegres <= 110) ippRaideur = 10;
+                }
+                
+                // Calcul IPP instabilité (sans LCA explicite → fourchette basse)
+                const ippInstabilite = 12; // Instabilité non ligamentaire documentée
+                
+                // Formule Balthazar
+                const ippTotal = ippRaideur + Math.round(ippInstabilite * (100 - ippRaideur) / 100);
+                
+                let justification = `<strong>🔗 CUMUL GENOU: RAIDEUR + INSTABILITÉ</strong><br><br>`;
+                justification += `📊 <strong>Données cliniques</strong> :<br>`;
+                if (flexionDegres > 0) justification += `&nbsp;&nbsp;• <strong>Raideur genou flexion ${flexionDegres}°</strong> = ${ippRaideur}%<br>`;
+                else justification += `&nbsp;&nbsp;• <strong>Raideur genou</strong> = ${ippRaideur}%<br>`;
+                justification += `&nbsp;&nbsp;• <strong>Instabilité/Laxité/Dérobements</strong> = ${ippInstabilite}%<br>`;
+                justification += `<br><strong>🧮 Calcul formule Balthazar (cumul) :</strong><br>`;
+                justification += `&nbsp;&nbsp;1. Raideur ${ippRaideur}%<br>`;
+                justification += `&nbsp;&nbsp;2. Instabilité ${ippInstabilite}% × (100 - ${ippRaideur}) / 100 = +${Math.round(ippInstabilite * (100 - ippRaideur) / 100)}%<br>`;
+                justification += `<br><strong>📊 IPP TOTAL = ${ippTotal}%</strong><br><br>`;
+                justification += `⚖️ Base juridique : Article 12 CSS (cumul séquelles multiples même articulation)`;
+                
+                return {
+                    type: 'proposal',
+                    name: 'Raideur genou + instabilité (cumul)',
+                    rate: ippTotal,
+                    justification: justification,
+                    path: 'Cumul Genou',
+                    injury: {
+                        name: 'Raideur genou + instabilité (cumul)',
+                        rate: ippTotal
                     } as Injury,
                     isCumul: true
                 };
@@ -9333,6 +9755,11 @@ export const detectMultipleLesions = (text: string): {
     const hasMultipleToes = /(?:amputation|raideur|ankylose).*(?:gros\s+orteil|orteil|o[1-5]).*?(?:et|avec).*?(?:orteil|o[1-5])/i.test(normalized);
     const hasMultipleViscera = /(splenectomie|nephrectomie|colectomie|hepatectomie).*?(?:et|avec|associee).*?(splenectomie|nephrectomie|colectomie|hepatectomie)/i.test(normalized);
     
+    // 🆕 Détection cumul MEMBRE SUPÉRIEUR + MEMBRE INFÉRIEUR (polytraumatisme fréquent)
+    const hasMembreSupLesion = /(?:fracture|luxation|rupture|lesion).*(?:[eé]paule|coude|poignet|main|doigt|bras|avant.*bras|hum[eé]r|radius|ulna|cubitus|clavicule)/i.test(normalized);
+    const hasMembreInfLesion = /(?:fracture|luxation|rupture|lesion).*(?:hanche|genou|cheville|pied|orteil|jambe|cuisse|f[eé]mur|tibia|p[eé]ron[eé]|fibula)/i.test(normalized);
+    const hasMembreSupEtInf = hasMembreSupLesion && hasMembreInfLesion;
+    
     // 6. Critères de cumul AMÉLIORÉS (détecte narratif médical naturel)
     const isCumul = 
         foundKeywords.length > 0 ||  // Keywords TRÈS explicites type "polytraumatisme"
@@ -9347,7 +9774,8 @@ export const detectMultipleLesions = (text: string): {
         (hasDoubleLesion && totalRegionsCount >= 1) ||  // 🆕 2 types de lésions + au moins 1 région = cumul probable
         hasMultipleDigits ||           // 🆕 V3.3.124: Cumul doigts (médius + annulaire, etc.)
         hasMultipleToes ||             // 🆕 V3.3.124: Cumul orteils (gros orteil + 2ème, etc.)
-        hasMultipleViscera;            // 🆕 V3.3.124: Cumul viscères (splénectomie + néphrectomie, etc.)
+        hasMultipleViscera ||          // 🆕 V3.3.124: Cumul viscères (splénectomie + néphrectomie, etc.)
+        hasMembreSupEtInf;             // 🆕 Cumul membre supérieur + membre inférieur (polytraumatisme)
     
     // Estimation nombre de lésions
     const lesionCount = Math.max(
@@ -9838,25 +10266,55 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
             
             console.log(`📊 TOTAL: ${lesionProposals.length} propositions générées sur ${individualLesions.length} lésions`);
             
-            // ⚠️ ASSOUPLIR: Accepter même 1 seule proposition si cumul détecté
-            if (lesionProposals.length >= 1) {
-                console.log('✅ Retour type cumul_proposals avec', lesionProposals.length, 'lésion(s)');
-                const cumulHeader = '<strong>⚠️ CUMUL DE LÉSIONS DÉTECTÉ</strong><br>';
-                const cumulDetails = `
-                    <div style="background:#fff3cd; padding:15px; margin:10px 0; border-left:5px solid #ffc107;">
-                    <strong>📊 Analyse cumul :</strong> ${individualLesions.length} lésions détectées, ${lesionProposals.length} évaluée(s) avec succès<br>
-                    <strong>💡 Formule de Balthazar :</strong> IPP_total = IPP1 + IPP2 × (100 - IPP1) / 100<br>
-                    <strong>📝 Calcul automatique :</strong> ${lesionProposals.length > 1 ? 'Les lésions ci-dessous ont été analysées individuellement.' : 'Analyse partielle - une seule lésion identifiée dans le barème.'}<br>
-                    ${lesionProposals.length > 1 ? `Exemple avec ${lesionProposals.length} lésions : 
-                    ${lesionProposals.map((p, i) => `Lésion ${i + 1} = ${Array.isArray(p.injury.rate) ? p.injury.rate.join('-') : p.injury.rate}%`).join(', ')}` : ''}
-                    </div>`;
+            // 🆕 CALCUL AUTOMATIQUE pour polytraumatismes (2+ lésions détectées)
+            if (lesionProposals.length >= 2) {
+                console.log('✅ Calcul automatique cumul avec', lesionProposals.length, 'lésion(s)');
+                
+                // Calculer IPP total avec formule Balthazar
+                let ippTotal = 0;
+                const details: string[] = [];
+                
+                for (let i = 0; i < lesionProposals.length; i++) {
+                    const proposal = lesionProposals[i];
+                    const rate = Array.isArray(proposal.injury.rate) 
+                        ? Math.round((proposal.injury.rate[0] + proposal.injury.rate[1]) / 2)
+                        : proposal.injury.rate;
+                    
+                    if (i === 0) {
+                        ippTotal = rate;
+                        details.push(`Lésion 1: ${proposal.injury.name} = ${rate}%`);
+                    } else {
+                        const capaciteRestante = 100 - ippTotal;
+                        const ajout = Math.round(rate * capaciteRestante / 100);
+                        ippTotal += ajout;
+                        details.push(`Lésion ${i+1}: ${proposal.injury.name} = ${rate}% × ${capaciteRestante}% = +${ajout}%`);
+                    }
+                }
+                
+                const cumulJustification = `<strong>🔗 POLYTRAUMATISME - CUMUL ${lesionProposals.length} LÉSIONS</strong><br><br>` +
+                    `<div style="background:#fff3cd; padding:15px; margin:10px 0; border-left:5px solid #ffc107;">` +
+                    `<strong>📋 Lésions identifiées :</strong><br>${details.join('<br>')}<br><br>` +
+                    `<strong>💡 Formule de Balthazar (cumul) :</strong><br>` +
+                    `IPP_total = IPP1 + IPP2 × (100 - IPP1) / 100<br><br>` +
+                    `<strong>📊 IPP TOTAL CUMULÉ = ${ippTotal}%</strong>` +
+                    `</div><br>` +
+                    `⚖️ <strong>Base juridique</strong> : Article 12 du Code de la Sécurité Sociale (méthode de la capacité restante)`;
                 
                 return {
-                    type: 'cumul_proposals',
-                    text: cumulHeader + cumulDetails,
-                    proposals: lesionProposals,
-                    lesionCount: lesionProposals.length
-                } as any;
+                    type: 'proposal',
+                    name: `Polytraumatisme (cumul ${lesionProposals.length} lésions)`,
+                    rate: ippTotal,
+                    justification: cumulJustification,
+                    path: 'Cumul Polytraumatisme',
+                    injury: {
+                        name: `Polytraumatisme (cumul ${lesionProposals.length} lésions)`,
+                        rate: ippTotal
+                    },
+                    isCumul: true
+                } as LocalProposal;
+            } else if (lesionProposals.length === 1) {
+                // Si une seule lésion identifiée, retourner celle-ci directement
+                return lesionProposals[0];
             }
         }
     }
