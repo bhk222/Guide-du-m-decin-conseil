@@ -7364,7 +7364,66 @@ export const aldData: AldItem[] = [
             { code: "C15A06", name: "Autres insuffisances respiratoires chroniques par" }
           ] 
         },
-        { code: "C15B", name: "Les insuffisances respiratoires chroniques par restriction", children: [] }
+        { 
+          code: "C15B", 
+          name: "Les insuffisances respiratoires chroniques par restriction",
+          tooltip: `<div class="space-y-3">
+<p><strong>Définition</strong>: Diminution chronique des volumes pulmonaires par atteinte parenchymateuse, pariétale ou neuromusculaire, entraînant <span class="tooltip-term" title="Diminution de l'oxygène dans le sang artériel (PaO₂ < 80 mmHg)">hypoxémie</span> ± <span class="tooltip-term" title="Augmentation du CO₂ dans le sang artériel (PaCO₂ > 45 mmHg)">hypercapnie</span>.</p>
+
+<p><strong>Mécanisme physiopathologique</strong>: Réduction de la <span class="tooltip-term" title="Capacité d'expansion pulmonaire/thoracique - facilité à se distendre">compliance pulmonaire</span> ou thoracique → baisse de la <span class="tooltip-term" title="CPT - Volume total d'air contenu dans les poumons après inspiration maximale">capacité pulmonaire totale (CPT)</span> et de la <span class="tooltip-term" title="CV - Volume d'air mobilisable entre inspiration et expiration maximales">CV</span> → altération des échanges gazeux.</p>
+
+<p><strong>Catégories étiologiques</strong>:</p>
+<ul class="list-disc pl-5">
+  <li><strong>1) Pulmonaires (intrinsèques)</strong>: <span class="tooltip-term" title="PID - Maladies touchant le tissu pulmonaire interstitiel (entre les alvéoles)">Pneumopathies interstitielles diffuses (PID)</span>, <span class="tooltip-term" title="Fibrose progressive du poumon sans cause identifiable">fibrose pulmonaire idiopathique</span>, sarcoïdose évolutive</li>
+  <li><strong>2) Extra-pulmonaires (extrinsèques)</strong>: <span class="tooltip-term" title="Déformation de la colonne vertébrale avec courbure anormale">Cyphoscoliose</span> sévère, obésité massive, séquelles thoraciques, pleurésie chronique</li>
+  <li><strong>3) Neuromusculaires</strong>: <span class="tooltip-term" title="Sclérose Latérale Amyotrophique - Maladie neurodégénérative des motoneurones">SLA</span>, dystrophies, myopathies, atteintes diaphragmatiques, lésions médullaires</li>
+</ul>
+
+<p><strong>Facteurs de risque / contexte</strong>: Maladies systémiques, exposition toxique/professionnelle, antécédents pleuro-pulmonaires, pathologies neuromusculaires, déformations thoraciques</p>
+
+<p><strong>Tableau clinique</strong>: <span class="tooltip-term" title="Difficulté respiratoire, essoufflement">Dyspnée</span> d'effort progressive → repos, <span class="tooltip-term" title="Difficulté respiratoire en position allongée, soulagement en position assise">orthopnée</span> (formes neuromusculaires), fatigue, baisse de tolérance à l'effort, signes d'hypoventilation nocturne, ± toux sèche</p>
+
+<p><strong>Examens complémentaires clés</strong>:</p>
+<ul class="list-disc pl-5">
+  <li><strong><span class="tooltip-term" title="Épreuves Fonctionnelles Respiratoires">EFR</span></strong>: ↓ CV et CPT, rapport <span class="tooltip-term" title="Volume Expiratoire Maximal par Seconde">VEMS</span>/<span class="tooltip-term" title="Capacité Vitale Forcée">CVF</span> normal ou ↑ (profil restrictif)</li>
+  <li><strong><span class="tooltip-term" title="Diffusion du Monoxyde de Carbone - Test mesurant le transfert gazeux alvéolo-capillaire">DLCO</span></strong> ↓ si atteinte interstitielle</li>
+  <li><strong><span class="tooltip-term" title="Gaz Du Sang artériel - Mesure PaO₂, PaCO₂, pH">GDS</span></strong>: hypoxémie ± hypercapnie</li>
+  <li><strong><span class="tooltip-term" title="Tomodensitométrie Haute Résolution - Scanner thoracique précis">TDM thoracique HR</span></strong> si suspicion interstitielle</li>
+  <li><strong>Évaluation neuromusculaire</strong>: spirométrie assis/couché, <span class="tooltip-term" title="Sniff Nasal Inspiratory Pressure - Pression inspiratoire nasale (force diaphragmatique)">SNIP</span>, <span class="tooltip-term" title="Pression inspiratoire/expiratoire maximale (force musculaire respiratoire)">Pimax/Nimax</span>, polysomnographie si suspicion d'hypoventilation</li>
+</ul>
+
+<p><strong>Diagnostic différentiel</strong>: BPCO/obstruction masquée — insuffisance cardiaque — désentraînement à l'effort — anémie</p>
+
+<p><strong>Classification de sévérité</strong>: Basée sur <strong>CPT / CV (% théorique)</strong>, DLCO, statut gazométrique, présence d'hypoventilation nocturne, retentissement fonctionnel</p>
+
+<p><strong>Prise en charge thérapeutique</strong>:</p>
+<ul class="list-disc pl-5">
+  <li>Traitement étiologique spécifique quand possible (PID, maladie systémique)</li>
+  <li>Réhabilitation respiratoire</li>
+  <li><span class="tooltip-term" title="OLD - Oxygène ≥15h/jour pour PaO₂ < 55 mmHg">Oxygénothérapie de longue durée</span> si critères</li>
+  <li><span class="tooltip-term" title="VNI - Ventilation par masque pour hypoventilation/hypercapnie">Ventilation non invasive (VNI)</span> en cas d'hypoventilation neuromusculaire ou hypercapnie</li>
+  <li>Kinésithérapie respiratoire, vaccination</li>
+</ul>
+
+<p><strong>Suivi / surveillance</strong>: EFR régulières, DLCO, GDS, évaluation sommeil/ventilation, dépistage complications, évaluation capacité fonctionnelle et qualité de vie</p>
+
+<p><strong>Complications</strong>: Insuffisance respiratoire chronique hypercapnique — infections respiratoires — <span class="tooltip-term" title="Hypertension Artérielle Pulmonaire">HTAP</span> — cœur pulmonaire — déconditionnement fonctionnel</p>
+
+<p><strong>Évaluation médico-légale / expertise</strong>:</p>
+<ul class="list-disc pl-5">
+  <li>Retentissement sur <span class="tooltip-term" title="Activités de la Vie Domestique/Quotidienne">AVD/AVQ</span>, mobilité et autonomie</li>
+  <li>Besoin d'OLD/VNI</li>
+  <li>Capacité professionnelle</li>
+  <li>Fréquence des décompensations</li>
+  <li>Limitations à l'effort objectivées</li>
+</ul>
+
+<p><strong>Pronostic</strong>: Lié à l'étiologie, au degré de restriction, à la DLCO, à la présence d'hypercapnie et à la réponse au traitement</p>
+
+<p><strong>Prévention / éducation</strong>: Vaccination, activité adaptée, éviction expositions toxiques, observance thérapeutique et suivi spécialisé</p>
+</div>`,
+          children: [] 
+        }
     ],
   },
   {
