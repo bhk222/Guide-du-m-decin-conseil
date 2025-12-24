@@ -7300,7 +7300,70 @@ export const aldData: AldItem[] = [
     code: "C15",
     name: "Les insuffisances respiratoires chroniques",
     children: [
-        { code: "C15A", name: "Les insuffisances respiratoires chroniques par obstruction", children: [{ code: "C15A01", name: "Bronchopneumopathie chronique obstructive (BPCO)" }, { code: "C15A02", name: "DDB (étendue)" }, { code: "C15A03", name: "Emphysème" }, { code: "C15A04", name: "Mucoviscidose" }, { code: "C15A05", name: "Asthme ancien dit \"à dyspnée continue\"" }, { code: "C15A06", name: "Autres insuffisances respiratoires chroniques par" }] },
+        { 
+          code: "C15A", 
+          name: "Les insuffisances respiratoires chroniques par obstruction", 
+          tooltip: `<div class="space-y-3">
+<p><strong>Définition</strong>: Altération chronique des échanges gazeux liée à une obstruction persistante des voies aériennes, responsable d'une <span class="tooltip-term" title="Diminution de la concentration d'oxygène dans le sang artériel (PaO₂ < 80 mmHg)">hypoxémie</span> ± <span class="tooltip-term" title="Augmentation du CO₂ dans le sang artériel (PaCO₂ > 45 mmHg)">hypercapnie</span>.</p>
+
+<p><strong>Étiologies principales</strong>:</p>
+<ul class="list-disc pl-5">
+  <li><span class="tooltip-term" title="Bronchopneumopathie Chronique Obstructive - Maladie inflammatoire chronique des bronches avec obstruction permanente">BPCO</span> (tabagisme, exposition professionnelle)</li>
+  <li>Asthme chronique non contrôlé / remodelage bronchique</li>
+  <li><span class="tooltip-term" title="Dilatations permanentes et irréversibles des bronches avec infections récidivantes">Bronchiectasies</span></li>
+  <li><span class="tooltip-term" title="Maladie génétique avec mucus épais obstruant les bronches">Mucoviscidose</span></li>
+  <li><span class="tooltip-term" title="Inflammation et obstruction des petites voies aériennes">Bronchiolite oblitérante</span></li>
+</ul>
+
+<p><strong>Facteurs de risque</strong>: Tabac actif/passif — Pollution — Expositions professionnelles — ATCD respiratoires — Infections respiratoires répétées — Terrain génétique</p>
+
+<p><strong>Tableau clinique</strong>: <span class="tooltip-term" title="Difficulté respiratoire, essoufflement">Dyspnée</span> d'effort puis de repos — Toux chronique — <span class="tooltip-term" title="Crachats, production de mucus">Expectoration</span> — Sifflements — <span class="tooltip-term" title="Coloration bleutée de la peau par manque d'oxygène">Cyanose</span> — <span class="tooltip-term" title="Déformation des doigts en 'baguettes de tambour' (stades évolués)">Hippocratisme digital</span> — Signes d'hypercapnie</p>
+
+<p><strong>Examens complémentaires</strong>:</p>
+<ul class="list-disc pl-5">
+  <li><strong><span class="tooltip-term" title="Épreuves Fonctionnelles Respiratoires - Tests mesurant les volumes et débits pulmonaires">EFR</span> / Spirométrie</strong>: <span class="tooltip-term" title="Volume Expiratoire Maximal par Seconde - Volume d'air expiré en 1 seconde">VEMS</span> ↓, <span class="tooltip-term" title="Rapport VEMS/CVF - Si < 70% = obstruction bronchique">VEMS/CVF</span> < 70%</li>
+  <li><strong>Gaz du sang</strong>: <span class="tooltip-term" title="Pression artérielle en oxygène">PaO₂</span> ↓ ± <span class="tooltip-term" title="Pression artérielle en CO₂">PaCO₂</span> ↑</li>
+  <li><strong>Imagerie thoracique</strong>: emphysème, distension, lésions bronchiques</li>
+</ul>
+
+<p><strong>Classification de la sévérité</strong>: Basée sur <strong>VEMS (% théorique)</strong>, retentissement clinique, fréquence des exacerbations, statut gazométrique et comorbidités</p>
+
+<p><strong>Traitement de fond</strong>:</p>
+<ul class="list-disc pl-5">
+  <li>Sevrage tabagique (prioritaire)</li>
+  <li><span class="tooltip-term" title="Médicaments dilatant les bronches (β2-agonistes, anticholinergiques)">Bronchodilatateurs</span> ± <span class="tooltip-term" title="Corticostéroïdes Inhalés - Anti-inflammatoires">CSI</span> selon phénotype</li>
+  <li>Réhabilitation respiratoire</li>
+  <li>Vaccination grippe / pneumocoque</li>
+  <li><span class="tooltip-term" title="OLD - Oxygène au moins 15h/jour pour PaO₂ < 55 mmHg">Oxygénothérapie de longue durée</span> si critères</li>
+  <li><span class="tooltip-term" title="VNI - Assistance respiratoire par masque (nuit) pour hypercapnie chronique">Ventilation non invasive</span> si hypercapnie chronique</li>
+</ul>
+
+<p><strong>Prise en charge des exacerbations</strong>: Oxygène contrôlé — Bronchodilatateurs courte durée — Corticothérapie — Antibiotiques si indication — VNI si insuffisance ventilatoire — Hospitalisation selon gravité</p>
+
+<p><strong>Complications</strong>: <span class="tooltip-term" title="Insuffisance cardiaque droite par augmentation de la pression pulmonaire">Cœur pulmonaire chronique</span> — <span class="tooltip-term" title="Hypertension Artérielle Pulmonaire - Pression élevée dans artères pulmonaires">HTAP</span> — <span class="tooltip-term" title="Augmentation des globules rouges compensatoire">Polyglobulie</span> — Infections récidivantes — IRC ventilatoire — Retentissement fonctionnel et social</p>
+
+<p><strong>Évaluation fonctionnelle / Expertise</strong>:</p>
+<ul class="list-disc pl-5">
+  <li>Capacité fonctionnelle à l'effort</li>
+  <li>Retentissement sur <span class="tooltip-term" title="Activités de la Vie Domestique/Quotidienne">AVD/AVQ</span></li>
+  <li>Besoin d'OLD ou VNI</li>
+  <li>Fréquence des exacerbations</li>
+  <li>Adaptation poste de travail / incapacité partielle ou totale</li>
+</ul>
+
+<p><strong>Pronostic</strong>: Dépend de la sévérité de l'obstruction, du statut tabagique, de la gazométrie, des comorbidités et de l'observance thérapeutique</p>
+
+<p><strong>Prévention / Éducation</strong>: Sevrage tabagique — Réduction expositions nocives — Observance traitement — Reconnaissance précoce des exacerbations — Suivi spécialisé régulier</p>
+</div>`,
+          children: [
+            { code: "C15A01", name: "Bronchopneumopathie chronique obstructive (BPCO)" }, 
+            { code: "C15A02", name: "DDB (étendue)" }, 
+            { code: "C15A03", name: "Emphysème" }, 
+            { code: "C15A04", name: "Mucoviscidose" }, 
+            { code: "C15A05", name: "Asthme ancien dit \"à dyspnée continue\"" }, 
+            { code: "C15A06", name: "Autres insuffisances respiratoires chroniques par" }
+          ] 
+        },
         { code: "C15B", name: "Les insuffisances respiratoires chroniques par restriction", children: [] }
     ],
   },
