@@ -4668,7 +4668,117 @@ export const aldData: AldItem[] = [
         </div>`,
         children: [
           { code: "C10A01", name: "Maladie d'Alzheimer" }, 
-          { code: "C10A02", name: "Démence à corps de Lewy" }, 
+          { 
+            code: "C10A02", 
+            name: "Démence à corps de Lewy",
+            tooltip: `<div class="space-y-3">
+<p><strong>Définition</strong>: Démence neurodégénérative caractérisée par un déclin cognitif fluctuant, une atteinte attentionnelle–exécutive et visuospatiale précoce, associée à :</p>
+<ul class="list-disc pl-5">
+  <li>Hallucinations visuelles bien systématisées</li>
+  <li>Signes parkinsoniens spontanés</li>
+  <li>Hypersensibilité marquée aux neuroleptiques</li>
+</ul>
+<p><strong>Histopathologie</strong>: dépôts d'<span class="tooltip-term" title="Protéine anormale s'accumulant dans les neurones, formant les corps de Lewy">α-synucléine</span> (<span class="tooltip-term" title="Inclusions intracellulaires pathologiques caractéristiques">corps de Lewy</span>) corticaux et sous-corticaux</p>
+
+<p><strong>Critères diagnostiques cliniques majeurs (consensus <span class="tooltip-term" title="Dementia with Lewy Bodies Consortium - Consortium international sur la démence à corps de Lewy">DLB Consortium</span>)</strong>:</p>
+
+<p><strong>Caractéristiques cliniques cardinales</strong>:</p>
+<ul class="list-disc pl-5">
+  <li><strong>Fluctuations cognitives</strong> (variabilité vigilance / attention)</li>
+  <li><strong>Hallucinations visuelles récurrentes</strong> (détaillées, bien formées)</li>
+  <li><strong>Syndrome parkinsonien spontané</strong></li>
+  <li>± <span class="tooltip-term" title="Trouble du Comportement en Sommeil Paradoxal - Comportements moteurs anormaux pendant les rêves">TCSP</span></li>
+</ul>
+
+<p><strong>Examens de soutien</strong>:</p>
+<ul class="list-disc pl-5">
+  <li><span class="tooltip-term" title="Dopamine Active Transporter Scan - Scintigraphie évaluant les transporteurs dopaminergiques">DAT-scan</span>: hypofixation striatale dopaminergique</li>
+  <li><span class="tooltip-term" title="Électroencéphalogramme - Enregistrement de l'activité électrique cérébrale">EEG</span>: ralentissement postérieur dominant</li>
+  <li><strong>IRM</strong>: relative préservation hippocampique vs Alzheimer</li>
+  <li><span class="tooltip-term" title="Meta-Iodo-Benzyl-Guanidine - Traceur évaluant l'innervation cardiaque sympathique">Scintigraphie MIBG</span> cardiaque ↓ (dysautonomie)</li>
+</ul>
+
+<p>👉 <strong>Diagnostic probable</strong> = ≥2 caractéristiques cardinales (ou 1 + biomarqueur de soutien)<br>
+👉 <strong>Diagnostic possible</strong> = 1 caractéristique cardinale sans biomarqueur</p>
+
+<p><strong>Clinique typique</strong>:</p>
+<ul class="list-disc pl-5">
+  <li><strong>Déclin cognitif fluctuant</strong> (attention/exécutif > mémoire)</li>
+  <li><strong>Hallucinations visuelles précoces</strong>, illusions, <span class="tooltip-term" title="Confusion des perceptions sensorielles (ex: voir des sons, entendre des couleurs)">synesthésies</span></li>
+  <li><strong>Parkinsonisme modéré</strong> (akinésie, rigidité, marche à petits pas)</li>
+  <li><strong>TCSP fréquent</strong> (rêves agités, comportements oniriques)</li>
+  <li><strong><span class="tooltip-term" title="Dysfonctionnement du système nerveux autonome (hypotension, troubles digestifs/urinaires)">Dysautonomie</span></strong>: <span class="tooltip-term" title="Baisse de tension en position debout, risque de chute">hypotension orthostatique</span>, constipation, troubles urinaires</li>
+  <li><strong>Hypersensibilité sévère aux neuroleptiques</strong> (confusion, <span class="tooltip-term" title="Urgence médicale: fièvre, rigidité, troubles conscience après neuroleptique">syndrome malin</span>)</li>
+</ul>
+
+<p><strong>Diagnostic différentiel</strong>:</p>
+<ul class="list-disc pl-5">
+  <li><strong>Maladie d'Alzheimer</strong> (mémoire prédominante, hallucinations tardives)</li>
+  <li><strong>Maladie de Parkinson avec démence</strong>:
+    <ul class="list-disc pl-5 ml-3">
+      <li>Démence > 1 an après début parkinsonisme → <span class="tooltip-term" title="Maladie de Parkinson avec Démence">MP-D</span></li>
+      <li>Sinon → <span class="tooltip-term" title="Démence à Corps de Lewy">DCL</span></li>
+    </ul>
+  </li>
+  <li>Dégénérescence fronto-temporale</li>
+  <li>Démence vasculaire / causes métaboliques-toxiques</li>
+</ul>
+
+<p><strong>Bilan complémentaire</strong>:</p>
+<ul class="list-disc pl-5">
+  <li>Tests cognitifs: fluctuations, attention, fonctions exécutives, visuospatial</li>
+  <li>IRM cérébrale (exclure lésions secondaires)</li>
+  <li>DAT-scan / MIBG / EEG selon disponibilité et doute diagnostique</li>
+  <li>Bilan biologique standard (TSH, B12, syphilis, etc.)</li>
+</ul>
+
+<p><strong>Prise en charge thérapeutique</strong>:</p>
+
+<p><strong>A. Traitement cognitif</strong>:</p>
+<ul class="list-disc pl-5">
+  <li><span class="tooltip-term" title="Inhibiteurs de l'Acétylcholinestérase - Médicaments améliorant transmission cholinergique">Inhibiteurs de l'AChE</span> (donepezil, rivastigmine) → amélioration cognition & hallucinations</li>
+  <li><span class="tooltip-term" title="Antagoniste NMDA - Modulateur glutamatergique">Mémantine</span>: option complémentaire selon profil</li>
+</ul>
+
+<p><strong>B. Troubles parkinsoniens</strong>:</p>
+<ul class="list-disc pl-5">
+  <li><span class="tooltip-term" title="L-DOPA - Précurseur de la dopamine, traitement antiparkinsonien">Levodopa</span> à dose minimale efficace</li>
+  <li>⚠️ risque d'aggravation psychotique — titration prudente</li>
+</ul>
+
+<p><strong>C. Hallucinations / troubles du comportement</strong>:</p>
+<ul class="list-disc pl-5">
+  <li>Approche non pharmacologique prioritaire</li>
+  <li><strong>Éviter la plupart des neuroleptiques</strong></li>
+  <li>Si nécessaire: quetiapine ou clozapine (surveillance stricte)</li>
+</ul>
+
+<p><strong>D. TCSP</strong>:</p>
+<ul class="list-disc pl-5">
+  <li><span class="tooltip-term" title="Hormone régulant le sommeil">Mélatonine</span> ± <span class="tooltip-term" title="Benzodiazépine anticonvulsivante">clonazépam</span> (prudence chutes/somnolence)</li>
+</ul>
+
+<p><strong>E. Dysautonomie</strong>:</p>
+<ul class="list-disc pl-5">
+  <li>Prise en charge spécifique (hydratation, bas de contention, <span class="tooltip-term" title="Vasoconstricteur utilisé pour l'hypotension orthostatique">midodrine</span> selon cas)</li>
+</ul>
+
+<p><strong>Évolution</strong>:</p>
+<ul class="list-disc pl-5">
+  <li>Progression graduelle avec fluctuations persistantes</li>
+  <li>Déclin fonctionnel, chutes, complications autonomiques</li>
+  <li>Surmortalité liée aux complications motrices et cardio-respiratoires</li>
+</ul>
+
+<p><strong>Suivi et accompagnement</strong>:</p>
+<ul class="list-disc pl-5">
+  <li>Éducation patient-aidants — aménagement du domicile</li>
+  <li>Rééducation motrice / prévention des chutes</li>
+  <li>Réévaluation régulière cognitive, motrice et iatrogénie médicamenteuse</li>
+  <li>Coordination neuro-gériatrie / neurologie / psychiatrie</li>
+</ul>
+</div>`
+          }, 
           { code: "C10A03", name: "Démence vasculaire" }, 
           { 
             code: "C10A04", 
