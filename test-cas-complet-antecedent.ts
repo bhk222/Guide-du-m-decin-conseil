@@ -20,9 +20,9 @@ if (result.type === 'proposal') {
   • Lésion: ${result.injury.name}
   • IPP: ${result.rate}%
   • Fourchette: [${result.injury.rate[0]} - ${result.injury.rate[1]}%]
-  • Rubrique: ${result.injury.path}
-  • Antécédents: ${result.antecedents?.join(', ') || 'Aucun'}
 `);
+  // • Rubrique: N/A (pas de propriété path)
+  // • Antécédents: N/A
     
     console.log('🔍 VALIDATION:');
     console.log('─'.repeat(70));

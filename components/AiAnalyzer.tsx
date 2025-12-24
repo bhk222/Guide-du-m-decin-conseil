@@ -1528,8 +1528,8 @@ const keywordWeights: { [key: string]: number } = {
     'prono supination': 65, 'pseudarthrose scaphoide': 72,
     'tendons flechisseurs': 65, 'section tendons': 68,
     'amputation index': 85, 'amputation medius': 80, 'amputation annulaire': 78, 'amputation auriculaire': 78,
-    'ankylose pouce': 85, 'ankylose index': 82, 'ankylose medius': 78, 'ankylose annulaire': 75, 'ankylose auriculaire': 75,
-    'raideur pouce': 80, 'raideur index': 78, 'raideur medius': 75, 'raideur annulaire': 72, 'raideur auriculaire': 72,
+    'ankylose annulaire': 75, 'ankylose auriculaire': 75,
+    'raideur annulaire': 72, 'raideur auriculaire': 72,
     
     // 🧠 NERFS - Mots-clés spécifiques
     'nerf radial': 75, 'paralysie radiale': 75, 'main tombante': 70,
@@ -1631,7 +1631,7 @@ const keywordWeights: { [key: string]: number } = {
     'champ visuel reduit': 70, 'retrecissement champ visuel': 75, 'champ visuel ampute': 78,
     'diminution vision': 68, 'baisse acuite visuelle': 70, 'vision floue': 62,
     'cataracte bilaterale': 75, 'cataracte unilaterale': 70, 'cataracte deux yeux': 73,
-    'champ visuel': 60, 'retrecissement': 55, 'scotome': 55, 'hemianopsie': 55,
+    'scotome champ visuel': 55,
     'glaucome': 75, 'glaucome post-traumatique': 85, 'tension oculaire': 68, 'pression intraoculaire': 68,
     'uveite': 60, 'uveit': 55, 
     'retine': 55, 'decollement': 75, 
@@ -2175,7 +2175,6 @@ const synonymMap: { [key: string]: string } = {
     'rom': 'amplitude mouvement',
     'amp': 'amplitude',
     'rof': 'raideur',
-    'ipd': 'incapacite permanente partielle',
     'ipp': 'taux incapacite',
     'it': 'incapacite temporaire',
     
@@ -2355,7 +2354,6 @@ const synonymMap: { [key: string]: string } = {
     // Degrés de gravité et intensité
     'severe': 'grave',
     'important': 'grave',
-    'majeur': 'grave',
     'considerable': 'grave',
     'leger': 'faible',
     'minime': 'faible',
@@ -7421,8 +7419,7 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
                             `Context vérifié : <code>${rule.context}</code><br><br>` +
                             `📊 <strong>Taux IPP : ${rateValue}%</strong>`,
                         path: directMatch.path,
-                        injury: directMatch as Injury,
-                        preexisting: preexistingEarly
+                        injury: directMatch as Injury
                     };
                 }
             }

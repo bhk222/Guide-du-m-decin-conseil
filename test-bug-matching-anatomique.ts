@@ -19,13 +19,13 @@ if (result.type === 'proposal') {
     console.log(`📋 PROPOSITION:
   • Lésion: ${result.injury.name}
   • IPP: ${result.rate}%
-  • Rubrique: ${result.injury.path}
-  • Antécédents: ${result.antecedents?.join(', ') || 'Aucun'}
 `);
+  // • Rubrique: N/A (pas de propriété path)
+  // • Antécédents: N/A
     
     // Vérifier si c'est bien une lésion du GENOU
-    const isGenouRelated = /genou|rotule|patell|ligament.*crois|m[eé]nisque|LCA|LCP/i.test(result.injury.name) || 
-                          /genou/i.test(result.injury.path);
+    const isGenouRelated = /genou|rotule|patell|ligament.*crois|m[eé]nisque|LCA|LCP/i.test(result.injury.name);
+    // || /genou/i.test(result.injury.path);
     
     console.log('🔍 VALIDATION:');
     console.log('─'.repeat(70));

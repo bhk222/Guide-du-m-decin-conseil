@@ -313,7 +313,7 @@ export const NomenclatureGenerale: React.FC = () => {
                                 </div>
                                 <div className="text-center">
                                     <div className="text-2xl font-bold text-purple-600">
-                                        {Math.max(...Object.values(stats.categories))}
+                                        {Math.max(...Object.values(stats.categories) as number[])}
                                     </div>
                                     <div className="text-xs text-slate-600">Catégorie max</div>
                                 </div>
