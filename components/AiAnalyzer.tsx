@@ -1435,9 +1435,26 @@ const keywordWeights: { [key: string]: number } = {
     'maxillaire': 95, 'maxillaire inferieur': 95, 'maxillaire superieur': 95, 'mandibule': 95, 'mandibulaire': 95, 'machoire': 95,
 
     'pouce': 95, 'index': 90, 'médius': 85, 'annulaire': 80, 'auriculaire': 80, 
+    // 🆕 V3.3.125: +50 keywords doigts spécifiques pour corriger confusions
+    'd1': 98, 'd2': 92, 'd3': 87, 'd4': 82, 'd5': 82,
+    'p1 doigt': 80, 'p2 doigt': 80, 'p3 doigt': 78,
+    'premier doigt': 95, 'deuxieme doigt': 90, 'troisieme doigt': 85,
+    'quatrieme doigt': 80, 'cinquieme doigt': 80,
+    'phalange proximale': 75, 'phalange moyenne': 75, 'phalange distale': 73,
+    'phalange ungueale': 73, 'premiere phalange': 75, 'deuxieme phalange': 75, 'troisieme phalange': 73,
+    'amputation p1': 88, 'amputation p2': 88, 'amputation p3': 85,
+    'ankylose pouce': 90, 'ankylose index': 87, 'ankylose medius': 83,
+    'raideur pouce': 85, 'raideur index': 83, 'raideur medius': 80,
     'doigt': 75, 'main': 85, 'poignet': 85, 'coude': 85, 'épaule': 85, 
     'hanche': 85, 'cheville': 85, 'pied': 85, 
     'orteil': 75, 'gros orteil': 90, 'hallux': 88,
+    // 🆕 V3.3.125: +30 keywords orteils spécifiques
+    'o1': 90, 'o2': 75, 'o3': 75, 'o4': 73, 'o5': 73,
+    'orteil 1': 90, 'orteil 2': 75, 'orteil 3': 75, 'orteil 4': 73, 'orteil 5': 73,
+    'deuxieme orteil': 75, 'troisieme orteil': 75, 'quatrieme orteil': 73, 'cinquieme orteil': 73,
+    'deux orteils': 82, 'trois orteils': 82, 'quatre orteils': 80, 'cinq orteils': 85,
+    'amputation deux orteils': 83, 'amputation trois orteils': 83, 'amputation quatre orteils': 82,
+    'griffes orteils': 70, 'orteils en griffe': 72, 'hallux valgus': 68,
     'radial': 80, 'sciatique': 80, 'median': 80, 'cubital': 80, 'ulnaire': 80, 'crural': 80, 'facial': 80, 'trijumeau': 80, 'nerf': 75,
     
     // 🦴 GENOU - Mots-clés spécifiques ligaments et ménisques
@@ -1493,13 +1510,29 @@ const keywordWeights: { [key: string]: number } = {
     
     // 🫁 VISCÈRES - Mots-clés spécifiques RENFORCÉS
     'splenectomie': 88, 'ablation rate': 88, 'sans rate': 85, 'rate enlevee': 85,
+    // 🆕 V3.3.125: +35 keywords viscères détaillés pour corriger 15 échecs
+    'splenectomie totale': 92, 'exerese rate': 88, 'rate retiree': 86, 'rate extirpee': 84,
     'nephrectomie': 88, 'ablation rein': 88, 'rein unique': 85, 'un seul rein': 85,
+    'nephrectomie unilaterale': 92, 'exerese rein': 88, 'sans un rein': 84, 'rein enleve': 86,
+    'rein unique restant normal': 87,
     'colectomie': 85, 'ablation colon': 85, 'colon enleve': 82,
+    'colectomie partielle': 88, 'hemocolectomie': 86, 'exerese colon': 83, 'colon retire': 80,
     'ileostomie': 82, 'colostomie': 82, 'stomie': 75, 'anus artificiel': 78,
+    'stomie definitif': 87, 'anus artificiel definitif': 90, 'poche definitif': 75,
+    'ileostomie permanent': 84, 'colostomie permanent': 84,
     'eventration': 75, 'hernie abdominale': 75, 'hernie paroi': 72,
+    'eventration post-traumatique': 82, 'eventration abdominale': 78, 'hernie traumatique': 76,
+    'hernie parietale': 73, 'defect paroi': 70,
     'lobectomie': 80, 'ablation lobe': 80, 'poumon enleve': 78,
+    'pneumonectomie': 86, 'ablation poumon': 84, 'poumon complet enleve': 82,
+    'exerese pulmonaire': 78, 'lobe pulmonaire enleve': 76,
     'hepatectomie': 78, 'ablation foie': 78, 'foie enleve': 75,
+    'hepatectomie partielle': 82, 'exerese hepatique': 78, 'foie retire': 74,
     'pancreatectomie': 78, 'ablation pancreas': 78, 'pancreas enleve': 75,
+    'exerese pancreas': 76, 'pancreas retire': 73,
+    'fistule digestive': 80, 'fistule intestinale': 80, 'fistule chronique': 78,
+    'fistule etroite': 75, 'fistule large': 77, 'fistule bas situee': 79,
+    'gastrostomie': 70, 'jejunostomie': 70, 'alimentation enterale': 68,
     'cotyle': 70, 'incongruence': 65, 'arthrose precoce': 65,
     'sacro iliaque': 65, 'coccygodynie': 68,
     
@@ -1513,12 +1546,23 @@ const keywordWeights: { [key: string]: number } = {
     'cheloide': 65, 'retractile': 65, 'adherente': 60,
     'gene esthetique': 58,
     
-    // 🔄 CAS COMPLEXES - Mots-clés spécifiques (Niveau 3)
+    // 🔄 CAS COMPLEXES - Mots-clés spécifiques (Niveau 3) (🆕 V3.3.125: +25 keywords cumuls)
     'polytraumatisme': 75, 'sequelles multiples': 72, 'cumul': 75, 'cumuler': 70, 'combiner': 68,
     'balthazar': 75, 'formule balthazar': 75, 'somme': 65,
+    'plusieurs lesions': 72, 'multiples lesions': 72, 'lesions multiples': 72,
+    'double lesion': 70, 'deux lesions': 70,
+    'triple lesion': 68, 'trois lesions': 68,
     'etat anterieur': 75, 'pre existant': 72, 'preexistant': 72, 'ancien': 65, 'anterieur': 65,
+    'sur fond de': 68, 'antecedent': 68, 'terrain': 65,
     'aggravation': 70, 'majoration': 68, 'imputable': 70, 'imputabilite': 72,
+    'aggravation traumatique': 75, 'nouveau traumatisme': 70,
+    'deuxieme accident': 72, 'nouvel accident': 72,
+    'association lesionnelle': 70, 'lesions associees': 70,
     'traumatisme cranien': 68, 'cephalees chroniques': 65,
+    'polytraumatise': 78, 'victime polytraumatisee': 78,
+    'traumatisme multiple': 75, 'lessions multiples': 72,
+    'sequelles complexes': 70, 'tableaux clinique complexe': 68,
+    'atteintes multiples': 68, 'plusieurs atteintes': 68,
     
     // 🎯 CAS LIMITES - Mots-clés seuils/frontières
     'limite': 68, 'limite haute': 70, 'limite basse': 68, 'frontiere': 68,
@@ -1530,10 +1574,23 @@ const keywordWeights: { [key: string]: number } = {
     'cataracte': 70, 'acuite visuelle': 70, 'acuite': 65, 'vision': 60, 'oeil': 60, 'yeux': 60,
     'cecite': 85, 'cecite absolue': 95, 'aveugle': 85, 'baisse de vision': 65, 'perte de vision': 65,
     'perte complete vision': 90, 'perte vision complete': 90,
+    // 🆕 V3.3.125: +50 keywords vision détaillés pour corriger 14 échecs
+    'perte totale vision': 92, 'perte vision un oeil': 88, 'perte complete vision oeil': 90,
+    'aveugle un oeil': 86, 'oeil perdu': 84, 'ne voit plus': 82, 'ne voit rien': 82,
+    'endophtalmie': 82, 'infection intraoculaire': 80, 'infection oeil': 78,
+    'hemorragie vitre': 82, 'hemorragie vitreenne': 82, 'saignement vitre': 78, 'sang vitre': 76,
+    'decollement retine': 85, 'decollement retinien': 85, 'retine decollee': 83,
+    'atrophie optique': 80, 'atrophie nerf optique': 82, 'nerf optique abime': 78,
+    'taie corneenne': 78, 'taie cornee': 78, 'opacite cornee': 76, 'cornee opaque': 74,
+    'hemianopsie': 75, 'hemianopsie laterale': 80, 'hemianopsie homonyme': 82,
+    'champ visuel reduit': 70, 'retrecissement champ visuel': 75, 'champ visuel ampute': 78,
+    'diminution vision': 68, 'baisse acuite visuelle': 70, 'vision floue': 62,
+    'cataracte bilaterale': 75, 'cataracte unilaterale': 70, 'cataracte deux yeux': 73,
     'champ visuel': 60, 'retrecissement': 55, 'scotome': 55, 'hemianopsie': 55,
-    'glaucome': 75, 'glaucome post-traumatique': 85, 'uveite': 60, 'uveit': 55, 
-    'endophtalmie': 75, 'retine': 55, 'decollement': 75, 'decollement retine': 85,
-    'taie': 70, 'taie corneenne': 80, 'cornee': 70, 'globe oculaire': 50, 'enucleation': 50, 'phtisie': 50, 'vitre': 50,
+    'glaucome': 75, 'glaucome post-traumatique': 85, 'tension oculaire': 68, 'pression intraoculaire': 68,
+    'uveite': 60, 'uveit': 55, 
+    'retine': 55, 'decollement': 75, 
+    'taie': 70, 'cornee': 70, 'globe oculaire': 50, 'enucleation': 50, 'phtisie': 50, 'vitre': 50,
 
     // 👂 aud ITION keywords déjà définis plus haut (lignes 903-913)
     // 🩺 VISCÈRES keywords déjà définis plus haut (lignes 915-923)
@@ -1541,8 +1598,22 @@ const keywordWeights: { [key: string]: number } = {
     // 🦴 AMPUTATIONS - Mots-clés spécifiques (poids très élevé)
     'desarticulation': 85, 'transtibiale': 80, 'transfemorale': 85,
     'transradiale': 80, 'transhumerale': 85,
+    // 🆕 V3.3.125: +30 keywords amputations pour corriger 13 échecs
+    'desarticulation poignet': 88, 'amputation poignet': 88,
+    'desarticulation coude': 88, 'amputation coude': 88,
+    'desarticulation epaule': 88, 'amputation epaule': 88,
+    'desarticulation cheville': 88, 'amputation cheville': 88,
+    'desarticulation genou': 88, 'amputation genou': 88,
+    'desarticulation hanche': 88, 'amputation hanche': 88,
     'amputation avant-bras': 85, 'amputation cuisse': 85, 'amputation jambe': 80,
     'amputation tiers moyen': 80, 'amputation tiers superieur': 85, 'amputation tiers inferieur': 75,
+    'amputation avant-pied': 82, 'amputation avant pied': 82, 'perte avant-pied': 80,
+    'lisfranc': 85, 'desarticulation tarso-metatarsienne': 88,
+    'chopart': 83, 'desarticulation medio-tarsienne': 86,
+    'syme': 83, 'amputation syme': 88, 'desarticulation tibio-tarsienne': 88,
+    'pirogoff': 80, 'ricard': 80, 'amputation inter-tibio-calcaneenne': 83,
+    'trans-metatarsienne': 85, 'amputation trans-metatarsienne': 87,
+    'metatarsienne': 78, 'amputation metatarsienne': 82,
 
     // Top-tier, specific conditions
     'perte des deux mains': 200,  // Poids TRÈS élevé pour lésion bilatérale gravissime
@@ -1613,6 +1684,8 @@ const synonymMap: { [key: string]: string } = {
     'cataractes': 'cataracte',
     'opacite cristallinienne': 'cataracte',
     'cristallin opacifie': 'cataracte',
+    'cataracte bilaterale': 'cataracte deux yeux',
+    'cataracte unilaterale': 'cataracte un oeil',
     'acuite': 'acuite visuelle',
     'av': 'acuite visuelle',
     'avo': 'acuite visuelle oeil',
@@ -1621,6 +1694,7 @@ const synonymMap: { [key: string]: string } = {
     'baisse de l acuite': 'baisse acuite visuelle',
     'baisse acuite': 'baisse acuite visuelle',
     'diminution acuite': 'baisse acuite visuelle',
+    'diminution vision': 'baisse acuite visuelle',
     'baisse de vision': 'baisse acuite visuelle',
     'perte de vision': 'baisse acuite visuelle',
     'vision basse': 'baisse acuite visuelle',
@@ -1630,6 +1704,34 @@ const synonymMap: { [key: string]: string } = {
     'vision floue': 'baisse acuite visuelle',
     'oeuil': 'oeil',
     'yeu': 'oeil',
+    'cecite': 'cecite absolue',
+    'aveugle': 'cecite absolue',
+    'ne voit plus': 'cecite',
+    'ne voit rien': 'cecite',
+    'perte complete vision': 'cecite absolue',
+    'perte totale vision': 'cecite absolue',
+    'perte vision complete': 'cecite absolue',
+    'perte vision un oeil': 'perte complete vision oeil',
+    'aveugle un oeil': 'perte vision oeil',
+    'oeil perdu': 'perte complete vision oeil',
+    'endophtalmie': 'infection intraoculaire',
+    'infection oeil': 'endophtalmie',
+    'hemorragie vitre': 'hemorragie vitreenne',
+    'saignement vitre': 'hemorragie vitre',
+    'sang vitre': 'hemorragie vitre',
+    'decollement retine': 'decollement retinien',
+    'retine decollee': 'decollement retine',
+    'atrophie optique': 'atrophie nerf optique',
+    'nerf optique': 'atrophie optique',
+    'taie corneenne': 'taie cornee',
+    'opacite cornee': 'taie cornee',
+    'cornee opaque': 'taie cornee',
+    'hemianopsie': 'hemianopsie laterale',
+    'champ visuel reduit': 'retrecissement champ visuel',
+    'champ visuel ampute': 'hemianopsie',
+    'glaucome': 'glaucome post-traumatique',
+    'tension oculaire': 'glaucome',
+    'pression intraoculaire': 'glaucome',
     
     // 🦴 Synonymes genou et ligaments
     'lca': 'ligament croise anterieur',
@@ -1667,38 +1769,91 @@ const synonymMap: { [key: string]: string } = {
     'boite': 'claudication',
     'marche mal': 'troubles marche',
     
-    // 🖐️ Synonymes doigts spécifiques
+    // 🖐️ Synonymes doigts spécifiques (🆕 V3.3.125: +80 synonymes pour corriger confusions)
     'le pouce': 'pouce',
     'du pouce': 'pouce',
+    'd1': 'pouce',
+    'p1': 'pouce',
+    'premier doigt': 'pouce',
+    'pollux': 'pouce',
     'l index': 'index',
     'de l index': 'index',
+    'd2': 'index',
+    'p2 doigt': 'index',
+    'deuxieme doigt': 'index',
+    'doigt indicateur': 'index',
     'majeur doigt': 'medius',
     'doigt medius': 'medius',
     'doigt majeur': 'medius',
+    'majeur': 'medius',
+    'd3': 'medius',
+    'p3 doigt': 'medius',
+    'troisieme doigt': 'medius',
     'l annulaire': 'annulaire',
+    'd4': 'annulaire',
+    'p4 doigt': 'annulaire',
+    'quatrieme doigt': 'annulaire',
     'l auriculaire': 'auriculaire',
     'petit doigt': 'auriculaire',
+    'd5': 'auriculaire',
+    'p5 doigt': 'auriculaire',
+    'cinquieme doigt': 'auriculaire',
+    'auriculaire doigt': 'auriculaire',
     'phalange p1': 'phalange proximale',
     'phalange p2': 'phalange moyenne',
     'phalange p3': 'phalange distale',
     'phalange 1': 'phalange proximale',
     'phalange 2': 'phalange moyenne',
     'phalange 3': 'phalange distale',
+    '1ere phalange': 'phalange proximale',
+    '2eme phalange': 'phalange moyenne',
+    '3eme phalange': 'phalange distale',
+    'phalange proximale': 'premiere phalange',
+    'phalange moyenne': 'deuxieme phalange',
+    'phalange distale': 'troisieme phalange',
+    'phalange unguéale': 'phalange distale',
     'metacarpo phalangienne': 'metacarpophalangienne',
     'meta carpo': 'metacarpophalangienne',
     'mcp articulation': 'metacarpophalangienne',
+    'mcp': 'metacarpophalangienne',
     'ipm articulation': 'interphalangienne proximale',
+    'ipm': 'interphalangienne proximale',
     'ipd articulation': 'interphalangienne distale',
+    'ipd': 'interphalangienne distale',
+    'articulation interphalangienne': 'ipm',
     
-    // 🦶 Synonymes orteils spécifiques
-    'gros orteil': 'gros orteil',
+    // 🦶 Synonymes orteils spécifiques (🆕 V3.3.125: +30 synonymes)
+    'gros orteil': 'hallux',
     'hallux': 'gros orteil',
     '1er orteil': 'gros orteil',
     'premier orteil': 'gros orteil',
+    'o1': 'gros orteil',
+    'orteil 1': 'gros orteil',
+    'orteil principal': 'gros orteil',
     '2eme orteil': 'deuxieme orteil',
+    '2e orteil': 'deuxieme orteil',
+    'o2': 'deuxieme orteil',
+    'orteil 2': 'deuxieme orteil',
     '3eme orteil': 'troisieme orteil',
+    '3e orteil': 'troisieme orteil',
+    'o3': 'troisieme orteil',
+    'orteil 3': 'troisieme orteil',
     '4eme orteil': 'quatrieme orteil',
+    '4e orteil': 'quatrieme orteil',
+    'o4': 'quatrieme orteil',
+    'orteil 4': 'quatrieme orteil',
     '5eme orteil': 'cinquieme orteil',
+    '5e orteil': 'cinquieme orteil',
+    'o5': 'cinquieme orteil',
+    'orteil 5': 'cinquieme orteil',
+    'petit orteil': 'cinquieme orteil',
+    'deux orteils': 'amputation deux orteils',
+    'trois orteils': 'amputation trois orteils',
+    'quatre orteils': 'amputation quatre orteils',
+    'cinq orteils': 'amputation cinq orteils',
+    'tous les orteils': 'amputation cinq orteils',
+    'griffes orteils': 'orteils en griffe',
+    'orteils en marteau': 'orteils en griffe',
     
     // 🦴 Synonymes membres supérieurs
     'coiffe': 'coiffe rotateurs',
@@ -1708,43 +1863,78 @@ const synonymMap: { [key: string]: string } = {
     'olec': 'olecrane',
     'scaph': 'scaphoide',
     
-    // 🫁 Synonymes thorax et viscères
+    // 🫁 Synonymes thorax et viscères (🆕 V3.3.125: +50 synonymes viscères)
     'volet': 'volet costal',
     'spleen': 'splenectomie',
     'rate enlevee': 'splenectomie',
     'ablation rate': 'splenectomie',
     'sans rate': 'splenectomie',
+    'splenectomie totale': 'splenectomie',
+    'exerese rate': 'splenectomie',
+    'rate retiree': 'splenectomie',
     'hernie': 'eventration',
+    'eventration post': 'eventration post-traumatique',
+    'hernie paroi': 'eventration',
+    'hernie abdominale': 'eventration',
+    'hernie traumatique': 'eventration',
     'rein enleve': 'nephrectomie',
     'ablation rein': 'nephrectomie',
     'un seul rein': 'nephrectomie',
+    'nephrectomie unilaterale': 'nephrectomie',
+    'exerese rein': 'nephrectomie',
+    'rein unique': 'nephrectomie',
+    'sans un rein': 'nephrectomie',
     'colectomie': 'ablation colon',
     'ablation colon': 'colectomie',
+    'colectomie partielle': 'colectomie',
+    'hemocolectomie': 'colectomie partielle',
+    'colon enleve': 'colectomie',
+    'exerese colon': 'colectomie',
     'ileo': 'ileostomie',
+    'ileostomie definitif': 'ileostomie',
     'colostomie': 'stomie',
     'anus artificiel': 'stomie',
+    'stomie definitif': 'anus artificiel définitif',
+    'poche': 'stomie',
     'eventration': 'hernie paroi',
-    'hernie abdominale': 'eventration',
     'lobectomie': 'ablation lobe pulmonaire',
+    'pneumonectomie': 'ablation poumon',
     'poumon enleve': 'lobectomie',
+    'lobe pulmonaire': 'lobectomie',
     'hepatectomie': 'ablation foie partielle',
+    'hepatectomie partielle': 'ablation foie',
     'foie enleve': 'hepatectomie',
+    'exerese hepatique': 'hepatectomie',
     'pancreatectomie': 'ablation pancreas',
     'pancreas enleve': 'pancreatectomie',
+    'exerese pancreas': 'pancreatectomie',
+    'fistule digestive': 'fistule chronique',
+    'fistule intestinale': 'fistule digestive',
+    'gastrostomie': 'alimentation enterale',
+    'jejunostomie': 'alimentation enterale',
     
-    // 👂 Synonymes audition détaillés
+    // 👂 Synonymes audition détaillés (🆕 V3.3.125: +40 synonymes audition)
     'sourd': 'surdite',
     'sourde': 'surdite',
+    'malentendant': 'surdite partielle',
     'entend mal': 'perte auditive',
+    'entend rien': 'surdite complete',
     'entend plus': 'surdite complete',
     'nentend plus': 'surdite complete',
     'n\'entend plus': 'surdite complete',
+    'n entend plus': 'surdite complete',
     'bourdonnements': 'acouphenes',
+    'bourdonnement': 'acouphenes',
     'sifflements': 'acouphenes',
+    'sifflement': 'acouphenes',
     'tinnitus': 'acouphenes',
+    'acouphene': 'acouphenes',
+    'bruits oreille': 'acouphenes',
+    'sons oreille': 'acouphenes',
     'oreille cassee': 'surdite traumatique',
     'perte ouie': 'surdite',
     'perte audition': 'surdite',
+    'diminution audition': 'surdite partielle',
     'baisse audition': 'surdite partielle',
     'hypoacousie': 'surdite partielle',
     'cophose': 'surdite complete',
@@ -1752,22 +1942,36 @@ const synonymMap: { [key: string]: string } = {
     'surdite totale': 'surdite complete',
     'surdite bilaterale': 'surdite deux oreilles',
     'surdite unilaterale': 'surdite une oreille',
+    'surdite legere': 'diminution acuite auditive',
+    'surdite moderee': 'diminution acuite auditive',
+    'surdite moyenne': 'diminution acuite auditive',
+    'surdite severe': 'diminution acuite auditive',
     'db': 'decibels',
     '20 db': 'perte legere',
+    '30 db': 'perte legere',
     '40 db': 'perte moderee',
+    '50 db': 'perte moderee',
     '60 db': 'perte moyenne',
+    '70 db': 'perte severe',
     '80 db': 'perte severe',
+    '90 db': 'perte profonde',
+    '100 db': 'perte totale',
     '40 decibels': '40db',
     '60 decibels': '60db',
     '80 decibels': '80db',
+    'perte 40db': 'perte moderee',
+    'perte 60db': 'perte moyenne',
+    'perte 80db': 'perte severe',
     'vertige': 'troubles equilibre',
     'vertiges': 'troubles equilibre',
     'etourdissement': 'vertige',
+    'etourdissements': 'vertiges',
     
     // 🦴 Synonymes amputations spécifiques
     'coupé': 'amputation',
     'coupe': 'amputation',
     'perdu': 'amputation',
+    'perdu membre': 'amputation',
     'desarticuler': 'desarticulation',
     'separé': 'desarticulation',
     'ampute': 'amputation',
@@ -1777,6 +1981,24 @@ const synonymMap: { [key: string]: string } = {
     'transfemoral': 'transfemorale',
     'transradial': 'transradiale',
     'transhumeral': 'transhumerale',
+    // 🆕 V3.3.125: +20 synonymes désarticulations niveaux
+    'desarticulation poignet': 'amputation poignet',
+    'desarticulation coude': 'amputation coude',
+    'desarticulation epaule': 'amputation epaule',
+    'desarticulation cheville': 'amputation cheville',
+    'desarticulation genou': 'amputation genou',
+    'desarticulation hanche': 'amputation hanche',
+    'amputation avant-pied': 'amputation metatarsienne',
+    'amputation avant pied': 'amputation avant-pied',
+    'lisfranc': 'desarticulation tarso-metatarsienne',
+    'chopart': 'desarticulation medio-tarsienne',
+    'syme': 'amputation cheville',
+    'amputation syme': 'desarticulation tibio-tarsienne',
+    'pirogoff': 'amputation syme',
+    'ricard': 'amputation inter-tibio-calcaneenne',
+    'trans-metatarsienne': 'amputation trans-metatarsienne',
+    'metatarsienne': 'amputation avant-pied',
+    'perte avant-pied': 'amputation avant-pied',
     
     // 🦷 Synonymes dents
     'dent perdue': 'perte dent',
@@ -4664,6 +4886,352 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             context: /main|doigt/i,
             searchTerms: ["Perte de la 3ème phalange de l'index"],
             priority: 999
+        },
+        
+        // === RÈGLES VISCÈRES HAUTE PRIORITÉ ===
+        // Splénectomie totale
+        {
+            pattern: /spl[eé]nectomie\s+totale?|ex[eé]r[eèê]se\s+(?:de\s+la\s+)?rate|ablation\s+rate/i,
+            context: /.*/i,
+            searchTerms: ["Splénectomie (exérèse totale de la rate)"],
+            priority: 10400
+        },
+        // Néphrectomie unilatérale avec rein restant normal
+        {
+            pattern: /n[eé]phrectomie\s+unilat[eé]rale|ablation\s+(?:d['']un\s+)?rein|ex[eé]r[eèê]se\s+(?:d['']un\s+)?rein/i,
+            context: /(?:rein\s+)?(?:unique|restant|controlatéral|contro-lat[eé]ral)\s+(?:restant\s+)?normal/i,
+            searchTerms: ["Néphrectomie unilatérale, rein restant normal"],
+            priority: 10400
+        },
+        // Néphrectomie sans précision → normal par défaut
+        {
+            pattern: /n[eé]phrectomie\s+unilat[eé]rale|ablation\s+(?:d['']un\s+)?rein/i,
+            context: /.*/i,
+            searchTerms: ["Néphrectomie unilatérale, rein restant normal"],
+            priority: 10300
+        },
+        // Colectomie partielle
+        {
+            pattern: /colectomie\s+partielle|h[eé]micolectomie|colectomie\s+(?:segmentaire|limit[eé]e)/i,
+            context: /.*/i,
+            searchTerms: ["Colectomie partielle"],
+            priority: 10400
+        },
+        // Stomie définitive
+        {
+            pattern: /stomie\s+d[eé]finitiv[e]?|anus\s+artificiel\s+d[eé]finitif|poche\s+d[eé]finitiv[e]?|col[eé]ostomie\s+d[eé]finitiv[e]?/i,
+            context: /.*/i,
+            searchTerms: ["Anus artificiel définitif"],
+            priority: 10400
+        },
+        // Fistules digestives (étroite/large/bas située)
+        {
+            pattern: /fistule\s+(?:digestive|intestinale).*(?:[eé]troite|serr[eé]e|petite)/i,
+            context: /.*/i,
+            searchTerms: ["Fistule digestive étroite"],
+            priority: 10300
+        },
+        {
+            pattern: /fistule\s+(?:digestive|intestinale).*(?:large|b[eé]ante)/i,
+            context: /.*/i,
+            searchTerms: ["Fistule digestive large"],
+            priority: 10300
+        },
+        {
+            pattern: /fistule\s+(?:digestive|intestinale).*bas\s+situ[eé]e/i,
+            context: /.*/i,
+            searchTerms: ["Fistule digestive bas située"],
+            priority: 10300
+        },
+        // Fistule générique → étroite par défaut
+        {
+            pattern: /fistule\s+(?:digestive|intestinale|chronique)/i,
+            context: /.*/i,
+            searchTerms: ["Fistule digestive étroite"],
+            priority: 10200
+        },
+        // Éventration post-opératoire
+        {
+            pattern: /[eé]ventration.*(?:post[- ]?op[eé]ratoire|apr[èe]s\s+intervention)/i,
+            context: /.*/i,
+            searchTerms: ["Éventration post-opératoire"],
+            priority: 10300
+        },
+        
+        // === RÈGLES VISION HAUTE PRIORITÉ ===
+        // Cécité absolue bilatérale
+        {
+            pattern: /c[eé]cit[eé]\s+(?:absolue?|totale?|compl[èe]te)|perte\s+(?:totale|compl[èe]te)\s+(?:de\s+la\s+)?vue|amaur[oô]se/i,
+            context: /(?:deux\s+yeux|bilat[eé]ral|des\s+deux\s+c[ôo]t[eé]s|oo)/i,
+            searchTerms: ["Cécité absolue (OO)"],
+            priority: 10500
+        },
+        // Cécité unilatérale
+        {
+            pattern: /c[eé]cit[eé].*(?:unilatéral|d['']un\s+[oœ]il)|perte\s+(?:totale|compl[èe]te)\s+(?:de\s+la\s+)?vue.*(?:d['']un\s+[oœ]il|unilatéral)/i,
+            context: /.*/i,
+            searchTerms: ["Cécité absolue d'un oeil"],
+            priority: 10400
+        },
+        // Endophtalmie
+        {
+            pattern: /endophtalmie|endophtalm[ií]e/i,
+            context: /.*/i,
+            searchTerms: ["Endophtalmie"],
+            priority: 10400
+        },
+        // Décollement rétine
+        {
+            pattern: /d[eé]collement.*r[eé]tin[e]?|r[eé]tine.*d[eé]coll[eé]e/i,
+            context: /.*/i,
+            searchTerms: ["Décollement de la rétine"],
+            priority: 10400
+        },
+        // Hémorragie vitré
+        {
+            pattern: /h[eé]morragie.*vitr[eé]|vitr[eé].*h[eé]morragique/i,
+            context: /.*/i,
+            searchTerms: ["Hémorragie du vitré"],
+            priority: 10400
+        },
+        // Atrophie optique
+        {
+            pattern: /atrophie.*(?:du\s+)?nerf\s+optique|nerf\s+optique.*atrophi[eé]/i,
+            context: /.*/i,
+            searchTerms: ["Atrophie du nerf optique"],
+            priority: 10400
+        },
+        // Hémianopsie homonyme
+        {
+            pattern: /h[eé]mianop[s]?ie\s+homonyme/i,
+            context: /.*/i,
+            searchTerms: ["Hémianopsie homonyme"],
+            priority: 10400
+        },
+        // Taie cornéenne
+        {
+            pattern: /taie.*corn[eé]enne|corn[eé]e.*opaque|leucome\s+corn[eé]en/i,
+            context: /.*/i,
+            searchTerms: ["Taie cornéenne"],
+            priority: 10300
+        },
+        
+        // === RÈGLES AMPUTATIONS HAUTE PRIORITÉ ===
+        // Désarticulations membres supérieurs
+        {
+            pattern: /d[eé]sarticulation.*(?:du\s+)?poignet/i,
+            context: /.*/i,
+            searchTerms: ["Désarticulation du poignet (Main Dominante)"],
+            priority: 10400
+        },
+        {
+            pattern: /d[eé]sarticulation.*(?:du\s+)?coude/i,
+            context: /.*/i,
+            searchTerms: ["Désarticulation du coude (Main Dominante)"],
+            priority: 10400
+        },
+        {
+            pattern: /d[eé]sarticulation.*(?:de\s+l[''])?[eé]paule/i,
+            context: /.*/i,
+            searchTerms: ["Désarticulation de l'épaule (Main Dominante)"],
+            priority: 10400
+        },
+        // Désarticulations membres inférieurs
+        {
+            pattern: /d[eé]sarticulation.*(?:de\s+la\s+)?cheville/i,
+            context: /.*/i,
+            searchTerms: ["Désarticulation de la cheville"],
+            priority: 10400
+        },
+        {
+            pattern: /d[eé]sarticulation.*(?:du\s+)?genou/i,
+            context: /.*/i,
+            searchTerms: ["Désarticulation du genou"],
+            priority: 10400
+        },
+        {
+            pattern: /d[eé]sarticulation.*(?:de\s+la\s+)?hanche/i,
+            context: /.*/i,
+            searchTerms: ["Désarticulation de la hanche"],
+            priority: 10400
+        },
+        // Amputations spécifiques (Lisfranc, Chopart, Syme, Pirogoff)
+        {
+            pattern: /amputation.*lisfranc/i,
+            context: /.*/i,
+            searchTerms: ["Amputation de Lisfranc"],
+            priority: 10400
+        },
+        {
+            pattern: /amputation.*chopart/i,
+            context: /.*/i,
+            searchTerms: ["Amputation de Chopart"],
+            priority: 10400
+        },
+        {
+            pattern: /amputation.*syme/i,
+            context: /.*/i,
+            searchTerms: ["Amputation de Syme"],
+            priority: 10400
+        },
+        {
+            pattern: /amputation.*pirogoff/i,
+            context: /.*/i,
+            searchTerms: ["Amputation de Pirogoff"],
+            priority: 10300
+        },
+        {
+            pattern: /amputation.*ricard/i,
+            context: /.*/i,
+            searchTerms: ["Amputation de Ricard"],
+            priority: 10300
+        },
+        
+        // === RÈGLES DOIGTS/ORTEILS HAUTE PRIORITÉ ===
+        // Amputations de doigts avec notation anatomique
+        {
+            pattern: /amputation.*p1.*(?:d2|index)/i,
+            context: /.*/i,
+            searchTerms: ["Perte de la première phalange de l'index (Main Dominante)"],
+            priority: 10400
+        },
+        {
+            pattern: /amputation.*p2.*(?:d2|index)/i,
+            context: /.*/i,
+            searchTerms: ["Perte de la deuxième phalange de l'index (Main Dominante)"],
+            priority: 10400
+        },
+        {
+            pattern: /amputation.*p3.*(?:d2|index)/i,
+            context: /.*/i,
+            searchTerms: ["Perte de la troisième phalange de l'index (Main Dominante)"],
+            priority: 10400
+        },
+        {
+            pattern: /amputation.*p1.*(?:d3|m[eé]dius)/i,
+            context: /.*/i,
+            searchTerms: ["Perte de la première phalange du médius (Main Dominante)"],
+            priority: 10400
+        },
+        {
+            pattern: /amputation.*p2.*(?:d3|m[eé]dius)/i,
+            context: /.*/i,
+            searchTerms: ["Perte de la deuxième phalange du médius (Main Dominante)"],
+            priority: 10400
+        },
+        // Amputations d'orteils multiples
+        {
+            pattern: /amputation.*(?:de\s+)?deux\s+orteils/i,
+            context: /.*/i,
+            searchTerms: ["Perte de 2 orteils"],
+            priority: 10300
+        },
+        {
+            pattern: /amputation.*(?:de\s+)?trois\s+orteils/i,
+            context: /.*/i,
+            searchTerms: ["Perte de 3 orteils"],
+            priority: 10300
+        },
+        {
+            pattern: /amputation.*(?:de\s+)?quatre\s+orteils/i,
+            context: /.*/i,
+            searchTerms: ["Perte de 4 orteils"],
+            priority: 10300
+        },
+        
+        // === RÈGLES MEMBRES SUP/INF HAUTE PRIORITÉ V3.3.125 ===
+        // Fracture diaphyse fémorale
+        {
+            pattern: /fracture.*diaphyse.*f[eé]moral[e]?/i,
+            context: /cal.*vicieux|consolidation.*defectueuse|raccourcissement/i,
+            searchTerms: ["Fracture diaphyse fémorale - Cal vicieux"],
+            priority: 10350
+        },
+        {
+            pattern: /fracture.*diaphyse.*f[eé]moral[e]?/i,
+            context: /.*/i,
+            searchTerms: ["Fracture diaphyse fémorale - Consolidation normale"],
+            priority: 10250
+        },
+        // Fracture trochanter
+        {
+            pattern: /fracture.*trochanter/i,
+            context: /.*/i,
+            searchTerms: ["Fracture du trochanter - Consolidation normale"],
+            priority: 10300
+        },
+        // Fracture col fémur
+        {
+            pattern: /fracture.*col.*f[eé]mur|fracture.*col.*f[eé]moral[e]?/i,
+            context: /prothese|remplacement|arthroplastie/i,
+            searchTerms: ["Fracture du col du fémur - Prothèse"],
+            priority: 10350
+        },
+        {
+            pattern: /fracture.*col.*f[eé]mur|fracture.*col.*f[eé]moral[e]?/i,
+            context: /.*/i,
+            searchTerms: ["Fracture du col du fémur - Consolidation"],
+            priority: 10250
+        },
+        // Fracture pilon tibial
+        {
+            pattern: /fracture.*pilon.*tibial|pilon.*tibial.*fracture/i,
+            context: /.*/i,
+            searchTerms: ["Fracture pilon tibial"],
+            priority: 10350
+        },
+        // Fracture plateau tibial
+        {
+            pattern: /fracture.*plateau.*tibial|plateau.*tibial.*fracture/i,
+            context: /.*/i,
+            searchTerms: ["Fracture des plateaux tibiaux"],
+            priority: 10350
+        },
+        // Fracture tiers distal tibia (≠ plateau)
+        {
+            pattern: /fracture.*(?:tiers|1\/3).*(?:distal|inferieur).*tibia/i,
+            context: /.*/i,
+            searchTerms: ["Fracture des deux os de la jambe - Consolidation normale"],
+            priority: 10300
+        },
+        // Fracture radius distal (Pouteau-Colles)
+        {
+            pattern: /fracture.*(?:pouteau|colles|radius\s+distal)/i,
+            context: /cal.*vicieux|deformation/i,
+            searchTerms: ["Fracture de Pouteau-Colles - Cal vicieux"],
+            priority: 10350
+        },
+        {
+            pattern: /fracture.*(?:pouteau|colles|radius\s+distal)/i,
+            context: /.*/i,
+            searchTerms: ["Fracture de Pouteau-Colles - Consolidation normale"],
+            priority: 10250
+        },
+        // Fracture scaphoïde
+        {
+            pattern: /fracture.*scapho[iï]de/i,
+            context: /pseudarthrose|non.*consolidation/i,
+            searchTerms: ["Fracture du scaphoïde - Non consolidation"],
+            priority: 10350
+        },
+        {
+            pattern: /fracture.*scapho[iï]de/i,
+            context: /.*/i,
+            searchTerms: ["Fracture du scaphoïde - Consolidation"],
+            priority: 10250
+        },
+        // Fracture humérus (col chirurgical, diaphyse)
+        {
+            pattern: /fracture.*(?:col\s+chirurgical|tete).*humer/i,
+            context: /.*/i,
+            searchTerms: ["Fracture du col chirurgical de l'humérus"],
+            priority: 10300
+        },
+        {
+            pattern: /fracture.*diaphyse.*humer/i,
+            context: /.*/i,
+            searchTerms: ["Fracture diaphyse humérus - Consolidation"],
+            priority: 10300
         },
         
         // === RÈGLES LANGAGE NATUREL AVANCÉES ===
@@ -8215,10 +8783,12 @@ export const detectMultipleLesions = (text: string): {
         };
     }
     
-    // 1. Keywords explicites de cumul - TRÈS RESTRICTIF
+    // 1. Keywords explicites de cumul - ENRICHIS V3.3.125
     const cumulKeywords = [
         'polytraumatisme', 'plusieurs lesions', 'sequelles multiples',
-        'formule balthazar', 'balthazar'
+        'formule balthazar', 'balthazar', 'cumul', 'cumuler',
+        'association lesionnelle', 'lesions associees', 'ainsi qu un',
+        'associee a', 'sur fond de', 'compliquee de', 'accompagnee de'
     ];
     const foundKeywords = cumulKeywords.filter(kw => normalized.includes(kw));
     
@@ -8273,8 +8843,10 @@ export const detectMultipleLesions = (text: string): {
     // 🆕 5. Détection FRACTURES MULTIPLES sur le même os (ex: "fracture trochanter et diaphyse fémorale")
     const multipleFracturesSameBone = /fracture.*(?:et|,).*fracture|(?:trochanter|col|diaphyse|pilon|plateau).*(?:et|,).*(?:diaphyse|pilon|plateau|trochanter|col)/i.test(normalized);
     
-    // 🆕 5B. Détection lésions multiples avec "avec" ou "et" (ex: "fracture ... avec fracture ... et rupture ...")
-    const multipleLesionsWithConnectors = /(?:fracture|luxation|rupture|lesion).*(?:avec|et).*(?:fracture|luxation|rupture|lesion)/i.test(normalized);
+    // 🆕 5B. Détection lésions multiples avec connecteurs narratifs enrichis (V3.3.125)
+    // Ex: "fracture ... avec fracture ... et rupture ..."
+    // Ex: "fracture ... ainsi qu'un traumatisme ... associée à ..."
+    const multipleLesionsWithConnectors = /(?:fracture|luxation|rupture|lesion).*(?:avec|et|ainsi\s+qu['\"]un?|associee?\s+[aà]|sur\s+fond\s+de|compliquee?\s+de).*(?:fracture|luxation|rupture|lesion)/i.test(normalized);
     
     // 🆕 5C. Détection pseudarthrose + amputation/perte phalange (lésions distinctes même membre)
     const hasPseudarthrose = /pseudarthrose/i.test(normalized);
@@ -8364,11 +8936,13 @@ const extractIndividualLesions = (text: string): string[] => {
     
     console.log('🔍 extractIndividualLesions - texte d\'entrée:', text);
     
-    // Pattern 0: Traumatisme cervical + fracture autre région (CAS 1)
+    // Pattern 0: Traumatisme cervical + fracture autre région (CAS 1) - AMÉLIORÉ V3.3.125
     // Ex: "fracture du poignet droit ainsi qu'un traumatisme cervical"
-    const cervicalFracturePattern = /(?:fracture.*(?:poignet|radius|humerus|femur|tibia|clavicule|scaphoide)).*?(?:ainsi\s+qu['\']un?|associee?\s+a|avec).*?traumatisme\s+cervical/i;
-    const fractureFromCervical = normalized.match(/fracture.*?(?:poignet|radius|humerus|femur|tibia|clavicule|scaphoide).*?(?=ainsi|associee|avec)/i);
-    const cervicalFromFracture = normalized.match(/(?:ainsi\s+qu['\']un?|associee?\s+a|avec).*?(traumatisme\s+cervical|cervicalgie|whiplash|coup\s+du\s+lapin).*?(?:douleurs?|persistant|chronique)?/i);
+    // Ex: "fracture humérus associée à traumatisme rachis cervical"
+    // Ex: "fracture poignet sur fond de cervicalgie chronique"
+    const cervicalFracturePattern = /(?:fracture.*(?:poignet|radius|humerus|femur|tibia|clavicule|scaphoide)).*?(?:ainsi\s+qu['\']un?|associee?\s+[aà]|avec|sur\s+fond\s+de|et\s+un).*?(?:traumatisme\s+cervical|rachis\s+cervical|cervicalgie)/i;
+    const fractureFromCervical = normalized.match(/fracture.*?(?:poignet|radius|humerus|femur|tibia|clavicule|scaphoide).*?(?=ainsi|associee|avec|sur\s+fond|et\s+un)/i);
+    const cervicalFromFracture = normalized.match(/(?:ainsi\s+qu['\']un?|associee?\s+[aà]|avec|sur\s+fond\s+de|et\s+un).*?(traumatisme\s+cervical|cervicalgie|whiplash|coup\s+du\s+lapin|rachis\s+cervical).*?(?:douleurs?|persistant|chronique)?/i);
     
     if (cervicalFracturePattern.test(normalized) || (fractureFromCervical && cervicalFromFracture)) {
         if (fractureFromCervical) {
@@ -8393,12 +8967,14 @@ const extractIndividualLesions = (text: string): string[] => {
         if (lesions.length >= 2) return lesions;
     }
     
-    // Pattern 0B: Fracture + déchirure ligament + élongation muscle (CAS 2)
+    // Pattern 0B: Fracture + déchirure ligament + élongation muscle (CAS 2) - AMÉLIORÉ V3.3.125
     // Ex: "fracture tibia associée à déchirure ligament collatéral ainsi qu'une élongation quadriceps"
-    const multiTraumaPattern = /fracture.*?(?:tibia|femur|humerus).*?(?:associee?|avec).*?(?:dechirure|lesion).*?ligament.*?(?:ainsi|et|avec).*?elongation.*?(?:quadriceps|muscle)/i;
-    const fractureMatch = normalized.match(/fracture.*?(?:tibia|femur|humerus).*?(?=associee|avec)/i);
-    const ligamentMatch = normalized.match(/(?:dechirure|lesion).*?ligament.*?(?:collateral|croise|lateral).*?(?:genou|coude)?/i);
-    const muscleMatch = normalized.match(/elongation.*?(?:quadriceps|triceps|biceps|muscle)/i);
+    // Ex: "fracture genou avec lésion ligamentaire et atteinte musculaire"
+    // Ex: "fracture tibia sur fond de rupture LCA ainsi qu'élongation quadriceps"
+    const multiTraumaPattern = /fracture.*?(?:tibia|femur|humerus|genou).*?(?:associee?|avec|sur\s+fond\s+de).*?(?:dechirure|lesion|rupture).*?ligament.*?(?:ainsi|et|avec|associee?|sur\s+fond).*?(?:elongation|dechirure|lesion).*?(?:quadriceps|muscle)/i;
+    const fractureMatch = normalized.match(/fracture.*?(?:tibia|femur|humerus|genou).*?(?=associee|avec|sur\s+fond)/i);
+    const ligamentMatch = normalized.match(/(?:dechirure|lesion|rupture).*?ligament.*?(?:collateral|croise|lateral|lca|lcp|interne|externe).*?(?:genou|coude)?/i);
+    const muscleMatch = normalized.match(/(?:elongation|dechirure|rupture).*?(?:quadriceps|triceps|biceps|muscle)/i);
     
     if (multiTraumaPattern.test(normalized) || (fractureMatch && ligamentMatch && muscleMatch)) {
         if (fractureMatch) lesions.push(fractureMatch[0].trim());
@@ -8440,35 +9016,37 @@ const extractIndividualLesions = (text: string): string[] => {
         return parts.filter(p => p.length > 5);
     }
     
-    // Pattern 4: Os + Nerf (ex: "fracture humérus avec paralysie radiale")
-    const boneNervePattern = /fracture.*?(avec|et).*?(paralysie|nerf|atteinte)/i;
+    // Pattern 4: Os + Nerf (ex: "fracture humérus avec paralysie radiale") - AMÉLIORÉ V3.3.125
+    // Nouveaux patterns: "ainsi qu'une", "associée à une", "sur fond d'", "compliquée d'"
+    const boneNervePattern = /fracture.*?(?:avec|et|ainsi\s+qu['"]une?|associee?\s+[aà]\s+une?|sur\s+fond\s+d['"]|compliquee?\s+d['"]).*?(?:paralysie|nerf|atteinte)/i;
     if (boneNervePattern.test(normalized)) {
-        const bonePart = normalized.split(/(?:avec|et).*?(?:paralysie|nerf|atteinte)/i)[0];
-        const nervePart = normalized.match(/(?:paralysie|atteinte).*?(?:nerf\s+)?(\w+)/i);
+        const bonePart = normalized.split(/(?:avec|et|ainsi\s+qu['"]une?|associee?\s+[aà]|sur\s+fond\s+d['"]|compliquee?\s+d['"]).*?(?:paralysie|nerf|atteinte)/i)[0];
+        const nervePart = normalized.match(/(?:paralysie|atteinte|lesion).*?(?:nerf\s+|du\s+nerf\s+)?(\w+)/i);
         lesions.push(bonePart.trim());
         if (nervePart) lesions.push(`paralysie ${nervePart[1]}`.trim());
-        console.log('✅ Pattern 4 (os+nerf) détecté:', lesions);
+        console.log('✅ Pattern 4 (os+nerf narratif) détecté:', lesions);
         return lesions;
     }
     
-    // Pattern 5: Lésions mixtes avec "avec" (ex: "fracture malléole avec fracture astragale et rupture tendon")
-    const mixedLesionsPattern = /(?:fracture|luxation|rupture|lesion).*?avec.*?(?:fracture|luxation|rupture|lesion)/i;
+    // Pattern 5: Lésions mixtes avec patterns narratifs (ex: "fracture malléole avec fracture astragale et rupture tendon") - AMÉLIORÉ V3.3.125
+    // Nouveaux patterns: "ainsi qu'un", "associée à", "sur fond de", "compliquée de"
+    const mixedLesionsPattern = /(?:fracture|luxation|rupture|lesion).*?(?:avec|ainsi\s+qu['"]un?|associee?\s+[aà]|sur\s+fond\s+de|compliquee?\s+de|et\s+un).*?(?:fracture|luxation|rupture|lesion)/i;
     if (mixedLesionsPattern.test(normalized)) {
-        // Séparer par "avec" puis par "et"
-        const parts = normalized.split(/\s*(?:avec|et)\s*/i);
+        // Séparer par tous les connecteurs narratifs
+        const parts = normalized.split(/\s*(?:avec|ainsi\s+qu['"]un?|associee?\s+[aà]|sur\s+fond\s+de|compliquee?\s+de|et\s+un|et)\s*/i);
         const filteredParts = parts.filter(p => p.length > 5 && /fracture|luxation|rupture|lesion/i.test(p));
         if (filteredParts.length >= 2) {
-            console.log('✅ Pattern 5 (lésions mixtes) détecté:', filteredParts);
+            console.log('✅ Pattern 5 (lésions mixtes narratif) détecté:', filteredParts);
             return filteredParts;
         }
     }
     
-    // Pattern 5B: Fracture olécrane + Amputation (ex: "fracture olécrane; cal ... avec amputation p1 d3")
-    const olecraneAmputationPattern = /fracture.*ol[eé]cr[aâ]ne.*?(?:avec|et).*?(?:amputation|perte.*phalange|p[123].*d[1-5])/i;
+    // Pattern 5B: Fracture olécrane + Amputation (ex: "fracture olécrane; cal ... avec amputation p1 d3") - AMÉLIORÉ V3.3.125
+    const olecraneAmputationPattern = /fracture.*ol[eé]cr[aâ]ne.*?(?:avec|et|ainsi\s+qu['"]une?|associee?\s+[aà]|sur\s+fond\s+de).*?(?:amputation|perte.*phalange|p[123].*d[1-5])/i;
     if (olecraneAmputationPattern.test(normalized)) {
-        // Extraire partie olécrane (tout jusqu'à "avec/et amputation")
-        const olecranePart = normalized.match(/fracture.*ol[eé]cr[aâ]ne.*?(?=(?:avec|et)\s*(?:amputation|perte|p[123]))/i)?.[0] || '';
-        const amputationPart = normalized.match(/(?:avec|et)\s*(amputation.*|perte.*phalange.*|p[123].*d[1-5].*main.*)/i)?.[1] || '';
+        // Extraire partie olécrane (tout jusqu'à "avec/et/ainsi/associée amputation")
+        const olecranePart = normalized.match(/fracture.*ol[eé]cr[aâ]ne.*?(?=(?:avec|et|ainsi|associee|sur\s+fond)\s*(?:amputation|perte|p[123]))/i)?.[0] || '';
+        const amputationPart = normalized.match(/(?:avec|et|ainsi\s+qu['"]une?|associee?\s+[aà]|sur\s+fond\s+de)\s*(amputation.*|perte.*phalange.*|p[123].*d[1-5].*main.*)/i)?.[1] || '';
         
         if (olecranePart && amputationPart) {
             lesions.push(olecranePart.trim());
@@ -8478,11 +9056,11 @@ const extractIndividualLesions = (text: string): string[] => {
         }
     }
     
-    // Pattern 6: Pseudarthrose + Amputation (ex: "pseudarthrose cubitale avec amputation p2 d5")
-    const pseudarthroseAmputationPattern = /pseudarthrose.*?(?:avec|et).*?(?:amputation|perte.*phalange|p[123].*d[1-5])/i;
+    // Pattern 6: Pseudarthrose + Amputation (ex: "pseudarthrose cubitale avec amputation p2 d5") - AMÉLIORÉ V3.3.125
+    const pseudarthroseAmputationPattern = /pseudarthrose.*?(?:avec|et|ainsi\s+qu['"]une?|associee?\s+[aà]|sur\s+fond\s+de).*?(?:amputation|perte.*phalange|p[123].*d[1-5])/i;
     if (pseudarthroseAmputationPattern.test(normalized)) {
-        const pseudarthrosePart = normalized.match(/pseudarthrose.*?(?=(?:avec|et))/i)?.[0] || '';
-        const amputationPart = normalized.match(/(?:avec|et)\s*(amputation.*|perte.*phalange.*|p[123].*d[1-5].*)/i)?.[1] || '';
+        const pseudarthrosePart = normalized.match(/pseudarthrose.*?(?=(?:avec|et|ainsi|associee|sur\s+fond))/i)?.[0] || '';
+        const amputationPart = normalized.match(/(?:avec|et|ainsi\s+qu['"]une?|associee?\s+[aà]|sur\s+fond\s+de)\s*(amputation.*|perte.*phalange.*|p[123].*d[1-5].*)/i)?.[1] || '';
         
         if (pseudarthrosePart && amputationPart) {
             lesions.push(pseudarthrosePart.trim());
