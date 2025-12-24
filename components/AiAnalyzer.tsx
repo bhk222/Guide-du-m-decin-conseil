@@ -6419,6 +6419,31 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
         },
 
         // 🆕 V3.3.127: ABLATIONS PARTIELLES DES DOIGTS (selon barème officiel Fig. 9-12)
+        // 🆕 V3.3.129: Patterns prioritaires pour notation médicale exacte "P3 D[2-5]"
+        {
+            pattern: /(?:ablation|amputation).*\bP3\s+D2\b/i,
+            context: /doigt|main/i,
+            searchTerms: ['Ablation phalange unguéale de l\'index (Main Dominante)', 'Ablation phalange unguéale de l\'index (Main Non Dominante)'],
+            priority: 16000  // Priorité maximale pour notation exacte
+        },
+        {
+            pattern: /(?:ablation|amputation).*\bP3\s+D3\b/i,
+            context: /doigt|main/i,
+            searchTerms: ['Ablation phalange unguéale du médius (Main Dominante)', 'Ablation phalange unguéale du médius (Main Non Dominante)'],
+            priority: 16000
+        },
+        {
+            pattern: /(?:ablation|amputation).*\bP3\s+D4\b/i,
+            context: /doigt|main/i,
+            searchTerms: ['Ablation phalange unguéale de l\'annulaire (Main Dominante)', 'Ablation phalange unguéale de l\'annulaire (Main Non Dominante)'],
+            priority: 16000
+        },
+        {
+            pattern: /(?:ablation|amputation).*\bP3\s+D5\b/i,
+            context: /doigt|main/i,
+            searchTerms: ['Ablation phalange unguéale de l\'auriculaire (Main Dominante)', 'Ablation phalange unguéale de l\'auriculaire (Main Non Dominante)'],
+            priority: 16000
+        },
         // === POUCE ===
         {
             pattern: /(?:ablation|amputation).*(?:extr[eé]mit[eé]|bout|pulpe).*(?:phalange\s+)?(?:ungu[eé]ale|distale|terminale|P3).*(?:pouce|d1)/i,
