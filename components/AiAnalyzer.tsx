@@ -7062,14 +7062,14 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
         // 🆕 V3.3.130: FRACTURE DIAPHYSAIRE DU FÉMUR (éviter confusion avec membre supérieur)
         {
             pattern: /fracture.*(?:diaphyse|diaphysaire|tiers.*moyen|tiers.*(?:inf|sup)).*f[eé]mur.*raccor[cs]issement/i,
-            context: /jambe|membre.*inf[eé]rieur|boiterie|genou|hanche/i,
+            context: /jambe|membre.*inf[eé]rieur|boiterie|genou|hanche|f[eé]mur|chirurgical|s[eé]quelle/i,  // Context plus large incluant "fémur" lui-même
             searchTerms: ['Fracture de la diaphyse fémorale - Avec cal vicieux'],
             priority: 999,
             negativeContext: /main|doigt|canal.*carpien|poignet|bras|coude|[eé]paule/i
         },
         {
             pattern: /fracture.*(?:diaphyse|diaphysaire|tiers.*moyen).*f[eé]mur(?!.*raccor[cs]issement)/i,
-            context: /jambe|membre.*inf[eé]rieur|boiterie|consolid|cal.*vicieux/i,
+            context: /jambe|membre.*inf[eé]rieur|boiterie|consolid|cal.*vicieux|f[eé]mur|chirurgical|s[eé]quelle/i,  // Context plus large
             searchTerms: ['Fracture diaphysaire du fémur'],
             priority: 998,
             negativeContext: /main|doigt|canal.*carpien|poignet|bras|coude|[eé]paule/i
