@@ -9893,21 +9893,21 @@ const extractIndividualLesions = (text: string): string[] => {
         if (lesions.length >= 2) return lesions;
     }
     
-    // Pattern 0B: Fracture + déchirure ligament + élongation muscle (CAS 2) - AMÉLIORÉ V3.3.130
+    // Pattern 0B: Fracture + déchirure ligament + élongation muscle (CAS 2) - AMÉLIORÉ V3.3.131
     // Ex: "fracture tibia associée à déchirure ligament collatéral ainsi qu'une élongation quadriceps"
     // Ex: "fracture genou avec lésion ligamentaire et atteinte musculaire"
     // Ex: "fracture tibia sur fond de rupture LCA ainsi qu'élongation quadriceps"
     const multiTraumaPattern = /fracture.*?(?:tibia|femur|humerus|genou).*?(?:associee?|avec|sur\s+fond\s+de).*?(?:dechirure|lesion|rupture).*?ligament.*?(?:ainsi|et|avec|associee?|sur\s+fond).*?(?:elongation|dechirure|lesion).*?(?:quadriceps|muscle)/i;
-    const fractureMatch = normalized.match(/fracture.*?(?:tibia|femur|humerus|genou).*?(?:droit|gauche)?/i);
-    const ligamentMatch = normalized.match(/(?:dechirure|lesion|rupture).*?(?:partielle?|complete?|totale?)?\s*(?:du|de\s+la)?\s*ligament.*?(?:collateral|croise|lateral|lca|lcp|interne|externe|medial).*?(?:genou|coude)?.*?(?:droit|gauche)?/i);
-    const muscleMatch = normalized.match(/(?:elongation|dechirure|rupture).*?(?:musculaire?)?\s*(?:du|de\s+la)?\s*(?:quadriceps|triceps|biceps|muscle.*?quadriceps)/i);
+    const fractureMatch = normalized.match(/fracture\s+(?:non\s+)?(?:deplacee?)?\s*(?:du|de\s+la)?\s*(?:tiers)?\s*(?:distal|proximal|moyen)?\s*(?:du|de\s+la)?\s*(?:tibia|femur|humerus|genou)\s*(?:droit|gauche)?/i);
+    const ligamentMatch = normalized.match(/(?:dechirure|lesion|rupture)\s+(?:partielle?|complete?|totale?)?\s*(?:du|de\s+la)?\s*ligament\s+(?:collateral|croise|lateral|lca|lcp)\s*(?:medial|interne|externe|anterieur|posterieur)?\s*(?:du)?\s*(?:genou|coude)?\s*(?:droit|gauche)?/i);
+    const muscleMatch = normalized.match(/(?:elongation|dechirure|rupture)\s+(?:musculaire?)?\s*(?:du|de\s+la)?\s*(?:quadriceps|triceps|biceps|muscle\s+quadriceps)/i);
     
     if (multiTraumaPattern.test(normalized) || (fractureMatch && ligamentMatch && muscleMatch)) {
         if (fractureMatch) lesions.push(fractureMatch[0].trim());
         if (ligamentMatch) lesions.push(ligamentMatch[0].trim());
         if (muscleMatch) lesions.push(muscleMatch[0].trim());
         console.log('✅ Pattern 0B (os+ligament+muscle) détecté:', lesions);
-        if (lesions.length >= 2) return lesions;
+        if (lesions.length >= 2) return lesions; // Retourner toutes les lésions détectées (2 ou 3)
     }
     
     // Pattern 1: Fractures multiples sur même os (trochanter et diaphyse)
