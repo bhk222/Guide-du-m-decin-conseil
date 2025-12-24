@@ -6213,7 +6213,8 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             pattern: /(?:syndrome.*)?canal\s+carpien/i,
             context: /poignet|main|par[eé]sth[eé]sie|traumatique/i,
             searchTerms: ['Syndrome du canal carpien post-traumatique (Main Dominante)'],
-            priority: 93
+            priority: 93,
+            negativeContext: /f[eé]mur|fémoral|jambe|genou|hanche|tibia|péroné|membre.*inf[eé]rieur/i
         },
         {
             pattern: /fracture.*(?:deux\s+os.*(?:avant-bras|forearm)|both\s+bones.*(?:avant-bras|forearm))|fracture.*radius.*(?:ulna|cubitus)/i,
@@ -7056,6 +7057,22 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             searchTerms: ["Prothèse totale de hanche"],
             priority: 999,
             negativeContext: /sans.*prothèse/i
+        },
+        
+        // 🆕 V3.3.130: FRACTURE DIAPHYSAIRE DU FÉMUR (éviter confusion avec membre supérieur)
+        {
+            pattern: /fracture.*(?:diaphyse|diaphysaire|tiers.*moyen|tiers.*(?:inf|sup)).*f[eé]mur.*raccor[cs]issement/i,
+            context: /jambe|membre.*inf[eé]rieur|boiterie|genou|hanche/i,
+            searchTerms: ['Fracture de la diaphyse fémorale - Avec cal vicieux'],
+            priority: 999,
+            negativeContext: /main|doigt|canal.*carpien|poignet|bras|coude|[eé]paule/i
+        },
+        {
+            pattern: /fracture.*(?:diaphyse|diaphysaire|tiers.*moyen).*f[eé]mur(?!.*raccor[cs]issement)/i,
+            context: /jambe|membre.*inf[eé]rieur|boiterie|consolid|cal.*vicieux/i,
+            searchTerms: ['Fracture diaphysaire du fémur'],
+            priority: 998,
+            negativeContext: /main|doigt|canal.*carpien|poignet|bras|coude|[eé]paule/i
         },
         {
             pattern: /arthrose.*post.*traumatique.*hanche.*sévère/i,
