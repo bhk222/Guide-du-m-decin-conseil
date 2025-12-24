@@ -7356,10 +7356,126 @@ export const aldData: AldItem[] = [
 <p><strong>Prévention / Éducation</strong>: Sevrage tabagique — Réduction expositions nocives — Observance traitement — Reconnaissance précoce des exacerbations — Suivi spécialisé régulier</p>
 </div>`,
           children: [
-            { code: "C15A01", name: "Bronchopneumopathie chronique obstructive (BPCO)" }, 
+            { 
+              code: "C15A01", 
+              name: "Bronchopneumopathie chronique obstructive (BPCO)",
+              tooltip: `<div class="space-y-3">
+<p><strong>Définition</strong>: Maladie respiratoire chronique caractérisée par une obstruction bronchique progressive non totalement réversible, le plus souvent secondaire à exposition au tabac, biomasse ou toxiques inhalés.</p>
+
+<p><strong>Physiopathologie</strong>:</p>
+<ul class="list-disc pl-5">
+  <li>Obstruction persistante des voies aériennes</li>
+  <li>Inflammation chronique</li>
+  <li>Remodelage bronchique et destruction parenchymateuse (<span class="tooltip-term" title="Destruction des alvéoles pulmonaires avec perte d'élasticité">emphysème</span>)</li>
+  <li>Altération ventilation/perfusion → <span class="tooltip-term" title="Diminution oxygène sanguin (PaO₂ < 80 mmHg)">hypoxémie</span> ± <span class="tooltip-term" title="Augmentation CO₂ sanguin (PaCO₂ > 45 mmHg)">hypercapnie</span></li>
+</ul>
+
+<p><strong>Facteurs de risque</strong>: Tabagisme (actif ou passif) — Pollution biomasse — Expositions professionnelles — ATCD respiratoires — Génétique (<span class="tooltip-term" title="Déficit génétique favorisant emphysème précoce">déficit en α1-antitrypsine</span>)</p>
+
+<p><strong>Tableau clinique</strong>: <span class="tooltip-term" title="Difficulté respiratoire, essoufflement">Dyspnée</span> progressive (initialement à l'effort, puis de repos), toux chronique, expectorations, infections respiratoires récidivantes, <span class="tooltip-term" title="Sifflements respiratoires">sibilants</span>, <span class="tooltip-term" title="Coloration bleutée par manque d'oxygène">cyanose</span> aux stades avancés</p>
+
+<p><strong>Examens complémentaires</strong>:</p>
+<ul class="list-disc pl-5">
+  <li><strong><span class="tooltip-term" title="Épreuves Fonctionnelles Respiratoires">EFR</span></strong>: <span class="tooltip-term" title="Volume Expiratoire Maximal par Seconde / Capacité Vitale Forcée">VEMS/CVF</span> < 70% post-bronchodilatateur, <span class="tooltip-term" title="Volume Résiduel - Air restant après expiration maximale">VR</span> ↑, <span class="tooltip-term" title="Capacité Pulmonaire Totale">CPT</span> ↑</li>
+  <li><strong>Gaz du sang</strong>: PaO₂ ↓, PaCO₂ ↑ si hypercapnie</li>
+  <li><strong>Imagerie</strong>: Rx thorax ou <span class="tooltip-term" title="High Resolution Computed Tomography - Scanner haute résolution">HRCT</span> — emphysème, hyperinflation, bronchiectasies</li>
+  <li><strong>Bilan biologique</strong>: α1-antitrypsine si suspicion génétique</li>
+</ul>
+
+<p><strong>Classification <span class="tooltip-term" title="Global Initiative for Chronic Obstructive Lung Disease">GOLD</span> (2025)</strong>:</p>
+<ul class="list-disc pl-5">
+  <li><strong>GOLD 1</strong>: léger VEMS ≥ 80%</li>
+  <li><strong>GOLD 2</strong>: modéré 50 ≤ VEMS < 80%</li>
+  <li><strong>GOLD 3</strong>: sévère 30 ≤ VEMS < 50%</li>
+  <li><strong>GOLD 4</strong>: très sévère VEMS < 30%</li>
+  <li><strong>Stratification ABCD</strong>: basée sur symptômes (<span class="tooltip-term" title="Modified Medical Research Council - Échelle de dyspnée">mMRC</span>, <span class="tooltip-term" title="COPD Assessment Test - Questionnaire d'évaluation BPCO">CAT</span>) + exacerbations/an</li>
+</ul>
+
+<p><strong>Prise en charge thérapeutique</strong>:</p>
+<ul class="list-disc pl-5">
+  <li><strong>Mesures générales</strong>: sevrage tabac, vaccination, réhabilitation, activité physique adaptée</li>
+  <li><strong>Bronchodilatateurs</strong>: <span class="tooltip-term" title="Long-Acting Muscarinic Antagonist - Anticholinergique longue durée">LAMA</span> ± <span class="tooltip-term" title="Long-Acting Beta-Agonist - β2-agoniste longue durée">LABA</span> ± <span class="tooltip-term" title="Corticostéroïdes Inhalés">CSI</span> selon phénotype et exacerbations</li>
+  <li><strong><span class="tooltip-term" title="OLD - Oxygène ≥15h/jour pour PaO₂ ≤ 55 mmHg">Oxygénothérapie longue durée</span></strong> si PaO₂ ≤ 55 mmHg</li>
+  <li><strong><span class="tooltip-term" title="Ventilation Non Invasive par masque">VNI</span></strong> si hypercapnie chronique ou exacerbations répétées</li>
+  <li><strong>Traitement exacerbations</strong>: bronchodilatateurs, corticostéroïdes, antibiotiques selon critères</li>
+</ul>
+
+<p><strong>Complications</strong>: Insuffisance respiratoire chronique, cœur pulmonaire, <span class="tooltip-term" title="Hypertension Artérielle Pulmonaire">HTAP</span>, exacerbations fréquentes, infections respiratoires, pneumothorax, cachexie</p>
+
+<p><strong>Suivi / surveillance</strong>: EFR régulières, gazométrie, suivi symptomatique (mMRC, CAT), vaccination, prévention exacerbations, rééducation respiratoire</p>
+
+<p><strong>Pronostic</strong>: Dépend du VEMS, fréquence exacerbations, comorbidités, observance thérapeutique. GOLD 4 et exacerbations fréquentes → risque élevé mortalité</p>
+
+<p><strong>Évaluation pour expertise / dossier médical</strong>: Capacité fonctionnelle à l'effort, retentissement sur <span class="tooltip-term" title="Activités de la Vie Quotidienne/Domestique">AVQ/AVD</span>, besoin OLD/VNI, limitations professionnelles, IPP indicative selon sévérité GOLD et comorbidités</p>
+</div>`
+            }, 
             { code: "C15A02", name: "DDB (étendue)" }, 
             { code: "C15A03", name: "Emphysème" }, 
-            { code: "C15A04", name: "Mucoviscidose" }, 
+            { 
+              code: "C15A04", 
+              name: "Mucoviscidose",
+              tooltip: `<div class="space-y-3">
+<p><strong>Définition</strong>: Maladie génétique autosomique récessive due à une mutation du gène <span class="tooltip-term" title="Cystic Fibrosis Transmembrane Conductance Regulator - Régulateur de conductance transmembranaire de la fibrose kystique">CFTR</span> (chromosome 7), entraînant altération du transport chlore/eau, mucus visqueux multi-organique, avec atteinte respiratoire, digestive et endocrinienne.</p>
+
+<p><strong>Épidémiologie</strong>:</p>
+<ul class="list-disc pl-5">
+  <li><strong>Prévalence</strong>: ~1/2500–5000 naissances caucasiennes</li>
+  <li><strong>Portage CFTR</strong>: ~1/25–1/30</li>
+  <li><strong>Début</strong>: souvent néonatal ou enfance</li>
+</ul>
+
+<p><strong>Physiopathologie</strong>:</p>
+<ul class="list-disc pl-5">
+  <li>Dysfonction CFTR → mucus épais → obstruction canalaire, inflammation chronique, infections récurrentes</li>
+  <li><strong>Poumons</strong>: <span class="tooltip-term" title="Dilatations permanentes des bronches">bronchiectasies</span>, infections chroniques, insuffisance respiratoire progressive</li>
+  <li><strong>Pancréas</strong>: insuffisance exocrine et digestive, <span class="tooltip-term" title="Mauvaise absorption des graisses">malabsorption</span></li>
+  <li><strong>Autres</strong>: foie, voies biliaires, reproduction, intestin</li>
+</ul>
+
+<p><strong>Manifestations cliniques</strong>:</p>
+<ul class="list-disc pl-5">
+  <li><strong>Respiratoires</strong>: toux chronique, expectoration, infections récidivantes, bronchiectasies, dyspnée, hypoxémie</li>
+  <li><strong>Digestives</strong>: <span class="tooltip-term" title="Selles grasses par malabsorption des lipides">stéatorrhée</span>, retard pondéral, déficit en enzymes pancréatiques</li>
+  <li><strong>Endocriniennes</strong>: <span class="tooltip-term" title="Cystic Fibrosis-Related Diabetes - Diabète lié à la mucoviscidose">diabète CF (CFRD)</span></li>
+  <li><strong>Autres</strong>: infertilité masculine, atteintes hépatiques/biliaires</li>
+</ul>
+
+<p><strong>Diagnostic</strong>:</p>
+<ul class="list-disc pl-5">
+  <li><strong>Test de la sueur</strong>: <span class="tooltip-term" title="Chlorure - Concentration de chlore dans la sueur">Cl⁻</span> > 60 mmol/L confirmatoire</li>
+  <li><strong>Génétique CFTR</strong>: mutations pathogènes</li>
+  <li><strong>Imagerie thoracique</strong>: <span class="tooltip-term" title="High Resolution Computed Tomography">HRCT</span> pour bronchiectasies</li>
+  <li><strong><span class="tooltip-term" title="Épreuves Fonctionnelles Respiratoires">EFR</span></strong>: obstruction progressive, <span class="tooltip-term" title="Volume Expiratoire Maximal par Seconde">VEMS</span> ↓</li>
+  <li><strong>Biologie</strong>: nutritionnelle, glycémie (CFRD), microbiologie respiratoire</li>
+</ul>
+
+<p><strong>Microbiologie respiratoire</strong>: Colonisation / infection chronique : <em>Staphylococcus aureus</em>, <em><span class="tooltip-term" title="Bactérie souvent multi-résistante">Pseudomonas aeruginosa</span></em>, <em><span class="tooltip-term" title="Groupe de bactéries très pathogènes">Burkholderia cepacia</span></em> complexe, <em>Haemophilus influenzae</em></p>
+
+<p><strong>Prise en charge thérapeutique</strong>:</p>
+<ul class="list-disc pl-5">
+  <li><strong>Respiratoire</strong>: kinésithérapie respiratoire quotidienne, bronchodilatateurs, mucolytiques (<span class="tooltip-term" title="DNase recombinante - Enzyme dégradant l'ADN du mucus">Dornase alpha</span>), antibiothérapie dirigée, oxygénothérapie si hypoxémie, VNI si IR chronique</li>
+  <li><strong>Digestive</strong>: enzymes pancréatiques, régime hypercalorique/protéiné, suppléments vitaminiques liposolubles</li>
+  <li><strong>Modulateurs CFTR</strong>: <span class="tooltip-term" title="Médicament potentialisateur CFTR">Ivacaftor</span>, Lumacaftor/Ivacaftor, Tezacaftor/Ivacaftor selon mutation</li>
+  <li><strong>Transplantation pulmonaire</strong>: en cas d'IR sévère ou complications pulmonaires irréversibles</li>
+</ul>
+
+<p><strong>Complications</strong>: Insuffisance respiratoire chronique, hypertension pulmonaire, pneumothorax, <span class="tooltip-term" title="Crachats de sang">hémoptysie</span> massive, infections respiratoires récurrentes, diabète CF, hépatopathie, ostéoporose, infertilité</p>
+
+<p><strong>Suivi</strong>:</p>
+<ul class="list-disc pl-5">
+  <li><strong>Multidisciplinaire</strong>: pneumologie, gastro-entérologie, nutrition, endocrinologie, kinésithérapie, psychologue</li>
+  <li><strong>Examens réguliers</strong>: EFR, culture respiratoire, poids/taille, glycémie, imagerie thoracique</li>
+</ul>
+
+<p><strong>Pronostic</strong>:</p>
+<ul class="list-disc pl-5">
+  <li><strong>Espérance de vie moyenne</strong>: ~50 ans (selon accès thérapeutique et complications)</li>
+  <li><strong>Facteurs pronostiques</strong>: VEMS, colonisation Pseudomonas, nutrition, adhérence thérapeutique</li>
+</ul>
+
+<p><strong>Prévention / éducation</strong>: Dépistage néonatal, vaccination, hygiène respiratoire, adhésion kinésithérapie et traitement, soutien familial et social</p>
+</div>`
+            }, 
             { code: "C15A05", name: "Asthme ancien dit \"à dyspnée continue\"" }, 
             { code: "C15A06", name: "Autres insuffisances respiratoires chroniques par" }
           ] 
