@@ -5181,7 +5181,119 @@ export const aldData: AldItem[] = [
         </div>
       </div>`
           }, 
-          { code: "C10A06", name: "Démence de la maladie de Huntington" }, 
+          { 
+            code: "C10A06", 
+            name: "Démence de la maladie de Huntington",
+            tooltip: `<div class="space-y-3">
+<p><strong>Définition</strong>: Affection neurodégénérative autosomique dominante due à une expansion anormale du triplet <span class="tooltip-term" title="Cytosine-Adénine-Guanine - Séquence de 3 nucléotides répétée de façon anormale">CAG</span> dans le gène <span class="tooltip-term" title="Huntingtine - Gène situé sur chromosome 4 responsable de la maladie">HTT</span> (chromosome 4), responsable d'une neurodégénérescence striatale et corticale, associant :</p>
+<ul class="list-disc pl-5">
+  <li>Troubles moteurs <span class="tooltip-term" title="Mouvements involontaires brusques, imprévisibles, irréguliers">choréiques</span></li>
+  <li>Déclin cognitif progressif (démence sous-cortico-frontale)</li>
+  <li>Troubles psychiatriques et comportementaux</li>
+</ul>
+
+<p><strong>Génétique et physiopathologie</strong>:</p>
+<ul class="list-disc pl-5">
+  <li><strong>Transmission</strong>: autosomique dominante (pénétrance complète)</li>
+  <li><strong>Nombre de répétitions CAG</strong>:
+    <ul class="list-disc pl-5 ml-3">
+      <li>< 26 : normal</li>
+      <li>27–35 : zone intermédiaire</li>
+      <li>≥ 36 : pathologique (≥ 40 = expression certaine)</li>
+    </ul>
+  </li>
+  <li><strong>Phénomène d'<span class="tooltip-term" title="Apparition plus précoce et/ou sévère à chaque génération, surtout transmission paternelle">anticipation</span></strong> (aggravation/transmission paternelle ++)</li>
+  <li><strong>Atteinte préférentielle</strong>: <span class="tooltip-term" title="Ensemble des noyaux gris centraux (putamen + caudé)">striatum</span> (<span class="tooltip-term" title="Noyau gris central impliqué dans le contrôle moteur">putamen</span>, <span class="tooltip-term" title="Noyau gris central en forme de queue">caudé</span>) → circuits fronto-sous-corticaux</li>
+</ul>
+
+<p><strong>Clinique</strong>:</p>
+<p><strong>A. Manifestations cognitives (démence)</strong>:</p>
+<ul class="list-disc pl-5">
+  <li>Ralentissement psychomoteur</li>
+  <li>Troubles exécutifs (planification, flexibilité, attention)</li>
+  <li>Difficultés visuo-spatiales</li>
+  <li>Mémoire altérée secondairement (profil sous-cortical)</li>
+  <li>Altération progressive des <span class="tooltip-term" title="Activités Instrumentales de la Vie Quotidienne (téléphone, courses, médicaments, transport)">AIVQ</span> puis <span class="tooltip-term" title="Activités de la Vie Quotidienne (toilette, habillage, alimentation)">AVQ</span></li>
+</ul>
+
+<p><strong>B. Manifestations motrices</strong>:</p>
+<ul class="list-disc pl-5">
+  <li><span class="tooltip-term" title="Mouvements anormaux involontaires, rapides, imprévisibles">Chorée</span> généralisée</li>
+  <li><span class="tooltip-term" title="Contractions musculaires prolongées anormales">Dystonie</span>, troubles de la marche, <span class="tooltip-term" title="Difficulté d'articulation de la parole">dysarthrie</span>, <span class="tooltip-term" title="Difficulté à avaler">dysphagie</span></li>
+  <li><strong>Formes juvéniles</strong>: rigidité / akinésie > chorée</li>
+</ul>
+
+<p><strong>C. Troubles psychiatriques / comportementaux</strong>:</p>
+<ul class="list-disc pl-5">
+  <li>Irritabilité, impulsivité, apathie</li>
+  <li>Troubles anxio-dépressifs</li>
+  <li>Troubles obsessionnels-compulsifs</li>
+  <li>Risque suicidaire ↑</li>
+</ul>
+
+<p><strong>Diagnostic</strong>:</p>
+<ul class="list-disc pl-5">
+  <li><strong>Critères cliniques</strong>: Triade (troubles moteurs + cognitifs + psychiatriques) dans contexte familial évocateur</li>
+  <li><strong>Test génétique HTT (CAG)</strong>: confirmation diagnostique (après consultation génétique)</li>
+  <li><strong>IRM cérébrale</strong>: atrophie des noyaux caudés et du cortex</li>
+  <li><strong>Bilan neuropsychologique</strong>: profil dysexécutif</li>
+  <li>👉 Test présymptomatique uniquement dans cadre d'accompagnement génétique spécialisé</li>
+</ul>
+
+<p><strong>Diagnostic différentiel</strong>: Chorée médicamenteuse (neuroleptiques, L-dopa) — Chorée auto-immune/métabolique (thyroïdienne, Wilson) — Démences fronto-temporales — Chorée bénigne héréditaire</p>
+
+<p><strong>Prise en charge thérapeutique (symptomatique et pluridisciplinaire)</strong>:</p>
+
+<p><strong>A. Troubles moteurs</strong>:</p>
+<ul class="list-disc pl-5">
+  <li><span class="tooltip-term" title="Médicament déplétor vésiculaire de monoamines, réduisant la chorée">Tétrabénazine</span> / deutétrabénazine (chorée)</li>
+  <li>± Neuroleptiques atypiques (quetiapine, olanzapine) si agitation/psychose</li>
+  <li>Kinésithérapie — orthophonie — prévention des chutes</li>
+</ul>
+
+<p><strong>B. Troubles cognitifs</strong>:</p>
+<ul class="list-disc pl-5">
+  <li>Réhabilitation cognitive / soutien fonctionnel</li>
+  <li>Aides techniques — aménagement du domicile</li>
+  <li>Pas de traitement curatif validé à ce jour</li>
+</ul>
+
+<p><strong>C. Troubles psychiatriques</strong>:</p>
+<ul class="list-disc pl-5">
+  <li>Antidépresseurs <span class="tooltip-term" title="Inhibiteurs de la Recapture de la Sérotonine et Noradrénaline">IRSN</span>/<span class="tooltip-term" title="Inhibiteurs Sélectifs de la Recapture de la Sérotonine">ISRS</span> selon tableau</li>
+  <li>Stabilisation comportementale — psychothérapie</li>
+  <li>Surveillance du risque suicidaire</li>
+</ul>
+
+<p><strong>D. Nutrition / déglutition</strong>:</p>
+<ul class="list-disc pl-5">
+  <li>Suivi diététique, prévention dénutrition</li>
+  <li>Prise en charge dysphagie ± <span class="tooltip-term" title="Sonde d'alimentation placée directement dans l'estomac via la paroi abdominale">gastrostomie</span> selon évolution</li>
+</ul>
+
+<p>👉 <strong>Prise en charge coordonnée</strong>: neurologie – psychiatrie – rééducation – social – génétique</p>
+
+<p><strong>Évolution et pronostic</strong>:</p>
+<ul class="list-disc pl-5">
+  <li><strong>Début habituel</strong>: 30–50 ans (formes juvéniles plus rapides)</li>
+  <li><strong>Évolution progressive</strong>: 10–20 ans vers perte d'autonomie, complications respiratoires et nutritionnelles</li>
+</ul>
+
+<p><strong>Suivi et accompagnement</strong>:</p>
+<ul class="list-disc pl-5">
+  <li>Évaluations régulières : motricité, cognition, comportement, nutrition</li>
+  <li>Soutien aux aidants / accompagnement social et médico-légal</li>
+  <li>Conseil génétique pour la famille (dépistage encadré)</li>
+</ul>
+
+<p><strong>Points clés</strong>:</p>
+<ul class="list-disc pl-5">
+  <li>Démence sous-cortico-frontale avec chorée et troubles psychiatriques</li>
+  <li>Diagnostic confirmé par test génétique HTT</li>
+  <li>Prise en charge symptomatique, pluridisciplinaire et évolutive</li>
+</ul>
+</div>`
+          }, 
           { code: "C10A07", name: "Autres démences" }
         ] 
       }
