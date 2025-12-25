@@ -10,7 +10,7 @@ import { DrugDictionary } from './tools/DrugDictionary';
 import { ReverseIppSearch } from './tools/ReverseIppSearch';
 import { IAValidator } from './IAValidator';
 import { NomenclatureGenerale } from './tools/NomenclatureGenerale';
-import { NGAPCalculateur } from './tools/NGAPCalculateur';
+import NGAPCalculateur from './tools/NGAPCalculateur';
 
 const InsulinIcon = () => (
     <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-primary-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">

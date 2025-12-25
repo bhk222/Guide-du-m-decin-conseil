@@ -8,6 +8,7 @@ export interface Injury {
     medium?: string;
     high: string;
   }
+  excludeContext?: string[]; // Mots-clés pour exclure cette lésion dans certains contextes
 }
 
 export interface InjurySubcategory {
