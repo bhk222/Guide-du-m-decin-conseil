@@ -9540,6 +9540,9 @@ const extractPreexistingConditions = (text: string): { preexisting: string[]; cl
             const textContext = text.substring(Math.max(0, match.index - 100), Math.min(text.length, match.index + match[0].length + 100));
             const isNewDiagnosis = /(?:mis\s+en\s+évidence|révélé|objectivé|constaté|IRM|imagerie)/i.test(textContext) && isTraumaticLesion;
             
+            // 🆕 V3.3.132: Exclusion "séquelles potentielles" / "plan évolutif" (FUTUR, pas antécédent)
+            const isFutureSequela = /(?:sequelles?\s+potentielles?|plan\s+evolutif|sur\s+le\s+plan\s+evolutif|comprennent|susceptibles?\s+de)/i.test(textContext);
+            
             // 🆕 Si lésion primaire présente ET symptôme proche, c'est probablement une séquelle
             const isLikelySequela = primaryLesionPresent && (
                 conditionNormalized.includes('douleur') ||
@@ -9548,13 +9551,15 @@ const extractPreexistingConditions = (text: string): { preexisting: string[]; cl
             );
             
             // Ajouter UNIQUEMENT si c'est un VRAI antécédent
-            if (condition.length > 10 && !isSequela && !isLikelySequela && !isNewDiagnosis) {
+            if (condition.length > 10 && !isSequela && !isLikelySequela && !isNewDiagnosis && !isFutureSequela) {
                 preexisting.push(condition);
                 alreadyAdded.add(conditionNormalized);
                 cleanedText = cleanedText.replace(match[0], ' ').trim(); // Remplacer par espace, pas vide
                 console.log(`✅ Antécédent détecté: ${condition}`);
             } else if (isNewDiagnosis) {
                 console.log(`⚠️ Lésion NOUVELLE ignorée des antécédents: ${condition}`);
+            } else if (isFutureSequela) {
+                console.log(`⚠️ Séquelle POTENTIELLE (future) ignorée des antécédents: ${condition}`);
             }
         }
     }
@@ -9893,14 +9898,14 @@ const extractIndividualLesions = (text: string): string[] => {
         if (lesions.length >= 2) return lesions;
     }
     
-    // Pattern 0B: Fracture + déchirure ligament + élongation muscle (CAS 2) - AMÉLIORÉ V3.3.131
+    // Pattern 0B: Fracture + déchirure ligament + élongation muscle (CAS 2) - AMÉLIORÉ V3.3.132
     // Ex: "fracture tibia associée à déchirure ligament collatéral ainsi qu'une élongation quadriceps"
     // Ex: "fracture genou avec lésion ligamentaire et atteinte musculaire"
     // Ex: "fracture tibia sur fond de rupture LCA ainsi qu'élongation quadriceps"
     const multiTraumaPattern = /fracture.*?(?:tibia|femur|humerus|genou).*?(?:associee?|avec|sur\s+fond\s+de).*?(?:dechirure|lesion|rupture).*?ligament.*?(?:ainsi|et|avec|associee?|sur\s+fond).*?(?:elongation|dechirure|lesion).*?(?:quadriceps|muscle)/i;
     const fractureMatch = normalized.match(/fracture\s+(?:non\s+)?(?:deplacee?)?\s*(?:du|de\s+la)?\s*(?:tiers)?\s*(?:distal|proximal|moyen)?\s*(?:du|de\s+la)?\s*(?:tibia|femur|humerus|genou)\s*(?:droit|gauche)?/i);
     const ligamentMatch = normalized.match(/(?:dechirure|lesion|rupture)\s+(?:partielle?|complete?|totale?)?\s*(?:du|de\s+la)?\s*ligament\s+(?:collateral|croise|lateral|lca|lcp)\s*(?:medial|interne|externe|anterieur|posterieur)?\s*(?:du)?\s*(?:genou|coude)?\s*(?:droit|gauche)?/i);
-    const muscleMatch = normalized.match(/(?:elongation|dechirure|rupture)\s+(?:musculaire?)?\s*(?:du|de\s+la)?\s*(?:quadriceps|triceps|biceps|muscle\s+quadriceps)/i);
+    const muscleMatch = normalized.match(/(?:elongation|dechirure|rupture)\s+(?:musculaire\s+)?(?:du|de\s+la)?\s*(?:quadriceps|triceps|biceps|muscle\s+quadriceps)/i);
     
     if (multiTraumaPattern.test(normalized) || (fractureMatch && ligamentMatch && muscleMatch)) {
         if (fractureMatch) lesions.push(fractureMatch[0].trim());
