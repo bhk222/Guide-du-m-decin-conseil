@@ -9797,6 +9797,12 @@ export const detectMultipleLesions = (text: string): {
 } => {
     const normalized = normalize(text);
     
+    // 🆕 V3.3.133: Détection PRÉCOCE amputation + rupture/section tendon (AVANT normalisation complète)
+    // Ex: "amputation P3 D5 avec rupture fléchisseur P2 D4" 
+    // Teste sur texte original pour éviter confusion avec "vertebre dorsale D4" ajouté par normalisation
+    // CORRECTION: accepte typos médicales courantes (repture, flechisseur/fléchisseur)
+    const hasAmputationAndTendonRaw = /(?:amputation|perte).*(?:p[123]|phalange).*(?:d[1-5]).*(?:avec|et|ainsi\s+qu['"]un?).*(?:r[ue]pture|section|l[eé]sion).*(?:fl[eé]chisseur|extenseur|tendon)/i.test(text);
+    
     // 🆕 V3.3.116: EXCEPTION BASSIN+SCIATIQUE - Retour anticipé pour forcer analyse globale
     // Ce cas doit être traité comme une seule lésion complexe par la règle experte (priorité 1020)
     const isBassinSciatique = /bassin.*fracture|fracture.*bassin|fracture.*complexe.*bassin/i.test(normalized) && 
@@ -9930,6 +9936,12 @@ export const detectMultipleLesions = (text: string): {
     const hasMultipleToes = /(?:amputation|raideur|ankylose).*(?:gros\s+orteil|orteil|o[1-5]).*?(?:et|avec).*?(?:orteil|o[1-5])/i.test(normalized);
     const hasMultipleViscera = /(splenectomie|nephrectomie|colectomie|hepatectomie).*?(?:et|avec|associee).*?(splenectomie|nephrectomie|colectomie|hepatectomie)/i.test(normalized);
     
+    // 🆕 V3.3.133: Détection amputation + rupture/section tendon (doigts différents)
+    // Ex: "amputation P3 D5 avec rupture fléchisseur P2 D4"
+    // Note: hasAmputationAndTendonRaw testé sur texte original avant normalisation
+    // CORRECTION: accepte typos médicales (repture, flechisseur/fléchisseur)
+    const hasAmputationAndTendon = hasAmputationAndTendonRaw || /(?:amputation|perte).*(?:p[123]|phalange).*(?:d[1-5]|doigt).*(?:avec|et|ainsi\s+qu['"]un?).*(?:r[ue]pture|section|l[eé]sion).*(?:fl[eé]chisseur|extenseur|tendon)/i.test(normalized);
+    
     // 🆕 Détection cumul MEMBRE SUPÉRIEUR + MEMBRE INFÉRIEUR (polytraumatisme fréquent)
     const hasMembreSupLesion = /(?:fracture|luxation|rupture|lesion).*(?:[eé]paule|coude|poignet|main|doigt|bras|avant.*bras|hum[eé]r|radius|ulna|cubitus|clavicule)/i.test(normalized);
     const hasMembreInfLesion = /(?:fracture|luxation|rupture|lesion).*(?:hanche|genou|cheville|pied|orteil|jambe|cuisse|f[eé]mur|tibia|p[eé]ron[eé]|fibula)/i.test(normalized);
@@ -9950,6 +9962,7 @@ export const detectMultipleLesions = (text: string): {
         hasMultipleDigits ||           // 🆕 V3.3.124: Cumul doigts (médius + annulaire, etc.)
         hasMultipleToes ||             // 🆕 V3.3.124: Cumul orteils (gros orteil + 2ème, etc.)
         hasMultipleViscera ||          // 🆕 V3.3.124: Cumul viscères (splénectomie + néphrectomie, etc.)
+        hasAmputationAndTendon ||      // 🆕 V3.3.133: Cumul amputation + rupture tendon (doigts différents)
         hasMembreSupEtInf;             // 🆕 Cumul membre supérieur + membre inférieur (polytraumatisme)
     
     // Estimation nombre de lésions
@@ -9962,7 +9975,8 @@ export const detectMultipleLesions = (text: string): {
         multipleFracturesSameBone ? 2 : 1,  // Au moins 2 fractures si pattern détecté
         lesionTypes.length,  // Nombre de types de lésions différents
         hasTripleLesion ? 3 : (hasDoubleLesion ? 2 : 1),  // 🆕 Compter os+ligament+muscle
-        hasChevilleEtGenou && (hasBoneLesion || hasLigamentLesion || hasNerveLesion) ? 3 : 1  // 🆕 Cheville + genou + lésion = au moins 3
+        hasChevilleEtGenou && (hasBoneLesion || hasLigamentLesion || hasNerveLesion) ? 3 : 1,  // 🆕 Cheville + genou + lésion = au moins 3
+        hasAmputationAndTendon ? 2 : 1  // 🆕 V3.3.133: Amputation + tendon = au moins 2 lésions
     );
     
     return {
@@ -10128,19 +10142,20 @@ const extractIndividualLesions = (text: string): string[] => {
         }
     }
     
-    // Pattern 7: Amputation + Rupture tendon (ex: "amputation P3 D5 avec rupture fléchisseur P2 D4") - V3.3.131
+    // Pattern 7: Amputation + Rupture tendon (ex: "amputation P3 D5 avec rupture fléchisseur P2 D4") - V3.3.133
     // Détecte les lésions combinées doigt: amputation sur un doigt + tendon sur autre doigt
-    const amputationTendonPattern = /(?:amputation|perte|desart).*?(?:p[123]|phalange).*?(?:d[1-5]|doigt).*?(?:avec|et|ainsi\s+qu['"]une?|associee?\s+[aà]).*?(?:rupture|section|lesion).*?(?:flechisseur|extenseur|tendon)/i;
-    if (amputationTendonPattern.test(normalized)) {
+    // 🆕 V3.3.133: Teste sur texte ORIGINAL pour éviter confusion "vertebre dorsale D4"
+    const amputationTendonPattern = /(?:amputation|perte|desart).*?(?:p[123]|phalange).*?(?:d[1-5]|doigt).*?(?:avec|et|ainsi\s+qu['"]une?|associee?\s+[aà]).*?(?:r[ue]pture|section|l[eé]sion).*?(?:fl[eé]chisseur|extenseur|tendon)/i;
+    if (amputationTendonPattern.test(text)) {  // ✅ Teste sur 'text' pas 'normalized'
         // Extraire amputation: chercher "amputation...D5" ou "amputation...auriculaire"
-        const amputationPart = normalized.match(/(?:amputation|perte|desart).*?(?:p[123]|phalange).*?(?:d[1-5]|doigt|pouce|index|medius|annulaire|auriculaire).*?(?=(?:avec|et|ainsi|associee))/i)?.[0] || '';
+        const amputationPart = text.match(/(?:amputation|perte|desart).*?(?:p[123]|phalange).*?(?:d[1-5]|doigt|pouce|index|m[eé]dius|annulaire|auriculaire).*?(?=(?:avec|et|ainsi|associ[eé]e?))/i)?.[0] || '';
         // Extraire tendon: chercher "rupture fléchisseur...D4" ou "rupture...annulaire"
-        const tendonPart = normalized.match(/(?:avec|et|ainsi\s+qu['"]une?|associee?\s+[aà])\s*(?:rupture|section|lesion).*?(?:flechisseur|extenseur|tendon).*?(?:p[123]|phalange)?.*?(?:d[1-5]|doigt|pouce|index|medius|annulaire|auriculaire)/i)?.[0] || '';
+        const tendonPart = text.match(/(?:avec|et|ainsi\s+qu['"]une?|associ[eé]e?\s+[aà])\s*(?:r[ue]pture|section|l[eé]sion).*?(?:fl[eé]chisseur|extenseur|tendon).*?(?:p[123]|phalange)?.*?(?:d[1-5]|doigt|pouce|index|m[eé]dius|annulaire|auriculaire)/i)?.[0] || '';
         
         if (amputationPart && tendonPart) {
             lesions.push(amputationPart.trim());
             // Nettoyer le tendonPart des connecteurs
-            const cleanTendonPart = tendonPart.replace(/^(?:avec|et|ainsi\s+qu['"]une?|associee?\s+[aà])\s*/i, '').trim();
+            const cleanTendonPart = tendonPart.replace(/^(?:avec|et|ainsi\s+qu['"]une?|associ[eé]e?\s+[aà])\s*/i, '').trim();
             lesions.push(cleanTendonPart);
             console.log('✅ Pattern 7 (amputation+tendon) détecté:', lesions);
             return lesions;
