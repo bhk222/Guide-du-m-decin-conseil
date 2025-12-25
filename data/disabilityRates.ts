@@ -1370,8 +1370,8 @@ const middleCategories: InjuryCategory[] = [
             { name: "Perte de la 2ème phalange de l'annulaire (Main Dominante)", rate: 3 },
             { name: "Perte des 2ème et 3ème phalanges de l'annulaire (Main Dominante)", rate: 6 },
             { name: "Ankylose de l'annulaire (totalité) (Main Dominante)", rate: 8 },
-            { name: "Raideur d'une articulation de l'annulaire (Main Dominante)", rate: [1, 3] },
-            { name: "Raideur de l'annulaire (Main Dominante)", rate: [2, 4] },
+            { name: "Raideur d'une articulation de l'annulaire (Main Dominante)", rate: [3, 8] },
+            { name: "Raideur de l'annulaire (Main Dominante)", rate: [3, 8] },
         ]
       },
       {

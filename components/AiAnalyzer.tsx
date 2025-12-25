@@ -81,7 +81,7 @@ const medicalSynonyms: { [key: string]: string[] } = {
   pouce: ['pouce', 'P1', 'D1', 'premier doigt', 'pollux', 'gros doigt', '1er doigt', 'doigt 1'],
   index: ['index', 'P2', 'D2', 'deuxième doigt', '2ème doigt', '2e doigt', 'doigt 2', 'indicateur'],
   medius: ['médius', 'majeur', 'P3', 'D3', 'troisième doigt', '3ème doigt', '3e doigt', 'doigt 3', 'doigt du milieu'],
-  annulaire: ['annulaire', 'P4', 'D4', 'quatrième doigt', '4ème doigt', '4e doigt', 'doigt 4'],
+  annulaire: ['annulaire', 'P4', 'D4', 'quatrième doigt', '4ème doigt', '4e doigt', 'doigt 4', 'p2 d4', 'p3 d4', 'p1 d4'],
   auriculaire: ['auriculaire', 'petit doigt', 'P5', 'D5', 'cinquième doigt', '5ème doigt', '5e doigt', 'doigt 5', 'auricularis'],
   phalanges: ['phalange', 'phalanges', 'P1', 'P2', 'P3', 'proximale', 'moyenne', 'distale', 'unguéale'],
   deux_doigts: ['deux doigts', '2 doigts', 'amputation deux', 'perte deux doigts'],
@@ -186,7 +186,7 @@ const boneTerms: { [key: string]: string[] } = {
     // Membre Inférieur
     femur: ['fémur', 'fémoral', 'femorale', 'col du fémur', 'condyle fémoral', 'trochanter', 'diaphyse fémorale'],
     rotule: ['rotule', 'patella', 'patellaire'],
-    tibia: ['tibia', 'tibial', 'tibiale', 'plateau tibial', 'épines tibiales', 'malléole interne', 'pilon tibial', 'bi-malléolaire', 'bimalléolaire', 'bi malléolaire', 'trimalléolaire', 'tri-malléolaire'],
+    tibia: ['tibia', 'tibial', 'tibiale', 'plateau tibial', 'extrémité supérieure tibia', 'épines tibiales', 'malléole interne', 'pilon tibial', 'bi-malléolaire', 'bimalléolaire', 'bi malléolaire', 'trimalléolaire', 'tri-malléolaire'],
     fibula: ['péroné', 'perone', 'peronier', 'fibula', 'malléole externe', 'malléole'],
     tarse: ['tarse', 'astragale', 'talus', 'calcanéum', 'calcaneum', 'naviculaire', 'scaphoïde tarsien', 'cuboïde', 'cunéiforme'],
     metatarse: ['métatarse', 'métatarsien', 'lisfranc'],
@@ -2951,6 +2951,9 @@ const determineSeverity = (
     const hasAmyotrophie = /amyotrophie|atrophie.*(?:quadriceps|musculaire|cuisse)/i.test(normalizedText);
     const hasBoiterieLegere = /boiterie\s+(?:l[eé]g[eè]re|mod[eé]r[eé]e|discrète)|l[eé]g[eè]re\s+boiterie/i.test(normalizedText);
     const hasBoiterieMajeure = /boiterie\s+(?:importante|s[eé]v[eè]re|marqu[eé]e|permanente)|impossibilit[eé].*marche|quasi[\s-]?impotence/i.test(normalizedText);
+    const hasBoiterie = /boiterie|claudication|marche.*(?:difficile|pathologique|anormale)/i.test(normalizedText);
+    const hasFractureComminutive = /fracture\s+comminutive|comminutive|plurifragmentaire|complexe/i.test(normalizedText);
+    const hasFractureFibula = /fracture.*fibula|fibula.*fracture|fracture.*p[eé]ron[eé]|p[eé]ron[eé].*fracture|m[eé]taphyso.*[eé]piphysaire/i.test(normalizedText);
     
     // COTYLE + SÉQUELLES FONCTIONNELLES MULTIPLES (V3.3.122)
     // Limitations multiples (abduction+adduction+rotation) + amyotrophie → MOYEN/ÉLEVÉ
@@ -2970,6 +2973,36 @@ const determineSeverity = (
                 isDefault: false
             };
         }
+    }
+    
+    // 🦴 FRACTURE PLATEAUX TIBIAUX + FIBULA + BOITERIE → MOYEN-ÉLEVÉ
+    const hasPlateauxTibiaux = /fracture.*(?:plateau|plateaux).*tibial|(?:extremit[eé]|extr[eé]mit[eé]).*(?:sup[eé]rieure?|proximale?).*tibia/i.test(normalizedText);
+    
+    if (hasPlateauxTibiaux && hasFractureFibula && hasBoiterie) {
+        // Si fracture comminutive + boiterie → ÉLEVÉ
+        if (hasFractureComminutive) {
+            return {
+                level: 'élevé',
+                signs: [
+                    '🦴 Fracture complexe plateaux tibiaux',
+                    'Fracture comminutive métaphyso-épiphysaire fibula associée',
+                    'Séquelles : marche avec boiterie',
+                    'Lésions articulaires majeures'
+                ],
+                isDefault: false
+            };
+        }
+        // Sinon boiterie simple → MOYEN-HAUT
+        return {
+            level: 'moyen',
+            signs: [
+                '🦴 Fracture plateaux tibiaux (extrémité supérieure)',
+                'Fracture fibula associée',
+                'Séquelles : boiterie persistante',
+                'Atteinte articulaire genou'
+            ],
+            isDefault: false
+        };
     }
     
     // COTYLE + AMP INSTABLE + LIMITATION MOBILITÉ → MOYEN (38%)
@@ -3326,6 +3359,23 @@ const determineSeverity = (
     console.log('🔍 [determineSeverity] Faible signs:', signs);
     if (signs.length > 0) return { level: 'faible', signs: [...new Set(signs)], isDefault: false };
 
+    // 🆕 CRITÈRE SPÉCIFIQUE RAIDEUR DOIGT : Flexion limitée + Extension normale → MOYEN
+    const isFingerInjury = /(?:doigt|phalange|index|medius|annulaire|auriculaire|d[2-5]|p[123])/i.test(normalizedText);
+    const hasFlexionLimitee = /flexion.*limit[eé]/i.test(normalizedText);
+    const hasExtensionNormale = /extension.*normale?|extension.*(?:conserv[eé]e|preserv[eé]e)|extension.*ok/i.test(normalizedText);
+    
+    if (isFingerInjury && hasFlexionLimitee && hasExtensionNormale) {
+        return {
+            level: 'moyen',
+            signs: [
+                'Flexion limitée (déficit partiel)',
+                'Extension normale conservée (récupération partielle)',
+                'Impact fonctionnel modéré'
+            ],
+            isDefault: false
+        };
+    }
+    
     // 🆕 3️⃣ Analyse contextuelle AVANT détection mots-clés "élevé"
     // Si claudication modérée (≥300m) OU impossibilité partielle (charges) OU chirurgie simple → Ne pas forcer ÉLEVÉ
     const hasModerateContext = hasClaudicationModerate || hasPartialImpossibility || hasSimpleSurgery;
@@ -3716,6 +3766,7 @@ export const findCandidateInjuries = (text: string, externalKeywords?: string[])
     }
 
     normalizedText = normalizedText.replace(/plateau tibiale/g, 'plateau tibial');
+    normalizedText = normalizedText.replace(/raidair/g, 'raideur');
     
     normalizedText = normalizedText.replace(/\b(droit|droite)\b/g, 'dominante').replace(/\bgauche\b/g, 'non dominante');
     normalizedText = normalizedText.replace(/\bamputaion\b/g, 'amputation'); 
@@ -5567,6 +5618,13 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             searchTerms: ["Fracture des plateaux tibiaux"],
             priority: 10350
         },
+        // Fracture extrémité supérieure tibia = plateaux tibiaux
+        {
+            pattern: /fracture.*(?:extremit[eé]|extr[eé]mit[eé]).*(?:sup[eé]rieure?|proximale?).*tibia|tibia.*(?:extremit[eé]|extr[eé]mit[eé]).*(?:sup[eé]rieure?|proximale?)/i,
+            context: /.*/i,
+            searchTerms: ["Fracture des plateaux tibiaux"],
+            priority: 10350
+        },
         // Fracture tiers distal tibia (≠ plateau)
         {
             pattern: /fracture.*(?:tiers|1\/3).*(?:distal|inferieur).*tibia/i,
@@ -5744,6 +5802,13 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
         {
             pattern: /fracture.*plateaux.*tibiaux|plateaux.*tibiaux.*fracture/i,
             context: /deviation|raideur|flexion|valgus|varus|degres?/i,
+            searchTerms: ['Fracture des plateaux tibiaux - Avec déviation et/ou raideur'],
+            priority: 999
+        },
+        // Extrémité supérieure tibia avec séquelles = plateaux tibiaux avec déviation/raideur
+        {
+            pattern: /fracture.*(?:extremit[eé]|extr[eé]mit[eé]).*(?:sup[eé]rieure?|proximale?).*tibia|tibia.*(?:extremit[eé]|extr[eé]mit[eé]).*(?:sup[eé]rieure?|proximale?)/i,
+            context: /boiterie|raideur|deviation|marche|claudication|sequelle/i,
             searchTerms: ['Fracture des plateaux tibiaux - Avec déviation et/ou raideur'],
             priority: 999
         },
@@ -6496,6 +6561,26 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             priority: 92
         },
         // Règles doigts - raideurs
+        // 🆕 Désinsertion tendon extenseur D4 avec raideur séquellaire
+        {
+            pattern: /(?:d[eé]sinsertion|rupture|section|l[eé]sion).*tendon.*extenseur.*(?:p[123]\s*)?d4|(?:p[123]\s*)?d4.*(?:d[eé]sinsertion|rupture|section).*tendon.*extenseur/i,
+            context: /raideur|raidair|s[eé]quelle|flexion.*limit[eé]|extension/i,
+            searchTerms: ['Raideur d\'une articulation de l\'annulaire (Main Dominante)', 'Raideur d\'une articulation de l\'annulaire (Main Non Dominante)'],
+            priority: 999
+        },
+        {
+            pattern: /(?:d[eé]sinsertion|rupture|section|l[eé]sion).*tendon.*extenseur.*annulaire/i,
+            context: /raideur|raidair|s[eé]quelle|flexion.*limit[eé]|extension/i,
+            searchTerms: ['Raideur d\'une articulation de l\'annulaire (Main Dominante)', 'Raideur d\'une articulation de l\'annulaire (Main Non Dominante)'],
+            priority: 998
+        },
+        // Raideur P2 D4 (notation anatomique)
+        {
+            pattern: /raideur.*(?:p[123]\s*)?d4|(?:p[123]\s*)?d4.*raideur|raidair.*(?:p[123]\s*)?d4/i,
+            context: /doigt|main|phalange|tendon|extenseur|flechisseur/i,
+            searchTerms: ['Raideur d\'une articulation de l\'annulaire (Main Dominante)', 'Raideur d\'une articulation de l\'annulaire (Main Non Dominante)'],
+            priority: 997
+        },
         {
             pattern: /raideur.*index|index.*raideur|ankylose.*index/i,
             context: /doigt|main|fracture|phalange/i,
@@ -9714,6 +9799,21 @@ export const detectMultipleLesions = (text: string): {
         return {
             isCumul: false,  // NE PAS splitter le texte
             lesionCount: 1,  // Traiter comme une seule lésion complexe
+            keywords: [],
+            hasAnteriorState: false,
+            anteriorIPP: null
+        };
+    }
+    
+    // 🆕 EXCEPTION PLATEAUX TIBIAUX + FIBULA - Une seule lésion complexe du genou
+    // Fracture extrémité supérieure tibia + fibula proximal = traumatisme articulaire genou unique
+    const isPlateauxTibiauxFibula = /fracture.*(?:plateau|plateaux).*tibial|(?:extremit[eé]|extr[eé]mit[eé]).*(?:sup[eé]rieure?|proximale?).*tibia/i.test(normalized) && 
+                                     /fracture.*(?:fibula|p[eé]ron[eé])|(?:fibula|p[eé]ron[eé]).*fracture|m[eé]taphyso.*[eé]piphysaire/i.test(normalized);
+    
+    if (isPlateauxTibiauxFibula) {
+        return {
+            isCumul: false,  // NE PAS splitter - c'est UNE seule lésion du genou
+            lesionCount: 1,  // Fracture complexe du genou (plateau tibial + fibula = même traumatisme)
             keywords: [],
             hasAnteriorState: false,
             anteriorIPP: null
