@@ -149,7 +149,7 @@ const medicalSynonyms: { [key: string]: string[] } = {
   dixieme: ['dixième', '/10', 'sur 10', '10ème', 'sur dix'],
   
   // Termes ORL
-  oreille: ['oreille', 'auriculaire', 'auditif'],
+  oreille: ['oreille', 'auditif', 'pavilion', 'conduit auditif'],  // V3.3.131: RETIRÉ "auriculaire" - ambigu (doigt vs oreille)
   surdite: ['surdité', 'perte auditive', 'hypoacousie', 'cophose'],
 };
 
@@ -6719,8 +6719,15 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
         {
             pattern: /(?:ablation|amputation).*\bP3\s+D5\b/i,
             context: /doigt|main/i,
-            searchTerms: ['Ablation phalange unguéale de l\'auriculaire (Main Dominante)', 'Ablation phalange unguéale de l\'auriculaire (Main Non Dominante)'],
+            searchTerms: ['Amputation de l\'auriculaire - Désarticulation 2ème phalange', 'Ablation phalange unguéale de l\'auriculaire (Main Dominante)', 'Ablation phalange unguéale de l\'auriculaire (Main Non Dominante)'],
             priority: 16000
+        },
+        {
+            pattern: /(?:amputation|perte).*(?:auriculaire|d5).*\bP3\b/i,
+            context: /doigt|main/i,
+            negativeContext: /oreille|auditif|conduit/i,  // Exclure contexte ORL
+            searchTerms: ['Amputation de l\'auriculaire - Désarticulation 2ème phalange'],
+            priority: 17000  // Priorité supérieure pour éviter confusion avec oreille
         },
         // === POUCE ===
         {
@@ -10117,6 +10124,25 @@ const extractIndividualLesions = (text: string): string[] => {
             lesions.push(pseudarthrosePart.trim());
             lesions.push(amputationPart.trim());
             console.log('✅ Pattern 6 (pseudarthrose+amputation) détecté:', lesions);
+            return lesions;
+        }
+    }
+    
+    // Pattern 7: Amputation + Rupture tendon (ex: "amputation P3 D5 avec rupture fléchisseur P2 D4") - V3.3.131
+    // Détecte les lésions combinées doigt: amputation sur un doigt + tendon sur autre doigt
+    const amputationTendonPattern = /(?:amputation|perte|desart).*?(?:p[123]|phalange).*?(?:d[1-5]|doigt).*?(?:avec|et|ainsi\s+qu['"]une?|associee?\s+[aà]).*?(?:rupture|section|lesion).*?(?:flechisseur|extenseur|tendon)/i;
+    if (amputationTendonPattern.test(normalized)) {
+        // Extraire amputation: chercher "amputation...D5" ou "amputation...auriculaire"
+        const amputationPart = normalized.match(/(?:amputation|perte|desart).*?(?:p[123]|phalange).*?(?:d[1-5]|doigt|pouce|index|medius|annulaire|auriculaire).*?(?=(?:avec|et|ainsi|associee))/i)?.[0] || '';
+        // Extraire tendon: chercher "rupture fléchisseur...D4" ou "rupture...annulaire"
+        const tendonPart = normalized.match(/(?:avec|et|ainsi\s+qu['"]une?|associee?\s+[aà])\s*(?:rupture|section|lesion).*?(?:flechisseur|extenseur|tendon).*?(?:p[123]|phalange)?.*?(?:d[1-5]|doigt|pouce|index|medius|annulaire|auriculaire)/i)?.[0] || '';
+        
+        if (amputationPart && tendonPart) {
+            lesions.push(amputationPart.trim());
+            // Nettoyer le tendonPart des connecteurs
+            const cleanTendonPart = tendonPart.replace(/^(?:avec|et|ainsi\s+qu['"]une?|associee?\s+[aà])\s*/i, '').trim();
+            lesions.push(cleanTendonPart);
+            console.log('✅ Pattern 7 (amputation+tendon) détecté:', lesions);
             return lesions;
         }
     }

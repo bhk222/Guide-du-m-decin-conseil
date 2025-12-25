@@ -65,6 +65,30 @@ export const mayetReyComplement: InjuryCategory[] = [
           { name: "Doigt en col de cygne (IPP hyperextension, IPD flexion) (Dominante)", rate: [8, 15], description: "Rétraction de l'intrinsèque ou laxité volaire." },
           { name: "Clinodactylie post-traumatique (Dominante)", rate: [2, 8], description: "Déviation latérale d'un doigt." },
           
+          // Lésions tendineuses fléchisseurs (Classification Verdan - Zone II la plus critique)
+          { name: "Rupture/Section fléchisseur pouce - Zone I (IPP) (Dominante)", rate: [8, 12], description: "Section FPL zone distale, perte flexion IPP pouce." },
+          { name: "Rupture/Section fléchisseur pouce - Zone II-III (thénar/paume) (Dominante)", rate: [10, 15], description: "Section FPL zone critique, risque adhérences." },
+          { name: "Rupture/Section fléchisseur index - Zone I (IPD) (Dominante)", rate: [6, 10], description: "Section FDP zone distale, perte flexion IPD uniquement." },
+          { name: "Rupture/Section fléchisseur index - Zone II (gaine digitale P1-P2) (Dominante)", rate: [10, 15], description: "Section zone critique, adhérences fréquentes, raideur IPP+IPD." },
+          { name: "Rupture/Section fléchisseur index - Zone III-IV-V (paume/poignet) (Dominante)", rate: [8, 12], description: "Section zone proximale, meilleur pronostic." },
+          { name: "Rupture/Section fléchisseur médius - Zone I (IPD) (Dominante)", rate: [5, 8], description: "Section FDP zone distale médius." },
+          { name: "Rupture/Section fléchisseur médius - Zone II (gaine digitale) (Dominante)", rate: [8, 12], description: "Section zone critique médius, raideur IPP+IPD." },
+          { name: "Rupture/Section fléchisseur médius - Zone III-IV-V (Dominante)", rate: [6, 10], description: "Section zone proximale médius." },
+          { name: "Rupture/Section fléchisseur annulaire - Zone I (IPD) (Dominante)", rate: [4, 7], description: "Section FDP zone distale annulaire." },
+          { name: "Rupture/Section fléchisseur annulaire - Zone II (gaine digitale) (Dominante)", rate: [6, 10], description: "Section zone critique annulaire, raideur IPP+IPD." },
+          { name: "Rupture/Section fléchisseur annulaire - Zone III-IV-V (Dominante)", rate: [5, 8], description: "Section zone proximale annulaire." },
+          { name: "Rupture/Section fléchisseur auriculaire - Zone I (IPD) (Dominante)", rate: [3, 5], description: "Section FDP zone distale auriculaire." },
+          { name: "Rupture/Section fléchisseur auriculaire - Zone II (gaine digitale) (Dominante)", rate: [4, 8], description: "Section zone critique auriculaire, raideur." },
+          { name: "Rupture/Section fléchisseur auriculaire - Zone III-IV-V (Dominante)", rate: [3, 6], description: "Section zone proximale auriculaire." },
+          { name: "Section fléchisseurs multiples (2 doigts ou plus) - Zone II (Dominante)", rate: [15, 30], description: "Lésion complexe multi-digitale en zone critique." },
+          
+          // Lésions tendineuses extenseurs
+          { name: "Section extenseur pouce - Zone T1-T2 (IPP/MCP) (Dominante)", rate: [5, 10], description: "Perte extension pouce." },
+          { name: "Section extenseur doigt long - Zone 1 (IPD) (Dominante)", rate: [2, 5], description: "Doigt en maillet (voir déformation ci-dessus)." },
+          { name: "Section extenseur doigt long - Zone 3 (IPP) (Dominante)", rate: [5, 10], description: "Doigt en boutonnière (voir déformation ci-dessus)." },
+          { name: "Section extenseur doigt long - Zone 5-7 (MCP/poignet) (Dominante)", rate: [8, 15], description: "Perte extension doigt au niveau MCP." },
+          { name: "Section extenseurs multiples au poignet (Dominante)", rate: [15, 25], description: "Atteinte de plusieurs tendons extenseurs." },
+          
           // Main non dominante (facteur 0.7-0.8)
           { name: "Ankylose IPP Index (Non-Dominante)", rate: [5, 12] },
           { name: "Ankylose IPP Médius (Non-Dominante)", rate: [4, 10] },
