@@ -89,7 +89,36 @@ export const mayetReyComplement: InjuryCategory[] = [
           { name: "Section extenseur doigt long - Zone 5-7 (MCP/poignet) (Dominante)", rate: [8, 15], description: "Perte extension doigt au niveau MCP." },
           { name: "Section extenseurs multiples au poignet (Dominante)", rate: [15, 25], description: "Atteinte de plusieurs tendons extenseurs." },
           
-          // Main non dominante (facteur 0.7-0.8)
+          // Main non dominante - Déformations (facteur 0.7-0.8)
+          { name: "Doigt en maillet (mallet finger) IPD (Non-Dominante)", rate: [2, 6], description: "Rupture tendon extenseur terminal, IPD en flexion permanente." },
+          { name: "Doigt en boutonnière (IPP fléchie, IPD hyperextension) (Non-Dominante)", rate: [6, 12], description: "Rupture bandelette médiane extenseur." },
+          { name: "Doigt en col de cygne (IPP hyperextension, IPD flexion) (Non-Dominante)", rate: [6, 12], description: "Rétraction de l'intrinsèque ou laxité volaire." },
+          
+          // Main non dominante - Lésions tendineuses fléchisseurs (facteur 0.7-0.8)
+          { name: "Rupture/Section fléchisseur pouce - Zone I (IPP) (Non-Dominante)", rate: [6, 9], description: "Section FPL zone distale, perte flexion IPP pouce." },
+          { name: "Rupture/Section fléchisseur pouce - Zone II-III (thénar/paume) (Non-Dominante)", rate: [7, 12], description: "Section FPL zone critique, risque adhérences." },
+          { name: "Rupture/Section fléchisseur index - Zone I (IPD) (Non-Dominante)", rate: [4, 8], description: "Section FDP zone distale, perte flexion IPD uniquement." },
+          { name: "Rupture/Section fléchisseur index - Zone II (gaine digitale P1-P2) (Non-Dominante)", rate: [7, 12], description: "Section zone critique, adhérences fréquentes, raideur IPP+IPD." },
+          { name: "Rupture/Section fléchisseur index - Zone III-IV-V (paume/poignet) (Non-Dominante)", rate: [6, 9], description: "Section zone proximale, meilleur pronostic." },
+          { name: "Rupture/Section fléchisseur médius - Zone I (IPD) (Non-Dominante)", rate: [4, 6], description: "Section FDP zone distale médius." },
+          { name: "Rupture/Section fléchisseur médius - Zone II (gaine digitale) (Non-Dominante)", rate: [6, 9], description: "Section zone critique médius, raideur IPP+IPD." },
+          { name: "Rupture/Section fléchisseur médius - Zone III-IV-V (Non-Dominante)", rate: [4, 8], description: "Section zone proximale médius." },
+          { name: "Rupture/Section fléchisseur annulaire - Zone I (IPD) (Non-Dominante)", rate: [3, 5], description: "Section FDP zone distale annulaire." },
+          { name: "Rupture/Section fléchisseur annulaire - Zone II (gaine digitale) (Non-Dominante)", rate: [4, 8], description: "Section zone critique annulaire, raideur IPP+IPD." },
+          { name: "Rupture/Section fléchisseur annulaire - Zone III-IV-V (Non-Dominante)", rate: [4, 6], description: "Section zone proximale annulaire." },
+          { name: "Rupture/Section fléchisseur auriculaire - Zone I (IPD) (Non-Dominante)", rate: [2, 4], description: "Section FDP zone distale auriculaire." },
+          { name: "Rupture/Section fléchisseur auriculaire - Zone II (gaine digitale) (Non-Dominante)", rate: [3, 6], description: "Section zone critique auriculaire, raideur." },
+          { name: "Rupture/Section fléchisseur auriculaire - Zone III-IV-V (Non-Dominante)", rate: [2, 5], description: "Section zone proximale auriculaire." },
+          { name: "Section fléchisseurs multiples (2 doigts ou plus) - Zone II (Non-Dominante)", rate: [12, 24], description: "Lésion complexe multi-digitale en zone critique." },
+          
+          // Main non dominante - Lésions tendineuses extenseurs (facteur 0.7-0.8)
+          { name: "Section extenseur pouce - Zone T1-T2 (IPP/MCP) (Non-Dominante)", rate: [4, 8], description: "Perte extension pouce." },
+          { name: "Section extenseur doigt long - Zone 1 (IPD) (Non-Dominante)", rate: [2, 4], description: "Doigt en maillet (voir déformation ci-dessus)." },
+          { name: "Section extenseur doigt long - Zone 3 (IPP) (Non-Dominante)", rate: [4, 8], description: "Doigt en boutonnière (voir déformation ci-dessus)." },
+          { name: "Section extenseur doigt long - Zone 5-7 (MCP/poignet) (Non-Dominante)", rate: [6, 12], description: "Perte extension doigt au niveau MCP." },
+          { name: "Section extenseurs multiples au poignet (Non-Dominante)", rate: [12, 20], description: "Atteinte de plusieurs tendons extenseurs." },
+          
+          // Main non dominante - Ankyloses
           { name: "Ankylose IPP Index (Non-Dominante)", rate: [5, 12] },
           { name: "Ankylose IPP Médius (Non-Dominante)", rate: [4, 10] },
           { name: "Ankylose IPP Annulaire (Non-Dominante)", rate: [3, 8] },
