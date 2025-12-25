@@ -9479,7 +9479,19 @@ const extractPatientContext = (text: string): { profession?: string; age?: strin
 const extractPreexistingConditions = (text: string): { preexisting: string[]; cleanedText: string } => {
     const preexisting: string[] = [];
     let cleanedText = text;
-    const normalized = normalize(text);
+    
+    // 🆕 V3.3.136: EXCLURE AVANT TOUT les sections "séquelles potentielles/futures" et "plan évolutif"
+    // Ces phrases décrivent des séquelles FUTURES, pas des antécédents
+    const futureSequelaPattern = /(?:sur\s+le\s+plan\s+évolutif|plan\s+évolutif)[^.]*?(?:séquelles?\s+potentielles?|comprennent|susceptibles?\s+de)[^.]*?\./gi;
+    const futureSequelaMatches = text.match(futureSequelaPattern);
+    if (futureSequelaMatches) {
+        futureSequelaMatches.forEach(match => {
+            cleanedText = cleanedText.replace(match, ''); // Supprimer totalement
+            console.log(`🚫 Section séquelles futures EXCLUE des antécédents: ${match.substring(0, 80)}...`);
+        });
+    }
+    
+    const normalized = normalize(cleanedText); // Normaliser APRÈS exclusion
 
     // 🆕 Détection mots-clés SÉQUELLES (post-traumatiques) - À EXCLURE des antécédents
     const sequelaKeywords = [
