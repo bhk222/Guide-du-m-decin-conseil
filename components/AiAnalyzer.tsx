@@ -9898,7 +9898,7 @@ const extractIndividualLesions = (text: string): string[] => {
         if (lesions.length >= 2) return lesions;
     }
     
-    // Pattern 0B: Fracture + déchirure ligament + élongation muscle (CAS 2) - AMÉLIORÉ V3.3.133
+    // Pattern 0B: Fracture + déchirure ligament + élongation muscle (CAS 2) - AMÉLIORÉ V3.3.134
     // Ex: "fracture tibia associée à déchirure ligament collatéral ainsi qu'une élongation quadriceps"
     // Ex: "fracture genou avec lésion ligamentaire et atteinte musculaire"
     // Ex: "fracture tibia sur fond de rupture LCA ainsi qu'élongation quadriceps"
@@ -9906,6 +9906,12 @@ const extractIndividualLesions = (text: string): string[] => {
     const fractureMatch = normalized.match(/fracture\s+(?:non\s+)?(?:deplacee?)?\s*(?:du|de\s+la)?\s*(?:tiers)?\s*(?:distal|proximal|moyen)?\s*(?:du|de\s+la)?\s*(?:tibia|femur|humerus|genou)\s*(?:droit|gauche)?/i);
     const ligamentMatch = normalized.match(/(?:dechirure|lesion|rupture)\s+(?:partielle?|complete?|totale?)?\s*(?:du|de\s+la)?\s*ligament\s+(?:collateral|croise|lateral|lca|lcp)\s*(?:medial|interne|externe|anterieur|posterieur)?\s*(?:du)?\s*(?:genou|coude)?\s*(?:droit|gauche)?/i);
     const muscleMatch = normalized.match(/(?:elongation|dechirure|rupture)\s+(?:musculaire\s+)?(?:du|de\s+la)?\s*(?:quadriceps|triceps|biceps)/i);
+    
+    console.log('🔍 Pattern 0B - Extraction détaillée:');
+    console.log('  multiTraumaPattern test:', multiTraumaPattern.test(normalized));
+    console.log('  fractureMatch:', fractureMatch ? fractureMatch[0] : 'NULL');
+    console.log('  ligamentMatch:', ligamentMatch ? ligamentMatch[0] : 'NULL');
+    console.log('  muscleMatch:', muscleMatch ? muscleMatch[0] : 'NULL');
     
     if (multiTraumaPattern.test(normalized) || (fractureMatch && ligamentMatch && muscleMatch)) {
         if (fractureMatch) lesions.push(fractureMatch[0].trim());
