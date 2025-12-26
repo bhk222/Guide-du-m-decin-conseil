@@ -40,6 +40,53 @@ const normalize = (str: string) => str.toLowerCase().normalize("NFD").replace(/[
 
 // --- Sub-components ---
 
+const InjuryImageTooltip: React.FC<{ imageUrl: string; injuryName: string }> = ({ imageUrl, injuryName }) => {
+    const [show, setShow] = useState(false);
+    
+    return (
+        <div className="relative inline-block ml-2">
+            <button
+                type="button"
+                className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-blue-100 hover:bg-blue-200 text-blue-600 transition-colors"
+                onMouseEnter={() => setShow(true)}
+                onMouseLeave={() => setShow(false)}
+                onClick={(e) => { e.stopPropagation(); setShow(!show); }}
+            >
+                <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+            </button>
+            
+            {show && (
+                <div 
+                    className="absolute z-50 left-0 top-full mt-2 p-3 bg-white border-2 border-blue-300 rounded-lg shadow-2xl w-96"
+                    onMouseEnter={() => setShow(true)}
+                    onMouseLeave={() => setShow(false)}
+                    onClick={(e) => e.stopPropagation()}
+                >
+                    <div className="flex items-start justify-between mb-2">
+                        <h5 className="text-xs font-bold text-slate-800">Illustration médicale</h5>
+                        <button
+                            type="button"
+                            className="text-slate-400 hover:text-slate-600"
+                            onClick={(e) => { e.stopPropagation(); setShow(false); }}
+                        >
+                            <svg className="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </button>
+                    </div>
+                    <img 
+                        src={imageUrl} 
+                        alt={injuryName}
+                        className="w-full rounded-md border border-slate-200"
+                    />
+                </div>
+            )}
+        </div>
+    );
+};
+
 const AdvancedRateSelector: React.FC<{ injury: Injury; onSelect: (rate: number, severity: 'low' | 'low-medium' | 'medium' | 'medium-high' | 'high') => void }> = ({ injury, onSelect }) => {
     const [currentStep, setCurrentStep] = useState(2); // Default to medium
     const severityLevels: Array<'low' | 'low-medium' | 'medium' | 'medium-high' | 'high'> = ['low', 'low-medium', 'medium', 'medium-high', 'high'];
@@ -337,7 +384,14 @@ export const GuidedCalculator: React.FC<GuidedCalculatorProps> = ({
                                                                 isSelected ? 'bg-primary-600 text-white shadow' : 'bg-slate-50 hover:bg-primary-100'
                                                             }`}
                                                         >
-                                                            <p className="font-semibold">{injury.name}</p>
+                                                            <div className="flex items-center justify-between">
+                                                                <p className="font-semibold flex items-center">
+                                                                    {injury.name}
+                                                                    {injury.imageUrl && (
+                                                                        <InjuryImageTooltip imageUrl={injury.imageUrl} injuryName={injury.name} />
+                                                                    )}
+                                                                </p>
+                                                            </div>
                                                             <p className={`text-xs ${isSelected ? 'text-primary-200' : 'text-slate-600'}`}>
                                                                 Taux: {typeof injury.rate === 'number' ? `${injury.rate}%` : `[${injury.rate[0]}-${injury.rate[1]}]%`}
                                                             </p>

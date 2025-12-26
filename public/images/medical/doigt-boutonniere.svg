@@ -1,0 +1,108 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" width="800" height="400">
+  <!-- Déformation en boutonnière -->
+  <g id="boutonniere">
+    <!-- Fond -->
+    <rect width="800" height="400" fill="white"/>
+    
+    <!-- Titre -->
+    <text x="400" y="30" text-anchor="middle" font-size="20" font-weight="bold" fill="#333">
+      Déformation en boutonnière
+    </text>
+    
+    <!-- Main avec doigt en déformation boutonnière -->
+    <g id="main-boutonniere" transform="translate(100, 80)">
+      <!-- Paume -->
+      <ellipse cx="150" cy="200" rx="80" ry="120" fill="#f4b8d4" stroke="#333" stroke-width="2"/>
+      
+      <!-- Doigt en boutonnière - IPP fléchie -->
+      <g id="doigt-boutonniere">
+        <!-- Phalange proximale -->
+        <rect x="120" y="60" width="60" height="80" rx="10" fill="#f4b8d4" stroke="#333" stroke-width="2"/>
+        
+        <!-- IPP fléchie (articulation en flexion) -->
+        <circle cx="150" cy="140" r="8" fill="#ff6b9d" stroke="#333" stroke-width="2"/>
+        
+        <!-- Phalange moyenne en flexion -->
+        <g transform="translate(150, 140) rotate(45)">
+          <rect x="-30" y="0" width="60" height="70" rx="8" fill="#f4b8d4" stroke="#333" stroke-width="2"/>
+        </g>
+        
+        <!-- IPD en hyperextension -->
+        <g transform="translate(200, 180)">
+          <circle cx="0" cy="0" r="6" fill="#ff6b9d" stroke="#333" stroke-width="2"/>
+          <!-- Phalange distale en hyperextension -->
+          <g transform="rotate(-30)">
+            <rect x="0" y="-5" width="40" height="50" rx="8" fill="#f4b8d4" stroke="#333" stroke-width="2"/>
+          </g>
+        </g>
+      </g>
+      
+      <!-- Flèche et label IPP fléchie -->
+      <g id="label-ipp">
+        <line x1="80" y1="140" x2="140" y2="140" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)"/>
+        <text x="20" y="145" font-size="14" font-weight="bold" fill="#333">IPP fléchie</text>
+      </g>
+      
+      <!-- Flèche et label IPD hyperextension -->
+      <g id="label-ipd">
+        <line x1="250" y1="150" x2="210" y2="170" stroke="#333" stroke-width="2" marker-end="url(#arrowhead)"/>
+        <text x="260" y="155" font-size="14" font-weight="bold" fill="#333">IPD</text>
+        <text x="260" y="170" font-size="14" font-weight="bold" fill="#333">hyperextension</text>
+      </g>
+    </g>
+    
+    <!-- Vue de profil normale -->
+    <g id="doigt-normal" transform="translate(450, 150)">
+      <text x="0" y="-20" font-size="16" font-weight="bold" fill="#666">Position normale</text>
+      
+      <!-- Doigt normal en ligne -->
+      <rect x="0" y="0" width="50" height="80" rx="8" fill="#e0e0e0" stroke="#999" stroke-width="1.5"/>
+      <circle cx="25" cy="80" r="5" fill="#999"/>
+      <rect x="0" y="80" width="50" height="70" rx="8" fill="#e0e0e0" stroke="#999" stroke-width="1.5"/>
+      <circle cx="25" cy="150" r="4" fill="#999"/>
+      <rect x="0" y="150" width="50" height="60" rx="8" fill="#e0e0e0" stroke="#999" stroke-width="1.5"/>
+    </g>
+    
+    <!-- Vue de profil avec déformation boutonnière -->
+    <g id="doigt-boutonniere-profil" transform="translate(450, 80)">
+      <text x="0" y="-20" font-size="16" font-weight="bold" fill="#d63384">Déformation en boutonnière</text>
+      
+      <!-- Phalange proximale -->
+      <rect x="0" y="0" width="50" height="80" rx="8" fill="#f4b8d4" stroke="#333" stroke-width="2"/>
+      
+      <!-- IPP fléchie -->
+      <circle cx="25" cy="80" r="6" fill="#ff6b9d" stroke="#333" stroke-width="2"/>
+      
+      <!-- Phalange moyenne en flexion -->
+      <g transform="translate(25, 80) rotate(50)">
+        <rect x="-25" y="0" width="50" height="70" rx="8" fill="#f4b8d4" stroke="#333" stroke-width="2"/>
+        <circle cx="0" cy="70" r="5" fill="#ff6b9d" stroke="#333" stroke-width="2"/>
+        
+        <!-- Phalange distale en hyperextension -->
+        <g transform="translate(0, 70) rotate(-40)">
+          <rect x="-25" y="0" width="50" height="55" rx="8" fill="#f4b8d4" stroke="#333" stroke-width="2"/>
+        </g>
+      </g>
+      
+      <!-- Annotations -->
+      <text x="90" y="85" font-size="13" fill="#d63384" font-weight="bold">← IPP fléchie</text>
+      <text x="90" y="135" font-size="13" fill="#d63384" font-weight="bold">← IPD en</text>
+      <text x="95" y="150" font-size="13" fill="#d63384" font-weight="bold">hyperextension</text>
+    </g>
+    
+    <!-- Définition des marqueurs de flèche -->
+    <defs>
+      <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+        <polygon points="0 0, 10 3, 0 6" fill="#333" />
+      </marker>
+    </defs>
+    
+    <!-- Légende explicative -->
+    <g id="legende" transform="translate(50, 320)">
+      <rect x="0" y="0" width="700" height="60" fill="#f8f9fa" stroke="#ddd" stroke-width="1" rx="5"/>
+      <text x="10" y="20" font-size="14" font-weight="bold" fill="#333">Mécanisme :</text>
+      <text x="10" y="38" font-size="12" fill="#555">Rupture de la bandelette médiane de l'extenseur → IPP en flexion</text>
+      <text x="10" y="53" font-size="12" fill="#555">Rétraction des bandelettes latérales → IPD en hyperextension</text>
+    </g>
+  </g>
+</svg>

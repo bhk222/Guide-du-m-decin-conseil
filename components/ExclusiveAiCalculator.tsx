@@ -51,11 +51,56 @@ const TypingIndicator: React.FC = () => (
 );
 
 const ProposalBubble: React.FC<{ proposal: Proposal; onAccept: () => void; onReject: () => void; }> = ({ proposal, onAccept, onReject }) => {
+    const [showImageTooltip, setShowImageTooltip] = useState(false);
+    
     return (
         <div className="p-4 bg-primary-100/60 border-l-4 border-primary-500 rounded-r-lg">
             <h4 className="font-bold text-primary-800 text-sm">Proposition de l'Expert IA</h4>
             <div className="mt-2 p-3 bg-white rounded-md border border-primary-200/80">
                 <div className="text-xs text-slate-700 space-y-2" dangerouslySetInnerHTML={{ __html: proposal.justification }}></div>
+                
+                {/* Image médicale explicative si disponible */}
+                {proposal.injury.imageUrl && (
+                    <div className="mt-3 relative">
+                        <button
+                            className="flex items-center gap-2 px-3 py-2 bg-blue-50 hover:bg-blue-100 border border-blue-200 rounded-md text-xs text-blue-700 font-medium transition-colors"
+                            onMouseEnter={() => setShowImageTooltip(true)}
+                            onMouseLeave={() => setShowImageTooltip(false)}
+                            onClick={() => setShowImageTooltip(!showImageTooltip)}
+                        >
+                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                            </svg>
+                            Voir l'illustration médicale
+                        </button>
+                        
+                        {/* Tooltip avec l'image */}
+                        {showImageTooltip && (
+                            <div 
+                                className="absolute z-50 left-0 top-full mt-2 p-3 bg-white border-2 border-blue-300 rounded-lg shadow-2xl max-w-2xl"
+                                onMouseEnter={() => setShowImageTooltip(true)}
+                                onMouseLeave={() => setShowImageTooltip(false)}
+                            >
+                                <div className="flex items-start justify-between mb-2">
+                                    <h5 className="text-sm font-bold text-slate-800">Illustration médicale</h5>
+                                    <button
+                                        className="text-slate-400 hover:text-slate-600"
+                                        onClick={(e) => { e.stopPropagation(); setShowImageTooltip(false); }}
+                                    >
+                                        <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                                        </svg>
+                                    </button>
+                                </div>
+                                <img 
+                                    src={proposal.injury.imageUrl} 
+                                    alt={proposal.name}
+                                    className="w-full rounded-md border border-slate-200"
+                                />
+                            </div>
+                        )}
+                    </div>
+                )}
             </div>
             {proposal.status === 'pending' && (
                 <div className="mt-3 flex gap-2 justify-end">

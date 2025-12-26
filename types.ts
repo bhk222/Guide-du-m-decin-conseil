@@ -3,6 +3,7 @@ export interface Injury {
   name: string;
   rate: number | [number, number];
   description?: string;
+  imageUrl?: string; // URL de l'image explicative médicale
   rateCriteria?: {
     low: string;
     medium?: string;
