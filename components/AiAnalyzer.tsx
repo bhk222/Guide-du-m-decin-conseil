@@ -1514,9 +1514,13 @@ const keywordWeights: { [key: string]: number } = {
     
     // ✋ DÉFORMATIONS SPÉCIFIQUES DES DOIGTS - Haute priorité pour détecter boutonnière et col de cygne
     'boutonnière': 110, 'boutonniere': 110, 'attitude vicieuse': 90, 'attitude vicieuse boutonnière': 120,
-    'col de cygne': 110, 'col cygne': 108, 'IPP': 85, 'IPD': 85,
+    'bandelette médiane': 105, 'bandelette centrale': 105, 'bandelette extenseur': 100,
+    'col de cygne': 110, 'col cygne': 108, 
+    'maillet': 110, 'mallet': 110, 'mallet finger': 112,
+    'IPP': 85, 'IPD': 85,
     'interphalangienne proximale': 82, 'interphalangienne distale': 82,
     'flexion IPP': 95, 'hyperextension IPD': 95, 'hyperextension IPP': 95, 'flexion IPD': 95,
+    'tendon extenseur': 88, 'extenseur terminal': 90, 'perte extension': 85,
     
     // 🦴 GENOU - Mots-clés spécifiques ligaments et ménisques
     'lca': 75, 'ligament croise anterieur': 75, 'lcp': 68, 'ligament croise posterieur': 68,
@@ -1889,12 +1893,24 @@ const synonymMap: { [key: string]: string } = {
     'déformation en boutonnière': 'boutonnière',
     'doigt boutonniere': 'boutonnière',
     'doigt en boutonniere': 'boutonnière',
+    'bandelette mediane': 'bandelette médiane',
+    'bandelette centrale': 'bandelette médiane',
+    'rupture bandelette': 'bandelette médiane',
+    'lesion bandelette': 'bandelette médiane',
+    'lésion bandelette': 'bandelette médiane',
     'col cygne': 'col de cygne',
     'attitude en col de cygne': 'col de cygne',
     'deformation col de cygne': 'col de cygne',
     'déformation col de cygne': 'col de cygne',
     'doigt col de cygne': 'col de cygne',
     'doigt en col de cygne': 'col de cygne',
+    'mallet': 'maillet',
+    'mallet finger': 'doigt en maillet',
+    'doigt maillet': 'doigt en maillet',
+    'doigt en maillet': 'maillet',
+    'attitude en maillet': 'maillet',
+    'deformation en maillet': 'maillet',
+    'déformation en maillet': 'maillet',
     'ipp': 'IPP',
     'ipd': 'IPD',
     'ip proximale': 'IPP',
@@ -4930,7 +4946,21 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             searchTerms: ["Doigt en boutonnière (IPP fléchie, IPD hyperextension)"],
             priority: 11000
         },
-        // Pattern 3: Col de cygne - doigt en premier
+        // Pattern 3: Détecte "rupture bandelette médiane" (lésion caractéristique de boutonnière)
+        {
+            pattern: /(?:rupture|l[eé]sion|section).*bandelette.*(?:m[eé]diane|centrale|extenseur)/i,
+            context: /(?:doigt|[1-5]\s*[eè]me|index|m[eé]dius|annulaire|auriculaire)/i,
+            searchTerms: ["Doigt en boutonnière (IPP fléchie, IPD hyperextension)"],
+            priority: 11000
+        },
+        // Pattern 4: Détecte "bandelette médiane" en premier
+        {
+            pattern: /bandelette.*(?:m[eé]diane|centrale).*(?:rupture|l[eé]sion|section)/i,
+            context: /(?:doigt|[1-5]\s*[eè]me|index|m[eé]dius|annulaire|auriculaire|extenseur)/i,
+            searchTerms: ["Doigt en boutonnière (IPP fléchie, IPD hyperextension)"],
+            priority: 11000
+        },
+        // Pattern 5: Col de cygne - doigt en premier
         {
             pattern: /(?:(?:le\s*)?[1-5]\s*[eè]me\s*(?:doigt)?|troisi[eè]me|doigt|index|m[eé]dius|annulaire|auriculaire).*col\s*(?:de\s*)?cygne/i,
             context: /(?:hyper.*?extension|extension).*(?:ipp|interphalangienne.*proximale)/i,
@@ -4942,6 +4972,36 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             pattern: /col\s*(?:de\s*)?cygne.*(?:(?:le\s*)?[1-5]\s*[eè]me|doigt|index|m[eé]dius|annulaire|auriculaire)/i,
             context: /(?:hyper.*?extension|extension).*(?:ipp|interphalangienne.*proximale)/i,
             searchTerms: ["Doigt en col de cygne (IPP hyperextension, IPD flexion)"],
+            priority: 11000
+        },
+        
+        // ✋ DOIGT EN MAILLET - Rupture tendon extenseur terminal (PRIORITÉ ABSOLUE)
+        // Pattern 1: Détecte "maillet" + doigt
+        {
+            pattern: /(?:(?:le\s*)?[1-5]\s*[eè]me\s*(?:doigt)?|troisi[eè]me|doigt|index|m[eé]dius|annulaire|auriculaire).*(?:maillet|mallet)/i,
+            context: /(?:ipd|interphalangienne.*distale).*(?:fl[eé]|flexion)/i,
+            searchTerms: ["Doigt en maillet (mallet finger) IPD"],
+            priority: 11000
+        },
+        // Pattern 2: Détecte "maillet" en premier
+        {
+            pattern: /(?:maillet|mallet).*(?:(?:le\s*)?[1-5]\s*[eè]me|doigt|index|m[eé]dius|annulaire|auriculaire)/i,
+            context: /(?:ipd|interphalangienne.*distale).*(?:fl[eé]|flexion)/i,
+            searchTerms: ["Doigt en maillet (mallet finger) IPD"],
+            priority: 11000
+        },
+        // Pattern 3: Détecte "rupture tendon extenseur terminal"
+        {
+            pattern: /(?:rupture|l[eé]sion|section).*(?:tendon\s*)?extenseur.*(?:terminal|distal)/i,
+            context: /(?:ipd|interphalangienne.*distale).*(?:fl[eé]|flexion|perte.*extension)/i,
+            searchTerms: ["Doigt en maillet (mallet finger) IPD"],
+            priority: 11000
+        },
+        // Pattern 4: Détecte "perte extension IPD"
+        {
+            pattern: /(?:(?:le\s*)?[1-5]\s*[eè]me\s*(?:doigt)?|troisi[eè]me|doigt|index|m[eé]dius|annulaire|auriculaire).*(?:perte|impossibilit[eé]|d[eé]ficit).*extension/i,
+            context: /(?:ipd|interphalangienne.*distale)/i,
+            searchTerms: ["Doigt en maillet (mallet finger) IPD"],
             priority: 11000
         },
         
@@ -7633,6 +7693,15 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
                             `• Hyperextension anormale de l'articulation IPP (interphalangienne proximale)<br>` +
                             `• Flexion compensatrice de l'articulation IPD (interphalangienne distale)<br>` +
                             `• Attitude vicieuse typique du doigt en col de cygne<br><br>` +
+                            `<strong>📋 Référence barémique :</strong> ${directMatch.name}<br>` +
+                            `<strong>📊 Taux IPP retenu : ${rateValue}%</strong>`;
+                    } else if (directMatch.name.toLowerCase().includes('maillet') || directMatch.name.toLowerCase().includes('mallet')) {
+                        medicalJustification = `<strong>🎯 DÉTECTION EXPERTE : DOIGT EN MAILLET (MALLET FINGER)</strong><br><br>` +
+                            `<strong>Signes cliniques caractéristiques identifiés :</strong><br>` +
+                            `• Rupture du tendon extenseur terminal<br>` +
+                            `• Flexion permanente de l'articulation IPD (interphalangienne distale)<br>` +
+                            `• Impossibilité d'extension active de l'IPD (extension passive possible)<br>` +
+                            `• Perte de la fonction d'extension terminale du doigt<br><br>` +
                             `<strong>📋 Référence barémique :</strong> ${directMatch.name}<br>` +
                             `<strong>📊 Taux IPP retenu : ${rateValue}%</strong>`;
                     } else {
