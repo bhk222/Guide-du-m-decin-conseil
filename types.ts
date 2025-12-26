@@ -4,6 +4,7 @@ export interface Injury {
   rate: number | [number, number];
   description?: string;
   imageUrl?: string; // URL de l'image explicative médicale
+  clinicalTip?: string; // Astuce pour l'examen clinique et l'orientation diagnostique
   rateCriteria?: {
     low: string;
     medium?: string;
