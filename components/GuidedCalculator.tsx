@@ -44,7 +44,7 @@ const ImageIndicator: React.FC<{ imageUrl: string; injuryName: string }> = ({ im
     const [show, setShow] = useState(false);
     
     return (
-        <div className="relative inline-block ml-2">
+        <div className="relative inline-block mr-2">
             <button
                 type="button"
                 className="inline-flex items-center justify-center w-5 h-5 rounded bg-blue-100 hover:bg-blue-200 text-blue-600 transition-colors cursor-help"
@@ -412,10 +412,10 @@ export const GuidedCalculator: React.FC<GuidedCalculatorProps> = ({
                                                             }`}
                                                         >
                                                             <p className="font-semibold flex items-center">
-                                                                {injury.name}
                                                                 {injury.imageUrl && (
                                                                     <ImageIndicator imageUrl={injury.imageUrl} injuryName={injury.name} />
                                                                 )}
+                                                                {injury.name}
                                                             </p>
                                                             <p className={`text-xs ${isSelected ? 'text-primary-200' : 'text-slate-600'}`}>
                                                                 Taux: {typeof injury.rate === 'number' ? `${injury.rate}%` : `[${injury.rate[0]}-${injury.rate[1]}]%`}
