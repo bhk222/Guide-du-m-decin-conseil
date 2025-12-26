@@ -40,6 +40,35 @@ const normalize = (str: string) => str.toLowerCase().normalize("NFD").replace(/[
 
 // --- Sub-components ---
 
+const ImageIndicator: React.FC<{ imageUrl: string; injuryName: string }> = ({ imageUrl, injuryName }) => {
+    const [show, setShow] = useState(false);
+    
+    return (
+        <div className="relative inline-block ml-1.5">
+            <div
+                className="w-2 h-2 rounded-full bg-blue-500 cursor-help animate-pulse hover:animate-none"
+                onMouseEnter={() => setShow(true)}
+                onMouseLeave={() => setShow(false)}
+            />
+            
+            {show && (
+                <div 
+                    className="absolute z-50 left-full ml-2 top-1/2 -translate-y-1/2 p-2 bg-white border-2 border-blue-300 rounded-lg shadow-2xl w-80"
+                    onMouseEnter={() => setShow(true)}
+                    onMouseLeave={() => setShow(false)}
+                    style={{ pointerEvents: 'auto' }}
+                >
+                    <img 
+                        src={imageUrl} 
+                        alt={injuryName}
+                        className="w-full rounded-md"
+                    />
+                </div>
+            )}
+        </div>
+    );
+};
+
 const AdvancedRateSelector: React.FC<{ injury: Injury; onSelect: (rate: number, severity: 'low' | 'low-medium' | 'medium' | 'medium-high' | 'high') => void }> = ({ injury, onSelect }) => {
     const [currentStep, setCurrentStep] = useState(2); // Default to medium
     const severityLevels: Array<'low' | 'low-medium' | 'medium' | 'medium-high' | 'high'> = ['low', 'low-medium', 'medium', 'medium-high', 'high'];
@@ -362,7 +391,12 @@ export const GuidedCalculator: React.FC<GuidedCalculatorProps> = ({
                                                                 isSelected ? 'bg-primary-600 text-white shadow' : 'bg-slate-50 hover:bg-primary-100'
                                                             }`}
                                                         >
-                                                            <p className="font-semibold">{injury.name}</p>
+                                                            <p className="font-semibold flex items-center">
+                                                                {injury.name}
+                                                                {injury.imageUrl && (
+                                                                    <ImageIndicator imageUrl={injury.imageUrl} injuryName={injury.name} />
+                                                                )}
+                                                            </p>
                                                             <p className={`text-xs ${isSelected ? 'text-primary-200' : 'text-slate-600'}`}>
                                                                 Taux: {typeof injury.rate === 'number' ? `${injury.rate}%` : `[${injury.rate[0]}-${injury.rate[1]}]%`}
                                                             </p>
