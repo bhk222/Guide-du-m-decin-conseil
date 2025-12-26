@@ -8,6 +8,51 @@ interface SearchResult {
     path: string;
 }
 
+// Component for medical image tooltip
+const ImageIndicator: React.FC<{ imageUrl: string; injuryName: string }> = ({ imageUrl, injuryName }) => {
+    const [show, setShow] = useState(false);
+    
+    return (
+        <div className="relative inline-block mr-2">
+            <button
+                type="button"
+                className="inline-flex items-center justify-center w-5 h-5 rounded bg-blue-100 hover:bg-blue-200 text-blue-600 transition-colors cursor-help"
+                onMouseEnter={() => setShow(true)}
+                onMouseLeave={() => setShow(false)}
+                onClick={(e) => e.stopPropagation()}
+                title="Voir l'illustration médicale"
+            >
+                <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+            </button>
+            
+            {show && (
+                <div className="absolute z-50 left-0 top-full mt-2 p-3 bg-white border-2 border-blue-300 rounded-lg shadow-2xl w-96 pointer-events-none">
+                    <div className="flex items-center justify-between mb-2">
+                        <h4 className="font-bold text-sm text-blue-900">Illustration médicale</h4>
+                        <button
+                            type="button"
+                            onClick={(e) => {
+                                e.stopPropagation();
+                                setShow(false);
+                            }}
+                            className="text-slate-400 hover:text-slate-600 pointer-events-auto"
+                        >
+                            ✕
+                        </button>
+                    </div>
+                    <img 
+                        src={imageUrl} 
+                        alt={injuryName}
+                        className="w-full rounded-md border border-slate-200"
+                    />
+                </div>
+            )}
+        </div>
+    );
+};
+
 export const ReverseIppSearch: React.FC = () => {
     const [targetRate, setTargetRate] = useState('');
     const [results, setResults] = useState<SearchResult[]>([]);
@@ -84,7 +129,12 @@ export const ReverseIppSearch: React.FC = () => {
                             <div className="space-y-3 max-h-[50vh] overflow-y-auto custom-scrollbar -mr-3 pr-3">
                                 {results.map((result, index) => (
                                     <div key={index} className="p-3 bg-slate-50 border border-slate-200 rounded-lg">
-                                        <p className="font-semibold text-primary-700">{result.injury.name}</p>
+                                        <p className="font-semibold text-primary-700 flex items-center">
+                                            {result.injury.imageUrl && (
+                                                <ImageIndicator imageUrl={result.injury.imageUrl} injuryName={result.injury.name} />
+                                            )}
+                                            {result.injury.name}
+                                        </p>
                                         <p className="text-xs text-slate-500 mt-1">{result.path}</p>
                                         <div className="mt-2 text-xs">
                                             {typeof result.injury.rate === 'number' ? (

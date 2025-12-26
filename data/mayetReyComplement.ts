@@ -60,15 +60,27 @@ export const mayetReyComplement: InjuryCategory[] = [
           { name: "Section nerfs collatéraux digitaux multiples (Dominante)", rate: [5, 15], description: "Atteinte de 2 doigts ou plus." },
           
           // Déformations des doigts
-          { name: "Doigt en maillet (mallet finger) IPD (Dominante)", rate: [3, 8], description: "Rupture tendon extenseur terminal, IPD en flexion permanente." },
+          { 
+            name: "Doigt en maillet (mallet finger) IPD (Dominante)", 
+            rate: [3, 8], 
+            description: "Rupture tendon extenseur terminal, IPD en flexion permanente.",
+            imageUrl: "/images/medical/Doigt en maillet.svg",
+            clinicalTip: "Vérifier : impossibilité d'extension active de l'IPD (interphalangienne distale) avec flexion permanente. Tester l'extension passive (possible) vs active (impossible). Rechercher une avulsion osseuse sur la radiographie. Mesurer le déficit d'extension en degrés."
+          },
           { 
             name: "Doigt en boutonnière (IPP fléchie, IPD hyperextension) (Dominante)", 
             rate: [8, 15], 
             description: "Rupture bandelette médiane extenseur.", 
-            imageUrl: "/images/medical/doigt-boutonniere.svg",
+            imageUrl: "/images/medical/mus_boutonniere_fr.svg",
             clinicalTip: "Vérifier : flexion IPP irréductible + hyperextension IPD. Mesurer les amplitudes articulaires actives et passives. Rechercher douleur à la palpation de la bandelette médiane. Tester la force de préhension."
           },
-          { name: "Doigt en col de cygne (IPP hyperextension, IPD flexion) (Dominante)", rate: [8, 15], description: "Rétraction de l'intrinsèque ou laxité volaire." },
+          { 
+            name: "Doigt en col de cygne (IPP hyperextension, IPD flexion) (Dominante)", 
+            rate: [8, 15], 
+            description: "Rétraction de l'intrinsèque ou laxité volaire.",
+            imageUrl: "/images/medical/mus_boutonniere_fr.svg",
+            clinicalTip: "Vérifier : hyperextension IPP + flexion IPD (inverse de la boutonnière). Tester la stabilité de l'IPP en flexion contrariée. Rechercher un ressaut ou une instabilité. Évaluer la force de préhension et la coordination fine."
+          },
           { name: "Clinodactylie post-traumatique (Dominante)", rate: [2, 8], description: "Déviation latérale d'un doigt." },
           
           // Lésions tendineuses fléchisseurs (Classification Verdan - Zone II la plus critique)
@@ -96,15 +108,27 @@ export const mayetReyComplement: InjuryCategory[] = [
           { name: "Section extenseurs multiples au poignet (Dominante)", rate: [15, 25], description: "Atteinte de plusieurs tendons extenseurs." },
           
           // Main non dominante - Déformations (facteur 0.7-0.8)
-          { name: "Doigt en maillet (mallet finger) IPD (Non-Dominante)", rate: [2, 6], description: "Rupture tendon extenseur terminal, IPD en flexion permanente." },
+          { 
+            name: "Doigt en maillet (mallet finger) IPD (Non-Dominante)", 
+            rate: [2, 6], 
+            description: "Rupture tendon extenseur terminal, IPD en flexion permanente.",
+            imageUrl: "/images/medical/Doigt en maillet.svg",
+            clinicalTip: "Vérifier : impossibilité d'extension active de l'IPD (interphalangienne distale) avec flexion permanente. Tester l'extension passive (possible) vs active (impossible). Rechercher une avulsion osseuse sur la radiographie. Mesurer le déficit d'extension en degrés."
+          },
           { 
             name: "Doigt en boutonnière (IPP fléchie, IPD hyperextension) (Non-Dominante)", 
             rate: [6, 12], 
             description: "Rupture bandelette médiane extenseur.", 
-            imageUrl: "/images/medical/doigt-boutonniere.svg",
+            imageUrl: "/images/medical/mus_boutonniere_fr.svg",
             clinicalTip: "Vérifier : flexion IPP irréductible + hyperextension IPD. Mesurer les amplitudes articulaires actives et passives. Rechercher douleur à la palpation de la bandelette médiane. Tester la force de préhension."
           },
-          { name: "Doigt en col de cygne (IPP hyperextension, IPD flexion) (Non-Dominante)", rate: [6, 12], description: "Rétraction de l'intrinsèque ou laxité volaire." },
+          { 
+            name: "Doigt en col de cygne (IPP hyperextension, IPD flexion) (Non-Dominante)", 
+            rate: [6, 12], 
+            description: "Rétraction de l'intrinsèque ou laxité volaire.",
+            imageUrl: "/images/medical/mus_boutonniere_fr.svg",
+            clinicalTip: "Vérifier : hyperextension IPP + flexion IPD (inverse de la boutonnière). Tester la stabilité de l'IPP en flexion contrariée. Rechercher un ressaut ou une instabilité. Évaluer la force de préhension et la coordination fine."
+          },
           
           // Main non dominante - Lésions tendineuses fléchisseurs (facteur 0.7-0.8)
           { name: "Rupture/Section fléchisseur pouce - Zone I (IPP) (Non-Dominante)", rate: [6, 9], description: "Section FPL zone distale, perte flexion IPP pouce." },

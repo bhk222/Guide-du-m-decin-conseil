@@ -43,7 +43,7 @@ interface ExclusiveAiCalculatorProps {
 
 const TypingIndicator: React.FC = () => (
     <div className="flex items-center space-x-1.5 p-3 animate-fade-in">
-        <span className="text-slate-500 text-sm">Dr. Hakim analyse...</span>
+        <span className="text-slate-500 text-sm">Dr. Hacene analyse...</span>
         <div className="animate-bounce w-1.5 h-1.5 bg-slate-500 rounded-full [animation-delay:-0.3s]"></div>
         <div className="animate-bounce w-1.5 h-1.5 bg-slate-500 rounded-full [animation-delay:-0.15s]"></div>
         <div className="animate-bounce w-1.5 h-1.5 bg-slate-500 rounded-full"></div>
@@ -203,7 +203,7 @@ export const ExclusiveAiCalculator: React.FC<ExclusiveAiCalculatorProps> = ({
     hasPreexisting 
 }) => {
     const [messages, setMessages] = useState<ChatMessage[]>([
-        { id: crypto.randomUUID(), role: 'model', text: "Bonjour. Je suis Dr. Hakim, votre expert en évaluation médico-légale. Décrivez-moi les séquelles cliniques constatées après consolidation pour que je puisse vous aider à déterminer le taux d'IPP." }
+        { id: crypto.randomUUID(), role: 'model', text: "Bonjour. Je suis Dr. Hacene, votre expert en évaluation médico-légale. Décrivez-moi les séquelles cliniques constatées après consolidation pour que je puisse vous aider à déterminer le taux d'IPP." }
     ]);
     const [userInput, setUserInput] = useState('');
     const [isLoading, setIsLoading] = useState(false);

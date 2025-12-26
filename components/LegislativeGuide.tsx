@@ -377,7 +377,7 @@ const MessageBubble: React.FC<{ message: Message }> = ({ message }) => {
 
 const AiAssistantView: React.FC = () => {
     const [messages, setMessages] = useState<Message[]>([
-        { id: 'initial', role: 'model', text: "Bonjour, je suis Dr. Hakim, votre assistant juridique. Posez-moi une question sur la législation AT/MP en Algérie, ou choisissez une suggestion." }
+        { id: 'initial', role: 'model', text: "Bonjour, je suis Dr. Hacene, votre assistant juridique. Posez-moi une question sur la législation AT/MP en Algérie, ou choisissez une suggestion." }
     ]);
     const [input, setInput] = useState('');
     const [isLoading, setIsLoading] = useState(false);

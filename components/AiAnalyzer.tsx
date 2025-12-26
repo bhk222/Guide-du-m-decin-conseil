@@ -1512,6 +1512,12 @@ const keywordWeights: { [key: string]: number } = {
     'griffes orteils': 70, 'orteils en griffe': 72, 'hallux valgus': 68,
     'radial': 80, 'sciatique': 80, 'median': 80, 'cubital': 80, 'ulnaire': 80, 'crural': 80, 'facial': 80, 'trijumeau': 80, 'nerf': 75,
     
+    // ✋ DÉFORMATIONS SPÉCIFIQUES DES DOIGTS - Haute priorité pour détecter boutonnière et col de cygne
+    'boutonnière': 110, 'boutonniere': 110, 'attitude vicieuse': 90, 'attitude vicieuse boutonnière': 120,
+    'col de cygne': 110, 'col cygne': 108, 'IPP': 85, 'IPD': 85,
+    'interphalangienne proximale': 82, 'interphalangienne distale': 82,
+    'flexion IPP': 95, 'hyperextension IPD': 95, 'hyperextension IPP': 95, 'flexion IPD': 95,
+    
     // 🦴 GENOU - Mots-clés spécifiques ligaments et ménisques
     'lca': 75, 'ligament croise anterieur': 75, 'lcp': 68, 'ligament croise posterieur': 68,
     'lli': 75, 'ligament lateral interne': 75, 'ligament collateral medial': 75, 'collateral medial': 75,
@@ -1872,6 +1878,30 @@ const synonymMap: { [key: string]: string } = {
     'phalange p3': 'phalange distale',
     'phalange 1': 'phalange proximale',
     'phalange 2': 'phalange moyenne',
+    
+    // ✋ Déformations des doigts - Synonymes
+    'boutonniere': 'boutonnière',
+    'attitude en boutonniere': 'boutonnière',
+    'attitude en boutonnière': 'boutonnière',
+    'attitude vicieuse en boutonniere': 'boutonnière',
+    'attitude vicieuse en boutonnière': 'boutonnière',
+    'deformation en boutonniere': 'boutonnière',
+    'déformation en boutonnière': 'boutonnière',
+    'doigt boutonniere': 'boutonnière',
+    'doigt en boutonniere': 'boutonnière',
+    'col cygne': 'col de cygne',
+    'attitude en col de cygne': 'col de cygne',
+    'deformation col de cygne': 'col de cygne',
+    'déformation col de cygne': 'col de cygne',
+    'doigt col de cygne': 'col de cygne',
+    'doigt en col de cygne': 'col de cygne',
+    'ipp': 'IPP',
+    'ipd': 'IPD',
+    'ip proximale': 'IPP',
+    'ip distale': 'IPD',
+    'interphalangienne prox': 'IPP',
+    'interphalangienne dist': 'IPD',
+    'flechie': 'fléchie',
     'phalange 3': 'phalange distale',
     '1ere phalange': 'phalange proximale',
     '2eme phalange': 'phalange moyenne',
@@ -4885,6 +4915,36 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             priority: 11000
         },
         
+        // ✋ DÉFORMATIONS DOIGTS - Boutonnière et Col de cygne (PRIORITÉ ABSOLUE)
+        // Pattern 1: Détecte "doigt/index/médius/etc + boutonnière" OU "le 3ème + boutonnière" (mot "doigt" optionnel)
+        {
+            pattern: /(?:(?:le\s*)?[1-5]\s*[eè]me\s*(?:doigt)?|troisi[eè]me|doigt|index|m[eé]dius|annulaire|auriculaire).*(?:boutonnière|boutonniere)/i,
+            context: /(?:fl[eé]).*(?:ipp|interphalangienne.*proximale)/i,
+            searchTerms: ["Doigt en boutonnière (IPP fléchie, IPD hyperextension)"],
+            priority: 11000
+        },
+        // Pattern 2: Détecte "boutonnière + doigt/3ème/index/etc"
+        {
+            pattern: /(?:boutonnière|boutonniere).*(?:(?:le\s*)?[1-5]\s*[eè]me|doigt|index|m[eé]dius|annulaire|auriculaire)/i,
+            context: /(?:fl[eé]).*(?:ipp|interphalangienne.*proximale)/i,
+            searchTerms: ["Doigt en boutonnière (IPP fléchie, IPD hyperextension)"],
+            priority: 11000
+        },
+        // Pattern 3: Col de cygne - doigt en premier
+        {
+            pattern: /(?:(?:le\s*)?[1-5]\s*[eè]me\s*(?:doigt)?|troisi[eè]me|doigt|index|m[eé]dius|annulaire|auriculaire).*col\s*(?:de\s*)?cygne/i,
+            context: /(?:hyper.*?extension|extension).*(?:ipp|interphalangienne.*proximale)/i,
+            searchTerms: ["Doigt en col de cygne (IPP hyperextension, IPD flexion)"],
+            priority: 11000
+        },
+        // Pattern 4: Col de cygne - col de cygne en premier
+        {
+            pattern: /col\s*(?:de\s*)?cygne.*(?:(?:le\s*)?[1-5]\s*[eè]me|doigt|index|m[eé]dius|annulaire|auriculaire)/i,
+            context: /(?:hyper.*?extension|extension).*(?:ipp|interphalangienne.*proximale)/i,
+            searchTerms: ["Doigt en col de cygne (IPP hyperextension, IPD flexion)"],
+            priority: 11000
+        },
+        
         // Rupture coiffe des rotateurs ISOLÉE
         {
             pattern: /rupture.*coiffe|coiffe.*rupture|l[eé]sion.*coiffe/i,
@@ -7556,14 +7616,37 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
                     
                     console.log(`✅ [EXPERT RULE MATCH - PRIORITY ${rule.priority}] ${directMatch.name} = ${rateValue}%`);
                     
+                    // 🆕 Justification médicale lisible pour déformations digitales
+                    let medicalJustification = '';
+                    if (directMatch.name.toLowerCase().includes('boutonnière') || directMatch.name.toLowerCase().includes('boutonniere')) {
+                        medicalJustification = `<strong>🎯 DÉTECTION EXPERTE : DÉFORMATION EN BOUTONNIÈRE</strong><br><br>` +
+                            `<strong>Signes cliniques caractéristiques identifiés :</strong><br>` +
+                            `• Flexion anormale de l'articulation IPP (interphalangienne proximale)<br>` +
+                            `• Hyperextension compensatrice de l'articulation IPD (interphalangienne distale)<br>` +
+                            `• Perte du relief dorsal normal de l'articulation IPP<br>` +
+                            `• Attitude vicieuse typique du doigt<br><br>` +
+                            `<strong>📋 Référence barémique :</strong> ${directMatch.name}<br>` +
+                            `<strong>📊 Taux IPP retenu : ${rateValue}%</strong>`;
+                    } else if (directMatch.name.toLowerCase().includes('col de cygne')) {
+                        medicalJustification = `<strong>🎯 DÉTECTION EXPERTE : DÉFORMATION EN COL DE CYGNE</strong><br><br>` +
+                            `<strong>Signes cliniques caractéristiques identifiés :</strong><br>` +
+                            `• Hyperextension anormale de l'articulation IPP (interphalangienne proximale)<br>` +
+                            `• Flexion compensatrice de l'articulation IPD (interphalangienne distale)<br>` +
+                            `• Attitude vicieuse typique du doigt en col de cygne<br><br>` +
+                            `<strong>📋 Référence barémique :</strong> ${directMatch.name}<br>` +
+                            `<strong>📊 Taux IPP retenu : ${rateValue}%</strong>`;
+                    } else {
+                        // Justification générique pour autres règles expertes
+                        medicalJustification = `<strong>🎯 RÈGLE EXPERTE PRIORITAIRE</strong><br><br>` +
+                            `<strong>📋 Référence barémique :</strong> ${directMatch.name}<br>` +
+                            `<strong>📊 Taux IPP retenu : ${rateValue}%</strong>`;
+                    }
+                    
                     return {
                         type: 'proposal',
                         name: directMatch.name,
                         rate: rateValue,
-                        justification: `<strong>🎯 RÈGLE EXPERTE PRIORITAIRE (${rule.priority})</strong><br><br>` +
-                            `Pattern détecté : <code>${rule.pattern}</code><br>` +
-                            `Context vérifié : <code>${rule.context}</code><br><br>` +
-                            `📊 <strong>Taux IPP : ${rateValue}%</strong>`,
+                        justification: medicalJustification,
                         path: directMatch.path,
                         injury: directMatch as Injury
                     };
