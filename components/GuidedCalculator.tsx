@@ -44,20 +44,40 @@ const ImageIndicator: React.FC<{ imageUrl: string; injuryName: string }> = ({ im
     const [show, setShow] = useState(false);
     
     return (
-        <div className="relative inline-block ml-1.5">
-            <div
-                className="w-2 h-2 rounded-full bg-blue-500 cursor-help animate-pulse hover:animate-none"
+        <div className="relative inline-block ml-2">
+            <button
+                type="button"
+                className="inline-flex items-center justify-center w-5 h-5 rounded bg-blue-100 hover:bg-blue-200 text-blue-600 transition-colors cursor-help"
                 onMouseEnter={() => setShow(true)}
                 onMouseLeave={() => setShow(false)}
-            />
+                onClick={(e) => e.stopPropagation()}
+                title="Voir l'illustration médicale"
+            >
+                <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2">
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+            </button>
             
             {show && (
                 <div 
-                    className="absolute z-50 left-full ml-2 top-1/2 -translate-y-1/2 p-2 bg-white border-2 border-blue-300 rounded-lg shadow-2xl w-80"
+                    className="absolute z-50 left-full ml-2 top-1/2 -translate-y-1/2 p-3 bg-white border-2 border-blue-400 rounded-lg shadow-2xl w-96"
                     onMouseEnter={() => setShow(true)}
                     onMouseLeave={() => setShow(false)}
+                    onClick={(e) => e.stopPropagation()}
                     style={{ pointerEvents: 'auto' }}
                 >
+                    <div className="flex items-center justify-between mb-2 pb-2 border-b border-slate-200">
+                        <span className="text-xs font-semibold text-slate-700">Illustration médicale</span>
+                        <button
+                            type="button"
+                            className="text-slate-400 hover:text-slate-600 transition-colors"
+                            onClick={(e) => { e.stopPropagation(); setShow(false); }}
+                        >
+                            <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </button>
+                    </div>
                     <img 
                         src={imageUrl} 
                         alt={injuryName}
