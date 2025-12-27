@@ -1201,19 +1201,12 @@ const middleCategories: InjuryCategory[] = [
       {
         name: "Poignet - Raideurs et Ankyloses",
         injuries: [
-            { name: "Raideur du poignet - Flexion/extension limitée", rate: [8, 15], description: "Limitation bipolaire dorsiflexion/palmarflexion modérée (40-50°)." },
-            { name: "Raideur du poignet - Mobilité réduite", rate: [10, 18], description: "Dorsiflexion réduite (30-40°) avec limitation des inclinaisons radiale/cubitale." },
-            { name: "Raideur poignet + déficit force", rate: [12, 20], description: "Raideur articulaire avec diminution significative de la force de prise." },
-            { name: "Raideur du poignet - Limitation sévère", rate: [12, 22], description: "Dorsiflexion < 30° et palmarflexion < 40°, quasi-ankylose." },
-            { name: "Raideur poignet avec douleur", rate: [6, 15], description: "Raideur post-traumatique avec douleurs chroniques résiduelles." },
-            { name: "Raideur poignet - Inclinaisons limitées", rate: [8, 16], description: "Flexion-extension préservées mais inclinaisons radiale/cubitale très réduites." },
-            { name: "Raideur poignet main dominante", rate: [10, 18], description: "Raideur du poignet de la main dominante avec retentissement fonctionnel." },
-            { name: "Ankylose du poignet - Rectiligne (Main Dominante)", rate: [25, 30] },
-            { name: "Ankylose du poignet - Rectiligne (Main Non Dominante)", rate: [20, 25] },
-            { name: "Ankylose du poignet - En flexion ou extension (Main Dominante)", rate: [30, 40] },
-            { name: "Ankylose du poignet - En flexion ou extension (Main Non Dominante)", rate: [25, 35] },
-            { name: "Raideur du poignet (Main Dominante)", rate: [5, 15], rateCriteria: { low: "Limitation de 25% des mobilités.", medium: "Limitation de 50%.", high: "Quasi-ankylose." } },
-            { name: "Raideur du poignet (Main Non Dominante)", rate: [4, 12], rateCriteria: { low: "Limitation de 25%.", medium: "Limitation de 50%.", high: "Quasi-ankylose." } },
+            { name: "Raideur du poignet (Main Dominante)", rate: [5, 15], description: "Limitation des mobilités du poignet en flexion-extension et inclinaisons radiale/cubitale. Évaluation selon le pourcentage de perte des amplitudes articulaires.", rateCriteria: { low: "Limitation légère de 25% des mobilités : raideur modérée avec gêne fonctionnelle minime.", medium: "Limitation moyenne de 50% des mobilités : raideur importante avec retentissement fonctionnel significatif.", high: "Limitation sévère > 75% : quasi-ankylose avec perte quasi-totale des mouvements." } },
+            { name: "Raideur du poignet (Main Non Dominante)", rate: [4, 12], description: "Limitation des mobilités du poignet en flexion-extension et inclinaisons radiale/cubitale. Évaluation selon le pourcentage de perte des amplitudes articulaires.", rateCriteria: { low: "Limitation légère de 25% des mobilités : raideur modérée avec gêne fonctionnelle minime.", medium: "Limitation moyenne de 50% des mobilités : raideur importante avec retentissement fonctionnel significatif.", high: "Limitation sévère > 75% : quasi-ankylose avec perte quasi-totale des mouvements." } },
+            { name: "Ankylose du poignet - En rectitude, position fonctionnelle (Main Dominante)", rate: 25, description: "Ankylose complète du poignet en position rectiligne (0° de flexion-extension), position fonctionnelle permettant compensation partielle. Blocage total des mouvements radio-carpiens." },
+            { name: "Ankylose du poignet - En rectitude, position fonctionnelle (Main Non Dominante)", rate: 20, description: "Ankylose complète du poignet en position rectiligne (0° de flexion-extension), position fonctionnelle permettant compensation partielle. Blocage total des mouvements radio-carpiens." },
+            { name: "Ankylose du poignet - En flexion ou extension vicieuse (Main Dominante)", rate: 35, description: "Ankylose du poignet en position vicieuse (flexion palmaire ou dorsiflexion excessive). Retentissement fonctionnel majeur sur tous les gestes de la main et des doigts." },
+            { name: "Ankylose du poignet - En flexion ou extension vicieuse (Main Non Dominante)", rate: 30, description: "Ankylose du poignet en position vicieuse (flexion palmaire ou dorsiflexion excessive). Retentissement fonctionnel majeur sur tous les gestes de la main et des doigts." },
         ]
       },
       {
