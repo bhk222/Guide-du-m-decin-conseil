@@ -1194,7 +1194,6 @@ const middleCategories: InjuryCategory[] = [
             { name: "Luxation du lunaire - Forme grave, non réduite, troubles nerveux (Main Non Dominante)", rate: 25, description: "Luxation du semi-lunaire non réduite avec blocage du poignet et compression fréquente du nerf médian. Troubles nerveux sensitifs et/ou moteurs. Séquelles fonctionnelles majeures." },
             { name: "Ostéoporose post-traumatique du poignet (Main Dominante)", rate: [10, 25], description: "Déminéralisation osseuse post-traumatique (algodystrophie) avec troubles trophiques et douleurs chroniques." },
             { name: "Ostéoporose post-traumatique du poignet (Main Non Dominante)", rate: [8, 20], description: "Déminéralisation osseuse post-traumatique avec séquelles fonctionnelles." },
-            { name: "Pseudarthrose du scaphoïde", rate: 22, description: "Pseudarthrose du scaphoïde carpien sans précision de dominance." },
             { name: "Pseudarthrose du scaphoïde carpien (Main Dominante)", rate: [10, 20], rateCriteria: { low: "Serrée, peu douloureuse.", high: "Lâche, douloureuse, arthrose radio-carpienne." } },
             { name: "Pseudarthrose du scaphoïde carpien (Main Non Dominante)", rate: [8, 15], rateCriteria: { low: "Serrée.", high: "Lâche et douloureuse." } },
         ]
