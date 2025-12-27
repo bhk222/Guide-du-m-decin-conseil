@@ -1196,17 +1196,48 @@ const middleCategories: InjuryCategory[] = [
             { name: "Ostéoporose post-traumatique du poignet (Main Non Dominante)", rate: [8, 20], description: "Déminéralisation osseuse post-traumatique avec séquelles fonctionnelles." },
             { name: "Pseudarthrose du scaphoïde carpien (Main Dominante)", rate: [10, 20], rateCriteria: { low: "Serrée, peu douloureuse.", high: "Lâche, douloureuse, arthrose radio-carpienne." } },
             { name: "Pseudarthrose du scaphoïde carpien (Main Non Dominante)", rate: [8, 15], rateCriteria: { low: "Serrée.", high: "Lâche et douloureuse." } },
+            { name: "Poignet ballant suite résection ou perte de substance du carpe (Main Dominante)", rate: [35, 45], description: "Instabilité majeure du poignet consécutive à une large résection chirurgicale ou une grande perte de substance traumatique du carpe. Pseudarthrose avec mobilité anormale, instabilité sévère compromettant la fonction de préhension. Susceptible d'amélioration par appareillage orthopédique.", rateCriteria: { low: "Instabilité modérée, compensation partielle, appareillage efficace.", medium: "Instabilité importante, gêne fonctionnelle majeure.", high: "Instabilité sévère avec douleurs chroniques, perte quasi-totale de la stabilité du poignet." } },
+            { name: "Poignet ballant suite résection ou perte de substance du carpe (Main Non Dominante)", rate: [30, 40], description: "Instabilité majeure du poignet consécutive à une large résection chirurgicale ou une grande perte de substance traumatique du carpe. Pseudarthrose avec mobilité anormale, instabilité sévère compromettant la fonction de préhension. Susceptible d'amélioration par appareillage orthopédique.", rateCriteria: { low: "Instabilité modérée, compensation partielle, appareillage efficace.", medium: "Instabilité importante, gêne fonctionnelle majeure.", high: "Instabilité sévère avec douleurs chroniques, perte quasi-totale de la stabilité du poignet." } },
         ]
       },
       {
         name: "Poignet - Raideurs et Ankyloses",
         injuries: [
-            { name: "Raideur du poignet (Main Dominante)", rate: [5, 15], description: "Limitation des mobilités du poignet en flexion-extension et inclinaisons radiale/cubitale. Évaluation selon le pourcentage de perte des amplitudes articulaires.", rateCriteria: { low: "Limitation légère de 25% des mobilités : raideur modérée avec gêne fonctionnelle minime.", medium: "Limitation moyenne de 50% des mobilités : raideur importante avec retentissement fonctionnel significatif.", high: "Limitation sévère > 75% : quasi-ankylose avec perte quasi-totale des mouvements." } },
-            { name: "Raideur du poignet (Main Non Dominante)", rate: [4, 12], description: "Limitation des mobilités du poignet en flexion-extension et inclinaisons radiale/cubitale. Évaluation selon le pourcentage de perte des amplitudes articulaires.", rateCriteria: { low: "Limitation légère de 25% des mobilités : raideur modérée avec gêne fonctionnelle minime.", medium: "Limitation moyenne de 50% des mobilités : raideur importante avec retentissement fonctionnel significatif.", high: "Limitation sévère > 75% : quasi-ankylose avec perte quasi-totale des mouvements." } },
-            { name: "Ankylose du poignet - En rectitude, position fonctionnelle (Main Dominante)", rate: 25, description: "Ankylose complète du poignet en position rectiligne (0° de flexion-extension), position fonctionnelle permettant compensation partielle. Blocage total des mouvements radio-carpiens." },
-            { name: "Ankylose du poignet - En rectitude, position fonctionnelle (Main Non Dominante)", rate: 20, description: "Ankylose complète du poignet en position rectiligne (0° de flexion-extension), position fonctionnelle permettant compensation partielle. Blocage total des mouvements radio-carpiens." },
-            { name: "Ankylose du poignet - En flexion ou extension vicieuse (Main Dominante)", rate: 35, description: "Ankylose du poignet en position vicieuse (flexion palmaire ou dorsiflexion excessive). Retentissement fonctionnel majeur sur tous les gestes de la main et des doigts." },
-            { name: "Ankylose du poignet - En flexion ou extension vicieuse (Main Non Dominante)", rate: 30, description: "Ankylose du poignet en position vicieuse (flexion palmaire ou dorsiflexion excessive). Retentissement fonctionnel majeur sur tous les gestes de la main et des doigts." },
+            // RAIDEURS ARTICULAIRES SIMPLES
+            { name: "Raideur légère du poignet en position favorable (rectitude) (Main Dominante)", rate: 5, description: "Raideur légère avec mouvements conservés en position rectiligne favorable. Limitation minime de la flexion-extension." },
+            { name: "Raideur légère du poignet en position favorable (rectitude) (Main Non Dominante)", rate: 4, description: "Raideur légère avec mouvements conservés en position rectiligne favorable. Limitation minime de la flexion-extension." },
+            
+            { name: "Raideur de l'extension et de la flexion du poignet (Main Dominante)", rate: [5, 8], description: "Limitation isolée des mouvements de flexion-extension du poignet. Pro-supination préservée.", rateCriteria: { low: "Limitation modérée < 50%.", high: "Limitation importante > 50%." } },
+            { name: "Raideur de l'extension et de la flexion du poignet (Main Non Dominante)", rate: [4, 6], description: "Limitation isolée des mouvements de flexion-extension du poignet. Pro-supination préservée.", rateCriteria: { low: "Limitation modérée < 50%.", high: "Limitation importante > 50%." } },
+            
+            { name: "Raideur de la pronation et de la supination (Main Dominante)", rate: [5, 10], description: "Limitation isolée de la rotation de l'avant-bras (pronation-supination). Flexion-extension du poignet préservée.", rateCriteria: { low: "Limitation modérée < 50%.", high: "Limitation importante > 50%." } },
+            { name: "Raideur de la pronation et de la supination (Main Non Dominante)", rate: [4, 8], description: "Limitation isolée de la rotation de l'avant-bras (pronation-supination). Flexion-extension du poignet préservée.", rateCriteria: { low: "Limitation modérée < 50%.", high: "Limitation importante > 50%." } },
+            
+            { name: "Raideurs combinées du poignet (flexion-extension + pronation-supination) (Main Dominante)", rate: [10, 20], description: "Limitation combinée des mouvements du poignet ET de la rotation de l'avant-bras. Retentissement fonctionnel important.", rateCriteria: { low: "Limitations modérées combinées.", medium: "Limitations importantes combinées.", high: "Quasi-ankylose avec mouvements très réduits." } },
+            { name: "Raideurs combinées du poignet (flexion-extension + pronation-supination) (Main Non Dominante)", rate: [8, 15], description: "Limitation combinée des mouvements du poignet ET de la rotation de l'avant-bras. Retentissement fonctionnel important.", rateCriteria: { low: "Limitations modérées combinées.", medium: "Limitations importantes combinées.", high: "Quasi-ankylose avec mouvements très réduits." } },
+
+            // ANKYLOSES COMPLÈTES - Position extension
+            { name: "Ankylose du poignet - En extension et demi-pronation, doigts mobiles (Main Dominante)", rate: [18, 20], description: "Ankylose complète en extension (30°) avec avant-bras en demi-pronation (pouce en dessus). Position de fonction optimale, doigts conservant leur mobilité. Barème officiel 1939.", rateCriteria: { low: "Position de fonction idéale, doigts parfaitement mobiles.", high: "Position légèrement sous-optimale ou mobilité digitale partiellement limitée." } },
+            { name: "Ankylose du poignet - En extension et demi-pronation, doigts mobiles (Main Non Dominante)", rate: [13, 15], description: "Ankylose complète en extension (30°) avec avant-bras en demi-pronation (pouce en dessus). Position de fonction optimale, doigts conservant leur mobilité. Barème officiel 1939.", rateCriteria: { low: "Position de fonction idéale, doigts parfaitement mobiles.", high: "Position légèrement sous-optimale ou mobilité digitale partiellement limitée." } },
+            
+            { name: "Ankylose du poignet - En extension et pronation complète, doigts mobiles (Main Dominante)", rate: [23, 25], description: "Ankylose en extension avec pronation complète de l'avant-bras. Doigts conservant leur mobilité complète. Retentissement fonctionnel plus important que demi-pronation.", rateCriteria: { low: "Doigts parfaitement mobiles, compensation partielle.", high: "Mobilité digitale légèrement limitée." } },
+            { name: "Ankylose du poignet - En extension et pronation complète, doigts mobiles (Main Non Dominante)", rate: [18, 20], description: "Ankylose en extension avec pronation complète de l'avant-bras. Doigts conservant leur mobilité complète. Retentissement fonctionnel plus important que demi-pronation.", rateCriteria: { low: "Doigts parfaitement mobiles, compensation partielle.", high: "Mobilité digitale légèrement limitée." } },
+            
+            { name: "Ankylose du poignet - En extension et pronation complète, doigts raidis (Main Dominante)", rate: [35, 40], description: "Ankylose en extension avec pronation complète ET raideur importante des doigts. Association invalidante compromettant sérieusement la fonction de préhension.", rateCriteria: { low: "Raideur modérée des doigts.", high: "Raideur sévère des doigts, préhension très limitée." } },
+            { name: "Ankylose du poignet - En extension et pronation complète, doigts raidis (Main Non Dominante)", rate: [25, 30], description: "Ankylose en extension avec pronation complète ET raideur importante des doigts. Association invalidante compromettant sérieusement la fonction de préhension.", rateCriteria: { low: "Raideur modérée des doigts.", high: "Raideur sévère des doigts, préhension très limitée." } },
+            
+            { name: "Ankylose du poignet - En extension et supination, doigts mobiles (Main Dominante)", rate: [40, 50], description: "Ankylose en extension avec supination de l'avant-bras. Position très défavorable selon degré de mobilité des doigts. Gêne majeure pour activités quotidiennes.", rateCriteria: { low: "Doigts mobiles, compensation partielle possible.", high: "Doigts légèrement raidis ou supination extrême." } },
+            { name: "Ankylose du poignet - En extension et supination, doigts mobiles (Main Non Dominante)", rate: [30, 40], description: "Ankylose en extension avec supination de l'avant-bras. Position très défavorable selon degré de mobilité des doigts. Gêne majeure pour activités quotidiennes.", rateCriteria: { low: "Doigts mobiles, compensation partielle possible.", high: "Doigts légèrement raidis ou supination extrême." } },
+
+            // ANKYLOSES COMPLÈTES - Position flexion
+            { name: "Ankylose du poignet - En flexion et pronation, doigts mobiles (Main Dominante)", rate: [45, 60], description: "Ankylose en flexion palmaire avec pronation. Position très défavorable selon degré de mobilité des doigts. Retentissement fonctionnel majeur.", rateCriteria: { low: "Flexion modérée (< 30°), doigts mobiles.", medium: "Flexion importante (30-60°), doigts partiellement mobiles.", high: "Flexion complète (> 60°) ou doigts raidis." } },
+            { name: "Ankylose du poignet - En flexion et pronation, doigts mobiles (Main Non Dominante)", rate: [35, 45], description: "Ankylose en flexion palmaire avec pronation. Position très défavorable selon degré de mobilité des doigts. Retentissement fonctionnel majeur.", rateCriteria: { low: "Flexion modérée (< 30°), doigts mobiles.", medium: "Flexion importante (30-60°), doigts partiellement mobiles.", high: "Flexion complète (> 60°) ou doigts raidis." } },
+            
+            { name: "Ankylose du poignet - En flexion et supination, doigts mobiles (Main Dominante)", rate: [45, 50], description: "Ankylose en flexion palmaire avec supination. Position défavorable, doigts conservant leur mobilité. Gêne fonctionnelle importante.", rateCriteria: { low: "Flexion modérée, doigts parfaitement mobiles.", high: "Flexion importante ou mobilité digitale partiellement limitée." } },
+            { name: "Ankylose du poignet - En flexion et supination, doigts mobiles (Main Non Dominante)", rate: [35, 45], description: "Ankylose en flexion palmaire avec supination. Position défavorable, doigts conservant leur mobilité. Gêne fonctionnelle importante.", rateCriteria: { low: "Flexion modérée, doigts parfaitement mobiles.", high: "Flexion importante ou mobilité digitale partiellement limitée." } },
+            
+            { name: "Ankylose du poignet - En flexion et supination, doigts ankylosés (perte de l'usage de la main) (Main Dominante)", rate: [55, 60], description: "Ankylose du poignet en flexion + supination AVEC ankylose des doigts. Équivaut à perte quasi-totale de l'usage fonctionnel de la main. Situation la plus invalidante.", rateCriteria: { low: "Quelques mouvements résiduels possibles.", high: "Ankylose complète poignet + tous doigts, main totalement figée." } },
+            { name: "Ankylose du poignet - En flexion et supination, doigts ankylosés (perte de l'usage de la main) (Main Non Dominante)", rate: [45, 50], description: "Ankylose du poignet en flexion + supination AVEC ankylose des doigts. Équivaut à perte quasi-totale de l'usage fonctionnel de la main. Situation la plus invalidante.", rateCriteria: { low: "Quelques mouvements résiduels possibles.", high: "Ankylose complète poignet + tous doigts, main totalement figée." } },
         ]
       },
       {
@@ -1238,8 +1269,10 @@ const middleCategories: InjuryCategory[] = [
         injuries: [
             { name: "Ankylose de tous les doigts de la main (Main Dominante)", rate: [50, 55] },
             { name: "Ankylose de tous les doigts de la main (Main Non Dominante)", rate: [40, 45] },
-            { name: "Main bote, creuse, etc. (Main Dominante)", rate: [40, 50] },
-            { name: "Main bote, creuse, etc. (Main Non Dominante)", rate: [30, 40] },
+            { name: "Main bote radiale ou cubitale (Main Dominante)", rate: [20, 40], description: "Main bote (déformation en déviation radiale ou cubitale) consécutive à une large perte de substance d'un des os de l'avant-bras (radius ou ulna). Évaluation selon le degré de déviation latérale et de la gêne apportée à la mobilité des doigts. Déformation osseuse avec retentissement fonctionnel variable.", rateCriteria: { low: "Déviation légère, mobilité des doigts peu gênée, compensation satisfaisante.", medium: "Déviation modérée, limitation partielle de la mobilité digitale.", high: "Déviation importante, gêne majeure de la mobilité des doigts, préhension très compromise." } },
+            { name: "Main bote radiale ou cubitale (Main Non Dominante)", rate: [15, 30], description: "Main bote (déformation en déviation radiale ou cubitale) consécutive à une large perte de substance d'un des os de l'avant-bras (radius ou ulna). Évaluation selon le degré de déviation latérale et de la gêne apportée à la mobilité des doigts. Déformation osseuse avec retentissement fonctionnel variable.", rateCriteria: { low: "Déviation légère, mobilité des doigts peu gênée, compensation satisfaisante.", medium: "Déviation modérée, limitation partielle de la mobilité digitale.", high: "Déviation importante, gêne majeure de la mobilité des doigts, préhension très compromise." } },
+            { name: "Main creuse avec rétraction palmaire (Main Dominante)", rate: [40, 50], description: "Main creuse avec rétraction de l'aponévrose palmaire (type Dupuytren post-traumatique), cicatrices vicieuses rétractiles. Déformation en griffe avec limitation sévère de l'extension des doigts." },
+            { name: "Main creuse avec rétraction palmaire (Main Non Dominante)", rate: [30, 40], description: "Main creuse avec rétraction de l'aponévrose palmaire (type Dupuytren post-traumatique), cicatrices vicieuses rétractiles. Déformation en griffe avec limitation sévère de l'extension des doigts." },
             { name: "Cicatrices vicieuses de la paume (Main Dominante)", rate: [5, 40], rateCriteria: { low: "Bride limitant l'extension d'un doigt.", high: "Main en griffe, rétraction de tous les doigts." } },
             { name: "Cicatrices vicieuses de la paume (Main Non Dominante)", rate: [4, 35], rateCriteria: { low: "Bride limitant l'extension d'un doigt.", high: "Main en griffe." } },
             { name: "Séquelles de fracture de métacarpien (cal vicieux, raideur) (Main Dominante)", rate: [3, 10] },
@@ -1258,12 +1291,11 @@ const middleCategories: InjuryCategory[] = [
         injuries: [
             { name: "Ablation moitié phalange unguéale du pouce (Main Dominante)", rate: 5 },
             { name: "Ablation phalange unguéale entière du pouce (Main Dominante)", rate: 15 },
+            { name: "Désarticulation inter-phalangienne du pouce (Main Dominante)", rate: 20, description: "Amputation du pouce au niveau de l'articulation inter-phalangienne avec conservation de la base (phalange proximale et métacarpien). Barème officiel." },
             { name: "Ablation 2 phalanges du pouce (Main Dominante)", rate: 25 },
+            { name: "Désarticulation métacarpo-phalangienne du pouce (Main Dominante)", rate: 28, description: "Amputation totale du pouce au niveau de l'articulation métacarpo-phalangienne. Perte totale du pouce avec conservation du métacarpien. Barème officiel." },
             { name: "Ablation 2 phalanges + tête métacarpien du pouce (Main Dominante)", rate: 27 },
             { name: "Ablation 2 phalanges + métacarpien entier du pouce (Main Dominante)", rate: 30 },
-            { name: "Amputation du pouce (main dominante)", rate: 20 },
-            { name: "Perte du pouce (2 phalanges) (Main Dominante)", rate: 25 },
-            { name: "Perte de la 2ème phalange du pouce (Main Dominante)", rate: 10 },
             { name: "Ankylose carpo-métacarpienne du pouce (Main Dominante)", rate: [15, 20] },
             { name: "Ankylose métacarpo-phalangienne du pouce (Main Dominante)", rate: 10 },
             { name: "Ankylose inter-phalangienne du pouce (Main Dominante)", rate: 5 },
@@ -1291,16 +1323,13 @@ const middleCategories: InjuryCategory[] = [
         injuries: [
             { name: "Ablation extrémité phalange unguéale de l'index (Main Dominante)", rate: 4 },
             { name: "Ablation phalange unguéale de l'index (Main Dominante)", rate: 6 },
+            { name: "Désarticulation 2ème phalange de l'index (Main Dominante)", rate: 8, description: "Amputation de l'index au niveau de l'articulation IPD (inter-phalangienne distale). Barème officiel." },
             { name: "Ablation phalange unguéale + phalange intermédiaire de l'index (Main Dominante)", rate: 8 },
             { name: "Ablation 2 phalanges de l'index (Main Dominante)", rate: 10 },
+            { name: "Désarticulation 1ère phalange de l'index (Main Dominante)", rate: 12, description: "Amputation de l'index au niveau de l'articulation IPP (inter-phalangienne proximale). Barème officiel." },
             { name: "Ablation 3 phalanges de l'index (Main Dominante)", rate: 13 },
+            { name: "Désarticulation métacarpo-phalangienne de l'index (Main Dominante)", rate: 15, description: "Amputation totale de l'index au niveau de l'articulation métacarpo-phalangienne. Barème officiel." },
             { name: "Ablation 3 phalanges + tête métacarpien de l'index (Main Dominante)", rate: 15 },
-            { name: "Amputation de l'index (main dominante)", rate: 10 },
-            { name: "Perte de l'index (3 phalanges) (Main Dominante)", rate: 15 },
-            { name: "Perte de la 3ème phalange de l'index (Main Dominante)", rate: 5 },
-            { name: "Perte de la 2ème phalange seule de l'index (P2 seule) (Main Dominante)", rate: 5 },
-            { name: "Perte de la 2ème phalange de l'index (Main Dominante)", rate: 5 },
-            { name: "Perte des 2ème et 3ème phalanges de l'index (Main Dominante)", rate: 10 },
             { name: "Ankylose de l'index (totalité) (Main Dominante)", rate: 15 },
             { name: "Raideur d'une articulation de l'index (Main Dominante)", rate: [2, 5] },
         ]
@@ -1328,15 +1357,12 @@ const middleCategories: InjuryCategory[] = [
         injuries: [
             { name: "Ablation extrémité phalange unguéale du médius (Main Dominante)", rate: 1 },
             { name: "Ablation phalange unguéale du médius (Main Dominante)", rate: 5 },
+            { name: "Désarticulation 2ème phalange du médius (Main Dominante)", rate: 6, description: "Amputation du médius au niveau de l'articulation IPD (inter-phalangienne distale). Barème officiel." },
             { name: "Ablation phalange unguéale + phalange intermédiaire du médius (Main Dominante)", rate: 6 },
             { name: "Ablation 2 phalanges du médius (Main Dominante)", rate: 9 },
+            { name: "Désarticulation 1ère phalange du médius (Main Dominante)", rate: 10, description: "Amputation du médius au niveau de l'articulation IPP (inter-phalangienne proximale). Barème officiel." },
+            { name: "Désarticulation métacarpo-phalangienne du médius (Main Dominante)", rate: 12, description: "Amputation totale du médius au niveau de l'articulation métacarpo-phalangienne. Barème officiel." },
             { name: "Ablation 3 phalanges du médius (Main Dominante)", rate: 12 },
-            { name: "Amputation du médius (main dominante)", rate: 10 },
-            { name: "Perte du médius (3 phalanges) (Main Dominante)", rate: 12 },
-            { name: "Perte de la 3ème phalange du médius (Main Dominante)", rate: 4 },
-            { name: "Perte de la 2ème phalange seule du médius (P2 seule) (Main Dominante)", rate: 4 },
-            { name: "Perte de la 2ème phalange du médius (Main Dominante)", rate: 4 },
-            { name: "Perte des 2ème et 3ème phalanges du médius (Main Dominante)", rate: 8 },
             { name: "Ankylose du médius (totalité) (Main Dominante)", rate: 12 },
             { name: "Raideur d'une articulation du médius (Main Dominante)", rate: [1, 4] },
             { name: "Raideur du médius (Main Dominante)", rate: [2, 5] },
@@ -1366,15 +1392,12 @@ const middleCategories: InjuryCategory[] = [
         injuries: [
             { name: "Ablation extrémité phalange unguéale de l'annulaire (Main Dominante)", rate: 1 },
             { name: "Ablation phalange unguéale de l'annulaire (Main Dominante)", rate: 4 },
+            { name: "Désarticulation 2ème phalange de l'annulaire (Main Dominante)", rate: 5, description: "Amputation de l'annulaire au niveau de l'articulation IPD (inter-phalangienne distale). Barème officiel." },
             { name: "Ablation phalange unguéale + phalange intermédiaire de l'annulaire (Main Dominante)", rate: 5 },
             { name: "Ablation 2 phalanges de l'annulaire (Main Dominante)", rate: 6 },
+            { name: "Désarticulation 1ère phalange de l'annulaire (Main Dominante)", rate: 8, description: "Amputation de l'annulaire au niveau de l'articulation IPP (inter-phalangienne proximale). Barème officiel." },
             { name: "Ablation 3 phalanges de l'annulaire (Main Dominante)", rate: 10 },
-            { name: "Amputation de l'annulaire (main dominante)", rate: 8 },
-            { name: "Perte de l'annulaire (3 phalanges) (Main Dominante)", rate: 8 },
-            { name: "Perte de la 3ème phalange de l'annulaire (Main Dominante)", rate: 3 },
-            { name: "Perte de la 2ème phalange seule de l'annulaire (P2 seule) (Main Dominante)", rate: 3 },
-            { name: "Perte de la 2ème phalange de l'annulaire (Main Dominante)", rate: 3 },
-            { name: "Perte des 2ème et 3ème phalanges de l'annulaire (Main Dominante)", rate: 6 },
+            { name: "Désarticulation métacarpo-phalangienne de l'annulaire (Main Dominante)", rate: 10, description: "Amputation totale de l'annulaire au niveau de l'articulation métacarpo-phalangienne. Barème officiel." },
             { name: "Ankylose de l'annulaire (totalité) (Main Dominante)", rate: 8 },
             { name: "Raideur d'une articulation de l'annulaire (Main Dominante)", rate: [3, 8] },
             { name: "Raideur de l'annulaire (Main Dominante)", rate: [3, 8] },
@@ -1387,13 +1410,10 @@ const middleCategories: InjuryCategory[] = [
             { name: "Ablation phalange unguéale de l'annulaire (Main Non Dominante)", rate: 2 },
             { name: "Ablation phalange unguéale + phalange intermédiaire de l'annulaire (Main Non Dominante)", rate: 3 },
             { name: "Ablation 2 phalanges de l'annulaire (Main Non Dominante)", rate: 4 },
+            { name: "Désarticulation 2ème phalange de l'annulaire (Main Non Dominante)", rate: 5, description: "Amputation de l'annulaire au niveau de l'articulation IPD. Barème officiel." },
+            { name: "Désarticulation 1ère phalange de l'annulaire (Main Non Dominante)", rate: 6, description: "Amputation de l'annulaire au niveau de l'articulation IPP. Barème officiel." },
             { name: "Ablation 3 phalanges de l'annulaire (Main Non Dominante)", rate: 7 },
-            { name: "Amputation de l'annulaire (main non dominante)", rate: 6 },
-            { name: "Perte de l'annulaire (3 phalanges) (Main Non Dominante)", rate: 6 },
-            { name: "Perte de la 3ème phalange de l'annulaire (Main Non Dominante)", rate: 2 },
-            { name: "Perte de la 2ème phalange seule de l'annulaire (P2 seule) (Main Non Dominante)", rate: 2 },
-            { name: "Perte de la 2ème phalange de l'annulaire (Main Non Dominante)", rate: 2 },
-            { name: "Perte des 2ème et 3ème phalanges de l'annulaire (Main Non Dominante)", rate: 4 },
+            { name: "Désarticulation métacarpo-phalangienne de l'annulaire (Main Non Dominante)", rate: 10, description: "Amputation totale de l'annulaire au niveau de l'articulation MCP. Barème officiel." },
             { name: "Ankylose de l'annulaire (totalité) (Main Non Dominante)", rate: 6 },
             { name: "Raideur d'une articulation de l'annulaire (Main Non Dominante)", rate: [1, 2] },
             { name: "Raideur de l'annulaire (Main Non Dominante)", rate: [1, 3] },
@@ -1404,14 +1424,11 @@ const middleCategories: InjuryCategory[] = [
         injuries: [
             { name: "Ablation extrémité phalange unguéale de l'auriculaire (Main Dominante)", rate: 1 },
             { name: "Ablation phalange unguéale de l'auriculaire (Main Dominante)", rate: 3 },
+            { name: "Désarticulation 2ème phalange de l'auriculaire (Main Dominante)", rate: 4, description: "Amputation de l'auriculaire au niveau de l'articulation IPD (inter-phalangienne distale). Barème officiel." },
             { name: "Ablation 2 phalanges de l'auriculaire (Main Dominante)", rate: 6 },
+            { name: "Désarticulation 1ère phalange de l'auriculaire (Main Dominante)", rate: 6, description: "Amputation de l'auriculaire au niveau de l'articulation IPP (inter-phalangienne proximale). Barème officiel." },
+            { name: "Désarticulation métacarpo-phalangienne de l'auriculaire (Main Dominante)", rate: 8, description: "Amputation totale de l'auriculaire au niveau de l'articulation métacarpo-phalangienne. Barème officiel." },
             { name: "Ablation 3 phalanges de l'auriculaire (Main Dominante)", rate: 10 },
-            { name: "Amputation de l'auriculaire (main dominante)", rate: 6 },
-            { name: "Perte de l'auriculaire (3 phalanges) (Main Dominante)", rate: 10 },
-            { name: "Perte de la 3ème phalange de l'auriculaire (Main Dominante)", rate: 4 },
-            { name: "Perte de la 2ème phalange seule de l'auriculaire (P2 seule) (Main Dominante)", rate: 3 },
-            { name: "Perte de la 2ème phalange de l'auriculaire (Main Dominante)", rate: 3 },
-            { name: "Perte des 2ème et 3ème phalanges de l'auriculaire (Main Dominante)", rate: 7 },
             { name: "Ankylose de l'auriculaire (totalité) (Main Dominante)", rate: 10 },
             { name: "Raideur d'une articulation de l'auriculaire (Main Dominante)", rate: [1, 3] },
             { name: "Raideur de l'auriculaire (Main Dominante)", rate: [1, 3] },
@@ -1422,14 +1439,11 @@ const middleCategories: InjuryCategory[] = [
         injuries: [
             { name: "Ablation extrémité phalange unguéale de l'auriculaire (Main Non Dominante)", rate: 1 },
             { name: "Ablation phalange unguéale de l'auriculaire (Main Non Dominante)", rate: 2 },
+            { name: "Désarticulation 2ème phalange de l'auriculaire (Main Non Dominante)", rate: 4, description: "Amputation de l'auriculaire au niveau de l'articulation IPD. Barème officiel." },
             { name: "Ablation 2 phalanges de l'auriculaire (Main Non Dominante)", rate: 4 },
+            { name: "Désarticulation 1ère phalange de l'auriculaire (Main Non Dominante)", rate: 5, description: "Amputation de l'auriculaire au niveau de l'articulation IPP. Barème officiel." },
+            { name: "Désarticulation métacarpo-phalangienne de l'auriculaire (Main Non Dominante)", rate: 8, description: "Amputation totale de l'auriculaire au niveau de l'articulation MCP. Barème officiel." },
             { name: "Ablation 3 phalanges de l'auriculaire (Main Non Dominante)", rate: 8 },
-            { name: "Amputation de l'auriculaire (main non dominante)", rate: 5 },
-            { name: "Perte de l'auriculaire (3 phalanges) (Main Non Dominante)", rate: 8 },
-            { name: "Perte de la 3ème phalange de l'auriculaire (Main Non Dominante)", rate: 3 },
-            { name: "Perte de la 2ème phalange seule de l'auriculaire (P2 seule) (Main Non Dominante)", rate: 2 },
-            { name: "Perte de la 2ème phalange de l'auriculaire (Main Non Dominante)", rate: 2 },
-            { name: "Perte des 2ème et 3ème phalanges de l'auriculaire (Main Non Dominante)", rate: 5 },
             { name: "Ankylose de l'auriculaire (totalité) (Main Non Dominante)", rate: 8 },
             { name: "Raideur d'une articulation de l'auriculaire (Main Non Dominante)", rate: [1, 2] },
             { name: "Raideur de l'auriculaire (Main Non Dominante)", rate: [1, 2] },
@@ -1445,14 +1459,23 @@ const middleCategories: InjuryCategory[] = [
         injuries: [
             { 
                 name: "Amputation de jambe sous le genou (tiers supérieur)", 
-                rate: 65, 
-                description: "Amputation sous le genou au tiers supérieur (amputation jambe proximale, amputation tibiale haute) avec moignon long et bien appareillable, prothèse fonctionnelle."
+                rate: 55, 
+                description: "Amputation sous le genou au tiers supérieur (amputation jambe proximale, amputation tibiale haute) avec moignon long et bien appareillable, prothèse fonctionnelle. Barème officiel : 55%."
             },
             { 
-                name: "Amputation de cuisse", 
-                rate: [70, 80], 
-                rateCriteria: { low: "Amputation de cuisse avec moignon long (amputation fémorale).", high: "Amputation de cuisse avec moignon très court, difficilement appareillable." },
-                description: "Amputation de cuisse (amputation fémorale), au-dessus du genou."
+                name: "Amputation de cuisse au tiers supérieur", 
+                rate: 75, 
+                description: "Amputation de la cuisse au niveau du tiers supérieur (amputation fémorale proximale). Moignon très court, difficulté d'appareillage importante. Barème officiel."
+            },
+            { 
+                name: "Amputation de cuisse au tiers moyen", 
+                rate: 70, 
+                description: "Amputation de la cuisse au niveau du tiers moyen (amputation fémorale). Moignon de longueur moyenne, appareillage standard. Barème officiel."
+            },
+            { 
+                name: "Amputation de cuisse au tiers inférieur", 
+                rate: 65, 
+                description: "Amputation de la cuisse au niveau du tiers inférieur (amputation fémorale distale, proche du genou). Moignon long, meilleur pronostic fonctionnel. Barème officiel."
             },
             { 
                 name: "Désarticulation de la hanche", 
