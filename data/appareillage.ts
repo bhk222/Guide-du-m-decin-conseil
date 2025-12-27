@@ -5055,10 +5055,10 @@ Composée de :
 • 01 paire d'articulation de genou libre ou à verrou
 • 01 paire d'articulation à tourillon
 
-Exigences orthopédiques :
+En plus des indications suscitées, des exigences orthopédiques s'imposent :
 • Le poids du malade est inférieur ou égal à 90 kilos (orthèse très légère)
 • Un raccourcissement inférieur à 02 cm confirmé à la télémétrie
-• Absence de déviation axiale des genoux (varus ou valgus inférieur à 6°)`,
+• Absence de déviation axiale des genoux (varus ou valgus inférieure à 6°)`,
     indications: [
           "Lésions de l'appareil extenseur du genou associées ou non à un déficit de la cheville",
           "Sclérose en plaque",
