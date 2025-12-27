@@ -452,7 +452,9 @@ export const algerianBareme1967: InjuryCategory[] = [
             rateCriteria: {
               low: "Déformation modérée, marche possible",
               high: "Déformation sévère, marche très difficile"
-            }
+            },
+            imageUrl: "/images/medical/pied-varus-equin.jpg",
+            clinicalTip: "Vérifier : triade varus + équin + adduction (CAVE: Cavus Adductus Varus Equinus), réductibilité passive (test Finochietto), déformations osseuses fixées, subluxation/luxation astragale, griffe orteils associée, durillons latéraux, impossibilité chaussage normal, boiterie sévère. Scorer irréductibilité (Pirani/Dimeglio) pour pronostic appareillage."
           },
           { 
             name: "Pied bot post-traumatique appareillable",
@@ -461,7 +463,9 @@ export const algerianBareme1967: InjuryCategory[] = [
             rateCriteria: {
               low: "Appareillage efficace",
               high: "Appareillage contraignant"
-            }
+            },
+            imageUrl: "/images/medical/pied-varus-equin.jpg",
+            clinicalTip: "Vérifier : réductibilité passive partielle de la déformation, efficacité de l'orthoprothèse (chaussure orthopédique ou AFOKAFO), correction de l'axe par appareillage, marche possible avec aide technique, durillons persistants sous zones d'hyperpression, observance port appareillage, complications cutanées (escarres, phlyctènes). Réévaluer efficacité appareillage tous les 6 mois."
           },
         ]
       },

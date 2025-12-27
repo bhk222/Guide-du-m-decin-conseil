@@ -40,7 +40,7 @@ const normalize = (str: string) => str.toLowerCase().normalize("NFD").replace(/[
 
 // --- Sub-components ---
 
-const ImageIndicator: React.FC<{ imageUrl: string; injuryName: string }> = ({ imageUrl, injuryName }) => {
+const ImageIndicator: React.FC<{ imageUrl: string; injuryName: string; clinicalTip?: string }> = ({ imageUrl, injuryName, clinicalTip }) => {
     const [show, setShow] = useState(false);
     
     return (
@@ -60,7 +60,7 @@ const ImageIndicator: React.FC<{ imageUrl: string; injuryName: string }> = ({ im
             
             {show && (
                 <div 
-                    className="absolute z-50 left-full ml-2 top-1/2 -translate-y-1/2 p-3 bg-white border-2 border-blue-400 rounded-lg shadow-2xl w-96"
+                    className="absolute z-50 left-full ml-2 top-1/2 -translate-y-1/2 p-3 bg-white border-2 border-blue-400 rounded-lg shadow-2xl w-96 max-h-[500px] overflow-y-auto"
                     onMouseEnter={() => setShow(true)}
                     onMouseLeave={() => setShow(false)}
                     onClick={(e) => e.stopPropagation()}
@@ -81,8 +81,14 @@ const ImageIndicator: React.FC<{ imageUrl: string; injuryName: string }> = ({ im
                     <img 
                         src={imageUrl} 
                         alt={injuryName}
-                        className="w-full rounded-md"
+                        className="w-full rounded-md mb-3"
                     />
+                    {clinicalTip && (
+                        <div className="mt-3 pt-3 border-t border-slate-200">
+                            <p className="text-xs font-semibold text-slate-700 mb-2">💡 Points clés d'examen clinique</p>
+                            <p className="text-xs text-slate-600 leading-relaxed">{clinicalTip}</p>
+                        </div>
+                    )}
                 </div>
             )}
         </div>
@@ -413,7 +419,7 @@ export const GuidedCalculator: React.FC<GuidedCalculatorProps> = ({
                                                         >
                                                             <p className="font-semibold flex items-center">
                                                                 {injury.imageUrl && (
-                                                                    <ImageIndicator imageUrl={injury.imageUrl} injuryName={injury.name} />
+                                                                    <ImageIndicator imageUrl={injury.imageUrl} injuryName={injury.name} clinicalTip={injury.clinicalTip} />
                                                                 )}
                                                                 {injury.name}
                                                             </p>

@@ -8,7 +8,7 @@ interface AnalogCalculatorProps {
 }
 
 // Component for medical image tooltip
-const ImageIndicator: React.FC<{ imageUrl: string; injuryName: string }> = ({ imageUrl, injuryName }) => {
+const ImageIndicator: React.FC<{ imageUrl: string; injuryName: string; clinicalTip?: string }> = ({ imageUrl, injuryName, clinicalTip }) => {
     const [show, setShow] = useState(false);
     
     return (
@@ -27,7 +27,7 @@ const ImageIndicator: React.FC<{ imageUrl: string; injuryName: string }> = ({ im
             </button>
             
             {show && (
-                <div className="absolute z-50 left-0 top-full mt-2 p-3 bg-white border-2 border-blue-300 rounded-lg shadow-2xl w-96 pointer-events-none">
+                <div className="absolute z-50 left-0 top-full mt-2 p-3 bg-white border-2 border-blue-300 rounded-lg shadow-2xl w-96 max-h-[500px] overflow-y-auto pointer-events-none">
                     <div className="flex items-center justify-between mb-2">
                         <h4 className="font-bold text-sm text-blue-900">Illustration médicale</h4>
                         <button
@@ -44,8 +44,14 @@ const ImageIndicator: React.FC<{ imageUrl: string; injuryName: string }> = ({ im
                     <img 
                         src={imageUrl} 
                         alt={injuryName}
-                        className="w-full rounded-md border border-slate-200"
+                        className="w-full rounded-md border border-slate-200 mb-3"
                     />
+                    {clinicalTip && (
+                        <div className="mt-3 pt-3 border-t border-slate-200">
+                            <p className="text-xs font-semibold text-slate-700 mb-2">💡 Points clés d'examen clinique</p>
+                            <p className="text-xs text-slate-600 leading-relaxed">{clinicalTip}</p>
+                        </div>
+                    )}
                 </div>
             )}
         </div>
@@ -238,7 +244,7 @@ export const AnalogCalculator: React.FC<AnalogCalculatorProps> = ({ onAddInjury 
                                                     <div className="flex-1">
                                                         <p className="font-semibold text-sm text-slate-900 flex items-center">
                                                             {injury.imageUrl && (
-                                                                <ImageIndicator imageUrl={injury.imageUrl} injuryName={injury.name} />
+                                                                <ImageIndicator imageUrl={injury.imageUrl} injuryName={injury.name} clinicalTip={injury.clinicalTip} />
                                                             )}
                                                             {injury.name}
                                                         </p>

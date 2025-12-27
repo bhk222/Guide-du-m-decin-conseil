@@ -331,12 +331,16 @@ const middleCategories: InjuryCategory[] = [
           { 
               name: "Paralysie radiculaire inférieure (Klumpke) (droite)", 
               rate: [55, 65],
-              description: "Atteinte du tronc inférieur du plexus brachial (racines C8-T1), paralysie distale : main, doigts. Clinique : main en griffe, troubles sensitifs cubital. EMG confirmant l'atteinte radiculaire inférieure."
+              description: "Atteinte du tronc inférieur du plexus brachial (racines C8-T1), paralysie distale : main, doigts. Clinique : main en griffe, troubles sensitifs cubital. EMG confirmant l'atteinte radiculaire inférieure.",
+              imageUrl: "/images/medical/main-griffe-klumpke.jpg",
+              clinicalTip: "Vérifier : main en griffe cubitale (flexion IPP + hyperextension IPD des 4ème et 5ème doigts), hypoesthésie bord cubital main et avant-bras médial, déficit fléchisseurs profonds D4-D5, signe de Froment positif, amyotrophie interosseux et hypothénar. EMG indispensable pour confirmer atteinte radiculaire C8-T1 vs lésion tronculaire nerf cubital."
           },
           { 
               name: "Paralysie radiculaire inférieure (Klumpke) (gauche)", 
               rate: [45, 55],
-              description: "Atteinte du tronc inférieur du plexus brachial (racines C8-T1), paralysie distale : main, doigts. Main en griffe, troubles sensitifs."
+              description: "Atteinte du tronc inférieur du plexus brachial (racines C8-T1), paralysie distale : main, doigts. Main en griffe, troubles sensitifs.",
+              imageUrl: "/images/medical/main-griffe-klumpke.jpg",
+              clinicalTip: "Vérifier : main en griffe cubitale (flexion IPP + hyperextension IPD des 4ème et 5ème doigts), hypoesthésie bord cubital main et avant-bras médial, déficit fléchisseurs profonds D4-D5, signe de Froment positif, amyotrophie interosseux et hypothénar. EMG indispensable pour confirmer atteinte radiculaire C8-T1 vs lésion tronculaire nerf cubital."
           },
           { name: "Paralysie du nerf du grand dentelé (Serratus anterior) (Main Dominante)", rate: [10, 25], description: "Atteinte du nerf thoracique long entraînant une paralysie du muscle grand dentelé et un décollement de l'omoplate ('scapula alata').", rateCriteria: { low: "Décollement partiel de l'omoplate, gêne modérée dans les mouvements d'élévation au-dessus de 90°.", high: "Décollement complet, perte de force majeure, limitation sévère de l'antépulsion et de l'abduction de l'épaule." } },
           { name: "Paralysie du nerf du grand dentelé (Serratus anterior) (Main Non Dominante)", rate: [8, 20], description: "Atteinte du nerf thoracique long entraînant une paralysie du muscle grand dentelé et un décollement de l'omoplate ('scapula alata').", rateCriteria: { low: "Décollement partiel de l'omoplate, gêne modérée.", high: "Décollement complet, perte de force et limitation sévère des mouvements de l'épaule." } },
@@ -1657,7 +1661,7 @@ const middleCategories: InjuryCategory[] = [
             { name: "Ankylose du gros orteil", rate: 5, description: "Ankylose articulaire du gros orteil en position fonctionnelle." },
             { name: "Ankylose d'un orteil (autre que gros orteil)", rate: 2, description: "Ankylose articulaire d'un orteil latéral." },
             { name: "Raideur du gros orteil", rate: [2, 4], rateCriteria: { low: "Raideur légère sans impact fonctionnel majeur.", high: "Raideur importante avec gêne à la marche." } },
-            { name: "Hallux valgus post-traumatique symptomatique", rate: [5, 15], rateCriteria: { low: "Déviation modérée sans conflit chaussage.", high: "Déviation sévère avec douleurs permanentes et conflit chaussage majeur." }, description: "Déviation du gros orteil en valgus secondaire à un traumatisme." },
+            { name: "Hallux valgus post-traumatique symptomatique", rate: [5, 15], rateCriteria: { low: "Déviation modérée sans conflit chaussage.", high: "Déviation sévère avec douleurs permanentes et conflit chaussage majeur." }, description: "Déviation du gros orteil en valgus secondaire à un traumatisme.", imageUrl: "/images/medical/Hallux-Valgus.jpg", clinicalTip: "Vérifier : angle M1-P1 > 15° (normal < 15°), angle inter-métatarsien M1-M2 > 9° (normal < 9°), déformation en Z de la 1ère colonne, bursite (oignon) en regard de la tête M1, griffe compensatrice du gros orteil, durillons plantaires sous M2-M3 (transfert d'appui), conflit chaussage, douleurs à la marche. Mesure radiographique indispensable pour évaluation objective." },
             { name: "Griffes des orteils post-traumatiques", rate: [5, 10], rateCriteria: { low: "Griffes partielles, gêne au chaussage minime.", high: "Griffes complètes multiples avec conflits chaussage et douleurs." }, description: "Déformation en griffe des orteils suite à un traumatisme." },
             { name: "Cal vicieux d'un métatarsien", rate: [5, 10], rateCriteria: { low: "Cal vicieux modéré sans impact fonctionnel majeur.", high: "Cal vicieux important avec métatarsalgie et troubles de l'appui." }, description: "Consolidation vicieuse d'une fracture métatarsienne." },
             { name: "Fracture consolidée phalange gros orteil avec raideur", rate: [2, 5], rateCriteria: { low: "Fracture phalange distale, cal vicieux minime, raideur IP discrète.", medium: "Fracture phalange proximale ou moyenne, raideur MP partielle.", high: "Cal vicieux avec déformation, raideur importante, douleurs résiduelles." } },
