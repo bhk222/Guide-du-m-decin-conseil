@@ -1162,8 +1162,8 @@ const middleCategories: InjuryCategory[] = [
       {
         name: "Poignet - Désarticulation",
         injuries: [
-          { name: "Désarticulation du poignet (Main Dominante)", rate: [65, 70] },
-          { name: "Désarticulation du poignet (Main Non Dominante)", rate: [55, 60] },
+          { name: "Désarticulation du poignet (Main Dominante)", rate: 70, description: "Désarticulation radio-carpienne = perte totale de la main au niveau du poignet." },
+          { name: "Désarticulation du poignet (Main Non Dominante)", rate: 60, description: "Désarticulation radio-carpienne = perte totale de la main au niveau du poignet." },
         ]
       },
       {
@@ -1186,10 +1186,12 @@ const middleCategories: InjuryCategory[] = [
             { name: "Fracture du scaphoïde carpien - Forme moyenne (Main Non Dominante)", rate: 10, description: "Douleurs modérées, faible limitation des mouvements du poignet." },
             { name: "Fracture du scaphoïde carpien - Forme grave (Main Dominante)", rate: [20, 25], description: "Avec raideur, douleurs plus accentuées, gêne fonctionnelle du pouce." },
             { name: "Fracture du scaphoïde carpien - Forme grave (Main Non Dominante)", rate: [15, 20], description: "Avec raideur, douleurs plus accentuées, gêne fonctionnelle du pouce." },
-            { name: "Luxation-fracture du semi-lunaire (lunatum) (Main Dominante)", rate: [8, 15], description: "Fracture et/ou luxation de l'os semi-lunaire (lunatum) avec raideur et limitation du poignet." },
-            { name: "Luxation-fracture du semi-lunaire (lunatum) (Main Non Dominante)", rate: [6, 12], description: "Fracture et/ou luxation de l'os semi-lunaire (lunatum) avec raideur et limitation du poignet." },
-            { name: "Luxation du semi-lunaire et du grand os (Main Dominante)", rate: [20, 25], description: "Luxation associée du semi-lunaire (lunatum) et du capitatum (grand os) avec séquelles fonctionnelles majeures." },
-            { name: "Luxation du semi-lunaire et du grand os (Main Non Dominante)", rate: [15, 25], description: "Luxation associée du semi-lunaire (lunatum) et du capitatum (grand os)." },
+            { name: "Luxation du lunaire - Forme légère, réduite, séquelles légères (Main Dominante)", rate: 15, description: "Fracture et/ou luxation du semi-lunaire (lunatum) traitée par réduction. Forme peu grave avec séquelles légères. Évolution possible vers lunarité (nécrose aseptique) : raideurs et douleurs modérées." },
+            { name: "Luxation du lunaire - Forme légère, réduite, séquelles légères (Main Non Dominante)", rate: 8, description: "Fracture et/ou luxation du semi-lunaire (lunatum) traitée par réduction. Forme peu grave avec séquelles légères. Évolution possible vers lunarité (nécrose aseptique) : raideurs et douleurs modérées." },
+            { name: "Luxation du lunaire - Forme moyenne, gêne de l'enroulement des doigts (Main Dominante)", rate: 20, description: "Luxation du semi-lunaire avec gêne fonctionnelle de l'enroulement des doigts. Raideur du poignet et douleurs. Traitement par réposition ou extirpation de l'os." },
+            { name: "Luxation du lunaire - Forme moyenne, gêne de l'enroulement des doigts (Main Non Dominante)", rate: 15, description: "Luxation du semi-lunaire avec gêne fonctionnelle de l'enroulement des doigts. Raideur du poignet et douleurs. Traitement par réposition ou extirpation de l'os." },
+            { name: "Luxation du lunaire - Forme grave, non réduite, troubles nerveux (Main Dominante)", rate: 30, description: "Luxation du semi-lunaire non réduite avec blocage du poignet et compression fréquente du nerf médian. Troubles nerveux sensitifs et/ou moteurs. Séquelles fonctionnelles majeures." },
+            { name: "Luxation du lunaire - Forme grave, non réduite, troubles nerveux (Main Non Dominante)", rate: 25, description: "Luxation du semi-lunaire non réduite avec blocage du poignet et compression fréquente du nerf médian. Troubles nerveux sensitifs et/ou moteurs. Séquelles fonctionnelles majeures." },
             { name: "Ostéoporose post-traumatique du poignet (Main Dominante)", rate: [10, 25], description: "Déminéralisation osseuse post-traumatique (algodystrophie) avec troubles trophiques et douleurs chroniques." },
             { name: "Ostéoporose post-traumatique du poignet (Main Non Dominante)", rate: [8, 20], description: "Déminéralisation osseuse post-traumatique avec séquelles fonctionnelles." },
             { name: "Pseudarthrose du scaphoïde", rate: 22, description: "Pseudarthrose du scaphoïde carpien sans précision de dominance." },
