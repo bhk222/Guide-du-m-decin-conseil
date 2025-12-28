@@ -212,7 +212,13 @@ export const AnalogCalculator: React.FC<AnalogCalculatorProps> = ({ onAddInjury 
             </div>
             
             <div className="flex-1 overflow-y-auto space-y-2 custom-scrollbar pr-2 -mr-2">
-                {filteredData.map(category => (
+                {filteredData.map(category => {
+                    // Afficher le tooltip uniquement pour les amputations d'épaule, bras et avant-bras
+                    const shouldShowImage = category.name === "Épaule - Amputation et Désarticulation" ||
+                                          category.name === "Bras - Amputations" ||
+                                          category.name === "Avant-bras - Amputations";
+                    
+                    return (
                      <details 
                         key={category.name} 
                         className="group" 
@@ -226,7 +232,22 @@ export const AnalogCalculator: React.FC<AnalogCalculatorProps> = ({ onAddInjury 
                         }}
                      >
                         <summary className="cursor-pointer p-3 bg-slate-100 rounded-md font-bold text-slate-800 list-none flex justify-between items-center hover:bg-slate-200 transition-colors">
-                            {category.name}
+                            <div className="flex items-center gap-2">
+                                <span>{category.name}</span>
+                                {shouldShowImage && (
+                                  <span 
+                                    className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-blue-500 hover:bg-blue-600 text-white text-xs font-bold cursor-help transition-colors relative group/tooltip"
+                                    title="Voir le diagramme d'amputation"
+                                    onClick={(e) => {
+                                      e.preventDefault();
+                                      e.stopPropagation();
+                                      window.open('/images/medical/AMPUTATION%20DE%20SEGMENT%20MBR%20SUP.jpg', '_blank');
+                                    }}
+                                  >
+                                    📷
+                                  </span>
+                                )}
+                            </div>
                              <svg className="h-5 w-5 transition-transform duration-200 group-open:rotate-180" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                                 <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
                             </svg>
@@ -317,7 +338,8 @@ export const AnalogCalculator: React.FC<AnalogCalculatorProps> = ({ onAddInjury 
                             ))}
                         </div>
                     </details>
-                ))}
+                    );
+                })}
                  {filteredData.length === 0 && searchTerm && (
                     <div className="text-center text-slate-500 py-10">
                         <p>Aucun résultat trouvé pour "{searchTerm}".</p>
