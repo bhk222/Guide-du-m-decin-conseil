@@ -1,0 +1,1292 @@
+≡ƒÜÇ VALIDATION RAPIDE V3.3.132 - 30 CAS CRITIQUES
+
+ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ
+
+
+≡ƒô¥ Test 1/30: doigt-1
+   Input: "amputation m├⌐dius main dominante"
+   Expected: "Amputation du m├⌐dius" (8%)
+≡ƒöì DEBUG M├ëTACARPIENS - Texte normalis├⌐: amputation medius main dominante ablation perte section amputation perte section amputation ablation section amputation ablation perte metacarpe chirurgicale main chirurgicale main metacarpe majeur phalange distale p3 d3 vertebre dorsale d3 medius phalange distale p3 d3 vertebre dorsale d3 medius majeur d3 vertebre dorsale d3 medius majeur phalange distale p3 medius phalange distale p3 d3 vertebre dorsale d3 phalange phalanges phalange proximale p1
+≡ƒöì DEBUG M├ëTACARPIENS - hasMetacarpienWord: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSingleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasMultipleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSpecificFingerEarly: true
+≡ƒöì DEBUG M├ëTACARPIENS - isMetacarpienSingleQueryEarly: false
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì isCumulDetected: false lesionCount: 1
+≡ƒöì [M├ëTACARPIENS] Input brut: amputation m├⌐dius main dominante
+≡ƒöì [M├ëTACARPIENS] hasMetaWord: false
+≡ƒöì [M├ëTACARPIENS] hasSingleOrPerte: false
+≡ƒöì [M├ëTACARPIENS] hasSpecificFinger: false
+≡ƒöì [M├ëTACARPIENS] hasCinq: false
+ΓÜá∩╕Å [M├ëTACARPIENS] Pas de dialogue - continuons analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì [EARLY] Ant├⌐c├⌐dents d├⌐tect├⌐s: 0 - 
+≡ƒöì [DEBUG EXPERT RULE - EARLY TEST]
+Pattern: /tassement.*vert[e├⌐]br.*L\d/i
+CleanText: "amputation medius main dominante"
+matchClean: false, matchWorking: false
+Γ£à [EXPERT RULE MATCH - PRIORITY 95] Amputation du m├⌐dius - D├⌐sarticulation m├⌐tacarpo-phalangienne = 12%
+   Γ£à SUCC├êS: "Amputation du m├⌐dius - D├⌐sarticulation m├⌐tacarpo-phalangienne" (12%) - 92ms
+
+≡ƒô¥ Test 2/30: doigt-2
+   Input: "ankylose annulaire"
+   Expected: "Ankylose de l'annulaire" (5%)
+≡ƒöì DEBUG M├ëTACARPIENS - Texte normalis├⌐: ankylose annulaire raideur complete blocage articulaire arthrodese ankylose blocage articulaire arthrodese ankylose raideur complete arthrodese ankylose raideur complete blocage articulaire p4 d4 vertebre dorsale d4 quatrieme doigt annulaire d4 vertebre dorsale d4 quatrieme doigt annulaire p4 quatrieme doigt annulaire p4 d4 vertebre dorsale d4
+≡ƒöì DEBUG M├ëTACARPIENS - hasMetacarpienWord: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSingleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasMultipleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSpecificFingerEarly: true
+≡ƒöì DEBUG M├ëTACARPIENS - isMetacarpienSingleQueryEarly: false
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì isCumulDetected: false lesionCount: 1
+≡ƒöì [M├ëTACARPIENS] Input brut: ankylose annulaire
+≡ƒöì [M├ëTACARPIENS] hasMetaWord: false
+≡ƒöì [M├ëTACARPIENS] hasSingleOrPerte: false
+≡ƒöì [M├ëTACARPIENS] hasSpecificFinger: true
+≡ƒöì [M├ëTACARPIENS] hasCinq: false
+ΓÜá∩╕Å [M├ëTACARPIENS] Pas de dialogue - continuons analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì [EARLY] Ant├⌐c├⌐dents d├⌐tect├⌐s: 0 - 
+≡ƒöì [DEBUG EXPERT RULE - EARLY TEST]
+Pattern: /tassement.*vert[e├⌐]br.*L\d/i
+CleanText: "ankylose annulaire"
+matchClean: false, matchWorking: false
+≡ƒÄ» TOP 10 R├ëSULTATS: [
+  {
+    name: 'Ankylose compl├¿te tibio-tarsienne en flexion dorsale',
+    score: 1992,
+    path: 'Membres Inf├⌐rieurs > Cheville et Pied'
+  },
+  {
+    name: 'Ankylose du poignet - En extension et pronation compl├¿te, doigts mobiles (Main Dominante)',
+    score: 1892,
+    path: 'Membres Sup├⌐rieurs > Poignet - Raideurs et Ankyloses'
+  },
+  {
+    name: 'Ankylose du poignet - En extension et pronation compl├¿te, doigts mobiles (Main Non Dominante)',
+    score: 1892,
+    path: 'Membres Sup├⌐rieurs > Poignet - Raideurs et Ankyloses'
+  },
+  {
+    name: 'Ankylose du poignet - En extension et pronation compl├¿te, doigts raidis (Main Dominante)',
+    score: 1892,
+    path: 'Membres Sup├⌐rieurs > Poignet - Raideurs et Ankyloses'
+  },
+  {
+    name: 'Ankylose du poignet - En extension et pronation compl├¿te, doigts raidis (Main Non Dominante)',
+    score: 1892,
+    path: 'Membres Sup├⌐rieurs > Poignet - Raideurs et Ankyloses'
+  },
+  {
+    name: 'Ankylose du poignet - En extension et demi-pronation, doigts mobiles (Main Dominante)',
+    score: 1882,
+    path: 'Membres Sup├⌐rieurs > Poignet - Raideurs et Ankyloses'
+  },
+  {
+    name: 'Ankylose du poignet - En extension et demi-pronation, doigts mobiles (Main Non Dominante)',
+    score: 1882,
+    path: 'Membres Sup├⌐rieurs > Poignet - Raideurs et Ankyloses'
+  },
+  {
+    name: 'Ankylose du poignet - En flexion et pronation, doigts mobiles (Main Dominante)',
+    score: 1882,
+    path: 'Membres Sup├⌐rieurs > Poignet - Raideurs et Ankyloses'
+  },
+  {
+    name: 'Ankylose du poignet - En flexion et pronation, doigts mobiles (Main Non Dominante)',
+    score: 1882,
+    path: 'Membres Sup├⌐rieurs > Poignet - Raideurs et Ankyloses'
+  },
+  {
+    name: "Ankylose du poignet - En flexion et supination, doigts ankylos├⌐s (perte de l'usage de la main) (Main Dominante)",
+    score: 1882,
+    path: 'Membres Sup├⌐rieurs > Poignet - Raideurs et Ankyloses'
+  }
+]
+≡ƒöì [detectRequestType] D├⌐but analyse...
+≡ƒôè [detectRequestType] R├⌐sultat: attribution
+≡ƒöì [determineSeverity] Text: ankylose annulaire
+≡ƒöì [determineSeverity] Faible signs: []
+≡ƒöì [determineSeverity] High signs: [ 'ankylose' ]
+   ΓÜá∩╕Å PARTIEL: "Ankylose compl├¿te tibio-tarsienne en flexion dorsale" (35%) - 357ms
+      Γ¥î L├⌐sion incorrecte
+      Γ¥î Taux ├⌐cart 30%
+
+≡ƒô¥ Test 3/30: doigt-3
+   Input: "raideur pouce avec limitation pince"
+   Expected: "Raideur du pouce" (8%)
+≡ƒöì DEBUG M├ëTACARPIENS - Texte normalis├⌐: raideur pouce limitation pince limitation restriction enraidissement raideur restriction enraidissement raideur limitation enraidissement raideur limitation restriction phalange proximale p1 d1 vertebre dorsale d1 premier doigt pouce d1 vertebre dorsale d1 premier doigt pouce phalange proximale p1 premier doigt pouce phalange proximale p1 d1 vertebre dorsale d1 phalange phalanges phalange moyenne p2 phalange phalanges phalange proximale p1
+≡ƒöì DEBUG M├ëTACARPIENS - hasMetacarpienWord: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSingleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasMultipleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSpecificFingerEarly: true
+≡ƒöì DEBUG M├ëTACARPIENS - isMetacarpienSingleQueryEarly: false
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì isCumulDetected: false lesionCount: 1
+≡ƒöì [M├ëTACARPIENS] Input brut: raideur pouce avec limitation pince
+≡ƒöì [M├ëTACARPIENS] hasMetaWord: false
+≡ƒöì [M├ëTACARPIENS] hasSingleOrPerte: false
+≡ƒöì [M├ëTACARPIENS] hasSpecificFinger: true
+≡ƒöì [M├ëTACARPIENS] hasCinq: false
+ΓÜá∩╕Å [M├ëTACARPIENS] Pas de dialogue - continuons analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì [EARLY] Ant├⌐c├⌐dents d├⌐tect├⌐s: 0 - 
+≡ƒöì [DEBUG EXPERT RULE - EARLY TEST]
+Pattern: /tassement.*vert[e├⌐]br.*L\d/i
+CleanText: "raideur pouce avec limitation pince"
+matchClean: false, matchWorking: false
+Γ£à [EXPERT RULE MATCH - PRIORITY 10700] Fracture Clavicule - Bien consolid├⌐e sans raideur (Main Dominante) = 3%
+   Γ£à SUCC├êS: "Fracture Clavicule - Bien consolid├⌐e sans raideur (Main Dominante)" (3%) - 14ms
+
+≡ƒô¥ Test 4/30: orteil-1
+   Input: "amputation trois orteils"
+   Expected: "Amputation de trois orteils" (8%)
+≡ƒöì DEBUG M├ëTACARPIENS - Texte normalis├⌐: amputation 3 orteils ablation perte section amputation perte section amputation ablation section amputation ablation perte 3 doigts 3 doigts perte 3 doigts 3 doigts 3 doigts amputation 3 doigt de pied phalange pied orteils orteil phalange pied orteils orteil doigt de pied orteils orteil doigt de pied phalange pied 3 orteils amputation 3 perte 3 orteils 3 orteils amputation 3 perte 3 orteils 3 orteils 3 orteils perte 3 orteils 3 orteils 3 orteils amputation 3
+≡ƒöì DEBUG M├ëTACARPIENS - hasMetacarpienWord: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSingleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasMultipleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSpecificFingerEarly: false
+≡ƒöì DEBUG M├ëTACARPIENS - isMetacarpienSingleQueryEarly: false
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì isCumulDetected: false lesionCount: 1
+≡ƒöì [M├ëTACARPIENS] Input brut: amputation trois orteils
+≡ƒöì [M├ëTACARPIENS] hasMetaWord: false
+≡ƒöì [M├ëTACARPIENS] hasSingleOrPerte: false
+≡ƒöì [M├ëTACARPIENS] hasSpecificFinger: false
+≡ƒöì [M├ëTACARPIENS] hasCinq: false
+ΓÜá∩╕Å [M├ëTACARPIENS] Pas de dialogue - continuons analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì [EARLY] Ant├⌐c├⌐dents d├⌐tect├⌐s: 0 - 
+≡ƒöì [DEBUG EXPERT RULE - EARLY TEST]
+Pattern: /tassement.*vert[e├⌐]br.*L\d/i
+CleanText: "amputation trois orteils"
+matchClean: false, matchWorking: false
+   Γ£à SUCC├êS: "Amputation de trois orteils" (8%) - 13ms
+
+≡ƒô¥ Test 5/30: orteil-2
+   Input: "ankylose gros orteil hallux rigidus"
+   Expected: "Ankylose du gros orteil" (5%)
+≡ƒöì DEBUG M├ëTACARPIENS - Texte normalis├⌐: ankylose gros orteil hallux rigidus raideur complete blocage articulaire arthrodese ankylose blocage articulaire arthrodese ankylose raideur complete arthrodese ankylose raideur complete blocage articulaire doigt de pied phalange pied orteils orteil phalange pied orteils orteil doigt de pied orteils orteil doigt de pied phalange pied hallux premier orteil 1er orteil gros orteil premier orteil 1er orteil gros orteil hallux 1er orteil gros orteil hallux premier orteil gros orteil premier orteil 1er orteil gros orteil hallux premier orteil ankylose orteil raideur orteil blocage orteil
+≡ƒöì DEBUG M├ëTACARPIENS - hasMetacarpienWord: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSingleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasMultipleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSpecificFingerEarly: true
+≡ƒöì DEBUG M├ëTACARPIENS - isMetacarpienSingleQueryEarly: false
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì isCumulDetected: false lesionCount: 1
+≡ƒöì [M├ëTACARPIENS] Input brut: ankylose gros orteil hallux rigidus
+≡ƒöì [M├ëTACARPIENS] hasMetaWord: false
+≡ƒöì [M├ëTACARPIENS] hasSingleOrPerte: false
+≡ƒöì [M├ëTACARPIENS] hasSpecificFinger: false
+≡ƒöì [M├ëTACARPIENS] hasCinq: false
+ΓÜá∩╕Å [M├ëTACARPIENS] Pas de dialogue - continuons analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì [EARLY] Ant├⌐c├⌐dents d├⌐tect├⌐s: 0 - 
+≡ƒöì [DEBUG EXPERT RULE - EARLY TEST]
+Pattern: /tassement.*vert[e├⌐]br.*L\d/i
+CleanText: "ankylose gros orteil hallux rigidus"
+matchClean: false, matchWorking: false
+Γ£à [EXPERT RULE MATCH - PRIORITY 98] Ankylose ou raideur du gros orteil (Hallux rigidus) = 10%
+   Γ£à SUCC├êS: "Ankylose ou raideur du gros orteil (Hallux rigidus)" (10%) - 12ms
+
+≡ƒô¥ Test 6/30: amp-1
+   Input: "d├⌐sarticulation du poignet"
+   Expected: "D├⌐sarticulation du poignet" (70%)
+≡ƒöì DEBUG M├ëTACARPIENS - Texte normalis├⌐: desarticulation poignet amputation ablation perte desarticulation poignet amputation poignet perte main niveau poignet desarticulation poignet amputation poignet perte main niveau poignet radio carpien articulation poignet carpe poignet articulation poignet carpe poignet radio carpien carpe poignet radio carpien articulation poignet metacarpe chirurgicale main chirurgicale main metacarpe
+≡ƒöì DEBUG M├ëTACARPIENS - hasMetacarpienWord: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSingleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasMultipleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSpecificFingerEarly: false
+≡ƒöì DEBUG M├ëTACARPIENS - isMetacarpienSingleQueryEarly: false
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì isCumulDetected: false lesionCount: 1
+≡ƒöì [M├ëTACARPIENS] Input brut: d├⌐sarticulation du poignet
+≡ƒöì [M├ëTACARPIENS] hasMetaWord: false
+≡ƒöì [M├ëTACARPIENS] hasSingleOrPerte: false
+≡ƒöì [M├ëTACARPIENS] hasSpecificFinger: false
+≡ƒöì [M├ëTACARPIENS] hasCinq: false
+ΓÜá∩╕Å [M├ëTACARPIENS] Pas de dialogue - continuons analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì [EARLY] Ant├⌐c├⌐dents d├⌐tect├⌐s: 0 - 
+≡ƒöì [DEBUG EXPERT RULE - EARLY TEST]
+Pattern: /tassement.*vert[e├⌐]br.*L\d/i
+CleanText: "desarticulation du poignet"
+matchClean: false, matchWorking: false
+Γ£à [EXPERT RULE MATCH - PRIORITY 10400] D├⌐sarticulation du poignet (Main Dominante) = 70%
+   Γ£à SUCC├êS: "D├⌐sarticulation du poignet (Main Dominante)" (70%) - 17ms
+
+≡ƒô¥ Test 7/30: amp-2
+   Input: "amputation jambe au tiers moyen"
+   Expected: "Amputation de la jambe au tiers moyen" (50%)
+≡ƒöì DEBUG M├ëTACARPIENS - Texte normalis├⌐: amputation jambe au tiers moyen ablation perte section amputation perte section amputation ablation section amputation ablation perte tiers superieur tiers inferieur 1/3 sup tiers superieur tiers moyen 1/3 sup tiers superieur tiers moyen tiers inferieur transtibial bk below knee transtibial amputation jambe below knee transtibial amputation jambe bk
+≡ƒöì DEBUG M├ëTACARPIENS - hasMetacarpienWord: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSingleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasMultipleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSpecificFingerEarly: false
+≡ƒöì DEBUG M├ëTACARPIENS - isMetacarpienSingleQueryEarly: false
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì isCumulDetected: false lesionCount: 1
+≡ƒöì [M├ëTACARPIENS] Input brut: amputation jambe au tiers moyen
+≡ƒöì [M├ëTACARPIENS] hasMetaWord: false
+≡ƒöì [M├ëTACARPIENS] hasSingleOrPerte: false
+≡ƒöì [M├ëTACARPIENS] hasSpecificFinger: false
+≡ƒöì [M├ëTACARPIENS] hasCinq: false
+ΓÜá∩╕Å [M├ëTACARPIENS] Pas de dialogue - continuons analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì [EARLY] Ant├⌐c├⌐dents d├⌐tect├⌐s: 0 - 
+≡ƒöì [DEBUG EXPERT RULE - EARLY TEST]
+Pattern: /tassement.*vert[e├⌐]br.*L\d/i
+CleanText: "amputation jambe au tiers moyen"
+matchClean: false, matchWorking: false
+Γ£à [EXPERT RULE MATCH - PRIORITY 9850] Amputation de jambe sous le genou (tiers sup├⌐rieur) = 55%
+   Γ£à SUCC├êS: "Amputation de jambe sous le genou (tiers sup├⌐rieur)" (55%) - 14ms
+
+≡ƒô¥ Test 8/30: visc-1
+   Input: "spl├⌐nectomie totale ablation rate"
+   Expected: "Ablation de la rate (spl├⌐nectomie)" (18%)
+≡ƒöì DEBUG M├ëTACARPIENS - Texte normalis├⌐: splenectomie totale ablation rate amputation perte section amputation ablation section amputation ablation perte splenique spleno splenectomie rate spleno splenectomie rate splenique splenectomie rate splenique spleno rate splenique spleno rate splenique spleno
+≡ƒöì DEBUG M├ëTACARPIENS - hasMetacarpienWord: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSingleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasMultipleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSpecificFingerEarly: false
+≡ƒöì DEBUG M├ëTACARPIENS - isMetacarpienSingleQueryEarly: false
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì isCumulDetected: false lesionCount: 1
+≡ƒöì [M├ëTACARPIENS] Input brut: spl├⌐nectomie totale ablation rate
+≡ƒöì [M├ëTACARPIENS] hasMetaWord: false
+≡ƒöì [M├ëTACARPIENS] hasSingleOrPerte: false
+≡ƒöì [M├ëTACARPIENS] hasSpecificFinger: false
+≡ƒöì [M├ëTACARPIENS] hasCinq: false
+ΓÜá∩╕Å [M├ëTACARPIENS] Pas de dialogue - continuons analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì [EARLY] Ant├⌐c├⌐dents d├⌐tect├⌐s: 0 - 
+≡ƒöì [DEBUG EXPERT RULE - EARLY TEST]
+Pattern: /tassement.*vert[e├⌐]br.*L\d/i
+CleanText: "splenectomie totale ablation rate"
+matchClean: false, matchWorking: false
+Γ£à [EXPERT RULE MATCH - PRIORITY 10400] Spl├⌐nectomie totale (ablation de la rate) = 18%
+   Γ£à SUCC├êS: "Spl├⌐nectomie totale (ablation de la rate)" (18%) - 17ms
+
+≡ƒô¥ Test 9/30: visc-2
+   Input: "anus artificiel d├⌐finitif colostomie"
+   Expected: "Anus artificiel d├⌐finitif" (40%)
+≡ƒöì DEBUG M├ëTACARPIENS - Texte normalis├⌐: anus artificiel definitif colostomie colostomie ileostomie anus artificiel stomie ileostomie anus artificiel stomie colostomie anus artificiel stomie colostomie ileostomie stomie colostomie ileostomie
+≡ƒöì DEBUG M├ëTACARPIENS - hasMetacarpienWord: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSingleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasMultipleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSpecificFingerEarly: false
+≡ƒöì DEBUG M├ëTACARPIENS - isMetacarpienSingleQueryEarly: false
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì isCumulDetected: false lesionCount: 1
+≡ƒöì [M├ëTACARPIENS] Input brut: anus artificiel d├⌐finitif colostomie
+≡ƒöì [M├ëTACARPIENS] hasMetaWord: false
+≡ƒöì [M├ëTACARPIENS] hasSingleOrPerte: false
+≡ƒöì [M├ëTACARPIENS] hasSpecificFinger: false
+≡ƒöì [M├ëTACARPIENS] hasCinq: false
+ΓÜá∩╕Å [M├ëTACARPIENS] Pas de dialogue - continuons analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì [EARLY] Ant├⌐c├⌐dents d├⌐tect├⌐s: 0 - 
+≡ƒöì [DEBUG EXPERT RULE - EARLY TEST]
+Pattern: /tassement.*vert[e├⌐]br.*L\d/i
+CleanText: "anus artificiel definitif colostomie"
+matchClean: false, matchWorking: false
+Γ£à [EXPERT RULE MATCH - PRIORITY 10400] Anus artificiel d├⌐finitif = 90%
+   ΓÜá∩╕Å PARTIEL: "Anus artificiel d├⌐finitif" (90%) - 7ms
+      Γ¥î Taux ├⌐cart 50%
+
+≡ƒô¥ Test 10/30: audio-1
+   Input: "surdit├⌐ compl├¿te d'une oreille l'autre normale"
+   Expected: "Surdit├⌐ unilat├⌐rale profonde" (20%)
+≡ƒöì DEBUG M├ëTACARPIENS - Texte normalis├⌐: surdite complete d oreille l autre normale auditif pavilion conduit auditif oreille pavilion conduit auditif oreille auditif conduit auditif oreille auditif pavilion perte auditive hypoacousie cophose surdite hypoacousie cophose surdite perte auditive cophose surdite perte auditive hypoacousie surdite perte auditive hypoacousie diminution acuite auditive baisse audition perte partielle diminution acuite auditive baisse audition hypoacousie
+≡ƒöì DEBUG M├ëTACARPIENS - hasMetacarpienWord: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSingleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasMultipleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSpecificFingerEarly: false
+≡ƒöì DEBUG M├ëTACARPIENS - isMetacarpienSingleQueryEarly: false
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì isCumulDetected: false lesionCount: 1
+≡ƒöì [M├ëTACARPIENS] Input brut: surdit├⌐ compl├¿te d une oreille l autre normale
+≡ƒöì [M├ëTACARPIENS] hasMetaWord: false
+≡ƒöì [M├ëTACARPIENS] hasSingleOrPerte: false
+≡ƒöì [M├ëTACARPIENS] hasSpecificFinger: false
+≡ƒöì [M├ëTACARPIENS] hasCinq: false
+ΓÜá∩╕Å [M├ëTACARPIENS] Pas de dialogue - continuons analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì [EARLY] Ant├⌐c├⌐dents d├⌐tect├⌐s: 0 - 
+   ΓÜá∩╕Å PARTIEL: "Diminution de l'acuit├⌐ auditive" (15%) - 2ms
+      Γ¥î L├⌐sion incorrecte
+
+≡ƒô¥ Test 11/30: audio-2
+   Input: "acouph├¿nes isol├⌐s bourdonnements"
+   Expected: "Bourdonnements d'oreille (acouph├¿nes) isol├⌐s" (10%)
+≡ƒöì DEBUG M├ëTACARPIENS - Texte normalis├⌐: acouphenes isoles bourdonnements bourdonnements sifflements tinnitus acouphenes sifflements tinnitus acouphenes bourdonnements tinnitus acouphenes bourdonnements sifflements acouphenes bourdonnements sifflements
+≡ƒöì DEBUG M├ëTACARPIENS - hasMetacarpienWord: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSingleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasMultipleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSpecificFingerEarly: false
+≡ƒöì DEBUG M├ëTACARPIENS - isMetacarpienSingleQueryEarly: false
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì isCumulDetected: false lesionCount: 1
+≡ƒöì [M├ëTACARPIENS] Input brut: acouph├¿nes isol├⌐s bourdonnements
+≡ƒöì [M├ëTACARPIENS] hasMetaWord: false
+≡ƒöì [M├ëTACARPIENS] hasSingleOrPerte: false
+≡ƒöì [M├ëTACARPIENS] hasSpecificFinger: false
+≡ƒöì [M├ëTACARPIENS] hasCinq: false
+ΓÜá∩╕Å [M├ëTACARPIENS] Pas de dialogue - continuons analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì [EARLY] Ant├⌐c├⌐dents d├⌐tect├⌐s: 0 - 
+   Γ£à SUCC├êS: "Bourdonnements d'oreille (acouph├¿nes) isol├⌐s" (5%) - 2ms
+
+≡ƒô¥ Test 12/30: vision-1
+   Input: "perte compl├¿te vision ┼ôil droit"
+   Expected: "Perte compl├¿te de la vision d'un oeil" (30%)
+≡ƒöì DEBUG M├ëTACARPIENS - Texte normalis├⌐: perte complete vision oeil droit amputation ablation section amputation ablation perte oeil oculaire ophtalmique oeil oculaire ophtalmique oeil oeil ophtalmique oeil oeil oculaire oeil oeil oculaire vue acuite visuelle visuel vision acuite visuelle visuel vision vue visuel vision vue acuite visuelle vision vue acuite visuelle av acuite visuelle vision de acuite acuite visuelle vision de acuite av vision de acuite av acuite visuelle
+≡ƒöì DEBUG M├ëTACARPIENS - hasMetacarpienWord: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSingleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasMultipleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSpecificFingerEarly: false
+≡ƒöì DEBUG M├ëTACARPIENS - isMetacarpienSingleQueryEarly: false
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì isCumulDetected: false lesionCount: 1
+≡ƒöì [M├ëTACARPIENS] Input brut: perte compl├¿te vision ┼ôil droit
+≡ƒöì [M├ëTACARPIENS] hasMetaWord: false
+≡ƒöì [M├ëTACARPIENS] hasSingleOrPerte: true
+≡ƒöì [M├ëTACARPIENS] hasSpecificFinger: false
+≡ƒöì [M├ëTACARPIENS] hasCinq: false
+ΓÜá∩╕Å [M├ëTACARPIENS] Pas de dialogue - continuons analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì [EARLY] Ant├⌐c├⌐dents d├⌐tect├⌐s: 0 - 
+Γ£à [EXPERT RULE MATCH - PRIORITY 12000] Perte compl├¿te de la vision d'un oeil (l'autre ├⌐tant normal) = 30%
+   Γ£à SUCC├êS: "Perte compl├¿te de la vision d'un oeil (l'autre ├⌐tant normal)" (30%) - 24ms
+
+≡ƒô¥ Test 13/30: vision-2
+   Input: "cataracte bilat├⌐rale post-traumatique AV 3/10 et 5/10"
+   Expected: "Cataracte (selon acuit├⌐ et complications)" (42%)
+≡ƒöì DEBUG M├ëTACARPIENS - Texte normalis├⌐: cataracte bilateral erale post traumatique av 3/10 et 5/10 opacite cristallin cristallin opaque trouble cristallin cataracte cristallin opaque trouble cristallin cataracte opacite cristallin trouble cristallin cataracte opacite cristallin cristallin opaque dixieme sur 10 10eme dixieme /10 10eme dixieme /10 sur 10
+≡ƒöì DEBUG M├ëTACARPIENS - hasMetacarpienWord: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSingleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasMultipleIndicator: true
+≡ƒöì DEBUG M├ëTACARPIENS - hasSpecificFingerEarly: false
+≡ƒöì DEBUG M├ëTACARPIENS - isMetacarpienSingleQueryEarly: false
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì isCumulDetected: false lesionCount: 1
+≡ƒöì [M├ëTACARPIENS] Input brut: cataracte bilat├⌐rale post-traumatique av3/10 et5/10
+≡ƒöì [M├ëTACARPIENS] hasMetaWord: false
+≡ƒöì [M├ëTACARPIENS] hasSingleOrPerte: false
+≡ƒöì [M├ëTACARPIENS] hasSpecificFinger: false
+≡ƒöì [M├ëTACARPIENS] hasCinq: true
+ΓÜá∩╕Å [M├ëTACARPIENS] Pas de dialogue - continuons analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì [EARLY] Ant├⌐c├⌐dents d├⌐tect├⌐s: 0 - 
+≡ƒöì [DEBUG EXPERT RULE - EARLY TEST]
+Pattern: /tassement.*vert[e├⌐]br.*L\d/i
+CleanText: "cataracte bilaterale post traumatique av3/10 et5/10"
+matchClean: false, matchWorking: false
+   Γ¥î ├ëCHEC: Non trouv├⌐
+
+≡ƒô¥ Test 14/30: vision-3
+   Input: "d├⌐collement r├⌐tine post-traumatique"
+   Expected: "D├⌐collement de la r├⌐tine post-traumatique" (100%)
+≡ƒöì DEBUG M├ëTACARPIENS - Texte normalis├⌐: decollement retine post traumatique retinien retinopathie decollement retine retine retinopathie decollement retine retine retinien decollement retine retine retinien retinopathie
+≡ƒöì DEBUG M├ëTACARPIENS - hasMetacarpienWord: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSingleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasMultipleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSpecificFingerEarly: false
+≡ƒöì DEBUG M├ëTACARPIENS - isMetacarpienSingleQueryEarly: false
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì isCumulDetected: false lesionCount: 1
+≡ƒöì [M├ëTACARPIENS] Input brut: d├⌐collement r├⌐tine post-traumatique
+≡ƒöì [M├ëTACARPIENS] hasMetaWord: false
+≡ƒöì [M├ëTACARPIENS] hasSingleOrPerte: false
+≡ƒöì [M├ëTACARPIENS] hasSpecificFinger: false
+≡ƒöì [M├ëTACARPIENS] hasCinq: false
+ΓÜá∩╕Å [M├ëTACARPIENS] Pas de dialogue - continuons analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì [EARLY] Ant├⌐c├⌐dents d├⌐tect├⌐s: 0 - 
+≡ƒöì [DEBUG EXPERT RULE - EARLY TEST]
+Pattern: /tassement.*vert[e├⌐]br.*L\d/i
+CleanText: "decollement retine post traumatique"
+matchClean: false, matchWorking: false
+Γ£à [EXPERT RULE MATCH - PRIORITY 10400] D├⌐collement de la r├⌐tine post-traumatique = 100%
+   Γ£à SUCC├êS: "D├⌐collement de la r├⌐tine post-traumatique" (100%) - 15ms
+
+≡ƒô¥ Test 15/30: ms-1
+   Input: "raideur ├⌐paule abduction 60-90┬░ avec rotation limit├⌐e"
+   Expected: "Raideur de l'├⌐paule - Abduction 60-90┬░ + rotation" (25%)
+≡ƒöì DEBUG M├ëTACARPIENS - Texte normalis├⌐: raideur epaule abduction 60 90┬░ avec rotation limitee limitation restriction enraidissement raideur restriction enraidissement raideur limitation enraidissement raideur limitation restriction scapulo humerale gleno humerale articulation de l epaule epaule gleno humerale articulation de l epaule epaule scapulo humerale articulation de l epaule epaule scapulo humerale gleno humerale epaule scapulo humerale gleno humerale
+≡ƒöì DEBUG M├ëTACARPIENS - hasMetacarpienWord: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSingleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasMultipleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSpecificFingerEarly: false
+≡ƒöì DEBUG M├ëTACARPIENS - isMetacarpienSingleQueryEarly: false
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì isCumulDetected: false lesionCount: 1
+≡ƒöì [M├ëTACARPIENS] Input brut: raideur ├⌐paule abduction60-90┬░ avec rotation limit├⌐e
+≡ƒöì [M├ëTACARPIENS] hasMetaWord: false
+≡ƒöì [M├ëTACARPIENS] hasSingleOrPerte: false
+≡ƒöì [M├ëTACARPIENS] hasSpecificFinger: false
+≡ƒöì [M├ëTACARPIENS] hasCinq: false
+ΓÜá∩╕Å [M├ëTACARPIENS] Pas de dialogue - continuons analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì [EARLY] Ant├⌐c├⌐dents d├⌐tect├⌐s: 0 - 
+≡ƒöì [DEBUG EXPERT RULE - EARLY TEST]
+Pattern: /tassement.*vert[e├⌐]br.*L\d/i
+CleanText: "raideur epaule abduction60 90┬░ avec rotation limitee"
+matchClean: false, matchWorking: false
+Γ£à [EXPERT RULE MATCH - PRIORITY 10500] Raideur de l'├⌐paule - Abduction 60-90┬░ + rotation = 25%
+   Γ£à SUCC├êS: "Raideur de l'├⌐paule - Abduction 60-90┬░ + rotation" (25%) - 11ms
+
+≡ƒô¥ Test 16/30: ms-2
+   Input: "raideur coude flexion 90-130┬░"
+   Expected: "Raideur du coude - Flexion 90-130┬░" (18%)
+≡ƒöì DEBUG M├ëTACARPIENS - Texte normalis├⌐: raideur coude flexion 90 130┬░ limitation restriction enraidissement raideur restriction enraidissement raideur limitation enraidissement raideur limitation restriction cubital humero cubital olecrane coude humero cubital olecrane coude cubital olecrane coude cubital humero cubital coude cubital humero cubital
+≡ƒöì DEBUG M├ëTACARPIENS - hasMetacarpienWord: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSingleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasMultipleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSpecificFingerEarly: false
+≡ƒöì DEBUG M├ëTACARPIENS - isMetacarpienSingleQueryEarly: false
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì isCumulDetected: true lesionCount: 2
+≡ƒöì CUMUL D├ëTECT├ë - Extraction des l├⌐sions individuelles
+≡ƒô¥ text original: raideur coude flexion 90-130┬░
+≡ƒô¥ finalCleanedText: raideur coude flexion 90-130┬░
+≡ƒöì extractIndividualLesions - texte d'entr├⌐e: raideur coude flexion 90-130┬░
+≡ƒöì Pattern 0B - Extraction d├⌐taill├⌐e:
+  multiTraumaPattern test: false
+  fractureMatch: NULL
+  ligamentMatch: NULL
+  muscleMatch: NULL
+ΓÜá∩╕Å Aucun pattern de cumul d├⌐tect├⌐, retour texte original
+≡ƒôï L├⌐sions extraites: [ 'raideur coude flexion 90 130┬░' ] Nombre: 1
+≡ƒöì [M├ëTACARPIENS] Input brut: raideur coude flexion90-130┬░
+≡ƒöì [M├ëTACARPIENS] hasMetaWord: false
+≡ƒöì [M├ëTACARPIENS] hasSingleOrPerte: false
+≡ƒöì [M├ëTACARPIENS] hasSpecificFinger: false
+≡ƒöì [M├ëTACARPIENS] hasCinq: false
+ΓÜá∩╕Å [M├ëTACARPIENS] Pas de dialogue - continuons analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì [EARLY] Ant├⌐c├⌐dents d├⌐tect├⌐s: 0 - 
+≡ƒöì [DEBUG EXPERT RULE - EARLY TEST]
+Pattern: /tassement.*vert[e├⌐]br.*L\d/i
+CleanText: "raideur coude flexion90 130┬░"
+matchClean: false, matchWorking: false
+Γ£à [EXPERT RULE MATCH - PRIORITY 10500] Raideur du coude - Flexion 90-130┬░ = 18%
+   Γ£à SUCC├êS: "Raideur du coude - Flexion 90-130┬░" (18%) - 9ms
+
+≡ƒô¥ Test 17/30: ms-3
+   Input: "raideur poignet limitation s├⌐v├¿re"
+   Expected: "Raideur du poignet - Limitation s├⌐v├¿re" (22%)
+≡ƒöì DEBUG M├ëTACARPIENS - Texte normalis├⌐: raideur poignet limitation severe limitation restriction enraidissement raideur restriction enraidissement raideur limitation enraidissement raideur limitation restriction radio carpien articulation poignet carpe poignet articulation poignet carpe poignet radio carpien carpe poignet radio carpien articulation poignet poignet radio carpien articulation poignet
+≡ƒöì DEBUG M├ëTACARPIENS - hasMetacarpienWord: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSingleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasMultipleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSpecificFingerEarly: false
+≡ƒöì DEBUG M├ëTACARPIENS - isMetacarpienSingleQueryEarly: false
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì isCumulDetected: false lesionCount: 1
+≡ƒöì [M├ëTACARPIENS] Input brut: raideur poignet limitation s├⌐v├¿re
+≡ƒöì [M├ëTACARPIENS] hasMetaWord: false
+≡ƒöì [M├ëTACARPIENS] hasSingleOrPerte: false
+≡ƒöì [M├ëTACARPIENS] hasSpecificFinger: false
+≡ƒöì [M├ëTACARPIENS] hasCinq: false
+ΓÜá∩╕Å [M├ëTACARPIENS] Pas de dialogue - continuons analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì [EARLY] Ant├⌐c├⌐dents d├⌐tect├⌐s: 0 - 
+≡ƒöì [DEBUG EXPERT RULE - EARLY TEST]
+Pattern: /tassement.*vert[e├⌐]br.*L\d/i
+CleanText: "raideur poignet limitation severe"
+matchClean: false, matchWorking: false
+Γ£à [EXPERT RULE MATCH - PRIORITY 99] Raideur du coude - Limitation s├⌐v├¿re = 28%
+   Γ£à SUCC├êS: "Raideur du coude - Limitation s├⌐v├¿re" (28%) - 15ms
+
+≡ƒô¥ Test 18/30: mi-1
+   Input: "raideur hanche flexion 90-120┬░ avec claudication"
+   Expected: "Raideur de la hanche - Flexion 90-120┬░" (25%)
+≡ƒöì DEBUG M├ëTACARPIENS - Texte normalis├⌐: raideur hanche flexion 90 120┬░ avec claudication limitation restriction enraidissement raideur restriction enraidissement raideur limitation enraidissement raideur limitation restriction coxo femorale articulation hanche cotyle hanche articulation hanche cotyle hanche coxo femorale cotyle hanche coxo femorale articulation hanche hanche coxo femorale articulation hanche hanche coxo femorale articulation hanche
+≡ƒöì DEBUG M├ëTACARPIENS - hasMetacarpienWord: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSingleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasMultipleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSpecificFingerEarly: false
+≡ƒöì DEBUG M├ëTACARPIENS - isMetacarpienSingleQueryEarly: false
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì isCumulDetected: false lesionCount: 1
+≡ƒöì [M├ëTACARPIENS] Input brut: raideur hanche flexion90-120┬░ avec claudication
+≡ƒöì [M├ëTACARPIENS] hasMetaWord: false
+≡ƒöì [M├ëTACARPIENS] hasSingleOrPerte: false
+≡ƒöì [M├ëTACARPIENS] hasSpecificFinger: false
+≡ƒöì [M├ëTACARPIENS] hasCinq: false
+ΓÜá∩╕Å [M├ëTACARPIENS] Pas de dialogue - continuons analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì [EARLY] Ant├⌐c├⌐dents d├⌐tect├⌐s: 0 - 
+≡ƒöì [DEBUG EXPERT RULE - EARLY TEST]
+Pattern: /tassement.*vert[e├⌐]br.*L\d/i
+CleanText: "raideur hanche flexion90 120┬░ avec claudication"
+matchClean: false, matchWorking: false
+Γ£à [EXPERT RULE MATCH - PRIORITY 10400] Raideur importante de la hanche avec limitation marqu├⌐e = 40%
+   ΓÜá∩╕Å PARTIEL: "Raideur importante de la hanche avec limitation marqu├⌐e" (40%) - 24ms
+      Γ¥î L├⌐sion incorrecte
+      Γ¥î Taux ├⌐cart 15%
+
+≡ƒô¥ Test 19/30: mi-2
+   Input: "raideur genou avec instabilit├⌐ et ├⌐panchement"
+   Expected: "Raideur genou + instabilit├⌐ LCA (cumul)" (30%)
+≡ƒöì DEBUG M├ëTACARPIENS - Texte normalis├⌐: raideur genou avec instabilite et epanchement limitation restriction enraidissement raideur restriction enraidissement raideur limitation enraidissement raideur limitation restriction femoro tibiale femoro patellaire articulation genou genou femoro patellaire articulation genou genou femoro tibiale articulation genou genou femoro tibiale femoro patellaire genou femoro tibiale femoro patellaire genou femoro tibiale femoro patellaire
+≡ƒöì DEBUG M├ëTACARPIENS - hasMetacarpienWord: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSingleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasMultipleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSpecificFingerEarly: false
+≡ƒöì DEBUG M├ëTACARPIENS - isMetacarpienSingleQueryEarly: false
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì isCumulDetected: true lesionCount: 2
+≡ƒöì CUMUL D├ëTECT├ë - Extraction des l├⌐sions individuelles
+≡ƒô¥ text original: raideur genou avec instabilit├⌐ et ├⌐panchement
+≡ƒô¥ finalCleanedText: raideur genou avec instabilit├⌐ et ├⌐panchement
+≡ƒöì extractIndividualLesions - texte d'entr├⌐e: raideur genou avec instabilit├⌐ et ├⌐panchement
+≡ƒöì Pattern 0B - Extraction d├⌐taill├⌐e:
+  multiTraumaPattern test: false
+  fractureMatch: NULL
+  ligamentMatch: NULL
+  muscleMatch: NULL
+ΓÜá∩╕Å Aucun pattern de cumul d├⌐tect├⌐, retour texte original
+≡ƒôï L├⌐sions extraites: [ 'raideur genou avec instabilite et epanchement' ] Nombre: 1
+≡ƒöì [M├ëTACARPIENS] Input brut: raideur genou avec instabilit├⌐ et ├⌐panchement
+≡ƒöì [M├ëTACARPIENS] hasMetaWord: false
+≡ƒöì [M├ëTACARPIENS] hasSingleOrPerte: false
+≡ƒöì [M├ëTACARPIENS] hasSpecificFinger: false
+≡ƒöì [M├ëTACARPIENS] hasCinq: false
+ΓÜá∩╕Å [M├ëTACARPIENS] Pas de dialogue - continuons analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì [EARLY] Ant├⌐c├⌐dents d├⌐tect├⌐s: 0 - 
+≡ƒöì [DEBUG EXPERT RULE - EARLY TEST]
+Pattern: /tassement.*vert[e├⌐]br.*L\d/i
+CleanText: "raideur genou avec instabilite et epanchement"
+matchClean: false, matchWorking: false
+Γ£à [EXPERT RULE MATCH - PRIORITY 10400] Raideur du genou = 25%
+   ΓÜá∩╕Å PARTIEL: "Raideur du genou" (25%) - 35ms
+      Γ¥î L├⌐sion incorrecte
+
+≡ƒô¥ Test 20/30: mi-3
+   Input: "├⌐quin mod├⌐r├⌐ cheville dorsiflexion limit├⌐e"
+   Expected: "├ëquin mod├⌐r├⌐ de la cheville" (15%)
+≡ƒöì DEBUG M├ëTACARPIENS - Texte normalis├⌐: equin modere cheville dorsiflexion limitee tibio tarsienne articulation cheville malleolaire cheville articulation cheville malleolaire cheville tibio tarsienne malleolaire cheville tibio tarsienne articulation cheville cheville tibio tarsienne articulation cheville cheville tibio tarsienne articulation cheville
+≡ƒöì DEBUG M├ëTACARPIENS - hasMetacarpienWord: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSingleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasMultipleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSpecificFingerEarly: false
+≡ƒöì DEBUG M├ëTACARPIENS - isMetacarpienSingleQueryEarly: false
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì isCumulDetected: false lesionCount: 1
+≡ƒöì [M├ëTACARPIENS] Input brut: ├⌐quin mod├⌐r├⌐ cheville dorsiflexion limit├⌐e
+≡ƒöì [M├ëTACARPIENS] hasMetaWord: false
+≡ƒöì [M├ëTACARPIENS] hasSingleOrPerte: false
+≡ƒöì [M├ëTACARPIENS] hasSpecificFinger: false
+≡ƒöì [M├ëTACARPIENS] hasCinq: false
+ΓÜá∩╕Å [M├ëTACARPIENS] Pas de dialogue - continuons analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì [EARLY] Ant├⌐c├⌐dents d├⌐tect├⌐s: 0 - 
+≡ƒöì [DEBUG EXPERT RULE - EARLY TEST]
+Pattern: /tassement.*vert[e├⌐]br.*L\d/i
+CleanText: "equin modere cheville dorsiflexion limitee"
+matchClean: false, matchWorking: false
+Γ£à [EXPERT RULE MATCH - PRIORITY 10500] Pied ├⌐quin post-traumatique = 40%
+   ΓÜá∩╕Å PARTIEL: "Pied ├⌐quin post-traumatique" (40%) - 12ms
+      Γ¥î L├⌐sion incorrecte
+      Γ¥î Taux ├⌐cart 25%
+
+≡ƒô¥ Test 21/30: rachis-1
+   Input: "raideur rachis lombaire DDS 20-40 cm"
+   Expected: "Raideur rachis lombaire - DDS 20-40 cm" (15%)
+≡ƒöì DEBUG M├ëTACARPIENS - Texte normalis├⌐: raideur rachis lombaire dds 20 40 cm limitation restriction enraidissement raideur restriction enraidissement raideur limitation enraidissement raideur limitation restriction colonne lombaire lombaires lombes rachis lombaire lombaires lombes rachis lombaire colonne lombaire lombes rachis lombaire colonne lombaire lombaires colonne lombaire lombaires lombes rachis lombaire lombaires lombes rachis lombaire colonne lombaire lombaires
+≡ƒöì DEBUG M├ëTACARPIENS - hasMetacarpienWord: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSingleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasMultipleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSpecificFingerEarly: false
+≡ƒöì DEBUG M├ëTACARPIENS - isMetacarpienSingleQueryEarly: false
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì isCumulDetected: false lesionCount: 1
+≡ƒöì [M├ëTACARPIENS] Input brut: raideur rachis lombaire dds20-40 cm
+≡ƒöì [M├ëTACARPIENS] hasMetaWord: false
+≡ƒöì [M├ëTACARPIENS] hasSingleOrPerte: false
+≡ƒöì [M├ëTACARPIENS] hasSpecificFinger: false
+≡ƒöì [M├ëTACARPIENS] hasCinq: false
+ΓÜá∩╕Å [M├ëTACARPIENS] Pas de dialogue - continuons analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì [EARLY] Ant├⌐c├⌐dents d├⌐tect├⌐s: 0 - 
+≡ƒöì [DEBUG EXPERT RULE - EARLY TEST]
+Pattern: /tassement.*vert[e├⌐]br.*L\d/i
+CleanText: "raideur rachis lombaire dds20 40 cm"
+matchClean: false, matchWorking: false
+Γ£à [EXPERT RULE MATCH - PRIORITY 10500] Raideur rachis lombaire - DDS 20-40 cm = 15%
+   Γ£à SUCC├êS: "Raideur rachis lombaire - DDS 20-40 cm" (15%) - 7ms
+
+≡ƒô¥ Test 22/30: cumul-1
+   Input: "LCA + m├⌐niscectomie totale + instabilit├⌐ genou"
+   Expected: "LCA + m├⌐niscectomie + instabilit├⌐ (cumul)" (30%)
+≡ƒöì DEBUG M├ëTACARPIENS - Texte normalis├⌐: lca + meniscectomie totale + instabilite genou femoro tibiale femoro patellaire articulation genou genou femoro patellaire articulation genou genou femoro tibiale articulation genou genou femoro tibiale femoro patellaire genou femoro tibiale femoro patellaire menisque lesion meniscale menisque meniscectomie
+≡ƒöì DEBUG M├ëTACARPIENS - hasMetacarpienWord: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSingleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasMultipleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSpecificFingerEarly: false
+≡ƒöì DEBUG M├ëTACARPIENS - isMetacarpienSingleQueryEarly: false
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì isCumulDetected: true lesionCount: 3
+≡ƒöì CUMUL D├ëTECT├ë - Extraction des l├⌐sions individuelles
+≡ƒô¥ text original: LCA + m├⌐niscectomie totale + instabilit├⌐ genou
+≡ƒô¥ finalCleanedText: LCA + m├⌐niscectomie totale + instabilit├⌐ genou
+≡ƒöì extractIndividualLesions - texte d'entr├⌐e: LCA + m├⌐niscectomie totale + instabilit├⌐ genou
+Γ£à Pattern 0A (format X+Y+Z) d├⌐tect├⌐: [ 'lca', 'meniscectomie totale', 'instabilite genou' ]
+≡ƒôï L├⌐sions extraites: [ 'lca', 'meniscectomie totale', 'instabilite genou' ] Nombre: 3
+Γ£à Au moins 2 l├⌐sions ΓåÆ Analyse s├⌐par├⌐e
+≡ƒöÄ Analyse l├⌐sion "lca" ΓåÆ enrichi: "rupture ligament crois├⌐ ant├⌐rieur genou laxit├⌐ instabilit├⌐" (processed: "rupture ligament crois├⌐ ant├⌐rieur genou laxit├⌐ instabilit├⌐")
+≡ƒöì [M├ëTACARPIENS] Input brut: rupture ligament crois├⌐ ant├⌐rieur genou laxit├⌐ instabilit├⌐
+≡ƒöì [M├ëTACARPIENS] hasMetaWord: false
+≡ƒöì [M├ëTACARPIENS] hasSingleOrPerte: false
+≡ƒöì [M├ëTACARPIENS] hasSpecificFinger: false
+≡ƒöì [M├ëTACARPIENS] hasCinq: false
+ΓÜá∩╕Å [M├ëTACARPIENS] Pas de dialogue - continuons analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì [EARLY] Ant├⌐c├⌐dents d├⌐tect├⌐s: 0 - 
+≡ƒöì [DEBUG EXPERT RULE - EARLY TEST]
+Pattern: /tassement.*vert[e├⌐]br.*L\d/i
+CleanText: "rupture ligament croise anterieur genou laxite instabilite"
+matchClean: false, matchWorking: false
+Γ£à [EXPERT RULE MATCH - PRIORITY 11000] Laxit├⌐ chronique du genou (s├⌐quelle d'entorse) = 20%
+   ΓåÆ Type: proposal
+   ΓåÆ Injury: Laxit├⌐ chronique du genou (s├⌐quelle d'entorse)
+   ΓåÆ Rate: 5,20
+≡ƒöÄ Analyse l├⌐sion "meniscectomie totale" ΓåÆ enrichi: "meniscectomie totale genou" (processed: "meniscectomie totale genou")
+≡ƒöì [M├ëTACARPIENS] Input brut: meniscectomie totale genou
+≡ƒöì [M├ëTACARPIENS] hasMetaWord: false
+≡ƒöì [M├ëTACARPIENS] hasSingleOrPerte: false
+≡ƒöì [M├ëTACARPIENS] hasSpecificFinger: false
+≡ƒöì [M├ëTACARPIENS] hasCinq: false
+ΓÜá∩╕Å [M├ëTACARPIENS] Pas de dialogue - continuons analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì [EARLY] Ant├⌐c├⌐dents d├⌐tect├⌐s: 0 - 
+≡ƒöì [DEBUG EXPERT RULE - EARLY TEST]
+Pattern: /tassement.*vert[e├⌐]br.*L\d/i
+CleanText: "meniscectomie totale genou"
+matchClean: false, matchWorking: false
+≡ƒÄ» TOP 10 R├ëSULTATS: [
+  {
+    name: 'L├⌐sion m├⌐niscale m├⌐diale - M├⌐niscectomie totale',
+    score: 4317,
+    path: 'Membres Inf├⌐rieurs D├⌐taill├⌐s > Genou - L├⌐sions M├⌐niscales et Ligamentaires D├⌐taill├⌐es'
+  },
+  {
+    name: 'L├⌐sion m├⌐niscale lat├⌐rale - M├⌐niscectomie totale',
+    score: 4317,
+    path: 'Membres Inf├⌐rieurs D├⌐taill├⌐s > Genou - L├⌐sions M├⌐niscales et Ligamentaires D├⌐taill├⌐es'
+  },
+  {
+    name: 'S├⌐quelles de m├⌐niscectomie (douleurs, hydarthrose)',
+    score: 2653,
+    path: 'Membres Inf├⌐rieurs > Genou - L├⌐sions Ligamentaires et M├⌐niscales'
+  },
+  {
+    name: 'L├⌐sion m├⌐niscale m├⌐diale (interne) isol├⌐e op├⌐r├⌐e - M├⌐niscectomie partielle',
+    score: 2317,
+    path: 'Membres Inf├⌐rieurs D├⌐taill├⌐s > Genou - L├⌐sions M├⌐niscales et Ligamentaires D├⌐taill├⌐es'
+  },
+  {
+    name: 'L├⌐sion m├⌐niscale lat├⌐rale (externe) isol├⌐e op├⌐r├⌐e - M├⌐niscectomie partielle',
+    score: 2317,
+    path: 'Membres Inf├⌐rieurs D├⌐taill├⌐s > Genou - L├⌐sions M├⌐niscales et Ligamentaires D├⌐taill├⌐es'
+  },
+  {
+    name: 'Arthrose f├⌐moro-patellaire ou f├⌐moro-tibiale post-traumatique',
+    score: 789,
+    path: 'Membres Inf├⌐rieurs > Genou - L├⌐sions Osseuses et Articulaires'
+  },
+  {
+    name: 'Arthrose f├⌐moro-tibiale tri-compartimentale (globale)',
+    score: 729,
+    path: 'Membres Inf├⌐rieurs D├⌐taill├⌐s > Genou - L├⌐sions M├⌐niscales et Ligamentaires D├⌐taill├⌐es'
+  },
+  {
+    name: 'Fracture des plateaux tibiaux - Avec d├⌐viation et/ou raideur',
+    score: 567,
+    path: 'Membres Inf├⌐rieurs > Genou - L├⌐sions Osseuses et Articulaires'
+  },
+  {
+    name: 'Arthrose f├⌐moro-tibiale m├⌐diale (compartiment interne) post-traumatique',
+    score: 528,
+    path: 'Membres Inf├⌐rieurs D├⌐taill├⌐s > Genou - L├⌐sions M├⌐niscales et Ligamentaires D├⌐taill├⌐es'
+  },
+  {
+    name: 'Arthrose f├⌐moro-tibiale lat├⌐rale (compartiment externe) post-traumatique',
+    score: 528,
+    path: 'Membres Inf├⌐rieurs D├⌐taill├⌐s > Genou - L├⌐sions M├⌐niscales et Ligamentaires D├⌐taill├⌐es'
+  }
+]
+≡ƒöì [detectRequestType] D├⌐but analyse...
+≡ƒôè [detectRequestType] R├⌐sultat: attribution
+≡ƒöì [determineSeverity] Text: meniscectomie totale genou
+≡ƒöì [determineSeverity] Faible signs: []
+≡ƒöì [determineSeverity] High signs: [ 'totale' ]
+   ΓåÆ Type: proposal
+   ΓåÆ Injury: L├⌐sion m├⌐niscale m├⌐diale - M├⌐niscectomie totale
+   ΓåÆ Rate: 15,25
+≡ƒöÄ Analyse l├⌐sion "instabilite genou" ΓåÆ enrichi: "instabilit├⌐ chronique genou laxit├⌐" (processed: "instabilit├⌐ chronique genou laxit├⌐")
+≡ƒöì [M├ëTACARPIENS] Input brut: instabilit├⌐ chronique genou laxit├⌐
+≡ƒöì [M├ëTACARPIENS] hasMetaWord: false
+≡ƒöì [M├ëTACARPIENS] hasSingleOrPerte: false
+≡ƒöì [M├ëTACARPIENS] hasSpecificFinger: false
+≡ƒöì [M├ëTACARPIENS] hasCinq: false
+ΓÜá∩╕Å [M├ëTACARPIENS] Pas de dialogue - continuons analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì [EARLY] Ant├⌐c├⌐dents d├⌐tect├⌐s: 0 - 
+≡ƒöì [DEBUG EXPERT RULE - EARLY TEST]
+Pattern: /tassement.*vert[e├⌐]br.*L\d/i
+CleanText: "instabilite chronique genou laxite"
+matchClean: false, matchWorking: false
+Γ£à [EXPERT RULE MATCH - PRIORITY 11000] Laxit├⌐ chronique du genou (s├⌐quelle d'entorse) = 20%
+   ΓåÆ Type: proposal
+   ΓåÆ Injury: Laxit├⌐ chronique du genou (s├⌐quelle d'entorse)
+   ΓåÆ Rate: 5,20
+≡ƒôè TOTAL: 3 propositions g├⌐n├⌐r├⌐es sur 3 l├⌐sions
+Γ£à Calcul automatique cumul avec 3 l├⌐sion(s)
+   Γ£à SUCC├êS: "Polytraumatisme (cumul 3 l├⌐sions)" (39%) - 232ms
+
+≡ƒô¥ Test 23/30: cumul-2
+   Input: "polytraumatisme ├⌐paule genou rachis"
+   Expected: "Polytraumatisme ├⌐paule + genou + rachis" (35%)
+≡ƒöì DEBUG M├ëTACARPIENS - Texte normalis├⌐: polytraumatisme epaule genou rachis scapulo humerale gleno humerale articulation de l epaule epaule gleno humerale articulation de l epaule epaule scapulo humerale articulation de l epaule epaule scapulo humerale gleno humerale femoro tibiale femoro patellaire articulation genou genou femoro patellaire articulation genou genou femoro tibiale articulation genou genou femoro tibiale femoro patellaire
+≡ƒöì DEBUG M├ëTACARPIENS - hasMetacarpienWord: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSingleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasMultipleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSpecificFingerEarly: false
+≡ƒöì DEBUG M├ëTACARPIENS - isMetacarpienSingleQueryEarly: false
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì isCumulDetected: true lesionCount: 3
+≡ƒöì CUMUL D├ëTECT├ë - Extraction des l├⌐sions individuelles
+≡ƒô¥ text original: polytraumatisme ├⌐paule genou rachis
+≡ƒô¥ finalCleanedText: polytraumatisme ├⌐paule genou rachis
+≡ƒöì extractIndividualLesions - texte d'entr├⌐e: polytraumatisme ├⌐paule genou rachis
+Γ£à Pattern 0A-bis (polytraumatisme r├⌐gions espac├⌐es) d├⌐tect├⌐: [ 'epaule', 'genou', 'rachis' ]
+≡ƒôï L├⌐sions extraites: [ 'traumatisme epaule', 'traumatisme genou', 'traumatisme rachis' ] Nombre: 3
+Γ£à Au moins 2 l├⌐sions ΓåÆ Analyse s├⌐par├⌐e
+≡ƒöÄ Analyse l├⌐sion "traumatisme epaule" ΓåÆ enrichi: "traumatisme epaule" (processed: "traumatisme epaule")
+≡ƒöì [M├ëTACARPIENS] Input brut: traumatisme epaule
+≡ƒöì [M├ëTACARPIENS] hasMetaWord: false
+≡ƒöì [M├ëTACARPIENS] hasSingleOrPerte: false
+≡ƒöì [M├ëTACARPIENS] hasSpecificFinger: false
+≡ƒöì [M├ëTACARPIENS] hasCinq: false
+ΓÜá∩╕Å [M├ëTACARPIENS] Pas de dialogue - continuons analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì [EARLY] Ant├⌐c├⌐dents d├⌐tect├⌐s: 0 - 
+≡ƒöì [DEBUG EXPERT RULE - EARLY TEST]
+Pattern: /tassement.*vert[e├⌐]br.*L\d/i
+CleanText: "traumatisme epaule"
+matchClean: false, matchWorking: false
+≡ƒÄ» TOP 10 R├ëSULTATS: [
+  {
+    name: 'Capsulite r├⌐tractile post-traumatique (├⌐paule gel├⌐e) (Main Dominante)',
+    score: 63,
+    path: 'Membres Sup├⌐rieurs > ├ëpaule - L├⌐sions Diverses'
+  },
+  {
+    name: 'Capsulite r├⌐tractile post-traumatique (├⌐paule gel├⌐e) (Main Non Dominante)',
+    score: 63,
+    path: 'Membres Sup├⌐rieurs > ├ëpaule - L├⌐sions Diverses'
+  },
+  {
+    name: 'Capsulite r├⌐tractile post-traumatique (├⌐paule gel├⌐e) (Dominante)',
+    score: 63,
+    path: 'Membres Sup├⌐rieurs D├⌐taill├⌐s > ├ëpaule - L├⌐sions Sp├⌐cifiques'
+  },
+  {
+    name: 'Omarthrose post-traumatique (arthrose gl├⌐no-hum├⌐rale) (Dominante)',
+    score: 53,
+    path: 'Membres Sup├⌐rieurs D├⌐taill├⌐s > ├ëpaule - L├⌐sions Sp├⌐cifiques'
+  },
+  {
+    name: 'Arthropathie acromio-claviculaire post-traumatique (Dominante)',
+    score: 53,
+    path: 'Membres Sup├⌐rieurs D├⌐taill├⌐s > ├ëpaule - L├⌐sions Sp├⌐cifiques'
+  },
+  {
+    name: 'Omarthrose post-traumatique (Non-Dominante)',
+    score: 53,
+    path: 'Membres Sup├⌐rieurs D├⌐taill├⌐s > ├ëpaule - L├⌐sions Sp├⌐cifiques'
+  },
+  {
+    name: "Raideur mod├⌐r├⌐e de l'├⌐paule",
+    score: 52,
+    path: 'Membres Sup├⌐rieurs > ├ëpaule'
+  },
+  {
+    name: "Fracture de la t├¬te hum├⌐rale avec raideur importante de l'├⌐paule (Main Dominante)",
+    score: 52,
+    path: "Membres Sup├⌐rieurs > ├ëpaule - Fractures de l'Extr├⌐mit├⌐ Sup├⌐rieure de l'Hum├⌐rus"
+  },
+  {
+    name: "Fracture de la t├¬te hum├⌐rale avec raideur importante de l'├⌐paule (Main Non Dominante)",
+    score: 52,
+    path: "Membres Sup├⌐rieurs > ├ëpaule - Fractures de l'Extr├⌐mit├⌐ Sup├⌐rieure de l'Hum├⌐rus"
+  },
+  {
+    name: "Luxation r├⌐cidivante de l'├⌐paule",
+    score: 52,
+    path: 'Membres Sup├⌐rieurs > ├ëpaule - L├⌐sions Diverses'
+  }
+]
+≡ƒöì [detectRequestType] D├⌐but analyse...
+≡ƒôè [detectRequestType] R├⌐sultat: attribution
+≡ƒöì [determineSeverity] Text: traumatisme epaule
+≡ƒöì [determineSeverity] Faible signs: []
+≡ƒöì [determineSeverity] High signs: []
+   ΓåÆ Type: proposal
+   ΓåÆ Injury: Capsulite r├⌐tractile post-traumatique (├⌐paule gel├⌐e) (Main Dominante)
+   ΓåÆ Rate: 15,30
+≡ƒöÄ Analyse l├⌐sion "traumatisme genou" ΓåÆ enrichi: "traumatisme genou" (processed: "traumatisme genou")
+≡ƒöì [M├ëTACARPIENS] Input brut: traumatisme genou
+≡ƒöì [M├ëTACARPIENS] hasMetaWord: false
+≡ƒöì [M├ëTACARPIENS] hasSingleOrPerte: false
+≡ƒöì [M├ëTACARPIENS] hasSpecificFinger: false
+≡ƒöì [M├ëTACARPIENS] hasCinq: false
+ΓÜá∩╕Å [M├ëTACARPIENS] Pas de dialogue - continuons analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì [EARLY] Ant├⌐c├⌐dents d├⌐tect├⌐s: 0 - 
+≡ƒöì [DEBUG EXPERT RULE - EARLY TEST]
+Pattern: /tassement.*vert[e├⌐]br.*L\d/i
+CleanText: "traumatisme genou"
+matchClean: false, matchWorking: false
+≡ƒÄ» TOP 10 R├ëSULTATS: [
+  {
+    name: 'Arthrose f├⌐moro-patellaire ou f├⌐moro-tibiale post-traumatique',
+    score: 799,
+    path: 'Membres Inf├⌐rieurs > Genou - L├⌐sions Osseuses et Articulaires'
+  },
+  {
+    name: 'Arthrose f├⌐moro-tibiale tri-compartimentale (globale)',
+    score: 728,
+    path: 'Membres Inf├⌐rieurs D├⌐taill├⌐s > Genou - L├⌐sions M├⌐niscales et Ligamentaires D├⌐taill├⌐es'
+  },
+  {
+    name: 'Fracture des plateaux tibiaux - Avec d├⌐viation et/ou raideur',
+    score: 566,
+    path: 'Membres Inf├⌐rieurs > Genou - L├⌐sions Osseuses et Articulaires'
+  },
+  {
+    name: 'Arthrose f├⌐moro-tibiale m├⌐diale (compartiment interne) post-traumatique',
+    score: 538,
+    path: 'Membres Inf├⌐rieurs D├⌐taill├⌐s > Genou - L├⌐sions M├⌐niscales et Ligamentaires D├⌐taill├⌐es'
+  },
+  {
+    name: 'Arthrose f├⌐moro-tibiale lat├⌐rale (compartiment externe) post-traumatique',
+    score: 538,
+    path: 'Membres Inf├⌐rieurs D├⌐taill├⌐s > Genou - L├⌐sions M├⌐niscales et Ligamentaires D├⌐taill├⌐es'
+  },
+  {
+    name: 'S├⌐quelles de rupture du ligament crois├⌐ post├⌐rieur (LCP)',
+    score: 487,
+    path: 'Membres Inf├⌐rieurs > Genou - L├⌐sions Ligamentaires et M├⌐niscales'
+  },
+  {
+    name: 'S├⌐quelles de m├⌐niscectomie (douleurs, hydarthrose)',
+    score: 487,
+    path: 'Membres Inf├⌐rieurs > Genou - L├⌐sions Ligamentaires et M├⌐niscales'
+  },
+  {
+    name: 'Fracture isol├⌐e du tibia',
+    score: 466,
+    path: 'Membres Inf├⌐rieurs > Jambe - Fractures'
+  },
+  {
+    name: 'Syndrome du tunnel tarsien (compression nerf tibial post├⌐rieur)',
+    score: 376,
+    path: 'Membres Inf├⌐rieurs D├⌐taill├⌐s > Cheville et Pied - L├⌐sions D├⌐taill├⌐es'
+  },
+  {
+    name: 'Syndrome f├⌐moro-patellaire post-traumatique (douleurs rotule)',
+    score: 374,
+    path: 'Membres Inf├⌐rieurs D├⌐taill├⌐s > Genou - L├⌐sions M├⌐niscales et Ligamentaires D├⌐taill├⌐es'
+  }
+]
+≡ƒöì [detectRequestType] D├⌐but analyse...
+≡ƒôè [detectRequestType] R├⌐sultat: attribution
+≡ƒöì [determineSeverity] Text: traumatisme genou
+≡ƒöì [determineSeverity] Faible signs: []
+≡ƒöì [determineSeverity] High signs: []
+   ΓåÆ Type: proposal
+   ΓåÆ Injury: Arthrose f├⌐moro-patellaire ou f├⌐moro-tibiale post-traumatique
+   ΓåÆ Rate: 10,30
+≡ƒöÄ Analyse l├⌐sion "traumatisme rachis" ΓåÆ enrichi: "traumatisme rachis" (processed: "traumatisme rachis")
+≡ƒöì [M├ëTACARPIENS] Input brut: traumatisme rachis
+≡ƒöì [M├ëTACARPIENS] hasMetaWord: false
+≡ƒöì [M├ëTACARPIENS] hasSingleOrPerte: false
+≡ƒöì [M├ëTACARPIENS] hasSpecificFinger: false
+≡ƒöì [M├ëTACARPIENS] hasCinq: false
+ΓÜá∩╕Å [M├ëTACARPIENS] Pas de dialogue - continuons analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì [EARLY] Ant├⌐c├⌐dents d├⌐tect├⌐s: 0 - 
+≡ƒöì [DEBUG EXPERT RULE - EARLY TEST]
+Pattern: /tassement.*vert[e├⌐]br.*L\d/i
+CleanText: "traumatisme rachis"
+matchClean: false, matchWorking: false
+≡ƒÄ» TOP 10 R├ëSULTATS: [
+  {
+    name: 'Hernie discale cervicale post-traumatique - Syndrome rachidien pur (cervicalgies)',
+    score: 303,
+    path: 'S├⌐quelles du Rachis, du Bassin et de la Moelle ├ëpini├¿re > Rachis'
+  },
+  {
+    name: 'Hernie discale cervicale post-traumatique - Avec n├⌐vralgie cervico-brachiale (NCB)',
+    score: 303,
+    path: 'S├⌐quelles du Rachis, du Bassin et de la Moelle ├ëpini├¿re > Rachis'
+  },
+  {
+    name: 'Hernie discale lombaire post-traumatique - Syndrome rachidien pur (lombalgies)',
+    score: 303,
+    path: 'S├⌐quelles du Rachis, du Bassin et de la Moelle ├ëpini├¿re > Rachis'
+  },
+  {
+    name: 'Hernie discale lombaire post-traumatique - Avec radiculalgie (sciatique ou cruralgie)',
+    score: 303,
+    path: 'S├⌐quelles du Rachis, du Bassin et de la Moelle ├ëpini├¿re > Rachis'
+  },
+  {
+    name: 'Syndrome post-traumatique cervical chronique (Whiplash / Coup du lapin)',
+    score: 303,
+    path: 'S├⌐quelles du Rachis, du Bassin et de la Moelle ├ëpini├¿re > Rachis'
+  },
+  {
+    name: 'Syndrome cervical chronique post-traumatique',
+    score: 303,
+    path: 'S├⌐quelles du Rachis, du Bassin et de la Moelle ├ëpini├¿re > Rachis'
+  },
+  {
+    name: "N├⌐vralgie d'Arnold (N├⌐vralgie du grand occipital) post-traumatique",
+    score: 303,
+    path: 'S├⌐quelles du Rachis, du Bassin et de la Moelle ├ëpini├¿re > Rachis'
+  },
+  {
+    name: 'Syndrome myofascial cervical post-traumatique (contractures chroniques)',
+    score: 303,
+    path: 'S├⌐quelles du Rachis, du Bassin et de la Moelle ├ëpini├¿re > Rachis'
+  },
+  {
+    name: 'Scoliose ou cyphose douloureuse post-traumatique',
+    score: 303,
+    path: 'S├⌐quelles du Rachis, du Bassin et de la Moelle ├ëpini├¿re > Rachis'
+  },
+  {
+    name: 'My├⌐lopathie cervicarthrosique post-traumatique',
+    score: 303,
+    path: 'S├⌐quelles du Rachis, du Bassin et de la Moelle ├ëpini├¿re > Rachis'
+  }
+]
+≡ƒöì [detectRequestType] D├⌐but analyse...
+≡ƒôè [detectRequestType] R├⌐sultat: attribution
+≡ƒöì [determineSeverity] Text: traumatisme rachis
+≡ƒöì [determineSeverity] Faible signs: []
+≡ƒöì [determineSeverity] High signs: []
+   ΓåÆ Type: proposal
+   ΓåÆ Injury: Hernie discale cervicale post-traumatique - Syndrome rachidien pur (cervicalgies)
+   ΓåÆ Rate: 5,15
+≡ƒôè TOTAL: 3 propositions g├⌐n├⌐r├⌐es sur 3 l├⌐sions
+Γ£à Calcul automatique cumul avec 3 l├⌐sion(s)
+   Γ£à SUCC├êS: "Polytraumatisme (cumul 3 l├⌐sions)" (44%) - 619ms
+
+≡ƒô¥ Test 24/30: etat-1
+   Input: "tassement L4 sur ├⌐tat ant├⌐rieur tassement L3"
+   Expected: "Tassement L4 sur ├⌐tat ant├⌐rieur L3" (18%)
+≡ƒöì DEBUG M├ëTACARPIENS - Texte normalis├⌐: tassement l4 vertebre lombaire l4 sur etat anterieur tassement l3 vertebre lombaire l3
+≡ƒöì DEBUG M├ëTACARPIENS - hasMetacarpienWord: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSingleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasMultipleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSpecificFingerEarly: false
+≡ƒöì DEBUG M├ëTACARPIENS - isMetacarpienSingleQueryEarly: false
+Γ£à Ant├⌐c├⌐dent d├⌐tect├⌐: tassement L3
+≡ƒôï Ant├⌐c├⌐dents extraits (1): [ 'tassement L3' ]
+ΓÜá∩╕Å Pathologie ant├⌐rieure non reconnue, estimation par d├⌐faut: tassement L3
+≡ƒÆí IPP ant├⌐rieur estim├⌐: 5% pour "tassement L3"
+≡ƒöì isCumulDetected: false lesionCount: 1
+≡ƒöì [M├ëTACARPIENS] Input brut: tassement l4
+≡ƒöì [M├ëTACARPIENS] hasMetaWord: false
+≡ƒöì [M├ëTACARPIENS] hasSingleOrPerte: false
+≡ƒöì [M├ëTACARPIENS] hasSpecificFinger: false
+≡ƒöì [M├ëTACARPIENS] hasCinq: false
+ΓÜá∩╕Å [M├ëTACARPIENS] Pas de dialogue - continuons analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì [EARLY] Ant├⌐c├⌐dents d├⌐tect├⌐s: 0 - 
+≡ƒöì [DEBUG EXPERT RULE - EARLY TEST]
+Pattern: /tassement.*vert[e├⌐]br.*L\d/i
+CleanText: "tassement l4"
+matchClean: false, matchWorking: false
+Γ£à [EXPERT RULE MATCH - PRIORITY 11000] Fracture tassement vert├⌐bral lombaire non d├⌐plac├⌐e consolid├⌐e = 25%
+≡ƒôè Calcul Article 12 appliqu├⌐: 5% + 21% = 25%
+   ΓÜá∩╕Å PARTIEL: "Fracture tassement vert├⌐bral lombaire non d├⌐plac├⌐e consolid├⌐e" (25%) - 9ms
+      Γ¥î L├⌐sion incorrecte
+
+≡ƒô¥ Test 25/30: etat-2
+   Input: "luxation ├⌐paule sur ├⌐tat ant├⌐rieur fracture"
+   Expected: "Luxation sur ├⌐tat ant├⌐rieur fracture ├⌐paule" (25%)
+≡ƒöì DEBUG M├ëTACARPIENS - Texte normalis├⌐: luxation epaule sur etat anterieur fracture cassure fissure bris fracture fissure bris fracture cassure bris fracture cassure fissure deboitement deplacement articulaire dislocation luxation deplacement articulaire dislocation luxation deboitement dislocation luxation deboitement deplacement articulaire scapulo humerale gleno humerale articulation de l epaule epaule gleno humerale articulation de l epaule epaule scapulo humerale articulation de l epaule epaule scapulo humerale gleno humerale
+≡ƒöì DEBUG M├ëTACARPIENS - hasMetacarpienWord: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSingleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasMultipleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSpecificFingerEarly: false
+≡ƒöì DEBUG M├ëTACARPIENS - isMetacarpienSingleQueryEarly: false
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì isCumulDetected: true lesionCount: 2
+≡ƒöì CUMUL D├ëTECT├ë - Extraction des l├⌐sions individuelles
+≡ƒô¥ text original: luxation ├⌐paule sur ├⌐tat ant├⌐rieur fracture
+≡ƒô¥ finalCleanedText: luxation ├⌐paule sur ├⌐tat ant├⌐rieur fracture
+≡ƒöì extractIndividualLesions - texte d'entr├⌐e: luxation ├⌐paule sur ├⌐tat ant├⌐rieur fracture
+Γ£à Pattern 0D (├⌐tat ant├⌐rieur cumul) d├⌐tect├⌐: [ 'luxation epaule', 'fracture epaule' ]
+≡ƒôï L├⌐sions extraites: [ 'luxation epaule', 'fracture epaule' ] Nombre: 2
+Γ£à Au moins 2 l├⌐sions ΓåÆ Analyse s├⌐par├⌐e
+≡ƒöÄ Analyse l├⌐sion "luxation epaule" ΓåÆ enrichi: "luxation epaule" (processed: "luxation epaule")
+≡ƒöì [M├ëTACARPIENS] Input brut: luxation epaule
+≡ƒöì [M├ëTACARPIENS] hasMetaWord: false
+≡ƒöì [M├ëTACARPIENS] hasSingleOrPerte: false
+≡ƒöì [M├ëTACARPIENS] hasSpecificFinger: false
+≡ƒöì [M├ëTACARPIENS] hasCinq: false
+ΓÜá∩╕Å [M├ëTACARPIENS] Pas de dialogue - continuons analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì [EARLY] Ant├⌐c├⌐dents d├⌐tect├⌐s: 0 - 
+≡ƒöì [DEBUG EXPERT RULE - EARLY TEST]
+Pattern: /tassement.*vert[e├⌐]br.*L\d/i
+CleanText: "luxation epaule"
+matchClean: false, matchWorking: false
+≡ƒÄ» TOP 10 R├ëSULTATS: [
+  {
+    name: "Luxation r├⌐cidivante de l'├⌐paule (Main Dominante)",
+    score: 163,
+    path: 'Membres Sup├⌐rieurs > ├ëpaule - L├⌐sions Diverses'
+  },
+  {
+    name: "Luxation r├⌐cidivante de l'├⌐paule (Main Non Dominante)",
+    score: 163,
+    path: 'Membres Sup├⌐rieurs > ├ëpaule - L├⌐sions Diverses'
+  },
+  {
+    name: "Instabilit├⌐ chronique ant├⌐rieure de l'├⌐paule (luxations r├⌐cidivantes) (Dominante)",
+    score: 163,
+    path: 'Membres Sup├⌐rieurs D├⌐taill├⌐s > ├ëpaule - L├⌐sions Sp├⌐cifiques'
+  },
+  {
+    name: "Luxation r├⌐cidivante de l'├⌐paule",
+    score: 152,
+    path: 'Membres Sup├⌐rieurs > ├ëpaule - L├⌐sions Diverses'
+  },
+  {
+    name: 'Luxation Clavicule non r├⌐duite - Externe (acromio-claviculaire) (Main Dominante)',
+    score: 112,
+    path: 'Membres Sup├⌐rieurs > Ceinture Scapulaire - Fractures et L├⌐sions Musculaires'
+  },
+  {
+    name: 'Luxation Clavicule non r├⌐duite - Externe (acromio-claviculaire) (Main Non Dominante)',
+    score: 112,
+    path: 'Membres Sup├⌐rieurs > Ceinture Scapulaire - Fractures et L├⌐sions Musculaires'
+  },
+  {
+    name: 'Luxation Clavicule non r├⌐duite - Interne (sterno-claviculaire) (Main Dominante)',
+    score: 112,
+    path: 'Membres Sup├⌐rieurs > Ceinture Scapulaire - Fractures et L├⌐sions Musculaires'
+  },
+  {
+    name: 'Luxation Clavicule non r├⌐duite - Interne (sterno-claviculaire) (Main Non Dominante)',
+    score: 112,
+    path: 'Membres Sup├⌐rieurs > Ceinture Scapulaire - Fractures et L├⌐sions Musculaires'
+  },
+  {
+    name: 'Luxation acromio-claviculaire simple (Main Dominante)',
+    score: 112,
+    path: 'Membres Sup├⌐rieurs > Ceinture Scapulaire - Fractures et L├⌐sions Musculaires'
+  },
+  {
+    name: 'Luxation acromio-claviculaire simple (Main Non Dominante)',
+    score: 112,
+    path: 'Membres Sup├⌐rieurs > Ceinture Scapulaire - Fractures et L├⌐sions Musculaires'
+  }
+]
+≡ƒöì [detectRequestType] D├⌐but analyse...
+≡ƒôè [detectRequestType] R├⌐sultat: attribution
+≡ƒöì [determineSeverity] Text: luxation epaule
+≡ƒöì [determineSeverity] Faible signs: []
+≡ƒöì [determineSeverity] High signs: []
+   ΓåÆ Type: proposal
+   ΓåÆ Injury: Luxation r├⌐cidivante de l'├⌐paule (Main Dominante)
+   ΓåÆ Rate: 10,30
+≡ƒöÄ Analyse l├⌐sion "fracture epaule" ΓåÆ enrichi: "fracture epaule" (processed: "fracture epaule")
+≡ƒöì [M├ëTACARPIENS] Input brut: fracture epaule
+≡ƒöì [M├ëTACARPIENS] hasMetaWord: false
+≡ƒöì [M├ëTACARPIENS] hasSingleOrPerte: false
+≡ƒöì [M├ëTACARPIENS] hasSpecificFinger: false
+≡ƒöì [M├ëTACARPIENS] hasCinq: false
+ΓÜá∩╕Å [M├ëTACARPIENS] Pas de dialogue - continuons analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì [EARLY] Ant├⌐c├⌐dents d├⌐tect├⌐s: 0 - 
+≡ƒöì [DEBUG EXPERT RULE - EARLY TEST]
+Pattern: /tassement.*vert[e├⌐]br.*L\d/i
+CleanText: "fracture epaule"
+matchClean: false, matchWorking: false
+≡ƒÄ» TOP 10 R├ëSULTATS: [
+  {
+    name: "Fracture de la t├¬te hum├⌐rale avec raideur importante de l'├⌐paule (Main Dominante)",
+    score: 152,
+    path: "Membres Sup├⌐rieurs > ├ëpaule - Fractures de l'Extr├⌐mit├⌐ Sup├⌐rieure de l'Hum├⌐rus"
+  },
+  {
+    name: "Fracture de la t├¬te hum├⌐rale avec raideur importante de l'├⌐paule (Main Non Dominante)",
+    score: 152,
+    path: "Membres Sup├⌐rieurs > ├ëpaule - Fractures de l'Extr├⌐mit├⌐ Sup├⌐rieure de l'Hum├⌐rus"
+  },
+  {
+    name: 'Fracture de la t├¬te hum├⌐rale',
+    score: 142,
+    path: "Membres Sup├⌐rieurs > ├ëpaule - Fractures de l'Extr├⌐mit├⌐ Sup├⌐rieure de l'Hum├⌐rus"
+  },
+  {
+    name: 'Fracture du col chirurgical avec cal vicieux important et abduction limit├⌐e (Main Dominante)',
+    score: 142,
+    path: "Membres Sup├⌐rieurs > ├ëpaule - Fractures de l'Extr├⌐mit├⌐ Sup├⌐rieure de l'Hum├⌐rus"
+  },
+  {
+    name: 'Fracture du col chirurgical avec cal vicieux important et abduction limit├⌐e (Main Non Dominante)',
+    score: 142,
+    path: "Membres Sup├⌐rieurs > ├ëpaule - Fractures de l'Extr├⌐mit├⌐ Sup├⌐rieure de l'Hum├⌐rus"
+  },
+  {
+    name: 'Fracture du col chirurgical avec raccourcissement et g├¬ne mod├⌐r├⌐e (Main Dominante)',
+    score: 142,
+    path: "Membres Sup├⌐rieurs > ├ëpaule - Fractures de l'Extr├⌐mit├⌐ Sup├⌐rieure de l'Hum├⌐rus"
+  },
+  {
+    name: 'Fracture du col chirurgical avec raccourcissement et g├¬ne mod├⌐r├⌐e (Main Non Dominante)',
+    score: 142,
+    path: "Membres Sup├⌐rieurs > ├ëpaule - Fractures de l'Extr├⌐mit├⌐ Sup├⌐rieure de l'Hum├⌐rus"
+  },
+  {
+    name: "Fracture du trochiter avec limitation de l'abduction et rotation (Main Dominante)",
+    score: 142,
+    path: "Membres Sup├⌐rieurs > ├ëpaule - Fractures de l'Extr├⌐mit├⌐ Sup├⌐rieure de l'Hum├⌐rus"
+  },
+  {
+    name: "Fracture du trochiter avec limitation de l'abduction et rotation (Main Non Dominante)",
+    score: 142,
+    path: "Membres Sup├⌐rieurs > ├ëpaule - Fractures de l'Extr├⌐mit├⌐ Sup├⌐rieure de l'Hum├⌐rus"
+  },
+  {
+    name: 'Fracture du trochin avec limitation de la rotation interne (Main Dominante)',
+    score: 142,
+    path: "Membres Sup├⌐rieurs > ├ëpaule - Fractures de l'Extr├⌐mit├⌐ Sup├⌐rieure de l'Hum├⌐rus"
+  }
+]
+   ΓåÆ Type: ambiguity
+   ΓåÆ Ambigu├»t├⌐ r├⌐solue auto: Fracture de la t├¬te hum├⌐rale avec raideur importante de l'├⌐paule (Main Dominante)
+   ΓåÆ Rate: 20,30
+≡ƒöì [determineSeverity] Text: fracture epaule
+≡ƒöì [determineSeverity] Faible signs: []
+≡ƒöì [determineSeverity] High signs: []
+   ΓåÆ S├⌐v├⌐rit├⌐ d├⌐tect├⌐e: moyen (signs: g├¬ne fonctionnelle mod├⌐r├⌐e)
+   ΓåÆ Taux final orient├⌐: 25% (intervalle [20-30])
+≡ƒôè TOTAL: 2 propositions g├⌐n├⌐r├⌐es sur 2 l├⌐sions
+Γ£à Calcul automatique cumul avec 2 l├⌐sion(s)
+   ΓÜá∩╕Å PARTIEL: "Polytraumatisme (cumul 2 l├⌐sions)" (40%) - 442ms
+      Γ¥î Taux ├⌐cart 15%
+
+≡ƒô¥ Test 26/30: limite-1
+   Input: "raideur genou limite haute flexion exactement 130┬░"
+   Expected: "Raideur genou limite haute (flexion 130┬░)" (15%)
+≡ƒöì DEBUG M├ëTACARPIENS - Texte normalis├⌐: raideur genou limite haute flexion exactement 130┬░ limitation restriction enraidissement raideur restriction enraidissement raideur limitation enraidissement raideur limitation restriction femoro tibiale femoro patellaire articulation genou genou femoro patellaire articulation genou genou femoro tibiale articulation genou genou femoro tibiale femoro patellaire genou femoro tibiale femoro patellaire
+≡ƒöì DEBUG M├ëTACARPIENS - hasMetacarpienWord: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSingleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasMultipleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSpecificFingerEarly: false
+≡ƒöì DEBUG M├ëTACARPIENS - isMetacarpienSingleQueryEarly: false
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì isCumulDetected: false lesionCount: 1
+≡ƒöì [M├ëTACARPIENS] Input brut: raideur genou limite haute flexion exactement130┬░
+≡ƒöì [M├ëTACARPIENS] hasMetaWord: false
+≡ƒöì [M├ëTACARPIENS] hasSingleOrPerte: false
+≡ƒöì [M├ëTACARPIENS] hasSpecificFinger: false
+≡ƒöì [M├ëTACARPIENS] hasCinq: false
+ΓÜá∩╕Å [M├ëTACARPIENS] Pas de dialogue - continuons analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì [EARLY] Ant├⌐c├⌐dents d├⌐tect├⌐s: 0 - 
+≡ƒöì [DEBUG EXPERT RULE - EARLY TEST]
+Pattern: /tassement.*vert[e├⌐]br.*L\d/i
+CleanText: "raideur genou limite haute flexion exactement130┬░"
+matchClean: false, matchWorking: false
+≡ƒÄ» TOP 10 R├ëSULTATS: [
+  {
+    name: 'Fracture des plateaux tibiaux - Avec d├⌐viation et/ou raideur',
+    score: 827,
+    path: 'Membres Inf├⌐rieurs > Genou - L├⌐sions Osseuses et Articulaires'
+  },
+  {
+    name: 'Arthrose f├⌐moro-patellaire ou f├⌐moro-tibiale post-traumatique',
+    score: 818,
+    path: 'Membres Inf├⌐rieurs > Genou - L├⌐sions Osseuses et Articulaires'
+  },
+  {
+    name: 'Arthrose f├⌐moro-tibiale tri-compartimentale (globale)',
+    score: 758,
+    path: 'Membres Inf├⌐rieurs D├⌐taill├⌐s > Genou - L├⌐sions M├⌐niscales et Ligamentaires D├⌐taill├⌐es'
+  },
+  {
+    name: 'Fracture isol├⌐e du tibia',
+    score: 546,
+    path: 'Membres Inf├⌐rieurs > Jambe - Fractures'
+  },
+  {
+    name: 'Arthrose f├⌐moro-tibiale m├⌐diale (compartiment interne) post-traumatique',
+    score: 527,
+    path: 'Membres Inf├⌐rieurs D├⌐taill├⌐s > Genou - L├⌐sions M├⌐niscales et Ligamentaires D├⌐taill├⌐es'
+  },
+  {
+    name: 'Arthrose f├⌐moro-tibiale lat├⌐rale (compartiment externe) post-traumatique',
+    score: 527,
+    path: 'Membres Inf├⌐rieurs D├⌐taill├⌐s > Genou - L├⌐sions M├⌐niscales et Ligamentaires D├⌐taill├⌐es'
+  },
+  {
+    name: 'S├⌐quelles de rupture du ligament crois├⌐ post├⌐rieur (LCP)',
+    score: 487,
+    path: 'Membres Inf├⌐rieurs > Genou - L├⌐sions Ligamentaires et M├⌐niscales'
+  },
+  {
+    name: 'S├⌐quelles de m├⌐niscectomie (douleurs, hydarthrose)',
+    score: 487,
+    path: 'Membres Inf├⌐rieurs > Genou - L├⌐sions Ligamentaires et M├⌐niscales'
+  },
+  {
+    name: 'Raideur importante du genou',
+    score: 481,
+    path: 'Membres Inf├⌐rieurs > Genou'
+  },
+  {
+    name: 'Raideur mod├⌐r├⌐e du genou',
+    score: 481,
+    path: 'Membres Inf├⌐rieurs > Genou'
+  }
+]
+   Γ¥î ├ëCHEC: Non trouv├⌐
+
+
+ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ
+≡ƒôè R├ëSULTATS VALIDATION RAPIDE V3.3.132
+
+Γ£à Taux de r├⌐ussite global: 16/26 (61.5%)
+≡ƒôì Reconnaissance l├⌐sions: 18/26 (69.2%)
+≡ƒÄ» Pr├⌐cision taux IPP: 19/26 (73.1%)
+ΓÜí Temps moyen: 84ms
+
+ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ
+
+≡ƒÄ» PR├ëDICTIONS SUR 297 CAS COMPLETS:
+
+   Cas r├⌐ussis attendus: 183/297 (61.5%)
+   Reconnaissance l├⌐sions: 69.2%
+   Pr├⌐cision taux IPP: 73.1%
+
+ΓÜá∩╕Å OBJECTIF NON ATTEINT: Taux < 85%
+   Γ₧í∩╕Å  Ajustements n├⌐cessaires avant validation compl├¿te
+
+ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ
+
+≡ƒôä Rapport d├⌐taill├⌐ export├⌐: ./VALIDATION_RAPIDE_V3.3.132_RESULTS.json

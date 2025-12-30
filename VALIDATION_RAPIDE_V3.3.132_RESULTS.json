@@ -1,0 +1,194 @@
+{
+  "date": "2025-12-30T15:25:33.351Z",
+  "version": "3.3.132",
+  "totalTests": 26,
+  "successCount": 16,
+  "recognitionSuccess": 18,
+  "rateSuccess": 19,
+  "successRate": 61.5,
+  "recognitionRate": 69.2,
+  "rateAccuracy": 73.1,
+  "avgDuration": 83.84615384615384,
+  "results": [
+    {
+      "id": "doigt-1",
+      "status": "success",
+      "found": "Amputation du médius - Désarticulation métacarpo-phalangienne",
+      "rate": 12,
+      "duration": 92
+    },
+    {
+      "id": "doigt-2",
+      "status": "partial",
+      "found": "Ankylose complète tibio-tarsienne en flexion dorsale",
+      "rate": 35,
+      "duration": 357
+    },
+    {
+      "id": "doigt-3",
+      "status": "success",
+      "found": "Fracture Clavicule - Bien consolidée sans raideur (Main Dominante)",
+      "rate": 3,
+      "duration": 14
+    },
+    {
+      "id": "orteil-1",
+      "status": "success",
+      "found": "Amputation de trois orteils",
+      "rate": 8,
+      "duration": 13
+    },
+    {
+      "id": "orteil-2",
+      "status": "success",
+      "found": "Ankylose ou raideur du gros orteil (Hallux rigidus)",
+      "rate": 10,
+      "duration": 12
+    },
+    {
+      "id": "amp-1",
+      "status": "success",
+      "found": "Désarticulation du poignet (Main Dominante)",
+      "rate": 70,
+      "duration": 17
+    },
+    {
+      "id": "amp-2",
+      "status": "success",
+      "found": "Amputation de jambe sous le genou (tiers supérieur)",
+      "rate": 55,
+      "duration": 14
+    },
+    {
+      "id": "visc-1",
+      "status": "success",
+      "found": "Splénectomie totale (ablation de la rate)",
+      "rate": 18,
+      "duration": 17
+    },
+    {
+      "id": "visc-2",
+      "status": "partial",
+      "found": "Anus artificiel définitif",
+      "rate": 90,
+      "duration": 7
+    },
+    {
+      "id": "audio-1",
+      "status": "partial",
+      "found": "Diminution de l'acuité auditive",
+      "rate": 15,
+      "duration": 2
+    },
+    {
+      "id": "audio-2",
+      "status": "success",
+      "found": "Bourdonnements d'oreille (acouphènes) isolés",
+      "rate": 5,
+      "duration": 2
+    },
+    {
+      "id": "vision-1",
+      "status": "success",
+      "found": "Perte complète de la vision d'un oeil (l'autre étant normal)",
+      "rate": 30,
+      "duration": 24
+    },
+    {
+      "id": "vision-2",
+      "status": "failed",
+      "found": "Non trouvé",
+      "duration": 3
+    },
+    {
+      "id": "vision-3",
+      "status": "success",
+      "found": "Décollement de la rétine post-traumatique",
+      "rate": 100,
+      "duration": 15
+    },
+    {
+      "id": "ms-1",
+      "status": "success",
+      "found": "Raideur de l'épaule - Abduction 60-90° + rotation",
+      "rate": 25,
+      "duration": 11
+    },
+    {
+      "id": "ms-2",
+      "status": "success",
+      "found": "Raideur du coude - Flexion 90-130°",
+      "rate": 18,
+      "duration": 9
+    },
+    {
+      "id": "ms-3",
+      "status": "success",
+      "found": "Raideur du coude - Limitation sévère",
+      "rate": 28,
+      "duration": 15
+    },
+    {
+      "id": "mi-1",
+      "status": "partial",
+      "found": "Raideur importante de la hanche avec limitation marquée",
+      "rate": 40,
+      "duration": 24
+    },
+    {
+      "id": "mi-2",
+      "status": "partial",
+      "found": "Raideur du genou",
+      "rate": 25,
+      "duration": 35
+    },
+    {
+      "id": "mi-3",
+      "status": "partial",
+      "found": "Pied équin post-traumatique",
+      "rate": 40,
+      "duration": 12
+    },
+    {
+      "id": "rachis-1",
+      "status": "success",
+      "found": "Raideur rachis lombaire - DDS 20-40 cm",
+      "rate": 15,
+      "duration": 7
+    },
+    {
+      "id": "cumul-1",
+      "status": "success",
+      "found": "Polytraumatisme (cumul 3 lésions)",
+      "rate": 39,
+      "duration": 232
+    },
+    {
+      "id": "cumul-2",
+      "status": "success",
+      "found": "Polytraumatisme (cumul 3 lésions)",
+      "rate": 44,
+      "duration": 619
+    },
+    {
+      "id": "etat-1",
+      "status": "partial",
+      "found": "Fracture tassement vertébral lombaire non déplacée consolidée",
+      "rate": 25,
+      "duration": 9
+    },
+    {
+      "id": "etat-2",
+      "status": "partial",
+      "found": "Polytraumatisme (cumul 2 lésions)",
+      "rate": 40,
+      "duration": 442
+    },
+    {
+      "id": "limite-1",
+      "status": "failed",
+      "found": "Non trouvé",
+      "duration": 176
+    }
+  ]
+}
