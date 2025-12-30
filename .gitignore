@@ -21,6 +21,10 @@ dist-ssr
 # Vercel
 .vercel
 
+# Validation files
+validation*.txt
+VALIDATION_*.txt
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
@@ -35,3 +39,9 @@ dist-ssr
 .vercel
 
 .vercel
+
+# Fichiers validation temporaires
+validation*.txt
+validation*.json
+!VALIDATION_RAPIDE_V3.3.132_RESULTS.json
+ENTRAINEMENT_MASSIF_*.md
