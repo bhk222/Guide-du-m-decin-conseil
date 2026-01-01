@@ -1393,7 +1393,9 @@ const middleCategories: InjuryCategory[] = [
             { name: "Raideur de la pronation et de la supination (Main Non Dominante)", rate: [4, 8], description: "Limitation isolée de la rotation de l'avant-bras (pronation-supination). Flexion-extension du poignet préservée.", rateCriteria: { low: "Limitation modérée < 50%.", high: "Limitation importante > 50%." } },
             
             { name: "Raideurs combinées du poignet (flexion-extension + pronation-supination) (Main Dominante)", rate: [10, 20], description: "Limitation combinée des mouvements du poignet ET de la rotation de l'avant-bras. Retentissement fonctionnel important.", rateCriteria: { low: "Limitations modérées combinées.", medium: "Limitations importantes combinées.", high: "Quasi-ankylose avec mouvements très réduits." } },
-            { nRAIDEURS SERRÉES
+            { name: "Raideurs combinées du poignet (flexion-extension + pronation-supination) (Main Non Dominante)", rate: [8, 15], description: "Limitation combinée des mouvements du poignet ET de la rotation de l'avant-bras. Retentissement fonctionnel important.", rateCriteria: { low: "Limitations modérées combinées.", medium: "Limitations importantes combinées.", high: "Quasi-ankylose avec mouvements très réduits." } },
+
+            // RAIDEURS SERRÉES
             { name: "Raideur serrée du poignet en extension (Main Dominante)", rate: 10, description: "Raideur serrée avec poignet bloqué en extension. Limitation majeure de la flexion palmaire." },
             { name: "Raideur serrée du poignet en extension (Main Non Dominante)", rate: 8, description: "Raideur serrée avec poignet bloqué en extension. Limitation majeure de la flexion palmaire." },
             { name: "Raideur serrée du poignet en flexion forcée (Main Dominante)", rate: 20, description: "Raideur serrée avec poignet bloqué en flexion palmaire forcée. Position très défavorable, retentissement fonctionnel majeur sur la préhension." },
