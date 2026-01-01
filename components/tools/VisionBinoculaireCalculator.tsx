@@ -3,6 +3,7 @@ import { calculateVisionBinoculaireIPP, VisionLevel } from '../utils/visionBinoc
 
 const VISION_LEVELS: VisionLevel[] = [
   "10/10",
+  "9/10",
   "8/10",
   "7/10",
   "6/10",
@@ -42,10 +43,7 @@ export const VisionBinoculaireCalculator: React.FC = () => {
     }
   };
 
-  const formatIPP = (ipp: number | [number, number]) => {
-    if (Array.isArray(ipp)) {
-      return `${ipp[0]} - ${ipp[1]}%`;
-    }
+  const formatIPP = (ipp: number) => {
     return `${ipp}%`;
   };
 
@@ -137,11 +135,16 @@ export const VisionBinoculaireCalculator: React.FC = () => {
 
           {/* Note explicative */}
           <div className="bg-blue-50 border-l-4 border-blue-500 p-4 text-sm text-gray-700">
-            <p className="font-semibold mb-1">📋 Note:</p>
-            <p>
-              Ce calcul est basé sur le tableau officiel du barème AT pour la vision binoculaire.
-              Les fourchettes [min-max] reflètent la variabilité selon le contexte clinique et professionnel.
+            <p className="font-semibold mb-1">📋 Tableau Général d'Évaluation:</p>
+            <p className="mb-2">
+              Ce calcul est basé sur le tableau officiel du barème AT. Les valeurs sont exactes selon la grille de correspondance.
             </p>
+            {result.noteCorrection && (
+              <div className="mt-3 pt-3 border-t border-blue-200">
+                <p className="font-semibold text-blue-900 mb-1">⚠️ Note importante:</p>
+                <p className="text-xs italic">{result.noteCorrection}</p>
+              </div>
+            )}
           </div>
         </div>
       )}

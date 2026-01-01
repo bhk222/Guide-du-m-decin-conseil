@@ -548,83 +548,97 @@ const middleCategories: InjuryCategory[] = [
         ]
       },
       {
-        name: "Yeux - Vision Binoculaire (Tableau à Double Entrée)",
-        description: "IPP selon l'acuité visuelle des deux yeux. Utiliser le tableau croisé pour déterminer le taux exact.",
+        name: "Yeux - Vision Binoculaire (Tableau Général d'Évaluation)",
+        description: "IPP selon l'acuité visuelle des deux yeux. Valeurs exactes du tableau officiel AT.",
         injuries: [
-          // Ligne 10/10 + X
-          { name: "Vision binoculaire: 10/10 + 8/10", rate: 0, description: "Aucune IPP" },
-          { name: "Vision binoculaire: 10/10 + 7/10 à 6/10", rate: [2, 3], description: "Baisse légère d'un œil" },
-          { name: "Vision binoculaire: 10/10 + 5/10 à 4/10", rate: [4, 6], description: "Baisse modérée d'un œil" },
-          { name: "Vision binoculaire: 10/10 + 3/10", rate: [7, 11], description: "Baisse importante d'un œil" },
-          { name: "Vision binoculaire: 10/10 + 2/10", rate: [16, 18], description: "Baisse sévère d'un œil" },
-          { name: "Vision binoculaire: 10/10 + 1/10", rate: [19, 22], description: "Baisse très sévère d'un œil" },
-          { name: "Vision binoculaire: 10/10 + 1/20", rate: [22, 25], description: "Vision résiduelle minimale d'un œil" },
-          { name: "Vision binoculaire: 10/10 + Moins de 1/20", rate: [25, 30], description: "Perte fonctionnelle d'un œil, autre normal" },
-          { name: "Vision binoculaire: 10/10 + Énucléation", rate: [28, 33], description: "Énucléation unilatérale, autre œil normal" },
+          // Ligne 8-9/10 + X
+          { name: "Vision binoculaire: 8-9/10 + 8-9/10", rate: 0, description: "Vision normale bilatérale" },
+          { name: "Vision binoculaire: 8-9/10 + 7/10", rate: 3, description: "Baisse légère d'un œil" },
+          { name: "Vision binoculaire: 8-9/10 + 6/10", rate: 3, description: "Baisse légère d'un œil" },
+          { name: "Vision binoculaire: 8-9/10 + 5/10", rate: 6, description: "Baisse modérée d'un œil" },
+          { name: "Vision binoculaire: 8-9/10 + 4/10", rate: 8, description: "Baisse modérée d'un œil" },
+          { name: "Vision binoculaire: 8-9/10 + 3/10", rate: 10, description: "Baisse importante d'un œil" },
+          { name: "Vision binoculaire: 8-9/10 + 2/10", rate: 17, description: "Baisse sévère d'un œil" },
+          { name: "Vision binoculaire: 8-9/10 + 1/10", rate: 23, description: "Baisse très sévère d'un œil" },
+          { name: "Vision binoculaire: 8-9/10 + 1/20", rate: 28, description: "Vision résiduelle minimale d'un œil" },
+          { name: "Vision binoculaire: 8-9/10 + Moins de 1/20", rate: 30, description: "Quasi perte d'un œil" },
+          { name: "Vision binoculaire: 8-9/10 + Énucléation", rate: 35, description: "Énucléation unilatérale" },
           
-          // Ligne 8/10 + X
-          { name: "Vision binoculaire: 8/10 + 8/10", rate: 0, description: "Vision bilatérale normale" },
-          { name: "Vision binoculaire: 8/10 + 7/10 à 6/10", rate: [2, 3], description: "Baisse légère bilatérale" },
-          { name: "Vision binoculaire: 8/10 + 5/10 à 4/10", rate: [4, 6], description: "Asymétrie modérée" },
-          { name: "Vision binoculaire: 8/10 + 3/10", rate: [7, 11], description: "Baisse importante d'un œil" },
-          { name: "Vision binoculaire: 8/10 + 2/10", rate: [16, 18], description: "Baisse sévère d'un œil" },
-          { name: "Vision binoculaire: 8/10 + 1/10", rate: [19, 22], description: "Vision très réduite d'un œil" },
-          { name: "Vision binoculaire: 8/10 + 1/20", rate: [22, 25], description: "Vision résiduelle minimale" },
-          { name: "Vision binoculaire: 8/10 + Moins de 1/20", rate: [25, 30], description: "Perte fonctionnelle unilatérale" },
-          { name: "Vision binoculaire: 8/10 + Énucléation", rate: [28, 33], description: "Énucléation + vision légèrement réduite" },
+          // Ligne 7/10 + X
+          { name: "Vision binoculaire: 7/10 + 7/10", rate: 3, description: "Baisse légère bilatérale symétrique" },
+          { name: "Vision binoculaire: 7/10 + 6/10", rate: 5, description: "Baisse légère bilatérale" },
+          { name: "Vision binoculaire: 7/10 + 5/10", rate: 8, description: "Asymétrie modérée" },
+          { name: "Vision binoculaire: 7/10 + 4/10", rate: 11, description: "Asymétrie modérée" },
+          { name: "Vision binoculaire: 7/10 + 3/10", rate: 13, description: "Baisse importante asymétrique" },
+          { name: "Vision binoculaire: 7/10 + 2/10", rate: 18, description: "Baisse sévère asymétrique" },
+          { name: "Vision binoculaire: 7/10 + 1/10", rate: 25, description: "Vision très réduite d'un œil" },
+          { name: "Vision binoculaire: 7/10 + 1/20", rate: 30, description: "Vision résiduelle minimale" },
+          { name: "Vision binoculaire: 7/10 + Moins de 1/20", rate: 35, description: "Quasi perte d'un œil" },
+          { name: "Vision binoculaire: 7/10 + Énucléation", rate: 40, description: "Énucléation + baisse controlatérale" },
           
-          // Ligne 7/10 et 6/10 + X
-          { name: "Vision binoculaire: 7/10 à 6/10 + 7/10 à 6/10", rate: [2, 3], description: "Baisse légère bilatérale symétrique" },
-          { name: "Vision binoculaire: 7/10 à 6/10 + 5/10 à 4/10", rate: [5, 8], description: "Baisse modérée asymétrique" },
-          { name: "Vision binoculaire: 7/10 à 6/10 + 3/10", rate: [12, 15], description: "Baisse importante asymétrique" },
-          { name: "Vision binoculaire: 7/10 à 6/10 + 2/10", rate: [18, 21], description: "Baisse sévère asymétrique" },
-          { name: "Vision binoculaire: 7/10 à 6/10 + 1/10", rate: [22, 25], description: "Vision très réduite d'un œil" },
-          { name: "Vision binoculaire: 7/10 à 6/10 + 1/20", rate: [25, 30], description: "Vision résiduelle minimale" },
-          { name: "Vision binoculaire: 7/10 à 6/10 + Moins de 1/20", rate: [30, 35], description: "Quasi perte d'un œil" },
-          { name: "Vision binoculaire: 7/10 à 6/10 + Énucléation", rate: [33, 38], description: "Énucléation + baisse controlatérale" },
+          // Ligne 6/10 + X
+          { name: "Vision binoculaire: 6/10 + 6/10", rate: 5, description: "Baisse légère bilatérale symétrique" },
+          { name: "Vision binoculaire: 6/10 + 5/10", rate: 8, description: "Baisse modérée" },
+          { name: "Vision binoculaire: 6/10 + 4/10", rate: 11, description: "Baisse modérée asymétrique" },
+          { name: "Vision binoculaire: 6/10 + 3/10", rate: 13, description: "Baisse importante" },
+          { name: "Vision binoculaire: 6/10 + 2/10", rate: 18, description: "Baisse sévère asymétrique" },
+          { name: "Vision binoculaire: 6/10 + 1/10", rate: 25, description: "Vision très réduite d'un œil" },
+          { name: "Vision binoculaire: 6/10 + 1/20", rate: 30, description: "Vision résiduelle minimale" },
+          { name: "Vision binoculaire: 6/10 + Moins de 1/20", rate: 35, description: "Quasi perte d'un œil" },
+          { name: "Vision binoculaire: 6/10 + Énucléation", rate: 40, description: "Énucléation + baisse" },
           
-          // Ligne 5/10 et 4/10 + X
-          { name: "Vision binoculaire: 5/10 à 4/10 + 5/10 à 4/10", rate: [4, 6], description: "Baisse modérée bilatérale symétrique" },
-          { name: "Vision binoculaire: 5/10 à 4/10 + 3/10", rate: [9, 12], description: "Baisse modérée à importante" },
-          { name: "Vision binoculaire: 5/10 à 4/10 + 2/10", rate: [18, 21], description: "Baisse sévère d'un œil" },
-          { name: "Vision binoculaire: 5/10 à 4/10 + 1/10", rate: [22, 25], description: "Vision très réduite d'un œil" },
-          { name: "Vision binoculaire: 5/10 à 4/10 + 1/20", rate: [25, 30], description: "Vision résiduelle minimale" },
-          { name: "Vision binoculaire: 5/10 à 4/10 + Moins de 1/20", rate: [35, 40], description: "Quasi perte d'un œil" },
-          { name: "Vision binoculaire: 5/10 à 4/10 + Énucléation", rate: [45, 48], description: "Énucléation + vision modérément réduite" },
+          // Ligne 5/10 + X
+          { name: "Vision binoculaire: 5/10 + 5/10", rate: 6, description: "Baisse modérée bilatérale symétrique" },
+          { name: "Vision binoculaire: 5/10 + 4/10", rate: 8, description: "Baisse modérée bilatérale" },
+          { name: "Vision binoculaire: 5/10 + 3/10", rate: 10, description: "Baisse modérée à importante" },
+          { name: "Vision binoculaire: 5/10 + 2/10", rate: 25, description: "Baisse sévère" },
+          { name: "Vision binoculaire: 5/10 + 1/10", rate: 30, description: "Vision très réduite d'un œil" },
+          { name: "Vision binoculaire: 5/10 + 1/20", rate: 40, description: "Vision résiduelle minimale" },
+          { name: "Vision binoculaire: 5/10 + Moins de 1/20", rate: 45, description: "Quasi perte d'un œil" },
+          { name: "Vision binoculaire: 5/10 + Énucléation", rate: 50, description: "Énucléation + vision modérée" },
+          
+          // Ligne 4/10 + X
+          { name: "Vision binoculaire: 4/10 + 4/10", rate: 8, description: "Baisse modérée bilatérale symétrique" },
+          { name: "Vision binoculaire: 4/10 + 3/10", rate: 15, description: "Baisse importante bilatérale" },
+          { name: "Vision binoculaire: 4/10 + 2/10", rate: 25, description: "Baisse sévère asymétrique" },
+          { name: "Vision binoculaire: 4/10 + 1/10", rate: 35, description: "Vision très réduite d'un œil" },
+          { name: "Vision binoculaire: 4/10 + 1/20", rate: 43, description: "Vision résiduelle minimale" },
+          { name: "Vision binoculaire: 4/10 + Moins de 1/20", rate: 48, description: "Quasi perte d'un œil" },
+          { name: "Vision binoculaire: 4/10 + Énucléation", rate: 53, description: "Énucléation + baisse importante" },
           
           // Ligne 3/10 + X
-          { name: "Vision binoculaire: 3/10 + 3/10", rate: [7, 11], description: "Baisse importante bilatérale symétrique" },
-          { name: "Vision binoculaire: 3/10 + 2/10", rate: [12, 15], description: "Baisse importante bilatérale" },
-          { name: "Vision binoculaire: 3/10 + 1/10", rate: [18, 21], description: "Baisse importante à sévère" },
-          { name: "Vision binoculaire: 3/10 + 1/20", rate: [22, 25], description: "Baisse importante + vision résiduelle" },
-          { name: "Vision binoculaire: 3/10 + Moins de 1/20", rate: [30, 35], description: "Baisse importante + quasi cécité" },
-          { name: "Vision binoculaire: 3/10 + Énucléation", rate: [40, 45], description: "Énucléation + baisse importante" },
+          { name: "Vision binoculaire: 3/10 + 3/10", rate: 10, description: "Baisse importante bilatérale symétrique" },
+          { name: "Vision binoculaire: 3/10 + 2/10", rate: 25, description: "Baisse importante à sévère" },
+          { name: "Vision binoculaire: 3/10 + 1/10", rate: 35, description: "Baisse sévère asymétrique" },
+          { name: "Vision binoculaire: 3/10 + 1/20", rate: 55, description: "Vision résiduelle" },
+          { name: "Vision binoculaire: 3/10 + Moins de 1/20", rate: 60, description: "Quasi cécité unilatérale" },
+          { name: "Vision binoculaire: 3/10 + Énucléation", rate: 65, description: "Énucléation + baisse sévère" },
           
           // Ligne 2/10 + X
-          { name: "Vision binoculaire: 2/10 + 2/10", rate: [16, 18], description: "Baisse sévère bilatérale symétrique" },
-          { name: "Vision binoculaire: 2/10 + 1/10", rate: [18, 21], description: "Baisse sévère bilatérale" },
-          { name: "Vision binoculaire: 2/10 + 1/20", rate: [22, 25], description: "Baisse sévère + vision résiduelle" },
-          { name: "Vision binoculaire: 2/10 + Moins de 1/20", rate: [30, 35], description: "Baisse sévère + quasi cécité" },
-          { name: "Vision binoculaire: 2/10 + Énucléation", rate: [45, 50], description: "Énucléation + baisse sévère" },
+          { name: "Vision binoculaire: 2/10 + 2/10", rate: 17, description: "Baisse sévère bilatérale symétrique" },
+          { name: "Vision binoculaire: 2/10 + 1/10", rate: 45, description: "Baisse sévère bilatérale" },
+          { name: "Vision binoculaire: 2/10 + 1/20", rate: 55, description: "Baisse sévère + vision résiduelle" },
+          { name: "Vision binoculaire: 2/10 + Moins de 1/20", rate: 80, description: "Quasi cécité" },
+          { name: "Vision binoculaire: 2/10 + Énucléation", rate: 85, description: "Énucléation + baisse très sévère" },
           
           // Ligne 1/10 + X
-          { name: "Vision binoculaire: 1/10 + 1/10", rate: [19, 22], description: "Vision très réduite bilatérale" },
-          { name: "Vision binoculaire: 1/10 + 1/20", rate: [22, 25], description: "Vision très réduite + résiduelle" },
-          { name: "Vision binoculaire: 1/10 + Moins de 1/20", rate: [25, 30], description: "Vision très réduite + quasi cécité" },
-          { name: "Vision binoculaire: 1/10 + Énucléation", rate: [40, 45], description: "Énucléation + vision très réduite" },
+          { name: "Vision binoculaire: 1/10 + 1/10", rate: 23, description: "Vision très réduite bilatérale" },
+          { name: "Vision binoculaire: 1/10 + 1/20", rate: 60, description: "Vision très réduite + résiduelle" },
+          { name: "Vision binoculaire: 1/10 + Moins de 1/20", rate: 80, description: "Vision très réduite + quasi cécité" },
+          { name: "Vision binoculaire: 1/10 + Énucléation", rate: 100, description: "Énucléation + vision très réduite" },
           
           // Ligne 1/20 + X
-          { name: "Vision binoculaire: 1/20 + 1/20", rate: [22, 25], description: "Vision résiduelle bilatérale" },
-          { name: "Vision binoculaire: 1/20 + Moins de 1/20", rate: [25, 30], description: "Vision résiduelle + quasi cécité" },
-          { name: "Vision binoculaire: 1/20 + Énucléation", rate: [35, 40], description: "Énucléation + vision résiduelle" },
+          { name: "Vision binoculaire: 1/20 + 1/20", rate: 28, description: "Vision résiduelle bilatérale" },
+          { name: "Vision binoculaire: 1/20 + Moins de 1/20", rate: 90, description: "Vision résiduelle + quasi cécité" },
+          { name: "Vision binoculaire: 1/20 + Énucléation", rate: 100, description: "Énucléation + vision résiduelle" },
           
           // Ligne Moins de 1/20 + X
-          { name: "Vision binoculaire: Moins de 1/20 + Moins de 1/20", rate: [25, 30], description: "Quasi cécité bilatérale" },
-          { name: "Vision binoculaire: Moins de 1/20 + Énucléation", rate: [33, 48], description: "Énucléation + quasi cécité controlatérale" },
+          { name: "Vision binoculaire: Moins de 1/20 + Moins de 1/20", rate: 30, description: "Quasi cécité bilatérale" },
+          { name: "Vision binoculaire: Moins de 1/20 + Énucléation", rate: 100, description: "Énucléation + quasi cécité" },
           
           // Ligne Énucléation + X
-          { name: "Vision binoculaire: Énucléation + Énucléation", rate: [28, 33], description: "Énucléation bilatérale avec prothèses" },
-          { name: "Vision binoculaire: Énucléation bilatérale (Cécité absolue)", rate: 100, description: "Perte des deux yeux - Incapacité totale" },
+          { name: "Vision binoculaire: Énucléation + Énucléation", rate: 35, description: "Énucléation bilatérale avec prothèses" },
+          { name: "Vision binoculaire: Énucléation bilatérale sans prothèse", rate: 100, description: "Cécité absolue - Incapacité totale" },
         ]
       },
       {

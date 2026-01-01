@@ -1,0 +1,469 @@
+═══════════════════════════════════════════════════════════════
+📊 RAPPORT DE COMPARAISON - ÉPILEPSIES POST-TRAUMATIQUES
+═══════════════════════════════════════════════════════════════
+
+## 🔍 ANALYSE GLOBALE
+
+L'application possède une couverture complète du barème officiel 1939
+pour les épilepsies post-traumatiques, avec une correspondance stricte
+des taux et une organisation optimisée par fréquence.
+
+═══════════════════════════════════════════════════════════════
+## 📋 COMPARAISON DÉTAILLÉE PAR CATÉGORIE
+═══════════════════════════════════════════════════════════════
+
+┌─────────────────────────────────────────────────────────────┐
+│ 1. ÉPILEPSIES NON JACKSONIENNES - CRISES CONVULSIVES       │
+└─────────────────────────────────────────────────────────────┘
+
+╔══════════════════════════════════════════════════════════════╗
+║ Séquelle                    │ Barème Officiel │ Application  ║
+╠═════════════════════════════╪═════════════════╪══════════════╣
+║ Épilepsie traumatique selon│ 30 à 100%       │ 30 à 100%    ║
+║ gravité/fréquence           │                 │ ✅ IDENTIQUE  ║
+║─────────────────────────────┼─────────────────┼──────────────║
+║ Accès rares                 │ 20 à 30%        │ 20 à 30%     ║
+║                             │                 │ ✅ IDENTIQUE  ║
+╚═════════════════════════════╧═════════════════╧══════════════╝
+
+⭐ BONUS APPLICATION:
+   • rateCriteria pour crises généralisées (2 niveaux):
+     - low: Crises rares (annuelles), bien contrôlées par monothérapie
+     - high: Crises fréquentes et pharmacorésistantes, retentissement majeur
+
+┌─────────────────────────────────────────────────────────────┐
+│ 2. ÉQUIVALENTS ÉPILEPTIQUES (NON CONVULSIFS)               │
+└─────────────────────────────────────────────────────────────┘
+
+╔══════════════════════════════════════════════════════════════╗
+║ Fréquence                   │ Barème Officiel │ Application  ║
+╠═════════════════════════════╪═════════════════╪══════════════╣
+║ Accès vertigineux/procursifs│ 0 à 10%         │ 0 à 10%      ║
+║ 1 à 3 fois par an           │                 │ ✅ IDENTIQUE  ║
+║─────────────────────────────┼─────────────────┼──────────────║
+║ Accès vertigineux/procursifs│ 10 à 20%        │ 10 à 20%     ║
+║ une fois par mois           │                 │ ✅ IDENTIQUE  ║
+║─────────────────────────────┼─────────────────┼──────────────║
+║ Accès vertigineux/procursifs│ 20 à 30%        │ 20 à 30%     ║
+║ une fois par semaine        │                 │ ✅ IDENTIQUE  ║
+║─────────────────────────────┼─────────────────┼──────────────║
+║ Accès vertigineux/procursifs│ 40 à 50%        │ 40 à 50%     ║
+║ trois fois par semaine      │                 │ ✅ IDENTIQUE  ║
+║─────────────────────────────┼─────────────────┼──────────────║
+║ Accès très fréquents avec   │ 40 à 80%        │ 40 à 80%     ║
+║ manifestations graves       │                 │ ✅ IDENTIQUE  ║
+╚═════════════════════════════╧═════════════════╧══════════════╝
+
+┌─────────────────────────────────────────────────────────────┐
+│ 3. ÉPILEPSIES JACKSONIENNES (CRISES LOCALISÉES)            │
+└─────────────────────────────────────────────────────────────┘
+
+╔══════════════════════════════════════════════════════════════╗
+║ Type & Fréquence            │ Barème Officiel │ Application  ║
+╠═════════════════════════════╪═════════════════╪══════════════╣
+║ CRISES LIMITÉES:            │                 │              ║
+║ • Jusqu'à 10-12 fois/an     │ 0 à 10%         │ 0 à 10%      ║
+║                             │                 │ ✅ IDENTIQUE  ║
+║─────────────────────────────┼─────────────────┼──────────────║
+║ • Jusqu'à 1 fois/semaine    │ 10 à 20%        │ 10 à 20%     ║
+║                             │                 │ ✅ IDENTIQUE  ║
+║─────────────────────────────┼─────────────────┼──────────────║
+║ • Plusieurs fois/semaine    │ 20 à 30%        │ 20 à 30%     ║
+║                             │                 │ ✅ IDENTIQUE  ║
+║─────────────────────────────┼─────────────────┼──────────────║
+║ CRISES ÉTENDUES:            │                 │              ║
+║ • Jusqu'à 10-12 fois/an     │ 10 à 20%        │ 10 à 20%     ║
+║                             │                 │ ✅ IDENTIQUE  ║
+║─────────────────────────────┼─────────────────┼──────────────║
+║ • Jusqu'à 1 fois/semaine    │ 20 à 30%        │ 20 à 30%     ║
+║                             │                 │ ✅ IDENTIQUE  ║
+║─────────────────────────────┼─────────────────┼──────────────║
+║ • Plusieurs fois/semaine    │ 20 à 40%        │ 20 à 40%     ║
+║                             │                 │ ✅ IDENTIQUE  ║
+╚═════════════════════════════╧═════════════════╧══════════════╝
+
+📝 NOTE: Crises généralisées = même taux que crises d'épilepsie essentielle
+
+═══════════════════════════════════════════════════════════════
+## 📊 STATISTIQUES GLOBALES
+═══════════════════════════════════════════════════════════════
+
+┌─────────────────────────────────────────────────────────────┐
+│ CRISES CONVULSIVES GÉNÉRALISÉES (NON JACKSONIENNES)        │
+├─────────────────────────────────────────────────────────────┤
+│ Séquelles barème officiel 1939:     2/2     ✅ 100%        │
+│ Taux identiques:                    2/2     ✅ 100%        │
+│ Avec rateCriteria:                  1/2     ⭐ 50%         │
+└─────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────┐
+│ ÉQUIVALENTS ÉPILEPTIQUES (ABSENCES, VERTIGES)              │
+├─────────────────────────────────────────────────────────────┤
+│ Séquelles barème officiel 1939:     5/5     ✅ 100%        │
+│ Taux identiques:                    5/5     ✅ 100%        │
+│ Organisation par fréquence:         5/5     ⭐ Optimisée   │
+└─────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────┐
+│ ÉPILEPSIES JACKSONIENNES (CRISES LOCALISÉES)               │
+├─────────────────────────────────────────────────────────────┤
+│ Séquelles barème officiel 1939:     6/6     ✅ 100%        │
+│ Taux identiques:                    6/6     ✅ 100%        │
+│ Organisation claire:                         ⭐ Optimisée   │
+│   • Crises limitées (3 variantes)                          │
+│   • Crises étendues (3 variantes)                          │
+└─────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────┐
+│ TOTAL GÉNÉRAL                                               │
+├─────────────────────────────────────────────────────────────┤
+│ Séquelles barème officiel 1939:    13/13    ✅ 100%        │
+│ Taux identiques:                   13/13    ✅ 100%        │
+│ Avec rateCriteria:                  1/13    ⭐ 8%          │
+│ Organisation optimisée:              Oui    ⭐              │
+└─────────────────────────────────────────────────────────────┘
+
+═══════════════════════════════════════════════════════════════
+## 🎯 RÉSUMÉ EXÉCUTIF
+═══════════════════════════════════════════════════════════════
+
+✅ CONFORMITÉ AU BARÈME OFFICIEL 1939: 100%
+   • Crises convulsives généralisées: 2/2 séquelles (100%)
+   • Équivalents épileptiques: 5/5 séquelles (100%)
+   • Épilepsies jacksoniennes: 6/6 séquelles (100%)
+   • TOTAL: 13/13 séquelles officielles présentes
+
+⭐ ORGANISATION DE L'APPLICATION:
+   • Classification claire par type de crise
+   • Organisation par fréquence (annuelle → quotidienne)
+   • Nomenclature explicite et standardisée
+   • rateCriteria pour crises généralisées
+
+🏆 NOTE GLOBALE: A (TRÈS BON)
+
+═══════════════════════════════════════════════════════════════
+## 💡 POINTS FORTS DE L'APPLICATION
+═══════════════════════════════════════════════════════════════
+
+1. CONFORMITÉ LÉGALE ✅
+   ────────────────────────────────────────────────────────────
+   • Tous les taux du barème 1939 respectés (13/13)
+   • Aucune séquelle officielle manquante
+   • Compatibilité juridique totale
+
+2. ORGANISATION OPTIMISÉE ⭐
+   ────────────────────────────────────────────────────────────
+   • Classification par type:
+     - Crises convulsives généralisées (non jacksoniennes)
+     - Équivalents épileptiques (absences, vertiges, procursifs)
+     - Crises jacksoniennes (limitées vs étendues)
+   
+   • Organisation par fréquence croissante:
+     - 1-3 fois/an → 1 fois/mois → 1 fois/semaine → 3 fois/semaine
+   
+   • Nomenclature claire et standardisée
+
+3. CRITÈRES DÉTAILLÉS ⭐
+   ────────────────────────────────────────────────────────────
+   • rateCriteria pour crises généralisées:
+     - low: Crises rares (annuelles), bien contrôlées par monothérapie
+     - high: Crises fréquentes et pharmacorésistantes, 
+             retentissement social et professionnel majeur
+
+4. COHÉRENCE CLINIQUE ⭐
+   ────────────────────────────────────────────────────────────
+   • Distinction claire types de crises:
+     - Généralisées (grand mal)
+     - Équivalents (petit mal, absences, vertiges)
+     - Jacksoniennes (partielles motrices)
+   
+   • Progression logique des taux selon fréquence
+   • Prise en compte de la pharmacorésistance
+
+═══════════════════════════════════════════════════════════════
+## 📋 TABLEAUX DE CORRESPONDANCE DÉTAILLÉS
+═══════════════════════════════════════════════════════════════
+
+A. CRISES CONVULSIVES GÉNÉRALISÉES (NON JACKSONIENNES)
+──────────────────────────────────────────────────────────────
+
+┌─────────────────────────────────────────────────────────────┐
+│ BARÈME OFFICIEL 1939                                        │
+├─────────────────────────────────────────────────────────────┤
+│ • Épilepsie traumatique selon gravité/fréquence: 30-100%   │
+│ • Accès rares: 20-30%                                       │
+└─────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────┐
+│ APPLICATION                                                 │
+├─────────────────────────────────────────────────────────────┤
+│ • Crises convulsives généralisées: 30-100%                 │
+│   → rateCriteria:                                           │
+│      - low: Crises rares (annuelles), monothérapie         │
+│      - high: Crises fréquentes pharmacorésistantes         │
+│                                                             │
+│ • Crises convulsives généralisées rares: 20-30%            │
+└─────────────────────────────────────────────────────────────┘
+
+✅ CORRESPONDANCE: 100% IDENTIQUE
+⭐ AMÉLIORATION: rateCriteria avec critères de pharmacorésistance
+
+B. ÉQUIVALENTS ÉPILEPTIQUES (ABSENCES, VERTIGES, PROCURSIFS)
+──────────────────────────────────────────────────────────────
+
+┌─────────────────────────────────────────────────────────────┐
+│ BARÈME OFFICIEL 1939                                        │
+├─────────────────────────────────────────────────────────────┤
+│ Accès vertigineux ou procursifs:                            │
+│ • 1 à 3 fois par an: 0-10%                                  │
+│ • Une fois par mois: 10-20%                                 │
+│ • Une fois par semaine: 20-30%                              │
+│ • Trois fois par semaine: 40-50%                            │
+│ • Très fréquents avec manifestations graves: 40-80%         │
+└─────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────┐
+│ APPLICATION                                                 │
+├─────────────────────────────────────────────────────────────┤
+│ Équivalents épileptiques (absences, vertiges):              │
+│ • 1 à 3 fois par an: 0-10%                                  │
+│ • Une fois par mois: 10-20%                                 │
+│ • Une fois par semaine: 20-30%                              │
+│ • Trois fois par semaine: 40-50%                            │
+│ • Très fréquents avec manifestations graves: 40-80%         │
+└─────────────────────────────────────────────────────────────┘
+
+✅ CORRESPONDANCE: 100% IDENTIQUE (5/5 variantes)
+⭐ AMÉLIORATION: Organisation systématique par fréquence croissante
+
+C. ÉPILEPSIES JACKSONIENNES (CRISES PARTIELLES MOTRICES)
+──────────────────────────────────────────────────────────────
+
+┌─────────────────────────────────────────────────────────────┐
+│ BARÈME OFFICIEL 1939                                        │
+├─────────────────────────────────────────────────────────────┤
+│ CRISES LIMITÉES (quelques groupes musculaires):             │
+│ • Jusqu'à 10-12 fois/an: 0-10%                              │
+│ • Jusqu'à 1 fois/semaine: 10-20%                            │
+│ • Plusieurs fois/semaine: 20-30%                            │
+│                                                             │
+│ CRISES ÉTENDUES (groupes assez étendus):                    │
+│ • Jusqu'à 10-12 fois/an: 10-20%                             │
+│ • Jusqu'à 1 fois/semaine: 20-30%                            │
+│ • Plusieurs fois/semaine: 20-40%                            │
+│                                                             │
+│ CRISES GÉNÉRALISÉES: même taux que épilepsie essentielle   │
+└─────────────────────────────────────────────────────────────┘
+
+┌─────────────────────────────────────────────────────────────┐
+│ APPLICATION                                                 │
+├─────────────────────────────────────────────────────────────┤
+│ CRISES JACKSONIENNES LIMITÉES:                              │
+│ • Jusqu'à 12 fois par an: 0-10%                             │
+│ • Jusqu'à 1 fois par semaine: 10-20%                        │
+│ • Plusieurs fois par semaine: 20-30%                        │
+│                                                             │
+│ CRISES JACKSONIENNES ÉTENDUES:                              │
+│ • Jusqu'à 12 fois par an: 10-20%                            │
+│ • Jusqu'à 1 fois par semaine: 20-30%                        │
+│ • Plusieurs fois par semaine: 20-40%                        │
+└─────────────────────────────────────────────────────────────┘
+
+✅ CORRESPONDANCE: 100% IDENTIQUE (6/6 variantes)
+⭐ AMÉLIORATION: Distinction claire "limitées" vs "étendues"
+
+═══════════════════════════════════════════════════════════════
+## 🔬 ANALYSE CLINIQUE DÉTAILLÉE
+═══════════════════════════════════════════════════════════════
+
+1. CRISES CONVULSIVES GÉNÉRALISÉES (GRAND MAL)
+   ────────────────────────────────────────────────────────────
+   
+   📋 DÉFINITION BARÈME:
+   • Perte de connaissance brutale
+   • Accès tonico-clonique
+   • Coma secondaire
+   • Amnésie de la crise
+   
+   📊 ÉCHELLE DE GRAVITÉ (selon fréquence):
+   • Quotidiennes ou 3-4 fois/semaine: 100%
+   • 1-2 fois/mois: 50-70%
+   • 3-4 fois/an: 30-40%
+   • 1 fois/an: 25%
+   • Crises rares: 20-30%
+   
+   ⭐ CRITÈRES APPLICATION (rateCriteria):
+   • low: Crises rares (annuelles)
+         + Bien contrôlées par monothérapie
+         = 20-30%
+   
+   • high: Crises fréquentes
+          + Pharmacorésistantes
+          + Retentissement socio-professionnel majeur
+          = 80-100%
+
+2. ÉQUIVALENTS ÉPILEPTIQUES (PETIT MAL)
+   ────────────────────────────────────────────────────────────
+   
+   📋 TYPES RECONNUS:
+   • Absences (brèves pertes de conscience)
+   • Accès vertigineux (vertiges épileptiques)
+   • Épilepsie procursive (activité motrice automatique)
+   
+   📊 ÉCHELLE DE GRAVITÉ (selon fréquence):
+   
+   ┌──────────────────┬─────────────────────┬──────────────┐
+   │ Fréquence        │ Caractéristiques    │ Taux         │
+   ├──────────────────┼─────────────────────┼──────────────┤
+   │ 1-3 fois/an      │ Impact minimal      │ 0-10%        │
+   │ 1 fois/mois      │ Gêne modérée        │ 10-20%       │
+   │ 1 fois/semaine   │ Gêne importante     │ 20-30%       │
+   │ 3 fois/semaine   │ Retentissement net  │ 40-50%       │
+   │ Très fréquents   │ Manifestations      │ 40-80%       │
+   │ + graves         │ graves, chutes      │              │
+   └──────────────────┴─────────────────────┴──────────────┘
+   
+   📝 NOTES BARÈME:
+   • Accès avec chute brutale: risque important
+   • Plusieurs fois/jour + rebelle: jusqu'à 80%
+   • Absences simples: indemnisation moindre
+
+3. CRISES JACKSONIENNES (ÉPILEPSIE PARTIELLE MOTRICE)
+   ────────────────────────────────────────────────────────────
+   
+   📋 DÉFINITION:
+   • Crises partielles motrices
+   • Débutant dans un territoire localisé
+   • Peuvent se généraliser secondairement
+   
+   🔍 DISTINCTION IMPORTANTE:
+   
+   A. CRISES LIMITÉES:
+      • Quelques groupes musculaires
+      • Face ou membre
+      • En très petit nombre
+   
+   B. CRISES ÉTENDUES:
+      • Groupes musculaires assez étendus
+      • Territoire plus large
+      • Risque de généralisation
+   
+   📊 ÉCHELLE DE GRAVITÉ:
+   
+   CRISES LIMITÉES:
+   ├─ Rares (≤12/an): 0-10% (très faible impact)
+   ├─ Hebdomadaires: 10-20% (gêne modérée)
+   └─ Plurihebdomadaires: 20-30% (gêne importante)
+   
+   CRISES ÉTENDUES:
+   ├─ Rares (≤12/an): 10-20% (impact plus important)
+   ├─ Hebdomadaires: 20-30% (gêne significative)
+   └─ Plurihebdomadaires: 20-40% (forte gêne)
+   
+   ⚠️ SI GÉNÉRALISATION SECONDAIRE:
+   → Appliquer taux des crises généralisées
+
+4. CRITÈRES D'IMPUTABILITÉ TRAUMATIQUE (selon barème)
+   ────────────────────────────────────────────────────────────
+   
+   ✅ CRITÈRES POSITIFS:
+   • Traumatisme crânien certain avec coma initial
+   • Délai d'apparition: 3 mois minimum à 1 an maximum
+   • EEG: perturbations focalisées ou bilatérales synchrones
+   • Crises précoces possibles si traumatisme grave
+   • Traitement antiépileptique suivi
+   
+   ❌ CRITÈRES NÉGATIFS:
+   • Crises précoces après traumatisme bénin
+   • EEG: pointes-ondes 3 c/s (épilepsie idiopathique)
+   • Épilepsie photosensible
+   • Absence de coma initial
+   
+   🔬 INVESTIGATIONS NÉCESSAIRES:
+   • EEG (de préférence avec suspension traitement 24h)
+   • Interrogatoire entourage (morsure langue, incontinence, chutes)
+   • Attestations médicales du suivi
+   • Vérification du traitement effectif
+
+═══════════════════════════════════════════════════════════════
+## 🔄 PROGRESSION LOGIQUE DES TAUX
+═══════════════════════════════════════════════════════════════
+
+L'application respecte une progression logique selon:
+
+1. TYPE DE CRISE (gravité intrinsèque):
+   ────────────────────────────────────────────────────────────
+   Généralisées > Jacksoniennes étendues > Jacksoniennes limitées
+      (30-100%)      (10-40%)                (0-30%)
+   
+   Équivalents avec chute > Équivalents simples
+      (40-80%)                (0-50%)
+
+2. FRÉQUENCE DES CRISES:
+   ────────────────────────────────────────────────────────────
+   Quotidienne → Plurihebdomadaire → Hebdomadaire → 
+   Mensuelle → Annuelle
+   
+   100% → 40-80% → 20-40% → 10-30% → 0-20%
+
+3. PHARMACORÉSISTANCE (rateCriteria):
+   ────────────────────────────────────────────────────────────
+   Bien contrôlée par monothérapie → Taux bas de fourchette
+   Pharmacorésistante → Taux élevé de fourchette
+
+4. RETENTISSEMENT SOCIAL/PROFESSIONNEL:
+   ────────────────────────────────────────────────────────────
+   Activités normales maintenues → Taux bas
+   Retentissement majeur → Taux élevé
+
+═══════════════════════════════════════════════════════════════
+## ✅ CONCLUSION FINALE
+═══════════════════════════════════════════════════════════════
+
+┌─────────────────────────────────────────────────────────────┐
+│ 🏆 L'APPLICATION RESPECTE INTÉGRALEMENT LE BARÈME 1939      │
+│    AVEC UNE ORGANISATION OPTIMISÉE                          │
+└─────────────────────────────────────────────────────────────┘
+
+✅ CONFORMITÉ: 100% (13/13 séquelles officielles)
+✅ TAUX IDENTIQUES: 100% (tous respectés)
+⭐ ORGANISATION: Optimisée par type et fréquence
+⭐ RATECRITERIA: Ajoutés pour crises généralisées
+
+🚀 RECOMMANDATION: AUCUNE ACTION REQUISE
+   
+   Le barème de l'application pour les épilepsies:
+   • ✅ Respecte tous les taux du barème officiel 1939
+   • ⭐ Organisation claire par type de crise
+   • ⭐ Classification par fréquence croissante
+   • ⭐ Critères de pharmacorésistance intégrés
+   • ⭐ Nomenclature standardisée et explicite
+
+NOTE GLOBALE: 🏆 A (TRÈS BON)
+
+═══════════════════════════════════════════════════════════════
+
+📋 CORRESPONDANCE COMPLÈTE (13/13):
+
+CRISES CONVULSIVES GÉNÉRALISÉES (2/2):
+✅ Épilepsie traumatique selon gravité: 30-100%
+✅ Accès rares: 20-30%
+
+ÉQUIVALENTS ÉPILEPTIQUES (5/5):
+✅ 1-3 fois/an: 0-10%
+✅ 1 fois/mois: 10-20%
+✅ 1 fois/semaine: 20-30%
+✅ 3 fois/semaine: 40-50%
+✅ Très fréquents/graves: 40-80%
+
+JACKSONIENNES LIMITÉES (3/3):
+✅ Jusqu'à 12 fois/an: 0-10%
+✅ Jusqu'à 1 fois/semaine: 10-20%
+✅ Plusieurs fois/semaine: 20-30%
+
+JACKSONIENNES ÉTENDUES (3/3):
+✅ Jusqu'à 12 fois/an: 10-20%
+✅ Jusqu'à 1 fois/semaine: 20-30%
+✅ Plusieurs fois/semaine: 20-40%
+
+═══════════════════════════════════════════════════════════════

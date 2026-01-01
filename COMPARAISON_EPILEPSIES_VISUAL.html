@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comparaison Épilepsies Post-Traumatiques - Barème 1939 vs Application</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        header p {
+            font-size: 1.2em;
+            opacity: 0.95;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            padding: 40px;
+            background: #f8f9fa;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 12px rgba(0,0,0,0.15);
+        }
+
+        .stat-card .number {
+            font-size: 3em;
+            font-weight: bold;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-card .label {
+            font-size: 1.1em;
+            color: #666;
+            margin-top: 10px;
+        }
+
+        .content {
+            padding: 40px;
+        }
+
+        .section {
+            margin-bottom: 40px;
+        }
+
+        .section-title {
+            font-size: 2em;
+            color: #667eea;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .comparison-table thead {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+
+        .comparison-table th {
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .comparison-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .comparison-table tbody tr:hover {
+            background: #f8f9fa;
+        }
+
+        .status {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9em;
+        }
+
+        .status.identique {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .rate-cell {
+            font-weight: 600;
+            color: #667eea;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+            border-left: 4px solid #667eea;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 5px;
+        }
+
+        .highlight-box h3 {
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        .highlight-box ul {
+            margin-left: 20px;
+        }
+
+        .highlight-box li {
+            margin: 5px 0;
+            line-height: 1.6;
+        }
+
+        .grade {
+            display: inline-block;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 10px 30px;
+            border-radius: 50px;
+            font-size: 1.5em;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+
+        .conclusion {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+            padding: 30px;
+            border-radius: 15px;
+            margin-top: 40px;
+        }
+
+        .conclusion h2 {
+            color: #667eea;
+            margin-bottom: 20px;
+        }
+
+        .conclusion ul {
+            list-style: none;
+        }
+
+        .conclusion li {
+            padding: 10px 0;
+            padding-left: 30px;
+            position: relative;
+            line-height: 1.6;
+        }
+
+        .conclusion li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+
+        footer {
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .category-badge {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            margin-right: 10px;
+            font-weight: 600;
+        }
+
+        .subsection {
+            margin: 30px 0;
+        }
+
+        .subsection-title {
+            font-size: 1.5em;
+            color: #764ba2;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+
+        .criteria-box {
+            background: white;
+            border: 2px solid #667eea;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 15px 0;
+        }
+
+        .criteria-box h4 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+
+        .criteria-item {
+            padding: 10px;
+            margin: 5px 0;
+            background: #f8f9fa;
+            border-radius: 5px;
+        }
+
+        .criteria-item strong {
+            color: #764ba2;
+        }
+
+        .analysis-section {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 20px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .analysis-section h3 {
+            color: #667eea;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+
+        .type-comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .type-box {
+            padding: 20px;
+            border-radius: 10px;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
+            border: 1px solid #667eea;
+        }
+
+        .type-box h4 {
+            color: #764ba2;
+            margin-bottom: 10px;
+        }
+
+        .type-box ul {
+            list-style: none;
+            margin-left: 0;
+        }
+
+        .type-box li {
+            padding: 5px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+
+        .type-box li:before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: #667eea;
+            font-weight: bold;
+        }
+
+        .progression-chart {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border: 2px solid #eee;
+        }
+
+        .progression-chart h4 {
+            color: #667eea;
+            margin-bottom: 15px;
+        }
+
+        .progression-bar {
+            display: flex;
+            align-items: center;
+            margin: 10px 0;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 5px;
+        }
+
+        .progression-bar .freq-label {
+            flex: 0 0 200px;
+            font-weight: 600;
+        }
+
+        .progression-bar .bar {
+            flex: 1;
+            height: 30px;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🧠 Comparaison Épilepsies Post-Traumatiques</h1>
+            <p>Barème Officiel 1939 vs Application - Analyse Détaillée</p>
+        </header>
+
+        <div class="stats">
+            <div class="stat-card">
+                <div class="number">2/2</div>
+                <div class="label">Crises Convulsives<br>Généralisées</div>
+            </div>
+            <div class="stat-card">
+                <div class="number">5/5</div>
+                <div class="label">Équivalents<br>Épileptiques</div>
+            </div>
+            <div class="stat-card">
+                <div class="number">6/6</div>
+                <div class="label">Épilepsies<br>Jacksoniennes</div>
+            </div>
+            <div class="stat-card">
+                <div class="number">100%</div>
+                <div class="label">Conformité<br>Globale</div>
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="section">
+                <h2 class="section-title">1. Crises Convulsives Généralisées</h2>
+                
+                <div class="highlight-box">
+                    <h3>📋 Définition clinique</h3>
+                    <ul>
+                        <li><strong>Grand Mal</strong> : Perte de connaissance brutale, accès tonico-clonique</li>
+                        <li><strong>Signes</strong> : Coma secondaire, amnésie de la crise</li>
+                        <li><strong>Imputabilité</strong> : Traumatisme crânien avec coma, délai 3 mois à 1 an</li>
+                        <li><strong>EEG</strong> : Perturbations focalisées ou bilatérales synchrones</li>
+                    </ul>
+                </div>
+
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Séquelle</th>
+                            <th>Barème 1939</th>
+                            <th>Application</th>
+                            <th>Statut</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Épilepsie traumatique selon gravité</strong></td>
+                            <td class="rate-cell">30 à 100%</td>
+                            <td class="rate-cell">30 à 100%</td>
+                            <td><span class="status identique">✓ IDENTIQUE</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Accès rares</strong></td>
+                            <td class="rate-cell">20 à 30%</td>
+                            <td class="rate-cell">20 à 30%</td>
+                            <td><span class="status identique">✓ IDENTIQUE</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <div class="criteria-box">
+                    <h4>⭐ rateCriteria ajoutés</h4>
+                    <div class="criteria-item">
+                        <strong>LOW (20-30%)</strong> : Crises rares, bien contrôlées par monothérapie
+                    </div>
+                    <div class="criteria-item">
+                        <strong>HIGH (80-100%)</strong> : Crises fréquentes pharmacorésistantes, retentissement majeur
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">2. Équivalents Épileptiques</h2>
+                
+                <div class="highlight-box">
+                    <h3>📋 Types reconnus</h3>
+                    <ul>
+                        <li><strong>Absences</strong> : Pertes de conscience brèves (Petit Mal)</li>
+                        <li><strong>Vertiges</strong> : Vertiges épileptiques</li>
+                        <li><strong>Procursifs</strong> : Activité motrice automatique</li>
+                        <li><strong>Risque</strong> : Chutes brutales traumatiques</li>
+                    </ul>
+                </div>
+
+                <table class="comparison-table">
+                    <thead>
+                        <tr>
+                            <th>Fréquence</th>
+                            <th>Barème 1939</th>
+                            <th>Application</th>
+                            <th>Statut</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>1 à 3 fois par an</strong></td>
+                            <td class="rate-cell">0 à 10%</td>
+                            <td class="rate-cell">0 à 10%</td>
+                            <td><span class="status identique">✓ IDENTIQUE</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Une fois par mois</strong></td>
+                            <td class="rate-cell">10 à 20%</td>
+                            <td class="rate-cell">10 à 20%</td>
+                            <td><span class="status identique">✓ IDENTIQUE</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Une fois par semaine</strong></td>
+                            <td class="rate-cell">20 à 30%</td>
+                            <td class="rate-cell">20 à 30%</td>
+                            <td><span class="status identique">✓ IDENTIQUE</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Trois fois par semaine</strong></td>
+                            <td class="rate-cell">40 à 50%</td>
+                            <td class="rate-cell">40 à 50%</td>
+                            <td><span class="status identique">✓ IDENTIQUE</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>Très fréquents graves</strong></td>
+                            <td class="rate-cell">40 à 80%</td>
+                            <td class="rate-cell">40 à 80%</td>
+                            <td><span class="status identique">✓ IDENTIQUE</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">3. Épilepsies Jacksoniennes</h2>
+                
+                <div class="highlight-box">
+                    <h3>📋 Définition</h3>
+                    <ul>
+                        <li><strong>Nature</strong> : Crises partielles motrices localisées</li>
+                        <li><strong>Évolution</strong> : Peuvent se généraliser (marche jacksonienne)</li>
+                        <li><strong>Distinction</strong> : Limitées vs étendues</li>
+                    </ul>
+                </div>
+
+                <div class="subsection">
+                    <h3 class="subsection-title">
+                        <span class="category-badge">A</span> Crises Limitées
+                    </h3>
+                    
+                    <table class="comparison-table">
+                        <thead>
+                            <tr>
+                                <th>Fréquence</th>
+                                <th>Barème 1939</th>
+                                <th>Application</th>
+                                <th>Statut</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Jusqu'à 12 fois/an</strong></td>
+                                <td class="rate-cell">0 à 10%</td>
+                                <td class="rate-cell">0 à 10%</td>
+                                <td><span class="status identique">✓ IDENTIQUE</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Jusqu'à 1 fois/semaine</strong></td>
+                                <td class="rate-cell">10 à 20%</td>
+                                <td class="rate-cell">10 à 20%</td>
+                                <td><span class="status identique">✓ IDENTIQUE</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Plusieurs fois/semaine</strong></td>
+                                <td class="rate-cell">20 à 30%</td>
+                                <td class="rate-cell">20 à 30%</td>
+                                <td><span class="status identique">✓ IDENTIQUE</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="subsection">
+                    <h3 class="subsection-title">
+                        <span class="category-badge">B</span> Crises Étendues
+                    </h3>
+                    
+                    <table class="comparison-table">
+                        <thead>
+                            <tr>
+                                <th>Fréquence</th>
+                                <th>Barème 1939</th>
+                                <th>Application</th>
+                                <th>Statut</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>Jusqu'à 12 fois/an</strong></td>
+                                <td class="rate-cell">10 à 20%</td>
+                                <td class="rate-cell">10 à 20%</td>
+                                <td><span class="status identique">✓ IDENTIQUE</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Jusqu'à 1 fois/semaine</strong></td>
+                                <td class="rate-cell">20 à 30%</td>
+                                <td class="rate-cell">20 à 30%</td>
+                                <td><span class="status identique">✓ IDENTIQUE</span></td>
+                            </tr>
+                            <tr>
+                                <td><strong>Plusieurs fois/semaine</strong></td>
+                                <td class="rate-cell">20 à 40%</td>
+                                <td class="rate-cell">20 à 40%</td>
+                                <td><span class="status identique">✓ IDENTIQUE</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="conclusion">
+                <h2>✅ Conclusion</h2>
+                <div style="text-align: center; margin: 20px 0;">
+                    <div class="grade">🏆 NOTE : A (TRÈS BON)</div>
+                </div>
+                
+                <h3 style="color: #667eea; margin-top: 30px; margin-bottom: 15px;">Conformité 100%</h3>
+                <ul>
+                    <li>Crises convulsives : 2/2 séquelles</li>
+                    <li>Équivalents épileptiques : 5/5 séquelles</li>
+                    <li>Jacksoniennes : 6/6 séquelles</li>
+                    <li><strong>TOTAL : 13/13 (100%)</strong></li>
+                </ul>
+
+                <h3 style="color: #667eea; margin-top: 30px; margin-bottom: 15px;">Points Forts</h3>
+                <ul>
+                    <li>Conformité juridique totale</li>
+                    <li>Organisation claire par type</li>
+                    <li>Classification par fréquence</li>
+                    <li>Nomenclature standardisée</li>
+                    <li>rateCriteria avec pharmacorésistance</li>
+                    <li>Distinction limitées/étendues</li>
+                </ul>
+
+                <div style="background: white; padding: 20px; border-radius: 10px; margin-top: 20px; border-left: 4px solid #28a745;">
+                    <p style="font-size: 1.1em;"><strong>✅ AUCUNE ACTION REQUISE</strong></p>
+                    <p style="margin-top: 10px;">Respect intégral du barème 1939 avec organisation optimisée.</p>
+                </div>
+            </div>
+        </div>
+
+        <footer>
+            <p>© 2025 - Analyse Épilepsies Post-Traumatiques - Conformité Barème 1939</p>
+        </footer>
+    </div>
+</body>
+</html>

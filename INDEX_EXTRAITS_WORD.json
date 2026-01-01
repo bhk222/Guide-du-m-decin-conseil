@@ -1,0 +1,71 @@
+{
+  "description": "Index des sections extraites des fichiers Word BAREME AT.docx et IPP.docx",
+  "date": "2026-01-01",
+  "statistiques": {
+    "sections_totales_bareme_at": 22,
+    "sections_totales_ipp": 22,
+    "sections_communes": 22
+  },
+  "sections_principales_bareme_at": [
+    "Membres supérieurs",
+    "Ceinture pelvienne",
+    "Colonne vertébrale",
+    "Épaule",
+    "Bras",
+    "Membres inférieurs",
+    "Hanches",
+    "Main",
+    "Poignet",
+    "Cervical",
+    "Genou",
+    "Jambe",
+    "Cuisse",
+    "Rachis",
+    "Pied"
+  ],
+  "sections_principales_ipp": [
+    "Membres supérieurs",
+    "Colonne vertébrale",
+    "Épaule",
+    "Bras",
+    "Ceinture pelvienne",
+    "Membres inférieurs",
+    "Hanches",
+    "Main",
+    "Poignet",
+    "Cervical",
+    "Genou",
+    "Jambe",
+    "Cuisse",
+    "Dorsal",
+    "Rachis"
+  ],
+  "contenu_resume": {
+    "Membres_supérieurs": "Les deux fichiers contiennent des sections sur les membres supérieurs, incluant amputations, ankyloses, raideurs. Le barème utilise des fourchettes d'IPP.",
+    "Épaule": "Détails sur ankyloses (position favorable/défavorable 35-70%), raideurs (10-35%), périarthrite, luxations. Mentions de pseudarthrose et cicatrices aisselle.",
+    "Membres_inférieurs": "Amputations, ankyloses, raideurs. Formule de Balthazard pour calcul des lésions bilatérales (action synergique).",
+    "Hanches": "Ankyloses (40-100%), raideurs (8-40%), pseudarthrose (75-80%), désarticulation (95-100%). Fractures col fémur avec gradation selon séquelles.",
+    "Rachis": "Fractures vertébrales dorsales et lombaires avec 4 niveaux de gravité (10% à 100%). Hernies discales, syndrome commotionnel, whiplash.",
+    "Cheville_Pied": "Ankyloses (20-60%), fractures malléolaires, pied bot, pied plat. Amputations orteils."
+  },
+  "formules_importantes": {
+    "Balthazard_MI": "Pour lésions bilatérales MI: IPP = IPP1 + IPP2 - (IPP_min / 2). Tient compte de la valeur synergique des deux membres.",
+    "Capacite_restante": "Pour incapacités multiples: IPP_totale = IPP1 + (IPP2 × (100-IPP1)/100). Chaque incapacité porte sur la capacité restante.",
+    "Formule_Gabrielli": "Pour état antérieur: (C1 - C2) / C1, où C1 = capacité avant accident, C2 = capacité après accident."
+  },
+  "definitions_cles": {
+    "Consolidation": "Moment où les séquelles deviennent permanentes. Ne pas confondre avec 'guérison' (absence de séquelles).",
+    "IPP": "Incapacité Permanente Partielle. Pourcentage de perte de capacité de travail due aux séquelles.",
+    "Coefficient_professionnel": "Majoration tenant compte du déclassement professionnel, difficultés embauche.",
+    "Position_favorable": "Pour ankylose: position anatomique permettant compensation fonctionnelle optimale.",
+    "Position_défavorable": "Position anatomique aggravant l'impotence fonctionnelle."
+  },
+  "baremes_specifiques_mentionnes": {
+    "Vision": "Référence au barème des affections oculaires (absent de l'extraction mais mentionné)",
+    "Audition": "Référence au barème spécial oreilles avec table audiométrique (absent de l'extraction mais mentionné)",
+    "Nerfs_craniens": "Barème détaillé des 12 paires de nerfs crâniens",
+    "Psychoses_nevroses": "Barème spécifique pour séquelles psychiatriques post-traumatiques"
+  },
+  "note": "Fichier complet avec tout le texte extrait disponible dans extracted_word_content.json (très volumineux)",
+  "utilisation": "Ce fichier index permet de naviguer rapidement dans les sections extraites sans charger le fichier complet de 50000+ caractères par section."
+}

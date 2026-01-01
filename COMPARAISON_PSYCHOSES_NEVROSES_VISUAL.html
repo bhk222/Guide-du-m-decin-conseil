@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comparaison Psychoses et Névroses - Barème 1939 vs Application</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            color: #333;
+        }
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        .header p {
+            font-size: 1.2em;
+            opacity: 0.95;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            padding: 40px;
+            background: #f8f9fa;
+        }
+        .stat-card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 12px rgba(0,0,0,0.15);
+        }
+        .stat-number {
+            font-size: 3em;
+            font-weight: bold;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .stat-label {
+            color: #666;
+            margin-top: 10px;
+            font-size: 0.9em;
+        }
+        .section {
+            padding: 40px;
+        }
+        .section-title {
+            font-size: 2em;
+            color: #667eea;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #667eea;
+        }
+        .subsection-title {
+            font-size: 1.5em;
+            color: #764ba2;
+            margin: 30px 0 20px 0;
+            display: flex;
+            align-items: center;
+        }
+        .subsection-title::before {
+            content: '';
+            width: 5px;
+            height: 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin-right: 15px;
+            border-radius: 3px;
+        }
+        .item-card {
+            background: #f8f9fa;
+            border-left: 5px solid #ddd;
+            padding: 20px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+        .item-card:hover {
+            background: #fff;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .item-card.conforme { border-left-color: #28a745; }
+        .item-card.partiel { border-left-color: #ffc107; }
+        .item-card.manquant { border-left-color: #dc3545; }
+        .item-card.moderne { border-left-color: #17a2b8; }
+        .item-title {
+            font-weight: bold;
+            font-size: 1.1em;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+        }
+        .badge {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.75em;
+            font-weight: bold;
+            margin-right: 10px;
+            text-transform: uppercase;
+        }
+        .badge.conforme { background: #28a745; color: white; }
+        .badge.partiel { background: #ffc107; color: #333; }
+        .badge.manquant { background: #dc3545; color: white; }
+        .badge.moderne { background: #17a2b8; color: white; }
+        .taux {
+            background: #e9ecef;
+            padding: 8px 15px;
+            border-radius: 8px;
+            display: inline-block;
+            margin: 10px 0;
+            font-family: 'Courier New', monospace;
+            font-weight: bold;
+        }
+        .description {
+            color: #666;
+            line-height: 1.6;
+            margin-top: 10px;
+        }
+        .note {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin-top: 10px;
+            border-radius: 5px;
+            font-size: 0.9em;
+        }
+        .note strong {
+            color: #856404;
+        }
+        .legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            padding: 30px 40px;
+            background: #f8f9fa;
+            border-top: 2px solid #e9ecef;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .legend-color {
+            width: 30px;
+            height: 30px;
+            border-radius: 5px;
+        }
+        .grade {
+            text-align: center;
+            padding: 50px 40px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        .grade-letter {
+            font-size: 8em;
+            font-weight: bold;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.3);
+            margin-bottom: 20px;
+        }
+        .grade-text {
+            font-size: 1.5em;
+            opacity: 0.95;
+        }
+        .priority-section {
+            background: #fff3cd;
+            padding: 30px 40px;
+            margin: 20px 0;
+            border-radius: 10px;
+            border: 2px solid #ffc107;
+        }
+        .priority-title {
+            color: #856404;
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+        .priority-title::before {
+            content: '⚠️';
+            margin-right: 10px;
+            font-size: 1.5em;
+        }
+        .priority-item {
+            background: white;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 8px;
+            border-left: 4px solid #ffc107;
+        }
+        .recommendations {
+            background: #d1ecf1;
+            padding: 30px 40px;
+            margin: 20px 0;
+            border-radius: 10px;
+            border: 2px solid #17a2b8;
+        }
+        .recommendations-title {
+            color: #0c5460;
+            font-size: 1.3em;
+            font-weight: bold;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+        .recommendations-title::before {
+            content: '💡';
+            margin-right: 10px;
+            font-size: 1.5em;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🧠 PSYCHOSES ET NÉVROSES POST-TRAUMATIQUES</h1>
+            <p>Comparaison Barème Officiel 1939 vs Application Moderne</p>
+            <p style="font-size: 0.9em; margin-top: 10px; opacity: 0.9;">Version 3.3.130 | 01/01/2026</p>
+        </div>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-number">34</div>
+                <div class="stat-label">Séquelles<br>Barème 1939</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">19</div>
+                <div class="stat-label">Conformes<br>ou Bonnes</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">55.9%</div>
+                <div class="stat-label">Taux de<br>Conformité</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">10</div>
+                <div class="stat-label">Séquelles<br>Manquantes</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">10</div>
+                <div class="stat-label">Ajouts<br>Modernes</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number">B</div>
+                <div class="stat-label">Note<br>Finale</div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">📊 Vue d'Ensemble</h2>
+            
+            <div class="item-card conforme">
+                <div class="item-title">
+                    <span class="badge conforme">✅ Conformité Parfaite</span>
+                    6 items (17.6%)
+                </div>
+                <div class="description">
+                    Les états neuro-psychasthéniques présentent une conformité PARFAITE avec taux identiques au barème 1939. 
+                    Ces 6 items constituent le socle essentiel des névroses post-traumatiques.
+                </div>
+            </div>
+
+            <div class="item-card partiel">
+                <div class="item-title">
+                    <span class="badge partiel">⚠️ Conformité Bonne/Partielle</span>
+                    18 items (52.9%)
+                </div>
+                <div class="description">
+                    Séquelles présentes dans l'application avec taux légèrement différents ou couverture indirecte. 
+                    Principes généralement respectés mais codification parfois implicite.
+                </div>
+            </div>
+
+            <div class="item-card manquant">
+                <div class="item-title">
+                    <span class="badge manquant">❌ Séquelles Manquantes</span>
+                    10 items (29.4%)
+                </div>
+                <div class="description">
+                    Items médico-légaux importants absents : principes de revendication, sinistrose, cas mixtes, 
+                    complications alcoolisme, démences dégénératives (rôle favorisant).
+                </div>
+            </div>
+
+            <div class="item-card moderne">
+                <div class="item-title">
+                    <span class="badge moderne">🆕 Ajouts Modernes</span>
+                    10 items (DSM-5, CIM-10/11)
+                </div>
+                <div class="description">
+                    Ajouts pertinents reflétant l'évolution scientifique : TSPT, troubles personnalité post-trauma, 
+                    TOC, dépression majeure résistante, trouble bipolaire. Classification moderne plus précise.
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">✅ CONFORMITÉ PARFAITE - États Neuro-Psychasthéniques</h2>
+            <p style="margin-bottom: 30px; color: #666; font-size: 1.1em;">
+                6 items en alignement strict avec le barème officiel 1939 (taux identiques)
+            </p>
+
+            <div class="item-card conforme">
+                <div class="item-title">
+                    <span class="badge conforme">✅ Parfait</span>
+                    Signes fonctionnels somatiques sans symptômes objectifs
+                </div>
+                <div class="taux">Barème 1939: 0-10% | Application: 0-10%</div>
+                <div class="description">
+                    Réaction émotionnelle causée par accident. Signes fonctionnels purs sans objectivation.
+                </div>
+            </div>
+
+            <div class="item-card conforme">
+                <div class="item-title">
+                    <span class="badge conforme">✅ Parfait</span>
+                    Signes somatiques avec retentissement net sur l'état général
+                </div>
+                <div class="taux">Barème 1939: 10-40% | Application: 10-40%</div>
+                <div class="description">
+                    Manifestations somatiques objectivables avec impact sur état général.
+                </div>
+            </div>
+
+            <div class="item-card conforme">
+                <div class="item-title">
+                    <span class="badge conforme">✅ Parfait</span>
+                    Signes psychiques (fatigabilité cérébrale → impuissance intellectuelle)
+                </div>
+                <div class="taux">Barème 1939: 20-50% | Application: 20-50%</div>
+                <div class="description">
+                    Épuisement psychique conscient allant de la fatigabilité simple à l'impuissance intellectuelle caractérisée.
+                </div>
+            </div>
+
+            <div class="item-card conforme">
+                <div class="item-title">
+                    <span class="badge conforme">✅ Parfait</span>
+                    Symptômes vago-sympathiques marqués ou prédominants
+                </div>
+                <div class="taux">Barème 1939: 5-20% | Application: 5-20%</div>
+                <div class="description">
+                    Perturbations neuro-végétatives (cardio-vasculaires, digestives, respiratoires). S'ajoute aux autres taux.
+                </div>
+            </div>
+
+            <div class="item-card conforme">
+                <div class="item-title">
+                    <span class="badge conforme">✅ Parfait</span>
+                    Syndromes anxieux provoqués par gros accident
+                </div>
+                <div class="taux">Barème 1939: 10-50% | Application: 10-50%</div>
+                <div class="description">
+                    Hyper-émotivité anxieuse après explosions, électrocutions, accidents graves.
+                </div>
+            </div>
+
+            <div class="item-card conforme">
+                <div class="item-title">
+                    <span class="badge conforme">✅ Parfait</span>
+                    Syndromes moteurs fonctionnels sans base organique
+                </div>
+                <div class="taux">Barème 1939: 0-20% | Application: 0-20%</div>
+                <div class="description">
+                    Manifestations motrices fonctionnelles sans lésion organique décelable.
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">⚠️ CONFORMITÉ BONNE - Psychoses</h2>
+            <p style="margin-bottom: 30px; color: #666; font-size: 1.1em;">
+                Séquelles présentes avec taux légèrement différents ou couverture modernisée
+            </p>
+
+            <div class="item-card partiel">
+                <div class="item-title">
+                    <span class="badge partiel">⚠️ Bon</span>
+                    Démence post-traumatique incomplète
+                </div>
+                <div class="taux">Barème 1939: Variable (5-25%, 25-75%) | Application: 60-90%</div>
+                <div class="description">
+                    Application couvre forme sévère (60-90%) mais manque forme légère (5-25%).
+                </div>
+                <div class="note">
+                    <strong>Note:</strong> Barème 1939 distingue 2 niveaux : léger (5-25%) et important (25-75%). 
+                    Application = forme sévère uniquement.
+                </div>
+            </div>
+
+            <div class="item-card partiel">
+                <div class="item-title">
+                    <span class="badge partiel">⚠️ Bon</span>
+                    Démence post-traumatique complète
+                </div>
+                <div class="taux">Barème 1939: 75-100% | Application: 100%</div>
+                <div class="description">
+                    Inaptitude totale à la vie sociale, gâtisme, nécessité internement ou surveillance permanente.
+                </div>
+                <div class="note">
+                    <strong>Note:</strong> Application = taux fixe 100%, barème prévoit plage 75-100%.
+                </div>
+            </div>
+
+            <div class="item-card partiel">
+                <div class="item-title">
+                    <span class="badge partiel">⚠️ Bon</span>
+                    Schizophrénie post-traumatique
+                </div>
+                <div class="taux">Barème 1939: 5-100% (imputabilité 1/3, 1/2, totale) | Application: 60-100%</div>
+                <div class="description">
+                    État dissociatif modéré dépressif. Conditions strictes : intégrité mentale antérieure + traumatisme grave.
+                </div>
+                <div class="note">
+                    <strong>Note:</strong> Application = taux élevé (60-100%). Barème prévoit imputabilité partielle 
+                    (1/3, 1/2, exceptionnellement totale) non codifiée dans l'application.
+                </div>
+            </div>
+
+            <div class="item-card partiel">
+                <div class="item-title">
+                    <span class="badge partiel">⚠️ Bon</span>
+                    Troubles psychiques liés à épilepsie traumatique
+                </div>
+                <div class="taux">Barème 1939: 5-15% (s'ajoute au taux épilepsie) | Application: ⚠️ Indirect</div>
+                <div class="description">
+                    Irritabilité, instabilité, troubles caractère, impulsivité, désintérêt intellectuel 
+                    (peut être lié au traitement anticomitial).
+                </div>
+                <div class="note">
+                    <strong>Note:</strong> Principe d'ajout 5-15% non explicite dans l'application.
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">❌ SÉQUELLES MANQUANTES - 10 Items Critiques</h2>
+            <p style="margin-bottom: 30px; color: #666; font-size: 1.1em;">
+                Items médico-légaux importants absents de l'application (29.4%)
+            </p>
+
+            <h3 class="subsection-title">Principes Médico-Légaux</h3>
+
+            <div class="item-card manquant">
+                <div class="item-title">
+                    <span class="badge manquant">❌ Manquant</span>
+                    Névrose de revendication
+                </div>
+                <div class="taux">Barème 1939: 5% (s'ajoute aux autres séquelles)</div>
+                <div class="description">
+                    Désir légitime de justice et de revendication (normal et non pathologique). 
+                    Ne pas minimiser : refus ou taux faible peut aggraver les troubles.
+                </div>
+                <div class="note">
+                    <strong>Importance:</strong> Principe médico-légal fondamental. Éviter de confondre désir 
+                    de justice légitime avec pathologie.
+                </div>
+            </div>
+
+            <div class="item-card manquant">
+                <div class="item-title">
+                    <span class="badge manquant">❌ Manquant</span>
+                    Sinistrose
+                </div>
+                <div class="taux">Barème 1939: 5%</div>
+                <div class="description">
+                    Définition Brissaud : idée fausse de revendication et d'injustice subie en toute BONNE FOI. 
+                    Surestimation INCONSCIENTE du dommage (≠ simulation = surestimation consciente). 
+                    Disparaît souvent avec règlement du litige.
+                </div>
+                <div class="note">
+                    <strong>Importance:</strong> Différencier sinistrose (inconsciente, bonne foi) de simulation 
+                    (consciente, mauvaise foi). Éviter terme péjoratif.
+                </div>
+            </div>
+
+            <div class="item-card manquant">
+                <div class="item-title">
+                    <span class="badge manquant">❌ Manquant</span>
+                    Cas mixtes : majoration névrotique sur atteinte organique
+                </div>
+                <div class="taux">Barème 1939: +5% maximum (s'ajoute au taux organique)</div>
+                <div class="description">
+                    Interférence entre atteinte organique et majoration névrotique. 
+                    Taux supplémentaire ne doit JAMAIS dépasser 5%.
+                </div>
+                <div class="note">
+                    <strong>Importance:</strong> Principe fondamental pour éviter surindemnisation des cas mixtes.
+                </div>
+            </div>
+
+            <h3 class="subsection-title">Complications Alcoolisme</h3>
+
+            <div class="item-card manquant">
+                <div class="item-title">
+                    <span class="badge manquant">❌ Manquant</span>
+                    Delirium tremens déclenché par traumatisme
+                </div>
+                <div class="taux">Barème 1939: Rôle favorisant 50% si mort, ≤50% pour état démentiel ultérieur</div>
+                <div class="description">
+                    Chez alcoolique chronique, traumatisme peut déclencher delirium tremens. 
+                    Rôle traumatisme = favorisant (imputabilité partielle).
+                </div>
+                <div class="note">
+                    <strong>Importance:</strong> Délimiter rôle traumatisme (favorisant) vs alcoolisme (principal).
+                </div>
+            </div>
+
+            <div class="item-card manquant">
+                <div class="item-title">
+                    <span class="badge manquant">❌ Manquant</span>
+                    Encéphalopathie de Gayet-Wernicke
+                </div>
+                <div class="taux">Barème 1939: Rôle traumatisme accessoire (imputabilité partielle limitée)</div>
+                <div class="description">
+                    Évolution peut être favorisée par traumatisme, mais rôle accessoire uniquement.
+                </div>
+            </div>
+
+            <h3 class="subsection-title">Démences Dégénératives (Rôle Favorisant)</h3>
+
+            <div class="item-card manquant">
+                <div class="item-title">
+                    <span class="badge manquant">❌ Manquant</span>
+                    Démences artériopathiques (rôle favorisant possible)
+                </div>
+                <div class="taux">Barème 1939: Imputabilité partielle ou nulle</div>
+                <div class="description">
+                    Traumatisme ne peut causer démence artériopathique, mais rôle favorisant/aggravant possible.
+                </div>
+            </div>
+
+            <div class="item-card manquant">
+                <div class="item-title">
+                    <span class="badge manquant">❌ Manquant</span>
+                    Maladie de Pick (rôle favorisant possible)
+                </div>
+                <div class="taux">Barème 1939: Imputabilité très limitée</div>
+                <div class="description">
+                    Ne dépend pas d'un traumatisme, mais rôle favorisant plus ou moins important possible.
+                </div>
+            </div>
+
+            <div class="item-card manquant">
+                <div class="item-title">
+                    <span class="badge manquant">❌ Manquant</span>
+                    Maladie d'Alzheimer (rôle favorisant possible)
+                </div>
+                <div class="taux">Barème 1939: Imputabilité très limitée</div>
+                <div class="description">
+                    Ne dépend pas d'un traumatisme, mais rôle favorisant plus ou moins important possible.
+                </div>
+            </div>
+
+            <div class="item-card manquant">
+                <div class="item-title">
+                    <span class="badge manquant">❌ Manquant</span>
+                    Paralysie générale (non imputable)
+                </div>
+                <div class="taux">Barème 1939: Imputabilité nulle ou rôle favorisant minime</div>
+                <div class="description">
+                    Ne peut dépendre d'un traumatisme. Rôle favorisant très limité.
+                </div>
+            </div>
+
+            <h3 class="subsection-title">Autres Séquelles</h3>
+
+            <div class="item-card manquant">
+                <div class="item-title">
+                    <span class="badge manquant">❌ Manquant</span>
+                    Confusion mentale grave après réaction d'effroi
+                </div>
+                <div class="taux">Barème 1939: Variable selon gravité</div>
+                <div class="description">
+                    Évolution rare mais grave de réaction d'effroi. Peut aboutir à la mort ou état psychotique.
+                </div>
+            </div>
+        </div>
+
+        <div class="section">
+            <h2 class="section-title">🆕 AJOUTS MODERNES - Enrichissement Scientifique</h2>
+            <p style="margin-bottom: 30px; color: #666; font-size: 1.1em;">
+                10 items modernes (DSM-5, CIM-10/11) reflétant l'évolution depuis 1939
+            </p>
+
+            <div class="item-card moderne">
+                <div class="item-title">
+                    <span class="badge moderne">🆕 DSM-5</span>
+                    Trouble de Stress Post-Traumatique (TSPT)
+                </div>
+                <div class="taux">Application: 10-50%</div>
+                <div class="description">
+                    Concept moderne absent du barème 1939. Classification DSM-5/CIM-11 standardisée.
+                </div>
+            </div>
+
+            <div class="item-card moderne">
+                <div class="item-title">
+                    <span class="badge moderne">🆕 DSM-5</span>
+                    Trouble de l'adaptation avec anxiété/humeur dépressive
+                </div>
+                <div class="taux">Application: 5-15%</div>
+                <div class="description">
+                    Concept moderne DSM-5. Distinction avec névroses classiques.
+                </div>
+            </div>
+
+            <div class="item-card moderne">
+                <div class="item-title">
+                    <span class="badge moderne">🆕 CIM-11</span>
+                    Trouble de la personnalité post-traumatique
+                </div>
+                <div class="taux">Application: 15-40%</div>
+                <div class="description">
+                    Modification persistante du comportement (CIM-11). Concept moderne de changement personnalité.
+                </div>
+            </div>
+
+            <div class="item-card moderne">
+                <div class="item-title">
+                    <span class="badge moderne">🆕 CIM-10</span>
+                    Trouble somatoforme douloureux persistant
+                </div>
+                <div class="taux">Application: 10-30%</div>
+                <div class="description">
+                    Algie psychogène codifiée (CIM-10). Douleurs sans substratum organique suffisant.
+                </div>
+            </div>
+
+            <div class="item-card moderne">
+                <div class="item-title">
+                    <span class="badge moderne">🆕 DSM-5</span>
+                    Dépression majeure post-traumatique chronique résistante
+                </div>
+                <div class="taux">Application: 30-70%</div>
+                <div class="description">
+                    Codification DSM-5 moderne. Distinction forme majeure vs névrotique (barème 1939).
+                </div>
+            </div>
+
+            <div class="item-card moderne">
+                <div class="item-title">
+                    <span class="badge moderne">🆕 DSM-5</span>
+                    Trouble bipolaire post-traumatique
+                </div>
+                <div class="taux">Application: 40-80%</div>
+                <div class="description">
+                    Classification moderne DSM-5. Barème 1939 indiquait "état maniaco-dépressif non imputable".
+                </div>
+            </div>
+
+            <div class="item-card moderne">
+                <div class="item-title">
+                    <span class="badge moderne">🆕 DSM-5</span>
+                    Trouble Obsessionnel-Compulsif (TOC) post-traumatique invalidant
+                </div>
+                <div class="taux">Application: 20-60%</div>
+                <div class="description">
+                    Codification moderne DSM-5. Barème 1939 mentionnait "névrose obsessionnelle exceptionnelle" sans taux précis.
+                </div>
+            </div>
+        </div>
+
+        <div class="priority-section">
+            <div class="priority-title">Priorités de Correction</div>
+            
+            <div class="priority-item">
+                <strong>1. URGENCE ÉLEVÉE : Principes médico-légaux</strong><br>
+                • Ajouter "Névrose de revendication" (5%)<br>
+                • Ajouter "Sinistrose" (5%)<br>
+                • Ajouter "Majoration névrotique cas mixtes" (+5% max)<br>
+                • Ajouter "Troubles psychiques liés épilepsie" (+5-15%)
+            </div>
+
+            <div class="priority-item">
+                <strong>2. IMPORTANCE ÉLEVÉE : Complications alcoolisme</strong><br>
+                • Ajouter "Delirium tremens post-traumatique" (imputabilité 50%)<br>
+                • Ajouter "Encéphalopathie Gayet-Wernicke" (rôle accessoire)
+            </div>
+
+            <div class="priority-item">
+                <strong>3. IMPORTANCE MOYENNE : Démences dégénératives</strong><br>
+                • Ajouter 4 items démences (artériopathique, Pick, Alzheimer, paralysie générale)<br>
+                • Préciser "rôle favorisant uniquement" (imputabilité limitée)
+            </div>
+
+            <div class="priority-item">
+                <strong>4. AJUSTEMENTS TECHNIQUES : Taux</strong><br>
+                • Phobie spécifique : 5-20% → 5-35%<br>
+                • Démence incomplète : Ajouter forme légère (5-25%)<br>
+                • Démence complète : 100% fixe → 75-100%<br>
+                • Schizophrénie : Codifier imputabilité partielle (1/3, 1/2)
+            </div>
+        </div>
+
+        <div class="recommendations">
+            <div class="recommendations-title">Recommandations Stratégiques</div>
+            
+            <p style="margin-bottom: 15px; line-height: 1.8;">
+                <strong>1. Approche Équilibrée :</strong> Intégrer les 10 manquants du barème 1939 tout en 
+                préservant les 10 ajouts modernes pertinents (DSM-5, CIM-10/11).
+            </p>
+
+            <p style="margin-bottom: 15px; line-height: 1.8;">
+                <strong>2. Priorité Médico-Légale :</strong> Commencer par les 4 principes médico-légaux 
+                (revendication, sinistrose, cas mixtes, troubles épilepsie) car impact élevé sur pratique expertale.
+            </p>
+
+            <p style="margin-bottom: 15px; line-height: 1.8;">
+                <strong>3. Documentation :</strong> Ajouter notes explicatives pour démences dégénératives 
+                (rôle favorisant uniquement, imputabilité partielle limitée).
+            </p>
+
+            <p style="margin-bottom: 15px; line-height: 1.8;">
+                <strong>4. Validation :</strong> Après corrections, conformité attendue ≥85% avec respect 
+                de l'esprit du barème 1939 + enrichissement moderne.
+            </p>
+        </div>
+
+        <div class="grade">
+            <div class="grade-letter">B</div>
+            <div class="grade-text">NOTE : BON (55.9% de conformité)</div>
+            <div style="margin-top: 20px; font-size: 1.1em; opacity: 0.9;">
+                Socle essentiel conforme (6 items parfaits) • 10 manquants critiques • 
+                10 ajouts modernes pertinents
+            </div>
+        </div>
+
+        <div class="legend">
+            <div class="legend-item">
+                <div class="legend-color" style="background: #28a745;"></div>
+                <span><strong>Conforme (Parfait)</strong> - Taux identiques barème 1939</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background: #ffc107;"></div>
+                <span><strong>Bon/Partiel</strong> - Présent avec taux différents</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background: #dc3545;"></div>
+                <span><strong>Manquant</strong> - Absent de l'application</span>
+            </div>
+            <div class="legend-item">
+                <div class="legend-color" style="background: #17a2b8;"></div>
+                <span><strong>Moderne</strong> - Ajout DSM-5/CIM-10/11</span>
+            </div>
+        </div>
+
+        <div style="text-align: center; padding: 30px; background: #f8f9fa; color: #666;">
+            <p style="margin-bottom: 10px;">📅 Rapport généré le 01/01/2026</p>
+            <p style="margin-bottom: 10px;">✍️ Analyste : IA Médico-Légale v3.3.130</p>
+            <p style="margin-bottom: 10px;">📋 Barème référence : Barème officiel 1939 (France)</p>
+            <p>💻 Application : Guide du Médecin Conseil (commit c40cb4c)</p>
+        </div>
+    </div>
+</body>
+</html>

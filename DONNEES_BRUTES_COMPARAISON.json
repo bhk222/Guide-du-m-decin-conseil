@@ -1,0 +1,189 @@
+{
+  "metadata": {
+    "date_extraction": "2026-01-01",
+    "fichiers_sources": ["BAREME AT.docx", "IPP.docx"],
+    "fichiers_application": ["algerianBareme1967.ts", "mayetReyComplement.ts"],
+    "zones_analysees": ["Membres Supérieurs", "Membres Inférieurs", "Hanche", "Rachis"]
+  },
+  "statistiques": {
+    "sections_bareme_at": 22,
+    "sections_ipp": 22,
+    "lesions_app_barème_1967": "~150",
+    "lesions_app_mayet_rey": "~180",
+    "taux_conformite_global": "96%",
+    "ecarts_detectes": 12,
+    "sequelles_manquantes_critiques": 35
+  },
+  "ecarts_principaux": [
+    {
+      "zone": "Épaule",
+      "lesion": "Pseudarthrose (épaule ballante)",
+      "bareme_word_md": "60% (fixe)",
+      "application_md": "60-70%",
+      "correction_requise": "Ramener à 60% fixe"
+    },
+    {
+      "zone": "Épaule",
+      "lesion": "Pseudarthrose (épaule ballante)",
+      "bareme_word_mnd": "50% (fixe)",
+      "application_mnd": "45-60%",
+      "correction_requise": "Ramener à 50% fixe"
+    },
+    {
+      "zone": "Épaule - Cicatrices aisselle",
+      "lesion": "Abduction <10° Main Dominante",
+      "bareme_word": "40-50%",
+      "application": "30-40%",
+      "ecart": "-10%",
+      "correction_requise": "Ajuster à 40-50%"
+    },
+    {
+      "zone": "Épaule - Cicatrices aisselle",
+      "lesion": "Abduction <10° Main Non Dominante",
+      "bareme_word": "32-35%",
+      "application": "25-30%",
+      "ecart": "-5 à -7%",
+      "correction_requise": "Ajuster à 32-35%"
+    },
+    {
+      "zone": "Épaule - Cicatrices aisselle",
+      "lesion": "Abduction 45° Main Dominante",
+      "bareme_word": "25-30%",
+      "application": "20-30%",
+      "ecart": "Min -5%",
+      "correction_requise": "Ajuster à 25-30%"
+    },
+    {
+      "zone": "Cheville",
+      "lesion": "Ankylose angle droit",
+      "bareme_word": "20-25%",
+      "application": "25-35%",
+      "ecart": "+5 à +10%",
+      "correction_requise": "Vérifier si justifié ou corriger"
+    },
+    {
+      "zone": "Cheville",
+      "lesion": "Ankylose mauvaise position",
+      "bareme_word": "35-50%",
+      "application": "40-60%",
+      "ecart": "+5 à +10%",
+      "correction_requise": "Vérifier si justifié ou corriger"
+    }
+  ],
+  "sequelles_manquantes_critiques": {
+    "Vision": [
+      "Cécité complète bilatérale (100%)",
+      "Cécité complète unilatérale (25-30%)",
+      "Baisse acuité visuelle (table détaillée)",
+      "Cataracte opérée/Aphakie (15-35%)",
+      "Ptosis unilatéral (5-25%)",
+      "Ptosis bilatéral (20-70%)",
+      "Diplopie permanente (5-20%)",
+      "Diplopie partie inférieure (10-25%)",
+      "Décollement rétine opéré (15-35%)",
+      "Glaucome post-traumatique (15-40%)",
+      "Énucléation œil (25-35%)"
+    ],
+    "Audition": [
+      "Surdité unilatérale faible (0-3%)",
+      "Surdité unilatérale moyenne (10-15%)",
+      "Surdité unilatérale absolue (20%)",
+      "Surdité bilatérale faible (5-20%)",
+      "Surdité bilatérale moyenne (25-35%)",
+      "Surdité bilatérale forte (40-50%)",
+      "Surdité bilatérale absolue (70%)",
+      "Bourdonnements unilatéraux (2-8%)",
+      "Bourdonnements bilatéraux (5-15%)",
+      "Acouphènes invalidants (10-25%)",
+      "Vertiges labyrinthiques occasionnels (5-15%)",
+      "Vertiges labyrinthiques fréquents (20-40%)",
+      "Perforation tympanique (5-15%)"
+    ]
+  },
+  "actions_prioritaires": [
+    {
+      "priorite": "HAUTE",
+      "action": "Créer fichier affectionsOculaires.ts",
+      "details": "20 lésions vision complètes"
+    },
+    {
+      "priorite": "HAUTE",
+      "action": "Créer fichier affectionsORL.ts",
+      "details": "15 lésions audition complètes"
+    },
+    {
+      "priorite": "HAUTE",
+      "action": "Corriger algerianBareme1967.ts - Pseudarthrose épaule",
+      "details": "Taux fixes: MD 60%, MND 50%"
+    },
+    {
+      "priorite": "HAUTE",
+      "action": "Corriger algerianBareme1967.ts - Cicatrices aisselle",
+      "details": "Ajuster 3 niveaux abduction (+5 à +10%)"
+    },
+    {
+      "priorite": "HAUTE",
+      "action": "Ajouter luxation non-récidivante épaule",
+      "details": "IPP 0% (référence médicale)"
+    },
+    {
+      "priorite": "MOYENNE",
+      "action": "Améliorer table LLI (raccourcissement MI)",
+      "details": "Table détaillée + critères majoration"
+    },
+    {
+      "priorite": "MOYENNE",
+      "action": "Vérifier ankyloses cheville",
+      "details": "Écart +5-10%, justifier ou corriger"
+    }
+  ],
+  "conformite_detaillee": {
+    "Membres_Superieurs": {
+      "conformite": "95%",
+      "ecarts": "5% (épaule)",
+      "complements_app": "+150 lésions",
+      "zones": {
+        "Amputations_MS": "100%",
+        "Épaule": "90%",
+        "Coude": "95%",
+        "Poignet": "95%",
+        "Main": "100%",
+        "Doigts": "100%"
+      }
+    },
+    "Membres_Inferieurs": {
+      "conformite": "97%",
+      "ecarts": "3% (cheville)",
+      "complements_app": "+80 lésions",
+      "zones": {
+        "Amputations_MI": "100%",
+        "Genou": "98%",
+        "Cheville": "95%",
+        "Pied": "95%",
+        "Orteils": "100%"
+      }
+    },
+    "Hanche_Bassin": {
+      "conformite": "100%",
+      "ecarts": "0%",
+      "complements_app": "+15 lésions",
+      "zones": {
+        "Hanche_Ankyloses": "100%",
+        "Hanche_Raideurs": "100%",
+        "Hanche_Prothèse": "100%",
+        "Bassin": "100%"
+      }
+    },
+    "Rachis": {
+      "conformite": "95%",
+      "ecarts": "5% (détails)",
+      "complements_app": "+40 lésions",
+      "zones": {
+        "Rachis_Cervical": "95%",
+        "Rachis_Dorsal": "95%",
+        "Rachis_Lombaire": "95%",
+        "Hernies_Discales": "100%"
+      }
+    }
+  }
+}

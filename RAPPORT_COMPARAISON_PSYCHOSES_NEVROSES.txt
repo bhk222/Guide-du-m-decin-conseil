@@ -1,0 +1,524 @@
+═══════════════════════════════════════════════════════════════════════════════
+║                  RAPPORT DE COMPARAISON DÉTAILLÉ                            ║
+║     PSYCHOSES ET NÉVROSES POST-TRAUMATIQUES - BARÈME 1939 vs APPLICATION   ║
+║                            Version 3.3.130                                  ║
+═══════════════════════════════════════════════════════════════════════════════
+
+📅 Date d'analyse : 01/01/2026
+🔍 Source : Barème officiel 1939 (France)
+💻 Application : data/disabilityRates.ts (commit c40cb4c)
+
+═══════════════════════════════════════════════════════════════════════════════
+║                     SECTION I : PSYCHOSES CHRONIQUES                        ║
+║                       POST-TRAUMATIQUES COMMOTIONNELLES                     ║
+═══════════════════════════════════════════════════════════════════════════════
+
+📋 BARÈME 1939 - Psychoses Chroniques Post-Traumatiques
+────────────────────────────────────────────────────────────────────────────
+
+A) ÉTATS DÉMENTIELS INCOMPLETS (liés ou non à un substratum anatomique)
+
+1. ✅ Troubles de l'attention, mémoire, vitalité générale
+   └─ Syndrome post-commotionnel tardif grave
+   └─ Taux : 5-25%
+   └─ APPLICATION : ✅ "Démence post-traumatique incomplète" [60-90%]
+   └─ NOTE: Application couvre forme plus sévère (60-90%) mais pas forme légère (5-25%)
+
+2. ✅ État démentiel important (inactivité professionnelle)
+   └─ Sans inaptitude totale à la vie sociale
+   └─ Taux : 25-75%
+   └─ APPLICATION : ✅ "Démence post-traumatique incomplète" [60-90%]
+   └─ NOTE: Taux application décalé vers le haut (60-90% vs 25-75%)
+
+B) ÉTAT DÉMENTIEL COMPLET
+
+3. ✅ Inaptitude à toute vie sociale → État démentiel avec gâtisme
+   └─ Nécessité internement ou surveillance familiale permanente
+   └─ Taux : 75-100%
+   └─ APPLICATION : ✅ "Démence post-traumatique complète" [100%]
+   └─ NOTE: Application = taux fixe 100%, barème 1939 = 75-100%
+
+C) ÉTATS PSYCHOTIQUES SPÉCIFIQUES
+
+4. ❌ MANQUANT: État maniaco-dépressif (non imputable)
+   └─ Taux : Généralement non imputable
+   └─ APPLICATION : ❌ Non mentionné explicitement comme non imputable
+   └─ NOTE: Mais application a "Trouble bipolaire post-traumatique" [40-80%]
+
+5. ✅ Schizophrénie traumatique
+   └─ Conditions strictes : intégrité mentale antérieure + traumatisme grave
+   └─ Dissociation dissociative modérée dépressive (5-100%)
+   └─ Imputabilité partielle possible (1/3, 1/2, exceptionnellement totale)
+   └─ APPLICATION : ✅ "Schizophrénie post-traumatique" [60-100%]
+   └─ NOTE: Taux élevé (60-100%), imputabilité partielle non codifiée
+
+6. ❌ MANQUANT: Schizophrénie paranoïde (difficile à imputer)
+   └─ Taux : Variable selon imputabilité
+   └─ APPLICATION : ✅ Couvert par rateCriteria (low: "paranoïde")
+
+7. ❌ MANQUANT: Hébéphrénie (très difficile à imputer)
+   └─ Taux : Variable selon imputabilité
+   └─ APPLICATION : ✅ Couvert par rateCriteria (high: "désorganisée")
+
+D) COMPLICATIONS DÉMENCES ARTÉRIOPATHIQUES ET DÉGÉNÉRATIVES
+
+8. ❌ MANQUANT: Démences artériopathiques (rôle favorisant)
+   └─ Taux : Imputabilité partielle ou nulle
+   └─ APPLICATION : ❌ Non mentionné
+
+9. ❌ MANQUANT: Maladie de Pick (rôle favorisant possible)
+   └─ Taux : Imputabilité très limitée
+   └─ APPLICATION : ❌ Non mentionné
+
+10. ❌ MANQUANT: Maladie d'Alzheimer (rôle favorisant possible)
+    └─ Taux : Imputabilité très limitée
+    └─ APPLICATION : ❌ Non mentionné
+
+11. ❌ MANQUANT: Paralysie générale (non imputable)
+    └─ Taux : Imputabilité nulle ou rôle favorisant minime
+    └─ APPLICATION : ❌ Non mentionné
+
+E) COMPLICATIONS ALCOOLISME
+
+12. ❌ MANQUANT: Delirium tremens post-traumatique
+    └─ Taux : Rôle favorisant 50% si mort
+    └─ État démentiel ultérieur : imputabilité ≤50%
+    └─ APPLICATION : ❌ Non mentionné
+
+13. ❌ MANQUANT: Encéphalopathie de Gayet-Wernicke
+    └─ Taux : Rôle accessoire
+    └─ APPLICATION : ❌ Non mentionné
+
+F) COMPLICATIONS ÉPILEPSIE TRAUMATIQUE
+
+14. ✅ Troubles psychiques liés à épilepsie traumatique
+    └─ Irritabilité, instabilité, troubles caractère, impulsivité
+    └─ Désintérêt intellectuel (lié au traitement anticomitial)
+    └─ Taux : 5-15% (EN PLUS des autres séquelles)
+    └─ APPLICATION : ⚠️ PARTIEL - Couvert indirectement via épilepsie
+    └─ NOTE: Barème prévoit ajout 5-15%, application non explicite
+
+═══════════════════════════════════════════════════════════════════════════════
+║                     SECTION II : NÉVROSES POST-TRAUMATIQUES                 ║
+═══════════════════════════════════════════════════════════════════════════════
+
+📋 BARÈME 1939 - Névroses Post-Traumatiques
+────────────────────────────────────────────────────────────────────────────
+
+A) ÉTATS NEURO-PSYCHASTHÉNIQUES (Épuisement + Hyper-émotivité anxieuse)
+
+A.1 - CAS À PRÉDOMINANCE D'ÉPUISEMENT
+
+15. ✅ Signes fonctionnels somatiques SANS symptômes objectifs
+    └─ Réaction émotionnelle causée par accident
+    └─ Taux : 0-10%
+    └─ APPLICATION : ✅ "États neuro-psychasthéniques (signes fonctionnels)" [0-10%]
+    └─ CONFORMITÉ : ✅ PARFAITE (taux identique)
+
+16. ✅ Signes somatiques AVEC retentissement net sur l'état général
+    └─ Taux : 10-40%
+    └─ APPLICATION : ✅ "États neuro-psychasthéniques (signes somatiques)" [10-40%]
+    └─ CONFORMITÉ : ✅ PARFAITE (taux identique)
+
+17. ✅ Signes psychiques (fatigabilité cérébrale → impuissance intellectuelle)
+    └─ Consciente
+    └─ Taux : 20-50%
+    └─ APPLICATION : ✅ "Signes psychiques (fatigabilité cérébrale)" [20-50%]
+    └─ CONFORMITÉ : ✅ PARFAITE (taux identique)
+
+18. ✅ Symptômes vago-sympathiques marqués ou prédominants
+    └─ EN PLUS de l'invalidité ci-dessus
+    └─ Taux : 5-20%
+    └─ APPLICATION : ✅ "Symptômes vago-sympathiques" [5-20%]
+    └─ CONFORMITÉ : ✅ PARFAITE (taux identique)
+
+A.2 - CAS À PRÉDOMINANCE D'HYPER-ÉMOTIVITÉ ANXIEUSE
+
+19. ✅ Syndromes anxieux provoqués par gros accident
+    └─ Explosions, électrocutions, etc.
+    └─ Taux : 10-50%
+    └─ APPLICATION : ✅ "Syndromes anxieux" [10-50%]
+    └─ CONFORMITÉ : ✅ PARFAITE (taux identique)
+
+B) ÉTATS HYSTÉRIQUES ET PITHIATIQUES
+
+20. ✅ Manifestations pithiatiques isolées
+    └─ Taux : 0% (n'entraînent pas d'invalidité)
+    └─ APPLICATION : ⚠️ PARTIEL - Non explicite, mais implicite dans évaluation
+    └─ NOTE: Principe respecté (évaluation selon troubles organiques seuls)
+
+21. ✅ Manifestations pithiatiques + troubles organiques
+    └─ Taux : Selon gêne des troubles organiques uniquement
+    └─ APPLICATION : ⚠️ PARTIEL - Non explicite, mais implicite dans évaluation
+    └─ NOTE: Principe respecté (évaluation selon troubles organiques seuls)
+
+C) SYNDROMES MOTEURS FONCTIONNELS
+
+22. ✅ Sans base organique décelable
+    └─ Taux : 0-20%
+    └─ APPLICATION : ✅ "Syndromes moteurs fonctionnels" [0-20%]
+    └─ CONFORMITÉ : ✅ PARFAITE (taux identique)
+
+═══════════════════════════════════════════════════════════════════════════════
+║            SECTION III : NÉVROSES POST-TRAUMATIQUES (DÉTAILLÉES)            ║
+═══════════════════════════════════════════════════════════════════════════════
+
+📋 BARÈME 1939 - Classification Détaillée des Névroses
+────────────────────────────────────────────────────────────────────────────
+
+a) RÉACTION D'EFFROI
+
+23. ✅ Réaction d'effroi (excitation anxieuse ou prostration)
+    └─ Évolution : Guérison en quelques jours/semaines
+    └─ Séquelles : Anxiété, irritabilité, insomnie, amaigrissement
+    └─ Taux : 0-5%
+    └─ APPLICATION : ⚠️ PARTIEL - Couvert par "Trouble de l'adaptation" [5-15%]
+    └─ NOTE: Taux application plus élevé (5-15% vs 0-5%)
+
+24. ❌ MANQUANT: Confusion mentale grave post-effroi
+    └─ Peut aboutir à la mort ou état psychotique
+    └─ Taux : Selon gravité
+    └─ APPLICATION : ❌ Non explicite (couvert par psychoses?)
+
+b) NÉVROSE D'ANGOISSE/NEURASTHÉNIE POST-TRAUMATIQUE
+
+25. ✅ Dépression névrotique/hypocondriaque simple
+    └─ Avec perturbations neuro-végétatives
+    └─ Taux : 0-25%
+    └─ APPLICATION : ✅ Couvert par "États neuro-psychasthéniques" [0-40%]
+    └─ NOTE: Application plus large (0-40%)
+
+26. ✅ Dépression avec retentissement état général + amaigrissement
+    └─ Taux : 25-40%
+    └─ APPLICATION : ✅ "États neuro-psychasthéniques (somatiques)" [10-40%]
+    └─ NOTE: Borne inf. plus basse dans application (10 vs 25%)
+
+c) PHÉNOMÈNES PHOBIQUES ASSOCIÉS
+
+27. ✅ Phobies importantes associées à névrose d'angoisse
+    └─ Taux : 5-35%
+    └─ APPLICATION : ✅ "Phobie spécifique post-traumatique" [5-20%]
+    └─ NOTE: Borne sup. plus basse dans application (20% vs 35%)
+
+28. ❌ MANQUANT: Névrose obsessionnelle post-traumatique
+    └─ Exceptionnelle
+    └─ Taux : Variable
+    └─ APPLICATION : ✅ Ajout moderne "TOC post-traumatique" [20-60%]
+    └─ NOTE: Application plus complète que barème 1939
+
+d) RÉACTIONS HYSTÉRIQUES (HYSTÉRO-TRAUMATISME)
+
+29. ✅ Conversion somatique (paralysie, contracture)
+    └─ Levée par persuasion, mais récidivante
+    └─ Taux : 0-5% (sauf cas rebelles)
+    └─ APPLICATION : ⚠️ PARTIEL - Couvert par "Syndromes moteurs fonctionnels" [0-20%]
+    └─ NOTE: Borne sup. plus élevée dans application (20% vs 5%)
+
+30. ✅ Conversion physiologique (végétative, névrose d'organe)
+    └─ Maladie psychosomatique
+    └─ Taux : 0-15%
+    └─ APPLICATION : ✅ "Trouble somatoforme douloureux persistant" [10-30%]
+    └─ NOTE: Borne inf. plus élevée (10% vs 0%), borne sup. doublée (30% vs 15%)
+
+31. ✅ Conversion psychologique (dépression, obsessions, phobies)
+    └─ Difficulté d'authentifier (simulation possible)
+    └─ Taux : 5-50% (cas rebelles, après échec thérapeutique)
+    └─ APPLICATION : ✅ Multiples items modernes couvrant ces aspects
+    └─ NOTE: Application plus détaillée
+
+e) NÉVROSE DE REVENDICATION
+
+32. ✅ Névrose de revendication
+    └─ Désir légitime de justice (non pathologique)
+    └─ Taux : 5% (s'ajoute aux autres taux si autres lésions)
+    └─ APPLICATION : ❌ MANQUANT - Non codifié explicitement
+    └─ NOTE: Problème délicat, principe à ajouter
+
+f) SINISTROSE
+
+33. ✅ Sinistrose (surestimation inconsciente du dommage)
+    └─ Définition Brissaud : idée fausse de revendication en bonne foi
+    └─ Différent de simulation (surestimation consciente)
+    └─ Disparaît souvent avec règlement du litige
+    └─ Taux : 5%
+    └─ APPLICATION : ❌ MANQUANT - Non codifié explicitement
+    └─ NOTE: Problème médico-légal important à ajouter
+
+g) CAS MIXTES (ORGANIQUE + NÉVROTIQUE)
+
+34. ✅ Interférence atteinte organique + majoration névrotique
+    └─ Taux : +5% maximum (en plus de l'indemnisation organique)
+    └─ APPLICATION : ❌ MANQUANT - Principe non codifié explicitement
+    └─ NOTE: Règle importante pour cas mixtes
+
+═══════════════════════════════════════════════════════════════════════════════
+║                    AJOUTS MODERNES DE L'APPLICATION                         ║
+║                        (Non présents dans barème 1939)                      ║
+═══════════════════════════════════════════════════════════════════════════════
+
+🆕 ADDITIONS MODERNES (DSM-5, CIM-10, CIM-11, Progrès scientifiques)
+────────────────────────────────────────────────────────────────────────────
+
+35. 🆕 Trouble de stress post-traumatique (TSPT)
+    └─ Classification moderne DSM-5/CIM-11
+    └─ Taux : 10-50%
+    └─ NOTE: Concept absent du barème 1939
+
+36. 🆕 Phobie spécifique (amaxophobie, acrophobie)
+    └─ Classification moderne DSM-5
+    └─ Taux : 5-20%
+    └─ NOTE: Barème 1939 avait "phobies" (5-35%) mais moins spécifique
+
+37. 🆕 Trouble de l'adaptation avec anxiété/humeur dépressive
+    └─ Classification moderne DSM-5
+    └─ Taux : 5-15%
+    └─ NOTE: Concept moderne absent barème 1939
+
+38. 🆕 Troubles du sommeil chroniques post-traumatiques
+    └─ Insomnie sévère codifiée séparément
+    └─ Taux : 5-15%
+    └─ NOTE: Barème 1939 mentionnait "insomnie" mais pas taux spécifique
+
+39. 🆕 Trouble de la personnalité post-traumatique
+    └─ Modification du comportement (CIM-11)
+    └─ Taux : 15-40%
+    └─ NOTE: Concept moderne de changement persistant personnalité
+
+40. 🆕 Trouble somatoforme douloureux persistant
+    └─ Algie psychogène codifiée (CIM-10)
+    └─ Taux : 10-30%
+    └─ NOTE: Barème 1939 avait "conversion physiologique" (0-15%)
+
+41. 🆕 Psychose hallucinatoire chronique
+    └─ Codification moderne précise
+    └─ Taux : 50-80%
+    └─ NOTE: Barème 1939 moins précis sur types psychoses
+
+42. 🆕 Dépression majeure post-traumatique chronique résistante
+    └─ Codification DSM-5 moderne
+    └─ Taux : 30-70%
+    └─ NOTE: Barème 1939 avait "dépression névrotique" mais pas forme majeure
+
+43. 🆕 Trouble bipolaire post-traumatique
+    └─ Classification moderne DSM-5
+    └─ Taux : 40-80%
+    └─ NOTE: Barème 1939 disait "état maniaco-dépressif non imputable"
+
+44. 🆕 Trouble obsessionnel-compulsif (TOC) invalidant
+    └─ Codification moderne DSM-5
+    └─ Taux : 20-60%
+    └─ NOTE: Barème 1939 mentionnait "névrose obsessionnelle exceptionnelle"
+
+═══════════════════════════════════════════════════════════════════════════════
+║                           ANALYSE STATISTIQUE FINALE                        ║
+═══════════════════════════════════════════════════════════════════════════════
+
+📊 RÉSULTATS DE LA COMPARAISON
+────────────────────────────────────────────────────────────────────────────
+
+Total séquelles barème 1939 identifiées :              34 items
+
+Conformité PARFAITE (taux identiques) :                 6 items (17.6%)
+   ├─ États neuro-psychasthéniques fonctionnels (0-10%)
+   ├─ États neuro-psychasthéniques somatiques (10-40%)
+   ├─ Signes psychiques fatigabilité (20-50%)
+   ├─ Symptômes vago-sympathiques (5-20%)
+   ├─ Syndromes anxieux (10-50%)
+   └─ Syndromes moteurs fonctionnels (0-20%)
+
+Conformité BONNE (présent, taux légèrement différent) : 13 items (38.2%)
+   ├─ Démence incomplète (app: 60-90% vs barème variable)
+   ├─ Démence complète (app: 100% fixe vs barème 75-100%)
+   ├─ Schizophrénie (app: 60-100% vs barème 5-100%)
+   ├─ Troubles épilepsie (indirect)
+   ├─ Dépression névrotique (couvert par états neuro-psych)
+   ├─ Phobies (app: 5-20% vs barème 5-35%)
+   ├─ Conversion somatique (app: 0-20% vs barème 0-5%)
+   ├─ Conversion physiologique (app: 10-30% vs barème 0-15%)
+   ├─ Conversion psychologique (couvert, plus détaillé)
+   ├─ Réaction d'effroi (app: 5-15% vs barème 0-5%)
+   ├─ Pithiatisme (principe implicite)
+   ├─ États hystériques (principe implicite)
+   └─ État maniaco-dépressif (app: trouble bipolaire 40-80%)
+
+Conformité PARTIELLE (lacunes identifiées) :            5 items (14.7%)
+   ├─ Troubles psychiques liés épilepsie (non explicite ajout 5-15%)
+   ├─ Réaction d'effroi sévère (confusion mentale grave)
+   ├─ Imputabilité partielle schizophrénie (1/3, 1/2)
+   ├─ Schizophrénie paranoïde vs hébéphrénie (dans rateCriteria)
+   └─ Névrose obsessionnelle (app: TOC moderne plus complet)
+
+NON CONFORME (manquants importants) :                  10 items (29.4%)
+   ├─ ❌ Démences artériopathiques (rôle favorisant)
+   ├─ ❌ Maladie de Pick (rôle favorisant)
+   ├─ ❌ Maladie d'Alzheimer (rôle favorisant)
+   ├─ ❌ Paralysie générale (non imputable)
+   ├─ ❌ Delirium tremens post-traumatique
+   ├─ ❌ Encéphalopathie Gayet-Wernicke
+   ├─ ❌ Névrose de revendication (principe 5%)
+   ├─ ❌ Sinistrose (principe 5%)
+   ├─ ❌ Cas mixtes organique+névrotique (principe +5% max)
+   └─ ❌ Confusion mentale grave post-effroi
+
+Ajouts modernes (non dans barème 1939) :               10 items
+   ├─ 🆕 TSPT (Trouble Stress Post-Traumatique DSM-5)
+   ├─ 🆕 Phobie spécifique codifiée moderne
+   ├─ 🆕 Trouble de l'adaptation (DSM-5)
+   ├─ 🆕 Troubles sommeil chroniques (codifié)
+   ├─ 🆕 Trouble personnalité post-trauma (CIM-11)
+   ├─ 🆕 Trouble somatoforme douloureux (CIM-10)
+   ├─ 🆕 Psychose hallucinatoire (classification moderne)
+   ├─ 🆕 Dépression majeure résistante (DSM-5)
+   ├─ 🆕 Trouble bipolaire post-trauma (DSM-5)
+   └─ 🆕 TOC invalidant (DSM-5)
+
+═══════════════════════════════════════════════════════════════════════════════
+║                              NOTE FINALE                                    ║
+═══════════════════════════════════════════════════════════════════════════════
+
+CONFORMITÉ GLOBALE : 19/34 (55.9%)
+   ├─ Parfaite/Bonne : 19 items (55.9%)
+   ├─ Partielle :      5 items (14.7%)
+   └─ Manquant :       10 items (29.4%)
+
+NOTE QUALITATIVE : B (BON)
+
+COMMENTAIRES :
+──────────────
+
+✅ POINTS FORTS :
+   • Conformité PARFAITE pour les 6 items principaux névroses (états neuro-psychasth.)
+   • Ajouts modernes pertinents (TSPT, DSM-5, CIM-10/11)
+   • Classification moderne plus détaillée et scientifique
+   • Taux généralement cohérents avec barème 1939
+
+⚠️ POINTS D'AMÉLIORATION :
+   • 10 items manquants importants (29.4%)
+   • Principes médico-légaux non codifiés :
+     * Névrose de revendication (5%)
+     * Sinistrose (5%)
+     * Cas mixtes organique+névrotique (+5% max)
+   • Complications alcoolisme non mentionnées
+   • Démences dégénératives (rôle favorisant) absentes
+   • Imputabilité partielle schizophrénie non codifiée
+
+🎯 PRIORITÉS DE CORRECTION :
+   1. Ajouter principes médico-légaux (revendication, sinistrose, cas mixtes)
+   2. Ajouter complications alcoolisme (delirium tremens, Gayet-Wernicke)
+   3. Ajouter démences dégénératives (rôle favorisant seulement)
+   4. Ajouter confusion mentale grave post-effroi
+   5. Codifier imputabilité partielle pour schizophrénie
+   6. Ajouter principe ajout 5-15% pour troubles psychiques liés à épilepsie
+
+═══════════════════════════════════════════════════════════════════════════════
+║                              RECOMMANDATIONS                                ║
+═══════════════════════════════════════════════════════════════════════════════
+
+🔧 CORRECTIONS URGENTES (Impact médico-légal élevé)
+────────────────────────────────────────────────────────────────────────────
+
+1. AJOUTER : Névrose de revendication
+   └─ Item : "Névrose de revendication (s'ajoute aux autres séquelles)"
+   └─ Taux : 5%
+   └─ Description : Désir légitime de justice, non pathologique en soi
+
+2. AJOUTER : Sinistrose
+   └─ Item : "Sinistrose (surestimation inconsciente du préjudice)"
+   └─ Taux : 5%
+   └─ Description : Idée fausse de revendication en bonne foi (Brissaud)
+
+3. AJOUTER : Majoration névrotique cas mixtes
+   └─ Item : "Majoration névrotique sur atteinte organique"
+   └─ Taux : 0-5% (maximum, s'ajoute au taux organique)
+   └─ Description : Cas mixte organique + névrotique
+
+4. AJOUTER : Troubles psychiques liés à épilepsie traumatique
+   └─ Item : "Troubles psychiques associés à épilepsie traumatique"
+   └─ Taux : 5-15% (s'ajoute au taux épilepsie)
+   └─ Description : Irritabilité, instabilité, impulsivité, désintérêt intellectuel
+
+🔧 CORRECTIONS IMPORTANTES (Complétude barème 1939)
+────────────────────────────────────────────────────────────────────────────
+
+5. AJOUTER : Delirium tremens post-traumatique
+   └─ Item : "Delirium tremens déclenché par traumatisme (alcoolique chronique)"
+   └─ Taux : Rôle favorisant 50% si mort, ≤50% pour état démentiel ultérieur
+   └─ Description : Complication alcoolisme, rôle traumatisme limité
+
+6. AJOUTER : Encéphalopathie de Gayet-Wernicke
+   └─ Item : "Encéphalopathie Gayet-Wernicke (rôle traumatisme accessoire)"
+   └─ Taux : Rôle accessoire (imputabilité partielle faible)
+   └─ Description : Complication alcoolisme/carence B1
+
+7. AJOUTER : Démences dégénératives (rôle favorisant)
+   └─ Items : 
+     • "Démence artériopathique (rôle traumatisme favorisant)"
+     • "Maladie de Pick (rôle traumatisme favorisant possible)"
+     • "Maladie d'Alzheimer (rôle traumatisme favorisant possible)"
+     • "Paralysie générale (non imputable au traumatisme)"
+   └─ Taux : Imputabilité nulle ou partielle très limitée
+   └─ Description : Rôle favorisant/aggravant uniquement
+
+8. AJOUTER : Confusion mentale grave post-effroi
+   └─ Item : "Confusion mentale grave après réaction d'effroi"
+   └─ Taux : Variable selon gravité (peut évoluer vers psychose)
+   └─ Description : Évolution rare mais grave de réaction d'effroi
+
+🔧 CORRECTIONS TECHNIQUES (Alignement taux)
+────────────────────────────────────────────────────────────────────────────
+
+9. AJUSTER : Phobie spécifique
+   └─ ACTUEL : [5-20%]
+   └─ BARÈME 1939 : [5-35%]
+   └─ CORRECTION : Augmenter borne sup. à 35%
+
+10. AJUSTER : Démence incomplète (forme légère)
+    └─ ACTUEL : [60-90%] (forme sévère uniquement)
+    └─ BARÈME 1939 : [5-25%] (forme légère), [25-75%] (forme sévère)
+    └─ CORRECTION : Ajouter item "Démence incomplète légère" [5-25%]
+
+11. AJUSTER : Démence complète
+    └─ ACTUEL : 100% (fixe)
+    └─ BARÈME 1939 : [75-100%]
+    └─ CORRECTION : Passer à plage [75-100%]
+
+12. AJUSTER : Réaction d'effroi
+    └─ ACTUEL : "Trouble de l'adaptation" [5-15%]
+    └─ BARÈME 1939 : "Réaction d'effroi" [0-5%]
+    └─ CORRECTION : Ajouter item distinct "Réaction d'effroi" [0-5%]
+
+13. CODIFIER : Imputabilité partielle schizophrénie
+    └─ ACTUEL : Taux fixe [60-100%]
+    └─ BARÈME 1939 : Imputabilité variable (1/3, 1/2, exceptionnellement totale)
+    └─ CORRECTION : Ajouter note d'imputabilité partielle possible
+
+═══════════════════════════════════════════════════════════════════════════════
+║                            CONCLUSION GÉNÉRALE                              ║
+═══════════════════════════════════════════════════════════════════════════════
+
+L'application présente une BONNE conformité (55.9%) avec le barème officiel 1939 
+concernant les PSYCHOSES ET NÉVROSES POST-TRAUMATIQUES.
+
+Les 6 items principaux des névroses (états neuro-psychasthéniques) sont en 
+conformité PARFAITE avec le barème 1939, ce qui constitue le socle essentiel.
+
+Cependant, 10 items médico-légaux importants sont manquants (29.4%), notamment :
+• Principes médico-légaux (revendication, sinistrose, cas mixtes)
+• Complications alcoolisme (delirium tremens, Gayet-Wernicke)  
+• Démences dégénératives (rôle favorisant)
+• Imputabilité partielle schizophrénie
+
+L'application compense partiellement ces manques par 10 ajouts modernes pertinents
+(TSPT, DSM-5, CIM-10/11) reflétant l'évolution scientifique depuis 1939.
+
+RECOMMANDATION : Procéder aux 13 corrections identifiées pour atteindre 
+conformité ≥85% tout en préservant les ajouts modernes pertinents.
+
+═══════════════════════════════════════════════════════════════════════════════
+
+📅 Rapport généré le : 01/01/2026
+✍️  Analyste : IA Médico-Légale v3.3.130
+📋 Barème référence : Barème officiel 1939 (France)
+💻 Application : Guide du Médecin Conseil (commit c40cb4c)
+
+═══════════════════════════════════════════════════════════════════════════════
