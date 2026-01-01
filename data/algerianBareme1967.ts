@@ -310,6 +310,11 @@ export const algerianBareme1967: InjuryCategory[] = [
         name: "Hanche",
         injuries: [
           { 
+            name: "Ankylose des deux hanches",
+            rate: 100,
+            description: "Incapacité totale - Les deux hanches figées"
+          },
+          { 
             name: "Ankylose complète de la hanche en position favorable",
             rate: [40, 50],
             description: "Position: légère flexion (10-15°), légère abduction",
@@ -328,6 +333,21 @@ export const algerianBareme1967: InjuryCategory[] = [
             }
           },
           { 
+            name: "Pseudarthrose de la hanche (hanche ballante)",
+            rate: [75, 80],
+            description: "Absence de consolidation, instabilité majeure"
+          },
+          { 
+            name: "Désarticulation de la hanche",
+            rate: 95,
+            description: "Amputation au niveau de l'articulation coxo-fémorale"
+          },
+          { 
+            name: "Désarticulation inter-ilio-abdominale (hémipelvectomie)",
+            rate: 100,
+            description: "Amputation incluant une partie du bassin - Incapacité totale"
+          },
+          { 
             name: "Raideur importante de la hanche avec limitation marquée",
             rate: [25, 40],
             description: "",
@@ -343,6 +363,15 @@ export const algerianBareme1967: InjuryCategory[] = [
             rateCriteria: {
               low: "Limitation discrète",
               high: "Limitation nette mais fonctionnelle"
+            }
+          },
+          {
+            name: "Nécrose de la tête fémorale",
+            rate: [25, 60],
+            description: "IPP fonction du retentissement articulaire (douleurs, raideur, arthrose)",
+            rateCriteria: {
+              low: "Nécrose débutante, douleurs modérées, mobilité conservée",
+              high: "Nécrose évoluée, douleurs importantes, raideur majeure"
             }
           },
         ]
@@ -558,6 +587,29 @@ export const algerianBareme1967: InjuryCategory[] = [
       {
         name: "Rachis Dorso-Lombaire",
         injuries: [
+          { 
+            name: "Tassement vertébral simple sans raideur ni signes neurologiques",
+            rate: 10,
+            description: "Cas léger - Tassement vertébral consolidé sans séquelles importantes"
+          },
+          { 
+            name: "Tassement vertébral avec raideur rachidienne nette sans signes neurologiques",
+            rate: [20, 30],
+            description: "Tassement avec limitation rachidienne marquée",
+            rateCriteria: {
+              low: "Raideur modérée, DDS 20-30 cm",
+              high: "Raideur importante, DDS > 40 cm"
+            }
+          },
+          { 
+            name: "Fracture ou luxation rachidienne avec raideur importante et signes neurologiques légers",
+            rate: [40, 50],
+            description: "Signes d'irritation radiculo-médullaire",
+            rateCriteria: {
+              low: "Signes neurologiques discrets, raideur modérée",
+              high: "Signes neurologiques nets, raideur majeure"
+            }
+          },
           { 
             name: "Ankylose complète du rachis dorso-lombaire en bonne position",
             rate: [30, 40],
