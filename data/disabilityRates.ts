@@ -289,6 +289,7 @@ const middleCategories: InjuryCategory[] = [
           { name: "Anosmie unilatérale ou bilatérale", description: "Se référer au barème oto-rhino-laryngologie.", rate: [5, 30] },
           { name: "Névralgie du Trijumeau (V) - Algie avec ou sans anesthésie", rate: [25, 70] },
           { name: "Névralgie du Trijumeau (V) - Algie du type continu sympathalgique", rate: [30, 80] },
+          { name: "Atteinte motrice du Trijumeau (V) - Paralysie motrice unilatérale", rate: 5, description: "Gêne à la mastication d'un côté, déformation de la bouche à l'ouverture. Atteinte unilatérale entraîne peu de gêne." },
           { name: "Paralysie du Nerf Facial (VII) - Paralysie totale et définitive", rate: [20, 30] },
           { name: "Paralysie du Nerf Facial (VII) - Paralysie partielle et définitive", rate: [10, 30] },
           { name: "Paralysie du Nerf Facial (VII) - Paralysie bilatérale totale", rate: [20, 50] },
@@ -373,9 +374,10 @@ const middleCategories: InjuryCategory[] = [
       {
         name: "Nerfs Périphériques - Membre Inférieur",
         injuries: [
-          { name: "Paralysie totale d'un membre inférieur", rate: [70, 80] },
+          { name: "Paralysie totale d'un membre inférieur (flasque)", rate: [70, 80], description: "Paralysie périphérique flasque avec atteinte complète du membre inférieur." },
+          { name: "Paralysie totale d'un membre inférieur (spasmodique)", rate: [10, 50], description: "Paralysie centrale spasmodique (post-AVC, lésion médullaire) avec hypertonie et troubles de la marche variables.", rateCriteria: { low: "Spasticité modérée, marche possible avec aide technique, contrôle partiel préservé.", high: "Spasticité sévère, marche impossible, rétractions tendineuses, douleurs spastiques invalidantes." } },
           { name: "Paralysie complète du nerf sciatique", rate: [35, 45] },
-          { name: "Paralysie du nerf sciatique poplité externe (SPE)", rate: [15, 25], rateCriteria: { low: "Déficit du releveur du pied, marche sur la pointe des pieds possible, steppage discret.", high: "Steppage majeur avec nécessité de releveur, troubles trophiques." } },
+          { name: "Paralysie du nerf sciatique poplité externe (SPE)", rate: [15, 30], rateCriteria: { low: "Déficit du releveur du pied, marche sur la pointe des pieds possible, steppage discret.", high: "Steppage majeur avec nécessité de releveur, troubles trophiques, forme sévère et rebelle." } },
           { name: "Paralysie du nerf sciatique poplité interne (SPI)", rate: [15, 25], rateCriteria: { low: "Difficulté à la marche sur la pointe des pieds, déficit modéré de flexion des orteils.", high: "Perte de la propulsion du pas, pied en talus, troubles trophiques importants." } },
           { name: "Paralysie du nerf crural", rate: [45, 55] },
           { name: "Paralysie du nerf obturateur", rate: [10, 20] },
