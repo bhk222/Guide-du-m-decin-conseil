@@ -127,7 +127,17 @@ export const ReverseIppSearch: React.FC = () => {
                         </h3>
                         {results.length > 0 ? (
                             <div className="space-y-3 max-h-[50vh] overflow-y-auto custom-scrollbar -mr-3 pr-3">
-                                {results.map((result, index) => (
+                                {results.map((result, index) => {
+                                    // Vérifier si le path contient une section d'amputation des membres supérieurs
+                                    const shouldShowAmputationImage = 
+                                        result.path.includes("Épaule - Amputation et Désarticulation") ||
+                                        result.path.includes("Bras - Amputations") ||
+                                        result.path.includes("Coude - Désarticulation") ||
+                                        result.path.includes("Avant-bras - Amputations") ||
+                                        result.path.includes("Poignet - Désarticulation") ||
+                                        result.path.includes("Main - Amputations");
+                                    
+                                    return (
                                     <div key={index} className="p-3 bg-slate-50 border border-slate-200 rounded-lg">
                                         <p className="font-semibold text-primary-700 flex items-center">
                                             {result.injury.imageUrl && (
@@ -135,7 +145,21 @@ export const ReverseIppSearch: React.FC = () => {
                                             )}
                                             {result.injury.name}
                                         </p>
-                                        <p className="text-xs text-slate-500 mt-1">{result.path}</p>
+                                        <p className="text-xs text-slate-500 mt-1 flex items-center gap-2">
+                                            <span>{result.path}</span>
+                                            {shouldShowAmputationImage && (
+                                                <span 
+                                                    className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-blue-500 hover:bg-blue-600 text-white text-xs font-bold cursor-help transition-colors"
+                                                    title="Voir le diagramme d'amputation des membres supérieurs"
+                                                    onClick={(e) => {
+                                                        e.stopPropagation();
+                                                        window.open('/images/medical/AMPUTATION%20DE%20SEGMENT%20MBR%20SUP.jpg', '_blank');
+                                                    }}
+                                                >
+                                                    📷
+                                                </span>
+                                            )}
+                                        </p>
                                         <div className="mt-2 text-xs">
                                             {typeof result.injury.rate === 'number' ? (
                                                 <span className="font-bold bg-green-100 text-green-800 px-2 py-0.5 rounded-full">Taux fixe : {result.injury.rate}%</span>
@@ -144,7 +168,8 @@ export const ReverseIppSearch: React.FC = () => {
                                             )}
                                         </div>
                                     </div>
-                                ))}
+                                    );
+                                })}
                             </div>
                         ) : (
                             <p className="text-slate-500 text-center py-4">Aucune lésion unique trouvée pour le taux de {targetRate}%.</p>
