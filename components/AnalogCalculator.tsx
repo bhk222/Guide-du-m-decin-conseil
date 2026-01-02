@@ -213,10 +213,13 @@ export const AnalogCalculator: React.FC<AnalogCalculatorProps> = ({ onAddInjury 
             
             <div className="flex-1 overflow-y-auto space-y-2 custom-scrollbar pr-2 -mr-2">
                 {filteredData.map(category => {
-                    // Afficher le tooltip uniquement pour les amputations d'épaule, bras et avant-bras
+                    // Afficher le tooltip pour toutes les amputations des membres supérieurs (épaule, bras, coude, avant-bras, poignet, main)
                     const shouldShowImage = category.name === "Épaule - Amputation et Désarticulation" ||
                                           category.name === "Bras - Amputations" ||
-                                          category.name === "Avant-bras - Amputations";
+                                          category.name === "Coude - Désarticulation" ||
+                                          category.name === "Avant-bras - Amputations" ||
+                                          category.name === "Poignet - Désarticulation" ||
+                                          category.name === "Main - Amputations";
                     
                     return (
                      <details 
