@@ -252,19 +252,266 @@ const middleCategories: InjuryCategory[] = [
         ]
       },
       {
-        name: "Bassin - Lésions Osseuses",
+        name: "Bassin - Fractures Partielles (Arc Antérieur)",
         injuries: [
-          { name: "Fracture isolée d'une branche pubienne ou de l'aile iliaque (sans déplacement)", rate: [5, 10] },
+          { name: "Fracture isolée aile iliaque sans déplacement", rate: [8, 12], description: "Fracture simple de l'aile iliaque, IPP souvent insignifiante si traitée fonctionnellement." },
+          { name: "Fracture branche horizontale du pubis (unilatérale)", rate: [10, 15], description: "Fracture isolée d'une branche horizontale, traitement fonctionnel dès le début." },
+          { name: "Fracture branche ischio-pubienne (unilatérale)", rate: [10, 15], description: "Fracture isolée d'une branche ischio-pubienne, traitement fonctionnel." },
+          { name: "Fracture arc antérieur (branche horizontale + ischio-pubienne même côté)", rate: [15, 18], description: "Fracture combinée des branches du même côté." },
+          { name: "Fracture branches horizontales bilatérales ± branche ischio-pubienne", rate: [20, 25], description: "Fracture des deux branches horizontales du pubis, associée ou non à une branche ischio-pubienne." },
+          { name: "Fracture partielles du bassin (aile iliaque, branches pubiennes, ischio-pubiennes) - Barème global", rate: [8, 18], description: "Fourchette globale du barème officiel pour les fractures partielles." },
+        ]
+      },
+      {
+        name: "Bassin - Fractures Doubles Verticales",
+        injuries: [
+          { 
+            name: "Fracture double verticale (interruption ceinture antérieure et postérieure)", 
+            rate: [25, 40],
+            description: "Interruption de la ceinture pelvienne en AVANT (fracture du pubis) ET en ARRIÈRE (fracture du sacrum ou des jonctions sacro-iliaques) du même côté. Instabilité majeure de l'anneau pelvien.",
+            rateCriteria: {
+              low: "Fracture consolidée avec bonne stabilité, instabilité minime, marche autonome sans aide, douleurs contrôlées.",
+              medium: "Instabilité modérée du bassin, boiterie, douleurs à l'effort et à la marche prolongée, nécessité ceinture pelvienne.",
+              high: "Instabilité pelvienne sévère, marche très difficile nécessitant aide technique, douleurs chroniques importantes, limitation fonctionnelle majeure."
+            }
+          },
+        ]
+      },
+      {
+        name: "Bassin - Fractures Arc Postérieur (Sacrum)",
+        injuries: [
+          { 
+            name: "Fracture aileron sacrum isolée", 
+            rate: [5, 10],
+            description: "Fracture simple de l'aileron sacré sans troubles nerveux ni atteinte articulaire sacro-iliaque importante. IPP très réduite." 
+          },
+          { 
+            name: "Fracture sacrum verticale ou transversale simple (sans troubles nerveux)", 
+            rate: [15, 40],
+            description: "Fracture du corps du sacrum sans complication neurologique. Évaluation selon douleurs, limitation fonctionnelle et retentissement sur statique.",
+            rateCriteria: {
+              low: "Fracture consolidée sans douleurs importantes, bonne mobilité rachis et membres.",
+              medium: "Douleurs sacro-iliaques chroniques, limitation position assise, gêne marche prolongée.",
+              high: "Douleurs chroniques invalidantes, limitation majeure position assise et marche, retentissement important sur rachis et statique."
+            }
+          },
+          { 
+            name: "Fracture sacrum avec syndrome de la queue de cheval (complet ou partiel)", 
+            rate: [60, 80],
+            description: "Fracture du sacrum avec compression de la moelle sacrée ou de la queue de cheval : douleurs radiculaires, anesthésie en selle (territoire S3-S4-S5-Co), troubles sphinctériens (incontinence urinaire ~45%, incontinence fécale ~50%), troubles génitaux (impuissance ~15% + dépression psychique), paralysies et déficits moteurs membres inférieurs, algies chroniques. Syndrome gravissime nécessitant évaluation par calcul séparé de chaque atteinte (troubles moteurs, sensitifs, sphinctériens, génitaux) sur validité restante.",
+            rateCriteria: {
+              low: "Syndrome partiel avec récupération significative, incontinence occasionnelle contrôlable, autonomie préservée, vie sociale possible.",
+              medium: "Syndrome modéré à sévère, incontinence fréquente nécessitant protections, impotence sexuelle, limitation déplacements, retentissement psychologique.",
+              high: "Syndrome complet, incontinence urinaire et fécale permanente, impotence sexuelle totale, paralysies, douleurs chroniques sévères, dépendance majeure, isolement social."
+            }
+          },
+          { 
+            name: "Fracture sacrum avec troubles sphinctériens isolés (sans paralysie complète)", 
+            rate: [45, 60],
+            description: "Troubles de la continence urinaire (45%) ou fécale (50%) après fracture du sacrum, sans syndrome complet de la queue de cheval. Évaluer séparément incontinence urinaire et fécale si association.",
+            rateCriteria: {
+              low: "Incontinence partielle, contrôle possible avec rééducation et protections légères.",
+              high: "Incontinence majeure permanente, retentissement social et psychologique important."
+            }
+          },
+          { 
+            name: "Fracture sacrum avec impuissance génitale post-traumatique", 
+            rate: [15, 25],
+            description: "Impuissance génitale suite à fracture du sacrum (atteinte plexus honteux S2-S3-S4). On indemnise également la dépression psychique réactionnelle associée.",
+            rateCriteria: {
+              low: "Troubles érectiles partiels, vie intime possible avec adaptations.",
+              high: "Impuissance totale, retentissement psychologique majeur, dépression."
+            }
+          },
+        ]
+      },
+      {
+        name: "Bassin - Fractures du Cotyle (Détaillé)",
+        injuries: [
+          { 
+            name: "Fracture sourcil cotyloïdien sans déplacement de la tête fémorale", 
+            rate: [8, 15],
+            description: "Fracture du rebord du cotyle (sourcil) sans déplacement de la tête fémorale, ou luxation réduite précocement et fragment cotyloïdien remis en place et vissé. Peut s'accompagner d'une raideur modérée de la hanche. Surveillance arthrose à long terme.",
+            rateCriteria: {
+              low: "Consolidation parfaite, mobilité hanche préservée, pas de douleur.",
+              medium: "Raideur modérée hanche, douleurs à l'effort, limitation abduction.",
+              high: "Raideur importante, douleurs chroniques, signes d'arthrose précoce."
+            }
+          },
           { name: "Fracture du cotyle sans déplacement, hanche congruente", rate: [10, 20] },
+          { 
+            name: "Fissure cavité cotyloïde (sans déplacement) - Arthropathie consécutive", 
+            rate: [20, 25],
+            description: "Fissure de la cavité cotyloïde ayant entraîné une arthropathie secondaire." 
+          },
           { name: "Fracture du cotyle - Avec séquelles articulaires", rate: [25, 45], rateCriteria: { low: "Limitation mobilité légère, pas de boiterie, autonomie complète.", medium: "Limitation mobilité modérée, boiterie légère, appui mono-podal instable, accroupissement difficile.", high: "Limitation mobilité sévère, boiterie marquée, instabilité majeure, quasi-impotence fonctionnelle." } },
+          { 
+            name: "Fracture cotyle avec luxation centrale, raccourcissement, tendance à l'ankylose", 
+            rate: [35, 50],
+            description: "Fracture du cotyle avec déplacement de la tête fémorale, raccourcissement du membre, évolution vers l'ankylose ou raideur sévère." 
+          },
+          { 
+            name: "Fracture cotyle par enfoncement du fond avec protrusion intra-pelvienne de la tête fémorale", 
+            rate: [60, 70],
+            description: "Fracture par enfoncement du fond du cotyle avec protrusion (migration) de la tête fémorale dans le bassin. Déplacement persistant de la tête fémorale. L'infirmité peut être plus importante que celle correspondant à une ankylose de la hanche en bonne position. Cas gravissime.",
+            rateCriteria: {
+              low: "Protrusion modérée, mobilité résiduelle partielle, marche avec aide.",
+              high: "Protrusion majeure, quasi-ankylose en mauvaise position, impotence fonctionnelle > ankylose simple, marche très difficile."
+            }
+          },
           { name: "Fracture du cotyle avec arthrose post-traumatique", description: "Évaluer comme une coxarthrie (voir Membres Inférieurs)", rate: [15, 40] },
-          { name: "Fracture du sacrum", rate: [8, 15] },
-          { name: "Fracture du coccyx", rate: [6, 12] },
-          { name: "Fracture du sacrum ou du coccyx avec douleurs chroniques (coccygodynie)", rate: [5, 15], rateCriteria: { low: "Douleurs à la position assise prolongée, calmées par le changement de position.", high: "Douleurs invalidantes quasi-permanentes, rendant la position assise impossible." } },
-          { name: "Fracture du sacrum avec troubles neurologiques (radiculalgie S1)", rate: [15, 30] },
-          { name: "Disjonction de la symphyse pubienne ou sacro-iliaque (instabilité résiduelle)", rate: [15, 30], rateCriteria: { low: "Douleurs mécaniques à l'effort, sans instabilité majeure.", high: "Douleurs et instabilité importantes à la marche, nécessitant une aide." } },
-          { name: "Fracture complexe de l'anneau pelvien avec séquelles importantes (boiterie, douleurs)", rate: [30, 60], rateCriteria: { low: "Boiterie discrète, douleurs contrôlées.", high: "Boiterie majeure, douleurs invalidantes, séquelles urologiques ou neurologiques associées." } },
-          { name: "Névralgie pudendale post-traumatique (fracture du bassin)", rate: [15, 35], rateCriteria: { low: "Douleurs périnéales positionnelles, avec impact modéré sur la qualité de vie.", high: "Douleurs neuropathiques invalidantes (brûlures, décharges électriques) en position assise, avec retentissement majeur." } },
+        ]
+      },
+      {
+        name: "Bassin - Fracture du Coccyx",
+        injuries: [
+          { 
+            name: "Fracture coccyx - Simple trouvaille radiographique sans symptômes", 
+            rate: 0,
+            description: "Fracture du coccyx découverte fortuitement à la radiographie, sans aucune douleur ni gêne fonctionnelle. IPP = 0%. IMPORTANT : Extrême variabilité des images radiologiques pour les coccyx normaux. Prudence sur imputabilité si examen radio non fait immédiatement après accident." 
+          },
+          { 
+            name: "Fracture du coccyx avec coccygodynie (douleurs fonctionnelles)", 
+            rate: [5, 20],
+            description: "Fracture/luxation du coccyx avec tiraillements lors de la flexion du tronc, douleurs position assise, gêne usage bicyclette. Taux moyen première évaluation ~8%, car large amélioration à escompter après deux années. La coccygodynie isolée sans lésions anatomiques relève souvent d'un syndrome névrotique. SUSPICION si persiste > 1 an.",
+            rateCriteria: {
+              low: "Douleurs modérées en position assise prolongée uniquement, amélioration progressive.",
+              medium: "Douleurs régulières en position assise, gêne vie quotidienne et professionnelle, utilisation coussin nécessaire.",
+              high: "Douleurs invalidantes quasi-permanentes, position assise impossible > 15-20 minutes, retentissement professionnel majeur. RARE."
+            }
+          },
+        ]
+      },
+      {
+        name: "Bassin - Articulations Sacro-iliaques",
+        injuries: [
+          { 
+            name: "Diastasis sacro-iliaque (mobilité anormale du sacrum)", 
+            rate: [40, 45],
+            description: "Le sacrum devient mal fixé entre les deux os iliaques : il tourne, bascule, prend une position oblique asymétrique. Retentissement important sur l'équilibre du rachis et la statique des membres inférieurs (A. Massart). Manœuvres diagnostiques : écartement et rapprochement des ailes iliaques, écartement contrarié des cuisses fléchies sur bassin, hyperextension d'une cuisse (autre fixée en flexion). Selon l'importance des déplacements sacro-iliaques, IPP peut aller de 15 à 45%.",
+            rateCriteria: {
+              low: "Diastasis modéré, mobilité anormale discrète détectable aux manœuvres, douleurs contrôlées, marche normale.",
+              medium: "Diastasis modéré à sévère, instabilité palpable, douleurs à l'effort, gêne marche prolongée, retentissement rachis (lombalgies).",
+              high: "Diastasis sévère, instabilité majeure du sacrum, douleurs chroniques importantes, impossibilité port de fardeaux, retentissement majeur sur statique rachis et membres inférieurs, marche rapidement pénible."
+            }
+          },
+          { 
+            name: "Arthropathie chronique sacro-iliaque post-traumatique", 
+            rate: [15, 25],
+            description: "Séquelles post-traumatiques des articulations sacro-iliaques (disjonction, entorse). Atteinte portée à la statique pelvienne (les sacro-iliaques transmettent tout le poids du corps aux membres inférieurs). Douleurs, gêne de la marche, accroupissement quasi-impossible, difficultés port des fardeaux, lumbago symptomatique. Radios souvent négatives. Manœuvres diagnostiques positives.",
+            rateCriteria: {
+              low: "Douleurs modérées à l'effort, limitation partielle activités.",
+              high: "Douleurs chroniques importantes, marche rapidement pénible, impossibilité porter fardeaux, accroupissement impossible."
+            }
+          },
+        ]
+      },
+      {
+        name: "Bassin - Symphyse Pubienne",
+        injuries: [
+          { 
+            name: "Disjonction traumatique simple de la symphyse pubienne", 
+            rate: [10, 25],
+            description: "Disjonction de la symphyse pubienne avec retentissement sacro-iliaque. Manque de résistance de la ceinture pelvienne : marche rapidement pénible, impossibilité de porter des fardeaux, douleurs.",
+            rateCriteria: {
+              low: "Disjonction minime, douleurs légères à l'effort, autonomie préservée.",
+              high: "Disjonction importante, instabilité pelvienne, marche pénible, douleurs chroniques, impossibilité porter fardeaux."
+            }
+          },
+          { 
+            name: "Luxation irréductible du pubis ou relâchement étendu de la symphyse pubienne", 
+            rate: [10, 25],
+            description: "Luxation pubienne persistante ou relâchement important avec instabilité de la symphyse." 
+          },
+          { 
+            name: "Disjonction de la symphyse pubienne avec fracture du bassin", 
+            rate: 0,
+            description: "Note spéciale : Lorsque disjonction symphysaire associée à fracture du bassin, la fracture et le tableau clinique laissent à l'arrière-plan la luxation symphysaire. IPP calculée sur les séquelles de la fracture principalement." 
+          },
+        ]
+      },
+      {
+        name: "Bassin - Complications Neurologiques Post-Fracture",
+        injuries: [
+          { 
+            name: "Irritation ou atteinte du nerf obturateur (cal vicieux canal sous-pubien)", 
+            rate: [10, 25],
+            description: "Atteinte du nerf obturateur par un cal vicieux au niveau du canal sous-pubien. Topographie des douleurs, atrophie musculaire des adducteurs, zones d'anesthésie de la face interne de la cuisse.",
+            rateCriteria: {
+              low: "Douleurs modérées, paresthésies, déficit moteur léger.",
+              high: "Douleurs chroniques sévères, atrophie musculaire marquée, déficit moteur important des adducteurs."
+            }
+          },
+          { 
+            name: "Atteinte des racines nerveuses au niveau de l'échancrure sciatique", 
+            rate: [20, 40],
+            description: "Atteinte des racines nerveuses par des fragments osseux au niveau de l'échancrure sciatique. Topographie des douleurs, atrophie musculaire, paralysies partielles, zones d'anesthésie, atteinte du réflexe achilléen. Évaluation selon gravité atteinte nerveuse.",
+            rateCriteria: {
+              low: "Douleurs radiculaires modérées, paresthésies, déficit moteur léger.",
+              medium: "Douleurs chroniques, déficit moteur modéré, atrophie musculaire visible.",
+              high: "Douleurs neuropathiques sévères, paralysie partielle, atrophie importante, retentissement fonctionnel majeur."
+            }
+          },
+        ]
+      },
+      {
+        name: "Bassin - Complications Urologiques Post-Fracture",
+        injuries: [
+          { 
+            name: "Troubles urinaires post-fracture bassin (rupture vessie ou urètre)", 
+            rate: [20, 60],
+            description: "Troubles urinaires pouvant résulter d'une rupture de la vessie ou de l'urètre lors d'une fracture du bassin. Évaluer selon : rétrécissement de l'urètre, cystite chronique, phénomènes d'incontinence, retentissement rénal. Voir également tableau détaillé appareil urinaire page 175 du barème officiel.",
+            rateCriteria: {
+              low: "Rétrécissement urétral mineur traité avec succès, gêne urinaire modérée intermittente, pas de retentissement rénal.",
+              medium: "Rétrécissement urétral nécessitant dilatations répétées, cystite récidivante, incontinence d'effort, gêne vie quotidienne.",
+              high: "Rétrécissement urétral sévère, incontinence urinaire permanente nécessitant protections, cystites répétées, retentissement rénal (insuffisance rénale débutante), retentissement social et psychologique majeur."
+            }
+          },
+          { 
+            name: "Incontinence urinaire post-fracture bassin", 
+            rate: [40, 50],
+            description: "Incontinence urinaire permanente après rupture vésicale ou urétrale lors de fracture du bassin. Barème indicatif : incontinence urinaire ~45%." 
+          },
+        ]
+      },
+      {
+        name: "Bassin - Complications Vasculaires et Digestives",
+        injuries: [
+          { 
+            name: "Hématomes sous-péritonéaux ou pelviens avec troubles fonctionnels", 
+            rate: [10, 30],
+            description: "Hématomes sous-péritonéaux ou pelviens pouvant provoquer : 1) troubles intestinaux persistants, 2) troubles de la circulation veineuse entraînant œdème chronique du membre inférieur.",
+            rateCriteria: {
+              low: "Troubles digestifs modérés intermittents ou œdème léger d'un membre.",
+              medium: "Troubles digestifs fréquents (constipation, douleurs) ou œdème modéré nécessitant contention.",
+              high: "Troubles digestifs chroniques invalidants ou œdème sévère bilatéral, troubles trophiques."
+            }
+          },
+          { 
+            name: "Œdème chronique d'un membre inférieur post-hématome pelvien", 
+            rate: [10, 20],
+            description: "Œdème chronique d'un membre inférieur par troubles de la circulation veineuse suite à hématome pelvien." 
+          },
+        ]
+      },
+      {
+        name: "Bassin - Incidence Obstétricale (Jeunes Femmes)",
+        injuries: [
+          { 
+            name: "Fracture du bassin chez jeune femme - Incidence obstétricale", 
+            rate: 0,
+            description: "NOTE MÉDICO-LÉGALE IMPORTANTE : Chez une jeune fille ou jeune femme, la fracture du bassin comporte l'appréciation de l'incidence obstétricale. Nécessité de RADIOPELVIMÉTRIE pour évaluer la capacité du bassin. L'accouchement par les voies naturelles reste le plus souvent possible. Sur 19 cas étudiés (Thèse J. Rebon, Paris 1967), seulement 4 césariennes ont été faites en raison du rétrécissement lié directement à la fracture du bassin. IPP : pas de majoration systématique, mais MENTION OBLIGATOIRE dans le rapport d'expertise de l'évaluation obstétricale et de la radiopelvimétrie si patiente en âge de procréer." 
+          },
+        ]
+      },
+      {
+        name: "Bassin - Notes Importantes du Barème Officiel",
+        injuries: [
+          { 
+            name: "Fracture du bassin - Impossibilité de donner un taux moyen", 
+            rate: 0,
+            description: "IMPORTANT : Il est IMPOSSIBLE de donner d'indications valables touchant un taux moyen pour les fractures du bassin, étant donnée la variabilité des lésions associées. Les fractures du bassin vont des très bénignes (aile iliaque isolée : IPP insignifiante ou nulle) aux très graves (syndrome queue de cheval : jusqu'à 80%). Une fracture des branches ischio-pubiennes ou horizontale du pubis traitée dès le début d'une manière fonctionnelle doit aboutir à un résultat IPP insignifiant ou nul. Pour les fractures complexes, sont ADDITIONNÉS les IPP relatives aux complications de la fracture (troubles urinaires + neurologiques + articulaires, etc.)." 
+          },
         ]
       },
       {
@@ -1820,12 +2067,62 @@ const middleCategories: InjuryCategory[] = [
         ]
       },
       {
-        name: "Hanche - Fractures",
+        name: "Hanche - Fractures du Col du Fémur (Détails par Âge)",
         injuries: [
+            { 
+              name: "Fracture col du fémur - Jeune sujet (<40 ans), très bon résultat anatomique", 
+              rate: [15, 25],
+              description: "Fracture bien consolidée chez un sujet jeune sans gêne fonctionnelle importante, sans ostéochondrite de la tête. Barème officiel : cas de très bon résultat anatomique.",
+              rateCriteria: {
+                low: "Consolidation parfaite, mobilité complète hanche, reprise activités sportives.",
+                high: "Consolidation avec légère limitation abduction ou rotation, gêne accroupissement."
+              }
+            },
+            { 
+              name: "Fracture col du fémur - Sujet 50 ans, limitation marquée des mouvements hanche", 
+              rate: [35, 45],
+              description: "Blessé d'une cinquantaine d'années, limitation marquée des mouvements de la hanche. Barème officiel : cas moyen.",
+              rateCriteria: {
+                low: "Limitation modérée abduction et flexion, boiterie discrète, marche autonome.",
+                high: "Limitation importante mouvements, difficultés accroupissement, boiterie marquée, douleurs fréquentes."
+              }
+            },
+            { 
+              name: "Fracture col du fémur - Sujet ≥60 ans, boiterie, coxa vara, marche difficile", 
+              rate: [60, 70],
+              description: "Blessé de 60 ans et plus, boiterie importante, déformation en coxa vara, gêne articulaire marquée, marche difficile. Barème officiel : cas grave.",
+              rateCriteria: {
+                low: "Boiterie permanente, coxa vara modérée, marche avec canne occasionnelle, autonomie préservée.",
+                high: "Boiterie majeure, coxa vara sévère avec raccourcissement, marche très difficile nécessitant canne permanente, douleurs chroniques."
+              }
+            },
+            { 
+              name: "Pseudarthrose col du fémur avec bon appui pelvien, boiterie compatible avec marche", 
+              rate: [75, 80],
+              description: "Cas de pseudarthrose du col comportant un bon appui pelvien avec boiterie compatible avec la marche. Barème officiel.",
+              rateCriteria: {
+                low: "Pseudarthrose stable, appui satisfaisant, marche possible >1km avec canne, douleurs modérées.",
+                high: "Pseudarthrose avec appui pelvien correct mais boiterie importante, marche limitée <500m, douleurs fréquentes."
+              }
+            },
+            { 
+              name: "Pseudarthrose col du fémur lâche, marche très difficile, grosse déformation", 
+              rate: [85, 90],
+              description: "Cas de pseudarthrose lâche, marche très difficile, grosse déformation, attitude vicieuse du membre inférieur. Barème officiel : cas gravissime.",
+              rateCriteria: {
+                low: "Pseudarthrose instable, marche très difficile avec 2 cannes, déformation importante, périmètre <200m.",
+                high: "Pseudarthrose lâche complète, impotence fonctionnelle quasi-totale, membre inutilisable, fauteuil roulant nécessaire pour déplacements longs."
+              }
+            },
             { name: "Fracture du col du fémur - Bonne consolidation", rate: [5, 15], rateCriteria: { low: "Consolidation anatomique, mobilité conservée, limitation minime.", high: "Légère raideur, gêne activités extrêmes (accroupissement)." } },
             { name: "Fracture du col du fémur - Consolidation avec raideur modérée", rate: [15, 30], rateCriteria: { low: "Raideur modérée, mobilité fonctionnelle conservée.", high: "Raideur marquée sans raccourcissement significatif." } },
             { name: "Fracture du col du fémur - Consolidation avec raccourcissement et raideur", rate: [30, 60], rateCriteria: { low: "Raccourcissement <3cm + raideur modérée.", high: "Raccourcissement >3cm + raideur importante + boiterie." } },
             { name: "Pseudarthrose du col du fémur", rate: [60, 80], rateCriteria: { low: "Pseudarthrose stable avec mobilité conservée, douleurs modérées.", high: "Pseudarthrose instable avec raccourcissement >3cm, douleurs permanentes, impotence fonctionnelle majeure nécessitant canne." } },
+        ]
+      },
+      {
+        name: "Hanche - Fractures du Massif Trochantérien",
+        injuries: [
             { name: "Fracture du massif trochantérien - Bonne consolidation", rate: [5, 10], rateCriteria: { low: "Consolidation anatomique sans séquelle, gêne minime.", high: "Consolidation avec légère raideur et douleurs mécaniques." } },
             { name: "Fracture du massif trochantérien - Cal vicieux et raideur", rate: [20, 40], rateCriteria: { low: "Cal vicieux avec raideur modérée de hanche, boiterie discrète.", medium: "Cal vicieux important avec limitation flexion/abduction 50%, douleurs fréquentes.", high: "Cal vicieux majeur avec raccourcissement >2cm, quasi-ankylose, boiterie permanente nécessitant canne." } },
         ]
@@ -1833,21 +2130,91 @@ const middleCategories: InjuryCategory[] = [
       {
         name: "Hanche - Raideurs et Ankyloses",
         injuries: [
+            { 
+              name: "Ankylose complète hanche en rectitude (position favorable)", 
+              rate: [50, 55],
+              description: "Ankylose de la hanche en bonne position (rectitude ou légère flexion). Pour la marche et station debout, immobilisation hanche en bonne position n'entraîne pas infirmité supérieure à ankylose genou. Barème officiel : 50-55%.",
+              rateCriteria: {
+                low: "Ankylose en position optimale (extension complète, rotation neutre), marche satisfaisante, autonomie complète.",
+                high: "Ankylose en position acceptable mais sous-optimale (légère flexion ou rotation), compensation rachis/genou, marche avec aide occasionnelle."
+              }
+            },
+            { 
+              name: "Ankylose complète hanche en mauvaise position (flexion, adduction, abduction, rotation)", 
+              rate: [65, 70],
+              description: "Ankylose de la hanche en attitude défavorable : flexion importante, adduction, abduction excessive, ou rotation pathologique. Retentissement majeur sur la marche. Barème officiel : 65-70%.",
+              rateCriteria: {
+                low: "Mauvaise position modérée (flexion 30°), compensation possible, marche avec canne.",
+                high: "Mauvaise position sévère (flexion >45° ou adduction majeure), quasi-impotence fonctionnelle, marche très difficile, béquilles nécessaires."
+              }
+            },
+            { 
+              name: "Ankylose des deux hanches", 
+              rate: [90, 100],
+              description: "Ankylose bilatérale des hanches. Incapacité quasi-totale. Barème officiel : 90-100%.",
+              rateCriteria: {
+                low: "Ankyloses bilatérales en position acceptable, déplacements limités avec aide technique importante.",
+                high: "Ankyloses bilatérales en mauvaise position, incapacité totale, fauteuil roulant permanent."
+              }
+            },
+            { 
+              name: "Hanche ballante (pseudarthrose hanche)", 
+              rate: [75, 80],
+              description: "Pseudarthrose de la hanche avec mobilité anormale, instabilité majeure, hanche instable et ballante. Barème officiel : 75-80%."
+            },
+            { 
+              name: "Désarticulation de la hanche (exarticulation coxo-fémorale)", 
+              rate: 95,
+              description: "Désarticulation complète de la hanche, ablation de la tête et du col fémoraux. Barème officiel : 95%."
+            },
+            { 
+              name: "Amputation inter-ilio-abdominale (hémipelvectomie)", 
+              rate: 100,
+              description: "Désarticulation inter-ilio-abdominale, amputation incluant une partie du bassin. Incapacité totale permanente. Barème officiel : 100%."
+            },
             { name: "Ankylose complète de la hanche", rate: [50, 70], rateCriteria: { low: "Ankylose en position de fonction (flexion 20°, abduction/rotation neutre).", high: "Ankylose en mauvaise position (adduction, rotation externe)." } },
             { name: "Raideur de la hanche", rate: [10, 40], rateCriteria: { low: "Limitation des amplitudes extrêmes.", high: "Quasi-ankylose avec boiterie importante." } },
-            { name: "Prothèse totale de hanche", rate: 28 },  // Entrée générique pour PTH
+            { name: "Prothèse totale de hanche", rate: 28 },
             { name: "Séquelles de prothèse totale de hanche", rate: [15, 40], rateCriteria: { low: "Prothèse bien intégrée, indolore, mobilité fonctionnelle.", high: "Douleurs, boiterie, descellement, luxations récidivantes." } },
-            { name: "Arthrose post-traumatique de la hanche", rate: 25 },  // Entrée générique pour coxarthrose sévère
+            { name: "Arthrose post-traumatique de la hanche", rate: 25 },
             { name: "Coxarthrie post-traumatique", rate: [15, 40], rateCriteria: { low: "Pincement articulaire modéré, douleurs mécaniques.", high: "Arthrose sévère avec destruction de l'interligne et ankylose." } },
         ]
       },
       {
-        name: "Cuisse - Fractures",
+        name: "Cuisse - Fractures du Fémur (Détails par Âge)",
         injuries: [
+            { 
+              name: "Fracture diaphysaire fémur - Ouvrier jeune, sans séquelles graves, raccourcissement ≤4cm", 
+              rate: 10,
+              description: "Fracture diaphysaire du fémur chez ouvrier jeune, consolidation satisfaisante sans séquelles graves, raccourcissement ne dépassant pas 4 centimètres. Barème officiel : 10%."
+            },
+            { 
+              name: "Fracture diaphysaire fémur - Ouvrier 40-45 ans, cal moyen, atrophie, raccourcissement ≤4cm", 
+              rate: 20,
+              description: "Fracture diaphysaire fémur chez ouvrier âgé de 40-45 ans, avec cal laissant un peu à désirer, douleurs, atrophie musculaire, raccourcissement ne dépassant pas 4 centimètres. Barème officiel : 20%."
+            },
+            { 
+              name: "Fracture diaphysaire fémur - Ouvrier >50 ans, raideurs, amyotrophie, raccourcissement 9-10cm", 
+              rate: 65,
+              description: "Fracture diaphysaire fémur chez ouvrier ayant dépassé la cinquantaine, raideurs articulaires, amyotrophie prononcée, faiblesse membre inférieur, cal difforme avec angulation, raccourcissement entre 9 et 10 centimètres (cas graves). Barème officiel : 65%."
+            },
+            { 
+              name: "Cal vicieux consolidant en crosse fracture sous-trochantérienne, grand raccourcissement, douleurs", 
+              rate: [65, 70],
+              description: "Cal vicieux important consolidant en crosse une fracture sous-trochantérienne, accompagné de grand raccourcissement et de douleurs. Barème officiel : 65-70%."
+            },
             { name: "Fracture diaphysaire du fémur", rate: [10, 30], description: "Séquelles d'une fracture de la diaphyse fémorale.", rateCriteria: { low: "Consolidation sans séquelle majeure, gêne discrète.", medium: "Cal vicieux avec raccourcissement < 2cm et/ou raideur modérée du genou/hanche.", high: "Cal vicieux important avec boiterie, raideur et/ou troubles neurologiques." } },
             { name: "Fracture de la diaphyse fémorale - Avec cal vicieux", description: "Cal vicieux modéré avec raccourcissement 2-3cm et boiterie.", rate: 22 },
             { name: "Fracture de l'extrémité inférieure du fémur - Avec raideur du genou", rate: [15, 30], rateCriteria: { low: "Raideur légère genou (flexion >100°), douleurs mécaniques.", medium: "Raideur modérée (flexion 60-100°), douleurs fréquentes.", high: "Raideur sévère (flexion <60°), cal vicieux articulaire, arthrose débutante." } },
-            { name: "Pseudarthrose du fémur", rate: [60, 80], rateCriteria: { low: "Pseudarthrose stable du tiers moyen, mobilité conservée hanche/genou, douleurs modérées.", high: "Pseudarthrose instable avec raccourcissement majeur >5cm, quasi-impotence fonctionnelle, nécessité 2 cannes ou fauteuil." } },
+            { 
+              name: "Pseudarthrose du fémur", 
+              rate: [60, 70],
+              description: "Pseudarthrose de la diaphyse fémorale. Barème officiel : 60-70%.",
+              rateCriteria: { 
+                low: "Pseudarthrose stable du tiers moyen, mobilité conservée hanche/genou, douleurs modérées, marche avec canne.", 
+                high: "Pseudarthrose instable avec raccourcissement majeur >5cm, quasi-impotence fonctionnelle, nécessité 2 cannes ou fauteuil." 
+              }
+            },
         ]
       },
       {
@@ -1881,15 +2248,123 @@ const middleCategories: InjuryCategory[] = [
         ]
       },
       {
-        name: "Genou - Raideurs et Ankyloses",
+        name: "Genou - Ankyloses Complètes (Détails par Angle de Flexion)",
         injuries: [
+            { 
+              name: "Ankylose genou en extension complète (180°) ou quasi-complète (jusqu'à 135° = flexion 45°)", 
+              rate: [30, 35],
+              description: "Ankylose du genou en position favorable : rectitude (180°) ou légère flexion (jusqu'à 135° soit 45° de flexion). Position la plus favorable pour la marche et station debout. Barème officiel : 30-35%. Note : Pour la marche et station debout, ankylose genou en bonne position n'entraîne pas infirmité supérieure à ankylose hanche en bonne position.",
+              rateCriteria: {
+                low: "Ankylose en extension complète (180°), marche satisfaisante, autonomie complète, compensation possible.",
+                high: "Ankylose avec légère flexion (135°-170°), marche avec compensation, aide occasionnelle."
+              }
+            },
+            { 
+              name: "Ankylose genou avec flexion 30° (angle 150°)", 
+              rate: 40,
+              description: "Ankylose du genou avec 30° de flexion. Barème officiel : ajouter 5% par rapport à l'extension complète = 35% + 5% = 40%."
+            },
+            { 
+              name: "Ankylose genou avec flexion 45° (angle 135°)", 
+              rate: 45,
+              description: "Ankylose du genou avec 45° de flexion. Barème officiel : ajouter 10% par rapport à l'extension complète = 35% + 10% = 45%."
+            },
+            { 
+              name: "Ankylose genou avec flexion 60° (angle 120°)", 
+              rate: 50,
+              description: "Ankylose du genou avec 60° de flexion. Barème officiel : ajouter 15% par rapport à l'extension complète = 35% + 15% = 50%."
+            },
+            { 
+              name: "Ankylose genou avec flexion 75° (angle 105°)", 
+              rate: 55,
+              description: "Ankylose du genou avec 75° de flexion. Barème officiel : ajouter 20% par rapport à l'extension complète = 35% + 20% = 55%."
+            },
+            { 
+              name: "Ankylose genou en flexion (de 45° à 150° de flexion) - Position défavorable", 
+              rate: [45, 60],
+              description: "Ankylose du genou en position défavorable : flexion importante de 45° (angle 135°) à 150° (angle 30°). Taux maximum : 60%. Barème officiel : Au-delà de 20° de flexion, ajouter 5% par quinze degrés de flexion en sus. Si déviation varus ou valgus associée : ajouter 5% en sus.",
+              rateCriteria: {
+                low: "Flexion 45-60°, marche avec aide technique (canne), périmètre limité >500m.",
+                high: "Flexion >90°, marche très difficile, béquilles ou fauteuil nécessaire, quasi-impotence fonctionnelle."
+              }
+            },
             { name: "Ankylose du genou", rate: [30, 50], rateCriteria: { low: "Ankylose en extension complète ou légère flexion.", high: "Ankylose en flexion > 30°." } },
+        ]
+      },
+      {
+        name: "Genou - Cal Vicieux avec Ankylose et Déviation",
+        injuries: [
+            { 
+              name: "Genu valgum par cal vicieux ankylosé en extension (jambe oblique dehors)", 
+              rate: [50, 55],
+              description: "Cal vicieux de l'extrémité inférieure du fémur déterminant un genu valgum (jambe désaxée oblique de dedans en dehors) après ankylose en extension. Barème officiel : 50-55%."
+            },
+            { 
+              name: "Genu varum par cal vicieux ankylosé en extension (jambe oblique dedans)", 
+              rate: [50, 55],
+              description: "Cal vicieux de l'extrémité inférieure du fémur déterminant un genu varum (jambe désaxée oblique de dehors en dedans) après ankylose en extension. Barème officiel : 50-55%."
+            },
+            { 
+              name: "Déviation jambe en varus ou valgus (en sus d'une ankylose)", 
+              rate: 5,
+              description: "Majoration en cas de déviation de la jambe en varus ou en valgus, en sus du taux d'ankylose. Barème officiel : +5%."
+            },
+        ]
+      },
+      {
+        name: "Genou - Pseudarthrose",
+        injuries: [
+            { 
+              name: "Pseudarthrose après résection genou, raccourcissement <6cm, genou non ballant", 
+              rate: [50, 55],
+              description: "Pseudarthrose consécutive à une résection du genou. Si raccourcissement ne dépasse pas 6 centimètres et si genou n'est pas ballant. Barème officiel : 50-55%."
+            },
+            { 
+              name: "Pseudarthrose genou ballant", 
+              rate: [60, 65],
+              description: "Pseudarthrose du genou avec instabilité majeure (genou ballant), mobilité anormale. Barème officiel : 60-65%."
+            },
+            { 
+              name: "Désarticulation du genou", 
+              rate: [70, 75],
+              description: "Désarticulation complète du genou (exarticulation fémoro-tibiale). Barème officiel : 70-75%."
+            },
+        ]
+      },
+      {
+        name: "Genou - Raideurs",
+        injuries: [
+            { 
+              name: "Raideurs genou avec mouvements dans zone favorable (180°-135° soit flexion 0-45°)", 
+              rate: 15,
+              description: "Raideurs du genou avec mouvements se produisant dans la zone d'attitude favorable (180°-135° soit flexion 0-45°). Barème officiel : 15%."
+            },
+            { 
+              name: "Raideurs genou avec mouvements dans zone défavorable (135°-30° soit flexion 45°-150°)", 
+              rate: 30,
+              description: "Raideurs du genou avec mouvements se produisant dans la zone d'attitude défavorable (135°-30° soit flexion 45°-150°). Barème officiel : 30%."
+            },
             { name: "Raideur du genou", rate: [5, 25], rateCriteria: { low: "Flexion limitée à 90°.", high: "Flexion < 45° et/ou flessum important." } },
         ]
       },
       {
-        name: "Jambe - Fractures",
+        name: "Jambe - Fractures (Détails par Âge)",
         injuries: [
+            { 
+              name: "Fracture diaphysaire jambe sujet jeune (travailleur manuel)", 
+              rate: 12,
+              description: "Fracture consolidée de la diaphyse tibiale chez sujet jeune, travailleur manuel, avec bonne consolidation. Barème officiel : 12%."
+            },
+            { 
+              name: "Fracture jambe sujet 40-50 ans avec atrophie et troubles trophiques", 
+              rate: 25,
+              description: "Fracture de la jambe chez sujet âgé de 40-50 ans avec atrophie musculaire du mollet, troubles trophiques modérés. Barème officiel : 25%."
+            },
+            { 
+              name: "Fracture jambe sujet âgé avec cal vicieux, troubles trophiques sévères", 
+              rate: 40,
+              description: "Fracture de la jambe chez sujet âgé avec cal vicieux important et troubles trophiques sévères (œdème chronique, varices, ulcères). Barème officiel : 40%."
+            },
             { name: "Fracture des deux os de la jambe - Bonne consolidation", rate: [5, 10], rateCriteria: { low: "Consolidation anatomique sans cal vicieux, gêne minime.", medium: "Légère atrophie mollet, douleurs mécaniques occasionnelles.", high: "Consolidation avec cal palpable, raideur cheville modérée, douleurs à la marche prolongée." } },
             { name: "Fracture des deux os de la jambe - Avec cal vicieux et troubles trophiques", rate: [15, 40], rateCriteria: { low: "Cal vicieux angulaire <10°, troubles trophiques modérés (œdème discret).", medium: "Cal vicieux 10-20°, troubles trophiques nets (œdème chronique, peau fragile), boiterie.", high: "Cal vicieux >20° avec déviation majeure, troubles trophiques sévères (ulcères récidivants, varices), raideur cheville, périmètre marche limité <500m." } },
             { name: "Fracture isolée du tibia", rate: [5, 20], rateCriteria: { low: "Fracture consolidée sans séquelle, gêne minime.", medium: "Cal vicieux tibia, douleurs mécaniques, léger œdème.", high: "Cal vicieux angulaire tibia, raideur cheville, troubles trophiques, boiterie." } },
@@ -1939,6 +2414,43 @@ const middleCategories: InjuryCategory[] = [
         injuries: [
             { name: "Ankylose d'une articulation du tarse", rate: [10, 20], rateCriteria: { low: "Ankylose sous-astragalienne, adaptation possible, boiterie discrète.", medium: "Ankylose médio-tarsienne avec raideur globale arrière-pied.", high: "Ankyloses multiples tarse, pied rigide, troubles statiques, boiterie majeure." } },
             { name: "Pied plat ou pied creux post-traumatique", rate: [5, 20], rateCriteria: { low: "Déformation modérée, douleurs mécaniques, correction semelles efficace.", medium: "Déformation importante, métatarsalgies/talalgies fréquentes, chaussage orthopédique.", high: "Déformation sévère irréductible, troubles statiques majeurs, douleurs permanentes, périmètre marche très limité." } },
+        ]
+      },
+      {
+        name: "Pied et Cheville - Lésions Spécifiques",
+        injuries: [
+            { 
+              name: "Diastasis tibio-fibulaire (désunion tibia-péroné)", 
+              rate: 12,
+              description: "Diastasis tibio-fibulaire : désunion de l'articulation entre le tibia et le péroné (fibula) à la cheville, entraînant instabilité et douleurs. Barème officiel : 12%."
+            },
+            { 
+              name: "Astragalectomie (résection de l'astragale)", 
+              rate: [25, 30],
+              description: "Astragalectomie : ablation chirurgicale de l'astragale (talus), os essentiel de la cheville, entraînant perte majeure de mobilité et boiterie importante. Barème officiel : 25-30%.",
+              rateCriteria: {
+                low: "Astragalectomie avec arthrodèse stable, appareillage efficace, marche possible > 500m.",
+                high: "Astragalectomie avec instabilité persistante, douleurs permanentes, marche < 200m, nécessité canne permanente."
+              }
+            },
+            { 
+              name: "Pied bot traumatique (varus équin acquis)", 
+              rate: [15, 25],
+              description: "Pied bot traumatique : déformation en varus équin du pied d'origine traumatique, limitant l'appui et la marche. Barème officiel : 15-25%.",
+              rateCriteria: {
+                low: "Pied bot modéré, partiellement réductible, chaussage orthopédique possible, boiterie modérée.",
+                high: "Pied bot sévère irréductible, appui très limité, chaussage très difficile, marche < 200m avec aide."
+              }
+            },
+            { 
+              name: "Exostose douloureuse du pied (séquelle de fracture)", 
+              rate: [15, 25],
+              description: "Exostose douloureuse du pied : saillie osseuse post-traumatique provoquant douleurs à l'appui et au chaussage. Barème officiel : 15-25%.",
+              rateCriteria: {
+                low: "Exostose localisée, douleurs à l'appui prolongé, chaussage adapté possible.",
+                high: "Exostoses multiples, douleurs permanentes, chaussage très difficile, limitation sévère de la marche."
+              }
+            },
         ]
       },
       {
@@ -2004,9 +2516,96 @@ const middleCategories: InjuryCategory[] = [
         ]
       },
       {
+        name: "Membre Inférieur - Raccourcissement (Détails Précis)",
+        injuries: [
+            { 
+              name: "Raccourcissement membre inférieur : 2 cm ou 3 cm", 
+              rate: 4,
+              description: "Raccourcissement du membre inférieur de 2 à 3 centimètres. Barème officiel : 4%."
+            },
+            { 
+              name: "Raccourcissement membre inférieur : 4 cm", 
+              rate: 9,
+              description: "Raccourcissement du membre inférieur de 4 centimètres. Barème officiel : 9%."
+            },
+            { 
+              name: "Raccourcissement membre inférieur : 5 cm", 
+              rate: 15,
+              description: "Raccourcissement du membre inférieur de 5 centimètres. Barème officiel : 15%."
+            },
+            { 
+              name: "Raccourcissement membre inférieur : 6 cm", 
+              rate: 18,
+              description: "Raccourcissement du membre inférieur de 6 centimètres. Barème officiel : 18%."
+            },
+            { 
+              name: "Raccourcissement membre inférieur : 7 cm", 
+              rate: 21,
+              description: "Raccourcissement du membre inférieur de 7 centimètres. Barème officiel : 21%."
+            },
+            { 
+              name: "Raccourcissement membre inférieur : 8 cm", 
+              rate: 24,
+              description: "Raccourcissement du membre inférieur de 8 centimètres. Barème officiel : 24%."
+            },
+            { 
+              name: "Raccourcissement membre inférieur : 9 cm", 
+              rate: 28,
+              description: "Raccourcissement du membre inférieur de 9 centimètres. Barème officiel : 28%."
+            },
+            { 
+              name: "Raccourcissement membre inférieur : 10 cm", 
+              rate: 30,
+              description: "Raccourcissement du membre inférieur de 10 centimètres. Barème officiel : 30%."
+            },
+            { name: "Raccourcissement d'un membre inférieur", rate: [5, 25], rateCriteria: { low: "Raccourcissement de 1 à 2 cm.", high: "Raccourcissement > 4 cm." } },
+        ]
+      },
+      {
+        name: "Membre Inférieur - Lésions Tendineuses et Musculaires",
+        injuries: [
+            { 
+              name: "Luxation tendons péroniers (tendons fibulaires) non opérée", 
+              rate: [5, 10],
+              description: "Luxation des tendons péroniers (fibulaires) latéraux non opérée avec instabilité et douleurs lors des mouvements de la cheville. Barème officiel : 5-10% si douleur continue.",
+              rateCriteria: {
+                low: "Luxation occasionnelle, gêne modérée à l'activité sportive, douleurs intermittentes.",
+                high: "Luxation répétée à chaque mouvement, douleurs continues, limitation marche et activités."
+              }
+            },
+            { 
+              name: "Luxation tendons péroniers (tendons fibulaires) opérée", 
+              rate: [0, 5],
+              description: "Luxation des tendons péroniers (fibulaires) après traitement chirurgical de stabilisation. Barème officiel : 0-5%.",
+              rateCriteria: {
+                low: "Stabilisation réussie, pas de luxation résiduelle, gêne minime.",
+                high: "Stabilisation partielle, luxation occasionnelle résiduelle, douleurs mécaniques."
+              }
+            },
+            { 
+              name: "Rupture complète tendons péroniers (péronier latéral long et/ou court)", 
+              rate: [10, 20],
+              description: "Rupture complète d'un ou des deux tendons péroniers (fibulaires) latéraux avec déficit de l'éversion du pied et instabilité. Barème officiel : 10-20%.",
+              rateCriteria: {
+                low: "Rupture d'un seul tendon (long ou court), gêne modérée, compensation possible.",
+                high: "Rupture des deux tendons, déficit majeur de l'éversion, instabilité cheville, marche sur terrain inégal très difficile."
+              }
+            },
+            { 
+              name: "Rupture tendon d'Achille avec séquelles", 
+              rate: [10, 25],
+              description: "Rupture du tendon d'Achille (calcanéen) avec séquelles fonctionnelles malgré traitement (chirurgical ou orthopédique).",
+              rateCriteria: {
+                low: "Réparation satisfaisante, légère perte de force plantaire, course impossible mais marche normale.",
+                medium: "Allongement tendineux avec boiterie, marche sur pointe impossible, escaliers difficiles.",
+                high: "Allongement majeur ou re-rupture, déficit force plantaire sévère, boiterie permanente, marche limitée."
+              }
+            },
+        ]
+      },
+      {
         name: "Membre Inférieur - Lésions Diverses",
         injuries: [
-            { name: "Raccourcissement d'un membre inférieur", rate: [5, 25], rateCriteria: { low: "Raccourcissement de 1 à 2 cm.", high: "Raccourcissement > 4 cm." } },
             { name: "Troubles trophiques, œdème chronique, varices", rate: [5, 20] },
             { name: "Boiterie (sans raccourcissement)", rate: [5, 15] },
         ]
