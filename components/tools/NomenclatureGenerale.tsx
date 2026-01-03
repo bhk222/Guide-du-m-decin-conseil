@@ -71,6 +71,7 @@ export const NomenclatureGenerale: React.FC = () => {
                 'diabete': ['glucose', 'sucre', 'hyperglycémie', 'glycosylée'],
                 'hba1c': ['hémoglobine glycosylée', 'hemoglobine glycosylee'],
                 'hemoglobine glycosylee': ['glycosylée'],
+                'tsh': ['thyréostim', 'thyreostim', 'hormone thyroïdienne'],
                 'téléthorax': ['thorax', 'gril costal', 'sternum', 'hémithorax', 'poumon'],
                 'telethorax': ['thorax', 'gril costal', 'sternum', 'hémithorax', 'poumon'],
                 'radio thorax': ['thorax', 'gril costal', 'sternum', 'hémithorax', 'poumon'],
@@ -88,7 +89,8 @@ export const NomenclatureGenerale: React.FC = () => {
                 }
             });
 
-            const queryWordsExpanded = queryExpanded.toLowerCase().split(/\s+/).filter(w => w.length > 2);
+            // Modifier le filtre pour accepter les codes de 2 lettres et plus (TSH, NFS, IRM, etc.)
+            const queryWordsExpanded = queryExpanded.toLowerCase().split(/\s+/).filter(w => w.length >= 2);
 
             // Détecter recherche par code lettre-clé (ex: "B 30", "E 15", "C 20")
             const codeMatch = query.match(/^([A-Z])\s*(\d+)$/i);
