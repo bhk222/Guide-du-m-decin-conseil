@@ -519,10 +519,13 @@ const middleCategories: InjuryCategory[] = [
         injuries: [
           { name: "Paraplégie incomplète", rate: [10, 80] },
           { name: "Paraplégie complète", rate: 100 },
+          { name: "Paraparésie", rate: [10, 60], description: "Déficit moteur partiel des deux membres inférieurs d'origine médullaire, moins sévère que la paraplégie. Marche possible mais difficile." },
           { name: "Tétraplégie incomplète (marche possible)", rate: [60, 90], description: "Atteinte médullaire des 4 membres avec déficit moteur incomplet permettant encore la marche. Aussi appelée quadriplégie." },
           { name: "Tétraplégie complète (confinement au lit)", rate: 100, description: "Atteinte médullaire complète des 4 membres avec paralysie totale nécessitant confinement au lit. Aussi appelée quadriplégie." },
+          { name: "Tétraparésie", rate: [30, 80], description: "Déficit moteur partiel des 4 membres d'origine médullaire, moins sévère que la tétraplégie. Aussi appelée quadriparésie. Faiblesse des membres supérieurs et inférieurs avec marche et préhension possibles mais difficiles." },
           { name: "Quadriplégie incomplète (marche possible)", rate: [60, 90] },
           { name: "Quadriplégie complète (confinement au lit)", rate: 100 },
+          { name: "Quadriparésie", rate: [30, 80], description: "Synonyme de tétraparésie. Déficit moteur partiel des 4 membres." },
           { name: "Syndrome de Brown-Séquard", rate: [10, 50] },
           { name: "Hémiplégie médullaire incomplète (Côté Droit)", rate: [10, 80] },
           { name: "Hémiplégie médullaire incomplète (Côté Gauche)", rate: [10, 75] },
