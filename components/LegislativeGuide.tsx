@@ -204,9 +204,9 @@ L'expert doit valider la **pertinence et la nécessité des soins** prescrits pa
 
 ## 1. Le Rejet Administratif de la Rechute
 
-Ce rejet signifie que votre demande est **irrecevable pour des raisons de délais ou de procédure**, avant même l'examen médical. Il est basé sur l'**Article 59**.
+Ce rejet signifie que votre demande est **irrecevable pour des raisons de délais ou de procédure**, avant même l'examen médical. Il est basé sur l'**Article 59 de la Loi 83-13** relative aux accidents du travail et aux maladies professionnelles.
 
-**L'Article de référence :** Article 59.
+**L'Article de référence :** Article 59 de la Loi 83-13.
 
 **La Règle :** La loi impose des intervalles stricts pour demander une révision (rechute/aggravation) :
 - Durant les **2 premières années** après la guérison/consolidation : tous les **3 mois maximum**.
@@ -216,11 +216,11 @@ Ce rejet signifie que votre demande est **irrecevable pour des raisons de délai
 
 ## 2. Le Rejet Médical de la Rechute
 
-Ce rejet intervient après l'avis du Médecin Conseil. Il signifie que votre état de santé ne remplit pas les critères de la loi. Il se base sur les **Articles 58 et 62**.
+Ce rejet intervient après l'avis du Médecin Conseil. Il signifie que votre état de santé ne remplit pas les critères de la loi. Il se base sur les **Articles 58 et 62 de la Loi 83-13**.
 
 ### A. Motif : "État Stationnaire" (Pas de changement)
 
-**L'Article de référence :** Article 58.
+**L'Article de référence :** Article 58 de la Loi 83-13.
 
 **La Règle :** La révision (prise en charge de la rechute) est « limitée au cas de **modification effective** de l'état de la victime ».
 
@@ -228,7 +228,7 @@ Ce rejet intervient après l'avis du Médecin Conseil. Il signifie que votre ét
 
 ### B. Motif : "Soins non nécessaires"
 
-**L'Article de référence :** Article 62.
+**L'Article de référence :** Article 62 de la Loi 83-13.
 
 **La Règle :** La rechute doit entraîner « la **nécessité d'un traitement médical** ».
 
@@ -238,9 +238,9 @@ Ce rejet intervient après l'avis du Médecin Conseil. Il signifie que votre ét
 
 | Type de Rejet | Ce que dit la loi (Motif) | Article à citer |
 |---------------|---------------------------|-----------------|
-| **Administratif** | Vous n'avez pas respecté l'intervalle de temps (ex: 1 an) entre deux demandes. | Art. 59 |
-| **Médical** | Il n'y a pas de "modification effective" de votre état (c'est pareil qu'avant). | Art. 58 |
-| **Médical** | Votre état ne nécessite pas de "traitement médical" actif. | Art. 62 |`
+| **Administratif** | Vous n'avez pas respecté l'intervalle de temps (ex: 1 an) entre deux demandes. | Art. 59, Loi 83-13 |
+| **Médical** | Il n'y a pas de "modification effective" de votre état (c'est pareil qu'avant). | Art. 58, Loi 83-13 |
+| **Médical** | Votre état ne nécessite pas de "traitement médical" actif. | Art. 62, Loi 83-13 |`
         },
         recours_prealable_obligatoire: { keywords: ['recours prealable', 'obligatoire'], law: 'loi_08_08', article: 4 },
         composition_commission_invalidite: { keywords: ['composition', 'commission', 'invalidite'], law: 'loi_83_15', article: 32 },
