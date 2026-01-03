@@ -89,9 +89,13 @@ const middleCategories: InjuryCategory[] = [
       {
         name: "Syndromes Neurologiques Spécifiques",
         injuries: [
-          { name: "Syndrome Cérébelleux Unilatéral (Côté Droit)", rate: [10, 80] },
-          { name: "Syndrome Cérébelleux Unilatéral (Côté Gauche)", rate: [10, 75] },
-          { name: "Syndrome Cérébelleux Bilatéral", rate: [30, 100] },
+          { name: "Syndrome Cérébelleux", rate: [10, 100], description: "Séquelles cérébelleuses des traumatismes crâniens, relativement rares à l'état pur. Généralement associées à d'autres séquelles, surtout pyramidales. Voir formes spécifiques selon atteinte." },
+          { name: "Syndrome Cérébelleux Global", rate: 100, description: "Atteinte cérébelleuse globale comportant troubles statiques (impossibilité de la marche) et troubles kinétiques (dysmétrie et incoordination bilatérale)." },
+          { name: "Syndrome Cérébelleux Bilatéral Incomplet", rate: [50, 75], description: "Atteinte bilatérale incomplète permettant une marche imparfaite et des mouvements maladroits, mais susceptibles de rendre service au blessé." },
+          { name: "Syndrome Cérébelleux Léger", rate: [25, 50], description: "Atteinte légère avec maladresse des mouvements. Taux majoré s'il y a gêne professionnelle considérable, surtout pour activité professionnelle de précision antérieure.", rateCriteria: { low: "Maladresse légère, pas de gêne professionnelle majeure, activité non spécialisée.", medium: "Maladresse modérée avec gêne professionnelle notable, nécessitant adaptation.", high: "Maladresse importante avec gêne professionnelle considérable, surtout si activité de précision avant traumatisme (chirurgien, horloger, musicien, etc.)." } },
+          { name: "Syndrome Cérébelleux Unilatéral (Côté Droit/Dominant)", rate: [10, 80], description: "Atteinte unilatérale du côté droit ou côté dominant. Taux selon importance de la maladresse des mouvements." },
+          { name: "Syndrome Cérébelleux Unilatéral (Côté Gauche/Non Dominant)", rate: [10, 75], description: "Atteinte unilatérale du côté gauche ou côté non dominant. Taux selon importance de la maladresse des mouvements." },
+          { name: "Syndrome Cérébelleux Bilatéral", rate: [25, 100], description: "Terme générique. Voir formes spécifiques: global (100%), bilatéral incomplet (50-75%), ou léger (25-50%)." },
           { name: "Syndrome de Parkinson Post-Traumatique", rate: [10, 100] },
           { name: "Mouvements anormaux post-traumatiques (dystonie, chorée, tremblements)", rate: [15, 60], description: "Apparition de mouvements involontaires (postures anormales, tremblements de repos ou d'action, mouvements brusques) après un traumatisme crânien ou périphérique.", rateCriteria: { low: "Mouvements discrets, intermittents, n'entraînant qu'une gêne mineure dans les activités.", medium: "Mouvements modérés et fréquents, contrôlés partiellement par le traitement, avec un retentissement sur les gestes fins ou la marche.", high: "Mouvements invalidants, permanents, rebelles au traitement, avec un retentissement majeur sur l'autonomie." } },
           { name: "Torticolis d'origine neurologique centrale (dystonie cervicale)", rate: [8, 15], description: "Torticolis d'origine neurologique centrale (lésion des noyaux gris centraux) après traumatisme crânien, avec contracture permanente des muscles cervicaux." },
