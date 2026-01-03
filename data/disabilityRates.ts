@@ -519,6 +519,8 @@ const middleCategories: InjuryCategory[] = [
         injuries: [
           { name: "Paraplégie incomplète", rate: [10, 80] },
           { name: "Paraplégie complète", rate: 100 },
+          { name: "Tétraplégie incomplète (marche possible)", rate: [60, 90], description: "Atteinte médullaire des 4 membres avec déficit moteur incomplet permettant encore la marche. Aussi appelée quadriplégie." },
+          { name: "Tétraplégie complète (confinement au lit)", rate: 100, description: "Atteinte médullaire complète des 4 membres avec paralysie totale nécessitant confinement au lit. Aussi appelée quadriplégie." },
           { name: "Quadriplégie incomplète (marche possible)", rate: [60, 90] },
           { name: "Quadriplégie complète (confinement au lit)", rate: 100 },
           { name: "Syndrome de Brown-Séquard", rate: [10, 50] },
