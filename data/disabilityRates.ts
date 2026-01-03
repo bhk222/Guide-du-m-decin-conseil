@@ -517,6 +517,7 @@ const middleCategories: InjuryCategory[] = [
       {
         name: "Troubles Nerveux d'Origine Médullaire",
         injuries: [
+          { name: "Paraplégie", rate: [10, 100], description: "Paralysie des deux membres inférieurs d'origine médullaire. Voir les formes spécifiques: paraplégie incomplète (10-80%) ou complète (100%)." },
           { name: "Paraplégie incomplète", rate: [10, 80] },
           { name: "Paraplégie complète", rate: 100 },
           { name: "Paraparésie", rate: [10, 60], description: "Déficit moteur partiel des deux membres inférieurs d'origine médullaire, moins sévère que la paraplégie. Marche possible mais difficile." },
