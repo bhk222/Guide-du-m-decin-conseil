@@ -2687,33 +2687,10 @@ const middleCategories: InjuryCategory[] = [
   },
 ];
 
-// ========================================
-// CAS COMPLEXES ET CUMULS SPÉCIFIQUES  
-// ========================================
-
-const casComplexes: InjuryCategory = {
-  name: "Cas Complexes et Cumuls",
-  subcategories: [
-    {
-      name: "Cumuls Multiples - Membres",
-      injuries: [
-        { name: "Séquelles multiples membres (cumul)", rate: 30 },
-      ]
-    },
-    {
-      name: "Cumuls Multiples - Mixtes",
-      injuries: [
-        { name: "Séquelles multiples (neurologique + ortho)", rate: 12 },
-      ]
-    }
-  ]
-};
-
 // Fusionner toutes les catégories (barème algérien + middleCategories + complément)
 // La fonction mergeCategories va automatiquement fusionner les catégories portant le même nom
 export const disabilityData: InjuryCategory[] = mergeCategories([
   ...algerianBareme1967,
   ...middleCategories,
   ...mayetReyComplement,
-  casComplexes,
 ]);
