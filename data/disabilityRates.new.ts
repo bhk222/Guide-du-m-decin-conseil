@@ -2498,7 +2498,7 @@ export const disabilityData: InjuryCategory[] = [
       {
         name: "Cumuls Simples - Même Membre",
         injuries: [
-          { name: "Raideur genou + instabilité LCA (cumul)", rate: [25, 35], description: "Cumul d'une raideur du genou avec séquelles de rupture du LCA." },
+          { name: "Raideur genou + instabilité LCA (cumul)", searchTerms: ["raideur genou instabilité lca", "genou raideur lca instabilité", "lca genou raideur", "instabilité lca genou"], rate: [25, 35], description: "Cumul d'une raideur du genou avec séquelles de rupture du LCA." },
           { name: "Raideur cheville + séquelles fracture (cumul)", rate: [20, 30], description: "Cumul d'une raideur de cheville avec séquelles de fracture malléolaire ou bimalléolaire." },
           { name: "Raideur épaule + rupture coiffe (cumul)", rate: [28, 40], description: "Cumul d'une raideur d'épaule avec rupture de la coiffe des rotateurs." },
           { name: "Raideur poignet + fracture scaphoïde (cumul)", rate: [15, 25], description: "Cumul d'une raideur du poignet avec séquelles de fracture du scaphoïde." },
@@ -2675,10 +2675,14 @@ export const disabilityData: InjuryCategory[] = [
   
             } 
   
-          },
+          }
   
         ]
   
-      },
+      }
+  
+    ]
+  
+  }
 
 ];

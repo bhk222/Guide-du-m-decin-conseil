@@ -3,6 +3,7 @@ export interface Injury {
   name: string;
   rate: number | [number, number];
   description?: string;
+  searchTerms?: string[]; // V3.3.138: Termes de recherche pour améliorer le matching
   imageUrl?: string; // URL de l'image explicative médicale
   clinicalTip?: string; // Astuce pour l'examen clinique et l'orientation diagnostique
   rateCriteria?: {

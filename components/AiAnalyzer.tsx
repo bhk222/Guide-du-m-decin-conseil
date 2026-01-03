@@ -278,7 +278,7 @@ const medicalSynonyms: { [key: string]: string[] } = {
 const expandWithSynonyms = (text: string): string => {
   let expanded = text.toLowerCase();
   
-  // V3.3.128: Expansion SÉLECTIVE - ajouter max 3 synonymes par terme trouvé
+  // V3.3.128: Expansion SÉLECTIVE - ajouter max 3 synonymes par terme trouvé  
   Object.entries(medicalSynonyms).forEach(([key, synonyms]) => {
     synonyms.forEach(synonym => {
       if (expanded.includes(synonym)) {
@@ -1558,7 +1558,9 @@ const extractArticularAndOccupational = (text: string): {
 
 const createSearchableString = (cat: InjuryCategory, sub: InjurySubcategory, inj: Injury): string => {
     const criteriaText = inj.rateCriteria ? `${inj.rateCriteria.low} ${inj.rateCriteria.medium || ''} ${inj.rateCriteria.high}` : '';
-    return normalize(`${cat.name} ${sub.name} ${inj.name} ${inj.description || ''} ${criteriaText}`);
+    // V3.3.138: Inclure searchTerms pour améliorer le matching (272+ nouvelles entrées)
+    const searchTermsText = inj.searchTerms ? inj.searchTerms.join(' ') : '';
+    return normalize(`${cat.name} ${sub.name} ${inj.name} ${inj.description || ''} ${criteriaText} ${searchTermsText}`);
 };
 
 const getBonesFromString = (normalizedText: string): Set<string> => {
@@ -11050,3 +11052,4 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
 
     return result;
 };
+
