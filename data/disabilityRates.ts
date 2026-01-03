@@ -616,12 +616,12 @@ const middleCategories: InjuryCategory[] = [
         injuries: [
           { 
               name: "Paralysie complète du plexus brachial (droite)", 
-              rate: [70, 80],
+              rate: [60, 70],
               description: "Atteinte complète du plexus brachial, paralysie totale du membre supérieur droit avec troubles sensitifs et douleurs neuropathiques."
           },
           { 
               name: "Paralysie complète du plexus brachial (gauche)", 
-              rate: [60, 70],
+              rate: [50, 60],
               description: "Atteinte complète du plexus brachial, paralysie totale du membre supérieur gauche avec troubles sensitifs et douleurs neuropathiques."
           },
           { name: "Paralysie totale du membre supérieur (droite)", rate: [70, 80] },
