@@ -54,12 +54,6 @@ const medicalSynonyms: { [key: string]: string[] } = {
   amputation: ['amputation', 'ablation', 'perte', 'section', 'désarticulation', 'mutilation', 'coupé', 'enlevé', 'retiré', 'exérèse'],
   moignon: ['moignon', 'bout', 'trognon', 'chicot', 'reste'],
   niveaux_amp: ['tiers supérieur', 'tiers moyen', 'tiers inférieur', '1/3 sup', '1/3 moy', '1/3 inf'],
-  desart_poignet: ['désarticulation poignet', 'amputation poignet', 'perte main niveau poignet', 'desart poignet', 'désarticulation du poignet', 'amputation main', 'perte main'],
-  desart_coude: ['désarticulation coude', 'amputation coude', 'perte avant-bras niveau coude', 'desart coude', 'désarticulation du coude', 'amputation avant-bras au coude'],
-  desart_epaule: ['désarticulation épaule', 'amputation épaule', 'perte bras niveau épaule', 'desart épaule', 'désarticulation de l\'épaule', 'amputation bras épaule'],
-  desart_cheville: ['désarticulation cheville', 'amputation cheville', 'Syme', 'perte pied niveau cheville', 'desart cheville', 'désarticulation de la cheville', 'amputation pied cheville', 'amputation type Syme'],
-  desart_genou: ['désarticulation genou', 'amputation genou', 'perte jambe niveau genou', 'desart genou', 'désarticulation du genou', 'amputation jambe au genou'],
-  desart_hanche: ['désarticulation hanche', 'amputation hanche', 'perte membre inférieur niveau hanche', 'desart hanche', 'désarticulation de la hanche', 'amputation membre inférieur hanche', 'hémipelvectomie'],
   transtibial: ['transtibial', 'amputation jambe', 'BK', 'below knee', 'sous genou', 'amputation tiers inférieur jambe', 'amputation tiers moyen jambe', 'amputation jambe tiers', 'jambe amputée'],
   transfemoral: ['transfémoral', 'amputation cuisse', 'AK', 'above knee', 'au-dessus genou', 'amputation tiers moyen cuisse', 'amputation tiers supérieur cuisse', 'amputation cuisse tiers', 'cuisse amputée'],
   transradial: ['transradial', 'amputation avant-bras', 'BE', 'below elbow', 'amputation avant-bras tiers moyen', 'amputation tiers moyen avant-bras', 'avant-bras amputé'],
@@ -73,10 +67,7 @@ const medicalSynonyms: { [key: string]: string[] } = {
   pseudarthrose: ['pseudarthrose', 'fausse articulation', 'non-consolidation', 'absence de consolidation'],
   arthrose: ['arthrose', 'arthropathie', 'dégénérescence articulaire', 'usure articulaire'],
   
-  // Anatomie membre supérieur
-  epaule: ['épaule', 'scapulo-humérale', 'gleno-humerale', 'articulation de l\'épaule', 'épaule droite', 'épaule gauche', 'scapulo humérale', 'gléno-humérale', 'gléno humérale', 'articulation gleno-humerale', 'raideur épaule', 'limitation épaule', 'abduction épaule', 'rotation épaule', 'élévation épaule'],
-  coude: ['coude', 'cubital', 'huméro-cubital', 'olécrane', 'articulation du coude', 'coude droit', 'coude gauche', 'huméro cubital', 'articulation huméro-cubitale', 'raideur coude', 'limitation coude', 'flexion coude', 'extension coude', 'pronosupination', 'prono-supination'],
-  poignet: ['poignet', 'radio-carpien', 'articulation du poignet', 'carpe', 'poignet droit', 'poignet gauche', 'radio carpien', 'raideur poignet', 'limitation poignet', 'flexion poignet', 'extension poignet', 'inclinaison poignet', 'mobilité poignet', 'poignet limité'],
+  // Anatomie membre supérieur (anciennes déclarations supprimées - versions enrichies V3.3.136 conservées plus bas)
   main: ['main', 'métacarpe', 'chirurgicale'],
   pouce: ['pouce', 'P1', 'D1', 'premier doigt', 'pollux', 'gros doigt', '1er doigt', 'doigt 1'],
   index: ['index', 'P2', 'D2', 'deuxième doigt', '2ème doigt', '2e doigt', 'doigt 2', 'indicateur'],
