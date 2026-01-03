@@ -1,7 +1,7 @@
-import { disabilityData } from '../data/disabilityRates';
+import { disabilityData } from '../data/disabilityRates.new';
 import { Injury, InjuryCategory, InjurySubcategory } from '../types';
 
-// Version: 3.3.124 - Système de synonymes avancé + Cumul logic
+// Version: 3.3.139 - SearchTerms matching + Cumul prioritaire (DB: .new avec catégorie Cumuls)
 // --- Types for Local Expert System ---
 export interface LocalProposal {
   type: 'proposal';
@@ -4191,6 +4191,38 @@ export const findCandidateInjuries = (text: string, externalKeywords?: string[])
                 currentScore += specificityBonus;
                 
                 // � VÉRIFICATION INCOMPATIBILITÉS ANATOMIQUES CRITIQUES
+                
+                // 🆕 V3.3.139: Bonus MASSIF pour correspondance searchTerms (cumuls prioritaires)
+                if (injury.searchTerms && injury.searchTerms.length > 0) {
+                    const userNormalized = normalize(normalizedText);
+                    const userWords = userNormalized.split(' ').filter(w => w.length > 2);
+                    
+                    let bestSimilarity = 0;
+                    injury.searchTerms.forEach(term => {
+                        const termNormalized = normalize(term);
+                        const termWords = termNormalized.split(' ').filter(w => w.length > 2);
+                        
+                        // Calculer le chevauchement de mots
+                        const overlap = userWords.filter(w => termWords.includes(w));
+                        const similarity = overlap.length / Math.max(userWords.length, termWords.length);
+                        
+                        if (similarity > bestSimilarity) {
+                            bestSimilarity = similarity;
+                        }
+                    });
+                    
+                    // Attribuer un bonus MASSIF pour prioriser les entrées avec searchTerms
+                    if (bestSimilarity >= 0.6) {
+                        // Haute similarité (60%+): bonus ÉNORME pour forcer le cumul
+                        currentScore += 5000;
+                    } else if (bestSimilarity >= 0.4) {
+                        // Similarité modérée (40-60%): bonus important
+                        currentScore += 2000;
+                    } else if (bestSimilarity >= 0.25) {
+                        // Chevauchement partiel (25-40%): bonus moyen
+                        currentScore += 500;
+                    }
+                }
                 const hasAnatomicalIncompatibility = (): boolean => {
                     // Genou vs Œil 
                     const isGenouQuery = normalizedText.includes('genou') || normalizedText.includes('menisque') || normalizedText.includes('lca') || normalizedText.includes('ligament');
@@ -10737,6 +10769,96 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
         if (result.type === 'proposal') {
             return result;
         }
+    }
+    
+    // 🆕 V3.3.139: VÉRIFICATION PRIORITAIRE - chercher entrée cumul spécifique AVANT detectMultipleLesions
+    // Si une entrée cumul existe dans la DB qui match bien le texte, la retourner directement
+    // Cela évite que le système détecte 2 lésions individuelles et retourne "Polytraumatisme (cumul 2 lésions)"
+    // alors qu'une entrée cumul spécifique existe (ex: "Raideur genou + instabilité LCA (cumul)")
+    try {
+        console.log('🔍 V3.3.139: Vérification cumul prioritaire...');
+        const normalizedQuery = normalize(text);
+        const queryWords = normalizedQuery.split(' ').filter(w => w.length > 2);
+        console.log(`🔍 Query words: ${queryWords.slice(0, 10).join(', ')}`);
+        
+        // Chercher dans la catégorie "Cumuls de Lésions"
+        const cumulCategory = disabilityData.find(cat => normalize(cat.name).includes('cumul'));
+        console.log(`🔍 Catégorie cumul trouvée: ${cumulCategory ? cumulCategory.name : 'AUCUNE'}`);
+        
+        if (cumulCategory) {
+            let bestCumulMatch: any = null;
+            let bestCumulScore = 0;
+            let entriesChecked = 0;
+            
+            for (const subcategory of cumulCategory.subcategories) {
+                for (const injury of subcategory.injuries) {
+                    // Si l'entrée a searchTerms, calculer similarité
+                    if (injury.searchTerms && injury.searchTerms.length > 0) {
+                        entriesChecked++;
+                        let bestSimilarity = 0;
+                        injury.searchTerms.forEach((term: string) => {
+                            const termNormalized = normalize(term);
+                            const termWords = termNormalized.split(' ').filter(w => w.length > 2);
+                            
+                            const overlap = queryWords.filter(w => termWords.includes(w));
+                            const similarity = overlap.length / Math.max(queryWords.length, termWords.length);
+                            
+                            if (similarity > bestSimilarity) {
+                                bestSimilarity = similarity;
+                            }
+                        });
+                        
+                        // Si similarité >= 50%, c'est un bon match
+                        if (bestSimilarity >= 0.5 && bestSimilarity > bestCumulScore) {
+                            console.log(`🎯 Match trouvé: ${injury.name} (similarité: ${(bestSimilarity * 100).toFixed(1)}%)`);
+                            bestCumulScore = bestSimilarity;
+                            bestCumulMatch = {
+                                injury,
+                                subcategory,
+                                category: cumulCategory,
+                                similarity: bestSimilarity
+                            };
+                        }
+                    }
+                }
+            }
+            
+            console.log(`🔍 Entrées avec searchTerms vérifiées: ${entriesChecked}, meilleur score: ${(bestCumulScore * 100).toFixed(1)}%`);
+            
+            // Si on a trouvé un bon match (>= 50% similarité), retourner directement
+            if (bestCumulMatch && bestCumulScore >= 0.5) {
+                console.log(`✅ V3.3.139: Entrée cumul spécifique trouvée: ${bestCumulMatch.injury.name} (similarité: ${(bestCumulScore * 100).toFixed(1)}%)`);
+                
+                const chosenRate = Array.isArray(bestCumulMatch.injury.rate)
+                    ? Math.round((bestCumulMatch.injury.rate[0] + bestCumulMatch.injury.rate[1]) / 2)
+                    : bestCumulMatch.injury.rate;
+                
+                const path = `${bestCumulMatch.category.name} > ${bestCumulMatch.subcategory.name}`;
+                const justification = buildExpertJustification(
+                    text,
+                    bestCumulMatch.injury,
+                    chosenRate,
+                    path,
+                    'moyen',
+                    [],
+                    true
+                );
+                
+                return {
+                    type: 'proposal',
+                    name: bestCumulMatch.injury.name,
+                    rate: chosenRate,
+                    justification,
+                    path,
+                    injury: bestCumulMatch.injury
+                };
+            } else {
+                console.log('ℹ️ Aucun cumul prioritaire trouvé (similarité < 50%), continue avec analyse normale');
+            }
+        }
+    } catch (e) {
+        console.error('❌ Erreur vérification cumul prioritaire:', e);
+        // Continuer avec analyse normale
     }
     
     // Étape 0A: Détection cumuls de lésions (Balthazar) - mais continuer l'analyse normale
