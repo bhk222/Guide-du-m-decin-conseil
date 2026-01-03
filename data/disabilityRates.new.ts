@@ -2159,7 +2159,6 @@ export const disabilityData: InjuryCategory[] = [
       }
     ]
   },
-,
   // ========================================
   // LÉSIONS SUPPLÉMENTAIRES - BARÈME COMPLET AT-MP
   // Ajouté automatiquement le 04/11/2025
@@ -2221,7 +2220,11 @@ export const disabilityData: InjuryCategory[] = [
   
         ]
   
-      },
+      }
+  
+    ]
+  
+  },
 
   // SECTION: Maladies Infectieuses Post-Traumatiques
   
@@ -2279,7 +2282,11 @@ export const disabilityData: InjuryCategory[] = [
   
         ]
   
-      },
+      }
+  
+    ]
+  
+  },
 
   // SECTION: Séquelles Hématologiques
   
@@ -2317,7 +2324,11 @@ export const disabilityData: InjuryCategory[] = [
   
         ]
   
-      },
+      }
+  
+    ]
+  
+  },
 
   // SECTION: Séquelles Dermatologiques Étendues
   
@@ -2351,11 +2362,15 @@ export const disabilityData: InjuryCategory[] = [
   
             } 
   
-          },
+          }
   
         ]
   
-      },
+      }
+  
+    ]
+  
+  },
 
   // SECTION: Complications de la Grossesse et Séquelles Obstétricales
   
