@@ -144,6 +144,18 @@ const GuidedRateSelector: React.FC<{
 };
 
 
+// Fonction pour obtenir l'emoji et la couleur de badge par catégorie
+const getCategoryStyle = (categoryName: string): { emoji: string; color: string } => {
+    if (categoryName.includes('Crâniennes') || categoryName.includes('Neurologiques')) return { emoji: '🧠', color: 'bg-purple-100 text-purple-700' };
+    if (categoryName.includes('Rachis') || categoryName.includes('Moelle')) return { emoji: '🦴', color: 'bg-indigo-100 text-indigo-700' };
+    if (categoryName.includes('Nerfs')) return { emoji: '⚡', color: 'bg-yellow-100 text-yellow-700' };
+    if (categoryName.includes('Maxillo') || categoryName.includes('ORL') || categoryName.includes('Ophtalmologiques')) return { emoji: '👁️', color: 'bg-blue-100 text-blue-700' };
+    if (categoryName.includes('Thoraciques') || categoryName.includes('Cardio')) return { emoji: '❤️', color: 'bg-red-100 text-red-700' };
+    if (categoryName.includes('Membres Supérieurs')) return { emoji: '💪', color: 'bg-green-100 text-green-700' };
+    if (categoryName.includes('Membres Inférieurs')) return { emoji: '🦵', color: 'bg-teal-100 text-teal-700' };
+    return { emoji: '📋', color: 'bg-slate-100 text-slate-700' };
+};
+
 export const AnalogCalculator: React.FC<AnalogCalculatorProps> = ({ onAddInjury }) => {
     const [searchTerm, setSearchTerm] = useState('');
     const [openCategory, setOpenCategory] = useState<string | null>(null);
@@ -151,13 +163,35 @@ export const AnalogCalculator: React.FC<AnalogCalculatorProps> = ({ onAddInjury 
     
     const normalize = (str: string) => str.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 
+    // Organisation hiérarchique par ordre anatomique logique (tête → pieds)
+    const organizedData = useMemo(() => {
+        const categoryOrder = [
+            'Séquelles Crâniennes, Neurologiques et Psychiatriques',
+            'Séquelles du Rachis, du Bassin et de la Moelle Épinière',
+            'Séquelles des Nerfs Crâniens et Périphériques',
+            'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques',
+            'Séquelles Thoraciques, Abdominales, Pelviennes et Cardio-vasculaires',
+            'Membres Supérieurs',
+            'Membres Inférieurs'
+        ];
+
+        return disabilityData.sort((a, b) => {
+            const indexA = categoryOrder.indexOf(a.name);
+            const indexB = categoryOrder.indexOf(b.name);
+            if (indexA === -1 && indexB === -1) return 0;
+            if (indexA === -1) return 1;
+            if (indexB === -1) return -1;
+            return indexA - indexB;
+        });
+    }, []);
+
     const filteredData = useMemo(() => {
-        if (!searchTerm) return disabilityData;
+        if (!searchTerm) return organizedData;
 
         const lowercasedFilter = normalize(searchTerm);
         const filtered: InjuryCategory[] = [];
 
-        disabilityData.forEach(category => {
+        organizedData.forEach(category => {
             const matchingSubcategories: InjurySubcategory[] = [];
             category.subcategories.forEach(subcategory => {
                 const matchingInjuries = subcategory.injuries.filter(injury => 
@@ -174,7 +208,7 @@ export const AnalogCalculator: React.FC<AnalogCalculatorProps> = ({ onAddInjury 
             }
         });
         return filtered;
-    }, [searchTerm]);
+    }, [searchTerm, organizedData]);
     
     const handleToggleEditor = (injury: Injury, path: string) => {
         if (Array.isArray(injury.rate)) {
@@ -212,6 +246,12 @@ export const AnalogCalculator: React.FC<AnalogCalculatorProps> = ({ onAddInjury 
             </div>
             
             <div className="flex-1 overflow-y-auto space-y-2 custom-scrollbar pr-2 -mr-2">
+                {filteredData.length === 0 && searchTerm && (
+                    <div className="text-center text-slate-500 py-10">
+                        <p className="text-lg font-semibold mb-2">🔍 Aucun résultat trouvé</p>
+                        <p className="text-sm">Essayez avec d'autres termes comme "fracture", "raideur", ou "amputation"</p>
+                    </div>
+                )}
                 {filteredData.map(category => {
                     // Afficher le tooltip pour toutes les amputations des membres supérieurs (épaule, bras, coude, avant-bras, poignet, main)
                     const shouldShowImage = category.name === "Épaule - Amputation et Désarticulation" ||
@@ -220,6 +260,9 @@ export const AnalogCalculator: React.FC<AnalogCalculatorProps> = ({ onAddInjury 
                                           category.name === "Avant-bras - Amputations" ||
                                           category.name === "Poignet - Désarticulation" ||
                                           category.name === "Main - Amputations";
+                    
+                    const categoryStyle = getCategoryStyle(category.name);
+                    const totalInjuries = category.subcategories.reduce((acc, sub) => acc + sub.injuries.length, 0);
                     
                     return (
                      <details 
@@ -234,12 +277,18 @@ export const AnalogCalculator: React.FC<AnalogCalculatorProps> = ({ onAddInjury 
                             }
                         }}
                      >
-                        <summary className="cursor-pointer p-3 bg-slate-100 rounded-md font-bold text-slate-800 list-none flex justify-between items-center hover:bg-slate-200 transition-colors">
-                            <div className="flex items-center gap-2">
-                                <span>{category.name}</span>
+                        <summary className="cursor-pointer p-3 bg-gradient-to-r from-slate-50 to-slate-100 rounded-lg font-bold text-slate-800 list-none flex justify-between items-center hover:from-slate-100 hover:to-slate-200 transition-all duration-200 shadow-sm border border-slate-200">
+                            <div className="flex items-center gap-3">
+                                <span className={`px-2.5 py-1 rounded-full text-sm font-bold ${categoryStyle.color}`}>
+                                    {categoryStyle.emoji}
+                                </span>
+                                <div className="flex flex-col">
+                                    <span className="text-sm">{category.name}</span>
+                                    <span className="text-xs font-normal text-slate-500">{category.subcategories.length} sous-catégories · {totalInjuries} lésions</span>
+                                </div>
                                 {shouldShowImage && (
                                   <span 
-                                    className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-blue-500 hover:bg-blue-600 text-white text-xs font-bold cursor-help transition-colors relative group/tooltip"
+                                    className="inline-flex items-center justify-center w-7 h-7 rounded-full bg-blue-500 hover:bg-blue-600 text-white text-xs font-bold cursor-help transition-colors relative group/tooltip ml-2"
                                     title="Voir le diagramme d'amputation"
                                     onClick={(e) => {
                                       e.preventDefault();
@@ -251,14 +300,17 @@ export const AnalogCalculator: React.FC<AnalogCalculatorProps> = ({ onAddInjury 
                                   </span>
                                 )}
                             </div>
-                             <svg className="h-5 w-5 transition-transform duration-200 group-open:rotate-180" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+                             <svg className="h-5 w-5 transition-transform duration-200 group-open:rotate-180 text-slate-600" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
                                 <path fillRule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clipRule="evenodd" />
                             </svg>
                         </summary>
                         <div className="pt-2 pl-2 space-y-2">
                             {category.subcategories.map(sub => (
-                                <div key={sub.name}>
-                                    <h4 className="font-semibold text-sm text-primary-700 mt-2 mb-1 pl-2">{sub.name}</h4>
+                                <div key={sub.name} className="mb-3">
+                                    <h4 className="font-semibold text-sm text-primary-700 mt-3 mb-2 pl-2 flex items-center gap-2 border-l-4 border-primary-300">
+                                        <span className="bg-primary-50 px-2 py-0.5 rounded">📌 {sub.name}</span>
+                                        <span className="text-xs font-normal text-slate-500">({sub.injuries.length} lésion{sub.injuries.length > 1 ? 's' : ''})</span>
+                                    </h4>
                                      <div className="space-y-1">
                                         {sub.injuries.map(injury => {
                                             const isEditing = editingInjury?.name === injury.name;
@@ -343,11 +395,6 @@ export const AnalogCalculator: React.FC<AnalogCalculatorProps> = ({ onAddInjury 
                     </details>
                     );
                 })}
-                 {filteredData.length === 0 && searchTerm && (
-                    <div className="text-center text-slate-500 py-10">
-                        <p>Aucun résultat trouvé pour "{searchTerm}".</p>
-                    </div>
-                 )}
             </div>
         </div>
     );
