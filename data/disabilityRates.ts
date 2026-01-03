@@ -511,11 +511,6 @@ const middleCategories: InjuryCategory[] = [
       {
         name: "Bassin - Notes Importantes du Barème Officiel",
         injuries: [
-          { 
-            name: "Fracture du bassin - Impossibilité de donner un taux moyen", 
-            rate: 0,
-            description: "IMPORTANT : Il est IMPOSSIBLE de donner d'indications valables touchant un taux moyen pour les fractures du bassin, étant donnée la variabilité des lésions associées. Les fractures du bassin vont des très bénignes (aile iliaque isolée : IPP insignifiante ou nulle) aux très graves (syndrome queue de cheval : jusqu'à 80%). Une fracture des branches ischio-pubiennes ou horizontale du pubis traitée dès le début d'une manière fonctionnelle doit aboutir à un résultat IPP insignifiant ou nul. Pour les fractures complexes, sont ADDITIONNÉS les IPP relatives aux complications de la fracture (troubles urinaires + neurologiques + articulaires, etc.)." 
-          },
         ]
       },
       {
