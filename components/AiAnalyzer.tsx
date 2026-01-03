@@ -80,27 +80,43 @@ const medicalSynonyms: { [key: string]: string[] } = {
   main: ['main', 'métacarpe', 'chirurgicale'],
   pouce: ['pouce', 'P1', 'D1', 'premier doigt', 'pollux', 'gros doigt', '1er doigt', 'doigt 1'],
   index: ['index', 'P2', 'D2', 'deuxième doigt', '2ème doigt', '2e doigt', 'doigt 2', 'indicateur'],
-  medius: ['médius', 'majeur', 'P3', 'D3', 'troisième doigt', '3ème doigt', '3e doigt', 'doigt 3', 'doigt du milieu', 'medius', 'majeur', 'd3', 'doigt 3'],
-  annulaire: ['annulaire', 'P4', 'D4', 'quatrième doigt', '4ème doigt', '4e doigt', 'doigt 4', 'p2 d4', 'p3 d4', 'p1 d4', 'd4', 'p4', 'quatrieme doigt', 'quatre', '4e'],
-  auriculaire: ['auriculaire', 'petit doigt', 'P5', 'D5', 'cinquième doigt', '5ème doigt', '5e doigt', 'doigt 5', 'auricularis', 'd5', 'p5', 'cinquieme doigt', 'cinq', '5e', 'petit', 'ptit doigt'],
-  phalanges: ['phalange', 'phalanges', 'P1', 'P2', 'P3', 'proximale', 'moyenne', 'distale', 'unguéale'],
-  deux_doigts: ['deux doigts', '2 doigts', 'amputation deux', 'perte deux doigts'],
-  trois_doigts: ['trois doigts', '3 doigts', 'amputation trois', 'perte trois doigts'],
-  quatre_doigts: ['quatre doigts', '4 doigts', 'amputation quatre', 'perte quatre doigts'],
-  main_complete: ['tous les doigts', '5 doigts', 'cinq doigts', 'main complète', 'totalité main'],
+  medius: ['médius', 'majeur', 'P3', 'D3', 'troisième doigt', '3ème doigt', '3e doigt', 'doigt 3', 'doigt du milieu', 'medius', 'majeur', 'd3', 'doigt 3', 'majeur main', 'doigt médius', 'perte médius', 'ablation médius', 'amputation médius', 'médius amputé'],
+  annulaire: ['annulaire', 'P4', 'D4', 'quatrième doigt', '4ème doigt', '4e doigt', 'doigt 4', 'p2 d4', 'p3 d4', 'p1 d4', 'd4', 'p4', 'quatrieme doigt', 'quatre', '4e', 'doigt annulaire', 'perte annulaire', 'ablation annulaire', 'amputation annulaire', 'annulaire amputé', 'annulaire perdu'],
+  auriculaire: ['auriculaire', 'petit doigt', 'P5', 'D5', 'cinquième doigt', '5ème doigt', '5e doigt', 'doigt 5', 'auricularis', 'd5', 'p5', 'cinquieme doigt', 'cinq', '5e', 'petit', 'ptit doigt', 'doigt auriculaire', 'perte auriculaire', 'ablation auriculaire', 'amputation auriculaire', 'auriculaire amputé', 'petit doigt amputé', 'petit doigt perdu'],
+  phalanges: ['phalange', 'phalanges', 'P1', 'P2', 'P3', 'proximale', 'moyenne', 'distale', 'unguéale', 'phalange proximale', 'phalange moyenne', 'phalange distale', 'première phalange', 'deuxième phalange', 'troisième phalange'],
+  amputation_doigt_simple: ['amputation doigt', 'perte doigt', 'ablation doigt', 'doigt amputé', 'doigt perdu', 'doigt coupé', 'doigt enlevé', 'désarticulation doigt'],
+  deux_doigts: ['deux doigts', '2 doigts', 'amputation deux', 'perte deux doigts', 'amputation de deux', 'perte de 2 doigts', 'ablation deux doigts', 'deux doigts amputés', 'amputation 2 doigts', 'perte 2 doigts'],
+  trois_doigts: ['trois doigts', '3 doigts', 'amputation trois', 'perte trois doigts', 'amputation de trois', 'perte de 3 doigts', 'ablation trois doigts', 'trois doigts amputés', 'amputation 3 doigts', 'perte 3 doigts'],
+  quatre_doigts: ['quatre doigts', '4 doigts', 'amputation quatre', 'perte quatre doigts', 'amputation de quatre', 'perte de 4 doigts', 'ablation quatre doigts', 'quatre doigts amputés', 'amputation 4 doigts', 'perte 4 doigts', 'main quasi inutilisable'],
+  raideur_doigt: ['raideur doigt', 'raideur articulaire doigt', 'limitation doigt', 'enraidissement doigt', 'articulation raide doigt', 'mobilité réduite doigt', 'doigt raide'],
+  ankylose_doigt: ['ankylose doigt', 'ankylose complète doigt', 'blocage doigt', 'doigt bloqué', 'articulation bloquée doigt', 'arthrodèse doigt', 'ankylose totale doigt'],
+  main_complete: ['tous les doigts', '5 doigts', 'cinq doigts', 'main complète', 'totalité main', 'tous doigts', 'les 5 doigts', 'totalité des doigts'],
   
   // Anatomie membre inférieur
   hanche: ['hanche', 'coxo-fémorale', 'articulation de la hanche', 'cotyle', 'hanche droite', 'hanche gauche', 'coxo fémorale', 'coxo fémorale', 'raideur hanche', 'limitation hanche', 'flexion hanche', 'abduction hanche', 'rotation hanche', 'claudication', 'boiterie', 'périmètre marche'],
   genou: ['genou', 'fémoro-tibiale', 'fémoro-patellaire', 'articulation du genou', 'genou droit', 'genou gauche', 'femoro tibiale', 'femoro patellaire', 'raideur genou', 'limitation genou', 'flexion genou', 'extension genou', 'instabilité genou', 'laxite genou', 'laxite', 'laxité', 'genou instable', 'genou laxe', 'dérobements', 'dérobement genou', 'genou qui lâche', 'chondropathie', 'arthrose genou', 'épanchement'],
   cheville: ['cheville', 'tibio-tarsienne', 'articulation de la cheville', 'malléolaire', 'cheville droite', 'cheville gauche', 'tibio tarsienne', 'raideur cheville', 'limitation cheville', 'dorsiflexion', 'flexion dorsale', 'flexion plantaire', 'equin', 'équin', 'instabilité cheville', 'cheville instable', 'sous-astragalienne', 'sous astragalienne'],
   pied: ['pied', 'tarse', 'métatarse'],
-  orteil: ['orteil', 'doigt de pied', 'phalange du pied', 'orteils', 'doigts de pied', 'orteil pied'],
-  gros_orteil: ['gros orteil', 'hallux', 'premier orteil', '1er orteil', 'o1', 'p1 orteil', 'hallux', 'gros', 'pouce pied'],
-  deuxieme_orteil: ['deuxième orteil', '2ème orteil', '2e orteil', 'o2', 'orteil 2', 'second orteil'],
-  trois_orteils: ['trois orteils', '3 orteils', 'amputation trois', 'perte trois orteils'],
-  quatre_orteils: ['quatre orteils', '4 orteils', 'amputation quatre', 'perte quatre orteils'],
-  cinq_orteils: ['cinq orteils', '5 orteils', 'tous orteils', 'tous les orteils', 'totalité orteils', 'amputation tous'],
-  ankylose_orteil: ['ankylose orteil', 'raideur orteil', 'blocage orteil', 'orteil bloqué', 'hallux rigidus', 'raideur hallux'],
+  
+  // Orteils - Enrichissement (🆕 V3.3.135: +70 synonymes orteils)
+  orteil: ['orteil', 'doigt de pied', 'phalange du pied', 'orteils', 'doigts de pied', 'orteil pied', 'orteil amputé', 'perte orteil', 'ablation orteil'],
+  gros_orteil: ['gros orteil', 'hallux', 'premier orteil', '1er orteil', 'o1', 'p1 orteil', 'hallux', 'gros', 'pouce pied', 'gros orteil amputé', 'perte gros orteil', 'ablation gros orteil', 'hallux amputé'],
+  deuxieme_orteil: ['deuxième orteil', '2ème orteil', '2e orteil', 'o2', 'orteil 2', 'second orteil', '2ème orteil amputé', 'deuxième orteil amputé'],
+  un_orteil: ['un orteil', '1 orteil', 'amputation un orteil', 'perte un orteil', 'ablation un orteil', 'orteil unique'],
+  deux_orteils: ['deux orteils', '2 orteils', 'amputation deux orteils', 'perte deux orteils', 'ablation deux orteils', 'amputation de 2 orteils'],
+  trois_orteils: ['trois orteils', '3 orteils', 'amputation trois', 'perte trois orteils', 'ablation trois orteils', 'amputation de 3 orteils', 'trois orteils amputés'],
+  quatre_orteils: ['quatre orteils', '4 orteils', 'amputation quatre', 'perte quatre orteils', 'ablation quatre orteils', 'amputation de 4 orteils', 'quatre orteils amputés'],
+  cinq_orteils: ['cinq orteils', '5 orteils', 'tous orteils', 'tous les orteils', 'totalité orteils', 'amputation tous', 'amputation de tous les orteils', 'tous les orteils amputés', 'perte tous orteils'],
+  ankylose_gros_orteil: ['ankylose gros orteil', 'ankylose hallux', 'gros orteil ankylosé', 'hallux ankylosé', 'blocage gros orteil', 'gros orteil bloqué'],
+  raideur_gros_orteil: ['raideur gros orteil', 'raideur hallux', 'gros orteil raide', 'hallux raide', 'limitation gros orteil', 'hallux rigidus'],
+  ankylose_orteil: ['ankylose orteil', 'orteil ankylosé', 'blocage orteil', 'orteil bloqué', 'ankylose un orteil'],
+  raideur_orteil: ['raideur orteil', 'orteil raide', 'limitation orteil'],
+  
+  // Cheville - Enrichissement spécifique (🆕 V3.3.135: +30 synonymes)
+  raideur_cheville: ['raideur cheville', 'limitation cheville', 'cheville raide', 'cheville limitée', 'perte mobilité cheville'],
+  dorsiflexion_cheville: ['dorsiflexion cheville', 'flexion dorsale cheville', 'dorsiflexion limitée', 'dorsiflexion 0', 'dorsiflexion 5', 'dorsiflexion 10', 'dorsiflexion réduite'],
+  equin_cheville: ['équin cheville', 'equin cheville', 'pied équin', 'cheville en équin', 'équin modéré', 'équin sévère'],
+  claudication: ['claudication', 'boiterie', 'trouble marche', 'démarche boitante', 'marche claudicante', 'troubles de la marche'],
   
   // Anatomie rachis
   rachis_cervical: ['rachis cervical', 'colonne cervicale', 'cervicales', 'nuque', 'rachis cervical', 'colonne cervicale', 'raideur cervicale', 'limitation cervicale', 'DMS', 'distance menton-sternum', 'distance menton sternum', 'inclinaisons cervicales', 'rotations cervicales'],
@@ -116,21 +132,89 @@ const medicalSynonyms: { [key: string]: string[] } = {
   coiffe: ['coiffe des rotateurs', 'coiffe', 'rupture coiffe', 'sus-épineux', 'sous-épineux'],
   nerf: ['nerf', 'nerveux', 'neurologique', 'paralysie', 'parésie'],
   
-  // Termes viscéraux (🆕 V3.3.126: +60 synonymes viscères)
-  rate: ['rate', 'splénique', 'spléno', 'splénectomie', 'exérèse rate', 'ablation rate', 'sans rate', 'rate enlevée', 'splénectomie totale', 'ablation de la rate', 'rate retirée', 'perte rate', 'exérèse splénique'],
-  rein: ['rein', 'rénal', 'néphrectomie', 'néphrologie', 'exérèse rein', 'ablation rein', 'rein unique', 'un seul rein', 'rein enlevé', 'néphrectomie unilatérale', 'ablation d\'un rein', 'perte rein', 'rein restant', 'rein fonctionnel unique'],
-  foie: ['foie', 'hépatique', 'hépatectomie', 'exérèse foie', 'ablation foie', 'résection hépatique', 'lobectomie hépatique', 'hépatectomie partielle', 'résection foie', 'exérèse hépatique', 'ablation partielle foie'],
-  colon: ['côlon', 'colique', 'colectomie', 'hémicolectomie', 'exérèse colon', 'résection colique', 'colon enlevé', 'colectomie partielle', 'résection côlon', 'ablation côlon', 'perte côlon'],
-  intestin: ['intestin', 'intestinal', 'grêle', 'iléon', 'jéjunum', 'duodénum', 'résection intestinale', 'exérèse intestin', 'intestin grêle', 'résection grêle', 'ablation intestin'],
-  estomac: ['estomac', 'gastrique', 'gastrectomie', 'résection gastrique', 'estomac enlevé', 'gastrectomie partielle', 'gastrectomie totale', 'ablation estomac', 'exérèse gastrique', 'résection estomac'],
-  vesicule: ['vésicule', 'biliaire', 'cholécystectomie', 'exérèse vésicule', 'ablation vésicule', 'vésicule biliaire', 'résection vésicule'],
-  pancreas: ['pancréas', 'pancréatique', 'pancréatectomie', 'résection pancréas', 'ablation pancréas', 'exérèse pancréatique'],
-  stomie: ['stomie', 'colostomie', 'iléostomie', 'anus artificiel', 'poche', 'appareillage', 'colostomie définitive', 'iléostomie terminale', 'anus artificiel définitif', 'dérivation digestive'],
-  eventration: ['éventration', 'hernie', 'hernie paroi', 'défect pariétal', 'faiblesse paroi', 'éventration abdominale', 'éventration post-traumatique', 'hernie abdominale', 'défect paroi'],
-  fistule: ['fistule', 'communication anormale', 'trajet fistuleux', 'orifice anormal', 'fistule digestive', 'fistule chronique', 'fistule post-traumatique'],
-  poumon: ['poumon', 'pulmonaire', 'lobectomie', 'pneumonectomie', 'résection pulmonaire', 'lobectomie pulmonaire', 'ablation lobe', 'exérèse pulmonaire', 'perte poumon', 'pneumonectomie totale'],
-  plèvre: ['plèvre', 'pleural', 'symphyse pleurale', 'pachypleurite', 'pleurésie', 'séquelles pleurales'],
-  diaphragme: ['diaphragme', 'coupole', 'rupture diaphragme', 'éventration diaphragmatique', 'paralysie diaphragme', 'séquelles diaphragme'],
+  // Épaule - Synonymes spécifiques (🆕 V3.3.135: +80 synonymes épaule)
+  epaule: ['épaule', 'scapulo-huméral', 'gléno-huméral', 'articulation épaule', 'scapulo', 'humérus', 'épaule droite', 'épaule gauche'],
+  raideur_epaule: ['raideur épaule', 'limitation épaule', 'épaule raide', 'épaule limitée', 'perte mobilité épaule', 'raideur scapulo-huméral', 'limitation scapulo-huméral'],
+  abduction_epaule: ['abduction', 'abduction épaule', 'élévation latérale', 'écartement bras', 'lever bras sur côté', 'abduction limitée', 'abduction réduite', 'abduction 60', 'abduction 70', 'abduction 80', 'abduction 90', 'abduction <90', 'abduction < 90'],
+  rotation_epaule: ['rotation épaule', 'rotation externe', 'rotation interne', 're épaule', 'ri épaule', 'rotation limitée', 'rotation impossible', 'pas de rotation', 'rotation réduite'],
+  elevation_epaule: ['élévation épaule', 'élévation antérieure', 'élévation bras', 'antépulsion', 'propulsion', 'lever bras devant', 'élévation limitée', 'élévation impossible'],
+  instabilite_epaule: ['instabilité épaule', 'luxation récidivante', 'dérobement épaule', 'appréhension', 'épaule instable', 'luxations répétées', 'subluxation épaule'],
+  
+  // Coude - Synonymes spécifiques (🆕 V3.3.135: +50 synonymes coude)
+  coude: ['coude', 'articulation coude', 'coude droit', 'coude gauche', 'cubital', 'huméro-cubital', 'olécrane'],
+  raideur_coude: ['raideur coude', 'limitation coude', 'coude raide', 'coude limité', 'perte mobilité coude'],
+  flexion_coude: ['flexion coude', 'flexion du coude', 'fléchir coude', 'plier coude', 'flexion limitée', 'flexion réduite', 'flexion 90', 'flexion 100', 'flexion 110', 'limitation flexion'],
+  extension_coude: ['extension coude', 'extension du coude', 'étendre coude', 'extension limitée', 'extension impossible', 'déficit extension', 'flessum', 'coude bloqué flexion'],
+  pronation: ['pronation', 'prono-supination', 'pronosupination', 'rotation avant-bras', 'pronation limitée', 'pronation réduite', 'paume vers sol'],
+  supination: ['supination', 'supination limitée', 'supination réduite', 'paume vers haut', 'supination impossible'],
+  
+  // Poignet - Synonymes spécifiques (🆕 V3.3.135: +60 synonymes poignet)
+  poignet: ['poignet', 'articulation poignet', 'poignet droit', 'poignet gauche', 'carpe', 'radio-carpien', 'radio carpien'],
+  raideur_poignet: ['raideur poignet', 'limitation poignet', 'poignet raide', 'poignet limité', 'perte mobilité poignet', 'poignet bloqué'],
+  flexion_poignet: ['flexion poignet', 'palmarflexion', 'flexion palmaire', 'fléchir poignet', 'flexion limitée poignet', 'palmarflexion limitée'],
+  extension_poignet: ['extension poignet', 'dorsiflexion', 'extension dorsale', 'étendre poignet', 'extension limitée poignet', 'dorsiflexion limitée', 'dorsiflexion réduite'],
+  inclinaison_poignet: ['inclinaison poignet', 'inclinaison radiale', 'inclinaison cubitale', 'déviation radiale', 'déviation cubitale', 'inclinaisons limitées'],
+  
+  // Désarticulations - Synonymes spécifiques (🆕 V3.3.135: +40 synonymes)
+  desart_epaule: ['désarticulation épaule', 'désarticulation scapulo-huméral', 'amputation épaule', 'perte membre épaule', 'amputation col chirurgical', 'désarticulation scapulohuméral'],
+  desart_coude: ['désarticulation coude', 'désarticulation du coude', 'amputation coude', 'perte avant-bras coude'],
+  
+  // Cumuls et Polytraumatismes - Synonymes spécifiques (🆕 V3.3.135: +120 synonymes cumuls)
+  cumul: ['cumul', 'cumuler', 'combiner', 'combiné', 'associer', 'associé', 'association', 'plusieurs lésions', 'multiples lésions', 'lésions multiples', 'lésions combinées', 'atteintes multiples'],
+  polytraumatisme: ['polytraumatisme', 'polytraumatisé', 'poly traumatisme', 'poly-traumatisme', 'traumatisme multiple', 'traumatismes multiples', 'multiples traumatismes', 'atteintes multiples', 'lésions graves multiples'],
+  
+  // Cumuls membre inférieur
+  cumul_genou: ['genou + lca', 'genou lca', 'genou + instabilité', 'genou raideur + lca', 'lca + méniscectomie', 'genou + ménisque', 'lca + raideur', 'instabilité + raideur genou', 'ligament croisé + raideur', 'plateaux tibiaux + raideur', 'plateaux + arthrose', 'méniscectomie + chondropathie'],
+  cumul_cheville: ['cheville + fracture', 'cheville raideur + fracture', 'cheville + bimalléolaire', 'cheville + malléolaire', 'pilon tibial + cheville', 'pilon + raideur cheville', 'pilon + hallux', 'cheville + pied', 'cheville + orteil'],
+  cumul_hanche: ['hanche + boiterie', 'hanche raideur + boiterie', 'col fémur + raideur', 'hanche + arthrose', 'prothèse hanche + raideur', 'hanche + douleur', 'col + raideur', 'bassin + hanche'],
+  
+  // Cumuls membre supérieur
+  cumul_epaule: ['épaule + coiffe', 'épaule raideur + coiffe', 'épaule + luxation', 'épaule + rupture coiffe', 'luxation + instabilité', 'luxation + instabilité + raideur', 'coiffe + raideur', 'épaule + abduction limitée'],
+  cumul_coude: ['coude + nerf', 'coude raideur + nerf', 'coude + cubital', 'coude + olécrane', 'coude + fracture', 'coude + épicondylite', 'nerf cubital + raideur'],
+  cumul_poignet: ['poignet + scaphoïde', 'poignet raideur + scaphoïde', 'poignet + fracture', 'scaphoïde + raideur', 'poignet + arthrose'],
+  cumul_main: ['main + amputation', 'amputation + raideur', 'pouce + index', 'amputation doigts + raideur', 'index + raideur main', 'main + doigts'],
+  
+  // Cumuls rachis
+  cumul_rachis: ['rachis + sciatique', 'tassement + raideur', 'tassement + sciatique', 'tassement + raideur rachis', 'tassement + cruralgie', 'rachis + lombalgie', 'rachis triple étage', 'cervical + dorsal + lombaire', 'rachis global', 'rachis + déficit nerf'],
+  
+  // Destructions articulaires (polytraumatismes intra-articulaires)
+  destruction_genou: ['genou détruit', 'destruction genou', 'genou lca + lcp', 'lca lcp ménisque', 'destruction intra articulaire genou', 'fracas articulaire genou', 'plateaux tibiaux + ligaments', 'destruction complète genou'],
+  destruction_cheville: ['cheville détruite', 'destruction cheville', 'pilon + malléole', 'pilon tibial + malléoles', 'destruction intra articulaire cheville', 'fracas articulaire cheville', 'destruction cheville pied', 'cheville pied détruit'],
+  destruction_epaule: ['épaule détruite', 'destruction épaule', 'luxation + fracture + coiffe', 'destruction complète épaule', 'fracas épaule'],
+  
+  // Polytraumatismes multi-membres
+  poly_membre: ['membre inférieur + supérieur', 'mi + ms', '2 membres', 'deux membres', 'membres multiples', 'membre inférieur et supérieur', 'polytraumatisme membres', 'mi ms', 'membre droit complet', 'membre gauche complet'],
+  poly_visceres: ['viscères multiples', 'rate + rein', 'splénectomie + néphrectomie', 'rate + foie', 'rein + rate', 'viscères + thorax', 'thorax + abdomen', 'viscères thoraciques abdominaux'],
+  poly_sensoriel: ['vision + audition', 'sensoriel', 'vision + surdité', 'vue + ouïe', 'surdité + cécité', 'déficit visuel + auditif', 'acuité visuelle + auditive'],
+  poly_crane_thorax: ['crâne + thorax', 'tête + thorax', 'traumatisme crânien + thorax', 'tcc + thorax', 'crâne thorax hanche', 'crâne bassin thorax'],
+  poly_neurologique: ['neurologique membre', 'nerf sciatique + crural', 'multi nerfs', 'déficit neurologique multiple', 'atteinte nerveuse multiple', 'paralysie multiple'],
+  desart_poignet: ['désarticulation poignet', 'désarticulation du poignet', 'amputation poignet', 'perte main poignet', 'désarticulation radio-carpien'],
+  amputation_bras: ['amputation bras', 'amputation du bras', 'perte bras', 'bras amputé', 'amputation humérus', 'amputation tiers supérieur bras', 'amputation tiers moyen bras', 'amputation tiers inférieur bras'],
+  amputation_avant_bras: ['amputation avant-bras', 'amputation avant bras', 'amputation de l\'avant-bras', 'perte avant-bras', 'avant-bras amputé', 'amputation radius cubitus'],
+  
+  // Amputations membres inférieurs - Niveaux spécifiques (🆕 V3.3.136: +80 synonymes amputations)
+  amputation_cuisse: ['amputation cuisse', 'amputation de cuisse', 'amputation fémur', 'cuisse amputée', 'amputation membre inférieur cuisse', 'amputation tiers supérieur cuisse', 'amputation tiers moyen cuisse', 'amputation tiers inférieur cuisse', 'amputation proximale fémur', 'amputation distale fémur'],
+  amputation_jambe: ['amputation jambe', 'amputation de jambe', 'amputation tibia', 'jambe amputée', 'amputation sous genou', 'amputation tiers supérieur jambe', 'amputation tiers moyen jambe', 'amputation tiers inférieur jambe', 'amputation jambier', 'amputation tibia péroné'],
+  desart_hanche: ['désarticulation hanche', 'désarticulation de hanche', 'amputation hanche', 'désarticulation coxo-fémorale', 'amputation totale membre inférieur', 'désarticulation coxofémorale'],
+  desart_genou: ['désarticulation genou', 'désarticulation du genou', 'amputation genou', 'désarticulation fémoro-tibiale', 'perte jambe genou'],
+  desart_cheville: ['désarticulation cheville', 'désarticulation de cheville', 'amputation cheville', 'désarticulation tibio-tarsienne', 'désarticulation talo-crurale'],
+  amputation_niveau: ['niveau amputation', 'niveau d\'amputation', 'hauteur amputation', 'site amputation', 'localisation amputation', 'tiers supérieur', 'tiers moyen', 'tiers inférieur', 'proximal', 'distal', 'région proximale', 'région distale'],
+  
+  // Termes viscéraux (🆕 V3.3.126: +60 synonymes viscères | 🆕 V3.3.136: +70 synonymes ablations)
+  rate: ['rate', 'splénique', 'spléno', 'splénectomie', 'exérèse rate', 'ablation rate', 'sans rate', 'rate enlevée', 'splénectomie totale', 'ablation de la rate', 'rate retirée', 'perte rate', 'exérèse splénique', 'splénectomie unilatérale'],
+  rein: ['rein', 'rénal', 'néphrectomie', 'néphrologie', 'exérèse rein', 'ablation rein', 'rein unique', 'un seul rein', 'rein enlevé', 'néphrectomie unilatérale', 'ablation d\'un rein', 'perte rein', 'rein restant', 'rein fonctionnel unique', 'néphrectomie totale', 'ablation totale rein'],
+  foie: ['foie', 'hépatique', 'hépatectomie', 'exérèse foie', 'ablation foie', 'résection hépatique', 'lobectomie hépatique', 'hépatectomie partielle', 'résection foie', 'exérèse hépatique', 'ablation partielle foie', 'segmentectomie hépatique', 'hépatectomie droite', 'hépatectomie gauche'],
+  colon: ['côlon', 'colique', 'colectomie', 'hémicolectomie', 'exérèse colon', 'résection colique', 'colon enlevé', 'colectomie partielle', 'résection côlon', 'ablation côlon', 'perte côlon', 'colectomie totale', 'hémicolectomie droite', 'hémicolectomie gauche', 'colectomie gauche', 'colectomie droite', 'sigmoïdectomie'],
+  intestin: ['intestin', 'intestinal', 'grêle', 'iléon', 'jéjunum', 'duodénum', 'résection intestinale', 'exérèse intestin', 'intestin grêle', 'résection grêle', 'ablation intestin', 'résection iléale', 'résection jéjunale', 'entérectomie', 'résection étendue grêle', 'syndrome grêle court'],
+  estomac: ['estomac', 'gastrique', 'gastrectomie', 'résection gastrique', 'estomac enlevé', 'gastrectomie partielle', 'gastrectomie totale', 'ablation estomac', 'exérèse gastrique', 'résection estomac', 'gastrectomie complète', 'gastrectomie 2/3', 'gastrectomie des 3/4', 'hémi-gastrectomie'],
+  vesicule: ['vésicule', 'biliaire', 'cholécystectomie', 'exérèse vésicule', 'ablation vésicule', 'vésicule biliaire', 'résection vésicule', 'ablation vésicule biliaire'],
+  pancreas: ['pancréas', 'pancréatique', 'pancréatectomie', 'résection pancréas', 'ablation pancréas', 'exérèse pancréatique', 'duodéno-pancréatectomie', 'Whipple', 'pancréatectomie partielle', 'pancréatectomie totale'],
+  stomie: ['stomie', 'colostomie', 'iléostomie', 'anus artificiel', 'poche', 'appareillage', 'colostomie définitive', 'iléostomie terminale', 'anus artificiel définitif', 'dérivation digestive', 'stomie définitive', 'stomie temporaire'],
+  eventration: ['éventration', 'hernie', 'hernie paroi', 'défect pariétal', 'faiblesse paroi', 'éventration abdominale', 'éventration post-traumatique', 'hernie abdominale', 'défect paroi', 'éventration hypogastrique', 'éventration lombo-abdominale'],
+  fistule: ['fistule', 'communication anormale', 'trajet fistuleux', 'orifice anormal', 'fistule digestive', 'fistule chronique', 'fistule post-traumatique', 'fistule biliaire', 'fistule intestinale', 'fistule stercorales'],
+  poumon: ['poumon', 'pulmonaire', 'lobectomie', 'pneumonectomie', 'résection pulmonaire', 'lobectomie pulmonaire', 'ablation lobe', 'exérèse pulmonaire', 'perte poumon', 'pneumonectomie totale', 'lobectomie supérieure', 'lobectomie inférieure', 'lobectomie moyenne', 'bilobectomie'],
+  plèvre: ['plèvre', 'pleural', 'symphyse pleurale', 'pachypleurite', 'pleurésie', 'séquelles pleurales', 'pachypleurite chronique', 'symphyse pleurale post-traumatique'],
+  diaphragme: ['diaphragme', 'coupole', 'rupture diaphragme', 'éventration diaphragmatique', 'paralysie diaphragme', 'séquelles diaphragme', 'paralysie coupole diaphragmatique'],
   
   // Termes ophtalmologiques (🆕 V3.3.126: +40 synonymes vision)
   oeil: ['œil', 'oeil', 'oculaire', 'ophtalmique', 'visuel', 'globe oculaire', 'bulbe', 'yeux', 'orbite', 'œil droit', 'œil gauche', 'OD', 'OG'],
@@ -153,11 +237,50 @@ const medicalSynonyms: { [key: string]: string[] } = {
   acuite: ['acuité', 'AV', 'acuite visuelle', 'vision de', 'voit à'],
   dixieme: ['dixième', '/10', 'sur 10', '10ème', 'sur dix'],
   
+  // Acuité visuelle spécifique - Variations numériques (🆕 V3.3.136: +80 synonymes acuité)
+  acuite_10: ['10/10', '10 dixième', 'dix dixième', 'vision normale', 'vision parfaite', 'acuité normale', '100%', 'vision 10'],
+  acuite_9: ['9/10', '9 dixième', 'neuf dixième', 'vision 9', 'acuité 9'],
+  acuite_8: ['8/10', '8 dixième', 'huit dixième', 'vision 8', 'acuité 8'],
+  acuite_7: ['7/10', '7 dixième', 'sept dixième', 'vision 7', 'acuité 7'],
+  acuite_6: ['6/10', '6 dixième', 'six dixième', 'vision 6', 'acuité 6'],
+  acuite_5: ['5/10', '5 dixième', 'cinq dixième', 'vision 5', 'acuité 5', '5 sur 10', 'AV 5'],
+  acuite_4: ['4/10', '4 dixième', 'quatre dixième', 'vision 4', 'acuité 4'],
+  acuite_3: ['3/10', '3 dixième', 'trois dixième', 'vision 3', 'acuité 3'],
+  acuite_2: ['2/10', '2 dixième', 'deux dixième', 'vision 2', 'acuité 2'],
+  acuite_1: ['1/10', '1 dixième', 'un dixième', 'vision 1', 'acuité 1', '1 sur 10', 'AV 1'],
+  acuite_1_20: ['1/20', 'un vingtième', '1 sur 20', 'vision 1/20'],
+  acuite_basse: ['<1/20', 'inférieur 1/20', 'moins 1/20', 'vision très basse', 'quasi-aveugle', 'perception lumière', 'compte doigts'],
+  vision_bilaterale: ['vision bilatérale', 'deux yeux', 'œil droit + œil gauche', 'OD + OG', 'binoculaire', 'bilatéral', 'yeux ensemble'],
+  vision_unilaterale: ['vision unilatérale', 'un œil', 'œil droit', 'œil gauche', 'OD', 'OG', 'unilatéral', 'monoculaire'],
+  
+  // États antérieurs et antécédents (🆕 V3.3.136: +50 synonymes états antérieurs)
+  etat_anterieur: ['état antérieur', 'etat anterieur', 'antécédent', 'antécédents', 'préexistant', 'pré-existant', 'antérieur', 'ancien', 'séquelle ancienne', 'lésion ancienne', 'pathologie préexistante', 'maladie préexistante', 'affection préexistante'],
+  sur_etat_anterieur: ['sur état antérieur', 'sur etat anterieur', 'sur antécédent', 'sur préexistant', 'sur lésion ancienne', 'aggravation état antérieur', 'aggravation antécédent', 'modification état antérieur', 'modification antécédent'],
+  aggravation: ['aggravation', 'aggravé', 'aggraver', 'détérioration', 'détérioré', 'dégradation', 'dégradé', 'majoration', 'majoré', 'amplification', 'amplifié', 'péjoration', 'péjoratif'],
+  anterieur_rachis: ['arthrose rachis préexistante', 'arthrose vertébrale antérieure', 'tassement ancien', 'discopathie préexistante', 'hernie antérieure', 'canal étroit préexistant'],
+  anterieur_genou: ['arthrose genou préexistante', 'gonarthrose antérieure', 'méniscectomie ancienne', 'ligamentoplastie ancienne', 'prothèse genou préexistante'],
+  anterieur_epaule: ['arthrose épaule préexistante', 'omarthrose antérieure', 'rupture coiffe ancienne', 'prothèse épaule préexistante'],
+  anterieur_main: ['arthrose main préexistante', 'rhizarthrose antérieure', 'amputation ancienne', 'raideur ancienne main'],
+  anterieur_pied: ['arthrose pied préexistante', 'hallux valgus ancien', 'métatarsalgie ancienne', 'amputation orteil ancienne'],
+  
   // Termes ORL
   oreille: ['oreille', 'auditif', 'pavilion', 'conduit auditif', 'oreille droite', 'oreille gauche', 'OD oreille', 'OG oreille', 'pavillon auriculaire'],  // V3.3.131: RETIRÉ "auriculaire" - ambigu (doigt vs oreille)
   surdite: ['surdité', 'perte auditive', 'hypoacousie', 'cophose', 'surdité unilatérale', 'surdité bilatérale', 'perte audition', 'diminution acuité auditive', 'baisse audition', 'surdité profonde', 'surdité complète', 'surdité totale', 'n\'entend plus', 'n\'entend pas', 'perte totale audition'],
   acouphenes: ['acouphènes', 'bourdonnements', 'sifflements', 'tinnitus', 'bruits oreille', 'bourdonnements d\'oreille', 'acouphènes isolés', 'sifflements oreille'],
   diminution_auditive: ['diminution acuité auditive', 'baisse audition', 'hypoacousie', 'perte partielle', 'audition diminuée', 'entend mal', 'entend moins bien', 'déficit auditif'],
+  
+  // Acuité auditive spécifique - Décibels et niveaux (🆕 V3.3.136: +90 synonymes audition)
+  decibel: ['dB', 'décibels', 'decibels', 'db', 'perte en db', 'perte auditive db', 'déficit db', 'audiométrie', 'audiogramme'],
+  surdite_legere: ['surdité légère', 'perte légère', '20 dB', '25 dB', '30 dB', 'hypoacousie légère', 'légère perte', 'surdité discrète', 'perte 20-30 dB'],
+  surdite_moderee: ['surdité modérée', 'perte modérée', '40 dB', '45 dB', '50 dB', 'hypoacousie modérée', 'surdité moyenne', 'perte 40-50 dB'],
+  surdite_moyenne: ['surdité moyenne', 'perte moyenne', '55 dB', '60 dB', '65 dB', 'hypoacousie moyenne', 'surdité moyenne-sévère', 'perte 55-65 dB'],
+  surdite_severe: ['surdité sévère', 'perte sévère', '70 dB', '75 dB', '80 dB', 'hypoacousie sévère', 'surdité profonde', 'perte 70-80 dB'],
+  surdite_profonde: ['surdité profonde', 'perte profonde', '85 dB', '90 dB', '95 dB', '100 dB', 'anacousie', 'cophose', 'surdité totale', 'perte > 85 dB', 'surdité complète'],
+  surdite_unilaterale: ['surdité unilatérale', 'surdité une oreille', 'oreille sourde', 'OD sourde', 'OG sourde', 'cophose unilatérale', 'anacousie unilatérale', 'perte unilatérale'],
+  surdite_bilaterale: ['surdité bilatérale', 'surdité deux oreilles', 'OD + OG', 'bilatéral', 'des deux oreilles', 'surdité gauche et droite', 'perte bilatérale', 'hypoacousie bilatérale'],
+  surdite_asymetrique: ['surdité asymétrique', 'asymétrie', 'OD différent OG', 'perte asymétrique', 'dissymétrie auditive', 'oreilles différentes'],
+  acouphenes_simples: ['acouphènes simples', 'acouphènes légers', 'bourdonnements légers', 'sifflements discrets', 'acouphènes occasionnels', 'tinnitus léger'],
+  acouphenes_invalidants: ['acouphènes invalidants', 'acouphènes sévères', 'acouphènes permanents', 'sifflements aigus continus', 'bourdonnements majeurs', 'acouphènes résistants', 'tinnitus invalidant', 'résistant masqueurs', 'résistant traitement'],
 };
 
 // Fonction pour enrichir le texte avec les synonymes

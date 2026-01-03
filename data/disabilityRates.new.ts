@@ -450,6 +450,31 @@ export const disabilityData: InjuryCategory[] = [
           { name: "Ablation ou altération du globe avec prothèse possible", rate: [28, 33] },
           { name: "Ablation ou altération du globe sans prothèse possible", rate: [35, 40] },
           { name: "Diminution de la vision des deux yeux (selon tableau à double entrée)", description: "Se référer au tableau p.120 du PDF. Un outil de calcul dédié est recommandé.", rate: [0, 100] },
+          
+          // 🆕 V3.3.136 - Acuité visuelle unilatérale spécifique
+          { name: "Acuité visuelle 9/10 ou 10/10 un œil", description: "Vision normale ou quasi-normale d'un seul œil.", rate: [0, 2] },
+          { name: "Acuité visuelle 8/10 un œil", description: "Légère baisse d'acuité sur un œil.", rate: [2, 5] },
+          { name: "Acuité visuelle 7/10 un œil", description: "Baisse modérée d'acuité sur un œil.", rate: [5, 8] },
+          { name: "Acuité visuelle 6/10 un œil", description: "Baisse moyenne d'acuité sur un œil.", rate: [8, 12] },
+          { name: "Acuité visuelle 5/10 un œil", description: "Baisse importante d'acuité sur un œil.", rate: [12, 18] },
+          { name: "Acuité visuelle 4/10 un œil", description: "Baisse sévère d'acuité sur un œil.", rate: [18, 22] },
+          { name: "Acuité visuelle 3/10 un œil", description: "Baisse profonde d'acuité sur un œil.", rate: [22, 27] },
+          { name: "Acuité visuelle 2/10 un œil", description: "Acuité très basse sur un œil.", rate: [27, 30] },
+          { name: "Acuité visuelle 1/10 un œil", description: "Acuité quasiment nulle sur un œil.", rate: [30, 33] },
+          { name: "Acuité visuelle <1/20 un œil", description: "Quasi-cécité d'un œil (compte doigts, perception lumière).", rate: [33, 35] },
+          
+          // 🆕 V3.3.136 - Acuité visuelle bilatérale spécifique (exemples communs)
+          { name: "Acuité visuelle bilatérale 5/10 - 6/10", description: "Vision bilatérale moyenne (OD 5/10, OG 6/10 ou similaire).", rate: [40, 50] },
+          { name: "Acuité visuelle bilatérale 4/10 - 5/10", description: "Vision bilatérale basse (OD 4/10, OG 5/10 ou similaire).", rate: [50, 60] },
+          { name: "Acuité visuelle bilatérale 3/10 - 4/10", description: "Vision bilatérale très basse (OD 3/10, OG 4/10 ou similaire).", rate: [60, 70] },
+          { name: "Acuité visuelle bilatérale 2/10 - 3/10", description: "Malvoyance sévère bilatérale (OD 2/10, OG 3/10 ou similaire).", rate: [70, 80] },
+          { name: "Acuité visuelle bilatérale 1/10 - 2/10", description: "Malvoyance profonde bilatérale (OD 1/10, OG 2/10 ou similaire).", rate: [80, 90] },
+          { name: "Acuité visuelle bilatérale <1/20 ou cécité", description: "Cécité bilatérale ou quasi-cécité des deux yeux.", rate: [90, 100] },
+          
+          // 🆕 V3.3.136 - Cataracte bilatérale post-traumatique
+          { name: "Cataracte bilatérale opérée avec implants (acuité résiduelle 5-6/10)", description: "Cataracte bilatérale post-traumatique opérée, résultat visuel moyen.", rate: [40, 55] },
+          { name: "Cataracte bilatérale opérée avec implants (acuité résiduelle 7-8/10)", description: "Cataracte bilatérale post-traumatique opérée, bon résultat visuel.", rate: [25, 40] },
+          { name: "Cataracte bilatérale opérée avec implants (acuité résiduelle 3-4/10)", description: "Cataracte bilatérale post-traumatique opérée, résultat visuel médiocre.", rate: [55, 70] },
         ]
       },
       {
@@ -537,6 +562,22 @@ export const disabilityData: InjuryCategory[] = [
         name: "Oreilles - Diminution de l'Acuité Auditive (Surdité)",
         injuries: [
           { name: "Diminution de l'acuité auditive", description: "Le taux est calculé selon un tableau complexe (p.140 du PDF) basé sur la perte en décibels. Un outil dédié est recommandé.", rate: [0, 70] },
+          
+          // 🆕 V3.3.136 - Surdité unilatérale spécifique
+          { name: "Surdité unilatérale légère (perte 20-30 dB)", description: "Hypoacousie légère d'une oreille, oreille controlatérale normale.", rate: [2, 5] },
+          { name: "Surdité unilatérale modérée (perte 40-50 dB)", description: "Hypoacousie modérée d'une oreille, oreille controlatérale normale.", rate: [5, 10] },
+          { name: "Surdité unilatérale moyenne (perte 55-70 dB)", description: "Hypoacousie moyenne d'une oreille, oreille controlatérale normale.", rate: [10, 15] },
+          { name: "Surdité unilatérale profonde", description: "Surdité profonde ou complète (cophose/anacousie) d'une oreille, oreille controlatérale normale.", rate: [15, 20] },
+          
+          // 🆕 V3.3.136 - Surdité bilatérale spécifique
+          { name: "Surdité bilatérale légère (perte 20-30 dB)", description: "Hypoacousie légère bilatérale symétrique ou moyenne bilatérale 20-30 dB.", rate: [8, 15] },
+          { name: "Surdité bilatérale modérée (perte 40-50 dB)", description: "Hypoacousie modérée bilatérale nécessitant appareillage.", rate: [20, 30] },
+          { name: "Surdité bilatérale moyenne (perte 55-70 dB)", description: "Hypoacousie moyenne-sévère bilatérale, appareillage indispensable.", rate: [35, 50] },
+          { name: "Surdité bilatérale sévère (perte 70-85 dB)", description: "Surdité sévère bilatérale avec gêne majeure, même appareillé.", rate: [50, 60] },
+          { name: "Surdité bilatérale profonde (perte > 85 dB)", description: "Anacousie ou cophose bilatérale, communication très altérée.", rate: [60, 70] },
+          
+          // 🆕 V3.3.136 - Surdité asymétrique
+          { name: "Surdité asymétrique (OD/OG > 25 dB différence)", description: "Asymétrie auditive importante entre les deux oreilles (différence > 25 dB).", rate: [15, 35] },
         ]
       },
       {
@@ -753,6 +794,21 @@ export const disabilityData: InjuryCategory[] = [
           { name: "Fistules biliaires ou purulentes (Contusion du foie)", rate: [20, 60] },
           { name: "Splénectomie (Ablation de la rate)", rate: [15, 30] },
           { name: "Splénose péritonéale (après rupture de la rate)", rate: [0, 10], description: "Généralement asymptomatique. Le taux indemnise le risque potentiel de complication (douleurs, occlusion) ou la gêne si les nodules sont volumineux.", rateCriteria: { low: "Découverte fortuite, asymptomatique.", high: "Nodules symptomatiques (douleurs abdominales chroniques) confirmés par imagerie." } },
+          
+          // 🆕 V3.3.136 - Viscères spécifiques (ablations/résections)
+          { name: "Gastrectomie totale (ablation complète estomac)", description: "Ablation totale de l'estomac avec reconstitution du circuit digestif.", rate: [50, 70] },
+          { name: "Gastrectomie partielle (ablation partielle estomac)", description: "Résection partielle de l'estomac (hémi-gastrectomie, gastrectomie 2/3).", rate: [30, 50] },
+          { name: "Colectomie totale (ablation complète côlon)", description: "Ablation totale du côlon avec iléostomie ou anastomose iléo-rectale.", rate: [60, 80] },
+          { name: "Hémicolectomie droite (ablation côlon droit)", description: "Résection du côlon droit (caecum + côlon ascendant + angle colique droit).", rate: [20, 35] },
+          { name: "Hémicolectomie gauche (ablation côlon gauche)", description: "Résection du côlon gauche (angle colique gauche + côlon descendant + sigmoïde).", rate: [20, 35] },
+          { name: "Résection intestinale grêle courte (<50 cm)", description: "Résection de moins de 50 cm d'intestin grêle, sans syndrome de grêle court.", rate: [10, 20] },
+          { name: "Résection intestinale grêle étendue (>100 cm)", description: "Résection étendue d'intestin grêle avec syndrome de grêle court (malabsorption).", rate: [40, 70] },
+          { name: "Lobectomie pulmonaire (ablation lobe poumon)", description: "Ablation d'un lobe pulmonaire (lobectomie supérieure, moyenne ou inférieure).", rate: [25, 40] },
+          { name: "Pneumonectomie (ablation poumon entier)", description: "Ablation complète d'un poumon (pneumonectomie totale).", rate: [50, 70] },
+          { name: "Cholécystectomie (ablation vésicule biliaire)", description: "Ablation de la vésicule biliaire, généralement bien tolérée.", rate: [5, 15] },
+          { name: "Splénectomie unilatérale (ablation rate)", description: "Ablation de la rate avec conservation du rein, foie et autres organes.", rate: [15, 30] },
+          { name: "Néphrectomie unilatérale (ablation rein)", description: "Ablation d'un rein avec rein restant sain et fonctionnel.", rate: [25, 35] },
+          
           { name: "Adhérences abdominales post-traumatiques/post-opératoires avec troubles du transit", rate: [10, 40], rateCriteria: { low: "Douleurs abdominales chroniques intermittentes, sans épisodes subocclusifs documentés.", high: "Syndrome occlusif ou subocclusif à répétition ayant nécessité une ou plusieurs hospitalisations/interventions." } },
           { name: "Séquelles de pancréatite aiguë post-traumatique", rate: [15, 60], rateCriteria: { low: "Pancréatite chronique modérée avec douleurs récurrentes contrôlées par le traitement.", medium: "Insuffisance pancréatique exocrine (stéatorrhée) nécessitant un traitement substitutif enzymatique.", high: "Diabète secondaire (insuffisance endocrine) nécessitant un traitement par insuline." } },
           { name: "Séquelles de colectomie partielle post-traumatique (hors stomie)", rate: [15, 30], description: "Troubles du transit (diarrhée, constipation) et douleurs abdominales après résection d'une partie du côlon.", rateCriteria: { low: "Troubles du transit modérés et bien contrôlés par le régime.", high: "Diarrhée motrice invalidante ou syndrome occlusif récidivant." } },
@@ -854,6 +910,24 @@ export const disabilityData: InjuryCategory[] = [
           { name: "Désarticulation de l'épaule ou amputation au col chirurgical (Main Non Dominante)", rate: 80, description: "Amputation complète du membre supérieur au niveau de l'épaule, côté non dominant." },
           { name: "Amputation interscapulo-thoracique (Main Dominante)", rate: 95, description: "Amputation avec ablation de l'omoplate et de la clavicule, côté dominant. Séquelle majeure." },
           { name: "Amputation interscapulo-thoracique (Main Non Dominante)", rate: 85, description: "Amputation avec ablation de l'omoplate et de la clavicule, côté non dominant." },
+          
+          // 🆕 V3.3.136 - Amputations membre supérieur niveaux intermédiaires
+          { name: "Amputation du bras (tiers supérieur - Main Dominante)", description: "Amputation du tiers supérieur du bras (proche épaule), main dominante.", rate: [85, 90] },
+          { name: "Amputation du bras (tiers supérieur - Main Non Dominante)", description: "Amputation du tiers supérieur du bras (proche épaule), main non dominante.", rate: [75, 80] },
+          { name: "Amputation du bras (tiers moyen - Main Dominante)", description: "Amputation du tiers moyen du bras, main dominante.", rate: [75, 80] },
+          { name: "Amputation du bras (tiers moyen - Main Non Dominante)", description: "Amputation du tiers moyen du bras, main non dominante.", rate: [65, 70] },
+          { name: "Amputation du bras (tiers inférieur - Main Dominante)", description: "Amputation du tiers inférieur du bras (proche coude), main dominante.", rate: [70, 75] },
+          { name: "Amputation du bras (tiers inférieur - Main Non Dominante)", description: "Amputation du tiers inférieur du bras (proche coude), main non dominante.", rate: [60, 65] },
+          { name: "Désarticulation du coude (Main Dominante)", description: "Désarticulation au niveau de l'articulation du coude, main dominante.", rate: [70, 75] },
+          { name: "Désarticulation du coude (Main Non Dominante)", description: "Désarticulation au niveau de l'articulation du coude, main non dominante.", rate: [60, 65] },
+          { name: "Amputation de l'avant-bras (tiers supérieur - Main Dominante)", description: "Amputation du tiers supérieur de l'avant-bras (sous coude), main dominante.", rate: [65, 70] },
+          { name: "Amputation de l'avant-bras (tiers supérieur - Main Non Dominante)", description: "Amputation du tiers supérieur de l'avant-bras (sous coude), main non dominante.", rate: [55, 60] },
+          { name: "Amputation de l'avant-bras (tiers moyen - Main Dominante)", description: "Amputation du tiers moyen de l'avant-bras, main dominante.", rate: [60, 65] },
+          { name: "Amputation de l'avant-bras (tiers moyen - Main Non Dominante)", description: "Amputation du tiers moyen de l'avant-bras, main non dominante.", rate: [50, 55] },
+          { name: "Amputation de l'avant-bras (tiers inférieur - Main Dominante)", description: "Amputation du tiers inférieur de l'avant-bras (proche poignet), main dominante.", rate: [55, 60] },
+          { name: "Amputation de l'avant-bras (tiers inférieur - Main Non Dominante)", description: "Amputation du tiers inférieur de l'avant-bras (proche poignet), main non dominante.", rate: [45, 50] },
+          { name: "Désarticulation du poignet (Main Dominante)", description: "Désarticulation au niveau de l'articulation du poignet, main dominante.", rate: [55, 60] },
+          { name: "Désarticulation du poignet (Main Non Dominante)", description: "Désarticulation au niveau de l'articulation du poignet, main non dominante.", rate: [45, 50] },
         ]
        },
        {
@@ -878,6 +952,14 @@ export const disabilityData: InjuryCategory[] = [
         injuries: [
           { name: "Raideur de l'épaule (propulsion, abduction, rotation) (Main Dominante)", rate: [5, 30], rateCriteria: { low: "Limitation des amplitudes extrêmes, abduction possible > 90°.", medium: "Abduction limitée à 90°, rotation externe/interne limitée de 50%.", high: "Abduction < 60°, quasi-ankylose, main ne peut atteindre la tête." } },
           { name: "Raideur de l'épaule (propulsion, abduction, rotation) (Main Non Dominante)", rate: [4, 25], rateCriteria: { low: "Limitation légère.", medium: "Limitation modérée.", high: "Quasi-ankylose." } },
+          { name: "Raideur de l'épaule - Abduction 60-90°", rate: [10, 18], description: "Limitation modérée de l'abduction entre 60 et 90 degrés, sans atteinte majeure de rotation." },
+          { name: "Raideur de l'épaule - Abduction 60-90° + rotation", rate: [15, 25], description: "Limitation modérée de l'abduction (60-90°) associée à une limitation des rotations." },
+          { name: "Raideur de l'épaule - Limitation rotation", rate: [8, 15], description: "Limitation principalement de la rotation externe et/ou interne, abduction relativement préservée." },
+          { name: "Raideur de l'épaule - Élévation limitée", rate: [10, 20], description: "Limitation de l'élévation antérieure (antépulsion/propulsion), difficulté à lever le bras devant." },
+          { name: "Raideur de l'épaule avec douleur", rate: [12, 22], description: "Raideur modérée associée à des douleurs mécaniques ou nocturnes persistantes." },
+          { name: "Raideur de l'épaule avec limitation fonctionnelle", rate: [15, 25], description: "Raideur entraînant une gêne importante dans les gestes de la vie quotidienne." },
+          { name: "Raideur + instabilité épaule", rate: [20, 35], description: "Association d'une raideur et d'une instabilité chronique (séquelle complexe)." },
+          { name: "Raideur épaule abduction <90° + rotation", rate: [18, 28], description: "Limitation sévère : abduction inférieure à 90° avec atteinte rotations." },
           { name: "Ankylose d'épaule avec mobilité de l'omoplate (Main Dominante)", rate: [35, 45], rateCriteria: { low: "Ankylose en position fonctionnelle (abduction 45-60°).", high: "Ankylose en adduction stricte ou abduction > 90°." } },
           { name: "Ankylose d'épaule avec mobilité de l'omoplate (Main Non Dominante)", rate: [25, 30], rateCriteria: { low: "Position fonctionnelle.", high: "Position non fonctionnelle." } },
           { name: "Ankylose d'épaule avec fixation de l'omoplate (Main Dominante)", rate: [45, 60], rateCriteria: { low: "Position fonctionnelle.", high: "Position non fonctionnelle." } },
@@ -912,6 +994,8 @@ export const disabilityData: InjuryCategory[] = [
             { name: "Amputation du bras au tiers moyen ou inférieur (Main Non Dominante)", rate: [70, 75], rateCriteria: { low: "Moignon long.", high: "Moignon court." } },
             { name: "Amputation du bras au tiers supérieur (Main Dominante)", rate: [80, 85], rateCriteria: { low: "Moignon long.", high: "Moignon très court, difficilement appareillable." } },
             { name: "Amputation du bras au tiers supérieur (Main Non Dominante)", rate: [70, 75], rateCriteria: { low: "Moignon long.", high: "Moignon très court." } },
+            { name: "Amputation du bras au tiers moyen", rate: [80, 85], description: "Amputation de l'humérus dans sa partie moyenne, côté dominant supposé." },
+            { name: "Amputation du bras au tiers inférieur", rate: [80, 85], description: "Amputation de l'humérus dans sa partie distale, proche du coude." },
         ]
        },
        {
@@ -997,6 +1081,9 @@ export const disabilityData: InjuryCategory[] = [
         injuries: [
             { name: "Amputation de l'avant-bras (Main Dominante)", rate: [70, 75], rateCriteria: { low: "Moignon long.", high: "Moignon court." } },
             { name: "Amputation de l'avant-bras (Main Non Dominante)", rate: [60, 65], rateCriteria: { low: "Moignon long.", high: "Moignon court." } },
+            { name: "Amputation de l'avant-bras au tiers moyen", rate: [70, 75], description: "Amputation du radius et cubitus dans leur partie moyenne." },
+            { name: "Amputation de l'avant-bras au tiers supérieur", rate: [72, 77], description: "Amputation du radius et cubitus dans leur partie proximale, proche du coude." },
+            { name: "Amputation de l'avant-bras au tiers inférieur", rate: [68, 73], description: "Amputation du radius et cubitus dans leur partie distale, proche du poignet." },
             { name: "Perte des deux mains ou désarticulation des poignets", rate: 100 },
         ]
        },
@@ -1060,6 +1147,11 @@ export const disabilityData: InjuryCategory[] = [
             { name: "Ankylose du poignet - En flexion ou extension (Main Non Dominante)", rate: [25, 35] },
             { name: "Raideur du poignet (Main Dominante)", rate: [5, 15], rateCriteria: { low: "Limitation de 25% des mobilités.", medium: "Limitation de 50%.", high: "Quasi-ankylose." } },
             { name: "Raideur du poignet (Main Non Dominante)", rate: [4, 12], rateCriteria: { low: "Limitation de 25%.", medium: "Limitation de 50%.", high: "Quasi-ankylose." } },
+            { name: "Raideur du poignet - Flexion/extension limitée", rate: [8, 14], description: "Limitation de la flexion palmaire et/ou de l'extension dorsale du poignet." },
+            { name: "Raideur du poignet - Mobilité réduite", rate: [10, 16], description: "Réduction globale des amplitudes articulaires du poignet (flexion, extension, inclinaisons)." },
+            { name: "Raideur du poignet - Limitation sévère", rate: [15, 22], description: "Limitation majeure des mobilités, proche de l'ankylose fonctionnelle." },
+            { name: "Raideur poignet avec douleur", rate: [12, 18], description: "Raideur modérée associée à des douleurs chroniques ou mécaniques." },
+            { name: "Raideur importante du poignet", rate: [15, 20], description: "Raideur sévère avec limitation fonctionnelle importante dans les gestes quotidiens." },
         ]
       },
       {
@@ -1094,19 +1186,28 @@ export const disabilityData: InjuryCategory[] = [
       {
         name: "Doigts - Pouce (Main Dominante)",
         injuries: [
+            { name: "Amputation du pouce - Désarticulation métacarpo-phalangienne", rate: 28 },
             { name: "Perte du pouce (2 phalanges) (Main Dominante)", rate: 25 },
+            { name: "Amputation du pouce (main dominante)", rate: 28 },
             { name: "Perte de la 2ème phalange du pouce (Main Dominante)", rate: 10 },
+            { name: "Ablation 2 phalanges du pouce (Main Dominante)", rate: 25 },
+            { name: "Amputation phalange P1 du pouce", rate: 18 },
             { name: "Ankylose carpo-métacarpienne du pouce (Main Dominante)", rate: [15, 20] },
             { name: "Ankylose métacarpo-phalangienne du pouce (Main Dominante)", rate: 10 },
             { name: "Ankylose inter-phalangienne du pouce (Main Dominante)", rate: 5 },
+            { name: "Ankylose du pouce", rate: 20 },
             { name: "Raideur d'une articulation du pouce (Main Dominante)", rate: [3, 8] },
+            { name: "Raideur du pouce", rate: [3, 8] },
         ]
       },
       {
         name: "Doigts - Pouce (Main Non Dominante)",
         injuries: [
+            { name: "Amputation du pouce - Désarticulation métacarpo-phalangienne", rate: 23 },
             { name: "Perte du pouce (2 phalanges) (Main Non Dominante)", rate: 20 },
+            { name: "Amputation du pouce (main non dominante)", rate: 23 },
             { name: "Perte de la 2ème phalange du pouce (Main Non Dominante)", rate: 8 },
+            { name: "Ablation 2 phalanges du pouce (Main Non Dominante)", rate: 20 },
             { name: "Ankylose carpo-métacarpienne du pouce (Main Non Dominante)", rate: [12, 15] },
             { name: "Ankylose métacarpo-phalangienne du pouce (Main Non Dominante)", rate: 8 },
             { name: "Ankylose inter-phalangienne du pouce (Main Non Dominante)", rate: 4 },
@@ -1116,16 +1217,23 @@ export const disabilityData: InjuryCategory[] = [
       {
         name: "Doigts - Index (Main Dominante)",
         injuries: [
+            { name: "Amputation de l'index - Désarticulation métacarpo-phalangienne", rate: 15 },
             { name: "Perte de l'index (3 phalanges) (Main Dominante)", rate: 15 },
+            { name: "Amputation de l'index", rate: 15 },
             { name: "Perte de la 3ème phalange de l'index (Main Dominante)", rate: 5 },
             { name: "Perte des 2ème et 3ème phalanges de l'index (Main Dominante)", rate: 10 },
+            { name: "Amputation phalange P2 index", rate: 8 },
+            { name: "Ablation 2 phalanges de l'index (Main Dominante)", rate: 10 },
             { name: "Ankylose de l'index (totalité) (Main Dominante)", rate: 15 },
+            { name: "Ankylose de l'index", rate: 15 },
             { name: "Raideur d'une articulation de l'index (Main Dominante)", rate: [2, 5] },
+            { name: "Raideur de l'index", rate: [2, 5] },
         ]
       },
       {
         name: "Doigts - Index (Main Non Dominante)",
         injuries: [
+            { name: "Amputation de l'index - Désarticulation métacarpo-phalangienne", rate: 12 },
             { name: "Perte de l'index (3 phalanges) (Main Non Dominante)", rate: 12 },
             { name: "Perte de la 3ème phalange de l'index (Main Non Dominante)", rate: 4 },
             { name: "Perte des 2ème et 3ème phalanges de l'index (Main Non Dominante)", rate: 8 },
@@ -1136,16 +1244,22 @@ export const disabilityData: InjuryCategory[] = [
       {
         name: "Doigts - Médius (Main Dominante)",
         injuries: [
+            { name: "Amputation du médius - Désarticulation métacarpo-phalangienne", rate: 12 },
             { name: "Perte du médius (3 phalanges) (Main Dominante)", rate: 12 },
+            { name: "Amputation du médius", rate: 12 },
             { name: "Perte de la 3ème phalange du médius (Main Dominante)", rate: 4 },
             { name: "Perte des 2ème et 3ème phalanges du médius (Main Dominante)", rate: 8 },
+            { name: "Ablation 2 phalanges du médius (Main Dominante)", rate: 8 },
             { name: "Ankylose du médius (totalité) (Main Dominante)", rate: 12 },
+            { name: "Ankylose du médius", rate: 12 },
             { name: "Raideur d'une articulation du médius (Main Dominante)", rate: [1, 4] },
+            { name: "Raideur du médius", rate: [1, 4] },
         ]
       },
       {
         name: "Doigts - Médius (Main Non Dominante)",
         injuries: [
+            { name: "Amputation du médius - Désarticulation métacarpo-phalangienne", rate: 10 },
             { name: "Perte du médius (3 phalanges) (Main Non Dominante)", rate: 10 },
             { name: "Perte de la 3ème phalange du médius (Main Non Dominante)", rate: 3 },
             { name: "Perte des 2ème et 3ème phalanges du médius (Main Non Dominante)", rate: 6 },
@@ -1156,16 +1270,21 @@ export const disabilityData: InjuryCategory[] = [
       {
         name: "Doigts - Annulaire (Main Dominante)",
         injuries: [
+            { name: "Amputation de l'annulaire - Désarticulation métacarpo-phalangienne", rate: 10 },
             { name: "Perte de l'annulaire (3 phalanges) (Main Dominante)", rate: 8 },
+            { name: "Amputation de l'annulaire", rate: 10 },
             { name: "Perte de la 3ème phalange de l'annulaire (Main Dominante)", rate: 3 },
             { name: "Perte des 2ème et 3ème phalanges de l'annulaire (Main Dominante)", rate: 6 },
             { name: "Ankylose de l'annulaire (totalité) (Main Dominante)", rate: 8 },
+            { name: "Ankylose de l'annulaire", rate: 8 },
             { name: "Raideur d'une articulation de l'annulaire (Main Dominante)", rate: [1, 3] },
+            { name: "Raideur de l'annulaire", rate: [1, 3] },
         ]
       },
       {
         name: "Doigts - Annulaire (Main Non Dominante)",
         injuries: [
+            { name: "Amputation de l'annulaire - Désarticulation métacarpo-phalangienne", rate: 7 },
             { name: "Perte de l'annulaire (3 phalanges) (Main Non Dominante)", rate: 6 },
             { name: "Perte de la 3ème phalange de l'annulaire (Main Non Dominante)", rate: 2 },
             { name: "Perte des 2ème et 3ème phalanges de l'annulaire (Main Non Dominante)", rate: 4 },
@@ -1176,21 +1295,39 @@ export const disabilityData: InjuryCategory[] = [
       {
         name: "Doigts - Auriculaire (Main Dominante)",
         injuries: [
+            { name: "Amputation de l'auriculaire - Désarticulation métacarpo-phalangienne", rate: 10 },
             { name: "Perte de l'auriculaire (3 phalanges) (Main Dominante)", rate: 10 },
+            { name: "Amputation de l'auriculaire", rate: 10 },
             { name: "Perte de la 3ème phalange de l'auriculaire (Main Dominante)", rate: 4 },
+            { name: "Ablation phalange unguéale de l'auriculaire (Main Dominante)", rate: 3 },
             { name: "Perte des 2ème et 3ème phalanges de l'auriculaire (Main Dominante)", rate: 7 },
             { name: "Ankylose de l'auriculaire (totalité) (Main Dominante)", rate: 10 },
+            { name: "Ankylose de l'auriculaire", rate: 10 },
             { name: "Raideur d'une articulation de l'auriculaire (Main Dominante)", rate: [1, 3] },
+            { name: "Raideur de l'auriculaire", rate: [1, 3] },
         ]
       },
       {
         name: "Doigts - Auriculaire (Main Non Dominante)",
         injuries: [
+            { name: "Amputation de l'auriculaire - Désarticulation métacarpo-phalangienne", rate: 8 },
             { name: "Perte de l'auriculaire (3 phalanges) (Main Non Dominante)", rate: 8 },
             { name: "Perte de la 3ème phalange de l'auriculaire (Main Non Dominante)", rate: 3 },
             { name: "Perte des 2ème et 3ème phalanges de l'auriculaire (Main Non Dominante)", rate: 5 },
             { name: "Ankylose de l'auriculaire (totalité) (Main Non Dominante)", rate: 8 },
             { name: "Raideur d'une articulation de l'auriculaire (Main Non Dominante)", rate: [1, 2] },
+        ]
+      },
+      {
+        name: "Doigts - Amputations Multiples",
+        injuries: [
+            { name: "Amputation de deux doigts", rate: 18 },
+            { name: "Amputation de deux doigts (hors pouce)", rate: 18 },
+            { name: "Amputation de trois doigts", rate: 28 },
+            { name: "Amputation de trois doigts dont le pouce", rate: 35 },
+            { name: "Amputation de quatre doigts", rate: 45 },
+            { name: "Perte 4 doigts incluant Pouce + Index + Médius + Annulaire (Main Dominante)", rate: 58 },
+            { name: "Amputation totale des 5 doigts", rate: 65 },
         ]
       },
     ]
@@ -1203,6 +1340,17 @@ export const disabilityData: InjuryCategory[] = [
         injuries: [
             { name: "Amputation d'un membre inférieur", rate: [70, 80], rateCriteria: { low: "Amputation sous le genou avec moignon long et bien appareillable.", high: "Désarticulation de la hanche ou amputation de cuisse avec moignon très court." } },
             { name: "Amputation des deux membres inférieurs", rate: 100 },
+            
+            // 🆕 V3.3.136 - Amputations membre inférieur spécifiques
+            { name: "Amputation de cuisse (tiers supérieur)", description: "Amputation du tiers supérieur de la cuisse (proche hanche).", rate: [75, 80] },
+            { name: "Amputation de cuisse (tiers moyen)", description: "Amputation du tiers moyen de la cuisse.", rate: [70, 75] },
+            { name: "Amputation de cuisse (tiers inférieur)", description: "Amputation du tiers inférieur de la cuisse (proche genou).", rate: [65, 70] },
+            { name: "Désarticulation du genou", description: "Désarticulation au niveau du genou.", rate: [60, 65] },
+            { name: "Amputation de jambe (tiers supérieur)", description: "Amputation du tiers supérieur de la jambe (sous genou).", rate: [55, 60] },
+            { name: "Amputation de jambe (tiers moyen)", description: "Amputation du tiers moyen de la jambe.", rate: [50, 55] },
+            { name: "Amputation de jambe (tiers inférieur)", description: "Amputation du tiers inférieur de la jambe (proche cheville).", rate: [45, 50] },
+            { name: "Désarticulation de la cheville", description: "Désarticulation tibio-tarsienne.", rate: [40, 45] },
+            { name: "Désarticulation de la hanche", description: "Désarticulation complète au niveau de la hanche.", rate: [78, 80] },
         ]
       },
       {
@@ -1290,6 +1438,13 @@ export const disabilityData: InjuryCategory[] = [
         injuries: [
             { name: "Ankylose de la cheville", rate: [20, 30], rateCriteria: { low: "Position à angle droit.", high: "En équin ou talus." } },
             { name: "Raideur de la cheville", rate: [5, 15], rateCriteria: { low: "Limitation modérée de la flexion-extension.", high: "Quasi-ankylose." } },
+            { name: "Raideur importante de la cheville", rate: [12, 20], description: "Raideur sévère de la cheville avec limitation fonctionnelle majeure." },
+            { name: "Raideur modérée de la cheville", rate: [8, 15], description: "Raideur modérée avec limitation partielle des mobilités." },
+            { name: "Raideur de la cheville - Dorsiflexion 0-10°", rate: [10, 18], description: "Limitation sévère de la dorsiflexion (flexion dorsale) entre 0 et 10 degrés." },
+            { name: "Équin modéré de la cheville", rate: [10, 18], description: "Déformation en équin (pied en extension) modérée avec limitation de la dorsiflexion." },
+            { name: "Raideur cheville avec limitation fonctionnelle", rate: [12, 20], description: "Raideur de cheville entraînant une gêne importante dans la marche quotidienne." },
+            { name: "Raideur cheville + sous-astragalienne", rate: [15, 25], description: "Raideur combinée de la tibio-tarsienne et de la sous-astragalienne." },
+            { name: "Raideur cheville post-bimalléolaire avec claudication", rate: [15, 25], description: "Raideur séquellaire de fracture bimalléolaire avec boiterie persistante." },
             { name: "Instabilité chronique de la cheville (séquelle d'entorse)", rate: [5, 15], rateCriteria: { low: "Entorses rares.", high: "Entorses à répétition, arthrose." } },
         ]
       },
@@ -1313,7 +1468,20 @@ export const disabilityData: InjuryCategory[] = [
         injuries: [
             { name: "Amputation du gros orteil", rate: [5, 8] },
             { name: "Amputation d'un autre orteil", rate: [1, 3] },
+            { name: "Amputation d'un orteil (sauf gros orteil)", rate: [1, 3], description: "Amputation d'un orteil autre que le gros orteil." },
+            { name: "Amputation de deux orteils", rate: [4, 6], description: "Amputation de deux orteils (dont ou non le gros orteil selon contexte)." },
+            { name: "Amputation de trois orteils", rate: [6, 10], description: "Amputation de trois orteils." },
+            { name: "Amputation de trois orteils ou plus (dont le gros orteil)", rate: [10, 15], description: "Amputation d'au moins trois orteils incluant le gros orteil." },
+            { name: "Amputation de quatre orteils", rate: [8, 12], description: "Amputation de quatre orteils." },
+            { name: "Amputation de tous les orteils", rate: [12, 18], description: "Amputation des cinq orteils." },
             { name: "Ankylose ou raideur du gros orteil (Hallux rigidus)", rate: [3, 10] },
+            { name: "Ankylose du gros orteil", rate: [5, 10], description: "Ankylose complète du gros orteil sans mobilité résiduelle." },
+            { name: "Raideur du gros orteil", rate: [3, 7], description: "Raideur du gros orteil avec mobilité résiduelle mais limitée." },
+            { name: "Ankylose d'un orteil (autre que gros orteil)", rate: [2, 5], description: "Ankylose d'un orteil autre que le gros orteil." },
+            { name: "Ankylose d'un orteil", rate: [2, 5], description: "Ankylose d'un orteil (non précisé)." },
+            { name: "Hallux valgus post-traumatique symptomatique", rate: [3, 8], description: "Déviation du gros orteil vers l'extérieur avec douleurs et difficultés de chaussage." },
+            { name: "Griffes des orteils post-traumatiques", rate: [3, 10], description: "Déformation en griffe d'un ou plusieurs orteils avec douleurs et difficultés de chaussage." },
+            { name: "Cal vicieux d'un métatarsien", rate: [3, 8], description: "Consolidation vicieuse d'une fracture métatarsienne avec douleurs à la marche." },
         ]
       },
       {
@@ -2321,6 +2489,138 @@ export const disabilityData: InjuryCategory[] = [
   
     ]
   
+  },
+
+  // SECTION: Cumuls et Polytraumatismes (🆕 V3.3.135)
+  {
+    name: "Cumuls de Lésions et Polytraumatismes",
+    subcategories: [
+      {
+        name: "Cumuls Simples - Même Membre",
+        injuries: [
+          { name: "Raideur genou + instabilité LCA (cumul)", rate: [25, 35], description: "Cumul d'une raideur du genou avec séquelles de rupture du LCA." },
+          { name: "Raideur cheville + séquelles fracture (cumul)", rate: [20, 30], description: "Cumul d'une raideur de cheville avec séquelles de fracture malléolaire ou bimalléolaire." },
+          { name: "Raideur épaule + rupture coiffe (cumul)", rate: [28, 40], description: "Cumul d'une raideur d'épaule avec rupture de la coiffe des rotateurs." },
+          { name: "Raideur poignet + fracture scaphoïde (cumul)", rate: [15, 25], description: "Cumul d'une raideur du poignet avec séquelles de fracture du scaphoïde." },
+          { name: "Raideur coude + déficit nerf cubital (cumul)", rate: [22, 32], description: "Cumul d'une raideur de coude avec atteinte du nerf cubital." },
+          { name: "Amputation index + raideur main (cumul)", rate: [18, 28], description: "Cumul d'une amputation d'un doigt avec raideur des autres doigts." },
+          { name: "Méniscectomie + chondropathie sévère (cumul)", rate: [25, 35], description: "Cumul méniscectomie et arthrose fémoro-patellaire ou fémoro-tibiale." },
+          { name: "Raideur hanche + boiterie sévère (cumul)", rate: [24, 34], description: "Cumul raideur de hanche avec claudication nécessitant une aide à la marche." },
+          { name: "Pilon tibial + raideur cheville + hallux (cumul)", rate: [30, 42], description: "Cumul de 3 lésions du pied: séquelles de pilon tibial, raideur de cheville, et atteinte du gros orteil." },
+          { name: "Tassement + raideur rachis + sciatique (cumul)", rate: [20, 30], description: "Cumul tassement vertébral, raideur rachidienne, et névralgie sciatique." },
+          { name: "Fracture radius + raideur + déficit force (cumul)", rate: [22, 32], description: "Cumul fracture avant-bras, raideur poignet, et déficit de force de préhension." },
+          { name: "Luxation + instabilité + raideur épaule (cumul)", rate: [30, 42], description: "Cumul luxation récidivante, instabilité chronique, et raideur d'épaule." },
+          { name: "Plateaux tibiaux + raideur + arthrose (cumul)", rate: [28, 38], description: "Cumul fracture des plateaux tibiaux, raideur du genou, et gonarthrose." },
+          { name: "Malléole + entorse + instabilité (cumul)", rate: [22, 32], description: "Cumul fracture malléolaire, entorse grave, et instabilité chronique de cheville." },
+          { name: "Amputation pouce + ankylose index (cumul)", rate: [25, 35], description: "Cumul amputation du pouce avec ankylose d'un autre doigt long." },
+          { name: "Olécrane + raideur coude (cumul)", rate: [20, 30], description: "Cumul séquelles de fracture de l'olécrane avec raideur du coude." },
+          { name: "Calcanéum + raideur + troubles marche (cumul)", rate: [26, 36], description: "Cumul fracture du calcanéum, raideur sous-astragalienne, et troubles de la marche." },
+          { name: "Syndrome cervical + raideur + névralgie (cumul)", rate: [22, 32], description: "Cumul syndrome cervical, raideur du rachis cervical, et névralgie cervico-brachiale." },
+          { name: "Col fémur + raideur + raccourcissement (cumul)", rate: [28, 40], description: "Cumul fracture du col fémoral, raideur de hanche, et raccourcissement de membre." },
+          { name: "LCA + méniscectomie + instabilité (cumul)", rate: [30, 40], description: "Cumul rupture LCA, méniscectomie, et instabilité résiduelle du genou." },
+          { name: "Raideur genou + dérobements", rate: [18, 28], description: "Cumul raideur du genou avec instabilité fonctionnelle et dérobements fréquents." },
+          { name: "Raideur + instabilité épaule", rate: [18, 30], description: "Association raideur et instabilité chronique de l'épaule." },
+          { name: "Fracture bimalléolaire + troubles marche", rate: [20, 30], description: "Séquelles de fracture bimalléolaire avec troubles persistants de la marche." },
+        ]
+      },
+      {
+        name: "Polytraumatismes - Membres Multiples",
+        injuries: [
+          { name: "Polytraumatisme membre inférieur + supérieur", rate: [40, 55], description: "Atteinte simultanée d'un membre inférieur et d'un membre supérieur." },
+          { name: "Polytraumatisme épaule + genou + rachis", rate: [35, 48], description: "Atteinte de l'épaule, du genou, et du rachis dans un même accident." },
+          { name: "Polytraumatisme crâne + thorax + hanche", rate: [38, 50], description: "Traumatisme crânien, thoracique, et de la hanche." },
+          { name: "Polytraumatisme main + 2 membres inférieurs", rate: [42, 55], description: "Atteinte de la main et des deux membres inférieurs." },
+          { name: "Polytraumatisme vision + audition + genou", rate: [48, 62], description: "Atteintes sensorielles (vision et audition) associées à une lésion du genou." },
+          { name: "Polytraumatisme bassin + 2 membres + rachis", rate: [52, 65], description: "Fracture du bassin avec atteintes des membres et du rachis." },
+          { name: "Polytraumatisme 2 membres supérieurs + rachis", rate: [38, 50], description: "Atteinte des deux membres supérieurs et du rachis." },
+          { name: "Polytraumatisme thorax + abdomen sévère", rate: [35, 48], description: "Traumatisme thoraco-abdominal avec atteintes viscérales multiples." },
+          { name: "Polytraumatisme membre inférieur + supérieur droit complet", rate: [48, 60], description: "Atteinte complète du membre inférieur et supérieur du même côté." },
+          { name: "Polytraumatisme rachis triple étage", rate: [32, 42], description: "Atteinte du rachis sur trois étages (cervical, dorsal, lombaire)." },
+          { name: "Polytraumatisme membre inférieur droit complet", rate: [50, 62], description: "Atteinte de toutes les articulations du membre inférieur (hanche, genou, cheville, pied)." },
+          { name: "Polytraumatisme membre supérieur gauche complet", rate: [45, 58], description: "Atteinte complète du membre supérieur (épaule, coude, poignet, main)." },
+          { name: "Polytraumatisme sensoriel + rachis", rate: [48, 60], description: "Atteintes sensorielles (vision et/ou audition) associées à une atteinte rachidienne." },
+          { name: "Polytraumatisme bassin-rachis complexe", rate: [45, 58], description: "Fractures complexes du bassin et du rachis lombo-sacré." },
+          { name: "Polytraumatisme neurologique membre inférieur", rate: [38, 50], description: "Atteintes neurologiques multiples du membre inférieur (sciatique, fibulaire, steppage)." },
+          { name: "Polytraumatisme viscères multiples", rate: [40, 55], description: "Atteintes de plusieurs organes abdominaux (rate, rein, pancréas, etc.)." },
+          { name: "Polytraumatisme main dominante complète", rate: [50, 62], description: "Atteinte complète de la main dominante (doigts, poignet, avant-bras)." },
+          { name: "Destruction genou (polytraumatisme intra-articulaire)", rate: [40, 52], description: "Destruction du genou avec atteintes ligamentaires et méniscales multiples." },
+          { name: "Destruction cheville-pied (polytraumatisme)", rate: [42, 55], description: "Destruction cheville et pied avec atteintes de multiples articulations." },
+          { name: "Raideur rachis global (polytraumatisme axial)", rate: [35, 48], description: "Raideur globale du rachis sur plusieurs étages." },
+          { name: "Polytraumatisme 2 membres inférieurs", rate: [55, 68], description: "Atteinte des deux membres inférieurs dans le même accident." },
+        ]
+      },
+      {
+        name: "Formules de Cumul (Référence)",
+        injuries: [
+          { name: "Cumul de 2 lésions (Formule de Balthazar)", rate: [0, 0], description: "Référence pour calcul: appliquer la formule de Balthazar pour deux lésions distinctes." },
+          { name: "Cumul de 3 lésions (Formule de Balthazar)", rate: [0, 0], description: "Référence pour calcul: appliquer la formule de Balthazar pour trois lésions distinctes." },
+          { name: "Cumul de 4 lésions (Formule de Balthazar)", rate: [0, 0], description: "Référence pour calcul: appliquer la formule de Balthazar pour quatre lésions distinctes." },
+          { name: "Cumul de 5 lésions (Formule de Balthazar)", rate: [0, 0], description: "Référence pour calcul: appliquer la formule de Balthazar pour cinq lésions ou plus." },
+          { name: "Cumul de 7 lésions (Formule de Balthazar)", rate: [0, 0], description: "Référence pour calcul: polytraumatisme majeur nécessitant formule de Balthazar complexe." },
+        ]
+      }
+    ]
+  },
+  
+  // 🆕 V3.3.136 - SECTION: États Antérieurs et Aggravation de Pathologies Préexistantes
+  {
+    name: "États Antérieurs et Aggravation de Pathologies Préexistantes",
+    subcategories: [
+      {
+        name: "Aggravation Rachis sur État Antérieur",
+        injuries: [
+          { name: "Aggravation arthrose rachis sur état antérieur", description: "Aggravation d'une arthrose vertébrale préexistante suite à traumatisme.", rate: [10, 25] },
+          { name: "Tassement vertébral sur discopathie préexistante", description: "Tassement sur discopathie ou arthrose préexistante.", rate: [12, 28] },
+          { name: "Hernie discale sur canal étroit préexistant", description: "Hernie discale aggravant un canal lombaire étroit congénital ou dégénératif.", rate: [15, 30] },
+          { name: "Fracture rachis sur scoliose préexistante", description: "Fracture vertébrale compliquant une scoliose ancienne.", rate: [18, 35] },
+          { name: "Sciatique sur arthrose lombaire préexistante", description: "Sciatique post-traumatique sur contexte d'arthrose lombaire.", rate: [10, 22] },
+        ]
+      },
+      {
+        name: "Aggravation Genou sur État Antérieur",
+        injuries: [
+          { name: "Fracture genou sur gonarthrose préexistante", description: "Fracture du genou aggravant une arthrose préexistante.", rate: [18, 35] },
+          { name: "Entorse LCA sur méniscectomie ancienne", description: "Rupture LCA compliquant une méniscectomie réalisée antérieurement.", rate: [15, 30] },
+          { name: "Raideur genou sur prothèse préexistante", description: "Raideur post-traumatique sur prothèse totale de genou préexistante.", rate: [20, 38] },
+          { name: "Chondropathie aggravée sur arthrose genou", description: "Aggravation traumatique d'une chondropathie ou gonarthrose connue.", rate: [12, 25] },
+        ]
+      },
+      {
+        name: "Aggravation Épaule sur État Antérieur",
+        injuries: [
+          { name: "Luxation épaule sur omarthrose préexistante", description: "Luxation compliquant une arthrose gléno-humérale préexistante.", rate: [18, 32] },
+          { name: "Fracture épaule sur rupture coiffe ancienne", description: "Fracture sur contexte de rupture de coiffe des rotateurs ancienne.", rate: [20, 38] },
+          { name: "Raideur épaule sur prothèse préexistante", description: "Raideur post-traumatique sur prothèse d'épaule préexistante.", rate: [22, 40] },
+          { name: "Capsulite rétractile sur tendinopathie ancienne", description: "Capsulite aggravée par contexte de tendinopathie chronique.", rate: [15, 28] },
+        ]
+      },
+      {
+        name: "Aggravation Main et Poignet sur État Antérieur",
+        injuries: [
+          { name: "Fracture poignet sur rhizarthrose préexistante", description: "Fracture du poignet aggravant une rhizarthrose (arthrose base pouce).", rate: [12, 22] },
+          { name: "Fracture scaphoïde sur arthrose carpe", description: "Fracture du scaphoïde compliquant une arthrose carpienne préexistante.", rate: [15, 28] },
+          { name: "Raideur main sur amputation ancienne", description: "Raideur compliquant une amputation digitale ancienne.", rate: [18, 32] },
+          { name: "Syndrome canal carpien sur ténosynovite ancienne", description: "Canal carpien aggravé sur ténosynovite chronique préexistante.", rate: [10, 20] },
+        ]
+      },
+      {
+        name: "Aggravation Hanche et Membre Inférieur sur État Antérieur",
+        injuries: [
+          { name: "Fracture hanche sur coxarthrose préexistante", description: "Fracture du col fémoral ou trochantérienne sur arthrose de hanche connue.", rate: [25, 45] },
+          { name: "Luxation hanche sur prothèse préexistante", description: "Luxation post-traumatique d'une prothèse totale de hanche.", rate: [22, 40] },
+          { name: "Fracture cheville sur arthrose tibio-tarsienne", description: "Fracture de cheville compliquant une arthrose préexistante.", rate: [18, 32] },
+          { name: "Amputation sur neuropathie diabétique", description: "Amputation d'orteil ou pied sur contexte de neuropathie diabétique.", rate: [30, 50] },
+        ]
+      },
+      {
+        name: "Aggravation Affections Sensorielles sur État Antérieur",
+        injuries: [
+          { name: "Traumatisme crânien sur surdité préexistante", description: "Aggravation d'une surdité partielle préexistante par traumatisme crânien.", rate: [15, 30] },
+          { name: "Atteinte visuelle sur amblyopie préexistante", description: "Traumatisme oculaire aggravant une amblyopie (œil paresseux) ancienne.", rate: [12, 25] },
+          { name: "Cataracte traumatique sur glaucome préexistant", description: "Cataracte post-traumatique compliquant un glaucome connu.", rate: [18, 35] },
+        ]
+      }
+    ]
   },
 
   // SECTION: Complications Psychiatriques Spécifiques
