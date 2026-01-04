@@ -10571,7 +10571,8 @@ export const detectMultipleLesions = (text: string): {
         lesionTypes.length,  // Nombre de types de lésions différents
         hasTripleLesion ? 3 : (hasDoubleLesion ? 2 : 1),  // 🆕 Compter os+ligament+muscle
         hasChevilleEtGenou && (hasBoneLesion || hasLigamentLesion || hasNerveLesion) ? 3 : 1,  // 🆕 Cheville + genou + lésion = au moins 3
-        hasAmputationAndTendon ? 2 : 1  // 🆕 V3.3.133: Amputation + tendon = au moins 2 lésions
+        hasAmputationAndTendon ? 2 : 1,  // 🆕 V3.3.133: Amputation + tendon = au moins 2 lésions
+        hasPlexusAndAmputation ? 2 : 1   // 🆕 V3.3.140: Plexus/paralysie + amputation = au moins 2 lésions
     );
     
     return {
