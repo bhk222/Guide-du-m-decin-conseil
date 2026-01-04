@@ -11311,8 +11311,22 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
                     isCumul: true
                 } as LocalProposal;
             } else if (lesionProposals.length === 1) {
-                // Si une seule lésion identifiée, retourner celle-ci directement
-                return lesionProposals[0];
+                // V3.3.140: Si une seule lésion identifiée sur plusieurs attendues, retourner en format CumulProposals
+                const proposal = lesionProposals[0];
+                const rate = Array.isArray(proposal.injury.rate) 
+                    ? Math.round((proposal.injury.rate[0] + proposal.injury.rate[1]) / 2)
+                    : proposal.injury.rate;
+                
+                console.warn(`⚠️ Seulement 1/${individualLesions.length} lésion(s) trouvée(s)`);
+                
+                return {
+                    type: 'cumul_proposals',
+                    text: `⚠️ <strong>CUMUL DE LÉSIONS DÉTECTÉ - ${individualLesions.length} lésions identifiées</strong><br><br>` +
+                          `J'ai détecté plusieurs lésions mais n'ai pu identifier qu'une seule dans la base de données.<br>` +
+                          `Veuillez accepter ou refuser chaque lésion individuellement :`,
+                    proposals: [proposal],
+                    lesionCount: individualLesions.length
+                } as CumulProposals;
             }
         }
     }
