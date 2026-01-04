@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { calculateVisionBinoculaireIPP, VisionLevel } from '../utils/visionBinoculaireCalculator';
+import { calculateVisionBinoculaireIPP, VisionLevel } from '../../utils/visionBinoculaireCalculator';
 
 const VISION_LEVELS: VisionLevel[] = [
   "10/10",

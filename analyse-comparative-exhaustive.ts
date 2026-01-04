@@ -186,21 +186,31 @@ function extractAppSequelles(categories: InjuryCategory[], zoneNames: string[]):
                               zoneName.toLowerCase().includes(p.toLowerCase()))
       );
       
-      if (cat.injuries) {
-        for (const injury of cat.injuries) {
-          if (isTargetZone || path.length === 0) {
-            sequelles.push({
-              libelle: injury.name,
-              ipp: injury.rate,
-              source: currentPath.join(' > '),
-              path: currentPath.join(' > ')
-            });
+      // Traiter les sous-catégories
+      if (cat.subcategories) {
+        for (const subcat of cat.subcategories) {
+          const subcatPath = [...currentPath, subcat.name];
+          
+          // Vérifier si la sous-catégorie est dans une zone cible
+          const isSubcatTargetZone = zoneNames.some(zoneName => 
+            subcatPath.some(p => p.toLowerCase().includes(zoneName.toLowerCase()) || 
+                                zoneName.toLowerCase().includes(p.toLowerCase()))
+          );
+          
+          // Traiter les blessures de la sous-catégorie
+          if (subcat.injuries) {
+            for (const injury of subcat.injuries) {
+              if (isSubcatTargetZone || isTargetZone || path.length === 0) {
+                sequelles.push({
+                  libelle: injury.name,
+                  ipp: injury.rate,
+                  source: subcatPath.join(' > '),
+                  path: subcatPath.join(' > ')
+                });
+              }
+            }
           }
         }
-      }
-      
-      if (cat.subcategories) {
-        traverse(cat.subcategories, currentPath);
       }
     }
   }

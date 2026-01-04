@@ -12,11 +12,13 @@ export interface Injury {
     high: string;
   }
   excludeContext?: string[]; // Mots-clés pour exclure cette lésion dans certains contextes
+  path?: string; // Chemin hiérarchique de la lésion
 }
 
 export interface InjurySubcategory {
   name:string;
   injuries: Injury[];
+  description?: string;
 }
 
 export interface InjuryCategory {
@@ -70,7 +72,7 @@ export interface Drug {
 export interface Appareillage {
   reference: string;
   nom: string;
-  categorie: string;
+  categorie?: string;
   type?: string;
   remboursement?: string;
   description: string;
@@ -78,6 +80,8 @@ export interface Appareillage {
   criteres_conformite?: string[];
   adjonctions?: string[];
   references_composees?: string[];
+  combinaison?: string;
+  remarque?: string;
 }
 
 export interface AISearchResult {

@@ -123,8 +123,9 @@ testCases.forEach(testCase => {
       
     } else if (result.type === 'cumul_proposals') {
       // V3.3.133: Valider cumuls correctement
-      const foundName = result.name || `Polytraumatisme (cumul ${result.lesionCount} lésions)`;
-      const foundRate = result.rate || 0;
+      const firstProposal = result.proposals && result.proposals[0];
+      const foundName = firstProposal ? firstProposal.injury.name : `Polytraumatisme (cumul ${result.lesionCount} lésions)`;
+      const foundRate = firstProposal ? (typeof firstProposal.injury.rate === 'number' ? firstProposal.injury.rate : firstProposal.injury.rate[0]) : 0;
       
       // Vérification reconnaissance (cumul accepté si mots "polytraumatisme" ou "cumul")
       const normalizedExpected = testCase.expected.toLowerCase();
@@ -193,8 +194,8 @@ console.log('\n' + '═'.repeat(80));
 
 // Prédiction sur 297 cas complets
 const predictedSuccess = Math.round(297 * successCount / totalTests);
-const predictedRecognition = (recognitionRate * 1.0).toFixed(1);
-const predictedRate = (rateAccuracy * 1.0).toFixed(1);
+const predictedRecognition = parseFloat(recognitionRate).toFixed(1);
+const predictedRate = parseFloat(rateAccuracy).toFixed(1);
 
 console.log('\n🎯 PRÉDICTIONS SUR 297 CAS COMPLETS:\n');
 console.log(`   Cas réussis attendus: ${predictedSuccess}/297 (${successRate}%)`);
