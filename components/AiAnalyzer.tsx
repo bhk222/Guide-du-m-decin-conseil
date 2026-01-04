@@ -10604,6 +10604,24 @@ const extractIndividualLesions = (text: string): string[] => {
         }
     }
     
+    // 🆕 Pattern 0E: Cumul "X avec amputation Y" (V3.3.138)
+    // Ex: "plexus brachial avec amputation P1 D3"
+    // Ex: "paralysie Erb avec amputation doigt"
+    const amputationCumulPattern = /(.+?)\s+avec\s+(amputation\s+(?:de\s+)?(?:p[123]\s+d[1-5]|phalange|doigt|[a-zéèêàâ]+))/i;
+    if (amputationCumulPattern.test(normalized)) {
+        const match = normalized.match(amputationCumulPattern);
+        if (match) {
+            const lesion1 = match[1].trim();
+            const lesion2 = match[2].trim();
+            if (lesion1.length >= 5 && lesion2.length >= 5) {
+                lesions.push(lesion1);
+                lesions.push(lesion2);
+                console.log('✅ Pattern 0E (cumul avec amputation) détecté:', lesions);
+                return lesions;
+            }
+        }
+    }
+    
     // Pattern 0A: Format compact 'X + Y + Z' avec séparateur + (V3.3.132)
     // Ex: "LCA + méniscectomie totale + instabilité genou"
     // Ex: "fracture radius + rupture TFCC + instabilité poignet"
@@ -11170,6 +11188,24 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
                 // Si "diaphyse" sans "diaphysaire", ajouter
                 if (/diaphyse(?!\w)/i.test(lesion) && !/diaphysaire/i.test(lesion)) {
                     enrichedLesion = enrichedLesion.replace(/diaphyse/i, 'diaphysaire');
+                }
+                
+                // 🆕 V3.3.138: Si amputation avec code Px Dx (ex: P1 D3), enrichir
+                // P1 D3 = phalange proximale du doigt 3 (médius)
+                if (/amputation.*(?:p[123]|phalange).*d[1-5]/i.test(lesion)) {
+                    // Extraire le doigt concerné
+                    const doigtMatch = lesion.match(/d([1-5])/i);
+                    if (doigtMatch) {
+                        const doigtNum = parseInt(doigtMatch[1]);
+                        const doigts = ['', 'pouce', 'index', 'médius', 'annulaire', 'auriculaire'];
+                        const doigtNom = doigts[doigtNum] || 'doigt';
+                        
+                        // Enrichir avec le nom du doigt
+                        if (!/pouce|index|m[eé]dius|annulaire|auriculaire/i.test(lesion)) {
+                            enrichedLesion = `amputation ${doigtNom}`;
+                            console.log(`   🔧 Enrichissement amputation: "${lesion}" → "${enrichedLesion}"`);
+                        }
+                    }
                 }
                 
                 const processedLesion = enrichedLesion.replace(/([A-ZCSLT])\s*(\d)/gi, '$1$2');
