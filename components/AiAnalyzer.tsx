@@ -10441,7 +10441,7 @@ export const detectMultipleLesions = (text: string): {
     // 4. Comptage lésions anatomiques DISTINCTES ET SÉPARÉES (pas dans une même description)
     const parts = text.split(/\s\+\s/);
     const anatomicalKeywords = [
-        'genou', 'cheville', 'epaule', 'coude', 'poignet', 'hanche',
+        'genou', 'cheville', 'hanche',
         'rachis', 'bassin', 'main', 'pied', 'cervical', 'cervicale', 'cou'
     ];
     
@@ -10604,16 +10604,20 @@ const extractIndividualLesions = (text: string): string[] => {
         }
     }
     
-    // 🆕 Pattern 0E: Cumul "X avec amputation Y" (V3.3.138)
+    // 🆕 Pattern 0E: Cumul "X avec amputation Y" (V3.3.140)
     // Ex: "plexus brachial avec amputation P1 D3"
     // Ex: "paralysie Erb avec amputation doigt"
-    // Ex: "plexus C5-C6).avec amputation P1 D3" (gérer ponctuation)
-    const amputationCumulPattern = /(.+?)[\s.,:;]*avec\s+(amputation\s+(?:de\s+)?(?:p[123]\s+d[1-5]|phalange|doigt|[a-zéèêàâ]+))/i;
+    // Ex: "plexus C5-C6).avec amputation du P1 D3" (gérer ponctuation + du/de la)
+    const amputationCumulPattern = /(.+?)[\s.,:;]*avec\s+(amputation\s+(?:du|de\s+la|de\s+l['']|des?)?\s*(?:p[123]\s+d[1-5]|phalange[^.]+|doigt[^.]+|pouce|index|m[eé]dius|annulaire|auriculaire)[^.]*)/i;
     if (amputationCumulPattern.test(normalized)) {
         const match = normalized.match(amputationCumulPattern);
         if (match) {
             const lesion1 = match[1].trim();
-            const lesion2 = match[2].trim();
+            let lesion2 = match[2].trim();
+            
+            // V3.3.140: Nettoyer "amputation du P1 D3" → "amputation P1 D3"
+            lesion2 = lesion2.replace(/^amputation\s+(?:du|de\s+la|de\s+l['']|des?)\s+/i, 'amputation ');
+            
             // Vérifier que ce ne sont pas juste des mots courts (artéfacts)
             if (lesion1.length >= 10 && lesion2.length >= 10) {
                 lesions.push(lesion1);
