@@ -10607,13 +10607,15 @@ const extractIndividualLesions = (text: string): string[] => {
     // 🆕 Pattern 0E: Cumul "X avec amputation Y" (V3.3.138)
     // Ex: "plexus brachial avec amputation P1 D3"
     // Ex: "paralysie Erb avec amputation doigt"
-    const amputationCumulPattern = /(.+?)\s+avec\s+(amputation\s+(?:de\s+)?(?:p[123]\s+d[1-5]|phalange|doigt|[a-zéèêàâ]+))/i;
+    // Ex: "plexus C5-C6).avec amputation P1 D3" (gérer ponctuation)
+    const amputationCumulPattern = /(.+?)[\s.,:;]*avec\s+(amputation\s+(?:de\s+)?(?:p[123]\s+d[1-5]|phalange|doigt|[a-zéèêàâ]+))/i;
     if (amputationCumulPattern.test(normalized)) {
         const match = normalized.match(amputationCumulPattern);
         if (match) {
             const lesion1 = match[1].trim();
             const lesion2 = match[2].trim();
-            if (lesion1.length >= 5 && lesion2.length >= 5) {
+            // Vérifier que ce ne sont pas juste des mots courts (artéfacts)
+            if (lesion1.length >= 10 && lesion2.length >= 10) {
                 lesions.push(lesion1);
                 lesions.push(lesion2);
                 console.log('✅ Pattern 0E (cumul avec amputation) détecté:', lesions);
