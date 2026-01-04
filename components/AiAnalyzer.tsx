@@ -10530,6 +10530,12 @@ export const detectMultipleLesions = (text: string): {
     // CORRECTION: accepte typos médicales (repture, flechisseur/fléchisseur)
     const hasAmputationAndTendon = hasAmputationAndTendonRaw || /(?:amputation|perte).*(?:p[123]|phalange).*(?:d[1-5]|doigt).*(?:avec|et|ainsi\s+qu['"]un?).*(?:r[ue]pture|section|l[eé]sion).*(?:fl[eé]chisseur|extenseur|tendon)/i.test(normalized);
     
+    // 🆕 V3.3.140: Détection plexus brachial/paralysie + amputation (cumul)
+    // Ex: "plexus brachial droit (Duchenne-Erb C5-C6) avec amputation P1 D3"
+    const hasPlexusOrParalysisLesion = /(?:plexus|paralysie|duchenne|erb|klumpke)/i.test(normalized);
+    const hasAmputationLesion = /amputation.*(?:p[123]\s+d[1-5]|doigt|phalange|pouce|index|m[eé]dius|annulaire|auriculaire)/i.test(normalized);
+    const hasPlexusAndAmputation = hasPlexusOrParalysisLesion && hasAmputationLesion;
+    
     // 🆕 Détection cumul MEMBRE SUPÉRIEUR + MEMBRE INFÉRIEUR (polytraumatisme fréquent)
     const hasMembreSupLesion = /(?:fracture|luxation|rupture|lesion).*(?:[eé]paule|coude|poignet|main|doigt|bras|avant.*bras|hum[eé]r|radius|ulna|cubitus|clavicule)/i.test(normalized);
     const hasMembreInfLesion = /(?:fracture|luxation|rupture|lesion).*(?:hanche|genou|cheville|pied|orteil|jambe|cuisse|f[eé]mur|tibia|p[eé]ron[eé]|fibula)/i.test(normalized);
@@ -10551,6 +10557,7 @@ export const detectMultipleLesions = (text: string): {
         hasMultipleToes ||             // 🆕 V3.3.124: Cumul orteils (gros orteil + 2ème, etc.)
         hasMultipleViscera ||          // 🆕 V3.3.124: Cumul viscères (splénectomie + néphrectomie, etc.)
         hasAmputationAndTendon ||      // 🆕 V3.3.133: Cumul amputation + rupture tendon (doigts différents)
+        hasPlexusAndAmputation ||      // 🆕 V3.3.140: Cumul plexus/paralysie + amputation
         hasMembreSupEtInf;             // 🆕 Cumul membre supérieur + membre inférieur (polytraumatisme)
     
     // Estimation nombre de lésions
