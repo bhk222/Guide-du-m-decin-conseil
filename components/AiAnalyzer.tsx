@@ -5077,6 +5077,38 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             priority: 11000
         },
         
+        // 🆕 V3.3.140: CODES DOIGTS Px Dx - Détection directe AVANT enrichissement
+        {
+            pattern: /amputation.*p[123]\s*d1/i,  // P1/P2/P3 D1 = Pouce
+            context: /.*/i,
+            searchTerms: ["Amputation du pouce (main dominante)"],  // 20%
+            priority: 12000  // PRIORITÉ HAUTE pour éviter confusion
+        },
+        {
+            pattern: /amputation.*p[123]\s*d2/i,  // P1/P2/P3 D2 = Index
+            context: /.*/i,
+            searchTerms: ["Amputation de l'index"],  // 10%
+            priority: 12000
+        },
+        {
+            pattern: /amputation.*p[123]\s*d3/i,  // P1/P2/P3 D3 = Médius
+            context: /.*/i,
+            searchTerms: ["Amputation du médius"],  // 12%
+            priority: 12000
+        },
+        {
+            pattern: /amputation.*p[123]\s*d4/i,  // P1/P2/P3 D4 = Annulaire
+            context: /.*/i,
+            searchTerms: ["Amputation de l'annulaire"],  // 7%
+            priority: 12000
+        },
+        {
+            pattern: /amputation.*p[123]\s*d5/i,  // P1/P2/P3 D5 = Auriculaire
+            context: /.*/i,
+            searchTerms: ["Amputation de l'auriculaire"],  // 6%
+            priority: 12000
+        },
+        
         // 🆕 V3.3.138: ATTEINTES PLEXUS BRACHIAL (Duchenne-Erb, Klumpke, paralysie obstétricale)
         // Priorité MAXIMALE car confusion fréquente avec raideurs simples
         {
