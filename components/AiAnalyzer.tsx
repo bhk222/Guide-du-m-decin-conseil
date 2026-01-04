@@ -5077,6 +5077,22 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             priority: 11000
         },
         
+        // 🆕 V3.3.138: Instabilité/Laxité CHEVILLE (entorse, rupture ligamentaire)
+        {
+            pattern: /(?:cheville|cou.*de.*pied).*(?:instabilit[eé]|laxit[eé]|entorse|rupture.*ligament|ligament.*externe)/i,
+            context: /.*/i,
+            searchTerms: ["Instabilité chronique de la cheville (séquelle d'entorse)"],  // Nom EXACT du barème
+            priority: 12000,  // Priorité MAXIMALE pour éviter confusion avec autres membres
+            negativeContext: /ankylose.*cheville/i  // Exclure si ankylose (lésion différente)
+        },
+        {
+            pattern: /(?:entorse|rupture.*ligament|ligament.*externe).*(?:cheville|cou.*de.*pied)/i,
+            context: /.*/i,
+            searchTerms: ["Instabilité chronique de la cheville (séquelle d'entorse)"],  
+            priority: 12000,
+            negativeContext: /ankylose.*cheville/i
+        },
+        
         // Instabilité genou ISOLÉE (sans raideur mentionnée)
         {
             pattern: /genou.*instabilit[eé]|instabilit[eé].*genou/i,
