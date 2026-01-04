@@ -11053,8 +11053,8 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
                             }
                         });
                         
-                        // Si similarité >= 50%, c'est un bon match
-                        if (bestSimilarity >= 0.5 && bestSimilarity > bestCumulScore) {
+                        // V3.3.140: Si similarité >= 70%, c'est un bon match (augmenté de 50% pour éviter faux positifs)
+                        if (bestSimilarity >= 0.7 && bestSimilarity > bestCumulScore) {
                             console.log(`🎯 Match trouvé: ${injury.name} (similarité: ${(bestSimilarity * 100).toFixed(1)}%)`);
                             bestCumulScore = bestSimilarity;
                             bestCumulMatch = {
@@ -11070,8 +11070,8 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
             
             console.log(`🔍 Entrées avec searchTerms vérifiées: ${entriesChecked}, meilleur score: ${(bestCumulScore * 100).toFixed(1)}%`);
             
-            // Si on a trouvé un bon match (>= 50% similarité), retourner directement
-            if (bestCumulMatch && bestCumulScore >= 0.5) {
+            // V3.3.140: Si on a trouvé un bon match (>= 70% similarité), retourner directement
+            if (bestCumulMatch && bestCumulScore >= 0.7) {
                 console.log(`✅ V3.3.139: Entrée cumul spécifique trouvée: ${bestCumulMatch.injury.name} (similarité: ${(bestCumulScore * 100).toFixed(1)}%)`);
                 
                 const chosenRate = Array.isArray(bestCumulMatch.injury.rate)
@@ -11098,7 +11098,7 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
                     injury: bestCumulMatch.injury
                 };
             } else {
-                console.log('ℹ️ Aucun cumul prioritaire trouvé (similarité < 50%), continue avec analyse normale');
+                console.log('ℹ️ Aucun cumul prioritaire trouvé (similarité < 70%), continue avec analyse normale');
             }
         }
     } catch (e) {
