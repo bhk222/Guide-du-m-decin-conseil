@@ -9635,6 +9635,66 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
                 }
             }
             
+            // 🆕 V3.3.138: FILTRAGE ANATOMIQUE - Exclure choix hors contexte anatomique
+            // Détection des mots-clés anatomiques dans la description utilisateur
+            const anatomicalKeywords = {
+                membreInf: /\b(cheville|pied|genou|jambe|cuisse|hanche|membre\s+inf|mi\b|orteil)/i,
+                membreSup: /\b(main|poignet|coude|avant[-\s]?bras|bras|epaule|membre\s+sup|ms\b|doigt)/i,
+                rachis: /\b(rachis|vertebr|dorsal|cervical|lombaire|dos|colonne)/i,
+                tete: /\b(crane|tete|visage|machoire|mandibul|maxillaire|facial)/i,
+                vision: /\b(oeil|vision|vue|retine|cataracte|aveugl|cecite)/i,
+                audition: /\b(oreille|audi|surdite|acouph|ouie|entend)/i,
+                visceres: /\b(abdomen|intestin|foie|rate|estomac|rein|vesicule|pancreas)/i,
+                genitourinaire: /\b(urin|vessie|rein|prostat|testicul|ovaire|penis|verge|uteru|vagin)/i,
+            };
+            
+            // Identifier le contexte anatomique de l'input
+            let detectedContext = '';
+            for (const [context, pattern] of Object.entries(anatomicalKeywords)) {
+                if (pattern.test(normalizedInput)) {
+                    detectedContext = context;
+                    break;
+                }
+            }
+            
+            // Si un contexte anatomique est détecté, filtrer les choix incohérents
+            if (detectedContext) {
+                console.log(`🔍 Contexte anatomique détecté: ${detectedContext}`);
+                const filteredChoices = choices.filter(c => {
+                    const choicePath = allInjuriesWithPaths.find(inj => inj.name === c.name)?.path || '';
+                    const choiceText = (c.name + ' ' + choicePath).toLowerCase();
+                    
+                    // Vérifier si le choix correspond au contexte détecté
+                    switch(detectedContext) {
+                        case 'membreInf':
+                            return /cheville|pied|genou|jambe|cuisse|hanche|membre.*inf/i.test(choiceText);
+                        case 'membreSup':
+                            return /main|poignet|coude|avant.*bras|bras|epaule|membre.*sup/i.test(choiceText);
+                        case 'rachis':
+                            return /rachis|vertebr|dorsal|cervical|lombaire|colonne/i.test(choiceText);
+                        case 'tete':
+                            return /crane|tete|visage|machoire|mandibul|maxillaire|facial/i.test(choiceText);
+                        case 'vision':
+                            return /oeil|vision|vue|retine|cataracte|ophtalmol/i.test(choiceText);
+                        case 'audition':
+                            return /oreille|audi|surdite|acouph|ouie|otologie/i.test(choiceText);
+                        case 'visceres':
+                            return /abdomen|intestin|foie|rate|estomac|digestif|hepat/i.test(choiceText);
+                        case 'genitourinaire':
+                            return /genito|urinaire|vessie|rein|prostat|testicul|ovaire|penis|verge/i.test(choiceText);
+                        default:
+                            return true;
+                    }
+                });
+                
+                if (filteredChoices.length > 0) {
+                    console.log(`✅ Filtrage anatomique: ${choices.length} → ${filteredChoices.length} choix`);
+                    choices = filteredChoices;
+                } else {
+                    console.log(`⚠️ Filtrage anatomique aurait tout supprimé, on garde les choix originaux`);
+                }
+            }
+            
             // 🆕 V3.3.124c: Limite de choix adaptative - 7 pour métacarpiens, 5 pour autres
             const maxChoices = isMetacarpienSingleQuery ? 7 : 5;
             
