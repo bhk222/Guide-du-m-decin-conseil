@@ -5077,6 +5077,37 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             priority: 11000
         },
         
+        // 🆕 V3.3.138: ATTEINTES PLEXUS BRACHIAL (Duchenne-Erb, Klumpke, paralysie obstétricale)
+        // Priorité MAXIMALE car confusion fréquente avec raideurs simples
+        {
+            pattern: /(?:plexus.*brachial|duchenne.*erb|erb.*duchenne|paralysie.*radiculaire.*(?:sup[eé]rieure|inf[eé]rieure)).*(?:c5.*c6|c6.*c7|c8.*t1|t1|droit|gauche)/i,
+            context: /.*/i,
+            searchTerms: ["Paralysie radiculaire supérieure (Duchenne-Erb)"],  // Recherche générique
+            priority: 15000,  // ULTRA PRIORITAIRE
+            negativeContext: /simple.*raideur|sans.*d[eé]ficit/i  // Exclure si pas de déficit
+        },
+        {
+            pattern: /(?:c5.*c6|c6.*c7).*(?:plexus|duchenne|erb|tronc.*sup[eé]rieur|paralysie.*radiculaire)/i,
+            context: /.*/i,
+            searchTerms: ["Paralysie radiculaire supérieure (Duchenne-Erb)"],
+            priority: 15000,
+            negativeContext: /simple.*raideur|sans.*d[eé]ficit/i
+        },
+        {
+            pattern: /(?:c8.*t1|t1.*c8).*(?:plexus|klumpke|tronc.*inf[eé]rieur|paralysie.*radiculaire)/i,
+            context: /.*/i,
+            searchTerms: ["Paralysie radiculaire inférieure (Klumpke)"],  // Nom partiel pour matching
+            priority: 15000,
+            negativeContext: /simple.*raideur|sans.*d[eé]ficit/i
+        },
+        {
+            pattern: /paralysie.*compl[eè]te.*(?:plexus|brachial|membre.*sup[eé]rieur)/i,
+            context: /.*/i,
+            searchTerms: ["Paralysie complète du plexus brachial"],
+            priority: 15000,
+            negativeContext: /simple.*raideur/i
+        },
+        
         // 🆕 V3.3.138: Instabilité/Laxité CHEVILLE (entorse, rupture ligamentaire)
         {
             pattern: /(?:cheville|cou.*de.*pied).*(?:instabilit[eé]|laxit[eé]|entorse|rupture.*ligament|ligament.*externe)/i,
