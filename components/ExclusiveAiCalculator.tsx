@@ -332,21 +332,35 @@ export const ExclusiveAiCalculator: React.FC<ExclusiveAiCalculatorProps> = ({
                     ? Math.round((lesionToAdd.injury.rate[0] + lesionToAdd.injury.rate[1]) / 2)
                     : lesionToAdd.injury.rate;
                 
-                const selectedInjury = {
+                const selectedInjury: SelectedInjury = {
                     ...lesionToAdd.injury,
                     id: `ai-cumul-${crypto.randomUUID()}`,
                     chosenRate: medianRate,
                     category: `Cumul Lésion ${lesionToAdd.lesionNumber}`,
                     justification: lesionToAdd.justification,
                 };
-                onAddInjury(selectedInjury);
-
-                const confirmMessage: ChatMessage = { 
-                    id: crypto.randomUUID(), 
-                    role: 'model', 
-                    text: `✅ Lésion ${lesionToAdd.lesionNumber} ajoutée : **${lesionToAdd.injury.name}** (${medianRate}%).` 
-                };
-                setMessages(prev => [...prev, confirmMessage]);
+                
+                console.log('🔧 [CUMUL] Tentative ajout lésion', lesionToAdd.lesionNumber, ':', selectedInjury);
+                
+                try {
+                    onAddInjury(selectedInjury);
+                    console.log('✅ [CUMUL] Lésion ajoutée avec succès');
+                    
+                    const confirmMessage: ChatMessage = { 
+                        id: crypto.randomUUID(), 
+                        role: 'model', 
+                        text: `✅ Lésion ${lesionToAdd.lesionNumber} ajoutée : **${lesionToAdd.injury.name}** (${medianRate}%).` 
+                    };
+                    setMessages(prev => [...prev, confirmMessage]);
+                } catch (error) {
+                    console.error('❌ [CUMUL] Erreur lors de l\'ajout de la lésion:', error);
+                    const errorMessage: ChatMessage = { 
+                        id: crypto.randomUUID(), 
+                        role: 'model', 
+                        text: `❌ Erreur lors de l'ajout de la lésion ${lesionToAdd.lesionNumber}. Veuillez réessayer.` 
+                    };
+                    setMessages(prev => [...prev, errorMessage]);
+                }
             }
         }
     }, [messages, onAddInjury]);
@@ -366,7 +380,7 @@ export const ExclusiveAiCalculator: React.FC<ExclusiveAiCalculatorProps> = ({
         ));
 
         if (accepted) {
-            const selectedInjury = {
+            const selectedInjury: SelectedInjury = {
                 ...respondedProposal.injury,
                 id: `ai-${crypto.randomUUID()}`,
                 chosenRate: respondedProposal.rate,
@@ -374,24 +388,37 @@ export const ExclusiveAiCalculator: React.FC<ExclusiveAiCalculatorProps> = ({
                 justification: respondedProposal.justification,
             };
             
-            onAddInjury(selectedInjury);
+            console.log('🔧 [PROPOSAL] Tentative ajout lésion:', selectedInjury);
             
-            // Sauvegarder dans l'historique
-            saveToHistory(
-                'ia-exclusive',
-                respondedProposal.name,
-                [{
-                    name: respondedProposal.name,
-                    rate: respondedProposal.rate,
-                    path: respondedProposal.path
-                }],
-                respondedProposal.rate,
-                victimInfo
-            );
-            
-            setTimeout(() => {
-                processQueueOrPrompt();
-            }, 500);
+            try {
+                onAddInjury(selectedInjury);
+                console.log('✅ [PROPOSAL] Lésion ajoutée avec succès');
+                
+                // Sauvegarder dans l'historique
+                saveToHistory(
+                    'ia-exclusive',
+                    respondedProposal.name,
+                    [{
+                        name: respondedProposal.name,
+                        rate: respondedProposal.rate,
+                        path: respondedProposal.path
+                    }],
+                    respondedProposal.rate,
+                    victimInfo
+                );
+                
+                setTimeout(() => {
+                    processQueueOrPrompt();
+                }, 500);
+            } catch (error) {
+                console.error('❌ [PROPOSAL] Erreur lors de l\'ajout de la lésion:', error);
+                const errorMessage: ChatMessage = { 
+                    id: crypto.randomUUID(), 
+                    role: 'model', 
+                    text: `❌ Erreur lors de l'ajout de la lésion. Veuillez réessayer.` 
+                };
+                setMessages(prev => [...prev, errorMessage]);
+            }
         } else {
             setTimeout(() => {
                 const feedbackText = `Entendu. Pourriez-vous me donner plus de détails sur la séquelle pour que je puisse réévaluer le cas, ou me décrire une autre lésion ?`;

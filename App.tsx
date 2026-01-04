@@ -139,15 +139,29 @@ export const App: React.FC = () => {
     };
     
     const handleAddInjury = useCallback((injury: SelectedInjury) => {
-      setSelectedInjuries(prev => {
-        const existingIndex = prev.findIndex(i => i.id === injury.id);
-        if (existingIndex > -1) {
-            const updated = [...prev];
-            updated[existingIndex] = injury;
-            return updated;
-        }
-        return [...prev, injury];
-      });
+      console.log('🔧 [APP] handleAddInjury appelé avec:', injury);
+      console.log('🔧 [APP] État actuel selectedInjuries:', selectedInjuries);
+      
+      try {
+          setSelectedInjuries(prev => {
+            console.log('🔧 [APP] Prev injuries:', prev);
+            const existingIndex = prev.findIndex(i => i.id === injury.id);
+            console.log('🔧 [APP] Index existant:', existingIndex);
+            
+            if (existingIndex > -1) {
+                const updated = [...prev];
+                updated[existingIndex] = injury;
+                console.log('✅ [APP] Mise à jour lésion existante, nouvelles injuries:', updated);
+                return updated;
+            }
+            const newInjuries = [...prev, injury];
+            console.log('✅ [APP] Ajout nouvelle lésion, nouvelles injuries:', newInjuries);
+            return newInjuries;
+          });
+      } catch (error) {
+          console.error('❌ [APP] Erreur dans handleAddInjury:', error);
+          throw error;
+      }
     }, []);
 
     const handleRemoveInjury = useCallback((id: string) => {
