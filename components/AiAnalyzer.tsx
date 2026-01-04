@@ -10447,20 +10447,10 @@ export const detectMultipleLesions = (text: string): {
     // CORRECTION: accepte typos médicales courantes (repture, flechisseur/fléchisseur)
     const hasAmputationAndTendonRaw = /(?:amputation|perte).*(?:p[123]|phalange).*(?:d[1-5]).*(?:avec|et|ainsi\s+qu['"]un?).*(?:r[ue]pture|section|l[eé]sion).*(?:fl[eé]chisseur|extenseur|tendon)/i.test(text);
     
-    // 🆕 V3.3.116: EXCEPTION BASSIN+SCIATIQUE - Retour anticipé pour forcer analyse globale
-    // Ce cas doit être traité comme une seule lésion complexe par la règle experte (priorité 1020)
-    const isBassinSciatique = /bassin.*fracture|fracture.*bassin|fracture.*complexe.*bassin/i.test(normalized) && 
-                              /sciatique|nerf.*sciatique|steppage|deficit.*moteur.*pied/i.test(normalized);
-    
-    if (isBassinSciatique) {
-        return {
-            isCumul: false,  // NE PAS splitter le texte
-            lesionCount: 1,  // Traiter comme une seule lésion complexe
-            keywords: [],
-            hasAnteriorState: false,
-            anteriorIPP: null
-        };
-    }
+    // 🆕 V3.3.141: CUMUL BASSIN+SCIATIQUE - Détection explicite pour cumul
+    // Ce cas doit être détecté comme CUMUL de deux lésions distinctes
+    const hasBassinSciatiqueCumul = /fracture.*bassin|bassin.*fracture|fracture.*complexe.*bassin|disjonction.*sacro|cadre.*obturateur/i.test(normalized) && 
+                                    /sciatique|nerf.*sciatique|spe|steppage|d[eé]ficit.*moteur.*pied|paralysie.*nerf/i.test(normalized);
     
     // 🆕 EXCEPTION PLATEAUX TIBIAUX + FIBULA - Une seule lésion complexe du genou
     // Fracture extrémité supérieure tibia + fibula proximal = traumatisme articulaire genou unique
@@ -10597,6 +10587,10 @@ export const detectMultipleLesions = (text: string): {
     const hasAmputationLesion = /amputation.*(?:p[123]\s+d[1-5]|doigt|phalange|pouce|index|m[eé]dius|annulaire|auriculaire)/i.test(normalized);
     const hasPlexusAndAmputation = hasPlexusOrParalysisLesion && hasAmputationLesion;
     
+    // 🆕 V3.3.141: Détection FRACTURE BASSIN + NERF SCIATIQUE (cumul fréquent en traumatologie)
+    // Ex: "Fracture bassin (cadre obturateur + disjonction sacro-iliaque) et lésion nerf sciatique gauche"
+    // hasBassinSciatiqueCumul déjà détecté plus haut (ligne ~10453)
+    
     // 🆕 Détection cumul MEMBRE SUPÉRIEUR + MEMBRE INFÉRIEUR (polytraumatisme fréquent)
     const hasMembreSupLesion = /(?:fracture|luxation|rupture|lesion).*(?:[eé]paule|coude|poignet|main|doigt|bras|avant.*bras|hum[eé]r|radius|ulna|cubitus|clavicule)/i.test(normalized);
     const hasMembreInfLesion = /(?:fracture|luxation|rupture|lesion).*(?:hanche|genou|cheville|pied|orteil|jambe|cuisse|f[eé]mur|tibia|p[eé]ron[eé]|fibula)/i.test(normalized);
@@ -10608,6 +10602,7 @@ export const detectMultipleLesions = (text: string): {
         plusCount >= 3 ||             // Au moins 3 séparateurs "+" (ex: "A + B + C + D")
         (plusCount >= 2 && distinctRegions >= 3) ||  // 2+ "+" avec 3+ régions anatomiques DIFFÉRENTES
         hasBoneAndNerve ||            // Lésion osseuse + atteinte nerveuse (pattern traumatologique)
+        hasBassinSciatiqueCumul ||    // 🆕 V3.3.141: Fracture bassin + nerf sciatique (polytraumatisme fréquent)
         multipleFracturesSameBone ||  // Plusieurs fractures sur le même os (ex: trochanter + diaphyse ou trochanter, diaphyse)
         hasPseudarthroseAndAmputation ||  // Pseudarthrose + amputation phalange (lésions distinctes)
         (multipleLesionsWithConnectors && hasMultipleLesionTypes) ||  // "avec"/"et" + types différents (fracture + rupture)
@@ -10627,6 +10622,7 @@ export const detectMultipleLesions = (text: string): {
         distinctRegions,
         totalRegionsCount,             // 🆕 Nombre total de régions = estimation minimale du nombre de lésions
         hasBoneAndNerve ? 2 : 1,      // Si os + nerf, au moins 2 lésions
+        hasBassinSciatiqueCumul ? 2 : 1,  // 🆕 V3.3.141: Bassin + sciatique = 2 lésions distinctes
         hasAnteriorState ? 2 : 1,
         multipleFracturesSameBone ? 2 : 1,  // Au moins 2 fractures si pattern détecté
         lesionTypes.length,  // Nombre de types de lésions différents
@@ -10692,6 +10688,30 @@ const extractIndividualLesions = (text: string): string[] => {
                 lesions.push(lesion1);
                 lesions.push(lesion2);
                 console.log('✅ Pattern 0E (cumul avec amputation) détecté:', lesions);
+                return lesions;
+            }
+        }
+    }
+    
+    // 🆕 V3.3.141: Pattern 0F: CUMUL BASSIN + SCIATIQUE (polytraumatisme fréquent)
+    // Ex: "Fracture complexe bassin (cadre obturateur + disjonction sacro-iliaque) et lésion nerf sciatique gauche associée"
+    // Ex: "Accident voiture avec polytraumatisme. Fracture bassin et lésion nerf sciatique"
+    // OBJECTIF: Forcer l'extraction de DEUX lésions distinctes
+    const bassinSciatiqueCumulPattern = /(fracture.*bassin[^.]+(?:cadre|obturateur|disjonction|sacro|iliaque|pubis|pubienne|pelvien)[^.]*?)(?:[.,;]?\s+(?:et|avec|associ[eé]e?|ainsi\s+qu['']une?)\s+)(l[eé]sion.*nerf.*sciatique|nerf.*sciatique|sciatique|steppage|d[eé]ficit.*moteur.*pied|paralysie.*nerf)/i;
+    if (bassinSciatiqueCumulPattern.test(normalized) && hasBassinSciatiqueCumul) {
+        const match = normalized.match(bassinSciatiqueCumulPattern);
+        if (match) {
+            const lesionBassin = match[1].trim();
+            const lesionSciatique = match[3].trim();
+            
+            if (lesionBassin.length >= 15 && lesionSciatique.length >= 10) {
+                lesions.push(lesionBassin);
+                lesions.push(lesionSciatique);
+                console.log('✅ Pattern 0F (cumul bassin + sciatique) détecté:', lesions);
+                return lesions;
+            }
+        }
+    }
                 return lesions;
             }
         }
