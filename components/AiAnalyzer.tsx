@@ -3000,6 +3000,121 @@ const subPartKeywords: { [key: string]: string[] } = {
 type Candidate = { injury: Injury; score: number; path: string };
 
 /**
+ * 🆕 V3.3.141: Calcul ajustement de taux selon critères de sévérité
+ * Détecte infection, fistule, béquilles, CRP, multiples chirurgies
+ * Retourne coefficient multiplicateur: 0.5 (bas), 0.75 (moyen), 1.0 (haut)
+ */
+const calculateSeverityAdjustment = (text: string): {
+    coefficient: number;
+    level: 'bas' | 'moyen' | 'élevé';
+    criteria: string[];
+} => {
+    const normalized = normalize(text);
+    const criteria: string[] = [];
+    let score = 0;
+    
+    // 🔴 CRITÈRES TRÈS GRAVES (+3 points chacun)
+    if (/septique|infect[eé]|suppuration|pus/i.test(text)) {
+        criteria.push('Infection active (septique/pus)');
+        score += 3;
+    }
+    if (/fistule|fistulisation|fistul[eé]/i.test(text)) {
+        criteria.push('Fistule chronique');
+        score += 3;
+    }
+    if (/b[eé]quilles?|canne|d[eé]ambulateur/i.test(text)) {
+        criteria.push('Aide à la marche nécessaire');
+        score += 3;
+    }
+    
+    // 🟠 CRITÈRES GRAVES (+2 points chacun)
+    if (/plusieurs.*chirurgie|multiples.*intervention|reprise.*chirurgical|[0-9]+.*chirurgie/i.test(text)) {
+        criteria.push('Reprises chirurgicales multiples');
+        score += 2;
+    }
+    if (/crp.*[1-9][0-9]+|crp.*[eé]lev[eé]/i.test(text)) {
+        criteria.push('CRP élevée (inflammation)');
+        score += 2;
+    }
+    if (/raideur.*serr[eé]e|ankylose|(?:flexion|extension).*impossible/i.test(text)) {
+        criteria.push('Raideur serrée/ankylose');
+        score += 2;
+    }
+    if (/œd[eè]me.*persist|œd[eè]me.*chronic|gonflement.*permanent/i.test(text)) {
+        criteria.push('Œdème chronique');
+        score += 2;
+    }
+    
+    // 🟡 CRITÈRES MODÉRÉS (+1 point chacun)
+    if (/cicatrice.*mauvaise.*qualit[eé]|cicatrice.*adh[eé]rent|cicatrice.*hypertrophique/i.test(text)) {
+        criteria.push('Cicatrices de mauvaise qualité');
+        score += 1;
+    }
+    if (/douleur.*permanent|douleur.*chronique|douleur.*invalidant/i.test(text)) {
+        criteria.push('Douleurs chroniques invalidantes');
+        score += 1;
+    }
+    if (/amyotrophie|atrophie.*musculaire|fonte.*musculaire/i.test(text)) {
+        criteria.push('Amyotrophie/atrophie musculaire');
+        score += 1;
+    }
+    
+    // Calcul coefficient selon score
+    let coefficient: number;
+    let level: 'bas' | 'moyen' | 'élevé';
+    
+    if (score >= 6) {
+        // 6+ points → TRÈS GRAVE → Haut de fourchette (coefficient 1.0)
+        coefficient = 1.0;
+        level = 'élevé';
+    } else if (score >= 3) {
+        // 3-5 points → GRAVE → Milieu-haut (coefficient 0.75)
+        coefficient = 0.75;
+        level = 'moyen';
+    } else if (score >= 1) {
+        // 1-2 points → MODÉRÉ → Milieu (coefficient 0.5)
+        coefficient = 0.5;
+        level = 'moyen';
+    } else {
+        // 0 points → LÉGER → Bas de fourchette (coefficient 0.0)
+        coefficient = 0.0;
+        level = 'bas';
+    }
+    
+    return { coefficient, level, criteria };
+};
+
+/**
+ * 🆕 V3.3.141: Calcule le taux IPP en tenant compte de la sévérité clinique
+ * Ajuste automatiquement vers le haut de fourchette selon critères aggravants
+ * @param injury - L'injury avec fourchette [min, max]
+ * @param text - Texte médical pour analyse de sévérité
+ * @returns Taux IPP ajusté
+ */
+const calculateAdjustedRate = (injury: Injury, text: string): number => {
+    if (!Array.isArray(injury.rate)) {
+        return injury.rate; // Taux fixe, pas d'ajustement
+    }
+    
+    const [minRate, maxRate] = injury.rate;
+    const { coefficient, level, criteria } = calculateSeverityAdjustment(text);
+    
+    // Calcul: min + (max - min) × coefficient
+    // coefficient = 0.0 → minRate (bas)
+    // coefficient = 0.5 → milieu
+    // coefficient = 0.75 → milieu-haut
+    // coefficient = 1.0 → maxRate (haut)
+    const adjustedRate = Math.round(minRate + (maxRate - minRate) * coefficient);
+    
+    console.log(`📊 Ajustement sévérité [${minRate}-${maxRate}%]: ${level} (${criteria.length} critères) → ${adjustedRate}%`);
+    if (criteria.length > 0) {
+        console.log(`   Critères: ${criteria.join(', ')}`);
+    }
+    
+    return adjustedRate;
+};
+
+/**
  * Analyse avancée du contexte clinique pour détecter critères de sévérité
  * Amélioration v2.7: Détection troubles statiques, déformations, complications
  */
@@ -11325,17 +11440,29 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
                     let finalRate = bestChoice.rate;
                     if (Array.isArray(bestChoice.rate)) {
                         const [minRate, maxRate] = bestChoice.rate;
-                        const severityData = determineSeverity(normalize(processedLesion));
-                        console.log(`   → Sévérité détectée: ${severityData.level} (signs: ${severityData.signs.join(', ')})`);
                         
-                        if (severityData.level === 'élevé') {
-                            finalRate = maxRate;
-                        } else if (severityData.level === 'faible') {
-                            finalRate = minRate;
-                        } else {
-                            finalRate = Math.round((minRate + maxRate) / 2);
+                        // 🆕 V3.3.141: Combine sévérité traditionnelle + critères aggravants
+                        const severityData = determineSeverity(normalize(processedLesion));
+                        const aggravationData = calculateSeverityAdjustment(processedLesion);
+                        
+                        console.log(`   → Sévérité clinique: ${severityData.level} (${severityData.signs.slice(0, 2).join(', ')}...)`);
+                        if (aggravationData.criteria.length > 0) {
+                            console.log(`   → Critères aggravants: ${aggravationData.level} (${aggravationData.criteria.join(', ')})`);
                         }
-                        console.log(`   → Taux final orienté: ${finalRate}% (intervalle [${minRate}-${maxRate}])`);
+                        
+                        // Fusionner les deux analyses pour décision finale
+                        const isSevere = severityData.level === 'élevé' || aggravationData.level === 'élevé';
+                        const isMild = severityData.level === 'faible' && aggravationData.level === 'bas';
+                        
+                        if (isSevere) {
+                            finalRate = maxRate; // Haut de fourchette
+                        } else if (isMild) {
+                            finalRate = minRate; // Bas de fourchette
+                        } else {
+                            // Utiliser coefficient aggravation pour affiner
+                            finalRate = Math.round(minRate + (maxRate - minRate) * Math.max(0.5, aggravationData.coefficient));
+                        }
+                        console.log(`   → Taux final ajusté: ${finalRate}% (intervalle [${minRate}-${maxRate}])`);
                     }
                     
                     lesionProposals.push({
@@ -11366,6 +11493,16 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
                     const rate = Array.isArray(proposal.injury.rate) 
                         ? Math.round((proposal.injury.rate[0] + proposal.injury.rate[1]) / 2)
                         : proposal.injury.rate;
+                    
+                    // 🆕 V3.3.141: Ajuster selon sévérité AUSSI dans calcul cumul
+                    if (Array.isArray(proposal.injury.rate)) {
+                        const aggravationData = calculateSeverityAdjustment(text);
+                        if (aggravationData.criteria.length > 0) {
+                            const [minRate, maxRate] = proposal.injury.rate;
+                            rate = Math.round(minRate + (maxRate - minRate) * aggravationData.coefficient);
+                            console.log(`   📊 Ajustement cumul lésion ${i+1}: [${minRate}-${maxRate}] → ${rate}% (${aggravationData.level})`);
+                        }
+                    }
                     
                     if (i === 0) {
                         ippTotal = rate;
