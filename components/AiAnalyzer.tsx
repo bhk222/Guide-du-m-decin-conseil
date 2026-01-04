@@ -5077,6 +5077,22 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             priority: 11000
         },
         
+        // 🆕 V3.3.140: PSEUDARTHROSE SEPTIQUE JAMBE/TIBIA (cas graves avec infection/fistule)
+        {
+            pattern: /pseudarthrose.*(?:septique|infect[eé]|fistule|suppuration|pus).*(?:jambe|tibia|péroné|fibula|1\/4\s+inf[eé]rieur)/i,
+            context: /.*/i,
+            searchTerms: ["Pseudarthrose des deux os de la jambe"],  // 40-60% (cas grave avec infection)
+            priority: 13000,  // ULTRA PRIORITAIRE pour court-circuiter les faux positifs
+            negativeContext: /bassin|pubis|symphyse|branche.*ascendante|branche.*horizontale/i
+        },
+        {
+            pattern: /pseudarthrose.*(?:tibia|1\/4\s+inf[eé]rieur.*jambe)/i,
+            context: /(?:septique|infect|fistule|suppuration|pus)/i,
+            searchTerms: ["Pseudarthrose des deux os de la jambe"],  // 40-60%
+            priority: 13000,
+            negativeContext: /bassin|pubis|symphyse/i
+        },
+        
         // 🆕 V3.3.140: CODES DOIGTS Px Dx - Détection directe AVANT et APRÈS enrichissement
         {
             pattern: /amputation.*(?:p[123]\s*d1|premi[eè]re phalange.*pouce|phalange.*pouce)/i,  // P1/P2/P3 D1 = Pouce
