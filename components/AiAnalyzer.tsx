@@ -11490,7 +11490,7 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
                 
                 for (let i = 0; i < lesionProposals.length; i++) {
                     const proposal = lesionProposals[i];
-                    const rate = Array.isArray(proposal.injury.rate) 
+                    let rate = Array.isArray(proposal.injury.rate) 
                         ? Math.round((proposal.injury.rate[0] + proposal.injury.rate[1]) / 2)
                         : proposal.injury.rate;
                     
