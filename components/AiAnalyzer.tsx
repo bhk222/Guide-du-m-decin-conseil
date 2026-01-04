@@ -10712,10 +10712,6 @@ const extractIndividualLesions = (text: string): string[] => {
             }
         }
     }
-                return lesions;
-            }
-        }
-    }
     
     // Pattern 0A: Format compact 'X + Y + Z' avec séparateur + (V3.3.132)
     // Ex: "LCA + méniscectomie totale + instabilité genou"
