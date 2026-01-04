@@ -9711,6 +9711,75 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
     // --- FINAL PROPOSAL GENERATION ---
     const { injury, path } = finalCandidate;
     
+    // 🆕 V3.3.138: VALIDATION ANATOMIQUE DU RÉSULTAT FINAL
+    // Vérifier que la proposition finale est cohérente avec le contexte anatomique
+    const anatomicalKeywordsForValidation = {
+        membreInf: /\b(cheville|pied|genou|jambe|cuisse|hanche|membre\s+inf|mi\b|orteil)/i,
+        membreSup: /\b(main|poignet|coude|avant[-\s]?bras|bras|epaule|membre\s+sup|ms\b|doigt)/i,
+        rachis: /\b(rachis|vertebr|dorsal|cervical|lombaire|dos|colonne)/i,
+        tete: /\b(crane|tete|visage|machoire|mandibul|maxillaire|facial)/i,
+        vision: /\b(oeil|vision|vue|retine|cataracte|aveugl|cecite)/i,
+        audition: /\b(oreille|audi|surdite|acouph|ouie|entend)/i,
+        visceres: /\b(abdomen|intestin|foie|rate|estomac|rein|vesicule|pancreas)/i,
+        genitourinaire: /\b(urin|vessie|rein|prostat|testicul|ovaire|penis|verge|uteru|vagin)/i,
+    };
+    
+    const normalizedInputForValidation = normalize(preprocessMedicalText(text));
+    let detectedContextForValidation = '';
+    
+    for (const [context, pattern] of Object.entries(anatomicalKeywordsForValidation)) {
+        if (pattern.test(normalizedInputForValidation)) {
+            detectedContextForValidation = context;
+            break;
+        }
+    }
+    
+    // Si un contexte anatomique clair est détecté, vérifier la cohérence
+    if (detectedContextForValidation) {
+        const proposalText = (injury.name + ' ' + path).toLowerCase();
+        let isCoherent = true;
+        
+        switch(detectedContextForValidation) {
+            case 'membreInf':
+                isCoherent = /cheville|pied|genou|jambe|cuisse|hanche|membre.*inf|orteil|tibia|perone|femur|rotule|menisque|ligament.*croise/i.test(proposalText);
+                break;
+            case 'membreSup':
+                isCoherent = /main|poignet|coude|avant.*bras|bras|epaule|membre.*sup|doigt|radius|cubitus|ulna|humer/i.test(proposalText);
+                break;
+            case 'rachis':
+                isCoherent = /rachis|vertebr|dorsal|cervical|lombaire|colonne|disc/i.test(proposalText);
+                break;
+            case 'tete':
+                isCoherent = /crane|tete|visage|machoire|mandibul|maxillaire|facial/i.test(proposalText);
+                break;
+            case 'vision':
+                isCoherent = /oeil|vision|vue|retine|cataracte|ophtalmol/i.test(proposalText);
+                break;
+            case 'audition':
+                isCoherent = /oreille|audi|surdite|acouph|ouie|otologie/i.test(proposalText);
+                break;
+            case 'visceres':
+                isCoherent = /abdomen|intestin|foie|rate|estomac|digestif|hepat/i.test(proposalText);
+                break;
+            case 'genitourinaire':
+                isCoherent = /genito|urinaire|vessie|rein|prostat|testicul|ovaire|penis|verge/i.test(proposalText);
+                break;
+        }
+        
+        if (!isCoherent) {
+            console.log(`❌ INCOHÉRENCE ANATOMIQUE DÉTECTÉE !`);
+            console.log(`   Input contexte: ${detectedContextForValidation}`);
+            console.log(`   Proposition: ${injury.name}`);
+            console.log(`   Path: ${path}`);
+            
+            // Retourner une erreur explicite
+            return {
+                type: 'no_result',
+                text: `La séquelle proposée "${injury.name}" ne correspond pas au contexte anatomique de votre description (${detectedContextForValidation}). Veuillez reformuler votre description en étant plus précis sur la localisation et le type de lésion.`
+            };
+        }
+    }
+    
     // 🆕 Vérification consolidation (v2.6) - PRIORITAIRE
     const consolidationCheck = checkConsolidationDelay(text, injury.name);
     if (!consolidationCheck.isConsolidated && consolidationCheck.warning) {
