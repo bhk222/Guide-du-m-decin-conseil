@@ -42,12 +42,17 @@ export const NomenclatureGenerale: React.FC = () => {
             return;
         }
 
+        console.log('🔍 Recherche lancée pour:', searchQuery);
+        console.log('📊 Base de données:', baseDeDonnees.length, 'actes');
+
         setIsLoading(true);
 
         setTimeout(() => {
             // Recherche dans la base de données intégrée
             const query = searchQuery.toLowerCase().trim();
             const queryWords = query.split(/\s+/);
+            
+            console.log('🔎 Query normalisée:', query);
 
             // Synonymes et suggestions pour termes modernes
             const synonymes: { [key: string]: string[] } = {
@@ -137,6 +142,9 @@ export const NomenclatureGenerale: React.FC = () => {
                 .sort((a, b) => b.score - a.score)
                 .slice(0, 20)
                 .map(item => item.acte);
+
+            console.log('✅ Résultats trouvés:', resultats.length);
+            console.log('📋 Premiers résultats:', resultats.slice(0, 3).map(a => a.libelle));
 
             setActesTrouves(resultats);
             setIsLoading(false);
