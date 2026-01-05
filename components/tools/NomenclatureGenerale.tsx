@@ -1,7 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Card } from '../ui/Card';
 import { Upload, Search, Plus, Calculator, FileText, Trash2, Download, X, Database, Info, RefreshCw } from 'lucide-react';
-import nomenclatureData from '../../data/nomenclature-complete.json';
 
 interface ActeMedical {
     code: string;
@@ -29,10 +28,28 @@ export const NomenclatureGenerale: React.FC = () => {
 
     // Charger la base de données intégrée au démarrage
     useEffect(() => {
-        if (nomenclatureData && nomenclatureData.actes) {
-            setBaseDeDonnees(nomenclatureData.actes);
-            console.log(`✅ Base de données chargée: ${nomenclatureData.actes.length} actes`);
-        }
+        console.log('⏳ Chargement nomenclature depuis /nomenclature-complete.json...');
+        fetch('/nomenclature-complete.json')
+            .then(response => {
+                console.log('📡 Réponse reçue:', response.status, response.statusText);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('📦 Data reçue:', data);
+                if (data && data.actes) {
+                    setBaseDeDonnees(data.actes);
+                    console.log(`✅ Base de données chargée: ${data.actes.length} actes`);
+                    console.log('📋 Échantillon:', data.actes.slice(0, 2));
+                } else {
+                    console.error('❌ Format invalide - pas de propriété "actes"');
+                }
+            })
+            .catch(error => {
+                console.error('❌ Erreur chargement:', error);
+            });
     }, []);
 
     // Recherche sémantique dans les actes
@@ -222,7 +239,7 @@ export const NomenclatureGenerale: React.FC = () => {
                                         ✅ Base de données active: <span className="font-bold text-green-800">{baseDeDonnees.length} actes médicaux</span>
                                     </p>
                                     <p className="text-xs text-slate-600">
-                                        📚 Source: {(nomenclatureData as any).source || 'acte.pdf'} • Version: {(nomenclatureData as any).version || '1.0'}
+                                        📚 Source: acte_extracted_clean.txt • Version: 2.0-complete
                                     </p>
                                     <div className="flex gap-2">
                                         <button
