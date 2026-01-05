@@ -25,10 +25,13 @@ export const NomenclatureGenerale: React.FC = () => {
     const [baseDeDonnees, setBaseDeDonnees] = useState<ActeMedical[]>([]);
     const [showStats, setShowStats] = useState(false);
     const [codesRapides, setCodesRapides] = useState('');
+    const [loadingStatus, setLoadingStatus] = useState<'loading' | 'loaded' | 'error'>('loading');
+    const [errorMessage, setErrorMessage] = useState('');
 
     // Charger la base de données intégrée au démarrage
     useEffect(() => {
         console.log('⏳ Chargement nomenclature depuis /nomenclature-complete.json...');
+        setLoadingStatus('loading');
         fetch('/nomenclature-complete.json')
             .then(response => {
                 console.log('📡 Réponse reçue:', response.status, response.statusText);
@@ -41,14 +44,19 @@ export const NomenclatureGenerale: React.FC = () => {
                 console.log('📦 Data reçue:', data);
                 if (data && data.actes) {
                     setBaseDeDonnees(data.actes);
+                    setLoadingStatus('loaded');
                     console.log(`✅ Base de données chargée: ${data.actes.length} actes`);
                     console.log('📋 Échantillon:', data.actes.slice(0, 2));
                 } else {
                     console.error('❌ Format invalide - pas de propriété "actes"');
+                    setLoadingStatus('error');
+                    setErrorMessage('Format de données invalide');
                 }
             })
             .catch(error => {
                 console.error('❌ Erreur chargement:', error);
+                setLoadingStatus('error');
+                setErrorMessage(`Erreur: ${error.message}`);
             });
     }, []);
 
@@ -227,6 +235,27 @@ export const NomenclatureGenerale: React.FC = () => {
             {/* Base de données intégrée */}
             <Card className="bg-gradient-to-r from-blue-50 to-indigo-50">
                 <div className="space-y-4">
+                    {loadingStatus === 'loading' && (
+                        <div className="text-center py-8">
+                            <div className="inline-block animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600 mb-4"></div>
+                            <p className="text-indigo-700 font-medium">⏳ Chargement de la base de données...</p>
+                        </div>
+                    )}
+                    
+                    {loadingStatus === 'error' && (
+                        <div className="bg-red-100 border-2 border-red-400 rounded-lg p-6 text-center">
+                            <p className="text-red-800 font-bold text-lg mb-2">❌ Erreur de chargement</p>
+                            <p className="text-red-700">{errorMessage}</p>
+                            <button
+                                onClick={() => window.location.reload()}
+                                className="mt-4 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700"
+                            >
+                                🔄 Recharger la page
+                            </button>
+                        </div>
+                    )}
+                    
+                    {loadingStatus === 'loaded' && (
                     <div className="flex items-center justify-between">
                         <div className="flex-1">
                             <h3 className="text-lg font-semibold text-slate-800 mb-2 flex items-center gap-2">
@@ -303,7 +332,17 @@ export const NomenclatureGenerale: React.FC = () => {
                 </div>
             </Card>
 
+            {/* Message si pas chargé */}
+            {loadingStatus !== 'loaded' && (
+                <Card className="bg-yellow-50 border-2 border-yellow-400">
+                    <p className="text-yellow-800 text-center">
+                        ⚠️ Veuillez attendre le chargement de la base de données avant de rechercher
+                    </p>
+                </Card>
+            )}
+
             {/* Recherche */}
+            {loadingStatus === 'loaded' && (
             <Card>
                 <h3 className="text-lg font-semibold text-slate-800 mb-3">
                     🔍 Rechercher un acte médical
@@ -319,7 +358,8 @@ export const NomenclatureGenerale: React.FC = () => {
                     />
                     <button
                         onClick={handleSearch}
-                        disabled={isLoading}
+                   
+            )}     disabled={isLoading}
                         className="px-6 py-3 bg-primary-600 text-white rounded-lg hover:bg-primary-700 disabled:opacity-50 transition-colors font-medium flex items-center gap-2"
                     >
                         <Search size={20} />
