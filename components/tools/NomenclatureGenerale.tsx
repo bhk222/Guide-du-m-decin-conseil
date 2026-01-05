@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Card } from '../ui/Card';
 import { Upload, Search, Plus, Calculator, FileText, Trash2, Download, X, Database, Info, RefreshCw } from 'lucide-react';
-import nomenclatureData from '../../data/nomenclature-static.json';
+import nomenclatureData from '../../data/nomenclature-complete.json';
 
 interface ActeMedical {
     code: string;
@@ -51,17 +51,21 @@ export const NomenclatureGenerale: React.FC = () => {
 
             // Synonymes et suggestions pour termes modernes
             const synonymes: { [key: string]: string[] } = {
-                'scanner': ['radiographie', 'radio', 'cliché', 'urographie', 'myélographie'],
-                'irm': ['radiographie', 'myélographie', 'angiographie'],
-                'échographie': ['radiographie', 'urographie'],
-                'tdm': ['radiographie', 'tomodensitométrie'],
-                'tomodensitométrie': ['radiographie'],
+                'scanner': ['radiographie', 'radio', 'cliché', 'urographie', 'myélographie', 'tomographie'],
+                'irm': ['radiographie', 'myélographie', 'angiographie', 'imagerie'],
+                'échographie': ['radiographie', 'urographie', 'imagerie'],
+                'tdm': ['radiographie', 'tomodensitométrie', 'tomographie', 'scanner', 'cliché'],
+                'tomodensitométrie': ['radiographie', 'tomographie', 'scanner'],
                 'glycémie': ['glucose', 'sucre', 'hyperglycémie', 'glycose'],
                 'glycemie': ['glucose', 'sucre', 'hyperglycémie', 'glycose'],
                 'cholestérol': ['lipides', 'cholesterol'],
                 'cholesterol': ['lipides'],
                 'créatinine': ['urée', 'creatinine'],
                 'creatinine': ['urée'],
+                'cortisol': ['cortisolémie', 'cortisolemie', 'hormone', 'surrénale'],
+                'cortisolémie': ['cortisol', 'hormone', 'cortisolemie'],
+                'cortisolemie': ['cortisol', 'hormone', 'cortisolémie'],
+                'acth': ['corticotrope', 'hormone', 'corticotrophine'],
                 'nfs': ['numération', 'hémogramme', 'formule sanguine', 'hemogramme'],
                 'hémogramme': ['numération', 'formule sanguine', 'hemogramme'],
                 'hemogramme': ['numération', 'formule sanguine'],

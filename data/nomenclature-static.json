@@ -1,8 +1,8 @@
 {
-  "version": "1.0",
-  "date": "2025-12-23",
-  "source": "acte_extracted.txt",
-  "total": 796,
+  "version": "1.1",
+  "date": "2026-01-05",
+  "source": "acte_extracted.txt + nomenclature algérienne ajoutée",
+  "total": 810,
   "categories": {
     "Autre": 650,
     "Orthopédie": 9,
@@ -19,9 +19,121 @@
     "Gastro-entérologie": 2,
     "Gynécologie": 3,
     "Anesthésie": 1,
-    "Imagerie": 1
+    "Imagerie": 15
   },
   "actes": [
+    {
+      "code": "R90-TDM-001",
+      "libelle": "TDM (Tomodensitométrie) - Scanner cérébral",
+      "tarif": 2700,
+      "coefficient": 90,
+      "lettreCle": "R",
+      "categorie": "Imagerie"
+    },
+    {
+      "code": "R90-TDM-002",
+      "libelle": "TDM (Tomodensitométrie) - Scanner thoracique",
+      "tarif": 2700,
+      "coefficient": 90,
+      "lettreCle": "R",
+      "categorie": "Imagerie"
+    },
+    {
+      "code": "R90-TDM-003",
+      "libelle": "TDM (Tomodensitométrie) - Scanner abdomino-pelvien",
+      "tarif": 2700,
+      "coefficient": 90,
+      "lettreCle": "R",
+      "categorie": "Imagerie"
+    },
+    {
+      "code": "R90-TDM-004",
+      "libelle": "TDM (Tomodensitométrie) - Scanner rachis cervical",
+      "tarif": 2700,
+      "coefficient": 90,
+      "lettreCle": "R",
+      "categorie": "Imagerie"
+    },
+    {
+      "code": "R90-TDM-005",
+      "libelle": "TDM (Tomodensitométrie) - Scanner rachis dorsal",
+      "tarif": 2700,
+      "coefficient": 90,
+      "lettreCle": "R",
+      "categorie": "Imagerie"
+    },
+    {
+      "code": "R90-TDM-006",
+      "libelle": "TDM (Tomodensitométrie) - Scanner rachis lombaire",
+      "tarif": 2700,
+      "coefficient": 90,
+      "lettreCle": "R",
+      "categorie": "Imagerie"
+    },
+    {
+      "code": "R90-TDM-007",
+      "libelle": "TDM (Tomodensitométrie) - Scanner membre supérieur",
+      "tarif": 2700,
+      "coefficient": 90,
+      "lettreCle": "R",
+      "categorie": "Imagerie"
+    },
+    {
+      "code": "R90-TDM-008",
+      "libelle": "TDM (Tomodensitométrie) - Scanner membre inférieur",
+      "tarif": 2700,
+      "coefficient": 90,
+      "lettreCle": "R",
+      "categorie": "Imagerie"
+    },
+    {
+      "code": "R90-TDM-009",
+      "libelle": "TDM (Tomodensitométrie) - Scanner sinus",
+      "tarif": 2700,
+      "coefficient": 90,
+      "lettreCle": "R",
+      "categorie": "Imagerie"
+    },
+    {
+      "code": "R90-TDM-010",
+      "libelle": "TDM (Tomodensitométrie) - Scanner facial",
+      "tarif": 2700,
+      "coefficient": 90,
+      "lettreCle": "R",
+      "categorie": "Imagerie"
+    },
+    {
+      "code": "R90-IRM-001",
+      "libelle": "IRM (Imagerie par Résonance Magnétique) - IRM cérébrale",
+      "tarif": 2700,
+      "coefficient": 90,
+      "lettreCle": "R",
+      "categorie": "Imagerie"
+    },
+    {
+      "code": "R90-IRM-002",
+      "libelle": "IRM (Imagerie par Résonance Magnétique) - IRM rachis",
+      "tarif": 2700,
+      "coefficient": 90,
+      "lettreCle": "R",
+      "categorie": "Imagerie"
+    },
+    {
+      "code": "R90-IRM-003",
+      "libelle": "IRM (Imagerie par Résonance Magnétique) - IRM articulation",
+      "tarif": 2700,
+      "coefficient": 90,
+      "lettreCle": "R",
+      "categorie": "Imagerie"
+    },
+    {
+      "code": "R90-IRM-004",
+      "libelle": "IRM (Imagerie par Résonance Magnétique) - IRM abdominale",
+      "tarif": 2700,
+      "coefficient": 90,
+      "lettreCle": "R",
+      "categorie": "Imagerie"
+    },
     {
       "code": "0003",
       "libelle": "Main, styloïdes radiale au cubitale... '\"",
@@ -6023,12 +6135,20 @@
       "categorie": "Autre"
     },
     {
-      "code": "1671",
-      "libelle": "Cortisol (cotation au maximum de 3 dosages)",
+      "code": "B70",
+      "libelle": "Cortisol (cortisolémie) - dosage sanguin",
       "tarif": 70,
       "coefficient": 70,
       "lettreCle": "B",
-      "categorie": "Autre"
+      "categorie": "Biologie"
+    },
+    {
+      "code": "B70-U",
+      "libelle": "Cortisol urinaire (cortisolurie des 24h)",
+      "tarif": 70,
+      "coefficient": 70,
+      "lettreCle": "B",
+      "categorie": "Biologie"
     },
     {
       "code": "1672",
@@ -6172,27 +6292,27 @@
       "tarif": 70,
       "coefficient": 70,
       "lettreCle": "B",
-      "categorie": "Autre"
+      "categorie": "Biologie"
     },
     {
-      "code": "1692",
-      "libelle": "Thyrocalcitonine",
+      "code": "B70-TCT",
+      "libelle": "Thyrocalcitonine (calcitonine)",
       "tarif": 70,
       "coefficient": 70,
       "lettreCle": "B",
-      "categorie": "Autre"
+      "categorie": "Biologie"
     },
     {
-      "code": "1693",
-      "libelle": "Hormone corticotrope (ACTH)",
+      "code": "B70-ACTH",
+      "libelle": "Hormone corticotrope (ACTH - corticotrophine)",
       "tarif": 70,
       "coefficient": 70,
       "lettreCle": "B",
-      "categorie": "Autre"
+      "categorie": "Biologie"
     },
     {
-      "code": "1694",
-      "libelle": "Hormone de croissance",
+      "code": "B70-GH",
+      "libelle": "Hormone de croissance (GH - growth hormone)",
       "tarif": 70,
       "coefficient": 70,
       "lettreCle": "B",

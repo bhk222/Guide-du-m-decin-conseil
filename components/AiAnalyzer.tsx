@@ -10468,9 +10468,15 @@ const detectPrimaryLesionWithSequelae = (text: string): {
     const hasPrimaryLesion = primaryLesionKeywords.some(kw => normalized.includes(kw));
     const hasSequelae = sequelaeFunctionalKeywords.some(kw => normalized.includes(kw));
     
+    // 🆕 V3.3.142: EXCEPTION pseudarthrose séparée par ";" ou "séquelle" explicite
+    // "fracture ; séquelle pseudarthrose" = 2 lésions distinctes (ne PAS traiter comme une)
+    // "fracture avec pseudarthrose" = 1 seule lésion (traiter comme une)
+    const hasSeparatedPseudarthrose = /;[\s\w]*pseudarthrose|sequelle[\s]+pseudarthrose/i.test(normalized);
+    
     // Si lésion primaire ET séquelle fonctionnelle dans même phrase/description
     // → Traiter comme UNE SEULE lésion (ex: "fracture avec raideur")
-    const shouldTreatAsOne = hasPrimaryLesion && hasSequelae;
+    // SAUF si pseudarthrose séparée explicitement
+    const shouldTreatAsOne = hasPrimaryLesion && hasSequelae && !hasSeparatedPseudarthrose;
     
     // Nettoyer la description pour l'analyse (garder uniquement lésion primaire si double)
     let cleanedDescription = text;
@@ -10653,6 +10659,14 @@ export const detectMultipleLesions = (text: string): {
     const hasAmputation = /amputation|perte.*(?:phalange|doigt|orteil)|p[123].*d[1-5]|p[123].*o[1-5]/i.test(normalized);
     const hasPseudarthroseAndAmputation = hasPseudarthrose && hasAmputation;
     
+    // 🆕 5D. Détection fracture + séquelle pseudarthrose (complications distinctes)
+    // Ex: "fracture diaphysaire du fémur ; séquelle pseudarthrose"
+    // Ex: "fracture col fémoral ; pseudarthrose"  
+    // La pseudarthrose est une complication grave qui nécessite une évaluation distincte QUAND séparée par ";"
+    const hasFracture = /fracture/i.test(normalized);
+    // CORRECTION V3.3.142: Détecter séparation explicite par ";" ou mot "séquelle" avant pseudarthrose
+    const hasFractureAndPseudarthrose = hasFracture && hasPseudarthrose && /;[\s\w]*pseudarthrose|sequelle[\s]+pseudarthrose|complication[\s]+pseudarthrose/i.test(normalized);
+    
     // Compter le nombre de types de lésions différents (fracture, rupture, luxation, pseudarthrose, amputation, etc.)
     const lesionTypes = [];
     if (/fracture/i.test(normalized)) lesionTypes.push('fracture');
@@ -10720,6 +10734,7 @@ export const detectMultipleLesions = (text: string): {
         hasBassinSciatiqueCumul ||    // 🆕 V3.3.141: Fracture bassin + nerf sciatique (polytraumatisme fréquent)
         multipleFracturesSameBone ||  // Plusieurs fractures sur le même os (ex: trochanter + diaphyse ou trochanter, diaphyse)
         hasPseudarthroseAndAmputation ||  // Pseudarthrose + amputation phalange (lésions distinctes)
+        hasFractureAndPseudarthrose ||    // 🆕 V3.3.142: Fracture + séquelle pseudarthrose (complication distincte)
         (multipleLesionsWithConnectors && hasMultipleLesionTypes) ||  // "avec"/"et" + types différents (fracture + rupture)
         totalRegionsCount >= 2 ||      // 🆕 2+ régions anatomiques distinctes dans TOUT le texte (narratif naturel)
         hasTripleLesion ||             // 🆕 Os + ligament + muscle = 3 lésions distinctes
@@ -10744,7 +10759,8 @@ export const detectMultipleLesions = (text: string): {
         hasTripleLesion ? 3 : (hasDoubleLesion ? 2 : 1),  // 🆕 Compter os+ligament+muscle
         hasChevilleEtGenou && (hasBoneLesion || hasLigamentLesion || hasNerveLesion) ? 3 : 1,  // 🆕 Cheville + genou + lésion = au moins 3
         hasAmputationAndTendon ? 2 : 1,  // 🆕 V3.3.133: Amputation + tendon = au moins 2 lésions
-        hasPlexusAndAmputation ? 2 : 1   // 🆕 V3.3.140: Plexus/paralysie + amputation = au moins 2 lésions
+        hasPlexusAndAmputation ? 2 : 1,  // 🆕 V3.3.140: Plexus/paralysie + amputation = au moins 2 lésions
+        hasFractureAndPseudarthrose ? 2 : 1  // 🆕 V3.3.142: Fracture + pseudarthrose = 2 lésions distinctes
     );
     
     return {
@@ -10767,6 +10783,29 @@ const extractIndividualLesions = (text: string): string[] => {
     const lesions: string[] = [];
     
     console.log('🔍 extractIndividualLesions - texte d\'entrée:', text);
+    
+    // 🆕 Pattern 0C: Fracture + séquelle pseudarthrose (V3.3.142) - PRIORITÉ TRÈS HAUTE
+    // Ex: "fracture diaphysaire du fémur ; séquelle pseudarthrose"
+    // Ex: "fracture col fémoral avec pseudarthrose comme séquelle"
+    // CORRECTION: Accepter ";" ou "avec" ou "et" comme séparateurs + "séquelle" optionnel
+    const fractureEtPseudarthrosePattern = /(fracture[^;.]*?(?:femur|femoral|diaphysaire|col|trochanter|plateau|pilon|malleolaire|olecrane|tibia|radius|humerus)?[^;.]*?)[\s;,]+(?:sequelle|complication|avec|et)?\s*(pseudarthrose[^;.]*)/i;
+    if (fractureEtPseudarthrosePattern.test(normalized)) {
+        const match = normalized.match(fractureEtPseudarthrosePattern);
+        if (match) {
+            const lesionFracture = match[1].trim();
+            const lesionPseudarthrose = match[2].trim();
+            
+            console.log('🔍 Pattern 0C - Match trouvé:', { lesionFracture, lesionPseudarthrose });
+            
+            // Valider que les deux parties sont suffisamment descriptives
+            if (lesionFracture.length >= 8 && lesionPseudarthrose.length >= 8) {
+                lesions.push(lesionFracture);
+                lesions.push('sequelle ' + lesionPseudarthrose);  // Ajouter "séquelle" au début pour clarté
+                console.log('✅ Pattern 0C (fracture + pseudarthrose) détecté:', lesions);
+                return lesions;
+            }
+        }
+    }
     
     // Pattern 0D: État antérieur cumul (V3.3.133) - PRIORITÉ MAXIMALE
     // Ex: "luxation épaule sur état antérieur fracture"
@@ -10813,6 +10852,8 @@ const extractIndividualLesions = (text: string): string[] => {
     // Ex: "Accident voiture avec polytraumatisme. Fracture bassin et lésion nerf sciatique"
     // OBJECTIF: Forcer l'extraction de DEUX lésions distinctes
     const bassinSciatiqueCumulPattern = /(fracture.*bassin[^.]+(?:cadre|obturateur|disjonction|sacro|iliaque|pubis|pubienne|pelvien)[^.]*?)(?:[.,;]?\s+(?:et|avec|associ[eé]e?|ainsi\s+qu['']une?)\s+)(l[eé]sion.*nerf.*sciatique|nerf.*sciatique|sciatique|steppage|d[eé]ficit.*moteur.*pied|paralysie.*nerf)/i;
+    const hasBassinSciatiqueCumul = /fracture.*bassin|bassin.*fracture|fracture.*complexe.*bassin|disjonction.*sacro|cadre.*obturateur/i.test(normalized) && 
+                                    /sciatique|nerf.*sciatique|spe|steppage|d[eé]ficit.*moteur.*pied|paralysie.*nerf/i.test(normalized);
     if (bassinSciatiqueCumulPattern.test(normalized) && hasBassinSciatiqueCumul) {
         const match = normalized.match(bassinSciatiqueCumulPattern);
         if (match) {
