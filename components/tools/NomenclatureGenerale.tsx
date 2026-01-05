@@ -328,6 +328,7 @@ export const NomenclatureGenerale: React.FC = () => {
                             </div>
                         </div>
                     )}
+                    )}
 
                 </div>
             </Card>
