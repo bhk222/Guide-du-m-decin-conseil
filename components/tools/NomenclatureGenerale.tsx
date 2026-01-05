@@ -42,113 +42,32 @@ export const NomenclatureGenerale: React.FC = () => {
             return;
         }
 
-        console.log('🔍 Recherche lancée pour:', searchQuery);
-        console.log('📊 Base de données:', baseDeDonnees.length, 'actes');
+        console.log('🔍 DEBUT RECHERCHE:', searchQuery);
+        console.log('📊 BASE DONNEES:', baseDeDonnees.length, 'actes disponibles');
+        console.log('📦 Echantillon base:', baseDeDonnees.slice(0, 2));
 
         setIsLoading(true);
 
         setTimeout(() => {
-            // Recherche dans la base de données intégrée
             const query = searchQuery.toLowerCase().trim();
-            const queryWords = query.split(/\s+/);
-            
-            console.log('🔎 Query normalisée:', query);
+            console.log('🔎 Query:', query);
 
-            // Synonymes et suggestions pour termes modernes
-            const synonymes: { [key: string]: string[] } = {
-                'scanner': ['radiographie', 'radio', 'cliché', 'urographie', 'myélographie', 'tomographie'],
-                'irm': ['radiographie', 'myélographie', 'angiographie', 'imagerie'],
-                'échographie': ['radiographie', 'urographie', 'imagerie'],
-                'tdm': ['radiographie', 'tomodensitométrie', 'tomographie', 'scanner', 'cliché'],
-                'tomodensitométrie': ['radiographie', 'tomographie', 'scanner'],
-                'glycémie': ['glucose', 'sucre', 'hyperglycémie', 'glycose'],
-                'glycemie': ['glucose', 'sucre', 'hyperglycémie', 'glycose'],
-                'cholestérol': ['lipides', 'cholesterol'],
-                'cholesterol': ['lipides'],
-                'créatinine': ['urée', 'creatinine'],
-                'creatinine': ['urée'],
-                'cortisol': ['cortisolémie', 'cortisolemie', 'hormone', 'surrénale'],
-                'cortisolémie': ['cortisol', 'hormone', 'cortisolemie'],
-                'cortisolemie': ['cortisol', 'hormone', 'cortisolémie'],
-                'acth': ['corticotrope', 'hormone', 'corticotrophine'],
-                'nfs': ['numération', 'hémogramme', 'formule sanguine', 'hemogramme'],
-                'hémogramme': ['numération', 'formule sanguine', 'hemogramme'],
-                'hemogramme': ['numération', 'formule sanguine'],
-                'prise de sang': ['numération', 'glucose', 'formule'],
-                'bilan sanguin': ['numération', 'glucose', 'urée', 'lipides'],
-                'diabète': ['glucose', 'sucre', 'hyperglycémie', 'glycosylée'],
-                'diabete': ['glucose', 'sucre', 'hyperglycémie', 'glycosylée'],
-                'hba1c': ['hémoglobine glycosylée', 'hemoglobine glycosylee'],
-                'hemoglobine glycosylee': ['glycosylée'],
-                'tsh': ['thyréostim', 'thyreostim', 'hormone thyroïdienne'],
-                'téléthorax': ['thorax', 'gril costal', 'sternum', 'hémithorax', 'poumon'],
-                'telethorax': ['thorax', 'gril costal', 'sternum', 'hémithorax', 'poumon'],
-                'radio thorax': ['thorax', 'gril costal', 'sternum', 'hémithorax', 'poumon'],
-                'radio poumon': ['thorax', 'gril costal', 'poumon', 'hémithorax'],
-                'radiographie thorax': ['thorax', 'gril costal', 'sternum', 'poumon'],
-                'radiographie poumon': ['thorax', 'poumon', 'gril costal'],
-                'rx thorax': ['thorax', 'gril costal', 'sternum', 'poumon'],
-                'rx poumon': ['thorax', 'poumon', 'gril costal']
-            };
-
-            let queryExpanded = query;
-            Object.keys(synonymes).forEach(terme => {
-                if (query.includes(terme)) {
-                    queryExpanded += ' ' + synonymes[terme].join(' ');
+            // RECHERCHE ULTRA-SIMPLE : juste chercher dans le libellé
+            const resultats = baseDeDonnees.filter(acte => {
+                const libelleLower = acte.libelle.toLowerCase();
+                const match = libelleLower.includes(query);
+                if (match) {
+                    console.log('✓ Match trouvé:', acte.libelle);
                 }
-            });
+                return match;
+            }).slice(0, 20);
 
-            // Modifier le filtre pour accepter les codes de 2 lettres et plus (TSH, NFS, IRM, etc.)
-            const queryWordsExpanded = queryExpanded.toLowerCase().split(/\s+/).filter(w => w.length >= 2);
-
-            // Détecter recherche par code lettre-clé (ex: "B 30", "E 15", "C 20")
-            const codeMatch = query.match(/^([A-Z])\s*(\d+)$/i);
-            
-            const resultats = baseDeDonnees
-                .map(acte => {
-                    let score = 0;
-                    const libelleLower = acte.libelle.toLowerCase();
-                    const codeLower = acte.code.toLowerCase();
-
-                    // Recherche par code lettre-clé (ex: "B 30")
-                    if (codeMatch) {
-                        const [, lettre, coef] = codeMatch;
-                        const lettreUpper = lettre.toUpperCase();
-                        const coefNum = parseInt(coef);
-                        
-                        // Vérifier si l'acte correspond à cette lettre et coefficient
-                        if (acte.lettreCle === lettreUpper && acte.coefficient === coefNum) {
-                            score += 200; // Score très élevé pour correspondance exacte lettre-clé
-                        } else if (acte.lettreCle === lettreUpper) {
-                            score += 100; // Même lettre-clé
-                        }
-                    }
-
-                    // Code exact
-                    if (codeLower === query) score += 100;
-                    else if (codeLower.includes(query)) score += 50;
-
-                    // Libellé
-                    queryWordsExpanded.forEach(word => {
-                        if (libelleLower.includes(word)) score += 10;
-                    });
-
-                    // Catégorie
-                    if (acte.categorie?.toLowerCase().includes(query)) score += 20;
-
-                    return { acte, score };
-                })
-                .filter(item => item.score > 0)
-                .sort((a, b) => b.score - a.score)
-                .slice(0, 20)
-                .map(item => item.acte);
-
-            console.log('✅ Résultats trouvés:', resultats.length);
-            console.log('📋 Premiers résultats:', resultats.slice(0, 3).map(a => a.libelle));
+            console.log('✅ TOTAL RESULTATS:', resultats.length);
+            console.log('📋 Résultats:', resultats.map(a => a.libelle));
 
             setActesTrouves(resultats);
             setIsLoading(false);
-        }, 300);
+        }, 100);
     };
 
     // Ajouter un acte à la sélection
