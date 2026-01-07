@@ -307,7 +307,7 @@ const boneTerms: { [key: string]: string[] } = {
     // Membre Inférieur
     femur: ['fémur', 'fémoral', 'femorale', 'col du fémur', 'condyle fémoral', 'trochanter', 'diaphyse fémorale'],
     rotule: ['rotule', 'patella', 'patellaire'],
-    tibia: ['tibia', 'tibial', 'tibiale', 'plateau tibial', 'extrémité supérieure tibia', 'épines tibiales', 'malléole interne', 'pilon tibial', 'bi-malléolaire', 'bimalléolaire', 'bi malléolaire', 'trimalléolaire', 'tri-malléolaire'],
+    tibia: ['tibia', 'tibial', 'tibiale', 'plateau tibial', 'extrémité supérieure tibia', 'épines tibiales', 'malléole interne', 'pilon tibial', 'bi-malléolaire', 'bimalléolaire', 'bi malléolaire', 'bi-maliolaire', 'bimaliolaire', 'trimalléolaire', 'tri-malléolaire'],
     fibula: ['péroné', 'perone', 'peronier', 'fibula', 'malléole externe', 'malléole'],
     tarse: ['tarse', 'astragale', 'talus', 'calcanéum', 'calcaneum', 'naviculaire', 'scaphoïde tarsien', 'cuboïde', 'cunéiforme'],
     metatarse: ['métatarse', 'métatarsien', 'lisfranc'],
@@ -1979,6 +1979,9 @@ const synonymMap: { [key: string]: string } = {
     'pilon': 'pilon tibial',
     'bimall': 'bimalleolaire',
     'bi malleolaire': 'bimalleolaire',
+    'bimaliolaire': 'bimalleolaire',
+    'bi maliolaire': 'bimalleolaire',
+    'maliolaire': 'malleolaire',
     'thalamique': 'calcaneum thalamique',
     
     // 🔙 Synonymes rachis
@@ -2972,7 +2975,7 @@ const subPartKeywords: { [key: string]: string[] } = {
     // MI
     'Orteils': ['orteil'],
     'Pied': ['pied', 'métatarsien', 'metatarsien', 'astragale', 'calcanéum', 'calcaneum', 'tarse', 'chopart', 'lisfranc'],
-    'Cheville': ['cheville', 'malléole', 'malleole', 'bimalléolaire', 'bimalleolaire', 'bimaleollaire', 'tibio-tarsienne'],
+    'Cheville': ['cheville', 'malléole', 'malleole', 'maliolaire', 'bimalléolaire', 'bimalleolaire', 'bimaliolaire', 'bimaleollaire', 'tibio-tarsienne'],
     'Jambe': ['jambe', 'tibia', 'tibial', 'tibiale', 'péroné', 'perone', 'fibula'],
     'Genou': ['genou', 'rotule', 'patella', 'ménisque', 'menisque', 'plateau tibial'],
     'Cuisse': ['cuisse', 'fémur', 'femur', 'femoral', 'femorale', 'diaphyse'],
@@ -6566,6 +6569,13 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             context: /\d+.*degr|boiterie|marche/i,
             searchTerms: ["Raideur de la cheville"],
             priority: 10350
+        },
+        {
+            pattern: /fracture.*(?:bi-?mall?[eéi]olaire|bi-?maliolaire)|(?:bi-?mall?[eéi]olaire|bi-?maliolaire).*fracture/i,
+            context: /cheville|trait[eé]|chirurg|oed[eè]me|douleur|marche/i,
+            searchTerms: ["Fracture malléolaire ou bi-malléolaire - Bonne consolidation"],
+            priority: 15000,  // Ultra-priorité pour éviter confusion anatomique
+            explanation: "Fracture bi-malléolaire = CHEVILLE (malléoles interne + externe)"
         },
         {
             pattern: /sequelle.*fracture.*pilon.*tibial|pilon.*tibial.*sequelle/i,
@@ -11361,6 +11371,84 @@ const extractIndividualLesions = (text: string): string[] => {
  * @param isExactMatch - Si true, cherche une correspondance exacte par nom (pour résoudre ambiguïté)
  */
 export const localExpertAnalysis = (text: string, externalKeywords?: string[], isExactMatch: boolean = false): LocalAnalysisResult => {
+    
+    // 🆕 V3.3.146: DÉTECTION SURDITÉ PAR DÉCIBELS (dB) - PRIORITÉ ABSOLUE
+    // Ex: "surdité de transmission avec mois de 95 db a droite et moin 25 db a gauche"
+    // Ex: "perte auditive -80 dB oreille gauche"
+    const decibelPattern = /(?:surdité|perte.*audit|baisse.*acuit.*audit|hypoacousie|cophose).*?(?:avec|de)?.*?(moins|moin|mois)?\s*(?:de)?\s*[\-−]?\s*(\d{1,3})\s*(?:db|d\s*b|décibels?)(?:\s+[aà]\s+(droite|gauche|d|g))?/gi;
+    const decibelMatches = Array.from(text.matchAll(decibelPattern));
+    
+    if (decibelMatches.length > 0) {
+        console.log('🔊 SURDITÉ DÉTECTÉE avec mesures dB:', decibelMatches.map(m => m[0]));
+        
+        // Extraire toutes les mesures
+        const hearingLossDetails: Array<{ side: string; db: number; text: string }> = [];
+        
+        for (const match of decibelMatches) {
+            const db = parseInt(match[2]);
+            const side = match[3]?.toLowerCase() || 'non précisé';
+            hearingLossDetails.push({ 
+                side: side === 'd' || side === 'droite' ? 'droite' : side === 'g' || side === 'gauche' ? 'gauche' : 'non précisé',
+                db, 
+                text: match[0] 
+            });
+        }
+        
+        // Déterminer le type de surdité selon dB
+        const hearingInjuries = hearingLossDetails.map(detail => {
+            let injuryName = '';
+            if (detail.db >= 85) {
+                injuryName = 'Surdité unilatérale profonde';
+            } else if (detail.db >= 70) {
+                injuryName = 'Surdité unilatérale moyenne';
+            } else if (detail.db >= 40) {
+                injuryName = 'Surdité unilatérale moyenne';
+            } else if (detail.db >= 20) {
+                injuryName = 'Surdité unilatérale faible';
+            } else {
+                injuryName = 'Diminution de l\'acuité auditive';
+            }
+            
+            const matchedInjury = allInjuriesWithPaths.find(inj => 
+                normalize(inj.name).includes(normalize(injuryName))
+            );
+            
+            return {
+                injury: matchedInjury,
+                side: detail.side,
+                db: detail.db,
+                text: detail.text
+            };
+        }).filter(h => h.injury);
+        
+        if (hearingInjuries.length > 0) {
+            console.log('✅ SURDITÉ: Redirection vers analyse séquelles multiples (surdité + autres)');
+            // Retourner ambiguïté avec détection de séquelles multiples
+            return {
+                type: 'proposal',
+                name: `Surdité ${hearingInjuries[0].side} (${hearingInjuries[0].db} dB)`,
+                rate: typeof hearingInjuries[0].injury!.injury.rate === 'number' 
+                    ? hearingInjuries[0].injury!.injury.rate 
+                    : Math.round((hearingInjuries[0].injury!.injury.rate[0] + hearingInjuries[0].injury!.injury.rate[1]) / 2),
+                justification: `⚠️ <strong>ATTENTION : Séquelles multiples détectées</strong><br><br>` +
+                    `🔊 <strong>Surdité(s) mesurée(s) :</strong><br>` +
+                    hearingInjuries.map(h => 
+                        `• ${h.side}: <strong>${h.db} dB</strong> → ${h.injury!.name} [${Array.isArray(h.injury!.injury.rate) ? h.injury!.injury.rate.join('-') : h.injury!.injury.rate}%]`
+                    ).join('<br>') +
+                    `<br><br>⚠️ <strong>Autres séquelles à analyser séparément :</strong><br>` +
+                    `• Perforation tympanique (si présente)<br>` +
+                    `• Vertiges/syndrome vestibulaire<br>` +
+                    `• Céphalées post-traumatiques<br>` +
+                    `• Cervicalgie/syndrome cervical<br><br>` +
+                    `<strong>📋 Procédure recommandée :</strong><br>` +
+                    `1. Évaluer CHAQUE séquelle séparément<br>` +
+                    `2. Appliquer formule de Balthazar pour cumul<br>` +
+                    `3. T = 100 - [(100-T1) × (100-T2) × (100-T3) / 10000]`,
+                path: hearingInjuries[0].injury!.path,
+                injury: hearingInjuries[0].injury!.injury
+            };
+        }
+    }
     
     // 🆕 V3.3.124e: CHECK MÉTACARPIENS EN PRIORITÉ ABSOLUE - AVANT TOUT AUTRE TRAITEMENT
     // Si l'utilisateur tape "perte d'un seul métacarpien" SANS mentionner de doigt spécifique,
