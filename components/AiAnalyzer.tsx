@@ -5438,7 +5438,7 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
         // Si mouvements libres/normaux → FORCER "Bonne consolidation" et EXCLURE "Cal vicieux et raideur"
         {
             pattern: /fracture.*(?:trochant[eé]r|massif\s+trochant)/i,
-            context: /mouvements?\s+(?:libres?|normaux?|conserv[eé]s?|comme\s+libres?)|mobilit[eé]\s+(?:libre|normale|conserv[eé]e|pr[eé]serv[eé]e)|amplitude\s+(?:normale|conserv[eé]e)|sans\s+raideur/i,
+            context: /mouvements?.*(?:libres?|normaux?|conserv[eé]s?|comme\s+libres?)|mobilit[eé].*(?:libre|normale|conserv[eé]e|pr[eé]serv[eé]e)|amplitude.*(?:normale|conserv[eé]e)|sans\s+raideur|hanche.*(?:comme\s+)?libres?/i,
             searchTerms: ["Fracture du massif trochantérien - Bonne consolidation"],
             priority: 15000,  // ULTRA PRIORITAIRE - Court-circuite "cal vicieux"
             negativeContext: /cal\s+vicieux|raideur\s+(?:s[eé]v[eè]re|importante|marqu[eé]e)|ankylose|quasi[- ]ankylose/i
@@ -5873,12 +5873,13 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             priority: 9500
         },
         
-        // === RÈGLE SPÉCIALE: CONSOLIDATION SANS SÉQUELLE = 0% IPP ===
+        // === RÈGLE SPÉCIALE: CONSOLIDATION SANS SÉQUELLE = 0% IPP (V3.3.137 FIX) ===
         {
             pattern: /(?:fracture|arrachement|luxation|entorse|traumatisme|lesion|trauma)/i,  // Détecte simplement un traumatisme
             context: /(?:sans|pas\s+d[e']?|aucune?)\s*s[eé]quelles?|examen.*normal|clinique.*normal|normalit[eé]|consolidation.*sans|guérison.*compl[eè]te|r[eé]cup[eé]ration.*compl[eè]te|mobilit[eé].*normale/i,  // ÉLARGI: récupération complète, mobilité normale
             searchTerms: ["__SANS_SEQUELLE__", "__FRACTURE_CONSOLIDEE_SANS_SEQUELLE__"],  // Marqueurs spéciaux
-            priority: 10000  // Priorité maximale absolue
+            priority: 10000,  // Priorité maximale absolue
+            negativeContext: /(?:marche.*canne|canne|accroupissement.*difficile|difficult[eé]|trochanter|massif.*trochant|trochant[eé]ro)/i  // 🆕 NE PAS appliquer si aide technique ou gêne fonctionnelle
         },
         
         // === RÈGLES AMPUTATIONS NIVEAUX ANATOMIQUES ===
@@ -8043,13 +8044,26 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             priority: 999
         },
         // === RÈGLES RACHIS ET BASSIN ===
+        // 🆕 V3.3.137: PRIORITÉ ABSOLUE - Fracture trochanter avec mouvements libres = bonne consolidation
+        {
+            pattern: /fracture.*(?:pertrochant|pertrochanteri|trochanter|massif.*trochant|trochant[eé]ro-diaphysaire)/i,
+            context: /(?:mouvements?|mobilit[eé]).*(?:hanche|coxo-f[eé]moral).*(?:libre|libres|normal|normaux|conserv[eé]s?)|hanche.*(?:droite|gauche).*(?:libre|comme.*libre)|(?:libre|libres).*mouvements?/i,
+            searchTerms: [
+                'Fracture du massif trochantérien - Bonne consolidation',
+                'fracture massif trochantérien bonne consolidation',
+                'Bonne consolidation trochantérien',
+                'Fracture trochanter consolidation'
+            ],
+            priority: 10500,  // PRIORITÉ MAXIMALE pour court-circuiter la règle séquelles
+            negativeContext: /raideur.*hanche|hanche.*raideur|limitation.*(?:abduction|adduction|rotation).*hanche|hanche.*limitation/i
+        },
         // === RÈGLE FRACTURE PERTROCHANTÉRIENNE AVEC SÉQUELLES (V3.3.124) ===
         {
             pattern: /fracture.*(?:pertrochant|pertrochanteri|trochanter|massif.*trochant)/i,
             context: /séquelles?.*douloureus|abduction.*limit[eé]|adduction.*limit[eé]|accroupissement.*(?:difficile|douloureux)|relèvement.*difficile|boiterie/i,
             searchTerms: ['Fracture du massif trochantérien - Cal vicieux et raideur'],
             priority: 999,
-            negativeContext: /bonne.*consolidation|sans.*sequelle/i
+            negativeContext: /bonne.*consolidation|sans.*sequelle|mouvements?.*(?:libre|libres)|mobilit[eé].*libre|hanche.*libre/i
         },
         {
             pattern: /fracture.*(?:pertrochant|pertrochanteri|trochanter|massif.*trochant).*(?:bonne.*consolidation|sans.*sequelle)/i,
