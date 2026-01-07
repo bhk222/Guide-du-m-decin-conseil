@@ -3013,7 +3013,25 @@ const calculateSeverityAdjustment = (text: string): {
     const criteria: string[] = [];
     let score = 0;
     
-    // 🔴 CRITÈRES TRÈS GRAVES (+3 points chacun)
+    // � CRITÈRES POSITIFS (BONNE RÉCUPÉRATION) - Score négatif vers bas de fourchette
+    const hasFreeMovement = /mouvements?\s+(?:libres?|normaux?|conserv[eé]s?|comme\s+libres?)|mobilit[eé]\s+(?:libre|normale|conserv[eé]e|pr[eé]serv[eé]e)|amplitude\s+(?:normale|conserv[eé]e|pr[eé]serv[eé]e)|sans\s+raideur/i.test(text);
+    const hasNoStiffness = /(?:pas\s+de|sans|absence\s+de)\s+(?:raideur|limitation|ankylose)/i.test(text);
+    const hasGoodConsolidation = /bonne\s+consolidation|consolidation\s+(?:anatomique|parfaite)|sans\s+cal\s+vicieux/i.test(text);
+    
+    if (hasFreeMovement) {
+        criteria.push('✅ Mouvements libres/normaux (bonne récupération)');
+        score -= 3;  // Score négatif = vers bas de fourchette
+    }
+    if (hasNoStiffness) {
+        criteria.push('✅ Pas de raideur');
+        score -= 2;
+    }
+    if (hasGoodConsolidation) {
+        criteria.push('✅ Bonne consolidation');
+        score -= 1;
+    }
+    
+    // �🔴 CRITÈRES TRÈS GRAVES (+3 points chacun)
     if (/septique|infect[eé]|suppuration|pus/i.test(text)) {
         criteria.push('Infection active (septique/pus)');
         score += 3;
@@ -3022,9 +3040,17 @@ const calculateSeverityAdjustment = (text: string): {
         criteria.push('Fistule chronique');
         score += 3;
     }
-    if (/b[eé]quilles?|canne|d[eé]ambulateur/i.test(text)) {
-        criteria.push('Aide à la marche nécessaire');
+    
+    // Aide à la marche : distinction importante
+    const hasWalkingAid = /b[eé]quilles?|canne|d[eé]ambulateur|fauteuil\s+roulant/i.test(text);
+    if (hasWalkingAid && !hasFreeMovement) {
+        // Aide à la marche + raideur = vraiment grave
+        criteria.push('Aide à la marche nécessaire (mobilité limitée)');
         score += 3;
+    } else if (hasWalkingAid && hasFreeMovement) {
+        // Aide à la marche mais mouvements libres = aide de précaution seulement
+        criteria.push('⚠️ Aide à la marche (mouvements préservés) - impact réduit');
+        score += 1;  // Impact minime si mouvements libres
     }
     
     // 🟠 CRITÈRES GRAVES (+2 points chacun)
@@ -3059,7 +3085,7 @@ const calculateSeverityAdjustment = (text: string): {
         score += 1;
     }
     
-    // Calcul coefficient selon score
+    // Calcul coefficient selon score (peut être négatif pour bonne récupération)
     let coefficient: number;
     let level: 'bas' | 'moyen' | 'élevé';
     
@@ -3075,10 +3101,19 @@ const calculateSeverityAdjustment = (text: string): {
         // 1-2 points → MODÉRÉ → Milieu (coefficient 0.5)
         coefficient = 0.5;
         level = 'moyen';
-    } else {
-        // 0 points → LÉGER → Bas de fourchette (coefficient 0.0)
+    } else if (score === 0) {
+        // 0 points → NEUTRE → Bas de fourchette (coefficient 0.0)
         coefficient = 0.0;
         level = 'bas';
+    } else if (score >= -2) {
+        // -1 à -2 points → BONNE RÉCUPÉRATION → Très bas de fourchette (coefficient 0.0)
+        coefficient = 0.0;
+        level = 'bas';
+    } else {
+        // -3 ou moins → EXCELLENTE RÉCUPÉRATION → Minimum absolu (coefficient 0.0)
+        coefficient = 0.0;
+        level = 'bas';
+        criteria.push('⭐ Excellente récupération fonctionnelle → Taux minimal');
     }
     
     return { coefficient, level, criteria };
@@ -3741,6 +3776,240 @@ const determineSeverity = (
     return { level: 'moyen', signs: ["gêne fonctionnelle modérée"], isDefault: true }; // Default
 };
 
+/**
+ * Génère un rapport clinique détaillé avec état du patient et critères de gravité
+ */
+const buildDetailedClinicalReport = (
+    userInput: string,
+    injury: Injury,
+    chosenRate: number,
+    severityLevel: 'faible' | 'moyen' | 'élevé' | 'fixe'
+): string => {
+    const normalized = normalize(userInput);
+    let report = "";
+
+    // 📋 EXTRACTION ÉTAT CLINIQUE
+    const hasMarche = /marche|deambulation|perimetre de marche/i.test(userInput);
+    const hasBequ = /bequille|canne|deambulateur/i.test(userInput);
+    const hasBoiterie = /boiterie|claudication|marche\s+difficile/i.test(normalized);
+    const hasAMP = /amp|amplitude.*impossible|mobilite.*impossible/i.test(normalized);
+    const hasFlexion = /flexion.*(?:reduite|limitee|tres\s+reduite|impossible)/i.test(normalized);
+    const hasExtension = /extension.*(?:reduite|limitee|tres\s+reduite|impossible)/i.test(normalized);
+    const hasForceFaible = /force.*(?:faible|tres\s+faible|diminuee|reduite)|force\s+musculaire.*(?:faible|diminuee)/i.test(normalized);
+    const hasAmyotrophie = /amyotrophie|atrophie.*musculaire|fonte\s+musculaire/i.test(normalized);
+    const hasDouleur = /douleur|douloureuse|douloureux|gonalgie|coxalgie/i.test(normalized);
+    const hasRaideur = /raideur/i.test(normalized);
+    const hasInstabilite = /instabilite|laxite|derobement/i.test(normalized);
+    const hasOedeme = /oedeme|gonflement|epanchement/i.test(normalized);
+    
+    // Extraire mesures quantitatives
+    const flexionMatch = /flexion.*?(\d+)(?:°|deg)/i.exec(userInput);
+    const extensionMatch = /extension.*?(\d+)(?:°|deg)/i.exec(userInput);
+    const evaMatch = /eva\s*[=:]?\s*(\d{1,2})/i.exec(userInput);
+    const raccourcissementMatch = /raccourcissement.*?(\d+(?:[.,]\d+)?)\s*cm/i.exec(userInput);
+    
+    // Déterminer si c'est un cas de fracture/traumatisme
+    const isFracture = /fracture|luxation|entorse/i.test(normalized);
+    
+    if (hasMarche || hasBequ || hasFlexion || hasForceFaible || hasAmyotrophie || hasDouleur) {
+        report += `<div style="background:#e3f2fd; padding:15px; margin:15px 0; border-left:5px solid #2196F3; border-radius:5px;">`;
+        report += `<strong>📋 ÉTAT CLINIQUE DU PATIENT</strong><br><br>`;
+        
+        // État général/mobilité
+        if (hasMarche || hasBequ || hasBoiterie) {
+            report += `<strong>🚶 Mobilité et déambulation :</strong><br>`;
+            report += `<ul style="margin:5px 0;">`;
+            if (hasBequ) report += `<li>Marche avec aide technique (béquille/canne) - Dépendance à l'appareillage</li>`;
+            if (hasBoiterie) report += `<li>Boiterie constatée - Trouble de la marche</li>`;
+            if (hasMarche && !hasBequ) report += `<li>Périmètre de marche affecté</li>`;
+            report += `</ul>`;
+        }
+        
+        // Mobilité articulaire
+        if (hasAMP || hasFlexion || hasExtension || hasRaideur) {
+            report += `<strong>🦴 Mobilité articulaire :</strong><br>`;
+            report += `<ul style="margin:5px 0;">`;
+            if (hasAMP) report += `<li>Amplitude mobilité passive (AMP) impossible - Raideur majeure</li>`;
+            if (flexionMatch) {
+                report += `<li>Flexion limitée à ${flexionMatch[1]}° (limitation sévère)</li>`;
+            } else if (hasFlexion) {
+                report += `<li>Flexion très réduite et douloureuse</li>`;
+            }
+            if (extensionMatch) {
+                report += `<li>Extension limitée à ${extensionMatch[1]}° (flexum résiduel)</li>`;
+            } else if (hasExtension) {
+                report += `<li>Extension très réduite et douloureuse</li>`;
+            }
+            if (hasRaideur && !hasFlexion && !hasExtension) {
+                report += `<li>Raideur articulaire importante</li>`;
+            }
+            report += `</ul>`;
+        }
+        
+        // Force musculaire et trophicité
+        if (hasForceFaible || hasAmyotrophie) {
+            report += `<strong>💪 Force musculaire et trophicité :</strong><br>`;
+            report += `<ul style="margin:5px 0;">`;
+            if (hasForceFaible) report += `<li>Force musculaire très faible - Déficit moteur significatif</li>`;
+            if (hasAmyotrophie) report += `<li>Amyotrophie constatée (fonte musculaire) - Déconditionnement</li>`;
+            report += `</ul>`;
+        }
+        
+        // Douleur et symptômes
+        if (hasDouleur || hasOedeme || hasInstabilite) {
+            report += `<strong>⚕️ Symptômes associés :</strong><br>`;
+            report += `<ul style="margin:5px 0;">`;
+            if (evaMatch) {
+                report += `<li>Douleurs évaluées à EVA ${evaMatch[1]}/10</li>`;
+            } else if (hasDouleur) {
+                report += `<li>Douleurs présentes à la mobilisation</li>`;
+            }
+            if (hasOedeme) report += `<li>Œdème ou épanchement articulaire</li>`;
+            if (hasInstabilite) report += `<li>Instabilité articulaire (laxité ligamentaire)</li>`;
+            report += `</ul>`;
+        }
+        
+        // Mesures objectives
+        if (raccourcissementMatch) {
+            report += `<strong>📏 Mesures objectives :</strong><br>`;
+            report += `<ul style="margin:5px 0;">`;
+            report += `<li>Raccourcissement membre : ${raccourcissementMatch[1]} cm</li>`;
+            report += `</ul>`;
+        }
+        
+        report += `</div>`;
+    }
+
+    // 🎯 TABLEAU CRITÈRES DE GRAVITÉ
+    if (Array.isArray(injury.rate) && injury.rateCriteria) {
+        const criteria = injury.rateCriteria;
+        const [minRate, maxRate] = injury.rate;
+        
+        report += `<div style="background:#fff8e1; padding:15px; margin:15px 0; border-left:5px solid #ffc107; border-radius:5px;">`;
+        report += `<strong>🎯 CRITÈRES DE GRAVITÉ - ANALYSE COMPARATIVE</strong><br><br>`;
+        
+        report += `<table style="width:100%; border-collapse:collapse; margin:10px 0;">`;
+        report += `<thead><tr style="background:#fff3cd;">`;
+        report += `<th style="padding:10px; border:1px solid #ddd; text-align:left;">Critère</th>`;
+        report += `<th style="padding:10px; border:1px solid #ddd; text-align:center;">Présent</th>`;
+        report += `<th style="padding:10px; border:1px solid #ddd; text-align:center;">Niveau de gravité</th>`;
+        report += `</tr></thead><tbody>`;
+        
+        // Analyser chaque critère
+        const criteriaChecks: Array<{name: string, present: boolean, level: string}> = [];
+        
+        // Raideur sévère
+        if ((hasFlexion && (!flexionMatch || parseInt(flexionMatch[1]) < 90)) || hasRaideur) {
+            criteriaChecks.push({
+                name: 'Raideur sévère (flexion <90°)',
+                present: true,
+                level: '<span style="color:#d32f2f; font-weight:bold;">⬆️ HAUTE</span>'
+            });
+        }
+        
+        // Force musculaire
+        if (hasForceFaible) {
+            criteriaChecks.push({
+                name: 'Force musculaire très faible',
+                present: true,
+                level: '<span style="color:#d32f2f; font-weight:bold;">⬆️ HAUTE</span>'
+            });
+        }
+        
+        // Amyotrophie
+        if (hasAmyotrophie) {
+            criteriaChecks.push({
+                name: 'Amyotrophie marquée',
+                present: true,
+                level: '<span style="color:#d32f2f; font-weight:bold;">⬆️ HAUTE</span>'
+            });
+        }
+        
+        // Boiterie
+        if (hasBoiterie) {
+            criteriaChecks.push({
+                name: 'Boiterie persistante',
+                present: true,
+                level: '<span style="color:#d32f2f; font-weight:bold;">⬆️ HAUTE</span>'
+            });
+        }
+        
+        // Douleurs
+        if (hasDouleur) {
+            const level = evaMatch && parseInt(evaMatch[1]) >= 7 ? 'HAUTE' : 
+                         evaMatch && parseInt(evaMatch[1]) >= 4 ? 'MOYENNE' : 'BASSE';
+            const color = level === 'HAUTE' ? '#d32f2f' : level === 'MOYENNE' ? '#f57c00' : '#388e3c';
+            criteriaChecks.push({
+                name: `Douleurs${evaMatch ? ` (EVA ${evaMatch[1]}/10)` : ''}`,
+                present: true,
+                level: `<span style="color:${color}; font-weight:bold;">⬆️ ${level}</span>`
+            });
+        }
+        
+        // AMP impossible
+        if (hasAMP) {
+            criteriaChecks.push({
+                name: 'AMP impossible',
+                present: true,
+                level: '<span style="color:#d32f2f; font-weight:bold;">⬆️ HAUTE</span>'
+            });
+        }
+        
+        // Instabilité
+        if (hasInstabilite) {
+            criteriaChecks.push({
+                name: 'Instabilité articulaire',
+                present: true,
+                level: '<span style="color:#d32f2f; font-weight:bold;">⬆️ HAUTE</span>'
+            });
+        }
+        
+        // Afficher le tableau
+        criteriaChecks.forEach(check => {
+            report += `<tr>`;
+            report += `<td style="padding:10px; border:1px solid #ddd;">${check.name}</td>`;
+            report += `<td style="padding:10px; border:1px solid #ddd; text-align:center;">`;
+            report += check.present ? '✅ <strong>OUI</strong>' : '❌ Non';
+            report += `</td>`;
+            report += `<td style="padding:10px; border:1px solid #ddd; text-align:center;">${check.level}</td>`;
+            report += `</tr>`;
+        });
+        
+        report += `</tbody></table>`;
+        
+        // Synthèse
+        const hauteCount = criteriaChecks.filter(c => c.level.includes('HAUTE')).length;
+        report += `<br><strong>📊 Synthèse :</strong> ${hauteCount} critère(s) de gravité <strong style="color:#d32f2f;">HAUTE</strong> identifié(s)<br>`;
+        report += `<strong>💡 Positionnement dans la fourchette [${minRate}-${maxRate}%] :</strong> `;
+        
+        if (hauteCount >= 3) {
+            report += `<strong style="color:#d32f2f;">Partie HAUTE</strong> (≥${Math.round(minRate + (maxRate - minRate) * 0.7)}%)`;
+        } else if (hauteCount >= 1) {
+            report += `<strong style="color:#f57c00;">Partie MOYENNE-HAUTE</strong> (${Math.round(minRate + (maxRate - minRate) * 0.5)}-${Math.round(minRate + (maxRate - minRate) * 0.7)}%)`;
+        } else {
+            report += `<strong style="color:#388e3c;">Partie BASSE</strong> (${minRate}-${Math.round(minRate + (maxRate - minRate) * 0.4)}%)`;
+        }
+        
+        report += `</div>`;
+    }
+
+    // ⚠️ POINTS D'ATTENTION
+    report += `<div style="background:#ffebee; padding:15px; margin:15px 0; border-left:5px solid #f44336; border-radius:5px;">`;
+    report += `<strong>⚠️ POINTS D'ATTENTION MÉDICAUX</strong><br><br>`;
+    report += `<ol style="margin:5px 0;">`;
+    report += `<li><strong>Évaluation goniométrique recommandée</strong> pour objectiver l'amplitude articulaire exacte</li>`;
+    report += `<li><strong>Bilan radiologique à demander</strong> pour évaluer :<ul>`;
+    report += `<li>Cal vicieux éventuel</li>`;
+    report += `<li>Déviation axiale (varus/valgus)</li>`;
+    report += `<li>Arthrose post-traumatique précoce</li>`;
+    report += `</ul></li>`;
+    report += `<li><strong>Réévaluation à 6 mois</strong> pourrait être pertinente si amélioration possible avec rééducation intensive</li>`;
+    report += `</ol>`;
+    report += `</div>`;
+
+    return report;
+};
+
 export const buildExpertJustification = (
     userInput: string,
     injury: Injury,
@@ -3781,6 +4050,9 @@ export const buildExpertJustification = (
         justification += `3️⃣ OU cumuler : Taux fracture + Taux atteinte radiculaire (formule de cumul)<br>`;
         justification += `</div><br>`;
     }
+    
+    // 🆕 NOUVEAU RAPPORT DÉTAILLÉ - EXTRACTION ÉTAT CLINIQUE
+    justification += buildDetailedClinicalReport(userInput, injury, chosenRate, severityLevel);
     
     // Section 1 : Résumé clinique
     justification += "<strong>1️⃣ Résumé clinique</strong><br>";
@@ -5159,6 +5431,16 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
 
     // �🎯 SYSTÈME DE RÈGLES EXPERTES - Court-circuite l'algorithme pour cas fréquents
     const expertRules = [
+        // === 🆕 V3.3.142: RÈGLE FRACTURE TROCHANTÉRIENNE AVEC MOUVEMENTS LIBRES (PRIORITÉ ABSOLUE) ===
+        // Si mouvements libres/normaux → FORCER "Bonne consolidation" et EXCLURE "Cal vicieux et raideur"
+        {
+            pattern: /fracture.*(?:trochant[eé]r|massif\s+trochant)/i,
+            context: /mouvements?\s+(?:libres?|normaux?|conserv[eé]s?|comme\s+libres?)|mobilit[eé]\s+(?:libre|normale|conserv[eé]e|pr[eé]serv[eé]e)|amplitude\s+(?:normale|conserv[eé]e)|sans\s+raideur/i,
+            searchTerms: ["Fracture du massif trochantérien - Bonne consolidation"],
+            priority: 15000,  // ULTRA PRIORITAIRE - Court-circuite "cal vicieux"
+            negativeContext: /cal\s+vicieux|raideur\s+(?:s[eé]v[eè]re|importante|marqu[eé]e)|ankylose|quasi[- ]ankylose/i
+        },
+        
         // === 🆕 V3.3.127: RÈGLES CAS LIMITES ET INCERTITUDES (PRIORITÉ ABSOLUE) ===
         // Amputations doigts avec incertitude niveau (P1 ou P2)
         {
@@ -9605,12 +9887,14 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
                     );
                 }
                 
-                // 🆕 Si "pas de raideur" / "sans raideur" → exclure entrées avec raideur (V3.3.25)
-                if (/(pas\s+de|sans)\s+(raideur|limitation|gene)/i.test(normalizedInputText)) {
+                // 🆕 Si "pas de raideur" / "sans raideur" / "mouvements libres" → exclure entrées avec raideur (V3.3.25 + V3.3.142)
+                const hasFreeMovement = /(pas\s+de|sans)\s+(raideur|limitation|gene)|mouvements?\s+(libres?|normaux?|conserves?|comme\s+libres?)|mobilite\s+(libre|normale|conservee|preservee)|amplitude\s+(normale|conservee|preservee)/i.test(normalizedInputText);
+                
+                if (hasFreeMovement) {
                     filteredFractures = filteredFractures.filter(f => {
                         const fname = normalize(f.name);
-                        // Garder seulement celles explicitement "sans raideur" ET sans features problématiques
-                        const hasSansRaideur = /sans\s+raideur/i.test(fname);
+                        // Garder seulement celles explicitement "sans raideur/bonne consolidation" ET sans features problématiques
+                        const hasSansRaideur = /sans\s+raideur|bonne\s+consolidation|consolidation\s+parfaite/i.test(fname);
                         const hasProblematicFeatures = /(cal\s+saillant|double|difforme|compression)/i.test(fname);
                         return hasSansRaideur && !hasProblematicFeatures;
                     });

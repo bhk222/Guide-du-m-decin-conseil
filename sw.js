@@ -1,17 +1,10 @@
-const CACHE_NAME = 'guide-medecin-conseil-v4.3.111-CECITE-NEGATIVE-FIX';
-const DATA_CACHE_NAME = 'guide-medecin-conseil-data-v4.3.111-CECITE-NEGATIVE-FIX';
+const CACHE_NAME = 'guide-medecin-conseil-v4.3.115-MINIMAL';
+const DATA_CACHE_NAME = 'guide-medecin-conseil-data-v4.3.115-MINIMAL';
 
 // Ressources essentielles à mettre en cache immédiatement
 const STATIC_CACHE_URLS = [
   '/',
   '/index.html',
-  '/manifest.json',
-  '/metadata.json',
-  '/css/index.css',
-  '/fonts/Roboto-Regular.woff2',
-  '/fonts/Roboto-Medium.woff2',
-  '/fonts/Roboto-Bold.woff2',
-  '/fonts/Roboto-Black.woff2',
 ];
 
 // Installation du Service Worker
@@ -23,9 +16,17 @@ self.addEventListener('install', event => {
   
   event.waitUntil(
     caches.open(CACHE_NAME)
-      .then(cache => {
+      .then(async cache => {
         console.log('✅ Cache ouvert:', CACHE_NAME);
-        return cache.addAll(STATIC_CACHE_URLS);
+        // Mettre en cache les ressources une par une pour éviter l'échec complet
+        for (const url of STATIC_CACHE_URLS) {
+          try {
+            await cache.add(url);
+            console.log('✅ Mis en cache:', url);
+          } catch (error) {
+            console.warn('⚠️ Impossible de mettre en cache:', url, error.message);
+          }
+        }
       })
       .catch(error => {
         console.error('❌ Erreur lors de la mise en cache initiale:', error);
