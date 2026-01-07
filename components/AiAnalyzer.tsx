@@ -11372,83 +11372,96 @@ const extractIndividualLesions = (text: string): string[] => {
  */
 export const localExpertAnalysis = (text: string, externalKeywords?: string[], isExactMatch: boolean = false): LocalAnalysisResult => {
     
-    // 🆕 V3.3.146: DÉTECTION SURDITÉ PAR DÉCIBELS (dB) - PRIORITÉ ABSOLUE
-    // Ex: "surdité de transmission avec mois de 95 db a droite et moin 25 db a gauche"
-    // Ex: "perte auditive -80 dB oreille gauche"
+    // 🆕 V3.3.147: DÉTECTION SÉQUELLES MULTIPLES - Analyse complète avant de retourner
+    const detectedSequelae: Array<{name: string; keywords: string[]; context: string}> = [];
+    
+    // Détecter surdité par dB
     const decibelPattern = /(?:surdité|perte.*audit|baisse.*acuit.*audit|hypoacousie|cophose).*?(?:avec|de)?.*?(moins|moin|mois)?\s*(?:de)?\s*[\-−]?\s*(\d{1,3})\s*(?:db|d\s*b|décibels?)(?:\s+[aà]\s+(droite|gauche|d|g))?/gi;
     const decibelMatches = Array.from(text.matchAll(decibelPattern));
     
     if (decibelMatches.length > 0) {
         console.log('🔊 SURDITÉ DÉTECTÉE avec mesures dB:', decibelMatches.map(m => m[0]));
-        
-        // Extraire toutes les mesures
-        const hearingLossDetails: Array<{ side: string; db: number; text: string }> = [];
-        
         for (const match of decibelMatches) {
             const db = parseInt(match[2]);
             const side = match[3]?.toLowerCase() || 'non précisé';
-            hearingLossDetails.push({ 
-                side: side === 'd' || side === 'droite' ? 'droite' : side === 'g' || side === 'gauche' ? 'gauche' : 'non précisé',
-                db, 
-                text: match[0] 
+            const sideText = side === 'd' || side === 'droite' ? 'droite' : side === 'g' || side === 'gauche' ? 'gauche' : 'non précisé';
+            detectedSequelae.push({
+                name: `Surdité ${sideText} (${db} dB)`,
+                keywords: ['surdité', sideText, db.toString(), 'dB'],
+                context: match[0]
             });
         }
-        
-        // Déterminer le type de surdité selon dB
-        const hearingInjuries = hearingLossDetails.map(detail => {
-            let injuryName = '';
-            if (detail.db >= 85) {
-                injuryName = 'Surdité unilatérale profonde';
-            } else if (detail.db >= 70) {
-                injuryName = 'Surdité unilatérale moyenne';
-            } else if (detail.db >= 40) {
-                injuryName = 'Surdité unilatérale moyenne';
-            } else if (detail.db >= 20) {
-                injuryName = 'Surdité unilatérale faible';
-            } else {
-                injuryName = 'Diminution de l\'acuité auditive';
-            }
-            
-            const matchedInjury = allInjuriesWithPaths.find(inj => 
-                normalize(inj.name).includes(normalize(injuryName))
-            );
-            
-            return {
-                injury: matchedInjury,
-                side: detail.side,
-                db: detail.db,
-                text: detail.text
-            };
-        }).filter(h => h.injury);
-        
-        if (hearingInjuries.length > 0) {
-            console.log('✅ SURDITÉ: Redirection vers analyse séquelles multiples (surdité + autres)');
-            // Retourner ambiguïté avec détection de séquelles multiples
-            return {
-                type: 'proposal',
-                name: `Surdité ${hearingInjuries[0].side} (${hearingInjuries[0].db} dB)`,
-                rate: typeof hearingInjuries[0].injury!.injury.rate === 'number' 
-                    ? hearingInjuries[0].injury!.injury.rate 
-                    : Math.round((hearingInjuries[0].injury!.injury.rate[0] + hearingInjuries[0].injury!.injury.rate[1]) / 2),
-                justification: `⚠️ <strong>ATTENTION : Séquelles multiples détectées</strong><br><br>` +
-                    `🔊 <strong>Surdité(s) mesurée(s) :</strong><br>` +
-                    hearingInjuries.map(h => 
-                        `• ${h.side}: <strong>${h.db} dB</strong> → ${h.injury!.name} [${Array.isArray(h.injury!.injury.rate) ? h.injury!.injury.rate.join('-') : h.injury!.injury.rate}%]`
-                    ).join('<br>') +
-                    `<br><br>⚠️ <strong>Autres séquelles à analyser séparément :</strong><br>` +
-                    `• Perforation tympanique (si présente)<br>` +
-                    `• Vertiges/syndrome vestibulaire<br>` +
-                    `• Céphalées post-traumatiques<br>` +
-                    `• Cervicalgie/syndrome cervical<br><br>` +
-                    `<strong>📋 Procédure recommandée :</strong><br>` +
-                    `1. Évaluer CHAQUE séquelle séparément<br>` +
-                    `2. Appliquer formule de Balthazar pour cumul<br>` +
-                    `3. T = 100 - [(100-T1) × (100-T2) × (100-T3) / 10000]`,
-                path: hearingInjuries[0].injury!.path,
-                injury: hearingInjuries[0].injury!.injury
-            };
-        }
     }
+    
+    // Détecter perforation tympanique
+    if (/perforation.*tympan|tympan.*perfor/i.test(text)) {
+        detectedSequelae.push({
+            name: 'Perforation tympanique',
+            keywords: ['perforation', 'tympan', 'tympanique'],
+            context: text.match(/perforation.*tympan[^.;]*/i)?.[0] || ''
+        });
+    }
+    
+    // Détecter vertiges
+    if (/vertige|syndrome.*vestibulaire|troubles.*[eé]quilibre/i.test(text)) {
+        detectedSequelae.push({
+            name: 'Syndrome vertigineux',
+            keywords: ['vertige', 'vestibulaire', 'équilibre'],
+            context: text.match(/vertige[^.;]*/i)?.[0] || ''
+        });
+    }
+    
+    // Détecter céphalées
+    if (/c[eé]phal[eé]e|maux.*t[eê]te|douleur.*cr[aâ]ne/i.test(text)) {
+        detectedSequelae.push({
+            name: 'Céphalées post-traumatiques',
+            keywords: ['céphalée', 'mal de tête', 'douleur crânienne'],
+            context: text.match(/c[eé]phal[eé]e[^.;]*/i)?.[0] || ''
+        });
+    }
+    
+    // Détecter cervicalgie
+    if (/cervicalgie|douleur.*cervical|syndrome.*cervical|coup.*lapin|whiplash/i.test(text)) {
+        detectedSequelae.push({
+            name: 'Cervicalgie / Syndrome cervical',
+            keywords: ['cervicalgie', 'cervical', 'coup du lapin'],
+            context: text.match(/cervicalgie[^.;]*/i)?.[0] || ''
+        });
+    }
+    
+    // Si plusieurs séquelles détectées, retourner un message d'alerte
+    if (detectedSequelae.length > 1) {
+        console.log('⚠️ SÉQUELLES MULTIPLES DÉTECTÉES:', detectedSequelae.length);
+        return {
+            type: 'proposal',
+            name: `⚠️ ${detectedSequelae.length} séquelles distinctes détectées`,
+            rate: 0,
+            justification: `<strong>🚨 ATTENTION : CAS COMPLEXE AVEC SÉQUELLES MULTIPLES</strong><br><br>` +
+                `<strong>${detectedSequelae.length} séquelles post-traumatiques ont été identifiées :</strong><br><br>` +
+                detectedSequelae.map((seq, idx) => 
+                    `${idx + 1}. <strong>${seq.name}</strong><br>   └ Contexte : "${seq.context}"<br>`
+                ).join('<br>') +
+                `<br><strong>📋 PROCÉDURE RECOMMANDÉE :</strong><br>` +
+                `1️⃣ Évaluer <strong>CHAQUE séquelle séparément</strong> (saisir une description par séquelle)<br>` +
+                `2️⃣ Obtenir un taux IPP pour chacune<br>` +
+                `3️⃣ Appliquer la <strong>formule de Balthazar</strong> pour le cumul :<br>` +
+                `   <code>T = 100 - [(100-T1) × (100-T2) × (100-T3) / 10000]</code><br><br>` +
+                `<strong>💡 EXEMPLE :</strong><br>` +
+                `• Surdité droite -95 dB → 20%<br>` +
+                `• Surdité gauche -25 dB → 5%<br>` +
+                `• Cervicalgie → 10%<br>` +
+                `• <strong>TOTAL CUMULÉ</strong> = 100 - [(100-20)×(100-5)×(100-10)/10000] = 100 - [80×95×90/10000] = <strong>31.6%</strong><br><br>` +
+                `⚠️ <strong>Veuillez saisir les séquelles UNE PAR UNE pour obtenir une évaluation précise.</strong>`,
+            path: 'Séquelles multiples > Évaluation requise',
+            injury: { 
+                name: 'Séquelles multiples - Évaluation individuelle requise',
+                rate: [0, 0],
+                description: 'Plusieurs séquelles distinctes nécessitent une évaluation séparée'
+            }
+        };
+    }
+    
+    // Si une seule séquelle, continuer l'analyse normale
     
     // 🆕 V3.3.124e: CHECK MÉTACARPIENS EN PRIORITÉ ABSOLUE - AVANT TOUT AUTRE TRAITEMENT
     // Si l'utilisateur tape "perte d'un seul métacarpien" SANS mentionner de doigt spécifique,
