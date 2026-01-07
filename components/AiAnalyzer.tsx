@@ -5437,7 +5437,7 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
         // === 🆕 V3.3.142: RÈGLE FRACTURE TROCHANTÉRIENNE AVEC MOUVEMENTS LIBRES (PRIORITÉ ABSOLUE) ===
         // Si mouvements libres/normaux → FORCER "Bonne consolidation" et EXCLURE "Cal vicieux et raideur"
         {
-            pattern: /fracture.*(?:trochant[eé]r|massif\s+trochant)/i,
+            pattern: /fracture.*(?:trochant[eé]ro?|massif\s+trochant)/i,
             context: /mouvements?.*(?:libres?|normaux?|conserv[eé]s?|comme\s+libres?)|mobilit[eé].*(?:libre|normale|conserv[eé]e|pr[eé]serv[eé]e)|amplitude.*(?:normale|conserv[eé]e)|sans\s+raideur|hanche.*(?:comme\s+)?libres?/i,
             searchTerms: ["Fracture du massif trochantérien - Bonne consolidation"],
             priority: 15000,  // ULTRA PRIORITAIRE - Court-circuite "cal vicieux"
