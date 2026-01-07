@@ -11372,18 +11372,21 @@ const extractIndividualLesions = (text: string): string[] => {
  */
 export const localExpertAnalysis = (text: string, externalKeywords?: string[], isExactMatch: boolean = false): LocalAnalysisResult => {
     
+    console.log('🔍 [V3.3.147] TEXTE REÇU:', text.substring(0, 200));
+    
     // 🆕 V3.3.147: DÉTECTION SÉQUELLES MULTIPLES - Analyse complète avant de retourner
     const detectedSequelae: Array<{name: string; keywords: string[]; context: string}> = [];
     
-    // Détecter surdité par dB
-    const decibelPattern = /(?:surdité|perte.*audit|baisse.*acuit.*audit|hypoacousie|cophose).*?(?:avec|de)?.*?(moins|moin|mois)?\s*(?:de)?\s*[\-−]?\s*(\d{1,3})\s*(?:db|d\s*b|décibels?)(?:\s+[aà]\s+(droite|gauche|d|g))?/gi;
+    // Détecter surdité par dB - Pattern plus flexible
+    // Ex: "avec mois de 95 db a droite", "moins de 25 db a gauche", "surdité -80dB"
+    const decibelPattern = /(?:surdité|perte.*audit|baisse.*acuit.*audit|hypoacousie|cophose)[^.;]*?(?:moins|moin|mois|avec)?\s*(?:de)?\s*[\-−]?\s*(\d{1,3})\s*(?:db|d\s*b|décibels?)[^.;]*?(?:[aà]\s+)?(droite|gauche|d|g)?/gi;
     const decibelMatches = Array.from(text.matchAll(decibelPattern));
     
     if (decibelMatches.length > 0) {
         console.log('🔊 SURDITÉ DÉTECTÉE avec mesures dB:', decibelMatches.map(m => m[0]));
         for (const match of decibelMatches) {
-            const db = parseInt(match[2]);
-            const side = match[3]?.toLowerCase() || 'non précisé';
+            const db = parseInt(match[1]);
+            const side = match[2]?.toLowerCase() || 'non précisé';
             const sideText = side === 'd' || side === 'droite' ? 'droite' : side === 'g' || side === 'gauche' ? 'gauche' : 'non précisé';
             detectedSequelae.push({
                 name: `Surdité ${sideText} (${db} dB)`,
@@ -11391,9 +11394,7 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
                 context: match[0]
             });
         }
-    }
-    
-    // Détecter perforation tympanique
+    }    // Détecter perforation tympanique
     if (/perforation.*tympan|tympan.*perfor/i.test(text)) {
         detectedSequelae.push({
             name: 'Perforation tympanique',
@@ -11430,6 +11431,8 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
     }
     
     // Si plusieurs séquelles détectées, retourner un message d'alerte
+    console.log('🔍 [V3.3.147] Séquelles détectées:', detectedSequelae.length, detectedSequelae.map(s => s.name));
+    
     if (detectedSequelae.length > 1) {
         console.log('⚠️ SÉQUELLES MULTIPLES DÉTECTÉES:', detectedSequelae.length);
         return {
