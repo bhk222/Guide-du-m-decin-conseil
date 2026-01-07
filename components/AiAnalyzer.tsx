@@ -11377,12 +11377,15 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
     // 🆕 V3.3.147: DÉTECTION SÉQUELLES MULTIPLES - Analyse complète avant de retourner
     const detectedSequelae: Array<{name: string; keywords: string[]; context: string}> = [];
     
-    // Détecter surdité par dB - Pattern plus flexible
-    // Ex: "avec mois de 95 db a droite", "moins de 25 db a gauche", "surdité -80dB"
-    const decibelPattern = /(?:surdité|perte.*audit|baisse.*acuit.*audit|hypoacousie|cophose)[^.;]*?(?:moins|moin|mois|avec)?\s*(?:de)?\s*[\-−]?\s*(\d{1,3})\s*(?:db|d\s*b|décibels?)[^.;]*?(?:[aà]\s+)?(droite|gauche|d|g)?/gi;
+    // Détecter surdité par dB - Pattern simplifié pour capturer CHAQUE mention de dB
+    // Ex: "95 db a droite et moin 25 db a gauche" → 2 matches distincts
+    const decibelPattern = /(\d{1,3})\s*(?:db|d\s*b|décibels?)\s*(?:[aà]\s+)?(droite|gauche|d|g)/gi;
     const decibelMatches = Array.from(text.matchAll(decibelPattern));
     
-    if (decibelMatches.length > 0) {
+    // Vérifier si le contexte global parle de surdité/audition
+    const hearingContext = /surdité|perte.*audit|baisse.*acuit.*audit|hypoacousie|cophose|otorragie|oreille/i.test(text);
+    
+    if (decibelMatches.length > 0 && hearingContext) {
         console.log('🔊 SURDITÉ DÉTECTÉE avec mesures dB:', decibelMatches.map(m => m[0]));
         for (const match of decibelMatches) {
             const db = parseInt(match[1]);

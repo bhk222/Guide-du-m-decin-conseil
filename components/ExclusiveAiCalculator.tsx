@@ -474,6 +474,24 @@ export const ExclusiveAiCalculator: React.FC<ExclusiveAiCalculatorProps> = ({
              processAndDisplayAnalysis(textToSend, true); // 🔑 isExactMatch=true pour éviter boucle ambiguïté
              return;
         }
+        
+        // 🆕 V3.3.148: DÉTECTION SÉQUELLES MULTIPLES AVANT SPLIT
+        // Si le texte contient plusieurs séquelles distinctes (surdité, céphalée, vertige, etc.), 
+        // envoyer TOUT à localExpertAnalysis pour qu'il détecte et alerte l'utilisateur
+        const hasMultipleInjuryIndicators = (
+            // Compter les mentions de parties du corps différentes
+            ((/surdité|baisse.*audit|perte.*audit|\d+\s*db/i.test(textToSend) ? 1 : 0) +
+            (/perforation.*tympan|tympan.*perfor/i.test(textToSend) ? 1 : 0) +
+            (/vertige|syndrome.*vestibulaire/i.test(textToSend) ? 1 : 0) +
+            (/c[eé]phal[eé]e|maux.*t[eê]te/i.test(textToSend) ? 1 : 0) +
+            (/cervicalgie|syndrome.*cervical/i.test(textToSend) ? 1 : 0)) >= 2
+        );
+        
+        if (hasMultipleInjuryIndicators) {
+            // Envoyer TOUT le texte à l'analyse pour détection séquelles multiples
+            processAndDisplayAnalysis(textToSend);
+            return;
+        }
 
         const calculationKeywords = ["calcul", "calcule", "ipp total", "résultat", "c'est tout", "fini", "terminé", "total ipp"];
         if (calculationKeywords.some(kw => textToSend.toLowerCase().includes(kw))) {
