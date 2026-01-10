@@ -8234,6 +8234,24 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             negativeContext: /amputation|ablation|perte.*doigt.*complet/i  // Évite confusion avec amputation
         },
         
+        // 🆕 V3.3.150: Lombalgie post-traumatique (protection contre confusion avec séquelles ophtalmologiques/ORL/maxillo-faciales)
+        {
+            pattern: /lombalgie.*(?:post[-\s]?traumatique|m[eé]canique|chronique)|douleur.*lombaire.*(?:chronique|post[-\s]?traumatique)|syndrome.*lombaire/i,
+            context: /rachis|lombaire|L\d|vert[eé]bral|sans.*irradiation|EVA.*\d|douleur.*effort/i,
+            searchTerms: ["Entorse lombaire avec lombalgies mécaniques"],  // ✅ Pointe vers entrée barème existante
+            priority: 13500,  // TRÈS HAUTE priorité pour éviter confusion avec glaucome/ORL
+            negativeContext: /[oœ]il|vision|glaucome|cataracte|oreille|audition|surdité|tympan|maxillaire|mandibule/i  // Évite confusion avec autres spécialités
+        },
+        
+        // 🆕 V3.3.150: Cicatrice thorax (protection IPP trop élevé + confusion viscérale)
+        {
+            pattern: /cicatrice.*(?:ch[eé]lo[ïi]de|hypertrophique).*thorax|thorax.*cicatrice.*(?:ch[eé]lo[ïi]de|hypertrophique)/i,
+            context: /adh[eé]rente|plans.*profonds|ant[eé]rieur|paroi|cm|surface/i,
+            searchTerms: ["Cicatrice vicieuse thorax antérieur"],
+            priority: 13500,  // TRÈS HAUTE priorité pour éviter confusion avec cicatrices étendues
+            negativeContext: /poumon|cardiaque|rate|foie|rein|viscéral|thoracotomie|thoracoplastie|multiples.*[eé]tendues/i  // Évite confusion avec atteinte viscérale ou cicatrices multiples
+        },
+        
         // Règles yeux
         // 🆕 V3.3.148: Pattern renforcé + context strict + negativeContext membres
         {
