@@ -7166,6 +7166,19 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             priority: 995
         },
         
+        // === 🆕 V3.3.158: TC AVEC SÉQUELLES MULTIPLES (PRIORITÉ MAXIMALE) ===
+        // Problème: detectComplexCase() détecte séquelles séparément (vertiges + céphalées) au lieu du syndrome complet
+        // Contexte: Chute + perte connaissance + hospitalisation neuro + ≥2 séquelles parmi (cognitif, hémiparésie, vertiges, céphalées)
+        // Solution: Expert rule ultra-prioritaire détectant DIRECTEMENT le syndrome complet AVANT detectComplexCase
+        // PRIORITÉ 1025 > 1020 (TC grave CAS 13) > 1001 (Commotion prolongée)
+        {
+            pattern: /(?:chute|traumatisme.*cr[aâ]ne?|TC).*(?:perte.*connaissance|coma|hospitalisation.*neuro)/i,
+            context: /(?:troubles?.*cognitif|h[eé]mipar[eé]sie|vertige|c[eé]phal[eé]e).*(?:troubles?.*cognitif|h[eé]mipar[eé]sie|vertige|c[eé]phal[eé]e)/is,
+            searchTerms: ["Commotion cérébro-spinale prolongée (syndrome complet)"],
+            priority: 1025,
+            negativeContext: /sans.*s[eé]quelle|r[eé]cup[eé]ration.*compl[eè]te/i
+        },
+        
         // === RÈGLE TC GRAVE AVEC CUMUL SÉQUELLES MULTIPLES (V3.3.35 - FIX CAS 13) ===
         // Problème CAS 13: Détecte "Commotion cérébrale" (33%) au lieu de cumul TC grave (50-70%)
         // Contexte: TC grave Glasgow ≤8 + céphalées chroniques + troubles cognitifs (MMS 24/30) + épilepsie post-traumatique
