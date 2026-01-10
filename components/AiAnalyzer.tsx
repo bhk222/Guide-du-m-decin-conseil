@@ -11911,34 +11911,49 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
     console.log('🔍 [V3.3.147] Séquelles détectées:', detectedSequelae.length, detectedSequelae.map(s => s.name));
     
     if (detectedSequelae.length > 1) {
-        console.log('⚠️ SÉQUELLES MULTIPLES DÉTECTÉES:', detectedSequelae.length);
-        return {
-            type: 'proposal',
-            name: `⚠️ ${detectedSequelae.length} séquelles distinctes détectées`,
-            rate: 0,
-            justification: `<strong>🚨 ATTENTION : CAS COMPLEXE AVEC SÉQUELLES MULTIPLES</strong><br><br>` +
-                `<strong>${detectedSequelae.length} séquelles post-traumatiques ont été identifiées :</strong><br><br>` +
-                detectedSequelae.map((seq, idx) => 
-                    `${idx + 1}. <strong>${seq.name}</strong><br>   └ Contexte : "${seq.context}"<br>`
-                ).join('<br>') +
-                `<br><strong>📋 PROCÉDURE RECOMMANDÉE :</strong><br>` +
-                `1️⃣ Évaluer <strong>CHAQUE séquelle séparément</strong> (saisir une description par séquelle)<br>` +
-                `2️⃣ Obtenir un taux IPP pour chacune<br>` +
-                `3️⃣ Appliquer la <strong>formule de Balthazar</strong> pour le cumul :<br>` +
-                `   <code>T = 100 - [(100-T1) × (100-T2) × (100-T3) / 10000]</code><br><br>` +
-                `<strong>💡 EXEMPLE :</strong><br>` +
-                `• Surdité droite -95 dB → 20%<br>` +
-                `• Surdité gauche -25 dB → 5%<br>` +
-                `• Cervicalgie → 10%<br>` +
-                `• <strong>TOTAL CUMULÉ</strong> = 100 - [(100-20)×(100-5)×(100-10)/10000] = 100 - [80×95×90/10000] = <strong>31.6%</strong><br><br>` +
-                `⚠️ <strong>Veuillez saisir les séquelles UNE PAR UNE pour obtenir une évaluation précise.</strong>`,
-            path: 'Séquelles multiples > Évaluation requise',
-            injury: { 
-                name: 'Séquelles multiples - Évaluation individuelle requise',
-                rate: [0, 0],
-                description: 'Plusieurs séquelles distinctes nécessitent une évaluation séparée'
-            }
-        };
+        // 🆕 V3.3.158: EXCEPTION TC NEUROLOGIQUES - Ne pas proposer dialogue si TC avec séquelles neurologiques multiples
+        // Pattern: Chute OU TC + perte connaissance/hospitalisation + troubles cognitifs/hémiparésie/vertiges/céphalées
+        // → Laisser passer aux expert rules qui détecteront "Commotion cérébro-spinale prolongée" automatiquement
+        const hasTraumaticBrainInjury = /(?:chute|traumatisme.*cr[aâ]ne?|TC|perte.*connaissance|coma|hospitalisation.*neuro)/i.test(text);
+        const hasNeurologicalSequelae = /(?:troubles?.*cognitif|h[eé]mipar[eé]sie|vertige|c[eé]phal[eé]e)/i.test(text);
+        const neurologicalSequelaCount = detectedSequelae.filter(s => 
+            s.name.includes('vertige') || s.name.includes('Céphalées') || 
+            /troubles.*cognitif|hémiparésie/i.test(text)
+        ).length;
+        
+        if (hasTraumaticBrainInjury && hasNeurologicalSequelae && neurologicalSequelaCount >= 2) {
+            console.log('🧠 [V3.3.158] TC avec séquelles neurologiques multiples détecté → Laisser passer aux expert rules');
+            // Ne pas retourner le dialogue, laisser l'analyse continuer avec les expert rules
+        } else {
+            console.log('⚠️ SÉQUELLES MULTIPLES DÉTECTÉES:', detectedSequelae.length);
+            return {
+                type: 'proposal',
+                name: `⚠️ ${detectedSequelae.length} séquelles distinctes détectées`,
+                rate: 0,
+                justification: `<strong>🚨 ATTENTION : CAS COMPLEXE AVEC SÉQUELLES MULTIPLES</strong><br><br>` +
+                    `<strong>${detectedSequelae.length} séquelles post-traumatiques ont été identifiées :</strong><br><br>` +
+                    detectedSequelae.map((seq, idx) => 
+                        `${idx + 1}. <strong>${seq.name}</strong><br>   └ Contexte : "${seq.context}"<br>`
+                    ).join('<br>') +
+                    `<br><strong>📋 PROCÉDURE RECOMMANDÉE :</strong><br>` +
+                    `1️⃣ Évaluer <strong>CHAQUE séquelle séparément</strong> (saisir une description par séquelle)<br>` +
+                    `2️⃣ Obtenir un taux IPP pour chacune<br>` +
+                    `3️⃣ Appliquer la <strong>formule de Balthazar</strong> pour le cumul :<br>` +
+                    `   <code>T = 100 - [(100-T1) × (100-T2) × (100-T3) / 10000]</code><br><br>` +
+                    `<strong>💡 EXEMPLE :</strong><br>` +
+                    `• Surdité droite -95 dB → 20%<br>` +
+                    `• Surdité gauche -25 dB → 5%<br>` +
+                    `• Cervicalgie → 10%<br>` +
+                    `• <strong>TOTAL CUMULÉ</strong> = 100 - [(100-20)×(100-5)×(100-10)/10000] = 100 - [80×95×90/10000] = <strong>31.6%</strong><br><br>` +
+                    `⚠️ <strong>Veuillez saisir les séquelles UNE PAR UNE pour obtenir une évaluation précise.</strong>`,
+                path: 'Séquelles multiples > Évaluation requise',
+                injury: { 
+                    name: 'Séquelles multiples - Évaluation individuelle requise',
+                    rate: [0, 0],
+                    description: 'Plusieurs séquelles distinctes nécessitent une évaluation séparée'
+                }
+            };
+        }
     }
     
     // Si une seule séquelle, continuer l'analyse normale
