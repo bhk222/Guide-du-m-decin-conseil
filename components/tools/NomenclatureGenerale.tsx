@@ -77,12 +77,13 @@ export const NomenclatureGenerale: React.FC = () => {
             const query = searchQuery.toLowerCase().trim();
             console.log('🔎 Query:', query);
 
-            // RECHERCHE ULTRA-SIMPLE : juste chercher dans le libellé
+            // RECHERCHE AMÉLIORÉE : chercher dans libellé ET code
             const resultats = baseDeDonnees.filter(acte => {
                 const libelleLower = acte.libelle.toLowerCase();
-                const match = libelleLower.includes(query);
+                const codeLower = acte.code.toLowerCase();
+                const match = libelleLower.includes(query) || codeLower.includes(query);
                 if (match) {
-                    console.log('✓ Match trouvé:', acte.libelle);
+                    console.log('✓ Match trouvé:', acte.libelle, 'Code:', acte.code);
                 }
                 return match;
             }).slice(0, 20);
