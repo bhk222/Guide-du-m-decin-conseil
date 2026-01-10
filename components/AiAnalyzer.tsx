@@ -7686,7 +7686,7 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
         {
             pattern: /fracture.*radius/i,
             context: /poignet|avant-bras|prono|supination/i,
-            negativeContext: /extrémité.*inférieure|extremite.*inferieure|cal.*vicieux/i,
+            negativeContext: /extrémité.*inférieure|extremite.*inferieure|cal.*vicieux|amputation|d[eé]sarticulation|perte.*main|transcarpienne/i,  // V3.3.156: Bloquer si amputation présente
             searchTerms: ['Fracture des deux os de l\'avant-bras - Bonne consolidation sans trouble fonctionnel (Main Dominante)'],
             priority: 88
         },
@@ -8238,12 +8238,13 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
         },
         
         // 🆕 V3.3.155: Amputation transcarpienne / Désarticulation poignet (ULTRA HAUTE priorité)
+        // 🔧 V3.3.156: Priority 15000 empêche autres détections (fracture radius priority 88 bloquée par negativeContext)
         {
             pattern: /amputation.*transcarpienne|transcarpienne|d[eé]sarticulation.*poignet|amputation.*poignet|perte.*(?:main|mains).*(?:niveau|au).*poignet/i,
             context: /main|membre.*sup[eé]rieur|poignet|avant.*bras/i,
             searchTerms: ["Désarticulation du poignet"],  // ✅ V3.3.155: Amputation majeure [55-60% dominante, 45-50% non-dominante]
-            priority: 15000,  // ULTRA HAUTE priorité - amputation majeure
-            negativeContext: /fracture.*(?:isol[eé]e|simple)|raideur.*poignet|entorse/i  // Évite confusion avec fracture simple ou raideur
+            priority: 15000,  // ULTRA HAUTE priorité - amputation majeure, bloque fracture radius (priority 88)
+            negativeContext: /(?:uniquement|seulement|simple).*fracture.*isol[eé]e/i  // Seulement si texte précise explicitement "uniquement fracture"
         },
         
         // 🆕 V3.3.150: Cicatrice thorax (protection IPP trop élevé + confusion viscérale)
