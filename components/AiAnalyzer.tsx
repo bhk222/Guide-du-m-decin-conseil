@@ -6855,6 +6855,16 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             priority: 10750
         },
         
+        // === 🆕 V3.3.147: RÈGLE EXPERTE LOMBALGIE POST-TRAUMATIQUE / ENTORSE LOMBAIRE ===
+        // Lombalgie post-traumatique secondaire à entorse lombaire (pour cumuls)
+        {
+            pattern: /(?:lombalgie|lombalgies?).*(?:post[-\s]?traumatique|mecanique|chronique|effort)|entorse.*lombaire|entorse.*rachis.*lombaire/i,
+            context: /(?:accident|trauma|chute|choc).*(?:rachis|lombaire|dos)|mouvement.*brutal.*(?:rachis|lombaire)|consolidation.*sequelle|limitation.*fonctionnelle/i,
+            searchTerms: ["Entorse lombaire avec lombalgies mécaniques"],
+            priority: 10750,
+            negativeContext: /hernie.*discale|sciatique|cruralgie|tassement/i
+        },
+        
         // === RÈGLES RAIDEURS MEMBRES INFÉRIEURS V3.3.126 ===
         // Raideur hanche (flexion, abduction, rotation)
         // 🆕 V3.3.140: Pattern plus strict (nécessite mot "raideur" explicite) + negativeContext renforcé
@@ -11380,6 +11390,13 @@ export const detectMultipleLesions = (text: string): {
     const hasMembreInfLesion = /(?:fracture|luxation|rupture|lesion).*(?:hanche|genou|cheville|pied|orteil|jambe|cuisse|f[eé]mur|tibia|p[eé]ron[eé]|fibula)/i.test(normalized);
     const hasMembreSupEtInf = hasMembreSupLesion && hasMembreInfLesion;
     
+    // 🆕 V3.3.147: Détection cumul FRACTURE MEMBRE + LÉSION RACHIS (trauma avec lombalgie/entorse lombaire)
+    // Ex: "fracture radius droit avec lombalgie post-traumatique"
+    // Ex: "fracture poignet et entorse lombaire"
+    const hasFractureMembre = /fracture.*(?:[eé]paule|coude|poignet|main|radius|ulna|hum[eé]r|f[eé]mur|tibia|jambe|cuisse|bras)/i.test(normalized);
+    const hasRachisLesion = /(?:lombalgie|entorse.*lombaire|entorse.*rachis|cervicalgie|dorsalgie|traumatisme.*cervical|coup.*lapin).*(?:post.*traumatique|m[eé]canique|chronique)/i.test(normalized);
+    const hasMembreEtRachis = hasFractureMembre && hasRachisLesion;
+    
     // 6. Critères de cumul AMÉLIORÉS (détecte narratif médical naturel)
     const isCumul = 
         foundKeywords.length > 0 ||  // Keywords TRÈS explicites type "polytraumatisme"
@@ -11399,7 +11416,8 @@ export const detectMultipleLesions = (text: string): {
         hasMultipleViscera ||          // 🆕 V3.3.124: Cumul viscères (splénectomie + néphrectomie, etc.)
         hasAmputationAndTendon ||      // 🆕 V3.3.133: Cumul amputation + rupture tendon (doigts différents)
         hasPlexusAndAmputation ||      // 🆕 V3.3.140: Cumul plexus/paralysie + amputation
-        hasMembreSupEtInf;             // 🆕 Cumul membre supérieur + membre inférieur (polytraumatisme)
+        hasMembreSupEtInf ||           // 🆕 Cumul membre supérieur + membre inférieur (polytraumatisme)
+        hasMembreEtRachis;             // 🆕 V3.3.147: Cumul fracture membre + lésion rachis (lombalgie/entorse)
     
     // Estimation nombre de lésions
     const lesionCount = Math.max(
@@ -11415,7 +11433,8 @@ export const detectMultipleLesions = (text: string): {
         hasChevilleEtGenou && (hasBoneLesion || hasLigamentLesion || hasNerveLesion) ? 3 : 1,  // 🆕 Cheville + genou + lésion = au moins 3
         hasAmputationAndTendon ? 2 : 1,  // 🆕 V3.3.133: Amputation + tendon = au moins 2 lésions
         hasPlexusAndAmputation ? 2 : 1,  // 🆕 V3.3.140: Plexus/paralysie + amputation = au moins 2 lésions
-        hasFractureAndPseudarthrose ? 2 : 1  // 🆕 V3.3.142: Fracture + pseudarthrose = 2 lésions distinctes
+        hasFractureAndPseudarthrose ? 2 : 1,  // 🆕 V3.3.142: Fracture + pseudarthrose = 2 lésions distinctes
+        hasMembreEtRachis ? 2 : 1  // 🆕 V3.3.147: Fracture membre + lésion rachis = 2 lésions distinctes
     );
     
     return {
