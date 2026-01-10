@@ -5159,6 +5159,97 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
     // 🆕 PREPROCESSING MÉDICAL ENRICHI - Transformer descriptions vagues en termes détectables
     // Ceci enrichit le texte AVANT toute analyse
     const medicalEnrichment: [RegExp, string][] = [
+        // 🆕 V3.3.148: PATHOLOGIES OCULAIRES - Descriptions naturalistes complètes
+        
+        // Cataracte avec description naturaliste complète (cas soudeur)
+        [/br[uû]lures?\s+oculaires?.*cataracte.*bilat[eé]rale.*op[eé]r[eé]e.*implants?.*acuit[eé].*visuelle.*OD.*\d+\/\d+.*OG.*\d+\/\d+/gi, 'cataracte bilatérale post-traumatique opérée avec implants acuité visuelle résiduelle séquelle oculaire vision yeux'],
+        [/cataracte.*bilat[eé]rale.*op[eé]r[eé]e.*implants?.*r[eé]sultat.*acuit[eé].*visuelle/gi, 'cataracte bilatérale post-traumatique opérée avec implants acuité visuelle résiduelle séquelle oculaire vision yeux'],
+        [/cataracte.*bilat[eé]rale.*op[eé]r[eé]e.*acuit[eé].*visuelle.*\d+\/\d+/gi, 'cataracte bilatérale post-traumatique opérée acuité visuelle résiduelle séquelle oculaire vision yeux'],
+        [/cataracte.*(?:unilatérale|un [oœ]il).*op[eé]r[eé]e.*acuit[eé].*visuelle.*\d+\/\d+/gi, 'cataracte unilatérale post-traumatique opérée acuité visuelle résiduelle séquelle oculaire vision yeux'],
+        
+        // Glaucome post-traumatique avec mesures
+        [/glaucome.*post[-\s]?traumatique.*tension.*oculaire.*\d+.*mmHg/gi, 'glaucome post-traumatique hypertension oculaire séquelle oculaire vision yeux'],
+        [/glaucome.*traitement.*[eé]volu[eé].*perte.*vision/gi, 'glaucome post-traumatique avec baisse acuité visuelle séquelle oculaire vision yeux'],
+        [/hypertension.*oculaire.*glaucome.*champ.*visuel/gi, 'glaucome hypertension oculaire rétrécissement champ visuel séquelle oculaire'],
+        
+        // Décollement de rétine avec chirurgie
+        [/d[eé]collement.*r[eé]tine.*op[eé]r[eé].*acuit[eé].*visuelle.*\d+\/\d+/gi, 'décollement rétine post-traumatique opéré acuité visuelle résiduelle séquelle oculaire vision'],
+        [/d[eé]collement.*r[eé]tine.*chirurgie.*r[eé]sultat.*visuel/gi, 'décollement rétine post-traumatique opéré résultat visuel séquelle oculaire vision'],
+        [/d[eé]collement.*r[eé]tine.*[eé]chec.*chirurgie/gi, 'décollement rétine échec chirurgical perte vision séquelle oculaire'],
+        
+        // Atrophie optique
+        [/atrophie.*optique.*perte.*vision.*\d+\/\d+/gi, 'atrophie optique post-traumatique perte vision séquelle oculaire nerf optique'],
+        [/atrophie.*nerf.*optique.*acuit[eé].*visuelle/gi, 'atrophie nerf optique post-traumatique baisse vision séquelle oculaire'],
+        
+        // Taies cornéennes et opacités
+        [/taies?.*corn[eé]enne.*g[eê]ne.*visuelle.*flou/gi, 'taie cornéenne opacité cornée gêne visuelle séquelle oculaire'],
+        [/opacit[eé].*corn[eé]e.*cicatrice.*vision.*floue/gi, 'taie cornéenne opacité cornée post-traumatique séquelle oculaire vision'],
+        
+        // Symptômes oculaires fonctionnels
+        [/g[eê]ne.*travaux.*pr[eé]cision.*[eé]blouissement.*impossibilit[eé].*conduite.*nocturne/gi, 'gêne fonctionnelle visuelle éblouissement photophobie troubles visuels séquelle oculaire'],
+        [/[eé]blouissement.*impossibilit[eé].*conduite.*nocturne/gi, 'éblouissement photophobie troubles vision nocturne séquelle oculaire'],
+        [/photophobie.*larmoiement.*douleur.*oculaire/gi, 'photophobie larmoiement douleur séquelle oculaire fonctionnelle'],
+        
+        // 🆕 V3.3.148: PATHOLOGIES AUDITIVES - Descriptions avec mesures
+        
+        // Surdité avec audiométrie détaillée
+        [/surdit[eé].*(?:profonde|s[eé]v[eè]re|moyenne).*perte.*auditive.*\d+.*dB/gi, 'surdité post-traumatique perte auditive audiométrie décibels oreille audition'],
+        [/hypoacousie.*perte.*\d+.*dB.*oreille/gi, 'hypoacousie surdité perte auditive mesure audiométrique oreille'],
+        [/cophose.*oreille.*(?:droite|gauche).*surdit[eé].*compl[eè]te/gi, 'cophose surdité complète unilatérale perte audition totale oreille'],
+        [/audiogramme.*perte.*\d+.*dB.*fr[eé]quence/gi, 'surdité perte auditive audiogramme mesure fréquences oreille audition'],
+        
+        // Acouphènes et vertiges
+        [/acouph[eè]nes.*intenses.*permanents.*g[eê]ne.*important/gi, 'acouphènes post-traumatiques intenses permanents gêne fonctionnelle audition'],
+        [/vertiges.*rotatoires.*syndrome.*vestibulaire.*[eé]quilibre/gi, 'vertiges syndrome vestibulaire post-traumatique troubles équilibre'],
+        [/syndrome.*m[eé]ni[eè]re.*vertiges.*surdit[eé].*acouph[eè]nes/gi, 'syndrome de Ménière vertiges surdité acouphènes post-traumatique'],
+        
+        // 🆕 V3.3.148: PATHOLOGIES NEUROLOGIQUES - Descriptions fonctionnelles
+        
+        // Syndrome douloureux régional complexe (SDRC)
+        [/syndrome.*douloureux.*r[eé]gional.*complexe.*SDRC.*dystrophie.*sympathique/gi, 'syndrome douloureux régional complexe SDRC algodystrophie douleur neuropathique'],
+        [/algodystrophie.*main.*douleur.*permanente.*œd[eè]me/gi, 'algodystrophie syndrome douloureux régional complexe SDRC main douleur'],
+        [/douleur.*neuropathique.*br[uû]lure.*[eé]lectrique.*allodynie/gi, 'douleur neuropathique post-traumatique syndrome douloureux chronique'],
+        
+        // Névralgie et atteinte nerveuse
+        [/n[eé]vralgie.*faciale.*douleur.*lancinante.*zona/gi, 'névralgie faciale post-zostérienne douleur chronique nerf facial'],
+        [/atteinte.*nerf.*sciatique.*cruralgie.*douleur.*irradiante.*jambe/gi, 'atteinte nerf sciatique cruralgie douleur neuropathique membre inférieur'],
+        [/paralysie.*faciale.*p[eé]riph[eé]rique.*s[eé]quelle.*asymétrie/gi, 'paralysie faciale périphérique séquelle asymétrie faciale nerf facial'],
+        
+        // 🆕 V3.3.148: PATHOLOGIES ORTHOPÉDIQUES - Limitations fonctionnelles chiffrées
+        
+        // Raideur articulaire avec mesures d'amplitudes
+        [/raideur.*[eé]paule.*abduction.*\d+.*degr[eé]s.*limitation.*s[eé]v[eè]re/gi, 'raideur épaule limitation abduction mobilité réduite séquelle orthopédique'],
+        [/limitation.*genou.*flexion.*\d+.*degr[eé]s.*extension.*\d+/gi, 'raideur genou limitation flexion extension mobilité réduite séquelle orthopédique'],
+        [/ankylose.*coude.*flexion.*bloqu[eé]e.*\d+.*degr[eé]s/gi, 'ankylose coude blocage articulaire raideur complète séquelle orthopédique'],
+        
+        // Instabilité ligamentaire avec tests
+        [/instabilit[eé].*genou.*test.*lachman.*positif.*tiroir.*ant[eé]rieur/gi, 'instabilité genou laxité ligamentaire LCA séquelle orthopédique'],
+        [/laxite.*cheville.*entorse.*grave.*[eé]pisodes.*r[eé]cidivants/gi, 'laxité cheville instabilité entorse grade 3 séquelle ligamentaire'],
+        
+        // Amyotrophie et fonte musculaire
+        [/amyotrophie.*cuisse.*p[eé]rim[eè]tre.*diff[eé]rence.*\d+.*cm/gi, 'amyotrophie cuisse fonte musculaire séquelle neurologique orthopédique'],
+        [/fonte.*musculaire.*mollet.*diff[eé]rence.*circonf[eé]rence/gi, 'amyotrophie mollet fonte musculaire séquelle neurologique'],
+        
+        // 🆕 V3.3.148: FRACTURES FÉMORALES - Localisations spécifiques
+        
+        // Fracture trochantéro-diaphysaire = Fracture massif trochantérien étendue
+        [/fracture.*trochant[eé]ro[-\s]?diaphysaire.*f[eé]mur/gi, 'fracture massif trochantérien cal vicieux raideur hanche fémur séquelle orthopédique'],
+        [/fracture.*complexe.*trochant[eé]ro[-\s]?diaphysaire/gi, 'fracture massif trochantérien cal vicieux raideur hanche fémur séquelle orthopédique'],
+        [/fracture.*trochant[eé]rienne.*diaphysaire/gi, 'fracture massif trochantérien cal vicieux raideur hanche fémur séquelle orthopédique'],
+        
+        // Fracture massif trochantérien (variantes)
+        [/fracture.*massif.*trochant[eé]rien.*cal.*vicieux/gi, 'fracture massif trochantérien cal vicieux raideur hanche fémur'],
+        [/fracture.*trochant[eé]rienne.*per[\s-]?trochant[eé]rienne/gi, 'fracture massif trochantérien grand trochanter petit trochanter hanche'],
+        [/fracture.*per[\s-]?trochant[eé]rienne/gi, 'fracture massif trochantérien pertrochantérienne hanche fémur'],
+        
+        // Fracture col fémur (variantes)
+        [/fracture.*col.*f[eé]mur.*raccourcissement.*raideur/gi, 'fracture col fémur raccourcissement raideur hanche séquelle orthopédique'],
+        [/fracture.*col.*f[eé]moral.*n[eé]crose/gi, 'fracture col fémur nécrose tête fémorale hanche séquelle'],
+        
+        // Fracture diaphysaire fémur
+        [/fracture.*diaphysaire.*f[eé]mur.*cal.*vicieux/gi, 'fracture diaphysaire fémur cal vicieux cuisse séquelle orthopédique'],
+        [/fracture.*diaphyse.*f[eé]morale/gi, 'fracture diaphysaire fémur cuisse séquelle orthopédique'],
+        
         // 🆕 V3.3.124h: Main réduite à palette métacarpienne = Amputation tous doigts
         [/main.*r[eé]duite.*palette.*m[eé]tacarpienne|palette.*m[eé]tacarpienne/gi, 'amputation de tous les doigts de la main perte complète doigts'],
         [/perte.*compl[eè]te.*tous.*doigts/gi, 'amputation de tous les doigts de la main'],
