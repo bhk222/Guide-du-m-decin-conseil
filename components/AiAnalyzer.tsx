@@ -6803,12 +6803,14 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
         {
             pattern: /fracture.*(?:pouteau|colles|radius\s+distal)/i,
             context: /cal.*vicieux|deformation/i,
+            negativeContext: /amputation|d[eé]sarticulation|perte.*main|transcarpienne/i,  // V3.3.157: Bloquer si amputation
             searchTerms: ["Fracture de Pouteau-Colles - Cal vicieux"],
             priority: 10350
         },
         {
             pattern: /fracture.*(?:pouteau|colles|radius\s+distal)/i,
             context: /.*/i,
+            negativeContext: /amputation|d[eé]sarticulation|perte.*main|transcarpienne/i,  // V3.3.157: Bloquer si amputation
             searchTerms: ["Fracture de Pouteau-Colles - Consolidation normale"],
             priority: 10250
         },
@@ -7817,7 +7819,7 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             context: /supination.*limit[eé]|limitation.*supination|pronation.*limit[eé]|cal\s+(?:osseux|vicieux).*radius/i,
             searchTerms: ['Fracture isolée du radius - Avec cal vicieux modéré (Main Dominante)'],
             priority: 10900,
-            negativeContext: /sans.*s[eé]quelle|consolidation.*parfaite/i
+            negativeContext: /sans.*s[eé]quelle|consolidation.*parfaite|amputation|d[eé]sarticulation|perte.*main|transcarpienne/i  // V3.3.157: Ajout amputation
         },
         // 🆕 V3.3.100: Rupture jambier postérieur avec pied varus
         {
@@ -8534,6 +8536,7 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
         {
             pattern: /fracture.*(?:extrémité|extremite).*(?:inférieure|inf).*radius/i,
             context: /cal.*vicieux|déformation|prono.*supination|limitation/i,
+            negativeContext: /amputation|désarticulation|perte.*main|transcarpienne/i,  // V3.3.157: Bloquer si amputation
             searchTerms: ["Fracture de l'extrémité inférieure du radius - Avec cal vicieux"],
             priority: 98
         },
