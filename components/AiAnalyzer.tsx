@@ -4593,7 +4593,7 @@ export const findCandidateInjuries = (text: string, externalKeywords?: string[])
 
     const stopWords = ['de', 'du', 'la', 'le', 'les', 'un', 'une', 'et', 'avec', 'au', 'des', 'ou', 'a'];
 
-    const baseKeywords = externalKeywords 
+    const baseKeywords = (externalKeywords && externalKeywords.length > 0)
         ? [...new Set(externalKeywords.map(normalize))]
         : [...new Set(normalizedText.split(' ').filter(w => w && !stopWords.includes(w)))];
         
@@ -8224,6 +8224,16 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             searchTerms: ['Cicatrice vicieuse thorax antérieur'],
             priority: 999
         },
+        
+        // 🆕 V3.3.149: Doigt en boutonnière (déformation caractéristique IPP fléchie + IPD hyperextension)
+        {
+            pattern: /(?:doigt|d3|m[eé]dius|3.*me.*doigt|3eme.*doigt).*(?:en\s+)?boutonn[iè]re|boutonn[iè]re.*(?:doigt|d3|m[eé]dius|3.*me)|attitude.*vicieuse.*(?:caract[eé]ristique|IPP|interphalangienne)/i,
+            context: /flexion.*(?:ipp|interphalangienne.*proximale).*hyperextension.*(?:ipd|interphalangienne.*distale)|hyperextension.*(?:ipd|distale).*flexion.*(?:ipp|proximale)|perte.*relief.*dorsal|bandelette.*m[eé]diane|rupture.*extenseur/i,
+            searchTerms: ["Doigt en boutonnière du médius (IPP fléchie, IPD hyperextension) (Main Dominante)"],
+            priority: 10900,
+            negativeContext: /amputation|ablation|perte.*doigt.*complet/i  // Évite confusion avec amputation
+        },
+        
         // Règles yeux
         // 🆕 V3.3.148: Pattern renforcé + context strict + negativeContext membres
         {

@@ -1256,6 +1256,30 @@ export const disabilityData: InjuryCategory[] = [
             { name: "Ankylose du médius", searchTerms: ["ankylose médius"], rate: 12 },
             { name: "Raideur d'une articulation du médius (Main Dominante)", searchTerms: ["raideur d'une articulation médius main dominante", "dominante main médius articulation d'une raideur", "raideur d'une", "d'une articulation", "articulation médius"], rate: [1, 4] },
             { name: "Raideur du médius", searchTerms: ["raideur médius"], rate: [1, 4] },
+            // 🆕 V3.3.149: Déformations en attitude vicieuse (boutonnière, col de cygne)
+            { 
+              name: "Doigt en boutonnière du médius (IPP fléchie, IPD hyperextension) (Main Dominante)", 
+              searchTerms: [
+                "doigt en boutonnière médius",
+                "boutonnière médius ipp fléchie ipd hyperextension",
+                "attitude vicieuse médius boutonnière",
+                "flexion ipp hyperextension ipd médius",
+                "3ème doigt boutonnière",
+                "d3 boutonnière",
+                "médius attitude vicieuse caractéristique boutonnière",
+                "rupture bandelette médiane extenseur médius",
+                "déformation boutonnière médius",
+                "flexion interphalangienne proximale hyperextension distale médius",
+                "perte relief dorsal ipp médius"
+              ], 
+              rate: [8, 15], 
+              description: "Rupture de la bandelette médiane de l'extenseur du médius. Attitude caractéristique : flexion irréductible IPP + hyperextension IPD.", 
+              rateCriteria: { 
+                low: "Déformation discrète, préhension conservée, douleurs occasionnelles", 
+                medium: "Déformation évidente, gêne fonctionnelle modérée, limitation de la force de préhension", 
+                high: "Déformation majeure, impotence fonctionnelle importante, perte significative de la préhension fine" 
+              } 
+            },
         ]
       },
       {
