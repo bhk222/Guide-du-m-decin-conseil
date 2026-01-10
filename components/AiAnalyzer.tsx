@@ -10021,24 +10021,36 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
                         severityData = { level: 'élevé', signs: ['Céphalées invalidantes résistantes au traitement'], isDefault: false };
                     } // Sinon laisser severityData undefined pour utiliser determineSeverity standard
                 }
-                // CAS 2: Brûlures de la main (V3.3.3)
+                // CAS 2: Brûlures de la main (V3.3.3 + V3.3.160)
                 else if (/brulures.*mains?.*sequelles.*fonctionnelles/i.test(normalize(directMatch.name))) {
-                    const severeFeatures = [
+                    // 🆕 V3.3.160: Critères de sévérité fonctionnelle RÉELS (pas juste présence de features)
+                    // ÉLEVÉ (60%) nécessite séquelles fonctionnelles MAJEURES explicites
+                    const hasSevereDeformity = /(?:main.*(?:en\s+)?griffe|griffe.*main|r[eé]traction.*majeur|bride.*r[eé]tractile|perte.*pince.*pouce|impossibilit[eé].*pr[eé]hension|amputation.*doigt)/i.test(normalizedInputText);
+                    const hasSevereStiffness = /(?:raideur.*(?:s[eé]v[eè]re|majeur|importante)|plusieurs.*doigts.*raides?|ankylose.*doigt|flexion.*impossible)/i.test(normalizedInputText);
+                    const hasMultipleComplications = /(?:n[eé]crose|d[eé]labrement.*extensif|infection.*profonde|ost[eé]omyélite)/i.test(normalizedInputText);
+                    
+                    // Features de base (pour moyen)
+                    const basicFeatures = [
                         /circonférentielle?/i.test(normalizedInputText),
                         /profondes?/i.test(normalizedInputText),
                         /2.*3.*degr[eé]/i.test(normalizedInputText),
                         /greffe/i.test(normalizedInputText),
-                        /raideur/i.test(normalizedInputText),
+                        /raideur/i.test(normalizedInputText),  // Raideur simple (pas sévère)
                         /avant.*bras.*main|main.*avant.*bras/i.test(normalizedInputText),
                         /troubles?\s+sensitif/i.test(normalizedInputText)
                     ].filter(Boolean).length;
                     
-                    const hasDeformity = /(?:griffe|retraction|bride|cicatrice.*vicieuse)/i.test(normalizedInputText);
-                    
-                    if (severeFeatures >= 3 || (severeFeatures >= 2 && hasDeformity)) {
-                        severityData = { level: 'élevé', signs: ['Brûlures circonférentielles avec séquelles fonctionnelles majeures'], isDefault: false };
-                    } else if (severeFeatures >= 2) {
-                        severityData = { level: 'moyen', signs: ['Brûlures avec séquelles fonctionnelles modérées'], isDefault: false };
+                    // ÉLEVÉ (60%) : Séquelles fonctionnelles MAJEURES explicites
+                    if (hasSevereDeformity || hasSevereStiffness || hasMultipleComplications) {
+                        severityData = { level: 'élevé', signs: ['Séquelles fonctionnelles majeures (griffe, perte pince, raideur sévère)'], isDefault: false };
+                    } 
+                    // MOYEN (40%) : Brûlures profondes avec séquelles modérées (raideur simple, troubles sensitifs)
+                    else if (basicFeatures >= 3) {
+                        severityData = { level: 'moyen', signs: ['Brûlures profondes avec raideur et troubles sensitifs modérés'], isDefault: false };
+                    }
+                    // LÉGER : Si < 3 features (rare)
+                    else {
+                        severityData = { level: 'léger', signs: ['Brûlures avec séquelles limitées'], isDefault: false };
                     }
                 }
                 // CAS 2b: Brûlures du visage et du cou (V3.3.17)
