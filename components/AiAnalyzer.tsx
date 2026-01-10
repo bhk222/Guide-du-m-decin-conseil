@@ -8250,16 +8250,16 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
         {
             pattern: /d[eé]chirure.*(?:partielle|totale|compl[eè]te)?.*ligament.*(?:collat[eé]ral|lat[eé]ral.*(?:interne|m[eé]dial))|ligament.*(?:collat[eé]ral|lat[eé]ral.*(?:interne|m[eé]dial)).*(?:d[eé]chir|ruptur|l[eé]sion)/i,
             context: /genou|LLI|LCM/i,
-            searchTerms: ["Laxité chronique du genou (séquelle d'entorse)"],  // ✅ Entrée barème existante [5-15%]
+            searchTerms: ["Déchirure/rupture ligament latéral interne (LLI) - ligament collatéral médial genou"],  // ✅ V3.3.153: Entrée spécifique [10-20%]
             priority: 13600,  // ULTRA HAUTE priorité pour éviter confusion avec fracture rotule
-            negativeContext: /rotule|fracture.*rotule|patella/i  // Évite confusion avec fracture rotule
+            negativeContext: /rotule|fracture.*rotule|patella|[eé]longation.*quadriceps|quadriceps.*[eé]longation/i  // Évite confusion avec fracture rotule ET quadriceps
         },
         
         // 🆕 V3.3.151: Élongation musculaire quadriceps (protection contre confusion avec fracture)
         {
             pattern: /[eé]longation.*musculaire.*quadriceps|quadriceps.*[eé]longation|l[eé]sion.*musculaire.*quadriceps/i,
             context: /membre.*inf[eé]rieur|cuisse|genou/i,
-            searchTerms: ["Séquelles de lésions musculaires majeures (cuisse, jambe)"],  // ✅ Entrée barème existante
+            searchTerms: ["Élongation/déchirure musculaire quadriceps - Tendinopathie quadricipitale (séquelles)"],  // ✅ V3.3.153: Entrée spécifique
             priority: 13600,
             negativeContext: /fracture|rupture.*tendon|rupture.*compl[eè]te/i  // Évite confusion avec fractures
         },
