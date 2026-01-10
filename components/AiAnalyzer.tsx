@@ -6791,11 +6791,12 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             searchTerms: ["Fracture des plateaux tibiaux"],
             priority: 10350
         },
-        // Fracture tiers distal tibia (≠ plateau)
+        // Fracture tiers distal tibia ISOLÉE (≠ tibia+péroné = "deux os")
         {
-            pattern: /fracture.*(?:tiers|1\/3).*(?:distal|inferieur).*tibia/i,
+            pattern: /fracture.*(?:tiers|1\/3).*(?:distal|inf[eé]rieur).*tibia/i,
             context: /.*/i,
-            searchTerms: ["Fracture des deux os de la jambe - Consolidation normale"],
+            negativeContext: /p[eé]ron[eé]|fibula|deux\s+os/i,  // ✅ Évite confusion avec fracture bi-osseuse
+            searchTerms: ["Fracture isolée du tibia"],  // ✅ Pointe vers fracture tibia SEUL
             priority: 10300
         },
         // Fracture radius distal (Pouteau-Colles)
@@ -8217,13 +8218,6 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             searchTerms: ['Pseudarthrose de la diaphyse tibiale'],
             priority: 999
         },
-        // Règles cicatrices
-        {
-            pattern: /cicatrice.*ch[eé]lo[ïi]de.*thorax|thorax.*cicatrice.*ch[eé]lo[ïi]de/i,
-            context: /face.*ant[eé]rieure|r[eé]tractile|adh[eé]rente|plans.*profonds|g[êe]ne.*esth[eé]tique/i,
-            searchTerms: ['Cicatrice vicieuse thorax antérieur'],
-            priority: 999
-        },
         
         // 🆕 V3.3.149: Doigt en boutonnière (déformation caractéristique IPP fléchie + IPD hyperextension)
         {
@@ -8245,11 +8239,29 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
         
         // 🆕 V3.3.150: Cicatrice thorax (protection IPP trop élevé + confusion viscérale)
         {
-            pattern: /cicatrice.*(?:ch[eé]lo[ïi]de|hypertrophique).*thorax|thorax.*cicatrice.*(?:ch[eé]lo[ïi]de|hypertrophique)/i,
-            context: /adh[eé]rente|plans.*profonds|ant[eé]rieur|paroi|cm|surface/i,
-            searchTerms: ["Cicatrice vicieuse thorax antérieur"],
+            pattern: /cicatrice.*(?:cheloide|hypertrophique).*thorax|thorax.*cicatrice.*(?:cheloide|hypertrophique)/i,
+            context: /adherente?|plans?.*profonds?|anterieure?|paroi|cm|surface/i,
+            searchTerms: ["Cicatrices chéloïdes multiples étendues"],  // 🔧 V3.3.151: Temporaire - utilise entrée existante en attendant ajout barème
             priority: 13500,  // TRÈS HAUTE priorité pour éviter confusion avec cicatrices étendues
-            negativeContext: /poumon|cardiaque|rate|foie|rein|viscéral|thoracotomie|thoracoplastie|multiples.*[eé]tendues/i  // Évite confusion avec atteinte viscérale ou cicatrices multiples
+            negativeContext: /poumons?|cardiaque|rate|foie|reins?|viscerale?|thoracotomie|thoracoplastie/i  // Évite confusion avec atteinte viscérale
+        },
+        
+        // 🆕 V3.3.151: Déchirure ligament collatéral médial genou (protection contre confusion avec fracture rotule)
+        {
+            pattern: /d[eé]chirure.*(?:partielle|totale|compl[eè]te)?.*ligament.*(?:collat[eé]ral|lat[eé]ral.*(?:interne|m[eé]dial))|ligament.*(?:collat[eé]ral|lat[eé]ral.*(?:interne|m[eé]dial)).*(?:d[eé]chir|ruptur|l[eé]sion)/i,
+            context: /genou|LLI|LCM/i,
+            searchTerms: ["Laxité chronique du genou (séquelle d'entorse)"],  // ✅ Entrée barème existante [5-15%]
+            priority: 13600,  // ULTRA HAUTE priorité pour éviter confusion avec fracture rotule
+            negativeContext: /rotule|fracture.*rotule|patella/i  // Évite confusion avec fracture rotule
+        },
+        
+        // 🆕 V3.3.151: Élongation musculaire quadriceps (protection contre confusion avec fracture)
+        {
+            pattern: /[eé]longation.*musculaire.*quadriceps|quadriceps.*[eé]longation|l[eé]sion.*musculaire.*quadriceps/i,
+            context: /membre.*inf[eé]rieur|cuisse|genou/i,
+            searchTerms: ["Séquelles de lésions musculaires majeures (cuisse, jambe)"],  // ✅ Entrée barème existante
+            priority: 13600,
+            negativeContext: /fracture|rupture.*tendon|rupture.*compl[eè]te/i  // Évite confusion avec fractures
         },
         
         // Règles yeux
@@ -8661,8 +8673,7 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             context: /cyphose.*\d+.*degr[eé]s|raideur.*lombaire|DDS|lombalgie/i,
             searchTerms: ['Tassement d\'une vertèbre lombaire - Avec cyphose et/ou raideur'],
             priority: 11500,
-            negativeContext: /consolid[eé]e.*sans.*s[eé]quelle/i,
-            debug: true  // 🚨 DEBUG TEMPORAIRE
+            negativeContext: /consolid[eé]e.*sans.*s[eé]quelle/i
         },
         // 🆕 V3.3.130-P10: TASSEMENT VERTÉBRAL DORSAL avec cyphose (PRIORITÉ MAXIMALE)
         {
