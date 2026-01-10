@@ -8241,9 +8241,9 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
         {
             pattern: /cicatrice.*(?:cheloide|hypertrophique).*thorax|thorax.*cicatrice.*(?:cheloide|hypertrophique)/i,
             context: /adherente?|plans?.*profonds?|anterieure?|paroi|cm|surface/i,
-            searchTerms: ["Cicatrices chéloïdes multiples étendues"],  // 🔧 V3.3.151: Temporaire - utilise entrée existante en attendant ajout barème
+            searchTerms: ["Cicatrice vicieuse thorax antérieur"],  // ✅ V3.3.152: Entrée barème ajoutée (3-15%)
             priority: 13500,  // TRÈS HAUTE priorité pour éviter confusion avec cicatrices étendues
-            negativeContext: /poumons?|cardiaque|rate|foie|reins?|viscerale?|thoracotomie|thoracoplastie/i  // Évite confusion avec atteinte viscérale
+            negativeContext: /poumons?|cardiaque|rate|foie|reins?|viscerale?|thoracotomie|thoracoplastie|multiples?.*etendues?/i  // Évite confusion avec atteinte viscérale ou cicatrices multiples
         },
         
         // 🆕 V3.3.151: Déchirure ligament collatéral médial genou (protection contre confusion avec fracture rotule)

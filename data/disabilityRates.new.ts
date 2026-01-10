@@ -2013,6 +2013,17 @@ export const disabilityData: InjuryCategory[] = [
         name: "Cicatrices Chéloïdes et Hypertrophiques",
         injuries: [
           { 
+            name: "Cicatrice vicieuse thorax antérieur", 
+            searchTerms: ["cicatrice vicieuse thorax antérieur", "thorax antérieur cicatrice vicieuse", "cicatrice thorax", "thorax antérieur", "vicieuse thorax"], 
+            rate: [3, 15], 
+            description: "Cicatrice chéloïde ou rétractile de la face antérieure du thorax avec adhérences aux plans profonds et gêne esthétique.",
+            rateCriteria: { 
+              low: "Cicatrice localisée (< 5 cm), souple, peu adhérente, gêne esthétique minime.", 
+              medium: "Cicatrice étendue (5-10 cm), adhérente aux plans profonds, prurit modéré, gêne esthétique notable.",
+              high: "Cicatrice large (> 10 cm), fortement adhérente, rétractile, douloureuse, retentissement esthétique et psychologique majeur."
+            } 
+          },
+          { 
             name: "Cicatrices chéloïdes multiples étendues", 
             searchTerms: ["cicatrices chéloïdes multiples étendues", "étendues multiples chéloïdes cicatrices", "cicatrices chéloïdes", "chéloïdes multiples", "multiples étendues"], rate: [10, 40], 
             description: "Cicatrices chéloïdes (prolifération excessive de tissu cicatriciel) étendues et invalidantes, sur plusieurs zones du corps.",
