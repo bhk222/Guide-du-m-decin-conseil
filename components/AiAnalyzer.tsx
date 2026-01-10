@@ -8237,6 +8237,15 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             negativeContext: /[oœ]il|vision|glaucome|cataracte|oreille|audition|surdité|tympan|maxillaire|mandibule/i  // Évite confusion avec autres spécialités
         },
         
+        // 🆕 V3.3.155: Amputation transcarpienne / Désarticulation poignet (ULTRA HAUTE priorité)
+        {
+            pattern: /amputation.*transcarpienne|transcarpienne|d[eé]sarticulation.*poignet|amputation.*poignet|perte.*(?:main|mains).*(?:niveau|au).*poignet/i,
+            context: /main|membre.*sup[eé]rieur|poignet|avant.*bras/i,
+            searchTerms: ["Désarticulation du poignet"],  // ✅ V3.3.155: Amputation majeure [55-60% dominante, 45-50% non-dominante]
+            priority: 15000,  // ULTRA HAUTE priorité - amputation majeure
+            negativeContext: /fracture.*(?:isol[eé]e|simple)|raideur.*poignet|entorse/i  // Évite confusion avec fracture simple ou raideur
+        },
+        
         // 🆕 V3.3.150: Cicatrice thorax (protection IPP trop élevé + confusion viscérale)
         {
             pattern: /cicatrice.*(?:cheloide|hypertrophique).*thorax|thorax.*cicatrice.*(?:cheloide|hypertrophique)/i,

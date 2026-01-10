@@ -928,8 +928,8 @@ export const disabilityData: InjuryCategory[] = [
           { name: "Amputation de l'avant-bras (tiers moyen - Main Non Dominante)", description: "Amputation du tiers moyen de l'avant-bras, main non dominante.", rate: [50, 55] },
           { name: "Amputation de l'avant-bras (tiers inférieur - Main Dominante)", description: "Amputation du tiers inférieur de l'avant-bras (proche poignet), main dominante.", rate: [55, 60] },
           { name: "Amputation de l'avant-bras (tiers inférieur - Main Non Dominante)", description: "Amputation du tiers inférieur de l'avant-bras (proche poignet), main non dominante.", rate: [45, 50] },
-          { name: "Désarticulation du poignet (Main Dominante)", description: "Désarticulation au niveau de l'articulation du poignet, main dominante.", rate: [55, 60] },
-          { name: "Désarticulation du poignet (Main Non Dominante)", description: "Désarticulation au niveau de l'articulation du poignet, main non dominante.", rate: [45, 50] },
+          { name: "Désarticulation du poignet (Main Dominante)", searchTerms: ["désarticulation poignet main dominante", "amputation transcarpienne main dominante", "transcarpienne", "désarticulation poignet", "amputation poignet", "perte main niveau poignet"], description: "Désarticulation au niveau de l'articulation du poignet, main dominante. Synonyme: amputation transcarpienne.", rate: [55, 60] },
+          { name: "Désarticulation du poignet (Main Non Dominante)", searchTerms: ["désarticulation poignet main non dominante", "amputation transcarpienne main non dominante", "transcarpienne", "désarticulation poignet", "amputation poignet", "perte main niveau poignet"], description: "Désarticulation au niveau de l'articulation du poignet, main non dominante. Synonyme: amputation transcarpienne.", rate: [45, 50] },
         ]
        },
        {
