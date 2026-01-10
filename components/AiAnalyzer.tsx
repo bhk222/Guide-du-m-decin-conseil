@@ -8257,11 +8257,29 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
         
         // 🆕 V3.3.151: Élongation musculaire quadriceps (protection contre confusion avec fracture)
         {
-            pattern: /[eé]longation.*musculaire.*quadriceps|quadriceps.*[eé]longation|l[eé]sion.*musculaire.*quadriceps/i,
-            context: /membre.*inf[eé]rieur|cuisse|genou/i,
+            pattern: /[eé]longation.*musculaire.*(?:du|de\s+la?)?\s*quadriceps|quadriceps.*[eé]longation|l[eé]sion.*musculaire.*quadriceps/i,
+            context: /.*/i,  // V3.3.154: Context permissif car lésion déjà isolée par Pattern 0B
             searchTerms: ["Élongation/déchirure musculaire quadriceps - Tendinopathie quadricipitale (séquelles)"],  // ✅ V3.3.153: Entrée spécifique
             priority: 13600,
             negativeContext: /fracture|rupture.*tendon|rupture.*compl[eè]te/i  // Évite confusion avec fractures
+        },
+        
+        // 🆕 V3.3.154: Déchirure tendons extenseurs poignet (protection contre cumul générique radius)
+        {
+            pattern: /d[eé]chirure.*(?:partielle|totale)?.*tendons?.*extenseurs?.*(?:poignet|main)|tendons?.*extenseurs?.*(?:poignet|main).*(?:d[eé]chir|ruptur|l[eé]sion)/i,
+            context: /membre.*sup[eé]rieur|poignet|main|doigts?/i,
+            searchTerms: ["Déchirure partielle des tendons extenseurs du poignet"],  // ✅ V3.3.154: Entrée spécifique [8-15% dominante, 6-12% non-dominante]
+            priority: 13600,  // ULTRA HAUTE priorité pour éviter confusion avec cumul générique "Fracture radius + raideur + déficit force"
+            negativeContext: /fracture.*radius|radius.*fracture|[eé]longation.*[eé]paule|[eé]paule.*[eé]longation/i  // Évite confusion avec fracture radius ET élongation épaule
+        },
+        
+        // 🆕 V3.3.154: Élongation musculaire épaule (protection contre cumul générique radius)
+        {
+            pattern: /[eé]longation.*musculaire.*[eé]paule|[eé]paule.*[eé]longation|l[eé]sion.*musculaire.*[eé]paule|muscle.*delto[ïi]de.*[eé]longation/i,
+            context: /membre.*sup[eé]rieur|[eé]paule|bras/i,
+            searchTerms: ["Élongation musculaire de l'épaule"],  // ✅ V3.3.154: Entrée spécifique [5-12% dominante, 4-10% non-dominante]
+            priority: 13600,  // ULTRA HAUTE priorité
+            negativeContext: /fracture|rupture.*compl[eè]te|tendons?.*extenseurs?|coiffe.*rotateurs/i  // Évite confusion avec fractures, ruptures complètes, tendons
         },
         
         // Règles yeux
@@ -11652,15 +11670,21 @@ const extractIndividualLesions = (text: string): string[] => {
         if (lesions.length >= 2) return lesions;
     }
     
-    // Pattern 0B: Fracture + déchirure ligament + élongation muscle (CAS 2) - AMÉLIORÉ V3.3.135
-    // Ex: "fracture tibia associée à déchirure ligament collatéral ainsi qu'une élongation quadriceps"
+    // Pattern 0B: Fracture + déchirure ligament + élongation muscle (CAS 2) - AMÉLIORÉ V3.3.154
+    // Membre inférieur: "fracture tibia associée à déchirure ligament collatéral ainsi qu'une élongation quadriceps"
+    // Membre supérieur: "fracture radius associée à déchirure tendons extenseurs ainsi qu'élongation épaule"
     // Ex: "fracture genou avec lésion ligamentaire et atteinte musculaire"
     // Ex: "fracture tibia sur fond de rupture LCA ainsi qu'élongation quadriceps"
-    const multiTraumaPattern = /fracture.*?(?:tibia|femur|humerus|genou).*?(?:associee?|avec|sur\s+fond\s+de).*?(?:dechirure|lesion|rupture).*?ligament.*?(?:ainsi|et|avec|associee?|sur\s+fond).*?(?:elongation|dechirure|lesion).*?(?:quadriceps|muscle)/i;
-    const fractureMatch = normalized.match(/fracture\s+(?:non\s+)?(?:deplacee?)?\s*(?:du|de\s+la)?\s*(?:tiers)?\s*(?:distal|proximal|moyen)?\s*(?:du|de\s+la)?\s*(?:tibia|femur|humerus|genou)\s*(?:droit|gauche)?/i);
-    const ligamentMatch = normalized.match(/(?:dechirure|lesion|rupture)\s+(?:partielle?|complete?|totale?)?\s*(?:du|de\s+la)?\s*ligament\s+(?:collateral|croise|lateral|lca|lcp)\s*(?:medial|interne|externe|anterieur|posterieur)?\s*(?:du)?\s*(?:genou|coude)?\s*(?:droit|gauche)?/i);
-    // V3.3.135: Regex ultra-simplifié pour garantir le match
-    const muscleMatch = normalized.match(/(?:elongation|dechirure|rupture).*?quadriceps/i);
+    
+    // V3.3.154: Ajout pattern membre supérieur (radius + tendon + muscle épaule)
+    const multiTraumaPattern = /fracture.*?(?:tibia|femur|humerus|genou|radius|cubitus).*?(?:associee?|avec|sur\s+fond\s+de).*?(?:dechirure|lesion|rupture).*?(?:ligament|tendons?).*?(?:ainsi|et|avec|associee?|sur\s+fond).*?(?:elongation|dechirure|lesion).*?(?:quadriceps|muscle|epaule)/i;
+    const fractureMatch = normalized.match(/fracture\s+(?:non\s+)?(?:deplacee?)?\s*(?:du|de\s+la)?\s*(?:tiers)?\s*(?:distal|proximal|moyen)?\s*(?:du|de\s+la)?\s*(?:tibia|femur|humerus|genou|radius|cubitus)\s*(?:droit|gauche)?/i);
+    
+    // V3.3.154: Ligament OU Tendon (membre inf. ou sup.)
+    const ligamentMatch = normalized.match(/(?:dechirure|lesion|rupture)\s+(?:partielle?|complete?|totale?)?\s*(?:du|de\s+la|des)?\s*(?:ligament\s+(?:collateral|croise|lateral|lca|lcp)|tendons?\s+extenseurs?)\s*(?:medial|interne|externe|anterieur|posterieur|poignet|main)?\s*(?:du|de\s+la)?\s*(?:genou|coude|poignet)?\s*(?:droit|gauche)?/i);
+    
+    // V3.3.154: Quadriceps (membre inf.) OU Épaule (membre sup.) - PATTERN FLEXIBLE
+    const muscleMatch = normalized.match(/(?:elongation|dechirure|rupture)\s+(?:musculaire?)?\s*(?:du|de\s+la?|l)?\s*(?:quadriceps|epaule)/i);
     
     console.log('🔍 Pattern 0B - Extraction détaillée:');
     console.log('  multiTraumaPattern test:', multiTraumaPattern.test(normalized));
@@ -11669,11 +11693,11 @@ const extractIndividualLesions = (text: string): string[] => {
     console.log('  muscleMatch:', muscleMatch ? muscleMatch[0] : 'NULL');
     
     if (multiTraumaPattern.test(normalized) && fractureMatch && ligamentMatch && muscleMatch) {
-        // V3.3.135: Changé OU en ET pour exiger les 3 matches
+        // V3.3.154: Changé OU en ET pour exiger les 3 matches (membre inf. + sup.)
         lesions.push(fractureMatch[0].trim());
         lesions.push(ligamentMatch[0].trim());
         lesions.push(muscleMatch[0].trim());
-        console.log('✅ Pattern 0B (os+ligament+muscle) détecté:', lesions);
+        console.log('✅ Pattern 0B (os+ligament/tendon+muscle) détecté:', lesions);
         return lesions; // Retourner les 3 lésions
     }
     
