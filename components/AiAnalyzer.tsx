@@ -4013,6 +4013,223 @@ const buildDetailedClinicalReport = (
     return report;
 };
 
+/**
+ * 🆕 Génère une analyse comparative expliquant POURQUOI ce barème et PAS un autre
+ * Version V3.3.140 - Explication pédagogique détaillée
+ */
+export const buildComparativeAnalysis = (
+    selectedInjury: Injury,
+    userInput: string,
+    chosenRate: number,
+    selectedPath: string
+): string => {
+    const normalized = normalize(userInput);
+    const injuryNameLower = normalize(selectedInjury.name);
+    let analysis = "";
+    
+    // 🔍 Détecter les barèmes similaires/proches dans la même zone anatomique
+    const selectedCategory = selectedPath.split('>')[0].trim();
+    const relatedInjuries = allInjuriesWithPaths.filter(inj => {
+        const cat = inj.path.split('>')[0].trim();
+        return cat === selectedCategory && inj.name !== selectedInjury.name;
+    });
+    
+    // --- CAS SPÉCIFIQUES PAR TYPE DE LÉSION ---
+    
+    // 🦴 FRACTURES : Distinguer consolidation simple / cal vicieux / raideur
+    if (injuryNameLower.includes('fracture')) {
+        analysis += `<div style="background:#e3f2fd; padding:15px; margin:10px 0; border-left:5px solid #2196F3; border-radius:5px;">`;
+        analysis += `<strong>🎯 POURQUOI CE BARÈME ?</strong><br><br>`;
+        
+        // Détection du contexte clinique
+        const hasRaideur = /raideur|limitation.*(?:mobilite|amplitude)|flexion.*limit|enraidissement/i.test(normalized);
+        const hasCalVicieux = /cal\s+vicieux|consolidation\s+vicieuse|deformation|axe.*defaut/i.test(normalized);
+        const hasRaccourcissement = /raccourcissement|inegalite.*longueur|jambe.*courte|boiterie/i.test(normalized);
+        const hasMouvementsLibres = /mouvements?\s+(?:comme\s+)?libres?|mobilite\s+(?:conservee|normale|complete)|amplitude\s+normale/i.test(normalized);
+        const hasBonneConsolidation = /bonne\s+consolidation|consolidation\s+(?:satisfaisante|anatomique)|consolide.*sans\s+sequelle/i.test(normalized);
+        
+        // 🆕 LOGIQUE EXPLICATIVE DÉTAILLÉE
+        analysis += `<strong>📋 Le barème des fractures distingue 3 situations :</strong><br><br>`;
+        
+        // Barème 1 : Bonne consolidation
+        const bonneConsoMatch = relatedInjuries.find(inj => 
+            normalize(inj.name).includes('bonne consolidation') || 
+            normalize(inj.name).includes('bien consolidee')
+        );
+        if (bonneConsoMatch) {
+            const bonneConsoRate = Array.isArray(bonneConsoMatch.rate) 
+                ? `${bonneConsoMatch.rate[0]}-${bonneConsoMatch.rate[1]}%`
+                : `${bonneConsoMatch.rate}%`;
+            
+            analysis += `<strong>1️⃣ Bonne consolidation (sans séquelle) : ${bonneConsoRate}</strong><br>`;
+            analysis += `<em>Critères :</em> Consolidation anatomique, mobilité conservée, pas de raideur, pas de douleur<br>`;
+            
+            if (injuryNameLower.includes('bonne consolidation') || hasBonneConsolidation) {
+                analysis += `<span style="color:green; font-weight:bold;">✅ C'EST VOTRE CAS</span> car : `;
+                const raisons = [];
+                if (hasMouvementsLibres) raisons.push('mouvements libres constatés');
+                if (!hasRaideur) raisons.push('pas de raideur mentionnée');
+                if (!hasCalVicieux) raisons.push('pas de cal vicieux');
+                analysis += raisons.join(', ');
+                analysis += `<br>`;
+            } else {
+                analysis += `<span style="color:red; font-weight:bold;">❌ PAS votre cas</span> car : `;
+                const raisons = [];
+                if (hasRaideur) raisons.push('raideur présente');
+                if (hasCalVicieux) raisons.push('cal vicieux mentionné');
+                if (hasRaccourcissement) raisons.push('raccourcissement/boiterie');
+                analysis += raisons.join(', ');
+                analysis += `<br>`;
+            }
+            analysis += `<br>`;
+        }
+        
+        // Barème 2 : Consolidation avec raideur modérée
+        const raideurModereeMatch = relatedInjuries.find(inj => 
+            normalize(inj.name).includes('raideur moderee') ||
+            (normalize(inj.name).includes('raideur') && !normalize(inj.name).includes('cal vicieux'))
+        );
+        if (raideurModereeMatch) {
+            const raideurRate = Array.isArray(raideurModereeMatch.rate) 
+                ? `${raideurModereeMatch.rate[0]}-${raideurModereeMatch.rate[1]}%`
+                : `${raideurModereeMatch.rate}%`;
+            
+            analysis += `<strong>2️⃣ Consolidation avec raideur modérée : ${raideurRate}</strong><br>`;
+            analysis += `<em>Critères :</em> Limitation mobilité articulaire, pas de déformation majeure<br>`;
+            
+            if (hasRaideur && !hasCalVicieux && !injuryNameLower.includes('bonne consolidation')) {
+                analysis += `<span style="color:green; font-weight:bold;">✅ Pourrait correspondre</span> si limitation articulaire confirmée<br>`;
+            } else if (injuryNameLower.includes('bonne consolidation')) {
+                analysis += `<span style="color:red; font-weight:bold;">❌ Taux trop élevé</span> car pas de raideur constatée<br>`;
+            }
+            analysis += `<br>`;
+        }
+        
+        // Barème 3 : Cal vicieux avec raideur et/ou raccourcissement
+        const calVicieuxMatch = relatedInjuries.find(inj => 
+            normalize(inj.name).includes('cal vicieux') ||
+            normalize(inj.name).includes('consolidation.*raccourcissement')
+        );
+        if (calVicieuxMatch) {
+            const calVicRate = Array.isArray(calVicieuxMatch.rate) 
+                ? `${calVicieuxMatch.rate[0]}-${calVicieuxMatch.rate[1]}%`
+                : `${calVicieuxMatch.rate}%`;
+            
+            analysis += `<strong>3️⃣ Cal vicieux avec raideur/raccourcissement : ${calVicRate}</strong><br>`;
+            analysis += `<em>Critères :</em> Consolidation vicieuse, déformation, raccourcissement >2cm, raideur importante<br>`;
+            
+            if ((hasCalVicieux || hasRaccourcissement) && injuryNameLower.includes('cal vicieux')) {
+                analysis += `<span style="color:green; font-weight:bold;">✅ C'EST VOTRE CAS</span> car séquelles importantes détectées<br>`;
+            } else if (injuryNameLower.includes('bonne consolidation')) {
+                analysis += `<span style="color:red; font-weight:bold;">❌ Taux trop élevé</span> (300-400% de différence !) car aucune de ces complications<br>`;
+            }
+            analysis += `<br>`;
+        }
+        
+        // Conclusion de l'analyse comparative
+        analysis += `<strong>💡 CONCLUSION :</strong><br>`;
+        analysis += `Le barème retenu "<em>${selectedInjury.name}</em>" (${Array.isArray(selectedInjury.rate) ? `${selectedInjury.rate[0]}-${selectedInjury.rate[1]}%` : `${selectedInjury.rate}%`}) est approprié car `;
+        
+        if (hasMouvementsLibres || hasBonneConsolidation) {
+            analysis += `la consolidation est satisfaisante avec <strong>mobilité préservée</strong>. `;
+            analysis += `Les séquelles sont principalement <strong>fonctionnelles</strong> (aide technique, limitation activité) sans raideur articulaire objectivée.`;
+        } else if (hasRaideur && !hasCalVicieux) {
+            analysis += `une <strong>limitation articulaire</strong> est constatée sans déformation osseuse majeure.`;
+        } else if (hasCalVicieux || hasRaccourcissement) {
+            analysis += `des <strong>séquelles structurelles</strong> importantes sont objectivées (déformation, raccourcissement, raideur).`;
+        }
+        
+        analysis += `</div><br>`;
+    }
+    
+    // 🤚 RAIDEUR DE LA HANCHE : Distinguer simple raideur / ankylose / prothèse
+    else if (injuryNameLower.includes('raideur') && injuryNameLower.includes('hanche')) {
+        analysis += `<div style="background:#fff3e0; padding:15px; margin:10px 0; border-left:5px solid #ff9800; border-radius:5px;">`;
+        analysis += `<strong>🎯 DISTINCTION CRITIQUE : Raideur vs Ankylose</strong><br><br>`;
+        
+        const hasAnkylose = /ankylose|blocage.*complet|mobilite.*nulle|immobilite/i.test(normalized);
+        const hasMouvementsLibres = /mouvements?\s+(?:comme\s+)?libres?|mobilite\s+conservee/i.test(normalized);
+        
+        // Barème Raideur simple
+        analysis += `<strong>📊 Barème "Raideur de la hanche" : 10-40%</strong><br>`;
+        analysis += `<em>Critères :</em><br>`;
+        analysis += `• <strong>Faible (10%):</strong> Limitation amplitudes extrêmes seulement<br>`;
+        analysis += `• <strong>Moyen (25%):</strong> Limitation modérée (flexion 90-120°, abduction 20-30°)<br>`;
+        analysis += `• <strong>Élevé (40%):</strong> Quasi-ankylose avec boiterie importante<br><br>`;
+        
+        if (hasMouvementsLibres) {
+            analysis += `<span style="color:red; font-weight:bold;">❌ CE BARÈME NE CONVIENT PAS</span> car :<br>`;
+            analysis += `• Examen clinique indique : "<em>mouvements libres</em>"<br>`;
+            analysis += `• <strong>Contradiction majeure</strong> : On ne peut PAS retenir une "raideur" quand les mouvements sont libres !<br>`;
+            analysis += `• <strong>Taux de 40%</strong> signifierait : quasi-ankylose, immobilité quasi-totale, boiterie sévère<br><br>`;
+            
+            analysis += `<strong>✅ BARÈME APPROPRIÉ :</strong> "Fracture du massif trochantérien - Bonne consolidation" (5-10%)<br>`;
+            analysis += `<em>Raison :</em> Consolidation osseuse acquise, mobilité conservée, séquelles fonctionnelles modérées<br>`;
+        }
+        
+        // Barème Ankylose (comparaison si applicable)
+        const ankyloseMatch = relatedInjuries.find(inj => normalize(inj.name).includes('ankylose'));
+        if (ankyloseMatch) {
+            const ankRate = Array.isArray(ankyloseMatch.rate) 
+                ? `${ankyloseMatch.rate[0]}-${ankyloseMatch.rate[1]}%`
+                : `${ankyloseMatch.rate}%`;
+            
+            analysis += `<br><strong>⚠️ Pour comparaison : "Ankylose hanche" = ${ankRate}</strong><br>`;
+            analysis += `<em>Critères :</em> Blocage articulaire complet, immobilité totale<br>`;
+            
+            if (!hasAnkylose) {
+                analysis += `<span style="color:red; font-weight:bold;">❌ Manifestement pas le cas ici</span> (mobilité présente)<br>`;
+            }
+        }
+        
+        analysis += `</div><br>`;
+    }
+    
+    // 🆕 CAS GÉNÉRIQUE : Explication simple si pas de cas spécifique
+    else {
+        analysis += `<div style="background:#f5f5f5; padding:15px; margin:10px 0; border-left:5px solid #757575; border-radius:5px;">`;
+        analysis += `<strong>🎯 Sélection du barème :</strong><br><br>`;
+        analysis += `Le barème "<em>${selectedInjury.name}</em>" a été retenu car il correspond le mieux aux éléments cliniques décrits. `;
+        
+        // Recherche d'autres barèmes proches
+        const similarInjuries = relatedInjuries.filter(inj => {
+            const score = calculateSimilarityScore(injuryNameLower, normalize(inj.name));
+            return score > 0.3; // 30% de similarité minimum
+        }).slice(0, 2);
+        
+        if (similarInjuries.length > 0) {
+            analysis += `<br><br><strong>Autres barèmes proches non retenus :</strong><br>`;
+            similarInjuries.forEach(inj => {
+                const rate = Array.isArray(inj.rate) 
+                    ? `${inj.rate[0]}-${inj.rate[1]}%`
+                    : `${inj.rate}%`;
+                analysis += `• "${inj.name}" (${rate}) - Critères non remplis<br>`;
+            });
+        }
+        
+        analysis += `</div><br>`;
+    }
+    
+    return analysis;
+};
+
+/**
+ * Calcule un score de similarité simple entre deux chaînes normalisées
+ */
+const calculateSimilarityScore = (str1: string, str2: string): number => {
+    const words1 = str1.split(' ').filter(w => w.length > 2);
+    const words2 = str2.split(' ').filter(w => w.length > 2);
+    
+    let matches = 0;
+    words1.forEach(w1 => {
+        if (words2.some(w2 => w2.includes(w1) || w1.includes(w2))) {
+            matches++;
+        }
+    });
+    
+    return matches / Math.max(words1.length, words2.length);
+};
+
 export const buildExpertJustification = (
     userInput: string,
     injury: Injury,
@@ -4224,11 +4441,15 @@ export const buildExpertJustification = (
     justification += `<strong style="font-size:20px;">IPP = ${chosenRate}%</strong>`;
     justification += `</div><br>`;
 
-    // Section 5 : Conclusion médico-légale ENRICHIE
-    justification += "<strong>5️⃣ Conclusion médico-légale</strong><br>";
+    // Section 5 : EXPLICATION DÉTAILLÉE - POURQUOI CE BARÈME ? (🆕)
+    justification += "<strong>5️⃣ Analyse comparative des barèmes applicables</strong><br>";
+    justification += buildComparativeAnalysis(injury, userInput, chosenRate, path);
+    
+    // Section 6 : Conclusion médico-légale ENRICHIE
+    justification += "<strong>6️⃣ Conclusion médico-légale</strong><br>";
     justification += `Il persiste des séquelles consolidées post-traumatiques entraînant un retentissement fonctionnel <strong>${severityText}</strong> et permanent, justifiant l'attribution d'un taux d'IPP de <strong>${chosenRate}%</strong>.<br><br>`;
     
-    // Section 6 : Données cliniques manquantes (si incomplètes) - PERSONNALISÉES PAR LÉSION
+    // Section 7 : Données cliniques manquantes (si incomplètes) - PERSONNALISÉES PAR LÉSION
     if (isDefaultSeverity || (!hasFlexion && !hasExtension && !hasEVA)) {
         justification += "<strong>📋 Données cliniques recommandées pour affiner l'évaluation</strong><br>";
         justification += "<em>Pour une évaluation plus précise, il serait souhaitable de disposer de :</em><br>";
@@ -5232,6 +5453,10 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
         
         // 🆕 V3.3.148: FRACTURES FÉMORALES - Localisations spécifiques
         
+        // 🆕 V3.3.140: Fracture trochantéro-diaphysaire avec BONNE consolidation (mouvements libres)
+        [/fracture.*(?:trochant[eé]ro[-\s]?diaphysaire|complexe.*trochant|trochant[eé]rienne).*(?:mouvements?.*libres?|mobilite.*conserv|sans.*raideur|consolidation.*satisfaisante|bonne.*consolidation)/gi, 'fracture massif trochantérien bonne consolidation hanche fémur séquelle fonctionnelle'],
+        [/fracture.*(?:trochant[eé]ro[-\s]?diaphysaire|complexe.*trochant).*(?=.*mouvements?.*libres?)/gi, 'fracture massif trochantérien bonne consolidation hanche fémur'],
+        
         // Fracture trochantéro-diaphysaire = Fracture massif trochantérien étendue
         [/fracture.*trochant[eé]ro[-\s]?diaphysaire.*f[eé]mur/gi, 'fracture massif trochantérien cal vicieux raideur hanche fémur séquelle orthopédique'],
         [/fracture.*complexe.*trochant[eé]ro[-\s]?diaphysaire/gi, 'fracture massif trochantérien cal vicieux raideur hanche fémur séquelle orthopédique'],
@@ -6119,17 +6344,20 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
         
         // === RÈGLES RAIDEURS ARTICULATIONS MEMBRES INFÉRIEURS V3.3.126 ===
         // Raideur hanche avec flexion 90-120°
+        // 🆕 V3.3.140: Ajout negativeContext pour exclure "mouvements libres"
         {
             pattern: /raideur.*hanche|hanche.*raideur/i,
             context: /flexion.*(?:90|100|110|120)|limitation.*120/i,
             searchTerms: ["Raideur de la hanche - Flexion 90-120°"],
-            priority: 10700
+            priority: 10700,
+            negativeContext: /mouvements?\s+(?:comme\s+)?libres?|mobilite\s+(?:conservee|normale|complete)|amplitude\s+normale|sans\s+raideur/i
         },
         {
             pattern: /raideur.*hanche|hanche.*raideur/i,
             context: /claudication|boiterie/i,
             searchTerms: ["Raideur hanche avec claudication"],
-            priority: 10400
+            priority: 10400,
+            negativeContext: /mouvements?\s+(?:comme\s+)?libres?|mobilite\s+(?:conservee|normale)|sans\s+raideur/i
         },
         // Raideur genou avec instabilité
         {
@@ -6610,19 +6838,39 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             priority: 10300
         },
         
+        // === 🆕 V3.3.142: RÈGLE EXPERTE FRACTURE TROCHANTÉRO-DIAPHYSAIRE (PRIORITÉ MAXIMALE) ===
+        // Fracture trochantéro-diaphysaire avec bonne consolidation (mouvements libres)
+        {
+            pattern: /fracture.*(?:trochant[eé]ro[-\s]?diaphysaire|complexe.*trochant|trochant[eé]rienne.*diaphyse)/i,
+            context: /mouvements?.*(?:comme\s+)?libres?|mouvements?\s+\$1.*(?:comme\s+)?libre|mobilite.*(?:conserv|normale|complete)|sans\s+raideur|bonne.*consolidation|consolidation.*satisfaisante/i,
+            searchTerms: ["fracture massif trochantérien bonne consolidation"],
+            priority: 10800,
+            negativeContext: /cal\s+vicieux|raideur.*(?:importante|majeure)|raccourcissement.*>.*2\s*cm|ankylose/i
+        },
+        // Fracture trochantéro-diaphysaire avec cal vicieux/raideur
+        {
+            pattern: /fracture.*(?:trochant[eé]ro[-\s]?diaphysaire|complexe.*trochant|trochant[eé]rienne.*diaphyse)/i,
+            context: /cal\s+vicieux|raideur|limitation|raccourcissement.*[3-9]\s*cm|boiterie.*(?:importante|majeure|permanente)/i,
+            searchTerms: ["Fracture du massif trochantérien - Cal vicieux et raideur"],
+            priority: 10750
+        },
+        
         // === RÈGLES RAIDEURS MEMBRES INFÉRIEURS V3.3.126 ===
         // Raideur hanche (flexion, abduction, rotation)
+        // 🆕 V3.3.140: Pattern plus strict (nécessite mot "raideur" explicite) + negativeContext renforcé
         {
-            pattern: /raideur.*hanche|hanche.*raideur|limitation.*flexion.*hanche/i,
-            context: /flexion\s+(?:90|95|100|105|110|115|120).*degr|boiterie|claudication|marche|perimetre/i,
+            pattern: /\b(?:raideur.*hanche|hanche.*raideur|limitation.*(?:flexion|mouvement).*hanche)\b/i,
+            context: /flexion\s+(?:90|95|100|105|110|115|120).*degr|boiterie|claudication|marche.*(?:difficile|limit|reduit)|perimetre.*reduit/i,
             searchTerms: ["Raideur de la hanche"],
-            priority: 10400
+            priority: 10400,
+            negativeContext: /mouvements?\s+(?:comme\s+)?libres?|mobilite\s+(?:conservee|normale|complete)|amplitude\s+normale|sans\s+raideur|mouvements.*hanche.*(?:comme\s+)?libres?/i
         },
         {
-            pattern: /hanche.*flexion\s+(?:90|95|100|105|110|115|120)/i,
-            context: /abduction|rotation|marche/i,
+            pattern: /\bhanche.*flexion\s+(?:90|95|100|105|110|115|120)\b/i,
+            context: /abduction|rotation|marche.*(?:difficile|limit)/i,
             searchTerms: ["Raideur de la hanche"],
-            priority: 10350
+            priority: 10350,
+            negativeContext: /mouvements?\s+(?:comme\s+)?libres?|mobilite\s+(?:conservee|normale)|sans\s+raideur|mouvements.*hanche.*libres?/i
         },
         // Raideur genou (flexion/extension)
         {
@@ -8459,9 +8707,17 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
         const matchWorking = rule.pattern.test(workingText) && rule.context.test(workingText);
         
         if ((rule as any).debug) {
+            const patternMatchClean = rule.pattern.test(cleanNormalizedText);
+            const contextMatchClean = rule.context.test(cleanNormalizedText);
+            const negContextMatchClean = rule.negativeContext ? rule.negativeContext.test(cleanNormalizedText) : false;
+            const negContextMatchWorking = rule.negativeContext ? rule.negativeContext.test(workingText) : false;
             console.log(`🔍 [DEBUG EXPERT RULE - EARLY TEST]`);
             console.log(`Pattern: ${rule.pattern}`);
+            console.log(`Context: ${rule.context}`);
+            console.log(`NegativeContext: ${rule.negativeContext || 'none'}`);
             console.log(`CleanText: "${cleanNormalizedText}"`);
+            console.log(`patternMatchClean: ${patternMatchClean}, contextMatchClean: ${contextMatchClean}`);
+            console.log(`negContextMatchClean: ${negContextMatchClean}, negContextMatchWorking: ${negContextMatchWorking}`);
             console.log(`matchClean: ${matchClean}, matchWorking: ${matchWorking}`);
         }
         

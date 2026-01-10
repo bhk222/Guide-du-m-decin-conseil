@@ -1358,6 +1358,7 @@ export const disabilityData: InjuryCategory[] = [
         injuries: [
             { name: "Fracture du col du fémur - Consolidation avec raccourcissement et raideur", searchTerms: ["fracture col fémur consolidation avec raccourcissement raideur", "raideur raccourcissement avec consolidation fémur col fracture", "fracture col fémur consolidation raccourcissement raideur", "fracture col", "col fémur"], rate: [30, 60] },
             { name: "Pseudarthrose du col du fémur", searchTerms: ["pseudarthrose col fémur", "fémur col pseudarthrose", "pseudarthrose col", "col fémur"], rate: [60, 80] },
+            { name: "Fracture du massif trochantérien - Bonne consolidation", searchTerms: ["fracture massif trochantérien bonne consolidation", "consolidation bonne trochantérien massif fracture", "fracture massif", "massif trochantérien", "trochantérien bonne", "fracture trochantero diaphysaire", "fracture complexe trochantero", "trochantero diaphysaire droite", "trochantero diaphysaire gauche", "fracture trochantero diaphysaire bonne consolidation"], rate: [5, 10], rateCriteria: { low: "Consolidation anatomique sans séquelle, gêne minime.", high: "Consolidation avec légère raideur et douleurs mécaniques." } },
             { name: "Fracture du massif trochantérien - Cal vicieux et raideur", searchTerms: ["fracture massif trochantérien cal vicieux raideur", "raideur vicieux cal trochantérien massif fracture", "fracture massif", "massif trochantérien", "trochantérien cal"], rate: [20, 40] },
         ]
       },
