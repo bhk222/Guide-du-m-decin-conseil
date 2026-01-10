@@ -447,10 +447,10 @@ export const disabilityData: InjuryCategory[] = [
         injuries: [
           { name: "Cécité complète", searchTerms: ["cécité complète"], rate: 100 },
           { name: "Quasi-cécité ou cécité professionnelle", searchTerms: ["quasi cécité cécité professionnelle", "professionnelle cécité cécité quasi", "quasi cécité", "cécité cécité", "cécité professionnelle"], rate: 100 },
-          { name: "Perte complète de la vision d'un oeil (l'autre étant normal)", searchTerms: ["perte complète vision d'un oeil l'autre étant normal", "amputation complète vision d'un vision l'autre étant normal", "normal étant l'autre oeil d'un vision complète perte", "perte complète", "complète vision"], rate: 30 },
-          { name: "Perte de la vision d'un oeil sans difformité apparente", searchTerms: ["perte vision d'un oeil sans difformité apparente", "amputation vision d'un vision sans difformité apparente", "apparente difformité sans oeil d'un vision perte", "perte vision d'un oeil difformité apparente", "perte vision"], rate: [25, 30] },
-          { name: "Ablation ou altération du globe avec prothèse possible", searchTerms: ["ablation altération globe avec prothèse possible", "amputation altération globe avec prothèse possible", "possible prothèse avec globe altération ablation", "ablation altération globe prothèse possible", "ablation altération"], rate: [28, 33] },
-          { name: "Ablation ou altération du globe sans prothèse possible", searchTerms: ["ablation altération globe sans prothèse possible", "amputation altération globe sans prothèse possible", "possible prothèse sans globe altération ablation", "ablation altération globe prothèse possible", "ablation altération"], rate: [35, 40] },
+          { name: "Perte complète de la vision d'un oeil (l'autre étant normal)", searchTerms: ["perte complète vision d'un oeil l'autre étant normal", "perte complète vision oeil normal", "perte totale vision oeil unique", "cécité complète un oeil", "aveugle d'un oeil", "perte vision complète oeil"], rate: 30 },
+          { name: "Perte de la vision d'un oeil sans difformité apparente", searchTerms: ["perte vision d'un oeil sans difformité apparente", "perte vision oeil sans difformité", "cécité un oeil sans difformité", "aveugle oeil sans difformité", "perte totale vision oeil sans difformité", "non voyant un oeil sans difformité"], rate: [25, 30] },
+          { name: "Ablation ou altération du globe avec prothèse possible", searchTerms: ["ablation altération globe avec prothèse possible", "ablation globe oculaire prothèse", "énucléation oeil prothèse", "altération globe prothèse possible", "extraction globe oeil prothèse"], rate: [28, 33] },
+          { name: "Ablation ou altération du globe sans prothèse possible", searchTerms: ["ablation altération globe sans prothèse possible", "ablation globe sans prothèse", "énucléation oeil sans prothèse", "altération globe sans prothèse", "extraction globe sans prothèse possible"], rate: [35, 40] },
           { name: "Diminution de la vision des deux yeux (selon tableau à double entrée)", description: "Se référer au tableau p.120 du PDF. Un outil de calcul dédié est recommandé.", rate: [0, 100] },
           
           // 🆕 V3.3.136 - Acuité visuelle unilatérale spécifique
@@ -2544,6 +2544,34 @@ export const disabilityData: InjuryCategory[] = [
       {
         name: "Polytraumatismes - Membres Multiples",
         injuries: [
+          // 🆕 V3.3.148: Cumul fracture membre supérieur + membre inférieur (chute polytraumatique)
+          { 
+            name: "Fracture radius + fracture malléole (cumul)", 
+            searchTerms: [
+              "fracture radius fracture malléole",
+              "fracture malléole fracture radius",
+              "fracture poignet fracture cheville",
+              "fracture cheville fracture radius",
+              "fracture extrémité inférieure radius fracture malléole externe",
+              "fracture malléole externe fracture radius droit",
+              "chute membre supérieur droit membre inférieur gauche",
+              "traumatisme poignet cheville",
+              "chute polytraumatique radius malléole",
+              "consolidation radius malléole douleurs résiduelles",
+              "raideur poignet douleurs cheville",
+              "immobilisation radius immobilisation malléole",
+              "fracture fermée radius fracture malléole",
+              "séquelles fonctionnelles poignet cheville"
+            ], 
+            rate: [18, 28], 
+            description: "Cumul d'une fracture du radius et d'une fracture de la malléole dans un même accident (polytraumatisme membres).", 
+            rateCriteria: { 
+              low: "Fracture radius consolidée (3-5% IPP) + fracture malléole bonne consolidation (3-5% IPP) = ~8-10% cumul", 
+              medium: "Fracture radius avec raideur modérée (10-15% IPP) + fracture malléole avec douleurs (8-12% IPP) = ~17-25% cumul", 
+              high: "Fracture radius avec limitation importante (15-20% IPP) + fracture malléole avec raideur (12-20% IPP) = ~25-36% cumul" 
+            } 
+          },
+          
           // 🆕 V3.3.147: Cumul fracture membre + lésion rachis (pattern fréquent en traumatologie)
           { name: "Fracture radius + lombalgie post-traumatique (cumul)", searchTerms: ["fracture radius lombalgie post traumatique", "lombalgie post traumatique fracture radius", "fracture radius entorse lombaire", "entorse lombaire fracture radius", "fracture poignet lombalgie", "lombalgie mécanique fracture radius", "radius lombalgie", "poignet entorse lombaire", "fracture fermée extrémité inférieure radius lombalgie", "fracture radius droit lombalgie", "consolidation radius lombalgies mécaniques", "fracture radius limitation fonctionnelle lombalgies", "fracture radius mouvement brutal rachis lombaire", "chute membre supérieur mouvement brutal rachis", "fracture extrémité inférieure radius entorse lombaire", "immobilisation radius lombalgie post traumatique"], rate: [20, 25], description: "Cumul d'une fracture du radius avec lombalgie post-traumatique ou entorse lombaire.", rateCriteria: { low: "Fracture radius consolidée avec limitation minime + lombalgies mécaniques occasionnelles.", medium: "Fracture radius avec raideur modérée + lombalgies mécaniques fréquentes.", high: "Fracture radius avec limitation importante + lombalgies chroniques invalidantes." } },
           { name: "Polytraumatisme membre inférieur + supérieur", searchTerms: ["polytraumatisme membre inférieur supérieur", "supérieur inférieur membre polytraumatisme", "polytraumatisme membre", "membre inférieur", "inférieur supérieur"], rate: [40, 55], description: "Atteinte simultanée d'un membre inférieur et d'un membre supérieur." },

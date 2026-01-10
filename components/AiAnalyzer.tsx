@@ -8195,11 +8195,13 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             priority: 999
         },
         // Règles cheville
+        // 🆕 V3.3.148: Amélioration détection fracture malléole + negativeContext oeil
         {
-            pattern: /fracture.*mall[eé]ol(?:e|aire)/i,
-            context: /raideur.*mod[eé]r[eé]e|d[eé]ficit|flexion.*dorsale|limitation/i,
+            pattern: /fracture.*mall[eé]ol(?:e|aire)(?:.*externe|.*interne|.*bi[-\s]?mall[eé]ol)?/i,
+            context: /raideur.*mod[eé]r[eé]e|d[eé]ficit|flexion.*dorsale|limitation|cheville|consolidation|douleur.*cheville/i,
             searchTerms: ['Fracture malléolaire ou bi-malléolaire - Avec raideur modérée'],
-            priority: 999
+            priority: 10800,
+            negativeContext: /vision|oeil|[oœ]culaire|c[eé]cit[eé]|acuit[eé].*visuelle/i  // Évite confusion avec lésions oculaires
         },
         // Règles pied
         {
@@ -8223,11 +8225,13 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             priority: 999
         },
         // Règles yeux
+        // 🆕 V3.3.148: Pattern renforcé + context strict + negativeContext membres
         {
-            pattern: /perte.*(?:totale|compl[eè]te).*vision.*(?:[oœ]eil|yeux)|(?:[oœ]eil|yeux).*perte.*(?:totale|compl[eè]te)/i,
-            context: /traumatisme|autre.*normal|unilat[eé]rale|gauche.*normal|droite.*normal/i,
+            pattern: /perte.*(?:totale|compl[eè]te).*vision.*(?:[oœ]eil|yeux)|(?:[oœ]eil|yeux).*perte.*(?:totale|compl[eè]te).*vision|c[eé]cit[eé].*unilat[eé]rale|aveugle.*(?:d|un)['\s]?[oœ]eil/i,
+            context: /traumatisme.*(?:[oœ]eil|orbitaire|facial)|acuit[eé].*visuelle|fond.*[oœ]il|examen.*ophtalmologique|autre.*normal|unilat[eé]rale|gauche.*normal|droite.*normal/i,
             searchTerms: ["Perte complète de la vision d'un oeil (l'autre étant normal)"],
-            priority: 999
+            priority: 10850,
+            negativeContext: /fracture.*(?:radius|mall[eé]ol|humérus|fémur|tibia)|membre.*(?:sup[eé]rieur|inf[eé]rieur)|cheville|poignet|genou|hanche|entorse/i  // Évite détection dans cas orthopédiques
         },
         // Cataracte post-traumatique - Nécessite OBLIGATOIREMENT l'acuité visuelle (V3.3.20)
         {
@@ -11434,6 +11438,7 @@ export const detectMultipleLesions = (text: string): {
         hasAmputationAndTendon ? 2 : 1,  // 🆕 V3.3.133: Amputation + tendon = au moins 2 lésions
         hasPlexusAndAmputation ? 2 : 1,  // 🆕 V3.3.140: Plexus/paralysie + amputation = au moins 2 lésions
         hasFractureAndPseudarthrose ? 2 : 1,  // 🆕 V3.3.142: Fracture + pseudarthrose = 2 lésions distinctes
+        hasMembreSupEtInf ? 2 : 1,  // 🆕 V3.3.148: Membre supérieur + membre inférieur = 2 lésions distinctes (polytraumatisme)
         hasMembreEtRachis ? 2 : 1  // 🆕 V3.3.147: Fracture membre + lésion rachis = 2 lésions distinctes
     );
     
