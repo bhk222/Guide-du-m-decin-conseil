@@ -420,12 +420,22 @@ export const NomenclatureGenerale: React.FC = () => {
                                 <div className="flex items-start justify-between mb-2">
                                     <div className="flex-1">
                                         <div className="flex items-center gap-2 mb-1">
-                                            <span className="inline-block px-2 py-1 bg-primary-100 text-primary-700 text-xs rounded font-mono font-bold">
-                                                {acte.code}
-                                            </span>
-                                            {acte.lettreCle && (
-                                                <span className="inline-block px-2 py-1 bg-green-100 text-green-700 text-xs rounded font-mono font-bold">
-                                                    {acte.lettreCle} {acte.coefficient}
+                                            {/* Afficher le vrai code NGAP (Lettre-Clé + Coefficient) en priorité */}
+                                            {acte.lettreCle && acte.coefficient ? (
+                                                <>
+                                                    <span className="inline-block px-3 py-1 bg-green-600 text-white text-sm rounded font-mono font-bold">
+                                                        {acte.lettreCle} {acte.coefficient}
+                                                    </span>
+                                                    {/* Code numérique en petit à côté */}
+                                                    {acte.code && !/^[A-Z]+\d+/.test(acte.code) && (
+                                                        <span className="text-xs text-slate-400 font-mono">
+                                                            (Réf: {acte.code})
+                                                        </span>
+                                                    )}
+                                                </>
+                                            ) : (
+                                                <span className="inline-block px-2 py-1 bg-primary-100 text-primary-700 text-xs rounded font-mono font-bold">
+                                                    {acte.code}
                                                 </span>
                                             )}
                                             <span className="text-xs text-slate-500">{acte.categorie}</span>
@@ -470,9 +480,16 @@ export const NomenclatureGenerale: React.FC = () => {
                                                 <span className="inline-block w-6 h-6 bg-primary-600 text-white rounded-full text-xs font-bold flex items-center justify-center">
                                                     {index + 1}
                                                 </span>
-                                                <span className="inline-block px-2 py-1 bg-primary-100 text-primary-700 text-xs rounded font-mono font-bold">
-                                                    {item.acte.code}
-                                                </span>
+                                                {/* Afficher le vrai code NGAP (Lettre-Clé + Coefficient) */}
+                                                {item.acte.lettreCle && item.acte.coefficient ? (
+                                                    <span className="inline-block px-3 py-1 bg-green-600 text-white text-sm rounded font-mono font-bold">
+                                                        {item.acte.lettreCle} {item.acte.coefficient}
+                                                    </span>
+                                                ) : (
+                                                    <span className="inline-block px-2 py-1 bg-primary-100 text-primary-700 text-xs rounded font-mono font-bold">
+                                                        {item.acte.code}
+                                                    </span>
+                                                )}
                                             </div>
                                             <p className="text-sm font-medium text-slate-800">{item.acte.libelle}</p>
                                         </div>
