@@ -1073,7 +1073,9 @@ const middleCategories: InjuryCategory[] = [
           { name: "Dysgueusie (distorsion du goût) ou Cacosmie (perception d'odeurs nauséabondes)", searchTerms: ["dysgueusie distorsion goût cacosmie perception d'odeurs nauséabondes", "nauséabondes d'odeurs perception cacosmie goût distorsion dysgueusie", "dysgueusie distorsion", "distorsion goût", "goût cacosmie"], rate: [5, 15], description: "Altération qualitative de l'odorat ou du goût, entraînant la perception d'odeurs ou de saveurs désagréables, souvent avec un retentissement sur l'alimentation et la qualité de vie.", rateCriteria: { low: "Distorsions occasionnelles, n'entraînant pas de dégoût alimentaire majeur.", high: "Perceptions désagréables quasi-permanentes, avec aversion alimentaire, perte de poids et retentissement psychologique." } },
           { name: "Troubles esthétiques par mutilation nasale", searchTerms: ["troubles esthétiques par mutilation nasale", "nasale mutilation par esthétiques troubles", "troubles esthétiques", "esthétiques par", "par mutilation"], rate: [5, 30] },
           { name: "Sinusite traumatique", description: "Voir p.164 du PDF pour les détails.", rate: [5, 30] },
-          { name: "Rhinites croûteuses post-traumatiques", searchTerms: ["rhinites croûteuses post traumatiques", "traumatiques post croûteuses rhinites", "rhinites croûteuses", "croûteuses post", "post traumatiques"], rate: [5, 20] },
+          { name: "Crânio-hydrorrhée - Écoulement de liquide céphalo-rachidien (LCR) par fosse nasale", searchTerms: ["crânio hydrorrhée écoulement liquide céphalo rachidien lcr fosse nasale", "fuite lcr nez", "liquide cérébro-spinal rhinorrhée", "écoulement lcr post traumatique"], rate: 100, description: "Fuite persistante de LCR par le nez après fracture du crâne avec brèche ostéo-méningée. Risque majeur d'infection (méningite). Incapacité totale tant que non réparée. Barème officiel Art. 41 : 100%." },
+          { name: "Rhinites croûteuses post-traumatiques - Unilatérale", searchTerms: ["rhinites croûteuses post traumatiques unilatérale", "rhinite croûteuse un côté", "croûtes nasales unilatérale"], rate: [5, 10], description: "Rhinite croûteuse affectant une seule fosse nasale. Barème officiel : 5-10%." },
+          { name: "Rhinites croûteuses post-traumatiques - Bilatérale", searchTerms: ["rhinites croûteuses post traumatiques bilatérale", "rhinite croûteuse deux côtés", "croûtes nasales bilatérale"], rate: [10, 20], description: "Rhinite croûteuse affectant les deux fosses nasales. Barème officiel : 10-20%." },
           {
             name: "Séquelles de fracture de l'os hyoïde",
             searchTerms: ["séquelles fracture l'os hyoïde", "hyoïde l'os fracture séquelles", "séquelles fracture", "fracture l'os", "l'os hyoïde"], rate: [10, 30],
@@ -1148,7 +1150,9 @@ const middleCategories: InjuryCategory[] = [
           { name: "Troubles cardiaques fonctionnels - Avec asystolie confirmée", searchTerms: ["troubles cardiaques fonctionnels avec asystolie confirmée", "confirmée asystolie avec fonctionnels cardiaques troubles", "troubles cardiaques fonctionnels asystolie confirmée", "troubles cardiaques", "cardiaques fonctionnels"], rate: [80, 100] },
           { name: "Séquelles de contusion myocardique (troubles du rythme, insuffisance cardiaque)", searchTerms: ["séquelles contusion myocardique troubles rythme, insuffisance cardiaque", "cardiaque insuffisance rythme, troubles myocardique contusion séquelles", "séquelles contusion", "contusion myocardique", "myocardique troubles"], rate: [15, 50], rateCriteria: { low: "Anomalies ECG isolées, sans retentissement sur la fraction d'éjection.", high: "Insuffisance cardiaque ou troubles du rythme sévères nécessitant un traitement à vie." } },
           { name: "Troubles du rythme cardiaque post-traumatiques documentés (non appareillés)", searchTerms: ["troubles rythme cardiaque post traumatiques documentés non appareillés", "appareillés non documentés traumatiques post cardiaque rythme troubles", "troubles rythme", "rythme cardiaque", "cardiaque post"], rate: [5, 20], description: "Apparition de troubles du rythme (extrasystoles, tachycardie, fibrillation auriculaire) après une contusion myocardique ou un traumatisme thoracique, confirmés par Holter-ECG.", rateCriteria: { low: "Troubles du rythme peu fréquents, asymptomatiques ou paucisymptomatiques.", high: "Troubles du rythme fréquents, symptomatiques (palpitations, malaises) nécessitant un traitement anti-arythmique au long cours." } },
-          { name: "Ruptures traumatiques de valvules", searchTerms: ["ruptures traumatiques valvules", "valvules traumatiques ruptures", "ruptures traumatiques", "traumatiques valvules"], rate: [50, 100] },
+          { name: "Ruptures traumatiques de valvules", searchTerms: ["ruptures traumatiques valvules", "valvules traumatiques ruptures", "rupture traumatique valve cardiaque"], rate: [50, 100], description: "Rupture d'une valve cardiaque (mitrale, aortique, tricuspide) suite à un traumatisme thoracique fermé. Lésion gravissime. Barème officiel : 50-100%.", rateCriteria: { low: "Insuffisance valvulaire modérée, bien tolérée, sans insuffisance cardiaque.", high: "Insuffisance valvulaire sévère avec défaillance cardiaque, nécessitant un remplacement valvulaire." } },
+          { name: "Affections cardio-rénales consécutives à une maladie infectieuse ou intoxication", searchTerms: ["affections cardio rénales consécutives maladie infectieuse intoxication", "cardiomyopathie infectieuse", "atteinte cardiaque rénale infection"], rate: [30, 90], description: "Atteinte combinée cardiaque et rénale après infection ou intoxication professionnelle. Barème officiel : 30-90%.", rateCriteria: { low: "Atteinte modérée d'un seul organe, compensation thérapeutique.", medium: "Atteinte des deux organes avec retentissement fonctionnel moyen.", high: "Défaillance cardiaque et/ou rénale sévère, dialyse ou transplantation." } },
+          { name: "Artério-sclérose", searchTerms: ["artério sclérose", "athérosclérose", "sclérose artérielle"], rate: 0, description: "L'artério-sclérose ne donne pas lieu à estimation d'invalidité permanente selon le barème officiel (sauf complications : voir AVC, infarctus, artériopathie, etc.). Barème officiel : 0%." },
           { name: "Affections cardiovasculaires consécutives à une maladie infectieuse", searchTerms: ["affections cardiovasculaires consécutives une maladie infectieuse", "infectieuse maladie une consécutives cardiovasculaires affections", "affections cardiovasculaires", "cardiovasculaires consécutives", "consécutives une"], rate: [30, 90] },
           { name: "Anévrisme de l'aorte (hors syphilis)", searchTerms: ["anévrisme l'aorte hors syphilis", "syphilis hors l'aorte anévrisme", "anévrisme l'aorte", "l'aorte hors", "hors syphilis"], rate: [40, 80] },
           { name: "Péricardite chronique constrictive post-traumatique", searchTerms: ["péricardite chronique constrictive post traumatique", "traumatique post constrictive chronique péricardite", "péricardite chronique", "chronique constrictive", "constrictive post"], rate: [20, 60], rateCriteria: { low: "Péricardite bien tolérée, sans signe d'insuffisance cardiaque droite, simple surveillance.", high: "Péricardite invalidante avec signes de tamponnade chronique (turgescence jugulaire, hépatomégalie, œdèmes), nécessitant une chirurgie (péricardectomie)." } },
@@ -1174,6 +1178,96 @@ const middleCategories: InjuryCategory[] = [
                   high: "Complications de l'anévrisme (thrombose, embolie distale, rupture) avec séquelles ischémiques permanentes."
               }
             },
+            
+            // Art. 25 - OBLITÉRATIONS VASCULAIRES
+            {
+              name: "Oblitération artérielle - Sans invalidité apparente",
+              searchTerms: ["oblitération artérielle sans invalidité", "occlusion artère sans séquelle", "thrombose artérielle asymptomatique"],
+              rate: 0,
+              description: "Oblitération artérielle post-traumatique sans retentissement fonctionnel (circulation collatérale efficace). Barème officiel Art. 25A : 0%.",
+            },
+            {
+              name: "Oblitération artérielle - Avec atrophie du membre",
+              searchTerms: ["oblitération artérielle avec atrophie membre", "occlusion artère atrophie musculaire", "ischémie chronique atrophie"],
+              rate: [10, 40],
+              description: "Oblitération artérielle avec atrophie du membre accompagnée de raideurs articulaires (voir aussi séquelles articulaires correspondantes). Barème officiel Art. 25A : 10-40%.",
+              rateCriteria: {
+                low: "Atrophie modérée, raideurs minimes, compensation circulatoire partielle, marche autonome.",
+                medium: "Atrophie importante, raideurs multiples, claudication intermittente <500m, douleurs fréquentes.",
+                high: "Atrophie sévère, raideurs majeures, claudication <200m, douleurs de repos, ischémie chronique."
+              }
+            },
+            {
+              name: "Oblitération artérielle - Avec lésions nerveuses",
+              searchTerms: ["oblitération artérielle avec lésions nerveuses", "ischémie avec atteinte neurologique", "oblitération artère séquelles nerveuses"],
+              rate: 0,
+              description: "Oblitération artérielle accompagnée de lésions nerveuses (se reporter au chapitre Nerfs pour l'évaluation). Barème officiel Art. 25A : Voir Nerfs.",
+            },
+            {
+              name: "Oblitération artérielle - Avec sphacèle (voir amputation)",
+              searchTerms: ["oblitération artérielle avec sphacèle", "gangrène ischémique", "nécrose artérielle membre"],
+              rate: 0,
+              description: "Oblitération artérielle ayant entraîné sphacèle (gangrène) et amputation (se reporter au chapitre Amputations pour l'évaluation). Barème officiel Art. 25A : Voir Amputations.",
+            },
+            {
+              name: "Oblitération veineuse - Œdème chronique vérifié",
+              searchTerms: ["oblitération veineuse œdème chronique", "thrombose veineuse œdème", "phlébite séquelles œdème"],
+              rate: [10, 30],
+              description: "Oblitération veineuse post-thrombotique avec œdème chronique vérifié d'un membre. Barème officiel Art. 25B : 10-30%.",
+              rateCriteria: {
+                low: "Œdème vespéral modéré, réductible au repos, contention efficace, pas de troubles trophiques.",
+                medium: "Œdème permanent modéré, pigmentation cutanée (dermite ocre), varices secondaires, nécessité contention permanente.",
+                high: "Œdème permanent important, troubles trophiques (dermite ocre étendue, lipodermatosclérose), douleurs, limitation marche."
+              }
+            },
+            {
+              name: "Oblitération veineuse bilatérale membres inférieurs - Gênant marche et station debout",
+              searchTerms: ["oblitération veineuse bilatérale membres inférieurs", "thrombose veineuse bilatérale", "phlébite bilatérale séquelles"],
+              rate: [20, 50],
+              description: "Oblitération veineuse bilatérale des membres inférieurs gênant la marche et la station debout. Barème officiel Art. 25B : 20-50%.",
+              rateCriteria: {
+                low: "Œdèmes bilatéraux modérés, marche possible >500m avec contention, station debout limitée.",
+                medium: "Œdèmes bilatéraux importants, marche limitée <500m, station debout difficile, troubles trophiques bilatéraux.",
+                high: "Œdèmes bilatéraux majeurs, marche très limitée <200m, station debout quasi-impossible, ulcères veineux bilatéraux ou récidivants, dépendance pour activités quotidiennes."
+              }
+            },
+            
+            // Art. 26 - VARICES
+            {
+              name: "Varices - Pas d'évaluation (sauf complications)",
+              searchTerms: ["varices sans complication", "varices simples", "insuffisance veineuse simple"],
+              rate: 0,
+              description: "Varices post-traumatiques : par elles-mêmes ne donnent pas lieu à évaluation. Seules les complications sont évaluées. Barème officiel Art. 26 : 0%.",
+            },
+            {
+              name: "Varices - Ulcère variqueux récidivant peu étendu",
+              searchTerms: ["varices ulcère variqueux récidivant peu étendu", "ulcère veineux petit", "plaie variqueuse récidivante"],
+              rate: [5, 15],
+              description: "Complication variqueuse : ulcère variqueux récidivant peu étendu. Barème officiel Art. 26 : 5-15%.",
+              rateCriteria: {
+                low: "Ulcère unique petit (<3cm), récidives rares (1/an), cicatrisation sous traitement, activités peu limitées.",
+                medium: "Ulcère récidivant (2-3/an), taille moyenne, cicatrisation lente, nécessité soins réguliers, limitation activités.",
+                high: "Ulcère récidivant fréquent (>3/an) ou chronique, cicatrisation difficile, douleurs, limitation marche/station debout."
+              }
+            },
+            {
+              name: "Varices - Ulcère variqueux récidivant étendu",
+              searchTerms: ["varices ulcère variqueux récidivant étendu", "ulcère veineux large", "plaie variqueuse étendue"],
+              rate: [15, 30],
+              description: "Complication variqueuse : ulcère variqueux récidivant étendu. Barème officiel Art. 26 : 15-30%.",
+              rateCriteria: {
+                low: "Ulcère étendu (>5cm) récidivant, cicatrisation possible sous traitement intensif, limitation activités nette.",
+                medium: "Ulcère étendu chronique ou récidivant fréquent, cicatrisation très lente/incomplète, douleurs importantes, marche limitée.",
+                high: "Ulcère variqueux étendu permanent ou récidivant immédiatement, impossibilité cicatrisation complète, douleurs permanentes, marche très limitée, invalidité majeure."
+              }
+            },
+            {
+              name: "Varices - Brides circonférentielles ou phlébite chronique",
+              searchTerms: ["varices brides circonférentielles", "phlébite chronique séquelles", "sclérose veineuse post-phlébitique"],
+              rate: 0,
+              description: "Complications variqueuses : brides circonférentielles ou phlébite chronique à évaluer selon le cas. Barème officiel Art. 26 : Évaluation selon le cas.",
+            },
+            
             { name: "Syndrome de Raynaud post-traumatique ou lié aux vibrations", searchTerms: ["syndrome raynaud post traumatique lié aux vibrations", "vibrations aux lié traumatique post raynaud syndrome", "syndrome raynaud", "raynaud post", "post traumatique"], rate: [5, 20], description: "Trouble vasomoteur des doigts déclenché par le froid ou les vibrations.", rateCriteria: { low: "Crises rares et brèves, touchant 1 ou 2 doigts, sans troubles trophiques.", high: "Crises fréquentes, prolongées, invalidantes, avec troubles trophiques (ulcérations pulpaires)." } },
             { name: "Lymphœdème chronique post-traumatique d'un membre", searchTerms: ["lymphœdème chronique post traumatique d'un membre", "membre d'un traumatique post chronique lymphœdème", "lymphœdème chronique", "chronique post", "post traumatique"], rate: [10, 30], description: "Gonflement chronique d'un membre par atteinte du système lymphatique après un traumatisme grave ou une chirurgie.", rateCriteria: { low: "Augmentation de volume modérée, réductible au repos, sans retentissement cutané majeur.", high: "Éléphantiasis avec augmentation de volume majeure, troubles trophiques sévères (sclérose cutanée, infections à répétition)." } }
         ]
@@ -1414,6 +1508,7 @@ const middleCategories: InjuryCategory[] = [
           { name: "Fracture Omoplate - Séquelles sérieuses (Main Non Dominante)", searchTerms: ["fracture omoplate séquelles sérieuses main non dominante", "dominante non main sérieuses séquelles omoplate fracture", "fracture omoplate", "omoplate séquelles", "séquelles sérieuses"], rate: [15, 20], description: "Arthrite chronique, raideurs articulaires.", rateCriteria: { low: "Raideurs modérées.", high: "Raideurs importantes." } },
           { name: "Fracture Omoplate - Séquelles graves (immobilisation, ankylose) (Main Dominante)", searchTerms: ["fracture omoplate séquelles graves immobilisation, ankylose main dominante", "dominante main ankylose immobilisation, graves séquelles omoplate fracture", "fracture omoplate", "omoplate séquelles", "séquelles graves"], rate: [45, 50], description: "Immobilisation de l'omoplate, ankylose de l'épaule.", rateCriteria: { low: "Immobilisation partielle.", high: "Immobilisation complète avec ankylose." } },
           { name: "Fracture Omoplate - Séquelles graves (Main Non Dominante)", searchTerms: ["fracture omoplate séquelles graves main non dominante", "dominante non main graves séquelles omoplate fracture", "fracture omoplate", "omoplate séquelles", "séquelles graves"], rate: [35, 40], description: "Immobilisation de l'omoplate, ankylose de l'épaule.", rateCriteria: { low: "Immobilisation partielle.", high: "Immobilisation complète." } },
+          { name: "Fracture Omoplate - Suivant variété, désordres articulaires, etc.", searchTerms: ["fracture omoplate suivant variété désordres articulaires", "omoplate fracture variété désordres", "fracture scapula", "omoplate traumatisme"], rate: [10, 50], description: "Évaluation globale des fractures de l'omoplate selon la variété (corps, col, cavité glénoïde, acromion, apophyse coracoïde), les désordres articulaires (atteinte scapulo-humérale), les raideurs et l'étendue des lésions. Barème officiel : 10-50%.", rateCriteria: { low: "Fracture simple du corps de l'omoplate consolidée avec séquelles minimes (douleurs légères, limitation fonctionnelle modérée).", medium: "Fracture complexe avec désordres articulaires modérés, raideur partielle de l'épaule, limitation importante des mouvements.", high: "Fracture comminutive avec destruction articulaire (cavité glénoïde), ankylose ou quasi-ankylose de l'épaule, impotence fonctionnelle majeure." } },
           { name: "Fracture du col anatomique de l'omoplate (Main Dominante)", searchTerms: ["fracture col anatomique l'omoplate main dominante", "dominante main l'omoplate anatomique col fracture", "fracture col", "col anatomique", "anatomique l'omoplate"], rate: [5, 10], description: "Fracture rare entre le corps de l'omoplate et la cavité glénoïde. Consolidation avec limitation des mouvements de rotation et d'abduction de l'épaule.", rateCriteria: { low: "Consolidation satisfaisante, limitation minime.", high: "Limitation importante des mouvements de l'épaule." } },
           { name: "Fracture du col anatomique de l'omoplate (Main Non Dominante)", searchTerms: ["fracture col anatomique l'omoplate main non dominante", "dominante non main l'omoplate anatomique col fracture", "fracture col", "col anatomique", "anatomique l'omoplate"], rate: [4, 8], description: "Fracture rare entre le corps de l'omoplate et la cavité glénoïde. Consolidation avec limitation des mouvements de rotation et d'abduction de l'épaule.", rateCriteria: { low: "Consolidation satisfaisante, limitation minime.", high: "Limitation importante des mouvements de l'épaule." } },
           { name: "Limitation douloureuse mouvements omoplate - articulation scapulo-thoracique (Main Dominante)", searchTerms: ["limitation douloureuse mouvements omoplate articulation scapulo thoracique main dominante", "raideur douloureuse mouvements omoplate articulation scapulo thoracique main dominante", "dominante main thoracique scapulo articulation omoplate mouvements douloureuse limitation", "limitation douloureuse", "douloureuse mouvements"], rate: [15, 20], description: "Après contusion ayant lésé l'articulation scapulo-thoracique (suffusion sanguine, adhérences) mais laissé indemne l'articulation scapulo-humérale.", rateCriteria: { low: "Douleurs modérées, limitation partielle.", high: "Douleurs marquées, limitation importante avec adhérences." } },
@@ -1487,8 +1582,8 @@ const middleCategories: InjuryCategory[] = [
           { name: "Rupture de la coiffe des rotateurs post-traumatique (supra-épineux, etc.) (Main Non Dominante)", searchTerms: ["rupture coiffe des rotateurs post traumatique supra épineux, etc. main non dominante", "dominante non main etc. épineux, supra traumatique post rotateurs des coiffe rupture", "rupture coiffe rotateurs post traumatique supra épineux, etc. main non dominante", "rupture coiffe", "coiffe des"], rate: [8, 25], rateCriteria: { low: "Rupture partielle, douleurs à l'effort.", medium: "Rupture transfixiante, perte de force.", high: "Rupture massive, épaule pseudo-paralytique." } },
           { name: "Lésion SLAP (Superior Labrum from Anterior to Posterior) chronique (Main Dominante)", searchTerms: ["lésion slap superior labrum from anterior posterior chronique main dominante", "dominante main chronique posterior anterior from labrum superior slap lésion", "lésion slap", "slap superior", "superior labrum"], rate: [8, 20], description: "Lésion du bourrelet glénoïdien supérieur de l'épaule, entraînant des douleurs, des blocages et une instabilité fonctionnelle.", rateCriteria: { low: "Douleurs mécaniques aux mouvements extrêmes (armé du bras), sans instabilité objective.", high: "Douleurs, blocages et ressauts fréquents avec perte de force, invalidant pour les gestes au-dessus de la tête." } },
           { name: "Lésion SLAP (Superior Labrum from Anterior to Posterior) chronique (Main Non Dominante)", searchTerms: ["lésion slap superior labrum from anterior posterior chronique main non dominante", "dominante non main chronique posterior anterior from labrum superior slap lésion", "lésion slap", "slap superior", "superior labrum"], rate: [6, 15], description: "Lésion du bourrelet glénoïdien supérieur de l'épaule, entraînant des douleurs, des blocages et une instabilité fonctionnelle.", rateCriteria: { low: "Douleurs mécaniques aux mouvements extrêmes (armé du bras), sans instabilité objective.", high: "Douleurs, blocages et ressauts fréquents avec perte de force, invalidant pour les gestes au-dessus de la tête." } },
-          { name: "Pseudarthrose (épaule ballante) (Main Dominante)", searchTerms: ["pseudarthrose épaule ballante main dominante", "dominante main ballante épaule pseudarthrose", "pseudarthrose épaule", "épaule ballante", "ballante main"], rate: 60, description: "Épaule ballante par résection large ou pertes de substance osseuse étendues." },
-          { name: "Pseudarthrose (épaule ballante) (Main Non Dominante)", searchTerms: ["pseudarthrose épaule ballante main non dominante", "dominante non main ballante épaule pseudarthrose", "pseudarthrose épaule", "épaule ballante", "ballante main"], rate: 50, description: "Épaule ballante par résection large ou pertes de substance osseuse étendues." },
+          { name: "Pseudarthrose (épaule ballante) (Main Dominante)", searchTerms: ["pseudarthrose épaule ballante main dominante", "dominante main ballante épaule pseudarthrose", "pseudarthrose épaule", "épaule ballante", "ballante main"], rate: [60, 70], description: "Épaule ballante par résection large ou pertes de substance osseuse étendues. Barème officiel : 60-70%.", rateCriteria: { low: "Résection large avec mobilité conservée de l'omoplate, compensation fonctionnelle partielle.", high: "Perte de substance osseuse étendue, épaule complètement ballante, impotence fonctionnelle majeure." } },
+          { name: "Pseudarthrose (épaule ballante) (Main Non Dominante)", searchTerms: ["pseudarthrose épaule ballante main non dominante", "dominante non main ballante épaule pseudarthrose", "pseudarthrose épaule", "épaule ballante", "ballante main"], rate: [45, 60], description: "Épaule ballante par résection large ou pertes de substance osseuse étendues. Barème officiel : 45-60%.", rateCriteria: { low: "Résection large avec compensation fonctionnelle partielle.", high: "Perte de substance osseuse étendue, épaule complètement ballante." } },
           { name: "Luxation de l'épaule unique, réduite, sans séquelles", searchTerms: ["luxation l'épaule unique, réduite, sans séquelles", "séquelles sans réduite, unique, l'épaule luxation", "luxation l'épaule unique, réduite, séquelles", "luxation l'épaule", "l'épaule unique,"], rate: 0, description: "Luxation de l'épaule unique, réduite, n'ayant pas entraîné d'arthrite, de périarthrite scapulo-humérale, ni de limitation d'amplitude des mouvements du bras. Si séquelles : voir périarthrite scapulo-humérale." },
           { name: "Luxation récidivante de l'épaule", searchTerms: ["luxation récidivante l'épaule", "l'épaule récidivante luxation", "luxation récidivante", "récidivante l'épaule"], rate: 18, description: "Luxation récidivante de l'épaule sans précision de côte ou dominance." },
           { name: "Luxation récidivante de l'épaule (Main Dominante)", searchTerms: ["luxation récidivante l'épaule main dominante", "dominante main l'épaule récidivante luxation", "luxation récidivante", "récidivante l'épaule", "l'épaule main"], rate: [10, 30], rateCriteria: { low: "Luxations rares, peu d'appréhension.", medium: "Luxations fréquentes, appréhension limitant les activités.", high: "Instabilité majeure, luxations quasi-permanentes, arthrose." } },
@@ -1512,6 +1607,7 @@ const middleCategories: InjuryCategory[] = [
             { name: "Amputation du bras au tiers supérieur (Main Non Dominante)", searchTerms: ["amputation bras tiers supérieur main non dominante", "amputation supérieur tiers supérieur main non dominante", "dominante non main supérieur tiers bras amputation", "amputation bras", "bras tiers"], rate: [70, 75], rateCriteria: { low: "Moignon long.", high: "Moignon très court." } },
             { name: "Désarticulation de l'épaule (Main Dominante)", searchTerms: ["désarticulation l'épaule main dominante", "dominante main l'épaule désarticulation", "désarticulation l'épaule", "l'épaule main", "main dominante"], rate: [85, 90], description: "Désarticulation scapulo-humérale, amputation au niveau de l'épaule." },
             { name: "Désarticulation de l'épaule (Main Non Dominante)", searchTerms: ["désarticulation l'épaule main non dominante", "dominante non main l'épaule désarticulation", "désarticulation l'épaule", "l'épaule main", "main non"], rate: [75, 80], description: "Désarticulation scapulo-humérale, amputation au niveau de l'épaule." },
+            { name: "Pertes des deux membres supérieurs (quel qu'en soit le niveau)", searchTerms: ["pertes des deux membres supérieurs quel soit niveau", "perte bilatérale membres supérieurs", "amputation bilatérale membres supérieurs", "pertes deux bras", "perte membres supérieurs bilatérale"], rate: 100, description: "Perte bilatérale des deux membres supérieurs, quel que soit le niveau d'amputation (main, avant-bras, bras ou épaule). Invalidité totale." },
         ]
        },
        {
@@ -1528,6 +1624,8 @@ const middleCategories: InjuryCategory[] = [
             { name: "Rupture du biceps partielle (Main Non Dominante)", searchTerms: ["rupture biceps partielle main non dominante", "dominante non main partielle biceps rupture", "rupture biceps", "biceps partielle", "partielle main"], rate: [6, 12], rateCriteria: { low: "Déformation modérée, peu de gêne.", high: "Perte de force et gêne fonctionnelle." } },
             { name: "Rupture du biceps complète (Main Dominante)", searchTerms: ["rupture biceps complète main dominante", "dominante main complète biceps rupture", "rupture biceps", "biceps complète", "complète main"], rate: [15, 25], description: "Rupture totale d'un tendon du biceps (souvent le long chef), avec déformation marquée ('signe de Popeye') et perte de force significative.", rateCriteria: { low: "Perte de force modérée (environ 30%), bien compensée.", high: "Perte de force importante (>40%), invalidante pour les travaux de force." } },
             { name: "Rupture du biceps complète (Main Non Dominante)", searchTerms: ["rupture biceps complète main non dominante", "dominante non main complète biceps rupture", "rupture biceps", "biceps complète", "complète main"], rate: [12, 20], rateCriteria: { low: "Perte de force modérée.", high: "Perte de force importante et invalidante." } },
+            { name: "Rupture du triceps partielle (Main Dominante)", searchTerms: ["rupture triceps partielle main dominante", "dominante main partielle triceps rupture", "rupture triceps partielle", "triceps partielle", "désinsertion partielle triceps"], rate: [10, 15], description: "Désinsertion partielle du tendon du triceps avec perte de force en extension du coude.", rateCriteria: { low: "Perte de force modérée, extension possible contre résistance.", high: "Perte de force importante, difficulté à l'extension complète du coude." } },
+            { name: "Rupture du triceps partielle (Main Non Dominante)", searchTerms: ["rupture triceps partielle main non dominante", "dominante non main partielle triceps rupture", "rupture triceps partielle", "triceps partielle", "désinsertion partielle triceps"], rate: [8, 12], description: "Désinsertion partielle du tendon du triceps avec perte de force en extension du coude.", rateCriteria: { low: "Perte de force modérée, extension possible contre résistance.", high: "Perte de force importante, difficulté à l'extension complète du coude." } },
             { name: "Rupture du triceps totale (Main Dominante)", searchTerms: ["rupture triceps totale main dominante", "dominante main totale triceps rupture", "rupture triceps", "triceps totale", "totale main"], rate: [20, 30] },
             { name: "Rupture du triceps totale (Main Non Dominante)", searchTerms: ["rupture triceps totale main non dominante", "dominante non main totale triceps rupture", "rupture triceps", "triceps totale", "totale main"], rate: [15, 25] },
         ]
@@ -1561,6 +1659,9 @@ const middleCategories: InjuryCategory[] = [
           { name: "Cicatrices du coude entravant l'extension - à 90°", searchTerms: ["cicatrices coude entravant l'extension 90°", "90° l'extension entravant coude cicatrices", "cicatrices coude", "coude entravant", "entravant l'extension"], rate: [15, 20] },
           { name: "Cicatrices du coude entravant l'extension - à 45°", searchTerms: ["cicatrices coude entravant l'extension 45°", "45° l'extension entravant coude cicatrices", "cicatrices coude", "coude entravant", "entravant l'extension"], rate: [35, 40] },
           { name: "Cicatrices du coude entravant l'extension - en deçà de 45°", searchTerms: ["cicatrices coude entravant l'extension deçà 45°", "45° deçà l'extension entravant coude cicatrices", "cicatrices coude", "coude entravant", "entravant l'extension"], rate: [45, 50] },
+          { name: "Cicatrices du creux poplité entravant l'extension de la jambe", searchTerms: ["cicatrices creux poplité entravant extension jambe", "flexion genou cicatrice poplité", "bride rétractile poplité", "cicatrice arrière genou"], rate: [10, 60], description: "Brides cicatricielles du creux poplité limitant l'extension de la jambe (maintien en flexion). Barème officiel Chapitre XII : 10-60%.", rateCriteria: { low: "Flexion résiduelle légère (<30°), marche peu gênée, extension presque complète possible.", medium: "Flexion modérée (30-60°), marche avec boiterie, extension limitée, difficulté à la montée d'escaliers.", high: "Flexion sévère (>60°), extension impossible, jambe maintenue en flexion permanente, marche très difficile ou impossible." } },
+          { name: "Cicatrices de la plante du pied incurvant la pointe", searchTerms: ["cicatrices plante pied incurvant pointe", "rétraction plante pied", "bride plantaire griffe orteils", "cicatrice plantaire douloureuse"], rate: [10, 30], description: "Cicatrices rétractiles de la plante du pied entraînant une incurvation de la pointe (griffe des orteils, pied creux cicatriciel). Barème officiel Chapitre XII : 10-30%.", rateCriteria: { low: "Incurvation modérée, marche possible avec chaussure adaptée, douleurs occasionnelles.", medium: "Incurvation importante, griffe des orteils gênant le chaussage, douleurs fréquentes à l'appui.", high: "Incurvation sévère, pied creux cicatriciel majeur, chaussage très difficile, douleurs permanentes, marche limitée." } },
+          { name: "Cicatrices douloureuses et ulcérées (selon étendue et localisation)", searchTerms: ["cicatrices douloureuses ulcérées", "cicatrice douloureuse chronique", "ulcération cicatricielle", "cicatrice hyperalgique"], rate: [5, 25], description: "Cicatrices pathologiques avec douleurs chroniques et/ou ulcérations récidivantes. Barème officiel Chapitre XII : 5-25%.", rateCriteria: { low: "Cicatrice hypersensible, douleurs à la pression, pas d'ulcération.", medium: "Douleurs spontanées fréquentes, ulcérations occasionnelles nécessitant des soins réguliers.", high: "Douleurs permanentes invalidantes, ulcérations chroniques résistantes au traitement, retentissement majeur sur activités." } },
           { name: "Pseudarthrose coude - Mobile (coude ballant) (Main Dominante)", searchTerms: ["pseudarthrose coude mobile coude ballant main dominante", "dominante main ballant coude mobile coude pseudarthrose", "pseudarthrose coude", "coude mobile", "mobile coude"], rate: [40, 50] },
           { name: "Pseudarthrose coude - Mobile (coude ballant) (Main Non Dominante)", searchTerms: ["pseudarthrose coude mobile coude ballant main non dominante", "dominante non main ballant coude mobile coude pseudarthrose", "pseudarthrose coude", "coude mobile", "mobile coude"], rate: [30, 40] },
           { name: "Pseudarthrose coude - Avec ankylose (Main Dominante)", searchTerms: ["pseudarthrose coude avec ankylose main dominante", "dominante main ankylose avec coude pseudarthrose", "pseudarthrose coude ankylose main dominante", "pseudarthrose coude", "coude avec"], rate: [30, 45] },
@@ -1576,6 +1677,17 @@ const middleCategories: InjuryCategory[] = [
             { name: "Raideur du coude post-fracture", searchTerms: ["raideur coude post fracture", "fracture post coude raideur", "raideur coude", "coude post", "post fracture"], rate: [12, 22], description: "Séquelles de fracture avec raideur résiduelle et limitation pronosupination." },
             { name: "Raideur du coude - Pronosupination limitée", searchTerms: ["raideur coude pronosupination limitée", "limitée pronosupination coude raideur", "raideur coude", "coude pronosupination", "pronosupination limitée"], rate: [8, 15], description: "Flexion-extension préservées mais pronation/supination très réduites." },
             { name: "Raideur du coude - Limitation sévère", searchTerms: ["raideur coude limitation sévère", "raideur coude raideur sévère", "sévère limitation coude raideur", "raideur coude", "coude limitation"], rate: [18, 28], description: "Flexion ≤ 90° avec déficit extension important, limitation majeure." },
+            
+            // Raideurs spécifiques selon barème officiel (avec amplitudes précises)
+            { name: "Raideur du coude - Mouvements conservés vont de 110° à 35° (Main Dominante)", searchTerms: ["raideur coude mouvements conservés 110° 35° main dominante", "raideur coude amplitude 110 35 degrés dominante", "coude mouvements 110 35 dominante", "raideur coude 110 35"], rate: [8, 10], description: "Raideur articulaire du coude avec conservation d'une amplitude de mouvement de 110° à 35° (selon barème officiel).", rateCriteria: { low: "Amplitude fonctionnelle conservée 110°-35°.", high: "Gêne fonctionnelle malgré amplitude théorique." } },
+            { name: "Raideur du coude - Mouvements conservés vont de 110° à 35° (Main Non Dominante)", searchTerms: ["raideur coude mouvements conservés 110° 35° main non dominante", "raideur coude amplitude 110 35 degrés non dominante", "coude mouvements 110 35 non dominante", "raideur coude 110 35"], rate: [6, 8], description: "Raideur articulaire du coude avec conservation d'une amplitude de mouvement de 110° à 35° (selon barème officiel).", rateCriteria: { low: "Amplitude fonctionnelle conservée 110°-35°.", high: "Gêne fonctionnelle malgré amplitude théorique." } },
+            { name: "Raideur du coude - Mouvements conservés de 110° à 75° (Main Dominante)", searchTerms: ["raideur coude mouvements conservés 110° 75° main dominante", "raideur coude amplitude 110 75 degrés dominante", "coude mouvements 110 75 dominante", "raideur coude 110 75"], rate: [13, 15], description: "Raideur articulaire du coude avec conservation d'une amplitude de mouvement de 110° à 75° (selon barème officiel).", rateCriteria: { low: "Amplitude conservée 110°-75° avec adaptation.", high: "Limitation fonctionnelle importante." } },
+            { name: "Raideur du coude - Mouvements conservés de 110° à 75° (Main Non Dominante)", searchTerms: ["raideur coude mouvements conservés 110° 75° main non dominante", "raideur coude amplitude 110 75 degrés non dominante", "coude mouvements 110 75 non dominante", "raideur coude 110 75"], rate: [10, 12], description: "Raideur articulaire du coude avec conservation d'une amplitude de mouvement de 110° à 75° (selon barème officiel).", rateCriteria: { low: "Amplitude conservée 110°-75° avec adaptation.", high: "Limitation fonctionnelle importante." } },
+            { name: "Raideur du coude - Mouvements oscillent de 10° de part et d'autre de l'angle droit (Main Dominante)", searchTerms: ["raideur coude mouvements oscillent 10° part autre angle droit main dominante", "raideur coude oscillation 10 degrés angle droit dominante", "coude mouvements 10 angle droit dominante", "raideur coude oscillent angle droit"], rate: [18, 20], description: "Raideur importante du coude avec amplitude très réduite : les mouvements oscillent seulement de 10° de part et d'autre de l'angle droit (80°-100°).", rateCriteria: { low: "Position à angle droit avec oscillation 10°.", high: "Blocage quasi-complet autour de l'angle droit." } },
+            { name: "Raideur du coude - Mouvements oscillent de 10° de part et d'autre de l'angle droit (Main Non Dominante)", searchTerms: ["raideur coude mouvements oscillent 10° part autre angle droit main non dominante", "raideur coude oscillation 10 degrés angle droit non dominante", "coude mouvements 10 angle droit non dominante", "raideur coude oscillent angle droit"], rate: [14, 16], description: "Raideur importante du coude avec amplitude très réduite : les mouvements oscillent seulement de 10° de part et d'autre de l'angle droit (80°-100°).", rateCriteria: { low: "Position à angle droit avec oscillation 10°.", high: "Blocage quasi-complet autour de l'angle droit." } },
+            { name: "Raideur du coude - Mouvements vont de 180° à 110° (Main Dominante)", searchTerms: ["raideur coude mouvements 180° 110° main dominante", "raideur coude amplitude 180 110 degrés dominante", "coude mouvements 180 110 dominante", "raideur coude 180 110"], rate: [25, 30], description: "Raideur sévère du coude avec perte de la flexion complète : les mouvements sont limités entre 180° (extension) et 110° seulement.", rateCriteria: { low: "Extension conservée mais flexion très limitée (110°).", high: "Impossibilité de porter la main à la bouche, gêne majeure." } },
+            { name: "Raideur du coude - Mouvements vont de 180° à 110° (Main Non Dominante)", searchTerms: ["raideur coude mouvements 180° 110° main non dominante", "raideur coude amplitude 180 110 degrés non dominante", "coude mouvements 180 110 non dominante", "raideur coude 180 110"], rate: [20, 25], description: "Raideur sévère du coude avec perte de la flexion complète : les mouvements sont limités entre 180° (extension) et 110° seulement.", rateCriteria: { low: "Extension conservée mais flexion très limitée (110°).", high: "Impossibilité de porter la main à la bouche, gêne majeure." } },
+            
             { name: "Raideur du coude avec douleur", searchTerms: ["raideur coude avec douleur", "douleur avec coude raideur", "raideur coude douleur", "raideur coude", "coude avec"], rate: [12, 20], description: "Raideur articulaire avec composante douloureuse chronique." },
             { name: "Raideur + déficit force coude", searchTerms: ["raideur déficit force coude", "coude force déficit raideur", "raideur déficit", "déficit force", "force coude"], rate: [15, 25], description: "Raideur associée à diminution significative de la force de préhension." },
             { name: "Ankylose du coude en position vicieuse", searchTerms: ["ankylose coude position vicieuse", "vicieuse position coude ankylose", "ankylose coude", "coude position", "position vicieuse"], rate: [30, 45] },
@@ -1627,6 +1739,39 @@ const middleCategories: InjuryCategory[] = [
             { name: "Fracture des deux os de l'avant-bras - Cal vicieux avec limitation de la prono-supination (Main Non Dominante)", searchTerms: ["fracture des deux l'avant bras cal vicieux avec limitation prono supination main non dominante", "fracture des deux l'avant supérieur cal vicieux avec raideur prono supination main non dominante", "dominante non main supination prono limitation avec vicieux cal bras l'avant deux des fracture", "fracture deux l'avant bras cal vicieux limitation prono supination main non dominante", "fracture des"], rate: [8, 20], rateCriteria: { low: "Limitation légère.", high: "Blocage complet." } },
             { name: "Fracture des deux os de l'avant-bras - Cal vicieux avec impotence et troubles nerveux (Main Dominante)", searchTerms: ["fracture des deux l'avant bras cal vicieux avec impotence troubles nerveux main dominante", "fracture des deux l'avant supérieur cal vicieux avec impotence troubles nerf main dominante", "dominante main nerveux troubles impotence avec vicieux cal bras l'avant deux des fracture", "fracture deux l'avant bras cal vicieux impotence troubles nerveux main dominante", "fracture des"], rate: [30, 45] },
             { name: "Fracture des deux os de l'avant-bras - Cal vicieux avec impotence et troubles nerveux (Main Non Dominante)", searchTerms: ["fracture des deux l'avant bras cal vicieux avec impotence troubles nerveux main non dominante", "fracture des deux l'avant supérieur cal vicieux avec impotence troubles nerf main non dominante", "dominante non main nerveux troubles impotence avec vicieux cal bras l'avant deux des fracture", "fracture deux l'avant bras cal vicieux impotence troubles nerveux main non dominante", "fracture des"], rate: [25, 35] },
+            
+            // Fractures selon reliquats (barème officiel)
+            { name: "Fractures diaphysaires simultanées du cubitus et du radius selon reliquats (Main Dominante)", searchTerms: ["fractures diaphysaires simultanées cubitus radius selon reliquats main dominante", "fracture simultanée cubitus radius main dominante", "fractures diaphysaires cubitus radius dominante", "fractures simultanées avant bras main dominante"], rate: [5, 35], description: "Fractures diaphysaires simultanées des deux os de l'avant-bras selon l'importance des reliquats fonctionnels.", rateCriteria: { low: "Consolidation satisfaisante, reliquats minimes.", high: "Cal vicieux important avec impotence fonctionnelle majeure." } },
+            { name: "Fractures diaphysaires simultanées du cubitus et du radius selon reliquats (Main Non Dominante)", searchTerms: ["fractures diaphysaires simultanées cubitus radius selon reliquats main non dominante", "fracture simultanée cubitus radius main non dominante", "fractures diaphysaires cubitus radius non dominante", "fractures simultanées avant bras main non dominante"], rate: [4, 28], description: "Fractures diaphysaires simultanées des deux os de l'avant-bras selon l'importance des reliquats fonctionnels.", rateCriteria: { low: "Consolidation satisfaisante, reliquats minimes.", high: "Cal vicieux important avec impotence fonctionnelle majeure." } },
+            { name: "Fracture du corps du radius selon reliquats (Main Dominante)", searchTerms: ["fracture corps radius selon reliquats main dominante", "fracture corps radius dominante", "fracture diaphysaire radius reliquats", "fracture radius selon reliquats"], rate: [3, 20], description: "Fracture du corps du radius selon l'importance des reliquats fonctionnels (prono-supination, fonction des doigts).", rateCriteria: { low: "Consolidation satisfaisante, reliquats fonctionnels minimes.", high: "Cal vicieux avec limitation importante de la prono-supination et troubles fonctionnels." } },
+            { name: "Fracture du corps du radius selon reliquats (Main Non Dominante)", searchTerms: ["fracture corps radius selon reliquats main non dominante", "fracture corps radius non dominante", "fracture diaphysaire radius reliquats", "fracture radius selon reliquats"], rate: [2, 15], description: "Fracture du corps du radius selon l'importance des reliquats fonctionnels (prono-supination, fonction des doigts).", rateCriteria: { low: "Consolidation satisfaisante, reliquats fonctionnels minimes.", high: "Cal vicieux avec limitation importante de la prono-supination et troubles fonctionnels." } },
+            { name: "Fracture du corps du cubitus selon reliquats (Main Dominante)", searchTerms: ["fracture corps cubitus selon reliquats main dominante", "fracture corps cubitus dominante", "fracture diaphysaire cubitus reliquats", "fracture cubitus selon reliquats"], rate: [3, 18], description: "Fracture du corps du cubitus selon l'importance des reliquats fonctionnels.", rateCriteria: { low: "Consolidation satisfaisante, reliquats fonctionnels minimes.", high: "Cal vicieux avec limitation importante de la prono-supination." } },
+            { name: "Fracture du corps du cubitus selon reliquats (Main Non Dominante)", searchTerms: ["fracture corps cubitus selon reliquats main non dominante", "fracture corps cubitus non dominante", "fracture diaphysaire cubitus reliquats", "fracture cubitus selon reliquats"], rate: [2, 14], description: "Fracture du corps du cubitus selon l'importance des reliquats fonctionnels.", rateCriteria: { low: "Consolidation satisfaisante, reliquats fonctionnels minimes.", high: "Cal vicieux avec limitation importante de la prono-supination." } },
+            { name: "Fracture de l'extrémité inférieure du radius selon reliquats (Main Dominante)", searchTerms: ["fracture extrémité inférieure radius selon reliquats main dominante", "fracture extrémité inférieure radius dominante", "fracture poignet radius reliquats", "fracture distale radius selon reliquats"], rate: [3, 20], description: "Fracture de l'extrémité inférieure du radius selon l'importance des reliquats fonctionnels (raideur poignet, troubles prono-supination).", rateCriteria: { low: "Consolidation satisfaisante, mobilité conservée.", high: "Cal vicieux avec raideur importante du poignet et limitation de la prono-supination." } },
+            { name: "Fracture de l'extrémité inférieure du radius selon reliquats (Main Non Dominante)", searchTerms: ["fracture extrémité inférieure radius selon reliquats main non dominante", "fracture extrémité inférieure radius non dominante", "fracture poignet radius reliquats", "fracture distale radius selon reliquats"], rate: [2, 15], description: "Fracture de l'extrémité inférieure du radius selon l'importance des reliquats fonctionnels (raideur poignet, troubles prono-supination).", rateCriteria: { low: "Consolidation satisfaisante, mobilité conservée.", high: "Cal vicieux avec raideur importante du poignet et limitation de la prono-supination." } },
+
+            // Inflexion latérale ou antéro-postérieure
+            { name: "Fracture des deux os de l'avant-bras - Inflexion latérale ou antéro-postérieure avec gêne (Main Dominante)", searchTerms: ["fracture des deux avant bras inflexion latérale gêne main dominante", "fracture avant bras inflexion antéro postérieure dominante", "inflexion latérale avant bras", "déviation avant bras fracture"], rate: [5, 15], description: "Inflexion latérale ou antéro-postérieure de l'avant-bras consécutive à une fracture, avec gêne fonctionnelle.", rateCriteria: { low: "Inflexion modérée, gêne minime.", high: "Inflexion importante avec gêne fonctionnelle significative." } },
+            { name: "Fracture des deux os de l'avant-bras - Inflexion latérale ou antéro-postérieure avec gêne (Main Non Dominante)", searchTerms: ["fracture des deux avant bras inflexion latérale gêne main non dominante", "fracture avant bras inflexion antéro postérieure non dominante", "inflexion latérale avant bras", "déviation avant bras fracture"], rate: [4, 12], description: "Inflexion latérale ou antéro-postérieure de l'avant-bras consécutive à une fracture, avec gêne fonctionnelle.", rateCriteria: { low: "Inflexion modérée, gêne minime.", high: "Inflexion importante avec gêne fonctionnelle significative." } },
+
+            // Limitation des mouvements de torsion
+            { name: "Avant-bras - Pronation conservée, supination abolie (Main Dominante)", searchTerms: ["avant bras pronation conservée supination abolie main dominante", "pronation conservée supination abolie dominante", "limitation supination avant bras", "supination abolie"], rate: [5, 10], description: "Limitation des mouvements de torsion de l'avant-bras : pronation conservée mais supination abolie.", rateCriteria: { low: "Supination presque abolie avec pronation normale.", high: "Supination totalement abolie." } },
+            { name: "Avant-bras - Pronation conservée, supination abolie (Main Non Dominante)", searchTerms: ["avant bras pronation conservée supination abolie main non dominante", "pronation conservée supination abolie non dominante", "limitation supination avant bras", "supination abolie"], rate: [4, 8], description: "Limitation des mouvements de torsion de l'avant-bras : pronation conservée mais supination abolie.", rateCriteria: { low: "Supination presque abolie avec pronation normale.", high: "Supination totalement abolie." } },
+            { name: "Avant-bras - Pronation abolie, supination conservée (Main Dominante)", searchTerms: ["avant bras pronation abolie supination conservée main dominante", "pronation abolie supination conservée dominante", "limitation pronation avant bras", "pronation abolie"], rate: [10, 15], description: "Limitation des mouvements de torsion de l'avant-bras : supination conservée mais pronation abolie.", rateCriteria: { low: "Pronation presque abolie avec supination normale.", high: "Pronation totalement abolie." } },
+            { name: "Avant-bras - Pronation abolie, supination conservée (Main Non Dominante)", searchTerms: ["avant bras pronation abolie supination conservée main non dominante", "pronation abolie supination conservée non dominante", "limitation pronation avant bras", "pronation abolie"], rate: [8, 12], description: "Limitation des mouvements de torsion de l'avant-bras : supination conservée mais pronation abolie.", rateCriteria: { low: "Pronation presque abolie avec supination normale.", high: "Pronation totalement abolie." } },
+
+            // Suppression complète des mouvements de torsion
+            { name: "Avant-bras - Suppression des mouvements de torsion avec immobilisation en demi-pronation (Main Dominante)", searchTerms: ["avant bras suppression mouvements torsion immobilisation demi pronation main dominante", "suppression prono supination demi pronation dominante", "immobilisation demi pronation avant bras", "blocage torsion demi pronation"], rate: [13, 15], description: "Suppression complète des mouvements de torsion (prono-supination) avec immobilisation de l'avant-bras en position de demi-pronation.", rateCriteria: { low: "Immobilisation en demi-pronation avec adaptation fonctionnelle.", high: "Immobilisation en demi-pronation avec gêne fonctionnelle importante." } },
+            { name: "Avant-bras - Suppression des mouvements de torsion avec immobilisation en demi-pronation (Main Non Dominante)", searchTerms: ["avant bras suppression mouvements torsion immobilisation demi pronation main non dominante", "suppression prono supination demi pronation non dominante", "immobilisation demi pronation avant bras", "blocage torsion demi pronation"], rate: [10, 12], description: "Suppression complète des mouvements de torsion (prono-supination) avec immobilisation de l'avant-bras en position de demi-pronation.", rateCriteria: { low: "Immobilisation en demi-pronation avec adaptation fonctionnelle.", high: "Immobilisation en demi-pronation avec gêne fonctionnelle importante." } },
+            { name: "Avant-bras - Suppression des mouvements de torsion avec immobilisation en pronation complète (Main Dominante)", searchTerms: ["avant bras suppression mouvements torsion immobilisation pronation complète main dominante", "suppression prono supination pronation complète dominante", "immobilisation pronation complète avant bras", "blocage torsion pronation"], rate: [23, 25], description: "Suppression complète des mouvements de torsion (prono-supination) avec immobilisation de l'avant-bras en position de pronation complète.", rateCriteria: { low: "Immobilisation en pronation complète avec adaptation fonctionnelle partielle.", high: "Immobilisation en pronation complète avec gêne fonctionnelle majeure." } },
+            { name: "Avant-bras - Suppression des mouvements de torsion avec immobilisation en pronation complète (Main Non Dominante)", searchTerms: ["avant bras suppression mouvements torsion immobilisation pronation complète main non dominante", "suppression prono supination pronation complète non dominante", "immobilisation pronation complète avant bras", "blocage torsion pronation"], rate: [18, 20], description: "Suppression complète des mouvements de torsion (prono-supination) avec immobilisation de l'avant-bras en position de pronation complète.", rateCriteria: { low: "Immobilisation en pronation complète avec adaptation fonctionnelle partielle.", high: "Immobilisation en pronation complète avec gêne fonctionnelle majeure." } },
+            { name: "Avant-bras - Suppression des mouvements de torsion avec immobilisation en supination complète (Main Dominante)", searchTerms: ["avant bras suppression mouvements torsion immobilisation supination complète main dominante", "suppression prono supination supination complète dominante", "immobilisation supination complète avant bras", "blocage torsion supination"], rate: [35, 40], description: "Suppression complète des mouvements de torsion (prono-supination) avec immobilisation de l'avant-bras en position de supination complète (position la plus invalidante).", rateCriteria: { low: "Immobilisation en supination complète avec adaptation fonctionnelle partielle.", high: "Immobilisation en supination complète avec impossibilité d'adaptation, gêne majeure dans les actes de la vie quotidienne." } },
+            { name: "Avant-bras - Suppression des mouvements de torsion avec immobilisation en supination complète (Main Non Dominante)", searchTerms: ["avant bras suppression mouvements torsion immobilisation supination complète main non dominante", "suppression prono supination supination complète non dominante", "immobilisation supination complète avant bras", "blocage torsion supination"], rate: [28, 32], description: "Suppression complète des mouvements de torsion (prono-supination) avec immobilisation de l'avant-bras en position de supination complète (position la plus invalidante).", rateCriteria: { low: "Immobilisation en supination complète avec adaptation fonctionnelle partielle.", high: "Immobilisation en supination complète avec impossibilité d'adaptation, gêne majeure dans les actes de la vie quotidienne." } },
+
+            // Rétraction ischémique de Volkmann
+            { name: "Rétraction ischémique de Volkmann de l'avant-bras (Main Dominante)", searchTerms: ["rétraction ischémique volkmann avant bras main dominante", "syndrome volkmann main dominante", "rétraction volkmann dominante", "ischémie volkmann avant bras"], rate: [40, 60], description: "Rétraction ischémique de Volkmann : syndrome séquellaire grave consécutif à une ischémie musculaire aiguë de l'avant-bras, entraînant une rétraction des fléchisseurs et une impotence fonctionnelle majeure.", rateCriteria: { low: "Rétraction modérée avec conservation partielle de la fonction.", high: "Rétraction sévère avec impotence fonctionnelle majeure, main en griffe." } },
+            { name: "Rétraction ischémique de Volkmann de l'avant-bras (Main Non Dominante)", searchTerms: ["rétraction ischémique volkmann avant bras main non dominante", "syndrome volkmann main non dominante", "rétraction volkmann non dominante", "ischémie volkmann avant bras"], rate: [35, 50], description: "Rétraction ischémique de Volkmann : syndrome séquellaire grave consécutif à une ischémie musculaire aiguë de l'avant-bras, entraînant une rétraction des fléchisseurs et une impotence fonctionnelle majeure.", rateCriteria: { low: "Rétraction modérée avec conservation partielle de la fonction.", high: "Rétraction sévère avec impotence fonctionnelle majeure, main en griffe." } },
+
             { name: "Fracture diaphysaire du radius (Main Dominante)", searchTerms: ["fracture diaphysaire radius main dominante", "dominante main radius diaphysaire fracture", "fracture diaphysaire", "diaphysaire radius", "radius main"], rate: [3, 15], description: "Fracture de la diaphyse radiale. Séquelles selon retentissement sur la prono-supination et la fonction des doigts.", rateCriteria: { low: "Consolidation satisfaisante, limitation minime prono-supination.", high: "Cal vicieux avec limitation importante prono-supination et troubles fonctionnels doigts." } },
             { name: "Fracture diaphysaire du radius (Main Non Dominante)", searchTerms: ["fracture diaphysaire radius main non dominante", "dominante non main radius diaphysaire fracture", "fracture diaphysaire", "diaphysaire radius", "radius main"], rate: [2, 12], description: "Fracture de la diaphyse radiale. Séquelles selon retentissement sur la prono-supination et la fonction des doigts.", rateCriteria: { low: "Consolidation satisfaisante, limitation minime prono-supination.", high: "Cal vicieux avec limitation importante prono-supination et troubles fonctionnels doigts." } },
             { name: "Fracture de l'extrémité supérieure du radius (cupule radiale) (Main Dominante)", searchTerms: ["fracture l'extrémité supérieure radius cupule radiale main dominante", "dominante main radiale cupule radius supérieure l'extrémité fracture", "fracture l'extrémité", "l'extrémité supérieure", "supérieure radius"], rate: [10, 20], description: "Fracture parcellaire de la cupule radiale avec limitation de la prono-supination et gêne de la flexion-extension antibrachiale (arthropathie du coude secondaire à la lésion osseuse).", rateCriteria: { low: "Limitation modérée prono-supination et flexion-extension coude.", high: "Arthropathie sévère avec raideur importante et douleurs." } },
@@ -1757,8 +1902,19 @@ const middleCategories: InjuryCategory[] = [
       {
         name: "Main - Amputations",
         injuries: [
-            { name: "Perte totale de la main (Main Dominante)", searchTerms: ["perte totale main main dominante", "amputation totale main main dominante", "dominante main main totale perte", "perte totale", "totale main"], rate: 70, description: "Perte totale par désarticulation du poignet, des cinq métacarpiens, amputation intra-métacarpienne, ou ablation pouce et quatre doigts. Barème officiel." },
-            { name: "Perte totale de la main (Main Non Dominante)", searchTerms: ["perte totale main main non dominante", "amputation totale main main non dominante", "dominante non main main totale perte", "perte totale", "totale main"], rate: 65, description: "Perte totale par désarticulation du poignet, des cinq métacarpiens, amputation intra-métacarpienne, ou ablation pouce et quatre doigts. Barème officiel." },
+            { name: "Perte totale de la main (Main Dominante)", searchTerms: ["perte totale main main dominante", "amputation totale main main dominante", "dominante main main totale perte", "perte totale", "totale main"], rate: [68, 70], description: "Perte totale par désarticulation du poignet, des cinq métacarpiens, amputation intra-métacarpienne, ou ablation pouce et quatre doigts. Barème officiel." },
+            { name: "Perte totale de la main (Main Non Dominante)", searchTerms: ["perte totale main main non dominante", "amputation totale main main non dominante", "dominante non main main totale perte", "perte totale", "totale main"], rate: [58, 60], description: "Perte totale par désarticulation du poignet, des cinq métacarpiens, amputation intra-métacarpienne, ou ablation pouce et quatre doigts. Barème officiel." },
+            { name: "Perte totale de la main - Par désarticulation du poignet (Main Dominante)", searchTerms: ["perte totale main par désarticulation poignet main dominante", "amputation totale main par désarticulation poignet main dominante", "dominante main poignet désarticulation par main totale perte", "perte totale main désarticulation poignet main dominante", "perte totale"], rate: [68, 70], description: "Perte totale de la main par désarticulation radio-carpienne (au niveau du poignet). Barème officiel : 68-70% côté dominant, 58-60% côté non dominant." },
+            { name: "Perte totale de la main - Par désarticulation du poignet (Main Non Dominante)", searchTerms: ["perte totale main par désarticulation poignet main non dominante", "amputation totale main par désarticulation poignet main non dominante", "dominante non main poignet désarticulation par main totale perte", "perte totale main désarticulation poignet main non dominante", "perte totale"], rate: [58, 60], description: "Perte totale de la main par désarticulation radio-carpienne (au niveau du poignet)." },
+            { name: "Perte totale de la main - Par amputation très basse de l'avant-bras (Main Dominante)", searchTerms: ["perte totale main par amputation très basse l'avant bras main dominante", "perte totale main par amputation très basse l'avant supérieur main dominante", "dominante main bras l'avant basse très amputation par main totale perte", "perte totale main amputation très basse l'avant bras main dominante", "perte totale"], rate: [68, 70], description: "Perte totale de la main par amputation très basse de l'avant-bras (équivalent fonctionnel à la désarticulation du poignet). Barème officiel." },
+            { name: "Perte totale de la main - Par amputation très basse de l'avant-bras (Main Non Dominante)", searchTerms: ["perte totale main par amputation très basse l'avant bras main non dominante", "perte totale main par amputation très basse l'avant supérieur main non dominante", "dominante non main bras l'avant basse très amputation par main totale perte", "perte totale main amputation très basse l'avant bras main non dominante", "perte totale"], rate: [58, 60], description: "Perte totale de la main par amputation très basse de l'avant-bras (équivalent fonctionnel à la désarticulation du poignet)." },
+            { name: "Perte totale de la main - Par désarticulation des cinq métacarpiens (Main Dominante)", searchTerms: ["perte totale main par désarticulation des cinq métacarpiens main dominante", "amputation totale main par désarticulation des cinq métacarpiens main dominante", "dominante main métacarpiens cinq des désarticulation par main totale perte", "perte totale main désarticulation cinq métacarpiens main dominante", "perte totale"], rate: [68, 70], description: "Perte totale de la main par désarticulation des cinq métacarpiens au niveau carpo-métacarpien. Main réduite au carpe. Barème officiel." },
+            { name: "Perte totale de la main - Par désarticulation des cinq métacarpiens (Main Non Dominante)", searchTerms: ["perte totale main par désarticulation des cinq métacarpiens main non dominante", "amputation totale main par désarticulation des cinq métacarpiens main non dominante", "dominante non main métacarpiens cinq des désarticulation par main totale perte", "perte totale main désarticulation cinq métacarpiens main non dominante", "perte totale"], rate: [58, 60], description: "Perte totale de la main par désarticulation des cinq métacarpiens. Main réduite au carpe." },
+            { name: "Perte totale de la main - Par amputation intra-métacarpienne (Main Dominante)", searchTerms: ["perte totale main par amputation intra métacarpienne main dominante", "amputation totale main par amputation intra métacarpienne main dominante", "dominante main métacarpienne intra amputation par main totale perte", "perte totale main amputation intra métacarpienne main dominante", "perte totale"], rate: [68, 70], description: "Perte totale de la main par amputation au niveau des métacarpiens (entre leur base et leur tête). Segments métacarpiens résiduels sans aucun doigt. Barème officiel." },
+            { name: "Perte totale de la main - Par amputation intra-métacarpienne (Main Non Dominante)", searchTerms: ["perte totale main par amputation intra métacarpienne main non dominante", "amputation totale main par amputation intra métacarpienne main non dominante", "dominante non main métacarpienne intra amputation par main totale perte", "perte totale main amputation intra métacarpienne main non dominante", "perte totale"], rate: [58, 60], description: "Perte totale de la main par amputation au niveau des métacarpiens. Segments métacarpiens résiduels sans doigts." },
+            { name: "Perte totale de la main - Par ablation du pouce et des quatre doigts (Main Dominante)", searchTerms: ["perte totale main par ablation pouce des quatre doigts main dominante", "amputation totale main par ablation pouce des quatre doigts main dominante", "dominante main doigts quatre des pouce ablation par main totale perte", "perte totale main ablation pouce quatre doigts main dominante", "perte totale"], rate: [68, 70], description: "Perte totale de la main par ablation du pouce et des quatre autres doigts, quelle que soit le niveau d'amputation. Main réduite à la palette métacarpienne sans aucune fonction de préhension. Barème officiel." },
+            { name: "Perte totale de la main - Par ablation du pouce et des quatre doigts (Main Non Dominante)", searchTerms: ["perte totale main par ablation pouce des quatre doigts main non dominante", "amputation totale main par ablation pouce des quatre doigts main non dominante", "dominante non main doigts quatre des pouce ablation par main totale perte", "perte totale main ablation pouce quatre doigts main non dominante", "perte totale"], rate: [58, 60], description: "Perte totale de la main par ablation du pouce et des quatre doigts. Main réduite à la palette métacarpienne." },
+            { name: "Perte des deux mains (bilatérale)", searchTerms: ["perte des deux mains bilatérale", "amputation des deux mains bilatérale", "bilatérale mains deux des perte", "perte deux mains", "deux mains"], rate: 100, description: "Perte des deux mains, quel qu'en soit le niveau (désarticulation des poignets, amputation intra-métacarpienne, ablation des deux pouces et de tous les doigts aux deux mains). Perte totale de la préhension et de l'autonomie manuelle. Barème officiel : 100%." },
             { name: "Perte de l'usage de la main - Perte complète tous doigts + poignet ankylosé (Main Dominante)", searchTerms: ["perte l'usage main perte complète tous doigts poignet ankylosé main dominante", "amputation l'usage main amputation complète tous doigts poignet ankylosé main dominante", "dominante main ankylosé poignet doigts tous complète perte main l'usage perte", "perte l'usage", "l'usage main"], rate: 70, description: "Main réduite à la palette métacarpienne avec ankylose du poignet." },
             { name: "Perte de l'usage de la main - Perte complète tous doigts + poignet ankylosé (Main Non Dominante)", searchTerms: ["perte l'usage main perte complète tous doigts poignet ankylosé main non dominante", "amputation l'usage main amputation complète tous doigts poignet ankylosé main non dominante", "dominante non main ankylosé poignet doigts tous complète perte main l'usage perte", "perte l'usage", "l'usage main"], rate: 65, description: "Main réduite à la palette métacarpienne avec ankylose du poignet." },
             { name: "Perte de l'usage de la main - Immobilisation tous doigts en extension (Main Dominante)", searchTerms: ["perte l'usage main immobilisation tous doigts extension main dominante", "amputation l'usage main immobilisation tous doigts extension main dominante", "dominante main extension doigts tous immobilisation main l'usage perte", "perte l'usage", "l'usage main"], rate: 70, description: "Tous les doigts immobilisés en extension, quel que soit l'état du poignet." },
@@ -1856,6 +2012,21 @@ const middleCategories: InjuryCategory[] = [
         ]
       },
       {
+        name: "Main - Métacarpe",
+        injuries: [
+            { name: "Fracture métacarpienne - Cal plus ou moins difforme, saillant, gêne motrice doigts (Main Dominante)", searchTerms: ["fracture métacarpienne cal difforme, saillant, gêne motrice doigts main dominante", "dominante main doigts motrice gêne saillant, difforme, cal métacarpienne fracture", "fracture métacarpienne cal difforme saillant gêne motrice doigts main dominante", "fracture métacarpienne", "métacarpienne cal"], rate: [5, 15], description: "Cal plus ou moins difforme et saillant avec gêne motrice des doigts correspondants. Séquelles de fracture métacarpienne selon l'importance du cal vicieux et du retentissement fonctionnel sur les doigts.", rateCriteria: { low: "Cal légèrement saillant, gêne motrice minime des doigts.", medium: "Cal saillant, gêne modérée de la mobilité digitale.", high: "Cal très difforme, gêne importante de la motricité des doigts adjacents." } },
+            { name: "Fracture métacarpienne - Cal difforme, gêne motrice (Main Non Dominante)", searchTerms: ["fracture métacarpienne cal difforme, gêne motrice main non dominante", "dominante non main motrice gêne difforme, cal métacarpienne fracture", "fracture métacarpienne cal difforme gêne motrice main non dominante", "fracture métacarpienne", "métacarpienne cal"], rate: [4, 12], description: "Cal plus ou moins difforme avec gêne motrice des doigts correspondants.", rateCriteria: { low: "Cal légèrement saillant, gêne minime.", medium: "Cal saillant, gêne modérée.", high: "Cal très difforme, gêne importante." } },
+            { name: "Fracture métacarpienne avec perte de substance osseuse, déviation main, gêne motrice importante (Main Dominante)", searchTerms: ["fracture métacarpienne avec perte substance osseuse, déviation main, gêne motrice importante main dominante", "fracture métacarpienne avec amputation substance osseuse, déviation main, gêne motrice importante main dominante", "dominante main importante motrice gêne main, déviation osseuse, substance perte avec métacarpienne fracture", "fracture métacarpienne perte substance osseuse déviation main gêne motrice importante main dominante", "fracture métacarpienne"], rate: [10, 20], description: "Fractures avec perte de substance osseuse sur l'un ou l'autre bord de la main, entraînant une déviation secondaire de la main, un écartement ou une gêne motrice importante des doigts. Séquelles graves compromettant la fonction de préhension.", rateCriteria: { low: "Perte de substance modérée, déviation légère, gêne motrice modérée.", medium: "Perte de substance importante, déviation notable, gêne motrice marquée.", high: "Perte de substance majeure, déviation sévère, gêne motrice très importante avec écartement des doigts." } },
+            { name: "Fracture métacarpienne avec perte de substance osseuse, déviation main (Main Non Dominante)", searchTerms: ["fracture métacarpienne avec perte substance osseuse, déviation main main non dominante", "fracture métacarpienne avec amputation substance osseuse, déviation main main non dominante", "dominante non main main déviation osseuse, substance perte avec métacarpienne fracture", "fracture métacarpienne perte substance osseuse déviation main main non dominante", "fracture métacarpienne"], rate: [8, 15], description: "Fractures avec perte de substance osseuse entraînant déviation de la main et gêne motrice des doigts.", rateCriteria: { low: "Perte modérée, déviation légère.", medium: "Perte importante, déviation notable.", high: "Perte majeure, déviation sévère." } },
+            { name: "Fracture de Bennett du pouce (Main Dominante)", searchTerms: ["fracture bennett pouce main dominante", "dominante main pouce bennett fracture", "fracture bennett", "bennett pouce", "pouce main"], rate: [8, 15], description: "Fracture-luxation de la base du premier métacarpien (pouce) avec subluxation trapézo-métacarpienne. Séquelles fonctionnelles variables selon qualité de la réduction et consolidation.", rateCriteria: { low: "Bonne réduction, consolidation satisfaisante, mobilité du pouce quasi-normale avec gêne minime.", medium: "Consolidation avec subluxation résiduelle, limitation modérée de la mobilité du pouce, douleurs à l'effort.", high: "Cal vicieux avec arthrose trapézo-métacarpienne secondaire, limitation importante de la mobilité et de la force du pouce, douleurs fréquentes." } },
+            { name: "Fracture de Bennett du pouce (Main Non Dominante)", searchTerms: ["fracture bennett pouce main non dominante", "dominante non main pouce bennett fracture", "fracture bennett", "bennett pouce", "pouce main"], rate: [6, 12], description: "Fracture-luxation de la base du premier métacarpien (pouce) avec subluxation trapézo-métacarpienne. Séquelles fonctionnelles variables.", rateCriteria: { low: "Bonne réduction, mobilité quasi-normale.", medium: "Consolidation avec subluxation résiduelle, limitation modérée.", high: "Cal vicieux avec arthrose secondaire, limitation importante." } },
+            { name: "Rétraction de l'aponévrose palmaire (exceptionnellement traumatique) (Main Dominante)", searchTerms: ["rétraction l'aponévrose palmaire exceptionnellement traumatique main dominante", "dominante main traumatique exceptionnellement palmaire l'aponévrose rétraction", "rétraction l'aponévrose palmaire traumatique main dominante", "rétraction l'aponévrose", "l'aponévrose palmaire"], rate: [8, 20], description: "Rétraction de l'aponévrose palmaire (maladie de Dupuytren post-traumatique, exceptionnelle en contexte purement traumatique). Entraîne une flexion progressive et irréductible des doigts, gênant l'extension complète.", rateCriteria: { low: "Rétraction débutante, flexion modérée d'un doigt, extension possible à 20-30° du plan.", medium: "Rétraction moyenne, flexion de 1-2 doigts, extension limitée à 45-60°, gêne fonctionnelle notable.", high: "Rétraction sévère, flexion de plusieurs doigts, extension impossible, main en griffe, préhension très compromise." } },
+            { name: "Rétraction de l'aponévrose palmaire (Main Non Dominante)", searchTerms: ["rétraction l'aponévrose palmaire main non dominante", "dominante non main palmaire l'aponévrose rétraction", "rétraction l'aponévrose palmaire main non dominante", "rétraction l'aponévrose", "l'aponévrose palmaire"], rate: [6, 15], description: "Rétraction de l'aponévrose palmaire (Dupuytren post-traumatique, exceptionnel). Entraîne flexion progressive des doigts.", rateCriteria: { low: "Rétraction débutante, flexion modérée.", medium: "Rétraction moyenne, flexion de 1-2 doigts.", high: "Rétraction sévère, main en griffe." } },
+            { name: "Œdème dur traumatique de la main (Main Dominante)", searchTerms: ["œdème dur traumatique main main dominante", "dominante main main traumatique dur œdème", "œdème dur", "dur traumatique", "traumatique main"], rate: [8, 10], description: "Œdème chronique induré de la main d'origine traumatique (séquelle d'algodystrophie, troubles trophiques), entraînant raideur, limitation fonctionnelle et gêne esthétique.", rateCriteria: { low: "Œdème modéré localisé, limitation fonctionnelle minime.", high: "Œdème important diffus, main empâtée, limitation majeure de la mobilité digitale et de la préhension." } },
+            { name: "Œdème dur traumatique de la main (Main Non Dominante)", searchTerms: ["œdème dur traumatique main main non dominante", "dominante non main main traumatique dur œdème", "œdème dur", "dur traumatique", "traumatique main"], rate: [6, 8], description: "Œdème chronique induré de la main d'origine traumatique (algodystrophie, troubles trophiques).", rateCriteria: { low: "Œdème modéré, limitation minime.", high: "Œdème important diffus, limitation majeure." } },
+        ]
+      },
+      {
         name: "Doigts - Lésions Tendineuses",
         injuries: [
             { name: "Section des tendons fléchisseurs doigt long", searchTerms: ["section des tendons fléchisseurs doigt long", "long doigt fléchisseurs tendons des section", "section tendons fléchisseurs doigt long", "section des", "des tendons"], rate: [8, 12] },
@@ -1873,8 +2044,11 @@ const middleCategories: InjuryCategory[] = [
             { name: "Ablation 2 phalanges + tête métacarpien du pouce (Main Dominante)", searchTerms: ["ablation phalanges tête métacarpien pouce main dominante", "amputation phalanges tête métacarpien pouce main dominante", "dominante main pouce métacarpien tête phalanges ablation", "ablation phalanges", "phalanges tête"], rate: [25, 30] },
             { name: "Ablation 2 phalanges + métacarpien entier du pouce (Main Dominante)", searchTerms: ["ablation phalanges métacarpien entier pouce main dominante", "amputation phalanges métacarpien entier pouce main dominante", "dominante main pouce entier métacarpien phalanges ablation", "ablation phalanges", "phalanges métacarpien"], rate: [30, 35] },
             { name: "Ankylose carpo-métacarpienne du pouce (Main Dominante)", searchTerms: ["ankylose carpo métacarpienne pouce main dominante", "dominante main pouce métacarpienne carpo ankylose", "ankylose carpo", "carpo métacarpienne", "métacarpienne pouce"], rate: [15, 20] },
-            { name: "Ankylose métacarpo-phalangienne du pouce (Main Dominante)", searchTerms: ["ankylose métacarpo phalangienne pouce main dominante", "dominante main pouce phalangienne métacarpo ankylose", "ankylose métacarpo", "métacarpo phalangienne", "phalangienne pouce"], rate: 10 },
-            { name: "Ankylose inter-phalangienne du pouce (Main Dominante)", searchTerms: ["ankylose inter phalangienne pouce main dominante", "dominante main pouce phalangienne inter ankylose", "ankylose inter", "inter phalangienne", "phalangienne pouce"], rate: 5 },
+            { name: "Ankylose métacarpo-phalangienne du pouce (Main Dominante)", searchTerms: ["ankylose métacarpo phalangienne pouce main dominante", "dominante main pouce phalangienne métacarpo ankylose", "ankylose métacarpo", "métacarpo phalangienne", "phalangienne pouce"], rate: [8, 10] },
+            { name: "Ankylose inter-phalangienne du pouce (Main Dominante)", searchTerms: ["ankylose inter phalangienne pouce main dominante", "dominante main pouce phalangienne inter ankylose", "ankylose inter", "inter phalangienne", "phalangienne pouce"], rate: [5, 6] },
+            { name: "Ankylose métacarpo-phalangienne et inter-phalangienne du pouce (Main Dominante)", searchTerms: ["ankylose métacarpo phalangienne inter phalangienne pouce main dominante", "dominante main pouce phalangienne inter phalangienne métacarpo ankylose", "ankylose métacarpo inter phalangienne pouce", "ankylose deux articulations pouce"], rate: [15, 18], description: "Ankylose des deux articulations du pouce (MCP et IPP). Barème officiel." },
+            { name: "Ankylose totale du pouce en extension (Main Dominante)", searchTerms: ["ankylose totale pouce extension main dominante", "dominante main extension pouce totale ankylose", "ankylose totale extension pouce", "pouce extension ankylose totale"], rate: [25, 30], description: "Ankylose de toutes les articulations du pouce en position d'extension. Barème officiel." },
+            { name: "Ankylose totale du pouce en flexion modérée (Main Dominante)", searchTerms: ["ankylose totale pouce flexion modérée main dominante", "dominante main modérée flexion pouce totale ankylose", "ankylose totale flexion modérée pouce", "pouce flexion modérée ankylose"], rate: [20, 25], description: "Ankylose de toutes les articulations du pouce en position de flexion modérée. Barème officiel." },
             { name: "Raideur d'une articulation du pouce (Main Dominante)", searchTerms: ["raideur d'une articulation pouce main dominante", "dominante main pouce articulation d'une raideur", "raideur d'une", "d'une articulation", "articulation pouce"], rate: [3, 8] },
         ]
       },
@@ -1889,8 +2063,11 @@ const middleCategories: InjuryCategory[] = [
             { name: "Perte du pouce (2 phalanges) (Main Non Dominante)", searchTerms: ["perte pouce phalanges main non dominante", "amputation pouce phalanges main non dominante", "dominante non main phalanges pouce perte", "perte pouce", "pouce phalanges"], rate: 20 },
             { name: "Perte de la 2ème phalange du pouce (Main Non Dominante)", searchTerms: ["perte 2ème phalange pouce main non dominante", "amputation 2ème phalange pouce main non dominante", "dominante non main pouce phalange 2ème perte", "perte 2ème", "2ème phalange"], rate: 8 },
             { name: "Ankylose carpo-métacarpienne du pouce (Main Non Dominante)", searchTerms: ["ankylose carpo métacarpienne pouce main non dominante", "dominante non main pouce métacarpienne carpo ankylose", "ankylose carpo", "carpo métacarpienne", "métacarpienne pouce"], rate: [12, 15] },
-            { name: "Ankylose métacarpo-phalangienne du pouce (Main Non Dominante)", searchTerms: ["ankylose métacarpo phalangienne pouce main non dominante", "dominante non main pouce phalangienne métacarpo ankylose", "ankylose métacarpo", "métacarpo phalangienne", "phalangienne pouce"], rate: 8 },
-            { name: "Ankylose inter-phalangienne du pouce (Main Non Dominante)", searchTerms: ["ankylose inter phalangienne pouce main non dominante", "dominante non main pouce phalangienne inter ankylose", "ankylose inter", "inter phalangienne", "phalangienne pouce"], rate: 4 },
+            { name: "Ankylose métacarpo-phalangienne du pouce (Main Non Dominante)", searchTerms: ["ankylose métacarpo phalangienne pouce main non dominante", "dominante non main pouce phalangienne métacarpo ankylose", "ankylose métacarpo", "métacarpo phalangienne", "phalangienne pouce"], rate: [6, 8] },
+            { name: "Ankylose inter-phalangienne du pouce (Main Non Dominante)", searchTerms: ["ankylose inter phalangienne pouce main non dominante", "dominante non main pouce phalangienne inter ankylose", "ankylose inter", "inter phalangienne", "phalangienne pouce"], rate: [4, 5] },
+            { name: "Ankylose métacarpo-phalangienne et inter-phalangienne du pouce (Main Non Dominante)", searchTerms: ["ankylose métacarpo phalangienne inter phalangienne pouce main non dominante", "dominante non main pouce phalangienne inter phalangienne métacarpo ankylose", "ankylose métacarpo inter phalangienne pouce", "ankylose deux articulations pouce"], rate: [12, 14], description: "Ankylose des deux articulations du pouce (MCP et IPP). Barème officiel." },
+            { name: "Ankylose totale du pouce en extension (Main Non Dominante)", searchTerms: ["ankylose totale pouce extension main non dominante", "dominante non main extension pouce totale ankylose", "ankylose totale extension pouce", "pouce extension ankylose totale"], rate: [20, 25], description: "Ankylose de toutes les articulations du pouce en position d'extension. Barème officiel." },
+            { name: "Ankylose totale du pouce en flexion modérée (Main Non Dominante)", searchTerms: ["ankylose totale pouce flexion modérée main non dominante", "dominante non main modérée flexion pouce totale ankylose", "ankylose totale flexion modérée pouce", "pouce flexion modérée ankylose"], rate: [15, 20], description: "Ankylose de toutes les articulations du pouce en position de flexion modérée. Barème officiel." },
             { name: "Raideur d'une articulation du pouce (Main Non Dominante)", searchTerms: ["raideur d'une articulation pouce main non dominante", "dominante non main pouce articulation d'une raideur", "raideur d'une", "d'une articulation", "articulation pouce"], rate: [2, 6] },
         ]
       },
@@ -1906,7 +2083,11 @@ const middleCategories: InjuryCategory[] = [
             { name: "Ablation 3 phalanges de l'index (Main Dominante)", searchTerms: ["ablation phalanges l'index main dominante", "amputation phalanges l'index main dominante", "dominante main l'index phalanges ablation", "ablation phalanges", "phalanges l'index"], rate: [12, 15] },
             { name: "Désarticulation métacarpo-phalangienne de l'index (Main Dominante)", searchTerms: ["désarticulation métacarpo phalangienne l'index main dominante", "dominante main l'index phalangienne métacarpo désarticulation", "désarticulation métacarpo", "métacarpo phalangienne", "phalangienne l'index"], rate: 15, description: "Amputation totale de l'index au niveau de l'articulation métacarpo-phalangienne. Barème officiel." },
             { name: "Ablation 3 phalanges + tête métacarpien de l'index (Main Dominante)", searchTerms: ["ablation phalanges tête métacarpien l'index main dominante", "amputation phalanges tête métacarpien l'index main dominante", "dominante main l'index métacarpien tête phalanges ablation", "ablation phalanges", "phalanges tête"], rate: [15, 18] },
-            { name: "Ankylose de l'index (totalité) (Main Dominante)", searchTerms: ["ankylose l'index totalité main dominante", "dominante main totalité l'index ankylose", "ankylose l'index", "l'index totalité", "totalité main"], rate: 15 },
+            { name: "Ankylose métacarpo-phalangienne de l'index (Main Dominante)", searchTerms: ["ankylose métacarpo phalangienne l'index main dominante", "ankylose mcp index main dominante", "ankylose articulation métacarpo phalangienne index"], rate: [4, 5], description: "Ankylose de l'articulation métacarpo-phalangienne de l'index. Barème officiel." },
+            { name: "Ankylose de la 1ère et 2ème phalange de l'index (IPP) (Main Dominante)", searchTerms: ["ankylose 1ère 2ème phalange l'index main dominante", "ankylose ipp index main dominante", "ankylose inter phalangienne proximale index"], rate: [8, 10], description: "Ankylose de l'articulation inter-phalangienne proximale (IPP) de l'index. Barème officiel." },
+            { name: "Ankylose de la 2ème et 3ème phalange de l'index (IPD) (Main Dominante)", searchTerms: ["ankylose 2ème 3ème phalange l'index main dominante", "ankylose ipd index main dominante", "ankylose inter phalangienne distale index"], rate: [2, 3], description: "Ankylose de l'articulation inter-phalangienne distale (IPD) de l'index. Barème officiel." },
+            { name: "Ankylose des deux dernières articulations de l'index (Main Dominante)", searchTerms: ["ankylose deux dernières articulations l'index main dominante", "ankylose ipp ipd index main dominante", "ankylose inter phalangiennes index"], rate: [8, 10], description: "Ankylose des articulations IPP et IPD de l'index. Barème officiel." },
+            { name: "Ankylose de l'index (totalité - 3 articulations) (Main Dominante)", searchTerms: ["ankylose l'index totalité trois articulations main dominante", "ankylose totale index main dominante", "ankylose complète index"], rate: [13, 15], description: "Ankylose des trois articulations de l'index (MCP, IPP, IPD). Barème officiel." },
             { name: "Raideur d'une articulation de l'index (Main Dominante)", searchTerms: ["raideur d'une articulation l'index main dominante", "dominante main l'index articulation d'une raideur", "raideur d'une", "d'une articulation", "articulation l'index"], rate: [2, 5] },
         ]
       },
@@ -1924,7 +2105,11 @@ const middleCategories: InjuryCategory[] = [
             { name: "Perte de la 2ème phalange seule de l'index (P2 seule) (Main Non Dominante)", searchTerms: ["perte 2ème phalange seule l'index seule main non dominante", "amputation 2ème phalange seule l'index seule main non dominante", "dominante non main seule l'index seule phalange 2ème perte", "perte 2ème", "2ème phalange"], rate: 4 },
             { name: "Perte de la 2ème phalange de l'index (Main Non Dominante)", searchTerms: ["perte 2ème phalange l'index main non dominante", "amputation 2ème phalange l'index main non dominante", "dominante non main l'index phalange 2ème perte", "perte 2ème", "2ème phalange"], rate: 4 },
             { name: "Perte des 2ème et 3ème phalanges de l'index (Main Non Dominante)", searchTerms: ["perte des 2ème 3ème phalanges l'index main non dominante", "amputation des 2ème 3ème phalanges l'index main non dominante", "dominante non main l'index phalanges 3ème 2ème des perte", "perte 2ème 3ème phalanges l'index main non dominante", "perte des"], rate: 8 },
-            { name: "Ankylose de l'index (totalité) (Main Non Dominante)", searchTerms: ["ankylose l'index totalité main non dominante", "dominante non main totalité l'index ankylose", "ankylose l'index", "l'index totalité", "totalité main"], rate: 12 },
+            { name: "Ankylose métacarpo-phalangienne de l'index (Main Non Dominante)", searchTerms: ["ankylose métacarpo phalangienne l'index main non dominante", "ankylose mcp index main non dominante", "ankylose articulation métacarpo phalangienne index"], rate: [3, 4], description: "Ankylose de l'articulation métacarpo-phalangienne de l'index. Barème officiel." },
+            { name: "Ankylose de la 1ère et 2ème phalange de l'index (IPP) (Main Non Dominante)", searchTerms: ["ankylose 1ère 2ème phalange l'index main non dominante", "ankylose ipp index main non dominante", "ankylose inter phalangienne proximale index"], rate: [6, 8], description: "Ankylose de l'articulation inter-phalangienne proximale (IPP) de l'index. Barème officiel." },
+            { name: "Ankylose de la 2ème et 3ème phalange de l'index (IPD) (Main Non Dominante)", searchTerms: ["ankylose 2ème 3ème phalange l'index main non dominante", "ankylose ipd index main non dominante", "ankylose inter phalangienne distale index"], rate: [0, 1], description: "Ankylose de l'articulation inter-phalangienne distale (IPD) de l'index. Barème officiel." },
+            { name: "Ankylose des deux dernières articulations de l'index (Main Non Dominante)", searchTerms: ["ankylose deux dernières articulations l'index main non dominante", "ankylose ipp ipd index main non dominante", "ankylose inter phalangiennes index"], rate: [6, 8], description: "Ankylose des articulations IPP et IPD de l'index. Barème officiel." },
+            { name: "Ankylose de l'index (totalité - 3 articulations) (Main Non Dominante)", searchTerms: ["ankylose l'index totalité trois articulations main non dominante", "ankylose totale index main non dominante", "ankylose complète index"], rate: [10, 12], description: "Ankylose des trois articulations de l'index (MCP, IPP, IPD). Barème officiel." },
             { name: "Raideur d'une articulation de l'index (Main Non Dominante)", searchTerms: ["raideur d'une articulation l'index main non dominante", "dominante non main l'index articulation d'une raideur", "raideur d'une", "d'une articulation", "articulation l'index"], rate: [1, 4] },
         ]
       },
@@ -1939,7 +2124,11 @@ const middleCategories: InjuryCategory[] = [
             { name: "Désarticulation 1ère phalange du médius (Main Dominante)", searchTerms: ["désarticulation 1ère phalange médius main dominante", "dominante main médius phalange 1ère désarticulation", "désarticulation 1ère", "1ère phalange", "phalange médius"], rate: 10, description: "Amputation du médius au niveau de l'articulation IPP (inter-phalangienne proximale). Barème officiel." },
             { name: "Désarticulation métacarpo-phalangienne du médius (Main Dominante)", searchTerms: ["désarticulation métacarpo phalangienne médius main dominante", "dominante main médius phalangienne métacarpo désarticulation", "désarticulation métacarpo", "métacarpo phalangienne", "phalangienne médius"], rate: 12, description: "Amputation totale du médius au niveau de l'articulation métacarpo-phalangienne. Barème officiel." },
             { name: "Ablation 3 phalanges du médius (Main Dominante)", searchTerms: ["ablation phalanges médius main dominante", "amputation phalanges médius main dominante", "dominante main médius phalanges ablation", "ablation phalanges", "phalanges médius"], rate: 12 },
-            { name: "Ankylose du médius (totalité) (Main Dominante)", searchTerms: ["ankylose médius totalité main dominante", "dominante main totalité médius ankylose", "ankylose médius", "médius totalité", "totalité main"], rate: 12 },
+            { name: "Ankylose métacarpo-phalangienne du médius (Main Dominante)", searchTerms: ["ankylose métacarpo phalangienne médius main dominante", "ankylose mcp médius main dominante", "ankylose articulation métacarpo phalangienne médius"], rate: [3, 4], description: "Ankylose de l'articulation métacarpo-phalangienne du médius. Barème officiel." },
+            { name: "Ankylose de la 1ère et 2ème phalange du médius (IPP) (Main Dominante)", searchTerms: ["ankylose 1ère 2ème phalange médius main dominante", "ankylose ipp médius main dominante", "ankylose inter phalangienne proximale médius"], rate: [6, 7], description: "Ankylose de l'articulation inter-phalangienne proximale (IPP) du médius. Barème officiel." },
+            { name: "Ankylose de la 2ème et 3ème phalange du médius (IPD) (Main Dominante)", searchTerms: ["ankylose 2ème 3ème phalange médius main dominante", "ankylose ipd médius main dominante", "ankylose inter phalangienne distale médius"], rate: [1, 2], description: "Ankylose de l'articulation inter-phalangienne distale (IPD) du médius. Barème officiel." },
+            { name: "Ankylose des deux dernières articulations du médius (Main Dominante)", searchTerms: ["ankylose deux dernières articulations médius main dominante", "ankylose ipp ipd médius main dominante", "ankylose inter phalangiennes médius"], rate: [8, 10], description: "Ankylose des articulations IPP et IPD du médius. Barème officiel." },
+            { name: "Ankylose du médius (totalité - 3 articulations) (Main Dominante)", searchTerms: ["ankylose médius totalité trois articulations main dominante", "ankylose totale médius main dominante", "ankylose complète médius"], rate: [12, 15], description: "Ankylose des trois articulations du médius (MCP, IPP, IPD). Barème officiel." },
             { name: "Raideur d'une articulation du médius (Main Dominante)", searchTerms: ["raideur d'une articulation médius main dominante", "dominante main médius articulation d'une raideur", "raideur d'une", "d'une articulation", "articulation médius"], rate: [1, 4] },
             { name: "Raideur du médius (Main Dominante)", searchTerms: ["raideur médius main dominante", "dominante main médius raideur", "raideur médius", "médius main", "main dominante"], rate: [2, 5] },
         ]
@@ -1958,7 +2147,11 @@ const middleCategories: InjuryCategory[] = [
             { name: "Perte de la 2ème phalange seule du médius (P2 seule) (Main Non Dominante)", searchTerms: ["perte 2ème phalange seule médius seule main non dominante", "amputation 2ème phalange seule médius seule main non dominante", "dominante non main seule médius seule phalange 2ème perte", "perte 2ème", "2ème phalange"], rate: 3 },
             { name: "Perte de la 2ème phalange du médius (Main Non Dominante)", searchTerms: ["perte 2ème phalange médius main non dominante", "amputation 2ème phalange médius main non dominante", "dominante non main médius phalange 2ème perte", "perte 2ème", "2ème phalange"], rate: 3 },
             { name: "Perte des 2ème et 3ème phalanges du médius (Main Non Dominante)", searchTerms: ["perte des 2ème 3ème phalanges médius main non dominante", "amputation des 2ème 3ème phalanges médius main non dominante", "dominante non main médius phalanges 3ème 2ème des perte", "perte 2ème 3ème phalanges médius main non dominante", "perte des"], rate: 6 },
-            { name: "Ankylose du médius (totalité) (Main Non Dominante)", searchTerms: ["ankylose médius totalité main non dominante", "dominante non main totalité médius ankylose", "ankylose médius", "médius totalité", "totalité main"], rate: 10 },
+            { name: "Ankylose métacarpo-phalangienne du médius (Main Non Dominante)", searchTerms: ["ankylose métacarpo phalangienne médius main non dominante", "ankylose mcp médius main non dominante", "ankylose articulation métacarpo phalangienne médius"], rate: [1, 2], description: "Ankylose de l'articulation métacarpo-phalangienne du médius. Barème officiel." },
+            { name: "Ankylose de la 1ère et 2ème phalange du médius (IPP) (Main Non Dominante)", searchTerms: ["ankylose 1ère 2ème phalange médius main non dominante", "ankylose ipp médius main non dominante", "ankylose inter phalangienne proximale médius"], rate: [4, 5], description: "Ankylose de l'articulation inter-phalangienne proximale (IPP) du médius. Barème officiel." },
+            { name: "Ankylose de la 2ème et 3ème phalange du médius (IPD) (Main Non Dominante)", searchTerms: ["ankylose 2ème 3ème phalange médius main non dominante", "ankylose ipd médius main non dominante", "ankylose inter phalangienne distale médius"], rate: [0, 1], description: "Ankylose de l'articulation inter-phalangienne distale (IPD) du médius. Barème officiel." },
+            { name: "Ankylose des deux dernières articulations du médius (Main Non Dominante)", searchTerms: ["ankylose deux dernières articulations médius main non dominante", "ankylose ipp ipd médius main non dominante", "ankylose inter phalangiennes médius"], rate: [6, 8], description: "Ankylose des articulations IPP et IPD du médius. Barème officiel." },
+            { name: "Ankylose du médius (totalité - 3 articulations) (Main Non Dominante)", searchTerms: ["ankylose médius totalité trois articulations main non dominante", "ankylose totale médius main non dominante", "ankylose complète médius"], rate: [10, 12], description: "Ankylose des trois articulations du médius (MCP, IPP, IPD). Barème officiel." },
             { name: "Raideur d'une articulation du médius (Main Non Dominante)", searchTerms: ["raideur d'une articulation médius main non dominante", "dominante non main médius articulation d'une raideur", "raideur d'une", "d'une articulation", "articulation médius"], rate: [1, 3] },
             { name: "Raideur du médius (Main Non Dominante)", searchTerms: ["raideur médius main non dominante", "dominante non main médius raideur", "raideur médius", "médius main", "main non"], rate: [1, 4] },
         ]
@@ -1974,7 +2167,11 @@ const middleCategories: InjuryCategory[] = [
             { name: "Désarticulation 1ère phalange de l'annulaire (Main Dominante)", searchTerms: ["désarticulation 1ère phalange l'annulaire main dominante", "dominante main l'annulaire phalange 1ère désarticulation", "désarticulation 1ère", "1ère phalange", "phalange l'annulaire"], rate: 8, description: "Amputation de l'annulaire au niveau de l'articulation IPP (inter-phalangienne proximale). Barème officiel." },
             { name: "Ablation 3 phalanges de l'annulaire (Main Dominante)", searchTerms: ["ablation phalanges l'annulaire main dominante", "amputation phalanges l'annulaire main dominante", "dominante main l'annulaire phalanges ablation", "ablation phalanges", "phalanges l'annulaire"], rate: 10 },
             { name: "Désarticulation métacarpo-phalangienne de l'annulaire (Main Dominante)", searchTerms: ["désarticulation métacarpo phalangienne l'annulaire main dominante", "dominante main l'annulaire phalangienne métacarpo désarticulation", "désarticulation métacarpo", "métacarpo phalangienne", "phalangienne l'annulaire"], rate: 10, description: "Amputation totale de l'annulaire au niveau de l'articulation métacarpo-phalangienne. Barème officiel." },
-            { name: "Ankylose de l'annulaire (totalité) (Main Dominante)", searchTerms: ["ankylose l'annulaire totalité main dominante", "dominante main totalité l'annulaire ankylose", "ankylose l'annulaire", "l'annulaire totalité", "totalité main"], rate: 8 },
+            { name: "Ankylose métacarpo-phalangienne de l'annulaire (Main Dominante)", searchTerms: ["ankylose métacarpo phalangienne l'annulaire main dominante", "ankylose mcp annulaire main dominante", "ankylose articulation métacarpo phalangienne annulaire"], rate: [2, 3], description: "Ankylose de l'articulation métacarpo-phalangienne de l'annulaire. Barème officiel." },
+            { name: "Ankylose de la 1ère et 2ème phalange de l'annulaire (IPP) (Main Dominante)", searchTerms: ["ankylose 1ère 2ème phalange l'annulaire main dominante", "ankylose ipp annulaire main dominante", "ankylose inter phalangienne proximale annulaire"], rate: [5, 6], description: "Ankylose de l'articulation inter-phalangienne proximale (IPP) de l'annulaire. Barème officiel." },
+            { name: "Ankylose de la 2ème et 3ème phalange de l'annulaire (IPD) (Main Dominante)", searchTerms: ["ankylose 2ème 3ème phalange l'annulaire main dominante", "ankylose ipd annulaire main dominante", "ankylose inter phalangienne distale annulaire"], rate: [1, 2], description: "Ankylose de l'articulation inter-phalangienne distale (IPD) de l'annulaire. Barème officiel." },
+            { name: "Ankylose des deux dernières articulations de l'annulaire (Main Dominante)", searchTerms: ["ankylose deux dernières articulations l'annulaire main dominante", "ankylose ipp ipd annulaire main dominante", "ankylose inter phalangiennes annulaire"], rate: [8, 10], description: "Ankylose des articulations IPP et IPD de l'annulaire. Barème officiel." },
+            { name: "Ankylose de l'annulaire (totalité - 3 articulations) (Main Dominante)", searchTerms: ["ankylose l'annulaire totalité trois articulations main dominante", "ankylose totale annulaire main dominante", "ankylose complète annulaire"], rate: [10, 12], description: "Ankylose des trois articulations de l'annulaire (MCP, IPP, IPD). Barème officiel." },
             { name: "Raideur d'une articulation de l'annulaire (Main Dominante)", searchTerms: ["raideur d'une articulation l'annulaire main dominante", "dominante main l'annulaire articulation d'une raideur", "raideur d'une", "d'une articulation", "articulation l'annulaire"], rate: [3, 8] },
             { name: "Raideur de l'annulaire (Main Dominante)", searchTerms: ["raideur l'annulaire main dominante", "dominante main l'annulaire raideur", "raideur l'annulaire", "l'annulaire main", "main dominante"], rate: [3, 8] },
         ]
@@ -1990,7 +2187,11 @@ const middleCategories: InjuryCategory[] = [
             { name: "Désarticulation 1ère phalange de l'annulaire (Main Non Dominante)", searchTerms: ["désarticulation 1ère phalange l'annulaire main non dominante", "dominante non main l'annulaire phalange 1ère désarticulation", "désarticulation 1ère", "1ère phalange", "phalange l'annulaire"], rate: 6, description: "Amputation de l'annulaire au niveau de l'articulation IPP. Barème officiel." },
             { name: "Ablation 3 phalanges de l'annulaire (Main Non Dominante)", searchTerms: ["ablation phalanges l'annulaire main non dominante", "amputation phalanges l'annulaire main non dominante", "dominante non main l'annulaire phalanges ablation", "ablation phalanges", "phalanges l'annulaire"], rate: 7 },
             { name: "Désarticulation métacarpo-phalangienne de l'annulaire (Main Non Dominante)", searchTerms: ["désarticulation métacarpo phalangienne l'annulaire main non dominante", "dominante non main l'annulaire phalangienne métacarpo désarticulation", "désarticulation métacarpo", "métacarpo phalangienne", "phalangienne l'annulaire"], rate: 10, description: "Amputation totale de l'annulaire au niveau de l'articulation MCP. Barème officiel." },
-            { name: "Ankylose de l'annulaire (totalité) (Main Non Dominante)", searchTerms: ["ankylose l'annulaire totalité main non dominante", "dominante non main totalité l'annulaire ankylose", "ankylose l'annulaire", "l'annulaire totalité", "totalité main"], rate: 6 },
+            { name: "Ankylose métacarpo-phalangienne de l'annulaire (Main Non Dominante)", searchTerms: ["ankylose métacarpo phalangienne l'annulaire main non dominante", "ankylose mcp annulaire main non dominante", "ankylose articulation métacarpo phalangienne annulaire"], rate: [0, 1], description: "Ankylose de l'articulation métacarpo-phalangienne de l'annulaire. Barème officiel." },
+            { name: "Ankylose de la 1ère et 2ème phalange de l'annulaire (IPP) (Main Non Dominante)", searchTerms: ["ankylose 1ère 2ème phalange l'annulaire main non dominante", "ankylose ipp annulaire main non dominante", "ankylose inter phalangienne proximale annulaire"], rate: [3, 4], description: "Ankylose de l'articulation inter-phalangienne proximale (IPP) de l'annulaire. Barème officiel." },
+            { name: "Ankylose de la 2ème et 3ème phalange de l'annulaire (IPD) (Main Non Dominante)", searchTerms: ["ankylose 2ème 3ème phalange l'annulaire main non dominante", "ankylose ipd annulaire main non dominante", "ankylose inter phalangienne distale annulaire"], rate: [0, 1], description: "Ankylose de l'articulation inter-phalangienne distale (IPD) de l'annulaire. Barème officiel." },
+            { name: "Ankylose des deux dernières articulations de l'annulaire (Main Non Dominante)", searchTerms: ["ankylose deux dernières articulations l'annulaire main non dominante", "ankylose ipp ipd annulaire main non dominante", "ankylose inter phalangiennes annulaire"], rate: [6, 8], description: "Ankylose des articulations IPP et IPD de l'annulaire. Barème officiel." },
+            { name: "Ankylose de l'annulaire (totalité - 3 articulations) (Main Non Dominante)", searchTerms: ["ankylose l'annulaire totalité trois articulations main non dominante", "ankylose totale annulaire main non dominante", "ankylose complète annulaire"], rate: [7, 9], description: "Ankylose des trois articulations de l'annulaire (MCP, IPP, IPD). Barème officiel." },
             { name: "Raideur d'une articulation de l'annulaire (Main Non Dominante)", searchTerms: ["raideur d'une articulation l'annulaire main non dominante", "dominante non main l'annulaire articulation d'une raideur", "raideur d'une", "d'une articulation", "articulation l'annulaire"], rate: [1, 2] },
             { name: "Raideur de l'annulaire (Main Non Dominante)", searchTerms: ["raideur l'annulaire main non dominante", "dominante non main l'annulaire raideur", "raideur l'annulaire", "l'annulaire main", "main non"], rate: [1, 3] },
         ]
@@ -2005,7 +2206,11 @@ const middleCategories: InjuryCategory[] = [
             { name: "Désarticulation 1ère phalange de l'auriculaire (Main Dominante)", searchTerms: ["désarticulation 1ère phalange l'auriculaire main dominante", "dominante main l'auriculaire phalange 1ère désarticulation", "désarticulation 1ère", "1ère phalange", "phalange l'auriculaire"], rate: 6, description: "Amputation de l'auriculaire au niveau de l'articulation IPP (inter-phalangienne proximale). Barème officiel." },
             { name: "Désarticulation métacarpo-phalangienne de l'auriculaire (Main Dominante)", searchTerms: ["désarticulation métacarpo phalangienne l'auriculaire main dominante", "dominante main l'auriculaire phalangienne métacarpo désarticulation", "désarticulation métacarpo", "métacarpo phalangienne", "phalangienne l'auriculaire"], rate: 8, description: "Amputation totale de l'auriculaire au niveau de l'articulation métacarpo-phalangienne. Barème officiel." },
             { name: "Ablation 3 phalanges de l'auriculaire (Main Dominante)", searchTerms: ["ablation phalanges l'auriculaire main dominante", "amputation phalanges l'auriculaire main dominante", "dominante main l'auriculaire phalanges ablation", "ablation phalanges", "phalanges l'auriculaire"], rate: [6, 8] },
-            { name: "Ankylose de l'auriculaire (totalité) (Main Dominante)", searchTerms: ["ankylose l'auriculaire totalité main dominante", "dominante main totalité l'auriculaire ankylose", "ankylose l'auriculaire", "l'auriculaire totalité", "totalité main"], rate: 10 },
+            { name: "Ankylose métacarpo-phalangienne de l'auriculaire (Main Dominante)", searchTerms: ["ankylose métacarpo phalangienne l'auriculaire main dominante", "ankylose mcp auriculaire main dominante", "ankylose articulation métacarpo phalangienne auriculaire"], rate: [1, 2], description: "Ankylose de l'articulation métacarpo-phalangienne de l'auriculaire. Barème officiel." },
+            { name: "Ankylose de la 1ère et 2ème phalange de l'auriculaire (IPP) (Main Dominante)", searchTerms: ["ankylose 1ère 2ème phalange l'auriculaire main dominante", "ankylose ipp auriculaire main dominante", "ankylose inter phalangienne proximale auriculaire"], rate: [3, 4], description: "Ankylose de l'articulation inter-phalangienne proximale (IPP) de l'auriculaire. Barème officiel." },
+            { name: "Ankylose de la 2ème et 3ème phalange de l'auriculaire (IPD) (Main Dominante)", searchTerms: ["ankylose 2ème 3ème phalange l'auriculaire main dominante", "ankylose ipd auriculaire main dominante", "ankylose inter phalangienne distale auriculaire"], rate: [1, 2], description: "Ankylose de l'articulation inter-phalangienne distale (IPD) de l'auriculaire. Barème officiel." },
+            { name: "Ankylose des deux dernières articulations de l'auriculaire (Main Dominante)", searchTerms: ["ankylose deux dernières articulations l'auriculaire main dominante", "ankylose ipp ipd auriculaire main dominante", "ankylose inter phalangiennes auriculaire"], rate: [5, 6], description: "Ankylose des articulations IPP et IPD de l'auriculaire. Barème officiel." },
+            { name: "Ankylose de l'auriculaire (totalité - 3 articulations) (Main Dominante)", searchTerms: ["ankylose l'auriculaire totalité trois articulations main dominante", "ankylose totale auriculaire main dominante", "ankylose complète auriculaire"], rate: [8, 10], description: "Ankylose des trois articulations de l'auriculaire (MCP, IPP, IPD). Barème officiel." },
             { name: "Raideur d'une articulation de l'auriculaire (Main Dominante)", searchTerms: ["raideur d'une articulation l'auriculaire main dominante", "dominante main l'auriculaire articulation d'une raideur", "raideur d'une", "d'une articulation", "articulation l'auriculaire"], rate: [1, 3] },
             { name: "Raideur de l'auriculaire (Main Dominante)", searchTerms: ["raideur l'auriculaire main dominante", "dominante main l'auriculaire raideur", "raideur l'auriculaire", "l'auriculaire main", "main dominante"], rate: [1, 3] },
         ]
@@ -2020,9 +2225,169 @@ const middleCategories: InjuryCategory[] = [
             { name: "Désarticulation 1ère phalange de l'auriculaire (Main Non Dominante)", searchTerms: ["désarticulation 1ère phalange l'auriculaire main non dominante", "dominante non main l'auriculaire phalange 1ère désarticulation", "désarticulation 1ère", "1ère phalange", "phalange l'auriculaire"], rate: 5, description: "Amputation de l'auriculaire au niveau de l'articulation IPP. Barème officiel." },
             { name: "Désarticulation métacarpo-phalangienne de l'auriculaire (Main Non Dominante)", searchTerms: ["désarticulation métacarpo phalangienne l'auriculaire main non dominante", "dominante non main l'auriculaire phalangienne métacarpo désarticulation", "désarticulation métacarpo", "métacarpo phalangienne", "phalangienne l'auriculaire"], rate: 8, description: "Amputation totale de l'auriculaire au niveau de l'articulation MCP. Barème officiel." },
             { name: "Ablation 3 phalanges de l'auriculaire (Main Non Dominante)", searchTerms: ["ablation phalanges l'auriculaire main non dominante", "amputation phalanges l'auriculaire main non dominante", "dominante non main l'auriculaire phalanges ablation", "ablation phalanges", "phalanges l'auriculaire"], rate: [5, 6] },
-            { name: "Ankylose de l'auriculaire (totalité) (Main Non Dominante)", searchTerms: ["ankylose l'auriculaire totalité main non dominante", "dominante non main totalité l'auriculaire ankylose", "ankylose l'auriculaire", "l'auriculaire totalité", "totalité main"], rate: 8 },
+            { name: "Ankylose métacarpo-phalangienne de l'auriculaire (Main Non Dominante)", searchTerms: ["ankylose métacarpo phalangienne l'auriculaire main non dominante", "ankylose mcp auriculaire main non dominante", "ankylose articulation métacarpo phalangienne auriculaire"], rate: [0, 1], description: "Ankylose de l'articulation métacarpo-phalangienne de l'auriculaire. Barème officiel." },
+            { name: "Ankylose de la 1ère et 2ème phalange de l'auriculaire (IPP) (Main Non Dominante)", searchTerms: ["ankylose 1ère 2ème phalange l'auriculaire main non dominante", "ankylose ipp auriculaire main non dominante", "ankylose inter phalangienne proximale auriculaire"], rate: [1, 2], description: "Ankylose de l'articulation inter-phalangienne proximale (IPP) de l'auriculaire. Barème officiel." },
+            { name: "Ankylose de la 2ème et 3ème phalange de l'auriculaire (IPD) (Main Non Dominante)", searchTerms: ["ankylose 2ème 3ème phalange l'auriculaire main non dominante", "ankylose ipd auriculaire main non dominante", "ankylose inter phalangienne distale auriculaire"], rate: [0, 1], description: "Ankylose de l'articulation inter-phalangienne distale (IPD) de l'auriculaire. Barème officiel." },
+            { name: "Ankylose des deux dernières articulations de l'auriculaire (Main Non Dominante)", searchTerms: ["ankylose deux dernières articulations l'auriculaire main non dominante", "ankylose ipp ipd auriculaire main non dominante", "ankylose inter phalangiennes auriculaire"], rate: [3, 4], description: "Ankylose des articulations IPP et IPD de l'auriculaire. Barème officiel." },
+            { name: "Ankylose de l'auriculaire (totalité - 3 articulations) (Main Non Dominante)", searchTerms: ["ankylose l'auriculaire totalité trois articulations main non dominante", "ankylose totale auriculaire main non dominante", "ankylose complète auriculaire"], rate: [6, 8], description: "Ankylose des trois articulations de l'auriculaire (MCP, IPP, IPD). Barème officiel." },
             { name: "Raideur d'une articulation de l'auriculaire (Main Non Dominante)", searchTerms: ["raideur d'une articulation l'auriculaire main non dominante", "dominante non main l'auriculaire articulation d'une raideur", "raideur d'une", "d'une articulation", "articulation l'auriculaire"], rate: [1, 2] },
             { name: "Raideur de l'auriculaire (Main Non Dominante)", searchTerms: ["raideur l'auriculaire main non dominante", "dominante non main l'auriculaire raideur", "raideur l'auriculaire", "l'auriculaire main", "main non"], rate: [1, 2] },
+        ]
+      },
+      {
+        name: "Doigts - Flexions et Extensions Permanentes",
+        injuries: [
+            // POUCE - Flexions permanentes
+            { name: "Flexion permanente du pouce - 2 articulations (Main Dominante)", searchTerms: ["flexion permanente pouce deux articulations main dominante", "pouce flexion bloqué deux articulations dominante", "flexion pouce mcp ipp dominante"], rate: [10, 25], description: "Flexion permanente du pouce au niveau des deux articulations (MCP + IPP). Barème officiel." },
+            { name: "Flexion permanente articulation métacarpo-phalangienne du pouce (Main Dominante)", searchTerms: ["flexion permanente métacarpo phalangienne pouce main dominante", "flexion mcp pouce dominante", "flexion permanente mcp pouce"], rate: [8, 10], description: "Flexion permanente de l'articulation MCP du pouce. Barème officiel." },
+            { name: "Flexion permanente articulation inter-phalangienne du pouce (Main Dominante)", searchTerms: ["flexion permanente inter phalangienne pouce main dominante", "flexion ipp pouce dominante", "flexion permanente ipp pouce"], rate: [3, 5], description: "Flexion permanente de l'articulation IPP du pouce. Barème officiel." },
+            { name: "Flexion permanente du pouce - 2 articulations (Main Non Dominante)", searchTerms: ["flexion permanente pouce deux articulations main non dominante", "pouce flexion bloqué deux articulations non dominante", "flexion pouce mcp ipp non dominante"], rate: [8, 20], description: "Flexion permanente du pouce au niveau des deux articulations (MCP + IPP). Barème officiel." },
+            { name: "Flexion permanente articulation métacarpo-phalangienne du pouce (Main Non Dominante)", searchTerms: ["flexion permanente métacarpo phalangienne pouce main non dominante", "flexion mcp pouce non dominante", "flexion permanente mcp pouce"], rate: [6, 8], description: "Flexion permanente de l'articulation MCP du pouce. Barème officiel." },
+            { name: "Flexion permanente articulation inter-phalangienne du pouce (Main Non Dominante)", searchTerms: ["flexion permanente inter phalangienne pouce main non dominante", "flexion ipp pouce non dominante", "flexion permanente ipp pouce"], rate: [2, 3], description: "Flexion permanente de l'articulation IPP du pouce. Barème officiel." },
+            
+            // INDEX - Flexions permanentes
+            { name: "Flexion permanente de l'index - 3 articulations (Main Dominante)", searchTerms: ["flexion permanente index trois articulations main dominante", "index flexion bloqué trois articulations dominante", "flexion index mcp ipp ipd dominante"], rate: [5, 15], description: "Flexion permanente de l'index au niveau des trois articulations. Barème officiel." },
+            { name: "Flexion permanente articulation inter-phalangienne proximale de l'index (Main Dominante)", searchTerms: ["flexion permanente inter phalangienne proximale index main dominante", "flexion ipp index dominante"], rate: [4, 5], description: "Flexion permanente de l'articulation IPP de l'index. Barème officiel." },
+            { name: "Flexion permanente articulation inter-phalangienne distale de l'index (Main Dominante)", searchTerms: ["flexion permanente inter phalangienne distale index main dominante", "flexion ipd index dominante"], rate: [1, 2], description: "Flexion permanente de l'articulation IPD de l'index. Barème officiel." },
+            { name: "Flexion permanente de l'index - 3 articulations (Main Non Dominante)", searchTerms: ["flexion permanente index trois articulations main non dominante", "index flexion bloqué trois articulations non dominante"], rate: [4, 12], description: "Flexion permanente de l'index au niveau des trois articulations. Barème officiel." },
+            { name: "Flexion permanente articulation inter-phalangienne proximale de l'index (Main Non Dominante)", searchTerms: ["flexion permanente inter phalangienne proximale index main non dominante", "flexion ipp index non dominante"], rate: [3, 4], description: "Flexion permanente de l'articulation IPP de l'index. Barème officiel." },
+            { name: "Flexion permanente articulation inter-phalangienne distale de l'index (Main Non Dominante)", searchTerms: ["flexion permanente inter phalangienne distale index main non dominante", "flexion ipd index non dominante"], rate: [1, 2], description: "Flexion permanente de l'articulation IPD de l'index. Barème officiel." },
+            
+            // MÉDIUS - Flexions permanentes
+            { name: "Flexion permanente du médius - 3 articulations (Main Dominante)", searchTerms: ["flexion permanente médius trois articulations main dominante", "médius flexion bloqué trois articulations dominante"], rate: [5, 15], description: "Flexion permanente du médius au niveau des trois articulations. Barème officiel." },
+            { name: "Flexion permanente articulation inter-phalangienne du médius (Main Dominante)", searchTerms: ["flexion permanente inter phalangienne médius main dominante", "flexion ipp médius dominante"], rate: [4, 5], description: "Flexion permanente de l'articulation IPP du médius. Barème officiel." },
+            { name: "Flexion permanente articulation phalangino-phalangettienne du médius (Main Dominante)", searchTerms: ["flexion permanente phalangino phalangettienne médius main dominante", "flexion ipd médius dominante"], rate: [2, 3], description: "Flexion permanente de l'articulation IPD du médius. Barème officiel." },
+            { name: "Flexion permanente du médius - 3 articulations (Main Non Dominante)", searchTerms: ["flexion permanente médius trois articulations main non dominante", "médius flexion bloqué trois articulations non dominante"], rate: [4, 12], description: "Flexion permanente du médius au niveau des trois articulations. Barème officiel." },
+            { name: "Flexion permanente articulation inter-phalangienne du médius (Main Non Dominante)", searchTerms: ["flexion permanente inter phalangienne médius main non dominante", "flexion ipp médius non dominante"], rate: [3, 4], description: "Flexion permanente de l'articulation IPP du médius. Barème officiel." },
+            { name: "Flexion permanente articulation phalangino-phalangettienne du médius (Main Non Dominante)", searchTerms: ["flexion permanente phalangino phalangettienne médius main non dominante", "flexion ipd médius non dominante"], rate: [1, 2], description: "Flexion permanente de l'articulation IPD du médius. Barème officiel." },
+            
+            // ANNULAIRE - Flexions permanentes
+            { name: "Flexion permanente de l'annulaire - 3 articulations (Main Dominante)", searchTerms: ["flexion permanente annulaire trois articulations main dominante", "annulaire flexion bloqué trois articulations dominante"], rate: [5, 12], description: "Flexion permanente de l'annulaire au niveau des trois articulations. Barème officiel." },
+            { name: "Flexion permanente articulation inter-phalangienne de l'annulaire (Main Dominante)", searchTerms: ["flexion permanente inter phalangienne annulaire main dominante", "flexion ipp annulaire dominante"], rate: [4, 5], description: "Flexion permanente de l'articulation IPP de l'annulaire. Barème officiel." },
+            { name: "Flexion permanente articulation phalangino-phalangettienne de l'annulaire (Main Dominante)", searchTerms: ["flexion permanente phalangino phalangettienne annulaire main dominante", "flexion ipd annulaire dominante"], rate: [2, 3], description: "Flexion permanente de l'articulation IPD de l'annulaire. Barème officiel." },
+            { name: "Flexion permanente de l'annulaire - 3 articulations (Main Non Dominante)", searchTerms: ["flexion permanente annulaire trois articulations main non dominante", "annulaire flexion bloqué trois articulations non dominante"], rate: [4, 9], description: "Flexion permanente de l'annulaire au niveau des trois articulations. Barème officiel." },
+            { name: "Flexion permanente articulation inter-phalangienne de l'annulaire (Main Non Dominante)", searchTerms: ["flexion permanente inter phalangienne annulaire main non dominante", "flexion ipp annulaire non dominante"], rate: [3, 4], description: "Flexion permanente de l'articulation IPP de l'annulaire. Barème officiel." },
+            { name: "Flexion permanente articulation phalangino-phalangettienne de l'annulaire (Main Non Dominante)", searchTerms: ["flexion permanente phalangino phalangettienne annulaire main non dominante", "flexion ipd annulaire non dominante"], rate: [1, 2], description: "Flexion permanente de l'articulation IPD de l'annulaire. Barème officiel." },
+            
+            // AURICULAIRE - Flexions permanentes
+            { name: "Flexion permanente de l'auriculaire - 3 articulations (Main Dominante)", searchTerms: ["flexion permanente auriculaire trois articulations main dominante", "auriculaire flexion bloqué trois articulations dominante"], rate: [5, 10], description: "Flexion permanente de l'auriculaire au niveau des trois articulations. Barème officiel." },
+            { name: "Flexion permanente articulation inter-phalangienne de l'auriculaire (Main Dominante)", searchTerms: ["flexion permanente inter phalangienne auriculaire main dominante", "flexion ipp auriculaire dominante"], rate: [4, 5], description: "Flexion permanente de l'articulation IPP de l'auriculaire. Barème officiel." },
+            { name: "Flexion permanente articulation phalangino-phalangettienne de l'auriculaire (Main Dominante)", searchTerms: ["flexion permanente phalangino phalangettienne auriculaire main dominante", "flexion ipd auriculaire dominante"], rate: [1, 2], description: "Flexion permanente de l'articulation IPD de l'auriculaire. Barème officiel." },
+            { name: "Flexion permanente de l'auriculaire - 3 articulations (Main Non Dominante)", searchTerms: ["flexion permanente auriculaire trois articulations main non dominante", "auriculaire flexion bloqué trois articulations non dominante"], rate: [4, 8], description: "Flexion permanente de l'auriculaire au niveau des trois articulations. Barème officiel." },
+            { name: "Flexion permanente articulation inter-phalangienne de l'auriculaire (Main Non Dominante)", searchTerms: ["flexion permanente inter phalangienne auriculaire main non dominante", "flexion ipp auriculaire non dominante"], rate: [3, 4], description: "Flexion permanente de l'articulation IPP de l'auriculaire. Barème officiel." },
+            { name: "Flexion permanente articulation phalangino-phalangettienne de l'auriculaire (Main Non Dominante)", searchTerms: ["flexion permanente phalangino phalangettienne auriculaire main non dominante", "flexion ipd auriculaire non dominante"], rate: [0, 1], description: "Flexion permanente de l'articulation IPD de l'auriculaire. Barème officiel." },
+            
+            // EXTENSIONS PERMANENTES
+            { name: "Extension permanente du pouce entier (Main Dominante)", searchTerms: ["extension permanente pouce entier main dominante", "pouce extension bloqué main dominante"], rate: [15, 25], description: "Extension permanente de toutes les articulations du pouce. Barème officiel." },
+            { name: "Extension permanente du pouce entier (Main Non Dominante)", searchTerms: ["extension permanente pouce entier main non dominante", "pouce extension bloqué main non dominante"], rate: [12, 20], description: "Extension permanente de toutes les articulations du pouce. Barème officiel." },
+            { name: "Extension permanente de l'index entier (Main Dominante)", searchTerms: ["extension permanente index entier main dominante", "index extension bloqué main dominante"], rate: [10, 15], description: "Extension permanente de toutes les articulations de l'index. Barème officiel." },
+            { name: "Extension permanente de l'index entier (Main Non Dominante)", searchTerms: ["extension permanente index entier main non dominante", "index extension bloqué main non dominante"], rate: [8, 12], description: "Extension permanente de toutes les articulations de l'index. Barème officiel." },
+            { name: "Extension permanente du médius entier (Main Dominante)", searchTerms: ["extension permanente médius entier main dominante", "médius extension bloqué main dominante"], rate: [5, 15], description: "Extension permanente de toutes les articulations du médius. Barème officiel." },
+            { name: "Extension permanente du médius entier (Main Non Dominante)", searchTerms: ["extension permanente médius entier main non dominante", "médius extension bloqué main non dominante"], rate: [4, 12], description: "Extension permanente de toutes les articulations du médius. Barème officiel." },
+            { name: "Extension permanente de l'annulaire entier (Main Dominante)", searchTerms: ["extension permanente annulaire entier main dominante", "annulaire extension bloqué main dominante"], rate: [5, 12], description: "Extension permanente de toutes les articulations de l'annulaire. Barème officiel." },
+            { name: "Extension permanente de l'annulaire entier (Main Non Dominante)", searchTerms: ["extension permanente annulaire entier main non dominante", "annulaire extension bloqué main non dominante"], rate: [4, 9], description: "Extension permanente de toutes les articulations de l'annulaire. Barème officiel." },
+            { name: "Extension permanente de l'auriculaire entier (Main Dominante)", searchTerms: ["extension permanente auriculaire entier main dominante", "auriculaire extension bloqué main dominante"], rate: [5, 12], description: "Extension permanente de toutes les articulations de l'auriculaire. Barème officiel." },
+            { name: "Extension permanente de l'auriculaire entier (Main Non Dominante)", searchTerms: ["extension permanente auriculaire entier main non dominante", "auriculaire extension bloqué main non dominante"], rate: [4, 9], description: "Extension permanente de toutes les articulations de l'auriculaire. Barème officiel." },
+            
+            // PERTES TENDINEUSES
+            { name: "Perte du tendon extenseur ou fléchisseur du pouce (Main Dominante)", searchTerms: ["perte tendon extenseur fléchisseur pouce main dominante", "section tendon pouce dominante", "rupture tendon pouce dominante"], rate: [6, 20], description: "Perte du tendon extenseur ou fléchisseur du pouce. Barème officiel." },
+            { name: "Perte du tendon extenseur ou fléchisseur du pouce (Main Non Dominante)", searchTerms: ["perte tendon extenseur fléchisseur pouce main non dominante", "section tendon pouce non dominante"], rate: [4, 15], description: "Perte du tendon extenseur ou fléchisseur du pouce. Barème officiel." },
+            { name: "Perte du tendon extenseur ou fléchisseur des doigts longs (Main Dominante)", searchTerms: ["perte tendon extenseur fléchisseur doigts longs main dominante", "section tendon doigts dominante"], rate: [3, 12], description: "Perte du tendon extenseur ou fléchisseur des doigts autres que le pouce (selon la hauteur). Barème officiel." },
+            { name: "Perte du tendon extenseur ou fléchisseur des doigts longs (Main Non Dominante)", searchTerms: ["perte tendon extenseur fléchisseur doigts longs main non dominante", "section tendon doigts non dominante"], rate: [2, 10], description: "Perte du tendon extenseur ou fléchisseur des doigts autres que le pouce (selon la hauteur). Barème officiel." },
+        ]
+      },
+      {
+        name: "Doigts - Pseudarthroses et Luxations",
+        injuries: [
+            // PSEUDARTHROSES - Phalange unguéale
+            { name: "Pseudarthrose phalange unguéale du pouce (Main Dominante)", searchTerms: ["pseudarthrose phalange unguéale pouce main dominante", "pseudarthrose p3 pouce dominante", "faux articulation phalange unguéale pouce"], rate: [5, 6], description: "Pseudarthrose ballante avec large perte de substance osseuse de la phalange unguéale du pouce. Barème officiel." },
+            { name: "Pseudarthrose phalange unguéale du pouce (Main Non Dominante)", searchTerms: ["pseudarthrose phalange unguéale pouce main non dominante", "pseudarthrose p3 pouce non dominante"], rate: [4, 5], description: "Pseudarthrose ballante avec large perte de substance osseuse de la phalange unguéale du pouce. Barème officiel." },
+            { name: "Pseudarthrose phalange unguéale des doigts longs (Main Dominante)", searchTerms: ["pseudarthrose phalange unguéale doigts longs main dominante", "pseudarthrose p3 doigts dominante"], rate: [1, 2], description: "Pseudarthrose ballante de la phalange unguéale des doigts autres que le pouce. Barème officiel." },
+            { name: "Pseudarthrose phalange unguéale des doigts longs (Main Non Dominante)", searchTerms: ["pseudarthrose phalange unguéale doigts longs main non dominante", "pseudarthrose p3 doigts non dominante"], rate: [0, 1], description: "Pseudarthrose ballante de la phalange unguéale des doigts autres que le pouce. Barème officiel." },
+            
+            // PSEUDARTHROSES - Autres phalanges
+            { name: "Pseudarthrose autre phalange du pouce (Main Dominante)", searchTerms: ["pseudarthrose autre phalange pouce main dominante", "pseudarthrose p1 p2 pouce dominante", "pseudarthrose phalange proximale pouce"], rate: [14, 16], description: "Pseudarthrose ballante avec large perte de substance osseuse des autres phalanges du pouce (P1 ou P2). Barème officiel." },
+            { name: "Pseudarthrose autre phalange du pouce (Main Non Dominante)", searchTerms: ["pseudarthrose autre phalange pouce main non dominante", "pseudarthrose p1 p2 pouce non dominante"], rate: [11, 13], description: "Pseudarthrose ballante avec large perte de substance osseuse des autres phalanges du pouce (P1 ou P2). Barème officiel." },
+            { name: "Pseudarthrose autre phalange de l'index (Main Dominante)", searchTerms: ["pseudarthrose autre phalange index main dominante", "pseudarthrose p1 p2 index dominante"], rate: [9, 11], description: "Pseudarthrose ballante des autres phalanges de l'index (P1 ou P2). Barème officiel." },
+            { name: "Pseudarthrose autre phalange de l'index (Main Non Dominante)", searchTerms: ["pseudarthrose autre phalange index main non dominante", "pseudarthrose p1 p2 index non dominante"], rate: [7, 9], description: "Pseudarthrose ballante des autres phalanges de l'index (P1 ou P2). Barème officiel." },
+            { name: "Pseudarthrose autre phalange des doigts longs (Main Dominante)", searchTerms: ["pseudarthrose autre phalange doigts longs main dominante", "pseudarthrose p1 p2 médius annulaire auriculaire dominante"], rate: [4, 6], description: "Pseudarthrose ballante des autres phalanges des doigts autres que pouce et index. Barème officiel." },
+            { name: "Pseudarthrose autre phalange des doigts longs (Main Non Dominante)", searchTerms: ["pseudarthrose autre phalange doigts longs main non dominante", "pseudarthrose p1 p2 médius annulaire auriculaire non dominante"], rate: [3, 5], description: "Pseudarthrose ballante des autres phalanges des doigts autres que pouce et index. Barème officiel." },
+            
+            // LUXATIONS IRRÉDUCTIBLES
+            { name: "Luxation irréductible phalangette du pouce (Main Dominante)", searchTerms: ["luxation irréductible phalangette pouce main dominante", "luxation irréductible p3 pouce dominante", "luxation irréductible ipd pouce"], rate: [4, 6], description: "Luxation irréductible et irréductible de la phalangette du pouce. Barème officiel." },
+            { name: "Luxation irréductible phalangette du pouce (Main Non Dominante)", searchTerms: ["luxation irréductible phalangette pouce main non dominante", "luxation irréductible p3 pouce non dominante"], rate: [3, 5], description: "Luxation irréductible et irréductible de la phalangette du pouce. Barème officiel." },
+            { name: "Luxation irréductible métacarpo-phalangienne du pouce (Main Dominante)", searchTerms: ["luxation irréductible métacarpo phalangienne pouce main dominante", "luxation irréductible mcp pouce dominante"], rate: [10, 25], description: "Luxation irréductible métacarpo-phalangienne du pouce (selon la mobilité restaurée). Barème officiel." },
+            { name: "Luxation irréductible métacarpo-phalangienne du pouce (Main Non Dominante)", searchTerms: ["luxation irréductible métacarpo phalangienne pouce main non dominante", "luxation irréductible mcp pouce non dominante"], rate: [8, 20], description: "Luxation irréductible métacarpo-phalangienne du pouce (selon la mobilité restaurée). Barème officiel." },
+            { name: "Luxation irréductible métacarpo-phalangienne du pouce avec cicatrices adhérentes paume (Main Dominante)", searchTerms: ["luxation irréductible mcp pouce cicatrices adhérentes paume main dominante", "luxation pouce cicatrices palmaires raideur doigts"], rate: [30, 40], description: "Luxation irréductible du pouce avec cicatrices adhérentes de la paume et raideur des autres doigts. Barème officiel." },
+            { name: "Luxation irréductible métacarpo-phalangienne du pouce avec cicatrices adhérentes paume (Main Non Dominante)", searchTerms: ["luxation irréductible mcp pouce cicatrices adhérentes paume main non dominante", "luxation pouce cicatrices palmaires raideur doigts"], rate: [20, 30], description: "Luxation irréductible du pouce avec cicatrices adhérentes de la paume et raideur des autres doigts. Barème officiel." },
+            { name: "Pouce à ressort (Main Dominante)", searchTerms: ["pouce ressort main dominante", "pouce trigger dominante", "ténosynovite sténosante pouce"], rate: [0, 3], description: "Pouce à ressort (ténosynovite sténosante). Barème officiel." },
+            { name: "Pouce à ressort (Main Non Dominante)", searchTerms: ["pouce ressort main non dominante", "pouce trigger non dominante"], rate: [0, 2], description: "Pouce à ressort (ténosynovite sténosante). Barème officiel." },
+            { name: "Pouce collé à l'index (Main Dominante)", searchTerms: ["pouce collé index main dominante", "syndactylie traumatique pouce index dominante", "adhérence pouce index"], rate: [15, 25], description: "Pouce collé à l'index par adhérences post-traumatiques. Barème officiel." },
+            { name: "Pouce collé à l'index (Main Non Dominante)", searchTerms: ["pouce collé index main non dominante", "syndactylie traumatique pouce index non dominante"], rate: [15, 20], description: "Pouce collé à l'index par adhérences post-traumatiques. Barème officiel." },
+            
+            // LUXATIONS DES DOIGTS LONGS
+            { name: "Luxation irréductible phalangette des doigts longs (Main Dominante)", searchTerms: ["luxation irréductible phalangette doigts longs main dominante", "luxation irréductible p3 doigts dominante"], rate: [2, 3], description: "Luxation irréductible de la phalangette des doigts autres que le pouce. Barème officiel." },
+            { name: "Luxation irréductible phalangette des doigts longs (Main Non Dominante)", searchTerms: ["luxation irréductible phalangette doigts longs main non dominante", "luxation irréductible p3 doigts non dominante"], rate: [0, 1], description: "Luxation irréductible de la phalangette des doigts autres que le pouce. Barème officiel." },
+            { name: "Luxation irréductible phalangine et phalange des doigts longs (Main Dominante)", searchTerms: ["luxation irréductible phalangine phalange doigts longs main dominante", "luxation irréductible p1 p2 doigts dominante"], rate: [5, 15], description: "Luxation irréductible de la phalangine et phalange des doigts longs (selon la mobilité restaurée). Barème officiel." },
+            { name: "Luxation irréductible phalangine et phalange des doigts longs (Main Non Dominante)", searchTerms: ["luxation irréductible phalangine phalange doigts longs main non dominante", "luxation irréductible p1 p2 doigts non dominante"], rate: [4, 12], description: "Luxation irréductible de la phalangine et phalange des doigts longs (selon la mobilité restaurée). Barème officiel." },
+        ]
+      },
+      {
+        name: "Doigts - Amputations Multiples et Impotence Totale",
+        injuries: [
+            // IMPOTENCE TOTALE DE PRÉHENSION
+            { name: "Impotence totale définitive de préhension de la main - Flexion ou extension permanente tous doigts (Main Dominante)", searchTerms: ["impotence totale préhension main flexion extension permanente tous doigts dominante", "perte totale fonction main dominante", "main inutilisable dominante"], rate: [60, 65], description: "Par flexion ou extension permanente de tous les doigts, y compris le pouce (avec ou sans ankylose proprement dite). Barème officiel." },
+            { name: "Impotence totale définitive de préhension de la main - Flexion ou extension permanente tous doigts (Main Non Dominante)", searchTerms: ["impotence totale préhension main flexion extension permanente tous doigts non dominante", "perte totale fonction main non dominante"], rate: [45, 50], description: "Par flexion ou extension permanente de tous les doigts, y compris le pouce (avec ou sans ankylose proprement dite). Barème officiel." },
+            { name: "Impotence totale définitive de préhension - Flexion 3 doigts avec raideur autres et atrophie (Main Dominante)", searchTerms: ["impotence totale préhension flexion trois doigts raideur autres atrophie main dominante", "flexion trois doigts raideur atrophie main dominante"], rate: [60, 65], description: "Par flexion ou extension permanente de 3 doigts, avec raideur des autres, atrophie de la main et de l'avant-bras, raideur du poignet. Barème officiel." },
+            { name: "Impotence totale définitive de préhension - Flexion 3 doigts avec raideur autres et atrophie (Main Non Dominante)", searchTerms: ["impotence totale préhension flexion trois doigts raideur autres atrophie main non dominante", "flexion trois doigts raideur atrophie main non dominante"], rate: [45, 50], description: "Par flexion ou extension permanente de 3 doigts, avec raideur des autres, atrophie de la main et de l'avant-bras, raideur du poignet. Barème officiel." },
+            
+            // ABLATIONS DE 2 DOIGTS
+            { name: "Ablation index et un autre doigt avec métacarpiens (Main Dominante)", searchTerms: ["ablation index autre doigt avec métacarpiens main dominante", "amputation index autre doigt métacarpiens dominante"], rate: [30, 40], description: "Ablation de l'index et d'un autre doigt avec les métacarpiens correspondants. Barème officiel." },
+            { name: "Ablation index et un autre doigt avec métacarpiens (Main Non Dominante)", searchTerms: ["ablation index autre doigt avec métacarpiens main non dominante", "amputation index autre doigt métacarpiens non dominante"], rate: [20, 30], description: "Ablation de l'index et d'un autre doigt avec les métacarpiens correspondants. Barème officiel." },
+            { name: "Ablation 2 doigts autres que l'index avec métacarpiens (Main Dominante)", searchTerms: ["ablation deux doigts autres index avec métacarpiens main dominante", "amputation deux doigts sauf index métacarpiens dominante"], rate: [20, 25], description: "Ablation de 2 doigts autres que l'index avec les métacarpiens correspondants (lors de mobilité conservée du pouce et des autres doigts). Barème officiel." },
+            { name: "Ablation 2 doigts autres que l'index avec métacarpiens (Main Non Dominante)", searchTerms: ["ablation deux doigts autres index avec métacarpiens main non dominante", "amputation deux doigts sauf index métacarpiens non dominante"], rate: [15, 20], description: "Ablation de 2 doigts autres que l'index avec les métacarpiens correspondants (lors de mobilité conservée du pouce et des autres doigts). Barème officiel." },
+            { name: "Ablation 2 doigts avec raideur prononcée du pouce et atrophie main (Main Dominante)", searchTerms: ["ablation deux doigts raideur prononcée pouce atrophie main dominante", "amputation deux doigts raideur pouce atrophie dominante"], rate: [50, 55], description: "Ablation de 2 doigts avec ou sans métacarpiens avec raideur très prononcée du pouce et des autres doigts et atrophie de la main. Barème officiel." },
+            { name: "Ablation 2 doigts avec raideur prononcée du pouce et atrophie main (Main Non Dominante)", searchTerms: ["ablation deux doigts raideur prononcée pouce atrophie main non dominante", "amputation deux doigts raideur pouce atrophie non dominante"], rate: [40, 45], description: "Ablation de 2 doigts avec ou sans métacarpiens avec raideur très prononcée du pouce et des autres doigts et atrophie de la main. Barème officiel." },
+            
+            // ABLATIONS DE 3 DOIGTS
+            { name: "Ablation index et 2 autres doigts avec métacarpiens (Main Dominante)", searchTerms: ["ablation index deux autres doigts avec métacarpiens main dominante", "amputation index deux autres doigts métacarpiens dominante"], rate: [40, 50], description: "Ablation de l'index et 2 autres doigts avec les métacarpiens correspondants. Barème officiel." },
+            { name: "Ablation index et 2 autres doigts avec métacarpiens (Main Non Dominante)", searchTerms: ["ablation index deux autres doigts avec métacarpiens main non dominante", "amputation index deux autres doigts métacarpiens non dominante"], rate: [30, 40], description: "Ablation de l'index et 2 autres doigts avec les métacarpiens correspondants. Barème officiel." },
+            { name: "Ablation médius, annulaire, auriculaire avec métacarpiens (Main Dominante)", searchTerms: ["ablation médius annulaire auriculaire avec métacarpiens main dominante", "amputation trois derniers doigts métacarpiens dominante"], rate: [40, 50], description: "Ablation du médius, annulaire et auriculaire avec métacarpiens (selon l'état de mobilité du pouce et de l'index). Barème officiel." },
+            { name: "Ablation médius, annulaire, auriculaire avec métacarpiens (Main Non Dominante)", searchTerms: ["ablation médius annulaire auriculaire avec métacarpiens main non dominante", "amputation trois derniers doigts métacarpiens non dominante"], rate: [30, 35], description: "Ablation du médius, annulaire et auriculaire avec métacarpiens (selon l'état de mobilité du pouce et de l'index). Barème officiel." },
+            { name: "Ablation 3 doigts avec immobilisation pouce et doigt restant (Main Dominante)", searchTerms: ["ablation trois doigts immobilisation pouce doigt restant main dominante", "amputation trois doigts raideur pouce index dominante"], rate: [55, 60], description: "Ablation de 3 doigts avec immobilisation du pouce et du doigt restant. Barème officiel." },
+            { name: "Ablation 3 doigts avec immobilisation pouce et doigt restant (Main Non Dominante)", searchTerms: ["ablation trois doigts immobilisation pouce doigt restant main non dominante", "amputation trois doigts raideur pouce index non dominante"], rate: [45, 50], description: "Ablation de 3 doigts avec immobilisation du pouce et du doigt restant. Barème officiel." },
+            { name: "Ablation index et 2 autres doigts sans métacarpiens (Main Dominante)", searchTerms: ["ablation index deux autres doigts sans métacarpiens main dominante", "amputation index deux autres doigts sans métacarpiens dominante"], rate: [40, 45], description: "Ablation de l'index et 2 autres doigts sans les métacarpiens correspondants (lors de mobilité conservée du pouce et du doigt restant). Barème officiel." },
+            { name: "Ablation index et 2 autres doigts sans métacarpiens (Main Non Dominante)", searchTerms: ["ablation index deux autres doigts sans métacarpiens main non dominante", "amputation index deux autres doigts sans métacarpiens non dominante"], rate: [30, 35], description: "Ablation de l'index et 2 autres doigts sans les métacarpiens correspondants (lors de mobilité conservée du pouce et du doigt restant). Barème officiel." },
+            { name: "Ablation médius, annulaire, auriculaire sans métacarpiens (Main Dominante)", searchTerms: ["ablation médius annulaire auriculaire sans métacarpiens main dominante", "amputation trois derniers doigts sans métacarpiens dominante"], rate: [30, 35], description: "Ablation du médius, annulaire et auriculaire sans métacarpiens (lors de mobilité conservée du pouce et de l'index). Barème officiel." },
+            { name: "Ablation médius, annulaire, auriculaire sans métacarpiens (Main Non Dominante)", searchTerms: ["ablation médius annulaire auriculaire sans métacarpiens main non dominante", "amputation trois derniers doigts sans métacarpiens non dominante"], rate: [20, 25], description: "Ablation du médius, annulaire et auriculaire sans métacarpiens (lors de mobilité conservée du pouce et de l'index). Barème officiel." },
+            { name: "Ablation 3 doigts sans métacarpiens avec immobilisation pouce et doigt restant (Main Dominante)", searchTerms: ["ablation trois doigts sans métacarpiens immobilisation pouce doigt restant main dominante"], rate: [55, 60], description: "Ablation de 3 doigts sans métacarpiens avec immobilisation du pouce et du doigt restant. Barème officiel." },
+            { name: "Ablation 3 doigts sans métacarpiens avec immobilisation pouce et doigt restant (Main Non Dominante)", searchTerms: ["ablation trois doigts sans métacarpiens immobilisation pouce doigt restant main non dominante"], rate: [45, 50], description: "Ablation de 3 doigts sans métacarpiens avec immobilisation du pouce et du doigt restant. Barème officiel." },
+            
+            // ABLATIONS POUCE + INDEX
+            { name: "Ablation phalangette pouce et 2 dernières phalanges index avec mobilité (Main Dominante)", searchTerms: ["ablation phalangette pouce deux dernières phalanges index mobilité main dominante", "amputation p3 pouce p2 p3 index mobilité dominante"], rate: [18, 20], description: "Ablation de la phalangette du pouce et des 2 dernières phalanges de l'index avec mobilité complète des moignons. Barème officiel." },
+            { name: "Ablation phalangette pouce et 2 dernières phalanges index avec mobilité (Main Non Dominante)", searchTerms: ["ablation phalangette pouce deux dernières phalanges index mobilité main non dominante", "amputation p3 pouce p2 p3 index mobilité non dominante"], rate: [13, 15], description: "Ablation de la phalangette du pouce et des 2 dernières phalanges de l'index avec mobilité complète des moignons. Barème officiel." },
+            { name: "Ablation phalangette pouce et 2 dernières phalanges index sans mobilité (Main Dominante)", searchTerms: ["ablation phalangette pouce deux dernières phalanges index sans mobilité main dominante", "amputation p3 pouce p2 p3 index raideur dominante"], rate: [28, 30], description: "Ablation de la phalangette du pouce et des 2 dernières phalanges de l'index sans mobilité des moignons. Barème officiel." },
+            { name: "Ablation phalangette pouce et 2 dernières phalanges index sans mobilité (Main Non Dominante)", searchTerms: ["ablation phalangette pouce deux dernières phalanges index sans mobilité main non dominante", "amputation p3 pouce p2 p3 index raideur non dominante"], rate: [20, 25], description: "Ablation de la phalangette du pouce et des 2 dernières phalanges de l'index sans mobilité des moignons. Barème officiel." },
+            { name: "Ablation totale pouce et index avec autres doigts mobiles (Main Dominante)", searchTerms: ["ablation totale pouce index autres doigts mobiles main dominante", "amputation totale pouce index préhension paume dominante"], rate: [40, 45], description: "Ablation totale du pouce et de l'index si les autres doigts sont assez mobiles pour faire préhension avec la paume. Barème officiel." },
+            { name: "Ablation totale pouce et index avec autres doigts mobiles (Main Non Dominante)", searchTerms: ["ablation totale pouce index autres doigts mobiles main non dominante", "amputation totale pouce index préhension paume non dominante"], rate: [35, 40], description: "Ablation totale du pouce et de l'index si les autres doigts sont assez mobiles pour faire préhension avec la paume. Barème officiel." },
+            { name: "Ablation totale pouce et index avec autres doigts déviés ou raideur (Main Dominante)", searchTerms: ["ablation totale pouce index autres doigts déviés raideur main dominante", "amputation totale pouce index doigts raideur dominante"], rate: [50, 60], description: "Ablation totale du pouce et de l'index si les autres doigts sont déviés ou de mobilité plus ou moins incomplète. Barème officiel." },
+            { name: "Ablation totale pouce et index avec autres doigts déviés ou raideur (Main Non Dominante)", searchTerms: ["ablation totale pouce index autres doigts déviés raideur main non dominante", "amputation totale pouce index doigts raideur non dominante"], rate: [40, 50], description: "Ablation totale du pouce et de l'index si les autres doigts sont déviés ou de mobilité plus ou moins incomplète. Barème officiel." },
+            { name: "Ablation totale pouce et 3 ou 2 doigts autres que l'index (Main Dominante)", searchTerms: ["ablation totale pouce trois deux doigts autres index main dominante", "amputation pouce médius annulaire auriculaire dominante"], rate: [50, 60], description: "Ablation totale du pouce et de 3 ou 2 doigts autres que l'index. Barème officiel." },
+            { name: "Ablation totale pouce et 3 ou 2 doigts autres que l'index (Main Non Dominante)", searchTerms: ["ablation totale pouce trois deux doigts autres index main non dominante", "amputation pouce médius annulaire auriculaire non dominante"], rate: [40, 45], description: "Ablation totale du pouce et de 3 ou 2 doigts autres que l'index. Barème officiel." },
+            
+            // ABLATIONS DE 4 DOIGTS
+            { name: "Ablation 4 doigts avec pouce restant et mobile (Main Dominante)", searchTerms: ["ablation quatre doigts pouce restant mobile main dominante", "amputation quatre doigts pouce mobile dominante"], rate: [45, 50], description: "Ablation de 4 doigts, le pouce restant et mobile. Barème officiel." },
+            { name: "Ablation 4 doigts avec pouce restant et mobile (Main Non Dominante)", searchTerms: ["ablation quatre doigts pouce restant mobile main non dominante", "amputation quatre doigts pouce mobile non dominante"], rate: [35, 45], description: "Ablation de 4 doigts, le pouce restant et mobile. Barème officiel." },
+            { name: "Ablation 4 doigts avec immobilisation du pouce restant (Main Dominante)", searchTerms: ["ablation quatre doigts immobilisation pouce restant main dominante", "amputation quatre doigts pouce raideur dominante"], rate: [55, 60], description: "Ablation de 4 doigts avec immobilisation du pouce restant. Barème officiel." },
+            { name: "Ablation 4 doigts avec immobilisation du pouce restant (Main Non Dominante)", searchTerms: ["ablation quatre doigts immobilisation pouce restant main non dominante", "amputation quatre doigts pouce raideur non dominante"], rate: [45, 55], description: "Ablation de 4 doigts avec immobilisation du pouce restant. Barème officiel." },
+            
+            // ABLATIONS SIMULTANÉES AUX DEUX MAINS
+            { name: "Ablation simultanée des pouces et de tous les doigts aux deux mains", searchTerms: ["ablation simultanée pouces tous doigts deux mains", "amputation totale doigts deux mains", "ablation bilatérale totale doigts"], rate: 100, description: "Ablation simultanée aux deux mains des pouces et de tous les doigts. Barème officiel - IPP maximale." },
+            { name: "Ablation simultanée des pouces et de tous les doigts sauf un aux deux mains", searchTerms: ["ablation simultanée pouces tous doigts sauf un deux mains", "amputation totale doigts sauf un deux mains"], rate: [95, 100], description: "Ablation simultanée aux deux mains des pouces et de tous les doigts à l'exception d'un seul. Barème officiel." },
+            { name: "Ablation simultanée des pouces et de 3 ou 4 doigts aux deux mains", searchTerms: ["ablation simultanée pouces trois quatre doigts deux mains", "amputation bilatérale pouces trois quatre doigts"], rate: [90, 95], description: "Ablation simultanée aux deux mains des pouces et de 3 ou 4 doigts. Barème officiel." },
+            { name: "Ablation simultanée des deux pouces", searchTerms: ["ablation simultanée deux pouces", "amputation bilatérale pouces", "perte deux pouces"], rate: [60, 70], description: "Ablation simultanée des deux pouces. Barème officiel." },
+            { name: "Ablation simultanée des deux pouces et des deux index", searchTerms: ["ablation simultanée deux pouces deux index", "amputation bilatérale pouces index", "perte pouces index deux mains"], rate: [80, 85], description: "Ablation simultanée des deux pouces et des deux index. Barème officiel." },
+            { name: "Ablation simultanée des deux pouces et de 3 ou 4 doigts autres que les index", searchTerms: ["ablation simultanée deux pouces trois quatre doigts autres index", "amputation bilatérale pouces doigts sauf index"], rate: [70, 80], description: "Ablation simultanée des deux pouces et de 3 ou 4 doigts autres que les index. Barème officiel." },
         ]
       },
     ]
@@ -2247,9 +2612,106 @@ const middleCategories: InjuryCategory[] = [
         name: "Genou - Lésions Osseuses et Articulaires",
         injuries: [
             { name: "Fracture de la rotule - Avec gêne fonctionnelle", searchTerms: ["fracture rotule avec gêne fonctionnelle", "fonctionnelle gêne avec rotule fracture", "fracture rotule gêne fonctionnelle", "fracture rotule", "rotule avec"], rate: [5, 15], rateCriteria: { low: "Fracture consolidée, gêne à la flexion complète (accroupissement), douleurs mécaniques.", medium: "Cal vicieux avec craquements, limitation flexion à 90°, douleurs fréquentes.", high: "Patellectomie ou pseudarthrose, perte d'extension active, faiblesse quadriceps majeure." } },
+            { 
+              name: "Ablation de la rotule (Patellectomie) - Avec genou libre", 
+              searchTerms: ["ablation rotule patellectomie avec genou libre", "patellectomie genou libre", "exérèse rotule séquelles"], 
+              rate: [30, 40], 
+              description: "Ablation chirurgicale de la rotule (patellectomie) avec genou libre, atrophie notable du triceps et extension active insuffisante. Barème officiel : 30-40%.",
+              rateCriteria: { 
+                low: "Genou libre, mobilité conservée, atrophie modérée du quadriceps, extension active possible mais faible, marche autonome.", 
+                medium: "Atrophie importante du quadriceps, déficit extension active net, descente escaliers difficile, boiterie.", 
+                high: "Atrophie majeure quadriceps, extension active quasi-impossible, marche très difficile, nécessité canne, combinée avec raideur si présente." 
+              } 
+            },
             { name: "Fracture des plateaux tibiaux - Avec déviation et/ou raideur", searchTerms: ["fracture des plateaux tibiaux avec déviation et/ou raideur", "raideur et/ou déviation avec tibiaux plateaux des fracture", "fracture plateaux tibiaux déviation et/ou raideur", "fracture des", "des plateaux"], rate: [10, 30], rateCriteria: { low: "Déviation axiale minime (<5°), raideur légère (flexion >120°), douleurs mécaniques modérées.", medium: "Déviation modérée (5-10°), raideur moyenne (flexion 90-120°), douleurs fréquentes.", high: "Déviation importante (>10° valgus/varus), raideur sévère (flexion <90°), instabilité, douleurs permanentes." } },
             { name: "Fracture des condyles fémoraux - Avec déviation et/ou raideur", searchTerms: ["fracture des condyles fémoraux avec déviation et/ou raideur", "raideur et/ou déviation avec fémoraux condyles des fracture", "fracture condyles fémoraux déviation et/ou raideur", "fracture des", "des condyles"], rate: [10, 30], rateCriteria: { low: "Déviation minime, raideur légère (flexion >120°), douleurs mécaniques modérées.", medium: "Déviation modérée, raideur moyenne (flexion 90-120°), douleurs fréquentes.", high: "Déviation importante, raideur sévère (flexion <90°), instabilité, douleurs permanentes." } },
-            { name: "Hydarthrose chronique du genou", searchTerms: ["hydarthrose chronique genou", "genou chronique hydarthrose", "hydarthrose chronique", "chronique genou"], rate: [5, 15], rateCriteria: { low: "Épanchements rares (1-2/an), drainage ponctuel.", medium: "Épanchements récidivants (mensulres), gonflement permanent modéré.", high: "Hydarthrose permanente volumineuse, ponctions fréquentes, limitation mobilité, synovectomie envisagée." } },
+            { 
+              name: "Hydarthrose légère du genou", 
+              searchTerms: ["hydarthrose légère genou", "épanchement modéré genou", "hydarthrose minime"], 
+              rate: [5, 10], 
+              description: "Hydarthrose légère avec épanchements occasionnels. Barème officiel : 5-10%.",
+              rateCriteria: { 
+                low: "Épanchements rares (1-2/an), drainage ponctuel, gêne minime.", 
+                high: "Épanchements plus fréquents (3-4/an), gonflement modéré, limitation activités sportives." 
+              } 
+            },
+            { 
+              name: "Hydarthrose chronique du genou à poussées récidivantes", 
+              searchTerms: ["hydarthrose chronique genou poussées récidivantes", "épanchement récidivant genou", "hydarthrose avec amyotrophie"], 
+              rate: [10, 20], 
+              description: "Hydarthrose chronique à poussées récidivantes avec amyotrophie. Barème officiel : 10-20%.",
+              rateCriteria: { 
+                low: "Épanchements récidivants mensuels, gonflement modéré, amyotrophie débutante.", 
+                medium: "Épanchements fréquents (hebdomadaires), gonflement important, amyotrophie notable, limitation marche.", 
+                high: "Hydarthrose permanente volumineuse, ponctions fréquentes, amyotrophie majeure, limitation mobilité sévère." 
+              } 
+            },
+            { 
+              name: "Double hydarthrose volumineuse bilatérale gênant marche et station debout", 
+              searchTerms: ["double hydarthrose volumineuse bilatérale gênant marche station debout", "hydarthrose bilatérale deux genoux", "épanchement bilatéral genoux"], 
+              rate: [25, 35], 
+              description: "Double hydarthrose volumineuse des deux genoux gênant la marche et la station debout. Barème officiel : 25-35%.",
+              rateCriteria: { 
+                low: "Hydarthroses bilatérales modérées, marche limitée, ponctions régulières.", 
+                medium: "Hydarthroses bilatérales importantes, marche difficile <500m, station debout limitée.", 
+                high: "Hydarthroses bilatérales volumineuses permanentes, marche très limitée <200m, station debout quasi-impossible, nécessité canne(s)." 
+              } 
+            },
+            { name: "Hydarthrose chronique du genou", searchTerms: ["hydarthrose chronique genou", "genou chronique hydarthrose", "hydarthrose chronique", "chronique genou"], rate: [5, 15], rateCriteria: { low: "Épanchements rares (1-2/an), drainage ponctuel.", medium: "Épanchements récidivants (mensuels), gonflement permanent modéré.", high: "Hydarthrose permanente volumineuse, ponctions fréquentes, limitation mobilité, synovectomie envisagée." } },
+            { 
+              name: "Rupture ou luxation du ménisque", 
+              searchTerms: ["rupture luxation ménisque", "déchirure ménisque", "lésion méniscale traumatique"], 
+              rate: [10, 30], 
+              description: "Rupture ou luxation du ménisque avec séquelles fonctionnelles. Barème officiel : 10-30%.",
+              rateCriteria: { 
+                low: "Méniscectomie partielle, récupération satisfaisante, gêne minime.", 
+                medium: "Méniscectomie totale, douleurs mécaniques, hydarthrose récidivante.", 
+                high: "Complications : arthrose précoce, chondropathie sévère, douleurs permanentes, limitation marche." 
+              } 
+            },
+            { 
+              name: "Rupture du tendon rotulien (ou du tendon quadricipital)", 
+              searchTerms: ["rupture tendon rotulien tendon quadricipital", "désinsertion tendon rotule", "rupture appareil extenseur genou"], 
+              rate: [10, 15], 
+              description: "Rupture du tendon rotulien ou du tendon quadricipital. Barème officiel : 10-15%.",
+              rateCriteria: { 
+                low: "Rupture réparée chirurgicalement, récupération extension active satisfaisante, déficit force modéré.", 
+                medium: "Rupture avec séquelles : déficit extension active partiel, amyotrophie quadriceps, difficulté escaliers.", 
+                high: "Rupture avec échec réparation, déficit extension active majeur, impossibilité montée escaliers sans aide." 
+              } 
+            },
+            { 
+              name: "Rupture du ligament rotulien", 
+              searchTerms: ["rupture ligament rotulien", "déchirure ligament patellaire", "rupture ligament patella"], 
+              rate: [10, 15], 
+              description: "Rupture du ligament rotulien (ligament patellaire). Barème officiel : 10-15%.",
+              rateCriteria: { 
+                low: "Rupture réparée, extension active conservée, déficit force léger.", 
+                medium: "Rupture avec séquelles : extension active faible, amyotrophie, douleurs résiduelles.", 
+                high: "Rupture mal réparée, déficit extension active important, marche difficile." 
+              } 
+            },
+            { 
+              name: "Corps étrangers traumatiques du genou", 
+              searchTerms: ["corps étrangers traumatiques genou", "fragments ostéochondraux genou", "souris articulaire genou"], 
+              rate: [5, 25], 
+              description: "Corps étrangers traumatiques intra-articulaires du genou (fragments ostéochondraux, souris articulaires). Barème officiel : 5-25%.",
+              rateCriteria: { 
+                low: "Corps étranger unique retiré, séquelles minimes, mobilité conservée.", 
+                medium: "Corps étrangers multiples ou non retirables, blocages occasionnels, douleurs mécaniques, hydarthrose.", 
+                high: "Corps étrangers multiples avec complications : blocages fréquents, arthrose précoce, douleurs permanentes, limitation sévère." 
+              } 
+            },
+            { 
+              name: "Maladie de Pellegrini-Hoffa (calcification ligament latéral interne)", 
+              searchTerms: ["maladie pellegrini hoffa calcification ligament latéral interne", "pellegrini hoffa syndrome", "ossification LLI genou"], 
+              rate: [8, 10], 
+              description: "Maladie de Pellegrini-Hoffa : calcification/ossification du ligament latéral interne du genou post-traumatique. Barème officiel : 8-10%.",
+              rateCriteria: { 
+                low: "Calcification modérée, douleurs mécaniques, mobilité quasi-normale.", 
+                high: "Calcification importante, douleurs fréquentes, limitation mobilité, raideur." 
+              } 
+            },
             { name: "Arthrose fémoro-patellaire ou fémoro-tibiale post-traumatique", searchTerms: ["arthrose fémoro patellaire fémoro tibiale post traumatique", "traumatique post tibiale fémoro patellaire fémoro arthrose", "arthrose fémoro", "fémoro patellaire", "patellaire fémoro"], rate: [10, 30], rateCriteria: { low: "Douleurs mécaniques, pincement radiologique modéré.", high: "Arthrose sévère avec déviation axiale et raideur." } },
             { name: "Séquelles de prothèse totale de genou", searchTerms: ["séquelles prothèse totale genou", "genou totale prothèse séquelles", "séquelles prothèse", "prothèse totale", "totale genou"], rate: [15, 40], rateCriteria: { low: "Prothèse indolore, mobilité > 90°, marche sans aide.", high: "Douleurs, instabilité, raideur, nécessité de cannes." } },
         ]
@@ -2421,16 +2883,306 @@ const middleCategories: InjuryCategory[] = [
         ]
       },
       {
-        name: "Pied - Fractures",
+        name: "Pied - Fractures - Métatarse",
         injuries: [
-            { name: "Fracture de l'astragale (Talus) - Avec cal vicieux", searchTerms: ["fracture l'astragale talus avec cal vicieux", "vicieux cal avec talus l'astragale fracture", "fracture l'astragale talus cal vicieux", "fracture l'astragale", "l'astragale talus"], rate: [10, 25], rateCriteria: { low: "Cal vicieux minime, raideur sous-astragalienne modérée, douleurs mécaniques.", medium: "Cal vicieux important, raideur sévère arrière-pied, boiterie.", high: "Pseudarthrose ou nécrose astragale, arthrose tibio-tarsienne et sous-astragalienne, douleurs permanentes, marche très limitée." } },
-            { name: "Fracture du calcanéum - Avec douleurs et boiterie", searchTerms: ["fracture calcanéum avec douleurs boiterie", "boiterie douleurs avec calcanéum fracture", "fracture calcanéum douleurs boiterie", "fracture calcanéum", "calcanéum avec"], rate: [10, 30], rateCriteria: { low: "Fracture extra-articulaire consolidée, douleurs mécaniques à la marche prolongée, boiterie discrète.", medium: "Fracture thalamique avec enfoncement thalamus, raideur sous-astragalienne, boiterie nette, douleurs fréquentes.", high: "Cal vicieux calcanéum avec élargissement majeur, arthrose sous-astragalienne sévère, douleurs permanentes, marche <500m, nécessité canne." } },
+            { 
+              name: "Fracture du premier métatarsien", 
+              searchTerms: ["fracture premier métatarsien", "fracture M1", "fracture métatarsien gros orteil", "fracture métatarsien hallux"], 
+              rate: [7, 15], 
+              description: "Fracture du premier métatarsien (M1). Barème officiel : 7-15%.",
+              rateCriteria: { 
+                low: "Fracture consolidée en bonne position, douleurs mécaniques légères, démarche quasi-normale.", 
+                medium: "Cal vicieux modéré, métatarsalgie M1, troubles appui/propulsion modérés.",
+                high: "Cal vicieux important avec déformation, métatarsalgie sévère, troubles propulsion majeurs, nécessité semelles orthopédiques." 
+              } 
+            },
+            { 
+              name: "Fracture du cinquième métatarsien", 
+              searchTerms: ["fracture cinquième métatarsien", "fracture M5", "fracture métatarsien latéral", "fracture métatarsien 5e orteil"], 
+              rate: [5, 8], 
+              description: "Fracture du cinquième métatarsien (M5). Barème officiel : 5-8%.",
+              rateCriteria: { 
+                low: "Fracture consolidée en bonne position, douleurs mécaniques modérées.", 
+                high: "Cal vicieux, douleurs latérales persistantes, troubles appui latéral, conflit chaussage." 
+              } 
+            },
+            { 
+              name: "Fracture d'un métatarsien moyen (2e, 3e ou 4e)", 
+              searchTerms: ["fracture métatarsien moyen", "fracture M2 M3 M4", "fracture deuxième troisième quatrième métatarsien", "fracture métatarsien central"], 
+              rate: [3, 5], 
+              description: "Fracture d'un métatarsien moyen (2e, 3e ou 4e métatarsien). Barème officiel : 3-5%.",
+              rateCriteria: { 
+                low: "Fracture consolidée, douleurs mécaniques discrètes.", 
+                high: "Cal vicieux, métatarsalgie d'appui, nécessité semelles." 
+              } 
+            },
             { name: "Fracture des métatarsiens - Avec douleurs à la marche", searchTerms: ["fracture des métatarsiens avec douleurs marche", "marche douleurs avec métatarsiens des fracture", "fracture métatarsiens douleurs marche", "fracture des", "des métatarsiens"], rate: [3, 10], rateCriteria: { low: "Fracture 1 métatarsien consolidée, douleurs mécaniques légères, port chaussures normal.", medium: "Fractures multiples métatarsiens avec cal vicieux, métatarsalgies d'appui, nécessité semelles orthopédiques.", high: "Cals vicieux multiples avec avant-pied élargi/déformé, troubles statiques sévères, douleurs permanentes, chaussage orthopédique obligatoire." } },
         ]
       },
       {
-        name: "Pied - Raideurs et Ankyloses",
+        name: "Pied - Fractures - Tarse",
         injuries: [
+            // Fractures combinées métatarsiens + tarse
+            { 
+              name: "Fractures combinées métatarsiens et tarse - Plante affaissée et douloureuse", 
+              searchTerms: ["fractures combinées métatarsiens et tarse plante affaissée douloureuse", "fracture lisfranc affaissement plantaire", "fracture médio tarse avant pied", "plante affaissée"], 
+              rate: [10, 20], 
+              description: "Fractures combinées des métatarsiens et des os du tarse avec affaissement de la plante du pied et douleurs. Barème officiel : 10-20%.",
+              rateCriteria: { 
+                low: "Affaissement modéré, douleurs mécaniques, semelles efficaces.", 
+                high: "Affaissement important, douleurs permanentes, troubles statiques majeurs." 
+              } 
+            },
+            { 
+              name: "Fractures combinées métatarsiens et tarse - Avec déviation du pied", 
+              searchTerms: ["fractures combinées métatarsiens et tarse avec déviation pied", "fracture lisfranc déviation varus valgus", "déformation pied post fracture"], 
+              rate: [20, 30], 
+              description: "Fractures combinées avec déviation du pied (varus ou valgus). Barème officiel : 20-30%.",
+              rateCriteria: { 
+                low: "Déviation modérée, marche possible avec chaussage adapté.", 
+                high: "Déviation sévère, troubles statiques majeurs, boiterie importante." 
+              } 
+            },
+            { 
+              name: "Fractures combinées métatarsiens et tarse - Pied bot traumatique", 
+              searchTerms: ["fractures combinées pied bot traumatique", "pied bot acquis post fracture", "équin varus traumatique"], 
+              rate: [30, 50], 
+              description: "Fractures combinées avec pied bot traumatique (déformation en équin-varus sévère). Barème officiel : 30-50%.",
+              rateCriteria: { 
+                low: "Pied bot partiellement réductible, chaussage orthopédique possible.", 
+                high: "Pied bot irréductible, appui très limité, marche très difficile." 
+              } 
+            },
+            { 
+              name: "Fractures combinées métatarsiens et tarse - Avec atrophie de la jambe", 
+              searchTerms: ["fractures combinées avec atrophie jambe", "syndrome algodystrophique pied", "atrophie musculaire jambe post fracture"], 
+              rate: [30, 50], 
+              description: "Fractures combinées avec atrophie importante de la jambe (syndrome algodystrophique ou complications vasculo-nerveuses). Barème officiel : 30-50%.",
+              rateCriteria: { 
+                low: "Atrophie modérée, récupération partielle possible.", 
+                high: "Atrophie sévère, douleurs permanentes, impotence fonctionnelle majeure." 
+              } 
+            },
+            
+            // Fractures isolées astragale
+            { 
+              name: "Fracture isolée de l'astragale - Consolidation simple", 
+              searchTerms: ["fracture isolée astragale consolidation simple", "fracture talus sans complication", "fracture astragale consolidée"], 
+              rate: [5, 10], 
+              description: "Fracture isolée de l'astragale avec consolidation simple sans complications majeures. Barème officiel : 5-10%.",
+              rateCriteria: { 
+                low: "Consolidation sans cal vicieux, raideur minime.", 
+                high: "Raideur modérée sous-astragalienne, douleurs mécaniques." 
+              } 
+            },
+            { 
+              name: "Fracture isolée de l'astragale - Cal vicieux avec séquelles", 
+              searchTerms: ["fracture isolée astragale cal vicieux séquelles", "fracture talus cal vicieux", "astragale mal consolidée"], 
+              rate: [10, 25], 
+              description: "Fracture isolée de l'astragale avec cal vicieux et séquelles fonctionnelles importantes. Barème officiel : 10-25%.",
+              rateCriteria: { 
+                low: "Cal vicieux minime, raideur sous-astragalienne modérée, douleurs mécaniques.", 
+                medium: "Cal vicieux important, raideur sévère arrière-pied, boiterie.", 
+                high: "Pseudarthrose ou nécrose astragale, arthrose tibio-tarsienne et sous-astragalienne, douleurs permanentes, marche très limitée." 
+              } 
+            },
+            { 
+              name: "Fracture isolée de l'astragale - Évolution avec nécrose aseptique", 
+              searchTerms: ["fracture isolée astragale nécrose aseptique", "fracture talus ostéonécrose", "nécrose avasculaire astragale"], 
+              rate: [25, 40], 
+              description: "Fracture isolée de l'astragale compliquée de nécrose aseptique (ostéonécrose). Barème officiel : 25-40%.",
+              rateCriteria: { 
+                low: "Nécrose partielle, arthrose débutante, douleurs modérées.", 
+                high: "Nécrose complète, effondrement astragale, arthrose sévère, douleurs permanentes, marche très limitée." 
+              } 
+            },
+            
+            // Fractures du calcanéum
+            { 
+              name: "Fracture du corps du calcanéum - Consolidation simple", 
+              searchTerms: ["fracture corps calcanéum consolidation simple", "fracture calcaneus sans complication", "fracture calcanéum consolidée"], 
+              rate: [12, 15], 
+              description: "Fracture du corps du calcanéum avec consolidation simple. Barème officiel : 12-15%.",
+              rateCriteria: { 
+                low: "Consolidation sans déformation, douleurs mécaniques modérées.", 
+                high: "Élargissement modéré talon, raideur sous-astragalienne, boiterie discrète." 
+              } 
+            },
+            { 
+              name: "Fracture du corps du calcanéum - Cal vicieux avec séquelles", 
+              searchTerms: ["fracture corps calcanéum cal vicieux séquelles", "fracture calcaneus mal consolidée", "cal vicieux calcanéum"], 
+              rate: [15, 30], 
+              description: "Fracture du corps du calcanéum avec cal vicieux et séquelles importantes. Barème officiel : 15-30%.",
+              rateCriteria: { 
+                low: "Cal vicieux modéré, raideur sous-astragalienne, douleurs fréquentes.", 
+                medium: "Cal vicieux important, élargissement talon, arthrose sous-astragalienne, boiterie nette.", 
+                high: "Cal vicieux sévère avec élargissement majeur, arthrose sévère, douleurs permanentes, marche <500m." 
+              } 
+            },
+            { 
+              name: "Fracture du corps du calcanéum - Pseudarthrose ou complications graves", 
+              searchTerms: ["fracture corps calcanéum pseudarthrose complications graves", "pseudarthrose calcanéum", "calcanéum non consolidé"], 
+              rate: [40, 50], 
+              description: "Fracture du corps du calcanéum avec pseudarthrose ou complications graves. Barème officiel : 40-50%.",
+              rateCriteria: { 
+                low: "Pseudarthrose peu douloureuse, marche limitée mais possible.", 
+                high: "Pseudarthrose douloureuse, déformation majeure, impotence fonctionnelle sévère, nécessité canne permanente." 
+              } 
+            },
+            { 
+              name: "Fracture de la grande apophyse du calcanéum", 
+              searchTerms: ["fracture grande apophyse calcanéum", "fracture tubérosité antérieure calcanéum", "arrachement grande apophyse"], 
+              rate: [10, 15], 
+              description: "Fracture de la grande apophyse du calcanéum (tubérosité antérieure). Barème officiel : 10-15%.",
+              rateCriteria: { 
+                low: "Consolidation satisfaisante, douleurs mécaniques modérées.", 
+                high: "Cal vicieux, conflit chaussage, douleurs persistantes." 
+              } 
+            },
+            { 
+              name: "Fracture de la petite apophyse du calcanéum", 
+              searchTerms: ["fracture petite apophyse calcanéum", "fracture apophyse postérieure calcanéum mineure", "arrachement petite apophyse"], 
+              rate: [2, 5], 
+              description: "Fracture de la petite apophyse du calcanéum. Barème officiel : 2-5%.",
+              rateCriteria: { 
+                low: "Consolidation simple, gêne minime.", 
+                high: "Douleurs résiduelles modérées." 
+              } 
+            },
+            { 
+              name: "Fracture de la tubérosité postérieure du calcanéum", 
+              searchTerms: ["fracture tubérosité postérieure calcanéum", "arrachement achilléen calcanéum", "fracture insertion achille"], 
+              rate: [5, 15], 
+              description: "Fracture de la tubérosité postérieure du calcanéum (insertion du tendon d'Achille). Barème officiel : 5-15%.",
+              rateCriteria: { 
+                low: "Consolidation satisfaisante, force triceps quasi-normale.", 
+                medium: "Cal vicieux modéré, déficit force triceps partiel.", 
+                high: "Cal vicieux important ou pseudarthrose, faiblesse triceps majeure, limitation marche." 
+              } 
+            },
+            { 
+              name: "Fracture des deux calcanéums", 
+              searchTerms: ["fracture des deux calcanéums", "fracture bilatérale calcanéum", "double fracture calcaneus"], 
+              rate: [40, 70], 
+              description: "Fracture bilatérale des deux calcanéums. Barème officiel : 40-70%.",
+              rateCriteria: { 
+                low: "Consolidations satisfaisantes bilatérales, raideurs modérées, marche autonome possible.", 
+                medium: "Cals vicieux bilatéraux, douleurs fréquentes, boiterie importante, périmètre marche limité.", 
+                high: "Cals vicieux sévères bilatéraux, douleurs permanentes, marche très limitée <200m, nécessité aides techniques permanentes." 
+              } 
+            },
+            
+            // Autres fractures du tarse
+            { 
+              name: "Fracture du scaphoïde tarsien", 
+              searchTerms: ["fracture scaphoïde tarsien", "fracture naviculaire pied", "fracture os naviculaire tarse"], 
+              rate: [5, 20], 
+              description: "Fracture du scaphoïde tarsien (os naviculaire du pied). Barème officiel : 5-20%.",
+              rateCriteria: { 
+                low: "Consolidation simple, raideur minime médio-tarse.", 
+                medium: "Cal vicieux modéré, raideur médio-tarsienne, douleurs mécaniques.", 
+                high: "Pseudarthrose ou arthrose médio-tarsienne sévère, douleurs permanentes, boiterie importante." 
+              } 
+            },
+            { 
+              name: "Fracture du cuboïde", 
+              searchTerms: ["fracture cuboïde", "fracture cuboïde pied", "fracture os cuboïde tarse"], 
+              rate: [8, 30], 
+              description: "Fracture du cuboïde. Barème officiel : 8-30%.",
+              rateCriteria: { 
+                low: "Consolidation satisfaisante, raideur latérale pied modérée.", 
+                medium: "Cal vicieux, enfoncement cuboïde, raideur importante.", 
+                high: "Cal vicieux sévère avec déformation pied, arthrose, douleurs permanentes, troubles statiques majeurs." 
+              } 
+            },
+            { 
+              name: "Fracture des cunéiformes", 
+              searchTerms: ["fracture cunéiformes", "fracture os cunéiformes pied", "fracture cunéiforme médial intermédiaire latéral"], 
+              rate: [6, 20], 
+              description: "Fracture d'un ou plusieurs os cunéiformes. Barème officiel : 6-20%.",
+              rateCriteria: { 
+                low: "Fracture d'un seul cunéiforme, consolidation simple.", 
+                medium: "Fractures multiples cunéiformes ou cal vicieux, raideur médio-tarse.", 
+                high: "Cals vicieux multiples, arthrose tarso-métatarsienne, troubles statiques, douleurs permanentes." 
+              } 
+            },
+        ]
+      },
+      {
+        name: "Pied - Raideurs et Ankyloses - Articulation Tibio-Tarsienne",
+        injuries: [
+            { 
+              name: "Raideur de l'articulation tibio-tarsienne (cheville) - Angle favorable", 
+              searchTerms: ["raideur articulation tibio tarsienne cheville angle favorable", "raideur cheville angle droit fonctionnel", "limitation mobilité cheville angle bon"], 
+              rate: [5, 8], 
+              description: "Raideur de la cheville avec limitation modérée de la mobilité en angle favorable (proche angle droit). Barème officiel : 5-8%.",
+              rateCriteria: { 
+                low: "Raideur légère, mobilité résiduelle 10-15°, marche quasi-normale.", 
+                high: "Raideur importante, mobilité résiduelle <10°, boiterie discrète." 
+              } 
+            },
+            { 
+              name: "Raideur de l'articulation tibio-tarsienne (cheville) - Angle défavorable", 
+              searchTerms: ["raideur articulation tibio tarsienne cheville angle défavorable", "raideur cheville équin varus", "limitation mobilité cheville position vicieuse"], 
+              rate: [10, 30], 
+              description: "Raideur de la cheville avec limitation importante en angle défavorable (équin, varus, valgus). Barème officiel : 10-30%.",
+              rateCriteria: { 
+                low: "Angle modérément défavorable, chaussage adapté possible, marche limitée.", 
+                medium: "Angle défavorable, boiterie importante, périmètre marche réduit.", 
+                high: "Angle très défavorable (équin sévère), marche très difficile, nécessité canne, chaussage orthopédique complexe." 
+              } 
+            },
+            { 
+              name: "Ankylose tibio-tarsienne (cheville) - À angle droit", 
+              searchTerms: ["ankylose tibio tarsienne cheville angle droit", "ankylose cheville position fonctionnelle", "blocage cheville angle droit"], 
+              rate: [10, 20], 
+              description: "Ankylose complète de la cheville à angle droit (position fonctionnelle). Barème officiel : 10-20%.",
+              rateCriteria: { 
+                low: "Ankylose stable à angle droit, adaptation satisfaisante, boiterie modérée.", 
+                high: "Ankylose avec douleurs résiduelles, troubles statiques, boiterie nette." 
+              } 
+            },
+            { 
+              name: "Ankylose tibio-tarsienne (cheville) - À angle droit avec déformation du pied", 
+              searchTerms: ["ankylose tibio tarsienne angle droit avec déformation pied", "ankylose cheville déformation varus valgus", "blocage cheville avec déformation"], 
+              rate: [20, 30], 
+              description: "Ankylose de la cheville à angle droit mais avec déformation du pied (varus, valgus). Barème officiel : 20-30%.",
+              rateCriteria: { 
+                low: "Déformation modérée, chaussage adapté possible.", 
+                high: "Déformation importante, troubles statiques majeurs, chaussage très difficile." 
+              } 
+            },
+            { 
+              name: "Ankylose tibio-tarsienne (cheville) - En attitude vicieuse", 
+              searchTerms: ["ankylose tibio tarsienne attitude vicieuse", "ankylose cheville équin sévère", "blocage cheville position invalidante"], 
+              rate: [30, 50], 
+              description: "Ankylose de la cheville en attitude vicieuse (équin, varus, valgus sévère). Barème officiel : 30-50%.",
+              rateCriteria: { 
+                low: "Attitude vicieuse modérée, marche possible avec aide.", 
+                medium: "Attitude vicieuse importante, appui difficile, périmètre marche très limité.", 
+                high: "Attitude vicieuse sévère, appui quasi-impossible, marche très limitée même avec aide." 
+              } 
+            },
+            { 
+              name: "Désarticulation tibio-tarsienne", 
+              searchTerms: ["désarticulation tibio tarsienne", "amputation syme", "désarticulation cheville"], 
+              rate: [50, 55], 
+              description: "Désarticulation au niveau de l'articulation tibio-tarsienne (amputation de Syme). Barème officiel : 50-55%.",
+              rateCriteria: { 
+                low: "Moignon satisfaisant, appareillage bien toléré, marche autonome >1km.", 
+                high: "Moignon douloureux, appareillage mal toléré, marche limitée <500m." 
+              } 
+            },
+            { 
+              name: "Amputation des deux pieds", 
+              searchTerms: ["amputation des deux pieds", "amputation bilatérale pieds", "double amputation pied"], 
+              rate: [85, 100], 
+              description: "Amputation bilatérale des deux pieds (quel que soit le niveau). Barème officiel : 85-100%.",
+              rateCriteria: { 
+                low: "Appareillages bilatéraux bien tolérés, déambulation autonome possible avec aides.", 
+                high: "Appareillages mal tolérés, autonomie très limitée, dépendance majeure pour déplacements." 
+              } 
+            },
             { name: "Ankylose d'une articulation du tarse", searchTerms: ["ankylose d'une articulation tarse", "tarse articulation d'une ankylose", "ankylose d'une", "d'une articulation", "articulation tarse"], rate: [10, 20], rateCriteria: { low: "Ankylose sous-astragalienne, adaptation possible, boiterie discrète.", medium: "Ankylose médio-tarsienne avec raideur globale arrière-pied.", high: "Ankyloses multiples tarse, pied rigide, troubles statiques, boiterie majeure." } },
             { name: "Pied plat ou pied creux post-traumatique", searchTerms: ["pied plat pied creux post traumatique", "traumatique post creux pied plat pied", "pied plat", "plat pied", "pied creux"], rate: [5, 20], rateCriteria: { low: "Déformation modérée, douleurs mécaniques, correction semelles efficace.", medium: "Déformation importante, métatarsalgies/talalgies fréquentes, chaussage orthopédique.", high: "Déformation sévère irréductible, troubles statiques majeurs, douleurs permanentes, périmètre marche très limité." } },
         ]
@@ -2482,23 +3234,56 @@ const middleCategories: InjuryCategory[] = [
             },
             { 
                 name: "Opération de Pirogoff", 
-                searchTerms: ["opération pirogoff"], rate: 50, 
-                description: "Amputation du pied avec conservation partielle du calcanéum fixé sous le tibia. Technique d'amputation conservant l'appui calcanéen."
+                searchTerms: ["opération pirogoff amputation"], rate: [35, 40], 
+                description: "Amputation du pied avec conservation partielle du calcanéum fixé sous le tibia. Technique d'amputation conservant l'appui calcanéen. Barème officiel : 35-40%.",
+                rateCriteria: {
+                    low: "Moignon satisfaisant, appareillage bien toléré, marche autonome.",
+                    high: "Moignon douloureux, troubles statiques, marche limitée."
+                }
             },
             { 
                 name: "Opération de Ricard (amputation inter-tibio-calcanéenne)", 
-                searchTerms: ["opération ricard amputation inter tibio calcanéenne", "calcanéenne tibio inter amputation ricard opération", "opération ricard", "ricard amputation", "amputation inter"], rate: 45, 
-                description: "Amputation inter-tibio-calcanéenne. Technique d'amputation partielle du pied."
+                searchTerms: ["opération ricard amputation inter tibio calcanéenne", "calcanéenne tibio inter amputation ricard opération", "opération ricard", "ricard amputation", "amputation inter"], rate: [30, 35], 
+                description: "Amputation inter-tibio-calcanéenne. Technique d'amputation partielle du pied. Barème officiel : 30-35%.",
+                rateCriteria: {
+                    low: "Moignon satisfaisant, appareillage bien adapté, marche autonome.",
+                    high: "Moignon douloureux, appareillage difficile, marche limitée."
+                }
             },
             { 
-                name: "Désarticulation médio-tarsienne (amputation de Chopart)", 
-                searchTerms: ["désarticulation médio tarsienne amputation chopart", "chopart amputation tarsienne médio désarticulation", "désarticulation médio", "médio tarsienne", "tarsienne amputation"], rate: 45, 
-                description: "Amputation du pied au niveau de l'articulation médio-tarsienne (entre arrière-pied et avant-pied). Conservation de l'astragale et du calcanéum. Équivalent aux opérations de Syme, Pirogoff, Ricard (désarticulation tibio-tarsienne et amputation inter-tibio-calcanéenne)."
+                name: "Désarticulation médio-tarsienne (Chopart) - Bonne attitude du pied", 
+                searchTerms: ["désarticulation médio tarsienne chopart bonne attitude", "amputation chopart attitude favorable", "désarticulation chopart position fonctionnelle"], 
+                rate: [30, 35], 
+                description: "Désarticulation médio-tarsienne (Chopart) avec moignon en bonne attitude (angle droit, pas d'équin). Barème officiel : 30-35%.",
+                rateCriteria: { 
+                    low: "Moignon satisfaisant, appareillage bien toléré, déambulation autonome.", 
+                    high: "Moignon avec douleurs modérées, appareillage nécessaire en permanence." 
+                }
+            },
+            { 
+                name: "Désarticulation médio-tarsienne (Chopart) - Mauvaise attitude du pied", 
+                searchTerms: ["désarticulation médio tarsienne chopart mauvaise attitude", "amputation chopart équin varus", "désarticulation chopart attitude vicieuse"], 
+                rate: [40, 45], 
+                description: "Désarticulation médio-tarsienne (Chopart) avec moignon en mauvaise attitude (équin, varus). Barème officiel : 40-45%.",
+                rateCriteria: { 
+                    low: "Attitude vicieuse modérée, appareillage adapté possible.", 
+                    high: "Attitude vicieuse sévère, appareillage très difficile, marche très limitée." 
+                }
+            },
+            { 
+                name: "Désarticulation sous-astragalienne", 
+                searchTerms: ["désarticulation sous astragalienne", "amputation sous astragalienne", "exérèse calcanéum"], 
+                rate: [35, 40], 
+                description: "Désarticulation sous-astragalienne (ablation du calcanéum, conservation de l'astragale). Barème officiel : 35-40%.",
+                rateCriteria: { 
+                    low: "Moignon satisfaisant, appareillage bien adapté, marche autonome >500m.", 
+                    high: "Moignon instable, douleurs, marche limitée <500m, nécessité canne." 
+                }
             },
             { 
                 name: "Désarticulation tarso-métatarsienne (amputation de Lisfranc)", 
-                searchTerms: ["désarticulation tarso métatarsienne amputation lisfranc", "lisfranc amputation métatarsienne tarso désarticulation", "désarticulation tarso", "tarso métatarsienne", "métatarsienne amputation"], rate: [35, 40], 
-                description: "Amputation de l'avant-pied au niveau de l'articulation de Lisfranc (entre tarse et métatarsiens). Perte de tous les métatarsiens et orteils.",
+                searchTerms: ["désarticulation tarso métatarsienne amputation lisfranc", "lisfranc amputation métatarsienne tarso désarticulation", "désarticulation tarso", "tarso métatarsienne", "métatarsienne amputation"], rate: [30, 35], 
+                description: "Amputation de l'avant-pied au niveau de l'articulation de Lisfranc (entre tarse et métatarsiens). Perte de tous les métatarsiens et orteils. Barème officiel : 30-35%.",
                 rateCriteria: { 
                     low: "Moignon d'appui satisfaisant, chaussage orthopédique bien toléré, déambulation autonome >1km, activités quotidiennes préservées.", 
                     high: "Moignon douloureux avec troubles trophiques, déséquilibre postural majeur, marche limitée <500m, nécessité canne, chaussage très difficile, retentissement professionnel majeur." 
@@ -2506,8 +3291,8 @@ const middleCategories: InjuryCategory[] = [
             },
             { 
                 name: "Amputation trans-métatarsienne (perte des cinq orteils)", 
-                searchTerms: ["amputation trans métatarsienne perte des cinq orteils", "amputation trans métatarsienne amputation des cinq orteils", "orteils cinq des perte métatarsienne trans amputation", "amputation trans métatarsienne perte cinq orteils", "amputation trans"], rate: [25, 30], 
-                description: "Amputation au niveau des métatarsiens (conservation partielle des métatarsiens, perte de tous les orteils).",
+                searchTerms: ["amputation trans métatarsienne perte des cinq orteils", "amputation trans métatarsienne amputation des cinq orteils", "orteils cinq des perte métatarsienne trans amputation", "amputation trans métatarsienne perte cinq orteils", "amputation trans"], rate: [20, 30], 
+                description: "Amputation au niveau des métatarsiens (conservation partielle des métatarsiens, perte de tous les orteils). Barème officiel : 20-30%.",
                 rateCriteria: { 
                     low: "Amputation distale (niveau tête métatarsiens), bon appui antérieur, chaussage adapté bien toléré, marche autonome.", 
                     high: "Amputation métatarsienne proximale, perte appui antérieur majeure, moignon douloureux, marche très limitée <500m, nécessité aide à la marche." 
@@ -2518,6 +3303,47 @@ const middleCategories: InjuryCategory[] = [
       {
         name: "Orteils - Lésions",
         injuries: [
+            // Raideurs articulaires
+            { name: "Raideurs articulaires des orteils", searchTerms: ["raideurs articulaires des orteils", "raideur articulation orteils", "raideur orteil", "limitation mobilité orteils"], rate: [0, 5], description: "Raideurs articulaires des orteils suite à fractures consolidées (voir ci-après raideurs, ankyloses, amputations).", rateCriteria: { low: "Raideur minime, gêne au chaussage discrète.", high: "Raideurs multiples avec gêne fonctionnelle." } },
+            
+            // Ankyloses du gros orteil
+            { name: "Ankylose complète du gros orteil - En bonne position", searchTerms: ["ankylose complète gros orteil en bonne position rectitude prolongement pied", "ankylose gros orteil bonne position", "ankylose hallux position favorable"], rate: [2, 5], description: "Ankylose complète du gros orteil en rectitude dans le prolongement du pied (position fonctionnelle favorable).", rateCriteria: { low: "Ankylose en position idéale, adaptation bonne.", high: "Ankylose en bonne position mais avec douleurs résiduelles ou troubles statiques." } },
+            { name: "Ankylose complète du gros orteil - En mauvaise position", searchTerms: ["ankylose complète gros orteil en mauvaise position hyperextension flexion déviation latérale", "ankylose gros orteil position défavorable", "ankylose hallux position vicieuse"], rate: [10, 12], description: "Ankylose complète du gros orteil en mauvaise position : hypérextension, flexion ou déviation latérale. Note du barème : l'ablation est indiquée et bénigne.", rateCriteria: { low: "Position vicieuse modérée, gêne au chaussage.", high: "Position très défavorable, douleurs d'appui, nécessité ablation." } },
+            
+            // Ankyloses des autres orteils
+            { name: "Ankylose des autres orteils - En position défavorable", searchTerms: ["ankylose autres orteils en position défavorable hyperextension flexion chevauchement", "ankylose orteil 2 3 4 5 position vicieuse", "ankylose orteil mauvaise position"], rate: [5, 15], description: "Ankylose des autres orteils (2e, 3e, 4e, 5e) en position défavorable : hypérextension équivalente à l'amputation, flexion, chevauchement sur les voisins. Note du barème : l'ablation est indiquée et bénigne.", rateCriteria: { low: "Ankylose d'un seul orteil en position modérément défavorable.", high: "Ankyloses multiples ou position très invalidante (chevau chement, griffe), conflit chaussage majeur." } },
+            { name: "Ankylose des autres orteils - En position rectiligne favorable", searchTerms: ["ankylose autres orteils en position rectiligne favorable", "ankylose orteil 2 3 4 5 bonne position", "ankylose orteil position fonctionnelle"], rate: [0, 5], description: "Ankylose des autres orteils (2e, 3e, 4e, 5e) en position rectiligne et favorable.", rateCriteria: { low: "Ankylose en position fonctionnelle, pas de gêne.", high: "Ankylose avec légère gêne au chaussage." } },
+            
+            // Amputations sans les métatarsiens - Gros orteil
+            { name: "Amputation gros orteil - Deuxième phalange seule", searchTerms: ["amputation gros orteil deuxième phalange seule", "amputation hallux phalange distale", "amputation P2 gros orteil"], rate: [3, 5], description: "Amputation de la deuxième phalange du gros orteil (phalange distale) sans atteinte de la première phalange.", rateCriteria: { low: "Amputation distale propre, troubles propulsion minimes.", high: "Troubles appui et propulsion modérés." } },
+            { name: "Amputation gros orteil - Deuxième phalange et inertie première phalange", searchTerms: ["amputation gros orteil deuxième phalange inertie première", "amputation hallux P2 inertie P1", "amputation gros orteil avec raideur"], rate: [6, 8], description: "Amputation de la deuxième phalange du gros orteil avec inertie (raideur/ankylose) de la première phalange.", rateCriteria: { low: "Inertie partielle P1, adaptation possible.", high: "Ankylose complète P1, troubles appui/propulsion nets." } },
+            { name: "Amputation gros orteil - Les deux phalanges", searchTerms: ["amputation gros orteil les deux phalanges", "amputation hallux complète phalanges", "amputation totale gros orteil métatarsien conservé"], rate: [8, 12], description: "Amputation complète des deux phalanges du gros orteil (sans atteinte du métatarsien).", rateCriteria: { low: "Amputation propre, moignon M1 conservé, troubles propulsion modérés.", high: "Troubles appui/propulsion importants, boiterie, transfert d'appui latéral." } },
+            
+            // Amputations sans les métatarsiens - Autres orteils individuels
+            { name: "Amputation troisième ou quatrième orteil", searchTerms: ["amputation troisième quatrième orteil", "amputation orteil 3 4 central", "perte orteil 3e 4e"], rate: [1, 2], description: "Amputation d'un orteil central (3e ou 4e), peu invalidante.", rateCriteria: { low: "Gêne esthétique principalement.", high: "Troubles appui modérés, conflit chaussage." } },
+            { name: "Amputation deuxième ou cinquième orteil", searchTerms: ["amputation deuxième cinquième orteil", "amputation orteil 2 5 latéral", "perte orteil 2e 5e"], rate: [2, 3], description: "Amputation du deuxième orteil ou du cinquième orteil (orteils de bordure).", rateCriteria: { low: "Gêne esthétique et troubles appui minimes.", high: "Troubles appui modérés, déséquilibre avant-pied." } },
+            
+            // Amputations sans les métatarsiens - Ablations simultanées
+            { name: "Ablation simultanée premier et deuxième orteils", searchTerms: ["ablation simultanée premier deuxième orteils", "amputation gros orteil et deuxième orteil", "amputation orteil 1 et 2"], rate: [9, 13], description: "Ablation simultanée du gros orteil (1er) et du deuxième orteil.", rateCriteria: { low: "Amputation propre, adaptation possible.", high: "Troubles appui/propulsion importants, boiterie." } },
+            { name: "Ablation simultanée premier, deuxième et troisième orteils", searchTerms: ["ablation simultanée premier deuxième troisième orteils", "amputation orteils 1 2 3", "perte trois orteils dont hallux"], rate: [9, 14], description: "Ablation simultanée des trois premiers orteils (1er, 2e, 3e).", rateCriteria: { low: "Adaptation satisfaisante, appui sur orteils restants.", high: "Troubles appui/propulsion majeurs, boiterie nette." } },
+            { name: "Ablation simultanée premier, deuxième, troisième et quatrième orteils", searchTerms: ["ablation simultanée premier deuxième troisième quatrième orteils", "amputation orteils 1 2 3 4", "perte quatre orteils"], rate: [12, 16], description: "Ablation simultanée de quatre orteils (1er, 2e, 3e, 4e), seul le 5e orteil est conservé.", rateCriteria: { low: "Appui possible sur 5e orteil, adaptation partielle.", high: "Troubles statiques majeurs, avant-pied quasi non fonctionnel." } },
+            { name: "Ablation simultanée deuxième, troisième, quatrième orteils", searchTerms: ["ablation simultanée deuxième troisième quatrième orteils", "amputation orteils 2 3 4 centraux", "perte orteils centraux"], rate: [4, 6], description: "Ablation simultanée des trois orteils centraux (2e, 3e, 4e), conservation du gros orteil et du 5e.", rateCriteria: { low: "Gros orteil conservé, appui/propulsion partiellement préservés.", high: "Troubles appui modérés malgré conservation hallux." } },
+            { name: "Ablation simultanée deuxième, troisième, quatrième, cinquième orteils", searchTerms: ["ablation simultanée deuxième troisième quatrième cinquième orteils", "amputation orteils 2 3 4 5", "perte quatre orteils latéraux"], rate: [8, 10], description: "Ablation simultanée de quatre orteils latéraux (2e, 3e, 4e, 5e), seul le gros orteil est conservé.", rateCriteria: { low: "Gros orteil conservé assure propulsion partielle.", high: "Troubles appui latéral importants, boiterie." } },
+            { name: "Ablation simultanée troisième et quatrième orteils", searchTerms: ["ablation simultanée troisième quatrième orteils", "amputation orteils 3 4 centraux", "perte deux orteils centraux"], rate: [1, 2], description: "Ablation simultanée des deux orteils centraux (3e et 4e).", rateCriteria: { low: "Gêne esthétique principalement.", high: "Troubles appui modérés." } },
+            { name: "Ablation simultanée troisième, quatrième, cinquième orteils", searchTerms: ["ablation simultanée troisième quatrième cinquième orteils", "amputation orteils 3 4 5 latéraux", "perte trois orteils latéraux"], rate: [4, 6], description: "Ablation simultanée de trois orteils latéraux (3e, 4e, 5e).", rateCriteria: { low: "Gros et deuxième orteils conservés, appui/propulsion partiellement préservés.", high: "Troubles appui latéral modérés." } },
+            { name: "Ablation simultanée quatrième et cinquième orteils", searchTerms: ["ablation simultanée quatrième cinquième orteils", "amputation orteils 4 5", "perte deux orteils latéraux"], rate: [2, 4], description: "Ablation simultanée des deux derniers orteils (4e et 5e).", rateCriteria: { low: "Gêne esthétique et troubles appui minimes.", high: "Troubles appui latéral modérés." } },
+            { name: "Ablation simultanée tous les orteils y compris le gros orteil", searchTerms: ["ablation simultanée tous les orteils y compris gros orteil", "amputation tous orteils", "perte cinq orteils"], rate: [20, 30], description: "Amputation de tous les orteils (1er, 2e, 3e, 4e, 5e), sans atteinte des métatarsiens.", rateCriteria: { low: "Métatarsiens conservés, appui plantaire possible, adaptation avec orthèse.", high: "Troubles appui/propulsion majeurs, boiterie importante, nécessité appareillage." } },
+            
+            // Amputations avec les métatarsiens
+            { name: "Amputation gros orteil avec son métatarsien", searchTerms: ["amputation gros orteil avec son métatarsien", "amputation hallux et M1", "désarticulation tarso métatarsienne gros orteil"], rate: [18, 20], description: "Amputation du gros orteil avec son métatarsien (M1).", rateCriteria: { low: "Adaptation satisfaisante, appui sur métatarsiens restants.", high: "Troubles appui/propulsion majeurs, valgus pied, boiterie nette." } },
+            { name: "Amputation deuxième ou cinquième orteil avec son métatarsien", searchTerms: ["amputation deuxième cinquième orteil avec son métatarsien", "amputation orteil 2 5 avec métatarsien", "perte rayon métatarsien 2 ou 5"], rate: [10, 12], description: "Amputation du 2e ou du 5e orteil avec son métatarsien.", rateCriteria: { low: "Adaptation satisfaisante, troubles appui modérés.", high: "Troubles statiques et appui importants, déséquilibre avant-pied." } },
+            { name: "Amputation troisième ou quatrième orteil avec son métatarsien", searchTerms: ["amputation troisième quatrième orteil avec son métatarsien", "amputation orteil 3 4 avec métatarsien", "perte rayon métatarsien central"], rate: [4, 6], description: "Amputation du 3e ou du 4e orteil avec son métatarsien.", rateCriteria: { low: "Troubles appui modérés, adaptation possible.", high: "Troubles statiques, métatarsalgies de transfert." } },
+            { name: "Amputation premier et cinquième orteils avec leurs métatarsiens", searchTerms: ["amputation premier cinquième orteils avec leurs métatarsiens", "amputation orteil 1 et 5 avec M1 M5", "perte rayons bordure"], rate: [20, 25], description: "Amputation des orteils de bordure (1er et 5e) avec leurs métatarsiens (M1 et M5).", rateCriteria: { low: "Conservation orteils centraux, appui partiel possible.", high: "Troubles statiques majeurs, avant-pied très étroit, boiterie importante." } },
+            { name: "Amputation quatrième et cinquième orteils avec leurs métatarsiens", searchTerms: ["amputation quatrième cinquième orteils avec leurs métatarsiens", "amputation orteils 4 5 avec M4 M5", "perte deux rayons latéraux"], rate: [15, 20], description: "Amputation des 4e et 5e orteils avec leurs métatarsiens (M4 et M5).", rateCriteria: { low: "Conservation orteils médiaux, appui partiel préservé.", high: "Troubles appui latéral importants, varus pied." } },
+            { name: "Amputation troisième, quatrième, cinquième orteils avec leurs métatarsiens", searchTerms: ["amputation troisième quatrième cinquième orteils avec leurs métatarsiens", "amputation orteils 3 4 5 avec métatarsiens", "perte trois rayons latéraux"], rate: [20, 25], description: "Amputation des 3e, 4e et 5e orteils avec leurs métatarsiens (M3, M4, M5).", rateCriteria: { low: "Conservation 1er et 2e rayons, appui/propulsion partiels préservés.", high: "Troubles statiques importants, avant-pied étroit, boiterie." } },
+            { name: "Amputation tous les orteils avec leurs métatarsiens (Lisfranc)", searchTerms: ["amputation tous les orteils avec leurs métatarsiens lisfranc", "désarticulation lisfranc", "amputation tarso métatarsienne complète"], rate: [30, 35], description: "Désarticulation de Lisfranc : amputation de tous les orteils avec tous les métatarsiens au niveau de l'articulation tarso-métatarsienne.", rateCriteria: { low: "Appareillage adapté, marche possible avec orthèse.", high: "Troubles statiques majeurs, marche difficile, nécessité appareillage complexe." } },
+            
+            // Entrées existantes conservées pour compatibilité
             { name: "Amputation du gros orteil", searchTerms: ["amputation gros orteil", "orteil gros amputation", "amputation gros", "gros orteil"], rate: [5, 8], rateCriteria: { low: "Amputation distale (phalange distale), troubles propulsion minimes.", high: "Amputation complète gros orteil, troubles appui/propulsion nets, boiterie." } },
             { name: "Amputation d'un autre orteil", searchTerms: ["amputation d'un autre orteil", "orteil autre d'un amputation", "amputation d'un", "d'un autre", "autre orteil"], rate: [1, 3], rateCriteria: { low: "Amputation orteil latéral (4ème/5ème), gêne esthétique surtout.", high: "Amputation 2ème orteil, troubles appui modérés." } },
             { name: "Amputation de deux orteils (dont le gros orteil)", searchTerms: ["amputation deux orteils dont gros orteil", "orteil gros dont orteils deux amputation", "amputation deux", "deux orteils", "orteils dont"], rate: 12, description: "Amputation du gros orteil plus un autre orteil." },
@@ -2611,6 +3437,17 @@ const middleCategories: InjuryCategory[] = [
               }
             },
             { 
+              name: "Rupture tendon d'Achille complète", 
+              searchTerms: ["rupture tendon d'achille complète", "rupture achilléenne complète", "déchirure totale achille"], 
+              rate: [12, 25],
+              description: "Rupture complète du tendon d'Achille (calcanéen) avec séquelles fonctionnelles malgré traitement. Barème officiel : 12-25%.",
+              rateCriteria: {
+                low: "Réparation chirurgicale satisfaisante, légère perte de force plantaire, course impossible mais marche normale, montée pointe pieds difficile.",
+                medium: "Allongement tendineux avec boiterie modérée, marche sur pointe impossible, escaliers difficiles, amyotrophie mollet.",
+                high: "Allongement majeur ou re-rupture, déficit force plantaire sévère, boiterie permanente, marche limitée, impossibilité montée escaliers sans aide."
+              }
+            },
+            { 
               name: "Rupture tendon d'Achille avec séquelles", 
               searchTerms: ["rupture tendon d'achille avec séquelles", "séquelles avec d'achille tendon rupture", "rupture tendon d'achille séquelles", "rupture tendon", "tendon d'achille"], rate: [10, 25],
               description: "Rupture du tendon d'Achille (calcanéen) avec séquelles fonctionnelles malgré traitement (chirurgical ou orthopédique).",
@@ -2618,6 +3455,17 @@ const middleCategories: InjuryCategory[] = [
                 low: "Réparation satisfaisante, légère perte de force plantaire, course impossible mais marche normale.",
                 medium: "Allongement tendineux avec boiterie, marche sur pointe impossible, escaliers difficiles.",
                 high: "Allongement majeur ou re-rupture, déficit force plantaire sévère, boiterie permanente, marche limitée."
+              }
+            },
+            { 
+              name: "Rupture complète du triceps des adducteurs", 
+              searchTerms: ["rupture complète triceps adducteurs", "déchirure totale adducteurs cuisse", "rupture muscles adducteurs"], 
+              rate: [10, 25],
+              description: "Rupture complète du triceps des adducteurs de la cuisse avec séquelles fonctionnelles. Barème officiel : 10-25%.",
+              rateCriteria: {
+                low: "Rupture partielle réparée, déficit force adduction modéré, gêne lors des changements de direction.",
+                medium: "Rupture complète avec déficit force adduction important, boiterie modérée, limitation activités sportives.",
+                high: "Rupture complète non réparée ou récidivante, déficit majeur d'adduction, instabilité hanche, boiterie importante, limitation marche."
               }
             },
         ]
@@ -3051,6 +3899,47 @@ const middleCategories: InjuryCategory[] = [
               medium: "Arthrose post-infectieuse sévère avec douleurs chroniques, raideur articulaire majeure, mobilité < 50%.",
               high: "Destruction articulaire complète nécessitant une arthrodèse ou une arthroplastie (prothèse), ou ankylose en mauvaise position, invalidité majeure."
             } 
+          },
+          { 
+            name: "Ostéomyélite chronique - Fistule persistante unique", 
+            searchTerms: ["ostéomyélite chronique fistule persistante unique", "fistule osseuse unique", "ostéite fistule"], 
+            rate: [10, 15], 
+            description: "Ostéomyélite chronique avec fistule cutanée persistante unique (orifice de drainage d'une infection osseuse chronique). Barème officiel Chapitre XIII : 10-15%.",
+            rateCriteria: { 
+              low: "Fistule unique peu productive, pansements simples, pas de douleur majeure.",
+              high: "Fistule productive nécessitant des soins quotidiens, douleurs chroniques, épisodes de réactivation."
+            }
+          },
+          { 
+            name: "Ostéomyélite chronique - Fistules multiples persistantes rebelles", 
+            searchTerms: ["ostéomyélite chronique fistules multiples persistantes rebelles", "fistules osseuses multiples", "ostéite fistules"], 
+            rate: [20, 50], 
+            description: "Ostéomyélite chronique avec fistules cutanées multiples persistantes, résistantes au traitement chirurgical et antibiotique. Barème officiel Chapitre XIII : 20-50%.",
+            rateCriteria: { 
+              low: "Fistules multiples (2-3), écoulements modérés, soins réguliers nécessaires.",
+              medium: "Fistules nombreuses (>3), écoulements abondants, pansements quotidiens, épisodes infectieux fréquents.",
+              high: "Fistules très nombreuses, ostéite extensive rebelle, échec chirurgical répété, risque d'amputation."
+            }
+          },
+          { 
+            name: "Ostéomyélite cicatrisée - Persistance d'os volumineux et irrégulier", 
+            searchTerms: ["ostéomyélite cicatrisée os volumineux irrégulier", "cal osseux irrégulier", "ostéite consolidée hyperostose", "séquelle ostéomyélite"], 
+            rate: [5, 10], 
+            description: "Ostéomyélite guérie (absence de fistule) mais avec persistance d'un cal osseux volumineux et irrégulier entraînant une gêne fonctionnelle ou esthétique. Barème officiel Chapitre XIII : 5-10%.",
+            rateCriteria: { 
+              low: "Cal osseux hypertrophique avec gêne modérée (chaussage, habillement), pas de douleur.",
+              high: "Cal osseux très volumineux avec gêne importante, douleurs résiduelles, limitation fonctionnelle."
+            }
+          },
+          { 
+            name: "Ostéomes post-traumatiques (exostoses)", 
+            searchTerms: ["ostéomes post traumatiques exostoses", "ossifications hétérotopiques", "cal osseux hypertrophique", "exostose traumatique"], 
+            rate: [5, 10], 
+            description: "Ostéomes (excroissances osseuses) apparus après un traumatisme. Selon localisation, volume et gêne fonctionnelle. Barème officiel Chapitre XII : 5-10%.",
+            rateCriteria: { 
+              low: "Ostéome unique, petit volume, peu gênant.",
+              high: "Ostéomes multiples ou volumineux, compression nerveuse ou vasculaire, limitation articulaire."
+            }
           },
         ]
       },
