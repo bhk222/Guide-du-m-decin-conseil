@@ -12047,6 +12047,15 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
     
     // ========== 5. MEMBRES INFÉRIEURS ==========
     
+    // Fracture métatarse/phalanges pied (PIED - à différencier de fémur/tibia)
+    if (/fracture.*m[ée]tatarse|m[ée]tatarsien.*fractur|fracture.*phalange.*(?:pied|orteil)/i.test(text)) {
+        detectedSequelae.push({
+            name: 'Fracture du métatarse ou phalanges du pied',
+            keywords: ['fracture', 'métatarse', 'pied', 'phalange'],
+            context: text.match(/fracture.*m[ée]tatarse[^.;]*/i)?.[0] || text.match(/m[ée]tatarsien[^.;]*/i)?.[0] || ''
+        });
+    }
+    
     // Fracture fémur - Amélioration capture contexte (diaphyse, trochantéro-diaphysaire, col, etc.)
     if (/fracture.*(?:f[ée]mur|f[ée]moral|trochant[ée]r|col.*f[ée]mur|diaphyse.*f[ée]moral)|f[ée]mur.*fractur|enclouage.*centro.*m[ée]dullaire|ost[ée]osynth[èe]se.*f[ée]mur/i.test(text)) {
         detectedSequelae.push({
@@ -12116,6 +12125,33 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
             name: 'Limitation fonctionnelle (accroupissement difficile/impossible)',
             keywords: ['accroupissement', 'difficile', 'limitation'],
             context: text.match(/accroupissement[^.;]*/i)?.[0] || ''
+        });
+    }
+    
+    // Œdème persistant (pied/cheville/jambe)
+    if (/[œo]ed[èe]me|gonflement.*(?:persistant|chronique|r[ée]siduel|l[ée]ger)/i.test(text)) {
+        detectedSequelae.push({
+            name: 'Œdème persistant/résiduel',
+            keywords: ['œdème', 'gonflement', 'persistant'],
+            context: text.match(/[œo]ed[èe]me[^.;]*/i)?.[0] || ''
+        });
+    }
+    
+    // Douleurs thermoréactives (au froid/à la chaleur)
+    if (/douleur.*(?:froid|chaleur|temp[ée]rature)|alg[ée]sie.*thermo|douleur.*p[ée]riode.*froid|sensibilit[ée].*froid/i.test(text)) {
+        detectedSequelae.push({
+            name: 'Douleurs thermoréactives (au froid/chaleur)',
+            keywords: ['douleur', 'froid', 'thermoréactif'],
+            context: text.match(/douleur.*(?:froid|temp[ée]rature)[^.;]*/i)?.[0] || ''
+        });
+    }
+    
+    // Douleurs à la montée des escaliers
+    if (/douleur.*mont[ée]e.*escalier|mont[ée]e.*escalier.*douleur|escalier.*difficile/i.test(text)) {
+        detectedSequelae.push({
+            name: 'Limitation fonctionnelle (douleurs montée escaliers)',
+            keywords: ['douleur', 'escaliers', 'montée'],
+            context: text.match(/douleur.*mont[ée]e.*escalier[^.;]*/i)?.[0] || text.match(/mont[ée]e.*escalier[^.;]*/i)?.[0] || ''
         });
     }
     
@@ -12357,11 +12393,33 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
                     }
                 }
                 
-                // MEMBRE INFÉRIEUR (fracture + amyotrophie + limitation + raccourcissement + boiterie = 1 seul taux membre)
-                else if (/fracture.*f[ée]mur|fracture.*tibia|amyotrophie.*quadricipital|limitation.*(?:flexion|extension).*genou|raccourcissement.*membre|boiterie/i.test(seq.name)) {
+                // MEMBRE INFÉRIEUR - DIFFÉRENCIATION PIED vs CUISSE/GENOU
+                else if (/fracture.*f[ée]mur|fracture.*tibia|amyotrophie.*quadricipital|limitation.*(?:flexion|extension).*genou|raccourcissement.*membre|boiterie|fracture.*m[ée]tatarse|[œo]ed[èe]me.*(?:persistant|r[ée]siduel|l[ée]ger)|douleur.*froid|douleur.*mont[ée]e.*escalier|accroupissement.*difficile/i.test(seq.name)) {
                     system = 'MEMBRE_INFERIEUR';
-                    // Taux global reflétant l'ensemble des atteintes du membre
-                    rate = 15; explanation = 'Membre inférieur : Fracture fémur consolidée avec séquelles fonctionnelles (limitation flexion genou, amyotrophie, raccourcissement 1 cm, boiterie)';
+                    
+                    // SOUS-CATÉGORIE : PIED/CHEVILLE (séquelles mineures)
+                    if (/fracture.*m[ée]tatarse|fracture.*phalange.*pied/i.test(seq.name)) {
+                        // Métatarse/pied avec séquelles légères (boiterie légère, œdème, douleurs)
+                        const hasBoiterie = detectedSequelae.some(s => /boiterie/i.test(s.name));
+                        const hasOedeme = detectedSequelae.some(s => /[œo]ed[èe]me/i.test(s.name));
+                        const hasDouleurs = detectedSequelae.some(s => /douleur.*(?:froid|escalier)/i.test(s.name));
+                        
+                        if (hasBoiterie && (hasOedeme || hasDouleurs)) {
+                            rate = 8; explanation = 'Membre inférieur (PIED) : Fracture métatarse consolidée avec séquelles (boiterie légère, œdème/douleurs résiduelles)';
+                        } else if (hasBoiterie || hasOedeme) {
+                            rate = 5; explanation = 'Membre inférieur (PIED) : Fracture métatarse consolidée avec séquelles minimes';
+                        } else {
+                            rate = 3; explanation = 'Membre inférieur (PIED) : Fracture métatarse consolidée sans séquelles significatives';
+                        }
+                    }
+                    // SOUS-CATÉGORIE : FÉMUR/TIBIA/GENOU (séquelles majeures)
+                    else if (/fracture.*f[ée]mur|fracture.*tibia|amyotrophie|limitation.*genou/i.test(seq.name)) {
+                        rate = 15; explanation = 'Membre inférieur (CUISSE/GENOU) : Fracture fémur/tibia consolidée avec séquelles fonctionnelles importantes';
+                    }
+                    // Boiterie/limitations fonctionnelles seules (sans fracture identifiée)
+                    else {
+                        rate = 10; explanation = 'Membre inférieur : Séquelles fonctionnelles (boiterie, limitations mobilité)';
+                    }
                 }
                 
                 // MEMBRE SUPÉRIEUR (fracture + raideur + paresthésies = 1 seul taux membre)
