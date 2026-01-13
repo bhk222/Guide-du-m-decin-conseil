@@ -12177,6 +12177,93 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
         });
     }
     
+    // ========== 8. APPAREIL GÉNITO-URINAIRE ==========
+    
+    // Sténose urétrale / Rétrécissement urètre / Dysurie
+    if (/st[ée]nose.*ur[ée]t[rh]|r[ée]tr[ée]cissement.*ur[èe]t[rh]|dysurie|difficult[ée].*uriner|diminution.*jet|dilatation.*ur[ée]t[rh]/i.test(text)) {
+        detectedSequelae.push({
+            name: 'Sténose urétrale / Rétrécissement urètre (dysurie, dilatations)',
+            keywords: ['sténose', 'urétrale', 'dysurie', 'dilatation'],
+            context: text.match(/(st[ée]nose|r[ée]tr[ée]cissement|dysurie).*ur[ée]t[rh][^.;]*/i)?.[0] || text.match(/difficult[ée].*uriner[^.;]*/i)?.[0] || ''
+        });
+    }
+    
+    // Rupture urètre / Urétroplastie
+    if (/rupture.*ur[èe]t[rh]|ur[ée]troplastie|l[ée]sion.*ur[ée]t[rh]/i.test(text)) {
+        detectedSequelae.push({
+            name: 'Rupture urètre postérieur (séquelles après urétroplastie)',
+            keywords: ['rupture', 'urètre', 'urétroplastie'],
+            context: text.match(/rupture.*ur[èe]t[rh][^.;]*/i)?.[0] || text.match(/ur[ée]troplastie[^.;]*/i)?.[0] || ''
+        });
+    }
+    
+    // Incontinence urinaire
+    if (/incontinence.*urinaire|fuites?.*urinaire|perte.*urine/i.test(text)) {
+        detectedSequelae.push({
+            name: 'Incontinence urinaire post-traumatique',
+            keywords: ['incontinence', 'urinaire', 'fuites'],
+            context: text.match(/incontinence.*urinaire[^.;]*/i)?.[0] || ''
+        });
+    }
+    
+    // ========== 9. BASSIN / PELVIS ==========
+    
+    // Douleurs sacro-iliaques / Douleurs pelviennes
+    if (/douleur.*sacro.*iliaque|douleur.*pelvien|fatigabilit[ée].*pelvien|douleur.*bassin/i.test(text)) {
+        detectedSequelae.push({
+            name: 'Douleurs sacro-iliaques / Douleurs pelviennes chroniques',
+            keywords: ['douleur', 'sacro-iliaque', 'pelvienne', 'bassin'],
+            context: text.match(/douleur.*(?:sacro.*iliaque|pelvien|bassin)[^.;]*/i)?.[0] || ''
+        });
+    }
+    
+    // Fracture bassin (disjonction symphyse, aileron sacré)
+    if (/fracture.*bassin|disjonction.*symphyse.*pubienne|fracture.*aileron.*sacr[ée]|fracture.*sacrum|fracture.*coty.*le/i.test(text)) {
+        detectedSequelae.push({
+            name: 'Fracture du bassin (disjonction symphyse / aileron sacré)',
+            keywords: ['fracture', 'bassin', 'symphyse', 'sacrum'],
+            context: text.match(/fracture.*bassin[^.;]*/i)?.[0] || text.match(/disjonction.*symphyse[^.;]*/i)?.[0] || ''
+        });
+    }
+    
+    // ========== 10. PSYCHIATRIE / NEUROPSYCHOLOGIE ==========
+    
+    // État de Stress Post-Traumatique (ESPT)
+    if (/[ée]tat.*stress.*post.*traumatique|espt|syndrome.*stress.*post.*traumatique|sspt|stress.*post.*traumatique/i.test(text)) {
+        detectedSequelae.push({
+            name: 'État de Stress Post-Traumatique (ESPT)',
+            keywords: ['ESPT', 'stress post-traumatique', 'syndrome'],
+            context: text.match(/[ée]tat.*stress.*post.*traumatique[^.;]*/i)?.[0] || text.match(/espt[^.;]*/i)?.[0] || ''
+        });
+    }
+    
+    // Phobie / Anxiété post-traumatique
+    if (/phobie.*conduite|phobie.*v[ée]hicule|anxi[ée]t[ée].*post.*traumatique|peur.*condui/i.test(text)) {
+        detectedSequelae.push({
+            name: 'Phobie post-traumatique (phobie de la conduite)',
+            keywords: ['phobie', 'conduite', 'anxiété'],
+            context: text.match(/phobie.*conduite[^.;]*/i)?.[0] || text.match(/anxi[ée]t[ée].*post.*traumatique[^.;]*/i)?.[0] || ''
+        });
+    }
+    
+    // Syndrome dépressif / Dépression réactionnelle
+    if (/syndrome.*d[ée]pressif|d[ée]pression.*r[ée]actionnelle|[ée]tat.*d[ée]pressif/i.test(text)) {
+        detectedSequelae.push({
+            name: 'Syndrome dépressif réactionnel post-traumatique',
+            keywords: ['dépression', 'dépressif', 'réactionnel'],
+            context: text.match(/(?:syndrome|[ée]tat).*d[ée]pressif[^.;]*/i)?.[0] || ''
+        });
+    }
+    
+    // Troubles du sommeil
+    if (/trouble.*sommeil|insomnie.*post.*traumatique|difficult[ée].*endormissement/i.test(text)) {
+        detectedSequelae.push({
+            name: 'Troubles du sommeil post-traumatiques',
+            keywords: ['troubles', 'sommeil', 'insomnie'],
+            context: text.match(/trouble.*sommeil[^.;]*/i)?.[0] || ''
+        });
+    }
+    
     // Si plusieurs séquelles détectées, retourner un message d'alerte
     console.log('🔍 [V3.3.150] Séquelles détectées:', detectedSequelae.length, detectedSequelae.map(s => s.name));
     
@@ -12268,10 +12355,18 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
                 }
                 
                 // MEMBRE SUPÉRIEUR (fracture + raideur + paresthésies = 1 seul taux membre)
-                else if (/fracture.*hum[ée]rus|fracture.*clavicule|raideur.*[ée]paule|raideur.*coude|parasth[ée]sie.*ulnaire/i.test(seq.name)) {
+                else if (/fracture.*hum[ée]rus|fracture.*clavicule|fracture.*radius|raideur.*[ée]paule|raideur.*coude|raideur.*poignet|parasth[ée]sie.*ulnaire|perte.*force.*pr[ée]hension/i.test(seq.name)) {
                     system = 'MEMBRE_SUPERIEUR';
-                    if (/raideur.*coude.*d[ée]ficit.*extension.*30|flexion.*limit.*110/i.test(seq.name) || /parasth[ée]sie/i.test(seq.name)) {
+                    // Évaluer selon main dominante et sévérité
+                    const isDominant = /dominant|droitier.*droit|gaucher.*gauche/i.test(text);
+                    const hasGripLoss = /perte.*force.*pr[ée]hension.*40|grip.*test.*40|force.*diminu[ée]e.*40/i.test(text);
+                    
+                    if (isDominant && hasGripLoss && /raideur.*poignet|fracture.*radius/i.test(seq.name)) {
+                        rate = 18; explanation = 'Membre supérieur DOMINANT : Fracture radius avec raideur poignet importante (extension/flexion limitées) et perte force préhension 40%';
+                    } else if (/raideur.*coude.*d[ée]ficit.*extension.*30|flexion.*limit.*110/i.test(seq.name) || /parasth[ée]sie/i.test(seq.name)) {
                         rate = 15; explanation = 'Membre supérieur : Raideur coude importante avec atteinte nerveuse (paresthésies ulnaires)';
+                    } else if (isDominant) {
+                        rate = 14; explanation = 'Membre supérieur DOMINANT : Raideur articulaire avec limitation fonctionnelle';
                     } else {
                         rate = 12; explanation = 'Membre supérieur : Raideur articulaire avec limitation fonctionnelle';
                     }
@@ -12284,6 +12379,49 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
                         rate = 12; explanation = 'Face/Ophtalmologie : Diplopie persistante (vision double) post-fracture orbite';
                     } else {
                         rate = 10; explanation = 'Face/Ophtalmologie : Enophtalmie et fracture plancher orbite';
+                    }
+                }
+                
+                // APPAREIL GÉNITO-URINAIRE (sténose urétrale + rupture urètre + incontinence = 1 seul taux)
+                else if (/st[ée]nose.*ur[ée]t[rh]|rupture.*ur[èe]t[rh]|ur[ée]troplastie|dysurie|incontinence.*urinaire/i.test(seq.name)) {
+                    system = 'GENITO_URINAIRE';
+                    // Évaluer selon sévérité des atteintes urologiques
+                    if (/incontinence.*urinaire/i.test(seq.name)) {
+                        rate = 20; explanation = 'Génito-urinaire : Incontinence urinaire post-traumatique';
+                    } else if (/st[ée]nose.*ur[ée]t[rh].*dilatation|dysurie.*dilatation/i.test(text)) {
+                        rate = 15; explanation = 'Génito-urinaire : Sténose urétrale nécessitant dilatations périodiques (dysurie chronique)';
+                    } else if (/rupture.*ur[èe]t[rh]|ur[ée]troplastie/i.test(seq.name)) {
+                        rate = 12; explanation = 'Génito-urinaire : Séquelles rupture urètre postérieur (après urétroplastie)';
+                    } else {
+                        rate = 10; explanation = 'Génito-urinaire : Séquelles urologiques post-traumatiques';
+                    }
+                }
+                
+                // BASSIN / PELVIS (fracture bassin + douleurs sacro-iliaques + fatigabilité = 1 seul taux)
+                else if (/fracture.*bassin|disjonction.*symphyse|aileron.*sacr[ée]|douleur.*sacro.*iliaque|douleur.*pelvien|fatigabilit[ée].*pelvien/i.test(seq.name)) {
+                    system = 'BASSIN_PELVIS';
+                    // Évaluer selon sévérité des atteintes pelviennes
+                    if (/fracture.*bassin.*instable|disjonction.*symphyse|aileron.*sacr[ée]/i.test(text)) {
+                        rate = 10; explanation = 'Bassin/Pelvis : Fracture instable du bassin (disjonction symphyse/aileron sacré) avec douleurs sacro-iliaques chroniques';
+                    } else if (/douleur.*sacro.*iliaque|fatigabilit[ée].*pelvien/i.test(seq.name)) {
+                        rate = 8; explanation = 'Bassin/Pelvis : Douleurs sacro-iliaques chroniques avec fatigabilité pelvienne';
+                    } else {
+                        rate = 5; explanation = 'Bassin/Pelvis : Séquelles de fracture du bassin';
+                    }
+                }
+                
+                // PSYCHIATRIE / NEUROPSYCHOLOGIE (ESPT + phobie + dépression + troubles sommeil = 1 seul taux)
+                else if (/[ée]tat.*stress.*post.*traumatique|espt|phobie.*conduite|syndrome.*d[ée]pressif|trouble.*sommeil/i.test(seq.name)) {
+                    system = 'PSYCHIATRIE';
+                    // Évaluer selon retentissement socio-professionnel
+                    if (/espt|[ée]tat.*stress.*post.*traumatique/i.test(seq.name) && /phobie.*conduite|impossibilit[ée].*reprendre.*poste/i.test(text)) {
+                        rate = 10; explanation = 'Psychiatrie : ESPT chronique avec retentissement professionnel majeur (inaptitude au poste, phobie de la conduite)';
+                    } else if (/phobie.*conduite/i.test(seq.name)) {
+                        rate = 8; explanation = 'Psychiatrie : Phobie post-traumatique avec retentissement professionnel';
+                    } else if (/syndrome.*d[ée]pressif/i.test(seq.name)) {
+                        rate = 8; explanation = 'Psychiatrie : Syndrome dépressif réactionnel post-traumatique';
+                    } else {
+                        rate = 5; explanation = 'Psychiatrie : Troubles anxieux/sommeil post-traumatiques';
                     }
                 }
                 
