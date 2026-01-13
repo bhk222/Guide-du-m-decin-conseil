@@ -12264,10 +12264,10 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
         });
     }
     
-    // Si plusieurs séquelles détectées, retourner un message d'alerte
-    console.log('🔍 [V3.3.150] Séquelles détectées:', detectedSequelae.length, detectedSequelae.map(s => s.name));
+    // 🆕 V3.3.155: CALCUL AUTOMATIQUE POUR TOUS LES CAS (polytraumatismes ET cas simples)
+    console.log('🔍 [V3.3.155] Séquelles détectées:', detectedSequelae.length, detectedSequelae.map(s => s.name));
     
-    if (detectedSequelae.length > 1) {
+    if (detectedSequelae.length >= 1) {
         // 🆕 V3.3.158: EXCEPTION TC NEUROLOGIQUES - Ne pas proposer dialogue si TC avec séquelles neurologiques multiples
         // Pattern: Chute OU TC + perte connaissance/hospitalisation + troubles cognitifs/hémiparésie/vertiges/céphalées
         // → Laisser passer aux expert rules qui détecteront "Commotion cérébro-spinale prolongée" automatiquement
@@ -12282,8 +12282,9 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
             console.log('🧠 [V3.3.158] TC avec séquelles neurologiques multiples détecté → Laisser passer aux expert rules');
             // Ne pas retourner le dialogue, laisser l'analyse continuer avec les expert rules
         } else {
-            // 🆕 V3.3.152: CALCUL AUTOMATIQUE IPP GLOBAL POLYTRAUMATISME avec formule de Balthazar
-            console.log('⚠️ SÉQUELLES MULTIPLES DÉTECTÉES:', detectedSequelae.length);
+            // 🆕 V3.3.155: CALCUL AUTOMATIQUE IPP (polytraumatismes ET cas simples)
+            const isPolytrauma = detectedSequelae.length > 1;
+            console.log(isPolytrauma ? '⚠️ POLYTRAUMATISME DÉTECTÉ:' : '✅ CAS SIMPLE DÉTECTÉ:', detectedSequelae.length, 'séquelle(s)');
             
             // 🔥 V3.3.153: REGROUPEMENT PAR SYSTÈME ANATOMIQUE (principe du barème 1967)
             // Les séquelles d'un même système anatomique ne se cumulent PAS individuellement
@@ -12466,45 +12467,59 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
             console.log('🧮 CALCUL BALTHAZAR (PAR SYSTÈME):', systemRates.map(s => `${s.system}: ${s.rate}%`));
             console.log('📊 IPP GLOBAL CUMULÉ:', ippGlobal + '%');
             
+            // Adapter le message selon polytraumatisme ou cas simple
+            const titlePrefix = isPolytrauma ? '🏥 POLYTRAUMATISME' : '✅ ÉVALUATION PRÉCISE';
+            const pathPrefix = isPolytrauma ? 'Polytraumatisme' : 'Séquelle';
+            const namePrefix = isPolytrauma ? 'Polytraumatisme' : 'Séquelle post-traumatique';
+            const cumulExplanation = isPolytrauma 
+                ? `<br><strong>🧮 CALCUL DU CUMUL (Formule de Balthazar - Barème 1967) :</strong><br>` +
+                  `<em>Principe : Les séquelles d'un même système anatomique sont regroupées en UN SEUL taux.</em><br>` +
+                  `<em>Le cumul s'applique ensuite entre les SYSTÈMES (pas entre séquelles individuelles).</em><br><br>` +
+                  `La formule de cumul : <code>T = 100 - [(100-T₁) × (100-T₂) × (100-T₃) × ... / 100^(n-1)]</code><br><br>` +
+                  calculSteps.slice(0, Math.min(3, calculSteps.length)).map((step, i) => `${i + 1}. ${step}<br>`).join('') +
+                  (calculSteps.length > 3 ? `<em>[... ${calculSteps.length - 3} étapes supplémentaires ...]</em><br>` : '')
+                : ''; // Pas de calcul de cumul pour cas simple (1 seul système)
+            
             // Retourner la proposition avec IPP global calculé
             return {
                 type: 'proposal',
-                name: `Polytraumatisme - ${systemRates.length} systèmes atteints - IPP global ${ippGlobal}%`,
+                name: isPolytrauma 
+                    ? `Polytraumatisme - ${systemRates.length} systèmes atteints - IPP global ${ippGlobal}%`
+                    : `${systemRates[0].explanation} - IPP ${ippGlobal}%`,
                 rate: ippGlobal,
-                justification: `<strong>🏥 POLYTRAUMATISME - CALCUL IPP GLOBAL (Formule de Balthazar - Barème 1967)</strong><br><br>` +
-                    `<strong>📋 ${detectedSequelae.length} séquelles post-traumatiques regroupées en ${systemRates.length} systèmes anatomiques :</strong><br><br>` +
+                justification: `<strong>${titlePrefix} - CALCUL IPP (Barème 1967)</strong><br><br>` +
+                    `<strong>📋 ${detectedSequelae.length} séquelle${detectedSequelae.length > 1 ? 's' : ''} post-traumatique${detectedSequelae.length > 1 ? 's' : ''} ${isPolytrauma ? 'regroupées en ' + systemRates.length + ' systèmes anatomiques' : 'identifiée'} :</strong><br><br>` +
                     systemRates.map((sys, idx) => {
                         const sequelaList = sys.sequelae.map(s => `• ${s.name}`).join('<br>      ');
-                        return `<strong>${String.fromCharCode(65 + idx)}. SYSTÈME ${sys.system.replace(/_/g, ' ')}</strong> → <span style="color: #d32f2f; font-weight: bold;">${sys.rate}% IPP</span><br>` +
+                        return `<strong>${isPolytrauma ? String.fromCharCode(65 + idx) + '. ' : ''}SYSTÈME ${sys.system.replace(/_/g, ' ')}</strong> → <span style="color: #d32f2f; font-weight: bold;">${sys.rate}% IPP</span><br>` +
                             `   └ ${sys.explanation}<br>` +
-                            `   └ Séquelles regroupées :<br>      ${sequelaList}<br>`;
+                            `   └ Séquelle${sys.sequelae.length > 1 ? 's' : ''} ${isPolytrauma ? 'regroupées' : 'détectée'} :<br>      ${sequelaList}<br>`;
                     }).join('<br>') +
-                    `<br><strong>🧮 CALCUL DU CUMUL (Formule de Balthazar - Barème 1967) :</strong><br>` +
-                    `<em>Principe : Les séquelles d'un même système anatomique sont regroupées en UN SEUL taux.</em><br>` +
-                    `<em>Le cumul s'applique ensuite entre les SYSTÈMES (pas entre séquelles individuelles).</em><br><br>` +
-                    `La formule de cumul : <code>T = 100 - [(100-T₁) × (100-T₂) × (100-T₃) × ... / 100^(n-1)]</code><br><br>` +
-                    calculSteps.slice(0, Math.min(3, calculSteps.length)).map((step, i) => `${i + 1}. ${step}<br>`).join('') +
-                    (calculSteps.length > 3 ? `<em>[... ${calculSteps.length - 3} étapes supplémentaires ...]</em><br>` : '') +
+                    cumulExplanation +
                     `<br><strong>📊 RÉSULTAT FINAL :</strong><br>` +
                     `<div style="background: #fff3e0; border-left: 4px solid #ff9800; padding: 12px; margin: 8px 0;">` +
-                    `<strong style="font-size: 18px; color: #e65100;">IPP GLOBAL CUMULÉ = ${ippGlobal}%</strong><br>` +
-                    `<span style="font-size: 14px; color: #666;">Taux d'Incapacité Permanente Partielle après application de la formule de Balthazar (Barème 1967)</span>` +
+                    `<strong style="font-size: 18px; color: #e65100;">IPP ${isPolytrauma ? 'GLOBAL CUMULÉ' : ''} = ${ippGlobal}%</strong><br>` +
+                    `<span style="font-size: 14px; color: #666;">Taux d'Incapacité Permanente Partielle ${isPolytrauma ? 'après application de la formule de Balthazar ' : ''}(Barème 1967)</span>` +
                     `</div><br>` +
                     `<strong>⚖️ BARÈME OFFICIEL 1967 :</strong><br>` +
-                    `Le cumul des séquelles respecte le <strong>principe du regroupement par système anatomique</strong>. ` +
-                    `Les séquelles multiples d'un même système (ex: fracture fémur + amyotrophie + limitation genou) ` +
-                    `ne s'additionnent PAS arithmétiquement mais sont évaluées par un TAUX GLOBAL pour ce système. ` +
-                    `La formule de Balthazar garantit ensuite que l'IPP globale ne dépasse jamais 100% tout en ` +
-                    `tenant compte de l'impact cumulatif des atteintes multiples sur la capacité fonctionnelle.<br><br>` +
+                    (isPolytrauma 
+                        ? `Le cumul des séquelles respecte le <strong>principe du regroupement par système anatomique</strong>. ` +
+                          `Les séquelles multiples d'un même système (ex: fracture fémur + amyotrophie + limitation genou) ` +
+                          `ne s'additionnent PAS arithmétiquement mais sont évaluées par un TAUX GLOBAL pour ce système. ` +
+                          `La formule de Balthazar garantit ensuite que l'IPP globale ne dépasse jamais 100% tout en ` +
+                          `tenant compte de l'impact cumulatif des atteintes multiples sur la capacité fonctionnelle.<br><br>`
+                        : `L'évaluation respecte le <strong>barème officiel algérien 1967</strong> avec des taux précis ` +
+                          `adaptés à la sévérité de l'atteinte et au retentissement fonctionnel.<br><br>`
+                    ) +
                     `<strong>📌 NOTE IMPORTANTE :</strong><br>` +
                     `Ce calcul automatique fournit une <strong>estimation précise</strong> conforme au barème 1967. ` +
                     `Pour un calcul exact adapté au cas individuel, l'évaluation peut être affinée selon la sévérité ` +
                     `des atteintes, les bilans complémentaires et le retentissement socio-professionnel.`,
-                path: 'Polytraumatisme > Cumul Balthazar (Barème 1967)',
+                path: `${pathPrefix} > Barème 1967`,
                 injury: { 
-                    name: `Polytraumatisme - ${systemRates.length} systèmes atteints`,
+                    name: `${namePrefix} - ${systemRates.length} système${systemRates.length > 1 ? 's' : ''} atteint${systemRates.length > 1 ? 's' : ''}`,
                     rate: [ippGlobal, ippGlobal],
-                    description: `Séquelles multiples post-traumatiques avec IPP global ${ippGlobal}% (formule de Balthazar - Barème 1967)`
+                    description: `${isPolytrauma ? 'Séquelles multiples post-traumatiques' : 'Séquelle post-traumatique'} avec IPP ${isPolytrauma ? 'global' : ''} ${ippGlobal}% ${isPolytrauma ? '(formule de Balthazar - ' : '('}Barème 1967)`
                 }
             };
         }
