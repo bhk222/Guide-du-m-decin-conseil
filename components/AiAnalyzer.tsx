@@ -12047,12 +12047,12 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
     
     // ========== 5. MEMBRES INFÉRIEURS ==========
     
-    // Fracture fémur - Amélioration capture contexte
-    if (/fracture.*f[ée]mur|fracture.*f[ée]moral|f[ée]mur.*fractur|diaphyse.*f[ée]moral|enclouage.*centro.*m[ée]dullaire/i.test(text)) {
+    // Fracture fémur - Amélioration capture contexte (diaphyse, trochantéro-diaphysaire, col, etc.)
+    if (/fracture.*(?:f[ée]mur|f[ée]moral|trochant[ée]r|col.*f[ée]mur|diaphyse.*f[ée]moral)|f[ée]mur.*fractur|enclouage.*centro.*m[ée]dullaire|ost[ée]osynth[èe]se.*f[ée]mur/i.test(text)) {
         detectedSequelae.push({
-            name: 'Fracture du fémur (diaphyse fémorale)',
-            keywords: ['fracture', 'fémur', 'fémoral', 'enclouage'],
-            context: text.match(/fracture.*f[ée]mur[aâ][^.;]*/i)?.[0] || text.match(/diaphyse.*f[ée]moral[^.;]*/i)?.[0] || text.match(/enclouage.*centro[^.;]*/i)?.[0] || ''
+            name: 'Fracture du fémur (diaphyse/trochantéro-diaphysaire/col fémoral)',
+            keywords: ['fracture', 'fémur', 'fémoral', 'trochantéro-diaphysaire', 'enclouage', 'ostéosynthèse'],
+            context: text.match(/fracture.*(?:f[ée]mur|trochant[ée]r|diaphyse)[^.;]*/i)?.[0] || text.match(/enclouage.*centro[^.;]*/i)?.[0] || text.match(/ost[ée]osynth[èe]se[^.;]*/i)?.[0] || ''
         });
     }
     
@@ -12101,12 +12101,21 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
         });
     }
     
-    // Boiterie
-    if (/boiterie|boite|claudication|marche.*difficile/i.test(text)) {
+    // Boiterie / Marche avec canne / Aide technique
+    if (/boiterie|boite|claudication|marche.*difficile|marche.*avec.*canne|canne.*permanente|aide.*technique.*marche|b[ée]quille/i.test(text)) {
         detectedSequelae.push({
-            name: 'Boiterie (conséquence des séquelles orthopédiques)',
-            keywords: ['boiterie', 'claudication'],
-            context: text.match(/boiterie[^.;]*/i)?.[0] || ''
+            name: 'Boiterie / Marche avec aide technique (canne, béquille)',
+            keywords: ['boiterie', 'claudication', 'canne', 'aide technique'],
+            context: text.match(/(?:boiterie|marche.*(?:avec.*canne|difficile)|canne)[^.;]*/i)?.[0] || ''
+        });
+    }
+    
+    // Accroupissement difficile/impossible
+    if (/accroupissement.*(?:difficile|impossible|indolore|douloureux)|difficult[ée].*accroupir|ne.*peut.*accroupir/i.test(text)) {
+        detectedSequelae.push({
+            name: 'Limitation fonctionnelle (accroupissement difficile/impossible)',
+            keywords: ['accroupissement', 'difficile', 'limitation'],
+            context: text.match(/accroupissement[^.;]*/i)?.[0] || ''
         });
     }
     
