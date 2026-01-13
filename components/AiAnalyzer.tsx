@@ -12357,6 +12357,36 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
     // 🆕 V3.3.155: CALCUL AUTOMATIQUE POUR TOUS LES CAS (polytraumatismes ET cas simples)
     console.log('🔍 [V3.3.155] Séquelles détectées:', detectedSequelae.length, detectedSequelae.map(s => s.name));
     
+    // 🆕 V3.3.159: FONCTION DE RECHERCHE DANS BASE BARÈME OFFICIEL
+    const findInBareme = (sequellaName: string, context: string): {name: string; rate: number[]; article?: string; rateCriteria?: any} | null => {
+        // Rechercher dans disabilityData (base officielle)
+        for (const category of disabilityData) {
+            for (const subcategory of category.subcategories) {
+                for (const injury of subcategory.injuries) {
+                    // Matching par nom exact ou searchTerms
+                    const nameMatch = injury.name.toLowerCase().includes(sequellaName.toLowerCase()) || 
+                                     sequellaName.toLowerCase().includes(injury.name.toLowerCase());
+                    const searchTermMatch = injury.searchTerms?.some(term => {
+                        const termLower = term.toLowerCase();
+                        const contextLower = context.toLowerCase();
+                        const seqLower = sequellaName.toLowerCase();
+                        return contextLower.includes(termLower) || seqLower.includes(termLower);
+                    });
+                    
+                    if (nameMatch || searchTermMatch) {
+                        return {
+                            name: injury.name,
+                            rate: Array.isArray(injury.rate) ? injury.rate : [injury.rate, injury.rate],
+                            article: `${category.name} > ${subcategory.name}`,
+                            rateCriteria: injury.rateCriteria
+                        };
+                    }
+                }
+            }
+        }
+        return null;
+    };
+    
     if (detectedSequelae.length >= 1) {
         // 🆕 V3.3.158: EXCEPTION TC NEUROLOGIQUES - Ne pas proposer dialogue si TC avec séquelles neurologiques multiples
         // Pattern: Chute OU TC + perte connaissance/hospitalisation + troubles cognitifs/hémiparésie/vertiges/céphalées
@@ -12564,10 +12594,22 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
                 
                 // Regrouper par système - garder le taux MAX si plusieurs séquelles du même système
                 if (!systemGroups[system]) {
-                    systemGroups[system] = { sequelae: [], rate: 0, explanation: '' };
+                    systemGroups[system] = { sequelae: [], rate: 0, explanation: '', baremeRef: '' };
                 }
                 systemGroups[system].sequelae.push(seq);
-                if (rate > systemGroups[system].rate) {
+                
+                // 🆕 V3.3.159: ENRICHIR AVEC RÉFÉRENCE BARÈME OFFICIEL
+                const baremeEntry = findInBareme(seq.name, seq.context);
+                if (baremeEntry) {
+                    console.log(`📚 TROUVÉ DANS BARÈME: "${seq.name}" → "${baremeEntry.name}" (${baremeEntry.rate[0]}-${baremeEntry.rate[1]}%)`);
+                    // Utiliser le taux du barème officiel si disponible
+                    const baremeRate = baremeEntry.rate[1]; // Utiliser le taux maximum comme estimation
+                    if (baremeRate > systemGroups[system].rate) {
+                        systemGroups[system].rate = baremeRate;
+                        systemGroups[system].explanation = `${explanation} - Barème: "${baremeEntry.name}" (${baremeEntry.rate[0]}-${baremeEntry.rate[1]}%)`;
+                        systemGroups[system].baremeRef = baremeEntry.article || '';
+                    }
+                } else if (rate > systemGroups[system].rate) {
                     systemGroups[system].rate = rate;
                     systemGroups[system].explanation = explanation;
                 }
@@ -12637,14 +12679,10 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
                           `Les séquelles multiples d'un même système (ex: fracture fémur + amyotrophie + limitation genou) ` +
                           `ne s'additionnent PAS arithmétiquement mais sont évaluées par un TAUX GLOBAL pour ce système. ` +
                           `La formule de Balthazar garantit ensuite que l'IPP globale ne dépasse jamais 100% tout en ` +
-                          `tenant compte de l'impact cumulatif des atteintes multiples sur la capacité fonctionnelle.<br><br>`
-                        : `L'évaluation respecte le <strong>barème officiel algérien 1967</strong> avec des taux précis ` +
-                          `adaptés à la sévérité de l'atteinte et au retentissement fonctionnel.<br><br>`
-                    ) +
-                    `<strong>📌 NOTE IMPORTANTE :</strong><br>` +
-                    `Ce calcul automatique fournit une <strong>estimation précise</strong> conforme au barème 1967. ` +
-                    `Pour un calcul exact adapté au cas individuel, l'évaluation peut être affinée selon la sévérité ` +
-                    `des atteintes, les bilans complémentaires et le retentissement socio-professionnel.`,
+                          `tenant compte de l'impact cumulatif des atteintes multiples sur la capacité fonctionnelle.`
+                        : `L'évaluation respecte le <strong>barème officiel algérien 1967</strong> avec les taux précis ` +
+                          `correspondant aux séquelles identifiées dans le barème réglementaire.`
+                    ),
                 path: `${pathPrefix} > Barème 1967`,
                 injury: { 
                     name: `${namePrefix} - ${systemRates.length} système${systemRates.length > 1 ? 's' : ''} atteint${systemRates.length > 1 ? 's' : ''}`,
