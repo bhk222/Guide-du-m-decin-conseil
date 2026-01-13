@@ -12074,6 +12074,24 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
         });
     }
     
+    // Déchirure ligamentaire genou (LCM/LLI/croisés)
+    if (/d[ée]chirure.*ligament.*genou|ligament.*collat[ée]ral.*m[ée]dial|ligament.*lat[ée]ral.*interne|LCM|LLI|ligament.*crois[ée].*(?:ant[ée]rieur|post[ée]rieur)|LCA|LCP|entorse.*grave.*genou/i.test(text)) {
+        detectedSequelae.push({
+            name: 'Déchirure ligamentaire du genou (LCM/LLI/croisés)',
+            keywords: ['déchirure', 'ligament', 'genou', 'LCM', 'LLI', 'collatéral'],
+            context: text.match(/d[ée]chirure.*ligament[^.;]*/i)?.[0] || text.match(/ligament.*collat[ée]ral[^.;]*/i)?.[0] || ''
+        });
+    }
+    
+    // Élongation/lésion musculaire quadriceps
+    if (/[ée]longation.*musculaire.*quadriceps|[ée]longation.*quadriceps|l[ée]sion.*musculaire.*quadriceps|d[ée]chirure.*quadriceps/i.test(text)) {
+        detectedSequelae.push({
+            name: 'Élongation musculaire du quadriceps',
+            keywords: ['élongation', 'quadriceps', 'musculaire'],
+            context: text.match(/[ée]longation.*quadriceps[^.;]*/i)?.[0] || ''
+        });
+    }
+    
     // Amyotrophie quadricipitale
     if (/amyotrophie.*quadricipital|atrophie.*quadriceps|fonte.*musculaire.*cuisse/i.test(text)) {
         detectedSequelae.push({
@@ -12089,6 +12107,15 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
             name: 'Limitation de la flexion du genou',
             keywords: ['limitation', 'flexion', 'genou'],
             context: text.match(/limitation.*flexion.*genou[^.;]*/i)?.[0] || ''
+        });
+    }
+    
+    // Raideur articulaire genou (général)
+    if (/raideur.*(?:articulaire.*)?genou|genou.*raide|enraidissement.*genou/i.test(text)) {
+        detectedSequelae.push({
+            name: 'Raideur articulaire du genou',
+            keywords: ['raideur', 'genou', 'articulaire'],
+            context: text.match(/raideur.*genou[^.;]*/i)?.[0] || ''
         });
     }
     
@@ -12152,6 +12179,24 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
             name: 'Limitation fonctionnelle (douleurs montée escaliers)',
             keywords: ['douleur', 'escaliers', 'montée'],
             context: text.match(/douleur.*mont[ée]e.*escalier[^.;]*/i)?.[0] || text.match(/mont[ée]e.*escalier[^.;]*/i)?.[0] || ''
+        });
+    }
+    
+    // Algies mécaniques (douleurs à l'effort/mécaniques)
+    if (/algie.*m[ée]canique|douleur.*m[ée]canique|douleur.*effort|douleur.*persistant.*effort|algie.*effort/i.test(text)) {
+        detectedSequelae.push({
+            name: 'Algies mécaniques persistantes (à l\'effort)',
+            keywords: ['algie', 'mécanique', 'douleur', 'effort'],
+            context: text.match(/algie.*m[ée]canique[^.;]*/i)?.[0] || text.match(/douleur.*effort[^.;]*/i)?.[0] || ''
+        });
+    }
+    
+    // Diminution force musculaire membre inférieur
+    if (/diminution.*force.*musculaire.*membre.*inf[ée]rieur|perte.*force.*membre.*inf[ée]rieur|force.*musculaire.*diminu[ée]e|d[ée]ficit.*musculaire.*membre.*inf[ée]rieur/i.test(text)) {
+        detectedSequelae.push({
+            name: 'Diminution de la force musculaire du membre inférieur',
+            keywords: ['diminution', 'force', 'musculaire', 'membre inférieur'],
+            context: text.match(/diminution.*force.*musculaire[^.;]*/i)?.[0] || ''
         });
     }
     
@@ -12394,7 +12439,7 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
                 }
                 
                 // MEMBRE INFÉRIEUR - DIFFÉRENCIATION PIED vs CUISSE/GENOU
-                else if (/fracture.*f[ée]mur|fracture.*tibia|amyotrophie.*quadricipital|limitation.*(?:flexion|extension).*genou|raccourcissement.*membre|boiterie|fracture.*m[ée]tatarse|[œo]ed[èe]me.*(?:persistant|r[ée]siduel|l[ée]ger)|douleur.*froid|douleur.*mont[ée]e.*escalier|accroupissement.*difficile/i.test(seq.name)) {
+                else if (/fracture.*f[ée]mur|fracture.*tibia|amyotrophie.*quadricipital|limitation.*(?:flexion|extension).*genou|raccourcissement.*membre|boiterie|fracture.*m[ée]tatarse|[œo]ed[èe]me.*(?:persistant|r[ée]siduel|l[ée]ger)|douleur.*froid|douleur.*mont[ée]e.*escalier|accroupissement.*difficile|d[ée]chirure.*ligament.*genou|[ée]longation.*quadriceps|raideur.*genou|algie.*m[ée]canique|diminution.*force.*musculaire/i.test(seq.name)) {
                     system = 'MEMBRE_INFERIEUR';
                     
                     // SOUS-CATÉGORIE : PIED/CHEVILLE (séquelles mineures)
@@ -12413,8 +12458,26 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
                         }
                     }
                     // SOUS-CATÉGORIE : FÉMUR/TIBIA/GENOU (séquelles majeures)
-                    else if (/fracture.*f[ée]mur|fracture.*tibia|amyotrophie|limitation.*genou/i.test(seq.name)) {
-                        rate = 15; explanation = 'Membre inférieur (CUISSE/GENOU) : Fracture fémur/tibia consolidée avec séquelles fonctionnelles importantes';
+                    else if (/fracture.*f[ée]mur|fracture.*tibia|amyotrophie|limitation.*genou|d[ée]chirure.*ligament|[ée]longation.*quadriceps|raideur.*genou|algie.*m[ée]canique|diminution.*force/i.test(seq.name)) {
+                        // Évaluer sévérité selon nombre et type de séquelles
+                        const hasFracture = detectedSequelae.some(s => /fracture.*(f[ée]mur|tibia)/i.test(s.name));
+                        const hasLigamentaire = detectedSequelae.some(s => /d[ée]chirure.*ligament/i.test(s.name));
+                        const hasRaideur = detectedSequelae.some(s => /raideur.*genou|limitation.*genou/i.test(s.name));
+                        const hasAlgies = detectedSequelae.some(s => /algie.*m[ée]canique/i.test(s.name));
+                        const hasDiminution = detectedSequelae.some(s => /diminution.*force/i.test(s.name));
+                        
+                        // Polytraumatisme du membre (fracture + ligaments + séquelles multiples)
+                        if (hasFracture && hasLigamentaire && (hasRaideur || hasAlgies || hasDiminution)) {
+                            rate = 18; explanation = 'Membre inférieur (CUISSE/GENOU) : Polytraumatisme membre - Fracture tibia + déchirure ligamentaire + séquelles fonctionnelles multiples (raideur, algies, déficit force)';
+                        }
+                        // Fracture avec séquelles importantes
+                        else if (hasFracture && (hasRaideur || hasAlgies)) {
+                            rate = 15; explanation = 'Membre inférieur (CUISSE/GENOU) : Fracture fémur/tibia consolidée avec séquelles fonctionnelles importantes';
+                        }
+                        // Séquelles ligamentaires/musculaires seules
+                        else {
+                            rate = 12; explanation = 'Membre inférieur (CUISSE/GENOU) : Séquelles ligamentaires/musculaires avec retentissement fonctionnel';
+                        }
                     }
                     // Boiterie/limitations fonctionnelles seules (sans fracture identifiée)
                     else {
