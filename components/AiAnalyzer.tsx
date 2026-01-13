@@ -12047,12 +12047,12 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
     
     // ========== 5. MEMBRES INFÉRIEURS ==========
     
-    // Fracture fémur
-    if (/fracture.*f[ée]mur|fracture.*f[ée]moral|enclouage.*centro.*m[ée]dullaire/i.test(text)) {
+    // Fracture fémur - Amélioration capture contexte
+    if (/fracture.*f[ée]mur|fracture.*f[ée]moral|f[ée]mur.*fractur|diaphyse.*f[ée]moral|enclouage.*centro.*m[ée]dullaire/i.test(text)) {
         detectedSequelae.push({
             name: 'Fracture du fémur (diaphyse fémorale)',
             keywords: ['fracture', 'fémur', 'fémoral', 'enclouage'],
-            context: text.match(/fracture.*f[ée]mur[^.;]*/i)?.[0] || ''
+            context: text.match(/fracture.*f[ée]mur[aâ][^.;]*/i)?.[0] || text.match(/diaphyse.*f[ée]moral[^.;]*/i)?.[0] || text.match(/enclouage.*centro[^.;]*/i)?.[0] || ''
         });
     }
     
@@ -12083,12 +12083,12 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
         });
     }
     
-    // Limitation extension genou
-    if (/limitation.*extension.*genou|extension.*genou.*limit[ée]e?.*\d+|d[ée]ficit.*extension/i.test(text)) {
+    // Limitation extension genou - Pattern spécifique pour éviter confusion avec coude
+    if (/(?:limitation|d[ée]ficit).*extension.*genou|extension.*genou.*limit[ée]e?.*\d+|genou.*extension.*limit[ée]e?/i.test(text)) {
         detectedSequelae.push({
             name: 'Limitation de l\'extension du genou',
             keywords: ['limitation', 'extension', 'genou'],
-            context: text.match(/limitation.*extension.*genou[^.;]*/i)?.[0] || ''
+            context: text.match(/(?:limitation|d[ée]ficit).*extension.*genou[^.;]*/i)?.[0] || ''
         });
     }
     
@@ -12130,21 +12130,21 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
         });
     }
     
-    // Raideur coude
-    if (/raideur.*coude|limitation.*coude|flexion.*coude.*limit|extension.*coude.*limit/i.test(text)) {
+    // Raideur coude - Amélioration capture contexte
+    if (/raideur.*coude|limitation.*coude|(?:flexion|extension).*coude.*limit|d[ée]ficit.*(?:flexion|extension).*coude|coude.*raide/i.test(text)) {
         detectedSequelae.push({
             name: 'Raideur articulaire du coude',
             keywords: ['raideur', 'coude', 'limitation'],
-            context: text.match(/raideur.*coude[^.;]*/i)?.[0] || ''
+            context: text.match(/(?:raideur|limitation|d[ée]ficit).*coude[^.;]*/i)?.[0] || text.match(/coude.*(?:raide|limit[ée])[^.;]*/i)?.[0] || ''
         });
     }
     
-    // Paresthésies nerf ulnaire/cubital
-    if (/parasth[ée]sie.*nerf.*ulnaire|parasth[ée]sie.*nerf.*cubital|atteinte.*nerf.*ulnaire/i.test(text)) {
+    // Paresthésies nerf ulnaire/cubital - Amélioration capture contexte
+    if (/parasth[ée]sie.*(?:nerf.*)?ulnaire|parasth[ée]sie.*(?:nerf.*)?cubital|atteinte.*nerf.*ulnaire|territoire.*nerf.*ulnaire/i.test(text)) {
         detectedSequelae.push({
             name: 'Paresthésies dans le territoire du nerf ulnaire (cubital)',
             keywords: ['paresthésie', 'nerf ulnaire', 'cubital'],
-            context: text.match(/parasth[ée]sie.*nerf[^.;]*/i)?.[0] || ''
+            context: text.match(/parasth[ée]sie[^.;]*(?:ulnaire|cubital)[^.;]*/i)?.[0] || text.match(/territoire.*nerf.*ulnaire[^.;]*/i)?.[0] || ''
         });
     }
     
