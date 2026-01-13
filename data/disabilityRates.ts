@@ -1446,6 +1446,17 @@ const middleCategories: InjuryCategory[] = [
           { name: "Néphrectomie unilatérale (rein unique restant normal)", searchTerms: ["néphrectomie unilatérale rein unique restant normal", "rein unilatérale rein unique restant normal", "normal restant unique rein unilatérale néphrectomie", "néphrectomie unilatérale", "unilatérale rein"], rate: 30, description: "Ablation d'un rein avec fonction rénale normale du rein restant." },
           { name: "Néphrectomie avec azotémie irréductible de 0,60 à 1 gramme", searchTerms: ["néphrectomie avec azotémie irréductible 0,60 gramme", "rein avec azotémie irréductible 0,60 gramme", "gramme 0,60 irréductible azotémie avec néphrectomie", "néphrectomie azotémie irréductible 0,60 gramme", "néphrectomie avec"], rate: [30, 60] },
           { name: "Néphrectomie avec azotémie irréductible supérieure à 1 gramme", searchTerms: ["néphrectomie avec azotémie irréductible supérieure gramme", "rein avec azotémie irréductible supérieure gramme", "gramme supérieure irréductible azotémie avec néphrectomie", "néphrectomie azotémie irréductible supérieure gramme", "néphrectomie avec"], rate: [60, 100] },
+          { 
+            name: "Néphrectomie avec modifications rénales (complications cicatricielles, éventration)",
+            searchTerms: ["néphrectomie avec modifications rénales complications cicatricielles éventration", "néphrectomie modification rénale complication cicatricielle", "néphrectomie complications cicatricielles", "néphrectomie éventration"],
+            rate: [50, 70],
+            description: "Néphrectomie compliquée de modifications rénales, complications cicatricielles importantes ou éventration. Barème officiel Art. 57: 50-70%. Ce taux évalue l'ensemble des complications post-néphrectomie.",
+            rateCriteria: {
+              low: "Complications cicatricielles modérées sans retentissement majeur sur la fonction rénale controlatérale, petite éventration réductible.",
+              medium: "Complications cicatricielles importantes avec douleurs chroniques, éventration moyenne nécessitant une contention, léger retentissement sur rein controlatéral.",
+              high: "Complications sévères multiples: éventration volumineuse irréductible, adhérences majeures, altération fonction rein controlatéral, douleurs chroniques invalidantes, nécessité de réinterventions."
+            }
+          },
           { name: "Néphrectomie partielle", searchTerms: ["néphrectomie partielle", "rein partielle"], rate: [10, 30], description: "Résection partielle du rein (pôle supérieur ou inférieur) avec conservation d'une partie fonctionnelle. Taux selon fonction résiduelle du rein opéré et qualité cicatrice.", rateCriteria: { low: "Néphrectomie polaire, fonction rénale totale normale.", high: "Néphrectomie étendue, altération fonction, cicatrice compliquée." } },
           { name: "Éventration lombo-abdominale après néphrectomie", searchTerms: ["éventration lombo abdominale après néphrectomie", "éventration lombo abdominale après rein", "néphrectomie après abdominale lombo éventration", "éventration lombo", "lombo abdominale"], rate: [10, 30] },
           { name: "Contusion rénale avec rein conservé - Fonction normale", searchTerms: ["contusion rénale avec rein conservé fonction normale", "normale fonction conservé rein avec rénale contusion", "contusion rénale rein conservé fonction normale", "contusion rénale", "rénale avec"], rate: [0, 10], description: "Rein contus conservé avec fonction rénale normale après consolidation (3-6 mois). Morphologie normale à l'UIV." },
@@ -1488,6 +1499,17 @@ const middleCategories: InjuryCategory[] = [
           { name: "Rétrécissement de l'urètre postérieur infranchissable", searchTerms: ["rétrécissement l'urètre postérieur infranchissable", "infranchissable postérieur l'urètre rétrécissement", "rétrécissement l'urètre", "l'urètre postérieur", "postérieur infranchissable"], rate: [60, 80] },
           { name: "Rétrécissement de l'urètre postérieur difficilement franchissable", searchTerms: ["rétrécissement l'urètre postérieur difficilement franchissable", "franchissable difficilement postérieur l'urètre rétrécissement", "rétrécissement l'urètre", "l'urètre postérieur", "postérieur difficilement"], rate: [30, 50] },
           { name: "Rétrécissement de l'urètre postérieur facilement franchissable", searchTerms: ["rétrécissement l'urètre postérieur facilement franchissable", "franchissable facilement postérieur l'urètre rétrécissement", "rétrécissement l'urètre", "l'urètre postérieur", "postérieur facilement"], rate: [15, 30] },
+          {
+            name: "Rétrécissement de l'urètre postérieur avec destruction du sphincter anal",
+            searchTerms: ["rétrécissement l'urètre postérieur avec destruction sphincter anal", "rétrécissement urètre postérieur destruction sphincter", "sténose urètre destruction sphincter anal", "rétrécissement urétral sphincter anal"],
+            rate: [60, 90],
+            description: "Rétrécissement de l'urètre postérieur associé à une destruction du sphincter anal. Barème officiel Art. 59: 60-90%. Double préjudice: troubles mictionnels majeurs et incontinence fécale.",
+            rateCriteria: {
+              low: "Rétrécissement modéré avec lésion sphincter partielle, incontinence fécale aux gaz et selles liquides, nécessitant des dilatations urétrales régulières et traitement médical (ralentisseurs transit).",
+              medium: "Rétrécissement sévère avec destruction sphincter importante, incontinence fécale majeure aux selles solides, nécessitant urétrotomie répétée ou endoprothèse urétrale et port de protections permanentes.",
+              high: "Sténose urétrale infranchissable avec destruction sphincter complète, incontinence fécale totale, nécessitant cystostomie sus-pubienne définitive et colostomie, retentissement psycho-social majeur, isolement complet."
+            }
+          },
           { name: "Rétrécissement de l'urètre antérieur facilement dilatable", searchTerms: ["rétrécissement l'urètre antérieur facilement dilatable", "dilatable facilement antérieur l'urètre rétrécissement", "rétrécissement l'urètre facilement dilatable", "rétrécissement l'urètre", "l'urètre antérieur"], rate: [15, 30] },
           { name: "Rétrécissement de l'urètre antérieur difficilement dilatable", searchTerms: ["rétrécissement l'urètre antérieur difficilement dilatable", "dilatable difficilement antérieur l'urètre rétrécissement", "rétrécissement l'urètre difficilement dilatable", "rétrécissement l'urètre", "l'urètre antérieur"], rate: [30, 50] },
           { name: "Autoplastie cutanée ou autre de l'urètre", searchTerms: ["autoplastie cutanée autre l'urètre", "l'urètre autre cutanée autoplastie", "autoplastie cutanée", "cutanée autre", "autre l'urètre"], rate: [20, 50] },
