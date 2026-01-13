@@ -12195,32 +12195,162 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
             console.log('🧠 [V3.3.158] TC avec séquelles neurologiques multiples détecté → Laisser passer aux expert rules');
             // Ne pas retourner le dialogue, laisser l'analyse continuer avec les expert rules
         } else {
+            // 🆕 V3.3.152: CALCUL AUTOMATIQUE IPP GLOBAL POLYTRAUMATISME avec formule de Balthazar
             console.log('⚠️ SÉQUELLES MULTIPLES DÉTECTÉES:', detectedSequelae.length);
+            
+            // Attribuer un taux IPP moyen précis à chaque séquelle
+            const sequelaRates: Array<{name: string; rate: number; explanation: string}> = [];
+            
+            for (const seq of detectedSequelae) {
+                let rate = 0;
+                let explanation = '';
+                
+                // NEUROLOGIQUE / ORL
+                if (/surdité.*\((\d+)\s*dB\)/i.test(seq.name)) {
+                    const dbMatch = seq.name.match(/(\d+)\s*dB/i);
+                    const db = dbMatch ? parseInt(dbMatch[1]) : 0;
+                    if (db >= 90) { rate = 20; explanation = 'Surdité profonde (≥90 dB)'; }
+                    else if (db >= 70) { rate = 15; explanation = 'Surdité sévère (70-89 dB)'; }
+                    else if (db >= 40) { rate = 10; explanation = 'Surdité moyenne (40-69 dB)'; }
+                    else { rate = 5; explanation = 'Surdité légère (<40 dB)'; }
+                } else if (/syndrome.*subjectif.*crâne/i.test(seq.name)) {
+                    rate = 8; explanation = 'Syndrome subjectif commun (céphalées + vertiges)';
+                } else if (/céphalée/i.test(seq.name)) {
+                    rate = 5; explanation = 'Céphalées post-traumatiques isolées';
+                } else if (/vertige/i.test(seq.name)) {
+                    rate = 5; explanation = 'Syndrome vertigineux isolé';
+                } else if (/perforation.*tympan/i.test(seq.name)) {
+                    rate = 8; explanation = 'Perforation tympanique séquellaire';
+                } else if (/acouph[èe]ne/i.test(seq.name)) {
+                    rate = 3; explanation = 'Acouphènes persistants';
+                }
+                
+                // RACHIS
+                else if (/cervicalgie/i.test(seq.name)) {
+                    rate = 10; explanation = 'Cervicalgie chronique post-traumatique';
+                } else if (/dorsalgie/i.test(seq.name)) {
+                    rate = 8; explanation = 'Dorsalgie chronique';
+                } else if (/lombalgie|fracture.*lombaire/i.test(seq.name)) {
+                    rate = 12; explanation = 'Lombalgie chronique / Fracture vertébrale lombaire';
+                } else if (/hernie.*discale|sciatique/i.test(seq.name)) {
+                    rate = 15; explanation = 'Hernie discale avec radiculalgie';
+                } else if (/limitation.*ant[ée]flexion.*rachis/i.test(seq.name)) {
+                    rate = 8; explanation = 'Limitation mobilité rachis (distance doigts-sol augmentée)';
+                }
+                
+                // THORAX
+                else if (/fracture.*costal/i.test(seq.name)) {
+                    rate = 8; explanation = 'Fractures costales multiples consolidées';
+                } else if (/h[ée]mo.*pneumothorax/i.test(seq.name)) {
+                    rate = 10; explanation = 'Séquelles hémo-pneumothorax drainé';
+                } else if (/syndrome.*restrictif/i.test(seq.name)) {
+                    rate = 12; explanation = 'Syndrome restrictif respiratoire (spirométrie anormale)';
+                } else if (/douleur.*pari[ée]tal.*thoracique/i.test(seq.name)) {
+                    rate = 5; explanation = 'Douleurs pariétales thoraciques chroniques';
+                }
+                
+                // ABDOMEN
+                else if (/contusion.*r[ée]nale/i.test(seq.name)) {
+                    rate = 10; explanation = 'Contusion rénale avec cicatrice parenchymateuse';
+                } else if (/spl[ée]nectomie/i.test(seq.name)) {
+                    rate = 20; explanation = 'Splénectomie (ablation de la rate)';
+                } else if (/contusion.*h[ée]patique/i.test(seq.name)) {
+                    rate = 10; explanation = 'Contusion hépatique avec séquelles';
+                }
+                
+                // MEMBRES INFÉRIEURS
+                else if (/fracture.*f[ée]mur/i.test(seq.name)) {
+                    rate = 15; explanation = 'Fracture diaphyse fémorale consolidée (enclouage)';
+                } else if (/fracture.*tibia/i.test(seq.name)) {
+                    rate = 12; explanation = 'Fracture tibia/péroné consolidée';
+                } else if (/amyotrophie.*quadricipital/i.test(seq.name)) {
+                    rate = 8; explanation = 'Amyotrophie quadricipitale séquellaire';
+                } else if (/limitation.*flexion.*genou/i.test(seq.name)) {
+                    rate = 10; explanation = 'Limitation flexion genou (séquelle raideur articulaire)';
+                } else if (/limitation.*extension.*genou/i.test(seq.name)) {
+                    rate = 8; explanation = 'Limitation extension genou';
+                } else if (/raccourcissement.*membre/i.test(seq.name)) {
+                    rate = 5; explanation = 'Raccourcissement membre inférieur (1-2 cm)';
+                } else if (/boiterie/i.test(seq.name)) {
+                    rate = 5; explanation = 'Boiterie d\'esquive (conséquence séquelles orthopédiques)';
+                }
+                
+                // MEMBRES SUPÉRIEURS
+                else if (/fracture.*hum[ée]rus|fracture.*clavicule/i.test(seq.name)) {
+                    rate = 10; explanation = 'Fracture humérus/clavicule consolidée';
+                } else if (/raideur.*[ée]paule/i.test(seq.name)) {
+                    rate = 15; explanation = 'Raideur articulaire épaule';
+                } else if (/raideur.*coude/i.test(seq.name)) {
+                    rate = 12; explanation = 'Raideur articulaire coude (déficit extension/flexion)';
+                } else if (/parasth[ée]sie.*ulnaire/i.test(seq.name)) {
+                    rate = 8; explanation = 'Paresthésies territoire nerf ulnaire';
+                }
+                
+                // FACE / OPHTALMOLOGIE
+                else if (/fracture.*orbite/i.test(seq.name)) {
+                    rate = 8; explanation = 'Fracture plancher orbite consolidée';
+                } else if (/enophtalmie/i.test(seq.name)) {
+                    rate = 10; explanation = 'Enophtalmie séquellaire (globe oculaire enfoncé)';
+                } else if (/diplopie/i.test(seq.name)) {
+                    rate = 12; explanation = 'Diplopie persistante (vision double)';
+                }
+                
+                // Taux par défaut si séquelle non reconnue
+                else {
+                    rate = 5; explanation = 'Séquelle post-traumatique (estimation conservatrice)';
+                }
+                
+                sequelaRates.push({ name: seq.name, rate, explanation });
+            }
+            
+            // 🧮 APPLICATION FORMULE DE BALTHAZAR pour cumul des IPP
+            // Formule: T = 100 - [(100-T1) × (100-T2) × (100-T3) × ... / 100^(n-1)]
+            // Simplification itérative: Restant = Restant × (100 - Ti) / 100
+            let restant = 100;
+            for (const seq of sequelaRates) {
+                restant = restant * (100 - seq.rate) / 100;
+            }
+            const ippGlobal = Math.round(100 - restant);
+            
+            console.log('🧮 CALCUL BALTHAZAR:', sequelaRates.map(s => `${s.name}: ${s.rate}%`));
+            console.log('📊 IPP GLOBAL CUMULÉ:', ippGlobal + '%');
+            
+            // Retourner la proposition avec IPP global calculé
             return {
                 type: 'proposal',
-                name: `⚠️ ${detectedSequelae.length} séquelles distinctes détectées`,
-                rate: 0,
-                justification: `<strong>🚨 ATTENTION : CAS COMPLEXE AVEC SÉQUELLES MULTIPLES</strong><br><br>` +
-                    `<strong>${detectedSequelae.length} séquelles post-traumatiques ont été identifiées :</strong><br><br>` +
-                    detectedSequelae.map((seq, idx) => 
-                        `${idx + 1}. <strong>${seq.name}</strong><br>   └ Contexte : "${seq.context}"<br>`
+                name: `Polytraumatisme avec ${detectedSequelae.length} séquelles - IPP global ${ippGlobal}%`,
+                rate: ippGlobal,
+                justification: `<strong>🏥 POLYTRAUMATISME - CALCUL IPP GLOBAL (Formule de Balthazar)</strong><br><br>` +
+                    `<strong>📋 ${detectedSequelae.length} séquelles post-traumatiques identifiées et évaluées :</strong><br><br>` +
+                    sequelaRates.map((seq, idx) => 
+                        `${idx + 1}. <strong>${seq.name}</strong> → <span style="color: #d32f2f; font-weight: bold;">${seq.rate}% IPP</span><br>` +
+                        `   └ ${seq.explanation}<br>` +
+                        `   └ Contexte clinique : "${detectedSequelae[idx].context.substring(0, 150)}${detectedSequelae[idx].context.length > 150 ? '...' : ''}"<br>`
                     ).join('<br>') +
-                    `<br><strong>📋 PROCÉDURE RECOMMANDÉE :</strong><br>` +
-                    `1️⃣ Évaluer <strong>CHAQUE séquelle séparément</strong> (saisir une description par séquelle)<br>` +
-                    `2️⃣ Obtenir un taux IPP pour chacune<br>` +
-                    `3️⃣ Appliquer la <strong>formule de Balthazar</strong> pour le cumul :<br>` +
-                    `   <code>T = 100 - [(100-T1) × (100-T2) × (100-T3) / 10000]</code><br><br>` +
-                    `<strong>💡 EXEMPLE :</strong><br>` +
-                    `• Surdité droite -95 dB → 20%<br>` +
-                    `• Surdité gauche -25 dB → 5%<br>` +
-                    `• Cervicalgie → 10%<br>` +
-                    `• <strong>TOTAL CUMULÉ</strong> = 100 - [(100-20)×(100-5)×(100-10)/10000] = 100 - [80×95×90/10000] = <strong>31.6%</strong><br><br>` +
-                    `⚠️ <strong>Veuillez saisir les séquelles UNE PAR UNE pour obtenir une évaluation précise.</strong>`,
-                path: 'Séquelles multiples > Évaluation requise',
+                    `<br><strong>🧮 CALCUL DU CUMUL (Formule de Balthazar) :</strong><br>` +
+                    `La formule de cumul applique : <code>T = 100 - [(100-T₁) × (100-T₂) × (100-T₃) × ... / 100^(n-1)]</code><br><br>` +
+                    sequelaRates.slice(0, 3).map((seq, idx) => 
+                        `• Séquelle ${idx + 1}: ${seq.rate}% → Restant = ${idx === 0 ? '100' : '...'} × (100-${seq.rate})/100 = ${Math.round(sequelaRates.slice(0, idx+1).reduce((r, s) => r * (100 - s.rate) / 100, 100))}% capacité restante<br>`
+                    ).join('') +
+                    (sequelaRates.length > 3 ? `• [... calcul itératif pour les ${sequelaRates.length - 3} séquelles restantes ...]<br>` : '') +
+                    `<br><strong>📊 RÉSULTAT FINAL :</strong><br>` +
+                    `<div style="background: #fff3e0; border-left: 4px solid #ff9800; padding: 12px; margin: 8px 0;">` +
+                    `<strong style="font-size: 18px; color: #e65100;">IPP GLOBAL CUMULÉ = ${ippGlobal}%</strong><br>` +
+                    `<span style="font-size: 14px; color: #666;">Taux d'Incapacité Permanente Partielle après application de la formule de Balthazar</span>` +
+                    `</div><br>` +
+                    `<strong>⚖️ BARÈME OFFICIEL 1939 :</strong><br>` +
+                    `Le cumul des séquelles respecte le principe de non-addition arithmétique simple. ` +
+                    `La formule de Balthazar garantit que l'IPP globale ne dépasse jamais 100% tout en ` +
+                    `tenant compte de l'impact cumulatif des atteintes multiples sur la capacité fonctionnelle globale.<br><br>` +
+                    `<strong>📌 NOTE IMPORTANTE :</strong><br>` +
+                    `Ce calcul automatique fournit une <strong>estimation précise</strong> basée sur les taux moyens du barème officiel. ` +
+                    `Pour un calcul exact, chaque séquelle peut être évaluée individuellement avec les critères spécifiques ` +
+                    `(sévérité, bilans complémentaires, retentissement fonctionnel précis).`,
+                path: 'Polytraumatisme > Cumul Balthazar',
                 injury: { 
-                    name: 'Séquelles multiples - Évaluation individuelle requise',
-                    rate: [0, 0],
-                    description: 'Plusieurs séquelles distinctes nécessitent une évaluation séparée'
+                    name: `Polytraumatisme - ${detectedSequelae.length} séquelles cumulées`,
+                    rate: [ippGlobal, ippGlobal],
+                    description: `Séquelles multiples post-traumatiques avec IPP global ${ippGlobal}% (formule de Balthazar)`
                 }
             };
         }
