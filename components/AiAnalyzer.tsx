@@ -11860,15 +11860,14 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
     
     console.log('🔍 [V3.3.147] TEXTE REÇU:', text.substring(0, 200));
     
-    // 🆕 V3.3.147: DÉTECTION SÉQUELLES MULTIPLES - Analyse complète avant de retourner
+    // 🆕 V3.3.150: DÉTECTION SÉQUELLES MULTIPLES POLYTRAUMATISMES - Analyse exhaustive
     const detectedSequelae: Array<{name: string; keywords: string[]; context: string}> = [];
     
+    // ========== 1. NEUROLOGIQUE / ORL ==========
+    
     // Détecter surdité par dB - Pattern simplifié pour capturer CHAQUE mention de dB
-    // Ex: "95 db a droite et moin 25 db a gauche" → 2 matches distincts
     const decibelPattern = /(\d{1,3})\s*(?:db|d\s*b|décibels?)\s*(?:[aà]\s+)?(droite|gauche|d|g)/gi;
     const decibelMatches = Array.from(text.matchAll(decibelPattern));
-    
-    // Vérifier si le contexte global parle de surdité/audition
     const hearingContext = /surdité|perte.*audit|baisse.*acuit.*audit|hypoacousie|cophose|otorragie|oreille/i.test(text);
     
     if (decibelMatches.length > 0 && hearingContext) {
@@ -11883,44 +11882,303 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
                 context: match[0]
             });
         }
-    }    // Détecter perforation tympanique
+    }
+    
+    // Perforation tympanique
     if (/perforation.*tympan|tympan.*perfor/i.test(text)) {
         detectedSequelae.push({
             name: 'Perforation tympanique',
-            keywords: ['perforation', 'tympan', 'tympanique'],
+            keywords: ['perforation', 'tympan'],
             context: text.match(/perforation.*tympan[^.;]*/i)?.[0] || ''
         });
     }
     
-    // Détecter vertiges
-    if (/vertige|syndrome.*vestibulaire|troubles.*[eé]quilibre/i.test(text)) {
+    // Acouphènes
+    if (/acouph[èe]ne/i.test(text)) {
         detectedSequelae.push({
-            name: 'Syndrome vertigineux',
-            keywords: ['vertige', 'vestibulaire', 'équilibre'],
-            context: text.match(/vertige[^.;]*/i)?.[0] || ''
+            name: 'Acouphènes',
+            keywords: ['acouphène', 'sifflement'],
+            context: text.match(/acouph[èe]ne[^.;]*/i)?.[0] || ''
         });
     }
     
-    // Détecter céphalées
-    if (/c[eé]phal[eé]e|maux.*t[eê]te|douleur.*cr[aâ]ne/i.test(text)) {
+    // Syndrome subjectif du crâne (céphalées + vertiges ensemble)
+    const hasCephalees = /c[eé]phal[eé]e/i.test(text);
+    const hasVertiges = /vertige|syndrome.*vestibulaire/i.test(text);
+    
+    if (hasCephalees && hasVertiges) {
         detectedSequelae.push({
-            name: 'Céphalées post-traumatiques',
-            keywords: ['céphalée', 'mal de tête', 'douleur crânienne'],
-            context: text.match(/c[eé]phal[eé]e[^.;]*/i)?.[0] || ''
+            name: 'Syndrome subjectif commun des blessures du crâne (céphalées, vertiges)',
+            keywords: ['syndrome subjectif', 'céphalée', 'vertige'],
+            context: text.match(/(syndrome.*subjectif|c[eé]phal[eé]e.*vertige|vertige.*c[eé]phal[eé]e)[^.;]*/i)?.[0] || ''
         });
+    } else {
+        // Détecter séparément si non ensemble
+        if (hasVertiges) {
+            detectedSequelae.push({
+                name: 'Syndrome vertigineux',
+                keywords: ['vertige', 'vestibulaire'],
+                context: text.match(/vertige[^.;]*/i)?.[0] || ''
+            });
+        }
+        
+        if (hasCephalees) {
+            detectedSequelae.push({
+                name: 'Céphalées post-traumatiques chroniques',
+                keywords: ['céphalée', 'mal de tête'],
+                context: text.match(/c[eé]phal[eé]e[^.;]*/i)?.[0] || ''
+            });
+        }
     }
     
-    // Détecter cervicalgie
-    if (/cervicalgie|douleur.*cervical|syndrome.*cervical|coup.*lapin|whiplash/i.test(text)) {
+    // ========== 2. RACHIS ==========
+    
+    // Cervicalgie
+    if (/cervicalgie|douleur.*cervical|syndrome.*cervical|coup.*lapin|whiplash|raideur.*cervical/i.test(text)) {
         detectedSequelae.push({
             name: 'Cervicalgie / Syndrome cervical',
-            keywords: ['cervicalgie', 'cervical', 'coup du lapin'],
+            keywords: ['cervicalgie', 'cervical'],
             context: text.match(/cervicalgie[^.;]*/i)?.[0] || ''
         });
     }
     
+    // Dorsalgie
+    if (/dorsalgie|douleur.*dorsal|syndrome.*dorsal|raideur.*dorsal/i.test(text)) {
+        detectedSequelae.push({
+            name: 'Dorsalgie',
+            keywords: ['dorsalgie', 'dorsal'],
+            context: text.match(/dorsalgie[^.;]*/i)?.[0] || ''
+        });
+    }
+    
+    // Lombalgie + Fracture vertébrale lombaire
+    if (/lombalgie|douleur.*lombaire|syndrome.*lombaire|raideur.*lombaire|fracture.*t.*lombaire|fracture.*l1|fracture.*l2|fracture.*l3|fracture.*l4|fracture.*l5/i.test(text)) {
+        detectedSequelae.push({
+            name: 'Lombalgie chronique / Fracture vertébrale lombaire',
+            keywords: ['lombalgie', 'lombaire', 'fracture vertébrale'],
+            context: text.match(/(lombalgie|fracture.*lombaire)[^.;]*/i)?.[0] || ''
+        });
+    }
+    
+    // Hernie discale + Sciatique
+    if (/hernie.*discale|sciatique|cruralgie|radiculalgie/i.test(text)) {
+        detectedSequelae.push({
+            name: 'Hernie discale lombaire avec radiculalgie (sciatique/cruralgie)',
+            keywords: ['hernie discale', 'sciatique', 'cruralgie'],
+            context: text.match(/(hernie.*discale|sciatique)[^.;]*/i)?.[0] || ''
+        });
+    }
+    
+    // Limitation flexion rachis (distance doigts-sol)
+    if (/distance.*doigt.*sol|flexion.*tronc.*limit|ant[ée]flexion.*limit|schober/i.test(text)) {
+        detectedSequelae.push({
+            name: 'Limitation antéflexion du rachis',
+            keywords: ['distance doigts-sol', 'flexion tronc', 'schober'],
+            context: text.match(/distance.*doigt.*sol[^.;]*/i)?.[0] || ''
+        });
+    }
+    
+    // ========== 3. THORAX ==========
+    
+    // Fractures costales
+    if (/fracture.*c[ôo]te|fracture.*costal|c[ôo]te.*fractur|fracture.*[ée]tag[ée]e/i.test(text)) {
+        detectedSequelae.push({
+            name: 'Fractures costales multiples',
+            keywords: ['fracture', 'côte', 'costal', 'étagées'],
+            context: text.match(/fracture.*c[ôo]te[^.;]*/i)?.[0] || ''
+        });
+    }
+    
+    // Hémo-pneumothorax
+    if (/h[ée]mo.*pneumothorax|pneumothorax|h[ée]mothorax|drain.*thoracique|drain[ée]/i.test(text)) {
+        detectedSequelae.push({
+            name: 'Hémo-pneumothorax drainé (séquelles)',
+            keywords: ['hémo-pneumothorax', 'pneumothorax', 'drainé'],
+            context: text.match(/(h[ée]mo.*pneumothorax|pneumothorax.*drain)[^.;]*/i)?.[0] || ''
+        });
+    }
+    
+    // Syndrome restrictif / Capacité respiratoire diminuée
+    if (/syndrome.*restrictif|capacit[ée].*respiratoire.*diminu[ée]|spirom[ée]trie.*anormale|dyspn[ée]e.*effort/i.test(text)) {
+        detectedSequelae.push({
+            name: 'Syndrome restrictif respiratoire / Capacité respiratoire diminuée',
+            keywords: ['syndrome restrictif', 'spirométrie', 'capacité respiratoire'],
+            context: text.match(/syndrome.*restrictif[^.;]*/i)?.[0] || ''
+        });
+    }
+    
+    // Douleurs pariétales thoraciques
+    if (/douleur.*pari[ée]tal.*thoracique|douleur.*thoracique.*chronique|n[ée]vralgie.*intercostal/i.test(text)) {
+        detectedSequelae.push({
+            name: 'Douleurs pariétales thoraciques chroniques',
+            keywords: ['douleur pariétale', 'thoracique', 'névralgies intercostales'],
+            context: text.match(/douleur.*pari[ée]tal[^.;]*/i)?.[0] || ''
+        });
+    }
+    
+    // ========== 4. ABDOMEN / VISCÈRES ==========
+    
+    // Contusion rénale / Fracture rein
+    if (/contusion.*r[ée]nale|fracture.*rein|l[ée]sion.*r[ée]nale|cicatrice.*parenchymateuse.*rein/i.test(text)) {
+        detectedSequelae.push({
+            name: 'Contusion rénale avec cicatrice parenchymateuse',
+            keywords: ['contusion rénale', 'fracture rein', 'cicatrice rénale'],
+            context: text.match(/(contusion.*r[ée]nale|fracture.*rein)[^.;]*/i)?.[0] || ''
+        });
+    }
+    
+    // Splénectomie / Rupture rate
+    if (/spl[ée]nectomie|ablation.*rate|rupture.*rate|rate.*ruptur/i.test(text)) {
+        detectedSequelae.push({
+            name: 'Splénectomie (ablation de la rate)',
+            keywords: ['splénectomie', 'rate', 'ablation'],
+            context: text.match(/(spl[ée]nectomie|rupture.*rate)[^.;]*/i)?.[0] || ''
+        });
+    }
+    
+    // Contusion hépatique / Rupture foie
+    if (/contusion.*h[ée]patique|rupture.*foie|l[ée]sion.*foie/i.test(text)) {
+        detectedSequelae.push({
+            name: 'Contusion hépatique / Lésion du foie',
+            keywords: ['contusion hépatique', 'rupture foie'],
+            context: text.match(/(contusion.*h[ée]patique|rupture.*foie)[^.;]*/i)?.[0] || ''
+        });
+    }
+    
+    // ========== 5. MEMBRES INFÉRIEURS ==========
+    
+    // Fracture fémur
+    if (/fracture.*f[ée]mur|fracture.*f[ée]moral|enclouage.*centro.*m[ée]dullaire/i.test(text)) {
+        detectedSequelae.push({
+            name: 'Fracture du fémur (diaphyse fémorale)',
+            keywords: ['fracture', 'fémur', 'fémoral', 'enclouage'],
+            context: text.match(/fracture.*f[ée]mur[^.;]*/i)?.[0] || ''
+        });
+    }
+    
+    // Fracture tibia/péroné
+    if (/fracture.*tibia|fracture.*p[ée]ron[ée]|fracture.*jambe/i.test(text)) {
+        detectedSequelae.push({
+            name: 'Fracture tibia/péroné',
+            keywords: ['fracture', 'tibia', 'péroné'],
+            context: text.match(/fracture.*tibia[^.;]*/i)?.[0] || ''
+        });
+    }
+    
+    // Amyotrophie quadricipitale
+    if (/amyotrophie.*quadricipital|atrophie.*quadriceps|fonte.*musculaire.*cuisse/i.test(text)) {
+        detectedSequelae.push({
+            name: 'Amyotrophie quadricipitale',
+            keywords: ['amyotrophie', 'quadriceps', 'atrophie cuisse'],
+            context: text.match(/amyotrophie.*quadricipital[^.;]*/i)?.[0] || ''
+        });
+    }
+    
+    // Limitation flexion genou
+    if (/limitation.*flexion.*genou|flexion.*genou.*limit[ée]e?.*\d+|genou.*flex.*\d+/i.test(text)) {
+        detectedSequelae.push({
+            name: 'Limitation de la flexion du genou',
+            keywords: ['limitation', 'flexion', 'genou'],
+            context: text.match(/limitation.*flexion.*genou[^.;]*/i)?.[0] || ''
+        });
+    }
+    
+    // Limitation extension genou
+    if (/limitation.*extension.*genou|extension.*genou.*limit[ée]e?.*\d+|d[ée]ficit.*extension/i.test(text)) {
+        detectedSequelae.push({
+            name: 'Limitation de l\'extension du genou',
+            keywords: ['limitation', 'extension', 'genou'],
+            context: text.match(/limitation.*extension.*genou[^.;]*/i)?.[0] || ''
+        });
+    }
+    
+    // Raccourcissement membre
+    if (/raccourcissement.*membre|in[ée]galit[ée].*membre|membre.*raccourci|in[ée]galit[ée].*longueur/i.test(text)) {
+        detectedSequelae.push({
+            name: 'Raccourcissement du membre inférieur',
+            keywords: ['raccourcissement', 'inégalité', 'membre'],
+            context: text.match(/raccourcissement.*membre[^.;]*/i)?.[0] || ''
+        });
+    }
+    
+    // Boiterie
+    if (/boiterie|boite|claudication|marche.*difficile/i.test(text)) {
+        detectedSequelae.push({
+            name: 'Boiterie (conséquence des séquelles orthopédiques)',
+            keywords: ['boiterie', 'claudication'],
+            context: text.match(/boiterie[^.;]*/i)?.[0] || ''
+        });
+    }
+    
+    // ========== 6. MEMBRES SUPÉRIEURS ==========
+    
+    // Fracture humérus/clavicule/scapula
+    if (/fracture.*hum[ée]rus|fracture.*clavicule|fracture.*scapula|fracture.*omoplate/i.test(text)) {
+        detectedSequelae.push({
+            name: 'Fracture de l\'humérus/clavicule/omoplate',
+            keywords: ['fracture', 'humérus', 'clavicule', 'omoplate'],
+            context: text.match(/fracture.*(hum[ée]rus|clavicule|scapula)[^.;]*/i)?.[0] || ''
+        });
+    }
+    
+    // Raideur épaule
+    if (/raideur.*[ée]paule|limitation.*[ée]paule|ankyl.*[ée]paule|p[ée]riarthrite/i.test(text)) {
+        detectedSequelae.push({
+            name: 'Raideur/Limitation articulaire de l\'épaule',
+            keywords: ['raideur', 'épaule', 'limitation'],
+            context: text.match(/raideur.*[ée]paule[^.;]*/i)?.[0] || ''
+        });
+    }
+    
+    // Raideur coude
+    if (/raideur.*coude|limitation.*coude|flexion.*coude.*limit|extension.*coude.*limit/i.test(text)) {
+        detectedSequelae.push({
+            name: 'Raideur articulaire du coude',
+            keywords: ['raideur', 'coude', 'limitation'],
+            context: text.match(/raideur.*coude[^.;]*/i)?.[0] || ''
+        });
+    }
+    
+    // Paresthésies nerf ulnaire/cubital
+    if (/parasth[ée]sie.*nerf.*ulnaire|parasth[ée]sie.*nerf.*cubital|atteinte.*nerf.*ulnaire/i.test(text)) {
+        detectedSequelae.push({
+            name: 'Paresthésies dans le territoire du nerf ulnaire (cubital)',
+            keywords: ['paresthésie', 'nerf ulnaire', 'cubital'],
+            context: text.match(/parasth[ée]sie.*nerf[^.;]*/i)?.[0] || ''
+        });
+    }
+    
+    // ========== 7. FACE / OPHTALMOLOGIE ==========
+    
+    // Fracture orbite / Plancher orbite
+    if (/fracture.*plancher.*orbite|fracture.*orbite|blow.*out/i.test(text)) {
+        detectedSequelae.push({
+            name: 'Fracture du plancher de l\'orbite',
+            keywords: ['fracture', 'orbite', 'plancher', 'blow-out'],
+            context: text.match(/fracture.*orbite[^.;]*/i)?.[0] || ''
+        });
+    }
+    
+    // Enophtalmie
+    if (/enophtalmie/i.test(text)) {
+        detectedSequelae.push({
+            name: 'Enophtalmie (globe oculaire enfoncé)',
+            keywords: ['enophtalmie'],
+            context: text.match(/enophtalmie[^.;]*/i)?.[0] || ''
+        });
+    }
+    
+    // Diplopie
+    if (/diplopie|vision.*double/i.test(text)) {
+        detectedSequelae.push({
+            name: 'Diplopie (vision double)',
+            keywords: ['diplopie', 'vision double'],
+            context: text.match(/diplopie[^.;]*/i)?.[0] || ''
+        });
+    }
+    
     // Si plusieurs séquelles détectées, retourner un message d'alerte
-    console.log('🔍 [V3.3.147] Séquelles détectées:', detectedSequelae.length, detectedSequelae.map(s => s.name));
+    console.log('🔍 [V3.3.150] Séquelles détectées:', detectedSequelae.length, detectedSequelae.map(s => s.name));
     
     if (detectedSequelae.length > 1) {
         // 🆕 V3.3.158: EXCEPTION TC NEUROLOGIQUES - Ne pas proposer dialogue si TC avec séquelles neurologiques multiples
