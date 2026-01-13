@@ -475,17 +475,72 @@ export const ExclusiveAiCalculator: React.FC<ExclusiveAiCalculatorProps> = ({
              return;
         }
         
-        // 🆕 V3.3.148: DÉTECTION SÉQUELLES MULTIPLES AVANT SPLIT
-        // Si le texte contient plusieurs séquelles distinctes (surdité, céphalée, vertige, etc.), 
+        // 🆕 V3.3.150: DÉTECTION SÉQUELLES MULTIPLES AMÉLIORÉE - CAS POLYTRAUMATIQUES
+        // Si le texte contient plusieurs séquelles distinctes (neurologiques, thoraciques, orthopédiques, etc.), 
         // envoyer TOUT à localExpertAnalysis pour qu'il détecte et alerte l'utilisateur
-        const hasMultipleInjuryIndicators = (
-            // Compter les mentions de parties du corps différentes
-            ((/surdité|baisse.*audit|perte.*audit|\d+\s*db/i.test(textToSend) ? 1 : 0) +
-            (/perforation.*tympan|tympan.*perfor/i.test(textToSend) ? 1 : 0) +
-            (/vertige|syndrome.*vestibulaire/i.test(textToSend) ? 1 : 0) +
-            (/c[eé]phal[eé]e|maux.*t[eê]te/i.test(textToSend) ? 1 : 0) +
-            (/cervicalgie|syndrome.*cervical/i.test(textToSend) ? 1 : 0)) >= 2
+        const multipleInjuryCount = (
+            // === NEUROLOGIQUE ===
+            ((/traumatisme.*cr[âa]n|contusion.*c[ée]r[ée]bral|syndrome.*subjectif.*cr[âa]ne/i.test(textToSend)) ? 1 : 0) +
+            ((/c[eé]phal[eé]e.*post.*traumatique|c[eé]phal[eé]e.*chronique/i.test(textToSend) && !/syndrome.*subjectif/i.test(textToSend)) ? 1 : 0) +
+            ((/vertige|syndrome.*vestibulaire|syndrome.*vertigineux/i.test(textToSend) && !/syndrome.*subjectif/i.test(textToSend)) ? 1 : 0) +
+            
+            // === ORL / AUDITIF ===
+            ((/surdité|baisse.*audit|perte.*audit|\d+\s*db/i.test(textToSend)) ? 1 : 0) +
+            ((/perforation.*tympan|tympan.*perfor/i.test(textToSend)) ? 1 : 0) +
+            ((/acouph[èe]ne/i.test(textToSend)) ? 1 : 0) +
+            
+            // === RACHIS ===
+            ((/cervicalgie|syndrome.*cervical|raideur.*cervical/i.test(textToSend)) ? 1 : 0) +
+            ((/dorsalgie|syndrome.*dorsal|raideur.*dorsal/i.test(textToSend)) ? 1 : 0) +
+            ((/lombalgie|syndrome.*lombaire|raideur.*lombaire/i.test(textToSend)) ? 1 : 0) +
+            ((/hernie.*discale.*lombaire|sciatique/i.test(textToSend)) ? 1 : 0) +
+            
+            // === THORAX ===
+            ((/fracture.*c[ôo]te|fracture.*costal|c[ôo]te.*fractur/i.test(textToSend)) ? 1 : 0) +
+            ((/h[ée]mo.*pneumothorax|pneumothorax|h[ée]mothorax/i.test(textToSend)) ? 1 : 0) +
+            ((/syndrome.*restrictif|capacit[ée].*respiratoire.*diminu[ée]/i.test(textToSend)) ? 1 : 0) +
+            ((/douleur.*pari[ée]tal.*thoracique|douleur.*thoracique/i.test(textToSend)) ? 1 : 0) +
+            
+            // === ABDOMEN / VISCÈRES ===
+            ((/contusion.*r[ée]nale|fracture.*rein|l[ée]sion.*r[ée]nale/i.test(textToSend)) ? 1 : 0) +
+            ((/contusion.*h[ée]patique|rupture.*foie|l[ée]sion.*foie/i.test(textToSend)) ? 1 : 0) +
+            ((/contusion.*spl[ée]nique|rupture.*rate|spl[ée]nectomie/i.test(textToSend)) ? 1 : 0) +
+            
+            // === MEMBRES INFÉRIEURS ===
+            ((/fracture.*f[ée]mur|fracture.*f[ée]moral/i.test(textToSend)) ? 1 : 0) +
+            ((/fracture.*tibia|fracture.*p[ée]ron[ée]/i.test(textToSend)) ? 1 : 0) +
+            ((/fracture.*rotule|fracture.*patella/i.test(textToSend)) ? 1 : 0) +
+            ((/amyotrophie.*quadricipital|atrophie.*quadriceps/i.test(textToSend)) ? 1 : 0) +
+            ((/limitation.*flexion.*genou|raideur.*genou/i.test(textToSend)) ? 1 : 0) +
+            ((/raccourcissement.*membre|in[ée]galit[ée].*membre/i.test(textToSend)) ? 1 : 0) +
+            ((/boiterie/i.test(textToSend)) ? 1 : 0) +
+            
+            // === MEMBRES SUPÉRIEURS ===
+            ((/fracture.*hum[ée]rus|fracture.*clavicule|fracture.*scapula/i.test(textToSend)) ? 1 : 0) +
+            ((/fracture.*radius|fracture.*ulna|fracture.*poignet/i.test(textToSend)) ? 1 : 0) +
+            ((/limitation.*[ée]paule|raideur.*[ée]paule/i.test(textToSend)) ? 1 : 0) +
+            ((/limitation.*coude|raideur.*coude/i.test(textToSend)) ? 1 : 0) +
+            ((/limitation.*poignet|raideur.*poignet/i.test(textToSend)) ? 1 : 0) +
+            
+            // === BASSIN ===
+            ((/fracture.*bassin|fracture.*cotyle|fracture.*sacrum/i.test(textToSend)) ? 1 : 0) +
+            ((/fracture.*hanche|fracture.*col.*f[ée]moral/i.test(textToSend)) ? 1 : 0)
         );
+        
+        const hasMultipleInjuryIndicators = multipleInjuryCount >= 2;
+        
+        // 🆕 V3.3.150: FUSION CÉPHALÉES + VERTIGES = SYNDROME SUBJECTIF
+        // Si "céphalées" ET "vertiges" sont mentionnés ENSEMBLE, ils forment UNE SEULE séquelle
+        const hasCephaleesVertiges = /c[eé]phal[eé]e/i.test(textToSend) && /vertige/i.test(textToSend);
+        if (hasCephaleesVertiges && !/syndrome.*subjectif/i.test(textToSend)) {
+            // Remplacer "céphalées, vertiges" par "syndrome subjectif commun des blessures du crâne"
+            const normalizedText = textToSend.replace(
+                /(c[eé]phal[eé]e[s]?,?\s*(et|,)?\s*vertige[s]?|vertige[s]?,?\s*(et|,)?\s*c[eé]phal[eé]e[s]?)/gi,
+                'syndrome subjectif commun des blessures du crâne'
+            );
+            processAndDisplayAnalysis(normalizedText);
+            return;
+        }
         
         if (hasMultipleInjuryIndicators) {
             // Envoyer TOUT le texte à l'analyse pour détection séquelles multiples
