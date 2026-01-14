@@ -12623,7 +12623,7 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
                 }
                 
                 // THORAX (fractures costales + hémo-pneumothorax + restrictif = 1 seul taux global thorax)
-                else if (/fracture.*costal|h[ée]mo.*pneumothorax|syndrome.*restrictif|douleur.*pari[ée]tal.*thoracique/i.test(seq.name)) {
+                else if (/fracture.*costal|h[ée]mo[\s\-]?pneumothorax|pneumothorax|syndrome.*restrictif|douleur.*pari[ée]tal.*thoracique/i.test(seq.name)) {
                     system = 'THORAX';
                     // Le taux thorax reflète l'ensemble des atteintes thoraciques
                     rate = 8; explanation = 'Séquelles thoraciques globales (fractures costales, hémo-pneumothorax drainé, syndrome restrictif léger)';
