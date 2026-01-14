@@ -11858,7 +11858,13 @@ const extractIndividualLesions = (text: string): string[] => {
  */
 export const localExpertAnalysis = (text: string, externalKeywords?: string[], isExactMatch: boolean = false): LocalAnalysisResult => {
     
-    console.log('🔍 [V3.3.147] TEXTE REÇU:', text.substring(0, 200));
+    // 🔴 V3.3.162: NETTOYAGE TEXTE - Supprime caractères invisibles (zero-width space, etc.)
+    // Ces caractères peuvent casser les regex et empêcher la détection
+    text = text.replace(/[\u200B-\u200D\uFEFF]/g, ' '); // Zero-width spaces
+    text = text.replace(/\u00A0/g, ' '); // Non-breaking space
+    text = text.trim();
+    
+    console.log('🔍 [V3.3.162] TEXTE REÇU (nettoyé):', text.substring(0, 200));
     
     // 🆕 V3.3.150: DÉTECTION SÉQUELLES MULTIPLES POLYTRAUMATISMES - Analyse exhaustive
     const detectedSequelae: Array<{name: string; keywords: string[]; context: string}> = [];
