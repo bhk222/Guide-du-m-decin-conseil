@@ -11905,6 +11905,18 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
     // Syndrome subjectif du crâne (céphalées + vertiges ensemble)
     const hasCephalees = /c[eé]phal[eé]e/i.test(text);
     const hasVertiges = /vertige|syndrome.*vestibulaire/i.test(text);
+    const hasTC = /traumatisme.*cr[aâ]n|perte.*connaissance|coma/i.test(text);
+    const tcDaysMatch = text.match(/(?:perte.*connaissance|coma|hospitalisation).*?(\d+)\s*(?:jour|j)/i);
+    const tcDays = tcDaysMatch ? parseInt(tcDaysMatch[1]) : 0;
+    
+    // Traumatisme crânien avec perte de connaissance prolongée (≥1 jour)
+    if (hasTC && tcDays >= 1) {
+        detectedSequelae.push({
+            name: `Traumatisme crânien avec perte de connaissance prolongée (${tcDays} jours)`,
+            keywords: ['traumatisme crânien', 'perte connaissance', 'coma'],
+            context: text.match(/traumatisme.*cr[aâ]n[^.;]*/i)?.[0] || text.match(/perte.*connaissance.*\d+.*jour[^.;]*/i)?.[0] || ''
+        });
+    }
     
     if (hasCephalees && hasVertiges) {
         detectedSequelae.push({
@@ -11939,6 +11951,24 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
             name: 'Cervicalgie / Syndrome cervical',
             keywords: ['cervicalgie', 'cervical'],
             context: text.match(/cervicalgie[^.;]*/i)?.[0] || ''
+        });
+    }
+    
+    // Brachialgie / Névralgie cervico-brachiale (radiculalgie membre supérieur)
+    if (/brachialgie|n[ée]vralgie.*cervico.*brachial|douleur.*irradiant.*bras|radiculalgie.*membre.*sup[ée]rieur|c5.*c6.*c7/i.test(text)) {
+        detectedSequelae.push({
+            name: 'Brachialgie / Névralgie cervico-brachiale (radiculalgie)',
+            keywords: ['brachialgie', 'névralgie', 'cervico-brachiale', 'radiculalgie'],
+            context: text.match(/brachialgie[^.;]*/i)?.[0] || text.match(/n[ée]vralgie.*cervico.*brachial[^.;]*/i)?.[0] || ''
+        });
+    }
+    
+    // Paresthésies / Fourmillements (troubles sensitifs)
+    if (/parasth[ée]sie|fourmillement|engourdissement|picotement|trouble.*sensitif/i.test(text)) {
+        detectedSequelae.push({
+            name: 'Paresthésies / Fourmillements (troubles sensitifs)',
+            keywords: ['paresthésie', 'fourmillement', 'trouble sensitif'],
+            context: text.match(/(?:parasth[ée]sie|fourmillement)[^.;]*/i)?.[0] || ''
         });
     }
     
@@ -12120,12 +12150,13 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
         });
     }
     
-    // Amyotrophie quadricipitale
-    if (/amyotrophie.*quadricipital|atrophie.*quadriceps|fonte.*musculaire.*cuisse/i.test(text)) {
+    // Amyotrophie quadricipitale / Amyotrophie globale membre inférieur
+    if (/amyotrophie.*(?:quadricipital|cuisse.*jambe|membre.*inf[ée]rieur)|atrophie.*(?:quadriceps|muscles.*cuisse)|fonte.*musculaire.*(?:cuisse|jambe)/i.test(text)) {
+        const isGlobal = /amyotrophie.*(?:cuisse.*jambe|membre.*inf[ée]rieur)/i.test(text);
         detectedSequelae.push({
-            name: 'Amyotrophie quadricipitale',
+            name: isGlobal ? 'Amyotrophie globale du membre inférieur (cuisse + jambe)' : 'Amyotrophie quadricipitale',
             keywords: ['amyotrophie', 'quadriceps', 'atrophie cuisse'],
-            context: text.match(/amyotrophie.*quadricipital[^.;]*/i)?.[0] || ''
+            context: text.match(/amyotrophie[^.;]*/i)?.[0] || ''
         });
     }
     
@@ -12144,6 +12175,26 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
             name: 'Raideur articulaire du genou',
             keywords: ['raideur', 'genou', 'articulaire'],
             context: text.match(/raideur.*genou[^.;]*/i)?.[0] || ''
+        });
+    }
+    
+    // Ankylose articulaire (MAJEURE - perte totale mobilité)
+    if (/ankylos[ée].*(?:genou|cheville|hanche|coude|poignet|épaule)|(?:genou|cheville|hanche|coude|poignet|épaule).*ankylos[ée]/i.test(text)) {
+        const joint = text.match(/ankylos[ée].*(?:genou|cheville|hanche|coude|poignet|épaule)|(?:genou|cheville|hanche|coude|poignet|épaule).*ankylos[ée]/i)?.[0] || '';
+        const position = text.match(/(?:en\s+)?(extension|flexion|position.*interm[ée]diaire)/i)?.[1] || '';
+        detectedSequelae.push({
+            name: `Ankylose articulaire ${joint.includes('genou') ? 'du genou' : joint.includes('cheville') ? 'de la cheville' : joint.includes('hanche') ? 'de la hanche' : ''} ${position ? 'en ' + position : ''}`,
+            keywords: ['ankylose', joint.includes('genou') ? 'genou' : joint.includes('cheville') ? 'cheville' : 'articulation'],
+            context: text.match(/(?:genou|cheville|hanche).*ankylos[ée][^.;]*/i)?.[0] || text.match(/ankylos[ée].*(?:genou|cheville|hanche)[^.;]*/i)?.[0] || ''
+        });
+    }
+    
+    // Matériel d'ostéosynthèse en place (non retiré)
+    if (/mat[ée]riel.*ost[ée]osynth[èe]se.*en.*place|ost[ée]osynth[èe]se.*en.*place|plaque.*vis.*en.*place/i.test(text)) {
+        detectedSequelae.push({
+            name: 'Matériel d\'ostéosynthèse en place (non retiré)',
+            keywords: ['matériel', 'ostéosynthèse', 'en place'],
+            context: text.match(/mat[ée]riel.*ost[ée]osynth[èe]se[^.;]*/i)?.[0] || ''
         });
     }
     
@@ -12502,6 +12553,18 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
                     else if (db >= 70) { rate = 15; explanation = 'Surdité sévère (70-89 dB)'; }
                     else if (db >= 40) { rate = 10; explanation = 'Surdité moyenne (40-69 dB)'; }
                     else { rate = 5; explanation = 'Surdité légère (<40 dB)'; }
+                } else if (/traumatisme.*cr[âa]nien.*perte.*connaissance/i.test(seq.name)) {
+                    // 🔴 V3.3.162: TC AVEC PERTE DE CONNAISSANCE PROLONGÉE (≥1 jour) = COMMOTION GRAVE
+                    system = 'NEUROLOGIQUE';
+                    const tcDaysMatch = seq.name.match(/(\d+)\s*jour/i);
+                    const tcDays = tcDaysMatch ? parseInt(tcDaysMatch[1]) : 0;
+                    if (tcDays >= 4) {
+                        rate = 18; explanation = `Traumatisme crânien avec perte de connaissance prolongée (${tcDays} jours) = Commotion cérébro-spinale grave → IPP 15-20%`;
+                    } else if (tcDays >= 2) {
+                        rate = 15; explanation = `Traumatisme crânien avec perte de connaissance (${tcDays} jours) = Commotion cérébro-spinale`;
+                    } else {
+                        rate = 12; explanation = 'Traumatisme crânien avec perte de connaissance';
+                    }
                 } else if (/syndrome.*subjectif.*crâne|céphalée|vertige/i.test(seq.name)) {
                     system = 'NEUROLOGIQUE';
                     rate = 10; explanation = 'Syndrome subjectif des traumatisés du crâne (SSTC) avec céphalées/vertiges persistants';
@@ -12511,8 +12574,12 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
                 }
                 
                 // RACHIS (toutes atteintes rachis = 1 seul taux global)
-                else if (/cervicalgie|dorsalgie|lombalgie|fracture.*lombaire|hernie.*discale|sciatique|limitation.*ant[ée]flexion.*rachis/i.test(seq.name)) {
+                else if (/cervicalgie|brachialgie|parasth[ée]sie|dorsalgie|lombalgie|fracture.*lombaire|hernie.*discale|sciatique|limitation.*ant[ée]flexion.*rachis/i.test(seq.name)) {
                     system = 'RACHIS';
+                    
+                    // 🔴 V3.3.162: BRACHIALGIE = RADICULALGIE CERVICALE (atteinte nerveuse majeure)
+                    const hasBrachialgie = detectedSequelae.some(s => /brachialgie|n[ée]vralgie.*cervico.*brachial/i.test(s.name));
+                    const hasParesthesies = detectedSequelae.some(s => /parasth[ée]sie|fourmillement/i.test(s.name));
                     
                     // 🥇 V3.3.160: AJUSTEMENT TAUX SELON SÉVÉRITÉ CLINIQUE
                     // Analyser les signes cliniques pour ajuster le taux
@@ -12522,7 +12589,11 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
                     const dmsValue = text.match(/dms.*?(\d+).*?cm/i)?.[1] ? parseInt(text.match(/dms.*?(\d+).*?cm/i)![1]) : null;
                     
                     // Prendre le taux max selon sévérité
-                    if (/hernie.*discale|sciatique/i.test(seq.name)) {
+                    if (hasBrachialgie || (hasParesthesies && /cervicalgie/i.test(text))) {
+                        // Brachialgie = Radiculalgie cervicale (atteinte nerveuse C5-C6-C7) → 15-20% IPP
+                        rate = 18; 
+                        explanation = 'Rachis CERVICAL : Cervicalgie avec BRACHIALGIE (névralgie cervico-brachiale = radiculalgie par compression nerveuse) + troubles sensitifs (paresthésies) → IPP majorée pour atteinte nerveuse';
+                    } else if (/hernie.*discale|sciatique/i.test(seq.name)) {
                         rate = 15; explanation = 'Rachis : hernie discale avec radiculalgie (séquelle majeure)';
                     } else if (/lombalgie|fracture.*lombaire/i.test(seq.name)) {
                         // Fracture lombaire avec tassement : ajuster selon signes cliniques
@@ -12565,11 +12636,57 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
                 }
                 
                 // MEMBRE INFÉRIEUR - DIFFÉRENCIATION PIED vs CUISSE/GENOU
-                else if (/fracture.*f[ée]mur|fracture.*tibia|amyotrophie.*quadricipital|limitation.*(?:flexion|extension).*genou|raccourcissement.*membre|boiterie|fracture.*m[ée]tatarse|[œo]ed[èe]me.*(?:persistant|r[ée]siduel|l[ée]ger)|douleur.*froid|douleur.*mont[ée]e.*escalier|accroupissement.*difficile|d[ée]chirure.*ligament.*genou|[ée]longation.*quadriceps|raideur.*genou|algie.*m[ée]canique|diminution.*force.*musculaire|ost[ée]omy[ée]lite|d[ée]formation.*osseuse|cicatrice.*pathologique|instabilit[ée].*articulaire/i.test(seq.name)) {
+                else if (/fracture.*f[ée]mur|fracture.*tibia|amyotrophie.*quadricipital|limitation.*(?:flexion|extension).*genou|raccourcissement.*membre|boiterie|fracture.*m[ée]tatarse|[œo]ed[èe]me.*(?:persistant|r[ée]siduel|l[ée]ger)|douleur.*froid|douleur.*mont[ée]e.*escalier|accroupissement.*difficile|d[ée]chirure.*ligament.*genou|[ée]longation.*quadriceps|raideur.*genou|algie.*m[ée]canique|diminution.*force.*musculaire|ost[ée]omy[ée]lite|d[ée]formation.*osseuse|cicatrice.*pathologique|instabilit[ée].*articulaire|ankylose.*articulaire|mat[ée]riel.*ost[ée]osynth[èe]se/i.test(seq.name)) {
                     system = 'MEMBRE_INFERIEUR';
                     
+                    // 🔴 V3.3.162: ANKYLOSE ARTICULAIRE = SÉQUELLE MAJEURE (35-50% IPP)
+                    // L'ankylose (perte TOTALE mobilité) est la séquelle la plus grave
+                    const hasAnkylose = detectedSequelae.some(s => /ankylose.*articulaire/i.test(s.name));
+                    const hasRaccourcissement = detectedSequelae.some(s => /raccourcissement/i.test(s.name));
+                    const hasCanne = /canne|béquille|tuteur|marche.*difficile|aide.*marche/i.test(text);
+                    const hasMateriel = detectedSequelae.some(s => /mat[ée]riel.*ost[ée]osynth[èe]se/i.test(s.name));
+                    const hasAmyotrophieGlobal = detectedSequelae.some(s => /amyotrophie.*globale.*membre/i.test(s.name));
+                    const hasChirurgies = text.match(/(\d+)\s*(?:intervention|chirurgie|opération)/i);
+                    const nbChirurgies = hasChirurgies ? parseInt(hasChirurgies[1]) : 0;
+                    
+                    if (hasAnkylose) {
+                        // Ankylose genou en extension = 35-40% IPP de base
+                        let rate = 35;
+                        let details = ['ankylose genou (perte totale mobilité)'];
+                        
+                        // Majoration selon séquelles associées
+                        if (hasAmyotrophieGlobal) {
+                            rate += 5;
+                            details.push('amyotrophie globale membre inférieur');
+                        }
+                        if (hasRaccourcissement) {
+                            const raccMatch = text.match(/raccourcissement.*?(\d+)\s*cm/i);
+                            const raccCm = raccMatch ? parseInt(raccMatch[1]) : 0;
+                            if (raccCm >= 3) {
+                                rate += 5;
+                                details.push(`raccourcissement ${raccCm}cm (significatif)`);
+                            }
+                        }
+                        if (hasMateriel) {
+                            rate += 3;
+                            details.push('matériel ostéosynthèse en place');
+                        }
+                        if (hasCanne) {
+                            rate += 4;
+                            details.push('marche avec canne obligatoire');
+                        }
+                        if (nbChirurgies >= 2) {
+                            rate += 3;
+                            details.push(`${nbChirurgies} interventions chirurgicales`);
+                        }
+                        
+                        // Limite max ~55% pour membre inférieur
+                        rate = Math.min(rate, 55);
+                        
+                        explanation = `Membre inférieur (CUISSE/GENOU) : ANKYLOSE ARTICULAIRE (séquelle majeure invalidante) - ${details.join(' + ')} → IPP ${rate}% justifiée par perte totale mobilité + retentissement fonctionnel global`;
+                    }
                     // SOUS-CATÉGORIE : PIED/CHEVILLE (séquelles mineures)
-                    if (/fracture.*m[ée]tatarse|fracture.*phalange.*pied/i.test(seq.name)) {
+                    else if (/fracture.*m[ée]tatarse|fracture.*phalange.*pied/i.test(seq.name)) {
                         // Métatarse/pied avec séquelles légères (boiterie légère, œdème, douleurs)
                         const hasBoiterie = detectedSequelae.some(s => /boiterie/i.test(s.name));
                         const hasOedeme = detectedSequelae.some(s => /[œo]ed[èe]me/i.test(s.name));
