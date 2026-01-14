@@ -12068,8 +12068,15 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
         });
     }
     
-    // Fracture tibia/péroné
-    if (/fracture.*tibia|fracture.*p[ée]ron[ée]|fracture.*jambe/i.test(text)) {
+    // Fracture tibia/péroné - Différencier ouverte (grave) vs fermée
+    if (/fracture.*(?:ouverte|exposée).*(?:tibia|jambe|02.*os.*jambe|deux.*os.*jambe)|(?:tibia|jambe|02.*os).*fracture.*ouverte/i.test(text)) {
+        const location = text.match(/(?:1\/3|tiers)\s*(?:inf[ée]rieur|inf|distal)/i)?.[0] || '';
+        detectedSequelae.push({
+            name: `Fracture OUVERTE tibia/péroné ${location ? '(' + location + ')' : ''}`,
+            keywords: ['fracture ouverte', 'tibia', 'péroné', 'exposée', '2 os jambe'],
+            context: text.match(/fracture.*ouverte.*(?:tibia|jambe|os)[^.;]*/i)?.[0] || ''
+        });
+    } else if (/fracture.*tibia|fracture.*p[ée]ron[ée]|fracture.*jambe/i.test(text)) {
         detectedSequelae.push({
             name: 'Fracture tibia/péroné',
             keywords: ['fracture', 'tibia', 'péroné'],
@@ -12092,6 +12099,24 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
             name: 'Élongation musculaire du quadriceps',
             keywords: ['élongation', 'quadriceps', 'musculaire'],
             context: text.match(/[ée]longation.*quadriceps[^.;]*/i)?.[0] || ''
+        });
+    }
+    
+    // Ostéomyélite (complication infectieuse grave post-fracture ouverte)
+    if (/ost[ée]omy[ée]lite|infection.*osseuse|suppuration.*osseuse/i.test(text)) {
+        detectedSequelae.push({
+            name: 'Ostéomyélite (complication infectieuse osseuse)',
+            keywords: ['ostéomyélite', 'infection', 'osseuse'],
+            context: text.match(/ost[ée]omy[ée]lite[^.;]*/i)?.[0] || text.match(/compliqu[ée].*ost[ée]omy[ée]lite[^.;]*/i)?.[0] || ''
+        });
+    }
+    
+    // Déformation osseuse séquellaire
+    if (/d[ée]formation.*osseuse|os.*d[ée]form[ée]|cal.*vicieux|consolidation.*vicieuse/i.test(text)) {
+        detectedSequelae.push({
+            name: 'Déformation osseuse séquellaire (cal vicieux)',
+            keywords: ['déformation', 'osseuse', 'cal vicieux'],
+            context: text.match(/d[ée]formation.*osseuse[^.;]*/i)?.[0] || ''
         });
     }
     
@@ -12200,6 +12225,24 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
             name: 'Diminution de la force musculaire du membre inférieur',
             keywords: ['diminution', 'force', 'musculaire', 'membre inférieur'],
             context: text.match(/diminution.*force.*musculaire[^.;]*/i)?.[0] || ''
+        });
+    }
+    
+    // Cicatrice pathologique/vicieuse (mauvaise qualité, adhérente, rétractile)
+    if (/cicatrice.*(?:mauvaise.*qualit[ée]|pathologique|vicieuse|adh[ée]rente|r[ée]tractile|hypertrophique|ch[ée]lo[ïie]de)/i.test(text)) {
+        detectedSequelae.push({
+            name: 'Cicatrice pathologique (mauvaise qualité, adhérente)',
+            keywords: ['cicatrice', 'pathologique', 'mauvaise qualité', 'adhérente'],
+            context: text.match(/cicatrice.*(?:mauvaise|pathologique|vicieuse)[^.;]*/i)?.[0] || ''
+        });
+    }
+    
+    // Instabilité articulaire (cheville, genou, métatarso-phalangienne)
+    if (/instabilit[ée].*(?:articulaire|cheville|genou|amp)|(?:cheville|genou|amp).*instable|laxit[ée].*(?:ligamentaire|articulaire)/i.test(text)) {
+        detectedSequelae.push({
+            name: 'Instabilité articulaire (cheville/genou/AMP)',
+            keywords: ['instabilité', 'articulaire', 'cheville', 'AMP'],
+            context: text.match(/(?:instabilit[ée]|amp).*(?:articulaire|instable|douloureux)[^.;]*/i)?.[0] || ''
         });
     }
     
@@ -12522,7 +12565,7 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
                 }
                 
                 // MEMBRE INFÉRIEUR - DIFFÉRENCIATION PIED vs CUISSE/GENOU
-                else if (/fracture.*f[ée]mur|fracture.*tibia|amyotrophie.*quadricipital|limitation.*(?:flexion|extension).*genou|raccourcissement.*membre|boiterie|fracture.*m[ée]tatarse|[œo]ed[èe]me.*(?:persistant|r[ée]siduel|l[ée]ger)|douleur.*froid|douleur.*mont[ée]e.*escalier|accroupissement.*difficile|d[ée]chirure.*ligament.*genou|[ée]longation.*quadriceps|raideur.*genou|algie.*m[ée]canique|diminution.*force.*musculaire/i.test(seq.name)) {
+                else if (/fracture.*f[ée]mur|fracture.*tibia|amyotrophie.*quadricipital|limitation.*(?:flexion|extension).*genou|raccourcissement.*membre|boiterie|fracture.*m[ée]tatarse|[œo]ed[èe]me.*(?:persistant|r[ée]siduel|l[ée]ger)|douleur.*froid|douleur.*mont[ée]e.*escalier|accroupissement.*difficile|d[ée]chirure.*ligament.*genou|[ée]longation.*quadriceps|raideur.*genou|algie.*m[ée]canique|diminution.*force.*musculaire|ost[ée]omy[ée]lite|d[ée]formation.*osseuse|cicatrice.*pathologique|instabilit[ée].*articulaire/i.test(seq.name)) {
                     system = 'MEMBRE_INFERIEUR';
                     
                     // SOUS-CATÉGORIE : PIED/CHEVILLE (séquelles mineures)
@@ -12541,16 +12584,29 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
                         }
                     }
                     // SOUS-CATÉGORIE : FÉMUR/TIBIA/GENOU (séquelles majeures)
-                    else if (/fracture.*f[ée]mur|fracture.*tibia|amyotrophie|limitation.*genou|d[ée]chirure.*ligament|[ée]longation.*quadriceps|raideur.*genou|algie.*m[ée]canique|diminution.*force/i.test(seq.name)) {
-                        // Évaluer sévérité selon nombre et type de séquelles
+                    else if (/fracture.*f[ée]mur|fracture.*tibia|amyotrophie|limitation.*genou|d[ée]chirure.*ligament|[ée]longation.*quadriceps|raideur.*genou|algie.*m[ée]canique|diminution.*force|ost[ée]omy[ée]lite|d[ée]formation.*osseuse|cicatrice.*pathologique|instabilit[ée]/i.test(seq.name)) {
+                        // 🚨 V3.3.161: ÉVALUATION SÉVÉRITÉ AVEC COMPLICATIONS
                         const hasFracture = detectedSequelae.some(s => /fracture.*(f[ée]mur|tibia)/i.test(s.name));
+                        const isFractureOuverte = detectedSequelae.some(s => /fracture.*ouverte/i.test(s.name));
+                        const hasOsteomyelite = detectedSequelae.some(s => /ost[ée]omy[ée]lite/i.test(s.name));
+                        const hasDeformation = detectedSequelae.some(s => /d[ée]formation.*osseuse/i.test(s.name));
+                        const hasCicatricePath = detectedSequelae.some(s => /cicatrice.*pathologique/i.test(s.name));
+                        const hasInstabilite = detectedSequelae.some(s => /instabilit[ée]/i.test(s.name));
                         const hasLigamentaire = detectedSequelae.some(s => /d[ée]chirure.*ligament/i.test(s.name));
                         const hasRaideur = detectedSequelae.some(s => /raideur.*genou|limitation.*genou/i.test(s.name));
                         const hasAlgies = detectedSequelae.some(s => /algie.*m[ée]canique/i.test(s.name));
                         const hasDiminution = detectedSequelae.some(s => /diminution.*force/i.test(s.name));
                         
+                        // FRACTURE OUVERTE + OSTÉOMYÉLITE = CAS TRÈS GRAVE (20-25%)
+                        if (isFractureOuverte && hasOsteomyelite && (hasDeformation || hasCicatricePath || hasInstabilite)) {
+                            rate = 22; explanation = 'Membre inférieur (CUISSE/GENOU) : Fracture OUVERTE compliquée d\'ostéomyélite avec séquelles majeures (déformation osseuse, cicatrice pathologique, instabilité articulaire)';
+                        }
+                        // FRACTURE OUVERTE SEULE + SÉQUELLES (18-20%)
+                        else if (isFractureOuverte && (hasDeformation || hasInstabilite || hasCicatricePath)) {
+                            rate = 18; explanation = 'Membre inférieur (CUISSE/GENOU) : Fracture OUVERTE avec séquelles importantes (déformation/instabilité/cicatrice pathologique)';
+                        }
                         // Polytraumatisme du membre (fracture + ligaments + séquelles multiples)
-                        if (hasFracture && hasLigamentaire && (hasRaideur || hasAlgies || hasDiminution)) {
+                        else if (hasFracture && hasLigamentaire && (hasRaideur || hasAlgies || hasDiminution)) {
                             rate = 18; explanation = 'Membre inférieur (CUISSE/GENOU) : Polytraumatisme membre - Fracture tibia + déchirure ligamentaire + séquelles fonctionnelles multiples (raideur, algies, déficit force)';
                         }
                         // Fracture avec séquelles importantes
