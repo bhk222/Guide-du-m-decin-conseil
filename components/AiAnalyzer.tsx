@@ -12652,7 +12652,7 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
                     const hasCanne = /canne|béquille|tuteur|marche.*difficile|aide.*marche/i.test(text);
                     const hasMateriel = detectedSequelae.some(s => /mat[ée]riel.*ost[ée]osynth[èe]se/i.test(s.name));
                     const hasAmyotrophieGlobal = detectedSequelae.some(s => /amyotrophie.*globale.*membre/i.test(s.name));
-                    const hasChirurgies = text.match(/(\d+)\s*(?:intervention|chirurgie|opération)/i);
+                    const hasChirurgies = text.match(/(\d+)\s*(?:intervention|chirurgie|op[ée]ration|reprise)/i);
                     const nbChirurgies = hasChirurgies ? parseInt(hasChirurgies[1]) : 0;
                     
                     if (hasAnkylose) {
