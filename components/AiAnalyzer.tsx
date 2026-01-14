@@ -11951,12 +11951,15 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
         });
     }
     
-    // Lombalgie + Fracture vertébrale lombaire
-    if (/lombalgie|douleur.*lombaire|syndrome.*lombaire|raideur.*lombaire|fracture.*t.*lombaire|fracture.*l1|fracture.*l2|fracture.*l3|fracture.*l4|fracture.*l5/i.test(text)) {
+    // Lombalgie + Fracture vertébrale lombaire (L1-L5)
+    if (/lombalgie|douleur.*lombaire|syndrome.*lombaire|raideur.*lombaire|fracture.*(?:vertébr|tassement|corps).*lombaire|fracture.*l[1-5]|tassement.*l[1-5]|fracture.*(?:l1|l2|l3|l4|l5)/i.test(text)) {
+        // Extraire le niveau vertébral si présent
+        const levelMatch = text.match(/l[1-5]/i)?.[0]?.toUpperCase() || 'lombaire';
+        const isTassement = /tassement|corps.*antérieur|grade\s*1/i.test(text);
         detectedSequelae.push({
-            name: 'Lombalgie chronique / Fracture vertébrale lombaire',
-            keywords: ['lombalgie', 'lombaire', 'fracture vertébrale'],
-            context: text.match(/(lombalgie|fracture.*lombaire)[^.;]*/i)?.[0] || ''
+            name: `Lombalgie chronique / Fracture ${isTassement ? 'tassement ' : ''}vertébrale ${levelMatch}`,
+            keywords: ['lombalgie', 'lombaire', 'fracture', 'tassement', levelMatch],
+            context: text.match(/(lombalgie|fracture.*(?:lombaire|l[1-5])|tassement.*l[1-5])[^.;]*/i)?.[0] || ''
         });
     }
     
@@ -12358,11 +12361,15 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
     console.log('🔍 [V3.3.155] Séquelles détectées:', detectedSequelae.length, detectedSequelae.map(s => s.name));
     
     // 🆕 V3.3.159: FONCTION DE RECHERCHE DANS BASE BARÈME OFFICIEL
-    const findInBareme = (sequellaName: string, context: string): {name: string; rate: number[]; article?: string; rateCriteria?: any} | null => {
+    const findInBareme = (sequellaName: string, context: string, fullText: string): {name: string; rate: number[]; article?: string; rateCriteria?: any} | null => {
         // Rechercher dans disabilityData (base officielle)
+        let bestMatch: {name: string; rate: number[]; article: string; rateCriteria?: any; score: number} | null = null;
+        
         for (const category of disabilityData) {
             for (const subcategory of category.subcategories) {
                 for (const injury of subcategory.injuries) {
+                    let score = 0;
+                    
                     // Matching par nom exact ou searchTerms
                     const nameMatch = injury.name.toLowerCase().includes(sequellaName.toLowerCase()) || 
                                      sequellaName.toLowerCase().includes(injury.name.toLowerCase());
@@ -12373,16 +12380,42 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
                         return contextLower.includes(termLower) || seqLower.includes(termLower);
                     });
                     
-                    if (nameMatch || searchTermMatch) {
-                        return {
+                    if (nameMatch) score += 10;
+                    if (searchTermMatch) score += 5;
+                    
+                    // 🛡️ V3.3.160: FILTRAGE SPÉCIFIQUE RACHIS (cervical vs lombaire)
+                    if (/rachis|vertébr|cervical|lombaire/i.test(sequellaName)) {
+                        const seqIsLombaire = /lombaire|l[1-5]|lombalgie/i.test(sequellaName + ' ' + context);
+                        const seqIsCervical = /cervical|c[1-7]|cervicalgie/i.test(sequellaName + ' ' + context);
+                        const injuryIsLombaire = /lombaire|l[1-5]/i.test(injury.name);
+                        const injuryIsCervical = /cervical|c[1-7]/i.test(injury.name);
+                        
+                        // Pénaliser si mismatch cervical/lombaire
+                        if ((seqIsLombaire && injuryIsCervical) || (seqIsCervical && injuryIsLombaire)) {
+                            score -= 100; // Éliminer ce match
+                        }
+                        // Bonus si match exact cervical/lombaire
+                        if ((seqIsLombaire && injuryIsLombaire) || (seqIsCervical && injuryIsCervical)) {
+                            score += 20;
+                        }
+                    }
+                    
+                    if (score > 0 && (!bestMatch || score > bestMatch.score)) {
+                        bestMatch = {
                             name: injury.name,
                             rate: Array.isArray(injury.rate) ? injury.rate : [injury.rate, injury.rate],
                             article: `${category.name} > ${subcategory.name}`,
-                            rateCriteria: injury.rateCriteria
+                            rateCriteria: injury.rateCriteria,
+                            score
                         };
                     }
                 }
             }
+        }
+        
+        if (bestMatch) {
+            const { score, ...result } = bestMatch;
+            return result;
         }
         return null;
     };
@@ -12437,11 +12470,31 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
                 // RACHIS (toutes atteintes rachis = 1 seul taux global)
                 else if (/cervicalgie|dorsalgie|lombalgie|fracture.*lombaire|hernie.*discale|sciatique|limitation.*ant[ée]flexion.*rachis/i.test(seq.name)) {
                     system = 'RACHIS';
+                    
+                    // 🥇 V3.3.160: AJUSTEMENT TAUX SELON SÉVÉRITÉ CLINIQUE
+                    // Analyser les signes cliniques pour ajuster le taux
+                    const hasFavorableSigns = /marche.*normale|sans.*tuteur|ne.*porte.*pas.*ceinture|mouvements.*possible|pas.*contracture|las[eè]gue.*n[eé]gatif|pas.*trouble.*neurologique/i.test(text);
+                    const hasUnfavorableSigns = /marche.*difficile|canne|béquille|ceinture.*permanente|contracture.*importante|las[eè]gue.*positif|trouble.*neurologique|d[eé]ficit.*moteur/i.test(text);
+                    const hasDMS = /dms|distance.*doigt.*sol/i.test(text);
+                    const dmsValue = text.match(/dms.*?(\d+).*?cm/i)?.[1] ? parseInt(text.match(/dms.*?(\d+).*?cm/i)![1]) : null;
+                    
                     // Prendre le taux max selon sévérité
                     if (/hernie.*discale|sciatique/i.test(seq.name)) {
                         rate = 15; explanation = 'Rachis : hernie discale avec radiculalgie (séquelle majeure)';
                     } else if (/lombalgie|fracture.*lombaire/i.test(seq.name)) {
-                        rate = 12; explanation = 'Rachis : lombalgie chronique post-fracture vertébrale';
+                        // Fracture lombaire avec tassement : ajuster selon signes cliniques
+                        const isTassementGrade1 = /grade\s*1|tassement.*minim/i.test(text);
+                        
+                        if (hasFavorableSigns && isTassementGrade1 && (!dmsValue || dmsValue <= 15)) {
+                            // Cas favorable : tassement grade 1, marche normale, DMS correct
+                            rate = 8; explanation = 'Rachis : fracture tassement lombaire grade 1 consolidée avec séquelles minimes (lombalgie légère)';
+                        } else if (hasUnfavorableSigns || (dmsValue && dmsValue > 20)) {
+                            // Cas sévère : signes défavorables
+                            rate = 15; explanation = 'Rachis : fracture lombaire avec séquelles importantes (lombalgie invalidante, limitation majeure)';
+                        } else {
+                            // Cas intermédiaire
+                            rate = 12; explanation = 'Rachis : fracture lombaire consolidée avec lombalgie chronique modérée';
+                        }
                     } else if (/limitation.*ant[ée]flexion/i.test(seq.name)) {
                         rate = Math.max(rate, 8); explanation = 'Rachis : lombalgie avec limitation mobilité';
                     } else {
@@ -12599,15 +12652,20 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
                 systemGroups[system].sequelae.push(seq);
                 
                 // 🆕 V3.3.159: ENRICHIR AVEC RÉFÉRENCE BARÈME OFFICIEL
-                const baremeEntry = findInBareme(seq.name, seq.context);
+                const baremeEntry = findInBareme(seq.name, seq.context, text);
                 if (baremeEntry) {
                     console.log(`📚 TROUVÉ DANS BARÈME: "${seq.name}" → "${baremeEntry.name}" (${baremeEntry.rate[0]}-${baremeEntry.rate[1]}%)`);
-                    // Utiliser le taux du barème officiel si disponible
-                    const baremeRate = baremeEntry.rate[1]; // Utiliser le taux maximum comme estimation
-                    if (baremeRate > systemGroups[system].rate) {
-                        systemGroups[system].rate = baremeRate;
+                    
+                    // 🎯 V3.3.160: NE PAS écraser le taux déjà calculé par la logique clinique
+                    // Le taux clinique (8-15%) est PRIORITAIRE sur le taux barème brut
+                    // On ajoute juste la référence barème pour justification
+                    if (rate > systemGroups[system].rate) {
+                        systemGroups[system].rate = rate; // Utiliser le taux clinique (pas le barème brut)
                         systemGroups[system].explanation = `${explanation} - Barème: "${baremeEntry.name}" (${baremeEntry.rate[0]}-${baremeEntry.rate[1]}%)`;
                         systemGroups[system].baremeRef = baremeEntry.article || '';
+                    } else if (!systemGroups[system].baremeRef && baremeEntry.article) {
+                        // Ajouter la référence barème même si le taux n'est pas plus élevé
+                        systemGroups[system].baremeRef = baremeEntry.article;
                     }
                 } else if (rate > systemGroups[system].rate) {
                     systemGroups[system].rate = rate;
