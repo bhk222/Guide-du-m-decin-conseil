@@ -12186,7 +12186,7 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
     
     // Ankylose articulaire (MAJEURE - perte totale mobilité)
     if (/ankylos[ée].*(?:genou|cheville|hanche|coude|poignet|épaule)|(?:genou|cheville|hanche|coude|poignet|épaule).*ankylos[ée]/i.test(text)) {
-        const joint = text.match(/ankylos[ée].*(?:genou|cheville|hanche|coude|poignet|épaule)|(?:genou|cheville|hanche|coude|poignet|épaule).*ankylos[ée]/i)?.[0] || '';
+        const joint = text.match(/ankylos[ée].*(?:genou|cheville|hanche|coude|poignet|épaule)|(?:genou|cheville|hanche|coude|poignet|épaule).*ankylos[ée]/i)?.[0]?.toLowerCase() || '';
         const position = text.match(/(?:en\s+)?(extension|flexion|position.*interm[ée]diaire)/i)?.[1] || '';
         detectedSequelae.push({
             name: `Ankylose articulaire ${joint.includes('genou') ? 'du genou' : joint.includes('cheville') ? 'de la cheville' : joint.includes('hanche') ? 'de la hanche' : ''} ${position ? 'en ' + position : ''}`,
