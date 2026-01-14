@@ -12657,7 +12657,7 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
                     
                     if (hasAnkylose) {
                         // Ankylose genou en extension = 35-40% IPP de base
-                        let rate = 35;
+                        rate = 35;
                         let details = ['ankylose genou (perte totale mobilité)'];
                         
                         // Majoration selon séquelles associées
