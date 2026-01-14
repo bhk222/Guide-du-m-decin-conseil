@@ -12029,7 +12029,7 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
     }
     
     // Hémo-pneumothorax
-    if (/h[ée]mo.*pneumothorax|pneumothorax|h[ée]mothorax|drain.*thoracique|drain[ée]/i.test(text)) {
+    if (/h[ée]mo[\s\-]?pneumothorax|pneumothorax|h[ée]mothorax|drain.*thoracique|drain[ée]/i.test(text)) {
         detectedSequelae.push({
             name: 'Hémo-pneumothorax drainé (séquelles)',
             keywords: ['hémo-pneumothorax', 'pneumothorax', 'drainé'],
