@@ -12642,7 +12642,7 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
                 }
                 
                 // MEMBRE INFÉRIEUR - DIFFÉRENCIATION PIED vs CUISSE/GENOU
-                else if (/fracture.*f[ée]mur|fracture.*tibia|amyotrophie.*quadricipital|limitation.*(?:flexion|extension).*genou|raccourcissement.*membre|boiterie|fracture.*m[ée]tatarse|[œo]ed[èe]me.*(?:persistant|r[ée]siduel|l[ée]ger)|douleur.*froid|douleur.*mont[ée]e.*escalier|accroupissement.*difficile|d[ée]chirure.*ligament.*genou|[ée]longation.*quadriceps|raideur.*genou|algie.*m[ée]canique|diminution.*force.*musculaire|ost[ée]omy[ée]lite|d[ée]formation.*osseuse|cicatrice.*pathologique|instabilit[ée].*articulaire|ankylose.*articulaire|mat[ée]riel.*ost[ée]osynth[èe]se/i.test(seq.name)) {
+                else if (/fracture.*f[ée]mur|fracture.*tibia|amyotrophie.*(?:quadricipital|globale)|limitation.*(?:flexion|extension).*genou|raccourcissement.*membre|boiterie|fracture.*m[ée]tatarse|[œo]ed[èe]me.*(?:persistant|r[ée]siduel|l[ée]ger)|douleur.*froid|douleur.*mont[ée]e.*escalier|accroupissement.*difficile|d[ée]chirure.*ligament.*genou|[ée]longation.*quadriceps|raideur.*genou|algie.*m[ée]canique|diminution.*force.*musculaire|ost[ée]omy[ée]lite|d[ée]formation.*osseuse|cicatrice.*pathologique|instabilit[ée].*articulaire|ankylose.*articulaire|mat[ée]riel.*ost[ée]osynth[èe]se/i.test(seq.name)) {
                     system = 'MEMBRE_INFERIEUR';
                     
                     // 🔴 V3.3.162: ANKYLOSE ARTICULAIRE = SÉQUELLE MAJEURE (35-50% IPP)
