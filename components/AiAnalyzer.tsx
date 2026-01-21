@@ -12135,7 +12135,20 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
             keywords: ['fracture ouverte', 'tibia', 'péroné', 'exposée', '2 os jambe'],
             context: text.match(/fracture.*ouverte.*(?:tibia|jambe|os)[^.;]*/i)?.[0] || ''
         });
-    } else if (/fracture.*tibia|fracture.*p[ée]ron[ée]|fracture.*jambe/i.test(text)) {
+    } 
+    // 🔴 V3.3.163: Fracture plateau tibial (extrémité supérieure tibia = articulation genou)
+    else if (/(?:fracture|fissure).*plateau.*tibial|plateau.*tibial.*(?:fracture|fissur[ée])/i.test(text)) {
+        const isFissure = /fissure/i.test(text);
+        const amplitudeInfo = text.match(/(?:amp|amplitude).*(?:possible|libre|conserv[ée]e)|genou.*(?:libre|mobile)/i)?.[0] || '';
+        const hasLimitationMobility = /limitation.*(?:flexion|extension)|raideur|ankylos[ée]/i.test(text);
+        
+        detectedSequelae.push({
+            name: `${isFissure ? 'Fissure' : 'Fracture'} plateau tibial ${amplitudeInfo ? '(amplitudes conservées)' : hasLimitationMobility ? '(avec raideur)' : ''}`,
+            keywords: ['fracture', 'plateau tibial', 'genou', isFissure ? 'fissure' : ''].filter(k => k),
+            context: text.match(/(?:fracture|fissure).*plateau.*tibial[^.;]*/i)?.[0] || ''
+        });
+    }
+    else if (/fracture.*tibia|fracture.*p[ée]ron[ée]|fracture.*jambe/i.test(text)) {
         detectedSequelae.push({
             name: 'Fracture tibia/péroné',
             keywords: ['fracture', 'tibia', 'péroné'],
@@ -12785,8 +12798,25 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
                         const hasAlgies = detectedSequelae.some(s => /algie.*m[ée]canique/i.test(s.name));
                         const hasDiminution = detectedSequelae.some(s => /diminution.*force/i.test(s.name));
                         
+                        // 🔴 V3.3.163: FRACTURE PLATEAU TIBIAL (articulation genou) - Évaluation selon séquelles
+                        const isPlateauTibial = detectedSequelae.some(s => /plateau.*tibial/i.test(s.name));
+                        const hasAmplitudesConservees = detectedSequelae.some(s => /amplitudes.*conserv[ée]es|genou.*libre/i.test(s.name)) || 
+                                                        /amp.*possible|genou.*libre|amplitudes.*conserv[ée]es/i.test(text);
+                        
+                        if (isPlateauTibial) {
+                            if (hasAmplitudesConservees && !hasRaideur && !hasInstabilite) {
+                                rate = 10; 
+                                explanation = 'Membre inférieur (GENOU) : Fracture plateau tibial consolidée avec amplitudes articulaires conservées (genou libre) → IPP 8-12%';
+                            } else if (hasRaideur || hasInstabilite) {
+                                rate = 15;
+                                explanation = 'Membre inférieur (GENOU) : Fracture plateau tibial avec séquelles fonctionnelles (raideur/instabilité) → IPP 12-18%';
+                            } else {
+                                rate = 12;
+                                explanation = 'Membre inférieur (GENOU) : Fracture plateau tibial consolidée → IPP 10-15%';
+                            }
+                        }
                         // FRACTURE OUVERTE + OSTÉOMYÉLITE = CAS TRÈS GRAVE (20-25%)
-                        if (isFractureOuverte && hasOsteomyelite && (hasDeformation || hasCicatricePath || hasInstabilite)) {
+                        else if (isFractureOuverte && hasOsteomyelite && (hasDeformation || hasCicatricePath || hasInstabilite)) {
                             rate = 22; explanation = 'Membre inférieur (CUISSE/GENOU) : Fracture OUVERTE compliquée d\'ostéomyélite avec séquelles majeures (déformation osseuse, cicatrice pathologique, instabilité articulaire)';
                         }
                         // FRACTURE OUVERTE SEULE + SÉQUELLES (18-20%)
