@@ -12957,7 +12957,7 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
                 }
                 
                 // MEMBRE SUPÉRIEUR (fracture + raideur + paresthésies = 1 seul taux membre)
-                else if (/fracture.*hum[ée]rus|fracture.*clavicule|fracture.*radius|raideur.*[ée]paule|raideur.*coude|raideur.*poignet|parasth[ée]sie.*ulnaire|perte.*force.*pr[ée]hension|amputation.*doigt|amyotrophie.*main|luxation.*m[ée]tacarpe|d[ée]viation.*doigt|enroulement.*main|diminution.*force.*serrage/i.test(seq.name)) {
+                else if (/fracture.*hum[ée]rus|fracture.*clavicule|fracture.*radius|raideur.*[ée]paule|raideur.*coude|raideur.*poignet|parasth[ée]sie.*ulnaire|perte.*force.*pr[ée]hension|amputation.*(?:doigt|auriculaire|annulaire|index|m[ée]dius|D[2345])|amyotrophie.*main|luxation.*m[ée]tacarpe|d[ée]viation.*doigt|enroulement.*main|diminution.*force.*serrage/i.test(seq.name)) {
                     system = 'MEMBRE_SUPERIEUR';
                     
                     // 🔴 V3.3.163: POLYTRAUMATISME MAIN (amputation + séquelles multiples)
