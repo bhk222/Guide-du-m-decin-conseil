@@ -177,11 +177,28 @@ export const mayetReyComplement: InjuryCategory[] = [
           { name: "Perte de force de serrage de la main 30-50% (Dominante)", rate: [10, 20] },
           { name: "Perte de force de serrage de la main < 30% (Dominante)", rate: [5, 10] },
           
+          // Séquelles fonctionnelles complexes de la main
+          { name: "Séquelles de fracture/luxation métacarpienne avec déformation et limitation fonctionnelle (Dominante)", rate: [6, 15], description: "Cal vicieux métacarpien, déviation digitale, perte d'amplitude.", rateCriteria: { low: "Cal vicieux mineur, déviation < 15°, limitation légère.", high: "Cal vicieux majeur, déviations multiples, limitation sévère de la préhension." } },
+          { name: "Amyotrophie de la main post-traumatique (Dominante)", rate: [8, 20], description: "Atrophie musculaire de la main après immobilisation prolongée, lésion nerveuse ou syndrome compartimental.", rateCriteria: { low: "Amyotrophie modérée (< 20%), force conservée à 60-80%.", high: "Amyotrophie sévère (> 30%), perte de force majeure < 50%." } },
+          { name: "Cicatrice rétractile de la main avec limitation fonctionnelle (Dominante)", rate: [10, 30], description: "Cicatrice adhérente, bride cutanée limitant l'extension ou la flexion des doigts.", rateCriteria: { low: "Bride isolée limitant un seul doigt.", high: "Brides multiples, main en griffe ou en extension forcée, préhension impossible." } },
+          { name: "Déviation digitale post-traumatique multiple (Dominante)", rate: [8, 18], description: "Déviation de plusieurs doigts suite à fractures, luxations ou lésions ligamentaires.", rateCriteria: { low: "Déviation de 2 doigts < 20°, fonction conservée.", high: "Déviation de 3-4 doigts > 20°, préhension perturbée." } },
+          { name: "Séquelles fonctionnelles complexes de la main avec perte globale de fonction (Dominante)", rate: [25, 40], description: "Polyséquelles associant amyotrophie, raideurs articulaires multiples, cicatrices rétractiles, déviations digitales avec perte majeure de la fonction globale.", rateCriteria: { low: "Atteinte modérée : perte fonctionnelle 30-50%, préhension possible mais limitée.", high: "Atteinte sévère : perte fonctionnelle > 60%, préhension quasi impossible, main peu utilisable." } },
+          
           // Main non dominante
           { name: "Instabilité scapho-lunaire (Non-Dominante)", rate: [12, 24] },
           { name: "Pseudarthrose du scaphoïde (Non-Dominante)", rate: [15, 28] },
           { name: "Maladie de Kienböck (Non-Dominante)", rate: [20, 32] },
           { name: "Arthrose trapézo-métacarpienne (Non-Dominante)", rate: [12, 24] },
+          { name: "Perte de force de serrage de la main > 50% (Non-Dominante)", rate: [15, 28], description: "Mesuré au dynamomètre (Jamar), comparativement au côté controlatéral sain." },
+          { name: "Perte de force de serrage de la main 30-50% (Non-Dominante)", rate: [8, 16] },
+          { name: "Perte de force de serrage de la main < 30% (Non-Dominante)", rate: [4, 8] },
+          
+          // Séquelles fonctionnelles complexes de la main non dominante
+          { name: "Séquelles de fracture/luxation métacarpienne avec déformation et limitation fonctionnelle (Non-Dominante)", rate: [4, 12], description: "Cal vicieux métacarpien, déviation digitale, perte d'amplitude.", rateCriteria: { low: "Cal vicieux mineur, déviation < 15°, limitation légère.", high: "Cal vicieux majeur, déviations multiples, limitation sévère de la préhension." } },
+          { name: "Amyotrophie de la main post-traumatique (Non-Dominante)", rate: [6, 16], description: "Atrophie musculaire de la main après immobilisation prolongée, lésion nerveuse ou syndrome compartimental.", rateCriteria: { low: "Amyotrophie modérée (< 20%), force conservée à 60-80%.", high: "Amyotrophie sévère (> 30%), perte de force majeure < 50%." } },
+          { name: "Cicatrice rétractile de la main avec limitation fonctionnelle (Non-Dominante)", rate: [8, 24], description: "Cicatrice adhérente, bride cutanée limitant l'extension ou la flexion des doigts.", rateCriteria: { low: "Bride isolée limitant un seul doigt.", high: "Brides multiples, main en griffe ou en extension forcée, préhension impossible." } },
+          { name: "Déviation digitale post-traumatique multiple (Non-Dominante)", rate: [6, 14], description: "Déviation de plusieurs doigts suite à fractures, luxations ou lésions ligamentaires.", rateCriteria: { low: "Déviation de 2 doigts < 20°, fonction conservée.", high: "Déviation de 3-4 doigts > 20°, préhension perturbée." } },
+          { name: "Séquelles fonctionnelles complexes de la main avec perte globale de fonction (Non-Dominante)", rate: [20, 32], description: "Polyséquelles associant amyotrophie, raideurs articulaires multiples, cicatrices rétractiles, déviations digitales avec perte majeure de la fonction globale.", rateCriteria: { low: "Atteinte modérée : perte fonctionnelle 30-50%, préhension possible mais limitée.", high: "Atteinte sévère : perte fonctionnelle > 60%, préhension quasi impossible, main peu utilisable." } },
         ]
       },
       {
