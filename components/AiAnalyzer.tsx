@@ -12214,6 +12214,57 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
         });
     }
     
+    // 🔴 V3.3.163: SÉQUELLES COMPLEXES DE LA MAIN
+    // Amyotrophie de la main
+    if (/amyotrophie.*main|atrophie.*(?:musculaire|inter.*osseux).*main|fonte.*musculaire.*main/i.test(text)) {
+        const lateralite = text.match(/(droite|gauche)/i)?.[1]?.toLowerCase() || '';
+        detectedSequelae.push({
+            name: `Amyotrophie de la main ${lateralite}`,
+            keywords: ['amyotrophie', 'main', 'atrophie musculaire'],
+            context: text.match(/amyotrophie.*main[^.;]*/i)?.[0] || ''
+        });
+    }
+    
+    // Luxation métacarpes (M4-M5)
+    if (/luxation.*(?:m[ée]tacarpe|M[45])|(?:m[ée]tacarpe|M[45]).*lux[ée]/i.test(text)) {
+        const metaMatch = text.match(/M([45])/gi);
+        const metaString = metaMatch ? metaMatch.join('-') : 'métacarpe';
+        detectedSequelae.push({
+            name: `Luxation ${metaString} (métacarpe)`,
+            keywords: ['luxation', 'métacarpe', metaString],
+            context: text.match(/luxation.*m[ée]tacarpe[^.;]*/i)?.[0] || ''
+        });
+    }
+    
+    // Déviation des doigts
+    if (/d[ée]viation.*(?:doigt|D[2345])|(?:doigt|D[2345]).*d[ée]vi[ée]/i.test(text)) {
+        const doigtsMatch = text.match(/D([2345])/gi);
+        const doigtsString = doigtsMatch ? doigtsMatch.join(' ') : 'doigts';
+        detectedSequelae.push({
+            name: `Déviation des doigts ${doigtsString}`,
+            keywords: ['déviation', 'doigts', 'déformation'],
+            context: text.match(/d[ée]viation.*doigt[^.;]*/i)?.[0] || ''
+        });
+    }
+    
+    // Enroulement incomplet de la main (limitation flexion globale)
+    if (/enroulement.*(?:main|doigt).*incomplet|flexion.*main.*incompl[èe]te|fermeture.*poing.*incompl[èe]te/i.test(text)) {
+        detectedSequelae.push({
+            name: 'Enroulement incomplet de la main (limitation flexion globale)',
+            keywords: ['enroulement', 'flexion', 'main', 'poing'],
+            context: text.match(/enroulement.*incomplet[^.;]*/i)?.[0] || ''
+        });
+    }
+    
+    // Diminution force de serrage
+    if (/diminution.*force.*serrage|force.*serrage.*diminu[ée]e?|perte.*force.*pr[ée]hension/i.test(text)) {
+        detectedSequelae.push({
+            name: 'Diminution de la force de serrage (déficit préhension)',
+            keywords: ['force serrage', 'préhension', 'déficit'],
+            context: text.match(/(?:diminution|perte).*force.*serrage[^.;]*/i)?.[0] || ''
+        });
+    }
+    
     // Limitation flexion genou
     if (/limitation.*flexion.*genou|flexion.*genou.*limit[ée]e?.*\d+|genou.*flex.*\d+/i.test(text)) {
         detectedSequelae.push({
@@ -12880,20 +12931,54 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
                 }
                 
                 // MEMBRE SUPÉRIEUR (fracture + raideur + paresthésies = 1 seul taux membre)
-                else if (/fracture.*hum[ée]rus|fracture.*clavicule|fracture.*radius|raideur.*[ée]paule|raideur.*coude|raideur.*poignet|parasth[ée]sie.*ulnaire|perte.*force.*pr[ée]hension/i.test(seq.name)) {
+                else if (/fracture.*hum[ée]rus|fracture.*clavicule|fracture.*radius|raideur.*[ée]paule|raideur.*coude|raideur.*poignet|parasth[ée]sie.*ulnaire|perte.*force.*pr[ée]hension|amputation.*doigt|amyotrophie.*main|luxation.*m[ée]tacarpe|d[ée]viation.*doigt|enroulement.*main|diminution.*force.*serrage/i.test(seq.name)) {
                     system = 'MEMBRE_SUPERIEUR';
-                    // Évaluer selon main dominante et sévérité
-                    const isDominant = /dominant|droitier.*droit|gaucher.*gauche/i.test(text);
-                    const hasGripLoss = /perte.*force.*pr[ée]hension.*40|grip.*test.*40|force.*diminu[ée]e.*40/i.test(text);
                     
-                    if (isDominant && hasGripLoss && /raideur.*poignet|fracture.*radius/i.test(seq.name)) {
-                        rate = 18; explanation = 'Membre supérieur DOMINANT : Fracture radius avec raideur poignet importante (extension/flexion limitées) et perte force préhension 40%';
-                    } else if (/raideur.*coude.*d[ée]ficit.*extension.*30|flexion.*limit.*110/i.test(seq.name) || /parasth[ée]sie/i.test(seq.name)) {
-                        rate = 15; explanation = 'Membre supérieur : Raideur coude importante avec atteinte nerveuse (paresthésies ulnaires)';
-                    } else if (isDominant) {
-                        rate = 14; explanation = 'Membre supérieur DOMINANT : Raideur articulaire avec limitation fonctionnelle';
-                    } else {
-                        rate = 12; explanation = 'Membre supérieur : Raideur articulaire avec limitation fonctionnelle';
+                    // 🔴 V3.3.163: POLYTRAUMATISME MAIN (amputation + séquelles multiples)
+                    const hasAmputation = detectedSequelae.some(s => /amputation.*(?:doigt|D[2345]|auriculaire|annulaire)/i.test(s.name));
+                    const hasAmyotrophie = detectedSequelae.some(s => /amyotrophie.*main/i.test(s.name));
+                    const hasLuxationMeta = detectedSequelae.some(s => /luxation.*m[ée]tacarpe/i.test(s.name));
+                    const hasDeviation = detectedSequelae.some(s => /d[ée]viation.*doigt/i.test(s.name));
+                    const hasCicatriceRetractile = detectedSequelae.some(s => /cicatrice.*(?:r[ée]tractile|pathologique)/i.test(s.name));
+                    const hasEnroulement = detectedSequelae.some(s => /enroulement.*incomplet/i.test(s.name));
+                    const hasForceSerrage = detectedSequelae.some(s => /diminution.*force.*serrage/i.test(s.name));
+                    const isDominant = /dominant|droitier.*droit|gaucher.*gauche|main.*droite/i.test(text);
+                    
+                    // Compter séquelles main (hors amputation)
+                    const nombreSequellesMain = [hasAmyotrophie, hasLuxationMeta, hasDeviation, hasCicatriceRetractile, hasEnroulement, hasForceSerrage].filter(Boolean).length;
+                    
+                    if (hasAmputation && nombreSequellesMain >= 3) {
+                        // Amputation + ≥3 séquelles fonctionnelles majeures = Main très invalidée
+                        if (isDominant) {
+                            rate = 30;
+                            explanation = 'Membre supérieur DOMINANT : Polytraumatisme main majeur - Amputation D5 + luxation métacarpes + amyotrophie + déviation doigts + limitation fonctionnelle globale → IPP 25-35% (main sérieusement handicapée)';
+                        } else {
+                            rate = 25;
+                            explanation = 'Membre supérieur NON DOMINANT : Polytraumatisme main majeur - Amputation + séquelles multiples → IPP 20-28%';
+                        }
+                    } else if (hasAmputation && nombreSequellesMain >= 1) {
+                        // Amputation + quelques séquelles
+                        if (isDominant) {
+                            rate = 22;
+                            explanation = 'Membre supérieur DOMINANT : Amputation digitale avec séquelles associées (amyotrophie/limitation) → IPP 18-25%';
+                        } else {
+                            rate = 18;
+                            explanation = 'Membre supérieur : Amputation digitale avec séquelles fonctionnelles → IPP 15-20%';
+                        }
+                    }
+                    // Évaluer selon main dominante et sévérité (sans amputation)
+                    else {
+                        const hasGripLoss = /perte.*force.*pr[ée]hension.*40|grip.*test.*40|force.*diminu[ée]e.*40/i.test(text);
+                        
+                        if (isDominant && hasGripLoss && /raideur.*poignet|fracture.*radius/i.test(seq.name)) {
+                            rate = 18; explanation = 'Membre supérieur DOMINANT : Fracture radius avec raideur poignet importante (extension/flexion limitées) et perte force préhension 40%';
+                        } else if (/raideur.*coude.*d[ée]ficit.*extension.*30|flexion.*limit.*110/i.test(seq.name) || /parasth[ée]sie/i.test(seq.name)) {
+                            rate = 15; explanation = 'Membre supérieur : Raideur coude importante avec atteinte nerveuse (paresthésies ulnaires)';
+                        } else if (isDominant) {
+                            rate = 14; explanation = 'Membre supérieur DOMINANT : Raideur articulaire avec limitation fonctionnelle';
+                        } else {
+                            rate = 12; explanation = 'Membre supérieur : Raideur articulaire avec limitation fonctionnelle';
+                        }
                     }
                 }
                 
