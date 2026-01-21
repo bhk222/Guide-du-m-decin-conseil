@@ -8130,26 +8130,26 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             pattern: /amputation.*(?:totale|compl[èe]te|du|de\s+l[a']?)?\s*D5(?!\s*(?:p[123]|phalange))/i,
             context: /doigt|main/i,
             searchTerms: ['Amputation de l\'auriculaire'],
-            priority: 96  // Priorité haute pour capturer avant pattern générique
+            priority: 13000  // ULTRA PRIORITAIRE - Testé AVANT patterns P1/P2/P3 (12000)
         },
         // 🔴 V3.3.163: Amputation D2-D4 (index/médius/annulaire) - Patterns génériques
         {
             pattern: /amputation.*(?:totale|compl[èe]te|du|de\s+l[a']?)?\s*D2(?!\s*(?:p[123]|phalange))/i,
             context: /doigt|main/i,
             searchTerms: ['Amputation de l\'index'],
-            priority: 96
+            priority: 13000  // ULTRA PRIORITAIRE - Testé AVANT patterns P1/P2/P3 (12000)
         },
         {
             pattern: /amputation.*(?:totale|compl[èe]te|du|de\s+l[a']?)?\s*D3(?!\s*(?:p[123]|phalange))/i,
             context: /doigt|main/i,
             searchTerms: ['Amputation du médius'],
-            priority: 96
+            priority: 13000  // ULTRA PRIORITAIRE
         },
         {
             pattern: /amputation.*(?:totale|compl[èe]te|du|de\s+l[a']?)?\s*D4(?!\s*(?:p[123]|phalange))/i,
             context: /doigt|main/i,
             searchTerms: ['Amputation de l\'annulaire'],
-            priority: 96
+            priority: 13000  // ULTRA PRIORITAIRE
         },
         // Règles orteils
         {
