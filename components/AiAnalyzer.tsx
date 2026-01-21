@@ -12262,32 +12262,32 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
         });
     }
     
-    // Déviation des doigts
-    if (/d[ée]viation.*(?:doigt|D[2345])|(?:doigt|D[2345]).*d[ée]vi[ée]/i.test(text)) {
+    // Déviation des doigts (tolérant aux fautes: diviation, deviation)
+    if (/d[ée iey]via?tion.*(?:doigt|D[2345])|(?:doigt|D[2345]).*d[ée iey]vi[ée]/i.test(text)) {
         const doigtsMatch = text.match(/D([2345])/gi);
         const doigtsString = doigtsMatch ? doigtsMatch.join(' ') : 'doigts';
         detectedSequelae.push({
             name: `Déviation des doigts ${doigtsString}`,
             keywords: ['déviation', 'doigts', 'déformation'],
-            context: text.match(/d[ée]viation.*doigt[^.;]*/i)?.[0] || ''
+            context: text.match(/d[ée iey]via?tion.*doigt[^.;]*/i)?.[0] || ''
         });
     }
     
-    // Enroulement incomplet de la main (limitation flexion globale)
-    if (/enroulement.*(?:main|doigt).*incomplet|flexion.*main.*incompl[èe]te|fermeture.*poing.*incompl[èe]te/i.test(text)) {
+    // Enroulement incomplet de la main (limitation flexion globale) - tolérant aux fautes
+    if (/enro[ul]+ement.*(?:main|doigt).*incomplet|flexion.*main.*incompl[èe]te|fermeture.*poing.*incompl[èe]te/i.test(text)) {
         detectedSequelae.push({
             name: 'Enroulement incomplet de la main (limitation flexion globale)',
             keywords: ['enroulement', 'flexion', 'main', 'poing'],
-            context: text.match(/enroulement.*incomplet[^.;]*/i)?.[0] || ''
+            context: text.match(/enro[ul]+ement.*incomplet[^.;]*/i)?.[0] || ''
         });
     }
     
-    // Diminution force de serrage
-    if (/diminution.*force.*serrage|force.*serrage.*diminu[ée]e?|perte.*force.*pr[ée]hension/i.test(text)) {
+    // Diminution force de serrage (tolérant aux fautes: dimunition, dimimution)
+    if (/dim[iu]n[iu]tion.*force.*serrage|force.*serrage.*dim[iu]n[iu][ée]e?|perte.*force.*pr[ée]hension/i.test(text)) {
         detectedSequelae.push({
             name: 'Diminution de la force de serrage (déficit préhension)',
             keywords: ['force serrage', 'préhension', 'déficit'],
-            context: text.match(/(?:diminution|perte).*force.*serrage[^.;]*/i)?.[0] || ''
+            context: text.match(/(?:dim[iu]n[iu]tion|perte).*force.*serrage[^.;]*/i)?.[0] || ''
         });
     }
     
@@ -12410,8 +12410,8 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
         });
     }
     
-    // Cicatrice pathologique/vicieuse (mauvaise qualité, adhérente, rétractile)
-    if (/cicatrice.*(?:mauvaise.*qualit[ée]|pathologique|vicieuse|adh[ée]rente|r[ée]tractile|hypertrophique|ch[ée]lo[ïie]de)/i.test(text)) {
+    // Cicatrice pathologique/vicieuse (mauvaise qualité, adhérente, rétractile) - tolérant aux fautes
+    if (/cicatrice.*(?:mauvaise.*qualit[ée]|pathologique|vicieuse|adh[ée]rente|r[ée e]tracti?le?|hypertrophique|ch[ée]lo[ïie]de)/i.test(text)) {
         detectedSequelae.push({
             name: 'Cicatrice pathologique (mauvaise qualité, adhérente)',
             keywords: ['cicatrice', 'pathologique', 'mauvaise qualité', 'adhérente'],
