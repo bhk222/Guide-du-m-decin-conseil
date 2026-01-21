@@ -11915,6 +11915,29 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
     const tcDaysMatch = text.match(/(?:perte.*connaissance|coma|hospitalisation).*?(\d+)\s*(?:jour|j)/i);
     const tcDays = tcDaysMatch ? parseInt(tcDaysMatch[1]) : 0;
     
+    // Embarrure crânienne (fracture avec enfoncement osseux)
+    if (/embarrure|enfoncement.*cr[âa]ni|fracture.*enfonc[ée]/i.test(text)) {
+        const localisation = text.match(/(temporale?|pari[ée]tale?|frontale?|occipitale?|[ée]caille.*temporale?)/i)?.[1] || '';
+        const opere = /op[ée]r[ée]|chirurgie|intervention|craniotomie|volet/i.test(text);
+        detectedSequelae.push({
+            name: `Embarrure crânienne ${localisation} ${opere ? '(opérée)' : ''}`,
+            keywords: ['embarrure', 'fracture crâne', localisation].filter(k => k),
+            context: text.match(/embarrure[^.;]*/i)?.[0] || text.match(/fracture.*cr[âa]n.*enfonc[^.;]*/i)?.[0] || ''
+        });
+    }
+    
+    // Hématome intracrânien opéré (extradural/sous-dural/intracérébral)
+    if (/h[ée]matome.*(?:extradural|[ée]pidural|sous.*dural|intrac[ée]r[ée]bral|intracr[âa]nien)/i.test(text) || 
+        /h[ée]matome.*(?:extra.*dural|sous.*dural).*op[ée]r[ée]/i.test(text)) {
+        const typeHematome = text.match(/h[ée]matome\s+(?:extradural|[ée]pidural|sous.*dural|intrac[ée]r[ée]bral)/i)?.[0] || 'Hématome intracrânien';
+        const opere = /op[ée]r[ée]|drain[ée]|[ée]vacu[ée]|craniotomie|tr[ée]pan/i.test(text);
+        detectedSequelae.push({
+            name: `${typeHematome} ${opere ? '(opéré/évacué)' : ''}`,
+            keywords: ['hématome', 'intracrânien', 'chirurgie'],
+            context: text.match(/h[ée]matome.*(?:extradural|sous.*dural|intrac[ée]r[ée]bral)[^.;]*/i)?.[0] || ''
+        });
+    }
+    
     // Traumatisme crânien avec perte de connaissance prolongée (≥1 jour)
     if (hasTC && tcDays >= 1) {
         detectedSequelae.push({
@@ -12571,7 +12594,49 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
                     } else {
                         rate = 12; explanation = 'Traumatisme crânien avec perte de connaissance';
                     }
-                } else if (/syndrome.*subjectif.*crâne|céphalée|vertige/i.test(seq.name)) {
+                }
+                // 🔴 V3.3.163: EMBARRURE CRÂNIENNE (fracture enfoncée du crâne)
+                else if (/embarrure.*cr[âa]ni/i.test(seq.name)) {
+                    system = 'NEUROLOGIQUE';
+                    const opere = /op[ée]r[ée]/i.test(seq.name);
+                    const hasEpilepsie = detectedSequelae.some(s => /[ée]pilepsie/i.test(s.name));
+                    const hasDeficit = detectedSequelae.some(s => /h[ée]mipar[ée]sie|d[ée]ficit.*moteur|paralysie/i.test(s.name));
+                    
+                    if (hasEpilepsie || hasDeficit) {
+                        rate = 30;
+                        explanation = `Embarrure crânienne ${opere ? 'opérée' : ''} avec complications neurologiques (épilepsie/déficit moteur) → IPP 25-35%`;
+                    } else if (opere) {
+                        rate = 20;
+                        explanation = 'Embarrure crânienne opérée (fracture du crâne avec enfoncement osseux) → IPP 15-25%';
+                    } else {
+                        rate = 15;
+                        explanation = 'Embarrure crânienne (fracture avec enfoncement osseux) → IPP 10-20%';
+                    }
+                }
+                // 🔴 V3.3.163: HÉMATOME INTRACRÂNIEN OPÉRÉ (extradural/sous-dural/intracérébral)
+                else if (/h[ée]matome.*(?:extradural|sous.*dural|intrac[ée]r[ée]bral|intracr[âa]nien)/i.test(seq.name)) {
+                    system = 'NEUROLOGIQUE';
+                    const opere = /op[ée]r[ée]|[ée]vacu[ée]/i.test(seq.name);
+                    const isExtradural = /extradural|[ée]pidural/i.test(seq.name);
+                    const hasDeficit = detectedSequelae.some(s => /h[ée]mipar[ée]sie|d[ée]ficit.*moteur|paralysie/i.test(s.name));
+                    
+                    if (hasDeficit) {
+                        rate = 35;
+                        explanation = `Hématome intracrânien opéré avec séquelles neurologiques déficitaires → IPP 30-40%`;
+                    } else if (opere) {
+                        if (isExtradural) {
+                            rate = 25;
+                            explanation = 'Hématome extradural opéré (collection sang entre dure-mère et os) → IPP 20-30%';
+                        } else {
+                            rate = 30;
+                            explanation = 'Hématome sous-dural/intracérébral opéré → IPP 25-35%';
+                        }
+                    } else {
+                        rate = 15;
+                        explanation = 'Hématome intracrânien (traitement conservateur) → IPP 10-20%';
+                    }
+                }
+                else if (/syndrome.*subjectif.*crâne|céphalée|vertige/i.test(seq.name)) {
                     system = 'NEUROLOGIQUE';
                     rate = 10; explanation = 'Syndrome subjectif des traumatisés du crâne (SSTC) avec céphalées/vertiges persistants';
                 } else if (/perforation.*tympan|acouph[èe]ne/i.test(seq.name)) {
