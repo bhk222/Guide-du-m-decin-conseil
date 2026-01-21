@@ -12157,11 +12157,23 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
     }
     
     // Déchirure ligamentaire genou (LCM/LLI/croisés)
+    // Déchirure ligamentaire genou (LCM/LLI/croisés)
     if (/d[ée]chirure.*ligament.*genou|ligament.*collat[ée]ral.*m[ée]dial|ligament.*lat[ée]ral.*interne|LCM|LLI|ligament.*crois[ée].*(?:ant[ée]rieur|post[ée]rieur)|LCA|LCP|entorse.*grave.*genou/i.test(text)) {
         detectedSequelae.push({
             name: 'Déchirure ligamentaire du genou (LCM/LLI/croisés)',
             keywords: ['déchirure', 'ligament', 'genou', 'LCM', 'LLI', 'collatéral'],
             context: text.match(/d[ée]chirure.*ligament[^.;]*/i)?.[0] || text.match(/ligament.*collat[ée]ral[^.;]*/i)?.[0] || ''
+        });
+    }
+    
+    // 🔴 V3.3.163: STEPPAGE (pied tombant = paralysie du releveur du pied)
+    if (/steppage|pied.*tombant|marche.*avec.*steppage|d[ée]ficit.*releveur.*pied|paralysie.*releveur/i.test(text)) {
+        const lateralite = text.match(/(droit|gauche|bilat[ée]ral)/i)?.[1]?.toLowerCase() || '';
+        const isBilateral = /bilat[ée]ral|deux.*pieds|02.*pieds/i.test(text);
+        detectedSequelae.push({
+            name: `Steppage ${lateralite ? lateralite : ''} ${isBilateral ? '(bilatéral)' : ''}(pied tombant - paralysie releveur du pied)`,
+            keywords: ['steppage', 'pied tombant', 'paralysie', 'SPE', 'nerf sciatique poplité externe'],
+            context: text.match(/steppage[^.;]*/i)?.[0] || text.match(/marche.*steppage[^.;]*/i)?.[0] || text.match(/pied.*tombant[^.;]*/i)?.[0] || ''
         });
     }
     
@@ -12656,25 +12668,50 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
                     system = 'ORL';
                     rate = 8; explanation = 'Séquelles ORL (perforation tympanique/acouphènes)';
                 }
+                // 🔴 V3.3.163: STEPPAGE (paralysie releveur du pied = atteinte nerf SPE ou L5)
+                else if (/steppage|pied.*tombant|paralysie.*releveur/i.test(seq.name)) {
+                    system = 'NEUROLOGIQUE';
+                    const isBilateral = /bilat[ée]ral/i.test(seq.name);
+                    const hasAmyotrophie = detectedSequelae.some(s => /amyotrophie/i.test(s.name));
+                    
+                    if (isBilateral) {
+                        rate = 30;
+                        explanation = 'Steppage bilatéral (paralysie releveurs des deux pieds) = Atteinte neurologique grave → IPP 25-35%';
+                    } else if (hasAmyotrophie) {
+                        rate = 18;
+                        explanation = 'Steppage unilatéral avec amyotrophie (paralysie releveur pied + fonte musculaire) = Atteinte nerf SPE/L5 complète → IPP 15-20%';
+                    } else {
+                        rate = 15;
+                        explanation = 'Steppage unilatéral (pied tombant - paralysie releveur du pied) = Atteinte nerf sciatique poplité externe → IPP 12-18%';
+                    }
+                }
                 
                 // RACHIS (toutes atteintes rachis = 1 seul taux global)
-                else if (/cervicalgie|brachialgie|parasth[ée]sie|dorsalgie|lombalgie|fracture.*lombaire|hernie.*discale|sciatique|limitation.*ant[ée]flexion.*rachis/i.test(seq.name)) {
+                else if (/cervicalgie|brachialgie|parasth[ée]sie|dorsalgie|lombalgie|fracture.*lombaire|hernie.*discale|sciatique|limitation.*ant[ée]flexion.*rachis|raideur.*rachis/i.test(seq.name)) {
                     system = 'RACHIS';
+                    
+                    // 🔴 V3.3.163: FRACTURE-LUXATION VERTÉBRALE (grave: instabilité + chirurgie)
+                    const isFractureLuxation = /fracture.*luxation|luxation.*fracture/i.test(text);
+                    const isOperated = /op[ée]r[ée]|chirurgie|intervention|arthrod[èe]se|ost[ée]osynth[èe]se/i.test(text);
+                    const hasRaideur = /raideur.*rachis|limitation.*rachis|enraidissement/i.test(text);
                     
                     // 🔴 V3.3.162: BRACHIALGIE = RADICULALGIE CERVICALE (atteinte nerveuse majeure)
                     const hasBrachialgie = detectedSequelae.some(s => /brachialgie|n[ée]vralgie.*cervico.*brachial/i.test(s.name));
                     const hasParesthesies = detectedSequelae.some(s => /parasth[ée]sie|fourmillement/i.test(s.name));
                     
                     // 🥇 V3.3.160: AJUSTEMENT TAUX SELON SÉVÉRITÉ CLINIQUE
-                    // Analyser les signes cliniques pour ajuster le taux
                     const hasFavorableSigns = /marche.*normale|sans.*tuteur|ne.*porte.*pas.*ceinture|mouvements.*possible|pas.*contracture|las[eè]gue.*n[eé]gatif|pas.*trouble.*neurologique/i.test(text);
                     const hasUnfavorableSigns = /marche.*difficile|canne|béquille|ceinture.*permanente|contracture.*importante|las[eè]gue.*positif|trouble.*neurologique|d[eé]ficit.*moteur/i.test(text);
                     const hasDMS = /dms|distance.*doigt.*sol/i.test(text);
                     const dmsValue = text.match(/dms.*?(\d+).*?cm/i)?.[1] ? parseInt(text.match(/dms.*?(\d+).*?cm/i)![1]) : null;
                     
-                    // Prendre le taux max selon sévérité
-                    if (hasBrachialgie || (hasParesthesies && /cervicalgie/i.test(text))) {
-                        // Brachialgie = Radiculalgie cervicale (atteinte nerveuse C5-C6-C7) → 15-20% IPP
+                    // Fracture-luxation opérée avec raideur (grave)
+                    if (isFractureLuxation && isOperated && hasRaideur) {
+                        rate = 20;
+                        explanation = 'Rachis LOMBAIRE : Fracture-luxation opérée (instabilité rachidienne) avec raideur résiduelle → IPP 18-25% (séquelle majeure)';
+                    }
+                    // Brachialgie cervicale
+                    else if (hasBrachialgie || (hasParesthesies && /cervicalgie/i.test(text))) {
                         rate = 18; 
                         explanation = 'Rachis CERVICAL : Cervicalgie avec BRACHIALGIE (névralgie cervico-brachiale = radiculalgie par compression nerveuse) + troubles sensitifs (paresthésies) → IPP majorée pour atteinte nerveuse';
                     } else if (/hernie.*discale|sciatique/i.test(seq.name)) {
