@@ -8820,12 +8820,36 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
         }
     ];
     
+    // ========== 🆕 V3.3.170: DÉTECTION PRÉCOCE CUMUL AVANT RÈGLES EXPERTES ==========
+    // Détecter les polyséquelles AVANT l'exécution des règles expertes simples
+    const earlyCumulCheck = detectMultipleLesions(text);
+    const isEarlyCumulDetected = earlyCumulCheck.isCumul && earlyCumulCheck.lesionCount >= 2;
+    
+    if (isEarlyCumulDetected) {
+        console.log(`🔍 [CUMUL DÉTECTÉ EN AVANCE] ${earlyCumulCheck.lesionCount} lésions - SKIP RÈGLES EXPERTES SIMPLES`);
+    }
+    
     // ========== 🆕 V3.3.131: TEST EXPERT RULES EN PRIORITÉ ABSOLUE (AVANT SCORING KEYWORD) ==========
     // Trier et tester IMMÉDIATEMENT après définition, avant tout autre code
     const cleanNormalizedText = normalize(text);
     const sortedExpertRules = expertRules.sort((a, b) => (b.priority || 0) - (a.priority || 0));
     
     for (const rule of sortedExpertRules) {
+        // 🆕 V3.3.170: SKIP règles expertes simples si cumul détecté
+        // Ne pas appliquer de règle experte simple (amputation isolée) si polyséquelles détectées
+        const isSimpleRule = !rule.searchTerms.some(term => 
+            term.includes("__CUMUL_") || 
+            term.includes("__SANS_SEQUELLE__") ||
+            term.includes("CATARACTE") ||
+            term.includes("POUTEAU") ||
+            term.includes("DUCHENNE")
+        );
+        
+        if (isEarlyCumulDetected && isSimpleRule) {
+            // Si cumul détecté, ignorer les règles simples d'amputation/fracture isolée
+            continue;
+        }
+        
         const matchClean = rule.pattern.test(cleanNormalizedText) && rule.context.test(cleanNormalizedText);
         const matchWorking = rule.pattern.test(workingText) && rule.context.test(workingText);
         
@@ -11522,6 +11546,21 @@ export const detectMultipleLesions = (text: string): {
     const hasRachisLesion = /(?:lombalgie|entorse.*lombaire|entorse.*rachis|cervicalgie|dorsalgie|traumatisme.*cervical|coup.*lapin).*(?:post.*traumatique|m[eé]canique|chronique)/i.test(normalized);
     const hasMembreEtRachis = hasFractureMembre && hasRachisLesion;
     
+    // 🆕 V3.3.170: Détection POLYSÉQUELLES FONCTIONNELLES COMPLEXES (amyotrophie + cicatrice + déviation + perte force)
+    // Ex: "amputation D5 avec luxation M4-M5, amyotrophie main, cicatrice rétractile, déviation D2 D3 D4, perte force serrage"
+    // Pattern: Amputation/luxation + au moins 3 séquelles fonctionnelles
+    const countFunctionalSequelae = [
+        /amyotrophie|atrophie.*(?:musculaire|main|doigt)/i.test(normalized),
+        /cicatrice.*r[eé]tractile|bride.*cutanée|cicatrice.*adh[eé]rente/i.test(normalized),
+        /d[eé]viation.*(?:digitale|doigt|d[2-5])|doigt.*d[eé]vi[eé]/i.test(normalized),
+        /(?:perte|diminution|r[eé]duction).*force.*serrage|force.*pr[eé]hension.*diminu[eé]e|serrage.*faible/i.test(normalized),
+        /enroulement.*(?:incomplet|limit[eé]|r[eé]duit)|(?:flexion|fermeture).*main.*incompl[eéè]te/i.test(normalized),
+        /raideur.*(?:main|doigt|articulaire)/i.test(normalized)
+    ].filter(Boolean).length;
+    
+    const hasAmputationOrLuxation = /amputation|luxation.*m[eé]tacarp/i.test(normalized);
+    const hasMultipleFunctionalSequelae = hasAmputationOrLuxation && countFunctionalSequelae >= 3;
+    
     // 6. Critères de cumul AMÉLIORÉS (détecte narratif médical naturel)
     const isCumul = 
         foundKeywords.length > 0 ||  // Keywords TRÈS explicites type "polytraumatisme"
@@ -11542,7 +11581,8 @@ export const detectMultipleLesions = (text: string): {
         hasAmputationAndTendon ||      // 🆕 V3.3.133: Cumul amputation + rupture tendon (doigts différents)
         hasPlexusAndAmputation ||      // 🆕 V3.3.140: Cumul plexus/paralysie + amputation
         hasMembreSupEtInf ||           // 🆕 Cumul membre supérieur + membre inférieur (polytraumatisme)
-        hasMembreEtRachis;             // 🆕 V3.3.147: Cumul fracture membre + lésion rachis (lombalgie/entorse)
+        hasMembreEtRachis ||           // 🆕 V3.3.147: Cumul fracture membre + lésion rachis (lombalgie/entorse)
+        hasMultipleFunctionalSequelae; // 🆕 V3.3.170: Cumul amputation/luxation + séquelles fonctionnelles multiples (amyotrophie + cicatrice + déviation + perte force)
     
     // Estimation nombre de lésions
     const lesionCount = Math.max(
@@ -11560,7 +11600,8 @@ export const detectMultipleLesions = (text: string): {
         hasPlexusAndAmputation ? 2 : 1,  // 🆕 V3.3.140: Plexus/paralysie + amputation = au moins 2 lésions
         hasFractureAndPseudarthrose ? 2 : 1,  // 🆕 V3.3.142: Fracture + pseudarthrose = 2 lésions distinctes
         hasMembreSupEtInf ? 2 : 1,  // 🆕 V3.3.148: Membre supérieur + membre inférieur = 2 lésions distinctes (polytraumatisme)
-        hasMembreEtRachis ? 2 : 1  // 🆕 V3.3.147: Fracture membre + lésion rachis = 2 lésions distinctes
+        hasMembreEtRachis ? 2 : 1,  // 🆕 V3.3.147: Fracture membre + lésion rachis = 2 lésions distinctes
+        hasMultipleFunctionalSequelae ? Math.max(3, countFunctionalSequelae) : 1  // 🆕 V3.3.170: Polyséquelles fonctionnelles = nombre de séquelles détectées (min 3)
     );
     
     return {
