@@ -12480,6 +12480,50 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
         });
     }
     
+    // Fracture avant-bras (radius/cubitus)
+    if (/fracture.*(?:2.*os.*)?avant.?bras|fracture.*radius.*cubitus|fracture.*radio.*(?:ulnaire|cubitale)|fracture.*cubitus|fracture.*ulna|fracture.*radius(?!.*poignet)/i.test(text)) {
+        detectedSequelae.push({
+            name: 'Fracture de l\'avant-bras (radius et/ou cubitus)',
+            keywords: ['fracture', 'avant-bras', 'radius', 'cubitus'],
+            context: text.match(/fracture.*(?:avant.?bras|radius|cubitus|ulna)[^.;]*/i)?.[0] || ''
+        });
+    }
+    
+    // Cal vicieux (os longs membres)
+    if (/cal\s+vicieux|d[ée]formation\s+osseuse|consolidation\s+vicieuse/i.test(text)) {
+        detectedSequelae.push({
+            name: 'Déformation osseuse séquellaire (cal vicieux)',
+            keywords: ['cal vicieux', 'déformation', 'consolidation vicieuse'],
+            context: text.match(/cal\s+vicieux[^.;]*/i)?.[0] || text.match(/(?:d[ée]formation|consolidation)[^.;]*(?:osseuse|vicieuse)[^.;]*/i)?.[0] || ''
+        });
+    }
+    
+    // Limitation pronosupination
+    if (/supination\s+limit[ée]e?|perte.*supination|d[ée]ficit.*supination|supination.*(?:r[ée]duite|absente)/i.test(text)) {
+        detectedSequelae.push({
+            name: 'Limitation de la supination (rotation externe avant-bras)',
+            keywords: ['supination', 'limitation', 'rotation externe'],
+            context: text.match(/supination[^.;]*/i)?.[0] || ''
+        });
+    }
+    
+    if (/pronation\s+limit[ée]e?|perte.*pronation|d[ée]ficit.*pronation|pronation.*(?:r[ée]duite|absente)/i.test(text)) {
+        detectedSequelae.push({
+            name: 'Limitation de la pronation (rotation interne avant-bras)',
+            keywords: ['pronation', 'limitation', 'rotation interne'],
+            context: text.match(/pronation[^.;]*/i)?.[0] || ''
+        });
+    }
+    
+    // Baisse force de serrage
+    if (/baisse.*force.*serrage|perte.*force.*(?:de\s+)?serrage|d[ée]ficit.*force.*pr[ée]hension|force.*serrage.*diminu[ée]e?/i.test(text)) {
+        detectedSequelae.push({
+            name: 'Baisse de la force de serrage/préhension',
+            keywords: ['baisse', 'force', 'serrage', 'préhension'],
+            context: text.match(/(?:baisse|perte|d[ée]ficit).*force.*(?:serrage|pr[ée]hension)[^.;]*/i)?.[0] || ''
+        });
+    }
+    
     // Raideur épaule
     if (/raideur.*[ée]paule|limitation.*[ée]paule|ankyl.*[ée]paule|p[ée]riarthrite/i.test(text)) {
         detectedSequelae.push({

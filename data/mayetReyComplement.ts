@@ -239,6 +239,29 @@ export const mayetReyComplement: InjuryCategory[] = [
           { name: "Pseudarthrose de l'olécrane (Dominante)", rate: [20, 35], description: "Non-consolidation de fracture olécranienne avec perte de force d'extension." },
           { name: "Pseudarthrose de la tête radiale (Dominante)", rate: [15, 25], description: "Douleurs et limitation de la pronosupination." },
           
+          // AVANT-BRAS - Cal vicieux et séquelles spécifiques
+          { name: "Cal vicieux du cubitus (ulna) isolé (Dominante)", rate: [8, 18], description: "Déformation du cubitus avec limitation de la pronosupination.", rateCriteria: { low: "Cal vicieux minime, limitation < 30° de pronosupination.", medium: "Cal vicieux modéré, limitation 30-60°, douleurs d'effort.", high: "Cal vicieux majeur, limitation > 60°, perte de force de serrage." } },
+          { name: "Cal vicieux du radius isolé (Dominante)", rate: [10, 20], description: "Déformation du radius avec limitation de la pronosupination et douleur au poignet.", rateCriteria: { low: "Cal vicieux minime avec gêne légère.", medium: "Cal vicieux modéré, limitation 40-60°.", high: "Cal vicieux majeur avec arthrose radio-cubitale inférieure." } },
+          { name: "Cal vicieux des 2 os de l'avant-bras (radio-ulnaire) (Dominante)", rate: [15, 35], description: "Déformation double radius et cubitus, limitation sévère de la pronosupination.", rateCriteria: { low: "Cal vicieux léger, limitation < 50°, pronation et supination partielles conservées.", medium: "Cal vicieux modéré, limitation 50-80°, douleurs fréquentes, baisse force.", high: "Cal vicieux majeur, quasi-absence de pronosupination (< 20° total), avant-bras figé, perte force de serrage majeure." } },
+          { name: "Limitation isolée de la supination (Dominante)", rate: [8, 20], description: "Perte de la supination (rotation externe) de l'avant-bras.", rateCriteria: { low: "Supination conservée > 40°.", medium: "Supination 20-40°.", high: "Supination < 20° ou absente." } },
+          { name: "Limitation isolée de la pronation (Dominante)", rate: [5, 15], description: "Perte de la pronation (rotation interne) de l'avant-bras.", rateCriteria: { low: "Pronation conservée > 50°.", high: "Pronation < 30° ou absente." } },
+          { name: "Synostose radio-ulnaire (fusion des 2 os) (Dominante)", rate: [30, 50], description: "Fusion osseuse entre radius et cubitus, absence totale de pronosupination.", rateCriteria: { low: "Synostose minime avec pronosupination résiduelle 10-20°.", high: "Synostose complète, avant-bras figé en position intermédiaire ou défavorable." } },
+          { name: "Pseudarthrose de l'avant-bras (cubitus ou radius) (Dominante)", rate: [25, 45], description: "Non-consolidation osseuse avec instabilité et douleurs.", rateCriteria: { low: "Pseudarthrose stable avec limitation modérée.", high: "Pseudarthrose instable, douleurs permanentes, indication chirurgicale." } },
+          { name: "Syndrome de loge chronique de l'avant-bras (Dominante)", rate: [15, 30], description: "Séquelles de syndrome de loge aigu avec fibrose musculaire et rétraction.", rateCriteria: { low: "Fibrose modérée avec force conservée.", high: "Rétraction sévère type Volkmann avec griffe des doigts." } },
+          
+          // HUMÉRUS - Séquelles spécifiques
+          { name: "Cal vicieux de l'humérus (diaphysaire ou métaphysaire) (Dominante)", rate: [10, 25], description: "Déformation de l'humérus avec limitation de l'épaule ou du coude.", rateCriteria: { low: "Cal vicieux minime, angulation < 20°, mobilité épaule/coude conservée > 80%.", medium: "Cal vicieux modéré, angulation 20-40°, limitation 40-60°, douleurs effort.", high: "Cal vicieux majeur, angulation > 40° ou rotation > 30°, limitation sévère épaule/coude, compression nerveuse." } },
+          { name: "Pseudarthrose de l'humérus (Dominante)", rate: [35, 60], description: "Non-consolidation de fracture humérale avec instabilité.", rateCriteria: { low: "Pseudarthrose hypertrophique stabilisée.", high: "Pseudarthrose atrophique avec mobilité anormale, indication chirurgicale impérative." } },
+          { name: "Paralysie du nerf radial sur cal vicieux huméral (Dominante)", rate: [35, 55], description: "Compression secondaire du nerf radial par cal vicieux de l'humérus." },
+          
+          // Avant-bras et humérus non-dominante
+          { name: "Cal vicieux cubitus (Non-Dominante)", rate: [6, 14] },
+          { name: "Cal vicieux radius (Non-Dominante)", rate: [8, 16] },
+          { name: "Cal vicieux 2 os avant-bras (Non-Dominante)", rate: [12, 28] },
+          { name: "Limitation supination (Non-Dominante)", rate: [6, 16] },
+          { name: "Cal vicieux humérus (Non-Dominante)", rate: [8, 20] },
+          { name: "Pseudarthrose humérus (Non-Dominante)", rate: [28, 48] },
+          
           // Coude non-dominante
           { name: "Arthrose coude (Non-Dominante)", rate: [15, 32] },
           { name: "Raideur coude (Non-Dominante)", rate: [8, 24] },
