@@ -5342,7 +5342,170 @@ export const aldData: AldItem[] = [
               </div>
             </div>`
           },
-          { code: "C09C03", name: "Maladie de Landouzy-Déjerine" },
+          { 
+            code: "C09C03", 
+            name: "Maladie de Landouzy-Déjerine",
+            tooltip: `<div class="space-y-3">
+              <h3 class="font-bold text-lg text-primary-700">MALADIE DE LANDOUZY-DÉJERINE (FSHD) — Guide Complet</h3>
+              <p class="text-sm italic">Plus communément appelée aujourd'hui <strong>Dystrophie Facio-Scapulo-Humérale (FSHD)</strong></p>
+              
+              <div>
+                <h4 class="font-semibold text-primary-600">🔹 1. PHYSIOPATHOLOGIE</h4>
+                <p class="text-sm"><strong>Ancien nom :</strong> Maladie de Landouzy-Déjerine</p>
+                
+                <p class="text-sm mt-2"><strong>Transmission :</strong> Autosomique Dominante</p>
+                <ul class="text-sm list-disc list-inside ml-2">
+                  <li>Touche hommes et femmes</li>
+                  <li>50% de risque de transmission</li>
+                </ul>
+
+                <p class="text-sm mt-2"><strong>Génétique :</strong></p>
+                <ul class="text-sm list-disc list-inside ml-2">
+                  <li>Anomalie sur le chromosome 4 (4q35)</li>
+                  <li><strong>Mécanisme complexe :</strong> Contraction du nombre de répétitions de la séquence D4Z4</li>
+                  <li>Cette contraction entraîne l'expression toxique du gène DUX4 (qui devrait normalement être éteint)</li>
+                </ul>
+
+                <p class="text-sm mt-2"><strong>Formes :</strong></p>
+                <ul class="text-sm list-disc list-inside ml-2">
+                  <li><strong>FSHD1 (95%) :</strong> Délétion génétique classique</li>
+                  <li><strong>FSHD2 (5%) :</strong> Anomalie épigénétique (gène SMCHD1)</li>
+                </ul>
+              </div>
+
+              <div>
+                <h4 class="font-semibold text-primary-600">🔹 2. LE TABLEAU CLINIQUE (Topographie Spécifique)</h4>
+                <p class="text-sm">Le nom de la maladie indique les zones touchées. L'évolution est souvent lente, par poussées.</p>
+                
+                <div class="bg-orange-50 border-2 border-orange-400 p-3 rounded mt-2">
+                  <p class="text-sm font-bold text-orange-700">⚠️ Caractéristique majeure : L'ASYMÉTRIE</p>
+                  <p class="text-sm">Contrairement aux autres myopathies, l'atteinte est souvent beaucoup plus marquée d'un côté que de l'autre.</p>
+                </div>
+
+                <div class="bg-blue-50 p-3 rounded mt-2">
+                  <p class="text-sm font-bold text-blue-700">A. Atteinte Faciale (Facio-)</p>
+                  <p class="text-sm"><em>Souvent le premier signe, mais parfois discret</em></p>
+                  <ul class="text-sm list-disc list-inside ml-2">
+                    <li><strong>Visage inexpressif :</strong> Effacement des rides, impossibilité de siffler ou de gonfler les joues</li>
+                    <li><strong>Sourire :</strong> "Sourire horizontal" ou transversal (les commissures ne remontent pas)</li>
+                    <li><strong>Yeux :</strong> Lagophtalmie (dormir les yeux entrouverts) par faiblesse de l'orbiculaire des paupières</li>
+                  </ul>
+                </div>
+
+                <div class="bg-green-50 p-3 rounded mt-2">
+                  <p class="text-sm font-bold text-green-700">B. Atteinte des Épaules (Scapulo-)</p>
+                  <ul class="text-sm list-disc list-inside ml-2">
+                    <li><strong>Décollement des omoplates (Scapula Alata) :</strong> Les omoplates remontent et s'écartent lors de l'élévation des bras</li>
+                    <li><strong>Clavicules horizontales :</strong> Aspect caractéristique de face</li>
+                    <li>Difficulté à lever les bras au-dessus de l'horizontale (coiffage, étagères)</li>
+                  </ul>
+                </div>
+
+                <div class="bg-purple-50 p-3 rounded mt-2">
+                  <p class="text-sm font-bold text-purple-700">C. Atteinte des Bras (Humérale)</p>
+                  <ul class="text-sm list-disc list-inside ml-2">
+                    <li>Atrophie des biceps et triceps</li>
+                    <li>Épargne relative des avant-bras (donne un aspect de bras "en cuisse de grenouille")</li>
+                  </ul>
+                </div>
+
+                <div class="bg-pink-50 p-3 rounded mt-2">
+                  <p class="text-sm font-bold text-pink-700">D. Autres signes moteurs évocateurs</p>
+                  
+                  <p class="text-sm mt-2"><strong>Abdominaux :</strong> Faiblesse fréquente</p>
+                  <ul class="text-sm list-disc list-inside ml-2">
+                    <li><strong>Signe de Beevor (Pathognomonique) :</strong> Lorsqu'on demande au patient couché de relever la tête (flexion du cou), le nombril remonte vers le haut (car les abdos inférieurs sont plus faibles que les supérieurs)</li>
+                  </ul>
+
+                  <p class="text-sm mt-2"><strong>Membres inférieurs :</strong></p>
+                  <ul class="text-sm list-disc list-inside ml-2">
+                    <li>Atteinte des releveurs du pied (steppage) possible au cours de l'évolution</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div>
+                <h4 class="font-semibold text-primary-600">🔹 3. ATTEINTES EXTRA-MUSCULAIRES</h4>
+                <p class="text-sm">Le pronostic vital est rarement engagé (pas d'atteinte cardiaque classique comme dans Steinert ou Duchenne), mais il faut surveiller :</p>
+                
+                <ul class="text-sm list-disc list-inside ml-2 mt-2">
+                  <li><strong>Audition :</strong> Surdité de perception (fréquente mais souvent infraclinique)</li>
+                  <li><strong>Vision :</strong> Vasculopathie rétinienne (type maladie de Coats) avec exsudats (rare mais grave, risque de décollement de rétine)</li>
+                  <li><strong>Respiratoire :</strong> Insuffisance respiratoire restrictive possible dans les formes sévères (faiblesse diaphragme + abdominaux)</li>
+                </ul>
+              </div>
+
+              <div>
+                <h4 class="font-semibold text-primary-600">🔹 4. DIAGNOSTIC</h4>
+                
+                <div class="overflow-x-auto mt-2">
+                  <table class="w-full text-sm border-collapse border border-slate-300">
+                    <thead class="bg-primary-100">
+                      <tr>
+                        <th class="border border-slate-300 p-2 text-left">Examen</th>
+                        <th class="border border-slate-300 p-2 text-left">Résultats</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td class="border border-slate-300 p-2 font-semibold">CPK</td>
+                        <td class="border border-slate-300 p-2">Normales ou modérément élevées (< 5 fois la normale)</td>
+                      </tr>
+                      <tr class="bg-slate-50">
+                        <td class="border border-slate-300 p-2 font-semibold">EMG</td>
+                        <td class="border border-slate-300 p-2">Tracé myogène. Peut être normal dans les muscles non atteints (car l'atteinte est "mitée")</td>
+                      </tr>
+                      <tr>
+                        <td class="border border-slate-300 p-2 font-semibold">Génétique (Confirmateur)</td>
+                        <td class="border border-slate-300 p-2">Mise en évidence de la contraction D4Z4 (nombre de répétitions < 10 unités) sur le chromosome 4</td>
+                      </tr>
+                      <tr class="bg-slate-50">
+                        <td class="border border-slate-300 p-2 font-semibold">Biopsie Musculaire</td>
+                        <td class="border border-slate-300 p-2">Rarement nécessaire aujourd'hui. Montre parfois des infiltrats inflammatoires (peut faire confondre à tort avec une myosite !)</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <div>
+                <h4 class="font-semibold text-primary-600">🔹 5. PRISE EN CHARGE</h4>
+                <p class="text-sm"><em>Pas de traitement curatif ciblant le gène DUX4 pour l'instant</em></p>
+                
+                <p class="text-sm font-bold mt-2">Rééducation (Kiné) :</p>
+                <ul class="text-sm list-disc list-inside ml-2">
+                  <li>Entretien articulaire, balnéothérapie</li>
+                  <li>⚠️ Attention à ne pas surmener les muscles atrophiques</li>
+                </ul>
+
+                <p class="text-sm font-bold mt-2">Chirurgie Orthopédique (Spécifique) :</p>
+                <ul class="text-sm list-disc list-inside ml-2">
+                  <li><strong>Arthrodèse Scapulo-Thoracique :</strong> On fixe l'omoplate à la cage thoracique. Cela permet au patient de récupérer de l'abduction du bras (parfois spectaculaire pour l'autonomie)</li>
+                </ul>
+
+                <p class="text-sm font-bold mt-2">Surveillance :</p>
+                <ul class="text-sm list-disc list-inside ml-2">
+                  <li>Audiogramme et Fond d'œil (systématiques au diagnostic)</li>
+                </ul>
+
+                <p class="text-sm font-bold mt-2">Douleur :</p>
+                <ul class="text-sm list-disc list-inside ml-2">
+                  <li>Les douleurs scapulaires sont fréquentes (déséquilibre mécanique), traitement antalgique nécessaire</li>
+                </ul>
+              </div>
+
+              <div class="bg-yellow-50 border-2 border-yellow-400 p-3 rounded">
+                <h4 class="font-semibold text-yellow-800">💡 LE MÉMO POUR L'EXAMEN</h4>
+                <p class="text-sm mt-2">Si vous avez un patient avec :</p>
+                <ul class="text-sm list-disc list-inside ml-2">
+                  <li>Une faiblesse des épaules et du visage</li>
+                  <li>Une atteinte asymétrique</li>
+                  <li>Un nombril qui remonte quand il lève la tête (Beevor)</li>
+                </ul>
+                <p class="text-sm mt-2 font-bold text-yellow-800">👉 C'est une FSHD (Landouzy-Déjerine) jusqu'à preuve du contraire.</p>
+              </div>
+            </div>`
+          },
           { code: "C09C04", name: "Myopathies congénitales" },
           { code: "C09C05", name: "Myopathies inflammatoires" },
           { code: "C09C09", name: "Autres myopathies" }
