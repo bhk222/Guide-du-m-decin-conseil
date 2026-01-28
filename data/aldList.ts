@@ -5506,7 +5506,203 @@ export const aldData: AldItem[] = [
               </div>
             </div>`
           },
-          { code: "C09C04", name: "Myopathies congénitales" },
+          { 
+            code: "C09C04", 
+            name: "Myopathies congénitales",
+            tooltip: `<div class="space-y-3">
+              <h3 class="font-bold text-lg text-primary-700">MYOPATHIES CONGÉNITALES — Guide Complet</h3>
+              
+              <div>
+                <h4 class="font-semibold text-primary-600">🔹 1. DÉFINITION</h4>
+                <p class="text-sm">Groupe hétérogène d'affections génétiques caractérisées par des <strong>anomalies structurelles spécifiques de la fibre musculaire</strong>, visibles à la biopsie.</p>
+                
+                <p class="text-sm mt-2"><strong>Différence clé avec les Dystrophies :</strong></p>
+                <ul class="text-sm list-disc list-inside ml-2">
+                  <li>Il n'y a pas (ou peu) de processus de nécrose/régénération</li>
+                  <li>Le muscle est "mal construit" mais ne se détruit pas activement</li>
+                </ul>
+
+                <p class="text-sm mt-2"><strong>Transmission :</strong> Variable (Autosomique Dominante, Récessive ou Liée à l'X)</p>
+              </div>
+
+              <div>
+                <h4 class="font-semibold text-primary-600">🔹 2. LE TABLEAU CLINIQUE (Le "Floppy Infant")</h4>
+                <p class="text-sm">Le tableau typique est celui du <strong>nouveau-né hypotonique</strong>.</p>
+                
+                <div class="bg-blue-50 p-3 rounded mt-2">
+                  <p class="text-sm font-bold text-blue-700">A. Période Néonatale</p>
+                  <ul class="text-sm list-disc list-inside ml-2">
+                    <li><strong>Hypotonie majeure :</strong> "Bébé mou" (poupée de chiffon)</li>
+                    <li><strong>Détresse respiratoire :</strong> Fréquente (faiblesse diaphragme/intercostaux)</li>
+                    <li><strong>Troubles de la succion/déglutition :</strong> Difficultés alimentaires</li>
+                    <li><strong>Arthrogrypose :</strong> Raideurs articulaires à la naissance (signe d'immobilité in utero)</li>
+                  </ul>
+                </div>
+
+                <div class="bg-green-50 p-3 rounded mt-2">
+                  <p class="text-sm font-bold text-green-700">B. Enfance / Adulte (Formes moins sévères)</p>
+                  <ul class="text-sm list-disc list-inside ml-2">
+                    <li>Retard des acquisitions motrices (marche tardive)</li>
+                    <li><strong>Faciès myopathique :</strong> Visage allongé, inexpressif, bouche ouverte, palais ogival (très creux)</li>
+                    <li><strong>Dysmorphie squelettique :</strong> Scoliose précoce, thorax en entonnoir, luxation de hanche</li>
+                    <li><strong>Faiblesse musculaire :</strong> Diffuse ou proximale, mais stable dans le temps</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div>
+                <h4 class="font-semibold text-primary-600">🔹 3. DIAGNOSTIC PARACLINIQUE</h4>
+                
+                <div class="overflow-x-auto mt-2">
+                  <table class="w-full text-sm border-collapse border border-slate-300">
+                    <thead class="bg-primary-100">
+                      <tr>
+                        <th class="border border-slate-300 p-2 text-left">Examen</th>
+                        <th class="border border-slate-300 p-2 text-left">Résultats Caractéristiques</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td class="border border-slate-300 p-2 font-semibold">CPK (Enzymes)</td>
+                        <td class="border border-slate-300 p-2"><strong>Normales ou très peu élevées</strong> (élément discriminant majeur vs Dystrophies)</td>
+                      </tr>
+                      <tr class="bg-slate-50">
+                        <td class="border border-slate-300 p-2 font-semibold">Biopsie Musculaire</td>
+                        <td class="border border-slate-300 p-2"><strong>L'examen clé.</strong> C'est l'aspect histologique qui donne le nom à la maladie (Cores, Bâtonnets, noyaux centraux...)</td>
+                      </tr>
+                      <tr>
+                        <td class="border border-slate-300 p-2 font-semibold">Génétique</td>
+                        <td class="border border-slate-300 p-2">Panels NGS (Next Generation Sequencing) pour identifier le gène (RYR1, NEB, MTM1, etc.)</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <div>
+                <h4 class="font-semibold text-primary-600">🔹 4. LES 3 FORMES PRINCIPALES</h4>
+                <p class="text-sm"><em>C'est la classification histologique (ce qu'on voit au microscope) qui prime.</em></p>
+                
+                <div class="bg-purple-50 p-3 rounded mt-2">
+                  <p class="text-sm font-bold text-purple-700">A. Myopathie "Central Core" (à axes centraux)</p>
+                  
+                  <p class="text-sm mt-2"><strong>Histologie :</strong> Zones centrales de la fibre dépourvues d'activité oxydative (pas de mitochondries au centre)</p>
+                  
+                  <p class="text-sm mt-2"><strong>Gène :</strong> RYR1 (Récepteur à la Ryanodine)</p>
+                  
+                  <p class="text-sm mt-2"><strong>Clinique :</strong> Faiblesse modérée, luxation de hanches fréquentes</p>
+                  
+                  <div class="bg-red-100 border-2 border-red-400 p-2 rounded mt-2">
+                    <p class="text-sm font-bold text-red-700">⚠️ ALERTE VITALE : Hyperthermie Maligne</p>
+                    <ul class="text-sm list-disc list-inside ml-2">
+                      <li>Ces patients sont à <strong>risque extrême d'hyperthermie maligne</strong> lors d'une anesthésie générale (gaz halogénés / suxaméthonium)</li>
+                      <li><strong>Règle :</strong> Tout patient "Central Core" (et sa famille) doit être considéré à risque anesthésique majeur</li>
+                    </ul>
+                  </div>
+                </div>
+
+                <div class="bg-pink-50 p-3 rounded mt-2">
+                  <p class="text-sm font-bold text-pink-700">B. Myopathie à Bâtonnets (Nemaline)</p>
+                  
+                  <p class="text-sm mt-2"><strong>Histologie :</strong> Présence de bâtonnets (agrégats de structure Z) colorés en rouge au trichrome de Gomori</p>
+                  
+                  <p class="text-sm mt-2"><strong>Gènes :</strong> NEB (Nébuline), ACTA1 (Actine)</p>
+                  
+                  <p class="text-sm mt-2"><strong>Clinique :</strong></p>
+                  <ul class="text-sm list-disc list-inside ml-2">
+                    <li>Atteinte faciale et bulbaire sévère (troubles déglutition/phonation)</li>
+                    <li>Atteinte respiratoire souvent disproportionnée par rapport à la faiblesse des membres</li>
+                  </ul>
+                </div>
+
+                <div class="bg-indigo-50 p-3 rounded mt-2">
+                  <p class="text-sm font-bold text-indigo-700">C. Myopathie Centronucléaire (inc. Myotubulaire)</p>
+                  
+                  <p class="text-sm mt-2"><strong>Histologie :</strong> Les noyaux sont au centre de la fibre (comme au stade fœtal) au lieu d'être en périphérie</p>
+                  
+                  <p class="text-sm mt-2"><strong>Forme liée à l'X (Myotubulaire - MTM1) :</strong></p>
+                  <ul class="text-sm list-disc list-inside ml-2">
+                    <li>Touche les garçons</li>
+                    <li><strong>Très sévère :</strong> Détresse respiratoire majeure à la naissance, décès fréquent sans assistance ventilatoire</li>
+                  </ul>
+
+                  <p class="text-sm mt-2"><strong>Formes autosomiques (DNM2) :</strong></p>
+                  <ul class="text-sm list-disc list-inside ml-2">
+                    <li>Plus modérées, début plus tardif (ptosis, ophtalmoplégie)</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div>
+                <h4 class="font-semibold text-primary-600">🔹 5. PRISE EN CHARGE & PRONOSTIC</h4>
+                <p class="text-sm"><em>Il n'y a pas de traitement curatif. La prise en charge est supportive.</em></p>
+                
+                <p class="text-sm font-bold mt-2">Respiratoire (Priorité) :</p>
+                <ul class="text-sm list-disc list-inside ml-2">
+                  <li>Surveillance des apnées du sommeil et de l'hypoventilation nocturne</li>
+                  <li>VNI (Ventilation Non Invasive) et techniques de désencombrement (Cough Assist)</li>
+                </ul>
+
+                <p class="text-sm font-bold mt-2">Nutritionnelle :</p>
+                <ul class="text-sm list-disc list-inside ml-2">
+                  <li>Prise en charge des troubles de la déglutition (textures, gastrostomie si besoin pour protéger les voies aériennes)</li>
+                </ul>
+
+                <p class="text-sm font-bold mt-2">Orthopédique :</p>
+                <ul class="text-sm list-disc list-inside ml-2">
+                  <li>Corset ou chirurgie pour la scoliose (très fréquente)</li>
+                </ul>
+
+                <p class="text-sm font-bold mt-2">Carte d'Anesthésie :</p>
+                <ul class="text-sm list-disc list-inside ml-2">
+                  <li><strong>Indispensable</strong> pour les porteurs de mutation RYR1 (Central Core)</li>
+                </ul>
+              </div>
+
+              <div class="bg-yellow-50 border-2 border-yellow-400 p-3 rounded">
+                <h4 class="font-semibold text-yellow-800">💡 LE MÉMO DIFFÉRENTIEL "Bébé Mou"</h4>
+                
+                <div class="overflow-x-auto mt-2">
+                  <table class="w-full text-sm border-collapse border border-slate-300">
+                    <thead class="bg-yellow-100">
+                      <tr>
+                        <th class="border border-slate-300 p-2 text-left">Critère</th>
+                        <th class="border border-slate-300 p-2 text-left">Atrophie Spinale (SMA)</th>
+                        <th class="border border-slate-300 p-2 text-left">Myopathie Congénitale</th>
+                        <th class="border border-slate-300 p-2 text-left">Dystrophie (Duchenne)</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td class="border border-slate-300 p-2 font-semibold">Réflexes (ROT)</td>
+                        <td class="border border-slate-300 p-2">Absents (Aréflexie)</td>
+                        <td class="border border-slate-300 p-2">Diminués ou présents</td>
+                        <td class="border border-slate-300 p-2">Présents au début</td>
+                      </tr>
+                      <tr class="bg-slate-50">
+                        <td class="border border-slate-300 p-2 font-semibold">Fasciculations</td>
+                        <td class="border border-slate-300 p-2">Oui (langue)</td>
+                        <td class="border border-slate-300 p-2">Non</td>
+                        <td class="border border-slate-300 p-2">Non</td>
+                      </tr>
+                      <tr>
+                        <td class="border border-slate-300 p-2 font-semibold">CPK</td>
+                        <td class="border border-slate-300 p-2">Normales</td>
+                        <td class="border border-slate-300 p-2"><strong>Normales</strong></td>
+                        <td class="border border-slate-300 p-2">Très élevées</td>
+                      </tr>
+                      <tr class="bg-slate-50">
+                        <td class="border border-slate-300 p-2 font-semibold">Évolution</td>
+                        <td class="border border-slate-300 p-2">Aggravation (sans ttt)</td>
+                        <td class="border border-slate-300 p-2"><strong>Stable</strong></td>
+                        <td class="border border-slate-300 p-2">Aggravation</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>`
+          },
           { code: "C09C05", name: "Myopathies inflammatoires" },
           { code: "C09C09", name: "Autres myopathies" }
         ]
