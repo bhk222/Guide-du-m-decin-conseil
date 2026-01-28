@@ -3089,7 +3089,230 @@ export const aldData: AldItem[] = [
   {
     code: "C06",
     name: "L'hypertension artérielle maligne",
-    children: [{ code: "C06A", name: "HTA maligne", children: [{ code: "C06A01", name: "HTA maligne" }] }],
+    children: [{ 
+      code: "C06A", 
+      name: "HTA maligne", 
+      children: [{ 
+        code: "C06A01", 
+        name: "HTA maligne",
+        tooltip: `<div class="space-y-3">
+          <h3 class="font-bold text-lg text-primary-700">HYPERTENSION ARTÉRIELLE MALIGNE — ALD C06</h3>
+          
+          <div>
+            <h4 class="font-semibold text-primary-600">🔹 RAPPEL : Mesure de la pression artérielle</h4>
+            <p class="text-sm">La pression artérielle doit être mesurée en <strong>position assise ou allongée</strong>, après <strong>5 à 10 minutes de repos</strong>. Les valeurs doivent être retrouvées élevées à <strong>trois occasions différentes</strong> pour qu'on puisse parler d'hypertension artérielle (HTA).</p>
+            <p class="text-sm mt-2">Le médecin mesure deux nombres :</p>
+            <ul class="text-sm list-disc list-inside ml-2">
+              <li><strong>Pression artérielle systolique (PAS)</strong> : reflète la pression lors de la contraction du ventricule gauche (systole)</li>
+              <li><strong>Pression artérielle diastolique (PAD)</strong> : reflète la pression lors de la relaxation du ventricule gauche (diastole)</li>
+            </ul>
+            <p class="text-sm mt-2"><strong>Une tension est considérée comme normale si :</strong></p>
+            <ul class="text-sm list-disc list-inside ml-2">
+              <li>PAS < 140 mmHg</li>
+              <li>PAD < 90 mmHg</li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 class="font-semibold text-primary-600">🔹 Chiffres limites des différents niveaux d'hypertension</h4>
+            <div class="overflow-x-auto">
+              <table class="w-full text-sm border-collapse border border-slate-300">
+                <thead class="bg-primary-100">
+                  <tr>
+                    <th class="border border-slate-300 p-2 text-left">Classification</th>
+                    <th class="border border-slate-300 p-2 text-left">Pression systolique</th>
+                    <th class="border border-slate-300 p-2 text-left">Pression diastolique</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="border border-slate-300 p-2"><strong>HTA sévère</strong></td>
+                    <td class="border border-slate-300 p-2">> 180 mm Hg</td>
+                    <td class="border border-slate-300 p-2">> 110 mm Hg</td>
+                  </tr>
+                  <tr class="bg-slate-50">
+                    <td class="border border-slate-300 p-2"><strong>HTA stade 2</strong></td>
+                    <td class="border border-slate-300 p-2">> 160 mm Hg</td>
+                    <td class="border border-slate-300 p-2">> 100 mm Hg</td>
+                  </tr>
+                  <tr>
+                    <td class="border border-slate-300 p-2"><strong>HTA stade 1</strong></td>
+                    <td class="border border-slate-300 p-2">> 140 et < 159 mm Hg</td>
+                    <td class="border border-slate-300 p-2">> 90 et < 99 mm Hg</td>
+                  </tr>
+                  <tr class="bg-slate-50">
+                    <td class="border border-slate-300 p-2"><strong>Pré-HTA</strong></td>
+                    <td class="border border-slate-300 p-2">> 120 et < 139 mm Hg</td>
+                    <td class="border border-slate-300 p-2">> 80 et < 89 mm Hg</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div>
+            <h4 class="font-semibold text-primary-600">🔹 Types d'hypertension</h4>
+            <p class="text-sm"><strong>Dans 90% des cas</strong> : l'hypertension artérielle est dite <strong>essentielle</strong> – aucune cause connue ne peut être retrouvée.</p>
+            <p class="text-sm mt-2"><strong>Dans 10% des cas</strong> : l'hypertension artérielle est <strong>secondaire</strong> – plusieurs causes peuvent être à l'origine, certaines étant curables de façon définitive.</p>
+          </div>
+
+          <div>
+            <h4 class="font-semibold text-primary-600">🔹 CAUSES de l'HTA secondaire</h4>
+            
+            <p class="text-sm font-semibold mt-2">Causes rénales :</p>
+            <ul class="text-sm list-disc list-inside ml-2">
+              <li>Insuffisance rénale (polykystose rénale, glomérulonéphrite, pyélonéphrite)</li>
+              <li>Affection rénale unilatérale non vasculaire (pyélonéphrite unilatérale, tuberculose, hyperplasie congénitale)</li>
+              <li>Sténose artère rénale (athérome ou fibrose) → hypoperfusion du parenchyme rénal → activation système rénine-angiotensine-aldostérone → rétention hydrosodée + vasoconstriction</li>
+            </ul>
+
+            <p class="text-sm font-semibold mt-2">Causes surrénaliennes :</p>
+            <ul class="text-sm list-disc list-inside ml-2">
+              <li>Phéochromocytome</li>
+              <li>Syndrome de Cushing</li>
+              <li>Syndrome de Conn</li>
+              <li>Intoxication par la glycyrrhizine</li>
+            </ul>
+
+            <p class="text-sm font-semibold mt-2">Causes vasculaires :</p>
+            <ul class="text-sm list-disc list-inside ml-2">
+              <li>Coarctation de l'aorte</li>
+            </ul>
+
+            <p class="text-sm font-semibold mt-2">Causes liées à la grossesse</p>
+
+            <p class="text-sm font-semibold mt-2">Autres causes :</p>
+            <ul class="text-sm list-disc list-inside ml-2">
+              <li><strong>Endocriniennes :</strong> hyperthyroïdie, hypothyroïdie, acromégalie, hyperparathyroïdie</li>
+              <li><strong>Médicamenteuses :</strong> corticothérapie et hormones</li>
+              <li><strong>Neurologiques :</strong> tumeur cérébrale, accident vasculaire cérébral</li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 class="font-semibold text-primary-600">🔹 Facteurs favorisants</h4>
+            <ul class="text-sm list-disc list-inside ml-2">
+              <li>L'âge</li>
+              <li>Le sexe : niveau tensionnel des hommes > femmes jusqu'à 50 ans, puis inversion</li>
+              <li>L'hérédité</li>
+              <li>L'alimentation (excès de sel)</li>
+              <li>Excès de poids</li>
+              <li>Le diabète</li>
+              <li>Le stress</li>
+              <li>L'effort physique et la sédentarité</li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 class="font-semibold text-primary-600">🔹 MANIFESTATIONS cliniques</h4>
+            <p class="text-sm">Les principaux symptômes pouvant être rencontrés lors d'une hypertension (bien que non spécifiques) :</p>
+            <ul class="text-sm list-disc list-inside ml-2">
+              <li>Céphalées</li>
+              <li>Acouphènes</li>
+              <li>Vertiges</li>
+              <li>Palpitations</li>
+              <li>Asthénie</li>
+              <li>Dyspnée</li>
+              <li>Épistaxis</li>
+              <li>Hématurie</li>
+            </ul>
+          </div>
+
+          <div class="bg-red-50 p-3 rounded">
+            <h4 class="font-semibold text-red-700">⚠️ HYPERTENSION ARTÉRIELLE MALIGNE (Urgence médicale)</h4>
+            <p class="text-sm mt-2"><strong>Définition :</strong></p>
+            <p class="text-sm">L'HTA accélérée ou maligne est définie par la combinaison de :</p>
+            <ul class="text-sm list-disc list-inside ml-2">
+              <li><strong>Pression artérielle très élevée</strong> : habituellement PAD ≥ 130 mmHg</li>
+              <li><strong>Atteinte du fond d'œil</strong> : rétinopathie hypertensive stade III (hémorragie et exsudat) ou stade IV (œdème papillaire)</li>
+            </ul>
+
+            <p class="text-sm mt-2"><strong>En pratique :</strong></p>
+            <p class="text-sm">Si le fond d'œil permet de porter le diagnostic d'HTA maligne, c'est la recherche d'une <strong>atteinte rénale</strong> de néphroangiosclérose maligne éventuellement accompagnée d'une <strong>anémie hémolytique</strong> ou d'une <strong>encéphalopathie hypertensive</strong> qui constitue l'action diagnostique essentielle.</p>
+
+            <p class="text-sm mt-2"><strong>Tableau clinique :</strong></p>
+            <p class="text-sm">Le trait commun chez ces patients est l'<strong>altération récente et rapide de l'état général</strong> avec :</p>
+            <ul class="text-sm list-disc list-inside ml-2">
+              <li>Asthénie intense</li>
+              <li>Amaigrissement (déshydratation non compensée)</li>
+              <li>Soif intense</li>
+            </ul>
+
+            <p class="text-sm mt-2"><strong>Encéphalopathie hypertensive :</strong></p>
+            <p class="text-sm">Tableau clinique associant :</p>
+            <ul class="text-sm list-disc list-inside ml-2">
+              <li>Élévation de la pression artérielle</li>
+              <li>Maux de tête intenses</li>
+              <li>Confusion</li>
+              <li>Vomissements</li>
+              <li>Fond d'œil : rétinopathie hypertensive stade IV</li>
+            </ul>
+            <p class="text-sm"><strong>⚠️ En l'absence de traitement :</strong> convulsions et coma peuvent survenir.</p>
+          </div>
+
+          <div>
+            <h4 class="font-semibold text-primary-600">🔹 EXAMEN CLINIQUE</h4>
+            
+            <p class="text-sm font-semibold">Examen cardiovasculaire :</p>
+            <ul class="text-sm list-disc list-inside ml-2">
+              <li>Recherche de signes d'insuffisance ventriculaire gauche</li>
+              <li>Arguments en faveur d'une coarctation aortique, dissection aortique (palpation de tous les pouls)</li>
+              <li>Arguments en faveur d'une sténose de l'artère rénale (auscultation des fosses lombaires)</li>
+            </ul>
+
+            <p class="text-sm font-semibold mt-2">Examen neurologique :</p>
+            <ul class="text-sm list-disc list-inside ml-2">
+              <li>Recherche de signes de localisation en faveur d'un AVC, hémorragie méningée</li>
+              <li>La notion de céphalée violente, troubles digestifs (nausées, vomissements), amaurose, troubles de la conscience ou crise convulsive justifient la réalisation d'un <strong>fond d'œil en urgence</strong></li>
+              <li>Recherche : hémorragies rétiniennes, exsudats, œdème papillaire (rétinopathie hypertensive stade III ou IV)</li>
+            </ul>
+
+            <p class="text-sm font-semibold mt-2">État d'hydratation :</p>
+            <ul class="text-sm list-disc list-inside ml-2">
+              <li>Soif</li>
+              <li>Pli cutané</li>
+              <li>Œdèmes</li>
+            </ul>
+
+            <p class="text-sm font-semibold mt-2">Examen urinaire :</p>
+            <ul class="text-sm list-disc list-inside ml-2">
+              <li>Recherche protéinurie, hématurie microscopique (bandelette urinaire)</li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 class="font-semibold text-primary-600">🔹 EXAMENS COMPLÉMENTAIRES (en urgence)</h4>
+            
+            <p class="text-sm font-semibold">Biologie :</p>
+            <ul class="text-sm list-disc list-inside ml-2">
+              <li><strong>Ionogramme sanguin :</strong> évaluation de la kaliémie</li>
+              <li><strong>Hématocrite et protides totaux :</strong> état d'hydratation extra-cellulaire</li>
+              <li><strong>Créatinine sanguine :</strong> appréciation de la fonction rénale</li>
+              <li><strong>Numération plaquettaire :</strong> recherche association thrombopénie, schizocytose et réticulocytose élevées (anémie micro-angiopathique dans contexte d'HTA maligne)</li>
+            </ul>
+
+            <p class="text-sm font-semibold mt-2">Radiographie de thorax :</p>
+            <ul class="text-sm list-disc list-inside ml-2">
+              <li>Recherche de cardiomégalie et d'œdème pulmonaire</li>
+            </ul>
+
+            <p class="text-sm font-semibold mt-2">Examen des urines :</p>
+            <ul class="text-sm list-disc list-inside ml-2">
+              <li>Bandelette urinaire</li>
+              <li>Examen cyto-bactériologique urinaire (ECBU)</li>
+              <li>Protéinurie de 24 heures</li>
+            </ul>
+
+            <p class="text-sm font-semibold mt-2">Électrocardiogramme (ECG) :</p>
+            <ul class="text-sm list-disc list-inside ml-2">
+              <li>Recherche de signes ischémiques</li>
+              <li>Trouble du rythme ou de la conduction</li>
+              <li>Hypertrophie ventriculaire gauche</li>
+            </ul>
+          </div>
+        </div>`
+      }] 
+    }],
   },
   {
     code: "C07",
