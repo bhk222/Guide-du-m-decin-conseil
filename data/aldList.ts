@@ -4813,6 +4813,126 @@ export const aldData: AldItem[] = [
       {
         code: "C09C",
         name: "Myopathies",
+        tooltip: `<div class="space-y-3">
+          <h3 class="font-bold text-lg text-primary-700">MYOPATHIES — Guide Diagnostique</h3>
+          
+          <div>
+            <h4 class="font-semibold text-primary-600">🔹 1. LE CONCEPT</h4>
+            <p class="text-sm"><strong>Maladie primitive de la fibre musculaire</strong></p>
+            <p class="text-sm mt-2"><strong>Mots-clés :</strong> Déficit moteur pur + Proximal + Symétrique</p>
+            <p class="text-sm mt-2"><strong>Ce qu'il n'y a PAS :</strong></p>
+            <ul class="text-sm list-disc list-inside ml-2">
+              <li>Pas de troubles sensitifs</li>
+              <li>Pas de troubles sphinctériens</li>
+              <li>Réflexes conservés (sauf stade avancé)</li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 class="font-semibold text-primary-600">🔹 2. LA CLINIQUE (Syndrome Myogène)</h4>
+            
+            <p class="text-sm font-semibold">Déficit :</p>
+            <ul class="text-sm list-disc list-inside ml-2">
+              <li><strong>Ceintures</strong> : Scapulaire (se peigner) / Pelvienne (monter escaliers)</li>
+            </ul>
+
+            <p class="text-sm font-semibold mt-2">Marche :</p>
+            <ul class="text-sm list-disc list-inside ml-2">
+              <li><strong>Dandinante</strong> ("en canard")</li>
+            </ul>
+
+            <p class="text-sm font-semibold mt-2">Signe clé :</p>
+            <ul class="text-sm list-disc list-inside ml-2">
+              <li><strong>Signe du Tabouret (Gowers)</strong> ➔ Se relève en s'aidant des mains sur les cuisses</li>
+            </ul>
+
+            <p class="text-sm font-semibold mt-2">Volume musculaire :</p>
+            <ul class="text-sm list-disc list-inside ml-2">
+              <li><strong>Amyotrophie</strong> (fonte musculaire)</li>
+              <li><strong>Pseudo-hypertrophie</strong> (mollets durs et gros, typique de Duchenne)</li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 class="font-semibold text-primary-600">🔹 3. LES 3 EXAMENS DU DIAGNOSTIC</h4>
+            
+            <p class="text-sm font-semibold">CPK (Enzymes) :</p>
+            <ul class="text-sm list-disc list-inside ml-2">
+              <li><strong>Augmentées</strong> (signe la cytolyse musculaire)</li>
+            </ul>
+
+            <p class="text-sm font-semibold mt-2">EMG (Électromyogramme) : Tracé Myogène</p>
+            <ul class="text-sm list-disc list-inside ml-2">
+              <li><strong>Riche</strong> (trop de potentiels pour un effort faible)</li>
+              <li><strong>Polyphasique</strong> et de faible amplitude</li>
+              <li><strong>Vitesse de conduction :</strong> Normale (le nerf va bien)</li>
+            </ul>
+
+            <p class="text-sm font-semibold mt-2">Biopsie Musculaire :</p>
+            <ul class="text-sm list-disc list-inside ml-2">
+              <li>Le <strong>"Gold Standard"</strong> pour confirmer le type</li>
+              <li>Recherche : Nécrose, régénération, fibrose</li>
+            </ul>
+          </div>
+
+          <div>
+            <h4 class="font-semibold text-primary-600">🔹 4. CLASSIFICATION SIMPLIFIÉE (Étiologies)</h4>
+            
+            <div class="overflow-x-auto">
+              <table class="w-full text-sm border-collapse border border-slate-300">
+                <thead class="bg-primary-100">
+                  <tr>
+                    <th class="border border-slate-300 p-2 text-left">Type</th>
+                    <th class="border border-slate-300 p-2 text-left">Causes Principales</th>
+                    <th class="border border-slate-300 p-2 text-left">Particularités</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="border border-slate-300 p-2 font-semibold" rowspan="2"><strong>Héréditaires</strong></td>
+                    <td class="border border-slate-300 p-2">Dystrophies (Duchenne, Becker)</td>
+                    <td class="border border-slate-300 p-2"><strong>Duchenne :</strong> Garçon, début < 5 ans, très sévère<br><strong>Becker :</strong> plus tardif</td>
+                  </tr>
+                  <tr class="bg-slate-50">
+                    <td class="border border-slate-300 p-2">Steinert</td>
+                    <td class="border border-slate-300 p-2">La + fréquente de l'adulte. Associe myotonie (lenteur à la décontraction) + calvitie + cataracte</td>
+                  </tr>
+                  <tr>
+                    <td class="border border-slate-300 p-2 font-semibold" rowspan="3"><strong>Acquises</strong></td>
+                    <td class="border border-slate-300 p-2">Toxiques</td>
+                    <td class="border border-slate-300 p-2">Statines, Corticoïdes, Alcool</td>
+                  </tr>
+                  <tr class="bg-slate-50">
+                    <td class="border border-slate-300 p-2">Inflammatoires</td>
+                    <td class="border border-slate-300 p-2">Polymyosite, Dermatomyosite (signes cutanés associés)</td>
+                  </tr>
+                  <tr>
+                    <td class="border border-slate-300 p-2">Endocriniennes</td>
+                    <td class="border border-slate-300 p-2">Hypothyroïdie, Cushing</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div>
+            <h4 class="font-semibold text-primary-600">🔹 5. DIAGNOSTIC DIFFÉRENTIEL (Ne pas confondre !)</h4>
+            
+            <p class="text-sm font-semibold">Vs Neuropathie :</p>
+            <ul class="text-sm list-disc list-inside ml-2">
+              <li>La neuropathie a un déficit <strong>distal</strong></li>
+              <li>Des troubles <strong>sensitifs</strong></li>
+              <li>Des réflexes <strong>abolis</strong></li>
+            </ul>
+
+            <p class="text-sm font-semibold mt-2">Vs Myasthénie :</p>
+            <ul class="text-sm list-disc list-inside ml-2">
+              <li>La myasthénie est <strong>fluctuante</strong> (fatigabilité)</li>
+              <li>Touche souvent les <strong>yeux</strong> (ptosis)</li>
+              <li>CPK <strong>normales</strong></li>
+            </ul>
+          </div>
+        </div>`,
         children: [
           { code: "C09C01", name: "Myopathie de Duchenne et Becker" },
           { code: "C09C02", name: "Dystrophie myotonique de Steinert" },
