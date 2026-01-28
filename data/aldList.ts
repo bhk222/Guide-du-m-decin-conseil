@@ -6096,7 +6096,150 @@ export const aldData: AldItem[] = [
               </div>
             </div>`
           },
-          { code: "C09D02", name: "Syndromes myasthéniques congénitaux" }
+          { 
+            code: "C09D02", 
+            name: "Syndromes myasthéniques congénitaux",
+            tooltip: `<div class="space-y-3">
+              <h3 class="font-bold text-lg text-primary-700">SYNDROMES MYASTHÉNIQUES CONGÉNITAUX — Guide Complet</h3>
+              
+              <div>
+                <h4 class="font-semibold text-primary-600">🔹 1. DÉFINITION</h4>
+                <p class="text-sm">Groupe hétérogène de maladies génétiques (héréditaires) causées par une <strong>anomalie structurelle ou fonctionnelle d'une protéine de la Jonction Neuromusculaire</strong>.</p>
+                
+                <div class="bg-orange-50 border-2 border-orange-400 p-3 rounded mt-2">
+                  <p class="text-sm font-bold text-orange-700">Différence Capitale avec la Myasthénie Auto-immune :</p>
+                  <ul class="text-sm list-disc list-inside ml-2">
+                    <li>Ce n'est <strong>PAS auto-immun</strong> (pas d'anticorps)</li>
+                    <li>C'est <strong>génétique</strong> (mutations)</li>
+                    <li>Les immunothérapies (Corticoïdes, IgIV, Plasmaphérèse) sont <strong>INEFFICACES</strong></li>
+                  </ul>
+                </div>
+              </div>
+
+              <div>
+                <h4 class="font-semibold text-primary-600">🔹 2. PHYSIOPATHOLOGIE</h4>
+                <p class="text-sm">La mutation peut toucher l'un des trois niveaux de la synapse :</p>
+                
+                <ul class="text-sm list-disc list-inside ml-2 mt-2">
+                  <li><strong>Pré-synaptique :</strong> Synthèse ou libération de l'acétylcholine (ex: gène CHAT)</li>
+                  <li><strong>Synaptique (Fente) :</strong> Déficit en enzyme Acétylcholinestérase (ex: gène COLQ)</li>
+                  <li><strong>Post-synaptique (75% des cas) :</strong> Anomalie du récepteur à l'acétylcholine (ex: gène CHRNE) ou des protéines d'ancrage (DOK7, RAPSN)</li>
+                </ul>
+              </div>
+
+              <div>
+                <h4 class="font-semibold text-primary-600">🔹 3. TABLEAU CLINIQUE</h4>
+                <p class="text-sm">Le début est généralement néonatal ou dans la petite enfance.</p>
+                
+                <div class="bg-blue-50 p-3 rounded mt-2">
+                  <p class="text-sm font-bold text-blue-700">A. Triade du Nouveau-né</p>
+                  <ul class="text-sm list-disc list-inside ml-2">
+                    <li>Hypotonie ("bébé mou")</li>
+                    <li>Détresse respiratoire (pauses respiratoires, apnées)</li>
+                    <li>Troubles de la succion / alimentation</li>
+                  </ul>
+                </div>
+
+                <div class="bg-green-50 p-3 rounded mt-2">
+                  <p class="text-sm font-bold text-green-700">B. Signes chez l'Enfant/Adulte</p>
+                  <ul class="text-sm list-disc list-inside ml-2">
+                    <li><strong>Ptosis et Ophtalmoplégie</strong> (paralysie des mouvements oculaires) souvent au premier plan</li>
+                    <li>Fatigabilité à l'effort (comme la myasthénie classique)</li>
+                    <li>Faiblesse musculaire proximale ou faciale</li>
+                    <li><strong>Signe d'alerte (forme CHAT) :</strong> Épisodes d'apnées brutales déclenchées par la fièvre ou l'excitation</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div>
+                <h4 class="font-semibold text-primary-600">🔹 4. DIAGNOSTIC PARACLINIQUE</h4>
+                
+                <div class="overflow-x-auto mt-2">
+                  <table class="w-full text-sm border-collapse border border-slate-300">
+                    <thead class="bg-primary-100">
+                      <tr>
+                        <th class="border border-slate-300 p-2 text-left">Examen</th>
+                        <th class="border border-slate-300 p-2 text-left">Résultats Caractéristiques</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td class="border border-slate-300 p-2 font-semibold">Immunologie</td>
+                        <td class="border border-slate-300 p-2"><strong>NÉGATIVE.</strong> Absence d'anticorps anti-RACh et anti-MuSK. (Critère d'exclusion majeur)</td>
+                      </tr>
+                      <tr class="bg-slate-50">
+                        <td class="border border-slate-300 p-2 font-semibold">EMG</td>
+                        <td class="border border-slate-300 p-2">Décrément à la stimulation répétitive (épuisement de la réponse), parfois dédoublement du potentiel (dans les déficits en COLQ)</td>
+                      </tr>
+                      <tr>
+                        <td class="border border-slate-300 p-2 font-semibold">Test Thérapeutique</td>
+                        <td class="border border-slate-300 p-2">Parfois réalisé avec la Pyridostigmine (Mestinon). <strong>Attention :</strong> peut aggraver certaines formes !</td>
+                      </tr>
+                      <tr class="bg-slate-50">
+                        <td class="border border-slate-300 p-2 font-semibold">Génétique</td>
+                        <td class="border border-slate-300 p-2"><strong>Diagnostic de certitude.</strong> Panel de gènes (NGS). Indispensable car le gène dicte le traitement</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <div>
+                <h4 class="font-semibold text-primary-600">🔹 5. LES PRINCIPALES FORMES (Corrélation Gène-Traitement)</h4>
+                <p class="text-sm"><em>C'est ici que la médecine de précision est cruciale. Se tromper de traitement peut être dangereux.</em></p>
+                
+                <div class="bg-purple-50 p-3 rounded mt-2">
+                  <p class="text-sm font-bold text-purple-700">A. Déficit en Récepteur à l'Acétylcholine (CHRNE) - Le plus fréquent</p>
+                  <p class="text-sm mt-2"><strong>Clinique :</strong> Ptosis, ophtalmoplégie, forme assez "classique"</p>
+                  <p class="text-sm mt-2"><strong>Traitement :</strong> Répond bien aux Anticholinestérasiques (Mestinon)</p>
+                </div>
+
+                <div class="bg-pink-50 p-3 rounded mt-2">
+                  <p class="text-sm font-bold text-pink-700">B. Déficit en DOK7 (Ancrage synaptique)</p>
+                  <p class="text-sm mt-2"><strong>Clinique :</strong> "Myasthénie des ceintures". Ptosis mais pas d'ophtalmoplégie. Aggravation progressive</p>
+                  <p class="text-sm mt-2"><strong>Traitement :</strong></p>
+                  <ul class="text-sm list-disc list-inside ml-2">
+                    <li>Mestinon souvent inefficace ou aggrave</li>
+                    <li><strong>Traitement de choix :</strong> Éphédrine ou Salbutamol (Ventoline per os)</li>
+                  </ul>
+                </div>
+
+                <div class="bg-red-50 border-2 border-red-500 p-3 rounded mt-2">
+                  <p class="text-sm font-bold text-red-700">C. Déficit en COLQ (Manque d'Acétylcholinestérase)</p>
+                  <p class="text-sm mt-2"><strong>Mécanisme :</strong> L'enzyme qui détruit l'acétylcholine manque. Il y a donc trop d'acétylcholine qui stagne, ce qui finit par bloquer le récepteur (bloc par dépolarisation)</p>
+                  
+                  <div class="bg-red-200 border border-red-600 p-2 rounded mt-2">
+                    <p class="text-sm font-bold text-red-800">⚠️ DANGER :</p>
+                    <p class="text-sm">Si vous donnez du Mestinon (qui bloque l'enzyme), vous rajoutez de l'huile sur le feu. Risque de crise cholinergique grave.</p>
+                  </div>
+                  
+                  <p class="text-sm mt-2"><strong>Traitement :</strong> Éphédrine ou Salbutamol</p>
+                </div>
+              </div>
+
+              <div>
+                <h4 class="font-semibold text-primary-600">🔹 6. DIAGNOSTIC DIFFÉRENTIEL</h4>
+                
+                <ul class="text-sm list-disc list-inside ml-2">
+                  <li><strong>Myasthénie Auto-immune Néonatale Transitoire :</strong> Mère myasthénique qui transmet ses anticorps au fœtus. Guérit en quelques semaines (le temps d'éliminer les anticorps maternels)</li>
+                  <li><strong>Myopathies Congénitales :</strong> Hypotonie constante, pas de fluctuation journalière, CPK parfois un peu modifiées, biopsie anormale</li>
+                  <li><strong>Botulisme infantile :</strong> Constipation + hypotonie aiguë</li>
+                </ul>
+              </div>
+
+              <div class="bg-yellow-50 border-2 border-yellow-400 p-3 rounded">
+                <h4 class="font-semibold text-yellow-800">💡 LE MÉMO DU PRATICIEN</h4>
+                <p class="text-sm mt-2">Un enfant avec :</p>
+                <ul class="text-sm list-disc list-inside ml-2">
+                  <li>Un ptosis, une ophtalmoplégie et une fatigabilité</li>
+                  <li>Des anticorps (anti-RACh) <strong>négatifs</strong></li>
+                  <li>Une réponse variable (ou mauvaise) au Mestinon</li>
+                </ul>
+                <p class="text-sm mt-2 font-bold text-yellow-800">👉 Penser au Syndrome Myasthénique Congénital.</p>
+                <p class="text-sm mt-2 font-bold text-yellow-800">👉 Ne pas insister avec le Mestinon si aggravation (penser à COLQ ou DOK7).</p>
+              </div>
+            </div>`
+          }
         ]
       }
     ],
