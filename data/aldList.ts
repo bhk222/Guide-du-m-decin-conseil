@@ -4934,7 +4934,209 @@ export const aldData: AldItem[] = [
           </div>
         </div>`,
         children: [
-          { code: "C09C01", name: "Myopathie de Duchenne et Becker" },
+          { 
+            code: "C09C01", 
+            name: "Myopathie de Duchenne et Becker",
+            tooltip: `<div class="space-y-3">
+              <h3 class="font-bold text-lg text-primary-700">MYOPATHIE DE DUCHENNE ET BECKER — Guide Complet</h3>
+              
+              <div>
+                <h4 class="font-semibold text-primary-600">🔹 1. PHYSIOPATHOLOGIE</h4>
+                <p class="text-sm">Ces deux maladies sont <strong>alléliques</strong> : elles touchent le même gène mais avec des conséquences différentes.</p>
+                
+                <p class="text-sm mt-2"><strong>Gène :</strong> DMD (Locus Xp21 sur le chromosome X)</p>
+                <ul class="text-sm list-disc list-inside ml-2">
+                  <li>Le plus grand gène du corps humain</li>
+                  <li>Taux de mutation spontanée élevé : 1/3 sont des mutations de novo sans antécédent familial</li>
+                </ul>
+
+                <p class="text-sm mt-2"><strong>Protéine :</strong> Dystrophine</p>
+                <ul class="text-sm list-disc list-inside ml-2">
+                  <li>Relie le cytosquelette de la fibre musculaire à la matrice extracellulaire</li>
+                  <li>Sans elle, la contraction déchire la membrane cellulaire</li>
+                </ul>
+
+                <p class="text-sm mt-2"><strong>Transmission :</strong> Récessive liée à l'X</p>
+                <ul class="text-sm list-disc list-inside ml-2">
+                  <li><strong>Garçons :</strong> Malades</li>
+                  <li><strong>Femmes :</strong> Conductrices (asymptomatiques ou signes mineurs, risque de cardiomyopathie)</li>
+                </ul>
+              </div>
+
+              <div>
+                <h4 class="font-semibold text-primary-600">🔹 2. LE MÉCANISME GÉNÉTIQUE (La Différence Clé)</h4>
+                <p class="text-sm">C'est la <strong>Règle du Cadre de Lecture</strong> (Reading Frame Rule) qui détermine la gravité.</p>
+                
+                <div class="overflow-x-auto mt-2">
+                  <table class="w-full text-sm border-collapse border border-slate-300">
+                    <thead class="bg-primary-100">
+                      <tr>
+                        <th class="border border-slate-300 p-2 text-left">Caractéristique</th>
+                        <th class="border border-slate-300 p-2 text-left">Duchenne (DMD)</th>
+                        <th class="border border-slate-300 p-2 text-left">Becker (BMD)</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td class="border border-slate-300 p-2 font-semibold">Mutation</td>
+                        <td class="border border-slate-300 p-2">Décalage du cadre de lecture (Out of frame) ou codon stop prématuré</td>
+                        <td class="border border-slate-300 p-2">Respect du cadre de lecture (In frame)</td>
+                      </tr>
+                      <tr class="bg-slate-50">
+                        <td class="border border-slate-300 p-2 font-semibold">Conséquence</td>
+                        <td class="border border-slate-300 p-2">Absence totale de dystrophine</td>
+                        <td class="border border-slate-300 p-2">Dystrophine produite mais anormale (tronquée/courte) ou en quantité réduite</td>
+                      </tr>
+                      <tr>
+                        <td class="border border-slate-300 p-2 font-semibold">Résultat</td>
+                        <td class="border border-slate-300 p-2"><strong class="text-red-600">Forme Sévère</strong></td>
+                        <td class="border border-slate-300 p-2"><strong class="text-orange-600">Forme Bénigne à Modérée</strong></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <div>
+                <h4 class="font-semibold text-primary-600">🔹 3. TABLEAU CLINIQUE COMPARATIF</h4>
+                
+                <div class="bg-red-50 p-3 rounded mt-2">
+                  <p class="text-sm font-bold text-red-700">A. Myopathie de Duchenne (DMD)</p>
+                  
+                  <p class="text-sm mt-2"><strong>Début :</strong> Avant 5 ans (retard marche, chutes fréquentes)</p>
+                  
+                  <p class="text-sm mt-2"><strong>Signes Moteurs :</strong></p>
+                  <ul class="text-sm list-disc list-inside ml-2">
+                    <li>Déficit proximal symétrique (ceinture pelvienne > scapulaire)</li>
+                    <li><strong>Signe de Gowers (Tabouret) :</strong> Pathognomonique</li>
+                    <li><strong>Pseudo-hypertrophie des mollets :</strong> Constante</li>
+                    <li>Marche dandinante, hyperlordose</li>
+                  </ul>
+
+                  <p class="text-sm mt-2"><strong>Évolution :</strong> Perte de la marche vers 10-12 ans (en absence de corticoïdes)</p>
+                  
+                  <p class="text-sm mt-2"><strong>Cognitif :</strong> Retard mental ou troubles des apprentissages fréquents (la dystrophine est aussi cérébrale)</p>
+                </div>
+
+                <div class="bg-orange-50 p-3 rounded mt-2">
+                  <p class="text-sm font-bold text-orange-700">B. Myopathie de Becker (BMD)</p>
+                  
+                  <p class="text-sm mt-2"><strong>Début :</strong> Plus tardif (> 7 ans, adolescence, voire adulte)</p>
+                  
+                  <p class="text-sm mt-2"><strong>Signes Moteurs :</strong></p>
+                  <ul class="text-sm list-disc list-inside ml-2">
+                    <li>Intolérance à l'effort, myalgies, crampes</li>
+                    <li>Faiblesse proximale modérée</li>
+                    <li>Atrophie quadriceps ou hypertrophie mollets</li>
+                  </ul>
+
+                  <p class="text-sm mt-2"><strong>Évolution :</strong> Marche conservée au-delà de 16 ans (souvent > 40 ans)</p>
+                </div>
+              </div>
+
+              <div class="bg-yellow-50 p-3 rounded">
+                <h4 class="font-semibold text-yellow-800">⚠️ 4. COMPLICATIONS (Pronostic Vital)</h4>
+                
+                <p class="text-sm font-bold mt-2">1. Cardiaques (Le Piège du Becker ⚠️)</p>
+                <p class="text-sm"><strong>Cardiomyopathie Dilatée (CMD) :</strong></p>
+                <ul class="text-sm list-disc list-inside ml-2">
+                  <li><strong>Duchenne :</strong> Inéluctable mais souvent masquée par le manque d'activité physique</li>
+                  <li><strong>Becker :</strong> Peut être inaugurale et isolée. La gravité cardiaque n'est pas corrélée à la gravité musculaire</li>
+                </ul>
+                <p class="text-sm mt-1"><strong>Action :</strong> Échocardiographie annuelle systématique</p>
+
+                <p class="text-sm font-bold mt-2">2. Respiratoires</p>
+                <ul class="text-sm list-disc list-inside ml-2">
+                  <li>Syndrome restrictif progressif (atteinte du diaphragme et des intercostaux)</li>
+                  <li>Toux inefficace (risque d'encombrement)</li>
+                  <li>Apparition précoce dans le Duchenne (dès la perte de la marche)</li>
+                </ul>
+
+                <p class="text-sm font-bold mt-2">3. Orthopédiques</p>
+                <ul class="text-sm list-disc list-inside ml-2">
+                  <li><strong>Scoliose :</strong> Majeure et rapide dès que l'enfant est en fauteuil roulant (effondrement du tronc)</li>
+                  <li><strong>Rétractions tendineuses</strong> (chevilles en équin)</li>
+                </ul>
+              </div>
+
+              <div>
+                <h4 class="font-semibold text-primary-600">🔹 5. DÉMARCHE DIAGNOSTIQUE</h4>
+                
+                <div class="overflow-x-auto mt-2">
+                  <table class="w-full text-sm border-collapse border border-slate-300">
+                    <thead class="bg-primary-100">
+                      <tr>
+                        <th class="border border-slate-300 p-2 text-left">Examen</th>
+                        <th class="border border-slate-300 p-2 text-left">Duchenne</th>
+                        <th class="border border-slate-300 p-2 text-left">Becker</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td class="border border-slate-300 p-2 font-semibold">CPK (Enzymes)</td>
+                        <td class="border border-slate-300 p-2"><strong class="text-red-600">Explosives</strong> (> 10 à 100 fois la normale)</td>
+                        <td class="border border-slate-300 p-2">Élevées (> 5 fois la normale) mais variables</td>
+                      </tr>
+                      <tr class="bg-slate-50">
+                        <td class="border border-slate-300 p-2 font-semibold">Biologie Moléculaire (1ère intention)</td>
+                        <td class="border border-slate-300 p-2" colspan="2">Recherche de délétions/duplications (MLPA). Si négatif : Séquençage (NGS)</td>
+                      </tr>
+                      <tr>
+                        <td class="border border-slate-300 p-2 font-semibold">Biopsie Musculaire (2e intention)</td>
+                        <td class="border border-slate-300 p-2">Immunomarquage dystrophine <strong>NÉGATIF</strong> (absence)</td>
+                        <td class="border border-slate-300 p-2">Immunomarquage <strong>POSITIF</strong> mais ANORMAL (irrégulier, taille réduite)</td>
+                      </tr>
+                      <tr class="bg-slate-50">
+                        <td class="border border-slate-300 p-2 font-semibold">EMG</td>
+                        <td class="border border-slate-300 p-2" colspan="2">Tracé myogène pur (peu utile si génétique disponible)</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <div>
+                <h4 class="font-semibold text-primary-600">🔹 6. PRISE EN CHARGE THÉRAPEUTIQUE</h4>
+                <p class="text-sm"><em>Il n'y a pas de guérison, mais une prise en charge multidisciplinaire augmente l'espérance et la qualité de vie.</em></p>
+                
+                <p class="text-sm font-bold mt-2">Traitement de fond (Duchenne) :</p>
+                <ul class="text-sm list-disc list-inside ml-2">
+                  <li><strong>Corticothérapie</strong> (Prednisone ou Deflazacort) : Retarde la perte de la marche de 2-3 ans, protège le cœur et le dos. Effets secondaires à surveiller</li>
+                  <li><strong>Rééducation :</strong> Kinésithérapie motrice (lutte contre les rétractions) et respiratoire</li>
+                </ul>
+
+                <p class="text-sm font-bold mt-2">Respiratoire :</p>
+                <ul class="text-sm list-disc list-inside ml-2">
+                  <li>Ventilation Non Invasive (VNI) nocturne si capacité vitale < 50%</li>
+                </ul>
+
+                <p class="text-sm font-bold mt-2">Cardiaque :</p>
+                <ul class="text-sm list-disc list-inside ml-2">
+                  <li>Traitement cardio-protecteur précoce (IEC / Bêta-bloquants) souvent dès le diagnostic ou dès 10 ans</li>
+                </ul>
+
+                <p class="text-sm font-bold mt-2">Chirurgie :</p>
+                <ul class="text-sm list-disc list-inside ml-2">
+                  <li>Arthrodèse vertébrale (fixation du dos) pour la scoliose</li>
+                </ul>
+
+                <p class="text-sm font-bold mt-2">Thérapies Innovantes (selon mutation) :</p>
+                <ul class="text-sm list-disc list-inside ml-2">
+                  <li><strong>Saut d'exon (Exon skipping) :</strong> Transforme un Duchenne en Becker (ex: Ataluren)</li>
+                  <li><strong>Thérapie génique :</strong> Micro-dystrophine</li>
+                </ul>
+              </div>
+
+              <div class="bg-blue-50 p-3 rounded">
+                <h4 class="font-semibold text-blue-700">💡 POINTS CLÉS POUR LE PRATICIEN</h4>
+                <ul class="text-sm list-disc list-inside ml-2 space-y-1">
+                  <li>Devant un jeune garçon qui tombe souvent ou "court mal" ➔ <strong>Dosage CPK</strong></li>
+                  <li>Devant une découverte fortuite de CPK très élevées chez un homme asymptomatique ➔ <strong>Penser au Becker</strong></li>
+                  <li>Chez une mère d'un enfant Duchenne ➔ <strong>Surveillance cardiaque obligatoire</strong> (risque de CMD même si asymptomatique musculairement)</li>
+                </ul>
+              </div>
+            </div>`
+          },
           { code: "C09C02", name: "Dystrophie myotonique de Steinert" },
           { code: "C09C03", name: "Maladie de Landouzy-Déjerine" },
           { code: "C09C04", name: "Myopathies congénitales" },
