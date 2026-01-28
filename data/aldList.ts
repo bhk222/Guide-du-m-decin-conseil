@@ -5703,7 +5703,202 @@ export const aldData: AldItem[] = [
               </div>
             </div>`
           },
-          { code: "C09C05", name: "Myopathies inflammatoires" },
+          { 
+            code: "C09C05", 
+            name: "Myopathies inflammatoires",
+            tooltip: `<div class="space-y-3">
+              <h3 class="font-bold text-lg text-primary-700">MYOPATHIES INFLAMMATOIRES — Guide Complet</h3>
+              
+              <div>
+                <h4 class="font-semibold text-primary-600">🔹 1. DÉFINITION</h4>
+                <p class="text-sm">Maladies auto-immunes systémiques caractérisées par une <strong>inflammation musculaire striée</strong> entraînant une faiblesse.</p>
+                
+                <p class="text-sm mt-2"><strong>Caractère clé :</strong></p>
+                <ul class="text-sm list-disc list-inside ml-2">
+                  <li><strong>Acquises</strong> (non génétiques)</li>
+                  <li><strong>Potentiellement réversibles</strong> sous traitement</li>
+                </ul>
+
+                <p class="text-sm mt-2"><strong>Signes d'appel :</strong> Faiblesse musculaire + Douleurs (Myalgies) + CPK élevées</p>
+              </div>
+
+              <div>
+                <h4 class="font-semibold text-primary-600">🔹 2. CLASSIFICATION & CLINIQUE SPÉCIFIQUE</h4>
+                <p class="text-sm">On distingue 4 grands groupes, avec des présentations très différentes :</p>
+                
+                <div class="bg-purple-50 border-2 border-purple-400 p-3 rounded mt-2">
+                  <p class="text-sm font-bold text-purple-700">A. Dermatomyosite (DM)</p>
+                  <p class="text-sm">Touche l'enfant et l'adulte</p>
+                  
+                  <p class="text-sm mt-2"><strong>Signes Cutanés (Pathognomoniques) :</strong></p>
+                  <ul class="text-sm list-disc list-inside ml-2">
+                    <li><strong>Érythème lillas (Héliotrope) :</strong> Autour des yeux (lunettes violettes)</li>
+                    <li><strong>Papules de Gottron :</strong> Plaques rouges/squameuses sur la face dorsale des articulations des doigts (MCP/IPP), coudes et genoux</li>
+                    <li><strong>Signe de la manucure :</strong> Érythème péri-unguéal, mégacapillaires</li>
+                  </ul>
+
+                  <p class="text-sm mt-2"><strong>Signes Musculaires :</strong> Déficit proximal, symétrique</p>
+                  
+                  <div class="bg-red-100 border-2 border-red-400 p-2 rounded mt-2">
+                    <p class="text-sm font-bold text-red-700">⚠️ Risque Paranéoplasique :</p>
+                    <p class="text-sm">Forte association avec le cancer (ovaire, sein, poumon, digestif) chez l'adulte. <strong>Bilan systématique obligatoire.</strong></p>
+                  </div>
+                </div>
+
+                <div class="bg-blue-50 p-3 rounded mt-2">
+                  <p class="text-sm font-bold text-blue-700">B. Polymyosite (PM)</p>
+                  <p class="text-sm"><strong>Définition :</strong> Diagnostic d'exclusion (devenu rare, beaucoup sont en fait des myopathies nécrosantes ou des myosites à inclusions)</p>
+                  <p class="text-sm mt-2"><strong>Clinique :</strong> Atteinte musculaire pure, proximale, sans atteinte cutanée</p>
+                  <p class="text-sm mt-2"><strong>Mécanisme :</strong> Médiation cellulaire T cytotoxique (CD8+)</p>
+                </div>
+
+                <div class="bg-orange-50 border-2 border-orange-400 p-3 rounded mt-2">
+                  <p class="text-sm font-bold text-orange-700">C. Myosite à Inclusions (IBM - Inclusion Body Myositis)</p>
+                  <p class="text-sm"><strong>Population :</strong> Homme > 50 ans. C'est la plus fréquente après 50 ans</p>
+                  
+                  <p class="text-sm mt-2"><strong>Clinique (Le piège) :</strong></p>
+                  <ul class="text-sm list-disc list-inside ml-2">
+                    <li>Évolution très lente (années)</li>
+                    <li><strong>Asymétrique</strong></li>
+                    <li><strong>Distale :</strong> Faiblesse des fléchisseurs des doigts et du quadriceps (genoux qui lâchent)</li>
+                    <li><strong>Résistance :</strong> Ne répond pas (ou très peu) aux corticoïdes</li>
+                  </ul>
+                </div>
+
+                <div class="bg-red-50 p-3 rounded mt-2">
+                  <p class="text-sm font-bold text-red-700">D. Myopathie Nécrosante Auto-immune (MNAI)</p>
+                  <p class="text-sm"><strong>Clinique :</strong> Installation très aiguë, faiblesse sévère, douleurs importantes</p>
+                  <p class="text-sm mt-2"><strong>Biologie :</strong> CPK explosives</p>
+                  <p class="text-sm mt-2"><strong>Associations :</strong> Parfois déclenchée par les Statines (anticorps anti-HMGCR) ou paranéoplasique</p>
+                </div>
+              </div>
+
+              <div>
+                <h4 class="font-semibold text-primary-600">🔹 3. MANIFESTATIONS EXTRA-MUSCULAIRES (Gravité)</h4>
+                <p class="text-sm">C'est une maladie systémique. Le pronostic vital dépend souvent de l'atteinte pulmonaire.</p>
+                
+                <ul class="text-sm list-disc list-inside ml-2 mt-2">
+                  <li><strong>Pneumopathie Interstitielle Diffuse (PID) :</strong>
+                    <ul class="list-disc list-inside ml-4">
+                      <li>Toux sèche, dyspnée d'effort</li>
+                      <li>Fréquente dans le Syndrome des Antisynthétases</li>
+                    </ul>
+                  </li>
+                  <li><strong>Articulaire :</strong> Arthralgies ou arthrites (souvent bilatérales symétriques)</li>
+                  <li><strong>Digestif :</strong> Dysphagie haute (risque de fausse route) par atteinte des muscles striés du pharynx/œsophage</li>
+                  <li><strong>Phénomène de Raynaud</strong></li>
+                </ul>
+              </div>
+
+              <div>
+                <h4 class="font-semibold text-primary-600">🔹 4. DIAGNOSTIC PARACLINIQUE</h4>
+                
+                <div class="overflow-x-auto mt-2">
+                  <table class="w-full text-sm border-collapse border border-slate-300">
+                    <thead class="bg-primary-100">
+                      <tr>
+                        <th class="border border-slate-300 p-2 text-left">Examen</th>
+                        <th class="border border-slate-300 p-2 text-left">Résultats Attendus</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td class="border border-slate-300 p-2 font-semibold">Enzymes (CPK)</td>
+                        <td class="border border-slate-300 p-2">Élevées (sauf parfois dans la myosite à inclusions)</td>
+                      </tr>
+                      <tr class="bg-slate-50">
+                        <td class="border border-slate-300 p-2 font-semibold">EMG</td>
+                        <td class="border border-slate-300 p-2">Tracé myogène + Activité spontanée (fibrillations, ondes lentes) signant l'inflammation active</td>
+                      </tr>
+                      <tr>
+                        <td class="border border-slate-300 p-2 font-semibold">Auto-Anticorps (Spécifiques)</td>
+                        <td class="border border-slate-300 p-2">
+                          • <strong>Anti-Jo1</strong> (Syndrome des Antisynthétases : poumon + muscle + mains de mécanicien)<br>
+                          • <strong>Anti-Mi2 / Anti-TIF1-γ</strong> (Dermatomyosite, TIF1 associé au cancer)<br>
+                          • <strong>Anti-SRP / Anti-HMGCR</strong> (Nécrosante)<br>
+                          • <strong>Anti-cN1A</strong> (Inclusions)
+                        </td>
+                      </tr>
+                      <tr class="bg-slate-50">
+                        <td class="border border-slate-300 p-2 font-semibold">IRM Musculaire</td>
+                        <td class="border border-slate-300 p-2">Hypersignal T2/STIR (œdème inflammatoire). Guide la biopsie</td>
+                      </tr>
+                      <tr>
+                        <td class="border border-slate-300 p-2 font-semibold">Biopsie Musculaire</td>
+                        <td class="border border-slate-300 p-2">
+                          <strong>Gold Standard</strong><br>
+                          • Dermatomyosite : Atrophie périfasciculaire<br>
+                          • Polymyosite : Infiltrat inflammatoire endomysial (CD8)<br>
+                          • Inclusions : Vacuoles bordées + inclusions
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <div>
+                <h4 class="font-semibold text-primary-600">🔹 5. TRAITEMENT</h4>
+                <p class="text-sm"><em>Le but est d'arrêter l'inflammation ("éteindre le feu")</em></p>
+                
+                <p class="text-sm font-bold mt-2">Traitement d'attaque :</p>
+                <ul class="text-sm list-disc list-inside ml-2">
+                  <li><strong>Corticothérapie forte dose</strong> (1 mg/kg/j)</li>
+                  <li>Bolus de Solumédrol si forme sévère (dysphagie, atteinte respiratoire)</li>
+                </ul>
+
+                <p class="text-sm font-bold mt-2">Traitement de fond (Épargne cortisonique) :</p>
+                <ul class="text-sm list-disc list-inside ml-2">
+                  <li>Introduit tôt pour diminuer la cortisone</li>
+                  <li>Methotrexate, Azathioprine</li>
+                </ul>
+
+                <p class="text-sm font-bold mt-2">Formes sévères / Résistantes :</p>
+                <ul class="text-sm list-disc list-inside ml-2">
+                  <li>Immunoglobulines IV (IgIV)</li>
+                  <li>Rituximab (Anti-CD20) ou Cyclophosphamide (si atteinte pulmonaire grave)</li>
+                </ul>
+
+                <p class="text-sm font-bold mt-2">Kinésithérapie :</p>
+                <ul class="text-sm list-disc list-inside ml-2">
+                  <li>Indispensable dès la phase aiguë pour éviter l'amyotrophie</li>
+                </ul>
+              </div>
+
+              <div class="bg-yellow-50 border-2 border-yellow-400 p-3 rounded">
+                <h4 class="font-semibold text-yellow-800">💡 LE MÉMO DU PRATICIEN</h4>
+                
+                <div class="overflow-x-auto mt-2">
+                  <table class="w-full text-sm border-collapse border border-slate-300">
+                    <thead class="bg-yellow-100">
+                      <tr>
+                        <th class="border border-slate-300 p-2 text-left">Si vous voyez...</th>
+                        <th class="border border-slate-300 p-2 text-left">Pensez à...</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td class="border border-slate-300 p-2">Femme + Mains rugueuses ("mains de mécanicien") + Essoufflement</td>
+                        <td class="border border-slate-300 p-2"><strong>Syndrome des Antisynthétases (Anti-Jo1)</strong></td>
+                      </tr>
+                      <tr class="bg-slate-50">
+                        <td class="border border-slate-300 p-2">Homme > 60 ans + Ne peut plus fermer le poing ou verrouiller le genou</td>
+                        <td class="border border-slate-300 p-2"><strong>Myosite à Inclusions (Pas de corticoïdes !)</strong></td>
+                      </tr>
+                      <tr>
+                        <td class="border border-slate-300 p-2">Dermatomyosite chez un adulte de 50 ans</td>
+                        <td class="border border-slate-300 p-2"><strong>Rechercher un CANCER</strong> (Scanner TAP, Mammographie, Gynéco, PSA)</td>
+                      </tr>
+                      <tr class="bg-slate-50">
+                        <td class="border border-slate-300 p-2">Patient sous Statines avec CPK qui ne baissent pas à l'arrêt</td>
+                        <td class="border border-slate-300 p-2"><strong>Myopathie Nécrosante (Anti-HMGCR)</strong></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>`
+          },
           { code: "C09C09", name: "Autres myopathies" }
         ]
       },
