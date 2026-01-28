@@ -4582,6 +4582,30 @@ export const aldData: AldItem[] = [
           { code: "C09A02", name: "Polynévrite diabétique" }, 
           { code: "C09A03", name: "Autres polynévrites" }
         ] 
+      },
+      {
+        code: "C09B",
+        name: "Amyotrophies spinales progressives"
+      },
+      {
+        code: "C09C",
+        name: "Myopathies",
+        children: [
+          { code: "C09C01", name: "Myopathie de Duchenne et Becker" },
+          { code: "C09C02", name: "Dystrophie myotonique de Steinert" },
+          { code: "C09C03", name: "Maladie de Landouzy-Déjerine" },
+          { code: "C09C04", name: "Myopathies congénitales" },
+          { code: "C09C05", name: "Myopathies inflammatoires" },
+          { code: "C09C09", name: "Autres myopathies" }
+        ]
+      },
+      {
+        code: "C09D",
+        name: "Myasthénies",
+        children: [
+          { code: "C09D01", name: "Myasthénie auto-immune" },
+          { code: "C09D02", name: "Syndromes myasthéniques congénitaux" }
+        ]
       }
     ],
   },
