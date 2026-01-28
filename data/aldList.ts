@@ -5137,7 +5137,211 @@ export const aldData: AldItem[] = [
               </div>
             </div>`
           },
-          { code: "C09C02", name: "Dystrophie myotonique de Steinert" },
+          { 
+            code: "C09C02", 
+            name: "Dystrophie myotonique de Steinert",
+            tooltip: `<div class="space-y-3">
+              <h3 class="font-bold text-lg text-primary-700">DYSTROPHIE MYOTONIQUE DE STEINERT — Guide Complet</h3>
+              
+              <div>
+                <h4 class="font-semibold text-primary-600">🔹 1. PHYSIOPATHOLOGIE</h4>
+                <p class="text-sm"><strong>C'est la dystrophie musculaire la plus fréquente chez l'adulte</strong></p>
+                
+                <p class="text-sm mt-2"><strong>Génétique :</strong></p>
+                <ul class="text-sm list-disc list-inside ml-2">
+                  <li>Maladie <strong>autosomique dominante</strong> (un seul parent atteint suffit à transmettre)</li>
+                  <li><strong>Locus :</strong> Chromosome 19 (Gène DMPK)</li>
+                </ul>
+
+                <p class="text-sm mt-2"><strong>Mécanisme :</strong> Expansion instable de triplets CTG</p>
+                <ul class="text-sm list-disc list-inside ml-2">
+                  <li>Normal : < 37 répétitions</li>
+                  <li>Pathologique : > 50 répétitions (peut aller jusqu'à plusieurs milliers)</li>
+                </ul>
+
+                <p class="text-sm mt-2"><strong>Phénomène d'Anticipation :</strong></p>
+                <ul class="text-sm list-disc list-inside ml-2">
+                  <li>La maladie survient plus tôt et est plus grave à chaque génération</li>
+                  <li>Le nombre de triplets augmente à chaque transmission</li>
+                </ul>
+              </div>
+
+              <div>
+                <h4 class="font-semibold text-primary-600">🔹 2. LE TABLEAU CLINIQUE (La Triade)</h4>
+                <p class="text-sm"><em>Contrairement aux autres myopathies (souvent proximales), Steinert est une myopathie <strong>distale</strong> associée à une <strong>myotonie</strong>.</em></p>
+                
+                <div class="bg-purple-50 p-3 rounded mt-2">
+                  <p class="text-sm font-bold text-purple-700">A. Atteinte Musculaire</p>
+                  
+                  <p class="text-sm mt-2"><strong>Myotonie (Le signe clé) :</strong> Lenteur à la décontraction musculaire</p>
+                  <ul class="text-sm list-disc list-inside ml-2">
+                    <li>Visible à la main (le patient serre la main du médecin et ne peut pas la rouvrir rapidement)</li>
+                    <li>Améliorée par la répétition du mouvement (phénomène d'échauffement)</li>
+                    <li>Visible à la percussion de l'éminence thénar (le pouce se contracte et reste figé)</li>
+                  </ul>
+
+                  <p class="text-sm mt-2"><strong>Déficit Moteur & Atrophie :</strong></p>
+                  <ul class="text-sm list-disc list-inside ml-2">
+                    <li><strong>Topographie Distale</strong> (mains, releveurs du pied = steppage)</li>
+                    <li><strong>Atteinte de la Face :</strong> Ptosis (paupières tombantes), visage inexpressif, atrophie des masséters, bouche entrouverte</li>
+                    <li><strong>Atteinte du Cou :</strong> Atrophie des sterno-cléido-mastoïdiens (cou fin, tête tombante en arrière)</li>
+                  </ul>
+                </div>
+
+                <div class="bg-red-50 p-3 rounded mt-2">
+                  <p class="text-sm font-bold text-red-700">B. Atteinte Multisystémique (Systématique !)</p>
+                  <p class="text-sm"><em>C'est ce qui fait la gravité du pronostic vital</em></p>
+                  
+                  <p class="text-sm mt-2"><strong>⚠️ Cœur (Urgence vitale) :</strong></p>
+                  <ul class="text-sm list-disc list-inside ml-2">
+                    <li>Troubles de la conduction (BAV, troubles du rythme)</li>
+                    <li><strong class="text-red-600">Risque de mort subite</strong></li>
+                  </ul>
+
+                  <p class="text-sm mt-2"><strong>Œil :</strong></p>
+                  <ul class="text-sm list-disc list-inside ml-2">
+                    <li>Cataracte bilatérale précoce (aspect en "arbre de Noël" ou sous-capsulaire post)</li>
+                  </ul>
+
+                  <p class="text-sm mt-2"><strong>Endocrinien :</strong></p>
+                  <ul class="text-sm list-disc list-inside ml-2">
+                    <li>Diabète (insulinorésistance)</li>
+                    <li>Hypogonadisme (atrophie testiculaire, infertilité)</li>
+                    <li>Calvitie frontale précoce (hommes et femmes)</li>
+                  </ul>
+
+                  <p class="text-sm mt-2"><strong>Système Nerveux Central :</strong></p>
+                  <ul class="text-sm list-disc list-inside ml-2">
+                    <li>Hypersomnie, apathie, troubles cognitifs (surtout formes congénitales/infantiles)</li>
+                  </ul>
+
+                  <p class="text-sm mt-2"><strong>Digestif :</strong></p>
+                  <ul class="text-sm list-disc list-inside ml-2">
+                    <li>Troubles de la déglutition, constipation, mégacôlon</li>
+                  </ul>
+                </div>
+              </div>
+
+              <div>
+                <h4 class="font-semibold text-primary-600">🔹 3. LES FORMES CLINIQUES (Corrélation Génotype-Phénotype)</h4>
+                <p class="text-sm">La gravité dépend du nombre de répétitions CTG.</p>
+                
+                <div class="overflow-x-auto mt-2">
+                  <table class="w-full text-sm border-collapse border border-slate-300">
+                    <thead class="bg-primary-100">
+                      <tr>
+                        <th class="border border-slate-300 p-2 text-left">Forme</th>
+                        <th class="border border-slate-300 p-2 text-left">Répétitions CTG</th>
+                        <th class="border border-slate-300 p-2 text-left">Clinique</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td class="border border-slate-300 p-2 font-semibold">Légère / Tardive</td>
+                        <td class="border border-slate-300 p-2">50 – 150</td>
+                        <td class="border border-slate-300 p-2">Cataracte isolée ou myotonie discrète après 50 ans</td>
+                      </tr>
+                      <tr class="bg-slate-50">
+                        <td class="border border-slate-300 p-2 font-semibold">Adulte Classique</td>
+                        <td class="border border-slate-300 p-2">100 – 1000</td>
+                        <td class="border border-slate-300 p-2">Myotonie + Faiblesse distale + Atteinte cardiaque. Début 20-30 ans</td>
+                      </tr>
+                      <tr>
+                        <td class="border border-slate-300 p-2 font-semibold text-red-600">Congénitale</td>
+                        <td class="border border-slate-300 p-2">> 1000</td>
+                        <td class="border border-slate-300 p-2"><strong>Très grave.</strong> Transmise quasi exclusivement par la mère. Hypotonie majeure à la naissance ("bébé mou"), détresse respiratoire, retard mental. Pronostic sombre</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <div>
+                <h4 class="font-semibold text-primary-600">🔹 4. EXAMENS COMPLÉMENTAIRES</h4>
+                
+                <div class="overflow-x-auto mt-2">
+                  <table class="w-full text-sm border-collapse border border-slate-300">
+                    <thead class="bg-primary-100">
+                      <tr>
+                        <th class="border border-slate-300 p-2 text-left">Examen</th>
+                        <th class="border border-slate-300 p-2 text-left">Résultats Caractéristiques</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td class="border border-slate-300 p-2 font-semibold">EMG (Électromyogramme)</td>
+                        <td class="border border-slate-300 p-2">
+                          <strong>Rafales myotoniques :</strong> Décharges répétitives à haute fréquence dont l'amplitude et la fréquence croissent et décroissent<br>
+                          🔊 Son caractéristique : <strong>"Bruit de bombardier en piqué"</strong> ou <strong>"Bruit de moto au démarrage"</strong>
+                        </td>
+                      </tr>
+                      <tr class="bg-slate-50">
+                        <td class="border border-slate-300 p-2 font-semibold">Génétique (Confirmateur)</td>
+                        <td class="border border-slate-300 p-2">PCR (pour les petites expansions) ou Southern Blot. Compte le nombre de triplets CTG</td>
+                      </tr>
+                      <tr>
+                        <td class="border border-slate-300 p-2 font-semibold">Bilan Cardiaque</td>
+                        <td class="border border-slate-300 p-2"><strong>ECG annuel indispensable.</strong> Recherche un allongement du PR ou des QRS larges</td>
+                      </tr>
+                      <tr class="bg-slate-50">
+                        <td class="border border-slate-300 p-2 font-semibold">Bilan Ophtalmo</td>
+                        <td class="border border-slate-300 p-2">Lampe à fente (recherche cataracte)</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+              <div>
+                <h4 class="font-semibold text-primary-600">🔹 5. PRISE EN CHARGE THÉRAPEUTIQUE</h4>
+                <p class="text-sm"><em>Pas de traitement curatif génétique à ce jour. Traitement symptomatique uniquement.</em></p>
+                
+                <p class="text-sm font-bold mt-2">Surveillance Cardiaque (Priorité absolue) :</p>
+                <ul class="text-sm list-disc list-inside ml-2">
+                  <li>ECG annuel + Holter</li>
+                  <li>Pose de Pacemaker (stimulateur) ou défibrillateur préventif si troubles de conduction sévères</li>
+                </ul>
+
+                <p class="text-sm font-bold mt-2">Traitement de la Myotonie :</p>
+                <ul class="text-sm list-disc list-inside ml-2">
+                  <li>Uniquement si elle est très gênante (souvent le patient s'y habitue)</li>
+                  <li><strong>Molécule :</strong> Mexiletine (antiarythmique classe Ib)</li>
+                  <li>⚠️ Attention : Contre-indiqué si troubles de conduction cardiaque !</li>
+                </ul>
+
+                <p class="text-sm font-bold mt-2">Respiratoire :</p>
+                <ul class="text-sm list-disc list-inside ml-2">
+                  <li>VNI (Ventilation Non Invasive) si apnées du sommeil ou hypoventilation</li>
+                </ul>
+
+                <p class="text-sm font-bold mt-2">Chirurgie :</p>
+                <ul class="text-sm list-disc list-inside ml-2">
+                  <li>Opération de la cataracte</li>
+                  <li>Releveurs de pieds (orthèses) pour le steppage</li>
+                </ul>
+              </div>
+
+              <div class="bg-red-100 border-2 border-red-400 p-3 rounded">
+                <h4 class="font-semibold text-red-800">⚠️ AVERTISSEMENT MAJEUR : L'Anesthésie</h4>
+                <p class="text-sm mt-2">Les patients Steinert sont <strong>extrêmement sensibles aux anesthésiants</strong> (sédatifs, curares, opiacés)</p>
+                <ul class="text-sm list-disc list-inside ml-2">
+                  <li><strong class="text-red-700">Risque de dépression respiratoire prolongée post-opératoire</strong></li>
+                  <li>Risque d'aggravation de la myotonie</li>
+                </ul>
+                <p class="text-sm mt-2 font-bold text-red-700">Règle : Toujours signaler la maladie à l'anesthésiste. Prudence maximale même pour une chirurgie mineure.</p>
+              </div>
+
+              <div class="bg-blue-50 p-3 rounded">
+                <h4 class="font-semibold text-blue-700">💡 LE MÉMO DIFFÉRENTIEL</h4>
+                <p class="text-sm mt-2"><strong>Ne pas confondre avec la Myopathie de Steinert Type 2 (PROMM) :</strong></p>
+                <ul class="text-sm list-disc list-inside ml-2">
+                  <li>Clinique proche mais atteinte musculaire <strong>proximale</strong> (cuisses)</li>
+                  <li>Pas de forme congénitale grave</li>
+                  <li>Gène différent (ZNF9 sur chromosome 3)</li>
+                </ul>
+              </div>
+            </div>`
+          },
           { code: "C09C03", name: "Maladie de Landouzy-Déjerine" },
           { code: "C09C04", name: "Myopathies congénitales" },
           { code: "C09C05", name: "Myopathies inflammatoires" },
