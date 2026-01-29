@@ -325,7 +325,7 @@
       "codeNGAP": "K 5",
       "lettreCle": "K",
       "coefficient": 5,
-      "libelle": "Prélèvement simple de peau ou de muqueuse pour examen histologique",
+      "libelle": "prélèvement simple de peau ou de muqueuse pour examen histologique",
       "section": "TOXICOLOGIE",
       "chapter": "PEAU ET TISSUS CELLULAIRE SOUS-CUT ANE"
     },
@@ -1477,7 +1477,7 @@
       "codeNGAP": "E 100",
       "lettreCle": "E",
       "coefficient": 100,
-      "libelle": "Abtation d'une tuméur de rbite avec intervention intrsCrânienne (doub!e équipe) pour chaque éq.uipe",
+      "libelle": "Abtation d'une tuméur de rbite avec intervention intrsCrânienne (double équipe) pour chaque éq.uipe",
       "section": "TOXICOLOGIE",
       "chapter": "0 VAISSEAUX"
     },
@@ -2521,7 +2521,7 @@
       "codeNGAP": "E 50",
       "lettreCle": "E",
       "coefficient": 50,
-      "libelle": "Réséction lingualp. f!Jrtiel!e pour tum eur maligne de la partie mobile, de la rngue",
+      "libelle": "Réséction lingualp. f!Jrtielle pour tum eur maligne de la partie mobile, de la rngue",
       "section": "TOXICOLOGIE",
       "chapter": "BOUCHE-PHARYNX (parties m0lles)"
     },
@@ -3691,7 +3691,7 @@
       "codeNGAP": "B 40",
       "lettreCle": "B",
       "coefficient": 40,
-      "libelle": "Mesure de la ventilation alvéolaire et étude des échanges pulmORaires par prélèvement simultané du gaz expiré et de sang artériel (prélèvements et dosages compris)",
+      "libelle": "Mesure de la ventilation alvéolaire et étude des échanges pulmonaires par prélèvement simultané du gaz expiré et de sang artériel (prélèvements et dosages compris)",
       "section": "TOXICOLOGIE",
       "chapter": "• PLEVRE - ~OUMONS"
     },
@@ -4627,7 +4627,7 @@
       "codeNGAP": "K 10",
       "lettreCle": "K",
       "coefficient": 10,
-      "libelle": "Prélèvement par ponction biopsique du foie ou de la rate.pour examen",
+      "libelle": "prélèvement par ponction biopsique du foie ou de la rate.pour examen",
       "section": "TOXICOLOGIE",
       "chapter": "• FOIE. VOtES BILLAIRES,· PANCREAS"
     },
@@ -6544,7 +6544,7 @@
       "codeNGAP": "B 5",
       "lettreCle": "B",
       "coefficient": 5,
-      "libelle": "Prélèvement de sang veineux au pli du coude ,",
+      "libelle": "prélèvement de sang veineux au pli du coude ,",
       "section": "TOXICOLOGIE",
       "chapter": ""
     },
@@ -7057,7 +7057,7 @@
       "codeNGAP": "B 60",
       "lettreCle": "B",
       "coefficient": 60,
-      "libelle": "Galactosém!e",
+      "libelle": "Galactosémle",
       "section": "TOXICOLOGIE",
       "chapter": "ACTES SPECIALISES"
     },
@@ -7201,7 +7201,7 @@
       "codeNGAP": "K 10",
       "lettreCle": "K",
       "coefficient": 10,
-      "libelle": "numération des globules rouges et vdlalur flobulaire. !e taux de l'hémoglobine étant déterminé àTélectrophotoTilétre ou au spectnlphotoB 25 métre : _. ; : _ - B",
+      "libelle": "numération des globules rouges et valeur globulaire. le taux de l'hémoglobine étant déterminé à l'électrophotomètre ou au spectnlphotoB 25 métre : _. ; : _ - B",
       "section": "TOXICOLOGIE",
       "chapter": "ACTES SPECIALISES"
     },
@@ -8029,7 +8029,7 @@
       "codeNGAP": "E 120",
       "lettreCle": "E",
       "coefficient": 120,
-      "libelle": "Héact c de 1 Waaler-Rose en I.Ibes 165j Analyse imm!lo électrophorétique des proteines d'un milieu biologique (avec documents et commentaires), technique standard avec immune B Hl B 35 serum antihumain total (non cumulab!e avec le proteinogramme) B",
+      "libelle": "Héact c de 1 Waaler-Rose en I.Ibes 165j Analyse imm!lo électrophorétique des proteines d'un milieu biologique (avec documents et commentaires), technique standard avec immune B Hl B 35 serum antihumain total (non cumulable avec le proteinogramme) B",
       "section": "TOXICOLOGIE",
       "chapter": "PARASITOLOGIE."
     },
