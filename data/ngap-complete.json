@@ -2274,8 +2274,8 @@
     },
     {
       "code": "9012",
-      "codeNGAP": "R 50",
-      "lettreCle": "R",
+      "codeNGAP": "K 50",
+      "lettreCle": "K",
       "coefficient": 50,
       "libelle": "Échographie abdominale",
       "section": "ECHOGRAPHIE",
@@ -2283,8 +2283,8 @@
     },
     {
       "code": "9013",
-      "codeNGAP": "R 40",
-      "lettreCle": "R",
+      "codeNGAP": "K 40",
+      "lettreCle": "K",
       "coefficient": 40,
       "libelle": "Échographie pelvienne",
       "section": "ECHOGRAPHIE",
@@ -2292,8 +2292,8 @@
     },
     {
       "code": "9014",
-      "codeNGAP": "R 40",
-      "lettreCle": "R",
+      "codeNGAP": "K 40",
+      "lettreCle": "K",
       "coefficient": 40,
       "libelle": "Échographie obstétricale",
       "section": "ECHOGRAPHIE",
@@ -2301,8 +2301,8 @@
     },
     {
       "code": "9015",
-      "codeNGAP": "R 35",
-      "lettreCle": "R",
+      "codeNGAP": "K 35",
+      "lettreCle": "K",
       "coefficient": 35,
       "libelle": "Doppler vasculaire",
       "section": "ECHOGRAPHIE",
