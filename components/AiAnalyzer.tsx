@@ -7196,12 +7196,13 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
         // Problème CAS 14: Détecte doigts individuels (4-20%) au lieu d'amputation main complète (60%)
         // Contexte: Amputation traumatique main dominante niveau poignet + douleurs membre fantôme + dépression majeure
         // Solution: Expert rule haute priorité détectant amputation MAIN (vs doigts) avec marker pour cumul complexe
+        // 🔴 V3.3.164: negativeContext DÉSACTIVÉ - bloquait amputation D5 avec "main droite" dans texte
         {
-            pattern: /amputation.*main.*(?:poignet|radio.*carpien|niveau.*poignet)|d[eé]sarticulation.*radio.*carpien|amputation.*traumatique.*main.*(?:dominante|droite)/i,
+            pattern: /amputation.*main.*(?:compl[èe]te|totale|enti[èe]re).*(?:poignet|radio.*carpien|niveau.*poignet)|d[eé]sarticulation.*radio.*carpien/i,
             context: /dominante|droite|poignet|radio.*carpien|membre.*fant[oô]me|douleur.*fant[oô]me|d[eé]pression|Hamilton/i,
             searchTerms: ["__CUMUL_AMPUTATION_MAIN_PHANTOM__"],  // Marker spécial pour cumul amputation + phantom pain + dépression
             priority: 1013,  // TRÈS HAUTE PRIORITÉ (avant amputation doigts individuels)
-            negativeContext: /doigt|index|pouce|majeur|annulaire|auriculaire/i
+            // negativeContext RETIRÉ - trop restrictif, bloquait "amputation D5 main droite"
         },
         
         // === RÈGLE DOULEURS MEMBRE FANTÔME (V3.3.36 - FIX CAS 14) ===
