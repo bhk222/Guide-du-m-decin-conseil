@@ -6071,182 +6071,208 @@ export const aldData: AldItem[] = [
               <h3 class="font-bold text-lg text-primary-700">MYASTHÉNIE AUTO-IMMUNE — Guide Complet</h3>
               
               <div>
-                <h4 class="font-semibold text-primary-600">🔹 1. PHYSIOPATHOLOGIE (Mécanisme)</h4>
-                <p class="text-sm"><strong>Le problème :</strong> Blocage postsynaptique</p>
-                <p class="text-sm"><strong>L'agent :</strong> Des auto-anticorps attaquent les récepteurs à l'Acétylcholine (RACh) sur le muscle</p>
-                <p class="text-sm"><strong>Conséquence :</strong> L'influx nerveux n'arrive pas à déclencher la contraction musculaire correctement</p>
+                <h4 class="font-semibold text-primary-600">🔹 1. DÉFINITION & PHYSIOPATHOLOGIE</h4>
+                <p class="text-sm"><strong>Maladie auto-immune de la jonction neuromusculaire</strong> caractérisée par un blocage de la transmission synaptique <strong>post-synaptique</strong>.</p>
                 
-                <p class="text-sm mt-2"><strong>Lien Thymique :</strong></p>
+                <p class="text-sm mt-2"><strong>Mécanisme :</strong></p>
+                <p class="text-sm">Des auto-anticorps pathogènes attaquent les protéines de la membrane musculaire, empêchant l'acétylcholine (ACh) de déclencher la contraction.</p>
+                
+                <p class="text-sm mt-3"><strong>Cibles antigéniques :</strong></p>
+                <ul class="text-sm list-disc list-inside ml-2 space-y-1">
+                  <li><strong>Récepteur de l'Acétylcholine (RACh) :</strong> ~85 % des cas (forme classique)</li>
+                  <li><strong>MuSK</strong> (Muscle Specific Kinase) : ~5-10 % (formes souvent bulbaires, sévères, femmes jeunes)</li>
+                  <li><strong>LRP4 :</strong> ~1-3 % (formes "séronégatives")</li>
+                </ul>
+                
+                <p class="text-sm mt-3"><strong>Le Thymus : Rôle central dans la tolérance immunitaire</strong></p>
                 <ul class="text-sm list-disc list-inside ml-2">
-                  <li>Le thymus est anormal dans <strong>75% des cas</strong></li>
-                  <li>Hyperplasie ou Thymome</li>
+                  <li>Anormal dans <strong>75% des cas</strong> (65% hyperplasie, 10-15% thymome)</li>
                 </ul>
               </div>
 
               <div class="bg-blue-50 border-2 border-blue-400 p-3 rounded">
-                <h4 class="font-semibold text-blue-700">🔹 2. LE MAÎTRE-SYMPTÔME : La Fatigabilité 📉</h4>
-                <p class="text-sm mt-2"><strong>Contrairement aux myopathies</strong> où le déficit est constant, ici le déficit est <strong>FLUCTUANT</strong>.</p>
-                <ul class="text-sm list-disc list-inside ml-2 mt-2">
-                  <li>Le patient est fort le matin (repos) et s'épuise au fur et à mesure de la journée ou de l'effort</li>
-                  <li>Le repos améliore les symptômes</li>
-                </ul>
-
-                <p class="text-sm font-bold mt-2">Topographie des symptômes</p>
+                <h4 class="font-semibold text-blue-700">🔹 2. CLINIQUE : La Fatigabilité (Le Maître-mot) 📉</h4>
+                <p class="text-sm mt-2"><strong>Le déficit n'est pas constant, il est FLUCTUANT.</strong></p>
+                <p class="text-sm">Il s'aggrave à l'effort et en fin de journée, et s'améliore au repos.</p>
                 
-                <p class="text-sm mt-2"><strong>Oculaire (50-60% des débuts) :</strong></p>
-                <ul class="text-sm list-disc list-inside ml-2">
-                  <li><strong>Ptosis :</strong> Chute de la paupière (souvent asymétrique, à bascule)</li>
-                  <li><strong>Diplopie :</strong> Vision double (intermittente, en fin de journée)</li>
+                <p class="text-sm font-bold mt-3">A. Signes Inauguraux</p>
+                
+                <p class="text-sm mt-2"><strong>Oculaires (50-60%) :</strong></p>
+                <ul class="text-sm list-disc list-inside ml-2 space-y-1">
+                  <li><strong>Ptosis :</strong> Uni ou bilatéral, souvent à bascule (change de côté)</li>
+                  <li><strong>Diplopie :</strong> Binoculaire, intermittente</li>
+                  <li><strong>Signe du Cogan :</strong> Ressaut de la paupière supérieure lorsqu'on demande au patient de repasser du regard vers le bas au regard primaire</li>
                 </ul>
 
-                <p class="text-sm mt-2"><strong>Bulbaire (Signes de gravité) :</strong></p>
-                <ul class="text-sm list-disc list-inside ml-2">
-                  <li>Troubles de la déglutition (fausses routes)</li>
-                  <li>Voix nasonnée</li>
-                  <li>Fatigabilité à la mastication (lâcher la fourchette en milieu de repas)</li>
+                <p class="text-sm mt-2"><strong>Bulbaires (Urgence) :</strong></p>
+                <ul class="text-sm list-disc list-inside ml-2 space-y-1">
+                  <li><strong>Dysphonie</strong> (voix nasonnée qui s'éteint)</li>
+                  <li><strong>Dysphagie</strong> (fausses routes, surtout aux liquides)</li>
+                  <li>Mastication difficile</li>
                 </ul>
 
-                <p class="text-sm mt-2"><strong>Faciale :</strong></p>
+                <p class="text-sm mt-2"><strong>Faciaux :</strong></p>
                 <ul class="text-sm list-disc list-inside ml-2">
-                  <li>Visage inexpressif, "sourire vertical" (le patient veut sourire mais les coins de la bouche ne montent pas)</li>
+                  <li>Faciès inexpressif, ptosis, difficulté à siffler</li>
                 </ul>
 
-                <p class="text-sm mt-2"><strong>Axiale et Respiratoire :</strong></p>
-                <ul class="text-sm list-disc list-inside ml-2">
-                  <li>Chute de la tête (faiblesse des extenseurs du cou)</li>
-                  <li><strong>Dyspnée : Urgence absolue</strong></li>
-                </ul>
-
-                <p class="text-sm font-bold mt-2">Tests Cliniques au lit du malade</p>
-                <ul class="text-sm list-disc list-inside ml-2">
-                  <li><strong>Test du glaçon (Ice pack test) :</strong> Poser un glaçon sur la paupière (ptosis) pendant 2 min améliore le ptosis (le froid inhibe l'enzyme qui détruit l'acétylcholine)</li>
-                  <li><strong>Test de fatigabilité :</strong> Demander au patient de regarder le plafond sans bouger la tête. Le ptosis apparaît en < 1 minute</li>
+                <p class="text-sm font-bold mt-3">B. Manœuvres Cliniques</p>
+                <ul class="text-sm list-disc list-inside ml-2 space-y-1">
+                  <li><strong>Test du Glaçon :</strong> Appliquer de la glace 2 min sur le ptosis $\rightarrow$ Amélioration (le froid inhibe l'acétylcholinestérase)</li>
+                  <li><strong>Test de Simpson :</strong> Regard vers le haut soutenu 1 min $\rightarrow$ Apparition/aggravation du ptosis</li>
                 </ul>
               </div>
 
               <div>
-                <h4 class="font-semibold text-primary-600">🔹 3. DIAGNOSTIC PARACLINIQUE</h4>
+                <h4 class="font-semibold text-primary-600">🔹 3. CLASSIFICATION CLINIQUE D'OSSERMAN</h4>
+                <p class="text-sm">Permet d'évaluer la sévérité et le pronostic.</p>
                 
                 <div class="overflow-x-auto mt-2">
-                  <table class="w-full text-sm border-collapse border border-slate-300">
-                    <thead class="bg-primary-100">
+                  <table class="w-full text-sm border-collapse border border-gray-300 rounded-lg">
+                    <thead class="bg-gray-100">
                       <tr>
-                        <th class="border border-slate-300 p-2 text-left">Examen</th>
-                        <th class="border border-slate-300 p-2 text-left">Résultats Attendus</th>
+                        <th class="border border-gray-300 p-2 text-left">Stade</th>
+                        <th class="border border-gray-300 p-2 text-left">Description</th>
                       </tr>
                     </thead>
                     <tbody>
                       <tr>
-                        <td class="border border-slate-300 p-2 font-semibold">Immunologie (La preuve)</td>
-                        <td class="border border-slate-300 p-2">
-                          1. <strong>Anti-RACh</strong> (Anti-Récepteurs Acétylcholine) : Positifs dans 85% des cas<br>
-                          2. <strong>Anti-MuSK</strong> : Si anti-RACh négatifs (formes bulbaires sévères, femmes)<br>
-                          3. <strong>Anti-LRP4</strong> : Plus rare
-                        </td>
+                        <td class="border border-gray-300 p-2 font-semibold">I</td>
+                        <td class="border border-gray-300 p-2">Myasthénie Oculaire pure. Pas d'atteinte généralisée.</td>
                       </tr>
-                      <tr class="bg-slate-50">
-                        <td class="border border-slate-300 p-2 font-semibold">ENMG (Électromyogramme)</td>
-                        <td class="border border-slate-300 p-2">
-                          Stimulation Répétitive à basse fréquence (3Hz)<br>
-                          👉 <strong>Décrément :</strong> La réponse musculaire diminue d'amplitude à chaque stimulation (> 10%). On épuise la plaque motrice
-                        </td>
+                      <tr class="bg-gray-50">
+                        <td class="border border-gray-300 p-2 font-semibold">IIa</td>
+                        <td class="border border-gray-300 p-2">Généralisée Légère. Pas de crises respiratoires. Réponse médicamenteuse bonne.</td>
                       </tr>
                       <tr>
-                        <td class="border border-slate-300 p-2 font-semibold">Scanner Thoracique</td>
-                        <td class="border border-slate-300 p-2"><strong>OBLIGATOIRE.</strong> À la recherche d'un Thymome (tumeur du thymus) ou d'une hyperplasie thymique</td>
+                        <td class="border border-gray-300 p-2 font-semibold">IIb</td>
+                        <td class="border border-gray-300 p-2">Généralisée Modérée. Atteinte bulbaire fréquente mais pas respiratoire.</td>
+                      </tr>
+                      <tr class="bg-gray-50">
+                        <td class="border border-gray-300 p-2 font-semibold">III</td>
+                        <td class="border border-gray-300 p-2">Aiguë Fulminante. Atteinte respiratoire rapide, mauvaise réponse au traitement.</td>
+                      </tr>
+                      <tr>
+                        <td class="border border-gray-300 p-2 font-semibold">IV</td>
+                        <td class="border border-gray-300 p-2">Myasthénie Sévère Tardive. Évolution d'une forme I ou II vers une forme sévère après 2 ans.</td>
                       </tr>
                     </tbody>
                   </table>
                 </div>
               </div>
 
-              <div class="bg-red-50 border-2 border-red-500 p-3 rounded">
-                <h4 class="font-semibold text-red-700">🚨 4. COMPLICATIONS : La Crise Myasthénique</h4>
-                <p class="text-sm mt-2">C'est une décompensation aiguë <strong>mettant en jeu le pronostic vital</strong>.</p>
+              <div class="bg-purple-50 p-3 rounded-lg border border-purple-200">
+                <h4 class="font-semibold text-purple-800">🔹 4. BILAN PARACLINIQUE</h4>
                 
-                <p class="text-sm mt-2"><strong>Signes :</strong></p>
-                <ul class="text-sm list-disc list-inside ml-2">
-                  <li>Détresse respiratoire</li>
-                  <li>Troubles de déglutition majeurs</li>
-                </ul>
-
-                <p class="text-sm mt-2"><strong>Cause :</strong> Infection, chirurgie, médicament interdit, ou arrêt brutal du traitement</p>
-                
-                <p class="text-sm mt-2"><strong>Action :</strong> Réanimation, intubation, plasmaphérèse ou IgIV</p>
+                <div class="overflow-x-auto mt-2">
+                  <table class="w-full text-sm border-collapse border border-gray-300 rounded-lg">
+                    <thead class="bg-purple-100">
+                      <tr>
+                        <th class="border border-gray-300 p-2 text-left">Examen</th>
+                        <th class="border border-gray-300 p-2 text-left">Intérêt et Résultats</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td class="border border-gray-300 p-2 font-semibold">Immunologie</td>
+                        <td class="border border-gray-300 p-2">
+                          <strong>Dosage des Anticorps :</strong><br>
+                          1. <strong>Anti-RACh</strong> (Spécificité 99%)<br>
+                          2. <strong>Anti-MuSK</strong> (si RACh négatif)<br>
+                          3. <strong>Anti-LRP4</strong> ou anti-stries (si "double séronégatif")
+                        </td>
+                      </tr>
+                      <tr class="bg-purple-50">
+                        <td class="border border-gray-300 p-2 font-semibold">ENMG (Électroneuromyogramme)</td>
+                        <td class="border border-gray-300 p-2">
+                          <strong>Stimulation Répétitive (3 Hz) :</strong><br>
+                          Recherche d'un <strong>Décrément > 10%</strong> de l'amplitude du potentiel moteur (épuisement de la plaque motrice).<br>
+                          <strong>En fibre unique (SFEMG) :</strong> Augmentation du "Jitter" (plus sensible mais moins spécifique)
+                        </td>
+                      </tr>
+                      <tr>
+                        <td class="border border-gray-300 p-2 font-semibold">Imagerie</td>
+                        <td class="border border-gray-300 p-2">
+                          <strong>TDM Thoracique (Scanner) :</strong><br>
+                          <strong>SYSTÉMATIQUE</strong> à la recherche d'un Thymome (tumeur) ou d'une hyperplasie thymique.
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
               </div>
 
               <div>
                 <h4 class="font-semibold text-primary-600">🔹 5. PRISE EN CHARGE THÉRAPEUTIQUE</h4>
                 
-                <p class="text-sm font-bold mt-2">A. Traitement Symptomatique (La base)</p>
-                <ul class="text-sm list-disc list-inside ml-2">
-                  <li><strong>Anticholinestérasiques</strong> (Pyridostigmine / Mestinon)
-                    <ul class="list-disc list-inside ml-4">
-                      <li><strong>Mécanisme :</strong> Empêche la destruction de l'acétylcholine, augmentant sa durée de vie dans la synapse</li>
-                      <li><strong>Effets secondaires :</strong> Diarrhées, crampes abdominales, hypersalivation (syndrome cholinergique)</li>
-                    </ul>
-                  </li>
+                <p class="text-sm font-bold mt-2">A. Traitement Symptomatique</p>
+                <p class="text-sm mt-1"><strong>Anticholinestérasiques (Pyridostigmine / Mestinon) :</strong></p>
+                <ul class="text-sm list-disc list-inside ml-2 space-y-1">
+                  <li>Prolonge l'action de l'ACh</li>
+                  <li>Dose : Progressive (ex: 60mg x 3 ou 4/j)</li>
+                  <li><strong>Surdosage :</strong> Crise cholinergique (diarrhée, hypersalivation, fasciculations, bradycardie)</li>
                 </ul>
 
-                <p class="text-sm font-bold mt-2">B. Traitement de Fond (Immunosuppresseur)</p>
-                <ul class="text-sm list-disc list-inside ml-2">
-                  <li><strong>Corticothérapie</strong> (Prednisone)</li>
-                  <li><strong>Immunosuppresseurs</strong> (Azathioprine, Mycophénolate mofétil) si cortico-dépendance</li>
-                  <li><strong>Thymectomie :</strong> Chirurgie d'ablation du thymus
-                    <ul class="list-disc list-inside ml-4">
-                      <li>Systématique si thymome</li>
-                      <li>Discutée chez le sujet jeune (< 50 ans) avec anti-RACh+ même sans thymome pour améliorer le pronostic à long terme</li>
-                    </ul>
-                  </li>
+                <p class="text-sm font-bold mt-3">B. Traitement de Fond (Immunosuppresseur)</p>
+                <ul class="text-sm list-disc list-inside ml-2 space-y-1">
+                  <li><strong>Corticothérapie :</strong> Souvent nécessaire (Prednisone). ⚠️ Attention à l'aggravation transitoire à l'introduction !</li>
+                  <li><strong>Immunosuppresseurs :</strong> Azathioprine (Imurel), mycophénolate mofétil (Cellcept)</li>
+                  <li><strong>Biothérapies :</strong> Rituximab (Anti-CD20) ou Eculizumab (Anti-C5) pour les formes réfractaires</li>
                 </ul>
 
-                <p class="text-sm font-bold mt-2">C. Traitement de la Crise</p>
-                <ul class="text-sm list-disc list-inside ml-2">
-                  <li>Immunoglobulines IV (IgIV)</li>
-                  <li>Échanges plasmatiques (Plasmaphérèse)</li>
+                <p class="text-sm font-bold mt-3">C. Chirurgie (Thymectomie)</p>
+                <ul class="text-sm list-disc list-inside ml-2 space-y-1">
+                  <li><strong>Absolue :</strong> Si Thymome (risque de cancer)</li>
+                  <li><strong>Discutée :</strong> Chez le sujet jeune (< 50 ans) avec hyperplasie et anti-RACh positifs (améliore le pronostic à long terme)</li>
+                </ul>
+
+                <p class="text-sm font-bold mt-3">D. Traitement de la Poussée (Crise Myasthénique)</p>
+                <ul class="text-sm list-disc list-inside ml-2 space-y-1">
+                  <li>En Réanimation si détresse respiratoire ou troubles de déglutition majeurs</li>
+                  <li><strong>Immunoglobulines Polyvalentes IV (IgIV)</strong></li>
+                  <li><strong>Échanges Plasmatiques (Plasmaphérèse)</strong></li>
                 </ul>
               </div>
 
-              <div class="bg-red-100 border-2 border-red-600 p-3 rounded">
-                <h4 class="font-semibold text-red-800">⚠️ 6. LA LISTE ROUGE (Médicaments Contre-Indiqués)</h4>
-                <p class="text-sm mt-2">Le patient myasthénique est "allergique" pharmacologiquement à de nombreux médicaments qui bloquent la jonction neuromusculaire. <strong>Cette liste doit être connue par cœur.</strong></p>
+              <div class="bg-red-50 border-2 border-red-500 p-3 rounded">
+                <h4 class="font-semibold text-red-800">⚠️ 6. CONTRE-INDICATIONS ABSOLUES (Mémo)</h4>
+                <p class="text-sm text-red-900 mt-2"><strong>Le patient myasthénique est "pharmacologiquement fragile". Tout nouveau médicament doit être vérifié.</strong></p>
                 
-                <ul class="text-sm list-disc list-inside ml-2 mt-2">
-                  <li><strong>Antibiotiques :</strong> Aminosides (Gentamicine, Amik...), Fluoroquinolones, Macrolides (Telithromycine)</li>
-                  <li><strong>Cardio :</strong> Bêta-bloquants (même en collyre !), Quinidine</li>
-                  <li><strong>Neuro/Psy :</strong> Benzodiazépines (Valium, Xanax...), Neuroleptiques</li>
-                  <li><strong>Anesthésie :</strong> Curares (sensibilité extrême)</li>
-                  <li><strong>Autres :</strong> Magnésium injectable</li>
+                <ul class="text-sm text-red-900 list-disc list-inside ml-2 mt-2 space-y-1">
+                  <li><strong>Antibiotiques :</strong> Aminosides (Gentamicine...), Fluoroquinolones (Ciprofloxacine...), Macrolides (sauf Azithromycine avec prudence), Cyclines</li>
+                  <li><strong>Cardiologie :</strong> Bêta-bloquants (même en collyre !), inhibiteurs calciques, Quinidine</li>
+                  <li><strong>Anesthésie :</strong> Curares (sensibilité extrême), Benzodiazépines (risque dépression respiratoire)</li>
+                  <li><strong>Autres :</strong> Magnésium injectable, D-Pénicillamine</li>
                 </ul>
               </div>
 
               <div class="bg-yellow-50 border-2 border-yellow-400 p-3 rounded">
-                <h4 class="font-semibold text-yellow-800">💡 LE MÉMO DIFFÉRENTIEL</h4>
+                <h4 class="font-semibold text-yellow-800">💡 DIAGNOSTIC DIFFÉRENTIEL "Neuromusculaire"</h4>
                 
                 <div class="overflow-x-auto mt-2">
-                  <table class="w-full text-sm border-collapse border border-slate-300">
+                  <table class="w-full text-sm border-collapse border border-gray-300 rounded-lg">
                     <thead class="bg-yellow-100">
                       <tr>
-                        <th class="border border-slate-300 p-2 text-left">Pathologie</th>
-                        <th class="border border-slate-300 p-2 text-left">Clinique</th>
-                        <th class="border border-slate-300 p-2 text-left">Différence avec Myasthénie</th>
+                        <th class="border border-gray-300 p-2 text-left">Pathologie</th>
+                        <th class="border border-gray-300 p-2 text-left">Clinique</th>
+                        <th class="border border-gray-300 p-2 text-left">Indice Clé</th>
                       </tr>
                     </thead>
                     <tbody>
                       <tr>
-                        <td class="border border-slate-300 p-2 font-semibold">Lambert-Eaton</td>
-                        <td class="border border-slate-300 p-2">Faiblesse proximale + bouche sèche</td>
-                        <td class="border border-slate-300 p-2"><strong>Amélioration à l'effort</strong> (Incrément à l'EMG). Cause paranéoplasique (Poumon)</td>
+                        <td class="border border-gray-300 p-2 font-semibold">Syndrome de Lambert-Eaton</td>
+                        <td class="border border-gray-300 p-2">Faiblesse proximale + bouche sèche</td>
+                        <td class="border border-gray-300 p-2"><strong>Incrément à l'EMG</strong> (l'effort améliore la force). Souvent paranéoplasique (Poumon)</td>
                       </tr>
-                      <tr class="bg-slate-50">
-                        <td class="border border-slate-300 p-2 font-semibold">Botulisme</td>
-                        <td class="border border-slate-300 p-2">Paralysie descendante + mydriase</td>
-                        <td class="border border-slate-300 p-2">Notion de conserve artisanale. Atteinte pupillaire (rare dans myasthénie)</td>
+                      <tr class="bg-yellow-50">
+                        <td class="border border-gray-300 p-2 font-semibold">Botulisme</td>
+                        <td class="border border-gray-300 p-2">Paralysie descendante + Mydriase (pupilles)</td>
+                        <td class="border border-gray-300 p-2">Notion de consommation de conserve</td>
                       </tr>
                       <tr>
-                        <td class="border border-slate-300 p-2 font-semibold">SLA (Charcot)</td>
-                        <td class="border border-slate-300 p-2">Faiblesse bulbaire</td>
-                        <td class="border border-slate-300 p-2">Présence de signes pyramidaux (Babinski) et fasciculations. Pas de fluctuation</td>
+                        <td class="border border-gray-300 p-2 font-semibold">SLA (Charcot)</td>
+                        <td class="border border-gray-300 p-2">Atteinte bulbaire</td>
+                        <td class="border border-gray-300 p-2">Pas de fluctuation. Présence de signes pyramidaux (Babinski) et fasciculations diffuses</td>
                       </tr>
                     </tbody>
                   </table>
