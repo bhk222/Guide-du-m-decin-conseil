@@ -136,52 +136,103 @@ function normalizeCode(code) {
 }
 
 function nettoyerLibelle(text) {
-    return text
-        .replace(/\.{2,}/g, '')
+    // Nettoyer d'abord les caractères spéciaux et les espaces multiples
+    text = text.replace(/\.{2,}/g, ' ')
         .replace(/\s+/g, ' ')
         .replace(/['"«»]/g, '')
-        // Corrections OCR courantes - ordre important!
-        .replace(/0u\b/gi, 'ou')
-        .replace(/\b0n\b/gi, 'on')
-        .replace(/\b0r\b/gi, 'or')
-        .replace(/cyt0l0gique/gi, 'cytologique')
-        .replace(/d0rientati0n/gi, "d'orientation")
-        .replace(/électr0/gi, 'électro')
-        .replace(/hémat0/gi, 'hémato')
-        .replace(/trach0/gi, 'tracho')
-        .replace(/déc0/gi, 'déco')
-        .replace(/c0ngénitale/gi, 'congénitale')
-        .replace(/c0mp0rtant/gi, 'comportant')
-        .replace(/bar0/gi, 'baro')
-        .replace(/0es0/gi, 'oeso')
-        .replace(/th0racique/gi, 'thoracique')
-        .replace(/l0es0/gi, 'loeso')
-        .replace(/l0rbité/gi, "l'orbité")
-        .replace(/0sseuse/gi, 'osseuse')
-        .replace(/cutané0/gi, 'cutanéo')
-        .replace(/derm0/gi, 'dermo')
-        .replace(/granuati0ns/gi, 'granulations')
-        .replace(/paralysi\s*e/gi, 'paralysie')
-        .replace(/p0ur\b/gi, 'pour')
-        .replace(/pressi0n/gi, 'pression')
-        .replace(/déchantill0ns/gi, "d'échantillons")
-        .replace(/\b0s\b/gi, 'os')
-        .replace(/c0ude/gi, 'coude')
-        .replace(/p0ignet/gi, 'poignet')
-        .replace(/c0u-de-pied/gi, 'cou-de-pied')
-        .replace(/péron0/gi, 'pérono')
-        .replace(/styl0/gi, 'stylo')
-        .replace(/mall0/gi, 'mallo')
-        .replace(/mallé0/gi, 'malléo')
-        .replace(/ß/g, 'B')
-        .replace(/do~age/gi, 'dosage')
-        .replace(/~ /g, '')
-        .replace(/~\s/g, '')
-        .replace(/polynuc\s+léaires/gi, 'polynucléaires')
-        .replace(/\bl'électr/gi, "à l'électr")
-        // Nettoyer les caractères spéciaux restants
-        .replace(/[_\-]{3,}/g, '')
+        .replace(/•+/g, '')
+        .replace(/_+/g, '')
+        .replace(/~/g, '');
+    
+    // Corrections OCR massives - remplacer 0 par o dans les contextes appropriés
+    const corrections = [
+        [/\b([a-z])0([a-z])/gi, '$1o$2'],  // x0x -> xox
+        [/0u\b/gi, 'ou'],
+        [/\b0n\b/gi, 'on'],
+        [/\b0r\b/gi, 'or'],
+        [/lavant-bra\$/gi, "l'avant-bras"],
+        [/lautre/gi, "l'autre"],
+        [/luxati0n/gi, 'luxation'],
+        [/Jun\b/gi, "l'un"],
+        [/dune\b/gi, "d'une"],
+        [/ral:tiale/gi, 'radiale'],
+        [/cubitale/gi, 'cubitale'],
+        [/péron0/gi, 'péroné'],
+        [/pér0né/gi, 'péroné'],
+        [/Réducti0n/gi, 'Réduction'],
+        [/pr0cés/gi, 'procès'],
+        [/alvé0laires/gi, 'alvéolaires'],
+        [/c0nservati0n/gi, 'conservation'],
+        [/rnobileset/gi, 'mobiles et'],
+        [/Tt:.aitement/gi, 'Traitement'],
+        [/c0mplète/gi, 'complète'],
+        [/simultanés/gi, 'simultanée'],
+        [/appar~illage/gi, 'appareillage'],
+        [/c0mplet/gi, 'complet'],
+        [/0sté0-synthèse/gi, 'ostéosynthèse'],
+        [/los\b/gi, "l'os"],
+        [/R0tule/gi, 'Rotule'],
+        [/r0tule/gi, 'rotule'],
+        [/Fractur0S/gi, 'Fractures'],
+        [/èureb0rd/gi, 'du rebord'],
+        [/c0tyl0ïdien/gi, 'cotyloïdien'],
+        [/transc0tyl0ïdiennes/gi, 'transcotyloïdiennes'],
+        [/COllde/gi, 'Coude'],
+        [/c0ude/gi, 'coude'],
+        [/disj0ncti0n/gi, 'disjonction'],
+        [/It;gularis<lti0n/gi, 'régularisation'],
+        [/Apluchage/gi, 'Épluchage'],
+        [/Evacuati0n/gi, 'Évacuation'],
+        [/sér0-hématiques/gi, 'séro-hématiques'],
+        [/c0rps/gi, 'corps'],
+        [/Extracti0n/gi, 'Extraction'],
+        [/c0rps étranger::/gi, 'corps étrangers'],
+        [/pr0f0nds/gi, 'profonds'],
+        [/m0lles/gi, 'molles'],
+        [/cyt0l0gique/gi, 'cytologique'],
+        [/d0rientati0n/gi, "d'orientation"],
+        [/électr0/gi, 'électro'],
+        [/hémat0/gi, 'hémato'],
+        [/trach0/gi, 'tracho'],
+        [/déc0/gi, 'déco'],
+        [/c0ngénitale/gi, 'congénitale'],
+        [/c0mp0rtant/gi, 'comportant'],
+        [/bar0/gi, 'baro'],
+        [/0es0/gi, 'oeso'],
+        [/th0racique/gi, 'thoracique'],
+        [/l0es0/gi, 'loeso'],
+        [/l0rbité/gi, "l'orbité"],
+        [/0sseuse/gi, 'osseuse'],
+        [/cutané0/gi, 'cutanéo'],
+        [/derm0/gi, 'dermo'],
+        [/granuati0ns/gi, 'granulations'],
+        [/paralysi\s*e/gi, 'paralysie'],
+        [/p0ur\b/gi, 'pour'],
+        [/pressi0n/gi, 'pression'],
+        [/déchantill0ns/gi, "d'échantillons"],
+        [/\b0s\b/gi, 'os'],
+        [/p0ignet/gi, 'poignet'],
+        [/c0u-de-pied/gi, 'cou-de-pied'],
+        [/péron0/gi, 'pérono'],
+        [/styl0/gi, 'stylo'],
+        [/mall0/gi, 'mallo'],
+        [/mallé0/gi, 'malléo'],
+        [/ß/g, 'B'],
+        [/do~age/gi, 'dosage'],
+        [/polynuc\s+léaires/gi, 'polynucléaires']
+    ];
+    
+    corrections.forEach(([pattern, replacement]) => {
+        text = text.replace(pattern, replacement);
+    });
+    
+    // Nettoyer les ponctuations et espaces
+    return text
+        .replace(/[,\s\.]{3,}/g, ' ')
         .replace(/\s+/g, ' ')
+        .replace(/\s+\./g, '.')
+        .replace(/\.\s*\./g, '.')
+        .replace(/\\\s*/g, '')
         .trim();
 }
 
