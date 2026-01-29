@@ -8611,18 +8611,18 @@
     },
     {
       "code": "9003",
-      "codeNGAP": "R 120",
+      "codeNGAP": "R 90",
       "lettreCle": "R",
-      "coefficient": 120,
+      "coefficient": 90,
       "libelle": "Scanner avec injection de produit de contraste",
       "section": "IMAGERIE MODERNE",
       "chapter": "Scanner et IRM"
     },
     {
       "code": "9004",
-      "codeNGAP": "R 120",
+      "codeNGAP": "R 90",
       "lettreCle": "R",
-      "coefficient": 120,
+      "coefficient": 90,
       "libelle": "IRM avec injection de produit de contraste (Gadolinium)",
       "section": "IMAGERIE MODERNE",
       "chapter": "Scanner et IRM"

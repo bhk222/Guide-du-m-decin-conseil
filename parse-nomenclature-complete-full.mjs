@@ -189,8 +189,8 @@ console.log(`✅ ${actesUniques.length} actes extraits de la nomenclature offici
 const actesModernes = [
     { code: '9001', codeNGAP: 'R 90', lettreCle: 'R', coefficient: 90, libelle: 'Tomodensitométrie (TDM / Scanner) - par région anatomique', section: 'IMAGERIE MODERNE', chapter: 'Scanner et IRM' },
     { code: '9002', codeNGAP: 'R 90', lettreCle: 'R', coefficient: 90, libelle: 'Imagerie par Résonance Magnétique (IRM) - par région anatomique', section: 'IMAGERIE MODERNE', chapter: 'Scanner et IRM' },
-    { code: '9003', codeNGAP: 'R 120', lettreCle: 'R', coefficient: 120, libelle: 'Scanner avec injection de produit de contraste', section: 'IMAGERIE MODERNE', chapter: 'Scanner et IRM' },
-    { code: '9004', codeNGAP: 'R 120', lettreCle: 'R', coefficient: 120, libelle: 'IRM avec injection de produit de contraste (Gadolinium)', section: 'IMAGERIE MODERNE', chapter: 'Scanner et IRM' },
+    { code: '9003', codeNGAP: 'R 90', lettreCle: 'R', coefficient: 90, libelle: 'Scanner avec injection de produit de contraste', section: 'IMAGERIE MODERNE', chapter: 'Scanner et IRM' },
+    { code: '9004', codeNGAP: 'R 90', lettreCle: 'R', coefficient: 90, libelle: 'IRM avec injection de produit de contraste (Gadolinium)', section: 'IMAGERIE MODERNE', chapter: 'Scanner et IRM' },
     { code: '9010', codeNGAP: 'R 20', lettreCle: 'R', coefficient: 20, libelle: 'Radiographie standard (un cliché)', section: 'RADIOLOGIE', chapter: 'Radiographie simple' },
     { code: '9011', codeNGAP: 'R 30', lettreCle: 'R', coefficient: 30, libelle: 'Radiographie standard (deux clichés)', section: 'RADIOLOGIE', chapter: 'Radiographie simple' },
     { code: '9012', codeNGAP: 'K 50', lettreCle: 'K', coefficient: 50, libelle: 'Échographie abdominale', section: 'ECHOGRAPHIE', chapter: 'Échographie' },
