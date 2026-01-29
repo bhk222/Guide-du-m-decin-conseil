@@ -43,9 +43,8 @@ export const App: React.FC = () => {
 
     // Version de l'application
     useEffect(() => {
-        console.log('🏥 Guide du Médecin Conseil - Version V3.3.166');
-        console.log('✅ Fix: Déviation doigts D2-D5 - Détection ajoutée');
-        console.log('✅ Debug: Steppage - Logs détaillés activés');
+        console.log('🏥 Guide du Médecin Conseil - Version V3.3.167');
+        console.log('🔍 Debug VERBOSE: Logs détaillés steppage et déviation');
         console.log('📅 Build:', new Date().toISOString());
     }, []);
 
