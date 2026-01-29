@@ -11948,6 +11948,75 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
     // 🆕 V3.3.150: DÉTECTION SÉQUELLES MULTIPLES POLYTRAUMATISMES - Analyse exhaustive
     const detectedSequelae: Array<{name: string; keywords: string[]; context: string}> = [];
     
+    // ========== 0. DÉTECTIONS PRIORITAIRES CRITIQUES (V3.3.164) ==========
+    
+    // 🔴 AMPUTATION DOIGTS (D1-D5) - PRIORITÉ ABSOLUE
+    const amputationD5Match = /amputation.*(?:totale|compl[èe]te|du|de\s+l[a']?)?\s*D5/i.test(text);
+    const amputationD4Match = /amputation.*(?:totale|compl[èe]te|du|de\s+l[a']?)?\s*D4/i.test(text);
+    const amputationD3Match = /amputation.*(?:totale|compl[èe]te|du|de\s+l[a']?)?\s*D3/i.test(text);
+    const amputationD2Match = /amputation.*(?:totale|compl[èe]te|du|de\s+l[a']?)?\s*D2/i.test(text);
+    const amputationD1Match = /amputation.*(?:totale|compl[èe]te|du|de\s+l[a']?)?\s*(?:D1|pouce)/i.test(text);
+    const mainContext = /doigt|main/i.test(text);
+    
+    if (amputationD5Match && mainContext) {
+        console.log('✅ AMPUTATION D5 DÉTECTÉE (PRIORITÉ ABSOLUE)');
+        detectedSequelae.push({
+            name: 'Amputation de l\'auriculaire',
+            keywords: ['amputation', 'D5', 'auriculaire', 'doigt'],
+            context: text.match(/amputation.*D5[^.;]*/i)?.[0] || ''
+        });
+    }
+    
+    if (amputationD4Match && mainContext) {
+        console.log('✅ AMPUTATION D4 DÉTECTÉE');
+        detectedSequelae.push({
+            name: 'Amputation de l\'annulaire',
+            keywords: ['amputation', 'D4', 'annulaire'],
+            context: text.match(/amputation.*D4[^.;]*/i)?.[0] || ''
+        });
+    }
+    
+    if (amputationD3Match && mainContext) {
+        console.log('✅ AMPUTATION D3 DÉTECTÉE');
+        detectedSequelae.push({
+            name: 'Amputation du médius',
+            keywords: ['amputation', 'D3', 'médius'],
+            context: text.match(/amputation.*D3[^.;]*/i)?.[0] || ''
+        });
+    }
+    
+    if (amputationD2Match && mainContext) {
+        console.log('✅ AMPUTATION D2 DÉTECTÉE');
+        detectedSequelae.push({
+            name: 'Amputation de l\'index',
+            keywords: ['amputation', 'D2', 'index'],
+            context: text.match(/amputation.*D2[^.;]*/i)?.[0] || ''
+        });
+    }
+    
+    if (amputationD1Match && mainContext) {
+        console.log('✅ AMPUTATION D1/POUCE DÉTECTÉE');
+        detectedSequelae.push({
+            name: 'Amputation du pouce',
+            keywords: ['amputation', 'D1', 'pouce'],
+            context: text.match(/amputation.*(?:D1|pouce)[^.;]*/i)?.[0] || ''
+        });
+    }
+    
+    // 🔴 PARALYSIE SPE / STEPPAGE - PRIORITÉ ABSOLUE
+    const steppageMatch = /steppage|pied.*tomb[eé]|marche.*avec.*relev|paralysie.*SPE|sciatique.*poplit[ée].*externe/i.test(text);
+    const amyotrophieMIMatch = /amyotrophie.*(?:membre.*inf[ée]rieur|jambe|mollet)/i.test(text);
+    const fractureL1Match = /fracture.*(?:luxation.*)?L1|L1.*fracture/i.test(text);
+    
+    if (steppageMatch || (amyotrophieMIMatch && fractureL1Match)) {
+        console.log('✅ PARALYSIE SPE AVEC STEPPAGE DÉTECTÉE (PRIORITÉ ABSOLUE)');
+        detectedSequelae.push({
+            name: 'Paralysie du nerf sciatique poplité externe (SPE) avec steppage',
+            keywords: ['steppage', 'SPE', 'pied tombant', 'paralysie', 'sciatique poplité externe'],
+            context: text.match(/(?:steppage|pied.*tomb[eé]|paralysie.*SPE|sciatique.*poplit[ée])[^.;]*/i)?.[0] || ''
+        });
+    }
+    
     // ========== 1. NEUROLOGIQUE / ORL ==========
     
     // Détecter surdité par dB - Pattern simplifié pour capturer CHAQUE mention de dB
