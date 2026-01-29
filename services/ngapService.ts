@@ -30,24 +30,40 @@ export interface ResultatCalcul {
 function chargerActesNGAP(): ActeNGAP[] {
     const actes: ActeNGAP[] = [];
     
-    Object.entries(ngapData.categories).forEach(([categorieName, actesCategorie]) => {
-        (actesCategorie as any[]).forEach(acte => {
-            // Construire le code officiel de la nomenclature algérienne: lettreCle + coef
-            const codeOfficiel = acte.coef2 
-                ? `${acte.lettreCle}${acte.coef}+${acte.coef2}` 
-                : `${acte.lettreCle} ${acte.coef}`;
-            
+    // Nouveau format: liste directe d'actes
+    if (Array.isArray((ngapData as any).actes)) {
+        ((ngapData as any).actes as any[]).forEach(acte => {
             actes.push({
-                code: codeOfficiel, // Utiliser le code officiel (ex: "K 15", "B 30")
+                code: acte.codeNGAP || `${acte.lettreCle} ${acte.coefficient}`, // Code officiel (ex: "B 30", "K 15")
                 lettreCle: acte.lettreCle,
-                coefficient: acte.coef,
+                coefficient: acte.coefficient,
                 libelle: acte.libelle,
-                tarif: acte.tarif * 100, // Convertir en centimes
-                categorie: categorieName.charAt(0).toUpperCase() + categorieName.slice(1).replace(/_/g, ' '),
-                synonymes: acte.synonymes || []
+                tarif: 0, // Pas de tarif dans ce fichier source
+                categorie: acte.chapter || acte.section || 'Général',
+                synonymes: acte.libelle.toLowerCase().split(/\s+/).filter((w: string) => w.length > 3)
             });
         });
-    });
+    }
+    // Ancien format: par catégories (fallback)
+    else if ((ngapData as any).categories) {
+        Object.entries((ngapData as any).categories).forEach(([categorieName, actesCategorie]) => {
+            (actesCategorie as any[]).forEach(acte => {
+                const codeOfficiel = acte.coef2 
+                    ? `${acte.lettreCle}${acte.coef}+${acte.coef2}` 
+                    : `${acte.lettreCle} ${acte.coef}`;
+                
+                actes.push({
+                    code: codeOfficiel,
+                    lettreCle: acte.lettreCle,
+                    coefficient: acte.coef,
+                    libelle: acte.libelle,
+                    tarif: acte.tarif * 100,
+                    categorie: categorieName.charAt(0).toUpperCase() + categorieName.slice(1).replace(/_/g, ' '),
+                    synonymes: acte.synonymes || []
+                });
+            });
+        });
+    }
     
     return actes;
 }
