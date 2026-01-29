@@ -12008,12 +12008,33 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
     const amyotrophieMIMatch = /amyotrophie.*(?:membre.*inf[ée]rieur|jambe|mollet)/i.test(text);
     const fractureL1Match = /fracture.*(?:luxation.*)?L1|L1.*fracture/i.test(text);
     
+    console.log('🔍 DEBUG STEPPAGE:', {
+        steppageMatch,
+        amyotrophieMIMatch,
+        fractureL1Match,
+        texteRecherche: text.substring(0, 200)
+    });
+    
     if (steppageMatch || (amyotrophieMIMatch && fractureL1Match)) {
         console.log('✅ PARALYSIE SPE AVEC STEPPAGE DÉTECTÉE (PRIORITÉ ABSOLUE)');
         detectedSequelae.push({
             name: 'Paralysie du nerf sciatique poplité externe (SPE) avec steppage',
             keywords: ['steppage', 'SPE', 'pied tombant', 'paralysie', 'sciatique poplité externe'],
             context: text.match(/(?:steppage|pied.*tomb[eé]|paralysie.*SPE|sciatique.*poplit[ée])[^.;]*/i)?.[0] || ''
+        });
+    }
+    
+    // 🔴 DÉVIATION DOIGTS (D2-D5) - PRIORITÉ ABSOLUE
+    // Tolérant aux fautes: diviation, deviation, déviation
+    const deviationMatch = /d[ée iey]via?tion.*(?:doigt|D[2345])|(?:doigt|D[2345]).*d[ée iey]vi[ée]/i.test(text);
+    if (deviationMatch && mainContext) {
+        const doigtsMatch = text.match(/D([2345])/gi);
+        const doigtsString = doigtsMatch ? doigtsMatch.join(' ') : 'doigts';
+        console.log('✅ DÉVIATION DOIGTS DÉTECTÉE:', doigtsString);
+        detectedSequelae.push({
+            name: `Déviation multiple des doigts ${doigtsString}`,
+            keywords: ['déviation', 'doigts', 'déformation'],
+            context: text.match(/d[ée iey]via?tion.*doigt[^.;]*/i)?.[0] || ''
         });
     }
     

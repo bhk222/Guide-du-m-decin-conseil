@@ -43,9 +43,9 @@ export const App: React.FC = () => {
 
     // Version de l'application
     useEffect(() => {
-        console.log('🏥 Guide du Médecin Conseil - Version V3.3.165');
-        console.log('✅ Fix CRITIQUE: Amputation D5 - Détection manuelle prioritaire');
-        console.log('✅ Fix CRITIQUE: Steppage/SPE - Détection manuelle prioritaire');
+        console.log('🏥 Guide du Médecin Conseil - Version V3.3.166');
+        console.log('✅ Fix: Déviation doigts D2-D5 - Détection ajoutée');
+        console.log('✅ Debug: Steppage - Logs détaillés activés');
         console.log('📅 Build:', new Date().toISOString());
     }, []);
 
