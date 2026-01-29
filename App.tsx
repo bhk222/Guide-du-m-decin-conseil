@@ -41,6 +41,14 @@ export const App: React.FC = () => {
     const [victimInfo, setVictimInfo] = useState({ age: '', profession: '', sector: 'prive', gender: 'homme', company: '' });
     const [accidentType, setAccidentType] = useState('');
 
+    // Version de l'application
+    useEffect(() => {
+        console.log('🏥 Guide du Médecin Conseil - Version V3.3.164');
+        console.log('✅ Fix: Amputation D5 - Retrait negativeContext bloquant');
+        console.log('✅ Fix: Steppage/Amyotrophie neurologique détection améliorée');
+        console.log('📅 Build:', new Date().toISOString());
+    }, []);
+
     // Détecter le statut en ligne/hors ligne
     useEffect(() => {
         const handleOnline = () => setIsOnline(true);
