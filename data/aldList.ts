@@ -3436,12 +3436,268 @@ export const aldData: AldItem[] = [
                 </div>
               </div>`
             }, 
-            { code: "C07A02", name: "Infarctus du myocarde", info: `
-              <div class="space-y-3">
+            { 
+              code: "C07A02", 
+              name: "Infarctus du myocarde", 
+              tooltip: `<div class="space-y-3">
+                <h3 class="font-bold text-lg text-primary-700">INFARCTUS DU MYOCARDE — Guide Complet</h3>
+                
                 <div>
-                  <p><strong>1. Définition</strong></p>
-                  <p><span class="tooltip-term" title="Syndrome clinique lié à une ischémie coronaire aiguë">Syndrome coronarien aigu</span> correspondant à une <span class="tooltip-term" title="Mort cellulaire du tissu cardiaque par privation prolongée d'oxygène">nécrose myocardique</span> irréversible secondaire à une occlusion aiguë d'une <span class="tooltip-term" title="Artères vascularisant le muscle cardiaque (coronaires droite et gauche)">artère coronaire</span>, le plus souvent par <span class="tooltip-term" title="Formation d'un caillot sanguin obstruant la lumière artérielle">thrombose</span> sur <span class="tooltip-term" title="Dépôt lipidique dans la paroi artérielle pouvant se rompre">plaque athéroscléreuse</span> fissurée/rompue, objectivée par une élévation significative et dynamique des <span class="tooltip-term" title="Protéines cardiaques (cTnI/cTnT) libérées lors de lésion myocardique">troponines</span>.</p>
+                  <h4 class="font-semibold text-primary-600">🔹 1. PHYSIOPATHOLOGIE</h4>
+                  <p class="text-sm"><strong>Mécanisme :</strong></p>
+                  <p class="text-sm">Rupture d'une plaque d'athérome → Formation d'un thrombus (caillot) → Occlusion complète et brutale d'une artère coronaire</p>
+                  <p class="text-sm mt-2"><strong>Conséquence :</strong> Ischémie prolongée (> 20-30 min) entraînant une nécrose irréversible du muscle cardiaque (myocarde)</p>
                 </div>
+
+                <div class="bg-blue-50 p-3 rounded-lg border border-blue-200">
+                  <h4 class="font-semibold text-blue-800">🔹 2. DIAGNOSTIC CLINIQUE</h4>
+                  <p class="text-sm text-blue-900 mt-2"><strong>Douleur thoracique typique :</strong></p>
+                  <ul class="list-disc pl-5 text-sm text-blue-900 space-y-1">
+                    <li><strong>Constrictive / Oppressive</strong> : "un poids sur la poitrine", "un étau"</li>
+                    <li><strong>Rétrosternale</strong> (derrière le sternum)</li>
+                    <li><strong>Irradiation :</strong> mâchoire, bras gauche, dos, épigastre</li>
+                    <li><strong>Prolongée :</strong> > 20-30 minutes, ne cède pas au repos ni à la trinitrine</li>
+                    <li><strong>Contexte :</strong> Survient au repos ou à l'effort</li>
+                  </ul>
+                  <p class="text-sm text-blue-900 mt-3"><strong>Formes atypiques (trompeuses) :</strong></p>
+                  <ul class="list-disc pl-5 text-sm text-blue-900 space-y-1">
+                    <li><strong>Femme, diabétique, âgé :</strong> Malaise, fatigue intense, nausées, dyspnée</li>
+                    <li><strong>Asymptomatique :</strong> IDM "silencieux" (surtout diabétiques)</li>
+                  </ul>
+                </div>
+
+                <div>
+                  <h4 class="font-semibold text-primary-600">🔹 3. DIAGNOSTIC ECG — LA CLÉ 🔑</h4>
+                  <p class="text-sm"><strong>ECG 12 dérivations à faire EN URGENCE (&lt; 10 min)</strong></p>
+                  <p class="text-sm mt-2"><strong>🟢 SCA-ST+ (STEMI) :</strong></p>
+                  <ul class="list-disc pl-5 text-sm space-y-1">
+                    <li><strong>SUS-DÉCALAGE du segment ST ≥ 1 mm</strong> dans au moins 2 dérivations concordantes (territoire)</li>
+                    <li><strong>"Onde de Pardee" :</strong> Aspect convexe vers le haut (en "dôme")</li>
+                    <li><strong>Image en miroir :</strong> Sous-décalage dans les dérivations opposées</li>
+                    <li>👉 <strong>URGENCE ABSOLUE</strong> → Reperfusion immédiate (PCI ou fibrinolyse)</li>
+                  </ul>
+                  <p class="text-sm mt-2"><strong>🟡 SCA-ST- (NSTEMI/Angor instable) :</strong></p>
+                  <ul class="list-disc pl-5 text-sm space-y-1">
+                    <li>Sous-décalage ST, inversion ondes T, ou ECG normal</li>
+                    <li>👉 Diagnostic par dosage de troponines + score GRACE</li>
+                  </ul>
+                  
+                  <div class="overflow-x-auto mt-3">
+                    <table class="w-full text-sm border-collapse border border-gray-300 rounded-lg">
+                      <thead class="bg-gray-100">
+                        <tr>
+                          <th class="border border-gray-300 p-2 text-left">LOCALISATION</th>
+                          <th class="border border-gray-300 p-2 text-left">DÉRIVATIONS ECG</th>
+                          <th class="border border-gray-300 p-2 text-left">ARTÈRE COUPABLE</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td class="border border-gray-300 p-2">Antérieur (étendu)</td>
+                          <td class="border border-gray-300 p-2">V1 à V4 (voire V5-V6)</td>
+                          <td class="border border-gray-300 p-2"><strong>IVA</strong> (Interventriculaire antérieure)</td>
+                        </tr>
+                        <tr class="bg-gray-50">
+                          <td class="border border-gray-300 p-2">Latéral (haut)</td>
+                          <td class="border border-gray-300 p-2">D1, aVL</td>
+                          <td class="border border-gray-300 p-2"><strong>Circonflexe</strong></td>
+                        </tr>
+                        <tr>
+                          <td class="border border-gray-300 p-2">Latéral (bas)</td>
+                          <td class="border border-gray-300 p-2">V5, V6</td>
+                          <td class="border border-gray-300 p-2"><strong>Circonflexe</strong> ou <strong>Coronaire droite</strong></td>
+                        </tr>
+                        <tr class="bg-gray-50">
+                          <td class="border border-gray-300 p-2">Inférieur</td>
+                          <td class="border border-gray-300 p-2">D2, D3, aVF</td>
+                          <td class="border border-gray-300 p-2"><strong>Coronaire droite</strong> (90 %)</td>
+                        </tr>
+                        <tr>
+                          <td class="border border-gray-300 p-2">Postérieur (basal)</td>
+                          <td class="border border-gray-300 p-2">V7, V8, V9 (ou miroir V1-V3)</td>
+                          <td class="border border-gray-300 p-2"><strong>Circonflexe</strong></td>
+                        </tr>
+                        <tr class="bg-gray-50">
+                          <td class="border border-gray-300 p-2">Ventricule droit</td>
+                          <td class="border border-gray-300 p-2">V3R, V4R (+ IDM inférieur)</td>
+                          <td class="border border-gray-300 p-2"><strong>Coronaire droite</strong> (proximale)</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+
+                <div class="bg-purple-50 p-3 rounded-lg border border-purple-200">
+                  <h4 class="font-semibold text-purple-800">🔹 4. BIOLOGIE</h4>
+                  <p class="text-sm text-purple-900 mt-2"><strong>TROPONINE (cTnI ou cTnT) :</strong></p>
+                  <ul class="list-disc pl-5 text-sm text-purple-900 space-y-1">
+                    <li><strong>Marqueur de référence</strong> (plus spécifique que CPK-MB)</li>
+                    <li><strong>Dosage à T0, puis à 3 heures</strong></li>
+                    <li>Élévation dès <strong>3-4 heures</strong>, pic 12-24 h, persiste 7-14 jours</li>
+                    <li>👉 <strong>Si normale à H0 mais forte suspicion clinique → Redoser à H3 !</strong></li>
+                  </ul>
+                  <p class="text-sm text-purple-900 mt-2"><strong>Autres marqueurs (moins utilisés) :</strong></p>
+                  <ul class="list-disc pl-5 text-sm text-purple-900">
+                    <li>CPK-MB : moins spécifique</li>
+                    <li>Myoglobine : précoce mais peu spécifique</li>
+                  </ul>
+                </div>
+
+                <div>
+                  <h4 class="font-semibold text-primary-600">🔹 5. PRISE EN CHARGE IMMÉDIATE (PHASE AIGUË)</h4>
+                  <p class="text-sm"><strong>Conditionnement :</strong></p>
+                  <ul class="list-disc pl-5 text-sm space-y-1">
+                    <li>✅ Appel SAMU / Monitoring cardiaque / Repos strict / O₂ si SpO₂ &lt; 90 %</li>
+                    <li>✅ Voie veineuse périphérique</li>
+                  </ul>
+                  <p class="text-sm mt-2"><strong>Traitement antithrombotique immédiat :</strong></p>
+                  <ul class="list-disc pl-5 text-sm space-y-1">
+                    <li><strong>Aspirine 250-500 mg</strong> à croquer/avaler (sauf allergie)</li>
+                    <li><strong>Anti-P2Y12 :</strong> Ticagrélor 180 mg ou Prasugrel 60 mg (loading dose)</li>
+                    <li><strong>Anticoagulation :</strong> HBPM (énoxaparine), HNF ou fondaparinux</li>
+                  </ul>
+                  <p class="text-sm mt-2"><strong>Antalgie :</strong></p>
+                  <ul class="list-disc pl-5 text-sm">
+                    <li>Morphine titrée si douleur persistante</li>
+                  </ul>
+                  <p class="text-sm mt-2"><strong>🔴 STRATÉGIE DE REPERFUSION (SCA ST+) :</strong></p>
+                  <div class="overflow-x-auto mt-2">
+                    <table class="w-full text-sm border-collapse border border-gray-300 rounded-lg">
+                      <thead class="bg-gray-100">
+                        <tr>
+                          <th class="border border-gray-300 p-2 text-left">STRATÉGIE</th>
+                          <th class="border border-gray-300 p-2 text-left">DÉLAI</th>
+                          <th class="border border-gray-300 p-2 text-left">MÉTHODE</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td class="border border-gray-300 p-2"><strong>1ère intention</strong></td>
+                          <td class="border border-gray-300 p-2"><strong>&lt; 120 min</strong> (contact médical → reperfusion)</td>
+                          <td class="border border-gray-300 p-2"><strong>ANGIOPLASTIE PRIMAIRE (PCI)</strong> avec pose de stent</td>
+                        </tr>
+                        <tr class="bg-gray-50">
+                          <td class="border border-gray-300 p-2"><strong>Alternative</strong></td>
+                          <td class="border border-gray-300 p-2">Si délai > 120 min ou absence de plateau technique</td>
+                          <td class="border border-gray-300 p-2"><strong>FIBRINOLYSE</strong> (altéplase, tenectéplase) puis transfert</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <p class="text-sm mt-2">👉 <strong>« TIME IS MUSCLE » : Chaque minute compte !</strong></p>
+                </div>
+
+                <div class="bg-red-50 p-3 rounded-lg border-2 border-red-400">
+                  <h4 class="font-semibold text-red-800">⚠️ 6. LES 5 « C » — COMPLICATIONS DE L'IDM</h4>
+                  <ul class="list-disc pl-5 text-sm text-red-900 space-y-2 mt-2">
+                    <li>
+                      <strong>1️⃣ Complications rythmiques (Cardiac arrhythmias) :</strong>
+                      <ul class="list-disc pl-5 text-sm space-y-1 mt-1">
+                        <li><strong>Troubles du rythme ventriculaire :</strong> TV, FV (cause principale de mort subite dans les 1ères heures)</li>
+                        <li><strong>Troubles de conduction :</strong> BAV (surtout IDM inférieur)</li>
+                        <li>👉 Nécessité de monitoring continu en USIC</li>
+                      </ul>
+                    </li>
+                    <li>
+                      <strong>2️⃣ Choc cardiogénique (Cardiogenic shock) :</strong>
+                      <ul class="list-disc pl-5 text-sm space-y-1 mt-1">
+                        <li>Défaillance de la pompe cardiaque → TAS &lt; 90 mmHg, oligurie, marbrures, extrémités froides</li>
+                        <li>Mortalité élevée (40-50 %) malgré la revascularisation</li>
+                      </ul>
+                    </li>
+                    <li>
+                      <strong>3️⃣ Complications mécaniques (Complications) :</strong>
+                      <ul class="list-disc pl-5 text-sm space-y-1 mt-1">
+                        <li><strong>Rupture de la paroi libre du VG :</strong> tamponnade (urgence extrême)</li>
+                        <li><strong>Communication interventriculaire (CIV) :</strong> souffle systolique brutal</li>
+                        <li><strong>Insuffisance mitrale aiguë :</strong> rupture/dysfonction de pilier</li>
+                      </ul>
+                    </li>
+                    <li>
+                      <strong>4️⃣ Caillot/Thrombus (Clot) :</strong>
+                      <ul class="list-disc pl-5 text-sm space-y-1 mt-1">
+                        <li><strong>Thrombus intra-VG :</strong> risque embolique (AVC)</li>
+                        <li>Anticoagulation si FEVG &lt; 35 % ou thrombus visible</li>
+                      </ul>
+                    </li>
+                    <li>
+                      <strong>5️⃣ Complications péricardiques (pericarditis) :</strong>
+                      <ul class="list-disc pl-5 text-sm space-y-1 mt-1">
+                        <li><strong>Péricardite précoce :</strong> J2-J5, transmural, douleur + frottement</li>
+                        <li><strong>Syndrome de Dressler :</strong> 2-8 semaines, réaction immunitaire (auto-anticorps anti-myocarde)</li>
+                      </ul>
+                    </li>
+                  </ul>
+                </div>
+
+                <div class="bg-green-50 p-3 rounded-lg border border-green-200">
+                  <h4 class="font-semibold text-green-800">🔹 7. TRAITEMENT AU LONG COURS — LE « BASIC »</h4>
+                  <p class="text-sm text-green-900 mt-2"><strong>Acronyme mnémotechnique pour retenir les 5 piliers :</strong></p>
+                  <ul class="list-disc pl-5 text-sm text-green-900 space-y-2 mt-2">
+                    <li>
+                      <strong>B</strong> = <strong>Bêta-bloquants</strong>
+                      <ul class="list-disc pl-5 text-sm mt-1">
+                        <li>Bisoprolol, métoprolol, carvédilol</li>
+                        <li>Objectif FC : 50-60 bpm</li>
+                      </ul>
+                    </li>
+                    <li>
+                      <strong>A</strong> = <strong>Antiagrégants plaquettaires</strong>
+                      <ul class="list-disc pl-5 text-sm mt-1">
+                        <li><strong>Bithérapie (DAPT) :</strong> Aspirine + anti-P2Y12 (ticagrélor ou prasugrel)</li>
+                        <li>Durée : 12 mois minimum</li>
+                      </ul>
+                    </li>
+                    <li>
+                      <strong>S</strong> = <strong>Statines</strong>
+                      <ul class="list-disc pl-5 text-sm mt-1">
+                        <li>Atorvastatine 80 mg (haute intensité)</li>
+                        <li>Objectif LDL &lt; 0,55 g/L (≈ 1,4 mmol/L)</li>
+                      </ul>
+                    </li>
+                    <li>
+                      <strong>I</strong> = <strong>IEC (ou ARA2 si intolérance)</strong>
+                      <ul class="list-disc pl-5 text-sm mt-1">
+                        <li>Ramipril, périndopril</li>
+                        <li>Surtout si FEVG &lt; 40 % ou insuffisance cardiaque</li>
+                      </ul>
+                    </li>
+                    <li>
+                      <strong>C</strong> = <strong>Correction des FDR CV (Facteurs de Risque CardioVasculaire)</strong>
+                      <ul class="list-disc pl-5 text-sm mt-1">
+                        <li><strong>Arrêt tabac ++++ (priorité n°1)</strong></li>
+                        <li>Contrôle HTA, diabète, dyslipidémie</li>
+                        <li>Activité physique régulière (réadaptation cardiaque)</li>
+                        <li>Régime méditerranéen, contrôle du poids</li>
+                      </ul>
+                    </li>
+                  </ul>
+                </div>
+
+                <div class="bg-yellow-50 p-3 rounded-lg border border-yellow-300">
+                  <h4 class="font-semibold text-yellow-800">📋 MÉMO DU PRATICIEN</h4>
+                  <p class="text-sm text-yellow-900 mt-2"><strong>🔴 PIÈGE : IDM inférieur (D2, D3, aVF) :</strong></p>
+                  <ul class="list-disc pl-5 text-sm text-yellow-900 space-y-1">
+                    <li><strong>Signes vagaux fréquents :</strong> Bradycardie, hypotension, nausées, vomissements</li>
+                    <li>👉 Penser à atropine si bradycardie symptomatique</li>
+                    <li>👉 <strong>Rechercher IDM VD associé</strong> (ECG en V3R-V4R) : contre-indication aux dérivés nitrés !</li>
+                  </ul>
+                  <p class="text-sm text-yellow-900 mt-3"><strong>✅ Reperfusion réussie (critères indirects) :</strong></p>
+                  <ul class="list-disc pl-5 text-sm text-yellow-900">
+                    <li>Régression rapide de la douleur</li>
+                    <li>Diminution du sus-décalage ST > 50 % en 60-90 min</li>
+                    <li>Troubles du rythme ventriculaire transitoires ("arythmie de reperfusion")</li>
+                  </ul>
+                  <p class="text-sm text-yellow-900 mt-3"><strong>🔴 Contre-indications absolues fibrinolyse :</strong></p>
+                  <ul class="list-disc pl-5 text-sm text-yellow-900">
+                    <li>AVC hémorragique ou ischémique &lt; 3 mois</li>
+                    <li>Traumatisme crânien récent, néoplasie cérébrale</li>
+                    <li>Hémorragie active, diathèse hémorragique</li>
+                    <li>Dissection aortique suspectée</li>
+                  </ul>
+                </div>
+              </div>`
+            },
                 
                 <div>
                   <p><strong>2. Classification</strong></p>
