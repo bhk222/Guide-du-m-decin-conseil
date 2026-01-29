@@ -33,6 +33,9 @@ export const NGAPCalculateur: React.FC = () => {
         } else {
             setExpressionCalcul(code);
         }
+        // Vider les résultats de recherche après ajout
+        setResultatsRecherche([]);
+        setRechercheQuery('');
     };
 
     const handleCalculer = () => {
