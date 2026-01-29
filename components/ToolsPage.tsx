@@ -8,7 +8,6 @@ import { GfrCalculator } from './tools/GfrCalculator';
 import { AldList } from './tools/AldList';
 import { DrugDictionary } from './tools/DrugDictionary';
 import { ReverseIppSearch } from './tools/ReverseIppSearch';
-import { IAValidator } from './IAValidator';
 import { NomenclatureGenerale } from './tools/NomenclatureGenerale';
 import { NGAPCalculateur } from './tools/NGAPCalculateur';
 
@@ -87,13 +86,6 @@ const tools = [
         description: "Recherche sémantique d'actes médicaux pour trouver les codes NGAP. Ex: FNS → B30, consultation → C, injection → K2.",
         icon: <CalculatorPlusIcon />,
         component: <NGAPCalculateur />
-    },
-    {
-        id: "ia-validator",
-        title: "🔬 Validation IA Médico-Légale",
-        description: "Testez automatiquement l'expertise de l'IA locale sur 297 cas cliniques de référence. Métriques: reconnaissance, précision IPP, temps réponse.",
-        icon: <AIIcon />,
-        component: <IAValidator />
     },
     {
         id: "insulin",
