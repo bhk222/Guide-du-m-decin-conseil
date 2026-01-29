@@ -1,15 +1,15 @@
 {
-  "version": "2026",
+  "version": "2026-v2",
   "date": "2026-01-29",
-  "source": "Nomenclature Algérienne 1987 + Actes modernes",
-  "totalActes": 233,
+  "source": "Nomenclature Algérienne 1987 + Actes modernes 2026",
+  "totalActes": 274,
   "actes": [
     {
       "code": "0086",
       "codeNGAP": "E 30",
       "lettreCle": "E",
       "coefficient": 30,
-      "libelle": "Ablation d'angiome ou delymp.hanglome volumineux...",
+      "libelle": "Ablation d'angiome ou delymp.hanglome volumineux 40",
       "section": "TITRE IX. TOXICOLOGIE",
       "chapter": "CHAPITRE 3. Liquide Gastrique"
     },
@@ -18,7 +18,7 @@
       "codeNGAP": "E 25",
       "lettreCle": "E",
       "coefficient": 25,
-      "libelle": "exérése d'une tumeur osseuse bénigne oblitérante du conduit auditif externe...,...,...",
+      "libelle": "exérése d'une tumeur osseuse bénigne oblitérante du conduit auditif externe,, 60",
       "section": "TITRE IX. TOXICOLOGIE",
       "chapter": "CHAPITRE 3. Liquide Gastrique"
     },
@@ -27,7 +27,7 @@
       "codeNGAP": "E 30",
       "lettreCle": "E",
       "coefficient": 30,
-      "libelle": "Chirurgie corrective bilatérale des oreilles...",
+      "libelle": "Chirurgie corrective bilatérale des oreilles 60",
       "section": "TITRE IX. TOXICOLOGIE",
       "chapter": "CHAPITRE 3. Liquide Gastrique"
     },
@@ -36,7 +36,16 @@
       "codeNGAP": "E 40",
       "lettreCle": "E",
       "coefficient": 40,
-      "libelle": "Reconstitution du pavillon de l'oreille pour aplasie ou mutilation grave, avee greffe cartilagineuse. non compris les temps de préparation des lambeaux cutanés...",
+      "libelle": "Reconstitution du pavillon de l'oreille pour aplasie ou mutilation grave, avee greffe cartilagineuse. non compris les temps de préparation des lambeaux cutanés 120",
+      "section": "TITRE IX. TOXICOLOGIE",
+      "chapter": "CHAPITRE 3. Liquide Gastrique"
+    },
+    {
+      "code": "0379",
+      "codeNGAP": "O 50",
+      "lettreCle": "O",
+      "coefficient": 50,
+      "libelle": "Evidement pétro-mastoïdien;;, 1 ",
       "section": "TITRE IX. TOXICOLOGIE",
       "chapter": "CHAPITRE 3. Liquide Gastrique"
     },
@@ -45,16 +54,7 @@
       "codeNGAP": "E 30",
       "lettreCle": "E",
       "coefficient": 30,
-      "libelle": "Plastie narinaire... _...,..",
-      "section": "TITRE IX. TOXICOLOGIE",
-      "chapter": "CHAPITRE 3. Liquide Gastrique"
-    },
-    {
-      "code": "0394",
-      "codeNGAP": "E 50",
-      "lettreCle": "E",
-      "coefficient": 50,
-      "libelle": "Chirurgie réparatrice de la pyramide nasale avec greffe osseusè ou cartilagineuse. non compris les temps de préparation de lambeaux cutan\"'és..",
+      "libelle": "Plastie narinaire _,.. 80",
       "section": "TITRE IX. TOXICOLOGIE",
       "chapter": "CHAPITRE 3. Liquide Gastrique"
     },
@@ -63,7 +63,16 @@
       "codeNGAP": "E 30",
       "lettreCle": "E",
       "coefficient": 30,
-      "libelle": "Réduction d'une fracture récente du nez avec appareillage..,., 20 25 0393.Rhinoplastie post-traumatique, y compris le traitement de la cloison..",
+      "libelle": "Réduction d'une fracture récente du nez avec appareillage..,., 20 25 0393.Rhinoplastie post-traumatique, y compris le traitement de la cloison.. 100",
+      "section": "TITRE IX. TOXICOLOGIE",
+      "chapter": "CHAPITRE 3. Liquide Gastrique"
+    },
+    {
+      "code": "0394",
+      "codeNGAP": "E 50",
+      "lettreCle": "E",
+      "coefficient": 50,
+      "libelle": "Chirurgie réparatrice de la pyramide nasale avec greffe osseusè ou cartilagineuse. non compris les temps de préparation de lambeaux cutan\"'és.. 120",
       "section": "TITRE IX. TOXICOLOGIE",
       "chapter": "CHAPITRE 3. Liquide Gastrique"
     },
@@ -72,7 +81,7 @@
       "codeNGAP": "E 50",
       "lettreCle": "E",
       "coefficient": 50,
-      "libelle": "Traitement d'une pansinusité unilatérale. quelle que soit la voie d'abord",
+      "libelle": "Traitement d'une pansinusité unilatérale. quelle que soit la voie d'abord 120",
       "section": "TITRE IX. TOXICOLOGIE",
       "chapter": "CHAPITRE 3. Liquide Gastrique"
     },
@@ -81,16 +90,43 @@
       "codeNGAP": "E 30",
       "lettreCle": "E",
       "coefficient": 30,
-      "libelle": "Correction de dépression traumatique ou congénitale de !n face n'intéressant pas l'orbité, la greffe osseuse, c utanéo-muqueuse, dermo-graisseuse ou par matériau Inerte (flrélèvement da greffon osseux non compris)..",
+      "libelle": "Correction de dépression traumatique ou congénitale de !n face n'intéressant pas l'orbité, la greffe osseuse, c utanéo-muqueuse, dermo-graisseuse ou par matériau Inerte (flrélèvement da greffon osseux non compris).. 80",
       "section": "TITRE IX. TOXICOLOGIE",
       "chapter": "CHAPITRE 3. Liquide Gastrique"
+    },
+    {
+      "code": "0421",
+      "codeNGAP": "E 60",
+      "lettreCle": "E",
+      "coefficient": 60,
+      "libelle": "Réfeètion uni ou bilatérale d'un massif osseux par greffe osseus cartilagineuse. ou par: matériau\" inerte, intéressan{l'orbite, l'os malaire, les maxillaires ou ta r,landibule pour lésion congénitale ou ancienne. 150",
+      "section": "TITRE IX. TOXICOLOGIE",
+      "chapter": "CHAPITRE 3. Liquide Gastrique"
+    },
+    {
+      "code": "0512",
+      "codeNGAP": "E 30",
+      "lettreCle": "E",
+      "coefficient": 30,
+      "libelle": "Extraction d'une dent en désinclusion dont la couronne ast us-muqu use an posrtion palatine ou linguale:.. c: !\", 50 30 1l5î3 Extraction d'une dent ectopique et inculse,(coroné, gooion branche montante, bord basilaire de la branche -et du menton, sinus) 80 30 Extrz,ction Ghlrurgica!e d\\mg dent p.ermanente incluse, traitement radiculaire, reilTiplantation, ccr.tentlcn: 0514/1 D'une dent..,..,.,.. 100",
+      "section": "TITRE IX. TOXICOLOGIE",
+      "chapter": "CHAPITRE VII - DENTS, GENCIVES."
     },
     {
       "code": "0571",
       "codeNGAP": "E 25",
       "lettreCle": "E",
       "coefficient": 25,
-      "libelle": "E~luchage du larynx sous laryngoscopie en suspension...",
+      "libelle": "Eluchage du larynx sous laryngoscopie en suspension 50",
+      "section": "TITRE IX. TOXICOLOGIE",
+      "chapter": "CHAPITRE VII - DENTS, GENCIVES."
+    },
+    {
+      "code": "0582",
+      "codeNGAP": "O 130",
+      "lettreCle": "O",
+      "coefficient": 130,
+      "libelle": "Pharyngolaryngectomie avec curage ganglionnaire.. \" 2!)",
       "section": "TITRE IX. TOXICOLOGIE",
       "chapter": "CHAPITRE VII - DENTS, GENCIVES."
     },
@@ -99,7 +135,7 @@
       "codeNGAP": "E 30",
       "lettreCle": "E",
       "coefficient": 30,
-      "libelle": "Lipectomie antérieure.... \"! • •. • • • •.. •.. •...",
+      "libelle": "Lipectomie antérieure. \"!  .    .. ..  80",
       "section": "TITRE IX. TOXICOLOGIE",
       "chapter": "CHAPITRE VII - DENTS, GENCIVES."
     },
@@ -108,16 +144,7 @@
       "codeNGAP": "E 40",
       "lettreCle": "E",
       "coefficient": 40,
-      "libelle": "Upactomie totale ciréulaire...",
-      "section": "TITRE IX. TOXICOLOGIE",
-      "chapter": "CHAPITRE VII - DENTS, GENCIVES."
-    },
-    {
-      "code": "0763",
-      "codeNGAP": "JO 60",
-      "lettreCle": "JO",
-      "coefficient": 60,
-      "libelle": "Traitement chirurgical des hernies, éventrations de plus de 10 cm de diamètre, avec perte de substance de la paroi abdominale avec ou sans plastie ycompris les prothèses... '... \\.. 10035 Traitement chirurgical des hernies ou éventrations étranglées: 0766/1 Sans résection' intestinale.. < • • • • • • • • • • • • • • • • • • • • • • • • • • • • 60 30 0766/2 Avec résection de l'intestin ou de tout autre viscére 10060 Laparo'LOmie: 0761/1 Exploratrice. évacuatrice 50 0767/2 D'urgence pour hemorragi",
+      "libelle": "Upactomie totale ciréulaire 100",
       "section": "TITRE IX. TOXICOLOGIE",
       "chapter": "CHAPITRE VII - DENTS, GENCIVES."
     },
@@ -126,7 +153,7 @@
       "codeNGAP": "B 40",
       "lettreCle": "B",
       "coefficient": 40,
-      "libelle": "Diagnostic du sexe chromatiniAn ~ur frçttiR..",
+      "libelle": "Diagnostic du sexe chromatiniAn ur frçttiR..",
       "section": "TITRE III",
       "chapter": "CHAPITRE 3."
     },
@@ -135,7 +162,7 @@
       "codeNGAP": "B 50",
       "lettreCle": "B",
       "coefficient": 50,
-      "libelle": "Diagnostic cytopathologique d'une lésion, par étalements et/ou apposi. tion.s...,...,. '\"...",
+      "libelle": "Diagnostic cytopathologique d'une lésion, par étalements et/ou apposi. tion.s,,. '\"",
       "section": "TITRE III",
       "chapter": "CHAPITRE 3."
     },
@@ -162,7 +189,7 @@
       "codeNGAP": "B 120",
       "lettreCle": "B",
       "coefficient": 120,
-      "libelle": "Diagnostic histopathologique. par ine lusion et coupe d'une pièce opéra· toire intéressant un organe...",
+      "libelle": "Diagnostic histopathologique. par ine lusion et coupe d'une pièce opéra· toire intéressant un organe",
       "section": "TITRE III",
       "chapter": "CHAPITRE 3."
     },
@@ -171,7 +198,16 @@
       "codeNGAP": "B 120",
       "lettreCle": "B",
       "coefficient": 120,
-      "libelle": "Diagnostic histopathoJogique. par inclusion et coupe de prélèvements prevenant d'une résection ou d'un.curetage effectués par voie endoscopique (quel que soit le nombre de fragments)...",
+      "libelle": "Diagnostic histopathoJogique. par inclusion et coupe de prélèvements prevenant d'une résection ou d'un.curetage effectués par voie endoscopique (quel que soit le nombre de fragments)",
+      "section": "TITRE III",
+      "chapter": "CHAPITRE 3."
+    },
+    {
+      "code": "1310",
+      "codeNGAP": "B 220",
+      "lettreCle": "B",
+      "coefficient": 220,
+      "libelle": "Diagnostic histopathologique. par Inclusion et coupe d'une place operatoire complexe comportant plusieurs organes [une chaine ganglionnaire est.. '\"' quemilée à un organe)..",
       "section": "TITRE III",
       "chapter": "CHAPITRE 3."
     },
@@ -180,7 +216,7 @@
       "codeNGAP": "B 30",
       "lettreCle": "B",
       "coefficient": 30,
-      "libelle": "c) Examens sur coupes h!$;tolngiques' à raide d'immunosérums. quel que soit le nombre réactions..;...",
+      "libelle": "c) Examens sur coupes h!$;tolngiques' à raide d'immunosérums. quel que soit le nombre réactions..;",
       "section": "TITRE III",
       "chapter": "CHAPITRE 3."
     },
@@ -189,7 +225,7 @@
       "codeNGAP": "B 200",
       "lettreCle": "B",
       "coefficient": 200,
-      "libelle": "Etablissement du caryotype...",
+      "libelle": "Etablissement du caryotype",
       "section": "TITRE III",
       "chapter": "CHAPITRE 3."
     },
@@ -198,7 +234,16 @@
       "codeNGAP": "B 40",
       "lettreCle": "B",
       "coefficient": 40,
-      "libelle": "1 - Frottis isolé...",
+      "libelle": "1 - Frottis isolé",
+      "section": "TITRE III",
+      "chapter": "CHAPITRE 3."
+    },
+    {
+      "code": "1317",
+      "codeNGAP": "B 10",
+      "lettreCle": "B",
+      "coefficient": 10,
+      "libelle": "2 - les frottis suivants éhacun.. \"\"\".. \".. \"\".\".. \"",
       "section": "TITRE III",
       "chapter": "CHAPITRE 3."
     },
@@ -212,11 +257,20 @@
       "chapter": "CHAPITRE 3."
     },
     {
+      "code": "1319",
+      "codeNGAP": "B 10",
+      "lettreCle": "B",
+      "coefficient": 10,
+      "libelle": "2- Les frottis suivants avec un maximum de six (y compris le premier), chacun",
+      "section": "TITRE III",
+      "chapter": "CHAPITRE 3."
+    },
+    {
       "code": "1320",
       "codeNGAP": "B 20",
       "lettreCle": "B",
       "coefficient": 20,
-      "libelle": "Etude cytologlqu~ J:>ronchique (Inflammatoire et hnctlonnelle).. ~",
+      "libelle": "Etude cytologlqu J:>ronchique (Inflammatoire et hnctlonnelle).. ",
       "section": "TITRE III",
       "chapter": "CHAPITRE 3."
     },
@@ -225,7 +279,16 @@
       "codeNGAP": "B 60",
       "lettreCle": "B",
       "coefficient": 60,
-      "libelle": "Etude fonctlonnell~ du sperme..",
+      "libelle": "Etude fonctlonnell du sperme..",
+      "section": "TITRE III",
+      "chapter": "CHAPITRE 3."
+    },
+    {
+      "code": "1325",
+      "codeNGAP": "B 20",
+      "lettreCle": "B",
+      "coefficient": 20,
+      "libelle": "Etude de l'aspect du sérum à 4° C aprèS--24, H 1326i Acides,gras libres: \\",
       "section": "TITRE III",
       "chapter": "CHAPITRE 3."
     },
@@ -234,7 +297,7 @@
       "codeNGAP": "B 50",
       "lettreCle": "B",
       "coefficient": 50,
-      "libelle": "Amoniaqûe. _...",
+      "libelle": "Amoniaqûe. _",
       "section": "TITRE III",
       "chapter": "CHAPITRE 3."
     },
@@ -243,7 +306,7 @@
       "codeNGAP": "B 30",
       "lettreCle": "B",
       "coefficient": 30,
-      "libelle": "Fer sérique...,...",
+      "libelle": "Fer sérique,",
       "section": "TITRE III",
       "chapter": "CHAPITRE 3."
     },
@@ -261,7 +324,7 @@
       "codeNGAP": "B 20",
       "lettreCle": "B",
       "coefficient": 20,
-      "libelle": "Fibrinogène...,..",
+      "libelle": "Fibrinogène,..",
       "section": "TITRE III",
       "chapter": "CHAPITRE 3."
     },
@@ -270,7 +333,7 @@
       "codeNGAP": "B 10",
       "lettreCle": "B",
       "coefficient": 10,
-      "libelle": "a - par épreuve... __",
+      "libelle": "a - par épreuve __",
       "section": "TITRE III",
       "chapter": "CHAPITRE 3."
     },
@@ -279,7 +342,16 @@
       "codeNGAP": "R 30",
       "lettreCle": "R",
       "coefficient": 30,
-      "libelle": "b - avec côtatlon maximale de 4 épreuves...",
+      "libelle": "b - avec côtatlon maximale de 4 épreuves",
+      "section": "TITRE III",
+      "chapter": "CHAPITRE 3."
+    },
+    {
+      "code": "1349",
+      "codeNGAP": "B 60",
+      "lettreCle": "B",
+      "coefficient": 60,
+      "libelle": "Lipldogramme (électrophorèse (avec détermination des pourcentage, + document et compte rendu).. .",
       "section": "TITRE III",
       "chapter": "CHAPITRE 3."
     },
@@ -288,16 +360,25 @@
       "codeNGAP": "B 10",
       "lettreCle": "B",
       "coefficient": 10,
-      "libelle": "Protéines sériqdes ou plasmatiqdes totales...",
+      "libelle": "Protéines sériqdes ou plasmatiqdes totales",
       "section": "TITRE III",
       "chapter": "CHAPITRE 3."
     },
     {
       "code": "1356",
-      "codeNGAP": "B 10",
+      "codeNGAP": "B 60",
       "lettreCle": "B",
-      "coefficient": 10,
-      "libelle": "Proteinogramme (électrophorèse) avec détermination des pourcentages. 1357 1358 1359 1360 dosage des prot!ilnestotales + document et compte rendu.... B 60 Réserve alcaline.... Sérum albumiru.... Triglycérides.. Urée... \".,.. \"\" \"\",,\" \",,\"\"... \" \"\"\",,.. \".' \",, \"\".\"\"\" \"\"\".. \".\" \"\".\" \"\".. \"\".... ' \"\"....\"\"\" B 15 B 10 B 30 BiO.... f.... 1361 1362 1363 1364 1365 1366 1367 1368 Chapitre 2. - LIQUIDE CEPHALO RACHIDIEN. Calcium.,.. '~\"\"'\".. Chlorure... ',... Glucose.. '.... ••• PotassIum..,{' ·... Prote",
+      "coefficient": 60,
+      "libelle": "Proteinogramme (électrophorèse) avec détermination des pourcentages. dosage des prot!ilnestotales + document et compte rendu.",
+      "section": "TITRE III",
+      "chapter": "CHAPITRE 3."
+    },
+    {
+      "code": "1378",
+      "codeNGAP": "B 5",
+      "lettreCle": "B",
+      "coefficient": 5,
+      "libelle": "Examen microscopique du.sédlment minéral à l'exclusion de la cymlogie..",
       "section": "TITRE III",
       "chapter": "CHAPITRE 3."
     },
@@ -315,7 +396,7 @@
       "codeNGAP": "B 5",
       "lettreCle": "B",
       "coefficient": 5,
-      "libelle": "Pigments et sels biliaires (recherches)...",
+      "libelle": "Pigments et sels biliaires (recherches)",
       "section": "TITRE III",
       "chapter": "CHAPITRE 3."
     },
@@ -329,11 +410,20 @@
       "chapter": "CHAPITRE 3."
     },
     {
+      "code": "1385",
+      "codeNGAP": "B 70",
+      "lettreCle": "B",
+      "coefficient": 70,
+      "libelle": "Proeines (recherches et identiflr..ativll pàr électrophorèse y compris le d'lsage de proteines)",
+      "section": "TITRE III",
+      "chapter": "CHAPITRE 3."
+    },
+    {
       "code": "1386",
       "codeNGAP": "B 15",
       "lettreCle": "B",
       "coefficient": 15,
-      "libelle": "potassium...;...",
+      "libelle": "potassium;",
       "section": "TITRE III",
       "chapter": "CHAPITRE 3."
     },
@@ -342,7 +432,7 @@
       "codeNGAP": "B 10",
       "lettreCle": "B",
       "coefficient": 10,
-      "libelle": "Sang (caractérisation soit par recherche de:s hémlities soit par l'hémoglobine)...,...",
+      "libelle": "Sang (caractérisation soit par recherche de:s hémlities soit par l'hémoglobine),",
       "section": "TITRE III",
       "chapter": "CHAPITRE 3."
     },
@@ -360,7 +450,7 @@
       "codeNGAP": "B 35",
       "lettreCle": "B",
       "coefficient": 35,
-      "libelle": "Sodium + Potassium + Chlorures...",
+      "libelle": "Sodium + Potassium + Chlorures",
       "section": "TITRE III",
       "chapter": "CHAPITRE 3."
     },
@@ -369,7 +459,7 @@
       "codeNGAP": "B 2",
       "lettreCle": "B",
       "coefficient": 2,
-      "libelle": "S.ucre (recherche)... '.'..",
+      "libelle": "S.ucre (recherche) '.'..",
       "section": "TITRE III",
       "chapter": "CHAPITRE 3."
     },
@@ -378,7 +468,7 @@
       "codeNGAP": "B 5",
       "lettreCle": "B",
       "coefficient": 5,
-      "libelle": "Sucre (recherche et dosage)...",
+      "libelle": "Sucre (recherche et dosage)",
       "section": "TITRE III",
       "chapter": "CHAPITRE 3."
     },
@@ -387,25 +477,34 @@
       "codeNGAP": "B 20",
       "lettreCle": "B",
       "coefficient": 20,
-      "libelle": "Sucre (identification par chromatographie)...",
+      "libelle": "Sucre (identification par chromatographie)",
       "section": "TITRE III",
       "chapter": "CHAPITRE 3."
     },
     {
-      "code": "1385",
-      "codeNGAP": "B 10",
+      "code": "1394",
+      "codeNGAP": "B 5",
       "lettreCle": "B",
-      "coefficient": 10,
-      "libelle": "Pro~eines (recherches et identiflr..ativll pàr électrophorèse y compris le d'lsage de proteines)... B 70 1~93 Urée (dosage)...",
+      "coefficient": 5,
+      "libelle": "Urobiline (recherche) 13!)S Examen chImique complet d'une selle contenant un minimum caractères phyiques. pigments biliaires. mucus soluble, proteines exsudatives dégradées ou non dégradées, recherche d sang, des",
       "section": "TITRE III",
       "chapter": "CHAPITRE 3."
+    },
+    {
+      "code": "1396",
+      "codeNGAP": "B 20",
+      "lettreCle": "B",
+      "coefficient": 20,
+      "libelle": "Proteine$'t:. exsudatives dégradées ou non dégradées (réaction de Tri boulet) ne peut ·se cumuler avec l'e xamen chimique complet).",
+      "section": "TITRE III",
+      "chapter": "CHAPITRE 4 - SELLES"
     },
     {
       "code": "1399",
       "codeNGAP": "B 49",
       "lettreCle": "B",
       "coefficient": 49,
-      "libelle": "Examen chimique et caractérisation des composants...",
+      "libelle": "Examen chimique et caractérisation des composants",
       "section": "TITRE III",
       "chapter": "CHAPITRE 4 - SELLES"
     },
@@ -414,7 +513,7 @@
       "codeNGAP": "B 25",
       "lettreCle": "B",
       "coefficient": 25,
-      "libelle": "Proteines et réactions de Rivalta...:...,",
+      "libelle": "Proteines et réactions de Rivalta:,",
       "section": "TITRE III",
       "chapter": "CHAPITRE 4 - SELLES"
     },
@@ -432,7 +531,7 @@
       "codeNGAP": "B 40",
       "lettreCle": "B",
       "coefficient": 40,
-      "libelle": "Dosage de l'aluminium dans le dialysat...,.. \"...",
+      "libelle": "Dosage de l'aluminium dans le dialysat,.. \"",
       "section": "TITRE III",
       "chapter": "CHAPITRE 4 - SELLES"
     },
@@ -459,7 +558,7 @@
       "codeNGAP": "B 30",
       "lettreCle": "B",
       "coefficient": 30,
-      "libelle": "Chymotrypsine...:...,...",
+      "libelle": "Chymotrypsine:,",
       "section": "TITRE III",
       "chapter": "CHAPITRE 6..,- ENZYMOlOGIE"
     },
@@ -468,7 +567,7 @@
       "codeNGAP": "B 30",
       "lettreCle": "B",
       "coefficient": 30,
-      "libelle": "Créatine phosphokinase..,...",
+      "libelle": "Créatine phosphokinase..,",
       "section": "TITRE III",
       "chapter": "CHAPITRE 6..,- ENZYMOlOGIE"
     },
@@ -477,7 +576,7 @@
       "codeNGAP": "B 25",
       "lettreCle": "B",
       "coefficient": 25,
-      "libelle": "Gama glutamyl transférase... '...",
+      "libelle": "Gama glutamyl transférase '",
       "section": "TITRE III",
       "chapter": "CHAPITRE 6..,- ENZYMOlOGIE"
     },
@@ -486,7 +585,7 @@
       "codeNGAP": "B 30",
       "lettreCle": "B",
       "coefficient": 30,
-      "libelle": "Mucopolysaccharides totaux...,...",
+      "libelle": "Mucopolysaccharides totaux,",
       "section": "TITRE III",
       "chapter": "CHAPITRE 6..,- ENZYMOlOGIE"
     },
@@ -504,7 +603,16 @@
       "codeNGAP": "B 10",
       "lettreCle": "B",
       "coefficient": 10,
-      "libelle": "Recherche qualitative (pour chaque épreuve);...",
+      "libelle": "Recherche qualitative (pour chaque épreuve);",
+      "section": "TITRE III",
+      "chapter": "CHAPITRE 6..,- ENZYMOlOGIE"
+    },
+    {
+      "code": "1429",
+      "codeNGAP": "B 80",
+      "lettreCle": "B",
+      "coefficient": 80,
+      "libelle": "Chromatographie en couche mince des acides Ëminés sanguins.",
       "section": "TITRE III",
       "chapter": "CHAPITRE 6..,- ENZYMOlOGIE"
     },
@@ -513,7 +621,7 @@
       "codeNGAP": "B 70",
       "lettreCle": "B",
       "coefficient": 70,
-      "libelle": "Phénylalanine (sang)..;...;....:....;..",
+      "libelle": "Phénylalanine (sang)..;;.:.;..",
       "section": "TITRE III",
       "chapter": "CHAPITRE 6..,- ENZYMOlOGIE"
     },
@@ -522,7 +630,7 @@
       "codeNGAP": "B 70",
       "lettreCle": "B",
       "coefficient": 70,
-      "libelle": "Thyrosine (sa,fig)..;...;...",
+      "libelle": "Thyrosine (sa,fig)..;;",
       "section": "TITRE III",
       "chapter": "CHAPITRE 6..,- ENZYMOlOGIE"
     },
@@ -540,7 +648,7 @@
       "codeNGAP": "B 80",
       "lettreCle": "B",
       "coefficient": 80,
-      "libelle": "Chromatographie en couches minces des sucres urinaires...",
+      "libelle": "Chromatographie en couches minces des sucres urinaires",
       "section": "TITRE III",
       "chapter": "CHAPITRE 6..,- ENZYMOlOGIE"
     },
@@ -549,7 +657,7 @@
       "codeNGAP": "B 60",
       "lettreCle": "B",
       "coefficient": 60,
-      "libelle": "Fructosémie... '...",
+      "libelle": "Fructosémie '",
       "section": "TITRE III",
       "chapter": "CHAPITRE 6..,- ENZYMOlOGIE"
     },
@@ -558,7 +666,7 @@
       "codeNGAP": "B 60",
       "lettreCle": "B",
       "coefficient": 60,
-      "libelle": "Galactosém!e...",
+      "libelle": "Galactosém!e",
       "section": "TITRE III",
       "chapter": "CHAPITRE 6..,- ENZYMOlOGIE"
     },
@@ -567,7 +675,7 @@
       "codeNGAP": "B 60",
       "lettreCle": "B",
       "coefficient": 60,
-      "libelle": "Xylosùmie...;....;....",
+      "libelle": "Xylosùmie;.;.",
       "section": "TITRE III",
       "chapter": "CHAPITRE 6..,- ENZYMOlOGIE"
     },
@@ -576,16 +684,25 @@
       "codeNGAP": "B 40",
       "lettreCle": "B",
       "coefficient": 40,
-      "libelle": "Hémoglobine glycosylée (chromatographie)...",
+      "libelle": "Hémoglobine glycosylée (chromatographie)",
       "section": "TITRE III",
       "chapter": "CHAPITRE 6..,- ENZYMOlOGIE"
+    },
+    {
+      "code": "1452",
+      "codeNGAP": "B 100",
+      "lettreCle": "B",
+      "coefficient": 100,
+      "libelle": "Epreuve à la sécretino (comportant au moins trois séries de dosages de 3 enzymes);..",
+      "section": "TITRE III",
+      "chapter": "CHAPITRE 8"
     },
     {
       "code": "1453",
       "codeNGAP": "B 25",
       "lettreCle": "B",
       "coefficient": 25,
-      "libelle": "Epreu,,,e de galactosurie provoquée...",
+      "libelle": "Epreu,,,e de galactosurie provoquée",
       "section": "TITRE III",
       "chapter": "CHAPITRE 8"
     },
@@ -594,7 +711,7 @@
       "codeNGAP": "B 25",
       "lettreCle": "B",
       "coefficient": 25,
-      "libelle": "Epreuve à la bromo sulfone phtaléine simple...:.",
+      "libelle": "Epreuve à la bromo sulfone phtaléine simple:.",
       "section": "TITRE III",
       "chapter": "CHAPITRE 8"
     },
@@ -603,7 +720,7 @@
       "codeNGAP": "B 30",
       "lettreCle": "B",
       "coefficient": 30,
-      "libelle": "Clairance de \"urée...,... *",
+      "libelle": "Clairance de \"urée, *",
       "section": "TITRE III",
       "chapter": "CHAPITRE 8"
     },
@@ -612,7 +729,7 @@
       "codeNGAP": "B 35",
       "lettreCle": "B",
       "coefficient": 35,
-      "libelle": "Clairance du mannitol...",
+      "libelle": "Clairance du mannitol",
       "section": "TITRE III",
       "chapter": "CHAPITRE 8"
     },
@@ -621,7 +738,7 @@
       "codeNGAP": "B 30",
       "lettreCle": "B",
       "coefficient": 30,
-      "libelle": "Epreuve à la phénol sutfone phtaléine...",
+      "libelle": "Epreuve à la phénol sutfone phtaléine",
       "section": "TITRE III",
       "chapter": "CHAPITRE 8"
     },
@@ -630,7 +747,7 @@
       "codeNGAP": "B 15",
       "lettreCle": "B",
       "coefficient": 15,
-      "libelle": "Epreuve de concentration...",
+      "libelle": "Epreuve de concentration",
       "section": "TITRE III",
       "chapter": "CHAPITRE 8"
     },
@@ -639,16 +756,16 @@
       "codeNGAP": "B 15",
       "lettreCle": "B",
       "coefficient": 15,
-      "libelle": "Epreuve de dilution...;....",
+      "libelle": "Epreuve de dilution;.",
       "section": "TITRE III",
       "chapter": "CHAPITRE 8"
     },
     {
-      "code": "1457",
-      "codeNGAP": "B 20",
+      "code": "1464",
+      "codeNGAP": "B 60",
       "lettreCle": "B",
-      "coefficient": 20,
-      "libelle": "Clairance de la créatinine..;... Ii 30 '\".f··.· 1462 1463 -:... 178 - 5/- Divers Epreuve au rouge Congo Epreuve simplifiée d'hyperglycémie (2 dosages) B",
+      "coefficient": 60,
+      "libelle": "Epreuve d'hyperglycémie provoquée (au moins 5 dosages. y compris recherGhes et.eventuellement dosages de la glycosurie)",
       "section": "TITRE III",
       "chapter": "CHAPITRE 8"
     },
@@ -657,7 +774,7 @@
       "codeNGAP": "B 60",
       "lettreCle": "B",
       "coefficient": 60,
-      "libelle": "Epreuve au fructose...",
+      "libelle": "Epreuve au fructose",
       "section": "TITRE III",
       "chapter": "CHAPITRE 8"
     },
@@ -666,9 +783,18 @@
       "codeNGAP": "B 60",
       "lettreCle": "B",
       "coefficient": 60,
-      "libelle": "Epreuve au 0 - Xylose...,...",
+      "libelle": "Epreuve au 0 - Xylose,",
       "section": "TITRE III",
       "chapter": "CHAPITRE 8"
+    },
+    {
+      "code": "1469",
+      "codeNGAP": "B 60",
+      "lettreCle": "B",
+      "coefficient": 60,
+      "libelle": "Myélogramme. splénogramme ou adénogramme. après coloration par -la méthode de May-Grunward-Giemsa",
+      "section": "TITRE III",
+      "chapter": "CHAPITRE 1er - CVi\"OLOGIE"
     },
     {
       "code": "1470",
@@ -684,7 +810,7 @@
       "codeNGAP": "B 25",
       "lettreCle": "B",
       "coefficient": 25,
-      "libelle": "il/ Autres recherches cytochimiques, par examen...",
+      "libelle": "il/ Autres recherches cytochimiques, par examen",
       "section": "TITRE III",
       "chapter": "CHAPITRE 1er - CVi\"OLOGIE"
     },
@@ -693,7 +819,16 @@
       "codeNGAP": "B 20",
       "lettreCle": "B",
       "coefficient": 20,
-      "libelle": "Examen cytologique d'orientation du sang: hématocrite, do~age de l'hémoglobine à l'electrophotométre()u au spec· trophotométre, nùmération des globules blancs et formule leucocytaire.",
+      "libelle": "Examen cytologique d'orientation du sang: hématocrite, doage de l'hémoglobine à l'electrophotométre()u au spec· trophotométre, nùmération des globules blancs et formule leucocytaire.",
+      "section": "TITRE III",
+      "chapter": "CHAPITRE 1er - CVi\"OLOGIE"
+    },
+    {
+      "code": "1473",
+      "codeNGAP": "B 30",
+      "lettreCle": "B",
+      "coefficient": 30,
+      "libelle": "I:x<lmen cytologique simple du sang (hémogramme classique) numé-.ation des globules rouges et blancs formule leucocytaire, aspect des globules rouges étudé des plaquettes sur lame, dosge de rhê:-noglç- bine à l'électrophotométre ou spectrophotomôtrie. hématocrite. valeur globulaire ou constantesérythrocytaires (La prescription de cet eyamen entralne les examens cl-dessous. s'Ils s' avèrent nécess8ire$).",
       "section": "TITRE III",
       "chapter": "CHAPITRE 1er - CVi\"OLOGIE"
     },
@@ -702,7 +837,16 @@
       "codeNGAP": "B 40",
       "lettreCle": "B",
       "coefficient": 40,
-      "libelle": "a/- Eva!uation cytochimJque (fe la phosphatélse alcaline des leucocytes...,_... _..,.. •... •.",
+      "libelle": "a/- Eva!uation cytochimJque (fe la phosphatélse alcaline des leucocytes,_ _..,..  .",
+      "section": "TITRE III",
+      "chapter": "CHAPITRE 1er - CVi\"OLOGIE"
+    },
+    {
+      "code": "1477",
+      "codeNGAP": "B 10",
+      "lettreCle": "B",
+      "coefficient": 10,
+      "libelle": "Numération des globules rouges et vdlalur flobulaire. !e taux de l'hémoglobine étant déterminé àTélectrophotoTilétre ou au spectnlphotoB 25 métre.;:. \"..,..:.. _.;:. _ -",
       "section": "TITRE III",
       "chapter": "CHAPITRE 1er - CVi\"OLOGIE"
     },
@@ -720,7 +864,7 @@
       "codeNGAP": "B 10",
       "lettreCle": "B",
       "coefficient": 10,
-      "libelle": "Taux des hé~ties granulo\"filamenteuses(réticu!ocytes)",
+      "libelle": "Taux des héties granulo\"filamenteuses(réticu!ocytes)",
       "section": "TITRE III",
       "chapter": "CHAPITRE 1er - CVi\"OLOGIE"
     },
@@ -729,16 +873,7 @@
       "codeNGAP": "S 10",
       "lettreCle": "S",
       "coefficient": 10,
-      "libelle": "Recherche des CO!p8 de Heinz,...",
-      "section": "TITRE III",
-      "chapter": "CHAPITRE 1er - CVi\"OLOGIE"
-    },
-    {
-      "code": "1477",
-      "codeNGAP": "B 10",
-      "lettreCle": "B",
-      "coefficient": 10,
-      "libelle": "Numération des globules rouges et vdlalur flobulaire. !e taux de l'hémoglobine étant déterminé àTélectrophotoTilétre ou au spectnlphotoB 25 métre....;:.... \"..,..:.. _.;...:.... _... -",
+      "libelle": "Recherche des CO!p8 de Heinz,",
       "section": "TITRE III",
       "chapter": "CHAPITRE 1er - CVi\"OLOGIE"
     },
@@ -747,7 +882,7 @@
       "codeNGAP": "B 15",
       "lettreCle": "B",
       "coefficient": 15,
-      "libelle": "Formule leucocytaire et numération des globules blancs... •",
+      "libelle": "Formule leucocytaire et numération des globules blancs ",
       "section": "TITRE III",
       "chapter": "CHAPITRE 1er - CVi\"OLOGIE"
     },
@@ -756,7 +891,16 @@
       "codeNGAP": "B 10",
       "lettreCle": "B",
       "coefficient": 10,
-      "libelle": "Numér~tion des polynuclé~ires éosinopliles..",
+      "libelle": "Numértion des polynucléires éosinopliles..",
+      "section": "TITRE III",
+      "chapter": "CHAPITRE 1er - CVi\"OLOGIE"
+    },
+    {
+      "code": "1465",
+      "codeNGAP": "B 30",
+      "lettreCle": "B",
+      "coefficient": 30,
+      "libelle": "Recherche des cellules de Margraves par méthode dire1e oulet ind:recte - \\",
       "section": "TITRE III",
       "chapter": "CHAPITRE 1er - CVi\"OLOGIE"
     },
@@ -770,20 +914,29 @@
       "chapter": "CHAPITRE 1er - CVi\"OLOGIE"
     },
     {
-      "code": "1489",
-      "codeNGAP": "S 10",
-      "lettreCle": "S",
-      "coefficient": 10,
-      "libelle": "Mesut-e du di1métre moyen des hématies...",
-      "section": "TITRE III",
-      "chapter": "CHAPITRE 1er - CVi\"OLOGIE"
-    },
-    {
       "code": "1487",
       "codeNGAP": "B 20",
       "lettreCle": "B",
       "coefficient": 20,
-      "libelle": "Recherche des autres parasites du sang... \". B ~5 1-488 Recherche et numération de polynuc iéaires éosinophiles dans las sécrettions nasales...",
+      "libelle": "Recherche des autres parasites du sang \". B 5 1-488 Recherche et numération de polynuc iéaires éosinophiles dans las sécrettions nasales",
+      "section": "TITRE III",
+      "chapter": "CHAPITRE 1er - CVi\"OLOGIE"
+    },
+    {
+      "code": "1489",
+      "codeNGAP": "S 10",
+      "lettreCle": "S",
+      "coefficient": 10,
+      "libelle": "Mesut-e du di1métre moyen des hématies",
+      "section": "TITRE III",
+      "chapter": "CHAPITRE 1er - CVi\"OLOGIE"
+    },
+    {
+      "code": "1492",
+      "codeNGAP": "B 30",
+      "lettreCle": "B",
+      "coefficient": 30,
+      "libelle": "Temps de saignement (épreuve de Duke), temps de coagulation (sur sang veineux et en tube. méthode de Lee et White)· étude de la rétracB 15",
       "section": "TITRE III",
       "chapter": "CHAPITRE 1er - CVi\"OLOGIE"
     },
@@ -792,7 +945,7 @@
       "codeNGAP": "B 5",
       "lettreCle": "B",
       "coefficient": 5,
-      "libelle": "Temps de saignement (épreuve de Duke)...",
+      "libelle": "Temps de saignement (épreuve de Duke)",
       "section": "TITRE III",
       "chapter": "CHAPITRE 1er - CVi\"OLOGIE"
     },
@@ -801,7 +954,7 @@
       "codeNGAP": "B 15",
       "lettreCle": "B",
       "coefficient": 15,
-      "libelle": "Temps de récalcification plasmatique (temps de Howell)...",
+      "libelle": "Temps de récalcification plasmatique (temps de Howell)",
       "section": "TITRE III",
       "chapter": "CHAPITRE 1er - CVi\"OLOGIE"
     },
@@ -819,7 +972,7 @@
       "codeNGAP": "B 50",
       "lettreCle": "B",
       "coefficient": 50,
-      "libelle": "Thrombo-élastogramme sur sang total ou plasma (méthodes non cumulables entre elles)... '...",
+      "libelle": "Thrombo-élastogramme sur sang total ou plasma (méthodes non cumulables entre elles) '",
       "section": "TITRE III",
       "chapter": "CHAPITRE 1er - CVi\"OLOGIE"
     },
@@ -828,7 +981,7 @@
       "codeNGAP": "B 50",
       "lettreCle": "B",
       "coefficient": 50,
-      "libelle": "_ Sur plasma Natif... '.'..",
+      "libelle": "_ Sur plasma Natif '.'..",
       "section": "TITRE III",
       "chapter": "CHAPITRE 1er - CVi\"OLOGIE"
     },
@@ -837,16 +990,16 @@
       "codeNGAP": "B 50",
       "lettreCle": "B",
       "coefficient": 50,
-      "libelle": "- Sur plasma de plaquette... '..,... -....,...",
+      "libelle": "- Sur plasma de plaquette '.., -.,",
       "section": "TITRE III",
       "chapter": "CHAPITRE 1er - CVi\"OLOGIE"
     },
     {
-      "code": "1492",
-      "codeNGAP": "B 15",
+      "code": "1499",
+      "codeNGAP": "B 30",
       "lettreCle": "B",
-      "coefficient": 15,
-      "libelle": "Temps de saignement (épreuve de Duke), temps de coagulation (sur sang veineux et en tube. méthode de Lee et White)· étude de la rétracB 15 B 30 tibilité du caillot, fragilité capillaire... _...",
+      "coefficient": 30,
+      "libelle": "Héparinémie (titrarin)",
       "section": "TITRE III",
       "chapter": "CHAPITRE 1er - CVi\"OLOGIE"
     },
@@ -855,7 +1008,7 @@
       "codeNGAP": "B 30",
       "lettreCle": "B",
       "coefficient": 30,
-      "libelle": "Consommation de prothrombine.... \"... \"\"...",
+      "libelle": "Consommation de prothrombine. \" \"\"",
       "section": "TITRE III",
       "chapter": "CHAPITRE 1er - CVi\"OLOGIE"
     },
@@ -864,7 +1017,16 @@
       "codeNGAP": "B 20",
       "lettreCle": "B",
       "coefficient": 20,
-      "libelle": "Temps de céphaline en présence ou non d.'un adjuvant type kaolin....",
+      "libelle": "Temps de céphaline en présence ou non d.'un adjuvant type kaolin.",
+      "section": "TITRE III",
+      "chapter": "CHAPITRE 1er - CVi\"OLOGIE"
+    },
+    {
+      "code": "1502",
+      "codeNGAP": "B 15",
+      "lettreCle": "B",
+      "coefficient": 15,
+      "libelle": "Temps de thrombine \"-\";.. '\"..",
       "section": "TITRE III",
       "chapter": "CHAPITRE 1er - CVi\"OLOGIE"
     },
@@ -873,7 +1035,7 @@
       "codeNGAP": "B 10",
       "lettreCle": "B",
       "coefficient": 10,
-      "libelle": "Lyse du caillot sanguin· et plasmatiq ue...",
+      "libelle": "Lyse du caillot sanguin· et plasmatiq ue",
       "section": "TITRE III",
       "chapter": "CHAPITRE 1er - CVi\"OLOGIE"
     },
@@ -882,7 +1044,7 @@
       "codeNGAP": "B 25",
       "lettreCle": "B",
       "coefficient": 25,
-      "libelle": "-- Un deces dosages...",
+      "libelle": "-- Un deces dosages",
       "section": "TITRE III",
       "chapter": "CHAPITRE 1er - CVi\"OLOGIE"
     },
@@ -896,22 +1058,13 @@
       "chapter": "CHAPITRE 1er - CVi\"OLOGIE"
     },
     {
-      "code": "1502",
-      "codeNGAP": "B 60",
+      "code": "1508",
+      "codeNGAP": "B 40",
       "lettreCle": "B",
-      "coefficient": 60,
-      "libelle": "Temps de thrombine... \"-\";.. '\".. B 15, Dosage différentiel des facteurs du complexe prothrombique: prothrombine proaccélérine, proconvertine, facteurStuart, etc: 1S0S -- Deux de ces dosages B 45 i S06 - Plus de deux dosages... '...",
+      "coefficient": 40,
+      "libelle": "ec erc que.71 fibrinolyse par l'épreuve de Lyse des euglobulines et re- d lerche de l'activateur du plasminogène en utilisant comme substrat des euglobulines tmoins (non cumu!able avec l'ex:::men précédent)      _  * '., Epreuve de la génération de la throm boplasmine (TGTJ Bilan d'orientation pour la recherche d'un trouble de l'hémostase. Ce bilan comprend au minimum les examens suivants: temps de saignement. temps de coaulation. temps de Quick. et l'un des quatre examens suivants: temps de cép",
       "section": "TITRE III",
       "chapter": "CHAPITRE 1er - CVi\"OLOGIE"
-    },
-    {
-      "code": "1508",
-      "codeNGAP": "B 8",
-      "lettreCle": "B",
-      "coefficient": 8,
-      "libelle": "ec erc que.71 fibrinolyse par l'épreuve de Lyse des euglobulines et re- 1509 d lerche de l'activateur du plasminogène en utilisant comme substrat des euglobulines t~moins (non cumu!able avec l'ex:::men précédent) •• • •• • • _ ••• *... '.,... Epreuve de la génération de la throm boplasmine (TGTJ... Bilan d'orientation pour la recherche d'un trouble de l'hémostase. Ce bilan comprend au minimum les examens suivants: temps de saignement. temps de coa~ulation. temps de Quick. et l'un des quatre exam",
-      "section": "TITRE III",
-      "chapter": "CHAPITRE 3 - DIVERS"
     },
     {
       "code": "1513",
@@ -927,7 +1080,7 @@
       "codeNGAP": "B 60",
       "lettreCle": "B",
       "coefficient": 60,
-      "libelle": "Electrophorèse de l'hémoglobine..:...,.'... '.. '",
+      "libelle": "Electrophorèse de l'hémoglobine..:,.' '.. '",
       "section": "TITRE III",
       "chapter": "CHAPITRE 4 - Chimie Hématologique"
     },
@@ -936,7 +1089,7 @@
       "codeNGAP": "B 50",
       "lettreCle": "B",
       "coefficient": 50,
-      "libelle": "Dosage sur plaque de cellulose à pH alçalin.... '... '",
+      "libelle": "Dosage sur plaque de cellulose à pH alçalin. ' '",
       "section": "TITRE III",
       "chapter": "CHAPITRE 4 - Chimie Hématologique"
     },
@@ -945,7 +1098,7 @@
       "codeNGAP": "B 80",
       "lettreCle": "B",
       "coefficient": 80,
-      "libelle": "Electrophorèse de i'Hb sur gélose à p'H acide....,...",
+      "libelle": "Electrophorèse de i'Hb sur gélose à p'H acide.,",
       "section": "TITRE III",
       "chapter": "CHAPITRE 4 - Chimie Hématologique"
     },
@@ -954,7 +1107,7 @@
       "codeNGAP": "B 60",
       "lettreCle": "B",
       "coefficient": 60,
-      "libelle": "Electrophorèse de la G6PD... '..",
+      "libelle": "Electrophorèse de la G6PD '..",
       "section": "TITRE III",
       "chapter": "CHAPITRE 4 - Chimie Hématologique"
     },
@@ -963,7 +1116,7 @@
       "codeNGAP": "B 30",
       "lettreCle": "B",
       "coefficient": 30,
-      "libelle": "Solubilité de desoxy Hb en solution saline concentrée...",
+      "libelle": "Solubilité de desoxy Hb en solution saline concentrée",
       "section": "TITRE III",
       "chapter": "CHAPITRE 4 - Chimie Hématologique"
     },
@@ -972,7 +1125,7 @@
       "codeNGAP": "B 80",
       "lettreCle": "B",
       "coefficient": 80,
-      "libelle": "Test de solubilité de l'Hb...,..,...",
+      "libelle": "Test de solubilité de l'Hb,..,",
       "section": "TITRE III",
       "chapter": "CHAPITRE 4 - Chimie Hématologique"
     },
@@ -986,11 +1139,11 @@
       "chapter": "CHAPITRE 4 - Chimie Hématologique"
     },
     {
-      "code": "1512",
-      "codeNGAP": "B 30",
+      "code": "1523",
+      "codeNGAP": "B 20",
       "lettreCle": "B",
-      "coefficient": 30,
-      "libelle": "Résistance globulaire.., \"..,.. _... '.'..,., _... \"..•,. \".. B 2ü 1520 1521 Dosage de la methemogiobine Recherche dp. la myoglobine dans les urines B 35 •••• ' \".. • •• •, • •••• •• ! •••.",
+      "coefficient": 20,
+      "libelle": "Ooage de l'haptoglobine par méthode ' chimique",
       "section": "TITRE III",
       "chapter": "CHAPITRE 4 - Chimie Hématologique"
     },
@@ -999,9 +1152,45 @@
       "codeNGAP": "B 20",
       "lettreCle": "B",
       "coefficient": 20,
-      "libelle": "Dépistage Simple d'anticorps Irréguliers (OSAI). •.. _.. _ • _",
+      "libelle": "Dépistage Simple d'anticorps Irréguliers (OSAI). .. _.. _  _",
       "section": "TITRE III",
       "chapter": "CHAPITRE 4 - Chimie Hématologique"
+    },
+    {
+      "code": "1526",
+      "codeNGAP": "B 30",
+      "lettreCle": "B",
+      "coefficient": 30,
+      "libelle": "Détermination des phénotypes Rhésus et Kell antigène D,C.e,E,K (et éventuellement Cw et el sur prescription médicale explicita d:ms !e cadre de la prévention des accidents d'allo-Immunisation définie par voie réglementaire ou à \"initiative du · biologiste, en cas de RAI positive",
+      "section": "TITRE III",
+      "chapter": "CHAPITRE 4 - Chimie Hématologique"
+    },
+    {
+      "code": "1531",
+      "codeNGAP": "B 20",
+      "lettreCle": "B",
+      "coefficient": 20,
+      "libelle": "Epreuve directe de compatibilité ar au moins deux méthodes susceptibles de dépister les anticorps incomplets pour chaque unité àe sang ou de dérivés cellulaires délivrés aL! maiade {que! que soit le nombre d'échantillons de donneurs testés)                  t'  .",
+      "section": "TITRE III",
+      "chapter": "CHAPITRE 4 - Chimie Hématologique"
+    },
+    {
+      "code": "1536",
+      "codeNGAP": "B 10",
+      "lettreCle": "B",
+      "coefficient": 10,
+      "libelle": "Epreuve d'élutlon d'anticorps à partir de globules rouges en vue d'IdenB 15",
+      "section": "TITRE III",
+      "chapter": "CHAPITRE 6"
+    },
+    {
+      "code": "1538",
+      "codeNGAP": "B 15",
+      "lettreCle": "B",
+      "coefficient": 15,
+      "libelle": "b - Examen avec cytologie quantitative ou proportionnelle avec",
+      "section": "TITRE III",
+      "chapter": "CHAPITRE 1er"
     },
     {
       "code": "1539",
@@ -1017,7 +1206,7 @@
       "codeNGAP": "B 60",
       "lettreCle": "B",
       "coefficient": 60,
-      "libelle": "e -- Etuete fonctionnellA nll ~f'8rme avec spermocvtogramme...",
+      "libelle": "e -- Etuete fonctionnellA nll f'8rme avec spermocvtogramme",
       "section": "TITRE Y",
       "chapter": "CHAPITRE 1er"
     },
@@ -1026,7 +1215,7 @@
       "codeNGAP": "B 125",
       "lettreCle": "B",
       "coefficient": 125,
-      "libelle": "b - Sécretions et ex:;uaats genitaux...",
+      "libelle": "b - Sécretions et ex:;uaats genitaux",
       "section": "TITRE Y",
       "chapter": "CHAPITRE 2"
     },
@@ -1035,7 +1224,7 @@
       "codeNGAP": "B 75",
       "lettreCle": "B",
       "coefficient": 75,
-      "libelle": "c - Etude b3ctériologique du sperme...",
+      "libelle": "c - Etude b3ctériologique du sperme",
       "section": "TITRE Y",
       "chapter": "CHAPITRE 2"
     },
@@ -1053,7 +1242,7 @@
       "codeNGAP": "B 110",
       "lettreCle": "B",
       "coefficient": 110,
-      "libelle": "f - Sécretions broncho-pulmonaire et explorations...",
+      "libelle": "f - Sécretions broncho-pulmonaire et explorations",
       "section": "TITRE Y",
       "chapter": "CHAPITRE 2"
     },
@@ -1067,11 +1256,20 @@
       "chapter": "CHAPITRE 2"
     },
     {
+      "code": "1549",
+      "codeNGAP": "B 80",
+      "lettreCle": "B",
+      "coefficient": 80,
+      "libelle": "h - Etude cytobactériologique des prélèvements de peau, phanères. pus et divers IO,.,..,.  10",
+      "section": "TITRE Y",
+      "chapter": "CHAPITRE 2"
+    },
+    {
       "code": "1550",
       "codeNGAP": "B 80",
       "lettreCle": "B",
       "coefficient": 80,
-      "libelle": "i - Hémocultures...:...,...",
+      "libelle": "i - Hémocultures:,",
       "section": "TITRE Y",
       "chapter": "CHAPITRE 2"
     },
@@ -1085,47 +1283,56 @@
       "chapter": "CHAPITRE 3"
     },
     {
-      "code": "1553",
-      "codeNGAP": "B 25",
-      "lettreCle": "B",
-      "coefficient": 25,
-      "libelle": "c - Dénombrement par culture des bactéries dans un milieu biologique.. \"...,.. '...,...::.",
-      "section": "TITRE Y",
-      "chapter": "CHAPITRE 3"
-    },
-    {
       "code": "1552",
       "codeNGAP": "B 60",
       "lettreCle": "B",
       "coefficient": 60,
-      "libelle": "b - Identification d'une.bactérle anaerobie... B 60.... /.... - 189 - - d - Identification antigénique d'une bactérie: 1554/1 nécessitant moins de 6 sérums.. B 30 1554/2 nécessitant plus de 6 sérums...",
+      "libelle": "b - Identification d'une.bactérle anaerobie",
+      "section": "TITRE Y",
+      "chapter": "CHAPITRE 3"
+    },
+    {
+      "code": "1553",
+      "codeNGAP": "B 25",
+      "lettreCle": "B",
+      "coefficient": 25,
+      "libelle": "c - Dénombrement par culture des bactéries dans un milieu biologique.. \",.. ',::.",
       "section": "TITRE Y",
       "chapter": "CHAPITRE 3"
     },
     {
       "code": "1555",
-      "codeNGAP": "B 200",
+      "codeNGAP": "B 50",
       "lettreCle": "B",
-      "coefficient": 200,
-      "libelle": "c -Isolement et/ou identification d'une bactérie par pouvoir pathogène 1556t1 1556/2 1556/3 1557/1 1557/2 1557/3 expérimental sur l'animal...,'... B 50 f. Identification d'une bactérie par détermination de sa toxine. - par technique immunologique...,... B 60 - par séroneutralisation du pouvoir pathogène...,.. B 100 - par toxinotypie botulique.. B 200 9 - Identification des mycobactéries: - examen mIcroscopique (avec ou sans fluorescence) B 30 - culture d'isolement..,.:.... B 40 - Identification ",
+      "coefficient": 50,
+      "libelle": "c -Isolement et/ou identification d'une bactérie par pouvoir pathogène 1556t1 1556/2 1556/3 1557/1 1557/2 1557/3 expérimental sur l'animal,'",
       "section": "TITRE Y",
       "chapter": "CHAPITRE 3"
     },
     {
       "code": "1559",
-      "codeNGAP": "B 50",
+      "codeNGAP": "B 100",
       "lettreCle": "B",
-      "coefficient": 50,
-      "libelle": "i. Recherche et Identification des'rickettsiales et chlamydlales: • - examen direct et isolement... B 100...,,/.. - 190- 1560. J.... Recherche et identification des mycoplasmee: 1561/1 - cuitlJre sur milieux spécl, numération e~ caractérisation bl~ chimique... \" 13 00. k • Etude de la sensibilité.s bactéries aux antlblotrques: quelque. -.»t la nombre d'antibiotiqdes testés. quelque IDlt le mode. d'expression des résultats excepté pour les pycobactéries:....;. bactérie aérobie.. • • ~ \" \" el.. \"\"",
+      "coefficient": 100,
+      "libelle": "i. Recherche et Identification des'rickettsiales et chlamydlales:  - examen direct et isolement",
       "section": "TITRE Y",
       "chapter": "CHAPITRE 3"
     },
     {
       "code": "1563",
+      "codeNGAP": "B 40",
+      "lettreCle": "B",
+      "coefficient": 40,
+      "libelle": "m  Etude du pouvoir bactéricide des ·antlblotlqVes et de leurs associations: - par antibiotique testé \"\" \"",
+      "section": "TITRE Y",
+      "chapter": "CHAPITRE 3"
+    },
+    {
+      "code": "1569",
       "codeNGAP": "B 150",
       "lettreCle": "B",
       "coefficient": 150,
-      "libelle": "m • Etude du pouvoir bactéricide des ·antlblotlqVes et de leurs associations: - par antibiotique testé... \"\"... \" B 40 (maximum limité à 5.antibiotiques). Chapitre 4. - ACTES SPECIALISES: VIROLOGIE. Recherche de virus par inoculation aux cul~ures cellulaires: par prélèvement. inoculé 1564. al Sur lignes épithéliale continue humaine Otl animale 000 • • 0 '0 '0 B 20 t565.566.5ii7 '568 b) Sur prlmoculture de rein de alngeo • \". ••. \" '. \".,. ' \" cl Sur primoculture de rein humain embryonnaire.... \"",
+      "libelle": "Recherche de virus par inoculation è une ou plusÎp-urs portées de Slluri ceaux (minimum de 10 souriceaux) o. o  o . 0  0 0 0., 0 0 o..",
       "section": "TITRE Y",
       "chapter": "CHAPITRE 3"
     },
@@ -1134,16 +1341,7 @@
       "codeNGAP": "B 100",
       "lettreCle": "B",
       "coefficient": 100,
-      "libelle": "4°) Grippe.:.. 0 •••, •• o. o. • •••",
-      "section": "TITRE Y",
-      "chapter": "CHAPITRE 3"
-    },
-    {
-      "code": "1569",
-      "codeNGAP": "B 100",
-      "lettreCle": "B",
-      "coefficient": 100,
-      "libelle": "Recherche de virus par inoculation è une ou plusÎp-urs portées de Slluri ceaux (minimum de 10 souriceaux) o.•• o ••• o •. 0 • 0 0 0., 0 0 o..• B 150 Identification d'un viros b compris déterminafton du sérotypel: 1570, 0) Adénovirus '\" 0 B 100 '571 2'») Arbovirus.;.... B 100 t572 Chariom6AH...,.,., h...' JO)... •... T..,. ••• p GCIIaire.. 0 • 0 •• • ••• 8 50 '574 5Q ) ~~ et virus respiratoire syricytial....",
+      "libelle": "4°) Grippe.:.. 0 ,  o. o.  ",
       "section": "TITRE Y",
       "chapter": "CHAPITRE 3"
     },
@@ -1152,16 +1350,16 @@
       "codeNGAP": "B 100",
       "lettreCle": "B",
       "coefficient": 100,
-      "libelle": "7°) Herpès virus variceUe et Cytomégalovlrus.... o..",
+      "libelle": "7°) Herpès virus variceUe et Cytomégalovlrus. o..",
       "section": "TITRE Y",
       "chapter": "CHAPITRE 3"
     },
     {
       "code": "1519",
-      "codeNGAP": "B 500",
+      "codeNGAP": "B 100",
       "lettreCle": "B",
-      "coefficient": 500,
-      "libelle": "b, isolé sur souriceau... 1...",
+      "coefficient": 100,
+      "libelle": "b, isolé sur souriceau 1 B 500 1 CO) Conaclde 8: tS80 a) iaolé en culture cellulaire",
       "section": "TITRE Y",
       "chapter": "CHAPITRE 3"
     },
@@ -1170,7 +1368,7 @@
       "codeNGAP": "B 50",
       "lettreCle": "B",
       "coefficient": 50,
-      "libelle": "16°) Pox virus (autres que les virus varioleux) \"...",
+      "libelle": "16°) Pox virus (autres que les virus varioleux) \"",
       "section": "TITRE Y",
       "chapter": "CHAPITRE 3"
     },
@@ -1202,11 +1400,20 @@
       "chapter": "CHAPITRE 3"
     },
     {
+      "code": "1594",
+      "codeNGAP": "B 70",
+      "lettreCle": "B",
+      "coefficient": 70,
+      "libelle": "al Examen mycologique en vue de la recherche et de \" Identification év.en-- ruelle de: dermatophytes, aspergillus. candida, torulopsis, etc..",
+      "section": "TITRE Y",
+      "chapter": "CHAPITRE 3"
+    },
+    {
       "code": "1595",
       "codeNGAP": "B 10",
       "lettreCle": "B",
       "coefficient": 10,
-      "libelle": "b) Recherche de pityriasis verslcolor par la méthode de la cellophane.adhéslve... r ••",
+      "libelle": "b) Recherche de pityriasis verslcolor par la méthode de la cellophane.adhéslve r ",
       "section": "TITRE Y",
       "chapter": "CHAPITRE 3"
     },
@@ -1215,7 +1422,7 @@
       "codeNGAP": "B 10",
       "lettreCle": "B",
       "coefficient": 10,
-      "libelle": "Examen parasitologlque des selles apportées au laboratoire...,..",
+      "libelle": "Examen parasitologlque des selles apportées au laboratoire,..",
       "section": "TITRE Y",
       "chapter": "CHAPITRE 3"
     },
@@ -1224,7 +1431,7 @@
       "codeNGAP": "B 50",
       "lettreCle": "B",
       "coefficient": 50,
-      "libelle": "Examen parasitologique de selles émises au laboratoire en vue de la · recherche extemporanée des formes végétatives d~ protozoaires et identification des formes végétativesd'amibest/ou autres protozoaires par coloration élective: M.l.F. et/ou noir chlorazol. et/ou hématoxjline...",
+      "libelle": "Examen parasitologique de selles émises au laboratoire en vue de la · recherche extemporanée des formes végétatives d protozoaires et identification des formes végétativesd'amibest/ou autres protozoaires par coloration élective: M.l.F. et/ou noir chlorazol. et/ou hématoxjline",
       "section": "TITRE Y",
       "chapter": "CHAPITRE 3"
     },
@@ -1233,7 +1440,7 @@
       "codeNGAP": "B 100",
       "lettreCle": "B",
       "coefficient": 100,
-      "libelle": "Examen parasitologique des selles émises au labo comportant l'ensemble des deux examens... •.,.,.,..,...",
+      "libelle": "Examen parasitologique des selles émises au labo comportant l'ensemble des deux examens .,.,.,..,",
       "section": "TITRE Y",
       "chapter": "CHAPITRE 3"
     },
@@ -1242,16 +1449,7 @@
       "codeNGAP": "B 25",
       "lettreCle": "B",
       "coefficient": 25,
-      "libelle": "Numération des œufs d'helminthes dans les selles (résultats exprimés -en nombre d'œufs par gramme de selles), sur prescription particulière exclusivement...,..",
-      "section": "TITRE Y",
-      "chapter": "CHAPITRE 3"
-    },
-    {
-      "code": "1605",
-      "codeNGAP": "B 10",
-      "lettreCle": "B",
-      "coefficient": 10,
-      "libelle": "Recherche d'œufs d'tu:tlrilintheasur la marge de l'anus {méthode de la cetlophane adhésive. ou autre}..,...",
+      "libelle": "Numération des œufs d'helminthes dans les selles (résultats exprimés -en nombre d'œufs par gramme de selles), sur prescription particulière exclusivement,..",
       "section": "TITRE Y",
       "chapter": "CHAPITRE 3"
     },
@@ -1260,7 +1458,25 @@
       "codeNGAP": "B 50",
       "lettreCle": "B",
       "coefficient": 50,
-      "libelle": "Recherche d'amibes dans un prélèvement de mucus recueilli sous rectosco· pie. Examen extemporané.et après ~oloratiOfl...,",
+      "libelle": "Recherche d'amibes dans un prélèvement de mucus recueilli sous rectosco· pie. Examen extemporané.et après oloratiOfl,",
+      "section": "TITRE Y",
+      "chapter": "CHAPITRE 3"
+    },
+    {
+      "code": "1605",
+      "codeNGAP": "B 10",
+      "lettreCle": "B",
+      "coefficient": 10,
+      "libelle": "Recherche d'œufs d'tu:tlrilintheasur la marge de l'anus {méthode de la cetlophane adhésive. ou autre}..,",
+      "section": "TITRE Y",
+      "chapter": "CHAPITRE 3"
+    },
+    {
+      "code": "1606",
+      "codeNGAP": "B 25",
+      "lettreCle": "B",
+      "coefficient": 25,
+      "libelle": "Recherche des larves rllabditoides d'anguillules par la technique d'extraction de Baerman (.à l'initiativedu biologiste sp.lon les antécédents géographiqdes du malade),",
       "section": "TITRE Y",
       "chapter": "CHAPITRE 3"
     },
@@ -1269,7 +1485,7 @@
       "codeNGAP": "B 40",
       "lettreCle": "B",
       "coefficient": 40,
-      "libelle": "Coproculture pour rect\\6(che et iderttifica,tion des larves d'anguillules et d'ankylostomes.,.. o\" 0 • ~ • •. \" \"it-:'!- ••••",
+      "libelle": "Coproculture pour rect\\6(che et iderttifica,tion des larves d'anguillules et d'ankylostomes.,.. o\" 0    . \" \"it-:'!- ",
       "section": "TITRE Y",
       "chapter": "CHAPITRE 3"
     },
@@ -1287,7 +1503,7 @@
       "codeNGAP": "B 30",
       "lettreCle": "B",
       "coefficient": 30,
-      "libelle": "Recherche ou identification isolée de IJarasites (~ang et selles exclus) par eXUli-tCn direct ~t év.ent~Uement après enrichis~emenl: (autres que trichamonas ou champ:.Q{lOm. llui font (l'objet de cotation particulière).•..",
+      "libelle": "Recherche ou identification isolée de IJarasites (ang et selles exclus) par eXUli-tCn direct t év.entUement après enrichisemenl: (autres que trichamonas ou champ:.Q{lOm. llui font (l'objet de cotation particulière)...",
       "section": "TITRE Y",
       "chapter": "CHAPITRE 3"
     },
@@ -1296,25 +1512,7 @@
       "codeNGAP": "B 45",
       "lettreCle": "B",
       "coefficient": 45,
-      "libelle": "- Recherche d'un antigène ou d'un anticorps par immunodiffuslon (Ouchterlony) (cotation maximum de deux) chacun... 8 30.... /.... ~S20 - Recherche simultanée d'antigène et anticorps homologués par immunodiffusion(Quchterlony)...",
-      "section": "TITRE Y",
-      "chapter": "CHAPITRE 1er - TECHNIQUES GENERALES '"
-    },
-    {
-      "code": "1622",
-      "codeNGAP": "B 120",
-      "lettreCle": "B",
-      "coefficient": 120,
-      "libelle": "- Recherche d'un antigène ou d'un anticorps par irrtmunoélectrophorèse...",
-      "section": "TITRE Y",
-      "chapter": "CHAPITRE 1er - TECHNIQUES GENERALES '"
-    },
-    {
-      "code": "1623",
-      "codeNGAP": "B 130",
-      "lettreCle": "B",
-      "coefficient": 130,
-      "libelle": "- En cas ùt: t\"ech~rchc3 simultanées quel que soit le nombre d'antigène ou d'anticorps, côtation maximum... \"...,..",
+      "libelle": "- Recherche d'un antigène ou d'un anticorps par immunodiffuslon (Ouchterlony) (cotation maximum de deux) chacun 8 30. /. S20 - Recherche simultanée d'antigène et anticorps homologués par immunodiffusion(Quchterlony)",
       "section": "TITRE Y",
       "chapter": "CHAPITRE 1er - TECHNIQUES GENERALES '"
     },
@@ -1323,7 +1521,25 @@
       "codeNGAP": "B 40",
       "lettreCle": "B",
       "coefficient": 40,
-      "libelle": "- Dosage d'un antigène ou d'un anticorps p3r Immunodiffusion radiale (côtation maximum de 2)...",
+      "libelle": "- Dosage d'un antigène ou d'un anticorps p3r Immunodiffusion radiale (côtation maximum de 2)",
+      "section": "TITRE Y",
+      "chapter": "CHAPITRE 1er - TECHNIQUES GENERALES '"
+    },
+    {
+      "code": "1622",
+      "codeNGAP": "B 120",
+      "lettreCle": "B",
+      "coefficient": 120,
+      "libelle": "- Recherche d'un antigène ou d'un anticorps par irrtmunoélectrophorèse",
+      "section": "TITRE Y",
+      "chapter": "CHAPITRE 1er - TECHNIQUES GENERALES '"
+    },
+    {
+      "code": "1623",
+      "codeNGAP": "B 130",
+      "lettreCle": "B",
+      "coefficient": 130,
+      "libelle": "- En cas ùt: t\"echrchc3 simultanées quel que soit le nombre d'antigène ou d'anticorps, côtation maximum \",..",
       "section": "TITRE Y",
       "chapter": "CHAPITRE 1er - TECHNIQUES GENERALES '"
     },
@@ -1332,7 +1548,16 @@
       "codeNGAP": "B 30",
       "lettreCle": "B",
       "coefficient": 30,
-      "libelle": "- Recherche quaiitative d'anticorps par immunofluorescence indirecte (cn cas de rechen;he simultanee de plusieurs anticorps\" côtation maximUl,' de deux): chacun..,...",
+      "libelle": "- Recherche quaiitative d'anticorps par immunofluorescence indirecte (cn cas de rechen;he simultanee de plusieurs anticorps\" côtation maximUl,' de deux): chacun..,",
+      "section": "TITRE Y",
+      "chapter": "CHAPITRE 1er - TECHNIQUES GENERALES '"
+    },
+    {
+      "code": "1626",
+      "codeNGAP": "B 30",
+      "lettreCle": "B",
+      "coefficient": 30,
+      "libelle": "- nacherche d'antigène par immuncHuoresèence directe (côtation ma- '. ximum de deux): chacun;..",
       "section": "TITRE Y",
       "chapter": "CHAPITRE 1er - TECHNIQUES GENERALES '"
     },
@@ -1346,20 +1571,20 @@
       "chapter": "CHAPITRE 1er - TECHNIQUES GENERALES '"
     },
     {
-      "code": "1626",
-      "codeNGAP": "B 30",
+      "code": "1629",
+      "codeNGAP": "B 40",
       "lettreCle": "B",
-      "coefficient": 30,
-      "libelle": "- nacherche d'antigène par immuncHuoresèence directe (côtation ma- '. ximum de deux): chacun...;..",
+      "coefficient": 40,
+      "libelle": "- Dosage d'un antico/Ps ou d'un antigène par laser nephelométrle..",
       "section": "TITRE Y",
       "chapter": "CHAPITRE 1er - TECHNIQUES GENERALES '"
     },
     {
       "code": "1631",
-      "codeNGAP": "CHAPITRE 2",
-      "lettreCle": "CHAPITRE",
-      "coefficient": 2,
-      "libelle": "- Si la-réaction précédente est posi tlve. Titrage..,..",
+      "codeNGAP": "B 45",
+      "lettreCle": "B",
+      "coefficient": 45,
+      "libelle": "- Si la-réaction précédente est posi tlve. Titrage..,.. CHAPITRE 2 TECHNIQUES U11USANT UN MARQUEUR (s\"\"f exceptions précisées) Dosages sanguins pouvant être effectués par une technique utilisant, un marqueur enzymatique.",
       "section": "TITRE Y",
       "chapter": "CHAPITRE 1er - TECHNIQUES GENERALES '"
     },
@@ -1368,7 +1593,7 @@
       "codeNGAP": "B 70",
       "lettreCle": "B",
       "coefficient": 70,
-      "libelle": "- Alpha foetoproteine...:...",
+      "libelle": "- Alpha foetoproteine:",
       "section": "TITRE Y",
       "chapter": "CHAPITRE 1er - TECHNIQUES GENERALES '"
     },
@@ -1377,7 +1602,7 @@
       "codeNGAP": "B 70",
       "lettreCle": "B",
       "coefficient": 70,
-      "libelle": "- Alpha foetoproteine d3ns le liquide amniotique...",
+      "libelle": "- Alpha foetoproteine d3ns le liquide amniotique",
       "section": "TITRE Y",
       "chapter": "CHAPITRE 1er - TECHNIQUES GENERALES '"
     },
@@ -1386,7 +1611,7 @@
       "codeNGAP": "B 70",
       "lettreCle": "B",
       "coefficient": 70,
-      "libelle": "- Antigènes HbS...:...",
+      "libelle": "- Antigènes HbS:",
       "section": "TITRE Y",
       "chapter": "CHAPITRE 1er - TECHNIQUES GENERALES '"
     },
@@ -1395,7 +1620,7 @@
       "codeNGAP": "B 70",
       "lettreCle": "B",
       "coefficient": 70,
-      "libelle": "- Anticorps anti-HbS... '.'...",
+      "libelle": "- Anticorps anti-HbS '.'",
       "section": "TITRE Y",
       "chapter": "CHAPITRE 1er - TECHNIQUES GENERALES '"
     },
@@ -1404,7 +1629,7 @@
       "codeNGAP": "B 10",
       "lettreCle": "B",
       "coefficient": 10,
-      "libelle": "- Bêta 2 microglobullne...",
+      "libelle": "- Bêta 2 microglobullne",
       "section": "TITRE Y",
       "chapter": "CHAPITRE 1er - TECHNIQUES GENERALES '"
     },
@@ -1413,16 +1638,34 @@
       "codeNGAP": "S 70",
       "lettreCle": "S",
       "coefficient": 70,
-      "libelle": "- ImmuI1oglobulJne E (igE) totales...",
+      "libelle": "- ImmuI1oglobulJne E (igE) totales",
       "section": "TITRE Y",
       "chapter": "CHAPITRE 1er - TECHNIQUES GENERALES '"
+    },
+    {
+      "code": "1638",
+      "codeNGAP": "B 70",
+      "lettreCle": "B",
+      "coefficient": 70,
+      "libelle": "- Immunoglobulines E (IgE) spécifiqdes (côtation au m3ximum de 2 allèrgènes) '",
+      "section": "TITRE Y",
+      "chapter": "CHAPITRE 1er - TECHNIQUES GENERALES '"
+    },
+    {
+      "code": "1639",
+      "codeNGAP": "S 20",
+      "lettreCle": "S",
+      "coefficient": 20,
+      "libelle": "- Recherche de la syphili en vue d'examen systématique par au moins une réaction qualitative de chacun des deux groupes suivants: Groupe 1: - Réaction de Kline. - Réaction du V.O.R.L. - Réaction du V.D.R.L. au charbon. Groupe 2: - Immunofluoroscence Indirecte absorbée (F.T.A. - A.B.S). - Hémagglutination passive (T.P.H.A)",
+      "section": "TITRE Y",
+      "chapter": "CHAPITRE 3"
     },
     {
       "code": "1640",
       "codeNGAP": "B 40",
       "lettreCle": "B",
       "coefficient": 40,
-      "libelle": "Examen de controle avant traitement QU examen de sUrveiliance d'une syphilis traitée par au moins une réaction quantitative de chacun des 2 groupes suivants Groupe '1: - Réaction de Kline. - Réaction du V.D.R.L. - Réaction du V.O.R.L. a u charbon. Groupe 2: - Immunofluorescence indirecte absorbée (F.T.A - A.B.S) - Hémaggiutination pass ive (T.P.H.A)...",
+      "libelle": "Examen de controle avant traitement QU examen de sUrveiliance d'une syphilis traitée par au moins une réaction quantitative de chacun des 2 groupes suivants Groupe '1: - Réaction de Kline. - Réaction du V.D.R.L. - Réaction du V.O.R.L. a u charbon. Groupe 2: - Immunofluorescence indirecte absorbée (F.T.A - A.B.S) - Hémaggiutination pass ive (T.P.H.A)",
       "section": "TITRE Y",
       "chapter": "CHAPITRE 3"
     },
@@ -1431,7 +1674,7 @@
       "codeNGAP": "B 40",
       "lettreCle": "B",
       "coefficient": 40,
-      "libelle": "Recherche et titrage des agglutinines 0 et H des Salmonella typhi. para A. para B. para C...,... _.... -..",
+      "libelle": "Recherche et titrage des agglutinines 0 et H des Salmonella typhi. para A. para B. para C, _. -..",
       "section": "TITRE Y",
       "chapter": "CHAPITRE 3"
     },
@@ -1440,7 +1683,7 @@
       "codeNGAP": "B 10",
       "lettreCle": "B",
       "coefficient": 10,
-      "libelle": "Recherche de la mononucléose infectieuse par agglutination d'hématies ou de particules sensibilisées.. _...;.. ___.... -.. -..",
+      "libelle": "Recherche de la mononucléose infectieuse par agglutination d'hématies ou de particules sensibilisées.. _;.. ___. -.. -..",
       "section": "TITRE Y",
       "chapter": "CHAPITRE 3"
     },
@@ -1449,16 +1692,16 @@
       "codeNGAP": "B 40",
       "lettreCle": "B",
       "coefficient": 40,
-      "libelle": "Recherche de mononucléose infectieuse par réaction de Paul, BunneUet Davidsohn..:,... _. _....,.. __ _..",
+      "libelle": "Recherche de mononucléose infectieuse par réaction de Paul, BunneUet Davidsohn..:, _. _.,.. __ _..",
       "section": "TITRE Y",
       "chapter": "CHAPITRE 3"
     },
     {
       "code": "1644",
-      "codeNGAP": "B 35",
+      "codeNGAP": "B 10",
       "lettreCle": "B",
-      "coefficient": 35,
-      "libelle": "Recherche du titre de l'hémolysine antiboeuf (en c.as de réaction de Paul et Bunnellnégative)...;... _. _... B 10 1645. TItrage d:line anti-enzyme streptococc ique du sérum (exemple: antis· trepiolysine. \"0\" ou antistreptokinase)...",
+      "coefficient": 10,
+      "libelle": "Recherche du titre de l'hémolysine antiboeuf (en c.as de réaction de Paul et Bunnellnégative); _. _",
       "section": "TITRE Y",
       "chapter": "CHAPITRE 3"
     },
@@ -1467,16 +1710,43 @@
       "codeNGAP": "B 80",
       "lettreCle": "B",
       "coefficient": 80,
-      "libelle": "Recherche et/ou titrages séparés de plusieurs ûntienzymes str~ptoc. cociqdes 1 sérum... _..;..",
+      "libelle": "Recherche et/ou titrages séparés de plusieurs ûntienzymes strptoc. cociqdes 1 sérum _..;..",
+      "section": "TITRE Y",
+      "chapter": "CHAPITRE 3"
+    },
+    {
+      "code": "1647",
+      "codeNGAP": "B 20",
+      "lettreCle": "B",
+      "coefficient": 20,
+      "libelle": "Titrage de l'antistaphylolysine alha du sérum",
+      "section": "TITRE Y",
+      "chapter": "CHAPITRE 3"
+    },
+    {
+      "code": "1648",
+      "codeNGAP": "B 40",
+      "lettreCle": "B",
+      "coefficient": 40,
+      "libelle": "Recherche et titrage d'un anticorps antibactérien ou antiparasitaire par agglutina,ion directe de l'agent pathogène (à l'exception des séro-diagnostics de la fièvre thyphoïde et de 1 a toxoplasmose (cette cotation comprend la recherct\\e des anticorps bloquants si nécessaire) ..",
       "section": "TITRE Y",
       "chapter": "CHAPITRE 3"
     },
     {
       "code": "1650",
-      "codeNGAP": "B 120",
+      "codeNGAP": "B 35",
       "lettreCle": "B",
-      "coefficient": 120,
-      "libelle": "Héact c~ de 1 Waaler-Rose en \"'I.Ibes..,..,.. '... 165'j Analyse imm~!'lo électrophorétique des proteines d'un milieu biologique (avec documents et commentaires), technique standard avec immune B Hl B 35 serum antihumain total (non cumulab!e avec le proteinogramme)....",
+      "coefficient": 35,
+      "libelle": "Héact c de 1 Waaler-Rose en \"'I.Ibes..,..,.. ' 165'j Analyse imm!'lo électrophorétique des proteines d'un milieu biologique (avec documents et commentaires), technique standard avec immune B Hl",
+      "section": "TITRE Y",
+      "chapter": "CHAPITRE 3"
+    },
+    {
+      "code": "1653",
+      "codeNGAP": "B 40",
+      "lettreCle": "B",
+      "coefficient": 40,
+      "libelle": "Diagnostic sérologique de la toxoplasmose avec titrage (en unité intel'lnatJonales pour les IgG) au m'Jins deux techniqdes différentes..",
       "section": "TITRE Y",
       "chapter": "CHAPITRE 3"
     },
@@ -1485,7 +1755,16 @@
       "codeNGAP": "B 40",
       "lettreCle": "B",
       "coefficient": 40,
-      "libelle": "Réaction de Nelson qualitative... i...",
+      "libelle": "Réaction de Nelson qualitative i",
+      "section": "TITRE Y",
+      "chapter": "CHAPITRE 3"
+    },
+    {
+      "code": "1658",
+      "codeNGAP": "B 15",
+      "lettreCle": "B",
+      "coefficient": 15,
+      "libelle": "Recherche simultanée d'antigène et d'anticorps homologués par élec· tro-immunodiffusion ou par électre-synérèse 1659 Typage HLA (1 spéclfué A ou Bi",
       "section": "TITRE Y",
       "chapter": "CHAPITRE 3"
     },
@@ -1494,34 +1773,7 @@
       "codeNGAP": "B 30",
       "lettreCle": "B",
       "coefficient": 30,
-      "libelle": "Diagnostic de ln grossesse (test presomptif par méthode immunolog!- que avec au moi~s 2 réactifs...",
-      "section": "TITRE Y",
-      "chapter": "CHAPITRE 3"
-    },
-    {
-      "code": "1662",
-      "codeNGAP": "B 100",
-      "lettreCle": "B",
-      "coefficient": 100,
-      "libelle": "Dosage de la gonadotropine LH... \",.\",.\" ••••, ••,.",
-      "section": "TITRE Y",
-      "chapter": "CHAPITRE 3"
-    },
-    {
-      "code": "1663",
-      "codeNGAP": "B 100",
-      "lettreCle": "B",
-      "coefficient": 100,
-      "libelle": "Dosage de la gonadotropine FSH...,...,...",
-      "section": "TITRE Y",
-      "chapter": "CHAPITRE 3"
-    },
-    {
-      "code": "1664",
-      "codeNGAP": "B 60",
-      "lettreCle": "B",
-      "coefficient": 60,
-      "libelle": "Dix-sept 17-cetosteroidès.. ·... '..,. • •..",
+      "libelle": "Diagnostic de ln grossesse (test presomptif par méthode immunolog!- que avec au mois 2 réactifs",
       "section": "TITRE Y",
       "chapter": "CHAPITRE 3"
     },
@@ -1530,7 +1782,34 @@
       "codeNGAP": "B 100",
       "lettreCle": "B",
       "coefficient": 100,
-      "libelle": "Dosage de la gonadotropine' chorionique (HC6ou' ~rolans 8) (non cumulable avec.le diagnostic de grossesse)...:.., \".. •",
+      "libelle": "Dosage de la gonadotropine' chorionique (HC6ou' rolans 8) (non cumulable avec.le diagnostic de grossesse):.., \".. ",
+      "section": "TITRE Y",
+      "chapter": "CHAPITRE 3"
+    },
+    {
+      "code": "1662",
+      "codeNGAP": "B 100",
+      "lettreCle": "B",
+      "coefficient": 100,
+      "libelle": "Dosage de la gonadotropine LH \",.\",.\" , ,.",
+      "section": "TITRE Y",
+      "chapter": "CHAPITRE 3"
+    },
+    {
+      "code": "1663",
+      "codeNGAP": "B 100",
+      "lettreCle": "B",
+      "coefficient": 100,
+      "libelle": "Dosage de la gonadotropine FSH,,",
+      "section": "TITRE Y",
+      "chapter": "CHAPITRE 3"
+    },
+    {
+      "code": "1664",
+      "codeNGAP": "B 60",
+      "lettreCle": "B",
+      "coefficient": 60,
+      "libelle": "Dix-sept 17-cetosteroidès.. · '..,.  ..",
       "section": "TITRE Y",
       "chapter": "CHAPITRE 3"
     },
@@ -1539,25 +1818,7 @@
       "codeNGAP": "B 120",
       "lettreCle": "B",
       "coefficient": 120,
-      "libelle": "Fractionnement chromatographlque des-dix-sept cstosteroides[minimum 5 frac~onsJ non cumulables avec le dosage des 17 cetosteroïdes ••",
-      "section": "TITRE Y",
-      "chapter": "CHAPITRE 3"
-    },
-    {
-      "code": "1668",
-      "codeNGAP": "B 60",
-      "lettreCle": "B",
-      "coefficient": 60,
-      "libelle": "Pregriandiol...,,.,,....,,..,",
-      "section": "TITRE Y",
-      "chapter": "CHAPITRE 3"
-    },
-    {
-      "code": "1669",
-      "codeNGAP": "B 70",
-      "lettreCle": "B",
-      "coefficient": 70,
-      "libelle": "Pregnanetriol...,... '.' •, •..",
+      "libelle": "Fractionnement chromatographlque des-dix-sept cstosteroides[minimum 5 fraconsJ non cumulables avec le dosage des 17 cetosteroïdes ",
       "section": "TITRE Y",
       "chapter": "CHAPITRE 3"
     },
@@ -1566,7 +1827,25 @@
       "codeNGAP": "B 60",
       "lettreCle": "B",
       "coefficient": 60,
-      "libelle": "Androstérone + etiocholanolone (non cumulable avec les dix-sept Cetosteroïdes J.'..., '..",
+      "libelle": "Androstérone + etiocholanolone (non cumulable avec les dix-sept Cetosteroïdes J.', '..",
+      "section": "TITRE Y",
+      "chapter": "CHAPITRE 3"
+    },
+    {
+      "code": "1668",
+      "codeNGAP": "B 60",
+      "lettreCle": "B",
+      "coefficient": 60,
+      "libelle": "Pregriandiol,,.,,.,,..,",
+      "section": "TITRE Y",
+      "chapter": "CHAPITRE 3"
+    },
+    {
+      "code": "1669",
+      "codeNGAP": "B 70",
+      "lettreCle": "B",
+      "coefficient": 70,
+      "libelle": "Pregnanetriol, '.' , ..",
       "section": "TITRE Y",
       "chapter": "CHAPITRE 3"
     },
@@ -1575,7 +1854,7 @@
       "codeNGAP": "B 70",
       "lettreCle": "B",
       "coefficient": 70,
-      "libelle": "Cortisol (cotation au maximum de 3 dosages)...",
+      "libelle": "Cortisol (cotation au maximum de 3 dosages)",
       "section": "TITRE Y",
       "chapter": "CHAPITRE 3"
     },
@@ -1584,7 +1863,7 @@
       "codeNGAP": "B 120",
       "lettreCle": "B",
       "coefficient": 120,
-      "libelle": "Aldosterono ou tetrahydre -aldosterone- (non cumulabJ~)..,...",
+      "libelle": "Aldosterono ou tetrahydre -aldosterone- (non cumulabJ)..,",
       "section": "TITRE Y",
       "chapter": "CHAPITRE 3"
     },
@@ -1593,7 +1872,7 @@
       "codeNGAP": "B 80",
       "lettreCle": "B",
       "coefficient": 80,
-      "libelle": "OBstriol...",
+      "libelle": "OBstriol",
       "section": "TITRE Y",
       "chapter": "CHAPITRE 3"
     },
@@ -1607,11 +1886,20 @@
       "chapter": "CHAPITRE 3"
     },
     {
+      "code": "1675",
+      "codeNGAP": "B 70",
+      "lettreCle": "B",
+      "coefficient": 70,
+      "libelle": "b/re.cherehe et dosage, \"..",
+      "section": "TITRE Y",
+      "chapter": "CHAPITRE 3"
+    },
+    {
       "code": "1676",
       "codeNGAP": "B 60",
       "lettreCle": "B",
       "coefficient": 60,
-      "libelle": "Acidevanilmandelique (métaboli~es des catécholamines)",
+      "libelle": "Acidevanilmandelique (métabolies des catécholamines)",
       "section": "TITRE Y",
       "chapter": "CHAPITRE 3"
     },
@@ -1620,7 +1908,7 @@
       "codeNGAP": "B 80",
       "lettreCle": "B",
       "coefficient": 80,
-      "libelle": "Catécholamines urinaires... \"... \". '...",
+      "libelle": "Catécholamines urinaires \" \". '",
       "section": "TITRE Y",
       "chapter": "CHAPITRE 3"
     },
@@ -1629,7 +1917,7 @@
       "codeNGAP": "B 70",
       "lettreCle": "B",
       "coefficient": 70,
-      "libelle": "Estradiol (E2)...",
+      "libelle": "Estradiol (E2)",
       "section": "TITRE Y",
       "chapter": "CHAPITRE 3"
     },
@@ -1638,7 +1926,7 @@
       "codeNGAP": "B 70",
       "lettreCle": "B",
       "coefficient": 70,
-      "libelle": "Estrone (E1)...,...",
+      "libelle": "Estrone (E1),",
       "section": "TITRE Y",
       "chapter": "CHAPITRE 3"
     },
@@ -1647,7 +1935,7 @@
       "codeNGAP": "B 70",
       "lettreCle": "B",
       "coefficient": 70,
-      "libelle": "~érivés methoxylés",
+      "libelle": "érivés methoxylés",
       "section": "TITRE Y",
       "chapter": "CHAPITRE 3"
     },
@@ -1656,7 +1944,7 @@
       "codeNGAP": "B 40",
       "lettreCle": "B",
       "coefficient": 40,
-      "libelle": "Anticorps microsomes...",
+      "libelle": "Anticorps microsomes",
       "section": "TITRE Y",
       "chapter": "CHAPITRE 3"
     },
@@ -1683,7 +1971,7 @@
       "codeNGAP": "B 70",
       "lettreCle": "B",
       "coefficient": 70,
-      "libelle": "Thyréostim,line (TSH)...",
+      "libelle": "Thyréostim,line (TSH)",
       "section": "TITRE Y",
       "chapter": "CHAPITRE 3"
     },
@@ -1692,7 +1980,7 @@
       "codeNGAP": "B 70",
       "lettreCle": "B",
       "coefficient": 70,
-      "libelle": "Triodothyronine (T3)..,...",
+      "libelle": "Triodothyronine (T3)..,",
       "section": "TITRE Y",
       "chapter": "CHAPITRE 3"
     },
@@ -1701,7 +1989,7 @@
       "codeNGAP": "B 70",
       "lettreCle": "B",
       "coefficient": 70,
-      "libelle": "Thyrox1n\"e (T\")...;...",
+      "libelle": "Thyrox1n\"e (T\");",
       "section": "TITRE Y",
       "chapter": "CHAPITRE 3"
     },
@@ -1710,7 +1998,7 @@
       "codeNGAP": "B 70",
       "lettreCle": "B",
       "coefficient": 70,
-      "libelle": "T 4 libre (FT 4)... \"'... !..",
+      "libelle": "T 4 libre (FT 4) \"' !..",
       "section": "TITRE Y",
       "chapter": "CHAPITRE 3"
     },
@@ -1719,7 +2007,7 @@
       "codeNGAP": "B 70",
       "lettreCle": "B",
       "coefficient": 70,
-      "libelle": "Indice de thyroxine libre...",
+      "libelle": "Indice de thyroxine libre",
       "section": "TITRE Y",
       "chapter": "CHAPITRE 3"
     },
@@ -1728,7 +2016,7 @@
       "codeNGAP": "B 70",
       "lettreCle": "B",
       "coefficient": 70,
-      "libelle": "Thyroglobuiine...:...",
+      "libelle": "Thyroglobuiine:",
       "section": "TITRE Y",
       "chapter": "CHAPITRE 3"
     },
@@ -1737,7 +2025,7 @@
       "codeNGAP": "B 70",
       "lettreCle": "B",
       "coefficient": 70,
-      "libelle": "Thyroxin binclingglobuHn...:...",
+      "libelle": "Thyroxin binclingglobuHn:",
       "section": "TITRE Y",
       "chapter": "CHAPITRE 3"
     },
@@ -1746,7 +2034,7 @@
       "codeNGAP": "B 70",
       "lettreCle": "B",
       "coefficient": 70,
-      "libelle": "Thyrocalcitonine..::..;...",
+      "libelle": "Thyrocalcitonine..::..;",
       "section": "TITRE Y",
       "chapter": "CHAPITRE 3"
     },
@@ -1764,7 +2052,7 @@
       "codeNGAP": "B 70",
       "lettreCle": "B",
       "coefficient": 70,
-      "libelle": "Hormone de croissance..,...",
+      "libelle": "Hormone de croissance..,",
       "section": "TITRE Y",
       "chapter": "CHAPITRE 3"
     },
@@ -1773,7 +2061,7 @@
       "codeNGAP": "B 70",
       "lettreCle": "B",
       "coefficient": 70,
-      "libelle": "1. Progesterone.. '... '.'...",
+      "libelle": "1. Progesterone.. ' '.'",
       "section": "TITRE Y",
       "chapter": "CHAPITRE 3"
     },
@@ -1782,7 +2070,7 @@
       "codeNGAP": "B 70",
       "lettreCle": "B",
       "coefficient": 70,
-      "libelle": "Dix-s.ept hydroxy progesterone...:...",
+      "libelle": "Dix-s.ept hydroxy progesterone:",
       "section": "TITRE Y",
       "chapter": "CHAPITRE 3"
     },
@@ -1791,7 +2079,7 @@
       "codeNGAP": "B 70",
       "lettreCle": "B",
       "coefficient": 70,
-      "libelle": "Testosterone...",
+      "libelle": "Testosterone",
       "section": "TITRE Y",
       "chapter": "CHAPITRE 3"
     },
@@ -1800,7 +2088,7 @@
       "codeNGAP": "B 70",
       "lettreCle": "B",
       "coefficient": 70,
-      "libelle": "Insuline...,...",
+      "libelle": "Insuline,",
       "section": "TITRE Y",
       "chapter": "CHAPITRE 3"
     },
@@ -1823,11 +2111,20 @@
       "chapter": "CHAPITRE 3"
     },
     {
+      "code": "1702",
+      "codeNGAP": "B 50",
+      "lettreCle": "B",
+      "coefficient": 50,
+      "libelle": "Alcool (méthanol, éthanol) SANG nTREIX",
+      "section": "TITRE Y",
+      "chapter": "CHAPITRE 3"
+    },
+    {
       "code": "1703",
       "codeNGAP": "B 40",
       "lettreCle": "B",
       "coefficient": 40,
-      "libelle": "Oxyd~ de carbone...",
+      "libelle": "Oxyd de carbone",
       "section": "TITRE Y",
       "chapter": "CHAPITRE ter"
     },
@@ -1845,7 +2142,7 @@
       "codeNGAP": "B 40",
       "lettreCle": "B",
       "coefficient": 40,
-      "libelle": "Fluor·...:..",
+      "libelle": "Fluor·:..",
       "section": "TITRE Y",
       "chapter": "CHAPITRE ter"
     },
@@ -1854,7 +2151,7 @@
       "codeNGAP": "B 65",
       "lettreCle": "B",
       "coefficient": 65,
-      "libelle": "Solvants (Benzene, Phénol. Trichorethylène formaldehyde Chlorofonn~)...;...",
+      "libelle": "Solvants (Benzene, Phénol. Trichorethylène formaldehyde Chlorofonn);",
       "section": "TITRE Y",
       "chapter": "CHAPITRE ter"
     },
@@ -1863,7 +2160,7 @@
       "codeNGAP": "B 70",
       "lettreCle": "B",
       "coefficient": 70,
-      "libelle": "Pesticides (organo chlorés et organo phosphorés)...",
+      "libelle": "Pesticides (organo chlorés et organo phosphorés)",
       "section": "TITRE Y",
       "chapter": "CHAPITRE ter"
     },
@@ -1872,7 +2169,7 @@
       "codeNGAP": "B 10",
       "lettreCle": "B",
       "coefficient": 10,
-      "libelle": "StupéftantJ....",
+      "libelle": "StupéftantJ.",
       "section": "TITRE Y",
       "chapter": "CHAPITRE ter"
     },
@@ -1881,16 +2178,16 @@
       "codeNGAP": "B 50",
       "lettreCle": "B",
       "coefficient": 50,
-      "libelle": "Cyanures et métabolites...,..,...",
+      "libelle": "Cyanures et métabolites,..,",
       "section": "TITRE Y",
       "chapter": "CHAPITRE 2 - LES URINES"
     },
     {
-      "code": "1702",
-      "codeNGAP": "B 60",
+      "code": "1713",
+      "codeNGAP": "B 70",
       "lettreCle": "B",
-      "coefficient": 60,
-      "libelle": "Alcool (méthanol, éthanol) SANG nTREIX B 50 1705, Métaux (Pb. Hg. As)... B 60 Médicaments Ouelles que soient les techniqdes de dosage utilisées: marqueurs colorimètrie et CCM. 1709/1 - Acide ValproTqùe... B 70 1 '709/2 - Antidépresseurs Tricydiques... B 10 1709/3 _ Carbamazepine.. '.'... B 70 1709/4 - Digoxine... B 70 1709/5 - Ethosuximide... B 70 1709/6 1709/7 \" '; Phénitoine... - Phenobarbital... '.'... 1709/8 - Quinidine...:... 1709/9 - Théophyllhe B 70 B 70 B 70 B 70.... /.... Médic:aments: ",
+      "coefficient": 70,
+      "libelle": "Solvants a 65.1714 FluQrurie..  8 40 l7t5 Stupéfiants Porphyrines: 1'116/1 Recherche - B '10 8 5 1716/2 Recherche dosage et identification",
       "section": "TITRE Y",
       "chapter": "CHAPITRE 2 - LES URINES"
     },
@@ -1904,20 +2201,11 @@
       "chapter": "CHAPITRE 3 - LlQUIOe GASTRIQUE"
     },
     {
-      "code": "1713",
-      "codeNGAP": "B 70",
-      "lettreCle": "B",
-      "coefficient": 70,
-      "libelle": "Solvants... a 65.1714 FluQrurie.. • 8 40 l7t5 Stupéfiants Porphyrines: 1'116/1 Recherche... - B '10 8 5 1716/2 Recherche dosage et identification...",
-      "section": "TITRE Y",
-      "chapter": "CHAPITRE 3 - LlQUIOe GASTRIQUE"
-    },
-    {
       "code": "1719",
       "codeNGAP": "B 20",
       "lettreCle": "B",
       "coefficient": 20,
-      "libelle": "Plantes toxiqdes (identification microscopique)...",
+      "libelle": "Plantes toxiqdes (identification microscopique)",
       "section": "TITRE Y",
       "chapter": "CHAPITRE 3 - LlQUIOe GASTRIQUE"
     },
@@ -1926,7 +2214,7 @@
       "codeNGAP": "B 40",
       "lettreCle": "B",
       "coefficient": 40,
-      "libelle": "Fluorures (dosage)...",
+      "libelle": "Fluorures (dosage)",
       "section": "TITRE Y",
       "chapter": "CHAPITRE 3 - LlQUIOe GASTRIQUE"
     },
@@ -2012,6 +2300,15 @@
       "chapter": "Échographie"
     },
     {
+      "code": "9015",
+      "codeNGAP": "R 35",
+      "lettreCle": "R",
+      "coefficient": 35,
+      "libelle": "Doppler vasculaire",
+      "section": "ECHOGRAPHIE",
+      "chapter": "Doppler"
+    },
+    {
       "code": "9020",
       "codeNGAP": "C 1",
       "lettreCle": "C",
@@ -2093,6 +2390,24 @@
       "chapter": "Thyroïde"
     },
     {
+      "code": "9036",
+      "codeNGAP": "B 30",
+      "lettreCle": "B",
+      "coefficient": 30,
+      "libelle": "CRP (Protéine C-Réactive)",
+      "section": "BIOLOGIE - IMMUNOLOGIE",
+      "chapter": "Inflammation"
+    },
+    {
+      "code": "9037",
+      "codeNGAP": "B 20",
+      "lettreCle": "B",
+      "coefficient": 20,
+      "libelle": "Vitesse de Sédimentation (VS)",
+      "section": "BIOLOGIE - HEMATOLOGIE",
+      "chapter": "Inflammation"
+    },
+    {
       "code": "9040",
       "codeNGAP": "K 15",
       "lettreCle": "K",
@@ -2100,6 +2415,60 @@
       "libelle": "Électrocardiogramme (ECG) standard 12 dérivations",
       "section": "EXPLORATIONS FONCTIONNELLES",
       "chapter": "Cardiologie"
+    },
+    {
+      "code": "9041",
+      "codeNGAP": "K 30",
+      "lettreCle": "K",
+      "coefficient": 30,
+      "libelle": "Épreuve d'effort (ECG d'effort)",
+      "section": "EXPLORATIONS FONCTIONNELLES",
+      "chapter": "Cardiologie"
+    },
+    {
+      "code": "9042",
+      "codeNGAP": "K 50",
+      "lettreCle": "K",
+      "coefficient": 50,
+      "libelle": "Holter ECG 24h",
+      "section": "EXPLORATIONS FONCTIONNELLES",
+      "chapter": "Cardiologie"
+    },
+    {
+      "code": "9050",
+      "codeNGAP": "AMI 1",
+      "lettreCle": "AMI",
+      "coefficient": 1,
+      "libelle": "Pansement simple",
+      "section": "SOINS INFIRMIERS",
+      "chapter": "Pansements"
+    },
+    {
+      "code": "9051",
+      "codeNGAP": "AMI 2",
+      "lettreCle": "AMI",
+      "coefficient": 2,
+      "libelle": "Pansement lourd ou complexe",
+      "section": "SOINS INFIRMIERS",
+      "chapter": "Pansements"
+    },
+    {
+      "code": "9052",
+      "codeNGAP": "AMI 1",
+      "lettreCle": "AMI",
+      "coefficient": 1,
+      "libelle": "Injection intramusculaire ou sous-cutanée",
+      "section": "SOINS INFIRMIERS",
+      "chapter": "Injections"
+    },
+    {
+      "code": "9053",
+      "codeNGAP": "AMI 2",
+      "lettreCle": "AMI",
+      "coefficient": 2,
+      "libelle": "Injection intraveineuse",
+      "section": "SOINS INFIRMIERS",
+      "chapter": "Injections"
     }
   ]
 }
