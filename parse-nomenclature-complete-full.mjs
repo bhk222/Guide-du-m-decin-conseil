@@ -142,11 +142,47 @@ function nettoyerLibelle(text) {
         .replace(/['"«»]/g, '')
         .replace(/•+/g, '')
         .replace(/_+/g, '')
-        .replace(/~/g, '');
+        .replace(/~/g, '')
+        .replace(/\(\)/g, '')
+        .replace(/·/g, '');
     
-    // Corrections OCR massives - remplacer 0 par o dans les contextes appropriés
+    // Corrections OCR massives - ORDRE CRUCIAL: du plus spécifique au plus générique
+    // Appliquer 3 fois pour les mots avec plusieurs 0
+    for (let pass = 0; pass < 3; pass++) {
+        // Corrections très spécifiques
+        text = text.replace(/cyt0l0gique/gi, 'cytologique')
+            .replace(/d'?0rientati0n/gi, "d'orientation")
+            .replace(/d0rientati0n/gi, "d'orientation")
+            .replace(/dorientation/gi, "d'orientation")
+            .replace(/lelectr0ph0t0mètre/gi, "l'électrophotomètre")
+            .replace(/lelectr0ph0t0metre/gi, "l'électrophotomètre")
+            .replace(/lelectrophotométre/gi, "l'électrophotomètre")
+            .replace(/électr0ph0t0mètre/gi, 'électrophotomètre')
+            .replace(/électrophotomètreu/gi, 'électrophotomètre')
+            .replace(/spec\s*·?\s*tr0ph0t0mètre/gi, 'spectrophotomètre')
+            .replace(/spec\s+trophotométre/gi, 'spectrophotomètre')
+            .replace(/spectrophotométre/gi, 'spectrophotomètre')
+            .replace(/tr0ph0t0mètre/gi, 'trophotomètre')
+            .replace(/leuc0cytaire/gi, 'leucocytaire')
+            .replace(/gl0bules/gi, 'globules')
+            .replace(/numérati0n/gi, 'numération')
+            .replace(/nùmération/gi, 'numération')
+            .replace(/polynuc\s*iéaires/gi, 'polynucléaires')
+            .replace(/polynuc\s*léaires/gi, 'polynucléaires')
+            .replace(/h0m0gène/gi, 'homogène')
+            .replace(/hém0gl0bine/gi, 'hémoglobine')
+            .replace(/lhémoglobine/gi, "l'hémoglobine")
+            .replace(/hémat0crite/gi, 'hématocrite')
+            .replace(/d0sage/gi, 'dosage')
+            .replace(/doage/gi, 'dosage')
+            .replace(/éosin0philes/gi, 'éosinophiles')
+            .replace(/sécréti0ns/gi, 'sécrétions')
+            // Pattern générique pour 0->o entre lettres
+            .replace(/([a-zàâäéèêëïîôùûüÿçœæ])0([a-zàâäéèêëïîôùûüÿçœæ])/gi, '$1o$2');
+    }
+    
+    // Autres corrections
     const corrections = [
-        [/\b([a-z])0([a-z])/gi, '$1o$2'],  // x0x -> xox
         [/0u\b/gi, 'ou'],
         [/\b0n\b/gi, 'on'],
         [/\b0r\b/gi, 'or'],
