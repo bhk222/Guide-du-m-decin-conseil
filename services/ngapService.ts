@@ -32,8 +32,13 @@ function chargerActesNGAP(): ActeNGAP[] {
     
     Object.entries(ngapData.categories).forEach(([categorieName, actesCategorie]) => {
         (actesCategorie as any[]).forEach(acte => {
+            // Construire le code officiel de la nomenclature algérienne: lettreCle + coef
+            const codeOfficiel = acte.coef2 
+                ? `${acte.lettreCle}${acte.coef}+${acte.coef2}` 
+                : `${acte.lettreCle} ${acte.coef}`;
+            
             actes.push({
-                code: acte.code,
+                code: codeOfficiel, // Utiliser le code officiel (ex: "K 15", "B 30")
                 lettreCle: acte.lettreCle,
                 coefficient: acte.coef,
                 libelle: acte.libelle,
