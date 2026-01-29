@@ -121,26 +121,6 @@ export const NGAPCalculateur: React.FC = () => {
                         </button>
                     </div>
 
-                    <div className="flex flex-wrap gap-2">
-                        <span className="text-sm text-slate-600">Catégories:</span>
-                        {categories.map(cat => (
-                            <button
-                                key={cat}
-                                onClick={() => {
-                                    setCategorieSelectionnee(cat);
-                                    setResultatsRecherche(obtenirActesParCategorie(cat));
-                                }}
-                                className={`px-3 py-1 text-sm rounded-full ${
-                                    categorieSelectionnee === cat
-                                        ? 'bg-blue-600 text-white'
-                                        : 'bg-slate-100 text-slate-700 hover:bg-slate-200'
-                                }`}
-                            >
-                                {cat}
-                            </button>
-                        ))}
-                    </div>
-
                     {resultatsRecherche.length > 0 && (
                         <div className="space-y-2 max-h-96 overflow-y-auto">
                             {resultatsRecherche.map(acte => (
