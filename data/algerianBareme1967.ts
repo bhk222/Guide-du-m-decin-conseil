@@ -655,6 +655,70 @@ export const algerianBareme1967: InjuryCategory[] = [
               high: "Douleurs fréquentes, limitation activités"
             }
           },
+          {
+            name: "Fracture-luxation vertébrale lombaire avec complications neurologiques",
+            rate: [10, 30],
+            description: "Fracture consolidée avec raideur rachidienne et séquelles neurologiques du membre inférieur",
+            rateCriteria: {
+              low: "Raideur modérée, signes neurologiques discrets",
+              high: "Raideur importante, déficit neurologique marqué"
+            },
+            clinicalTip: "Évaluer séparément : 1) raideur rachis (10-20%) + 2) séquelle neurologique membre inférieur (steppage/amyotrophie = paralysie SPE 15-25%). Cumuler selon Balthazard."
+          },
+        ]
+      },
+      {
+        name: "Nerfs Périphériques - Membre Inférieur",
+        injuries: [
+          {
+            name: "Paralysie du nerf sciatique poplité externe (SPE) avec steppage",
+            rate: [15, 25],
+            description: "Pied tombant, marche avec steppage, amyotrophie loge antéro-externe jambe",
+            rateCriteria: {
+              low: "Déficit du releveur du pied, marche sur la pointe des pieds possible, steppage discret",
+              high: "Steppage majeur avec nécessité de releveur, amyotrophie sévère, troubles trophiques"
+            },
+            clinicalTip: "Signes cliniques : steppage à la marche (relever excessif du genou pour éviter que le pied traîne), impossibilité de marcher sur les talons, testing releveurs pied 0-2/5, amyotrophie loge antéro-externe (tibial antérieur, extenseur commun orteils), hypoesthésie dos du pied. Orthèse releveur souvent nécessaire."
+          },
+          {
+            name: "Paralysie du nerf sciatique poplité interne (SPI)",
+            rate: [15, 25],
+            description: "Atteinte de la flexion plantaire et flexion des orteils",
+            rateCriteria: {
+              low: "Difficulté à la marche sur la pointe des pieds, déficit modéré de flexion des orteils",
+              high: "Perte de la propulsion du pas, pied en talus, troubles trophiques importants"
+            },
+            clinicalTip: "Signes : impossibilité de se mettre sur la pointe des pieds, testing triceps sural 0-2/5, atrophie mollet, hypoesthésie plante du pied. Perte de propulsion lors de la marche."
+          },
+          {
+            name: "Paralysie complète du nerf sciatique",
+            rate: [35, 45],
+            description: "Atteinte combinée SPE + SPI",
+            rateCriteria: {
+              low: "Paralysie partielle, récupération possible",
+              high: "Paralysie complète sans récupération"
+            },
+            clinicalTip: "Combine steppage + perte propulsion + troubles sensitifs complets territoire sciatique. Retentissement fonctionnel majeur."
+          },
+          {
+            name: "Paralysie du nerf crural (fémoral)",
+            rate: [45, 55],
+            description: "Atteinte du quadriceps",
+            rateCriteria: {
+              low: "Déficit partiel",
+              high: "Paralysie complète"
+            },
+            clinicalTip: "Impossibilité d'extension active du genou, signe du rabot, amyotrophie cuisse, marche avec genou bloqué en extension par la main."
+          },
+          {
+            name: "Paralysie du nerf obturateur",
+            rate: [10, 20],
+            description: "Atteinte des adducteurs de la hanche",
+            rateCriteria: {
+              low: "Déficit modéré",
+              high: "Paralysie complète"
+            }
+          },
         ]
       },
     ]

@@ -8698,9 +8698,9 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
         },
         // 🆕 V3.3.130: Paralysie SPE/SPI (sciatique poplité externe/interne)
         {
-            pattern: /(?:paralysie|d[eé]ficit).*(?:SPE|sciatique.*poplit[eé].*externe)|steppage|pied.*tombant/i,
-            context: /steppage|pied.*tombe|releveur.*pied|d[eé]ficit.*releveur|fibulaire/i,
-            searchTerms: ['Paralysie du nerf sciatique poplité externe (SPE)'],
+            pattern: /(?:paralysie|d[eé]ficit).*(?:SPE|sciatique.*poplit[eé].*externe)|steppage|pied.*tombant|marche.*steppage/i,
+            context: /steppage|pied.*tomb[eé]?|releveur.*pied|d[eé]ficit.*releveur|fibulaire|amyotrophie.*jambe|amyotrophie.*membre.*inf[eé]rieur/i,
+            searchTerms: ['Paralysie du nerf sciatique poplité externe (SPE) avec steppage'],
             priority: 98,
             negativeContext: /SPI|interne/i
         },
@@ -8710,6 +8710,17 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             searchTerms: ['Paralysie du nerf sciatique poplité interne (SPI)'],
             priority: 98,
             negativeContext: /SPE|externe/i
+        },
+        // 🆕 V3.3.165: FRACTURE LOMBAIRE + SÉQUELLES NEUROLOGIQUES (steppage + amyotrophie)
+        {
+            pattern: /fracture[\s-]?luxation.*(?:L\d|lombaire)|(?:L\d|lombaire).*fracture[\s-]?luxation/i,
+            context: /steppage|amyotrophie.*(?:jambe|membre.*inf[eé]rieur|cuisse)|pied.*tomb[eé]?|marche.*avec.*steppage|releveur.*pied/i,
+            searchTerms: [
+                'Fracture-luxation vertébrale lombaire avec complications neurologiques',
+                'Paralysie du nerf sciatique poplité externe (SPE) avec steppage'
+            ],
+            priority: 1100,
+            negativeContext: /sans.*s[eé]quelle.*neurologique/i
         },
         {
             pattern: /sciatique.*chronique.*L5/i,
