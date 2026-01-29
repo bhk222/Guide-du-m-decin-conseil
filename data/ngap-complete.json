@@ -28,7 +28,7 @@
       "codeNGAP": "K 10",
       "lettreCle": "K",
       "coefficient": 10,
-      "libelle": "Fracture des deux os de l'avant-bras ou fracture de l'un et luxation de l'autre _ _. 60 -21- 6 Humérus 4 7 Clavicule 2 8 Omoplate",
+      "libelle": "Fracture des deux os de l'avant-bras ou fracture de l'un et luxation de l'autre 60 -21- 6 Humérus 4 7 Clavicule 2 8 Omoplate",
       "section": "TOXICOLOGIE",
       "chapter": "Fractures"
     },
@@ -172,7 +172,7 @@
       "codeNGAP": "K 50",
       "lettreCle": "K",
       "coefficient": 50,
-      "libelle": "Fractures du rebord cotyloïdien i20",
+      "libelle": "Fractures du rebord cotyloïdien 120",
       "section": "TOXICOLOGIE",
       "chapter": "Fractures"
     },
@@ -280,7 +280,7 @@
       "codeNGAP": "K 7",
       "lettreCle": "K",
       "coefficient": 7,
-      "libelle": "Pour les cinq premières _ _ _ _",
+      "libelle": "Pour les cinq premières",
       "section": "TOXICOLOGIE",
       "chapter": "PEAU ET TISSUS CELLULAIRE SOUS-CUT ANE"
     },
@@ -289,7 +289,7 @@
       "codeNGAP": "K 10",
       "lettreCle": "K",
       "coefficient": 10,
-      "libelle": "Désensibilisation par scarification dans les allergies polliniques _ 4 E 59 Inventaire allergologique comportant des tests cutanés effectués en scarification ou par tests épicutanés, avec compte rendu (maximum trois (03) séances}",
+      "libelle": "Désensibilisation par scarification dans les allergies polliniques 4 E 59 Inventaire allergologique comportant des tests cutanés effectués en scarification ou par tests épicutanés, avec compte rendu (maximum trois (03) séances}",
       "section": "TOXICOLOGIE",
       "chapter": "PEAU ET TISSUS CELLULAIRE SOUS-CUT ANE"
     },
@@ -298,7 +298,7 @@
       "codeNGAP": "K 15",
       "lettreCle": "K",
       "coefficient": 15,
-      "libelle": "Inventaires allergologique comportant des tests cutanés effectués en injection intradermiques avec compte rendu (maximum trois (03) séances) _",
+      "libelle": "Inventaires allergologique comportant des tests cutanés effectués en injection intradermiques avec compte rendu (maximum trois (03) séances)",
       "section": "TOXICOLOGIE",
       "chapter": "PEAU ET TISSUS CELLULAIRE SOUS-CUT ANE"
     },
@@ -343,7 +343,7 @@
       "codeNGAP": "K 15",
       "lettreCle": "K",
       "coefficient": 15,
-      "libelle": "Au dessous de 10 cm2",
+      "libelle": "Au dessous de 10 cm²",
       "section": "TOXICOLOGIE",
       "chapter": "PEAU ET TISSUS CELLULAIRE SOUS-CUT ANE"
     },
@@ -352,7 +352,7 @@
       "codeNGAP": "K 30",
       "lettreCle": "K",
       "coefficient": 30,
-      "libelle": "De 10 cm2 à 50 cm2 ;",
+      "libelle": "De 10 cm² à 50 cm² ;",
       "section": "TOXICOLOGIE",
       "chapter": "PEAU ET TISSUS CELLULAIRE SOUS-CUT ANE"
     },
@@ -361,7 +361,7 @@
       "codeNGAP": "K 20",
       "lettreCle": "K",
       "coefficient": 20,
-      "libelle": "Au dessus de 2 cm2 par multiples de 2 cm2 en supplément",
+      "libelle": "Au dessus de 2 cm² par mulntples de 2 cm² en supplément",
       "section": "TOXICOLOGIE",
       "chapter": "PEAU ET TISSUS CELLULAIRE SOUS-CUT ANE"
     },
@@ -415,7 +415,7 @@
       "codeNGAP": "K 40",
       "lettreCle": "K",
       "coefficient": 40,
-      "libelle": "Autoplastie par lambeau bipédiculé tubulé, chaque temps opératoire (avec maximum K 200) _",
+      "libelle": "Autoplastie par lambeau bipédiculé tubulé, chaque temps opératoire (avec maximum K 200)",
       "section": "TOXICOLOGIE",
       "chapter": "PEAU ET TISSUS CELLULAIRE SOUS-CUT ANE"
     },
@@ -469,7 +469,7 @@
       "codeNGAP": "E 80",
       "lettreCle": "E",
       "coefficient": 80,
-      "libelle": "Extirpation d'un anévrisme clrsolde ; _",
+      "libelle": "Extirpation d'un anévrisme cirsoïde ;",
       "section": "TOXICOLOGIE",
       "chapter": "PEAU ET TISSUS CELLULAIRE SOUS-CUT ANE"
     },
@@ -487,7 +487,7 @@
       "codeNGAP": "K 15",
       "lettreCle": "K",
       "coefficient": 15,
-      "libelle": "Multiples de 2à 4",
+      "libelle": "Multiples de à 4",
       "section": "TOXICOLOGIE",
       "chapter": "PEAU ET TISSUS CELLULAIRE SOUS-CUT ANE"
     },
@@ -496,7 +496,7 @@
       "codeNGAP": "K 6",
       "lettreCle": "K",
       "coefficient": 6,
-      "libelle": "Destruction de condylomes acuminés avec entente préalable au delà de la 2e séance par séance 10 Traitement des dermatoses : OD92/1 Injection sclérosante pour agiome, cryothérapie ëlectrocoagulatioll, ou ces traite ments combinés. par séance _",
+      "libelle": "Destruction de condylomes acuminés avec entente préalable au delà de la 2ème séance par séance 10 Traitement des dermatoses : OD92/1 Injection sclérosante pour agiome, cryothérapie ëlectrocoagulatioll, ou ces traite ments combinés. par séance",
       "section": "TOXICOLOGIE",
       "chapter": "PEAU ET TISSUS CELLULAIRE SOUS-CUT ANE"
     },
@@ -505,7 +505,7 @@
       "codeNGAP": "K 10",
       "lettreCle": "K",
       "coefficient": 10,
-      "libelle": "Lésion de moins de 4 cm2",
+      "libelle": "Lésion de moins de 4 cm²",
       "section": "TOXICOLOGIE",
       "chapter": "PEAU ET TISSUS CELLULAIRE SOUS-CUT ANE"
     },
@@ -514,7 +514,7 @@
       "codeNGAP": "K 30",
       "lettreCle": "K",
       "coefficient": 30,
-      "libelle": "Lésion de 4 cm2 ou plus",
+      "libelle": "Lésion de 4 cm² ou plus",
       "section": "TOXICOLOGIE",
       "chapter": "PEAU ET TISSUS CELLULAIRE SOUS-CUT ANE"
     },
@@ -559,7 +559,7 @@
       "codeNGAP": "K 30",
       "lettreCle": "K",
       "coefficient": 30,
-      "libelle": "avec envahissement dos vaisseaux et des lIerts 10i)",
+      "libelle": "avec envahissement dos vaisseaux et des lfierts 10i)",
       "section": "TOXICOLOGIE",
       "chapter": "PEAU ET TISSUS CELLULAIRE SOUS-CUT ANE"
     },
@@ -568,7 +568,7 @@
       "codeNGAP": "K 40",
       "lettreCle": "K",
       "coefficient": 40,
-      "libelle": "avec plastie (Vair chapitre I) o t 13 TraitE:lTlent péraioire des ruptures et hernies musculaires",
+      "libelle": "avec plastie (Vair chapitre I) o t 13 TraitE:lntent péraioire des ruptures et hernies musculaires",
       "section": "TOXICOLOGIE",
       "chapter": "PEAU ET TISSUS CELLULAIRE SOUS-CUT ANE"
     },
@@ -649,7 +649,7 @@
       "codeNGAP": "K 30",
       "lettreCle": "K",
       "coefficient": 30,
-      "libelle": "Préièvement d'une carotte 0sté0-médullaire",
+      "libelle": "Préièvement d'une carotte ostéo-médullaire",
       "section": "TOXICOLOGIE",
       "chapter": "• OS"
     },
@@ -685,7 +685,7 @@
       "codeNGAP": "E 50",
       "lettreCle": "E",
       "coefficient": 50,
-      "libelle": "Coude. épaùle. hanche, sacr0-iliaque. genou",
+      "libelle": "Coude. épaùle. hanche, sacro-iliaque. genou",
       "section": "TOXICOLOGIE",
       "chapter": "ARTICULATIONS"
     },
@@ -703,7 +703,7 @@
       "codeNGAP": "K 20",
       "lettreCle": "K",
       "coefficient": 20,
-      "libelle": "un ou pluieurs dOIt8 ou 0rteils :",
+      "libelle": "un ou plusieurs doigts ou orteils :",
       "section": "TOXICOLOGIE",
       "chapter": "ARTICULATIONS"
     },
@@ -757,7 +757,7 @@
       "codeNGAP": "E 80",
       "lettreCle": "E",
       "coefficient": 80,
-      "libelle": "De linterl i,gne tibi0-tarsienne, sous-astragalienne, médi0-tarsienne ou de lisf-ranc",
+      "libelle": "De linterl i,gne tibio-tarsienne, sous-astragalienne, médio-tarsienne ou de lisf-ranc",
       "section": "TOXICOLOGIE",
       "chapter": "ARTICULATIONS"
     },
@@ -775,7 +775,7 @@
       "codeNGAP": "E 100",
       "lettreCle": "E",
       "coefficient": 100,
-      "libelle": "Artériographie sélective d'un territolre anatomique par s0 de intra-arté- rielle guidée (ex. coronarographie, m yelographie etc)",
+      "libelle": "Artériographie sélective d'un territoire anatomique par s0 de intra-arté- rielle guidée (ex. coronarographie, m yelographie etc)",
       "section": "TOXICOLOGIE",
       "chapter": "0 VAISSEAUX"
     },
@@ -784,7 +784,7 @@
       "codeNGAP": "E 50",
       "lettreCle": "E",
       "coefficient": 50,
-      "libelle": "Aortographie par ponction percutanée _ 1 ;,;",
+      "libelle": "Aortographie par ponction percutanée 1 ;,;",
       "section": "TOXICOLOGIE",
       "chapter": "0 VAISSEAUX"
     },
@@ -811,7 +811,7 @@
       "codeNGAP": "K 25",
       "lettreCle": "K",
       "coefficient": 25,
-      "libelle": "1 Portant des deux côtés sur les artères cervic0-encéphaliques avec au moins lenregistrement des cé1rotides, sous-clavières, vertébrales et ophtalmiques, prise d'un minimum de douze tracés et établissement d'un cOlnpte rendu",
+      "libelle": "1 Portant des deux côtés sur les artères cervico-encéphaliques avec au moins lenregistrement des celrotides, sous-clavières, vertébrales et ophtalmiques, prise d'un minimum de douze tracés et établissement d'un colnpte rendu",
       "section": "TOXICOLOGIE",
       "chapter": "0 VAISSEAUX"
     },
@@ -829,7 +829,7 @@
       "codeNGAP": "K 8",
       "lettreCle": "K",
       "coefficient": 8,
-      "libelle": "Exploration fluroscopique de la circulation artérielle des membres _.",
+      "libelle": "Exploration fluoroscopique de la circulation artérielle des membres",
       "section": "TOXICOLOGIE",
       "chapter": "0 VAISSEAUX"
     },
@@ -838,7 +838,7 @@
       "codeNGAP": "K 6",
       "lettreCle": "K",
       "coefficient": 6,
-      "libelle": "Epreuve au bleu _ _ _ _ _ _ _ _",
+      "libelle": "Epreuve au bleu",
       "section": "TOXICOLOGIE",
       "chapter": "0 VAISSEAUX"
     },
@@ -865,7 +865,7 @@
       "codeNGAP": "K 5",
       "lettreCle": "K",
       "coefficient": 5,
-      "libelle": "Injection intra-artérieUe",
+      "libelle": "Injection intra-artérielle",
       "section": "TOXICOLOGIE",
       "chapter": "0 VAISSEAUX"
     },
@@ -901,7 +901,7 @@
       "codeNGAP": "K 30",
       "lettreCle": "K",
       "coefficient": 30,
-      "libelle": "2 _ 5Q",
+      "libelle": "2 5Q",
       "section": "TOXICOLOGIE",
       "chapter": "0 VAISSEAUX"
     },
@@ -982,7 +982,7 @@
       "codeNGAP": "E 100",
       "lettreCle": "E",
       "coefficient": 100,
-      "libelle": "Cytophérèse ; 10 ùt88 Embolisatioo thérapeutique _ ;, ; : : :",
+      "libelle": "Cytophérèse ; 10 ùts8 Embolisatioo thérapeutique ;, ; : : :",
       "section": "TOXICOLOGIE",
       "chapter": "0 VAISSEAUX"
     },
@@ -991,7 +991,7 @@
       "codeNGAP": "E 100",
       "lettreCle": "E",
       "coefficient": 100,
-      "libelle": ". Angioplasti end0-Ivmina1e : :",
+      "libelle": ". Angioplasti endo-Ivminale : :",
       "section": "TOXICOLOGIE",
       "chapter": "0 VAISSEAUX"
     },
@@ -1000,7 +1000,7 @@
       "codeNGAP": "K 10",
       "lettreCle": "K",
       "coefficient": 10,
-      "libelle": "Nerf trijumeau (trou 0vale ou grand rond), nerf 0phtalmique",
+      "libelle": "Nerf trijumeau (trou ovale ou grand rond), nerf ophtalmique",
       "section": "TOXICOLOGIE",
       "chapter": "0 VAISSEAUX"
     },
@@ -1009,7 +1009,7 @@
       "codeNGAP": "K 5",
       "lettreCle": "K",
       "coefficient": 5,
-      "libelle": "Branches terminales du trijumeau (sus et sous-0rbité!ire} à Jépine d / Spix, mentonnier, dans le canal palatin postérieur, etc",
+      "libelle": "Branches terminales du trijumeau (sus et sous-orbité!ire} à Jépine d / Spix, mentonnier, dans le canal palatin postérieur, etc",
       "section": "TOXICOLOGIE",
       "chapter": "0 VAISSEAUX"
     },
@@ -1027,7 +1027,7 @@
       "codeNGAP": "E 70",
       "lettreCle": "E",
       "coefficient": 70,
-      "libelle": "Suture nerveuse t;6Colldaire 1",
+      "libelle": "Suture nerveuse t;6colldaire 1",
       "section": "TOXICOLOGIE",
       "chapter": "0 VAISSEAUX"
     },
@@ -1036,7 +1036,7 @@
       "codeNGAP": "E 120",
       "lettreCle": "E",
       "coefficient": 120,
-      "libelle": "Greffe nérveuse en un ou deux tmp8",
+      "libelle": "Greffe nérveuse en un ou deux temps",
       "section": "TOXICOLOGIE",
       "chapter": "0 VAISSEAUX"
     },
@@ -1054,7 +1054,7 @@
       "codeNGAP": "K 40",
       "lettreCle": "K",
       "coefficient": 40,
-      "libelle": "Opération portant sur e nert splanchnique, I ganglion aortic0-rn8I ou les nerfs du pédicure rénal 12060 Neurotoriie - périphérique : :",
+      "libelle": "Opération portant sur e nert splanchnique, I ganglion aortico-rnal ou les nerfs du pédicure rénal 12060 Neurotoriie - périphérique : :",
       "section": "TOXICOLOGIE",
       "chapter": "0 VAISSEAUX"
     },
@@ -1063,7 +1063,7 @@
       "codeNGAP": "E 80",
       "lettreCle": "E",
       "coefficient": 80,
-      "libelle": "Rétablissement de la sensibUité par transplantation cutanée avec le pédicule vascul0-nerveux 150 D 0),05 Thermocoagulation du ganglion de Gasser _ :",
+      "libelle": "Rétablissement de la sensibilité par transplantation cutanée avec le pédicule vasculo-nerveux 150 D 0),05 Thermocoagulation du ganglion de Gasser :",
       "section": "TOXICOLOGIE",
       "chapter": "0 VAISSEAUX"
     },
@@ -1072,7 +1072,7 @@
       "codeNGAP": "E 120",
       "lettreCle": "E",
       "coefficient": 120,
-      "libelle": "xpl 0ration et neurolyse du plexis brachial",
+      "libelle": "xpl oration et neurolyse du plexis brachial",
       "section": "TOXICOLOGIE",
       "chapter": "0 VAISSEAUX"
     },
@@ -1081,7 +1081,7 @@
       "codeNGAP": "K 8",
       "lettreCle": "K",
       "coefficient": 8,
-      "libelle": "Ponction lombaire ou sous-0ccipitale avec ou sans ir jection médicamenteuse, vec ou sans épreuve au manomètrè de Oueechenstatt Stockey",
+      "libelle": "Ponction lombaire ou sous-occipitale avec ou sans ir jection médicamenteuse, vec ou sans épreuve au manomètrè de Oueechenstatt Stockey",
       "section": "TOXICOLOGIE",
       "chapter": "0 VAISSEAUX"
     },
@@ -1099,7 +1099,7 @@
       "codeNGAP": "K 30",
       "lettreCle": "K",
       "coefficient": 30,
-      "libelle": "ElectroencépHalogramme de plusieurs malades dans un établissement dépourvu dappareillage E,E.G pour chaque malade (frais de déplacement compris)",
+      "libelle": "Electroencéphalogramme de plusieurs malades dans un établissement dépourvu dappareillage E,E.G pour chaque malade (frais de déplacement compris)",
       "section": "TOXICOLOGIE",
       "chapter": "0 VAISSEAUX"
     },
@@ -1126,7 +1126,7 @@
       "codeNGAP": "K 10",
       "lettreCle": "K",
       "coefficient": 10,
-      "libelle": "Ec.hoencéphaloqramme _",
+      "libelle": "Ec.hoencéphaloqramme",
       "section": "TOXICOLOGIE",
       "chapter": "0 VAISSEAUX"
     },
@@ -1135,7 +1135,7 @@
       "codeNGAP": "K 10",
       "lettreCle": "K",
       "coefficient": 10,
-      "libelle": "- Examen électrique garvan0-faradique quels que soient le ou les territoir88 examinés",
+      "libelle": "- Examen électrique galvano-faradique quels que soient le ou les territoirs8 examinés",
       "section": "TOXICOLOGIE",
       "chapter": "0 VAISSEAUX"
     },
@@ -1153,7 +1153,7 @@
       "codeNGAP": "K 15",
       "lettreCle": "K",
       "coefficient": 15,
-      "libelle": "- Examen électromyographique par 0scilloacopie, phonie ou enregiatr. ment photographique à faible définition",
+      "libelle": "- Examen électromyographique par oscilloscopie, phonie ou enregiatr. ment photographique à faible définition",
       "section": "TOXICOLOGIE",
       "chapter": "0 VAISSEAUX"
     },
@@ -1171,7 +1171,7 @@
       "codeNGAP": "K 20",
       "lettreCle": "K",
       "coefficient": 20,
-      "libelle": "- Examen de stlmul0-détection avec réception musculaire ft mesures chronologiques :",
+      "libelle": "- Examen de stimulo-détection avec réception musculaire ft mesures chronologiques :",
       "section": "TOXICOLOGIE",
       "chapter": "0 VAISSEAUX"
     },
@@ -1396,7 +1396,7 @@
       "codeNGAP": "K 25",
       "lettreCle": "K",
       "coefficient": 25,
-      "libelle": "Interventions chirurgicéj les. sur les bords palpébraux (blépharroraphie. tarsorraphie et canthoplastie) : _",
+      "libelle": "Interventions chirurgicéj les. sur les bords palpébraux (blépharroraphie. tarsorraphie et canthoplastie) :",
       "section": "TOXICOLOGIE",
       "chapter": "0 VAISSEAUX"
     },
@@ -1414,7 +1414,7 @@
       "codeNGAP": "K 10",
       "lettreCle": "K",
       "coefficient": 10,
-      "libelle": "Cautérisations de granulations _",
+      "libelle": "Cautérisations de granulations",
       "section": "TOXICOLOGIE",
       "chapter": "0 VAISSEAUX"
     },
@@ -1423,7 +1423,7 @@
       "codeNGAP": "K 10",
       "lettreCle": "K",
       "coefficient": 10,
-      "libelle": "Expression de granulations trachomateuses _",
+      "libelle": "Expression de granulations trachomateuses",
       "section": "TOXICOLOGIE",
       "chapter": "0 VAISSEAUX"
     },
@@ -1630,7 +1630,7 @@
       "codeNGAP": "E 70",
       "lettreCle": "E",
       "coefficient": 70,
-      "libelle": "Remplacement du vitré par voie postérieure _",
+      "libelle": "Remplacement du vitré par voie postérieure",
       "section": "TOXICOLOGIE",
       "chapter": "0 VAISSEAUX"
     },
@@ -2071,7 +2071,7 @@
       "codeNGAP": "E 30",
       "lettreCle": "E",
       "coefficient": 30,
-      "libelle": "Plastie narinaire _ 80",
+      "libelle": "Plastie narinaire 80",
       "section": "TOXICOLOGIE",
       "chapter": "FACE"
     },
@@ -2233,7 +2233,7 @@
       "codeNGAP": "K 100",
       "lettreCle": "K",
       "coefficient": 100,
-      "libelle": "Traitement chirurgical d'un 0stéome ethmdidO-frontal",
+      "libelle": "Traitement chirurgical d'un ostéome ethmdidO-frontal",
       "section": "TOXICOLOGIE",
       "chapter": "FACE"
     },
@@ -2368,7 +2368,7 @@
       "codeNGAP": "E 60",
       "lettreCle": "E",
       "coefficient": 60,
-      "libelle": "Glossectomie partielle corrective _",
+      "libelle": "Glossectomie partielle corrective",
       "section": "TOXICOLOGIE",
       "chapter": "BOUCHE-PHARYNX (parties m0lles)"
     },
@@ -2395,7 +2395,7 @@
       "codeNGAP": "K 30",
       "lettreCle": "K",
       "coefficient": 30,
-      "libelle": "6.mygdalectomie isolée chez !ei1fht _ _ _ _ _",
+      "libelle": "6.mygdalectomie isolée chez !ei1fht",
       "section": "TOXICOLOGIE",
       "chapter": "BOUCHE-PHARYNX (parties m0lles)"
     },
@@ -2404,7 +2404,7 @@
       "codeNGAP": "K 40",
       "lettreCle": "K",
       "coefficient": 40,
-      "libelle": "Amygdalectomie totale ilez /adl,lte (à partir de 15 ans) _",
+      "libelle": "Amygdalectomie totale ilez /adl,lte (à partir de 15 ans)",
       "section": "TOXICOLOGIE",
       "chapter": "BOUCHE-PHARYNX (parties m0lles)"
     },
@@ -2413,7 +2413,7 @@
       "codeNGAP": "K 10",
       "lettreCle": "K",
       "coefficient": 10,
-      "libelle": "Pharyngot0;llie 5 30 20",
+      "libelle": "pharyngot0;llie 5 30 20",
       "section": "TOXICOLOGIE",
       "chapter": "BOUCHE-PHARYNX (parties m0lles)"
     },
@@ -2485,7 +2485,7 @@
       "codeNGAP": "K 10",
       "lettreCle": "K",
       "coefficient": 10,
-      "libelle": "d'une lésion intra-buccale de Jhypopharynx _ou du cavum",
+      "libelle": "d'une lésion intra-buccale de Jhypopharynx ou du cavum",
       "section": "TOXICOLOGIE",
       "chapter": "BOUCHE-PHARYNX (parties m0lles)"
     },
@@ -2602,7 +2602,7 @@
       "codeNGAP": "B 100",
       "lettreCle": "B",
       "coefficient": 100,
-      "libelle": "Traitement sanglant complet par ostéosynthèse des fractures des maxil lai res de l'os malaire ou du zygoma, quelle qu en soit leur forme anatomique (contention comprise)",
+      "libelle": "Traitement sanglant complet par ostéo-synthèse des fractures des maxil lai res de l'os malaire ou du zygoma, quelle qu en soit leur forme anatomique (contention comprise)",
       "section": "TOXICOLOGIE",
       "chapter": "MAXILLAIRES"
     },
@@ -2674,7 +2674,7 @@
       "codeNGAP": "K 40",
       "lettreCle": "K",
       "coefficient": 40,
-      "libelle": "Traitement des plaies, traitement opératoires des lésions de larticulation tempuro-maxillaire, septiques ou aseptiques. quelle que soit la technique - 1 10 _",
+      "libelle": "Traitement des plaies, traitement opératoires des lésions de larticulation tempuro-maxillaire, septiques ou aseptiques. quelle que soit la technique - 1 10",
       "section": "TOXICOLOGIE",
       "chapter": "MAXILLAIRES"
     },
@@ -2773,7 +2773,7 @@
       "codeNGAP": "K 20",
       "lettreCle": "K",
       "coefficient": 20,
-      "libelle": "Extraction d'une dt:il en déslncltls!on non enclavée, dont la couronne est sousmuqueuse",
+      "libelle": "Extraction d'une dt:il en déslnclnts!on non enclavée, dont la couronne est sousmuqueuse",
       "section": "TOXICOLOGIE",
       "chapter": "DENTS, GENCIVES."
     },
@@ -2935,7 +2935,7 @@
       "codeNGAP": "K 35",
       "lettreCle": "K",
       "coefficient": 35,
-      "libelle": "De quatre dents _",
+      "libelle": "De quatre dents",
       "section": "TOXICOLOGIE",
       "chapter": "DENTS, GENCIVES."
     },
@@ -2989,7 +2989,7 @@
       "codeNGAP": "E 80",
       "lettreCle": "E",
       "coefficient": 80,
-      "libelle": "Sur dèux arcades : _",
+      "libelle": "Sur dèux arcades :",
       "section": "TOXICOLOGIE",
       "chapter": "PROTHESE RESTAURAtfnCE"
     },
@@ -3115,7 +3115,7 @@
       "codeNGAP": "E 130",
       "lettreCle": "E",
       "coefficient": 130,
-      "libelle": "Pharyngolaryngectomie avec curage ganglionnaire 2!)O",
+      "libelle": "pharyngolaryngectomie avec curage ganglionnaire 2!)O",
       "section": "TOXICOLOGIE",
       "chapter": "PROTHESE RESTAURAtfnCE"
     },
@@ -3241,7 +3241,7 @@
       "codeNGAP": "E 150",
       "lettreCle": "E",
       "coefficient": 150,
-      "libelle": "Sans greffon ni 0stéosynthèse",
+      "libelle": "Sans greffon ni ostéosynthèse",
       "section": "TOXICOLOGIE",
       "chapter": "CORPS THYROIDE."
     },
@@ -3250,7 +3250,7 @@
       "codeNGAP": "K 90",
       "lettreCle": "K",
       "coefficient": 90,
-      "libelle": "Traitement d'un spina bifida avec myeloméningocèle. tumeur congénitale sacrococCygienne _ : 186.",
+      "libelle": "Traitement d'un spina bifida avec myeloméningocèle. tumeur congénitale sacrococCygienne : 186.",
       "section": "TOXICOLOGIE",
       "chapter": "CORPS THYROIDE."
     },
@@ -3556,7 +3556,7 @@
       "codeNGAP": "E 80",
       "lettreCle": "E",
       "coefficient": 80,
-      "libelle": "Phaln9isation d'un _métacarpien",
+      "libelle": "phaln9isation d'un métacarpien",
       "section": "TOXICOLOGIE",
       "chapter": "CORPS THYROIDE."
     },
@@ -3880,7 +3880,7 @@
       "codeNGAP": "E 100",
       "lettreCle": "E",
       "coefficient": 100,
-      "libelle": "Extraction d'un corps étranger 0esophagien ou bronchique chez lenfant de moins de 1!rt:lÎs ans _ _ <",
+      "libelle": "Extraction d'un corps étranger 0esophagien ou bronchique chez lenfant de moins de 1!rt:lÎs ans <",
       "section": "TOXICOLOGIE",
       "chapter": "• MEDIASTIN."
     },
@@ -3907,7 +3907,7 @@
       "codeNGAP": "K 5",
       "lettreCle": "K",
       "coefficient": 5,
-      "libelle": ". Dilatation 0esophagienne, par séance - _ _",
+      "libelle": ". Dilatation 0esophagienne, par séance -",
       "section": "TOXICOLOGIE",
       "chapter": "• MEDIASTIN."
     },
@@ -3916,7 +3916,7 @@
       "codeNGAP": "E 80",
       "lettreCle": "E",
       "coefficient": 80,
-      "libelle": "Mise en place d'une prothèse end0-0esophagierme pour tumeur de oerophage, oesophages copie comprise _ _ _",
+      "libelle": "Mise en place d'une prothèse endo-0esophagierme pour tumeur de oerophage, oesophages copie comprise",
       "section": "TOXICOLOGIE",
       "chapter": "• MEDIASTIN."
     },
@@ -3925,7 +3925,7 @@
       "codeNGAP": "E 150",
       "lettreCle": "E",
       "coefficient": 150,
-      "libelle": "Chirurgie des lésions de loesophage thoracique sans suppression de !a continuité _ - _ _",
+      "libelle": "Chirurgie des lésions de loesophage thoracique sans suppression de !a continuité -",
       "section": "TOXICOLOGIE",
       "chapter": "• MEDIASTIN."
     },
@@ -4006,7 +4006,7 @@
       "codeNGAP": "B 31",
       "lettreCle": "B",
       "coefficient": 31,
-      "libelle": "Cathétérisme du cOWrdrolt avec lecture et enregistrement des sions des tracés électriques;, avec OU.Sans lnjeetiOn._ e ou colorant, avec ou sans prélèvement de sang pout dosage : tOI.",
+      "libelle": "Cathétérisme du cOWrdrolt avec lecture et enregistrement des sions des tracés électriques;, avec OU.Sans lnjeetiOn e ou colorant, avec ou sans prélèvement de sang pout dosage : tOI.",
       "section": "TOXICOLOGIE",
       "chapter": "•• CŒUR· PERICARDE."
     },
@@ -4276,7 +4276,7 @@
       "codeNGAP": "E 50",
       "lettreCle": "E",
       "coefficient": 50,
-      "libelle": "Séance de dialys péritonéale pour insuffisance rénale algue (y compris la pose et le changement de cathéter). Cet honoraire peut sajouter aux honoraires prévus au titre XV Actes divers - Chapitre 2 Réanimation continue - - - - - - _ ,- --_ ,",
+      "libelle": "Séance de dialys péritonéale pour insuffisance rénale algue (y compris la pose et le changement de cathéter). Cet honoraire peut sajouter aux honoraires prévus au titre XV Actes divers - Chapitre 2 Réanimation continue - - - - - - - -- ,",
       "section": "TOXICOLOGIE",
       "chapter": "ACTES DE DIAGNOSTIC."
     },
@@ -4321,7 +4321,7 @@
       "codeNGAP": "K 40",
       "lettreCle": "K",
       "coefficient": 40,
-      "libelle": "Endofibroscopie 0esogastr0--duod.6.nale",
+      "libelle": "endofibroscopie 0esogastr0--duod.6.nale",
       "section": "TOXICOLOGIE",
       "chapter": "ACTES DE DIAGNOSTIC."
     },
@@ -4339,7 +4339,7 @@
       "codeNGAP": "R 100",
       "lettreCle": "R",
       "coefficient": 100,
-      "libelle": "Endoflbroscople sélective avec cathétérisme des voies biliaires. pancré- atiques ou les deux, avec ou sans biopsie, avec cliché radiographique _",
+      "libelle": "endoflbroscople sélective avec cathétérisme des voies biliaires. pancré- atiques ou les deux, avec ou sans biopsie, avec cliché radiographique",
       "section": "TOXICOLOGIE",
       "chapter": "ACTES DE DIAGNOSTIC."
     },
@@ -4357,7 +4357,7 @@
       "codeNGAP": "E 50",
       "lettreCle": "E",
       "coefficient": 50,
-      "libelle": "Colofibroscopie du côlon gauche",
+      "libelle": "colofibroscopie du côlon gauche",
       "section": "TOXICOLOGIE",
       "chapter": "ACTES DE DIAGNOSTIC."
     },
@@ -4366,7 +4366,7 @@
       "codeNGAP": "R 80",
       "lettreCle": "R",
       "coefficient": 80,
-      "libelle": "Avec cliché radIographique _.",
+      "libelle": "Avec cliché radIographique",
       "section": "TOXICOLOGIE",
       "chapter": "ACTES DE DIAGNOSTIC."
     },
@@ -4483,7 +4483,7 @@
       "codeNGAP": "E 120",
       "lettreCle": "E",
       "coefficient": 120,
-      "libelle": "Colectomie segmentaire avec ou sans rétablissement immédiat de la continuité _",
+      "libelle": "colectomie segmentaire avec ou sans rétablissement immédiat de la continuité",
       "section": "TOXICOLOGIE",
       "chapter": "ACTES DE DIAGNOSTIC."
     },
@@ -4492,7 +4492,7 @@
       "codeNGAP": "E 150",
       "lettreCle": "E",
       "coefficient": 150,
-      "libelle": "Hémicblectomie élargie 1_",
+      "libelle": "Hémicblectomie élargie 1",
       "section": "TOXICOLOGIE",
       "chapter": "ACTES DE DIAGNOSTIC."
     },
@@ -4753,7 +4753,7 @@
       "codeNGAP": "K 20",
       "lettreCle": "K",
       "coefficient": 20,
-      "libelle": "Ablation par eléctrocoagulation ae la paplIIomatose du canal anal et de la marge de ,anus _",
+      "libelle": "Ablation par eléctrocoagulation ae la paplIIomatose du canal anal et de la marge de ,anus",
       "section": "TOXICOLOGIE",
       "chapter": "•• RECTUM ET ANUS"
     },
@@ -4789,7 +4789,7 @@
       "codeNGAP": "K 30",
       "lettreCle": "K",
       "coefficient": 30,
-      "libelle": "Tra!tement des abcés t fistules extrasphinctériens à trajet multlramlfié (opératoIre ot: par traction continue sur fil) ;. 80 E Hémorroïdes 084ï Traitement des hémorroïdes par excision",
+      "libelle": "Tra!tement des abcés t fistules extrasphinctériens à trajet mulntramlfié (opératoIre ot: par traction continue sur fil) ;. 80 E Hémorroïdes 084ï Traitement des hémorroïdes par excision",
       "section": "TOXICOLOGIE",
       "chapter": "•• RECTUM ET ANUS"
     },
@@ -4798,7 +4798,7 @@
       "codeNGAP": "K 10",
       "lettreCle": "K",
       "coefficient": 10,
-      "libelle": "Traltsment de3 hémorroïdes par ligature élastique (maximum 5 séances) par séance _",
+      "libelle": "Traltsment de3 hémorroïdes par ligature élastique (maximum 5 séances) par séance",
       "section": "TOXICOLOGIE",
       "chapter": "•• RECTUM ET ANUS"
     },
@@ -4825,7 +4825,7 @@
       "codeNGAP": "K 10",
       "lettreCle": "K",
       "coefficient": 10,
-      "libelle": "Chez la femme _",
+      "libelle": "Chez la femme",
       "section": "TOXICOLOGIE",
       "chapter": "ENDOSCOPIE"
     },
@@ -4897,7 +4897,7 @@
       "codeNGAP": "K 20",
       "lettreCle": "K",
       "coefficient": 20,
-      "libelle": "Au delà du 15ème jour _",
+      "libelle": "Au delà du 15ème jour",
       "section": "TOXICOLOGIE",
       "chapter": "ACTES LIES A LA TECHNIQUE DE L'HEMODiAlYSE."
     },
@@ -5149,7 +5149,7 @@
       "codeNGAP": "K 20",
       "lettreCle": "K",
       "coefficient": 20,
-      "libelle": "Urétrotomie interne _",
+      "libelle": "Urétrotomie interne",
       "section": "TOXICOLOGIE",
       "chapter": "•• URETERE."
     },
@@ -5203,7 +5203,7 @@
       "codeNGAP": "K 40",
       "lettreCle": "K",
       "coefficient": 40,
-      "libelle": "Premier temps _",
+      "libelle": "Premier temps",
       "section": "TOXICOLOGIE",
       "chapter": "•• URETERE."
     },
@@ -5365,7 +5365,7 @@
       "codeNGAP": "E 50",
       "lettreCle": "E",
       "coefficient": 50,
-      "libelle": "Amputation du col évidement tronronnique du col en un.J ou plusieurs séances _",
+      "libelle": "Amputation du col évidement tronronnique du col en un.J ou plusieurs séances",
       "section": "TOXICOLOGIE",
       "chapter": "• !En deh0rs de la 9\"statl0n."
     },
@@ -5401,7 +5401,7 @@
       "codeNGAP": "E 70",
       "lettreCle": "E",
       "coefficient": 70,
-      "libelle": "A.ec curage ganglionnaire bilatéral i20",
+      "libelle": "A.ec curage ganglionnaire bilatéral 120",
       "section": "TOXICOLOGIE",
       "chapter": "• !En deh0rs de la 9\"statl0n."
     },
@@ -5410,7 +5410,7 @@
       "codeNGAP": "K 40",
       "lettreCle": "K",
       "coefficient": 40,
-      "libelle": "Colp0-périnéorraphie posterieure simple ou colporraphie antérieure simple",
+      "libelle": "colp0-périnéorraphie posterieure simple ou colporraphie antérieure simple",
       "section": "TOXICOLOGIE",
       "chapter": "• !En deh0rs de la 9\"statl0n."
     },
@@ -5581,7 +5581,7 @@
       "codeNGAP": "E 50",
       "lettreCle": "E",
       "coefficient": 50,
-      "libelle": "Pour traitement des anomalies de la grossesse, dU travail ou des suites de couches, y compris lextraction du foetus et lexérèSe év.entuellé de tout organe génital - _ -foo",
+      "libelle": "Pour traitement des anomalies de la grossesse, dU travail ou des suites de couches, y compris lextraction du foetus et lexérèSe év.entuellé de tout organe génital - -foo",
       "section": "TOXICOLOGIE",
       "chapter": "• !En deh0rs de la 9\"statl0n."
     },
@@ -5662,7 +5662,7 @@
       "codeNGAP": "E 80",
       "lettreCle": "E",
       "coefficient": 80,
-      "libelle": "Patellectomie, patelloplastie, rnenlScectomie, quelle que soit la technique _",
+      "libelle": "Patellectomie, patelloplastie, rnenlScectomie, quelle que soit la technique",
       "section": "TOXICOLOGIE",
       "chapter": "• !En deh0rs de la 9\"statl0n."
     },
@@ -5698,7 +5698,7 @@
       "codeNGAP": "E 100",
       "lettreCle": "E",
       "coefficient": 100,
-      "libelle": "Butée 0stéoplastique de hanche :",
+      "libelle": "Butée ostéoplastique de hanche :",
       "section": "TOXICOLOGIE",
       "chapter": "• !En deh0rs de la 9\"statl0n."
     },
@@ -5707,7 +5707,7 @@
       "codeNGAP": "K 5",
       "lettreCle": "K",
       "coefficient": 5,
-      "libelle": "Injection sclérossante intra-vascuaire pour varices, quel que soit le nombre dinjections pratiquées. quun seul ou les deux membres soient : : - traités, avec maximum de dix séances (renouvelables après ent8nt préalable). par séance",
+      "libelle": "Injection sclérossante intra-vascuaire pour varices, quel que soit le nombre dinjections pratiquées. quun seul ou les deux membres soient : : - traités, avec maximum de dix séances (renouvelables après entsnt préalable). par séance",
       "section": "TOXICOLOGIE",
       "chapter": "• !En deh0rs de la 9\"statl0n."
     },
@@ -6130,7 +6130,7 @@
       "codeNGAP": "B 45",
       "lettreCle": "B",
       "coefficient": 45,
-      "libelle": "Main globale, épaule, coude, poignet, cox0-fémorale, genou, tibi0-tarsienne (durée",
+      "libelle": "Main globale, épaule, coude, poignet, cox0-fémorale, genou, tibio-tarsienne (durée",
       "section": "TOXICOLOGIE",
       "chapter": "TRAITEMENT DE REEDUCATION ET DE READAPTATION FONCTIONNELLES"
     },
@@ -6211,7 +6211,7 @@
       "codeNGAP": "K 12",
       "lettreCle": "K",
       "coefficient": 12,
-      "libelle": "Rééducation é!ü i>i,,:, de déambulation impossible _",
+      "libelle": "Rééducation é!ü i>i,,:, de déambulation impossible",
       "section": "TOXICOLOGIE",
       "chapter": "TRAITEMENT DE REEDUCATION ET DE READAPTATION FONCTIONNELLES"
     },
@@ -6238,7 +6238,7 @@
       "codeNGAP": "B 8",
       "lettreCle": "B",
       "coefficient": 8,
-      "libelle": "Phase de rééducation (12 mois) la séance(durée 1 h.)",
+      "libelle": "phase de rééducation (12 mois) la séance(durée 1 h.)",
       "section": "TOXICOLOGIE",
       "chapter": "TRAITEMENT DE REEDUCATION ET DE READAPTATION FONCTIONNELLES"
     },
@@ -6256,7 +6256,7 @@
       "codeNGAP": "R 15",
       "lettreCle": "R",
       "coefficient": 15,
-      "libelle": "Thermographie avec un minimum de 3 clichés _ ,",
+      "libelle": "Thermographie avec un minimum de 3 clichés",
       "section": "TOXICOLOGIE",
       "chapter": "ACTES UTIliSANT lES ÂCiENTSPHYSIOUES"
     },
@@ -6391,7 +6391,7 @@
       "codeNGAP": "K 20",
       "lettreCle": "K",
       "coefficient": 20,
-      "libelle": "Dans la même région au cours de la même série de coupes selon un plan non parallèle u précédent, base fixe supplémentaire _",
+      "libelle": "Dans la même région au cours de la même série de coupes selon un plan non parallèle u précédent, base fixe supplémentaire",
       "section": "TOXICOLOGIE",
       "chapter": "EXAMENS UTILISANT DES APPARIELlAGES SPECIAUX"
     },
@@ -6409,7 +6409,7 @@
       "codeNGAP": "K 20",
       "lettreCle": "K",
       "coefficient": 20,
-      "libelle": "Etude dosirnétrique comportant la description du ou des faisceaux, la dose absorbée par volume cible àlisodose de référence _",
+      "libelle": "Etude dosirnétrique comportant la description du ou des faisceaux, la dose absorbée par volume cible àlisodose de référence",
       "section": "TOXICOLOGIE",
       "chapter": "ACTES DE RADIOTHERAPIE DE HAUTE ENERGIE."
     },
@@ -6418,7 +6418,7 @@
       "codeNGAP": "K 25",
       "lettreCle": "K",
       "coefficient": 25,
-      "libelle": "Protocole préalable des conditions dIrradiation _",
+      "libelle": "Protocole préalable des conditions dIrradiation",
       "section": "TOXICOLOGIE",
       "chapter": "ACTES DE RADIOTHERAPIE A MOYENNE ET BASSE ENERGIE."
     },
@@ -6427,7 +6427,7 @@
       "codeNGAP": "K 25",
       "lettreCle": "K",
       "coefficient": 25,
-      "libelle": "la mise en œuvre du traitement Impose létablissement d'un protocole de tralterr.qnt comprenant : le résumé clinique, le diagnostic histologique ou à défaut les bases de lindication thérapeutique, la description des surfaces à irradier, la prévision dosimétrique et le compte rendu de fin dirra diatlon o _ o O",
+      "libelle": "la mise en œuvre du traitement Impose létablissement d'un protocole de tralterr.qnt comprenant : le résumé clinique, le diagnostic histologique ou à défaut les bases de lindication thérapeutique, la description des surfaces à irradier, la prévision dosimétrique et le compte rendu de fin dirra diatlon o o O",
       "section": "TOXICOLOGIE",
       "chapter": "ACTES DE RADIOTHERAPIE DE CONTACT."
     },
@@ -6445,7 +6445,7 @@
       "codeNGAP": "K 20",
       "lettreCle": "K",
       "coefficient": 20,
-      "libelle": "Pour tumeur cutanée ou cutanéo-muqueuse da petite dimnsion. jusquà 2 cma _",
+      "libelle": "Pour tumeur cutanée ou cutanéo-muqueuse da petite dimnsion. jusquà 2 cma",
       "section": "TOXICOLOGIE",
       "chapter": "• ..:.... ACTES OE CURIETHERAPIE."
     },
@@ -6472,7 +6472,7 @@
       "codeNGAP": "E 100",
       "lettreCle": "E",
       "coefficient": 100,
-      "libelle": "Cas particulier : gammacardÎograph:e, cotation globale 50_ ART. 2. - Exploratîons morphologiqu 289/1 Pour un organe, chaque enregistrement 30 89/2 Avec un plafond <fe",
+      "libelle": "Cas particulier : gammacardÎograph:e, cotation globale 50 ART. 2. - Exploratîons morphologiqu 289/1 Pour un organe, chaque enregistrement 30 89/2 Avec un plafond <fe",
       "section": "TOXICOLOGIE",
       "chapter": "INVÊSTIGATIONS DIAGNOSTIOUES COMPORTANT L'ADMINISTRATION"
     },
@@ -6526,7 +6526,7 @@
       "codeNGAP": "E 100",
       "lettreCle": "E",
       "coefficient": 100,
-      "libelle": "Utilisation dactivitésde ,:20mCi_7 :à _mCi. que soit le fractionnement 100",
+      "libelle": "Utilisation dactivitésde ,:20mCi7 :à mCi. que soit le fractionnement 100",
       "section": "TOXICOLOGIE",
       "chapter": ""
     },
@@ -6580,7 +6580,7 @@
       "codeNGAP": "E 130",
       "lettreCle": "E",
       "coefficient": 130,
-      "libelle": "Diagn(stlc hlstopathologique. par inclusion et coupe de prélèvements biOpsiques étagés effectués au niveau de plusieurs zones de voisinage et né- cessitant lindividualisation des prélèvements (cette individualisation doit apparaître dans le compte rendu) B",
+      "libelle": "Diagn(stlc hlstopathologique. par inclusion et coupe de prélèvements biOpsiques étagés effectués au niveau de plusieurs zones de voisinage et né- cessitant lindividualisation des prélèvements (cette individualisation doigt apparaître dans le compte rendu) B",
       "section": "TOXICOLOGIE",
       "chapter": ""
     },
@@ -6679,7 +6679,7 @@
       "codeNGAP": "B 50",
       "lettreCle": "B",
       "coefficient": 50,
-      "libelle": "Amoniaqûe _",
+      "libelle": "Amoniaqûe",
       "section": "TOXICOLOGIE",
       "chapter": "CYTOLOGIE HORMONALE ET FONCTIONNELLE."
     },
@@ -7192,7 +7192,7 @@
       "codeNGAP": "B 40",
       "lettreCle": "B",
       "coefficient": 40,
-      "libelle": "a/- Eva!uation cytochimJque (fe la phosphatélse alcaline des leucocytes _ _",
+      "libelle": "a/- Eva!uation cytochimJque (fe la phosphatélse alcaline des leucocytes",
       "section": "TOXICOLOGIE",
       "chapter": "ACTES SPECIALISES"
     },
@@ -7201,7 +7201,7 @@
       "codeNGAP": "K 10",
       "lettreCle": "K",
       "coefficient": 10,
-      "libelle": "numération des globules rouges et valeur globulaire. le taux de l'hémoglobine étant déterminé à l'électrophotomètre ou au spectrophotomètre 25 métre : _. ; : _ - B",
+      "libelle": "numération des globules rouges et valeur globulaire. le taux de l'hémoglobine étant déterminé à l'électrophotomètre ou au spectrophotomètre 25 métre : ; : - B",
       "section": "TOXICOLOGIE",
       "chapter": "ACTES SPECIALISES"
     },
@@ -7219,7 +7219,7 @@
       "codeNGAP": "S 10",
       "lettreCle": "S",
       "coefficient": 10,
-      "libelle": "Recherche des CO!p8 de Heinz,",
+      "libelle": "Recherche des CO!ps de Heinz,",
       "section": "TOXICOLOGIE",
       "chapter": "ACTES SPECIALISES"
     },
@@ -7264,7 +7264,7 @@
       "codeNGAP": "B 15",
       "lettreCle": "B",
       "coefficient": 15,
-      "libelle": "Temps de saignement (épreuve de Duke), temps de coagulation (sur sang veineux et en tube. méthode de Lee et White) étude de la rétracB B 30 tibilité du caillot, fragilité capillaire _ B 15",
+      "libelle": "Temps de saignement (épreuve de Duke), temps de coagulation (sur sang veineux et en tube. méthode de Lee et White) étude de la rétracB B 30 tibilité du caillot, fragilité capillaire B 15",
       "section": "TOXICOLOGIE",
       "chapter": "2"
     },
@@ -7309,7 +7309,7 @@
       "codeNGAP": "B 50",
       "lettreCle": "B",
       "coefficient": 50,
-      "libelle": "_ Sur plasma Natif",
+      "libelle": "Sur plasma Natif",
       "section": "TOXICOLOGIE",
       "chapter": "2"
     },
@@ -7381,7 +7381,7 @@
       "codeNGAP": "B 8",
       "lettreCle": "B",
       "coefficient": 8,
-      "libelle": "Détérmination du volume total des hematies par rapport au volume total du Sallg (hémato,rite) - -_ - B B 8",
+      "libelle": "Détérmination du volume total des hematies par rapport au volume total du Sallg (hémato,rite) - - - B B 8",
       "section": "TOXICOLOGIE",
       "chapter": "DIVERS"
     },
@@ -7471,7 +7471,7 @@
       "codeNGAP": "B 20",
       "lettreCle": "B",
       "coefficient": 20,
-      "libelle": "Dépistage Simple danticorps Irréguliers (OSAI) _ _ _",
+      "libelle": "Dépistage Simple danticorps Irréguliers (OSAI)",
       "section": "TOXICOLOGIE",
       "chapter": "Chimie Hémat0l0gique"
     },
@@ -7480,7 +7480,7 @@
       "codeNGAP": "E 50",
       "lettreCle": "E",
       "coefficient": 50,
-      "libelle": "Si ce dépistage est positif, identification à laide d'une gamme dhématies test didentification ou de référence définie réglementairement et g 15 ES titrages si nécessaire _ _ _ _ _ _ B 50",
+      "libelle": "Si ce dépistage est positif, identification à laide d'une gamme dhématies test didentification ou de référence définie réglementairement et g 15 ES titrages si nécessaire B 50",
       "section": "TOXICOLOGIE",
       "chapter": "Chimie Hémat0l0gique"
     },
@@ -7633,7 +7633,7 @@
       "codeNGAP": "B 80",
       "lettreCle": "B",
       "coefficient": 80,
-      "libelle": "- isolement sur milieux spéciaux _",
+      "libelle": "- isolement sur milieux spéciaux",
       "section": "TOXICOLOGIE",
       "chapter": "Chimie Hémat0l0gique"
     },
@@ -7984,7 +7984,7 @@
       "codeNGAP": "K 40",
       "lettreCle": "K",
       "coefficient": 40,
-      "libelle": "Recherche et titrage des agglutinines et H des Salmonella typhi. para A. para B. para C _ - B",
+      "libelle": "Recherche et titrage des agglutinines et H des Salmonella typhi. para A. para B. para C - B",
       "section": "TOXICOLOGIE",
       "chapter": "PARASITOLOGIE."
     },
@@ -7993,7 +7993,7 @@
       "codeNGAP": "K 40",
       "lettreCle": "K",
       "coefficient": 40,
-      "libelle": "Recherche de la mononucléose infectieuse par agglutination dhématies ou de particules sensibilisées _ ; - - B 10 164J Recherche de mononucléose infectieuse par réaction de Paul, BunneUet Davidsohn : _ _ _ B",
+      "libelle": "Recherche de la mononucléose infectieuse par agglutination dhématies ou de particules sensibilisées ; - - B 10 164J Recherche de mononucléose infectieuse par réaction de Paul, Bunnellet Davidsohn : B",
       "section": "TOXICOLOGIE",
       "chapter": "PARASITOLOGIE."
     },
@@ -8002,7 +8002,7 @@
       "codeNGAP": "K 10",
       "lettreCle": "K",
       "coefficient": 10,
-      "libelle": "Recherche du titre de lhémolysine antiboeuf (en c.as de réaction de Paul et Bunnellnégative) ; _ _ B",
+      "libelle": "Recherche du titre de lhémolysine antiboeuf (en c.as de réaction de Paul et Bunnellnégative) ; B",
       "section": "TOXICOLOGIE",
       "chapter": "PARASITOLOGIE."
     },
@@ -8011,7 +8011,7 @@
       "codeNGAP": "B 80",
       "lettreCle": "B",
       "coefficient": 80,
-      "libelle": "Recherche et/ou titrages séparés de plusieurs ûntienzymes strptoc. cociques 1 sérum _ ; B",
+      "libelle": "Recherche et/ou titrages séparés de plusieurs ûntienzymes strptoc. cociques 1 sérum ; B",
       "section": "TOXICOLOGIE",
       "chapter": "PARASITOLOGIE."
     },
@@ -8335,7 +8335,7 @@
       "codeNGAP": "B 70",
       "lettreCle": "B",
       "coefficient": 70,
-      "libelle": "Thyroglobuiine :.",
+      "libelle": "Thyroglobiliine :.",
       "section": "TOXICOLOGIE",
       "chapter": "PARASITOLOGIE."
     },
@@ -8488,7 +8488,7 @@
       "codeNGAP": "B 70",
       "lettreCle": "B",
       "coefficient": 70,
-      "libelle": "_ Carbamazepine",
+      "libelle": "Carbamazepine",
       "section": "TOXICOLOGIE",
       "chapter": "PARASITOLOGIE."
     },

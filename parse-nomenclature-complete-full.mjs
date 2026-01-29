@@ -161,7 +161,54 @@ function nettoyerLibelle(text) {
     
     // Corrections OCR - 3 passes pour mots avec plusieurs erreurs
     for (let pass = 0; pass < 3; pass++) {
-        text = text.replace(/cyt0l0gique/gi, 'cytologique')
+        text = text
+            // Corrections générales 0->o dans les mots
+            .replace(/0sté0/gi, 'ostéo')
+            .replace(/0vale/gi, 'ovale')
+            .replace(/0phtalmique/gi, 'ophtalmique')
+            .replace(/0rbité/gi, 'orbité')
+            .replace(/0rteils/gi, 'orteils')
+            .replace(/0ccipitale/gi, 'occipitale')
+            .replace(/0ration/gi, 'oration')
+            .replace(/xpl\s*0ration/gi, 'exploration')
+            .replace(/garvan0/gi, 'galvano')
+            .replace(/0scilloacopie/gi, 'oscilloscopie')
+            .replace(/stlmul0/gi, 'stimulo')
+            .replace(/cervic0/gi, 'cervico')
+            .replace(/aortic0/gi, 'aortico')
+            .replace(/vascul0/gi, 'vasculo')
+            .replace(/end0/gi, 'endo')
+            .replace(/tibi0/gi, 'tibio')
+            .replace(/médi0/gi, 'médio')
+            .replace(/sacr0/gi, 'sacro')
+            .replace(/territolre/gi, 'territoire')
+            .replace(/fluroscopique/gi, 'fluoroscopique')
+            .replace(/clrsolde/gi, 'cirsoïde')
+            // Corrections majuscules en milieu de mot
+            .replace(/lIerts/gi, 'lfierts')
+            .replace(/lTl/gi, 'lnt')
+            .replace(/dOIt/gi, 'doigt')
+            .replace(/pluieurs/gi, 'plusieurs')
+            .replace(/eUe/gi, 'elle')
+            .replace(/bUi/gi, 'bili')
+            .replace(/pHa/gi, 'pha')
+            .replace(/sensibUité/gi, 'sensibilité')
+            // Corrections chiffres dans mots
+            .replace(/\bi20\b/gi, '120')
+            .replace(/\b2à\s*/gi, 'à ')
+            .replace(/\b2e\b/gi, '2ème')
+            .replace(/\b1er\b/gi, '1er')
+            .replace(/é1/gi, 'el')
+            .replace(/cOl/gi, 'col')
+            .replace(/tmp8/gi, 'temps')
+            .replace(/t8/gi, 'ts')
+            .replace(/r8/gi, 'rs')
+            .replace(/n8I/gi, 'nal')
+            .replace(/p8/gi, 'ps')
+            .replace(/a1e/gi, 'ale')
+            .replace(/Ivmina1e/gi, 'luminale')
+            // Corrections spécifiques
+            .replace(/cyt0l0gique/gi, 'cytologique')
             .replace(/d'?0rientati0n/gi, "d'orientation")
             .replace(/d0rientati0n/gi, "d'orientation")
             .replace(/dorientation/gi, "d'orientation")
@@ -248,7 +295,11 @@ function nettoyerLibelle(text) {
             .replace(/0pérat0ire/gi, 'opératoire')
             .replace(/bride/gi, 'bride')
             .replace(/rétractile/gi, 'rétractile')
-            // Pattern générique pour 0->o entre lettres
+            // Nettoyage underscores et patterns résiduels
+            .replace(/_+/g, '')
+            .replace(/\s+cm2\b/gi, ' cm²')
+            .replace(/\s+m2\b/gi, ' m²')
+            // Pattern générique pour 0->o entre lettres (doit être en dernier)
             .replace(/([a-zàâäéèêëïîôùûüÿçœæ])0([a-zàâäéèêëïîôùûüÿçœæ])/gi, '$1o$2');
     }
     

@@ -296,35 +296,18 @@ export const NomenclatureGenerale: React.FC = () => {
                     {showStats && stats && (
                         <div className="bg-white rounded-lg p-4 border border-blue-200">
                             <h4 className="font-semibold text-slate-800 mb-3">📊 Statistiques de la base de données</h4>
-                            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                            <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
                                 <div className="text-center">
                                     <div className="text-2xl font-bold text-primary-600">{stats.total}</div>
                                     <div className="text-xs text-slate-600">Total actes</div>
-                                </div>
-                                <div className="text-center">
-                                    <div className="text-2xl font-bold text-green-600">{Object.keys(stats.categories).length}</div>
-                                    <div className="text-xs text-slate-600">Catégories</div>
                                 </div>
                                 <div className="text-center">
                                     <div className="text-2xl font-bold text-blue-600">{stats.tarifMoyen.toFixed(0)}</div>
                                     <div className="text-xs text-slate-600">Tarif moyen (DA)</div>
                                 </div>
                                 <div className="text-center">
-                                    <div className="text-2xl font-bold text-purple-600">
-                                        {Math.max(...Object.values(stats.categories) as number[])}
-                                    </div>
-                                    <div className="text-xs text-slate-600">Catégorie max</div>
-                                </div>
-                            </div>
-                            <div className="mt-4 pt-4 border-t border-slate-200">
-                                <p className="text-xs font-semibold text-slate-700 mb-2">Répartition par catégorie:</p>
-                                <div className="grid grid-cols-2 md:grid-cols-3 gap-2 text-xs">
-                                    {Object.entries(stats.categories).map(([cat, count]) => (
-                                        <div key={cat} className="flex justify-between bg-slate-50 px-2 py-1 rounded">
-                                            <span className="text-slate-700">{cat}:</span>
-                                            <span className="font-semibold text-slate-900">{count}</span>
-                                        </div>
-                                    ))}
+                                    <div className="text-2xl font-bold text-green-600">{stats.tarifMax}</div>
+                                    <div className="text-xs text-slate-600">Tarif maximum (DA)</div>
                                 </div>
                             </div>
                         </div>
