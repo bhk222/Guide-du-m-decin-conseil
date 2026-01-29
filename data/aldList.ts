@@ -1853,7 +1853,351 @@ export const aldData: AldItem[] = [
         { code: "C03I", name: "Cancer de l'appareil génital masculin", children: [{ code: "C03I01", name: "Cancer de la verge" }, { code: "C03I02", name: "Cancer de la prostate" }, { code: "C03I03", name: "Cancer du testicule" }, { code: "C03I04", name: "Autres Cancers de l'appareil génital masculin" }] },
         { code: "C03J", name: "Cancer du sein", children: [{ code: "C03J01", name: "Carcinome canalaire in situ (CCIS)" }, { code: "C03J02", name: "Adénocarcinome canalaire infiltrant" }, { code: "C03J03", name: "Adénocarcinome lobulaire infiltrant" }, { code: "C03J04", name: "Carcinome médullaire" }, { code: "C03J05", name: "Carcinome mucineux ou colloïde muqueux" }, { code: "C03J06", name: "Adénocarcinome tubuleux" }, { code: "C03J07", name: "Carcinome adénoïde kystique" }, { code: "C03J08", name: "Carcinome apocrine" }, { code: "C03J09", name: "Maladie de Paget du mamelon" }, { code: "C03J10", name: "Cancer du sein chez l'homme" }] },
         { code: "C03K", name: "Cancers du système lymphatique", children: [{ code: "C03K01", name: "Cancer de l'amygdale" }, { code: "C03K02", name: "Cancer de la rate" }, { code: "C03K03", name: "Cancer des ganglions lymphatiques" }, { code: "C03K04", name: "Autres cancers du système lymphatique" }] },
-        { code: "C03L", name: "Cancers du sang", children: [{ code: "C03L01", name: "Macroglobulinémie de Waldenström" }, { code: "C03L02", name: "Leucémie lymphoïde aiguë [LLA]" }, { code: "C03L03", name: "Leucémie lymphoïde chronique [LLC]" }, { code: "C03L04", name: "Leucémie myéloblastique aiguë [LMA]" }, { code: "C03L05", name: "Leucémie myéloïde chronique [LMC]" }, { code: "C03L06", name: "Lymphome Hodgkinien" }, { code: "C03L07", name: "Lymphome non Hodgkinien" }, { code: "C03L08", name: "Lymphome de Burkitt" }, { code: "C03L09", name: "Maladie de Vaquez [MV] (= Polyglobulie vraie [PV])" }, { code: "C03L10", name: "Autres cancers du sang" }, { code: "C03L11", name: "Myélome multiple" }] },
+        { 
+          code: "C03L", 
+          name: "Cancers du sang", 
+          children: [
+            { 
+              code: "C03L01", 
+              name: "Macroglobulinémie de Waldenström",
+              tooltip: `<div class="space-y-3">
+                <h3 class="font-bold text-lg text-primary-700">MACROGLOBULINÉMIE DE WALDENSTRÖM</h3>
+                
+                <div>
+                  <h4 class="font-semibold text-primary-600">🔹 DÉFINITION</h4>
+                  <p class="text-sm">Lymphome lymphoplasmocytaire à bas grade de malignité caractérisé par la sécrétion d'une <strong>IgM monoclonale</strong>.</p>
+                </div>
+
+                <div class="bg-blue-50 p-3 rounded-lg border border-blue-200">
+                  <h4 class="font-semibold text-blue-800">🔹 PHYSIOPATHOLOGIE</h4>
+                  <p class="text-sm text-blue-900">Infiltration de la moelle par des <strong>cellules hybrides</strong> (entre le lymphocyte B et le plasmocyte).</p>
+                </div>
+
+                <div>
+                  <h4 class="font-semibold text-primary-600">🔹 CLINIQUE</h4>
+                  <ul class="text-sm list-disc list-inside ml-2 space-y-1">
+                    <li><strong>Syndrome d'hyperviscosité :</strong> Céphalées, vertiges, troubles visuels, saignements muqueux (épistaxis)</li>
+                    <li>Hépatosplénomégalie et adénopathies (modérées)</li>
+                  </ul>
+                </div>
+
+                <div class="bg-purple-50 p-3 rounded-lg border border-purple-200">
+                  <h4 class="font-semibold text-purple-800">🔹 DIAGNOSTIC CLÉ</h4>
+                  <ul class="text-sm text-purple-900 list-disc list-inside ml-2 space-y-1">
+                    <li><strong>Électrophorèse :</strong> Pic monoclonal IgM (souvent > 30 g/L)</li>
+                    <li><strong>Myélogramme :</strong> Infiltration lymphoplasmocytaire</li>
+                    <li><strong>Génétique :</strong> Mutation <strong>MYD88 L265P</strong> (présente dans > 90% des cas)</li>
+                  </ul>
+                </div>
+              </div>`
+            },
+            { 
+              code: "C03L02", 
+              name: "Leucémie lymphoïde aiguë [LLA]",
+              tooltip: `<div class="space-y-3">
+                <h3 class="font-bold text-lg text-primary-700">LEUCÉMIE LYMPHOÏDE AIGUË [LLA]</h3>
+                
+                <div>
+                  <h4 class="font-semibold text-primary-600">🔹 DÉFINITION</h4>
+                  <p class="text-sm">Prolifération maligne de précurseurs lymphoïdes (<strong>Lymphoblastes</strong>) bloqués dans leur différenciation.</p>
+                  <p class="text-sm mt-2"><strong>C'est le cancer le plus fréquent de l'enfant.</strong></p>
+                </div>
+
+                <div class="bg-red-50 p-3 rounded-lg border border-red-200">
+                  <h4 class="font-semibold text-red-800">🔹 CLINIQUE</h4>
+                  <p class="text-sm text-red-900 font-semibold">Installation brutale</p>
+                  <ul class="text-sm text-red-900 list-disc list-inside ml-2 space-y-1 mt-2">
+                    <li><strong>Syndrome d'insuffisance médullaire :</strong> Pâleur, asthénie, purpura</li>
+                    <li><strong>Syndrome tumoral :</strong> Adénopathies, splénomégalie, parfois hypertrophie testiculaire</li>
+                    <li><strong>Douleurs osseuses fréquentes</strong> chez l'enfant</li>
+                  </ul>
+                </div>
+
+                <div class="bg-purple-50 p-3 rounded-lg border border-purple-200">
+                  <h4 class="font-semibold text-purple-800">🔹 DIAGNOSTIC CLÉ</h4>
+                  <ul class="text-sm text-purple-900 list-disc list-inside ml-2 space-y-1">
+                    <li><strong>Myélogramme :</strong> Envahissement par <strong>> 20 %</strong> de lymphoblastes</li>
+                    <li><strong>Immunophénotypage :</strong> Distingue LLA-B (CD19+, CD79a+) et LLA-T (CD3+)</li>
+                    <li><strong>Ponction Lombaire :</strong> Systématique (risque d'atteinte méningée)</li>
+                  </ul>
+                </div>
+              </div>`
+            },
+            { 
+              code: "C03L03", 
+              name: "Leucémie lymphoïde chronique [LLC]",
+              tooltip: `<div class="space-y-3">
+                <h3 class="font-bold text-lg text-primary-700">LEUCÉMIE LYMPHOÏDE CHRONIQUE [LLC]</h3>
+                
+                <div>
+                  <h4 class="font-semibold text-primary-600">🔹 DÉFINITION</h4>
+                  <p class="text-sm">Prolifération et accumulation de <strong>lymphocytes B matures incompétents</strong> dans le sang, la moelle et les organes lymphoïdes.</p>
+                  <p class="text-sm mt-2"><strong>Pathologie du sujet âgé.</strong></p>
+                </div>
+
+                <div class="bg-green-50 p-3 rounded-lg border border-green-200">
+                  <h4 class="font-semibold text-green-800">🔹 CLINIQUE</h4>
+                  <ul class="text-sm text-green-900 list-disc list-inside ml-2 space-y-1">
+                    <li>Souvent <strong>asymptomatique</strong> (découverte fortuite)</li>
+                    <li><strong>Polyadénopathies symétriques, fermes, indolores</strong></li>
+                  </ul>
+                </div>
+
+                <div class="bg-purple-50 p-3 rounded-lg border border-purple-200">
+                  <h4 class="font-semibold text-purple-800">🔹 DIAGNOSTIC CLÉ</h4>
+                  <ul class="text-sm text-purple-900 list-disc list-inside ml-2 space-y-1">
+                    <li><strong>NFS :</strong> Hyperlymphocytose B persistante <strong>> 5 G/L depuis > 3 mois</strong></li>
+                    <li><strong>Frottis :</strong> Ombres de Gumprecht (lymphocytes écrasés)</li>
+                    <li><strong>Immunophénotypage (Score de Matutes) :</strong> CD5+, CD23+, CD19+, IgM de surface faible</li>
+                  </ul>
+                </div>
+              </div>`
+            },
+            { 
+              code: "C03L04", 
+              name: "Leucémie myéloblastique aiguë [LMA]",
+              tooltip: `<div class="space-y-3">
+                <h3 class="font-bold text-lg text-primary-700">LEUCÉMIE MYÉLOBLASTIQUE AIGUË [LMA]</h3>
+                
+                <div>
+                  <h4 class="font-semibold text-primary-600">🔹 DÉFINITION</h4>
+                  <p class="text-sm">Prolifération de précurseurs myéloïdes (<strong>Myéloblastes</strong>).</p>
+                  <p class="text-sm mt-2"><strong>C'est la leucémie aiguë la plus fréquente de l'adulte.</strong></p>
+                </div>
+
+                <div class="bg-red-50 p-3 rounded-lg border border-red-200">
+                  <h4 class="font-semibold text-red-800">🔹 CLINIQUE</h4>
+                  <ul class="text-sm text-red-900 list-disc list-inside ml-2 space-y-1">
+                    <li><strong>Altération majeure</strong> de l'état général</li>
+                    <li><strong>Syndrome infectieux grave</strong> (neutropénie)</li>
+                    <li><strong>Syndrome hémorragique</strong> (thrombopénie)</li>
+                    <li><strong>Hypertrophie gingivale</strong> (surtout dans les formes monoblastiques LAM4/LAM5)</li>
+                  </ul>
+                </div>
+
+                <div class="bg-purple-50 p-3 rounded-lg border border-purple-200">
+                  <h4 class="font-semibold text-purple-800">🔹 DIAGNOSTIC CLÉ</h4>
+                  <ul class="text-sm text-purple-900 list-disc list-inside ml-2 space-y-1">
+                    <li><strong>Myélogramme :</strong> > 20 % de blastes myéloïdes</li>
+                    <li><strong>Cytologie :</strong> Présence de <strong>Bâtonnets d'Auer</strong> (pathognomonique)</li>
+                  </ul>
+                </div>
+
+                <div class="bg-orange-50 border-2 border-orange-500 p-3 rounded-lg">
+                  <h4 class="font-semibold text-orange-800">⚠️ URGENCE</h4>
+                  <p class="text-sm text-orange-900">La forme <strong>LAM3 (Promyélocytaire)</strong> est une urgence absolue (risque de <strong>CIVD immédiate</strong>).</p>
+                </div>
+              </div>`
+            },
+            { 
+              code: "C03L05", 
+              name: "Leucémie myéloïde chronique [LMC]",
+              tooltip: `<div class="space-y-3">
+                <h3 class="font-bold text-lg text-primary-700">LEUCÉMIE MYÉLOÏDE CHRONIQUE [LMC]</h3>
+                
+                <div>
+                  <h4 class="font-semibold text-primary-600">🔹 DÉFINITION</h4>
+                  <p class="text-sm">Syndrome myéloprolifératif caractérisé par une <strong>translocation chromosomique spécifique</strong>.</p>
+                </div>
+
+                <div class="bg-blue-50 p-3 rounded-lg border border-blue-200">
+                  <h4 class="font-semibold text-blue-800">🔹 CLINIQUE</h4>
+                  <ul class="text-sm text-blue-900 list-disc list-inside ml-2 space-y-1">
+                    <li><strong>Splénomégalie volumineuse</strong> (pesanteur hypochondre gauche)</li>
+                    <li><strong>Pas d'adénopathies</strong> (diagnostic différentiel vs LLC)</li>
+                  </ul>
+                </div>
+
+                <div class="bg-purple-50 p-3 rounded-lg border border-purple-200">
+                  <h4 class="font-semibold text-purple-800">🔹 DIAGNOSTIC CLÉ</h4>
+                  <ul class="text-sm text-purple-900 list-disc list-inside ml-2 space-y-1">
+                    <li><strong>NFS :</strong> Hyperleucocytose majeure (50 - 200 G/L) avec <strong>myélémie</strong> (tous les stades de maturation granuleux présents)</li>
+                    <li><strong>Cytogénétique :</strong> <strong>Chromosome Philadelphie t(9;22)</strong></li>
+                    <li><strong>Biologie Moléculaire :</strong> Gène de fusion <strong>BCR-ABL</strong></li>
+                  </ul>
+                </div>
+
+                <div class="bg-green-50 p-3 rounded-lg border border-green-200">
+                  <h4 class="font-semibold text-green-800">🔹 TRAITEMENT</h4>
+                  <p class="text-sm text-green-900"><strong>Inhibiteurs de Tyrosine Kinase (Imatinib)</strong></p>
+                </div>
+              </div>`
+            },
+            { 
+              code: "C03L06", 
+              name: "Lymphome Hodgkinien",
+              tooltip: `<div class="space-y-3">
+                <h3 class="font-bold text-lg text-primary-700">LYMPHOME HODGKINIEN</h3>
+                
+                <div>
+                  <h4 class="font-semibold text-primary-600">🔹 DÉFINITION</h4>
+                  <p class="text-sm">Prolifération maligne ganglionnaire définie par la présence de la <strong>cellule de Reed-Sternberg</strong>.</p>
+                  <p class="text-sm mt-2">Touche souvent l'<strong>adulte jeune</strong>.</p>
+                </div>
+
+                <div class="bg-blue-50 p-3 rounded-lg border border-blue-200">
+                  <h4 class="font-semibold text-blue-800">🔹 CLINIQUE</h4>
+                  <ul class="text-sm text-blue-900 list-disc list-inside ml-2 space-y-1">
+                    <li><strong>Adénopathies périphériques (cervicales +++) :</strong> fermes, indolores, non compressives</li>
+                    <li><strong>Signes B :</strong> Fièvre, sueurs nocturnes profuses, amaigrissement</li>
+                    <li><strong>Prurit sine materia</strong> (sans lésion cutanée)</li>
+                  </ul>
+                </div>
+
+                <div class="bg-purple-50 p-3 rounded-lg border border-purple-200">
+                  <h4 class="font-semibold text-purple-800">🔹 DIAGNOSTIC CLÉ</h4>
+                  <ul class="text-sm text-purple-900 list-disc list-inside ml-2 space-y-1">
+                    <li><strong>Biopsie ganglionnaire :</strong> Présence de <strong>cellules de Reed-Sternberg</strong> (grandes cellules multinucléées "en yeux de hibou") dans un environnement inflammatoire</li>
+                    <li><strong>Marqueurs :</strong> CD30+ et CD15+</li>
+                  </ul>
+                </div>
+              </div>`
+            },
+            { 
+              code: "C03L07", 
+              name: "Lymphome non Hodgkinien",
+              tooltip: `<div class="space-y-3">
+                <h3 class="font-bold text-lg text-primary-700">LYMPHOME NON HODGKINIEN</h3>
+                
+                <div>
+                  <h4 class="font-semibold text-primary-600">🔹 DÉFINITION</h4>
+                  <p class="text-sm">Groupe hétérogène de proliférations malignes lymphoïdes (B ou T) <strong>sans cellules de Reed-Sternberg</strong>.</p>
+                </div>
+
+                <div class="bg-blue-50 p-3 rounded-lg border border-blue-200">
+                  <h4 class="font-semibold text-blue-800">🔹 CLASSIFICATION SIMPLIFIÉE</h4>
+                  <ul class="text-sm text-blue-900 list-disc list-inside ml-2 space-y-2">
+                    <li><strong>Agressifs</strong> (ex: Lymphome B Diffus à Grandes Cellules) : Évolution rapide, masse tumorale importante. <strong>Urgence thérapeutique</strong></li>
+                    <li><strong>Indolents</strong> (ex: Lymphome Folliculaire) : Évolution lente, souvent incurable mais longue survie</li>
+                  </ul>
+                </div>
+
+                <div class="bg-purple-50 p-3 rounded-lg border border-purple-200">
+                  <h4 class="font-semibold text-purple-800">🔹 DIAGNOSTIC CLÉ</h4>
+                  <ul class="text-sm text-purple-900 list-disc list-inside ml-2 space-y-1">
+                    <li><strong>Biopsie ganglionnaire indispensable</strong></li>
+                    <li><strong>Bilan d'extension :</strong> TEP-Scanner (PET-scan) et Biopsie Ostéo-Médullaire (BOM)</li>
+                  </ul>
+                </div>
+              </div>`
+            },
+            { 
+              code: "C03L08", 
+              name: "Lymphome de Burkitt",
+              tooltip: `<div class="space-y-3">
+                <h3 class="font-bold text-lg text-primary-700">LYMPHOME DE BURKITT</h3>
+                
+                <div>
+                  <h4 class="font-semibold text-primary-600">🔹 DÉFINITION</h4>
+                  <p class="text-sm">Lymphome B mature <strong>extrêmement agressif</strong>, à taux de doublement cellulaire très rapide.</p>
+                </div>
+
+                <div class="bg-orange-50 p-3 rounded-lg border border-orange-200">
+                  <h4 class="font-semibold text-orange-800">🔹 CONTEXTE</h4>
+                  <ul class="text-sm text-orange-900 list-disc list-inside ml-2 space-y-2">
+                    <li><strong>Endémique (Afrique) :</strong> Associé à l'<strong>EBV</strong> (Epstein-Barr Virus) et Paludisme. Atteinte maxillaire/mandibulaire</li>
+                    <li><strong>Sporadique (Occident) :</strong> Atteinte abdominale fréquente</li>
+                  </ul>
+                </div>
+
+                <div class="bg-purple-50 p-3 rounded-lg border border-purple-200">
+                  <h4 class="font-semibold text-purple-800">🔹 DIAGNOSTIC CLÉ</h4>
+                  <ul class="text-sm text-purple-900 list-disc list-inside ml-2 space-y-1">
+                    <li><strong>Histologie :</strong> Aspect en <strong>"Ciel Étoilé"</strong> (macrophages clairs au milieu de nappes de cellules tumorales basophiles)</li>
+                    <li><strong>Génétique :</strong> Translocation <strong>t(8;14)</strong> impliquant le gène <strong>c-MYC</strong></li>
+                  </ul>
+                </div>
+              </div>`
+            },
+            { 
+              code: "C03L09", 
+              name: "Maladie de Vaquez [MV] (= Polyglobulie vraie [PV])",
+              tooltip: `<div class="space-y-3">
+                <h3 class="font-bold text-lg text-primary-700">MALADIE DE VAQUEZ (Polyglobulie Vraie)</h3>
+                
+                <div>
+                  <h4 class="font-semibold text-primary-600">🔹 DÉFINITION</h4>
+                  <p class="text-sm">Néoplasie myéloproliférative caractérisée par une production excessive de globules rouges <strong>indépendante de l'érythropoïétine (EPO)</strong>.</p>
+                </div>
+
+                <div class="bg-red-50 p-3 rounded-lg border border-red-200">
+                  <h4 class="font-semibold text-red-800">🔹 CLINIQUE</h4>
+                  <ul class="text-sm text-red-900 list-disc list-inside ml-2 space-y-1">
+                    <li><strong>Érythrose faciale</strong> (visage et mains rouges)</li>
+                    <li><strong>Prurit à l'eau (aquagénique) :</strong> Grattage après la douche</li>
+                    <li><strong>Hyperviscosité :</strong> Céphalées, Hypertension artérielle (HTA), risque de <strong>Thrombose</strong> (artérielle ou veineuse)</li>
+                  </ul>
+                </div>
+
+                <div class="bg-purple-50 p-3 rounded-lg border border-purple-200">
+                  <h4 class="font-semibold text-purple-800">🔹 DIAGNOSTIC CLÉ</h4>
+                  <ul class="text-sm text-purple-900 list-disc list-inside ml-2 space-y-1">
+                    <li><strong>Hématocrite > 49% (H) ou > 48% (F)</strong></li>
+                    <li><strong>Mutation JAK2 V617F</strong> (présente dans 95% des cas)</li>
+                    <li><strong>EPO sérique effondrée</strong> (mécanisme de feedback)</li>
+                  </ul>
+                </div>
+              </div>`
+            },
+            { 
+              code: "C03L10", 
+              name: "Autres cancers du sang",
+              tooltip: `<div class="space-y-3">
+                <h3 class="font-bold text-lg text-primary-700">AUTRES CANCERS DU SANG</h3>
+                
+                <div>
+                  <h4 class="font-semibold text-primary-600">🔹 CATÉGORIES PRINCIPALES</h4>
+                  <p class="text-sm">Catégorie regroupant les autres hémopathies malignes ou syndromes myéloprolifératifs/dysplasiques :</p>
+                </div>
+
+                <div class="bg-blue-50 p-3 rounded-lg border border-blue-200">
+                  <h4 class="font-semibold text-blue-800">Thrombocytémie Essentielle</h4>
+                  <p class="text-sm text-blue-900">Trop de plaquettes (> 450 G/L) avec risque thrombotique, mutation <strong>JAK2</strong> ou <strong>CALR</strong>.</p>
+                </div>
+
+                <div class="bg-green-50 p-3 rounded-lg border border-green-200 mt-2">
+                  <h4 class="font-semibold text-green-800">Myélofibrose primitive</h4>
+                  <p class="text-sm text-green-900">Fibrose de la moelle, splénomégalie géante, érythromyélémie.</p>
+                </div>
+
+                <div class="bg-purple-50 p-3 rounded-lg border border-purple-200 mt-2">
+                  <h4 class="font-semibold text-purple-800">Syndromes Myélodysplasiques (SMD)</h4>
+                  <p class="text-sm text-purple-900">État pré-leucémique ("moelle qui travaille mal"), anémie réfractaire chez le sujet âgé.</p>
+                </div>
+              </div>`
+            },
+            { 
+              code: "C03L11", 
+              name: "Myélome multiple",
+              tooltip: `<div class="space-y-3">
+                <h3 class="font-bold text-lg text-primary-700">MYÉLOME MULTIPLE</h3>
+                
+                <div>
+                  <h4 class="font-semibold text-primary-600">🔹 DÉFINITION</h4>
+                  <p class="text-sm">Prolifération <strong>plasmocytaire maligne</strong> envahissant la moelle osseuse et sécrétant une <strong>immunoglobuline monoclonale</strong>.</p>
+                </div>
+
+                <div class="bg-red-50 p-3 rounded-lg border border-red-200">
+                  <h4 class="font-semibold text-red-800">🔹 CLINIQUE (Critères CRAB)</h4>
+                  <ul class="text-sm text-red-900 list-disc list-inside ml-2 space-y-1">
+                    <li><strong>C</strong>alcium : Hypercalcémie</li>
+                    <li><strong>R</strong>ein : Insuffisance rénale</li>
+                    <li><strong>A</strong>némie</li>
+                    <li><strong>B</strong>one (Os) : Lésions ostéolytiques ("emporte-pièce"), fractures pathologiques, tassements vertébraux</li>
+                  </ul>
+                </div>
+
+                <div class="bg-purple-50 p-3 rounded-lg border border-purple-200">
+                  <h4 class="font-semibold text-purple-800">🔹 DIAGNOSTIC CLÉ</h4>
+                  <ul class="text-sm text-purple-900 list-disc list-inside ml-2 space-y-1">
+                    <li><strong>Myélogramme :</strong> Plasmocytose médullaire > 10%</li>
+                    <li><strong>Biochimie :</strong> Pic monoclonal à l'électrophorèse + Protéinurie de <strong>Bence-Jones</strong></li>
+                  </ul>
+                </div>
+              </div>`
+            }
+          ] 
+        },
         { code: "C03M", name: "Autres cancers de système endocrine", children: [{ code: "C03M01", name: "Cancer de la thyroïde" }, { code: "C03M02", name: "Cancer de la parathyroïde" }, { code: "C03M03", name: "Cancer de la surrénale" }] },
         { code: "C03N", name: "Cancers des os et du cartilage", children: [{ code: "C03N01", name: "Ostéosarcome" }, { code: "C03N02", name: "Chondrosarcome ( tumeur cartilaginea)" }, { code: "C03N03", name: "Sarcome d'Ewing" }, { code: "C03N04", name: "Autres cancers des os et du cartilage" }] },
         { code: "C03O", name: "Cancers des tissus mous et tissus conjonctifs", children: [{ code: "C03O01", name: "Liposarcome" }, { code: "C03O02", name: "Rhabdomyosarcome" }, { code: "C03O03", name: "Leiomyosarcome" }, { code: "C03O04", name: "Angiosarcome" }, { code: "C03O05", name: "Sarcome de Kaposi" }, { code: "C03O06", name: "Fibrosarcome" }, { code: "C03O07", name: "Autres cancers des tissus mous et tissus conjonct" }] },
