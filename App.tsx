@@ -43,9 +43,9 @@ export const App: React.FC = () => {
 
     // Version de l'application
     useEffect(() => {
-        console.log('🏥 Guide du Médecin Conseil - Version V3.3.164');
-        console.log('✅ Fix: Amputation D5 - Retrait negativeContext bloquant');
-        console.log('✅ Fix: Steppage/Amyotrophie neurologique détection améliorée');
+        console.log('🏥 Guide du Médecin Conseil - Version V3.3.165');
+        console.log('✅ Fix CRITIQUE: Amputation D5 - Détection manuelle prioritaire');
+        console.log('✅ Fix CRITIQUE: Steppage/SPE - Détection manuelle prioritaire');
         console.log('📅 Build:', new Date().toISOString());
     }, []);
 
