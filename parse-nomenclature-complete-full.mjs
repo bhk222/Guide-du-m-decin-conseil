@@ -153,7 +153,9 @@ function nettoyerLibelle(text) {
         .replace(/[;:]{2,}/g, '')
         .replace(/-::/g, '')
         .replace(/!e\b/gi, 'le')
-        .replace(/\s+B\s+\d+\s+métre/gi, ' spectrophotomètre')
+        .replace(/spectnlph[o0]t[o0]B/gi, 'spectrophotomètre')
+        .replace(/\s+B\s+\d+\s+métre/gi, '')
+        .replace(/spectnlph0t0B\s+\d+\s+métre/gi, 'spectrophotomètre')
         .replace(/àTélectr/gi, "à l'électr")
         .replace(/spectnlph0t0/gi, 'spectrophoto');
     
