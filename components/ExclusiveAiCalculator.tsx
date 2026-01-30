@@ -613,7 +613,7 @@ export const ExclusiveAiCalculator: React.FC<ExclusiveAiCalculatorProps> = ({
         
         // Smart merging of sequela keywords
         const primaryLesionKeywords = /\b(fracture|luxation|rupture|lesion|brulure|mutilation|contusion|plaie|section|amputation|ecrasement|entorse|tassement)\b/i;
-        const sequelaKeywords = new Set(['raccourcissement', 'raideur', 'douleur', 'instabilite', 'laxite', 'gêne', 'gene', 'limitation', 'deviation', 'atrophie', 'amyotrophie', 'cal vicieux', 'troubles trophiques', 'severe', 'sévère', 'modérée', 'moderee', 'légère', 'legere']);
+        const sequelaKeywords = new Set(['raccourcissement', 'raideur', 'douleur', 'instabilite', 'laxite', 'gêne', 'gene', 'limitation', 'deviation', 'atrophie', 'amyotrophie', 'cal vicieux', 'troubles trophiques', 'severe', 'sévère', 'modérée', 'moderee', 'légère', 'legere', 'steppage', 'marche', 'sequelle', 'séquelle', 'sequelles', 'séquelles']);
         const descriptions: string[] = [];
         
         if (medicalDescriptions.length > 0) {
@@ -641,6 +641,7 @@ export const ExclusiveAiCalculator: React.FC<ExclusiveAiCalculatorProps> = ({
         }
 
         if (descriptions.length > 1) {
+            console.log('🔍 SPLITTING DÉTECTÉ:', descriptions);
             analysisQueueRef.current = descriptions.slice(1);
             setIsLoading(true);
             await new Promise(res => setTimeout(res, 400));
@@ -652,6 +653,7 @@ export const ExclusiveAiCalculator: React.FC<ExclusiveAiCalculatorProps> = ({
             setIsLoading(false); // ✅ Désactivation AVANT l'appel pour laisser la fonction gérer son propre loading
             setTimeout(() => processAndDisplayAnalysis(descriptions[0]), 100);
         } else {
+            console.log('🔍 PAS DE SPLITTING - description unique:', descriptions[0] || textToSend);
             processAndDisplayAnalysis(descriptions[0] || textToSend);
         }
     }, [isLoading, processAndDisplayAnalysis, selectedInjuries, totalRate, hasPreexisting, messages, onAddInjury, processQueueOrPrompt]);
