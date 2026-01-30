@@ -12046,8 +12046,8 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
     }
     
     // 🔴 PARALYSIE SPE / STEPPAGE - PRIORITÉ ABSOLUE
-    const steppageMatch = /steppage|pied.*tomb[eé]|marche.*avec.*relev|paralysie.*SPE|sciatique.*poplit[ée].*externe/i.test(text);
-    const amyotrophieMIMatch = /amyotrophie.*(?:membre.*inf[ée]rieur|jambe|mollet)/i.test(text);
+    const steppageMatch = /steppage|pied.*tomb[eé]|marche.*avec.*(?:steppage|relev|pied|tomb|SPE)|paralysie.*SPE|sciatique.*poplit[ée].*externe|relev.*pied.*d[eé]ficit/i.test(text);
+    const amyotrophieMIMatch = /amyotrophie.*(?:membre.*inf[ée]rieur|jambe|membre.*inf|MI|cuisse|mollet|tibia|d(?:roit|[eé]|ef|écline)?\s*(?:gauche|membre|jambe)?)|(?:membre.*inf[ée]rieur|jambe).*amyotrophie/i.test(text);
     const fractureL1Match = /fracture.*(?:luxation.*)?L1|L1.*fracture/i.test(text);
     
     console.log('🔍 DEBUG STEPPAGE DÉTAILLÉ:');
