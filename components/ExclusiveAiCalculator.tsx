@@ -600,7 +600,7 @@ export const ExclusiveAiCalculator: React.FC<ExclusiveAiCalculatorProps> = ({
                 return false;
             }
             // Inclure si contient des termes médicaux de lésion ou séquelles neurologiques
-            return /(fracture|luxation|rupture|tassement|entorse|plaie|amputation|brûlure|lésion|douleur|raideur|ankylose|limitation|qui\s+presente|presente|steppage|amyotrophie|séquelle|sequelle|marche|paralysie)/i.test(desc);
+            return /(fracture|luxation|rupture|tassement|entorse|plaie|amputation|brûlure|lésion|douleur|raideur|ankylose|limitation|qui\s+presente|presente|steppage|amyotrophie|séquelle|sequelle|marche|paralysie|cal\s+vicieux|supination|pronation|force|serrage|cicatrice)/i.test(desc);
         });
         
         // Si aucune lésion médicale trouvée, envoyer tout à l'IA pour analyse complète
@@ -611,7 +611,14 @@ export const ExclusiveAiCalculator: React.FC<ExclusiveAiCalculatorProps> = ({
         
         // Smart merging of sequela keywords
         const primaryLesionKeywords = /\b(fracture|luxation|rupture|lesion|brulure|mutilation|contusion|plaie|section|amputation|ecrasement|entorse|tassement)\b/i;
-        const sequelaKeywords = new Set(['raccourcissement', 'raideur', 'douleur', 'instabilite', 'laxite', 'gêne', 'gene', 'limitation', 'deviation', 'atrophie', 'amyotrophie', 'cal vicieux', 'troubles trophiques', 'severe', 'sévère', 'modérée', 'moderee', 'légère', 'legere', 'steppage', 'marche', 'sequelle', 'séquelle', 'sequelles', 'séquelles']);
+        const sequelaKeywords = new Set([
+            'raccourcissement', 'raideur', 'douleur', 'instabilite', 'laxite', 'gêne', 'gene', 'limitation', 
+            'deviation', 'atrophie', 'amyotrophie', 'cal vicieux', 'cal', 'vicieux', 'troubles trophiques', 
+            'severe', 'sévère', 'modérée', 'moderee', 'légère', 'legere', 'steppage', 'marche', 
+            'sequelle', 'séquelle', 'sequelles', 'séquelles', 'pronation', 'supination', 'conserve', 
+            'conservée', 'limitée', 'limite', 'force', 'serrage', 'baisse', 'diminution', 'diminuee',
+            'cicatrice', 'cicatricielle', 'qualité', 'qualite', 'radio', 'radiologique'
+        ]);
         const descriptions: string[] = [];
         
         if (medicalDescriptions.length > 0) {

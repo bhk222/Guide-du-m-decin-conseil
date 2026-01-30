@@ -43,7 +43,7 @@ export const App: React.FC = () => {
 
     // Version de l'application
     useEffect(() => {
-        console.log('🏥 Guide du Médecin Conseil - Version V3.3.177 - PWA réactivée');
+        console.log('🏥 Guide du Médecin Conseil - Version V3.3.178 - FIX fusion avant-bras');
         console.log('📅 Build:', new Date().toISOString());
     }, []);
 
