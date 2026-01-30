@@ -3,8 +3,9 @@ import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { App } from './App';
 
+// 🔴 SERVICE WORKER DÉSACTIVÉ TEMPORAIREMENT POUR DEBUG
 // Register Service Worker for PWA (Offline-First)
-if ('serviceWorker' in navigator) {
+if (false && 'serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('/sw.js', { scope: '/' })
       .then(registration => {
