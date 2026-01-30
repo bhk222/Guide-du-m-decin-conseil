@@ -11851,8 +11851,27 @@ const extractIndividualLesions = (text: string): string[] => {
         lesions.push(fractureMatch[0].trim());
         lesions.push(ligamentMatch[0].trim());
         lesions.push(muscleMatch[0].trim());
-        console.log('✅ Pattern 0B (os+ligament/tendon+muscle) détecté:', lesions);
-        return lesions; // Retourner les 3 lésions
+        
+        // 🆕 V3.3.201: Détecter séquelles fonctionnelles séparées (raideur, algies, déficit force)
+        const raideurMatch = normalized.match(/raideur\s+(?:articulaire|r[ée]siduelle)?\s*(?:du|de\s+la)?\s*(?:genou|hanche|coude|poignet|cheville)/i);
+        const algiesMatch = normalized.match(/(?:algies?|douleurs?)\s+(?:m[ée]caniques?)?\s*(?:persistantes?|chroniques?|r[ée]siduelles?)?/i);
+        const deficitForceMatch = normalized.match(/(?:diminution|d[ée]ficit|perte)\s+(?:de\s+la?)?\s*force\s+(?:musculaire?)?/i);
+        
+        if (raideurMatch) {
+            lesions.push(raideurMatch[0].trim());
+            console.log('  + Raideur détectée:', raideurMatch[0].trim());
+        }
+        if (algiesMatch) {
+            lesions.push(algiesMatch[0].trim());
+            console.log('  + Algies détectées:', algiesMatch[0].trim());
+        }
+        if (deficitForceMatch) {
+            lesions.push(deficitForceMatch[0].trim());
+            console.log('  + Déficit force détecté:', deficitForceMatch[0].trim());
+        }
+        
+        console.log('✅ Pattern 0B (os+ligament/tendon+muscle+séquelles) détecté:', lesions);
+        return lesions;
     }
     
     // Pattern 1: Fractures multiples sur même os (trochanter et diaphyse)
@@ -13289,10 +13308,11 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
                         else if (isFractureOuverte && (hasDeformation || hasInstabilite || hasCicatricePath)) {
                             rate = 18; explanation = 'Membre inférieur (CUISSE/GENOU) : Fracture OUVERTE avec séquelles importantes (déformation/instabilité/cicatrice pathologique)';
                         }
-                        // Polytraumatisme du membre (fracture + ligaments + séquelles multiples)
-                        else if (hasFracture && hasLigamentaire && (hasRaideur || hasAlgies || hasDiminution)) {
-                            rate = 18; explanation = 'Membre inférieur (CUISSE/GENOU) : Polytraumatisme membre - Fracture tibia + déchirure ligamentaire + séquelles fonctionnelles multiples (raideur, algies, déficit force)';
-                        }
+                        // ❌ SUPPRIMÉ V3.3.201: Polytraumatisme regroupé (sous-évalue les séquelles multiples)
+                        // Les lésions distinctes doivent être détectées séparément pour cumul correct via Balthazar
+                        // Ancienne logique: rate = 18 pour "fracture + ligaments + séquelles" → IPP trop faible
+                        // Nouvelle logique: Chaque séquelle détectée individuellement puis cumulée
+                        
                         // Fracture avec séquelles importantes
                         else if (hasFracture && (hasRaideur || hasAlgies)) {
                             rate = 15; explanation = 'Membre inférieur (CUISSE/GENOU) : Fracture fémur/tibia consolidée avec séquelles fonctionnelles importantes';
