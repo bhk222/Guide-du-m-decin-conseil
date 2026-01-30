@@ -43,7 +43,7 @@ export const App: React.FC = () => {
 
     // Version de l'application
     useEffect(() => {
-        console.log('🏥 Guide du Médecin Conseil - Version V3.3.179 - DEBUG queue séquelles multiples');
+        console.log('🏥 Guide du Médecin Conseil - Version V3.3.180 - FIX cal vicieux avant-bras');
         console.log('📅 Build:', new Date().toISOString());
     }, []);
 
