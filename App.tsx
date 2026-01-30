@@ -43,7 +43,7 @@ export const App: React.FC = () => {
 
     // Version de l'application
     useEffect(() => {
-        console.log('🏥 Guide du Médecin Conseil - Version V3.3.175 - FIX splitting steppage');
+        console.log('🏥 Guide du Médecin Conseil - Version V3.3.176 - DEBUG filtre médical');
         console.log('🔍 Debug VERBOSE: Logs détaillés steppage et déviation');
         console.log('📅 Build:', new Date().toISOString());
     }, []);
