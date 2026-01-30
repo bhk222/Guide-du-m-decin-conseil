@@ -464,6 +464,8 @@ export const ExclusiveAiCalculator: React.FC<ExclusiveAiCalculatorProps> = ({
 
     const handleSend = useCallback(async (text: string, isClarification: boolean = false) => {
         const textToSend = text.trim();
+        console.log('🔍 handleSend appelé avec text:', text);
+        console.log('🔍 textToSend après trim:', textToSend);
         if (!textToSend || isLoading) return;
 
         const newUserMessage: ChatMessage = { id: crypto.randomUUID(), role: 'user', text: textToSend };
