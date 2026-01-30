@@ -278,8 +278,10 @@ export const ExclusiveAiCalculator: React.FC<ExclusiveAiCalculatorProps> = ({
     }, []);
 
     const processQueueOrPrompt = useCallback(() => {
+        console.log('🔍 processQueueOrPrompt appelé, queue length:', analysisQueueRef.current.length);
         if (analysisQueueRef.current.length > 0) {
             const nextQuery = analysisQueueRef.current.shift()!;
+            console.log('🔍 Traitement séquelle suivante:', nextQuery);
             const nextMessage: ChatMessage = {
                 id: crypto.randomUUID(),
                 role: 'model',
@@ -291,6 +293,7 @@ export const ExclusiveAiCalculator: React.FC<ExclusiveAiCalculatorProps> = ({
                 processAndDisplayAnalysis(nextQuery);
             }, 800);
         } else {
+            console.log('🔍 Queue vide, affichage message final');
             setIsLoading(true);
             setTimeout(() => {
                 const finalMessage: ChatMessage = { 
@@ -645,8 +648,12 @@ export const ExclusiveAiCalculator: React.FC<ExclusiveAiCalculatorProps> = ({
             descriptions.push(currentDescription);
         }
 
+        console.log('🔍 DESCRIPTIONS FINALES:', descriptions);
+        console.log('🔍 Nombre de descriptions:', descriptions.length);
+
         if (descriptions.length > 1) {
             analysisQueueRef.current = descriptions.slice(1);
+            console.log('🔍 QUEUE initialisée avec:', analysisQueueRef.current);
             setIsLoading(true);
             await new Promise(res => setTimeout(res, 400));
             setMessages(prev => [...prev, {
