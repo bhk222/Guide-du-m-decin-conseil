@@ -7892,14 +7892,10 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             pattern: /amputation.*(?:D5|auriculaire|petit\s+doigt).*luxation.*(?:M4|M5|m[eé]tacarpe)|luxation.*(?:M4|M5).*amputation.*(?:D5|auriculaire)/i,
             context: /amyotrophie.*main|d[eé]viation.*(?:D2|D3|D4)|griffe|diminution.*force.*serrage|cicatrice.*r[eé]tractile/i,
             searchTerms: [
-                // Amputation D5
-                'Amputation de l\'auriculaire - Désarticulation métacarpienne (Dominante)',
-                // Luxations M4-M5
-                'Luxation métacarpienne avec limitation (Dominante)',
-                // Amyotrophie main (signature nerf cubital)
-                'Amyotrophie main (Dominante)',
-                // Cumul polyséquelles mains
-                '__CUMUL_POLYSEQUEL_NUMERIQUE_D5_LUX_M4M5_AMYO__'
+                // Polytraumatisme D5 + M4-M5 + amyotrophie
+                'Polytraumatisme main - Amputation D5 + Luxations M4-M5 avec amyotrophie et déviation digitale (Main Dominante)',
+                // Backup: Amputation D5 seule si le polytraumatisme n'est pas trouvé
+                'Désarticulation métacarpo-phalangienne de l\'auriculaire (Main Dominante)'
             ],
             priority: 1200,  // Très haute priorité pour ce cumul rare et complexe
             negativeContext: /sans.*s[eé]quelle|bien.*consolid[eée]/i
@@ -8760,10 +8756,8 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             searchTerms: [
                 // RACHIS: Fracture L1 + raideur post-chirurgicale
                 'Séquelles de fracture/luxation du rachis lombaire - Avec lésion neurologique légère',
-                'Fracture vertébrale lombaire - Consolidée avec raideur et douleurs chroniques',
                 // MEMBRE INFÉRIEUR: Amyotrophie + steppage
                 'Amyotrophie musculaire du membre inférieur',
-                'Paralysie du nerf sciatique poplité externe (SPE) avec steppage',
                 'Steppage et déficit du releveur du pied (L4-L5)',
                 // CUMUL: Balthazar pour polytraumatisme
                 '__CUMUL_RACHIS_MEMBRE_INFERIEUR_L1_STEPPAGE__'
