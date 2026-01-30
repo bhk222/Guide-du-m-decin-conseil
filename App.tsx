@@ -43,7 +43,7 @@ export const App: React.FC = () => {
 
     // Version de l'application
     useEffect(() => {
-        console.log('🏥 Guide du Médecin Conseil - Version V3.3.167');
+        console.log('🏥 Guide du Médecin Conseil - Version V3.3.171');
         console.log('🔍 Debug VERBOSE: Logs détaillés steppage et déviation');
         console.log('📅 Build:', new Date().toISOString());
     }, []);

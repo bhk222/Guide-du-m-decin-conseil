@@ -8758,9 +8758,7 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
                 'Séquelles de fracture/luxation du rachis lombaire - Avec lésion neurologique légère',
                 // MEMBRE INFÉRIEUR: Amyotrophie + steppage
                 'Amyotrophie musculaire du membre inférieur',
-                'Steppage et déficit du releveur du pied (L4-L5)',
-                // CUMUL: Balthazar pour polytraumatisme
-                '__CUMUL_RACHIS_MEMBRE_INFERIEUR_L1_STEPPAGE__'
+                'Steppage et déficit du releveur du pied (L4-L5)'
             ],
             priority: 1100,
             negativeContext: /sans.*s[eé]quelle.*neurologique/i
