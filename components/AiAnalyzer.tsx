@@ -12186,20 +12186,16 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
     
     // ========== 2. RACHIS ==========
     
-    // Cervicalgie
-    if (/cervicalgie|douleur.*cervical|syndrome.*cervical|coup.*lapin|whiplash|raideur.*cervical/i.test(text)) {
-        detectedSequelae.push({
-            name: 'Cervicalgie / Syndrome cervical',
-            keywords: ['cervicalgie', 'cervical'],
-            context: text.match(/cervicalgie[^.;]*/i)?.[0] || ''
-        });
-    }
+    // 🔴 V3.3.200: CERVICALGIE/SYNDROME CERVICAL → INTÉGRÉ AU SSTC (NEUROLOGIQUE)
+    // Selon barème 1967 ligne 746: "Ce syndrome cervical s'associe généralement au syndrôme post-commotionnel"
+    // Ne plus détecter comme séquelle RACHIS séparée, mais comme composante du SSTC neurologique
     
-    // Brachialgie / Névralgie cervico-brachiale (radiculalgie membre supérieur)
+    // Brachialgie / Névralgie cervico-brachiale → NEUROLOGIQUE (radiculalgie, pas rachis simple)
+    // 🔴 V3.3.200: Brachialgie = atteinte NERVEUSE périphérique → Système NEUROLOGIQUE
     if (/brachialgie|n[ée]vralgie.*cervico.*brachial|douleur.*irradiant.*bras|radiculalgie.*membre.*sup[ée]rieur|c5.*c6.*c7/i.test(text)) {
         detectedSequelae.push({
             name: 'Brachialgie / Névralgie cervico-brachiale (radiculalgie)',
-            keywords: ['brachialgie', 'névralgie', 'cervico-brachiale', 'radiculalgie'],
+            keywords: ['brachialgie', 'névralgie', 'cervico-brachiale', 'radiculalgie', 'neurologique'],
             context: text.match(/brachialgie[^.;]*/i)?.[0] || text.match(/n[ée]vralgie.*cervico.*brachial[^.;]*/i)?.[0] || ''
         });
     }
@@ -13045,9 +13041,53 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
                         explanation = 'Hématome intracrânien (traitement conservateur) → IPP 10-20%';
                     }
                 }
-                else if (/syndrome.*subjectif.*crâne|céphalée|vertige/i.test(seq.name)) {
+                // 🔴 V3.3.200: SSTC + SYNDROME CERVICAL ASSOCIÉ (Conformité barème 1967 ligne 746-758)
+                // Barème: "Ce syndrome cervical s'associe généralement au syndrôme post-commotionnel"
+                // Taux: Max 15% sans lésion organique, jusqu'à 20% avec lésions organiques
+                else if (/syndrome.*subjectif.*crâne|céphalée|vertige|cervicalgie|syndrome.*cervical|whiplash|coup.*lapin|brachialgie|n[ée]vralgie.*cervico/i.test(seq.name)) {
                     system = 'NEUROLOGIQUE';
-                    rate = 10; explanation = 'Syndrome subjectif des traumatisés du crâne (SSTC) avec céphalées/vertiges persistants';
+                    
+                    const hasCervicalgie = /cervicalgie|syndrome.*cervical|whiplash|coup.*lapin|raideur.*cervical|douleur.*cervical/i.test(text);
+                    const hasBrachialgie = /brachialgie|n[ée]vralgie.*cervico.*brachial/i.test(text);
+                    const hasCephalee = /c[ée]phal[ée]e/i.test(text);
+                    const hasVertige = /vertige|[ée]tourdissement/i.test(text);
+                    const isTraumatismeExplosion = /explosion|blast|d[ée]flagration/i.test(text);
+                    const isPersistant = /persistant|chronique|permanent/i.test(text) || 
+                                         (text.match(/\d{4}/)?.[0] && parseInt(text.match(/\d{4}/)?.[0] || '0') < new Date().getFullYear() - 1);
+                    
+                    const countSymptoms = [hasCephalee, hasVertige, hasCervicalgie].filter(Boolean).length;
+                    const hasOrganicLesions = /fracture.*cr[âa]ne|embarrure|h[ée]matome|perforation.*tympan|otorragie/i.test(text);
+                    
+                    // BRACHIALGIE = Radiculalgie cervicale (atteinte NERVEUSE périphérique)
+                    if (hasBrachialgie) {
+                        rate = 20;
+                        explanation = 'Névralgie cervico-brachiale (radiculalgie C5-C6-C7) avec atteinte nerveuse périphérique → IPP 15-25% (barème 1967)';
+                    }
+                    // SSTC sévère avec lésions organiques + mécanisme violent
+                    else if (isTraumatismeExplosion && hasOrganicLesions && isPersistant && countSymptoms >= 2) {
+                        rate = 18;
+                        explanation = 'Syndrome post-commotionnel avec syndrome cervical associé (explosion, lésions organiques, persistance >1 an, céphalées+vertiges+cervicalgie) → IPP 15-20% (barème 1967 ligne 746-758)';
+                    }
+                    // SSTC modéré avec syndrome cervical (barème: max 15% sans lésion organique)
+                    else if (hasCervicalgie && (hasCephalee || hasVertige) && isPersistant) {
+                        rate = 12;
+                        explanation = 'Syndrome post-commotionnel avec syndrome cervical associé (céphalées/vertiges + cervicalgie chronique) → IPP 10-15% (barème 1967 ligne 746-752)';
+                    }
+                    // SSTC simple avec céphalées/vertiges
+                    else if (countSymptoms >= 2 && isPersistant) {
+                        rate = 10;
+                        explanation = 'Syndrome subjectif des traumatisés du crâne (SSTC) avec céphalées et vertiges persistants → IPP 5-15%';
+                    }
+                    // Cervicalgie isolée post-traumatique (sans TC documenté)
+                    else if (hasCervicalgie && !hasCephalee && !hasVertige) {
+                        rate = 5;
+                        explanation = 'Syndrome cervical traumatique isolé (cervicalgie post-traumatique) → IPP 2-5% (barème 1967 ligne 746)';
+                    }
+                    // SSTC minimal
+                    else {
+                        rate = 8;
+                        explanation = 'Syndrome subjectif des traumatisés du crâne (SSTC) modéré → IPP 5-10%';
+                    }
                 } else if (/perforation.*tympan|acouph[èe]ne/i.test(seq.name)) {
                     system = 'ORL';
                     rate = 8; explanation = 'Séquelles ORL (perforation tympanique/acouphènes)';
@@ -13070,18 +13110,16 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
                     }
                 }
                 
-                // RACHIS (toutes atteintes rachis = 1 seul taux global)
-                else if (/cervicalgie|brachialgie|parasth[ée]sie|dorsalgie|lombalgie|fracture.*lombaire|hernie.*discale|sciatique|limitation.*ant[ée]flexion.*rachis|raideur.*rachis/i.test(seq.name)) {
+                // 🔴 V3.3.200: RACHIS (EXCLUT cervicalgie/brachialgie → désormais NEUROLOGIQUE)
+                // Barème 1967: Syndrome cervical = composante du SSTC, pas séquelle rachis séparée
+                // Seules les atteintes DORSALES et LOMBAIRES restent dans système RACHIS
+                else if (/dorsalgie|lombalgie|fracture.*lombaire|hernie.*discale|sciatique|limitation.*ant[ée]flexion.*rachis|raideur.*rachis/i.test(seq.name) && !/cervicalgie|brachialgie|syndrome.*cervical/i.test(seq.name)) {
                     system = 'RACHIS';
                     
                     // 🔴 V3.3.163: FRACTURE-LUXATION VERTÉBRALE (grave: instabilité + chirurgie)
                     const isFractureLuxation = /fracture.*luxation|luxation.*fracture/i.test(text);
                     const isOperated = /op[ée]r[ée]|chirurgie|intervention|arthrod[èe]se|ost[ée]osynth[èe]se/i.test(text);
                     const hasRaideur = /raideur.*rachis|limitation.*rachis|enraidissement/i.test(text);
-                    
-                    // 🔴 V3.3.162: BRACHIALGIE = RADICULALGIE CERVICALE (atteinte nerveuse majeure)
-                    const hasBrachialgie = detectedSequelae.some(s => /brachialgie|n[ée]vralgie.*cervico.*brachial/i.test(s.name));
-                    const hasParesthesies = detectedSequelae.some(s => /parasth[ée]sie|fourmillement/i.test(s.name));
                     
                     // 🥇 V3.3.160: AJUSTEMENT TAUX SELON SÉVÉRITÉ CLINIQUE
                     const hasFavorableSigns = /marche.*normale|sans.*tuteur|ne.*porte.*pas.*ceinture|mouvements.*possible|pas.*contracture|las[eè]gue.*n[eé]gatif|pas.*trouble.*neurologique/i.test(text);
@@ -13098,11 +13136,6 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
                     else if (/avec\s+l[eé]sion\s+neurologique/i.test(seq.name)) {
                         rate = 20;
                         explanation = 'Rachis LOMBAIRE : Fracture/luxation avec lésion neurologique légère (steppage, amyotrophie) → IPP 20-35% (atteinte neurologique)';
-                    }
-                    // Brachialgie cervicale
-                    else if (hasBrachialgie || (hasParesthesies && /cervicalgie/i.test(text))) {
-                        rate = 18; 
-                        explanation = 'Rachis CERVICAL : Cervicalgie avec BRACHIALGIE (névralgie cervico-brachiale = radiculalgie par compression nerveuse) + troubles sensitifs (paresthésies) → IPP majorée pour atteinte nerveuse';
                     } else if (/hernie.*discale|sciatique/i.test(seq.name)) {
                         rate = 15; explanation = 'Rachis : hernie discale avec radiculalgie (séquelle majeure)';
                     } else if (/lombalgie|fracture.*lombaire/i.test(seq.name)) {
