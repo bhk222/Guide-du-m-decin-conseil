@@ -12422,10 +12422,19 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
     
     // Déformation osseuse séquellaire
     if (/d[ée]formation.*osseuse|os.*d[ée]form[ée]|cal.*vicieux|consolidation.*vicieuse/i.test(text)) {
+        // 🔥 V3.3.181: ENRICHIR avec anatomie pour meilleur matching
+        const contextFull = text.match(/(?:fracture|cal\s+vicieux|d[ée]formation)[^.;]*(?:cubitus|radius|avant.?bras|hum[ée]rus|m[ée]tatars|pied|f[ée]mur|tibia)[^.;]*/i)?.[0] || '';
+        let anatomyDetail = '';
+        if (/cubitus|radius|avant.?bras/i.test(text)) anatomyDetail = ' (avant-bras/radius/cubitus)';
+        else if (/hum[ée]rus|bras/i.test(text) && !/avant.?bras/i.test(text)) anatomyDetail = ' (humérus)';
+        else if (/m[ée]tatars|pied|orteil/i.test(text)) anatomyDetail = ' (métatarsien/pied)';
+        else if (/f[ée]mur|cuisse/i.test(text)) anatomyDetail = ' (fémur)';
+        else if (/tibia|jambe/i.test(text)) anatomyDetail = ' (tibia)';
+        
         detectedSequelae.push({
-            name: 'Déformation osseuse séquellaire (cal vicieux)',
+            name: `Déformation osseuse séquellaire (cal vicieux)${anatomyDetail}`,
             keywords: ['déformation', 'osseuse', 'cal vicieux'],
-            context: text.match(/d[ée]formation.*osseuse[^.;]*/i)?.[0] || ''
+            context: contextFull || text.match(/d[ée]formation.*osseuse[^.;]*/i)?.[0] || ''
         });
     }
     
@@ -12649,10 +12658,19 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
     
     // Cal vicieux (os longs membres)
     if (/cal\s+vicieux|d[ée]formation\s+osseuse|consolidation\s+vicieuse/i.test(text)) {
+        // 🔥 V3.3.181: ENRICHIR avec anatomie pour meilleur matching
+        const contextFull = text.match(/(?:fracture|cal\s+vicieux|d[ée]formation)[^.;]*(?:cubitus|radius|avant.?bras|hum[ée]rus|m[ée]tatars|pied|f[ée]mur|tibia)[^.;]*/i)?.[0] || '';
+        let anatomyDetail = '';
+        if (/cubitus|radius|avant.?bras/i.test(text)) anatomyDetail = ' (avant-bras/radius/cubitus)';
+        else if (/hum[ée]rus|bras/i.test(text) && !/avant.?bras/i.test(text)) anatomyDetail = ' (humérus)';
+        else if (/m[ée]tatars|pied|orteil/i.test(text)) anatomyDetail = ' (métatarsien/pied)';
+        else if (/f[ée]mur|cuisse/i.test(text)) anatomyDetail = ' (fémur)';
+        else if (/tibia|jambe/i.test(text)) anatomyDetail = ' (tibia)';
+        
         detectedSequelae.push({
-            name: 'Déformation osseuse séquellaire (cal vicieux)',
+            name: `Déformation osseuse séquellaire (cal vicieux)${anatomyDetail}`,
             keywords: ['cal vicieux', 'déformation', 'consolidation vicieuse'],
-            context: text.match(/cal\s+vicieux[^.;]*/i)?.[0] || text.match(/(?:d[ée]formation|consolidation)[^.;]*(?:osseuse|vicieuse)[^.;]*/i)?.[0] || ''
+            context: contextFull || text.match(/cal\s+vicieux[^.;]*/i)?.[0] || text.match(/(?:d[ée]formation|consolidation)[^.;]*(?:osseuse|vicieuse)[^.;]*/i)?.[0] || ''
         });
     }
     
