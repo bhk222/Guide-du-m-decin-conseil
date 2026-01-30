@@ -12875,6 +12875,28 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
                     if (nameMatch) score += 10;
                     if (searchTermMatch) score += 5;
                     
+                    // 🔥 V3.3.181: FILTRAGE ANATOMIQUE pour "cal vicieux" (éviter confusion métatarsien/cubitus)
+                    if (/cal\s+vicieux/i.test(sequellaName)) {
+                        const contextFull = (context + ' ' + fullText).toLowerCase();
+                        const isMembreSuperieur = /avant.?bras|coude|poignet|radius|cubitus|hum[ée]rus|main|doigt|[ée]paule|bras/i.test(contextFull);
+                        const isMembreInferieur = /m[ée]tatars|pied|orteil|cheville|tibia|f[ée]mur|hanche|genou|jambe/i.test(contextFull);
+                        const injuryIsMembreSuperieur = /avant.?bras|coude|poignet|radius|cubitus|hum[ée]rus|main|doigt|[ée]paule|bras/i.test(injury.name.toLowerCase());
+                        const injuryIsMembreInferieur = /m[ée]tatars|pied|orteil|cheville|tibia|f[ée]mur|hanche|genou|jambe/i.test(injury.name.toLowerCase());
+                        
+                        console.log(`🔍 [V3.3.181] Cal vicieux détecté: "${injury.name}" | Context: MI=${isMembreInferieur} MS=${isMembreSuperieur} | Injury: MI=${injuryIsMembreInferieur} MS=${injuryIsMembreSuperieur}`);
+                        
+                        // Pénaliser si anatomie incompatible
+                        if ((isMembreSuperieur && injuryIsMembreInferieur) || (isMembreInferieur && injuryIsMembreSuperieur)) {
+                            score -= 100; // ÉLIMINER ce match
+                            console.log(`🚫 [V3.3.181] ÉLIMINÉ: "${injury.name}" (anatomie incompatible)`);
+                        }
+                        // Bonus si anatomie compatible
+                        else if ((isMembreSuperieur && injuryIsMembreSuperieur) || (isMembreInferieur && injuryIsMembreInferieur)) {
+                            score += 30; // FAVORISER le bon membre
+                            console.log(`✅ [V3.3.181] FAVORISÉ: "${injury.name}" (anatomie compatible)`);
+                        }
+                    }
+                    
                     // 🛡️ V3.3.160: FILTRAGE SPÉCIFIQUE RACHIS (cervical vs lombaire)
                     if (/rachis|vertébr|cervical|lombaire/i.test(sequellaName)) {
                         const seqIsLombaire = /lombaire|l[1-5]|lombalgie/i.test(sequellaName + ' ' + context);
