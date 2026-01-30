@@ -11824,53 +11824,42 @@ const extractIndividualLesions = (text: string): string[] => {
         if (lesions.length >= 2) return lesions;
     }
     
-    // Pattern 0B: Fracture + déchirure ligament + élongation muscle (CAS 2) - AMÉLIORÉ V3.3.154
+    // Pattern 0B: Fracture + déchirure ligament + élongation muscle (CAS 2) - AMÉLIORÉ V3.3.201
     // Membre inférieur: "fracture tibia associée à déchirure ligament collatéral ainsi qu'une élongation quadriceps"
+    // Ex narratif séparé: "fracture tibia. déchirure ligament. élongation quadriceps. raideur genou."
     // Membre supérieur: "fracture radius associée à déchirure tendons extenseurs ainsi qu'élongation épaule"
-    // Ex: "fracture genou avec lésion ligamentaire et atteinte musculaire"
-    // Ex: "fracture tibia sur fond de rupture LCA ainsi qu'élongation quadriceps"
     
-    // V3.3.154: Ajout pattern membre supérieur (radius + tendon + muscle épaule)
-    const multiTraumaPattern = /fracture.*?(?:tibia|femur|humerus|genou|radius|cubitus).*?(?:associee?|avec|sur\s+fond\s+de).*?(?:dechirure|lesion|rupture).*?(?:ligament|tendons?).*?(?:ainsi|et|avec|associee?|sur\s+fond).*?(?:elongation|dechirure|lesion).*?(?:quadriceps|muscle|epaule)/i;
+    // V3.3.201: Pattern flexible - accepte phrases connectées OU séparées
     const fractureMatch = normalized.match(/fracture\s+(?:non\s+)?(?:deplacee?)?\s*(?:du|de\s+la)?\s*(?:tiers)?\s*(?:distal|proximal|moyen)?\s*(?:du|de\s+la)?\s*(?:tibia|femur|humerus|genou|radius|cubitus)\s*(?:droit|gauche)?/i);
-    
-    // V3.3.154: Ligament OU Tendon (membre inf. ou sup.)
     const ligamentMatch = normalized.match(/(?:dechirure|lesion|rupture)\s+(?:partielle?|complete?|totale?)?\s*(?:du|de\s+la|des)?\s*(?:ligament\s+(?:collateral|croise|lateral|lca|lcp)|tendons?\s+extenseurs?)\s*(?:medial|interne|externe|anterieur|posterieur|poignet|main)?\s*(?:du|de\s+la)?\s*(?:genou|coude|poignet)?\s*(?:droit|gauche)?/i);
-    
-    // V3.3.154: Quadriceps (membre inf.) OU Épaule (membre sup.) - PATTERN FLEXIBLE
     const muscleMatch = normalized.match(/(?:elongation|dechirure|rupture)\s+(?:musculaire?)?\s*(?:du|de\s+la?|l)?\s*(?:quadriceps|epaule)/i);
     
-    console.log('🔍 Pattern 0B - Extraction détaillée:');
-    console.log('  multiTraumaPattern test:', multiTraumaPattern.test(normalized));
+    // V3.3.201: Séquelles fonctionnelles (même si phrases séparées)
+    const raideurMatch = normalized.match(/raideur\s+(?:articulaire|r[ée]siduelle)?\s*(?:du|de\s+la)?\s*(?:genou|hanche|coude|poignet|cheville)/i);
+    const algiesMatch = normalized.match(/(?:algies?|douleurs?)\s+(?:m[ée]caniques?)?\s*(?:persistantes?|chroniques?|r[ée]siduelles?)?/i);
+    const deficitForceMatch = normalized.match(/(?:diminution|d[ée]ficit|perte)\s+(?:de\s+la?)?\s*force\s+(?:musculaire?)?/i);
+    
+    console.log('🔍 Pattern 0B - Extraction polytraumatisme membre:');
     console.log('  fractureMatch:', fractureMatch ? fractureMatch[0] : 'NULL');
     console.log('  ligamentMatch:', ligamentMatch ? ligamentMatch[0] : 'NULL');
     console.log('  muscleMatch:', muscleMatch ? muscleMatch[0] : 'NULL');
+    console.log('  raideurMatch:', raideurMatch ? raideurMatch[0] : 'NULL');
+    console.log('  algiesMatch:', algiesMatch ? algiesMatch[0] : 'NULL');
+    console.log('  deficitForceMatch:', deficitForceMatch ? deficitForceMatch[0] : 'NULL');
     
-    if (multiTraumaPattern.test(normalized) && fractureMatch && ligamentMatch && muscleMatch) {
-        // V3.3.154: Changé OU en ET pour exiger les 3 matches (membre inf. + sup.)
-        lesions.push(fractureMatch[0].trim());
-        lesions.push(ligamentMatch[0].trim());
-        lesions.push(muscleMatch[0].trim());
+    // V3.3.201: Détecter si au moins 3 composantes présentes (fracture + ligament + muscle OU séquelle fonctionnelle)
+    const componentCount = [fractureMatch, ligamentMatch, muscleMatch, raideurMatch, algiesMatch, deficitForceMatch].filter(m => m).length;
+    
+    if (componentCount >= 3 && fractureMatch && (ligamentMatch || muscleMatch)) {
+        // V3.3.201: Polytraumatisme membre détecté - extraire TOUTES les lésions séparément
+        if (fractureMatch) lesions.push(fractureMatch[0].trim());
+        if (ligamentMatch) lesions.push(ligamentMatch[0].trim());
+        if (muscleMatch) lesions.push(muscleMatch[0].trim());
+        if (raideurMatch) lesions.push(raideurMatch[0].trim());
+        if (algiesMatch) lesions.push(algiesMatch[0].trim());
+        if (deficitForceMatch) lesions.push(deficitForceMatch[0].trim());
         
-        // 🆕 V3.3.201: Détecter séquelles fonctionnelles séparées (raideur, algies, déficit force)
-        const raideurMatch = normalized.match(/raideur\s+(?:articulaire|r[ée]siduelle)?\s*(?:du|de\s+la)?\s*(?:genou|hanche|coude|poignet|cheville)/i);
-        const algiesMatch = normalized.match(/(?:algies?|douleurs?)\s+(?:m[ée]caniques?)?\s*(?:persistantes?|chroniques?|r[ée]siduelles?)?/i);
-        const deficitForceMatch = normalized.match(/(?:diminution|d[ée]ficit|perte)\s+(?:de\s+la?)?\s*force\s+(?:musculaire?)?/i);
-        
-        if (raideurMatch) {
-            lesions.push(raideurMatch[0].trim());
-            console.log('  + Raideur détectée:', raideurMatch[0].trim());
-        }
-        if (algiesMatch) {
-            lesions.push(algiesMatch[0].trim());
-            console.log('  + Algies détectées:', algiesMatch[0].trim());
-        }
-        if (deficitForceMatch) {
-            lesions.push(deficitForceMatch[0].trim());
-            console.log('  + Déficit force détecté:', deficitForceMatch[0].trim());
-        }
-        
-        console.log('✅ Pattern 0B (os+ligament/tendon+muscle+séquelles) détecté:', lesions);
+        console.log(`✅ Pattern 0B (polytraumatisme membre) détecté: ${lesions.length} lésions`, lesions);
         return lesions;
     }
     
