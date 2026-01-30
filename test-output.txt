@@ -1,0 +1,102 @@
+≡ƒº¬ TEST VALIDATION FINALE V3.3.171
+
+================================================================================
+
+≡ƒôï CAS 1: Fracture-Luxation L1 avec signes neurologiques
+--------------------------------------------------------------------------------
+≡ƒô¥ Description clinique:
+   "ag├⌐ de 70 ans ; victime d'un AT 14.07.1991 ; fracture luxation de L1 ; trait├⌐ chirurgicalement ; s├⌐quelles amyotrophie du membre inferieur gauche ; marche avec steppage ; raideur du rachis"
+
+≡ƒöì Analyse...
+
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): ag├⌐ de 70 ans ; victime d'un AT 14.07.1991 ; fracture luxation de L1 ; trait├⌐ chirurgicalement ; s├⌐quelles amyotrophie du membre inferieur gauche ; marche avec steppage ; raideur du rachis
+≡ƒöì DEBUG STEPPAGE D├ëTAILL├ë:
+   - steppageMatch: true
+   - amyotrophieMIMatch: true
+   - fractureL1Match: true
+   - Texte analys├⌐: ag├⌐ de 70 ans ; victime d'un AT 14.07.1991 ; fracture luxation de L1 ; trait├⌐ chirurgicalement ; s├⌐quelles amyotrophie du membre inferieur gauche ; marche avec steppage ; raideur du rachis
+Γ£à PARALYSIE SPE AVEC STEPPAGE D├ëTECT├ëE (PRIORIT├ë ABSOLUE)
+≡ƒöì DEBUG D├ëVIATION:
+   - deviationMatch: false
+   - mainContext: false
+   - Recherche dans: diviation NON trouv├⌐
+≡ƒöì [V3.3.155] S├⌐quelles d├⌐tect├⌐es: 4 [
+  'Paralysie du nerf sciatique poplit├⌐ externe (SPE) avec steppage',
+  'S├⌐quelles de fracture/luxation du rachis lombaire - Avec l├⌐sion neurologique l├⌐g├¿re',
+  'Steppage gauche (pied tombant - paralysie releveur du pied)',
+  'Amyotrophie globale du membre inf├⌐rieur (cuisse + jambe)'
+]
+ΓÜá∩╕Å POLYTRAUMATISME D├ëTECT├ë: 4 s├⌐quelle(s)
+≡ƒôÜ TROUV├ë DANS BAR├êME: "Paralysie du nerf sciatique poplit├⌐ externe (SPE) avec steppage" ΓåÆ "Paralysie du nerf sciatique poplit├⌐ externe (SPE)" (15-25%)
+≡ƒôÜ TROUV├ë DANS BAR├êME: "S├⌐quelles de fracture/luxation du rachis lombaire - Avec l├⌐sion neurologique l├⌐g├¿re" ΓåÆ "S├⌐quelles de fracture/luxation du rachis lombaire (sans l├⌐sion neurologique)" (10-30%)
+≡ƒôÜ TROUV├ë DANS BAR├êME: "Amyotrophie globale du membre inf├⌐rieur (cuisse + jambe)" ΓåÆ "Monopl├⌐gie incompl├¿te - Membre inf├⌐rieur (l├⌐sion corticale)" (10-30%)
+≡ƒöä REGROUPEMENT PAR SYST├êME: [ 'NEUROLOGIQUE: 18%', 'RACHIS: 12%', 'MEMBRE_INFERIEUR: 12%' ]
+≡ƒº« CALCUL BALTHAZAR (PAR SYST├êME): [ 'NEUROLOGIQUE: 18%', 'RACHIS: 12%', 'MEMBRE_INFERIEUR: 12%' ]
+≡ƒôè IPP GLOBAL CUMUL├ë: 36%
+Γ£à R├⌐sultat:
+   Type: proposal
+   Rubrique: Polytraumatisme - 3 syst├¿mes atteints
+   IPP: 36-36%
+   Justification: <strong>≡ƒÅÑ POLYTRAUMATISME - CALCUL IPP (Bar├¿me 1967)</strong><br><br><strong>≡ƒôï 4 s├⌐quelles post-traumatiques regroup├⌐es en 3 syst├¿mes anatomiques :</strong><br><br><strong>A. SYST├êME NEUROLOGIQUE</strong> ΓåÆ <span style="color: #d32f2f; font-weight: bold;">18% IPP</span><br>   Γöö Steppage unilat├⌐ral avec amyotrophie (paralysie releveur pied + fonte musculaire) = Atteinte nerf SPE/L5 compl├¿te ΓåÆ IPP 15-20% - Bar├¿me: "Paralysie du nerf sciatique poplit├⌐ externe (SPE)" (15-25%)<br>   Γöö S├⌐quelles regroup├⌐es :<br>      ΓÇó Paralysie du nerf sciatique poplit├⌐ externe (SPE) avec steppage<br>      ΓÇó Steppage gauche (pied tombant - paralysie releveur du pied)<br><br><strong>B. SYST├êME RACHIS</strong> ΓåÆ <span style="color: #d32f2f; font-weight: bold;">12% IPP</span><br>   Γöö Rachis : fracture lombaire consolid├⌐e avec lombalgie chronique mod├⌐r├⌐e - Bar├¿me: "S├⌐quelles de fracture/luxation du rachis lombaire (sans l├⌐sion neurologique)" (10-30%)<br>   Γöö S├⌐quelle regroup├⌐es :<br>      ΓÇó S├⌐quelles de fracture/luxation du rachis lombaire - Avec l├⌐sion neurologique l├⌐g├¿re<br><br><strong>C. SYST├êME MEMBRE INFERIEUR</strong> ΓåÆ <span style="color: #d32f2f; font-weight: bold;">12% IPP</span><br>   Γöö Membre inf├⌐rieur (CUISSE/GENOU) : S├⌐quelles ligamentaires/musculaires avec retentissement fonctionnel - Bar├¿me: "Monopl├⌐gie incompl├¿te - Membre inf├⌐rieur (l├⌐sion corticale)" (10-30%)<br>   Γöö S├⌐quelle regroup├⌐es :<br>      ΓÇó Amyotrophie globale du membre inf├⌐rieur (cuisse + jambe)<br><br><strong>≡ƒº« CALCUL DU CUMUL (Formule de Balthazar - Bar├¿me 1967) :</strong><br><em>Principe : Les s├⌐quelles d'un m├¬me syst├¿me anatomique sont regroup├⌐es en UN SEUL taux.</em><br><em>Le cumul s'applique ensuite entre les SYST├êMES (pas entre s├⌐quelles individuelles).</em><br><br>La formule de cumul : <code>T = 100 - [(100-TΓéü) ├ù (100-TΓéé) ├ù (100-TΓéâ) ├ù ... / 100^(n-1)]</code><br><br>1. Syst├¿me 1 (NEUROLOGIQUE): 18% ΓåÆ Capacit├⌐ restante = 100.0 ├ù (100-18)/100 = 82.0%<br>2. Syst├¿me 2 (RACHIS): 12% ΓåÆ Capacit├⌐ restante = 82.0 ├ù (100-12)/100 = 72.2%<br>3. Syst├¿me 3 (MEMBRE_INFERIEUR): 12% ΓåÆ Capacit├⌐ restante = 72.2 ├ù (100-12)/100 = 63.5%<br><br><strong>≡ƒôè R├ëSULTAT FINAL :</strong><br><div style="background: #fff3e0; border-left: 4px solid #ff9800; padding: 12px; margin: 8px 0;"><strong style="font-size: 18px; color: #e65100;">IPP GLOBAL CUMUL├ë = 36%</strong><br><span style="font-size: 14px; color: #666;">Taux d'Incapacit├⌐ Permanente Partielle apr├¿s application de la formule de Balthazar (Bar├¿me 1967)</span></div><br><strong>ΓÜû∩╕Å BAR├êME OFFICIEL 1967 :</strong><br>Le cumul des s├⌐quelles respecte le <strong>principe du regroupement par syst├¿me anatomique</strong>. Les s├⌐quelles multiples d'un m├¬me syst├¿me (ex: fracture f├⌐mur + amyotrophie + limitation genou) ne s'additionnent PAS arithm├⌐tiquement mais sont ├⌐valu├⌐es par un TAUX GLOBAL pour ce syst├¿me. La formule de Balthazar garantit ensuite que l'IPP globale ne d├⌐passe jamais 100% tout en tenant compte de l'impact cumulatif des atteintes multiples sur la capacit├⌐ fonctionnelle.
+
+Γ¥î Γ¥î Γ¥î CAS 1 ├ëCHOU├ë! IPP 36% hors de [40-43%]
+   NOTE: Si le taux est ~20%, c'est qu'il manque les signes neurologiques
+
+================================================================================
+
+≡ƒôï CAS 2: Amputation D5 avec amyotrophie et d├⌐viation
+--------------------------------------------------------------------------------
+≡ƒô¥ Description clinique:
+   "71 ans ; amputation totale du D5 main droite avec luxation m4 m5. Sequelle amyotrophie de la main droite ; cicatrice rectracile . Diviation D2 D3 D4 ; diminution de la force de serrage"
+
+≡ƒöì Analyse...
+
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): 71 ans ; amputation totale du D5 main droite avec luxation m4 m5. Sequelle amyotrophie de la main droite ; cicatrice rectracile . Diviation D2 D3 D4 ; diminution de la force de serrage
+Γ£à AMPUTATION D5 D├ëTECT├ëE (PRIORIT├ë ABSOLUE)
+Γ£à AMPUTATION D4 D├ëTECT├ëE
+Γ£à AMPUTATION D3 D├ëTECT├ëE
+Γ£à AMPUTATION D2 D├ëTECT├ëE
+≡ƒöì DEBUG STEPPAGE D├ëTAILL├ë:
+   - steppageMatch: false
+   - amyotrophieMIMatch: true
+   - fractureL1Match: false
+   - Texte analys├⌐: 71 ans ; amputation totale du D5 main droite avec luxation m4 m5. Sequelle amyotrophie de la main droite ; cicatrice rectracile . Diviation D2 D3 D4 ; diminution de la force de serrage
+Γ¥î STEPPAGE NON D├ëTECT├ë - Conditions non remplies
+≡ƒöì DEBUG D├ëVIATION:
+   - deviationMatch: true
+   - mainContext: true
+   - Recherche dans: diviation NON trouv├⌐
+Γ£à D├ëVIATION DOIGTS D├ëTECT├ëE: D5 D2 D3 D4
+≡ƒöì [V3.3.155] S├⌐quelles d├⌐tect├⌐es: 9 [
+  "Amputation de l'auriculaire",
+  "Amputation de l'annulaire",
+  'Amputation du m├⌐dius',
+  "Amputation de l'index",
+  'D├⌐viation multiple des doigts D5 D2 D3 D4',
+  'Amyotrophie de la main droite',
+  'Luxation m4-m5 (m├⌐tacarpe)',
+  'D├⌐viation des doigts D5 D2 D3 D4',
+  'Diminution de la force de serrage (d├⌐ficit pr├⌐hension)'
+]
+ΓÜá∩╕Å POLYTRAUMATISME D├ëTECT├ë: 9 s├⌐quelle(s)
+≡ƒôÜ TROUV├ë DANS BAR├êME: "Amputation de l'auriculaire" ΓåÆ "Amputation de l'auriculaire - D├⌐sarticulation m├⌐tacarpo-phalangienne" (10-10%)
+≡ƒôÜ TROUV├ë DANS BAR├êME: "Amputation de l'annulaire" ΓåÆ "Amputation de l'annulaire - D├⌐sarticulation m├⌐tacarpo-phalangienne" (10-10%)
+≡ƒôÜ TROUV├ë DANS BAR├êME: "Amputation du m├⌐dius" ΓåÆ "Amputation du m├⌐dius - D├⌐sarticulation m├⌐tacarpo-phalangienne" (12-12%)
+≡ƒôÜ TROUV├ë DANS BAR├êME: "Amputation de l'index" ΓåÆ "Amputation de l'index - D├⌐sarticulation m├⌐tacarpo-phalangienne" (15-15%)
+≡ƒôÜ TROUV├ë DANS BAR├êME: "D├⌐viation des doigts D5 D2 D3 D4" ΓåÆ "Paupi├¿res - D├⌐viation des bords palp├⌐braux (entropion, ectropion, cicatrices vicieuses)" (5-20%)
+≡ƒöä REGROUPEMENT PAR SYST├êME: [ 'MEMBRE_SUPERIEUR: 30%' ]
+≡ƒº« CALCUL BALTHAZAR (PAR SYST├êME): [ 'MEMBRE_SUPERIEUR: 30%' ]
+≡ƒôè IPP GLOBAL CUMUL├ë: 30%
+Γ£à R├⌐sultat:
+   Type: proposal
+   Rubrique: Polytraumatisme - 1 syst├¿me atteint
+   IPP: 30-30%
+   Justification: <strong>≡ƒÅÑ POLYTRAUMATISME - CALCUL IPP (Bar├¿me 1967)</strong><br><br><strong>≡ƒôï 9 s├⌐quelles post-traumatiques regroup├⌐es en 1 syst├¿mes anatomiques :</strong><br><br><strong>A. SYST├êME MEMBRE SUPERIEUR</strong> ΓåÆ <span style="color: #d32f2f; font-weight: bold;">30% IPP</span><br>   Γöö Membre sup├⌐rieur DOMINANT : Polytraumatisme main majeur - Amputation D5 + luxation m├⌐tacarpes + amyotrophie + d├⌐viation doigts + limitation fonctionnelle globale ΓåÆ IPP 25-35% (main s├⌐rieusement handicap├⌐e) - Bar├¿me: "Amputation de l'auriculaire - D├⌐sarticulation m├⌐tacarpo-phalangienne" (10-10%)<br>   Γöö S├⌐quelles regroup├⌐es :<br>      ΓÇó Amputation de l'auriculaire<br>      ΓÇó Amputation de l'annulaire<br>      ΓÇó Amputation du m├⌐dius<br>      ΓÇó Amputation de l'index<br>      ΓÇó D├⌐viation multiple des doigts D5 D2 D3 D4<br>      ΓÇó Amyotrophie de la main droite<br>      ΓÇó Luxation m4-m5 (m├⌐tacarpe)<br>      ΓÇó D├⌐viation des doigts D5 D2 D3 D4<br>      ΓÇó Diminution de la force de serrage (d├⌐ficit pr├⌐hension)<br><br><strong>≡ƒº« CALCUL DU CUMUL (Formule de Balthazar - Bar├¿me 1967) :</strong><br><em>Principe : Les s├⌐quelles d'un m├¬me syst├¿me anatomique sont regroup├⌐es en UN SEUL taux.</em><br><em>Le cumul s'applique ensuite entre les SYST├êMES (pas entre s├⌐quelles individuelles).</em><br><br>La formule de cumul : <code>T = 100 - [(100-TΓéü) ├ù (100-TΓéé) ├ù (100-TΓéâ) ├ù ... / 100^(n-1)]</code><br><br>1. Syst├¿me 1 (MEMBRE_SUPERIEUR): 30% ΓåÆ Capacit├⌐ restante = 100.0 ├ù (100-30)/100 = 70.0%<br><br><strong>≡ƒôè R├ëSULTAT FINAL :</strong><br><div style="background: #fff3e0; border-left: 4px solid #ff9800; padding: 12px; margin: 8px 0;"><strong style="font-size: 18px; color: #e65100;">IPP GLOBAL CUMUL├ë = 30%</strong><br><span style="font-size: 14px; color: #666;">Taux d'Incapacit├⌐ Permanente Partielle apr├¿s application de la formule de Balthazar (Bar├¿me 1967)</span></div><br><strong>ΓÜû∩╕Å BAR├êME OFFICIEL 1967 :</strong><br>Le cumul des s├⌐quelles respecte le <strong>principe du regroupement par syst├¿me anatomique</strong>. Les s├⌐quelles multiples d'un m├¬me syst├¿me (ex: fracture f├⌐mur + amyotrophie + limitation genou) ne s'additionnent PAS arithm├⌐tiquement mais sont ├⌐valu├⌐es par un TAUX GLOBAL pour ce syst├¿me. La formule de Balthazar garantit ensuite que l'IPP globale ne d├⌐passe jamais 100% tout en tenant compte de l'impact cumulatif des atteintes multiples sur la capacit├⌐ fonctionnelle.
+
+Γ£à Γ£à Γ£à CAS 2 R├ëUSSI! IPP 30% dans [28-30%]
+
+================================================================================
+
+≡ƒÅü TEST TERMIN├ë
+
+

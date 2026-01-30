@@ -8749,16 +8749,13 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             negativeContext: /SPE|externe/i
         },
         // 🆕 V3.3.165-169: FRACTURE LOMBAIRE + SÉQUELLES NEUROLOGIQUES (steppage + amyotrophie)
-        // CORRECTION V3.3.169: Évaluation COMPLÈTE RACHIS + MEMBRE INFÉRIEUR
+        // CORRECTION V3.3.171 FINALE: Proposer UNE SEULE rubrique rachis AVEC neurologie (40% minimum)
         {
             pattern: /fracture[\s-]?luxation.*(?:L\d|lombaire)|(?:L\d|lombaire).*fracture[\s-]?luxation/i,
             context: /steppage|amyotrophie.*(?:jambe|membre.*inf[eé]rieur|cuisse)|pied.*tomb[eé]?|marche.*avec.*steppage|releveur.*pied/i,
             searchTerms: [
-                // RACHIS: Fracture L1 + raideur post-chirurgicale
-                'Séquelles de fracture/luxation du rachis lombaire - Avec lésion neurologique légère',
-                // MEMBRE INFÉRIEUR: Amyotrophie + steppage
-                'Amyotrophie musculaire du membre inférieur',
-                'Steppage et déficit du releveur du pied (L4-L5)'
+                // PRIORITÉ: RACHIS AVEC NEUROLOGIE (IPP 20-35% qui se cumule avec autres lésions → total 40-45%)
+                'Séquelles de fracture/luxation du rachis lombaire - Avec lésion neurologique légère'
             ],
             priority: 1100,
             negativeContext: /sans.*s[eé]quelle.*neurologique/i
@@ -12226,15 +12223,28 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
     }
     
     // Lombalgie + Fracture vertébrale lombaire (L1-L5)
+    // 🆕 V3.3.171 ULTRA-FINAL: Si steppage+amyotrophie présents → Fracture AVEC neurologie
+    const hasNeurologicalSigns = steppageMatch && (amyotrophieMIMatch || /amyotrophie/i.test(text));
     if (/lombalgie|douleur.*lombaire|syndrome.*lombaire|raideur.*lombaire|fracture.*(?:vertébr|tassement|corps).*lombaire|fracture.*l[1-5]|tassement.*l[1-5]|fracture.*(?:l1|l2|l3|l4|l5)/i.test(text)) {
         // Extraire le niveau vertébral si présent
         const levelMatch = text.match(/l[1-5]/i)?.[0]?.toUpperCase() || 'lombaire';
         const isTassement = /tassement|corps.*antérieur|grade\s*1/i.test(text);
-        detectedSequelae.push({
-            name: `Lombalgie chronique / Fracture ${isTassement ? 'tassement ' : ''}vertébrale ${levelMatch}`,
-            keywords: ['lombalgie', 'lombaire', 'fracture', 'tassement', levelMatch],
-            context: text.match(/(lombalgie|fracture.*(?:lombaire|l[1-5])|tassement.*l[1-5])[^.;]*/i)?.[0] || ''
-        });
+        
+        if (hasNeurologicalSigns) {
+            // PRIORITÉ: Fracture/Luxation rachis AVEC neurologie (20-35% → cumul final 40-45%)
+            detectedSequelae.push({
+                name: `Séquelles de fracture/luxation du rachis lombaire - Avec lésion neurologique légère`,
+                keywords: ['fracture', 'luxation', 'lombaire', 'neurologique', 'steppage', 'amyotrophie', levelMatch],
+                context: text.match(/(fracture.*l[1-5]|lombalgie)[^.;]*/i)?.[0] || ''
+            });
+        } else {
+            // SANS neurologie: lombalgie simple
+            detectedSequelae.push({
+                name: `Lombalgie chronique / Fracture ${isTassement ? 'tassement ' : ''}vertébrale ${levelMatch}`,
+                keywords: ['lombalgie', 'lombaire', 'fracture', 'tassement', levelMatch],
+                context: text.match(/(lombalgie|fracture.*(?:lombaire|l[1-5])|tassement.*l[1-5])[^.;]*/i)?.[0] || ''
+            });
+        }
     }
     
     // Hernie discale + Sciatique
@@ -12828,7 +12838,31 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
                 for (const injury of subcategory.injuries) {
                     let score = 0;
                     
-                    // Matching par nom exact ou searchTerms
+                    // 🔥 V3.3.171 ULTRA-FINAL: FILTRER "AVEC neurologie" vs "SANS neurologie" STRICTEMENT
+                    const seqHasAvec = /\bavec\s+l[eé]sion/i.test(sequellaName);
+                    const seqHasSans = /\bsans\s+l[eé]sion/i.test(sequellaName);
+                    const injuryHasAvec = /\bavec\s+l[eé]sion/i.test(injury.name);
+                    const injuryHasSans = /\bsans\s+l[eé]sion/i.test(injury.name);
+                    
+                    // Éliminer si conflit AVEC/SANS neurologie
+                    if ((seqHasAvec && injuryHasSans) || (seqHasSans && injuryHasAvec)) {
+                        continue; // SKIP cette rubrique
+                    }
+                    
+                    // 🎯 PRIORITÉ ABSOLUE: Match EXACT par nom
+                    const seqNameLower = sequellaName.toLowerCase().trim();
+                    const injuryNameLower = injury.name.toLowerCase().trim();
+                    if (seqNameLower === injuryNameLower) {
+                        // Match PARFAIT → Retourner immédiatement sans chercher d'autres rubriques
+                        return {
+                            name: injury.name,
+                            rate: Array.isArray(injury.rate) ? injury.rate : [injury.rate, injury.rate],
+                            article: `${category.name} > ${subcategory.name}`,
+                            rateCriteria: injury.rateCriteria
+                        };
+                    }
+                    
+                    // Matching par nom partiel ou searchTerms
                     const nameMatch = injury.name.toLowerCase().includes(sequellaName.toLowerCase()) || 
                                      sequellaName.toLowerCase().includes(injury.name.toLowerCase());
                     const searchTermMatch = injury.searchTerms?.some(term => {
@@ -13019,6 +13053,11 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
                     if (isFractureLuxation && isOperated && hasRaideur) {
                         rate = 20;
                         explanation = 'Rachis LOMBAIRE : Fracture-luxation opérée (instabilité rachidienne) avec raideur résiduelle → IPP 18-25% (séquelle majeure)';
+                    }
+                    // 🔥 V3.3.171 ULTIME: Fracture lombaire AVEC lésion neurologique légère (steppage/amyotrophie)
+                    else if (/avec\s+l[eé]sion\s+neurologique/i.test(seq.name)) {
+                        rate = 20;
+                        explanation = 'Rachis LOMBAIRE : Fracture/luxation avec lésion neurologique légère (steppage, amyotrophie) → IPP 20-35% (atteinte neurologique)';
                     }
                     // Brachialgie cervicale
                     else if (hasBrachialgie || (hasParesthesies && /cervicalgie/i.test(text))) {
@@ -13311,11 +13350,12 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
                 if (baremeEntry) {
                     console.log(`📚 TROUVÉ DANS BARÈME: "${seq.name}" → "${baremeEntry.name}" (${baremeEntry.rate[0]}-${baremeEntry.rate[1]}%)`);
                     
-                    // 🎯 V3.3.160: NE PAS écraser le taux déjà calculé par la logique clinique
-                    // Le taux clinique (8-15%) est PRIORITAIRE sur le taux barème brut
-                    // On ajoute juste la référence barème pour justification
-                    if (rate > systemGroups[system].rate) {
-                        systemGroups[system].rate = rate; // Utiliser le taux clinique (pas le barème brut)
+                    // 🎯 V3.3.171 ULTIME-FIX: UTILISER le taux du barème (min ou mid) si trouvé
+                    const baremeTaux = baremeEntry.rate[0]; // Utiliser le minimum de la fourchette
+                    const tauxFinal = Math.max(rate, baremeTaux); // Prendre le MAX entre clinique et barème
+                    
+                    if (tauxFinal > systemGroups[system].rate) {
+                        systemGroups[system].rate = tauxFinal;
                         systemGroups[system].explanation = `${explanation} - Barème: "${baremeEntry.name}" (${baremeEntry.rate[0]}-${baremeEntry.rate[1]}%)`;
                         systemGroups[system].baremeRef = baremeEntry.article || '';
                     } else if (!systemGroups[system].baremeRef && baremeEntry.article) {
