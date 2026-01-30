@@ -43,7 +43,7 @@ export const App: React.FC = () => {
 
     // Version de l'application
     useEffect(() => {
-        console.log('🏥 Guide du Médecin Conseil - Version V3.3.182 - ENRICHISSEMENT anatomique cal vicieux');
+        console.log('🏥 Guide du Médecin Conseil - Version V3.3.183 - FIX classification MS/MI pour cal vicieux');
         console.log('📅 Build:', new Date().toISOString());
     }, []);
 

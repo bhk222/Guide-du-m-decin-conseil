@@ -13147,6 +13147,13 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
                 
                 // MEMBRE INFÉRIEUR - DIFFÉRENCIATION PIED vs CUISSE/GENOU
                 else if (/fracture.*f[ée]mur|fracture.*tibia|amyotrophie.*(?:quadricipital|globale)|limitation.*(?:flexion|extension).*genou|raccourcissement.*membre|boiterie|fracture.*m[ée]tatarse|[œo]ed[èe]me.*(?:persistant|r[ée]siduel|l[ée]ger)|douleur.*froid|douleur.*mont[ée]e.*escalier|accroupissement.*difficile|d[ée]chirure.*ligament.*genou|[ée]longation.*quadriceps|raideur.*genou|algie.*m[ée]canique|diminution.*force.*musculaire|ost[ée]omy[ée]lite|d[ée]formation.*osseuse|cicatrice.*pathologique|instabilit[ée].*articulaire|ankylose.*articulaire|mat[ée]riel.*ost[ée]osynth[èe]se/i.test(seq.name)) {
+                    // 🔥 V3.3.182: EXCLURE déformations osseuses MEMBRE SUPERIEUR (cubitus/radius/avant-bras)
+                    const isMembreSuperieur = /avant.?bras|radius|cubitus|hum[ée]rus|coude|poignet|main|doigt|[ée]paule/i.test(seq.name + ' ' + seq.context);
+                    if (isMembreSuperieur) {
+                        // Rediriger vers MEMBRE_SUPERIEUR (traitement plus loin)
+                        continue; // Passer à la séquelle suivante
+                    }
+                    
                     system = 'MEMBRE_INFERIEUR';
                     
                     // 🔴 V3.3.162: ANKYLOSE ARTICULAIRE = SÉQUELLE MAJEURE (35-50% IPP)
@@ -13269,7 +13276,7 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
                 }
                 
                 // MEMBRE SUPÉRIEUR (fracture + raideur + paresthésies = 1 seul taux membre)
-                else if (/fracture.*hum[ée]rus|fracture.*clavicule|fracture.*radius|raideur.*[ée]paule|raideur.*coude|raideur.*poignet|parasth[ée]sie.*ulnaire|perte.*force.*pr[ée]hension|amputation.*(?:doigt|auriculaire|annulaire|index|m[ée]dius|D[2345])|amyotrophie.*main|luxation.*m[ée]tacarpe|d[ée]viation.*doigt|enroulement.*main|diminution.*force.*serrage/i.test(seq.name)) {
+                else if (/fracture.*hum[ée]rus|fracture.*clavicule|fracture.*radius|fracture.*cubitus|fracture.*avant.?bras|cal.*vicieux.*(?:cubitus|radius|avant.?bras)|d[ée]formation.*osseuse.*(?:cubitus|radius|avant.?bras)|raideur.*[ée]paule|raideur.*coude|raideur.*poignet|parasth[ée]sie.*ulnaire|perte.*force.*pr[ée]hension|amputation.*(?:doigt|auriculaire|annulaire|index|m[ée]dius|D[2345])|amyotrophie.*main|luxation.*m[ée]tacarpe|d[ée]viation.*doigt|enroulement.*main|diminution.*force.*serrage|limitation.*(?:pronation|supination)/i.test(seq.name)) {
                     system = 'MEMBRE_SUPERIEUR';
                     
                     // 🔴 V3.3.163: POLYTRAUMATISME MAIN (amputation + séquelles multiples)
