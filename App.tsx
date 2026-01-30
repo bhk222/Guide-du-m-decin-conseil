@@ -43,8 +43,7 @@ export const App: React.FC = () => {
 
     // Version de l'application
     useEffect(() => {
-        console.log('🏥 Guide du Médecin Conseil - Version V3.3.176 - DEBUG filtre médical');
-        console.log('🔍 Debug VERBOSE: Logs détaillés steppage et déviation');
+        console.log('🏥 Guide du Médecin Conseil - Version V3.3.177 - PWA réactivée');
         console.log('📅 Build:', new Date().toISOString());
     }, []);
 

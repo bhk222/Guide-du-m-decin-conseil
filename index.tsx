@@ -3,18 +3,18 @@ import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { App } from './App';
 
-// 🔴 SERVICE WORKER DÉSACTIVÉ TEMPORAIREMENT POUR DEBUG
+// ✅ SERVICE WORKER RÉACTIVÉ - PWA avec cache intelligent
 // Register Service Worker for PWA (Offline-First)
-if (false && 'serviceWorker' in navigator) {
+if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
     navigator.serviceWorker.register('/sw.js', { scope: '/' })
       .then(registration => {
         console.log('✅ ServiceWorker enregistré avec succès:', registration.scope);
         
-        // Vérifier les mises à jour toutes les heures
+        // Vérifier les mises à jour toutes les 30 minutes (plus fréquent)
         setInterval(() => {
           registration.update();
-        }, 60 * 60 * 1000);
+        }, 30 * 60 * 1000);
         
         // Vérifier immédiatement s'il y a une mise à jour
         registration.update();

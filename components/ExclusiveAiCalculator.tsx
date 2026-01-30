@@ -464,8 +464,6 @@ export const ExclusiveAiCalculator: React.FC<ExclusiveAiCalculatorProps> = ({
 
     const handleSend = useCallback(async (text: string, isClarification: boolean = false) => {
         const textToSend = text.trim();
-        console.log('🔍 handleSend appelé avec text:', text);
-        console.log('🔍 textToSend après trim:', textToSend);
         if (!textToSend || isLoading) return;
 
         const newUserMessage: ChatMessage = { id: crypto.randomUUID(), role: 'user', text: textToSend };
@@ -590,32 +588,20 @@ export const ExclusiveAiCalculator: React.FC<ExclusiveAiCalculatorProps> = ({
             ? [textToSend]  // Ne pas splitter
             : textToSend.split(/;|\s*\+\s*/i).map(s => s.trim()).filter(Boolean);
         
-        console.log('🔍 initialDescriptions après split:', initialDescriptions);
-        
         // Filtrer les segments pour ne garder que les vraies lésions post-traumatiques
         const medicalDescriptions = initialDescriptions.filter(desc => {
             const normalized = desc.toLowerCase();
             // Exclure si c'est uniquement du contexte
             if (contextKeywords.test(desc) && !/(fracture|luxation|rupture|tassement|entorse|plaie|amputation|brûlure|lésion)/i.test(desc)) {
-                console.log('🔍 EXCLU (contexte):', desc);
                 return false;
             }
             // Exclure si c'est un état antérieur explicite
             if (preexistingKeywords.test(desc)) {
-                console.log('🔍 EXCLU (antécédent):', desc);
                 return false;
             }
             // Inclure si contient des termes médicaux de lésion ou séquelles neurologiques
-            const isIncluded = /(fracture|luxation|rupture|tassement|entorse|plaie|amputation|brûlure|lésion|douleur|raideur|ankylose|limitation|qui\s+presente|presente|steppage|amyotrophie|séquelle|sequelle|marche|paralysie)/i.test(desc);
-            if (!isIncluded) {
-                console.log('🔍 EXCLU (pas médical):', desc);
-            } else {
-                console.log('🔍 INCLUS:', desc);
-            }
-            return isIncluded;
+            return /(fracture|luxation|rupture|tassement|entorse|plaie|amputation|brûlure|lésion|douleur|raideur|ankylose|limitation|qui\s+presente|presente|steppage|amyotrophie|séquelle|sequelle|marche|paralysie)/i.test(desc);
         });
-        
-        console.log('🔍 medicalDescriptions après filtre:', medicalDescriptions);
         
         // Si aucune lésion médicale trouvée, envoyer tout à l'IA pour analyse complète
         if (medicalDescriptions.length === 0) {
@@ -653,7 +639,6 @@ export const ExclusiveAiCalculator: React.FC<ExclusiveAiCalculatorProps> = ({
         }
 
         if (descriptions.length > 1) {
-            console.log('🔍 SPLITTING DÉTECTÉ:', descriptions);
             analysisQueueRef.current = descriptions.slice(1);
             setIsLoading(true);
             await new Promise(res => setTimeout(res, 400));
@@ -665,7 +650,6 @@ export const ExclusiveAiCalculator: React.FC<ExclusiveAiCalculatorProps> = ({
             setIsLoading(false); // ✅ Désactivation AVANT l'appel pour laisser la fonction gérer son propre loading
             setTimeout(() => processAndDisplayAnalysis(descriptions[0]), 100);
         } else {
-            console.log('🔍 PAS DE SPLITTING - description unique:', descriptions[0] || textToSend);
             processAndDisplayAnalysis(descriptions[0] || textToSend);
         }
     }, [isLoading, processAndDisplayAnalysis, selectedInjuries, totalRate, hasPreexisting, messages, onAddInjury, processQueueOrPrompt]);
