@@ -3224,7 +3224,7 @@ const analyzeAdvancedClinicalContext = (text: string): {
     
     const hasArthrose = arthrosePatterns.some(p => normalized.includes(p));
     
-    // Signes neurologiques (incluant signes radiculaires)
+    // Signes neurologiques (incluant signes radiculaires) + Signes déficitaires manifestes
     const neuroPatterns = [
         'paresthesie',
         'hypoesthesie',
@@ -3246,7 +3246,26 @@ const analyzeAdvancedClinicalContext = (text: string): {
         'hernie discale',
         'discopathie',
         'lasegue',
-        'signe de lasegue'
+        'signe de lasegue',
+        // 🆕 V3.3.168: AJOUT SIGNES DÉFICITAIRES MANIFESTES (steppage, amyotrophie)
+        'steppage',
+        'pied qui tombe',
+        'marche avec steppage',
+        'releveur pied',
+        'amyotrophie',
+        'atrophie musculaire',
+        'fonte musculaire',
+        'déviation doigts',
+        'déviation d2',
+        'déviation d3',
+        'déviation d4',
+        'griffe main',
+        'main tombante',
+        'claw hand',
+        'main en griffe',
+        'nerf cubital',
+        'nerf median',
+        'nerf radial'
     ];
     
     const hasNeurologicalSigns = neuroPatterns.some(p => normalized.includes(p));
@@ -7865,6 +7884,27 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             priority: 10700,
             negativeContext: /sans.*s[eé]quelle/i
         },
+        
+        // 🆕 V3.3.169: POLYTRAUMATISME NUMÉRIQUE - AMPUTATION D5 + LUXATIONS M4-M5 + NEUROPATHIE
+        // Pattern: Amputation auriculaire (D5) + luxations métacarpienne + amyotrophie + déviation doigts
+        // = CUMUL INTRA-MAIN = Evaluation complète requise
+        {
+            pattern: /amputation.*(?:D5|auriculaire|petit\s+doigt).*luxation.*(?:M4|M5|m[eé]tacarpe)|luxation.*(?:M4|M5).*amputation.*(?:D5|auriculaire)/i,
+            context: /amyotrophie.*main|d[eé]viation.*(?:D2|D3|D4)|griffe|diminution.*force.*serrage|cicatrice.*r[eé]tractile/i,
+            searchTerms: [
+                // Amputation D5
+                'Amputation de l\'auriculaire - Désarticulation métacarpienne (Dominante)',
+                // Luxations M4-M5
+                'Luxation métacarpienne avec limitation (Dominante)',
+                // Amyotrophie main (signature nerf cubital)
+                'Amyotrophie main (Dominante)',
+                // Cumul polyséquelles mains
+                '__CUMUL_POLYSEQUEL_NUMERIQUE_D5_LUX_M4M5_AMYO__'
+            ],
+            priority: 1200,  // Très haute priorité pour ce cumul rare et complexe
+            negativeContext: /sans.*s[eé]quelle|bien.*consolid[eée]/i
+        },
+        
         // 🆕 V3.3.83: Amputation P2 seule (détection "P2 D2/D3/D4/D5" ou "phalange moyenne seule")
         {
             pattern: /(?:amputation|perte).*(?:p2|phalange\s+moyenne).*(?:index|d2)(?!\s*(?:et|avec|p3|d3))/i,
@@ -8712,13 +8752,21 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             priority: 98,
             negativeContext: /SPE|externe/i
         },
-        // 🆕 V3.3.165: FRACTURE LOMBAIRE + SÉQUELLES NEUROLOGIQUES (steppage + amyotrophie)
+        // 🆕 V3.3.165-169: FRACTURE LOMBAIRE + SÉQUELLES NEUROLOGIQUES (steppage + amyotrophie)
+        // CORRECTION V3.3.169: Évaluation COMPLÈTE RACHIS + MEMBRE INFÉRIEUR
         {
             pattern: /fracture[\s-]?luxation.*(?:L\d|lombaire)|(?:L\d|lombaire).*fracture[\s-]?luxation/i,
             context: /steppage|amyotrophie.*(?:jambe|membre.*inf[eé]rieur|cuisse)|pied.*tomb[eé]?|marche.*avec.*steppage|releveur.*pied/i,
             searchTerms: [
-                'Fracture-luxation vertébrale lombaire avec complications neurologiques',
-                'Paralysie du nerf sciatique poplité externe (SPE) avec steppage'
+                // RACHIS: Fracture L1 + raideur post-chirurgicale
+                'Séquelles de fracture/luxation du rachis lombaire - Avec lésion neurologique légère',
+                'Fracture vertébrale lombaire - Consolidée avec raideur et douleurs chroniques',
+                // MEMBRE INFÉRIEUR: Amyotrophie + steppage
+                'Amyotrophie musculaire du membre inférieur',
+                'Paralysie du nerf sciatique poplité externe (SPE) avec steppage',
+                'Steppage et déficit du releveur du pied (L4-L5)',
+                // CUMUL: Balthazar pour polytraumatisme
+                '__CUMUL_RACHIS_MEMBRE_INFERIEUR_L1_STEPPAGE__'
             ],
             priority: 1100,
             negativeContext: /sans.*s[eé]quelle.*neurologique/i
