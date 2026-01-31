@@ -8320,11 +8320,11 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
         },
         
         // 🆕 V3.3.155: Amputation transcarpienne / Désarticulation poignet (ULTRA HAUTE priorité)
-        // 🔧 V3.3.156: Priority 15000 empêche autres détections (fracture radius priority 88 bloquée par negativeContext)
+        // 🔧 V3.3.265: Correction barème - Utiliser "Perte totale de la main" (68-70%) au lieu de "Désarticulation poignet" (55-60%)
         {
             pattern: /amputation.*transcarpienne|transcarpienne|d[eé]sarticulation.*poignet|amputation.*poignet|perte.*(?:main|mains).*(?:niveau|au).*poignet/i,
             context: /main|membre.*sup[eé]rieur|poignet|avant.*bras/i,
-            searchTerms: ["Désarticulation du poignet"],  // ✅ V3.3.155: Amputation majeure [55-60% dominante, 45-50% non-dominante]
+            searchTerms: ["Perte totale de la main - Par désarticulation du poignet"],  // ✅ V3.3.265: Barème officiel 68-70% (main dominante)
             priority: 15000,  // ULTRA HAUTE priorité - amputation majeure, bloque fracture radius (priority 88)
             negativeContext: /(?:uniquement|seulement|simple).*fracture.*isol[eé]e/i  // Seulement si texte précise explicitement "uniquement fracture"
         },
