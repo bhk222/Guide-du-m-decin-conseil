@@ -13022,12 +13022,9 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
     const isCumulDetected = cumulDetection.isCumul && cumulDetection.lesionCount >= 2;
     console.log('🔍 V3.3.201k: isCumulDetected =', isCumulDetected, ', lesionCount =', cumulDetection.lesionCount);
     
-    if (detectedSequelae.length >= 1) {
-        // 🆕 V3.3.201j: Si CUMUL détecté, SKIP le regroupement par système
-        if (isCumulDetected) {
-            console.log('⚠️ V3.3.201j: CUMUL DÉTECTÉ → SKIP regroupement par système, passage direct à extraction lésions individuelles');
-            // Ne rien faire, laisser le code continuer jusqu'à l'extraction cumul (ligne ~13906)
-        } else {
+    // 🆕 V3.3.201P: Si CUMUL détecté, SKIP COMPLÈTEMENT le regroupement par système
+    // Passer directement à l'extraction des lésions individuelles (ligne ~13920)
+    if (detectedSequelae.length >= 1 && !isCumulDetected) {
         // 🆕 V3.3.158: EXCEPTION TC NEUROLOGIQUES - Ne pas proposer dialogue si TC avec séquelles neurologiques multiples
         // Pattern: Chute OU TC + perte connaissance/hospitalisation + troubles cognitifs/hémiparésie/vertiges/céphalées
         // → Laisser passer aux expert rules qui détecteront "Commotion cérébro-spinale prolongée" automatiquement
@@ -13904,6 +13901,8 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
             text: `J'ai bien noté le contexte patient : ${profession ? `profession ${profession}` : ''}${age ? `, ${age} ans` : ''}${gender ? ` (${gender})` : ''}${preexisting.length > 0 ? `.<br><br>⚠️ <strong>Antécédents médicaux détectés</strong> (états AVANT l'accident du travail) : ${preexisting.join(', ')}. Ces antécédents ne seront PAS évalués comme lésions post-traumatiques` : ''}.<br><br>Veuillez maintenant décrire les <strong>séquelles post-traumatiques consolidées liées à l'accident du travail</strong> à évaluer (ex: "fracture consolidée du fémur avec boiterie", "tassement vertébral L3 avec lombalgie chronique").`
         };
     }
+    
+    } // 🆕 V3.3.201P: FIN du bloc grouping (sauté si isCumulDetected = true)
 
     // Étape 3: Informer sur les états antérieurs détectés si présents + Estimation IPP
     let contextInfo = '';
