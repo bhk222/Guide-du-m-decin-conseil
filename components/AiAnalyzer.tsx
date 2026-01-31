@@ -13002,14 +13002,12 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
         return null;
     };
     
-    // 🆕 V3.3.201i: Si CUMUL détecté, SKIP le regroupement par système (early skip pattern)
-    const shouldSkipGrouping = isCumulDetected && cumulDetection.lesionCount >= 2;
-    
-    if (shouldSkipGrouping) {
-        console.log('⚠️ V3.3.201i: CUMUL DÉTECTÉ → SKIP regroupement par système, passage direct à extraction lésions individuelles');
-    }
-    
-    if (detectedSequelae.length >= 1 && !shouldSkipGrouping) {
+    if (detectedSequelae.length >= 1) {
+        // 🆕 V3.3.201j: Si CUMUL détecté, SKIP le regroupement par système
+        if (isCumulDetected) {
+            console.log('⚠️ V3.3.201j: CUMUL DÉTECTÉ → SKIP regroupement par système, passage direct à extraction lésions individuelles');
+            // Ne rien faire, laisser le code continuer jusqu'à l'extraction cumul (ligne ~13906)
+        } else {
         // 🆕 V3.3.158: EXCEPTION TC NEUROLOGIQUES - Ne pas proposer dialogue si TC avec séquelles neurologiques multiples
         // Pattern: Chute OU TC + perte connaissance/hospitalisation + troubles cognitifs/hémiparésie/vertiges/céphalées
         // → Laisser passer aux expert rules qui détecteront "Commotion cérébro-spinale prolongée" automatiquement
@@ -13586,6 +13584,7 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
                 }
             };
         }
+        } // 🆕 V3.3.201j: FIN du bloc else (if isCumulDetected)
     }
     
     // Si une seule séquelle, continuer l'analyse normale
@@ -13817,6 +13816,11 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
     // Étape 0A: Détection cumuls de lésions (Balthazar) - mais continuer l'analyse normale
     const cumulDetection = detectMultipleLesions(text);
     const isCumulDetected = cumulDetection.isCumul && cumulDetection.lesionCount >= 2;
+    
+    // 🆕 V3.3.201j: IMPORTANT - Si cumul détecté, le regroupement par système doit être SKIPPÉ
+    // Cette vérification se fait à la ligne ~13006 dans le bloc "if (detectedSequelae.length >= 1)"
+    // On ne déclare PAS shouldSkipGrouping ici pour éviter erreur TDZ
+    console.log('🔍 V3.3.201j: isCumulDetected =', isCumulDetected, ', lesionCount =', cumulDetection.lesionCount);
     
     // Étape 0B: Détection lésion primaire + séquelles fonctionnelles
     const lesionAnalysis = detectPrimaryLesionWithSequelae(text);
