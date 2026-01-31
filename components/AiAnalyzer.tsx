@@ -13047,6 +13047,12 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
             // Les séquelles d'un même système anatomique ne se cumulent PAS individuellement
             // On attribue un taux GLOBAL par système en fonction de l'atteinte la plus importante
             
+            // 🆕 V3.3.201P: SKIP le grouping SI CUMUL détecté (l'extraction se fera après)
+            if (isCumulDetected) {
+                console.log('⚠️ V3.3.201P: CUMUL DÉTECTÉ → SKIP regroupement système, attendre extraction lésions individuelles');
+                // Laisser systemGroups vide pour forcer le passage à l'extraction (ligne ~13920)
+            } else {
+            
             const systemGroups: { [key: string]: { sequelae: Array<{name: string; context: string}>; rate: number; explanation: string } } = {};
             
             for (const seq of detectedSequelae) {
@@ -13601,7 +13607,10 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
                 }
             };
         }
-        } // 🆕 V3.3.201j: FIN du bloc else (if isCumulDetected)
+        
+        } // 🆕 V3.3.201P: FIN du bloc else (skip grouping si isCumulDetected)
+        
+        } // FIN du bloc else (V3.3.158 - non-TC neurologique)
     }
     
     // Si une seule séquelle, continuer l'analyse normale
