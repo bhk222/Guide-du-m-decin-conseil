@@ -11849,8 +11849,10 @@ const extractIndividualLesions = (text: string): string[] => {
     console.log('  algiesMatch:', algiesMatch ? algiesMatch[0] : 'NULL');
     console.log('  deficitForceMatch:', deficitForceMatch ? deficitForceMatch[0] : 'NULL');
     
-    // V3.3.201: Détecter si au moins 3 composantes présentes (fracture + ligament + muscle OU séquelle fonctionnelle)
+    // V3.3.201c: Détecter si au moins 3 composantes présentes (fracture + ligament + muscle OU séquelle fonctionnelle)
     const componentCount = [fractureMatch, ligamentMatch, muscleMatch, raideurMatch, algiesMatch, deficitForceMatch].filter(m => m).length;
+    console.log('  componentCount:', componentCount);
+    console.log('  Condition activée:', componentCount >= 3 && fractureMatch && (ligamentMatch || muscleMatch));
     
     if (componentCount >= 3 && fractureMatch && (ligamentMatch || muscleMatch)) {
         // V3.3.201: Polytraumatisme membre détecté - extraire TOUTES les lésions séparément
