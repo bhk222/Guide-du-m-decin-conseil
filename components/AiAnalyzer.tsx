@@ -13003,10 +13003,10 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
     };
     
     if (detectedSequelae.length >= 1) {
-        // 🆕 V3.3.201f: Si CUMUL détecté, SAUTER le regroupement par système et aller directement à l'extraction des lésions individuelles
+        // 🆕 V3.3.201h: Si CUMUL détecté, SAUTER le regroupement par système et aller directement à l'extraction des lésions individuelles
         // Le regroupement par système donne un taux global (ex: 15%) alors que le cumul doit analyser chaque lésion séparément
         if (isCumulDetected && cumulDetection.lesionCount >= 2) {
-            console.log('⚠️ V3.3.201f: CUMUL DÉTECTÉ → SKIP regroupement par système, passage direct à extraction lésions individuelles');
+            console.log('⚠️ V3.3.201h: CUMUL DÉTECTÉ → SKIP regroupement par système, passage direct à extraction lésions individuelles');
             // Ne rien faire ici, laisser le code continuer jusqu'à la section extraction cumul (ligne ~13901)
         } else {
             // 🆕 V3.3.158: EXCEPTION TC NEUROLOGIQUES - Ne pas proposer dialogue si TC avec séquelles neurologiques multiples
