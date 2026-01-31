@@ -11847,7 +11847,8 @@ const extractIndividualLesions = (text: string): string[] => {
     // V3.3.201L: Utiliser cleanedText (sans "séquelles potentielles" hypothétiques)
     const fractureMatch = cleanedText.match(/fracture\s+(?:non\s+)?(?:deplacee?)?\s*(?:du|de\s+la)?\s*(?:tiers)?\s*(?:distal|proximal|moyen)?\s*(?:du|de\s+la)?\s*(?:tibia|femur|humerus|genou|radius|cubitus)\s*(?:droit|gauche)?/i);
     const ligamentMatch = cleanedText.match(/(?:dechirure|lesion|rupture)\s+(?:partielle?|complete?|totale?)?\s*(?:du|de\s+la|des)?\s*(?:ligament\s+(?:collateral|croise|lateral|lca|lcp)|tendons?\s+extenseurs?)\s*(?:medial|interne|externe|anterieur|posterieur|poignet|main)?\s*(?:du|de\s+la)?\s*(?:genou|coude|poignet)?\s*(?:droit|gauche)?/i);
-    const muscleMatch = cleanedText.match(/(?:elongation|dechirure|rupture)\s+(?:musculaire?)?\s*(?:du|de\s+la?|l)?\s*(?:quadriceps|epaule)/i);
+    // 🆕 V3.3.201M: Améliorer Pattern 0B - Capturer "élongation musculaire DE L'épaule"
+    const muscleMatch = cleanedText.match(/(?:elongation|dechirure|rupture)\s+(?:musculaire?)?\s*(?:du|de\s+la?|de\s+l['']?|l['']?)?\s*(?:muscle|quadriceps|epaule|triceps|biceps|deltoid)\s*(?:gauche|droit)?/i);
     
     // V3.3.201L: Séquelles fonctionnelles - NE DOIVENT PAS être extraites car hypothétiques (déjà exclues par nettoyage)
     const raideurMatch = cleanedText.match(/raideur\s+(?:articulaire|r[ée]siduelle)?\s*(?:du|de\s+la)?\s*(?:genou|hanche|coude|poignet|cheville)/i);
