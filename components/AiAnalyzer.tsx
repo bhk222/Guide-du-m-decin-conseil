@@ -11676,13 +11676,26 @@ const extractIndividualLesions = (text: string): string[] => {
     
     console.log('🔍 extractIndividualLesions - texte d\'entrée:', text);
     
+    // 🆕 V3.3.201L: NETTOYAGE - Exclure section "séquelles potentielles" (hypothétiques futures)
+    // Pattern: "Sur le plan évolutif, les séquelles potentielles comprennent..." = FUTUR, pas ACTUEL
+    // Ces séquelles ne doivent PAS être évaluées comme lésions post-consolidation
+    let cleanedText = normalized;
+    const sequelasPotentiellesPattern = /(?:sur\s+le\s+plan\s+[eé]volutif|plan\s+[eé]volutif)[,.\s]*(?:les\s+)?s[eé]quelles?\s+(?:potentielles?|possibles?|envisageables?).*$/i;
+    if (sequelasPotentiellesPattern.test(cleanedText)) {
+        const beforePotentielles = cleanedText.split(sequelasPotentiellesPattern)[0];
+        console.log('🧹 V3.3.201L: Section "séquelles potentielles" EXCLUE (hypothétiques futures, non consolidées)');
+        console.log('   Texte original:', cleanedText.substring(0, 200));
+        console.log('   Texte nettoyé:', beforePotentielles.substring(0, 200));
+        cleanedText = beforePotentielles;
+    }
+    
     // 🆕 Pattern 0C: Fracture + séquelle pseudarthrose (V3.3.142) - PRIORITÉ TRÈS HAUTE
     // Ex: "fracture diaphysaire du fémur ; séquelle pseudarthrose"
     // Ex: "fracture col fémoral avec pseudarthrose comme séquelle"
     // CORRECTION: Accepter ";" ou "avec" ou "et" comme séparateurs + "séquelle" optionnel
     const fractureEtPseudarthrosePattern = /(fracture[^;.]*?(?:femur|femoral|diaphysaire|col|trochanter|plateau|pilon|malleolaire|olecrane|tibia|radius|humerus)?[^;.]*?)[\s;,]+(?:sequelle|complication|avec|et)?\s*(pseudarthrose[^;.]*)/i;
-    if (fractureEtPseudarthrosePattern.test(normalized)) {
-        const match = normalized.match(fractureEtPseudarthrosePattern);
+    if (fractureEtPseudarthrosePattern.test(cleanedText)) {
+        const match = cleanedText.match(fractureEtPseudarthrosePattern);
         if (match) {
             const lesionFracture = match[1].trim();
             const lesionPseudarthrose = match[2].trim();
@@ -11744,10 +11757,10 @@ const extractIndividualLesions = (text: string): string[] => {
     // Ex: "Accident voiture avec polytraumatisme. Fracture bassin et lésion nerf sciatique"
     // OBJECTIF: Forcer l'extraction de DEUX lésions distinctes
     const bassinSciatiqueCumulPattern = /(fracture.*bassin[^.]+(?:cadre|obturateur|disjonction|sacro|iliaque|pubis|pubienne|pelvien)[^.]*?)(?:[.,;]?\s+(?:et|avec|associ[eé]e?|ainsi\s+qu['']une?)\s+)(l[eé]sion.*nerf.*sciatique|nerf.*sciatique|sciatique|steppage|d[eé]ficit.*moteur.*pied|paralysie.*nerf)/i;
-    const hasBassinSciatiqueCumul = /fracture.*bassin|bassin.*fracture|fracture.*complexe.*bassin|disjonction.*sacro|cadre.*obturateur/i.test(normalized) && 
-                                    /sciatique|nerf.*sciatique|spe|steppage|d[eé]ficit.*moteur.*pied|paralysie.*nerf/i.test(normalized);
-    if (bassinSciatiqueCumulPattern.test(normalized) && hasBassinSciatiqueCumul) {
-        const match = normalized.match(bassinSciatiqueCumulPattern);
+    const hasBassinSciatiqueCumul = /fracture.*bassin|bassin.*fracture|fracture.*complexe.*bassin|disjonction.*sacro|cadre.*obturateur/i.test(cleanedText) && 
+                                    /sciatique|nerf.*sciatique|spe|steppage|d[eé]ficit.*moteur.*pied|paralysie.*nerf/i.test(cleanedText);
+    if (bassinSciatiqueCumulPattern.test(cleanedText) && hasBassinSciatiqueCumul) {
+        const match = cleanedText.match(bassinSciatiqueCumulPattern);
         if (match) {
             const lesionBassin = match[1].trim();
             const lesionSciatique = match[3].trim();
@@ -11826,22 +11839,22 @@ const extractIndividualLesions = (text: string): string[] => {
         if (lesions.length >= 2) return lesions;
     }
     
-    // Pattern 0B: Fracture + déchirure ligament + élongation muscle (CAS 2) - AMÉLIORÉ V3.3.201
+    // Pattern 0B: Fracture + déchirure ligament + élongation muscle (CAS 2) - AMÉLIORÉ V3.3.201L
     // Membre inférieur: "fracture tibia associée à déchirure ligament collatéral ainsi qu'une élongation quadriceps"
     // Ex narratif séparé: "fracture tibia. déchirure ligament. élongation quadriceps. raideur genou."
     // Membre supérieur: "fracture radius associée à déchirure tendons extenseurs ainsi qu'élongation épaule"
     
-    // V3.3.201: Pattern flexible - accepte phrases connectées OU séparées
-    const fractureMatch = normalized.match(/fracture\s+(?:non\s+)?(?:deplacee?)?\s*(?:du|de\s+la)?\s*(?:tiers)?\s*(?:distal|proximal|moyen)?\s*(?:du|de\s+la)?\s*(?:tibia|femur|humerus|genou|radius|cubitus)\s*(?:droit|gauche)?/i);
-    const ligamentMatch = normalized.match(/(?:dechirure|lesion|rupture)\s+(?:partielle?|complete?|totale?)?\s*(?:du|de\s+la|des)?\s*(?:ligament\s+(?:collateral|croise|lateral|lca|lcp)|tendons?\s+extenseurs?)\s*(?:medial|interne|externe|anterieur|posterieur|poignet|main)?\s*(?:du|de\s+la)?\s*(?:genou|coude|poignet)?\s*(?:droit|gauche)?/i);
-    const muscleMatch = normalized.match(/(?:elongation|dechirure|rupture)\s+(?:musculaire?)?\s*(?:du|de\s+la?|l)?\s*(?:quadriceps|epaule)/i);
+    // V3.3.201L: Utiliser cleanedText (sans "séquelles potentielles" hypothétiques)
+    const fractureMatch = cleanedText.match(/fracture\s+(?:non\s+)?(?:deplacee?)?\s*(?:du|de\s+la)?\s*(?:tiers)?\s*(?:distal|proximal|moyen)?\s*(?:du|de\s+la)?\s*(?:tibia|femur|humerus|genou|radius|cubitus)\s*(?:droit|gauche)?/i);
+    const ligamentMatch = cleanedText.match(/(?:dechirure|lesion|rupture)\s+(?:partielle?|complete?|totale?)?\s*(?:du|de\s+la|des)?\s*(?:ligament\s+(?:collateral|croise|lateral|lca|lcp)|tendons?\s+extenseurs?)\s*(?:medial|interne|externe|anterieur|posterieur|poignet|main)?\s*(?:du|de\s+la)?\s*(?:genou|coude|poignet)?\s*(?:droit|gauche)?/i);
+    const muscleMatch = cleanedText.match(/(?:elongation|dechirure|rupture)\s+(?:musculaire?)?\s*(?:du|de\s+la?|l)?\s*(?:quadriceps|epaule)/i);
     
-    // V3.3.201: Séquelles fonctionnelles (même si phrases séparées)
-    const raideurMatch = normalized.match(/raideur\s+(?:articulaire|r[ée]siduelle)?\s*(?:du|de\s+la)?\s*(?:genou|hanche|coude|poignet|cheville)/i);
-    const algiesMatch = normalized.match(/(?:algies?|douleurs?)\s+(?:m[ée]caniques?)?\s*(?:persistantes?|chroniques?|r[ée]siduelles?)?/i);
-    const deficitForceMatch = normalized.match(/(?:diminution|d[ée]ficit|perte)\s+(?:de\s+la?)?\s*force\s+(?:musculaire?)?/i);
+    // V3.3.201L: Séquelles fonctionnelles - NE DOIVENT PAS être extraites car hypothétiques (déjà exclues par nettoyage)
+    const raideurMatch = cleanedText.match(/raideur\s+(?:articulaire|r[ée]siduelle)?\s*(?:du|de\s+la)?\s*(?:genou|hanche|coude|poignet|cheville)/i);
+    const algiesMatch = cleanedText.match(/(?:algies?|douleurs?)\s+(?:m[ée]caniques?)?\s*(?:persistantes?|chroniques?|r[ée]siduelles?)?/i);
+    const deficitForceMatch = cleanedText.match(/(?:diminution|d[ée]ficit|perte)\s+(?:de\s+la?)?\s*force\s+(?:musculaire?)?/i);
     
-    console.log('🔍 Pattern 0B - Extraction polytraumatisme membre:');
+    console.log('🔍 Pattern 0B - Extraction polytraumatisme membre (V3.3.201L):');
     console.log('  fractureMatch:', fractureMatch ? fractureMatch[0] : 'NULL');
     console.log('  ligamentMatch:', ligamentMatch ? ligamentMatch[0] : 'NULL');
     console.log('  muscleMatch:', muscleMatch ? muscleMatch[0] : 'NULL');
