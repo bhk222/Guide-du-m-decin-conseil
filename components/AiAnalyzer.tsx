@@ -13986,6 +13986,39 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
                 
                 const lesionResult = comprehensiveSingleLesionAnalysis(processedLesion, externalKeywords);
                 
+                // 🆕 V3.3.201M: FILTRE COHÉRENCE ANATOMIQUE - Exclure lésions hors contexte
+                // Ex: Si texte parle de "membre supérieur/épaule/poignet", exclure "perte cheveux" ou "rachis"
+                // Ex: Si texte parle de "genou/tibia", exclure "radiculo-médullaire" (rachis)
+                if (lesionResult.type === 'proposal' && lesionResult.injury) {
+                    const lesionName = lesionResult.injury.name.toLowerCase();
+                    const textContext = text.toLowerCase();
+                    
+                    // Contexte anatomique du texte original
+                    const hasMembreSuperieur = /membre.*sup[eé]rieur|bras|avant.*bras|coude|poignet|[eé]paule|main|doigt/i.test(textContext);
+                    const hasMembreInferieur = /membre.*inf[eé]rieur|jambe|genou|tibia|f[eé]mur|cheville|pied|hanche/i.test(textContext);
+                    const hasRachis = /rachis|vert[eé]br|cervical|lombaire|dorsal|col.*vert[eé]br/i.test(textContext);
+                    
+                    // Lésions à exclure selon contexte
+                    const isCheveux = /cheveux|capillaire|alopecie/i.test(lesionName);
+                    const isRadiculoMedullaire = /radiculo.*m[eé]dullaire|m[eé]dullair/i.test(lesionName);
+                    
+                    let shouldExclude = false;
+                    let exclusionReason = '';
+                    
+                    if (isCheveux && (hasMembreSuperieur || hasMembreInferieur)) {
+                        shouldExclude = true;
+                        exclusionReason = 'Perte cheveux hors contexte (membre mentionné)';
+                    } else if (isRadiculoMedullaire && !hasRachis && (hasMembreSuperieur || hasMembreInferieur)) {
+                        shouldExclude = true;
+                        exclusionReason = 'Douleurs radiculo-médullaires hors contexte (membre périphérique, pas rachis)';
+                    }
+                    
+                    if (shouldExclude) {
+                        console.log(`   ❌ V3.3.201M: EXCLUSION "${lesionName}" - ${exclusionReason}`);
+                        continue; // Skip cette lésion, passer à la suivante
+                    }
+                }
+                
                 console.log(`   → Type: ${lesionResult.type}`);
                 
                 // ✅ ACCEPTER proposal ET ambiguity
