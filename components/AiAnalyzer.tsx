@@ -11451,9 +11451,10 @@ export const detectMultipleLesions = (text: string): {
         };
     }
     
-    // 1. Keywords explicites de cumul - ENRICHIS V3.3.125
+    // 1. Keywords explicites de cumul - ENRICHIS V3.3.201c
     const cumulKeywords = [
         'polytraumatisme', 'plusieurs lesions', 'sequelles multiples',
+        'sequelles potentielles', 'sequelles comprennent', 'sequelles incluent',
         'formule balthazar', 'balthazar', 'cumul', 'cumuler',
         'association lesionnelle', 'lesions associees', 'ainsi qu un',
         'associee a', 'sur fond de', 'compliquee de', 'accompagnee de'
@@ -11553,7 +11554,8 @@ export const detectMultipleLesions = (text: string): {
     // 🆕 V3.3.120: Détection intelligente de lésions OS + LIGAMENT + MUSCLE (traumatologie)
     const hasOsLesion = /fracture/i.test(normalized);
     const hasLigamentLesion = /(?:dechirure|lesion|rupture).*ligament|ligament.*(?:dechirure|lesion|rupture)/i.test(normalized);
-    const hasMuscleLesion = /(?:elongation|dechirure|rupture).*muscle|muscle.*(?:elongation|dechirure|rupture)|elongation.*quadriceps|quadriceps.*elongation/i.test(normalized);
+    // V3.3.201c: Pattern muscle amélioré - accepte "élongation musculaire du quadriceps"
+    const hasMuscleLesion = /(?:elongation|dechirure|rupture).*(?:muscle|musculaire)|(?:muscle|musculaire).*(?:elongation|dechirure|rupture)|elongation.*quadriceps|quadriceps.*elongation/i.test(normalized);
     const hasTripleLesion = hasOsLesion && hasLigamentLesion && hasMuscleLesion;
     const hasDoubleLesion = (hasOsLesion && hasLigamentLesion) || (hasOsLesion && hasMuscleLesion) || (hasLigamentLesion && hasMuscleLesion);
     
