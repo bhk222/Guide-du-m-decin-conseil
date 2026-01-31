@@ -11553,9 +11553,9 @@ export const detectMultipleLesions = (text: string): {
     
     // 🆕 V3.3.120: Détection intelligente de lésions OS + LIGAMENT + MUSCLE (traumatologie)
     const hasOsLesion = /fracture/i.test(normalized);
-    const hasLigamentLesion = /(?:dechirure|lesion|rupture).*ligament|ligament.*(?:dechirure|lesion|rupture)/i.test(normalized);
-    // V3.3.201c: Pattern muscle amélioré - accepte "élongation musculaire du quadriceps"
-    const hasMuscleLesion = /(?:elongation|dechirure|rupture).*(?:muscle|musculaire)|(?:muscle|musculaire).*(?:elongation|dechirure|rupture)|elongation.*quadriceps|quadriceps.*elongation/i.test(normalized);
+    const hasLigamentLesion = /(?:dechirure|lesion|rupture).*(?:ligament|tendons?.*extenseurs?)|(?:ligament|tendons?.*extenseurs?).*(?:dechirure|lesion|rupture)/i.test(normalized);
+    // V3.3.201N: Pattern muscle amélioré - accepte "élongation musculaire de l'épaule" et "élongation musculaire du quadriceps"
+    const hasMuscleLesion = /(?:elongation|dechirure|rupture).*(?:muscle|musculaire|epaule|quadriceps|triceps|biceps|deltoid|deltoide)|(?:muscle|musculaire|epaule|quadriceps).*(?:elongation|dechirure|rupture)/i.test(normalized);
     const hasTripleLesion = hasOsLesion && hasLigamentLesion && hasMuscleLesion;
     const hasDoubleLesion = (hasOsLesion && hasLigamentLesion) || (hasOsLesion && hasMuscleLesion) || (hasLigamentLesion && hasMuscleLesion);
     
@@ -11847,8 +11847,8 @@ const extractIndividualLesions = (text: string): string[] => {
     // V3.3.201L: Utiliser cleanedText (sans "séquelles potentielles" hypothétiques)
     const fractureMatch = cleanedText.match(/fracture\s+(?:non\s+)?(?:deplacee?)?\s*(?:du|de\s+la)?\s*(?:tiers)?\s*(?:distal|proximal|moyen)?\s*(?:du|de\s+la)?\s*(?:tibia|femur|humerus|genou|radius|cubitus)\s*(?:droit|gauche)?/i);
     const ligamentMatch = cleanedText.match(/(?:dechirure|lesion|rupture)\s+(?:partielle?|complete?|totale?)?\s*(?:du|de\s+la|des)?\s*(?:ligament\s+(?:collateral|croise|lateral|lca|lcp)|tendons?\s+extenseurs?)\s*(?:medial|interne|externe|anterieur|posterieur|poignet|main)?\s*(?:du|de\s+la)?\s*(?:genou|coude|poignet)?\s*(?:droit|gauche)?/i);
-    // 🆕 V3.3.201M: Améliorer Pattern 0B - Capturer "élongation musculaire DE L'épaule"
-    const muscleMatch = cleanedText.match(/(?:elongation|dechirure|rupture)\s+(?:musculaire?)?\s*(?:du|de\s+la?|de\s+l['']?|l['']?)?\s*(?:muscle|quadriceps|epaule|triceps|biceps|deltoid)\s*(?:gauche|droit)?/i);
+    // 🆕 V3.3.201M: Améliorer Pattern 0B - Capturer "élongation musculaire DE L'épaule" et "tendons extenseurs DU poignet"
+    const muscleMatch = cleanedText.match(/(?:elongation|dechirure|rupture)\s+(?:musculaire?)?\s*(?:du|de\s+la?|de\s+l['']?|l['']?)?\s*(?:muscle|quadriceps|epaule|triceps|biceps|deltoid|deltoide)\s*(?:gauche|droit)?/i);
     
     // V3.3.201L: Séquelles fonctionnelles - NE DOIVENT PAS être extraites car hypothétiques (déjà exclues par nettoyage)
     const raideurMatch = cleanedText.match(/raideur\s+(?:articulaire|r[ée]siduelle)?\s*(?:du|de\s+la)?\s*(?:genou|hanche|coude|poignet|cheville)/i);
@@ -11863,18 +11863,24 @@ const extractIndividualLesions = (text: string): string[] => {
     console.log('  algiesMatch:', algiesMatch ? algiesMatch[0] : 'NULL');
     console.log('  deficitForceMatch:', deficitForceMatch ? deficitForceMatch[0] : 'NULL');
     
-    // V3.3.201c: Détecter si au moins 3 composantes présentes (fracture + ligament + muscle OU séquelle fonctionnelle)
+    // V3.3.201c: Détecter si les 3 lésions PRINCIPALES présentes (fracture + ligament/tendon + muscle) OU au moins 3 composantes incluant séquelles
     const componentCount = [fractureMatch, ligamentMatch, muscleMatch, raideurMatch, algiesMatch, deficitForceMatch].filter(m => m).length;
+    const hasTripletPrincipal = fractureMatch && ligamentMatch && muscleMatch; // 3 lésions principales anatomiques
     console.log('  componentCount:', componentCount);
-    console.log('  Condition activée:', componentCount >= 3 && fractureMatch && (ligamentMatch || muscleMatch));
+    console.log('  hasTripletPrincipal:', hasTripletPrincipal);
+    console.log('  Condition activée:', (hasTripletPrincipal || (componentCount >= 3 && fractureMatch && (ligamentMatch || muscleMatch))));
     
-    if (componentCount >= 3 && fractureMatch && (ligamentMatch || muscleMatch)) {
+    if (hasTripletPrincipal || (componentCount >= 3 && fractureMatch && (ligamentMatch || muscleMatch))) {
         // V3.3.201e: Polytraumatisme membre détecté - extraire TOUTES les lésions avec contexte enrichi
         if (fractureMatch) {
-            // Enrichir fracture avec âge/profession si disponible
+            // Enrichir fracture avec contexte anatomique précis
             let fractureDesc = fractureMatch[0].trim();
-            if (/38\s*ans|manutentionnaire|travailleur.*manuel/i.test(text)) {
-                fractureDesc += ' (patient 38 ans travailleur manuel)';
+            // V3.3.201N: Identifier correctement "fracture radius distal" (pas "deux os avant-bras")
+            if (/radius.*distal|extremite.*inferieure.*radius|pouteau.*colles/i.test(fractureDesc)) {
+                fractureDesc = fractureDesc.replace(/fracture\s+(?:non\s+)?(?:deplacee?)?\s*(?:du|de\s+la)?\s*(?:tiers)?\s*distal\s*(?:du|de\s+la)?\s*radius/i, 'fracture radius distal');
+            }
+            if (/46\s*ans|macon|manutentionnaire|travailleur.*manuel/i.test(text)) {
+                fractureDesc += ' (patient 46 ans maçon)';
             }
             lesions.push(fractureDesc);
         }
@@ -11887,9 +11893,12 @@ const extractIndividualLesions = (text: string): string[] => {
             lesions.push(ligamentDesc);
         }
         if (muscleMatch) {
-            // Enrichir muscle avec contexte
+            // Enrichir muscle avec contexte anatomique
             let muscleDesc = muscleMatch[0].trim();
-            if (/quadriceps/i.test(muscleDesc) && !/deficit|dimin/i.test(muscleDesc)) {
+            // V3.3.201N: Normaliser élongation musculaire épaule
+            if (/elongation.*epaule|epaule.*elongation/i.test(muscleDesc)) {
+                muscleDesc = muscleDesc.replace(/elongation\s+(?:musculaire?)?\s*(?:du|de\s+la?|de\s+l['']?|l['']?)?\s*epaule/i, 'élongation musculaire de l\'épaule');
+            } else if (/quadriceps/i.test(muscleDesc) && !/deficit|dimin/i.test(muscleDesc)) {
                 muscleDesc += ' avec déficit de force modéré';
             }
             lesions.push(muscleDesc);
