@@ -1095,6 +1095,10 @@ const estimatePreviousIPP = (condition: string): number => {
     
     // Tendinopathies
     if (/tendinopathie|tendinite.*chronique/i.test(condition)) {
+        // Si mention "sans arrêt prolongé" ou "sans inaptitude" → IPP minimal (1-2%)
+        if (/sans.*arret.*prolonge|sans.*inaptitude|soins.*conservateurs/i.test(condition)) {
+            return 2; // Tendinopathie chronique minime/stable sans conséquence professionnelle
+        }
         if (/coiffe.*rotateurs|epaule/i.test(condition)) return 6;
         if (/achille|rotulien/i.test(condition)) return 5;
         return 4;
@@ -10272,23 +10276,51 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
                 
                 // Si cumul détecté, ajouter warning Balthazard dans la justification
                 if (cumulCheck.isCumul && cumulCheck.lesionCount >= 2) {
-                    // Extraire les mots-clés de lésions osseuses du texte
+                    // Détection intelligente du type de lésions cumulées
+                    const lesionTypes: string[] = [];
+                    let exampleText = '';
+                    
+                    // Détection lésions osseuses
                     const boneKeywords = ['fracture', 'luxation', 'disjonction', 'tassement'];
                     const boneMatches = boneKeywords.filter(kw => normalize(text).includes(kw));
-                    const boneContext = boneMatches.length > 0 
-                        ? `<br>💀 <strong>Lésion osseuse détectée</strong> : ${text.match(new RegExp(`(${boneMatches.join('|')}[^.;]+)`, 'i'))?.[1] || 'fracture bassin'}<br>`
-                        : '';
+                    if (boneMatches.length > 0) {
+                        const boneDetail = text.match(new RegExp(`(${boneMatches.join('|')}[^.;,]+)`, 'i'))?.[1] || boneMatches[0];
+                        lesionTypes.push(`💀 Lésion osseuse : ${boneDetail}`);
+                    }
+                    
+                    // Détection lésions tendineuses/musculaires (épaule, coiffe, etc.)
+                    const softTissueKeywords = ['rupture', 'bursite', 'elongation', 'tendinopathie', 'coiffe'];
+                    const softTissueMatches = softTissueKeywords.filter(kw => normalize(text).includes(kw));
+                    if (softTissueMatches.length > 1) {
+                        lesionTypes.push(`💪 Lésions tissus mous multiples détectées (${softTissueMatches.join(', ')})`);
+                        exampleText = '10% + 8% = 10 + 8×0.9 = 17.2% → 18%';
+                    }
+                    
+                    // Détection lésions nerveuses
+                    if (/nerf|nevralgie|paralysie|paresthesie/i.test(normalize(text))) {
+                        lesionTypes.push(`⚡ Lésion nerveuse : ${directMatch.name}`);
+                    }
+                    
+                    // Détection autres lésions articulaires
+                    if (/ankylose|raideur|limitation|capsulite/i.test(normalize(text)) && lesionTypes.length < 2) {
+                        lesionTypes.push(`🔒 Séquelle articulaire détectée`);
+                    }
+                    
+                    // Si pas d'exemple défini, utiliser exemple générique adapté
+                    if (!exampleText) {
+                        exampleText = '15% + 12% = 15 + 12×0.85 = 25.2% → 25%';
+                    }
+                    
+                    const lesionsContext = lesionTypes.length > 0 
+                        ? lesionTypes.join('<br>') + '<br><br>'
+                        : `Lésion principale : ${directMatch.name}<br><br>`;
                     
                     finalJustification = `<strong>⚠️ CUMUL DE LÉSIONS DÉTECTÉ</strong><br>` +
                         `📊 <strong>Analyse cumul</strong> : ${cumulCheck.lesionCount} lésions identifiées<br>` +
-                        boneContext +
-                        `⚡ <strong>Lésion nerveuse détectée</strong> : ${directMatch.name}<br><br>` +
+                        lesionsContext +
                         `💡 <strong>Formule de Balthazard</strong> : IPP_total = IPP1 + IPP2 × (100 - IPP1) / 100<br>` +
-                        `📝 <strong>Important</strong> : Évaluez chaque lésion séparément puis appliquez la formule :<br>` +
-                        `  1️⃣ Évaluez la lésion osseuse du bassin (fracture cadre obturateur + luxation sacro-iliaque)<br>` +
-                        `  2️⃣ Évaluez la lésion nerveuse (atteinte nerf sciatique) - proposée ci-dessous : ${chosenRate}%<br>` +
-                        `  3️⃣ Appliquez Balthazard : IPP_os + IPP_nerf × (100 - IPP_os) / 100<br>` +
-                        `<em>Exemple : 30% (os) + 40% (nerf) = 30 + 40×0.7 = 58% → 60% total</em><br><br>` +
+                        `📝 <strong>Important</strong> : Évaluez chaque lésion séparément puis appliquez la formule.<br>` +
+                        `<em>Exemple : ${exampleText}</em><br><br>` +
                         finalJustification;
                 }
                 
@@ -11847,8 +11879,8 @@ const extractIndividualLesions = (text: string): string[] => {
     // V3.3.201L: Utiliser cleanedText (sans "séquelles potentielles" hypothétiques)
     const fractureMatch = cleanedText.match(/fracture\s+(?:non\s+)?(?:deplacee?)?\s*(?:du|de\s+la)?\s*(?:tiers)?\s*(?:distal|proximal|moyen)?\s*(?:du|de\s+la)?\s*(?:tibia|femur|humerus|genou|radius|cubitus)\s*(?:droit|gauche)?/i);
     const ligamentMatch = cleanedText.match(/(?:dechirure|lesion|rupture)\s+(?:partielle?|complete?|totale?)?\s*(?:du|de\s+la|des)?\s*(?:ligament\s+(?:collateral|croise|lateral|lca|lcp)|tendons?\s+extenseurs?)\s*(?:medial|interne|externe|anterieur|posterieur|poignet|main)?\s*(?:du|de\s+la)?\s*(?:genou|coude|poignet)?\s*(?:droit|gauche)?/i);
-    // 🆕 V3.3.201R: Pattern muscle plus flexible - Capturer "élongation [musculaire] [de l'] épaule/quadriceps"
-    const muscleMatch = cleanedText.match(/elongation\s+(?:musculaire\s+)?(?:du|de\s+la?|de\s+l['']?|l['']?)?\s*(?:muscle|quadriceps|epaule|triceps|biceps|deltoid|deltoide)\s*(?:gauche|droit)?/i);
+    // 🆕 V3.3.201T: Pattern muscle - Accepter "de l'épaule" / "de lepaule" / "du quadriceps"
+    const muscleMatch = cleanedText.match(/elongation\s+(?:musculaire\s+)?(?:du\s+|de\s+la?\s+|de\s+l['\s]?)?(?:muscle|quadriceps|epaule|triceps|biceps|deltoid|deltoide)\s*(?:gauche|droit)?/i);
     
     // V3.3.201L: Séquelles fonctionnelles - NE DOIVENT PAS être extraites car hypothétiques (déjà exclues par nettoyage)
     const raideurMatch = cleanedText.match(/raideur\s+(?:articulaire|r[ée]siduelle)?\s*(?:du|de\s+la)?\s*(?:genou|hanche|coude|poignet|cheville)/i);
