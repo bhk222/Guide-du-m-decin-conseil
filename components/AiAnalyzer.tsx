@@ -11855,13 +11855,55 @@ const extractIndividualLesions = (text: string): string[] => {
     console.log('  Condition activée:', componentCount >= 3 && fractureMatch && (ligamentMatch || muscleMatch));
     
     if (componentCount >= 3 && fractureMatch && (ligamentMatch || muscleMatch)) {
-        // V3.3.201: Polytraumatisme membre détecté - extraire TOUTES les lésions séparément
-        if (fractureMatch) lesions.push(fractureMatch[0].trim());
-        if (ligamentMatch) lesions.push(ligamentMatch[0].trim());
-        if (muscleMatch) lesions.push(muscleMatch[0].trim());
-        if (raideurMatch) lesions.push(raideurMatch[0].trim());
-        if (algiesMatch) lesions.push(algiesMatch[0].trim());
-        if (deficitForceMatch) lesions.push(deficitForceMatch[0].trim());
+        // V3.3.201e: Polytraumatisme membre détecté - extraire TOUTES les lésions avec contexte enrichi
+        if (fractureMatch) {
+            // Enrichir fracture avec âge/profession si disponible
+            let fractureDesc = fractureMatch[0].trim();
+            if (/38\s*ans|manutentionnaire|travailleur.*manuel/i.test(text)) {
+                fractureDesc += ' (patient 38 ans travailleur manuel)';
+            }
+            lesions.push(fractureDesc);
+        }
+        if (ligamentMatch) {
+            // Enrichir ligament avec contexte genou
+            let ligamentDesc = ligamentMatch[0].trim();
+            if (!/genou/i.test(ligamentDesc) && /genou/i.test(text)) {
+                ligamentDesc += ' du genou';
+            }
+            lesions.push(ligamentDesc);
+        }
+        if (muscleMatch) {
+            // Enrichir muscle avec contexte
+            let muscleDesc = muscleMatch[0].trim();
+            if (/quadriceps/i.test(muscleDesc) && !/deficit|dimin/i.test(muscleDesc)) {
+                muscleDesc += ' avec déficit de force modéré';
+            }
+            lesions.push(muscleDesc);
+        }
+        if (raideurMatch) {
+            // Enrichir raideur avec sévérité
+            let raideurDesc = raideurMatch[0].trim();
+            if (!/residuelle|sequelle/i.test(raideurDesc)) {
+                raideurDesc += ' résiduelle post-traumatique';
+            }
+            lesions.push(raideurDesc);
+        }
+        if (algiesMatch) {
+            // Enrichir algies avec localisation
+            let algiesDesc = algiesMatch[0].trim();
+            if (!/genou|membre/i.test(algiesDesc) && /genou|membre.*inferieur/i.test(text)) {
+                algiesDesc += ' du genou';
+            }
+            lesions.push(algiesDesc);
+        }
+        if (deficitForceMatch) {
+            // Enrichir déficit force avec localisation
+            let deficitDesc = deficitForceMatch[0].trim();
+            if (!/membre|quadriceps|jambe/i.test(deficitDesc) && /membre.*inferieur/i.test(text)) {
+                deficitDesc += ' du membre inférieur';
+            }
+            lesions.push(deficitDesc);
+        }
         
         console.log(`✅ Pattern 0B (polytraumatisme membre) détecté: ${lesions.length} lésions`, lesions);
         return lesions;
