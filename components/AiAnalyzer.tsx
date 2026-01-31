@@ -11847,7 +11847,7 @@ const extractIndividualLesions = (text: string): string[] => {
     // V3.3.201L: Utiliser cleanedText (sans "séquelles potentielles" hypothétiques)
     const fractureMatch = cleanedText.match(/fracture\s+(?:non\s+)?(?:deplacee?)?\s*(?:du|de\s+la)?\s*(?:tiers)?\s*(?:distal|proximal|moyen)?\s*(?:du|de\s+la)?\s*(?:tibia|femur|humerus|genou|radius|cubitus)\s*(?:droit|gauche)?/i);
     const ligamentMatch = cleanedText.match(/(?:dechirure|lesion|rupture)\s+(?:partielle?|complete?|totale?)?\s*(?:du|de\s+la|des)?\s*(?:ligament\s+(?:collateral|croise|lateral|lca|lcp)|tendons?\s+extenseurs?)\s*(?:medial|interne|externe|anterieur|posterieur|poignet|main)?\s*(?:du|de\s+la)?\s*(?:genou|coude|poignet)?\s*(?:droit|gauche)?/i);
-    // 🆕 V3.3.201M: Améliorer Pattern 0B - Capturer "élongation musculaire DE L'épaule" et "tendons extenseurs DU poignet"
+    // 🆕 V3.3.201N: Améliorer Pattern 0B - Capturer "élongation musculaire DE L'épaule" et "tendons extenseurs DU poignet"
     const muscleMatch = cleanedText.match(/(?:elongation|dechirure|rupture)\s+(?:musculaire?)?\s*(?:du|de\s+la?|de\s+l['']?|l['']?)?\s*(?:muscle|quadriceps|epaule|triceps|biceps|deltoid|deltoide)\s*(?:gauche|droit)?/i);
     
     // V3.3.201L: Séquelles fonctionnelles - NE DOIVENT PAS être extraites car hypothétiques (déjà exclues par nettoyage)
@@ -11863,24 +11863,18 @@ const extractIndividualLesions = (text: string): string[] => {
     console.log('  algiesMatch:', algiesMatch ? algiesMatch[0] : 'NULL');
     console.log('  deficitForceMatch:', deficitForceMatch ? deficitForceMatch[0] : 'NULL');
     
-    // V3.3.201c: Détecter si les 3 lésions PRINCIPALES présentes (fracture + ligament/tendon + muscle) OU au moins 3 composantes incluant séquelles
+    // V3.3.201c: Détecter si au moins 3 composantes présentes (fracture + ligament + muscle OU séquelle fonctionnelle)
     const componentCount = [fractureMatch, ligamentMatch, muscleMatch, raideurMatch, algiesMatch, deficitForceMatch].filter(m => m).length;
-    const hasTripletPrincipal = fractureMatch && ligamentMatch && muscleMatch; // 3 lésions principales anatomiques
     console.log('  componentCount:', componentCount);
-    console.log('  hasTripletPrincipal:', hasTripletPrincipal);
-    console.log('  Condition activée:', (hasTripletPrincipal || (componentCount >= 3 && fractureMatch && (ligamentMatch || muscleMatch))));
+    console.log('  Condition activée:', componentCount >= 3 && fractureMatch && (ligamentMatch || muscleMatch));
     
-    if (hasTripletPrincipal || (componentCount >= 3 && fractureMatch && (ligamentMatch || muscleMatch))) {
+    if (componentCount >= 3 && fractureMatch && (ligamentMatch || muscleMatch)) {
         // V3.3.201e: Polytraumatisme membre détecté - extraire TOUTES les lésions avec contexte enrichi
         if (fractureMatch) {
-            // Enrichir fracture avec contexte anatomique précis
+            // Enrichir fracture avec âge/profession si disponible
             let fractureDesc = fractureMatch[0].trim();
-            // V3.3.201N: Identifier correctement "fracture radius distal" (pas "deux os avant-bras")
-            if (/radius.*distal|extremite.*inferieure.*radius|pouteau.*colles/i.test(fractureDesc)) {
-                fractureDesc = fractureDesc.replace(/fracture\s+(?:non\s+)?(?:deplacee?)?\s*(?:du|de\s+la)?\s*(?:tiers)?\s*distal\s*(?:du|de\s+la)?\s*radius/i, 'fracture radius distal');
-            }
-            if (/46\s*ans|macon|manutentionnaire|travailleur.*manuel/i.test(text)) {
-                fractureDesc += ' (patient 46 ans maçon)';
+            if (/38\s*ans|manutentionnaire|travailleur.*manuel/i.test(text)) {
+                fractureDesc += ' (patient 38 ans travailleur manuel)';
             }
             lesions.push(fractureDesc);
         }
@@ -11893,12 +11887,9 @@ const extractIndividualLesions = (text: string): string[] => {
             lesions.push(ligamentDesc);
         }
         if (muscleMatch) {
-            // Enrichir muscle avec contexte anatomique
+            // Enrichir muscle avec contexte
             let muscleDesc = muscleMatch[0].trim();
-            // V3.3.201N: Normaliser élongation musculaire épaule
-            if (/elongation.*epaule|epaule.*elongation/i.test(muscleDesc)) {
-                muscleDesc = muscleDesc.replace(/elongation\s+(?:musculaire?)?\s*(?:du|de\s+la?|de\s+l['']?|l['']?)?\s*epaule/i, 'élongation musculaire de l\'épaule');
-            } else if (/quadriceps/i.test(muscleDesc) && !/deficit|dimin/i.test(muscleDesc)) {
+            if (/quadriceps/i.test(muscleDesc) && !/deficit|dimin/i.test(muscleDesc)) {
                 muscleDesc += ' avec déficit de force modéré';
             }
             lesions.push(muscleDesc);
@@ -13031,9 +13022,12 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
     const isCumulDetected = cumulDetection.isCumul && cumulDetection.lesionCount >= 2;
     console.log('🔍 V3.3.201k: isCumulDetected =', isCumulDetected, ', lesionCount =', cumulDetection.lesionCount);
     
-    // 🆕 V3.3.201P: Si CUMUL détecté, SKIP COMPLÈTEMENT le regroupement par système
-    // Passer directement à l'extraction des lésions individuelles (ligne ~13920)
-    if (detectedSequelae.length >= 1 && !isCumulDetected) {
+    if (detectedSequelae.length >= 1) {
+        // 🆕 V3.3.201j: Si CUMUL détecté, SKIP le regroupement par système
+        if (isCumulDetected) {
+            console.log('⚠️ V3.3.201j: CUMUL DÉTECTÉ → SKIP regroupement par système, passage direct à extraction lésions individuelles');
+            // Ne rien faire, laisser le code continuer jusqu'à l'extraction cumul (ligne ~13906)
+        } else {
         // 🆕 V3.3.158: EXCEPTION TC NEUROLOGIQUES - Ne pas proposer dialogue si TC avec séquelles neurologiques multiples
         // Pattern: Chute OU TC + perte connaissance/hospitalisation + troubles cognitifs/hémiparésie/vertiges/céphalées
         // → Laisser passer aux expert rules qui détecteront "Commotion cérébro-spinale prolongée" automatiquement
@@ -13055,12 +13049,6 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
             // 🔥 V3.3.153: REGROUPEMENT PAR SYSTÈME ANATOMIQUE (principe du barème 1967)
             // Les séquelles d'un même système anatomique ne se cumulent PAS individuellement
             // On attribue un taux GLOBAL par système en fonction de l'atteinte la plus importante
-            
-            // 🆕 V3.3.201P: SKIP le grouping SI CUMUL détecté (l'extraction se fera après)
-            if (isCumulDetected) {
-                console.log('⚠️ V3.3.201P: CUMUL DÉTECTÉ → SKIP regroupement système, attendre extraction lésions individuelles');
-                // Laisser systemGroups vide pour forcer le passage à l'extraction (ligne ~13920)
-            } else {
             
             const systemGroups: { [key: string]: { sequelae: Array<{name: string; context: string}>; rate: number; explanation: string } } = {};
             
@@ -13616,10 +13604,7 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
                 }
             };
         }
-        
-        } // 🆕 V3.3.201P: FIN du bloc else (skip grouping si isCumulDetected)
-        
-        } // FIN du bloc else (V3.3.158 - non-TC neurologique)
+        } // 🆕 V3.3.201j: FIN du bloc else (if isCumulDetected)
     }
     
     // Si une seule séquelle, continuer l'analyse normale
@@ -13919,8 +13904,6 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
             text: `J'ai bien noté le contexte patient : ${profession ? `profession ${profession}` : ''}${age ? `, ${age} ans` : ''}${gender ? ` (${gender})` : ''}${preexisting.length > 0 ? `.<br><br>⚠️ <strong>Antécédents médicaux détectés</strong> (états AVANT l'accident du travail) : ${preexisting.join(', ')}. Ces antécédents ne seront PAS évalués comme lésions post-traumatiques` : ''}.<br><br>Veuillez maintenant décrire les <strong>séquelles post-traumatiques consolidées liées à l'accident du travail</strong> à évaluer (ex: "fracture consolidée du fémur avec boiterie", "tassement vertébral L3 avec lombalgie chronique").`
         };
     }
-    
-    } // 🆕 V3.3.201P: FIN du bloc grouping (sauté si isCumulDetected = true)
 
     // Étape 3: Informer sur les états antérieurs détectés si présents + Estimation IPP
     let contextInfo = '';
