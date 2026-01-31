@@ -13002,6 +13002,12 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
         return null;
     };
     
+    // 🆕 V3.3.201k: Détection cumul AVANT le regroupement par système
+    // Cette déclaration DOIT être ici (avant ligne 13005) pour éviter erreur TDZ
+    const cumulDetection = detectMultipleLesions(text);
+    const isCumulDetected = cumulDetection.isCumul && cumulDetection.lesionCount >= 2;
+    console.log('🔍 V3.3.201k: isCumulDetected =', isCumulDetected, ', lesionCount =', cumulDetection.lesionCount);
+    
     if (detectedSequelae.length >= 1) {
         // 🆕 V3.3.201j: Si CUMUL détecté, SKIP le regroupement par système
         if (isCumulDetected) {
@@ -13812,15 +13818,6 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
         console.error('❌ Erreur vérification cumul prioritaire:', e);
         // Continuer avec analyse normale
     }
-    
-    // Étape 0A: Détection cumuls de lésions (Balthazar) - mais continuer l'analyse normale
-    const cumulDetection = detectMultipleLesions(text);
-    const isCumulDetected = cumulDetection.isCumul && cumulDetection.lesionCount >= 2;
-    
-    // 🆕 V3.3.201j: IMPORTANT - Si cumul détecté, le regroupement par système doit être SKIPPÉ
-    // Cette vérification se fait à la ligne ~13006 dans le bloc "if (detectedSequelae.length >= 1)"
-    // On ne déclare PAS shouldSkipGrouping ici pour éviter erreur TDZ
-    console.log('🔍 V3.3.201j: isCumulDetected =', isCumulDetected, ', lesionCount =', cumulDetection.lesionCount);
     
     // Étape 0B: Détection lésion primaire + séquelles fonctionnelles
     const lesionAnalysis = detectPrimaryLesionWithSequelae(text);
