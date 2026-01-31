@@ -13019,10 +13019,10 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
                 /troubles.*cognitif|hémiparésie/i.test(text)
             ).length;
         
-        if (hasTraumaticBrainInjury && hasNeurologicalSequelae && neurologicalSequelaCount >= 2) {
-            console.log('🧠 [V3.3.158] TC avec séquelles neurologiques multiples détecté → Laisser passer aux expert rules');
-            // Ne pas retourner le dialogue, laisser l'analyse continuer avec les expert rules
-        } else {
+            if (hasTraumaticBrainInjury && hasNeurologicalSequelae && neurologicalSequelaCount >= 2) {
+                console.log('🧠 [V3.3.158] TC avec séquelles neurologiques multiples détecté → Laisser passer aux expert rules');
+                // Ne pas retourner le dialogue, laisser l'analyse continuer avec les expert rules
+            } else {
             // 🆕 V3.3.155: CALCUL AUTOMATIQUE IPP (polytraumatismes ET cas simples)
             const isPolytrauma = detectedSequelae.length > 1;
             console.log(isPolytrauma ? '⚠️ POLYTRAUMATISME DÉTECTÉ:' : '✅ CAS SIMPLE DÉTECTÉ:', detectedSequelae.length, 'séquelle(s)');
@@ -13584,8 +13584,8 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
                     description: `${isPolytrauma ? 'Séquelles multiples post-traumatiques' : 'Séquelle post-traumatique'} avec IPP ${isPolytrauma ? 'global' : ''} ${ippGlobal}% ${isPolytrauma ? '(formule de Balthazar - ' : '('}Barème 1967)`
                 }
             };
-        }
-        } // 🆕 V3.3.201f: FIN du bloc else (regroupement par système)
+            } // 🆕 V3.3.201f: FIN du bloc else (if hasTraumaticBrainInjury)
+        } // 🆕 V3.3.201f: FIN du bloc else (if isCumulDetected - regroupement par système)
     }
     
     // Si une seule séquelle, continuer l'analyse normale
