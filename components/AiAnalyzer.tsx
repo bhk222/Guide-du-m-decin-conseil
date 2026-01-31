@@ -13002,27 +13002,28 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
         return null;
     };
     
-    if (detectedSequelae.length >= 1) {
-        // 🆕 V3.3.201h: Si CUMUL détecté, SAUTER le regroupement par système et aller directement à l'extraction des lésions individuelles
-        // Le regroupement par système donne un taux global (ex: 15%) alors que le cumul doit analyser chaque lésion séparément
-        if (isCumulDetected && cumulDetection.lesionCount >= 2) {
-            console.log('⚠️ V3.3.201h: CUMUL DÉTECTÉ → SKIP regroupement par système, passage direct à extraction lésions individuelles');
-            // Ne rien faire ici, laisser le code continuer jusqu'à la section extraction cumul (ligne ~13901)
+    // 🆕 V3.3.201i: Si CUMUL détecté, SKIP le regroupement par système (early skip pattern)
+    const shouldSkipGrouping = isCumulDetected && cumulDetection.lesionCount >= 2;
+    
+    if (shouldSkipGrouping) {
+        console.log('⚠️ V3.3.201i: CUMUL DÉTECTÉ → SKIP regroupement par système, passage direct à extraction lésions individuelles');
+    }
+    
+    if (detectedSequelae.length >= 1 && !shouldSkipGrouping) {
+        // 🆕 V3.3.158: EXCEPTION TC NEUROLOGIQUES - Ne pas proposer dialogue si TC avec séquelles neurologiques multiples
+        // Pattern: Chute OU TC + perte connaissance/hospitalisation + troubles cognitifs/hémiparésie/vertiges/céphalées
+        // → Laisser passer aux expert rules qui détecteront "Commotion cérébro-spinale prolongée" automatiquement
+        const hasTraumaticBrainInjury = /(?:chute|traumatisme.*cr[aâ]ne?|TC|perte.*connaissance|coma|hospitalisation.*neuro)/i.test(text);
+        const hasNeurologicalSequelae = /(?:troubles?.*cognitif|h[eé]mipar[eé]sie|vertige|c[eé]phal[eé]e)/i.test(text);
+        const neurologicalSequelaCount = detectedSequelae.filter(s => 
+            s.name.includes('vertige') || s.name.includes('Céphalées') || 
+            /troubles.*cognitif|hémiparésie/i.test(text)
+        ).length;
+    
+        if (hasTraumaticBrainInjury && hasNeurologicalSequelae && neurologicalSequelaCount >= 2) {
+            console.log('🧠 [V3.3.158] TC avec séquelles neurologiques multiples détecté → Laisser passer aux expert rules');
+            // Ne pas retourner le dialogue, laisser l'analyse continuer avec les expert rules
         } else {
-            // 🆕 V3.3.158: EXCEPTION TC NEUROLOGIQUES - Ne pas proposer dialogue si TC avec séquelles neurologiques multiples
-            // Pattern: Chute OU TC + perte connaissance/hospitalisation + troubles cognitifs/hémiparésie/vertiges/céphalées
-            // → Laisser passer aux expert rules qui détecteront "Commotion cérébro-spinale prolongée" automatiquement
-            const hasTraumaticBrainInjury = /(?:chute|traumatisme.*cr[aâ]ne?|TC|perte.*connaissance|coma|hospitalisation.*neuro)/i.test(text);
-            const hasNeurologicalSequelae = /(?:troubles?.*cognitif|h[eé]mipar[eé]sie|vertige|c[eé]phal[eé]e)/i.test(text);
-            const neurologicalSequelaCount = detectedSequelae.filter(s => 
-                s.name.includes('vertige') || s.name.includes('Céphalées') || 
-                /troubles.*cognitif|hémiparésie/i.test(text)
-            ).length;
-        
-            if (hasTraumaticBrainInjury && hasNeurologicalSequelae && neurologicalSequelaCount >= 2) {
-                console.log('🧠 [V3.3.158] TC avec séquelles neurologiques multiples détecté → Laisser passer aux expert rules');
-                // Ne pas retourner le dialogue, laisser l'analyse continuer avec les expert rules
-            } else {
             // 🆕 V3.3.155: CALCUL AUTOMATIQUE IPP (polytraumatismes ET cas simples)
             const isPolytrauma = detectedSequelae.length > 1;
             console.log(isPolytrauma ? '⚠️ POLYTRAUMATISME DÉTECTÉ:' : '✅ CAS SIMPLE DÉTECTÉ:', detectedSequelae.length, 'séquelle(s)');
@@ -13584,8 +13585,7 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
                     description: `${isPolytrauma ? 'Séquelles multiples post-traumatiques' : 'Séquelle post-traumatique'} avec IPP ${isPolytrauma ? 'global' : ''} ${ippGlobal}% ${isPolytrauma ? '(formule de Balthazar - ' : '('}Barème 1967)`
                 }
             };
-            } // 🆕 V3.3.201f: FIN du bloc else (if hasTraumaticBrainInjury)
-        } // 🆕 V3.3.201f: FIN du bloc else (if isCumulDetected - regroupement par système)
+        }
     }
     
     // Si une seule séquelle, continuer l'analyse normale
