@@ -6809,18 +6809,19 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
         },
         // Fracture extrémité supérieure tibia = plateaux tibiaux
         {
-            pattern: /fracture.*(?:extremit[eé]|extr[eé]mit[eé]).*(?:sup[eé]rieure?|proximale?).*tibia|tibia.*(?:extremit[eé]|extr[eé]mit[eé]).*(?:sup[eé]rieure?|proximale?)/i,
+            pattern: /fracture.*(?:extremit[eé]|extr[eé]mit[eé]).*(?:sup[eé]rieure?|proximale?).*tibia|tibia.*(?:extremit[eé]|extr[eé]mit[eé]).*(?:sup[eé]rieure?|proximale?)|plateau.*tibial/i,
             context: /.*/i,
+            negativeContext: /tiers.*distal|diaphyse|diaphysaire|non.*d[ée]plac[ée]e/i,  // V3.3.202e: Bloquer si fracture diaphysaire/distale
             searchTerms: ["Fracture des plateaux tibiaux"],
             priority: 10350
         },
-        // Fracture tiers distal tibia ISOLÉE (≠ tibia+péroné = "deux os")
+        // Fracture tiers distal tibia ISOLÉE (≠ tibia+péroné = "deux os") - V3.3.202e: PRIORITÉ MAXIMALE
         {
-            pattern: /fracture.*(?:tiers|1\/3|diaphyse|diaphysaire).*(?:distal|inf[eé]rieur)?.*tibia|tibia.*(?:diaphysaire|diaphyse)|fracture.*non.*d[eé]plac[eé]e.*tibia/i,
+            pattern: /fracture.*(?:tiers|1\/3|diaphyse|diaphysaire).*(?:distal|inf[eé]rieur)?.*tibia|tibia.*(?:diaphysaire|diaphyse)|fracture.*non.*d[eé]plac[eé]e.*(?:du\s+)?(?:tiers\s+)?tibia/i,
             context: /.*/i,
-            negativeContext: /p[eé]ron[eé]|fibula|deux\s+os|plateau.*tibial|pilon.*tibial/i,  // ✅ Évite confusion avec fracture bi-osseuse, plateau ou pilon
+            negativeContext: /p[eé]ron[eé]|fibula|deux\s+os|plateau|pilon|extremit[eé].*sup[eé]rieur/i,  // ✅ Évite confusion avec plateau, pilon, bi-osseuse
             searchTerms: ["Fracture du tibia diaphysaire - Bonne consolidation (sujet jeune, travailleur manuel)"],  // ✅ V3.3.201: Match barème exact ligne 12%
-            priority: 10300
+            priority: 15000  // V3.3.202e: PRIORITÉ MAXIMALE pour forcer ce match
         },
         // Fracture radius distal (Pouteau-Colles)
         {
@@ -8343,8 +8344,8 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             pattern: /d[eé]chirure.*(?:partielle|totale|compl[eè]te)?.*ligament.*(?:collat[eé]ral|lat[eé]ral.*(?:interne|m[eé]dial))|ligament.*(?:collat[eé]ral|lat[eé]ral.*(?:interne|m[eé]dial)).*(?:d[eé]chir|ruptur|l[eé]sion)/i,
             context: /genou|LLI|LCM/i,
             searchTerms: ["Rupture du LLI (Ligament Latéral Interne) isolée"],  // ✅ V3.3.201: Match exact barème [10-20%]
-            priority: 13600,  // ULTRA HAUTE priorité pour éviter confusion avec fracture rotule
-            negativeContext: /rotule|fracture.*rotule|patella|[eé]longation.*quadriceps|quadriceps.*[eé]longation/i  // Évite confusion avec fracture rotule ET quadriceps
+            priority: 15000,  // V3.3.202e: PRIORITÉ MAXIMALE pour forcer ce match
+            negativeContext: /rotule|fracture.*rotule|patella/i  // Évite confusion avec fracture rotule (mais pas quadriceps)
         },
         
         // 🆕 V3.3.151: Élongation musculaire quadriceps (protection contre confusion avec fracture)
@@ -8352,8 +8353,8 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             pattern: /[eé]longation.*musculaire.*(?:du|de\s+la?)?\s*quadriceps|quadriceps.*[eé]longation|l[eé]sion.*musculaire.*quadriceps/i,
             context: /.*/i,  // V3.3.154: Context permissif car lésion déjà isolée par Pattern 0B
             searchTerms: ["Tendinopathie quadricipitale chronique post-traumatique"],  // ✅ V3.3.201: Match exact barème [5-20%]
-            priority: 13600,
-            negativeContext: /fracture|rupture.*tendon|rupture.*compl[eè]te/i  // Évite confusion avec fractures
+            priority: 15000,  // V3.3.202e: PRIORITÉ MAXIMALE pour forcer ce match
+            negativeContext: /fracture|rupture.*tendon.*compl[eè]te/i  // Évite confusion avec fractures ou ruptures complètes
         },
         
         // 🆕 V3.3.154: Déchirure tendons extenseurs poignet (protection contre cumul générique radius)
