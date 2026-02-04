@@ -294,6 +294,18 @@ export const mayetReyComplement: InjuryCategory[] = [
         ]
       },
       {
+        name: "Tibia et Jambe - Fractures Détaillées",
+        injuries: [
+          { name: "Fracture du tibia diaphysaire - Bonne consolidation (sujet jeune, travailleur manuel)", rate: [12, 20], description: "Fracture de la diaphyse tibiale consolidée sans complication majeure.", rateCriteria: { low: "Fracture non déplacée, consolidation anatomique, récupération complète.", medium: "Fracture déplacée consolidée, cal vicieux modéré, limitation fonctionnelle légère.", high: "Cal vicieux avec raccourcissement > 2cm ou angulation, limitation fonctionnelle notable." } },
+          { name: "Fracture du tibia diaphysaire - Complications (infection, pseudarthrose)", rate: [30, 60], description: "Fracture avec complications majeures nécessitant interventions multiples.", rateCriteria: { low: "Infection guérie, pseudarthrose consolidée après greffe.", high: "Infection chronique persistante, pseudarthrose non consolidée, ostéomyélite." } },
+          { name: "Fracture du plateau tibial (extrémité supérieure - genou)", rate: [15, 30], description: "Fracture articulaire du plateau tibial (uni ou bi-plateau).", rateCriteria: { low: "Fracture non déplacée ou réduite anatomiquement, mobilité genou conservée.", medium: "Cal vicieux modéré, début d'arthrose, raideur modérée.", high: "Cal vicieux sévère, arthrose post-traumatique, raideur majeure." } },
+          { name: "Fracture du pilon tibial (extrémité inférieure - cheville)", rate: [20, 40], description: "Fracture articulaire de l'extrémité distale du tibia (mortaise cheville).", rateCriteria: { low: "Fracture peu déplacée, bonne réduction, mobilité cheville conservée.", medium: "Raideur modérée cheville, douleurs mécaniques.", high: "Arthrose tibio-tarsienne sévère, raideur majeure, indication arthrodèse." } },
+          { name: "Fracture isolée du péroné (fibula)", rate: [5, 12], description: "Fracture du péroné seul sans atteinte tibiale majeure.", rateCriteria: { low: "Consolidation simple, fonction conservée.", high: "Cal vicieux, douleurs persistantes, instabilité cheville." } },
+          { name: "Fracture bi-malléolaire (tibia + péroné cheville)", rate: [20, 35], description: "Fracture des deux malléoles (cheville).", rateCriteria: { low: "Bonne réduction, mobilité cheville > 70%.", medium: "Raideur modérée, arthrose débutante.", high: "Raideur majeure, arthrose sévère, indication arthrodèse." } },
+          { name: "Fracture tri-malléolaire (bi-malléolaire + tubercule postérieur tibia)", rate: [25, 45], description: "Fracture complexe de cheville.", rateCriteria: { low: "Bonne consolidation, mobilité partielle.", high: "Arthrose sévère, instabilité chronique, raideur majeure." } },
+        ]
+      },
+      {
         name: "Genou - Lésions Méniscales et Ligamentaires Détaillées",
         injuries: [
           { name: "Lésion méniscale médiale (interne) isolée opérée - Méniscectomie partielle", rate: [5, 15], description: "Résection partielle du ménisque médial.", rateCriteria: { low: "Résection < 30%, genou stable, récupération complète.", high: "Résection > 70%, douleurs résiduelles, début d'arthrose." } },

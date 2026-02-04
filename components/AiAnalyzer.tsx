@@ -6816,10 +6816,10 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
         },
         // Fracture tiers distal tibia ISOLÉE (≠ tibia+péroné = "deux os")
         {
-            pattern: /fracture.*(?:tiers|1\/3).*(?:distal|inf[eé]rieur).*tibia/i,
+            pattern: /fracture.*(?:tiers|1\/3|diaphyse|diaphysaire).*(?:distal|inf[eé]rieur)?.*tibia|tibia.*(?:diaphysaire|diaphyse)|fracture.*non.*d[eé]plac[eé]e.*tibia/i,
             context: /.*/i,
-            negativeContext: /p[eé]ron[eé]|fibula|deux\s+os/i,  // ✅ Évite confusion avec fracture bi-osseuse
-            searchTerms: ["Fracture isolée du tibia"],  // ✅ Pointe vers fracture tibia SEUL
+            negativeContext: /p[eé]ron[eé]|fibula|deux\s+os|plateau.*tibial|pilon.*tibial/i,  // ✅ Évite confusion avec fracture bi-osseuse, plateau ou pilon
+            searchTerms: ["Fracture du tibia diaphysaire - Bonne consolidation (sujet jeune, travailleur manuel)"],  // ✅ V3.3.201: Match barème exact ligne 12%
             priority: 10300
         },
         // Fracture radius distal (Pouteau-Colles)
@@ -8342,7 +8342,7 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
         {
             pattern: /d[eé]chirure.*(?:partielle|totale|compl[eè]te)?.*ligament.*(?:collat[eé]ral|lat[eé]ral.*(?:interne|m[eé]dial))|ligament.*(?:collat[eé]ral|lat[eé]ral.*(?:interne|m[eé]dial)).*(?:d[eé]chir|ruptur|l[eé]sion)/i,
             context: /genou|LLI|LCM/i,
-            searchTerms: ["Déchirure/rupture ligament latéral interne (LLI) - ligament collatéral médial genou"],  // ✅ V3.3.153: Entrée spécifique [10-20%]
+            searchTerms: ["Rupture du LLI (Ligament Latéral Interne) isolée"],  // ✅ V3.3.201: Match exact barème [10-20%]
             priority: 13600,  // ULTRA HAUTE priorité pour éviter confusion avec fracture rotule
             negativeContext: /rotule|fracture.*rotule|patella|[eé]longation.*quadriceps|quadriceps.*[eé]longation/i  // Évite confusion avec fracture rotule ET quadriceps
         },
@@ -8351,7 +8351,7 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
         {
             pattern: /[eé]longation.*musculaire.*(?:du|de\s+la?)?\s*quadriceps|quadriceps.*[eé]longation|l[eé]sion.*musculaire.*quadriceps/i,
             context: /.*/i,  // V3.3.154: Context permissif car lésion déjà isolée par Pattern 0B
-            searchTerms: ["Élongation/déchirure musculaire quadriceps - Tendinopathie quadricipitale (séquelles)"],  // ✅ V3.3.153: Entrée spécifique
+            searchTerms: ["Tendinopathie quadricipitale chronique post-traumatique"],  // ✅ V3.3.201: Match exact barème [5-20%]
             priority: 13600,
             negativeContext: /fracture|rupture.*tendon|rupture.*compl[eè]te/i  // Évite confusion avec fractures
         },
@@ -11877,10 +11877,11 @@ const extractIndividualLesions = (text: string): string[] => {
     // Membre supérieur: "fracture radius associée à déchirure tendons extenseurs ainsi qu'élongation épaule"
     
     // V3.3.201L: Utiliser cleanedText (sans "séquelles potentielles" hypothétiques)
-    const fractureMatch = cleanedText.match(/fracture\s+(?:non\s+)?(?:deplacee?)?\s*(?:du|de\s+la)?\s*(?:tiers)?\s*(?:distal|proximal|moyen)?\s*(?:du|de\s+la)?\s*(?:tibia|femur|humerus|genou|radius|cubitus)\s*(?:droit|gauche)?/i);
-    const ligamentMatch = cleanedText.match(/(?:dechirure|lesion|rupture)\s+(?:partielle?|complete?|totale?)?\s*(?:du|de\s+la|des)?\s*(?:ligament\s+(?:collateral|croise|lateral|lca|lcp)|tendons?\s+extenseurs?)\s*(?:medial|interne|externe|anterieur|posterieur|poignet|main)?\s*(?:du|de\s+la)?\s*(?:genou|coude|poignet)?\s*(?:droit|gauche)?/i);
-    // 🆕 V3.3.201T: Pattern muscle - Accepter "de l'épaule" / "de lepaule" / "du quadriceps"
-    const muscleMatch = cleanedText.match(/elongation\s+(?:musculaire\s+)?(?:du\s+|de\s+la?\s+|de\s+l['\s]?)?(?:muscle|quadriceps|epaule|triceps|biceps|deltoid|deltoide)\s*(?:gauche|droit)?/i);
+    // V3.3.201T: Patterns renforcés pour capturer variantes narratives
+    const fractureMatch = cleanedText.match(/fracture\s+(?:non\s+)?(?:d[ée]plac[ée]e?)?\s*(?:du|de\s+la?)?\s*(?:tiers)?\s*(?:distal|proximal|moyen)?\s*(?:du|de\s+la?)?\s*(?:tibia|f[ée]mur|hum[ée]rus|genou|radius|cubitus|p[ée]ron[ée])\s*(?:droit|droite|gauche)?/i);
+    const ligamentMatch = cleanedText.match(/(?:d[ée]chirure|l[ée]sion|rupture)\s+(?:partielle?|compl[eè]te?|totale?)?\s*(?:du|de\s+la?|des)?\s*(?:ligament\s+(?:collat[ée]ral|crois[ée]|lat[ée]ral|lca|lcp|m[ée]dial|interne)|tendons?\s+extenseurs?)\s*(?:m[ée]dial|interne|externe|ant[ée]rieur|post[ée]rieur|poignet|main)?\s*(?:du|de\s+la?)?\s*(?:genou|coude|poignet)?\s*(?:droit|droite|gauche)?/i);
+    // 🆕 V3.3.201T: Pattern muscle - Accepter "de l'épaule" / "de lepaule" / "du quadriceps" / "musculaire"
+    const muscleMatch = cleanedText.match(/[ée]longation\s+(?:musculaire\s+)?(?:du\s+|de\s+la?\s+|de\s+l['\s]?)?(?:muscle|quadriceps|[ée]paule|triceps|biceps|deltoid|delto[ïi]de)\s*(?:gauche|droit|droite)?/i);
     
     // V3.3.201L: Séquelles fonctionnelles - NE DOIVENT PAS être extraites car hypothétiques (déjà exclues par nettoyage)
     const raideurMatch = cleanedText.match(/raideur\s+(?:articulaire|r[ée]siduelle)?\s*(?:du|de\s+la)?\s*(?:genou|hanche|coude|poignet|cheville)/i);
