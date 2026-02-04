@@ -8344,7 +8344,7 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             pattern: /d[eé]chirure.*(?:partielle|totale|compl[eè]te)?.*ligament.*(?:collat[eé]ral|lat[eé]ral.*(?:interne|m[eé]dial))|ligament.*(?:collat[eé]ral|lat[eé]ral.*(?:interne|m[eé]dial)).*(?:d[eé]chir|ruptur|l[eé]sion)/i,
             context: /genou|LLI|LCM/i,
             searchTerms: ["Rupture du LLI (Ligament Latéral Interne) isolée"],  // ✅ V3.3.201: Match exact barème [10-20%]
-            priority: 15000,  // V3.3.202e: PRIORITÉ MAXIMALE pour forcer ce match
+            priority: 999999,  // V3.3.202f: PRIORITÉ ABSOLUE
             negativeContext: /rotule|fracture.*rotule|patella/i  // Évite confusion avec fracture rotule (mais pas quadriceps)
         },
         
@@ -8353,7 +8353,7 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             pattern: /[eé]longation.*musculaire.*(?:du|de\s+la?)?\s*quadriceps|quadriceps.*[eé]longation|l[eé]sion.*musculaire.*quadriceps/i,
             context: /.*/i,  // V3.3.154: Context permissif car lésion déjà isolée par Pattern 0B
             searchTerms: ["Tendinopathie quadricipitale chronique post-traumatique"],  // ✅ V3.3.201: Match exact barème [5-20%]
-            priority: 15000,  // V3.3.202e: PRIORITÉ MAXIMALE pour forcer ce match
+            priority: 999999,  // V3.3.202f: PRIORITÉ ABSOLUE
             negativeContext: /fracture|rupture.*tendon.*compl[eè]te/i  // Évite confusion avec fractures ou ruptures complètes
         },
         
