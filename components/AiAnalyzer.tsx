@@ -6717,20 +6717,20 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
         {
             pattern: /amputation.*p1.*(?:d2|index)/i,
             context: /.*/i,
-            searchTerms: ["Perte de la première phalange de l'index (Main Dominante)"],
-            priority: 10400
+            searchTerms: ["Désarticulation 1ère phalange de l'index (Main Dominante)"],
+            priority: 999999
         },
         {
             pattern: /amputation.*p2.*(?:d2|index)/i,
             context: /.*/i,
-            searchTerms: ["Perte de la deuxième phalange de l'index (Main Dominante)"],
-            priority: 10400
+            searchTerms: ["Ablation phalange unguéale + phalange intermédiaire de l'index (Main Dominante)"],
+            priority: 999999
         },
         {
             pattern: /amputation.*p3.*(?:d2|index)/i,
             context: /.*/i,
-            searchTerms: ["Perte de la troisième phalange de l'index (Main Dominante)"],
-            priority: 10400
+            searchTerms: ["Ablation phalange unguéale de l'index (Main Dominante)"],
+            priority: 999999
         },
         {
             pattern: /amputation.*p1.*(?:d3|m[eé]dius)/i,
