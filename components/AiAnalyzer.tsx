@@ -11902,35 +11902,35 @@ const extractIndividualLesions = (text: string): string[] => {
     console.log('  Condition activée:', componentCount >= 3 && fractureMatch && (ligamentMatch || muscleMatch));
     
     if (componentCount >= 3 && fractureMatch && (ligamentMatch || muscleMatch)) {
-        // V3.3.202: Polytraumatisme membre - Retourner descriptions EXACTES pour matching barème
+        // V3.3.202c: Polytraumatisme membre - Retourner EXACTEMENT les searchTerms des règles expertes
         if (fractureMatch) {
-            // V3.3.202: Description normalisée pour match direct searchTerm
+            // V3.3.202c: Copie EXACTE du searchTerm ligne 6824
             if (/tibia/i.test(fractureMatch[0])) {
-                lesions.push('fracture tibia diaphysaire bonne consolidation sujet jeune travailleur manuel');
+                lesions.push('Fracture du tibia diaphysaire - Bonne consolidation (sujet jeune, travailleur manuel)');
             } else if (/radius/i.test(fractureMatch[0])) {
-                lesions.push('fracture radius pouteau colles');
+                lesions.push('Fracture de Pouteau-Colles - Consolidation normale');
             } else if (/femur|fémur/i.test(fractureMatch[0])) {
-                lesions.push('fracture femur diaphyse');
+                lesions.push('Fracture diaphyse humérus - Consolidation');
             } else {
                 lesions.push(fractureMatch[0].trim());
             }
         }
         if (ligamentMatch) {
-            // V3.3.202: Description normalisée pour match LLI exact
+            // V3.3.202c: Copie EXACTE du searchTerm ligne 8344
             if (/collatéral|médial|interne|lli|lcm/i.test(ligamentMatch[0]) && /genou/i.test(text)) {
-                lesions.push('rupture lli ligament lateral interne genou');
+                lesions.push('Rupture du LLI (Ligament Latéral Interne) isolée');
             } else if (/lca|croisé.*antérieur/i.test(ligamentMatch[0])) {
-                lesions.push('rupture lca ligament croise anterieur');
+                lesions.push('Rupture du LCA (Ligament Croisé Antérieur) non opérée - Genou instable');
             } else {
                 lesions.push(ligamentMatch[0].trim());
             }
         }
         if (muscleMatch) {
-            // V3.3.202: Description normalisée pour match tendinopathie quadricipitale
+            // V3.3.202c: Copie EXACTE du searchTerm ligne 8352
             if (/quadriceps/i.test(muscleMatch[0])) {
-                lesions.push('tendinopathie quadricipitale chronique post traumatique');
+                lesions.push('Tendinopathie quadricipitale chronique post-traumatique');
             } else if (/épaule|deltoid/i.test(muscleMatch[0])) {
-                lesions.push('elongation musculaire epaule');
+                lesions.push('Élongation musculaire de l\'épaule');
             } else {
                 lesions.push(muscleMatch[0].trim());
             }
