@@ -6815,13 +6815,13 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             searchTerms: ["Fracture des plateaux tibiaux"],
             priority: 10350
         },
-        // Fracture tiers distal tibia ISOLÉE (≠ tibia+péroné = "deux os") - V3.3.202e: PRIORITÉ MAXIMALE
+        // Fracture tiers distal tibia ISOLÉE (≠ tibia+péroné = "deux os") - V3.3.202f: PRIORITÉ ABSOLUE
         {
             pattern: /fracture.*(?:tiers|1\/3|diaphyse|diaphysaire).*(?:distal|inf[eé]rieur)?.*tibia|tibia.*(?:diaphysaire|diaphyse)|fracture.*non.*d[eé]plac[eé]e.*(?:du\s+)?(?:tiers\s+)?tibia/i,
             context: /.*/i,
             negativeContext: /p[eé]ron[eé]|fibula|deux\s+os|plateau|pilon|extremit[eé].*sup[eé]rieur/i,  // ✅ Évite confusion avec plateau, pilon, bi-osseuse
             searchTerms: ["Fracture du tibia diaphysaire - Bonne consolidation (sujet jeune, travailleur manuel)"],  // ✅ V3.3.201: Match barème exact ligne 12%
-            priority: 15000  // V3.3.202e: PRIORITÉ MAXIMALE pour forcer ce match
+            priority: 999999  // V3.3.202f: PRIORITÉ ABSOLUE pour écraser tout
         },
         // Fracture radius distal (Pouteau-Colles)
         {
