@@ -6713,24 +6713,46 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
         },
         
         // === RÈGLES DOIGTS/ORTEILS HAUTE PRIORITÉ ===
-        // Amputations de doigts avec notation anatomique
+        // Amputations de doigts avec notation anatomique - Main NON DOMINANTE (gauche pour droitier)
+        {
+            pattern: /amputation.*p1.*(?:d2|index)/i,
+            context: /main\s+gauche|mg|gauche/i,
+            negativeContext: /gaucher/i,
+            searchTerms: ["Désarticulation 1ère phalange de l'index (Main Non Dominante)"],
+            priority: 999999
+        },
+        {
+            pattern: /amputation.*p2.*(?:d2|index)/i,
+            context: /main\s+gauche|mg|gauche/i,
+            negativeContext: /gaucher/i,
+            searchTerms: ["Ablation 2 phalanges de l'index (Main Non Dominante)"],
+            priority: 999999
+        },
+        {
+            pattern: /amputation.*p3.*(?:d2|index)/i,
+            context: /main\s+gauche|mg|gauche/i,
+            negativeContext: /gaucher/i,
+            searchTerms: ["Ablation phalange unguéale de l'index (Main Non Dominante)"],
+            priority: 999999
+        },
+        // Amputations de doigts - Main DOMINANTE (droite pour droitier, ou gauche pour gaucher, ou par défaut)
         {
             pattern: /amputation.*p1.*(?:d2|index)/i,
             context: /.*/i,
             searchTerms: ["Désarticulation 1ère phalange de l'index (Main Dominante)"],
-            priority: 999999
+            priority: 999998
         },
         {
             pattern: /amputation.*p2.*(?:d2|index)/i,
             context: /.*/i,
             searchTerms: ["Ablation phalange unguéale + phalange intermédiaire de l'index (Main Dominante)"],
-            priority: 999999
+            priority: 999998
         },
         {
             pattern: /amputation.*p3.*(?:d2|index)/i,
             context: /.*/i,
             searchTerms: ["Ablation phalange unguéale de l'index (Main Dominante)"],
-            priority: 999999
+            priority: 999998
         },
         {
             pattern: /amputation.*p1.*(?:d3|m[eé]dius)/i,
