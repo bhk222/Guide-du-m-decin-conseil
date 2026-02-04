@@ -11901,8 +11901,22 @@ const extractIndividualLesions = (text: string): string[] => {
     console.log('  componentCount:', componentCount);
     console.log('  Condition activée:', componentCount >= 3 && fractureMatch && (ligamentMatch || muscleMatch));
     
+    // V3.3.202d: Debug - Pourquoi Pattern 0B ne se déclenche pas ?
+    if (componentCount < 3) {
+        console.log('❌ Pattern 0B NON ACTIVÉ: componentCount < 3');
+    } else if (!fractureMatch) {
+        console.log('❌ Pattern 0B NON ACTIVÉ: pas de fractureMatch');
+    } else if (!ligamentMatch && !muscleMatch) {
+        console.log('❌ Pattern 0B NON ACTIVÉ: ni ligamentMatch ni muscleMatch');
+    }
+    
     if (componentCount >= 3 && fractureMatch && (ligamentMatch || muscleMatch)) {
         // V3.3.202c: Polytraumatisme membre - Retourner EXACTEMENT les searchTerms des règles expertes
+        console.log('✅✅✅ PATTERN 0B ACTIVÉ - Polytraumatisme détecté !');
+        console.log('   fractureMatch:', fractureMatch[0]);
+        console.log('   ligamentMatch:', ligamentMatch ? ligamentMatch[0] : 'NULL');
+        console.log('   muscleMatch:', muscleMatch ? muscleMatch[0] : 'NULL');
+        
         if (fractureMatch) {
             // V3.3.202c: Copie EXACTE du searchTerm ligne 6824
             if (/tibia/i.test(fractureMatch[0])) {
