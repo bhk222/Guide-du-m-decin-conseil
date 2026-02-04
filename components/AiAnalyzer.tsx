@@ -7033,14 +7033,16 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             pattern: /fracture.*plateaux.*tibiaux|plateaux.*tibiaux.*fracture/i,
             context: /deviation|raideur|flexion|valgus|varus|degres?/i,
             searchTerms: ['Fracture des plateaux tibiaux - Avec déviation et/ou raideur'],
-            priority: 999
+            priority: 999,
+            negativeContext: /non.*d[eé]plac[eé]e|sans.*d[eé]placement|sans.*raideur|sans.*deviation|diaphyse|diaphysaire|tiers.*distal/i
         },
         // Extrémité supérieure tibia avec séquelles = plateaux tibiaux avec déviation/raideur
         {
             pattern: /fracture.*(?:extremit[eé]|extr[eé]mit[eé]).*(?:sup[eé]rieure?|proximale?).*tibia|tibia.*(?:extremit[eé]|extr[eé]mit[eé]).*(?:sup[eé]rieure?|proximale?)/i,
             context: /boiterie|raideur|deviation|marche|claudication|sequelle/i,
             searchTerms: ['Fracture des plateaux tibiaux - Avec déviation et/ou raideur'],
-            priority: 999
+            priority: 999,
+            negativeContext: /non.*d[eé]plac[eé]e|sans.*d[eé]placement|sans.*raideur|sans.*deviation|diaphyse|diaphysaire|tiers.*distal/i
         },
         {
             pattern: /m[eé]niscectomie.*totale/i,
