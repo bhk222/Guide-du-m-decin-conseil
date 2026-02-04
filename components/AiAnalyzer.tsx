@@ -5334,9 +5334,9 @@ export const findCandidateInjuries = (text: string, externalKeywords?: string[])
     // DEBUG: Log des top matches avant retour
     const topResults = filteredMatches
         .sort((a, b) => b.score - a.score)
-        .slice(0, 10);
+        .slice(0, 50);
     
-    console.log('🎯 TOP 10 RÉSULTATS:', topResults.map(m => ({
+    console.log('🎯 TOP 50 RÉSULTATS:', topResults.map(m => ({
         name: m.injury.name,
         score: m.score,
         path: m.path
@@ -5393,7 +5393,7 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             return {
                 type: 'ambiguity',
                 text: `Votre description "perte d'un seul métacarpien" peut correspondre à plusieurs séquelles. Pour la région "Main - Amputations", laquelle correspond le mieux à l'état du patient ?`,
-                choices: metacarpienChoices.slice(0, 5).map(c => c as Injury)
+                choices: metacarpienChoices.map(c => c as Injury)
             };
         }
     }
@@ -10838,10 +10838,9 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
                 }
             }
             
-            // 🆕 V3.3.124c: Limite de choix adaptative - 7 pour métacarpiens, 5 pour autres
-            const maxChoices = isMetacarpienSingleQuery ? 7 : 5;
+            // 🆕 V3.3.202k: Afficher TOUS les choix analogiques sans limite
             
-            if (choices.length > 1 && choices.length <= maxChoices) {
+            if (choices.length > 1) {
                 return {
                     type: 'ambiguity',
                     text: `Votre description "${text.trim()}" peut correspondre à plusieurs séquelles. Pour la région "${topPart}", laquelle correspond le mieux à l'état du patient ?`,
