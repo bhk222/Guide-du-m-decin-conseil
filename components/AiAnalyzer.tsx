@@ -7135,10 +7135,10 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
         // 🆕 V3.3.205: CONTUSION CÉRÉBRALE + PERTE CONNAISSANCE BRÈVE (polytraumatisme)
         {
             pattern: /contusion.*c[eé]r[eé]brale|traumatisme.*cr[aâ]ni.*contusion/i,
-            context: /perte.*connaissance.*(?:br[eè]ve|courte|quelques.*(?:minute|seconde)|imm[eé]diate)|frontale|temporale|pari[eé]tale/i,
+            context: /perte.*connaissance|frontale|temporale|pari[eé]tale|br[eè]ve|courte|surveillance.*neurologique/i,  // Contexte plus permissif
             searchTerms: ["Syndrome subjectif commun des blessures du crâne (céphalée, vertiges, troubles de l'humeur)"],
-            priority: 1005,  // TRÈS HAUTE - avant spondylolisthésis
-            negativeContext: /(?:sans.*s[eé]quelle|gu[eé]rison.*compl[eè]te|asymptomatique)/i
+            priority: 1010,  // ULTRA HAUTE - au dessus de spondylolisthésis ET bassin+sciatique
+            negativeContext: /spondylo|listth[eé]sis|glissement.*vert[eé]bral/i  // Exclure explicitement spondylo
         },
         {
             pattern: /(?:hémiparésie|troubles?\s+cognitif|céphalées?|vertiges?)/i,
@@ -7410,7 +7410,8 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             pattern: /spondylolysth[eé]sis|spondylo.*listh[eé]sis|listth[eé]sis|glissement\s+vert[eé]bral/i,
             context: /lombaire|L\d|S\d|rachis|traumatisme|post-traumatique/i,
             searchTerms: ['Spondylolisthésis modifié par traumatisme'],
-            priority: 93
+            priority: 93,
+            negativeContext: /contusion.*c[eé]r[eé]brale|perte.*connaissance|mandibule|genou|polytraumatisme|chute.*[eé]chafaudage/i  // Exclure si polytraumatisme
         },
         {
             pattern: /(?:fracture|fx).*(?:processus|apophyse).*transverse/i,
