@@ -11810,9 +11810,10 @@ export const detectMultipleLesions = (text: string): {
  * Ex2: "fracture tibia associée à déchirure ligament et élongation quadriceps" → 3 lésions
  */
 const extractIndividualLesions = (text: string): string[] => {
+    console.log('🔧 extractIndividualLesions V3.3.211 - avec Pattern 0C-ter + 0C-quater');
     const normalized = normalize(text);
     const lesions: string[] = [];
-    
+
     console.log('🔍 extractIndividualLesions - texte d\'entrée:', text);
     
     // 🆕 V3.3.201L: NETTOYAGE - Exclure section "séquelles potentielles" (hypothétiques futures)
@@ -11921,7 +11922,7 @@ const extractIndividualLesions = (text: string): string[] => {
 
         // Extraire trauma cervical
         if (hasRachisCerv) {
-            const cervicalMatch = cleanedText.match(/traumatisme\s+(?:du\s+)?(?:rachis\s+)?cervical\s*(?:sans\s+atteinte\s+medullaire|avec\s+raideur|chronique)?|cervicalgie\s*(?:post.*?traumatique)?|entorse\s+cervical[e]?\s*(?:benigne|grave)?/i);
+            const cervicalMatch = cleanedText.match(/traumatisme\s+(?:du\s+)?(?:rachis\s+)?cervical\s*(?:sans\s+(?:atteinte|lesion)\s+medullaire|avec\s+raideur|chronique)?|cervicalgie\s*(?:post.*?traumatique)?|entorse\s+cervical[e]?\s*(?:benigne|grave)?/i);
             extractedLesionsTer.push(cervicalMatch ? cervicalMatch[0].trim() : 'traumatisme du rachis cervical');
         }
 
@@ -11953,6 +11954,46 @@ const extractIndividualLesions = (text: string): string[] => {
             console.log('✅ Pattern 0C-ter (polytraumatisme étendu - ' + extractedLesionsTer.length + ' régions) détecté:', extractedLesionsTer);
             return extractedLesionsTer;
         }
+    }
+
+    // 🆕 V3.3.211: Pattern 0C-quater: FALLBACK GÉNÉRIQUE - Split sur diagnostics médicaux séparés par virgules/et
+    // Format narratif médical français: "un [diag1], une [diag2], un [diag3] et une [diag4]"
+    // Ex: "un traumatisme thoracique avec fractures costales, une fracture fermée du radius,
+    //       un traumatisme du rachis cervical et une contusion sévère de la cheville"
+    // Ce pattern est un FILET DE SÉCURITÉ si les patterns spécifiques n'ont pas fonctionné
+    const medicalTerms = /(?:traumatisme|fracture|contusion|luxation|entorse|rupture|lesion|dechirure|plaie|amputation|hernie)/i;
+    const diagnosticSplitPattern = /(?:^|[,;]\s*)(?:une?\s+)?((?:traumatisme|fracture|contusion|luxation|entorse|rupture|lesion|dechirure|plaie|amputation|hernie)[^,;]*?)(?=[,;]\s*(?:une?\s+)?(?:traumatisme|fracture|contusion|luxation|entorse|rupture|lesion|dechirure|plaie|amputation|hernie)|(?:\s+et\s+(?:une?\s+)?(?:traumatisme|fracture|contusion|luxation|entorse|rupture|lesion|dechirure|plaie|amputation|hernie)))/gi;
+
+    const genericLesions: string[] = [];
+    let diagMatch;
+    while ((diagMatch = diagnosticSplitPattern.exec(cleanedText)) !== null) {
+        const lesionText = diagMatch[1].trim();
+        if (lesionText.length >= 10) {
+            genericLesions.push(lesionText);
+        }
+    }
+
+    // Capturer le PREMIER diagnostic (précédé de "un/une", pas de virgule)
+    const firstDiagMatch = cleanedText.match(/\bune?\s+((?:traumatisme|fracture|contusion|luxation|entorse|rupture|lesion|dechirure|plaie|amputation|hernie)[^,;]*?)(?=[,;]\s*(?:une?\s+)?(?:traumatisme|fracture|contusion|luxation|entorse|rupture|lesion|dechirure|plaie|amputation|hernie))/i);
+    if (firstDiagMatch && firstDiagMatch[1].trim().length >= 10) {
+        const firstLesion = firstDiagMatch[1].trim();
+        if (!genericLesions.some(l => l.includes(firstLesion) || firstLesion.includes(l))) {
+            genericLesions.unshift(firstLesion);
+        }
+    }
+
+    // Capturer aussi la dernière lésion (après "et")
+    const lastLesionMatch = cleanedText.match(/\bet\s+(?:une?\s+)?((?:traumatisme|fracture|contusion|luxation|entorse|rupture|lesion|dechirure|plaie|amputation|hernie)[^.;]*)/i);
+    if (lastLesionMatch && lastLesionMatch[1].trim().length >= 10) {
+        const lastLesion = lastLesionMatch[1].trim();
+        if (!genericLesions.some(l => l.includes(lastLesion) || lastLesion.includes(l))) {
+            genericLesions.push(lastLesion);
+        }
+    }
+
+    if (genericLesions.length >= 3) {
+        console.log('✅ Pattern 0C-quater (fallback générique comma-split) détecté:', genericLesions);
+        return genericLesions;
     }
 
     // Pattern 0D: État antérieur cumul (V3.3.133) - PRIORITÉ MAXIMALE
@@ -12307,7 +12348,8 @@ const extractIndividualLesions = (text: string): string[] => {
  * @param isExactMatch - Si true, cherche une correspondance exacte par nom (pour résoudre ambiguïté)
  */
 export const localExpertAnalysis = (text: string, externalKeywords?: string[], isExactMatch: boolean = false): LocalAnalysisResult => {
-    
+    console.log('🔧 localExpertAnalysis V3.3.211 - polytrauma étendu + fallback générique');
+
     // 🔴 V3.3.162: NETTOYAGE TEXTE - Supprime caractères invisibles (zero-width space, etc.)
     // Ces caractères peuvent casser les regex et empêcher la détection
     text = text.replace(/[\u200B-\u200D\uFEFF]/g, ' '); // Zero-width spaces
