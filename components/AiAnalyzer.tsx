@@ -11668,6 +11668,24 @@ export const detectMultipleLesions = (text: string): {
     const hasAmputationOrLuxation = /amputation|luxation.*m[eé]tacarp/i.test(normalized);
     const hasMultipleFunctionalSequelae = hasAmputationOrLuxation && countFunctionalSequelae >= 3;
     
+    // 🆕 V3.3.204: Détection POLYTRAUMATISME CHUTE DE HAUTEUR (4+ lésions anatomiques distinctes)
+    // Ex: "contusion cérébrale + fracture mandibule + fracture L1 + lésion ligamentaire genou"
+    // Pattern typique: accident grave (chute échafaudage, AVP, chute) avec atteintes multisystémiques
+    const hasCraneLesion = /contusion.*c[eé]r[eé]brale|traumatisme.*cr[aâ]ni|perte.*connaissance|tc\s|t\.c\.|commotion/i.test(normalized);
+    const hasFaceLesion = /fracture.*(?:mandibule|maxillaire|m[aâ]choire|face|zygoma|orbite)/i.test(normalized);
+    const hasRachisLombaireLesion = /fracture.*(?:l1|l2|l3|l4|l5|lombaire|tassement.*vert[eé]bral)/i.test(normalized);
+    const hasGenouCheville = /(?:l[eé]sion|entorse|rupture).*(?:ligament|ligamentaire).*genou|genou.*(?:l[eé]sion|entorse|rupture)/i.test(normalized);
+    
+    // Comptage régions anatomiques majeures distinctes
+    const polytraumRegions = [
+        hasCraneLesion ? 'crane' : null,
+        hasFaceLesion ? 'face' : null,
+        hasRachisLombaireLesion ? 'rachis' : null,
+        hasGenouCheville ? 'genou' : null
+    ].filter(r => r !== null);
+    
+    const isPolytraumatismeGrave = polytraumRegions.length >= 3; // 3+ régions = polytraumatisme
+    
     // 6. Critères de cumul AMÉLIORÉS (détecte narratif médical naturel)
     const isCumul = 
         foundKeywords.length > 0 ||  // Keywords TRÈS explicites type "polytraumatisme"
@@ -11689,7 +11707,8 @@ export const detectMultipleLesions = (text: string): {
         hasPlexusAndAmputation ||      // 🆕 V3.3.140: Cumul plexus/paralysie + amputation
         hasMembreSupEtInf ||           // 🆕 Cumul membre supérieur + membre inférieur (polytraumatisme)
         hasMembreEtRachis ||           // 🆕 V3.3.147: Cumul fracture membre + lésion rachis (lombalgie/entorse)
-        hasMultipleFunctionalSequelae; // 🆕 V3.3.170: Cumul amputation/luxation + séquelles fonctionnelles multiples (amyotrophie + cicatrice + déviation + perte force)
+        hasMultipleFunctionalSequelae || // 🆕 V3.3.170: Cumul amputation/luxation + séquelles fonctionnelles multiples (amyotrophie + cicatrice + déviation + perte force)
+        isPolytraumatismeGrave;        // 🆕 V3.3.204: Polytraumatisme chute hauteur (3+ régions anatomiques majeures)
     
     // Estimation nombre de lésions
     const lesionCount = Math.max(
@@ -11708,7 +11727,8 @@ export const detectMultipleLesions = (text: string): {
         hasFractureAndPseudarthrose ? 2 : 1,  // 🆕 V3.3.142: Fracture + pseudarthrose = 2 lésions distinctes
         hasMembreSupEtInf ? 2 : 1,  // 🆕 V3.3.148: Membre supérieur + membre inférieur = 2 lésions distinctes (polytraumatisme)
         hasMembreEtRachis ? 2 : 1,  // 🆕 V3.3.147: Fracture membre + lésion rachis = 2 lésions distinctes
-        hasMultipleFunctionalSequelae ? Math.max(3, countFunctionalSequelae) : 1  // 🆕 V3.3.170: Polyséquelles fonctionnelles = nombre de séquelles détectées (min 3)
+        hasMultipleFunctionalSequelae ? Math.max(3, countFunctionalSequelae) : 1,  // 🆕 V3.3.170: Polyséquelles fonctionnelles = nombre de séquelles détectées (min 3)
+        isPolytraumatismeGrave ? polytraumRegions.length : 1  // 🆕 V3.3.204: Nombre régions anatomiques majeures distinctes
     );
     
     return {
@@ -11765,6 +11785,47 @@ const extractIndividualLesions = (text: string): string[] => {
                 console.log('✅ Pattern 0C (fracture + pseudarthrose) détecté:', lesions);
                 return lesions;
             }
+        }
+    }
+    
+    // 🆕 V3.3.204: Pattern 0C-bis: POLYTRAUMATISME CHUTE HAUTEUR (4 lésions anatomiques distinctes)
+    // Ex: "contusion cérébrale frontale, fracture mandibule, fracture L1, lésion ligamentaire genou"
+    // Pattern typique: Crâne + Face + Rachis + Membre (accident grave: chute échafaudage, AVP)
+    const hasCrane = /contusion.*c[eé]r[eé]brale|traumatisme.*cr[aâ]ni|perte.*connaissance|tc\s|t\.c\.|commotion/i.test(cleanedText);
+    const hasFace = /fracture.*(?:mandibule|maxillaire|m[aâ]choire|face|zygoma)/i.test(cleanedText);
+    const hasRachis = /fracture.*(?:l1|l2|l3|l4|l5|lombaire|tassement.*vert[eé]bral|rachis)/i.test(cleanedText);
+    const hasGenou = /(?:l[eé]sion|entorse|rupture).*(?:ligament|ligamentaire).*genou|genou.*(?:l[eé]sion|entorse)/i.test(cleanedText);
+    
+    if ((hasCrane || hasFace) && hasRachis && (hasGenou || hasFace)) {
+        const extractedLesions: string[] = [];
+        
+        // Extraire contusion cérébrale
+        if (hasCrane) {
+            const craneMatch = cleanedText.match(/contusion.*c[eé]r[eé]brale.*?(?:frontale|temporale|pari[eé]tale|occipitale)?.*?(?:avec.*?perte.*?connaissance.*?(?:br[eè]ve?|courte|quelques?.*?(?:minutes?|secondes?)))?/i);
+            if (craneMatch) extractedLesions.push(craneMatch[0].trim());
+        }
+        
+        // Extraire fracture mandibule/maxillaire
+        if (hasFace) {
+            const faceMatch = cleanedText.match(/fracture.*?(?:non\s+d[eé]plac[eé]e?)?\s*(?:de\s+la\s+)?(?:mandibule|maxillaire)/i);
+            if (faceMatch) extractedLesions.push(faceMatch[0].trim());
+        }
+        
+        // Extraire fracture lombaire
+        if (hasRachis) {
+            const rachisMatch = cleanedText.match(/fracture.*?(?:tassement)?\s*(?:stable)?\s*(?:de\s+)?(?:l1|l2|l3|l4|l5|lombaire|vert[eé]brale?.*?lombaire)/i);
+            if (rachisMatch) extractedLesions.push(rachisMatch[0].trim());
+        }
+        
+        // Extraire lésion ligamentaire genou
+        if (hasGenou) {
+            const genouMatch = cleanedText.match(/l[eé]sion\s+ligamentaire\s+(?:partielle\s+)?(?:du\s+)?genou\s+(?:droit|gauche)/i);
+            if (genouMatch) extractedLesions.push(genouMatch[0].trim());
+        }
+        
+        if (extractedLesions.length >= 3) {
+            console.log('✅ Pattern 0C-bis (polytraumatisme chute hauteur - 4 régions) détecté:', extractedLesions);
+            return extractedLesions;
         }
     }
     
