@@ -7037,10 +7037,11 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             searchTerms: ['Entorse du genou (sans laxité)', 'Séquelles d\'entorse bénigne du genou'],
             priority: 999
         },
-        // 🆕 V3.3.205: LÉSION LIGAMENTAIRE PARTIELLE GENOU (polytraumatisme)
+        // 🆕 V3.3.207: LÉSION LIGAMENTAIRE PARTIELLE GENOU (polytraumatisme)
+        // FIX: Pattern sans accents pour matcher après normalize()
         {
-            pattern: /l[eé]sion.*ligamentaire.*(?:partielle|mod[eé]r[eé]e).*genou|genou.*l[eé]sion.*ligamentaire.*(?:partielle|mod[eé]r[eé]e)/i,
-            context: /(?:droit|gauche)|immobilisation|r[eé][eé]ducation|entorse/i,
+            pattern: /lesion.*ligamentaire.*(?:partielle|moderee).*genou|genou.*lesion.*ligamentaire.*(?:partielle|moderee)/i,
+            context: /(?:droit|gauche)|immobilisation|reeducation|entorse/i,
             searchTerms: ['Laxité chronique du genou (séquelle d\'entorse)'],
             priority: 1003,  // HAUTE - avant fracture rotule
             negativeContext: /rotule|patella|fracture.*rotule/i
@@ -7132,13 +7133,14 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
         },
         
         // === RÈGLES TRAUMATISMES CRÂNIENS ET NEUROLOGIQUES (V3.3.2) ===
-        // 🆕 V3.3.205: CONTUSION CÉRÉBRALE + PERTE CONNAISSANCE BRÈVE (polytraumatisme)
+        // 🆕 V3.3.207: CONTUSION CÉRÉBRALE + PERTE CONNAISSANCE BRÈVE (polytraumatisme)
+        // FIX: Patterns sans accents pour matcher après normalize()
         {
-            pattern: /contusion.*c[eé]r[eé]brale|traumatisme.*cr[aâ]ni.*contusion/i,
-            context: /perte.*connaissance|frontale|temporale|pari[eé]tale|br[eè]ve|courte|surveillance.*neurologique/i,  // Contexte plus permissif
+            pattern: /contusion.*cerebrale|traumatisme.*crani.*contusion/i,
+            context: /perte.*connaissance|frontale|temporale|parietale|breve|courte|surveillance.*neurologique/i,
             searchTerms: ["Syndrome subjectif commun des blessures du crâne (céphalée, vertiges, troubles de l'humeur)"],
             priority: 1010,  // ULTRA HAUTE - au dessus de spondylolisthésis ET bassin+sciatique
-            negativeContext: /spondylo|listth[eé]sis|glissement.*vert[eé]bral/i  // Exclure explicitement spondylo
+            negativeContext: /spondylo|listthesis|glissement.*vertebral/i  // Exclure explicitement spondylo
         },
         {
             pattern: /(?:hémiparésie|troubles?\s+cognitif|céphalées?|vertiges?)/i,
@@ -7173,10 +7175,11 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             searchTerms: ["Brûlures du visage et du cou avec cicatrices défigurantes"],
             priority: 998
         },
-        // 🆕 V3.3.205: FRACTURE MANDIBULE NON DÉPLACÉE (polytraumatisme) = TROUBLE LÉGER
+        // 🆕 V3.3.207: FRACTURE MANDIBULE NON DÉPLACÉE (polytraumatisme) = TROUBLE LÉGER
+        // FIX: Pattern sans accents pour matcher après normalize()
         {
-            pattern: /fracture.*(?:non\s+d[eé]plac[eé]e|stable).*(?:mandibule|maxillaire.*inf[eé]rieur)|(?:mandibule|maxillaire.*inf[eé]rieur).*fracture.*(?:non\s+d[eé]plac[eé]e|stable)/i,
-            context: /traitement.*conservateur|consolidation|consolid[eé]e?/i,
+            pattern: /fracture.*(?:non\s+deplacee|stable).*(?:mandibule|maxillaire.*inferieur)|(?:mandibule|maxillaire.*inferieur).*fracture.*(?:non\s+deplacee|stable)/i,
+            context: /traitement.*conservateur|consolidation|consolidee?/i,
             searchTerms: ["Fracture du maxillaire inférieur - Consolidation vicieuse avec trouble léger de l'articulé"],
             priority: 1004,  // TRÈS HAUTE - éviter "trouble grave"
             negativeContext: /d[eé]plac[eé]e|trouble.*grave|pseudarthrose|infection/i
@@ -7407,11 +7410,11 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             negativeContext: /sans.*s[eé]quelle|gu[eé]rison/i
         },
         {
-            pattern: /spondylolysth[eé]sis|spondylo.*listh[eé]sis|listth[eé]sis|glissement\s+vert[eé]bral/i,
+            pattern: /spondylolisthesis|spondylo.*listhesis|listthesis|glissement\s+vertebral/i,
             context: /lombaire|L\d|S\d|rachis|traumatisme|post-traumatique/i,
             searchTerms: ['Spondylolisthésis modifié par traumatisme'],
             priority: 93,
-            negativeContext: /contusion.*c[eé]r[eé]brale|perte.*connaissance|mandibule|genou|polytraumatisme|chute.*[eé]chafaudage/i  // Exclure si polytraumatisme
+            negativeContext: /contusion.*cerebrale|perte.*connaissance|mandibule|genou|polytraumatisme|chute.*echafaudage/i  // V3.3.207: Sans accents
         },
         {
             pattern: /(?:fracture|fx).*(?:processus|apophyse).*transverse/i,
