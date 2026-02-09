@@ -7037,6 +7037,14 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             searchTerms: ['Entorse du genou (sans laxité)', 'Séquelles d\'entorse bénigne du genou'],
             priority: 999
         },
+        // 🆕 V3.3.205: LÉSION LIGAMENTAIRE PARTIELLE GENOU (polytraumatisme)
+        {
+            pattern: /l[eé]sion.*ligamentaire.*(?:partielle|mod[eé]r[eé]e).*genou|genou.*l[eé]sion.*ligamentaire.*(?:partielle|mod[eé]r[eé]e)/i,
+            context: /(?:droit|gauche)|immobilisation|r[eé][eé]ducation|entorse/i,
+            searchTerms: ['Laxité chronique du genou (séquelle d\'entorse)'],
+            priority: 1003,  // HAUTE - avant fracture rotule
+            negativeContext: /rotule|patella|fracture.*rotule/i
+        },
         
         {
             pattern: /rupture\s+(?:du\s+)?(?:ligament\s+crois[eé]\s+ant[eé]rieur|lca).*op[eé]r[eé]e?|op[eé]r[eé]e?.*(?:ligament\s+crois[eé]\s+ant[eé]rieur|lca)/i,
@@ -7124,6 +7132,14 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
         },
         
         // === RÈGLES TRAUMATISMES CRÂNIENS ET NEUROLOGIQUES (V3.3.2) ===
+        // 🆕 V3.3.205: CONTUSION CÉRÉBRALE + PERTE CONNAISSANCE BRÈVE (polytraumatisme)
+        {
+            pattern: /contusion.*c[eé]r[eé]brale|traumatisme.*cr[aâ]ni.*contusion/i,
+            context: /perte.*connaissance.*(?:br[eè]ve|courte|quelques.*(?:minute|seconde)|imm[eé]diate)|frontale|temporale|pari[eé]tale/i,
+            searchTerms: ["Syndrome subjectif commun des blessures du crâne (céphalée, vertiges, troubles de l'humeur)"],
+            priority: 1005,  // TRÈS HAUTE - avant spondylolisthésis
+            negativeContext: /(?:sans.*s[eé]quelle|gu[eé]rison.*compl[eè]te|asymptomatique)/i
+        },
         {
             pattern: /(?:hémiparésie|troubles?\s+cognitif|céphalées?|vertiges?)/i,
             context: /(?:hémiparésie.*troubles|troubles.*hémiparésie|hémiparésie.*céphal|céphal.*hémiparésie|troubles.*céphal|céphal.*troubles|vertiges.*hémiparésie|hémiparésie.*vertiges|vertiges.*troubles|troubles.*vertiges|vertiges.*céphal|céphal.*vertiges)/is,
@@ -7156,6 +7172,14 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             context: /(?:cicatric|d[eé]figurant|esth[eé]tique|2.*3.*degr[eé]|profond|greffe|r[eé]traction|acide|chimique)/i,
             searchTerms: ["Brûlures du visage et du cou avec cicatrices défigurantes"],
             priority: 998
+        },
+        // 🆕 V3.3.205: FRACTURE MANDIBULE NON DÉPLACÉE (polytraumatisme) = TROUBLE LÉGER
+        {
+            pattern: /fracture.*(?:non\s+d[eé]plac[eé]e|stable).*(?:mandibule|maxillaire.*inf[eé]rieur)|(?:mandibule|maxillaire.*inf[eé]rieur).*fracture.*(?:non\s+d[eé]plac[eé]e|stable)/i,
+            context: /traitement.*conservateur|consolidation|consolid[eé]e?/i,
+            searchTerms: ["Fracture du maxillaire inférieur - Consolidation vicieuse avec trouble léger de l'articulé"],
+            priority: 1004,  // TRÈS HAUTE - éviter "trouble grave"
+            negativeContext: /d[eé]plac[eé]e|trouble.*grave|pseudarthrose|infection/i
         },
         {
             pattern: /brûlures?.*(?:main|avant.*bras|poignet)|(?:main|avant.*bras|poignet).*brûlures?/i,
