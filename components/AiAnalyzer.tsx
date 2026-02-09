@@ -7133,14 +7133,15 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
         },
         
         // === RÈGLES TRAUMATISMES CRÂNIENS ET NEUROLOGIQUES (V3.3.2) ===
-        // 🆕 V3.3.207: CONTUSION CÉRÉBRALE + PERTE CONNAISSANCE BRÈVE (polytraumatisme)
-        // FIX: Patterns sans accents pour matcher après normalize()
+        // 🆕 V3.3.208: CONTUSION CÉRÉBRALE + PERTE CONNAISSANCE BRÈVE (polytraumatisme)
+        // FIX ULTIME: Debug activé + patterns simplifiés
         {
             pattern: /contusion.*cerebrale|traumatisme.*crani.*contusion/i,
             context: /perte.*connaissance|frontale|temporale|parietale|breve|courte|surveillance.*neurologique/i,
             searchTerms: ["Syndrome subjectif commun des blessures du crâne (céphalée, vertiges, troubles de l'humeur)"],
             priority: 1010,  // ULTRA HAUTE - au dessus de spondylolisthésis ET bassin+sciatique
-            negativeContext: /spondylo|listthesis|glissement.*vertebral/i  // Exclure explicitement spondylo
+            negativeContext: /spondylo|listthesis|glissement.*vertebral/i,  // Exclure explicitement spondylo
+            debug: true  // V3.3.208: ACTIVER DEBUG POUR COMPRENDRE POURQUOI ÇA NE MATCHE PAS
         },
         {
             pattern: /(?:hémiparésie|troubles?\s+cognitif|céphalées?|vertiges?)/i,
@@ -7414,7 +7415,8 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             context: /lombaire|L\d|S\d|rachis|traumatisme|post-traumatique/i,
             searchTerms: ['Spondylolisthésis modifié par traumatisme'],
             priority: 93,
-            negativeContext: /contusion.*cerebrale|perte.*connaissance|mandibule|genou|polytraumatisme|chute.*echafaudage/i  // V3.3.207: Sans accents
+            negativeContext: /contusion.*cerebrale|perte.*connaissance|mandibule|genou|polytraumatisme|chute.*echafaudage/i,  // V3.3.207: Sans accents
+            debug: true  // V3.3.208: DEBUG pour voir pourquoi il matche malgré negativeContext
         },
         {
             pattern: /(?:fracture|fx).*(?:processus|apophyse).*transverse/i,
