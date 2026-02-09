@@ -162,6 +162,34 @@ export const mayetReyComplement: InjuryCategory[] = [
         ]
       },
       {
+        name: "Doigts - Amputations Partielles",
+        injuries: [
+          // Index (D2)
+          { name: "Amputation P3 de l'index (Main Dominante)", rate: [4, 6], description: "Amputation de la phalange distale (P3) de l'index." },
+          { name: "Amputation P2 de l'index (Main Dominante)", rate: [6, 8], description: "Amputation de la phalange intermédiaire (P2) de l'index." },
+          { name: "Amputation P1 de l'index (Main Dominante)", rate: [10, 12], description: "Amputation de la phalange proximale (P1) de l'index." },
+          { name: "Amputation P2+P3 de l'index (Main Dominante)", rate: [8, 10], description: "Amputation de 2 phalanges distales de l'index." },
+          { name: "Amputation totale de l'index (Main Dominante)", rate: [12, 15], description: "Amputation des 3 phalanges de l'index." },
+          
+          { name: "Amputation P3 de l'index (Main Non-Dominante)", rate: [3, 5], description: "Amputation de la phalange distale (P3) de l'index." },
+          { name: "Amputation P2 de l'index (Main Non-Dominante)", rate: [5, 6], description: "Amputation de la phalange intermédiaire (P2) de l'index." },
+          { name: "Amputation P1 de l'index (Main Non-Dominante)", rate: [8, 10], description: "Amputation de la phalange proximale (P1) de l'index." },
+          { name: "Amputation P2+P3 de l'index (Main Non-Dominante)", rate: [6, 8], description: "Amputation de 2 phalanges distales de l'index." },
+          { name: "Amputation totale de l'index (Main Non-Dominante)", rate: [10, 12], description: "Amputation des 3 phalanges de l'index." },
+          
+          // Médius (D3)
+          { name: "Amputation P3 du médius (Main Dominante)", rate: [3, 5], description: "Amputation de la phalange distale (P3) du médius." },
+          { name: "Amputation P2 du médius (Main Dominante)", rate: [5, 6], description: "Amputation de la phalange intermédiaire (P2) du médius." },
+          { name: "Amputation P1 du médius (Main Dominante)", rate: [8, 10], description: "Amputation de la phalange proximale (P1) du médius." },
+          { name: "Amputation totale du médius (Main Dominante)", rate: [10, 12], description: "Amputation des 3 phalanges du médius." },
+          
+          { name: "Amputation P3 du médius (Main Non-Dominante)", rate: [2, 4], description: "Amputation de la phalange distale (P3) du médius." },
+          { name: "Amputation P2 du médius (Main Non-Dominante)", rate: [4, 5], description: "Amputation de la phalange intermédiaire (P2) du médius." },
+          { name: "Amputation P1 du médius (Main Non-Dominante)", rate: [6, 8], description: "Amputation de la phalange proximale (P1) du médius." },
+          { name: "Amputation totale du médius (Main Non-Dominante)", rate: [8, 10], description: "Amputation des 3 phalanges du médius." },
+        ]
+      },
+      {
         name: "Main et Poignet - Lésions Complexes",
         injuries: [
           { name: "Instabilité scapho-lunaire du poignet (Dominante)", rate: [15, 30], description: "Dissociation ligamentaire scapho-lunaire, poignet instable douloureux.", rateCriteria: { low: "Instabilité minime, douleurs d'effort.", high: "Instabilité majeure, arthrose secondaire débutante (SLAC wrist)." } },
