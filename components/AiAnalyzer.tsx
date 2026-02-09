@@ -11722,23 +11722,31 @@ export const detectMultipleLesions = (text: string): {
     const hasAmputationOrLuxation = /amputation|luxation.*metacarp/i.test(normalized);
     const hasMultipleFunctionalSequelae = hasAmputationOrLuxation && countFunctionalSequelae >= 3;
     
-    // 🆕 V3.3.208: Détection POLYTRAUMATISME CHUTE DE HAUTEUR (4+ lésions anatomiques distinctes)
-    // FIX ULTIME: Patterns SANS ACCENTS car normalized est sans accents
-    // Ex: "contusion cerebrale + fracture mandibule + fracture L1 + lesion ligamentaire genou"
-    // Pattern typique: accident grave (chute échafaudage, AVP, chute) avec atteintes multisystémiques
+    // 🆕 V3.3.210: Détection POLYTRAUMATISME ÉTENDU (toutes régions anatomiques majeures)
+    // Patterns SANS ACCENTS car normalized est sans accents
+    // Ex1: "contusion cerebrale + fracture mandibule + fracture L1 + lesion ligamentaire genou"
+    // Ex2: "traumatisme thoracique + fracture radius + trauma cervical + contusion cheville"
     const hasCraneLesion = /contusion.*cerebrale|traumatisme.*crani|perte.*connaissance|tc\s|t\.c\.|commotion/i.test(normalized);
     const hasFaceLesion = /fracture.*(?:mandibule|maxillaire|machoire|face|zygoma|orbite)/i.test(normalized);
     const hasRachisLombaireLesion = /fracture.*(?:l1|l2|l3|l4|l5|lombaire|tassement.*vertebral)/i.test(normalized);
     const hasGenouCheville = /(?:lesion|entorse|rupture).*(?:ligament|ligamentaire).*genou|genou.*(?:lesion|entorse|rupture)/i.test(normalized);
-    
-    // Comptage régions anatomiques majeures distinctes
+    const hasThoraxLesion = /(?:traumatisme|trauma).*thorac|fractures?.*cot[eé]s?|fractures?.*costale|volet.*costal|contusion.*thorac|contusion.*pulmonaire/i.test(normalized);
+    const hasMembreSupPolytraum = /fracture.*(?:radius|poignet|cubitus|ulna|humerus|clavicule|omoplate|scaphoide|avant.*bras)|fracture.*fermee?.*(?:radius|poignet)/i.test(normalized);
+    const hasRachisCervicalLesion = /traumatisme.*(?:rachis\s+)?cervical|cervicalgie.*post|entorse.*cervical|whiplash|coup.*lapin|raideur.*cervical|fracture.*(?:c[1-7]|atlas|axis)/i.test(normalized);
+    const hasCheville2 = /contusion.*cheville|entorse.*cheville|fracture.*(?:cheville|malleol)|traumatisme.*cheville|raideur.*cheville/i.test(normalized);
+
+    // Comptage régions anatomiques majeures distinctes (ÉTENDU V3.3.210)
     const polytraumRegions = [
         hasCraneLesion ? 'crane' : null,
         hasFaceLesion ? 'face' : null,
-        hasRachisLombaireLesion ? 'rachis' : null,
-        hasGenouCheville ? 'genou' : null
+        hasRachisLombaireLesion ? 'rachis_lombaire' : null,
+        hasGenouCheville ? 'genou' : null,
+        hasThoraxLesion ? 'thorax' : null,
+        hasMembreSupPolytraum ? 'membre_sup' : null,
+        hasRachisCervicalLesion ? 'rachis_cervical' : null,
+        hasCheville2 ? 'cheville' : null
     ].filter(r => r !== null);
-    
+
     const isPolytraumatismeGrave = polytraumRegions.length >= 3; // 3+ régions = polytraumatisme
     
     // 6. Critères de cumul AMÉLIORÉS (détecte narratif médical naturel)
@@ -11884,7 +11892,69 @@ const extractIndividualLesions = (text: string): string[] => {
             return extractedLesions;
         }
     }
-    
+
+    // 🆕 V3.3.210: Pattern 0C-ter: POLYTRAUMATISME ÉTENDU (toutes combinaisons de 3+ régions)
+    // Ex: "traumatisme thoracique avec fractures costales multiples, fracture fermée du radius gauche,
+    //       traumatisme du rachis cervical sans atteinte médullaire, contusion sévère de la cheville droite"
+    // Couvre TOUTES les combinaisons de régions anatomiques (thorax, membre sup, cervical, cheville, etc.)
+    const hasThorax = /(?:traumatisme|trauma).*thorac|fractures?.*cot[eé]s?|fractures?.*costale|volet.*costal|contusion.*thorac/i.test(cleanedText);
+    const hasMembreSup = /fracture.*(?:radius|poignet|cubitus|ulna|humerus|clavicule|omoplate|scaphoide|avant.*bras)|fracture.*fermee?.*(?:radius|poignet)/i.test(cleanedText);
+    const hasRachisCerv = /traumatisme.*(?:rachis\s+)?cervical|cervicalgie|entorse.*cervical|whiplash|coup.*lapin|raideur.*cervical/i.test(cleanedText);
+    const hasChevillePolytraum = /contusion.*cheville|entorse.*cheville|fracture.*(?:cheville|malleol)|traumatisme.*cheville/i.test(cleanedText);
+
+    const polytraumCountTer = [hasThorax, hasMembreSup, hasRachisCerv, hasChevillePolytraum, hasCrane, hasFace, hasRachis, hasGenou].filter(Boolean).length;
+
+    if (polytraumCountTer >= 3) {
+        const extractedLesionsTer: string[] = [];
+
+        // Extraire trauma thoracique / fractures costales
+        if (hasThorax) {
+            const thoraxMatch = cleanedText.match(/(?:traumatisme|trauma).*?thorac[a-z]*.*?(?:avec\s+)?fractures?.*?costales?.*?(?:multiples?|nombreuses?|[0-9]+)?|fractures?.*?costales?.*?(?:multiples?|nombreuses?)|fractures?.*?(?:de\s+)?cot[eé]s?.*?(?:multiples?|[0-9-]+)/i);
+            extractedLesionsTer.push(thoraxMatch ? thoraxMatch[0].trim() : 'traumatisme thoracique avec fractures costales');
+        }
+
+        // Extraire fracture membre supérieur (radius, etc.)
+        if (hasMembreSup) {
+            const membreSupMatch = cleanedText.match(/fracture\s*(?:fermee?|ouverte?|deplacee?|non\s+deplacee?)?\s*(?:du|de\s+la?)?\s*(?:radius|poignet|cubitus|ulna|humerus|clavicule|omoplate|avant.*?bras)\s*(?:gauche|droit|droite)?/i);
+            extractedLesionsTer.push(membreSupMatch ? membreSupMatch[0].trim() : 'fracture du radius');
+        }
+
+        // Extraire trauma cervical
+        if (hasRachisCerv) {
+            const cervicalMatch = cleanedText.match(/traumatisme\s+(?:du\s+)?(?:rachis\s+)?cervical\s*(?:sans\s+atteinte\s+medullaire|avec\s+raideur|chronique)?|cervicalgie\s*(?:post.*?traumatique)?|entorse\s+cervical[e]?\s*(?:benigne|grave)?/i);
+            extractedLesionsTer.push(cervicalMatch ? cervicalMatch[0].trim() : 'traumatisme du rachis cervical');
+        }
+
+        // Extraire contusion/lésion cheville
+        if (hasChevillePolytraum) {
+            const chevilleMatch = cleanedText.match(/contusion\s+(?:severe|importante|grave)?\s*(?:de\s+la?\s+)?cheville\s*(?:droite?|gauche)?|entorse\s+(?:de\s+la?\s+)?cheville\s*(?:droite?|gauche)?|fracture\s+(?:de\s+la?\s+)?(?:cheville|malleol[e]?)\s*(?:droite?|gauche)?|traumatisme\s+(?:de\s+la?\s+)?cheville\s*(?:droite?|gauche)?/i);
+            extractedLesionsTer.push(chevilleMatch ? chevilleMatch[0].trim() : 'contusion de la cheville');
+        }
+
+        // Inclure aussi crane/face/rachis lombaire/genou si présents
+        if (hasCrane) {
+            const craneMatch = cleanedText.match(/contusion.*cerebrale.*?(?:frontale|temporale|parietale|occipitale)?.*?(?:avec.*?perte.*?connaissance)?/i);
+            if (craneMatch) extractedLesionsTer.push(craneMatch[0].trim());
+        }
+        if (hasFace) {
+            const faceMatch = cleanedText.match(/fracture.*?(?:non\s+deplacee?)?\s*(?:de\s+la\s+)?(?:mandibule|maxillaire)/i);
+            if (faceMatch) extractedLesionsTer.push(faceMatch[0].trim());
+        }
+        if (hasRachis) {
+            const rachisMatch = cleanedText.match(/fracture.*?(?:tassement)?\s*(?:stable)?\s*(?:de\s+)?(?:l1|l2|l3|l4|l5|lombaire|vertebrale?.*?lombaire)/i);
+            if (rachisMatch) extractedLesionsTer.push(rachisMatch[0].trim());
+        }
+        if (hasGenou) {
+            const genouMatch = cleanedText.match(/(?:lesion|entorse|rupture)\s+ligamentaire\s+(?:partielle\s+)?(?:du\s+)?genou\s+(?:droit|gauche)/i);
+            if (genouMatch) extractedLesionsTer.push(genouMatch[0].trim());
+        }
+
+        if (extractedLesionsTer.length >= 3) {
+            console.log('✅ Pattern 0C-ter (polytraumatisme étendu - ' + extractedLesionsTer.length + ' régions) détecté:', extractedLesionsTer);
+            return extractedLesionsTer;
+        }
+    }
+
     // Pattern 0D: État antérieur cumul (V3.3.133) - PRIORITÉ MAXIMALE
     // Ex: "luxation épaule sur état antérieur fracture"
     // Ex: "entorse genou avec état antérieur rupture lca"
@@ -14148,6 +14218,30 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
                     /(?:mandibule|maxillaire).*fracture.*(?:non\s+deplacee|stable)/i.test(lesion)) {
                     enrichedLesion = lesion + ' consolidation vicieuse trouble leger articule traitement conservateur';
                     console.log(`   🔧 V3.3.209: Enrichissement fracture mandibule non déplacée: "${lesion}" → "${enrichedLesion}"`);
+                }
+
+                // 🆕 V3.3.210: FRACTURES COSTALES / TRAUMA THORACIQUE → Enrichir avec termes barème
+                if (/fractures?.*cot[eé]|fractures?.*costale|trauma.*thorac/i.test(lesion)) {
+                    enrichedLesion = lesion + ' fracture cotes non compliquee gêne nombre sequelles respiratoires nevralgie intercostale';
+                    console.log(`   🔧 V3.3.210: Enrichissement fractures costales: "${lesion}" → "${enrichedLesion}"`);
+                }
+
+                // 🆕 V3.3.210: FRACTURE RADIUS/POIGNET → Enrichir avec termes barème
+                if (/fracture.*(?:radius|poignet|avant.*bras)/i.test(lesion) && !/mandibule|maxillaire/i.test(lesion)) {
+                    enrichedLesion = lesion + ' fracture extremite inferieure radius pouteau colles consolidation cal vicieux';
+                    console.log(`   🔧 V3.3.210: Enrichissement fracture radius: "${lesion}" → "${enrichedLesion}"`);
+                }
+
+                // 🆕 V3.3.210: TRAUMATISME CERVICAL → Enrichir avec termes barème
+                if (/trauma.*cervical|cervicalgie|entorse.*cervical|whiplash|coup.*lapin/i.test(lesion)) {
+                    enrichedLesion = lesion + ' syndrome post traumatique cervical chronique whiplash coup lapin cervicalgie raideur rachis cervical';
+                    console.log(`   🔧 V3.3.210: Enrichissement trauma cervical: "${lesion}" → "${enrichedLesion}"`);
+                }
+
+                // 🆕 V3.3.210: CONTUSION/ENTORSE CHEVILLE → Enrichir avec termes barème
+                if (/contusion.*cheville|entorse.*cheville|traumatisme.*cheville/i.test(lesion)) {
+                    enrichedLesion = lesion + ' raideur cheville instabilite chronique sequelle entorse tibio tarsienne';
+                    console.log(`   🔧 V3.3.210: Enrichissement contusion cheville: "${lesion}" → "${enrichedLesion}"`);
                 }
 
                 // Si "lca" isolé, enrichir avec contexte complet
