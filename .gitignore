@@ -47,3 +47,6 @@ validation*.json
 ENTRAINEMENT_MASSIF_*.md
 .vercel
 .env*.local
+
+# Temporary Claude Code working directories
+tmpclaude-*/

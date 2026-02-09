@@ -7180,10 +7180,10 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
         // FIX: Pattern sans accents pour matcher après normalize()
         {
             pattern: /fracture.*(?:non\s+deplacee|stable).*(?:mandibule|maxillaire.*inferieur)|(?:mandibule|maxillaire.*inferieur).*fracture.*(?:non\s+deplacee|stable)/i,
-            context: /traitement.*conservateur|consolidation|consolidee?/i,
+            context: /traitement.*conservateur|consolidation|consolidee?|non\s+deplacee|stable|trouble.*leger/i,  // V3.3.209: Ajout "non deplacee" et "stable" comme contexte suffisant
             searchTerms: ["Fracture du maxillaire inférieur - Consolidation vicieuse avec trouble léger de l'articulé"],
             priority: 1004,  // TRÈS HAUTE - éviter "trouble grave"
-            negativeContext: /d[eé]plac[eé]e|trouble.*grave|pseudarthrose|infection/i
+            negativeContext: /trouble.*grave|pseudarthrose|infection/i  // V3.3.209: RETIRÉ "déplacée" du negativeContext car il matchait "non déplacée" → la règle ne se déclenchait JAMAIS
         },
         {
             pattern: /brûlures?.*(?:main|avant.*bras|poignet)|(?:main|avant.*bras|poignet).*brûlures?/i,
@@ -9021,10 +9021,33 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
                 
                 if (directMatches.length > 0) {
                     const directMatch = directMatches[0];
-                    const rateValue = Array.isArray(directMatch.rate) ? directMatch.rate[1] : directMatch.rate;
-                    
-                    console.log(`✅ [EXPERT RULE MATCH - PRIORITY ${rule.priority}] ${directMatch.name} = ${rateValue}%`);
-                    
+                    let rateValue: number;
+
+                    // 🆕 V3.3.209: Appliquer modération de sévérité pour intervalles (comme dans cumul Balthazard)
+                    // Au lieu de retourner systématiquement le max (rate[1]), évaluer la sévérité contextuelle
+                    if (Array.isArray(directMatch.rate)) {
+                        const [minRate, maxRate] = directMatch.rate;
+                        const aggravationData = calculateSeverityAdjustment(workingText);
+
+                        // Détection termes de faible sévérité dans le texte
+                        const isLowSeverity = /(?:non\s+d[eé]plac[eé]e?|stable|partielle?|mod[eé]r[eé]e?|l[eé]g[eè]re?|minime|favorable|bonne.*consolidation|sans.*complication|conservateur|br[eè]ve?|courte)/i.test(workingText);
+
+                        let coefficient = aggravationData.coefficient;
+
+                        // Plafonner le coefficient si faible sévérité détectée
+                        if (isLowSeverity) {
+                            coefficient = Math.min(coefficient, 0.35);  // Tiers bas de la fourchette
+                            console.log(`   📉 V3.3.209: Modération expert rule "${directMatch.name}" - sévérité LOW détectée`);
+                        }
+
+                        // Calculer le taux ajusté dans l'intervalle
+                        rateValue = Math.round(minRate + (maxRate - minRate) * coefficient);
+                        console.log(`✅ [EXPERT RULE MATCH - PRIORITY ${rule.priority}] ${directMatch.name} = [${minRate}-${maxRate}] → ${rateValue}% (coef: ${coefficient.toFixed(2)}${isLowSeverity ? ', LOW' : ''})`);
+                    } else {
+                        rateValue = directMatch.rate;
+                        console.log(`✅ [EXPERT RULE MATCH - PRIORITY ${rule.priority}] ${directMatch.name} = ${rateValue}%`);
+                    }
+
                     // 🆕 Justification médicale lisible pour déformations digitales
                     let medicalJustification = '';
                     if (directMatch.name.toLowerCase().includes('boutonnière') || directMatch.name.toLowerCase().includes('boutonniere')) {
@@ -14111,7 +14134,22 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
             for (const lesion of individualLesions) {
                 // 🆕 Enrichir la description pour améliorer le matching
                 let enrichedLesion = lesion;
-                
+
+                // 🆕 V3.3.209: CONTUSION CÉRÉBRALE (polytraumatisme) → Enrichir avec termes barème
+                // FIX: Sans enrichissement, le matching keyword peut dériver vers spondylolisthésis
+                if (/contusion.*cerebrale|cerebrale.*contusion/i.test(lesion)) {
+                    enrichedLesion = lesion + ' syndrome subjectif commun blessures crane cephalee vertiges troubles humeur perte connaissance';
+                    console.log(`   🔧 V3.3.209: Enrichissement contusion cérébrale: "${lesion}" → "${enrichedLesion}"`);
+                }
+
+                // 🆕 V3.3.209: FRACTURE MANDIBULE NON DÉPLACÉE → Enrichir avec "consolidation trouble léger"
+                // FIX: Sans enrichissement, le matching retourne "trouble grave" au lieu de "trouble léger"
+                if (/fracture.*(?:non\s+deplacee|stable).*(?:mandibule|maxillaire)/i.test(lesion) ||
+                    /(?:mandibule|maxillaire).*fracture.*(?:non\s+deplacee|stable)/i.test(lesion)) {
+                    enrichedLesion = lesion + ' consolidation vicieuse trouble leger articule traitement conservateur';
+                    console.log(`   🔧 V3.3.209: Enrichissement fracture mandibule non déplacée: "${lesion}" → "${enrichedLesion}"`);
+                }
+
                 // Si "lca" isolé, enrichir avec contexte complet
                 if (/^lca$/i.test(lesion.trim())) {
                     enrichedLesion = 'rupture ligament croisé antérieur genou laxité instabilité';
@@ -14198,9 +14236,15 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
                 // ✅ ACCEPTER proposal ET ambiguity
                 if (lesionResult.type === 'proposal') {
                     console.log(`   → Injury: ${lesionResult.injury.name}`);
-                    console.log(`   → Rate: ${lesionResult.injury.rate}`);
+                    console.log(`   → Rate calculé: ${lesionResult.rate}`);
+
+                    // 🆕 V3.3.209: CRITIQUE - Stocker le TAUX CALCULÉ (rate) au lieu de l'intervalle (injury.rate)
+                    // Sans cela, le calcul Balthazard recalcule la moyenne de l'intervalle original
                     lesionProposals.push({
-                        injury: lesionResult.injury,
+                        injury: {
+                            ...lesionResult.injury,
+                            rate: lesionResult.rate  // Utiliser le taux CALCULÉ par l'expert rule (5%) au lieu de l'intervalle ([5, 50])
+                        },
                         description: lesion,
                         justification: lesionResult.justification
                     });
@@ -14268,13 +14312,29 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
                         ? Math.round((proposal.injury.rate[0] + proposal.injury.rate[1]) / 2)
                         : proposal.injury.rate;
                     
-                    // 🆕 V3.3.141: Ajuster selon sévérité AUSSI dans calcul cumul
+                    // 🆕 V3.3.209: Ajuster selon sévérité de la LÉSION INDIVIDUELLE (pas du texte complet)
+                    // FIX: Utiliser proposal.description (texte de la lésion) au lieu de text (cas clinique complet)
+                    // L'ancien code utilisait le texte complet, ce qui gonflait tous les taux uniformément
                     if (Array.isArray(proposal.injury.rate)) {
-                        const aggravationData = calculateSeverityAdjustment(text);
-                        if (aggravationData.criteria.length > 0) {
+                        const lesionText = proposal.description || text;
+                        const aggravationData = calculateSeverityAdjustment(lesionText);
+
+                        // 🆕 V3.3.209: Modérateurs de sévérité pour lésions décrites comme bénignes
+                        // Si la description individuelle contient des termes de faible sévérité,
+                        // plafonner le coefficient pour éviter la surcotation
+                        const isLowSeverity = /(?:non\s+deplacee?|stable|partielle?|moderee?|legere?|minime|favorable|bonne.*consolidation|sans.*complication|conservateur)/i.test(lesionText);
+                        let adjustedCoefficient = aggravationData.coefficient;
+
+                        if (isLowSeverity) {
+                            // Plafonner à 0.35 (tiers bas de la fourchette) pour lésions de faible sévérité
+                            adjustedCoefficient = Math.min(adjustedCoefficient, 0.35);
+                            console.log(`   📉 V3.3.209: Modération sévérité "${lesionText.substring(0, 50)}..." → coefficient plafonné à ${adjustedCoefficient}`);
+                        }
+
+                        if (aggravationData.criteria.length > 0 || isLowSeverity) {
                             const [minRate, maxRate] = proposal.injury.rate;
-                            rate = Math.round(minRate + (maxRate - minRate) * aggravationData.coefficient);
-                            console.log(`   📊 Ajustement cumul lésion ${i+1}: [${minRate}-${maxRate}] → ${rate}% (${aggravationData.level})`);
+                            rate = Math.round(minRate + (maxRate - minRate) * adjustedCoefficient);
+                            console.log(`   📊 Ajustement cumul lésion ${i+1}: [${minRate}-${maxRate}] → ${rate}% (${aggravationData.level}${isLowSeverity ? ', modéré LOW' : ''})`);
                         }
                     }
                     
