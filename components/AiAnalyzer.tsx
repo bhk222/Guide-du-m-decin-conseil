@@ -11664,7 +11664,7 @@ export const detectMultipleLesions = (text: string): {
     // 🆕 V3.3.140: Détection plexus brachial/paralysie + amputation (cumul)
     // Ex: "plexus brachial droit (Duchenne-Erb C5-C6) avec amputation P1 D3"
     const hasPlexusOrParalysisLesion = /(?:plexus|paralysie|duchenne|erb|klumpke)/i.test(normalized);
-    const hasAmputationLesion = /amputation.*(?:p[123]\s+d[1-5]|doigt|phalange|pouce|index|m[eé]dius|annulaire|auriculaire)/i.test(normalized);
+    const hasAmputationLesion = /amputation.*(?:p[123]\s+d[1-5]|doigt|phalange|pouce|index|medius|annulaire|auriculaire)/i.test(normalized);
     const hasPlexusAndAmputation = hasPlexusOrParalysisLesion && hasAmputationLesion;
     
     // 🆕 V3.3.141: Détection FRACTURE BASSIN + NERF SCIATIQUE (cumul fréquent en traumatologie)
@@ -11672,39 +11672,41 @@ export const detectMultipleLesions = (text: string): {
     // hasBassinSciatiqueCumul déjà détecté plus haut (ligne ~10453)
     
     // 🆕 Détection cumul MEMBRE SUPÉRIEUR + MEMBRE INFÉRIEUR (polytraumatisme fréquent)
-    const hasMembreSupLesion = /(?:fracture|luxation|rupture|lesion).*(?:[eé]paule|coude|poignet|main|doigt|bras|avant.*bras|hum[eé]r|radius|ulna|cubitus|clavicule)/i.test(normalized);
-    const hasMembreInfLesion = /(?:fracture|luxation|rupture|lesion).*(?:hanche|genou|cheville|pied|orteil|jambe|cuisse|f[eé]mur|tibia|p[eé]ron[eé]|fibula)/i.test(normalized);
+    const hasMembreSupLesion = /(?:fracture|luxation|rupture|lesion).*(?:epaule|coude|poignet|main|doigt|bras|avant.*bras|humer|radius|ulna|cubitus|clavicule)/i.test(normalized);
+    const hasMembreInfLesion = /(?:fracture|luxation|rupture|lesion).*(?:hanche|genou|cheville|pied|orteil|jambe|cuisse|femur|tibia|perone|fibula)/i.test(normalized);
     const hasMembreSupEtInf = hasMembreSupLesion && hasMembreInfLesion;
     
     // 🆕 V3.3.147: Détection cumul FRACTURE MEMBRE + LÉSION RACHIS (trauma avec lombalgie/entorse lombaire)
     // Ex: "fracture radius droit avec lombalgie post-traumatique"
     // Ex: "fracture poignet et entorse lombaire"
-    const hasFractureMembre = /fracture.*(?:[eé]paule|coude|poignet|main|radius|ulna|hum[eé]r|f[eé]mur|tibia|jambe|cuisse|bras)/i.test(normalized);
-    const hasRachisLesion = /(?:lombalgie|entorse.*lombaire|entorse.*rachis|cervicalgie|dorsalgie|traumatisme.*cervical|coup.*lapin).*(?:post.*traumatique|m[eé]canique|chronique)/i.test(normalized);
+    const hasFractureMembre = /fracture.*(?:epaule|coude|poignet|main|radius|ulna|humer|femur|tibia|jambe|cuisse|bras)/i.test(normalized);
+    const hasRachisLesion = /(?:lombalgie|entorse.*lombaire|entorse.*rachis|cervicalgie|dorsalgie|traumatisme.*cervical|coup.*lapin).*(?:post.*traumatique|mecanique|chronique)/i.test(normalized);
     const hasMembreEtRachis = hasFractureMembre && hasRachisLesion;
     
-    // 🆕 V3.3.170: Détection POLYSÉQUELLES FONCTIONNELLES COMPLEXES (amyotrophie + cicatrice + déviation + perte force)
-    // Ex: "amputation D5 avec luxation M4-M5, amyotrophie main, cicatrice rétractile, déviation D2 D3 D4, perte force serrage"
+    // 🆕 V3.3.208: Détection POLYSÉQUELLES FONCTIONNELLES COMPLEXES (amyotrophie + cicatrice + déviation + perte force)
+    // FIX ULTIME: Patterns SANS ACCENTS car normalized est sans accents
+    // Ex: "amputation D5 avec luxation M4-M5, amyotrophie main, cicatrice retractile, deviation D2 D3 D4, perte force serrage"
     // Pattern: Amputation/luxation + au moins 3 séquelles fonctionnelles
     const countFunctionalSequelae = [
         /amyotrophie|atrophie.*(?:musculaire|main|doigt)/i.test(normalized),
-        /cicatrice.*r[eé]tractile|bride.*cutanée|cicatrice.*adh[eé]rente/i.test(normalized),
-        /d[eé]viation.*(?:digitale|doigt|d[2-5])|doigt.*d[eé]vi[eé]/i.test(normalized),
-        /(?:perte|diminution|r[eé]duction).*force.*serrage|force.*pr[eé]hension.*diminu[eé]e|serrage.*faible/i.test(normalized),
-        /enroulement.*(?:incomplet|limit[eé]|r[eé]duit)|(?:flexion|fermeture).*main.*incompl[eéè]te/i.test(normalized),
+        /cicatrice.*retractile|bride.*cutanee|cicatrice.*adherente/i.test(normalized),
+        /deviation.*(?:digitale|doigt|d[2-5])|doigt.*devie/i.test(normalized),
+        /(?:perte|diminution|reduction).*force.*serrage|force.*prehension.*diminuee|serrage.*faible/i.test(normalized),
+        /enroulement.*(?:incomplet|limite|reduit)|(?:flexion|fermeture).*main.*incomplete/i.test(normalized),
         /raideur.*(?:main|doigt|articulaire)/i.test(normalized)
     ].filter(Boolean).length;
     
-    const hasAmputationOrLuxation = /amputation|luxation.*m[eé]tacarp/i.test(normalized);
+    const hasAmputationOrLuxation = /amputation|luxation.*metacarp/i.test(normalized);
     const hasMultipleFunctionalSequelae = hasAmputationOrLuxation && countFunctionalSequelae >= 3;
     
-    // 🆕 V3.3.204: Détection POLYTRAUMATISME CHUTE DE HAUTEUR (4+ lésions anatomiques distinctes)
-    // Ex: "contusion cérébrale + fracture mandibule + fracture L1 + lésion ligamentaire genou"
+    // 🆕 V3.3.208: Détection POLYTRAUMATISME CHUTE DE HAUTEUR (4+ lésions anatomiques distinctes)
+    // FIX ULTIME: Patterns SANS ACCENTS car normalized est sans accents
+    // Ex: "contusion cerebrale + fracture mandibule + fracture L1 + lesion ligamentaire genou"
     // Pattern typique: accident grave (chute échafaudage, AVP, chute) avec atteintes multisystémiques
-    const hasCraneLesion = /contusion.*c[eé]r[eé]brale|traumatisme.*cr[aâ]ni|perte.*connaissance|tc\s|t\.c\.|commotion/i.test(normalized);
-    const hasFaceLesion = /fracture.*(?:mandibule|maxillaire|m[aâ]choire|face|zygoma|orbite)/i.test(normalized);
-    const hasRachisLombaireLesion = /fracture.*(?:l1|l2|l3|l4|l5|lombaire|tassement.*vert[eé]bral)/i.test(normalized);
-    const hasGenouCheville = /(?:l[eé]sion|entorse|rupture).*(?:ligament|ligamentaire).*genou|genou.*(?:l[eé]sion|entorse|rupture)/i.test(normalized);
+    const hasCraneLesion = /contusion.*cerebrale|traumatisme.*crani|perte.*connaissance|tc\s|t\.c\.|commotion/i.test(normalized);
+    const hasFaceLesion = /fracture.*(?:mandibule|maxillaire|machoire|face|zygoma|orbite)/i.test(normalized);
+    const hasRachisLombaireLesion = /fracture.*(?:l1|l2|l3|l4|l5|lombaire|tassement.*vertebral)/i.test(normalized);
+    const hasGenouCheville = /(?:lesion|entorse|rupture).*(?:ligament|ligamentaire).*genou|genou.*(?:lesion|entorse|rupture)/i.test(normalized);
     
     // Comptage régions anatomiques majeures distinctes
     const polytraumRegions = [
@@ -11818,38 +11820,39 @@ const extractIndividualLesions = (text: string): string[] => {
         }
     }
     
-    // 🆕 V3.3.204: Pattern 0C-bis: POLYTRAUMATISME CHUTE HAUTEUR (4 lésions anatomiques distinctes)
-    // Ex: "contusion cérébrale frontale, fracture mandibule, fracture L1, lésion ligamentaire genou"
+    // 🆕 V3.3.208: Pattern 0C-bis: POLYTRAUMATISME CHUTE HAUTEUR (4 lésions anatomiques distinctes)
+    // FIX ULTIME: Patterns SANS ACCENTS car cleanedText est normalisé
+    // Ex: "contusion cerebrale frontale, fracture mandibule, fracture L1, lesion ligamentaire genou"
     // Pattern typique: Crâne + Face + Rachis + Membre (accident grave: chute échafaudage, AVP)
-    const hasCrane = /contusion.*c[eé]r[eé]brale|traumatisme.*cr[aâ]ni|perte.*connaissance|tc\s|t\.c\.|commotion/i.test(cleanedText);
-    const hasFace = /fracture.*(?:mandibule|maxillaire|m[aâ]choire|face|zygoma)/i.test(cleanedText);
-    const hasRachis = /fracture.*(?:l1|l2|l3|l4|l5|lombaire|tassement.*vert[eé]bral|rachis)/i.test(cleanedText);
-    const hasGenou = /(?:l[eé]sion|entorse|rupture).*(?:ligament|ligamentaire).*genou|genou.*(?:l[eé]sion|entorse)/i.test(cleanedText);
+    const hasCrane = /contusion.*cerebrale|traumatisme.*crani|perte.*connaissance|tc\s|t\.c\.|commotion/i.test(cleanedText);
+    const hasFace = /fracture.*(?:mandibule|maxillaire|machoire|face|zygoma)/i.test(cleanedText);
+    const hasRachis = /fracture.*(?:l1|l2|l3|l4|l5|lombaire|tassement.*vertebral|rachis)/i.test(cleanedText);
+    const hasGenou = /(?:lesion|entorse|rupture).*(?:ligament|ligamentaire).*genou|genou.*(?:lesion|entorse)/i.test(cleanedText);
     
     if ((hasCrane || hasFace) && hasRachis && (hasGenou || hasFace)) {
         const extractedLesions: string[] = [];
         
-        // Extraire contusion cérébrale
+        // Extraire contusion cérébrale (SANS ACCENTS)
         if (hasCrane) {
-            const craneMatch = cleanedText.match(/contusion.*c[eé]r[eé]brale.*?(?:frontale|temporale|pari[eé]tale|occipitale)?.*?(?:avec.*?perte.*?connaissance.*?(?:br[eè]ve?|courte|quelques?.*?(?:minutes?|secondes?)))?/i);
+            const craneMatch = cleanedText.match(/contusion.*cerebrale.*?(?:frontale|temporale|parietale|occipitale)?.*?(?:avec.*?perte.*?connaissance.*?(?:breve?|courte|quelques?.*?(?:minutes?|secondes?)))?/i);
             if (craneMatch) extractedLesions.push(craneMatch[0].trim());
         }
         
-        // Extraire fracture mandibule/maxillaire
+        // Extraire fracture mandibule/maxillaire (SANS ACCENTS)
         if (hasFace) {
-            const faceMatch = cleanedText.match(/fracture.*?(?:non\s+d[eé]plac[eé]e?)?\s*(?:de\s+la\s+)?(?:mandibule|maxillaire)/i);
+            const faceMatch = cleanedText.match(/fracture.*?(?:non\s+deplacee?)?\s*(?:de\s+la\s+)?(?:mandibule|maxillaire)/i);
             if (faceMatch) extractedLesions.push(faceMatch[0].trim());
         }
         
-        // Extraire fracture lombaire
+        // Extraire fracture lombaire (SANS ACCENTS)
         if (hasRachis) {
-            const rachisMatch = cleanedText.match(/fracture.*?(?:tassement)?\s*(?:stable)?\s*(?:de\s+)?(?:l1|l2|l3|l4|l5|lombaire|vert[eé]brale?.*?lombaire)/i);
+            const rachisMatch = cleanedText.match(/fracture.*?(?:tassement)?\s*(?:stable)?\s*(?:de\s+)?(?:l1|l2|l3|l4|l5|lombaire|vertebrale?.*?lombaire)/i);
             if (rachisMatch) extractedLesions.push(rachisMatch[0].trim());
         }
         
-        // Extraire lésion ligamentaire genou
+        // Extraire lésion ligamentaire genou (SANS ACCENTS)
         if (hasGenou) {
-            const genouMatch = cleanedText.match(/l[eé]sion\s+ligamentaire\s+(?:partielle\s+)?(?:du\s+)?genou\s+(?:droit|gauche)/i);
+            const genouMatch = cleanedText.match(/lesion\s+ligamentaire\s+(?:partielle\s+)?(?:du\s+)?genou\s+(?:droit|gauche)/i);
             if (genouMatch) extractedLesions.push(genouMatch[0].trim());
         }
         
