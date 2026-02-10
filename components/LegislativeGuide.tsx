@@ -79,6 +79,19 @@ const SYNONYMS: Record<string, string[]> = {
   'conjoint': ['epoux', 'epouse', 'mari', 'femme', 'veuf', 'veuve'],
   'enfant': ['orphelin', 'fils', 'fille', 'mineur', 'descendant'],
   'ascendant': ['parent', 'pere', 'mere', 'grand parent'],
+  'gabrielli': ['etat anterieur', 'incapacite preexistante', 'antecedent'],
+  'guerison': ['gueri', 'guerir', 'remission', 'retablir', 'retablissement'],
+  'reprise': ['retour', 'reprendre', 'recommencer', 'reintegrer'],
+  'aggravation': ['aggraver', 'empirer', 'deteriorer', 'degrader'],
+  'polytraumatisme': ['poly trauma', 'multi lesion', 'multiple blessure'],
+  'survivant': ['ayant droit', 'veuve', 'veuf', 'orphelin', 'heritier', 'beneficiaire deces'],
+  'funeraire': ['obseques', 'enterrement', 'inhumation', 'funerailles'],
+  'revalorisation': ['augmentation', 'indexation', 'actualisation', 'mise a jour'],
+  'barème': ['grille', 'tableau', 'echelle', 'referentiel', 'guide', 'nomenclature'],
+  'mission': ['deplacement', 'detachement', 'voyage professionnel'],
+  'stagiaire': ['apprenti', 'eleve', 'formation', 'benevole', 'volontaire'],
+  'tableau': ['liste', 'nomenclature', 'repertoire', 'catalogue'],
+  'noir': ['informel', 'clandestin', 'non declare', 'sans contrat'],
 };
 
 // Expand query with synonyms for better matching
@@ -121,17 +134,62 @@ const extractNgrams = (text: string, n: number): string[] => {
 };
 
 // Detect greetings to respond conversationally
-const GREETINGS = ['bonjour', 'salut', 'bonsoir', 'salam', 'hello', 'hi', 'hey', 'bsr', 'bjr', 'slt', 'coucou'];
+const GREETINGS = ['bonjour', 'salut', 'bonsoir', 'salam', 'hello', 'hi', 'hey', 'bsr', 'bjr', 'slt', 'coucou', 'yo', 'wesh'];
 const isGreeting = (query: string): boolean => {
   const normalized = normalizeText(query).trim();
-  return GREETINGS.some(g => normalized === g || normalized.startsWith(g + ' ')) && normalized.split(/\s+/).length <= 4;
+  return GREETINGS.some(g => normalized === g || normalized.startsWith(g + ' ')) && normalized.split(/\s+/).length <= 5;
 };
 
 // Detect thanks
-const THANKS = ['merci', 'shukran', 'choukran', 'thanks', 'remercie'];
+const THANKS = ['merci', 'shukran', 'choukran', 'thanks', 'remercie', 'jazak', 'barak'];
 const isThanks = (query: string): boolean => {
   const normalized = normalizeText(query).trim();
   return THANKS.some(t => normalized.includes(t));
+};
+
+// Strip natural language prefixes to extract core intent
+const QUESTION_PREFIXES = [
+  'c est quoi', 'qu est ce que', 'qu est ce qu', 'que veut dire', 'que signifie',
+  'expliquer', 'expliquez', 'explique moi', 'dites moi', 'parlez moi de',
+  'parler de', 'je veux savoir', 'je voudrais savoir', 'pouvez vous expliquer',
+  'peux tu expliquer', 'comment fonctionne', 'comment marche', 'comment ca marche',
+  'quel est', 'quelle est', 'quels sont', 'quelles sont', 'a quoi sert',
+  'donnez moi', 'donne moi', 'je cherche', 'aide moi avec', 'aidez moi',
+  'comment faire', 'comment calculer', 'comment obtenir', 'comment declarer',
+  'en quoi consiste', 'definir', 'definition de', 'definition du', 'definition la',
+  'resume de', 'resumez', 'resumer', 'comprendre', 'une question sur',
+  'question sur', 'connaissez vous', 'connais tu', 'dis moi', 'besoin aide',
+  'besoin d aide', 'je ne comprends pas', 'il y a quoi dans', 'que dit',
+  'que prevoit', 'selon la loi', 'en vertu de', 'd apres la loi',
+];
+
+const stripQuestionPrefixes = (text: string): string => {
+  let stripped = normalizeText(text).trim();
+  for (const prefix of QUESTION_PREFIXES.sort((a, b) => b.length - a.length)) {
+    if (stripped.startsWith(prefix)) {
+      stripped = stripped.slice(prefix.length).trim();
+      break;
+    }
+  }
+  return stripped;
+};
+
+// Detect law number references ("83-13", "loi 83 11", "08-08")
+const detectLawReference = (query: string): string | null => {
+  const normalized = normalizeText(query);
+  const lawPatterns = [
+    { regex: /(?:loi|texte|code)?\s*83[\s-]*13/, key: 'explication_loi_83_13' },
+    { regex: /(?:loi|texte|code)?\s*83[\s-]*11/, key: 'explication_loi_83_11' },
+    { regex: /(?:loi|texte|code)?\s*08[\s-]*08/, key: 'explication_loi_08_08' },
+    { regex: /(?:loi|texte|code)?\s*83[\s-]*15/, key: 'explication_loi_83_15' },
+    { regex: /(?:loi|texte|code)?\s*83[\s-]*12/, key: 'explication_loi_83_12' },
+  ];
+  for (const { regex, key } of lawPatterns) {
+    if (regex.test(normalized) && !normalized.match(/article\s*\d+/)) {
+      return key;
+    }
+  }
+  return null;
 };
 
 const extractMeaningfulKeywords = (query: string): string[] => {
@@ -1734,10 +1792,986 @@ Le Guide du Médecin Conseil est un **document de référence** publié par la C
     relatedQuestions: ["Comment est fixé le taux d'incapacité ?", "Rôle du médecin conseil ?", "La formule de Balthazard ?"],
     category: 'medecin'
   },
-};
 
-// ═══════════════════════════════════════════════════════════════
-// AI QUERY PROCESSOR — Fuzzy intent matching with scoring
+  // ═══════════════════════════════════════════════════════════
+  // EXPLICATIONS DES LOIS — Résumés complets de chaque texte
+  // ═══════════════════════════════════════════════════════════
+  explication_loi_83_13: {
+    keywords: ['loi', '83', '13'],
+    synonymKeywords: ['loi 83-13', 'accidents travail loi', 'expliquer 83 13', 'resume loi at', 'texte at mp'],
+    summary: `## 📜 Loi 83-13 — Accidents du Travail et Maladies Professionnelles
+
+La **Loi n° 83-13 du 2 juillet 1983** est le texte fondamental qui régit les AT/MP en Algérie. Elle couvre l'ensemble du dispositif de protection des travailleurs contre les risques professionnels.
+
+### Structure de la loi :
+
+| Chapitre | Contenu | Articles |
+|----------|---------|----------|
+| **I** | Définitions (AT, trajet, MP) | Art. 6-12 |
+| **II** | Déclaration et constatation | Art. 13-19 |
+| **III** | Prestations en nature (soins) | Art. 20-36 |
+| **IV** | Prestations en espèces (IJ) | Art. 37-40 |
+| **V** | Incapacité permanente (rentes) | Art. 41-55 |
+| **VI** | Rechutes et révision | Art. 56-62 |
+| **VII** | Décès — ayants droit | Art. 63-67 |
+| **VIII** | Recours contre les tiers | Art. 68-72 |
+| **IX** | Prévention | Art. 73-75 |
+| **X** | Sanctions pénales | Art. 76-83 |
+
+### Principes clés :
+- **Présomption d'imputabilité** : tout accident au temps et lieu du travail est présumé AT
+- **Réparation automatique** : pas besoin de prouver une faute de l'employeur
+- **Prise en charge à 100%** : soins, hospitalisation, appareillage
+- **Indemnités journalières** : 100% du salaire dès le lendemain de l'AT
+- **Rentes viagères** : si IPP ≥ 10%
+- **Protection des ayants droit** : rentes en cas de décès
+
+> 💡 C'est **LE texte de référence** pour le médecin conseil en matière d'AT/MP.`,
+    relatedQuestions: ["Définition accident du travail ?", "Comment sont calculées les rentes ?", "Expliquer la Loi 83-11 ?", "Expliquer la Loi 08-08 ?"],
+    category: 'general'
+  },
+  explication_loi_83_11: {
+    keywords: ['loi', '83', '11'],
+    synonymKeywords: ['loi 83-11', 'assurances sociales loi', 'expliquer 83 11', 'resume loi assurance', 'regime assurance maladie'],
+    summary: `## 📜 Loi 83-11 — Assurances Sociales
+
+La **Loi n° 83-11 du 2 juillet 1983** organise le régime des assurances sociales en Algérie (maladie, maternité, invalidité, décès).
+
+### Structure de la loi :
+
+| Chapitre | Contenu | Thème |
+|----------|---------|-------|
+| **I** | Dispositions générales | Champ d'application |
+| **II** | Assurance maladie | Soins + IJ maladie |
+| **III** | Assurance maternité | Congé + IJ maternité |
+| **IV** | Assurance invalidité | 3 catégories + pension |
+| **V** | Assurance décès | Capital décès |
+| **VI** | Prestations en nature | Remboursements, ALD |
+| **VII** | Contrôle médical | Rôle du médecin conseil |
+
+### Points essentiels :
+
+| Prestation | Taux | Condition |
+|-----------|------|-----------|
+| Soins maladie ordinaire | **80%** | Ticket modérateur 20% |
+| Soins ALD | **100%** | Liste officielle ALD |
+| IJ maladie (J+1 à J+15) | **50%** | Carence 3 jours |
+| IJ maladie (après J+15) | **100%** | Si hospitalisation/ALD |
+| Congé maternité | **100%** | 150 jours |
+| Invalidité cat. 1 | **60%** du SAM | Capacité réduite des 2/3 |
+| Invalidité cat. 2 | **80%** du SAM | Inapte à tout travail |
+| Invalidité cat. 3 | **80% + 40%** | + tierce personne |
+
+> 💡 **Différence fondamentale** : La Loi 83-11 couvre la maladie **ordinaire**, tandis que la Loi 83-13 couvre les **AT/MP**. Les taux de prise en charge sont bien plus avantageux en AT/MP.`,
+    relatedQuestions: ["Assurance maladie ordinaire ?", "Quelles sont les ALD ?", "Catégories d'invalidité ?", "Congé de maternité ?"],
+    category: 'general'
+  },
+  explication_loi_08_08: {
+    keywords: ['loi', '08'],
+    synonymKeywords: ['loi 08-08', 'contentieux loi', 'expliquer 08 08', 'loi contentieux', 'loi recours'],
+    summary: `## 📜 Loi 08-08 — Contentieux en Matière de Sécurité Sociale
+
+La **Loi n° 2008-08 du 23 février 2008** a remplacé la Loi 83-15 pour moderniser les procédures de contentieux en sécurité sociale.
+
+### Les 3 types de contentieux :
+
+| Type | Objet | Procédure |
+|------|-------|-----------|
+| **Contentieux général** | Décisions administratives (refus de prise en charge, cotisations) | Recours préalable → Commission de recours → Tribunal |
+| **Contentieux médical** | Questions médicales (taux IPP, consolidation, aptitude) | Expertise médicale (Art. 17-25) |
+| **Contentieux technique médical** | Invalidité, inaptitude au travail | Commission nationale + expertise |
+
+### Procédure du contentieux médical (la plus utilisée par le MC) :
+
+\`\`\`
+1. Décision contestée du médecin conseil
+     ↓
+2. Recours préalable (15 jours) — Art. 8
+     ↓
+3. Expertise médicale (Art. 17-25)
+   - Expert choisi conjointement ou d'office
+   - Examen de la victime
+   - Rapport sous 30 jours (Art. 23)
+     ↓
+4. Décision de la CNAS sur base du rapport
+     ↓
+5. Si insatisfait → Tribunal (Art. 27)
+\`\`\`
+
+### Délais importants :
+
+| Recours | Délai | Article |
+|---------|-------|---------|
+| Contentieux général | **15 jours** | Art. 8 |
+| Contentieux médical | **15 jours** | Art. 20 |
+| Invalidité | **30 jours** | Art. 33 |
+| Contestation devant tribunal | **30 jours** après épuisement recours | Art. 27 |
+
+> ⚠️ Le recours préalable est **OBLIGATOIRE** avant toute saisine du tribunal. Son absence entraîne l'irrecevabilité.`,
+    relatedQuestions: ["Procédure d'expertise médicale ?", "Le recours préalable est-il obligatoire ?", "Délais de contestation ?", "Expliquer la Loi 83-13 ?"],
+    category: 'general'
+  },
+  explication_loi_83_15: {
+    keywords: ['loi', '83', '15'],
+    synonymKeywords: ['loi 83-15', 'ancien contentieux', 'expliquer 83 15', 'ancienne loi contentieux'],
+    summary: `## 📜 Loi 83-15 — Ancien Contentieux (abrogée partiellement par Loi 08-08)
+
+La **Loi n° 83-15 du 2 juillet 1983** était l'ancien texte régissant le contentieux en matière de sécurité sociale. Elle a été **largement remplacée** par la Loi 08-08 de 2008.
+
+### Ce qui reste pertinent :
+
+| Disposition | Statut |
+|------------|--------|
+| Faute inexcusable de l'employeur (Art. 45) | **Toujours en vigueur** |
+| Recours contre les tiers | Repris par Loi 08-08 |
+| Procédures de contentieux | **Remplacé** par Loi 08-08 |
+| Sanctions pénales | Partiellement en vigueur |
+
+### La faute inexcusable (Art. 45) — Disposition clé toujours applicable :
+- L'employeur qui avait ou devait avoir conscience du danger et n'a pas pris les mesures nécessaires
+- Conséquence : **majoration** de la rente de la victime
+- La CNAS verse puis se retourne contre l'employeur
+
+> 💡 Quand on parle de la Loi 83-15 aujourd'hui, c'est principalement pour la **faute inexcusable** (Art. 45). Pour le contentieux, il faut se référer à la **Loi 08-08**.`,
+    relatedQuestions: ["Qu'est-ce que la faute inexcusable ?", "Expliquer la Loi 08-08 ?", "Le recours contre un tiers ?"],
+    category: 'general'
+  },
+  explication_loi_83_12: {
+    keywords: ['loi', '83', '12'],
+    synonymKeywords: ['loi 83-12', 'retraite loi', 'expliquer 83 12', 'age retraite', 'pension retraite'],
+    summary: `## 📜 Loi 83-12 — La Retraite
+
+La **Loi n° 83-12 du 2 juillet 1983** organise le régime de retraite en Algérie.
+
+### Conditions de la retraite :
+
+| Type | Âge | Durée de cotisation |
+|------|-----|---------------------|
+| **Retraite normale** | **60 ans** (H) / **55 ans** (F) | 15 ans minimum |
+| **Retraite sans condition d'âge** | — | 32 ans de cotisation |
+| **Retraite proportionnelle** | 50 ans min. | 20 ans min. de cotisation |
+| **Retraite anticipée** (AT/MP) | Variable | Si IPP reconnue |
+
+### Calcul de la pension :
+\`Pension = 2,5% × nombre d'années × Salaire de référence\`
+
+- Plafond : **80%** du salaire de référence (après 32 ans)
+- Minimum : **75%** du SNMG
+
+### Lien avec les AT/MP :
+- Les périodes d'**ITT** (arrêt AT) comptent comme périodes de cotisation
+- La **rente AT** se cumule intégralement avec la pension de retraite
+- Possibilité de retraite anticipée pour **invalidité** suite à AT
+
+> 💡 Un travailleur peut cumuler : pension de retraite + rente AT/MP + majoration tierce personne.`,
+    relatedQuestions: ["Retraite anticipée et AT ?", "Peut-on cumuler rente et salaire ?", "Catégories d'invalidité ?"],
+    category: 'general'
+  },
+  explication_guide_1995: {
+    keywords: ['guide', '1995'],
+    synonymKeywords: ['guide medecin', 'guide pratique', 'guide cnas', 'manuel medecin'],
+    summary: `## 📜 Guide du Médecin Conseil (1995) — Le Manuel Pratique
+
+Le **Guide du Médecin Conseil** publié par la CNAS en 1995 est le document de référence pour la pratique quotidienne du contrôle médical.
+
+### Contenu détaillé :
+
+| Chapitre | Sujet | Utilité |
+|----------|-------|---------|
+| **1** | Cadre juridique | Rappel des lois applicables |
+| **2** | Contrôle des arrêts de travail | Méthodologie du contrôle |
+| **3** | Évaluation de l'IPP | Barème par appareil locomoteur |
+| **4** | Rechutes et révisions | Critères et procédures |
+| **5** | Expertise médicale | Déroulement pratique |
+| **6** | Invalidité | Les 3 catégories + commissions |
+| **7** | Formulaires types | Modèles de rapports |
+
+### Le barème indicatif (Chapitre 3) :
+Le guide contient un barème détaillé par appareil :
+- 🦴 Appareil locomoteur (membres supérieurs, inférieurs, rachis)
+- 🧠 Neurologie et psychiatrie
+- 👁️ Ophtalmologie
+- 👂 ORL
+- ❤️ Appareil cardio-vasculaire
+- 🫁 Appareil respiratoire
+- 🏥 Appareil digestif, urinaire, etc.
+
+### Statut juridique :
+- Document **indicatif** (pas force de loi)
+- Le médecin conseil peut s'en écarter avec **motivation écrite**
+- Sert de référence commune pour harmoniser les pratiques
+
+> 💡 Ce guide est intégralement accessible dans l'onglet **"Textes de Loi Intégraux"** de cette application.`,
+    relatedQuestions: ["Comment est fixé le taux d'incapacité ?", "Rôle du médecin conseil ?", "Les formules de calcul ?"],
+    category: 'general'
+  },
+
+  // ═══════════════════════════════════════════════════════════
+  // SUJETS EXPERTS AVANCÉS
+  // ═══════════════════════════════════════════════════════════
+  salaire_reference: {
+    keywords: ['salaire', 'reference'],
+    synonymKeywords: ['salaire moyen', 'base calcul', 'assiette', 'salaire journalier', 'salaire mensuel moyen'],
+    summary: `## 💵 Le salaire de référence
+
+Le **salaire de référence** est la base de calcul de toutes les prestations en espèces (IJ, rentes).
+
+### En AT/MP (Loi 83-13) :
+| Prestation | Salaire de référence |
+|-----------|---------------------|
+| **IJ** | 1/30e du salaire du mois précédant l'arrêt |
+| **Rente IPP** | Salaire annuel des 12 derniers mois (plafonné à 8× SNMG pour certains éléments) |
+
+### En maladie ordinaire (Loi 83-11) :
+| Prestation | Salaire de référence |
+|-----------|---------------------|
+| **IJ maladie** | 1/30e du salaire du mois précédant l'arrêt |
+| **IJ maternité** | Salaire journalier net |
+
+### Éléments inclus :
+- Salaire de base
+- Primes et indemnités régulières
+- Heures supplémentaires régulières
+
+### Éléments exclus :
+- Primes exceptionnelles
+- Remboursement de frais
+- Prestations familiales
+
+> 💡 Le salaire de référence pour la rente est **annualisé** : il prend en compte les 12 mois précédant l'accident ou l'arrêt.`,
+    relatedQuestions: ["Calcul de l'indemnité journalière ?", "Comment sont calculées les rentes ?", "Les cotisations de sécurité sociale ?"],
+    category: 'calcul'
+  },
+  capital_deces: {
+    keywords: ['capital', 'deces'],
+    synonymKeywords: ['capital deces', 'indemnite deces', 'deces assure', 'prime deces'],
+    summary: `## ⚰️ Capital décès (Loi 83-11, Art. 50-52)
+
+Le **capital décès** est une prestation versée en une seule fois aux ayants droit d'un assuré décédé (hors AT/MP).
+
+### Montant :
+- **12 fois** le salaire mensuel moyen des 3 derniers mois
+- Minimum fixé par voie réglementaire
+
+### Bénéficiaires (par ordre de priorité) :
+1. **Conjoint survivant**
+2. **Enfants** à charge
+3. **Ascendants** à charge
+
+### Différence capital décès vs rente AT/MP :
+
+| | Capital décès (maladie) | Rentes ayants droit (AT) |
+|---|------------------------|--------------------------|
+| **Nature** | Versement unique | Rentes trimestrielles |
+| **Durée** | Ponctuel | Viagère (conjoint) ou limitée (enfants) |
+| **Base légale** | Loi 83-11 | Loi 83-13, Art. 63-67 |
+| **Taux** | 12× salaire mensuel | % du salaire annuel selon le lien |
+
+### Rentes aux ayants droit (AT/MP — décès) :
+
+| Ayant droit | Taux de la rente |
+|------------|-----------------|
+| **Conjoint** | **30%** du salaire annuel |
+| **Chaque orphelin** | **15%** |
+| **Chaque ascendant** | **10%** |
+| **Total maximum** | **85%** du salaire annuel |
+
+> ⚠️ Les rentes AT aux ayants droit sont **cumulables** entre elles mais plafonnées à 85%.`,
+    relatedQuestions: ["Droits en cas de décès de la victime ?", "Comment sont calculées les rentes ?", "Le capital forfaitaire (IPP < 10%) ?"],
+    category: 'droits'
+  },
+  accident_mission: {
+    keywords: ['accident', 'mission'],
+    synonymKeywords: ['deplacement professionnel', 'mission travail', 'voyage affaire', 'detachement'],
+    summary: `## 🚗 Accident en mission (Art. 6, Loi 83-13)
+
+### Définition :
+Un accident survenu lors d'une **mission professionnelle** (en dehors du lieu habituel de travail) est considéré comme un **accident du travail**.
+
+### Conditions :
+- Le salarié doit être en **mission ordonnée** par l'employeur
+- L'accident doit survenir pendant la **durée de la mission**
+- Le lien avec l'activité professionnelle doit être maintenu
+
+### Ce qui est couvert :
+| Situation | Couvert ? |
+|-----------|----------|
+| Trajet vers le lieu de mission | **Oui** (AT de trajet) |
+| Accident pendant le travail sur place | **Oui** (AT) |
+| Accident à l'hôtel de mission | **Oui** (extension du lieu de travail) |
+| Accident pendant activité personnelle | **Non** (sauf s'il est dans le prolongement naturel) |
+
+### Preuve :
+- **Ordre de mission** écrit
+- **Billets** de transport
+- **Notes de frais** validées
+- **Témoignages**
+
+> 💡 La jurisprudence est favorable : pendant toute la durée de la mission, le salarié est sous la **subordination** de l'employeur, même pendant les temps de repos.`,
+    relatedQuestions: ["Définition accident du travail ?", "Qu'est-ce qu'un accident de trajet ?", "Qu'est-ce que l'imputabilité ?"],
+    category: 'general'
+  },
+  guerison_sans_sequelles: {
+    keywords: ['guerison', 'sans'],
+    synonymKeywords: ['guerison complete', 'aucune sequelle', 'pas de sequelle', 'guerison totale', 'remission complete'],
+    summary: `## ✅ Guérison sans séquelles
+
+### Définition :
+La **guérison** est la fin du traitement avec un retour à l'état antérieur. Il n'y a **aucune séquelle** indemnisable.
+
+### Conséquences :
+| Élément | Effet |
+|---------|-------|
+| **IPP** | 0% — Pas de rente |
+| **IJ** | Cessent à la date de guérison |
+| **Soins** | Plus de prise en charge AT |
+| **Dossier** | Clôturé |
+
+### Différence guérison vs consolidation :
+
+| | Guérison | Consolidation |
+|---|---------|---------------|
+| **Séquelles** | Aucune | Oui (stables) |
+| **IPP** | 0% | ≥ 1% |
+| **Rente** | Non | Si IPP ≥ 10% |
+| **Rechute possible** | Oui | Oui |
+
+### Le médecin conseil prononce la guérison quand :
+1. Les lésions sont **totalement réparées**
+2. L'examen clinique est **normal**
+3. Il n'y a **aucune limitation fonctionnelle**
+
+> ⚠️ Même en cas de guérison, la victime peut déclarer une **rechute** ultérieurement si de nouvelles lésions apparaissent en lien avec l'accident initial.`,
+    relatedQuestions: ["Qu'est-ce que la consolidation ?", "Comment gérer une rechute ?", "Comment est fixé le taux d'incapacité ?"],
+    category: 'medecin'
+  },
+  reprise_travail: {
+    keywords: ['reprise', 'travail'],
+    synonymKeywords: ['retour travail', 'fin arret', 'reprendre poste', 'aptitude reprise', 'mi temps therapeutique'],
+    summary: `## 🏢 Reprise du travail après AT/MP
+
+### Modalités :
+La reprise peut être :
+| Type | Condition | Décision de |
+|------|-----------|-------------|
+| **Reprise totale** | Guérison ou consolidation | Médecin traitant + MC |
+| **Reprise à temps partiel** | Mi-temps thérapeutique | Médecin conseil |
+| **Reprise avec aménagement** | Poste adapté | Médecin du travail |
+| **Inaptitude** | Impossibilité de reprendre | Commission médicale |
+
+### Mi-temps thérapeutique :
+- Reprise progressive à **50%** du temps de travail
+- **IJ complémentaires** versées par la CNAS pour le temps non travaillé
+- Durée limitée, soumise à l'avis du médecin conseil
+- L'employeur doit **accepter** l'aménagement
+
+### Visite de reprise :
+- **Obligatoire** après un arrêt de travail > 30 jours
+- Réalisée par le **médecin du travail**
+- Vérifie l'aptitude au poste
+
+### Protection du travailleur :
+- L'employeur **ne peut pas licencier** pendant l'arrêt maladie/AT
+- Si inaptitude → obligation de **reclassement** avant licenciement
+- Le salarié conserve son ancienneté
+
+> 💡 Le médecin du travail et le médecin conseil ont des rôles complémentaires : le MC évalue l'incapacité, le médecin du travail évalue l'aptitude au poste spécifique.`,
+    relatedQuestions: ["Contrôle des arrêts de travail ?", "Réadaptation professionnelle ?", "Qu'est-ce que la consolidation ?"],
+    category: 'medecin'
+  },
+  aggravation_vs_rechute: {
+    keywords: ['aggravation', 'rechute', 'difference'],
+    synonymKeywords: ['aggravation ou rechute', 'distinction aggravation', 'rechute vs aggravation'],
+    summary: `## 🔄 Aggravation vs Rechute — Distinction essentielle
+
+### Définitions :
+
+| | **Rechute** | **Aggravation** |
+|---|-----------|----------------|
+| **Moment** | Après consolidation/guérison | Avant consolidation |
+| **Nature** | Nouvelle poussée des lésions initiales | Évolution défavorable en cours de traitement |
+| **Conséquence** | Réouverture du dossier AT | Pas de changement de statut |
+| **IJ** | Nouvelles IJ versées | IJ en cours continuent |
+| **IPP** | Possible réévaluation | Pas encore évaluée |
+
+### La rechute (Art. 56, Loi 83-13) :
+- Survient **après** la date de consolidation ou guérison
+- Doit être en **lien direct** avec l'accident initial
+- Nécessite un **certificat médical de rechute**
+- La prise en charge est **à 100%** comme pour l'AT initial
+
+### L'aggravation (Art. 59, Loi 83-13) :
+- Survient **après** la consolidation
+- Modification du taux d'IPP à la hausse
+- La victime peut demander une **révision** (intervalle de 3 mois si < 2 ans, 1 an si > 2 ans)
+- Entraîne une **majoration de la rente**
+
+### En pratique pour le médecin conseil :
+
+| Situation | Action |
+|-----------|--------|
+| Nouvelles lésions liées à l'AT | → Rechute |
+| Mêmes séquelles qui s'aggravent | → Révision pour aggravation |
+| Apparition d'une nouvelle pathologie sans lien | → Rejet de rechute |
+
+> ⚠️ La distinction est cruciale car elle détermine le **régime de prise en charge** applicable.`,
+    relatedQuestions: ["Comment gérer une rechute ?", "Procédure de révision du taux ?", "Types de rejet de rechute ?"],
+    category: 'medecin'
+  },
+  contentieux_general_vs_medical: {
+    keywords: ['contentieux', 'general'],
+    synonymKeywords: ['difference contentieux', 'contentieux administratif', 'quel contentieux', 'type contentieux'],
+    summary: `## ⚖️ Les 3 types de contentieux (Loi 08-08)
+
+### Vue d'ensemble :
+
+| Type | Objet | Procédure | Délai |
+|------|-------|-----------|-------|
+| **Général** | Décisions administratives | Commission de recours préalable → Tribunal | 15 j |
+| **Médical** | Questions médicales | Expertise médicale → Tribunal | 15 j |
+| **Technique médical** | Invalidité/Inaptitude | Commission nationale → Tribunal | 30 j |
+
+### Le contentieux GÉNÉRAL (Art. 3-16) :
+Concerne les litiges **non médicaux** :
+- Refus d'affiliation
+- Contestation du montant des cotisations
+- Refus de prise en charge
+- Calcul des prestations
+
+→ **Procédure** : Recours devant la Commission de recours préalable de la CNAS
+
+### Le contentieux MÉDICAL (Art. 17-25) :
+Concerne les **décisions médicales** :
+- Taux d'IPP
+- Date de consolidation
+- Aptitude au travail
+- Durée de l'arrêt de travail
+- Date de guérison
+
+→ **Procédure** : Expertise médicale par un médecin expert
+
+### Le contentieux TECHNIQUE MÉDICAL (Art. 26-36) :
+Concerne spécifiquement :
+- **Invalidité** (catégorie, taux)
+- **Inaptitude** au travail
+
+→ **Procédure** : Commission nationale spécialisée
+
+> 💡 **Le médecin conseil est principalement concerné par le contentieux médical** (Art. 17-25). C'est là que ses décisions sont le plus souvent contestées.`,
+    relatedQuestions: ["Procédure d'expertise médicale ?", "Le recours préalable est-il obligatoire ?", "Délais de contestation ?"],
+    category: 'recours'
+  },
+  polytraumatisme: {
+    keywords: ['polytraumatisme'],
+    synonymKeywords: ['poly traumatisme', 'lesions multiples', 'plusieurs blessures', 'multi lesionnel', 'traumatismes multiples'],
+    summary: `## 🏥 Le polytraumatisme
+
+### Définition :
+Un **polytraumatisme** est la combinaison de **plusieurs lésions** traumatiques dont au moins une met en jeu le pronostic vital.
+
+### Évaluation de l'IPP en cas de polytraumatisme :
+
+**Méthode** : On utilise la **formule de Balthazard** (capacité restante) pour cumuler les différents taux.
+
+### Étapes :
+1. **Évaluer chaque lésion** séparément au barème
+2. **Classer** par ordre décroissant de gravité
+3. **Appliquer Balthazard** successivement
+
+### Exemple concret :
+Un accident de la route en mission causant :
+- Fracture fémur → barème : **20%**
+- Fracture poignet → barème : **12%**
+- Perte de 2 dents → barème : **5%**
+
+Calcul :
+\`Cumul₁₂ = 20% + (12% × 80%) = 20% + 9,6% = 29,6%\`
+\`Cumul₁₂₃ = 29,6% + (5% × 70,4%) = 29,6% + 3,5% = 33,1%\`
+
+→ **IPP globale = 33%** (arrondi) au lieu de 37% en addition simple.
+
+### Particularités :
+- Le médecin conseil peut ajouter l'**IPP sociale** si retentissement professionnel
+- Chaque séquelle doit être **décrite** et **motivée** individuellement
+- Le lien avec l'AT doit être établi pour **chaque lésion**
+
+> 💡 Toujours commencer par le taux le **plus élevé** et appliquer Balthazard en cascade.`,
+    relatedQuestions: ["Comment fonctionne la formule de Balthazard ?", "Calcul de la capacité restante ?", "Comment est fixé le taux d'incapacité ?"],
+    category: 'calcul'
+  },
+  carte_chifa: {
+    keywords: ['chifa', 'carte'],
+    synonymKeywords: ['carte assure', 'carte electronique', 'teletransmission', 'carte sante'],
+    summary: `## 💳 La carte CHIFA
+
+### Qu'est-ce que c'est ?
+La **carte CHIFA** est la carte électronique de l'assuré social algérien. Elle permet la **teletransmission** des données de soins et le remboursement automatique.
+
+### Fonctions :
+| Fonction | Détail |
+|----------|--------|
+| **Identification** | Contient le numéro d'assuré, les ayants droit |
+| **Tiers payant** | Dispense d'avance de frais chez les pharmaciens |
+| **Remboursement** | Automatisation des remboursements |
+| **Suivi** | Historique des consultations et ordonnances |
+
+### Qui en bénéficie ?
+- L'assuré social (titulaire)
+- Le conjoint
+- Les enfants (jusqu'à 18/21/25 ans selon le cas)
+- Les ascendants à charge
+
+### En cas d'AT/MP :
+- La carte CHIFA **n'est pas utilisée** pour les soins AT
+- On utilise la **feuille d'accident** (triptyque) qui donne droit à 100%
+- La CHIFA est pour les soins de **maladie ordinaire** (80%)
+
+### Obtention :
+1. Être affilié à la CNAS
+2. Fournir les documents (CNI, photos, attestation de travail)
+3. Retrait à l'agence CNAS
+
+> 💡 En pratique : **Feuille d'accident = 100% (AT)** vs **Carte CHIFA = 80% (maladie ordinaire)**.`,
+    relatedQuestions: ["Assurance maladie ordinaire ?", "La feuille d'accident ?", "Affiliation et immatriculation ?"],
+    category: 'pratique'
+  },
+  barème_officiel: {
+    keywords: ['bareme', 'officiel'],
+    synonymKeywords: ['bareme indicatif', 'grille evaluation', 'tableau ipp', 'referentiel bareme', 'bareme incapacite'],
+    summary: `## 📊 Le barème indicatif d'évaluation des IPP
+
+### Nature :
+Le barème est un **guide indicatif** qui propose des taux d'IPP pour chaque type de séquelle. Il fait partie du Guide du Médecin Conseil (1995).
+
+### Structure par appareil :
+
+| Appareil | Exemples de séquelles | Taux indicatifs |
+|----------|----------------------|-----------------|
+| 🦴 **Membres supérieurs** | Ankylose épaule, amputation doigt | 5% à 65% |
+| 🦵 **Membres inférieurs** | Ankylose genou, raccourcissement | 5% à 60% |
+| 🔙 **Rachis** | Raideur cervicale, fracture vertébrale | 5% à 70% |
+| 🧠 **Neurologie** | Séquelles traumatisme crânien | 5% à 100% |
+| 👁️ **Ophtalmologie** | Perte de vision, diplopie | 5% à 85% |
+| 👂 **ORL** | Surdité, vertiges | 5% à 60% |
+| ❤️ **Cardio-vasculaire** | Insuffisance cardiaque post-trauma | 10% à 100% |
+| 🫁 **Pneumologie** | Séquelles pulmonaires | 10% à 100% |
+| 🏥 **Digestif/Urinaire** | Séquelles abdominales | 5% à 80% |
+| 🦷 **Stomatologie** | Perte dentaire, trouble ATM | 1% à 30% |
+
+### Principes d'utilisation :
+1. Le barème est **indicatif**, pas obligatoire
+2. Le médecin conseil peut s'en écarter avec **motivation**
+3. Les taux tiennent compte de la **main dominante**
+4. On évalue les **séquelles fonctionnelles**, pas les lésions anatomiques
+
+> 💡 Ce barème est intégralement consultable dans le module **"Taux d'IPP"** de cette application.`,
+    relatedQuestions: ["Comment est fixé le taux d'incapacité ?", "Le Guide du Médecin Conseil 1995 ?", "La formule de Balthazard ?"],
+    category: 'medecin'
+  },
+  commission_invalidite_detail: {
+    keywords: ['commission', 'invalidite'],
+    synonymKeywords: ['commission medicale', 'commission locale', 'commission nationale', 'comite invalidite'],
+    summary: `## 🏛️ Les commissions (invalidité, AT, recours)
+
+### 1. Commission d'invalidité (Loi 83-11) :
+
+| Composition | Rôle |
+|------------|------|
+| Médecin conseil (président) | Évalue l'état de santé |
+| Médecin traitant | Présente le dossier médical |
+| Médecin du travail | Avis sur l'aptitude au poste |
+
+**Décide** : La catégorie d'invalidité (1, 2 ou 3) et le taux.
+
+### 2. Commission locale de recours préalable (Loi 08-08) :
+
+| Composition | Rôle |
+|------------|------|
+| Représentant CNAS | Examine le recours |
+| Représentant des assurés | Défend les droits de l'assuré |
+| Représentant des employeurs | Point de vue patronal |
+
+**Décide** : Sur les recours administratifs (contentieux général).
+
+### 3. Commission nationale d'invalidité (Loi 08-08, Art. 26-36) :
+
+| Compétence | Détail |
+|-----------|--------|
+| Invalidité contestée | Réévalue la catégorie |
+| Inaptitude au travail | Confirme ou infirme |
+
+### 4. Commission de réforme (secteur public) :
+- Spécifique aux **fonctionnaires**
+- Décide de la mise en invalidité
+- Détermine si l'invalidité est imputable au service
+
+> 💡 Le médecin conseil siège dans la quasi-totalité de ces commissions. Son avis médical est **déterminant**.`,
+    relatedQuestions: ["Catégories d'invalidité ?", "Le contentieux général vs médical ?", "Procédure d'expertise médicale ?"],
+    category: 'procedure'
+  },
+  journee_accident: {
+    keywords: ['journee', 'accident'],
+    synonymKeywords: ['jour accident', 'premier jour', 'j0', 'jour de l accident', 'charge employeur'],
+    summary: `## 📅 La journée de l'accident (Art. 35, Loi 83-13)
+
+### Règle :
+> La **journée de l'accident** est entièrement à la charge de l'**employeur**.
+
+### Chronologie :
+
+| Jour | Qui paie ? | Base |
+|------|-----------|------|
+| **J0** (jour de l'AT) | **Employeur** (salaire complet) | Art. 35 |
+| **J+1** et suivants | **CNAS** (IJ à 100%) | Art. 37 |
+
+### Conséquences pratiques :
+- L'employeur verse le salaire complet de la journée de l'accident
+- Les IJ de la CNAS démarrent le **lendemain**
+- Pas de **délai de carence** (contrairement à la maladie ordinaire)
+
+### Comparaison avec la maladie ordinaire :
+
+| | AT/MP | Maladie ordinaire |
+|---|------|-------------------|
+| **J0** | Employeur | Employeur |
+| **Carence** | **Aucune** | **3 jours** sans indemnité |
+| **IJ à partir de** | **J+1** | **J+4** |
+| **Taux IJ** | **100%** dès J+1 | 50% puis 100% |
+
+> 💡 L'absence de carence en AT est un avantage majeur pour la victime.`,
+    relatedQuestions: ["Calcul de l'indemnité journalière ?", "Définition accident du travail ?", "Obligations de l'employeur ?"],
+    category: 'calcul'
+  },
+  duree_maximale_arret: {
+    keywords: ['duree', 'maximale', 'arret'],
+    synonymKeywords: ['duree max', 'combien temps arret', 'limite arret travail', 'arret longue duree', 'delai maximal itt'],
+    summary: `## ⏱️ Durée maximale des arrêts de travail
+
+### En AT/MP :
+| Durée | Conséquence |
+|-------|-----------|
+| **Pas de limite légale fixe** | L'arrêt dure tant que l'état n'est pas consolidé |
+| **En pratique** : contrôles réguliers par le MC | Tous les 3 à 6 mois |
+| **Si l'état stagne** | Le MC peut prononcer la consolidation |
+
+### En maladie ordinaire (Loi 83-11) :
+| Durée | Conséquence |
+|-------|-----------|
+| Jusqu'à **3 ans** (1095 jours) | IJ maladie |
+| Au-delà de **3 ans** | Passage en **invalidité** si l'état le justifie |
+
+### Le passage en invalidité :
+Après épuisement des droits aux IJ maladie (3 ans) :
+1. Le médecin conseil évalue l'état
+2. Si capacité de travail réduite des **2/3** → invalidité
+3. Classification en catégorie 1, 2 ou 3
+4. Passage des IJ à la **pension d'invalidité**
+
+### Rôle du médecin conseil :
+- Contrôle la **justification** de l'arrêt
+- Vérifie l'**adéquation** entre les lésions et la durée
+- Peut **écourter** un arrêt injustifié
+- Prononce la **consolidation** quand l'état est stabilisé
+
+> ⚠️ En AT, il n'y a pas de durée maximale théorique, mais le MC a l'obligation de consolider dès que l'état est **stable** et que le traitement actif n'apporte plus d'amélioration.`,
+    relatedQuestions: ["Qu'est-ce que la consolidation ?", "Contrôle des arrêts de travail ?", "Catégories d'invalidité ?"],
+    category: 'medecin'
+  },
+  taux_minimum_rente: {
+    keywords: ['taux', 'minimum'],
+    synonymKeywords: ['seuil rente', 'minimum ipp', '10 pourcent', 'seuil 10'],
+    summary: `## 📊 Le seuil de 10% — Capital vs Rente
+
+### Le principe fondamental :
+Le taux de **10% d'IPP** est un seuil déterminant qui change la nature de la prestation :
+
+| Taux IPP | Type de prestation | Modalité |
+|----------|-------------------|----------|
+| **1% à 9%** | **Capital forfaitaire** | Versement unique |
+| **10% et plus** | **Rente** | Trimestrielle, viagère |
+
+### Pourquoi c'est crucial :
+- Un **capital** est versé une seule fois → pas de revalorisation
+- Une **rente** est versée **à vie**, avec revalorisation périodique
+- La rente ouvre droit à la **majoration tierce personne** (cat. 3)
+
+### Autour du seuil (8-12%) — Zone critique :
+Le médecin conseil doit être particulièrement **rigoureux** :
+- Un taux de **9%** = capital unique (quelques milliers de DA)
+- Un taux de **10%** = rente à vie (potentiellement des millions de DA)
+
+### La rente minimale :
+- Si le taux est exactement **10%**, le taux utile est **5%** (10/2)
+- La rente annuelle = 5% × salaire de référence annuel
+
+> 💡 L'évaluation entre 8% et 12% d'IPP requiert une **motivation détaillée** dans le rapport du médecin conseil.`,
+    relatedQuestions: ["Le capital forfaitaire (IPP < 10%) ?", "Comment sont calculées les rentes ?", "Le taux utile, c'est quoi ?"],
+    category: 'calcul'
+  },
+  legislation_comparee: {
+    keywords: ['difference', 'lois'],
+    synonymKeywords: ['comparaison lois', 'quelle loi applicable', 'coordination lois', 'articulation lois', 'lois algerie securite'],
+    summary: `## 📚 Articulation des lois de sécurité sociale algériennes
+
+### Vue d'ensemble du dispositif législatif :
+
+| Loi | Objet | Date |
+|-----|-------|------|
+| **83-11** | Assurances sociales (maladie, maternité, invalidité, décès) | 02/07/1983 |
+| **83-12** | Retraite | 02/07/1983 |
+| **83-13** | Accidents du travail et maladies professionnelles | 02/07/1983 |
+| **83-14** | Obligations des assujettis | 02/07/1983 |
+| **83-15** | Contentieux (partiellement abrogée) | 02/07/1983 |
+| **08-08** | Contentieux (nouveau texte) | 23/02/2008 |
+| **Guide 1995** | Guide pratique du médecin conseil | 1995 |
+
+### Quelle loi appliquer ?
+
+| Situation | Loi applicable |
+|-----------|---------------|
+| Accident au travail | **83-13** |
+| Maladie professionnelle | **83-13** |
+| Maladie ordinaire | **83-11** |
+| Maternité | **83-11** |
+| Invalidité | **83-11** |
+| Retraite | **83-12** |
+| Contestation médicale | **08-08** |
+| Faute inexcusable | **83-15** (Art. 45) |
+| Cotisations | **83-14** |
+
+> 💡 Le médecin conseil doit maîtriser **toutes ces lois** car un même dossier peut impliquer plusieurs textes (ex: un AT qui mène à une invalidité puis à une retraite anticipée).`,
+    relatedQuestions: ["Expliquer la Loi 83-13 ?", "Expliquer la Loi 83-11 ?", "Expliquer la Loi 08-08 ?", "Expliquer la Loi 83-12 ?"],
+    category: 'general'
+  },
+  travail_non_declare: {
+    keywords: ['travail', 'noir'],
+    synonymKeywords: ['non declare', 'sans contrat', 'informel', 'clandestin', 'pas affilie', 'pas assure'],
+    summary: `## 🚫 Travail non déclaré et droits de la victime
+
+### Le problème :
+Un travailleur **non déclaré** (travail au noir) n'est pas affilié à la CNAS et n'a théoriquement aucune couverture sociale.
+
+### Mais la loi protège quand même :
+
+| Situation | Droit de la victime |
+|-----------|-------------------|
+| AT chez un employeur non déclarant | La victime **conserve ses droits** |
+| Preuve de relation de travail | Peut saisir la CNAS + tribunal |
+| Emploi informel avec preuves | Attestations, témoignages acceptés |
+
+### Procédure pour la victime :
+1. Rassembler les **preuves** (bulletins de paie, témoins, virements)
+2. Déposer une **déclaration d'AT** directement à la CNAS
+3. La CNAS peut **contraindre** l'employeur
+4. En cas de refus → saisir le **tribunal social**
+
+### Sanctions pour l'employeur :
+- Remboursement de **toutes les prestations** versées par la CNAS
+- **Majorations** et pénalités de retard sur les cotisations dues
+- Poursuites **pénales** possibles
+
+> ⚠️ La CNAS peut agir d'office contre l'employeur. La victime ne doit **JAMAIS** renoncer à ses droits par crainte de perdre son emploi.`,
+    relatedQuestions: ["Affiliation et immatriculation ?", "Sanctions contre l'employeur ?", "Obligations de l'employeur ?"],
+    category: 'droits'
+  },
+  accident_benevolat: {
+    keywords: ['benevole'],
+    synonymKeywords: ['volontaire', 'stagiaire', 'apprenti', 'formation', 'eleve'],
+    summary: `## 👥 Stagiaires, apprentis et autres statuts
+
+### Extension de la couverture AT/MP :
+
+| Statut | Couvert AT/MP ? | Base légale |
+|--------|----------------|-------------|
+| **Salarié** | ✅ Oui | Loi 83-13 |
+| **Apprenti** | ✅ Oui | Couvert comme un salarié |
+| **Stagiaire rémunéré** | ✅ Oui | Convention de stage |
+| **Élève en formation technique** | ✅ Oui | Dispositions spéciales |
+| **Travailleur indépendant** | ⚠️ Selon affiliation | CASNOS |
+| **Bénévole** | ❌ Non (sauf dispositions) | Pas de couverture SS |
+
+### Le cas des apprentis :
+- Couverts comme des **salariés** pendant leur apprentissage
+- L'entreprise d'accueil est responsable de la **déclaration**
+- Les cotisations sont à la charge de l'**employeur**
+
+### Le cas du travailleur indépendant :
+- Affilié à la **CASNOS** (pas la CNAS)
+- Régime différent pour les AT
+- Couverture maladie + retraite
+
+> 💡 Le critère essentiel est l'existence d'un **lien de subordination** : si le travailleur est sous l'autorité d'un employeur, il est couvert, quel que soit son statut contractuel.`,
+    relatedQuestions: ["Définition accident du travail ?", "Affiliation et immatriculation ?", "Qu'est-ce que l'imputabilité ?"],
+    category: 'droits'
+  },
+  accident_trajet_detail: {
+    keywords: ['trajet', 'detail'],
+    synonymKeywords: ['accident route', 'domicile travail', 'itineraire habituel', 'detour trajet', 'trajet protege'],
+    summary: `## 🛣️ L'accident de trajet en détail (Art. 12, Loi 83-13)
+
+### Définition élargie :
+L'accident de trajet couvre le parcours entre :
+
+| Trajet protégé | De → À |
+|---------------|--------|
+| **Aller** | Domicile → Lieu de travail |
+| **Retour** | Lieu de travail → Domicile |
+| **Pause déjeuner** | Lieu de travail → Restaurant habituel |
+| **Formation** | Lieu de travail → Centre de formation |
+
+### Conditions :
+1. Trajet **normal** et direct (itinéraire habituel)
+2. Horaires **compatibles** avec les horaires de travail
+3. Pas d'**interruption prolongée** pour motif personnel
+
+### Détours acceptés :
+| Détour | Couvert ? |
+|--------|----------|
+| Poser/récupérer les enfants | ✅ Oui (nécessité familiale) |
+| Courses alimentaires rapides | ✅ Oui (acte de la vie courante) |
+| Détour important pour convenance | ❌ Non |
+| Itinéraire différent pour éviter embouteillage | ✅ Oui |
+
+### Preuve :
+- Le salarié doit prouver qu'il était **sur son trajet habituel**
+- **Rapport de police** en cas d'accident de la route
+- **Témoignages** de collègues ou passants
+- **Horaires** d'embauche et de fin de poste
+
+> ⚠️ Si un tiers est responsable de l'accident (autre conducteur), la **CNAS verse les prestations puis se retourne contre le tiers** (subrogation, Art. 68).`,
+    relatedQuestions: ["Qu'est-ce qu'un accident de trajet ?", "Le recours contre un tiers ?", "Définition accident du travail ?"],
+    category: 'general'
+  },
+  rente_survivants: {
+    keywords: ['rente', 'survivants'],
+    synonymKeywords: ['ayants droit deces', 'rente orphelin', 'rente veuve', 'rente conjoint', 'deces suite at'],
+    summary: `## 👥 Rentes aux survivants (Art. 63-67, Loi 83-13)
+
+### En cas de décès suite à un AT/MP :
+Les **ayants droit** de la victime décédée ont droit à des rentes calculées sur le salaire annuel de la victime.
+
+### Taux des rentes :
+
+| Bénéficiaire | Taux | Conditions |
+|-------------|------|-----------|
+| **Conjoint** | **30%** du salaire annuel | Non remarié(e) |
+| **Chaque orphelin de père OU de mère** | **15%** | < 18 ans (ou 21/25 si études) |
+| **Chaque orphelin de père ET de mère** | **30%** | < 18 ans (ou 21/25 si études) |
+| **Chaque ascendant** à charge | **10%** | Si à la charge de la victime |
+
+### Plafond :
+> Le total des rentes ne peut dépasser **85%** du salaire annuel de référence de la victime.
+
+### Durée des rentes :
+
+| Bénéficiaire | Durée |
+|-------------|-------|
+| Conjoint | **Viagère** (à vie, sauf remariage) |
+| Enfants | Jusqu'à **18 ans** (21 si études, 25 si études supérieures) |
+| Ascendants | **Viagère** |
+| Enfant handicapé | **Sans limite d'âge** |
+
+### En cas de remariage du conjoint :
+- La rente est **suspendue** (pas supprimée)
+- Si le nouveau mariage est dissous → la rente **reprend**
+
+### Frais funéraires :
+La CNAS prend en charge les **frais funéraires** dans la limite d'un plafond réglementaire.
+
+> 💡 Les rentes aux ayants droit sont **révisables** : si un enfant atteint l'âge limite, sa part est **redistribuée** aux autres bénéficiaires (dans la limite du plafond de 85%).`,
+    relatedQuestions: ["Droits en cas de décès de la victime ?", "Comment sont calculées les rentes ?", "Le capital décès ?"],
+    category: 'droits'
+  },
+  tableau_maladies_pro: {
+    keywords: ['tableau', 'maladies', 'professionnelles'],
+    synonymKeywords: ['liste mp', 'nomenclature mp', 'maladies reconnues', 'tableau officiel mp'],
+    summary: `## 📋 Les tableaux de maladies professionnelles
+
+### Le système :
+La reconnaissance d'une **maladie professionnelle** repose sur des **tableaux officiels** qui fixent pour chaque maladie :
+1. La **désignation** de la maladie
+2. Le **délai de prise en charge** (temps entre la fin d'exposition et l'apparition)
+3. La **liste des travaux** susceptibles de provoquer la maladie
+
+### Exemples de tableaux :
+
+| N° | Maladie | Délai | Travaux |
+|----|---------|-------|---------|
+| 1 | Intoxication par le plomb | 30 j à 1 an | Fonderie, peinture, batterie |
+| 25 | Silicose | 5 à 30 ans | Mines, carrières, fonderie |
+| 42 | Surdité professionnelle | 1 an | Exposition au bruit > 85 dB |
+| 57 | Affections péri-articulaires | 6 mois | Gestes répétitifs |
+| 98 | Affections dorsales | 6 mois | Manutention lourde |
+
+### Conditions de reconnaissance :
+1. La maladie figure dans un **tableau officiel**
+2. Le travailleur a été **exposé** au risque
+3. Le **délai de prise en charge** est respecté
+4. Les travaux correspondent à la **liste indicative**
+
+### Si la maladie ne figure dans aucun tableau :
+- Procédure particulière devant une **commission spéciale**
+- Doit prouver un lien **direct et essentiel** avec le travail
+- Plus difficile à faire reconnaître
+
+> 💡 Ce module dédié aux **maladies professionnelles** est accessible dans l'onglet spécifique de cette application.`,
+    relatedQuestions: ["Qu'est-ce qu'une maladie professionnelle ?", "Déclaration maladie professionnelle ?", "Prescription des droits ?"],
+    category: 'general'
+  },
+  frais_funeraires: {
+    keywords: ['frais', 'funeraires'],
+    synonymKeywords: ['obseques', 'enterrement', 'funerailles', 'inhumation', 'deces frais'],
+    summary: `## ⚰️ Frais funéraires (Art. 63, Loi 83-13)
+
+### Prise en charge :
+En cas de **décès suite à un AT/MP**, la CNAS prend en charge les frais funéraires.
+
+### Montant :
+- Fixé par voie **réglementaire** (arrêté)
+- Correspond au coût réel dans la limite d'un **plafond**
+
+### Qui en bénéficie :
+La personne qui a **effectivement supporté** les frais funéraires (conjoint, enfant, parent, ou toute personne).
+
+### Procédure :
+1. Certificat de décès mentionnant l'AT comme cause
+2. Factures des frais funéraires
+3. Demande de remboursement à la CNAS
+
+> 💡 Les frais funéraires sont distincts des **rentes aux ayants droit** : ils couvrent les dépenses d'inhumation, pas l'indemnisation des survivants.`,
+    relatedQuestions: ["Droits en cas de décès de la victime ?", "Rentes aux survivants ?", "Le capital décès ?"],
+    category: 'droits'
+  },
+  revalorisation_rentes: {
+    keywords: ['revalorisation'],
+    synonymKeywords: ['augmentation rente', 'indexation rente', 'actualisation rente', 'mise a jour rente'],
+    summary: `## 📈 Revalorisation des rentes
+
+### Principe :
+Les rentes AT/MP et les pensions d'invalidité sont **périodiquement revalorisées** pour maintenir le pouvoir d'achat.
+
+### Mécanisme :
+| Élément | Détail |
+|---------|--------|
+| **Fréquence** | Annuelle ou selon décret |
+| **Base** | Évolution du SNMG ou coefficient fixé par décret |
+| **Application** | Automatique (pas de demande) |
+| **Effet** | Augmentation proportionnelle de la rente |
+
+### Ce qui est revalorisé :
+- ✅ Rentes AT/MP (IPP ≥ 10%)
+- ✅ Pensions d'invalidité
+- ✅ Rentes aux ayants droit (décès AT)
+- ❌ Capital forfaitaire (IPP < 10%) — versé une seule fois
+
+### Historique récent :
+Les revalorisations suivent généralement l'**augmentation du SNMG** et l'**inflation**.
+
+> 💡 C'est un avantage majeur de la **rente** (taux ≥ 10%) par rapport au **capital** (taux < 10%) : la rente est revalorisée, le capital non.`,
+    relatedQuestions: ["Comment sont calculées les rentes ?", "Le seuil de 10% ?", "Le capital forfaitaire (IPP < 10%) ?"],
+    category: 'calcul'
+  },
+};
 // ═══════════════════════════════════════════════════════════════
 
 const processQuery = (query: string, context?: ConversationContext): { text: string; relatedQuestions?: string[]; confidence: 'high' | 'medium' | 'low'; sources?: string[]; intentKey?: string; category?: string } => {
@@ -1770,6 +2804,20 @@ const processQuery = (query: string, context?: ConversationContext): { text: str
     };
   }
 
+  // ─── 0.5. Law reference detection ("expliquer la loi 83-13", "c'est quoi la 08-08") ───
+  const lawRef = detectLawReference(normalizedQuery);
+  if (lawRef && INTENTS[lawRef]) {
+    const intent = INTENTS[lawRef];
+    return {
+      text: intent.summary || intent.text || '',
+      relatedQuestions: intent.relatedQuestions,
+      confidence: 'high',
+      sources: [],
+      intentKey: lawRef,
+      category: intent.category
+    };
+  }
+
   // ─── 1. Specific article lookup ───
   const articleMatch = normalizedQuery.match(/article\s*(\d+)\s*(?:de la loi\s*)?(\d{2,2}[\s-]\d{2,2})?/);
   if (articleMatch) {
@@ -1789,14 +2837,17 @@ const processQuery = (query: string, context?: ConversationContext): { text: str
     }
   }
 
-  // ─── 2. Scored intent matching (enhanced with n-grams) ───
+  // ─── 2. Scored intent matching (enhanced with n-grams + prefix stripping) ───
+  const strippedQuery = stripQuestionPrefixes(normalizedQuery);
+  const strippedKeywords = extractMeaningfulKeywords(strippedQuery);
+  const allKeywords = [...new Set([...queryKeywords, ...strippedKeywords])];
   const intentScores: { key: string; score: number; intent: IntentDef }[] = [];
 
   for (const [key, intent] of Object.entries(INTENTS)) {
     let score = 0;
 
-    // Primary keywords: weighted match
-    const primaryMatches = intent.keywords.filter(kw => normalizedQuery.includes(normalizeText(kw)));
+    // Primary keywords: check against both original and stripped query
+    const primaryMatches = intent.keywords.filter(kw => normalizedQuery.includes(normalizeText(kw)) || strippedQuery.includes(normalizeText(kw)));
     score += primaryMatches.length * 3;
     
     // Bonus if ALL primary keywords match
@@ -1829,11 +2880,16 @@ const processQuery = (query: string, context?: ConversationContext): { text: str
       }
     }
 
-    // Query keywords match against intent keywords (expanded)
+    // Query keywords match against intent keywords (expanded) — using merged keywords
     const expandedIntentKw = expandQueryWithSynonyms(intent.keywords);
-    queryKeywords.forEach(qk => {
+    allKeywords.forEach(qk => {
       if (expandedIntentKw.includes(qk)) score += 1;
     });
+
+    // Bonus: check intent key name against stripped query
+    const keyWords = key.split('_').filter(w => w.length > 2);
+    const keyMatches = keyWords.filter(kw => strippedQuery.includes(kw));
+    if (keyMatches.length >= 2) score += 3;
 
     // Context bonus: if the user was discussing the same category, give a boost
     if (context?.lastCategory && intent.category === context.lastCategory) {
@@ -2188,6 +3244,17 @@ const QUESTION_CATEGORIES: QuestionCategory[] = [
             "Peut-on cumuler rente et salaire ?",
             "Conversion rente en capital ?",
             "Catégories d'invalidité ?",
+        ]
+    },
+    {
+        icon: '📜', label: 'Lois & Textes', color: 'border-orange-300 bg-orange-50',
+        questions: [
+            "Expliquer la Loi 83-13 ?",
+            "Expliquer la Loi 83-11 ?",
+            "Expliquer la Loi 08-08 ?",
+            "Expliquer la Loi 83-12 ?",
+            "Articulation des lois ?",
+            "Le barème officiel d'IPP ?",
         ]
     }
 ];
