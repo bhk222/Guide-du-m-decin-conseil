@@ -423,30 +423,44 @@ Le taux d'incapacité est fixé par le médecin conseil en tenant compte de :
   },
   etat_anterieur: {
     keywords: ['etat', 'anterieur'],
-    synonymKeywords: ['antecedent', 'preexistant', 'capacite restante', 'art 12'],
-    summary: `## ⚕️ L'état antérieur (Art. 10 & Art. 14, Loi 83-13)
+    synonymKeywords: ['antecedent', 'preexistant', 'capacite restante', 'art 12', 'gabrielli', 'incapacite preexistante'],
+    summary: `## ⚕️ L'état antérieur — Formule de Gabrielli (Art. 10 & Art. 14, Loi 83-13)
 
-L'état antérieur désigne toute pathologie ou infirmité préexistante à l'accident du travail.
+L'état antérieur désigne toute pathologie ou infirmité **préexistante** à l'accident du travail. La **formule de Gabrielli** (ou méthode de la capacité restante) est utilisée en droit du dommage corporel pour évaluer l'IPP lorsqu'une victime présente un état antérieur, afin de **ne réparer que la part imputable à l'accident**.
 
 ### Le principe (Art. 10) :
 > « Sont considérés comme accidents du travail les accidents survenus du fait ou à l'occasion du travail, **quelle qu'en soit la cause**. »
 
-### La règle pratique (Art. 14) :
-Si la victime avait déjà un état antérieur (ex: IPP de 15% à un genou), le calcul du nouveau taux tient compte de la **capacité restante** :
+### Formule de Gabrielli :
+Le taux de la nouvelle lésion (**B**) est appliqué à la **capacité restante** (100% − taux de l'état antérieur **A**) :
 
-**Formule (Balthazard / Art. 12)** :
-\`Capacité restante = 100% - taux antérieur\`
-\`Nouveau taux = Capacité restante × taux barème séquelles\`
+\`Incapacité finale = Taux A + (Taux B × (100 - Taux A) / 100)\`
 
-**Exemple concret** :
-- État antérieur : genou droit IPP = 15%
-- Capacité restante : 100% - 15% = **85%**
-- Nouvelle lésion (barème) : 20%  
-- Taux réel : 85% × 20% = **17%** (au lieu de 20%)
-- IPP globale : 15% + 17% = **32%** (Balthazard)
+### Exemples concrets :
 
-> ⚠️ L'état antérieur ne doit pas pénaliser la victime : la prise en charge couvre **l'ensemble** des conséquences de l'accident, même si elles sont aggravées par l'état préexistant.`,
-    relatedQuestions: ["Comment est fixé le taux d'incapacité ?", "Comment fonctionne la formule de Balthazard ?", "Procédure de révision d'un taux ?"],
+| État antérieur (A) | Nouvelle lésion (B) | Capacité restante | Calcul | **IPP globale** |
+|---------------------|---------------------|-------------------|--------|-----------------|
+| 40% | 20% | 60% | 40% + (20% × 60%) = 40% + 12% | **52%** |
+| 15% | 20% | 85% | 15% + (20% × 85%) = 15% + 17% | **32%** |
+| 30% | 10% | 70% | 30% + (10% × 70%) = 30% + 7% | **37%** |
+| 50% | 25% | 50% | 50% + (25% × 50%) = 50% + 12,5% | **62,5%** |
+
+### Pourquoi cette formule ?
+- Elle évite de **dépasser 100%** lors du cumul de multiples incapacités
+- Elle garantit que seule la **part imputable** à l'accident est indemnisée
+- Elle est plus **juste** qu'une simple addition arithmétique
+
+### Différence avec Balthazard :
+| | **Gabrielli** | **Balthazard** |
+|---|--------------|----------------|
+| **Contexte** | État antérieur + nouvel accident | Plusieurs lésions **d'un même accident** |
+| **Objectif** | Isoler la part imputable | Cumuler les IPP multiples |
+| **Formule** | Identique | Identique |
+
+> ⚠️ L'état antérieur ne doit pas pénaliser la victime : la prise en charge couvre **l'ensemble** des conséquences de l'accident, même si elles sont aggravées par l'état préexistant.
+
+> 💡 **En pratique** : Le médecin conseil doit d'abord déterminer le taux de l'état antérieur (A), puis évaluer la nouvelle lésion au barème (B), et enfin appliquer la formule de Gabrielli pour obtenir l'IPP globale.`,
+    relatedQuestions: ["Comment est fixé le taux d'incapacité ?", "Comment fonctionne la formule de Balthazard ?", "Calcul de la capacité restante ?", "Procédure de révision d'un taux ?"],
     category: 'medecin'
   },
 
