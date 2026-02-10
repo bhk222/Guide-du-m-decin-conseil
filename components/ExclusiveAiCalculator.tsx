@@ -215,6 +215,13 @@ export const ExclusiveAiCalculator: React.FC<ExclusiveAiCalculatorProps> = ({
 
     // Correcteur d'orthographe médical
     const { results: spellCheckResults, applyCorrection, applyAllCorrections, ignoreWord, ignoreAll } = useMedicalSpellCheck(userInput);
+
+    // Réafficher le panneau correcteur quand l'utilisateur tape du nouveau texte
+    useEffect(() => {
+        if (userInput.length > 0) {
+            setSpellCheckDismissed(false);
+        }
+    }, [userInput]);
     const messagesEndRef = useRef<HTMLDivElement>(null);
     
     useEffect(() => {
