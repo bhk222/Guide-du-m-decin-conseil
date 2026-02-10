@@ -1218,22 +1218,35 @@ Lorsque le taux d'IPP est **inférieur à 10%**, la victime ne perçoit pas une 
     summary: `## 🤰 Congé de maternité (Loi 83-11, Art. 26-29)
 
 ### Durée :
-- **14 semaines** de congé (6 avant l'accouchement + 8 après)
-- Prolongation possible en cas de complications
+- **150 jours** (21 semaines) consécutifs, entièrement indemnisés
+- Peut débuter **42 jours** avant la date présumée de l'accouchement
+- **Prolongation** : +50 jours en cas de handicap ou de maladie du nouveau-né, avec possibilité d'extension supplémentaire
 
 ### Indemnités journalières :
-- **100%** du salaire journalier de référence
-- Versées par la CNAS pendant toute la durée du congé
+- **100%** du salaire journalier net (après déduction des cotisations)
+- Versées par la **CNAS** pendant toute la durée du congé (150 jours)
 
 ### Conditions :
 - Être assurée sociale
-- Avoir travaillé au moins **15 jours** ou **100 heures** pendant les 3 mois précédant la date présumée de l'accouchement
-- Justifier d'un certificat médical
+- Avoir travaillé au moins **15 jours** au cours des **3 derniers mois** ou **60 jours** au cours des **12 derniers mois**
+- Justifier d'un **certificat médical**
+
+### Dépôt du dossier :
+- Le dossier médical doit être soumis à la **CNAS** avec un certificat médical
+- La période de congé peut débuter **42 jours** avant la date prévue de l'accouchement
 
 ### Protections :
 - Interdiction de licencier la salariée pendant le congé de maternité
 - Conservation du poste de travail
 - Les jours de congé sont considérés comme période de travail pour le calcul des droits
+
+| Élément | Détail |
+|---------|--------|
+| **Durée totale** | 150 jours (5 mois) |
+| **Début possible** | 42 jours avant l'accouchement |
+| **Indemnisation** | 100% du salaire journalier net |
+| **Prolongation** | +50 jours (handicap/maladie nouveau-né) |
+| **Condition travail** | 15 j / 3 mois ou 60 j / 12 mois |
 
 > 💡 Les soins liés à la grossesse et à l'accouchement sont pris en charge à **100%** (pas de ticket modérateur).`,
     relatedQuestions: ["Calcul de l'indemnité journalière ?", "Quelles sont les prestations en nature ?"],
