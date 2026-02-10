@@ -4,6 +4,8 @@ import { localExpertAnalysis, LocalAnalysisResult } from './AiAnalyzer';
 import { Card } from './ui/Card';
 import { Button } from './ui/Button';
 import { HistoryModal, saveToHistory } from './HistoryModal';
+import { useMedicalSpellCheck } from './spellcheck/useMedicalSpellCheck';
+import { MedicalSpellChecker } from './spellcheck/MedicalSpellChecker';
 
 // --- TYPES ---
 interface Proposal {
@@ -208,7 +210,11 @@ export const ExclusiveAiCalculator: React.FC<ExclusiveAiCalculatorProps> = ({
     const [userInput, setUserInput] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const [isHistoryOpen, setIsHistoryOpen] = useState(false);
+    const [spellCheckDismissed, setSpellCheckDismissed] = useState(false);
     const analysisQueueRef = useRef<string[]>([]);
+
+    // Correcteur d'orthographe médical
+    const { results: spellCheckResults, applyCorrection, ignoreWord } = useMedicalSpellCheck(userInput);
     const messagesEndRef = useRef<HTMLDivElement>(null);
     
     useEffect(() => {
@@ -705,13 +711,15 @@ export const ExclusiveAiCalculator: React.FC<ExclusiveAiCalculatorProps> = ({
                     <div className="flex items-start gap-2">
                         <textarea
                             value={userInput}
-                            onChange={(e) => setUserInput(e.target.value)}
+                            onChange={(e) => { setUserInput(e.target.value); setSpellCheckDismissed(false); }}
                             onKeyPress={(e) => {if(e.key === 'Enter' && !e.shiftKey) {e.preventDefault(); handleSend(userInput);}}}
                             placeholder="Décrivez les séquelles ou demandez le calcul..."
                             className="flex-1 w-full p-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary-500/50 text-black placeholder:text-slate-400 bg-white resize-none"
                             aria-label="Décrire les séquelles cliniques ou demander le calcul"
                             disabled={isLoading}
                             rows={3}
+                            spellCheck={true}
+                            lang="fr"
                         />
                         <Button onClick={() => handleSend(userInput)} disabled={isLoading || !userInput.trim()} className="!p-3 self-stretch">
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -719,6 +727,16 @@ export const ExclusiveAiCalculator: React.FC<ExclusiveAiCalculatorProps> = ({
                             </svg>
                         </Button>
                     </div>
+                    {!spellCheckDismissed && spellCheckResults.length > 0 && (
+                        <MedicalSpellChecker
+                            results={spellCheckResults}
+                            onApply={(result, correction) => {
+                                setUserInput(applyCorrection(result, correction));
+                            }}
+                            onIgnore={ignoreWord}
+                            onDismiss={() => setSpellCheckDismissed(true)}
+                        />
+                    )}
                 </div>
             </Card>
             

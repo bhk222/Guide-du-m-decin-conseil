@@ -49,7 +49,7 @@ const allInjuriesWithPaths = disabilityData.flatMap(cat =>
 );
 
 // 🆕 V3.3.124: Dictionnaire de synonymes médicaux pour améliorer la reconnaissance
-const medicalSynonyms: { [key: string]: string[] } = {
+export const medicalSynonyms: { [key: string]: string[] } = {
   // Termes génériques
   amputation: ['amputation', 'ablation', 'perte', 'section', 'désarticulation', 'mutilation', 'coupé', 'enlevé', 'retiré', 'exérèse'],
   moignon: ['moignon', 'bout', 'trognon', 'chicot', 'reste'],
