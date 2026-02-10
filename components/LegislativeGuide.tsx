@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect, useMemo, useCallback } from 'react';
 import { legalTexts } from '../data/civilCode';
+import { nomenclatureRules, searchNomenclature } from '../services/nomenclatureData';
 import { Button } from './ui/Button';
 import { Tabs } from './ui/Tabs';
 
@@ -17,10 +18,11 @@ interface Message {
 }
 
 interface ConversationContext {
-  lastTopic: string;
-  lastLawId: string;
-  lastArticle: number;
-  recentTopics: string[];
+  topics: string[];
+  turnCount: number;
+  lastLawId?: string;
+  lastIntentKey?: string;
+  lastCategory?: string;
 }
 
 // ═══════════════════════════════════════════════════════════════
@@ -30,39 +32,53 @@ interface ConversationContext {
 const normalizeText = (text: string): string => 
   text.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[-']/g, ' ');
 
-// Expanded synonym map for fuzzy matching
+// Expanded synonym map for fuzzy matching — 45+ groups
 const SYNONYMS: Record<string, string[]> = {
-  'accident': ['at', 'sinistre', 'evenement', 'accidente'],
-  'travail': ['professionnel', 'professionnelle', 'emploi', 'service', 'poste'],
-  'maladie': ['pathologie', 'affection', 'mp', 'atteinte'],
-  'incapacite': ['ipp', 'invalidite', 'handicap', 'infirmite', 'taux', 'sequelle', 'sequelles'],
-  'consolidation': ['consolide', 'stabilisation', 'stabilise', 'guerison', 'gueri'],
-  'rechute': ['aggravation', 'reprise', 'recidive', 'reouverture', 'aggraver', 'aggrave'],
-  'indemnite': ['indemnisation', 'compensation', 'allocation', 'prestation', 'reparation'],
-  'rente': ['pension', 'capital', 'versement', 'allocation'],
-  'employeur': ['patron', 'entreprise', 'societe', 'organisme employeur'],
-  'victime': ['assure', 'beneficiaire', 'travailleur', 'salarie', 'blesse', 'accidente'],
-  'declaration': ['declarer', 'signalement', 'signaler', 'notification', 'notifier'],
-  'expertise': ['expert', 'contre expertise', 'examen', 'evaluation', 'medecin expert'],
-  'recours': ['contestation', 'contester', 'opposition', 'appel', 'plainte', 'litige'],
-  'delai': ['duree', 'periode', 'combien temps', 'temps', 'date limite', 'prescription'],
-  'medecin': ['docteur', 'praticien', 'clinicien', 'therapeute'],
-  'conseil': ['controle', 'controleur', 'medecin conseil'],
-  'commission': ['comite', 'jury', 'instance'],
-  'deces': ['mort', 'decede', 'mourir', 'droit conjoint', 'ayants droit', 'heritier'],
-  'trajet': ['parcours', 'deplacement', 'itineraire', 'chemin', 'route'],
-  'tierce': ['aide', 'assistance', 'dependance', 'autonomie'],
-  'faute': ['responsabilite', 'negligence', 'imprudence', 'inexcusable'],
-  'revision': ['reviser', 'modifier', 'modification', 'reexamen', 'reevaluation'],
-  'bareme': ['grille', 'tableau', 'echelle', 'referentiel', 'guide'],
-  'soins': ['traitement', 'therapie', 'therapeutique', 'medicament', 'hospitalisation', 'chirurgie'],
-  'transport': ['deplacement', 'ambulance', 'convocation', 'voyage'],
-  'arret': ['arret travail', 'conge', 'cessation', 'interruption', 'ijt'],
-  'journaliere': ['ij', 'ijt', 'indemnites journalieres'],
-  'categorie': ['groupe', 'classe', 'type', 'classification'],
-  'rejet': ['refus', 'refuse', 'rejete', 'irrecevable', 'deboute'],
-  'prise en charge': ['couverture', 'remboursement', 'rembourse', 'gratuite', 'charge'],
-  'cnas': ['securite sociale', 'caisse', 'organisme', 'assurance'],
+  'accident': ['at', 'sinistre', 'evenement', 'accidente', 'incident'],
+  'travail': ['professionnel', 'professionnelle', 'emploi', 'service', 'poste', 'activite'],
+  'maladie': ['pathologie', 'affection', 'mp', 'atteinte', 'malad'],
+  'incapacite': ['ipp', 'invalidite', 'handicap', 'infirmite', 'taux', 'sequelle', 'sequelles', 'impotence'],
+  'consolidation': ['consolide', 'stabilisation', 'stabilise', 'guerison', 'gueri', 'fin traitement'],
+  'rechute': ['aggravation', 'reprise', 'recidive', 'reouverture', 'aggraver', 'aggrave', 'rechuter'],
+  'indemnite': ['indemnisation', 'compensation', 'allocation', 'prestation', 'reparation', 'dedommagement'],
+  'rente': ['pension', 'capital', 'versement', 'allocation', 'trimestrielle'],
+  'employeur': ['patron', 'entreprise', 'societe', 'organisme employeur', 'responsable'],
+  'victime': ['assure', 'beneficiaire', 'travailleur', 'salarie', 'blesse', 'accidente', 'patient'],
+  'declaration': ['declarer', 'signalement', 'signaler', 'notification', 'notifier', 'deposition'],
+  'expertise': ['expert', 'contre expertise', 'examen', 'evaluation', 'medecin expert', 'expertise medicale'],
+  'recours': ['contestation', 'contester', 'opposition', 'appel', 'plainte', 'litige', 'tribunal'],
+  'delai': ['duree', 'periode', 'combien temps', 'temps', 'date limite', 'prescription', 'echeance'],
+  'medecin': ['docteur', 'praticien', 'clinicien', 'therapeute', 'soignant'],
+  'conseil': ['controle', 'controleur', 'medecin conseil', 'medecin expert'],
+  'commission': ['comite', 'jury', 'instance', 'organe'],
+  'deces': ['mort', 'decede', 'mourir', 'droit conjoint', 'ayants droit', 'heritier', 'survivant'],
+  'trajet': ['parcours', 'deplacement', 'itineraire', 'chemin', 'route', 'domicile travail'],
+  'tierce': ['aide', 'assistance', 'dependance', 'autonomie', 'accompagnement'],
+  'faute': ['responsabilite', 'negligence', 'imprudence', 'inexcusable', 'culpabilite'],
+  'revision': ['reviser', 'modifier', 'modification', 'reexamen', 'reevaluation', 'revoir'],
+  'bareme': ['grille', 'tableau', 'echelle', 'referentiel', 'guide', 'nomenclature'],
+  'soins': ['traitement', 'therapie', 'therapeutique', 'medicament', 'hospitalisation', 'chirurgie', 'reeducation'],
+  'transport': ['deplacement', 'ambulance', 'convocation', 'voyage', 'transfert'],
+  'arret': ['arret travail', 'conge', 'cessation', 'interruption', 'ijt', 'repos'],
+  'journaliere': ['ij', 'ijt', 'indemnites journalieres', 'journalieres'],
+  'categorie': ['groupe', 'classe', 'type', 'classification', 'niveau'],
+  'rejet': ['refus', 'refuse', 'rejete', 'irrecevable', 'deboute', 'defavorable'],
+  'prise en charge': ['couverture', 'remboursement', 'rembourse', 'gratuite', 'charge', 'couvert'],
+  'cnas': ['securite sociale', 'caisse', 'organisme', 'assurance', 'organisme securite'],
+  'cotisation': ['cotiser', 'contribution', 'versement', 'charge sociale', 'part patronale'],
+  'affiliation': ['affilier', 'immatriculation', 'inscription', 'enregistrement', 'numero'],
+  'retraite': ['pension retraite', 'depart retraite', 'mise retraite', 'age retraite'],
+  'maternite': ['conge maternite', 'grossesse', 'accouchement', 'naissance', 'enceinte'],
+  'chifa': ['carte', 'teletransmission', 'electronique', 'carte assure'],
+  'prescription': ['ordonnance', 'prescrire', 'prescrit', 'duree validite'],
+  'controle': ['verifier', 'verification', 'inspection', 'surveillance'],
+  'sanction': ['penalite', 'amende', 'punition', 'infraction', 'contravention'],
+  'prothese': ['orthese', 'appareillage', 'appareil', 'dispositif medical'],
+  'balthazard': ['formule', 'cumul ipp', 'capacite restante', 'lesions multiples'],
+  'salaire': ['remuneration', 'revenu', 'solde', 'paie', 'traitement'],
+  'conjoint': ['epoux', 'epouse', 'mari', 'femme', 'veuf', 'veuve'],
+  'enfant': ['orphelin', 'fils', 'fille', 'mineur', 'descendant'],
+  'ascendant': ['parent', 'pere', 'mere', 'grand parent'],
 };
 
 // Expand query with synonyms for better matching
@@ -90,7 +106,33 @@ const STOP_WORDS = new Set([
   "donc", "pas", "plus", "tout", "doit", "faut", "bien", "entre", "apres", "avant",
   "comme", "quels", "tres", "cas", "deja", "dit", "moi", "lui", "eux", 'si',
   'non', 'oui', 'merci', 'bonjour', 'svp', 'sil', 'plait', 'jai', 'dit', 'veut',
+  'utilise', 'besoin', 'quand', 'existe', 'donne', 'donner', 'veux', 'voudrais',
+  'connaitre', 'expliquer', 'expliquez', 'dites', 'parlez', 'aide', 'aidez',
 ]);
+
+// N-gram extraction for better phrase matching
+const extractNgrams = (text: string, n: number): string[] => {
+  const words = normalizeText(text).split(/\s+/).filter(w => w.length > 1);
+  const ngrams: string[] = [];
+  for (let i = 0; i <= words.length - n; i++) {
+    ngrams.push(words.slice(i, i + n).join(' '));
+  }
+  return ngrams;
+};
+
+// Detect greetings to respond conversationally
+const GREETINGS = ['bonjour', 'salut', 'bonsoir', 'salam', 'hello', 'hi', 'hey', 'bsr', 'bjr', 'slt', 'coucou'];
+const isGreeting = (query: string): boolean => {
+  const normalized = normalizeText(query).trim();
+  return GREETINGS.some(g => normalized === g || normalized.startsWith(g + ' ')) && normalized.split(/\s+/).length <= 4;
+};
+
+// Detect thanks
+const THANKS = ['merci', 'shukran', 'choukran', 'thanks', 'remercie'];
+const isThanks = (query: string): boolean => {
+  const normalized = normalizeText(query).trim();
+  return THANKS.some(t => normalized.includes(t));
+};
 
 const extractMeaningfulKeywords = (query: string): string[] => {
   const normalized = normalizeText(query);
@@ -987,15 +1029,719 @@ Ce litige relève du **contentieux médical** (Loi 08-08).
     relatedQuestions: ["Obligations de l'employeur ?"],
     category: 'pratique'
   },
+
+  // ─── CALCULS AVANCÉS (intégration nomenclature) ───
+  formule_balthazard: {
+    keywords: ['balthazard', 'formule'],
+    synonymKeywords: ['cumul ipp', 'lesions multiples', 'capacite restante', 'cumul lesions', 'plusieurs ipp', 'additionner ipp'],
+    summary: `## 🧮 Formule de Balthazard — Cumul des IPP
+
+Lorsqu'un accident du travail entraîne **plusieurs lésions**, on ne peut pas simplement additionner les taux. On utilise la **formule de Balthazard** qui tient compte de la **capacité restante**.
+
+### Principe fondamental :
+> Chaque lésion successive réduit non pas la capacité totale (100%), mais la **capacité qui reste** après les lésions précédentes.
+
+### Formule pour 2 lésions :
+\`IPP totale = IPP₁ + [(100 - IPP₁) × IPP₂ / 100]\`
+
+### Formule pour 3 lésions ou plus :
+\`Cumul₁₂ = IPP₁ + [(100 - IPP₁) × IPP₂ / 100]\`
+\`Cumul₁₂₃ = Cumul₁₂ + [(100 - Cumul₁₂) × IPP₃ / 100]\`
+
+### Exemples pratiques :
+
+| Lésion 1 | Lésion 2 | Somme simple | **Balthazard** |
+|----------|----------|-------------|----------------|
+| 20% | 10% | 30% | **28%** |
+| 15% | 8% | 23% | **21.8%** |
+| 30% | 20% | 50% | **44%** |
+| 25% | 15% | 40% | **36.25%** |
+
+> 💡 **Règle pratique** : Toujours commencer par le taux le **plus élevé** (IPP₁), puis ajouter les suivants par ordre décroissant.
+
+> ⚠️ Le résultat de Balthazard est toujours **inférieur à la somme arithmétique**, sauf si un des taux est 0%.
+
+**Base légale** : Principe reconnu par la jurisprudence et le barème indicatif. Utilisé systématiquement pour les poly-traumatismes.`,
+    relatedQuestions: ["Comment est fixé le taux d'incapacité ?", "Prise en charge d'un état antérieur ?", "Comment sont calculées les rentes ?"],
+    category: 'calcul'
+  },
+  calcul_capacite_restante: {
+    keywords: ['capacite', 'restante'],
+    synonymKeywords: ['capacite residuelle', 'capacite fonctionnelle'],
+    summary: `## 📐 Calcul de la capacité restante
+
+La **capacité restante** est la capacité fonctionnelle qui reste après une incapacité.
+
+### Formule :
+\`Capacité restante = 100% - IPP\`
+
+### Importance :
+Elle est essentielle pour :
+1. **Le calcul du cumul (Balthazard)** : Chaque nouvelle lésion s'applique sur la capacité restante
+2. **L'état antérieur (Art. 12)** : Le nouveau taux est calculé sur la capacité qui restait
+
+### Exemple :
+- IPP antérieure = 20% → Capacité restante = **80%**
+- Nouvelle lésion au barème = 15%
+- Taux imputable = 80% × 15% = **12%**
+- IPP globale (Balthazard) = 20% + 12% = **32%** (et non 35%)
+
+> 💡 Un travailleur avec 60% d'IPP n'a que 40% de capacité restante. Si une nouvelle lésion vaut 25% au barème, le taux réel sera : 40% × 25% = 10%, pas 25%.`,
+    relatedQuestions: ["Comment fonctionne la formule de Balthazard ?", "Prise en charge d'un état antérieur ?", "Comment sont calculées les rentes ?"],
+    category: 'calcul'
+  },
+  taux_utile_rente: {
+    keywords: ['taux', 'utile'],
+    synonymKeywords: ['taux utile rente', 'conversion taux', 'taux applicable rente'],
+    summary: `## 📊 Le taux utile (conversion du taux IPP pour la rente)
+
+Le **taux utile** est le taux réellement appliqué pour calculer la rente. Il n'est pas égal au taux d'IPP.
+
+### Règle de conversion :
+- La portion du taux **≤ 50%** est **divisée par 2**
+- La portion du taux **> 50%** est **multipliée par 1,5**
+
+### Formule :
+\`Si IPP ≤ 50% : Taux utile = IPP / 2\`
+\`Si IPP > 50% : Taux utile = 25% + (IPP - 50%) × 1,5\`
+
+### Table de conversion complète :
+
+| Taux IPP | Calcul | **Taux utile** |
+|----------|--------|----------------|
+| 10% | 10/2 | **5%** |
+| 20% | 20/2 | **10%** |
+| 30% | 30/2 | **15%** |
+| 40% | 40/2 | **20%** |
+| 50% | 50/2 | **25%** |
+| 60% | 25 + (10×1,5) | **40%** |
+| 70% | 25 + (20×1,5) | **55%** |
+| 80% | 25 + (30×1,5) | **70%** |
+| 90% | 25 + (40×1,5) | **85%** |
+| 100% | 25 + (50×1,5) | **100%** |
+
+> 💡 La formule avantage les taux élevés d'IPP (au-dessus de 50%). C'est une mesure de justice sociale pour les accidents graves.`,
+    relatedQuestions: ["Comment sont calculées les rentes ?", "Comment est fixé le taux d'incapacité ?"],
+    category: 'calcul'
+  },
+  ipp_sociale: {
+    keywords: ['ipp', 'sociale'],
+    synonymKeywords: ['taux social', 'majoration socio professionnelle', 'incidence professionnelle'],
+    summary: `## 📈 L'IPP sociale (majoration socio-professionnelle)
+
+En plus du taux **médical** (séquelles physiques), le médecin conseil peut accorder un **taux social** tenant compte de l'impact professionnel.
+
+### Critères d'évaluation :
+| Critère | Exemple |
+|---------|---------|
+| **Âge de la victime** | Travailleur jeune vs proche de la retraite |
+| **Profession exercée** | Manœuvre vs cadre bureau |
+| **Qualification** | Travailleur spécialisé sans possibilité de reconversion |
+| **Reclassement** | Possibilité ou non de changer de poste |
+| **Retentissement** | Impact réel sur l'emploi actuel |
+
+### Application :
+\`IPP globale = IPP médicale + IPP sociale\`
+
+### Limites :
+- Le taux social est généralement de **0 à 5%** (rarement plus)
+- Le total ne peut jamais dépasser **100%**
+- Le médecin conseil doit **motiver** cette majoration
+
+> 💡 **Exemple** : Un charpentier de 35 ans avec une ankylose du poignet (15% au barème). Son métier exige des mouvements fins du poignet → impact professionnel majeur → majoration sociale de 5% → **IPP globale = 20%**.`,
+    relatedQuestions: ["Comment est fixé le taux d'incapacité ?", "Comment fonctionne la formule de Balthazard ?"],
+    category: 'calcul'
+  },
+  capital_forfeiture_ipp: {
+    keywords: ['capital', 'forfaitaire'],
+    synonymKeywords: ['ipp moins 10', 'capital ipp', 'indemnite capital'],
+    summary: `## 💵 Le capital forfaitaire (IPP < 10%)
+
+Lorsque le taux d'IPP est **inférieur à 10%**, la victime ne perçoit pas une rente mais un **capital forfaitaire unique**.
+
+### Caractéristiques :
+- Versement **unique** (pas trimestriel)
+- Calculé sur la base du barème des capitaux représentatifs
+- Lié au taux d'IPP et au salaire de référence
+
+### Taux donnant droit au capital (barème) :
+
+| Taux IPP | Type de prestation |
+|----------|-------------------|
+| 1% à 9% | **Capital forfaitaire** (versement unique) |
+| ≥ 10% | **Rente** (trimestrielle, viagère) |
+
+### Important :
+- Le capital est **non révisable** contrairement à la rente
+- Il est versé en **une seule fois**
+- Il n'est **pas imposable**
+
+**Réf** : Art. 38, Loi 83-13.
+
+> ⚠️ Le seuil de 10% est crucial. Pour un taux de 9%, c'est un capital unique. Pour 10%, c'est une rente à vie. Le médecin conseil doit être particulièrement rigoureux dans l'évaluation autour de ce seuil.`,
+    relatedQuestions: ["Comment sont calculées les rentes ?", "Comment est fixé le taux d'incapacité ?", "Le taux utile, c'est quoi ?"],
+    category: 'calcul'
+  },
+
+  // ─── ASSURANCES SOCIALES (Loi 83-11) ───
+  assurance_maladie: {
+    keywords: ['assurance', 'maladie'],
+    synonymKeywords: ['maladie ordinaire', 'conge maladie', 'arret maladie ordinaire', 'regime maladie'],
+    summary: `## 🏥 Assurance maladie (Loi 83-11, Chapitre II)
+
+### Prestations en nature (soins) :
+- Remboursement à **80%** du tarif de référence (ticket modérateur de 20%)
+- **100%** pour les maladies chroniques (ALD), les hospitalisations de +30 jours
+- **100%** pour les soins liés à un AT/MP
+
+### Prestations en espèces (indemnités journalières) :
+| Période | Taux | Conditions |
+|---------|------|-----------|
+| **1er au 15e jour** | **50%** du salaire de référence | Délai de carence : **3 jours** |
+| **À partir du 16e jour** | **100%** du salaire de référence | Si hospitalisation ou ALD |
+
+### Différences AT/MP vs Maladie ordinaire :
+
+| | AT/MP | Maladie ordinaire |
+|---|------|-------------------|
+| Taux soins | **100%** | **80%** |
+| IJ taux | **100%** dès J+1 | 50% puis 100% |
+| Carence | **Aucune** | **3 jours** |
+
+> 💡 La qualification de l'événement (AT vs maladie ordinaire) a un impact majeur sur l'indemnisation.`,
+    relatedQuestions: ["Calcul de l'indemnité journalière ?", "Différence incapacité / invalidité ?", "Quelles sont les ALD ?"],
+    category: 'droits'
+  },
+  conge_maternite: {
+    keywords: ['maternite', 'conge'],
+    synonymKeywords: ['grossesse', 'accouchement', 'congé maternite', 'femme enceinte'],
+    summary: `## 🤰 Congé de maternité (Loi 83-11, Art. 26-29)
+
+### Durée :
+- **14 semaines** de congé (6 avant l'accouchement + 8 après)
+- Prolongation possible en cas de complications
+
+### Indemnités journalières :
+- **100%** du salaire journalier de référence
+- Versées par la CNAS pendant toute la durée du congé
+
+### Conditions :
+- Être assurée sociale
+- Avoir travaillé au moins **15 jours** ou **100 heures** pendant les 3 mois précédant la date présumée de l'accouchement
+- Justifier d'un certificat médical
+
+### Protections :
+- Interdiction de licencier la salariée pendant le congé de maternité
+- Conservation du poste de travail
+- Les jours de congé sont considérés comme période de travail pour le calcul des droits
+
+> 💡 Les soins liés à la grossesse et à l'accouchement sont pris en charge à **100%** (pas de ticket modérateur).`,
+    relatedQuestions: ["Calcul de l'indemnité journalière ?", "Quelles sont les prestations en nature ?"],
+    category: 'droits'
+  },
+  ald_maladies_chroniques: {
+    keywords: ['ald', 'chronique'],
+    synonymKeywords: ['maladie longue duree', 'affection longue duree', 'maladie chronique', 'exoneration ticket'],
+    summary: `## 🏥 Affections de Longue Durée — ALD (Loi 83-11)
+
+### Le principe :
+Les assurés atteints d'une ALD bénéficient d'un remboursement à **100%** (exonération du ticket modérateur) pour tous les soins liés à cette affection.
+
+### Liste des ALD (exemples) :
+- Diabète insulinodépendant
+- Hypertension artérielle sévère
+- Insuffisance cardiaque
+- Cancers
+- Insuffisance rénale chronique
+- Maladies psychiatriques chroniques
+- Tuberculose et séquelles
+- Sida (VIH)
+- Affections neurologiques graves (sclérose en plaques, etc.)
+
+### Procédure :
+1. Le médecin traitant remplit un **protocole de soins ALD**
+2. Le médecin conseil valide l'inscription en ALD
+3. La CNAS délivre une attestation d'ALD
+4. Remboursement à 100% pour les soins liés à l'ALD
+
+> ⚠️ Seuls les soins **en rapport avec l'ALD** sont à 100%. Les soins sans rapport restent à 80%.`,
+    relatedQuestions: ["Quelles sont les prestations en nature ?", "Assurance maladie ordinaire ?"],
+    category: 'droits'
+  },
+  cotisations_taux: {
+    keywords: ['cotisations', 'taux'],
+    synonymKeywords: ['taux cotisation', 'charge patronale', 'part salariale', 'assiette cotisation', 'combien cotise'],
+    summary: `## 💼 Cotisations de sécurité sociale
+
+### Répartition des cotisations :
+
+| Branche | **Part patronale** | **Part salariale** | **Total** |
+|---------|--------------------|--------------------|-----------|
+| Assurances sociales | 12,5% | 1,5% | 14% |
+| AT/MP | 1,25% | — | 1,25% |
+| Retraite | 11% | — | 11% |
+| Retraite anticipée | 0,5% | 0,5% | 1% |
+| Assurance chômage | 1,25% | 0,5% | 1,75% |
+| Œuvres sociales | — | — | Variable |
+| **TOTAL** | **~26%** | **~9%** | **~35%** |
+
+### Assiette de cotisation :
+- Basée sur le **salaire brut**
+- Plafonnée pour certaines branches (8x le SNMG pour les AT/MP)
+
+### Qui paie ?
+- L'**employeur** prélève la part salariale et verse le tout à la CNAS
+- En cas de non-versement → sanctions pénales et majorations de retard
+
+> 💡 Le taux de cotisation AT/MP peut être **majoré** pour les entreprises à fort taux de sinistralité (bonus-malus).`,
+    relatedQuestions: ["Obligations de l'employeur ?", "Qu'est-ce que l'affiliation ?", "Sanctions pour non-déclaration ?"],
+    category: 'pratique'
+  },
+  affiliation_immatriculation: {
+    keywords: ['affiliation'],
+    synonymKeywords: ['immatriculation', 'inscription cnas', 'numero assure'],
+    summary: `## 📋 Affiliation et immatriculation
+
+### L'affiliation de l'employeur :
+- Tout employeur est tenu de **s'affilier à la CNAS** dans les **10 jours** suivant l'embauche de son premier salarié
+- Il reçoit un **numéro d'affiliation** qui l'identifie
+
+### L'immatriculation du travailleur :
+- Chaque travailleur reçoit un **numéro d'immatriculation** (numéro de sécurité sociale)
+- Ce numéro est **unique et à vie**
+- Il est nécessaire pour : la prise en charge des soins, le calcul des droits à la retraite, l'ouverture de droits en cas d'AT/MP
+
+### Qui le demande ?
+- L'**employeur** est tenu d'immatriculer ses salariés
+- Le travailleur peut aussi se présenter à la CNAS avec une attestation de travail
+
+> ⚠️ Un travailleur non déclaré (travail au noir) n'a aucune couverture sociale. En cas d'accident, il peut néanmoins faire valoir ses droits avec des preuves de l'existence d'une relation de travail.`,
+    relatedQuestions: ["Obligations de l'employeur ?", "Cotisations de sécurité sociale ?"],
+    category: 'pratique'
+  },
+  prescription_droits: {
+    keywords: ['prescription', 'droits'],
+    synonymKeywords: ['delai prescription', 'forclusion', 'peremption droits', 'quand perd droit'],
+    summary: `## ⏳ Prescription des droits (Loi 83-13 et Loi 83-11)
+
+### AT/MP :
+
+| Objet | Délai de prescription | Réf |
+|-------|----------------------|-----|
+| **Déclaration AT** (par employeur) | **48 heures** | Art. 13, Loi 83-13 |
+| **Déclaration AT** (par victime) | **4 ans** | Art. 14, Loi 83-13 |
+| **Déclaration MP** | **15 jours** après 1re constatation | Art. 71, Loi 83-13 |
+| **Rechute/Révision** (0-2 ans) | Intervalle de **3 mois** | Art. 59, Loi 83-13 |
+| **Rechute/Révision** (après 2 ans) | Intervalle de **1 an** | Art. 59, Loi 83-13 |
+
+### Assurances sociales :
+
+| Objet | Délai de prescription |
+|-------|----------------------|
+| **Prestations en nature** (soins) | **2 ans** à compter de la date des soins |
+| **Prestations en espèces** (IJ) | **4 ans** |
+| **Action en remboursement** de la CNAS | **3 ans** |
+
+### Contestation :
+
+| Objet | Délai |
+|-------|-------|
+| **Contentieux général** | **15 jours** (Art. 8, Loi 08-08) |
+| **Contentieux médical** | **15 jours** (Art. 20, Loi 08-08) |
+| **Invalidité** | **30 jours** (Art. 33, Loi 08-08) |
+
+> ⚠️ **Attention** : Les délais de prescription sont **stricts** et leur non-respect entraîne la **forclusion** (perte définitive du droit).`,
+    relatedQuestions: ["Délais de contestation ?", "Délai de déclaration d'un accident ?", "Le recours préalable est-il obligatoire ?"],
+    category: 'procedure'
+  },
+  sanctions_employeur: {
+    keywords: ['sanctions', 'employeur'],
+    synonymKeywords: ['penalites patron', 'amende employeur', 'infraction employeur', 'sanctions penales'],
+    summary: `## ⚖️ Sanctions contre l'employeur (Loi 83-13, Art. 76-83)
+
+### 1. Non-déclaration de l'accident :
+- **Amende** de 500 à 2.000 DA par infraction
+- En cas de récidive : amende doublée + possibilité d'emprisonnement
+
+### 2. Non-paiement des cotisations :
+- Majorations de retard de **5%** par mois de retard
+- Poursuites devant le tribunal
+- Possibilité de saisie des biens de l'entreprise
+
+### 3. Entrave au contrôle médical :
+- Amende et possibilité de poursuites pénales
+
+### 4. Faute inexcusable (Art. 45, Loi 83-15) :
+- La CNAS verse les prestations majorées puis se **retourne contre l'employeur** pour remboursement
+- Majoration de la rente de la victime  
+
+### 5. Non-délivrance de la feuille d'accident :
+- Constitue une entrave aux droits de la victime
+- Sanctions administratives et pénales
+
+> 💡 En pratique, la victime peut signaler ces manquements directement à la CNAS ou à l'inspection du travail.`,
+    relatedQuestions: ["Obligations de l'employeur ?", "Qu'est-ce que la faute inexcusable ?", "Que faire si l'employeur refuse de déclarer ?"],
+    category: 'procedure'
+  },
+  feuille_accident: {
+    keywords: ['feuille', 'accident'],
+    synonymKeywords: ['formulaire accident', 'feuille soins at', 'document accident'],
+    summary: `## 📄 La feuille d'accident (Art. 15, Loi 83-13)
+
+### Qu'est-ce que c'est ?
+La **feuille d'accident** (ou triptyque) est un document officiel que l'employeur doit remettre à la victime. Elle permet la **prise en charge à 100%** des soins sans avance de frais.
+
+### Contenu :
+- Identité de la victime
+- Date, heure et lieu de l'accident
+- Nature des lésions
+- Cachet et signature de l'employeur
+
+### Obligations :
+| Qui | Fait quoi |
+|-----|----------|
+| **Employeur** | Délivre la feuille à la victime **immédiatement** |
+| **Victime** | Présente la feuille au médecin/pharmacien/hôpital |
+| **Praticien** | Remplit les cases "soins dispensés" |
+| **CNAS** | Prend en charge les frais à 100% |
+
+### Si l'employeur ne la donne pas ?
+La victime peut :
+1. Se rendre à la CNAS avec son CMI pour obtenir un bon de prise en charge
+2. Signaler le manquement à l'inspection du travail
+3. Les frais avancés seront remboursés après régularisation
+
+> ⚠️ La feuille d'accident est valable **3 ans** à compter de la date de l'accident.`,
+    relatedQuestions: ["Obligations de l'employeur ?", "Délai de déclaration d'un accident ?", "Quelles sont les prestations en nature ?"],
+    category: 'procedure'
+  },
+  appareillage_prothese: {
+    keywords: ['appareillage', 'prothese'],
+    synonymKeywords: ['prothese orthese', 'appareil medical', 'dispositif', 'attelle', 'fauteuil roulant', 'prothese dentaire'],
+    summary: `## 🦿 Appareillage et prothèses (Art. 31-34, Loi 83-13)
+
+### Prise en charge à 100% en AT/MP :
+
+| Type | Exemples | Couverture |
+|------|----------|-----------|
+| **Prothèses** | Prothèse de membre, prothèse dentaire (si trauma) | Fourniture + pose |
+| **Orthèses** | Attelle, corset, semelles orthopédiques | Fourniture |
+| **Appareillage** | Fauteuil roulant, cannes, déambulateur | Fourniture |
+| **Renouvellement** | Usure normale, changement morphologique | Couvert |
+| **Réparation** | Casse, dysfonctionnement | Couvert |
+
+### Procédure :
+1. Prescription par le médecin traitant
+2. Accord du médecin conseil (pour les appareillages coûteux)
+3. Fourniture par un fournisseur agréé
+4. Remboursement à 100% (tarif conventionné)
+
+### Renouvellement :
+- Le renouvellement est pris en charge si l'appareil est **usé**, **cassé** ou **inadapté**
+- Un accord préalable du médecin conseil peut être nécessaire
+
+> 💡 Pour les prothèses dentaires liées à un AT, la prise en charge couvre la **totalité** des frais, contrairement au régime maladie ordinaire.`,
+    relatedQuestions: ["Quelles sont les prestations en nature ?", "Les frais de transport sont-ils pris en charge ?"],
+    category: 'droits'
+  },
+  readaptation_professionnelle: {
+    keywords: ['readaptation', 'professionnelle'],
+    synonymKeywords: ['reconversion', 'reclassement professionnel', 'formation reconversion', 'changement poste'],
+    summary: `## 🏗️ Réadaptation professionnelle (Art. 34, Loi 83-13)
+
+### Principe :
+Si la victime ne peut plus exercer son ancien métier en raison des séquelles, elle a droit à une **réadaptation professionnelle** financée par la CNAS.
+
+### Ce que ça comprend :
+- **Formation** dans un nouveau métier compatible avec le handicap
+- **Frais de formation** pris en charge (inscription, matériel)
+- **Indemnités** pendant la durée de la formation
+- **Transport** pour se rendre au centre de formation
+
+### Conditions :
+- Existence d'une IPP empêchant la reprise de l'ancien emploi
+- Avis favorable du médecin conseil
+- Accord de la commission compétente
+
+### Avantages pour le travailleur :
+- Maintien des droits sociaux pendant la formation
+- Nouvelle qualification professionnelle
+- Rente d'IPP maintenue en totalité pendant la réadaptation
+
+> 💡 La réadaptation professionnelle est un **droit**, pas une faculté. L'employeur ne peut pas s'y opposer.`,
+    relatedQuestions: ["Quelles sont les prestations en nature ?", "Conditions pour une tierce personne ?", "Peut-on cumuler rente et salaire ?"],
+    category: 'droits'
+  },
+  retraite_anticipee_at: {
+    keywords: ['retraite', 'anticipee'],
+    synonymKeywords: ['depart anticipe', 'retraite ipp', 'retraite accident', 'depart avant age'],
+    summary: `## 🏖️ Retraite anticipée et AT/MP
+
+### Le lien entre AT/MP et retraite :
+
+La victime d'un AT/MP titulaire d'une rente d'incapacité peut bénéficier de conditions avantageuses pour la retraite :
+
+### 1. Retraite anticipée pour invalidité (Loi 83-12) :
+- Si la victime est reconnue **inapte au travail** par le médecin conseil
+- Pas de condition d'âge minimum
+- Condition de cotisation : variable selon la date
+
+### 2. Cumul pension de retraite + rente AT/MP :
+- La rente d'AT est un droit **propre** → elle se **cumule** intégralement avec la pension de retraite
+- Pas de réduction ni de plafonnement
+
+### 3. Majoration de durée d'assurance :
+- Les périodes d'ITT (arrêt de travail) sont comptabilisées comme **périodes d'assurance** pour le calcul de la retraite
+- Pas de perte de trimestres pendant l'incapacité temporaire
+
+> 💡 Un travailleur victime d'un AT grave peut cumuler : **pension de retraite + rente AT/MP + éventuellement majoration tierce personne**.`,
+    relatedQuestions: ["Peut-on cumuler rente et salaire ?", "Comment sont calculées les rentes ?", "Catégories d'invalidité ?"],
+    category: 'droits'
+  },
+  action_recours_tiers: {
+    keywords: ['recours', 'tiers'],
+    synonymKeywords: ['tiers responsable', 'action contre tiers', 'accident cause par tiers', 'responsabilite tiers'],
+    summary: `## ⚖️ Action récursoire contre le tiers (Art. 68-70, Loi 83-13)
+
+### Situation :
+Lorsqu'un accident du travail est causé par un **tiers** (ex: accident de la route causé par un autre conducteur), la CNAS verse les prestations à la victime **puis** peut se retourner contre le tiers responsable.
+
+### Le principe de subrogation (Art. 68) :
+> La CNAS est **subrogée** dans les droits de la victime contre le tiers responsable, à concurrence des prestations versées.
+
+### En pratique :
+
+| Acteur | Action |
+|--------|--------|
+| **La CNAS** | Verse les prestations à la victime (IJ, rente, soins) |
+| **La CNAS** | Se retourne contre le tiers (ou son assureur) pour récupérer les sommes |
+| **La victime** | Peut agir **en complément** pour les préjudices non couverts par la SS |
+
+### Ce que la victime peut encore réclamer au tiers :
+- Préjudice moral
+- Préjudice esthétique  
+- Préjudice d'agrément
+- Complément d'indemnisation au-delà des barèmes SS
+
+> 💡 L'action contre le tiers est **indépendante** de la couverture AT/MP. Les deux indemnisations ne se substituent pas, elles se complètent.`,
+    relatedQuestions: ["Définition de l'accident du travail ?", "Comment sont calculées les rentes ?", "Qu'est-ce que la faute inexcusable ?"],
+    category: 'recours'
+  },
+  controle_arret_travail: {
+    keywords: ['controle', 'arret'],
+    synonymKeywords: ['controle medical', 'verification arret', 'medecin controle', 'arret justifie', 'prolongation arret'],
+    summary: `## 🔍 Contrôle des arrêts de travail
+
+### Pouvoir du médecin conseil (Art. 64, Loi 83-11) :
+Le médecin conseil peut à tout moment vérifier que l'arrêt de travail est **médicalement justifié**.
+
+### Types de contrôle :
+1. **Contrôle sur pièces** : Étude du dossier médical
+2. **Convocation** : La victime est convoquée chez le médecin conseil
+3. **Contrôle à domicile** : Visite inopinée (heures de présence obligatoire)
+
+### Conséquences d'un contrôle défavorable :
+| Situation | Conséquence |
+|-----------|-----------|
+| Arrêt non justifié | **Suspension** des indemnités journalières |
+| Absence au contrôle (sans motif) | Suspension des IJ |
+| Activité rémunérée pendant l'arrêt | Suspension + remboursement des IJ |
+| Refus de soins | Suspension possible |
+
+### Obligations de la victime pendant l'arrêt :
+- Être présent au domicile aux **heures de sortie autorisées**
+- Se présenter aux convocations du médecin conseil
+- Ne pas exercer d'activité rémunérée
+- Suivre le traitement prescrit
+
+> 💡 En AT/MP, les heures de sortie sont généralement de **10h-12h** et **16h-18h** (sauf prescription contraire du médecin traitant).`,
+    relatedQuestions: ["Rôle du médecin conseil ?", "Calcul de l'indemnité journalière ?"],
+    category: 'medecin'
+  },
+  imputabilite: {
+    keywords: ['imputabilite'],
+    synonymKeywords: ['lien causal', 'relation cause', 'imputable at', 'presomption imputabilite'],
+    summary: `## 🔗 L'imputabilité (présomption d'imputabilité)
+
+### Le principe fondamental :
+En AT/MP, il existe une **présomption d'imputabilité** : tout accident survenu au temps et au lieu du travail est **présumé** être un accident du travail.
+
+### Conséquences pratiques :
+
+| | AT/MP | Droit commun |
+|---|------|-------------|
+| **Charge de la preuve** | La CNAS doit prouver que ce n'est **PAS** un AT | La victime doit prouver la faute |
+| **Présomption** | **Favorable** à la victime | Aucune présomption |
+| **Lien causal** | Présumé établi | À démontrer |
+
+### Conditions de la présomption :
+1. L'accident est survenu **au temps du travail** (horaires)
+2. L'accident est survenu **au lieu du travail** (locaux de l'entreprise)
+3. La victime était **sous l'autorité** de l'employeur
+
+### Renversement de la présomption :
+La CNAS peut renverser la présomption si elle prouve que :
+- L'accident n'a **aucun lien** avec le travail
+- L'accident résulte d'une **cause totalement étrangère** au travail (ex: malaise dû à une maladie personnelle préexistante clairement identifiée)
+
+> ⚠️ **Important pour le médecin conseil** : En cas de doute, la présomption joue en faveur de la victime. Le médecin conseil doit avoir des éléments **solides** pour écarter l'imputabilité.
+
+**Réf** : Art. 6, Loi 83-13 et jurisprudence constante.`,
+    relatedQuestions: ["Définition de l'accident du travail ?", "Prise en charge d'un état antérieur ?", "Une faute de la victime annule-t-elle ses droits ?"],
+    category: 'medecin'
+  },
+  conversion_pension_capital: {
+    keywords: ['conversion', 'rente'],
+    synonymKeywords: ['rachat rente', 'convertir pension', 'transformer rente capital'],
+    summary: `## 💱 Conversion de la rente en capital (Art. 50-51, Loi 83-13)
+
+### Le principe :
+La victime titulaire d'une rente d'IPP peut demander la **conversion partielle** de sa rente en capital.
+
+### Conditions :
+- Le taux d'IPP doit être **≤ 20%**
+- La demande est faite par la victime
+- L'organisme statue sur la demande
+
+### Limite :
+- La conversion ne peut porter que sur **une fraction** de la rente (pas la totalité pour les taux > 10%)
+- Le calcul se fait selon un barème officiel de capitalisation
+
+### Avantage :
+Percevoir un capital immédiat plutôt qu'une rente trimestrielle modeste.
+
+### Inconvénient :
+- Le capital versé est **définitif** — pas de retour possible à la rente
+- Pas de revalorisation future
+
+> 💡 Cette option est surtout intéressante pour les **faibles taux d'IPP** (10-20%) où la rente trimestrielle est modeste.`,
+    relatedQuestions: ["Comment sont calculées les rentes ?", "Le capital forfaitaire (IPP < 10%) ?"],
+    category: 'calcul'
+  },
+  reeducation_fonctionnelle: {
+    keywords: ['reeducation', 'fonctionnelle'],
+    synonymKeywords: ['kinesitherapie', 'readaptation', 'physiotherapie', 'kine', 'seances kine'],
+    summary: `## 🏋️ Rééducation fonctionnelle (Art. 33, Loi 83-13)
+
+### Prise en charge :
+La rééducation fonctionnelle est prise en charge à **100%** dans le cadre des AT/MP.
+
+### Ce qui est couvert :
+| Prestation | Détail |
+|-----------|--------|
+| **Kinésithérapie** | Séances prescrites par le médecin |
+| **Balnéothérapie** | Cures thermales si prescrites |
+| **Ergothérapie** | Rééducation des gestes quotidiens/professionnels |
+| **Transport** | Frais de déplacement vers le centre de rééducation |
+| **Hébergement** | Si nécessité d'hospitalisation en centre spécialisé |
+
+### Durée :
+- Pas de limite de séances fixée par la loi
+- Le médecin conseil évalue la **nécessité** et la **pertinence** de la rééducation
+- Elle peut se poursuivre **après la consolidation** si les soins sont liés aux séquelles
+
+### Contrôle :
+Le médecin conseil vérifie :
+1. L'adéquation entre la rééducation et les lésions
+2. L'évolution objective sous traitement
+3. L'absence de prolongation injustifiée
+
+> 💡 La rééducation fait partie des **prestations en nature**. Elle est un droit de la victime, pas une faveur.`,
+    relatedQuestions: ["Quelles sont les prestations en nature ?", "Qu'est-ce que la consolidation ?"],
+    category: 'droits'
+  },
+  expertise_contradictoire: {
+    keywords: ['expertise', 'contradictoire'],
+    synonymKeywords: ['contre expertise', 'contreexpertise', 'deuxieme avis', 'avis contraire'],
+    summary: `## ⚖️ L'expertise contradictoire
+
+### Différence avec l'expertise Loi 08-08 :
+
+| | Expertise Loi 08-08 | Expertise contradictoire (judiciaire) |
+|---|---------------------|--------------------------------------|
+| **Qui la demande** | L'assuré | Le tribunal |
+| **Quand** | Avant le recours judiciaire | Pendant le procès |
+| **Expert** | Choisi conjointement ou d'office | Désigné par le juge |
+| **Forces** | S'impose aux parties | S'impose au juge (sauf avis motivé contraire) |
+
+### L'expertise judiciaire :
+Si l'assuré n'est pas satisfait de l'expertise Loi 08-08, il peut saisir le tribunal qui ordonnera une **expertise judiciaire** :
+1. Le juge désigne un expert inscrit sur la liste des experts
+2. L'expert examine la victime **en présence** du médecin conseil et du médecin traitant
+3. Chaque partie peut présenter ses observations
+4. L'expert rend un rapport détaillé
+5. Le tribunal tranche sur la base de ce rapport
+
+> 💡 **Conseil** : L'expertise judiciaire est le dernier recours. Elle est plus longue et coûteuse. Privilégiez d'abord l'expertise Loi 08-08.`,
+    relatedQuestions: ["Procédure d'expertise médicale ?", "Le recours préalable est-il obligatoire ?", "Délais de contestation ?"],
+    category: 'recours'
+  },
+  guide_medecin_1995: {
+    keywords: ['guide', 'medecin', '1995'],
+    synonymKeywords: ['guide pratique', 'manuel medecin conseil', 'guide 1995', 'guide officiel'],
+    summary: `## 📖 Le Guide du Médecin Conseil (1995)
+
+### Nature :
+Le Guide du Médecin Conseil est un **document de référence** publié par la CNAS en 1995. Il constitue un outil pratique pour standardiser les pratiques des médecins conseil.
+
+### Contenu :
+- **Principes généraux** du contrôle médical
+- **Méthodologie** d'évaluation des incapacités
+- **Barème indicatif** des taux d'IPP par type de séquelle
+- **Procédures** à suivre pour chaque type de décision
+- **Modèles** de rapports et formulaires
+
+### Statut juridique :
+- C'est un guide **indicatif**, pas un texte de loi
+- Le médecin conseil peut s'en écarter avec **motivation**
+- Il complète les lois (83-11, 83-13, 83-15, 08-08) sans les remplacer
+
+### Les chapitres principaux :
+1. Contrôle des arrêts de travail
+2. Évaluation de l'IPP (barème par appareil)
+3. Gestion des rechutes et révisions
+4. Contentieux médical et expertise
+5. Invalidité et commissions
+
+> 💡 Ce guide est accessible dans l'onglet **"Textes de Loi Intégraux"** de cette application.`,
+    relatedQuestions: ["Comment est fixé le taux d'incapacité ?", "Rôle du médecin conseil ?", "La formule de Balthazard ?"],
+    category: 'medecin'
+  },
 };
 
 // ═══════════════════════════════════════════════════════════════
 // AI QUERY PROCESSOR — Fuzzy intent matching with scoring
 // ═══════════════════════════════════════════════════════════════
 
-const processQuery = (query: string, context?: ConversationContext): { text: string; relatedQuestions?: string[]; confidence: 'high' | 'medium' | 'low'; sources?: string[] } => {
+const processQuery = (query: string, context?: ConversationContext): { text: string; relatedQuestions?: string[]; confidence: 'high' | 'medium' | 'low'; sources?: string[]; intentKey?: string; category?: string } => {
   const normalizedQuery = normalizeText(query);
   const queryKeywords = extractMeaningfulKeywords(query);
+  const queryNgrams = extractNgrams(normalizedQuery, 3);
+
+  // ─── 0. Greetings & thanks ───
+  if (isGreeting(normalizedQuery)) {
+    const greetings = [
+      `## 👋 Bienvenue !\n\nJe suis votre **assistant juridique expert** en sécurité sociale algérienne.\n\n### Je peux vous aider sur :\n- 🏥 **Accidents du travail** et maladies professionnelles (Loi 83-13)\n- 💊 **Assurances sociales** et prestations maladie (Loi 83-11)\n- ⚖️ **Contentieux** et procédures de recours (Loi 08-08)\n- 🧮 **Calculs** : Balthazard, rentes, taux utile, IPP sociale\n- 📋 **Procédures** : expertise, consolidation, révision\n- 👨‍⚕️ **Rôle du médecin conseil**\n\nPosez-moi votre question ou choisissez un sujet ci-dessous !`,
+      `## 👋 Salam !\n\nJe suis votre **expert en droit de la sécurité sociale algérienne**.\n\nJe maîtrise les lois **83-11**, **83-13**, **83-15**, **08-08** et le **Guide du médecin conseil 1995**.\n\n> 💡 Posez-moi n'importe quelle question sur les AT/MP, les prestations, les calculs de rentes, les procédures... Je suis là pour vous aider !`
+    ];
+    return {
+      text: greetings[Math.floor(Math.random() * greetings.length)],
+      relatedQuestions: ["Définition de l'accident du travail ?", "Comment fonctionne la formule de Balthazard ?", "Calcul de l'indemnité journalière ?", "Procédure d'expertise médicale ?", "Quelles sont les ALD ?", "Les cotisations de sécurité sociale ?"],
+      confidence: 'high'
+    };
+  }
+
+  if (isThanks(normalizedQuery)) {
+    return {
+      text: `## ✅ Je vous en prie !\n\nN'hésitez pas si vous avez d'autres questions. Je suis là pour vous aider sur tous les aspects de la **sécurité sociale algérienne**.`,
+      relatedQuestions: context?.lastCategory === 'calcul'
+        ? ["La formule de Balthazard ?", "Comment calculer la rente ?", "Le taux utile ?"]
+        : context?.lastCategory === 'procedure'
+        ? ["Délais de contestation ?", "L'expertise contradictoire ?", "La feuille d'accident ?"]
+        : ["Définition accident du travail ?", "Les prestations en nature ?", "Rôle du médecin conseil ?"],
+      confidence: 'high'
+    };
+  }
 
   // ─── 1. Specific article lookup ───
   const articleMatch = normalizedQuery.match(/article\s*(\d+)\s*(?:de la loi\s*)?(\d{2,2}[\s-]\d{2,2})?/);
@@ -1016,7 +1762,7 @@ const processQuery = (query: string, context?: ConversationContext): { text: str
     }
   }
 
-  // ─── 2. Scored intent matching (fuzzy) ───
+  // ─── 2. Scored intent matching (enhanced with n-grams) ───
   const intentScores: { key: string; score: number; intent: IntentDef }[] = [];
 
   for (const [key, intent] of Object.entries(INTENTS)) {
@@ -1035,7 +1781,24 @@ const processQuery = (query: string, context?: ConversationContext): { text: str
         const synWords = normalizeText(synPhrase).split(/\s+/);
         const synMatches = synWords.filter(sw => normalizedQuery.includes(sw));
         if (synMatches.length === synWords.length) score += 4; // Full synonym phrase match
-        else score += synMatches.length * 0.5; // Partial
+        else if (synMatches.length > 0) score += synMatches.length * 0.8; // Partial
+      }
+    }
+
+    // N-gram matching: check n-grams of query against intent keywords
+    for (const ngram of queryNgrams) {
+      const ngramNorm = normalizeText(ngram);
+      for (const kw of intent.keywords) {
+        if (ngramNorm.includes(normalizeText(kw)) || normalizeText(kw).includes(ngramNorm)) {
+          score += 1.5;
+        }
+      }
+      if (intent.synonymKeywords) {
+        for (const syn of intent.synonymKeywords) {
+          if (ngramNorm.includes(normalizeText(syn)) || normalizeText(syn).includes(ngramNorm)) {
+            score += 2;
+          }
+        }
       }
     }
 
@@ -1044,6 +1807,11 @@ const processQuery = (query: string, context?: ConversationContext): { text: str
     queryKeywords.forEach(qk => {
       if (expandedIntentKw.includes(qk)) score += 1;
     });
+
+    // Context bonus: if the user was discussing the same category, give a boost
+    if (context?.lastCategory && intent.category === context.lastCategory) {
+      score += 1.5;
+    }
 
     if (score > 2) {
       intentScores.push({ key, score, intent });
@@ -1080,10 +1848,38 @@ const processQuery = (query: string, context?: ConversationContext): { text: str
       }
     }
 
-    return { text, relatedQuestions: intent.relatedQuestions, confidence, sources };
+    // If low confidence, check if nomenclature has better results to append
+    if (confidence === 'low') {
+      const nomenResults = searchNomenclature(query);
+      if (nomenResults.length > 0) {
+        const nomenTexts = nomenResults.slice(0, 2).map(r =>
+          `### 🧮 ${r.rule}\n*${r.article}*\n\n${r.description}\n\n**Formule** : \`${r.formula}\`${r.example ? `\n\n**Exemple** : ${r.example}` : ''}`
+        ).join('\n\n---\n\n');
+        text += `\n\n---\n\n## Règles de calcul associées :\n\n${nomenTexts}`;
+        sources.push('Nomenclature / Barème');
+      }
+    }
+
+    return { text, relatedQuestions: intent.relatedQuestions, confidence, sources, intentKey: best.key, category: intent.category };
   }
 
-  // ─── 3. Fallback: fuzzy search across legal texts ───
+  // ─── 3. Nomenclature / calculation search ───
+  const nomenResults = searchNomenclature(query);
+  if (nomenResults.length > 0) {
+    const nomenTexts = nomenResults.slice(0, 3).map(r =>
+      `### 🧮 ${r.rule}\n*${r.article}*\n\n${r.description}\n\n**Formule** : \`${r.formula}\`\n\n${r.variables?.length ? `**Variables** : ${r.variables.map(v => `\`${v.name}\` = ${v.description}`).join(', ')}` : ''}${r.example ? `\n\n**Exemple** : ${r.example}` : ''}`
+    ).join('\n\n---\n\n');
+
+    return {
+      text: `## 🧮 Résultats de la nomenclature :\n\n${nomenTexts}`,
+      relatedQuestions: ["Comment fonctionne la formule de Balthazard ?", "Le taux utile, c'est quoi ?", "Comment sont calculées les rentes ?"],
+      confidence: 'medium',
+      sources: ['Nomenclature / Barème'],
+      category: 'calcul'
+    };
+  }
+
+  // ─── 4. Fallback: fuzzy search across legal texts ───
   if (queryKeywords.length > 0) {
     const results = searchLegalTexts(queryKeywords);
     if (results.length > 0) {
@@ -1100,19 +1896,28 @@ const processQuery = (query: string, context?: ConversationContext): { text: str
     }
   }
 
-  // ─── 4. No results — helpful fallback ───
+  // ─── 5. No results — smart helpful fallback ───
+  const suggestedCategories = [
+    { emoji: '🏥', label: 'AT/MP', examples: ['accident du travail', 'maladie professionnelle', 'rechute'] },
+    { emoji: '💊', label: 'Prestations', examples: ['indemnité journalière', 'rente', 'soins'] },
+    { emoji: '⚖️', label: 'Contentieux', examples: ['expertise', 'recours', 'contestation'] },
+    { emoji: '🧮', label: 'Calculs', examples: ['Balthazard', 'taux utile', 'IPP'] },
+    { emoji: '👨‍⚕️', label: 'Médecin conseil', examples: ['consolidation', 'contrôle', 'imputabilité'] },
+    { emoji: '📋', label: 'Procédures', examples: ['déclaration', 'prescription', 'feuille accident'] },
+  ];
+  const catList = suggestedCategories.map(c => `- ${c.emoji} **${c.label}** : ${c.examples.map(e => `"${e}"`).join(', ')}`).join('\n');
+
   return {
-    text: `Je n'ai pas trouvé de réponse précise pour *"${query}"* dans les textes de loi que je connais.
+    text: `Je n'ai pas trouvé de réponse précise pour *"${query}"*.
 
-### 💡 Suggestions :
-- Reformulez avec des **termes juridiques** (ex: "consolidation", "rechute", "IPP", "rente")
-- Demandez un **article spécifique** (ex: "Article 42 de la loi 83-13")
-- Consultez les **textes intégraux** dans le 2e onglet
-- Choisissez une des **suggestions** ci-dessous
+### 💡 Essayez avec ces thèmes :
+${catList}
 
-### 📚 Textes que je connais :
-${legalTexts.map(l => `- ${l.title}`).join('\n')}`,
-    relatedQuestions: ["Définition accident du travail ?", "Procédure d'expertise médicale ?", "Comment est fixé le taux d'IPP ?", "Comment gérer une rechute ?"],
+### 📚 Vous pouvez aussi :
+- Demander un **article spécifique** (ex: "Article 42 de la loi 83-13")
+- Consulter les **textes intégraux** dans le 2e onglet
+- Choisir une des **suggestions** ci-dessous`,
+    relatedQuestions: ["Définition accident du travail ?", "Procédure d'expertise médicale ?", "Comment est fixé le taux d'IPP ?", "Comment gérer une rechute ?", "La formule de Balthazard ?", "Quelles sont les ALD ?"],
     confidence: 'low'
   };
 };
@@ -1289,60 +2094,72 @@ const QUESTION_CATEGORIES: QuestionCategory[] = [
             "Qu'est-ce que la consolidation ?",
             "Qu'est-ce qu'une maladie professionnelle ?",
             "Différence incapacité / invalidité ?",
-            "Différence incapacité temporaire / permanente ?",
+            "Qu'est-ce que l'imputabilité ?",
         ]
     },
     {
-        icon: '🩺', label: 'Médecin', color: 'border-emerald-300 bg-emerald-50',
+        icon: '🩺', label: 'Médecin conseil', color: 'border-emerald-300 bg-emerald-50',
         questions: [
             "Rôle du médecin conseil ?",
-            "Contenu du certificat médical initial ?",
             "Comment est fixé le taux d'incapacité ?",
             "Prise en charge d'un état antérieur ?",
-            "Les séquelles psychologiques sont-elles indemnisées ?",
-            "Qu'est-ce que l'aggravation au sens de la loi ?",
+            "Le Guide du Médecin Conseil 1995 ?",
+            "Contrôle des arrêts de travail ?",
+            "L'IPP sociale (majoration) ?",
         ]
     },
     {
         icon: '📝', label: 'Procédures', color: 'border-amber-300 bg-amber-50',
         questions: [
             "Délai de déclaration d'un accident ?",
-            "Déclaration maladie professionnelle ?",
+            "La feuille d'accident ?",
             "Obligations de l'employeur ?",
             "Comment gérer une rechute ?",
-            "Procédure de révision du taux ?",
-            "Que faire si l'employeur refuse de déclarer ?",
+            "Prescription des droits ?",
+            "Sanctions contre l'employeur ?",
         ]
     },
     {
-        icon: '💰', label: 'Calculs & Prestations', color: 'border-purple-300 bg-purple-50',
+        icon: '🧮', label: 'Calculs', color: 'border-purple-300 bg-purple-50',
         questions: [
-            "Calcul de l'indemnité journalière ?",
+            "La formule de Balthazard ?",
+            "Le taux utile, c'est quoi ?",
             "Comment sont calculées les rentes ?",
-            "Peut-on cumuler rente et salaire ?",
-            "Conditions pour une tierce personne ?",
-            "Quelles sont les prestations en nature ?",
-            "Les frais de transport sont-ils pris en charge ?",
+            "Le capital forfaitaire (IPP < 10%) ?",
+            "Calcul de la capacité restante ?",
+            "Calcul de l'indemnité journalière ?",
         ]
     },
     {
-        icon: '⚖️', label: 'Recours', color: 'border-red-300 bg-red-50',
+        icon: '⚖️', label: 'Recours & Contentieux', color: 'border-red-300 bg-red-50',
         questions: [
             "Procédure d'expertise médicale ?",
+            "L'expertise contradictoire ?",
             "Le recours préalable est-il obligatoire ?",
-            "Délais pour contester une décision CNAS ?",
-            "Types de rejet de rechute ?",
+            "Délais pour contester une décision ?",
             "Qu'est-ce que la faute inexcusable ?",
-            "Comment contester la date de consolidation ?",
+            "Le recours contre un tiers ?",
         ]
     },
     {
-        icon: '🛡️', label: 'Droits', color: 'border-teal-300 bg-teal-50',
+        icon: '🏥', label: 'Prestations & Droits', color: 'border-teal-300 bg-teal-50',
         questions: [
-            "La victime peut-elle choisir son médecin ?",
-            "Droits en cas de décès de la victime ?",
-            "Les soins à l'étranger sont-ils pris en charge ?",
-            "Une faute de la victime annule-t-elle ses droits ?",
+            "Assurance maladie ordinaire ?",
+            "Congé de maternité ?",
+            "Quelles sont les ALD ?",
+            "Appareillage et prothèses ?",
+            "Rééducation fonctionnelle ?",
+            "Réadaptation professionnelle ?",
+        ]
+    },
+    {
+        icon: '💼', label: 'Affiliations & Cotisations', color: 'border-indigo-300 bg-indigo-50',
+        questions: [
+            "Les cotisations de sécurité sociale ?",
+            "Affiliation et immatriculation ?",
+            "Retraite anticipée et AT ?",
+            "Peut-on cumuler rente et salaire ?",
+            "Conversion rente en capital ?",
             "Catégories d'invalidité ?",
         ]
     }
@@ -1352,14 +2169,18 @@ const AiAssistantView: React.FC = () => {
     const [messages, setMessages] = useState<Message[]>([
         { 
             id: 'initial', role: 'model', 
-            text: `## 🏛️ Assistant Juridique — Guide du Médecin Conseil
+            text: `## 🏛️ Expert en Sécurité Sociale Algérienne
 
-Bonjour ! Je suis votre assistant spécialisé en **législation AT/MP algérienne**. Je peux vous aider sur :
+Bienvenue ! Je suis un assistant spécialisé en **droit de la sécurité sociale algérienne**, expert en :
 
-- 📋 **Définitions légales** (accident du travail, consolidation, invalidité...)
-- 🩺 **Rôle du médecin** (certificats, évaluation IPP, état antérieur...)
-- 💰 **Calcul des prestations** (indemnités, rentes, tierce personne...)
-- ⚖️ **Procédures et recours** (expertise, rechute, contestation...)
+- 🏥 **AT/MP** — Accidents du travail et maladies professionnelles (Loi 83-13)
+- 💊 **Assurances sociales** — Maladie, maternité, ALD (Loi 83-11)
+- 🧮 **Calculs** — Balthazard, taux utile, rentes, IPP sociale
+- ⚖️ **Contentieux** — Expertise, recours, prescription (Loi 08-08)
+- 👨‍⚕️ **Médecin conseil** — Imputabilité, contrôle, consolidation
+- 📋 **Procédures** — Affiliation, cotisations, sanctions
+
+> 💡 **${Object.keys(INTENTS).length}+ sujets** couverts • **5 textes de loi** intégrés • **11 règles de calcul**
 
 Posez votre question ou choisissez une suggestion ci-dessous.`,
             confidence: 'high'
@@ -1397,11 +2218,13 @@ Posez votre question ou choisissez une suggestion ci-dessous.`,
             setMessages(prev => [...prev, newMsg]);
             setIsLoading(false);
 
-            // Update conversation context
+            // Update conversation context with intent tracking
             setConversationContext(prev => ({
                 topics: [...prev.topics, currentQuery].slice(-5),
                 turnCount: prev.turnCount + 1,
-                lastLawId: result.sources?.length ? undefined : prev.lastLawId
+                lastLawId: result.sources?.length ? undefined : prev.lastLawId,
+                lastIntentKey: result.intentKey || prev.lastIntentKey,
+                lastCategory: result.category || prev.lastCategory
             }));
         }, 400 + Math.random() * 400);
     }, [input, conversationContext]);
@@ -1419,7 +2242,7 @@ Posez votre question ou choisissez une suggestion ci-dessous.`,
             text: `## 🏛️ Assistant Juridique — Guide du Médecin Conseil\n\nConversation réinitialisée. Posez votre question ou choisissez une suggestion.`,
             confidence: 'high'
         }]);
-        setConversationContext({ topics: [], turnCount: 0 });
+        setConversationContext({ topics: [], turnCount: 0, lastIntentKey: undefined, lastCategory: undefined });
         setShowAllSuggestions(true);
     };
     
@@ -1434,8 +2257,8 @@ Posez votre question ou choisissez une suggestion ci-dessous.`,
                         </svg>
                     </div>
                     <div>
-                        <h2 className="text-sm font-bold">Dr. Hacene — Assistant Juridique</h2>
-                        <p className="text-[10px] text-primary-200">Législation AT/MP algérienne • 5 textes de loi</p>
+                        <h2 className="text-sm font-bold">Dr. Hacene — Expert Sécurité Sociale</h2>
+                        <p className="text-[10px] text-primary-200">Législation algérienne • {Object.keys(INTENTS).length}+ sujets • 5 lois • 11 règles de calcul</p>
                     </div>
                 </div>
                 <button onClick={handleClearChat} className="text-xs text-primary-200 hover:text-white transition-colors flex items-center gap-1 px-2 py-1 rounded hover:bg-white/10" title="Réinitialiser la conversation">
@@ -1507,7 +2330,7 @@ Posez votre question ou choisissez une suggestion ci-dessous.`,
                     </Button>
                 </div>
                 <p className="text-[10px] text-slate-400 mt-1.5 text-center">
-                    5 textes de loi • {Object.keys(INTENTS).length}+ sujets couverts • Tapez un article spécifique ou une question libre
+                    Expert en sécurité sociale algérienne • {Object.keys(INTENTS).length}+ sujets • Essayez "bonjour" ou une question libre
                 </p>
             </div>
         </div>
