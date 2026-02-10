@@ -214,7 +214,7 @@ export const ExclusiveAiCalculator: React.FC<ExclusiveAiCalculatorProps> = ({
     const analysisQueueRef = useRef<string[]>([]);
 
     // Correcteur d'orthographe médical
-    const { results: spellCheckResults, applyCorrection, ignoreWord } = useMedicalSpellCheck(userInput);
+    const { results: spellCheckResults, applyCorrection, applyAllCorrections, ignoreWord, ignoreAll } = useMedicalSpellCheck(userInput);
     const messagesEndRef = useRef<HTMLDivElement>(null);
     
     useEffect(() => {
@@ -734,6 +734,10 @@ export const ExclusiveAiCalculator: React.FC<ExclusiveAiCalculatorProps> = ({
                                 setUserInput(applyCorrection(result, correction));
                             }}
                             onIgnore={ignoreWord}
+                            onApplyAll={() => {
+                                setUserInput(applyAllCorrections());
+                            }}
+                            onIgnoreAll={ignoreAll}
                             onDismiss={() => setSpellCheckDismissed(true)}
                         />
                     )}

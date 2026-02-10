@@ -1,11 +1,12 @@
 /**
  * Hook React pour le correcteur d'orthographe médical
  * Tokenize, vérifie et suggère des corrections avec debounce
+ * V2: Auto-correction fautes courantes + fix multi-correction + "Tout corriger"
  */
 
 import { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import { normalize } from '../AiAnalyzer';
-import { getMedicalDictionary, FRENCH_STOP_WORDS } from './medicalDictionary';
+import { getMedicalDictionary, FRENCH_STOP_WORDS, COMMON_MEDICAL_TYPOS } from './medicalDictionary';
 import { findClosestTerms } from './levenshtein';
 
 export interface SpellCheckResult {
@@ -13,7 +14,8 @@ export interface SpellCheckResult {
     startIndex: number;     // position de début dans le texte
     endIndex: number;       // position de fin dans le texte
     normalizedWord: string; // mot normalisé (sans accents, minuscule)
-    suggestions: string[];  // suggestions de correction
+    suggestions: string[];  // suggestions de correction (première = meilleure)
+    isAutoCorrect: boolean; // true si faute courante connue (haute confiance)
 }
 
 interface TokenInfo {
@@ -58,24 +60,33 @@ export function useMedicalSpellCheck(text: string) {
             const newResults: SpellCheckResult[] = [];
 
             for (const token of tokens) {
-                // Ignorer les mots courts (< 3 chars)
                 if (token.word.length < 3) continue;
 
                 const normalized = normalize(token.word);
 
-                // Ignorer les stop-words
                 if (FRENCH_STOP_WORDS.has(normalized)) continue;
-
-                // Ignorer les mots déjà marqués "ignorer" par l'utilisateur
                 if (ignoredWords.current.has(normalized)) continue;
-
-                // Ignorer les nombres
                 if (/^\d+$/.test(token.word)) continue;
 
-                // Vérifier si le mot existe dans le dictionnaire médical
+                // 1. Vérifier la carte de fautes courantes (haute confiance)
+                const knownCorrection = COMMON_MEDICAL_TYPOS.get(normalized);
+                if (knownCorrection && knownCorrection !== normalized) {
+                    const displayForm = dictionary.originalForms.get(knownCorrection) || knownCorrection;
+                    newResults.push({
+                        word: token.word,
+                        startIndex: token.start,
+                        endIndex: token.end,
+                        normalizedWord: normalized,
+                        suggestions: [displayForm],
+                        isAutoCorrect: true,
+                    });
+                    continue;
+                }
+
+                // 2. Vérifier dans le dictionnaire médical
                 if (dictionary.singleWords.has(normalized)) continue;
 
-                // Mot non trouvé → chercher des suggestions
+                // 3. Chercher des suggestions par Levenshtein
                 const suggestions = findClosestTerms(
                     normalized,
                     dictionary.singleWords,
@@ -83,9 +94,7 @@ export function useMedicalSpellCheck(text: string) {
                     4   // max résultats
                 );
 
-                // Ne signaler que si on a des suggestions pertinentes
                 if (suggestions.length > 0) {
-                    // Restaurer les formes originales (avec accents) si possible
                     const displaySuggestions = suggestions.map(s => {
                         return dictionary.originalForms.get(s) || s;
                     });
@@ -96,12 +105,13 @@ export function useMedicalSpellCheck(text: string) {
                         endIndex: token.end,
                         normalizedWord: normalized,
                         suggestions: displaySuggestions,
+                        isAutoCorrect: false,
                     });
                 }
             }
 
             setResults(newResults);
-        }, 400);
+        }, 300); // 300ms au lieu de 400ms pour plus de réactivité
 
         return () => {
             if (debounceTimer.current) {
@@ -110,14 +120,41 @@ export function useMedicalSpellCheck(text: string) {
         };
     }, [text, dictionary]);
 
+    // Appliquer UNE correction (gère le décalage d'indices)
     const applyCorrection = useCallback((result: SpellCheckResult, correction: string): string => {
         return text.substring(0, result.startIndex) + correction + text.substring(result.endIndex);
     }, [text]);
+
+    // Appliquer TOUTES les corrections (de la fin vers le début pour préserver les indices)
+    const applyAllCorrections = useCallback((): string => {
+        if (results.length === 0) return text;
+
+        // Trier par position décroissante pour appliquer de la fin vers le début
+        const sorted = [...results].sort((a, b) => b.startIndex - a.startIndex);
+        let newText = text;
+
+        for (const result of sorted) {
+            if (result.suggestions.length > 0) {
+                newText = newText.substring(0, result.startIndex) +
+                    result.suggestions[0] +
+                    newText.substring(result.endIndex);
+            }
+        }
+
+        return newText;
+    }, [text, results]);
 
     const ignoreWord = useCallback((result: SpellCheckResult) => {
         ignoredWords.current.add(result.normalizedWord);
         setResults(prev => prev.filter(r => r.normalizedWord !== result.normalizedWord));
     }, []);
 
-    return { results, applyCorrection, ignoreWord };
+    const ignoreAll = useCallback(() => {
+        for (const result of results) {
+            ignoredWords.current.add(result.normalizedWord);
+        }
+        setResults([]);
+    }, [results]);
+
+    return { results, applyCorrection, applyAllCorrections, ignoreWord, ignoreAll };
 }

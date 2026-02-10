@@ -1,6 +1,7 @@
 /**
  * Dictionnaire médical français pour le correcteur d'orthographe
  * Construit à partir des données existantes : barème + synonymes médicaux
+ * + vocabulaire français courant + carte de fautes courantes
  */
 
 import { medicalSynonyms, normalize } from '../AiAnalyzer';
@@ -8,18 +9,142 @@ import { disabilityData } from '../../data/disabilityRates';
 import { disabilityData as disabilityDataNew } from '../../data/disabilityRates.new';
 import { InjuryCategory } from '../../types';
 
-// Stop-words français à ignorer
+// Stop-words français étendus (ne pas signaler comme fautes)
 const FRENCH_STOP_WORDS = new Set([
-    'le', 'la', 'les', 'de', 'du', 'des', 'un', 'une', 'et', 'ou', 'en',
-    'dans', 'avec', 'pour', 'par', 'sur', 'est', 'sont', 'a', 'au', 'aux',
+    // Articles et déterminants
+    'le', 'la', 'les', 'de', 'du', 'des', 'un', 'une', 'au', 'aux',
+    // Pronoms
     'ce', 'cette', 'ces', 'son', 'sa', 'ses', 'mon', 'ma', 'mes', 'ton',
     'ta', 'tes', 'il', 'elle', 'ils', 'elles', 'nous', 'vous', 'on',
-    'qui', 'que', 'dont', 'ou', 'ne', 'pas', 'plus', 'sans', 'se', 'si',
-    'non', 'oui', 'mais', 'car', 'donc', 'ni', 'entre', 'vers', 'chez',
-    'apres', 'avant', 'depuis', 'sous', 'pendant', 'selon', 'lors',
+    'qui', 'que', 'dont', 'se', 'lui', 'leur', 'leurs', 'moi', 'toi',
+    'soi', 'eux', 'cela', 'ceci', 'celui', 'celle', 'ceux', 'celles',
+    // Conjonctions et prépositions
+    'et', 'ou', 'en', 'dans', 'avec', 'pour', 'par', 'sur', 'est', 'sont',
+    'ne', 'pas', 'plus', 'sans', 'si', 'non', 'oui', 'mais', 'car',
+    'donc', 'ni', 'entre', 'vers', 'chez', 'apres', 'avant', 'depuis',
+    'sous', 'pendant', 'selon', 'lors', 'comme', 'aussi', 'bien', 'tres',
+    'tout', 'tous', 'toute', 'toutes', 'autre', 'autres', 'meme', 'peu',
+    'trop', 'assez', 'moins', 'aucun', 'aucune', 'chaque', 'quel', 'quelle',
+    // Verbes courants (conjugaisons fréquentes)
+    'avoir', 'etre', 'fait', 'faire', 'dit', 'dire', 'peut', 'ete',
+    'voir', 'aller', 'venir', 'prendre', 'mettre', 'donner', 'falloir',
+    'devoir', 'savoir', 'vouloir', 'croire', 'trouver', 'passer', 'rester',
+    'parler', 'porter', 'suivre', 'montrer', 'tomber', 'recevoir', 'tenir',
+    'comprendre', 'connaitre', 'partir', 'vivre', 'perdre',
+    'fut', 'faut', 'doit', 'peut', 'veut',
+    // Mots courants non médicaux
+    'ans', 'age', 'homme', 'femme', 'jour', 'jours', 'mois', 'annee',
+    'temps', 'fois', 'cas', 'vie', 'lieu', 'place', 'fin', 'debut',
+    'suite', 'cause', 'effet', 'etat', 'forme', 'maniere', 'facon',
+    'part', 'cote', 'sens', 'type', 'genre', 'sorte', 'espece',
+    'point', 'chose', 'rien', 'quelque', 'quelques', 'plusieurs',
+    'encore', 'deja', 'jamais', 'toujours', 'souvent', 'parfois',
+    'alors', 'donc', 'ensuite', 'enfin', 'puis', 'ainsi', 'surtout',
+    'cependant', 'toutefois', 'neanmoins', 'pourtant',
+    // Mots du contexte médico-légal courant
+    'monsieur', 'madame', 'salarie', 'employe', 'ouvrier', 'travailleur',
+    'victime', 'patient', 'malade', 'blesse', 'assure', 'beneficiaire',
+    'exerce', 'fonction', 'poste', 'entreprise', 'chantier', 'atelier',
+    'bureau', 'usine', 'societe', 'employeur',
+    'accident', 'survenu', 'lors', 'pendant', 'travail',
+    'descente', 'montee', 'chute', 'reception', 'appui', 'faux',
+    'membre', 'gauche', 'droite', 'droit', 'superieur', 'inferieur',
+    'examens', 'cliniques', 'radiologiques', 'revele', 'revelent',
+    'mise', 'evidence', 'bilan', 'initial', 'resultats',
+    'prise', 'charge', 'consiste', 'traitement',
+    'evolution', 'favorable', 'marquee', 'marque',
+    'douleurs', 'residuelles', 'limitation', 'mobilite',
+    'articulaire', 'fonctionnelle', 'persistante', 'gene',
+    'reduction', 'orthopedique', 'immobilisation', 'platree',
+    'reeducatif', 'reeducation', 'instaurees', 'instaure',
+    'duree', 'arret', 'prolonge', 'prolongee',
+    'force', 'prehension', 'diminution', 'hauteur',
+    'brutale', 'violente', 'importante', 'moderee', 'legere', 'severe',
+    'associee', 'associe', 'partielle', 'partiel', 'totale', 'total',
+    'deplacee', 'deplace', 'fermee', 'ferme', 'ouverte', 'ouvert',
+    'specialise', 'specialisee', 'macon', 'manoeuvre', 'echafaudage',
 ]);
 
 export { FRENCH_STOP_WORDS };
+
+// Carte de fautes médicales courantes → correction automatique (sans Levenshtein)
+export const COMMON_MEDICAL_TYPOS: Map<string, string> = new Map([
+    // Fractures
+    ['fracutre', 'fracture'], ['fracure', 'fracture'], ['fractrue', 'fracture'],
+    ['fractue', 'fracture'], ['farcture', 'fracture'], ['fractures', 'fractures'],
+    // Traumatisme
+    ['traumatise', 'traumatisme'], ['traumatsime', 'traumatisme'], ['taraumatisme', 'traumatisme'],
+    ['truamatisme', 'traumatisme'], ['trauamtisme', 'traumatisme'],
+    // Ménisque / méniscectomie
+    ['menisue', 'menisque'], ['menisqe', 'menisque'], ['menisce', 'menisque'],
+    ['meniscetomie', 'meniscectomie'], ['menisectomie', 'meniscectomie'],
+    // Spondylolisthésis
+    ['spondylolystesis', 'spondylolisthesis'], ['spondylolysthesis', 'spondylolisthesis'],
+    ['spondylolithesis', 'spondylolisthesis'], ['spondylolistesis', 'spondylolisthesis'],
+    // Rachis
+    ['rachiss', 'rachis'], ['racchis', 'rachis'], ['rachi', 'rachis'],
+    // Entorse
+    ['entrose', 'entorse'], ['entorce', 'entorse'], ['entosre', 'entorse'],
+    // Ligament
+    ['ligamnet', 'ligament'], ['ligamant', 'ligament'], ['ligement', 'ligament'],
+    // Tendon
+    ['tendont', 'tendon'], ['tendonn', 'tendon'], ['tenddon', 'tendon'],
+    // Cervical
+    ['cervcial', 'cervical'], ['cervicla', 'cervical'], ['cerviacl', 'cervical'],
+    // Lombaire
+    ['lombair', 'lombaire'], ['lomabire', 'lombaire'], ['lombarie', 'lombaire'],
+    // Épaule
+    ['epaul', 'epaule'], ['epaulr', 'epaule'], ['epauel', 'epaule'],
+    // Genou
+    ['genoux', 'genou'], ['genoo', 'genou'], ['genuo', 'genou'],
+    // Cheville
+    ['chevile', 'cheville'], ['chveille', 'cheville'], ['chevill', 'cheville'],
+    // Radius
+    ['raduis', 'radius'], ['raidus', 'radius'], ['raduus', 'radius'],
+    // Humérus
+    ['humerus', 'humerus'], ['humersu', 'humerus'], ['humeurs', 'humerus'],
+    // Clavicule
+    ['clavicul', 'clavicule'], ['clavciule', 'clavicule'], ['clavucile', 'clavicule'],
+    // Rotule / patella
+    ['rotul', 'rotule'], ['rotulle', 'rotule'], ['rotle', 'rotule'],
+    // Scaphoïde
+    ['scaphoide', 'scaphoide'], ['scapoide', 'scaphoide'], ['scaphoide', 'scaphoide'],
+    // Arthrose
+    ['artrhose', 'arthrose'], ['artrose', 'arthrose'], ['arthorse', 'arthrose'],
+    // Consolidation
+    ['consoliadtion', 'consolidation'], ['consolidaiton', 'consolidation'],
+    ['consoldiation', 'consolidation'],
+    // Séquelles
+    ['sequeles', 'sequelles'], ['sequelle', 'sequelle'], ['sequeles', 'sequelles'],
+    // Incapacité
+    ['incapacite', 'incapacite'], ['incapcite', 'incapacite'], ['incapacte', 'incapacite'],
+    // Luxation
+    ['luxaiton', 'luxation'], ['luxaton', 'luxation'], ['lxuation', 'luxation'],
+    // Contusion
+    ['contusion', 'contusion'], ['contsuion', 'contusion'], ['contuison', 'contusion'],
+    // Déchirure
+    ['dechirrue', 'dechirure'], ['dechirue', 'dechirure'], ['dechirur', 'dechirure'],
+    // Élongation
+    ['elongaiton', 'elongation'], ['elongaton', 'elongation'], ['elognation', 'elongation'],
+    // Paralysie
+    ['paralysye', 'paralysie'], ['parlaysie', 'paralysie'], ['paralysie', 'paralysie'],
+    // Prothèse
+    ['prothese', 'prothese'], ['protheze', 'prothese'], ['protese', 'prothese'],
+    // Ostéosynthèse
+    ['osteosynthse', 'osteosynthese'], ['osteosyntese', 'osteosynthese'],
+    // Capsulite
+    ['capsulte', 'capsulite'], ['capsuliet', 'capsulite'],
+    // Tendinite
+    ['tendinite', 'tendinite'], ['tendinitte', 'tendinite'], ['tendinnite', 'tendinite'],
+    // Névralgie
+    ['nevralge', 'nevralgie'], ['nevrlagie', 'nevralgie'],
+    // Amyotrophie
+    ['amyotrophie', 'amyotrophie'], ['amyotropie', 'amyotrophie'],
+    // Ankylose
+    ['ankilose', 'ankylose'], ['anklyose', 'ankylose'], ['ankylsoe', 'ankylose'],
+    // Raideur
+    ['raiduer', 'raideur'], ['raider', 'raideur'], ['riadeur', 'raideur'],
+]);
 
 export interface MedicalDictionary {
     singleWords: Set<string>;
@@ -57,24 +182,17 @@ function extractFromCategories(
     originalForms: Map<string, string>
 ) {
     for (const category of data) {
-        // Extraire les mots du nom de catégorie
         for (const word of extractWordsFromText(category.name)) {
             addToDictionary(word, word, singleWords, originalForms);
         }
-
         for (const sub of category.subcategories) {
-            // Mots du nom de sous-catégorie
             for (const word of extractWordsFromText(sub.name)) {
                 addToDictionary(word, word, singleWords, originalForms);
             }
-
             for (const injury of sub.injuries) {
-                // Mots du nom de la lésion
                 for (const word of extractWordsFromText(injury.name)) {
                     addToDictionary(word, word, singleWords, originalForms);
                 }
-
-                // Mots des searchTerms
                 if (injury.searchTerms) {
                     for (const term of injury.searchTerms) {
                         for (const word of extractWordsFromText(term)) {
@@ -82,8 +200,6 @@ function extractFromCategories(
                         }
                     }
                 }
-
-                // Mots de la description
                 if (injury.description) {
                     for (const word of extractWordsFromText(injury.description)) {
                         addToDictionary(word, word, singleWords, originalForms);
@@ -103,20 +219,17 @@ export function getMedicalDictionary(): MedicalDictionary {
     // Source 1: medicalSynonyms
     for (const values of Object.values(medicalSynonyms)) {
         for (const phrase of values) {
-            // Ajouter la phrase entière ET les mots individuels
             for (const word of extractWordsFromText(phrase)) {
                 addToDictionary(word, word, singleWords, originalForms);
             }
         }
     }
 
-    // Source 2: disabilityData (barème principal)
+    // Source 2+3: barème
     extractFromCategories(disabilityData, singleWords, originalForms);
-
-    // Source 3: disabilityDataNew (barème étendu)
     extractFromCategories(disabilityDataNew, singleWords, originalForms);
 
-    // Source 4: Termes médicaux courants supplémentaires (non couverts par le barème)
+    // Source 4: Termes médicaux courants supplémentaires
     const additionalTerms = [
         'consolidation', 'sequelle', 'sequelles', 'incapacite', 'invalidite',
         'permanente', 'partielle', 'totale', 'temporaire', 'definitif',
@@ -127,11 +240,10 @@ export function getMedicalDictionary(): MedicalDictionary {
         'chirurgical', 'chirurgie', 'osteosynthese', 'arthroscopie',
         'reeducation', 'kinesitherapie', 'physiotherapie', 'readaptation',
         'hospitalisation', 'ambulatoire', 'consultation', 'expertise',
-        'medecin', 'conseil', 'medico', 'legal', 'expertise',
-        'accident', 'travail', 'professionnel', 'maladie', 'professionnelle',
+        'medecin', 'conseil', 'medico', 'legal',
         'aggravation', 'rechute', 'recidive', 'complication',
         'pronostic', 'diagnostic', 'etiologie', 'pathologie',
-        'douleur', 'douleurs', 'algique', 'algie', 'nevralgie',
+        'douleur', 'algique', 'algie', 'nevralgie',
         'deficit', 'deficitaire', 'moteur', 'sensitif', 'sensoriel',
         'cicatrice', 'cicatriciel', 'cicatrisation', 'adherence',
         'atrophie', 'hypertrophie', 'dystrophie', 'fibrose',
@@ -146,14 +258,46 @@ export function getMedicalDictionary(): MedicalDictionary {
         'meniscectomie', 'menisque', 'ligamentoplastie',
         'prothese', 'orthese', 'appareillage', 'immobilisation',
         'consolidee', 'guerie', 'stabilisee', 'chronique',
-        'anterieur', 'posterieur', 'superieur', 'inferieur',
-        'proximal', 'distal', 'medial', 'lateral',
+        'anterieur', 'posterieur', 'proximal', 'distal', 'medial', 'lateral',
         'thoracique', 'abdominale', 'cervicale', 'lombaire', 'sacree',
         'cephalee', 'vertige', 'acouphene', 'surdite',
+        // Anatomie étendue
+        'humerus', 'cubitus', 'ulna', 'femur', 'tibia', 'perone', 'fibula',
+        'clavicule', 'omoplate', 'scapula', 'sternum', 'coccyx', 'sacrum',
+        'calcaneum', 'astragale', 'talus', 'scaphoide', 'pisiforme',
+        'trapeze', 'trapezoide', 'capitatum', 'hamatum', 'lunatum', 'triquetrum',
+        'metacarpe', 'metatarse', 'phalange', 'phalanges', 'phalangette',
+        'vertebre', 'vertebres', 'vertebral', 'discal', 'hernie', 'discale',
+        'ligament', 'ligamentaire', 'tendon', 'tendineux', 'aponévrose',
+        'cartilage', 'synoviale', 'synovial', 'menisque', 'labrum',
+        'rotule', 'patella', 'olecrane', 'acromion', 'coracoide',
+        'trochlée', 'condyle', 'epicondyle', 'epitrochlée', 'malleole',
+        'diaphyse', 'epiphyse', 'metaphyse', 'periostite', 'osteoporose',
+        // Procédures chirurgicales
+        'suture', 'greffe', 'transplant', 'fixation', 'enclouage',
+        'vissage', 'embrochage', 'ostectomie', 'osteotomie', 'artrodese',
+        'arthrodese', 'laminectomie', 'discectomie', 'nucleotomie',
+        'neuroplastie', 'tenorraphie', 'capsuloplastie', 'synovectomie',
+        // Imagerie et examens
+        'tomodensitometrie', 'scintigraphie', 'electromyogramme',
+        'electromyographie', 'potentiels', 'evoques', 'velocite',
+        'doppler', 'arthrographie', 'myelographie', 'discographie',
+        // Termes fonctionnels courants
+        'abduction', 'adduction', 'flexion', 'extension', 'rotation',
+        'pronation', 'supination', 'eversion', 'inversion',
+        'dorsiflexion', 'plantarflexion', 'circumduction',
+        'apprehension', 'amyotrophie', 'spasticite', 'flaccidite',
+        'ankylose', 'raideur', 'pseudarthrose', 'cal', 'vicieux',
+        'deformation', 'subluxation', 'instabilite', 'laxite',
     ];
 
     for (const term of additionalTerms) {
         addToDictionary(term, term, singleWords, originalForms);
+    }
+
+    // Source 5: Corrections des fautes courantes → ajouter les formes correctes
+    for (const correctForm of COMMON_MEDICAL_TYPOS.values()) {
+        addToDictionary(correctForm, correctForm, singleWords, originalForms);
     }
 
     cachedDictionary = { singleWords, originalForms };
