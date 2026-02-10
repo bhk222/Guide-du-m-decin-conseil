@@ -11961,12 +11961,21 @@ const extractIndividualLesions = (text: string): string[] => {
     // Ex: "un traumatisme thoracique avec fractures costales, une fracture fermée du radius,
     //       un traumatisme du rachis cervical et une contusion sévère de la cheville"
     // Ce pattern est un FILET DE SÉCURITÉ si les patterns spécifiques n'ont pas fonctionné
-    const medicalTerms = /(?:traumatisme|fracture|contusion|luxation|entorse|rupture|lesion|dechirure|plaie|amputation|hernie)/i;
-    const diagnosticSplitPattern = /(?:^|[,;]\s*)(?:une?\s+)?((?:traumatisme|fracture|contusion|luxation|entorse|rupture|lesion|dechirure|plaie|amputation|hernie)[^,;]*?)(?=[,;]\s*(?:une?\s+)?(?:traumatisme|fracture|contusion|luxation|entorse|rupture|lesion|dechirure|plaie|amputation|hernie)|(?:\s+et\s+(?:une?\s+)?(?:traumatisme|fracture|contusion|luxation|entorse|rupture|lesion|dechirure|plaie|amputation|hernie)))/gi;
+    // 🆕 V3.3.212: Ajout elongation|compression|syndrome|atteinte pour lésions musculaires/nerveuses
+    // 🆕 V3.3.212: Normalise "associée à", "ainsi que", "accompagnée de" → virgule pour split unifié
+    let splitText = cleanedText
+        .replace(/,?\s*associ[ée]+e?\s+a\s+/gi, ', ')
+        .replace(/\s+ainsi\s+qu\s*/gi, ', ')
+        .replace(/\s+accompagn[ée]+e?\s+d[e ]\s*/gi, ', ')
+        .replace(/\s+de\s+meme\s+qu\s*/gi, ', ')
+        .replace(/\s+en\s+plus\s+d\s*/gi, ', ');
+
+    const medTerms = '(?:traumatisme|fracture|contusion|luxation|entorse|rupture|lesion|dechirure|plaie|amputation|hernie|elongation|compression|syndrome|atteinte)';
+    const diagnosticSplitPattern = new RegExp(`(?:^|[,;]\\s*)(?:une?\\s+)?((?:${medTerms.slice(3, -1)})[^,;]*?)(?=[,;]\\s*(?:une?\\s+)?${medTerms}|(?:\\s+et\\s+(?:une?\\s+)?${medTerms}))`, 'gi');
 
     const genericLesions: string[] = [];
     let diagMatch;
-    while ((diagMatch = diagnosticSplitPattern.exec(cleanedText)) !== null) {
+    while ((diagMatch = diagnosticSplitPattern.exec(splitText)) !== null) {
         const lesionText = diagMatch[1].trim();
         if (lesionText.length >= 10) {
             genericLesions.push(lesionText);
@@ -11974,7 +11983,8 @@ const extractIndividualLesions = (text: string): string[] => {
     }
 
     // Capturer le PREMIER diagnostic (précédé de "un/une", pas de virgule)
-    const firstDiagMatch = cleanedText.match(/\bune?\s+((?:traumatisme|fracture|contusion|luxation|entorse|rupture|lesion|dechirure|plaie|amputation|hernie)[^,;]*?)(?=[,;]\s*(?:une?\s+)?(?:traumatisme|fracture|contusion|luxation|entorse|rupture|lesion|dechirure|plaie|amputation|hernie))/i);
+    const firstDiagRegex = new RegExp(`\\bune?\\s+(${medTerms.slice(3, -1)}[^,;]*?)(?=[,;]\\s*(?:une?\\s+)?${medTerms})`, 'i');
+    const firstDiagMatch = splitText.match(firstDiagRegex);
     if (firstDiagMatch && firstDiagMatch[1].trim().length >= 10) {
         const firstLesion = firstDiagMatch[1].trim();
         if (!genericLesions.some(l => l.includes(firstLesion) || firstLesion.includes(l))) {
@@ -11983,11 +11993,26 @@ const extractIndividualLesions = (text: string): string[] => {
     }
 
     // Capturer aussi la dernière lésion (après "et")
-    const lastLesionMatch = cleanedText.match(/\bet\s+(?:une?\s+)?((?:traumatisme|fracture|contusion|luxation|entorse|rupture|lesion|dechirure|plaie|amputation|hernie)[^.;]*)/i);
+    const lastLesionRegex = new RegExp(`\\bet\\s+(?:une?\\s+)?(${medTerms.slice(3, -1)}[^.;]*)`, 'i');
+    const lastLesionMatch = splitText.match(lastLesionRegex);
     if (lastLesionMatch && lastLesionMatch[1].trim().length >= 10) {
         const lastLesion = lastLesionMatch[1].trim();
         if (!genericLesions.some(l => l.includes(lastLesion) || lastLesion.includes(l))) {
             genericLesions.push(lastLesion);
+        }
+    }
+
+    // 🆕 V3.3.212: Capturer la dernière lésion TERMINALE (avant point/fin de phrase, après virgule)
+    // Cas: "..., une dechirure X, une elongation Y." → "elongation Y" n'est pas suivie d'un autre diag
+    if (genericLesions.length >= 1) {
+        const trailingLesionRegex = new RegExp(`[,;]\\s*(?:une?\\s+)(${medTerms.slice(3, -1)}[^,;]*?)\\s*[.]\\s*(?:[A-Z]|$)`, 'i');
+        const trailingMatch = splitText.match(trailingLesionRegex);
+        if (trailingMatch && trailingMatch[1].trim().length >= 10) {
+            const trailingLesion = trailingMatch[1].trim();
+            if (!genericLesions.some(l => l.includes(trailingLesion) || trailingLesion.includes(l))) {
+                genericLesions.push(trailingLesion);
+                console.log('  trailing lesion (before period):', trailingLesion);
+            }
         }
     }
 
@@ -14284,6 +14309,18 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
                 if (/contusion.*cheville|entorse.*cheville|traumatisme.*cheville/i.test(lesion)) {
                     enrichedLesion = lesion + ' raideur cheville instabilite chronique sequelle entorse tibio tarsienne';
                     console.log(`   🔧 V3.3.210: Enrichissement contusion cheville: "${lesion}" → "${enrichedLesion}"`);
+                }
+
+                // 🆕 V3.3.212: ÉLONGATION/DÉCHIRURE MUSCULAIRE ÉPAULE → Enrichir avec termes barème
+                if (/elongation.*(?:epaule|musculaire)|dechirure.*(?:epaule|musculaire.*epaule)/i.test(lesion)) {
+                    enrichedLesion = lesion + ' elongation musculaire epaule tendinopathie coiffe rotateurs limitation abduction';
+                    console.log(`   🔧 V3.3.212: Enrichissement elongation épaule: "${lesion}" → "${enrichedLesion}"`);
+                }
+
+                // 🆕 V3.3.212: DÉCHIRURE TENDONS → Enrichir avec termes barème
+                if (/dechirure.*tendon|rupture.*tendon|tendon.*(?:extenseur|flechisseur)/i.test(lesion)) {
+                    enrichedLesion = lesion + ' dechirure tendon rupture tendineuse sequelle tendon extenseur flechisseur poignet main';
+                    console.log(`   🔧 V3.3.212: Enrichissement dechirure tendon: "${lesion}" → "${enrichedLesion}"`);
                 }
 
                 // Si "lca" isolé, enrichir avec contexte complet
