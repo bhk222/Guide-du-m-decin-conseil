@@ -1869,46 +1869,394 @@ La **Loi n° 83-11 du 2 juillet 1983** organise le régime des assurances social
   explication_loi_08_08: {
     keywords: ['loi', '08'],
     synonymKeywords: ['loi 08-08', 'contentieux loi', 'expliquer 08 08', 'loi contentieux', 'loi recours'],
-    summary: `## 📜 Loi 08-08 — Contentieux en Matière de Sécurité Sociale
+    summary: `## 📜 Loi n° 08-08 du 16 Safar 1429 correspondant au 23 février 2008 relative au contentieux en matière de sécurité sociale
 
-La **Loi n° 2008-08 du 23 février 2008** a remplacé la Loi 83-15 pour moderniser les procédures de contentieux en sécurité sociale.
+*(Journal Officiel N°11 du 2 mars 2008)*
 
-### Les 3 types de contentieux :
+---
 
-| Type | Objet | Procédure |
-|------|-------|-----------|
-| **Contentieux général** | Décisions administratives (refus de prise en charge, cotisations) | Recours préalable → Commission de recours → Tribunal |
-| **Contentieux médical** | Questions médicales (taux IPP, consolidation, aptitude) | Expertise médicale (Art. 17-25) |
-| **Contentieux technique médical** | Invalidité, inaptitude au travail | Commission nationale + expertise |
+**Article 1er.** — La présente loi a pour objet de fixer :
+- le contentieux de la sécurité sociale et les procédures de son règlement ;
+- les procédures de recouvrement forcé des cotisations et autres créances de la sécurité sociale ;
+- les recours contre les tiers et les employeurs.
 
-### Procédure du contentieux médical (la plus utilisée par le MC) :
+---
 
-\`\`\`
-1. Décision contestée du médecin conseil
-     ↓
-2. Recours préalable (15 jours) — Art. 8
-     ↓
-3. Expertise médicale (Art. 17-25)
-   - Expert choisi conjointement ou d'office
-   - Examen de la victime
-   - Rapport sous 30 jours (Art. 23)
-     ↓
-4. Décision de la CNAS sur base du rapport
-     ↓
-5. Si insatisfait → Tribunal (Art. 27)
-\`\`\`
+## TITRE I — CONTENTIEUX DE LA SÉCURITÉ SOCIALE ET PROCÉDURES DE SON RÈGLEMENT
 
-### Délais importants :
+**Art. 2.** — Le contentieux en matière de sécurité sociale comprend :
+- le contentieux général ;
+- le contentieux médical ;
+- le contentieux technique à caractère médical.
 
-| Recours | Délai | Article |
-|---------|-------|---------|
-| Contentieux général | **15 jours** | Art. 8 |
-| Contentieux médical | **15 jours** | Art. 20 |
-| Invalidité | **30 jours** | Art. 33 |
-| Contestation devant tribunal | **30 jours** après épuisement recours | Art. 27 |
+### Chapitre I — Le contentieux général
 
-> ⚠️ Le recours préalable est **OBLIGATOIRE** avant toute saisine du tribunal. Son absence entraîne l'irrecevabilité.`,
-    relatedQuestions: ["Procédure d'expertise médicale ?", "Le recours préalable est-il obligatoire ?", "Délais de contestation ?", "Expliquer la Loi 83-13 ?"],
+**Art. 3.** — Est entendu par contentieux général de la sécurité sociale, au sens de la présente loi, les litiges qui naissent entre les organismes de sécurité sociale d'une part et les assurés sociaux ou les assujettis d'autre part à l'occasion de l'application de la législation et de la réglementation de la sécurité sociale.
+
+**Art. 4.** — Les litiges relevant du contentieux général sont portés obligatoirement devant les commissions de recours préalable avant tout recours aux juridictions.
+
+#### Section 1 — Le recours préalable
+
+**Art. 5.** — Le recours préalable est porté :
+- devant la commission locale de recours préalable qualifiée, en premier ressort ;
+- devant la commission nationale de recours préalable qualifiée, en cas de contestation des décisions de la commission locale de recours.
+
+##### Sous-section 1 — La commission locale de recours préalable qualifiée
+
+**Art. 6.** — Il est créé au sein des agences de wilayas ou régionales des organismes de sécurité sociale, des commissions locales de recours préalable qualifiées, composées des :
+- représentants des travailleurs salariés ;
+- représentants des employeurs ;
+- représentants de l'organisme de sécurité sociale ;
+- un médecin.
+
+Le nombre des membres de ces commissions ainsi que leur organisation et leur fonctionnement sont fixés par voie réglementaire.
+
+**Art. 7.** — La commission locale de recours préalable qualifiée statue sur les recours formulés par les assurés sociaux et les assujettis contre les décisions prises par les services des organismes de sécurité sociale.
+
+Elle statue également sur les contestations relatives aux majorations et pénalités de retard lorsque leur montant est inférieur à un million de dinars (1.000.000 DA).
+
+Les majorations et pénalités de retard sont réduites de 50% de leur montant au vu du dossier justifié du requérant.
+
+Elles ne sont pas exigibles en cas de force majeure dûment constatée par la commission.
+
+La commission est tenue de prendre sa décision dans un délai de trente (30) jours à compter de la date de réception de la requête.
+
+**Art. 8.** — La commission locale de recours préalable qualifiée est, sous peine d'irrecevabilité, saisie par lettre recommandée avec accusé de réception ou par requête déposée au secrétariat de la commission contre un récépissé de dépôt dans un délai de **quinze (15) jours** à compter de la date de réception de la notification de la décision contestée.
+
+Le recours doit être formulé par écrit et indiquer les griefs à l'encontre de la décision contestée.
+
+**Art. 9.** — Les décisions de la commission locale de recours préalable qualifiée sont notifiées par lettre recommandée avec accusé de réception ou par un agent de contrôle agréé de sécurité sociale au moyen d'un procès-verbal de réception dans un délai de dix (10) jours à compter de la date de la décision.
+
+##### Sous-section 2 — La commission nationale de recours préalable qualifiée
+
+**Art. 10.** — Il est créé, au sein de chaque organisme de sécurité sociale, une commission nationale de recours préalable qualifiée.
+
+La composition, l'organisation et le fonctionnement de cette commission sont fixés par voie réglementaire.
+
+**Art. 11.** — La commission nationale de recours préalable qualifiée statue sur les recours formulés contre les décisions des commissions locales de recours préalable qualifiée.
+
+Elle rend sa décision dans un délai de trente (30) jours à compter de la date de réception de la requête.
+
+**Art. 12.** — Les contestations relatives aux majorations et pénalités de retard prévues en matière d'obligations des assujettis sont directement portées devant la commission nationale de recours préalable qualifiée, qui statue en premier et dernier ressort, lorsque leur montant est égal ou supérieur à un million de dinars (1.000.000 DA).
+
+Les dispositions des alinéas 3 et 4 de l'article 7 ci-dessus sont applicables aux contestations prévues au présent article.
+
+**Art. 13.** — La commission nationale de recours préalable qualifiée est, sous peine d'irrecevabilité, saisie par lettre recommandée avec accusé de réception ou par une requête déposée au secrétariat de la commission contre un récépissé de dépôt dans un délai de **quinze (15) jours** à compter de la date de réception de la notification de la décision de la commission locale contestée, ou dans les **soixante (60) jours** à compter de la date de saisine de la commission locale de recours préalable qualifiée, si l'intéressé n'a reçu aucune réponse à sa requête.
+
+Le recours doit être formulé par écrit et indiquer les griefs à l'encontre de la décision contestée.
+
+**Art. 14.** — Les décisions de la commission nationale de recours préalable qualifiée sont notifiées par lettre recommandée avec accusé de réception, ou par un agent de contrôle agréé de la sécurité sociale au moyen d'un procès-verbal de réception dans un délai de dix (10) jours à compter de la date de la décision.
+
+#### Section 2 — Le recours juridictionnel
+
+**Art. 15.** — Les décisions de la commission nationale de recours préalable qualifiée sont susceptibles de recours devant le tribunal compétent, conformément aux dispositions du code de procédure civile, dans un délai de **trente (30) jours** à compter de la date de remise de la notification de la décision contestée, ou dans un délai de **soixante (60) jours** à compter de la date de réception de la requête par la commission nationale de recours préalable qualifiée, si l'intéressé n'a reçu aucune réponse à sa requête.
+
+**Art. 16.** — Relèvent de la compétence des juridictions administratives les litiges qui naissent entre les institutions et les administrations publiques en tant qu'organismes employeurs et les organismes de sécurité sociale.
+
+### Chapitre II — Le contentieux médical
+
+**Art. 17.** — Est entendu par contentieux médical, au sens de la présente loi, les litiges relatifs à l'état de santé des bénéficiaires de la sécurité sociale, notamment la maladie, la capacité de travail, l'état de santé du malade, le diagnostic, le traitement ainsi que toutes autres prescriptions médicales.
+
+**Art. 18.** — Les litiges relevant du contentieux médical sont réglés, suivant le cas, par la procédure de l'expertise médicale ou dans le cadre des commissions d'invalidité de wilayas qualifiées, conformément aux dispositions de la présente loi.
+
+#### Section 1 — L'expertise médicale
+
+**Art. 19.** — Les litiges prévus à l'article 17 ci-dessus sont du ressort de l'expertise médicale, à l'exception de ceux prévus par l'article 31 de la présente loi.
+
+Les résultats de l'expertise médicale s'imposent aux parties d'une manière définitive.
+
+Toutefois, le tribunal siégeant en matière sociale peut être saisi pour une expertise judiciaire, en cas d'impossibilité de procéder à l'expertise médicale sur l'intéressé.
+
+**Art. 20.** — La demande d'expertise médicale doit être formulée par l'assuré social dans un délai de **quinze (15) jours** à compter de la date de réception de la notification de la décision de l'organisme de sécurité sociale.
+
+La demande d'expertise médicale doit être formulée par écrit et accompagnée d'un rapport du médecin traitant.
+
+La demande est adressée par lettre recommandée avec accusé de réception ou déposée auprès des services de l'organisme de sécurité sociale contre récépissé de dépôt.
+
+**Art. 21.** — Le médecin expert est désigné d'un commun accord entre l'assuré social assisté de son médecin traitant d'une part, et l'organisme de sécurité sociale, d'autre part.
+
+Le médecin expert est choisi sur une liste de médecins experts, établie par le ministère chargé de la santé et le ministère chargé de la sécurité sociale, après consultation obligatoire du conseil de déontologie médicale.
+
+Les conditions et modalités d'inscription sur la liste des médecins experts, ainsi que leurs droits et obligations sont fixés par voie réglementaire.
+
+**Art. 22.** — L'organisme de sécurité sociale doit, dans un délai de **huit (8) jours** à compter de la date de dépôt de la demande, entamer la procédure de l'expertise médicale en proposant à l'assuré social par écrit, trois (3) médecins experts au moins figurant sur la liste prévue à l'article 21 ci-dessus, faute de quoi il sera tenu par l'avis du médecin traitant.
+
+**Art. 23.** — L'assuré social est tenu d'accepter ou de refuser les médecins experts proposés dans un délai de **huit (8) jours**, sous peine de déchéance de son droit à l'expertise médicale prévu à l'article 21 (alinéa 1er) ci-dessus.
+
+Dans le cas où il s'abstient de répondre, l'assuré social est tenu d'accepter l'expert désigné d'office par l'organisme de sécurité sociale.
+
+**Art. 24.** — A défaut d'accord sur le choix du médecin expert conformément à l'article 21 ci-dessus, dans un délai de **trente (30) jours** à compter du dépôt de la demande de l'expertise médicale, le médecin expert est désigné d'office et immédiatement par l'organisme de sécurité sociale sur la liste des experts médicaux, à condition que le médecin expert désigné ne soit pas l'un de ceux précédemment proposés.
+
+**Art. 25.** — L'organisme de sécurité sociale doit remettre au médecin expert un dossier comportant :
+- l'avis du médecin traitant ;
+- l'avis du médecin conseil ;
+- un résumé des questions, objet du litige ;
+- la mission du médecin expert.
+
+**Art. 26.** — Le médecin expert est tenu de déposer à l'organisme de sécurité sociale son rapport dans les **quinze (15) jours** à compter de la date de réception du dossier cité à l'article 25 ci-dessus.
+
+Une copie de ce rapport est adressée à l'assuré social.
+
+**Art. 27.** — L'organisme de sécurité sociale est tenu de notifier à l'intéressé les résultats du rapport d'expertise médicale dans les **dix (10) jours** qui suivent sa réception.
+
+**Art. 28.** — L'assuré social est déchu de son droit à l'expertise médicale dans le cas où il refuse, sans motif, de répondre aux convocations du médecin expert.
+
+**Art. 29.** — Les honoraires dus des médecins experts désignés pour procéder à l'expertise sont à la charge de l'organisme de sécurité sociale sauf si le médecin expert atteste que la demande de l'assuré social est manifestement infondée. Dans ce cas, les honoraires dus sont à la charge de ce dernier.
+
+Le montant des honoraires est fixé par arrêté du ministre chargé de la sécurité sociale.
+
+#### Section 2 — La commission d'invalidité de wilaya qualifiée
+
+**Art. 30.** — Il est créé une commission d'invalidité de wilaya qualifiée, dont la majorité des membres sont médecins.
+
+La composition, l'organisation et le fonctionnement de cette commission sont fixés par voie réglementaire.
+
+**Art. 31.** — La commission d'invalidité de wilaya qualifiée statue sur les litiges des décisions rendues par les organismes de sécurité sociale relatives à :
+- l'état d'incapacité permanente, totale ou partielle due à un accident de travail ou une maladie professionnelle donnant lieu à l'attribution d'une rente ;
+- l'admission en invalidité ainsi que la catégorie et la révision de l'état d'invalidité dans le cadre des assurances sociales.
+
+La commission statue sur les contestations qui lui sont soumises dans un délai de **soixante (60) jours** à compter de la date de réception de la requête.
+
+**Art. 32.** — La commission d'invalidité de wilaya qualifiée prend toutes les mesures, notamment la désignation d'un médecin expert, l'examen du malade, la demande d'examens complémentaires, et peut procéder à toute investigation qu'elle juge nécessaire.
+
+**Art. 33.** — La commission d'invalidité de wilaya qualifiée est saisie par l'assuré social dans un délai de **trente (30) jours** à compter de la date de réception de la notification de la décision de l'organisme de sécurité sociale, objet de la contestation.
+
+La commission est saisie par une demande écrite, accompagnée du rapport du médecin traitant, adressée par lettre recommandée avec accusé de réception ou déposée au secrétariat de la commission contre récépissé de dépôt.
+
+**Art. 34.** — Les décisions de la commission d'invalidité de wilaya qualifiée sont notifiées dans un délai de **vingt (20) jours** à compter de la date de la décision, par lettre recommandée avec accusé de réception ou par un agent de contrôle agréé de la sécurité sociale, avec procès-verbal de réception.
+
+**Art. 35.** — Les décisions de la commission d'invalidité de wilaya qualifiée sont susceptibles de recours devant les juridictions compétentes dans un délai de **trente (30) jours** à compter de la date de réception de la notification de la décision.
+
+**Art. 36.** — Les frais de déplacement de l'assuré social, de ses ayants droit ou, éventuellement, de son accompagnateur hors de leur commune de résidence pour répondre à la convocation du médecin expert ou de la commission d'invalidité de wilaya qualifiée, sont à la charge de l'organisme de sécurité sociale.
+
+Les modalités d'application des dispositions du présent article sont fixées par voie réglementaire.
+
+**Art. 37.** — Les frais résultant de la procédure prévue par les dispositions des articles 31 à 36 ci-dessus concernant le domaine d'invalidité sont mis à la charge de l'organisme de sécurité sociale, sauf si le médecin expert atteste que la demande de l'assuré social est manifestement infondée. Dans ce cas, les honoraires dus sont à la charge de ce dernier.
+
+### Chapitre III — Contentieux technique à caractère médical
+
+**Art. 38.** — Est entendu par contentieux technique à caractère médical, au sens de la présente loi, les litiges qui naissent entre les organismes de sécurité sociale et les prestataires de soins et de services et relatifs à l'activité professionnelle des médecins, pharmaciens, chirurgiens-dentistes, et auxiliaires médicaux concernant la nature du traitement et le séjour dans un hôpital ou une clinique.
+
+**Art. 39.** — Il est créé, auprès du ministre chargé de la sécurité sociale, une commission technique à caractère médical composée de façon égale de :
+- médecins relevant du ministère chargé de la santé ;
+- médecins de l'organisme de sécurité sociale ;
+- médecins du conseil de déontologie médicale.
+
+Le nombre des membres de cette commission ainsi que son organisation et son fonctionnement sont fixés par voie réglementaire.
+
+**Art. 40.** — Sans préjudice des dispositions prévues par la législation et la réglementation en vigueur, la commission technique à caractère médical est chargée de statuer en premier et dernier ressort sur les dépassements ayant entraîné des dépenses supplémentaires pour l'organisme de sécurité sociale.
+
+**Art. 41.** — La commission technique à caractère médical est habilitée à prendre toute mesure lui permettant d'établir les faits, notamment désigner un ou plusieurs experts et entreprendre toute enquête jugée nécessaire, y compris entendre le praticien concerné.
+
+**Art. 42.** — La commission technique à caractère médical est saisie par l'organisme de sécurité sociale dans les **six (6) mois** qui suivent la découverte des dépassements sans qu'il se soit, toutefois, écoulé un délai de **deux (2) années** à compter de la date de paiement des prestations, objet du litige.
+
+La commission technique à caractère médical est saisie par un rapport détaillé du directeur général de l'organisme de sécurité sociale, mentionnant la nature des dépassements et les montants des dépenses qui en ont découlé, accompagné des pièces justificatives.
+
+**Art. 43.** — Les décisions de la commission technique à caractère médical sont notifiées à l'organisme de sécurité sociale, au ministre chargé de la santé et au conseil national de déontologie médicale.
+
+---
+
+## TITRE II — PROCÉDURES DE RECOUVREMENT FORCÉ
+
+**Art. 44.** — Est entendu par recouvrement forcé des cotisations de sécurité sociale, au sens de la présente loi, les procédures particulières mises en oeuvre par les organismes de sécurité sociale à l'encontre des assujettis débiteurs pour le recouvrement des sommes dues.
+
+**Art. 45.** — Les sommes dues aux organismes de sécurité sociale au titre des cotisations principales, majorations, pénalités de retard et répétition de l'indû sont recouvrées au moyen des procédures suivantes :
+- le recouvrement par voie de rôle ;
+- la contrainte ;
+- l'opposition sur les comptes courants postaux et les comptes bancaires ;
+- les retenues sur les prêts.
+
+**Art. 46.** — L'organisme de sécurité sociale est tenu préalablement à la mise en oeuvre des procédures sus-citées, ou toute autre action ou poursuite, d'adresser au débiteur une mise en demeure l'invitant à régulariser sa situation dans un délai de **trente (30) jours**.
+
+La mise en demeure doit comporter, sous peine de nullité, les mentions suivantes :
+- le nom ou la raison sociale du débiteur ;
+- les sommes dues par nature et par période d'échéance ;
+- les dispositions législatives et réglementaires relatives au recouvrement forcé, ainsi que les sanctions encourues en cas de non-paiement.
+
+La mise en demeure est notifiée, soit par lettre recommandée avec accusé de réception, soit par voie d'huissier de justice ou par un agent de contrôle agréé de la sécurité sociale, par procès-verbal de réception.
+
+### Chapitre I — Le recouvrement par voie de rôle
+
+**Art. 47.** — Les sommes dues sont recouvrées par les services des impôts en vertu d'un rôle fixant la créance.
+
+Le rôle est établi par les services de l'organisme de sécurité sociale, selon un modèle déterminé par voie réglementaire et signé par le directeur d'agence de l'organisme de sécurité sociale concerné sous sa responsabilité personnelle.
+
+Le rôle est visé par le wali dans un délai de **huit (8) jours** à compter de sa signature et devient exécutoire.
+
+**Art. 48.** — Le rôle dûment visé est notifié conformément aux dispositions prévues au code des procédures fiscales.
+
+Il est exécuté par les services des impôts territorialement compétents conformément aux dispositions prévues pour le recouvrement des impôts.
+
+**Art. 49.** — Le rôle est exécutoire par provision, nonobstant toute voie de recours.
+
+**Art. 50.** — Le rôle peut faire l'objet d'un recours devant les juridictions compétentes, dans un délai de **trente (30) jours** à compter de la date de réception de sa notification.
+
+### Chapitre II — La contrainte
+
+**Art. 51.** — La contrainte est établie par les services de l'organisme de sécurité sociale selon un formulaire dont le modèle est fixé par voie réglementaire et est signée par le directeur de l'agence de l'organisme de sécurité sociale concerné sous sa responsabilité personnelle.
+
+**Art. 52.** — La contrainte est visée par le président du tribunal du lieu du domicile du débiteur dans un délai de **dix (10) jours**, sans frais et devient exécutoire.
+
+**Art. 53.** — La contrainte est notifiée au débiteur par un agent de contrôle agréé de la sécurité sociale par un procès-verbal de réception ou par huissier de justice.
+
+**Art. 54.** — La contrainte est exécutée conformément aux dispositions du code de procédure civile, en matière de recouvrement forcé.
+
+**Art. 55.** — La contrainte est exécutoire par provision, nonobstant toute voie de recours.
+
+**Art. 56.** — La contrainte peut faire l'objet d'un recours devant la juridiction l'ayant visée dans un délai de **trente (30) jours** à compter de la date de la réception de sa notification.
+
+### Chapitre III — L'opposition sur les comptes courants postaux et comptes bancaires
+
+**Art. 57.** — L'organisme de sécurité sociale créancier peut faire opposition sur les comptes courants postaux et les comptes bancaires de ses débiteurs, dans la limite des sommes qui lui sont dues.
+
+**Art. 58.** — L'opposition est notifiée aux banques, établissements financiers et "Algérie Poste" représentée par le centre national des chèques postaux, par lettre recommandée avec accusé de réception.
+
+**Art. 59.** — Les établissements susvisés destinataires de l'opposition sont tenus de conserver les montants dus sous leur responsabilité civile et pénale à compter de la date de réception de la notification de l'opposition.
+
+**Art. 60.** — L'organisme de sécurité sociale doit présenter aux banques et établissements financiers le titre exécutoire aux fins de paiement des sommes objet de l'opposition, dans un délai de **quinze (15) jours**.
+
+A défaut de titre exécutoire, l'organisme de sécurité sociale doit diligenter la procédure de validation de l'opposition devant la juridiction compétente dans un délai de **quinze (15) jours** à compter de la date de l'opposition.
+
+**Art. 61.** — Pour recouvrer les sommes dues, le directeur de l'organisme de sécurité sociale créancier peut faire opposition sur les biens meubles ou les liquidités appartenant au débiteur de l'organisme, entre les mains du tiers détenteur autre que les parties prévues à l'article 59 ci-dessus et ce, conformément aux dispositions prévues par le code de procédure civile.
+
+### Chapitre V — Les retenues sur les prêts
+
+**Art. 62.** — Les banques et les établissements financiers sont tenus d'exiger des assujettis demandeurs de prêts une attestation de mise à jour des cotisations délivrée par les organismes de sécurité sociale compétents.
+
+**Art. 63.** — L'organisme prêteur est tenu, le cas échéant, d'effectuer la retenue des sommes dues à l'organisme de sécurité sociale créancier et de les lui verser.
+
+**Art. 64.** — Les banques et établissements financiers sont civilement responsables en cas d'inobservation des articles 62 et 63 ci-dessus.
+
+### Chapitre VI — Dispositions communes
+
+**Art. 65.** — Les frais occasionnés aux organismes de sécurité sociale, pour le recouvrement des sommes qui leur sont dues, sont à la charge du débiteur dans toutes les procédures prévues par la présente loi, en matière de recouvrement forcé.
+
+**Art. 66.** — Après épuisement des moyens de recouvrement forcé, les procédures de recouvrement prévues par la présente loi ne sont pas exclusives du recours des organismes de sécurité sociale aux actions devant les juridictions compétentes, mesures conservatoires et voies d'exécution de droit commun.
+
+---
+
+## TITRE III — PRIVILÈGE ET SÛRETÉS RÉELLES
+
+**Art. 67.** — Le paiement des sommes dues aux organismes de sécurité sociale est garanti, à compter de l'exigibilité de la créance, par un privilège sur les meubles et les immeubles du débiteur, qui intervient immédiatement après celui des salaires et des sommes dues au Trésor public.
+
+**Art. 68.** — Le paiement des sommes dues aux organismes de sécurité sociale est garanti par une hypothèque légale prenant rang au jour de son inscription, conformément au code civil.
+
+---
+
+## TITRE IV — RECOURS CONTRE LES TIERS ET LES EMPLOYEURS
+
+**Art. 69.** — Est entendu par recours contre les tiers et les employeurs en matière de sécurité sociale cités à l'article 1er ci-dessus, au sens de la présente loi :
+- le recours de l'organisme de sécurité sociale contre l'auteur de la faute, cause du préjudice subi par l'assuré social, en vue du remboursement du montant des prestations servies ;
+- le recours de l'assuré social ou de ses ayants droit contre l'auteur de la faute pour une réparation complémentaire.
+
+**Art. 70.** — L'organisme de sécurité sociale doit, conformément aux dispositions du droit commun, se retourner contre le tiers responsable, par sa faute, du préjudice causé à l'assuré social, en remboursement des sommes payées ou de celles qu'elle aura à payer à ce dernier.
+
+**Art. 71.** — L'organisme de sécurité sociale peut, conformément aux dispositions du droit commun, se retourner contre l'employeur responsable par sa faute inexcusable ou intentionnelle ou celle de son préposé, du préjudice causé à l'assuré social, en remboursement des sommes payées ou de celles qu'il aura à payer à ce dernier.
+
+**Art. 72.** — L'assuré social ou ses ayants droit peuvent demander aux tiers ou à l'employeur des réparations complémentaires dans les cas prévus aux articles 70 et 71 ci-dessus.
+
+Le demandeur est tenu de mettre en cause l'organisme de sécurité sociale dans l'instance.
+
+**Art. 73.** — L'assuré social ou ses ayants droit peuvent, dans les cas prévus aux articles 70 et 71 ci-dessus, intervenir dans l'action introduite par l'organisme de sécurité sociale contre le tiers ou l'employeur, conformément aux dispositions du code de procédure civile.
+
+**Art. 74.** — Dans le cas où la responsabilité des dommages causés à l'assuré social, est partagée entre le tiers et l'employeur, l'organisme de sécurité sociale peut se retourner contre l'un d'eux ou contre les deux tenus solidairement.
+
+**Art. 75.** — Dans le cas où la responsabilité des dommages incombe en partie à l'assuré social, au tiers ou à l'employeur, l'organisme de sécurité sociale ne pourra se retourner contre ces deux derniers que dans la limite de leur responsabilité.
+
+**Art. 76.** — Le règlement amiable intervenu entre l'assuré social ou ses ayants droit et le tiers ou l'employeur, dans les cas prévus aux articles 72 à 75 ci-dessus, ne peut être opposé à l'organisme de sécurité sociale que lorsque celui-ci a participé et donné son accord exprès à ce règlement.
+
+**Art. 77.** — Les sociétés d'assurance sont tenues de retenir sur le montant de l'indemnisation des accidents de la circulation qu'elles accordent conformément à la législation en vigueur, les montants des prestations dues par l'organisme de sécurité sociale à la victime, en sa qualité d'assuré social ou à ses ayants droit.
+
+Les modalités d'application du présent article sont déterminées par voie réglementaire.
+
+---
+
+## TITRE V — PRESCRIPTION
+
+**Art. 78.** — Les prestations dues se prescrivent par **quatre (4) ans**, si elles ne sont pas réclamées.
+
+Sous réserves des dispositions prévues à l'article 316 du code civil, les arriérés dus au titre des pensions de retraite, d'invalidité, des rentes d'accidents du travail et des maladies professionnelles, se prescrivent par **cinq (5) ans**, s'ils ne sont pas réclamés.
+
+**Art. 79.** — Les actions et poursuites intentées par les organismes de sécurité sociale pour le recouvrement des sommes dues se prescrivent par **quatre (4) ans**.
+
+Ce délai court à compter de la date d'exigibilité.
+
+Toutefois, la mise en demeure prévue à l'article 46 ci-dessus éteint la prescription à compter de la date de réception de la notification.
+
+**Art. 80.** — Les recours introduits contre les décisions des organismes de sécurité sociale n'ont pas d'effet suspensif.
+
+Toutefois, l'exception d'irrecevabilité ne peut être opposée aux intéressés que si la décision, objet du recours, mentionne expressément les voies et délais de recours.
+
+---
+
+## TITRE VI — DISPOSITIONS PÉNALES
+
+**Art. 81.** — Les infractions aux dispositions de la présente loi sont constatées par les inspecteurs du travail, les agents de contrôle agréés de la sécurité sociale ainsi que tout agent habilité conformément à la législation et à la réglementation en vigueur.
+
+**Art. 82.** — Sans préjudice des dispositions législatives en vigueur, est punie d'un emprisonnement de **six (6) mois à deux (2) ans** et d'une amende de **cinquante mille à cent mille dinars (50.000 à 100.000 DA)**, toute personne ayant offert, accepté ou prêté des services pour obtenir, pour lui-même ou faire obtenir indûment, des prestations à des tiers.
+
+**Art. 83.** — Sans préjudice des dispositions législatives en vigueur, est punie d'un emprisonnement de **six (6) mois à deux (2) ans** et d'une amende de **trente mille à cent mille dinars (30.000 à 100.000 DA)**, toute personne ayant fait de fausses déclarations afin d'obtenir ou de faire obtenir indûment à des tiers des prestations ou des remboursements de l'organisme de sécurité sociale.
+
+**Art. 84.** — Sans préjudice des dispositions législatives en vigueur, est puni d'un emprisonnement de **six (6) mois à dix-huit (18) mois** et d'une amende de **cent mille à deux cent cinquante mille dinars (100.000 à 250.000 DA)**, tout médecin, pharmacien, chirurgien-dentiste, ou sage-femme ayant décrit faussement et sciemment l'état de santé d'un bénéficiaire.
+
+**Art. 85.** — Sans préjudice des dispositions législatives en vigueur, est punie d'un emprisonnement de **six (6) mois à deux (2) ans** et d'une amende de **cent mille à trois cent mille dinars (100.000 à 300.000 DA)**, toute personne qui a tenté d'influencer, ou aura influencé, par tout moyen possible, une personne témoin d'un accident de travail à l'effet de dissimuler ou de dénaturer la vérité.
+
+**Art. 86.** — Outre les sanctions prévues aux articles 82, 83 et 85 de la présente loi, toute personne ayant bénéficié indûment de prestations servies par l'organisme de sécurité sociale est tenue de lui rembourser les sommes qu'elle a perçues.
+
+Les organismes de sécurité sociale peuvent se faire rembourser ces sommes au moyen de retenues sur les prestations dues.
+
+---
+
+## TITRE VII — DISPOSITIONS TRANSITOIRES ET FINALES
+
+**Art. 87.** — A titre transitoire, et pour une période de **trois (3) années**, à compter de la date de publication de la présente loi au Journal officiel, les débiteurs de bonne foi, qui connaissent des difficultés financières, peuvent bénéficier d'un échéancier de paiement des cotisations de sécurité sociale.
+
+Les cotisations payées dans ce cadre sont exonérées des majorations et pénalités de retard.
+
+**Art. 88.** — Aucune demande d'octroi de prorogation de délai de paiement des cotisations de sécurité sociale ne peut être examinée s'il n'y a pas eu versement de la totalité de la quote-part salariale de la cotisation.
+
+**Art. 89.** — Les modalités d'application de la présente loi sont fixées, en tant que de besoin, par voie réglementaire.
+
+**Art. 90.** — Toutes dispositions contraires à la présente loi sont abrogées, notamment la loi n° 83-15 du 2 juillet 1983, modifiée et complétée, relative au contentieux en matière de sécurité sociale.
+
+**Art. 91.** — La présente loi sera publiée au Journal officiel de la République algérienne démocratique et populaire.
+
+*Fait à Alger, le 16 Safar 1429 correspondant au 23 février 2008.*
+*Abdelaziz BOUTEFLIKA.*
+
+---
+
+### Tableau récapitulatif des délais importants :
+
+| Procédure | Délai | Article |
+|-----------|-------|---------|
+| Recours devant commission locale | **15 jours** | Art. 8 |
+| Décision commission locale | **30 jours** | Art. 7 |
+| Notification décision locale | **10 jours** | Art. 9 |
+| Recours devant commission nationale | **15 jours** (ou 60 jours sans réponse) | Art. 13 |
+| Décision commission nationale | **30 jours** | Art. 11 |
+| Notification décision nationale | **10 jours** | Art. 14 |
+| Recours juridictionnel | **30 jours** (ou 60 jours sans réponse) | Art. 15 |
+| Demande expertise médicale | **15 jours** | Art. 20 |
+| CNAS propose 3 experts | **8 jours** | Art. 22 |
+| Assuré accepte/refuse experts | **8 jours** | Art. 23 |
+| Désignation expert d'office | **30 jours** | Art. 24 |
+| Rapport médecin expert | **15 jours** | Art. 26 |
+| Notification résultats expertise | **10 jours** | Art. 27 |
+| Saisine commission invalidité | **30 jours** | Art. 33 |
+| Décision commission invalidité | **60 jours** | Art. 31 |
+| Notification décision invalidité | **20 jours** | Art. 34 |
+| Recours décision invalidité | **30 jours** | Art. 35 |
+| Mise en demeure débiteur | **30 jours** | Art. 46 |
+| Visa du rôle par le wali | **8 jours** | Art. 47 |
+| Recours contre rôle | **30 jours** | Art. 50 |
+| Visa contrainte par tribunal | **10 jours** | Art. 52 |
+| Recours contre contrainte | **30 jours** | Art. 56 |
+| Titre exécutoire opposition | **15 jours** | Art. 60 |
+| Prescription prestations | **4 ans** | Art. 78 |
+| Prescription pensions/rentes | **5 ans** | Art. 78 |
+| Prescription recouvrement | **4 ans** | Art. 79 |`,
+    relatedQuestions: ["Procédure d'expertise médicale ?", "Le recours préalable est-il obligatoire ?", "Délais de contestation ?", "Expliquer la Loi 83-13 ?", "Commission d'invalidité ?", "Recours contre les tiers ?", "Sanctions pénales sécurité sociale ?"],
     category: 'general'
   },
   explication_loi_83_15: {
