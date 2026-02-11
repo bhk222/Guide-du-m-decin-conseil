@@ -2572,6 +2572,7 @@ const synonymMap: { [key: string]: string } = {
     'retard consolidation': 'consolidation lente',
     'neuropathie': 'atteinte nerveuse',
     'algodystrophie': 'syndrome douloureux',
+    'algodystrophique': 'algodystrophie syndrome douloureux',
     'syndrome regional douloureux': 'algodystrophie',
     'srdc': 'algodystrophie',
     'capsulite retractile': 'raideur capsulaire',
@@ -4704,18 +4705,29 @@ export const findCandidateInjuries = (text: string, externalKeywords?: string[])
         }
         
         // Membres Supérieurs vs Inférieurs - Blocage strict croisé
-        const isMembreSupQuery = normalizedText.includes('epaule') || normalizedText.includes('coiffe') || 
+        const isMembreSupQuery = normalizedText.includes('epaule') || normalizedText.includes('coiffe') ||
                                   normalizedText.includes('bras') || normalizedText.includes('coude') ||
                                   normalizedText.includes('poignet') || normalizedText.includes('main') ||
                                   normalizedText.includes('doigt') || normalizedText.includes('index') ||
-                                  normalizedText.includes('pouce');
+                                  normalizedText.includes('pouce') || normalizedText.includes('humerus') ||
+                                  normalizedText.includes('cubitus') || normalizedText.includes('olecrane') ||
+                                  normalizedText.includes('scaphoide') || normalizedText.includes('metacarpien') ||
+                                  normalizedText.includes('auriculaire') || normalizedText.includes('annulaire') ||
+                                  normalizedText.includes('medius');
         const isMembreInfCat = catName.includes('membres inferieurs');
         if (isMembreSupQuery && isMembreInfCat) return false;
         
         const isMembreInfQuery = normalizedText.includes('hanche') || normalizedText.includes('cuisse') ||
                                   normalizedText.includes('genou') || normalizedText.includes('jambe') ||
                                   normalizedText.includes('cheville') || normalizedText.includes('pied') ||
-                                  normalizedText.includes('orteil') || normalizedText.includes('femur');
+                                  normalizedText.includes('orteil') || normalizedText.includes('femur') ||
+                                  normalizedText.includes('rotule') || normalizedText.includes('patella') ||
+                                  normalizedText.includes('patellaire') || normalizedText.includes('tibia') ||
+                                  normalizedText.includes('menisque') || normalizedText.includes('perone') ||
+                                  normalizedText.includes('fibula') || normalizedText.includes('calcaneum') ||
+                                  normalizedText.includes('malleole') || normalizedText.includes('astragale') ||
+                                  normalizedText.includes('talus') || normalizedText.includes('metatarsien') ||
+                                  normalizedText.includes('trochanter');
         const isMembreSupCat = catName.includes('membres superieurs');
         if (isMembreInfQuery && isMembreSupCat) return false;
         
@@ -4858,8 +4870,8 @@ export const findCandidateInjuries = (text: string, externalKeywords?: string[])
                     }
                 }
                 const hasAnatomicalIncompatibility = (): boolean => {
-                    // Genou vs Œil 
-                    const isGenouQuery = normalizedText.includes('genou') || normalizedText.includes('menisque') || normalizedText.includes('lca') || normalizedText.includes('ligament');
+                    // Genou vs Œil
+                    const isGenouQuery = normalizedText.includes('genou') || normalizedText.includes('menisque') || normalizedText.includes('lca') || normalizedText.includes('ligament') || normalizedText.includes('rotule') || normalizedText.includes('patella');
                     const isOeilInjury = normalize(category.name).includes('ophtalmolog') || normalizedInjuryName.includes('globe') || normalizedInjuryName.includes('oeil');
                     if (isGenouQuery && isOeilInjury) return true;
                     
@@ -6029,11 +6041,11 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             priority: 11000
         },
         
-        // Arthrose post-traumatique genou
+        // Arthrose post-traumatique genou / fémoro-patellaire
         {
-            pattern: /arthrose.*genou|genou.*arthrose|gonarthrose/i,
-            context: /post.*trauma|traumatique|s[eé]quelle/i,
-            searchTerms: ["Arthrose traumatique du genou"],
+            pattern: /arthrose.*genou|genou.*arthrose|gonarthrose|arthrose.*f[eé]moro.*pat|f[eé]moro.*patellaire|arthrose.*patellaire/i,
+            context: /.*/i,
+            searchTerms: ["Arthrose fémoro-patellaire ou fémoro-tibiale post-traumatique"],
             priority: 11000
         },
         
@@ -6845,6 +6857,14 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             searchTerms: ["Fracture du tibia diaphysaire - Bonne consolidation (sujet jeune, travailleur manuel)"],  // ✅ V3.3.201: Match barème exact ligne 12%
             priority: 999999  // V3.3.202f: PRIORITÉ ABSOLUE pour écraser tout
         },
+        // Fracture de la rotule (genou)
+        {
+            pattern: /fracture.*(?:de\s+la\s+)?rotule|rotule.*fractur[eé]e?|fracture.*patella|fracture.*patellaire/i,
+            context: /.*/i,
+            negativeContext: /tendon.*rotulien|ligament.*rotulien|appareil.*extenseur|patellectomie|ablation.*rotule/i,
+            searchTerms: ["Fracture de la rotule - Avec gêne fonctionnelle"],
+            priority: 10400
+        },
         // Fracture radius distal (Pouteau-Colles)
         {
             pattern: /fracture.*(?:pouteau|colles|radius\s+distal)/i,
@@ -7228,10 +7248,18 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
         // Contexte: SDRC post-traumatique main dominante + EVA 8/10 résistant traitement + troubles trophiques
         // Solution: Expert rule SDRC avec détection douleur sévère résistante + troubles trophiques objectifs
         {
-            pattern: /SDRC|algodystrophie|syndrome.*douloureux.*r[eé]gional.*complexe|dystrophie.*sympathique.*r[eé]flexe/i,
+            pattern: /SDRC|algodystrophie|algodystrophique|syndrome.*douloureux.*r[eé]gional.*complexe|dystrophie.*sympathique.*r[eé]flexe/i,
             context: /(?:douleur.*(?:r[eé]sistant|permanente|chronique)|EVA.*[7-9]|troubles.*trophiques|œd[eè]me.*persistant|peau.*(?:fine|brillante)|reconversion|handicap)/i,
             searchTerms: ["Algodystrophie (SDRC de type I) - Forme majeure séquellaire du membre supérieur"],
             priority: 1008,  // HAUTE PRIORITÉ
+            negativeContext: /r[eé]solu|gu[eé]ri|sans.*s[eé]quelle/i
+        },
+        // SDRC / Algodystrophie membre inférieur (genou, rotule, cheville, pied)
+        {
+            pattern: /SDRC|algodystrophie|algodystrophique|syndrome.*douloureux.*r[eé]gional.*complexe|dystrophie.*sympathique.*r[eé]flexe/i,
+            context: /genou|rotule|patella|cheville|pied|jambe|hanche|membre.*inf[eé]rieur/i,
+            searchTerms: ["Algodystrophie (SDRC de type I) - Forme majeure séquellaire du membre inférieur"],
+            priority: 1009,
             negativeContext: /r[eé]solu|gu[eé]ri|sans.*s[eé]quelle/i
         },
         
