@@ -11608,6 +11608,11 @@ export const detectMultipleLesions = (text: string): {
     const hasNerveLesion = /(?:atteinte|lesion|paralysie|nevralgie).*nerf|nerf.*(?:atteinte|lesion|paralysie)/i.test(normalized);
     const hasBoneAndNerve = hasBoneLesion && hasNerveLesion;
     
+    // 2c. Détection séparation par point-virgule (ex: "fracture rotule ; sequelle algodystrophie")
+    const semicolonParts = text.split(/\s*;\s*/);
+    const meaningfulSemicolonParts = semicolonParts.filter(p => p.trim().length >= 5);
+    const hasSemicolonSeparation = meaningfulSemicolonParts.length >= 2;
+
     // 3. Comptage séparateurs de lésions - PLUS STRICTE
     const plusCount = (text.match(/\s\+\s/g) || []).length;
     
@@ -11681,6 +11686,7 @@ export const detectMultipleLesions = (text: string): {
     if (/instabilite|laxite/i.test(normalized)) lesionTypes.push('instabilite');
     if (/raideur|ankylose/i.test(normalized)) lesionTypes.push('raideur');
     if (/arthrose/i.test(normalized)) lesionTypes.push('arthrose');
+    if (/algodystrophie|sdrc|syndrome.*douloureux.*regional/i.test(normalized)) lesionTypes.push('algodystrophie');
     if (/traumatisme.*cervical|coup.*lapin|whiplash/i.test(normalized) && /fracture.*(?:poignet|radius|humerus|femur|tibia)/i.test(normalized)) {
         // Traumatisme cervical + fracture osseuse = 2 lésions distinctes
         lesionTypes.push('traumatisme_rachis');
@@ -11778,8 +11784,9 @@ export const detectMultipleLesions = (text: string): {
     const isPolytraumatismeGrave = polytraumRegions.length >= 3; // 3+ régions = polytraumatisme
     
     // 6. Critères de cumul AMÉLIORÉS (détecte narratif médical naturel)
-    const isCumul = 
+    const isCumul =
         foundKeywords.length > 0 ||  // Keywords TRÈS explicites type "polytraumatisme"
+        hasSemicolonSeparation ||     // Séparation par point-virgule (ex: "fracture rotule ; sequelle algodystrophie")
         plusCount >= 3 ||             // Au moins 3 séparateurs "+" (ex: "A + B + C + D")
         (plusCount >= 2 && distinctRegions >= 3) ||  // 2+ "+" avec 3+ régions anatomiques DIFFÉRENTES
         hasBoneAndNerve ||            // Lésion osseuse + atteinte nerveuse (pattern traumatologique)
@@ -11804,6 +11811,7 @@ export const detectMultipleLesions = (text: string): {
     // Estimation nombre de lésions
     const lesionCount = Math.max(
         plusCount + 1,
+        hasSemicolonSeparation ? meaningfulSemicolonParts.length : 1,  // Nombre de parties séparées par ";"
         distinctRegions,
         totalRegionsCount,             // 🆕 Nombre total de régions = estimation minimale du nombre de lésions
         hasBoneAndNerve ? 2 : 1,      // Si os + nerf, au moins 2 lésions
@@ -12389,6 +12397,14 @@ const extractIndividualLesions = (text: string): string[] => {
         }
     }
     
+    // Pattern 8: Séparation générique par point-virgule (ex: "fracture rotule ; sequelle algodystrophie")
+    const semicolonParts = normalized.split(/\s*;\s*/);
+    const meaningfulSemicolonParts = semicolonParts.filter(p => p.trim().length >= 5);
+    if (meaningfulSemicolonParts.length >= 2) {
+        console.log('✅ Pattern 8 (séparateur ;) détecté:', meaningfulSemicolonParts);
+        return meaningfulSemicolonParts;
+    }
+
     // Si aucun pattern détecté, retourner le texte original
     console.log('⚠️ Aucun pattern de cumul détecté, retour texte original');
     return [normalized];
