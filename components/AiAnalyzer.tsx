@@ -13381,7 +13381,7 @@ const extractIndividualLesions = (text: string): string[] => {
  * @param isExactMatch - Si true, cherche une correspondance exacte par nom (pour résoudre ambiguïté)
  */
 export const localExpertAnalysis = (text: string, externalKeywords?: string[], isExactMatch: boolean = false): LocalAnalysisResult => {
-    console.log('🔧 localExpertAnalysis V3.3.270 - fix métatarse matching, boiterie légère distinction, auxiliary sequelae skip, stopWords expansion');
+    console.log('🔧 localExpertAnalysis V3.3.271 - fix trochantéro-diaphysaire matching, normalize() in findInBareme, specific clinical rate');
 
     // 🔴 V3.3.162: NETTOYAGE TEXTE - Supprime caractères invisibles (zero-width space, etc.)
     // Ces caractères peuvent casser les regex et empêcher la détection
@@ -15556,12 +15556,38 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
         });
     }
     
-    // Fracture fémur - Amélioration capture contexte (diaphyse, trochantéro-diaphysaire, col, etc.)
-    if (/fracture.*(?:f[ée]mur|f[ée]moral|trochant[ée]r|col.*f[ée]mur|diaphyse.*f[ée]moral)|f[ée]mur.*fractur|enclouage.*centro.*m[ée]dullaire|ost[ée]osynth[èe]se.*f[ée]mur/i.test(text)) {
+    // 🔧 V3.3.271: Fracture fémur - Détection SPÉCIFIQUE par type (trochantéro-diaphysaire, col, diaphysaire)
+    // ⚠️ L'ordre est important: trochantéro-diaphysaire AVANT le catch-all générique
+    const isTrochanteroFracture = /fracture.*(?:trochant[ée]ro[-\s]?diaphysaire|complexe.*trochant[ée]r|per[-\s]?trochant[ée]r|trochant[ée]rienne|massif.*trochant[ée]r)/i.test(text);
+    const isColFemurFracture = /fracture.*col.*f[ée]m(?:ur|oral)|col.*f[ée]m(?:ur|oral).*fractur/i.test(text) && !isTrochanteroFracture;
+    
+    if (isTrochanteroFracture) {
+        // Vérifier si mouvements hanche libres → bonne consolidation
+        const hancheLibre = /(?:hanche|mouvements?.*hanche|articulation.*hanche).*(?:libre|conserv[ée]|normal|comme\s+libre)/i.test(text) ||
+                           /mouvements?.*(?:libre|conserv[ée]|normal|comme\s+libre)/i.test(text);
+        const hasCalVicieux = /cal\s*vicieux|d[ée]viation.*axe|rotation|raccourcissement/i.test(text);
+        const hasRaideurHanche = /raideur.*hanche|hanche.*raideur|ankylose.*hanche|hanche.*enraidie/i.test(text);
+        
+        const consolidationType = (hancheLibre && !hasCalVicieux && !hasRaideurHanche) ? 'bonne consolidation' :
+                                  (hasCalVicieux || hasRaideurHanche) ? 'cal vicieux et raideur' : '';
+        
         detectedSequelae.push({
-            name: 'Fracture du fémur (diaphyse/trochantéro-diaphysaire/col fémoral)',
-            keywords: ['fracture', 'fémur', 'fémoral', 'trochantéro-diaphysaire', 'enclouage', 'ostéosynthèse'],
-            context: text.match(/fracture.*(?:f[ée]mur|trochant[ée]r|diaphyse)[^.;]*/i)?.[0] || text.match(/enclouage.*centro[^.;]*/i)?.[0] || text.match(/ost[ée]osynth[èe]se[^.;]*/i)?.[0] || ''
+            name: `Fracture trochantéro-diaphysaire du fémur${consolidationType ? ' (' + consolidationType + ')' : ''}`,
+            keywords: ['fracture', 'massif trochantérien', 'trochantéro-diaphysaire', 'fémur', 'hanche',
+                       ...(consolidationType === 'bonne consolidation' ? ['bonne consolidation'] : ['cal vicieux', 'raideur'])],
+            context: text.match(/fracture.*(?:trochant[ée]r|complexe.*trochant|per.*trochant)[^.;]*/i)?.[0] || ''
+        });
+    } else if (isColFemurFracture) {
+        detectedSequelae.push({
+            name: 'Fracture du col du fémur',
+            keywords: ['fracture', 'col', 'fémur', 'col fémoral', 'hanche'],
+            context: text.match(/fracture.*col.*f[ée]m[^.;]*/i)?.[0] || ''
+        });
+    } else if (/fracture.*(?:f[ée]mur|f[ée]moral|diaphyse.*f[ée]moral|diaphysaire.*f[ée]m)|f[ée]mur.*fractur|enclouage.*centro.*m[ée]dullaire|ost[ée]osynth[èe]se.*f[ée]mur/i.test(text)) {
+        detectedSequelae.push({
+            name: 'Fracture diaphysaire du fémur',
+            keywords: ['fracture', 'fémur', 'diaphysaire', 'diaphyse fémorale', 'cuisse'],
+            context: text.match(/fracture.*(?:f[ée]mur|diaphyse)[^.;]*/i)?.[0] || text.match(/enclouage.*centro[^.;]*/i)?.[0] || text.match(/ost[ée]osynth[èe]se[^.;]*/i)?.[0] || ''
         });
     }
     
@@ -16177,8 +16203,9 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
                     }
                     
                     // 🎯 PRIORITÉ ABSOLUE: Match EXACT par nom
-                    const seqNameLower = sequellaName.toLowerCase().trim();
-                    const injuryNameLower = injury.name.toLowerCase().trim();
+                    // 🔧 V3.3.271: Utiliser normalize() pour supprimer accents et tirets (trochantéro-diaphysaire ↔ trochantero diaphysaire)
+                    const seqNameLower = normalize(sequellaName).trim();
+                    const injuryNameLower = normalize(injury.name).trim();
                     if (seqNameLower === injuryNameLower) {
                         // Match PARFAIT → Retourner immédiatement sans chercher d'autres rubriques
                         return {
@@ -16190,20 +16217,20 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
                     }
                     
                     // Matching par nom partiel ou searchTerms
-                    const nameMatch = injury.name.toLowerCase().includes(sequellaName.toLowerCase()) || 
-                                     sequellaName.toLowerCase().includes(injury.name.toLowerCase());
+                    const nameMatch = injuryNameLower.includes(seqNameLower) || 
+                                     seqNameLower.includes(injuryNameLower);
                     // 🔥 V3.3.268: searchTerms MUST have ≥3 words to match via context (anti-generic terms)
+                    // 🔧 V3.3.271: Utiliser normalize() pour la comparaison des searchTerms
                     const searchTermMatch = injury.searchTerms?.some(term => {
-                        const termLower = term.toLowerCase();
-                        const termWordCount = termLower.split(/\s+/).filter(w => w.length > 2).length;
+                        const termNorm = normalize(term);
+                        const termWordCount = termNorm.split(/\s+/).filter(w => w.length > 2).length;
                         // Ignore generic 1-2 word terms for context matching (e.g. "flexion extension", "post traumatique")
                         if (termWordCount < 3) {
                             // Only match if the sequellaName itself contains the term
-                            return sequellaName.toLowerCase().includes(termLower);
+                            return seqNameLower.includes(termNorm);
                         }
-                        const contextLower = context.toLowerCase();
-                        const seqLower = sequellaName.toLowerCase();
-                        return contextLower.includes(termLower) || seqLower.includes(termLower);
+                        const contextNorm = normalize(context);
+                        return contextNorm.includes(termNorm) || seqNameLower.includes(termNorm);
                     });
                     
                     // 🆕 V3.3.268: Track BASE score (content relevance) separately from anatomical bonus
@@ -16216,9 +16243,9 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
                     {
                         const seqWords = seqNameLower.split(/[\s\/\-\(\),]+/).filter(w => w.length > 2);
                         const injWords = injuryNameLower.split(/[\s\/\-\(\),]+/).filter(w => w.length > 2);
-                        // 🔧 V3.3.270: Ajout mots génériques médicaux/anatomiques trop communs
+                        // 🔧 V3.3.271: stopWords normalisés (sans accents) car seqNameLower/injuryNameLower sont normalisés
                         // Ces mots apparaissent dans des centaines d'entrées et ne sont pas discriminants
-                        const stopWords = new Set(['avec', 'sans', 'dans', 'pour', 'des', 'les', 'une', 'par', 'sur', 'main', 'non', 'plus', 'tout', 'très', 'qui', 'que', 'fracture', 'limitation', 'fonctionnelle', 'consolidation', 'conséquences', 'douleurs', 'douleur', 'marche', 'consolidée', 'traumatique', 'pied', 'phalange', 'phalanges', 'doigt', 'doigts', 'membre', 'lésion', 'atteinte', 'perte', 'séquelles', 'forme', 'type', 'post', 'ablation', 'amputation']);
+                        const stopWords = new Set(['avec', 'sans', 'dans', 'pour', 'des', 'les', 'une', 'par', 'sur', 'main', 'non', 'plus', 'tout', 'tres', 'qui', 'que', 'fracture', 'limitation', 'fonctionnelle', 'consolidation', 'consequences', 'douleurs', 'douleur', 'marche', 'consolidee', 'traumatique', 'pied', 'phalange', 'phalanges', 'doigt', 'doigts', 'membre', 'lesion', 'atteinte', 'perte', 'sequelles', 'forme', 'type', 'post', 'ablation', 'amputation', 'femur']);
                         const seqSignificant = seqWords.filter(w => !stopWords.has(w));
                         const injSignificant = injWords.filter(w => !stopWords.has(w));
                         const overlap = seqSignificant.filter(w => injSignificant.some(iw => {
@@ -16249,7 +16276,7 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
                         const ctxIsMS = /avant.?bras|coude|poignet|radius|cubitus|hum[ée]rus|main\b|doigt|[ée]paule|\bbras\b|pr[ée]hension|m[ée]tacarpe/i.test(contextFull);
                         const ctxIsMI = /m[ée]tatars|pied|orteil|cheville|tibia|fibula|p[ée]ron[ée]|f[ée]mur|hanche|genou|jambe|plateau.*tibi|rotule|patella|cuisse|boiterie/i.test(contextFull);
                         const injIsMS = /avant.?bras|coude|poignet|radius|cubitus|hum[ée]rus|main\b|doigt|[ée]paule|\bbras\b|pr[ée]hension|m[ée]tacarpe/i.test(injury.name.toLowerCase());
-                        const injIsMI = /m[ée]tatars|pied|orteil|cheville|tibia|fibula|p[ée]ron[ée]|f[ée]mur|hanche|genou|jambe|plateau.*tibi|rotule|patella|cuisse/i.test(injury.name.toLowerCase());
+                        const injIsMI = /m[ée]tatars|pied|orteil|cheville|tibia|fibula|p[ée]ron[ée]|f[ée]mur|hanche|genou|jambe|plateau.*tibi|rotule|patella|cuisse|trochant|bassin|cotyle/i.test(injury.name.toLowerCase());
                         
                         // Pénaliser si anatomie incompatible (MS context → MI injury, ou MI context → MS injury)
                         if ((ctxIsMS && !ctxIsMI && injIsMI) || (ctxIsMI && !ctxIsMS && injIsMS)) {
@@ -16796,6 +16823,18 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
                         // Fracture avec séquelles importantes
                         else if (hasFracture && (hasRaideur || hasAlgies)) {
                             rate = 15; explanation = 'Membre inférieur (CUISSE/GENOU) : Fracture fémur/tibia consolidée avec séquelles fonctionnelles importantes';
+                        }
+                        // 🔧 V3.3.271: Fracture trochantéro-diaphysaire/massif trochantérien avec bonne consolidation
+                        else if (hasFracture && /trochant[ée]ro|massif.*trochant|trochant[ée]rien|per.*trochant/i.test(seq.name)) {
+                            const hancheLibre = /hanche.*libre|mouvements?.*(?:hanche|libre)|comme\s+libre/i.test(text);
+                            const hasCalVicieux = /cal.*vicieux|d[ée]viation.*axe|raccourcissement/i.test(text);
+                            if (hancheLibre && !hasCalVicieux) {
+                                rate = 10; explanation = 'Membre inférieur (HANCHE) : Fracture trochantéro-diaphysaire consolidée avec mouvements hanche libres (bonne consolidation)';
+                            } else if (hasCalVicieux) {
+                                rate = 20; explanation = 'Membre inférieur (HANCHE) : Fracture trochantéro-diaphysaire avec cal vicieux et/ou raideur';
+                            } else {
+                                rate = 12; explanation = 'Membre inférieur (HANCHE) : Fracture trochantéro-diaphysaire consolidée avec séquelles fonctionnelles';
+                            }
                         }
                         // Séquelles ligamentaires/musculaires seules
                         else {
