@@ -7509,11 +7509,13 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             negativeContext: /r[eé]solu|gu[eé]ri|sans.*s[eé]quelle/i
         },
         
+        // 🔧 V3.3.266: Ajout negativeContext pour exclure "sciatique poplité" (géré par règles SPI/SPE spécifiques)
         {
             pattern: /atteinte\s+(?:du\s+)?nerf\s+sciatique/i,
             context: /nerf|sciatique|bassin|hanche/i,
             searchTerms: ["Névralgie sciatique post-traumatique", "Paralysie du nerf sciatique poplité externe (SPE)", "Paralysie du nerf sciatique poplité interne (SPI)"],
-            priority: 995
+            priority: 995,
+            negativeContext: /sciatique\s+poplit[eé]|SPI|SPE/i
         },
         
         // === 🆕 V3.3.213: TC AVEC HÉMIPARÉSIE → CONTUSIONS CÉRÉBRALES (PRIORITÉ MAXIMALE) ===
@@ -7691,19 +7693,22 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             searchTerms: ['Hernie discale cervicale post-traumatique - Avec névralgie cervico-brachiale (NCB)'],
             priority: 94
         },
+        // 🔧 V3.3.266: negativeContext pour ne pas matcher si "sciatique poplité" (nom de nerf)
         {
             pattern: /hernie.*discale.*(?:lombaire|L\d)|lombaire.*hernie.*discale/i,
             context: /rachis|lombaire|sciatique|cruralgie|radiculalgie|op[eé]r[eé]/i,
             searchTerms: ['Hernie discale lombaire post-traumatique - Avec radiculalgie (sciatique ou cruralgie)'],
-            priority: 94
+            priority: 94,
+            negativeContext: /sciatique\s+poplit[eé]/i
         },
         // 🆕 V3.3.130: Sciatique/Cruralgie chronique (sans hernie discale explicite)
+        // 🔧 V3.3.266: negativeContext ajouté pour exclure "sciatique poplité" (nom de nerf, pas radiculalgie)
         {
             pattern: /(?:sciatique|cruralgie).*(?:chronique|persistante|r[eé]siduelle)/i,
             context: /lombaire|L\d|rachis|radiculalgie|douleur.*irradiante|membre.*inf[eé]rieur/i,
             searchTerms: ['Hernie discale lombaire post-traumatique - Avec radiculalgie (sciatique ou cruralgie)'],
             priority: 96,
-            negativeContext: /sans.*s[eé]quelle|gu[eé]rison/i
+            negativeContext: /sans.*s[eé]quelle|gu[eé]rison|sciatique\s+poplit[eé]|SPI|SPE|nerf\s+sciatique\s+poplit[eé]/i
         },
         {
             pattern: /spondylolisthesis|spondylo.*listhesis|listthesis|glissement\s+vertebral/i,
@@ -8892,6 +8897,38 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             searchTerms: ["Section des tendons fléchisseurs doigt long"],
             priority: 100
         },
+        // === 🆕 V3.3.266: FASCIITE PLANTAIRE / APONÉVROSITE PLANTAIRE ===
+        {
+            pattern: /fasciite\s+plantaire|apon[eé]vros(?:ite|e)\s+plantaire|inflammation.*apon[eé]vrose.*plantaire|talalgie.*plantaire/i,
+            context: /pied|plantaire|talalgie|marche|douleur|calcan[eé]/i,
+            searchTerms: ['Aponévrosite plantaire (fasciite plantaire) chronique post-traumatique'],
+            priority: 1010,
+            negativeContext: /n[eé]crosante/i  // Exclure fasciite nécrosante
+        },
+        // === 🆕 V3.3.266: SYNDROME DU TUNNEL TARSIEN ===
+        {
+            pattern: /tunnel\s+tarsien|compression.*nerf.*tibial.*post[eé]rieur/i,
+            context: /nerf|tibial|plantaire|par[eé]sth[eé]sie|cheville|pied/i,
+            searchTerms: ['Syndrome du tunnel tarsien (compression nerf tibial postérieur)'],
+            priority: 1010
+        },
+        // === 🆕 V3.3.266: ATTEINTE SENSITIVO-MOTRICE DU NERF SPI (EMG) ===
+        // Détecte "atteinte sensitivo-motrice du nerf sciatique poplité interne" (pas forcément paralysie)
+        {
+            pattern: /(?:atteinte|l[eé]sion|neuropathie).*(?:sensitivo[\s-]?motrice|sensitive|motrice|axonale|d[eé]myélinisante)?.*(?:nerf\s+)?(?:sciatique\s+poplit[eé]\s+interne|SPI|tibial\s+(?:post[eé]rieur|interne))/i,
+            context: /EMG|[eé]lectromyogra|nerf|sensitivo|motrice|atteinte|pied|plantaire|cheville/i,
+            searchTerms: ['Paralysie du nerf sciatique poplité interne (SPI)'],
+            priority: 1015,
+            negativeContext: /SPE|externe|r[eé]solu|gu[eé]ri/i
+        },
+        // === 🆕 V3.3.266: ATTEINTE SENSITIVO-MOTRICE DU NERF SPE (EMG) ===
+        {
+            pattern: /(?:atteinte|l[eé]sion|neuropathie).*(?:sensitivo[\s-]?motrice|sensitive|motrice|axonale|d[eé]myélinisante)?.*(?:nerf\s+)?(?:sciatique\s+poplit[eé]\s+externe|SPE|fibulaire)/i,
+            context: /EMG|[eé]lectromyogra|nerf|sensitivo|motrice|atteinte|pied|cheville/i,
+            searchTerms: ['Paralysie du nerf sciatique poplité externe (SPE)'],
+            priority: 1015,
+            negativeContext: /SPI|interne|r[eé]solu|gu[eé]ri/i
+        },
         // === RÈGLES PIED ET MÉTATARSIENS (V3.3.124) ===
         {
             pattern: /(?:fracture|arrachement).*(?:5[\s\-]*[eè]?me|cinquieme|styloide).*m[eé]tatars/i,
@@ -9113,9 +9150,11 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             priority: 98,
             negativeContext: /SPI|interne/i
         },
+        // 🔧 V3.3.266: Élargi pour matcher "atteinte/lésion" en plus de "paralysie/déficit"
+        // + context élargi (EMG, sensitivo-motrice, pied, plantaire)
         {
-            pattern: /(?:paralysie|d[eé]ficit).*(?:SPI|sciatique.*poplit[eé].*interne)/i,
-            context: /flexion.*orteils|propulsion.*pas|triceps.*sural|marche.*pointe.*pieds/i,
+            pattern: /(?:paralysie|d[eé]ficit|atteinte|l[eé]sion).*(?:SPI|sciatique.*poplit[eé].*interne)|(?:SPI|sciatique.*poplit[eé].*interne).*(?:atteinte|l[eé]sion|d[eé]ficit)/i,
+            context: /flexion.*orteils|propulsion.*pas|triceps.*sural|marche.*pointe.*pieds|EMG|sensitivo|motrice|nerf|pied|plantaire|cheville/i,
             searchTerms: ['Paralysie du nerf sciatique poplité interne (SPI)'],
             priority: 98,
             negativeContext: /SPE|externe/i
@@ -13342,7 +13381,7 @@ const extractIndividualLesions = (text: string): string[] => {
  * @param isExactMatch - Si true, cherche une correspondance exacte par nom (pour résoudre ambiguïté)
  */
 export const localExpertAnalysis = (text: string, externalKeywords?: string[], isExactMatch: boolean = false): LocalAnalysisResult => {
-    console.log('🔧 localExpertAnalysis V3.3.227 - fix faux cumul (cou/main word boundary, LCA+ménisque, fémur+raideur, dB OD/OG, Achille barème)');
+    console.log('🔧 localExpertAnalysis V3.3.266 - fix fasciite plantaire + atteinte SPI (EMG), negativeContext hernie discale/sciatique poplité');
 
     // 🔴 V3.3.162: NETTOYAGE TEXTE - Supprime caractères invisibles (zero-width space, etc.)
     // Ces caractères peuvent casser les regex et empêcher la détection
@@ -15557,6 +15596,24 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
             name: 'Déchirure ligamentaire du genou (LCM/LLI/croisés)',
             keywords: ['déchirure', 'ligament', 'genou', 'LCM', 'LLI', 'collatéral'],
             context: text.match(/d[ée]chirure.*ligament[^.;]*/i)?.[0] || text.match(/ligament.*collat[ée]ral[^.;]*/i)?.[0] || ''
+        });
+    }
+    
+    // 🆕 V3.3.266: FASCIITE PLANTAIRE / APONÉVROSITE PLANTAIRE
+    if (/fasciite\s+plantaire|apon[eé]vros(?:ite|e)\s+plantaire|inflammation.*apon[eé]vrose.*plantaire/i.test(text)) {
+        detectedSequelae.push({
+            name: 'Aponévrosite plantaire (fasciite plantaire) chronique post-traumatique',
+            keywords: ['fasciite plantaire', 'aponévrosite plantaire', 'talalgie', 'plantaire'],
+            context: text.match(/fasciite\s+plantaire[^.;]*/i)?.[0] || text.match(/apon[eé]vros[^.;]*/i)?.[0] || ''
+        });
+    }
+    
+    // 🆕 V3.3.266: ATTEINTE NERF SPI (sciatique poplité interne / nerf tibial)
+    if (/(?:atteinte|l[eé]sion|paralysie|d[eé]ficit|neuropathie).*(?:sciatique\s+poplit[eé]\s+interne|SPI|nerf\s+tibial\s+(?:post[eé]rieur|interne))|(?:sciatique\s+poplit[eé]\s+interne|SPI).*(?:atteinte|l[eé]sion|paralysie|d[eé]ficit)/i.test(text)) {
+        detectedSequelae.push({
+            name: 'Atteinte du nerf sciatique poplité interne (SPI)',
+            keywords: ['SPI', 'sciatique poplité interne', 'nerf tibial', 'atteinte nerveuse'],
+            context: text.match(/(?:atteinte|l[eé]sion|paralysie).*(?:sciatique\s+poplit[eé]\s+interne|SPI)[^.;]*/i)?.[0] || text.match(/(?:sciatique\s+poplit[eé]\s+interne|SPI)[^.;]*/i)?.[0] || ''
         });
     }
     
