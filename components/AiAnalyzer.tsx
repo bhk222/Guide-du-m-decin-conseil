@@ -15574,16 +15574,21 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
             context: text.match(/fracture.*ouverte.*(?:tibia|jambe|os)[^.;]*/i)?.[0] || ''
         });
     } 
-    // 🔴 V3.3.163: Fracture plateau tibial (extrémité supérieure tibia = articulation genou)
-    else if (/(?:fracture|fissure).*plateau.*tibial|plateau.*tibial.*(?:fracture|fissur[ée])/i.test(text)) {
+    // 🔴 V3.3.163+V3.3.269: Fracture plateau tibial (extrémité supérieure tibia = articulation genou)
+    // 🆕 V3.3.269: Ajout pattern "extrémité supérieure tibia" (= plateau tibial anatomiquement)
+    else if (/(?:fracture|fissure).*plateau.*tibial|plateau.*tibial.*(?:fracture|fissur[ée])|(?:fracture|fissure).*(?:extr[ée]mit[ée]|extremite).*sup[ée]rieure.*tibia/i.test(text)) {
         const isFissure = /fissure/i.test(text);
-        const amplitudeInfo = text.match(/(?:amp|amplitude).*(?:possible|libre|conserv[ée]e)|genou.*(?:libre|mobile)/i)?.[0] || '';
-        const hasLimitationMobility = /limitation.*(?:flexion|extension)|raideur|ankylos[ée]/i.test(text);
+        // 🔧 V3.3.269: Fix "AMP" (Appui Monopodal) ≠ amplitude, et "impossible" ≠ "possible"
+        const amplitudeInfo = text.match(/amplitude[s]?.*(?:(?<!im)possible|libre|conserv[ée]e)|genou.*(?:libre|mobile)/i)?.[0] || '';
+        // 🔧 V3.3.269: Ajout "réduit", "diminué", "limité", "très réduit" pour détecter limitation de mobilité
+        const hasLimitationMobility = /limitation.*(?:flexion|extension)|raideur|ankylos[ée]|(?:flexion|extension|mobilit[ée]|amplitude).*(?:r[ée]duit|diminu[ée]|limit[ée])|tr[èe]s.*r[ée]duit/i.test(text);
+        const hasSevereLimitation = /tr[èe]s.*r[ée]duit|fortement.*(?:r[ée]duit|limit[ée]|diminu[ée])|quasi.*nul|quasi.*impossible|minime.*amplitude/i.test(text);
         
         detectedSequelae.push({
-            name: `${isFissure ? 'Fissure' : 'Fracture'} plateau tibial ${amplitudeInfo ? '(amplitudes conservées)' : hasLimitationMobility ? '(avec raideur)' : ''}`,
+            // 🔧 V3.3.269: Qualifier la sévérité correctement
+            name: `${isFissure ? 'Fissure' : 'Fracture'} plateau tibial ${hasSevereLimitation ? '(avec raideur sévère)' : amplitudeInfo ? '(amplitudes conservées)' : hasLimitationMobility ? '(avec raideur)' : ''}`,
             keywords: ['fracture', 'plateau tibial', 'genou', isFissure ? 'fissure' : ''].filter(k => k),
-            context: text.match(/(?:fracture|fissure).*plateau.*tibial[^.;]*/i)?.[0] || ''
+            context: text.match(/(?:fracture|fissure).*(?:plateau.*tibial|extr[ée]mit[ée].*sup[ée]rieure.*tibia)[^.;]*/i)?.[0] || ''
         });
     }
     else if (/fracture.*tibia|fracture.*p[ée]ron[ée]|fracture.*jambe/i.test(text)) {
@@ -15673,7 +15678,8 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
     }
     
     // Amyotrophie quadricipitale / Amyotrophie globale membre inférieur
-    if (/amyotrophie.*(?:quadricipital|cuisse.*jambe|membre.*inf[ée]rieur)|atrophie.*(?:quadriceps|muscles.*cuisse)|fonte.*musculaire.*(?:cuisse|jambe)/i.test(text)) {
+    // 🔧 V3.3.269: Ajout "amyotrophie.*cuisse" seul (la cuisse = quadriceps)
+    if (/amyotrophie.*(?:quadricipital|cuisse|jambe|membre.*inf[ée]rieur)|atrophie.*(?:quadriceps|muscles?.*cuisse)|fonte.*musculaire.*(?:cuisse|jambe)/i.test(text)) {
         const isGlobal = /amyotrophie.*(?:cuisse.*jambe|membre.*inf[ée]rieur)/i.test(text);
         detectedSequelae.push({
             name: isGlobal ? 'Amyotrophie globale du membre inférieur (cuisse + jambe)' : 'Amyotrophie quadricipitale',
@@ -16722,16 +16728,46 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
                         
                         // 🔴 V3.3.163: FRACTURE PLATEAU TIBIAL (articulation genou) - Évaluation selon séquelles
                         const isPlateauTibial = detectedSequelae.some(s => /plateau.*tibial/i.test(s.name));
+                        // 🔧 V3.3.269: Fix "AMP" (Appui Monopodal) ≠ amplitude, et "impossible" ≠ "possible"
                         const hasAmplitudesConservees = detectedSequelae.some(s => /amplitudes.*conserv[ée]es|genou.*libre/i.test(s.name)) || 
-                                                        /amp.*possible|genou.*libre|amplitudes.*conserv[ée]es/i.test(text);
+                                                        /amplitude[s]?.*(?:(?<!im)possible|libre|conserv[ée]es?)|genou.*(?:libre|mobile)/i.test(text);
                         
                         if (isPlateauTibial) {
-                            if (hasAmplitudesConservees && !hasRaideur && !hasInstabilite) {
+                            // 🔧 V3.3.269: Évaluation complète de sévérité pour fracture plateau tibial
+                            // Barème: "Fracture des plateaux tibiaux - Avec déviation et/ou raideur" (10-30%)
+                            const hasSevereROM = detectedSequelae.some(s => /raideur.*s[ée]v[èe]re/i.test(s.name)) || 
+                                                 /tr[èe]s.*r[ée]duit|fortement.*(?:r[ée]duit|limit[ée]|diminu[ée])|quasi.*nul|quasi.*impossible/i.test(text);
+                            const hasAmyotrophieMI = detectedSequelae.some(s => /amyotrophie/i.test(s.name)) ||
+                                                     /amyotrophie|atrophie.*(?:cuisse|quadriceps|musculaire)/i.test(text);
+                            const hasBoiterie = detectedSequelae.some(s => /boiterie/i.test(s.name));
+                            const hasCanneBequille = /canne|b[ée]quille|tuteur|aide.*(?:technique|marche)|marche.*avec.*(?:canne|b[ée]quille)/i.test(text);
+                            const hasFaiblesse = /force.*(?:tr[èe]s\s+)?faible|faiblesse.*musculaire|d[ée]ficit.*musculaire|force.*musculaire.*(?:tr[èe]s\s+)?(?:faible|diminu[ée]e|r[ée]duite)/i.test(text);
+                            const hasRaideurOrLimit = hasRaideur || hasInstabilite || /r[ée]duit|limit[ée]|diminu[ée]/i.test(text);
+                            
+                            // Compter les facteurs de gravité
+                            const severityFactors = [hasSevereROM, hasAmyotrophieMI, hasCanneBequille, hasFaiblesse, hasBoiterie].filter(Boolean).length;
+                            
+                            if (hasAmplitudesConservees && !hasRaideurOrLimit && !hasInstabilite && severityFactors === 0) {
                                 rate = 10; 
                                 explanation = 'Membre inférieur (GENOU) : Fracture plateau tibial consolidée avec amplitudes articulaires conservées (genou libre) → IPP 8-12%';
-                            } else if (hasRaideur || hasInstabilite) {
-                                rate = 15;
-                                explanation = 'Membre inférieur (GENOU) : Fracture plateau tibial avec séquelles fonctionnelles (raideur/instabilité) → IPP 12-18%';
+                            } else if (severityFactors >= 3) {
+                                // CAS SÉVÈRE: raideur sévère + amyotrophie + canne/béquille + faiblesse musculaire
+                                rate = 20 + Math.min(severityFactors - 3, 2) * 3; // 20-26%
+                                let details: string[] = [];
+                                if (hasSevereROM) details.push('raideur sévère genou');
+                                if (hasAmyotrophieMI) details.push('amyotrophie');
+                                if (hasCanneBequille) details.push('marche avec aide technique');
+                                if (hasFaiblesse) details.push('force musculaire très faible');
+                                if (hasBoiterie) details.push('boiterie');
+                                explanation = `Membre inférieur (GENOU) : Fracture plateau tibial avec séquelles SÉVÈRES (${details.join(' + ')}) → IPP ${rate}%`;
+                            } else if (severityFactors >= 1 || hasRaideurOrLimit) {
+                                rate = 15 + Math.min(severityFactors, 2) * 2; // 15-19%
+                                let details: string[] = [];
+                                if (hasRaideurOrLimit) details.push('raideur/limitation');
+                                if (hasAmyotrophieMI) details.push('amyotrophie');
+                                if (hasCanneBequille) details.push('aide technique');
+                                if (hasBoiterie) details.push('boiterie');
+                                explanation = `Membre inférieur (GENOU) : Fracture plateau tibial avec séquelles fonctionnelles (${details.join(' + ')}) → IPP ${rate}%`;
                             } else {
                                 rate = 12;
                                 explanation = 'Membre inférieur (GENOU) : Fracture plateau tibial consolidée → IPP 10-15%';
