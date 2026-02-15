@@ -15456,7 +15456,12 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
     }
     
     // Hernie discale + Sciatique
-    if (/hernie.*discale|sciatique|cruralgie|radiculalgie/i.test(text)) {
+    // 🔴 V3.3.266: "sciatique poplité" (SPI/SPE) = nerf périphérique, PAS radiculalgie rachis
+    // On ne push hernie discale QUE si: hernie explicite dans le texte OU sciatique SANS poplité OU cruralgie/radiculalgie
+    const hasExplicitHernie = /hernie.*discale/i.test(text);
+    const hasSciatRadiculalgieOnly = /sciatique/i.test(text) && !/sciatique\s+poplit[eé]|\bSPI\b|\bSPE\b/i.test(text);
+    const hasCruralgieOrRadiculalgie = /cruralgie|radiculalgie/i.test(text);
+    if (hasExplicitHernie || hasSciatRadiculalgieOnly || hasCruralgieOrRadiculalgie) {
         detectedSequelae.push({
             name: 'Hernie discale lombaire avec radiculalgie (sciatique/cruralgie)',
             keywords: ['hernie discale', 'sciatique', 'cruralgie'],
@@ -16465,7 +16470,8 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
                 // 🔴 V3.3.200: RACHIS (EXCLUT cervicalgie/brachialgie → désormais NEUROLOGIQUE)
                 // Barème 1967: Syndrome cervical = composante du SSTC, pas séquelle rachis séparée
                 // Seules les atteintes DORSALES et LOMBAIRES restent dans système RACHIS
-                else if (/dorsalgie|lombalgie|fracture.*lombaire|hernie.*discale|sciatique|limitation.*ant[ée]flexion.*rachis|raideur.*rachis/i.test(seq.name) && !/cervicalgie|brachialgie|syndrome.*cervical/i.test(seq.name)) {
+                // 🔴 V3.3.266: "sciatique" utilise negative lookahead pour EXCLURE "sciatique poplité" (= nerf SPI/SPE, PAS rachis)
+                else if (/dorsalgie|lombalgie|fracture.*lombaire|hernie.*discale|sciatique(?!\s+poplit[eé])|limitation.*ant[ée]flexion.*rachis|raideur.*rachis/i.test(seq.name) && !/cervicalgie|brachialgie|syndrome.*cervical/i.test(seq.name) && !/sciatique\s+poplit[eé]|\bSPI\b|\bSPE\b/i.test(seq.name)) {
                     system = 'RACHIS';
                     
                     // 🔴 V3.3.163: FRACTURE-LUXATION VERTÉBRALE (grave: instabilité + chirurgie)
@@ -16488,8 +16494,10 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
                     else if (/avec\s+l[eé]sion\s+neurologique/i.test(seq.name)) {
                         rate = 20;
                         explanation = 'Rachis LOMBAIRE : Fracture/luxation avec lésion neurologique légère (steppage, amyotrophie) → IPP 20-35% (atteinte neurologique)';
-                    } else if (/hernie.*discale|sciatique/i.test(seq.name)) {
+                    } else if (/hernie.*discale/i.test(seq.name)) {
                         rate = 15; explanation = 'Rachis : hernie discale avec radiculalgie (séquelle majeure)';
+                    } else if (/sciatique/i.test(seq.name) && !/sciatique\s+poplit[eé]|SPI|SPE/i.test(seq.name)) {
+                        rate = 15; explanation = 'Rachis : sciatique/radiculalgie post-traumatique (séquelle majeure)';
                     } else if (/lombalgie|fracture.*lombaire/i.test(seq.name)) {
                         // Fracture lombaire avec tassement : ajuster selon signes cliniques
                         const isTassementGrade1 = /grade\s*1|tassement.*minim/i.test(text);
@@ -16508,6 +16516,58 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
                         rate = Math.max(rate, 8); explanation = 'Rachis : lombalgie avec limitation mobilité';
                     } else {
                         rate = 10; explanation = 'Rachis : cervicalgie/dorsalgie chronique';
+                    }
+                }
+                
+                // 🆕 V3.3.266: NERFS PÉRIPHÉRIQUES MEMBRE INFÉRIEUR (SPI, SPE, nerf tibial)
+                // Atteinte du nerf sciatique poplité interne/externe = NEUROLOGIQUE (pas RACHIS)
+                else if (/sciatique\s+poplit[eé]|\bSPI\b|\bSPE\b|nerf\s+tibial|nerf\s+fibulaire/i.test(seq.name)) {
+                    system = 'NEUROLOGIQUE';
+                    const isSPI = /poplit[eé]\s+interne|\bSPI\b|tibial/i.test(seq.name);
+                    const isDiscrete = /discr[eè]te|l[eé]g[eè]re|mod[eé]r[eé]e|minime/i.test(text);
+                    const isSevere = /s[eé]v[eè]re|compl[eè]te|majeure|important/i.test(text);
+                    
+                    if (isSPI) {
+                        if (isDiscrete) {
+                            rate = 10; explanation = 'Neurologique : Atteinte discrète sensitivo-motrice du nerf SPI (sciatique poplité interne) → IPP 10% (fourchette basse 15-25%)';
+                        } else if (isSevere) {
+                            rate = 20; explanation = 'Neurologique : Paralysie du nerf SPI (sciatique poplité interne) sévère → IPP 20% (fourchette haute 15-25%)';
+                        } else {
+                            rate = 15; explanation = 'Neurologique : Atteinte du nerf SPI (sciatique poplité interne) → IPP 15% (barème 15-25%)';
+                        }
+                    } else {
+                        // SPE
+                        if (isDiscrete) {
+                            rate = 12; explanation = 'Neurologique : Atteinte discrète du nerf SPE (sciatique poplité externe) → IPP 12%';
+                        } else if (isSevere) {
+                            rate = 22; explanation = 'Neurologique : Paralysie du nerf SPE (sciatique poplité externe) sévère avec steppage → IPP 22%';
+                        } else {
+                            rate = 18; explanation = 'Neurologique : Atteinte du nerf SPE (sciatique poplité externe) → IPP 18%';
+                        }
+                    }
+                }
+                
+                // 🆕 V3.3.266: FASCIITE PLANTAIRE / APONÉVROSITE PLANTAIRE / TUNNEL TARSIEN
+                else if (/fasciite.*plantaire|apon[eé]vros.*plantaire|tunnel\s+tarsien/i.test(seq.name)) {
+                    system = 'MEMBRE_INFERIEUR';
+                    const isDiscrete = /discr[eè]te|l[eé]g[eè]re|mod[eé]r[eé]e|minime/i.test(text);
+                    const isSevere = /s[eé]v[eè]re|majeure|permanente|quasi.*permanente/i.test(text);
+                    
+                    if (/tunnel\s+tarsien/i.test(seq.name)) {
+                        if (isSevere) {
+                            rate = 18; explanation = 'Membre inférieur (PIED) : Syndrome tunnel tarsien sévère (douleurs neuropathiques permanentes) → IPP 18% (barème 10-25%)';
+                        } else {
+                            rate = 12; explanation = 'Membre inférieur (PIED) : Syndrome tunnel tarsien (compression nerf tibial postérieur) → IPP 12% (barème 10-25%)';
+                        }
+                    } else {
+                        // Fasciite plantaire
+                        if (isSevere) {
+                            rate = 12; explanation = 'Membre inférieur (PIED) : Fasciite plantaire chronique sévère (douleurs quasi-permanentes à la marche) → IPP 12% (barème 5-15%)';
+                        } else if (isDiscrete) {
+                            rate = 5; explanation = 'Membre inférieur (PIED) : Fasciite plantaire discrète (douleurs matinales résiduelles) → IPP 5% (barème 5-15%)';
+                        } else {
+                            rate = 8; explanation = 'Membre inférieur (PIED) : Fasciite plantaire chronique post-traumatique → IPP 8% (barème 5-15%)';
+                        }
                     }
                 }
                 
