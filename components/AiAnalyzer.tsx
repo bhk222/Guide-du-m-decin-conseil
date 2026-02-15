@@ -13381,7 +13381,7 @@ const extractIndividualLesions = (text: string): string[] => {
  * @param isExactMatch - Si true, cherche une correspondance exacte par nom (pour résoudre ambiguïté)
  */
 export const localExpertAnalysis = (text: string, externalKeywords?: string[], isExactMatch: boolean = false): LocalAnalysisResult => {
-    console.log('🔧 localExpertAnalysis V3.3.266 - fix fasciite plantaire + atteinte SPI (EMG), negativeContext hernie discale/sciatique poplité');
+    console.log('🔧 localExpertAnalysis V3.3.268 - fix findInBareme cross-region matching, anatomical filter, word-overlap scoring, baseScore threshold');
 
     // 🔴 V3.3.162: NETTOYAGE TEXTE - Supprime caractères invisibles (zero-width space, etc.)
     // Ces caractères peuvent casser les regex et empêcher la détection
@@ -16141,8 +16141,17 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
         let bestMatch: {name: string; rate: number[]; article: string; rateCriteria?: any; score: number} | null = null;
         
         for (const category of disabilityData) {
+            // 🆕 V3.3.268: SKIP cumul/polytrauma categories — individual sequelae should match individual barème entries
+            if (/cumul|polytrauma/i.test(category.name)) continue;
+            
             for (const subcategory of category.subcategories) {
+                // 🆕 V3.3.268: Also skip cumul subcategories
+                if (/cumul|polytrauma/i.test(subcategory.name)) continue;
+                
                 for (const injury of subcategory.injuries) {
+                    // 🆕 V3.3.268: Skip cumul entries (name with "cumul")
+                    if (/\(cumul\)/i.test(injury.name)) continue;
+                    
                     let score = 0;
                     
                     // 🔥 V3.3.171 ULTRA-FINAL: FILTRER "AVEC neurologie" vs "SANS neurologie" STRICTEMENT
@@ -16172,35 +16181,70 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
                     // Matching par nom partiel ou searchTerms
                     const nameMatch = injury.name.toLowerCase().includes(sequellaName.toLowerCase()) || 
                                      sequellaName.toLowerCase().includes(injury.name.toLowerCase());
+                    // 🔥 V3.3.268: searchTerms MUST have ≥3 words to match via context (anti-generic terms)
                     const searchTermMatch = injury.searchTerms?.some(term => {
                         const termLower = term.toLowerCase();
+                        const termWordCount = termLower.split(/\s+/).filter(w => w.length > 2).length;
+                        // Ignore generic 1-2 word terms for context matching (e.g. "flexion extension", "post traumatique")
+                        if (termWordCount < 3) {
+                            // Only match if the sequellaName itself contains the term
+                            return sequellaName.toLowerCase().includes(termLower);
+                        }
                         const contextLower = context.toLowerCase();
                         const seqLower = sequellaName.toLowerCase();
                         return contextLower.includes(termLower) || seqLower.includes(termLower);
                     });
                     
-                    if (nameMatch) score += 10;
-                    if (searchTermMatch) score += 5;
+                    // 🆕 V3.3.268: Track BASE score (content relevance) separately from anatomical bonus
+                    let baseScore = 0;
+                    if (nameMatch) baseScore += 10;
+                    if (searchTermMatch) baseScore += 5;
                     
-                    // 🔥 V3.3.181: FILTRAGE ANATOMIQUE pour "cal vicieux" (éviter confusion métatarsien/cubitus)
-                    if (/cal\s+vicieux/i.test(sequellaName)) {
-                        const contextFull = (context + ' ' + fullText).toLowerCase();
-                        const isMembreSuperieur = /avant.?bras|coude|poignet|radius|cubitus|hum[ée]rus|main|doigt|[ée]paule|bras/i.test(contextFull);
-                        const isMembreInferieur = /m[ée]tatars|pied|orteil|cheville|tibia|f[ée]mur|hanche|genou|jambe/i.test(contextFull);
-                        const injuryIsMembreSuperieur = /avant.?bras|coude|poignet|radius|cubitus|hum[ée]rus|main|doigt|[ée]paule|bras/i.test(injury.name.toLowerCase());
-                        const injuryIsMembreInferieur = /m[ée]tatars|pied|orteil|cheville|tibia|f[ée]mur|hanche|genou|jambe/i.test(injury.name.toLowerCase());
+                    // 🆕 V3.3.268: Word-overlap scoring between sequella name and injury name
+                    // This ensures entries sharing key medical terms with the sequella score higher
+                    {
+                        const seqWords = seqNameLower.split(/[\s\/\-\(\),]+/).filter(w => w.length > 2);
+                        const injWords = injuryNameLower.split(/[\s\/\-\(\),]+/).filter(w => w.length > 2);
+                        const stopWords = new Set(['avec', 'sans', 'dans', 'pour', 'des', 'les', 'une', 'par', 'sur', 'main', 'non', 'plus', 'tout', 'très', 'qui', 'que']);
+                        const seqSignificant = seqWords.filter(w => !stopWords.has(w));
+                        const injSignificant = injWords.filter(w => !stopWords.has(w));
+                        const overlap = seqSignificant.filter(w => injSignificant.some(iw => {
+                            // Exact match always counts
+                            if (iw === w) return true;
+                            // Substring matching only for words ≥ 5 chars (avoid "aide" in "raideur" etc.)
+                            if (w.length >= 5 && iw.length >= 5) return iw.includes(w) || w.includes(iw);
+                            return false;
+                        }));
+                        if (overlap.length > 0) {
+                            // Score proportional to overlap significance
+                            const overlapRatio = overlap.length / Math.max(seqSignificant.length, 1);
+                            baseScore += Math.round(overlapRatio * 20); // Up to +20 for perfect overlap
+                        }
+                    }
+                    
+                    // 🆕 V3.3.268: REQUIRE minimum base content match before considering this entry
+                    // Pure anatomical bonus alone should NEVER qualify an entry
+                    // A single word overlap (baseScore=3) is too weak — require at least searchTerm match (5) or 2+ word overlaps
+                    if (baseScore < 5) continue;
+                    
+                    score = baseScore;
+                    
+                    // 🔥 V3.3.268: FILTRAGE ANATOMIQUE GÉNÉRAL (membre supérieur vs inférieur)
+                    // Appliqué à TOUTES les entrées, pas seulement "cal vicieux"
+                    {
+                        const contextFull = (context + ' ' + fullText + ' ' + sequellaName).toLowerCase();
+                        const ctxIsMS = /avant.?bras|coude|poignet|radius|cubitus|hum[ée]rus|main\b|doigt|[ée]paule|\bbras\b|pr[ée]hension|m[ée]tacarpe/i.test(contextFull);
+                        const ctxIsMI = /m[ée]tatars|pied|orteil|cheville|tibia|fibula|p[ée]ron[ée]|f[ée]mur|hanche|genou|jambe|plateau.*tibi|rotule|patella|cuisse|boiterie/i.test(contextFull);
+                        const injIsMS = /avant.?bras|coude|poignet|radius|cubitus|hum[ée]rus|main\b|doigt|[ée]paule|\bbras\b|pr[ée]hension|m[ée]tacarpe/i.test(injury.name.toLowerCase());
+                        const injIsMI = /m[ée]tatars|pied|orteil|cheville|tibia|fibula|p[ée]ron[ée]|f[ée]mur|hanche|genou|jambe|plateau.*tibi|rotule|patella|cuisse/i.test(injury.name.toLowerCase());
                         
-                        console.log(`🔍 [V3.3.181] Cal vicieux détecté: "${injury.name}" | Context: MI=${isMembreInferieur} MS=${isMembreSuperieur} | Injury: MI=${injuryIsMembreInferieur} MS=${injuryIsMembreSuperieur}`);
-                        
-                        // Pénaliser si anatomie incompatible
-                        if ((isMembreSuperieur && injuryIsMembreInferieur) || (isMembreInferieur && injuryIsMembreSuperieur)) {
-                            score -= 100; // ÉLIMINER ce match
-                            console.log(`🚫 [V3.3.181] ÉLIMINÉ: "${injury.name}" (anatomie incompatible)`);
+                        // Pénaliser si anatomie incompatible (MS context → MI injury, ou MI context → MS injury)
+                        if ((ctxIsMS && !ctxIsMI && injIsMI) || (ctxIsMI && !ctxIsMS && injIsMS)) {
+                            score -= 100; // ÉLIMINER ce match cross-région
                         }
                         // Bonus si anatomie compatible
-                        else if ((isMembreSuperieur && injuryIsMembreSuperieur) || (isMembreInferieur && injuryIsMembreInferieur)) {
-                            score += 30; // FAVORISER le bon membre
-                            console.log(`✅ [V3.3.181] FAVORISÉ: "${injury.name}" (anatomie compatible)`);
+                        else if ((ctxIsMS && injIsMS) || (ctxIsMI && injIsMI)) {
+                            score += 15; // FAVORISER le bon membre
                         }
                     }
                     
@@ -16221,7 +16265,7 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
                         }
                     }
                     
-                    if (score > 0 && (!bestMatch || score > bestMatch.score)) {
+                    if (score >= 5 && (!bestMatch || score > bestMatch.score)) {
                         bestMatch = {
                             name: injury.name,
                             rate: Array.isArray(injury.rate) ? injury.rate : [injury.rate, injury.rate],
