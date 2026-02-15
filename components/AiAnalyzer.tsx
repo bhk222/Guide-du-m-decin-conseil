@@ -13381,7 +13381,7 @@ const extractIndividualLesions = (text: string): string[] => {
  * @param isExactMatch - Si true, cherche une correspondance exacte par nom (pour résoudre ambiguïté)
  */
 export const localExpertAnalysis = (text: string, externalKeywords?: string[], isExactMatch: boolean = false): LocalAnalysisResult => {
-    console.log('🔧 localExpertAnalysis V3.3.268 - fix findInBareme cross-region matching, anatomical filter, word-overlap scoring, baseScore threshold');
+    console.log('🔧 localExpertAnalysis V3.3.270 - fix métatarse matching, boiterie légère distinction, auxiliary sequelae skip, stopWords expansion');
 
     // 🔴 V3.3.162: NETTOYAGE TEXTE - Supprime caractères invisibles (zero-width space, etc.)
     // Ces caractères peuvent casser les regex et empêcher la détection
@@ -15796,11 +15796,16 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
     }
     
     // Boiterie / Marche avec canne / Aide technique
+    // 🔧 V3.3.270: Distinguer boiterie légère vs aide technique (canne/béquille)
     if (/boiterie|boite|claudication|marche.*difficile|marche.*avec.*canne|canne.*permanente|aide.*technique.*marche|b[ée]quille/i.test(text)) {
+        const hasAideTechnique = /canne|b[ée]quille|tuteur|d[\u00e9e]ambulateur|aide.*technique/i.test(text);
+        const isLegere = /l[ée]g[\u00e8e]re.*boiterie|boiterie.*l[ée]g[\u00e8e]re|discr[\u00e8e]te.*boiterie|boiterie.*discr[\u00e8e]te|l[ée]ger.*boitement/i.test(text);
         detectedSequelae.push({
-            name: 'Boiterie / Marche avec aide technique (canne, béquille)',
-            keywords: ['boiterie', 'claudication', 'canne', 'aide technique'],
-            context: text.match(/(?:boiterie|marche.*(?:avec.*canne|difficile)|canne)[^.;]*/i)?.[0] || ''
+            name: hasAideTechnique ? 'Boiterie / Marche avec aide technique (canne, béquille)' 
+                 : isLegere ? 'Boiterie légère' 
+                 : 'Boiterie',
+            keywords: ['boiterie', 'claudication', ...(hasAideTechnique ? ['canne', 'aide technique'] : [])],
+            context: text.match(/(?:boiterie|marche.*(?:avec.*canne|difficile)|canne|b[ée]quille)[^.;]*/i)?.[0] || ''
         });
     }
     
@@ -16211,7 +16216,9 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
                     {
                         const seqWords = seqNameLower.split(/[\s\/\-\(\),]+/).filter(w => w.length > 2);
                         const injWords = injuryNameLower.split(/[\s\/\-\(\),]+/).filter(w => w.length > 2);
-                        const stopWords = new Set(['avec', 'sans', 'dans', 'pour', 'des', 'les', 'une', 'par', 'sur', 'main', 'non', 'plus', 'tout', 'très', 'qui', 'que']);
+                        // 🔧 V3.3.270: Ajout mots génériques médicaux/anatomiques trop communs
+                        // Ces mots apparaissent dans des centaines d'entrées et ne sont pas discriminants
+                        const stopWords = new Set(['avec', 'sans', 'dans', 'pour', 'des', 'les', 'une', 'par', 'sur', 'main', 'non', 'plus', 'tout', 'très', 'qui', 'que', 'fracture', 'limitation', 'fonctionnelle', 'consolidation', 'conséquences', 'douleurs', 'douleur', 'marche', 'consolidée', 'traumatique', 'pied', 'phalange', 'phalanges', 'doigt', 'doigts', 'membre', 'lésion', 'atteinte', 'perte', 'séquelles', 'forme', 'type', 'post', 'ablation', 'amputation']);
                         const seqSignificant = seqWords.filter(w => !stopWords.has(w));
                         const injSignificant = injWords.filter(w => !stopWords.has(w));
                         const overlap = seqSignificant.filter(w => injSignificant.some(iw => {
@@ -16919,7 +16926,18 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
                 systemGroups[system].sequelae.push(seq);
                 
                 // 🆕 V3.3.159: ENRICHIR AVEC RÉFÉRENCE BARÈME OFFICIEL
-                const baremeEntry = findInBareme(seq.name, seq.context, text);
+                // 🔧 V3.3.270: SKIP findInBareme for auxiliary/symptom sequelae
+                // These are signs/symptoms that modify the main injury rate, not independent injuries
+                const isAuxiliarySequella = /^(?:boiterie|douleur|limitation fonctionnelle|[œo]ed[èe]me|algies?)/i.test(seq.name);
+                
+                // 🔧 V3.3.270: Auxiliary sequelae should NOT independently inflate system rate
+                // They are already factored into the main injury rate as modifiers
+                if (isAuxiliarySequella && systemGroups[system] && systemGroups[system].rate > 0) {
+                    // System already has a rate from a main injury — auxiliary sequella only adds context
+                    continue; // Skip rate override and findInBareme
+                }
+                
+                const baremeEntry = isAuxiliarySequella ? null : findInBareme(seq.name, seq.context, text);
                 if (baremeEntry) {
                     console.log(`📚 TROUVÉ DANS BARÈME: "${seq.name}" → "${baremeEntry.name}" (${baremeEntry.rate[0]}-${baremeEntry.rate[1]}%)`);
                     
