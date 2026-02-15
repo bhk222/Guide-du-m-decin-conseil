@@ -32,6 +32,40 @@ interface ConversationContext {
 const normalizeText = (text: string): string => 
   text.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[-']/g, ' ');
 
+// Simple Levenshtein distance for typo tolerance
+const levenshtein = (a: string, b: string): number => {
+  if (a.length === 0) return b.length;
+  if (b.length === 0) return a.length;
+  const matrix: number[][] = [];
+  for (let i = 0; i <= b.length; i++) matrix[i] = [i];
+  for (let j = 0; j <= a.length; j++) matrix[0][j] = j;
+  for (let i = 1; i <= b.length; i++) {
+    for (let j = 1; j <= a.length; j++) {
+      matrix[i][j] = Math.min(
+        matrix[i - 1][j] + 1,
+        matrix[i][j - 1] + 1,
+        matrix[i - 1][j - 1] + (b[i - 1] === a[j - 1] ? 0 : 1)
+      );
+    }
+  }
+  return matrix[b.length][a.length];
+};
+
+// Fuzzy match: returns true if distance <= threshold (proportional to word length)
+const fuzzyMatch = (word: string, target: string): boolean => {
+  if (word === target) return true;
+  if (word.length < 3 || target.length < 3) return word === target;
+  const maxDist = target.length <= 4 ? 1 : target.length <= 7 ? 2 : 3;
+  return levenshtein(word, target) <= maxDist;
+};
+
+// Check if a query word fuzzy-matches any word in a phrase
+const fuzzyIncludes = (query: string, keyword: string): boolean => {
+  const queryWords = query.split(/\s+/);
+  const kwWords = keyword.split(/\s+/);
+  return kwWords.every(kw => queryWords.some(qw => fuzzyMatch(qw, kw)));
+};
+
 // Expanded synonym map for fuzzy matching — 45+ groups
 const SYNONYMS: Record<string, string[]> = {
   'accident': ['at', 'sinistre', 'evenement', 'accidente', 'incident'],
@@ -285,6 +319,31 @@ const INTENTS: Record<string, IntentDef> = {
   definition_accident_travail: {
     keywords: ['definition', 'accident', 'travail'],
     synonymKeywords: ['accident travail', 'at', 'sinistre professionnel'],
+    summary: `## 📖 Définition de l'accident du travail (Art. 6, Loi 83-13)
+
+### Définition légale :
+Est considéré comme accident du travail, **tout accident** ayant entraîné une lésion corporelle, survenu :
+- Par le fait ou à l'occasion du travail
+- À tout salarié ou assimilé
+
+### Éléments constitutifs :
+| Élément | Description |
+|---------|-------------|
+| **Fait accidentel** | Événement soudain, daté, imprévu |
+| **Lésion corporelle** | Blessure physique ou psychique |
+| **Lien avec le travail** | Survenu au temps et au lieu du travail |
+| **Subordination** | Sous l'autorité de l'employeur |
+
+### Présomption d'imputabilité :
+Tout accident survenu **au temps et au lieu du travail** est **présumé** être un AT. C'est à la CNAS de prouver le contraire.
+
+### Ce qui est couvert :
+- Accidents dans les locaux de l'entreprise
+- Accidents pendant les pauses sur le lieu de travail
+- Accidents lors de missions professionnelles
+- Accidents de trajet (domicile ↔ travail)
+
+> 💡 La notion d'AT est **large** : même un malaise cardiaque survenu au travail bénéficie de la présomption d'imputabilité.`,
     law: 'loi_83_13', article: 6,
     relatedQuestions: ["Qu'est-ce qu'un accident de trajet ?", "Délai de déclaration d'un accident ?", "Obligations de l'employeur en cas d'accident ?"],
     category: 'general'
@@ -292,6 +351,32 @@ const INTENTS: Record<string, IntentDef> = {
   accident_trajet: {
     keywords: ['accident', 'trajet'],
     synonymKeywords: ['trajet domicile', 'accident route', 'parcours travail'],
+    summary: `## 🚗 Accident de trajet (Art. 12, Loi 83-13)
+
+### Définition :
+Est considéré comme accident de trajet, l'accident survenu sur le **parcours normal** effectué par le travailleur entre :
+- Son **domicile** et son **lieu de travail**
+- Son lieu de travail et le lieu habituel de ses **repas**
+
+### Conditions :
+- Le trajet doit être le **parcours normal** (pas de détour personnel important)
+- L'accident doit survenir dans un **délai raisonnable** (horaires compatibles)
+- Le lien avec le travail doit exister (aller ou retour)
+
+### Détours acceptés :
+- Déposer un enfant à l'école sur le trajet
+- Faire un covoiturage habituel
+- Détour lié à un besoin essentiel de la vie courante
+
+### Détours non acceptés :
+- Course personnelle importante hors trajet
+- Visite personnelle prolongée
+- Itinéraire totalement différent sans justification
+
+### Preuve :
+L'assuré doit établir que l'accident est survenu **sur le parcours protégé** et dans un **créneau horaire compatible**.
+
+> 💡 Le trajet protégé commence à la **sortie du domicile** et se termine à l'**entrée du lieu de travail** (et inversement).`,
     law: 'loi_83_13', article: 12,
     relatedQuestions: ["Quelle est la définition de l'accident du travail ?", "L'itinéraire dérouté est-il couvert ?"],
     category: 'general'
@@ -308,7 +393,7 @@ Chaque tableau précise :
 
 **Base légale** : Articles 63 à 72 de la Loi 83-13.
 
-La déclaration est faite par la victime ou ses ayants droit dans un **délai de 15 jours** après la première constatation médicale (Art. 71, Loi 83-13).`,
+La déclaration est faite par l'assuré ou ses ayants droit dans un **délai de 15 jours** après la première constatation médicale (Art. 71, Loi 83-13).`,
     relatedQuestions: ["Comment déclarer une maladie professionnelle ?", "Quels sont les tableaux de maladies professionnelles ?", "Quel est le délai de prise en charge ?"],
     category: 'general'
   },
@@ -378,9 +463,9 @@ La déclaration est faite par la victime ou ses ayants droit dans un **délai de
 Le médecin traitant établit **deux certificats essentiels** :
 
 ### 📋 1. Le Certificat Médical Initial (CMI)
-- Établi par le médecin traitant librement choisi par la victime
+- Établi par le médecin traitant librement choisi par l'assuré
 - Doit décrire en détail :
-  - L'état de la victime et la nature des lésions
+  - L'état de l'assuré et la nature des lésions
   - Le lien possible avec l'accident
   - La durée probable de l'incapacité de travail
 - **Réf** : Art. 22-23 de la Loi 83-13
@@ -392,7 +477,7 @@ Le médecin traitant établit **deux certificats essentiels** :
 - **Réf** : Art. 22, 24 de la Loi 83-13
 
 > ⚠️ **Attention** : Le CMI doit être descriptif et objectif. Éviter les formulations vagues comme "suite à un accident". Décrire les lésions constatées cliniquement.`,
-    relatedQuestions: ["Qu'est-ce que la consolidation ?", "La victime peut-elle choisir son médecin ?", "Quel est le rôle du médecin conseil ?"],
+    relatedQuestions: ["Qu'est-ce que la consolidation ?", "L'assuré peut-il choisir son médecin ?", "Quel est le rôle du médecin conseil ?"],
     category: 'medecin'
   },
   role_medecin_conseil: {
@@ -412,12 +497,12 @@ Fixer le taux d'incapacité permanente après consolidation, en se basant sur le
 Déterminer la date à laquelle les lésions sont stabilisées et ne sont plus susceptibles d'amélioration thérapeutique.
 
 ### 4. Contrôle des soins
-Vérifier l'adéquation entre les soins prescrits et l'état de santé de la victime, y compris les arrêts prolongés.
+Vérifier l'adéquation entre les soins prescrits et l'état de santé de l'assuré, y compris les arrêts prolongés.
 
 ### 5. Expertise médicale
 Représenter la CNAS dans les procédures d'expertise en cas de litige (Art. 22, Loi 08-08). Ses conclusions font autorité, sauf contre-expertise.
 
-> 💡 **En pratique** : Le médecin conseil n'est pas le médecin traitant de la victime. Il a un rôle de **contrôle et d'évaluation**, pas de soin.`,
+> 💡 **En pratique** : Le médecin conseil n'est pas le médecin traitant de l'assuré. Il a un rôle de **contrôle et d'évaluation**, pas de soin.`,
     relatedQuestions: ["Comment est fixé le taux d'incapacité ?", "Procédure d'expertise médicale ?", "Comment contester l'avis du médecin conseil ?"],
     category: 'medecin'
   },
@@ -459,7 +544,7 @@ Le taux d'incapacité est fixé par le médecin conseil en tenant compte de :
 
 ### Les éléments d'évaluation :
 1. **Nature de l'infirmité** : type et gravité des lésions
-2. **État général** de la victime (âge, état antérieur)
+2. **État général** de l'assuré (âge, état antérieur)
 3. **Aptitudes et qualification professionnelle** : impact sur la vie professionnelle
 4. **Barème indicatif** : guide des taux par type de séquelle
 
@@ -484,7 +569,7 @@ Le taux d'incapacité est fixé par le médecin conseil en tenant compte de :
     synonymKeywords: ['antecedent', 'preexistant', 'capacite restante', 'art 12', 'gabrielli', 'incapacite preexistante'],
     summary: `## ⚕️ L'état antérieur — Formule de Gabrielli (Art. 10 & Art. 14, Loi 83-13)
 
-L'état antérieur désigne toute pathologie ou infirmité **préexistante** à l'accident du travail. La **formule de Gabrielli** (ou méthode de la capacité restante) est utilisée en droit du dommage corporel pour évaluer l'IPP lorsqu'une victime présente un état antérieur, afin de **ne réparer que la part imputable à l'accident**.
+L'état antérieur désigne toute pathologie ou infirmité **préexistante** à l'accident du travail. La **formule de Gabrielli** (ou méthode de la capacité restante) est utilisée en droit du dommage corporel pour évaluer l'IPP lorsqu'un assuré présente un état antérieur, afin de **ne réparer que la part imputable à l'accident**.
 
 ### Le principe (Art. 10) :
 > « Sont considérés comme accidents du travail les accidents survenus du fait ou à l'occasion du travail, **quelle qu'en soit la cause**. »
@@ -515,7 +600,7 @@ Le taux de la nouvelle lésion (**B**) est appliqué à la **capacité restante*
 | **Objectif** | Isoler la part imputable | Cumuler les IPP multiples |
 | **Formule** | Identique | Identique |
 
-> ⚠️ L'état antérieur ne doit pas pénaliser la victime : la prise en charge couvre **l'ensemble** des conséquences de l'accident, même si elles sont aggravées par l'état préexistant.
+> ⚠️ L'état antérieur ne doit pas pénaliser l'assuré : la prise en charge couvre **l'ensemble** des conséquences de l'accident, même si elles sont aggravées par l'état préexistant.
 
 > 💡 **En pratique** : Le médecin conseil doit d'abord déterminer le taux de l'état antérieur (A), puis évaluer la nouvelle lésion au barème (B), et enfin appliquer la formule de Gabrielli pour obtenir l'IPP globale.`,
     relatedQuestions: ["Comment est fixé le taux d'incapacité ?", "Comment fonctionne la formule de Balthazard ?", "Calcul de la capacité restante ?", "Procédure de révision d'un taux ?"],
@@ -532,17 +617,17 @@ Le taux de la nouvelle lésion (**B**) est appliqué à la **capacité restante*
 | Qui | Délai | Comment |
 |-----|-------|---------|
 | **Employeur** | **48 heures** | Déclaration à la CNAS |
-| **Victime** (à défaut) | **4 ans** maximum | Si l'employeur n'a pas déclaré |
+| **Assuré** (à défaut) | **4 ans** maximum | Si l'employeur n'a pas déclaré |
 
 ### Maladie professionnelle :
 | Qui | Délai |
 |-----|-------|
-| **Victime** ou ayants droit | **15 jours** après la 1re constatation médicale (Art. 71) |
+| **Assuré** ou ayants droit | **15 jours** après la 1re constatation médicale (Art. 71) |
 
 ### Rechute / Aggravation :
 | Qui | Délai |
 |-----|-------|
-| **Victime** | Certificat médical de rechute à la CNAS |
+| **Assuré** | Certificat médical de rechute à la CNAS |
 
 > ⚠️ **Important** : La journée de l'accident est entièrement à la charge de l'employeur (Art. 35, Loi 83-13). Les indemnités journalières de la CNAS commencent le lendemain.`,
     relatedQuestions: ["Obligations de l'employeur en cas d'accident ?", "Que faire si l'employeur refuse de déclarer ?", "Comment déclarer une maladie professionnelle ?"],
@@ -551,6 +636,33 @@ Le taux de la nouvelle lésion (**B**) est appliqué à la **capacité restante*
   declaration_maladie_pro: {
     keywords: ['declaration', 'maladie'],
     synonymKeywords: ['declarer mp', 'declaration maladie professionnelle'],
+    summary: `## 📋 Déclaration d'une maladie professionnelle (Art. 71-73, Loi 83-13)
+
+### Qui déclare ?
+La déclaration est faite par le **travailleur** (ou ses ayants droit) auprès de la CNAS.
+
+### Délai :
+- **15 jours** après la première constatation médicale de la maladie
+- Ce délai court à partir de la date du **certificat médical initial** établissant le diagnostic
+
+### Pièces à fournir :
+1. **Certificat médical** de première constatation
+2. **Attestation de travail** ou justificatif d'emploi
+3. **Déclaration d'exposition** aux risques (description du poste)
+4. Tout document utile (analyses, imagerie, etc.)
+
+### Conditions de reconnaissance :
+La maladie doit :
+- Figurer dans un **tableau de maladies professionnelles** officiel
+- Être constatée dans le **délai de prise en charge** prévu par le tableau
+- Être liée à des **travaux** figurant dans la liste indicative du tableau
+
+### Si la maladie ne figure dans aucun tableau :
+- Procédure spéciale devant une **commission médicale**
+- Preuve du lien **direct et essentiel** avec le travail
+- Plus long et plus difficile
+
+> 💡 L'employeur a aussi l'obligation d'informer la CNAS de toute maladie à caractère professionnel constatée dans l'entreprise.`,
     law: 'loi_83_13', article: 71,
     relatedQuestions: ["Qu'est-ce qu'une maladie professionnelle ?", "Quel est le délai de prise en charge ?", "Quels sont les tableaux MP ?"],
     category: 'procedure'
@@ -560,10 +672,10 @@ Le taux de la nouvelle lésion (**B**) est appliqué à la **capacité restante*
     synonymKeywords: ['employeur pas declare', 'refus declaration', 'patron refuse'],
     summary: `## 🚫 Employeur refuse de déclarer ? (Art. 14, Loi 83-13)
 
-Si l'employeur refuse ou omet de déclarer l'accident, la victime a des **droits protecteurs** :
+Si l'employeur refuse ou omet de déclarer l'accident, l'assuré a des **droits protecteurs** :
 
-### Solution 1 : Déclaration par la victime
-La victime ou ses ayants droit peuvent déclarer directement l'accident à la CNAS, dans un **délai maximum de 4 ans** à compter de la date de l'accident (Art. 14, Loi 83-13).
+### Solution 1 : Déclaration par l'assuré
+L'assuré ou ses ayants droit peuvent déclarer directement l'accident à la CNAS, dans un **délai maximum de 4 ans** à compter de la date de l'accident (Art. 14, Loi 83-13).
 
 ### Solution 2 : Constitution de preuves
 - Certificat médical initial mentionnant les circonstances
@@ -573,7 +685,7 @@ La victime ou ses ayants droit peuvent déclarer directement l'accident à la CN
 ### Sanctions pour l'employeur :
 L'employeur s'expose à des **sanctions pénales** pour non-déclaration (Art. 76 et suivants, Loi 83-13).
 
-> 💡 **Conseil pratique** : Même en cas de réticence de l'employeur, la victime doit impérativement consulter un médecin et obtenir un CMI, puis se rendre à la CNAS avec ce certificat pour déposer sa propre déclaration.`,
+> 💡 **Conseil pratique** : Même en cas de réticence de l'employeur, l'assuré doit impérativement consulter un médecin et obtenir un CMI, puis se rendre à la CNAS avec ce certificat pour déposer sa propre déclaration.`,
     relatedQuestions: ["Délai de déclaration d'un accident ?", "Obligations de l'employeur ?", "Comment obtenir la feuille d'accident ?"],
     category: 'procedure'
   },
@@ -585,14 +697,14 @@ L'employeur s'expose à des **sanctions pénales** pour non-déclaration (Art. 7
 | Obligation | Détail | Article |
 |-----------|--------|---------|
 | **Déclaration** | Déclarer l'accident à la CNAS dans les **48h** | Art. 13 |
-| **Feuille d'accident** | Délivrer à la victime la feuille d'accident (gratuité des soins) | Art. 15 |
+| **Feuille d'accident** | Délivrer à l'assuré la feuille d'accident (gratuité des soins) | Art. 15 |
 | **Salaire jour J** | Payer intégralement la journée de travail de l'accident | Art. 35 |
 | **Premiers soins** | Fournir les premiers secours sur le lieu de travail | Art. 16 |
-| **Transport** | Assurer le transport de la victime vers le service médical le plus proche | Art. 16 |
+| **Transport** | Assurer le transport de l'assuré vers le service médical le plus proche | Art. 16 |
 | **Prévention** | Mettre en œuvre les mesures de prévention nécessaires | Art. 73+ |
 | **Cotisations** | Verser les cotisations AT/MP à la CNAS | Loi 83-14 |
 
-> ⚠️ En cas de **faute inexcusable** de l'employeur, la victime a droit à une majoration de sa rente (Art. 45, Loi 83-15).`,
+> ⚠️ En cas de **faute inexcusable** de l'employeur, l'assuré a droit à une majoration de sa rente (Art. 45, Loi 83-15).`,
     relatedQuestions: ["Délai de déclaration d'un accident ?", "Qu'est-ce que la faute inexcusable ?", "Que faire si l'employeur refuse de déclarer ?"],
     category: 'procedure'
   },
@@ -650,7 +762,7 @@ Versement unique calculé sur la base du salaire annuel et du taux.
 | 100% | 100% | (50/2) + (50×1.5) = 25% + 75% |
 
 ### Majoration pour tierce personne :
-Si la victime nécessite l'aide d'une tierce personne, la rente est majorée de **40%** (Art. 46).
+Si l'assuré nécessite l'aide d'une tierce personne, la rente est majorée de **40%** (Art. 46).
 
 > 💡 La rente AT/MP est **cumulable** avec un salaire, contrairement à la pension d'invalidité.`,
     relatedQuestions: ["Comment est fixé le taux d'incapacité ?", "Conditions pour tierce personne ?", "Peut-on cumuler rente et salaire ?"],
@@ -675,7 +787,7 @@ Ce sont deux objets juridiques différents → pas d'incompatibilité.
     summary: `## 🤝 Majoration pour tierce personne (Art. 46, Loi 83-13)
 
 ### Conditions :
-La victime doit, suite à l'accident du travail, être dans l'**impossibilité d'accomplir les actes ordinaires de la vie** et nécessiter l'assistance **constante** d'une tierce personne.
+L'assuré doit, suite à l'accident du travail, être dans l'**impossibilité d'accomplir les actes ordinaires de la vie** et nécessiter l'assistance **constante** d'une tierce personne.
 
 ### Montant :
 Majoration de **40%** de la rente d'incapacité, avec un minimum fixé réglementairement.
@@ -709,28 +821,28 @@ Les prestations en nature couvrent à **100%** (pas de ticket modérateur) :
 | 🏗️ **Réadaptation professionnelle** | Formation pour reconversion si nécessaire |
 
 > ⚠️ Le taux de remboursement est de **100%** pour les AT/MP, contre **80%** pour la maladie ordinaire. C'est un avantage majeur à ne pas négliger dans la qualification de l'accident.`,
-    relatedQuestions: ["Les frais de transport sont-ils pris en charge ?", "Les soins à l'étranger sont-ils remboursés ?", "La victime peut-elle choisir son médecin ?"],
+    relatedQuestions: ["Les frais de transport sont-ils pris en charge ?", "Les soins à l'étranger sont-ils remboursés ?", "L'assuré peut-il choisir son médecin ?"],
     category: 'droits'
   },
   frais_transport: {
     keywords: ['frais', 'transport'],
     synonymKeywords: ['remboursement transport', 'ambulance', 'deplacement medical'],
-    text: `Les **frais de transport** de la victime sont pris en charge par la sécurité sociale pour :
+    text: `Les **frais de transport** de l'assuré sont pris en charge par la sécurité sociale pour :
 
 - 🚑 **Transport en ambulance** si l'état l'exige
 - 📋 **Convocations** pour contrôle médical ou expertise CNAS
 - 🏥 **Soins éloignés** du domicile (établissement spécialisé)
 
-Les frais sont remboursés sur la base du **tarif le moins onéreux** compatible avec l'état de santé de la victime.
+Les frais sont remboursés sur la base du **tarif le moins onéreux** compatible avec l'état de santé de l'assuré.
 
 **Réf** : Art. 9, Loi 83-11 et Art. 85, Loi 83-13.`,
     relatedQuestions: ["Quelles sont les prestations en nature ?", "Les soins à l'étranger sont-ils pris en charge ?"],
     category: 'droits'
   },
   choix_medecin: {
-    keywords: ['victime', 'choisir', 'medecin'],
-    synonymKeywords: ['libre choix medecin', 'quel medecin', 'choix praticien'],
-    text: `Oui, la victime d'un accident du travail a le **droit de choisir librement** le praticien qui établira :
+    keywords: ['assure', 'choisir', 'medecin'],
+    synonymKeywords: ['choisir son docteur', 'libre choix praticien', 'libre choix medecin', 'quel medecin', 'choix praticien'],
+    text: `Oui, l'assuré victime d'un accident du travail a le **droit de choisir librement** le praticien qui établira :
 - Le **certificat médical initial** (CMI)
 - Le **certificat médical final** (guérison ou consolidation)
 
@@ -740,17 +852,17 @@ Ce droit au libre choix est garanti par l'**Article 22 de la Loi 83-13**.
     relatedQuestions: ["Contenu du certificat médical initial ?", "Quel est le rôle du médecin conseil ?"],
     category: 'droits'
   },
-  droits_deces_victime: {
-    keywords: ['deces', 'victime'],
-    synonymKeywords: ['mort travailleur', 'droit conjoint', 'ayants droit', 'rente deces'],
+  droits_deces_assure: {
+    keywords: ['deces', 'assure'],
+    synonymKeywords: ['mort assure', 'deces suite accident', 'ayants droit deces', 'victime decedee', 'mort travailleur', 'droit conjoint', 'rente deces'],
     summary: `## ⚰️ Droits en cas de décès (Art. 52-55, Loi 83-13)
 
-Si la victime décède suite à un AT/MP, les **ayants droit** bénéficient de :
+Si l'assuré décède suite à un AT/MP, les **ayants droit** bénéficient de :
 
 ### Rentes aux survivants :
 | Bénéficiaire | Taux de la rente |
 |-------------|------------------|
-| **Conjoint** | 75% du salaire de référence |
+| **Conjoint** | 30% du salaire de référence |
 | **Chaque enfant** à charge | 15% (ou 30% si orphelin de père et mère) |
 | **Ascendants** à charge | 10% chacun |
 
@@ -817,7 +929,7 @@ Le médecin conseil évalue ces séquelles **au même titre** que les séquelles
     synonymKeywords: ['imprudence victime', 'negligence victime', 'responsabilite victime'],
     text: `En AT/MP, le régime est basé sur le **risque professionnel**, pas sur la faute :
 
-✅ **Principe** : L'indemnisation est due **même si** l'accident est causé par une imprudence ou une négligence de la victime.
+✅ **Principe** : L'indemnisation est due **même si** l'accident est causé par une imprudence ou une négligence de l'assuré.
 
 ❌ **Seule exception** : La **faute intentionnelle** de la victime. Si elle est prouvée, elle peut supprimer le droit à réparation.
 
@@ -844,7 +956,7 @@ L'assuré formule une demande écrite, accompagnée d'un rapport de son médecin
 
 ### Étape 3 — Déroulement (Art. 25-26)
 - L'expert reçoit les 2 dossiers (médecin traitant + médecin conseil)
-- Il convoque la victime pour examen
+- Il convoque l'assuré pour examen
 - Rapport rendu dans les **15 jours**
 
 ### Étape 4 — Conclusion (Art. 19, 27)
@@ -861,6 +973,22 @@ Honoraires à la charge de la CNAS, sauf si la demande est manifestement infond�
   delai_expertise: {
     keywords: ['delai', 'expertise'],
     synonymKeywords: ['combien temps expertise', 'delai contester medical'],
+    summary: `## ⏱️ Délais de l'expertise médicale (Art. 20-27, Loi 08-08)
+
+### Délais clés :
+| Étape | Délai | Référence |
+|-------|-------|-----------|
+| **Demande d'expertise** | **15 jours** après notification | Art. 20 |
+| **Réponse de l'assuré** sur le choix de l'expert | **8 jours** | Art. 22 |
+| **Remise du rapport** par l'expert | **15 jours** après examen | Art. 26 |
+| **Notification** de la décision finale | **8 jours** | Art. 27 |
+
+### Important :
+- Le délai de 15 jours pour la demande est un **délai de forclusion** : passé ce délai, le droit à l'expertise est **perdu**
+- Le point de départ du délai est la **date de réception** de la notification (pas la date d'envoi)
+- En cas de force majeure justifiée, un dépassement peut être toléré
+
+> 💡 **Conseil** : Toujours envoyer la demande par **lettre recommandée avec accusé de réception** pour prouver le respect du délai.`,
     law: 'loi_08_08', article: 20,
     relatedQuestions: ["Procédure d'expertise médicale ?", "Honoraires du médecin expert ?"],
     category: 'recours'
@@ -868,6 +996,25 @@ Honoraires à la charge de la CNAS, sauf si la demande est manifestement infond�
   honoraires_expert: {
     keywords: ['honoraires', 'expert'],
     synonymKeywords: ['cout expertise', 'frais expert', 'payer expertise'],
+    summary: `## 💰 Honoraires de l'expert médical (Art. 29, Loi 08-08)
+
+### Principe :
+Les honoraires de l'expert médical sont à la charge de la **CNAS**.
+
+### Barème :
+- Les honoraires sont fixés par voie **réglementaire** (arrêté ministériel)
+- Ils varient selon la **nature** et la **complexité** de l'expertise
+- Incluent : consultation, rédaction du rapport, frais de déplacement éventuels
+
+### Exception :
+Si la demande d'expertise est jugée **manifestement infondée** ou **abusive**, les frais peuvent être mis à la charge du demandeur.
+
+### En pratique :
+- L'assuré n'a **rien à payer** dans la majorité des cas
+- L'expert est rémunéré directement par la CNAS
+- Aucune avance de frais n'est demandée à l'assuré
+
+> 💡 Le coût de l'expertise ne doit **jamais** dissuader l'assuré d'exercer son droit de contestation.`,
     law: 'loi_08_08', article: 29,
     relatedQuestions: ["Procédure d'expertise médicale ?"],
     category: 'recours'
@@ -918,12 +1065,55 @@ Avant tout recours judiciaire, l'assuré **DOIT** saisir les commissions de reco
   composition_commission_invalidite: {
     keywords: ['commission', 'invalidite'],
     synonymKeywords: ['composition commission', 'membres commission'],
+    summary: `## 🏛️ Commission d'invalidité de wilaya (Art. 32-35, Loi 08-08)
+
+### Composition :
+La commission d'invalidité de wilaya est composée de :
+- Un **médecin** désigné par le directeur de la santé (président)
+- Un **médecin conseil** de la CNAS
+- Un **médecin** désigné par l'assuré (ou son médecin traitant)
+- Un **représentant** de l'inspection du travail (voix consultative)
+
+### Compétences :
+- Statuer sur le **taux d'invalidité**
+- Se prononcer sur l'**aptitude au travail**
+- Déterminer la **catégorie d'invalidité** (1ère, 2ème ou 3ème)
+- Fixer la date d'effet de la pension
+
+### Fonctionnement :
+- Réunion à la demande de la CNAS ou de l'assuré
+- Délai de **30 jours** pour statuer
+- Décision notifiée à l'assuré dans les **8 jours**
+- Possibilité de recours devant le tribunal en cas de désaccord
+
+> 💡 L'assuré a le droit d'être accompagné par son médecin traitant lors de la commission.`,
     law: 'loi_08_08', article: 32,
     relatedQuestions: ["Catégories d'invalidité ?", "Délais de contestation ?"],
     category: 'recours'
   },
   composition_commission_locale: {
     keywords: ['commission', 'locale', 'recours'],
+    summary: `## 🏛️ Commission locale de recours préalable (Art. 6-9, Loi 08-08)
+
+### Composition :
+- Un **magistrat** (président) — désigné par le président du tribunal
+- Deux **représentants des travailleurs** — désignés par l'organisation syndicale la plus représentative
+- Deux **représentants des employeurs** — désignés par l'organisation patronale
+- Un **représentant** de l'organisme de sécurité sociale concerné
+
+### Compétences :
+Statue sur tous les litiges **non médicaux** entre l'assuré et la CNAS :
+- Refus de prise en charge
+- Contestation du montant des prestations
+- Immatriculation et affiliation
+- Cotisations et recouvrement
+
+### Fonctionnement :
+- Saisine dans les **15 jours** de la notification de la décision contestée
+- La commission statue dans un délai de **30 jours**
+- Décision susceptible de recours devant la commission **nationale**
+
+> 💡 La saisine de la commission locale est un **préalable obligatoire** à tout recours judiciaire.`,
     law: 'loi_08_08', article: 6,
     relatedQuestions: ["Le recours préalable est-il obligatoire ?"],
     category: 'recours'
@@ -943,9 +1133,9 @@ Avant tout recours judiciaire, l'assuré **DOIT** saisir les commissions de reco
 2. **Nécessité d'un traitement médical** actif (Art. 62) — médicaments, kiné, chirurgie
 
 ### Procédure :
-1. La victime consulte son médecin traitant
+1. L'assuré consulte son médecin traitant
 2. Le médecin établit un **certificat médical de rechute**
-3. La victime dépose le certificat à la CNAS
+3. L'assuré dépose le certificat à la CNAS
 4. Le médecin conseil examine la demande
 5. Décision : prise en charge ou rejet
 
@@ -1052,7 +1242,7 @@ Cela signifie qu'il faut prouver un **changement objectif** : clinique (réducti
 La faute inexcusable de l'employeur est caractérisée lorsqu'il avait ou aurait dû avoir conscience du danger auquel était exposé le travailleur et n'a pas pris les mesures nécessaires pour l'en préserver.
 
 ### Conséquences :
-- **Majoration de la rente** de la victime (jusqu'au double du montant initial)
+- **Majoration de la rente** de l'assuré (jusqu'au double du montant initial)
 - **Indemnisation complémentaire** des préjudices personnels (souffrances, esthétique, agrément)
 - La CNAS verse, puis se retourne contre l'employeur
 
@@ -1082,7 +1272,7 @@ Ce litige relève du **contentieux médical** (Loi 08-08).
 - Évolution encore possible des lésions
 - Intervention chirurgicale prévue
 
-> 💡 **Important** : Tant que la consolidation n'est pas actée, la victime continue de percevoir les indemnités journalières.`,
+> 💡 **Important** : Tant que la consolidation n'est pas actée, l'assuré continue de percevoir les indemnités journalières.`,
     relatedQuestions: ["Qu'est-ce que la consolidation ?", "Procédure d'expertise médicale ?", "Délais de contestation ?"],
     category: 'recours'
   },
@@ -1206,7 +1396,7 @@ En plus du taux **médical** (séquelles physiques), le médecin conseil peut ac
 ### Critères d'évaluation :
 | Critère | Exemple |
 |---------|---------|
-| **Âge de la victime** | Travailleur jeune vs proche de la retraite |
+| **Âge de l'assuré** | Travailleur jeune vs proche de la retraite |
 | **Profession exercée** | Manœuvre vs cadre bureau |
 | **Qualification** | Travailleur spécialisé sans possibilité de reconversion |
 | **Reclassement** | Possibilité ou non de changer de poste |
@@ -1229,7 +1419,7 @@ En plus du taux **médical** (séquelles physiques), le médecin conseil peut ac
     synonymKeywords: ['ipp moins 10', 'capital ipp', 'indemnite capital'],
     summary: `## 💵 Le capital forfaitaire (IPP < 10%)
 
-Lorsque le taux d'IPP est **inférieur à 10%**, la victime ne perçoit pas une rente mais un **capital forfaitaire unique**.
+Lorsque le taux d'IPP est **inférieur à 10%**, l'assuré ne perçoit pas une rente mais un **capital forfaitaire unique**.
 
 ### Caractéristiques :
 - Versement **unique** (pas trimestriel)
@@ -1414,7 +1604,7 @@ Les assurés atteints d'une ALD bénéficient d'un remboursement à **100%** (ex
 | Objet | Délai de prescription | Réf |
 |-------|----------------------|-----|
 | **Déclaration AT** (par employeur) | **48 heures** | Art. 13, Loi 83-13 |
-| **Déclaration AT** (par victime) | **4 ans** | Art. 14, Loi 83-13 |
+| **Déclaration AT** (par l'assuré) | **4 ans** | Art. 14, Loi 83-13 |
 | **Déclaration MP** | **15 jours** après 1re constatation | Art. 71, Loi 83-13 |
 | **Rechute/Révision** (0-2 ans) | Intervalle de **3 mois** | Art. 59, Loi 83-13 |
 | **Rechute/Révision** (après 2 ans) | Intervalle de **1 an** | Art. 59, Loi 83-13 |
@@ -1458,13 +1648,13 @@ Les assurés atteints d'une ALD bénéficient d'un remboursement à **100%** (ex
 
 ### 4. Faute inexcusable (Art. 45, Loi 83-15) :
 - La CNAS verse les prestations majorées puis se **retourne contre l'employeur** pour remboursement
-- Majoration de la rente de la victime  
+- Majoration de la rente de l'assuré  
 
 ### 5. Non-délivrance de la feuille d'accident :
-- Constitue une entrave aux droits de la victime
+- Constitue une entrave aux droits de l'assuré
 - Sanctions administratives et pénales
 
-> 💡 En pratique, la victime peut signaler ces manquements directement à la CNAS ou à l'inspection du travail.`,
+> 💡 En pratique, l'assuré peut signaler ces manquements directement à la CNAS ou à l'inspection du travail.`,
     relatedQuestions: ["Obligations de l'employeur ?", "Qu'est-ce que la faute inexcusable ?", "Que faire si l'employeur refuse de déclarer ?"],
     category: 'procedure'
   },
@@ -1474,10 +1664,10 @@ Les assurés atteints d'une ALD bénéficient d'un remboursement à **100%** (ex
     summary: `## 📄 La feuille d'accident (Art. 15, Loi 83-13)
 
 ### Qu'est-ce que c'est ?
-La **feuille d'accident** (ou triptyque) est un document officiel que l'employeur doit remettre à la victime. Elle permet la **prise en charge à 100%** des soins sans avance de frais.
+La **feuille d'accident** (ou triptyque) est un document officiel que l'employeur doit remettre à l'assuré. Elle permet la **prise en charge à 100%** des soins sans avance de frais.
 
 ### Contenu :
-- Identité de la victime
+- Identité de l'assuré
 - Date, heure et lieu de l'accident
 - Nature des lésions
 - Cachet et signature de l'employeur
@@ -1485,13 +1675,13 @@ La **feuille d'accident** (ou triptyque) est un document officiel que l'employeu
 ### Obligations :
 | Qui | Fait quoi |
 |-----|----------|
-| **Employeur** | Délivre la feuille à la victime **immédiatement** |
-| **Victime** | Présente la feuille au médecin/pharmacien/hôpital |
+| **Employeur** | Délivre la feuille à l'assuré **immédiatement** |
+| **Assuré** | Présente la feuille au médecin/pharmacien/hôpital |
 | **Praticien** | Remplit les cases "soins dispensés" |
 | **CNAS** | Prend en charge les frais à 100% |
 
 ### Si l'employeur ne la donne pas ?
-La victime peut :
+L'assuré peut :
 1. Se rendre à la CNAS avec son CMI pour obtenir un bon de prise en charge
 2. Signaler le manquement à l'inspection du travail
 3. Les frais avancés seront remboursés après régularisation
@@ -1535,7 +1725,7 @@ La victime peut :
     summary: `## 🏗️ Réadaptation professionnelle (Art. 34, Loi 83-13)
 
 ### Principe :
-Si la victime ne peut plus exercer son ancien métier en raison des séquelles, elle a droit à une **réadaptation professionnelle** financée par la CNAS.
+Si l'assuré ne peut plus exercer son ancien métier en raison des séquelles, il a droit à une **réadaptation professionnelle** financée par la CNAS.
 
 ### Ce que ça comprend :
 - **Formation** dans un nouveau métier compatible avec le handicap
@@ -1564,10 +1754,10 @@ Si la victime ne peut plus exercer son ancien métier en raison des séquelles, 
 
 ### Le lien entre AT/MP et retraite :
 
-La victime d'un AT/MP titulaire d'une rente d'incapacité peut bénéficier de conditions avantageuses pour la retraite :
+L'assuré victime d'un AT/MP titulaire d'une rente d'incapacité peut bénéficier de conditions avantageuses pour la retraite :
 
 ### 1. Retraite anticipée pour invalidité (Loi 83-12) :
-- Si la victime est reconnue **inapte au travail** par le médecin conseil
+- Si l'assuré est reconnu **inapte au travail** par le médecin conseil
 - Pas de condition d'âge minimum
 - Condition de cotisation : variable selon la date
 
@@ -1589,20 +1779,20 @@ La victime d'un AT/MP titulaire d'une rente d'incapacité peut bénéficier de c
     summary: `## ⚖️ Action récursoire contre le tiers (Art. 68-70, Loi 83-13)
 
 ### Situation :
-Lorsqu'un accident du travail est causé par un **tiers** (ex: accident de la route causé par un autre conducteur), la CNAS verse les prestations à la victime **puis** peut se retourner contre le tiers responsable.
+Lorsqu'un accident du travail est causé par un **tiers** (ex: accident de la route causé par un autre conducteur), la CNAS verse les prestations à l'assuré **puis** peut se retourner contre le tiers responsable.
 
 ### Le principe de subrogation (Art. 68) :
-> La CNAS est **subrogée** dans les droits de la victime contre le tiers responsable, à concurrence des prestations versées.
+> La CNAS est **subrogée** dans les droits de l'assuré contre le tiers responsable, à concurrence des prestations versées.
 
 ### En pratique :
 
 | Acteur | Action |
 |--------|--------|
-| **La CNAS** | Verse les prestations à la victime (IJ, rente, soins) |
+| **La CNAS** | Verse les prestations à l'assuré (IJ, rente, soins) |
 | **La CNAS** | Se retourne contre le tiers (ou son assureur) pour récupérer les sommes |
-| **La victime** | Peut agir **en complément** pour les préjudices non couverts par la SS |
+| **L'assuré** | Peut agir **en complément** pour les préjudices non couverts par la SS |
 
-### Ce que la victime peut encore réclamer au tiers :
+### Ce que l'assuré peut encore réclamer au tiers :
 - Préjudice moral
 - Préjudice esthétique  
 - Préjudice d'agrément
@@ -1622,7 +1812,7 @@ Le médecin conseil peut à tout moment vérifier que l'arrêt de travail est **
 
 ### Types de contrôle :
 1. **Contrôle sur pièces** : Étude du dossier médical
-2. **Convocation** : La victime est convoquée chez le médecin conseil
+2. **Convocation** : L'assuré est convoqué chez le médecin conseil
 3. **Contrôle à domicile** : Visite inopinée (heures de présence obligatoire)
 
 ### Conséquences d'un contrôle défavorable :
@@ -1633,7 +1823,7 @@ Le médecin conseil peut à tout moment vérifier que l'arrêt de travail est **
 | Activité rémunérée pendant l'arrêt | Suspension + remboursement des IJ |
 | Refus de soins | Suspension possible |
 
-### Obligations de la victime pendant l'arrêt :
+### Obligations de l'assuré pendant l'arrêt :
 - Être présent au domicile aux **heures de sortie autorisées**
 - Se présenter aux convocations du médecin conseil
 - Ne pas exercer d'activité rémunérée
@@ -1655,24 +1845,24 @@ En AT/MP, il existe une **présomption d'imputabilité** : tout accident survenu
 
 | | AT/MP | Droit commun |
 |---|------|-------------|
-| **Charge de la preuve** | La CNAS doit prouver que ce n'est **PAS** un AT | La victime doit prouver la faute |
-| **Présomption** | **Favorable** à la victime | Aucune présomption |
+| **Charge de la preuve** | La CNAS doit prouver que ce n'est **PAS** un AT | L'assuré doit prouver la faute |
+| **Présomption** | **Favorable** à l'assuré | Aucune présomption |
 | **Lien causal** | Présumé établi | À démontrer |
 
 ### Conditions de la présomption :
 1. L'accident est survenu **au temps du travail** (horaires)
 2. L'accident est survenu **au lieu du travail** (locaux de l'entreprise)
-3. La victime était **sous l'autorité** de l'employeur
+3. L'assuré était **sous l'autorité** de l'employeur
 
 ### Renversement de la présomption :
 La CNAS peut renverser la présomption si elle prouve que :
 - L'accident n'a **aucun lien** avec le travail
 - L'accident résulte d'une **cause totalement étrangère** au travail (ex: malaise dû à une maladie personnelle préexistante clairement identifiée)
 
-> ⚠️ **Important pour le médecin conseil** : En cas de doute, la présomption joue en faveur de la victime. Le médecin conseil doit avoir des éléments **solides** pour écarter l'imputabilité.
+> ⚠️ **Important pour le médecin conseil** : En cas de doute, la présomption joue en faveur de l'assuré. Le médecin conseil doit avoir des éléments **solides** pour écarter l'imputabilité.
 
 **Réf** : Art. 6, Loi 83-13 et jurisprudence constante.`,
-    relatedQuestions: ["Définition de l'accident du travail ?", "Prise en charge d'un état antérieur ?", "Une faute de la victime annule-t-elle ses droits ?"],
+    relatedQuestions: ["Définition de l'accident du travail ?", "Prise en charge d'un état antérieur ?", "Une faute de l'assuré annule-t-elle ses droits ?"],
     category: 'medecin'
   },
   conversion_pension_capital: {
@@ -1681,11 +1871,11 @@ La CNAS peut renverser la présomption si elle prouve que :
     summary: `## 💱 Conversion de la rente en capital (Art. 50-51, Loi 83-13)
 
 ### Le principe :
-La victime titulaire d'une rente d'IPP peut demander la **conversion partielle** de sa rente en capital.
+L'assuré titulaire d'une rente d'IPP peut demander la **conversion partielle** de sa rente en capital.
 
 ### Conditions :
 - Le taux d'IPP doit être **≤ 20%**
-- La demande est faite par la victime
+- La demande est faite par l'assuré
 - L'organisme statue sur la demande
 
 ### Limite :
@@ -1731,7 +1921,7 @@ Le médecin conseil vérifie :
 2. L'évolution objective sous traitement
 3. L'absence de prolongation injustifiée
 
-> 💡 La rééducation fait partie des **prestations en nature**. Elle est un droit de la victime, pas une faveur.`,
+> 💡 La rééducation fait partie des **prestations en nature**. Elle est un droit de l'assuré, pas une faveur.`,
     relatedQuestions: ["Quelles sont les prestations en nature ?", "Qu'est-ce que la consolidation ?"],
     category: 'droits'
   },
@@ -1752,7 +1942,7 @@ Le médecin conseil vérifie :
 ### L'expertise judiciaire :
 Si l'assuré n'est pas satisfait de l'expertise Loi 08-08, il peut saisir le tribunal qui ordonnera une **expertise judiciaire** :
 1. Le juge désigne un expert inscrit sur la liste des experts
-2. L'expert examine la victime **en présence** du médecin conseil et du médecin traitant
+2. L'expert examine l'assuré **en présence** du médecin conseil et du médecin traitant
 3. Chaque partie peut présenter ses observations
 4. L'expert rend un rapport détaillé
 5. Le tribunal tranche sur la base de ce rapport
@@ -2277,7 +2467,7 @@ La **Loi n° 83-15 du 2 juillet 1983** était l'ancien texte régissant le conte
 
 ### La faute inexcusable (Art. 45) — Disposition clé toujours applicable :
 - L'employeur qui avait ou devait avoir conscience du danger et n'a pas pris les mesures nécessaires
-- Conséquence : **majoration** de la rente de la victime
+- Conséquence : **majoration** de la rente de l'assuré
 - La CNAS verse puis se retourne contre l'employeur
 
 > 💡 Quand on parle de la Loi 83-15 aujourd'hui, c'est principalement pour la **faute inexcusable** (Art. 45). Pour le contentieux, il faut se référer à la **Loi 08-08**.`,
@@ -2425,7 +2615,7 @@ Le **capital décès** est une prestation versée en une seule fois aux ayants d
 | **Total maximum** | **85%** du salaire annuel |
 
 > ⚠️ Les rentes AT aux ayants droit sont **cumulables** entre elles mais plafonnées à 85%.`,
-    relatedQuestions: ["Droits en cas de décès de la victime ?", "Comment sont calculées les rentes ?", "Le capital forfaitaire (IPP < 10%) ?"],
+    relatedQuestions: ["Droits en cas de décès de l'assuré ?", "Comment sont calculées les rentes ?", "Le capital forfaitaire (IPP < 10%) ?"],
     category: 'droits'
   },
   accident_mission: {
@@ -2489,7 +2679,7 @@ La **guérison** est la fin du traitement avec un retour à l'état antérieur. 
 2. L'examen clinique est **normal**
 3. Il n'y a **aucune limitation fonctionnelle**
 
-> ⚠️ Même en cas de guérison, la victime peut déclarer une **rechute** ultérieurement si de nouvelles lésions apparaissent en lien avec l'accident initial.`,
+> ⚠️ Même en cas de guérison, l'assuré peut déclarer une **rechute** ultérieurement si de nouvelles lésions apparaissent en lien avec l'accident initial.`,
     relatedQuestions: ["Qu'est-ce que la consolidation ?", "Comment gérer une rechute ?", "Comment est fixé le taux d'incapacité ?"],
     category: 'medecin'
   },
@@ -2551,7 +2741,7 @@ La reprise peut être :
 ### L'aggravation (Art. 59, Loi 83-13) :
 - Survient **après** la consolidation
 - Modification du taux d'IPP à la hausse
-- La victime peut demander une **révision** (intervalle de 3 mois si < 2 ans, 1 an si > 2 ans)
+- L'assuré peut demander une **révision** (intervalle de 3 mois si < 2 ans, 1 an si > 2 ans)
 - Entraîne une **majoration de la rente**
 
 ### En pratique pour le médecin conseil :
@@ -2786,7 +2976,7 @@ Le barème est un **guide indicatif** qui propose des taux d'IPP pour chaque typ
 | **IJ à partir de** | **J+1** | **J+4** |
 | **Taux IJ** | **100%** dès J+1 | 50% puis 100% |
 
-> 💡 L'absence de carence en AT est un avantage majeur pour la victime.`,
+> 💡 L'absence de carence en AT est un avantage majeur pour l'assuré.`,
     relatedQuestions: ["Calcul de l'indemnité journalière ?", "Définition accident du travail ?", "Obligations de l'employeur ?"],
     category: 'calcul'
   },
@@ -2894,20 +3084,20 @@ Le médecin conseil doit être particulièrement **rigoureux** :
   travail_non_declare: {
     keywords: ['travail', 'noir'],
     synonymKeywords: ['non declare', 'sans contrat', 'informel', 'clandestin', 'pas affilie', 'pas assure'],
-    summary: `## 🚫 Travail non déclaré et droits de la victime
+    summary: `## 🚫 Travail non déclaré et droits de l'assuré
 
 ### Le problème :
 Un travailleur **non déclaré** (travail au noir) n'est pas affilié à la CNAS et n'a théoriquement aucune couverture sociale.
 
 ### Mais la loi protège quand même :
 
-| Situation | Droit de la victime |
+| Situation | Droit de l'assuré |
 |-----------|-------------------|
-| AT chez un employeur non déclarant | La victime **conserve ses droits** |
+| AT chez un employeur non déclarant | L'assuré **conserve ses droits** |
 | Preuve de relation de travail | Peut saisir la CNAS + tribunal |
 | Emploi informel avec preuves | Attestations, témoignages acceptés |
 
-### Procédure pour la victime :
+### Procédure pour l'assuré :
 1. Rassembler les **preuves** (bulletins de paie, témoins, virements)
 2. Déposer une **déclaration d'AT** directement à la CNAS
 3. La CNAS peut **contraindre** l'employeur
@@ -2918,7 +3108,7 @@ Un travailleur **non déclaré** (travail au noir) n'est pas affilié à la CNAS
 - **Majorations** et pénalités de retard sur les cotisations dues
 - Poursuites **pénales** possibles
 
-> ⚠️ La CNAS peut agir d'office contre l'employeur. La victime ne doit **JAMAIS** renoncer à ses droits par crainte de perdre son emploi.`,
+> ⚠️ La CNAS peut agir d'office contre l'employeur. L'assuré ne doit **JAMAIS** renoncer à ses droits par crainte de perdre son emploi.`,
     relatedQuestions: ["Affiliation et immatriculation ?", "Sanctions contre l'employeur ?", "Obligations de l'employeur ?"],
     category: 'droits'
   },
@@ -2996,7 +3186,7 @@ L'accident de trajet couvre le parcours entre :
     summary: `## 👥 Rentes aux survivants (Art. 63-67, Loi 83-13)
 
 ### En cas de décès suite à un AT/MP :
-Les **ayants droit** de la victime décédée ont droit à des rentes calculées sur le salaire annuel de la victime.
+Les **ayants droit** de l'assuré décédé ont droit à des rentes calculées sur le salaire annuel de l'assuré.
 
 ### Taux des rentes :
 
@@ -3005,10 +3195,10 @@ Les **ayants droit** de la victime décédée ont droit à des rentes calculées
 | **Conjoint** | **30%** du salaire annuel | Non remarié(e) |
 | **Chaque orphelin de père OU de mère** | **15%** | < 18 ans (ou 21/25 si études) |
 | **Chaque orphelin de père ET de mère** | **30%** | < 18 ans (ou 21/25 si études) |
-| **Chaque ascendant** à charge | **10%** | Si à la charge de la victime |
+| **Chaque ascendant** à charge | **10%** | Si à la charge de l'assuré |
 
 ### Plafond :
-> Le total des rentes ne peut dépasser **85%** du salaire annuel de référence de la victime.
+> Le total des rentes ne peut dépasser **85%** du salaire annuel de référence de l'assuré.
 
 ### Durée des rentes :
 
@@ -3027,7 +3217,7 @@ Les **ayants droit** de la victime décédée ont droit à des rentes calculées
 La CNAS prend en charge les **frais funéraires** dans la limite d'un plafond réglementaire.
 
 > 💡 Les rentes aux ayants droit sont **révisables** : si un enfant atteint l'âge limite, sa part est **redistribuée** aux autres bénéficiaires (dans la limite du plafond de 85%).`,
-    relatedQuestions: ["Droits en cas de décès de la victime ?", "Comment sont calculées les rentes ?", "Le capital décès ?"],
+    relatedQuestions: ["Droits en cas de décès de l'assuré ?", "Comment sont calculées les rentes ?", "Le capital décès ?"],
     category: 'droits'
   },
   tableau_maladies_pro: {
@@ -3087,7 +3277,7 @@ La personne qui a **effectivement supporté** les frais funéraires (conjoint, e
 3. Demande de remboursement à la CNAS
 
 > 💡 Les frais funéraires sont distincts des **rentes aux ayants droit** : ils couvrent les dépenses d'inhumation, pas l'indemnisation des survivants.`,
-    relatedQuestions: ["Droits en cas de décès de la victime ?", "Rentes aux survivants ?", "Le capital décès ?"],
+    relatedQuestions: ["Droits en cas de décès de l'assuré ?", "Rentes aux survivants ?", "Le capital décès ?"],
     category: 'droits'
   },
   revalorisation_rentes: {
@@ -3194,18 +3384,21 @@ const processQuery = (query: string, context?: ConversationContext): { text: str
   for (const [key, intent] of Object.entries(INTENTS)) {
     let score = 0;
 
-    // Primary keywords: check against both original and stripped query
-    const primaryMatches = intent.keywords.filter(kw => normalizedQuery.includes(normalizeText(kw)) || strippedQuery.includes(normalizeText(kw)));
+    // Primary keywords: check against both original and stripped query (with fuzzy)
+    const primaryMatches = intent.keywords.filter(kw => {
+      const nkw = normalizeText(kw);
+      return normalizedQuery.includes(nkw) || strippedQuery.includes(nkw) || fuzzyIncludes(normalizedQuery, nkw);
+    });
     score += primaryMatches.length * 3;
     
     // Bonus if ALL primary keywords match
     if (primaryMatches.length === intent.keywords.length) score += 5;
 
-    // Synonym keywords: check if any synonym phrase matches
+    // Synonym keywords: check if any synonym phrase matches (with fuzzy)
     if (intent.synonymKeywords) {
       for (const synPhrase of intent.synonymKeywords) {
         const synWords = normalizeText(synPhrase).split(/\s+/);
-        const synMatches = synWords.filter(sw => normalizedQuery.includes(sw));
+        const synMatches = synWords.filter(sw => normalizedQuery.includes(sw) || normalizedQuery.split(/\s+/).some(qw => fuzzyMatch(qw, sw)));
         if (synMatches.length === synWords.length) score += 4; // Full synonym phrase match
         else if (synMatches.length > 0) score += synMatches.length * 0.8; // Partial
       }

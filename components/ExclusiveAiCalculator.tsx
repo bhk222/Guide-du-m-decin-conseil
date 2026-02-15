@@ -564,8 +564,12 @@ export const ExclusiveAiCalculator: React.FC<ExclusiveAiCalculatorProps> = ({
             return;
         }
 
-        const calculationKeywords = ["calcul", "calcule", "ipp total", "résultat", "c'est tout", "fini", "terminé", "total ipp"];
-        if (calculationKeywords.some(kw => textToSend.toLowerCase().includes(kw))) {
+        // 🆕 V3.3.226: FIX faux positif "résultat" dans texte clinique (ex: "Résultat : acuité visuelle OD 5/10")
+        // "résultat" seul est trop générique → exiger "résultat final" ou "résultat ipp" ou "résultat total"
+        const calculationKeywords = ["calcul", "calcule", "ipp total", "résultat final", "résultat ipp", "résultat total", "c'est tout", "fini", "terminé", "total ipp"];
+        // Guard: si le texte contient des termes médicaux, ne PAS traiter comme demande de calcul
+        const hasMedicalContentForCalcGuard = /(cataracte|fracture|luxation|rupture|hernie|br[uû]lure|entorse|acuit[eé].*visuelle|amputation|l[eé]sion|paralysie|plexus|raideur.*rachis)/i.test(textToSend);
+        if (!hasMedicalContentForCalcGuard && calculationKeywords.some(kw => textToSend.toLowerCase().includes(kw))) {
              setIsLoading(true);
              await new Promise(res => setTimeout(res, 400));
              if (selectedInjuries.length === 0) {
@@ -616,7 +620,8 @@ export const ExclusiveAiCalculator: React.FC<ExclusiveAiCalculatorProps> = ({
                 return false;
             }
             // Inclure si contient des termes médicaux de lésion ou séquelles neurologiques
-            return /(fracture|luxation|rupture|tassement|entorse|plaie|amputation|brûlure|lésion|douleur|raideur|ankylose|limitation|qui\s+presente|presente|steppage|amyotrophie|séquelle|sequelle|marche|paralysie|cal\s+vicieux|supination|pronation|force|serrage|cicatrice)/i.test(desc);
+            // 🆕 V3.3.226: Ajout cataracte, acuité visuelle, implant, glaucome, rétine comme termes médicaux reconnus
+            return /(fracture|luxation|rupture|tassement|entorse|plaie|amputation|brûlure|lésion|douleur|raideur|ankylose|limitation|qui\s+presente|presente|steppage|amyotrophie|séquelle|sequelle|marche|paralysie|cal\s+vicieux|supination|pronation|force|serrage|cicatrice|cataracte|acuit[eé].*visuelle|implant|glaucome|r[eé]tine|surdit[eé]|acouph[eè]ne|perforation.*tympan)/i.test(desc);
         });
         
         // Si aucune lésion médicale trouvée, envoyer tout à l'IA pour analyse complète
