@@ -4735,7 +4735,7 @@ export const findCandidateInjuries = (text: string, externalKeywords?: string[])
     let allMatches: Array<{ injury: Injury; score: number; path: string }> = [];
     const CATEGORY_RELEVANCE_BONUS = 50;
     const FUNCTIONAL_DEFICIT_BONUS = 100;
-    const functionalDeficitKeywords = ['raideur', 'ankylose', 'limitation', 'instabilite', 'laxite', 'déficit'];
+    const functionalDeficitKeywords = ['raideur', 'ankylose', 'limitation', 'instabilite', 'laxite', 'déficit', 'paralysie', 'luxation', 'ablation', 'perte', 'fracture', 'amputation'];
 
     // 🚨 PRÉ-FILTRAGE ANATOMIQUE STRICT - Bloquer catégories incompatibles DÈS LE DÉBUT
     const isAnatomicallyCompatible = (category: InjuryCategory, subcategory: InjurySubcategory): boolean => {
@@ -4874,6 +4874,15 @@ export const findCandidateInjuries = (text: string, externalKeywords?: string[])
                 const isAmputationOrDesarticulation = /(?:amputation|désarticulation|desarticulation)/i.test(normalizedInjuryName);
                 if (hasStiffnessIndicators && isAmputationOrDesarticulation) {
                     return; // Exclure les amputations si des mesures de raideur sont présentes
+                }
+                
+                // 🆕 V3.3.281: EXCLUSION AMPUTATION si contexte NEUROLOGIQUE pur (paralysie/nerf, PAS amputation chirurgicale)
+                // "paralysie nerf radial au tiers moyen du bras" ≠ "Amputation du bras au tiers moyen"
+                // "main tombante" ≠ "amputation de la main"
+                const hasNerveLesionInText = /(?:paralysie|nerf\s+(?:radial|cubital|m[eé]dian|ulnaire|sciatique)|main\s+tombante|griffe\s+cubitale|section.*nerf)/i.test(normalizedText) &&
+                    !/(?:\bamputation\b|\bamput[eé]\b|\bmoignon\b)/i.test(normalizedText);
+                if (hasNerveLesionInText && isAmputationOrDesarticulation) {
+                    return; // Un contexte neurologique ne doit pas matcher sur des amputations
                 }
             
                 let currentScore = 1; 
@@ -5427,7 +5436,7 @@ export const findCandidateInjuries = (text: string, externalKeywords?: string[])
     return topResults;
 };
 
-export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords?: string[]): LocalAnalysisResult => {
+export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords?: string[], skipCumulCheck: boolean = false): LocalAnalysisResult => {
     
     // 🆕 V3.3.124f: CHECK MÉTACARPIENS ULTRA-SIMPLIFIÉ
     const textLower = text.toLowerCase().replace(/'/g, ' ');
@@ -8293,30 +8302,30 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             searchTerms: ['Perte de la 2ème phalange seule de l\'auriculaire (P2 seule) (Main Dominante)'],
             priority: 9800
         },
-        // 🆕 V3.3.120: Amputation P3 seule (phalangette/phalange distale) - Fix "amputation p3 d5"
+        // 🆕 V3.3.120/V3.3.281: Amputation P3 seule (phalangette/phalange distale) - Priorité 14000 > 12000 full amputation
         {
             pattern: /(?:amputation|perte).*(?:p3|troisi[eè]me\s+phalange|3[eè]me\s+phalange|phalange\s+(?:distale|terminale)|phalangette).*(?:index|d2)(?!\s*(?:et|avec|p2))/i,
             context: /doigt|main/i,
             searchTerms: ['Perte de la 3ème phalange de l\'index (Main Dominante)', 'Perte de la 3ème phalange de l\'index (Main Non Dominante)'],
-            priority: 11000
+            priority: 14000
         },
         {
             pattern: /(?:amputation|perte).*(?:p3|troisi[eè]me\s+phalange|3[eè]me\s+phalange|phalange\s+(?:distale|terminale)|phalangette).*(?:m[eé]dius|majeur|d3)(?!\s*(?:et|avec|p2))/i,
             context: /doigt|main/i,
             searchTerms: ['Perte de la 3ème phalange du médius (Main Dominante)', 'Perte de la 3ème phalange du médius (Main Non Dominante)'],
-            priority: 11000
+            priority: 14000
         },
         {
             pattern: /(?:amputation|perte).*(?:p3|troisi[eè]me\s+phalange|3[eè]me\s+phalange|phalange\s+(?:distale|terminale)|phalangette).*(?:annulaire|d4)(?!\s*(?:et|avec|p2))/i,
             context: /doigt|main/i,
             searchTerms: ['Perte de la 3ème phalange de l\'annulaire (Main Dominante)', 'Perte de la 3ème phalange de l\'annulaire (Main Non Dominante)'],
-            priority: 11000
+            priority: 14000
         },
         {
             pattern: /(?:amputation|perte).*(?:p3|troisi[eè]me\s+phalange|3[eè]me\s+phalange|phalange\s+(?:distale|terminale)|phalangette).*(?:auriculaire|d5)(?!\s*(?:et|avec|p2))/i,
             context: /doigt|main/i,
             searchTerms: ['Perte de la 3ème phalange de l\'auriculaire (Main Dominante)', 'Perte de la 3ème phalange de l\'auriculaire (Main Non Dominante)'],
-            priority: 11000
+            priority: 14000
         },
 
         // 🆕 V3.3.127: ABLATIONS PARTIELLES DES DOIGTS (selon barème officiel Fig. 9-12)
@@ -9119,26 +9128,43 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
         },
         
         // ========== NERFS PÉRIPHÉRIQUES ==========
+        // 🆕 V3.3.281: Luxation récidivante de l'épaule — AVANT nerfs pour ne pas confondre avec luxation clavicule
         {
-            pattern: /paralysie.*nerf.*radial/i,
-            context: /main.*tombante|extension.*poignet.*impossible|testing.*0\/5|amyotrophie.*sévère/i,
+            pattern: /luxation.*(?:[eé]paule|gl[eé]no[\s-]?hum[eé]ral).*(?:r[eé]cidiv|r[eé]p[eé]t|instabilit|chronique|habitu)|(?:r[eé]cidiv|instabilit|chronique).*luxation.*(?:[eé]paule|gl[eé]no)/i,
+            context: /[eé]paule|appr[eé]hension|recentrage|r[eé]cidiv|instabilit|gl[eé]no|ant[eé]ro/i,
+            searchTerms: ["Luxation récidivante de l'épaule (Main Dominante)", "Luxation récidivante de l'épaule (Main Non Dominante)"],
+            priority: 999,
+            negativeContext: /clavicule.*luxation|sterno.*clavicul|acromio.*clavicul/i
+        },
+        // 🆕 V3.3.281: Paralysie nerf radial — contexte élargi (EMG, diagnostic, niveau anatomique)
+        {
+            pattern: /paralysie.*nerf.*radial|nerf\s+radial.*(?:paralysie|l[eé]sion|section|atteinte)/i,
+            context: /main.*tombante|extension.*poignet.*impossible|testing.*0\/5|amyotrophie.*s[eé]v[eè]re|emg|[eé]lectromyogra|triceps|d[eé]ficit.*extension|au[\s-]*dessous|l[eé]sion.*nerf|nerf.*radial/i,
             searchTerms: ["Paralysie du nerf radial"],
             priority: 999,
-            negativeContext: /médian|cubital/i
+            negativeContext: /m[eé]dian|cubital/i
         },
-        // 🆕 V3.3.130: Paralysie nerf médian (main plate, thénar)
+        // 🆕 V3.3.281: Canal carpien / Nerf médian AU POIGNET — priorité haute
         {
-            pattern: /paralysie.*nerf.*m[eé]dian|d[eé]ficit.*nerf.*m[eé]dian/i,
-            context: /main.*plate|amyotrophie.*th[eé]nar|opposition.*pouce.*impossible|canal.*carpien.*s[eé]v[eè]re/i,
-            searchTerms: ['Paralysie du nerf médian - Au bras (droite)', 'Paralysie du nerf médian - Au bras (gauche)'],
-            priority: 99,
+            pattern: /canal\s+carpien|syndrome.*canal.*carpien|nerf\s+m[eé]dian.*poignet/i,
+            context: /canal.*carpien|paresthesie|opposition.*pouce|th[eé]nar|emg|sensitif|median/i,
+            searchTerms: ['Paralysie du nerf médian - Au poignet (droite)', 'Paralysie du nerf médian - Au poignet (gauche)'],
+            priority: 100,
             negativeContext: /radial|cubital/i
         },
-        // 🆕 V3.3.130: Paralysie nerf cubital (griffe cubitale)
+        // 🆕 V3.3.130: Paralysie nerf médian AU BRAS (pas canal carpien)
         {
-            pattern: /paralysie.*nerf.*(?:cubital|ulnaire)|d[eé]ficit.*nerf.*(?:cubital|ulnaire)/i,
-            context: /griffe.*cubitale|griffe.*auriculaire|annulaire|atrophie.*interosseux|signe.*froment/i,
-            searchTerms: ['Paralysie du nerf cubital - Au bras (droite)', 'Paralysie du nerf cubital - Au bras (gauche)'],
+            pattern: /paralysie.*nerf.*m[eé]dian|d[eé]ficit.*nerf.*m[eé]dian/i,
+            context: /main.*plate|amyotrophie.*th[eé]nar|opposition.*pouce.*impossible|pronation.*impossible|fl[eé]chisseur.*profond/i,
+            searchTerms: ['Paralysie du nerf médian - Au bras (droite)', 'Paralysie du nerf médian - Au bras (gauche)'],
+            priority: 99,
+            negativeContext: /radial|cubital|canal\s+carpien/i
+        },
+        // 🆕 V3.3.130: Paralysie nerf cubital — contexte élargi V3.3.281
+        {
+            pattern: /paralysie.*nerf.*(?:cubital|ulnaire)|d[eé]ficit.*nerf.*(?:cubital|ulnaire)|nerf\s+(?:cubital|ulnaire)/i,
+            context: /griffe.*cubitale|griffe.*auriculaire|annulaire|atrophie.*interosseux|signe.*froment|emg|[eé]lectromyogra|nerf.*(?:cubital|ulnaire)|poignet|coude/i,
+            searchTerms: ['Paralysie du nerf cubital'],
             priority: 99,
             negativeContext: /radial|m[eé]dian/i
         },
@@ -9282,7 +9308,8 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
     
     // ========== 🆕 V3.3.170: DÉTECTION PRÉCOCE CUMUL AVANT RÈGLES EXPERTES ==========
     // Détecter les polyséquelles AVANT l'exécution des règles expertes simples
-    const earlyCumulCheck = detectMultipleLesions(text);
+    // 🆕 V3.3.281: NE PAS détecter cumul si appelé depuis la boucle d'extraction cumul (lésion déjà extraite)
+    const earlyCumulCheck = skipCumulCheck ? { isCumul: false, lesionCount: 1 } : detectMultipleLesions(text);
     const isEarlyCumulDetected = earlyCumulCheck.isCumul && earlyCumulCheck.lesionCount >= 2;
     
     if (isEarlyCumulDetected) {
@@ -12658,6 +12685,11 @@ export const detectMultipleLesions = (text: string): {
     if (/lesion/i.test(normalized) && !/fracture|rupture|luxation/i.test(normalized)) lesionTypes.push('lesion');
     const hasMultipleLesionTypes = lesionTypes.length >= 2;
     
+    // 🆕 V3.3.281: Luxation + fracture = 2 lésions structurelles DISTINCTES (articulation + os)
+    // Ex: "luxation récidivante épaule + fracture clavicule" = cumul même membre
+    // Ex: "luxation hanche + fracture fémur" = cumul même membre
+    const hasLuxationAndFracture = lesionTypes.includes('luxation') && lesionTypes.includes('fracture');
+    
     // 🆕 V3.3.120: Détection intelligente de lésions OS + LIGAMENT + MUSCLE (traumatologie)
     const hasOsLesion = /fracture/i.test(normalized);
     const hasLigamentLesion = /(?:dechirure|lesion|rupture).*(?:ligament|tendons?.*extenseurs?)|(?:ligament|tendons?.*extenseurs?).*(?:dechirure|lesion|rupture)/i.test(normalized);
@@ -12770,6 +12802,7 @@ export const detectMultipleLesions = (text: string): {
         hasMembreSupEtInf ||           // 🆕 Cumul membre supérieur + membre inférieur (polytraumatisme)
         hasMembreEtRachis ||           // 🆕 V3.3.147: Cumul fracture membre + lésion rachis (lombalgie/entorse)
         hasMultipleFunctionalSequelae || // 🆕 V3.3.170: Cumul amputation/luxation + séquelles fonctionnelles multiples (amyotrophie + cicatrice + déviation + perte force)
+        hasLuxationAndFracture ||      // 🆕 V3.3.281: Luxation + fracture = 2 lésions structurelles distinctes (ex: luxation épaule + fracture clavicule)
         isPolytraumatismeGrave;        // 🆕 V3.3.204: Polytraumatisme chute hauteur (3+ régions anatomiques majeures)
     
     // Estimation nombre de lésions
@@ -12790,6 +12823,7 @@ export const detectMultipleLesions = (text: string): {
         hasFractureAndPseudarthrose ? 2 : 1,  // 🆕 V3.3.142: Fracture + pseudarthrose = 2 lésions distinctes
         hasMembreSupEtInf ? 2 : 1,  // 🆕 V3.3.148: Membre supérieur + membre inférieur = 2 lésions distinctes (polytraumatisme)
         hasMembreEtRachis ? 2 : 1,  // 🆕 V3.3.147: Fracture membre + lésion rachis = 2 lésions distinctes
+        hasLuxationAndFracture ? 2 : 1,  // 🆕 V3.3.281: Luxation + fracture = au moins 2 lésions
         hasMultipleFunctionalSequelae ? Math.max(3, countFunctionalSequelae) : 1,  // 🆕 V3.3.170: Polyséquelles fonctionnelles = nombre de séquelles détectées (min 3)
         isPolytraumatismeGrave ? polytraumRegions.length : 1  // 🆕 V3.3.204: Nombre régions anatomiques majeures distinctes
     );
@@ -12827,6 +12861,65 @@ const extractIndividualLesions = (text: string): string[] => {
         console.log('   Texte original:', cleanedText.substring(0, 200));
         console.log('   Texte nettoyé:', beforePotentielles.substring(0, 200));
         cleanedText = beforePotentielles;
+    }
+    
+    // 🆕 V3.3.280: PATTERN PARAGRAPH - PRIORITÉ MAXIMALE ABSOLUE
+    // Pattern universel pour textes cliniques structurés en paragraphes/lignes/phrases
+    // Chaque ligne ou phrase contenant un terme médical = 1 lésion distincte
+    // Ex: "Fracture bimalléolaire cheville gauche.\nFracture Pouteau-Colles poignet droit.\nHernie discale L4-L5."
+    // Ex: "Raideur genou droit post-fracture plateau tibial. Amputation trans-métatarsienne pied gauche."
+    {
+        const medKeywords = /(?:fracture|luxation|rupture|l[eé]sion|entorse|d[eé]chirure|amputation|hernie|contusion|arthrod[eè]se|raideur|ankylose|pseudarthrose|cal\s+vicieux|surdit[eé]|perte\s+auditi|acouph[eè]ne|hypoacousie|syndrome|d[eé]pression|ptsd|espt|paralysie|atteinte|coiffe|algodystrophie|sdrc|n[eé]vralgie|tendinopathie|instabilit[eé]|st[eé]nose|spondylolisth[eé]sis|sciatalgie|lombosciatalgie|cervicobrachialgie|bursectomie|spl[eé]nectomie)/i;
+        
+        // Splitter sur: retours à la ligne, points suivis d'espace+majuscule, tirets de liste
+        const segments = cleanedText
+            .split(/\n+|\r\n|\.\s+(?=[A-ZÉÈÀ])|(?:^|\n)\s*[-–•]\s*/g)
+            .map(s => s.trim())
+            .filter(s => s.length >= 10 && medKeywords.test(s));
+        
+        if (segments.length >= 2) {
+            // Vérifier que ce sont des lésions DISTINCTES (pas la même chose reformulée)
+            const uniqueSegments: string[] = [];
+            for (const seg of segments) {
+                const isDuplicate = uniqueSegments.some(existing => {
+                    const overlap = existing.toLowerCase().includes(seg.toLowerCase().substring(0, 20)) ||
+                                    seg.toLowerCase().includes(existing.toLowerCase().substring(0, 20));
+                    return overlap;
+                });
+                if (!isDuplicate) {
+                    // Nettoyer le point final si présent
+                    uniqueSegments.push(seg.replace(/\.\s*$/, '').trim());
+                }
+            }
+            
+            if (uniqueSegments.length >= 2) {
+                console.log('✅ Pattern PARAGRAPH V3.3.280 (split paragraphes/phrases) détecté:', uniqueSegments);
+                return uniqueSegments;
+            }
+        }
+        
+        // Aussi essayer le split sur points simples (phrases séparées par ".")
+        const sentenceSegments = cleanedText
+            .split(/\.\s+/)
+            .map(s => s.trim())
+            .filter(s => s.length >= 10 && medKeywords.test(s));
+        
+        if (sentenceSegments.length >= 2) {
+            const uniqueSentences: string[] = [];
+            for (const seg of sentenceSegments) {
+                const isDuplicate = uniqueSentences.some(existing => {
+                    return existing.toLowerCase().includes(seg.toLowerCase().substring(0, 20)) ||
+                           seg.toLowerCase().includes(existing.toLowerCase().substring(0, 20));
+                });
+                if (!isDuplicate) {
+                    uniqueSentences.push(seg.replace(/\.\s*$/, '').trim());
+                }
+            }
+            if (uniqueSentences.length >= 2) {
+                console.log('✅ Pattern PARAGRAPH-SENTENCE V3.3.280 (split phrases par point) détecté:', uniqueSentences);
+                return uniqueSentences;
+            }
+        }
     }
     
     // 🆕 Pattern 0C: Fracture + séquelle pseudarthrose (V3.3.142) - PRIORITÉ TRÈS HAUTE
@@ -13374,6 +13467,52 @@ const extractIndividualLesions = (text: string): string[] => {
     return [normalized];
 };
 
+// 🆕 V3.3.280: DÉTECTION MULTI-SITES ANATOMIQUES DISTINCTS
+// Fonction utilitaire pour déterminer si le texte décrit des lésions sur 2+ sites anatomiques MAJEURS distincts
+// Utilisée pour empêcher les handlers spécialisés (Pouteau-Colles, amputation, hernie, etc.) de court-circuiter
+// quand le patient a un polytraumatisme multi-sites nécessitant un cumul Balthazard
+const hasMultipleDistinctSites = (text: string): boolean => {
+    const t = text.toLowerCase();
+    let siteCount = 0;
+    
+    // Membre supérieur (épaule, bras, avant-bras, coude, poignet, main, doigts, clavicule)
+    if (/(?:fracture|luxation|rupture|l[eé]sion|entorse|raideur).*(?:[eé]paule|bras|avant[\s-]*bras|coude|poignet|main|radius|cubitus|ulna|hum[eé]r|clavicule|omoplate|scapho)/i.test(t) ||
+        /(?:coiffe|rotateurs?|sus[\s-]?[eé]pineux|sous[\s-]?[eé]pineux|tendinopathie.*[eé]paule)/i.test(t) ||
+        /amputation.*(?:index|pouce|m[eé]dius|majeur|annulaire|auriculaire|d[1-5]|doigt|phalange|main|bras|avant[\s-]*bras)/i.test(t)) siteCount++;
+    
+    // Membre inférieur (hanche, cuisse, genou, jambe, cheville, pied, orteils)
+    if (/(?:fracture|luxation|rupture|l[eé]sion|entorse|raideur).*(?:hanche|cuisse|genou|jambe|cheville|pied|orteil|tibia|f[eé]mur|p[eé]ron[eé]|fibula|rotule|calcan[eé]um|astragale|mall[eé]ol|plateau.*tibial)/i.test(t) ||
+        /(?:amputation.*(?:trans[\s-]?m[eé]tatars|pied|jambe|cuisse|orteil)|\blca\b|\blcl\b|\blli\b|m[eé]niscectomie|arthrod[eè]se.*(?:sous[\s-]?talienne|cheville|tibio))/i.test(t)) siteCount++;
+    
+    // Rachis (cervical, dorsal, lombaire)
+    if (/(?:hernie.*discale|lombalgie|cervicalgie|dorsalgie|tassement.*vert[eé]br|fracture.*(?:l[1-5]|c[1-7]|d[1-9]|t[1-9])|spondylolisth[eé]sis|entorse.*(?:lombaire|cervical)|sciatique.*l[4-5])/i.test(t) ||
+        /(?:raideur.*rachid|rachis.*lombaire|rachis.*cervical|lombosciatique|rachialgie|discectomie|laminectomie)/i.test(t)) siteCount++;
+    
+    // Thorax (côtes, poumon, sternum)
+    if (/(?:fracture.*c[oô]te|fracture.*costale|volet.*costal|contusion.*thorac|traumatisme.*thorac|diminution.*cv|pneumothorax|h[eé]mothorax|fracture.*sternum|s[eé]quelles?.*respiratoire)/i.test(t)) siteCount++;
+    
+    // Bassin/Pelvis
+    if (/(?:fracture.*bassin|disjonction.*sacro|branche.*(?:ilio[\s-]?pub|ischio[\s-]?pub)|cadre.*obturateur|fracture.*(?:aileron|sacr[eé]|cotylo[ïi]de|ac[eé]tabulum))/i.test(t)) siteCount++;
+    
+    // Crâne/Cérébral
+    if (/(?:traumatisme.*cr[aâ]ni|contusion.*c[eé]r[eé]br|perte.*connaissance|syndrome.*post[\s-]?commotionnel|tc\b|commotion.*c[eé]r[eé]br|c[eé]phal[eé]e.*chronique|troubles?.*cognitif)/i.test(t)) siteCount++;
+    
+    // Audition (surdité, acouphènes)
+    if (/(?:surdit[eé]|perte.*auditi|acouph[eè]ne|hypoacousie|blast.*auditif|barotraumatisme.*oreille)/i.test(t)) siteCount++;
+    
+    // Psychiatrique (PTSD, dépression, anxiété)
+    if (/(?:syndrome.*stress.*post[\s-]?traumat|ptsd|espt|d[eé]pression.*r[eé]actionnel|trouble.*anxieu|reviviscence|cauchemar.*r[eé]current|[eé]tat.*stress|troubles?.*psychiatr|suivi.*psychiatr|antid[eé]presseur)/i.test(t)) siteCount++;
+    
+    // Abdomen/Viscères
+    if (/(?:spl[eé]nectomie|n[eé]phrectomie|colectomie|h[eé]patectomie|[eé]ventration|rupture.*rate|contusion.*(?:h[eé]patique|spl[eé]nique|r[eé]nale))/i.test(t)) siteCount++;
+    
+    // Face/Mâchoire
+    if (/(?:fracture.*(?:mandibule|maxillaire|zygoma|orbite|nez)|traumatisme.*facial|d[eé]figur)/i.test(t)) siteCount++;
+    
+    console.log(`🔍 [V3.3.280] hasMultipleDistinctSites: ${siteCount} sites détectés (seuil=2) → ${siteCount >= 2 ? 'MULTI-SITES' : 'site unique'}`);
+    return siteCount >= 2;
+};
+
 /**
  * Analyse intelligente du langage naturel avec gestion du contexte médico-légal
  * @param text - Texte à analyser
@@ -13381,7 +13520,7 @@ const extractIndividualLesions = (text: string): string[] => {
  * @param isExactMatch - Si true, cherche une correspondance exacte par nom (pour résoudre ambiguïté)
  */
 export const localExpertAnalysis = (text: string, externalKeywords?: string[], isExactMatch: boolean = false): LocalAnalysisResult => {
-    console.log('🔧 localExpertAnalysis V3.3.271 - fix trochantéro-diaphysaire matching, normalize() in findInBareme, specific clinical rate');
+    console.log('🔧 localExpertAnalysis V3.3.280 - MULTI-SITES polytrauma fix, paragraph extraction, enrichment psych/audio');
 
     // 🔴 V3.3.162: NETTOYAGE TEXTE - Supprime caractères invisibles (zero-width space, etc.)
     // Ces caractères peuvent casser les regex et empêcher la détection
@@ -13398,8 +13537,12 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
     const isFractureRadiusPoignet = /fracture.*(?:extr[eé]mit[eé]|distale?).*(?:inf[eé]rieure?|inf).*radius/i.test(text) || 
                                      (/fracture/i.test(text) && /radius/i.test(text) && /poignet/i.test(text));
     
-    if ((isPouteauColles || isFractureRadiusPoignet) && !isExactMatch) {
-        console.log('🦴 [V3.3.216] FRACTURE POUTEAU-COLLES / RADIUS DISTAL détectée → Analyse spécialisée');
+    // 🆕 V3.3.280: NE PAS court-circuiter si le texte décrit des lésions sur 2+ sites anatomiques distincts
+    // Dans ce cas, laisser le flux cumul Balthazard gérer TOUTES les lésions ensemble
+    const isMultiSitePolytrauma = hasMultipleDistinctSites(text);
+    
+    if ((isPouteauColles || isFractureRadiusPoignet) && !isExactMatch && !isMultiSitePolytrauma) {
+        console.log('🦴 [V3.3.216] FRACTURE POUTEAU-COLLES / RADIUS DISTAL détectée → Analyse spécialisée (site unique)');
         
         // Déterminer dominance
         const isDominantPC = /dominant|main\s+dominante|dominante/i.test(text);
@@ -13589,8 +13732,8 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
     const isDiscectomie = /discectomie|nucl[eé]otomie|laminectomie|arthrod[eè]se.*lombaire|chirurgie.*discale|op[eé]r[eé]e?/i.test(text);
     const isHernieContext = /lombaire|lombalgies?|L[1-5][\s\-]?S[1-5]|L[1-5][\s\-]?L[1-5]|cervicale?|rachis/i.test(text);
     
-    if (isHernieDiscale && isHernieContext && !isExactMatch) {
-        console.log('💿 [V3.3.217] HERNIE DISCALE LOMBAIRE/CERVICALE détectée → Analyse spécialisée');
+    if (isHernieDiscale && isHernieContext && !isExactMatch && !isMultiSitePolytrauma) {
+        console.log('💿 [V3.3.217] HERNIE DISCALE LOMBAIRE/CERVICALE détectée → Analyse spécialisée (site unique)');
         
         // Déterminer cervicale vs lombaire
         const isCervicaleHD = /cervicale?|c[1-7][\s\-]c[1-7]|ncb|n[eé]vralgie.*cervico/i.test(text);
@@ -13857,8 +14000,8 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
     const isCicatriceDefigurante = /cicatrice.*(?:d[ée]figurant|ch[ée]lo[ïi]de|r[ée]tractile?|hypertrophique|adh[ée]rente)|(?:d[ée]figurant|ch[ée]lo[ïi]de).*cicatrice/i.test(text);
     const isContexteBrulureFace = /(?:greffe.*cutan[ée]|explosion|acide|flamme|gaz|thermique|chimique|[ée]bouillant).*(?:visage|facial|face|front|joue|cou)|(?:visage|facial|face|front|joue|cou).*(?:greffe|cicatric)/i.test(text);
     
-    if ((isBrulureFaciale || (isCicatriceDefigurante && isContexteBrulureFace)) && !isExactMatch) {
-        console.log('🔥 [V3.3.218] BRÛLURES FACIALES détectées → Analyse spécialisée');
+    if ((isBrulureFaciale || (isCicatriceDefigurante && isContexteBrulureFace)) && !isExactMatch && !isMultiSitePolytrauma) {
+        console.log('🔥 [V3.3.218] BRÛLURES FACIALES détectées → Analyse spécialisée (site unique)');
         
         // Extraction des éléments cliniques
         const hasCheloide = /ch[ée]lo[ïi]de/i.test(text);
@@ -14032,8 +14175,21 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
     // - Fallback erroné vers "Cicatrice pathologique" → MEMBRE_INFERIEUR
     const isAmputationDoigt = /amputation.*(?:index|pouce|m[eé]dius|majeur|annulaire|auriculaire|D[1-5]|doigt)|(?:index|pouce|m[eé]dius|annulaire|auriculaire).*amputation|perte.*(?:index|pouce|m[eé]dius|annulaire|auriculaire)|ablation.*(?:index|pouce|m[eé]dius|annulaire|auriculaire)/i.test(text);
     
-    if (isAmputationDoigt && !isExactMatch) {
-        console.log('✂️ [V3.3.219] AMPUTATION DOIGT détectée → Analyse spécialisée avec niveau');
+    // 🆕 V3.3.281: Détection lésions MULTIPLES sur le même membre supérieur
+    // Si amputation doigt + ankylose coude + canal carpien → NE PAS court-circuiter avec le handler doigt seul
+    // Laisser le flux cumul Balthazard gérer l'ensemble des lésions
+    const msPathologyCount = [
+        /amputation.*(?:doigt|phalange|index|pouce|m[eé]dius|majeur|annulaire|auriculaire|d[1-5])/i.test(text),
+        /(?:ankylose|blocage).*(?:coude|poignet|[eé]paule)|(?:coude|poignet|[eé]paule).*(?:ankylose|blocag)/i.test(text),
+        /(?:canal\s+carpien|nerf\s+(?:m[eé]dian|cubital|radial)|syndrome.*carpien|paralysie.*(?:m[eé]dian|cubital|radial))/i.test(text),
+        /fracture.*(?:hum[eé]r|ol[eé]cran|radius|clavicule|scapho)/i.test(text),
+        /luxation.*(?:[eé]paule|coude)/i.test(text),
+        /(?:coiffe|rotateurs?|sus[\s-]?[eé]pineux).*(?:rupture|d[eé]chirure|tendinopathie)/i.test(text) || /(?:rupture|d[eé]chirure).*(?:coiffe|sus[\s-]?[eé]pineux)/i.test(text)
+    ].filter(Boolean).length;
+    const hasMultipleMSPathologies = msPathologyCount >= 2;
+    
+    if (isAmputationDoigt && !isExactMatch && !isMultiSitePolytrauma && !hasMultipleMSPathologies) {
+        console.log('✂️ [V3.3.219] AMPUTATION DOIGT détectée → Analyse spécialisée avec niveau (site unique)');
         
         // Identifier le doigt
         let doigtNom = '';
@@ -14064,7 +14220,7 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
             const hasP3 = /P3|phalange.*(?:distale|ungu[eé]ale)|phalange.*(?:3[eè]me|troisi[eè]me)|extrem(?:ité|ite).*phalange|bout.*doigt/i.test(text);
             const hasP2 = /P2|phalange.*(?:moyenne|interm[eé]diaire|2[eè]me|deuxi[eè]me)|niveau.*P2|P2.*phalange/i.test(text);
             const hasP1 = /P1|phalange.*(?:proximale|1[eè]re|premi[eè]re)|niveau.*P1/i.test(text);
-            const hasMCP = /m[eé]tacarpo.*phalangienne|MCP|d[eé]sarticulation.*m[eé]tacarpo/i.test(text);
+            const hasMCP = /m[eé]tacarpo.*phalangi(?:en(?:ne)?)|MCP|d[eé]sarticulation.*m[eé]tacarpo/i.test(text);
             const hasIPP = /inter.*phalangienne.*proximale|IPP|d[eé]sarticulation.*1[eè]re/i.test(text);
             const hasIPD = /inter.*phalangienne.*distale|IPD|d[eé]sarticulation.*2[eè]me/i.test(text);
             const hasNiveau = /au\s+niveau\s+(?:de\s+)?(?:la?\s+)?/i.test(text);
@@ -14347,8 +14503,8 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
     
     const isPlexusBrachialDetected = isPlexusDuchenneErb || isPlexusKlumpke || isPlexusComplete;
     
-    if (isPlexusBrachialDetected && !isExactMatch) {
-        console.log('🧠 [V3.3.220] ATTEINTE PLEXUS BRACHIAL détectée → Analyse spécialisée');
+    if (isPlexusBrachialDetected && !isExactMatch && !isMultiSitePolytrauma) {
+        console.log('🧠 [V3.3.220] ATTEINTE PLEXUS BRACHIAL détectée → Analyse spécialisée (site unique)');
         
         // Déterminer latéralité
         const isDroitPB = /droit(?:e)?(?:\s|$|,|\.|;|\))/i.test(text) || /membre\s+sup[eé]rieur\s+droit/i.test(text);
@@ -14508,14 +14664,135 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
         }
     }
     
+    // 🆕 V3.3.281: PARALYSIE NERF PÉRIPHÉRIQUE MS (cubital, radial, médian) — Lésion unique
+    // Handler similaire au plexus brachial mais pour les nerfs individuels
+    // NE PAS court-circuiter si cumul multi-MS (ex: ankylose coude + canal carpien + amputation)
+    const isNerfCubital = /nerf\s+cubital|nerf\s+ulnaire|section.*cubital|paralysie.*cubital|griffe\s+cubitale/i.test(text);
+    const isNerfRadial = /nerf\s+radial|main\s+tombante|paralysie.*radial/i.test(text);
+    const isNerfMedianSimple = /(?:nerf\s+m[eé]dian|canal\s+carpien|syndrome.*canal.*carpien)(?!.*(?:ankylose|amputation|fracture.*(?:ol[eé]cran|hum[eé]r)))/i.test(text);
+    const isPeripheralNerveMS = isNerfCubital || isNerfRadial || isNerfMedianSimple;
+    
+    if (isPeripheralNerveMS && !isExactMatch && !isMultiSitePolytrauma && !hasMultipleMSPathologies) {
+        console.log('🧠 [V3.3.281] PARALYSIE NERF PÉRIPHÉRIQUE MS détectée → Analyse spécialisée (site unique)');
+        
+        // Déterminer le nerf et le niveau
+        let targetNerfName = '';
+        let nerfType = '';
+        let diagnosticNerf = '';
+        
+        if (isNerfCubital) {
+            const isAuCoude = /coude|gouttière|[eé]pitroch/i.test(text);
+            const isAuPoignet = /poignet|canal\s+de\s+guyon|section/i.test(text) || !isAuCoude;
+            const level = isAuCoude ? 'Au coude' : 'Au poignet';
+            nerfType = `Paralysie du nerf cubital - ${level}`;
+            diagnosticNerf = `Paralysie du nerf cubital ${level.toLowerCase()}`;
+        } else if (isNerfRadial) {
+            const isAbove = /au[\s-]*dessus.*triceps|aisselle|creux\s+axillaire/i.test(text);
+            const level = isAbove ? 'Au-dessus du triceps' : 'Au-dessous du triceps';
+            nerfType = `Paralysie du nerf radial - ${level}`;
+            diagnosticNerf = `Paralysie du nerf radial ${level.toLowerCase()}`;
+        } else if (isNerfMedianSimple) {
+            const isAuBras = /au\s+bras|pronation.*impossible|fl[eé]chisseur.*profond/i.test(text) && !/canal\s+carpien/i.test(text);
+            const level = isAuBras ? 'Au bras' : 'Au poignet';
+            nerfType = `Paralysie du nerf médian - ${level}`;
+            diagnosticNerf = `Paralysie du nerf médian ${level.toLowerCase()} (canal carpien)`;
+        }
+        
+        // Déterminer latéralité
+        const isDroitNerf = /droit(?:e)?(?:\s|$|,|\.|;|\))/i.test(text) || /membre\s+sup[eé]rieur\s+droit/i.test(text);
+        const isGaucheNerf = /gauche(?:\s|$|,|\.|;|\))/i.test(text) || /membre\s+sup[eé]rieur\s+gauche/i.test(text);
+        const isNDNerf = /non[\s-]*dominant/i.test(text);
+        const isDNerf = /dominant/i.test(text) && !isNDNerf;
+        
+        const lateraliteNerf = isGaucheNerf ? 'gauche' : 'droite';
+        const dominanceNerf = (isNDNerf || (isGaucheNerf && !isDNerf)) ? 'Non Dominante' : 'Dominante';
+        
+        // Chercher l'entrée barème avec la bonne latéralité
+        const targetSearchName = `${nerfType} (${lateraliteNerf})`;
+        const nerfEntry = allInjuriesWithPaths.find(inj => {
+            const injNorm = normalize(inj.name);
+            const targetNorm = normalize(targetSearchName);
+            return injNorm.includes(targetNorm) || targetNorm.includes(injNorm);
+        }) || allInjuriesWithPaths.find(inj => {
+            const injNorm = normalize(inj.name);
+            const typeNorm = normalize(nerfType);
+            const latNorm = lateraliteNerf === 'gauche' ? 'gauche' : 'droite';
+            return injNorm.includes(typeNorm) && injNorm.includes(latNorm);
+        }) || allInjuriesWithPaths.find(inj => {
+            const injNorm = normalize(inj.name);
+            const typeNorm = normalize(nerfType);
+            return injNorm.includes(typeNorm);
+        });
+        
+        if (nerfEntry && Array.isArray(nerfEntry.rate)) {
+            const [minN, maxN] = nerfEntry.rate as [number, number];
+            
+            // Score de gravité pour position dans fourchette
+            let scoreNerf = 0;
+            if (/d[eé]ficit.*moteur|d[eé]ficit.*sensitif/i.test(text)) scoreNerf += 2;
+            if (/amyotrophie|atrophie/i.test(text)) scoreNerf += 2;
+            if (/griffe|main\s+tombante/i.test(text)) scoreNerf += 2;
+            if (/emg|[eé]lectromyogra/i.test(text)) scoreNerf += 1;
+            if (/absence.*r[eé]innervation|pas.*r[eé]cup[eé]ration/i.test(text)) scoreNerf += 2;
+            if (/section\s+compl[eè]te/i.test(text)) scoreNerf += 2;
+            if (/douleur.*neuropathique/i.test(text)) scoreNerf += 1;
+            if (/s[eé]v[eè]re|grave|majeur/i.test(text)) scoreNerf += 1;
+            
+            const ratioNerf = Math.min(scoreNerf / 8, 1);
+            const rateFinalNerf = Math.round(minN + (maxN - minN) * ratioNerf);
+            
+            const facteursNerf: string[] = [];
+            if (/d[eé]ficit.*moteur/i.test(text)) facteursNerf.push('Déficit moteur');
+            if (/d[eé]ficit.*sensitif|perte.*sensibilit/i.test(text)) facteursNerf.push('Déficit sensitif');
+            if (/amyotrophie|atrophie/i.test(text)) facteursNerf.push('Amyotrophie');
+            if (/griffe/i.test(text)) facteursNerf.push('Griffe cubitale');
+            if (/main\s+tombante/i.test(text)) facteursNerf.push('Main tombante');
+            if (/emg|[eé]lectromyogra/i.test(text)) facteursNerf.push('Confirmation EMG');
+            if (/absence.*r[eé]innervation/i.test(text)) facteursNerf.push('Absence de réinnervation');
+            if (/douleur.*neuropathique/i.test(text)) facteursNerf.push('Douleurs neuropathiques');
+            if (/section\s+compl[eè]te/i.test(text)) facteursNerf.push('Section complète du nerf');
+            
+            const facteursHtmlNerf = facteursNerf.length > 0 
+                ? facteursNerf.map(f => `&nbsp;&nbsp;• ${f}`).join('<br>')
+                : '&nbsp;&nbsp;• Atteinte nerveuse périphérique confirmée';
+            
+            const justificationNerf = 
+                `<strong>⚠️ PARALYSIE NERF PÉRIPHÉRIQUE DÉTECTÉE</strong><br><br>` +
+                `📊 <strong>Diagnostic</strong> : ${diagnosticNerf}<br>` +
+                `&nbsp;&nbsp;• Côté : ${lateraliteNerf} (${dominanceNerf})<br><br>` +
+                `📋 <strong>Éléments cliniques retenus</strong> :<br>` +
+                `${facteursHtmlNerf}<br><br>` +
+                `📖 <strong>Référence barémique</strong> :<br>` +
+                `&nbsp;&nbsp;• Rubrique : "Nerfs Périphériques - Membre Supérieur"<br>` +
+                `&nbsp;&nbsp;• Entrée : <em>"${nerfEntry.name}"</em><br>` +
+                `&nbsp;&nbsp;• Fourchette : [${minN}% - ${maxN}%]<br><br>` +
+                `💡 <strong>Taux proposé : ${rateFinalNerf}%</strong>`;
+            
+            return {
+                type: 'proposal' as const,
+                name: nerfEntry.name,
+                rate: rateFinalNerf,
+                justification: justificationNerf,
+                path: nerfEntry.path || `Nerfs Périphériques - Membre Supérieur > ${nerfType}`,
+                injury: nerfEntry as Injury
+            };
+        }
+    }
+    
     // 🆕 V3.3.229: AMPUTATIONS DE MEMBRES - Évaluation directe avec barème
     // Détection prioritaire AVANT detectedSequelae pour éviter que "boiterie/marche difficile"
     // ne masque l'amputation (qui était classée à tort comme "Séquelles fonctionnelles" à 10%)
     // Les amputations ont des taux très élevés (40-95%) dans le barème 1967
     const isAmputationText = /amputation|amput[eé]|d[eé]sarticulation|perte.*(?:du|de\s+la|d\s*un|des)\s+(?:membre|jambe|cuisse|bras|avant[\s-]*bras|main|pied)/i.test(text);
     
-    if (isAmputationText && !isExactMatch) {
-        console.log('🦿 [V3.3.229] AMPUTATION DÉTECTÉE → Analyse spécialisée');
+    // 🆕 V3.3.281: Exclusion des faux positifs d'amputation quand le contexte est purement NEUROLOGIQUE
+    // "perte de la sensibilité de la main" ≠ "perte de la main" (amputation)
+    // "paralysie nerf cubital au poignet" ≠ "désarticulation du poignet"
+    const isNerveLesionOnly = /(?:paralysie|section|l[eé]sion|atteinte|compression).*(?:nerf|cubital|radial|m[eé]dian)/i.test(text) &&
+        !/(?:\bamputation\b|\bamput[eé]\b|\bmoignon\b|d[eé]sarticulation)/i.test(text);
+    
+    if (isAmputationText && !isExactMatch && !isMultiSitePolytrauma && !isNerveLesionOnly && !hasMultipleMSPathologies) {
+        console.log('🦿 [V3.3.229] AMPUTATION MEMBRE DÉTECTÉE → Analyse spécialisée (site unique)');
         
         // ═══════════════════════════════════════════════════════════════
         // CLASSIFICATION DU NIVEAU D'AMPUTATION
@@ -14751,7 +15028,7 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
         const hasOtherDistinctLesionFC = /fracture.*(?:f[eé]mur|tibia|hum[eé]rus|bassin|c[oô]te|rotule|plateau|radius|poignet|vert[eé]br)/i.test(text) ||
             /luxation.*(?:hanche|genou|[eé]paule)/i.test(text);
         
-        if (!hasOtherDistinctLesionFC) {
+        if (!hasOtherDistinctLesionFC && !isMultiSitePolytrauma) {
             console.log('🦴 [V3.3.221] FRACTURE CLAVICULE détectée → Analyse spécialisée');
             
             // Déterminer latéralité et dominance
@@ -15418,6 +15695,39 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
             name: 'Paresthésies / Fourmillements (troubles sensitifs)',
             keywords: ['paresthésie', 'fourmillement', 'trouble sensitif'],
             context: text.match(/(?:parasth[ée]sie|fourmillement)[^.;]*/i)?.[0] || ''
+        });
+    }
+    
+    // 🆕 V3.3.281: PARALYSIE NERF CUBITAL (ulnaire) - Membre Supérieur
+    if (/nerf\s+cubital|nerf\s+ulnaire|griffe\s+cubitale|section.*cubital/i.test(text)) {
+        const isAuCoude = /coude|gouttier|epitrochlee/i.test(text);
+        const isAuPoignet = /poignet|canal\s+de\s+guyon|loge\s+de\s+guyon/i.test(text);
+        const levelCubital = isAuCoude ? 'au coude' : (isAuPoignet ? 'au poignet' : 'au poignet');
+        detectedSequelae.push({
+            name: `Paralysie du nerf cubital ${levelCubital}`,
+            keywords: ['paralysie', 'nerf cubital', 'ulnaire', 'griffe cubitale', 'interosseux'],
+            context: text.match(/(?:nerf\s+cubital|griffe\s+cubitale|section.*cubital)[^.;]*/i)?.[0] || ''
+        });
+    }
+    
+    // 🆕 V3.3.281: PARALYSIE NERF RADIAL - Membre Supérieur
+    if (/nerf\s+radial|main\s+tombante|extension.*(?:poignet|doigts).*impossible/i.test(text)) {
+        const isBelowTriceps = /au[\s-]*dessous.*triceps|tiers\s+moyen.*bras/i.test(text);
+        const isAboveTriceps = /au[\s-]*dessus.*triceps|aisselle|creux\s+axillaire/i.test(text);
+        const levelRadial = isAboveTriceps ? 'au-dessus du triceps' : 'au-dessous du triceps';
+        detectedSequelae.push({
+            name: `Paralysie du nerf radial ${levelRadial}`,
+            keywords: ['paralysie', 'nerf radial', 'main tombante', 'extension poignet', 'supination'],
+            context: text.match(/(?:nerf\s+radial|main\s+tombante)[^.;]*/i)?.[0] || ''
+        });
+    }
+    
+    // 🆕 V3.3.281: PARALYSIE NERF MÉDIAN / SYNDROME CANAL CARPIEN - Membre Supérieur
+    if (/nerf\s+m[eé]dian|canal\s+carpien|syndrome\s+du?\s+canal|compression.*m[eé]dian/i.test(text)) {
+        detectedSequelae.push({
+            name: 'Paralysie du nerf médian au poignet (canal carpien)',
+            keywords: ['nerf médian', 'canal carpien', 'opposition pouce', 'éminence thénar'],
+            context: text.match(/(?:nerf\s+m[eé]dian|canal\s+carpien)[^.;]*/i)?.[0] || ''
         });
     }
     
@@ -16328,8 +16638,18 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
     // 🆕 V3.3.201k: Détection cumul AVANT le regroupement par système
     // Cette déclaration DOIT être ici (avant ligne 13005) pour éviter erreur TDZ
     const cumulDetection = detectMultipleLesions(text);
-    const isCumulDetected = cumulDetection.isCumul && cumulDetection.lesionCount >= 2;
+    let isCumulDetected = cumulDetection.isCumul && cumulDetection.lesionCount >= 2;
     console.log('🔍 V3.3.201k: isCumulDetected =', isCumulDetected, ', lesionCount =', cumulDetection.lesionCount);
+    
+    // 🆕 V3.3.280: Si multi-sites détectés mais detectMultipleLesions n'a pas trouvé le cumul,
+    // FORCER le cumul car le texte contient manifestement des lésions sur 2+ sites distincts
+    // Cela permet au Pattern PARAGRAPH de extraire les lésions individuelles
+    if (!isCumulDetected && isMultiSitePolytrauma) {
+        console.log('🆕 V3.3.280: OVERRIDE CUMUL - isMultiSitePolytrauma=true mais detectMultipleLesions=false → FORCE cumul');
+        isCumulDetected = true;
+        cumulDetection.isCumul = true;
+        cumulDetection.lesionCount = Math.max(cumulDetection.lesionCount, 2);
+    }
     
     if (detectedSequelae.length >= 1) {
         // 🆕 V3.3.201j: Si CUMUL détecté, SKIP le regroupement par système
@@ -17481,6 +17801,114 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
                     console.log(`   🔧 V3.3.212: Enrichissement dechirure tendon: "${lesion}" → "${enrichedLesion}"`);
                 }
 
+                // 🆕 V3.3.280: CALCANÉUM / ARTHRODÈSE SOUS-TALIENNE → Enrichir avec termes barème
+                if (/calcan[eé]um|calcan[eé]enne|arthrod[eè]se.*sous[\s-]?talienne|fracture.*thalamus|fracture.*arriere[\s-]?pied/i.test(lesion)) {
+                    enrichedLesion = lesion + ' fracture calcaneum thalamus arriere-pied arthrodese sous-talienne bonne position';
+                    console.log(`   🔧 V3.3.280: Enrichissement calcanéum: "${lesion}" → "${enrichedLesion}"`);
+                }
+
+                // 🆕 V3.3.280: SURDITÉ / PERTE AUDITIVE / ACOUPHÈNES → Enrichir avec termes barème
+                if (/surdit[eé]|perte.*auditi|acouph[eè]ne|hypoacousie|blast.*auditif|barotraumatisme|diminution.*auditi/i.test(lesion)) {
+                    enrichedLesion = lesion + ' surdite perte auditive hypoacousie acouphenes traumatisme sonore blast auditif';
+                    console.log(`   🔧 V3.3.280: Enrichissement surdité: "${lesion}" → "${enrichedLesion}"`);
+                }
+
+                // 🆕 V3.3.280: PTSD / SYNDROME STRESS POST-TRAUMATIQUE → Enrichir avec termes barème
+                if (/ptsd|espt|syndrome.*stress.*post[\s-]?traumat|[eé]tat.*stress.*post|troubles?.*stress.*post/i.test(lesion)) {
+                    enrichedLesion = lesion + ' syndrome stress post-traumatique PTSD ESPT troubles anxieux reviviscences cauchemars hypervigilance psychiatrique';
+                    console.log(`   🔧 V3.3.280: Enrichissement PTSD: "${lesion}" → "${enrichedLesion}"`);
+                }
+
+                // 🆕 V3.3.280: DÉPRESSION RÉACTIONNELLE → Enrichir avec termes barème
+                if (/d[eé]pression.*r[eé]actionnel|d[eé]pression.*post[\s-]?traumat|syndrome.*d[eé]pressi|trouble.*d[eé]pressi/i.test(lesion)) {
+                    enrichedLesion = lesion + ' depression reactionnelle post-traumatique syndrome depressif troubles humeur psychiatrique';
+                    console.log(`   🔧 V3.3.280: Enrichissement dépression: "${lesion}" → "${enrichedLesion}"`);
+                }
+
+                // 🆕 V3.3.280: COIFFE DES ROTATEURS / SUS-ÉPINEUX → Enrichir avec termes barème
+                if (/coiffe.*rotateurs?|sus[\s-]?[eé]pineux|sous[\s-]?[eé]pineux|rupture.*coiffe|tendinopathie.*[eé]paule|d[eé]chirure.*sus/i.test(lesion)) {
+                    enrichedLesion = lesion + ' rupture coiffe rotateurs sus-epineux epaule limitation abduction elevation antepulsion peri-arthrite';
+                    console.log(`   🔧 V3.3.280: Enrichissement coiffe rotateurs: "${lesion}" → "${enrichedLesion}"`);
+                }
+
+                // 🆕 V3.3.280: NERF MÉDIAN / CANAL CARPIEN → Enrichir avec termes barème
+                if (/nerf.*m[eé]dian|canal.*carpien|syndrome.*canal.*carpien|compression.*m[eé]dian/i.test(lesion)) {
+                    enrichedLesion = lesion + ' lesion nerf median paralysie mediane canal carpien deficit sensitif moteur opposition pouce';
+                    console.log(`   🔧 V3.3.280: Enrichissement nerf médian: "${lesion}" → "${enrichedLesion}"`);
+                }
+
+                // 🆕 V3.3.281: NERF RADIAL (paralysie, main tombante) → Enrichir avec termes barème
+                if (/(?:paralysie|atteinte|l[eé]sion).*nerf.*radial|nerf.*radial.*(?:paralysie|l[eé]sion)|main\s+tombante/i.test(lesion)) {
+                    enrichedLesion = lesion + ' paralysie nerf radial au-dessous triceps peripherique nerfs membre superieur deficit extension poignet supination';
+                    console.log(`   🔧 V3.3.281: Enrichissement nerf radial: "${lesion}" → "${enrichedLesion}"`);
+                }
+
+                // 🆕 V3.3.281: NERF CUBITAL (paralysie, griffe cubitale) → Enrichir avec termes barème
+                if (/(?:paralysie|atteinte|l[eé]sion|section).*nerf.*cubital|nerf.*cubital|griffe\s+cubitale/i.test(lesion)) {
+                    enrichedLesion = lesion + ' paralysie nerf cubital au poignet peripherique nerfs membre superieur griffe cubitale interosseux deficit adduction doigts';
+                    console.log(`   🔧 V3.3.281: Enrichissement nerf cubital: "${lesion}" → "${enrichedLesion}"`);
+                }
+
+                // 🆕 V3.3.281: LUXATION RÉCIDIVANTE ÉPAULE → Enrichir avec termes barème
+                if (/luxation.*(?:r[eé]cidivante|chronique|r[eé]p[eé]t[eé]e).*[eé]paule|[eé]paule.*luxation.*r[eé]cidivante|instabilit[eé].*chronique.*[eé]paule/i.test(lesion)) {
+                    enrichedLesion = lesion + ' luxation recidivante epaule instabilite chronique glenohumérale apprehension recentrage membre superieur';
+                    console.log(`   🔧 V3.3.281: Enrichissement luxation récidivante épaule: "${lesion}" → "${enrichedLesion}"`);
+                }
+
+                // 🆕 V3.3.281: ANKYLOSE COUDE → Enrichir avec termes barème
+                if (/ankylose.*coude|coude.*ankylose|blocage.*coude|coude.*bloqu/i.test(lesion)) {
+                    enrichedLesion = lesion + ' ankylose coude flexion extension pronosupination position fonction entre pronation supination olecrane';
+                    console.log(`   🔧 V3.3.281: Enrichissement ankylose coude: "${lesion}" → "${enrichedLesion}"`);
+                }
+
+                // 🆕 V3.3.281: FRACTURE HUMÉRUS → Enrichir avec termes barème
+                if (/fracture.*hum[eé]r|hum[eé]r.*fractur/i.test(lesion)) {
+                    enrichedLesion = lesion + ' fracture humerus diaphysaire cal vicieux deformation angulaire consolidation membre superieur bras';
+                    console.log(`   🔧 V3.3.281: Enrichissement fracture humérus: "${lesion}" → "${enrichedLesion}"`);
+                }
+
+                // 🆕 V3.3.280: AMPUTATION TRANS-MÉTATARSIENNE / ORTEILS → Enrichir avec termes barème
+                if (/amputation.*trans[\s-]?m[eé]tatars|amputation.*(?:avant[\s-]?pied|m[eé]tatarse|orteil)/i.test(lesion)) {
+                    enrichedLesion = lesion + ' amputation transmetatarsienne avant-pied orteils pied partielle prothese';
+                    console.log(`   🔧 V3.3.280: Enrichissement amputation transmétatarsienne: "${lesion}" → "${enrichedLesion}"`);
+                }
+
+                // 🆕 V3.3.280: FRACTURE BIMALLÉOLAIRE / CHEVILLE → Enrichir avec termes barème
+                if (/fracture.*(?:bimall[eé]ol|trimall[eé]ol|mall[eé]ol.*(?:interne|externe).*mall[eé]ol|cheville)/i.test(lesion)) {
+                    enrichedLesion = lesion + ' fracture bimalleolaire cheville malleole interne externe tibio-tarsienne raideur';
+                    console.log(`   🔧 V3.3.280: Enrichissement fracture bimalléolaire: "${lesion}" → "${enrichedLesion}"`);
+                }
+
+                // 🆕 V3.3.280: FRACTURE CLAVICULE → Enrichir avec termes barème
+                if (/fracture.*clavicule|clavicule.*fracture|pseudarthrose.*clavicule/i.test(lesion)) {
+                    enrichedLesion = lesion + ' fracture clavicule consolidation cal vicieux bonne non deplacee epaule';
+                    console.log(`   🔧 V3.3.280: Enrichissement fracture clavicule: "${lesion}" → "${enrichedLesion}"`);
+                }
+
+                // 🆕 V3.3.280: GENOU (raideur, fracture plateau tibial, etc.) → Enrichir 
+                if (/(?:raideur|fracture.*plateau.*tibial|gonarthrose|instabilit[eé]).*genou|genou.*(?:raideur|instabilit[eé]|arthrose)/i.test(lesion)) {
+                    enrichedLesion = lesion + ' raideur genou ankylose flexion extension goniometrie genu';
+                    console.log(`   🔧 V3.3.280: Enrichissement genou: "${lesion}" → "${enrichedLesion}"`);
+                }
+
+                // 🆕 V3.3.280: HERNIE DISCALE → Enrichir avec termes barème
+                if (/hernie.*discale|discopathie|protrusion.*discale/i.test(lesion)) {
+                    enrichedLesion = lesion + ' hernie discale lombaire sciatique radiculalgie deficit sensitif raideur rachis';
+                    console.log(`   🔧 V3.3.280: Enrichissement hernie discale: "${lesion}" → "${enrichedLesion}"`);
+                }
+
+                // 🆕 V3.3.280: FRACTURE CÔTES → Enrichir (si pas déjà fait par pattern V3.3.210) 
+                if (/fracture.*c[oô]te|volet.*costal|traumatisme.*thorac/i.test(lesion) && !/nevralgie.*intercostale/i.test(enrichedLesion)) {
+                    enrichedLesion = lesion + ' fracture cotes non compliquee gêne nombre sequelles respiratoires nevralgie intercostale thoracique';
+                    console.log(`   🔧 V3.3.280: Enrichissement fractures côtes thorax: "${lesion}" → "${enrichedLesion}"`);
+                }
+
+                // 🆕 V3.3.280: POUTEAU-COLLES / FRACTURE RADIUS → Enrichir (polytraumatisme context)
+                if (/pouteau[\s-]?colles|fracture.*(?:extremit[eé]|tiers).*(?:inf[eé]rieur|distal).*radius/i.test(lesion)) {
+                    enrichedLesion = lesion + ' fracture pouteau colles extremite inferieure radius poignet cal vicieux consolidation';
+                    console.log(`   🔧 V3.3.280: Enrichissement Pouteau-Colles: "${lesion}" → "${enrichedLesion}"`);
+                }
+
                 // Si "lca" isolé, enrichir avec contexte complet
                 if (/^lca$/i.test(lesion.trim())) {
                     enrichedLesion = 'rupture ligament croisé antérieur genou laxité instabilité';
@@ -17527,7 +17955,7 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
                 const processedLesion = enrichedLesion.replace(/([A-ZCSLT])\s*(\d)/gi, '$1$2');
                 console.log(`🔎 Analyse lésion "${lesion}" → enrichi: "${enrichedLesion}" (processed: "${processedLesion}")`);
                 
-                const lesionResult = comprehensiveSingleLesionAnalysis(processedLesion, externalKeywords);
+                const lesionResult = comprehensiveSingleLesionAnalysis(processedLesion, externalKeywords, true);
                 
                 // 🆕 V3.3.201M: FILTRE COHÉRENCE ANATOMIQUE - Exclure lésions hors contexte
                 // Ex: Si texte parle de "membre supérieur/épaule/poignet", exclure "perte cheveux" ou "rachis"
