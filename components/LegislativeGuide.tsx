@@ -1,8 +1,51 @@
 import React, { useState, useRef, useEffect, useMemo, useCallback } from 'react';
 import { legalTexts } from '../data/civilCode';
 import { nomenclatureRules, searchNomenclature } from '../services/nomenclatureData';
+import { aldData } from '../data/aldList';
+import type { AldItem } from '../data/aldList';
 import { Button } from './ui/Button';
 import { Tabs } from './ui/Tabs';
+
+// ═══════════════════════════════════════════════════════════════
+// GÉNÉRATION DYNAMIQUE DE LA LISTE ALD À PARTIR DE data/aldList.ts
+// ═══════════════════════════════════════════════════════════════
+function generateAldListMarkdown(): string {
+  const lines: string[] = [
+    '## 📋 Liste complète des ALD — Nomenclature codifiée (Art. 5, Décret 84-27)',
+    '',
+    '### 25 catégories d\'ALD ouvrant droit au remboursement à 100% :',
+    '',
+    '> 💡 Consultez la rubrique **Outils → Liste ALD** pour les fiches médicales détaillées avec tooltips.',
+    '',
+  ];
+  for (const cat of aldData) {
+    lines.push(`**${cat.code} — ${cat.name}**`);
+    if (cat.children && cat.children.length > 0) {
+      for (const sub of cat.children) {
+        if (sub.children && sub.children.length > 0) {
+          const leafNames = sub.children.map(l => l.name).join(', ');
+          lines.push(`- *${sub.name}* : ${leafNames}`);
+        } else {
+          lines.push(`- ${sub.name}`);
+        }
+      }
+    }
+    lines.push('');
+  }
+  lines.push('### Également prévu par le Décret 84-27 (Art. 5, 11°) :');
+  lines.push('- **L\'hydatidose** et ses complications');
+  lines.push('');
+  lines.push('### Procédure d\'inscription en ALD :');
+  lines.push('1. Le médecin traitant remplit un **protocole de soins ALD**');
+  lines.push('2. Le médecin conseil valide l\'inscription en ALD');
+  lines.push('3. La CNAS délivre une attestation d\'ALD');
+  lines.push('4. Remboursement à 100% pour les soins liés à l\'ALD');
+  lines.push('');
+  lines.push('> ⚠️ Seuls les soins **en rapport avec l\'ALD** sont à 100%. Les soins sans rapport restent à 80%.');
+  return lines.join('\n');
+}
+
+const ALD_LIST_MARKDOWN = generateAldListMarkdown();
 
 // ═══════════════════════════════════════════════════════════════
 // TYPES
@@ -1675,55 +1718,7 @@ Lorsque le taux d'IPP est **inférieur à 10%**, l'assuré ne perçoit pas une r
   ald_maladies_chroniques: {
     keywords: ['ald', 'chronique'],
     synonymKeywords: ['maladie longue duree', 'affection longue duree', 'maladie chronique', 'exoneration ticket', 'liste maladies longue duree', 'quelles ald', 'maladies exonerantes', 'nomenclature ald'],
-    summary: `## 🏥 Affections de Longue Durée — ALD (Loi 83-11, Art. 20 + Décret 84-27, Art. 5)
-
-### Le principe :
-Les assurés atteints d'une ALD bénéficient d'un remboursement à **100%** (exonération du ticket modérateur) pour tous les soins liés à cette affection (Art. 4, Décret 84-27).
-
-### 25 catégories ALD — Nomenclature codifiée (C01-C25) :
-
-> 💡 Consultez la rubrique **Outils → Liste ALD** pour le détail complet de chaque pathologie avec ses sous-catégories.
-
-| Code | Affection de Longue Durée |
-|------|---------------------------|
-| **C01** | Tuberculose sous toutes ses formes |
-| **C02** | Les psycho-névroses graves |
-| **C03** | Les maladies cancéreuses |
-| **C04** | Les hémopathies (dysprotéinémies, dyslipoïdoses) |
-| **C05** | La sarcoïdose |
-| **C06** | L'hypertension artérielle maligne (HTA maligne) |
-| **C07** | Les maladies cardiaques et vasculaires |
-| | → *Cardiaques :* angine de poitrine, IDM, pontage aorto-coronarien, valvulopathie décompensée, remplacement valvulaire, trouble du rythme avec stimulateur |
-| | → *Vasculaires :* maladies athéromateuses évoluées, artérites des MI, AVC (cérébral, méningé, cérébro-méningé) |
-| **C08** | Maladies neurologiques (SEP, syndromes extra-pyramidaux, paraplégies, hémiplégies, épilepsies) |
-| **C09** | Maladies musculaires ou neuromusculaires (polynévrites, amyotrophies spinales progressives, myopathies, myasthénies) |
-| **C10** | Les encéphalopathies |
-| **C11** | Les néphropathies |
-| **C12** | Les rhumatismes chroniques inflammatoires (spondylarthrite ankylosante, polyarthrite rhumatoïde, arthroses graves) |
-| **C13** | La périartérite noueuse |
-| **C14** | Le lupus érythémateux disséminé (LED) |
-| **C15** | Les insuffisances respiratoires chroniques (obstruction ou restriction) |
-| **C16** | La poliomyélite antérieure aiguë |
-| **C17** | Les maladies métaboliques (diabète et ses complications) |
-| **C18** | Les cardiopathies congénitales |
-| **C19** | Les affections endocriniennes (thyroïde, parathyroïde, surrénales, hypophyse, pancréas…) |
-| **C20** | Le rhumatisme articulaire aigu (RAA) |
-| **C21** | L'ostéomyélite chronique |
-| **C22** | Les complications graves et durables des gastrectomies et de la maladie ulcéreuse |
-| **C23** | Les cirrhoses du foie |
-| **C24** | La rectocolite hémorragique |
-| **C25** | Le pemphigus malin et le psoriasis |
-
-### Également prévu par le Décret 84-27 (Art. 5, 11°) :
-- **L'hydatidose** et ses complications
-
-### Procédure d'inscription en ALD :
-1. Le médecin traitant remplit un **protocole de soins ALD**
-2. Le médecin conseil valide l'inscription en ALD
-3. La CNAS délivre une attestation d'ALD
-4. Remboursement à 100% pour les soins liés à l'ALD
-
-> ⚠️ Seuls les soins **en rapport avec l'ALD** sont à 100%. Les soins sans rapport restent à 80%.`,
+    summary: ALD_LIST_MARKDOWN,
     relatedQuestions: ["Remboursement à 100% ?", "Indemnités journalières ALD ?", "Rôle du médecin-conseil ?"],
     category: 'droits'
   },
@@ -3635,46 +3630,7 @@ Les revalorisations suivent généralement l'**augmentation du SNMG** et l'**inf
   liste_ald_complete: {
     keywords: ['liste', 'ald'],
     synonymKeywords: ['liste maladies longue duree', 'affections longue duree liste', 'maladies chroniques liste', 'quelles ald', 'enumeration ald', 'maladies exonerantes', 'nomenclature ald', 'c01', 'c02', 'c03', 'c04', 'c05', 'c06', 'c07', 'c08', 'c09', 'c10', 'c11', 'c12', 'c13', 'c14', 'c15', 'c16', 'c17', 'c18', 'c19', 'c20', 'c21', 'c22', 'c23', 'c24', 'c25'],
-    summary: `## 📋 Liste complète des ALD — Nomenclature codifiée (Art. 5, Décret 84-27)
-
-### 25 catégories d'ALD ouvrant droit au remboursement à 100% :
-
-> 💡 Consultez la rubrique **Outils → Liste ALD** pour le détail complet de chaque pathologie avec ses sous-catégories.
-
-| Code | Affection de Longue Durée |
-|------|---------------------------|
-| **C01** | Tuberculose sous toutes ses formes |
-| **C02** | Les psycho-névroses graves |
-| **C03** | Les maladies cancéreuses |
-| **C04** | Les hémopathies (dysprotéinémies, dyslipoïdoses) |
-| **C05** | La sarcoïdose |
-| **C06** | L'hypertension artérielle maligne (HTA maligne) |
-| **C07** | Les maladies cardiaques et vasculaires |
-| | → *Cardiaques :* angine de poitrine, IDM, pontage aorto-coronarien, valvulopathie décompensée, remplacement valvulaire, trouble du rythme avec stimulateur |
-| | → *Vasculaires :* maladies athéromateuses évoluées, artérites des MI, AVC (cérébral, méningé, cérébro-méningé) |
-| **C08** | Maladies neurologiques (SEP, syndromes extra-pyramidaux, paraplégies, hémiplégies, épilepsies) |
-| **C09** | Maladies musculaires ou neuromusculaires (polynévrites, amyotrophies spinales progressives, myopathies, myasthénies) |
-| **C10** | Les encéphalopathies |
-| **C11** | Les néphropathies |
-| **C12** | Les rhumatismes chroniques inflammatoires (spondylarthrite ankylosante, polyarthrite rhumatoïde, arthroses graves) |
-| **C13** | La périartérite noueuse |
-| **C14** | Le lupus érythémateux disséminé (LED) |
-| **C15** | Les insuffisances respiratoires chroniques (obstruction ou restriction) |
-| **C16** | La poliomyélite antérieure aiguë |
-| **C17** | Les maladies métaboliques (diabète et ses complications) |
-| **C18** | Les cardiopathies congénitales |
-| **C19** | Les affections endocriniennes (thyroïde, parathyroïde, surrénales, hypophyse, pancréas…) |
-| **C20** | Le rhumatisme articulaire aigu (RAA) |
-| **C21** | L'ostéomyélite chronique |
-| **C22** | Les complications graves et durables des gastrectomies et de la maladie ulcéreuse |
-| **C23** | Les cirrhoses du foie |
-| **C24** | La rectocolite hémorragique |
-| **C25** | Le pemphigus malin et le psoriasis |
-
-### Également prévu par le Décret 84-27 (Art. 5, 11°) :
-- **L'hydatidose** et ses complications
-
-> ⚠️ Le médecin-conseil valide l'inscription en ALD sur présentation d'un dossier médical justificatif. Le remboursement à 100% ne concerne que les soins **en rapport avec l'ALD**.`,
+    summary: ALD_LIST_MARKDOWN,
     law: 'decret_84_27', article: 5,
     relatedQuestions: ["Remboursement à 100% ?", "Indemnités journalières ALD ?", "Rôle du médecin-conseil ?"],
     category: 'droits'
