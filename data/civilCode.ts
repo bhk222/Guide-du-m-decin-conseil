@@ -1435,5 +1435,396 @@ Principes clés du guide :
 2.  **Taux Social**: Un "taux social" peut être ajouté au taux médical pour tenir compte de l'âge, de la qualification professionnelle, et de la situation familiale de la victime.
 3.  **Incapacités Multiples**: En cas de lésions multiples, le taux global n'est pas une simple addition, mais est calculé selon la méthode de la capacité restante (dite de Balthazard).
 4.  **État Antérieur**: Si la victime présentait déjà une incapacité, le calcul du taux pour le nouvel accident est ajusté selon une formule spécifique (Art. 14 de la loi 83-13).`
+    },
+    {
+        id: 'decret_84_27',
+        title: 'Décret 84-27 (Application Loi 83-11 - Assurances Sociales)',
+        content: `Décret n° 84-27 du 11 février 1984 fixant les modalités d'application du titre II de la loi n° 83-11 du 2 juillet 1983 relative aux assurances sociales.
+
+JORADP n° 7 du 14 février 1984, p. 149.
+
+Le Président de la République,
+Sur le rapport du ministre de la protection sociale,
+Vu la Constitution, notamment ses articles 111-10° et 152 ;
+Vu la loi n° 83-11 du 2 juillet 1983 relative aux assurances sociales, notamment son titre II ;
+
+Décrète :
+
+Article 1er. Le présent décret a pour objet de fixer les modalités d'application du titre II de la loi n° 83-11 du 2 juillet 1983 relative aux assurances sociales.
+
+CHAPITRE I
+ASSURANCE-MALADIE
+
+Section 1 - PRESTATIONS EN NATURE
+
+Paragraphe 1 - Ouverture des droits
+
+Art. 2. Pour bénéficier des prestations en nature de l'assurance-maladie, l'assuré social doit justifier, à la date des soins, d'une période de travail au moins égale à trente-huit (38) jours ou deux cent quarante (240) heures durant les douze (12) mois précédant la date des soins.
+
+Art. 3. Les ayants droit du travailleur décédé ou de la veuve remariée continuent de bénéficier des prestations en nature de l'assurance-maladie, pendant douze (12) mois à compter de la date du décès de l'assuré ou du remariage de la veuve.
+
+Paragraphe 2 - Remboursement des soins
+
+Art. 4. Le remboursement des frais de soins est effectué à 100% dans les cas suivants :
+1° - Actes dont la cotation est égale ou supérieure à K 50 ;
+2° - Affections de longue durée telles que prévues à l'article 5 ci-dessous ;
+3° - Sang et dérivés du sang (plasma, albumine, etc.) ;
+4° - Hospitalisation d'une durée supérieure à trente (30) jours ;
+5° - Interruption de travail d'une durée supérieure à trois (3) mois ;
+6° - Grand appareillage, appareillage orthopédique et rééducation fonctionnelle ;
+7° - Titulaires d'une rente d'accident du travail ou de maladie professionnelle d'un taux d'incapacité égal ou supérieur à 50% et leurs ayants droit ;
+8° - Ayants droit du travailleur décédé ;
+9° - Pensionnés dont le montant de la pension est inférieur ou égal au salaire national minimum garanti (SNMG).
+
+Art. 5. La liste des affections de longue durée (ALD) prévues à l'article 4 ci-dessus comprend :
+1° - Les maladies de longue durée ;
+2° - Les maladies métaboliques (diabète et ses complications) ;
+3° - Les cardiopathies congénitales ;
+4° - Les affections endocriniennes ;
+5° - Le rhumatisme articulaire aigu (RAA) ;
+6° - L'ostéomyélite ;
+7° - Les gastrectomies et complications d'ulcères ;
+8° - Les cirrhoses du foie ;
+9° - La rectocolite hémorragique ;
+10° - Le pemphigus et le psoriasis ;
+11° - L'hydatidose ;
+12° - La sarcoïdose ;
+13° - L'hypertension artérielle maligne ;
+14° - Les cardiopathies : angine de poitrine, infarctus du myocarde, pontage coronarien, remplacement valvulaire ;
+15° - Les valvulopathies décompensées ;
+16° - Les maladies athéromateuses évoluées ;
+17° - L'artérite des membres inférieurs ;
+18° - L'accident vasculaire cérébral, méningé ou cérébro-méningé ;
+19° - Les troubles du rythme avec stimulateur ;
+20° - Les maladies neurologiques suivantes :
+    a) Sclérose en plaques ;
+    b) Syndromes extra-pyramidaux ;
+    c) Paraplégies, hémiplégies ;
+    d) Épilepsies du lobe temporal, myocloniques progressives et post-traumatiques ;
+    e) Maladies musculaires ou neuro-musculaires : polynévrites, amyotrophies spinales progressives, myopathies, myasthénies ;
+21° - Les encéphalopathies ;
+22° - Les néphropathies ;
+23° - Les rhumatismes chroniques, inflammatoires ou dégénératifs suivants :
+    a) Spondylarthrite ankylosante ;
+    b) Polyarthrite rhumatoïde ;
+    c) Arthroses graves ;
+24° - La périartérite noueuse ;
+25° - Le lupus érythémateux disséminé ;
+26° - Les insuffisances respiratoires chroniques par obstruction ou restriction ;
+27° - La poliomyélite antérieure aiguë ;
+28° - Les maladies cancéreuses ;
+29° - Les hémopathies ;
+30° - La tuberculose sous toutes ses formes ;
+31° - Les psycho-névroses graves.
+
+Art. 6. Pour le remboursement à 100%, la caisse de sécurité sociale se réserve le droit de vérifier les conditions ouvrant droit à ce taux.
+
+Art. 7. Pour toute demande de remboursement, l'assuré doit joindre les pièces justificatives requises.
+
+Art. 8. La feuille de maladie est le document qui permet le remboursement des soins. Elle est délivrée par l'organisme de sécurité sociale.
+
+Paragraphe 3 - Appareillage et prothèse
+
+Art. 9. Le remboursement ou la prise en charge de l'appareillage et des prothèses est subordonné à l'accord préalable de l'organisme de sécurité sociale qui transmet la demande, accompagnée du devis descriptif au médecin-conseil, pour avis médical.
+
+Art. 10. La fourniture de l'appareillage et des prothèses est subordonnée à un contrôle technique effectué par le médecin-conseil de l'organisme de sécurité sociale.
+
+Art. 11. L'appareil délivré par l'organisme de sécurité sociale est remis à l'assuré à titre personnel et ne peut être ni cédé, ni prêté. L'entretien et les réparations courantes sont à la charge de l'assuré.
+
+Paragraphe 4 - Lunetterie
+
+Art. 12. L'attribution de verres correcteurs ou de montures est subordonnée à l'avis du médecin-conseil de l'organisme de sécurité sociale.
+
+Art. 13. Le renouvellement de la lunetterie ne peut intervenir qu'après un délai de six (6) ans, sauf modification de la correction justifiée par une prescription médicale et confirmée par le médecin-conseil.
+
+Paragraphe 5 - Cures thermales
+
+Art. 14. La durée de la cure thermale est fixée entre dix-huit (18) et vingt et un (21) jours.
+
+Art. 15. La demande de cure thermale doit être adressée à l'organisme de sécurité sociale au moins deux (2) mois avant la date prévue pour le début de la cure.
+L'absence de réponse de l'organisme de sécurité sociale, à l'expiration du mois qui suit l'accusé de réception retourné à l'assuré, vaut rejet de la demande et permet à l'assuré d'engager la procédure de recours prévue dans le cadre de la législation du contentieux de la sécurité sociale.
+Le remboursement des frais de cure, à l'assuré, est subordonné à l'accord préalable et exprès de l'organisme de sécurité sociale.
+
+Art. 16. Les frais de cures thermales ou spécialisées ne sont remboursés ou pris en charge, qu'à la condition que la cure ait été suivie pendant la durée prescrite.
+Toutefois, si l'interruption de la cure est due à un cas justifié de force majeure ou un motif d'ordre médical reconnu par le médecin-conseil, l'organisme de sécurité sociale accorde un remboursement des frais engagés.
+
+Art. 17. Les frais de cures thermales sont remboursés à hauteur de 80%, les 20% restants étant à la charge de l'assuré.
+
+Paragraphe 6 - Produits pharmaceutiques
+
+Art. 18. Le remboursement des frais pharmaceutiques est effectué conformément aux dispositions prévues à l'article 59 de la loi n° 83-11 du 2 juillet 1983 relative aux assurances sociales.
+
+Art. 19. Un arrêté conjoint du ministre chargé de la sécurité sociale et du ministre chargé de la santé, précisera les formalités requises pour le remboursement des produits pharmaceutiques.
+
+Section 2 - PRESTATIONS EN ESPÈCES
+
+Art. 20. Sans préjudice des dispositions des articles 52 et 56 de la loi n° 83-11 du 2 juillet 1983 relative aux assurances sociales, pour bénéficier des indemnités journalières, l'assuré doit justifier, à la date de la constatation de la maladie, d'une activité professionnelle donnant droit à rémunération.
+
+Art. 21. Les affections de longue durée prévues à l'article 20 de la loi n° 83-11 du 2 juillet 1983 relative aux assurances sociales, lorsqu'elles mettent le travailleur dans l'impossibilité, dûment constatée, d'exercer son activité professionnelle, sont les suivantes :
+- La tuberculose sous toutes ses formes ;
+- Les psycho-névroses graves ;
+- Les maladies cancéreuses ;
+- Les hémopathies.
+
+Art. 22. Le nouveau délai prévu à l'article 16, 19, 2ème alinéa, de la loi n° 83-11 du 2 juillet 1983 susvisée, est ouvert pour une affection de longue durée différente de celle prévue à l'alinéa premier dudit article 16.
+
+Art. 23. En cas d'admission dans un établissement de cures thermales ou spécialisées, l'indemnité journalière n'est pas due sauf si l'intéressé bénéficiait, à la date d'admission, des indemnités journalières :
+- au titre de l'assurance-maladie depuis au moins un mois ;
+- au titre des accidents du travail et des maladies professionnelles, sans condition de durée.
+
+Section 3 - FORMALITÉS
+
+Art. 24. Pour le bénéfice des prestations de l'assurance-maladie, le demandeur doit justifier de la qualité d'assuré social et fournir des pièces justificatives dont la liste sera fixée par arrêté du ministre chargé de la sécurité sociale.
+
+Art. 25. En cas d'arrêt de travail pour cause de maladie, la prescription d'arrêt de travail doit comporter, de manière lisible :
+- d'une part, les nom et prénom de l'assuré, son numéro d'immatriculation et la durée probable de l'incapacité de travail ;
+- d'autre part, les nom, prénom, grade, spécialité et adresse professionnelle du prescripteur, la date de l'examen médical de l'assuré ainsi que, le cas échéant, une mention indiquant qu'il s'agit d'une prolongation de l'arrêt de travail.
+
+Section 4 - OBLIGATIONS DES MALADES BÉNÉFICIANT D'UN ARRÊT DE TRAVAIL
+
+Art. 26. Les obligations de l'assuré sont, notamment, les suivantes :
+1°) L'assuré malade ne doit se livrer à aucune activité professionnelle, rémunérée ou non, sauf autorisation de l'organisme de sécurité sociale ;
+2°) Le malade ne doit quitter son domicile que si le praticien le prescrit dans un but thérapeutique. Les heures de sortie doivent se situer, sauf cas de force majeure, entre 10 heures et 16 heures, et être inscrites, par le praticien, sur la feuille de maladie ;
+3°) Durant la maladie, l'assuré ne doit pas se déplacer sans autorisation préalable de l'organisme de sécurité sociale. Celui-ci peut autoriser le déplacement du malade, pour une durée indéterminée, si le médecin traitant le prescrit dans un but thérapeutique ou pour convenance personnelle justifiée, et ce, après avis du médecin-conseil de l'organisme de sécurité sociale ;
+4°) Le malade, dont l'envoi en convalescence est jugé nécessaire par le médecin traitant, doit en aviser l'organisme de sécurité sociale avant son départ et en attendre l'autorisation. Il doit, pendant la durée de la convalescence, se soumettre au contrôle de l'organisme de sécurité sociale ;
+5°) Si l'assuré tombe malade hors de la circonscription de l'organisme de sécurité sociale auquel il est affilié, il doit, dans les formes réglementaires, en aviser celui-ci lequel lui indique l'organisme chargé, le cas échéant, de lui servir les prestations ;
+6°) En cas de prolongation d'arrêt de travail, l'assuré doit, dans le cadre des dispositions de l'article 25, dernier alinéa ci-dessus, en aviser le médecin lors de la prescription de ladite prolongation.
+
+Art. 27. Les organismes de sécurité sociale font procéder à toute enquête utile par leurs agents habilités.
+
+Art. 28. Si l'assuré n'aura pas rempli l'une des obligations des malades visées à l'article 26 ci-dessus, l'organisme de sécurité sociale ne paie pas les indemnités journalières afférentes à la période d'arrêt de travail.
+
+Art. 29. Aucun bénéficiaire de l'assurance-maladie ne peut se soustraire aux divers contrôles requis par l'organisme de sécurité sociale. En cas de refus, les prestations en nature ou en espèces sont suspendues pour la période pendant laquelle le contrôle aura été rendu impossible.
+Pour tous les actes de contrôle médical, l'assuré social a le droit de se faire assister de son médecin traitant, mais les honoraires de ce dernier restent à la charge exclusive de l'assuré.
+
+Section 5 - DISPOSITIONS DIVERSES
+
+Art. 30. Les prestations de l'assurance-maladie sont suspendues pendant la période du service national ou en cas d'appel sous les drapeaux.
+Pour toute la durée du service national ou en cas d'appel sous les drapeaux, les prestations en nature de l'assurance-maladie sont maintenues au profit des ayants droit qui en bénéficiaient au moment de l'appel.
+Pour avoir ou ouvrir droit aux prestations en nature ou en espèces après son retour au foyer et la reprise effective du travail, l'assuré doit remplir, notamment les conditions prévues suivant le cas aux articles 52 et 56 de la loi n° 83-11 du 2 juillet 1983 relative aux assurances sociales, le temps passé sous les drapeaux étant considéré comme période de travail.
+
+Art. 31. En cas de maladie de l'enfant d'assurés affiliés à des organismes de sécurité sociale différents, les prestations sont dues par l'organisme dont relève le père. Lorsque celui-ci n'ouvre pas droit au bénéfice de l'assurance-maladie, les prestations sont dues par l'organisme dont relève la mère.
+
+CHAPITRE II
+ASSURANCE-MATERNITÉ
+
+Section 1 - OUVERTURE DES DROITS
+
+Art. 32. Pour avoir droit aux prestations en espèces de l'assurance-maternité, l'assurée ne doit pas avoir cessé son travail pour des motifs autres que ceux indemnisés par la sécurité sociale, pendant la période comprise entre la date de la première constatation médicale de la grossesse et la date de l'accouchement.
+
+Art. 33. L'état de grossesse, médicalement constaté, doit être notifié, par l'intéressée, à l'organisme de sécurité sociale concerné, au moins trois (3) mois avant la date présumée de l'accouchement.
+Le médecin ou l'auxiliaire médical habilité devront indiquer, sur le certificat qu'ils établiront, la date présumée de l'accouchement.
+
+Art. 34. La future mère doit se soumettre aux examens prénatals et postnatal indiqués ci-dessous :
+- un examen clinique complet avant la fin du 3ème mois de grossesse ;
+- un examen obstétrical au cours du 6ème mois de grossesse ;
+- deux examens gynécologiques : l'un, 4 semaines, au plus tôt, avant l'accouchement, et l'autre, 6 semaines, au plus tard, après l'accouchement.
+
+Section 2 - PRESTATIONS
+
+Art. 35. Le droit aux prestations de l'assurance-maternité est ouvert pour toute interruption de grossesse survenant après la fin du 6ème mois de gestation, même si l'enfant n'est pas né vivant.
+
+Art. 36. Le conjoint de l'assuré décédé peut bénéficier des prestations en nature de l'assurance-maternité, même si la constatation médicale de la grossesse a eu lieu après le décès de l'assuré, dès l'instant que ce dernier justifiait, à la date de son décès, des conditions de travail requises.
+Cette disposition ne s'applique qu'aux accouchements survenus, au plus tard, 305 jours après le décès.
+Dans le cas de divorce ou de séparation, intervenu entre la date présumée de la conception et celle de la naissance, la parturiente est subrogée dans les droits de l'assuré, si elle a supporté les frais de la maternité.
+
+Section 3 - FORMALITÉS
+
+Art. 37. L'assuré qui demande le bénéfice des prestations de l'assurance-maternité doit justifier de sa qualité d'assuré social et fournir des pièces justificatives dont la liste sera fixée par arrêté du ministre chargé de la sécurité sociale.
+
+Art. 38. Le défaut d'accomplissement, dans les délais impartis, de l'une des formalités prévues aux articles 33 et 34 ci-dessus est sanctionné par une diminution de 20% des prestations dues, sauf cas de force majeure.
+
+Art. 39. L'assurée qui demande le bénéfice des indemnités journalières de l'assurance-maternité doit fournir une attestation de l'employeur précisant la date d'interruption du travail et le montant des dernières rémunérations servant de base au calcul de l'indemnité journalière.
+
+CHAPITRE III
+ASSURANCE-INVALIDITÉ
+
+Section 1 - ÉVALUATION ET APPRÉCIATION DE L'ÉTAT D'INVALIDITÉ
+
+Art. 40. Pour l'application de l'article 32 de la loi n° 83-11 du 2 juillet 1983 relative aux assurances sociales, est considéré comme étant en état d'invalidité, l'assuré présentant une invalidité réduisant au moins de moitié sa capacité de travail ou de gain, c'est-à-dire le mettant hors d'état de se procurer, dans une profession quelconque, un salaire supérieur à la moitié du salaire de poste d'un travailleur de la même catégorie dans la profession qu'il exerçait, soit à la date des soins reçus, soit à la date de la constatation médicale de l'accident.
+
+Art. 41. L'état d'invalidité est apprécié à l'expiration de la période pendant laquelle l'assuré a bénéficié des prestations en espèces de l'assurance-maladie.
+Toutefois, lorsque l'état d'invalidité n'est pas stabilisé à l'expiration de ladite période, le montant de la pension est déterminé à titre provisoire.
+
+Art. 42. L'état d'invalidité est évalué globalement sans qu'il soit fait de distinction entre la maladie ou l'accident qui a entraîné cette invalidité et les autres facteurs d'incapacité de travail, même si ceux-ci ou certains d'entre eux sont antérieurs à la date depuis laquelle court l'assurance.
+Toutefois, les maladies, blessures et infirmités relevant d'une législation particulière, ne sont pas prises en considération pour l'appréciation de l'état d'invalidité.
+
+Section 2 - PRESTATIONS
+
+Art. 43. Les dispositions de l'article 20 du présent décret sont applicables aux prestations de l'assurance-invalidité.
+
+Art. 44. Sous peine de voir sa pension suspendue ou supprimée, l'invalide doit se soumettre aux visites médicales qui peuvent être demandées, à tout moment, par l'organisme de sécurité sociale.
+Les frais de ces visites sont à la charge de l'organisme de sécurité sociale.
+
+CHAPITRE IV
+DISPOSITIONS FINALES
+
+Art. 45. Un arrêté du ministre chargé de la sécurité sociale fixera les modèles d'imprimés devant être utilisés dans le cadre de l'application des dispositions de la loi n° 83-11 du 2 juillet 1983 relative aux assurances sociales.
+
+Art. 46. Le présent décret sera publié au Journal officiel de la République algérienne démocratique et populaire.
+
+Fait à Alger, le 11 février 1984.
+Chadli BENDJEDID.`
+    },
+    {
+        id: 'decret_84_28',
+        title: 'Décret 84-28 (Application Loi 83-13 - AT/MP)',
+        content: `Décret n° 84-28 du 11 février 1984 fixant les modalités d'application des titres III, IV et VIII de la loi n° 83-13 du 2 juillet 1983 relative aux accidents du travail et aux maladies professionnelles.
+
+JORADP n° 7 du 14 février 1984, p. 155.
+
+Le Président de la République,
+Sur le rapport du ministre de la protection sociale,
+Vu la Constitution, notamment ses articles 111-10° et 152 ;
+Vu la loi n° 83-11 du 2 juillet 1983 relative aux assurances sociales ;
+Vu la loi n° 83-13 du 2 juillet 1983 relative aux accidents du travail et aux maladies professionnelles, notamment ses titres III, IV et VIII ;
+
+Décrète :
+
+Article 1er. Le présent décret a pour objet de fixer les modalités d'application des titres III, IV et VIII de la loi n° 83-13 du 2 juillet 1983 relative aux accidents du travail et aux maladies professionnelles.
+
+CHAPITRE I
+PRESTATIONS D'INCAPACITÉ TEMPORAIRE
+
+Section 1 - Prestations en nature
+
+Art. 2. En application des dispositions prévues à l'article 29 de la loi n° 83-13 du 2 juillet 1983 susvisée, les prestations sont dues au-delà de la date de consolidation, dès lors et aussi longtemps que l'état de la victime d'un accident du travail ou d'une maladie professionnelle justifie la continuation du traitement.
+
+Art. 3. L'organisme de sécurité sociale qui prend en charge la rechute dans les conditions fixées à l'article 62 de la loi n° 83-13 du 2 juillet 1983 susvisée verse les prestations relatives aux soins qu'il y ait ou non un nouvel arrêt de travail.
+
+Art. 4. Les nomenclatures en vigueur en matière d'assurance-maladie sont applicables en matière d'accidents du travail et de maladies professionnelles, sous réserve de dispositions spéciales fixées dans les mêmes formes que la nomenclature générale des actes professionnels.
+
+Section 2 - Prestations en espèces
+
+Art. 5. Les indemnités journalières ne sont dues que si la victime justifie, au moment de l'accident ou de la date de la première constatation de la maladie professionnelle, d'une activité professionnelle donnant droit à rémunération.
+
+Art. 6. L'indemnité journalière est due jusques et y compris le jour fixé comme étant celui de la guérison, de la consolidation ou du décès.
+
+Art. 7. Dans le cas de rechute ou d'aggravation entraînant une nouvelle incapacité temporaire de travail, le salaire, pris pour le calcul de l'indemnité journalière, est celui qui correspond au salaire journalier de poste perçu antérieurement à la date de cette nouvelle interruption.
+Lorsque, au moment de la rechute ou de l'aggravation, la victime, apparemment consolidée, bénéficie déjà d'une rente, le service des indemnités journalières est substitué à celui de la rente si lesdites indemnités sont plus avantageuses.
+
+Section 3 - Dispositions communes aux prestations en nature et aux prestations en espèces
+
+Art. 8. La date de consolidation des lésions est la date à laquelle l'état de la victime, ayant pris un caractère permanent ou définitif, n'est plus susceptible de modification sensible, sous réserve de rechute ou de révision.
+Si la victime est atteinte d'une incapacité partielle ou totale, non susceptible d'amélioration, la consolidation ne peut être prononcée aussi longtemps que l'état de la victime continue à évoluer.
+La date de consolidation est fixée en fonction de critères exclusivement médicaux.
+
+Art. 9. En cas d'accident, l'employeur doit délivrer à la victime, ou à ses représentants tels que prévus à l'article 14 de la loi n° 83-13 du 2 juillet 1983 susvisée, une feuille d'accident portant désignation de l'organisme de sécurité sociale chargé du paiement des prestations.
+En cas de carence de l'employeur, l'organisme de sécurité sociale peut délivrer lui-même la feuille d'accident.
+Il est interdit de mentionner sur la feuille d'accident, le nom et l'adresse d'un praticien, d'un pharmacien, d'un auxiliaire médical, d'un laboratoire ou de toute structure sanitaire.
+La délivrance de la feuille d'accident, par l'employeur ou par l'organisme de sécurité sociale, n'entraîne pas, de plein droit, la prise en charge de l'indemnisation au titre de la loi n° 83-13 du 2 juillet 1983 susvisée.
+La feuille d'accident est présentée, par la victime ou ses représentants, au praticien, au pharmacien, à l'auxiliaire médical, au laboratoire, au fournisseur et à la structure sanitaire concernée.
+
+Art. 10. Les dispositions relatives à la feuille de maladie délivrée dans le cadre de l'assurance-maladie sont applicables à la feuille d'accident.
+
+Art. 11. La rechute est constituée soit par l'aggravation de la lésion dont la victime est atteinte, soit par l'apparition d'une nouvelle lésion résultant de l'accident du travail ou de la maladie professionnelle, alors que la victime avait été considérée comme guérie, ou bien n'avait souffert, jusqu'alors, d'aucune lésion apparente.
+Le traitement médical et, éventuellement, l'incapacité temporaire, entraînés par la rechute, sont pris en charge au titre des accidents du travail et des maladies professionnelles, quel que soit le temps écoulé entre la date soit de l'accident, soit de la dernière guérison, soit de la consolidation des lésions, et la date de la rechute.
+
+CHAPITRE II
+PRESTATIONS D'INCAPACITÉ PERMANENTE
+
+Section 1 - Montant de la rente
+
+Art. 12. Les taux figurant au barème prévu à l'article 42 de la loi n° 83-13 du 2 juillet 1983 susvisée s'imposent au médecin-conseil et au médecin-expert, pour la détermination du taux médical d'incapacité.
+
+Art. 13. Pour l'application de l'article 40 de la loi n° 83-13 du 2 juillet 1983 susvisée, lorsque la victime, au moment de l'arrêt de travail consécutif à l'accident ou à la maladie professionnelle, a travaillé pendant une durée inférieure à douze mois, la rente est calculée sur la base :
+- du salaire de poste de la victime, si celle-ci a travaillé pendant au moins un mois ;
+- du salaire de poste correspondant à la catégorie professionnelle de la victime, si celle-ci a travaillé pendant moins d'un mois.
+
+Art. 14. Lorsque l'état d'incapacité permanente n'apparaît, pour la première fois, qu'après une rechute ou une aggravation, la période de douze mois à retenir, pour le calcul de la rente, est celle qui précède, selon le mode de calcul le plus favorable à la victime :
+- soit la date de l'arrêt de travail consécutif à l'accident ou à la maladie professionnelle ;
+- soit la date de l'arrêt de travail consécutif à la rechute ou l'aggravation ;
+- soit la date de consolidation des lésions.
+
+Section 2 - Capital représentatif de la rente
+
+Art. 15. Le capital représentatif de la rente prévu à l'article 44 de la loi n° 83-13 du 2 juillet 1983 susvisée, est déterminé en fonction des éléments suivants :
+- une rente calculée pour ordre, sur la base, d'une part, du salaire national minimum garanti (SNMG) en vigueur à la date de la capitalisation, et ce, quel que soit le salaire perçu par la victime, et, d'autre part, du taux d'incapacité fixé ;
+- l'âge atteint par la victime à la date de la consolidation de la lésion ;
+- un coefficient correspondant à l'âge de la victime, conformément à un barème fixé par arrêté du ministre chargé de la sécurité sociale.
+
+Art. 16. Le capital représentatif de la rente est égal au montant annuel de la rente, telle que déterminée à l'article 15 ci-dessus, multiplié par le coefficient correspondant à l'âge de la victime.
+
+Art. 17. Le maximum du capital représentatif de la rente, tel que prévu à l'article 44, 4ème alinéa de la loi n° 83-13 du 2 juillet 1983 susvisée, est égal à 2.300 fois le montant horaire du salaire national minimum garanti.
+
+Section 3 - Accidents successifs
+
+Art. 18. En cas d'accidents successifs survenus à une même personne, l'organisme de sécurité sociale compétent pour le dernier accident, assume la charge des rentes afférentes à chacun des accidents du travail antérieurs.
+Cet organisme a qualité pour assurer la gestion de l'ensemble desdites rentes et notamment, pour recevoir tout document, procéder à tout contrôle, prendre toute décision et exercer toute action relative.
+Il doit informer la victime qu'il assure, désormais, le service de l'ensemble des rentes.
+Cet organisme supporte, définitivement, la charge de l'ensemble des rentes.
+
+Art. 19. Un arrêté du ministre chargé de la sécurité sociale fixera les modalités d'application de la présente section, notamment le mode de calcul des rentes attribuées en cas d'accidents successifs.
+
+Section 4 - Révision
+
+Art. 20. Lorsque la révision donne lieu à augmentation de la rente après une rechute ayant entraîné le paiement de nouvelles prestations d'incapacité temporaire, la nouvelle rente a pour point de départ le lendemain de la date de consolidation suivant la rechute.
+
+CHAPITRE III
+DISPOSITIONS DIVERSES
+
+Art. 21. Les montants des rentes allouées, en réparation des accidents du travail survenus ou des maladies professionnelles constatées avant le 1er janvier 1984, sont revalorisés dans les mêmes conditions que les pensions d'invalidité attribuées au titre des assurances sociales et telles que prévues à l'article 42 de la loi n° 83-11 du 2 juillet 1983 relative aux assurances sociales.
+
+CHAPITRE IV
+DISPOSITIONS FINALES
+
+Art. 22. Un arrêté du ministre chargé de la sécurité sociale fixera les modèles d'imprimés devant être utilisés dans le cadre de l'application des dispositions de la loi n° 83-13 du 2 juillet 1983 relative aux accidents du travail et aux maladies professionnelles.
+
+Art. 23. Le présent décret sera publié au Journal officiel de la République algérienne démocratique et populaire.
+
+Fait à Alger, le 11 février 1984.
+Chadli BENDJEDID.`
+    },
+    {
+        id: 'decret_84_29',
+        title: 'Décret 84-29 (Majoration Tierce Personne)',
+        content: `Décret n° 84-29 du 11 février 1984 fixant le montant minimum de la majoration pour tierce personne prévue par la législation de sécurité sociale.
+
+JORADP n° 7 du 14 février 1984, p. 157.
+
+Le Président de la République,
+Sur le rapport du ministre de la protection sociale,
+Vu la Constitution, notamment ses articles 111-10° et 152 ;
+Vu la loi n° 83-11 du 2 juillet 1983 relative aux assurances sociales, notamment ses articles 36 et 39 ;
+Vu la loi n° 83-12 du 2 juillet 1983 relative à la retraite, notamment son article 18 ;
+Vu la loi n° 83-13 du 2 juillet 1983 relative aux accidents du travail et aux maladies professionnelles, notamment son article 48 ;
+
+Décrète :
+
+Article 1er. Est fixé à 8.400 DA, le montant annuel minimum de la majoration pour tierce personne servie aux titulaires d'une pension d'invalidité ou de retraite, ou d'une rente d'accident du travail ou de maladie professionnelle, dans les conditions prévues à l'article 36 de la loi n° 83-11 du 2 juillet 1983 susvisée et à l'article 48 de la loi n° 83-13 du 2 juillet 1983 susvisée.
+
+Art. 2. Le présent décret sera publié au Journal officiel de la République algérienne démocratique et populaire.
+
+Fait à Alger, le 11 février 1984.
+Chadli BENDJEDID.`
+    },
+    {
+        id: 'decret_84_30',
+        title: 'Décret 84-30 (Dispositions Transitoires Sécurité Sociale)',
+        content: `Décret n° 84-30 du 11 février 1984 fixant les dispositions transitoires applicables en matière de gestion de sécurité sociale.
+
+JORADP n° 7 du 14 février 1984, p. 157.
+
+Le Président de la République,
+Sur le rapport du ministre de la protection sociale,
+Vu la Constitution, notamment ses articles 111-10° et 152 ;
+Vu la loi n° 83-11 du 2 juillet 1983 relative aux assurances sociales ;
+Vu la loi n° 83-12 du 2 juillet 1983 relative à la retraite ;
+Vu la loi n° 83-13 du 2 juillet 1983 relative aux accidents du travail et aux maladies professionnelles ;
+Vu la loi n° 83-14 du 2 juillet 1983 relative aux obligations des assujettis en matière de sécurité sociale ;
+Vu la loi n° 83-15 du 2 juillet 1983 relative au contentieux en matière de sécurité sociale ;
+
+Décrète :
+
+Article 1er. À titre transitoire et en attendant la mise en œuvre de la restructuration du secteur de la sécurité sociale, la gestion des risques de sécurité sociale est assurée par les organismes ou services existant antérieurement au 1er janvier 1984.
+
+Art. 2. Les procédures relatives au versement des cotisations et au service des prestations seront définies par arrêté conjoint du ministre chargé de la sécurité sociale et du ou des ministres concernés.
+
+Art. 3. Pendant la période transitoire prévue à l'article 1er ci-dessus, la compensation financière entre l'ensemble des organismes de sécurité sociale pourra être effectuée, en tant que de besoin, par décret.
+
+Art. 4. Le présent décret sera publié au Journal officiel de la République algérienne démocratique et populaire.
+
+Fait à Alger, le 11 février 1984.
+Chadli BENDJEDID.`
     }
 ];

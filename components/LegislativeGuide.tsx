@@ -221,6 +221,11 @@ const SYNONYMS: Record<string, string[]> = {
   'capital': ['forfait', 'versement unique', 'somme', 'montant unique'],
   'imputabilite': ['imputer', 'imputable', 'lien', 'rattacher', 'cause', 'consequence'],
   'avis': ['decision', 'conclusion', 'opinion', 'jugement'],
+  'decret': ['texte reglementaire', 'reglement', 'application', 'modalites'],
+  'ald': ['affection longue duree', 'maladie chronique', 'longue maladie', 'exoneration'],
+  'lunetterie': ['lunettes', 'verres', 'monture', 'optique', 'correction visuelle'],
+  'cure': ['thermalisme', 'thermale', 'station thermale', 'soins thermaux'],
+  'feuille': ['formulaire', 'imprime', 'feuille maladie', 'feuille accident'],
 };
 
 // Expand query with synonyms for better matching
@@ -366,6 +371,10 @@ const detectLawReference = (query: string): string | null => {
     { regex: /(?:loi|texte|code)?\s*08[\s-]*08/, key: 'explication_loi_08_08' },
     { regex: /(?:loi|texte|code)?\s*83[\s-]*15/, key: 'explication_loi_83_15' },
     { regex: /(?:loi|texte|code)?\s*83[\s-]*12/, key: 'explication_loi_83_12' },
+    { regex: /(?:decret|décret)?\s*84[\s-]*27/, key: 'explication_decret_84_27' },
+    { regex: /(?:decret|décret)?\s*84[\s-]*28/, key: 'explication_decret_84_28' },
+    { regex: /(?:decret|décret)?\s*84[\s-]*29/, key: 'explication_decret_84_29' },
+    { regex: /(?:decret|décret)?\s*84[\s-]*30/, key: 'explication_decret_84_30' },
   ];
   for (const { regex, key } of lawPatterns) {
     if (regex.test(normalized) && !normalized.match(/article\s*\d+/)) {
@@ -2694,6 +2703,116 @@ Le guide contient un barème détaillé par appareil :
   },
 
   // ═══════════════════════════════════════════════════════════
+  // DÉCRETS D'APPLICATION — EXPLICATIONS GÉNÉRALES
+  // ═══════════════════════════════════════════════════════════
+  explication_decret_84_27: {
+    keywords: ['decret', '84', '27'],
+    synonymKeywords: ['decret 84-27', 'decret application 83-11', 'modalites assurances sociales', 'decret assurance maladie'],
+    summary: `## 📜 Décret 84-27 — Application de la Loi 83-11 (Assurances Sociales)
+
+Le **Décret n° 84-27 du 11 février 1984** fixe les modalités d'application du titre II de la loi 83-11 relative aux assurances sociales.
+
+### Structure du décret (46 articles) :
+
+| Chapitre | Contenu | Articles |
+|----------|---------|----------|
+| **I** | Assurance-Maladie | Art. 2-31 |
+| **II** | Assurance-Maternité | Art. 32-39 |
+| **III** | Assurance-Invalidité | Art. 40-44 |
+| **IV** | Dispositions finales | Art. 45-46 |
+
+### Points clés pour le médecin-conseil :
+
+| Sujet | Article | Essentiel |
+|-------|---------|-----------|
+| Ouverture des droits | Art. 2 | 38 jours ou 240 heures / 12 mois |
+| Remboursement 100% | Art. 4 | 9 cas (K≥50, ALD, hospitalisation >30j, etc.) |
+| **Liste des ALD** | **Art. 5** | **31 catégories d'affections** |
+| Appareillage | Art. 9-11 | Accord préalable + avis médecin-conseil |
+| Lunetterie | Art. 12-13 | Renouvellement 6 ans minimum |
+| Cures thermales | Art. 14-17 | 18-21 jours, 80% remboursement |
+| Obligations malade | Art. 26 | 6 obligations (sorties 10h-16h, etc.) |
+| Invalidité | Art. 40 | Réduction ≥ 50% capacité travail |
+
+> 💡 Ce décret est **fondamental** pour la pratique quotidienne du médecin-conseil : il détaille les conditions de remboursement, la liste officielle des ALD, et les règles de contrôle des malades.`,
+    relatedQuestions: ["Liste complète des ALD ?", "Remboursement à 100% ?", "Obligations du malade en arrêt ?", "Assurance-invalidité ?"],
+    category: 'general'
+  },
+  explication_decret_84_28: {
+    keywords: ['decret', '84', '28'],
+    synonymKeywords: ['decret 84-28', 'decret application 83-13', 'modalites at mp', 'decret accident travail'],
+    summary: `## 📜 Décret 84-28 — Application de la Loi 83-13 (AT/MP)
+
+Le **Décret n° 84-28 du 11 février 1984** fixe les modalités d'application des titres III, IV et VIII de la loi 83-13 relative aux accidents du travail et aux maladies professionnelles.
+
+### Structure du décret (23 articles) :
+
+| Chapitre | Contenu | Articles |
+|----------|---------|----------|
+| **I** | Incapacité temporaire | Art. 2-11 |
+| **II** | Incapacité permanente | Art. 12-20 |
+| **III** | Dispositions diverses | Art. 21 |
+| **IV** | Dispositions finales | Art. 22-23 |
+
+### Points clés pour le médecin-conseil :
+
+| Sujet | Article | Essentiel |
+|-------|---------|-----------|
+| Soins après consolidation | Art. 2 | Prestations dues si traitement justifié |
+| Rechute — prise en charge | Art. 3 | Avec ou sans nouvel arrêt |
+| **Consolidation** | **Art. 8** | **Critères exclusivement médicaux** |
+| Feuille d'accident | Art. 9 | Délivrance et interdictions |
+| Rechute — définition | Art. 11 | Aggravation ou nouvelle lésion |
+| **Barème — s'impose** | **Art. 12** | **Le barème lie le médecin-conseil** |
+| Calcul rente | Art. 13-14 | Mode le plus favorable à la victime |
+| Capital représentatif | Art. 15-17 | Max = 2300 × SNMG horaire |
+| Accidents successifs | Art. 18 | Dernier organisme assume tout |
+| Révision | Art. 20 | Point départ = lendemain consolidation |
+
+> 💡 Ce décret est **capital** pour le médecin-conseil en AT/MP. Il définit la consolidation, impose le barème, et organise le passage de l'incapacité temporaire à l'incapacité permanente.`,
+    relatedQuestions: ["Date de consolidation ?", "Barème et taux d'IPP ?", "Rechute et aggravation ?", "Calcul de la rente ?"],
+    category: 'general'
+  },
+  explication_decret_84_29: {
+    keywords: ['decret', '84', '29'],
+    synonymKeywords: ['decret 84-29', 'tierce personne decret', 'majoration tierce', 'mtp decret'],
+    summary: `## 📜 Décret 84-29 — Majoration pour Tierce Personne
+
+Le **Décret n° 84-29 du 11 février 1984** fixe le montant minimum de la majoration pour tierce personne (MTP).
+
+### Contenu :
+- **Montant minimum** : 8.400 DA/an (montant initial 1984, revalorisé depuis)
+- **Bénéficiaires** : titulaires d'une pension d'invalidité, de retraite, ou d'une rente AT/MP
+- **Base légale** : Art. 36 loi 83-11 et Art. 48 loi 83-13
+
+### Application pratique :
+Le médecin-conseil évalue si l'assuré a besoin de l'assistance d'une tierce personne pour les actes ordinaires de la vie quotidienne.
+
+> 💡 La MTP est un complément de ressources essentiel pour les grands invalides ou les accidentés les plus gravement atteints.`,
+    relatedQuestions: ["Pension d'invalidité ?", "Rente AT/MP ?", "Catégories d'invalidité ?"],
+    category: 'general'
+  },
+  explication_decret_84_30: {
+    keywords: ['decret', '84', '30'],
+    synonymKeywords: ['decret 84-30', 'dispositions transitoires', 'gestion securite sociale transition'],
+    summary: `## 📜 Décret 84-30 — Dispositions Transitoires (Sécurité Sociale)
+
+Le **Décret n° 84-30 du 11 février 1984** fixe les dispositions transitoires applicables en matière de gestion de sécurité sociale.
+
+### Contenu :
+- **Art. 1** : En attendant la restructuration du secteur, la gestion des risques est assurée par les organismes existants avant le 1er janvier 1984
+- **Art. 2** : Les procédures de cotisations et prestations sont définies par arrêté conjoint
+- **Art. 3** : Compensation financière entre organismes possible par décret
+
+### Contexte :
+Ce décret a organisé la transition entre l'ancien et le nouveau système de sécurité sociale lors de l'entrée en vigueur des lois de juillet 1983.
+
+> 💡 Ce décret est essentiellement **historique**. Il a permis d'assurer la continuité du service pendant la mise en place du nouveau dispositif.`,
+    relatedQuestions: ["Loi 83-11 ?", "Loi 83-13 ?", "Organisation de la CNAS ?"],
+    category: 'general'
+  },
+
+  // ═══════════════════════════════════════════════════════════
   // SUJETS EXPERTS AVANCÉS
   // ═══════════════════════════════════════════════════════════
   salaire_reference: {
@@ -3458,6 +3577,586 @@ Les revalorisations suivent généralement l'**augmentation du SNMG** et l'**inf
     relatedQuestions: ["Comment sont calculées les rentes ?", "Le seuil de 10% ?", "Le capital forfaitaire (IPP < 10%) ?"],
     category: 'calcul'
   },
+
+  // ─── DÉCRETS D'APPLICATION (84-27, 84-28, 84-29) ───
+  remboursement_100_pourcent: {
+    keywords: ['remboursement', '100'],
+    synonymKeywords: ['cent pour cent', 'taux 100', 'exoneration', 'prise en charge integrale', 'gratuit', 'sans ticket', 'k50', 'k 50'],
+    summary: `## 💯 Remboursement à 100% — Cas prévus (Art. 4, Décret 84-27)
+
+### Les 9 cas de remboursement intégral :
+| N° | Cas | Détail |
+|----|-----|--------|
+| 1° | **Actes K ≥ 50** | Actes dont la cotation est ≥ K50 |
+| 2° | **ALD** | Affections de longue durée (liste art. 5) |
+| 3° | **Sang et dérivés** | Plasma, albumine, etc. |
+| 4° | **Hospitalisation > 30 jours** | Durée supérieure à 30 jours |
+| 5° | **Arrêt de travail > 3 mois** | Interruption de travail > 3 mois |
+| 6° | **Grand appareillage** | Appareillage orthopédique, rééducation fonctionnelle |
+| 7° | **Rente AT/MP ≥ 50%** | Titulaires rente IPP ≥ 50% et leurs ayants droit |
+| 8° | **Ayants droit travailleur décédé** | Survivants |
+| 9° | **Pensionnés ≤ SNMG** | Montant pension ≤ salaire minimum |
+
+### Référence :
+- **Art. 4, Décret 84-27** du 11/02/1984 (application loi 83-11)
+- Le taux normal est de 80%, les 9 cas ci-dessus ouvrent droit au 100%
+
+> 💡 Le médecin-conseil vérifie les conditions pour accorder le taux de 100%. Attention particulière aux actes K≥50 et aux ALD.`,
+    law: 'decret_84_27', article: 4,
+    relatedQuestions: ["Quelle est la liste des ALD ?", "Conditions d'ouverture des droits ?", "Appareillage et prothèse ?"],
+    category: 'droits'
+  },
+  liste_ald_complete: {
+    keywords: ['liste', 'ald'],
+    synonymKeywords: ['liste maladies longue duree', 'affections longue duree liste', 'maladies chroniques liste', 'quelles ald', 'enumeration ald', 'maladies exonerantes'],
+    summary: `## 📋 Liste complète des ALD (Art. 5, Décret 84-27)
+
+### 31 catégories d'ALD ouvrant droit au remboursement à 100% :
+
+**Maladies métaboliques et endocriniennes :**
+| N° | Affection |
+|----|-----------|
+| 1° | Maladies de longue durée |
+| 2° | Maladies métaboliques — **diabète** et ses complications |
+| 3° | Cardiopathies congénitales |
+| 4° | Affections endocriniennes |
+
+**Maladies ostéo-articulaires :**
+| N° | Affection |
+|----|-----------|
+| 5° | Rhumatisme articulaire aigu (RAA) |
+| 6° | Ostéomyélite |
+| 23° | Rhumatismes chroniques : **spondylarthrite ankylosante**, **polyarthrite rhumatoïde**, arthroses graves |
+
+**Maladies digestives :**
+| N° | Affection |
+|----|-----------|
+| 7° | Gastrectomies et complications d'ulcères |
+| 8° | Cirrhoses du foie |
+| 9° | Rectocolite hémorragique |
+
+**Maladies cardiovasculaires :**
+| N° | Affection |
+|----|-----------|
+| 13° | Hypertension artérielle maligne |
+| 14° | Cardiopathies : angine de poitrine, **IDM**, pontage coronarien, remplacement valvulaire |
+| 15° | Valvulopathies décompensées |
+| 16° | Maladies athéromateuses évoluées |
+| 17° | Artérite des membres inférieurs |
+| 18° | AVC (cérébral, méningé ou cérébro-méningé) |
+| 19° | Troubles du rythme avec stimulateur |
+
+**Maladies neurologiques :**
+| N° | Affection |
+|----|-----------|
+| 20° | SEP, syndromes extra-pyramidaux, paraplégies, hémiplégies, épilepsies, myopathies, myasthénies, polynévrites |
+| 21° | Encéphalopathies |
+
+**Maladies néphrologiques :**
+| N° | Affection |
+|----|-----------|
+| 22° | Néphropathies |
+
+**Maladies systémiques et autres :**
+| N° | Affection |
+|----|-----------|
+| 10° | Pemphigus et psoriasis |
+| 11° | Hydatidose |
+| 12° | Sarcoïdose |
+| 24° | Périartérite noueuse |
+| 25° | Lupus érythémateux disséminé |
+| 26° | Insuffisances respiratoires chroniques |
+| 27° | Poliomyélite antérieure aiguë |
+| 28° | Maladies cancéreuses |
+| 29° | Hémopathies |
+| 30° | Tuberculose sous toutes ses formes |
+| 31° | Psycho-névroses graves |
+
+> 💡 Cette liste est la **liste officielle** des ALD en Algérie. Le médecin-conseil valide l'inscription en ALD sur présentation d'un dossier médical justificatif.`,
+    law: 'decret_84_27', article: 5,
+    relatedQuestions: ["Remboursement à 100% ?", "Indemnités journalières ALD ?", "Rôle du médecin-conseil ?"],
+    category: 'droits'
+  },
+  ouverture_droits_assurance_maladie: {
+    keywords: ['ouverture', 'droits'],
+    synonymKeywords: ['conditions ouverture', 'heures travail', 'jours travail', '38 jours', '240 heures', 'droit prestations', 'ouvrir droit'],
+    summary: `## 🔑 Ouverture des droits — Assurance maladie (Art. 2-3, Décret 84-27)
+
+### Conditions (Art. 2) :
+Pour bénéficier des prestations en nature de l'assurance-maladie, l'assuré doit justifier de :
+- **38 jours** de travail, OU
+- **240 heures** de travail
+
+durant les **12 mois** précédant la date des soins.
+
+### Maintien des droits pour ayants droit (Art. 3) :
+Les ayants droit du travailleur **décédé** ou de la veuve **remariée** continuent de bénéficier des prestations en nature pendant **12 mois** à compter :
+- de la date du **décès** de l'assuré, ou
+- du **remariage** de la veuve
+
+### Récapitulatif :
+| Condition | Seuil |
+|-----------|-------|
+| Jours de travail | ≥ 38 jours / 12 mois |
+| Heures de travail | ≥ 240 heures / 12 mois |
+| Maintien après décès | 12 mois |
+
+> 💡 Ces conditions s'appliquent aux prestations en **nature** (soins). Pour les prestations en **espèces** (IJ), voir l'art. 20 du même décret.`,
+    law: 'decret_84_27', article: 2,
+    relatedQuestions: ["Remboursement à 100% ?", "Indemnités journalières ?", "Conditions AT/MP ?"],
+    category: 'droits'
+  },
+  appareillage_prothese_decret: {
+    keywords: ['appareillage', 'prothese'],
+    synonymKeywords: ['prothese accord', 'appareillage prealable', 'devis prothese', 'orthese', 'fauteuil roulant'],
+    summary: `## 🦿 Appareillage et prothèse (Art. 9-11, Décret 84-27)
+
+### Accord préalable obligatoire (Art. 9) :
+Le remboursement ou la prise en charge est subordonné à :
+1. **Accord préalable** de l'organisme de sécurité sociale
+2. Transmission de la demande au **médecin-conseil** avec **devis descriptif**
+3. **Avis médical** du médecin-conseil
+
+### Contrôle technique (Art. 10) :
+La fourniture est subordonnée à un **contrôle technique** effectué par le **médecin-conseil**.
+
+### Caractère personnel (Art. 11) :
+- L'appareil est remis à **titre personnel**
+- **Interdit** de céder ou prêter l'appareil
+- L'entretien et réparations courantes sont à la **charge de l'assuré**
+
+### Lunetterie (Art. 12-13) :
+- Attribution subordonnée à l'**avis du médecin-conseil**
+- Renouvellement : délai minimum de **6 ans**
+- Exception : modification de correction justifiée par prescription médicale + confirmation médecin-conseil
+
+> 💡 Le médecin-conseil joue un rôle central : il donne son avis sur la demande, contrôle la conformité technique, et valide le renouvellement de lunetterie.`,
+    law: 'decret_84_27', article: 9,
+    relatedQuestions: ["Remboursement à 100% ?", "Cures thermales ?", "Rôle du médecin-conseil ?"],
+    category: 'medecin'
+  },
+  cure_thermale: {
+    keywords: ['cure', 'thermale'],
+    synonymKeywords: ['cure specialisee', 'thermalisme', 'station thermale', 'hammam melouane', 'hammam boughrara'],
+    summary: `## ♨️ Cures thermales (Art. 14-17, Décret 84-27)
+
+### Durée (Art. 14) :
+- Entre **18 et 21 jours**
+
+### Procédure (Art. 15) :
+1. Demande adressée à la CNAS **2 mois minimum** avant le début de la cure
+2. Attente de l'**accord exprès** de l'organisme
+3. Silence de la CNAS pendant 1 mois après l'accusé de réception = **REJET**
+4. En cas de rejet : possibilité de recours contentieux
+
+### Conditions de remboursement (Art. 16-17) :
+- La cure doit être suivie **intégralement** pendant la durée prescrite
+- Exception : interruption pour **force majeure** ou **motif médical** reconnu par le médecin-conseil → remboursement accordé
+- Taux de remboursement : **80%** (20% à la charge de l'assuré)
+
+### Indemnités journalières (Art. 23) :
+- **Pas d'IJ** pendant la cure thermale, **SAUF** si l'assuré bénéficiait déjà d'IJ :
+  - Au titre de l'assurance-maladie depuis **au moins 1 mois**
+  - Au titre AT/MP : **sans condition de durée**
+
+| Élément | Détail |
+|---------|--------|
+| Durée | 18-21 jours |
+| Délai demande | 2 mois avant |
+| Taux remboursement | 80% |
+| Ticket modérateur | 20% |
+
+> 💡 Le médecin-conseil intervient pour valider l'interruption médicale de la cure et pour contrôler le bien-fondé de la prescription.`,
+    law: 'decret_84_27', article: 14,
+    relatedQuestions: ["Remboursement à 100% ?", "Obligations du malade ?", "Indemnités journalières maladie ?"],
+    category: 'droits'
+  },
+  obligations_malade_arret: {
+    keywords: ['obligations', 'malade'],
+    synonymKeywords: ['obligation arret', 'heures sortie', 'controle malade', 'sortie autorisee', 'deplacement malade', 'convalescence'],
+    summary: `## ⚖️ Obligations du malade en arrêt de travail (Art. 26-29, Décret 84-27)
+
+### Les 6 obligations (Art. 26) :
+| N° | Obligation |
+|----|-----------|
+| 1° | **Pas d'activité professionnelle** — rémunérée ou non — sauf autorisation CNAS |
+| 2° | **Heures de sortie** : entre **10h et 16h** uniquement, inscrites sur la feuille de maladie |
+| 3° | **Pas de déplacement** sans autorisation — possible si prescription thérapeutique + avis médecin-conseil |
+| 4° | **Convalescence** : aviser la CNAS avant départ, attendre autorisation, se soumettre au contrôle |
+| 5° | **Maladie hors circonscription** : aviser l'organisme d'affiliation dans les formes réglementaires |
+| 6° | **Prolongation** : aviser le médecin lors de la prescription de prolongation |
+
+### Sanctions (Art. 28-29) :
+- Non-respect des obligations → **suspension des IJ** pour la période concernée
+- Refus de contrôle → **suspension des prestations** (nature ET espèces)
+
+### Droits du malade (Art. 29) :
+- Se faire assister de son **médecin traitant** lors des contrôles médicaux
+- Honoraires du médecin traitant : à la **charge de l'assuré**
+
+### Enquêtes (Art. 27) :
+Les organismes de sécurité sociale font procéder à toute **enquête utile** par leurs agents habilités.
+
+> ⚠️ Le médecin-conseil est l'acteur clé du contrôle. Il valide les déplacements, autorise les sorties thérapeutiques, et peut demander le contrôle à domicile.`,
+    law: 'decret_84_27', article: 26,
+    relatedQuestions: ["Que vérifier lors d'un contrôle ?", "Suspension des prestations ?", "Indemnités journalières ?"],
+    category: 'medecin'
+  },
+  arret_travail_prescription: {
+    keywords: ['prescription', 'arret'],
+    synonymKeywords: ['arret travail prescription', 'certificat arret', 'feuille maladie', 'mentions obligatoires'],
+    summary: `## 📝 Prescription d'arrêt de travail (Art. 25, Décret 84-27)
+
+### Mentions obligatoires de la prescription :
+La prescription d'arrêt de travail doit comporter, de manière **lisible** :
+
+**Concernant l'assuré :**
+- Nom et prénom
+- Numéro d'immatriculation
+- Durée probable de l'incapacité de travail
+
+**Concernant le prescripteur :**
+- Nom et prénom
+- Grade et spécialité
+- Adresse professionnelle
+- Date de l'examen médical
+- Mention de prolongation (le cas échéant)
+
+### Délai de déclaration :
+Le délai de déclaration d'arrêt de travail est de **2 jours ouvrables** (le jour de l'arrêt non compris) — fixé par l'arrêté du 13/02/1984.
+
+> 💡 Le médecin-conseil vérifie que toutes les mentions sont présentes et que la durée prescrite est médicalement justifiée.`,
+    law: 'decret_84_27', article: 25,
+    relatedQuestions: ["Obligations du malade ?", "Indemnités journalières ?", "Contrôle médical ?"],
+    category: 'pratique'
+  },
+  invalidite_definition_decret: {
+    keywords: ['invalidite', 'definition'],
+    synonymKeywords: ['etat invalidite', 'pension invalidite', 'moitie capacite', 'evaluation invalidite', 'invalide'],
+    summary: `## 🩺 Assurance-invalidité (Art. 40-44, Décret 84-27)
+
+### Définition de l'invalidité (Art. 40) :
+Est considéré en état d'invalidité l'assuré présentant une invalidité **réduisant d'au moins la moitié** sa capacité de travail ou de gain, c'est-à-dire le mettant hors d'état de se procurer, dans une profession quelconque, un salaire supérieur à **la moitié du salaire de poste** d'un travailleur de la même catégorie.
+
+### Appréciation (Art. 41) :
+- Évaluée à l'**expiration** de la période d'IJ maladie
+- Si non stabilisée : pension déterminée à **titre provisoire**
+
+### Évaluation globale (Art. 42) :
+- L'invalidité est évaluée **globalement**
+- Pas de distinction entre maladie/accident causant l'invalidité et autres facteurs d'incapacité
+- **Exception** : les affections relevant d'une **législation particulière** (ex: AT/MP) ne sont PAS prises en compte
+
+### Contrôle (Art. 44) :
+- L'invalide doit se soumettre aux **visites médicales** à tout moment
+- Refus → **suspension ou suppression** de la pension
+- Frais des visites : à la charge de la **CNAS**
+
+| Élément | Détail |
+|---------|--------|
+| Seuil | Réduction ≥ 50% de la capacité de travail |
+| Évaluation | Globale, tous facteurs confondus |
+| Contrôle | Visites médicales à tout moment |
+| Sanction | Suspension/suppression si refus |
+
+> 💡 Attention à ne pas confondre **invalidité** (loi 83-11, assurance-maladie) et **incapacité permanente** (loi 83-13, AT/MP). Les deux régimes sont distincts.`,
+    law: 'decret_84_27', article: 40,
+    relatedQuestions: ["L'incapacité permanente AT/MP ?", "Pension d'invalidité ?", "Différence invalidité / incapacité ?"],
+    category: 'medecin'
+  },
+  consolidation_definition: {
+    keywords: ['consolidation', 'date'],
+    synonymKeywords: ['date consolidation', 'consolidation lesions', 'etat permanent', 'stabilisation', 'guerison consolidation'],
+    summary: `## 📅 Date de consolidation (Art. 8, Décret 84-28)
+
+### Définition légale :
+La date de consolidation des lésions est la date à laquelle l'état de la victime, ayant pris un **caractère permanent ou définitif**, n'est plus susceptible de **modification sensible**, sous réserve de rechute ou de révision.
+
+### Règles :
+- Si incapacité partielle ou totale **non susceptible d'amélioration** → la consolidation NE PEUT PAS être prononcée tant que l'état continue à **évoluer**
+- La consolidation est fixée en fonction de **critères exclusivement médicaux**
+
+### Importance pour le médecin-conseil :
+- C'est le médecin-conseil qui fixe la date de consolidation
+- Cette date détermine :
+  - La **fin des IJ** (incapacité temporaire)
+  - Le **début de la rente** (incapacité permanente)
+  - Le point de départ du **délai de révision**
+
+### Au-delà de la consolidation (Art. 2, Décret 84-28) :
+Les prestations en nature sont dues **au-delà de la consolidation**, tant que l'état de la victime justifie la **continuation du traitement**.
+
+| Avant consolidation | Après consolidation |
+|---------------------|---------------------|
+| IJ (incapacité temporaire) | Rente (incapacité permanente) |
+| Soins curatifs | Soins d'entretien si justifiés |
+| Pas de taux IPP fixé | Taux IPP fixé par le médecin-conseil |
+
+> ⚠️ La consolidation est un acte médical majeur. Ne pas confondre avec la **guérison** (retour à l'état antérieur). La consolidation peut être prononcée même avec des séquelles.`,
+    law: 'decret_84_28', article: 8,
+    relatedQuestions: ["Prestations après consolidation ?", "Rechute et aggravation ?", "Calcul de la rente ?"],
+    category: 'medecin'
+  },
+  feuille_accident_decret: {
+    keywords: ['feuille', 'accident', 'decret'],
+    synonymKeywords: ['feuille at delivrance', 'formulaire accident decret', 'declaration accident formulaire carence', 'delivrance feuille employeur'],
+    summary: `## 📄 Feuille d'accident du travail (Art. 9-10, Décret 84-28)
+
+### Délivrance (Art. 9) :
+- L'**employeur** doit délivrer la feuille d'accident à la victime ou à ses représentants
+- En cas de **carence de l'employeur** → la CNAS peut la délivrer elle-même
+
+### Contenu :
+- Désignation de l'organisme de sécurité sociale chargé du paiement des prestations
+- **Interdit** de mentionner le nom/adresse d'un praticien, pharmacien, laboratoire ou structure sanitaire
+
+### Effets juridiques :
+- La délivrance de la feuille d'accident **n'entraîne PAS automatiquement** la prise en charge AT
+- C'est un document préalable, la décision de prise en charge est distincte
+
+### Utilisation :
+Présentée par la victime au praticien, pharmacien, auxiliaire médical, laboratoire, fournisseur et structure sanitaire concernée.
+
+### Feuille de maladie (Art. 10) :
+Les dispositions de la feuille de maladie (assurance-maladie) sont applicables à la feuille d'accident.
+
+> 💡 En pratique, le médecin-conseil vérifie que la feuille d'accident est régulièrement délivrée et que les soins sont en rapport avec l'accident déclaré.`,
+    law: 'decret_84_28', article: 9,
+    relatedQuestions: ["Déclaration d'accident du travail ?", "Délais de déclaration ?", "Rechute AT ?"],
+    category: 'procedure'
+  },
+  rechute_aggravation_decret: {
+    keywords: ['rechute', 'aggravation'],
+    synonymKeywords: ['nouvelle lesion', 'rechute at', 'aggravation at', 'consolidation rechute'],
+    summary: `## 🔄 Rechute et aggravation AT/MP (Art. 7, 11, Décret 84-28)
+
+### Définition de la rechute (Art. 11) :
+La rechute est constituée par :
+- L'**aggravation** de la lésion dont la victime est atteinte, OU
+- L'**apparition d'une nouvelle lésion** résultant de l'AT/MP
+
+alors que la victime :
+- avait été considérée comme **guérie**, ou
+- n'avait souffert, jusqu'alors, d'aucune **lésion apparente**
+
+### Prise en charge :
+- Le traitement médical et l'incapacité temporaire entraînés par la rechute sont pris en charge au titre des AT/MP
+- **Quel que soit le temps écoulé** entre l'accident/consolidation et la rechute
+- La CNAS verse les prestations qu'il y ait ou non un **nouvel arrêt de travail** (Art. 3)
+
+### IJ en cas de rechute (Art. 7) :
+- Salaire de référence = salaire journalier de poste **avant** la nouvelle interruption
+- Si la victime bénéficiait déjà d'une rente → les IJ sont **substituées** à la rente si elles sont **plus avantageuses**
+
+### Après rechute — Incapacité permanente (Art. 14, 20) :
+- Le calcul de la rente prend la période la **plus favorable** à la victime
+- La nouvelle rente a pour point de départ le **lendemain de la consolidation** suivant la rechute
+
+> ⚠️ Le médecin-conseil doit établir le **lien de causalité** entre la rechute et l'accident initial. C'est un point souvent contesté en contentieux.`,
+    law: 'decret_84_28', article: 11,
+    relatedQuestions: ["Date de consolidation ?", "Révision de la rente ?", "Calcul de la rente AT/MP ?"],
+    category: 'medecin'
+  },
+  bareme_taux_ipp_decret: {
+    keywords: ['bareme', 'taux', 'ipp'],
+    synonymKeywords: ['bareme incapacite', 'taux medical', 'determination taux', 'medecin expert bareme', 'art 12 decret', 'art 42 loi 83-13'],
+    summary: `## 📊 Barème et taux d'IPP (Art. 12, Décret 84-28)
+
+### Principe fondamental :
+Les taux figurant au **barème** prévu à l'article 42 de la loi 83-13 **s'imposent** au médecin-conseil et au médecin-expert pour la détermination du **taux médical d'incapacité**.
+
+### Calcul de la rente (Art. 13) :
+Si la victime a travaillé **moins de 12 mois** au moment de l'arrêt :
+- **≥ 1 mois** de travail → rente basée sur le **salaire de poste** de la victime
+- **< 1 mois** de travail → rente basée sur le **salaire de poste** de la catégorie professionnelle
+
+### Cas de rechute/aggravation (Art. 14) :
+La période de 12 mois retenue est la **plus favorable** à la victime, parmi :
+- Date de l'arrêt consécutif à l'AT/MP
+- Date de l'arrêt consécutif à la rechute
+- Date de consolidation
+
+### Capital représentatif (Art. 15-17) :
+- Pour IPP < 10% : **capital** calculé sur base SNMG × taux × coefficient d'âge
+- Maximum du capital = **2.300** × montant horaire SNMG
+
+> 💡 Le médecin-conseil est **lié** par le barème officiel. Il ne peut pas s'en écarter. En revanche, il apprécie souverainement le taux **dans la fourchette** prévue par le barème.`,
+    law: 'decret_84_28', article: 12,
+    relatedQuestions: ["Seuil de 10% rente/capital ?", "Capital représentatif ?", "Accidents successifs ?"],
+    category: 'medecin'
+  },
+  accidents_successifs: {
+    keywords: ['accidents', 'successifs'],
+    synonymKeywords: ['accidents multiples', 'plusieurs accidents', 'rentes multiples', 'cumul accidents'],
+    summary: `## 🔗 Accidents successifs (Art. 18-19, Décret 84-28)
+
+### Principe (Art. 18) :
+En cas d'accidents successifs survenus à une même personne :
+- L'organisme compétent pour le **dernier accident** assume la charge de **toutes les rentes** antérieures
+- Cet organisme a qualité pour :
+  - Gérer l'**ensemble** des rentes
+  - Recevoir tout document
+  - Procéder à tout contrôle
+  - Prendre toute décision
+  - Exercer toute action
+
+### Conséquences :
+- L'organisme du dernier accident **informe la victime** qu'il assure désormais le service de l'ensemble des rentes
+- Il supporte **définitivement** la charge de l'ensemble des rentes
+
+### Mode de calcul :
+Un arrêté du ministre fixe les modalités d'application, notamment le mode de calcul des rentes en cas d'accidents successifs (Art. 19).
+
+> 💡 En pratique, le médecin-conseil du dernier organisme doit évaluer l'incapacité en tenant compte de l'**état antérieur** (capacité restante après le premier accident).`,
+    law: 'decret_84_28', article: 18,
+    relatedQuestions: ["Calcul de la rente ?", "Méthode de Balthazard ?", "Révision de la rente ?"],
+    category: 'calcul'
+  },
+  tierce_personne_decret: {
+    keywords: ['tierce', 'personne', 'majoration'],
+    synonymKeywords: ['majoration tierce personne', 'mtp montant', 'aide tierce personne decret', 'assistance tierce personne minimum', 'dependance tierce'],
+    summary: `## 👤 Majoration pour tierce personne (Décret 84-29 + Art. 36 Loi 83-11 + Art. 48 Loi 83-13)
+
+### Principe :
+La majoration pour tierce personne (MTP) est accordée aux assurés qui ont besoin de l'**assistance d'une tierce personne** pour effectuer les actes ordinaires de la vie.
+
+### Bénéficiaires :
+- Titulaires d'une **pension d'invalidité**
+- Titulaires d'une pension de **retraite**
+- Titulaires d'une **rente** d'accident du travail ou de maladie professionnelle
+
+### Montant minimum (Art. 1, Décret 84-29) :
+- **8.400 DA par an** (montant initial fixé en 1984, revalorisé depuis)
+
+### Conditions :
+- Conditions prévues à l'art. 36 de la loi 83-11 et à l'art. 48 de la loi 83-13
+- L'état de dépendance doit être **médicalement constaté** par le médecin-conseil
+
+### Rôle du médecin-conseil :
+Le médecin-conseil évalue le **degré de dépendance** de l'assuré en vérifiant l'incapacité à effectuer les actes essentiels :
+- Se lever, se coucher
+- S'habiller, se déshabiller
+- Se nourrir
+- Assurer son hygiène corporelle
+- Se déplacer
+
+> 💡 La MTP est un complément essentiel pour les patients les plus gravement atteints. Le médecin-conseil évalue l'autonomie selon une grille de dépendance.`,
+    law: 'decret_84_29', article: 1,
+    relatedQuestions: ["Pension d'invalidité ?", "Rente AT/MP ?", "IPP supérieure à 80% ?"],
+    category: 'droits'
+  },
+  maternite_decret: {
+    keywords: ['maternite', 'decret'],
+    synonymKeywords: ['grossesse decret', 'examen prenatal', 'accouchement formalites', 'assurance maternite decret', 'femme enceinte formalites'],
+    summary: `## 🤰 Assurance-maternité — Détails (Art. 32-39, Décret 84-27)
+
+### Conditions (Art. 32) :
+L'assurée ne doit pas avoir cessé son travail pour des motifs autres que ceux indemnisés par la sécurité sociale, entre la première constatation de la grossesse et l'accouchement.
+
+### Notification obligatoire (Art. 33) :
+- Notifier l'état de grossesse à la CNAS **3 mois minimum** avant la date présumée de l'accouchement
+- Le certificat médical doit indiquer la **date présumée de l'accouchement**
+
+### Examens obligatoires (Art. 34) :
+| Examen | Moment |
+|--------|--------|
+| Examen clinique complet | Avant fin du **3ème mois** |
+| Examen obstétrical | Au cours du **6ème mois** |
+| Examen gynécologique prénatal | **4 semaines** avant l'accouchement |
+| Examen gynécologique postnatal | **6 semaines** après l'accouchement |
+
+### Sanctions (Art. 38) :
+Défaut d'accomplissement des formalités → **diminution de 20%** des prestations, sauf force majeure.
+
+### Cas particuliers :
+- **Interruption de grossesse > 6 mois** (Art. 35) : droit aux prestations même si l'enfant n'est pas né vivant
+- **Conjoint de l'assuré décédé** (Art. 36) : prestations maintenues si décès < 305 jours avant l'accouchement
+- **Divorce/séparation** (Art. 36) : la parturiente est subrogée dans les droits de l'assuré
+
+> 💡 Le médecin-conseil intervient pour vérifier le respect des examens obligatoires et valider les cas particuliers (interruption, conjointe de décédé, etc.).`,
+    law: 'decret_84_27', article: 32,
+    relatedQuestions: ["Congé de maternité ?", "Indemnités journalières maternité ?", "Prestations en nature ?"],
+    category: 'droits'
+  },
+  ij_maladie_conditions: {
+    keywords: ['indemnite', 'journaliere', 'maladie'],
+    synonymKeywords: ['ij maladie', 'indemnite journaliere maladie', 'prestations especes maladie', 'arret travail ij'],
+    summary: `## 💰 Indemnités journalières maladie (Art. 20-23, Décret 84-27)
+
+### Condition (Art. 20) :
+L'assuré doit justifier, à la date de la constatation de la maladie, d'une **activité professionnelle** donnant droit à rémunération.
+
+### ALD ouvrant droit à IJ prolongées (Art. 21) :
+Quand elles rendent impossible l'activité professionnelle :
+- Tuberculose sous toutes ses formes
+- Psycho-névroses graves
+- Maladies cancéreuses
+- Hémopathies
+
+### Renouvellement du délai (Art. 22) :
+Un nouveau délai d'IJ est ouvert pour une **ALD différente** de celle qui a déjà épuisé le premier délai.
+
+### Cure thermale et IJ (Art. 23) :
+Pendant une cure thermale, l'IJ n'est **pas due** sauf si l'assuré bénéficiait déjà d'IJ :
+- Assurance-maladie : depuis **au moins 1 mois**
+- AT/MP : **sans condition de durée**
+
+> 💡 Le médecin-conseil valide la durée de l'arrêt, contrôle le lien avec la pathologie, et vérifie les conditions d'attribution des IJ.`,
+    law: 'decret_84_27', article: 20,
+    relatedQuestions: ["Obligations du malade ?", "ALD ?", "Cure thermale ?"],
+    category: 'calcul'
+  },
+  ij_at_mp_decret: {
+    keywords: ['indemnite', 'journaliere', 'accident'],
+    synonymKeywords: ['ij accident travail', 'ij at', 'indemnite at', 'prestations especes at'],
+    summary: `## 💰 Indemnités journalières AT/MP (Art. 5-7, Décret 84-28)
+
+### Conditions (Art. 5) :
+La victime doit justifier, au moment de l'accident ou de la première constatation de la MP, d'une **activité professionnelle** donnant droit à rémunération.
+
+### Durée (Art. 6) :
+L'IJ est due jusques et y compris le jour fixé comme étant celui de :
+- la **guérison**
+- la **consolidation**
+- le **décès**
+
+### En cas de rechute (Art. 7) :
+- Salaire de référence = salaire journalier de poste **avant** la nouvelle interruption
+- Si la victime bénéficiait déjà d'une rente → **substitution** des IJ à la rente si les IJ sont plus avantageuses
+
+### Comparaison IJ maladie vs IJ AT/MP :
+| | IJ Maladie | IJ AT/MP |
+|---|-----------|---------|
+| Taux J1-J15 | 50% | **100%** |
+| Taux à partir de J16 | 100% | **100%** |
+| Carence | 3 jours | **Aucune** |
+| Durée max | 3 ans | **Jusqu'à consolidation** |
+
+> 💡 En AT/MP, les IJ sont à 100% dès le premier jour. C'est un avantage majeur par rapport à l'assurance maladie ordinaire.`,
+    law: 'decret_84_28', article: 5,
+    relatedQuestions: ["Date de consolidation ?", "Rechute AT/MP ?", "Calcul de la rente ?"],
+    category: 'calcul'
+  },
+  revalorisation_rentes_decret: {
+    keywords: ['revalorisation', 'rentes', 'anciennes', 'decret'],
+    synonymKeywords: ['revalorisation rentes anciennes decret', 'rentes avant 1984 revalorisation', 'revalorisaton pensions anciennes'],
+    summary: `## 📈 Revalorisation des rentes antérieures (Art. 21, Décret 84-28)
+
+### Principe :
+Les rentes allouées en réparation des AT survenus ou MP constatées **avant le 1er janvier 1984** sont revalorisées dans les **mêmes conditions** que les pensions d'invalidité.
+
+### Base légale :
+- Art. 42 de la loi 83-11 du 2 juillet 1983 relative aux assurances sociales
+
+### Application :
+- La revalorisation suit l'**évolution du SNMG** et les coefficients fixés par décret
+- Elle est **automatique** (pas de demande nécessaire)
+
+> 💡 Cette disposition assure l'alignement entre les anciens et nouveaux régimes d'indemnisation.`,
+    law: 'decret_84_28', article: 21,
+    relatedQuestions: ["Calcul de la rente ?", "Capital représentatif ?", "Seuil 10% ?"],
+    category: 'calcul'
+  },
 };
 // ═══════════════════════════════════════════════════════════════
 
@@ -3525,19 +4224,27 @@ const processQuery = (query: string, context?: ConversationContext): { text: str
   }
 
   // ─── 1. Specific article lookup ───
-  const articleMatch = normalizedQuery.match(/article\s*(\d+)\s*(?:de la loi\s*)?(\d{2,2}[\s-]\d{2,2})?/);
+  const articleMatch = normalizedQuery.match(/article\s*(\d+)\s*(?:(?:de la loi|du decret|decret|loi)\s*)?(\d{2,2}[\s-]\d{2,2})?/);
   if (articleMatch) {
     const articleNum = parseInt(articleMatch[1], 10);
     const lawNum = articleMatch[2]?.replace(/\s/g, '-');
-    const lawId = lawNum ? `loi_${lawNum.replace('-', '_')}` : (context?.lastLawId || 'loi_83_13');
+    const isDecret = /decret/.test(normalizedQuery);
+    const lawId = lawNum ? (isDecret ? `decret_${lawNum.replace('-', '_')}` : `loi_${lawNum.replace('-', '_')}`) : (context?.lastLawId || 'loi_83_13');
     
-    const articleContent = findArticle(lawId, articleNum);
+    // Try the detected ID first, then fallback to try alternate prefix (loi vs decret)
+    let articleContent = findArticle(lawId, articleNum);
+    let usedLawId = lawId;
+    if (!articleContent && lawNum) {
+      const altId = isDecret ? `loi_${lawNum.replace('-', '_')}` : `decret_${lawNum.replace('-', '_')}`;
+      articleContent = findArticle(altId, articleNum);
+      if (articleContent) usedLawId = altId;
+    }
     if (articleContent) {
-      const lawTitle = legalTexts.find(l => l.id === lawId)?.title || '';
+      const lawTitle = legalTexts.find(l => l.id === usedLawId)?.title || '';
       // Find related intents that reference this article
       const relatedIntents = Object.entries(INTENTS).filter(([, intent]) => 
-        (intent.article === articleNum && intent.law === lawId) ||
-        (intent.articles?.includes(articleNum) && intent.law === lawId)
+        (intent.article === articleNum && intent.law === usedLawId) ||
+        (intent.articles?.includes(articleNum) && intent.law === usedLawId)
       );
       const relatedQuestions = relatedIntents.length > 0
         ? relatedIntents.slice(0, 2).map(([, i]) => i.relatedQuestions?.[0]).filter(Boolean) as string[]
