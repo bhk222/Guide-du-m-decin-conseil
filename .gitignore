@@ -50,3 +50,18 @@ ENTRAINEMENT_MASSIF_*.md
 
 # Temporary Claude Code working directories
 tmpclaude-*/
+tmpclaude-*
+
+# Backup files
+*.bak
+
+# Next.js
+.next/
+
+# Test output files
+test-output*.txt
+test-metatarse-output.txt
+test-output-ms2.txt
+
+# Temporary scripts
+new_acts.json
