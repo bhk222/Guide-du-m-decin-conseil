@@ -14741,9 +14741,178 @@
       "coefficient": 90,
       "tarif": 30,
       "categorie": "Imagerie"
+    },
+    {
+      "code": "0140",
+      "codeNGAP": "K 80",
+      "lettreCle": "K",
+      "coefficient": 80,
+      "libelle": "Arthroplastie avec interposition de prothèse, quels que soient la technique et le matériel",
+      "categorie": "Chirurgie",
+      "entente": true
+    },
+    {
+      "code": "0197",
+      "codeNGAP": "K 80",
+      "lettreCle": "K",
+      "coefficient": 80,
+      "libelle": "Ablation de tumeur nerveuse avec suture (membre - aucune région)",
+      "categorie": "Chirurgie",
+      "entente": true
+    },
+    {
+      "code": "0004",
+      "codeNGAP": "K 40",
+      "lettreCle": "K",
+      "coefficient": 40,
+      "libelle": "Fracture fermée d'un os de l'avant-bras: extrémité inférieure, diaphyse ou extrémité supérieure",
+      "categorie": "Chirurgie"
+    },
+    {
+      "code": "0150",
+      "codeNGAP": "K 10",
+      "lettreCle": "K",
+      "coefficient": 10,
+      "libelle": "Écho-doppler veineux - Phlébographie (avec compte-rendu)",
+      "categorie": "Chirurgie"
+    },
+    {
+      "code": "0284",
+      "codeNGAP": "K 10",
+      "lettreCle": "K",
+      "coefficient": 10,
+      "libelle": "Ablation ou destruction de xanthélasma - lésion unique",
+      "categorie": "Chirurgie"
+    },
+    {
+      "code": "0458",
+      "codeNGAP": "K 200",
+      "lettreCle": "K",
+      "coefficient": 200,
+      "libelle": "Pharyngectomie avec curage ganglionnaire jugulo-carotidien et sous-maxillaire",
+      "categorie": "Chirurgie",
+      "entente": true
+    },
+    {
+      "code": "0471",
+      "codeNGAP": "K 50",
+      "lettreCle": "K",
+      "coefficient": 50,
+      "libelle": "Curetage et ablation des séquestres pour ostéite ou nécrose du corps maxillaire",
+      "categorie": "Chirurgie",
+      "entente": true
+    },
+    {
+      "code": "0505",
+      "codeNGAP": "K 8",
+      "lettreCle": "K",
+      "coefficient": 8,
+      "libelle": "Extraction molaire inférieure - la première",
+      "categorie": "Chirurgie"
+    },
+    {
+      "code": "0532",
+      "codeNGAP": "K 60",
+      "lettreCle": "K",
+      "coefficient": 60,
+      "libelle": "Désinsertion musculaire du plancher de la bouche avec section des mylohyoïdiens",
+      "categorie": "Chirurgie",
+      "entente": true
+    },
+    {
+      "code": "0540",
+      "codeNGAP": "K 5",
+      "lettreCle": "K",
+      "coefficient": 5,
+      "libelle": "Réparation dent ou crochet sur plaque métallique - par élément suivant",
+      "categorie": "Chirurgie"
+    },
+    {
+      "code": "0600",
+      "codeNGAP": "K 120",
+      "lettreCle": "K",
+      "coefficient": 120,
+      "libelle": "Abord des lésions rachidiennes par voie postérieure sans greffon ni ostéosynthèse",
+      "categorie": "Chirurgie",
+      "entente": true
+    },
+    {
+      "code": "0684",
+      "codeNGAP": "K 100",
+      "lettreCle": "K",
+      "coefficient": 100,
+      "libelle": "Thoracotomie",
+      "categorie": "Chirurgie",
+      "entente": true
+    },
+    {
+      "code": "0930",
+      "codeNGAP": "K 80",
+      "lettreCle": "K",
+      "coefficient": 80,
+      "libelle": "Traitement de l'hypospadias périnéal ou pénien",
+      "categorie": "Chirurgie",
+      "entente": true
+    },
+    {
+      "code": "0954",
+      "codeNGAP": "K 10",
+      "lettreCle": "K",
+      "coefficient": 10,
+      "libelle": "Pose d'un dispositif intra-utérin (DIU)",
+      "categorie": "Chirurgie"
+    },
+    {
+      "code": "0973",
+      "codeNGAP": "K 100",
+      "lettreCle": "K",
+      "coefficient": 100,
+      "libelle": "Hystérectomie totale",
+      "categorie": "Chirurgie",
+      "entente": true
+    },
+    {
+      "code": "0992",
+      "codeNGAP": "K 20",
+      "lettreCle": "K",
+      "coefficient": 20,
+      "libelle": "Accouchement par le siège chez une primipare, supplément au forfait",
+      "categorie": "Chirurgie"
+    },
+    {
+      "code": "1132",
+      "codeNGAP": "AMM 4",
+      "lettreCle": "AMM",
+      "coefficient": 4,
+      "libelle": "Rééducation de petites articulations: doigts, pieds, orteils (30 min)",
+      "categorie": "Kinésithérapie"
+    },
+    {
+      "code": "1215",
+      "codeNGAP": "R 15",
+      "lettreCle": "R",
+      "coefficient": 15,
+      "libelle": "Laryngographie sans moyen de contraste",
+      "categorie": "Imagerie"
+    },
+    {
+      "code": "1645",
+      "codeNGAP": "B 35",
+      "lettreCle": "B",
+      "coefficient": 35,
+      "libelle": "Titrage d'une anti-enzyme streptococcique du sérum (ASLO, antistreptokinase)",
+      "categorie": "Biologie"
+    },
+    {
+      "code": "1705",
+      "codeNGAP": "B 60",
+      "lettreCle": "B",
+      "coefficient": 60,
+      "libelle": "Dosage des métaux (Pb, Hg, As) - Toxicologie",
+      "categorie": "Biologie"
     }
   ],
-  "total": 1820,
+  "total": 1840,
   "categories": [
     "Biologie",
     "Chirurgie",
