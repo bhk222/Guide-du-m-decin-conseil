@@ -1675,21 +1675,15 @@ Lorsque le taux d'IPP est **inférieur à 10%**, l'assuré ne perçoit pas une r
   ald_maladies_chroniques: {
     keywords: ['ald', 'chronique'],
     synonymKeywords: ['maladie longue duree', 'affection longue duree', 'maladie chronique', 'exoneration ticket'],
-    summary: `## 🏥 Affections de Longue Durée — ALD (Loi 83-11)
+    summary: `## 🏥 Affections de Longue Durée — ALD (Loi 83-11, Art. 20 + Décret 84-27, Art. 5)
 
 ### Le principe :
-Les assurés atteints d'une ALD bénéficient d'un remboursement à **100%** (exonération du ticket modérateur) pour tous les soins liés à cette affection.
+Les assurés atteints d'une ALD bénéficient d'un remboursement à **100%** (exonération du ticket modérateur) pour tous les soins liés à cette affection (Art. 4, Décret 84-27).
 
-### Liste des ALD (exemples) :
-- Diabète insulinodépendant
-- Hypertension artérielle sévère
-- Insuffisance cardiaque
-- Cancers
-- Insuffisance rénale chronique
-- Maladies psychiatriques chroniques
-- Tuberculose et séquelles
-- Sida (VIH)
-- Affections neurologiques graves (sclérose en plaques, etc.)
+### 25 catégories ALD (nomenclature codifiée C01-C25) :
+Les principales catégories incluent : tuberculose (C01), psycho-névroses graves (C02), cancers (C03), hémopathies (C04), sarcoïdose (C05), HTA maligne (C06), maladies cardiaques et vasculaires (C07), maladies neurologiques (C08-C09), encéphalopathies (C10), néphropathies (C11), rhumatismes chroniques (C12), périartérite noueuse (C13), LED (C14), insuffisances respiratoires (C15), poliomyélite (C16), maladies métaboliques/diabète (C17), cardiopathies congénitales (C18), affections endocriniennes (C19), RAA (C20), ostéomyélite (C21), complications gastrectomies (C22), cirrhoses (C23), rectocolite hémorragique (C24), pemphigus/psoriasis (C25).
+
+> 💡 Tapez **"liste ALD"** pour voir la liste complète détaillée, ou consultez **Outils → Liste ALD** pour les sous-catégories.
 
 ### Procédure :
 1. Le médecin traitant remplit un **protocole de soins ALD**
@@ -1698,7 +1692,7 @@ Les assurés atteints d'une ALD bénéficient d'un remboursement à **100%** (ex
 4. Remboursement à 100% pour les soins liés à l'ALD
 
 > ⚠️ Seuls les soins **en rapport avec l'ALD** sont à 100%. Les soins sans rapport restent à 80%.`,
-    relatedQuestions: ["Quelles sont les prestations en nature ?", "Assurance maladie ordinaire ?"],
+    relatedQuestions: ["Liste complète des ALD ?", "Quelles sont les prestations en nature ?", "Remboursement à 100% ?"],
     category: 'droits'
   },
   cotisations_taux: {
@@ -3608,71 +3602,47 @@ Les revalorisations suivent généralement l'**augmentation du SNMG** et l'**inf
   },
   liste_ald_complete: {
     keywords: ['liste', 'ald'],
-    synonymKeywords: ['liste maladies longue duree', 'affections longue duree liste', 'maladies chroniques liste', 'quelles ald', 'enumeration ald', 'maladies exonerantes'],
-    summary: `## 📋 Liste complète des ALD (Art. 5, Décret 84-27)
+    synonymKeywords: ['liste maladies longue duree', 'affections longue duree liste', 'maladies chroniques liste', 'quelles ald', 'enumeration ald', 'maladies exonerantes', 'nomenclature ald', 'c01', 'c02', 'c03', 'c04', 'c05', 'c06', 'c07', 'c08', 'c09', 'c10', 'c11', 'c12', 'c13', 'c14', 'c15', 'c16', 'c17', 'c18', 'c19', 'c20', 'c21', 'c22', 'c23', 'c24', 'c25'],
+    summary: `## 📋 Liste complète des ALD — Nomenclature codifiée (Art. 5, Décret 84-27)
 
-### 31 catégories d'ALD ouvrant droit au remboursement à 100% :
+### 25 catégories d'ALD ouvrant droit au remboursement à 100% :
 
-**Maladies métaboliques et endocriniennes :**
-| N° | Affection |
-|----|-----------|
-| 1° | Maladies de longue durée |
-| 2° | Maladies métaboliques — **diabète** et ses complications |
-| 3° | Cardiopathies congénitales |
-| 4° | Affections endocriniennes |
+> 💡 Consultez la rubrique **Outils → Liste ALD** pour le détail complet de chaque pathologie avec ses sous-catégories.
 
-**Maladies ostéo-articulaires :**
-| N° | Affection |
-|----|-----------|
-| 5° | Rhumatisme articulaire aigu (RAA) |
-| 6° | Ostéomyélite |
-| 23° | Rhumatismes chroniques : **spondylarthrite ankylosante**, **polyarthrite rhumatoïde**, arthroses graves |
+| Code | Affection de Longue Durée |
+|------|---------------------------|
+| **C01** | Tuberculose sous toutes ses formes |
+| **C02** | Les psycho-névroses graves |
+| **C03** | Les maladies cancéreuses |
+| **C04** | Les hémopathies (dysprotéinémies, dyslipoïdoses) |
+| **C05** | La sarcoïdose |
+| **C06** | L'hypertension artérielle maligne (HTA maligne) |
+| **C07** | Les maladies cardiaques et vasculaires |
+| | → *Cardiaques :* angine de poitrine, IDM, pontage aorto-coronarien, valvulopathie décompensée, remplacement valvulaire, trouble du rythme avec stimulateur |
+| | → *Vasculaires :* maladies athéromateuses évoluées, artérites des MI, AVC (cérébral, méningé, cérébro-méningé) |
+| **C08** | Maladies neurologiques (SEP, syndromes extra-pyramidaux, paraplégies, hémiplégies, épilepsies) |
+| **C09** | Maladies musculaires ou neuromusculaires (polynévrites, amyotrophies spinales progressives, myopathies, myasthénies) |
+| **C10** | Les encéphalopathies |
+| **C11** | Les néphropathies |
+| **C12** | Les rhumatismes chroniques inflammatoires (spondylarthrite ankylosante, polyarthrite rhumatoïde, arthroses graves) |
+| **C13** | La périartérite noueuse |
+| **C14** | Le lupus érythémateux disséminé (LED) |
+| **C15** | Les insuffisances respiratoires chroniques (obstruction ou restriction) |
+| **C16** | La poliomyélite antérieure aiguë |
+| **C17** | Les maladies métaboliques (diabète et ses complications) |
+| **C18** | Les cardiopathies congénitales |
+| **C19** | Les affections endocriniennes (thyroïde, parathyroïde, surrénales, hypophyse, pancréas…) |
+| **C20** | Le rhumatisme articulaire aigu (RAA) |
+| **C21** | L'ostéomyélite chronique |
+| **C22** | Les complications graves et durables des gastrectomies et de la maladie ulcéreuse |
+| **C23** | Les cirrhoses du foie |
+| **C24** | La rectocolite hémorragique |
+| **C25** | Le pemphigus malin et le psoriasis |
 
-**Maladies digestives :**
-| N° | Affection |
-|----|-----------|
-| 7° | Gastrectomies et complications d'ulcères |
-| 8° | Cirrhoses du foie |
-| 9° | Rectocolite hémorragique |
+### Également prévu par le Décret 84-27 (Art. 5, 11°) :
+- **L'hydatidose** et ses complications
 
-**Maladies cardiovasculaires :**
-| N° | Affection |
-|----|-----------|
-| 13° | Hypertension artérielle maligne |
-| 14° | Cardiopathies : angine de poitrine, **IDM**, pontage coronarien, remplacement valvulaire |
-| 15° | Valvulopathies décompensées |
-| 16° | Maladies athéromateuses évoluées |
-| 17° | Artérite des membres inférieurs |
-| 18° | AVC (cérébral, méningé ou cérébro-méningé) |
-| 19° | Troubles du rythme avec stimulateur |
-
-**Maladies neurologiques :**
-| N° | Affection |
-|----|-----------|
-| 20° | SEP, syndromes extra-pyramidaux, paraplégies, hémiplégies, épilepsies, myopathies, myasthénies, polynévrites |
-| 21° | Encéphalopathies |
-
-**Maladies néphrologiques :**
-| N° | Affection |
-|----|-----------|
-| 22° | Néphropathies |
-
-**Maladies systémiques et autres :**
-| N° | Affection |
-|----|-----------|
-| 10° | Pemphigus et psoriasis |
-| 11° | Hydatidose |
-| 12° | Sarcoïdose |
-| 24° | Périartérite noueuse |
-| 25° | Lupus érythémateux disséminé |
-| 26° | Insuffisances respiratoires chroniques |
-| 27° | Poliomyélite antérieure aiguë |
-| 28° | Maladies cancéreuses |
-| 29° | Hémopathies |
-| 30° | Tuberculose sous toutes ses formes |
-| 31° | Psycho-névroses graves |
-
-> 💡 Cette liste est la **liste officielle** des ALD en Algérie. Le médecin-conseil valide l'inscription en ALD sur présentation d'un dossier médical justificatif.`,
+> ⚠️ Le médecin-conseil valide l'inscription en ALD sur présentation d'un dossier médical justificatif. Le remboursement à 100% ne concerne que les soins **en rapport avec l'ALD**.`,
     law: 'decret_84_27', article: 5,
     relatedQuestions: ["Remboursement à 100% ?", "Indemnités journalières ALD ?", "Rôle du médecin-conseil ?"],
     category: 'droits'

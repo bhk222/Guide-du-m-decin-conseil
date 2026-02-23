@@ -1478,19 +1478,19 @@ Art. 4. Le remboursement des frais de soins est effectué à 100% dans les cas s
 
 Art. 5. La liste des affections de longue durée (ALD) prévues à l'article 4 ci-dessus comprend :
 1° - Les maladies de longue durée ;
-2° - Les maladies métaboliques (diabète et ses complications) ;
+2° - Les maladies métaboliques (diabète et ses complications, dysprotéinémies, dyslipoïdoses) ;
 3° - Les cardiopathies congénitales ;
-4° - Les affections endocriniennes ;
+4° - Les affections endocriniennes complexes ;
 5° - Le rhumatisme articulaire aigu (RAA) ;
-6° - L'ostéomyélite ;
-7° - Les gastrectomies et complications d'ulcères ;
+6° - L'ostéomyélite chronique ;
+7° - Les complications graves et durables des gastrectomies et de la maladie ulcéreuse ;
 8° - Les cirrhoses du foie ;
 9° - La rectocolite hémorragique ;
-10° - Le pemphigus et le psoriasis ;
-11° - L'hydatidose ;
+10° - Le pemphigus malin et le psoriasis ;
+11° - L'hydatidose et ses complications ;
 12° - La sarcoïdose ;
 13° - L'hypertension artérielle maligne ;
-14° - Les cardiopathies : angine de poitrine, infarctus du myocarde, pontage coronarien, remplacement valvulaire ;
+14° - Les cardiopathies : angine de poitrine, infarctus du myocarde, pontage aorto-coronarien, remplacement valvulaire prothétique ;
 15° - Les valvulopathies décompensées ;
 16° - Les maladies athéromateuses évoluées ;
 17° - L'artérite des membres inférieurs ;
@@ -1500,7 +1500,7 @@ Art. 5. La liste des affections de longue durée (ALD) prévues à l'article 4 c
     a) Sclérose en plaques ;
     b) Syndromes extra-pyramidaux ;
     c) Paraplégies, hémiplégies ;
-    d) Épilepsies du lobe temporal, myocloniques progressives et post-traumatiques ;
+    d) Épilepsies : du lobe temporal, myocloniques progressives et post-traumatiques ;
     e) Maladies musculaires ou neuro-musculaires : polynévrites, amyotrophies spinales progressives, myopathies, myasthénies ;
 21° - Les encéphalopathies ;
 22° - Les néphropathies ;
@@ -1510,7 +1510,7 @@ Art. 5. La liste des affections de longue durée (ALD) prévues à l'article 4 c
     c) Arthroses graves ;
 24° - La périartérite noueuse ;
 25° - Le lupus érythémateux disséminé ;
-26° - Les insuffisances respiratoires chroniques par obstruction ou restriction ;
+26° - Les insuffisances respiratoires chroniques par obstruction ou par restriction ;
 27° - La poliomyélite antérieure aiguë ;
 28° - Les maladies cancéreuses ;
 29° - Les hémopathies ;
