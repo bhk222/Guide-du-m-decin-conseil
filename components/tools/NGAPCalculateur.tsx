@@ -1,9 +1,10 @@
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 import { Card } from '../ui/Card';
 import { Search, Plus, Trash2, Info, FileText, Calculator, AlertTriangle } from 'lucide-react';
 import {
     rechercherActe,
     calculerActes,
+    chargerNomenclatureComplete,
     type ActeNGAP,
     type ResultatCalcul,
 } from '../../services/ngapService';
@@ -20,11 +21,17 @@ export const NGAPCalculateur: React.FC = () => {
     const [resultatCalcul, setResultatCalcul] = useState<ResultatCalcul | null>(null);
     const [isTrauma, setIsTrauma] = useState(false);
     const [showInfo, setShowInfo] = useState(false);
+    const [nomenclaturePrete, setNomenclaturePrete] = useState(false);
+
+    // Charger la nomenclature complète au montage
+    useEffect(() => {
+        chargerNomenclatureComplete().then(() => setNomenclaturePrete(true));
+    }, []);
 
     const handleRecherche = useCallback(() => {
         if (!rechercheQuery.trim()) { setResultatsRecherche([]); return; }
         setResultatsRecherche(rechercherActe(rechercheQuery));
-    }, [rechercheQuery]);
+    }, [rechercheQuery, nomenclaturePrete]);
 
     const ajouterActe = useCallback((acte: ActeNGAP) => {
         setActesSelectionnes(prev => {

@@ -412,6 +412,56 @@ function chargerActesNGAP(): ActeNGAP[] {
 // Base de données chargée et corrigée
 export const actesNGAP: ActeNGAP[] = chargerActesNGAP();
 
+// Chargement runtime de nomenclature-complete.json (contient 1855+ actes)
+let nomenclatureChargee = false;
+export async function chargerNomenclatureComplete(): Promise<void> {
+    if (nomenclatureChargee) return;
+    try {
+        const resp = await fetch('/nomenclature-complete.json');
+        if (!resp.ok) return;
+        const data = await resp.json();
+        const actesJson = Array.isArray(data) ? data : data.actes || [];
+        const codesExistants = new Set(actesNGAP.map(a => a.code));
+        let ajouts = 0;
+
+        for (const raw of actesJson) {
+            if (!raw.code || codesExistants.has(raw.code)) continue;
+
+            let lettreCle = raw.lettreCle || 'K';
+            let entente = false;
+            if (lettreCle === 'E') { lettreCle = 'K'; entente = true; }
+
+            const coefficient = raw.coefficient || 1;
+            const libelle = nettoyerLibelle(raw.libelle || '');
+            const codeNGAP = raw.codeNGAP || `${lettreCle} ${coefficient}`;
+            const tarif = raw.tarif || calculerTarifUnitaire(lettreCle, coefficient);
+            const categorie = raw.categorie || categorieParLettreCle(lettreCle);
+
+            actesNGAP.push({
+                code: raw.code,
+                codeNGAP,
+                lettreCle,
+                coefficient,
+                libelle: libelle || `Acte ${codeNGAP}`,
+                tarif,
+                categorie,
+                chapitre: raw.chapter || raw.section || '',
+                entente,
+            });
+            codesExistants.add(raw.code);
+            ajouts++;
+        }
+
+        nomenclatureChargee = true;
+        console.log(`✅ Nomenclature complète chargée: +${ajouts} actes (total: ${actesNGAP.length})`);
+    } catch (e) {
+        console.warn('⚠️ Impossible de charger nomenclature-complete.json:', e);
+    }
+}
+
+// Lancer le chargement automatiquement
+chargerNomenclatureComplete();
+
 // ============================================
 // RECHERCHE SÉMANTIQUE AVANCÉE
 // ============================================
