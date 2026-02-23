@@ -12061,6 +12061,15 @@
       "coefficient": 70,
       "categorie": "Biologie",
       "tarif": 2100,
+      "code": "1695",
+      "libelle": "Parathormone (PTH)",
+      "lettreCle": "B",
+      "codeNGAP": "B 70"
+    },
+    {
+      "coefficient": 70,
+      "categorie": "Biologie",
+      "tarif": 2100,
       "code": "1696",
       "libelle": "1. Progesterone.. '... '.'",
       "lettreCle": "B",
