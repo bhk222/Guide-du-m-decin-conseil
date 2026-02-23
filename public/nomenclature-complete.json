@@ -147,12 +147,13 @@
       "lettreCle": "K"
     },
     {
-      "coefficient": 10035,
+      "coefficient": 100,
       "categorie": "Chirurgie",
-      "tarif": 301050,
+      "tarif": 3000,
       "code": "0022/3",
-      "libelle": "Fracture articulaire de la palette humérale..,",
-      "lettreCle": "K"
+      "libelle": "Fracture articulaire de la palette humérale",
+      "lettreCle": "K",
+      "codeNGAP": "K 100"
     },
     {
       "code": "0025",
@@ -1009,14 +1010,6 @@
       "tarif": 30,
       "code": "0136-2",
       "libelle": "autres articulations; '::",
-      "lettreCle": "K"
-    },
-    {
-      "coefficient": 4,
-      "categorie": "Chirurgie",
-      "tarif": 120,
-      "code": "0137",
-      "libelle": "/",
       "lettreCle": "K"
     },
     {
@@ -4058,11 +4051,12 @@
     },
     {
       "code": "0545/1",
-      "libelle": "Premier éléfllertt 0 • • 0 •• ••• • ••• , ••••• 0 •••••••••••••. ; , 10 E",
+      "libelle": "Premier élément",
       "lettreCle": "K",
-      "coefficient": 0,
-      "tarif": 0,
-      "categorie": "Chirurgie"
+      "coefficient": 10,
+      "tarif": 300,
+      "categorie": "Chirurgie",
+      "codeNGAP": "E 10"
     },
     {
       "coefficient": 5,
@@ -8284,22 +8278,13 @@
       "lettreCle": "K"
     },
     {
-      "coefficient": 65,
-      "categorie": "Biologie",
+      "coefficient": 12,
+      "categorie": "Psychiatrie",
       "tarif": 360,
       "code": "1107",
-      "libelle": "Test du monde de Bu hier...,..,..:...,. \".",
+      "libelle": "Test du monde de Buhler",
       "lettreCle": "B",
-      "codeNGAP": "B 65"
-    },
-    {
-      "coefficient": 65,
-      "categorie": "Biologie",
-      "tarif": 1950,
-      "code": "1107",
-      "libelle": "Solvants (Benzene, Phénol. Trichorethylène formaldehyde Chlorofonn~)...;",
-      "lettreCle": "B",
-      "codeNGAP": "B 65"
+      "codeNGAP": "B 12"
     },
     {
       "coefficient": 12,
@@ -8380,14 +8365,6 @@
       "coefficient": 0,
       "tarif": 0,
       "categorie": "Soins"
-    },
-    {
-      "coefficient": 30,
-      "categorie": "Biologie",
-      "tarif": 900,
-      "code": "1118",
-      "libelle": "Toxique domestique (Naphtalène, etc)... 8",
-      "lettreCle": "K"
     },
     {
       "code": "1119",
@@ -12062,7 +12039,7 @@
       "categorie": "Biologie",
       "tarif": 2100,
       "code": "1695",
-      "libelle": "Parathormone (PTH)",
+      "libelle": "Prolactine",
       "lettreCle": "B",
       "codeNGAP": "B 70"
     },
@@ -12124,9 +12101,10 @@
       "code": "1702",
       "libelle": "Alcool (méthanol, éthanol)",
       "lettreCle": "B",
-      "coefficient": 0,
-      "tarif": 0,
-      "categorie": "Biologie"
+      "coefficient": 50,
+      "tarif": 1500,
+      "categorie": "Biologie",
+      "codeNGAP": "B 50"
     },
     {
       "coefficient": 40,
@@ -12210,11 +12188,12 @@
     },
     {
       "code": "1709/9",
-      "libelle": "Théophyllhe B 70 B 70 B 70 B 70 / - 206",
+      "libelle": "Théophylline",
       "lettreCle": "B",
-      "coefficient": 0,
-      "tarif": 0,
-      "categorie": "Biologie"
+      "coefficient": 70,
+      "tarif": 2100,
+      "categorie": "Biologie",
+      "codeNGAP": "B 70"
     },
     {
       "coefficient": 10,
@@ -12244,12 +12223,13 @@
       "codeNGAP": "B 50"
     },
     {
-      "coefficient": 40,
+      "coefficient": 65,
       "categorie": "Biologie",
-      "tarif": 1200,
+      "tarif": 1950,
       "code": "1713",
-      "libelle": "Solvants... a 65.1714 FluQrurie.. • 8",
-      "lettreCle": "K"
+      "libelle": "Solvants",
+      "lettreCle": "B",
+      "codeNGAP": "B 65"
     },
     {
       "coefficient": 70,
@@ -12300,8 +12280,9 @@
       "categorie": "Biologie",
       "tarif": 1200,
       "code": "1721",
-      "libelle": "Araenic. cyanure (identification)... _.. ~",
-      "lettreCle": "K"
+      "libelle": "Arsenic, cyanure (identification)",
+      "lettreCle": "B",
+      "codeNGAP": "B 40"
     },
     {
       "code": "6298",
@@ -14919,6 +14900,159 @@
       "coefficient": 60,
       "libelle": "Dosage des métaux (Pb, Hg, As) - Toxicologie",
       "categorie": "Biologie"
+    },
+    {
+      "code": "1707",
+      "libelle": "Solvants (Benzène, Phénol, Trichloréthylène, Formaldéhyde, Chloroforme)",
+      "lettreCle": "B",
+      "coefficient": 65,
+      "tarif": 1950,
+      "categorie": "Biologie",
+      "codeNGAP": "B 65"
+    },
+    {
+      "code": "1118",
+      "libelle": "Délivrance à domicile d'un certificat d'internement",
+      "lettreCle": "K",
+      "coefficient": 5,
+      "tarif": 150,
+      "categorie": "Psychiatrie",
+      "codeNGAP": "K 5"
+    },
+    {
+      "code": "1718",
+      "libelle": "Toxique domestique (Naphtalène, etc.)",
+      "lettreCle": "B",
+      "coefficient": 30,
+      "tarif": 900,
+      "categorie": "Biologie",
+      "codeNGAP": "B 30"
+    },
+    {
+      "code": "0022/2",
+      "libelle": "Humérus - Diaphyse, extrémité supérieure ou supra-condylienne de l'extrémité inférieure",
+      "lettreCle": "K",
+      "coefficient": 80,
+      "tarif": 2400,
+      "categorie": "Chirurgie",
+      "codeNGAP": "K 80"
+    },
+    {
+      "code": "0049/2",
+      "libelle": "Pour les actes chirurgicaux nécessités par le traitement des lésions des viscères, des artères ou des nerfs, voir les chapitres appropriés",
+      "lettreCle": "K",
+      "coefficient": 0,
+      "tarif": 0,
+      "categorie": "Chirurgie",
+      "codeNGAP": "K 0"
+    },
+    {
+      "code": "0545/2",
+      "libelle": "Les suivants, sur le même appareil",
+      "lettreCle": "E",
+      "coefficient": 5,
+      "tarif": 150,
+      "categorie": "Dentaire",
+      "codeNGAP": "E 5"
+    },
+    {
+      "code": "0137/4",
+      "libelle": "Hanche, bassin",
+      "lettreCle": "K",
+      "coefficient": 100,
+      "tarif": 3000,
+      "categorie": "Chirurgie",
+      "codeNGAP": "K 100"
+    },
+    {
+      "code": "1709/2",
+      "libelle": "Antidépresseurs Tricycliques",
+      "lettreCle": "B",
+      "coefficient": 70,
+      "tarif": 2100,
+      "categorie": "Biologie",
+      "codeNGAP": "B 70"
+    },
+    {
+      "code": "1709/6",
+      "libelle": "Phénitoïne",
+      "lettreCle": "B",
+      "coefficient": 70,
+      "tarif": 2100,
+      "categorie": "Biologie",
+      "codeNGAP": "B 70"
+    },
+    {
+      "code": "1709/7",
+      "libelle": "Phénobarbital",
+      "lettreCle": "B",
+      "coefficient": 70,
+      "tarif": 2100,
+      "categorie": "Biologie",
+      "codeNGAP": "B 70"
+    },
+    {
+      "code": "1709/8",
+      "libelle": "Quinidine",
+      "lettreCle": "B",
+      "coefficient": 70,
+      "tarif": 2100,
+      "categorie": "Biologie",
+      "codeNGAP": "B 70"
+    },
+    {
+      "code": "1714",
+      "libelle": "Fluorurie",
+      "lettreCle": "B",
+      "coefficient": 40,
+      "tarif": 1200,
+      "categorie": "Biologie",
+      "codeNGAP": "B 40"
+    },
+    {
+      "code": "1715",
+      "libelle": "Stupéfiants",
+      "lettreCle": "B",
+      "coefficient": 10,
+      "tarif": 300,
+      "categorie": "Biologie",
+      "codeNGAP": "B 10"
+    },
+    {
+      "code": "1711/1",
+      "libelle": "Recherche de médicaments (urines)",
+      "lettreCle": "B",
+      "coefficient": 20,
+      "tarif": 600,
+      "categorie": "Biologie",
+      "codeNGAP": "B 20"
+    },
+    {
+      "code": "1716/1",
+      "libelle": "Recherche de porphyrines (urines)",
+      "lettreCle": "B",
+      "coefficient": 10,
+      "tarif": 300,
+      "categorie": "Biologie",
+      "codeNGAP": "B 10"
+    },
+    {
+      "code": "0138/1",
+      "libelle": "Arthrolyse, synovectomie, réintervention pour excision tissulaire - coude, épaule, genou",
+      "lettreCle": "K",
+      "coefficient": 80,
+      "tarif": 2400,
+      "categorie": "Chirurgie",
+      "codeNGAP": "K 80"
+    },
+    {
+      "code": "0138/2",
+      "libelle": "Arthrolyse, synovectomie, réintervention pour excision tissulaire - hanche",
+      "lettreCle": "K",
+      "coefficient": 100,
+      "tarif": 3000,
+      "categorie": "Chirurgie",
+      "codeNGAP": "K 100"
     }
   ],
   "total": 1840,
