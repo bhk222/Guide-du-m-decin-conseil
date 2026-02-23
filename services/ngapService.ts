@@ -194,6 +194,8 @@ const ABREVIATIONS_MEDICALES: Record<string, string[]> = {
     'tsh': ['thyroïde', 'TSH', 'thyréostimuline', 'B 40'],
     't3': ['thyroïde', 'triiodothyronine', 'B 40'],
     't4': ['thyroïde', 'thyroxine', 'B 40'],
+    'pth': ['parathormone', 'PTH', 'parathyroïde', 'calcium', 'B 70'],
+    'parathormone': ['parathormone', 'PTH', 'parathyroïde', 'calcium', 'B 70'],
     'psa': ['prostate', 'antigène', 'PSA', 'B 40'],
     'hba1c': ['hémoglobine', 'glyquée', 'HbA1c', 'diabète', 'B 40'],
     'inr': ['coagulation', 'prothrombine', 'INR', 'TP'],
