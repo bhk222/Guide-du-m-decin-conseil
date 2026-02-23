@@ -1,0 +1,2471 @@
+
+================================================================================
+CATÉGORIE 1: Séquelles Crâniennes, Neurologiques et Psychiatriques
+================================================================================
+
+  --- Cuir Chevelu (3 entrées) ---
+    1. Lésions du cuir chevelu avec phénomènes douloureux, sans brèche osseuse
+       Taux: 0-15% | RateCriteria: OUI (low/medium/high) | Description: non
+    2. Scalp ou brûlures du cuir chevelu avec cicatrices douloureuses
+       Taux: 5-20% | RateCriteria: OUI (low/medium/high) | Description: non
+    3. Perte de cheveux post-traumatique (si gêne le travail)
+       Taux: 4-6% | RateCriteria: non | Description: non
+
+  --- Crâne - Lésions Osseuses (5 entrées) ---
+    4. Enfoncement de la seule table externe
+       Taux: 0-10% | RateCriteria: OUI (low/high) | Description: non
+    5. Brèche osseuse (1 à 4 cm²)
+       Taux: 20% | RateCriteria: non | Description: non
+    6. Brèche osseuse avec battements duremériens (jusqu'à 12 cm²)
+       Taux: 20-50% | RateCriteria: OUI (low/medium/high) | Description: non
+    7. Brèche osseuse (> 12 cm²) avec troubles subjectifs
+       Taux: 50-70% | RateCriteria: OUI (low/high) | Description: non
+    8. Fistule de liquide céphalo-rachidien (LCR) persistante (otorrhée ou rhinorrhée)
+       Taux: 30-60% | RateCriteria: OUI (low/high) | Description: OUI
+
+  --- Syndrome Post-Commotionnel (8 entrées) ---
+    9. Syndrome subjectif commun des blessures du crâne (céphalée, vertiges, troubles de l'humeur)
+       Taux: 5-50% | RateCriteria: OUI (low/medium/high) | Description: non
+    10. Céphalées post-traumatiques chroniques
+       Taux: 5-20% | RateCriteria: OUI (low/medium/high) | Description: non
+    11. Persistance de corps étranger intra-crânien sans phénomène surajouté
+       Taux: 20-60% | RateCriteria: OUI (low/high) | Description: non
+    12. Syndrome subjectif isolé (céphalées et étourdissements)
+       Taux: 5-10% | RateCriteria: non | Description: non
+    13. Commotion cérébro-spinale prolongée (syndrome complet)
+       Taux: 5-60% | RateCriteria: OUI (low/medium/high) | Description: non
+    14. Contusions cérébrales avec signes de localisation (hémiparésie, aphasie...)
+       Taux: 5-60% | RateCriteria: OUI (low/high) | Description: OUI
+    15. Déficits cognitifs post-traumatiques (mémoire, attention, fonctions exécutives)
+       Taux: 10-40% | RateCriteria: OUI (low/high) | Description: non
+    16. Syndrome dysexécutif post-traumatique (troubles de la planification, inhibition)
+       Taux: 20-50% | RateCriteria: OUI (low/high) | Description: non
+
+  --- Épilepsies Post-Traumatiques (13 entrées) ---
+    17. Crises convulsives généralisées (non jacksoniennes)
+       Taux: 30-100% | RateCriteria: OUI (low/high) | Description: non
+    18. Crises convulsives généralisées rares
+       Taux: 20-30% | RateCriteria: non | Description: non
+    19. Équivalents épileptiques (absences, vertiges) - 1 à 3 fois par an
+       Taux: 0-10% | RateCriteria: non | Description: non
+    20. Équivalents épileptiques - une fois par mois
+       Taux: 10-20% | RateCriteria: non | Description: non
+    21. Équivalents épileptiques - une fois par semaine
+       Taux: 20-30% | RateCriteria: non | Description: non
+    22. Équivalents épileptiques - trois fois par semaine
+       Taux: 40-50% | RateCriteria: non | Description: non
+    23. Équivalents épileptiques - très fréquents avec manifestations graves
+       Taux: 40-80% | RateCriteria: non | Description: non
+    24. Crises jacksoniennes limitées - jusqu'à 12 fois par an
+       Taux: 0-10% | RateCriteria: non | Description: non
+    25. Crises jacksoniennes limitées - jusqu'à 1 fois par semaine
+       Taux: 10-20% | RateCriteria: non | Description: non
+    26. Crises jacksoniennes limitées - plusieurs fois par semaine
+       Taux: 20-30% | RateCriteria: non | Description: non
+    27. Crises jacksoniennes étendues - jusqu'à 12 fois par an
+       Taux: 10-20% | RateCriteria: non | Description: non
+    28. Crises jacksoniennes étendues - jusqu'à 1 fois par semaine
+       Taux: 20-30% | RateCriteria: non | Description: non
+    29. Crises jacksoniennes étendues - plusieurs fois par semaine
+       Taux: 20-40% | RateCriteria: non | Description: non
+
+  --- Syndromes Neurologiques Spécifiques (12 entrées) ---
+    30. Syndrome Cérébelleux Unilatéral (Côté Droit)
+       Taux: 10-80% | RateCriteria: non | Description: non
+    31. Syndrome Cérébelleux Unilatéral (Côté Gauche)
+       Taux: 10-75% | RateCriteria: non | Description: non
+    32. Syndrome Cérébelleux Bilatéral
+       Taux: 30-100% | RateCriteria: non | Description: non
+    33. Syndrome de Parkinson Post-Traumatique
+       Taux: 10-100% | RateCriteria: non | Description: non
+    34. Mouvements anormaux post-traumatiques (dystonie, chorée, tremblements)
+       Taux: 15-60% | RateCriteria: OUI (low/medium/high) | Description: OUI
+    35. Torticolis Traumatique
+       Taux: 15-20% | RateCriteria: non | Description: non
+    36. Insuffisance Antéhypophysaire (Hypopituitarisme) Post-Traumatique
+       Taux: 40-80% | RateCriteria: OUI (low/high) | Description: OUI
+    37. Diabète Insipide Post-Traumatique
+       Taux: 15-30% | RateCriteria: OUI (low/high) | Description: OUI
+    38. Narcolepsie-cataplexie post-traumatique
+       Taux: 30-60% | RateCriteria: OUI (low/high) | Description: OUI
+    39. Hydrocéphalie à pression normale post-traumatique
+       Taux: 40-80% | RateCriteria: OUI (low/high) | Description: OUI
+    40. Fistule carotido-caverneuse post-traumatique
+       Taux: 20-50% | RateCriteria: OUI (low/high) | Description: OUI
+    41. Séquelles neurologiques centrales d'une embolie graisseuse post-traumatique
+       Taux: 20-80% | RateCriteria: OUI (low/high) | Description: OUI
+
+  --- Hémiplégies et Monoplégies (Origine Cérébrale) (19 entrées) ---
+    42. Hémiplégie complète flasque (persistant > 6 mois)
+       Taux: 100% | RateCriteria: non | Description: non
+    43. Hémiplégie complète avec contracture (Côté Droit)
+       Taux: 70-80% | RateCriteria: non | Description: non
+    44. Hémiplégie complète avec contracture (Côté Gauche)
+       Taux: 50-70% | RateCriteria: non | Description: non
+    45. Hémiplégie complète avec troubles sphinctériens
+       Taux: 80-100% | RateCriteria: non | Description: non
+    46. Hémiplégie complète avec aphasie
+       Taux: 100% | RateCriteria: non | Description: non
+    47. Hémiplégie incomplète (Côté Droit)
+       Taux: 10-60% | RateCriteria: non | Description: non
+    48. Hémiplégie incomplète (Côté Gauche)
+       Taux: 8-50% | RateCriteria: non | Description: non
+    49. Monoplégie complète - Membre supérieur droit
+       Taux: 70-75% | RateCriteria: non | Description: non
+    50. Monoplégie complète - Membre supérieur gauche
+       Taux: 60-65% | RateCriteria: non | Description: non
+    51. Monoplégie incomplète - Membre supérieur droit
+       Taux: 10-50% | RateCriteria: non | Description: non
+    52. Monoplégie incomplète - Membre supérieur gauche
+       Taux: 10-40% | RateCriteria: non | Description: non
+    53. Monoplégie incomplète - Membre inférieur (lésion corticale)
+       Taux: 10-30% | RateCriteria: non | Description: non
+    54. Aphasie avec difficulté d'élocution
+       Taux: 10-30% | RateCriteria: non | Description: non
+    55. Aphasie de Broca (motrice) post-traumatique
+       Taux: 30-60% | RateCriteria: OUI (low/high) | Description: non
+    56. Aphasie de Wernicke (sensorielle) post-traumatique
+       Taux: 40-70% | RateCriteria: OUI (low/high) | Description: non
+    57. Aphasie sensorielle avec altération du langage intérieur
+       Taux: 60-100% | RateCriteria: non | Description: non
+    58. Aphasie avec impossibilité de correspondre (mutisme)
+       Taux: 60-80% | RateCriteria: non | Description: non
+    59. Diplégie cérébrale (marche impossible)
+       Taux: 100% | RateCriteria: non | Description: non
+    60. Diplégie cérébrale (marche possible)
+       Taux: 30-90% | RateCriteria: non | Description: non
+
+  --- Psychoses et Névroses Post-Traumatiques (14 entrées) ---
+    61. Démence post-traumatique incomplète
+       Taux: 60-90% | RateCriteria: non | Description: non
+    62. Démence post-traumatique complète
+       Taux: 100% | RateCriteria: non | Description: non
+    63. Névrose post-traumatique - États neuro-psychasthéniques (signes fonctionnels)
+       Taux: 0-10% | RateCriteria: non | Description: non
+    64. Névrose post-traumatique - États neuro-psychasthéniques (signes somatiques)
+       Taux: 10-40% | RateCriteria: non | Description: non
+    65. Névrose post-traumatique - Signes psychiques (fatigabilité cérébrale)
+       Taux: 20-50% | RateCriteria: non | Description: non
+    66. Névrose post-traumatique - Symptômes vago-sympathiques
+       Taux: 5-20% | RateCriteria: non | Description: non
+    67. Névrose post-traumatique - Syndromes anxieux
+       Taux: 10-50% | RateCriteria: non | Description: non
+    68. Névrose post-traumatique - Syndromes moteurs fonctionnels
+       Taux: 0-20% | RateCriteria: non | Description: non
+    69. Trouble de stress post-traumatique (TSPT)
+       Taux: 10-50% | RateCriteria: OUI (low/high) | Description: non
+    70. Phobie spécifique post-traumatique (amaxophobie, acrophobie, etc.)
+       Taux: 5-20% | RateCriteria: OUI (low/medium/high) | Description: OUI
+    71. Trouble de l'adaptation avec anxiété et/ou humeur dépressive chronique
+       Taux: 5-15% | RateCriteria: OUI (low/high) | Description: non
+    72. Troubles du sommeil chroniques post-traumatiques (insomnie sévère)
+       Taux: 5-15% | RateCriteria: OUI (low/high) | Description: non
+    73. Trouble de la personnalité post-traumatique (modification du comportement)
+       Taux: 15-40% | RateCriteria: OUI (low/high) | Description: non
+    74. Trouble somatoforme douloureux persistant (algie psychogène) post-traumatique
+       Taux: 10-30% | RateCriteria: OUI (low/high) | Description: OUI
+
+================================================================================
+CATÉGORIE 2: Séquelles du Rachis, du Bassin et de la Moelle Épinière
+================================================================================
+
+  --- Rachis (29 entrées) ---
+    75. Séquelles de fracture/luxation du rachis cervical (sans lésion neurologique)
+       Taux: 8-25% | RateCriteria: OUI (low/high) | Description: non
+    76. Séquelles de fracture/luxation du rachis dorsal (sans lésion neurologique)
+       Taux: 5-20% | RateCriteria: OUI (low/high) | Description: non
+    77. Séquelles de fracture/luxation du rachis lombaire (sans lésion neurologique)
+       Taux: 10-30% | RateCriteria: OUI (low/high) | Description: non
+    78. Fracture tassement vertébral cervical non déplacée consolidée
+       Taux: 8-20% | RateCriteria: OUI (low/medium/high) | Description: OUI
+    79. Fracture tassement vertébral dorsal non déplacée consolidée
+       Taux: 5-15% | RateCriteria: OUI (low/medium/high) | Description: OUI
+    80. Fracture tassement vertébral lombaire non déplacée consolidée
+       Taux: 10-25% | RateCriteria: OUI (low/medium/high) | Description: OUI
+    81. Hernie discale cervicale post-traumatique - Syndrome rachidien pur (cervicalgies)
+       Taux: 5-15% | RateCriteria: OUI (low/high) | Description: non
+    82. Hernie discale cervicale post-traumatique - Avec névralgie cervico-brachiale (NCB)
+       Taux: 15-30% | RateCriteria: OUI (low/high) | Description: non
+    83. Hernie discale lombaire post-traumatique - Syndrome rachidien pur (lombalgies)
+       Taux: 5-20% | RateCriteria: OUI (low/high) | Description: non
+    84. Hernie discale lombaire post-traumatique - Avec radiculalgie (sciatique ou cruralgie)
+       Taux: 15-35% | RateCriteria: OUI (low/high) | Description: non
+    85. Entorse lombaire avec lombalgies mécaniques
+       Taux: 5-10% | RateCriteria: OUI (low/medium/high) | Description: OUI
+    86. Syndrome post-traumatique cervical chronique (Whiplash / Coup du lapin)
+       Taux: 5-15% | RateCriteria: OUI (low/medium/high) | Description: OUI
+    87. Névralgie d'Arnold (Névralgie du grand occipital) post-traumatique
+       Taux: 8-20% | RateCriteria: OUI (low/high) | Description: OUI
+    88. Syndrome de Maigne (Syndrome de la charnière thoraco-lombaire)
+       Taux: 5-15% | RateCriteria: OUI (low/high) | Description: OUI
+    89. Syndrome myofascial cervical post-traumatique (contractures chroniques)
+       Taux: 5-15% | RateCriteria: OUI (low/high) | Description: OUI
+    90. Fracture des apophyses transverses
+       Taux: 5-25% | RateCriteria: non | Description: non
+    91. Raideur rachidienne post-immobilisation, sans douleurs
+       Taux: 1-15% | RateCriteria: non | Description: non
+    92. Raideur rachidienne avec douleurs ostéo-articulaires
+       Taux: 15-25% | RateCriteria: non | Description: non
+    93. Raideur rachidienne avec douleurs névralgiques
+       Taux: 20-40% | RateCriteria: non | Description: non
+    94. Raideur rachidienne avec déviation très prononcée
+       Taux: 40-45% | RateCriteria: non | Description: non
+    95. Séquelles d'arthrodèse vertébrale (fusion) avec raideur et douleurs résiduelles
+       Taux: 15-40% | RateCriteria: OUI (low/high) | Description: non
+    96. Scoliose ou cyphose douloureuse post-traumatique
+       Taux: 10-30% | RateCriteria: OUI (low/high) | Description: non
+    97. Myélopathie cervicarthrosique post-traumatique
+       Taux: 20-70% | RateCriteria: OUI (low/high) | Description: OUI
+    98. Ankylose vertébrale post-traumatique (Spondylite, Kummel-Verneuil, Cyphose)
+       Taux: 20-80% | RateCriteria: non | Description: non
+    99. Spondylolisthésis modifié par traumatisme
+       Taux: 5-15% | RateCriteria: non | Description: non
+    100. Rhumatisme vertébral (lombalgie, cervicalgie) avec raideur
+       Taux: 5-25% | RateCriteria: non | Description: non
+    101. Spondylose rhizomélique (atteinte lombaire)
+       Taux: 20-30% | RateCriteria: non | Description: non
+    102. Spondylose rhizomélique (atteinte de tout le rachis et hanches)
+       Taux: 30-80% | RateCriteria: non | Description: non
+    103. Séquelles d'ostéo-arthrite vertébrale infectieuse
+       Taux: 15-35% | RateCriteria: non | Description: non
+
+  --- Bassin - Lésions Osseuses (8 entrées) ---
+    104. Fracture isolée d'une branche pubienne ou de l'aile iliaque (sans déplacement)
+       Taux: 5-10% | RateCriteria: non | Description: non
+    105. Fracture du cotyle sans déplacement, hanche congruente
+       Taux: 10-20% | RateCriteria: non | Description: non
+    106. Fracture du cotyle avec arthrose post-traumatique
+       Taux: 15-40% | RateCriteria: non | Description: OUI
+    107. Fracture du sacrum ou du coccyx avec douleurs chroniques (coccygodynie)
+       Taux: 5-15% | RateCriteria: OUI (low/high) | Description: non
+    108. Fracture du sacrum avec troubles neurologiques (radiculalgie S1)
+       Taux: 15-30% | RateCriteria: non | Description: non
+    109. Disjonction de la symphyse pubienne ou sacro-iliaque (instabilité résiduelle)
+       Taux: 15-30% | RateCriteria: OUI (low/high) | Description: non
+    110. Fracture complexe de l'anneau pelvien avec séquelles importantes (boiterie, douleurs)
+       Taux: 30-60% | RateCriteria: OUI (low/high) | Description: non
+    111. Névralgie pudendale post-traumatique (fracture du bassin)
+       Taux: 15-35% | RateCriteria: OUI (low/high) | Description: non
+
+  --- Troubles Nerveux d'Origine Médullaire (38 entrées) ---
+    112. Paraplégie incomplète
+       Taux: 10-80% | RateCriteria: non | Description: non
+    113. Paraplégie complète
+       Taux: 100% | RateCriteria: non | Description: non
+    114. Quadriplégie incomplète (marche possible)
+       Taux: 60-90% | RateCriteria: non | Description: non
+    115. Quadriplégie complète (confinement au lit)
+       Taux: 100% | RateCriteria: non | Description: non
+    116. Syndrome de Brown-Séquard
+       Taux: 10-50% | RateCriteria: non | Description: non
+    117. Hémiplégie médullaire incomplète (Côté Droit)
+       Taux: 10-80% | RateCriteria: non | Description: non
+    118. Hémiplégie médullaire incomplète (Côté Gauche)
+       Taux: 10-75% | RateCriteria: non | Description: non
+    119. Hémiplégie médullaire complète
+       Taux: 100% | RateCriteria: non | Description: non
+    120. Syndrome de la queue de cheval post-traumatique
+       Taux: 40-80% | RateCriteria: OUI (low/high) | Description: non
+    121. Majoration pour douleurs radiculo-médullaires
+       Taux: 10-20% | RateCriteria: non | Description: non
+    122. Claudication intermittente d'origine médullaire
+       Taux: 10-40% | RateCriteria: OUI (low/high) | Description: non
+    123. Para-ostéo-arthropathies neurogènes (POAN)
+       Taux: 10-40% | RateCriteria: OUI (low/high) | Description: OUI
+    124. Atrophie musculaire médullaire - Main (droite)
+       Taux: 5-30% | RateCriteria: non | Description: non
+    125. Atrophie musculaire médullaire - Main (gauche)
+       Taux: 5-20% | RateCriteria: non | Description: non
+    126. Atrophie musculaire médullaire - Avant-bras (droit)
+       Taux: 10-40% | RateCriteria: non | Description: non
+    127. Atrophie musculaire médullaire - Avant-bras (gauche)
+       Taux: 10-30% | RateCriteria: non | Description: non
+    128. Atrophie musculaire médullaire - Bras (droit)
+       Taux: 10-40% | RateCriteria: non | Description: non
+    129. Atrophie musculaire médullaire - Bras (gauche)
+       Taux: 10-30% | RateCriteria: non | Description: non
+    130. Atrophie musculaire médullaire - Épaule/Ceinture scapulaire (droite)
+       Taux: 10-40% | RateCriteria: non | Description: non
+    131. Atrophie musculaire médullaire - Épaule/Ceinture scapulaire (gauche)
+       Taux: 10-30% | RateCriteria: non | Description: non
+    132. Atrophie complète membre supérieur (droit)
+       Taux: 75% | RateCriteria: non | Description: non
+    133. Atrophie complète membre supérieur (gauche)
+       Taux: 65% | RateCriteria: non | Description: non
+    134. Atrophie musculaire médullaire - Pied
+       Taux: 5-15% | RateCriteria: non | Description: non
+    135. Atrophie musculaire médullaire - Jambe
+       Taux: 10-30% | RateCriteria: non | Description: non
+    136. Atrophie musculaire médullaire - Cuisse
+       Taux: 20-50% | RateCriteria: non | Description: non
+    137. Atrophie musculaire médullaire - Ceinture pelvienne
+       Taux: 30-60% | RateCriteria: non | Description: non
+    138. Atrophie complète d'un membre inférieur
+       Taux: 70% | RateCriteria: non | Description: non
+    139. Atrophie complète des deux membres inférieurs
+       Taux: 100% | RateCriteria: non | Description: non
+    140. Troubles de la sensibilité d'origine médullaire avec douleurs
+       Taux: 10-20% | RateCriteria: non | Description: non
+    141. Rétention fécale corrigible
+       Taux: 3-5% | RateCriteria: non | Description: non
+    142. Rétention fécale rebelle
+       Taux: 10-30% | RateCriteria: non | Description: non
+    143. Incontinence fécale incomplète ou rare
+       Taux: 10-25% | RateCriteria: non | Description: non
+    144. Incontinence fécale complète et fréquente
+       Taux: 30-70% | RateCriteria: non | Description: non
+    145. Abolition des érections
+       Taux: 10-20% | RateCriteria: non | Description: non
+    146. Priapisme incoercible
+       Taux: 10-20% | RateCriteria: non | Description: non
+    147. Syringomyélie - Formes frustes ou lentes
+       Taux: 20-40% | RateCriteria: non | Description: non
+    148. Syringomyélie - Formes progressives
+       Taux: 40-60% | RateCriteria: non | Description: non
+    149. Syringomyélie - Formes graves
+       Taux: 60-100% | RateCriteria: non | Description: non
+
+================================================================================
+CATÉGORIE 3: Séquelles des Nerfs Crâniens et Périphériques
+================================================================================
+
+  --- Nerfs Crâniens (15 entrées) ---
+    150. Anosmie unilatérale ou bilatérale
+       Taux: 5-30% | RateCriteria: non | Description: OUI
+    151. Névralgie du Trijumeau (V) - Algie avec ou sans anesthésie
+       Taux: 25-70% | RateCriteria: non | Description: non
+    152. Névralgie du Trijumeau (V) - Algie du type continu sympathalgique
+       Taux: 30-80% | RateCriteria: non | Description: non
+    153. Paralysie du Nerf Facial (VII) - Paralysie totale et définitive
+       Taux: 20-30% | RateCriteria: non | Description: non
+    154. Paralysie du Nerf Facial (VII) - Paralysie partielle et définitive
+       Taux: 10-30% | RateCriteria: non | Description: non
+    155. Paralysie du Nerf Facial (VII) - Paralysie bilatérale totale
+       Taux: 20-50% | RateCriteria: non | Description: non
+    156. Paralysie du Nerf Facial (VII) - Contracture post-paralytique
+       Taux: 0-10% | RateCriteria: non | Description: non
+    157. Paralysie du Nerf Facial (VII) - Spasmes (hémispasme facial)
+       Taux: 0-10% | RateCriteria: non | Description: non
+    158. Paralysie du Nerf Facial (VII) - Spasmes avec crises répétées
+       Taux: 10-20% | RateCriteria: non | Description: non
+    159. Atteinte du Nerf auditif (VIII) - Surdité, acouphènes, vertiges
+       Taux: 5-60% | RateCriteria: non | Description: OUI
+    160. Atteinte du Nerf glosso-pharyngien (IX) - Paralysie bilatérale
+       Taux: 5-10% | RateCriteria: non | Description: non
+    161. Atteinte du Nerf spinal externe (XI) - Atrophie du trapèze et sterno-cléido-mastoïdien
+       Taux: 5-25% | RateCriteria: non | Description: non
+    162. Atteinte du Nerf hypoglosse (XII) - Hémiatrophie et réaction de dégénérescence unilatérale
+       Taux: 10% | RateCriteria: non | Description: non
+    163. Atteinte du Nerf hypoglosse (XII) - Bilatérale (exceptionnelle)
+       Taux: 50-60% | RateCriteria: non | Description: non
+    164. Paralysies multiples des nerfs crâniens
+       Taux: 10-60% | RateCriteria: non | Description: non
+
+  --- Nerfs Périphériques - Membre Supérieur (33 entrées) ---
+    165. Paralysie complète du plexus brachial (droite)
+       Taux: 70-80% | RateCriteria: non | Description: non
+    166. Paralysie complète du plexus brachial (gauche)
+       Taux: 60-70% | RateCriteria: non | Description: non
+    167. Paralysie totale du membre supérieur (droite)
+       Taux: 70-80% | RateCriteria: non | Description: non
+    168. Paralysie totale du membre supérieur (gauche)
+       Taux: 60-70% | RateCriteria: non | Description: non
+    169. Paralysie radiculaire supérieure (Duchenne-Erb) (droite)
+       Taux: 45-55% | RateCriteria: non | Description: non
+    170. Paralysie radiculaire supérieure (Duchenne-Erb) (gauche)
+       Taux: 35-45% | RateCriteria: non | Description: non
+    171. Paralysie radiculaire inférieure (Klumpke) (droite)
+       Taux: 55-65% | RateCriteria: non | Description: non
+    172. Paralysie radiculaire inférieure (Klumpke) (gauche)
+       Taux: 45-55% | RateCriteria: non | Description: non
+    173. Paralysie du nerf du grand dentelé (Serratus anterior) (Main Dominante)
+       Taux: 10-25% | RateCriteria: OUI (low/high) | Description: OUI
+    174. Paralysie du nerf du grand dentelé (Serratus anterior) (Main Non Dominante)
+       Taux: 8-20% | RateCriteria: OUI (low/high) | Description: OUI
+    175. Paralysie isolée du nerf sous-scapulaire (droite)
+       Taux: 10-20% | RateCriteria: non | Description: non
+    176. Paralysie isolée du nerf sous-scapulaire (gauche)
+       Taux: 5-15% | RateCriteria: non | Description: non
+    177. Paralysie du nerf circonflexe (droite)
+       Taux: 25-35% | RateCriteria: non | Description: non
+    178. Paralysie du nerf circonflexe (gauche)
+       Taux: 20-30% | RateCriteria: non | Description: non
+    179. Paralysie du nerf musculo-cutané (droite)
+       Taux: 15-25% | RateCriteria: non | Description: non
+    180. Paralysie du nerf musculo-cutané (gauche)
+       Taux: 10-20% | RateCriteria: non | Description: non
+    181. Paralysie du nerf médian - Au bras (droite)
+       Taux: 45-55% | RateCriteria: non | Description: non
+    182. Paralysie du nerf médian - Au bras (gauche)
+       Taux: 35-45% | RateCriteria: non | Description: non
+    183. Paralysie du nerf médian - Au poignet (droite)
+       Taux: 15-25% | RateCriteria: non | Description: non
+    184. Paralysie du nerf médian - Au poignet (gauche)
+       Taux: 5-15% | RateCriteria: non | Description: non
+    185. Syndrome du canal carpien post-traumatique (Main Dominante)
+       Taux: 5-20% | RateCriteria: OUI (low/high) | Description: non
+    186. Syndrome du canal carpien post-traumatique (Main Non Dominante)
+       Taux: 4-15% | RateCriteria: OUI (low/high) | Description: non
+    187. Paralysie du nerf cubital - Au bras (droite)
+       Taux: 25-35% | RateCriteria: non | Description: non
+    188. Paralysie du nerf cubital - Au bras (gauche)
+       Taux: 15-25% | RateCriteria: non | Description: non
+    189. Paralysie du nerf cubital - Au poignet (droite)
+       Taux: 25-35% | RateCriteria: non | Description: non
+    190. Paralysie du nerf cubital - Au poignet (gauche)
+       Taux: 15-25% | RateCriteria: non | Description: non
+    191. Paralysie du nerf radial - Lésion au-dessus de la branche du triceps (droite)
+       Taux: 45-55% | RateCriteria: non | Description: non
+    192. Paralysie du nerf radial - Lésion au-dessus de la branche du triceps (gauche)
+       Taux: 35-45% | RateCriteria: non | Description: non
+    193. Paralysie du nerf radial - Lésion au-dessous de la branche du triceps (droite)
+       Taux: 35-45% | RateCriteria: non | Description: non
+    194. Paralysie du nerf radial - Lésion au-dessous de la branche du triceps (gauche)
+       Taux: 25-35% | RateCriteria: non | Description: non
+    195. Paralysie associée du médian et du cubital (droite)
+       Taux: 45-55% | RateCriteria: non | Description: non
+    196. Paralysie associée du médian et du cubital (gauche)
+       Taux: 45-55% | RateCriteria: non | Description: non
+    197. Syndrome du défilé thoraco-brachial post-traumatique
+       Taux: 10-30% | RateCriteria: OUI (low/medium/high) | Description: non
+
+  --- Nerfs Périphériques - Membre Inférieur (7 entrées) ---
+    198. Paralysie totale d'un membre inférieur
+       Taux: 70-80% | RateCriteria: non | Description: non
+    199. Paralysie complète du nerf sciatique
+       Taux: 35-45% | RateCriteria: non | Description: non
+    200. Paralysie du nerf sciatique poplité externe (SPE)
+       Taux: 15-25% | RateCriteria: OUI (low/high) | Description: non
+    201. Paralysie du nerf sciatique poplité interne (SPI)
+       Taux: 15-25% | RateCriteria: OUI (low/high) | Description: non
+    202. Paralysie du nerf crural
+       Taux: 45-55% | RateCriteria: non | Description: non
+    203. Paralysie du nerf obturateur
+       Taux: 10-20% | RateCriteria: non | Description: non
+    204. Méralgie paresthésique (Névralgie fémoro-cutanée)
+       Taux: 5-15% | RateCriteria: OUI (low/high) | Description: OUI
+
+  --- Nerfs du Tronc (1 entrées) ---
+    205. Névralgie intercostale post-traumatique
+       Taux: 5-15% | RateCriteria: OUI (low/high) | Description: non
+
+  --- Névrites, Névralgies et Syndromes Douloureux (11 entrées) ---
+    206. Névrite avec algies (membre supérieur droit)
+       Taux: 10-50% | RateCriteria: non | Description: non
+    207. Névrite avec algies (membre supérieur gauche)
+       Taux: 8-40% | RateCriteria: non | Description: non
+    208. Séquelles névritiques (pied varus équin)
+       Taux: 30-50% | RateCriteria: non | Description: non
+    209. Névralgie sciatique légère (confirmée, sans troubles graves)
+       Taux: 10-20% | RateCriteria: non | Description: non
+    210. Névralgie sciatique d'intensité moyenne (gêne marche/travail)
+       Taux: 25-40% | RateCriteria: non | Description: non
+    211. Névralgie sciatique grave (travail et marche impossibles)
+       Taux: 45-60% | RateCriteria: non | Description: non
+    212. Névralgie sciatique compliquée (causalgie, rétentissement général)
+       Taux: 40-80% | RateCriteria: non | Description: non
+    213. Réaction névritique (douleurs, raideurs) - membre supérieur
+       Taux: 8-50% | RateCriteria: non | Description: non
+    214. Réaction névritique (douleurs, raideurs) - membre inférieur
+       Taux: 10-40% | RateCriteria: non | Description: non
+    215. Causalgie (majoration) - membre supérieur
+       Taux: 20-60% | RateCriteria: non | Description: non
+    216. Causalgie (majoration) - membre inférieur
+       Taux: 20-60% | RateCriteria: non | Description: non
+
+  --- Troubles Trophiques et Sympathiques (4 entrées) ---
+    217. Syndrome de paralysie du sympathique cervical (Claude Bernard-Horner)
+       Taux: 5-10% | RateCriteria: non | Description: non
+    218. Syndrome d'excitation du sympathique cervical (Pourfour du Petit)
+       Taux: 5-10% | RateCriteria: non | Description: non
+    219. Ulcérations persistantes, troubles trophiques cutanés (majoration)
+       Taux: 5-20% | RateCriteria: non | Description: non
+    220. Œdème dur traumatique
+       Taux: 8-10% | RateCriteria: non | Description: non
+
+================================================================================
+CATÉGORIE 4: Séquelles Maxillo-Faciales, ORL et Ophtalmologiques
+================================================================================
+
+  --- Face - Mâchoires (32 entrées) ---
+    221. Mutilation - Perte des deux maxillaires supérieurs
+       Taux: 90-100% | RateCriteria: non | Description: non
+    222. Mutilation - Perte d'un maxillaire inférieur
+       Taux: 90-100% | RateCriteria: non | Description: non
+    223. Mutilation - Perte d'un maxillaire supérieur et d'un maxillaire inférieur
+       Taux: 100% | RateCriteria: non | Description: non
+    224. Mutilation - Perte d'un seul maxillaire supérieur avec conservation mandibule
+       Taux: 50-60% | RateCriteria: non | Description: non
+    225. Mutilation - Perte d'un maxillaire supérieur avec perte de substance étendue
+       Taux: 70-90% | RateCriteria: non | Description: non
+    226. Perte de substance des parties molles de la face (joue, lèvres, menton)
+       Taux: 10-80% | RateCriteria: OUI (low/high) | Description: non
+    227. Consolidation vicieuse - Mobilité totale du maxillaire supérieur
+       Taux: 60-80% | RateCriteria: non | Description: non
+    228. Consolidation vicieuse - Mobilité partielle du maxillaire supérieur
+       Taux: 20-50% | RateCriteria: non | Description: non
+    229. Consolidation vicieuse - Troubles sérieux de l'articulé dentaire
+       Taux: 15-30% | RateCriteria: non | Description: non
+    230. Consolidation vicieuse - Trouble léger de l'articulé dentaire
+       Taux: 5-15% | RateCriteria: non | Description: non
+    231. Perte de substance de la voûte palatine
+       Taux: 10-20% | RateCriteria: non | Description: non
+    232. Perte de substance de la voûte avec communication bucco-nasale
+       Taux: 30-60% | RateCriteria: non | Description: non
+    233. Perte de substance partielle de l'arcade dentaire (sans trouble fonctionnel)
+       Taux: 0-5% | RateCriteria: non | Description: non
+    234. Fracture du maxillaire inférieur - Consolidation vicieuse avec trouble grave de l'articulé
+       Taux: 15-20% | RateCriteria: non | Description: non
+    235. Fracture du maxillaire inférieur - Consolidation vicieuse avec trouble léger de l'articulé
+       Taux: 5-10% | RateCriteria: non | Description: non
+    236. Pseudarthrose lâche de la mandibule
+       Taux: 60-85% | RateCriteria: non | Description: non
+    237. Pseudarthrose serrée de la branche ascendante
+       Taux: 0-25% | RateCriteria: non | Description: non
+    238. Pseudarthrose lâche de la branche ascendante
+       Taux: 10-15% | RateCriteria: non | Description: non
+    239. Pseudarthrose serrée de la branche horizontale
+       Taux: 5-10% | RateCriteria: non | Description: non
+    240. Pseudarthrose lâche de la branche horizontale
+       Taux: 15-25% | RateCriteria: non | Description: non
+    241. Pseudarthrose serrée de la région symphysaire
+       Taux: 10-15% | RateCriteria: non | Description: non
+    242. Perte de substance partielle de l'arcade dentaire (mandibule)
+       Taux: 0-5% | RateCriteria: non | Description: non
+    243. Ankylose temporo-maxillaire osseuse
+       Taux: 80-90% | RateCriteria: non | Description: non
+    244. Luxation irréductible temporo-maxillaire
+       Taux: 10-50% | RateCriteria: non | Description: non
+    245. Luxation récidivante temporo-maxillaire
+       Taux: 5-20% | RateCriteria: non | Description: non
+    246. Constriction des mâchoires (écartement < 10 mm)
+       Taux: 20-80% | RateCriteria: non | Description: non
+    247. Constriction des mâchoires (écartement 10 à 30 mm)
+       Taux: 5-20% | RateCriteria: non | Description: non
+    248. Constriction des mâchoires avec troubles salivaires, etc.
+       Taux: 10-20% | RateCriteria: non | Description: non
+    249. Syndrome algo-dysfonctionnel de l'appareil manducateur (SADAM) post-traumatique
+       Taux: 5-25% | RateCriteria: OUI (low/medium/high) | Description: non
+    250. Fistule bucco-sinusienne persistante post-traumatique
+       Taux: 10-25% | RateCriteria: OUI (low/high) | Description: non
+    251. Séquelles de fracture des os propres du nez
+       Taux: 3-15% | RateCriteria: OUI (low/medium/high) | Description: non
+    252. Séquelles de fracture de l'os malaire (zygomatique)
+       Taux: 5-25% | RateCriteria: OUI (low/medium/high) | Description: non
+
+  --- Face - Dents, Langue, Pharynx (13 entrées) ---
+    253. Perte d'une ou deux dents (n'entraînant pas d'incapacité)
+       Taux: 0% | RateCriteria: non | Description: non
+    254. Perte de plusieurs dents (coefficient par dent) - Incisives/Canines
+       Taux: 1% | RateCriteria: non | Description: OUI
+    255. Perte de plusieurs dents (coefficient par dent) - Prémolaires
+       Taux: 1.25% | RateCriteria: non | Description: OUI
+    256. Perte de plusieurs dents (coefficient par dent) - Molaires
+       Taux: 1.5% | RateCriteria: non | Description: OUI
+    257. Séquelles de fracture dentaire coronaire avec atteinte pulpaire (par dent vitale traitée)
+       Taux: 0.5% | RateCriteria: non | Description: OUI
+    258. Séquelles de luxation/subluxation dentaire avec nécrose ou ankylose (par dent)
+       Taux: 1% | RateCriteria: non | Description: OUI
+    259. Parodontolyse post-traumatique (par dent avec mobilité anormale)
+       Taux: 0.5-1% | RateCriteria: OUI (low/high) | Description: OUI
+    260. Amputation partielle de la langue (gêne légère)
+       Taux: 10-20% | RateCriteria: non | Description: non
+    261. Amputation étendue de la langue (gêne fonctionnelle)
+       Taux: 35-75% | RateCriteria: non | Description: non
+    262. Amputation totale de la langue
+       Taux: 80% | RateCriteria: non | Description: non
+    263. Gêne de la déglutition par cicatrice pharyngée
+       Taux: 10-30% | RateCriteria: non | Description: non
+    264. Agueusie (perte du goût) post-traumatique
+       Taux: 5-10% | RateCriteria: OUI (low/high) | Description: non
+    265. Fistules salivaires
+       Taux: 10-30% | RateCriteria: OUI (low/high) | Description: non
+
+  --- Face - Séquelles des Brûlures (3 entrées) ---
+    266. Cicatrices rétractiles des paupières (ectropion, lagophtalmie, etc.)
+       Taux: 5-20% | RateCriteria: OUI (low/high) | Description: non
+    267. Cicatrices sténosantes des orifices (bouche, nez)
+       Taux: 10-50% | RateCriteria: OUI (low/high) | Description: non
+    268. Préjudice esthétique important lié aux brûlures de la face
+       Taux: 20-40% | RateCriteria: OUI (low/high) | Description: non
+
+  --- Yeux - Cécité et Baisse de Vision (26 entrées) ---
+    269. Cécité complète
+       Taux: 100% | RateCriteria: non | Description: non
+    270. Quasi-cécité ou cécité professionnelle
+       Taux: 100% | RateCriteria: non | Description: non
+    271. Perte complète de la vision d'un oeil (l'autre étant normal)
+       Taux: 30% | RateCriteria: non | Description: non
+    272. Perte de la vision d'un oeil sans difformité apparente
+       Taux: 25-30% | RateCriteria: non | Description: non
+    273. Ablation ou altération du globe avec prothèse possible
+       Taux: 28-33% | RateCriteria: non | Description: non
+    274. Ablation ou altération du globe sans prothèse possible
+       Taux: 35-40% | RateCriteria: non | Description: non
+    275. Diminution de la vision des deux yeux (selon tableau à double entrée)
+       Taux: 0-100% | RateCriteria: non | Description: OUI
+    276. Acuité visuelle 9/10 ou 10/10 un œil
+       Taux: 0-2% | RateCriteria: non | Description: OUI
+    277. Acuité visuelle 8/10 un œil
+       Taux: 2-5% | RateCriteria: non | Description: OUI
+    278. Acuité visuelle 7/10 un œil
+       Taux: 5-8% | RateCriteria: non | Description: OUI
+    279. Acuité visuelle 6/10 un œil
+       Taux: 8-12% | RateCriteria: non | Description: OUI
+    280. Acuité visuelle 5/10 un œil
+       Taux: 12-18% | RateCriteria: non | Description: OUI
+    281. Acuité visuelle 4/10 un œil
+       Taux: 18-22% | RateCriteria: non | Description: OUI
+    282. Acuité visuelle 3/10 un œil
+       Taux: 22-27% | RateCriteria: non | Description: OUI
+    283. Acuité visuelle 2/10 un œil
+       Taux: 27-30% | RateCriteria: non | Description: OUI
+    284. Acuité visuelle 1/10 un œil
+       Taux: 30-33% | RateCriteria: non | Description: OUI
+    285. Acuité visuelle <1/20 un œil
+       Taux: 33-35% | RateCriteria: non | Description: OUI
+    286. Acuité visuelle bilatérale 5/10 - 6/10
+       Taux: 40-50% | RateCriteria: non | Description: OUI
+    287. Acuité visuelle bilatérale 4/10 - 5/10
+       Taux: 50-60% | RateCriteria: non | Description: OUI
+    288. Acuité visuelle bilatérale 3/10 - 4/10
+       Taux: 60-70% | RateCriteria: non | Description: OUI
+    289. Acuité visuelle bilatérale 2/10 - 3/10
+       Taux: 70-80% | RateCriteria: non | Description: OUI
+    290. Acuité visuelle bilatérale 1/10 - 2/10
+       Taux: 80-90% | RateCriteria: non | Description: OUI
+    291. Acuité visuelle bilatérale <1/20 ou cécité
+       Taux: 90-100% | RateCriteria: non | Description: OUI
+    292. Cataracte bilatérale opérée avec implants (acuité résiduelle 5-6/10)
+       Taux: 40-55% | RateCriteria: non | Description: OUI
+    293. Cataracte bilatérale opérée avec implants (acuité résiduelle 7-8/10)
+       Taux: 25-40% | RateCriteria: non | Description: OUI
+    294. Cataracte bilatérale opérée avec implants (acuité résiduelle 3-4/10)
+       Taux: 55-70% | RateCriteria: non | Description: OUI
+
+  --- Yeux - Champ Visuel et Vision Binoculaire (18 entrées) ---
+    295. Rétrécissement concentrique à 30° (un oeil)
+       Taux: 3-5% | RateCriteria: non | Description: non
+    296. Rétrécissement concentrique à 30° (deux yeux)
+       Taux: 5-20% | RateCriteria: non | Description: non
+    297. Rétrécissement concentrique à 10° (un oeil)
+       Taux: 10-15% | RateCriteria: non | Description: non
+    298. Rétrécissement concentrique à 10° (deux yeux)
+       Taux: 70-80% | RateCriteria: non | Description: non
+    299. Scotomes centraux (un oeil)
+       Taux: 15-30% | RateCriteria: non | Description: non
+    300. Scotomes centraux (deux yeux)
+       Taux: 40-100% | RateCriteria: non | Description: non
+    301. Hémianopsie homonyme droite ou gauche
+       Taux: 30-35% | RateCriteria: non | Description: non
+    302. Hémianopsie hétéronyme nasale
+       Taux: 10-15% | RateCriteria: non | Description: non
+    303. Hémianopsie hétéronyme bitemporale
+       Taux: 70-80% | RateCriteria: non | Description: non
+    304. Hémianopsie horizontale supérieure
+       Taux: 10-15% | RateCriteria: non | Description: non
+    305. Hémianopsie horizontale inférieure
+       Taux: 30-50% | RateCriteria: non | Description: non
+    306. Hémianopsie en quadrant supérieure
+       Taux: 7-10% | RateCriteria: non | Description: non
+    307. Hémianopsie en quadrant inférieure
+       Taux: 20-25% | RateCriteria: non | Description: non
+    308. Hémianopsie chez un borgne - Nasale
+       Taux: 60-70% | RateCriteria: non | Description: non
+    309. Hémianopsie chez un borgne - Inférieure
+       Taux: 70-80% | RateCriteria: non | Description: non
+    310. Hémianopsie chez un borgne - Temporale
+       Taux: 80-90% | RateCriteria: non | Description: non
+    311. Diplopie
+       Taux: 5-20% | RateCriteria: non | Description: non
+    312. Diplopie dans la partie inférieure du champ
+       Taux: 10-25% | RateCriteria: non | Description: non
+
+  --- Yeux - Lésions Spécifiques et Annexes (24 entrées) ---
+    313. Taies de cornée (selon gêne visuelle)
+       Taux: 0-100% | RateCriteria: non | Description: OUI
+    314. Cataracte (selon acuité et complications)
+       Taux: 10-100% | RateCriteria: non | Description: OUI
+    315. Hémorragies du vitré
+       Taux: 0-100% | RateCriteria: non | Description: OUI
+    316. Décollement de la rétine post-traumatique
+       Taux: 0-100% | RateCriteria: non | Description: OUI
+    317. Atrophie optique post-traumatique
+       Taux: 30-80% | RateCriteria: OUI (low/high) | Description: OUI
+    318. Glaucome post-traumatique
+       Taux: 10-40% | RateCriteria: OUI (low/high) | Description: OUI
+    319. Uvéite post-traumatique chronique
+       Taux: 10-30% | RateCriteria: OUI (low/high) | Description: OUI
+    320. Séquelles d'endophtalmie post-traumatique (infection intraoculaire)
+       Taux: 10-35% | RateCriteria: OUI (low/high) | Description: OUI
+    321. Ophtalmie sympathique
+       Taux: 20-80% | RateCriteria: OUI (low/high) | Description: OUI
+    322. Phthisis bulbi (atrophie du globe oculaire) post-traumatique
+       Taux: 35-40% | RateCriteria: OUI (low/high) | Description: OUI
+    323. Paralysie de l'accommodation - Ophtalmoplégie interne totale unilatérale
+       Taux: 10-15% | RateCriteria: non | Description: non
+    324. Paralysie de l'accommodation - Ophtalmoplégie interne totale bilatérale
+       Taux: 15-20% | RateCriteria: non | Description: non
+    325. Paralysie du sphincter irien - Mydriase existant seule unilatérale
+       Taux: 3-5% | RateCriteria: non | Description: non
+    326. Paralysie du sphincter irien - Mydriase existant seule bilatérale
+       Taux: 7-10% | RateCriteria: non | Description: non
+    327. Voies lacrymales - Larmoiement ou fistules (un oeil)
+       Taux: 0-10% | RateCriteria: non | Description: non
+    328. Voies lacrymales - Larmoiement ou fistules (chaque oeil)
+       Taux: 5-10% | RateCriteria: non | Description: non
+    329. Orbite - Fracture du plancher de l'orbite (Blow-out) avec séquelles
+       Taux: 5-25% | RateCriteria: OUI (low/high) | Description: OUI
+    330. Orbite - Paralysie d'un ou plusieurs nerfs oculo-moteurs (voir diplopie)
+       Taux: 5-25% | RateCriteria: non | Description: non
+    331. Orbite - Névrites, névralgies du nerf V (trijumeau)
+       Taux: 15-25% | RateCriteria: non | Description: non
+    332. Orbite - Altérations vasculaires (anévrisme, etc.)
+       Taux: 10-30% | RateCriteria: non | Description: OUI
+    333. Paupières - Déviation des bords palpébraux (entropion, ectropion, cicatrices vicieuses)
+       Taux: 5-20% | RateCriteria: non | Description: non
+    334. Paupières - Ptosis ou blépharospasme (un oeil)
+       Taux: 5-25% | RateCriteria: non | Description: non
+    335. Paupières - Ptosis ou blépharospasme (deux yeux)
+       Taux: 20-70% | RateCriteria: non | Description: non
+    336. Paupières - Lagophtalmie cicatricielle ou paralytique
+       Taux: 10% | RateCriteria: non | Description: OUI
+
+  --- Oreilles - Lésions Externes et Moyennes (9 entrées) ---
+    337. Mutilations et cicatrices vicieuses de l'oreille externe
+       Taux: 2-10% | RateCriteria: non | Description: non
+    338. Fracture du rocher avec complications (paralysie faciale, surdité, vertiges)
+       Taux: 20-60% | RateCriteria: OUI (low/high) | Description: non
+    339. Sténose du conduit auditif unilatérale
+       Taux: 1-5% | RateCriteria: non | Description: non
+    340. Sténose du conduit auditif bilatérale
+       Taux: 1-10% | RateCriteria: non | Description: non
+    341. Otorrhée traumatique unilatérale
+       Taux: 1-5% | RateCriteria: non | Description: non
+    342. Otorrhée tubaire unilatérale
+       Taux: 1-8% | RateCriteria: non | Description: non
+    343. Otorrhée chronique avec ostéite unilatérale
+       Taux: 5-10% | RateCriteria: non | Description: non
+    344. Otorrhée chronique avec ostéite bilatérale
+       Taux: 8-15% | RateCriteria: non | Description: non
+    345. Bourdonnements d'oreille (acouphènes) isolés
+       Taux: 5-10% | RateCriteria: non | Description: OUI
+
+  --- Oreilles - Diminution de l'Acuité Auditive (Surdité) (11 entrées) ---
+    346. Diminution de l'acuité auditive
+       Taux: 0-70% | RateCriteria: non | Description: OUI
+    347. Surdité unilatérale légère (perte 20-30 dB)
+       Taux: 2-5% | RateCriteria: non | Description: OUI
+    348. Surdité unilatérale modérée (perte 40-50 dB)
+       Taux: 5-10% | RateCriteria: non | Description: OUI
+    349. Surdité unilatérale moyenne (perte 55-70 dB)
+       Taux: 10-15% | RateCriteria: non | Description: OUI
+    350. Surdité unilatérale profonde
+       Taux: 15-20% | RateCriteria: non | Description: OUI
+    351. Surdité bilatérale légère (perte 20-30 dB)
+       Taux: 8-15% | RateCriteria: non | Description: OUI
+    352. Surdité bilatérale modérée (perte 40-50 dB)
+       Taux: 20-30% | RateCriteria: non | Description: OUI
+    353. Surdité bilatérale moyenne (perte 55-70 dB)
+       Taux: 35-50% | RateCriteria: non | Description: OUI
+    354. Surdité bilatérale sévère (perte 70-85 dB)
+       Taux: 50-60% | RateCriteria: non | Description: OUI
+    355. Surdité bilatérale profonde (perte > 85 dB)
+       Taux: 60-70% | RateCriteria: non | Description: OUI
+    356. Surdité asymétrique (OD/OG > 25 dB différence)
+       Taux: 15-35% | RateCriteria: non | Description: OUI
+
+  --- Oreilles - Vertiges et Troubles de l'Équilibre (4 entrées) ---
+    357. Vertiges et troubles de l'équilibre
+       Taux: 5-40% | RateCriteria: non | Description: OUI
+    358. Vertiges - 1er degré (pas de trouble objectif)
+       Taux: 5-10% | RateCriteria: non | Description: non
+    359. Vertiges - 2ème degré (hyper-excitabilité aux épreuves)
+       Taux: 10-20% | RateCriteria: non | Description: non
+    360. Vertiges - 3ème degré (troubles objectifs)
+       Taux: 20-40% | RateCriteria: non | Description: non
+
+  --- Voies Respiratoires Supérieures (20 entrées) ---
+    361. Sténose nasale unilatérale simple
+       Taux: 0-3% | RateCriteria: non | Description: non
+    362. Sténose nasale unilatérale avec formation de croûtes
+       Taux: 3-8% | RateCriteria: non | Description: non
+    363. Sténose nasale unilatérale avec sinusite
+       Taux: 6-10% | RateCriteria: non | Description: non
+    364. Sténose nasale bilatérale légère
+       Taux: 5-8% | RateCriteria: non | Description: non
+    365. Sténose nasale bilatérale accentuée
+       Taux: 8-12% | RateCriteria: non | Description: non
+    366. Sténose nasale bilatérale serrée
+       Taux: 12-20% | RateCriteria: non | Description: non
+    367. Perforation de la cloison nasale
+       Taux: 0% | RateCriteria: non | Description: non
+    368. Anosmie (perte de l'odorat)
+       Taux: 5-10% | RateCriteria: non | Description: non
+    369. Anosmie avec nécessité de changement de profession
+       Taux: 20-30% | RateCriteria: non | Description: non
+    370. Dysgueusie (distorsion du goût) ou Cacosmie (perception d'odeurs nauséabondes)
+       Taux: 5-15% | RateCriteria: OUI (low/high) | Description: OUI
+    371. Troubles esthétiques par mutilation nasale
+       Taux: 5-30% | RateCriteria: non | Description: non
+    372. Sinusite traumatique
+       Taux: 5-30% | RateCriteria: non | Description: OUI
+    373. Rhinites croûteuses post-traumatiques
+       Taux: 5-20% | RateCriteria: non | Description: non
+    374. Séquelles de fracture de l'os hyoïde
+       Taux: 10-30% | RateCriteria: OUI (low/high) | Description: OUI
+    375. Troubles vocaux (dysphonie, aphonie)
+       Taux: 5-30% | RateCriteria: non | Description: non
+    376. Paralysie récurrentielle (corde vocale) post-traumatique unilatérale
+       Taux: 10-25% | RateCriteria: OUI (low/high) | Description: non
+    377. Sténose laryngo-trachéale post-traumatique
+       Taux: 20-100% | RateCriteria: OUI (low/high) | Description: non
+    378. Syndrome d'apnées-hypopnées du sommeil (SAHS) post-traumatique
+       Taux: 10-30% | RateCriteria: OUI (low/high) | Description: OUI
+    379. Troubles respiratoires (dyspnée laryngée)
+       Taux: 20-100% | RateCriteria: non | Description: non
+    380. Laryngostomie ou trachéotomie
+       Taux: 100% | RateCriteria: non | Description: non
+
+================================================================================
+CATÉGORIE 5: Séquelles Thoraciques, Abdominales, Pelviennes et Cardio-vasculaires
+================================================================================
+
+  --- Thorax - Paroi Osseuse (6 entrées) ---
+    381. Fracture isolée du sternum - simple
+       Taux: 3-10% | RateCriteria: non | Description: non
+    382. Fracture isolée du sternum - avec enfoncement
+       Taux: 10-20% | RateCriteria: non | Description: non
+    383. Fracture de côtes non compliquée (selon gêne et nombre)
+       Taux: 2-30% | RateCriteria: non | Description: non
+    384. Séquelles de volet costal mobile (thoracic flail chest)
+       Taux: 15-40% | RateCriteria: OUI (low/medium/high) | Description: OUI
+    385. Grand fracas du thorax
+       Taux: 30-50% | RateCriteria: non | Description: non
+    386. Hernie irréductible du poumon
+       Taux: 10-40% | RateCriteria: non | Description: non
+
+  --- Thorax - Plèvre et Poumons (7 entrées) ---
+    387. Pleurésie traumatique avec déformations
+       Taux: 5-30% | RateCriteria: non | Description: non
+    388. Hémothorax, adhérences et rétractions thoraciques
+       Taux: 5-20% | RateCriteria: non | Description: non
+    389. Pyothorax (empyème)
+       Taux: 10-50% | RateCriteria: non | Description: non
+    390. Fibrose pulmonaire post-traumatique (hors pneumoconiose)
+       Taux: 10-60% | RateCriteria: OUI (low/high) | Description: non
+    391. Fistule broncho-pleurale chronique
+       Taux: 30-60% | RateCriteria: OUI (low/high) | Description: OUI
+    392. Chylothorax chronique post-traumatique
+       Taux: 20-40% | RateCriteria: OUI (low/high) | Description: non
+    393. Tuberculose pulmonaire post-traumatique (si incapacité permanente)
+       Taux: 10-100% | RateCriteria: non | Description: non
+
+  --- Appareil Circulatoire (13 entrées) ---
+    394. Troubles cardiaques fonctionnels - Bien compensés
+       Taux: 5-20% | RateCriteria: non | Description: non
+    395. Troubles cardiaques fonctionnels - Avec troubles fonctionnels caractérisés
+       Taux: 20-80% | RateCriteria: non | Description: non
+    396. Troubles cardiaques fonctionnels - Avec asystolie confirmée
+       Taux: 80-100% | RateCriteria: non | Description: non
+    397. Séquelles de contusion myocardique (troubles du rythme, insuffisance cardiaque)
+       Taux: 15-50% | RateCriteria: OUI (low/high) | Description: non
+    398. Troubles du rythme cardiaque post-traumatiques documentés (non appareillés)
+       Taux: 5-20% | RateCriteria: OUI (low/high) | Description: OUI
+    399. Ruptures traumatiques de valvules
+       Taux: 50-100% | RateCriteria: non | Description: non
+    400. Affections cardiovasculaires consécutives à une maladie infectieuse
+       Taux: 30-90% | RateCriteria: non | Description: non
+    401. Anévrisme de l'aorte (hors syphilis)
+       Taux: 40-80% | RateCriteria: non | Description: non
+    402. Péricardite chronique constrictive post-traumatique
+       Taux: 20-60% | RateCriteria: OUI (low/high) | Description: non
+    403. Syndrome post-péricardotomie (ou de Dressler) persistant
+       Taux: 5-15% | RateCriteria: OUI (low/high) | Description: OUI
+    404. Névrose cardiaque post-traumatique (tachycardie, palpitations, anxiété)
+       Taux: 5-15% | RateCriteria: non | Description: non
+    405. Lésions des gros vaisseaux (hors aorte) avec troubles hémodynamiques
+       Taux: 10-40% | RateCriteria: non | Description: non
+    406. Dissection traumatique d'un gros vaisseau (aorte, carotide) avec séquelles
+       Taux: 40-80% | RateCriteria: OUI (low/high) | Description: non
+
+  --- Vaisseaux Périphériques (6 entrées) ---
+    407. Syndrome post-thrombotique (maladie post-phlébitique)
+       Taux: 10-40% | RateCriteria: OUI (low/medium/high) | Description: OUI
+    408. Artériopathie post-traumatique d'un membre
+       Taux: 15-50% | RateCriteria: OUI (low/medium/high) | Description: OUI
+    409. Fistule artério-veineuse post-traumatique
+       Taux: 15-40% | RateCriteria: OUI (low/high) | Description: non
+    410. Anévrisme ou pseudo-anévrisme artériel périphérique post-traumatique
+       Taux: 10-30% | RateCriteria: OUI (low/medium/high) | Description: OUI
+    411. Syndrome de Raynaud post-traumatique ou lié aux vibrations
+       Taux: 5-20% | RateCriteria: OUI (low/high) | Description: OUI
+    412. Lymphœdème chronique post-traumatique d'un membre
+       Taux: 10-30% | RateCriteria: OUI (low/high) | Description: OUI
+
+  --- Diaphragme (1 entrées) ---
+    413. Séquelles de rupture ou hernie diaphragmatique traumatique opérée
+       Taux: 10-30% | RateCriteria: OUI (low/high) | Description: non
+
+  --- Médiastin et Œsophage (3 entrées) ---
+    414. Dysphagie post-traumatique par sténose de l'œsophage cervical
+       Taux: 15-50% | RateCriteria: OUI (low/high) | Description: OUI
+    415. Médiastinite chronique post-traumatique (fibrosante)
+       Taux: 40-70% | RateCriteria: OUI (low/high) | Description: OUI
+    416. Fistule œso-trachéale post-traumatique
+       Taux: 50-80% | RateCriteria: OUI (low/high) | Description: OUI
+
+  --- Abdomen - Paroi et Hernies (15 entrées) ---
+    417. Cicatrices opératoires normales
+       Taux: 0% | RateCriteria: non | Description: non
+    418. Cicatrices (sans éventration) très larges et adhérentes
+       Taux: 10-30% | RateCriteria: non | Description: non
+    419. Cicatrices avec éventration post-opératoire
+       Taux: 5-30% | RateCriteria: non | Description: non
+    420. Cicatrice avec éventration après laparotomie (appareillage ou non)
+       Taux: 15-50% | RateCriteria: non | Description: non
+    421. Éventration sur orifice de trocart (post-cœlioscopie)
+       Taux: 5-15% | RateCriteria: OUI (low/high) | Description: non
+    422. Rupture isolée du grand droit de l'abdomen
+       Taux: 8-20% | RateCriteria: non | Description: non
+    423. Diastasis des grands droits post-traumatique
+       Taux: 5-15% | RateCriteria: OUI (low/high) | Description: OUI
+    424. Hernie ou éventration consécutive à des ruptures musculaires
+       Taux: 10-40% | RateCriteria: non | Description: non
+    425. Éventration hypogastrique
+       Taux: 10-20% | RateCriteria: non | Description: non
+    426. Névralgie pariétale post-traumatique ou post-chirurgicale (nerf ilio-inguinal, ilio-hypogastrique)
+       Taux: 5-15% | RateCriteria: OUI (low/high) | Description: OUI
+    427. Hernie inguinale opérée (en relation avec accident)
+       Taux: 0% | RateCriteria: non | Description: non
+    428. Hernie inguinale réductible bien maintenue
+       Taux: 5-8% | RateCriteria: non | Description: non
+    429. Hernies bilatérales
+       Taux: 5-12% | RateCriteria: non | Description: non
+    430. Hernie inguinale irréductible
+       Taux: 15-25% | RateCriteria: non | Description: non
+    431. Hernie crurale, ombilicale, ligne blanche épigastrique
+       Taux: 5-12% | RateCriteria: non | Description: non
+
+  --- Abdomen - Tube Digestif et Organes (35 entrées) ---
+    432. Séquelles d'ulcère chronique (cicatrices, amaigrissement, douleurs)
+       Taux: 10-90% | RateCriteria: non | Description: non
+    433. Syndrome du grêle court post-traumatique
+       Taux: 60-100% | RateCriteria: OUI (low/high) | Description: OUI
+    434. Syndrome de l'intestin irritable post-traumatique (SII-PT)
+       Taux: 10-25% | RateCriteria: OUI (low/high) | Description: OUI
+    435. Dumping syndrome (post-chirurgie gastrique traumatique)
+       Taux: 15-40% | RateCriteria: OUI (low/medium/high) | Description: OUI
+    436. Sténose biliaire post-traumatique
+       Taux: 20-50% | RateCriteria: OUI (low/high) | Description: non
+    437. Fistules intestinales - Étroites
+       Taux: 20-30% | RateCriteria: non | Description: non
+    438. Fistules intestinales - Larges, bas situées
+       Taux: 40-70% | RateCriteria: non | Description: non
+    439. Fistules intestinales - Larges, haut situées
+       Taux: 70-90% | RateCriteria: non | Description: non
+    440. Fistules stercorales - Ne livrant que du gaz
+       Taux: 20-30% | RateCriteria: non | Description: non
+    441. Fistules stercorales - Livrant une certaine quantité de matières
+       Taux: 30-40% | RateCriteria: non | Description: non
+    442. Anus contre nature livrant passage à la presque totalité du contenu intestinal
+       Taux: 80-90% | RateCriteria: non | Description: non
+    443. Prolapsus du rectum
+       Taux: 80-90% | RateCriteria: non | Description: non
+    444. Fistules anales
+       Taux: 10-40% | RateCriteria: non | Description: non
+    445. Appendicite (si imputable et opérée)
+       Taux: 0-30% | RateCriteria: non | Description: non
+    446. Incontinence ou rétention fécale par lésions du sphincter anal
+       Taux: 30-70% | RateCriteria: non | Description: non
+    447. Séquelles de contusion hépatique (douleurs, troubles digestifs)
+       Taux: 5-20% | RateCriteria: non | Description: non
+    448. Fistules biliaires ou purulentes (Contusion du foie)
+       Taux: 20-60% | RateCriteria: non | Description: non
+    449. Splénectomie (Ablation de la rate)
+       Taux: 15-30% | RateCriteria: non | Description: non
+    450. Splénose péritonéale (après rupture de la rate)
+       Taux: 0-10% | RateCriteria: OUI (low/high) | Description: OUI
+    451. Gastrectomie totale (ablation complète estomac)
+       Taux: 50-70% | RateCriteria: non | Description: OUI
+    452. Gastrectomie partielle (ablation partielle estomac)
+       Taux: 30-50% | RateCriteria: non | Description: OUI
+    453. Colectomie totale (ablation complète côlon)
+       Taux: 60-80% | RateCriteria: non | Description: OUI
+    454. Hémicolectomie droite (ablation côlon droit)
+       Taux: 20-35% | RateCriteria: non | Description: OUI
+    455. Hémicolectomie gauche (ablation côlon gauche)
+       Taux: 20-35% | RateCriteria: non | Description: OUI
+    456. Résection intestinale grêle courte (<50 cm)
+       Taux: 10-20% | RateCriteria: non | Description: OUI
+    457. Résection intestinale grêle étendue (>100 cm)
+       Taux: 40-70% | RateCriteria: non | Description: OUI
+    458. Lobectomie pulmonaire (ablation lobe poumon)
+       Taux: 25-40% | RateCriteria: non | Description: OUI
+    459. Pneumonectomie (ablation poumon entier)
+       Taux: 50-70% | RateCriteria: non | Description: OUI
+    460. Cholécystectomie (ablation vésicule biliaire)
+       Taux: 5-15% | RateCriteria: non | Description: OUI
+    461. Splénectomie unilatérale (ablation rate)
+       Taux: 15-30% | RateCriteria: non | Description: OUI
+    462. Néphrectomie unilatérale (ablation rein)
+       Taux: 25-35% | RateCriteria: non | Description: OUI
+    463. Adhérences abdominales post-traumatiques/post-opératoires avec troubles du transit
+       Taux: 10-40% | RateCriteria: OUI (low/high) | Description: non
+    464. Séquelles de pancréatite aiguë post-traumatique
+       Taux: 15-60% | RateCriteria: OUI (low/medium/high) | Description: non
+    465. Séquelles de colectomie partielle post-traumatique (hors stomie)
+       Taux: 15-30% | RateCriteria: OUI (low/high) | Description: OUI
+    466. Séquelles d'hépatectomie partielle post-traumatique
+       Taux: 10-40% | RateCriteria: OUI (low/high) | Description: OUI
+
+  --- Appareil Génito-Urinaire (43 entrées) ---
+    467. Néphrectomie (ablation d'un rein), avec rein restant sain
+       Taux: 30% | RateCriteria: non | Description: non
+    468. Néphrectomie avec azotémie irréductible de 0,60 à 1 gramme
+       Taux: 30-60% | RateCriteria: non | Description: non
+    469. Néphrectomie avec azotémie irréductible supérieure à 1 gramme
+       Taux: 60-100% | RateCriteria: non | Description: non
+    470. Éventration lombo-abdominale après néphrectomie
+       Taux: 10-30% | RateCriteria: non | Description: non
+    471. Contusions et ruptures du rein (séquelles)
+       Taux: 10-100% | RateCriteria: non | Description: non
+    472. Hydronéphrose traumatique
+       Taux: 30-50% | RateCriteria: non | Description: non
+    473. Modification d'une hydronéphrose antérieure
+       Taux: 15-30% | RateCriteria: non | Description: non
+    474. Rupture d'uretère avec périnéphrose ou fistule
+       Taux: 30-50% | RateCriteria: non | Description: non
+    475. Sténose urétérale post-traumatique
+       Taux: 15-40% | RateCriteria: OUI (low/high) | Description: OUI
+    476. Rein mobile toujours indépendant du traumatisme
+       Taux: 0% | RateCriteria: non | Description: non
+    477. Pyélonéphrite post-traumatique ascendante (unilatérale)
+       Taux: 30-50% | RateCriteria: non | Description: non
+    478. Pyélonéphrite post-traumatique ascendante (bilatérale)
+       Taux: 60-80% | RateCriteria: non | Description: non
+    479. Phlegmon périnéphrétique après traumatisme
+       Taux: 10-20% | RateCriteria: non | Description: non
+    480. Tuberculose rénale (modification par traumatisme)
+       Taux: 15-30% | RateCriteria: non | Description: non
+    481. Atrophie ou destruction d'un testicule
+       Taux: 1-10% | RateCriteria: non | Description: non
+    482. Atrophie ou destruction des deux testicules (selon l'âge)
+       Taux: 20-50% | RateCriteria: non | Description: non
+    483. Emasculation totale
+       Taux: 80-90% | RateCriteria: non | Description: non
+    484. Hématocèle et hydrocèle post-traumatique
+       Taux: 5-15% | RateCriteria: non | Description: non
+    485. Séquelles de contusion du testicule ou torsion
+       Taux: 5-10% | RateCriteria: non | Description: non
+    486. Dysfonction érectile post-traumatique (origine non neurologique médullaire)
+       Taux: 10-25% | RateCriteria: OUI (low/high) | Description: non
+    487. Tuberculose épididymo-testiculaire modifiée par traumatisme
+       Taux: 10-30% | RateCriteria: non | Description: non
+    488. Éventration hypogastrique après cystostomie
+       Taux: 10-30% | RateCriteria: non | Description: non
+    489. Fistule hypogastrique persistante
+       Taux: 50-70% | RateCriteria: non | Description: non
+    490. Cystite chronique persistante
+       Taux: 20-40% | RateCriteria: non | Description: non
+    491. Avec infection rénale (unilatérale)
+       Taux: 40-60% | RateCriteria: non | Description: non
+    492. Avec infection rénale (bilatérale)
+       Taux: 60-80% | RateCriteria: non | Description: non
+    493. Rétention d'urine chronique et permanente (complète)
+       Taux: 40-60% | RateCriteria: non | Description: non
+    494. Rétention d'urine chronique et permanente (incomplète)
+       Taux: 20-40% | RateCriteria: non | Description: non
+    495. Vessie neurologique post-traumatique (origine non médullaire)
+       Taux: 30-70% | RateCriteria: OUI (low/medium/high) | Description: non
+    496. Incontinence d'urine rebelle ou permanente
+       Taux: 20-40% | RateCriteria: non | Description: non
+    497. Rétrécissement de l'urètre postérieur infranchissable
+       Taux: 60-80% | RateCriteria: non | Description: non
+    498. Rétrécissement de l'urètre postérieur difficilement franchissable
+       Taux: 30-50% | RateCriteria: non | Description: non
+    499. Rétrécissement de l'urètre postérieur facilement franchissable
+       Taux: 15-30% | RateCriteria: non | Description: non
+    500. Rétrécissement de l'urètre antérieur facilement dilatable
+       Taux: 15-30% | RateCriteria: non | Description: non
+    501. Rétrécissement de l'urètre antérieur difficilement dilatable
+       Taux: 30-50% | RateCriteria: non | Description: non
+    502. Autoplastie cutanée ou autre de l'urètre
+       Taux: 20-50% | RateCriteria: non | Description: non
+    503. Fistule urinaire persistante avec rétrécissement
+       Taux: 30-40% | RateCriteria: non | Description: non
+    504. Destruction totale de l'urètre antérieur
+       Taux: 50-90% | RateCriteria: non | Description: non
+    505. Prolapsus utérin post-traumatique
+       Taux: 15-30% | RateCriteria: non | Description: non
+    506. Stérilité féminine post-traumatique (selon l'âge et le désir de maternité)
+       Taux: 10-50% | RateCriteria: non | Description: non
+    507. Troubles menstruels post-traumatiques graves et persistants
+       Taux: 5-15% | RateCriteria: non | Description: non
+    508. Séquelles de traumatisme ovarien (douleurs chroniques, troubles hormonaux)
+       Taux: 10-25% | RateCriteria: non | Description: non
+    509. Fistule vésico-vaginale post-traumatique
+       Taux: 30-50% | RateCriteria: OUI (low/high) | Description: OUI
+
+================================================================================
+CATÉGORIE 6: Membres Supérieurs
+================================================================================
+
+  --- Ceinture Scapulaire - Lésions Cutanées (8 entrées) ---
+    510. Cicatrices de l'aisselle - Bras collé au corps (droite)
+       Taux: 30-40% | RateCriteria: non | Description: non
+    511. Cicatrices de l'aisselle - Bras collé au corps (gauche)
+       Taux: 25-30% | RateCriteria: non | Description: non
+    512. Cicatrices de l'aisselle - Abduction limitée de 10° à 45° (droite)
+       Taux: 20-30% | RateCriteria: non | Description: non
+    513. Cicatrices de l'aisselle - Abduction limitée de 10° à 45° (gauche)
+       Taux: 15-25% | RateCriteria: non | Description: non
+    514. Cicatrices de l'aisselle - Abduction limitée de 45° à 90° (droite)
+       Taux: 15-20% | RateCriteria: non | Description: non
+    515. Cicatrices de l'aisselle - Abduction limitée de 45° à 90° (gauche)
+       Taux: 10-15% | RateCriteria: non | Description: non
+    516. Cicatrices de l'aisselle - Abduction conservée jusqu'à 90° (droite)
+       Taux: 10-15% | RateCriteria: non | Description: non
+    517. Cicatrices de l'aisselle - Abduction conservée jusqu'à 90° (gauche)
+       Taux: 5-10% | RateCriteria: non | Description: non
+
+  --- Ceinture Scapulaire - Fractures et Lésions Musculaires (17 entrées) ---
+    518. Fracture Clavicule - Bien consolidée sans raideur (Main Dominante)
+       Taux: 2-3% | RateCriteria: non | Description: non
+    519. Fracture Clavicule - Bien consolidée sans raideur (Main Non Dominante)
+       Taux: 1-2% | RateCriteria: non | Description: non
+    520. Fracture Clavicule - Cal saillant avec raideur d'épaule (Main Dominante)
+       Taux: 5-15% | RateCriteria: OUI (low/high) | Description: non
+    521. Fracture Clavicule - Cal saillant avec raideur d'épaule (Main Non Dominante)
+       Taux: 4-12% | RateCriteria: OUI (low/high) | Description: non
+    522. Fracture Clavicule - Double, cals saillants, raideurs des épaules (Main Dominante)
+       Taux: 10-30% | RateCriteria: OUI (low/high) | Description: non
+    523. Fracture Clavicule - Double, cals saillants, raideurs des épaules (Main Non Dominante)
+       Taux: 8-25% | RateCriteria: OUI (low/high) | Description: non
+    524. Fracture Clavicule - Cal difforme avec compressions nerveuses (Main Dominante)
+       Taux: 30-40% | RateCriteria: OUI (low/high) | Description: non
+    525. Fracture Clavicule - Cal difforme avec compressions nerveuses (Main Non Dominante)
+       Taux: 25-35% | RateCriteria: OUI (low/high) | Description: non
+    526. Pseudarthrose Clavicule (Main Dominante)
+       Taux: 5-10% | RateCriteria: OUI (low/high) | Description: non
+    527. Pseudarthrose Clavicule (Main Non Dominante)
+       Taux: 3-6% | RateCriteria: OUI (low/high) | Description: non
+    528. Luxation Clavicule non réduite - Externe (acromio-claviculaire) (Main Dominante)
+       Taux: 0-5% | RateCriteria: OUI (low/high) | Description: non
+    529. Luxation Clavicule non réduite - Externe (acromio-claviculaire) (Main Non Dominante)
+       Taux: 0-4% | RateCriteria: OUI (low/high) | Description: non
+    530. Luxation Clavicule non réduite - Interne (sterno-claviculaire) (Main Dominante)
+       Taux: 4-8% | RateCriteria: OUI (low/high) | Description: non
+    531. Luxation Clavicule non réduite - Interne (sterno-claviculaire) (Main Non Dominante)
+       Taux: 2-5% | RateCriteria: OUI (low/high) | Description: non
+    532. Fracture Omoplate (selon variété et désordres articulaires)
+       Taux: 10-50% | RateCriteria: OUI (low/medium/high) | Description: non
+    533. Rupture du deltoïde plus ou moins complète (Main Dominante)
+       Taux: 10-25% | RateCriteria: OUI (low/high) | Description: non
+    534. Rupture du deltoïde plus ou moins complète (Main Non Dominante)
+       Taux: 8-20% | RateCriteria: OUI (low/high) | Description: non
+
+  --- Épaule - Amputation et Désarticulation (20 entrées) ---
+    535. Désarticulation de l'épaule ou amputation au col chirurgical (Main Dominante)
+       Taux: 90% | RateCriteria: non | Description: OUI
+    536. Désarticulation de l'épaule ou amputation au col chirurgical (Main Non Dominante)
+       Taux: 80% | RateCriteria: non | Description: OUI
+    537. Amputation interscapulo-thoracique (Main Dominante)
+       Taux: 95% | RateCriteria: non | Description: OUI
+    538. Amputation interscapulo-thoracique (Main Non Dominante)
+       Taux: 85% | RateCriteria: non | Description: OUI
+    539. Amputation du bras (tiers supérieur - Main Dominante)
+       Taux: 85-90% | RateCriteria: non | Description: OUI
+    540. Amputation du bras (tiers supérieur - Main Non Dominante)
+       Taux: 75-80% | RateCriteria: non | Description: OUI
+    541. Amputation du bras (tiers moyen - Main Dominante)
+       Taux: 75-80% | RateCriteria: non | Description: OUI
+    542. Amputation du bras (tiers moyen - Main Non Dominante)
+       Taux: 65-70% | RateCriteria: non | Description: OUI
+    543. Amputation du bras (tiers inférieur - Main Dominante)
+       Taux: 70-75% | RateCriteria: non | Description: OUI
+    544. Amputation du bras (tiers inférieur - Main Non Dominante)
+       Taux: 60-65% | RateCriteria: non | Description: OUI
+    545. Désarticulation du coude (Main Dominante)
+       Taux: 70-75% | RateCriteria: non | Description: OUI
+    546. Désarticulation du coude (Main Non Dominante)
+       Taux: 60-65% | RateCriteria: non | Description: OUI
+    547. Amputation de l'avant-bras (tiers supérieur - Main Dominante)
+       Taux: 65-70% | RateCriteria: non | Description: OUI
+    548. Amputation de l'avant-bras (tiers supérieur - Main Non Dominante)
+       Taux: 55-60% | RateCriteria: non | Description: OUI
+    549. Amputation de l'avant-bras (tiers moyen - Main Dominante)
+       Taux: 60-65% | RateCriteria: non | Description: OUI
+    550. Amputation de l'avant-bras (tiers moyen - Main Non Dominante)
+       Taux: 50-55% | RateCriteria: non | Description: OUI
+    551. Amputation de l'avant-bras (tiers inférieur - Main Dominante)
+       Taux: 55-60% | RateCriteria: non | Description: OUI
+    552. Amputation de l'avant-bras (tiers inférieur - Main Non Dominante)
+       Taux: 45-50% | RateCriteria: non | Description: OUI
+    553. Désarticulation du poignet (Main Dominante)
+       Taux: 55-60% | RateCriteria: non | Description: OUI
+    554. Désarticulation du poignet (Main Non Dominante)
+       Taux: 45-50% | RateCriteria: non | Description: OUI
+
+  --- Épaule - Fractures de l'Extrémité Supérieure de l'Humérus (12 entrées) ---
+    555. Fracture de la tête humérale avec blocage et impotence fonctionnelle quasi totale (Main Dominante)
+       Taux: 30-45% | RateCriteria: non | Description: non
+    556. Fracture de la tête humérale avec blocage et impotence fonctionnelle quasi totale (Main Non Dominante)
+       Taux: 25-35% | RateCriteria: non | Description: non
+    557. Fracture de la tête humérale avec raideur importante de l'épaule (Main Dominante)
+       Taux: 20-30% | RateCriteria: non | Description: non
+    558. Fracture de la tête humérale avec raideur importante de l'épaule (Main Non Dominante)
+       Taux: 15-25% | RateCriteria: non | Description: non
+    559. Fracture du col chirurgical avec cal vicieux important et abduction limitée (Main Dominante)
+       Taux: 25-35% | RateCriteria: non | Description: non
+    560. Fracture du col chirurgical avec cal vicieux important et abduction limitée (Main Non Dominante)
+       Taux: 20-30% | RateCriteria: non | Description: non
+    561. Fracture du col chirurgical avec raccourcissement et gêne modérée (Main Dominante)
+       Taux: 8-15% | RateCriteria: non | Description: non
+    562. Fracture du col chirurgical avec raccourcissement et gêne modérée (Main Non Dominante)
+       Taux: 6-12% | RateCriteria: non | Description: non
+    563. Fracture du trochiter avec limitation de l'abduction et rotation (Main Dominante)
+       Taux: 8-15% | RateCriteria: non | Description: non
+    564. Fracture du trochiter avec limitation de l'abduction et rotation (Main Non Dominante)
+       Taux: 6-12% | RateCriteria: non | Description: non
+    565. Fracture du trochin avec limitation de la rotation interne (Main Dominante)
+       Taux: 5-10% | RateCriteria: non | Description: non
+    566. Fracture du trochin avec limitation de la rotation interne (Main Non Dominante)
+       Taux: 4-8% | RateCriteria: non | Description: non
+
+  --- Épaule - Raideurs et Ankyloses (14 entrées) ---
+    567. Raideur de l'épaule (propulsion, abduction, rotation) (Main Dominante)
+       Taux: 5-30% | RateCriteria: OUI (low/medium/high) | Description: non
+    568. Raideur de l'épaule (propulsion, abduction, rotation) (Main Non Dominante)
+       Taux: 4-25% | RateCriteria: OUI (low/medium/high) | Description: non
+    569. Raideur de l'épaule - Abduction 60-90°
+       Taux: 10-18% | RateCriteria: non | Description: OUI
+    570. Raideur de l'épaule - Abduction 60-90° + rotation
+       Taux: 15-25% | RateCriteria: non | Description: OUI
+    571. Raideur de l'épaule - Limitation rotation
+       Taux: 8-15% | RateCriteria: non | Description: OUI
+    572. Raideur de l'épaule - Élévation limitée
+       Taux: 10-20% | RateCriteria: non | Description: OUI
+    573. Raideur de l'épaule avec douleur
+       Taux: 12-22% | RateCriteria: non | Description: OUI
+    574. Raideur de l'épaule avec limitation fonctionnelle
+       Taux: 15-25% | RateCriteria: non | Description: OUI
+    575. Raideur + instabilité épaule
+       Taux: 20-35% | RateCriteria: non | Description: OUI
+    576. Raideur épaule abduction <90° + rotation
+       Taux: 18-28% | RateCriteria: non | Description: OUI
+    577. Ankylose d'épaule avec mobilité de l'omoplate (Main Dominante)
+       Taux: 35-45% | RateCriteria: OUI (low/high) | Description: non
+    578. Ankylose d'épaule avec mobilité de l'omoplate (Main Non Dominante)
+       Taux: 25-30% | RateCriteria: OUI (low/high) | Description: non
+    579. Ankylose d'épaule avec fixation de l'omoplate (Main Dominante)
+       Taux: 45-60% | RateCriteria: OUI (low/high) | Description: non
+    580. Ankylose d'épaule avec fixation de l'omoplate (Main Non Dominante)
+       Taux: 35-50% | RateCriteria: OUI (low/high) | Description: non
+
+  --- Épaule - Lésions Diverses (16 entrées) ---
+    581. Périarthrite chronique douloureuse - limitation modérée (Main Dominante)
+       Taux: 5-25% | RateCriteria: OUI (low/medium/high) | Description: non
+    582. Périarthrite chronique douloureuse - limitation modérée (Main Non Dominante)
+       Taux: 4-20% | RateCriteria: OUI (low/high) | Description: non
+    583. Périarthrite chronique douloureuse - abolition des mouvements et atrophie (Main Dominante)
+       Taux: 30-35% | RateCriteria: OUI (low/high) | Description: non
+    584. Périarthrite chronique douloureuse - abolition des mouvements et atrophie (Main Non Dominante)
+       Taux: 20-25% | RateCriteria: OUI (low/high) | Description: non
+    585. Rupture de la coiffe des rotateurs post-traumatique (supra-épineux, etc.) (Main Dominante)
+       Taux: 10-30% | RateCriteria: OUI (low/medium/high) | Description: non
+    586. Rupture de la coiffe des rotateurs post-traumatique (supra-épineux, etc.) (Main Non Dominante)
+       Taux: 8-25% | RateCriteria: OUI (low/medium/high) | Description: non
+    587. Lésion SLAP (Superior Labrum from Anterior to Posterior) chronique (Main Dominante)
+       Taux: 8-20% | RateCriteria: OUI (low/high) | Description: OUI
+    588. Lésion SLAP (Superior Labrum from Anterior to Posterior) chronique (Main Non Dominante)
+       Taux: 6-15% | RateCriteria: OUI (low/high) | Description: OUI
+    589. Pseudarthrose (épaule ballante) (Main Dominante)
+       Taux: 60-70% | RateCriteria: OUI (low/high) | Description: non
+    590. Pseudarthrose (épaule ballante) (Main Non Dominante)
+       Taux: 45-60% | RateCriteria: OUI (low/high) | Description: non
+    591. Luxation récidivante de l'épaule (Main Dominante)
+       Taux: 10-30% | RateCriteria: OUI (low/medium/high) | Description: non
+    592. Luxation récidivante de l'épaule (Main Non Dominante)
+       Taux: 8-25% | RateCriteria: OUI (low/medium/high) | Description: non
+    593. Capsulite rétractile post-traumatique (épaule gelée) (Main Dominante)
+       Taux: 15-30% | RateCriteria: OUI (low/high) | Description: OUI
+    594. Capsulite rétractile post-traumatique (épaule gelée) (Main Non Dominante)
+       Taux: 12-25% | RateCriteria: OUI (low/high) | Description: OUI
+    595. Séquelles de prothèse totale d'épaule (Main Dominante)
+       Taux: 20-40% | RateCriteria: OUI (low/high) | Description: non
+    596. Séquelles de prothèse totale d'épaule (Main Non Dominante)
+       Taux: 15-35% | RateCriteria: OUI (low/high) | Description: non
+
+  --- Bras - Amputations (6 entrées) ---
+    597. Amputation du bras au tiers moyen ou inférieur (Main Dominante)
+       Taux: 80-85% | RateCriteria: OUI (low/high) | Description: non
+    598. Amputation du bras au tiers moyen ou inférieur (Main Non Dominante)
+       Taux: 70-75% | RateCriteria: OUI (low/high) | Description: non
+    599. Amputation du bras au tiers supérieur (Main Dominante)
+       Taux: 80-85% | RateCriteria: OUI (low/high) | Description: non
+    600. Amputation du bras au tiers supérieur (Main Non Dominante)
+       Taux: 70-75% | RateCriteria: OUI (low/high) | Description: non
+    601. Amputation du bras au tiers moyen
+       Taux: 80-85% | RateCriteria: non | Description: OUI
+    602. Amputation du bras au tiers inférieur
+       Taux: 80-85% | RateCriteria: non | Description: OUI
+
+  --- Bras - Fractures et Lésions Musculaires (17 entrées) ---
+    603. Fracture de l'humérus normalement consolidée (Main Dominante)
+       Taux: 4-6% | RateCriteria: OUI (low/medium/high) | Description: non
+    604. Fracture de l'humérus normalement consolidée (Main Non Dominante)
+       Taux: 3-5% | RateCriteria: OUI (low/medium/high) | Description: non
+    605. Fracture de l'humérus avec déformation et atrophie (sans paralysie) (Main Dominante)
+       Taux: 7-30% | RateCriteria: OUI (low/medium/high) | Description: non
+    606. Fracture de l'humérus avec déformation et atrophie (sans paralysie) (Main Non Dominante)
+       Taux: 5-25% | RateCriteria: OUI (low/medium/high) | Description: non
+    607. Pseudarthrose de l'humérus - Partie moyenne (Main Dominante)
+       Taux: 40-50% | RateCriteria: OUI (low/high) | Description: non
+    608. Pseudarthrose de l'humérus - Partie moyenne (Main Non Dominante)
+       Taux: 30-40% | RateCriteria: OUI (low/high) | Description: non
+    609. Pseudarthrose de l'humérus - Voisinage épaule ou coude (épaule/coude ballant)
+       Taux: 40-70% | RateCriteria: OUI (low/high) | Description: OUI
+    610. Rupture du biceps partielle (Main Dominante)
+       Taux: 8-15% | RateCriteria: OUI (low/high) | Description: OUI
+    611. Rupture du biceps partielle (Main Non Dominante)
+       Taux: 6-12% | RateCriteria: OUI (low/high) | Description: non
+    612. Rupture du biceps complète (Main Dominante)
+       Taux: 15-25% | RateCriteria: OUI (low/high) | Description: OUI
+    613. Rupture du biceps complète (Main Non Dominante)
+       Taux: 12-20% | RateCriteria: OUI (low/high) | Description: non
+    614. Rupture du triceps totale (Main Dominante)
+       Taux: 20-30% | RateCriteria: non | Description: non
+    615. Rupture du triceps totale (Main Non Dominante)
+       Taux: 15-25% | RateCriteria: non | Description: non
+    616. Déchirure partielle des tendons extenseurs du poignet (Main Dominante)
+       Taux: 8-15% | RateCriteria: OUI (low/medium/high) | Description: OUI
+    617. Déchirure partielle des tendons extenseurs du poignet (Main Non Dominante)
+       Taux: 6-12% | RateCriteria: OUI (low/medium/high) | Description: OUI
+    618. Élongation musculaire de l'épaule (Main Dominante)
+       Taux: 5-12% | RateCriteria: OUI (low/medium/high) | Description: OUI
+    619. Élongation musculaire de l'épaule (Main Non Dominante)
+       Taux: 4-10% | RateCriteria: OUI (low/medium/high) | Description: OUI
+
+  --- Coude - Désarticulation (2 entrées) ---
+    620. Désarticulation du coude (Main Dominante)
+       Taux: 75-80% | RateCriteria: OUI (low/high) | Description: non
+    621. Désarticulation du coude (Main Non Dominante)
+       Taux: 65-70% | RateCriteria: OUI (low/high) | Description: non
+
+  --- Coude - Fractures et Pseudarthroses (14 entrées) ---
+    622. Fracture de l'olécrane - Cal osseux court, bonne extension (Main Dominante)
+       Taux: 3-5% | RateCriteria: non | Description: non
+    623. Fracture de l'olécrane - Cal osseux court, bonne extension (Main Non Dominante)
+       Taux: 2-4% | RateCriteria: non | Description: non
+    624. Fracture de l'olécrane - Cal fibreux long, extension active faible (Main Dominante)
+       Taux: 8-10% | RateCriteria: non | Description: non
+    625. Fracture de l'olécrane - Cal fibreux long, extension active faible (Main Non Dominante)
+       Taux: 6-8% | RateCriteria: non | Description: non
+    626. Fracture de l'olécrane - Cal fibreux long, extension active nulle, atrophie (Main Dominante)
+       Taux: 20-23% | RateCriteria: non | Description: non
+    627. Fracture de l'olécrane - Cal fibreux long, extension active nulle, atrophie (Main Non Dominante)
+       Taux: 15-18% | RateCriteria: non | Description: non
+    628. Cicatrices du coude entravant l'extension - à 135°
+       Taux: 10-15% | RateCriteria: non | Description: non
+    629. Cicatrices du coude entravant l'extension - à 90°
+       Taux: 15-20% | RateCriteria: non | Description: non
+    630. Cicatrices du coude entravant l'extension - à 45°
+       Taux: 35-40% | RateCriteria: non | Description: non
+    631. Cicatrices du coude entravant l'extension - en deçà de 45°
+       Taux: 45-50% | RateCriteria: non | Description: non
+    632. Pseudarthrose coude - Mobile (coude ballant) (Main Dominante)
+       Taux: 40-50% | RateCriteria: non | Description: non
+    633. Pseudarthrose coude - Mobile (coude ballant) (Main Non Dominante)
+       Taux: 30-40% | RateCriteria: non | Description: non
+    634. Pseudarthrose coude - Avec ankylose (Main Dominante)
+       Taux: 30-45% | RateCriteria: non | Description: non
+    635. Pseudarthrose coude - Avec ankylose (Main Non Dominante)
+       Taux: 25-35% | RateCriteria: non | Description: non
+
+  --- Coude - Raideurs et Ankyloses (16 entrées) ---
+    636. Ankylose complète du coude - Bras en pronation (Main Dominante)
+       Taux: 40-50% | RateCriteria: non | Description: non
+    637. Ankylose complète du coude - Bras en pronation (Main Non Dominante)
+       Taux: 30-40% | RateCriteria: non | Description: non
+    638. Ankylose complète du coude - Bras en supination (Main Dominante)
+       Taux: 50-60% | RateCriteria: non | Description: non
+    639. Ankylose complète du coude - Bras en supination (Main Non Dominante)
+       Taux: 40-50% | RateCriteria: non | Description: non
+    640. Ankylose complète du coude - Bras entre pronation et supination (Main Dominante)
+       Taux: 30-40% | RateCriteria: non | Description: non
+    641. Ankylose complète du coude - Bras entre pronation et supination (Main Non Dominante)
+       Taux: 25-35% | RateCriteria: non | Description: non
+    642. Limitation de la flexion du coude (Main Dominante)
+       Taux: 3-25% | RateCriteria: OUI (low/high) | Description: non
+    643. Limitation de la flexion du coude (Main Non Dominante)
+       Taux: 2-20% | RateCriteria: OUI (low/high) | Description: non
+    644. Limitation de l'extension du coude (Main Dominante)
+       Taux: 2-10% | RateCriteria: OUI (low/high) | Description: non
+    645. Limitation de l'extension du coude (Main Non Dominante)
+       Taux: 1-8% | RateCriteria: OUI (low/high) | Description: non
+    646. Limitation de la pronation (Main Dominante)
+       Taux: 4-8% | RateCriteria: non | Description: non
+    647. Limitation de la pronation (Main Non Dominante)
+       Taux: 2-6% | RateCriteria: non | Description: non
+    648. Limitation de la supination (Main Dominante)
+       Taux: 5-10% | RateCriteria: non | Description: non
+    649. Limitation de la supination (Main Non Dominante)
+       Taux: 4-8% | RateCriteria: non | Description: non
+    650. Abolition de la prono-supination (Main Dominante)
+       Taux: 15-20% | RateCriteria: OUI (low/high) | Description: non
+    651. Abolition de la prono-supination (Main Non Dominante)
+       Taux: 12-18% | RateCriteria: OUI (low/high) | Description: non
+
+  --- Coude - Lésions Diverses (8 entrées) ---
+    652. Séquelles de prothèse totale du coude (Main Dominante)
+       Taux: 25-50% | RateCriteria: OUI (low/high) | Description: non
+    653. Séquelles de prothèse totale du coude (Main Non Dominante)
+       Taux: 20-45% | RateCriteria: OUI (low/high) | Description: non
+    654. Hygroma chronique du coude (Main Dominante)
+       Taux: 2-5% | RateCriteria: non | Description: non
+    655. Hygroma chronique du coude (Main Non Dominante)
+       Taux: 1-4% | RateCriteria: non | Description: non
+    656. Épicondylite ou Épitrochléite chronique rebelle (Main Dominante)
+       Taux: 5-15% | RateCriteria: OUI (low/high) | Description: non
+    657. Épicondylite ou Épitrochléite chronique rebelle (Main Non Dominante)
+       Taux: 4-12% | RateCriteria: OUI (low/high) | Description: non
+    658. Instabilité chronique du coude post-traumatique (Main Dominante)
+       Taux: 10-25% | RateCriteria: OUI (low/high) | Description: non
+    659. Instabilité chronique du coude post-traumatique (Main Non Dominante)
+       Taux: 8-20% | RateCriteria: OUI (low/high) | Description: non
+
+  --- Avant-bras - Amputations (6 entrées) ---
+    660. Amputation de l'avant-bras (Main Dominante)
+       Taux: 70-75% | RateCriteria: OUI (low/high) | Description: non
+    661. Amputation de l'avant-bras (Main Non Dominante)
+       Taux: 60-65% | RateCriteria: OUI (low/high) | Description: non
+    662. Amputation de l'avant-bras au tiers moyen
+       Taux: 70-75% | RateCriteria: non | Description: OUI
+    663. Amputation de l'avant-bras au tiers supérieur
+       Taux: 72-77% | RateCriteria: non | Description: OUI
+    664. Amputation de l'avant-bras au tiers inférieur
+       Taux: 68-73% | RateCriteria: non | Description: OUI
+    665. Perte des deux mains ou désarticulation des poignets
+       Taux: 100% | RateCriteria: non | Description: non
+
+  --- Avant-bras - Fractures et Pseudarthroses (24 entrées) ---
+    666. Fracture des deux os de l'avant-bras - Bonne consolidation sans trouble fonctionnel (Main Dominante)
+       Taux: 3-6% | RateCriteria: non | Description: non
+    667. Fracture des deux os de l'avant-bras - Bonne consolidation sans trouble fonctionnel (Main Non Dominante)
+       Taux: 2-5% | RateCriteria: non | Description: non
+    668. Fracture des deux os de l'avant-bras - Cal vicieux avec limitation de la prono-supination (Main Dominante)
+       Taux: 10-25% | RateCriteria: OUI (low/high) | Description: non
+    669. Fracture des deux os de l'avant-bras - Cal vicieux avec limitation de la prono-supination (Main Non Dominante)
+       Taux: 8-20% | RateCriteria: OUI (low/high) | Description: non
+    670. Fracture des deux os de l'avant-bras - Cal vicieux avec impotence et troubles nerveux (Main Dominante)
+       Taux: 30-45% | RateCriteria: non | Description: non
+    671. Fracture des deux os de l'avant-bras - Cal vicieux avec impotence et troubles nerveux (Main Non Dominante)
+       Taux: 25-35% | RateCriteria: non | Description: non
+    672. Fracture isolée du radius (Main Dominante)
+       Taux: 4-8% | RateCriteria: non | Description: non
+    673. Fracture isolée du radius (Main Non Dominante)
+       Taux: 3-6% | RateCriteria: non | Description: non
+    674. Fracture isolée du cubitus (Main Dominante)
+       Taux: 3-6% | RateCriteria: non | Description: non
+    675. Fracture isolée du cubitus (Main Non Dominante)
+       Taux: 2-5% | RateCriteria: non | Description: non
+    676. Pseudarthrose des deux os de l'avant-bras - serrée (Main Dominante)
+       Taux: 25-35% | RateCriteria: non | Description: non
+    677. Pseudarthrose des deux os de l'avant-bras - serrée (Main Non Dominante)
+       Taux: 20-30% | RateCriteria: non | Description: non
+    678. Pseudarthrose des deux os de l'avant-bras - lâche (Main Dominante)
+       Taux: 45-55% | RateCriteria: non | Description: non
+    679. Pseudarthrose des deux os de l'avant-bras - lâche (Main Non Dominante)
+       Taux: 35-45% | RateCriteria: non | Description: non
+    680. Pseudarthrose du radius (Main Dominante)
+       Taux: 20-25% | RateCriteria: non | Description: non
+    681. Pseudarthrose du radius (Main Non Dominante)
+       Taux: 15-20% | RateCriteria: non | Description: non
+    682. Pseudarthrose du cubitus (Main Dominante)
+       Taux: 15-20% | RateCriteria: non | Description: non
+    683. Pseudarthrose du cubitus (Main Non Dominante)
+       Taux: 12-18% | RateCriteria: non | Description: non
+    684. Séquelles de fracture-luxation de Monteggia (Main Dominante)
+       Taux: 10-30% | RateCriteria: OUI (low/high) | Description: non
+    685. Séquelles de fracture-luxation de Monteggia (Main Non Dominante)
+       Taux: 8-25% | RateCriteria: OUI (low/high) | Description: non
+    686. Séquelles de fracture-luxation de Galeazzi (Main Dominante)
+       Taux: 10-25% | RateCriteria: OUI (low/high) | Description: non
+    687. Séquelles de fracture-luxation de Galeazzi (Main Non Dominante)
+       Taux: 8-20% | RateCriteria: OUI (low/high) | Description: non
+    688. Synostose radio-cubitale post-traumatique (Main Dominante)
+       Taux: 15-25% | RateCriteria: OUI (low/high) | Description: OUI
+    689. Synostose radio-cubitale post-traumatique (Main Non Dominante)
+       Taux: 12-20% | RateCriteria: OUI (low/high) | Description: non
+
+  --- Poignet - Désarticulation (2 entrées) ---
+    690. Désarticulation du poignet (Main Dominante)
+       Taux: 65-70% | RateCriteria: non | Description: non
+    691. Désarticulation du poignet (Main Non Dominante)
+       Taux: 55-60% | RateCriteria: non | Description: non
+
+  --- Poignet - Fractures (10 entrées) ---
+    692. Fracture de l'extrémité inférieure du radius - Consolidation parfaite (Main Dominante)
+       Taux: 3-5% | RateCriteria: non | Description: non
+    693. Fracture de l'extrémité inférieure du radius - Consolidation parfaite (Main Non Dominante)
+       Taux: 2-4% | RateCriteria: non | Description: non
+    694. Fracture de l'extrémité inférieure du radius - Avec limitation des mouvements (Main Dominante)
+       Taux: 8-15% | RateCriteria: non | Description: non
+    695. Fracture de l'extrémité inférieure du radius - Avec limitation des mouvements (Main Non Dominante)
+       Taux: 6-12% | RateCriteria: non | Description: non
+    696. Fracture de l'extrémité inférieure du radius - Avec raideur, déformation et troubles nerveux (Main Dominante)
+       Taux: 15-30% | RateCriteria: non | Description: non
+    697. Fracture de l'extrémité inférieure du radius - Avec raideur, déformation et troubles nerveux (Main Non Dominante)
+       Taux: 12-25% | RateCriteria: non | Description: non
+    698. Fracture du scaphoïde carpien - Avec raideur simple (Main Dominante)
+       Taux: 5-10% | RateCriteria: non | Description: non
+    699. Fracture du scaphoïde carpien - Avec raideur simple (Main Non Dominante)
+       Taux: 4-8% | RateCriteria: non | Description: non
+    700. Pseudarthrose du scaphoïde carpien (Main Dominante)
+       Taux: 10-20% | RateCriteria: OUI (low/high) | Description: non
+    701. Pseudarthrose du scaphoïde carpien (Main Non Dominante)
+       Taux: 8-15% | RateCriteria: OUI (low/high) | Description: non
+
+  --- Poignet - Raideurs et Ankyloses (11 entrées) ---
+    702. Ankylose du poignet - Rectiligne (Main Dominante)
+       Taux: 25-30% | RateCriteria: non | Description: non
+    703. Ankylose du poignet - Rectiligne (Main Non Dominante)
+       Taux: 20-25% | RateCriteria: non | Description: non
+    704. Ankylose du poignet - En flexion ou extension (Main Dominante)
+       Taux: 30-40% | RateCriteria: non | Description: non
+    705. Ankylose du poignet - En flexion ou extension (Main Non Dominante)
+       Taux: 25-35% | RateCriteria: non | Description: non
+    706. Raideur du poignet (Main Dominante)
+       Taux: 5-15% | RateCriteria: OUI (low/medium/high) | Description: non
+    707. Raideur du poignet (Main Non Dominante)
+       Taux: 4-12% | RateCriteria: OUI (low/medium/high) | Description: non
+    708. Raideur du poignet - Flexion/extension limitée
+       Taux: 8-14% | RateCriteria: non | Description: OUI
+    709. Raideur du poignet - Mobilité réduite
+       Taux: 10-16% | RateCriteria: non | Description: OUI
+    710. Raideur du poignet - Limitation sévère
+       Taux: 15-22% | RateCriteria: non | Description: OUI
+    711. Raideur poignet avec douleur
+       Taux: 12-18% | RateCriteria: non | Description: OUI
+    712. Raideur importante du poignet
+       Taux: 15-20% | RateCriteria: non | Description: OUI
+
+  --- Main - Amputations (11 entrées) ---
+    713. Amputation de la main (Main Dominante)
+       Taux: 60-65% | RateCriteria: non | Description: non
+    714. Amputation de la main (Main Non Dominante)
+       Taux: 50-55% | RateCriteria: non | Description: non
+    715. Amputation de tous les doigts de la main (Main Dominante)
+       Taux: 55-60% | RateCriteria: non | Description: non
+    716. Amputation de tous les doigts de la main (Main Non Dominante)
+       Taux: 45-50% | RateCriteria: non | Description: non
+    717. Perte des cinq métacarpiens (Main Dominante)
+       Taux: 50-55% | RateCriteria: non | Description: non
+    718. Perte des cinq métacarpiens (Main Non Dominante)
+       Taux: 40-45% | RateCriteria: non | Description: non
+    719. Perte du 1er métacarpien (Pouce)
+       Taux: 10-12% | RateCriteria: non | Description: non
+    720. Perte du 2e métacarpien (Index)
+       Taux: 8-10% | RateCriteria: non | Description: non
+    721. Perte du 3e métacarpien (Majeur)
+       Taux: 8-10% | RateCriteria: non | Description: non
+    722. Perte du 4e métacarpien (Annulaire)
+       Taux: 5-7% | RateCriteria: non | Description: non
+    723. Perte du 5e métacarpien (Auriculaire)
+       Taux: 3-5% | RateCriteria: non | Description: non
+
+  --- Main - Raideurs et Ankyloses (8 entrées) ---
+    724. Ankylose de tous les doigts de la main (Main Dominante)
+       Taux: 50-55% | RateCriteria: non | Description: non
+    725. Ankylose de tous les doigts de la main (Main Non Dominante)
+       Taux: 40-45% | RateCriteria: non | Description: non
+    726. Main bote, creuse, etc. (Main Dominante)
+       Taux: 40-50% | RateCriteria: non | Description: non
+    727. Main bote, creuse, etc. (Main Non Dominante)
+       Taux: 30-40% | RateCriteria: non | Description: non
+    728. Cicatrices vicieuses de la paume (Main Dominante)
+       Taux: 5-40% | RateCriteria: OUI (low/high) | Description: non
+    729. Cicatrices vicieuses de la paume (Main Non Dominante)
+       Taux: 4-35% | RateCriteria: OUI (low/high) | Description: non
+    730. Séquelles de fracture de métacarpien (cal vicieux, raideur) (Main Dominante)
+       Taux: 3-10% | RateCriteria: non | Description: non
+    731. Séquelles de fracture de métacarpien (cal vicieux, raideur) (Main Non Dominante)
+       Taux: 2-8% | RateCriteria: non | Description: non
+
+  --- Doigts - Pouce (Main Dominante) (12 entrées) ---
+    732. Amputation du pouce - Désarticulation métacarpo-phalangienne
+       Taux: 28% | RateCriteria: non | Description: non
+    733. Perte du pouce (2 phalanges) (Main Dominante)
+       Taux: 25% | RateCriteria: non | Description: non
+    734. Amputation du pouce (main dominante)
+       Taux: 28% | RateCriteria: non | Description: non
+    735. Perte de la 2ème phalange du pouce (Main Dominante)
+       Taux: 10% | RateCriteria: non | Description: non
+    736. Ablation 2 phalanges du pouce (Main Dominante)
+       Taux: 25% | RateCriteria: non | Description: non
+    737. Amputation phalange P1 du pouce
+       Taux: 18% | RateCriteria: non | Description: non
+    738. Ankylose carpo-métacarpienne du pouce (Main Dominante)
+       Taux: 15-20% | RateCriteria: non | Description: non
+    739. Ankylose métacarpo-phalangienne du pouce (Main Dominante)
+       Taux: 10% | RateCriteria: non | Description: non
+    740. Ankylose inter-phalangienne du pouce (Main Dominante)
+       Taux: 5% | RateCriteria: non | Description: non
+    741. Ankylose du pouce
+       Taux: 20% | RateCriteria: non | Description: non
+    742. Raideur d'une articulation du pouce (Main Dominante)
+       Taux: 3-8% | RateCriteria: non | Description: non
+    743. Raideur du pouce
+       Taux: 3-8% | RateCriteria: non | Description: non
+
+  --- Doigts - Pouce (Main Non Dominante) (9 entrées) ---
+    744. Amputation du pouce - Désarticulation métacarpo-phalangienne
+       Taux: 23% | RateCriteria: non | Description: non
+    745. Perte du pouce (2 phalanges) (Main Non Dominante)
+       Taux: 20% | RateCriteria: non | Description: non
+    746. Amputation du pouce (main non dominante)
+       Taux: 23% | RateCriteria: non | Description: non
+    747. Perte de la 2ème phalange du pouce (Main Non Dominante)
+       Taux: 8% | RateCriteria: non | Description: non
+    748. Ablation 2 phalanges du pouce (Main Non Dominante)
+       Taux: 20% | RateCriteria: non | Description: non
+    749. Ankylose carpo-métacarpienne du pouce (Main Non Dominante)
+       Taux: 12-15% | RateCriteria: non | Description: non
+    750. Ankylose métacarpo-phalangienne du pouce (Main Non Dominante)
+       Taux: 8% | RateCriteria: non | Description: non
+    751. Ankylose inter-phalangienne du pouce (Main Non Dominante)
+       Taux: 4% | RateCriteria: non | Description: non
+    752. Raideur d'une articulation du pouce (Main Non Dominante)
+       Taux: 2-6% | RateCriteria: non | Description: non
+
+  --- Doigts - Index (Main Dominante) (11 entrées) ---
+    753. Amputation de l'index - Désarticulation métacarpo-phalangienne
+       Taux: 15% | RateCriteria: non | Description: non
+    754. Perte de l'index (3 phalanges) (Main Dominante)
+       Taux: 15% | RateCriteria: non | Description: non
+    755. Amputation de l'index
+       Taux: 15% | RateCriteria: non | Description: non
+    756. Perte de la 3ème phalange de l'index (Main Dominante)
+       Taux: 5% | RateCriteria: non | Description: non
+    757. Perte des 2ème et 3ème phalanges de l'index (Main Dominante)
+       Taux: 10% | RateCriteria: non | Description: non
+    758. Amputation phalange P2 index
+       Taux: 8% | RateCriteria: non | Description: non
+    759. Ablation 2 phalanges de l'index (Main Dominante)
+       Taux: 10% | RateCriteria: non | Description: non
+    760. Ankylose de l'index (totalité) (Main Dominante)
+       Taux: 15% | RateCriteria: non | Description: non
+    761. Ankylose de l'index
+       Taux: 15% | RateCriteria: non | Description: non
+    762. Raideur d'une articulation de l'index (Main Dominante)
+       Taux: 2-5% | RateCriteria: non | Description: non
+    763. Raideur de l'index
+       Taux: 2-5% | RateCriteria: non | Description: non
+
+  --- Doigts - Index (Main Non Dominante) (6 entrées) ---
+    764. Amputation de l'index - Désarticulation métacarpo-phalangienne
+       Taux: 12% | RateCriteria: non | Description: non
+    765. Perte de l'index (3 phalanges) (Main Non Dominante)
+       Taux: 12% | RateCriteria: non | Description: non
+    766. Perte de la 3ème phalange de l'index (Main Non Dominante)
+       Taux: 4% | RateCriteria: non | Description: non
+    767. Perte des 2ème et 3ème phalanges de l'index (Main Non Dominante)
+       Taux: 8% | RateCriteria: non | Description: non
+    768. Ankylose de l'index (totalité) (Main Non Dominante)
+       Taux: 12% | RateCriteria: non | Description: non
+    769. Raideur d'une articulation de l'index (Main Non Dominante)
+       Taux: 1-4% | RateCriteria: non | Description: non
+
+  --- Doigts - Médius (Main Dominante) (11 entrées) ---
+    770. Amputation du médius - Désarticulation métacarpo-phalangienne
+       Taux: 12% | RateCriteria: non | Description: non
+    771. Perte du médius (3 phalanges) (Main Dominante)
+       Taux: 12% | RateCriteria: non | Description: non
+    772. Amputation du médius
+       Taux: 12% | RateCriteria: non | Description: non
+    773. Perte de la 3ème phalange du médius (Main Dominante)
+       Taux: 4% | RateCriteria: non | Description: non
+    774. Perte des 2ème et 3ème phalanges du médius (Main Dominante)
+       Taux: 8% | RateCriteria: non | Description: non
+    775. Ablation 2 phalanges du médius (Main Dominante)
+       Taux: 8% | RateCriteria: non | Description: non
+    776. Ankylose du médius (totalité) (Main Dominante)
+       Taux: 12% | RateCriteria: non | Description: non
+    777. Ankylose du médius
+       Taux: 12% | RateCriteria: non | Description: non
+    778. Raideur d'une articulation du médius (Main Dominante)
+       Taux: 1-4% | RateCriteria: non | Description: non
+    779. Raideur du médius
+       Taux: 1-4% | RateCriteria: non | Description: non
+    780. Doigt en boutonnière du médius (IPP fléchie, IPD hyperextension) (Main Dominante)
+       Taux: 8-15% | RateCriteria: OUI (low/medium/high) | Description: OUI
+
+  --- Doigts - Médius (Main Non Dominante) (6 entrées) ---
+    781. Amputation du médius - Désarticulation métacarpo-phalangienne
+       Taux: 10% | RateCriteria: non | Description: non
+    782. Perte du médius (3 phalanges) (Main Non Dominante)
+       Taux: 10% | RateCriteria: non | Description: non
+    783. Perte de la 3ème phalange du médius (Main Non Dominante)
+       Taux: 3% | RateCriteria: non | Description: non
+    784. Perte des 2ème et 3ème phalanges du médius (Main Non Dominante)
+       Taux: 6% | RateCriteria: non | Description: non
+    785. Ankylose du médius (totalité) (Main Non Dominante)
+       Taux: 10% | RateCriteria: non | Description: non
+    786. Raideur d'une articulation du médius (Main Non Dominante)
+       Taux: 1-3% | RateCriteria: non | Description: non
+
+  --- Doigts - Annulaire (Main Dominante) (9 entrées) ---
+    787. Amputation de l'annulaire - Désarticulation métacarpo-phalangienne
+       Taux: 10% | RateCriteria: non | Description: non
+    788. Perte de l'annulaire (3 phalanges) (Main Dominante)
+       Taux: 8% | RateCriteria: non | Description: non
+    789. Amputation de l'annulaire
+       Taux: 10% | RateCriteria: non | Description: non
+    790. Perte de la 3ème phalange de l'annulaire (Main Dominante)
+       Taux: 3% | RateCriteria: non | Description: non
+    791. Perte des 2ème et 3ème phalanges de l'annulaire (Main Dominante)
+       Taux: 6% | RateCriteria: non | Description: non
+    792. Ankylose de l'annulaire (totalité) (Main Dominante)
+       Taux: 8% | RateCriteria: non | Description: non
+    793. Ankylose de l'annulaire
+       Taux: 8% | RateCriteria: non | Description: non
+    794. Raideur d'une articulation de l'annulaire (Main Dominante)
+       Taux: 1-3% | RateCriteria: non | Description: non
+    795. Raideur de l'annulaire
+       Taux: 1-3% | RateCriteria: non | Description: non
+
+  --- Doigts - Annulaire (Main Non Dominante) (6 entrées) ---
+    796. Amputation de l'annulaire - Désarticulation métacarpo-phalangienne
+       Taux: 7% | RateCriteria: non | Description: non
+    797. Perte de l'annulaire (3 phalanges) (Main Non Dominante)
+       Taux: 6% | RateCriteria: non | Description: non
+    798. Perte de la 3ème phalange de l'annulaire (Main Non Dominante)
+       Taux: 2% | RateCriteria: non | Description: non
+    799. Perte des 2ème et 3ème phalanges de l'annulaire (Main Non Dominante)
+       Taux: 4% | RateCriteria: non | Description: non
+    800. Ankylose de l'annulaire (totalité) (Main Non Dominante)
+       Taux: 6% | RateCriteria: non | Description: non
+    801. Raideur d'une articulation de l'annulaire (Main Non Dominante)
+       Taux: 1-2% | RateCriteria: non | Description: non
+
+  --- Doigts - Auriculaire (Main Dominante) (10 entrées) ---
+    802. Amputation de l'auriculaire - Désarticulation métacarpo-phalangienne
+       Taux: 10% | RateCriteria: non | Description: non
+    803. Perte de l'auriculaire (3 phalanges) (Main Dominante)
+       Taux: 10% | RateCriteria: non | Description: non
+    804. Amputation de l'auriculaire
+       Taux: 10% | RateCriteria: non | Description: non
+    805. Perte de la 3ème phalange de l'auriculaire (Main Dominante)
+       Taux: 4% | RateCriteria: non | Description: non
+    806. Ablation phalange unguéale de l'auriculaire (Main Dominante)
+       Taux: 3% | RateCriteria: non | Description: non
+    807. Perte des 2ème et 3ème phalanges de l'auriculaire (Main Dominante)
+       Taux: 7% | RateCriteria: non | Description: non
+    808. Ankylose de l'auriculaire (totalité) (Main Dominante)
+       Taux: 10% | RateCriteria: non | Description: non
+    809. Ankylose de l'auriculaire
+       Taux: 10% | RateCriteria: non | Description: non
+    810. Raideur d'une articulation de l'auriculaire (Main Dominante)
+       Taux: 1-3% | RateCriteria: non | Description: non
+    811. Raideur de l'auriculaire
+       Taux: 1-3% | RateCriteria: non | Description: non
+
+  --- Doigts - Auriculaire (Main Non Dominante) (6 entrées) ---
+    812. Amputation de l'auriculaire - Désarticulation métacarpo-phalangienne
+       Taux: 8% | RateCriteria: non | Description: non
+    813. Perte de l'auriculaire (3 phalanges) (Main Non Dominante)
+       Taux: 8% | RateCriteria: non | Description: non
+    814. Perte de la 3ème phalange de l'auriculaire (Main Non Dominante)
+       Taux: 3% | RateCriteria: non | Description: non
+    815. Perte des 2ème et 3ème phalanges de l'auriculaire (Main Non Dominante)
+       Taux: 5% | RateCriteria: non | Description: non
+    816. Ankylose de l'auriculaire (totalité) (Main Non Dominante)
+       Taux: 8% | RateCriteria: non | Description: non
+    817. Raideur d'une articulation de l'auriculaire (Main Non Dominante)
+       Taux: 1-2% | RateCriteria: non | Description: non
+
+  --- Doigts - Amputations Multiples (7 entrées) ---
+    818. Amputation de deux doigts
+       Taux: 18% | RateCriteria: non | Description: non
+    819. Amputation de deux doigts (hors pouce)
+       Taux: 18% | RateCriteria: non | Description: non
+    820. Amputation de trois doigts
+       Taux: 28% | RateCriteria: non | Description: non
+    821. Amputation de trois doigts dont le pouce
+       Taux: 35% | RateCriteria: non | Description: non
+    822. Amputation de quatre doigts
+       Taux: 45% | RateCriteria: non | Description: non
+    823. Perte 4 doigts incluant Pouce + Index + Médius + Annulaire (Main Dominante)
+       Taux: 58% | RateCriteria: non | Description: non
+    824. Amputation totale des 5 doigts
+       Taux: 65% | RateCriteria: non | Description: non
+
+================================================================================
+CATÉGORIE 7: Membres Inférieurs
+================================================================================
+
+  --- Amputations (11 entrées) ---
+    825. Amputation d'un membre inférieur
+       Taux: 70-80% | RateCriteria: OUI (low/high) | Description: non
+    826. Amputation des deux membres inférieurs
+       Taux: 100% | RateCriteria: non | Description: non
+    827. Amputation de cuisse (tiers supérieur)
+       Taux: 75-80% | RateCriteria: non | Description: OUI
+    828. Amputation de cuisse (tiers moyen)
+       Taux: 70-75% | RateCriteria: non | Description: OUI
+    829. Amputation de cuisse (tiers inférieur)
+       Taux: 65-70% | RateCriteria: non | Description: OUI
+    830. Désarticulation du genou
+       Taux: 60-65% | RateCriteria: non | Description: OUI
+    831. Amputation de jambe (tiers supérieur)
+       Taux: 55-60% | RateCriteria: non | Description: OUI
+    832. Amputation de jambe (tiers moyen)
+       Taux: 50-55% | RateCriteria: non | Description: OUI
+    833. Amputation de jambe (tiers inférieur)
+       Taux: 45-50% | RateCriteria: non | Description: OUI
+    834. Désarticulation de la cheville
+       Taux: 40-45% | RateCriteria: non | Description: OUI
+    835. Désarticulation de la hanche
+       Taux: 78-80% | RateCriteria: non | Description: OUI
+
+  --- Hanche - Fractures (4 entrées) ---
+    836. Fracture du col du fémur - Consolidation avec raccourcissement et raideur
+       Taux: 30-60% | RateCriteria: non | Description: non
+    837. Pseudarthrose du col du fémur
+       Taux: 60-80% | RateCriteria: non | Description: non
+    838. Fracture du massif trochantérien - Bonne consolidation
+       Taux: 5-10% | RateCriteria: OUI (low/high) | Description: non
+    839. Fracture du massif trochantérien - Cal vicieux et raideur
+       Taux: 20-40% | RateCriteria: non | Description: non
+
+  --- Hanche - Raideurs et Ankyloses (4 entrées) ---
+    840. Ankylose complète de la hanche
+       Taux: 50-70% | RateCriteria: OUI (low/high) | Description: non
+    841. Raideur de la hanche
+       Taux: 10-40% | RateCriteria: OUI (low/high) | Description: non
+    842. Séquelles de prothèse totale de hanche
+       Taux: 15-40% | RateCriteria: OUI (low/high) | Description: non
+    843. Coxarthrie post-traumatique
+       Taux: 15-40% | RateCriteria: OUI (low/high) | Description: non
+
+  --- Cuisse - Fractures (3 entrées) ---
+    844. Fracture diaphysaire du fémur
+       Taux: 10-30% | RateCriteria: OUI (low/medium/high) | Description: OUI
+    845. Fracture de l'extrémité inférieure du fémur - Avec raideur du genou
+       Taux: 15-30% | RateCriteria: non | Description: non
+    846. Pseudarthrose du fémur
+       Taux: 60-80% | RateCriteria: non | Description: non
+
+  --- Cuisse - Lésions Musculaires et Tendineuses (3 entrées) ---
+    847. Élongation/déchirure musculaire quadriceps - Tendinopathie quadricipitale (séquelles)
+       Taux: 5-20% | RateCriteria: OUI (low/medium/high) | Description: non
+    848. Rupture du tendon quadricipital
+       Taux: 15-30% | RateCriteria: OUI (low/medium/high) | Description: non
+    849. Séquelles de lésions musculaires majeures de la cuisse
+       Taux: 10-25% | RateCriteria: OUI (low/medium/high) | Description: OUI
+
+  --- Genou - Lésions Osseuses et Articulaires (6 entrées) ---
+    850. Fracture de la rotule - Avec gêne fonctionnelle
+       Taux: 5-15% | RateCriteria: non | Description: non
+    851. Fracture des plateaux tibiaux - Avec déviation et/ou raideur
+       Taux: 10-30% | RateCriteria: non | Description: non
+    852. Fracture des condyles fémoraux - Avec déviation et/ou raideur
+       Taux: 10-30% | RateCriteria: non | Description: non
+    853. Hydarthrose chronique du genou
+       Taux: 5-15% | RateCriteria: non | Description: non
+    854. Arthrose fémoro-patellaire ou fémoro-tibiale post-traumatique
+       Taux: 10-30% | RateCriteria: OUI (low/high) | Description: non
+    855. Séquelles de prothèse totale de genou
+       Taux: 15-40% | RateCriteria: OUI (low/high) | Description: non
+
+  --- Genou - Lésions Ligamentaires et Méniscales (6 entrées) ---
+    856. Laxité chronique du genou (séquelle d'entorse)
+       Taux: 5-20% | RateCriteria: OUI (low/high) | Description: non
+    857. Séquelles de rupture du ligament croisé antérieur (LCA)
+       Taux: 10-25% | RateCriteria: non | Description: non
+    858. Séquelles de rupture du ligament croisé postérieur (LCP)
+       Taux: 10-25% | RateCriteria: non | Description: non
+    859. Déchirure/rupture ligament latéral interne (LLI) - ligament collatéral médial genou
+       Taux: 10-20% | RateCriteria: OUI (low/medium/high) | Description: non
+    860. Déchirure/rupture ligament latéral externe (LLE) - ligament collatéral latéral genou
+       Taux: 10-20% | RateCriteria: OUI (low/medium/high) | Description: non
+    861. Séquelles de méniscectomie (douleurs, hydarthrose)
+       Taux: 5-15% | RateCriteria: non | Description: non
+
+  --- Genou - Raideurs et Ankyloses (2 entrées) ---
+    862. Ankylose du genou
+       Taux: 30-50% | RateCriteria: OUI (low/high) | Description: non
+    863. Raideur du genou
+       Taux: 5-25% | RateCriteria: OUI (low/high) | Description: non
+
+  --- Jambe - Fractures (7 entrées) ---
+    864. Fracture des deux os de la jambe - Bonne consolidation
+       Taux: 5-10% | RateCriteria: non | Description: non
+    865. Fracture des deux os de la jambe - Avec cal vicieux et troubles trophiques
+       Taux: 15-40% | RateCriteria: non | Description: non
+    866. Fracture isolée du tibia
+       Taux: 5-20% | RateCriteria: non | Description: non
+    867. Fracture isolée du péroné
+       Taux: 2-5% | RateCriteria: non | Description: non
+    868. Pseudarthrose des deux os de la jambe
+       Taux: 40-60% | RateCriteria: non | Description: non
+    869. Pseudarthrose du tibia
+       Taux: 30-50% | RateCriteria: non | Description: non
+    870. Syndrome des loges chronique d'effort de la jambe
+       Taux: 10-25% | RateCriteria: OUI (low/high) | Description: OUI
+
+  --- Cheville (Cou-de-pied) - Fractures (4 entrées) ---
+    871. Fracture malléolaire ou bi-malléolaire - Bonne consolidation
+       Taux: 3-8% | RateCriteria: non | Description: non
+    872. Fracture malléolaire ou bi-malléolaire - Avec raideur modérée
+       Taux: 10-20% | RateCriteria: OUI (low/high) | Description: non
+    873. Fracture bi-malléolaire - Avec cal vicieux important, déformation et troubles trophiques
+       Taux: 20-35% | RateCriteria: OUI (low/high) | Description: non
+    874. Fracture du pilon tibial
+       Taux: 15-40% | RateCriteria: non | Description: non
+
+  --- Cheville (Cou-de-pied) - Raideurs et Ankyloses (10 entrées) ---
+    875. Ankylose de la cheville
+       Taux: 20-30% | RateCriteria: OUI (low/high) | Description: non
+    876. Raideur de la cheville
+       Taux: 5-15% | RateCriteria: OUI (low/high) | Description: non
+    877. Raideur importante de la cheville
+       Taux: 12-20% | RateCriteria: non | Description: OUI
+    878. Raideur modérée de la cheville
+       Taux: 8-15% | RateCriteria: non | Description: OUI
+    879. Raideur de la cheville - Dorsiflexion 0-10°
+       Taux: 10-18% | RateCriteria: non | Description: OUI
+    880. Équin modéré de la cheville
+       Taux: 10-18% | RateCriteria: non | Description: OUI
+    881. Raideur cheville avec limitation fonctionnelle
+       Taux: 12-20% | RateCriteria: non | Description: OUI
+    882. Raideur cheville + sous-astragalienne
+       Taux: 15-25% | RateCriteria: non | Description: OUI
+    883. Raideur cheville post-bimalléolaire avec claudication
+       Taux: 15-25% | RateCriteria: non | Description: OUI
+    884. Instabilité chronique de la cheville (séquelle d'entorse)
+       Taux: 5-15% | RateCriteria: OUI (low/high) | Description: non
+
+  --- Pied - Fractures (4 entrées) ---
+    885. Fracture de l'astragale (Talus) - Avec cal vicieux
+       Taux: 10-25% | RateCriteria: non | Description: non
+    886. Fracture du calcanéum - Avec douleurs et boiterie
+       Taux: 10-30% | RateCriteria: non | Description: non
+    887. Fracture du calcanéum bilatérale - Avec douleurs et boiterie
+       Taux: 20-45% | RateCriteria: OUI (low/medium/high) | Description: OUI
+    888. Fracture des métatarsiens - Avec douleurs à la marche
+       Taux: 3-10% | RateCriteria: non | Description: non
+
+  --- Pied - Tendons (3 entrées) ---
+    889. Rupture du tendon d'Achille - Séquelles opératoires
+       Taux: 5-15% | RateCriteria: OUI (low/medium/high) | Description: non
+    890. Rupture du tendon d'Achille non opérée
+       Taux: 10-25% | RateCriteria: OUI (low/medium/high) | Description: non
+    891. Tendinopathie d'Achille post-traumatique chronique
+       Taux: 3-8% | RateCriteria: non | Description: OUI
+
+  --- Pied - Pathologies des tissus mous (2 entrées) ---
+    892. Aponévrosite plantaire (fasciite plantaire) chronique post-traumatique
+       Taux: 5-15% | RateCriteria: OUI (low/high) | Description: OUI
+    893. Syndrome du tunnel tarsien (compression nerf tibial postérieur)
+       Taux: 10-25% | RateCriteria: OUI (low/high) | Description: OUI
+
+  --- Pied - Raideurs et Ankyloses (2 entrées) ---
+    894. Ankylose d'une articulation du tarse
+       Taux: 10-20% | RateCriteria: non | Description: non
+    895. Pied plat ou pied creux post-traumatique
+       Taux: 5-20% | RateCriteria: non | Description: non
+
+  --- Orteils - Lésions (16 entrées) ---
+    896. Amputation du gros orteil
+       Taux: 5-8% | RateCriteria: non | Description: non
+    897. Amputation d'un autre orteil
+       Taux: 1-3% | RateCriteria: non | Description: non
+    898. Amputation d'un orteil (sauf gros orteil)
+       Taux: 1-3% | RateCriteria: non | Description: OUI
+    899. Amputation de deux orteils
+       Taux: 4-6% | RateCriteria: non | Description: OUI
+    900. Amputation de trois orteils
+       Taux: 6-10% | RateCriteria: non | Description: OUI
+    901. Amputation de trois orteils ou plus (dont le gros orteil)
+       Taux: 10-15% | RateCriteria: non | Description: OUI
+    902. Amputation de quatre orteils
+       Taux: 8-12% | RateCriteria: non | Description: OUI
+    903. Amputation de tous les orteils
+       Taux: 12-18% | RateCriteria: non | Description: OUI
+    904. Ankylose ou raideur du gros orteil (Hallux rigidus)
+       Taux: 3-10% | RateCriteria: non | Description: non
+    905. Ankylose du gros orteil
+       Taux: 5-10% | RateCriteria: non | Description: OUI
+    906. Raideur du gros orteil
+       Taux: 3-7% | RateCriteria: non | Description: OUI
+    907. Ankylose d'un orteil (autre que gros orteil)
+       Taux: 2-5% | RateCriteria: non | Description: OUI
+    908. Ankylose d'un orteil
+       Taux: 2-5% | RateCriteria: non | Description: OUI
+    909. Hallux valgus post-traumatique symptomatique
+       Taux: 3-8% | RateCriteria: non | Description: OUI
+    910. Griffes des orteils post-traumatiques
+       Taux: 3-10% | RateCriteria: non | Description: OUI
+    911. Cal vicieux d'un métatarsien
+       Taux: 3-8% | RateCriteria: non | Description: OUI
+
+  --- Membre Inférieur - Lésions Diverses (3 entrées) ---
+    912. Raccourcissement d'un membre inférieur
+       Taux: 5-25% | RateCriteria: OUI (low/high) | Description: non
+    913. Troubles trophiques, œdème chronique, varices
+       Taux: 5-20% | RateCriteria: non | Description: non
+    914. Boiterie (sans raccourcissement)
+       Taux: 5-15% | RateCriteria: non | Description: non
+
+================================================================================
+CATÉGORIE 8: Algodystrophie et Syndromes Douloureux Régionaux Complexes
+================================================================================
+
+  --- Syndrome Douloureux Régional Complexe (SDRC) (4 entrées) ---
+    915. Algodystrophie (SDRC de type I) - Forme mineure résolutive
+       Taux: 5-15% | RateCriteria: OUI (low/medium/high) | Description: OUI
+    916. Algodystrophie (SDRC de type I) - Forme majeure séquellaire du membre supérieur
+       Taux: 20-50% | RateCriteria: OUI (low/medium/high) | Description: OUI
+    917. Algodystrophie (SDRC de type I) - Forme majeure séquellaire du membre inférieur
+       Taux: 15-40% | RateCriteria: OUI (low/medium/high) | Description: OUI
+    918. Causalgie (SDRC de type II) - Lésion nerveuse documentée
+       Taux: 30-70% | RateCriteria: OUI (low/medium/high) | Description: OUI
+
+================================================================================
+CATÉGORIE 9: Séquelles Respiratoires
+================================================================================
+
+  --- Insuffisance Respiratoire Chronique (7 entrées) ---
+    919. Insuffisance respiratoire chronique - Stade I (légère)
+       Taux: 10-20% | RateCriteria: OUI (low/high) | Description: OUI
+    920. Insuffisance respiratoire chronique - Stade II (modérée)
+       Taux: 30-50% | RateCriteria: OUI (low/high) | Description: OUI
+    921. Insuffisance respiratoire chronique - Stade III (sévère)
+       Taux: 60-80% | RateCriteria: OUI (low/high) | Description: OUI
+    922. Insuffisance respiratoire chronique - Stade IV (très sévère avec décompensation)
+       Taux: 90-100% | RateCriteria: OUI (low/high) | Description: OUI
+    923. Bronchopneumopathie Chronique Obstructive (BPCO) post-traumatique
+       Taux: 20-60% | RateCriteria: OUI (low/medium/high) | Description: OUI
+    924. Bronchectasies (dilatations des bronches) post-traumatiques ou post-infectieuses
+       Taux: 20-50% | RateCriteria: OUI (low/medium/high) | Description: OUI
+    925. Séquelles de pneumothorax récidivant ou de bullectomie/pleurectomie
+       Taux: 10-30% | RateCriteria: OUI (low/medium/high) | Description: OUI
+
+  --- Asthme et Pathologies Obstructives (1 entrées) ---
+    926. Asthme post-traumatique ou asthme professionnel indemnisable
+       Taux: 10-40% | RateCriteria: OUI (low/medium/high) | Description: OUI
+
+================================================================================
+CATÉGORIE 10: Séquelles de Brûlures
+================================================================================
+
+  --- Brûlures Étendues (4 entrées) ---
+    927. Brûlures cutanées étendues - 10 à 20% de la surface corporelle
+       Taux: 10-30% | RateCriteria: OUI (low/medium/high) | Description: OUI
+    928. Brûlures cutanées étendues - 20 à 40% de la surface corporelle
+       Taux: 40-60% | RateCriteria: OUI (low/medium/high) | Description: OUI
+    929. Brûlures cutanées étendues - 40 à 60% de la surface corporelle
+       Taux: 70-90% | RateCriteria: OUI (low/medium/high) | Description: OUI
+    930. Brûlures cutanées étendues - > 60% de la surface corporelle
+       Taux: 90-100% | RateCriteria: OUI (low/high) | Description: OUI
+
+  --- Brûlures de Localisations Spécifiques (4 entrées) ---
+    931. Brûlures du visage et du cou avec cicatrices défigurantes
+       Taux: 20-50% | RateCriteria: OUI (low/medium/high) | Description: OUI
+    932. Brûlures des mains avec séquelles fonctionnelles (Main Dominante)
+       Taux: 20-60% | RateCriteria: OUI (low/medium/high) | Description: OUI
+    933. Brûlures des mains avec séquelles fonctionnelles (Main Non Dominante)
+       Taux: 15-50% | RateCriteria: OUI (low/medium/high) | Description: OUI
+    934. Brûlures du périnée avec séquelles fonctionnelles et/ou esthétiques
+       Taux: 20-50% | RateCriteria: OUI (low/medium/high) | Description: OUI
+
+================================================================================
+CATÉGORIE 11: Maladies Professionnelles Indemnisables
+================================================================================
+
+  --- Maladies Pulmonaires Professionnelles (3 entrées) ---
+    935. Silicose pulmonaire
+       Taux: 20-100% | RateCriteria: OUI (low/medium/high) | Description: OUI
+    936. Asbestose pulmonaire
+       Taux: 30-100% | RateCriteria: OUI (low/medium/high) | Description: OUI
+    937. Mésothéliome pleural malin lié à l'amiante
+       Taux: 100% | RateCriteria: non | Description: OUI
+
+  --- Troubles Musculo-Squelettiques (TMS) Professionnels (3 entrées) ---
+    938. Syndrome du canal carpien professionnel bilatéral
+       Taux: 10-30% | RateCriteria: OUI (low/medium/high) | Description: OUI
+    939. Tendinopathie de la coiffe des rotateurs professionnelle
+       Taux: 10-30% | RateCriteria: OUI (low/medium/high) | Description: OUI
+    940. Épicondylite latérale professionnelle
+       Taux: 5-15% | RateCriteria: OUI (low/medium/high) | Description: OUI
+
+  --- Maladies Cutanées Professionnelles (1 entrées) ---
+    941. Eczéma de contact professionnel chronique
+       Taux: 5-20% | RateCriteria: OUI (low/medium/high) | Description: OUI
+
+================================================================================
+CATÉGORIE 12: Séquelles Endocriniennes et Métaboliques
+================================================================================
+
+  --- Diabète Post-Traumatique (2 entrées) ---
+    942. Diabète post-traumatique ou post-pancréatique - Type 1 (insulinodépendant)
+       Taux: 30-60% | RateCriteria: OUI (low/medium/high) | Description: OUI
+    943. Diabète post-traumatique - Type 2 (non insulinodépendant)
+       Taux: 10-30% | RateCriteria: OUI (low/medium/high) | Description: OUI
+
+  --- Troubles Thyroïdiens (2 entrées) ---
+    944. Hypothyroïdie post-traumatique ou post-radiothérapie
+       Taux: 10-25% | RateCriteria: OUI (low/medium/high) | Description: OUI
+    945. Hyperthyroïdie post-traumatique (maladie de Basedow ou nodule toxique)
+       Taux: 15-35% | RateCriteria: OUI (low/medium/high) | Description: OUI
+
+  --- Troubles des Glandes Surrénales (1 entrées) ---
+    946. Insuffisance surrénalienne post-traumatique (maladie d'Addison secondaire)
+       Taux: 40-70% | RateCriteria: OUI (low/medium/high) | Description: OUI
+
+================================================================================
+CATÉGORIE 13: Séquelles de Maladies Infectieuses Post-Traumatiques
+================================================================================
+
+  --- Infections Osseuses et Articulaires (2 entrées) ---
+    947. Ostéomyélite chronique post-traumatique
+       Taux: 20-60% | RateCriteria: OUI (low/medium/high) | Description: OUI
+    948. Arthrite septique chronique post-traumatique
+       Taux: 25-70% | RateCriteria: OUI (low/medium/high) | Description: OUI
+
+  --- Infections des Parties Molles (1 entrées) ---
+    949. Fasciite nécrosante séquellaire
+       Taux: 30-80% | RateCriteria: OUI (low/medium/high) | Description: OUI
+
+  --- Tétanos (1 entrées) ---
+    950. Séquelles de tétanos post-traumatique
+       Taux: 20-80% | RateCriteria: OUI (low/medium/high) | Description: OUI
+
+================================================================================
+CATÉGORIE 14: Séquelles Hématologiques
+================================================================================
+
+  --- Anémie Post-Traumatique (1 entrées) ---
+    951. Anémie chronique post-hémorragique sévère
+       Taux: 10-40% | RateCriteria: OUI (low/medium/high) | Description: OUI
+
+  --- Troubles de la Coagulation (1 entrées) ---
+    952. Syndrome hémorragique post-traumatique (coagulopathie de consommation séquellaire)
+       Taux: 30-60% | RateCriteria: OUI (low/medium/high) | Description: OUI
+
+================================================================================
+CATÉGORIE 15: Séquelles Dermatologiques Étendues
+================================================================================
+
+  --- Cicatrices Chéloïdes et Hypertrophiques (2 entrées) ---
+    953. Cicatrice vicieuse thorax antérieur
+       Taux: 3-15% | RateCriteria: OUI (low/medium/high) | Description: OUI
+    954. Cicatrices chéloïdes multiples étendues
+       Taux: 10-40% | RateCriteria: OUI (low/medium/high) | Description: OUI
+
+  --- Troubles Pigmentaires Post-Traumatiques (1 entrées) ---
+    955. Vitiligo post-traumatique étendu
+       Taux: 5-20% | RateCriteria: OUI (low/medium/high) | Description: OUI
+
+================================================================================
+CATÉGORIE 16: Séquelles Obstétricales et Gynécologiques Post-Traumatiques
+================================================================================
+
+  --- Traumatismes Obstétricaux (2 entrées) ---
+    956. Déchirure périnéale complète (3e ou 4e degré) post-accouchement traumatique
+       Taux: 15-40% | RateCriteria: OUI (low/medium/high) | Description: OUI
+    957. Prolapsus génital post-traumatique sévère
+       Taux: 20-40% | RateCriteria: OUI (low/medium/high) | Description: OUI
+
+================================================================================
+CATÉGORIE 17: Amputations Multiples et Polyhandicap
+================================================================================
+
+  --- Amputations Multiples (5 entrées) ---
+    958. Amputation de deux membres supérieurs
+       Taux: 100% | RateCriteria: non | Description: OUI
+    959. Amputation de deux membres inférieurs
+       Taux: 100% | RateCriteria: non | Description: OUI
+    960. Amputation d'un membre supérieur et d'un membre inférieur
+       Taux: 100% | RateCriteria: non | Description: OUI
+    961. Amputation de trois membres
+       Taux: 100% | RateCriteria: non | Description: OUI
+    962. Amputation des quatre membres (tétra-amputation)
+       Taux: 100% | RateCriteria: non | Description: OUI
+
+================================================================================
+CATÉGORIE 18: Séquelles Psychiatriques Sévères et Spécifiques
+================================================================================
+
+  --- Psychose Post-Traumatique (2 entrées) ---
+    963. Psychose hallucinatoire chronique post-traumatique
+       Taux: 50-80% | RateCriteria: OUI (low/medium/high) | Description: OUI
+    964. Schizophrénie post-traumatique
+       Taux: 60-100% | RateCriteria: OUI (low/medium/high) | Description: OUI
+
+  --- Dépression et Troubles de l'Humeur (2 entrées) ---
+    965. Dépression majeure post-traumatique chronique résistante
+       Taux: 30-70% | RateCriteria: OUI (low/medium/high) | Description: OUI
+    966. Trouble bipolaire post-traumatique
+       Taux: 40-80% | RateCriteria: OUI (low/medium/high) | Description: OUI
+
+  --- Troubles Anxieux Sévères (2 entrées) ---
+    967. Trouble obsessionnel-compulsif (TOC) post-traumatique invalidant
+       Taux: 20-60% | RateCriteria: OUI (low/medium/high) | Description: OUI
+    968. Trouble panique avec agoraphobie post-traumatique sévère
+       Taux: 20-50% | RateCriteria: OUI (low/medium/high) | Description: OUI
+
+================================================================================
+CATÉGORIE 19: Séquelles Endocriniennes et Métaboliques
+================================================================================
+
+  --- Diabète Post-Traumatique (2 entrées) ---
+    969. Diabète post-traumatique ou post-pancréatique - Type 1 (insulinodépendant)
+       Taux: 30-60% | RateCriteria: OUI (low/medium/high) | Description: OUI
+    970. Diabète post-traumatique - Type 2 (non insulinodépendant)
+       Taux: 10-30% | RateCriteria: OUI (low/medium/high) | Description: OUI
+
+================================================================================
+CATÉGORIE 20: Séquelles de Maladies Infectieuses Post-Traumatiques
+================================================================================
+
+  --- Infections Osseuses et Articulaires (2 entrées) ---
+    971. Ostéomyélite chronique post-traumatique
+       Taux: 20-60% | RateCriteria: OUI (low/medium/high) | Description: OUI
+    972. Arthrite septique chronique post-traumatique
+       Taux: 25-70% | RateCriteria: OUI (low/medium/high) | Description: OUI
+
+================================================================================
+CATÉGORIE 21: Séquelles Hématologiques
+================================================================================
+
+  --- Anémie Post-Traumatique (1 entrées) ---
+    973. Anémie chronique post-hémorragique sévère
+       Taux: 10-40% | RateCriteria: OUI (low/medium/high) | Description: OUI
+
+================================================================================
+CATÉGORIE 22: Séquelles Dermatologiques Étendues
+================================================================================
+
+  --- Cicatrices Chéloïdes et Hypertrophiques (1 entrées) ---
+    974. Cicatrices chéloïdes multiples étendues
+       Taux: 10-40% | RateCriteria: OUI (low/medium/high) | Description: OUI
+
+================================================================================
+CATÉGORIE 23: Séquelles Obstétricales et Gynécologiques Post-Traumatiques
+================================================================================
+
+  --- Traumatismes Obstétricaux (2 entrées) ---
+    975. Déchirure périnéale complète (3e ou 4e degré) post-accouchement traumatique
+       Taux: 15-40% | RateCriteria: OUI (low/medium/high) | Description: OUI
+    976. Prolapsus génital post-traumatique sévère
+       Taux: 20-40% | RateCriteria: OUI (low/medium/high) | Description: OUI
+
+================================================================================
+CATÉGORIE 24: Amputations Multiples et Polyhandicap
+================================================================================
+
+  --- Amputations Multiples (5 entrées) ---
+    977. Amputation de deux membres supérieurs
+       Taux: 100% | RateCriteria: non | Description: OUI
+    978. Amputation de deux membres inférieurs
+       Taux: 100% | RateCriteria: non | Description: OUI
+    979. Amputation d'un membre supérieur et d'un membre inférieur
+       Taux: 100% | RateCriteria: non | Description: OUI
+    980. Amputation de trois membres
+       Taux: 100% | RateCriteria: non | Description: OUI
+    981. Amputation des quatre membres (tétra-amputation)
+       Taux: 100% | RateCriteria: non | Description: OUI
+
+================================================================================
+CATÉGORIE 25: Cumuls de Lésions et Polytraumatismes
+================================================================================
+
+  --- Cumuls Simples - Même Membre (23 entrées) ---
+    982. Raideur genou + instabilité LCA (cumul)
+       Taux: 25-35% | RateCriteria: non | Description: OUI
+    983. Raideur cheville + séquelles fracture (cumul)
+       Taux: 20-30% | RateCriteria: non | Description: OUI
+    984. Raideur épaule + rupture coiffe (cumul)
+       Taux: 28-40% | RateCriteria: non | Description: OUI
+    985. Raideur poignet + fracture scaphoïde (cumul)
+       Taux: 15-25% | RateCriteria: non | Description: OUI
+    986. Raideur coude + déficit nerf cubital (cumul)
+       Taux: 22-32% | RateCriteria: non | Description: OUI
+    987. Amputation index + raideur main (cumul)
+       Taux: 18-28% | RateCriteria: non | Description: OUI
+    988. Méniscectomie + chondropathie sévère (cumul)
+       Taux: 25-35% | RateCriteria: non | Description: OUI
+    989. Raideur hanche + boiterie sévère (cumul)
+       Taux: 24-34% | RateCriteria: non | Description: OUI
+    990. Pilon tibial + raideur cheville + hallux (cumul)
+       Taux: 30-42% | RateCriteria: non | Description: OUI
+    991. Tassement + raideur rachis + sciatique (cumul)
+       Taux: 20-30% | RateCriteria: non | Description: OUI
+    992. Fracture radius + raideur + déficit force (cumul)
+       Taux: 22-32% | RateCriteria: non | Description: OUI
+    993. Luxation + instabilité + raideur épaule (cumul)
+       Taux: 30-42% | RateCriteria: non | Description: OUI
+    994. Plateaux tibiaux + raideur + arthrose (cumul)
+       Taux: 28-38% | RateCriteria: non | Description: OUI
+    995. Malléole + entorse + instabilité (cumul)
+       Taux: 22-32% | RateCriteria: non | Description: OUI
+    996. Amputation pouce + ankylose index (cumul)
+       Taux: 25-35% | RateCriteria: non | Description: OUI
+    997. Olécrane + raideur coude (cumul)
+       Taux: 20-30% | RateCriteria: non | Description: OUI
+    998. Calcanéum + raideur + troubles marche (cumul)
+       Taux: 26-36% | RateCriteria: non | Description: OUI
+    999. Syndrome cervical + raideur + névralgie (cumul)
+       Taux: 22-32% | RateCriteria: non | Description: OUI
+    1000. Col fémur + raideur + raccourcissement (cumul)
+       Taux: 28-40% | RateCriteria: non | Description: OUI
+    1001. LCA + méniscectomie + instabilité (cumul)
+       Taux: 30-40% | RateCriteria: non | Description: OUI
+    1002. Raideur genou + dérobements
+       Taux: 18-28% | RateCriteria: non | Description: OUI
+    1003. Raideur + instabilité épaule
+       Taux: 18-30% | RateCriteria: non | Description: OUI
+    1004. Fracture bimalléolaire + troubles marche
+       Taux: 20-30% | RateCriteria: non | Description: OUI
+
+  --- Polytraumatismes - Membres Multiples (23 entrées) ---
+    1005. Fracture radius + fracture malléole (cumul)
+       Taux: 18-28% | RateCriteria: OUI (low/medium/high) | Description: OUI
+    1006. Fracture radius + lombalgie post-traumatique (cumul)
+       Taux: 20-25% | RateCriteria: OUI (low/medium/high) | Description: OUI
+    1007. Polytraumatisme membre inférieur + supérieur
+       Taux: 40-55% | RateCriteria: non | Description: OUI
+    1008. Polytraumatisme épaule + genou + rachis
+       Taux: 35-48% | RateCriteria: non | Description: OUI
+    1009. Polytraumatisme crâne + thorax + hanche
+       Taux: 38-50% | RateCriteria: non | Description: OUI
+    1010. Polytraumatisme main + 2 membres inférieurs
+       Taux: 42-55% | RateCriteria: non | Description: OUI
+    1011. Polytraumatisme vision + audition + genou
+       Taux: 48-62% | RateCriteria: non | Description: OUI
+    1012. Polytraumatisme bassin + 2 membres + rachis
+       Taux: 52-65% | RateCriteria: non | Description: OUI
+    1013. Polytraumatisme 2 membres supérieurs + rachis
+       Taux: 38-50% | RateCriteria: non | Description: OUI
+    1014. Polytraumatisme thorax + abdomen sévère
+       Taux: 35-48% | RateCriteria: non | Description: OUI
+    1015. Polytraumatisme membre inférieur + supérieur droit complet
+       Taux: 48-60% | RateCriteria: non | Description: OUI
+    1016. Polytraumatisme rachis triple étage
+       Taux: 32-42% | RateCriteria: non | Description: OUI
+    1017. Polytraumatisme membre inférieur droit complet
+       Taux: 50-62% | RateCriteria: non | Description: OUI
+    1018. Polytraumatisme membre supérieur gauche complet
+       Taux: 45-58% | RateCriteria: non | Description: OUI
+    1019. Polytraumatisme sensoriel + rachis
+       Taux: 48-60% | RateCriteria: non | Description: OUI
+    1020. Polytraumatisme bassin-rachis complexe
+       Taux: 45-58% | RateCriteria: non | Description: OUI
+    1021. Polytraumatisme neurologique membre inférieur
+       Taux: 38-50% | RateCriteria: non | Description: OUI
+    1022. Polytraumatisme viscères multiples
+       Taux: 40-55% | RateCriteria: non | Description: OUI
+    1023. Polytraumatisme main dominante complète
+       Taux: 50-62% | RateCriteria: non | Description: OUI
+    1024. Destruction genou (polytraumatisme intra-articulaire)
+       Taux: 40-52% | RateCriteria: non | Description: OUI
+    1025. Destruction cheville-pied (polytraumatisme)
+       Taux: 42-55% | RateCriteria: non | Description: OUI
+    1026. Raideur rachis global (polytraumatisme axial)
+       Taux: 35-48% | RateCriteria: non | Description: OUI
+    1027. Polytraumatisme 2 membres inférieurs
+       Taux: 55-68% | RateCriteria: non | Description: OUI
+
+  --- Formules de Cumul (Référence) (5 entrées) ---
+    1028. Cumul de 2 lésions (Formule de Balthazar)
+       Taux: 0-0% | RateCriteria: non | Description: OUI
+    1029. Cumul de 3 lésions (Formule de Balthazar)
+       Taux: 0-0% | RateCriteria: non | Description: OUI
+    1030. Cumul de 4 lésions (Formule de Balthazar)
+       Taux: 0-0% | RateCriteria: non | Description: OUI
+    1031. Cumul de 5 lésions (Formule de Balthazar)
+       Taux: 0-0% | RateCriteria: non | Description: OUI
+    1032. Cumul de 7 lésions (Formule de Balthazar)
+       Taux: 0-0% | RateCriteria: non | Description: OUI
+
+================================================================================
+CATÉGORIE 26: États Antérieurs et Aggravation de Pathologies Préexistantes
+================================================================================
+
+  --- Aggravation Rachis sur État Antérieur (5 entrées) ---
+    1033. Aggravation arthrose rachis sur état antérieur
+       Taux: 10-25% | RateCriteria: non | Description: OUI
+    1034. Tassement vertébral sur discopathie préexistante
+       Taux: 12-28% | RateCriteria: non | Description: OUI
+    1035. Hernie discale sur canal étroit préexistant
+       Taux: 15-30% | RateCriteria: non | Description: OUI
+    1036. Fracture rachis sur scoliose préexistante
+       Taux: 18-35% | RateCriteria: non | Description: OUI
+    1037. Sciatique sur arthrose lombaire préexistante
+       Taux: 10-22% | RateCriteria: non | Description: OUI
+
+  --- Aggravation Genou sur État Antérieur (4 entrées) ---
+    1038. Fracture genou sur gonarthrose préexistante
+       Taux: 18-35% | RateCriteria: non | Description: OUI
+    1039. Entorse LCA sur méniscectomie ancienne
+       Taux: 15-30% | RateCriteria: non | Description: OUI
+    1040. Raideur genou sur prothèse préexistante
+       Taux: 20-38% | RateCriteria: non | Description: OUI
+    1041. Chondropathie aggravée sur arthrose genou
+       Taux: 12-25% | RateCriteria: non | Description: OUI
+
+  --- Aggravation Épaule sur État Antérieur (4 entrées) ---
+    1042. Luxation épaule sur omarthrose préexistante
+       Taux: 18-32% | RateCriteria: non | Description: OUI
+    1043. Fracture épaule sur rupture coiffe ancienne
+       Taux: 20-38% | RateCriteria: non | Description: OUI
+    1044. Raideur épaule sur prothèse préexistante
+       Taux: 22-40% | RateCriteria: non | Description: OUI
+    1045. Capsulite rétractile sur tendinopathie ancienne
+       Taux: 15-28% | RateCriteria: non | Description: OUI
+
+  --- Aggravation Main et Poignet sur État Antérieur (4 entrées) ---
+    1046. Fracture poignet sur rhizarthrose préexistante
+       Taux: 12-22% | RateCriteria: non | Description: OUI
+    1047. Fracture scaphoïde sur arthrose carpe
+       Taux: 15-28% | RateCriteria: non | Description: OUI
+    1048. Raideur main sur amputation ancienne
+       Taux: 18-32% | RateCriteria: non | Description: OUI
+    1049. Syndrome canal carpien sur ténosynovite ancienne
+       Taux: 10-20% | RateCriteria: non | Description: OUI
+
+  --- Aggravation Hanche et Membre Inférieur sur État Antérieur (4 entrées) ---
+    1050. Fracture hanche sur coxarthrose préexistante
+       Taux: 25-45% | RateCriteria: non | Description: OUI
+    1051. Luxation hanche sur prothèse préexistante
+       Taux: 22-40% | RateCriteria: non | Description: OUI
+    1052. Fracture cheville sur arthrose tibio-tarsienne
+       Taux: 18-32% | RateCriteria: non | Description: OUI
+    1053. Amputation sur neuropathie diabétique
+       Taux: 30-50% | RateCriteria: non | Description: OUI
+
+  --- Aggravation Affections Sensorielles sur État Antérieur (3 entrées) ---
+    1054. Traumatisme crânien sur surdité préexistante
+       Taux: 15-30% | RateCriteria: non | Description: OUI
+    1055. Atteinte visuelle sur amblyopie préexistante
+       Taux: 12-25% | RateCriteria: non | Description: OUI
+    1056. Cataracte traumatique sur glaucome préexistant
+       Taux: 18-35% | RateCriteria: non | Description: OUI
+
+================================================================================
+CATÉGORIE 27: Séquelles Psychiatriques Sévères et Spécifiques
+================================================================================
+
+  --- Psychose Post-Traumatique (2 entrées) ---
+    1057. Psychose hallucinatoire chronique post-traumatique
+       Taux: 50-80% | RateCriteria: OUI (low/medium/high) | Description: OUI
+    1058. Schizophrénie post-traumatique
+       Taux: 60-100% | RateCriteria: OUI (low/medium/high) | Description: OUI
+
+================================================================================
+TOTAL ENTRÉES: 1058
+TOTAL CATÉGORIES: 27
+TOTAL SOUS-CATÉGORIES: 121

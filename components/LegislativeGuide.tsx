@@ -23,14 +23,92 @@ interface ConversationContext {
   lastLawId?: string;
   lastIntentKey?: string;
   lastCategory?: string;
+  lastKeywords?: string[];   // For follow-up question understanding
+  lastEntityType?: string;   // 'loi' | 'procedure' | 'calcul' | 'definition'
+  pendingClarification?: boolean;  // If last response was low confidence
 }
 
 // ═══════════════════════════════════════════════════════════════
-// NLP ENGINE — Normalisation, synonymes, extraction
+// NLP ENGINE — Normalisation avancée, synonymes, extraction
 // ═══════════════════════════════════════════════════════════════
 
-const normalizeText = (text: string): string => 
-  text.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/[-']/g, ' ');
+// Darija / Algerian informal patterns → French equivalents
+const DARIJA_MAP: [RegExp, string][] = [
+  [/\bwesh\b/gi, 'comment'],
+  [/\bkifash\b/gi, 'comment'],
+  [/\bkifahesh\b/gi, 'comment'],
+  [/\bchhal\b/gi, 'combien'],
+  [/\bch7al\b/gi, 'combien'],
+  [/\bwahed\b/gi, 'un'],
+  [/\bkheddem\b/gi, 'travail'],
+  [/\bkhadma\b/gi, 'travail'],
+  [/\bkhdem\b/gi, 'travail'],
+  [/\btbib\b/gi, 'medecin'],
+  [/\btoubibi?\b/gi, 'medecin'],
+  [/\bdoktour?\b/gi, 'medecin'],
+  [/\b7a9\b/gi, 'droit'],
+  [/\b7o9ou9\b/gi, 'droits'],
+  [/\bflous\b/gi, 'argent indemnite'],
+  [/\bdrahem\b/gi, 'argent indemnite'],
+  [/\bsba7\b/gi, 'matin'],
+  [/\bmrid\b/gi, 'malade maladie'],
+  [/\bmrad\b/gi, 'malade maladie'],
+  [/\btahwis\b/gi, 'indemnite compensation'],
+  [/\bta3wid\b/gi, 'indemnite compensation'],
+  [/\bta3wid.*at\b/gi, 'indemnites'],
+  [/\bkhlass\b/gi, 'paiement indemnite'],
+  [/\bchikaya\b/gi, 'recours plainte'],
+  [/\bm7akma\b/gi, 'tribunal'],
+  [/\bkhabir\b/gi, 'expert expertise'],
+  [/\bhadtha\b/gi, 'accident'],
+  [/\b3atla\b/gi, 'arret conge'],
+  [/\bconge[e]?\b/gi, 'arret conge'],
+  [/\bta9a3od\b/gi, 'retraite'],
+];
+
+// Informal French / SMS / Colloquial patterns
+const INFORMAL_MAP: [RegExp, string][] = [
+  [/\bpk\b/gi, 'pourquoi'],
+  [/\bpq\b/gi, 'pourquoi'],
+  [/\bstp\b/gi, ''],
+  [/\bsvp\b/gi, ''],
+  [/\bcmnt\b/gi, 'comment'],
+  [/\bcmb\b/gi, 'combien'],
+  [/\bqd\b/gi, 'quand'],
+  [/\bss\b/gi, 'securite sociale'],
+  [/\bmed\s*conseil\b/gi, 'medecin conseil'],
+  [/\bmed\s*cons\b/gi, 'medecin conseil'],
+  [/\bij[st]?\b/gi, 'indemnite journaliere'],
+  [/\bipp\b/gi, 'incapacite permanente partielle'],
+  [/\bipt\b/gi, 'incapacite permanente totale'],
+  [/\b(?:at|a\.t\.?)(?:\/|\s*et\s*|\s*)(?:mp|m\.p\.?)\b/gi, 'accident travail maladie professionnelle'],
+  [/\bat\b/gi, 'accident travail'],
+  [/\bmp\b/gi, 'maladie professionnelle'],
+  [/\bald\b/gi, 'affection longue duree'],
+  [/\bpec\b/gi, 'prise en charge'],
+  [/\binval\b/gi, 'invalidite'],
+  [/\bconso\b/gi, 'consolidation'],
+  [/\bindj\b/gi, 'indemnite journaliere'],
+  [/\bsecu\b/gi, 'securite sociale'],
+  [/\bsecu\s*sociale?\b/gi, 'securite sociale'],
+  [/\bretraite antic\w*\b/gi, 'retraite anticipee'],
+  [/\bb[aâ]lt?h?az?ard?\b/gi, 'balthazard'],
+  [/\bgabriell?i?\b/gi, 'gabrielli'],
+];
+
+const normalizeText = (text: string): string => {
+  let t = text.toLowerCase();
+  // Apply Darija mappings
+  for (const [pattern, replacement] of DARIJA_MAP) {
+    t = t.replace(pattern, replacement);
+  }
+  // Apply informal/SMS mappings
+  for (const [pattern, replacement] of INFORMAL_MAP) {
+    t = t.replace(pattern, replacement);
+  }
+  // Standard normalization
+  return t.normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[-']/g, ' ');
+};
 
 // Simple Levenshtein distance for typo tolerance
 const levenshtein = (a: string, b: string): number => {
@@ -105,7 +183,7 @@ const SYNONYMS: Record<string, string[]> = {
   'maternite': ['conge maternite', 'grossesse', 'accouchement', 'naissance', 'enceinte'],
   'chifa': ['carte', 'teletransmission', 'electronique', 'carte assure'],
   'prescription': ['ordonnance', 'prescrire', 'prescrit', 'duree validite'],
-  'controle': ['verifier', 'verification', 'inspection', 'surveillance'],
+  'controle': ['verifier', 'verification', 'inspection', 'surveillance', 'controler', 'convocation', 'convoquer'],
   'sanction': ['penalite', 'amende', 'punition', 'infraction', 'contravention'],
   'prothese': ['orthese', 'appareillage', 'appareil', 'dispositif medical'],
   'balthazard': ['formule', 'cumul ipp', 'capacite restante', 'lesions multiples'],
@@ -126,6 +204,23 @@ const SYNONYMS: Record<string, string[]> = {
   'stagiaire': ['apprenti', 'eleve', 'formation', 'benevole', 'volontaire'],
   'tableau': ['liste', 'nomenclature', 'repertoire', 'catalogue'],
   'noir': ['informel', 'clandestin', 'non declare', 'sans contrat'],
+  // Extended: more real-world query patterns
+  'taux': ['pourcentage', 'bareme', 'ipp', 'coefficient', 'degre'],
+  'droit': ['benefice', 'avantage', 'prestation', 'pretention', 'avoir droit', 'ouverture droit'],
+  'obligation': ['devoir', 'contrainte', 'imposer', 'obliger', 'tenu'],
+  'calcul': ['calculer', 'formule', 'combien', 'montant', 'evaluer', 'estimer', 'chiffrer'],
+  'duree': ['combien temps', 'combien jours', 'delai', 'periode', 'jusqu quand'],
+  'condition': ['critere', 'prerequis', 'faut il', 'necessaire', 'exigence', 'requis'],
+  'document': ['papier', 'dossier', 'formulaire', 'piece', 'justificatif', 'certificat'],
+  'certificat': ['attestation', 'document', 'justificatif', 'certificat medical'],
+  'refus': ['refuse', 'rejete', 'rejet', 'negatif', 'pas accepte', 'pas accord'],
+  'cumul': ['cumuler', 'combinaison', 'addition', 'ensemble', 'les deux', 'en meme temps'],
+  'notification': ['informer', 'prevenir', 'aviser', 'lettre', 'courrier', 'reception'],
+  'prolongation': ['prolonger', 'extension', 'renouvellement', 'continuer', 'encore'],
+  'guichet': ['agence', 'bureau', 'accueil', 'cnas', 'antenne'],
+  'capital': ['forfait', 'versement unique', 'somme', 'montant unique'],
+  'imputabilite': ['imputer', 'imputable', 'lien', 'rattacher', 'cause', 'consequence'],
+  'avis': ['decision', 'conclusion', 'opinion', 'jugement'],
 };
 
 // Expand query with synonyms for better matching
@@ -168,21 +263,58 @@ const extractNgrams = (text: string, n: number): string[] => {
 };
 
 // Detect greetings to respond conversationally
-const GREETINGS = ['bonjour', 'salut', 'bonsoir', 'salam', 'hello', 'hi', 'hey', 'bsr', 'bjr', 'slt', 'coucou', 'yo', 'wesh'];
+const GREETINGS = ['bonjour', 'salut', 'bonsoir', 'salam', 'hello', 'hi', 'hey', 'bsr', 'bjr', 'slt', 'coucou', 'yo', 'wesh', 'saha', 'sahit', 'labas', 'cv'];
 const isGreeting = (query: string): boolean => {
   const normalized = normalizeText(query).trim();
   return GREETINGS.some(g => normalized === g || normalized.startsWith(g + ' ')) && normalized.split(/\s+/).length <= 5;
 };
 
 // Detect thanks
-const THANKS = ['merci', 'shukran', 'choukran', 'thanks', 'remercie', 'jazak', 'barak'];
+const THANKS = ['merci', 'shukran', 'choukran', 'thanks', 'remercie', 'jazak', 'barak', 'sahit', 'tslm', 'baraka'];
 const isThanks = (query: string): boolean => {
   const normalized = normalizeText(query).trim();
   return THANKS.some(t => normalized.includes(t));
 };
 
+// Detect follow-up / continuation questions
+const FOLLOWUP_PATTERNS = [
+  /^et\s+(pour|si|en cas|quand|comment|quel|quelle)/,
+  /^(et|mais)\s+(le|la|les|l)\s/,
+  /^(ok|d accord|bien|oui)\s*(et|mais|donc)/,
+  /^(quel|quelle|quels|quelles)\s+(est|sont|etai)/,
+  /^(combien|comment|pourquoi|quand)\s/,
+  /^(c est quoi|qu est ce que?)\s/,
+  /^(le|la|les|son|sa|ses)\s+(delai|montant|taux|duree|condition|procedure)/,
+  /^en cas de\s/,
+  /^si\s+(le|la|l|je|on|il)/,
+  /^(pareil|meme chose|idem|pareillement)\s/,
+  /^(plus|encore)\s+(de|d)\s+(detail|info|precision|explication)/,
+  /^(developp|detaill|precis|elabor|approfondi)/,
+  /^(je comprends pas|pas clair|pas compris|c est a dire)/,
+];
+const isFollowUp = (query: string): boolean => {
+  const normalized = normalizeText(query).trim();
+  return FOLLOWUP_PATTERNS.some(p => p.test(normalized));
+};
+
+// Detect scenario/practical questions ("que faire si...", "j'ai un cas où...")
+const SCENARIO_PATTERNS: [RegExp, string[]][] = [
+  [/(?:que faire|quoi faire|comment faire).*(?:si|quand|lorsqu)/, ['procedure']],
+  [/(?:j ai|mon patient|un assure|un travailleur).*(?:accident|blesse|maladie)/, ['general', 'procedure']],
+  [/(?:la cnas|l organisme).*(?:refus|refuse|rejete|pas accept)/, ['recours']],
+  [/(?:contester|pas d accord|je veux contester|comment contester)/, ['recours']],
+  [/(?:combien|quel montant|quelle somme).*(?:touche|percoi|recoi|donne|verse)/, ['calcul', 'droits']],
+  [/(?:est ce que|puis je|peut on|a t on|ai je).*(?:droit|benefici|preten|cumul)/, ['droits']],
+  [/(?:difference|distinguer|comparer).*(?:entre|et)/, ['general']],
+  [/(?:delai|combien temps|jusqu quand|date limite).*(?:depass|expire|passe)/, ['procedure', 'recours']],
+  [/(?:medecin conseil|medecin expert).*(?:convoque|convocation|refuse|conteste)/, ['medecin', 'recours']],
+  [/(?:rechute|aggrav).*(?:apres|suite|consolid|gueri)/, ['procedure', 'droits']],
+  [/(?:employeur|patron).*(?:refuse|pas|declare|negligence)/, ['procedure', 'recours']],
+];
+
 // Strip natural language prefixes to extract core intent
 const QUESTION_PREFIXES = [
+  // Formal French
   'c est quoi', 'qu est ce que', 'qu est ce qu', 'que veut dire', 'que signifie',
   'expliquer', 'expliquez', 'explique moi', 'dites moi', 'parlez moi de',
   'parler de', 'je veux savoir', 'je voudrais savoir', 'pouvez vous expliquer',
@@ -195,6 +327,23 @@ const QUESTION_PREFIXES = [
   'question sur', 'connaissez vous', 'connais tu', 'dis moi', 'besoin aide',
   'besoin d aide', 'je ne comprends pas', 'il y a quoi dans', 'que dit',
   'que prevoit', 'selon la loi', 'en vertu de', 'd apres la loi',
+  // Informal / colloquial French
+  'c quoi', 'ca veut dire quoi', 'ca marche comment', 'ca se passe comment',
+  'tu peux m expliquer', 'tu connais', 'tu sais', 'j ai besoin de savoir',
+  'j ai une question', 'je comprends pas', 'en gros c est quoi', 'en fait',
+  'j aimerais savoir', 'j aimerai savoir', 'svp expliquer', 'stp',
+  'je voudrais comprendre', 'donne moi des infos sur', 'infos sur', 'info sur',
+  'j ai pas compris', 'je capte pas', 'c est a dire',
+  // Practical / Scenario  
+  'que faire si', 'que faire en cas de', 'que faire quand', 'comment gerer',
+  'comment reagir', 'en cas de', 'si jamais', 'dans le cas ou',
+  'que se passe t il si', 'que se passe t il quand', 'qu arrive t il si',
+  'est ce que je peux', 'est ce que', 'est ce qu',
+  'ai je le droit de', 'a t on le droit de', 'peut on',
+  'faut il', 'est il necessaire de', 'est il obligatoire de',
+  // Darija / Arabic-influenced
+  'chnahya', 'chnou hya', 'ach hya', 'ach houwa', 'kifash ndir',
+  'wach momkin', 'wach nqder', 'baghi n3ref', 'bgit nfahem',
 ];
 
 const stripQuestionPrefixes = (text: string): string => {
@@ -3312,34 +3461,52 @@ Les revalorisations suivent généralement l'**augmentation du SNMG** et l'**inf
 };
 // ═══════════════════════════════════════════════════════════════
 
-const processQuery = (query: string, context?: ConversationContext): { text: string; relatedQuestions?: string[]; confidence: 'high' | 'medium' | 'low'; sources?: string[]; intentKey?: string; category?: string } => {
+const processQuery = (query: string, context?: ConversationContext): { text: string; relatedQuestions?: string[]; confidence: 'high' | 'medium' | 'low'; sources?: string[]; intentKey?: string; category?: string; keywords?: string[] } => {
   const normalizedQuery = normalizeText(query);
   const queryKeywords = extractMeaningfulKeywords(query);
   const queryNgrams = extractNgrams(normalizedQuery, 3);
+  const queryBigrams = extractNgrams(normalizedQuery, 2);
 
   // ─── 0. Greetings & thanks ───
   if (isGreeting(normalizedQuery)) {
     const greetings = [
-      `## 👋 Bienvenue !\n\nJe suis votre **assistant juridique expert** en sécurité sociale algérienne.\n\n### Je peux vous aider sur :\n- 🏥 **Accidents du travail** et maladies professionnelles (Loi 83-13)\n- 💊 **Assurances sociales** et prestations maladie (Loi 83-11)\n- ⚖️ **Contentieux** et procédures de recours (Loi 08-08)\n- 🧮 **Calculs** : Balthazard, rentes, taux utile, IPP sociale\n- 📋 **Procédures** : expertise, consolidation, révision\n- 👨‍⚕️ **Rôle du médecin conseil**\n\nPosez-moi votre question ou choisissez un sujet ci-dessous !`,
-      `## 👋 Salam !\n\nJe suis votre **expert en droit de la sécurité sociale algérienne**.\n\nJe maîtrise les lois **83-11**, **83-13**, **83-15**, **08-08** et le **Guide du médecin conseil 1995**.\n\n> 💡 Posez-moi n'importe quelle question sur les AT/MP, les prestations, les calculs de rentes, les procédures... Je suis là pour vous aider !`
+      `## 👋 Bienvenue, docteur !\n\nJe suis **Dr. Hacene**, votre assistant juridique spécialisé en **droit de la sécurité sociale algérienne**.\n\n### Posez-moi n'importe quelle question, par exemple :\n- *\"C'est quoi un accident de trajet ?\"*\n- *\"Comment contester un taux d'IPP ?\"*\n- *\"Calcule-moi une rente AT\"*\n- *\"Quel est le délai d'expertise ?\"*\n- *\"L'employeur n'a pas déclaré l'AT, que faire ?\"*\n\nJe maîtrise les lois **83-13**, **83-11**, **83-15**, **83-12**, **08-08**, le **Guide du médecin conseil 1995** et les **règles de calcul** (Balthazard, rentes, taux utile, etc.).\n\n> 💬 Vous pouvez me parler en **français**, en **langage courant**, ou même en **darija**. Je comprends tout !`,
+      `## 👋 Salam !\n\nJe suis votre **expert juridique** dédié à la sécurité sociale algérienne.\n\nPensez à moi comme un **confrère juriste** disponible 24h/24 : posez votre question comme vous le feriez à un collègue.\n\n### Mes domaines :\n- 🏥 AT/MP — accident du travail, maladie professionnelle\n- ⚖️ Contentieux — expertise, recours, tribunal\n- 💊 Prestations — IJ, rentes, soins, ALD\n- 🧮 Calculs — Balthazard, taux utile, IPP sociale\n- 👨‍⚕️ Médecin conseil — imputabilité, consolidation, contrôle\n\n> 💡 **${Object.keys(INTENTS).length}+ sujets** couverts • **5 textes de loi** intégrés`
     ];
     return {
       text: greetings[Math.floor(Math.random() * greetings.length)],
-      relatedQuestions: ["Définition de l'accident du travail ?", "Comment fonctionne la formule de Balthazard ?", "Calcul de l'indemnité journalière ?", "Procédure d'expertise médicale ?", "Quelles sont les ALD ?", "Les cotisations de sécurité sociale ?"],
+      relatedQuestions: ["Définition de l'accident du travail ?", "Comment fonctionne la formule de Balthazard ?", "Procédure d'expertise médicale ?", "Comment contester une décision CNAS ?", "Quelles sont les ALD ?", "Rôle du médecin conseil ?"],
       confidence: 'high'
     };
   }
 
   if (isThanks(normalizedQuery)) {
     return {
-      text: `## ✅ Je vous en prie !\n\nN'hésitez pas si vous avez d'autres questions. Je suis là pour vous aider sur tous les aspects de la **sécurité sociale algérienne**.`,
+      text: `## ✅ Je vous en prie, docteur !\n\nC'était un plaisir de vous aider. N'hésitez pas à revenir, je suis disponible à tout moment.\n\n> 💬 Vous pouvez enchaîner sur un autre sujet ou approfondir le précédent.`,
       relatedQuestions: context?.lastCategory === 'calcul'
-        ? ["La formule de Balthazard ?", "Comment calculer la rente ?", "Le taux utile ?"]
+        ? ["La formule de Balthazard ?", "Comment calculer la rente ?", "Le taux utile ?", "IPP sociale vs médicale ?"]
         : context?.lastCategory === 'procedure'
         ? ["Délais de contestation ?", "L'expertise contradictoire ?", "La feuille d'accident ?"]
+        : context?.lastCategory === 'recours'
+        ? ["Procédure d'expertise médicale ?", "Le recours préalable ?", "Délais de contestation ?"]
+        : context?.lastCategory === 'medecin'
+        ? ["Consolidation ?", "Imputabilité ?", "Contrôle médical ?"]
         : ["Définition accident du travail ?", "Les prestations en nature ?", "Rôle du médecin conseil ?"],
       confidence: 'high'
     };
+  }
+
+  // ─── 0.4. Follow-up detection: use previous context to enrich short queries ───
+  let enrichedQuery = normalizedQuery;
+  let enrichedKeywords = [...queryKeywords];
+  if (context && context.turnCount > 0 && isFollowUp(normalizedQuery) && context.lastKeywords?.length) {
+    // Merge previous keywords with current for better matching
+    enrichedKeywords = [...new Set([...queryKeywords, ...context.lastKeywords])];
+    enrichedQuery = normalizedQuery + ' ' + (context.lastKeywords || []).join(' ');
+  }
+  // Short queries (1-2 words) in context → assume follow-up
+  if (context && context.turnCount > 0 && queryKeywords.length <= 2 && queryKeywords.length > 0 && context.lastKeywords?.length) {
+    enrichedKeywords = [...new Set([...queryKeywords, ...context.lastKeywords])];
   }
 
   // ─── 0.5. Law reference detection ("expliquer la loi 83-13", "c'est quoi la 08-08") ───
@@ -3352,7 +3519,8 @@ const processQuery = (query: string, context?: ConversationContext): { text: str
       confidence: 'high',
       sources: [],
       intentKey: lawRef,
-      category: intent.category
+      category: intent.category,
+      keywords: queryKeywords
     };
   }
 
@@ -3366,20 +3534,30 @@ const processQuery = (query: string, context?: ConversationContext): { text: str
     const articleContent = findArticle(lawId, articleNum);
     if (articleContent) {
       const lawTitle = legalTexts.find(l => l.id === lawId)?.title || '';
+      // Find related intents that reference this article
+      const relatedIntents = Object.entries(INTENTS).filter(([, intent]) => 
+        (intent.article === articleNum && intent.law === lawId) ||
+        (intent.articles?.includes(articleNum) && intent.law === lawId)
+      );
+      const relatedQuestions = relatedIntents.length > 0
+        ? relatedIntents.slice(0, 2).map(([, i]) => i.relatedQuestions?.[0]).filter(Boolean) as string[]
+        : [];
       return {
-        text: `Voici le contenu de l'**Article ${articleNum}** de la **${lawTitle}** :\n\n> ${articleContent}`,
-        relatedQuestions: [`Article ${articleNum + 1} de la même loi ?`, `Article ${Math.max(1, articleNum - 1)} de la même loi ?`],
+        text: `## 📜 Article ${articleNum} — ${lawTitle}\n\n> ${articleContent}\n\n---\n*💡 **En pratique** : Cet article fait partie du cadre légal de la sécurité sociale algérienne. Pour une explication simplifiée, demandez-moi le contexte (ex: \"explique-moi l'article ${articleNum}\").*`,
+        relatedQuestions: [`Article ${articleNum + 1} de la même loi ?`, `Article ${Math.max(1, articleNum - 1)} de la même loi ?`, ...relatedQuestions],
         confidence: 'high',
-        sources: [lawTitle]
+        sources: [lawTitle],
+        keywords: queryKeywords
       };
     }
   }
 
-  // ─── 2. Scored intent matching (enhanced with n-grams + prefix stripping) ───
+  // ─── 2. Scored intent matching (enhanced with n-grams + prefix stripping + follow-up context) ───
   const strippedQuery = stripQuestionPrefixes(normalizedQuery);
   const strippedKeywords = extractMeaningfulKeywords(strippedQuery);
-  const allKeywords = [...new Set([...queryKeywords, ...strippedKeywords])];
+  const allKeywords = [...new Set([...queryKeywords, ...strippedKeywords, ...enrichedKeywords])];
   const intentScores: { key: string; score: number; intent: IntentDef }[] = [];
+  const searchQuery = enrichedQuery || normalizedQuery;
 
   for (const [key, intent] of Object.entries(INTENTS)) {
     let score = 0;
@@ -3387,7 +3565,7 @@ const processQuery = (query: string, context?: ConversationContext): { text: str
     // Primary keywords: check against both original and stripped query (with fuzzy)
     const primaryMatches = intent.keywords.filter(kw => {
       const nkw = normalizeText(kw);
-      return normalizedQuery.includes(nkw) || strippedQuery.includes(nkw) || fuzzyIncludes(normalizedQuery, nkw);
+      return searchQuery.includes(nkw) || strippedQuery.includes(nkw) || fuzzyIncludes(searchQuery, nkw);
     });
     score += primaryMatches.length * 3;
     
@@ -3484,43 +3662,132 @@ const processQuery = (query: string, context?: ConversationContext): { text: str
       }
     }
 
-    return { text, relatedQuestions: intent.relatedQuestions, confidence, sources, intentKey: best.key, category: intent.category };
+    // Add cross-references to related intents (suggest broader context)
+    const crossRefs: string[] = [];
+    if (intent.law) {
+      // Find other intents in the same law
+      const siblingIntents = Object.entries(INTENTS)
+        .filter(([k, i]) => k !== best.key && i.law === intent.law && i.summary)
+        .slice(0, 2);
+      siblingIntents.forEach(([, si]) => {
+        if (si.relatedQuestions?.[0] && !intent.relatedQuestions?.includes(si.relatedQuestions[0])) {
+          crossRefs.push(si.relatedQuestions[0]);
+        }
+      });
+    }
+    const finalRelated = [...(intent.relatedQuestions || []), ...crossRefs].slice(0, 6);
+
+    return { text, relatedQuestions: finalRelated, confidence, sources, intentKey: best.key, category: intent.category, keywords: allKeywords };
   }
 
-  // ─── 3. Nomenclature / calculation search ───
+  // ─── 3. Nomenclature / calculation search (expert-style) ───
   const nomenResults = searchNomenclature(query);
   if (nomenResults.length > 0) {
-    const nomenTexts = nomenResults.slice(0, 3).map(r =>
-      `### 🧮 ${r.rule}\n*${r.article}*\n\n${r.description}\n\n**Formule** : \`${r.formula}\`\n\n${r.variables?.length ? `**Variables** : ${r.variables.map(v => `\`${v.name}\` = ${v.description}`).join(', ')}` : ''}${r.example ? `\n\n**Exemple** : ${r.example}` : ''}`
-    ).join('\n\n---\n\n');
+    const nomenTexts = nomenResults.slice(0, 3).map(r => {
+      let block = `### 🧮 ${r.rule}\n*Référence : ${r.article}*\n\n${r.description}`;
+      if (r.formula) block += `\n\n**Formule applicable** :\n\`\`\`\n${r.formula}\n\`\`\``;
+      if (r.variables?.length) {
+        block += `\n\n**Variables** :\n${r.variables.map(v => `- \`${v.name}\` — ${v.description}`).join('\n')}`;
+      }
+      if (r.example) block += `\n\n**💡 Exemple concret** : ${r.example}`;
+      return block;
+    }).join('\n\n---\n\n');
+
+    // Contextual related questions based on what was found
+    const nomenRelated: string[] = [];
+    const ruleNames = nomenResults.map(r => (r.rule || '').toLowerCase());
+    if (ruleNames.some(n => n.includes('balthazard'))) nomenRelated.push("Comment appliquer Balthazard à 3 infirmités ?");
+    if (ruleNames.some(n => n.includes('rente'))) nomenRelated.push("Quel est le salaire de référence pour la rente ?");
+    if (ruleNames.some(n => n.includes('taux'))) nomenRelated.push("La différence entre taux médical et taux utile ?");
+    // Always add general calculation questions
+    nomenRelated.push("Comment calculer l'IPP ?", "Les majorations pour tierce personne ?", "Formule de la rente AT ?");
 
     return {
-      text: `## 🧮 Résultats de la nomenclature :\n\n${nomenTexts}`,
-      relatedQuestions: ["Comment fonctionne la formule de Balthazard ?", "Le taux utile, c'est quoi ?", "Comment sont calculées les rentes ?"],
+      text: `## 🧮 Règles de calcul trouvées\n\nVoici **${nomenResults.length} règle(s)** correspondant à votre recherche :\n\n${nomenTexts}\n\n---\n> 💡 *N'hésitez pas à me demander un exemple chiffré ou des précisions sur une formule.*`,
+      relatedQuestions: [...new Set(nomenRelated)].slice(0, 5),
       confidence: 'medium',
       sources: ['Nomenclature / Barème'],
-      category: 'calcul'
+      category: 'calcul',
+      keywords: allKeywords
     };
   }
 
-  // ─── 4. Fallback: fuzzy search across legal texts ───
-  if (queryKeywords.length > 0) {
-    const results = searchLegalTexts(queryKeywords);
-    if (results.length > 0) {
-      const topResults = results.slice(0, 3);
-      const snippets = topResults.map((r, i) => `**${i + 1}.** *(${r.source})* ${r.snippet}`).join('\n\n');
-      const sources = [...new Set(topResults.map(r => r.source))];
+  // ─── 4. Fallback: enhanced fuzzy search across legal texts ───
+  // Try with original keywords first, then with enriched keywords, then with synonym-expanded
+  const searchVariants = [queryKeywords, allKeywords, expandQueryWithSynonyms(allKeywords)];
+  let bestResults: { snippet: string; source: string; articleNum: string; score: number }[] = [];
 
-      return {
-        text: `J'ai trouvé **${results.length} résultat(s)** dans les textes de loi :\n\n${snippets}${results.length > 3 ? `\n\n*...et ${results.length - 3} autre(s) résultat(s). Affinez votre question pour plus de précision.*` : ''}`,
-        relatedQuestions: ["Précisez votre question", "Demandez un article spécifique"],
-        confidence: 'low',
-        sources
-      };
+  for (const kwSet of searchVariants) {
+    if (kwSet.length === 0) continue;
+    const results = searchLegalTexts(kwSet);
+    if (results.length > bestResults.length || (results.length > 0 && results[0].score > (bestResults[0]?.score || 0))) {
+      bestResults = results;
+    }
+    if (bestResults.length >= 3) break; // Good enough
+  }
+
+  if (bestResults.length > 0) {
+    const topResults = bestResults.slice(0, 3);
+    const snippets = topResults.map((r, i) => {
+      return `### ${i + 1}. ${r.articleNum} — *${r.source}*\n\n> ${r.snippet}`;
+    }).join('\n\n---\n\n');
+    const sources = [...new Set(topResults.map(r => r.source))];
+
+    // Try to detect what category this might be for better related questions
+    const snippetText = topResults.map(r => r.snippet).join(' ').toLowerCase();
+    const fallbackRelated: string[] = [];
+    if (snippetText.includes('indemnit') || snippetText.includes('rente') || snippetText.includes('prestati'))
+      fallbackRelated.push("Quelles sont les prestations en nature ?", "Comment est calculée la rente ?");
+    if (snippetText.includes('expert') || snippetText.includes('contestat') || snippetText.includes('recours'))
+      fallbackRelated.push("Comment contester une décision ?", "L'expertise contradictoire ?");
+    if (snippetText.includes('accident') || snippetText.includes('travail'))
+      fallbackRelated.push("Définition de l'accident du travail ?", "La déclaration de l'AT ?");
+    if (snippetText.includes('maladie') || snippetText.includes('professionnel'))
+      fallbackRelated.push("C'est quoi une maladie professionnelle ?", "Le tableau des maladies professionnelles ?");
+    fallbackRelated.push("Précisez votre question", "Demandez un article spécifique");
+
+    return {
+      text: `## 📖 Extraits pertinents des textes de loi\n\nJ'ai trouvé **${bestResults.length} passage(s)** en rapport avec votre question :\n\n${snippets}${bestResults.length > 3 ? `\n\n---\n*📌 ${bestResults.length - 3} autre(s) résultat(s) disponibles — reformulez ou précisez pour affiner.*` : ''}\n\n---\n> 💡 *Pour une réponse plus ciblée, essayez de mentionner un numéro d'article ou un concept juridique précis.*`,
+      relatedQuestions: [...new Set(fallbackRelated)].slice(0, 5),
+      confidence: 'low',
+      sources,
+      keywords: allKeywords
+    };
+  }
+
+  // ─── 4b. Last resort: try SCENARIO_PATTERNS to guide ───
+  for (const sp of SCENARIO_PATTERNS) {
+    if (sp.pattern.test(normalizedQuery)) {
+      // Found a scenario pattern — suggest relevant categories
+      const scenarioIntents = Object.entries(INTENTS)
+        .filter(([, i]) => sp.categories.includes(i.category))
+        .slice(0, 4);
+      if (scenarioIntents.length > 0) {
+        const suggestions = scenarioIntents
+          .map(([, i]) => i.relatedQuestions?.[0] || i.summary?.substring(0, 80))
+          .filter(Boolean) as string[];
+        return {
+          text: `## 🤔 Je comprends votre question\n\nVotre demande concerne ${sp.categories.map(c => `**${c}**`).join(' / ')}. Voici ce que je peux vous proposer :\n\n${suggestions.map((s, i) => `${i + 1}. *"${s}"*`).join('\n')}\n\n> 💬 Cliquez sur une suggestion ci-dessous ou reformulez avec plus de détails.`,
+          relatedQuestions: suggestions.slice(0, 5),
+          confidence: 'low',
+          keywords: allKeywords
+        };
+      }
     }
   }
 
-  // ─── 5. No results — smart helpful fallback ───
+  // ─── 5. No results — intelligent helpful fallback ───
+  // Detect likely category from query words for a targeted response
+  const queryLower = normalizedQuery;
+  let hintCategory = '';
+  if (/accident|travail|at\b|chute|trajet/.test(queryLower)) hintCategory = 'AT/MP';
+  else if (/maladie|profession|mp\b|tableau/.test(queryLower)) hintCategory = 'AT/MP';
+  else if (/rente|indemnit|ij\b|prestat|soin|prothes/.test(queryLower)) hintCategory = 'Prestations';
+  else if (/expert|recours|contest|refus|tribunal|litiges/.test(queryLower)) hintCategory = 'Contentieux';
+  else if (/calcul|taux|formul|balthazard|ipp\b|bareme/.test(queryLower)) hintCategory = 'Calculs';
+  else if (/medecin|consolid|controle|imputab|avis/.test(queryLower)) hintCategory = 'Médecin conseil';
+  else if (/delai|declarat|prescri|feuill|procedur|dossier/.test(queryLower)) hintCategory = 'Procédures';
+
   const suggestedCategories = [
     { emoji: '🏥', label: 'AT/MP', examples: ['accident du travail', 'maladie professionnelle', 'rechute'] },
     { emoji: '💊', label: 'Prestations', examples: ['indemnité journalière', 'rente', 'soins'] },
@@ -3529,20 +3796,56 @@ const processQuery = (query: string, context?: ConversationContext): { text: str
     { emoji: '👨‍⚕️', label: 'Médecin conseil', examples: ['consolidation', 'contrôle', 'imputabilité'] },
     { emoji: '📋', label: 'Procédures', examples: ['déclaration', 'prescription', 'feuille accident'] },
   ];
+
+  // If we detected a hint, prioritize that category at the top
+  if (hintCategory) {
+    const hintCat = suggestedCategories.find(c => c.label === hintCategory);
+    if (hintCat) {
+      // Find relevant intents for this category
+      const catIntents = Object.entries(INTENTS)
+        .filter(([, i]) => {
+          const catMap: Record<string, string[]> = {
+            'AT/MP': ['general', 'droits'],
+            'Prestations': ['calcul', 'droits'],
+            'Contentieux': ['recours'],
+            'Calculs': ['calcul'],
+            'Médecin conseil': ['medecin'],
+            'Procédures': ['procedure', 'pratique'],
+          };
+          return (catMap[hintCategory] || []).includes(i.category);
+        })
+        .slice(0, 5)
+        .map(([, i]) => i.relatedQuestions?.[0])
+        .filter(Boolean) as string[];
+
+      return {
+        text: `## 🔍 Je n'ai pas trouvé de réponse exacte pour *"${query}"*\n\nMais il semble que votre question porte sur **${hintCat.emoji} ${hintCat.label}**. Essayez une de ces formulations :\n\n${catIntents.map((q, i) => `${i + 1}. *"${q}"*`).join('\n')}\n\n---\n> 💡 *Vous pouvez aussi demander un **article spécifique** (ex: "Article 6 de la loi 83-13") ou consulter les **textes intégraux** dans le 2e onglet.*`,
+        relatedQuestions: catIntents.slice(0, 5),
+        confidence: 'low',
+        keywords: allKeywords
+      };
+    }
+  }
+
+  // Fully generic fallback
   const catList = suggestedCategories.map(c => `- ${c.emoji} **${c.label}** : ${c.examples.map(e => `"${e}"`).join(', ')}`).join('\n');
 
   return {
-    text: `Je n'ai pas trouvé de réponse précise pour *"${query}"*.
+    text: `## 🔍 Je n'ai pas trouvé de réponse précise pour *"${query}"*
 
-### 💡 Essayez avec ces thèmes :
+Pas de panique ! Voici comment je peux vous aider :
+
+### 💡 Thèmes disponibles :
 ${catList}
 
-### 📚 Vous pouvez aussi :
-- Demander un **article spécifique** (ex: "Article 42 de la loi 83-13")
-- Consulter les **textes intégraux** dans le 2e onglet
-- Choisir une des **suggestions** ci-dessous`,
+### 📚 Astuces :
+- Demandez un **article spécifique** (ex: "Article 42 de la loi 83-13")
+- Utilisez des **mots-clés** simples : "rente", "IPP", "rechute", "consolidation"
+- Consultez les **textes intégraux** dans le 2e onglet
+- Posez votre question en **darija** si vous préférez (ex: "wech hiya hadtha lkhidma")`,
     relatedQuestions: ["Définition accident du travail ?", "Procédure d'expertise médicale ?", "Comment est fixé le taux d'IPP ?", "Comment gérer une rechute ?", "La formule de Balthazard ?", "Quelles sont les ALD ?"],
-    confidence: 'low'
+    confidence: 'low',
+    keywords: allKeywords
   };
 };
 
@@ -3853,13 +4156,16 @@ Posez votre question ou choisissez une suggestion ci-dessous.`,
             setMessages(prev => [...prev, newMsg]);
             setIsLoading(false);
 
-            // Update conversation context with intent tracking
+            // Update conversation context with intent tracking + keywords for follow-up
             setConversationContext(prev => ({
                 topics: [...prev.topics, currentQuery].slice(-5),
                 turnCount: prev.turnCount + 1,
                 lastLawId: result.sources?.length ? undefined : prev.lastLawId,
                 lastIntentKey: result.intentKey || prev.lastIntentKey,
-                lastCategory: result.category || prev.lastCategory
+                lastCategory: result.category || prev.lastCategory,
+                lastKeywords: result.keywords?.length ? result.keywords : prev.lastKeywords,
+                lastEntityType: result.category || prev.lastEntityType,
+                pendingClarification: result.confidence === 'low'
             }));
         }, 400 + Math.random() * 400);
     }, [input, conversationContext]);
@@ -3877,7 +4183,7 @@ Posez votre question ou choisissez une suggestion ci-dessous.`,
             text: `## 🏛️ Assistant Juridique — Guide du Médecin Conseil\n\nConversation réinitialisée. Posez votre question ou choisissez une suggestion.`,
             confidence: 'high'
         }]);
-        setConversationContext({ topics: [], turnCount: 0, lastIntentKey: undefined, lastCategory: undefined });
+        setConversationContext({ topics: [], turnCount: 0, lastIntentKey: undefined, lastCategory: undefined, lastKeywords: undefined, lastEntityType: undefined, pendingClarification: false });
         setShowAllSuggestions(true);
     };
     

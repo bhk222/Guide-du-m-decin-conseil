@@ -1,0 +1,23 @@
+[
+  {
+    "code": "0022/2",
+    "desc": "Diaphyse. extrémité supérieure ou supra-condylienne de l'extrémité.",
+    "lettre": null,
+    "coef": null,
+    "line": 1065
+  },
+  {
+    "code": "0049/2",
+    "desc": "Pour les actes chirurgicaux nécessités par lE: traitement des lésions des viscéres.",
+    "lettre": null,
+    "coef": null,
+    "line": 1156
+  },
+  {
+    "code": "0545/2",
+    "desc": "Les suivants, sur la même appareil \"...,.. 5 E",
+    "lettre": null,
+    "coef": null,
+    "line": 2390
+  }
+]

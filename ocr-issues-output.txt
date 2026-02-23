@@ -1,0 +1,1093 @@
+Total acts: 1856
+Acts with possible issues: 1176
+
+Issue types:
+  double_punct: 893
+  multiple_dots: 697
+  special_chars: 492
+  trailing_number: 284
+  tilde: 107
+  trailing_code: 27
+  double_colons: 18
+  caps_accent: 18
+
+=== ALL LIBELLES (sorted by code) ===
+0002 | OCR | Bras, ├⌐paule. rachis. hanche, cuisse, genou, tibia ou les deux oa de jambe . ΓÇó
+0003 | DOTS | Main, stylo├»des radiale au cubitale... '"..
+0005 | OCR,NOACCENT | Fracture des deux os de l'avant-bra ou fracture de J'un et luxation de l'autre .ΓÇóΓÇóΓÇóΓÇó.ΓÇóΓÇó
+0006 | DOTS | Hum├⌐rus...,..
+0007 | DOTS,NOACCENT | Clavicule...,.... \
+0008 | DOTS,OCR,NOACCENT | Omoplate....,....,..ΓÇó.,,.. '...,..
+0010 | DOTS | Astragale-calcan├⌐um...,
+0011 | DOTS | Une mall├⌐ole...,...,,. ".
+0012 | DOTS | Deux mall├⌐oles... '
+0013 | DOTS | Jambe...,..,
+0014 | DOTS,OCR | Rotule... ΓÇó ΓÇó..
+0016 | DOTS,NOACCENT | Rachis....,.. "...,
+0017 | NOACCENT | Fractures articulaires de la hanche,..
+0018 | NOACCENT | Autres fractures du bassin
+0022/1 | NOACCENT | Fracture parcellaire extra-articulaire
+0028/2 | DOTS | Fractures des extr├⌐mit├⌐s sup├⌐rieures ou inf├⌐rieures... " 150
+0029/1 | DOTS,NOACCENT | Fractures parcellaires... "
+0029/2 | DOTS | Fractures du rebord cotylo├»dien... 120
+0030 | DOTS | Fractures transcotylo├»diennes...;.. 150
+0040 | DOTS,NOACCENT | Carpe, poignet, cou-de-pied... 60
+0041 | DOTS | Coude, ├⌐paule, rotule, genou... 80
+0042 | DOTS,COLON | Hanche.... -::
+0043 | DOTS,NOACCENT | Bassin (disjonction pubienne)...:.... 80
+0051 | DOTS | / 3 Surface sup├⌐rieure ├á 20%... 60
+0051/2 | OCR,NOACCENT | Surface entre 10 et 20%.. 0 ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó ΓÇóΓÇó
+0052 | DOTS,COLON | Extraction de corps ├⌐tranger::> profonds des parties molles... 20.. "/0
+0053 | DOTS,OCR | Imp├⌐denc├⌐m├⌐trie des tissus...,,..,.,.,.., ΓÇóΓÇó ". ".
+0056/1 | DOTS | Pour les cinq premi├¿res.,,,,.,.. _____. _. _.... _.. _
+0056/2 | OCR,TRAIL,NOACCENT | Pour les suivantes ,. ,., ., ΓÇó.ΓÇóΓÇóΓÇó , , , , , , , 5 E
+0057 | OCR,TRAIL | Traitement d'hyposensibilisation sp├⌐cifique comportant injection d'un ou plusieurs allerg├¿nes par s├⌐rie d'un maximum de 
+0060 | DOTS | Inventaires allergologique comportant des tests cutan├⌐s effectu├⌐s en injection intradermiqdes avec compte rendu (maximum
+0061 | OCR | Hyposenslbllls8tion sp├⌐cifique pratiqu├⌐e ├á J'aide du vaccin CoCoB 0 0 ΓÇó 0 0 0 ΓÇó 0 0 0 0 o. 0 0 ΓÇóΓÇó 0 ΓÇóΓÇóΓÇó 0.0.00. 0 0 0 0 
+0062-2 | OCR | Les m├¬mes implants SOLIS une muqueuse ' 0 0 ΓÇóΓÇóΓÇó 0 0 ΓÇóΓÇó
+0062/1 | OCR,NOACCENT | Incll,lsion ou implant de pastilles d'hormones amniotiques ou placentaires sous la peau 00. o. 0 ., 000. o 000.0 ΓÇóΓÇó 0 ΓÇóΓÇó
+0062/2 | DOTS,OCR | Les m├¬mes implants SOLIS une muqueuse.. '.. 0... 0 ΓÇóΓÇóΓÇó 0 0 ΓÇóΓÇó
+0065/2 | OCR | Si ce dernier pr├⌐l├¿vement est effectu├⌐ sur les parties d├⌐couvertes des la t├¬te, du cou ou d├¿s mains o. 00.0.0000. 00000 
+0066 | DOTS,OCR | Suture secondaire d'une plaie apr├¿s avivement 00.00.0. 0 ΓÇó o... 0 0 0
+0067-4 | OCR | Au dessus de 200 cm2 par multlple's de 200 cm2 en suppl├⌐ment.ΓÇó o
+0067/1 | DOTS,NOACCENT | Au dessous de 10 cm2 0.0... 0 0 0.0.. 00.00000.. o.
+0067/2 | DOTS,OCR | De 10 cm2 ├á 50 cm2 '. 0 0 ΓÇó 0 ΓÇóΓÇóΓÇó 0... 0 0 0 0 0 0.... 0.. 0..; ΓÇóΓÇó 0 ΓÇó
+0067/4 | OCR | Au dessus de 200 cm2 par multlple's de 200 cm2 en suppl├⌐ment.ΓÇó o. 20
+0068 | OCR,NOACCENT | excision d'une cicatrice vicieuse suivie d,e suture.. 0 ΓÇóΓÇóΓÇóΓÇó 0 0 ΓÇó 0 ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó ΓÇóΓÇó
+0069 | OCR,NOACCENT | Exci~on des hygromas
+0070 | DOTS,OCR,NOACCENT | Excision d'un anthrax....,,'...,'.. 0.. 0 ΓÇóΓÇóΓÇó 0 0 ΓÇó 0.. 0 ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó
+0071 | OCR | Ponction d'abc├⌐s ou de ganglion.ΓÇó ".".ΓÇóΓÇóΓÇó,..ΓÇó.,,, ",,.,.ΓÇó,..,..,,
+0075 | OCR | Autoplastie par rotation ou par glissement (y compris le recouvrement de la r├⌐gion donneuse) , " , "." '. ' .ΓÇó
+0076/2 | NOACCENT | 0076/3 1ar temps Les autres
+0077 | OCR | /1 Autoplastie par lambeau uni p├⌐dicul├⌐ ├á distance (les deux temps y, compris le recou∩┐╛vrement de la r├⌐gion donneuse et 
+0080 | OCR | Ablation d'une tumeur cutan├⌐e. suivie de fermeture par autoplastie locale ou par greffe , 50 Nota Pour la chirurgie plas
+0086 | DOTS,TRAIL,NOACCENT | Ablation d'angiome ou delymp.hanglome volumineux... 40 E
+0087 | DOTS | Extirpation d'un an├⌐vrisme clrsolde...;... _ 80
+0089/1 | DOTS,OCR,NOACCENT | Unique... ΓÇó.. ΓÇó... ΓÇó. ΓÇó
+0090 | DOTS | /1 En une s├⌐a:1ce...,.,.. 1
+0091 | OCR | Destruction de condylomes acumin├⌐s avec entente pr├⌐alable au del├á de la 2e s├⌐ance , par s├⌐ance 10 Traitement des dermato
+0096/1 | DOTS | L├⌐sion de moins de 4 cm2...,
+0096/2 | OCR,TRAIL | L├⌐sion ┬╖ de 4 cm2 ou plus . 30 / - 31- ├Ö097/ 1 Application de rayons ultraviolets pour affection derm.tolo que par s├⌐anc
+0097/2 | TRAIL | Si l'├⌐tendue de l'affection n├⌐cessite deux ou ptu.ieura champs par s├⌐ance. la s├⌐ance . 3,5 E
+0098 | DOTS | Puvath├⌐rapie... '... '
+0099 | OCR | P04C~~ filiforme, par s├⌐ance
+0100/3 | OCR | Sur face, augmerter le co├⌐ffici.ent donn├⌐ par 1. surfl,\Ce de tatouage de .ΓÇó ΓÇóΓÇóΓÇóΓÇó ΓÇó .ΓÇó
+0102 | OCR,TRAIL | Le m├¬me traitement av.ec nettoyage de peau et mil8 ├á plat 8S collections ;uppur├⌐es ou kystiqu├¿s, par s├⌐ance : . , 15 E 0
+0104 | OCR,TRAIL | Tritament de la totalit├⌐ du vlJage effectu├⌐ en un" seure l├⌐ance soua art;:sth├⌐sie g├⌐n├⌐rale . . ΓÇóΓÇó. 1 ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó
+0106 | NOACCENT | Injection intra-musculairt:
+0111 | OCR | Extirpation d'un~ tumeur musculaire encapsul├⌐e
+0111 | DOTS | Ex├⌐r├¿se de kystes synoviaux.,...,
+0112/1 | NOACCENT | sans envahissement des vaisseaux et des nerfs
+0112/2 | NOACCENT | avec envahissement des vaisseaux.. et des nerfs
+0113 | DOTS,OCR | Traitement de hernie ou ├⌐ventration diaphragmatique ~r voie thora-. ci que ou thraco-abdominale.. '... 150
+0114/3 | NOACCENT | trois tendons ou plus . 60 '30
+0116 | OCR | Suppl├⌐ment pOL:!" examen pratiqu├⌐ au domicile d malade (en dehors de tout ├⌐tablissement de 01118) ΓÇóΓÇóΓÇó.ΓÇóΓÇó
+0118/3 | DOTS,NOACCENT | trois tendons 'et plus... 120
+0120 | NOACCENT | Ponction biopsie osseuse . S
+0123/2 | NOACCENT | autrec localisations
+0127/2 | DOTS | F├⌐mur... "... 150,
+0127/3 | DOTS,NOACCENT | Autres os...,...,... 120
+0130/2 | OCR,COLON,NOACCENT | Hanche . ΓÇó : ΓÇó , :: ;.: ,: : .:. ::' :: :. : io
+0131 | OCR | Synoviorth├¿se i ΓÇó , ; ; iO
+0132 | OCR,NOACCENT | Ponction ┬╖ articulaire au bistouri : toutes articulations lnfiltrations intra┬╖articulalres
+0134 | DOTS | Mobilisation sous an├⌐sth├¿sie g├⌐n├⌐rale...,..
+0135 | DOTS,NOACCENT | Arthroscopie...;..:;...,.,..
+0136-2 | COLON,NOACCENT | autres articulations; '::
+0136/2 | DOTS,COLON,NOACCENT | autres articulations..;.. '...::
+0137/1 | OCR,NOACCENT | un ou plu~ieurs dOI~t8 ou orteils..:..,
+0137/3 | DOTS | ├⌐paule, genou ├á l'exclusion de la m├⌐nlsectomle...,
+0139 | DOTS | Changement de bo├«tier...,...;..
+0141/1 | OCR,NOACCENT | Hanche., 0, 0, ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó 0, 0 0 ΓÇóΓÇóΓÇóΓÇó ΓÇó, ΓÇóΓÇóΓÇó ΓÇó 0 ΓÇó,, ΓÇó ΓÇóΓÇó ΓÇó ΓÇóΓÇó ΓÇó.. ΓÇóΓÇó ΓÇóΓÇóΓÇó ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó,,. 140
+0143/2 | OCR | d'une art├¿re carotide ΓÇóΓÇó ΓÇóΓÇó ΓÇóΓÇóΓÇó ΓÇó "..,. l
+0145 | DOTS | Aortographie par ponction percutan├⌐e.",.... _, " 1' "..;,;.. '. ',. ""'"
+0149/3 | OCR | 3" Portant sur les veines des deux membres inf├⌐rieurs ou des membres su∩┐╛p├⌐rieurs avec prise d'u minimum de six trac├⌐s et
+0151 | DOTS | Mesure de la pression veineuse p├⌐riph├⌐rique...,. _... __.
+0152 | DOTS | Mesure de r├⌐sistance capillaire.' -.... -.., ___. _.... _. _.. _
+0153 | DOTS,NOACCENT | Oscillographie.. _...:....;.. _... _.. _..
+0155 | DOTS,NOACCENT | Epreuve au bleu... __. _. _.. _., _.. _.. _.. _. _..
+0156 | DOTS | Pi├⌐zographje,... - _.. _ -... _... _. _
+0161 | OCR | i Recherche de trichomonas par examen direct extemporan├⌐ et coloration. ( voir 137) 11')12 Recherche de protozoaires et/
+0168 | OCR | Perfusion veirreuse au cou ou au thorax avec mise en p-lace d'un cath├⌐ter ├á demeure ΓÇó 10 / 0169 - 39 - Transfusion de sa
+0171 | OCR,NOACCENT | Exsanguino~transfusjon (minimum 4 1 itres c~ez l'adulte)
+0172/2 | DOTS,NOACCENT | 2"...,...,... '. _ 5Q'
+0172/3 | OCR | R├⌐tablissement de la continuit├⌐ art├⌐rielle ou veineuse, quelle que soit la technique. en coas de suppression d├⌐fil1itive
+0173/1 | DOTS,NOACCENT | 1┬░...:... '. -.. -..
+0174/1 | DOTS | 1┬░...:... '. 80
+0174/2 | DOTS | 2┬░...,
+0175/2 | DOTS,NOACCENT | 3┬░ Ainsi que les vaisseaux du cou...,... 150
+0180/1 | NOACCENT | Segmentaire.. 80
+0181 | OCR | Traitement par la m├⌐thode compressive de Van der Molen de l'├⌐l├⌐phan┬╖ tiasis ou du Iymphoed├¿me d'un membre. primitif ou s
+0183/1 | DOTS | Unilat├⌐ral... -... -... '..,..,.,.. 60
+0184 | OCR | Grand ├⌐videment jugulo-maxillaire. carotidien, sous-maxillaire et sus-ela- 0185/1 0185/2 viculaire en un temps . . : , 1
+0186 | OCR | Plasmaph├⌐r├¿se ' ' ΓÇó 1 ΓÇóΓÇó .ΓÇó ΓÇó , ΓÇó ΓÇóΓÇó ' , " "" ;, .ΓÇó , ,: 8O
+0187 | OCR | Cytoph├⌐r├¿se . , " , .'; ┬╖10 ├╣t88 Embolisatioo th├⌐rapeutique
+0195 | DOTS,NOACCENT | Suture nerveuse primitive... J. J
+0196 | DOTS,NOACCENT | Suture nerveuse t;6Colldaire... " 1 ".. 70
+0198 | DOTS,OCR | Greffe n├⌐rveuse en un ou deux t~mp8... 120
+0199 | DOTS,OCR | I-ib├⌐ratlon d'un nerf corrtprlm├⌐.. ΓÇó. ','... ΓÇó..
+0201 | NOACCENT | Sympathectomie dorso-Iombalre sus et sous.qiaphragmatlque t20 &0
+0202 | OCR | Op├⌐ration portant sur "e nert splanchnique, I ganglion aortico-rn8I' ou les nerfs du p├⌐dicure r├⌐nal .ΓÇóΓÇóΓÇóΓÇó.ΓÇóΓÇóΓÇóΓÇóΓÇóΓÇó 12060 N
+0204 | OCR | R├⌐tablissement de la sensibUit├⌐ par transplantation cutan├⌐e avec le p├⌐di∩┐╛cule vasculo-nerveux ΓÇóΓÇóΓÇó.ΓÇóΓÇó , 150 D 0),05 Therm
+0206 | OCR,NOACCENT | ~xpl oration et neurolyse du plexis brachial
+0207 | OCR | Ponction lombaire ou sous-occipitale avec ou sans ir jection m├⌐dicamenteuse, ~vec ou sans ├⌐preuve au manom├¿tr├¿ de Oueech
+0209 | DOTS,OCR,NOACCENT | Myelographie gazeuse, enc~phalo9raphie totale par voie lombaire.... 30
+0213 | OCR | EJectroenc├⌐phalogramrne, quel ' ql,J soit le nombre de cha'lnes de.J'apparil le temps pass├⌐, les proc├⌐d├⌐s ┬½d!activation┬╗
+0215 | OCR | Electroenc├⌐pHalogramme de plusieurs malades dans un ├⌐tablissement d├⌐pourvu d'appareillage E,E.G., pour chaque malade (fr
+0217 | DOTS | Examen. ├¿lectrocorticographique...,
+0218 | DOTS | Ec.hoenc├⌐phaloqramme... _'
+0220/1 | OCR | Examen ├⌐lectromyographique par oscilloacopie, phonie ou enregiatr. ment photographique ├á faible d├⌐finition , ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó
+0220/4 | NOACCENT | Mesures de vitesse de conduction sensitive 20 ,. / - 45
+0224 | DOTS,OCR | Trous de tr├⌐pans et ponction d'un abc├¿s ou d'un h├⌐matome intra-cr├ónien... ┬╖.┬╖┬╖┬╖ 80
+0226/2 | DOTS,NOACCENT | Avec greffe ou autoplastie..,... 80'
+0228 | NOACCENT | Embarrure osseuse
+0229 | DOTS,OCR | Traitement p~r volet d'un h├⌐matome extra-durai ou d'un hell.dlOrne sousdurai chronique...,.,...,.. '.... -... 120
+0231 | DOTS,NOACCENT | Mise en place d'un drainage ventriculaire externe... 40
+0232 | DOTS | Pinealomes, cranio-ph├⌐lryngiomes..chordoms s... 3001
+0234 | DOTS | Neurmomes de l'angle ponto-c├⌐r├⌐belleux... 3001
+0235 | DOTS,NOACCENT | Tu.meurs intra-vt:otriculaires..,.,... 3001
+0236 | DOTS | Tumeurs et abc├⌐s c├⌐r├⌐braux ├á "exclusion des pr├⌐c├⌐dents... 2001
+0237 | DOTS,NOACCENT | Tumeurs de l'hypophyse, quel qu'ensoit l'abord... 2001
+0237 | OCR | Cath├⌐t├⌐risme des voies lacrymales avec an├⌐sth├⌐sie r├⌐gionale.. 6298 Cath├⌐t├⌐risme des ' voies lacrymales a vecintubatioti 
+0238 | DOTS | Tumeurs de l'orbite par vole Intra-cr├ónienne... 2001
+0239 | DOTS,OCR | ~mpy├¿me sous-dural.ΓÇó..;... 120
+0240 | OCR | MiJlformations v~cu aires c├⌐r├⌐brales (an├⌐vrysme et angiomes).. 3001
+0241 | DOTS | H├⌐morragie ou h├⌐matome Intra-c├⌐r├⌐bral non traumatique... 2001
+0242 | OCR | igature Intra-cr├ónlenne de la carotide Interne pour an├⌐vrysme art├⌐riel o&.l"an├⌐vrysme carotido-cavemeux , ΓÇó . '" , 150 7
+0243 | DOTS,NOACCENT | Cranioplastie... 120
+0245 | NOACCENT | L┼ôotomie chimique ou physique.. 50
+0246 | DOTS,NOACCENT | lebotomle ou topectomle... 150
+0253 | DOTS,OCR | ' Section Intra-cr├ónienne du trljumeau. de l'acoustique ou du glosso-phar yngien... '.. '. ΓÇó ΓÇó ΓÇó ΓÇó... ΓÇó... 150
+0257 | DOTS | Angiographie fluoresc├⌐nique (clich├⌐s photographiqdes compris)...,. "
+0258 | DOTS | K├⌐ratom├⌐trie...,.,.... ".. '...,..,... 1
+0260 | OCR,NOACCENT | Trailement ch r~rg cal de l'entropion ou ectropion. du trichiasis.. 40
+0262 | OCR | Exploration chromatique centrale et┬╖ p├⌐riph├⌐rique
+0264 | OCR | Examen tonctionnel d├⌐taill├⌐ de la motilit├⌐ oculaire dans le strabisme et les h├⌐t├⌐rophobies ΓÇó. .ΓÇóΓÇó ΓÇó
+0265 | NOACCENT | examen sensori()-moteur dans le strabisme et l'amblyopie
+0267 | DOTS,NOACCENT | Epreuves de provocation dans le glaucome...:..
+0269 | TRAIL,NOACCENT | Courbe de tension (4 fois par jour pendant 5 jours) . 10 E
+0274 | DOTS | Potentiels ├⌐voqu├⌐s visuels... '....,... '
+0275 | NOACCENT | Electro oculogramme . 30 / /; .- 48
+0276 | DOTS | R├⌐fection palp├⌐brale totale. quelle que soit la technique... 60
+0282 | DOTS,OCR | Caut├⌐risations de granulations...,.,.. _.... ΓÇó
+0283 | NOACCENT | Expression de granulations trachomateuses.. '.',.. _.. "..
+0285 | OCR | L├⌐sions multiples. el' une ou plusieurs s├⌐ancl:s u~i ou bil:lt├⌐rale..
+0289 | OCR | Orbitotomie avec axtraction de corps ├⌐trangers ou de tumeurs (kystes dermo├»├┤e de l'orbite) . . .ΓÇó. 100 JO ", 090 Orbltot
+0291 | DOTS,NOACCENT | Tnutemcnt chirurgical du ptosis..:....'...:... 60
+0300 | DOTS,NOACCENT | A├ÄJ├Äation chirurgical du sac lacrymal... -.
+0301 | DOTS,NOACCENT | Oacryocystohinostomie ou lacodacrYostomie...,
+0310 | DOTS,NOACCENT | Ablation chirurgicale..,..,..,..,...,.
+0313 | DOTS,NOACCENT | Avec pelage...,...:..
+0316 | DOTS,OCR | Indentat~on limit├⌐e ├á un quadrant.,.... ΓÇó.,,'.,
+0317 | NOACCENT | Inaentation atteignant plus d'un quadrant
+0319 | NOACCENT | Vitrectomie et tamponnement interne allee ou sans indentation.. 180
+0320 | OCR | Traitement de la r├⌐tinite palissadique ou des d├⌐chirures sans d├⌐collement par photo-coagulation, cryo-appllcatlon ├öu dia
+0321 | OCR | Photo-coagulation des autres l├⌐sions de la r├⌐tine en une ou plusieurs s├⌐ances. quel que soit le nombre de s├⌐ances dans u
+0328 | DOTS | Greffe de la corn├⌐e... 120
+0329 | DOTS,NOACCENT | Pour un oeil... '
+0330 | DOTS,OCR,NOACCENT | Pour les deux yeux... ΓÇó
+0332 | OCR | Op├⌐latio~ de la cataracte quelle que soit la technique sans implant..
+0333 | DOTS | Op├⌐ration de la cataracte avec impla.├«l cri stalinien... 120
+0334 | OCR | Membr~nule├¿tOmie, iridotomie, iridectomie '. hernie de l'iris ou du vitr
+0336 | DOTS | Magn├⌐tique...,;. "
+0337 | DOTS | Non magn├⌐tique... '... 60
+0342 | NOACCENT | Iridectomie, cyclo-diathermie, cyclodialys
+0343 | NOACCENT | Traitement d'une paralysie oculo-motrice ou chirurgie du nystagmu
+0346 | DOTS | Sur oeil... 60
+0351 | TRAIL | Traitement des h├⌐t├⌐rophories et insuffisances de convergence, avec maxi∩┐╛mum de 12 s├⌐ances, sauf accord ave c le contr├┤le
+0354 | DOTS | Examen audiom├⌐trique tonal et voca!...:
+0356 | OCR | Audiom├⌐trie tO!lGl! liminaire av├¿c ├⌐tude de l'imp├⌐dance ├ácoustique et supraliminaire avec ├⌐tude de la sensation suivant 
+0357 | DOTS,NOACCENT | Examen labyrinthique... "...,.. 1
+0366 | OCR | ex├⌐r├⌐se d'une tumeur osseuse b├⌐nigne oblit├⌐rante du conduit auditif externe , ΓÇó
+0368 | DOTS,TRAIL | Chirurgie corrective bilat├⌐rale des oreilles... 60 E
+0372 | DOTS,OCR | Ablation d'une tumeur du conduit auditif par voie sus--p├⌐treuse sousmicroscope...;.. ΓÇó
+0374 | NOACCENT | Ablation d'un polype de l'oreille moyenne
+0375 | NOACCENT | Injection transtympanique. avec maximum de quatre.. '..
+0378 | DOTS,NOACCENT | Mastoidectomie... 8Q
+0379 | DOTS,OCR | Evidement p├⌐tro-masto├»dien...;...;..., 1 ~O
+0380 | NOACCENT | Exploration chirurgicale de l'oreille moyenne sous microscope,.. 80
+0381 | NOACCENT | Myringoplastie simple - , 80 30 f - 55
+0382 | DOTS | Mobilisation de l'├⌐trier... 80
+0383 | OCR | F├⌐nestration, tr├⌐(.ianation┬╖ Ibyrinthiqu e, platlnectomie totale 04 partielle reconstitutive
+0384 | DOTS,NOACCENT | Tympanoplastie (y compris le temps osseux)quella que soit la technique... 150
+0385 | DOTS | R├⌐section du rocher pour tumeur de J'oreille moyenne... 2001
+0387 | OCR | Rhinomanom├⌐trie ant├⌐rieur~ passive
+0388 | DOTS | Traitement du rhinophyma p'ar d├⌐cortication... 30
+0389 | DOTS,TRAIL,NOACCENT | Plastie narinaire... _...,.. 80 E
+0391 | TRAIL | Traitement e la rhinite atrophlque uni ou bilat├⌐rale par injection de substance plastique , 30 E
+0393 | NOACCENT | Rhinoplastie post-traumatique, y compris le traitement de la cloison
+0394 | TRAIL | Chirurgie r├⌐paratrice de la pyramide nasale avec greffe osseus├¿ ou cartilagineuse. non compris les temps de pr├⌐paration 
+0397 | OCR | H├⌐mostase nasale pour ┬╖ ├⌐pistaxfe
+0398 | OCR | Turbinectoml~ unilat├⌐rale..
+0399 | DOTS | R├⌐section de cr├¬te de cloison...,... 15
+0400 | OCR | R├⌐section ou reposition de la cloison.. ΓÇó ΓÇó ΓÇó. 60
+0406 | OCR,NOACCENT | Fermeture autoplastique d'une communication bucco-nasale ou bucc sinusale . ΓÇóΓÇóΓÇóΓÇóΓÇóΓÇóΓÇó
+0408 | OCR | Lavage de sinus .par ponction ou par la m├⌐thode deProetz-avecmaximulY' de 10 s├⌐ances ΓÇó
+0409 | OCR | Tr├⌐pan~ponction du sinus frontal
+0410 | OCR,NOACCENT | Traitement par drainage permanent et instillations par voie endo-nasale d'une sinusite maxilliaire"ΓÇó ΓÇó ΓÇó ΓÇó 30 ┬╖
+0411 | OCR | Traitement d'une l├⌐sion non maligne du sinus maxillaire, quelle qu'en soit l'origine par tr├⌐panation de la fosse ┬╖ canin
+0412 | OCR | Traitement chirurgical par┬╖ tr├⌐panation externe d'une atteinte infectieuse ou d'une l├⌐sion non maligne ├⌐thmo├»dG-frontale
+0414 | TRAIL | Traitement d'une pansinusit├⌐ unilat├⌐rale. quelle que soit la voie d'abord 120 E
+0415 | DOTS,NOACCENT | Traitement chirurgical d'une tumeur maligne des sinus... 180
+0424/3 | OCR | Div~sion v├⌐lopalatine.. -
+0424/4 | DOTS | Bec de li├¿vre avec division v├⌐Jopalatine... 120
+0427 | OCR | 1cision d'un abc├¿s de la langue ou du plancher de la bouche par voie buccale ΓÇóΓÇóΓÇó.ΓÇó.ΓÇóΓÇó
+0428 | DOTS | Excision et suture d'une bride fibreuse ou du frein hypertrophi├⌐.... "
+0429 | DOTS,NOACCENT | Glossectomie partielle corrective...,.. _..,..,, 60
+0430 | COLON | Incision d'un abc├¿s ou phlegmon de la base de la langue ou du plancher de la bouche par vole ::::.:hyoidienne
+0431 | NOACCENT | Excision par voie buccale d'un kyste du plancher de la bouche ,. 20 2S
+0434 | DOTS,OCR | 6.mygdalectomie isol├⌐e chez !'ei1f~ht _.. _.,,.. _.... ',.. _. _..
+0436 | OCR | Traitement des hemorragies amygdal iennes post-op├⌐ratoires chez l'adult ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó ΓÇóΓÇó ΓÇó ; ΓÇó ; ' ΓÇó ΓÇó ΓÇó
+0439 | OCR | Incision d'un phlegmon p├⌐ri┬╖amygdalion ou r├⌐tro-pharyngien
+0441 | OCR,NOACCENT | Pharyngoto;llie . ┬╖5 30 20 10 20 50 lpO
+0446/2 | DOTS,OCR | Ablation d'un calcul post├⌐rie~r par dissection compl├¿te du canal excr├⌐teur... ΓÇó ΓÇóΓÇó ΓÇó ΓÇó.ΓÇó -.. ΓÇó.. ΓÇóΓÇó '.; ΓÇóΓÇó. ΓÇóΓÇó ΓÇó ΓÇóΓÇóΓÇó ΓÇó ΓÇó
+0447 | DOTS | Traitement op├⌐ratoire d'une fistule salivaire.cutan├⌐e... 50
+0448 | OCR | Traitement chirurgical d'une l├⌐sion b├⌐nigne d'une glande salivaire autre que la parotide, : " " ', ,.' ". ' '.' '.' ΓÇó 5Q
+0449-1 | NOACCENT | Sans dissection du nerf facial
+0449/1 | DOTS,NOACCENT | Sans dissection du nerf facial... 80
+0449/2 | NOACCENT | Avec dissection du nerf facia
+0451 | DOTS,OCR | Ex├⌐r├⌐s~ d'une tumeur b├⌐nigne de la bouche... 15
+0455/1 | DOTS | Diatherm.:--coagulatlon d'une tumeur maligne de la cavit├⌐ buccale.... 50
+0456/2 | DOTS | R├⌐section avec curage ganglionnaire... 150
+0457 | NOACCENT | fibrome naso-pharvnaie
+0458 | NOACCENT | Pharyngectomie avec curage ganglionnaire jugulo-carotidien et sous-maxillaire
+0459 | DOTS,NOACCENT | Abi",tion d'un& glande salivaire autre que la parotide pour tu'inel.1r maligne... '"..,.'.. '.. " "... '....,'.... 80
+0462 | OCR | Traitement orthop├⌐dique d'une fracture compl├¿te sans d├⌐placement (appareillage compris) 60 2┬╖&
+0464/2 | DOTS | Avec d├⌐placement... '...;....,... 120
+0465 | OCR | Tt:.aitement d'une fracture compl├¿te et simultan├⌐s des ┬╖ deux maxillaires (apparillage compris)
+0468 | NOACCENT | Fracture du zygoma
+0469 | NOACCENT | Disjonction intermaxillaire rapid
+0482 | DOTS | Traitement orthop├⌐dique de luxation uni ou bilat├⌐rale r├⌐cente de la mandibu le.. a... 10
+0483 | OCR | Traitement des plaies, traitement op├⌐ratoires des l├⌐sions de l'articulation┬╖ tempuro-maxillaire, septiques ou aseptiques
+0484 | DOTS | m├⌐nisectomie uniiat├⌐rale., resection du la condyle..:... 80
+0485 | DOTS | R├⌐ductit.'1 sanglante de la luxation tamporo-maxillaire... 80
+0486 | OCR | Arthroplasti├⌐, traitement chirurgical d'une c├ánstriction permanente, par articulation. (endo-proth├¿se non comprise) ,.; 
+0489/1 | OCR | Par p├⌐riode de six mois.. ΓÇó..
+0489/2 | DOTS,OCR,NOACCENT | Avec plafond de...,.ΓÇó
+0491-1 | NOACCENT | D'une canine incluse
+0491/1 | NOACCENT | D'une canine incluse
+0491/2 | DOTS,NOACCENT | De deux canines incluses.... ' ".. '"..
+0493 | OCR | 1┬░ Cavit├⌐ simple, traitement global (l'obturation de plusieurs cavit├⌐s simples sur la m├¬me face ne 'peut ├¬tre compt├⌐e 'q
+0496/1 | OCR | Pulpoltlmie, pulpectomie coronaire, avec obturation de la chambre pulpaire (traite∩┐╛ment globl) ' , , " " , ΓÇó. i ΓÇó '7 10 
+0496/3 | OCR | Groupe pr├⌐molaires ' ; . 15 19 (1) ├ö496/4 Groupe molair:es ΓÇó , , 25 30 ( 1 )
+0502 | TRAIL | Proth├¿se attelle de contention quel que soit fa nombre de dents ou de crochets '" " "" 70 E
+0503 | NOACCENT | Amputation radiculaire
+0508 | DOTS | Extractions d'une dent incluse ou enclav├⌐e... 40
+0509 | DOTS,NOACCENT | Extraction d'une canine incluse... 50
+0510 | DOTS | Extraction d'une odonto├»de ou d'une dent surnum├⌐raire incluse, ou enclav├⌐e... 40
+0512 | DOTS,OCR | Extraction d'une dent en d├⌐sinclusion dont la couronne ast ~us-muqu use an posrtion palatine ou linguale...:.. c...:... 
+0514/1 | DOTS,TRAIL,NOACCENT | D'une dent..,..,....,.. 100 E
+0515-1 | NOACCENT | Pour dent de sagesse,, ' ":
+0515/1 | DOTS,NOACCENT | Pour dent de sagesse..,....,.. '... "...:.... 40
+0519/2 | OCR,TRAIL | Ef├¿ndue ├á la cr├¬te d'un nemlrrli'\xiHaire ou de canine ├á canine " 15 E 051 9/3'┬╖ Etendue ├á la totalit├⌐ da la cr├¬te . 30 
+0521 | DOTS | Kyste de petit volume par voie alv├⌐olaire ├⌐largie,....,.,
+0523 | DOTS | Kyste ├⌐tendu ├á un segment Important du maxillaire... 50
+0524 | DOTS,NOACCENT | Partielle.... '..
+0527 | OCR | Chirurgie parodontale ├á lambeaux d'~n quadrant
+0528 | DOTS,NOACCENT | Greffe gingivale.. '.'.. "...,.,
+0529 | DOTS,NOACCENT | Greffe osseuse...,..
+0530 | NOACCENT | Elongation coronaire
+0531 | OCR | Traitement d"une h├⌐morragie' post-op├⌐ratoire dans une s├⌐ance: autre que celle de 1 btervention 10 Art. 3 - Chirurgie pr├⌐
+0535/1 | DOTS,OCR | D'une ├á trois dents... '0 ΓÇó ΓÇóΓÇó ΓÇó ΓÇó ΓÇó ΓÇó
+0535/2 | NOACCENT | De quatre dents.. _
+0535/12 | OCR,NOACCENT | De quatorze dents ΓÇó
+0535/13 | TRAIL | Couronne ├á incrustation vestibulaire en r├⌐sine 55 60 65 70 75 80 85 50 E
+0535/14 | TRAIL | Couronne en richement en r├⌐sine : 60 E
+0535/15 | NOACCENT | M' d't" t' 1 " '11 20 Ise en con 1 Ion ISSU ane par maxi aire
+0539 | DOTS,OCR | Aesceilement d'une dent ├á tenon... 0 ΓÇóΓÇó 0 ΓÇó 0.. ΓÇó
+0543 | OCR,TRAIL | Dent proth├⌐tique contre-plaqu├⌐e ou massive soud├⌐e sur plaque m├⌐tallique de ba5e suppl├⌐ment 0 ΓÇóΓÇó ΓÇóΓÇó ΓÇóΓÇóΓÇó ΓÇóΓÇó ΓÇó '" 0 ΓÇóΓÇó 0 ΓÇóΓÇó
+0546 | OCR | Par ├⌐l├⌐ment '. ┬╖ 0 ΓÇóΓÇóΓÇóΓÇó ΓÇó ΓÇóΓÇó ΓÇóΓÇóΓÇóΓÇóΓÇó ΓÇó ΓÇó ΓÇóΓÇó ΓÇóΓÇóΓÇóΓÇóΓÇóΓÇóΓÇóΓÇóΓÇóΓÇóΓÇóΓÇóΓÇóΓÇóΓÇóΓÇóΓÇó ΓÇóΓÇóΓÇóΓÇóΓÇóΓÇóΓÇóΓÇóΓÇóΓÇóΓÇóΓÇó ΓÇó 0. 0 20 f
+0547 | TRAIL | R├⌐paration de fractures de la plaque base m├⌐tallicjuE;ls, non. compris,:s'il y a lieu, le 0548 d d t " 1 (. ). 1 1 remon
+0549 | OCR | Remp!acement de facette ou dent ├á tube , , 8 E ΓÇóΓÇó 0 oj ΓÇóΓÇóΓÇó 0 - 74 - CHAPiTRE VIII - PROTHESE RESTAURAtfnCE MAXILLO FACIA
+0550/1 | NOACCENT | Pour perforation palatine de moins de 1 Cm
+0550/3 | DOTS | - S'il s'agit d'une proth├¿se compl├⌐te...,
+0557/1 | NOACCENT | Sur une arcade..,
+0557/2 | DOTS | Sur d├¿ux arcades..:...,... _..
+0565 | OCR,NOACCENT | Incision.,,et drainage d'un ad~l.lophlogmon c,ervico-facial
+0566/2 | DOTS | SUIvi de la confection d'un appareil platr├⌐..;.... ".,...;..,
+0571 | DOTS,OCR,TRAIL,NOACCENT | E~luchage du larynx sous laryngoscopie en suspension... 50 E
+0572 | DOTS | Dilatation laryng├⌐e, par s├⌐ance...,
+0573 | DOTS | Cryoth├⌐rapie des papillomes endolaryng├⌐s... '
+0574 | DOTS,OCR | OlJverture d'une collection ando- ou p├⌐ri-laryng├⌐e par les voies naturelles..;,... '..;.. 0.. ΓÇó ΓÇó ΓÇó ΓÇó 1... '
+0576 | DOTS | Extraction d'un corps ├⌐tranger de l'hypopharynx ou du larynx:.... '
+0577 | DOTS | Tubage du larynx pour obturation laryng├⌐e...,.,..;
+0578 | DOTS,OCR | Traitement chirurgical par voie externe desst├⌐nose~ laryngo-trach├⌐ales et des paralysies laryng├⌐es...,... 150
+0579 | OCR | Thyrotomi~ 80
+0580 | OCR,NOACCENT | Laryngectomie partielle , , .ΓÇó. ' , .100
+0581 | DOTS,NOACCENT | Laryngectomie totale ou sus-glottique:.... -... >.. '.. 180
+0582 | DOTS,NOACCENT | Pharyngolaryngectomie avec curage ganglionnaire.. "... 2!)O
+0583 | OCR | Bilan fonctionnel de la phonation, y compris ├⌐ventuellement j'├⌐tude de la mobilit├⌐ pharyngolaryng├¬e, quels que soient la
+0584 | DOTS,OCR | Bilan phon├⌐tique du langage...,..,.. ΓÇó
+0585 | OCR | Examen d'aptitude ├á j'acquisition du langage oral ou ├⌐crit (une fois par anl, ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó J 12 20 
+0586/1 | OCR | Troubles d'articulation isol├⌐s chez les sujets ne pr├⌐sentant pas d'affection neuro∩┐╛logique, llar s├⌐ance '., ., : ΓÇó , : '
+0588 | OCR | H├⌐mithyro├»dectomle partj~"-
+0589 | DOTS,OCR | H├⌐mithyro┬╖ldectomie totale... 80
+0590/1 | DOTS | Thyro├»dectomie totale... 120
+0592 | NOACCENT | Aspiration transtracheale..,
+0594 | OCR | Intubation traeh├⌐o;.bronchique ┬╖ s├⌐lective ┬╖ pour une Interi.ention chirurgicale endotti. racique, en suppl├⌐ment
+0595 | DOTS,OCR | Trach├⌐otomie, trach├⌐ostomie, traitement chirurgical d'une plaie de la trach├⌐e... * ΓÇóΓÇóΓÇó.,... 50
+0596 | NOACCENT | Oesophagotomie, oesophagostomie, traitement chirurgical d'une fistule oesophagienne.. 80
+0596/1 | DOTS,OCR | Traitement ope~oire qu ~orticoliS par tenotomi├⌐ sous cutan├⌐e...;.
+0601/1 | DOTS | Sans greffon ni ost├⌐osynth├¿se... 150
+0603 | OCR | 1 raitement Cfllrurgical direct des anomalies de la charni├¿re cran jo-rachidienne compre∩┐╛nant les r├⌐sectionsosSeuses.l┬╖e
+0604 | DOTS | Traitement d'un spina bifida avec myelom├⌐ningoc├¿le. tumeur cong├⌐nitale sacrococCygienne.., _...:... 186.
+0606 | NOACCENT | Ablation d'une tumeur intra-durale, Intraou extra-rMdullalre ou d'une tumeur en sablier intra et extra-rachidienne
+0607 | DOTS | Ablation d'une tumeur g├⌐ante de la queue de cheval '"... 250
+0608 | DOTS | Ablation d'une malformation art├⌐rio-veineuse m├⌐dullaire... 3001
+0614 | DOTS,NOACCENT | kystes et fistules sacre-coccygiens...;.
+0616 | DOTS,OCR,NOACCENT | Extirpation d'un os du carpe... ~
+0618 | NOACCENT | Ablation de la clavicule
+0619 | DOTS,OCR,NOACCENT | Ablation de l'omoplate ΓÇó.. ΓÇó ΓÇó ΓÇó ΓÇó ~ ΓÇóΓÇó.1. ΓÇó ΓÇó.. ΓÇó.. ΓÇó.. ΓÇó... ΓÇó.. ΓÇó.. ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó 60
+0620 | DOTS,NOACCENT | Amputation inter-scapulo-thoracique... 150
+0621 | DOTS,NOACCENT | Traitement chirurgical du syndrome de Volkmann... '..:.
+0623 | NOACCENT | Ablation d'un ongle
+0624 | DOTS | Traitement chirurgical des l├⌐sions de la rate... 10Q
+0625 | OCR,NOACCENT | Excision d'un panaris 10 ┬╖
+0626 | DOTS,NOACCENT | Traitement chirurgical d'un.phlegmon profond de la main... 20. '.
+0627 | NOACCENT | Traitement chirurgical d'un phlegmon d'une ou plusieurs gaines digitales
+0628 | OCR | Tr├áltement chirurgical d'un phlegmon d'une ou plusieurs gaines. digito-carpienn(t' ! ΓÇó f ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó " ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó
+0630/1 | DOTS,NOACCENT | 1 doigt... '...:.... 60
+0630/2 | DOTS,NOACCENT | 2 doigts... '.,'..,... 80
+0630/3 | NOACCENT | 3 doigts ou plus
+0632/3 | DOTS,NOACCENT | 3 doigts ou plus... 150
+0633/3 | DOTS,NOACCENT | 3 doi]ts ou plus '... '...,..
+0634/3 | OCR,NOACCENT | 3 doigts ou plus . 120 30 ┬╖f - 84
+0635 | OCR | Doigt ├á re~scrt
+0638/3 | DOTS,NOACCENT | 3 ligaments ou plus... '... 70
+0639/1 | OCR | 1 articulation , 50' 0639/2 0639/3 0640/1 0640/2 0640/3 2 articulations ΓÇóΓÇóΓÇóΓÇóΓÇó O'O' , 0 , - 6├ö 25 3 articulations 70 30 A
+0641 | DOTS | Arthrod├¿se Inter-m├⌐tacarpienne,...,...;..:.. 60
+0642 | DOTS | Amputation ou d├⌐sartictJ!at.ion d'une phalange Ou d'un doigt...:..,
+0643/1 | DOTS | Traitement chirurgical des l├⌐sions palmaires ou digitales. apon├⌐vrotiqdes ou cutan├⌐es de la maladie de Dupuytren... 120
+0644/1 | DOTS,NOACCENT | Une commissure...,.. 80
+0644/2 | DOTS,NOACCENT | Deux comillissures...:..
+0645 | DOTS,OCR | Phal~n9isation d'un _m├⌐tacarpien... '... 80
+0646 | DOTS,NOACCENT | Pollicisation d'un dOigL... _.'... _... -:... 180
+0647 | NOACCENT | Transposition d'un doigt en dehors de la pollicisation . 100 O -- 86 - Actes portant sur le thorax Titre VU
+0648 | NOACCENT | Galactographie ;5
+0650 | DOTS,NOACCENT | Plastie d'un sein pour hypertrophie.. '.,.,. '.... '.,.'..
+0651 | NOACCENT | Ponction- biopsie 'du sein " ., ,' , ', " ' Hl
+0652 | DOTS | Ablation d'une tumeur b├⌐nigne du sein.,..,.. ' ".,...., ',,... '... '
+0653 | NOACCENT | Mastectomie simple
+0654-3 | OCR | M├¬me op├⌐ration avec curage sus-clavicu~aire. en suppi├⌐ment
+0654/1 | NOACCENT | Mastectomie avec curage ganglionnaire axillaire .' , ' ., , '. ' ".' 100 GO
+0654/3 | OCR | M├¬me op├⌐ration avec curage sus-clavicu~aire. en suppi├⌐men
+0659 | DOTS | R├⌐section tO!3le ou partielle de la premi├¿re c├┤te..;... 60
+0663 | OCR | Spirogr├⌐lphie compl├¿te avec ┬╖ mesures multiples de la capacit├⌐ vitale, du V.E.M.S, d├⌐termination du volume r├⌐siduel de l
+0670 | OCR | Mesure de la ventilation alv├⌐olaire et ├⌐tude des ├⌐changes pulmORaires par pr├⌐l├¿vement simultan├⌐ du gaz expir├⌐ et de sang
+0671 | DOTS,OCR | Oxym├⌐trie et capnim├⌐trie du 8ang art├⌐riel (ponctions et dosages compris)... ΓÇó... ΓÇó. ΓÇóΓÇó.. ΓÇó. ΓÇó ΓÇó
+0673/2 | OCR | 20 - par pl├⌐thysmographie de la ve!ltilation pulmonaire y compris mesure des volumes, des d├⌐bits, de la capacit├⌐ r├⌐sidue
+0681 | NOACCENT | Pleurotomie simple
+0683 | OCR | Pneumotomie, sp├⌐l├⌐otomie, en un ou ┬╖plusleurs temps
+0685 | DOTS,NOACCENT | Thoracolaparotomie... "... ' 120
+0689 | DOTS,NOACCENT | Ablation d'un segment ou d'un poumon..,... 150
+0690 | OCR | Ablation d'un oup!usieurs lobes ou de plusieurs segments dans des lobes ┬╖ diff├⌐rents
+0691 | OCR | Traitement en un temps par une seule voie d'abord de l├⌐sions dans les deux poumons ΓÇó.ΓÇó
+0692 | OCR | Traitement en un temps par une double voie d'abord de l├⌐sions dans ies deux ┬╖poumons
+0694 | DOTS,OCR | Pneumone~tomie ├⌐largie pour cancer. avec curage ganglionnaire ┬╖ m├⌐dias-.tinal... 250
+0696/2 | DOTS,NOACCENT | Avec biopsie...;... 40
+0699 | DOTS,NOACCENT | Bronchofibroscopie...,...:'.
+0699 | DOTS,OCR,NOACCENT | Bronchofibroscopie avec biopsie,...;.... 1. ΓÇó ΓÇó ΓÇó ΓÇó
+0702 | OCR | Extraction d'un corps ├⌐tranger oesophagien ou bronchique chez l'enfant de moins de 1!rt:l├Äs ans . < ΓÇó ΓÇó ΓÇó ΓÇóΓÇó
+0703 | DOTS | fraitement c:hinJrgical des l├⌐sions m├⌐diastinales... __. 150
+0706 | OCR | R├⌐section anastomose cie la tracn┬╖├⌐e avec mobilisation de la masse visc├⌐rale ando-thoraclque
+0712/2 | OCR,NOACCENT | Avec greffe 300 130 -. ┬╖f┬╖ 92
+0713 | NOACCENT | Gastroblopsle par sonr", il 8splro-section
+0717 | DOTS,NOACCENT | Epreuve d'effort sous E'.C.G... '..
+0718 | OCR | Enregistrement continu de l'E.C.G selon la m├⌐thode de Holter.. ΓÇó..
+0720 | OCR | E!ectrocardigramme et mesure des pressions intra-cardiaques QU intra-vasculaires pratiqu├⌐s au cours d'une intervention 5
+0731 | NOACCENT | ART. 4 - Autres examens-8rthodiagramme . i
+0733/1 | DOTS,OCR | P~r ├⌐quipe. par malade et par 24 heures..,.... '. "
+0733/2 | OCR | Choc ├⌐ictrique par d├⌐fibrilateur (quel qu'en soit le nombre au cours de 24 heures' " "" ; "." " '. ". , ΓÇó ,". 30 '} - 96
+0733/4 | OCR | Pose d'un micro-cath├⌐ter vitalre r P;ise. de .p,es.,.' ┬╖d├óns cavit├⌐s droites ΓÇó '" ' .ΓÇóΓÇó
+0734/1 | OCR | Cath├⌐t├⌐risme du cOWrdrolt avec lecture et enregistrement des sions des trac├⌐s ├⌐lectriques;, avec' OU' '.Sans lnjeetiOn. 
+0734/2 | OCR | Avec enregistrement dei sori, en suppl├⌐ment..:..ΓÇó ~;.. " ΓÇóΓÇó "." ΓÇóΓÇó.
+0735/1 | OCR | Cath├⌐trsrne du coeur gauche .vol.e art├⌐rieIJep├⌐6rtqueaYec 0135/2 0135/3 01J6 0737 0738 lecture et enregistrement ┬╖des :p
+0740/1 | NOACCENT | Avec prise et enregistrement de pression..,
+0740/2 | DOTS | Avec prise et enregistrement de pression et pr├⌐l├¿vem├¿nt d'├⌐chantillons sanguine pour dosage...,..,.,..,
+0741 | NOACCENT | Explorations electre-physiologiques endavitaire,s ., , '100 '30
+0742 | DOTS | Ponction du p├⌐ricarde...,..
+0745 | OCR | P├⌐ricardectomie.. ~-SO
+0746/1 | OCR | Mise en place d'un stimulateur ├⌐lectrosystolique avec ├⌐lectrode ├⌐plcar┬╖ dique
+0746/2 | DOTS,NOACCENT | Changement de boitier..,... 50
+0747 | DOTS | Tout├¿ intervention portant Sur un appareil valvulaire... 2001
+0748 | OCR | Toute intervention portant sur le myocarde. ouvrant ou non une ou plusieur cavit├⌐s du coeur 250 130 0149/1 Op├⌐rtion de "
+0751 | NOACCENT | Embolectomie pulmonaire
+0752/1 | OCR | Intervention portant sur un seul orlfi ce. une seul cavit├⌐ ou une seule art├¿re coronaire pour l├⌐sion aquise ou cong,├⌐nit
+0752/3 | DOTS | Pour une troisi├⌐me l├⌐sion, en suppl├⌐ment (par d├⌐rogation aux dispositionsg├⌐n├⌐rales Art. 12 B 1┬░).. L...:
+0752/5 | OCR | Suppl├⌐ment pour renforcement de l'├⌐q!lipe chirurgicale par ┬╖ un second chirurgien . .- ΓÇó
+0753 | DOTS | Pour l'├⌐quipe d'an├⌐sth├⌐sie-r├⌐animatlon.... globalement
+0760 | NOACCENT | Ponction de l'abdomen 11)
+0764 | DOTS,OCR,TRAIL | Lipectomie ant├⌐rieure.... "! ΓÇó ΓÇó. ΓÇó ΓÇó ΓÇó ΓÇó.. ΓÇó.. ΓÇó... 80 E
+0765 | DOTS,TRAIL | Upactomie totale cir├⌐ulaire... 100 E
+0766/1 | OCR | Sans r├⌐section' intestinale.. < ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó 60
+0772/1 | OCR,NOACCENT | Gastroscopie ΓÇó ┬╖30
+0774-1 | NOACCENT | Endofibroscopie oesogastro--duod.6.nale
+0774/1 | NOACCENT | Endofibroscopie oesogastro--duod.6.nale
+0775 | OCR | Endoflbroscople s├⌐lective avec cath├⌐t├⌐risme des voies biliaires. pancr├⌐- atiques ou les deux, avec ou sans biopsie, avec
+0776 | OCR | Biopsie du gr├¬le par sonde ├á asplro┬╖sectlon, y compris le contr├┤le radloscoplque
+0778/1 | DOTS | Avec clich├⌐ radIographique.... '"... _.
+0778/2 | NOACCENT | Avec biopsIe, en supph┬ºment
+0779 | DOTS,OCR,NOACCENT | Lavage d'eat~c,.. ' ΓÇó: ΓÇó ΓÇó..,,,.. ΓÇóΓÇó '..,.... t..
+0781 | OCR | Traitement d'une perforation d'ulceregas1tro' duod├⌐nat, par aspiration conti Aue, suivie ou non d1ntejventio, par jour' 
+0785 | NOACCENT | G<fs"trectomie totale : ' 200 11 G
+0790 | OCR,NOACCENT | rraltement chirurgical des. anomalies anatomiques ou ┬╖fonctionnelles de la jonction gastro-oesophagienne ou du diaphragm
+0794 | OCR | Plasties Intestinales ou m├⌐sent├⌐riques pour prevention ou traitement des occlusions. de gr├¬le, quelle que soit I techniq
+0796 | NOACCENT | Ablation de l'appendice
+0797 | DOTS,NOACCENT | Ablation du diverticule de Meckel.".,...,..,...,. 60
+0799 | DOTS,OCR | H├⌐micblectomie ├⌐largie "."...,.1_ ΓÇóΓÇóΓÇó " 150
+0800 | NOACCENT | Colectomie totale ., ,. , " ' 250 130 / 0801 0802 -104
+0803 | DOTS,OCR | Chol├⌐cystotomie ou chol├⌐cystostomie... ΓÇó.. 60
+0804 | DOTS,OCR | Chol├⌐cystectomie... ~ ΓÇó.. 80
+0805 | DOTS | Chol├⌐docotomie ou h├⌐paticotomie avec ou sans chol├⌐cystectomie.... 150
+0808 | NOACCENT | Anastomose, bilio-digestive directe sur la voie biliaire-pti'ncipale 150-60
+0809 | OCR | Proth├¿se transtumorale OU de d├⌐rivatiolVpour les l├⌐sions malignes de┬╖ la voie biliaire principale
+0813 | OCR | Drainage d'un abc├⌐s du foie ; 60 30 / - '105 - Traitement ┬╖ par laparotomie des kystes hydatiques du foie
+0814/1 | DOTS,NOACCENT | Pour kyste unique....,..,
+0814/2 | DOTS,NOACCENT | Pour-.kystes multiples... 120
+0815 | OCR | Traitement des l├⌐sions ├⌐tendues, complexes ou multiples ┬╖ du foie n├⌐cessitant une thoracophr├⌐nolaDarotomie
+0816 | DOTS,TRAIL | R├⌐section segmentaire du foie... 12C
+0818 | DOTS | Traitement des l├⌐sions Io.calis├⌐es, enkyst├⌐es oufistulisp.es du pancr├⌐as..,...,..,.. '... 150
+0819 | OCR | Majoration pour injection per-operatoire dans les canaux excr├⌐teurs d'un produit de contraste. pour prise de clich├⌐s ave
+0821 | DOTS | Duod├⌐no-pancr├⌐actectomie.(v compris les anastomoses visc├⌐rales n├⌐cessaires}... 3001
+0826/2 | DOTS,OCR,NOACCENT | Avec biopsie... "C ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó.
+0827 | NOACCENT | Biopsie musculaire du rectum, rectotoffiu:;..,
+0828/1 | DOTS,NOACCENT | Par vole basse... 80
+0828/2 | DOTS | Par voie haute ou combin├⌐e...,.. "... 2001
+0829 | NOACCENT | Resection d 'un prolapsus rectal..,
+0830 | NOACCENT | Traitement des prolapsus rectaux par voie haute et basse
+0831 | DOTS | Traitement chirurgical de m├⌐gac├┤lon par r├⌐section colique avec abaissement du bout proximal par voie p├⌐rin├⌐ale ou transa
+0832/1 | DOTS | Par 'Iole abdot11lnale. p├⌐rin├⌐ale ou sacr├⌐e..., 150
+0832/2 | DOTS | Par voies associ├⌐es...,...,. 2001
+0835 | DOTS | Traitement 'des l├⌐sions traumatiqdes complexes du p├⌐ri n├⌐s... 60
+0836 | NOACCENT | Reconstitution du phincter anal par plastie musculaire, en cas d'Inconinence ou d'insuffisance
+0837 | DOTS,OCR,NOACCENT | Sphincteropi~stie avec anoplastie muqueuse... 50
+0846 | OCR | Tra!tement des abc├⌐s t fistules extrasphinct├⌐riens ├á trajet multlramlfi├⌐ (op├⌐ratoIre ot: par traction continue sur fil) 
+0848 | OCR | Traltsment de3 h├⌐morro├»des par ligature ├⌐lastique (maximum 5 s├⌐ances) par s├⌐ance ΓÇó.ΓÇóΓÇó.ΓÇóΓÇó.ΓÇóΓÇóΓÇóΓÇóΓÇóΓÇóΓÇóΓÇó
+0849 | OCR | Traitemmt des h├⌐morro├»des circu├Äaies par rasection sous muqueuse ( type Milligan-Morgan) ΓÇó
+0850 | OCR | Injections scl├⌐rosantea pour h├⌐morro├»des internes (avec un maximum 0351 de 10 s├⌐ancs) par r.├⌐a-:tcal . , Anesth├⌐sie sphi
+0854 | OCR,NOACCENT | Tr~itement de la fissur~ ~nale par dila~etlon anale
+0856/1 | DOTS,NOACCENT | Chez la femme..,.... _... '"
+0856/2 | OCR | Chez l'homme et l'enfant ΓÇóΓÇóΓÇó ΓÇó '" , 20 ,- Mise en place d'une sonde ur├⌐t├⌐rale pour Investigation ou drainage: cath├⌐t├⌐ris
+0858/2 | NOACCENT | Chez l'homme et l'enfant
+0859/2 | DOTS,NOACCENT | Chez l'homme et l'enfant...,
+0866 | OCR | Cystometrle sous, perfusloil av.1C enregistrement graphique. enregistre. ment des courbes de pres on dans le haut' apPEl
+0867 | OCR | Traitement er,dGscopique des l├⌐sions basses de l'uret├¿re (lithiase. ur├⌐┬╖ t├⌐roc├¿le, st├⌐noso) ΓÇóΓÇó.ΓÇóΓÇó.ΓÇó. 'ΓÇó ΓÇó
+0868 | OCR | Surveillance d't!i1e s├⌐3nce d'h├⌐modlclyse, par un m├⌐decin pr├⌐sent en permanen:e, y comiJ├»i:. le3 intervcnt!O:lS pour inc
+0869/2 | DOTS | Au del├á du 15├¿me jour... _.
+0872 | OCR | Mise en p!ace de d2UX cam.!le'l pour fistule art├⌐rlo-velneuse, repose d"me cu de!Jx carmle:.1 .ΓÇó ΓÇó ΓÇó .- 80 35 0873/1 087
+0884/2 | DOTS | Intervention it├⌐rative. 'en suppl├⌐mentnt... 20
+0885 | DOTS | Section d├⌐ l'Isthme d'un rein en fer ├á cheval, avec ou sans n├⌐phrectomie..;... "'... 120
+0888 | DOTS | Ur├⌐t├⌐rotomle lombaire, ur├⌐t├⌐rolyse... 80
+0889 | DOTS | Ur├⌐t├⌐rostomi├⌐.. cutan├⌐e... 80
+0890 | DOTS | Ur├⌐t├⌐rotomie pelvienne. ur├⌐t├⌐rectomiesecondaire totale.... "..
+0891 | DOTS | Ur├⌐tero-lithotomie it├⌐rative en suppl├⌐ment... 20
+0893 | DOTS,OCR | Ur├⌐t├⌐rorraphle term!notcrminale cure d'une fistule cutan├⌐e de l'uret├¿re... "..,..;... '.. 100┬╖
+0900 | OCR,NOACCENT | Ponction sus-pubienne pour Cystographie ΓÇó
+0901 | NOACCENT | Cytostomie, cystostomie sus-pubienne, lithotritie
+0902 | OCR | Taille avec ex├⌐r├¿se ou ├⌐lectro-coagulation d'une tumeur v├⌐sicale p├⌐di∩┐╛culte " ' '. ' . , , ΓÇó, 200 100 5
+0904/2 | DOTS | Avec r├⌐implantation des uret├¿res dans l'intestin..., 2.50
+0905 | NOACCENT | Cystectomie totale avec remplacement par greffon intestinal.. 3001
+0906 | DOTS | Ex├⌐r├¿se des diverticules v├⌐sicaux avec ou sans r├⌐section du col.... 150
+0908 | DOTS | Intervention pour r├⌐cidive, en slJppl├⌐ment... 20
+0909 | DOTS | Fermeture de fistule v├⌐sico-cutan├⌐e-... '.
+0911-2 | NOACCENT | Reconstitution.simple de la vessie
+0911/1 | DOTS,OCR,NOACCENT | Ablation. ~imple de. la plaque vp.slcale..:... "..
+0911/2 | NOACCENT | Reconstitution.simple de la vessie
+0912 | NOACCENT | Traitement chirurgical de l'incontinence chez la femme' ou chez l'homme quelle que soit la technique
+0913 | DOTS | Ur├⌐t├⌐ro-ent├⌐ro-cistoplastie... 250
+0914 | DOTS,OCR | Hyst├⌐rectomie partielle. myomectomle (un ou┬╖ plulleuretnyomes).... 80
+0916 | OCR | Dilatation de l'ur├¿tre pour r├⌐tr├⌐cissement de toute origine, chaque s├⌐ance '" , ΓÇó
+0918 | DOTS | Ur├⌐trotomie interne.. "_ 0... "
+0919 | DOTS | Ur├⌐trotomie externe ou ur├⌐trostomie...,
+0921 | DOTS | Traitement op├⌐ratoire du phlegmon p├⌐ri"or├⌐tral ' diffus gangr├⌐neux (infiltration d'urine)...,.... 60
+0923 | OCR | Temps p├⌐rin├⌐al d├╝ traitement chirurgical des fistules ur├⌐trorectales acquises ΓÇó ΓÇó ΓÇó
+0924 | OCR | Reconstitution de l'ur├¿tre (ensemble du traitement)┬╖
+0925/1 | DOTS,NOACCENT | Premier temps... '.'... _
+0925/2 | DOTS,NOACCENT | les autres....: -
+0927-1 | OCR | Op├⌐ration d'ord~e th├⌐rapeutique pour phimosis apr├¿s le premier mois
+0927/1 | OCR | Op├⌐ration d'ord~e th├⌐rapeutique pour phimosis apr├¿s le premier mois..
+0927/3 | NOACCENT | Section ou plastie:chirurgicale du frein
+0927/4 | NOACCENT | Traitement chirurgical du priapisme
+0928/1 | OCR | Tumeur unique ΓÇó
+0928/2 | OCR,NOACCENT | Tumeurs multiples . ' ΓÇó
+0929/1 | NOACCENT | Traitement de l'hypospads balanique
+0929/2 | OCR,TRAIL | Chaque retouche ult├⌐rieure . '. .ΓÇó; , ' ; ' 0930/ 1 Traitement de l'hypospadias p├⌐rin├⌐al ou p├⌐nien . 0930/2 0931/1 0931/
+0934 | NOACCENT | Ponction biopsie de la prostate . ZO
+0943 | OCR | Cure op~ratoire de ia torsion du testicule ou de s├⌐s annexes, castration, orchidectomie, ou ├⌐pididymectomie unilat├⌐rale
+0946 | DOTS,NOACCENT | Traitement de l'Impuissance masculine...,.\.
+0947 | OCR | Pr├⌐l├¿vements gyn├⌐cologiques ├á dlff├⌐.rents niveaux, quel qu'en soit le nombre ΓÇóΓÇóΓÇóΓÇó
+0948 | TRAIL | Ins├⌐mination artificielle (une ├á trois) . 15 E
+0949 | OCR,NOACCENT | Ponction transvaginale du Douglas ΓÇó ; Hi
+0951 | OCR,NOACCENT | Culdoscopie ; ┬╖30
+0955 | OCR | ChirurgIe des l├⌐sions b├⌐nignes de l'hymen et de la vu.1ve ΓÇó.ΓÇó .ΓÇó 1S - / ; /
+0956 | OCR | Traitement des affections, anomal ies ou tumeurs b├⌐nignes du vagin, de l'ut├⌐rus ou du eu!-de-sac de Douglas, interventio
+0957 | COLON | Ex├⌐r├¿ses d'une 9la1'<'::e de Bartholin
+0961 | DOTS | Hyst├⌐rectomie vaginale...:..
+0962/3 | DOTS,OCR | A┬╖.'ec curage ganglionnaire bilat├⌐ral... '... 120
+0966 | OCR,NOACCENT | 4c - Cure de fistule urinaire ou recto-vaginale 120 50 ┬╖
+0970 | DOTS | Toutes Interventions portant sur "appareil g├⌐nital f├⌐minin... '. 80
+0971 | OCR | A l'exception d'op├⌐rations plastiqlJes pour st├⌐rilit├⌐ portant soit sur un ut├⌐rUs mal form├⌐, soit sur les annexes (implan
+0975 | OCR | Hyst├⌐rectomie ├⌐largie pour l├⌐sions mangnes. y compris celluldenec- ┬╖tomle ' : ΓÇó
+0976 | DOTS | Cellulo-ad├⌐nectomie abdominale isol├⌐e... ",'...;.
+0979 | DOTS,NOACCENT | liiterventions pour prolapsus...:...:.. 120
+0982 | OCR | E:chographie du foetus et de ses annexes utilisant obligatoirement plu- i urs modes d'analyses et en particulier une ├⌐ch
+0987 | OCR,COLON | S4rveillance et contr├┤le de l'├⌐vacuation d'un ut├⌐rus gravide ┬╖ par voie basse jusqu'au sixi├¿me mois (y COlnpri┬ºl eventue
+0988 | OCR | (Maximum hit s├⌐ances), par s├⌐ance d'une dur├⌐e minimum de 45 mi∩┐╛nutes, la s├⌐ance . C2 Lorsque la pr├⌐paration est dispens├⌐
+0994 | DOTS | Par un m├⌐decin appel├⌐ pour l'intervention... ',-..,.. 50
+0999 | OCR | Traitement ┬╖ de l'h├⌐morragie grave de la d├⌐livrance avec troubtes de la crase sanguine confirm├⌐e par les examens de labo
+1006 | DOTS,OCR | Evacuation de l'ut├⌐rus quelle que soit I~ m├⌐thode.,.. '.,....,.
+1009 | DOTS | C├⌐sari├⌐nne yaginale...,
+1014 | OCR | Surveillance d'un enfant pr├⌐matur├⌐ ├⌐lev├⌐ en couveuse (par vingt 1 quatre heures) ΓÇó < ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó
+1015 | OCR,NOACCENT | Test de 1a figure j:omplf;xc de ┬╖ Rey. '..
+1018 | DOTS | D├⌐sarticulation inter-ilio-abdominale...,... 250
+1021/1 | DOTS,OCR,NOACCENT | Portant sur le tibia,.. "...; -...,.ΓÇóΓÇó oi...;... ΓÇó ΓÇóΓÇóΓÇó ' 120
+1021/2 | DOTS | Portant sur le f├⌐mur... ".. 150
+1023 | NOACCENT | ligamentoplastle d'un Iig8""t du genou, quelle que soit la tecnique., 80
+1024 | DOTS,NOACCENT | Patellectomie, patelloplastie, rnenlScectomie, quelle que soit la technique.... _... ','.. 80
+1026 | NOACCENT | Section et transplantation musculaires ou tendineuses pour hanche paralytique ou coxarthrose 100 - 40 1 -126
+1026 | OCR | R├⌐duction chirurgicale de luxation cong├⌐nltah,- de hs!"che avec ou sana creusement du cotyle ΓÇó
+1030 | DOTS,OCR | Arthroplastie int├⌐ressant f├⌐mur et bas~in... 220
+1035 | OCR | R├⌐alisatili'l d'une botte de Unna et pansement d'unulc├⌐ro de jambe (d├⌐tersion ├⌐p ,lchage et r├⌐gularisation de la l├⌐sion)
+1039 | OCR | Epiphysiod├⌐se de l'e.x.ir,.-.it├⌐ inf├⌐rieure du genou ou de l'extr├⌐mit├⌐ sup├⌐rieure du tibia non ┬╖ compris le pr├⌐l├¿vement 
+1040 | DOTS | Proth├¿se totale du genou...;..
+1044/3 | NOACCENT | Trois rayons ou plus..
+1047/1 | DOTS,NOACCENT | Un seul rayon...,.
+1047/2 | OCR,NOACCENT | Deux ray'ons ΓÇóΓÇóΓÇóΓÇóΓÇóΓÇóΓÇóΓÇóΓÇóΓÇóΓÇó .ΓÇóΓÇóΓÇó.ΓÇó.ΓÇó
+1047/3 | DOTS,NOACCENT | Trois rayons et plus.... 80
+1049/2 | OCR,NOACCENT | Deux tendons ΓÇóΓÇó.ΓÇó.ΓÇóΓÇóΓÇóΓÇóΓÇó , .ΓÇó ' ." ., ,45
+1049/3 | DOTS,NOACCENT | i'roistendons et plus... 60
+1057 | DOTS,NOACCENT | Astragalectomle... i...;;.;..;..
+1058 | OCR | excision de ┬╖I├⌐slons cutan├⌐es (autres que verrues) suivie de fermeture par autoplastie o├ºale ou par greffe
+1059 | DOTS,OCR | Ex├⌐r├¿se d'une ou plusieurs gaines synoviales.:...,.. ΓÇó. 90
+1060 | OCR | Suture d'un ligament tibio┬╖tarsion ou sous astragalien pour rUQture traumatique r├⌐cente.. 60
+1061 | DOTS,OCR,NOACCENT | Plastie d'un ligament tibio┬╖tarslon ou sous astragalien, quelle qu'en soit la technique...:.;..
+1062 | DOTS,OCR | Ablation d'un n├⌐vrome de Morton...;.. ΓÇó...,'..;;
+1064 | COLON | R├⌐├⌐ducation d'un pied (├á l'exclusion de l'articulation tibio-tarsienne), en relation avec:: une intervention chirurgical
+1065 | OCR | R├⌐├⌐ducation des cleU)' p├Äecfs (├á l'exciusiOl1 des aRicu'qtlons tibio-tat'S├Äenf\esl. en r-ela- tiOnS avec une fnterventic
+1067 | OCR | Massage des deux piedS (├á l'e'xd├╗sion des al'ticulafiC>fls tlbio--t"arsienne). en relatiet't aVee uPIe iVlte"vHM chirurg
+1069 | OCR,NOACCENT | Pansement petit " -ΓÇóΓÇó ., , -. , .ΓÇó. 0.,75 - 1 069 "anStvneftt moyen ou n5elllents muftipleG SlIr un pied ΓÇó. " ." 1,26 "0
+1071 | OCR,COLON | PanSef1Jent crhygromacoftslcutif ├á {'intet've"tion -cluP:.├⌐de├ºin ΓÇó ΓÇóΓÇó. ┬╖:: \├ö TAiternent p cs pathglogiqu's du domaine d
+1074 | DOTS,NOACCENT | Test de structuration visuelle de Bender.. _... _.
+1077 | OCR,NOACCENT | Test de vision des couleurs h ΓÇóΓÇóΓÇó ΓÇó ΓÇóΓÇóΓÇó 2 / - 133
+1078 | NOACCENT | Test du dessin de Goodenough..
+1079 | DOTS,OCR,NOACCENT | Test de la dam~ de Fay.... ΓÇó.ΓÇó
+1081 | NOACCENT | Tests des cUbes de Kohn
+1088 | DOTS | Test de phrases ├á compl├⌐ter...,
+1090 | NOACCENT | Echelle de performance de Grace ArthuF..
+1092 | NOACCENT | Echelle de performance d'Alexander
+1093 | DOTS,OCR,NOACCENT | Echelle d'Intetllgence de Blnet-Slmon.... ΓÇó
+1095 | DOTS,OCR | Nouvelle r├⌐vlsi├ºm de Binet-Simon.... ΓÇó ΓÇó..
+1096 | NOACCENT | Test de Terman ou ferman Merill,
+1097 | DOTS | Test de nouvelle ├⌐chelle m├⌐trique d'Intelligence...,..
+1098 | NOACCENT | Test de Wechsler Bellevue
+1099 | NOACCENT | Test de Head pour aphasique '".. 8..
+1106 | NOACCENT | Test du village d'Arthus
+1107 | NOACCENT | Test du monde de Buhler
+1108 | NOACCENT | Test de frustration Rosenzweig "
+1109 | DOTS | C.A.T... '.,..
+1110 | DOTS,NOACCENT | Test de Blacky...,..,.. '.'.. ".. ',.:.,.,..
+1111 | DOTS,NOACCENT | Inventaire multiphasique de Minnesota (MMPIl,... ", "
+1112 | DOTS,NOACCENT | Test de Rorschach.,...,.. '.., '..,. ",. "..
+1113 | NOACCENT | T.A.T. Test de Symonds
+1115 | NOACCENT | Echelle d'intel'lIgence de wechs'Ier : Pour enfant W.l.S.C. ou pour adultes W.A.I.S
+1116 | OCR,NOACCENT | Test ΓÇó patte noire
+1119 | OCR | ┬╖Elerochoc ou ├⌐lectronarcose, ou convulsivoth├⌐rapie par agent chimique. la s├⌐ance, ,., ΓÇó.ΓÇóΓÇóΓÇóΓÇó.ΓÇó , .; ,., ,. S┬╖ Une deman
+1120 | DOTS,OCR | L'├⌐lectrochoc sous anesth├⌐sie par le m├⌐decin effectuant l'├⌐lectrochoc, la s├⌐ance...,-.. ┬╖.┬╖┬╖.┬╖fte.
+1121 | OCR | Choc insulinique avec sudation ou coma et resucrage en ' cours d'hospitalisation dans un ├⌐tablissement sp├⌐cialis├⌐ " .,,'
+1124/2 | DOTS | de 6 ├á 8 malades: par malade..,...;.. '.
+1124/3 | DOTS | de 8 ├á 9 malades, par malade...,.., ". '..
+1126 | OCR | D├⌐sintoxication alcoolique par t├⌐tra├⌐thylthiourane, par s├⌐ance avec un maximum de 8 s├⌐ances, , , , ., , ,. ., ΓÇó. '.". ,'
+1127-2 | OCR,NOACCENT | Pour deux membres ou un membre et ie trolleΓÇó
+1127/2 | OCR,NOACCENT | Pour deux membres ou un membre et ie trolle..ΓÇó.
+1127/3 | NOACCENT | Pour tous le corps..
+1128/2 | NOACCENT | Pour deux membres
+1131 | NOACCENT | /2 Traitements d'un membre
+1131/1 | OCR | Traitement localis├⌐s ΓÇó
+1131/3 | NOACCENT | iraitement de plusieurs membres
+1137/2 | OCR | m├¬me cas en b~ss:..;
+1140 | DOTS | Suppl├⌐ment pour baln├⌐oth├⌐rapie mise en ┼ôuvre par le praticien.... "
+1141 | OCR | 2┬░ - R├⌐├⌐ducation ├á un stade plus avanc├⌐ avec d├⌐ambulation libre possible ├á l'aide d't.:n appareil ,, .' ΓÇó
+1144 | DOTS | R├⌐├⌐ducation des muscles du p├⌐rin├⌐e...,..
+1145 | OCR | P├⌐riode des soins sp├⌐ciaux (dur├⌐e deux mois). traitement quotidien cc-mprenant l'en∩┐╛semble des actes dispens├⌐s dans la j
+1146/1 | DOTS | un membre (dur├⌐e 45 minutes)...,
+1146/4 | DOTS | un membre ou le tronc (dur├⌐e 10 minutes)... _ ". _ "
+1147/4 | DOTS | T├⌐trapl├⌐gie de l'enfant, la s├⌐ance (dur├⌐e 1 h 30)...,... _.. "
+1148/3 | OCR | Phase d'entretien (50 s├⌐ances par anl@ur├⌐e 40 minute~J
+1150 | OCR | Drainage postural (maximum 30 s├⌐ances), traitement exclusivement individuel (dur├⌐e 45 minutes), par s├⌐ance ΓÇóΓÇó ΓÇóΓÇóΓÇóΓÇó ΓÇóΓÇó .ΓÇó
+1151 | OCR | Qrainage des bronches. avec ou sans massage local th├⌐rapeutiq!i lTIassage et mo Ilisa!ion de l'├⌐paule, par s├⌐ance (dur├⌐e
+1154 | OCR | Traction sur ta.bIe m├⌐caniqOe 1Nfi'C massage des r├⌐g'lCt\S parave.rl├⌐brales ┬╖&
+1157 | OCR,COLON | Traitement d'un malade atteint de delirium-tremens, ou d'un malade non op├⌐r├⌐ pr├⌐- sentant Un ├⌐tat de choc ou de coma ou 
+1159 | OCR | Oxyg├⌐noth├⌐rapie hyperbare, en s├⌐rie: S├⌐ance quotidienne d'une heure, y compris la surveillance par tous pro┬╖ c├⌐d├⌐s, ├á un
+1160-1 | OCR | Le m├⌐decin ├⌐tant en dehors du caisson ~
+1160/1 | DOTS,OCR | Le m├⌐decin ├⌐tant en dehors du caisson... ~
+1161 | OCR | Echographie A isol├⌐e d'un organe ou de deux, organes sym├⌐triques. avec 1162/1 ├⌐tablissement d'un compte rendu 10 Echotom
+1162/2 | OCR | De plusieurs organes intra-abdomlnaux, avec ├⌐tablissement d'un compte rendu d├⌐taill├⌐ 35 Avec entente pr├⌐alable au┬╖del├á d
+1163 | DOTS | Thermographie avec un minimum de 3 clich├⌐s... _...,
+1164 | DOTS,NOACCENT | Reflexogramm,e achiliCen...;
+1165/2 | NOACCENT | En application intracavitatre.. _
+1167 | NOACCENT | Injection vaginale
+1170 | DOTS | Cath├⌐t├⌐risme ur├⌐tral chez la femme... 4
+1173 | DOTS | Injection intraveineuse Isol├⌐e... '
+1181 | OCR | Pansement {moyen} type petit ulc├¿re de la jambe, trach├⌐otomie 1)25 1182 1183 1184 Pansement (grand), pansement ├ávec sond
+1190 | NOACCENT | Perfusion intraveineuse
+1191 | OCR | S├⌐ance de soins infirmiers (hygi├¿ne) surveil!ance" observation et pr├⌐ven- 1192 tion}, ├á raison de quat!"e ├⌐e!'!ces au ma
+1194 | OCR | Surveillance et observation d'un malade en traitement prolong├⌐ ├á son do: mlcile, par jour o├╣ le malade est visi t├⌐ avec 
+1195 | OCR | Incidences fondamentales.l -de l'extr├⌐mit├⌐ du doigt ├á la diaphyse hum├⌐┬╖ raIe comprise, par segment ΓÇó. <. ΓÇóΓÇóΓÇóΓÇó ΓÇóΓÇóΓÇóΓÇó ΓÇóΓÇóΓÇóΓÇó 
+1198 | OCR | Incidences fondarnentaies. des orteils ├á la diaphyse f├⌐morale comprise par segment . " ΓÇóΓÇó 6 Indnences sp├⌐ciales : calcan
+1199-1 | COLON,NOACCENT | fals::mt suite aux incidences fonciamantales, par incidences
+1199/1 | COLON,NOACCENT | fals::mt suite aux incidences fonciamantales, par incidences..
+1200 | OCR | B├óssln. hanche, articulation sacro┬╖i1Iiaques
+1202 | OCR | Radiomensllration comparative des membres il l'aide de la r├¿gle de Bell Thomson. .ΓÇó. . ΓÇóΓÇóΓÇóΓÇó ΓÇóΓÇó.ΓÇó .ΓÇó . 30 AR7. 3. - T├¬te
+1207 | DOTS | Dent par technique intra-buccaie, film occlusalou rctroalv├⌐olaire, par 'incidence... ""...,.
+1208 | OCR | Radiographie panoramique de !a totaiit├⌐ du syst├¿me maxillaire et du┬╖ syst├¿me dentaire sur un ou plusieurs films
+1209 | OCR | T├⌐l├⌐radiographie .du cr├óne ├á trois m├¿tres (diagnostic orthodontique), par incidence . .ΓÇóΓÇó
+1210 | OCR | Gril costal ou sternum, ou h├⌐rnithorax ou articulation sterno┬╖cfavi culaire
+1215 | NOACCENT | Laryngographie sans moyen de contraste
+1228 | OCR | /f 1228/2 1229 l'examen gastro-duod├⌐nal ' 1,., .' " , ,. , ., ΓÇó.ΓÇó 5 C├┤lons: par vele haute par voie basse ΓÇó. Transit du 
+1230 | DOTS | E>C2men sans pr├⌐paration... '
+1231 | DOTS,NOACCENT | Urographie.,...,....,.. ' '.. ',
+1232 | DOTS,OCR | Cystographie isol.├⌐e descendante ou r├⌐trograde, ur├⌐tr~raphie mictionnelle, ur├⌐trographie r├⌐trQgrade. v├⌐siculo-d├⌐f├⌐rentog
+1251 | OCR | S'ajoutant ├á un examen radiographique standard, par s├⌐rIe de qldatre poses 9.┬╖ ΓÇóΓÇóΓÇóΓÇóΓÇóΓÇóΓÇóΓÇóΓÇóΓÇóΓÇóΓÇóΓÇóΓÇóΓÇóΓÇó.ΓÇóΓÇó c ΓÇóΓÇóΓÇó. ,.-- ARY. 3. -
+1253 | OCR | tomographie c!┬╖├ássique: 05. larynx. poumons.
+1254 | OCR | Dans la m├¬me r├⌐gion au cours de la m├¬me s├⌐rie de coupes selon un plan non parall├¿le u pr├⌐c├⌐dent, base fixe suppl├⌐mentair
+1255 | NOACCENT | Tomographie frontale, oblique ou transversale 4S
+1256 | OCR | Zonographie ou tomographie au cours d'un. examen quel qu'If soit (yoles biliaires, reins, enc├⌐phale, etc.) ΓÇó.ΓÇóΓÇóΓÇó ΓÇóΓÇó.ΓÇó .ΓÇó
+1258/2 | OCR | En 35 mm (avec un minimum de 30 m├¿tres de film).. ΓÇó -..
+1259 | OCR | Examen de la t├¬te et du cou ou eXamen portant surfe tJionc, avec ou sans Injection de prodUit de contraste , ΓÇóΓÇó ΓÇó .ΓÇó .ΓÇóΓÇó
+1260 | OCR | La mise en ┼ôuvre de -l'Irradiation de haute ├⌐nergie au-del├á de 0,5 MeV impose l'├⌐ta∩┐╛blissement d'un protocole de traitem
+1265 | DOTS,OCR,NOACCENT | Tran~lt d'une substance dans tm or9a,1e...;.
+1269/1 | DOTS,OCR | Protocole pr├⌐alable des conditions d'Irradiation.. _...ΓÇó,.,..
+1270 | OCR | Ouelles que soient la localisation et les modalit├⌐s de "Irradiation (kUo. volts, dose, ├⌐talement) ΓÇóΓÇó ΓÇóΓÇóΓÇóΓÇó ΓÇóΓÇóΓÇóΓÇóΓÇóΓÇóΓÇóΓÇó ΓÇóΓÇó.ΓÇó 
+1271 | OCR | Ouelles que soient les modalit├⌐s de l'Irradiation (kilovolts, dose, ├⌐tale.; nt) .ΓÇó. 0 ΓÇóΓÇóΓÇóΓÇó ΓÇó ΓÇóΓÇó 0 ΓÇóΓÇó 0 0 ΓÇóΓÇóΓÇó 0 ΓÇó ΓÇóΓÇóΓÇóΓÇóΓÇóΓÇóΓÇó
+1272 | OCR | Ouelles que soient la localisation et les modalit├⌐S de l'Irradiation (kilovolts, dose, ├⌐talement)..;.. ΓÇóΓÇóΓÇó ΓÇó ΓÇó
+1273 | DOTS,OCR | Quelles que soient la localisation et les modalit├⌐s de "Irradiation (kilovolts, dose, ├⌐talement).... 0 o.. 0.. ΓÇó -.. ΓÇó ΓÇó
+1274 | OCR | la mise en ┼ôuvre du traitement Impose l'├⌐tablissement d'un protocole de tralterr.qnt comprenant : le r├⌐sum├⌐ clinique, le
+1276 | OCR | ┬╖ La mise en ┼ôuvre de la cwi/?'!:!l├⌐rapie impose "├⌐tablissement d'un proto∩┐╛cole de traitement comprenant : le r├⌐sum├⌐ cli
+1279 | OCR | Clich├⌐s orthogonaux ΓÇó " , ΓÇóΓÇó .ΓÇó 10 + films
+1281 | DOTS,OCR | Un trac├⌐... ΓÇóΓÇó,... ΓÇó.. -..
+1282 | OCR | Par trac├⌐ suppl├⌐mentaire (avec maximum de d(lux) en suppl├⌐ment ΓÇóΓÇó
+1283/1 | OCR | Pour tumeur cutan├⌐e ou cutan├⌐o-muqueuse da petite dimnsion. jusqu'├á 2 cma ΓÇó ΓÇóΓÇóΓÇóΓÇóΓÇóΓÇóΓÇó ΓÇó ΓÇó ΓÇóΓÇóΓÇó ΓÇó ΓÇó
+1283/2 | NOACCENT | Pour les autres localisations
+1288 | NOACCENT | Cas particulier : gammacard├Äograph:e, cotation globale
+1289/4 | OCR | Pour une ├⌐tude s├⌐quentIelle, dynalT,ique. par cam├⌐ra scintigraphique. le piafond est port├⌐ ├á " ΓÇóΓÇó
+1291/1 | OCR,COLON | 3┬░ - En dehors <fes cas ci-dessus et dans le cadre d'une m├¬me:: explo∩┐╛ration fonctionnetle, apr├¿s dUllIHlistrationau pat
+1291/2 | NOACCENT | Et quel que soit le nombre de mesures, plafond..
+1292 | OCR | Utl'lisatlon d'activit├⌐s Inf├⌐rieures ├á 20 mfl.par ├ápplicatlon ΓÇó.:.
+1293 | OCR | ' Utilisation d'activit├⌐sde,:'20'mCi_7 ':├á, 100 _mCi. que soit le fractionnement ΓÇóΓÇóΓÇó.,.
+1294 | OCR | Au-det~ de 100 mCi et par tr:act1on de 100 mCi, en suppl├⌐ment.
+1296 | OCR | l'ensemble des dosa~es au cours de la m├¬me ├⌐preuve fonctionnelle
+1298 | OCR | Pr├⌐l├¿vement aseptique au nive"u des muqueuses ou de la peau, ├á "ex(",'tp∩┐╛tion des biopsies, pour examen cytologique, bac
+1301 | OCR | Diagn(\stlc hlstopathologique. par inclusion et coupe de pr├⌐l├¿vements biOp∩┐╛siques ├⌐tag├⌐s effectu├⌐s au niveau de plusieur
+1302 | DOTS | Pr├⌐l├¿vements multiples de sang (au moins 4)...;
+1303 | OCR | Diagnostic du sexe chromatiniAn ~ur fr├ºttiR..
+1304 | OCR | Diagnostic cytopathologique d'une l├⌐sion, par ├⌐talements et/ou apposi. tion.s . , , '" ΓÇó
+1304 | OCR | Cette c├┤tation ne s'applique pas aux urines et au liquide c├⌐phalorachi∩┐╛d├«ell ΓÇó ΓÇó ΓÇóΓÇóΓÇó. ΓÇó ΓÇó ΓÇóΓÇó ΓÇó 'S '100
+1305 | NOACCENT | Diagnostic cytopathologique. l'ur inclusion et couPe (on cumulable. avec
+1308 | OCR | Diagnostic histopathologique. par ine lusion et coupe d'une pi├¿ce op├⌐ra┬╖ toire int├⌐ressant un organe ΓÇó
+1310 | OCR | Diagnostic histopathologique. par Inclusion et coupe d'une place operatoire complexe comportant plusieurs organes [une c
+1312 | OCR | b) - D├⌐calcification pour ├⌐tude d├¿s os et tissus ca,lcifi├⌐s (tes supol├⌐ments '. ├á et b, ne sont pas cumulables) .ΓÇó B tO
+1315 | NOACCENT | Etablissement du caryotype
+1319 | NOACCENT | 2- Les frottis suivants avec un maximum de six (y compris le premier), chacun B 10 - 169
+1320 | OCR,NOACCENT | Etude cytologlqu~ J:>ronchique (Inflammatoire et hnctlonnelle).. ~
+1323 | OCR,NOACCENT | Epreuve de Huhner ΓÇó. ΓÇóΓÇó .ΓÇóΓÇóΓÇóΓÇó.ΓÇóΓÇóΓÇóΓÇó ΓÇóΓÇóΓÇóΓÇó ΓÇó ΓÇóΓÇóΓÇó
+1324 | OCR,NOACCENT | Etude fonctlonnell~ du sperme..
+1325 | OCR | Etude de l'aspect du s├⌐rum ├á 4┬░ C apr├¿S--24 , H 1326i Acides ,gras libres : ΓÇóΓÇó \ B 20 13 !7 Acide lactique ΓÇó. "1 '" B 30
+1333 | DOTS,OCR,NOACCENT | Dosage de bilirubine totale,.. ┬╖1-... "... il
+1334 | OCR | Dosage de la bilirubine directe et indirecte (c├┤tatlon non cunlUlableavec l├á bilirubine totale) ; ΓÇó ΓÇó. 8 25 1335 1336 13
+1342 | DOTS | Fer s├⌐rique...,
+1344 | DOTS | Fibrinog├¿ne...,..
+1346 | OCR | Glucose - .ΓÇó 13 10 < Epreuve de labilit├⌐ phlsmaUque
+1347 | DOTS | a - par ├⌐preuve... __
+1349 | OCR | Lipldogramme (├⌐lectrophor├¿se (avec d├⌐termination des pourcentage, + 1350 1351 1352 1353 1354 document et compte rendu) ΓÇó
+1356 | OCR | Proteinogramme (├⌐lectrophor├¿se) avec d├⌐termination des pourcentages. 1357 1358 1359 1360 dosage des prot!ilnestotales + 
+1373 | OCR | 1374 1375 1376. 1377 des proteines) ΓÇóΓÇó .ΓÇóΓÇó. ΓÇó. ΓÇóΓÇóΓÇóΓÇó , B 70 PH (mesure i'ectrom├⌐trlque) ΓÇó
+1378 | OCR | Examen microscopique du .s├⌐dlment min├⌐ral ├á l'exclusion de la cymlogie ΓÇó. B 5 f. 17
+1381 | NOACCENT | Pigments et sels biliaires (recherches)
+1382 | NOACCENT | proteines (recherches
+1383 | DOTS,NOACCENT | Proteines (recherche et dosage)...,..., 8
+1385 | OCR | Proeines (recherches et identiflrativll p├ár ├⌐lectrophor├¿se y compris le d'lsage de proteines) ΓÇóΓÇóΓÇóΓÇó
+1386 | DOTS | potassium...;
+1387 | DOTS | Sang (caract├⌐risation soit par recherche de:s h├⌐mlities soit par l'h├⌐moglobine)...,
+1389 | NOACCENT | Sodium + Potassium + Chlorures
+1390 | DOTS,NOACCENT | S.ucre (recherche)... '.'..
+1391 | NOACCENT | Sucre (recherche et dosage)
+1392 | NOACCENT | Sucre (identification par chromatographie)
+1394 | NOACCENT | Urobiline (recherche)
+1396 | OCR | Proteine't:. exsudatives d├⌐grad├⌐es ou non d├⌐grad├⌐es (r├⌐action de Tri 1397 boulet) ne peut ┬╖se cumuler avec l'e xamen chi
+1400 | NOACCENT | Proteines , ' B 1
+1401 | DOTS,NOACCENT | Chymotrypsine...:...,
+1404 | DOTS,NOACCENT | Dosage de l'aluminium dans le dialysat...,.. "
+1409 | DOTS | Gama glutamyl transf├⌐rase... '
+1411 | OCR | Glutamate d├⌐sydrog├⌐nase . ' . ,. ΓÇóΓÇó
+1412 | OCR | Isoenzymes de la LDH (Iactico d├⌐sydrog├⌐nase) , ΓÇó.ΓÇó. ' ΓÇóΓÇóΓÇó
+1413 | NOACCENT | de la CK (creatine Kinase)
+1414 | OCR | de ia PAL (phosphatases alcalines) ΓÇó , 1415 1416 1417 Isoenzymes de transaminase ; ΓÇóΓÇóΓÇóΓÇóΓÇó Lactate d├⌐shydrog├⌐nase , Leucin
+1421 | OCR | Phosphatases acides inhib├⌐es par les tartrates ΓÇó
+1422 | OCR,NOACCENT | Transaminase glutamique pyruvique (TGPj ΓÇó
+1423 | OCR | Transaminases glutamique oxalac├⌐tique (TGO) ΓÇó 1424 1425 Transaminases (TGO + TGP) , , Trypsine
+1426 | DOTS,NOACCENT | Mucopolysaccharides totaux...,
+1427 | NOACCENT | MiJcopolyssaccharides totaux avec identification
+1429 | OCR | Chromatographie en couche mince des acides ├ïmin├⌐s sanguins B 80 / - 176- t430 Cl1romatographie en couche mince des aC├Äde
+1431 | DOTS | Ph├⌐nylalanine (sang)..;...;....:....;..
+1432 | DOTS,NOACCENT | Thyrosine (sa,fig)..;...;
+1433 | NOACCENT | Hydroxyproline urinaire.,..
+1434 | NOACCENT | Chromatographie en couches minces des sucres urinaires
+1435 | DOTS | Fructos├⌐mie... '
+1437 | DOTS | Xylos├╣mie...;....;.
+1438 | DOTS,NOACCENT | Apolipoproteines A ou Al... r..
+1449 | OCR,NOACCENT | CRP (dotge quantitatif) 1. ΓÇóΓÇóΓÇóΓÇóΓÇó ΓÇó ΓÇóΓÇóΓÇóΓÇóΓÇóΓÇóΓÇóΓÇó " ΓÇóΓÇóΓÇó , ΓÇóΓÇó ΓÇó ΓÇóΓÇóΓÇóΓÇóΓÇóΓÇóΓÇó " ΓÇó
+1454 | DOTS | Epreuve ├á la bromo sulfone phtal├⌐ine simple...:.
+1455 | DOTS | Epreuve ├á la bromo sulfone phtal├⌐ine clairance...;...8
+1456 | DOTS | Clairance de "ur├⌐e...,... *
+1457 | DOTS | Clairance de la cr├⌐atinine..;... Ii
+1458 | NOACCENT | Clairance du mannitol
+1460 | NOACCENT | Epreuve de concentration
+1461 | DOTS,NOACCENT | Epreuve de dilution...;.
+1461 | NOACCENT | Epreuve au fructose
+1464 | OCR | Epreuve d'hyperglyc├⌐mie provoqu├⌐e (au moins 5 dosages. y compris 1465 1466 recherGhes et .eventuellement dosages de la g
+1468 | DOTS,NOACCENT | Epreuve au 0 - Xylose...,
+1470 | NOACCENT | aJ Evaluation cytochimique de la phOsphatase alcaline des leucocytes.
+1471 | NOACCENT | il/ Autres recherches cytochimiques, par examen
+1472 | OCR | Examen cytologique d'orientation du sang : h├⌐matocrite, doage de l'h├⌐moglobine ├á l'electrophotom├⌐tre()u au spec┬╖ trophot
+1473 | OCR | I:x<lmen cytologique simple du sang (h├⌐mogramme classique) num├⌐- .ation des globules rouges et blancs formule leucocytai
+1475 | DOTS,OCR | a/- Eva!uation cytochimJque (fe la phosphat├⌐lse alcaline des leucocytes...,_... _..,.. ΓÇó... ΓÇó.
+1477 | OCR | Num├⌐ration des globules rouges et vdlalur flobulaire. !e taux de l'h├⌐moglobine ├⌐tant d├⌐termin├⌐ ├áT├⌐lectrophotoTil├⌐tre ou 
+1479 | OCR | Taux des h├⌐~ties granulo"filamenteuses(r├⌐ticu!ocytes)
+1481 | OCR | Recherche des dr├⌐panocytes ΓÇóΓÇóΓÇó.ΓÇóΓÇó.ΓÇó 820
+1482 | DOTS,OCR | Formule leucocytaire et num├⌐ration des globules blancs... ΓÇó
+1483 | NOACCENT | Recherche des CO!p8 de Heinz,
+1483 | OCR | Num├⌐r~tion des polynucl├⌐~ires ├⌐osinopliles..
+1484 | OCR | Num├⌐ration en cellule apr├¿s h├⌐molyse et ├⌐tude morphologique .des p!lSlquettes ΓÇó ΓÇó -. . B 15 1 ΓÇó
+1490 | NOACCENT | Formule d'Arneth
+1491 | DOTS | Proteines et r├⌐actions de Rivalta...:...,
+1492 | OCR | Temps de saignement (├⌐preuve de Duke), temps de coagulation (sur sang veineux et en tube. m├⌐thode de Lee et White)┬╖ ├⌐tud
+1496 | DOTS | Thrombo-├⌐lastogramme sur sang total ou plasma (m├⌐thodes non cumulables entre elles)... '
+1497 | DOTS,NOACCENT | _ Sur plasma Natif... '.'..
+1498 | DOTS,NOACCENT | - Sur plasma de plaquette... '..,... -....,
+1500 | DOTS,NOACCENT | Consommation de prothrombine.... "... ""
+1502 | DOTS,NOACCENT | Temps de thrombine... "-";.. '"..
+1503 | OCR,NOACCENT | Lyse du caillot sanguin┬╖ et plasmatiq ue
+1504 | NOACCENT | -- Un deces dosages
+1508 | OCR,COLON | ec erc :.71 fibrinolyse par l'├⌐preuve de Lyse des euglobulines et re- 1509 d lerche de l'activateur du plasminog├¿ne en u
+1512 | OCR | R├⌐sistance globulaire , " , '.' ,., " .ΓÇó , " B 2├╝
+1513 | OCR,NOACCENT | 4┬░) Grippe.:.. 0 ΓÇóΓÇóΓÇó, ΓÇóΓÇó o. o. ΓÇó ΓÇóΓÇóΓÇó
+1514 | DOTS | Electrophor├¿se de l'h├⌐moglobine..:...,.'... '.. '
+1515 | DOTS | Dosage sur plaque de cellulose ├á pH al├ºalin.... '... '
+1516 | DOTS | Electrophor├¿se de i'Hb sur g├⌐lose ├á p'H acide....,
+1516 | DOTS | 7┬░) Herp├¿s virus variceUe et Cytom├⌐galovlrus.... o..
+1517 | DOTS | Electrophor├¿se de la G6PD... '..
+1519 | DOTS | Test de solubilit├⌐ de l'Hb...,..,
+1519 | DOTS | b, isol├⌐ sur souriceau... 1
+1523 | OCR | Ooage de l'haptoglobine par m├⌐thode ' chimique ΓÇó B 20 / 1524 - 164 - CHAPtRE S - Immuno-h├⌐matologie Groupge sanguin ΓÇóΓÇó .
+1525 | OCR | D├⌐pistage Simple d'anticorps Irr├⌐guliers (OSAI). ΓÇó.. _.. _ ΓÇó _
+1526 | OCR | D├⌐termination des ph├⌐notypes Rh├⌐sus et Kell antig├¿ne D,C.e,E,K (et ├⌐ventuellement Cw et el sur prescription m├⌐dicale exp
+1528/2 | OCR | Si ce d├⌐pistage est positif, identification ├á l'aide d'une gamme d'h├⌐ma∩┐╛ties test d'identification ou de r├⌐f├⌐rence d├⌐fin
+1531 | OCR | Epreuve directe de compatibilit├⌐ ar au moins deux m├⌐thodes suscep∩┐╛tibles de d├⌐pister les anticorps incomplets pour chaqu
+1534 | DOTS | - Antig├¿nes HbS...:
+1535 | NOACCENT | Groupage Rh sur cellules du liquide amniotique
+1538 | NOACCENT | b - Examen avec cytologie quantitative ou proportionnelle avec
+1541 | OCR,NOACCENT | e -- Etuete fonctionnellA nll ~f'8rme avec spermocvtogramme
+1549 | OCR | h - Etude cytobact├⌐riologique des pr├⌐l├¿vements de peau, phan├¿res. pus et divers IO ,., ,. ΓÇóΓÇó 10
+1550 | DOTS | i - H├⌐mocultures...:...,
+1551 | NOACCENT | a - Recherche d'un microorganisme par l'Immunofluorescence..
+1553 | DOTS,COLON | c - D├⌐nombrement par culture des bact├⌐ries dans un milieu biologique.. "...,.. '...,...::.
+1555 | OCR | c -Isolement et/ou identification d'une bact├⌐rie par pouvoir pathog├¿ne 1556t1 1556/2 1556/3 1557/1 1557/2 1557/3 exp├⌐rim
+1558-1 | NOACCENT | examen direct et coloration ou immunofluorescence
+1558/1 | NOACCENT | - examen direct et coloration ou immunofluorescence.
+1558/2 | DOTS | - isolement sur milieux sp├⌐ciaux...,... _.. '
+1559 | OCR,NOACCENT | i Recherche et Identification des'rickettsiales et chlamydlales : ΓÇó - examen direct et isolement . B 100 ,,/ .- 190
+1560 | OCR | J Recherche et identification des mycoplasmee : 1561/1 - cuitlJre sur milieux sp├⌐cl, num├⌐ration e caract├⌐risation bl chi
+1561/2 | DOTS | - bact├⌐ries an├⌐roble....;
+1563 | OCR | m ΓÇó Etude du pouvoir bact├⌐ricide des ┬╖antlblotlqVes et de leurs associations: - par antibiotique test├⌐ "" " B 40 (maximu
+1564 | OCR | al Sur lignes ├⌐pith├⌐liale continue humaine Otl animale 000 ΓÇó ΓÇó 0 '0 '0 B 20 t565 .566 .5ii7 '568 b) Sur prlmoculture de 
+1569 | OCR | Recherche de virus par inoculation ├¿ une ou plus├Äp-urs port├⌐es de Slluri ceaux (minimum de 10 souriceaux) o .ΓÇóΓÇó o ΓÇóΓÇóΓÇó o 
+1570 | OCR | 0) Ad├⌐novirus '" 0 B 100 '571 2'┬╗) Arbovirus .; B 100 t572 Chariom6AHo ,.,., h .' JO) ΓÇó T .,. ΓÇóΓÇóΓÇó p GCIIaire 0 ΓÇó 0 ΓÇóΓÇó ΓÇó 
+1575 | OCR,NOACCENT | 6┬░) Herp6s virus simple " 0 ΓÇó ΓÇóΓÇó ΓÇó ΓÇó ΓÇó 0 ΓÇóΓÇóΓÇóΓÇó ΓÇóΓÇó o. ΓÇóΓÇó
+1587 | NOACCENT | 16┬░) Pox virus (autres que les virus varioleux) "
+1594 | OCR | al Examen mycologique en vue de la recherche et de " Identification ├⌐v.en-- ruelle de : dermatophytes, aspergillus. cand
+1595 | DOTS,OCR | b) Recherche de pityriasis verslcolor par la m├⌐thode de la cellophane.adh├⌐slve... r ΓÇóΓÇó
+1600 | DOTS | Examen parasitologlque des selles apport├⌐es au laboratoire...,..
+1601 | OCR | Examen parasitologique de selles ├⌐mises au laboratoire en vue de la ┬╖ re∩┐╛cherche extemporan├⌐e des formes v├⌐g├⌐tatives d p
+1602 | OCR | Examen parasitologique des selles ├⌐mises au labo comportant l'ensemble des deux examens ΓÇó. ,.,., ΓÇóΓÇóΓÇóΓÇó
+1603 | OCR | Num├⌐ration des ┼ôufs d'helminthes dans les selles (r├⌐sultats exprim├⌐s -en nombre d'┼ôufs par gramme de selles), sur prescr
+1604 | OCR | Recherche d'amibes dans un pr├⌐l├¿vement de mucus recueilli sous rectosco┬╖ pie. Examen extemporan├⌐ .et apr├¿s oloratiOfl
+1606 | OCR | Recherche des larves rllabditoides d'anguillules par la technique d'extrac∩┐╛tion de Baerman (.├á l'initiativedu biologiste
+1607 | OCR,NOACCENT | Coproculture pour rect\6(che et iderttifica,tion des larves d'anguillules et d'ankylostomes ., o" 0 ΓÇó ΓÇó ΓÇó " "it-:'!- ΓÇóΓÇóΓÇó
+1608 | OCR,NOACCENT | Recherche des ┼ôufs de biJ.harzies 0 ΓÇóΓÇóΓÇóΓÇó ΓÇóΓÇóΓÇóΓÇóΓÇóΓÇóΓÇóΓÇó ,' 1 ΓÇóΓÇó " ΓÇóΓÇóΓÇóΓÇó B 25
+1610 | OCR | Recherche ou identification isol├⌐e de IJarasites (ang et selles exclus) par eXUli-tCn direct t ├⌐v.entUement apr├¿s enrich
+1613 | OCR | R├⌐action qualitative d'agglutinatIon .de particules Inertes sensibilis├⌐es ΓÇóΓÇó ' .ΓÇóΓÇóΓÇóΓÇóΓÇó , (latex) .ΓÇóΓÇóΓÇóΓÇóΓÇóΓÇóΓÇó.ΓÇó.ΓÇó ΓÇó.ΓÇóΓÇóΓÇóΓÇó. ' ΓÇó
+1614 | DOTS | - Si la r├⌐action pr├⌐c├⌐dente est positive, titrage... 8
+1615 | OCR | - R├⌐action qualitative d'agglutination d'h├⌐maties sensibilisees.. (polyartest).. ΓÇóΓÇóΓÇóΓÇó ΓÇó '. ΓÇóΓÇó ΓÇóΓÇóΓÇóΓÇó ΓÇóΓÇóΓÇóΓÇó ΓÇóΓÇóΓÇóΓÇó,8
+1616 | DOTS | - Si la r├⌐action pr├⌐c├⌐dente est positive, titrage... B.
+1618 | OCR | R├⌐action d'Inhibition, d'hemagglutlnation avec titrage (sauf diagnostic Immunologlque de la grossesse et de la rub├⌐ole) 
+1619 | OCR | Recherche d'un antig├¿ne ou d'un anticorps par immunodiffuslon (Ouchterlony) (cotation maximum de deux) chacun ΓÇóΓÇóΓÇóΓÇóΓÇóΓÇóΓÇóΓÇóΓÇóΓÇó
+1623 | DOTS,OCR | - En cas ├╣t: t"ech~rchc3 simultan├⌐es quel que soit le nombre d'antig├¿ne ou d'anticorps, c├┤tation maximum... "...,..
+1628 | OCR | Oosag.e d'un anticorps ou' d'un antig├¿ne par turbidim├⌐trie B 40 ┬╖
+1632 | DOTS,NOACCENT | - Alpha foetoproteine...:
+1633 | NOACCENT | - Alpha foetoproteine d3ns le liquide amniotique
+1635 | DOTS,NOACCENT | - Anticorps anti-HbS... '.'
+1637 | NOACCENT | - ImmuI1oglobulJne E (igE) totales
+1641 | NOACCENT | Recherche et titrage des agglutinines 0 et H des Salmonella typhi. para A. para B. para C
+1644 | OCR | Recherche du titre de l'h├⌐molysine antiboeuf (en c.as de r├⌐action de Paul et Bunnelln├⌐gative) ; B 10 1645. TItrage d:lin
+1647 | OCR | Titrage de l'antistaphylolysine al~ha du s├⌐rum
+1648 | OCR | Recherche et titrage d'un anticorps antibact├⌐rien ou antiparasitaire par agglutina,ion directe de l'agent pathog├¿ne (├á l
+1650 | OCR | H├⌐act c de 1 Waaler-Rose en "'I.Ibes , , ' ΓÇóΓÇó 165'j Analyse imm!'lo ├⌐lectrophor├⌐tique des proteines d'un milieu biologiq
+1653 | OCR | Diagnostic s├⌐rologique de la toxoplasmose avec titrage (en unit├⌐ intel'lnatJonales pour les IgG) au m'Jins deux techniqu
+1655 | DOTS | R├⌐action de Nelson qualitative... i
+1657 | OCR | Recherche d'un antig├¿ne ou d'un anti corps par ├⌐lectro-Immunodiffusinn ou par ├⌐lectrosyn├⌐r├¿se : 8 50 Chacun (c├┤tation ma
+1658 | OCR | Recherche simultan├⌐e d'antig├¿ne et d'anticorps homologu├⌐s par ├⌐lec┬╖ tro-immunodiffusion ou par ├⌐lectre-syn├⌐r├¿se ΓÇóΓÇó
+1659 | OCR | Typage HLA (1 sp├⌐clfu├⌐ A ou Bi B 15 B 120 -203 - 8 ΓÇó HORMONOLOGtE TITRE vm \
+1660 | OCR | Diagnostic de ln grossesse (test presomptif par m├⌐thode immunolog!- que avec au mois 2 r├⌐actifs ΓÇóΓÇó.ΓÇóΓÇóΓÇóΓÇó.ΓÇó
+1661 | OCR,NOACCENT | Dosage de la gonadotropine' chorionique (HC6ou' rolans 8) (non cumulable avec.le diagnostic de grossesse) ΓÇóΓÇóΓÇóΓÇó.ΓÇóΓÇó. : .ΓÇóΓÇó
+1662 | DOTS,OCR,NOACCENT | Dosage de la gonadotropine LH... ",.",." ΓÇóΓÇóΓÇóΓÇó, ΓÇóΓÇó,.
+1663 | DOTS,NOACCENT | Dosage de la gonadotropine FSH...,...,
+1664 | DOTS,OCR | Dix-sept 17-cetosteroid├¿s.. ┬╖... '..,. ΓÇó ΓÇó..
+1665 | OCR | Fractionnement chromatographlque des-dix-sept cstosteroides[minimum 5 fraconsJ non cumulables avec le dosage des 17 ceto
+1666 | DOTS | Dehydro├⌐piandrot├⌐rone (sulfate) (DHEA'S'...,
+1668 | DOTS,NOACCENT | Pregriandiol...,,.,,....,,..,
+1669 | DOTS,OCR,NOACCENT | Pregnanetriol...,... '.' ΓÇó, ΓÇó..
+1670 | DOTS | Dix-se!)t -hydroxy- ├ºorticost├⌐ro1des... 8
+1671 | NOACCENT | Cortisol (cotation au maximum de 3 dosages)
+1672 | OCR,NOACCENT | Aldosterono ou tetrahydre -aldosterone- (non cumulabJ~)..,
+1675 | NOACCENT | b/re.cherehe et dosage , " B 70 '/' - - 204
+1676 | OCR | Acidevanilmandelique (m├⌐taboli~es des cat├⌐cholamines)
+1677 | DOTS | Cat├⌐cholamines urinaires... "... ". '
+1679 | DOTS,NOACCENT | Estrone (E1)...,
+1680 | OCR | ~├⌐riv├⌐s methoxyl├⌐s
+1681 | NOACCENT | Anticorps microsomes
+1682 | NOACCENT | Anticorps antithyroglobuline
+1683 | NOACCENT | Iode proteique ou hormonal
+1685 | NOACCENT | Triodothyronine (T3)..,
+1686 | DOTS,NOACCENT | Thyrox1n"e (T")...;
+1688 | DOTS,NOACCENT | T 4 libre (FT 4)... "'... !..
+1689 | NOACCENT | Indice de thyroxine libre
+1690 | DOTS,NOACCENT | Thyroglobuiine...:
+1691 | DOTS,NOACCENT | Thyroxin binclingglobuHn...:
+1692 | COLON,NOACCENT | Thyrocalcitonine..::..;
+1693 | NOACCENT | Hormone corticotrope (ACTH)..
+1694 | NOACCENT | Hormone de croissance..,
+1695/2 | NOACCENT | Parathormone (PTH)
+1696 | DOTS,NOACCENT | 1. Progesterone.. '... '.'
+1697 | DOTS,NOACCENT | Dix-s.ept hydroxy progesterone...:
+1699 | DOTS | Insuline...,
+1703 | OCR,NOACCENT | Oxyd~ de carbone
+1706 | DOTS,OCR | Fluor┬╖...:..
+1709/3 | NOACCENT | _ Carbamazepine.. '.'
+1711/2 | NOACCENT | Recherche identification et dosage
+1712 | DOTS | Cyanures et m├⌐tabolites...,..,
+1716-2 | NOACCENT | Recherche dosage et identification
+1716/1 | NOACCENT | Recherche de porphyrines (urines)
+1716/2 | NOACCENT | Recherche dosage et identification
+1719 | NOACCENT | Plantes toxiqdes (identification microscopique)
+1720 | NOACCENT | Fluorures (dosage)
+1721 | NOACCENT | Arsenic, cyanure (identification)
+a25-895 | DOTS,OCR | 1:s30 Acidit├⌐ ionique (pH sanguin)...;.:. ΓÇóΓÇó ΓÇó ΓÇó. ΓÇó ΓÇó ΓÇó
+ART5 | OCR,NOACCENT | Traitement sanglant des pseudarthrose┬╖ ou des cals
+AUTO-4 | NOACCENT | Actes en plusieurs temps
+AUTO-6 | NOACCENT | qu 'en soit la technique
+AUTO-10 | NOACCENT | TITRE V. ACTES PORTANT SUR LE RACHIS OU LA MOELLE EPINIERE
+AUTO-11 | NOACCENT | TITRE VI. ACTES PORTANT SUR LE MEMBRE SUPERIEUR
+AUTO-12 | NOACCENT | TITRE VII. ACTES PORTANT SUR LE THORAX
+AUTO-14 | NOACCENT | TITRE VIII. ACTES PORTANT SUR L'ABDOMEN
+AUTO-15 | NOACCENT | TITRE X. ACTES PORTANT SUR L'APPAREIL GENITAL MASCULIN
+AUTO-16 | NOACCENT | TITRE II. ANATOMIE ET CYTOLOGIE PATHOLOGIQUES
+AUTO-19 | OCR,NOACCENT | actes de traitemen~ des traumatismes ntre
+AUTO-35 | NOACCENT | Os du carpe. ou un os de l'avant-bras..
+AUTO-45 | DOTS,NOACCENT | Main, poignet, coude-pied, pied...,
+AUTO-46 | OCR,NOACCENT | Avant┬╖bras, jambe, cuisse, genou..
+AUTO-47 | DOTS,NOACCENT | ou bi-jambier..,...,
+AUTO-48 | NOACCENT | Doigts autres que le pouce
+AUTO-49 | DOTS,NOACCENT | Orteils... ".. '...,..
+AUTO-50 | DOTS,NOACCENT | Pouce. clavicule... '
+AUTO-56 | DOTS,NOACCENT | des parties mol!es...,
+AUTO-66 | DOTS,NOACCENT | Bestedka."...,..,...,.. "...,..,.,..,...,.,.
+AUTO-80 | DOTS | avec ou sans anesth├⌐sie,,,,,,,,.,,,.,...,,.,....,.,,.,..,,,,,..,,
+AUTO-85 | OCR | entente pr├⌐alable alkltsl├á Ja┬╖ trois s├⌐ances
+AUTO-87 | DOTS | Ablation ou destruction de tumeurs b├⌐nignes cutan├⌐es. sous-cutan├⌐es ou sous-apon├⌐vrotiques, quelles que soient la demens
+AUTO-92 | DOTS,OCR,NOACCENT | Une verrue... '.... ΓÇó
+AUTO-96 | DOTS | ments combin├⌐s. par s├⌐ance.... _
+AUTO-97 | OCR | pour traitement d'une affection 'du derrme ou de l"├⌐piderme, par s├⌐~pce.
+AUTO-105 | DOTS,NOACCENT | deux tendons....,... '
+AUTO-126 | DOTS | rielle guid├⌐e (ex. coronarographie, m yelographie etc) ",.,...,..
+AUTO-151 | DOTS,NOACCENT | avec un maximum de deux par sernain... _.:.. _. _.:..
+AUTO-154 | DOTS | sup├⌐rieur.. -...,.. '. '
+AUTO-159 | DOTS | Neurotoriie '- ' p├⌐riph├⌐rique...:. '..,..:,
+AUTO-164 | NOACCENT | chirurgie endothoracique ou de neuro-chirurgie
+AUTO-169 | DOTS,OCR | ment photographique ├á faible d├⌐finition..,... ~ ΓÇó ΓÇó ΓÇó ΓÇó. ΓÇó... ΓÇó ΓÇó... ΓÇó
+AUTO-170 | NOACCENT | chronologiques..:..,
+AUTO-208 | DOTS,OCR,NOACCENT | tarsorraphie et canthoplastie)...:.. _... ~
+AUTO-215 | DOTS | pour chaque ├⌐q.uipe '''...,... ',.'..
+AUTO-217 | DOTS,NOACCENT | jours maximum...;.. '..;'.... '....,..
+AUTO-232 | DOTS | par p├⌐riode de vingt jours... _
+AUTO-233 | OCR,NOACCENT | soit la technique: broutag~ section aux ciseaux. au laser VAG..
+AUTO-255 | DOTS | effectu├⌐s '...:...;..
+AUTO-300 | NOACCENT | drainage filiforme}
+AUTO-304 | NOACCENT | plusief,,'lfs temps
+AUTO-338 | DOTS | articulation. (endo-proth├¿se non comprise)..,.;... Hio
+AUTO-345 | OCR | Forfait annuel, par ann├⌐e ΓÇó.. ΓÇó ΓÇó ΓÇó ΓÇó.. ΓÇó..;," ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó.. ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó.. ΓÇó.. ΓÇó # ΓÇó.. ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó
+AUTO-346 | DOTS | En p├⌐riode d'attente...:..
+AUTO-347 | DOTS | La cotatJon ├á retenitpour cette an├⌐sth├¿sie g├⌐n├⌐rale est... '.
+AUTO-349 | DOTS | soumises aux formalit├⌐s de l'tintente pr├⌐alable:.Extraction d'une dent...,
+AUTO-350 | DOTS,NOACCENT | Chacune des suivantes...;.
+AUTO-352 | NOACCENT | Treize et au-dessus
+AUTO-360 | DOTS,NOACCENT | ou plusieurs deryts et le drainage d'une collection... '"
+AUTO-376 | DOTS | Cavit├⌐ sim!)le...:
+AUTO-377 | NOACCENT | Pilier-bridge - ou couronne..,
+AUTO-383 | DOTS | Pour perte de substance v├⌐lopalptine,...,
+AUTO-384 | DOTS,NOACCENT | non conlprise}.. '... v,'.... _.
+AUTO-387 | DOTS | la mandibule lr├⌐section chirurgicale ou greffe)...,..
+AUTO-388 | DOTS | Appareillage par mobilisateur du maxillaire inf├⌐rieur (quel que soit le mod├¿le)..,... "
+AUTO-391 | NOACCENT | Appareillage de distention d'es cicatrices vicieuses
+AUTO-392 | DOTS,NOACCENT | ionisantes... _...,.
+AUTO-394 | NOACCENT | Prise en charge du syndrome de De Costen..
+AUTO-411 | OCR | pharyngolaryng├¬e, quels que soient la technique utilis├⌐e et le nombre d'├⌐preuves effectu├⌐es ┬╖..
+AUTO-413 | DOTS | app'rentissage de la voix C)esophagienne par s├⌐ance...,...,..
+AUTO-427 | DOTS | ChaljUe s├⌐ance... '.'
+AUTO-469 | DOTS | c├┤te.. ',.,.,.... "...,..,... ". " ",.". ".,...,.,' ".
+AUTO-473 | NOACCENT | pharmaco-dynamique qualitative
+AUTO-480 | NOACCENT | vitale, de la ventilation et de la consommation d'oxygene
+AUTO-481 | NOACCENT | mon, mesure de la' compliance dynamique et du travail ventilatoire..
+AUTO-482 | DOTS,OCR | spirographie compl├¿te... ΓÇó
+AUTO-497 | DOTS | anasth├⌐sie comprise..;... '
+AUTO-503 | NOACCENT | Toutes sections. sutures, anastomeses portant sur les gros vaisseaux
+AUTO-507 | DOTS,OCR | de la r├⌐daction d'un dossier cardio-vasculair~ avec con~lusions diagnostiqdes et indications th├⌐rapeutiqdes ├⌐ventuelles 
+AUTO-516 | OCR | ou colorant, avec ou sans pr├⌐l├¿vement de sang' pout dosage.ΓÇó:.. tOI.
+AUTO-527 | DOTS,OCR | pl├⌐mentde l'acte th├⌐rapeutique... -'... ~
+AUTO-529 | DOTS,OCR | art├¿re coronaire pour l├⌐sion aquise ou cong,├⌐nitale... ΓÇó ΓÇó ΓÇó. ΓÇó... ΓÇóΓÇó
+AUTO-533 | DOTS,NOACCENT | chirurgien... -... '.
+AUTO-540 | DOTS | ou sans manom├⌐trie... '
+AUTO-554 | DOTS | atiqdes ou les deux, avec ou sans biopsie, avec clich├⌐ radiographique...,... _
+AUTO-560 | NOACCENT | pour occlusion intestinale suivie ou non d'intervention, par jour.
+AUTO-592 | OCR | rectum, e~tractlo~ de corps ├⌐tranger n├⌐cessitant une an├⌐sth├¿sle.
+AUTO-597 | DOTS,NOACCENT | la marge de,'anus... _
+AUTO-612 | NOACCENT | Avec utilisation de la sonde da Fogarty
+AUTO-613 | NOACCENT | Lombotcmle eXf.loratr!ce
+AUTO-649 | DOTS,NOACCENT | Biopsie testiculaire...,.... ---.,.. _
+AUTO-652 | DOTS | ├⌐ventuelle de la hernie comprise)...;
+AUTO-654 | DOTS | O.I.U un ou plusieurs de ces actes dans la m├¬me s├⌐ance...;.
+AUTO-669 | NOACCENT | document photographique et d'un compte tendu,
+AUTO-673 | OCR | CCI~prbia d├⌐livrance artifiCielle
+AUTO-680 | DOTS,OCR,NOACCENT | r'achidiermel oO.. ΓÇó ΓÇó " " ΓÇó ΓÇó.. ΓÇó ΓÇó... -.. '."...,.... ΓÇó.
+AUTO-683 | DOTS | tout organe g├⌐nital.. -.. _... ','..,.. '.. -foo
+AUTO-684 | DOTS,OCR,NOACCENT | quatre heures)... < ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó ΓÇó
+AUTO-701 | NOACCENT | que soit la technique avec un maximum de deux par semaine
+AUTO-703 | DOTS,OCR | sup├⌐rieure du tibia non ┬╖ compris le pr├⌐l├¿vement ├⌐ventuel d'un greffon..,..:...,...;
+AUTO-716 | DOTS | Les trois premi├¿res s├⌐ances... "."
+AUTO-734 | NOACCENT | labyrinthes de Porteu!':.
+AUTO-735 | OCR,NOACCENT | Av~c analyse qualificative.
+AUTO-760 | DOTS | s├⌐ances "..,.... ',.. ".,..,..:..,.. ' ".,
+AUTO-766 | DOTS,NOACCENT | Pour tous le corps...,
+AUTO-779 | NOACCENT | d't.:n appareil..,..,.. '..,..
+AUTO-792 | NOACCENT | Etats asphyxiqdes aigus;.
+AUTO-794 | DOTS | ├⌐tablissement d'un compte rendu... _..
+AUTO-795 | OCR | Avec entente pr├⌐alable au┬╖del├á de
+AUTO-809 | DOTS,OCR,NOACCENT | raIe comprise, par segment... <. ΓÇóΓÇóΓÇóΓÇó ΓÇóΓÇóΓÇóΓÇó ΓÇóΓÇóΓÇóΓÇó ΓÇóΓÇó ΓÇó ΓÇó ΓÇóΓÇóΓÇóΓÇó ΓÇóΓÇó
+AUTO-811 | DOTS | franc de l'├⌐paule, scapho├»de... _.
+AUTO-815 | DOTS | nos Recherche d'un coros ├⌐tranger oculaire par radiographie multiples. l'examen... "
+AUTO-820 | NOACCENT | Chacun de ces examens
+AUTO-822 | DOTS,NOACCENT | Examen radioscopique ou radiophotographie... '.. '.
+AUTO-823 | DOTS,OCR | T├⌐l├⌐radiographie.... "... -,.. Opacifi c~~ tion bronchique, m├⌐diastinographie..
+AUTO-827 | DOTS | cysto-ur├⌐trographie mictionnelle.'.. ",. '...,. ",..,,... '
+AUTO-828 | OCR | Mamm~raphie bilat├⌐rale '.,.. ".,
+AUTO-829 | DOTS | Radiopelvim├⌐trie. '". ".'.,. '."..,.. ".. '....,. '.",..
+AUTO-830 | NOACCENT | Opaque, radiculographle, discographie d'uil ou plusieurs disqdes
+AUTO-831 | NOACCENT | Sacco-radiculographie
+AUTO-833 | DOTS | P├⌐ripMrique simple.'... P├⌐riph├⌐rique allt:c aortogrnphle sous-r├⌐nale
+AUTO-834 | DOTS | C├⌐r├⌐brale, vert├⌐brale ou car<;ltidienne.... \
+AUTO-835 | NOACCENT | Angiocardiographie
+AUTO-836 | DOTS,OCR | temps op├⌐ratoire... _.. ΓÇó.ΓÇó.
+AUTO-839 | COLON | Arthographle y -::ompris l'examen sans pr├⌐paration effectu├⌐.le m├¬me jour
+AUTO-841 | DOTS | corps ├⌐tranger.... '...,
+AUTO-843 | OCR | non parall├¿le ~u pr├⌐c├⌐dent, base fixe suppl├⌐mentaire.. _..
+AUTO-846 | NOACCENT | Injection de prodUit de contraste..,.
+AUTO-847 | DOTS,OCR | la pr├⌐vision dosim├⌐trique et le compte rendu de fin d'irradiation.... ΓÇó... _..
+AUTO-850 | DOTS | absorb├⌐e par volume cible ├ál'isodose de r├⌐f├⌐rence... _
+AUTO-855 | OCR,NOACCENT | diatlon '.. _.. O ' ΓÇóΓÇóΓÇóΓÇó
+AUTO-874 | NOACCENT | que, mycologique ou virologique
+AUTO-877 | DOTS,NOACCENT | tion.s...,...,. '"
+AUTO-898 | DOTS,NOACCENT | Calcium..,..,... Ceruleoplasmine '"... "
+AUTO-905 | OCR,NOACCENT | document et compte rendu).. ΓÇó.
+AUTO-907 | NOACCENT | dosage des prot!ilnestotales + document et compte rendu.
+AUTO-908 | DOTS | Sodium... '... Ur├⌐e _ '".. G.. Potassium + Sodium + Chlore..
+AUTO-909 | NOACCENT | des proteines)..,..
+AUTO-910 | DOTS | Corps bir├⌐fringents... Cr├⌐atinine
+AUTO-917 | NOACCENT | d'lsage de proteines)
+AUTO-926 | NOACCENT | acides organiques, de l'amoniaque. pH
+AUTO-927 | OCR,NOACCENT | boulet) ne peut ┬╖se cumuler avec l'e xamen chimique complet).
+AUTO-950 | NOACCENT | tats + bicarbonates + chlorures
+AUTO-961 | NOACCENT | recherGhes et.eventuellement dosages de la glycosurie)
+AUTO-971 | DOTS | m├⌐tre....;:.... "..,..:.. _.;...:.... _... -
+AUTO-980 | OCR | sang veineux et en tube. m├⌐thode de Lee et White)┬╖ ├⌐tude de la r├⌐tracB
+AUTO-981 | DOTS | tibilit├⌐ du caillot, fragilit├⌐ capillaire... _
+AUTO-997 | DOTS,OCR | total du Sallg (h├⌐mato",rite)... ~- -"_.. -
+AUTO-1008 | DOTS | titrages si n├⌐cessaire _..,.. _.... _.. _. __.. _.. _
+AUTO-1010 | NOACCENT | tification du ou des anticorps
+AUTO-1013 | NOACCENT | par minute (compte d'Addis) ou par millilitre
+AUTO-1027 | DOTS | exp├⌐rimental sur l'animal...,'
+AUTO-1038 | DOTS,OCR | les pycobact├⌐ries:....;. bact├⌐rie a├⌐robie.. ΓÇó ΓÇó ~ " " el.. """. " "". "'.,, !.
+AUTO-1063 | NOACCENT | ruelle de: dermatophytes, aspergillus. candida, torulopsis, etc..
+AUTO-1067 | DOTS,OCR,NOACCENT | des deux examens... ΓÇó.,.,.,..,
+AUTO-1068 | DOTS | nombre d'┼ôufs par gramme de selles), sur prescription particuli├¿re exclusivement...,..
+AUTO-1069 | DOTS,OCR | pie. Examen extemporan├⌐.et apr├¿s ~oloratiOfl...,
+AUTO-1073 | OCR | eXUli-tCn direct ~t ├⌐v.ent~Uement apr├¿s enrichis~emenl: (autres que trichamonas ou champ:.Q{lOm. llui font (l'objet de c
+AUTO-1081 | NOACCENT | maximUl,' de deux): chacun..,
+AUTO-1094 | DOTS | all├¿rg├¿nes)... '
+AUTO-1096 | DOTS,NOACCENT | para A. para B. para C...,... _.... -..
+AUTO-1097 | DOTS | ou de particules sensibilis├⌐es.. _...;.. ___.... -.. -..
+AUTO-1098 | DOTS,NOACCENT | Davidsohn..:,... _. _....,.. __ _..
+AUTO-1099 | DOTS | Paul et Bunnelln├⌐gative)...;... _. _
+AUTO-1102 | DOTS,OCR | comprend la recherct\e des anticorps bloquants si n├⌐cessaire)... ΓÇó..
+AUTO-1103 | NOACCENT | serum antihumain total (non cumulab!e avec le proteinogramme).
+AUTO-1108 | DOTS,OCR,NOACCENT | cumulable avec.le diagnostic de grossesse)...:.., ".. ΓÇó
+AUTO-1114 | DOTS | Cetostero├»des J.'..., '..
+B10-894 | DOTS,NOACCENT | 1 329 Acide urique.... '..,
+B10-925 | OCR | 1~93 Ur├⌐e (dosage)
+B10-1041 | DOTS,OCR | - mise en ├⌐vidence d'une ┬╖b├⌐ta-Iactamase...,..
+B15-888 | OCR | 13~1 Dea urines (y compris le s├⌐diment min├⌐ral).. ΓÇó
+B15-1106 | DOTS | tro-immunodiffusion ou par ├⌐lectre-syn├⌐r├¿se... 1659 Typage HLA (1 sp├⌐clfu├⌐ A ou Bi
+B20-889 | OCR,NOACCENT | 1~22 O'UI"! liquide bioloqjque (autre que les urines)
+B20-892 | DOTS,NOACCENT | 1326i Acides,gras libres...:... \
+B20-1042 | DOTS,OCR,NOACCENT | -Iocoquea. ΓÇó ΓÇó ΓÇóΓÇó.,.... ".. "
+B20-1046 | OCR | 1564. al Sur lignes ├⌐pith├⌐liale continue humaine Otl animale 000 ΓÇó ΓÇó 0 '0 '0
+B20-1160 | DOTS,OCR,NOACCENT | 171111 Recherche...,... ΓÇó. ΓÇó
+B25-890 | OCR,NOACCENT | 1323.Epreuve de Huhner.. ΓÇóΓÇóΓÇóΓÇó ΓÇó ΓÇóΓÇóΓÇó
+B30-893 | DOTS,OCR,NOACCENT | 13~ !7 Acide lactique... "1 '"
+B30-1005 | OCR,NOACCENT | ΓÇóΓÇóΓÇóΓÇó ' ".. ΓÇó ΓÇóΓÇó ΓÇó, ΓÇó ΓÇóΓÇóΓÇóΓÇó ΓÇóΓÇó ! ΓÇóΓÇóΓÇó.
+B30-1031 | NOACCENT | - examen mIcroscopique (avec ou sans fluorescence)
+B30-1083 | DOTS,NOACCENT | '. ximum de deux): chacun...;..
+B30-1107 | OCR | que avec au moi~s 2 r├⌐actifs
+B35-1100 | NOACCENT | trepiolysine. "0" ou antistreptokinase)
+B40-1032 | NOACCENT | - culture d'isolement..,.:.
+B40-1045 | DOTS | - par antibiotique test├⌐... ""... "
+B40-1071 | OCR,NOACCENT | d'ankylostomes.,.. o" 0 ΓÇó ~ ΓÇó ΓÇó. " "it-:'!- ΓÇóΓÇóΓÇóΓÇó
+B45-994 | NOACCENT | 1S0S -- Deux de ces dosages
+B45-1077 | OCR | ~S20 - Recherche simultan├⌐e d'antig├¿ne et anticorps homologu├⌐s par immunodiffusion(Quchterlony)
+B50-1043 | DOTS,NOACCENT | - dosage d'un antibiotique....,..
+B50-1044 | DOTS,OCR | _. d├⌐termination de l'actlvlt~ antiblotlqve globale d'un Ilqutde blologlqu& en bact├⌐rlostase et bact├⌐rlcldle...,
+B50-1062 | OCR,NOACCENT | ΓÇó 593 1. Identification d'un champlglon autre que candida alblcans..
+B60-995 | DOTS,NOACCENT | i S06 - Plus de deux dosages... '
+B60-1028 | DOTS,NOACCENT | - par technique immunologique...,
+B60-1033 | NOACCENT | - Identification biochimique..
+B70-1133 | DOTS,NOACCENT | 1687. T3 libre (FT3)....:...:
+B70-1141 | DOTS | ├«695 Prolactine..: "...,
+B80-940 | OCR | t430 Cl1romatographie en couche mince des aC├Ädes.am┬╖in├⌐s urinaires
+B80-1021 | DOTS,OCR,NOACCENT | pus et divers IO...,.,..,. ΓÇóΓÇó 10
+B80-1101 | DOTS | cociqdes 1 s├⌐rum... _..;..
+B100-878 | NOACCENT | &,iqdes (unique cu multiples), que! que soit le nombre de fragments
+B100-951 | DOTS,NOACCENT | dosages de 3 enzymes)...;..
+B100-1029 | DOTS | - par s├⌐roneutralisation du pouvoir pathog├¿ne...,..
+B100-1050 | NOACCENT | '571 2'┬╗) Arbovirus.;.
+B100-1052 | OCR,NOACCENT | '574 5Q ) ~~ et virus respiratoire syricytial.
+B120-881 | NOACCENT | (quel que soit le nombre de fragments)
+B120-1112 | OCR | 5 frac~onsJ non cumulables avec le dosage des 17 cetostero├»des ΓÇóΓÇó
+B150-1047 | OCR,NOACCENT | Recherche de virus par inoculation sur ┼ÆIlIf5 embryo'hnes fmlnlmum d~ 4. ┼ôufs). 0 ΓÇó ΓÇó ΓÇóΓÇó '.'" ΓÇó 0 ΓÇóΓÇó,. 0 0 0 0 0 ΓÇó ΓÇóΓÇó 0 
+B150-1048 | OCR,NOACCENT | ceaux (minimum de 10 souriceaux) o.ΓÇóΓÇó o ΓÇóΓÇóΓÇó o ΓÇó. 0 ΓÇó 0 0 0., 0 0 o..ΓÇó
+B200-1030 | NOACCENT | - par toxinotypie botulique..
+B200-1055 | DOTS,OCR | &0) Pollomy├⌐ilte... B 100.S18 a) isol├⌐ en culture cellulaire... 6" o┬╖".. o ΓÇó ΓÇó ΓÇó
+C | OCR,NOACCENT | ,80 du ge au 1 ~e jour
+E25-263 | DOTS,NOACCENT | externe...,...,... 60
+E30-284 | NOACCENT | 0393.Rhinoplastie post-traumatique, y compris le traitement de la cloison.. 100
+E40-266 | DOTS | lambeaux cutan├⌐s... 120
+E40-358 | NOACCENT | 05J 4/2 De deux dent
+E60-302 | DOTS | maxillaires ou ta r,landibule pour l├⌐sion cong├⌐nitale ou ancienne.... 150
+X1-17 | OCR | - (pour chacun des deux m├⌐d~ins ).. V
+X1-18 | DOTS,OCR | cio au cabinet duquel la ├ºoosultation ~ liet!... CS X 1 ou CPSY

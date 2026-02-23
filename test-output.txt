@@ -1,102 +1,260 @@
-≡ƒº¬ TEST VALIDATION FINALE V3.3.171
+=== TOP 15 CANDIDATS ===
 
-================================================================================
-
-≡ƒôï CAS 1: Fracture-Luxation L1 avec signes neurologiques
---------------------------------------------------------------------------------
-≡ƒô¥ Description clinique:
-   "ag├⌐ de 70 ans ; victime d'un AT 14.07.1991 ; fracture luxation de L1 ; trait├⌐ chirurgicalement ; s├⌐quelles amyotrophie du membre inferieur gauche ; marche avec steppage ; raideur du rachis"
-
-≡ƒöì Analyse...
-
-≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): ag├⌐ de 70 ans ; victime d'un AT 14.07.1991 ; fracture luxation de L1 ; trait├⌐ chirurgicalement ; s├⌐quelles amyotrophie du membre inferieur gauche ; marche avec steppage ; raideur du rachis
-≡ƒöì DEBUG STEPPAGE D├ëTAILL├ë:
-   - steppageMatch: true
-   - amyotrophieMIMatch: true
-   - fractureL1Match: true
-   - Texte analys├⌐: ag├⌐ de 70 ans ; victime d'un AT 14.07.1991 ; fracture luxation de L1 ; trait├⌐ chirurgicalement ; s├⌐quelles amyotrophie du membre inferieur gauche ; marche avec steppage ; raideur du rachis
-Γ£à PARALYSIE SPE AVEC STEPPAGE D├ëTECT├ëE (PRIORIT├ë ABSOLUE)
-≡ƒöì DEBUG D├ëVIATION:
-   - deviationMatch: false
-   - mainContext: false
-   - Recherche dans: diviation NON trouv├⌐
-≡ƒöì [V3.3.155] S├⌐quelles d├⌐tect├⌐es: 4 [
-  'Paralysie du nerf sciatique poplit├⌐ externe (SPE) avec steppage',
-  'S├⌐quelles de fracture/luxation du rachis lombaire - Avec l├⌐sion neurologique l├⌐g├¿re',
-  'Steppage gauche (pied tombant - paralysie releveur du pied)',
-  'Amyotrophie globale du membre inf├⌐rieur (cuisse + jambe)'
+≡ƒÄ» TOP 50 R├ëSULTATS: [
+  {
+    name: 'Fracture des deux os de la jambe - Avec cal vicieux et troubles trophiques',
+    score: 952,
+    path: 'Membres Inf├⌐rieurs > Jambe - Fractures'
+  },
+  {
+    name: 'Fracture des deux os de la jambe - Bonne consolidation',
+    score: 941,
+    path: 'Membres Inf├⌐rieurs > Jambe - Fractures'
+  },
+  {
+    name: "Fracture de l'extr├⌐mit├⌐ inf├⌐rieure du f├⌐mur - Avec raideur du genou",
+    score: 769,
+    path: 'Membres Inf├⌐rieurs > Cuisse - Fractures'
+  },
+  {
+    name: 'Fracture diaphysaire du f├⌐mur',
+    score: 669,
+    path: 'Membres Inf├⌐rieurs > Cuisse - Fractures'
+  },
+  {
+    name: 'Fracture du col du f├⌐mur - Consolidation avec raccourcissement et raideur',
+    score: 537,
+    path: 'Membres Inf├⌐rieurs > Hanche - Fractures'
+  },
+  {
+    name: 'Fracture des condyles f├⌐moraux - Avec d├⌐viation et/ou raideur',
+    score: 502,
+    path: 'Membres Inf├⌐rieurs > Genou - L├⌐sions Osseuses et Articulaires'
+  },
+  {
+    name: 'Fracture de la rotule - Avec g├¬ne fonctionnelle',
+    score: 491,
+    path: 'Membres Inf├⌐rieurs > Genou - L├⌐sions Osseuses et Articulaires'
+  },
+  {
+    name: 'Cal vicieux du f├⌐mur - Raccourcissement entre 10 et 50 mm',
+    score: 488,
+    path: 'Membres Inf├⌐rieurs > Cuisse - Fractures'
+  },
+  {
+    name: 'Cal vicieux du f├⌐mur - Raccourcissement au-del├á de 50 mm',
+    score: 488,
+    path: 'Membres Inf├⌐rieurs > Cuisse - Fractures'
+  },
+  {
+    name: "Cal vicieux du f├⌐mur - Raccourcissement jusqu'├á 10 mm (compens├⌐ par talonnette)",
+    score: 487,
+    path: 'Membres Inf├⌐rieurs > Cuisse - Fractures'
+  },
+  {
+    name: 'Col f├⌐mur + raideur + raccourcissement (cumul)',
+    score: 408,
+    path: 'Cumuls de L├⌐sions et Polytraumatismes > Cumuls Simples - M├¬me Membre'
+  },
+  {
+    name: 'Fracture du massif trochant├⌐rien - Cal vicieux et raideur',
+    score: 362,
+    path: 'Membres Inf├⌐rieurs > Hanche - Fractures'
+  },
+  {
+    name: 'Fracture du massif trochant├⌐rien - Bonne consolidation',
+    score: 352,
+    path: 'Membres Inf├⌐rieurs > Hanche - Fractures'
+  },
+  {
+    name: 'Fracture genou sur gonarthrose pr├⌐existante',
+    score: 321,
+    path: '├ëtats Ant├⌐rieurs et Aggravation de Pathologies Pr├⌐existantes > Aggravation Genou sur ├ëtat Ant├⌐rieur'
+  },
+  {
+    name: 'S├⌐quelles de proth├¿se totale de genou',
+    score: 273,
+    path: 'Membres Inf├⌐rieurs > Genou - L├⌐sions Osseuses et Articulaires'
+  },
+  {
+    name: 'D├⌐chirure/rupture ligament lat├⌐ral interne (LLI) - ligament collat├⌐ral m├⌐dial genou',
+    score: 272,
+    path: 'Membres Inf├⌐rieurs > Genou - L├⌐sions Ligamentaires et M├⌐niscales'
+  },
+  {
+    name: 'Hydarthrose chronique du genou',
+    score: 271,
+    path: 'Membres Inf├⌐rieurs > Genou - L├⌐sions Osseuses et Articulaires'
+  },
+  {
+    name: "Laxit├⌐ chronique du genou (s├⌐quelle d'entorse)",
+    score: 271,
+    path: 'Membres Inf├⌐rieurs > Genou - L├⌐sions Ligamentaires et M├⌐niscales'
+  },
+  {
+    name: 'D├⌐chirure/rupture ligament lat├⌐ral externe (LLE) - ligament collat├⌐ral lat├⌐ral genou',
+    score: 271,
+    path: 'Membres Inf├⌐rieurs > Genou - L├⌐sions Ligamentaires et M├⌐niscales'
+  },
+  {
+    name: 'Raideur genou sur proth├¿se pr├⌐existante',
+    score: 233,
+    path: '├ëtats Ant├⌐rieurs et Aggravation de Pathologies Pr├⌐existantes > Aggravation Genou sur ├ëtat Ant├⌐rieur'
+  },
+  {
+    name: 'Chondropathie aggrav├⌐e sur arthrose genou',
+    score: 222,
+    path: '├ëtats Ant├⌐rieurs et Aggravation de Pathologies Pr├⌐existantes > Aggravation Genou sur ├ëtat Ant├⌐rieur'
+  },
+  {
+    name: '├ëlongation/d├⌐chirure musculaire quadriceps - Tendinopathie quadricipitale (s├⌐quelles)',
+    score: 207,
+    path: 'Membres Inf├⌐rieurs > Cuisse - L├⌐sions Musculaires et Tendineuses'
+  },
+  {
+    name: 'Rupture du tendon quadricipital',
+    score: 200,
+    path: 'Membres Inf├⌐rieurs > Cuisse - L├⌐sions Musculaires et Tendineuses'
+  },
+  {
+    name: 'Raideur genou + instabilit├⌐ LCA (cumul)',
+    score: 193,
+    path: 'Cumuls de L├⌐sions et Polytraumatismes > Cumuls Simples - M├¬me Membre'
+  },
+  {
+    name: 'Raideur genou + d├⌐robements',
+    score: 193,
+    path: 'Cumuls de L├⌐sions et Polytraumatismes > Cumuls Simples - M├¬me Membre'
+  },
+  {
+    name: 'Polytraumatisme vision + audition + genou',
+    score: 192,
+    path: 'Cumuls de L├⌐sions et Polytraumatismes > Polytraumatismes - Membres Multiples'
+  },
+  {
+    name: 'Destruction genou (polytraumatisme intra-articulaire)',
+    score: 192,
+    path: 'Cumuls de L├⌐sions et Polytraumatismes > Polytraumatismes - Membres Multiples'
+  },
+  {
+    name: 'S├⌐quelles de rupture du ligament crois├⌐ ant├⌐rieur (LCA)',
+    score: 191,
+    path: 'Membres Inf├⌐rieurs > Genou - L├⌐sions Ligamentaires et M├⌐niscales'
+  },
+  {
+    name: 'S├⌐quelles de rupture du ligament crois├⌐ post├⌐rieur (LCP)',
+    score: 191,
+    path: 'Membres Inf├⌐rieurs > Genou - L├⌐sions Ligamentaires et M├⌐niscales'
+  },
+  {
+    name: 'S├⌐quelles de m├⌐niscectomie (douleurs, hydarthrose)',
+    score: 191,
+    path: 'Membres Inf├⌐rieurs > Genou - L├⌐sions Ligamentaires et M├⌐niscales'
+  },
+  {
+    name: 'Entorse LCA sur m├⌐niscectomie ancienne',
+    score: 141,
+    path: '├ëtats Ant├⌐rieurs et Aggravation de Pathologies Pr├⌐existantes > Aggravation Genou sur ├ëtat Ant├⌐rieur'
+  },
+  {
+    name: 'S├⌐quelles de l├⌐sions musculaires majeures de la cuisse',
+    score: 118,
+    path: 'Membres Inf├⌐rieurs > Cuisse - L├⌐sions Musculaires et Tendineuses'
+  },
+  {
+    name: "Syndrome des loges chronique d'effort de la jambe",
+    score: 112,
+    path: 'Membres Inf├⌐rieurs > Jambe - Fractures'
+  },
+  {
+    name: 'Polytraumatisme membre inf├⌐rieur droit complet',
+    score: 112,
+    path: 'Cumuls de L├⌐sions et Polytraumatismes > Polytraumatismes - Membres Multiples'
+  },
+  {
+    name: 'LCA + m├⌐niscectomie + instabilit├⌐ (cumul)',
+    score: 102,
+    path: 'Cumuls de L├⌐sions et Polytraumatismes > Cumuls Simples - M├¬me Membre'
+  },
+  {
+    name: 'Apon├⌐vrosite plantaire (fasciite plantaire) chronique post-traumatique',
+    score: 63,
+    path: 'Membres Inf├⌐rieurs > Pied - Pathologies des tissus mous'
+  },
+  {
+    name: 'Syndrome post-thrombotique (maladie post-phl├⌐bitique)',
+    score: 62,
+    path: 'S├⌐quelles Thoraciques, Abdominales, Pelviennes et Cardio-vasculaires > Vaisseaux P├⌐riph├⌐riques'
+  },
+  {
+    name: "Tendinopathie d'Achille post-traumatique chronique",
+    score: 62,
+    path: 'Membres Inf├⌐rieurs > Pied - Tendons'
+  },
+  {
+    name: 'Troubles trophiques, ┼ôd├¿me chronique, varices',
+    score: 62,
+    path: 'Membres Inf├⌐rieurs > Membre Inf├⌐rieur - L├⌐sions Diverses'
+  },
+  {
+    name: "Raccourcissement d'un membre inf├⌐rieur",
+    score: 51,
+    path: 'Membres Inf├⌐rieurs > Membre Inf├⌐rieur - L├⌐sions Diverses'
+  },
+  {
+    name: 'Boiterie (sans raccourcissement)',
+    score: 51,
+    path: 'Membres Inf├⌐rieurs > Membre Inf├⌐rieur - L├⌐sions Diverses'
+  },
+  {
+    name: 'Fracture hanche sur coxarthrose pr├⌐existante',
+    score: 30.1,
+    path: '├ëtats Ant├⌐rieurs et Aggravation de Pathologies Pr├⌐existantes > Aggravation Hanche et Membre Inf├⌐rieur sur ├ëtat Ant├⌐rieur'
+  }
 ]
-ΓÜá∩╕Å POLYTRAUMATISME D├ëTECT├ë: 4 s├⌐quelle(s)
-≡ƒôÜ TROUV├ë DANS BAR├êME: "Paralysie du nerf sciatique poplit├⌐ externe (SPE) avec steppage" ΓåÆ "Paralysie du nerf sciatique poplit├⌐ externe (SPE)" (15-25%)
-≡ƒôÜ TROUV├ë DANS BAR├êME: "S├⌐quelles de fracture/luxation du rachis lombaire - Avec l├⌐sion neurologique l├⌐g├¿re" ΓåÆ "S├⌐quelles de fracture/luxation du rachis lombaire (sans l├⌐sion neurologique)" (10-30%)
-≡ƒôÜ TROUV├ë DANS BAR├êME: "Amyotrophie globale du membre inf├⌐rieur (cuisse + jambe)" ΓåÆ "Monopl├⌐gie incompl├¿te - Membre inf├⌐rieur (l├⌐sion corticale)" (10-30%)
-≡ƒöä REGROUPEMENT PAR SYST├êME: [ 'NEUROLOGIQUE: 18%', 'RACHIS: 12%', 'MEMBRE_INFERIEUR: 12%' ]
-≡ƒº« CALCUL BALTHAZAR (PAR SYST├êME): [ 'NEUROLOGIQUE: 18%', 'RACHIS: 12%', 'MEMBRE_INFERIEUR: 12%' ]
-≡ƒôè IPP GLOBAL CUMUL├ë: 36%
-Γ£à R├⌐sultat:
-   Type: proposal
-   Rubrique: Polytraumatisme - 3 syst├¿mes atteints
-   IPP: 36-36%
-   Justification: <strong>≡ƒÅÑ POLYTRAUMATISME - CALCUL IPP (Bar├¿me 1967)</strong><br><br><strong>≡ƒôï 4 s├⌐quelles post-traumatiques regroup├⌐es en 3 syst├¿mes anatomiques :</strong><br><br><strong>A. SYST├êME NEUROLOGIQUE</strong> ΓåÆ <span style="color: #d32f2f; font-weight: bold;">18% IPP</span><br>   Γöö Steppage unilat├⌐ral avec amyotrophie (paralysie releveur pied + fonte musculaire) = Atteinte nerf SPE/L5 compl├¿te ΓåÆ IPP 15-20% - Bar├¿me: "Paralysie du nerf sciatique poplit├⌐ externe (SPE)" (15-25%)<br>   Γöö S├⌐quelles regroup├⌐es :<br>      ΓÇó Paralysie du nerf sciatique poplit├⌐ externe (SPE) avec steppage<br>      ΓÇó Steppage gauche (pied tombant - paralysie releveur du pied)<br><br><strong>B. SYST├êME RACHIS</strong> ΓåÆ <span style="color: #d32f2f; font-weight: bold;">12% IPP</span><br>   Γöö Rachis : fracture lombaire consolid├⌐e avec lombalgie chronique mod├⌐r├⌐e - Bar├¿me: "S├⌐quelles de fracture/luxation du rachis lombaire (sans l├⌐sion neurologique)" (10-30%)<br>   Γöö S├⌐quelle regroup├⌐es :<br>      ΓÇó S├⌐quelles de fracture/luxation du rachis lombaire - Avec l├⌐sion neurologique l├⌐g├¿re<br><br><strong>C. SYST├êME MEMBRE INFERIEUR</strong> ΓåÆ <span style="color: #d32f2f; font-weight: bold;">12% IPP</span><br>   Γöö Membre inf├⌐rieur (CUISSE/GENOU) : S├⌐quelles ligamentaires/musculaires avec retentissement fonctionnel - Bar├¿me: "Monopl├⌐gie incompl├¿te - Membre inf├⌐rieur (l├⌐sion corticale)" (10-30%)<br>   Γöö S├⌐quelle regroup├⌐es :<br>      ΓÇó Amyotrophie globale du membre inf├⌐rieur (cuisse + jambe)<br><br><strong>≡ƒº« CALCUL DU CUMUL (Formule de Balthazar - Bar├¿me 1967) :</strong><br><em>Principe : Les s├⌐quelles d'un m├¬me syst├¿me anatomique sont regroup├⌐es en UN SEUL taux.</em><br><em>Le cumul s'applique ensuite entre les SYST├êMES (pas entre s├⌐quelles individuelles).</em><br><br>La formule de cumul : <code>T = 100 - [(100-TΓéü) ├ù (100-TΓéé) ├ù (100-TΓéâ) ├ù ... / 100^(n-1)]</code><br><br>1. Syst├¿me 1 (NEUROLOGIQUE): 18% ΓåÆ Capacit├⌐ restante = 100.0 ├ù (100-18)/100 = 82.0%<br>2. Syst├¿me 2 (RACHIS): 12% ΓåÆ Capacit├⌐ restante = 82.0 ├ù (100-12)/100 = 72.2%<br>3. Syst├¿me 3 (MEMBRE_INFERIEUR): 12% ΓåÆ Capacit├⌐ restante = 72.2 ├ù (100-12)/100 = 63.5%<br><br><strong>≡ƒôè R├ëSULTAT FINAL :</strong><br><div style="background: #fff3e0; border-left: 4px solid #ff9800; padding: 12px; margin: 8px 0;"><strong style="font-size: 18px; color: #e65100;">IPP GLOBAL CUMUL├ë = 36%</strong><br><span style="font-size: 14px; color: #666;">Taux d'Incapacit├⌐ Permanente Partielle apr├¿s application de la formule de Balthazar (Bar├¿me 1967)</span></div><br><strong>ΓÜû∩╕Å BAR├êME OFFICIEL 1967 :</strong><br>Le cumul des s├⌐quelles respecte le <strong>principe du regroupement par syst├¿me anatomique</strong>. Les s├⌐quelles multiples d'un m├¬me syst├¿me (ex: fracture f├⌐mur + amyotrophie + limitation genou) ne s'additionnent PAS arithm├⌐tiquement mais sont ├⌐valu├⌐es par un TAUX GLOBAL pour ce syst├¿me. La formule de Balthazar garantit ensuite que l'IPP globale ne d├⌐passe jamais 100% tout en tenant compte de l'impact cumulatif des atteintes multiples sur la capacit├⌐ fonctionnelle.
+1. [952] Fracture des deux os de la jambe - Avec cal vicieux et troubles trophiques => rate=[15,40]
+2. [941] Fracture des deux os de la jambe - Bonne consolidation => rate=[5,10]
+3. [769] Fracture de l'extr├⌐mit├⌐ inf├⌐rieure du f├⌐mur - Avec raideur du genou => rate=[15,30]
+4. [669] Fracture diaphysaire du f├⌐mur => rate=[10,30]
+5. [537] Fracture du col du f├⌐mur - Consolidation avec raccourcissement et raideur => rate=[30,60]
+6. [502] Fracture des condyles f├⌐moraux - Avec d├⌐viation et/ou raideur => rate=[10,30]
+7. [491] Fracture de la rotule - Avec g├¬ne fonctionnelle => rate=[5,15]
+8. [488] Cal vicieux du f├⌐mur - Raccourcissement entre 10 et 50 mm => rate=[3,8]
+9. [488] Cal vicieux du f├⌐mur - Raccourcissement au-del├á de 50 mm => rate=[8,15]
+10. [487] Cal vicieux du f├⌐mur - Raccourcissement jusqu'├á 10 mm (compens├⌐ par talonnette) => rate=0
+11. [408] Col f├⌐mur + raideur + raccourcissement (cumul) => rate=[28,40]
+12. [362] Fracture du massif trochant├⌐rien - Cal vicieux et raideur => rate=[20,40]
+13. [352] Fracture du massif trochant├⌐rien - Bonne consolidation => rate=[5,10]
+14. [321] Fracture genou sur gonarthrose pr├⌐existante => rate=[18,35]
+15. [273] S├⌐quelles de proth├¿se totale de genou => rate=[15,40]
 
-Γ¥î Γ¥î Γ¥î CAS 1 ├ëCHOU├ë! IPP 36% hors de [40-43%]
-   NOTE: Si le taux est ~20%, c'est qu'il manque les signes neurologiques
+=== RESULTAT FINAL ===
 
-================================================================================
-
-≡ƒôï CAS 2: Amputation D5 avec amyotrophie et d├⌐viation
---------------------------------------------------------------------------------
-≡ƒô¥ Description clinique:
-   "71 ans ; amputation totale du D5 main droite avec luxation m4 m5. Sequelle amyotrophie de la main droite ; cicatrice rectracile . Diviation D2 D3 D4 ; diminution de la force de serrage"
-
-≡ƒöì Analyse...
-
-≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): 71 ans ; amputation totale du D5 main droite avec luxation m4 m5. Sequelle amyotrophie de la main droite ; cicatrice rectracile . Diviation D2 D3 D4 ; diminution de la force de serrage
-Γ£à AMPUTATION D5 D├ëTECT├ëE (PRIORIT├ë ABSOLUE)
-Γ£à AMPUTATION D4 D├ëTECT├ëE
-Γ£à AMPUTATION D3 D├ëTECT├ëE
-Γ£à AMPUTATION D2 D├ëTECT├ëE
+≡ƒöº localExpertAnalysis V3.3.268 - fix findInBareme cross-region matching, anatomical filter, word-overlap scoring, baseScore threshold
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): Trauma genou gauche Fracture metaphysio-epiphysaire extremite superieure tibia et fibula Fracture extremite superieure tibia Traitement orthopedique marche avec bequille gauche boiterie a la marche Fl
 ≡ƒöì DEBUG STEPPAGE D├ëTAILL├ë:
    - steppageMatch: false
    - amyotrophieMIMatch: true
    - fractureL1Match: false
-   - Texte analys├⌐: 71 ans ; amputation totale du D5 main droite avec luxation m4 m5. Sequelle amyotrophie de la main droite ; cicatrice rectracile . Diviation D2 D3 D4 ; diminution de la force de serrage
+   - Texte analys├⌐: Trauma genou gauche Fracture metaphysio-epiphysaire extremite superieure tibia et fibula Fracture extremite superieure tibia Traitement orthopedique marche avec bequille gauche boiterie a la marche Flexion extension genou gauche tres reduite et doulo
 Γ¥î STEPPAGE NON D├ëTECT├ë - Conditions non remplies
 ≡ƒöì DEBUG D├ëVIATION:
-   - deviationMatch: true
-   - mainContext: true
+   - deviationMatch: false
+   - mainContext: false
    - Recherche dans: diviation NON trouv├⌐
-Γ£à D├ëVIATION DOIGTS D├ëTECT├ëE: D5 D2 D3 D4
-≡ƒöì [V3.3.155] S├⌐quelles d├⌐tect├⌐es: 9 [
-  "Amputation de l'auriculaire",
-  "Amputation de l'annulaire",
-  'Amputation du m├⌐dius',
-  "Amputation de l'index",
-  'D├⌐viation multiple des doigts D5 D2 D3 D4',
-  'Amyotrophie de la main droite',
-  'Luxation m4-m5 (m├⌐tacarpe)',
-  'D├⌐viation des doigts D5 D2 D3 D4',
-  'Diminution de la force de serrage (d├⌐ficit pr├⌐hension)'
+≡ƒöì [V3.3.155] S├⌐quelles d├⌐tect├⌐es: 3 [
+  'Fracture plateau tibial (avec raideur s├⌐v├¿re)',
+  'Amyotrophie quadricipitale',
+  'Boiterie / Marche avec aide technique (canne, b├⌐quille)'
 ]
-ΓÜá∩╕Å POLYTRAUMATISME D├ëTECT├ë: 9 s├⌐quelle(s)
-≡ƒôÜ TROUV├ë DANS BAR├êME: "Amputation de l'auriculaire" ΓåÆ "Amputation de l'auriculaire - D├⌐sarticulation m├⌐tacarpo-phalangienne" (10-10%)
-≡ƒôÜ TROUV├ë DANS BAR├êME: "Amputation de l'annulaire" ΓåÆ "Amputation de l'annulaire - D├⌐sarticulation m├⌐tacarpo-phalangienne" (10-10%)
-≡ƒôÜ TROUV├ë DANS BAR├êME: "Amputation du m├⌐dius" ΓåÆ "Amputation du m├⌐dius - D├⌐sarticulation m├⌐tacarpo-phalangienne" (12-12%)
-≡ƒôÜ TROUV├ë DANS BAR├êME: "Amputation de l'index" ΓåÆ "Amputation de l'index - D├⌐sarticulation m├⌐tacarpo-phalangienne" (15-15%)
-≡ƒôÜ TROUV├ë DANS BAR├êME: "D├⌐viation des doigts D5 D2 D3 D4" ΓåÆ "Paupi├¿res - D├⌐viation des bords palp├⌐braux (entropion, ectropion, cicatrices vicieuses)" (5-20%)
-≡ƒöä REGROUPEMENT PAR SYST├êME: [ 'MEMBRE_SUPERIEUR: 30%' ]
-≡ƒº« CALCUL BALTHAZAR (PAR SYST├êME): [ 'MEMBRE_SUPERIEUR: 30%' ]
-≡ƒôè IPP GLOBAL CUMUL├ë: 30%
-Γ£à R├⌐sultat:
-   Type: proposal
-   Rubrique: Polytraumatisme - 1 syst├¿me atteint
-   IPP: 30-30%
-   Justification: <strong>≡ƒÅÑ POLYTRAUMATISME - CALCUL IPP (Bar├¿me 1967)</strong><br><br><strong>≡ƒôï 9 s├⌐quelles post-traumatiques regroup├⌐es en 1 syst├¿mes anatomiques :</strong><br><br><strong>A. SYST├êME MEMBRE SUPERIEUR</strong> ΓåÆ <span style="color: #d32f2f; font-weight: bold;">30% IPP</span><br>   Γöö Membre sup├⌐rieur DOMINANT : Polytraumatisme main majeur - Amputation D5 + luxation m├⌐tacarpes + amyotrophie + d├⌐viation doigts + limitation fonctionnelle globale ΓåÆ IPP 25-35% (main s├⌐rieusement handicap├⌐e) - Bar├¿me: "Amputation de l'auriculaire - D├⌐sarticulation m├⌐tacarpo-phalangienne" (10-10%)<br>   Γöö S├⌐quelles regroup├⌐es :<br>      ΓÇó Amputation de l'auriculaire<br>      ΓÇó Amputation de l'annulaire<br>      ΓÇó Amputation du m├⌐dius<br>      ΓÇó Amputation de l'index<br>      ΓÇó D├⌐viation multiple des doigts D5 D2 D3 D4<br>      ΓÇó Amyotrophie de la main droite<br>      ΓÇó Luxation m4-m5 (m├⌐tacarpe)<br>      ΓÇó D├⌐viation des doigts D5 D2 D3 D4<br>      ΓÇó Diminution de la force de serrage (d├⌐ficit pr├⌐hension)<br><br><strong>≡ƒº« CALCUL DU CUMUL (Formule de Balthazar - Bar├¿me 1967) :</strong><br><em>Principe : Les s├⌐quelles d'un m├¬me syst├¿me anatomique sont regroup├⌐es en UN SEUL taux.</em><br><em>Le cumul s'applique ensuite entre les SYST├êMES (pas entre s├⌐quelles individuelles).</em><br><br>La formule de cumul : <code>T = 100 - [(100-TΓéü) ├ù (100-TΓéé) ├ù (100-TΓéâ) ├ù ... / 100^(n-1)]</code><br><br>1. Syst├¿me 1 (MEMBRE_SUPERIEUR): 30% ΓåÆ Capacit├⌐ restante = 100.0 ├ù (100-30)/100 = 70.0%<br><br><strong>≡ƒôè R├ëSULTAT FINAL :</strong><br><div style="background: #fff3e0; border-left: 4px solid #ff9800; padding: 12px; margin: 8px 0;"><strong style="font-size: 18px; color: #e65100;">IPP GLOBAL CUMUL├ë = 30%</strong><br><span style="font-size: 14px; color: #666;">Taux d'Incapacit├⌐ Permanente Partielle apr├¿s application de la formule de Balthazar (Bar├¿me 1967)</span></div><br><strong>ΓÜû∩╕Å BAR├êME OFFICIEL 1967 :</strong><br>Le cumul des s├⌐quelles respecte le <strong>principe du regroupement par syst├¿me anatomique</strong>. Les s├⌐quelles multiples d'un m├¬me syst├¿me (ex: fracture f├⌐mur + amyotrophie + limitation genou) ne s'additionnent PAS arithm├⌐tiquement mais sont ├⌐valu├⌐es par un TAUX GLOBAL pour ce syst├¿me. La formule de Balthazar garantit ensuite que l'IPP globale ne d├⌐passe jamais 100% tout en tenant compte de l'impact cumulatif des atteintes multiples sur la capacit├⌐ fonctionnelle.
-
-Γ£à Γ£à Γ£à CAS 2 R├ëUSSI! IPP 30% dans [28-30%]
-
-================================================================================
-
-≡ƒÅü TEST TERMIN├ë
-
-
+≡ƒöì V3.3.201k: isCumulDetected = false , lesionCount = 1
+≡ƒºá [V3.3.214] TC check: hasTC=false, hasNeuro=false, hasFocal=false, neuroCount=0
+ΓÜá∩╕Å POLYTRAUMATISME D├ëTECT├ë: 3 s├⌐quelle(s)
+≡ƒôÜ TROUV├ë DANS BAR├êME: "Fracture plateau tibial (avec raideur s├⌐v├¿re)" ΓåÆ "Fracture des plateaux tibiaux - Avec d├⌐viation et/ou raideur" (10-30%)
+≡ƒôÜ TROUV├ë DANS BAR├êME: "Amyotrophie quadricipitale" ΓåÆ "Rupture de l'appareil extenseur du genou (tendon rotulien/quadricipital) - Flexum actif r├⌐siduel" (3-8%)
+≡ƒöä REGROUPEMENT PAR SYST├êME: [ 'MEMBRE_INFERIEUR: 26%' ]
+≡ƒº« CALCUL BALTHAZAR (PAR SYST├êME): [ 'MEMBRE_INFERIEUR: 26%' ]
+≡ƒôè IPP GLOBAL CUMUL├ë: 26%
+Type: proposal
+Name: Polytraumatisme - 1 syst├¿mes atteints - IPP global 26%
+Rate: 26
