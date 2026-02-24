@@ -6926,9 +6926,9 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
         },
         // Néphrectomie sans précision → normal par défaut
         {
-            pattern: /n[eé]phrectomie\s+unilat[eé]rale|ablation\s+(?:d['']un\s+)?rein/i,
+            pattern: /n[eé]phrectomie(?:\s+(?:unilat[eé]rale|gauche|droite|totale))?|ablation\s+(?:d['']un\s+)?rein/i,
             context: /.*/i,
-            searchTerms: ["Néphrectomie unilatérale, rein restant normal"],
+            searchTerms: ["Néphrectomie (ablation d'un rein), avec rein restant sain"],
             priority: 10300
         },
         // Colectomie partielle
@@ -6971,11 +6971,11 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             searchTerms: ["Fistule digestive étroite"],
             priority: 10200
         },
-        // Éventration post-opératoire
+        // Éventration post-opératoire / abdominale
         {
-            pattern: /[eé]ventration.*(?:post[- ]?op[eé]ratoire|apr[èe]s\s+intervention)/i,
+            pattern: /[eé]ventration.*(?:post[- ]?op[eé]ratoire|apr[èe]s\s+intervention|abdominal|sur\s+cicatrice|laparotomie)/i,
             context: /.*/i,
-            searchTerms: ["Éventration post-opératoire"],
+            searchTerms: ["Cicatrice avec éventration après laparotomie (appareillage ou non)"],
             priority: 10300
         },
         
@@ -9239,9 +9239,9 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
         },
         // Règles viscères (PRIORITÉ MAXIMALE)
         {
-            pattern: /[eé]ventration.*post.*traumatique|[eé]ventration.*pari[eé]tale/i,
-            context: /hernie|contention|ceinture|paro[ií]|abdomen/i,
-            searchTerms: ['Éventration post-traumatique'],
+            pattern: /[eé]ventration.*(?:post.*traumatique|pari[eé]tale|abdominal|apr[eèê]s.*laparotomie)|d[eé]fect.*pari[eé]tal.*abdom/i,
+            context: /hernie|contention|ceinture|paro[ií]|abdomen|laparotomie|cicatrice|h[ée]mop[ée]ritoine/i,
+            searchTerms: ['Cicatrice avec éventration après laparotomie (appareillage ou non)'],
             priority: 999
         },
         {
@@ -9281,7 +9281,7 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
         {
             pattern: /chol[eé]cystectomie|ablation.*v[eé]sicule.*biliaire|exérèse.*v[eé]sicule/i,
             context: /traumatisme|abdomen|biliaire|v[eé]sicule/i,
-            searchTerms: ['Séquelles de cholécystectomie post-traumatique'],
+            searchTerms: ['Cholécystectomie (ablation vésicule biliaire)'],
             priority: 97
         },
         // 🆕 V3.3.130: Stomie digestive (colostomie/iléostomie)
@@ -9945,7 +9945,17 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             term.includes("Névralgie intercostale") ||
             term.includes("Lobectomie pulmonaire") ||
             term.includes("Pneumonectomie") ||
-            term.includes("contusion myocardique")
+            term.includes("contusion myocardique") ||
+            // 🆕 V3.3.294: Viscères abdominaux = prioritaires
+            term.includes("Splénectomie") ||
+            term.includes("Néphrectomie") ||
+            term.includes("Cholécystectomie") ||
+            term.includes("éventration") ||
+            term.includes("hépatectomie") ||
+            term.includes("pancréatite") ||
+            term.includes("Dumping syndrome") ||
+            term.includes("Fistules intestinales") ||
+            term.includes("colectomie")
         );
         
         if (isEarlyCumulDetected && isSimpleRule) {
@@ -14260,7 +14270,7 @@ const hasMultipleDistinctSites = (text: string): boolean => {
  * @param isExactMatch - Si true, cherche une correspondance exacte par nom (pour résoudre ambiguïté)
  */
 export const localExpertAnalysis = (text: string, externalKeywords?: string[], isExactMatch: boolean = false): LocalAnalysisResult => {
-    console.log('🔧 localExpertAnalysis V3.3.293 - thorax bypass patterns, thoracic expert rules, expanded thoracic bypass');
+    console.log('🔧 localExpertAnalysis V3.3.294 - visceral expert rules (néphrectomie, cholécystectomie, éventration)');
 
     // 🔴 V3.3.162: NETTOYAGE TEXTE - Supprime caractères invisibles (zero-width space, etc.)
     // Ces caractères peuvent casser les regex et empêcher la détection
@@ -16828,12 +16838,38 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
     
     // ========== 4. ABDOMEN / VISCÈRES ==========
     
-    // Contusion rénale / Fracture rein
-    if (/contusion.*r[ée]nale|fracture.*rein|l[ée]sion.*r[ée]nale|cicatrice.*parenchymateuse.*rein/i.test(text)) {
+    // 🆕 V3.3.294: Néphrectomie (ablation rein) - PRIORITAIRE sur contusion rénale
+    if (/n[ée]phrectomie|ablation.*rein|ex[eé]r[eèê]se.*rein/i.test(text)) {
+        detectedSequelae.push({
+            name: 'Néphrectomie (ablation d\'un rein)',
+            keywords: ['néphrectomie', 'ablation rein', 'exérèse rein'],
+            context: text.match(/(n[ée]phrectomie|ablation.*rein)[^.;]*/i)?.[0] || ''
+        });
+    }
+    // Contusion rénale / Fracture rein (SEULEMENT si pas de néphrectomie)
+    else if (/contusion.*r[ée]nale|fracture.*rein|l[ée]sion.*r[ée]nale|cicatrice.*parenchymateuse.*rein/i.test(text)) {
         detectedSequelae.push({
             name: 'Contusion rénale avec cicatrice parenchymateuse',
             keywords: ['contusion rénale', 'fracture rein', 'cicatrice rénale'],
             context: text.match(/(contusion.*r[ée]nale|fracture.*rein)[^.;]*/i)?.[0] || ''
+        });
+    }
+    
+    // 🆕 V3.3.294: Cholécystectomie (ablation vésicule biliaire)
+    if (/chol[ée]cystectomie|ablation.*v[ée]sicule|ex[eé]r[eèê]se.*v[ée]sicule/i.test(text)) {
+        detectedSequelae.push({
+            name: 'Cholécystectomie (ablation vésicule biliaire)',
+            keywords: ['cholécystectomie', 'ablation vésicule', 'vésicule biliaire'],
+            context: text.match(/(chol[ée]cystectomie|ablation.*v[ée]sicule)[^.;]*/i)?.[0] || ''
+        });
+    }
+    
+    // 🆕 V3.3.294: Éventration abdominale post-traumatique
+    if (/[ée]ventration.*(?:abdominal|pari[ée]tal|post.*(?:op|traumat)|apr[eèê]s.*laparotomie)|d[eé]fect.*pari[ée]tal/i.test(text)) {
+        detectedSequelae.push({
+            name: 'Éventration abdominale post-traumatique',
+            keywords: ['éventration', 'défect pariétal', 'laparotomie'],
+            context: text.match(/([ée]ventration[^.;]*)/i)?.[0] || ''
         });
     }
     
@@ -18156,10 +18192,20 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
                 }
                 
                 // ABDOMEN (toutes atteintes abdominales = 1 seul taux)
-                else if (/contusion.*r[ée]nale|spl[ée]nectomie|contusion.*h[ée]patique/i.test(seq.name)) {
+                else if (/contusion.*r[ée]nale|spl[ée]nectomie|contusion.*h[ée]patique|n[ée]phrectomie|chol[ée]cystectomie|[ée]ventration|h[ée]patectomie|pancr[ée]at/i.test(seq.name)) {
                     system = 'ABDOMEN';
                     if (/spl[ée]nectomie/i.test(seq.name)) {
                         rate = 20; explanation = 'Abdomen : Splénectomie (ablation de la rate)';
+                    } else if (/n[ée]phrectomie/i.test(seq.name)) {
+                        rate = 30; explanation = 'Abdomen : Néphrectomie (ablation d\'un rein) avec rein restant sain';
+                    } else if (/chol[ée]cystectomie/i.test(seq.name)) {
+                        rate = 10; explanation = 'Abdomen : Cholécystectomie (ablation vésicule biliaire)';
+                    } else if (/[ée]ventration/i.test(seq.name)) {
+                        rate = 20; explanation = 'Abdomen : Éventration abdominale post-traumatique';
+                    } else if (/h[ée]patectomie/i.test(seq.name)) {
+                        rate = 20; explanation = 'Abdomen : Hépatectomie partielle post-traumatique';
+                    } else if (/pancr[ée]at/i.test(seq.name)) {
+                        rate = 25; explanation = 'Abdomen : Séquelles de pancréatite aiguë post-traumatique';
                     } else if (/contusion.*r[ée]nale/i.test(seq.name)) {
                         rate = 5; explanation = 'Abdomen : Contusion rénale avec cicatrice parenchymateuse (sans IR ni HTA)';
                     } else {
