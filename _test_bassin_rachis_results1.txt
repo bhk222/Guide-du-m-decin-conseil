@@ -1,0 +1,690 @@
+🔧 localExpertAnalysis V3.3.280 - MULTI-SITES polytrauma fix, paragraph extraction, enrichment psych/audio
+🔍 [V3.3.162] TEXTE REÇU (nettoyé): fracture tassement vertébral L1 non déplacée consolidée avec lombalgies mécaniques résiduelles après chute de hauteur
+🔍 [V3.3.280] hasMultipleDistinctSites: 1 sites détectés (seuil=2) → site unique
+🔍 DEBUG STEPPAGE DÉTAILLÉ:
+   - steppageMatch: false
+   - amyotrophieMIMatch: false
+   - fractureL1Match: true
+   - Texte analysé: fracture tassement vertébral L1 non déplacée consolidée avec lombalgies mécaniques résiduelles après chute de hauteur
+❌ STEPPAGE NON DÉTECTÉ - Conditions non remplies
+🔍 DEBUG DÉVIATION:
+   - deviationMatch: false
+   - mainContext: false
+   - Recherche dans: diviation NON trouvé
+🔍 [V3.3.155] Séquelles détectées: 2 [
+  'Lombalgie chronique / Fracture tassement vertébrale L1',
+  "Algies mécaniques persistantes (à l'effort)"
+]
+🔍 V3.3.201k: isCumulDetected = false , lesionCount = 1
+🧠 [V3.3.214] TC check: hasTC=true, hasNeuro=false, hasFocal=false, neuroCount=0
+⚠️ POLYTRAUMATISME DÉTECTÉ: 2 séquelle(s)
+📚 TROUVÉ DANS BARÈME: "Lombalgie chronique / Fracture tassement vertébrale L1" → "Fracture tassement vertébral lombaire non déplacée consolidée" (10-25%)
+🔄 REGROUPEMENT PAR SYSTÈME: [ 'RACHIS: 12%', 'MEMBRE_INFERIEUR: 12%' ]
+🧮 CALCUL BALTHAZAR (PAR SYSTÈME): [ 'RACHIS: 12%', 'MEMBRE_INFERIEUR: 12%' ]
+📊 IPP GLOBAL CUMULÉ: 23%
+─── Cas 1 ───
+  Description: Tassement vertébral lombaire L1 consolidé
+  Input     : "fracture tassement vertébral L1 non déplacée consolidée avec lombalgies mécaniques résiduelles après chute de hauteur"
+  Attendu   : Fracture tassement vertébral lombaire (10-25%)
+  Obtenu    : ❌ Polytraumatisme - 2 systèmes atteints - IPP global 23%
+  Taux      : 23%
+  Type      : proposal
+  Path      : Polytraumatisme > Barème 1967
+  Justif    : <strong>🏥 POLYTRAUMATISME - CALCUL IPP (Barème 1967)</strong><br><br><strong>📋 2 séquelles post-traumatiques regroupée...
+  ⚠️ ANOMALIE: attendu "Fracture tassement vertébral lombaire" mais obtenu "Polytraumatisme - 2 systèmes atteints - IPP global 23%"
+
+🔧 localExpertAnalysis V3.3.280 - MULTI-SITES polytrauma fix, paragraph extraction, enrichment psych/audio
+🔍 [V3.3.162] TEXTE REÇU (nettoyé): hernie discale lombaire L4-L5 post-traumatique avec radiculalgie sciatique chronique persistante et déficit sensitif L5 après accident de travail
+🔍 [V3.3.280] hasMultipleDistinctSites: 1 sites détectés (seuil=2) → site unique
+💿 [V3.3.217] HERNIE DISCALE LOMBAIRE/CERVICALE détectée → Analyse spécialisée (site unique)
+💿 [V3.3.217] Score sévérité hernie discale: 2 | Région: lombaire | Niveau: L4-L5 | Opérée: false | EVA: null | Flexion: null° | Sciatique: true
+💿 [V3.3.217] Barème: Hernie discale lombaire post-traumatique - Avec radiculalgie unilatérale (sciatique ou cruralgie) | Fourchette: 10-60% | Position: 0 | Taux final: 10%
+─── Cas 2 ───
+  Description: Hernie discale lombaire avec sciatique chronique
+  Input     : "hernie discale lombaire L4-L5 post-traumatique avec radiculalgie sciatique chronique persistante et déficit sensitif L5 après accident de travail"
+  Attendu   : Hernie discale lombaire (15-35%)
+  Obtenu    : ✅ Hernie discale lombaire post-traumatique - Avec radiculalgie unilatérale (sciatique ou cruralgie)
+  Taux      : 10%
+  Type      : proposal
+  Path      : Rachis > Rachis lombaire - Hernie discale
+  Justif    : <strong>💿 HERNIE DISCALE LOMBAIRE (L4-L5) </strong><br><br><strong>📋 ÉLÉMENTS CLINIQUES DÉTECTÉS :</strong><br>• Herni...
+
+🔧 localExpertAnalysis V3.3.280 - MULTI-SITES polytrauma fix, paragraph extraction, enrichment psych/audio
+🔍 [V3.3.162] TEXTE REÇU (nettoyé): séquelles de fracture luxation du rachis cervical C5-C6 sans lésion neurologique avec cervicalgies quasi-permanentes et raideur cervicale invalidante
+🔍 [V3.3.280] hasMultipleDistinctSites: 1 sites détectés (seuil=2) → site unique
+🔍 DEBUG STEPPAGE DÉTAILLÉ:
+   - steppageMatch: false
+   - amyotrophieMIMatch: false
+   - fractureL1Match: false
+   - Texte analysé: séquelles de fracture luxation du rachis cervical C5-C6 sans lésion neurologique avec cervicalgies quasi-permanentes et raideur cervicale invalidante
+❌ STEPPAGE NON DÉTECTÉ - Conditions non remplies
+🔍 DEBUG DÉVIATION:
+   - deviationMatch: false
+   - mainContext: false
+   - Recherche dans: diviation NON trouvé
+🔍 [V3.3.155] Séquelles détectées: 0 []
+🔍 V3.3.201k: isCumulDetected = true , lesionCount = 3
+🔍 DEBUG MÉTACARPIENS - Texte normalisé: sequelles de fracture luxation rachis cervical c5 vertebre cervicale c5 c6 vertebre cervicale c6 sans lesion neurologique avec cervicalgies quasi permanentes et raideur cervicale invalidante limitation restriction enraidissement raideur restriction enraidissement raideur limitation enraidissement raideur limitation restriction cassure fissure bris fracture fissure bris fracture cassure bris fracture cassure fissure deboitement deplacement articulaire dislocation luxation deplacement articulaire dislocation luxation deboitement dislocation luxation deboitement deplacement articulaire colonne cervicale cervicales nuque rachis cervical cervicales nuque rachis cervical colonne cervicale nuque rachis cervical colonne cervicale cervicales colonne cervicale cervicales nuque rachis cervical cervicales nuque rachis cervical colonne cervicale cervicales nerf nerveux paralysie nerf nerveux neurologique
+🔍 DEBUG MÉTACARPIENS - hasMetacarpienWord: false
+🔍 DEBUG MÉTACARPIENS - hasSingleIndicator: false
+🔍 DEBUG MÉTACARPIENS - hasMultipleIndicator: true
+🔍 DEBUG MÉTACARPIENS - hasSpecificFingerEarly: false
+🔍 DEBUG MÉTACARPIENS - isMetacarpienSingleQueryEarly: false
+🔍 V3.3.139: Vérification cumul prioritaire...
+🔍 Query words: sequelles, fracture, luxation, rachis, cervical, sans, lesion, neurologique, avec, cervicalgies
+🔍 Catégorie cumul trouvée: Cumuls de Lésions et Polytraumatismes
+🔍 Entrées avec searchTerms vérifiées: 51, meilleur score: 0.0%
+ℹ️ Aucun cumul prioritaire trouvé (similarité < 70%), continue avec analyse normale
+📋 Antécédents extraits (0): []
+🔍 isCumulDetected: true lesionCount: 3
+🔍 CUMUL DÉTECTÉ - Extraction des lésions individuelles
+📝 text original: séquelles de fracture luxation du rachis cervical C5-C6 sans lésion neurologique avec cervicalgies quasi-permanentes et raideur cervicale invalidante
+📝 finalCleanedText: séquelles de fracture luxation du rachis cervical C5-C6 sans lésion neurologique avec cervicalgies quasi-permanentes et raideur cervicale invalidante
+🔧 extractIndividualLesions V3.3.211 - avec Pattern 0C-ter + 0C-quater
+🔍 extractIndividualLesions - texte d'entrée: séquelles de fracture luxation du rachis cervical C5-C6 sans lésion neurologique avec cervicalgies quasi-permanentes et raideur cervicale invalidante
+🔍 Pattern 0B - Extraction polytraumatisme membre (V3.3.201L):
+  fractureMatch: NULL
+  ligamentMatch: NULL
+  muscleMatch: NULL
+  raideurMatch: NULL
+  algiesMatch: algies 
+  deficitForceMatch: NULL
+  componentCount: 1
+  Condition activée: false
+❌ Pattern 0B NON ACTIVÉ: componentCount < 3
+⚠️ Aucun pattern de cumul détecté, retour texte original
+📋 Lésions extraites: [
+  'sequelles de fracture luxation du rachis cervical c5 c6 sans lesion neurologique avec cervicalgies quasi permanentes et raideur cervicale invalidante'
+] Nombre: 1
+🔍 [MÉTACARPIENS] Input brut: séquelles de fracture luxation du rachis cervical c5-c6 sans lésion neurologique avec cervicalgies quasi-permanentes et raideur cervicale invalidante
+🔍 [MÉTACARPIENS] hasMetaWord: false
+🔍 [MÉTACARPIENS] hasSingleOrPerte: false
+🔍 [MÉTACARPIENS] hasSpecificFinger: false
+🔍 [MÉTACARPIENS] hasCinq: true
+⚠️ [MÉTACARPIENS] Pas de dialogue - continuons analyse normale
+📋 Antécédents extraits (0): []
+🔍 [EARLY] Antécédents détectés: 0 - 
+🔍 [CUMUL DÉTECTÉ EN AVANCE] 3 lésions - SKIP RÈGLES EXPERTES SIMPLES
+─── Cas 3 ───
+  Description: Fracture-luxation cervicale sans déficit neurologique
+  Input     : "séquelles de fracture luxation du rachis cervical C5-C6 sans lésion neurologique avec cervicalgies quasi-permanentes et raideur cervicale invalidante"
+  Attendu   : Séquelles de fracture/luxation du rachis cervical (8-25%)
+  Obtenu    : ❌ Paralysie radiculaire supérieure (Duchenne-Erb) (gauche)
+  Taux      : 45%
+  Type      : proposal
+  Path      : Séquelles des Nerfs Crâniens et Périphériques > Nerfs Périphériques - Membre Supérieur
+  Justif    : <strong>⚠️ CUMUL DE LÉSIONS DÉTECTÉ</strong><br>
+                <div style="background:#fff3cd; padding:15px; margin:10...
+  ⚠️ ANOMALIE: attendu "Séquelles de fracture/luxation du rachis cervical" mais obtenu "Paralysie radiculaire supérieure (Duchenne-Erb) (gauche)"
+
+🔧 localExpertAnalysis V3.3.280 - MULTI-SITES polytrauma fix, paragraph extraction, enrichment psych/audio
+🔍 [V3.3.162] TEXTE REÇU (nettoyé): fracture isolée de la branche ilio-pubienne gauche sans déplacement avec douleurs mécaniques résiduelles à la marche prolongée
+🔍 [V3.3.280] hasMultipleDistinctSites: 1 sites détectés (seuil=2) → site unique
+🔍 DEBUG STEPPAGE DÉTAILLÉ:
+   - steppageMatch: false
+   - amyotrophieMIMatch: false
+   - fractureL1Match: false
+   - Texte analysé: fracture isolée de la branche ilio-pubienne gauche sans déplacement avec douleurs mécaniques résiduelles à la marche prolongée
+❌ STEPPAGE NON DÉTECTÉ - Conditions non remplies
+🔍 DEBUG DÉVIATION:
+   - deviationMatch: false
+   - mainContext: false
+   - Recherche dans: diviation NON trouvé
+🔍 [V3.3.155] Séquelles détectées: 1 [ "Algies mécaniques persistantes (à l'effort)" ]
+🔍 V3.3.201k: isCumulDetected = false , lesionCount = 1
+🧠 [V3.3.214] TC check: hasTC=false, hasNeuro=false, hasFocal=false, neuroCount=0
+✅ CAS SIMPLE DÉTECTÉ: 1 séquelle(s)
+🔄 REGROUPEMENT PAR SYSTÈME: [ 'MEMBRE_INFERIEUR: 12%' ]
+🧮 CALCUL BALTHAZAR (PAR SYSTÈME): [ 'MEMBRE_INFERIEUR: 12%' ]
+📊 IPP GLOBAL CUMULÉ: 12%
+─── Cas 4 ───
+  Description: Fracture branche pubienne isolée sans déplacement
+  Input     : "fracture isolée de la branche ilio-pubienne gauche sans déplacement avec douleurs mécaniques résiduelles à la marche prolongée"
+  Attendu   : Fracture isolée d'une branche pubienne (5-10%)
+  Obtenu    : ❌ Membre inférieur (CUISSE/GENOU) : Séquelles ligamentaires/musculaires avec retentissement fonctionnel - IPP 12%
+  Taux      : 12%
+  Type      : proposal
+  Path      : Séquelle > Barème 1967
+  Justif    : <strong>✅ ÉVALUATION PRÉCISE - CALCUL IPP (Barème 1967)</strong><br><br><strong>📋 1 séquelle post-traumatique identifié...
+  ⚠️ ANOMALIE: attendu "Fracture isolée d'une branche pubienne" mais obtenu "Membre inférieur (CUISSE/GENOU) : Séquelles ligamentaires/musculaires avec retentissement fonctionnel - IPP 12%"
+
+🔧 localExpertAnalysis V3.3.280 - MULTI-SITES polytrauma fix, paragraph extraction, enrichment psych/audio
+🔍 [V3.3.162] TEXTE REÇU (nettoyé): paraplégie incomplète post-traumatique avec marche possible à l'aide de cannes après fracture vertébrale D12 avec lésion médullaire partielle
+🔍 [V3.3.280] hasMultipleDistinctSites: 1 sites détectés (seuil=2) → site unique
+🔍 DEBUG STEPPAGE DÉTAILLÉ:
+   - steppageMatch: false
+   - amyotrophieMIMatch: false
+   - fractureL1Match: false
+   - Texte analysé: paraplégie incomplète post-traumatique avec marche possible à l'aide de cannes après fracture vertébrale D12 avec lésion médullaire partielle
+❌ STEPPAGE NON DÉTECTÉ - Conditions non remplies
+🔍 DEBUG DÉVIATION:
+   - deviationMatch: false
+   - mainContext: false
+   - Recherche dans: diviation NON trouvé
+🔍 [V3.3.155] Séquelles détectées: 0 []
+🔍 V3.3.201k: isCumulDetected = false , lesionCount = 1
+🔍 DEBUG MÉTACARPIENS - Texte normalisé: paraplegie incomplete post traumatique avec marche possible a l aide de cannes fracture vertebrale d12 vertebre dorsale d12 avec lesion medullaire partielle cassure fissure bris fracture fissure bris fracture cassure bris fracture cassure fissure
+🔍 DEBUG MÉTACARPIENS - hasMetacarpienWord: false
+🔍 DEBUG MÉTACARPIENS - hasSingleIndicator: false
+🔍 DEBUG MÉTACARPIENS - hasMultipleIndicator: false
+🔍 DEBUG MÉTACARPIENS - hasSpecificFingerEarly: false
+🔍 DEBUG MÉTACARPIENS - isMetacarpienSingleQueryEarly: false
+🔍 V3.3.139: Vérification cumul prioritaire...
+🔍 Query words: paraplegie, incomplete, post, traumatique, avec, marche, possible, aide, cannes, apres
+🔍 Catégorie cumul trouvée: Cumuls de Lésions et Polytraumatismes
+🔍 Entrées avec searchTerms vérifiées: 51, meilleur score: 0.0%
+ℹ️ Aucun cumul prioritaire trouvé (similarité < 70%), continue avec analyse normale
+📋 Antécédents extraits (0): []
+🔍 isCumulDetected: false lesionCount: 1
+🔍 [MÉTACARPIENS] Input brut: paraplégie incomplète post-traumatique avec marche possible à l aide de cannes après fracture vertébrale d12 avec lésion médullaire partielle
+🔍 [MÉTACARPIENS] hasMetaWord: false
+🔍 [MÉTACARPIENS] hasSingleOrPerte: false
+🔍 [MÉTACARPIENS] hasSpecificFinger: false
+🔍 [MÉTACARPIENS] hasCinq: false
+⚠️ [MÉTACARPIENS] Pas de dialogue - continuons analyse normale
+📋 Antécédents extraits (0): []
+🔍 [EARLY] Antécédents détectés: 0 - 
+🔍 [DEBUG EXPERT RULE - EARLY TEST]
+Pattern: /contusion.*cerebrale|traumatisme.*crani.*contusion/i
+Context: /perte.*connaissance|frontale|temporale|parietale|breve|courte|surveillance.*neurologique/i
+NegativeContext: /spondylo|listthesis|glissement.*vertebral/i
+CleanText: "paraplegie incomplete post traumatique avec marche possible a l aide de cannes apres fracture vertebrale d12 avec lesion medullaire partielle"
+patternMatchClean: false, contextMatchClean: false
+negContextMatchClean: false, negContextMatchWorking: false
+matchClean: false, matchWorking: false
+🔍 [DEBUG EXPERT RULE - EARLY TEST]
+Pattern: /spondylolisthesis|spondylo.*listhesis|listthesis|glissement\s+vertebral/i
+Context: /lombaire|L\d|S\d|rachis|traumatisme|post-traumatique/i
+NegativeContext: /contusion.*cerebrale|perte.*connaissance|mandibule|genou|polytraumatisme|chute.*echafaudage/i
+CleanText: "paraplegie incomplete post traumatique avec marche possible a l aide de cannes apres fracture vertebrale d12 avec lesion medullaire partielle"
+patternMatchClean: false, contextMatchClean: false
+negContextMatchClean: false, negContextMatchWorking: false
+matchClean: false, matchWorking: false
+🎯 TOP 50 RÉSULTATS: [
+  {
+    name: 'Fracture des apophyses transverses',
+    score: 542,
+    path: 'Séquelles du Rachis, du Bassin et de la Moelle Épinière > Rachis'
+  },
+  {
+    name: 'Fracture du cotyle avec arthrose post-traumatique',
+    score: 535,
+    path: 'Séquelles du Rachis, du Bassin et de la Moelle Épinière > Bassin - Lésions Osseuses'
+  },
+  {
+    name: 'Névralgie pudendale post-traumatique (fracture du bassin)',
+    score: 535,
+    path: 'Séquelles du Rachis, du Bassin et de la Moelle Épinière > Bassin - Lésions Osseuses'
+  },
+  {
+    name: 'Fracture du sacrum ou du coccyx avec douleurs chroniques (coccygodynie)',
+    score: 514,
+    path: 'Séquelles du Rachis, du Bassin et de la Moelle Épinière > Bassin - Lésions Osseuses'
+  },
+  {
+    name: "Fracture isolée d'une branche pubienne ou de l'aile iliaque (sans déplacement)",
+    score: 513,
+    path: 'Séquelles du Rachis, du Bassin et de la Moelle Épinière > Bassin - Lésions Osseuses'
+  },
+  {
+    name: 'Fracture du cotyle sans déplacement, hanche congruente',
+    score: 513,
+    path: 'Séquelles du Rachis, du Bassin et de la Moelle Épinière > Bassin - Lésions Osseuses'
+  },
+  {
+    name: 'Fracture du sacrum avec troubles neurologiques (radiculalgie S1)',
+    score: 513,
+    path: 'Séquelles du Rachis, du Bassin et de la Moelle Épinière > Bassin - Lésions Osseuses'
+  },
+  {
+    name: 'Fracture rachis sur scoliose préexistante',
+    score: 503,
+    path: 'États Antérieurs et Aggravation de Pathologies Préexistantes > Aggravation Rachis sur État Antérieur'
+  },
+  {
+    name: 'Fracture radius + lombalgie post-traumatique (cumul)',
+    score: 486,
+    path: 'Cumuls de Lésions et Polytraumatismes > Polytraumatismes - Membres Multiples'
+  },
+  {
+    name: 'Syndrome post-traumatique cervical chronique (Whiplash / Coup du lapin)',
+    score: 326,
+    path: 'Séquelles du Rachis, du Bassin et de la Moelle Épinière > Rachis'
+  },
+  {
+    name: 'Hernie discale cervicale post-traumatique - Syndrome rachidien pur (cervicalgies)',
+    score: 325,
+    path: 'Séquelles du Rachis, du Bassin et de la Moelle Épinière > Rachis'
+  },
+  {
+    name: 'Entorse lombaire avec lombalgies mécaniques',
+    score: 325,
+    path: 'Séquelles du Rachis, du Bassin et de la Moelle Épinière > Rachis'
+  },
+  {
+    name: 'Syndrome myofascial cervical post-traumatique (contractures chroniques)',
+    score: 325,
+    path: 'Séquelles du Rachis, du Bassin et de la Moelle Épinière > Rachis'
+  },
+  {
+    name: 'Myélopathie cervicarthrosique post-traumatique',
+    score: 325,
+    path: 'Séquelles du Rachis, du Bassin et de la Moelle Épinière > Rachis'
+  },
+  {
+    name: 'Hernie discale cervicale post-traumatique - Avec névralgie cervico-brachiale (NCB)',
+    score: 324,
+    path: 'Séquelles du Rachis, du Bassin et de la Moelle Épinière > Rachis'
+  },
+  {
+    name: 'Hernie discale lombaire post-traumatique - Syndrome rachidien pur (lombalgies)',
+    score: 324,
+    path: 'Séquelles du Rachis, du Bassin et de la Moelle Épinière > Rachis'
+  },
+  {
+    name: 'Hernie discale lombaire post-traumatique - Avec radiculalgie (sciatique ou cruralgie)',
+    score: 324,
+    path: 'Séquelles du Rachis, du Bassin et de la Moelle Épinière > Rachis'
+  },
+  {
+    name: "Névralgie d'Arnold (Névralgie du grand occipital) post-traumatique",
+    score: 324,
+    path: 'Séquelles du Rachis, du Bassin et de la Moelle Épinière > Rachis'
+  },
+  {
+    name: 'Raideur rachidienne post-immobilisation, sans douleurs',
+    score: 324,
+    path: 'Séquelles du Rachis, du Bassin et de la Moelle Épinière > Rachis'
+  },
+  {
+    name: 'Scoliose ou cyphose douloureuse post-traumatique',
+    score: 324,
+    path: 'Séquelles du Rachis, du Bassin et de la Moelle Épinière > Rachis'
+  },
+  {
+    name: 'Raideur rachidienne avec douleurs ostéo-articulaires',
+    score: 313,
+    path: 'Séquelles du Rachis, du Bassin et de la Moelle Épinière > Rachis'
+  },
+  {
+    name: 'Raideur rachidienne avec douleurs névralgiques',
+    score: 313,
+    path: 'Séquelles du Rachis, du Bassin et de la Moelle Épinière > Rachis'
+  },
+  {
+    name: 'Rhumatisme vertébral (lombalgie, cervicalgie) avec raideur',
+    score: 313,
+    path: 'Séquelles du Rachis, du Bassin et de la Moelle Épinière > Rachis'
+  },
+  {
+    name: 'Polytraumatisme rachis triple étage',
+    score: 313,
+    path: 'Cumuls de Lésions et Polytraumatismes > Polytraumatismes - Membres Multiples'
+  },
+  {
+    name: 'Syndrome de Maigne (Syndrome de la charnière thoraco-lombaire)',
+    score: 305,
+    path: 'Séquelles du Rachis, du Bassin et de la Moelle Épinière > Rachis'
+  },
+  {
+    name: 'Raideur rachidienne avec déviation très prononcée',
+    score: 303,
+    path: 'Séquelles du Rachis, du Bassin et de la Moelle Épinière > Rachis'
+  },
+  {
+    name: 'Spondylolisthésis modifié par traumatisme',
+    score: 302,
+    path: 'Séquelles du Rachis, du Bassin et de la Moelle Épinière > Rachis'
+  },
+  {
+    name: 'Spondylose rhizomélique (atteinte lombaire)',
+    score: 302,
+    path: 'Séquelles du Rachis, du Bassin et de la Moelle Épinière > Rachis'
+  },
+  {
+    name: 'Spondylose rhizomélique (atteinte de tout le rachis et hanches)',
+    score: 302,
+    path: 'Séquelles du Rachis, du Bassin et de la Moelle Épinière > Rachis'
+  },
+  {
+    name: 'Quadriplégie incomplète (marche possible)',
+    score: 296,
+    path: "Séquelles du Rachis, du Bassin et de la Moelle Épinière > Troubles Nerveux d'Origine Médullaire"
+  },
+  {
+    name: 'Syndrome de la queue de cheval post-traumatique',
+    score: 285,
+    path: "Séquelles du Rachis, du Bassin et de la Moelle Épinière > Troubles Nerveux d'Origine Médullaire"
+  },
+  {
+    name: "Claudication intermittente d'origine médullaire",
+    score: 274,
+    path: "Séquelles du Rachis, du Bassin et de la Moelle Épinière > Troubles Nerveux d'Origine Médullaire"
+  },
+  {
+    name: 'Incontinence fécale incomplète ou rare',
+    score: 274,
+    path: "Séquelles du Rachis, du Bassin et de la Moelle Épinière > Troubles Nerveux d'Origine Médullaire"
+  },
+  {
+    name: 'Majoration pour douleurs radiculo-médullaires',
+    score: 273,
+    path: "Séquelles du Rachis, du Bassin et de la Moelle Épinière > Troubles Nerveux d'Origine Médullaire"
+  },
+  {
+    name: 'Atrophie musculaire médullaire - Main (droite)',
+    score: 273,
+    path: "Séquelles du Rachis, du Bassin et de la Moelle Épinière > Troubles Nerveux d'Origine Médullaire"
+  },
+  {
+    name: 'Atrophie musculaire médullaire - Main (gauche)',
+    score: 273,
+    path: "Séquelles du Rachis, du Bassin et de la Moelle Épinière > Troubles Nerveux d'Origine Médullaire"
+  },
+  {
+    name: 'Atrophie musculaire médullaire - Avant-bras (droit)',
+    score: 273,
+    path: "Séquelles du Rachis, du Bassin et de la Moelle Épinière > Troubles Nerveux d'Origine Médullaire"
+  },
+  {
+    name: 'Atrophie musculaire médullaire - Avant-bras (gauche)',
+    score: 273,
+    path: "Séquelles du Rachis, du Bassin et de la Moelle Épinière > Troubles Nerveux d'Origine Médullaire"
+  },
+  {
+    name: 'Atrophie musculaire médullaire - Bras (droit)',
+    score: 273,
+    path: "Séquelles du Rachis, du Bassin et de la Moelle Épinière > Troubles Nerveux d'Origine Médullaire"
+  },
+  {
+    name: 'Atrophie musculaire médullaire - Bras (gauche)',
+    score: 273,
+    path: "Séquelles du Rachis, du Bassin et de la Moelle Épinière > Troubles Nerveux d'Origine Médullaire"
+  },
+  {
+    name: 'Atrophie musculaire médullaire - Épaule/Ceinture scapulaire (droite)',
+    score: 273,
+    path: "Séquelles du Rachis, du Bassin et de la Moelle Épinière > Troubles Nerveux d'Origine Médullaire"
+  },
+  {
+    name: 'Atrophie musculaire médullaire - Épaule/Ceinture scapulaire (gauche)',
+    score: 273,
+    path: "Séquelles du Rachis, du Bassin et de la Moelle Épinière > Troubles Nerveux d'Origine Médullaire"
+  },
+  {
+    name: 'Atrophie musculaire médullaire - Pied',
+    score: 273,
+    path: "Séquelles du Rachis, du Bassin et de la Moelle Épinière > Troubles Nerveux d'Origine Médullaire"
+  },
+  {
+    name: 'Atrophie musculaire médullaire - Jambe',
+    score: 273,
+    path: "Séquelles du Rachis, du Bassin et de la Moelle Épinière > Troubles Nerveux d'Origine Médullaire"
+  },
+  {
+    name: 'Atrophie musculaire médullaire - Cuisse',
+    score: 273,
+    path: "Séquelles du Rachis, du Bassin et de la Moelle Épinière > Troubles Nerveux d'Origine Médullaire"
+  },
+  {
+    name: 'Atrophie musculaire médullaire - Ceinture pelvienne',
+    score: 273,
+    path: "Séquelles du Rachis, du Bassin et de la Moelle Épinière > Troubles Nerveux d'Origine Médullaire"
+  },
+  {
+    name: "Troubles de la sensibilité d'origine médullaire avec douleurs",
+    score: 273,
+    path: "Séquelles du Rachis, du Bassin et de la Moelle Épinière > Troubles Nerveux d'Origine Médullaire"
+  },
+  {
+    name: 'Quadriplégie complète (confinement au lit)',
+    score: 263,
+    path: "Séquelles du Rachis, du Bassin et de la Moelle Épinière > Troubles Nerveux d'Origine Médullaire"
+  },
+  {
+    name: 'Atrophie complète membre supérieur (droit)',
+    score: 263,
+    path: "Séquelles du Rachis, du Bassin et de la Moelle Épinière > Troubles Nerveux d'Origine Médullaire"
+  },
+  {
+    name: 'Atrophie complète membre supérieur (gauche)',
+    score: 263,
+    path: "Séquelles du Rachis, du Bassin et de la Moelle Épinière > Troubles Nerveux d'Origine Médullaire"
+  }
+]
+🔍 [detectRequestType] Début analyse...
+📊 [detectRequestType] Résultat: attribution
+🔍 [determineSeverity] Text: paraplégie incomplète post-traumatique avec marche possible à l'aide de cannes après fracture vertéb
+🔍 [determineSeverity] Faible signs: []
+🔍 [determineSeverity] High signs: []
+─── Cas 5 ───
+  Description: Paraplégie incomplète post-fracture dorsale
+  Input     : "paraplégie incomplète post-traumatique avec marche possible à l'aide de cannes après fracture vertébrale D12 avec lésion médullaire partielle"
+  Attendu   : Paraplégie incomplète (10-80%)
+  Obtenu    : ❌ Fracture des apophyses transverses
+  Taux      : 15%
+  Type      : proposal
+  Path      : Séquelles du Rachis, du Bassin et de la Moelle Épinière > Rachis
+  Justif    : <strong>🔍 ANALYSE EXPERTIALE DÉTAILLÉE</strong><br><br><div style="background:#e3f2fd; padding:15px; margin:15px 0; bor...
+  ⚠️ ANOMALIE: attendu "Paraplégie incomplète" mais obtenu "Fracture des apophyses transverses"
+
+🔧 localExpertAnalysis V3.3.280 - MULTI-SITES polytrauma fix, paragraph extraction, enrichment psych/audio
+🔍 [V3.3.162] TEXTE REÇU (nettoyé): fracture du sacrum avec coccygodynie chronique invalidante rendant la position assise prolongée impossible après chute sur les fesses
+🔍 [V3.3.280] hasMultipleDistinctSites: 0 sites détectés (seuil=2) → site unique
+🔍 DEBUG STEPPAGE DÉTAILLÉ:
+   - steppageMatch: false
+   - amyotrophieMIMatch: false
+   - fractureL1Match: false
+   - Texte analysé: fracture du sacrum avec coccygodynie chronique invalidante rendant la position assise prolongée impossible après chute sur les fesses
+❌ STEPPAGE NON DÉTECTÉ - Conditions non remplies
+🔍 DEBUG DÉVIATION:
+   - deviationMatch: false
+   - mainContext: false
+   - Recherche dans: diviation NON trouvé
+🔍 [V3.3.155] Séquelles détectées: 1 [ 'Fracture du bassin (disjonction symphyse / aileron sacré)' ]
+🔍 V3.3.201k: isCumulDetected = false , lesionCount = 1
+🧠 [V3.3.214] TC check: hasTC=true, hasNeuro=false, hasFocal=false, neuroCount=0
+✅ CAS SIMPLE DÉTECTÉ: 1 séquelle(s)
+📚 TROUVÉ DANS BARÈME: "Fracture du bassin (disjonction symphyse / aileron sacré)" → "Disjonction de la symphyse pubienne ou sacro-iliaque (instabilité résiduelle)" (15-30%)
+🔄 REGROUPEMENT PAR SYSTÈME: [ 'BASSIN_PELVIS: 15%' ]
+🧮 CALCUL BALTHAZAR (PAR SYSTÈME): [ 'BASSIN_PELVIS: 15%' ]
+📊 IPP GLOBAL CUMULÉ: 15%
+─── Cas 6 ───
+  Description: Fracture sacrum avec coccygodynie chronique
+  Input     : "fracture du sacrum avec coccygodynie chronique invalidante rendant la position assise prolongée impossible après chute sur les fesses"
+  Attendu   : Fracture du sacrum ou du coccyx (5-15%)
+  Obtenu    : ❌ Bassin/Pelvis : Séquelles de fracture du bassin - Barème: "Disjonction de la symphyse pubienne ou sacro-iliaque (instabilité résiduelle)" (15-30%) - IPP 15%
+  Taux      : 15%
+  Type      : proposal
+  Path      : Séquelle > Barème 1967
+  Justif    : <strong>✅ ÉVALUATION PRÉCISE - CALCUL IPP (Barème 1967)</strong><br><br><strong>📋 1 séquelle post-traumatique identifié...
+  ⚠️ ANOMALIE: attendu "Fracture du sacrum ou du coccyx" mais obtenu "Bassin/Pelvis : Séquelles de fracture du bassin - Barème: "Disjonction de la symphyse pubienne ou sacro-iliaque (instabilité résiduelle)" (15-30%) - IPP 15%"
+
+🔧 localExpertAnalysis V3.3.280 - MULTI-SITES polytrauma fix, paragraph extraction, enrichment psych/audio
+🔍 [V3.3.162] TEXTE REÇU (nettoyé): spondylolisthésis L5-S1 aggravé par traumatisme lombaire direct avec lombalgies chroniques et limitation fonctionnelle
+🔍 [V3.3.280] hasMultipleDistinctSites: 1 sites détectés (seuil=2) → site unique
+🔍 DEBUG STEPPAGE DÉTAILLÉ:
+   - steppageMatch: false
+   - amyotrophieMIMatch: false
+   - fractureL1Match: false
+   - Texte analysé: spondylolisthésis L5-S1 aggravé par traumatisme lombaire direct avec lombalgies chroniques et limitation fonctionnelle
+❌ STEPPAGE NON DÉTECTÉ - Conditions non remplies
+🔍 DEBUG DÉVIATION:
+   - deviationMatch: false
+   - mainContext: false
+   - Recherche dans: diviation NON trouvé
+🔍 [V3.3.155] Séquelles détectées: 1 [ 'Lombalgie chronique / Fracture vertébrale L5' ]
+🔍 V3.3.201k: isCumulDetected = false , lesionCount = 1
+🧠 [V3.3.214] TC check: hasTC=false, hasNeuro=false, hasFocal=false, neuroCount=0
+✅ CAS SIMPLE DÉTECTÉ: 1 séquelle(s)
+📚 TROUVÉ DANS BARÈME: "Lombalgie chronique / Fracture vertébrale L5" → "Fracture tassement vertébral lombaire non déplacée consolidée" (10-25%)
+🔄 REGROUPEMENT PAR SYSTÈME: [ 'RACHIS: 12%' ]
+🧮 CALCUL BALTHAZAR (PAR SYSTÈME): [ 'RACHIS: 12%' ]
+📊 IPP GLOBAL CUMULÉ: 12%
+─── Cas 7 ───
+  Description: Spondylolisthésis aggravé par traumatisme
+  Input     : "spondylolisthésis L5-S1 aggravé par traumatisme lombaire direct avec lombalgies chroniques et limitation fonctionnelle"
+  Attendu   : Spondylolisthésis (5-15%)
+  Obtenu    : ❌ Rachis : fracture lombaire consolidée avec lombalgie chronique modérée - Barème: "Fracture tassement vertébral lombaire non déplacée consolidée" (10-25%) - IPP 12%
+  Taux      : 12%
+  Type      : proposal
+  Path      : Séquelle > Barème 1967
+  Justif    : <strong>✅ ÉVALUATION PRÉCISE - CALCUL IPP (Barème 1967)</strong><br><br><strong>📋 1 séquelle post-traumatique identifié...
+  ⚠️ ANOMALIE: attendu "Spondylolisthésis" mais obtenu "Rachis : fracture lombaire consolidée avec lombalgie chronique modérée - Barème: "Fracture tassement vertébral lombaire non déplacée consolidée" (10-25%) - IPP 12%"
+
+🔧 localExpertAnalysis V3.3.280 - MULTI-SITES polytrauma fix, paragraph extraction, enrichment psych/audio
+🔍 [V3.3.162] TEXTE REÇU (nettoyé): disjonction de la symphyse pubienne et de l'articulation sacro-iliaque gauche avec instabilité résiduelle et douleurs importantes à la marche nécessitant une canne
+🔍 [V3.3.280] hasMultipleDistinctSites: 1 sites détectés (seuil=2) → site unique
+🔍 DEBUG STEPPAGE DÉTAILLÉ:
+   - steppageMatch: false
+   - amyotrophieMIMatch: false
+   - fractureL1Match: false
+   - Texte analysé: disjonction de la symphyse pubienne et de l'articulation sacro-iliaque gauche avec instabilité résiduelle et douleurs importantes à la marche nécessitant une canne
+❌ STEPPAGE NON DÉTECTÉ - Conditions non remplies
+🔍 DEBUG DÉVIATION:
+   - deviationMatch: false
+   - mainContext: false
+   - Recherche dans: diviation NON trouvé
+🔍 [V3.3.155] Séquelles détectées: 1 [ 'Fracture du bassin (disjonction symphyse / aileron sacré)' ]
+🔍 V3.3.201k: isCumulDetected = false , lesionCount = 1
+🧠 [V3.3.214] TC check: hasTC=false, hasNeuro=false, hasFocal=false, neuroCount=0
+✅ CAS SIMPLE DÉTECTÉ: 1 séquelle(s)
+📚 TROUVÉ DANS BARÈME: "Fracture du bassin (disjonction symphyse / aileron sacré)" → "Disjonction de la symphyse pubienne ou sacro-iliaque (instabilité résiduelle)" (15-30%)
+🔄 REGROUPEMENT PAR SYSTÈME: [ 'BASSIN_PELVIS: 15%' ]
+🧮 CALCUL BALTHAZAR (PAR SYSTÈME): [ 'BASSIN_PELVIS: 15%' ]
+📊 IPP GLOBAL CUMULÉ: 15%
+─── Cas 8 ───
+  Description: Disjonction pubienne et sacro-iliaque avec instabilité
+  Input     : "disjonction de la symphyse pubienne et de l'articulation sacro-iliaque gauche avec instabilité résiduelle et douleurs importantes à la marche nécessitant une canne"
+  Attendu   : Disjonction de la symphyse pubienne (15-30%)
+  Obtenu    : ✅ Bassin/Pelvis : Fracture instable du bassin (disjonction symphyse/aileron sacré) avec douleurs sacro-iliaques chroniques - Barème: "Disjonction de la symphyse pubienne ou sacro-iliaque (instabilité résiduelle)" (15-30%) - IPP 15%
+  Taux      : 15%
+  Type      : proposal
+  Path      : Séquelle > Barème 1967
+  Justif    : <strong>✅ ÉVALUATION PRÉCISE - CALCUL IPP (Barème 1967)</strong><br><br><strong>📋 1 séquelle post-traumatique identifié...
+
+🔧 localExpertAnalysis V3.3.280 - MULTI-SITES polytrauma fix, paragraph extraction, enrichment psych/audio
+🔍 [V3.3.162] TEXTE REÇU (nettoyé): syndrome de la queue de cheval post-traumatique après fracture L3 avec troubles sphinctériens partiels et anesthésie en selle et déficit moteur des releveurs du pied
+🔍 [V3.3.280] hasMultipleDistinctSites: 2 sites détectés (seuil=2) → MULTI-SITES
+🔍 DEBUG STEPPAGE DÉTAILLÉ:
+   - steppageMatch: false
+   - amyotrophieMIMatch: false
+   - fractureL1Match: false
+   - Texte analysé: syndrome de la queue de cheval post-traumatique après fracture L3 avec troubles sphinctériens partiels et anesthésie en selle et déficit moteur des releveurs du pied
+❌ STEPPAGE NON DÉTECTÉ - Conditions non remplies
+🔍 DEBUG DÉVIATION:
+   - deviationMatch: false
+   - mainContext: false
+   - Recherche dans: diviation NON trouvé
+🔍 [V3.3.155] Séquelles détectées: 2 [
+  'Lombalgie chronique / Fracture vertébrale L3',
+  'Steppage  (pied tombant - paralysie releveur du pied)'
+]
+🔍 V3.3.201k: isCumulDetected = false , lesionCount = 1
+🆕 V3.3.280: OVERRIDE CUMUL - isMultiSitePolytrauma=true mais detectMultipleLesions=false → FORCE cumul
+⚠️ V3.3.201j: CUMUL DÉTECTÉ → SKIP regroupement par système, passage direct à extraction lésions individuelles
+🔍 DEBUG MÉTACARPIENS - Texte normalisé: syndrome queue de cheval post traumatique fracture l3 vertebre lombaire l3 avec troubles sphincteriens partiels et anesthesie en selle et deficit moteur releveurs pied cassure fissure bris fracture fissure bris fracture cassure bris fracture cassure fissure tarse metatarse pied metatarse pied tarse
+🔍 DEBUG MÉTACARPIENS - hasMetacarpienWord: false
+🔍 DEBUG MÉTACARPIENS - hasSingleIndicator: false
+🔍 DEBUG MÉTACARPIENS - hasMultipleIndicator: false
+🔍 DEBUG MÉTACARPIENS - hasSpecificFingerEarly: false
+🔍 DEBUG MÉTACARPIENS - isMetacarpienSingleQueryEarly: false
+🔍 V3.3.139: Vérification cumul prioritaire...
+🔍 Query words: syndrome, queue, cheval, post, traumatique, apres, fracture, avec, troubles, sphincteriens
+🔍 Catégorie cumul trouvée: Cumuls de Lésions et Polytraumatismes
+🔍 Entrées avec searchTerms vérifiées: 51, meilleur score: 0.0%
+ℹ️ Aucun cumul prioritaire trouvé (similarité < 70%), continue avec analyse normale
+📋 Antécédents extraits (0): []
+🔍 isCumulDetected: true lesionCount: 2
+🔍 CUMUL DÉTECTÉ - Extraction des lésions individuelles
+📝 text original: syndrome de la queue de cheval post-traumatique après fracture L3 avec troubles sphinctériens partiels et anesthésie en selle et déficit moteur des releveurs du pied
+📝 finalCleanedText: syndrome de la queue de cheval post-traumatique après fracture L3 avec troubles sphinctériens partiels et anesthésie en selle et déficit moteur des releveurs du pied
+🔧 extractIndividualLesions V3.3.211 - avec Pattern 0C-ter + 0C-quater
+🔍 extractIndividualLesions - texte d'entrée: syndrome de la queue de cheval post-traumatique après fracture L3 avec troubles sphinctériens partiels et anesthésie en selle et déficit moteur des releveurs du pied
+🔍 Pattern 0B - Extraction polytraumatisme membre (V3.3.201L):
+  fractureMatch: NULL
+  ligamentMatch: NULL
+  muscleMatch: NULL
+  raideurMatch: NULL
+  algiesMatch: NULL
+  deficitForceMatch: NULL
+  componentCount: 0
+  Condition activée: false
+❌ Pattern 0B NON ACTIVÉ: componentCount < 3
+⚠️ Aucun pattern de cumul détecté, retour texte original
+📋 Lésions extraites: [
+  'syndrome de la queue de cheval post traumatique apres fracture l3 avec troubles sphincteriens partiels et anesthesie en selle et deficit moteur des releveurs du pied'
+] Nombre: 1
+🆕 V3.3.286: FALLBACK extractIndividualLesions → utilisation detectedSequelae comme lésions individuelles
+   Séquelles détectées utilisées: [
+  'Lombalgie chronique / Fracture vertébrale L3',
+  'Steppage  (pied tombant - paralysie releveur du pied)'
+]
+✅ Au moins 2 lésions → Analyse séparée
+🔎 Analyse lésion "Lombalgie chronique / Fracture vertébrale L3" → enrichi: "Lombalgie chronique / Fracture vertébrale L3" (processed: "Lombalgie chronique / Fracture vertébrale L3")
+🔍 [MÉTACARPIENS] Input brut: lombalgie chronique / fracture vertébrale l3
+🔍 [MÉTACARPIENS] hasMetaWord: false
+🔍 [MÉTACARPIENS] hasSingleOrPerte: false
+🔍 [MÉTACARPIENS] hasSpecificFinger: false
+🔍 [MÉTACARPIENS] hasCinq: false
+⚠️ [MÉTACARPIENS] Pas de dialogue - continuons analyse normale
+📋 Antécédents extraits (0): []
+🔍 [EARLY] Antécédents détectés: 0 - 
+✅ [EXPERT RULE MATCH - PRIORITY 13500] Entorse lombaire avec lombalgies mécaniques = [5-10] → 5% (coef: 0.00)
+   → Type: proposal
+   → Injury: Entorse lombaire avec lombalgies mécaniques
+   → Rate calculé: 5
+🔎 Analyse lésion "Steppage  (pied tombant - paralysie releveur du pied)" → enrichi: "Steppage  (pied tombant - paralysie releveur du pied)" (processed: "Steppage  (pied tombant - paralysie releveur du pied)")
+🔍 [MÉTACARPIENS] Input brut: steppage  (pied tombant - paralysie releveur du pied)
+🔍 [MÉTACARPIENS] hasMetaWord: false
+🔍 [MÉTACARPIENS] hasSingleOrPerte: false
+🔍 [MÉTACARPIENS] hasSpecificFinger: false
+🔍 [MÉTACARPIENS] hasCinq: false
+⚠️ [MÉTACARPIENS] Pas de dialogue - continuons analyse normale
+📋 Antécédents extraits (0): []
+🔍 [EARLY] Antécédents détectés: 0 - 
+🔍 [DEBUG EXPERT RULE - EARLY TEST]
+Pattern: /contusion.*cerebrale|traumatisme.*crani.*contusion/i
+Context: /perte.*connaissance|frontale|temporale|parietale|breve|courte|surveillance.*neurologique/i
+NegativeContext: /spondylo|listthesis|glissement.*vertebral/i
+CleanText: "steppage (pied tombant paralysie releveur du pied)"
+patternMatchClean: false, contextMatchClean: false
+negContextMatchClean: false, negContextMatchWorking: false
+matchClean: false, matchWorking: false
+✅ [EXPERT RULE MATCH - PRIORITY 98] Paralysie du nerf sciatique poplité externe (SPE) = [15-25] → 15% (coef: 0.00)
+   → Type: proposal
+   → Injury: Paralysie du nerf sciatique poplité externe (SPE)
+   → Rate calculé: 15
+📊 TOTAL: 2 propositions générées sur 2 lésions
+✅ Calcul automatique cumul avec 2 lésion(s)
+─── Cas 9 ───
+  Description: Syndrome queue de cheval après fracture lombaire
+  Input     : "syndrome de la queue de cheval post-traumatique après fracture L3 avec troubles sphinctériens partiels et anesthésie en selle et déficit moteur des releveurs du pied"
+  Attendu   : Syndrome de la queue de cheval (40-80%)
+  Obtenu    : ❌ Polytraumatisme (cumul 2 lésions)
+  Taux      : 19%
+  Type      : proposal
+  Path      : Cumul Polytraumatisme
+  Justif    : <strong>🔗 POLYTRAUMATISME - CUMUL 2 LÉSIONS</strong><br><br><div style="background:#fff3cd; padding:15px; margin:10px 0...
+  ⚠️ ANOMALIE: attendu "Syndrome de la queue de cheval" mais obtenu "Polytraumatisme (cumul 2 lésions)"
+
+🔧 localExpertAnalysis V3.3.280 - MULTI-SITES polytrauma fix, paragraph extraction, enrichment psych/audio
+🔍 [V3.3.162] TEXTE REÇU (nettoyé): fracture complexe de l'anneau pelvien avec boiterie séquellaire et douleurs chroniques associée à une hernie discale lombaire L5-S1 post-traumatique avec sciatique droite après accident de la voie pub
+🔍 [V3.3.280] hasMultipleDistinctSites: 1 sites détectés (seuil=2) → site unique
+💿 [V3.3.217] HERNIE DISCALE LOMBAIRE/CERVICALE détectée → Analyse spécialisée (site unique)
+💿 [V3.3.217] Score sévérité hernie discale: 4 | Région: lombaire | Niveau: L5-S1 | Opérée: false | EVA: null | Flexion: null° | Sciatique: true
+💿 [V3.3.217] Barème: Hernie discale lombaire post-traumatique - Avec radiculalgie unilatérale (sciatique ou cruralgie) | Fourchette: 10-60% | Position: 1 | Taux final: 10%
+─── Cas 10 ───
+  Description: Polytraumatisme : anneau pelvien + hernie discale lombaire
+  Input     : "fracture complexe de l'anneau pelvien avec boiterie séquellaire et douleurs chroniques associée à une hernie discale lombaire L5-S1 post-traumatique avec sciatique droite après accident de la voie publique"
+  Attendu   : Polytraumatisme (cumul)
+  Obtenu    : ❌ Hernie discale lombaire post-traumatique - Avec radiculalgie unilatérale (sciatique ou cruralgie)
+  Taux      : 10%
+  Type      : proposal
+  Path      : Rachis > Rachis lombaire - Hernie discale
+  Justif    : <strong>💿 HERNIE DISCALE LOMBAIRE (L5-S1) </strong><br><br><strong>📋 ÉLÉMENTS CLINIQUES DÉTECTÉS :</strong><br>• Herni...
+  ⚠️ ANOMALIE: attendu "Polytraumatisme" mais obtenu "Hernie discale lombaire post-traumatique - Avec radiculalgie unilatérale (sciatique ou cruralgie)"
+
+═══════════════════════════════════════════════════════════════
+  RÉSULTAT GLOBAL : 2/10 trouvés | 8/10 échoués
+═══════════════════════════════════════════════════════════════

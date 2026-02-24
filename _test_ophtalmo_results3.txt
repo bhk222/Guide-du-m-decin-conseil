@@ -1,0 +1,706 @@
+🔧 localExpertAnalysis V3.3.280 - MULTI-SITES polytrauma fix, paragraph extraction, enrichment psych/audio
+🔍 [V3.3.162] TEXTE REÇU (nettoyé): cécité complète bilatérale post-traumatique après explosion
+🔍 [V3.3.280] hasMultipleDistinctSites: 0 sites détectés (seuil=2) → site unique
+🔍 DEBUG STEPPAGE DÉTAILLÉ:
+   - steppageMatch: false
+   - amyotrophieMIMatch: false
+   - fractureL1Match: false
+   - Texte analysé: cécité complète bilatérale post-traumatique après explosion
+❌ STEPPAGE NON DÉTECTÉ - Conditions non remplies
+🔍 DEBUG DÉVIATION:
+   - deviationMatch: false
+   - mainContext: false
+   - Recherche dans: diviation NON trouvé
+🔍 [V3.3.155] Séquelles détectées: 0 []
+🔍 V3.3.201k: isCumulDetected = false , lesionCount = 1
+🔍 DEBUG MÉTACARPIENS - Texte normalisé: cecite complete bilateral erale post traumatique explosion aveugle perte totale vision non voyant cecite perte totale vision non voyant cecite aveugle non voyant cecite aveugle perte totale vision vision bilateral erale 2 yeux oeil droit + oeil gauche vision unilateral erale oeil oeil gauche vision unilateral erale oeil oeil droit vision unilateral erale oeil oeil droit surdite bilateral erale surdite 2 oreilles od + og
+🔍 DEBUG MÉTACARPIENS - hasMetacarpienWord: false
+🔍 DEBUG MÉTACARPIENS - hasSingleIndicator: false
+🔍 DEBUG MÉTACARPIENS - hasMultipleIndicator: false
+🔍 DEBUG MÉTACARPIENS - hasSpecificFingerEarly: false
+🔍 DEBUG MÉTACARPIENS - isMetacarpienSingleQueryEarly: false
+🔍 V3.3.139: Vérification cumul prioritaire...
+🔍 Query words: cecite, complete, bilaterale, post, traumatique, apres, explosion
+🔍 Catégorie cumul trouvée: Cumuls de Lésions et Polytraumatismes
+🔍 Entrées avec searchTerms vérifiées: 51, meilleur score: 0.0%
+ℹ️ Aucun cumul prioritaire trouvé (similarité < 70%), continue avec analyse normale
+📋 Antécédents extraits (0): []
+─── Cas 1 ───
+  Input     : "cécité complète bilatérale post-traumatique après explosion"
+  Attendu   : Cécité complète (100%)
+  Obtenu    : ✅ Cécité complète
+  Taux      : 100%
+  Path      : Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Yeux - Cécité et Baisse de Vision
+
+🔧 localExpertAnalysis V3.3.280 - MULTI-SITES polytrauma fix, paragraph extraction, enrichment psych/audio
+🔍 [V3.3.162] TEXTE REÇU (nettoyé): perte complète de la vision de l'oeil droit après traumatisme perforant, l'oeil gauche étant normal
+🔍 [V3.3.280] hasMultipleDistinctSites: 0 sites détectés (seuil=2) → site unique
+🔍 DEBUG STEPPAGE DÉTAILLÉ:
+   - steppageMatch: false
+   - amyotrophieMIMatch: false
+   - fractureL1Match: false
+   - Texte analysé: perte complète de la vision de l'oeil droit après traumatisme perforant, l'oeil gauche étant normal
+❌ STEPPAGE NON DÉTECTÉ - Conditions non remplies
+🔍 DEBUG DÉVIATION:
+   - deviationMatch: false
+   - mainContext: false
+   - Recherche dans: diviation NON trouvé
+🔍 [V3.3.155] Séquelles détectées: 0 []
+🔍 V3.3.201k: isCumulDetected = false , lesionCount = 1
+🔍 DEBUG MÉTACARPIENS - Texte normalisé: perte complete vision de l oeil droit traumatisme perforant, l oeil gauche etant normal amputation ablation section amputation ablation perte oeil oculaire ophtalmique oeil oeil ophtalmique oeil oeil oculaire vue acuite visuelle visuel vision acuite visuelle visuel vision vue visuel vision vue acuite visuelle vision vue acuite visuelle vision vue acuite visuelle av acuite visuelle vision de acuite acuite visuelle vision de acuite av vision de acuite av acuite visuelle
+🔍 DEBUG MÉTACARPIENS - hasMetacarpienWord: false
+🔍 DEBUG MÉTACARPIENS - hasSingleIndicator: false
+🔍 DEBUG MÉTACARPIENS - hasMultipleIndicator: false
+🔍 DEBUG MÉTACARPIENS - hasSpecificFingerEarly: false
+🔍 DEBUG MÉTACARPIENS - isMetacarpienSingleQueryEarly: false
+🔍 V3.3.139: Vérification cumul prioritaire...
+🔍 Query words: perte, complete, vision, oeil, droit, apres, traumatisme, perforant,, oeil, gauche
+🔍 Catégorie cumul trouvée: Cumuls de Lésions et Polytraumatismes
+🔍 Entrées avec searchTerms vérifiées: 51, meilleur score: 0.0%
+ℹ️ Aucun cumul prioritaire trouvé (similarité < 70%), continue avec analyse normale
+📋 Antécédents extraits (0): []
+🔍 isCumulDetected: false lesionCount: 1
+🔍 [MÉTACARPIENS] Input brut: perte complète de la vision de l oeil droit après traumatisme perforant l oeil gauche étant normal
+🔍 [MÉTACARPIENS] hasMetaWord: false
+🔍 [MÉTACARPIENS] hasSingleOrPerte: true
+🔍 [MÉTACARPIENS] hasSpecificFinger: false
+🔍 [MÉTACARPIENS] hasCinq: false
+⚠️ [MÉTACARPIENS] Pas de dialogue - continuons analyse normale
+📋 Antécédents extraits (0): []
+🔍 [EARLY] Antécédents détectés: 0 - 
+✅ [EXPERT RULE MATCH - PRIORITY 12000] Perte complète de la vision d'un oeil (l'autre étant normal) = 30%
+─── Cas 2 ───
+  Input     : "perte complète de la vision de l'oeil droit après traumatisme perforant, l'oeil gauche étant normal"
+  Attendu   : Perte complète de la vision d'un oeil (30%)
+  Obtenu    : ✅ Perte complète de la vision d'un oeil (l'autre étant normal)
+  Taux      : 30%
+  Path      : Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Yeux - Cécité et Baisse de Vision
+
+🔧 localExpertAnalysis V3.3.280 - MULTI-SITES polytrauma fix, paragraph extraction, enrichment psych/audio
+🔍 [V3.3.162] TEXTE REÇU (nettoyé): énucléation de l'oeil gauche avec mise en place d'une prothèse oculaire après accident de travail
+🔍 [V3.3.280] hasMultipleDistinctSites: 0 sites détectés (seuil=2) → site unique
+🔍 DEBUG STEPPAGE DÉTAILLÉ:
+   - steppageMatch: false
+   - amyotrophieMIMatch: false
+   - fractureL1Match: false
+   - Texte analysé: énucléation de l'oeil gauche avec mise en place d'une prothèse oculaire après accident de travail
+❌ STEPPAGE NON DÉTECTÉ - Conditions non remplies
+🔍 DEBUG DÉVIATION:
+   - deviationMatch: false
+   - mainContext: false
+   - Recherche dans: diviation NON trouvé
+🔍 [V3.3.155] Séquelles détectées: 0 []
+🔍 V3.3.201k: isCumulDetected = false , lesionCount = 1
+🔍 DEBUG MÉTACARPIENS - Texte normalisé: enucleation de l oeil gauche avec mise en place d prothese oculaire accident de travail oeil oculaire ophtalmique oeil oeil ophtalmique oeil oeil oculaire
+🔍 DEBUG MÉTACARPIENS - hasMetacarpienWord: false
+🔍 DEBUG MÉTACARPIENS - hasSingleIndicator: false
+🔍 DEBUG MÉTACARPIENS - hasMultipleIndicator: false
+🔍 DEBUG MÉTACARPIENS - hasSpecificFingerEarly: false
+🔍 DEBUG MÉTACARPIENS - isMetacarpienSingleQueryEarly: false
+🔍 V3.3.139: Vérification cumul prioritaire...
+🔍 Query words: enucleation, oeil, gauche, avec, mise, place, une, prothese, oculaire, apres
+🔍 Catégorie cumul trouvée: Cumuls de Lésions et Polytraumatismes
+🔍 Entrées avec searchTerms vérifiées: 51, meilleur score: 0.0%
+ℹ️ Aucun cumul prioritaire trouvé (similarité < 70%), continue avec analyse normale
+📋 Antécédents extraits (0): []
+🔍 isCumulDetected: false lesionCount: 1
+🔍 [MÉTACARPIENS] Input brut: énucléation de l oeil gauche avec mise en place d une prothèse oculaire après accident de travail
+🔍 [MÉTACARPIENS] hasMetaWord: false
+🔍 [MÉTACARPIENS] hasSingleOrPerte: false
+🔍 [MÉTACARPIENS] hasSpecificFinger: false
+🔍 [MÉTACARPIENS] hasCinq: false
+⚠️ [MÉTACARPIENS] Pas de dialogue - continuons analyse normale
+📋 Antécédents extraits (0): []
+🔍 [EARLY] Antécédents détectés: 0 - 
+✅ [EXPERT RULE MATCH - PRIORITY 10865] Ablation ou altération du globe avec prothèse possible = [28-33] → 28% (coef: 0.00)
+─── Cas 3 ───
+  Input     : "énucléation de l'oeil gauche avec mise en place d'une prothèse oculaire après accident de travail"
+  Attendu   : Ablation ou altération du globe avec prothèse possible (28-33%)
+  Obtenu    : ✅ Ablation ou altération du globe avec prothèse possible
+  Taux      : 28%
+  Path      : Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Yeux - Cécité et Baisse de Vision
+
+🔧 localExpertAnalysis V3.3.280 - MULTI-SITES polytrauma fix, paragraph extraction, enrichment psych/audio
+🔍 [V3.3.162] TEXTE REÇU (nettoyé): diplopie post-traumatique dans la partie inférieure du champ visuel après fracture du plancher de l'orbite
+🔍 [V3.3.280] hasMultipleDistinctSites: 1 sites détectés (seuil=2) → site unique
+🔍 DEBUG STEPPAGE DÉTAILLÉ:
+   - steppageMatch: false
+   - amyotrophieMIMatch: false
+   - fractureL1Match: false
+   - Texte analysé: diplopie post-traumatique dans la partie inférieure du champ visuel après fracture du plancher de l'orbite
+❌ STEPPAGE NON DÉTECTÉ - Conditions non remplies
+🔍 DEBUG DÉVIATION:
+   - deviationMatch: false
+   - mainContext: false
+   - Recherche dans: diviation NON trouvé
+🔍 [V3.3.155] Séquelles détectées: 2 [ "Fracture du plancher de l'orbite", 'Diplopie (vision double)' ]
+🔍 V3.3.201k: isCumulDetected = false , lesionCount = 1
+🧠 [V3.3.214] TC check: hasTC=false, hasNeuro=false, hasFocal=false, neuroCount=0
+⚠️ POLYTRAUMATISME DÉTECTÉ: 2 séquelle(s)
+📚 TROUVÉ DANS BARÈME: "Fracture du plancher de l'orbite" → "Orbite - Fracture du plancher de l'orbite (Blow-out) avec séquelles" (5-25%)
+📚 TROUVÉ DANS BARÈME: "Diplopie (vision double)" → "Diplopie" (5-20%)
+🔄 REGROUPEMENT PAR SYSTÈME: [ 'FACE_OPHTALMOLOGIE: 12%' ]
+🧮 CALCUL BALTHAZAR (PAR SYSTÈME): [ 'FACE_OPHTALMOLOGIE: 12%' ]
+📊 IPP GLOBAL CUMULÉ: 12%
+─── Cas 4 ───
+  Input     : "diplopie post-traumatique dans la partie inférieure du champ visuel après fracture du plancher de l'orbite"
+  Attendu   : Diplopie dans la partie inférieure du champ (10-25%)
+  Obtenu    : ✅ Polytraumatisme - 1 systèmes atteints - IPP global 12%
+  Taux      : 12%
+  Path      : Polytraumatisme > Barème 1967
+
+🔧 localExpertAnalysis V3.3.280 - MULTI-SITES polytrauma fix, paragraph extraction, enrichment psych/audio
+🔍 [V3.3.162] TEXTE REÇU (nettoyé): hémianopsie homonyme gauche séquellaire d'un traumatisme crânien
+🔍 [V3.3.280] hasMultipleDistinctSites: 1 sites détectés (seuil=2) → site unique
+🔍 DEBUG STEPPAGE DÉTAILLÉ:
+   - steppageMatch: false
+   - amyotrophieMIMatch: false
+   - fractureL1Match: false
+   - Texte analysé: hémianopsie homonyme gauche séquellaire d'un traumatisme crânien
+❌ STEPPAGE NON DÉTECTÉ - Conditions non remplies
+🔍 DEBUG DÉVIATION:
+   - deviationMatch: false
+   - mainContext: false
+   - Recherche dans: diviation NON trouvé
+🔍 [V3.3.155] Séquelles détectées: 0 []
+🔍 V3.3.201k: isCumulDetected = false , lesionCount = 1
+🔍 DEBUG MÉTACARPIENS - Texte normalisé: hemianopsie homonyme gauche sequellaire d traumatisme cranien amputation moitie champ deficit champ visuel hemianopsie deficit champ visuel hemianopsie amputation moitie champ
+🔍 DEBUG MÉTACARPIENS - hasMetacarpienWord: false
+🔍 DEBUG MÉTACARPIENS - hasSingleIndicator: false
+🔍 DEBUG MÉTACARPIENS - hasMultipleIndicator: false
+🔍 DEBUG MÉTACARPIENS - hasSpecificFingerEarly: false
+🔍 DEBUG MÉTACARPIENS - isMetacarpienSingleQueryEarly: false
+🔍 V3.3.139: Vérification cumul prioritaire...
+🔍 Query words: hemianopsie, homonyme, gauche, sequellaire, traumatisme, cranien
+🔍 Catégorie cumul trouvée: Cumuls de Lésions et Polytraumatismes
+🔍 Entrées avec searchTerms vérifiées: 51, meilleur score: 0.0%
+ℹ️ Aucun cumul prioritaire trouvé (similarité < 70%), continue avec analyse normale
+📋 Antécédents extraits (0): []
+🔍 isCumulDetected: false lesionCount: 1
+🔍 [MÉTACARPIENS] Input brut: hémianopsie homonyme gauche séquellaire d un traumatisme crânien
+🔍 [MÉTACARPIENS] hasMetaWord: false
+🔍 [MÉTACARPIENS] hasSingleOrPerte: false
+🔍 [MÉTACARPIENS] hasSpecificFinger: false
+🔍 [MÉTACARPIENS] hasCinq: false
+⚠️ [MÉTACARPIENS] Pas de dialogue - continuons analyse normale
+📋 Antécédents extraits (0): []
+🔍 [EARLY] Antécédents détectés: 0 - 
+✅ [EXPERT RULE MATCH - PRIORITY 10400] Hémianopsie homonyme droite ou gauche = [30-35] → 30% (coef: 0.00)
+─── Cas 5 ───
+  Input     : "hémianopsie homonyme gauche séquellaire d'un traumatisme crânien"
+  Attendu   : Hémianopsie homonyme droite ou gauche (30-35%)
+  Obtenu    : ✅ Hémianopsie homonyme droite ou gauche
+  Taux      : 30%
+  Path      : Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Yeux - Champ Visuel et Vision Binoculaire
+
+🔧 localExpertAnalysis V3.3.280 - MULTI-SITES polytrauma fix, paragraph extraction, enrichment psych/audio
+🔍 [V3.3.162] TEXTE REÇU (nettoyé): glaucome post-traumatique de l'oeil droit avec altération du champ visuel malgré traitement
+🔍 [V3.3.280] hasMultipleDistinctSites: 0 sites détectés (seuil=2) → site unique
+🔍 DEBUG STEPPAGE DÉTAILLÉ:
+   - steppageMatch: false
+   - amyotrophieMIMatch: false
+   - fractureL1Match: false
+   - Texte analysé: glaucome post-traumatique de l'oeil droit avec altération du champ visuel malgré traitement
+❌ STEPPAGE NON DÉTECTÉ - Conditions non remplies
+🔍 DEBUG DÉVIATION:
+   - deviationMatch: false
+   - mainContext: false
+   - Recherche dans: diviation NON trouvé
+🔍 [V3.3.155] Séquelles détectées: 0 []
+🔍 V3.3.201k: isCumulDetected = false , lesionCount = 1
+🔍 DEBUG MÉTACARPIENS - Texte normalisé: glaucome post traumatique de l oeil droit avec alteration champ visuel malgre traitement oeil oculaire ophtalmique oeil oeil ophtalmique oeil oeil oculaire oeil oeil oculaire vision vue acuite visuelle vision vue acuite visuelle perimetrie champ de vision vision peripherique champ visuel champ de vision vision peripherique champ visuel perimetrie vision peripherique champ visuel perimetrie champ de vision pression intraoculaire tension oculaire hypertonie glaucome tension oculaire hypertonie glaucome pression intraoculaire hypertonie glaucome pression intraoculaire tension oculaire glaucome pression intraoculaire tension oculaire av acuite visuelle vision de acuite acuite visuelle vision de acuite av vision de acuite av acuite visuelle
+🔍 DEBUG MÉTACARPIENS - hasMetacarpienWord: false
+🔍 DEBUG MÉTACARPIENS - hasSingleIndicator: false
+🔍 DEBUG MÉTACARPIENS - hasMultipleIndicator: false
+🔍 DEBUG MÉTACARPIENS - hasSpecificFingerEarly: false
+🔍 DEBUG MÉTACARPIENS - isMetacarpienSingleQueryEarly: false
+🔍 V3.3.139: Vérification cumul prioritaire...
+🔍 Query words: glaucome, post, traumatique, oeil, droit, avec, alteration, champ, visuel, malgre
+🔍 Catégorie cumul trouvée: Cumuls de Lésions et Polytraumatismes
+🔍 Entrées avec searchTerms vérifiées: 51, meilleur score: 0.0%
+ℹ️ Aucun cumul prioritaire trouvé (similarité < 70%), continue avec analyse normale
+📋 Antécédents extraits (0): []
+🔍 isCumulDetected: false lesionCount: 1
+🔍 [MÉTACARPIENS] Input brut: glaucome post-traumatique de l oeil droit avec altération du champ visuel malgré traitement
+🔍 [MÉTACARPIENS] hasMetaWord: false
+🔍 [MÉTACARPIENS] hasSingleOrPerte: false
+🔍 [MÉTACARPIENS] hasSpecificFinger: false
+🔍 [MÉTACARPIENS] hasCinq: false
+⚠️ [MÉTACARPIENS] Pas de dialogue - continuons analyse normale
+📋 Antécédents extraits (0): []
+🔍 [EARLY] Antécédents détectés: 0 - 
+🔍 [DEBUG EXPERT RULE - EARLY TEST]
+Pattern: /contusion.*cerebrale|traumatisme.*crani.*contusion/i
+Context: /perte.*connaissance|frontale|temporale|parietale|breve|courte|surveillance.*neurologique/i
+NegativeContext: /spondylo|listthesis|glissement.*vertebral/i
+CleanText: "glaucome post traumatique de l oeil droit avec alteration du champ visuel malgre traitement"
+patternMatchClean: false, contextMatchClean: false
+negContextMatchClean: false, negContextMatchWorking: false
+matchClean: false, matchWorking: false
+🔍 [DEBUG EXPERT RULE - EARLY TEST]
+Pattern: /spondylolisthesis|spondylo.*listhesis|listthesis|glissement\s+vertebral/i
+Context: /lombaire|L\d|S\d|rachis|traumatisme|post-traumatique/i
+NegativeContext: /contusion.*cerebrale|perte.*connaissance|mandibule|genou|polytraumatisme|chute.*echafaudage/i
+CleanText: "glaucome post traumatique de l oeil droit avec alteration du champ visuel malgre traitement"
+patternMatchClean: false, contextMatchClean: false
+negContextMatchClean: false, negContextMatchWorking: false
+matchClean: false, matchWorking: false
+✅ [EXPERT RULE MATCH - PRIORITY 91] Glaucome post-traumatique = [10-40] → 10% (coef: 0.00)
+─── Cas 6 ───
+  Input     : "glaucome post-traumatique de l'oeil droit avec altération du champ visuel malgré traitement"
+  Attendu   : Glaucome post-traumatique (10-40%)
+  Obtenu    : ✅ Glaucome post-traumatique
+  Taux      : 10%
+  Path      : Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Yeux - Lésions Spécifiques et Annexes
+
+🔧 localExpertAnalysis V3.3.280 - MULTI-SITES polytrauma fix, paragraph extraction, enrichment psych/audio
+🔍 [V3.3.162] TEXTE REÇU (nettoyé): ptosis traumatique de la paupière supérieure de l'oeil gauche après plaie palpébrale
+🔍 [V3.3.280] hasMultipleDistinctSites: 0 sites détectés (seuil=2) → site unique
+🔍 DEBUG STEPPAGE DÉTAILLÉ:
+   - steppageMatch: false
+   - amyotrophieMIMatch: false
+   - fractureL1Match: false
+   - Texte analysé: ptosis traumatique de la paupière supérieure de l'oeil gauche après plaie palpébrale
+❌ STEPPAGE NON DÉTECTÉ - Conditions non remplies
+🔍 DEBUG DÉVIATION:
+   - deviationMatch: false
+   - mainContext: false
+   - Recherche dans: diviation NON trouvé
+🔍 [V3.3.155] Séquelles détectées: 0 []
+🔍 V3.3.201k: isCumulDetected = false , lesionCount = 1
+🔍 DEBUG MÉTACARPIENS - Texte normalisé: ptosis traumatique paupiere superieure de l oeil gauche plaie palpebrale oeil oculaire ophtalmique oeil oeil ophtalmique oeil oeil oculaire chute paupiere paupiere tombante ptosis paupiere tombante ptosis chute paupiere
+🔍 DEBUG MÉTACARPIENS - hasMetacarpienWord: false
+🔍 DEBUG MÉTACARPIENS - hasSingleIndicator: false
+🔍 DEBUG MÉTACARPIENS - hasMultipleIndicator: false
+🔍 DEBUG MÉTACARPIENS - hasSpecificFingerEarly: false
+🔍 DEBUG MÉTACARPIENS - isMetacarpienSingleQueryEarly: false
+🔍 V3.3.139: Vérification cumul prioritaire...
+🔍 Query words: ptosis, traumatique, paupiere, superieure, oeil, gauche, apres, plaie, palpebrale
+🔍 Catégorie cumul trouvée: Cumuls de Lésions et Polytraumatismes
+🔍 Entrées avec searchTerms vérifiées: 51, meilleur score: 0.0%
+ℹ️ Aucun cumul prioritaire trouvé (similarité < 70%), continue avec analyse normale
+📋 Antécédents extraits (0): []
+🔍 isCumulDetected: false lesionCount: 1
+🔍 [MÉTACARPIENS] Input brut: ptosis traumatique de la paupière supérieure de l oeil gauche après plaie palpébrale
+🔍 [MÉTACARPIENS] hasMetaWord: false
+🔍 [MÉTACARPIENS] hasSingleOrPerte: false
+🔍 [MÉTACARPIENS] hasSpecificFinger: false
+🔍 [MÉTACARPIENS] hasCinq: false
+⚠️ [MÉTACARPIENS] Pas de dialogue - continuons analyse normale
+📋 Antécédents extraits (0): []
+🔍 [EARLY] Antécédents détectés: 0 - 
+🔍 [DEBUG EXPERT RULE - EARLY TEST]
+Pattern: /contusion.*cerebrale|traumatisme.*crani.*contusion/i
+Context: /perte.*connaissance|frontale|temporale|parietale|breve|courte|surveillance.*neurologique/i
+NegativeContext: /spondylo|listthesis|glissement.*vertebral/i
+CleanText: "ptosis traumatique de la paupiere superieure de l oeil gauche apres plaie palpebrale"
+patternMatchClean: false, contextMatchClean: false
+negContextMatchClean: false, negContextMatchWorking: false
+matchClean: false, matchWorking: false
+🔍 [DEBUG EXPERT RULE - EARLY TEST]
+Pattern: /spondylolisthesis|spondylo.*listhesis|listthesis|glissement\s+vertebral/i
+Context: /lombaire|L\d|S\d|rachis|traumatisme|post-traumatique/i
+NegativeContext: /contusion.*cerebrale|perte.*connaissance|mandibule|genou|polytraumatisme|chute.*echafaudage/i
+CleanText: "ptosis traumatique de la paupiere superieure de l oeil gauche apres plaie palpebrale"
+patternMatchClean: false, contextMatchClean: false
+negContextMatchClean: false, negContextMatchWorking: false
+matchClean: false, matchWorking: false
+🎯 TOP 50 RÉSULTATS: [
+  {
+    name: 'Paupières - Ptosis ou blépharospasme (un oeil)',
+    score: 595,
+    path: 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Yeux - Lésions Spécifiques et Annexes'
+  },
+  {
+    name: 'Cicatrices rétractiles des paupières (ectropion, lagophtalmie, etc.)',
+    score: 193,
+    path: 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Face - Séquelles des Brûlures'
+  },
+  {
+    name: 'Paupières - Déviation des bords palpébraux (entropion, ectropion, cicatrices vicieuses)',
+    score: 193,
+    path: 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Yeux - Lésions Spécifiques et Annexes'
+  },
+  {
+    name: 'Gêne de la déglutition par cicatrice pharyngée',
+    score: 182,
+    path: 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Face - Dents, Langue, Pharynx'
+  },
+  {
+    name: 'Cicatrices sténosantes des orifices (bouche, nez)',
+    score: 172,
+    path: 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Face - Séquelles des Brûlures'
+  },
+  {
+    name: 'Cicatrices chéloïdes multiples étendues',
+    score: 172,
+    path: 'Séquelles Dermatologiques Étendues > Cicatrices Chéloïdes et Hypertrophiques'
+  },
+  {
+    name: 'Cicatrices chéloïdes multiples étendues',
+    score: 172,
+    path: 'Séquelles Dermatologiques Étendues > Cicatrices Chéloïdes et Hypertrophiques'
+  },
+  {
+    name: 'Cicatrice vicieuse thorax antérieur',
+    score: 162,
+    path: 'Séquelles Dermatologiques Étendues > Cicatrices Chéloïdes et Hypertrophiques'
+  },
+  {
+    name: 'Cicatrice avec éventration après laparotomie (appareillage ou non)',
+    score: 143,
+    path: 'Séquelles Thoraciques, Abdominales, Pelviennes et Cardio-vasculaires > Abdomen - Paroi et Hernies'
+  },
+  {
+    name: 'Brûlures du visage et du cou avec cicatrices défigurantes',
+    score: 134,
+    path: 'Séquelles de Brûlures > Brûlures de Localisations Spécifiques'
+  },
+  {
+    name: 'Scalp ou brûlures du cuir chevelu avec cicatrices douloureuses',
+    score: 132,
+    path: 'Séquelles Crâniennes, Neurologiques et Psychiatriques > Cuir Chevelu'
+  },
+  {
+    name: 'Cicatrices opératoires normales',
+    score: 132,
+    path: 'Séquelles Thoraciques, Abdominales, Pelviennes et Cardio-vasculaires > Abdomen - Paroi et Hernies'
+  },
+  {
+    name: 'Cicatrices (sans éventration) très larges et adhérentes',
+    score: 132,
+    path: 'Séquelles Thoraciques, Abdominales, Pelviennes et Cardio-vasculaires > Abdomen - Paroi et Hernies'
+  },
+  {
+    name: 'Cicatrices avec éventration post-opératoire',
+    score: 122,
+    path: 'Séquelles Thoraciques, Abdominales, Pelviennes et Cardio-vasculaires > Abdomen - Paroi et Hernies'
+  },
+  {
+    name: 'Rétrécissement concentrique à 30° (un oeil)',
+    score: 114,
+    path: 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Yeux - Champ Visuel et Vision Binoculaire'
+  },
+  {
+    name: 'Rétrécissement concentrique à 10° (un oeil)',
+    score: 114,
+    path: 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Yeux - Champ Visuel et Vision Binoculaire'
+  },
+  {
+    name: 'Scotomes centraux (un oeil)',
+    score: 114,
+    path: 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Yeux - Champ Visuel et Vision Binoculaire'
+  },
+  {
+    name: 'Hémianopsie horizontale supérieure',
+    score: 114,
+    path: 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Yeux - Champ Visuel et Vision Binoculaire'
+  },
+  {
+    name: 'Hémianopsie en quadrant supérieure',
+    score: 104,
+    path: 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Yeux - Champ Visuel et Vision Binoculaire'
+  },
+  {
+    name: 'Hémianopsie hétéronyme nasale',
+    score: 103,
+    path: 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Yeux - Champ Visuel et Vision Binoculaire'
+  },
+  {
+    name: 'Hémianopsie hétéronyme bitemporale',
+    score: 103,
+    path: 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Yeux - Champ Visuel et Vision Binoculaire'
+  },
+  {
+    name: 'Hémianopsie horizontale inférieure',
+    score: 103,
+    path: 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Yeux - Champ Visuel et Vision Binoculaire'
+  },
+  {
+    name: 'Hémianopsie chez un borgne - Nasale',
+    score: 103,
+    path: 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Yeux - Champ Visuel et Vision Binoculaire'
+  },
+  {
+    name: 'Hémianopsie chez un borgne - Temporale',
+    score: 103,
+    path: 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Yeux - Champ Visuel et Vision Binoculaire'
+  },
+  {
+    name: 'Diplopie',
+    score: 103,
+    path: 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Yeux - Champ Visuel et Vision Binoculaire'
+  },
+  {
+    name: 'Diplopie dans la partie inférieure du champ',
+    score: 103,
+    path: 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Yeux - Champ Visuel et Vision Binoculaire'
+  },
+  {
+    name: 'Préjudice esthétique important lié aux brûlures de la face',
+    score: 102,
+    path: 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Face - Séquelles des Brûlures'
+  },
+  {
+    name: 'Diminution de la vision des deux yeux (selon tableau à double entrée)',
+    score: 102,
+    path: 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Yeux - Cécité et Baisse de Vision'
+  },
+  {
+    name: 'Rétrécissement concentrique à 30° (deux yeux)',
+    score: 93,
+    path: 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Yeux - Champ Visuel et Vision Binoculaire'
+  },
+  {
+    name: 'Rétrécissement concentrique à 10° (deux yeux)',
+    score: 93,
+    path: 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Yeux - Champ Visuel et Vision Binoculaire'
+  },
+  {
+    name: 'Scotomes centraux (deux yeux)',
+    score: 93,
+    path: 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Yeux - Champ Visuel et Vision Binoculaire'
+  },
+  {
+    name: 'Hémianopsie homonyme droite ou gauche',
+    score: 93,
+    path: 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Yeux - Champ Visuel et Vision Binoculaire'
+  },
+  {
+    name: 'Hémianopsie en quadrant inférieure',
+    score: 93,
+    path: 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Yeux - Champ Visuel et Vision Binoculaire'
+  },
+  {
+    name: 'Hémianopsie chez un borgne - Inférieure',
+    score: 93,
+    path: 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Yeux - Champ Visuel et Vision Binoculaire'
+  },
+  {
+    name: 'Paupières - Ptosis ou blépharospasme (deux yeux)',
+    score: 84,
+    path: 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Yeux - Lésions Spécifiques et Annexes'
+  },
+  {
+    name: 'Glaucome post-traumatique',
+    score: 74,
+    path: 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Yeux - Lésions Spécifiques et Annexes'
+  },
+  {
+    name: 'Sténose laryngo-trachéale post-traumatique',
+    score: 74,
+    path: 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Voies Respiratoires Supérieures'
+  },
+  {
+    name: "Syndrome d'apnées-hypopnées du sommeil (SAHS) post-traumatique",
+    score: 74,
+    path: 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Voies Respiratoires Supérieures'
+  },
+  {
+    name: "Syndrome algo-dysfonctionnel de l'appareil manducateur (SADAM) post-traumatique",
+    score: 73,
+    path: 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Face - Mâchoires'
+  },
+  {
+    name: 'Fistule bucco-sinusienne persistante post-traumatique',
+    score: 73,
+    path: 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Face - Mâchoires'
+  },
+  {
+    name: 'Voies lacrymales - Larmoiement ou fistules (un oeil)',
+    score: 73,
+    path: 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Yeux - Lésions Spécifiques et Annexes'
+  },
+  {
+    name: 'Voies lacrymales - Larmoiement ou fistules (chaque oeil)',
+    score: 73,
+    path: 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Yeux - Lésions Spécifiques et Annexes'
+  },
+  {
+    name: 'Otorrhée traumatique unilatérale',
+    score: 73,
+    path: 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Oreilles - Lésions Externes et Moyennes'
+  },
+  {
+    name: 'Uvéite post-traumatique chronique',
+    score: 64,
+    path: 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Yeux - Lésions Spécifiques et Annexes'
+  },
+  {
+    name: 'Ophtalmie sympathique',
+    score: 64,
+    path: 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Yeux - Lésions Spécifiques et Annexes'
+  },
+  {
+    name: 'Sinusite traumatique',
+    score: 64,
+    path: 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Voies Respiratoires Supérieures'
+  },
+  {
+    name: 'Rhinites croûteuses post-traumatiques',
+    score: 64,
+    path: 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Voies Respiratoires Supérieures'
+  },
+  {
+    name: "Syndrome otolithique (sensation d'ébriété permanente)",
+    score: 63,
+    path: "Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Oreilles - Vertiges et Troubles de l'Équilibre"
+  },
+  {
+    name: 'Otorrhée chronique post-traumatique',
+    score: 63,
+    path: "Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Oreilles - Vertiges et Troubles de l'Équilibre"
+  },
+  {
+    name: 'Sténose nasale unilatérale simple',
+    score: 63,
+    path: 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Voies Respiratoires Supérieures'
+  }
+]
+🔍 [detectRequestType] Début analyse...
+📊 [detectRequestType] Résultat: attribution
+🔍 [determineSeverity] Text: ptosis traumatique de la paupière supérieure de l'oeil gauche après plaie palpébrale
+🔍 [determineSeverity] Faible signs: []
+🔍 [determineSeverity] High signs: []
+─── Cas 7 ───
+  Input     : "ptosis traumatique de la paupière supérieure de l'oeil gauche après plaie palpébrale"
+  Attendu   : Ptosis ou blépharospasme (un oeil) (5-25%)
+  Obtenu    : ✅ Paupières - Ptosis ou blépharospasme (un oeil)
+  Taux      : 15%
+  Path      : Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Yeux - Lésions Spécifiques et Annexes
+
+🔧 localExpertAnalysis V3.3.280 - MULTI-SITES polytrauma fix, paragraph extraction, enrichment psych/audio
+🔍 [V3.3.162] TEXTE REÇU (nettoyé): atrophie optique post-traumatique bilatérale avec acuité visuelle effondrée
+🔍 [V3.3.280] hasMultipleDistinctSites: 0 sites détectés (seuil=2) → site unique
+🔍 DEBUG STEPPAGE DÉTAILLÉ:
+   - steppageMatch: false
+   - amyotrophieMIMatch: false
+   - fractureL1Match: false
+   - Texte analysé: atrophie optique post-traumatique bilatérale avec acuité visuelle effondrée
+❌ STEPPAGE NON DÉTECTÉ - Conditions non remplies
+🔍 DEBUG DÉVIATION:
+   - deviationMatch: false
+   - mainContext: false
+   - Recherche dans: diviation NON trouvé
+🔍 [V3.3.155] Séquelles détectées: 0 []
+🔍 V3.3.201k: isCumulDetected = false , lesionCount = 1
+🔍 DEBUG MÉTACARPIENS - Texte normalisé: atrophie optique post traumatique bilateral erale avec acuite visuelle effondree oeil oeil oculaire vision vue visuel vision vue acuite visuelle vision vue acuite visuelle nerf optique atrophie paleur papillaire atrophie optique paleur papillaire atrophie optique nerf optique atrophie av acuite visuelle vision de acuite acuite visuelle vision de acuite av vision de acuite av acuite visuelle vision bilateral erale 2 yeux oeil droit + oeil gauche vision unilateral erale oeil oeil gauche vision unilateral erale oeil oeil droit vision unilateral erale oeil oeil droit surdite bilateral erale surdite 2 oreilles od + og
+🔍 DEBUG MÉTACARPIENS - hasMetacarpienWord: false
+🔍 DEBUG MÉTACARPIENS - hasSingleIndicator: false
+🔍 DEBUG MÉTACARPIENS - hasMultipleIndicator: false
+🔍 DEBUG MÉTACARPIENS - hasSpecificFingerEarly: false
+🔍 DEBUG MÉTACARPIENS - isMetacarpienSingleQueryEarly: false
+🔍 V3.3.139: Vérification cumul prioritaire...
+🔍 Query words: atrophie, optique, post, traumatique, bilaterale, avec, acuite, visuelle, effondree
+🔍 Catégorie cumul trouvée: Cumuls de Lésions et Polytraumatismes
+🔍 Entrées avec searchTerms vérifiées: 51, meilleur score: 0.0%
+ℹ️ Aucun cumul prioritaire trouvé (similarité < 70%), continue avec analyse normale
+📋 Antécédents extraits (0): []
+🔍 isCumulDetected: false lesionCount: 1
+🔍 [MÉTACARPIENS] Input brut: atrophie optique post-traumatique bilatérale avec acuité visuelle effondrée
+🔍 [MÉTACARPIENS] hasMetaWord: false
+🔍 [MÉTACARPIENS] hasSingleOrPerte: false
+🔍 [MÉTACARPIENS] hasSpecificFinger: false
+🔍 [MÉTACARPIENS] hasCinq: false
+⚠️ [MÉTACARPIENS] Pas de dialogue - continuons analyse normale
+📋 Antécédents extraits (0): []
+🔍 [EARLY] Antécédents détectés: 0 - 
+✅ [EXPERT RULE MATCH - PRIORITY 10870] Atrophie optique post-traumatique = [30-80] → 30% (coef: 0.00)
+─── Cas 8 ───
+  Input     : "atrophie optique post-traumatique bilatérale avec acuité visuelle effondrée"
+  Attendu   : Atrophie optique post-traumatique (30-80%)
+  Obtenu    : ✅ Atrophie optique post-traumatique
+  Taux      : 30%
+  Path      : Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Yeux - Lésions Spécifiques et Annexes
+
+🔧 localExpertAnalysis V3.3.280 - MULTI-SITES polytrauma fix, paragraph extraction, enrichment psych/audio
+🔍 [V3.3.162] TEXTE REÇU (nettoyé): décollement de rétine post-traumatique de l'oeil droit avec baisse d'acuité visuelle séquellaire
+🔍 [V3.3.280] hasMultipleDistinctSites: 0 sites détectés (seuil=2) → site unique
+🔍 DEBUG STEPPAGE DÉTAILLÉ:
+   - steppageMatch: false
+   - amyotrophieMIMatch: false
+   - fractureL1Match: false
+   - Texte analysé: décollement de rétine post-traumatique de l'oeil droit avec baisse d'acuité visuelle séquellaire
+❌ STEPPAGE NON DÉTECTÉ - Conditions non remplies
+🔍 DEBUG DÉVIATION:
+   - deviationMatch: false
+   - mainContext: false
+   - Recherche dans: diviation NON trouvé
+🔍 [V3.3.155] Séquelles détectées: 0 []
+🔍 V3.3.201k: isCumulDetected = false , lesionCount = 1
+🔍 DEBUG MÉTACARPIENS - Texte normalisé: decollement de retine post traumatique de l oeil droit avec baisse d acuite visuelle sequellaire oeil oculaire ophtalmique oeil oeil ophtalmique oeil oeil oculaire oeil oeil oculaire vision vue visuel vision vue acuite visuelle vision vue acuite visuelle retinien retinopathie decollement retine retine retinopathie decollement retine retine retinien decollement retine retine retinien retinopathie retine retinien retinopathie av acuite visuelle vision de acuite acuite visuelle vision de acuite av vision de acuite av acuite visuelle
+🔍 DEBUG MÉTACARPIENS - hasMetacarpienWord: false
+🔍 DEBUG MÉTACARPIENS - hasSingleIndicator: false
+🔍 DEBUG MÉTACARPIENS - hasMultipleIndicator: false
+🔍 DEBUG MÉTACARPIENS - hasSpecificFingerEarly: false
+🔍 DEBUG MÉTACARPIENS - isMetacarpienSingleQueryEarly: false
+🔍 V3.3.139: Vérification cumul prioritaire...
+🔍 Query words: decollement, retine, post, traumatique, oeil, droit, avec, baisse, acuite, visuelle
+🔍 Catégorie cumul trouvée: Cumuls de Lésions et Polytraumatismes
+🔍 Entrées avec searchTerms vérifiées: 51, meilleur score: 0.0%
+ℹ️ Aucun cumul prioritaire trouvé (similarité < 70%), continue avec analyse normale
+📋 Antécédents extraits (0): []
+🔍 isCumulDetected: false lesionCount: 1
+🔍 [MÉTACARPIENS] Input brut: décollement de rétine post-traumatique de l oeil droit avec baisse d acuité visuelle séquellaire
+🔍 [MÉTACARPIENS] hasMetaWord: false
+🔍 [MÉTACARPIENS] hasSingleOrPerte: false
+🔍 [MÉTACARPIENS] hasSpecificFinger: false
+🔍 [MÉTACARPIENS] hasCinq: false
+⚠️ [MÉTACARPIENS] Pas de dialogue - continuons analyse normale
+📋 Antécédents extraits (0): []
+🔍 [EARLY] Antécédents détectés: 0 - 
+✅ [EXPERT RULE MATCH - PRIORITY 10400] Décollement de la rétine post-traumatique = [0-100] → 0% (coef: 0.00)
+─── Cas 9 ───
+  Input     : "décollement de rétine post-traumatique de l'oeil droit avec baisse d'acuité visuelle séquellaire"
+  Attendu   : Décollement de la rétine post-traumatique (0-100%)
+  Obtenu    : ✅ Décollement de la rétine post-traumatique
+  Taux      : 0%
+  Path      : Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Yeux - Lésions Spécifiques et Annexes
+
+🔧 localExpertAnalysis V3.3.280 - MULTI-SITES polytrauma fix, paragraph extraction, enrichment psych/audio
+🔍 [V3.3.162] TEXTE REÇU (nettoyé): scotomes centraux bilatéraux séquellaires d'un traumatisme crânien avec contusion du nerf optique
+🔍 [V3.3.280] hasMultipleDistinctSites: 1 sites détectés (seuil=2) → site unique
+🔍 DEBUG STEPPAGE DÉTAILLÉ:
+   - steppageMatch: false
+   - amyotrophieMIMatch: false
+   - fractureL1Match: false
+   - Texte analysé: scotomes centraux bilatéraux séquellaires d'un traumatisme crânien avec contusion du nerf optique
+❌ STEPPAGE NON DÉTECTÉ - Conditions non remplies
+🔍 DEBUG DÉVIATION:
+   - deviationMatch: false
+   - mainContext: false
+   - Recherche dans: diviation NON trouvé
+🔍 [V3.3.155] Séquelles détectées: 0 []
+🔍 V3.3.201k: isCumulDetected = false , lesionCount = 1
+🔍 DEBUG MÉTACARPIENS - Texte normalisé: scotomes centraux bilateral eraux sequellaires d traumatisme cranien avec contusion nerf optique nerveux neurologique paralysie nerf neurologique paralysie nerf nerveux paralysie nerf nerveux neurologique tache aveugle zone aveugle scotome zone aveugle scotome tache aveugle
+🔍 DEBUG MÉTACARPIENS - hasMetacarpienWord: false
+🔍 DEBUG MÉTACARPIENS - hasSingleIndicator: false
+🔍 DEBUG MÉTACARPIENS - hasMultipleIndicator: false
+🔍 DEBUG MÉTACARPIENS - hasSpecificFingerEarly: false
+🔍 DEBUG MÉTACARPIENS - isMetacarpienSingleQueryEarly: false
+🔍 V3.3.139: Vérification cumul prioritaire...
+🔍 Query words: scotomes, centraux, bilateraux, sequellaires, traumatisme, cranien, avec, contusion, nerf, optique
+🔍 Catégorie cumul trouvée: Cumuls de Lésions et Polytraumatismes
+🔍 Entrées avec searchTerms vérifiées: 51, meilleur score: 0.0%
+ℹ️ Aucun cumul prioritaire trouvé (similarité < 70%), continue avec analyse normale
+📋 Antécédents extraits (0): []
+🔍 isCumulDetected: false lesionCount: 1
+🔍 [MÉTACARPIENS] Input brut: scotomes centraux bilatéraux séquellaires d un traumatisme crânien avec contusion du nerf optique
+🔍 [MÉTACARPIENS] hasMetaWord: false
+🔍 [MÉTACARPIENS] hasSingleOrPerte: false
+🔍 [MÉTACARPIENS] hasSpecificFinger: false
+🔍 [MÉTACARPIENS] hasCinq: false
+⚠️ [MÉTACARPIENS] Pas de dialogue - continuons analyse normale
+📋 Antécédents extraits (0): []
+🔍 [EARLY] Antécédents détectés: 0 - 
+✅ [EXPERT RULE MATCH - PRIORITY 10880] Scotomes centraux (deux yeux) = [40-100] → 40% (coef: 0.00)
+─── Cas 10 ───
+  Input     : "scotomes centraux bilatéraux séquellaires d'un traumatisme crânien avec contusion du nerf optique"
+  Attendu   : Scotomes centraux (deux yeux) (40-100%)
+  Obtenu    : ✅ Scotomes centraux (deux yeux)
+  Taux      : 40%
+  Path      : Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Yeux - Champ Visuel et Vision Binoculaire
+
+═══════════════════════════════════════════════════════════════
+  RÉSULTAT GLOBAL : 10/10 trouvés | 0/10 échoués
+═══════════════════════════════════════════════════════════════

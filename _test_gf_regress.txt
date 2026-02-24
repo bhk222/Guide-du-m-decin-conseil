@@ -1,0 +1,530 @@
+🔧 localExpertAnalysis V3.3.280 - MULTI-SITES polytrauma fix, paragraph extraction, enrichment psych/audio
+🔍 [V3.3.162] TEXTE REÇU (nettoyé): fracture diaphysaire du fémur droit ostéosynthésée par clou centromédullaire avec cal vicieux en rotation externe de 10 degrés et raccourcissement de 1,5 cm avec raideur du genou homolatéral en flexio
+🔍 [V3.3.280] hasMultipleDistinctSites: 1 sites détectés (seuil=2) → site unique
+🔍 DEBUG STEPPAGE DÉTAILLÉ:
+   - steppageMatch: false
+   - amyotrophieMIMatch: false
+   - fractureL1Match: false
+   - Texte analysé: fracture diaphysaire du fémur droit ostéosynthésée par clou centromédullaire avec cal vicieux en rotation externe de 10 degrés et raccourcissement de 1,5 cm avec raideur du genou homolatéral en flexion limitée à 110 degrés et douleurs mécaniques à la
+❌ STEPPAGE NON DÉTECTÉ - Conditions non remplies
+🔍 DEBUG DÉVIATION:
+   - deviationMatch: false
+   - mainContext: false
+   - Recherche dans: diviation NON trouvé
+🔍 [V3.3.155] Séquelles détectées: 6 [
+  'Fracture diaphysaire du fémur',
+  'Déformation osseuse séquellaire (cal vicieux) (fémur)',
+  'Limitation de la flexion du genou',
+  'Raideur articulaire du genou',
+  "Algies mécaniques persistantes (à l'effort)",
+  'Déformation osseuse séquellaire (cal vicieux) (fémur)'
+]
+🦴 [V3.3.227] Fracture fémur/tibia + raideur genou → PAS de cumul (raideur = séquelle)
+🔍 V3.3.201k: isCumulDetected = false , lesionCount = 1
+🧠 [V3.3.214] TC check: hasTC=false, hasNeuro=false, hasFocal=false, neuroCount=0
+⚠️ POLYTRAUMATISME DÉTECTÉ: 6 séquelle(s)
+📚 TROUVÉ DANS BARÈME: "Fracture diaphysaire du fémur" → "Fracture diaphysaire du fémur" (10-30%)
+📚 TROUVÉ DANS BARÈME: "Déformation osseuse séquellaire (cal vicieux) (fémur)" → "Cal vicieux d'un métatarsien" (3-8%)
+📚 TROUVÉ DANS BARÈME: "Limitation de la flexion du genou" → "Genou - Flexion possible de 0 à 30° seulement" (20-20%)
+📚 TROUVÉ DANS BARÈME: "Raideur articulaire du genou" → "Fracture de l'extrémité inférieure du fémur - Avec raideur du genou" (15-30%)
+📚 TROUVÉ DANS BARÈME: "Déformation osseuse séquellaire (cal vicieux) (fémur)" → "Cal vicieux d'un métatarsien" (3-8%)
+🔄 REGROUPEMENT PAR SYSTÈME: [ 'MEMBRE_INFERIEUR: 20%' ]
+🧮 CALCUL BALTHAZAR (PAR SYSTÈME): [ 'MEMBRE_INFERIEUR: 20%' ]
+📊 IPP GLOBAL CUMULÉ: 20%
+─── Cas 1 ───
+  Description: Fracture diaphysaire fémur + raideur genou séquellaire
+  Input     : "fracture diaphysaire du fémur droit ostéosynthésée par clou centromédullaire avec cal vicieux en rotation externe de 10 ..."
+  Attendu   : fracture.*fémur|fémur.*raideur|diaphysaire (10-30%)
+  Obtenu    : ✅ Polytraumatisme - 1 systèmes atteints - IPP global 20%
+  Taux      : 20%
+  Type      : proposal
+  Nom OK    : ✅ | Taux OK: ✅
+  Path      : Polytraumatisme > Barème 1967
+  Justif    : <strong>🏥 POLYTRAUMATISME - CALCUL IPP (Barème 1967)</strong><br><br><strong>📋 6 séquelles post-traumatiques regroupées en 1 systèmes anatomiques :</strong><br><br><strong>A. SYSTÈME MEMBRE INFERIEU...
+
+🔧 localExpertAnalysis V3.3.280 - MULTI-SITES polytrauma fix, paragraph extraction, enrichment psych/audio
+🔍 [V3.3.162] TEXTE REÇU (nettoyé): fracture de l'extrémité inférieure du fémur gauche traitée chirurgicalement par plaque vissée avec raideur importante du genou en flexion limitée à 60 degrés et extension incomplète avec flessum de 10
+🔍 [V3.3.280] hasMultipleDistinctSites: 1 sites détectés (seuil=2) → site unique
+🔍 DEBUG STEPPAGE DÉTAILLÉ:
+   - steppageMatch: false
+   - amyotrophieMIMatch: false
+   - fractureL1Match: false
+   - Texte analysé: fracture de l'extrémité inférieure du fémur gauche traitée chirurgicalement par plaque vissée avec raideur importante du genou en flexion limitée à 60 degrés et extension incomplète avec flessum de 10 degrés et gonarthrose fémoro-tibiale débutante su
+❌ STEPPAGE NON DÉTECTÉ - Conditions non remplies
+🔍 DEBUG DÉVIATION:
+   - deviationMatch: false
+   - mainContext: false
+   - Recherche dans: diviation NON trouvé
+🔍 [V3.3.155] Séquelles détectées: 4 [
+  'Fracture diaphysaire du fémur',
+  'Fracture tibia/péroné',
+  'Limitation de la flexion du genou',
+  'Raideur articulaire du genou'
+]
+🦴 [V3.3.227] Fracture fémur/tibia + raideur genou → PAS de cumul (raideur = séquelle)
+🔍 V3.3.201k: isCumulDetected = false , lesionCount = 1
+🧠 [V3.3.214] TC check: hasTC=false, hasNeuro=false, hasFocal=false, neuroCount=0
+⚠️ POLYTRAUMATISME DÉTECTÉ: 4 séquelle(s)
+📚 TROUVÉ DANS BARÈME: "Fracture diaphysaire du fémur" → "Fracture diaphysaire du fémur" (10-30%)
+📚 TROUVÉ DANS BARÈME: "Fracture tibia/péroné" → "Fracture des plateaux tibiaux - Avec déviation et/ou raideur" (10-30%)
+📚 TROUVÉ DANS BARÈME: "Limitation de la flexion du genou" → "Genou - Flexion possible de 0 à 30° seulement" (20-20%)
+📚 TROUVÉ DANS BARÈME: "Raideur articulaire du genou" → "Fracture de l'extrémité inférieure du fémur - Avec raideur du genou" (15-30%)
+🔄 REGROUPEMENT PAR SYSTÈME: [ 'MEMBRE_INFERIEUR: 20%' ]
+🧮 CALCUL BALTHAZAR (PAR SYSTÈME): [ 'MEMBRE_INFERIEUR: 20%' ]
+📊 IPP GLOBAL CUMULÉ: 20%
+─── Cas 2 ───
+  Description: Fracture extrémité inférieure fémur + raideur sévère genou
+  Input     : "fracture de l'extrémité inférieure du fémur gauche traitée chirurgicalement par plaque vissée avec raideur importante du..."
+  Attendu   : fracture.*inférieure.*fémur|extrémité.*inférieure|raideur.*genou (15-30%)
+  Obtenu    : ✅ Polytraumatisme - 1 systèmes atteints - IPP global 20%
+  Taux      : 20%
+  Type      : proposal
+  Nom OK    : ✅ | Taux OK: ✅
+  Path      : Polytraumatisme > Barème 1967
+  Justif    : <strong>🏥 POLYTRAUMATISME - CALCUL IPP (Barème 1967)</strong><br><br><strong>📋 4 séquelles post-traumatiques regroupées en 1 systèmes anatomiques :</strong><br><br><strong>A. SYSTÈME MEMBRE INFERIEU...
+
+🔧 localExpertAnalysis V3.3.280 - MULTI-SITES polytrauma fix, paragraph extraction, enrichment psych/audio
+🔍 [V3.3.162] TEXTE REÇU (nettoyé): fracture du plateau tibial externe du genou droit traitée par ostéosynthèse avec enfoncement résiduel de 3 mm et déviation en valgus de 5 degrés avec lésion méniscale interne ayant nécessité une ménis
+🔍 [V3.3.280] hasMultipleDistinctSites: 1 sites détectés (seuil=2) → site unique
+🔍 DEBUG STEPPAGE DÉTAILLÉ:
+   - steppageMatch: false
+   - amyotrophieMIMatch: false
+   - fractureL1Match: false
+   - Texte analysé: fracture du plateau tibial externe du genou droit traitée par ostéosynthèse avec enfoncement résiduel de 3 mm et déviation en valgus de 5 degrés avec lésion méniscale interne ayant nécessité une méniscectomie partielle et laxité résiduelle en valgus 
+❌ STEPPAGE NON DÉTECTÉ - Conditions non remplies
+🔍 DEBUG DÉVIATION:
+   - deviationMatch: false
+   - mainContext: false
+   - Recherche dans: diviation NON trouvé
+🔍 [V3.3.155] Séquelles détectées: 2 [ 'Embarrure crânienne  ', 'Fracture plateau tibial ' ]
+🔍 V3.3.201k: isCumulDetected = true , lesionCount = 3
+⚠️ V3.3.201j: CUMUL DÉTECTÉ → SKIP regroupement par système, passage direct à extraction lésions individuelles
+🔍 DEBUG MÉTACARPIENS - Texte normalisé: fracture plateau tibial externe $1 droit par osteosynthese avec enfoncement residuel de 3 mm et deviation en valgus de 5 degres avec lesion meniscale interne ayant necessite meniscectomie partielle et laxite residuelle en valgus avec douleurs a descente escaliers cassure fissure bris fracture fissure bris fracture cassure bris fracture cassure fissure femoro tibiale femoro patellaire articulation genou genou femoro patellaire articulation genou genou femoro tibiale articulation genou genou femoro tibiale femoro patellaire genou femoro tibiale femoro patellaire genou femoro tibiale femoro patellaire menisque lesion meniscale menisque meniscectomie
+🔍 DEBUG MÉTACARPIENS - hasMetacarpienWord: false
+🔍 DEBUG MÉTACARPIENS - hasSingleIndicator: false
+🔍 DEBUG MÉTACARPIENS - hasMultipleIndicator: true
+🔍 DEBUG MÉTACARPIENS - hasSpecificFingerEarly: false
+🔍 DEBUG MÉTACARPIENS - isMetacarpienSingleQueryEarly: false
+🔍 V3.3.139: Vérification cumul prioritaire...
+🔍 Query words: fracture, plateau, tibial, externe, genou, droit, traitee, par, osteosynthese, avec
+🔍 Catégorie cumul trouvée: Cumuls de Lésions et Polytraumatismes
+🔍 Entrées avec searchTerms vérifiées: 51, meilleur score: 0.0%
+ℹ️ Aucun cumul prioritaire trouvé (similarité < 70%), continue avec analyse normale
+📋 Antécédents extraits (0): []
+🔍 isCumulDetected: true lesionCount: 3
+🔍 CUMUL DÉTECTÉ - Extraction des lésions individuelles
+📝 text original: fracture du plateau tibial externe du genou droit traitée par ostéosynthèse avec enfoncement résiduel de 3 mm et déviation en valgus de 5 degrés avec lésion méniscale interne ayant nécessité une méniscectomie partielle et laxité résiduelle en valgus avec douleurs à la descente des escaliers
+📝 finalCleanedText: fracture du plateau tibial externe du genou droit traitée par ostéosynthèse avec enfoncement résiduel de 3 mm et déviation en valgus de 5 degrés avec lésion méniscale interne ayant nécessité une méniscectomie partielle et laxité résiduelle en valgus avec douleurs à la descente des escaliers
+🔧 extractIndividualLesions V3.3.211 - avec Pattern 0C-ter + 0C-quater
+🔍 extractIndividualLesions - texte d'entrée: fracture du plateau tibial externe du genou droit traitée par ostéosynthèse avec enfoncement résiduel de 3 mm et déviation en valgus de 5 degrés avec lésion méniscale interne ayant nécessité une méniscectomie partielle et laxité résiduelle en valgus avec douleurs à la descente des escaliers
+🔍 Pattern 0B - Extraction polytraumatisme membre (V3.3.201L):
+  fractureMatch: NULL
+  ligamentMatch: NULL
+  muscleMatch: NULL
+  raideurMatch: NULL
+  algiesMatch: douleurs 
+  deficitForceMatch: NULL
+  componentCount: 1
+  Condition activée: false
+❌ Pattern 0B NON ACTIVÉ: componentCount < 3
+✅ Pattern 5 (lésions mixtes narratif) détecté: [
+  'fracture du plateau tibial externe du genou droit traitee par osteosynthese',
+  'lesion meniscale interne ayant necessite une meniscectomie partielle'
+]
+📋 Lésions extraites: [
+  'fracture du plateau tibial externe du genou droit traitee par osteosynthese',
+  'lesion meniscale interne ayant necessite une meniscectomie partielle'
+] Nombre: 2
+✅ Au moins 2 lésions → Analyse séparée
+   🔧 V3.3.280: Enrichissement genou: "fracture du plateau tibial externe du genou droit traitee par osteosynthese" → "fracture du plateau tibial externe du genou droit traitee par osteosynthese raideur genou ankylose flexion extension goniometrie genu"
+🔎 Analyse lésion "fracture du plateau tibial externe du genou droit traitee par osteosynthese" → enrichi: "fracture du plateau tibial externe du genou droit traitee par osteosynthese raideur genou ankylose flexion extension goniometrie genu" (processed: "fracture du plateau tibial externe du genou droit traitee par osteosynthese raideur genou ankylose flexion extension goniometrie genu")
+🔍 [MÉTACARPIENS] Input brut: fracture du plateau tibial externe du genou droit traitee par osteosynthese raideur genou ankylose flexion extension goniometrie genu
+🔍 [MÉTACARPIENS] hasMetaWord: false
+🔍 [MÉTACARPIENS] hasSingleOrPerte: false
+🔍 [MÉTACARPIENS] hasSpecificFinger: false
+🔍 [MÉTACARPIENS] hasCinq: false
+⚠️ [MÉTACARPIENS] Pas de dialogue - continuons analyse normale
+📋 Antécédents extraits (0): []
+🔍 [EARLY] Antécédents détectés: 0 - 
+✅ [EXPERT RULE MATCH - PRIORITY 10350] Fracture des plateaux tibiaux - Avec déviation et/ou raideur = [10-30] → 25% (coef: 0.75)
+   → Type: proposal
+   → Injury: Fracture des plateaux tibiaux - Avec déviation et/ou raideur
+   → Rate calculé: 25
+🔎 Analyse lésion "lesion meniscale interne ayant necessite une meniscectomie partielle" → enrichi: "lesion meniscale interne ayant necessite une meniscectomie partielle genou" (processed: "lesion meniscale interne ayant necessite une meniscectomie partielle genou")
+🔍 [MÉTACARPIENS] Input brut: lesion meniscale interne ayant necessite une meniscectomie partielle genou
+🔍 [MÉTACARPIENS] hasMetaWord: false
+🔍 [MÉTACARPIENS] hasSingleOrPerte: false
+🔍 [MÉTACARPIENS] hasSpecificFinger: false
+🔍 [MÉTACARPIENS] hasCinq: false
+⚠️ [MÉTACARPIENS] Pas de dialogue - continuons analyse normale
+📋 Antécédents extraits (0): []
+🔍 [EARLY] Antécédents détectés: 0 - 
+🔍 [DEBUG EXPERT RULE - EARLY TEST]
+Pattern: /contusion.*cerebrale|traumatisme.*crani.*contusion/i
+Context: /perte.*connaissance|frontale|temporale|parietale|breve|courte|surveillance.*neurologique/i
+NegativeContext: /spondylo|listthesis|glissement.*vertebral/i
+CleanText: "lesion meniscale interne ayant necessite une meniscectomie partielle genou"
+patternMatchClean: false, contextMatchClean: false
+negContextMatchClean: false, negContextMatchWorking: false
+matchClean: false, matchWorking: false
+   📉 V3.3.209: Modération expert rule "Séquelles de méniscectomie (douleurs, hydarthrose)" - sévérité LOW détectée
+✅ [EXPERT RULE MATCH - PRIORITY 95] Séquelles de méniscectomie (douleurs, hydarthrose) = [5-15] → 5% (coef: 0.00, LOW)
+   → Type: proposal
+   → Injury: Séquelles de méniscectomie (douleurs, hydarthrose)
+   → Rate calculé: 5
+📊 TOTAL: 2 propositions générées sur 2 lésions
+✅ Calcul automatique cumul avec 2 lésion(s)
+─── Cas 3 ───
+  Description: Fracture plateau tibial + méniscectomie + laxité
+  Input     : "fracture du plateau tibial externe du genou droit traitée par ostéosynthèse avec enfoncement résiduel de 3 mm et déviati..."
+  Attendu   : plateau.*tibi|méniscectomie|arthrose.*fémoro|genou (10-30%)
+  Obtenu    : ✅ Polytraumatisme (cumul 2 lésions)
+  Taux      : 29%
+  Type      : proposal
+  Nom OK    : ✅ | Taux OK: ✅
+  Path      : Cumul Polytraumatisme
+  Justif    : <strong>🔗 POLYTRAUMATISME - CUMUL 2 LÉSIONS</strong><br><br><div style="background:#fff3cd; padding:15px; margin:10px 0; border-left:5px solid #ffc107;"><strong>📋 Lésions identifiées :</strong><br>L...
+
+🔧 localExpertAnalysis V3.3.280 - MULTI-SITES polytrauma fix, paragraph extraction, enrichment psych/audio
+🔍 [V3.3.162] TEXTE REÇU (nettoyé): fracture du col du fémur gauche consolidée après ostéosynthèse par vis-plaque DHS avec raccourcissement du membre inférieur de 3 cm et raideur de la hanche avec limitation de la flexion à 80 degrés et
+🔍 [V3.3.280] hasMultipleDistinctSites: 1 sites détectés (seuil=2) → site unique
+🔍 DEBUG STEPPAGE DÉTAILLÉ:
+   - steppageMatch: false
+   - amyotrophieMIMatch: false
+   - fractureL1Match: false
+   - Texte analysé: fracture du col du fémur gauche consolidée après ostéosynthèse par vis-plaque DHS avec raccourcissement du membre inférieur de 3 cm et raideur de la hanche avec limitation de la flexion à 80 degrés et rotation interne abolie et arthrose fémoro-tibial
+❌ STEPPAGE NON DÉTECTÉ - Conditions non remplies
+🔍 DEBUG DÉVIATION:
+   - deviationMatch: false
+   - mainContext: false
+   - Recherche dans: diviation NON trouvé
+🔍 [V3.3.155] Séquelles détectées: 7 [
+  'Fracture du col du fémur',
+  'Fracture tibia/péroné',
+  'Limitation de la flexion du genou',
+  'Raideur articulaire du genou',
+  'Raccourcissement du membre inférieur',
+  'Boiterie',
+  "Algies mécaniques persistantes (à l'effort)"
+]
+🦴 [V3.3.227] Fracture fémur/tibia + raideur genou → PAS de cumul (raideur = séquelle)
+🔍 V3.3.201k: isCumulDetected = false , lesionCount = 1
+🧠 [V3.3.214] TC check: hasTC=false, hasNeuro=false, hasFocal=false, neuroCount=0
+⚠️ POLYTRAUMATISME DÉTECTÉ: 7 séquelle(s)
+📚 TROUVÉ DANS BARÈME: "Fracture du col du fémur" → "Fracture du col du fémur - Consolidation avec raccourcissement et raideur" (30-60%)
+📚 TROUVÉ DANS BARÈME: "Fracture tibia/péroné" → "Fracture des plateaux tibiaux - Avec déviation et/ou raideur" (10-30%)
+📚 TROUVÉ DANS BARÈME: "Limitation de la flexion du genou" → "Genou - Flexion possible de 0 à 30° seulement" (20-20%)
+📚 TROUVÉ DANS BARÈME: "Raideur articulaire du genou" → "Fracture de l'extrémité inférieure du fémur - Avec raideur du genou" (15-30%)
+📚 TROUVÉ DANS BARÈME: "Raccourcissement du membre inférieur" → "Amputation de cuisse (tiers inférieur)" (65-70%)
+🔄 REGROUPEMENT PAR SYSTÈME: [ 'MEMBRE_INFERIEUR: 65%' ]
+🧮 CALCUL BALTHAZAR (PAR SYSTÈME): [ 'MEMBRE_INFERIEUR: 65%' ]
+📊 IPP GLOBAL CUMULÉ: 65%
+─── Cas 4 ───
+  Description: Fracture col fémur + raideur hanche + gonarthrose genou
+  Input     : "fracture du col du fémur gauche consolidée après ostéosynthèse par vis-plaque DHS avec raccourcissement du membre inféri..."
+  Attendu   : col.*fémur|hanche|gonarthrose|arthrose.*fémoro (25-60%)
+  Obtenu    : ✅ Polytraumatisme - 1 systèmes atteints - IPP global 65%
+  Taux      : 65%
+  Type      : proposal
+  Nom OK    : ✅ | Taux OK: ✅
+  Path      : Polytraumatisme > Barème 1967
+  Justif    : <strong>🏥 POLYTRAUMATISME - CALCUL IPP (Barème 1967)</strong><br><br><strong>📋 7 séquelles post-traumatiques regroupées en 1 systèmes anatomiques :</strong><br><br><strong>A. SYSTÈME MEMBRE INFERIEU...
+
+🔧 localExpertAnalysis V3.3.280 - MULTI-SITES polytrauma fix, paragraph extraction, enrichment psych/audio
+🔍 [V3.3.162] TEXTE REÇU (nettoyé): rupture du ligament croisé antérieur du genou droit traitée par ligamentoplastie de type Kenneth-Jones avec laxité résiduelle antérieure et dérobements occasionnels à la marche en terrain accidenté as
+🔍 [V3.3.280] hasMultipleDistinctSites: 1 sites détectés (seuil=2) → site unique
+🔍 DEBUG STEPPAGE DÉTAILLÉ:
+   - steppageMatch: false
+   - amyotrophieMIMatch: false
+   - fractureL1Match: false
+   - Texte analysé: rupture du ligament croisé antérieur du genou droit traitée par ligamentoplastie de type Kenneth-Jones avec laxité résiduelle antérieure et dérobements occasionnels à la marche en terrain accidenté associée à une fracture diaphysaire du fémur droit c
+❌ STEPPAGE NON DÉTECTÉ - Conditions non remplies
+🔍 DEBUG DÉVIATION:
+   - deviationMatch: false
+   - mainContext: false
+   - Recherche dans: diviation NON trouvé
+🔍 [V3.3.155] Séquelles détectées: 5 [
+  'Fracture diaphysaire du fémur',
+  'Séquelles de rupture du ligament croisé antérieur (LCA)',
+  'Déformation osseuse séquellaire (cal vicieux) (fémur)',
+  'Boiterie',
+  'Déformation osseuse séquellaire (cal vicieux) (fémur)'
+]
+🔍 V3.3.201k: isCumulDetected = true , lesionCount = 3
+⚠️ V3.3.201j: CUMUL DÉTECTÉ → SKIP regroupement par système, passage direct à extraction lésions individuelles
+🔍 DEBUG MÉTACARPIENS - Texte normalisé: rupture ligament croise anterieur $1 droit par ligamentoplastie de type kenneth jones avec laxite residuelle anterieure et derobements occasionnels a marche en terrain accidente associee a fracture diaphysaire femur droit consolidee avec cal vicieux et raccourcissement de 2 cm et boiterie a marche prolongee cassure fissure bris fracture fissure bris fracture cassure bris fracture cassure fissure consolidation vicieuse malunion defaut de consolidation cal vicieux malunion defaut de consolidation cal vicieux consolidation vicieuse defaut de consolidation cal vicieux consolidation vicieuse malunion hanche coxo femorale articulation hanche femoro tibiale femoro patellaire articulation genou genou femoro patellaire articulation genou genou femoro tibiale articulation genou genou femoro tibiale femoro patellaire genou femoro tibiale femoro patellaire genou femoro tibiale femoro patellaire genou femoro tibiale femoro patellaire claudication trouble marche demarche boitante claudication boiterie demarche boitante claudication boiterie trouble marche lca croise anterieur pivot central lca ligament croise anterieur pivot central lca ligament croise anterieur croise anterieur cumul cumuler combiner etat anterieur etat anterieur antecedent
+🔍 DEBUG MÉTACARPIENS - hasMetacarpienWord: false
+🔍 DEBUG MÉTACARPIENS - hasSingleIndicator: false
+🔍 DEBUG MÉTACARPIENS - hasMultipleIndicator: false
+🔍 DEBUG MÉTACARPIENS - hasSpecificFingerEarly: false
+🔍 DEBUG MÉTACARPIENS - isMetacarpienSingleQueryEarly: false
+🔍 V3.3.139: Vérification cumul prioritaire...
+🔍 Query words: rupture, ligament, croise, anterieur, genou, droit, traitee, par, ligamentoplastie, type
+🔍 Catégorie cumul trouvée: Cumuls de Lésions et Polytraumatismes
+🔍 Entrées avec searchTerms vérifiées: 51, meilleur score: 0.0%
+ℹ️ Aucun cumul prioritaire trouvé (similarité < 70%), continue avec analyse normale
+📋 Antécédents extraits (0): []
+🔍 isCumulDetected: true lesionCount: 3
+🔍 CUMUL DÉTECTÉ - Extraction des lésions individuelles
+📝 text original: rupture du ligament croisé antérieur du genou droit traitée par ligamentoplastie de type Kenneth-Jones avec laxité résiduelle antérieure et dérobements occasionnels à la marche en terrain accidenté associée à une fracture diaphysaire du fémur droit consolidée avec cal vicieux et raccourcissement de 2 cm et boiterie à la marche prolongée
+📝 finalCleanedText: rupture du ligament croisé antérieur du genou droit traitée par ligamentoplastie de type Kenneth-Jones avec laxité résiduelle antérieure et dérobements occasionnels à la marche en terrain accidenté associée à une fracture diaphysaire du fémur droit consolidée avec cal vicieux et raccourcissement de 2 cm et boiterie à la marche prolongée
+🔧 extractIndividualLesions V3.3.211 - avec Pattern 0C-ter + 0C-quater
+🔍 extractIndividualLesions - texte d'entrée: rupture du ligament croisé antérieur du genou droit traitée par ligamentoplastie de type Kenneth-Jones avec laxité résiduelle antérieure et dérobements occasionnels à la marche en terrain accidenté associée à une fracture diaphysaire du fémur droit consolidée avec cal vicieux et raccourcissement de 2 cm et boiterie à la marche prolongée
+🔍 Pattern 0B - Extraction polytraumatisme membre (V3.3.201L):
+  fractureMatch: NULL
+  ligamentMatch: rupture du ligament croise anterieur du genou droit
+  muscleMatch: NULL
+  raideurMatch: NULL
+  algiesMatch: NULL
+  deficitForceMatch: NULL
+  componentCount: 1
+  Condition activée: false
+❌ Pattern 0B NON ACTIVÉ: componentCount < 3
+✅ Pattern 5 (lésions mixtes narratif) détecté: [
+  'rupture du ligament croise anterieur du genou droit traitee par ligamentoplastie de type kenn',
+  'une fracture diaphysaire du femur droit consolidee'
+]
+📋 Lésions extraites: [
+  'rupture du ligament croise anterieur du genou droit traitee par ligamentoplastie de type kenn',
+  'une fracture diaphysaire du femur droit consolidee'
+] Nombre: 2
+✅ Au moins 2 lésions → Analyse séparée
+🔎 Analyse lésion "rupture du ligament croise anterieur du genou droit traitee par ligamentoplastie de type kenn" → enrichi: "rupture du ligament croise anterieur du genou droit traitee par ligamentoplastie de type kenn" (processed: "rupture du ligament croise anterieur du genou droit traitee par ligamentoplastie de type kenn")
+🔍 [MÉTACARPIENS] Input brut: rupture du ligament croise anterieur du genou droit traitee par ligamentoplastie de type kenn
+🔍 [MÉTACARPIENS] hasMetaWord: false
+🔍 [MÉTACARPIENS] hasSingleOrPerte: false
+🔍 [MÉTACARPIENS] hasSpecificFinger: false
+🔍 [MÉTACARPIENS] hasCinq: false
+⚠️ [MÉTACARPIENS] Pas de dialogue - continuons analyse normale
+📋 Antécédents extraits (0): []
+🔍 [EARLY] Antécédents détectés: 0 - 
+🔍 [DEBUG EXPERT RULE - EARLY TEST]
+Pattern: /contusion.*cerebrale|traumatisme.*crani.*contusion/i
+Context: /perte.*connaissance|frontale|temporale|parietale|breve|courte|surveillance.*neurologique/i
+NegativeContext: /spondylo|listthesis|glissement.*vertebral/i
+CleanText: "rupture du ligament croise anterieur du genou droit traitee par ligamentoplastie de type kenn"
+patternMatchClean: false, contextMatchClean: false
+negContextMatchClean: false, negContextMatchWorking: false
+matchClean: false, matchWorking: false
+✅ [EXPERT RULE MATCH - PRIORITY 100] Séquelles de rupture du ligament croisé antérieur (LCA) = [10-25] → 10% (coef: 0.00)
+   → Type: proposal
+   → Injury: Séquelles de rupture du ligament croisé antérieur (LCA)
+   → Rate calculé: 10
+🔎 Analyse lésion "une fracture diaphysaire du femur droit consolidee" → enrichi: "une fracture diaphysaire du femur droit consolidee" (processed: "une fracture diaphysaire du femur droit consolidee")
+🔍 [MÉTACARPIENS] Input brut: une fracture diaphysaire du femur droit consolidee
+🔍 [MÉTACARPIENS] hasMetaWord: false
+🔍 [MÉTACARPIENS] hasSingleOrPerte: false
+🔍 [MÉTACARPIENS] hasSpecificFinger: false
+🔍 [MÉTACARPIENS] hasCinq: false
+⚠️ [MÉTACARPIENS] Pas de dialogue - continuons analyse normale
+📋 Antécédents extraits (0): []
+🔍 [EARLY] Antécédents détectés: 0 - 
+🔍 [DEBUG EXPERT RULE - EARLY TEST]
+Pattern: /contusion.*cerebrale|traumatisme.*crani.*contusion/i
+Context: /perte.*connaissance|frontale|temporale|parietale|breve|courte|surveillance.*neurologique/i
+NegativeContext: /spondylo|listthesis|glissement.*vertebral/i
+CleanText: "une fracture diaphysaire du femur droit consolidee"
+patternMatchClean: false, contextMatchClean: false
+negContextMatchClean: false, negContextMatchWorking: false
+matchClean: false, matchWorking: false
+✅ [EXPERT RULE MATCH - PRIORITY 998] Fracture diaphysaire du fémur = [10-30] → 10% (coef: 0.00)
+   → Type: proposal
+   → Injury: Fracture diaphysaire du fémur
+   → Rate calculé: 10
+📊 TOTAL: 2 propositions générées sur 2 lésions
+✅ Calcul automatique cumul avec 2 lésion(s)
+─── Cas 5 ───
+  Description: Rupture LCA genou + fracture diaphysaire fémur homolatéral
+  Input     : "rupture du ligament croisé antérieur du genou droit traitée par ligamentoplastie de type Kenneth-Jones avec laxité résid..."
+  Attendu   : ligament.*croisé|lca|laxité|fémur|diaphysaire (10-35%)
+  Obtenu    : ✅ Polytraumatisme (cumul 2 lésions)
+  Taux      : 19%
+  Type      : proposal
+  Nom OK    : ✅ | Taux OK: ✅
+  Path      : Cumul Polytraumatisme
+  Justif    : <strong>🔗 POLYTRAUMATISME - CUMUL 2 LÉSIONS</strong><br><br><div style="background:#fff3cd; padding:15px; margin:10px 0; border-left:5px solid #ffc107;"><strong>📋 Lésions identifiées :</strong><br>L...
+
+🔧 localExpertAnalysis V3.3.280 - MULTI-SITES polytrauma fix, paragraph extraction, enrichment psych/audio
+🔍 [V3.3.162] TEXTE REÇU (nettoyé): fracture comminutive de la rotule droite traitée par haubanage avec gêne fonctionnelle résiduelle à la montée des escaliers et douleurs à l'agenouillement avec limitation de la flexion du genou à 90 d
+🔍 [V3.3.280] hasMultipleDistinctSites: 1 sites détectés (seuil=2) → site unique
+🔍 DEBUG STEPPAGE DÉTAILLÉ:
+   - steppageMatch: false
+   - amyotrophieMIMatch: false
+   - fractureL1Match: false
+   - Texte analysé: fracture comminutive de la rotule droite traitée par haubanage avec gêne fonctionnelle résiduelle à la montée des escaliers et douleurs à l'agenouillement avec limitation de la flexion du genou à 90 degrés après fracture sus-condylienne du fémur homo
+❌ STEPPAGE NON DÉTECTÉ - Conditions non remplies
+🔍 DEBUG DÉVIATION:
+   - deviationMatch: false
+   - mainContext: false
+   - Recherche dans: diviation NON trouvé
+🔍 [V3.3.155] Séquelles détectées: 4 [
+  'Fracture diaphysaire du fémur',
+  'Limitation de la flexion du genou',
+  'Raideur articulaire du genou',
+  'Limitation fonctionnelle (douleurs montée escaliers)'
+]
+🔍 V3.3.201k: isCumulDetected = true , lesionCount = 2
+⚠️ V3.3.201j: CUMUL DÉTECTÉ → SKIP regroupement par système, passage direct à extraction lésions individuelles
+🔍 DEBUG MÉTACARPIENS - Texte normalisé: fracture comminutive rotule droite par haubanage avec gene fonctionnelle residuelle a montee escaliers et douleurs a l agenouillement limitation flexion genou a 90 degres fracture sus condylienne femur homolateral eral osteosynthesee raideur important genou limitation restriction enraidissement raideur restriction enraidissement raideur limitation enraidissement raideur limitation restriction cassure fissure bris fracture fissure bris fracture cassure bris fracture cassure fissure femoro tibiale femoro patellaire articulation genou genou femoro patellaire articulation genou genou femoro tibiale articulation genou genou femoro tibiale femoro patellaire
+🔍 DEBUG MÉTACARPIENS - hasMetacarpienWord: false
+🔍 DEBUG MÉTACARPIENS - hasSingleIndicator: false
+🔍 DEBUG MÉTACARPIENS - hasMultipleIndicator: false
+🔍 DEBUG MÉTACARPIENS - hasSpecificFingerEarly: false
+🔍 DEBUG MÉTACARPIENS - isMetacarpienSingleQueryEarly: false
+🔍 V3.3.139: Vérification cumul prioritaire...
+🔍 Query words: fracture, comminutive, rotule, droite, traitee, par, haubanage, avec, gene, fonctionnelle
+🔍 Catégorie cumul trouvée: Cumuls de Lésions et Polytraumatismes
+🔍 Entrées avec searchTerms vérifiées: 51, meilleur score: 0.0%
+ℹ️ Aucun cumul prioritaire trouvé (similarité < 70%), continue avec analyse normale
+📋 Antécédents extraits (0): []
+🔍 isCumulDetected: true lesionCount: 2
+🔍 CUMUL DÉTECTÉ - Extraction des lésions individuelles
+📝 text original: fracture comminutive de la rotule droite traitée par haubanage avec gêne fonctionnelle résiduelle à la montée des escaliers et douleurs à l'agenouillement avec limitation de la flexion du genou à 90 degrés après fracture sus-condylienne du fémur homolatéral ostéosynthésée avec raideur importante du genou
+📝 finalCleanedText: fracture comminutive de la rotule droite traitée par haubanage avec gêne fonctionnelle résiduelle à la montée des escaliers et douleurs à l'agenouillement avec limitation de la flexion du genou à 90 degrés après fracture sus-condylienne du fémur homolatéral ostéosynthésée avec raideur importante du genou
+🔧 extractIndividualLesions V3.3.211 - avec Pattern 0C-ter + 0C-quater
+🔍 extractIndividualLesions - texte d'entrée: fracture comminutive de la rotule droite traitée par haubanage avec gêne fonctionnelle résiduelle à la montée des escaliers et douleurs à l'agenouillement avec limitation de la flexion du genou à 90 degrés après fracture sus-condylienne du fémur homolatéral ostéosynthésée avec raideur importante du genou
+🔍 Pattern 0B - Extraction polytraumatisme membre (V3.3.201L):
+  fractureMatch: NULL
+  ligamentMatch: NULL
+  muscleMatch: NULL
+  raideurMatch: NULL
+  algiesMatch: douleurs 
+  deficitForceMatch: NULL
+  componentCount: 1
+  Condition activée: false
+❌ Pattern 0B NON ACTIVÉ: componentCount < 3
+✅ Pattern 5 (lésions mixtes narratif) détecté: [
+  'fracture comminutive de la rotule droite traitee par haubanage',
+  'limitation de la flexion du genou a 90 degres apres fracture sus condylienne du femur homolateral osteosynthesee'
+]
+📋 Lésions extraites: [
+  'fracture comminutive de la rotule droite traitee par haubanage',
+  'limitation de la flexion du genou a 90 degres apres fracture sus condylienne du femur homolateral osteosynthesee'
+] Nombre: 2
+✅ Au moins 2 lésions → Analyse séparée
+🔎 Analyse lésion "fracture comminutive de la rotule droite traitee par haubanage" → enrichi: "fracture comminutive de la rotule droite traitee par haubanage" (processed: "fracture comminutive de la rotule droite traitee par haubanage")
+🔍 [MÉTACARPIENS] Input brut: fracture comminutive de la rotule droite traitee par haubanage
+🔍 [MÉTACARPIENS] hasMetaWord: false
+🔍 [MÉTACARPIENS] hasSingleOrPerte: false
+🔍 [MÉTACARPIENS] hasSpecificFinger: false
+🔍 [MÉTACARPIENS] hasCinq: false
+⚠️ [MÉTACARPIENS] Pas de dialogue - continuons analyse normale
+📋 Antécédents extraits (0): []
+🔍 [EARLY] Antécédents détectés: 0 - 
+✅ [EXPERT RULE MATCH - PRIORITY 10400] Fracture de la rotule - Avec gêne fonctionnelle = [5-15] → 5% (coef: 0.00)
+   → Type: proposal
+   → Injury: Fracture de la rotule - Avec gêne fonctionnelle
+   → Rate calculé: 5
+🔎 Analyse lésion "limitation de la flexion du genou a 90 degres apres fracture sus condylienne du femur homolateral osteosynthesee" → enrichi: "limitation de la flexion du genou a 90 degres apres fracture sus condylienne du femur homolateral osteosynthesee" (processed: "limitation de la flexion du genou a90 degres apres fracture sus condylienne du femur homolateral osteosynthesee")
+🔍 [MÉTACARPIENS] Input brut: limitation de la flexion du genou a90 degres apres fracture sus condylienne du femur homolateral osteosynthesee
+🔍 [MÉTACARPIENS] hasMetaWord: false
+🔍 [MÉTACARPIENS] hasSingleOrPerte: false
+🔍 [MÉTACARPIENS] hasSpecificFinger: false
+🔍 [MÉTACARPIENS] hasCinq: false
+⚠️ [MÉTACARPIENS] Pas de dialogue - continuons analyse normale
+📋 Antécédents extraits (0): []
+🔍 [EARLY] Antécédents détectés: 0 - 
+🔍 [DEBUG EXPERT RULE - EARLY TEST]
+Pattern: /contusion.*cerebrale|traumatisme.*crani.*contusion/i
+Context: /perte.*connaissance|frontale|temporale|parietale|breve|courte|surveillance.*neurologique/i
+NegativeContext: /spondylo|listthesis|glissement.*vertebral/i
+CleanText: "limitation de la flexion du genou a90 degres apres fracture sus condylienne du femur homolateral osteosynthesee"
+patternMatchClean: false, contextMatchClean: false
+negContextMatchClean: false, negContextMatchWorking: false
+matchClean: false, matchWorking: false
+✅ [EXPERT RULE MATCH - PRIORITY 1001] Fracture de l'extrémité inférieure du fémur - Avec raideur du genou = [15-30] → 23% (coef: 0.50)
+   → Type: proposal
+   → Injury: Fracture de l'extrémité inférieure du fémur - Avec raideur du genou
+   → Rate calculé: 23
+📊 TOTAL: 2 propositions générées sur 2 lésions
+✅ Calcul automatique cumul avec 2 lésion(s)
+─── Cas 6 ───
+  Description: Fracture rotule + fracture sus-condylienne fémur
+  Input     : "fracture comminutive de la rotule droite traitée par haubanage avec gêne fonctionnelle résiduelle à la montée des escali..."
+  Attendu   : rotule|fémur|raideur.*genou|arthrose|extrémité.*inférieure (10-45%)
+  Obtenu    : ✅ Polytraumatisme (cumul 2 lésions)
+  Taux      : 27%
+  Type      : proposal
+  Nom OK    : ✅ | Taux OK: ✅
+  Path      : Cumul Polytraumatisme
+  Justif    : <strong>🔗 POLYTRAUMATISME - CUMUL 2 LÉSIONS</strong><br><br><div style="background:#fff3cd; padding:15px; margin:10px 0; border-left:5px solid #ffc107;"><strong>📋 Lésions identifiées :</strong><br>L...
+
+🔧 localExpertAnalysis V3.3.280 - MULTI-SITES polytrauma fix, paragraph extraction, enrichment psych/audio
+🔍 [V3.3.162] TEXTE REÇU (nettoyé): séquelles de prothèse totale du genou gauche posée à la suite d'une gonarthrose post-traumatique sévère secondaire à une fracture de l'extrémité inférieure du fémur avec flexion du genou limitée à 80 
+🔍 [V3.3.280] hasMultipleDistinctSites: 1 sites détectés (seuil=2) → site unique
+🔍 DEBUG STEPPAGE DÉTAILLÉ:
+   - steppageMatch: false
+   - amyotrophieMIMatch: false
+   - fractureL1Match: false
+   - Texte analysé: séquelles de prothèse totale du genou gauche posée à la suite d'une gonarthrose post-traumatique sévère secondaire à une fracture de l'extrémité inférieure du fémur avec flexion du genou limitée à 80 degrés et douleurs persistantes nécessitant l'util
+❌ STEPPAGE NON DÉTECTÉ - Conditions non remplies
+🔍 DEBUG DÉVIATION:
+   - deviationMatch: false
+   - mainContext: false
+   - Recherche dans: diviation NON trouvé
+🔍 [V3.3.155] Séquelles détectées: 2 [
+  'Fracture diaphysaire du fémur',
+  'Limitation de la flexion du genou'
+]
+🔍 V3.3.201k: isCumulDetected = false , lesionCount = 1
+🧠 [V3.3.214] TC check: hasTC=false, hasNeuro=false, hasFocal=false, neuroCount=0
+⚠️ POLYTRAUMATISME DÉTECTÉ: 2 séquelle(s)
+📚 TROUVÉ DANS BARÈME: "Fracture diaphysaire du fémur" → "Fracture diaphysaire du fémur" (10-30%)
+📚 TROUVÉ DANS BARÈME: "Limitation de la flexion du genou" → "Genou - Flexion possible de 0 à 30° seulement" (20-20%)
+🔄 REGROUPEMENT PAR SYSTÈME: [ 'MEMBRE_INFERIEUR: 20%' ]
+🧮 CALCUL BALTHAZAR (PAR SYSTÈME): [ 'MEMBRE_INFERIEUR: 20%' ]
+📊 IPP GLOBAL CUMULÉ: 20%
+─── Cas 7 ───
+  Description: Prothèse totale genou post-fracture fémur
+  Input     : "séquelles de prothèse totale du genou gauche posée à la suite d'une gonarthrose post-traumatique sévère secondaire à une..."
+  Attendu   : prothèse.*genou|gonarthrose|genou (15-40%)
+  Obtenu    : ✅ Polytraumatisme - 1 systèmes atteints - IPP global 20%
+  Taux      : 20%
+  Type      : proposal
+  Nom OK    : ✅ | Taux OK: ✅
+  Path      : Polytraumatisme > Barème 1967
+  Justif    : <strong>🏥 POLYTRAUMATISME - CALCUL IPP (Barème 1967)</strong><br><br><strong>📋 2 séquelles post-traumatiques regroupées en 1 systèmes anatomiques :</strong><br><br><strong>A. SYSTÈME MEMBRE INFERIEU...
+
+🔧 localExpertAnalysis V3.3.280 - MULTI-SITES polytrauma fix, paragraph extraction, enrichment psych/audio
+🔍 [V3.3.162] TEXTE REÇU (nettoyé): ankylose du genou droit en position de flexion à 20 degrés secondaire à une fracture articulaire complexe de l'extrémité inférieure du fémur avec impossibilité de flexion au-delà de 30 degrés et impos
+🔍 [V3.3.280] hasMultipleDistinctSites: 1 sites détectés (seuil=2) → site unique
+🔍 DEBUG STEPPAGE DÉTAILLÉ:
+   - steppageMatch: false
+   - amyotrophieMIMatch: true
+   - fractureL1Match: false
+   - Texte analysé: ankylose du genou droit en position de flexion à 20 degrés secondaire à une fracture articulaire complexe de l'extrémité inférieure du fémur avec impossibilité de flexion au-delà de 30 degrés et impossibilité d'extension complète avec amyotrophie qua
+❌ STEPPAGE NON DÉTECTÉ - Conditions non remplies
+🔍 DEBUG DÉVIATION:
+   - deviationMatch: false
+   - mainContext: false
+   - Recherche dans: diviation NON trouvé
+🔍 [V3.3.155] Séquelles détectées: 4 [
+  'Fracture diaphysaire du fémur',
+  'Amyotrophie quadricipitale',
+  'Limitation de la flexion du genou',
+  'Ankylose articulaire du genou en flexion'
+]
+🔍 V3.3.201k: isCumulDetected = false , lesionCount = 1
+🧠 [V3.3.214] TC check: hasTC=false, hasNeuro=false, hasFocal=false, neuroCount=0
+⚠️ POLYTRAUMATISME DÉTECTÉ: 4 séquelle(s)
+📚 TROUVÉ DANS BARÈME: "Fracture diaphysaire du fémur" → "Fracture diaphysaire du fémur" (10-30%)
+📚 TROUVÉ DANS BARÈME: "Amyotrophie quadricipitale" → "Rupture de l'appareil extenseur du genou (tendon rotulien/quadricipital) - Flexum actif résiduel" (3-8%)
+📚 TROUVÉ DANS BARÈME: "Limitation de la flexion du genou" → "Genou - Flexion possible de 0 à 30° seulement" (20-20%)
+📚 TROUVÉ DANS BARÈME: "Ankylose articulaire du genou en flexion" → "Ankylose du genou" (30-50%)
+🔄 REGROUPEMENT PAR SYSTÈME: [ 'MEMBRE_INFERIEUR: 39%' ]
+🧮 CALCUL BALTHAZAR (PAR SYSTÈME): [ 'MEMBRE_INFERIEUR: 39%' ]
+📊 IPP GLOBAL CUMULÉ: 39%
+─── Cas 8 ───
+  Description: Ankylose genou sur fracture complexe fémur distal
+  Input     : "ankylose du genou droit en position de flexion à 20 degrés secondaire à une fracture articulaire complexe de l'extrémité..."
+  Attendu   : ankylose.*genou|raideur|fémur (25-50%)
+  Obtenu    : ✅ Polytraumatisme - 1 systèmes atteints - IPP global 39%
+  Taux      : 39%
+  Type      : proposal
+  Nom OK    : ✅ | Taux OK: ✅
+  Path      : Polytraumatisme > Barème 1967
+  Justif    : <strong>🏥 POLYTRAUMATISME - CALCUL IPP (Barème 1967)</strong><br><br><strong>📋 4 séquelles post-traumatiques regroupées en 1 systèmes anatomiques :</strong><br><br><strong>A. SYSTÈME MEMBRE INFERIEU...
+
+═══════════════════════════════════════════════════════════════
+  RÉSULTAT GLOBAL : 8/8 trouvés | 0/8 échoués
+═══════════════════════════════════════════════════════════════

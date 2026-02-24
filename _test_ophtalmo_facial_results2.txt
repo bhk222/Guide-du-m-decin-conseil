@@ -1,0 +1,892 @@
+🔧 localExpertAnalysis V3.3.280 - MULTI-SITES polytrauma fix, paragraph extraction, enrichment psych/audio
+🔍 [V3.3.162] TEXTE REÇU (nettoyé): fracture du plancher de l'orbite gauche (blow-out) avec diplopie séquellaire dans la partie inférieure du champ visuel et hypoesthésie sous-orbitaire
+🔍 [V3.3.280] hasMultipleDistinctSites: 1 sites détectés (seuil=2) → site unique
+🦴 [V3.3.286] FRACTURE FACIALE ISOLÉE (sans TC) → Analyse mono-lésion avec séquelles intégrées
+─── Cas 1 ───
+  Description: Blow-out orbitaire classique avec diplopie et hypoesthésie
+  Input     : "fracture du plancher de l'orbite gauche (blow-out) avec diplopie séquellaire dans la partie inférieure du champ visuel et hypoesthésie sous-orbitaire"
+  Attendu   : Fracture du plancher de l'orbite (Blow-out) (5-25%)
+  Obtenu    : ✅ Orbite - Fracture du plancher de l'orbite (Blow-out) avec séquelles
+  Taux      : 15%
+  Type      : proposal
+  Path      : Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Yeux - Lésions Spécifiques et Annexes
+  Justif    : <strong>🦴 FRACTURE FACIALE — ÉVALUATION MONO-LÉSION</strong><br><br><strong>📋 Séquelles identifiées :</strong><br>&nbs...
+
+🔧 localExpertAnalysis V3.3.280 - MULTI-SITES polytrauma fix, paragraph extraction, enrichment psych/audio
+🔍 [V3.3.162] TEXTE REÇU (nettoyé): séquelles de fracture de l'os malaire zygomatique gauche avec enfoncement et diplopie invalidante après agression
+🔍 [V3.3.280] hasMultipleDistinctSites: 1 sites détectés (seuil=2) → site unique
+🦴 [V3.3.286] FRACTURE FACIALE ISOLÉE (sans TC) → Analyse mono-lésion avec séquelles intégrées
+─── Cas 2 ───
+  Description: Fracture zygomatique avec séquelles oculaires
+  Input     : "séquelles de fracture de l'os malaire zygomatique gauche avec enfoncement et diplopie invalidante après agression"
+  Attendu   : Séquelles de fracture de l'os malaire (zygomatique) (5-25%)
+  Obtenu    : ✅ Séquelles de fracture de l'os malaire (zygomatique)
+  Taux      : 19%
+  Type      : proposal
+  Path      : Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Face - Mâchoires
+  Justif    : <strong>🦴 FRACTURE FACIALE — ÉVALUATION MONO-LÉSION</strong><br><br><strong>📋 Séquelles identifiées :</strong><br>&nbs...
+
+🔧 localExpertAnalysis V3.3.280 - MULTI-SITES polytrauma fix, paragraph extraction, enrichment psych/audio
+🔍 [V3.3.162] TEXTE REÇU (nettoyé): paralysie du nerf facial VII totale et définitive du côté gauche avec ptosis séquellaire après fracture du rocher
+🔍 [V3.3.280] hasMultipleDistinctSites: 0 sites détectés (seuil=2) → site unique
+🔍 DEBUG STEPPAGE DÉTAILLÉ:
+   - steppageMatch: false
+   - amyotrophieMIMatch: false
+   - fractureL1Match: false
+   - Texte analysé: paralysie du nerf facial VII totale et définitive du côté gauche avec ptosis séquellaire après fracture du rocher
+❌ STEPPAGE NON DÉTECTÉ - Conditions non remplies
+🔍 DEBUG DÉVIATION:
+   - deviationMatch: false
+   - mainContext: false
+   - Recherche dans: diviation NON trouvé
+🔍 [V3.3.155] Séquelles détectées: 0 []
+🔍 V3.3.201k: isCumulDetected = true , lesionCount = 2
+🔍 DEBUG MÉTACARPIENS - Texte normalisé: paralysie nerf facial vii totale et definitive gauche avec ptosis sequellaire fracture rocher cassure fissure bris fracture fissure bris fracture cassure bris fracture cassure fissure nerveux neurologique paralysie nerf neurologique paralysie nerf nerveux paralysie nerf nerveux neurologique chute paupiere paupiere tombante ptosis paupiere tombante ptosis chute paupiere
+🔍 DEBUG MÉTACARPIENS - hasMetacarpienWord: false
+🔍 DEBUG MÉTACARPIENS - hasSingleIndicator: false
+🔍 DEBUG MÉTACARPIENS - hasMultipleIndicator: false
+🔍 DEBUG MÉTACARPIENS - hasSpecificFingerEarly: false
+🔍 DEBUG MÉTACARPIENS - isMetacarpienSingleQueryEarly: false
+🔍 V3.3.139: Vérification cumul prioritaire...
+🔍 Query words: paralysie, nerf, facial, vii, totale, definitive, cote, gauche, avec, ptosis
+🔍 Catégorie cumul trouvée: Cumuls de Lésions et Polytraumatismes
+🔍 Entrées avec searchTerms vérifiées: 51, meilleur score: 0.0%
+ℹ️ Aucun cumul prioritaire trouvé (similarité < 70%), continue avec analyse normale
+📋 Antécédents extraits (0): []
+🔍 isCumulDetected: true lesionCount: 2
+🔍 CUMUL DÉTECTÉ - Extraction des lésions individuelles
+📝 text original: paralysie du nerf facial VII totale et définitive du côté gauche avec ptosis séquellaire après fracture du rocher
+📝 finalCleanedText: paralysie du nerf facial VII totale et définitive du côté gauche avec ptosis séquellaire après fracture du rocher
+🔧 extractIndividualLesions V3.3.211 - avec Pattern 0C-ter + 0C-quater
+🔍 extractIndividualLesions - texte d'entrée: paralysie du nerf facial VII totale et définitive du côté gauche avec ptosis séquellaire après fracture du rocher
+🔍 Pattern 0B - Extraction polytraumatisme membre (V3.3.201L):
+  fractureMatch: NULL
+  ligamentMatch: NULL
+  muscleMatch: NULL
+  raideurMatch: NULL
+  algiesMatch: NULL
+  deficitForceMatch: NULL
+  componentCount: 0
+  Condition activée: false
+❌ Pattern 0B NON ACTIVÉ: componentCount < 3
+⚠️ Aucun pattern de cumul détecté, retour texte original
+📋 Lésions extraites: [
+  'paralysie du nerf facial vii totale et definitive du cote gauche avec ptosis sequellaire apres fracture du rocher'
+] Nombre: 1
+🔍 [MÉTACARPIENS] Input brut: paralysie du nerf facial vii totale et définitive du côté gauche avec ptosis séquellaire après fracture du rocher
+🔍 [MÉTACARPIENS] hasMetaWord: false
+🔍 [MÉTACARPIENS] hasSingleOrPerte: false
+🔍 [MÉTACARPIENS] hasSpecificFinger: false
+🔍 [MÉTACARPIENS] hasCinq: false
+⚠️ [MÉTACARPIENS] Pas de dialogue - continuons analyse normale
+📋 Antécédents extraits (0): []
+🔍 [EARLY] Antécédents détectés: 0 - 
+🔍 [CUMUL DÉTECTÉ EN AVANCE] 2 lésions - SKIP RÈGLES EXPERTES SIMPLES
+🎯 TOP 50 RÉSULTATS: [
+  {
+    name: 'Paralysie du Nerf Facial (VII) - Paralysie totale et définitive',
+    score: 1349,
+    path: 'Séquelles des Nerfs Crâniens et Périphériques > Nerfs Crâniens'
+  },
+  {
+    name: 'Fracture du rocher avec complications (paralysie faciale, surdité, vertiges)',
+    score: 886,
+    path: 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Oreilles - Lésions Externes et Moyennes'
+  },
+  {
+    name: 'Paralysie du Nerf Facial (VII) - Paralysie bilatérale totale',
+    score: 838,
+    path: 'Séquelles des Nerfs Crâniens et Périphériques > Nerfs Crâniens'
+  },
+  {
+    name: 'Paralysie du Nerf Facial (VII) - Contracture post-paralytique',
+    score: 827,
+    path: 'Séquelles des Nerfs Crâniens et Périphériques > Nerfs Crâniens'
+  },
+  {
+    name: 'Paralysie du Nerf Facial (VII) - Spasmes (hémispasme facial)',
+    score: 827,
+    path: 'Séquelles des Nerfs Crâniens et Périphériques > Nerfs Crâniens'
+  },
+  {
+    name: 'Paralysie du Nerf Facial (VII) - Spasmes avec crises répétées',
+    score: 827,
+    path: 'Séquelles des Nerfs Crâniens et Périphériques > Nerfs Crâniens'
+  },
+  {
+    name: 'Paralysie du nerf du grand dentelé (Serratus anterior) (Main Non Dominante)',
+    score: 678,
+    path: 'Séquelles des Nerfs Crâniens et Périphériques > Nerfs Périphériques - Membre Supérieur'
+  },
+  {
+    name: 'Paralysie du nerf du grand dentelé (Serratus anterior) (Main Dominante)',
+    score: 667,
+    path: 'Séquelles des Nerfs Crâniens et Périphériques > Nerfs Périphériques - Membre Supérieur'
+  },
+  {
+    name: 'Atteinte du Nerf glosso-pharyngien (IX) - Paralysie bilatérale',
+    score: 656,
+    path: 'Séquelles des Nerfs Crâniens et Périphériques > Nerfs Crâniens'
+  },
+  {
+    name: 'Paralysies multiples des nerfs crâniens',
+    score: 656,
+    path: 'Séquelles des Nerfs Crâniens et Périphériques > Nerfs Crâniens'
+  },
+  {
+    name: 'Paralysie isolée du nerf sous-scapulaire (droite)',
+    score: 656,
+    path: 'Séquelles des Nerfs Crâniens et Périphériques > Nerfs Périphériques - Membre Supérieur'
+  },
+  {
+    name: 'Paralysie isolée du nerf sous-scapulaire (gauche)',
+    score: 656,
+    path: 'Séquelles des Nerfs Crâniens et Périphériques > Nerfs Périphériques - Membre Supérieur'
+  },
+  {
+    name: 'Paralysie du nerf circonflexe (droite)',
+    score: 656,
+    path: 'Séquelles des Nerfs Crâniens et Périphériques > Nerfs Périphériques - Membre Supérieur'
+  },
+  {
+    name: 'Paralysie du nerf circonflexe (gauche)',
+    score: 656,
+    path: 'Séquelles des Nerfs Crâniens et Périphériques > Nerfs Périphériques - Membre Supérieur'
+  },
+  {
+    name: 'Paralysie du nerf musculo-cutané (droite)',
+    score: 656,
+    path: 'Séquelles des Nerfs Crâniens et Périphériques > Nerfs Périphériques - Membre Supérieur'
+  },
+  {
+    name: 'Paralysie du nerf musculo-cutané (gauche)',
+    score: 656,
+    path: 'Séquelles des Nerfs Crâniens et Périphériques > Nerfs Périphériques - Membre Supérieur'
+  },
+  {
+    name: 'Paralysie du nerf médian - Au bras (droite)',
+    score: 656,
+    path: 'Séquelles des Nerfs Crâniens et Périphériques > Nerfs Périphériques - Membre Supérieur'
+  },
+  {
+    name: 'Paralysie du nerf médian - Au bras (gauche)',
+    score: 656,
+    path: 'Séquelles des Nerfs Crâniens et Périphériques > Nerfs Périphériques - Membre Supérieur'
+  },
+  {
+    name: 'Paralysie du nerf médian - Au poignet (droite)',
+    score: 656,
+    path: 'Séquelles des Nerfs Crâniens et Périphériques > Nerfs Périphériques - Membre Supérieur'
+  },
+  {
+    name: 'Paralysie du nerf médian - Au poignet (gauche)',
+    score: 656,
+    path: 'Séquelles des Nerfs Crâniens et Périphériques > Nerfs Périphériques - Membre Supérieur'
+  },
+  {
+    name: 'Paralysie du nerf cubital - Au bras (droite)',
+    score: 656,
+    path: 'Séquelles des Nerfs Crâniens et Périphériques > Nerfs Périphériques - Membre Supérieur'
+  },
+  {
+    name: 'Paralysie du nerf cubital - Au bras (gauche)',
+    score: 656,
+    path: 'Séquelles des Nerfs Crâniens et Périphériques > Nerfs Périphériques - Membre Supérieur'
+  },
+  {
+    name: 'Paralysie du nerf cubital - Au poignet (droite)',
+    score: 656,
+    path: 'Séquelles des Nerfs Crâniens et Périphériques > Nerfs Périphériques - Membre Supérieur'
+  },
+  {
+    name: 'Paralysie du nerf cubital - Au poignet (gauche)',
+    score: 656,
+    path: 'Séquelles des Nerfs Crâniens et Périphériques > Nerfs Périphériques - Membre Supérieur'
+  },
+  {
+    name: 'Paralysie du nerf radial - Lésion au-dessus de la branche du triceps (droite)',
+    score: 656,
+    path: 'Séquelles des Nerfs Crâniens et Périphériques > Nerfs Périphériques - Membre Supérieur'
+  },
+  {
+    name: 'Paralysie du nerf radial - Lésion au-dessus de la branche du triceps (gauche)',
+    score: 656,
+    path: 'Séquelles des Nerfs Crâniens et Périphériques > Nerfs Périphériques - Membre Supérieur'
+  },
+  {
+    name: 'Paralysie du nerf radial - Lésion au-dessous de la branche du triceps (droite)',
+    score: 656,
+    path: 'Séquelles des Nerfs Crâniens et Périphériques > Nerfs Périphériques - Membre Supérieur'
+  },
+  {
+    name: 'Paralysie du nerf radial - Lésion au-dessous de la branche du triceps (gauche)',
+    score: 656,
+    path: 'Séquelles des Nerfs Crâniens et Périphériques > Nerfs Périphériques - Membre Supérieur'
+  },
+  {
+    name: 'Paralysie complète du nerf sciatique',
+    score: 656,
+    path: 'Séquelles des Nerfs Crâniens et Périphériques > Nerfs Périphériques - Membre Inférieur'
+  },
+  {
+    name: 'Paralysie du nerf sciatique poplité externe (SPE)',
+    score: 656,
+    path: 'Séquelles des Nerfs Crâniens et Périphériques > Nerfs Périphériques - Membre Inférieur'
+  },
+  {
+    name: 'Paralysie du nerf sciatique poplité interne (SPI)',
+    score: 656,
+    path: 'Séquelles des Nerfs Crâniens et Périphériques > Nerfs Périphériques - Membre Inférieur'
+  },
+  {
+    name: 'Paralysie du nerf crural',
+    score: 656,
+    path: 'Séquelles des Nerfs Crâniens et Périphériques > Nerfs Périphériques - Membre Inférieur'
+  },
+  {
+    name: 'Paralysie du nerf obturateur',
+    score: 656,
+    path: 'Séquelles des Nerfs Crâniens et Périphériques > Nerfs Périphériques - Membre Inférieur'
+  },
+  {
+    name: 'Paralysie du nerf fémoro-cutané (méralgie paresthésique isolée)',
+    score: 656,
+    path: 'Séquelles des Nerfs Crâniens et Périphériques > Nerfs Périphériques - Membre Inférieur'
+  },
+  {
+    name: 'Paralysie isolée du nerf obturateur',
+    score: 656,
+    path: 'Séquelles des Nerfs Crâniens et Périphériques > Nerfs Périphériques - Membre Inférieur'
+  },
+  {
+    name: 'Paralysie totale du membre supérieur (droite)',
+    score: 587,
+    path: 'Séquelles des Nerfs Crâniens et Périphériques > Nerfs Périphériques - Membre Supérieur'
+  },
+  {
+    name: 'Paralysie totale du membre supérieur (gauche)',
+    score: 587,
+    path: 'Séquelles des Nerfs Crâniens et Périphériques > Nerfs Périphériques - Membre Supérieur'
+  },
+  {
+    name: "Paralysie totale d'un membre inférieur",
+    score: 587,
+    path: 'Séquelles des Nerfs Crâniens et Périphériques > Nerfs Périphériques - Membre Inférieur'
+  },
+  {
+    name: 'Paralysie complète du plexus brachial (droite)',
+    score: 576,
+    path: 'Séquelles des Nerfs Crâniens et Périphériques > Nerfs Périphériques - Membre Supérieur'
+  },
+  {
+    name: 'Paralysie complète du plexus brachial (gauche)',
+    score: 576,
+    path: 'Séquelles des Nerfs Crâniens et Périphériques > Nerfs Périphériques - Membre Supérieur'
+  },
+  {
+    name: 'Paralysie radiculaire supérieure (Duchenne-Erb) (droite)',
+    score: 576,
+    path: 'Séquelles des Nerfs Crâniens et Périphériques > Nerfs Périphériques - Membre Supérieur'
+  },
+  {
+    name: 'Paralysie radiculaire supérieure (Duchenne-Erb) (gauche)',
+    score: 576,
+    path: 'Séquelles des Nerfs Crâniens et Périphériques > Nerfs Périphériques - Membre Supérieur'
+  },
+  {
+    name: 'Paralysie radiculaire inférieure (Klumpke) (droite)',
+    score: 576,
+    path: 'Séquelles des Nerfs Crâniens et Périphériques > Nerfs Périphériques - Membre Supérieur'
+  },
+  {
+    name: 'Paralysie radiculaire inférieure (Klumpke) (gauche)',
+    score: 576,
+    path: 'Séquelles des Nerfs Crâniens et Périphériques > Nerfs Périphériques - Membre Supérieur'
+  },
+  {
+    name: 'Paralysie associée du médian et du cubital (droite)',
+    score: 576,
+    path: 'Séquelles des Nerfs Crâniens et Périphériques > Nerfs Périphériques - Membre Supérieur'
+  },
+  {
+    name: 'Paralysie associée du médian et du cubital (gauche)',
+    score: 576,
+    path: 'Séquelles des Nerfs Crâniens et Périphériques > Nerfs Périphériques - Membre Supérieur'
+  },
+  {
+    name: 'Syndrome de paralysie du sympathique cervical (Claude Bernard-Horner)',
+    score: 576,
+    path: 'Séquelles des Nerfs Crâniens et Périphériques > Troubles Trophiques et Sympathiques'
+  },
+  {
+    name: "Fracture de l'olécrane - Cal osseux court, bonne extension (Main Non Dominante)",
+    score: 423,
+    path: 'Membres Supérieurs > Coude - Fractures et Pseudarthroses'
+  },
+  {
+    name: "Fracture de l'olécrane - Cal fibreux long, extension active faible (Main Non Dominante)",
+    score: 423,
+    path: 'Membres Supérieurs > Coude - Fractures et Pseudarthroses'
+  },
+  {
+    name: "Fracture de l'olécrane - Cal osseux court, bonne extension (Main Dominante)",
+    score: 412,
+    path: 'Membres Supérieurs > Coude - Fractures et Pseudarthroses'
+  }
+]
+🔍 [detectRequestType] Début analyse...
+📊 [detectRequestType] Résultat: attribution
+🔍 [determineSeverity] Text: paralysie du nerf facial VII totale et définitive du côté gauche avec ptosis  après fracture du roch
+🔍 [determineSeverity] Faible signs: []
+🔍 [determineSeverity] High signs: [ 'paralysie', 'totale' ]
+─── Cas 3 ───
+  Description: Paralysie faciale totale post-fracture du rocher
+  Input     : "paralysie du nerf facial VII totale et définitive du côté gauche avec ptosis séquellaire après fracture du rocher"
+  Attendu   : Paralysie du Nerf Facial (VII) - Paralysie totale et définitive (20-30%)
+  Obtenu    : ✅ Paralysie du Nerf Facial (VII) - Paralysie totale et définitive
+  Taux      : 30%
+  Type      : proposal
+  Path      : Séquelles des Nerfs Crâniens et Périphériques > Nerfs Crâniens
+  Justif    : <strong>⚠️ CUMUL DE LÉSIONS DÉTECTÉ</strong><br>
+                <div style="background:#fff3cd; padding:15px; margin:10...
+
+🔧 localExpertAnalysis V3.3.280 - MULTI-SITES polytrauma fix, paragraph extraction, enrichment psych/audio
+🔍 [V3.3.162] TEXTE REÇU (nettoyé): uvéite post-traumatique chronique de l'oeil droit avec poussées fréquentes après contusion faciale sévère par accident de la voie publique
+🔍 [V3.3.280] hasMultipleDistinctSites: 0 sites détectés (seuil=2) → site unique
+🔍 DEBUG STEPPAGE DÉTAILLÉ:
+   - steppageMatch: false
+   - amyotrophieMIMatch: false
+   - fractureL1Match: false
+   - Texte analysé: uvéite post-traumatique chronique de l'oeil droit avec poussées fréquentes après contusion faciale sévère par accident de la voie publique
+❌ STEPPAGE NON DÉTECTÉ - Conditions non remplies
+🔍 DEBUG DÉVIATION:
+   - deviationMatch: false
+   - mainContext: false
+   - Recherche dans: diviation NON trouvé
+🔍 [V3.3.155] Séquelles détectées: 0 []
+🔍 V3.3.201k: isCumulDetected = false , lesionCount = 1
+🔍 DEBUG MÉTACARPIENS - Texte normalisé: uveite post traumatique chronique de l oeil droit avec poussees frequentes contusion faciale severe par accident voie publique oeil oculaire ophtalmique oeil oeil ophtalmique oeil oeil oculaire iritis inflammation oeil inflammation uveale uveite inflammation oeil inflammation uveale uveite iritis inflammation uveale uveite iritis inflammation oeil uveite iritis inflammation oeil
+🔍 DEBUG MÉTACARPIENS - hasMetacarpienWord: false
+🔍 DEBUG MÉTACARPIENS - hasSingleIndicator: false
+🔍 DEBUG MÉTACARPIENS - hasMultipleIndicator: false
+🔍 DEBUG MÉTACARPIENS - hasSpecificFingerEarly: false
+🔍 DEBUG MÉTACARPIENS - isMetacarpienSingleQueryEarly: false
+🔍 V3.3.139: Vérification cumul prioritaire...
+🔍 Query words: uveite, post, traumatique, chronique, oeil, droit, avec, poussees, frequentes, apres
+🔍 Catégorie cumul trouvée: Cumuls de Lésions et Polytraumatismes
+🔍 Entrées avec searchTerms vérifiées: 51, meilleur score: 0.0%
+ℹ️ Aucun cumul prioritaire trouvé (similarité < 70%), continue avec analyse normale
+📋 Antécédents extraits (0): []
+🔍 isCumulDetected: false lesionCount: 1
+🔍 [MÉTACARPIENS] Input brut: uvéite post-traumatique chronique de l oeil droit avec poussées fréquentes après contusion faciale sévère par accident de la voie publique
+🔍 [MÉTACARPIENS] hasMetaWord: false
+🔍 [MÉTACARPIENS] hasSingleOrPerte: false
+🔍 [MÉTACARPIENS] hasSpecificFinger: false
+🔍 [MÉTACARPIENS] hasCinq: false
+⚠️ [MÉTACARPIENS] Pas de dialogue - continuons analyse normale
+📋 Antécédents extraits (0): []
+🔍 [EARLY] Antécédents détectés: 0 - 
+✅ [EXPERT RULE MATCH - PRIORITY 9999] Uvéite post-traumatique chronique = [10-30] → 10% (coef: 0.00)
+─── Cas 4 ───
+  Description: Uvéite chronique après traumatisme facial
+  Input     : "uvéite post-traumatique chronique de l'oeil droit avec poussées fréquentes après contusion faciale sévère par accident de la voie publique"
+  Attendu   : Uvéite post-traumatique chronique (10-30%)
+  Obtenu    : ✅ Uvéite post-traumatique chronique
+  Taux      : 10%
+  Type      : proposal
+  Path      : Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Yeux - Lésions Spécifiques et Annexes
+  Justif    : <strong>🎯 RÈGLE EXPERTE PRIORITAIRE</strong><br><br><strong>🔍 Éléments cliniques identifiés :</strong><br>&nbsp;&nbsp;...
+
+🔧 localExpertAnalysis V3.3.280 - MULTI-SITES polytrauma fix, paragraph extraction, enrichment psych/audio
+🔍 [V3.3.162] TEXTE REÇU (nettoyé): séquelles de fracture des os propres du nez avec déviation septale et larmoiement chronique de l'oeil gauche par lésion des voies lacrymales
+🔍 [V3.3.280] hasMultipleDistinctSites: 1 sites détectés (seuil=2) → site unique
+🦴 [V3.3.286] FRACTURE FACIALE ISOLÉE (sans TC) → Analyse mono-lésion avec séquelles intégrées
+─── Cas 5 ───
+  Description: Fracture nasale avec atteinte des voies lacrymales
+  Input     : "séquelles de fracture des os propres du nez avec déviation septale et larmoiement chronique de l'oeil gauche par lésion des voies lacrymales"
+  Attendu   : Séquelles de fracture des os propres du nez (3-15%)
+  Obtenu    : ✅ Séquelles de fracture des os propres du nez
+  Taux      : 7%
+  Type      : proposal
+  Path      : Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Face - Mâchoires
+  Justif    : <strong>🦴 FRACTURE FACIALE — ÉVALUATION MONO-LÉSION</strong><br><br><strong>📋 Séquelles identifiées :</strong><br>&nbs...
+
+🔧 localExpertAnalysis V3.3.280 - MULTI-SITES polytrauma fix, paragraph extraction, enrichment psych/audio
+🔍 [V3.3.162] TEXTE REÇU (nettoyé): cicatrices rétractiles des paupières avec ectropion bilatéral sévère et lagophtalmie après brûlure de la face par explosion au travail
+🔍 [V3.3.280] hasMultipleDistinctSites: 0 sites détectés (seuil=2) → site unique
+🔥 [V3.3.218] BRÛLURES FACIALES détectées → Analyse spécialisée (site unique)
+🔥 [V3.3.218] Score sévérité brûlures faciales: 5 | Zones: paupières | Surface: null% | Chéloïde: false | Rétraction: true | Commissure: false
+🔥 [V3.3.218] Barème: Brûlures du visage et du cou avec cicatrices défigurantes | Fourchette: 20-50% | Position: 5 | Taux final: 35%
+─── Cas 6 ───
+  Description: Séquelles palpébrales post-brûlure faciale (intercepté par handler brûlures)
+  Input     : "cicatrices rétractiles des paupières avec ectropion bilatéral sévère et lagophtalmie après brûlure de la face par explosion au travail"
+  Attendu   : Brûlures (20-50%)
+  Obtenu    : ✅ Brûlures du visage et du cou avec cicatrices défigurantes
+  Taux      : 35%
+  Type      : proposal
+  Path      : Brûlures de Localisations Spécifiques > Visage et Cou
+  Justif    : <strong>🔥 BRÛLURES FACIALES  — EXPLOSION DE GAZ</strong><br><br><strong>📋 ÉLÉMENTS CLINIQUES DÉTECTÉS :</strong><br>• ...
+
+🔧 localExpertAnalysis V3.3.280 - MULTI-SITES polytrauma fix, paragraph extraction, enrichment psych/audio
+🔍 [V3.3.162] TEXTE REÇU (nettoyé): cataracte traumatique de l'oeil gauche après fracture du massif facial avec constriction des mâchoires
+🔍 [V3.3.280] hasMultipleDistinctSites: 0 sites détectés (seuil=2) → site unique
+🔍 DEBUG STEPPAGE DÉTAILLÉ:
+   - steppageMatch: false
+   - amyotrophieMIMatch: false
+   - fractureL1Match: false
+   - Texte analysé: cataracte traumatique de l'oeil gauche après fracture du massif facial avec constriction des mâchoires
+❌ STEPPAGE NON DÉTECTÉ - Conditions non remplies
+🔍 DEBUG DÉVIATION:
+   - deviationMatch: false
+   - mainContext: false
+   - Recherche dans: diviation NON trouvé
+🔍 [V3.3.155] Séquelles détectées: 0 []
+🔍 V3.3.201k: isCumulDetected = false , lesionCount = 1
+🔍 DEBUG MÉTACARPIENS - Texte normalisé: cataracte traumatique de l oeil gauche fracture massif facial avec constriction machoires cassure fissure bris fracture fissure bris fracture cassure bris fracture cassure fissure oeil oculaire ophtalmique oeil oeil ophtalmique oeil oeil oculaire opacite cristallin cristallin opaque trouble cristallin cataracte cristallin opaque trouble cristallin cataracte opacite cristallin trouble cristallin cataracte opacite cristallin cristallin opaque cataracte opacite cristallin cristallin opaque
+🔍 DEBUG MÉTACARPIENS - hasMetacarpienWord: false
+🔍 DEBUG MÉTACARPIENS - hasSingleIndicator: false
+🔍 DEBUG MÉTACARPIENS - hasMultipleIndicator: false
+🔍 DEBUG MÉTACARPIENS - hasSpecificFingerEarly: false
+🔍 DEBUG MÉTACARPIENS - isMetacarpienSingleQueryEarly: false
+🔍 V3.3.139: Vérification cumul prioritaire...
+🔍 Query words: cataracte, traumatique, oeil, gauche, apres, fracture, massif, facial, avec, constriction
+🔍 Catégorie cumul trouvée: Cumuls de Lésions et Polytraumatismes
+🔍 Entrées avec searchTerms vérifiées: 51, meilleur score: 0.0%
+ℹ️ Aucun cumul prioritaire trouvé (similarité < 70%), continue avec analyse normale
+📋 Antécédents extraits (0): []
+🔍 isCumulDetected: false lesionCount: 1
+🔍 [MÉTACARPIENS] Input brut: cataracte traumatique de l oeil gauche après fracture du massif facial avec constriction des mâchoires
+🔍 [MÉTACARPIENS] hasMetaWord: false
+🔍 [MÉTACARPIENS] hasSingleOrPerte: false
+🔍 [MÉTACARPIENS] hasSpecificFinger: false
+🔍 [MÉTACARPIENS] hasCinq: false
+⚠️ [MÉTACARPIENS] Pas de dialogue - continuons analyse normale
+📋 Antécédents extraits (0): []
+🔍 [EARLY] Antécédents détectés: 0 - 
+🔍 [DEBUG EXPERT RULE - EARLY TEST]
+Pattern: /contusion.*cerebrale|traumatisme.*crani.*contusion/i
+Context: /perte.*connaissance|frontale|temporale|parietale|breve|courte|surveillance.*neurologique/i
+NegativeContext: /spondylo|listthesis|glissement.*vertebral/i
+CleanText: "cataracte traumatique de l oeil gauche apres fracture du massif facial avec constriction des machoires"
+patternMatchClean: false, contextMatchClean: false
+negContextMatchClean: false, negContextMatchWorking: false
+matchClean: false, matchWorking: false
+🔍 [DEBUG EXPERT RULE - EARLY TEST]
+Pattern: /spondylolisthesis|spondylo.*listhesis|listthesis|glissement\s+vertebral/i
+Context: /lombaire|L\d|S\d|rachis|traumatisme|post-traumatique/i
+NegativeContext: /contusion.*cerebrale|perte.*connaissance|mandibule|genou|polytraumatisme|chute.*echafaudage/i
+CleanText: "cataracte traumatique de l oeil gauche apres fracture du massif facial avec constriction des machoires"
+patternMatchClean: false, contextMatchClean: false
+negContextMatchClean: false, negContextMatchWorking: false
+matchClean: false, matchWorking: false
+─── Cas 7 ───
+  Description: Cataracte post-trauma + constriction mâchoires (nécessite acuité)
+  Input     : "cataracte traumatique de l'oeil gauche après fracture du massif facial avec constriction des mâchoires"
+  Attendu   : Cataracte (données insuffisantes (no_result attendu))
+  Obtenu    : ✅ AUCUN
+  Taux      : no_result
+  Type      : no_result
+
+🔧 localExpertAnalysis V3.3.280 - MULTI-SITES polytrauma fix, paragraph extraction, enrichment psych/audio
+🔍 [V3.3.162] TEXTE REÇU (nettoyé): énucléation de l'oeil droit sans possibilité de prothèse après perte de substance des parties molles de la face par balle
+🔍 [V3.3.280] hasMultipleDistinctSites: 0 sites détectés (seuil=2) → site unique
+🔍 DEBUG STEPPAGE DÉTAILLÉ:
+   - steppageMatch: false
+   - amyotrophieMIMatch: false
+   - fractureL1Match: false
+   - Texte analysé: énucléation de l'oeil droit sans possibilité de prothèse après perte de substance des parties molles de la face par balle
+❌ STEPPAGE NON DÉTECTÉ - Conditions non remplies
+🔍 DEBUG DÉVIATION:
+   - deviationMatch: false
+   - mainContext: false
+   - Recherche dans: diviation NON trouvé
+🔍 [V3.3.155] Séquelles détectées: 0 []
+🔍 V3.3.201k: isCumulDetected = false , lesionCount = 1
+🔍 DEBUG MÉTACARPIENS - Texte normalisé: enucleation de l oeil droit sans possibilite de prothese perte de substance parties molles face par balle amputation ablation section amputation ablation perte oeil oculaire ophtalmique oeil oeil ophtalmique oeil oeil oculaire
+🔍 DEBUG MÉTACARPIENS - hasMetacarpienWord: false
+🔍 DEBUG MÉTACARPIENS - hasSingleIndicator: false
+🔍 DEBUG MÉTACARPIENS - hasMultipleIndicator: false
+🔍 DEBUG MÉTACARPIENS - hasSpecificFingerEarly: false
+🔍 DEBUG MÉTACARPIENS - isMetacarpienSingleQueryEarly: false
+🔍 V3.3.139: Vérification cumul prioritaire...
+🔍 Query words: enucleation, oeil, droit, sans, possibilite, prothese, apres, perte, substance, des
+🔍 Catégorie cumul trouvée: Cumuls de Lésions et Polytraumatismes
+🔍 Entrées avec searchTerms vérifiées: 51, meilleur score: 0.0%
+ℹ️ Aucun cumul prioritaire trouvé (similarité < 70%), continue avec analyse normale
+📋 Antécédents extraits (0): []
+🔍 isCumulDetected: false lesionCount: 1
+🔍 [MÉTACARPIENS] Input brut: énucléation de l oeil droit sans possibilité de prothèse après perte de substance des parties molles de la face par balle
+🔍 [MÉTACARPIENS] hasMetaWord: false
+🔍 [MÉTACARPIENS] hasSingleOrPerte: true
+🔍 [MÉTACARPIENS] hasSpecificFinger: false
+🔍 [MÉTACARPIENS] hasCinq: false
+⚠️ [MÉTACARPIENS] Pas de dialogue - continuons analyse normale
+📋 Antécédents extraits (0): []
+🔍 [EARLY] Antécédents détectés: 0 - 
+✅ [EXPERT RULE MATCH - PRIORITY 10868] Ablation ou altération du globe sans prothèse possible = [35-40] → 35% (coef: 0.00)
+─── Cas 8 ───
+  Description: Énucléation sans prothèse + perte substance faciale
+  Input     : "énucléation de l'oeil droit sans possibilité de prothèse après perte de substance des parties molles de la face par balle"
+  Attendu   : Ablation ou altération du globe sans prothèse possible (35-40%)
+  Obtenu    : ✅ Ablation ou altération du globe sans prothèse possible
+  Taux      : 35%
+  Type      : proposal
+  Path      : Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Yeux - Cécité et Baisse de Vision
+  Justif    : <strong>🎯 RÈGLE EXPERTE PRIORITAIRE</strong><br><br><strong>📋 Référence barémique :</strong> Ablation ou altération du...
+
+🔧 localExpertAnalysis V3.3.280 - MULTI-SITES polytrauma fix, paragraph extraction, enrichment psych/audio
+🔍 [V3.3.162] TEXTE REÇU (nettoyé): phthisis bulbi (atrophie du globe oculaire) de l'oeil gauche post-traumatique après fracture orbitaire complexe avec déformation de l'orbite
+🔍 [V3.3.280] hasMultipleDistinctSites: 1 sites détectés (seuil=2) → site unique
+🦴 [V3.3.286] FRACTURE FACIALE ISOLÉE (sans TC) → Analyse mono-lésion avec séquelles intégrées
+🔍 DEBUG STEPPAGE DÉTAILLÉ:
+   - steppageMatch: false
+   - amyotrophieMIMatch: false
+   - fractureL1Match: false
+   - Texte analysé: phthisis bulbi (atrophie du globe oculaire) de l'oeil gauche post-traumatique après fracture orbitaire complexe avec déformation de l'orbite
+❌ STEPPAGE NON DÉTECTÉ - Conditions non remplies
+🔍 DEBUG DÉVIATION:
+   - deviationMatch: false
+   - mainContext: false
+   - Recherche dans: diviation NON trouvé
+🔍 [V3.3.155] Séquelles détectées: 1 [ "Fracture du plancher de l'orbite" ]
+🔍 V3.3.201k: isCumulDetected = false , lesionCount = 1
+🧠 [V3.3.214] TC check: hasTC=false, hasNeuro=false, hasFocal=false, neuroCount=0
+✅ CAS SIMPLE DÉTECTÉ: 1 séquelle(s)
+📚 TROUVÉ DANS BARÈME: "Fracture du plancher de l'orbite" → "Orbite - Fracture du plancher de l'orbite (Blow-out) avec séquelles" (5-25%)
+🔄 REGROUPEMENT PAR SYSTÈME: [ 'FACE_OPHTALMOLOGIE: 10%' ]
+🧮 CALCUL BALTHAZAR (PAR SYSTÈME): [ 'FACE_OPHTALMOLOGIE: 10%' ]
+📊 IPP GLOBAL CUMULÉ: 10%
+─── Cas 9 ───
+  Description: Atrophie du globe post-fracture orbitaire
+  Input     : "phthisis bulbi (atrophie du globe oculaire) de l'oeil gauche post-traumatique après fracture orbitaire complexe avec déformation de l'orbite"
+  Attendu   : Phthisis bulbi (atrophie du globe oculaire) post-traumatique (35-40%)
+  Obtenu    : ❌ Face/Ophtalmologie : Enophtalmie et fracture plancher orbite - Barème: "Orbite - Fracture du plancher de l'orbite (Blow-out) avec séquelles" (5-25%) - IPP 10%
+  Taux      : 10%
+  Type      : proposal
+  Path      : Séquelle > Barème 1967
+  Justif    : <strong>✅ ÉVALUATION PRÉCISE - CALCUL IPP (Barème 1967)</strong><br><br><strong>📋 1 séquelle post-traumatique identifié...
+  ⚠️ ANOMALIE: attendu "Phthisis bulbi (atrophie du globe oculaire) post-traumatique" mais obtenu "Face/Ophtalmologie : Enophtalmie et fracture plancher orbite - Barème: "Orbite - Fracture du plancher de l'orbite (Blow-out) avec séquelles" (5-25%) - IPP 10%"
+
+🔧 localExpertAnalysis V3.3.280 - MULTI-SITES polytrauma fix, paragraph extraction, enrichment psych/audio
+🔍 [V3.3.162] TEXTE REÇU (nettoyé): glaucome post-traumatique de l'oeil droit avec altération du champ visuel et pseudarthrose lâche de la mandibule après accident de la route
+🔍 [V3.3.280] hasMultipleDistinctSites: 0 sites détectés (seuil=2) → site unique
+🔍 DEBUG STEPPAGE DÉTAILLÉ:
+   - steppageMatch: false
+   - amyotrophieMIMatch: false
+   - fractureL1Match: false
+   - Texte analysé: glaucome post-traumatique de l'oeil droit avec altération du champ visuel et pseudarthrose lâche de la mandibule après accident de la route
+❌ STEPPAGE NON DÉTECTÉ - Conditions non remplies
+🔍 DEBUG DÉVIATION:
+   - deviationMatch: false
+   - mainContext: false
+   - Recherche dans: diviation NON trouvé
+🔍 [V3.3.155] Séquelles détectées: 0 []
+🔍 V3.3.201k: isCumulDetected = false , lesionCount = 1
+🔍 DEBUG MÉTACARPIENS - Texte normalisé: glaucome post traumatique de l oeil droit avec alteration champ visuel et pseudarthrose lache mandibule accident route fausse articulation non consolidation absence de consolidation pseudarthrose non consolidation absence de consolidation pseudarthrose fausse articulation absence de consolidation pseudarthrose fausse articulation non consolidation arthropathie degenerescence articulaire usure articulaire arthrose degenerescence articulaire usure articulaire arthrose arthropathie usure articulaire arthrose arthropathie degenerescence articulaire oeil oculaire ophtalmique oeil oeil ophtalmique oeil oeil oculaire oeil oeil oculaire vision vue acuite visuelle vision vue acuite visuelle perimetrie champ de vision vision peripherique champ visuel champ de vision vision peripherique champ visuel perimetrie vision peripherique champ visuel perimetrie champ de vision pression intraoculaire tension oculaire hypertonie glaucome tension oculaire hypertonie glaucome pression intraoculaire hypertonie glaucome pression intraoculaire tension oculaire glaucome pression intraoculaire tension oculaire av acuite visuelle vision de acuite acuite visuelle vision de acuite av vision de acuite av acuite visuelle
+🔍 DEBUG MÉTACARPIENS - hasMetacarpienWord: false
+🔍 DEBUG MÉTACARPIENS - hasSingleIndicator: false
+🔍 DEBUG MÉTACARPIENS - hasMultipleIndicator: false
+🔍 DEBUG MÉTACARPIENS - hasSpecificFingerEarly: false
+🔍 DEBUG MÉTACARPIENS - isMetacarpienSingleQueryEarly: false
+🔍 V3.3.139: Vérification cumul prioritaire...
+🔍 Query words: glaucome, post, traumatique, oeil, droit, avec, alteration, champ, visuel, pseudarthrose
+🔍 Catégorie cumul trouvée: Cumuls de Lésions et Polytraumatismes
+🔍 Entrées avec searchTerms vérifiées: 51, meilleur score: 0.0%
+ℹ️ Aucun cumul prioritaire trouvé (similarité < 70%), continue avec analyse normale
+📋 Antécédents extraits (0): []
+🔍 isCumulDetected: false lesionCount: 1
+🔍 [MÉTACARPIENS] Input brut: glaucome post-traumatique de l oeil droit avec altération du champ visuel et pseudarthrose lâche de la mandibule après accident de la route
+🔍 [MÉTACARPIENS] hasMetaWord: false
+🔍 [MÉTACARPIENS] hasSingleOrPerte: false
+🔍 [MÉTACARPIENS] hasSpecificFinger: false
+🔍 [MÉTACARPIENS] hasCinq: false
+⚠️ [MÉTACARPIENS] Pas de dialogue - continuons analyse normale
+📋 Antécédents extraits (0): []
+🔍 [EARLY] Antécédents détectés: 0 - 
+🔍 [DEBUG EXPERT RULE - EARLY TEST]
+Pattern: /contusion.*cerebrale|traumatisme.*crani.*contusion/i
+Context: /perte.*connaissance|frontale|temporale|parietale|breve|courte|surveillance.*neurologique/i
+NegativeContext: /spondylo|listthesis|glissement.*vertebral/i
+CleanText: "glaucome post traumatique de l oeil droit avec alteration du champ visuel et pseudarthrose lache de la mandibule apres accident de la route"
+patternMatchClean: false, contextMatchClean: false
+negContextMatchClean: false, negContextMatchWorking: false
+matchClean: false, matchWorking: false
+🔍 [DEBUG EXPERT RULE - EARLY TEST]
+Pattern: /spondylolisthesis|spondylo.*listhesis|listthesis|glissement\s+vertebral/i
+Context: /lombaire|L\d|S\d|rachis|traumatisme|post-traumatique/i
+NegativeContext: /contusion.*cerebrale|perte.*connaissance|mandibule|genou|polytraumatisme|chute.*echafaudage/i
+CleanText: "glaucome post traumatique de l oeil droit avec alteration du champ visuel et pseudarthrose lache de la mandibule apres accident de la route"
+patternMatchClean: false, contextMatchClean: false
+negContextMatchClean: true, negContextMatchWorking: true
+matchClean: false, matchWorking: false
+🎯 TOP 50 RÉSULTATS: [
+  {
+    name: 'Glaucome post-traumatique',
+    score: 1220.1,
+    path: 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Yeux - Lésions Spécifiques et Annexes'
+  },
+  {
+    name: 'Cataracte traumatique sur glaucome préexistant',
+    score: 1175.3,
+    path: 'États Antérieurs et Aggravation de Pathologies Préexistantes > Aggravation Affections Sensorielles sur État Antérieur'
+  },
+  {
+    name: 'Pseudarthrose lâche de la mandibule',
+    score: 784,
+    path: 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Face - Mâchoires'
+  },
+  {
+    name: 'Pseudarthrose lâche de la branche ascendante',
+    score: 584,
+    path: 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Face - Mâchoires'
+  },
+  {
+    name: 'Pseudarthrose lâche de la branche horizontale',
+    score: 584,
+    path: 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Face - Mâchoires'
+  },
+  {
+    name: 'Pseudarthrose serrée de la branche ascendante',
+    score: 573,
+    path: 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Face - Mâchoires'
+  },
+  {
+    name: 'Pseudarthrose serrée de la branche horizontale',
+    score: 573,
+    path: 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Face - Mâchoires'
+  },
+  {
+    name: 'Pseudarthrose serrée de la région symphysaire',
+    score: 573,
+    path: 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Face - Mâchoires'
+  },
+  {
+    name: 'Luxation épaule sur omarthrose préexistante',
+    score: 550.23,
+    path: 'États Antérieurs et Aggravation de Pathologies Préexistantes > Aggravation Épaule sur État Antérieur'
+  },
+  {
+    name: 'Plateaux tibiaux + raideur + arthrose (cumul)',
+    score: 500.23,
+    path: 'Cumuls de Lésions et Polytraumatismes > Cumuls Simples - Même Membre'
+  },
+  {
+    name: "Mutilation - Perte d'un maxillaire inférieur",
+    score: 456.4,
+    path: 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Face - Mâchoires'
+  },
+  {
+    name: "Mutilation - Perte d'un maxillaire supérieur et d'un maxillaire inférieur",
+    score: 456.4,
+    path: 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Face - Mâchoires'
+  },
+  {
+    name: 'Agueusie (perte du goût) post-traumatique',
+    score: 343,
+    path: 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Face - Dents, Langue, Pharynx'
+  },
+  {
+    name: "Mutilation - Perte d'un seul maxillaire supérieur avec conservation mandibule",
+    score: 333.9,
+    path: 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Face - Mâchoires'
+  },
+  {
+    name: "Mutilation - Perte d'un maxillaire supérieur avec perte de substance étendue",
+    score: 333.9,
+    path: 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Face - Mâchoires'
+  },
+  {
+    name: "Perte de la vision d'un oeil sans difformité apparente",
+    score: 237.99999999999997,
+    path: 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Yeux - Cécité et Baisse de Vision'
+  },
+  {
+    name: "Perte complète de la vision d'un oeil (l'autre étant normal)",
+    score: 237.29999999999998,
+    path: 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Yeux - Cécité et Baisse de Vision'
+  },
+  {
+    name: 'Phthisis bulbi (atrophie du globe oculaire) post-traumatique',
+    score: 231.7,
+    path: 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Yeux - Lésions Spécifiques et Annexes'
+  },
+  {
+    name: 'Luxation irréductible temporo-maxillaire',
+    score: 218.39999999999998,
+    path: 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Face - Mâchoires'
+  },
+  {
+    name: 'Luxation récidivante temporo-maxillaire',
+    score: 218.39999999999998,
+    path: 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Face - Mâchoires'
+  },
+  {
+    name: 'Surdité unilatérale légère (perte 20-30 dB)',
+    score: 194.6,
+    path: "Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Oreilles - Diminution de l'Acuité Auditive (Surdité)"
+  },
+  {
+    name: 'Surdité unilatérale modérée (perte 40-50 dB)',
+    score: 194.6,
+    path: "Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Oreilles - Diminution de l'Acuité Auditive (Surdité)"
+  },
+  {
+    name: 'Surdité unilatérale moyenne (perte 55-70 dB)',
+    score: 194.6,
+    path: "Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Oreilles - Diminution de l'Acuité Auditive (Surdité)"
+  },
+  {
+    name: 'Surdité bilatérale légère (perte 20-30 dB)',
+    score: 194.6,
+    path: "Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Oreilles - Diminution de l'Acuité Auditive (Surdité)"
+  },
+  {
+    name: 'Surdité bilatérale modérée (perte 40-50 dB)',
+    score: 194.6,
+    path: "Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Oreilles - Diminution de l'Acuité Auditive (Surdité)"
+  },
+  {
+    name: 'Surdité bilatérale moyenne (perte 55-70 dB)',
+    score: 194.6,
+    path: "Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Oreilles - Diminution de l'Acuité Auditive (Surdité)"
+  },
+  {
+    name: 'Surdité bilatérale sévère (perte 70-85 dB)',
+    score: 194.6,
+    path: "Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Oreilles - Diminution de l'Acuité Auditive (Surdité)"
+  },
+  {
+    name: 'Surdité bilatérale profonde (perte > 85 dB)',
+    score: 194.6,
+    path: "Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Oreilles - Diminution de l'Acuité Auditive (Surdité)"
+  },
+  {
+    name: 'Mutilation - Perte des deux maxillaires supérieurs',
+    score: 193.89999999999998,
+    path: 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Face - Mâchoires'
+  },
+  {
+    name: 'Perte de substance de la voûte palatine',
+    score: 193.89999999999998,
+    path: 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Face - Mâchoires'
+  },
+  {
+    name: 'Perte de substance de la voûte avec communication bucco-nasale',
+    score: 193.89999999999998,
+    path: 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Face - Mâchoires'
+  },
+  {
+    name: "Anosmie (perte de l'odorat)",
+    score: 193.89999999999998,
+    path: 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Voies Respiratoires Supérieures'
+  },
+  {
+    name: "Orbite - Paralysie d'un ou plusieurs nerfs oculo-moteurs (voir diplopie)",
+    score: 183.39999999999998,
+    path: 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Yeux - Lésions Spécifiques et Annexes'
+  },
+  {
+    name: 'Ankylose temporo-maxillaire osseuse',
+    score: 140.434,
+    path: 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Face - Mâchoires'
+  },
+  {
+    name: 'Cécité complète',
+    score: 96.6,
+    path: 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Yeux - Cécité et Baisse de Vision'
+  },
+  {
+    name: 'Ablation ou altération du globe avec prothèse possible',
+    score: 81.19999999999999,
+    path: 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Yeux - Cécité et Baisse de Vision'
+  },
+  {
+    name: 'Ablation ou altération du globe sans prothèse possible',
+    score: 80.5,
+    path: 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Yeux - Cécité et Baisse de Vision'
+  },
+  {
+    name: 'Diminution de la vision des deux yeux (selon tableau à double entrée)',
+    score: 79.1,
+    path: 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Yeux - Cécité et Baisse de Vision'
+  },
+  {
+    name: "Diminution de l'acuité auditive",
+    score: 75.6,
+    path: "Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Oreilles - Diminution de l'Acuité Auditive (Surdité)"
+  },
+  {
+    name: "Dysgueusie (distorsion du goût) ou Cacosmie (perception d'odeurs nauséabondes)",
+    score: 61.599999999999994,
+    path: 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Voies Respiratoires Supérieures'
+  },
+  {
+    name: 'Cataracte (selon acuité et complications)',
+    score: 52.5,
+    path: 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Yeux - Lésions Spécifiques et Annexes'
+  },
+  {
+    name: 'Voies lacrymales - Larmoiement ou fistules (un oeil)',
+    score: 51.8,
+    path: 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Yeux - Lésions Spécifiques et Annexes'
+  },
+  {
+    name: 'Voies lacrymales - Larmoiement ou fistules (chaque oeil)',
+    score: 51.8,
+    path: 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Yeux - Lésions Spécifiques et Annexes'
+  },
+  {
+    name: 'Paupières - Ptosis ou blépharospasme (un oeil)',
+    score: 51.8,
+    path: 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Yeux - Lésions Spécifiques et Annexes'
+  },
+  {
+    name: 'Trouble obsessionnel-compulsif (TOC) post-traumatique invalidant',
+    score: 48.3,
+    path: 'Séquelles Psychiatriques Sévères et Spécifiques > Troubles Anxieux Sévères'
+  },
+  {
+    name: 'Luxation hanche sur prothèse préexistante',
+    score: 44.8,
+    path: 'États Antérieurs et Aggravation de Pathologies Préexistantes > Aggravation Hanche et Membre Inférieur sur État Antérieur'
+  },
+  {
+    name: "Paralysie de l'accommodation - Ophtalmoplégie interne totale unilatérale",
+    score: 43.4,
+    path: 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Yeux - Lésions Spécifiques et Annexes'
+  },
+  {
+    name: "Paralysie de l'accommodation - Ophtalmoplégie interne totale bilatérale",
+    score: 43.4,
+    path: 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Yeux - Lésions Spécifiques et Annexes'
+  },
+  {
+    name: 'Paralysie du sphincter irien - Mydriase existant seule unilatérale',
+    score: 43.4,
+    path: 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Yeux - Lésions Spécifiques et Annexes'
+  },
+  {
+    name: 'Paralysie du sphincter irien - Mydriase existant seule bilatérale',
+    score: 43.4,
+    path: 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Yeux - Lésions Spécifiques et Annexes'
+  }
+]
+🔍 [detectRequestType] Début analyse...
+📊 [detectRequestType] Résultat: attribution
+🔍 [determineSeverity] Text: glaucome post-traumatique de l'oeil droit avec altération du champ visuel et pseudarthrose lâche de 
+🔍 [determineSeverity] Faible signs: []
+🔍 [determineSeverity] High signs: [ 'pseudarthrose' ]
+─── Cas 10 ───
+  Description: Polytraumatisme : glaucome + pseudarthrose mandibule (2 sites)
+  Input     : "glaucome post-traumatique de l'oeil droit avec altération du champ visuel et pseudarthrose lâche de la mandibule après accident de la route"
+  Attendu   : Polytraumatisme (cumul)
+  Obtenu    : ❌ Glaucome post-traumatique
+  Taux      : 40%
+  Type      : proposal
+  Path      : Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Yeux - Lésions Spécifiques et Annexes
+  Justif    : <strong>🔍 ANALYSE EXPERTIALE DÉTAILLÉE</strong><br><br><div style="background:#fff8e1; padding:15px; margin:15px 0; bor...
+  ⚠️ ANOMALIE: attendu "Polytraumatisme" mais obtenu "Glaucome post-traumatique"
+
+═══════════════════════════════════════════════════════════════
+  RÉSULTAT GLOBAL : 8/10 trouvés | 2/10 échoués
+═══════════════════════════════════════════════════════════════

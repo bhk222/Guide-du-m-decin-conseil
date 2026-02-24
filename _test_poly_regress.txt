@@ -1,0 +1,1943 @@
+🔧 localExpertAnalysis V3.3.280 - MULTI-SITES polytrauma fix, paragraph extraction, enrichment psych/audio
+🔍 [V3.3.162] TEXTE REÇU (nettoyé): séquelles de fracture du fémur gauche consolidée avec raccourcissement de 2 cm et raideur du genou homolatéral associée à une fracture du radius distal droit avec raideur du poignet et limitation de l
+🔍 [V3.3.280] hasMultipleDistinctSites: 2 sites détectés (seuil=2) → MULTI-SITES
+🔍 DEBUG STEPPAGE DÉTAILLÉ:
+   - steppageMatch: false
+   - amyotrophieMIMatch: false
+   - fractureL1Match: false
+   - Texte analysé: séquelles de fracture du fémur gauche consolidée avec raccourcissement de 2 cm et raideur du genou homolatéral associée à une fracture du radius distal droit avec raideur du poignet et limitation de la pronosupination après accident de la voie publiq
+❌ STEPPAGE NON DÉTECTÉ - Conditions non remplies
+🔍 DEBUG DÉVIATION:
+   - deviationMatch: false
+   - mainContext: false
+   - Recherche dans: diviation NON trouvé
+🔍 [V3.3.155] Séquelles détectées: 2 [ 'Fracture diaphysaire du fémur', 'Raideur articulaire du genou' ]
+🔍 V3.3.201k: isCumulDetected = true , lesionCount = 2
+⚠️ V3.3.201j: CUMUL DÉTECTÉ → SKIP regroupement par système, passage direct à extraction lésions individuelles
+🔍 DEBUG MÉTACARPIENS - Texte normalisé: sequelles de fracture femur gauche consolidee avec raccourcissement de 2 cm et raideur genou homolateral eral associee a fracture radius distal droit raideur poignet et limitation pronosupination accident voie publique limitation restriction enraidissement raideur restriction enraidissement raideur limitation enraidissement raideur limitation restriction cassure fissure bris fracture fissure bris fracture cassure bris fracture cassure fissure femoro tibiale femoro patellaire articulation genou genou femoro patellaire articulation genou genou femoro tibiale articulation genou genou femoro tibiale femoro patellaire pronation prono supination rotation avant bras pronation prono supination pronosupination supination limitee supination reduite paume vers haut supination supination reduite paume vers haut supination supination limitee paume vers haut supination supination limitee supination reduite articulation poignet $1 droit $1 gauche poignet $1 droit $1 gauche poignet articulation poignet $1 gauche poignet articulation poignet $1 droit cumul cumuler combiner niveau amputation niveau d amputation hauteur amputation
+🔍 DEBUG MÉTACARPIENS - hasMetacarpienWord: false
+🔍 DEBUG MÉTACARPIENS - hasSingleIndicator: false
+🔍 DEBUG MÉTACARPIENS - hasMultipleIndicator: false
+🔍 DEBUG MÉTACARPIENS - hasSpecificFingerEarly: false
+🔍 DEBUG MÉTACARPIENS - isMetacarpienSingleQueryEarly: false
+🔍 V3.3.139: Vérification cumul prioritaire...
+🔍 Query words: sequelles, fracture, femur, gauche, consolidee, avec, raccourcissement, raideur, genou, homolateral
+🔍 Catégorie cumul trouvée: Cumuls de Lésions et Polytraumatismes
+🔍 Entrées avec searchTerms vérifiées: 51, meilleur score: 0.0%
+ℹ️ Aucun cumul prioritaire trouvé (similarité < 70%), continue avec analyse normale
+📋 Antécédents extraits (0): []
+🔍 isCumulDetected: true lesionCount: 2
+🔍 CUMUL DÉTECTÉ - Extraction des lésions individuelles
+📝 text original: séquelles de fracture du fémur gauche consolidée avec raccourcissement de 2 cm et raideur du genou homolatéral associée à une fracture du radius distal droit avec raideur du poignet et limitation de la pronosupination après accident de la voie publique
+📝 finalCleanedText: séquelles de fracture du fémur gauche consolidée avec raccourcissement de 2 cm et raideur du genou homolatéral associée à une fracture du radius distal droit avec raideur du poignet et limitation de la pronosupination après accident de la voie publique
+🔧 extractIndividualLesions V3.3.211 - avec Pattern 0C-ter + 0C-quater
+🔍 extractIndividualLesions - texte d'entrée: séquelles de fracture du fémur gauche consolidée avec raccourcissement de 2 cm et raideur du genou homolatéral associée à une fracture du radius distal droit avec raideur du poignet et limitation de la pronosupination après accident de la voie publique
+🔍 Pattern 0B - Extraction polytraumatisme membre (V3.3.201L):
+  fractureMatch: fracture du femur gauche
+  ligamentMatch: NULL
+  muscleMatch: NULL
+  raideurMatch: raideur du genou
+  algiesMatch: NULL
+  deficitForceMatch: NULL
+  componentCount: 2
+  Condition activée: false
+❌ Pattern 0B NON ACTIVÉ: componentCount < 3
+✅ Pattern 5 (lésions mixtes narratif) détecté: [
+  'sequelles de fracture du femur gauche consolidee',
+  'une fracture du radius distal droit'
+]
+📋 Lésions extraites: [
+  'sequelles de fracture du femur gauche consolidee',
+  'une fracture du radius distal droit'
+] Nombre: 2
+✅ Au moins 2 lésions → Analyse séparée
+🔎 Analyse lésion "sequelles de fracture du femur gauche consolidee" → enrichi: "sequelles de fracture du femur gauche consolidee" (processed: "sequelles de fracture du femur gauche consolidee")
+🔍 [MÉTACARPIENS] Input brut: sequelles de fracture du femur gauche consolidee
+🔍 [MÉTACARPIENS] hasMetaWord: false
+🔍 [MÉTACARPIENS] hasSingleOrPerte: false
+🔍 [MÉTACARPIENS] hasSpecificFinger: false
+🔍 [MÉTACARPIENS] hasCinq: false
+⚠️ [MÉTACARPIENS] Pas de dialogue - continuons analyse normale
+📋 Antécédents extraits (0): []
+🔍 [EARLY] Antécédents détectés: 0 - 
+🔍 [DEBUG EXPERT RULE - EARLY TEST]
+Pattern: /contusion.*cerebrale|traumatisme.*crani.*contusion/i
+Context: /perte.*connaissance|frontale|temporale|parietale|breve|courte|surveillance.*neurologique/i
+NegativeContext: /spondylo|listthesis|glissement.*vertebral/i
+CleanText: "sequelles de fracture du femur gauche consolidee"
+patternMatchClean: false, contextMatchClean: false
+negContextMatchClean: false, negContextMatchWorking: false
+matchClean: false, matchWorking: false
+🔍 [DEBUG EXPERT RULE - EARLY TEST]
+Pattern: /spondylolisthesis|spondylo.*listhesis|listthesis|glissement\s+vertebral/i
+Context: /lombaire|L\d|S\d|rachis|traumatisme|post-traumatique/i
+NegativeContext: /contusion.*cerebrale|perte.*connaissance|mandibule|genou|polytraumatisme|chute.*echafaudage/i
+CleanText: "sequelles de fracture du femur gauche consolidee"
+patternMatchClean: false, contextMatchClean: false
+negContextMatchClean: false, negContextMatchWorking: false
+matchClean: false, matchWorking: false
+🎯 TOP 50 RÉSULTATS: [
+  {
+    name: 'Fracture diaphysaire du fémur',
+    score: 1166,
+    path: 'Membres Inférieurs > Cuisse - Fractures'
+  },
+  {
+    name: "Fracture de l'extrémité inférieure du fémur - Avec raideur du genou",
+    score: 1166,
+    path: 'Membres Inférieurs > Cuisse - Fractures'
+  },
+  {
+    name: 'Fracture du col du fémur - Consolidation avec raccourcissement et raideur',
+    score: 1126,
+    path: 'Membres Inférieurs > Hanche - Fractures'
+  },
+  {
+    name: 'Fracture des condyles fémoraux - Avec déviation et/ou raideur',
+    score: 452,
+    path: 'Membres Inférieurs > Genou - Lésions Osseuses et Articulaires'
+  },
+  {
+    name: 'Fracture du massif trochantérien - Bonne consolidation',
+    score: 451,
+    path: 'Membres Inférieurs > Hanche - Fractures'
+  },
+  {
+    name: 'Fracture du massif trochantérien - Cal vicieux et raideur',
+    score: 451,
+    path: 'Membres Inférieurs > Hanche - Fractures'
+  },
+  {
+    name: 'Fracture hanche sur coxarthrose préexistante',
+    score: 451,
+    path: 'États Antérieurs et Aggravation de Pathologies Préexistantes > Aggravation Hanche et Membre Inférieur sur État Antérieur'
+  },
+  {
+    name: "Cal vicieux du fémur - Raccourcissement jusqu'à 10 mm (compensé par talonnette)",
+    score: 436,
+    path: 'Membres Inférieurs > Cuisse - Fractures'
+  },
+  {
+    name: 'Cal vicieux du fémur - Raccourcissement entre 10 et 50 mm',
+    score: 436,
+    path: 'Membres Inférieurs > Cuisse - Fractures'
+  },
+  {
+    name: 'Cal vicieux du fémur - Raccourcissement au-delà de 50 mm',
+    score: 436,
+    path: 'Membres Inférieurs > Cuisse - Fractures'
+  },
+  {
+    name: 'Col fémur + raideur + raccourcissement (cumul)',
+    score: 397,
+    path: 'Cumuls de Lésions et Polytraumatismes > Cumuls Simples - Même Membre'
+  },
+  {
+    name: 'Fracture genou sur gonarthrose préexistante',
+    score: 251,
+    path: 'États Antérieurs et Aggravation de Pathologies Préexistantes > Aggravation Genou sur État Antérieur'
+  },
+  {
+    name: 'Fracture de côtes non compliquée (selon gêne et nombre)',
+    score: 57.12,
+    path: 'Séquelles Thoraciques, Abdominales, Pelviennes et Cardio-vasculaires > Thorax - Paroi Osseuse'
+  },
+  {
+    name: 'Fracture radius + lombalgie post-traumatique (cumul)',
+    score: 52.03,
+    path: 'Cumuls de Lésions et Polytraumatismes > Polytraumatismes - Membres Multiples'
+  },
+  {
+    name: "Fracture isolée d'une branche pubienne ou de l'aile iliaque (sans déplacement)",
+    score: 52.02,
+    path: 'Séquelles du Rachis, du Bassin et de la Moelle Épinière > Bassin - Lésions Osseuses'
+  },
+  {
+    name: 'Fracture du cotyle sans déplacement, hanche congruente',
+    score: 52.02,
+    path: 'Séquelles du Rachis, du Bassin et de la Moelle Épinière > Bassin - Lésions Osseuses'
+  },
+  {
+    name: 'Fracture du cotyle avec arthrose post-traumatique',
+    score: 52.02,
+    path: 'Séquelles du Rachis, du Bassin et de la Moelle Épinière > Bassin - Lésions Osseuses'
+  },
+  {
+    name: 'Fracture du sacrum ou du coccyx avec douleurs chroniques (coccygodynie)',
+    score: 52.02,
+    path: 'Séquelles du Rachis, du Bassin et de la Moelle Épinière > Bassin - Lésions Osseuses'
+  },
+  {
+    name: 'Fracture du sacrum avec troubles neurologiques (radiculalgie S1)',
+    score: 52.02,
+    path: 'Séquelles du Rachis, du Bassin et de la Moelle Épinière > Bassin - Lésions Osseuses'
+  },
+  {
+    name: 'Névralgie pudendale post-traumatique (fracture du bassin)',
+    score: 52.02,
+    path: 'Séquelles du Rachis, du Bassin et de la Moelle Épinière > Bassin - Lésions Osseuses'
+  },
+  {
+    name: 'Fracture des plateaux tibiaux - Avec déviation et/ou raideur',
+    score: 52.02,
+    path: 'Membres Inférieurs > Genou - Lésions Osseuses et Articulaires'
+  },
+  {
+    name: 'Raideur poignet + fracture scaphoïde (cumul)',
+    score: 52.02,
+    path: 'Cumuls de Lésions et Polytraumatismes > Cumuls Simples - Même Membre'
+  },
+  {
+    name: 'Fracture radius + raideur + déficit force (cumul)',
+    score: 52.02,
+    path: 'Cumuls de Lésions et Polytraumatismes > Cumuls Simples - Même Membre'
+  },
+  {
+    name: 'Fracture des apophyses transverses',
+    score: 52.01,
+    path: 'Séquelles du Rachis, du Bassin et de la Moelle Épinière > Rachis'
+  },
+  {
+    name: "Fracture du maxillaire inférieur - Consolidation vicieuse avec trouble grave de l'articulé",
+    score: 52.01,
+    path: 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Face - Mâchoires'
+  },
+  {
+    name: "Fracture du maxillaire inférieur - Consolidation vicieuse avec trouble léger de l'articulé",
+    score: 52.01,
+    path: 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Face - Mâchoires'
+  },
+  {
+    name: 'Séquelles de fracture des os propres du nez',
+    score: 52.01,
+    path: 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Face - Mâchoires'
+  },
+  {
+    name: 'Fracture isolée du sternum - simple',
+    score: 52.01,
+    path: 'Séquelles Thoraciques, Abdominales, Pelviennes et Cardio-vasculaires > Thorax - Paroi Osseuse'
+  },
+  {
+    name: 'Fracture isolée du sternum - avec enfoncement',
+    score: 52.01,
+    path: 'Séquelles Thoraciques, Abdominales, Pelviennes et Cardio-vasculaires > Thorax - Paroi Osseuse'
+  },
+  {
+    name: 'Fracture des deux os de la jambe - Bonne consolidation',
+    score: 52.01,
+    path: 'Membres Inférieurs > Jambe - Fractures'
+  },
+  {
+    name: 'Fracture des deux os de la jambe - Avec cal vicieux et troubles trophiques',
+    score: 52.01,
+    path: 'Membres Inférieurs > Jambe - Fractures'
+  },
+  {
+    name: 'Fracture isolée du tibia',
+    score: 52.01,
+    path: 'Membres Inférieurs > Jambe - Fractures'
+  },
+  {
+    name: 'Fracture isolée du péroné',
+    score: 52.01,
+    path: 'Membres Inférieurs > Jambe - Fractures'
+  },
+  {
+    name: "Fracture de l'astragale (Talus) - Avec cal vicieux",
+    score: 52.01,
+    path: 'Membres Inférieurs > Pied - Fractures'
+  },
+  {
+    name: 'Fracture des métatarsiens - Avec douleurs à la marche',
+    score: 52.01,
+    path: 'Membres Inférieurs > Pied - Fractures'
+  },
+  {
+    name: 'Fracture rachis sur scoliose préexistante',
+    score: 52.01,
+    path: 'États Antérieurs et Aggravation de Pathologies Préexistantes > Aggravation Rachis sur État Antérieur'
+  },
+  {
+    name: 'Fracture poignet sur rhizarthrose préexistante',
+    score: 52.01,
+    path: 'États Antérieurs et Aggravation de Pathologies Préexistantes > Aggravation Main et Poignet sur État Antérieur'
+  },
+  {
+    name: 'Fracture scaphoïde sur arthrose carpe',
+    score: 52.01,
+    path: 'États Antérieurs et Aggravation de Pathologies Préexistantes > Aggravation Main et Poignet sur État Antérieur'
+  },
+  {
+    name: 'Fracture cheville sur arthrose tibio-tarsienne',
+    score: 52.01,
+    path: 'États Antérieurs et Aggravation de Pathologies Préexistantes > Aggravation Hanche et Membre Inférieur sur État Antérieur'
+  },
+  {
+    name: 'Luxation + instabilité + raideur épaule (cumul)',
+    score: 52,
+    path: 'Cumuls de Lésions et Polytraumatismes > Cumuls Simples - Même Membre'
+  },
+  {
+    name: 'Luxation hanche sur prothèse préexistante',
+    score: 51,
+    path: 'États Antérieurs et Aggravation de Pathologies Préexistantes > Aggravation Hanche et Membre Inférieur sur État Antérieur'
+  },
+  {
+    name: 'Séquelles de fracture/luxation du rachis cervical (sans lésion neurologique)',
+    score: 50.0212,
+    path: 'Séquelles du Rachis, du Bassin et de la Moelle Épinière > Rachis'
+  },
+  {
+    name: 'Séquelles de fracture/luxation du rachis dorsal (sans lésion neurologique)',
+    score: 50.0212,
+    path: 'Séquelles du Rachis, du Bassin et de la Moelle Épinière > Rachis'
+  },
+  {
+    name: 'Séquelles de fracture/luxation du rachis lombaire (sans lésion neurologique)',
+    score: 50.0212,
+    path: 'Séquelles du Rachis, du Bassin et de la Moelle Épinière > Rachis'
+  },
+  {
+    name: 'Fracture radius + fracture malléole (cumul)',
+    score: 50.0203,
+    path: 'Cumuls de Lésions et Polytraumatismes > Polytraumatismes - Membres Multiples'
+  },
+  {
+    name: "Fracture complexe de l'anneau pelvien avec séquelles importantes (boiterie, douleurs)",
+    score: 50.0202,
+    path: 'Séquelles du Rachis, du Bassin et de la Moelle Épinière > Bassin - Lésions Osseuses'
+  },
+  {
+    name: "Orbite - Fracture du plancher de l'orbite (Blow-out) avec séquelles",
+    score: 50.0202,
+    path: 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Yeux - Lésions Spécifiques et Annexes'
+  },
+  {
+    name: 'Fracture de la rotule - Avec gêne fonctionnelle',
+    score: 50.0202,
+    path: 'Membres Inférieurs > Genou - Lésions Osseuses et Articulaires'
+  },
+  {
+    name: 'Raideur cheville + séquelles fracture (cumul)',
+    score: 50.0202,
+    path: 'Cumuls de Lésions et Polytraumatismes > Cumuls Simples - Même Membre'
+  },
+  {
+    name: 'Fracture bimalléolaire + troubles marche',
+    score: 50.0202,
+    path: 'Cumuls de Lésions et Polytraumatismes > Cumuls Simples - Même Membre'
+  }
+]
+   → Type: ambiguity
+   → Ambiguïté résolue auto: Fracture du col du fémur - Consolidation avec raccourcissement et raideur
+   → Rate: 30,60
+🔍 [determineSeverity] Text: sequelles de fracture du femur gauche consolidee
+🔍 [determineSeverity] Faible signs: []
+🔍 [determineSeverity] High signs: []
+   → Sévérité clinique: moyen (gêne fonctionnelle modérée...)
+   → Taux final ajusté: 45% (intervalle [30-60])
+   🔧 V3.3.210: Enrichissement fracture radius: "une fracture du radius distal droit" → "une fracture du radius distal droit fracture extremite inferieure radius pouteau colles consolidation cal vicieux"
+🔎 Analyse lésion "une fracture du radius distal droit" → enrichi: "une fracture du radius distal droit fracture extremite inferieure radius pouteau colles consolidation cal vicieux" (processed: "une fracture du radius distal droit fracture extremite inferieure radius pouteau colles consolidation cal vicieux")
+🔍 [MÉTACARPIENS] Input brut: une fracture du radius distal droit fracture extremite inferieure radius pouteau colles consolidation cal vicieux
+🔍 [MÉTACARPIENS] hasMetaWord: false
+🔍 [MÉTACARPIENS] hasSingleOrPerte: false
+🔍 [MÉTACARPIENS] hasSpecificFinger: false
+🔍 [MÉTACARPIENS] hasCinq: false
+⚠️ [MÉTACARPIENS] Pas de dialogue - continuons analyse normale
+📋 Antécédents extraits (0): []
+🔍 [EARLY] Antécédents détectés: 0 - 
+🔍 [DEBUG EXPERT RULE - EARLY TEST]
+Pattern: /contusion.*cerebrale|traumatisme.*crani.*contusion/i
+Context: /perte.*connaissance|frontale|temporale|parietale|breve|courte|surveillance.*neurologique/i
+NegativeContext: /spondylo|listthesis|glissement.*vertebral/i
+CleanText: "une fracture du radius distal droit fracture extremite inferieure radius pouteau colles consolidation cal vicieux"
+patternMatchClean: false, contextMatchClean: false
+negContextMatchClean: false, negContextMatchWorking: false
+matchClean: false, matchWorking: false
+✅ [EXPERT RULE MATCH - PRIORITY 98] Fracture de l'extrémité inférieure du radius - Avec limitation des mouvements (Main Dominante) = [8-15] → 8% (coef: 0.00)
+   → Type: proposal
+   → Injury: Fracture de l'extrémité inférieure du radius - Avec limitation des mouvements (Main Dominante)
+   → Rate calculé: 8
+📊 TOTAL: 2 propositions générées sur 2 lésions
+✅ Calcul automatique cumul avec 2 lésion(s)
+─── Cas 1 ───
+  Description: Polytraumatisme MI + MS : fémur gauche + radius droit
+  Input     : "séquelles de fracture du fémur gauche consolidée avec raccourcissement de 2 cm et raideur du genou homolatéral associée ..."
+  Sièges    : membre inférieur + membre supérieur
+  Attendu   : Polytraumatisme (15-55%)
+  Obtenu    : ✅ Polytraumatisme (cumul 2 lésions)
+  Taux      : 49%
+  Type      : proposal
+  Polytrauma: ✅ | Taux OK: ✅ | Syst. trouvés: 2/2
+  Path      : Cumul Polytraumatisme
+  Justif    : <strong>🔗 POLYTRAUMATISME - CUMUL 2 LÉSIONS</strong><br><br><div style="background:#fff3cd; padding:15px; margin:10px 0; border-left:5px solid #ffc107;"><strong>📋 Lésions identifiées :</strong><br>L...
+
+🔧 localExpertAnalysis V3.3.280 - MULTI-SITES polytrauma fix, paragraph extraction, enrichment psych/audio
+🔍 [V3.3.162] TEXTE REÇU (nettoyé): luxation récidivante de l'épaule droite avec limitation de l'abduction à 90 degrés et instabilité résiduelle ; gonarthrose post-traumatique du genou gauche avec raideur en flexion limitée à 100 degrés
+🔍 [V3.3.280] hasMultipleDistinctSites: 3 sites détectés (seuil=2) → MULTI-SITES
+🔍 DEBUG STEPPAGE DÉTAILLÉ:
+   - steppageMatch: false
+   - amyotrophieMIMatch: false
+   - fractureL1Match: false
+   - Texte analysé: luxation récidivante de l'épaule droite avec limitation de l'abduction à 90 degrés et instabilité résiduelle ; gonarthrose post-traumatique du genou gauche avec raideur en flexion limitée à 100 degrés ; raideur du rachis lombaire avec lombalgies chro
+❌ STEPPAGE NON DÉTECTÉ - Conditions non remplies
+🔍 DEBUG DÉVIATION:
+   - deviationMatch: false
+   - mainContext: true
+   - Recherche dans: diviation NON trouvé
+🔍 [V3.3.155] Séquelles détectées: 5 [
+  'Lombalgie chronique / Fracture vertébrale lombaire',
+  'Limitation antéflexion du rachis',
+  'Limitation de la flexion du genou',
+  'Raideur articulaire du genou',
+  'Instabilité articulaire (cheville/genou/AMP)'
+]
+🔍 V3.3.201k: isCumulDetected = true , lesionCount = 4
+⚠️ V3.3.201j: CUMUL DÉTECTÉ → SKIP regroupement par système, passage direct à extraction lésions individuelles
+🔍 DEBUG MÉTACARPIENS - Texte normalisé: luxation recidivante de l epaule droite limitation de l abduction a 90 degres et instabilite residuelle ; gonarthrose post traumatique $1 gauche raideur en flexion limitee a 100 degres ; raideur rachis lombaire avec lombalgies chroniques et distance doigt sol a 35 cm accident route limitation restriction enraidissement raideur restriction enraidissement raideur limitation enraidissement raideur limitation restriction deboitement deplacement articulaire dislocation luxation deplacement articulaire dislocation luxation deboitement dislocation luxation deboitement deplacement articulaire arthropathie degenerescence articulaire usure articulaire arthrose degenerescence articulaire usure articulaire arthrose arthropathie usure articulaire arthrose arthropathie degenerescence articulaire femoro tibiale femoro patellaire articulation genou genou femoro patellaire articulation genou genou femoro tibiale articulation genou genou femoro tibiale femoro patellaire genou femoro tibiale femoro patellaire colonne lombaire lombaires lombes rachis lombaire lombaires lombes rachis lombaire colonne lombaire lombes rachis lombaire colonne lombaire lombaires colonne lombaire lombaires lombes rachis lombaire lombaires lombes scapulo humeral gleno humeral articulation epaule epaule gleno humeral articulation epaule epaule scapulo humeral articulation epaule epaule scapulo humeral gleno humeral epaule scapulo humeral gleno humeral epaule scapulo humeral gleno humeral abduction epaule elevation laterale ecartement bras abduction elevation laterale ecartement bras abduction abduction epaule ecartement bras abduction abduction epaule elevation laterale instabilite epaule derobement epaule apprehension instabilite epaule luxation recidivante apprehension instabilite epaule luxation recidivante derobement epaule flexion coude flexion coude flechir coude
+🔍 DEBUG MÉTACARPIENS - hasMetacarpienWord: false
+🔍 DEBUG MÉTACARPIENS - hasSingleIndicator: false
+🔍 DEBUG MÉTACARPIENS - hasMultipleIndicator: true
+🔍 DEBUG MÉTACARPIENS - hasSpecificFingerEarly: false
+🔍 DEBUG MÉTACARPIENS - isMetacarpienSingleQueryEarly: false
+🔍 V3.3.139: Vérification cumul prioritaire...
+🔍 Query words: luxation, recidivante, epaule, droite, avec, limitation, abduction, degres, instabilite, residuelle
+🔍 Catégorie cumul trouvée: Cumuls de Lésions et Polytraumatismes
+🔍 Entrées avec searchTerms vérifiées: 51, meilleur score: 0.0%
+ℹ️ Aucun cumul prioritaire trouvé (similarité < 70%), continue avec analyse normale
+📋 Antécédents extraits (0): []
+🔍 isCumulDetected: true lesionCount: 4
+🔍 CUMUL DÉTECTÉ - Extraction des lésions individuelles
+📝 text original: luxation récidivante de l'épaule droite avec limitation de l'abduction à 90 degrés et instabilité résiduelle ; gonarthrose post-traumatique du genou gauche avec raideur en flexion limitée à 100 degrés ; raideur du rachis lombaire avec lombalgies chroniques et distance doigt-sol à 35 cm après accident de la route
+📝 finalCleanedText: luxation récidivante de l'épaule droite avec limitation de l'abduction à 90 degrés et instabilité résiduelle gonarthrose post-traumatique du genou gauche avec raideur en flexion limitée à 100 degrés lombaire avec lombalgies chroniques et distance doigt-sol à 35 cm après accident de la route
+🔧 extractIndividualLesions V3.3.211 - avec Pattern 0C-ter + 0C-quater
+🔍 extractIndividualLesions - texte d'entrée: luxation récidivante de l'épaule droite avec limitation de l'abduction à 90 degrés et instabilité résiduelle ; gonarthrose post-traumatique du genou gauche avec raideur en flexion limitée à 100 degrés ; raideur du rachis lombaire avec lombalgies chroniques et distance doigt-sol à 35 cm après accident de la route
+🔍 Pattern 0B - Extraction polytraumatisme membre (V3.3.201L):
+  fractureMatch: NULL
+  ligamentMatch: NULL
+  muscleMatch: NULL
+  raideurMatch: NULL
+  algiesMatch: algies chroniques
+  deficitForceMatch: NULL
+  componentCount: 1
+  Condition activée: false
+❌ Pattern 0B NON ACTIVÉ: componentCount < 3
+✅ Pattern 8 (séparateur ;) détecté: [
+  'luxation recidivante de l epaule droite avec limitation de l abduction a 90 degres et instabilite residuelle',
+  'gonarthrose post traumatique du genou gauche avec raideur en flexion limitee a 100 degres',
+  'raideur du rachis lombaire avec lombalgies chroniques et distance doigt sol a 35 cm apres accident de la route'
+]
+📋 Lésions extraites: [
+  'luxation recidivante de l epaule droite avec limitation de l abduction a 90 degres et instabilite residuelle',
+  'gonarthrose post traumatique du genou gauche avec raideur en flexion limitee a 100 degres',
+  'raideur du rachis lombaire avec lombalgies chroniques et distance doigt sol a 35 cm apres accident de la route'
+] Nombre: 3
+✅ Au moins 2 lésions → Analyse séparée
+   🔧 V3.3.281: Enrichissement luxation récidivante épaule: "luxation recidivante de l epaule droite avec limitation de l abduction a 90 degres et instabilite residuelle" → "luxation recidivante de l epaule droite avec limitation de l abduction a 90 degres et instabilite residuelle luxation recidivante epaule instabilite chronique glenohumérale apprehension recentrage membre superieur"
+🔎 Analyse lésion "luxation recidivante de l epaule droite avec limitation de l abduction a 90 degres et instabilite residuelle" → enrichi: "luxation recidivante de l epaule droite avec limitation de l abduction a 90 degres et instabilite residuelle luxation recidivante epaule instabilite chronique glenohumérale apprehension recentrage membre superieur" (processed: "luxation recidivante de l epaule droite avec limitation de l abduction a90 degres et instabilite residuelle luxation recidivante epaule instabilite chronique glenohumérale apprehension recentrage membre superieur")
+🔍 [MÉTACARPIENS] Input brut: luxation recidivante de l epaule droite avec limitation de l abduction a90 degres et instabilite residuelle luxation recidivante epaule instabilite chronique glenohumérale apprehension recentrage membre superieur
+🔍 [MÉTACARPIENS] hasMetaWord: false
+🔍 [MÉTACARPIENS] hasSingleOrPerte: false
+🔍 [MÉTACARPIENS] hasSpecificFinger: false
+🔍 [MÉTACARPIENS] hasCinq: false
+⚠️ [MÉTACARPIENS] Pas de dialogue - continuons analyse normale
+📋 Antécédents extraits (0): []
+🔍 [EARLY] Antécédents détectés: 0 - 
+🔍 [DEBUG EXPERT RULE - EARLY TEST]
+Pattern: /contusion.*cerebrale|traumatisme.*crani.*contusion/i
+Context: /perte.*connaissance|frontale|temporale|parietale|breve|courte|surveillance.*neurologique/i
+NegativeContext: /spondylo|listthesis|glissement.*vertebral/i
+CleanText: "luxation recidivante de l epaule droite avec limitation de l abduction a90 degres et instabilite residuelle luxation recidivante epaule instabilite chronique glenohumerale apprehension recentrage membre superieur"
+patternMatchClean: false, contextMatchClean: false
+negContextMatchClean: false, negContextMatchWorking: false
+matchClean: false, matchWorking: false
+✅ [EXPERT RULE MATCH - PRIORITY 999] Luxation récidivante de l'épaule (Main Dominante) = [10-30] → 10% (coef: 0.00)
+   → Type: proposal
+   → Injury: Luxation récidivante de l'épaule (Main Dominante)
+   → Rate calculé: 10
+   🔧 V3.3.280: Enrichissement genou: "gonarthrose post traumatique du genou gauche avec raideur en flexion limitee a 100 degres" → "gonarthrose post traumatique du genou gauche avec raideur en flexion limitee a 100 degres raideur genou ankylose flexion extension goniometrie genu"
+🔎 Analyse lésion "gonarthrose post traumatique du genou gauche avec raideur en flexion limitee a 100 degres" → enrichi: "gonarthrose post traumatique du genou gauche avec raideur en flexion limitee a 100 degres raideur genou ankylose flexion extension goniometrie genu" (processed: "gonarthrose post traumatique du genou gauche avec raideur en flexion limitee a100 degres raideur genou ankylose flexion extension goniometrie genu")
+🔍 [MÉTACARPIENS] Input brut: gonarthrose post traumatique du genou gauche avec raideur en flexion limitee a100 degres raideur genou ankylose flexion extension goniometrie genu
+🔍 [MÉTACARPIENS] hasMetaWord: false
+🔍 [MÉTACARPIENS] hasSingleOrPerte: false
+🔍 [MÉTACARPIENS] hasSpecificFinger: false
+🔍 [MÉTACARPIENS] hasCinq: false
+⚠️ [MÉTACARPIENS] Pas de dialogue - continuons analyse normale
+📋 Antécédents extraits (0): []
+🔍 [EARLY] Antécédents détectés: 0 - 
+✅ [EXPERT RULE MATCH - PRIORITY 11000] Arthrose fémoro-patellaire ou fémoro-tibiale post-traumatique = [10-30] → 25% (coef: 0.75)
+   → Type: proposal
+   → Injury: Arthrose fémoro-patellaire ou fémoro-tibiale post-traumatique
+   → Rate calculé: 25
+🔎 Analyse lésion "raideur du rachis lombaire avec lombalgies chroniques et distance doigt sol a 35 cm apres accident de la route" → enrichi: "raideur du rachis lombaire avec lombalgies chroniques et distance doigt sol a 35 cm apres accident de la route" (processed: "raideur du rachis lombaire avec lombalgies chroniques et distance doigt sol a35 cm apres accident de la route")
+🔍 [MÉTACARPIENS] Input brut: raideur du rachis lombaire avec lombalgies chroniques et distance doigt sol a35 cm apres accident de la route
+🔍 [MÉTACARPIENS] hasMetaWord: false
+🔍 [MÉTACARPIENS] hasSingleOrPerte: false
+🔍 [MÉTACARPIENS] hasSpecificFinger: false
+🔍 [MÉTACARPIENS] hasCinq: true
+⚠️ [MÉTACARPIENS] Pas de dialogue - continuons analyse normale
+📋 Antécédents extraits (0): []
+🔍 [EARLY] Antécédents détectés: 0 - 
+✅ [EXPERT RULE MATCH - PRIORITY 13500] Entorse lombaire avec lombalgies mécaniques = [5-10] → 5% (coef: 0.00)
+   → Type: proposal
+   → Injury: Entorse lombaire avec lombalgies mécaniques
+   → Rate calculé: 5
+📊 TOTAL: 3 propositions générées sur 3 lésions
+✅ Calcul automatique cumul avec 3 lésion(s)
+─── Cas 2 ───
+  Description: Polytraumatisme 3 sièges : épaule + genou + rachis lombaire
+  Input     : "luxation récidivante de l'épaule droite avec limitation de l'abduction à 90 degrés et instabilité résiduelle ; gonarthro..."
+  Sièges    : épaule + genou + rachis
+  Attendu   : Polytraumatisme (20-50%)
+  Obtenu    : ✅ Polytraumatisme (cumul 3 lésions)
+  Taux      : 36%
+  Type      : proposal
+  Polytrauma: ✅ | Taux OK: ✅ | Syst. trouvés: 2/3
+  Path      : Cumul Polytraumatisme
+  Justif    : <strong>🔗 POLYTRAUMATISME - CUMUL 3 LÉSIONS</strong><br><br><div style="background:#fff3cd; padding:15px; margin:10px 0; border-left:5px solid #ffc107;"><strong>📋 Lésions identifiées :</strong><br>L...
+
+🔧 localExpertAnalysis V3.3.280 - MULTI-SITES polytrauma fix, paragraph extraction, enrichment psych/audio
+🔍 [V3.3.162] TEXTE REÇU (nettoyé): traumatisme crânien avec céphalées chroniques quotidiennes et troubles de la concentration ; fractures de côtes 5ème 6ème et 7ème gauches avec douleurs thoraciques résiduelles et dyspnée d'effort ; fr
+🔍 [V3.3.280] hasMultipleDistinctSites: 3 sites détectés (seuil=2) → MULTI-SITES
+🔍 DEBUG STEPPAGE DÉTAILLÉ:
+   - steppageMatch: false
+   - amyotrophieMIMatch: false
+   - fractureL1Match: false
+   - Texte analysé: traumatisme crânien avec céphalées chroniques quotidiennes et troubles de la concentration ; fractures de côtes 5ème 6ème et 7ème gauches avec douleurs thoraciques résiduelles et dyspnée d'effort ; fracture du col fémoral gauche traitée par ostéosynt
+❌ STEPPAGE NON DÉTECTÉ - Conditions non remplies
+🔍 DEBUG DÉVIATION:
+   - deviationMatch: false
+   - mainContext: false
+   - Recherche dans: diviation NON trouvé
+🔍 [V3.3.155] Séquelles détectées: 6 [
+  'Céphalées post-traumatiques chroniques',
+  'Fractures costales multiples',
+  'Syndrome restrictif respiratoire / Capacité respiratoire diminuée',
+  'Fracture du col du fémur',
+  'Boiterie',
+  "Algies mécaniques persistantes (à l'effort)"
+]
+🫁 [V3.3.230] Traumatisme thoracique + séquelles pulmonaires → PAS de cumul (pathologie thoracique unique)
+🔍 V3.3.201k: isCumulDetected = false , lesionCount = 1
+🆕 V3.3.280: OVERRIDE CUMUL - isMultiSitePolytrauma=true mais detectMultipleLesions=false → FORCE cumul
+⚠️ V3.3.201j: CUMUL DÉTECTÉ → SKIP regroupement par système, passage direct à extraction lésions individuelles
+🔍 DEBUG MÉTACARPIENS - Texte normalisé: traumatisme cranien avec cephalees chroniques quotidiennes et troubles concentration ; fractures de cotes 5eme 6eme et 7eme gauches avec douleurs thoraciques residuelles et dyspnee d effort ; fracture col femoral gauche par osteosynthese raideur hanche et boiterie sequellaire limitation restriction enraidissement raideur restriction enraidissement raideur limitation enraidissement raideur limitation restriction cassure fissure bris fracture fissure bris fracture cassure bris fracture cassure fissure coxo femorale articulation hanche cotyle hanche articulation hanche cotyle hanche coxo femorale cotyle hanche coxo femorale articulation hanche hanche coxo femorale articulation hanche claudication trouble marche demarche boitante claudication boiterie demarche boitante claudication boiterie trouble marche rachis dorsal colonne dorsale dorsales
+🔍 DEBUG MÉTACARPIENS - hasMetacarpienWord: false
+🔍 DEBUG MÉTACARPIENS - hasSingleIndicator: false
+🔍 DEBUG MÉTACARPIENS - hasMultipleIndicator: true
+🔍 DEBUG MÉTACARPIENS - hasSpecificFingerEarly: false
+🔍 DEBUG MÉTACARPIENS - isMetacarpienSingleQueryEarly: false
+🔍 V3.3.139: Vérification cumul prioritaire...
+🔍 Query words: traumatisme, cranien, avec, cephalees, chroniques, quotidiennes, troubles, concentration, fractures, cotes
+🔍 Catégorie cumul trouvée: Cumuls de Lésions et Polytraumatismes
+🔍 Entrées avec searchTerms vérifiées: 51, meilleur score: 0.0%
+ℹ️ Aucun cumul prioritaire trouvé (similarité < 70%), continue avec analyse normale
+📋 Antécédents extraits (0): []
+🔍 isCumulDetected: true lesionCount: 2
+🔍 CUMUL DÉTECTÉ - Extraction des lésions individuelles
+📝 text original: traumatisme crânien avec céphalées chroniques quotidiennes et troubles de la concentration ; fractures de côtes 5ème 6ème et 7ème gauches avec douleurs thoraciques résiduelles et dyspnée d'effort ; fracture du col fémoral gauche traitée par ostéosynthèse avec raideur de la hanche et boiterie séquellaire
+📝 finalCleanedText: traumatisme crânien avec céphalées chroniques quotidiennes et troubles de la concentration fractures de côtes 5ème 6ème et 7ème gauches avec douleurs thoraciques résiduelles et dyspnée d'effort fracture du col fémoral gauche traitée par ostéosynthèse avec raideur de la hanche et boiterie séquellaire
+🔧 extractIndividualLesions V3.3.211 - avec Pattern 0C-ter + 0C-quater
+🔍 extractIndividualLesions - texte d'entrée: traumatisme crânien avec céphalées chroniques quotidiennes et troubles de la concentration ; fractures de côtes 5ème 6ème et 7ème gauches avec douleurs thoraciques résiduelles et dyspnée d'effort ; fracture du col fémoral gauche traitée par ostéosynthèse avec raideur de la hanche et boiterie séquellaire
+🔍 Pattern 0B - Extraction polytraumatisme membre (V3.3.201L):
+  fractureMatch: NULL
+  ligamentMatch: NULL
+  muscleMatch: NULL
+  raideurMatch: raideur de la hanche
+  algiesMatch: douleurs 
+  deficitForceMatch: NULL
+  componentCount: 2
+  Condition activée: false
+❌ Pattern 0B NON ACTIVÉ: componentCount < 3
+✅ Pattern 8 (séparateur ;) détecté: [
+  'traumatisme cranien avec cephalees chroniques quotidiennes et troubles de la concentration',
+  'fractures de cotes 5eme 6eme et 7eme gauches avec douleurs thoraciques residuelles et dyspnee d effort',
+  'fracture du col femoral gauche traitee par osteosynthese avec raideur de la hanche et boiterie sequellaire'
+]
+📋 Lésions extraites: [
+  'traumatisme cranien avec cephalees chroniques quotidiennes et troubles de la concentration',
+  'fractures de cotes 5eme 6eme et 7eme gauches avec douleurs thoraciques residuelles et dyspnee d effort',
+  'fracture du col femoral gauche traitee par osteosynthese avec raideur de la hanche et boiterie sequellaire'
+] Nombre: 3
+✅ Au moins 2 lésions → Analyse séparée
+🔎 Analyse lésion "traumatisme cranien avec cephalees chroniques quotidiennes et troubles de la concentration" → enrichi: "traumatisme cranien avec cephalees chroniques quotidiennes et troubles de la concentration" (processed: "traumatisme cranien avec cephalees chroniques quotidiennes et troubles de la concentration")
+🔍 [MÉTACARPIENS] Input brut: traumatisme cranien avec cephalees chroniques quotidiennes et troubles de la concentration
+🔍 [MÉTACARPIENS] hasMetaWord: false
+🔍 [MÉTACARPIENS] hasSingleOrPerte: false
+🔍 [MÉTACARPIENS] hasSpecificFinger: false
+🔍 [MÉTACARPIENS] hasCinq: false
+⚠️ [MÉTACARPIENS] Pas de dialogue - continuons analyse normale
+📋 Antécédents extraits (0): []
+🔍 [EARLY] Antécédents détectés: 0 - 
+🔍 [DEBUG EXPERT RULE - EARLY TEST]
+Pattern: /contusion.*cerebrale|traumatisme.*crani.*contusion/i
+Context: /perte.*connaissance|frontale|temporale|parietale|breve|courte|surveillance.*neurologique/i
+NegativeContext: /spondylo|listthesis|glissement.*vertebral/i
+CleanText: "traumatisme cranien avec cephalees chroniques quotidiennes et troubles de la concentration"
+patternMatchClean: false, contextMatchClean: false
+negContextMatchClean: false, negContextMatchWorking: false
+matchClean: false, matchWorking: false
+✅ [EXPERT RULE MATCH - PRIORITY 1003] Syndrome subjectif commun des blessures du crâne (céphalée, vertiges, troubles de l'humeur) = [5-50] → 28% (coef: 0.50)
+   → Type: proposal
+   → Injury: Syndrome subjectif commun des blessures du crâne (céphalée, vertiges, troubles de l'humeur)
+   → Rate calculé: 28
+   🔧 V3.3.210: Enrichissement fractures costales: "fractures de cotes 5eme 6eme et 7eme gauches avec douleurs thoraciques residuelles et dyspnee d effort" → "fractures de cotes 5eme 6eme et 7eme gauches avec douleurs thoraciques residuelles et dyspnee d effort fracture cotes non compliquee gêne nombre sequelles respiratoires nevralgie intercostale"
+🔎 Analyse lésion "fractures de cotes 5eme 6eme et 7eme gauches avec douleurs thoraciques residuelles et dyspnee d effort" → enrichi: "fractures de cotes 5eme 6eme et 7eme gauches avec douleurs thoraciques residuelles et dyspnee d effort fracture cotes non compliquee gêne nombre sequelles respiratoires nevralgie intercostale" (processed: "fractures de cotes5eme6eme et7eme gauches avec douleurs thoraciques residuelles et dyspnee d effort fracture cotes non compliquee gêne nombre sequelles respiratoires nevralgie intercostale")
+🔍 [MÉTACARPIENS] Input brut: fractures de cotes5eme6eme et7eme gauches avec douleurs thoraciques residuelles et dyspnee d effort fracture cotes non compliquee gêne nombre sequelles respiratoires nevralgie intercostale
+🔍 [MÉTACARPIENS] hasMetaWord: false
+🔍 [MÉTACARPIENS] hasSingleOrPerte: false
+🔍 [MÉTACARPIENS] hasSpecificFinger: false
+🔍 [MÉTACARPIENS] hasCinq: true
+⚠️ [MÉTACARPIENS] Pas de dialogue - continuons analyse normale
+📋 Antécédents extraits (0): []
+🔍 [EARLY] Antécédents détectés: 0 - 
+🫁 [V3.3.230] TRAUMATISME THORACIQUE avec séquelles respiratoires détecté
+🫁 [V3.3.230] → Fracture de côtes non compliquée (selon gêne et nombre) | IPP: 15% | Sévérité: moyen
+   → Type: proposal
+   → Injury: Fracture de côtes non compliquée (selon gêne et nombre)
+   → Rate calculé: 15
+🔎 Analyse lésion "fracture du col femoral gauche traitee par osteosynthese avec raideur de la hanche et boiterie sequellaire" → enrichi: "fracture du col femoral gauche traitee par osteosynthese avec raideur de la hanche et boiterie sequellaire" (processed: "fracture du col femoral gauche traitee par osteosynthese avec raideur de la hanche et boiterie sequellaire")
+🔍 [MÉTACARPIENS] Input brut: fracture du col femoral gauche traitee par osteosynthese avec raideur de la hanche et boiterie sequellaire
+🔍 [MÉTACARPIENS] hasMetaWord: false
+🔍 [MÉTACARPIENS] hasSingleOrPerte: false
+🔍 [MÉTACARPIENS] hasSpecificFinger: false
+🔍 [MÉTACARPIENS] hasCinq: false
+⚠️ [MÉTACARPIENS] Pas de dialogue - continuons analyse normale
+📋 Antécédents extraits (0): []
+🔍 [EARLY] Antécédents détectés: 0 - 
+✅ [EXPERT RULE MATCH - PRIORITY 10400] Raideur de hanche avec conservation uniquement de la flexion = 15%
+   → Type: proposal
+   → Injury: Raideur de hanche avec conservation uniquement de la flexion
+   → Rate calculé: 15
+📊 TOTAL: 3 propositions générées sur 3 lésions
+✅ Calcul automatique cumul avec 3 lésion(s)
+─── Cas 3 ───
+  Description: Polytraumatisme crâne + thorax + hanche
+  Input     : "traumatisme crânien avec céphalées chroniques quotidiennes et troubles de la concentration ; fractures de côtes 5ème 6èm..."
+  Sièges    : crâne + thorax + hanche
+  Attendu   : Polytraumatisme (20-55%)
+  Obtenu    : ✅ Polytraumatisme (cumul 3 lésions)
+  Taux      : 48%
+  Type      : proposal
+  Polytrauma: ✅ | Taux OK: ✅ | Syst. trouvés: 3/3
+  Path      : Cumul Polytraumatisme
+  Justif    : <strong>🔗 POLYTRAUMATISME - CUMUL 3 LÉSIONS</strong><br><br><div style="background:#fff3cd; padding:15px; margin:10px 0; border-left:5px solid #ffc107;"><strong>📋 Lésions identifiées :</strong><br>L...
+
+🔧 localExpertAnalysis V3.3.280 - MULTI-SITES polytrauma fix, paragraph extraction, enrichment psych/audio
+🔍 [V3.3.162] TEXTE REÇU (nettoyé): polytraumatisme suite à accident de la circulation avec fracture du cadre obturateur du bassin consolidée avec douleurs résiduelles ; fracture diaphysaire du tibia gauche avec cal vicieux et raccourci
+🔍 [V3.3.280] hasMultipleDistinctSites: 4 sites détectés (seuil=2) → MULTI-SITES
+🔍 DEBUG STEPPAGE DÉTAILLÉ:
+   - steppageMatch: false
+   - amyotrophieMIMatch: false
+   - fractureL1Match: true
+   - Texte analysé: polytraumatisme suite à accident de la circulation avec fracture du cadre obturateur du bassin consolidée avec douleurs résiduelles ; fracture diaphysaire du tibia gauche avec cal vicieux et raccourcissement de 2 cm ; fracture de l'humérus droit osté
+❌ STEPPAGE NON DÉTECTÉ - Conditions non remplies
+🔍 DEBUG DÉVIATION:
+   - deviationMatch: false
+   - mainContext: false
+   - Recherche dans: diviation NON trouvé
+🔍 [V3.3.155] Séquelles détectées: 7 [
+  'Lombalgie chronique / Fracture tassement vertébrale L1',
+  'Fracture tibia/péroné',
+  'Déformation osseuse séquellaire (cal vicieux) (humérus)',
+  "Fracture de l'humérus/clavicule/omoplate",
+  'Déformation osseuse séquellaire (cal vicieux) (humérus)',
+  "Raideur/Limitation articulaire de l'épaule",
+  'Fracture du bassin (disjonction symphyse / aileron sacré)'
+]
+🔍 V3.3.201k: isCumulDetected = true , lesionCount = 4
+⚠️ V3.3.201j: CUMUL DÉTECTÉ → SKIP regroupement par système, passage direct à extraction lésions individuelles
+🔍 DEBUG MÉTACARPIENS - Texte normalisé: polytraumatisme accident circulation avec fracture cadre obturateur bassin consolidee avec douleurs residuelles ; fracture diaphysaire tibia gauche avec cal vicieux et raccourcissement de 2 cm ; fracture de l humerus droit osteosynthesee raideur de l epaule ; tassement vertebral de l1 vertebre lombaire l1 avec cyphose post traumatique limitation restriction enraidissement raideur restriction enraidissement raideur limitation enraidissement raideur limitation restriction cassure fissure bris fracture fissure bris fracture cassure bris fracture cassure fissure consolidation vicieuse malunion defaut de consolidation cal vicieux malunion defaut de consolidation cal vicieux consolidation vicieuse defaut de consolidation cal vicieux consolidation vicieuse malunion scapulo humeral gleno humeral articulation epaule epaule gleno humeral articulation epaule epaule scapulo humeral articulation epaule epaule scapulo humeral gleno humeral epaule scapulo humeral gleno humeral epaule scapulo humeral gleno humeral polytraumatise poly traumatisme poly traumatisme polytraumatisme poly traumatisme poly traumatisme polytraumatisme polytraumatise poly traumatisme polytraumatisme polytraumatise poly traumatisme splenique spleno splenectomie rate spleno splenectomie rate splenique splenectomie rate splenique spleno
+🔍 DEBUG MÉTACARPIENS - hasMetacarpienWord: false
+🔍 DEBUG MÉTACARPIENS - hasSingleIndicator: false
+🔍 DEBUG MÉTACARPIENS - hasMultipleIndicator: false
+🔍 DEBUG MÉTACARPIENS - hasSpecificFingerEarly: false
+🔍 DEBUG MÉTACARPIENS - isMetacarpienSingleQueryEarly: false
+🔍 V3.3.139: Vérification cumul prioritaire...
+🔍 Query words: polytraumatisme, suite, accident, circulation, avec, fracture, cadre, obturateur, bassin, consolidee
+🔍 Catégorie cumul trouvée: Cumuls de Lésions et Polytraumatismes
+🔍 Entrées avec searchTerms vérifiées: 51, meilleur score: 0.0%
+ℹ️ Aucun cumul prioritaire trouvé (similarité < 70%), continue avec analyse normale
+📋 Antécédents extraits (0): []
+🔍 isCumulDetected: true lesionCount: 4
+🔍 CUMUL DÉTECTÉ - Extraction des lésions individuelles
+📝 text original: polytraumatisme suite à accident de la circulation avec fracture du cadre obturateur du bassin consolidée avec douleurs résiduelles ; fracture diaphysaire du tibia gauche avec cal vicieux et raccourcissement de 2 cm ; fracture de l'humérus droit ostéosynthésée avec raideur de l'épaule ; tassement vertébral de L1 avec cyphose post-traumatique
+📝 finalCleanedText: polytraumatisme suite à accident de la circulation avec fracture du obturateur du bassin consolidée avec douleurs résiduelles fracture diaphysaire du tibia gauche avec cal vicieux et raccourcissement de 2 cm fracture de l'humérus droit ostéosynthésée avec raideur de l'épaule tassement vertébral de L1 avec cyphose post-traumatique
+🔧 extractIndividualLesions V3.3.211 - avec Pattern 0C-ter + 0C-quater
+🔍 extractIndividualLesions - texte d'entrée: polytraumatisme suite à accident de la circulation avec fracture du cadre obturateur du bassin consolidée avec douleurs résiduelles ; fracture diaphysaire du tibia gauche avec cal vicieux et raccourcissement de 2 cm ; fracture de l'humérus droit ostéosynthésée avec raideur de l'épaule ; tassement vertébral de L1 avec cyphose post-traumatique
+🔍 Pattern 0B - Extraction polytraumatisme membre (V3.3.201L):
+  fractureMatch: fracture de l humerus droit
+  ligamentMatch: NULL
+  muscleMatch: NULL
+  raideurMatch: NULL
+  algiesMatch: douleurs residuelles
+  deficitForceMatch: NULL
+  componentCount: 2
+  Condition activée: false
+❌ Pattern 0B NON ACTIVÉ: componentCount < 3
+✅ Pattern 8 (séparateur ;) détecté: [
+  'polytraumatisme suite a accident de la circulation avec fracture du cadre obturateur du bassin consolidee avec douleurs residuelles',
+  'fracture diaphysaire du tibia gauche avec cal vicieux et raccourcissement de 2 cm',
+  'fracture de l humerus droit osteosynthesee avec raideur de l epaule',
+  'tassement vertebral de l1 avec cyphose post traumatique'
+]
+📋 Lésions extraites: [
+  'polytraumatisme suite a accident de la circulation avec fracture du cadre obturateur du bassin consolidee avec douleurs residuelles',
+  'fracture diaphysaire du tibia gauche avec cal vicieux et raccourcissement de 2 cm',
+  'fracture de l humerus droit osteosynthesee avec raideur de l epaule',
+  'tassement vertebral de l1 avec cyphose post traumatique'
+] Nombre: 4
+✅ Au moins 2 lésions → Analyse séparée
+🔎 Analyse lésion "polytraumatisme suite a accident de la circulation avec fracture du cadre obturateur du bassin consolidee avec douleurs residuelles" → enrichi: "polytraumatisme suite a accident de la circulation avec fracture du cadre obturateur du bassin consolidee avec douleurs residuelles" (processed: "polytraumatisme suite a accident de la circulation avec fracture du cadre obturateur du bassin consolidee avec douleurs residuelles")
+🔍 [MÉTACARPIENS] Input brut: polytraumatisme suite a accident de la circulation avec fracture du cadre obturateur du bassin consolidee avec douleurs residuelles
+🔍 [MÉTACARPIENS] hasMetaWord: false
+🔍 [MÉTACARPIENS] hasSingleOrPerte: false
+🔍 [MÉTACARPIENS] hasSpecificFinger: false
+🔍 [MÉTACARPIENS] hasCinq: false
+⚠️ [MÉTACARPIENS] Pas de dialogue - continuons analyse normale
+📋 Antécédents extraits (0): []
+🔍 [EARLY] Antécédents détectés: 0 - 
+🔍 [DEBUG EXPERT RULE - EARLY TEST]
+Pattern: /contusion.*cerebrale|traumatisme.*crani.*contusion/i
+Context: /perte.*connaissance|frontale|temporale|parietale|breve|courte|surveillance.*neurologique/i
+NegativeContext: /spondylo|listthesis|glissement.*vertebral/i
+CleanText: "polytraumatisme suite a accident de la circulation avec fracture du cadre obturateur du bassin consolidee avec douleurs residuelles"
+patternMatchClean: false, contextMatchClean: false
+negContextMatchClean: false, negContextMatchWorking: false
+matchClean: false, matchWorking: false
+🔍 [DEBUG EXPERT RULE - EARLY TEST]
+Pattern: /spondylolisthesis|spondylo.*listhesis|listthesis|glissement\s+vertebral/i
+Context: /lombaire|L\d|S\d|rachis|traumatisme|post-traumatique/i
+NegativeContext: /contusion.*cerebrale|perte.*connaissance|mandibule|genou|polytraumatisme|chute.*echafaudage/i
+CleanText: "polytraumatisme suite a accident de la circulation avec fracture du cadre obturateur du bassin consolidee avec douleurs residuelles"
+patternMatchClean: false, contextMatchClean: true
+negContextMatchClean: true, negContextMatchWorking: true
+matchClean: false, matchWorking: false
+🎯 TOP 50 RÉSULTATS: [
+  {
+    name: 'Névralgie pudendale post-traumatique (fracture du bassin)',
+    score: 678,
+    path: 'Séquelles du Rachis, du Bassin et de la Moelle Épinière > Bassin - Lésions Osseuses'
+  },
+  {
+    name: 'Fracture du cotyle avec arthrose post-traumatique',
+    score: 597,
+    path: 'Séquelles du Rachis, du Bassin et de la Moelle Épinière > Bassin - Lésions Osseuses'
+  },
+  {
+    name: 'Fracture du sacrum ou du coccyx avec douleurs chroniques (coccygodynie)',
+    score: 597,
+    path: 'Séquelles du Rachis, du Bassin et de la Moelle Épinière > Bassin - Lésions Osseuses'
+  },
+  {
+    name: "Fracture isolée d'une branche pubienne ou de l'aile iliaque (sans déplacement)",
+    score: 586,
+    path: 'Séquelles du Rachis, du Bassin et de la Moelle Épinière > Bassin - Lésions Osseuses'
+  },
+  {
+    name: 'Fracture du cotyle sans déplacement, hanche congruente',
+    score: 586,
+    path: 'Séquelles du Rachis, du Bassin et de la Moelle Épinière > Bassin - Lésions Osseuses'
+  },
+  {
+    name: 'Fracture du sacrum avec troubles neurologiques (radiculalgie S1)',
+    score: 586,
+    path: 'Séquelles du Rachis, du Bassin et de la Moelle Épinière > Bassin - Lésions Osseuses'
+  },
+  {
+    name: 'Polytraumatisme bassin + 2 membres + rachis',
+    score: 573,
+    path: 'Cumuls de Lésions et Polytraumatismes > Polytraumatismes - Membres Multiples'
+  },
+  {
+    name: 'Polytraumatisme bassin-rachis complexe',
+    score: 573,
+    path: 'Cumuls de Lésions et Polytraumatismes > Polytraumatismes - Membres Multiples'
+  },
+  {
+    name: 'Fracture des apophyses transverses',
+    score: 546,
+    path: 'Séquelles du Rachis, du Bassin et de la Moelle Épinière > Rachis'
+  },
+  {
+    name: 'Fistule vésico-vaginale post-traumatique',
+    score: 377,
+    path: 'Séquelles Thoraciques, Abdominales, Pelviennes et Cardio-vasculaires > Appareil Génito-Urinaire'
+  },
+  {
+    name: 'Entorse lombaire avec lombalgies mécaniques',
+    score: 318,
+    path: 'Séquelles du Rachis, du Bassin et de la Moelle Épinière > Rachis'
+  },
+  {
+    name: 'Hernie discale cervicale post-traumatique - Syndrome rachidien pur (cervicalgies)',
+    score: 308,
+    path: 'Séquelles du Rachis, du Bassin et de la Moelle Épinière > Rachis'
+  },
+  {
+    name: 'Hernie discale lombaire post-traumatique - Syndrome rachidien pur (lombalgies)',
+    score: 308,
+    path: 'Séquelles du Rachis, du Bassin et de la Moelle Épinière > Rachis'
+  },
+  {
+    name: 'Syndrome post-traumatique cervical chronique (Whiplash / Coup du lapin)',
+    score: 308,
+    path: 'Séquelles du Rachis, du Bassin et de la Moelle Épinière > Rachis'
+  },
+  {
+    name: "Névralgie d'Arnold (Névralgie du grand occipital) post-traumatique",
+    score: 308,
+    path: 'Séquelles du Rachis, du Bassin et de la Moelle Épinière > Rachis'
+  },
+  {
+    name: 'Syndrome myofascial cervical post-traumatique (contractures chroniques)',
+    score: 308,
+    path: 'Séquelles du Rachis, du Bassin et de la Moelle Épinière > Rachis'
+  },
+  {
+    name: 'Scoliose ou cyphose douloureuse post-traumatique',
+    score: 308,
+    path: 'Séquelles du Rachis, du Bassin et de la Moelle Épinière > Rachis'
+  },
+  {
+    name: 'Hernie discale cervicale post-traumatique - Avec névralgie cervico-brachiale (NCB)',
+    score: 307,
+    path: 'Séquelles du Rachis, du Bassin et de la Moelle Épinière > Rachis'
+  },
+  {
+    name: 'Hernie discale lombaire post-traumatique - Avec radiculalgie (sciatique ou cruralgie)',
+    score: 307,
+    path: 'Séquelles du Rachis, du Bassin et de la Moelle Épinière > Rachis'
+  },
+  {
+    name: 'Raideur rachidienne post-immobilisation, sans douleurs',
+    score: 307,
+    path: 'Séquelles du Rachis, du Bassin et de la Moelle Épinière > Rachis'
+  },
+  {
+    name: 'Raideur rachidienne avec douleurs ostéo-articulaires',
+    score: 307,
+    path: 'Séquelles du Rachis, du Bassin et de la Moelle Épinière > Rachis'
+  },
+  {
+    name: 'Raideur rachidienne avec douleurs névralgiques',
+    score: 307,
+    path: 'Séquelles du Rachis, du Bassin et de la Moelle Épinière > Rachis'
+  },
+  {
+    name: 'Myélopathie cervicarthrosique post-traumatique',
+    score: 307,
+    path: 'Séquelles du Rachis, du Bassin et de la Moelle Épinière > Rachis'
+  },
+  {
+    name: 'Spondylolisthésis modifié par traumatisme',
+    score: 307,
+    path: 'Séquelles du Rachis, du Bassin et de la Moelle Épinière > Rachis'
+  },
+  {
+    name: 'Syndrome de la queue de cheval post-traumatique',
+    score: 307,
+    path: "Séquelles du Rachis, du Bassin et de la Moelle Épinière > Troubles Nerveux d'Origine Médullaire"
+  },
+  {
+    name: 'Majoration pour douleurs radiculo-médullaires',
+    score: 307,
+    path: "Séquelles du Rachis, du Bassin et de la Moelle Épinière > Troubles Nerveux d'Origine Médullaire"
+  },
+  {
+    name: "Troubles de la sensibilité d'origine médullaire avec douleurs",
+    score: 307,
+    path: "Séquelles du Rachis, du Bassin et de la Moelle Épinière > Troubles Nerveux d'Origine Médullaire"
+  },
+  {
+    name: 'Syndrome de Maigne (Syndrome de la charnière thoraco-lombaire)',
+    score: 298,
+    path: 'Séquelles du Rachis, du Bassin et de la Moelle Épinière > Rachis'
+  },
+  {
+    name: 'Raideur rachidienne avec déviation très prononcée',
+    score: 296,
+    path: 'Séquelles du Rachis, du Bassin et de la Moelle Épinière > Rachis'
+  },
+  {
+    name: 'Rhumatisme vertébral (lombalgie, cervicalgie) avec raideur',
+    score: 296,
+    path: 'Séquelles du Rachis, du Bassin et de la Moelle Épinière > Rachis'
+  },
+  {
+    name: 'Spondylose rhizomélique (atteinte lombaire)',
+    score: 296,
+    path: 'Séquelles du Rachis, du Bassin et de la Moelle Épinière > Rachis'
+  },
+  {
+    name: 'Spondylose rhizomélique (atteinte de tout le rachis et hanches)',
+    score: 296,
+    path: 'Séquelles du Rachis, du Bassin et de la Moelle Épinière > Rachis'
+  },
+  {
+    name: 'Quadriplégie incomplète (marche possible)',
+    score: 296,
+    path: "Séquelles du Rachis, du Bassin et de la Moelle Épinière > Troubles Nerveux d'Origine Médullaire"
+  },
+  {
+    name: 'Quadriplégie complète (confinement au lit)',
+    score: 296,
+    path: "Séquelles du Rachis, du Bassin et de la Moelle Épinière > Troubles Nerveux d'Origine Médullaire"
+  },
+  {
+    name: 'Syndrome de Brown-Séquard',
+    score: 296,
+    path: "Séquelles du Rachis, du Bassin et de la Moelle Épinière > Troubles Nerveux d'Origine Médullaire"
+  },
+  {
+    name: "Claudication intermittente d'origine médullaire",
+    score: 296,
+    path: "Séquelles du Rachis, du Bassin et de la Moelle Épinière > Troubles Nerveux d'Origine Médullaire"
+  },
+  {
+    name: 'Atrophie musculaire médullaire - Main (droite)',
+    score: 296,
+    path: "Séquelles du Rachis, du Bassin et de la Moelle Épinière > Troubles Nerveux d'Origine Médullaire"
+  },
+  {
+    name: 'Atrophie musculaire médullaire - Main (gauche)',
+    score: 296,
+    path: "Séquelles du Rachis, du Bassin et de la Moelle Épinière > Troubles Nerveux d'Origine Médullaire"
+  },
+  {
+    name: 'Atrophie musculaire médullaire - Avant-bras (droit)',
+    score: 296,
+    path: "Séquelles du Rachis, du Bassin et de la Moelle Épinière > Troubles Nerveux d'Origine Médullaire"
+  },
+  {
+    name: 'Atrophie musculaire médullaire - Avant-bras (gauche)',
+    score: 296,
+    path: "Séquelles du Rachis, du Bassin et de la Moelle Épinière > Troubles Nerveux d'Origine Médullaire"
+  },
+  {
+    name: 'Atrophie musculaire médullaire - Bras (droit)',
+    score: 296,
+    path: "Séquelles du Rachis, du Bassin et de la Moelle Épinière > Troubles Nerveux d'Origine Médullaire"
+  },
+  {
+    name: 'Atrophie musculaire médullaire - Bras (gauche)',
+    score: 296,
+    path: "Séquelles du Rachis, du Bassin et de la Moelle Épinière > Troubles Nerveux d'Origine Médullaire"
+  },
+  {
+    name: 'Atrophie musculaire médullaire - Épaule/Ceinture scapulaire (droite)',
+    score: 296,
+    path: "Séquelles du Rachis, du Bassin et de la Moelle Épinière > Troubles Nerveux d'Origine Médullaire"
+  },
+  {
+    name: 'Atrophie musculaire médullaire - Épaule/Ceinture scapulaire (gauche)',
+    score: 296,
+    path: "Séquelles du Rachis, du Bassin et de la Moelle Épinière > Troubles Nerveux d'Origine Médullaire"
+  },
+  {
+    name: 'Atrophie complète membre supérieur (droit)',
+    score: 296,
+    path: "Séquelles du Rachis, du Bassin et de la Moelle Épinière > Troubles Nerveux d'Origine Médullaire"
+  },
+  {
+    name: 'Atrophie complète membre supérieur (gauche)',
+    score: 296,
+    path: "Séquelles du Rachis, du Bassin et de la Moelle Épinière > Troubles Nerveux d'Origine Médullaire"
+  },
+  {
+    name: 'Atrophie musculaire médullaire - Pied',
+    score: 296,
+    path: "Séquelles du Rachis, du Bassin et de la Moelle Épinière > Troubles Nerveux d'Origine Médullaire"
+  },
+  {
+    name: 'Atrophie musculaire médullaire - Jambe',
+    score: 296,
+    path: "Séquelles du Rachis, du Bassin et de la Moelle Épinière > Troubles Nerveux d'Origine Médullaire"
+  },
+  {
+    name: 'Atrophie musculaire médullaire - Cuisse',
+    score: 296,
+    path: "Séquelles du Rachis, du Bassin et de la Moelle Épinière > Troubles Nerveux d'Origine Médullaire"
+  },
+  {
+    name: 'Atrophie musculaire médullaire - Ceinture pelvienne',
+    score: 296,
+    path: "Séquelles du Rachis, du Bassin et de la Moelle Épinière > Troubles Nerveux d'Origine Médullaire"
+  }
+]
+❌ INCOHÉRENCE ANATOMIQUE DÉTECTÉE !
+   Input contexte: visceres
+   Proposition: Fracture du sacrum ou du coccyx avec douleurs chroniques (coccygodynie)
+   Path: Séquelles du Rachis, du Bassin et de la Moelle Épinière > Bassin - Lésions Osseuses
+   → Type: no_result
+   ⚠️ Lésion ignorée (type=no_result)
+🔎 Analyse lésion "fracture diaphysaire du tibia gauche avec cal vicieux et raccourcissement de 2 cm" → enrichi: "fracture diaphysaire du tibia gauche avec cal vicieux et raccourcissement de 2 cm" (processed: "fracture diaphysaire du tibia gauche avec cal vicieux et raccourcissement de2 cm")
+🔍 [MÉTACARPIENS] Input brut: fracture diaphysaire du tibia gauche avec cal vicieux et raccourcissement de2 cm
+🔍 [MÉTACARPIENS] hasMetaWord: false
+🔍 [MÉTACARPIENS] hasSingleOrPerte: false
+🔍 [MÉTACARPIENS] hasSpecificFinger: false
+🔍 [MÉTACARPIENS] hasCinq: false
+⚠️ [MÉTACARPIENS] Pas de dialogue - continuons analyse normale
+📋 Antécédents extraits (0): []
+🔍 [EARLY] Antécédents détectés: 0 - 
+🔍 [DEBUG EXPERT RULE - EARLY TEST]
+Pattern: /contusion.*cerebrale|traumatisme.*crani.*contusion/i
+Context: /perte.*connaissance|frontale|temporale|parietale|breve|courte|surveillance.*neurologique/i
+NegativeContext: /spondylo|listthesis|glissement.*vertebral/i
+CleanText: "fracture diaphysaire du tibia gauche avec cal vicieux et raccourcissement de2 cm"
+patternMatchClean: false, contextMatchClean: false
+negContextMatchClean: false, negContextMatchWorking: false
+matchClean: false, matchWorking: false
+🔍 [DEBUG EXPERT RULE - EARLY TEST]
+Pattern: /spondylolisthesis|spondylo.*listhesis|listthesis|glissement\s+vertebral/i
+Context: /lombaire|L\d|S\d|rachis|traumatisme|post-traumatique/i
+NegativeContext: /contusion.*cerebrale|perte.*connaissance|mandibule|genou|polytraumatisme|chute.*echafaudage/i
+CleanText: "fracture diaphysaire du tibia gauche avec cal vicieux et raccourcissement de2 cm"
+patternMatchClean: false, contextMatchClean: false
+negContextMatchClean: false, negContextMatchWorking: false
+matchClean: false, matchWorking: false
+   → Type: proposal
+   → Injury: Cumul : Pseudarthrose + Raccourcissement + Amyotrophie
+   → Rate calculé: 7
+   🔧 V3.3.281: Enrichissement fracture humérus: "fracture de l humerus droit osteosynthesee avec raideur de l epaule" → "fracture de l humerus droit osteosynthesee avec raideur de l epaule fracture humerus diaphysaire cal vicieux deformation angulaire consolidation membre superieur bras"
+🔎 Analyse lésion "fracture de l humerus droit osteosynthesee avec raideur de l epaule" → enrichi: "fracture de l humerus droit osteosynthesee avec raideur de l epaule fracture humerus diaphysaire cal vicieux deformation angulaire consolidation membre superieur bras" (processed: "fracture de l humerus droit osteosynthesee avec raideur de l epaule fracture humerus diaphysaire cal vicieux deformation angulaire consolidation membre superieur bras")
+🔍 [MÉTACARPIENS] Input brut: fracture de l humerus droit osteosynthesee avec raideur de l epaule fracture humerus diaphysaire cal vicieux deformation angulaire consolidation membre superieur bras
+🔍 [MÉTACARPIENS] hasMetaWord: false
+🔍 [MÉTACARPIENS] hasSingleOrPerte: false
+🔍 [MÉTACARPIENS] hasSpecificFinger: false
+🔍 [MÉTACARPIENS] hasCinq: false
+⚠️ [MÉTACARPIENS] Pas de dialogue - continuons analyse normale
+📋 Antécédents extraits (0): []
+🔍 [EARLY] Antécédents détectés: 0 - 
+🔍 [DEBUG EXPERT RULE - EARLY TEST]
+Pattern: /contusion.*cerebrale|traumatisme.*crani.*contusion/i
+Context: /perte.*connaissance|frontale|temporale|parietale|breve|courte|surveillance.*neurologique/i
+NegativeContext: /spondylo|listthesis|glissement.*vertebral/i
+CleanText: "fracture de l humerus droit osteosynthesee avec raideur de l epaule fracture humerus diaphysaire cal vicieux deformation angulaire consolidation membre superieur bras"
+patternMatchClean: false, contextMatchClean: false
+negContextMatchClean: false, negContextMatchWorking: false
+matchClean: false, matchWorking: false
+🔍 [DEBUG EXPERT RULE - EARLY TEST]
+Pattern: /spondylolisthesis|spondylo.*listhesis|listthesis|glissement\s+vertebral/i
+Context: /lombaire|L\d|S\d|rachis|traumatisme|post-traumatique/i
+NegativeContext: /contusion.*cerebrale|perte.*connaissance|mandibule|genou|polytraumatisme|chute.*echafaudage/i
+CleanText: "fracture de l humerus droit osteosynthesee avec raideur de l epaule fracture humerus diaphysaire cal vicieux deformation angulaire consolidation membre superieur bras"
+patternMatchClean: false, contextMatchClean: false
+negContextMatchClean: false, negContextMatchWorking: false
+matchClean: false, matchWorking: false
+✅ [EXPERT RULE MATCH - PRIORITY 93] Fracture de l'humérus normalement consolidée (Main Dominante) = [4-6] → 5% (coef: 0.50)
+   → Type: proposal
+   → Injury: Fracture de l'humérus normalement consolidée (Main Dominante)
+   → Rate calculé: 5
+🔎 Analyse lésion "tassement vertebral de l1 avec cyphose post traumatique" → enrichi: "tassement vertebral de l1 avec cyphose post traumatique" (processed: "tassement vertebral de l1 avec cyphose post traumatique")
+🔍 [MÉTACARPIENS] Input brut: tassement vertebral de l1 avec cyphose post traumatique
+🔍 [MÉTACARPIENS] hasMetaWord: false
+🔍 [MÉTACARPIENS] hasSingleOrPerte: false
+🔍 [MÉTACARPIENS] hasSpecificFinger: false
+🔍 [MÉTACARPIENS] hasCinq: false
+⚠️ [MÉTACARPIENS] Pas de dialogue - continuons analyse normale
+📋 Antécédents extraits (0): []
+🔍 [EARLY] Antécédents détectés: 0 - 
+✅ [EXPERT RULE MATCH - PRIORITY 11000] Fracture tassement vertébral lombaire non déplacée consolidée = [10-25] → 10% (coef: 0.00)
+   → Type: proposal
+   → Injury: Fracture tassement vertébral lombaire non déplacée consolidée
+   → Rate calculé: 10
+📊 TOTAL: 3 propositions générées sur 4 lésions
+✅ Calcul automatique cumul avec 3 lésion(s)
+─── Cas 4 ───
+  Description: Polytraumatisme 4 sièges : bassin + tibia + humérus + rachis
+  Input     : "polytraumatisme suite à accident de la circulation avec fracture du cadre obturateur du bassin consolidée avec douleurs ..."
+  Sièges    : bassin + tibia + humérus + rachis
+  Attendu   : Polytraumatisme (25-65%)
+  Obtenu    : ✅ Polytraumatisme (cumul 3 lésions)
+  Taux      : 21%
+  Type      : proposal
+  Polytrauma: ✅ | Taux OK: ✅ | Syst. trouvés: 2/4
+  Path      : Cumul Polytraumatisme
+  Justif    : <strong>🔗 POLYTRAUMATISME - CUMUL 3 LÉSIONS</strong><br><br><div style="background:#fff3cd; padding:15px; margin:10px 0; border-left:5px solid #ffc107;"><strong>📋 Lésions identifiées :</strong><br>L...
+
+🔧 localExpertAnalysis V3.3.280 - MULTI-SITES polytrauma fix, paragraph extraction, enrichment psych/audio
+🔍 [V3.3.162] TEXTE REÇU (nettoyé): baisse de l'acuité visuelle OD à 3/10 et OG à 8/10 après traumatisme oculaire direct ; surdité de perception bilatérale moyenne à 40 dB avec acouphènes permanents invalidants ; raideur du genou droit 
+🔍 [V3.3.280] hasMultipleDistinctSites: 2 sites détectés (seuil=2) → MULTI-SITES
+🔍 DEBUG STEPPAGE DÉTAILLÉ:
+   - steppageMatch: false
+   - amyotrophieMIMatch: false
+   - fractureL1Match: false
+   - Texte analysé: baisse de l'acuité visuelle OD à 3/10 et OG à 8/10 après traumatisme oculaire direct ; surdité de perception bilatérale moyenne à 40 dB avec acouphènes permanents invalidants ; raideur du genou droit post-fracture du plateau tibial avec flexion limit
+❌ STEPPAGE NON DÉTECTÉ - Conditions non remplies
+🔍 DEBUG DÉVIATION:
+   - deviationMatch: false
+   - mainContext: false
+   - Recherche dans: diviation NON trouvé
+🔍 [V3.3.155] Séquelles détectées: 5 [
+  'Acouphènes',
+  'Fracture plateau tibial (avec raideur)',
+  'Limitation de la flexion du genou',
+  'Raideur articulaire du genou',
+  "Algies mécaniques persistantes (à l'effort)"
+]
+🦴 [V3.3.227] Fracture fémur/tibia + raideur genou → PAS de cumul (raideur = séquelle)
+🔍 V3.3.201k: isCumulDetected = false , lesionCount = 1
+🆕 V3.3.280: OVERRIDE CUMUL - isMultiSitePolytrauma=true mais detectMultipleLesions=false → FORCE cumul
+⚠️ V3.3.201j: CUMUL DÉTECTÉ → SKIP regroupement par système, passage direct à extraction lésions individuelles
+🔍 DEBUG MÉTACARPIENS - Texte normalisé: baisse de l acuite visuelle od a 3/10 et og a 8/10 traumatisme oculaire direct ; surdite de perception bilateral erale moyenne a 40 db avec acouphenes permanents invalidants ; raideur $1 droit post fracture plateau tibial avec flexion limitee a 90 degres et douleurs mecaniques limitation restriction enraidissement raideur restriction enraidissement raideur limitation enraidissement raideur limitation restriction cassure fissure bris fracture fissure bris fracture cassure bris fracture cassure fissure phalange phalanges phalange proximale p1 femoro tibiale femoro patellaire articulation genou genou femoro patellaire articulation genou genou femoro tibiale articulation genou genou femoro tibiale femoro patellaire genou femoro tibiale femoro patellaire flexion coude flexion coude flechir coude oeil oeil ophtalmique oeil oeil oculaire oeil oeil oculaire vision vue visuel vision vue acuite visuelle vision vue acuite visuelle av acuite visuelle vision de acuite acuite visuelle vision de acuite av vision de acuite av acuite visuelle dixieme sur 10 10eme dixieme /10 10eme dixieme /10 sur 10 8 dixieme 8 dixieme vision 8 8/10 8 dixieme vision 8 8/10 8 dixieme vision 8 8/10 8 dixieme 8 dixieme 3 dixieme 3 dixieme vision 3 3/10 3 dixieme vision 3 3/10 3 dixieme vision 3 3/10 3 dixieme 3 dixieme vision bilateral erale 2 yeux oeil droit + oeil gauche vision unilateral erale oeil oeil gauche vision unilateral erale oeil oeil droit vision unilateral erale oeil oeil droit perte auditive hypoacousie cophose surdite hypoacousie cophose surdite perte auditive cophose surdite perte auditive hypoacousie bourdonnements sifflements tinnitus acouphenes sifflements tinnitus acouphenes bourdonnements tinnitus acouphenes bourdonnements sifflements diminution acuite auditive baisse audition perte partielle diminution acuite auditive baisse audition hypoacousie db decibels decibels surdite profonde perte profonde 85 db surdite bilateral erale surdite 2 oreilles od + og acouphenes invalidants acouphenes severes sifflements aigus continus acouphenes invalidants acouphenes severes acouphenes permanents
+🔍 DEBUG MÉTACARPIENS - hasMetacarpienWord: false
+🔍 DEBUG MÉTACARPIENS - hasSingleIndicator: false
+🔍 DEBUG MÉTACARPIENS - hasMultipleIndicator: true
+🔍 DEBUG MÉTACARPIENS - hasSpecificFingerEarly: false
+🔍 DEBUG MÉTACARPIENS - isMetacarpienSingleQueryEarly: false
+🔍 V3.3.139: Vérification cumul prioritaire...
+🔍 Query words: baisse, acuite, visuelle, 3/10, 8/10, apres, traumatisme, oculaire, direct, surdite
+🔍 Catégorie cumul trouvée: Cumuls de Lésions et Polytraumatismes
+🔍 Entrées avec searchTerms vérifiées: 51, meilleur score: 0.0%
+ℹ️ Aucun cumul prioritaire trouvé (similarité < 70%), continue avec analyse normale
+📋 Antécédents extraits (0): []
+🔍 isCumulDetected: true lesionCount: 2
+🔍 CUMUL DÉTECTÉ - Extraction des lésions individuelles
+📝 text original: baisse de l'acuité visuelle OD à 3/10 et OG à 8/10 après traumatisme oculaire direct ; surdité de perception bilatérale moyenne à 40 dB avec acouphènes permanents invalidants ; raideur du genou droit post-fracture du plateau tibial avec flexion limitée à 90 degrés et douleurs mécaniques
+📝 finalCleanedText: baisse de l'acuité visuelle OD à 3/10 et OG à 8/10 après traumatisme oculaire direct surdité de perception bilatérale moyenne à 40 dB avec acouphènes permanents invalidants droit post-fracture du plateau tibial avec flexion limitée à 90 degrés et douleurs mécaniques
+🔧 extractIndividualLesions V3.3.211 - avec Pattern 0C-ter + 0C-quater
+🔍 extractIndividualLesions - texte d'entrée: baisse de l'acuité visuelle OD à 3/10 et OG à 8/10 après traumatisme oculaire direct ; surdité de perception bilatérale moyenne à 40 dB avec acouphènes permanents invalidants ; raideur du genou droit post-fracture du plateau tibial avec flexion limitée à 90 degrés et douleurs mécaniques
+🔍 Pattern 0B - Extraction polytraumatisme membre (V3.3.201L):
+  fractureMatch: NULL
+  ligamentMatch: NULL
+  muscleMatch: NULL
+  raideurMatch: raideur du genou
+  algiesMatch: douleurs mecaniques
+  deficitForceMatch: NULL
+  componentCount: 2
+  Condition activée: false
+❌ Pattern 0B NON ACTIVÉ: componentCount < 3
+✅ Pattern 8 (séparateur ;) détecté: [
+  'baisse de l acuite visuelle od a 3/10 et og a 8/10 apres traumatisme oculaire direct',
+  'surdite de perception bilaterale moyenne a 40 db avec acouphenes permanents invalidants',
+  'raideur du genou droit post fracture du plateau tibial avec flexion limitee a 90 degres et douleurs mecaniques'
+]
+📋 Lésions extraites: [
+  'baisse de l acuite visuelle od a 3/10 et og a 8/10 apres traumatisme oculaire direct',
+  'surdite de perception bilaterale moyenne a 40 db avec acouphenes permanents invalidants',
+  'raideur du genou droit post fracture du plateau tibial avec flexion limitee a 90 degres et douleurs mecaniques'
+] Nombre: 3
+✅ Au moins 2 lésions → Analyse séparée
+🔎 Analyse lésion "baisse de l acuite visuelle od a 3/10 et og a 8/10 apres traumatisme oculaire direct" → enrichi: "baisse de l acuite visuelle od a 3/10 et og a 8/10 apres traumatisme oculaire direct" (processed: "baisse de l acuite visuelle od a3/10 et og a8/10 apres traumatisme oculaire direct")
+🔍 [MÉTACARPIENS] Input brut: baisse de l acuite visuelle od a3/10 et og a8/10 apres traumatisme oculaire direct
+🔍 [MÉTACARPIENS] hasMetaWord: false
+🔍 [MÉTACARPIENS] hasSingleOrPerte: false
+🔍 [MÉTACARPIENS] hasSpecificFinger: false
+🔍 [MÉTACARPIENS] hasCinq: false
+⚠️ [MÉTACARPIENS] Pas de dialogue - continuons analyse normale
+📋 Antécédents extraits (0): []
+🔍 [EARLY] Antécédents détectés: 0 - 
+🔍 [DEBUG EXPERT RULE - EARLY TEST]
+Pattern: /contusion.*cerebrale|traumatisme.*crani.*contusion/i
+Context: /perte.*connaissance|frontale|temporale|parietale|breve|courte|surveillance.*neurologique/i
+NegativeContext: /spondylo|listthesis|glissement.*vertebral/i
+CleanText: "baisse de l acuite visuelle od a3/10 et og a8/10 apres traumatisme oculaire direct"
+patternMatchClean: false, contextMatchClean: false
+negContextMatchClean: false, negContextMatchWorking: false
+matchClean: false, matchWorking: false
+🔍 [DEBUG EXPERT RULE - EARLY TEST]
+Pattern: /spondylolisthesis|spondylo.*listhesis|listthesis|glissement\s+vertebral/i
+Context: /lombaire|L\d|S\d|rachis|traumatisme|post-traumatique/i
+NegativeContext: /contusion.*cerebrale|perte.*connaissance|mandibule|genou|polytraumatisme|chute.*echafaudage/i
+CleanText: "baisse de l acuite visuelle od a3/10 et og a8/10 apres traumatisme oculaire direct"
+patternMatchClean: false, contextMatchClean: true
+negContextMatchClean: false, negContextMatchWorking: false
+matchClean: false, matchWorking: false
+🎯 TOP 50 RÉSULTATS: [
+  {
+    name: 'Diminution de la vision des deux yeux (selon tableau à double entrée)',
+    score: 102,
+    path: 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Yeux - Cécité et Baisse de Vision'
+  },
+  {
+    name: 'Glaucome post-traumatique',
+    score: 64,
+    path: 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Yeux - Lésions Spécifiques et Annexes'
+  },
+  {
+    name: 'Uvéite post-traumatique chronique',
+    score: 64,
+    path: 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Yeux - Lésions Spécifiques et Annexes'
+  },
+  {
+    name: "Syndrome d'apnées-hypopnées du sommeil (SAHS) post-traumatique",
+    score: 64,
+    path: 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Voies Respiratoires Supérieures'
+  },
+  {
+    name: "Syndrome algo-dysfonctionnel de l'appareil manducateur (SADAM) post-traumatique",
+    score: 63,
+    path: 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Face - Mâchoires'
+  },
+  {
+    name: 'Voies lacrymales - Larmoiement ou fistules (un oeil)',
+    score: 63,
+    path: 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Yeux - Lésions Spécifiques et Annexes'
+  },
+  {
+    name: 'Voies lacrymales - Larmoiement ou fistules (chaque oeil)',
+    score: 63,
+    path: 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Yeux - Lésions Spécifiques et Annexes'
+  },
+  {
+    name: 'Paupières - Ptosis ou blépharospasme (un oeil)',
+    score: 63,
+    path: 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Yeux - Lésions Spécifiques et Annexes'
+  },
+  {
+    name: 'Otorrhée chronique post-traumatique',
+    score: 63,
+    path: "Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Oreilles - Vertiges et Troubles de l'Équilibre"
+  },
+  {
+    name: 'Constriction des mâchoires (écartement 10 à 30 mm)',
+    score: 62,
+    path: 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Face - Mâchoires'
+  },
+  {
+    name: 'Fistule bucco-sinusienne persistante post-traumatique',
+    score: 62,
+    path: 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Face - Mâchoires'
+  },
+  {
+    name: 'Otorrhée traumatique unilatérale',
+    score: 62,
+    path: 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Oreilles - Lésions Externes et Moyennes'
+  },
+  {
+    name: 'Vertiges - 3ème degré (troubles objectifs)',
+    score: 62,
+    path: "Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Oreilles - Vertiges et Troubles de l'Équilibre"
+  },
+  {
+    name: 'Sinusite traumatique',
+    score: 62,
+    path: 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Voies Respiratoires Supérieures'
+  },
+  {
+    name: 'Rhinites croûteuses post-traumatiques',
+    score: 62,
+    path: 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Voies Respiratoires Supérieures'
+  },
+  {
+    name: 'Sténose laryngo-trachéale post-traumatique',
+    score: 62,
+    path: 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Voies Respiratoires Supérieures'
+  },
+  {
+    name: 'Ophtalmie sympathique',
+    score: 55,
+    path: 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Yeux - Lésions Spécifiques et Annexes'
+  },
+  {
+    name: 'Syndrome de Frei (syndrome auriculo-temporal)',
+    score: 52,
+    path: 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Face - Dents, Langue, Pharynx'
+  },
+  {
+    name: 'Cataracte (selon acuité et complications)',
+    score: 52,
+    path: 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Yeux - Lésions Spécifiques et Annexes'
+  },
+  {
+    name: "Syndrome otolithique (sensation d'ébriété permanente)",
+    score: 52,
+    path: "Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Oreilles - Vertiges et Troubles de l'Équilibre"
+  },
+  {
+    name: 'Consolidation vicieuse - Mobilité totale du maxillaire supérieur',
+    score: 51,
+    path: 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Face - Mâchoires'
+  },
+  {
+    name: 'Luxation irréductible temporo-maxillaire',
+    score: 51,
+    path: 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Face - Mâchoires'
+  },
+  {
+    name: 'Luxation récidivante temporo-maxillaire',
+    score: 51,
+    path: 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Face - Mâchoires'
+  },
+  {
+    name: 'Constriction des mâchoires (écartement < 10 mm)',
+    score: 51,
+    path: 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Face - Mâchoires'
+  },
+  {
+    name: 'Constriction des mâchoires avec troubles salivaires, etc.',
+    score: 51,
+    path: 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Face - Mâchoires'
+  },
+  {
+    name: 'Gêne de la déglutition par cicatrice pharyngée',
+    score: 51,
+    path: 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Face - Dents, Langue, Pharynx'
+  },
+  {
+    name: 'Fistules salivaires',
+    score: 51,
+    path: 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Face - Dents, Langue, Pharynx'
+  },
+  {
+    name: 'Cicatrices rétractiles des paupières (ectropion, lagophtalmie, etc.)',
+    score: 51,
+    path: 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Face - Séquelles des Brûlures'
+  },
+  {
+    name: 'Cicatrices sténosantes des orifices (bouche, nez)',
+    score: 51,
+    path: 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Face - Séquelles des Brûlures'
+  },
+  {
+    name: 'Préjudice esthétique important lié aux brûlures de la face',
+    score: 51,
+    path: 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Face - Séquelles des Brûlures'
+  },
+  {
+    name: 'Hémorragies du vitré',
+    score: 51,
+    path: 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Yeux - Lésions Spécifiques et Annexes'
+  },
+  {
+    name: 'Orbite - Névrites, névralgies du nerf V (trijumeau)',
+    score: 51,
+    path: 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Yeux - Lésions Spécifiques et Annexes'
+  },
+  {
+    name: 'Orbite - Altérations vasculaires (anévrisme, etc.)',
+    score: 51,
+    path: 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Yeux - Lésions Spécifiques et Annexes'
+  },
+  {
+    name: 'Paupières - Déviation des bords palpébraux (entropion, ectropion, cicatrices vicieuses)',
+    score: 51,
+    path: 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Yeux - Lésions Spécifiques et Annexes'
+  },
+  {
+    name: 'Paupières - Ptosis ou blépharospasme (deux yeux)',
+    score: 51,
+    path: 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Yeux - Lésions Spécifiques et Annexes'
+  },
+  {
+    name: 'Sténose du conduit auditif unilatérale',
+    score: 51,
+    path: 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Oreilles - Lésions Externes et Moyennes'
+  },
+  {
+    name: 'Sténose du conduit auditif bilatérale',
+    score: 51,
+    path: 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Oreilles - Lésions Externes et Moyennes'
+  },
+  {
+    name: 'Otorrhée tubaire unilatérale',
+    score: 51,
+    path: 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Oreilles - Lésions Externes et Moyennes'
+  },
+  {
+    name: 'Otorrhée chronique avec ostéite unilatérale',
+    score: 51,
+    path: 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Oreilles - Lésions Externes et Moyennes'
+  },
+  {
+    name: 'Otorrhée chronique avec ostéite bilatérale',
+    score: 51,
+    path: 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Oreilles - Lésions Externes et Moyennes'
+  },
+  {
+    name: 'Surdité unilatérale profonde',
+    score: 51,
+    path: "Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Oreilles - Diminution de l'Acuité Auditive (Surdité)"
+  },
+  {
+    name: 'Surdité asymétrique (OD/OG > 25 dB différence)',
+    score: 51,
+    path: "Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Oreilles - Diminution de l'Acuité Auditive (Surdité)"
+  },
+  {
+    name: "Vertiges et troubles de l'équilibre",
+    score: 51,
+    path: "Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Oreilles - Vertiges et Troubles de l'Équilibre"
+  },
+  {
+    name: 'Vertiges - 1er degré (pas de trouble objectif)',
+    score: 51,
+    path: "Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Oreilles - Vertiges et Troubles de l'Équilibre"
+  },
+  {
+    name: 'Vertiges - 2ème degré (hyper-excitabilité aux épreuves)',
+    score: 51,
+    path: "Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Oreilles - Vertiges et Troubles de l'Équilibre"
+  },
+  {
+    name: 'Sténose nasale unilatérale simple',
+    score: 51,
+    path: 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Voies Respiratoires Supérieures'
+  },
+  {
+    name: 'Sténose nasale unilatérale avec formation de croûtes',
+    score: 51,
+    path: 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Voies Respiratoires Supérieures'
+  },
+  {
+    name: 'Sténose nasale unilatérale avec sinusite',
+    score: 51,
+    path: 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Voies Respiratoires Supérieures'
+  },
+  {
+    name: 'Sténose nasale bilatérale légère',
+    score: 51,
+    path: 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Voies Respiratoires Supérieures'
+  },
+  {
+    name: 'Sténose nasale bilatérale accentuée',
+    score: 51,
+    path: 'Séquelles Maxillo-Faciales, ORL et Ophtalmologiques > Voies Respiratoires Supérieures'
+  }
+]
+🔍 [detectRequestType] Début analyse...
+📊 [detectRequestType] Résultat: attribution
+🔍 [determineSeverity] Text: baisse de l acuite visuelle od a3/10 et og a8/10 apres traumatisme oculaire direct
+🔍 [determineSeverity] Faible signs: []
+🔍 [determineSeverity] High signs: []
+   → Type: proposal
+   → Injury: Diminution de la vision des deux yeux (selon tableau à double entrée)
+   → Rate calculé: 50
+   🔧 V3.3.280: Enrichissement surdité: "surdite de perception bilaterale moyenne a 40 db avec acouphenes permanents invalidants" → "surdite de perception bilaterale moyenne a 40 db avec acouphenes permanents invalidants surdite perte auditive hypoacousie acouphenes traumatisme sonore blast auditif"
+🔎 Analyse lésion "surdite de perception bilaterale moyenne a 40 db avec acouphenes permanents invalidants" → enrichi: "surdite de perception bilaterale moyenne a 40 db avec acouphenes permanents invalidants surdite perte auditive hypoacousie acouphenes traumatisme sonore blast auditif" (processed: "surdite de perception bilaterale moyenne a40 db avec acouphenes permanents invalidants surdite perte auditive hypoacousie acouphenes traumatisme sonore blast auditif")
+🔍 [MÉTACARPIENS] Input brut: surdite de perception bilaterale moyenne a40 db avec acouphenes permanents invalidants surdite perte auditive hypoacousie acouphenes traumatisme sonore blast auditif
+🔍 [MÉTACARPIENS] hasMetaWord: false
+🔍 [MÉTACARPIENS] hasSingleOrPerte: true
+🔍 [MÉTACARPIENS] hasSpecificFinger: false
+🔍 [MÉTACARPIENS] hasCinq: false
+⚠️ [MÉTACARPIENS] Pas de dialogue - continuons analyse normale
+📋 Antécédents extraits (0): []
+🔍 [EARLY] Antécédents détectés: 0 - 
+🔍 [DEBUG EXPERT RULE - EARLY TEST]
+Pattern: /contusion.*cerebrale|traumatisme.*crani.*contusion/i
+Context: /perte.*connaissance|frontale|temporale|parietale|breve|courte|surveillance.*neurologique/i
+NegativeContext: /spondylo|listthesis|glissement.*vertebral/i
+CleanText: "surdite de perception bilaterale moyenne a40 db avec acouphenes permanents invalidants surdite perte auditive hypoacousie acouphenes traumatisme sonore blast auditif"
+patternMatchClean: false, contextMatchClean: false
+negContextMatchClean: false, negContextMatchWorking: false
+matchClean: false, matchWorking: false
+✅ [EXPERT RULE MATCH - PRIORITY 94] Céphalées post-traumatiques chroniques = [5-20] → 5% (coef: 0.00)
+   → Type: proposal
+   → Injury: Céphalées post-traumatiques chroniques
+   → Rate calculé: 5
+   🔧 V3.3.280: Enrichissement genou: "raideur du genou droit post fracture du plateau tibial avec flexion limitee a 90 degres et douleurs mecaniques" → "raideur du genou droit post fracture du plateau tibial avec flexion limitee a 90 degres et douleurs mecaniques raideur genou ankylose flexion extension goniometrie genu"
+🔎 Analyse lésion "raideur du genou droit post fracture du plateau tibial avec flexion limitee a 90 degres et douleurs mecaniques" → enrichi: "raideur du genou droit post fracture du plateau tibial avec flexion limitee a 90 degres et douleurs mecaniques raideur genou ankylose flexion extension goniometrie genu" (processed: "raideur du genou droit post fracture du plateau tibial avec flexion limitee a90 degres et douleurs mecaniques raideur genou ankylose flexion extension goniometrie genu")
+🔍 [MÉTACARPIENS] Input brut: raideur du genou droit post fracture du plateau tibial avec flexion limitee a90 degres et douleurs mecaniques raideur genou ankylose flexion extension goniometrie genu
+🔍 [MÉTACARPIENS] hasMetaWord: false
+🔍 [MÉTACARPIENS] hasSingleOrPerte: false
+🔍 [MÉTACARPIENS] hasSpecificFinger: false
+🔍 [MÉTACARPIENS] hasCinq: false
+⚠️ [MÉTACARPIENS] Pas de dialogue - continuons analyse normale
+📋 Antécédents extraits (0): []
+🔍 [EARLY] Antécédents détectés: 0 - 
+✅ [EXPERT RULE MATCH - PRIORITY 10400] Raideur du genou = [5-25] → 20% (coef: 0.75)
+   → Type: proposal
+   → Injury: Raideur du genou
+   → Rate calculé: 20
+📊 TOTAL: 3 propositions générées sur 3 lésions
+✅ Calcul automatique cumul avec 3 lésion(s)
+─── Cas 5 ───
+  Description: Polytraumatisme sensoriel + genou : vision + audition + plateau tibial
+  Input     : "baisse de l'acuité visuelle OD à 3/10 et OG à 8/10 après traumatisme oculaire direct ; surdité de perception bilatérale ..."
+  Sièges    : vision + audition + genou
+  Attendu   : Polytraumatisme (20-65%)
+  Obtenu    : ✅ Polytraumatisme (cumul 3 lésions)
+  Taux      : 62%
+  Type      : proposal
+  Polytrauma: ✅ | Taux OK: ✅ | Syst. trouvés: 2/3
+  Path      : Cumul Polytraumatisme
+  Justif    : <strong>🔗 POLYTRAUMATISME - CUMUL 3 LÉSIONS</strong><br><br><div style="background:#fff3cd; padding:15px; margin:10px 0; border-left:5px solid #ffc107;"><strong>📋 Lésions identifiées :</strong><br>L...
+
+🔧 localExpertAnalysis V3.3.280 - MULTI-SITES polytrauma fix, paragraph extraction, enrichment psych/audio
+🔍 [V3.3.162] TEXTE REÇU (nettoyé): contusion thoracique avec fractures des 4ème 5ème et 6ème côtes droites et séquelles de pneumothorax avec syndrome restrictif modéré ; splénectomie totale pour rupture traumatique de la rate ; contusi
+🔍 [V3.3.280] hasMultipleDistinctSites: 2 sites détectés (seuil=2) → MULTI-SITES
+🔍 DEBUG STEPPAGE DÉTAILLÉ:
+   - steppageMatch: false
+   - amyotrophieMIMatch: false
+   - fractureL1Match: false
+   - Texte analysé: contusion thoracique avec fractures des 4ème 5ème et 6ème côtes droites et séquelles de pneumothorax avec syndrome restrictif modéré ; splénectomie totale pour rupture traumatique de la rate ; contusion rénale gauche avec diminution de la fonction ré
+❌ STEPPAGE NON DÉTECTÉ - Conditions non remplies
+🔍 DEBUG DÉVIATION:
+   - deviationMatch: false
+   - mainContext: false
+   - Recherche dans: diviation NON trouvé
+🔍 [V3.3.155] Séquelles détectées: 5 [
+  'Fractures costales multiples',
+  'Hémo-pneumothorax drainé (séquelles)',
+  'Syndrome restrictif respiratoire / Capacité respiratoire diminuée',
+  'Contusion rénale avec cicatrice parenchymateuse',
+  'Splénectomie (ablation de la rate)'
+]
+🔍 V3.3.201k: isCumulDetected = true , lesionCount = 3
+⚠️ V3.3.201j: CUMUL DÉTECTÉ → SKIP regroupement par système, passage direct à extraction lésions individuelles
+🔍 DEBUG MÉTACARPIENS - Texte normalisé: contusion thoracique avec fractures 4eme 5eme et 6eme cotes droites et sequelles de pneumothorax avec syndrome restrictif modere ; splenectomie totale pour rupture traumatique rate ; contusion renale gauche avec diminution fonction renale homolateral erale accident de voiture cassure fissure bris fracture fissure bris fracture cassure bris fracture cassure fissure rachis dorsal colonne dorsale dorsales splenique spleno splenectomie rate spleno splenectomie rate splenique splenectomie rate splenique spleno rate splenique spleno rein nephrectomie nephrologie rein renal nephrologie rein renal nephrectomie vision vue acuite visuelle vision vue acuite visuelle av acuite visuelle vision de acuite acuite visuelle vision de acuite av vision de acuite av acuite visuelle
+🔍 DEBUG MÉTACARPIENS - hasMetacarpienWord: false
+🔍 DEBUG MÉTACARPIENS - hasSingleIndicator: false
+🔍 DEBUG MÉTACARPIENS - hasMultipleIndicator: true
+🔍 DEBUG MÉTACARPIENS - hasSpecificFingerEarly: false
+🔍 DEBUG MÉTACARPIENS - isMetacarpienSingleQueryEarly: false
+🔍 V3.3.139: Vérification cumul prioritaire...
+🔍 Query words: contusion, thoracique, avec, fractures, des, 4eme, 5eme, 6eme, cotes, droites
+🔍 Catégorie cumul trouvée: Cumuls de Lésions et Polytraumatismes
+🔍 Entrées avec searchTerms vérifiées: 51, meilleur score: 0.0%
+ℹ️ Aucun cumul prioritaire trouvé (similarité < 70%), continue avec analyse normale
+📋 Antécédents extraits (0): []
+🔍 isCumulDetected: true lesionCount: 3
+🔍 CUMUL DÉTECTÉ - Extraction des lésions individuelles
+📝 text original: contusion thoracique avec fractures des 4ème 5ème et 6ème côtes droites et séquelles de pneumothorax avec syndrome restrictif modéré ; splénectomie totale pour rupture traumatique de la rate ; contusion rénale gauche avec diminution de la fonction rénale homolatérale après accident de voiture
+📝 finalCleanedText: contusion thoracique avec fractures des 4ème 5ème et 6ème côtes droites et séquelles de pneumothorax avec syndrome restrictif modéré splénectomie totale pour rupture traumatique de la rate contusion rénale gauche avec diminution de la fonction rénale homolatérale après accident de voiture
+🔧 extractIndividualLesions V3.3.211 - avec Pattern 0C-ter + 0C-quater
+🔍 extractIndividualLesions - texte d'entrée: contusion thoracique avec fractures des 4ème 5ème et 6ème côtes droites et séquelles de pneumothorax avec syndrome restrictif modéré ; splénectomie totale pour rupture traumatique de la rate ; contusion rénale gauche avec diminution de la fonction rénale homolatérale après accident de voiture
+🔍 Pattern 0B - Extraction polytraumatisme membre (V3.3.201L):
+  fractureMatch: NULL
+  ligamentMatch: NULL
+  muscleMatch: NULL
+  raideurMatch: NULL
+  algiesMatch: NULL
+  deficitForceMatch: NULL
+  componentCount: 0
+  Condition activée: false
+❌ Pattern 0B NON ACTIVÉ: componentCount < 3
+✅ Pattern 8 (séparateur ;) détecté: [
+  'contusion thoracique avec fractures des 4eme 5eme et 6eme cotes droites et sequelles de pneumothorax avec syndrome restrictif modere',
+  'splenectomie totale pour rupture traumatique de la rate',
+  'contusion renale gauche avec diminution de la fonction renale homolaterale apres accident de voiture'
+]
+📋 Lésions extraites: [
+  'contusion thoracique avec fractures des 4eme 5eme et 6eme cotes droites et sequelles de pneumothorax avec syndrome restrictif modere',
+  'splenectomie totale pour rupture traumatique de la rate',
+  'contusion renale gauche avec diminution de la fonction renale homolaterale apres accident de voiture'
+] Nombre: 3
+✅ Au moins 2 lésions → Analyse séparée
+   🔧 V3.3.210: Enrichissement fractures costales: "contusion thoracique avec fractures des 4eme 5eme et 6eme cotes droites et sequelles de pneumothorax avec syndrome restrictif modere" → "contusion thoracique avec fractures des 4eme 5eme et 6eme cotes droites et sequelles de pneumothorax avec syndrome restrictif modere fracture cotes non compliquee gêne nombre sequelles respiratoires nevralgie intercostale"
+🔎 Analyse lésion "contusion thoracique avec fractures des 4eme 5eme et 6eme cotes droites et sequelles de pneumothorax avec syndrome restrictif modere" → enrichi: "contusion thoracique avec fractures des 4eme 5eme et 6eme cotes droites et sequelles de pneumothorax avec syndrome restrictif modere fracture cotes non compliquee gêne nombre sequelles respiratoires nevralgie intercostale" (processed: "contusion thoracique avec fractures des4eme5eme et6eme cotes droites et sequelles de pneumothorax avec syndrome restrictif modere fracture cotes non compliquee gêne nombre sequelles respiratoires nevralgie intercostale")
+🔍 [MÉTACARPIENS] Input brut: contusion thoracique avec fractures des4eme5eme et6eme cotes droites et sequelles de pneumothorax avec syndrome restrictif modere fracture cotes non compliquee gêne nombre sequelles respiratoires nevralgie intercostale
+🔍 [MÉTACARPIENS] hasMetaWord: false
+🔍 [MÉTACARPIENS] hasSingleOrPerte: false
+🔍 [MÉTACARPIENS] hasSpecificFinger: false
+🔍 [MÉTACARPIENS] hasCinq: true
+⚠️ [MÉTACARPIENS] Pas de dialogue - continuons analyse normale
+📋 Antécédents extraits (0): []
+🔍 [EARLY] Antécédents détectés: 0 - 
+🫁 [V3.3.230] TRAUMATISME THORACIQUE avec séquelles respiratoires détecté
+🫁 [V3.3.230] → Fracture de côtes non compliquée (selon gêne et nombre) | IPP: 15% | Sévérité: moyen
+   → Type: proposal
+   → Injury: Fracture de côtes non compliquée (selon gêne et nombre)
+   → Rate calculé: 15
+🔎 Analyse lésion "splenectomie totale pour rupture traumatique de la rate" → enrichi: "splenectomie totale pour rupture traumatique de la rate" (processed: "splenectomie totale pour rupture traumatique de la rate")
+🔍 [MÉTACARPIENS] Input brut: splenectomie totale pour rupture traumatique de la rate
+🔍 [MÉTACARPIENS] hasMetaWord: false
+🔍 [MÉTACARPIENS] hasSingleOrPerte: false
+🔍 [MÉTACARPIENS] hasSpecificFinger: false
+🔍 [MÉTACARPIENS] hasCinq: false
+⚠️ [MÉTACARPIENS] Pas de dialogue - continuons analyse normale
+📋 Antécédents extraits (0): []
+🔍 [EARLY] Antécédents détectés: 0 - 
+🔍 [DEBUG EXPERT RULE - EARLY TEST]
+Pattern: /contusion.*cerebrale|traumatisme.*crani.*contusion/i
+Context: /perte.*connaissance|frontale|temporale|parietale|breve|courte|surveillance.*neurologique/i
+NegativeContext: /spondylo|listthesis|glissement.*vertebral/i
+CleanText: "splenectomie totale pour rupture traumatique de la rate"
+patternMatchClean: false, contextMatchClean: false
+negContextMatchClean: false, negContextMatchWorking: false
+matchClean: false, matchWorking: false
+✅ [EXPERT RULE MATCH - PRIORITY 98] Splénectomie (Ablation de la rate) = [15-30] → 15% (coef: 0.00)
+   → Type: proposal
+   → Injury: Splénectomie (Ablation de la rate)
+   → Rate calculé: 15
+🔎 Analyse lésion "contusion renale gauche avec diminution de la fonction renale homolaterale apres accident de voiture" → enrichi: "contusion renale gauche avec diminution de la fonction renale homolaterale apres accident de voiture" (processed: "contusion renale gauche avec diminution de la fonction renale homolaterale apres accident de voiture")
+🔍 [MÉTACARPIENS] Input brut: contusion renale gauche avec diminution de la fonction renale homolaterale apres accident de voiture
+🔍 [MÉTACARPIENS] hasMetaWord: false
+🔍 [MÉTACARPIENS] hasSingleOrPerte: false
+🔍 [MÉTACARPIENS] hasSpecificFinger: false
+🔍 [MÉTACARPIENS] hasCinq: false
+⚠️ [MÉTACARPIENS] Pas de dialogue - continuons analyse normale
+📋 Antécédents extraits (0): []
+🔍 [EARLY] Antécédents détectés: 0 - 
+🔍 [DEBUG EXPERT RULE - EARLY TEST]
+Pattern: /contusion.*cerebrale|traumatisme.*crani.*contusion/i
+Context: /perte.*connaissance|frontale|temporale|parietale|breve|courte|surveillance.*neurologique/i
+NegativeContext: /spondylo|listthesis|glissement.*vertebral/i
+CleanText: "contusion renale gauche avec diminution de la fonction renale homolaterale apres accident de voiture"
+patternMatchClean: false, contextMatchClean: false
+negContextMatchClean: false, negContextMatchWorking: false
+matchClean: false, matchWorking: false
+✅ [EXPERT RULE MATCH - PRIORITY 96] Néphrectomie (ablation d'un rein), avec rein restant sain = 30%
+   → Type: proposal
+   → Injury: Néphrectomie (ablation d'un rein), avec rein restant sain
+   → Rate calculé: 30
+📊 TOTAL: 3 propositions générées sur 3 lésions
+✅ Calcul automatique cumul avec 3 lésion(s)
+─── Cas 6 ───
+  Description: Polytraumatisme thorax + abdomen : côtes + splénectomie + rein
+  Input     : "contusion thoracique avec fractures des 4ème 5ème et 6ème côtes droites et séquelles de pneumothorax avec syndrome restr..."
+  Sièges    : thorax + abdomen
+  Attendu   : Polytraumatisme (20-55%)
+  Obtenu    : ✅ Polytraumatisme (cumul 3 lésions)
+  Taux      : 50%
+  Type      : proposal
+  Polytrauma: ✅ | Taux OK: ✅ | Syst. trouvés: 2/2
+  Path      : Cumul Polytraumatisme
+  Justif    : <strong>🔗 POLYTRAUMATISME - CUMUL 3 LÉSIONS</strong><br><br><div style="background:#fff3cd; padding:15px; margin:10px 0; border-left:5px solid #ffc107;"><strong>📋 Lésions identifiées :</strong><br>L...
+
+🔧 localExpertAnalysis V3.3.280 - MULTI-SITES polytrauma fix, paragraph extraction, enrichment psych/audio
+🔍 [V3.3.162] TEXTE REÇU (nettoyé): raideur du rachis cervical post-traumatique avec limitation des rotations et syndrome cervical chronique ; tassement vertébral dorsal D12 avec cyphose résiduelle et douleurs intercostales ; hernie dis
+🔍 [V3.3.280] hasMultipleDistinctSites: 1 sites détectés (seuil=2) → site unique
+🔍 DEBUG STEPPAGE DÉTAILLÉ:
+   - steppageMatch: false
+   - amyotrophieMIMatch: false
+   - fractureL1Match: false
+   - Texte analysé: raideur du rachis cervical post-traumatique avec limitation des rotations et syndrome cervical chronique ; tassement vertébral dorsal D12 avec cyphose résiduelle et douleurs intercostales ; hernie discale lombaire L4-L5 post-traumatique avec sciatiqu
+❌ STEPPAGE NON DÉTECTÉ - Conditions non remplies
+🔍 DEBUG DÉVIATION:
+   - deviationMatch: false
+   - mainContext: false
+   - Recherche dans: diviation NON trouvé
+🔍 [V3.3.155] Séquelles détectées: 3 [
+  'Dorsalgie',
+  'Lombalgie chronique / Fracture tassement vertébrale L4',
+  'Hernie discale lombaire avec radiculalgie (sciatique/cruralgie)'
+]
+🦴 [V3.3.287] Fracture tassement vertébral → PAS de cumul (lésion rachidienne unique)
+🔍 V3.3.201k: isCumulDetected = false , lesionCount = 1
+🧠 [V3.3.214] TC check: hasTC=true, hasNeuro=false, hasFocal=false, neuroCount=0
+⚠️ POLYTRAUMATISME DÉTECTÉ: 3 séquelle(s)
+📚 TROUVÉ DANS BARÈME: "Dorsalgie" → "Trouble somatoforme douloureux persistant (algie psychogène) post-traumatique" (10-30%)
+📚 TROUVÉ DANS BARÈME: "Lombalgie chronique / Fracture tassement vertébrale L4" → "Fracture tassement vertébral lombaire non déplacée consolidée" (10-25%)
+📚 TROUVÉ DANS BARÈME: "Hernie discale lombaire avec radiculalgie (sciatique/cruralgie)" → "Hernie discale lombaire post-traumatique - Avec radiculalgie (sciatique ou cruralgie)" (15-35%)
+🔄 REGROUPEMENT PAR SYSTÈME: [ 'RACHIS: 15%' ]
+🧮 CALCUL BALTHAZAR (PAR SYSTÈME): [ 'RACHIS: 15%' ]
+📊 IPP GLOBAL CUMULÉ: 15%
+─── Cas 7 ───
+  Description: Polytraumatisme rachis triple étage : cervical + dorsal + lombaire
+  Input     : "raideur du rachis cervical post-traumatique avec limitation des rotations et syndrome cervical chronique ; tassement ver..."
+  Sièges    : rachis cervical + rachis dorsal + rachis lombaire
+  Attendu   : Polytraumatisme (20-50%)
+  Obtenu    : ✅ Polytraumatisme - 1 systèmes atteints - IPP global 15%
+  Taux      : 15%
+  Type      : proposal
+  Polytrauma: ✅ | Taux OK: ✅ | Syst. trouvés: 3/3
+  Path      : Polytraumatisme > Barème 1967
+  Justif    : <strong>🏥 POLYTRAUMATISME - CALCUL IPP (Barème 1967)</strong><br><br><strong>📋 3 séquelles post-traumatiques regroupées en 1 systèmes anatomiques :</strong><br><br><strong>A. SYSTÈME RACHIS</strong>...
+
+🔧 localExpertAnalysis V3.3.280 - MULTI-SITES polytrauma fix, paragraph extraction, enrichment psych/audio
+🔍 [V3.3.162] TEXTE REÇU (nettoyé): amputation de l'index de la main droite dominante avec ankylose du médius en position de flexion ; raideur du poignet droit avec limitation de la flexion-extension ; déficit sensitivo-moteur du nerf c
+🔍 [V3.3.280] hasMultipleDistinctSites: 1 sites détectés (seuil=2) → site unique
+🔍 DEBUG STEPPAGE DÉTAILLÉ:
+   - steppageMatch: false
+   - amyotrophieMIMatch: true
+   - fractureL1Match: false
+   - Texte analysé: amputation de l'index de la main droite dominante avec ankylose du médius en position de flexion ; raideur du poignet droit avec limitation de la flexion-extension ; déficit sensitivo-moteur du nerf cubital au coude droit avec griffe cubitale et amyo
+❌ STEPPAGE NON DÉTECTÉ - Conditions non remplies
+🔍 DEBUG DÉVIATION:
+   - deviationMatch: false
+   - mainContext: true
+   - Recherche dans: diviation NON trouvé
+🔍 [V3.3.155] Séquelles détectées: 4 [
+  'Paralysie du nerf cubital au coude',
+  'Amyotrophie de la main droite',
+  'Ankylose articulaire  en flexion',
+  'Raideur articulaire du coude'
+]
+🔍 V3.3.201k: isCumulDetected = true , lesionCount = 3
+⚠️ V3.3.201j: CUMUL DÉTECTÉ → SKIP regroupement par système, passage direct à extraction lésions individuelles
+🔍 DEBUG MÉTACARPIENS - Texte normalisé: amputation de l index $1 droit dominante avec ankylose medius en position de flexion ; raideur $1 droit limitation flexion extension ; deficit sensitivo moteur nerf cubital au $1 droit avec griffe cubitale et amyotrophie interosseux ecrasement main par machine industrielle ablation perte section amputation perte section amputation ablation section amputation ablation perte limitation restriction enraidissement raideur restriction enraidissement raideur limitation enraidissement raideur limitation restriction raideur complete blocage articulaire arthrodese ankylose blocage articulaire arthrodese ankylose raideur complete arthrodese ankylose raideur complete blocage articulaire metacarpe chirurgicale main chirurgicale main metacarpe phalange moyenne p2 doigt index deuxieme doigt index doigt index deuxieme doigt index phalange moyenne p2 deuxieme doigt index phalange moyenne p2 d2 vertebre dorsale d2 majeur phalange distale p3 d3 vertebre dorsale d3 medius phalange distale p3 d3 vertebre dorsale d3 medius majeur d3 vertebre dorsale d3 medius majeur phalange distale p3 medius phalange distale p3 d3 vertebre dorsale d3 phalange phalanges phalange proximale p1 phalange phalanges phalange proximale p1 nerveux neurologique paralysie nerf neurologique paralysie nerf nerveux paralysie nerf nerveux neurologique articulation coude $1 droit $1 gauche coude $1 droit $1 gauche coude articulation coude $1 gauche coude articulation coude $1 droit coude articulation coude $1 droit articulation poignet $1 droit $1 gauche poignet $1 droit $1 gauche poignet articulation poignet $1 gauche poignet articulation poignet $1 droit poignet articulation poignet $1 droit
+🔍 DEBUG MÉTACARPIENS - hasMetacarpienWord: false
+🔍 DEBUG MÉTACARPIENS - hasSingleIndicator: false
+🔍 DEBUG MÉTACARPIENS - hasMultipleIndicator: false
+🔍 DEBUG MÉTACARPIENS - hasSpecificFingerEarly: true
+🔍 DEBUG MÉTACARPIENS - isMetacarpienSingleQueryEarly: false
+🔍 V3.3.139: Vérification cumul prioritaire...
+🔍 Query words: amputation, index, main, droite, dominante, avec, ankylose, medius, position, flexion
+🔍 Catégorie cumul trouvée: Cumuls de Lésions et Polytraumatismes
+🔍 Entrées avec searchTerms vérifiées: 51, meilleur score: 0.0%
+ℹ️ Aucun cumul prioritaire trouvé (similarité < 70%), continue avec analyse normale
+📋 Antécédents extraits (0): []
+🔍 isCumulDetected: true lesionCount: 3
+🔍 CUMUL DÉTECTÉ - Extraction des lésions individuelles
+📝 text original: amputation de l'index de la main droite dominante avec ankylose du médius en position de flexion ; raideur du poignet droit avec limitation de la flexion-extension ; déficit sensitivo-moteur du nerf cubital au coude droit avec griffe cubitale et amyotrophie des interosseux après écrasement de la main par machine industrielle
+📝 finalCleanedText: amputation de l'index de la main droite dominante avec ankylose du médius en position de flexion droit avec limitation de la flexion-extension déficit sensitivo-moteur du nerf cubital au coude droit avec griffe cubitale et amyotrophie des interosseux après écrasement de la main par machine industrielle
+🔧 extractIndividualLesions V3.3.211 - avec Pattern 0C-ter + 0C-quater
+🔍 extractIndividualLesions - texte d'entrée: amputation de l'index de la main droite dominante avec ankylose du médius en position de flexion ; raideur du poignet droit avec limitation de la flexion-extension ; déficit sensitivo-moteur du nerf cubital au coude droit avec griffe cubitale et amyotrophie des interosseux après écrasement de la main par machine industrielle
+🔍 Pattern 0B - Extraction polytraumatisme membre (V3.3.201L):
+  fractureMatch: NULL
+  ligamentMatch: NULL
+  muscleMatch: NULL
+  raideurMatch: raideur du poignet
+  algiesMatch: NULL
+  deficitForceMatch: NULL
+  componentCount: 1
+  Condition activée: false
+❌ Pattern 0B NON ACTIVÉ: componentCount < 3
+✅ Pattern 8 (séparateur ;) détecté: [
+  'amputation de l index de la main droite dominante avec ankylose du medius en position de flexion',
+  'raideur du poignet droit avec limitation de la flexion extension',
+  'deficit sensitivo moteur du nerf cubital au coude droit avec griffe cubitale et amyotrophie des interosseux apres ecrasement de la main par machine industrielle'
+]
+📋 Lésions extraites: [
+  'amputation de l index de la main droite dominante avec ankylose du medius en position de flexion',
+  'raideur du poignet droit avec limitation de la flexion extension',
+  'deficit sensitivo moteur du nerf cubital au coude droit avec griffe cubitale et amyotrophie des interosseux apres ecrasement de la main par machine industrielle'
+] Nombre: 3
+✅ Au moins 2 lésions → Analyse séparée
+🔎 Analyse lésion "amputation de l index de la main droite dominante avec ankylose du medius en position de flexion" → enrichi: "amputation de l index de la main droite dominante avec ankylose du medius en position de flexion" (processed: "amputation de l index de la main droite dominante avec ankylose du medius en position de flexion")
+🔍 [MÉTACARPIENS] Input brut: amputation de l index de la main droite dominante avec ankylose du medius en position de flexion
+🔍 [MÉTACARPIENS] hasMetaWord: false
+🔍 [MÉTACARPIENS] hasSingleOrPerte: false
+🔍 [MÉTACARPIENS] hasSpecificFinger: true
+🔍 [MÉTACARPIENS] hasCinq: false
+⚠️ [MÉTACARPIENS] Pas de dialogue - continuons analyse normale
+📋 Antécédents extraits (0): []
+🔍 [EARLY] Antécédents détectés: 0 - 
+🔍 [DEBUG EXPERT RULE - EARLY TEST]
+Pattern: /contusion.*cerebrale|traumatisme.*crani.*contusion/i
+Context: /perte.*connaissance|frontale|temporale|parietale|breve|courte|surveillance.*neurologique/i
+NegativeContext: /spondylo|listthesis|glissement.*vertebral/i
+CleanText: "amputation de l index de la main droite dominante avec ankylose du medius en position de flexion"
+patternMatchClean: false, contextMatchClean: false
+negContextMatchClean: false, negContextMatchWorking: false
+matchClean: false, matchWorking: false
+✅ [EXPERT RULE MATCH - PRIORITY 99] Perte de l'index (3 phalanges) (Main Dominante) = 15%
+   → Type: proposal
+   → Injury: Perte de l'index (3 phalanges) (Main Dominante)
+   → Rate calculé: 15
+🔎 Analyse lésion "raideur du poignet droit avec limitation de la flexion extension" → enrichi: "raideur du poignet droit avec limitation de la flexion extension" (processed: "raideur du poignet droit avec limitation de la flexion extension")
+🔍 [MÉTACARPIENS] Input brut: raideur du poignet droit avec limitation de la flexion extension
+🔍 [MÉTACARPIENS] hasMetaWord: false
+🔍 [MÉTACARPIENS] hasSingleOrPerte: false
+🔍 [MÉTACARPIENS] hasSpecificFinger: false
+🔍 [MÉTACARPIENS] hasCinq: false
+⚠️ [MÉTACARPIENS] Pas de dialogue - continuons analyse normale
+📋 Antécédents extraits (0): []
+🔍 [EARLY] Antécédents détectés: 0 - 
+✅ [EXPERT RULE MATCH - PRIORITY 10400] Raideur du poignet - Flexion/extension limitée = [8-14] → 8% (coef: 0.00)
+   → Type: proposal
+   → Injury: Raideur du poignet - Flexion/extension limitée
+   → Rate calculé: 8
+   🔧 V3.3.281: Enrichissement nerf cubital: "deficit sensitivo moteur du nerf cubital au coude droit avec griffe cubitale et amyotrophie des interosseux apres ecrasement de la main par machine industrielle" → "deficit sensitivo moteur du nerf cubital au coude droit avec griffe cubitale et amyotrophie des interosseux apres ecrasement de la main par machine industrielle paralysie nerf cubital au poignet peripherique nerfs membre superieur griffe cubitale interosseux deficit adduction doigts"
+🔎 Analyse lésion "deficit sensitivo moteur du nerf cubital au coude droit avec griffe cubitale et amyotrophie des interosseux apres ecrasement de la main par machine industrielle" → enrichi: "deficit sensitivo moteur du nerf cubital au coude droit avec griffe cubitale et amyotrophie des interosseux apres ecrasement de la main par machine industrielle paralysie nerf cubital au poignet peripherique nerfs membre superieur griffe cubitale interosseux deficit adduction doigts" (processed: "deficit sensitivo moteur du nerf cubital au coude droit avec griffe cubitale et amyotrophie des interosseux apres ecrasement de la main par machine industrielle paralysie nerf cubital au poignet peripherique nerfs membre superieur griffe cubitale interosseux deficit adduction doigts")
+🔍 [MÉTACARPIENS] Input brut: deficit sensitivo moteur du nerf cubital au coude droit avec griffe cubitale et amyotrophie des interosseux apres ecrasement de la main par machine industrielle paralysie nerf cubital au poignet peripherique nerfs membre superieur griffe cubitale interosseux deficit adduction doigts
+🔍 [MÉTACARPIENS] hasMetaWord: false
+🔍 [MÉTACARPIENS] hasSingleOrPerte: false
+🔍 [MÉTACARPIENS] hasSpecificFinger: false
+🔍 [MÉTACARPIENS] hasCinq: false
+⚠️ [MÉTACARPIENS] Pas de dialogue - continuons analyse normale
+📋 Antécédents extraits (0): []
+🔍 [EARLY] Antécédents détectés: 0 - 
+🔍 [DEBUG EXPERT RULE - EARLY TEST]
+Pattern: /contusion.*cerebrale|traumatisme.*crani.*contusion/i
+Context: /perte.*connaissance|frontale|temporale|parietale|breve|courte|surveillance.*neurologique/i
+NegativeContext: /spondylo|listthesis|glissement.*vertebral/i
+CleanText: "deficit sensitivo moteur du nerf cubital au coude droit avec griffe cubitale et amyotrophie des interosseux apres ecrasement de la main par machine industrielle paralysie nerf cubital au poignet peripherique nerfs membre superieur griffe cubitale interosseux deficit adduction doigts"
+patternMatchClean: false, contextMatchClean: false
+negContextMatchClean: false, negContextMatchWorking: false
+matchClean: false, matchWorking: false
+✅ [EXPERT RULE MATCH - PRIORITY 99] Paralysie du nerf cubital - Au bras (droite) = [25-35] → 30% (coef: 0.50)
+   → Type: proposal
+   → Injury: Paralysie du nerf cubital - Au bras (droite)
+   → Rate calculé: 30
+📊 TOTAL: 3 propositions générées sur 3 lésions
+✅ Calcul automatique cumul avec 3 lésion(s)
+─── Cas 8 ───
+  Description: Polytraumatisme main dominante : amputation + ankylose + nerf cubital
+  Input     : "amputation de l'index de la main droite dominante avec ankylose du médius en position de flexion ; raideur du poignet dr..."
+  Sièges    : main + poignet + nerf
+  Attendu   : Polytraumatisme (20-62%)
+  Obtenu    : ✅ Polytraumatisme (cumul 3 lésions)
+  Taux      : 45%
+  Type      : proposal
+  Polytrauma: ✅ | Taux OK: ✅ | Syst. trouvés: 3/3
+  Path      : Cumul Polytraumatisme
+  Justif    : <strong>🔗 POLYTRAUMATISME - CUMUL 3 LÉSIONS</strong><br><br><div style="background:#fff3cd; padding:15px; margin:10px 0; border-left:5px solid #ffc107;"><strong>📋 Lésions identifiées :</strong><br>L...
+
+🔧 localExpertAnalysis V3.3.280 - MULTI-SITES polytrauma fix, paragraph extraction, enrichment psych/audio
+🔍 [V3.3.162] TEXTE REÇU (nettoyé): fracture bimalléolaire de la cheville gauche opérée avec raideur résiduelle et instabilité en varus ; fracture du plateau tibial externe du genou droit avec déviation axiale en valgus et gonarthrose d
+🔍 [V3.3.280] hasMultipleDistinctSites: 1 sites détectés (seuil=2) → site unique
+🔍 DEBUG STEPPAGE DÉTAILLÉ:
+   - steppageMatch: false
+   - amyotrophieMIMatch: false
+   - fractureL1Match: false
+   - Texte analysé: fracture bimalléolaire de la cheville gauche opérée avec raideur résiduelle et instabilité en varus ; fracture du plateau tibial externe du genou droit avec déviation axiale en valgus et gonarthrose débutante ; boiterie bilatérale nécessitant l'utili
+❌ STEPPAGE NON DÉTECTÉ - Conditions non remplies
+🔍 DEBUG DÉVIATION:
+   - deviationMatch: false
+   - mainContext: false
+   - Recherche dans: diviation NON trouvé
+🔍 [V3.3.155] Séquelles détectées: 4 [
+  'Fracture plateau tibial (avec raideur)',
+  'Raideur articulaire du genou',
+  'Boiterie / Marche avec aide technique (canne, béquille)',
+  'Instabilité articulaire (cheville/genou/AMP)'
+]
+🦴 [V3.3.227] Fracture fémur/tibia + raideur genou → PAS de cumul (raideur = séquelle)
+🔍 V3.3.201k: isCumulDetected = false , lesionCount = 1
+🧠 [V3.3.214] TC check: hasTC=false, hasNeuro=false, hasFocal=false, neuroCount=0
+⚠️ POLYTRAUMATISME DÉTECTÉ: 4 séquelle(s)
+📚 TROUVÉ DANS BARÈME: "Fracture plateau tibial (avec raideur)" → "Fracture des plateaux tibiaux - Avec déviation et/ou raideur" (10-30%)
+📚 TROUVÉ DANS BARÈME: "Raideur articulaire du genou" → "Fracture de l'extrémité inférieure du fémur - Avec raideur du genou" (15-30%)
+📚 TROUVÉ DANS BARÈME: "Instabilité articulaire (cheville/genou/AMP)" → "Instabilité chronique de la cheville (séquelle d'entorse)" (5-15%)
+🔄 REGROUPEMENT PAR SYSTÈME: [ 'MEMBRE_INFERIEUR: 19%' ]
+🧮 CALCUL BALTHAZAR (PAR SYSTÈME): [ 'MEMBRE_INFERIEUR: 19%' ]
+📊 IPP GLOBAL CUMULÉ: 19%
+─── Cas 9 ───
+  Description: Polytraumatisme 2 MI bilatéral : cheville gauche + genou droit
+  Input     : "fracture bimalléolaire de la cheville gauche opérée avec raideur résiduelle et instabilité en varus ; fracture du platea..."
+  Sièges    : cheville + genou
+  Attendu   : Polytraumatisme (20-68%)
+  Obtenu    : ✅ Polytraumatisme - 1 systèmes atteints - IPP global 19%
+  Taux      : 19%
+  Type      : proposal
+  Polytrauma: ✅ | Taux OK: ✅ | Syst. trouvés: 2/2
+  Path      : Polytraumatisme > Barème 1967
+  Justif    : <strong>🏥 POLYTRAUMATISME - CALCUL IPP (Barème 1967)</strong><br><br><strong>📋 4 séquelles post-traumatiques regroupées en 1 systèmes anatomiques :</strong><br><br><strong>A. SYSTÈME MEMBRE INFERIEU...
+
+🔧 localExpertAnalysis V3.3.280 - MULTI-SITES polytrauma fix, paragraph extraction, enrichment psych/audio
+🔍 [V3.3.162] TEXTE REÇU (nettoyé): traumatisme crânien grave avec déficit cognitif séquellaire troubles de mémoire et de concentration et céphalées chroniques quotidiennes ; fracture diaphysaire du fémur gauche ostéosynthésée avec cal 
+🔍 [V3.3.280] hasMultipleDistinctSites: 3 sites détectés (seuil=2) → MULTI-SITES
+🔍 DEBUG STEPPAGE DÉTAILLÉ:
+   - steppageMatch: false
+   - amyotrophieMIMatch: false
+   - fractureL1Match: false
+   - Texte analysé: traumatisme crânien grave avec déficit cognitif séquellaire troubles de mémoire et de concentration et céphalées chroniques quotidiennes ; fracture diaphysaire du fémur gauche ostéosynthésée avec cal vicieux et raccourcissement de 2 cm et boiterie ; 
+❌ STEPPAGE NON DÉTECTÉ - Conditions non remplies
+🔍 DEBUG DÉVIATION:
+   - deviationMatch: false
+   - mainContext: false
+   - Recherche dans: diviation NON trouvé
+🔍 [V3.3.155] Séquelles détectées: 7 [
+  'Céphalées post-traumatiques chroniques',
+  'Fracture diaphysaire du fémur',
+  'Déformation osseuse séquellaire (cal vicieux) (fémur)',
+  'Boiterie',
+  'Déformation osseuse séquellaire (cal vicieux) (fémur)',
+  'Syndrome dépressif réactionnel post-traumatique',
+  'Troubles du sommeil post-traumatiques'
+]
+🔍 V3.3.201k: isCumulDetected = true , lesionCount = 3
+⚠️ V3.3.201j: CUMUL DÉTECTÉ → SKIP regroupement par système, passage direct à extraction lésions individuelles
+🔍 DEBUG MÉTACARPIENS - Texte normalisé: traumatisme cranien important avec deficit cognitif sequellaire troubles de memoire et de concentration et cephalees chroniques quotidiennes ; fracture diaphysaire femur gauche osteosynthesee avec cal vicieux et raccourcissement de 2 cm et boiterie ; syndrome depressif reactionnel post traumatique majeur avec trouble sommeil isolement social et traitement antidepresseur au long cours cassure fissure bris fracture fissure bris fracture cassure bris fracture cassure fissure consolidation vicieuse malunion defaut de consolidation cal vicieux malunion defaut de consolidation cal vicieux consolidation vicieuse defaut de consolidation cal vicieux consolidation vicieuse malunion medius phalange distale p3 d3 vertebre dorsale d3 medius majeur d3 vertebre dorsale d3 medius majeur phalange distale p3 medius phalange distale p3 d3 vertebre dorsale d3 phalange phalanges phalange proximale p1 hanche coxo femorale articulation hanche claudication trouble marche demarche boitante claudication boiterie demarche boitante claudication boiterie trouble marche
+🔍 DEBUG MÉTACARPIENS - hasMetacarpienWord: false
+🔍 DEBUG MÉTACARPIENS - hasSingleIndicator: false
+🔍 DEBUG MÉTACARPIENS - hasMultipleIndicator: false
+🔍 DEBUG MÉTACARPIENS - hasSpecificFingerEarly: true
+🔍 DEBUG MÉTACARPIENS - isMetacarpienSingleQueryEarly: false
+🔍 V3.3.139: Vérification cumul prioritaire...
+🔍 Query words: traumatisme, cranien, grave, avec, deficit, cognitif, sequellaire, troubles, memoire, concentration
+🔍 Catégorie cumul trouvée: Cumuls de Lésions et Polytraumatismes
+🔍 Entrées avec searchTerms vérifiées: 51, meilleur score: 0.0%
+ℹ️ Aucun cumul prioritaire trouvé (similarité < 70%), continue avec analyse normale
+📋 Antécédents extraits (0): []
+🔍 isCumulDetected: true lesionCount: 3
+🔍 CUMUL DÉTECTÉ - Extraction des lésions individuelles
+📝 text original: traumatisme crânien grave avec déficit cognitif séquellaire troubles de mémoire et de concentration et céphalées chroniques quotidiennes ; fracture diaphysaire du fémur gauche ostéosynthésée avec cal vicieux et raccourcissement de 2 cm et boiterie ; syndrome dépressif réactionnel post-traumatique majeur avec trouble du sommeil isolement social et traitement antidépresseur au long cours
+📝 finalCleanedText: traumatisme crânien grave avec déficit cognitif séquellaire troubles de mémoire et de concentration et céphalées chroniques quotidiennes fracture diaphysaire du fémur gauche ostéosynthésée avec cal vicieux et raccourcissement de 2 cm et boiterie syndrome dépressif réactionnel post-traumatique majeur avec trouble du sommeil isolement social et traitement antidépresseur au long cours
+🔧 extractIndividualLesions V3.3.211 - avec Pattern 0C-ter + 0C-quater
+🔍 extractIndividualLesions - texte d'entrée: traumatisme crânien grave avec déficit cognitif séquellaire troubles de mémoire et de concentration et céphalées chroniques quotidiennes ; fracture diaphysaire du fémur gauche ostéosynthésée avec cal vicieux et raccourcissement de 2 cm et boiterie ; syndrome dépressif réactionnel post-traumatique majeur avec trouble du sommeil isolement social et traitement antidépresseur au long cours
+🔍 Pattern 0B - Extraction polytraumatisme membre (V3.3.201L):
+  fractureMatch: NULL
+  ligamentMatch: NULL
+  muscleMatch: NULL
+  raideurMatch: NULL
+  algiesMatch: NULL
+  deficitForceMatch: NULL
+  componentCount: 0
+  Condition activée: false
+❌ Pattern 0B NON ACTIVÉ: componentCount < 3
+✅ Pattern 8 (séparateur ;) détecté: [
+  'traumatisme cranien grave avec deficit cognitif sequellaire troubles de memoire et de concentration et cephalees chroniques quotidiennes',
+  'fracture diaphysaire du femur gauche osteosynthesee avec cal vicieux et raccourcissement de 2 cm et boiterie',
+  'syndrome depressif reactionnel post traumatique majeur avec trouble du sommeil isolement social et traitement antidepresseur au long cours'
+]
+📋 Lésions extraites: [
+  'traumatisme cranien grave avec deficit cognitif sequellaire troubles de memoire et de concentration et cephalees chroniques quotidiennes',
+  'fracture diaphysaire du femur gauche osteosynthesee avec cal vicieux et raccourcissement de 2 cm et boiterie',
+  'syndrome depressif reactionnel post traumatique majeur avec trouble du sommeil isolement social et traitement antidepresseur au long cours'
+] Nombre: 3
+✅ Au moins 2 lésions → Analyse séparée
+🔎 Analyse lésion "traumatisme cranien grave avec deficit cognitif sequellaire troubles de memoire et de concentration et cephalees chroniques quotidiennes" → enrichi: "traumatisme cranien grave avec deficit cognitif sequellaire troubles de memoire et de concentration et cephalees chroniques quotidiennes" (processed: "traumatisme cranien grave avec deficit cognitif sequellaire troubles de memoire et de concentration et cephalees chroniques quotidiennes")
+🔍 [MÉTACARPIENS] Input brut: traumatisme cranien grave avec deficit cognitif sequellaire troubles de memoire et de concentration et cephalees chroniques quotidiennes
+🔍 [MÉTACARPIENS] hasMetaWord: false
+🔍 [MÉTACARPIENS] hasSingleOrPerte: false
+🔍 [MÉTACARPIENS] hasSpecificFinger: false
+🔍 [MÉTACARPIENS] hasCinq: false
+⚠️ [MÉTACARPIENS] Pas de dialogue - continuons analyse normale
+📋 Antécédents extraits (0): []
+🔍 [EARLY] Antécédents détectés: 0 - 
+🔍 [DEBUG EXPERT RULE - EARLY TEST]
+Pattern: /contusion.*cerebrale|traumatisme.*crani.*contusion/i
+Context: /perte.*connaissance|frontale|temporale|parietale|breve|courte|surveillance.*neurologique/i
+NegativeContext: /spondylo|listthesis|glissement.*vertebral/i
+CleanText: "traumatisme cranien grave avec deficit cognitif sequellaire troubles de memoire et de concentration et cephalees chroniques quotidiennes"
+patternMatchClean: false, contextMatchClean: false
+negContextMatchClean: false, negContextMatchWorking: false
+matchClean: false, matchWorking: false
+✅ [EXPERT RULE MATCH - PRIORITY 1005] Déficits cognitifs post-traumatiques (mémoire, attention, fonctions exécutives) = [10-40] → 33% (coef: 0.75)
+   → Type: proposal
+   → Injury: Déficits cognitifs post-traumatiques (mémoire, attention, fonctions exécutives)
+   → Rate calculé: 33
+🔎 Analyse lésion "fracture diaphysaire du femur gauche osteosynthesee avec cal vicieux et raccourcissement de 2 cm et boiterie" → enrichi: "fracture diaphysaire du femur gauche osteosynthesee avec cal vicieux et raccourcissement de 2 cm et boiterie" (processed: "fracture diaphysaire du femur gauche osteosynthesee avec cal vicieux et raccourcissement de2 cm et boiterie")
+🔍 [MÉTACARPIENS] Input brut: fracture diaphysaire du femur gauche osteosynthesee avec cal vicieux et raccourcissement de2 cm et boiterie
+🔍 [MÉTACARPIENS] hasMetaWord: false
+🔍 [MÉTACARPIENS] hasSingleOrPerte: false
+🔍 [MÉTACARPIENS] hasSpecificFinger: false
+🔍 [MÉTACARPIENS] hasCinq: false
+⚠️ [MÉTACARPIENS] Pas de dialogue - continuons analyse normale
+📋 Antécédents extraits (0): []
+🔍 [EARLY] Antécédents détectés: 0 - 
+🔍 [DEBUG EXPERT RULE - EARLY TEST]
+Pattern: /contusion.*cerebrale|traumatisme.*crani.*contusion/i
+Context: /perte.*connaissance|frontale|temporale|parietale|breve|courte|surveillance.*neurologique/i
+NegativeContext: /spondylo|listthesis|glissement.*vertebral/i
+CleanText: "fracture diaphysaire du femur gauche osteosynthesee avec cal vicieux et raccourcissement de2 cm et boiterie"
+patternMatchClean: false, contextMatchClean: false
+negContextMatchClean: false, negContextMatchWorking: false
+matchClean: false, matchWorking: false
+✅ [EXPERT RULE MATCH - PRIORITY 998] Fracture diaphysaire du fémur = [10-30] → 10% (coef: 0.00)
+   → Type: proposal
+   → Injury: Fracture diaphysaire du fémur
+   → Rate calculé: 10
+   🔧 V3.3.280: Enrichissement dépression: "syndrome depressif reactionnel post traumatique majeur avec trouble du sommeil isolement social et traitement antidepresseur au long cours" → "syndrome depressif reactionnel post traumatique majeur avec trouble du sommeil isolement social et traitement antidepresseur au long cours depression reactionnelle post-traumatique syndrome depressif troubles humeur psychiatrique"
+🔎 Analyse lésion "syndrome depressif reactionnel post traumatique majeur avec trouble du sommeil isolement social et traitement antidepresseur au long cours" → enrichi: "syndrome depressif reactionnel post traumatique majeur avec trouble du sommeil isolement social et traitement antidepresseur au long cours depression reactionnelle post-traumatique syndrome depressif troubles humeur psychiatrique" (processed: "syndrome depressif reactionnel post traumatique majeur avec trouble du sommeil isolement social et traitement antidepresseur au long cours depression reactionnelle post-traumatique syndrome depressif troubles humeur psychiatrique")
+🔍 [MÉTACARPIENS] Input brut: syndrome depressif reactionnel post traumatique majeur avec trouble du sommeil isolement social et traitement antidepresseur au long cours depression reactionnelle post-traumatique syndrome depressif troubles humeur psychiatrique
+🔍 [MÉTACARPIENS] hasMetaWord: false
+🔍 [MÉTACARPIENS] hasSingleOrPerte: false
+🔍 [MÉTACARPIENS] hasSpecificFinger: true
+🔍 [MÉTACARPIENS] hasCinq: false
+⚠️ [MÉTACARPIENS] Pas de dialogue - continuons analyse normale
+📋 Antécédents extraits (0): []
+🔍 [EARLY] Antécédents détectés: 0 - 
+🔍 [DEBUG EXPERT RULE - EARLY TEST]
+Pattern: /contusion.*cerebrale|traumatisme.*crani.*contusion/i
+Context: /perte.*connaissance|frontale|temporale|parietale|breve|courte|surveillance.*neurologique/i
+NegativeContext: /spondylo|listthesis|glissement.*vertebral/i
+CleanText: "syndrome depressif reactionnel post traumatique majeur avec trouble du sommeil isolement social et traitement antidepresseur au long cours depression reactionnelle post traumatique syndrome depressif troubles humeur psychiatrique"
+patternMatchClean: false, contextMatchClean: false
+negContextMatchClean: false, negContextMatchWorking: false
+matchClean: false, matchWorking: false
+✅ [EXPERT RULE MATCH - PRIORITY 997] Trouble de stress post-traumatique (TSPT) = [10-50] → 10% (coef: 0.00)
+   → Type: proposal
+   → Injury: Trouble de stress post-traumatique (TSPT)
+   → Rate calculé: 10
+📊 TOTAL: 3 propositions générées sur 3 lésions
+✅ Calcul automatique cumul avec 3 lésion(s)
+─── Cas 10 ───
+  Description: Polytraumatisme neuro + ortho + psy : TC grave + fémur + dépression
+  Input     : "traumatisme crânien grave avec déficit cognitif séquellaire troubles de mémoire et de concentration et céphalées chroniq..."
+  Sièges    : crâne + fémur + psychiatrique
+  Attendu   : Polytraumatisme (25-70%)
+  Obtenu    : ✅ Polytraumatisme (cumul 3 lésions)
+  Taux      : 46%
+  Type      : proposal
+  Polytrauma: ✅ | Taux OK: ✅ | Syst. trouvés: 1/3
+  Path      : Cumul Polytraumatisme
+  Justif    : <strong>🔗 POLYTRAUMATISME - CUMUL 3 LÉSIONS</strong><br><br><div style="background:#fff3cd; padding:15px; margin:10px 0; border-left:5px solid #ffc107;"><strong>📋 Lésions identifiées :</strong><br>L...
+
+═══════════════════════════════════════════════════════════════
+  RÉSULTAT GLOBAL : 10/10 trouvés | 0/10 échoués
+═══════════════════════════════════════════════════════════════
