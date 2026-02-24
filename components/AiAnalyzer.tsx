@@ -9325,6 +9325,71 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             searchTerms: ['Néphrectomie (ablation d\'un rein), avec rein restant sain'],
             priority: 96
         },
+        // 🆕 V3.3.295: Contusion rénale SANS néphrectomie
+        {
+            pattern: /contusion.*r[eé]nal|rupture.*r[eé]nal|fracture.*rein|l[eé]sion.*r[eé]nal|cicatrice.*parenchymateuse.*r[eé]nal/i,
+            context: /traumat|accident|r[eé]nal|rein|h[eé]maturie|parenchymat|grade/i,
+            negativeContext: /n[eé]phrectomie|ablation.*rein|ex[eé]r[eè]se.*rein/i,
+            searchTerms: ['Contusions et ruptures du rein (séquelles)'],
+            priority: 97
+        },
+        // 🆕 V3.3.295: Résection intestinale grêle
+        {
+            pattern: /r[eé]section.*(?:intestinal|gr[eê]le|j[eé]junal|il[eé]al)|ent[eé]rectomie|ablation.*gr[eê]le/i,
+            context: /traumat|accident|intestin|gr[eê]le|isch[eé]mi|n[eé]crose|abdom/i,
+            searchTerms: ['Résection intestinale grêle courte (<50 cm)'],
+            priority: 97
+        },
+        // 🆕 V3.3.295: Hernie inguinale irréductible
+        {
+            pattern: /hernie.*inguinal.*irr[eé]ductible|irr[eé]ductible.*hernie.*inguinal/i,
+            context: /traumat|accident|effort|abdom|tum[eé]faction/i,
+            searchTerms: ['Hernie inguinale irréductible'],
+            priority: 97
+        },
+        // 🆕 V3.3.295: Hernie inguinale réductible
+        {
+            pattern: /hernie.*inguinal|inguinal.*hernie/i,
+            context: /traumat|accident|effort|abdom/i,
+            negativeContext: /irr[eé]ductible/i,
+            searchTerms: ['Hernie inguinale réductible bien maintenue'],
+            priority: 95
+        },
+        // 🆕 V3.3.295: Incontinence fécale par lésion sphinctérienne
+        {
+            pattern: /incontinence.*(?:f[eé]cal|anale|mati[eè]re)|r[eé]tention.*f[eé]cal|l[eé]sion.*sphincter.*anal/i,
+            context: /traumat|accident|p[eé]rin[eé]|pudendal|sphincter|bassin/i,
+            searchTerms: ['Incontinence ou rétention fécale par lésions du sphincter anal'],
+            priority: 98
+        },
+        // 🆕 V3.3.295: Sténose biliaire post-traumatique
+        {
+            pattern: /st[eé]nose.*biliaire|obstruction.*chol[eé]doque|st[eé]nose.*chol[eé]doque/i,
+            context: /traumat|post.*traumat|contusion|h[eé]pat|ict[èe]re/i,
+            searchTerms: ['Sténose biliaire post-traumatique'],
+            priority: 97
+        },
+        // 🆕 V3.3.295: Névralgie pariétale abdominale post-chirurgicale
+        {
+            pattern: /n[eé]vralgie.*pari[eé]tal|nerf.*ilio[- ]?(?:inguinal|hypogastrique)|douleur.*neuropathique.*(?:pari[eé]tal|abdom)/i,
+            context: /traumat|post.*(?:op|chirurg)|laparotomie|abdom/i,
+            searchTerms: ['Névralgie pariétale post-traumatique ou post-chirurgicale (nerf ilio-inguinal, ilio-hypogastrique)'],
+            priority: 97
+        },
+        // 🆕 V3.3.295: Syndrome intestin irritable post-traumatique (SII-PT)
+        {
+            pattern: /syndrome.*intestin.*irritable|SII.*post.*traumat|colopathie.*fonctionnelle.*post.*traumat|intestin.*irritable.*post.*traumat/i,
+            context: /traumat|accident|post.*traumat|abdom|contusion/i,
+            searchTerms: ['Syndrome de l\'intestin irritable post-traumatique (SII-PT)'],
+            priority: 97
+        },
+        // 🆕 V3.3.295: Fistule biliaire post-traumatique
+        {
+            pattern: /fistule.*biliaire|fistule.*h[eé]patique|[eé]coulement.*bili(?:eux|aire)/i,
+            context: /traumat|post.*traumat|contusion|h[eé]pat|foie/i,
+            searchTerms: ['Fistules biliaires ou purulentes (Contusion du foie)'],
+            priority: 97
+        },
         {
             pattern: /gastrectomie|chirurgie.*gastrique|perforation.*estomac/i,
             context: /traumatisme|estomac|gastrique/i,
@@ -9955,7 +10020,16 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             term.includes("pancréatite") ||
             term.includes("Dumping syndrome") ||
             term.includes("Fistules intestinales") ||
-            term.includes("colectomie")
+            term.includes("colectomie") ||
+            // 🆕 V3.3.295: Viscères abdominaux supplémentaires = prioritaires
+            term.includes("Contusions et ruptures du rein") ||
+            term.includes("Résection intestinale") ||
+            term.includes("Hernie inguinale") ||
+            term.includes("Incontinence") ||
+            term.includes("Sténose biliaire") ||
+            term.includes("Névralgie pariétale") ||
+            term.includes("intestin irritable") ||
+            term.includes("Fistules biliaires")
         );
         
         if (isEarlyCumulDetected && isSimpleRule) {
@@ -14270,7 +14344,7 @@ const hasMultipleDistinctSites = (text: string): boolean => {
  * @param isExactMatch - Si true, cherche une correspondance exacte par nom (pour résoudre ambiguïté)
  */
 export const localExpertAnalysis = (text: string, externalKeywords?: string[], isExactMatch: boolean = false): LocalAnalysisResult => {
-    console.log('🔧 localExpertAnalysis V3.3.294 - visceral expert rules (néphrectomie, cholécystectomie, éventration)');
+    console.log('🔧 localExpertAnalysis V3.3.295 - visceral expert rules expanded (résection grêle, hernie, incontinence, sténose biliaire, SII, fistule biliaire)');
 
     // 🔴 V3.3.162: NETTOYAGE TEXTE - Supprime caractères invisibles (zero-width space, etc.)
     // Ces caractères peuvent casser les regex et empêcher la détection
@@ -16882,8 +16956,27 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
         });
     }
     
-    // Contusion hépatique / Rupture foie
-    if (/contusion.*h[ée]patique|rupture.*foie|l[ée]sion.*foie/i.test(text)) {
+    // 🆕 V3.3.295: Sténose biliaire post-traumatique (PRIORITAIRE sur contusion hépatique)
+    if (/st[eé]nose.*biliaire|obstruction.*chol[eé]doque|ict[eè]re.*r[eé]cidivant.*biliaire/i.test(text)) {
+        detectedSequelae.push({
+            name: 'Sténose biliaire post-traumatique',
+            keywords: ['sténose biliaire', 'cholédoque', 'angiocholite'],
+            context: text.match(/(st[eé]nose.*biliaire|angiocholite)[^.;]*/i)?.[0] || ''
+        });
+    }
+    
+    // 🆕 V3.3.295: Fistule biliaire post-traumatique (PRIORITAIRE sur contusion hépatique)
+    if (/fistule.*biliaire|fistule.*h[eé]patique|[eé]coulement.*bili(?:eux|aire)/i.test(text)) {
+        detectedSequelae.push({
+            name: 'Fistule biliaire post-traumatique',
+            keywords: ['fistule biliaire', 'écoulement bilieux', 'fistule hépatique'],
+            context: text.match(/(fistule.*biliaire|[eé]coulement.*bili)[^.;]*/i)?.[0] || ''
+        });
+    }
+    
+    // Contusion hépatique / Rupture foie - SEULEMENT si aucune pathologie hépatique spécifique déjà détectée
+    const hasSpecificHepaticSequela = detectedSequelae.some(s => /st[eé]nose.*biliaire|fistule.*biliaire/i.test(s.name));
+    if (!hasSpecificHepaticSequela && /contusion.*h[ée]patique|rupture.*foie|l[ée]sion.*foie/i.test(text)) {
         detectedSequelae.push({
             name: 'Contusion hépatique / Lésion du foie',
             keywords: ['contusion hépatique', 'rupture foie'],
@@ -18192,7 +18285,7 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
                 }
                 
                 // ABDOMEN (toutes atteintes abdominales = 1 seul taux)
-                else if (/contusion.*r[ée]nale|spl[ée]nectomie|contusion.*h[ée]patique|n[ée]phrectomie|chol[ée]cystectomie|[ée]ventration|h[ée]patectomie|pancr[ée]at/i.test(seq.name)) {
+                else if (/contusion.*r[ée]nale|spl[ée]nectomie|contusion.*h[ée]patique|n[ée]phrectomie|chol[ée]cystectomie|[ée]ventration|h[ée]patectomie|pancr[ée]at|st[eé]nose.*biliaire|fistule.*biliaire/i.test(seq.name)) {
                     system = 'ABDOMEN';
                     if (/spl[ée]nectomie/i.test(seq.name)) {
                         rate = 20; explanation = 'Abdomen : Splénectomie (ablation de la rate)';
@@ -18206,6 +18299,10 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
                         rate = 20; explanation = 'Abdomen : Hépatectomie partielle post-traumatique';
                     } else if (/pancr[ée]at/i.test(seq.name)) {
                         rate = 25; explanation = 'Abdomen : Séquelles de pancréatite aiguë post-traumatique';
+                    } else if (/st[eé]nose.*biliaire/i.test(seq.name)) {
+                        rate = 30; explanation = 'Abdomen : Sténose biliaire post-traumatique';
+                    } else if (/fistule.*biliaire/i.test(seq.name)) {
+                        rate = 35; explanation = 'Abdomen : Fistule biliaire post-traumatique (contusion du foie)';
                     } else if (/contusion.*r[ée]nale/i.test(seq.name)) {
                         rate = 5; explanation = 'Abdomen : Contusion rénale avec cicatrice parenchymateuse (sans IR ni HTA)';
                     } else {
