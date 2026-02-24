@@ -1,7 +1,8 @@
 import { disabilityData } from '../data/disabilityRates.new';
 import { Injury, InjuryCategory, InjurySubcategory } from '../types';
+import { fuzzySearchBareme, fuzzyAutoThreshold, FuzzyMatch, FuzzySearchResult } from '../utils/fuzzyMatch';
 
-// Version: 3.3.230 - Handler traumatisme thoracique + fix barème matching (DB: .new avec catégorie Cumuls)
+// Version: 3.3.300 - Fuzzy matching fallback + CI test runner + suggestions intelligentes
 // --- Types for Local Expert System ---
 export interface LocalProposal {
   type: 'proposal';
@@ -37,7 +38,7 @@ export interface CumulProposals {
   lesionCount: number;
 }
 
-export type LocalAnalysisResult = LocalProposal | NoResult | AmbiguityClarification | CumulProposals;
+export type LocalAnalysisResult = LocalProposal | NoResult | AmbiguityClarification | CumulProposals | FuzzySearchResult;
 
 const allInjuriesWithPaths = disabilityData.flatMap(cat => 
     cat.subcategories.flatMap(sub => 
@@ -19604,6 +19605,47 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
             type: 'no_result',
             text: `J'ai identifié un <strong>antécédent médical</strong> (état AVANT l'accident du travail) : <strong>${preexisting.join(', ')}</strong>.<br><br>⚠️ Les antécédents ne sont PAS des lésions à évaluer dans ce calcul. Veuillez maintenant décrire la <strong>nouvelle séquelle post-traumatique liée à l'accident du travail</strong> à évaluer (ex: "fracture du poignet droit", "entorse grave du genou avec instabilité").`
         };
+    }
+
+    // 🆕 V3.3.300: FUZZY MATCHING FALLBACK
+    // Si le système rule-based retourne no_result, lancer une recherche floue
+    if (result.type === 'no_result') {
+        console.log('🔍 [V3.3.300] No result from rule-based → Fuzzy matching fallback');
+        const fuzzyMatches = fuzzySearchBareme(text, 5, 15);
+        const fuzzyThreshold = fuzzyAutoThreshold(fuzzyMatches);
+        console.log(`🔍 [V3.3.300] Fuzzy: ${fuzzyMatches.length} matchs, best=${fuzzyMatches[0]?.score || 0}, threshold=${fuzzyThreshold}`);
+        
+        if (fuzzyThreshold === 'auto' && fuzzyMatches.length > 0) {
+            // Score >= 55 : auto-proposer le meilleur match
+            const best = fuzzyMatches[0];
+            const rate = Array.isArray(best.injury.rate) ? best.injury.rate : [best.injury.rate, best.injury.rate];
+            const midRate = Math.round((rate[0] + rate[1]) / 2);
+            console.log(`✅ [V3.3.300] Fuzzy auto-match: ${best.injury.name} (${midRate}%, score=${best.score})`);
+            return {
+                type: 'proposal',
+                name: best.injury.name,
+                rate: midRate,
+                justification: `<strong>🔍 Correspondance intelligente (score: ${best.score}%)</strong><br>` +
+                    `Votre description a été rapprochée de l'entrée du barème la plus pertinente.<br><br>` +
+                    (best.injury.rateCriteria ? `<strong>Critères d'évaluation :</strong><br>` +
+                    `• Taux bas : ${best.injury.rateCriteria.low}<br>` +
+                    (best.injury.rateCriteria.medium ? `• Taux moyen : ${best.injury.rateCriteria.medium}<br>` : '') +
+                    `• Taux haut : ${best.injury.rateCriteria.high}<br><br>` : '') +
+                    `<em>💡 Barème : ${rate[0]}–${rate[1]}% | Taux médian proposé : ${midRate}%</em>`,
+                path: best.path,
+                injury: best.injury
+            };
+        } else if (fuzzyThreshold === 'suggest' && fuzzyMatches.length > 0) {
+            // Score 30-55 : proposer les suggestions au médecin
+            console.log(`💡 [V3.3.300] Fuzzy suggestions: ${fuzzyMatches.length} options`);
+            return {
+                type: 'fuzzy_suggestions' as any,
+                text: `🔍 Votre description ne correspond pas exactement au barème, mais voici les entrées les plus proches :`,
+                suggestions: fuzzyMatches.slice(0, 5),
+                bestScore: fuzzyMatches[0].score
+            };
+        }
+        // Score < 30 : vrai no_result
     }
 
     return result;

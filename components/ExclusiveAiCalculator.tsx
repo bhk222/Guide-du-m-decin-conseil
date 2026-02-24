@@ -270,6 +270,18 @@ export const ExclusiveAiCalculator: React.FC<ExclusiveAiCalculatorProps> = ({
                             choices: result.choices,
                         };
                         break;
+                    case 'fuzzy_suggestions':
+                        // 🆕 V3.3.300: Suggestions intelligentes par fuzzy matching
+                        modelMessage = {
+                            id: crypto.randomUUID(), role: 'model',
+                            text: result.text,
+                            choices: (result as any).suggestions.map((s: any) => ({
+                                ...s.injury,
+                                path: s.path,
+                                name: `${s.injury.name} (${Math.round(s.score)}% de confiance)`,
+                            })),
+                        };
+                        break;
                     case 'no_result':
                     default:
                         modelMessage = { id: crypto.randomUUID(), role: 'model', text: result.text };
