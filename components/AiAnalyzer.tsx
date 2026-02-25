@@ -65,7 +65,7 @@ export const medicalSynonyms: { [key: string]: string[] } = {
   luxation: ['luxation', 'déboîtement', 'déplacement articulaire', 'dislocation'],
   entorse: ['entorse', 'distorsion', 'foulure', 'étirement ligamentaire'],
   cal_vicieux: ['cal vicieux', 'consolidation vicieuse', 'malunion', 'défaut de consolidation'],
-  pseudarthrose: ['pseudarthrose', 'fausse articulation', 'non-consolidation', 'absence de consolidation'],
+  pseudarthrose: ['pseudarthrose', 'fausse articulation', 'non-consolidation', 'absence de consolidation', 'pseudarthrose de la mortaise'],
   arthrose: ['arthrose', 'arthropathie', 'dégénérescence articulaire', 'usure articulaire'],
   
   // Anatomie membre supérieur (anciennes déclarations supprimées - versions enrichies V3.3.136 conservées plus bas)
@@ -87,7 +87,7 @@ export const medicalSynonyms: { [key: string]: string[] } = {
   // Anatomie membre inférieur
   hanche: ['hanche', 'coxo-fémorale', 'articulation de la hanche', 'cotyle', 'hanche droite', 'hanche gauche', 'coxo fémorale', 'coxo fémorale', 'raideur hanche', 'limitation hanche', 'flexion hanche', 'abduction hanche', 'rotation hanche', 'claudication', 'boiterie', 'périmètre marche'],
   genou: ['genou', 'fémoro-tibiale', 'fémoro-patellaire', 'articulation du genou', 'genou droit', 'genou gauche', 'femoro tibiale', 'femoro patellaire', 'raideur genou', 'limitation genou', 'flexion genou', 'extension genou', 'instabilité genou', 'laxite genou', 'laxite', 'laxité', 'genou instable', 'genou laxe', 'dérobements', 'dérobement genou', 'genou qui lâche', 'chondropathie', 'arthrose genou', 'épanchement'],
-  cheville: ['cheville', 'tibio-tarsienne', 'articulation de la cheville', 'malléolaire', 'cheville droite', 'cheville gauche', 'tibio tarsienne', 'raideur cheville', 'limitation cheville', 'dorsiflexion', 'flexion dorsale', 'flexion plantaire', 'equin', 'équin', 'instabilité cheville', 'cheville instable', 'sous-astragalienne', 'sous astragalienne'],
+  cheville: ['cheville', 'tibio-tarsienne', 'articulation de la cheville', 'malléolaire', 'cheville droite', 'cheville gauche', 'tibio tarsienne', 'raideur cheville', 'limitation cheville', 'dorsiflexion', 'flexion dorsale', 'flexion plantaire', 'equin', 'équin', 'instabilité cheville', 'cheville instable', 'sous-astragalienne', 'sous astragalienne', 'mortaise', 'mortaise tibiale', 'mortaise tibio-péronière', 'pilon tibial'],
   pied: ['pied', 'tarse', 'métatarse'],
   
   // Orteils - Enrichissement (🆕 V3.3.135: +70 synonymes orteils)
@@ -1988,6 +1988,10 @@ const synonymMap: { [key: string]: string } = {
     
     // 🦶 Synonymes cheville et pied
     'pilon': 'pilon tibial',
+    'mortaise': 'cheville',
+    'mortaise tibiale': 'cheville',
+    'mortaise tibio-péronière': 'cheville',
+    'mortaise tibio peroniere': 'cheville',
     'bimall': 'bimalleolaire',
     'bi malleolaire': 'bimalleolaire',
     'bimaliolaire': 'bimalleolaire',
@@ -7548,6 +7552,22 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             context: /calcan[eé]um|inversion|[eé]version|douleur|marche|limitation|claudication/i,
             searchTerms: ["Raideur cheville + sous-astragalienne"],
             priority: 15006,
+        },
+        // 🆕 V3.3.316: ULTRA-PRIORITÉ pilon tibial + pseudarthrose mortaise → Pseudarthrose du tibia (30-50%)
+        // Quand pilon tibial ET pseudarthrose coexistent, la pseudarthrose (non-union) est la lésion dominante
+        {
+            pattern: /pilon.*tibial[\s\S]*pseudarthrose|pseudarthrose[\s\S]*pilon.*tibial|fracture.*pilon.*tibial[\s\S]*pseudarthrose|pseudarthrose.*mortaise/i,
+            context: /cheville|mortaise|tibia|douleur|limitation|oedeme|oed[èe]me|raideur|boiterie|marche|flexion/i,
+            searchTerms: ["Pseudarthrose du tibia"],
+            priority: 15008,
+            negativeContext: /deux.*os.*jambe|p[ée]ron[ée].*pseudarthrose/i
+        },
+        // 🆕 V3.3.316: Pseudarthrose de la mortaise tibiale → Pseudarthrose du tibia
+        {
+            pattern: /pseudarthrose.*mortaise|mortaise.*pseudarthrose/i,
+            context: /cheville|tibia|pilon|limitation|douleur|marche|oedeme|oed[èe]me|raideur/i,
+            searchTerms: ["Pseudarthrose du tibia"],
+            priority: 15007,
         },
         // 🆕 V3.3.292: SUPER-PRIORITÉ pilon tibial (évite confusion avec raideur cheville)
         {
@@ -16915,7 +16935,13 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
         );
         
         const jambeBypassPatterns = [
-            { pattern: /pseudarthrose.*tibia|tibia.*pseudarthrose/i, context: /tibia|jambe|consolid|fracture|mobilit[eé]/i, label: 'Pseudarthrose tibia' },
+            // 🆕 V3.3.316: Pilon tibial + pseudarthrose mortaise → bypass prioritaire
+            { pattern: /pilon.*tibial[\s\S]*pseudarthrose|pseudarthrose[\s\S]*pilon.*tibial|fracture.*pilon[\s\S]*pseudarthrose.*mortaise/i, context: /cheville|mortaise|tibia|douleur|limitation|oedeme|raideur|boiterie|marche/i, label: 'Pilon tibial + pseudarthrose mortaise' },
+            // 🆕 V3.3.316: Pseudarthrose de la mortaise tibiale
+            { pattern: /pseudarthrose.*mortaise|mortaise.*pseudarthrose/i, context: /cheville|tibia|pilon|limitation|douleur|marche|oedeme/i, label: 'Pseudarthrose mortaise tibiale' },
+            // 🆕 V3.3.316: Fracture pilon tibial isolée
+            { pattern: /fracture.*pilon.*tibial|pilon.*tibial/i, context: /cheville|douleur|raideur|limitation|oedeme|boiterie|marche|flexion|arthrose/i, label: 'Fracture pilon tibial' },
+            { pattern: /pseudarthrose.*tibia|tibia.*pseudarthrose/i, context: /tibia|jambe|consolid|fracture|mobilit[eé]|mortaise|pilon|cheville|douleur|boiterie/i, label: 'Pseudarthrose tibia' },
             { pattern: /pseudarthrose.*(?:deux.*os|tibia.*p[eé]ron[eé]).*jambe|pseudarthrose.*jambe/i, context: /jambe|tibia/i, label: 'Pseudarthrose deux os jambe' },
             { pattern: /syndrome.*(?:des\s+)?loges?.*(?:chronique|effort)|syndrome.*compartiment/i, context: /jambe|effort|douleur|muscul/i, label: 'Syndrome des loges' },
             { pattern: /fracture.*(?:bi[\s-]?mall[eé]olaire|mall[eé]olaire).*cal.*vicieux|cal.*vicieux.*(?:bi[\s-]?mall[eé]olaire|mall[eé]ol)/i, context: /cheville|mall[eé]ol|d[eé]formation/i, label: 'Bimalléolaire cal vicieux' },
@@ -17622,6 +17648,15 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
             name: `${isFissure ? 'Fissure' : 'Fracture'} plateau tibial ${hasSevereLimitation ? '(avec raideur sévère)' : amplitudeInfo ? '(amplitudes conservées)' : hasLimitationMobility ? '(avec raideur)' : ''}`,
             keywords: ['fracture', 'plateau tibial', 'genou', isFissure ? 'fissure' : ''].filter(k => k),
             context: text.match(/(?:fracture|fissure).*(?:plateau.*tibial|extr[ée]mit[ée].*sup[ée]rieure.*tibia)[^.;]*/i)?.[0] || ''
+        });
+    }
+    // 🆕 V3.3.316: Fracture pilon tibial (cheville) AVANT le catch-all tibia/péroné
+    else if (/fracture.*pilon.*tibial|pilon.*tibial.*fractur/i.test(text)) {
+        const hasPseudarthrose = /pseudarthrose/i.test(text);
+        detectedSequelae.push({
+            name: hasPseudarthrose ? 'Pseudarthrose du tibia (pilon tibial)' : 'Fracture du pilon tibial',
+            keywords: ['fracture', 'pilon tibial', 'cheville', 'tibia', ...(hasPseudarthrose ? ['pseudarthrose'] : [])],
+            context: text.match(/(?:fracture|pilon).*tibial[^.;]*/i)?.[0] || ''
         });
     }
     else if (/fracture.*tibia|fracture.*p[ée]ron[ée]|fracture.*jambe/i.test(text)) {
