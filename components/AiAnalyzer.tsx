@@ -6464,11 +6464,11 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             searchTerms: ["__AMPUTATION_3_ORTEILS__"],
             priority: 10700
         },
-        // 🆕 V3.3.69: Perte de tous les orteils = trans-métatarsienne (pas Lisfranc qui inclut métatarsiens)
+        // 🆕 V3.3.69 / 🔧 V3.3.311: Perte de tous les orteils → barème "Amputation de tous les orteils" [12-18%]
         {
             pattern: /(?:perte|amputation).*(?:tous|5|cinq).*orteils|(?:tous|5|cinq).*orteils.*(?:perte|amputation)/i,
             context: /.*/i,
-            searchTerms: ["Amputation trans-métatarsienne (perte des cinq orteils)"],
+            searchTerms: ["Amputation de tous les orteils"],
             priority: 10002  // Priorité supérieure à Lisfranc
         },
         {
@@ -8975,11 +8975,12 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             searchTerms: ['Amputation d\'un autre orteil'],
             priority: 94
         },
+        // 🔧 V3.3.311: Hallux rigidus - priorité relevée à 10500 pour ne pas être masqué par fracture
         {
             pattern: /(?:ankylose|raideur|hallux\s+rigidus).*(?:gros\s+orteil|hallux)|(?:gros\s+orteil|hallux).*(?:ankylose|raideur|rigidus)/i,
             context: /pied|orteil|articulation|metatarso/i,
-            searchTerms: ['Ankylose ou raideur du gros orteil'],
-            priority: 98
+            searchTerms: ['Hallux rigidus post-traumatique'],
+            priority: 10500
         },
         {
             pattern: /ankylose.*(?:2[eè]me|deuxi[eè]me|troisi[eè]me|quatri[eè]me|cinqui[eè]me).*orteil/i,
@@ -8992,6 +8993,86 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             context: /pied|orteil/i,
             searchTerms: ['Ankylose ou raideur du gros orteil'],
             priority: 83
+        },
+        // ═══════════════════════════════════════════════════════════════
+        // 🆕 V3.3.311: RÈGLES PIED - Pathologies spécifiques
+        // ═══════════════════════════════════════════════════════════════
+        // Cas 4: Fracture de l'astragale (talus)
+        {
+            pattern: /fracture.*(?:astragale|talus)|(?:astragale|talus).*fractur[eé]/i,
+            context: /pied|cheville|tibio.*astragal|cal.*vicieux|arthrose|consolidat/i,
+            searchTerms: ["Fracture de l'astragale (Talus) - Avec cal vicieux"],
+            priority: 10500
+        },
+        // Cas 7/28: Lisfranc - luxation, fracture, entorse
+        {
+            pattern: /(?:luxation|fracture|entorse).*lisfranc|lisfranc.*(?:luxation|fracture|entorse)|lisfranc.*(?:raideur|arthrose)|(?:raideur|arthrose).*lisfranc/i,
+            context: /pied|avant.*pied|tarso|m[eé]tatars|m[eé]dio/i,
+            searchTerms: ['Ankylose tarso-métatarsienne (interligne de Lisfranc)'],
+            priority: 10500
+        },
+        // Cas 28: Laxité/entorse Lisfranc (quand "laxité" est plus proéminent)
+        {
+            pattern: /laxit[eé].*(?:lisfranc|m[eé]dio.*pied|tarso)|entorse.*grave.*(?:pied|lisfranc|m[eé]dio)/i,
+            context: /pied|avant.*pied|tarso|m[eé]tatars/i,
+            searchTerms: ['Ankylose tarso-métatarsienne (interligne de Lisfranc)'],
+            priority: 10500
+        },
+        // Cas 29: Arthrodèse Lisfranc / tarso-métatarsienne
+        {
+            pattern: /arthrod[eè]se.*(?:lisfranc|tarso[\.\s-]?m[eé]tatars)|(?:lisfranc|tarso[\.\s-]?m[eé]tatars).*arthrod[eè]se/i,
+            context: /pied|fusion|chirurg/i,
+            searchTerms: ['Arthrodèse tarso-métatarsienne (interligne de Lisfranc)'],
+            priority: 10600
+        },
+        // Cas 11: Tendinopathie d'Achille chronique
+        {
+            pattern: /tendinopathie.*(?:achille|achill[eé]en)|tendinite.*chronique.*(?:achille|achill[eé]en)/i,
+            context: /tendon|chronique|douleur|pied|talon|mollet/i,
+            searchTerms: ["Tendinopathie d'Achille post-traumatique chronique"],
+            priority: 10500
+        },
+        // Cas 18/19: Pied plat ou pied creux post-traumatique
+        {
+            pattern: /pied\s+(?:plat|creux)\s+post[\s-]?traumatique|pied\s+(?:plat|creux).*(?:secondaire|s[eé]quell)/i,
+            context: /pied|voûte|plantaire|appuis|ortho/i,
+            searchTerms: ['Pied plat ou pied creux post-traumatique'],
+            priority: 10600
+        },
+        // Cas 18/19: Pied plat/creux (pattern plus simple)
+        {
+            pattern: /pied\s+plat|pied\s+creux/i,
+            context: /post.*traumat|s[eé]quell|accident|fracture|chute/i,
+            searchTerms: ['Pied plat ou pied creux post-traumatique'],
+            priority: 10400
+        },
+        // Cas 20: Arthrodèse sous-talienne
+        {
+            pattern: /arthrod[eè]se\s+sous[\s-]?(?:talienne|astragal)/i,
+            context: /pied|cheville|calcan[eé]um|arthrose|fusion/i,
+            searchTerms: ['Arthrodèse sous-talienne en bonne position'],
+            priority: 10600
+        },
+        // Cas 23: Amputation de 2 orteils (énumérés par numéro)
+        {
+            pattern: /amputation.*(?:2[eè]?me|deuxi[eè]me).*(?:et|&).*(?:3[eè]?me|troisi[eè]me).*orteil|amputation.*deux.*(?:petit|autre|lat[eé]ral).*orteil/i,
+            context: /pied|orteil/i,
+            searchTerms: ['Amputation de deux orteils'],
+            priority: 10500
+        },
+        // Cas 23 bis: Amputation de 2 orteils (détection générique numérique)
+        {
+            pattern: /amputation.*(?:des|de).*(?:(?:\d[eè]?me|\w+i[eè]me).*(?:et|&).*(?:\d[eè]?me|\w+i[eè]me)).*orteil/i,
+            context: /pied|orteil/i,
+            searchTerms: ['Amputation de deux orteils'],
+            priority: 10400
+        },
+        // Cas 30: Griffes des orteils post-traumatiques
+        {
+            pattern: /griffes?\s+(?:des\s+)?orteils?|(?:d[eé]formation|r[eé]traction).*(?:en\s+)?griffe.*orteil|orteil.*(?:en\s+)?griffe/i,
+            context: /pied|orteil|chaussure|plantaire|m[eé]tatars/i,
+            searchTerms: ['Griffes des orteils post-traumatiques'],
+            priority: 10500
         },
         // Règles thorax
         // 🔧 V3.3.293: Fracture sternum - simple (searchTerms corrigé pour matcher le barème)
@@ -9509,12 +9590,12 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             priority: 1010,
             negativeContext: /n[eé]crosante/i  // Exclure fasciite nécrosante
         },
-        // === 🆕 V3.3.266: SYNDROME DU TUNNEL TARSIEN ===
+        // === 🆕 V3.3.266 / 🔧 V3.3.311: SYNDROME DU TUNNEL TARSIEN - priorité > fracture malléolaire ===
         {
             pattern: /tunnel\s+tarsien|compression.*nerf.*tibial.*post[eé]rieur/i,
             context: /nerf|tibial|plantaire|par[eé]sth[eé]sie|cheville|pied/i,
             searchTerms: ['Syndrome du tunnel tarsien (compression nerf tibial postérieur)'],
-            priority: 1010
+            priority: 15500
         },
         // === 🆕 V3.3.266: ATTEINTE SENSITIVO-MOTRICE DU NERF SPI (EMG) ===
         // Détecte "atteinte sensitivo-motrice du nerf sciatique poplité interne" (pas forcément paralysie)
@@ -10072,7 +10153,19 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             term.includes("Sténose biliaire") ||
             term.includes("Névralgie pariétale") ||
             term.includes("intestin irritable") ||
-            term.includes("Fistules biliaires")
+            term.includes("Fistules biliaires") ||
+            // 🆕 V3.3.311: Pied pathologies = prioritaires
+            term.includes("astragale") ||
+            term.includes("Tendinopathie d'Achille") ||
+            term.includes("tunnel tarsien") ||
+            term.includes("Pied plat") ||
+            term.includes("Arthrodèse sous-talienne") ||
+            term.includes("Arthrodèse tarso-métatarsienne") ||
+            term.includes("Ankylose tarso-métatarsienne") ||
+            term.includes("Hallux rigidus") ||
+            term.includes("Griffes des orteils") ||
+            term.includes("Amputation de deux orteils") ||
+            term.includes("Amputation de tous les orteils")
         );
         
         if (isEarlyCumulDetected && isSimpleRule) {
@@ -15898,7 +15991,15 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
     const isNerveLesionOnly = /(?:paralysie|section|l[eé]sion|atteinte|compression).*(?:nerf|cubital|radial|m[eé]dian)/i.test(text) &&
         !/(?:\bamputation\b|\bamput[eé]\b|\bmoignon\b|d[eé]sarticulation)/i.test(text);
     
-    if (isAmputationText && !isExactMatch && !isMultiSitePolytrauma && !isNerveLesionOnly && !hasMultipleMSPathologies) {
+    // 🆕 V3.3.311: Exclusion des amputations d'ORTEILS du handler lourd (désarticulation cheville)
+    // Les amputations d'orteils (gros orteil, 2 orteils, etc.) ont leurs propres entrées barémiques
+    // et doivent être gérées par les expert rules (lignes 6460+, 8967+), PAS par le handler MI lourd
+    // Seules les amputations transmétatarsiennes, médiotarsiennes et désarticulation cheville restent ici
+    // ⚠️ Exclusion: seuls transmétatarsienne, médiotarsienne, Chopart, Lisfranc restent dans le handler lourd
+    const isOrteilOnlyAmputation = /(?:amputation|amput[eé]|perte).*orteil/i.test(text) &&
+        !/(?:transm[eé]tatars|m[eé]diotars|chopart|lisfranc|d[eé]sarticulation.*cheville)/i.test(text);
+    
+    if (isAmputationText && !isExactMatch && !isMultiSitePolytrauma && !isNerveLesionOnly && !hasMultipleMSPathologies && !isOrteilOnlyAmputation) {
         console.log('🦿 [V3.3.229] AMPUTATION MEMBRE DÉTECTÉE → Analyse spécialisée (site unique)');
         
         // ═══════════════════════════════════════════════════════════════
@@ -15920,7 +16021,10 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
         const isJambeTiersMoy = /amputation.*jambe.*tiers\s+moyen|tiers\s+moyen.*jambe/i.test(text);
         const isJambeTiersInf = /amputation.*jambe.*tiers\s+inf[eé]rieur|tiers\s+inf[eé]rieur.*jambe|proche.*cheville/i.test(text);
         const isDesartCheville = /d[eé]sarticulation.*cheville|cheville.*d[eé]sarticulation|d[eé]sarticulation.*tibio[\s-]?tarsienne/i.test(text);
-        const isAmputPied = /amputation.*pied|pied.*amput[eé]/i.test(text);
+        // 🆕 V3.3.311: Sous-niveaux d'amputation du pied (transmétatarsienne, médiotarsienne)
+        const isAmputTransmetatarsienne = /amputation.*transm[eé]tatars|transm[eé]tatars.*amputation/i.test(text);
+        const isAmputMediotarsienne = /amputation.*(?:m[eé]diotars|chopart)|(?:m[eé]diotars|chopart).*amputation/i.test(text);
+        const isAmputPied = /amputation.*pied|pied.*amput[eé]/i.test(text) && !isAmputTransmetatarsienne && !isAmputMediotarsienne;
         
         // --- MEMBRE SUPÉRIEUR ---
         const isAmputMS = /bras|avant[\s-]*bras|[eé]paule|coude|poignet|main|hum[eé]r|radius|cubitus|membre\s+sup[eé]rieur|trans[\s-]?hum[eé]ral|trans[\s-]?radial/i.test(text);
@@ -15995,8 +16099,22 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
             } else if (isDesartCheville) {
                 targetNameAmp = 'Désarticulation de la cheville';
                 niveauAmp = 'Désarticulation tibio-tarsienne';
+            } else if (isAmputTransmetatarsienne) {
+                // 🆕 V3.3.311: Amputation transmétatarsienne = perte avant-pied
+                targetNameAmp = 'Amputation transmétatarsienne du pied';
+                niveauAmp = 'Amputation transmétatarsienne (perte avant-pied)';
+            } else if (isAmputMediotarsienne) {
+                // 🆕 V3.3.311: Amputation médiotarsienne (Chopart)
+                const hasEquin = /[eé]quin/i.test(text);
+                if (hasEquin) {
+                    targetNameAmp = 'Amputation médiotarsienne du pied avec équin';
+                    niveauAmp = 'Amputation médiotarsienne (Chopart) avec équin';
+                } else {
+                    targetNameAmp = 'Amputation médiotarsienne du pied sans équin (bon talon)';
+                    niveauAmp = 'Amputation médiotarsienne (Chopart) sans équin';
+                }
             } else if (isAmputPied) {
-                // Pied → utiliser désarticulation cheville comme approximation
+                // Pied générique → utiliser désarticulation cheville comme approximation
                 targetNameAmp = 'Désarticulation de la cheville';
                 niveauAmp = 'Amputation du pied (≈ désarticulation cheville)';
             } else {
@@ -17039,7 +17157,8 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
     // Dorsalgie
     // 🆕 V3.3.290: ÉVITER faux-positif "dorsalgie" quand le texte parle de "flexion dorsale" (cheville)
     const hasDorsalgieContext = /dorsalgie|douleur.*dorsal|syndrome.*dorsal|raideur.*dorsal/i.test(text);
-    const isDorsalFlexionOnly = /flexion.*dorsale|dorsiflexion|dorsal.*limit[eé]/i.test(text) && !/dorsalgie|douleur.*(?:dos|rachis.*dorsal|dorso)/i.test(text);
+    // 🔧 V3.3.311: Exclure faux-positifs "douleurs dorsales" dans contexte PIED (surface dorsale du pied ≠ dorsalgie)
+    const isDorsalFlexionOnly = (/flexion.*dorsale|dorsiflexion|dorsal.*limit[eé]/i.test(text) || /douleur.*dorsal.*(?:pied|orteil|chaussure|m[eé]tatars|griffe)/i.test(text)) && !/dorsalgie|douleur.*(?:dos|rachis.*dorsal|dorso)/i.test(text);
     if (hasDorsalgieContext && !isDorsalFlexionOnly) {
         detectedSequelae.push({
             name: 'Dorsalgie',
@@ -18273,6 +18392,23 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
                  (/raideur.*genou|genou.*raideur|amyotrophie.*(?:cuisse|quadricep|membre.*inf)|atrophie.*(?:cuisse|quadricep)/i.test(text)) &&
                  !(/fracture.*(?:hum[eé]rus|bassin|cadre.*obturateur|c[oô]tes?|radius|poignet|clavicule|rotule|f[eé]mur|cheville|mall[eé]ol|bimall[eé]ol|calcan[eé]|astragale|rachis|vert[eé]br)|luxation.*(?:hanche|[eé]paule)|hernie.*discale/i.test(text))) {
             console.log('🦴 [V3.3.310] FRACTURE TIBIA + RAIDEUR/AMYOTROPHIE détectée → Bypass vers expert rules (pathologie UNIQUE)');
+            // Ne pas retourner, laisser l'analyse continuer vers comprehensiveSingleLesionAnalysis
+        }
+        // 🆕 V3.3.311: PATHOLOGIES PIED SPÉCIFIQUES = Bypass vers expert rules
+        // Tendinopathie Achille, tunnel tarsien, pied plat/creux, griffes orteils, Lisfranc, arthrodèse sous-talienne
+        // Ces pathologies sont UNIQUES même si le texte mentionne des détails (fracture causale, symptômes multiples)
+        // → NE DOIVENT JAMAIS être regroupées en "Polytraumatisme - 2 systèmes"
+        else if (
+            /tendinopathie.*(?:achille|achill[eé]en)|tendinite.*(?:achille|achill[eé]en)/i.test(text) ||
+            /tunnel\s+tarsien|compression.*nerf.*tibial.*post[eé]rieur/i.test(text) ||
+            /pied\s+(?:plat|creux)\s+post[\s-]?traumatique/i.test(text) ||
+            /griffes?\s+(?:des\s+)?orteils?/i.test(text) ||
+            /arthrod[eè]se\s+sous[\s-]?(?:talienne|astragal)/i.test(text) ||
+            /(?:luxation|fracture|entorse).*lisfranc|lisfranc.*(?:luxation|fracture|entorse)/i.test(text) ||
+            /arthrod[eè]se.*(?:lisfranc|tarso[\.\s-]?m[eé]tatars)/i.test(text) ||
+            /fracture.*(?:astragale|talus)/i.test(text)
+        ) {
+            console.log('🦶 [V3.3.311] PATHOLOGIE PIED SPÉCIFIQUE détectée → Bypass vers expert rules (pathologie UNIQUE)');
             // Ne pas retourner, laisser l'analyse continuer vers comprehensiveSingleLesionAnalysis
         } else {
             // 🆕 V3.3.155: CALCUL AUTOMATIQUE IPP (polytraumatismes ET cas simples)
