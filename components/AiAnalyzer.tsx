@@ -2524,6 +2524,7 @@ const synonymMap: { [key: string]: string } = {
     'trait complet': 'fracture complete',
     'trait incomplet': 'fissure',
     'fracture comminutive': 'fracture plurifragmentaire',
+    'fracture communitive': 'fracture comminutive plurifragmentaire',  // 🆕 V3.3.310: Typo médical fréquent
     'fracture complexe': 'fracture grave',
     'esquille': 'fragment osseux',
     'esquilles': 'fragments',
@@ -3402,7 +3403,7 @@ const determineSeverity = (
     const hasBoiterieLegere = /boiterie\s+(?:l[eé]g[eè]re|mod[eé]r[eé]e|discrète)|l[eé]g[eè]re\s+boiterie/i.test(normalizedText);
     const hasBoiterieMajeure = /boiterie\s+(?:importante|s[eé]v[eè]re|marqu[eé]e|permanente)|impossibilit[eé].*marche|quasi[\s-]?impotence/i.test(normalizedText);
     const hasBoiterie = /boiterie|claudication|marche.*(?:difficile|pathologique|anormale)/i.test(normalizedText);
-    const hasFractureComminutive = /fracture\s+comminutive|comminutive|plurifragmentaire|complexe/i.test(normalizedText);
+    const hasFractureComminutive = /fracture\s+comm[iu]nutive|comm[iu]nutive|plurifragmentaire|complexe/i.test(normalizedText);
     const hasFractureFibula = /fracture.*fibula|fibula.*fracture|fracture.*p[eé]ron[eé]|p[eé]ron[eé].*fracture|m[eé]taphyso.*[eé]piphysaire/i.test(normalizedText);
     
     // COTYLE + SÉQUELLES FONCTIONNELLES MULTIPLES (V3.3.122)
@@ -3661,7 +3662,7 @@ const determineSeverity = (
             'severe', 'sevère', 'majeur', 'majeure', 'grave', 'important', 'importante', 'considerable',
             'intense', 'tres douloureux', 'tres important',
             // 🆕 V3.3.54: Types de fractures graves
-            'arrachement', 'comminutive', 'eclatement', 'explose', 'plurifragmentaire',
+            'arrachement', 'comminutive', 'communitive', 'eclatement', 'explose', 'plurifragmentaire',
             'deplacement important', 'deplacement majeur', 'fortement deplacee',
             // Persistance et chronicité
             'persistante', 'permanent', 'chronique severe', 'invalidant',
@@ -17297,7 +17298,7 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
     } 
     // 🔴 V3.3.163+V3.3.269: Fracture plateau tibial (extrémité supérieure tibia = articulation genou)
     // 🆕 V3.3.269: Ajout pattern "extrémité supérieure tibia" (= plateau tibial anatomiquement)
-    else if (/(?:fracture|fissure).*plateau.*tibial|plateau.*tibial.*(?:fracture|fissur[ée])|(?:fracture|fissure).*(?:extr[ée]mit[ée]|extremite).*sup[ée]rieure.*tibia/i.test(text)) {
+    else if (/(?:fracture|fissure).*plateau.*tibial|plateau.*tibial.*(?:fracture|fissur[ée])|(?:fracture|fissure).*(?:extr[ée]mit[ée]|extremite).*sup[ée]rieure?.*tibia/i.test(text)) {
         const isFissure = /fissure/i.test(text);
         // 🔧 V3.3.269: Fix "AMP" (Appui Monopodal) ≠ amplitude, et "impossible" ≠ "possible"
         const amplitudeInfo = text.match(/amplitude[s]?.*(?:(?<!im)possible|libre|conserv[ée]e)|genou.*(?:libre|mobile)/i)?.[0] || '';
@@ -18260,6 +18261,18 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
         else if (/surdit[eé].*(?:profonde|s[eé]v[eè]re|compl[eè]te|totale|perception).*bilat[eé]ral|bilat[eé]ral.*surdit[eé].*(?:profonde|perception)/i.test(text) ||
                  (/perforation.*tympan/i.test(text) && /surdit[eé]/i.test(text))) {
             console.log('👂 [V3.3.308] SURDITÉ BILATÉRALE PROFONDE / PERFORATION TYMPANIQUE détectée → Bypass vers expert rules ORL');
+            // Ne pas retourner, laisser l'analyse continuer vers comprehensiveSingleLesionAnalysis
+        }
+        // 🆕 V3.3.310: FRACTURE TIBIA/PLATEAU TIBIAL + RAIDEUR GENOU + AMYOTROPHIE = UNE SEULE PATHOLOGIE
+        // La raideur du genou et l'amyotrophie de la cuisse sont des SÉQUELLES de la fracture tibiale
+        // → NE DOIT JAMAIS être regroupé en "Polytraumatisme - 3 séquelles"
+        // → Doit atteindre comprehensiveSingleLesionAnalysis → expert rule "Fracture des plateaux tibiaux"
+        // ⚠️ tibia(?!le) exclut "fémoro-tibiale" (qui n'est PAS une fracture tibia)
+        // ⚠️ Exclusions accent-aware: f[eé]mur, hum[eé]rus, c[oô]tes?, mall[eé]ol, etc.
+        else if (/fracture.*tibia(?!le)|fracture.*plateau.*tibial|(?:fracture|fissure).*(?:extr[ée]mit[ée]|extremite).*sup[ée]rieure?.*tibia/i.test(text) &&
+                 (/raideur.*genou|genou.*raideur|amyotrophie.*(?:cuisse|quadricep|membre.*inf)|atrophie.*(?:cuisse|quadricep)/i.test(text)) &&
+                 !(/fracture.*(?:hum[eé]rus|bassin|cadre.*obturateur|c[oô]tes?|radius|poignet|clavicule|rotule|f[eé]mur|cheville|mall[eé]ol|bimall[eé]ol|calcan[eé]|astragale|rachis|vert[eé]br)|luxation.*(?:hanche|[eé]paule)|hernie.*discale/i.test(text))) {
+            console.log('🦴 [V3.3.310] FRACTURE TIBIA + RAIDEUR/AMYOTROPHIE détectée → Bypass vers expert rules (pathologie UNIQUE)');
             // Ne pas retourner, laisser l'analyse continuer vers comprehensiveSingleLesionAnalysis
         } else {
             // 🆕 V3.3.155: CALCUL AUTOMATIQUE IPP (polytraumatismes ET cas simples)
