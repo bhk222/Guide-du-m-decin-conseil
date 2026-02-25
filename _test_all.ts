@@ -44,6 +44,7 @@ const suites = [
   { file: '_test_pied_30.ts', expected: 30 },
   { file: '_test_cheville_pied_30.ts', expected: 30 },
   { file: '_test_avant_bras_30.ts', expected: 30 },
+  { file: '_test_polytrauma_40.ts', expected: 40 },
 ];
 
 const totalExpected = suites.reduce((s, t) => s + t.expected, 0);
