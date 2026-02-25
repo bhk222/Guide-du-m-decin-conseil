@@ -3124,11 +3124,16 @@ const calculateSeverityAdjustment = (text: string): {
     }
 
     // �🟡 CRITÈRES MODÉRÉS (+1 point chacun)
+    // V3.3.317: Rupture totale/complete/massive d'un tendon/ligament = severite aggravee
+    if (/rupture\s+(?:totale|compl[eè]te|massive)|d[eé]chirure\s+(?:totale|compl[eè]te)/i.test(text)) {
+        criteria.push('Rupture totale/complète (lésion sévère)');
+        score += 2;
+    }
     if (/cicatrice.*mauvaise.*qualit[eé]|cicatrice.*adh[eé]rent|cicatrice.*hypertrophique/i.test(text)) {
         criteria.push('Cicatrices de mauvaise qualité');
         score += 1;
     }
-    if (/douleur.*permanent|douleur.*chronique|douleur.*invalidant/i.test(text)) {
+    if (/douleur.*permanent|douleur.*chronique|douleur.*invalidant|s[eé]quelles?.*douloureuse|douleurs?.*r[eé]siduelle/i.test(text)) {
         criteria.push('Douleurs chroniques invalidantes');
         score += 1;
     }
@@ -3170,7 +3175,8 @@ const calculateSeverityAdjustment = (text: string): {
     }
     
     // Limitation fonctionnelle spécifique (abduction, flexion, extension, rotation)
-    if (/limitation\s+(?:de\s+l['’]?)?(?:abduction|flexion|extension|rotation|[eé]l[eé]vation|mobilit[eé])|(?:abduction|flexion|extension|rotation).*limit[eé]/i.test(text)) {
+    // 🆕 V3.3.317: Élargi pour capturer "limitation des mouvements", "antépulsion", "abduction à X°"
+    if (/limitation\s+(?:de\s+l['’]?)?(?:abduction|flexion|extension|rotation|[eé]l[eé]vation|mobilit[eé])|limitation\s+(?:des?\s+)?mouvement|(?:abduction|flexion|extension|rotation|ant[eé]pulsion).*(?:limit[eé]|\d+\s*(?:deg|\u00b0))/i.test(text)) {
         criteria.push('Limitation fonctionnelle articulaire');
         score += 1;
     }
@@ -18076,6 +18082,16 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
         });
     }
     
+    // 🆕 V3.3.317: Rupture coiffe des rotateurs / sus-épineux / supra-épineux
+    // DOIT être AVANT "raideur épaule" pour que la rupture soit l'entrée PRIORITAIRE
+    if (/rupture.*(?:coiffe|sus[- ]?[eéè]pineux|supra[- ]?[eéè]pineux|sous[- ]?[eéè]pineux|infra[- ]?[eéè]pineux)|(?:sus|supra|sous|infra)[- ]?[eéè]pineux.*(?:rupture|d[eé]chir)|coiffe.*(?:rupture|l[eé]sion|d[eé]chir)|d[eé]chirure.*coiffe|l[eé]sion.*coiffe/i.test(text)) {
+        detectedSequelae.push({
+            name: 'Rupture de la coiffe des rotateurs (sus-épineux)',
+            keywords: ['rupture', 'coiffe', 'rotateurs', 'sus-épineux', 'supra-épineux', 'épaule'],
+            context: text.match(/rupture.*(?:coiffe|(?:sus|supra|sous|infra)[- ]?[eéè]pineux)[^.;]*/i)?.[0] || text.match(/(?:coiffe|(?:sus|supra|sous|infra)[- ]?[eéè]pineux).*(?:rupture|d[eé]chir)[^.;]*/i)?.[0] || ''
+        });
+    }
+
     // Raideur épaule
     if (/raideur.*[ée]paule|limitation.*[ée]paule|ankyl.*[ée]paule|p[ée]riarthrite/i.test(text)) {
         detectedSequelae.push({
@@ -18636,6 +18652,14 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
             /fracture.*(?:astragale|talus)/i.test(text)
         ) {
             console.log('🦶 [V3.3.311] PATHOLOGIE PIED SPÉCIFIQUE détectée → Bypass vers expert rules (pathologie UNIQUE)');
+            // Ne pas retourner, laisser l'analyse continuer vers comprehensiveSingleLesionAnalysis
+        }
+        // 🆕 V3.3.317: RUPTURE COIFFE DES ROTATEURS / SUS-ÉPINEUX = Bypass vers expert rules
+        // La limitation de l'épaule (raideur/abduction/antépulsion) est un SYMPTÔME de la rupture,
+        // pas une pathologie distincte → NE DOIT JAMAIS être classé comme "Fracture Clavicule"
+        // → Doit atteindre comprehensiveSingleLesionAnalysis → expert rule "Rupture de la coiffe des rotateurs"
+        else if (/rupture.*(?:coiffe|sus[- ]?[eéè]pineux|supra[- ]?[eéè]pineux|sous[- ]?[eéè]pineux|infra[- ]?[eéè]pineux)|(?:sus|supra|sous|infra)[- ]?[eéè]pineux.*(?:rupture|d[eé]chir)|coiffe.*rotateurs.*(?:rupture|l[eé]sion|d[eé]chir)|d[eé]chirure.*coiffe|l[eé]sion.*coiffe|tendinopathie.*(?:sus|supra)[- ]?[eéè]pineux/i.test(text)) {
+            console.log('💪 [V3.3.317] RUPTURE COIFFE/SUS-ÉPINEUX détectée → Bypass vers expert rules (pathologie épaule unique)');
             // Ne pas retourner, laisser l'analyse continuer vers comprehensiveSingleLesionAnalysis
         } else {
             // 🆕 V3.3.155: CALCUL AUTOMATIQUE IPP (polytraumatismes ET cas simples)
