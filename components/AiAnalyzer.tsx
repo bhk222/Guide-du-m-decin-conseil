@@ -5630,6 +5630,23 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
         // 🆕 V3.3.86: Fracture Monteggia → enrichissement explicite
         [/fracture.*monteggia|monteggia/gi, 'fracture-luxation monteggia séquelles coude cubitus tête radiale'],
         
+        // 🆕 V3.3.313: Fracture Galeazzi → enrichissement explicite
+        [/fracture.*galeazzi|galeazzi/gi, 'fracture-luxation galeazzi séquelles radius poignet radio-cubitale prono-supination'],
+        
+        // 🆕 V3.3.313: Synostose radio-cubitale → enrichissement
+        [/synostose.*radio[\s-]?cubital|pont\s+osseux.*radius.*cubitus/gi, 'synostose radio-cubitale post-traumatique fusion radius cubitus blocage prono-supination'],
+        
+        // 🆕 V3.3.313: Fracture deux os avant-bras → enrichissement (sans prono-supination pour ne pas déclencher la règle cal vicieux)
+        [/fracture.*(?:deux|2)\s+os.*avant[\s-]?bras/gi, 'fracture des deux os avant-bras radius cubitus consolidation'],
+        
+        // 🆕 V3.3.313: Fracture isolée cubitus → enrichissement
+        [/fracture.*isol[eé]e.*cubitus|fracture.*cubitus.*isol[eé]/gi, 'fracture isolée cubitus ulna avant-bras consolidation'],
+        
+        // 🆕 V3.3.313: Pseudarthrose avant-bras → enrichissement (séparé radius/cubitus)
+        [/pseudarthrose.*(?:deux|2).*os.*avant[\s-]?bras|pseudarthrose.*avant[\s-]?bras.*(?:deux|2)/gi, 'pseudarthrose des deux os avant-bras consolidation force prono-supination'],
+        [/pseudarthrose.*radius(?!.*cubitus)/gi, 'pseudarthrose radius avant-bras consolidation force'],
+        [/pseudarthrose.*cubitus(?!.*radius)/gi, 'pseudarthrose cubitus ulna avant-bras consolidation force'],
+        
         // 🆕 V3.3.77: Fractures olécrane → Détection avec contexte clinique
         [/fractures?\s+(?:de\s+)?l'?olecrane.*?cal\s+osseux\s+court/gi, 'fracture olécrane cal osseux court bonne extension'],
         [/fractures?\s+(?:de\s+)?l'?olecrane.*?cal\s+fibreux\s+long.*?extension.*?faible/gi, 'fracture olécrane cal fibreux long extension active faible'],
@@ -6508,6 +6525,67 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             priority: 10500
         },
         
+        // === 🆕 V3.3.313: RÈGLE GALEAZZI ===
+        {
+            pattern: /(?:fracture|s[eé]quelles?).*galeazzi|galeazzi/i,
+            context: /.*/i,
+            searchTerms: ["Séquelles de fracture-luxation de Galeazzi (Main Dominante)"],
+            priority: 10500
+        },
+        
+        // === 🆕 V3.3.313: RÈGLE SYNOSTOSE RADIO-CUBITALE ===
+        {
+            pattern: /synostose.*radio[\s-]?cubital|synostose.*radius.*cubitus|fusion.*radius.*cubitus|pont\s+osseux.*radius.*cubitus/i,
+            context: /prono|supination|blocage|avant[\s-]?bras|rotation/i,
+            searchTerms: ["Synostose radio-cubitale post-traumatique (Main Dominante)"],
+            priority: 10500
+        },
+        
+        // === 🆕 V3.3.313: FRACTURE ISOLÉE DU CUBITUS ===
+        {
+            pattern: /fracture.*isol[eé]e.*(?:cubitus|ulna|cubitale)|fracture.*cubitus.*isol[eé]|fracture.*(?:du\s+)?cubitus(?!.*radius)/i,
+            context: /cubitus|ulna|avant[\s-]?bras|pare[\s-]?choc|d[eé]fense/i,
+            searchTerms: ["Fracture isolée du cubitus (Main Dominante)"],
+            priority: 10500,
+            negativeContext: /radius|deux\s+os|pseudarthrose|monteggia|galeazzi/i
+        },
+        
+        // === 🆕 V3.3.313: FRACTURE DEUX OS AVANT-BRAS - Cal vicieux + impotence + troubles nerveux ===
+        {
+            pattern: /fracture.*(?:deux\s+os|2\s+os).*avant[\s-]?bras|fracture.*avant[\s-]?bras.*(?:deux|2)\s+os/i,
+            context: /impotence|troubles?\s+nerveux|nerf|compression.*nerv|paralysie|par[eé]sth[eé]sie|amyotrophie.*th[eé]nar/i,
+            searchTerms: ["Fracture des deux os de l'avant-bras - Cal vicieux avec impotence et troubles nerveux (Main Dominante)"],
+            priority: 10600,
+            negativeContext: /pseudarthrose|amputation|d[eé]sarticulation/i
+        },
+        
+        // === 🆕 V3.3.313: FRACTURE DEUX OS AVANT-BRAS - Cal vicieux + prono-supination (boost priorité) ===
+        {
+            pattern: /fracture.*(?:deux\s+os|2\s+os).*avant[\s-]?bras|fracture.*avant[\s-]?bras.*(?:deux|2)\s+os/i,
+            context: /cal\s+vicieux|prono[\s-]?supination|limitation.*prono|blocage.*prono|rotation/i,
+            searchTerms: ["Fracture des deux os de l'avant-bras - Cal vicieux avec limitation de la prono-supination (Main Dominante)"],
+            priority: 10550,
+            negativeContext: /impotence|troubles?\s+nerveux|pseudarthrose|amputation|d[eé]sarticulation|sans\s+cal\s+vicieux|bonne\s+consolidation|r[eé]cup[eé]ration\s+compl[eè]te/i
+        },
+        
+        // === 🆕 V3.3.313: FRACTURE DEUX OS AVANT-BRAS - Bonne consolidation (boost priorité) ===
+        {
+            pattern: /fracture.*(?:deux\s+os|2\s+os).*avant[\s-]?bras|fracture.*avant[\s-]?bras.*(?:deux|2)\s+os/i,
+            context: /bonne.*consolidation|consolidation.*obtenue|sans.*trouble|r[eé]cup[eé]ration.*compl[eè]te|mobilit[eé].*normal/i,
+            searchTerms: ["Fracture des deux os de l'avant-bras - Bonne consolidation sans trouble fonctionnel (Main Dominante)"],
+            priority: 10500,
+            negativeContext: /(?<!sans\s)cal\s+vicieux(?!\s+sans)|impotence|troubles?\s+nerveux|pseudarthrose|amputation|d[eé]sarticulation/i
+        },
+        
+        // === 🆕 V3.3.313: FRACTURE ISOLÉE DU RADIUS (diaphyse, sans Monteggia/Galeazzi) ===
+        {
+            pattern: /fracture.*isol[eé]e.*radius|fracture.*diaphyse.*radius|fracture.*radius.*(?:tiers|diaphys)/i,
+            context: /radius|avant[\s-]?bras|prono|supination|rotation|douleur/i,
+            searchTerms: ["Fracture isolée du radius (Main Dominante)"],
+            priority: 10500,
+            negativeContext: /cubitus|ulna|deux\s+os|extr[eé]mit[eé].*inf[eé]rieure|pouteau|colles|pseudarthrose|monteggia|galeazzi|cupule|t[eê]te.*radial/i
+        },
+        
         // === 🆕 V3.3.89: RÈGLE CUPULE/TÊTE RADIALE ===
         // Limitation minime
         {
@@ -6573,32 +6651,37 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
         },
         
         // === RÈGLES PSEUDARTHROSE AVANT-BRAS ===
+        // 🆕 V3.3.313: Pseudarthrose double AVANT les isolées (priorité 9600 > 9500)
+        // Pseudarthrose double serrée (doit être AVANT lâche pour le context serrée)
+        {
+            pattern: /pseudarthrose.*(?:deux\s+os|double|serr[eé]e.*avant.*bras|radius.*(?:et|cubitus).*cubitus|cubitus.*(?:et|radius).*radius).*avant.*bras|pseudarthrose.*avant.*bras.*serr[eé]e|pseudarthrose.*(?:radius.*(?:et\s+(?:du\s+)?)?cubitus|cubitus.*(?:et\s+(?:du\s+)?)?radius)/i,
+            context: /serr[eé]e|fibreux.*dense|sans.*mobilit[eé].*(?:anormal|patholog)/i,
+            searchTerms: ["Pseudarthrose des deux os de l'avant-bras - serrée (Main Dominante)"],
+            priority: 9700,
+            negativeContext: /l[aâ]che|ballant|instab/i
+        },
+        // Pseudarthrose double ou avant-bras ballant (instable/lâche)
+        {
+            pattern: /(?:pseudarthrose.*(?:double|deux\s+os|radius.*(?:et\s+(?:du\s+)?)?cubitus|cubitus.*(?:et\s+(?:du\s+)?)?radius)|avant.*bras.*ballant)/i,
+            context: /avant.*bras|l[aâ]che|ballant|instab|mobilit[eé].*anormal/i,
+            searchTerms: ["Pseudarthrose des deux os de l'avant-bras - lâche (Main Dominante)"],
+            priority: 9600
+        },
         // Pseudarthrose radiale isolée
         {
             pattern: /pseudarthrose.*(?:radiale?|radius)/i,
             context: /.*/i,
             searchTerms: ["Pseudarthrose du radius (Main Dominante)"],
-            priority: 9500
+            priority: 9500,
+            negativeContext: /deux\s+os|double|cubitus|ulna/i
         },
         // Pseudarthrose cubitale isolée
         {
             pattern: /pseudarthrose.*(?:cubitale?|cubitus|ulnaire?|ulna)/i,
             context: /.*/i,
             searchTerms: ["Pseudarthrose du cubitus (Main Dominante)"],
-            priority: 9500
-        },
-        // Pseudarthrose double ou avant-bras ballant (instable/lâche)
-        {
-            pattern: /(?:pseudarthrose.*(?:double|deux\s+os)|avant.*bras.*ballant)/i,
-            context: /avant.*bras/i,
-            searchTerms: ["Pseudarthrose des deux os de l'avant-bras - lâche (Main Dominante)"],
-            priority: 9500
-        },
-        {
-            pattern: /pseudarthrose.*(?:deux\s+os|double).*avant.*bras/i,
-            context: /serr[eé]e/i,
-            searchTerms: ["Pseudarthrose des deux os de l'avant-bras - serrée (Main Dominante)"],
-            priority: 9500
+            priority: 9500,
+            negativeContext: /deux\s+os|double|radius/i
         },
         
         // === RÈGLE SPÉCIALE: CONSOLIDATION SANS SÉQUELLE = 0% IPP (V3.3.137 FIX) ===
@@ -10220,7 +10303,17 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             term.includes("Hallux rigidus") ||
             term.includes("Griffes des orteils") ||
             term.includes("Amputation de deux orteils") ||
-            term.includes("Amputation de tous les orteils")
+            term.includes("Amputation de tous les orteils") ||
+            // 🆕 V3.3.313: Avant-bras pathologies = prioritaires
+            term.includes("Monteggia") ||
+            term.includes("Galeazzi") ||
+            term.includes("Synostose radio-cubitale") ||
+            term.includes("Fracture isolée du cubitus") ||
+            term.includes("Fracture isolée du radius") ||
+            term.includes("Fracture des deux os de l'avant-bras") ||
+            term.includes("Pseudarthrose du radius") ||
+            term.includes("Pseudarthrose du cubitus") ||
+            term.includes("Pseudarthrose des deux os de l'avant-bras")
         );
         
         if (isEarlyCumulDetected && isSimpleRule) {
@@ -14737,11 +14830,14 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
     const isFractureRadiusPoignet = /fracture.*(?:extr[eé]mit[eé]|distale?).*(?:inf[eé]rieure?|inf).*radius/i.test(text) || 
                                      (/fracture/i.test(text) && /radius/i.test(text) && /poignet/i.test(text));
     
+    // 🆕 V3.3.313: NE PAS intercepter si le texte est clairement une pathologie avant-bras (Galeazzi, Monteggia, fracture deux os, pseudarthrose, synostose, fracture isolée)
+    const isAvantBrasSpecificPathology = /galeazzi|monteggia|synostose|pseudarthrose|deux\s+os.*avant[\s-]?bras|avant[\s-]?bras.*deux\s+os|fracture.*isol[eé]e.*(?:radius|cubitus)|fracture.*(?:diaphyse|diaphysaire).*radius/i.test(text);
+    
     // 🆕 V3.3.280: NE PAS court-circuiter si le texte décrit des lésions sur 2+ sites anatomiques distincts
     // Dans ce cas, laisser le flux cumul Balthazard gérer TOUTES les lésions ensemble
     const isMultiSitePolytrauma = hasMultipleDistinctSites(text);
     
-    if ((isPouteauColles || isFractureRadiusPoignet) && !isExactMatch && !isMultiSitePolytrauma) {
+    if ((isPouteauColles || isFractureRadiusPoignet) && !isExactMatch && !isMultiSitePolytrauma && !isAvantBrasSpecificPathology) {
         console.log('🦴 [V3.3.216] FRACTURE POUTEAU-COLLES / RADIUS DISTAL détectée → Analyse spécialisée (site unique)');
         
         // Déterminer dominance
@@ -15925,7 +16021,11 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
     const isNerfMedianSimple = /(?:nerf\s+m[eé]dian|canal\s+carpien|syndrome.*canal.*carpien)(?!.*(?:ankylose|amputation|fracture.*(?:ol[eé]cran|hum[eé]r)))/i.test(text);
     const isPeripheralNerveMS = isNerfCubital || isNerfRadial || isNerfMedianSimple;
     
-    if (isPeripheralNerveMS && !isExactMatch && !isMultiSitePolytrauma && !hasMultipleMSPathologies) {
+    // 🆕 V3.3.313: NE PAS intercepter si la pathologie principale est une fracture avant-bras
+    // avec atteinte nerveuse SECONDAIRE (compression au foyer de fracture)
+    const isFractureAvantBrasPrimary = /fracture.*(?:deux\s+os|comminutive|ouverte).*avant[\s-]?bras|fracture.*avant[\s-]?bras.*(?:deux|2)\s+os/i.test(text);
+    
+    if (isPeripheralNerveMS && !isExactMatch && !isMultiSitePolytrauma && !hasMultipleMSPathologies && !isFractureAvantBrasPrimary) {
         console.log('🧠 [V3.3.281] PARALYSIE NERF PÉRIPHÉRIQUE MS détectée → Analyse spécialisée (site unique)');
         
         // Déterminer le nerf et le niveau
@@ -16086,9 +16186,9 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
         
         const isDesartEpaule = /d[eé]sarticulation.*[eé]paule|[eé]paule.*d[eé]sarticulation|amputation.*col\s+chirurgical/i.test(text);
         const isInterscapulo = /interscapulo/i.test(text);
-        const isBrasTiersSup = /amputation.*bras.*tiers\s+sup[eé]rieur|tiers\s+sup[eé]rieur.*bras.*amput/i.test(text);
-        const isBrasTiersMoy = /amputation.*bras.*tiers\s+moyen|tiers\s+moyen.*bras.*amput/i.test(text);
-        const isBrasTiersInf = /amputation.*bras.*tiers\s+inf[eé]rieur|tiers\s+inf[eé]rieur.*bras.*amput/i.test(text);
+        const isBrasTiersSup = /amputation.*bras.*tiers\s+sup[eé]rieur|tiers\s+sup[eé]rieur.*bras.*amput/i.test(text) && !/avant[\s-]*bras/i.test(text);
+        const isBrasTiersMoy = /amputation.*bras.*tiers\s+moyen|tiers\s+moyen.*bras.*amput/i.test(text) && !/avant[\s-]*bras/i.test(text);
+        const isBrasTiersInf = /amputation.*bras.*tiers\s+inf[eé]rieur|tiers\s+inf[eé]rieur.*bras.*amput/i.test(text) && !/avant[\s-]*bras/i.test(text);
         const isBrasGeneral = /amputation.*bras|bras.*amput[eé]|trans[\s-]?hum[eé]ral/i.test(text) && 
                               !/avant[\s-]*bras/i.test(text) && !isBrasTiersSup && !isBrasTiersMoy && !isBrasTiersInf;
         const isDesartCoude = /d[eé]sarticulation.*coude|coude.*d[eé]sarticulation/i.test(text);
@@ -16844,6 +16944,37 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
                 // Si pas de proposal, continuer le flux normal
                 break;
             }
+        }
+    }
+    
+    // 🆕 V3.3.313: AVANT-BRAS BYPASS PATTERNS - Empêche le routage vers polytraumatisme
+    // pour les pathologies de l'avant-bras (fractures, pseudarthroses, Monteggia, Galeazzi, synostose)
+    // ⚠️ Ne PAS bypasser si le texte contient des séparateurs de polytrauma (;) ou plusieurs systèmes
+    {
+        const hasMultiplePathologies = /;/.test(text);
+        if (!hasMultiplePathologies) {
+        const avantBrasBypassPatterns = [
+            { pattern: /fracture.*(?:deux|2)\s+os.*avant[\s-]?bras|fracture.*avant[\s-]?bras.*(?:deux|2)/i, context: /avant[\s-]?bras|radius|cubitus|consolidation|cal|prono|supination/i, label: 'Fracture deux os avant-bras' },
+            { pattern: /fracture.*isol[eé]e.*(?:radius|cubitus|ulna)|fracture.*(?:radius|cubitus).*isol[eé]/i, context: /avant[\s-]?bras|radius|cubitus|diaphyse|consolidation/i, label: 'Fracture isolée radius/cubitus' },
+            { pattern: /fracture.*diaphyse.*(?:radius|cubitus)|fracture.*(?:radius|cubitus).*diaphys/i, context: /avant[\s-]?bras|douleur|limitation|prono|supination/i, label: 'Fracture diaphysaire radius/cubitus' },
+            { pattern: /pseudarthrose.*(?:radius|cubitus|ulna|avant[\s-]?bras|deux\s+os)/i, context: /avant[\s-]?bras|radius|cubitus|consolidation|douleur|force|serr[eé]e|l[aâ]che/i, label: 'Pseudarthrose avant-bras' },
+            { pattern: /(?:fracture|s[eé]quelles?).*monteggia|monteggia/i, context: /coude|cubitus|radius|luxation|raideur|prono|douleur/i, label: 'Monteggia' },
+            { pattern: /(?:fracture|s[eé]quelles?).*galeazzi|galeazzi/i, context: /radius|poignet|radio[\s-]?cubitale?|prono|supination|instabilit[eé]/i, label: 'Galeazzi' },
+            { pattern: /synostose.*radio[\s-]?cubital|synostose.*radius|pont\s+osseux.*radius/i, context: /prono|supination|blocage|rotation|avant[\s-]?bras/i, label: 'Synostose radio-cubitale' },
+            { pattern: /fracture.*cubitus.*(?:pare[\s-]?choc|d[eé]fense)|cubitus.*fractur/i, context: /cubitus|avant[\s-]?bras|plâtre|consolidation|douleur/i, label: 'Fracture cubitus (pare-choc)' },
+            { pattern: /fracture.*radius.*cubitus|fracture.*cubitus.*radius/i, context: /avant[\s-]?bras|ost[eé]osynth|plaque|consolidation/i, label: 'Fracture radius + cubitus' },
+        ];
+        
+        for (const bp of avantBrasBypassPatterns) {
+            if (bp.pattern.test(text) && bp.context.test(text)) {
+                console.log(`💪 [V3.3.313] ${bp.label} détecté → Bypass cumul, analyse directe via comprehensiveSingleLesionAnalysis`);
+                const directResult = comprehensiveSingleLesionAnalysis(text, externalKeywords, true);
+                if (directResult.type === 'proposal') {
+                    return directResult;
+                }
+                break;
+            }
+        }
         }
     }
     
