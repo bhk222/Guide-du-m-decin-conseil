@@ -3129,6 +3129,28 @@ const calculateSeverityAdjustment = (text: string): {
         criteria.push('Rupture totale/complète (lésion sévère)');
         score += 2;
     }
+    // 🆕 V3.3.318: Raccourcissement du MEMBRE INFÉRIEUR = séquelle significative
+    // ⚠️ Ne s'applique PAS au raccourcissement métacarpien/digital (phalange)
+    const raccMatch = text.match(/raccourcissement.*?(\d+)\s*(?:cm|mm)/i);
+    const isLowerLimbRacc = /raccourcissement.*(?:membre|jambe|f[eé]mur|tibia)/i.test(text) || (/raccourcissement/i.test(text) && !/m[eé]tacarp|phalange|doigt|main/i.test(text));
+    if (raccMatch && isLowerLimbRacc) {
+        const raccCm = raccMatch[0].includes('mm') ? parseInt(raccMatch[1]) / 10 : parseInt(raccMatch[1]);
+        if (raccCm >= 3) {
+            criteria.push(`Raccourcissement significatif (${raccCm}cm)`);
+            score += 2;
+        } else if (raccCm >= 1) {
+            criteria.push(`Raccourcissement (${raccCm}cm)`);
+            score += 1;
+        }
+    } else if (isLowerLimbRacc && /raccourcissement|in[ée]galit[ée].*membre/i.test(text)) {
+        criteria.push('Raccourcissement du membre');
+        score += 1;
+    }
+    // 🆕 V3.3.318: Arthrose post-traumatique / coxarthrose = complication articulaire grave
+    if (/coxarthrose|arthrose\s+post[\s-]?traumat|gonarthrose\s+post[\s-]?traumat/i.test(text)) {
+        criteria.push('Arthrose post-traumatique (complication articulaire)');
+        score += 2;
+    }
     if (/cicatrice.*mauvaise.*qualit[eé]|cicatrice.*adh[eé]rent|cicatrice.*hypertrophique/i.test(text)) {
         criteria.push('Cicatrices de mauvaise qualité');
         score += 1;
@@ -9822,6 +9844,15 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             context: /consolidation.*satisfaisante|sans.*raideur/i,
             searchTerms: ['Fracture du massif trochantérien - Bonne consolidation'],
             priority: 998
+        },
+        // === 🆕 V3.3.318: FRACTURE COTYLE + COXARTHROSE (ARTHROSE POST-TRAUMATIQUE) ===
+        // Barème: "Fracture du cotyle avec arthrose post-traumatique" [15-40%]
+        {
+            pattern: /fracture.*cotyle/i,
+            context: /coxarthrose|coxarthrie|arthrose.*(?:hanche|coxo)|raccourcissement/i,
+            searchTerms: ['Fracture du cotyle avec arthrose post-traumatique'],
+            priority: 1001,
+            negativeContext: /proth[èe]se.*totale|PTH/i
         },
         // === RÈGLE FRACTURE COTYLE AVEC SÉQUELLES (V3.3.122) ===
         {
@@ -17557,8 +17588,39 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
     
     // ========== 5. MEMBRES INFÉRIEURS ==========
     
+    // 🆕 V3.3.318: Fracture du cotyle — détection AVANT bassin et PTH/coxarthrose
+    // Le cotyle est une pathologie de la HANCHE, pas du bassin
+    if (/fracture.*coty|coty.*fractur/i.test(text)) {
+        const hasCoxarthrose = /coxarthrose|coxarthrie|arthrose.*(?:hanche|coxo)/i.test(text);
+        const hasRaccourcissement = /raccourcissement|in[ée]galit[ée].*membre/i.test(text);
+        
+        if (hasCoxarthrose) {
+            // Fracture cotyle + coxarthrose = séquelles articulaires graves
+            detectedSequelae.push({
+                name: 'Fracture du cotyle avec coxarthrose post-traumatique',
+                keywords: ['fracture', 'cotyle', 'coxarthrose', 'arthrose', 'hanche', 'raccourcissement'],
+                context: text.match(/fracture.*coty[^.;]*/i)?.[0] || ''
+            });
+            if (hasRaccourcissement) {
+                detectedSequelae.push({
+                    name: 'Raccourcissement du membre inférieur (séquelle fracture cotyle)',
+                    keywords: ['raccourcissement', 'membre', 'cotyle'],
+                    context: text.match(/raccourcissement[^.;]*/i)?.[0] || ''
+                });
+            }
+        } else {
+            detectedSequelae.push({
+                name: 'Fracture du cotyle',
+                keywords: ['fracture', 'cotyle', 'acétabulum', 'hanche'],
+                context: text.match(/fracture.*coty[^.;]*/i)?.[0] || ''
+            });
+        }
+    }
+    
     // 🆕 V3.3.288: Prothèse totale de hanche (PTH) / Coxarthrose post-traumatique
-    if (/proth[èe]se\s+totale\s+(?:de\s+)?(?:la\s+)?hanche|\bPTH\b|coxarthrose\s+post[\s-]?traumat|coxarthrie\s+post[\s-]?traumat/i.test(text)) {
+    // 🔧 V3.3.318: Skip si fracture cotyle déjà détectée ci-dessus
+    const hasFractureCotyleAlready318 = /fracture.*coty|coty.*fractur/i.test(text);
+    if (!hasFractureCotyleAlready318 && /proth[èe]se\s+totale\s+(?:de\s+)?(?:la\s+)?hanche|\bPTH\b|coxarthrose\s+post[\s-]?traumat|coxarthrie\s+post[\s-]?traumat/i.test(text)) {
         const hasBonneFonction = /bon(?:ne)?.*(?:fonction|r[ée]sultat)|sans.*(?:douleur|boiterie|g[eê]ne)|stable.*indolore/i.test(text);
         const hasBoiterie = /boiterie|boitant|claudication/i.test(text);
         const hasDouleurs = /douleur|algies|algie/i.test(text);
@@ -17577,12 +17639,15 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
             context: text.match(/proth[èe]se.*hanche[^.;]*/i)?.[0] || text.match(/coxarthrose[^.;]*/i)?.[0] || ''
         });
     }
-    // 🆕 V3.3.288: Coxarthrose post-traumatique sans PTH
-    else if (/coxarthrose\s+post[\s-]?traumat|arthrose.*hanche.*post[\s-]?traumat/i.test(text) && !/proth[èe]se/i.test(text)) {
+    // 🆕 V3.3.288+V3.3.318: Coxarthrose post-traumatique sans PTH
+    // V3.3.318: Élargi pour capturer "séquelle coxarthrose" / "coxarthrose" SANS exiger "post-traumatique"
+    // Quand le contexte mentionne une fracture (cotyle, fémur, hanche), la coxarthrose EST post-traumatique
+    // 🔧 V3.3.318: Skip si fracture cotyle déjà détectée (la coxarthrose est incluse dans la séquelle cotyle)
+    else if (!hasFractureCotyleAlready318 && /coxarthrose|coxarthrie|arthrose.*(?:hanche|coxo)/i.test(text) && !/proth[èe]se/i.test(text)) {
         detectedSequelae.push({
             name: 'Coxarthrose post-traumatique',
             keywords: ['coxarthrose', 'arthrose', 'hanche', 'post-traumatique'],
-            context: text.match(/coxarthrose[^.;]*/i)?.[0] || ''
+            context: text.match(/coxarthrose[^.;]*/i)?.[0] || text.match(/arthrose.*hanche[^.;]*/i)?.[0] || ''
         });
     }
     
@@ -18660,6 +18725,16 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
         // → Doit atteindre comprehensiveSingleLesionAnalysis → expert rule "Rupture de la coiffe des rotateurs"
         else if (/rupture.*(?:coiffe|sus[- ]?[eéè]pineux|supra[- ]?[eéè]pineux|sous[- ]?[eéè]pineux|infra[- ]?[eéè]pineux)|(?:sus|supra|sous|infra)[- ]?[eéè]pineux.*(?:rupture|d[eé]chir)|coiffe.*rotateurs.*(?:rupture|l[eé]sion|d[eé]chir)|d[eé]chirure.*coiffe|l[eé]sion.*coiffe|tendinopathie.*(?:sus|supra)[- ]?[eéè]pineux/i.test(text)) {
             console.log('💪 [V3.3.317] RUPTURE COIFFE/SUS-ÉPINEUX détectée → Bypass vers expert rules (pathologie épaule unique)');
+            // Ne pas retourner, laisser l'analyse continuer vers comprehensiveSingleLesionAnalysis
+        }
+        // 🆕 V3.3.318: FRACTURE COTYLE + COXARTHROSE + RACCOURCISSEMENT = PATHOLOGIE HANCHE UNIQUE
+        // La coxarthrose et le raccourcissement sont des SÉQUELLES de la fracture du cotyle
+        // → NE DOIT JAMAIS être regroupé en "Polytraumatisme - 2 systèmes" (BASSIN + MEMBRE_INFERIEUR)
+        // → Doit atteindre comprehensiveSingleLesionAnalysis → expert rule "Fracture du cotyle avec arthrose"
+        else if (/fracture.*coty|coty.*fractur/i.test(text) &&
+                 (/coxarthrose|coxarthrie|arthrose.*(?:hanche|coxo)|raccourcissement|s[eé]quelle/i.test(text)) &&
+                 !(/fracture.*(?:hum[eé]rus|c[oô]tes?|radius|poignet|clavicule|tibia|f[eé]mur|cheville|rachis|vert[eé]br)|luxation.*(?:[eé]paule|genou)/i.test(text))) {
+            console.log('🦴 [V3.3.318] FRACTURE COTYLE + COXARTHROSE/RACCOURCISSEMENT → Bypass vers expert rules (pathologie hanche unique)');
             // Ne pas retourner, laisser l'analyse continuer vers comprehensiveSingleLesionAnalysis
         } else {
             // 🆕 V3.3.155: CALCUL AUTOMATIQUE IPP (polytraumatismes ET cas simples)
