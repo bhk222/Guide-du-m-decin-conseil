@@ -7416,6 +7416,56 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             searchTerms: ["Raideur de la cheville"],
             priority: 10350
         },
+        // 🆕 V3.3.312: ULTRA-PRIORITÉ ankylose cheville (quand ankylose est la présentation principale, au-dessus de pilon tibial)
+        {
+            pattern: /^ankylose\b.*(?:cheville|cou\s*de\s*pied|tibio)/i,
+            context: /angle|droit|[eé]quin|position|mobili|flexion|s[eé]quell|fracture|pilon|impossib|douleur/i,
+            searchTerms: ["Ankylose de la cheville"],
+            priority: 15008,
+        },
+        // 🆕 V3.3.312: Arthrodèse tibio-talienne en bonne position (au-dessus de pilon tibial)
+        {
+            pattern: /arthrod[eè]se\s+tibio[\s-]?talienne/i,
+            context: /cheville|fusion|angle|bonne|douleur|marche|flexion|arthrose|post.*fracture|impossib/i,
+            searchTerms: ["Arthrodèse tibio-talienne en bonne position"],
+            priority: 15007,
+            negativeContext: /triple\s+arthrod[eè]se/i
+        },
+        // 🆕 V3.3.312: Triple arthrodèse (cheville + arrière-pied)
+        {
+            pattern: /triple\s+arthrod[eè]se/i,
+            context: /cheville|arri[eè]re[\s-]?pied|fusion|raideur|douleur|marche|boiterie|tibio/i,
+            searchTerms: ["triple arthrodèse"],
+            priority: 15007,
+        },
+        // 🆕 V3.3.312: Fracture malléolaire avec cal vicieux / déformation / troubles trophiques
+        {
+            pattern: /(?:fracture|s[eé]quell).*mall[eé]ol.*(?:cal\s*vicieux|d[eé]formation|troubles?\s+trophiques)|(?:cal\s*vicieux|troubles?\s+trophiques).*mall[eé]ol/i,
+            context: /cheville|oed[eè]me|raideur|boiterie|douleur|canne|valgus/i,
+            searchTerms: ["fracture malléolaire cal vicieux important, déformation troubles trophiques"],
+            priority: 15006,
+        },
+        // 🆕 V3.3.312: Équinisme cheville SUPER-PRIORITÉ (quand équinisme est la présentation principale)
+        {
+            pattern: /^[eé]quinisme\b/i,
+            context: /cheville|pied|dorsiflexion|marche|appareillage|releveur|tendon|talonnette|boiterie|paralysie/i,
+            searchTerms: ["Raideur de la cheville"],
+            priority: 15006,
+        },
+        // 🆕 V3.3.312: Luxation sous-talienne → raideur sous-astragalienne
+        {
+            pattern: /luxation\s+sous[\s-]?talienne|luxation.*sous[\s-]?astragal/i,
+            context: /pied|raideur|douleur|s[eé]quell|inversion|[eé]version|marche|chaussure/i,
+            searchTerms: ["Raideur cheville + sous-astragalienne"],
+            priority: 15006,
+        },
+        // 🆕 V3.3.312: Raideur combinée cheville + sous-astragalienne
+        {
+            pattern: /raideur.*(?:cheville|tibio[\s-]?tarsien).*(?:sous[\s-]?astragal|sous[\s-]?talien)|raideur.*combin[eé]e?.*cheville/i,
+            context: /calcan[eé]um|inversion|[eé]version|douleur|marche|limitation|claudication/i,
+            searchTerms: ["Raideur cheville + sous-astragalienne"],
+            priority: 15006,
+        },
         // 🆕 V3.3.292: SUPER-PRIORITÉ pilon tibial (évite confusion avec raideur cheville)
         {
             pattern: /fracture.*pilon\s+tibial|pilon\s+tibial/i,
@@ -10127,6 +10177,11 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             term.includes("Raideur importante de la cheville") ||
             term.includes("Fracture du calcanéum") ||
             term.includes("tendon d'Achille") ||
+            // 🆕 V3.3.312: Cheville pathologies complémentaires = prioritaires
+            term.includes("Arthrodèse tibio-talienne") ||
+            term.includes("triple arthrodèse") ||
+            term.includes("Raideur cheville + sous-astragalienne") ||
+            term.includes("cal vicieux important") ||
             // 🆕 V3.3.293: Thorax pathologies = prioritaires
             term.includes("Fracture isolée du sternum") ||
             term.includes("Fracture de côtes non compliquée") ||
@@ -16771,6 +16826,12 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
             { pattern: /fracture.*calcan[eé]um|calcan[eé]um.*fractur/i, context: /douleur|boiterie|appui|talon|marche|chute|semelle/i, label: 'Fracture calcanéum' },
             { pattern: /fracture.*(?:deux|2).*os.*jambe/i, context: /tibia|jambe|p[eé]ron[eé]|cal.*vicieux|enclouage|consolid/i, label: 'Fracture deux os jambe' },
             { pattern: /raideur.*(?:important|s[eé]v[eè]r).*cheville|raideur.*cheville.*(?:post|s[eé]quell|bimall[eé]ol)/i, context: /claudication|canne|flexion|douleur|bimall[eé]ol|antalgique/i, label: 'Raideur cheville sévère' },
+            // 🆕 V3.3.312: Bypass cheville pathologies complémentaires
+            { pattern: /[eé]quinisme|[eé]quin\b.*(?:pied|cheville)/i, context: /cheville|dorsiflexion|appareillage|releveur|marche|pied|talonnette|paralysie/i, label: 'Équinisme cheville' },
+            { pattern: /triple\s+arthrod[eè]se/i, context: /cheville|arri[eè]re.*pied|fusion|raideur|douleur|tibio/i, label: 'Triple arthrodèse' },
+            { pattern: /arthrod[eè]se\s+tibio[\s-]?talienne/i, context: /cheville|fusion|angle|bonne.*position|arthrose|douleur/i, label: 'Arthrodèse tibio-talienne' },
+            { pattern: /luxation\s+sous[\s-]?talienne|luxation.*sous[\s-]?astragal/i, context: /pied|raideur|douleur|inversion|marche|s[eé]quell/i, label: 'Luxation sous-talienne' },
+            { pattern: /raideur.*(?:cheville|tibio).*sous[\s-]?(?:astragal|talien)/i, context: /calcan[eé]um|douleur|marche|inversion|limitation/i, label: 'Raideur cheville + sous-astragalienne' },
         ];
         
         for (const bp of jambeBypassPatterns) {
