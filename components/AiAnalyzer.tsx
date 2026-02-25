@@ -371,6 +371,11 @@ const preprocessMedicalText = (text: string): string => {
     // V3.3.128: Réactivé avec optimisation - nécessaire pour reconnaissance
     processed = expandWithSynonyms(processed);
     
+    // 🆕 V3.3.309: ÉTAPE 0B - NORMALISATION D-CODES (doigts) séparés par des points
+    // "D2. D3 D4 D5" → "D2 D3 D4 D5" (dots between D-codes are list separators, not sentence enders)
+    // This MUST happen BEFORE sentence splitting to keep digit lists intact
+    processed = processed.replace(/\b([dD][2-5])\s*\.\s*(?=[dD][2-5])/g, '$1 ');
+    
     // ÉTAPE 1. ABRÉVIATIONS MÉDICALES PROFESSIONNELLES (pour médecins)
     const medicalAbbreviations: [RegExp, string | ((substring: string, ...args: any[]) => string)][] = [
         // 🆕 V3.3.124.4: Séparer abréviations collées (ex: "p1o4" → "p1 o4", "d2p1" → "d2 p1")
@@ -383,8 +388,9 @@ const preprocessMedicalText = (text: string): string => {
         [/\bmp\b(?!\s*\d)/gi, 'maladie professionnelle '], // Évite MP3, MP4...
         
         // === ANATOMIE - MEMBRES ===
-        // 🆕 V3.3.61: Doigts et orteils - AVANT phalanges génériques pour priorité sur p1 o4, p2 d5, etc.
-        [/\b([dD])([1-5])\b(?=\s*(?:de|du|mg|md|main|gauche|droite|fracture|amputation|ecrasement|arrachement|consolid|avec|raideur|ankylose|douleur|séquelle))/gi, (match, d, num) => {
+        // 🆕 V3.3.61+V3.3.309: Doigts et orteils - AVANT phalanges génériques pour priorité sur p1 o4, p2 d5, etc.
+        // V3.3.309: Widened lookahead to also accept D-code followed by another D-code, period, comma, semicolon, P-code, or end-of-string
+        [/\b([dD])([1-5])\b(?=\s*(?:de|du|mg|md|main|gauche|droite|fracture|amputation|ecrasement|arrachement|consolid|avec|raideur|ankylose|douleur|séquelle|[dD][1-5]|[.,;]|p[1-3]\b|\s*$))/gi, (match, d, num) => {
             const doigts = ['', 'pouce', 'index', 'médius', 'annulaire', 'auriculaire'];
             return `${d.toLowerCase() === 'd' ? 'doigt' : 'Doigt'} ${doigts[parseInt(num)]} `;
         }],
@@ -13568,8 +13574,10 @@ export const detectMultipleLesions = (text: string): {
     const hasPlateauTibial = /plateau.*tibial|fracture.*plateau/i.test(normalized);
     // Si "tiers distal" mentionné, forcer l'analyse à chercher "jambe" pas "genou"
     
-    // 🆕 V3.3.124: Amélioration détection cumuls doigts/orteils + viscères
-    const hasMultipleDigits = /(?:amputation|raideur|ankylose).*(?:medius|annulaire|auriculaire|p[2-5]|d[2-5]).*?(?:et|avec).*?(?:medius|annulaire|auriculaire|p[2-5]|d[2-5])/i.test(normalized);
+    // 🆕 V3.3.124+V3.3.309: Amélioration détection cumuls doigts/orteils + viscères
+    // V3.3.309: Added space-separated D-code detection (e.g., "D2 D3 D4" without "et/avec")
+    const hasMultipleDigits = /(?:amputation|raideur|ankylose|fracture).*(?:medius|annulaire|auriculaire|index|p[2-5]|d[2-5]).*?(?:et|avec|\s).*?(?:medius|annulaire|auriculaire|index|p[2-5]|d[2-5])/i.test(normalized) ||
+                              /\bd[2-5]\b.*\bd[2-5]\b/i.test(normalized);
     const hasMultipleToes = /(?:amputation|raideur|ankylose).*(?:gros\s+orteil|orteil|o[1-5]).*?(?:et|avec).*?(?:orteil|o[1-5])/i.test(normalized);
     const hasMultipleViscera = /(splenectomie|nephrectomie|colectomie|hepatectomie).*?(?:et|avec|associee).*?(splenectomie|nephrectomie|colectomie|hepatectomie)/i.test(normalized);
     
@@ -14401,7 +14409,7 @@ const hasMultipleDistinctSites = (text: string): boolean => {
  * @param isExactMatch - Si true, cherche une correspondance exacte par nom (pour résoudre ambiguïté)
  */
 export const localExpertAnalysis = (text: string, externalKeywords?: string[], isExactMatch: boolean = false): LocalAnalysisResult => {
-    console.log('🔧 localExpertAnalysis V3.3.295 - visceral expert rules expanded (résection grêle, hernie, incontinence, sténose biliaire, SII, fistule biliaire)');
+    console.log('🔧 localExpertAnalysis V3.3.309 - multi-finger D-code disambiguation + visceral expert rules');
 
     // 🔴 V3.3.162: NETTOYAGE TEXTE - Supprime caractères invisibles (zero-width space, etc.)
     // Ces caractères peuvent casser les regex et empêcher la détection
@@ -14410,6 +14418,168 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
     text = text.trim();
     
     console.log('🔍 [V3.3.162] TEXTE REÇU (nettoyé):', text.substring(0, 200));
+
+    // 🆕 V3.3.309: MULTI-FINGER ANKYLOSE/FRACTURE HANDLER (D-code disambiguation)
+    // Handles patterns like: "fracture ouverte de D2. D3 D4 D5 . ankyloses P2 ET P3 du D2 D3 D4"
+    // D[2-5] are DIGIT codes (index, médius, annulaire, auriculaire), NOT dorsal vertebrae
+    // P[1-3] are phalange levels → confirms HAND context
+    // This handler MUST fire BEFORE cumul detection to prevent D-codes being split and mismatched to spine
+    {
+        const normFingers = normalize(text);
+        // Extract all D-codes (D2-D5) in the text
+        const allDCodeMatches = normFingers.match(/\bd([2-5])(?!\d)/gi) || [];
+        const uniqueDCodes = [...new Set(allDCodeMatches.map(d => d.toLowerCase()))];
+        
+        // Hand context indicators
+        const hasPhalangeCode = /\bp[1-3]\b/i.test(normFingers);
+        const hasAnkyloseCtx = /ankylose/i.test(normFingers);
+        const hasFractureDigitCtx = /fracture/i.test(normFingers) && uniqueDCodes.length >= 2;
+        const hasHandKeywords = /main|doigt|phalange|metacarp/i.test(normFingers);
+        const isHandContext = hasPhalangeCode || hasHandKeywords;
+        
+        // Trigger: 2+ different D-codes AND (P-codes OR hand keywords) AND (ankylose OR multi-fracture)
+        if (uniqueDCodes.length >= 2 && isHandContext && (hasAnkyloseCtx || hasFractureDigitCtx) && !isExactMatch) {
+            console.log(`🖐️ [V3.3.309] MULTI-FINGER HANDLER: ${uniqueDCodes.length} D-codes (${uniqueDCodes.join(', ')}) with hand context`);
+            
+            const digitMap: Record<string, string> = {
+                'd1': 'pouce', 'd2': 'index', 'd3': 'médius', 'd4': 'annulaire', 'd5': 'auriculaire'
+            };
+            // Barème 1967 - Ankylose totalité (Main Dominante / Main Non Dominante)
+            const ankyloseRatesMD: Record<string, number> = { 'pouce': 22, 'index': 15, 'médius': 12, 'annulaire': 8, 'auriculaire': 10 };
+            const ankyloseRatesMND: Record<string, number> = { 'pouce': 18, 'index': 12, 'médius': 10, 'annulaire': 6, 'auriculaire': 8 };
+            
+            // Determine which fingers have ankylose vs fracture-only
+            const ankyloseDigits: string[] = [];
+            const fractureOnlyDigits: string[] = [];
+            
+            // Parse ankylose section: "ankyloses P2 ET P3 du D2 D3 D4"
+            const afterAnkylose = normFingers.split(/ankylose[s]?/i).slice(1).join(' ');
+            for (const dc of uniqueDCodes) {
+                const dNum = dc.charAt(1);
+                if (hasAnkyloseCtx && new RegExp(`\\bd${dNum}\\b`, 'i').test(afterAnkylose)) {
+                    ankyloseDigits.push(dc);
+                }
+            }
+            // Remaining D-codes without ankylose = fracture-only
+            for (const dc of uniqueDCodes) {
+                if (!ankyloseDigits.includes(dc)) {
+                    fractureOnlyDigits.push(dc);
+                }
+            }
+            // If no ankylose section parsed but ankylose keyword present, assume all fingers have ankylose
+            if (ankyloseDigits.length === 0 && hasAnkyloseCtx) {
+                for (const dc of uniqueDCodes) { ankyloseDigits.push(dc); }
+                fractureOnlyDigits.length = 0;
+            }
+            
+            console.log(`🖐️ [V3.3.309] Ankylose: ${ankyloseDigits.map(d => digitMap[d]).join(', ')} | Fracture-only: ${fractureOnlyDigits.map(d => digitMap[d]).join(', ')}`);
+            
+            // Detect dominance
+            const isNonDom309 = /non[\s-]*dominant/i.test(text);
+            const isDom309 = !isNonDom309 && (/dominant|main\s+dominante/i.test(text) || (/droit/i.test(text) && !/gaucher/i.test(text)));
+            const domLabel309 = isNonDom309 ? 'Main Non Dominante' : 'Main Dominante';
+            const rates309 = isNonDom309 ? ankyloseRatesMND : ankyloseRatesMD;
+            
+            // Detect phalange levels for ankylose severity
+            const hasP1_309 = /\bp1\b/i.test(normFingers);
+            const hasP2_309 = /\bp2\b/i.test(normFingers);
+            const hasP3_309 = /\bp3\b/i.test(normFingers);
+            const isTotalAnkylose309 = (hasP2_309 && hasP3_309) || (hasP1_309 && hasP2_309) || /totalit[eé]|complet/i.test(normFingers);
+            
+            // Build per-finger assessment
+            const fingerAssessments: Array<{ finger: string; injury: string; rate: number; baremeName: string }> = [];
+            
+            for (const dc of ankyloseDigits) {
+                const fingerName = digitMap[dc];
+                const rate = rates309[fingerName] || 5;
+                const article = (fingerName === 'index' || fingerName === 'annulaire' || fingerName === 'auriculaire') ? "de l'" : 'du ';
+                
+                if (isTotalAnkylose309) {
+                    fingerAssessments.push({
+                        finger: fingerName,
+                        injury: `Ankylose ${article}${fingerName} (totalité)`,
+                        rate: rate,
+                        baremeName: `Ankylose ${article}${fingerName} (totalité) (${domLabel309})`
+                    });
+                } else {
+                    // Partial ankylose (single phalange) → raideur rate
+                    const raideurRate = Math.max(Math.round(rate * 0.3), 2);
+                    fingerAssessments.push({
+                        finger: fingerName,
+                        injury: `Raideur ${article}${fingerName}`,
+                        rate: raideurRate,
+                        baremeName: `Raideur d'une articulation ${article}${fingerName} (${domLabel309})`
+                    });
+                }
+            }
+            
+            for (const dc of fractureOnlyDigits) {
+                const fingerName = digitMap[dc];
+                // Fracture without ankylose → séquelles (raideur post-fracture)
+                // "fracture ouverte" = plus sévère → milieu-haut de [3-10]%
+                const isOpenFracture = /fracture\s+ouverte/i.test(normFingers);
+                const fractureRate = isOpenFracture ? 7 : 5;
+                fingerAssessments.push({
+                    finger: fingerName,
+                    injury: `Séquelles fracture ${fingerName}`,
+                    rate: fractureRate,
+                    baremeName: `Séquelles de fracture de métacarpien (cal vicieux, raideur) (${domLabel309})`
+                });
+            }
+            
+            if (fingerAssessments.length >= 2) {
+                // Sort by rate descending for Balthazard
+                fingerAssessments.sort((a, b) => b.rate - a.rate);
+                
+                // Compute Balthazard cumul
+                let ippCumul309 = 0;
+                const balthSteps: string[] = [];
+                
+                for (let i = 0; i < fingerAssessments.length; i++) {
+                    const fa = fingerAssessments[i];
+                    if (i === 0) {
+                        ippCumul309 = fa.rate;
+                        balthSteps.push(`IPP₁ = ${fa.rate}% (${fa.injury})`);
+                    } else {
+                        const contrib = Math.round(fa.rate * (100 - ippCumul309) / 100);
+                        balthSteps.push(`+ ${fa.rate}% × (100 - ${ippCumul309}) / 100 = +${contrib}% (${fa.injury})`);
+                        ippCumul309 += contrib;
+                    }
+                }
+                
+                console.log(`🖐️ [V3.3.309] Balthazard cumul = ${ippCumul309}% (${fingerAssessments.length} doigts)`);
+                
+                const justif309 =
+                    `<strong>🖐️ TRAUMATISME MULTI-DOIGTS DÉTECTÉ (${fingerAssessments.length} doigts)</strong><br><br>` +
+                    `<strong>📋 DOIGTS ATTEINTS :</strong><br>` +
+                    fingerAssessments.map((fa, i) =>
+                        `&nbsp;&nbsp;${i + 1}. <strong>${fa.finger.charAt(0).toUpperCase() + fa.finger.slice(1)}</strong> : ${fa.injury} → <strong>${fa.rate}%</strong><br>&nbsp;&nbsp;&nbsp;&nbsp;<em>${fa.baremeName}</em>`
+                    ).join('<br>') + '<br><br>' +
+                    (hasPhalangeCode ? `<strong>📊 NIVEAU PHALANGIEN :</strong> ${hasP1_309 ? 'P1 ' : ''}${hasP2_309 ? 'P2 ' : ''}${hasP3_309 ? 'P3 ' : ''}→ ${isTotalAnkylose309 ? 'Ankylose totalité (2+ phalanges)' : 'Ankylose partielle'}<br><br>` : '') +
+                    `<strong>📐 CALCUL BALTHAZARD (cumul lésions indépendantes) :</strong><br>` +
+                    balthSteps.map(s => `&nbsp;&nbsp;• ${s}`).join('<br>') + '<br>' +
+                    `&nbsp;&nbsp;→ <strong>IPP cumulé = ${ippCumul309}%</strong><br><br>` +
+                    `<div style="background: #fff3e0; border-left: 4px solid #ff9800; padding: 12px; margin: 8px 0;">` +
+                    `<strong style="font-size: 18px; color: #e65100;">IPP = ${ippCumul309}%</strong><br>` +
+                    `<span style="font-size: 14px;">Cumul Balthazard — ${fingerAssessments.length} lésions de doigts (${domLabel309})</span>` +
+                    `</div><br>` +
+                    `⚖️ <strong>Base juridique</strong> : Formule de Balthazard (cumul lésions indépendantes, barème officiel algérien 1967)`;
+                
+                return {
+                    type: 'proposal' as const,
+                    name: `Polytraumatisme doigts (cumul ${fingerAssessments.length} lésions)`,
+                    rate: ippCumul309,
+                    justification: justif309,
+                    path: 'Membres Supérieurs > Doigts - Ankyloses',
+                    injury: {
+                        name: `Polytraumatisme doigts (cumul ${fingerAssessments.length} lésions)`,
+                        rate: ippCumul309
+                    },
+                    isCumul: true
+                } as LocalProposal;
+            }
+        }
+    }
     
     // 🆕 V3.3.216: FRACTURE POUTEAU-COLLES / EXTRÉMITÉ INFÉRIEURE DU RADIUS
     // Détection prioritaire AVANT detectedSequelae pour éviter faux cumul (fracture+raideur = UNE SEULE lésion)
