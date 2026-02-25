@@ -6897,6 +6897,41 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
         },
         
         // === RÈGLES AUDITION V3.3.133 - HAUTE PRIORITÉ ===
+        // 🆕 V3.3.308: Surdité bilatérale profonde (avec ou sans perforation tympanique)
+        {
+            pattern: /surdit[eé].*(?:profonde|compl[eè]te|totale|cophose|anacousie).*bilat[eé]ral|bilat[eé]ral.*surdit[eé].*(?:profonde|compl[eè]te|totale)/i,
+            context: /.*/i,
+            searchTerms: ["Surdité bilatérale profonde (perte > 85 dB)"],
+            priority: 10700  // Plus haute que unilatérale (10600)
+        },
+        {
+            pattern: /surdit[eé].*perception.*profonde.*bilat[eé]ral|perforation.*tympan.*surdit[eé].*profonde/i,
+            context: /.*/i,
+            searchTerms: ["Surdité bilatérale profonde (perte > 85 dB)"],
+            priority: 10700
+        },
+        // 🆕 V3.3.308: Surdité bilatérale sévère
+        {
+            pattern: /surdit[eé].*(?:s[eé]v[eè]re|importante|majeure).*bilat[eé]ral|bilat[eé]ral.*surdit[eé].*(?:s[eé]v[eè]re|importante)/i,
+            context: /.*/i,
+            searchTerms: ["Surdité bilatérale sévère (perte 70-85 dB)"],
+            priority: 10650
+        },
+        // 🆕 V3.3.308: Perforation tympanique bilatérale (avec surdité)
+        {
+            pattern: /perforation.*tympan.*bilat[eé]ral.*surdit[eé]|perforation.*tympan.*(?:avec|et).*surdit[eé]/i,
+            context: /.*/i,
+            searchTerms: ["Surdité bilatérale profonde (perte > 85 dB)"],
+            priority: 10700
+        },
+        // 🆕 V3.3.308: Perforation tympanique seule (sans mention surdité) → Otorrhée chronique
+        {
+            pattern: /perforation.*tympan|tympan.*perfor[eé]/i,
+            context: /.*/i,
+            searchTerms: ["Otorrhée chronique post-traumatique"],
+            priority: 10500,
+            negativeContext: /surdit[eé]|perte.*auditi|cophose|anacousie/i  // Si surdité présente, les règles plus haut prennent le relais
+        },
         {
             pattern: /surdit[eé].*(?:compl[eè]te|profonde|totale).*(?:une?|unilat[eé]rale?|d['\"]?oreille)/i,
             context: /autre.*normale|normale.*autre|unilat[eé]rale?/i,
@@ -13382,6 +13417,27 @@ export const detectMultipleLesions = (text: string): {
         }
     }
     
+    // 🆕 V3.3.308: EXCEPTION ORL - Perforation tympanique + Surdité = MÊME pathologie ORL
+    // "perforation tympanique bilatérale ; avec surdité de perception profonde bilatérale" = UNE SEULE pathologie
+    // La perforation tympanique est la CAUSE de la surdité, pas une lésion distincte
+    const hasTympanPerforation = /perforation.*tympan|tympan.*perfor/i.test(normalized);
+    const hasSurditeORL = /surdit[eé]|perte.*auditi|hypoacousie|cophose|anacousie/i.test(normalized);
+    const hasAcouphenes = /acouph[eè]ne|bourdonnement|sifflement.*oreille|tinnitus/i.test(normalized);
+    const isORLOnly = hasTympanPerforation && (hasSurditeORL || hasAcouphenes);
+    if (isORLOnly) {
+        const hasOtherDistinctLesionORL = /fracture.*(?:femur|tibia|humerus|bassin|cote|rotule|radius|poignet|clavicule|vertebr|mandibule)|luxation.*(?:epaule|hanche|genou)/i.test(normalized);
+        if (!hasOtherDistinctLesionORL) {
+            console.log('👂 [V3.3.308] Perforation tympanique + surdité/acouphènes → PAS de cumul (même pathologie ORL)');
+            return {
+                isCumul: false,
+                lesionCount: 1,
+                keywords: [],
+                hasAnteriorState: false,
+                anteriorIPP: null
+            };
+        }
+    }
+
     // 1. Keywords explicites de cumul - ENRICHIS V3.3.201c
     const cumulKeywords = [
         'polytraumatisme', 'plusieurs lesions', 'sequelles multiples',
@@ -18025,6 +18081,15 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
             (/fracture.*c[oô]tes?/i.test(text) && !/volet.*costal|grands?\s+fracas|lobectomie|pneumonectomie|paralysie.*faciale?|nerf.*facial|fracture.*rocher|ptosis/i.test(text))
         ) {
             console.log('🫁 [V3.3.293] PATHOLOGIE THORACIQUE détectée → Bypass vers handler thoracique (pas de regroupement systèmes)');
+            // Ne pas retourner, laisser l'analyse continuer vers comprehensiveSingleLesionAnalysis
+        }
+        // 🆕 V3.3.308: SURDITÉ / PERFORATION TYMPANIQUE = Bypass vers expert rules ORL
+        // Quand surdité bilatérale profonde + perforation tympanique sont mentionnées,
+        // le sequelae handler ne sait pas calculer le bon taux (rate=8 au lieu de 60-70%)
+        // → Bypass vers comprehensiveSingleLesionAnalysis où les expert rules V3.3.308 prennent le relais
+        else if (/surdit[eé].*(?:profonde|s[eé]v[eè]re|compl[eè]te|totale|perception).*bilat[eé]ral|bilat[eé]ral.*surdit[eé].*(?:profonde|perception)/i.test(text) ||
+                 (/perforation.*tympan/i.test(text) && /surdit[eé]/i.test(text))) {
+            console.log('👂 [V3.3.308] SURDITÉ BILATÉRALE PROFONDE / PERFORATION TYMPANIQUE détectée → Bypass vers expert rules ORL');
             // Ne pas retourner, laisser l'analyse continuer vers comprehensiveSingleLesionAnalysis
         } else {
             // 🆕 V3.3.155: CALCUL AUTOMATIQUE IPP (polytraumatismes ET cas simples)

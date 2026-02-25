@@ -583,8 +583,8 @@ export const disabilityData: InjuryCategory[] = [
           { name: "Surdité bilatérale légère (perte 20-30 dB)", description: "Hypoacousie légère bilatérale symétrique ou moyenne bilatérale 20-30 dB.", rate: [8, 15] },
           { name: "Surdité bilatérale modérée (perte 40-50 dB)", description: "Hypoacousie modérée bilatérale nécessitant appareillage.", rate: [20, 30] },
           { name: "Surdité bilatérale moyenne (perte 55-70 dB)", description: "Hypoacousie moyenne-sévère bilatérale, appareillage indispensable.", rate: [35, 50] },
-          { name: "Surdité bilatérale sévère (perte 70-85 dB)", description: "Surdité sévère bilatérale avec gêne majeure, même appareillé.", rate: [50, 60] },
-          { name: "Surdité bilatérale profonde (perte > 85 dB)", description: "Anacousie ou cophose bilatérale, communication très altérée.", rate: [60, 70] },
+          { name: "Surdité bilatérale sévère (perte 70-85 dB)", searchTerms: ["Surdité bilatérale sévère (perte 70-85 dB)", "surdité bilatérale sévère", "surdité sévère bilatérale", "surdité importante bilatérale"], description: "Surdité sévère bilatérale avec gêne majeure, même appareillé.", rate: [50, 60] },
+          { name: "Surdité bilatérale profonde (perte > 85 dB)", searchTerms: ["Surdité bilatérale profonde (perte > 85 dB)", "surdité bilatérale profonde", "cophose bilatérale", "anacousie bilatérale", "surdité profonde bilatérale", "surdité de perception profonde bilatérale", "perforation tympanique bilatérale avec surdité profonde"], description: "Anacousie ou cophose bilatérale, communication très altérée.", rate: [60, 70] },
           
           // 🆕 V3.3.136 - Surdité asymétrique
           { name: "Surdité asymétrique (OD/OG > 25 dB différence)", description: "Asymétrie auditive importante entre les deux oreilles (différence > 25 dB).", rate: [15, 35] },
@@ -599,7 +599,7 @@ export const disabilityData: InjuryCategory[] = [
           { name: "Vertiges - 3ème degré (troubles objectifs)", searchTerms: ["vertiges 3ème degré troubles objectifs", "objectifs troubles degré 3ème vertiges", "vertiges 3ème", "3ème degré", "degré troubles"], rate: [20, 40] },
           // 🆕 V3.3.267 - Syndrome otolithique (barème indicatif Chap. V ORL)
           { name: "Syndrome otolithique (sensation d'ébriété permanente)", searchTerms: ["syndrome otolithique sensation ébriété permanente", "syndrome otolithique", "sensation ébriété", "otolithique"], rate: [3, 5], description: "Sensation permanente d'instabilité, comme une ébriété, liée à une atteinte otolithique post-traumatique." },
-          { name: "Otorrhée chronique post-traumatique", searchTerms: ["otorrhée chronique post-traumatique", "otorrhée chronique", "otorrhée post-traumatique", "écoulement oreille chronique"], rate: [2, 4], description: "Écoulement chronique de l'oreille après traumatisme (perforation tympanique, fracture du rocher)." },
+          { name: "Otorrhée chronique post-traumatique", searchTerms: ["otorrhée chronique post-traumatique", "otorrhée chronique", "otorrhée post-traumatique", "écoulement oreille chronique", "perforation tympanique", "perforation tympan", "tympan perforé"], rate: [2, 4], description: "Écoulement chronique de l'oreille après traumatisme (perforation tympanique, fracture du rocher)." },
         ]
       },
       {
