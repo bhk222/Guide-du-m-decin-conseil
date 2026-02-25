@@ -38,6 +38,7 @@ const suites = [
   { file: '_test_polytrauma_complexe_30.ts', expected: 30 },
   { file: '_test_hanche_jambe.ts', expected: 30 },
   { file: '_test_sternum_clavicule_omoplate.ts', expected: 30 },
+  { file: '_test_rachis_20.ts', expected: 20 },
 ];
 
 const totalExpected = suites.reduce((s, t) => s + t.expected, 0);
