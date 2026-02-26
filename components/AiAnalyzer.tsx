@@ -3062,7 +3062,8 @@ const calculateSeverityAdjustment = (text: string): {
     }
     
     // Aide à la marche : distinction importante
-    const hasWalkingAid = /b[eé]quilles?|canne|d[eé]ambulateur|fauteuil\s+roulant/i.test(text);
+    // 🔧 V3.3.319: "cane" (1 seul n) = faute fréquente pour "canne" dans les rapports médicaux
+    const hasWalkingAid = /b[eé]quilles?|cann?e|d[eé]ambulateur|fauteuil\s+roulant/i.test(text);
     if (hasWalkingAid && !hasFreeMovement) {
         // Aide à la marche + raideur = vraiment grave
         criteria.push('Aide à la marche nécessaire (mobilité limitée)');
@@ -3927,7 +3928,7 @@ const buildDetailedClinicalReport = (
 
     // 📋 EXTRACTION ÉTAT CLINIQUE
     const hasMarche = /marche|deambulation|perimetre de marche/i.test(userInput);
-    const hasBequ = /bequille|canne|deambulateur/i.test(userInput);
+    const hasBequ = /bequille|cann?e|deambulateur/i.test(userInput);
     const hasBoiterie = /boiterie|claudication|marche\s+difficile/i.test(normalized);
     const hasAMP = /amp|amplitude.*impossible|mobilite.*impossible/i.test(normalized);
     const hasFlexion = /flexion.*(?:reduite|limitee|tres\s+reduite|impossible)/i.test(normalized);
@@ -7376,6 +7377,16 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             searchTerms: ["Fracture pilon tibial"],
             priority: 10350
         },
+        // 🆕 V3.3.319: Fracture plateau tibial / extrémité supérieure tibia + SÉQUELLES (raideur genou, amyotrophie, marche canne)
+        // La raideur du genou et l'amyotrophie sont des SÉQUELLES de la fracture, pas des pathologies indépendantes
+        // Priorité 10450 > 10400 (Raideur du genou) pour éviter que la séquelle n'écrase la fracture causale
+        {
+            pattern: /fracture.*(?:extr[eé]mit[eé]|extremite).*(?:sup[eé]rieure?|proximale?).*tibia|fracture.*plateau.*tibial|plateau.*tibial.*fracture/i,
+            context: /raideur|limitation.*(?:flexion|extension)|flexion.*(?:limit[eé]|r[eé]duit)|amyotrophie|atrophie.*(?:cuisse|quadricep)|marche.*(?:canne|c[aâ]ne|b[eé]quille)|boiterie/i,
+            negativeContext: /tiers.*distal|diaphyse|diaphysaire/i,
+            searchTerms: ["Fracture des plateaux tibiaux - Avec déviation et/ou raideur"],
+            priority: 10450
+        },
         // Fracture plateau tibial
         {
             pattern: /fracture.*plateau.*tibial|plateau.*tibial.*fracture/i,
@@ -10456,7 +10467,18 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
                         // 🆕 V3.3.227: NE PAS déclencher lowSeverity si "partielle" qualifie la récupération (= mauvais résultat)
                         const hasNeuroObjectiveSigns = /h[eé]mipar[eé]sie|h[eé]mipl[eé]gie|troubles?.*cognitif|neurochirurgie/i.test(workingText);
                         const hasRecuperationPartielle = /r[eé]cup[eé]ration.*partielle|am[eé]lioration.*partielle/i.test(workingText);
-                        const isLowSeverity = !hasNeuroObjectiveSigns && !hasRecuperationPartielle && /(?:non\s+d[eé]plac[eé]e?|stable|partielle?|mod[eé]r[eé]e?|l[eé]g[eè]re?|minime|favorable|bonne.*consolidation|sans.*complication|conservateur|br[eè]ve?|courte)/i.test(workingText);
+                        // 🆕 V3.3.319c: "légère amyotrophie" + signes fonctionnels significatifs → "légère" qualifie
+                        // un signe SECONDAIRE (atrophie musculaire), pas la blessure principale.
+                        // Neutraliser "légère" dans le texte testé pour ne pas déclencher lowSeverity abusivement.
+                        const hasLegereAmyotrophie319 = /l[eé]g[eè]re?\s+(?:amyotrophie|atrophie)|(?:amyotrophie|atrophie)\s+l[eé]g[eè]re?/i.test(workingText);
+                        const hasSignificantFunctionalSigns319 = /flexion.*limit[eé]|limit[eé].*(?:\d+|flexion|extension)|marche.*(?:canne|cane|b[eé]quille)|boiterie|steppage/i.test(workingText);
+                        let lowSeverityText319 = workingText;
+                        if (hasLegereAmyotrophie319 && hasSignificantFunctionalSigns319) {
+                            lowSeverityText319 = workingText
+                                .replace(/l[eé]g[eè]re?\s+(?:amyotrophie|atrophie)/gi, 'amyotrophie')
+                                .replace(/(?:amyotrophie|atrophie)\s+l[eé]g[eè]re?/gi, 'amyotrophie');
+                        }
+                        const isLowSeverity = !hasNeuroObjectiveSigns && !hasRecuperationPartielle && /(?:non\s+d[eé]plac[eé]e?|stable|partielle?|mod[eé]r[eé]e?|l[eé]g[eè]re?|minime|favorable|bonne.*consolidation|sans.*complication|conservateur|br[eè]ve?|courte)/i.test(lowSeverityText319);
 
                         let coefficient = aggravationData.coefficient;
 
@@ -17996,8 +18018,8 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
     // 🔧 V3.3.270: Distinguer boiterie légère vs aide technique (canne/béquille)
     // 🔧 V3.3.292: Vérifier négation "sans boiterie" / "pas de boiterie"
     const isBoiterieNegated = /sans\s+(?:la\s+)?boiterie|pas\s+de\s+boiterie|marche\s+sans\s+boiterie|absence\s+de\s+boiterie/i.test(text);
-    if (!isBoiterieNegated && /boiterie|boite|claudication|marche.*difficile|marche.*avec.*canne|canne.*permanente|aide.*technique.*marche|b[ée]quille/i.test(text)) {
-        const hasAideTechnique = /canne|b[ée]quille|tuteur|d[\u00e9e]ambulateur|aide.*technique/i.test(text);
+    if (!isBoiterieNegated && /boiterie|boite|claudication|marche.*difficile|marche.*avec.*cann?e|cann?e.*permanente|aide.*technique.*marche|b[ée]quille/i.test(text)) {
+        const hasAideTechnique = /cann?e|b[ée]quille|tuteur|d[\u00e9e]ambulateur|aide.*technique/i.test(text);
         const isLegere = /l[ée]g[\u00e8e]re.*boiterie|boiterie.*l[ée]g[\u00e8e]re|discr[\u00e8e]te.*boiterie|boiterie.*discr[\u00e8e]te|l[ée]ger.*boitement/i.test(text);
         detectedSequelae.push({
             name: hasAideTechnique ? 'Boiterie / Marche avec aide technique (canne, béquille)' 
@@ -18588,6 +18610,26 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
     const cumulDetection = detectMultipleLesions(text);
     let isCumulDetected = cumulDetection.isCumul && cumulDetection.lesionCount >= 2;
     console.log('🔍 V3.3.201k: isCumulDetected =', isCumulDetected, ', lesionCount =', cumulDetection.lesionCount);
+    
+    // 🆕 V3.3.319: GUARD — Les rapports médicaux utilisent souvent des ";" pour séparer
+    // les CONSTATATIONS D'EXAMEN (séquelles, signes cliniques) d'une SEULE blessure.
+    // Ex: "fracture tibia ; séquelles douloureuses ; marche à la canne ; amyotrophie ; flexion limitée"
+    // → Ce n'est PAS un polytraumatisme, c'est UNE fracture avec ses séquelles.
+    // Critère: site anatomique unique (pas multi-sites) ET ≤1 segment contient un mot-clé de lésion distincte.
+    // 🔧 V3.3.319b: Élargi pour inclure les pathologies non-traumatiques (BAV, surdité, etc.)
+    if (isCumulDetected && !isMultiSitePolytrauma) {
+        const semicolonSegments319 = text.split(/\s*;\s*/);
+        // Mots-clés indiquant une LÉSION/PATHOLOGIE DISTINCTE (pas juste un signe clinique/séquelle)
+        const distinctLesion319 = /fracture|luxation|rupture|entorse|arrachement|section|d[eé]chirure|amputation|d[eé]collement|avulsion|[eé]crasement|baisse.*acuit[eé]|surdit[eé]|perte.*(?:audition|vue|odorat)|[eé]nucl[eé]ation|n[eé]phrectomie|spl[eé]nectomie|arthrod[eè]se|proth[eè]se.*(?:totale|hanche|genou)|hernie.*discal|[eé]pilepsie|paralysie|parapl[eé]gie|h[eé]mipl[eé]gie|contusion.*(?:oculaire|c[eé]r[eé]bral|pulmonaire)|iridodialyse|perforation.*tympan/i;
+        const lesionSegmentCount319 = semicolonSegments319.filter(s => distinctLesion319.test(s)).length;
+        // 🔧 V3.3.319c: Le guard ne doit s'activer QUE pour les textes avec ≥2 points-virgules
+        // (rapports d'examen style "fracture tibia ; séquelles ; marche canne ; amyotrophie")
+        // Sans ce seuil, les textes SANS ";" sont aussi bloqués (1 segment → count=1 → ≤1 → faux blocage)
+        if (semicolonSegments319.length >= 3 && lesionSegmentCount319 <= 1) {
+            console.log(`🔧 V3.3.319: SINGLE INJURY + SEQUELAE detected (${lesionSegmentCount319} distinct lesion(s) / ${semicolonSegments319.length} semicolon parts, single site) → override isCumulDetected=false`);
+            isCumulDetected = false;
+        }
+    }
     
     // 🆕 V3.3.280: Si multi-sites détectés mais detectMultipleLesions n'a pas trouvé le cumul,
     // FORCER le cumul car le texte contient manifestement des lésions sur 2+ sites distincts
