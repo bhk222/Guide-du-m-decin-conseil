@@ -19920,7 +19920,11 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
                 rate: ippGlobal,
                 justification: justifCCF,
                 path: 'Polytraumatisme > Séquelles Maxillo-Faciales, ORL et Ophtalmologiques',
-                injury: undefined
+                injury: {
+                    name: `Polytraumatisme cervico-cranio-facial - ${ccfSequelae.length} séquelles - IPP global ${ippGlobal}%`,
+                    rate: ippGlobal,
+                    imageUrl: ''
+                }
             } as any;
         }
     } catch (e) {

@@ -62,7 +62,7 @@ const ProposalBubble: React.FC<{ proposal: Proposal; onAccept: () => void; onRej
                 <div className="text-xs text-slate-700 space-y-2" dangerouslySetInnerHTML={{ __html: proposal.justification }}></div>
                 
                 {/* Image médicale explicative si disponible */}
-                {proposal.injury.imageUrl && (
+                {proposal.injury?.imageUrl && (
                     <div className="mt-3 relative">
                         <button
                             className="flex items-center gap-2 px-3 py-2 bg-blue-50 hover:bg-blue-100 border border-blue-200 rounded-md text-xs text-blue-700 font-medium transition-colors"
@@ -95,7 +95,7 @@ const ProposalBubble: React.FC<{ proposal: Proposal; onAccept: () => void; onRej
                                     </button>
                                 </div>
                                 <img 
-                                    src={proposal.injury.imageUrl} 
+                                    src={proposal.injury?.imageUrl} 
                                     alt={proposal.name}
                                     className="w-full rounded-md border border-slate-200"
                                 />
