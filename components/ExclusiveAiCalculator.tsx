@@ -552,7 +552,13 @@ export const ExclusiveAiCalculator: React.FC<ExclusiveAiCalculatorProps> = ({
             
             // === BASSIN ===
             ((/fracture.*bassin|fracture.*cotyle|fracture.*sacrum/i.test(textToSend)) ? 1 : 0) +
-            ((/fracture.*hanche|fracture.*col.*f[ée]moral/i.test(textToSend)) ? 1 : 0)
+            ((/fracture.*hanche|fracture.*col.*f[ée]moral/i.test(textToSend)) ? 1 : 0) +
+            
+            // === OPHTALMOLOGIE === (🆕 V3.3.315: Fix cervico-cranio-facial polytrauma bypass)
+            ((/perte.*(?:subtotal|total|compl[eè]t).*vision|oeil.*(?:perdu|aveugle)|c[eé]cit[eé].*oeil|strabisme|diplopie/i.test(textToSend)) ? 1 : 0) +
+            
+            // === MAXILLO-FACIAL / CERVICO-FACIAL === (🆕 V3.3.315)
+            ((/enfoncement.*(?:pommette|malaire|zygoma)|anesth[eé]sie.*(?:nerf|sous[\s-]*orbit)|dysphagie|g[eê]ne.*mastication|plaie.*(?:langue|palais|cervical.*profond)/i.test(textToSend)) ? 1 : 0)
         );
         
         const hasMultipleInjuryIndicators = multipleInjuryCount >= 2;
