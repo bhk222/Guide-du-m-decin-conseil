@@ -314,7 +314,7 @@ const boneTerms: { [key: string]: string[] } = {
     tibia: ['tibia', 'tibial', 'tibiale', 'plateau tibial', 'extrémité supérieure tibia', 'épines tibiales', 'malléole interne', 'pilon tibial', 'bi-malléolaire', 'bimalléolaire', 'bi malléolaire', 'bi-maliolaire', 'bimaliolaire', 'trimalléolaire', 'tri-malléolaire'],
     fibula: ['péroné', 'perone', 'peronier', 'fibula', 'malléole externe', 'malléole'],
     tarse: ['tarse', 'astragale', 'talus', 'calcanéum', 'calcaneum', 'naviculaire', 'scaphoïde tarsien', 'cuboïde', 'cunéiforme'],
-    metatarse: ['métatarse', 'métatarsien', 'lisfranc'],
+    metatarse: ['métatarse', 'métatarsien', 'metatarso', 'lisfranc'],
     phalange_pied: ['orteil', 'phalange', 'hallux'],
 
     // Tronc & Tête
@@ -403,7 +403,7 @@ const preprocessMedicalText = (text: string): string => {
             const action = match.toLowerCase().startsWith('amputation') ? 'amputation' : 'fracture';
             return `${action} ${phalanges[phalange]} doigt ${doigts[parseInt(num)]} `;
         }],
-        [/\b([oO])([1-5])\b(?=\s*(?:de|du|pg|pd|pied|gauche|droite|fracture|amputation))/gi, (match, o, num) => {
+        [/\b([oO])([1-5])\b(?=\s*(?:de|du|pg|pd|pied|gauche|droite|fracture|amputation|luxation|[oO][1-5]))/gi, (match, o, num) => {
             const orteils = ['', 'hallux', 'deuxième orteil', 'troisième orteil', 'quatrième orteil', 'cinquième orteil'];
             return `${o.toLowerCase() === 'o' ? 'orteil' : 'Orteil'} ${orteils[parseInt(num)]} `;
         }],
@@ -531,6 +531,14 @@ const preprocessMedicalText = (text: string): string => {
         [/\bgche\b/gi, 'gauche '],  // Abréviation fréquente: gche → gauche
         [/\bnle\b/gi, 'normale '],  // Abréviation: nle → normale
         [/\bpls\b/gi, 'plus '],  // Abréviation: pls → plus
+        // 🆕 V3.3.317: Normalisation termes pied/tarse
+        [/\bTSLO\b/gi, 'traumatisme tarse lisfranc '],  // TSLO → traumatisme tarse Lisfranc
+        [/\bboitrie\b/gi, 'boiterie '],  // Faute courante: boitrie → boiterie
+        [/\bamp\b(?=\s+(?:stable|limit[eé]|r[eé]duit|conserv[eé]|normal|douloureux|diminu[eé]))/gi, 'amplitude '],  // amp + adj = amplitude (pas amputation)
+        [/\b[mM]([1-5])\b(?=\s*(?:du|de|gauche|droite|droit|pied|fractur|luxat))/gi, (match, num) => {
+            const metas = ['', 'premier métatarsien', 'deuxième métatarsien', 'troisième métatarsien', 'quatrième métatarsien', 'cinquième métatarsien'];
+            return `${metas[parseInt(num)]} `;
+        }],
         
         // === MOBILITÉ ===
         [/\bflex\b(?!\s*$)/gi, 'flexion '],
@@ -1913,6 +1921,9 @@ const synonymMap: { [key: string]: string } = {
     'tibiale': 'tibia',
     'carpien': 'carpe',
     'phalangienne': 'phalange',
+    'metatarso': 'métatarsien',
+    'metatarsophalangienne': 'métatarso-phalangienne métatarsien',
+    'metatarsienne': 'métatarsien',
     'facture': 'fracture',
     'laie': 'plaie',
     'plaie': 'cicatrice',
@@ -3939,7 +3950,7 @@ const buildDetailedClinicalReport = (
     const hasMarche = /marche|deambulation|perimetre de marche/i.test(userInput);
     const hasBequ = /bequille|cann?e|deambulateur/i.test(userInput);
     const hasBoiterie = /boiterie|claudication|marche\s+difficile/i.test(normalized);
-    const hasAMP = /amp|amplitude.*impossible|mobilite.*impossible/i.test(normalized);
+    const hasAMP = /\bamp\b(?:\s+(?:impossible|reduite?|tres\s+limit))|amplitude.*impossible|mobilite.*impossible/i.test(normalized);
     const hasFlexion = /flexion.*(?:reduite|limitee|tres\s+reduite|impossible)/i.test(normalized);
     const hasExtension = /extension.*(?:reduite|limitee|tres\s+reduite|impossible)/i.test(normalized);
     const hasForceFaible = /force.*(?:faible|tres\s+faible|diminuee|reduite)|force\s+musculaire.*(?:faible|diminuee)/i.test(normalized);
@@ -9212,6 +9223,21 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             searchTerms: ['Ankylose tarso-métatarsienne (interligne de Lisfranc)'],
             priority: 10500
         },
+        // 🆕 V3.3.317: Fractures/luxations combinées métatarsiens + tarse avec déviation
+        // Cas complexe: luxation MTP multiple (O2-O4) + fracture-luxation M4 + valgus
+        {
+            pattern: /(?:luxation|fracture).*m[eé]tatars.*(?:valgus|varus|d[eé]viation)|(?:valgus|varus).*pied.*(?:luxation|fracture)|(?:luxation|fracture).*(?:O[2-4]|M[1-5]|m[eé]tatarsien).*(?:luxation|fracture)/i,
+            context: /pied|tarse|m[eé]tatars|orteil|boiterie|boitrie|valgus|varus/i,
+            searchTerms: ['Fractures combinées métatarsiens et tarse - Avec déviation du pied'],
+            priority: 10700
+        },
+        // 🆕 V3.3.317: Fractures/luxations combinées métatarsiens + tarse (sans déviation)
+        {
+            pattern: /(?:luxation|fracture).*m[eé]tatars.*phalang|m[eé]tatarso[\s-]*phalang.*(?:luxation|fracture)|fracture.*luxation.*(?:M[1-5]|m[eé]tatarsien)|TSLO.*(?:bassin|pied|tarse)/i,
+            context: /pied|tarse|m[eé]tatars|orteil|boiterie|boitrie/i,
+            searchTerms: ['Fractures combinées métatarsiens et tarse - Plante affaissée et douloureuse'],
+            priority: 10600
+        },
         // Cas 28: Laxité/entorse Lisfranc (quand "laxité" est plus proéminent)
         {
             pattern: /laxit[eé].*(?:lisfranc|m[eé]dio.*pied|tarso)|entorse.*grave.*(?:pied|lisfranc|m[eé]dio)/i,
@@ -13581,6 +13607,18 @@ export const detectMultipleLesions = (text: string): {
             };
         }
     }
+
+    // 🆕 V3.3.317d: EXCEPTION FRACTURE SIMPLE MÉTATARSIEN(S)
+    // Fracture(s) métatarsien(s) + douleurs résiduelles + gêne à la marche = UNE SEULE lésion du pied
+    // NE PAS détecter comme cumul (douleurs et gêne sont des SÉQUELLES de la fracture, pas des lésions distinctes)
+    const isMetatarsalFractureText = /fracture.*m[eé]tatarsien|m[eé]tatarsien.*fractur/i.test(normalized);
+    if (isMetatarsalFractureText) {
+        const hasOtherDistinctLesionMT = /fracture.*(?:femur|tibia|humerus|clavicule|bassin|cote|rotule|plateau|radius|poignet|calcaneum|astragale|cheville|malleol|bimalleol|scaphoide|vertebr)|luxation.*(?:epaule|hanche|genou)|hernie.*discale/i.test(normalized);
+        if (!hasOtherDistinctLesionMT) {
+            console.log('🦶 [V3.3.317d] Fracture simple métatarsien(s) → PAS de cumul (lésion pied unique)');
+            return { isCumul: false, lesionCount: 1, keywords: [], hasAnteriorState: false, anteriorIPP: null };
+        }
+    }
     
     // 🆕 V3.3.222: EXCEPTION TC + FRACTURES FACIALES ISOLÉES
     // TC + fractures faciales (plancher orbitaire, zygoma, nez) = DEUX systèmes (NEURO + FACE)
@@ -17683,11 +17721,22 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
     }
     
     // Fracture métatarse/phalanges pied (PIED - à différencier de fémur/tibia)
-    if (/fracture.*m[ée]tatarse|m[ée]tatarsien.*fractur|fracture.*phalange.*(?:pied|orteil)/i.test(text)) {
+    // 🆕 V3.3.317: Élargi pour détecter metatarso-phalangienne, luxation tarse, Lisfranc, M[1-5]
+    if (/fracture.*m[ée]tatars|m[ée]tatars.*fractur|fracture.*phalange.*(?:pied|orteil)|luxation.*m[ée]tatars|m[eé]tatarso|fracture.*lisfranc|lisfranc/i.test(text) ||
+        /(?:fracture|luxation).*(?:tarse|m[ée]tatarsien)|(?:tarse|m[ée]tatarsien).*(?:fracture|luxation)/i.test(text)) {
+        const hasValgus = /valgus/i.test(text);
+        const hasMultipleMeta = /(O[2-4]|orteil.*(?:deuxième|troisième|quatrième))/i.test(text) || 
+                                /(?:M[1-5]|m[ée]tatarsien)/i.test(text);
+        const hasLisfranc = /lisfranc|tarso[\s-]*m[ée]tatars|TSLO/i.test(text);
+        const hasDeviation = /valgus|varus|d[ée]viation.*pied|pied.*bot/i.test(text);
+        
         detectedSequelae.push({
-            name: 'Fracture du métatarse ou phalanges du pied',
-            keywords: ['fracture', 'métatarse', 'pied', 'phalange'],
-            context: text.match(/fracture.*m[ée]tatarse[^.;]*/i)?.[0] || text.match(/m[ée]tatarsien[^.;]*/i)?.[0] || ''
+            name: hasDeviation ? 'Fractures combinées métatarsiens et tarse avec déviation du pied' :
+                  hasMultipleMeta ? 'Fractures combinées métatarsiens et tarse' :
+                  'Fracture du métatarse ou phalanges du pied',
+            keywords: ['fracture', 'métatarsien', 'luxation', 'pied', 'tarse', 'lisfranc', 'valgus'],
+            context: text.match(/(?:fracture|luxation).*(?:m[ée]tatars|tarse|pied|lisfranc)[^.;]*/i)?.[0] || 
+                     text.match(/m[eé]tatarso[^.;]*/i)?.[0] || ''
         });
     }
     
@@ -18643,7 +18692,11 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
     // 🆕 V3.3.280: Si multi-sites détectés mais detectMultipleLesions n'a pas trouvé le cumul,
     // FORCER le cumul car le texte contient manifestement des lésions sur 2+ sites distincts
     // Cela permet au Pattern PARAGRAPH de extraire les lésions individuelles
-    if (!isCumulDetected && isMultiSitePolytrauma) {
+    // 🔧 V3.3.317d: NE PAS overrider pour fractures simples métatarsien(s) — le multi-site est un faux positif
+    // (normalize() ajoute "main", "metacarpe" comme synonymes → hasMultipleDistinctSites détecte 2 sites)
+    const isSimpleMetaFracture280 = /fractures?.*m[eé]tatarsien|m[eé]tatarsien.*fractur/i.test(text) && /pied/i.test(text) &&
+        !/luxation.*(?!.*m[eé]tatars)|lisfranc|TSLO|arthrod[eè]se|(?:fracture|luxation).*(?:hum[eé]rus|clavicule|tibia|f[eé]mur|radius|bassin|c[oô]te|vert[eé]br|rotule|mall[eé]ol|bimall[eé]ol|hanche|trochant[eé]r|calcan[eé]um|astragale|plateau)/i.test(text);
+    if (!isCumulDetected && isMultiSitePolytrauma && !isSimpleMetaFracture280) {
         console.log('🆕 V3.3.280: OVERRIDE CUMUL - isMultiSitePolytrauma=true mais detectMultipleLesions=false → FORCE cumul');
         isCumulDetected = true;
         cumulDetection.isCumul = true;
@@ -18757,6 +18810,7 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
         // Tendinopathie Achille, tunnel tarsien, pied plat/creux, griffes orteils, Lisfranc, arthrodèse sous-talienne
         // Ces pathologies sont UNIQUES même si le texte mentionne des détails (fracture causale, symptômes multiples)
         // → NE DOIVENT JAMAIS être regroupées en "Polytraumatisme - 2 systèmes"
+        // 🔧 V3.3.317b: Ajout patterns RAW (avant preprocessing) pour TSLO, metatarso-phalangienne, O-codes, M-codes
         else if (
             /tendinopathie.*(?:achille|achill[eé]en)|tendinite.*(?:achille|achill[eé]en)/i.test(text) ||
             /tunnel\s+tarsien|compression.*nerf.*tibial.*post[eé]rieur/i.test(text) ||
@@ -18765,7 +18819,17 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
             /arthrod[eè]se\s+sous[\s-]?(?:talienne|astragal)/i.test(text) ||
             /(?:luxation|fracture|entorse).*lisfranc|lisfranc.*(?:luxation|fracture|entorse)/i.test(text) ||
             /arthrod[eè]se.*(?:lisfranc|tarso[\.\s-]?m[eé]tatars)/i.test(text) ||
-            /fracture.*(?:astragale|talus)/i.test(text)
+            /fracture.*(?:astragale|talus)/i.test(text) ||
+            // 🔧 V3.3.317b: Luxation métatarso-phalangienne (raw text, avant preprocessing)
+            /m[eé]tatarso[\s-]*phalang/i.test(text) ||
+            // 🔧 V3.3.317b: TSLO (Traumatisme Tarse/Lisfranc) + contexte pied
+            (/\bTSLO\b/i.test(text) && /pied|orteil|m[eé]tatars|metatars|valgus|varus|O[2-5]/i.test(text)) ||
+            // 🔧 V3.3.317b: Fracture/luxation métatarsien M1-M5 avec contexte pied
+            (/(?:fracture|luxation).*\bM[1-5]\b/i.test(text) && /pied|orteil|m[eé]tatars|metatars|valgus|varus/i.test(text)) ||
+            // 🔧 V3.3.317d: Fracture simple métatarsien(s) — lésion unique du pied (pas de cumul)
+            // ⚠️ EXCLUDE si le texte contient d'autres fractures distinctes (= vrai polytraumatisme)
+            (/fractures?.*m[eé]tatarsien/i.test(text) && /pied/i.test(text) && !/luxation|lisfranc|TSLO|arthrod[eè]se/i.test(text) &&
+             !/fracture.*(?:hanche|trochant[eé]r|f[eé]mur|tibia|plateau|bimall[eé]ol|mall[eé]ol|calcan[eé]um|rotule|hum[eé]rus|clavicule|bassin|c[oô]te|vert[eé]br|radius|poignet|astragale)/i.test(text))
         ) {
             console.log('🦶 [V3.3.311] PATHOLOGIE PIED SPÉCIFIQUE détectée → Bypass vers expert rules (pathologie UNIQUE)');
             // Ne pas retourner, laisser l'analyse continuer vers comprehensiveSingleLesionAnalysis
@@ -19140,6 +19204,24 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
                         rate = Math.min(rate, 55);
                         
                         explanation = `Membre inférieur (CUISSE/GENOU) : ANKYLOSE ARTICULAIRE (séquelle majeure invalidante) - ${details.join(' + ')} → IPP ${rate}% justifiée par perte totale mobilité + retentissement fonctionnel global`;
+                        }
+                    }
+                    // SOUS-CATÉGORIE : PIED/CHEVILLE - Fractures combinées (Lisfranc/tarse/métatarsiens)
+                    // 🆕 V3.3.317: Traitement des luxations/fractures métatarso-phalangiennes complexes
+                    else if (/fractures?\s+combin[ée]es.*m[ée]tatars.*(?:d[ée]viation|valgus|varus)|luxation.*m[eé]tatars.*phalang|m[eé]tatarso/i.test(seq.name)) {
+                        const hasBoiterie = detectedSequelae.some(s => /boiterie|boitrie/i.test(s.name)) || /boiterie|boitrie/i.test(text);
+                        const hasDeviation = /valgus|varus|d[ée]viation/i.test(text);
+                        const hasDouleurs = /douleur|sequell.*doulour/i.test(text);
+                        const hasMultipleLux = /(?:O[2-4]|M[1-5]).*(?:O[2-4]|M[1-5])/i.test(text) || /multiple|plusieurs/i.test(text);
+                        
+                        if (hasDeviation && hasBoiterie && hasDouleurs) {
+                            rate = 20; explanation = 'Membre inférieur (PIED) : Fractures/luxations combinées métatarsiens + tarse avec déviation du pied (valgus) + boiterie + douleurs → partie médiane [15-30%]';
+                        } else if (hasDeviation && (hasBoiterie || hasDouleurs)) {
+                            rate = 18; explanation = 'Membre inférieur (PIED) : Fractures/luxations combinées métatarsiens + tarse avec déviation du pied → [15-30%]';
+                        } else if (hasMultipleLux && hasBoiterie) {
+                            rate = 15; explanation = 'Membre inférieur (PIED) : Fractures/luxations métatarso-phalangiennes multiples avec boiterie → partie basse [10-20%]';
+                        } else {
+                            rate = 12; explanation = 'Membre inférieur (PIED) : Fractures/luxations métatarso-phalangiennes → plante affaissée et douloureuse [10-20%]';
                         }
                     }
                     // SOUS-CATÉGORIE : PIED/CHEVILLE (séquelles mineures)
@@ -19727,6 +19809,120 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
     
     // Étape 2: Extraction des états antérieurs
     const { preexisting, cleanedText: finalCleanedText } = extractPreexistingConditions(textWithoutContext);
+
+    // 🆕 V3.3.317: Règle rapide FRACTURES/LUXATIONS MÉTATARSO-PHALANGIENNES COMPLEXES DU PIED
+    // Détection: luxation métatarso-phalangienne multiple + fracture-luxation métatarsien + valgus/varus
+    // → Évaluation directe en lésion unique "Fractures combinées métatarsiens et tarse"
+    // Note: finalCleanedText = texte brut SANS preprocessing → regex doit matcher formes brutes
+    // 🔧 V3.3.317c: Conditions resserrées pour ne PAS intercepter hallux rigidus, arthrodèse, scaphoïde, Lisfranc explicite
+    try {
+        // V3.3.317c: Require "luxation" adjacent to "métatarso-phalangienne" (not just any mention like "raideur de l'articulation métatarso-phalangienne")
+        const hasMTPLuxation = /luxation[\s\S]{0,30}m[eé]tatarso?[\s-]*phalang|luxation[\s\S]{0,30}metatarso?[\s-]*phalang/i.test(finalCleanedText);
+        // V3.3.317c: Require "fracture" within 40 chars of "métatars" (not 200+ chars like "fracture scaphoïde...métatarsalgies")
+        // (?!algie) excludes "métatarsalgie" (symptom, not fracture) at the match point
+        const hasMetaFracture = /fractures?[\s\S]{0,40}m[eé]tatars(?!algie)|fractures?[\s\S]{0,25}[mM][1-5]\b|m[eé]tatarsien[\s\S]{0,20}fractur/i.test(finalCleanedText);
+        const hasTSLO = /\bTSLO\b/i.test(finalCleanedText);
+        const hasFootContext = /pied|orteil|O[2-5]|tarse|m[eé]tatars|metatars|plante|avant[\s-]pied|cheville/i.test(finalCleanedText);
+        console.log('🦶 [V3.3.317] hasMTPLuxation:', hasMTPLuxation, 'hasMetaFracture:', hasMetaFracture, 'hasTSLO:', hasTSLO, 'hasFootContext:', hasFootContext);
+        const hasValgusVarus = /valgus|varus|d[eé]viation.*pied/i.test(finalCleanedText);
+        const hasBoiterie317 = /boiterie|boitrie|claudication|l[eé]g[eè]re\s+boitr/i.test(finalCleanedText);
+        const hasDouleur317 = /douleur|sequell.*doulour|douloureux|douleureuse/i.test(finalCleanedText);
+        const hasPiedBot = /pied\s+bot/i.test(finalCleanedText);
+        
+        // V3.3.317c: EXCLUSIONS — ces pathologies ont leurs propres entrées barémiques
+        const hasExclusion317 = /hallux\s*rigidus/i.test(finalCleanedText) ||     // Hallux rigidus → propre entrée
+            /arthrod[eè]se/i.test(finalCleanedText) ||                             // Arthrodèse → propre entrée
+            /\blisfranc\b/i.test(finalCleanedText) ||                              // Lisfranc explicite → déjà géré par expert rules
+            /scapho[iï]de\s+tarsien/i.test(finalCleanedText) ||                   // Scaphoïde tarsien → propre entrée
+            /griffes?\s+(?:des?\s+)?orteils?/i.test(finalCleanedText) ||           // Griffes orteils → propre entrée
+            /pied\s+(?:plat|creux)/i.test(finalCleanedText);                       // Pied plat/creux → propre entrée
+        
+        // V3.3.317c: hasMetaFracture SEUL = fracture simple d'un métatarsien (3-10%, handled by normal search)
+        // "Fractures combinées" nécessite au moins un indicateur de COMPLEXITÉ
+        // ET une atteinte osseuse métatarsienne/tarsienne avérée (hasMTPLuxation ou hasMetaFracture)
+        // "varus seul" + "cheville" (ex: bimalléolaire avec instabilité en varus) ≠ fracture combinée du pied
+        const isComplexFootTrauma317 = hasMTPLuxation || hasTSLO || hasValgusVarus || hasPiedBot;
+        const hasMetatarsalBoneInvolvement = hasMTPLuxation || hasMetaFracture || hasTSLO;
+        
+        // Condition: atteinte métatarsienne/tarsienne + complexité + contexte pied + PAS d'exclusion
+        if (hasMetatarsalBoneInvolvement && isComplexFootTrauma317 && hasFootContext && !hasExclusion317) {
+            console.log(`🦶 [V3.3.317] FRACTURES/LUXATIONS MÉTATARSO-PHALANGIENNES COMPLEXES DU PIED DÉTECTÉES`);
+            
+            let targetEntry: string;
+            let rateValue: number;
+            let justifText: string;
+            
+            if (hasPiedBot) {
+                // Pied bot traumatique: 25-50%
+                targetEntry = "Fractures combinées métatarsiens et tarse - Pied bot traumatique";
+                rateValue = 30;
+                justifText = `<strong>🦶 FRACTURES/LUXATIONS COMBINÉES MÉTATARSIENS ET TARSE</strong><br><br>` +
+                    `<strong>📋 Lésions identifiées :</strong><br>` +
+                    `&nbsp;&nbsp;• Pied bot traumatique post-fracture/luxation<br>` +
+                    `<strong>📖 Référence barémique :</strong> Pied > Fractures combinées métatarsiens et tarse - Pied bot traumatique [25-50%]<br>` +
+                    `<strong>📊 Taux retenu : ${rateValue}%</strong> (fourchette [25-50%])`;
+            } else if (hasValgusVarus) {
+                // Avec déviation du pied: 15-30%
+                targetEntry = "Fractures combinées métatarsiens et tarse - Avec déviation du pied";
+                // Positionner dans la fourchette selon sévérité
+                if (hasBoiterie317 && hasDouleur317) {
+                    rateValue = 20;
+                } else if (hasBoiterie317 || hasDouleur317) {
+                    rateValue = 18;
+                } else {
+                    rateValue = 15;
+                }
+                justifText = `<strong>🦶 FRACTURES/LUXATIONS COMBINÉES MÉTATARSIENS ET TARSE</strong><br><br>` +
+                    `<strong>📋 Lésions identifiées :</strong><br>`;
+                if (hasMTPLuxation) justifText += `&nbsp;&nbsp;• Luxation métatarso-phalangienne<br>`;
+                if (hasMetaFracture) justifText += `&nbsp;&nbsp;• Fracture-luxation métatarsien<br>`;
+                if (hasTSLO) justifText += `&nbsp;&nbsp;• Traumatisme tarse (TSLO)<br>`;
+                justifText += `&nbsp;&nbsp;• Déviation du pied (${/valgus/i.test(finalCleanedText) ? 'valgus' : /varus/i.test(finalCleanedText) ? 'varus' : 'déviation'})<br>`;
+                if (hasBoiterie317) justifText += `&nbsp;&nbsp;• Boiterie résiduelle<br>`;
+                if (hasDouleur317) justifText += `&nbsp;&nbsp;• Séquelles douloureuses<br>`;
+                justifText += `<br><strong>📖 Référence barémique :</strong> Pied > Fractures combinées métatarsiens et tarse - Avec déviation du pied [15-30%]<br>`;
+                justifText += `<strong>📊 Taux retenu : ${rateValue}%</strong> (fourchette [15-30%])`;
+            } else {
+                // Plante affaissée et douloureuse: 10-20%
+                targetEntry = "Fractures combinées métatarsiens et tarse - Plante affaissée et douloureuse";
+                if (hasBoiterie317 && hasDouleur317) {
+                    rateValue = 15;
+                } else if (hasBoiterie317 || hasDouleur317) {
+                    rateValue = 12;
+                } else {
+                    rateValue = 10;
+                }
+                justifText = `<strong>🦶 FRACTURES/LUXATIONS COMBINÉES MÉTATARSIENS ET TARSE</strong><br><br>` +
+                    `<strong>📋 Lésions identifiées :</strong><br>`;
+                if (hasMTPLuxation) justifText += `&nbsp;&nbsp;• Luxation métatarso-phalangienne<br>`;
+                if (hasMetaFracture) justifText += `&nbsp;&nbsp;• Fracture-luxation métatarsien<br>`;
+                if (hasTSLO) justifText += `&nbsp;&nbsp;• Traumatisme tarse (TSLO)<br>`;
+                if (hasBoiterie317) justifText += `&nbsp;&nbsp;• Boiterie résiduelle<br>`;
+                if (hasDouleur317) justifText += `&nbsp;&nbsp;• Séquelles douloureuses<br>`;
+                justifText += `<br><strong>📖 Référence barémique :</strong> Pied > Fractures combinées métatarsiens et tarse - Plante affaissée et douloureuse [10-20%]<br>`;
+                justifText += `<strong>📊 Taux retenu : ${rateValue}%</strong> (fourchette [10-20%])`;
+            }
+            
+            // Ajout note patient
+            if (profession) justifText += `<br><br>📋 <em>Profession : ${profession}</em>`;
+            justifText += `<br><br>⚖️ <em>Base juridique : Barème indicatif d'invalidité — Accidents du travail (1967).</em>`;
+            
+            return {
+                type: 'proposal' as const,
+                name: targetEntry,
+                rate: rateValue,
+                justification: justifText,
+                path: 'Pied > Fractures combinées métatarsiens et tarse',
+                injury: {
+                    name: targetEntry,
+                    rate: rateValue,
+                    imageUrl: ''
+                }
+            } as any;
+        }
+    } catch (e) {
+        console.error('Erreur règle fractures métatarso-phalangiennes:', e);
+    }
 
     // ✅ V3.3.285: Règle rapide CÉCITÉ BILATÉRALE — AVANT la règle unilatérale
     // Problème: "cécité complète bilatérale" était interceptée par la règle unilatérale qui retournait 30% au lieu de 100%

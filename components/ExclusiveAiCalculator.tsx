@@ -541,7 +541,8 @@ export const ExclusiveAiCalculator: React.FC<ExclusiveAiCalculatorProps> = ({
             ((/amyotrophie.*quadricipital|atrophie.*quadriceps/i.test(textToSend)) ? 1 : 0) +
             ((/limitation.*flexion.*genou|raideur.*genou/i.test(textToSend)) ? 1 : 0) +
             ((/raccourcissement.*membre|in[ée]galit[ée].*membre/i.test(textToSend)) ? 1 : 0) +
-            ((/boiterie/i.test(textToSend)) ? 1 : 0) +
+            ((/boiterie|boitrie/i.test(textToSend)) ? 1 : 0) +
+            ((/(?:fracture|luxation).*(?:m[eé]tatars|tarse|lisfranc|pied)|valgus.*pied|pied.*valgus/i.test(textToSend)) ? 1 : 0) +
             
             // === MEMBRES SUPÉRIEURS ===
             ((/fracture.*hum[ée]rus|fracture.*clavicule|fracture.*scapula/i.test(textToSend)) ? 1 : 0) +
@@ -639,7 +640,7 @@ export const ExclusiveAiCalculator: React.FC<ExclusiveAiCalculatorProps> = ({
             }
             // Inclure si contient des termes médicaux de lésion ou séquelles neurologiques
             // 🆕 V3.3.226: Ajout cataracte, acuité visuelle, implant, glaucome, rétine comme termes médicaux reconnus
-            return /(fracture|luxation|rupture|tassement|entorse|plaie|amputation|brûlure|lésion|douleur|raideur|ankylose|limitation|qui\s+presente|presente|steppage|amyotrophie|séquelle|sequelle|marche|paralysie|cal\s+vicieux|supination|pronation|force|serrage|cicatrice|cataracte|acuit[eé].*visuelle|implant|glaucome|r[eé]tine|surdit[eé]|acouph[eè]ne|perforation.*tympan)/i.test(desc);
+            return /(fracture|luxation|rupture|tassement|entorse|plaie|amputation|brûlure|lésion|douleur|raideur|ankylose|limitation|qui\s+presente|presente|steppage|amyotrophie|séquelle|sequelle|marche|paralysie|cal\s+vicieux|supination|pronation|force|serrage|cicatrice|cataracte|acuit[eé].*visuelle|implant|glaucome|r[eé]tine|surdit[eé]|acouph[eè]ne|perforation.*tympan|valgus|varus|boiterie|boitrie|amplitude)/i.test(desc);
         });
         
         // Si aucune lésion médicale trouvée, envoyer tout à l'IA pour analyse complète
@@ -656,7 +657,9 @@ export const ExclusiveAiCalculator: React.FC<ExclusiveAiCalculatorProps> = ({
             'severe', 'sévère', 'modérée', 'moderee', 'légère', 'legere', 'steppage', 'marche', 
             'sequelle', 'séquelle', 'sequelles', 'séquelles', 'pronation', 'supination', 'conserve', 
             'conservée', 'limitée', 'limite', 'force', 'serrage', 'baisse', 'diminution', 'diminuee',
-            'cicatrice', 'cicatricielle', 'qualité', 'qualite', 'radio', 'radiologique'
+            'cicatrice', 'cicatricielle', 'qualité', 'qualite', 'radio', 'radiologique',
+            'douleureux', 'douloureuse', 'douloureux', 'stable', 'amplitude', 'amp',
+            'valgus', 'varus', 'boiterie', 'boitrie'
         ]);
         const descriptions: string[] = [];
         
