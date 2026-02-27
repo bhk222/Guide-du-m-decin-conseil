@@ -222,7 +222,10 @@ export const medicalSynonyms: { [key: string]: string[] } = {
   cecite: ['cécité', 'aveugle', 'perte totale vision', 'non voyant', 'amaurose'],
   amblyopie: ['amblyopie', 'œil paresseux', 'baisse acuité'],
   ptosis: ['ptosis', 'chute paupière', 'paupière tombante'],
-  strabisme: ['strabisme', 'déviation oculaire', 'œil qui louche'],
+  strabisme: ['strabisme', 'déviation oculaire', 'œil qui louche', 'strabisme paralytique', 'strabisme divergent', 'strabisme convergent'],
+  pommette: ['pommette', 'os malaire', 'zygomatique', 'os zygomatique', 'malaire', 'arcade zygomatique'],
+  dysphagie: ['dysphagie', 'trouble déglutition', 'difficulté avaler', 'gêne déglutition', 'trouble de la déglutition'],
+  mastication: ['mastication', 'gêne mastication', 'trouble mastication', 'difficulté mâcher', 'gêne à la mastication', 'trouble articulé dentaire'],
   nystagmus: ['nystagmus', 'oscillations oculaires', 'mouvements involontaires'],
   diplopie: ['diplopie', 'vision double', 'dédoublement vision'],
   scotome: ['scotome', 'tache aveugle', 'zone aveugle'],
@@ -316,7 +319,7 @@ const boneTerms: { [key: string]: string[] } = {
 
     // Tronc & Tête
     crane: ['crâne', 'cranien', 'rocher', 'occipital', 'frontal', 'pariétal', 'temporal'],
-    face: ['maxillaire', 'mandibule', 'malaire', 'zygomatique', 'os propres du nez', 'dent', 'dentaire', 'orbite'],
+    face: ['maxillaire', 'mandibule', 'malaire', 'zygomatique', 'pommette', 'os propres du nez', 'dent', 'dentaire', 'orbite'],
     hyoide: ['hyoïde', 'hyoidien'],
     vertebre: ['vertèbre', 'vertebral', 'cervical', 'dorsal', 'lombaire', 'rachis', 'atlas', 'axis', 'apophyse', 'odontoïde'],
     sacrum: ['sacrum', 'sacro-iliaque'],
@@ -522,6 +525,12 @@ const preprocessMedicalText = (text: string): string => {
         // 🆕 V3.3.129: Correction fautes tendons fléchisseurs
         [/\brepture\b/gi, 'rupture '],  // Faute: repture → rupture
         [/\bfl[eéè]chiss?eur/gi, 'fléchisseur '],  // Normalisation: flechiseur/flechisseur → fléchisseur
+        // 🆕 V3.3.314: Normalisation termes faciaux
+        [/\bpommette\b/gi, 'pommette os malaire zygomatique '],  // Enrichissement pommette → malaire
+        [/\bdte\b/gi, 'droite '],  // Abréviation fréquente: dte → droite
+        [/\bgche\b/gi, 'gauche '],  // Abréviation fréquente: gche → gauche
+        [/\bnle\b/gi, 'normale '],  // Abréviation: nle → normale
+        [/\bpls\b/gi, 'plus '],  // Abréviation: pls → plus
         
         // === MOBILITÉ ===
         [/\bflex\b(?!\s*$)/gi, 'flexion '],
@@ -13578,7 +13587,7 @@ export const detectMultipleLesions = (text: string): {
     // MAIS le priority handler TC+facial gère ce cas → NE PAS déclencher le cumul extraction
     // qui splitteait mal les lésions et perdait les fractures faciales
     const isTCText222 = /traumatisme.*crani|perte.*connaissance|coma|hospitalisation.*neuro|hematome.*(?:sous.*dural|extradural|epidural)/i.test(normalized);
-    const hasFracturesFaciales222 = /fracture.*(?:plancher.*orbit|orbit|zygoma|malaire|os\s*propres?\s*(?:du\s*)?nez|nasale?)|(?:zygoma|malaire).*fractur|blow[\s-]*out/i.test(normalized);
+    const hasFracturesFaciales222 = /fracture.*(?:plancher.*orbit|orbit|zygoma|malaire|pommette|os\s*propres?\s*(?:du\s*)?nez|nasale?)|(?:zygoma|malaire|pommette).*fractur|blow[\s-]*out|enfoncement.*(?:pommette|malaire|zygoma)/i.test(normalized);
     if (isTCText222 && hasFracturesFaciales222) {
         const hasOtherDistinctLesionTCF222 = /fracture.*(?:femur|tibia|humerus|bassin|cote|rotule|radius|poignet|vertebr|clavicule)|luxation.*(?:hanche|genou|epaule)/i.test(normalized);
         if (!hasOtherDistinctLesionTCF222) {
@@ -14063,7 +14072,7 @@ const extractIndividualLesions = (text: string): string[] => {
     // Ex: "Fracture bimalléolaire cheville gauche.\nFracture Pouteau-Colles poignet droit.\nHernie discale L4-L5."
     // Ex: "Raideur genou droit post-fracture plateau tibial. Amputation trans-métatarsienne pied gauche."
     {
-        const medKeywords = /(?:fracture|luxation|rupture|l[eé]sion|entorse|d[eé]chirure|amputation|hernie|contusion|arthrod[eè]se|raideur|ankylose|pseudarthrose|cal\s+vicieux|surdit[eé]|perte\s+auditi|acouph[eè]ne|hypoacousie|syndrome|d[eé]pression|ptsd|espt|paralysie|atteinte|coiffe|algodystrophie|sdrc|n[eé]vralgie|tendinopathie|instabilit[eé]|st[eé]nose|spondylolisth[eé]sis|sciatalgie|lombosciatalgie|cervicobrachialgie|bursectomie|spl[eé]nectomie)/i;
+        const medKeywords = /(?:fracture|luxation|rupture|l[eé]sion|entorse|d[eé]chirure|amputation|hernie|contusion|arthrod[eè]se|raideur|ankylose|pseudarthrose|cal\s+vicieux|surdit[eé]|perte\s+auditi|acouph[eè]ne|hypoacousie|syndrome|d[eé]pression|ptsd|espt|paralysie|atteinte|coiffe|algodystrophie|sdrc|n[eé]vralgie|tendinopathie|instabilit[eé]|st[eé]nose|spondylolisth[eé]sis|sciatalgie|lombosciatalgie|cervicobrachialgie|bursectomie|spl[eé]nectomie|strabisme|diplopie|dysphagie|mastication|anesth[eé]sie|perte.*vision|c[eé]cit[eé]|enfoncement|pommette|cicatrice)/i;
         
         // Splitter sur: retours à la ligne, points suivis d'espace+majuscule, tirets de liste
         const segments = cleanedText
@@ -16641,7 +16650,7 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
     // 🆕 V3.3.286: FRACTURES FACIALES ISOLÉES (SANS TC)
     // Problème: fracture blow-out + diplopie/hypoesthésie = détecté comme polytraumatisme multi-système
     // Réalité: diplopie et hypoesthésie sont des SÉQUELLES de la fracture, pas des lésions distinctes
-    const hasFracturesFacialesIsolees286 = /fracture.*(?:plancher.*orbit|orbit|zygoma|malaire|os\s*propres?\s*(?:du\s*)?nez|nasale?)|(?:zygoma|malaire).*fractur|blow[\s-]*out/i.test(text);
+    const hasFracturesFacialesIsolees286 = /fracture.*(?:plancher.*orbit|orbit|zygoma|malaire|pommette|os\s*propres?\s*(?:du\s*)?nez|nasale?)|(?:zygoma|malaire|pommette).*fractur|blow[\s-]*out|enfoncement.*(?:pommette|malaire|zygoma)/i.test(text);
     const isNOTTCPresent286 = !/traumatisme.*cr[aâ]n|perte.*connaissance|coma|hospitalisation.*neuro|h[eé]matome.*(?:sous.*dural|extradural|[eé]pidural)/i.test(text);
     const hasOtherDistinctSystem286 = /fracture.*(?:f[eé]mur|tibia|hum[eé]rus|bassin|c[oô]te|rotule|plateau|radius|poignet|vert[eé]br|clavicule)|luxation.*(?:hanche|genou|[eé]paule)|pseudarthrose.*(?:mandibule|branche)|glaucome|atrophie.*optique|c[eé]cit[eé]|[eé]nucl[eé]ation|phthisis\s*bulbi|atrophie.*globe/i.test(text);
 
@@ -16649,7 +16658,7 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
         console.log('🦴 [V3.3.286] FRACTURE FACIALE ISOLÉE (sans TC) → Analyse mono-lésion avec séquelles intégrées');
 
         const hasPlancherFracture286 = /fracture.*plancher.*orbit|blow[\s-]*out/i.test(text);
-        const hasZygomaFracture286 = /fracture.*(?:zygoma|malaire|os\s*malaire)|(?:zygoma|malaire).*fractur/i.test(text);
+        const hasZygomaFracture286 = /fracture.*(?:zygoma|malaire|pommette|os\s*malaire)|(?:zygoma|malaire|pommette).*fractur|enfoncement.*(?:pommette|malaire|zygoma)/i.test(text);
         const hasNezFracture286 = /fracture.*(?:os\s*propres?\s*(?:du\s*)?nez|nez|nasale?|os\s*nasal)|(?:nez|nasal).*fractur/i.test(text);
 
         // Trouver l'entrée principale du barème
@@ -16721,7 +16730,7 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
     // Le TC handler seul (comprehensiveSingleLesionAnalysis) fait un return qui ignore les fractures faciales
     // → Handler dédié qui évalue les 2 systèmes (NEUROLOGIQUE + FACE) et cumule avec Balthazard
     const isTCPresent = /traumatisme.*cr[aâ]n|perte.*connaissance|coma|hospitalisation.*neuro|h[eé]matome.*(?:sous.*dural|extradural|[eé]pidural)/i.test(text);
-    const hasFracturesFacialesV222 = /fracture.*(?:plancher.*orbit|orbit|zygoma|malaire|os\s*propres?\s*(?:du\s*)?nez|nasale?)|(?:zygoma|malaire).*fractur|blow[\s-]*out/i.test(text);
+    const hasFracturesFacialesV222 = /fracture.*(?:plancher.*orbit|orbit|zygoma|malaire|pommette|os\s*propres?\s*(?:du\s*)?nez|nasale?)|(?:zygoma|malaire|pommette).*fractur|blow[\s-]*out|enfoncement.*(?:pommette|malaire|zygoma)/i.test(text);
     
     if (isTCPresent && hasFracturesFacialesV222 && !isExactMatch) {
         // Vérifier qu'il n'y a PAS d'autre lésion distincte d'un 3ème système (ex: fracture fémur)
@@ -19764,6 +19773,158 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
         }
     } catch (e) {
         console.error('Erreur règle cécité bilatérale:', e);
+    }
+
+    // 🆕 V3.3.314: POLYTRAUMATISME CERVICO-CRANIO-FACIAL
+    // Détection: perte vision unilatérale + au moins 2 autres séquelles faciales/cervicales distinctes
+    // (strabisme, enfoncement pommette, anesthésie nerf sous-orbitaire, dysphagie, trouble mastication, cicatrice)
+    // → Évaluation cumul Balthazard sur toutes les séquelles distinctes
+    try {
+        const hasCCFVisionLoss = /(?:perte.*(?:subtotal|total|compl[eè]t).*vision|oeil.*(?:perdu|aveugle)|c[eé]cit[eé].*oeil|vision.*(?:perdu|nulle|abolie))/i.test(finalCleanedText);
+        const hasCCFOeilPerdu = /oeil.*(?:perdu|perte)|(?:perdu|perte).*oeil/i.test(finalCleanedText);
+        const hasCCFStrabisme = /strabisme|d[eé]viation\s+oculaire/i.test(finalCleanedText);
+        const hasCCFEnfoncementPommette = /enfoncement.*(?:pommette|malaire|zygoma)|(?:pommette|malaire|zygoma).*enfon/i.test(finalCleanedText);
+        const hasCCFAnesthesieNerf = /anesth[eé]sie.*(?:nerf|territoire|sous[\s-]*orbit)|hypo[eé]sth[eé]sie.*(?:nerf|territoire|sous[\s-]*orbit)/i.test(finalCleanedText);
+        const hasCCFDysphagie = /dysphagie|trouble.*d[eé]glutition|g[eê]ne.*d[eé]glutition/i.test(finalCleanedText);
+        const hasCCFMastication = /g[eê]ne.*mastication|trouble.*mastication|difficult[eé].*m[aâ]ch/i.test(finalCleanedText);
+        const hasCCFCicatriceCervicale = /cicatrice.*cervical|plaie.*cervical/i.test(finalCleanedText);
+        const hasCCFCicatriceCorneenne = /cicatrice.*corn[eé]en|taie.*corn[eé]en|opacit[eé].*corn[eé]/i.test(finalCleanedText);
+        const hasCCFTraumatismeCervical = /traumatisme.*cervic|plaie.*cervical.*profond|cervico.*cranio|cranio.*facial/i.test(finalCleanedText);
+        const hasCCFPlaieLangue = /plaie.*(?:langue|palais|base.*langue)|(?:langue|palais).*plaie/i.test(finalCleanedText);
+        
+        // Compter le nombre de séquelles cervico-cranio-faciales distinctes 
+        const ccfSequelae: { name: string; baremeRef: string; rate: number; justif: string }[] = [];
+        
+        if (hasCCFVisionLoss || hasCCFOeilPerdu) {
+            ccfSequelae.push({
+                name: "Perte complète de la vision d'un oeil (l'autre étant normal)",
+                baremeRef: "Yeux - Cécité et Baisse de Vision",
+                rate: 30,
+                justif: "Perte totale de la vision d'un œil avec l'autre œil normal → taux fixe barémique 30%"
+            });
+        }
+        if (hasCCFStrabisme) {
+            // Strabisme paralytique = diplopie / paralysie oculo-motrice → 5-25%
+            // Avec perte de vision de l'autre œil, la diplopie est moins gênante → partie basse
+            const strabRate = hasCCFVisionLoss ? 5 : 10;
+            ccfSequelae.push({
+                name: "Strabisme paralytique (diplopie)",
+                baremeRef: "Yeux - Orbite > Paralysie oculo-motrice",
+                rate: strabRate,
+                justif: `Strabisme paralytique post-traumatique → ${strabRate}% (diplopie ${hasCCFVisionLoss ? 'sur œil déjà perdu - retentissement réduit' : 'gênante'})`
+            });
+        }
+        if (hasCCFEnfoncementPommette) {
+            // Séquelles fracture malaire (zygomatique) : 5-25%
+            let pommetteRate = 10; // base - enfoncement modéré
+            if (hasCCFAnesthesieNerf) pommetteRate += 3; // anesthésie sous-orbitaire associée
+            if (/important|majeur|s[eé]v[eè]re/i.test(finalCleanedText)) pommetteRate += 5;
+            ccfSequelae.push({
+                name: "Séquelles de fracture de l'os malaire (zygomatique) - Enfoncement pommette",
+                baremeRef: "Séquelles Maxillo-Faciales > Face - Mâchoires",
+                rate: pommetteRate,
+                justif: `Enfoncement de la pommette (fracture malaire/zygomatique) → ${pommetteRate}% [fourchette 5-25%]`
+            });
+        }
+        if (hasCCFAnesthesieNerf && !hasCCFEnfoncementPommette) {
+            // Anesthésie nerf sous-orbitaire isolée (sans fracture malaire) → 3-5%
+            ccfSequelae.push({
+                name: "Anesthésie dans le territoire du nerf sous-orbitaire",
+                baremeRef: "Séquelles Maxillo-Faciales > Hypoesthésie/Anesthésie V2",
+                rate: 5,
+                justif: "Anesthésie territoire nerf sous-orbitaire (V2) → 5% [fourchette 3-5%]"
+            });
+        }
+        if (hasCCFMastication) {
+            // Gêne à la mastication → 5-10% pour gêne modérée
+            const masticRate = /important|s[eé]v[eè]re|impossible/i.test(finalCleanedText) ? 10 : 5;
+            ccfSequelae.push({
+                name: "Gêne à la mastication post-traumatique",
+                baremeRef: "Séquelles Maxillo-Faciales > Face - Mâchoires",
+                rate: masticRate,
+                justif: `Gêne à la mastication post-traumatique → ${masticRate}% [fourchette 5-15%]`
+            });
+        }
+        if (hasCCFDysphagie) {
+            // Dysphagie → gêne déglutition par cicatrice pharyngée 10-30%
+            const dysphRate = /s[eé]v[eè]re|important|majeur/i.test(finalCleanedText) ? 15 : 10;
+            ccfSequelae.push({
+                name: "Dysphagie post-traumatique (gêne de la déglutition)",
+                baremeRef: "ORL > Gêne de la déglutition par cicatrice pharyngée",
+                rate: dysphRate,
+                justif: `Dysphagie post-traumatique (plaie cervicale/base langue) → ${dysphRate}% [fourchette 10-30%]`
+            });
+        }
+        if (hasCCFCicatriceCorneenne) {
+            // Cicatrice cornéenne œil controlatéral avec vision normale → 0%
+            // Si vision diminuée, évaluer selon tableau d'AV
+            const hasVisionBaisseContra = /corn[eé]en.*vision.*baiss|baiss.*vision.*corn[eé]en/i.test(finalCleanedText);
+            if (hasVisionBaisseContra) {
+                ccfSequelae.push({
+                    name: "Cicatrice cornéenne avec retentissement visuel",
+                    baremeRef: "Yeux - Taies de cornée",
+                    rate: 5,
+                    justif: "Cicatrice cornéenne avec retentissement visuel → 5%"
+                });
+            }
+            // Si vision controlatérale normale → pas d'IPP (mentionné en note)
+        }
+
+        // Condition de déclenchement: au moins 3 séquelles cervico-cranio-faciales distinctes
+        if (ccfSequelae.length >= 3) {
+            console.log(`🏥 [V3.3.314] POLYTRAUMATISME CERVICO-CRANIO-FACIAL DÉTECTÉ: ${ccfSequelae.length} séquelles`);
+            
+            // Calcul Balthazard progressif
+            let ippGlobal = 0;
+            const sortedSeq = [...ccfSequelae].sort((a, b) => b.rate - a.rate); // Plus élevé d'abord
+            const balthDetails: string[] = [];
+            
+            for (let i = 0; i < sortedSeq.length; i++) {
+                const seq = sortedSeq[i];
+                if (i === 0) {
+                    ippGlobal = seq.rate;
+                    balthDetails.push(`&nbsp;&nbsp;${i + 1}. <strong>${seq.name}</strong> → ${seq.rate}% (taux principal)`);
+                } else {
+                    const contribution = Math.round(seq.rate * (100 - ippGlobal) / 100);
+                    balthDetails.push(`&nbsp;&nbsp;${i + 1}. <strong>${seq.name}</strong> → ${seq.rate}% × (100 - ${ippGlobal})% = +${contribution}%`);
+                    ippGlobal += contribution;
+                }
+            }
+            
+            // Notes cliniques complémentaires
+            const notesCompl: string[] = [];
+            if (hasCCFCicatriceCervicale) {
+                notesCompl.push("Cicatrice cervicale de bonne qualité → préjudice esthétique évalué séparément (pas d'IPP fonctionnel)");
+            }
+            if (hasCCFCicatriceCorneenne && !ccfSequelae.find(s => s.name.includes('cornéenne'))) {
+                notesCompl.push("Cicatrice cornéenne œil controlatéral avec vision normale → pas d'IPP fonctionnel additionnel");
+            }
+            if (hasCCFPlaieLangue) {
+                notesCompl.push("Plaie base de la langue et du palais → séquelles intégrées dans l'évaluation de la dysphagie et de la gêne masticatoire");
+            }
+            
+            const justifCCF =
+                `<strong>🏥 POLYTRAUMATISME CERVICO-CRANIO-FACIAL</strong><br>` +
+                `<strong>📋 Calcul IPP cumulé (Barème 1967 – Formule de Balthazard)</strong><br><br>` +
+                `<strong>📊 ${ccfSequelae.length} séquelles post-traumatiques identifiées :</strong><br>` +
+                balthDetails.join('<br>') + '<br><br>' +
+                `<strong>🧮 IPP GLOBAL CUMULÉ = ${ippGlobal}%</strong><br><br>` +
+                `<strong>📖 Références barémiques :</strong><br>` +
+                ccfSequelae.map(s => `&nbsp;&nbsp;• ${s.name} : <em>${s.baremeRef}</em> → ${s.rate}%<br>&nbsp;&nbsp;&nbsp;&nbsp;${s.justif}`).join('<br>') + '<br>' +
+                (notesCompl.length > 0 ? '<br><strong>📝 Notes complémentaires :</strong><br>' + notesCompl.map(n => `&nbsp;&nbsp;• ${n}`).join('<br>') : '') +
+                `<br><br>⚖️ <em>Base juridique : Barème indicatif d'invalidité — Accidents du travail (1967).</em>`;
+
+            return {
+                type: 'proposal' as const,
+                name: `Polytraumatisme cervico-cranio-facial - ${ccfSequelae.length} séquelles - IPP global ${ippGlobal}%`,
+                rate: ippGlobal,
+                justification: justifCCF,
+                path: 'Polytraumatisme > Séquelles Maxillo-Faciales, ORL et Ophtalmologiques',
+                injury: undefined
+            } as any;
+        }
+    } catch (e) {
+        console.error('Erreur règle polytraumatisme cervico-cranio-facial:', e);
     }
 
     // ✅ Règle rapide : détecter explicitement la cécité unilatérale (ex: "œil gauche aveugle", "cécité complète oeil droit")
