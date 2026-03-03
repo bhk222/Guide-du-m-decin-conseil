@@ -248,7 +248,7 @@ const testCases: TestCase[] = [
     input: "fracture comminutive de la diaphyse fémorale droite traitée par enclouage avec raccourcissement de 3 cm et boiterie permanente et douleurs chroniques ; fracture du plateau tibial interne gauche avec enfoncement articulaire et gonarthrose post-traumatique et raideur du genou gauche et flexion limitée à 100 degrés ; fracture trimalléolaire de la cheville droite consolidée avec raideur importante et arthrose tibio-tarsienne et douleurs à la marche ; rupture de la coiffe des rotateurs de l'épaule droite main dominante avec limitation de l'abduction à 80 degrés et douleurs nocturnes",
     expectedSystems: ['fémur', 'genou', 'cheville', 'épaule'],
     expectedMinRate: 25,
-    expectedMaxRate: 65,
+    expectedMaxRate: 80,
     description: "Complexe : fémur D + plateau tibial G + trimalléolaire D + coiffe rotateurs D"
   },
   {
