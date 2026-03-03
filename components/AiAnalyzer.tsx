@@ -8087,6 +8087,18 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
         // Contexte: Chute + perte connaissance + hospitalisation neuro + ≥2 séquelles parmi (cognitif, vertiges, céphalées)
         // SANS hémiparésie (qui est captée par la règle 1030 ci-dessus)
         // PRIORITÉ 1025 > 1020 (TC grave CAS 13) > 1001 (Commotion prolongée)
+        //
+        // 🆕 V3.3.321: GARDE — Si "syndrome post-commotionnel" explicite SANS signes focaux,
+        // diriger vers "Syndrome subjectif" (3-15%) au lieu de "Commotion cérébro-spinale" (5-60%)
+        // Le syndrome post-commotionnel persistant (céphalées, vertiges, troubles concentration) 
+        // sans hémiparésie/aphasie/déficit moteur = séquelles SUBJECTIVES, pas commotion grave
+        {
+            pattern: /(?:traumatisme|trauma).*cr[aâ]ni|cr[aâ]ni.*(?:traumatisme|trauma)/i,
+            context: /syndrome.*(?:post[\s-]?commotionnel|post[\s-]?traumati).*(?:c[eé]phal[eé]e|vertige|concentration|trouble)|perte.*connaissance.*syndrome.*(?:post[\s-]?commotionnel|commotionnel)/i,
+            negativeContext: /h[eé]mipar[eé]sie|h[eé]mipl[eé]gie|aphasie|d[eé]ficit.*moteur|paralysie.*faciale|d[eé]ficit.*cognitif.*(?:majeur|s[eé]v[eè]re)|dysex[eé]cutif|coma.*prolong|glasgow.*[3-8]|[eé]pilepsie/i,
+            searchTerms: ["Syndrome subjectif commun des blessures du crâne (céphalée, vertiges, troubles de l'humeur)"],
+            priority: 1026,
+        },
         {
             pattern: /(?:chute|traumatisme.*cr[aâ]ne?|TC).*(?:perte.*connaissance|coma|hospitalisation.*neuro)/i,
             context: /(?:troubles?.*cognitif|vertige|c[eé]phal[eé]e).*(?:troubles?.*cognitif|vertige|c[eé]phal[eé]e)/is,
@@ -12596,7 +12608,10 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             
             const sequelaCandidate = candidates.slice(1).find(c => {
                 const cNameNormalized = normalize(c.injury.name);
-                const cIsSequela = functionalSequelaKeywords.some(kw => cNameNormalized.includes(kw));
+                // 🆕 V3.3.320g: Un candidat "séquelle" ne doit PAS être lui-même une lésion primaire
+                // Ex: "Fracture du sacrum avec douleurs" a "douleur" mais est une fracture → pas une séquelle
+                const cHasPrimaryKeyword = primaryLesionKeywords.some(kw => cNameNormalized.includes(kw));
+                const cIsSequela = functionalSequelaKeywords.some(kw => cNameNormalized.includes(kw)) && !cHasPrimaryKeyword;
                 const cAnatomicalRegion = c.path.split(' > ')[1]?.split(' - ')[0].trim();
                 return cIsSequela && cAnatomicalRegion === topAnatomicalRegion;
             });
@@ -12805,6 +12820,18 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             
             // 🆕 V3.3.202k: Afficher TOUS les choix analogiques sans limite
             
+            // 🆕 V3.3.322: Auto-résolution Main Dominante / Main Non Dominante
+            // Si l'utilisateur spécifie explicitement la dominance, ne garder que la variante correspondante
+            const userSpecifiesMD_322 = /main\s+(?:dominante|dom\b)/i.test(normalizedInput) && !/(non\s+dominante|non\s+dom\b|mnd\b)/i.test(normalizedInput);
+            const userSpecifiesMND_322 = /(non\s+dominante|non\s+dom\b|mnd\b)/i.test(normalizedInput);
+            if (userSpecifiesMD_322) {
+                const mdFiltered = choices.filter(c => /Main Dominante/i.test(c.name) && !/Non Dominante/i.test(c.name));
+                if (mdFiltered.length > 0) choices = mdFiltered;
+            } else if (userSpecifiesMND_322) {
+                const mndFiltered = choices.filter(c => /Non Dominante/i.test(c.name));
+                if (mndFiltered.length > 0) choices = mndFiltered;
+            }
+            
             if (choices.length > 1) {
                 return {
                     type: 'ambiguity',
@@ -12848,7 +12875,8 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
         
         switch(detectedContextForValidation) {
             case 'membreInf':
-                isCoherent = /cheville|pied|genou|jambe|cuisse|hanche|membre.*inf|orteil|tibia|perone|femur|rotule|menisque|ligament.*croise/i.test(proposalText);
+                // 🆕 V3.3.321: Ajout bassin|cotyle|acetabul — le cotyle est l'articulation coxo-fémorale (hanche)
+                isCoherent = /cheville|pied|genou|jambe|cuisse|hanche|membre.*inf|orteil|tibia|perone|femur|rotule|menisque|ligament.*croise|bassin|cotyle|ac[eé]tabul/i.test(proposalText);
                 break;
             case 'membreSup':
                 isCoherent = /main|poignet|coude|avant.*bras|bras|epaule|membre.*sup|doigt|radius|cubitus|ulna|humer/i.test(proposalText);
@@ -13705,9 +13733,16 @@ export const detectMultipleLesions = (text: string): {
     // 🆕 V3.3.227: EXCEPTION FRACTURE FÉMUR/TIBIA + RAIDEUR GENOU (SÉQUELLE)
     // La raideur du genou est une SÉQUELLE de la fracture fémorale/tibiale, pas une lésion distincte
     // "Raccourcissement" + "raideur du genou" = conséquences d'une même fracture
+    // 🆕 V3.3.320: NE PAS appliquer si le texte contient 2 fractures DISTINCTES (ex: fracture fémur + fracture plateau tibial)
     const isFractureFemurOuTibia = /fracture.*(?:femur|femoral|diaphysaire.*femur|tibia|tibial)/i.test(normalized);
     const hasRaideurGenouSequelle = /raideur.*genou|genou.*raideur|limitation.*flexion.*genou|genou.*limitation/i.test(normalized);
-    if (isFractureFemurOuTibia && hasRaideurGenouSequelle) {
+    // V3.3.320: Détecter si le texte a des fractures DISTINCTES sur des segments DIFFÉRENTS du MI
+    const hasFractureFemur320 = /fracture.*(?:f[eé]mur|f[eé]moral|diaphys.*f[eé]m)/i.test(normalized);
+    const hasFractureTibia320 = /fracture.*(?:tibia|plateau.*tibial|diaphys.*tibi)/i.test(normalized);
+    const hasFractureCheville320 = /fracture.*(?:cheville|mall[eé]ol|astragale|bimall[eé]ol)/i.test(normalized);
+    const hasFractureGenou320 = /fracture.*(?:rotule|plateau.*tibial)/i.test(normalized);
+    const hasDistinctMIFractures320 = [hasFractureFemur320, hasFractureTibia320, hasFractureCheville320, hasFractureGenou320].filter(Boolean).length >= 2;
+    if (isFractureFemurOuTibia && hasRaideurGenouSequelle && !hasDistinctMIFractures320) {
         const hasOtherDistinctLesionFG = /fracture.*(?:humerus|bassin|cote|radius|poignet|vertebr|clavicule|rotule)|luxation.*(?:hanche|epaule)/i.test(normalized);
         if (!hasOtherDistinctLesionFG) {
             console.log('🦴 [V3.3.227] Fracture fémur/tibia + raideur genou → PAS de cumul (raideur = séquelle)');
@@ -13724,10 +13759,13 @@ export const detectMultipleLesions = (text: string): {
     // 🆕 V3.3.288: EXCEPTION FRACTURE COL FÉMUR + RAIDEUR HANCHE + RACCOURCISSEMENT (SÉQUELLES)
     // La raideur de la hanche et le raccourcissement sont des SÉQUELLES de la fracture du col fémoral
     // "fracture col fémur + raccourcissement 2cm + raideur hanche + boiterie" = UNE SEULE pathologie
-    const isFractureColFemur = /fracture.*col.*f[eé]m(?:ur|oral)|col.*f[eé]m.*fractur|fracture.*(?:hanche|cervicale.*f[eé]mur)|pseudarthrose.*col.*f[eé]m/i.test(normalized);
+    // 🆕 V3.3.321: EXCLURE fracture cotyle (pathologie DISTINCTE du col fémur) — le regex fracture.*hanche matchait à tort "fracture cotyle de la hanche"
+    const isCotyleFracture321 = /cotyle|ac[eé]tabul|cotylo[ïi]de/i.test(normalized);
+    const isFractureColFemur = !isCotyleFracture321 && /fracture.*col.*f[eé]m(?:ur|oral)|col.*f[eé]m.*fractur|fracture.*(?:hanche|cervicale.*f[eé]mur)|pseudarthrose.*col.*f[eé]m/i.test(normalized);
     const hasRaideurHancheSequelle = /raideur.*hanche|hanche.*raideur|limitation.*(?:flexion|abduction|rotation).*hanche|raccourcissement|boiterie/i.test(normalized);
     if (isFractureColFemur && hasRaideurHancheSequelle) {
-        const hasOtherDistinctLesionCF = /fracture.*(?:humerus|bassin|cote|radius|poignet|vertebr|clavicule|rotule|tibia)|luxation.*(?:epaule|genou)/i.test(normalized);
+        // 🆕 V3.3.321: Ajout péroné/fibula aux lésions distinctes reconnues
+        const hasOtherDistinctLesionCF = /fracture.*(?:humerus|bassin|cote|radius|poignet|vertebr|clavicule|rotule|tibia|p[eé]ron[eé]|fibula|cheville|mall[eé]ol)|luxation.*(?:epaule|genou)/i.test(normalized);
         if (!hasOtherDistinctLesionCF) {
             console.log('🦴 [V3.3.288] Fracture col fémur + raideur hanche/raccourcissement → PAS de cumul');
             return {
@@ -14110,11 +14148,15 @@ const extractIndividualLesions = (text: string): string[] => {
     // Ex: "Fracture bimalléolaire cheville gauche.\nFracture Pouteau-Colles poignet droit.\nHernie discale L4-L5."
     // Ex: "Raideur genou droit post-fracture plateau tibial. Amputation trans-métatarsienne pied gauche."
     {
-        const medKeywords = /(?:fracture|luxation|rupture|l[eé]sion|entorse|d[eé]chirure|amputation|hernie|contusion|arthrod[eè]se|raideur|ankylose|pseudarthrose|cal\s+vicieux|surdit[eé]|perte\s+auditi|acouph[eè]ne|hypoacousie|syndrome|d[eé]pression|ptsd|espt|paralysie|atteinte|coiffe|algodystrophie|sdrc|n[eé]vralgie|tendinopathie|instabilit[eé]|st[eé]nose|spondylolisth[eé]sis|sciatalgie|lombosciatalgie|cervicobrachialgie|bursectomie|spl[eé]nectomie|strabisme|diplopie|dysphagie|mastication|anesth[eé]sie|perte.*vision|c[eé]cit[eé]|enfoncement|pommette|cicatrice)/i;
+        // 🆕 V3.3.323: Ajout tassement, cyphose, kyphose, coxarthrose, gonarthrose, prothese,
+        // nephrectomie, gastrectomie, colectomie, ectomie, traumatisme, cervicalgie, dorsalgie, lombalgie,
+        // stress post-traumat, depress — synchronisé avec isLesionSegment320
+        const medKeywords = /(?:fracture|luxation|rupture|l[eé]sion|entorse|d[eé]chirure|amputation|hernie|contusion|arthrod[eè]se|raideur|ankylose|pseudarthrose|cal\s+vicieux|surdit[eé]|perte\s+auditi|acouph[eè]ne|hypoacousie|syndrome|d[eé]pression|ptsd|espt|paralysie|atteinte|coiffe|algodystrophie|sdrc|n[eé]vralgie|tendinopathie|instabilit[eé]|st[eé]nose|spondylolisth[eé]sis|sciatalgie|lombosciatalgie|cervicobrachialgie|bursectomie|spl[eé]nectomie|strabisme|diplopie|dysphagie|mastication|anesth[eé]sie|perte.*vision|c[eé]cit[eé]|enfoncement|pommette|cicatrice|tassement|cyphose|kyphose|coxarthrose|gonarthrose|proth[eè]se|n[eé]phrectomie|gastrectomie|colectomie|[eé]nucl[eé]ation|traumatisme|cervicalgie|dorsalgie|lombalgie|stress.*post.*traumat|d[eé]press)/i;
         
-        // Splitter sur: retours à la ligne, points suivis d'espace+majuscule, tirets de liste
+        // Splitter sur: retours à la ligne, points suivis d'espace+majuscule, tirets de liste, point-virgule
+        // 🆕 V3.3.321: Ajout split sur ";" (séparateur standard des lésions en texte clinique français)
         const segments = cleanedText
-            .split(/\n+|\r\n|\.\s+(?=[A-ZÉÈÀ])|(?:^|\n)\s*[-–•]\s*/g)
+            .split(/\n+|\r\n|\.\s+(?=[A-ZÉÈÀ])|(?:^|\n)\s*[-–•]\s*|\s*;\s*/g)
             .map(s => s.trim())
             .filter(s => s.length >= 10 && medKeywords.test(s));
         
@@ -14134,8 +14176,18 @@ const extractIndividualLesions = (text: string): string[] => {
             }
             
             if (uniqueSegments.length >= 2) {
-                console.log('✅ Pattern PARAGRAPH V3.3.280 (split paragraphes/phrases) détecté:', uniqueSegments);
-                return uniqueSegments;
+                // 🆕 V3.3.323: Nettoyer les préambules ("polytraumatisme suite à accident...avec")
+                // qui diluent le scoring quand ils précèdent la vraie description de lésion
+                const cleanedSegments = uniqueSegments.map(seg => {
+                    const stripped = seg.replace(/^(?:polytraumatisme|polytraumatise|poly\s*traumatisme)\s+(?:suite\s+[aà]\s+)?(?:accident\s+(?:de\s+la\s+(?:circulation|route|voie\s+publique)|du\s+travail|domestique|de\s+sport)\s+)?(?:avec\s+)?/i, '').trim();
+                    if (stripped.length >= 10 && stripped !== seg) {
+                        console.log(`   🧹 V3.3.323: Préambule nettoyé: "${seg.substring(0, 60)}..." → "${stripped.substring(0, 60)}..."`);
+                        return stripped;
+                    }
+                    return seg;
+                });
+                console.log('✅ Pattern PARAGRAPH V3.3.280 (split paragraphes/phrases) détecté:', cleanedSegments);
+                return cleanedSegments;
             }
         }
         
@@ -14733,7 +14785,9 @@ const hasMultipleDistinctSites = (text: string): boolean => {
         /amputation.*(?:index|pouce|m[eé]dius|majeur|annulaire|auriculaire|d[1-5]|doigt|phalange|main|bras|avant[\s-]*bras)/i.test(t)) siteCount++;
     
     // Membre inférieur (hanche, cuisse, genou, jambe, cheville, pied, orteils)
-    if (/(?:fracture|luxation|rupture|l[eé]sion|entorse|raideur).*(?:hanche|cuisse|genou|jambe|cheville|pied|orteil|tibia|f[eé]mur|p[eé]ron[eé]|fibula|rotule|calcan[eé]um|astragale|mall[eé]ol|plateau.*tibial)/i.test(t) ||
+    // 🆕 V3.3.320: Ajout cotyle, coxarthrose, prothèse hanche
+    if (/(?:fracture|luxation|rupture|l[eé]sion|entorse|raideur|coxarthrose).*(?:hanche|cuisse|genou|jambe|cheville|pied|orteil|tibia|f[eé]mur|p[eé]ron[eé]|fibula|rotule|calcan[eé]um|astragale|mall[eé]ol|plateau.*tibial|cotyle)/i.test(t) ||
+        /(?:fracture.*cotyle|coxarthrose|proth[eè]se.*hanche)/i.test(t) ||
         /(?:amputation.*(?:trans[\s-]?m[eé]tatars|pied|jambe|cuisse|orteil)|\blca\b|\blcl\b|\blli\b|m[eé]niscectomie|arthrod[eè]se.*(?:sous[\s-]?talienne|cheville|tibio))/i.test(t)) siteCount++;
     
     // Rachis (cervical, dorsal, lombaire)
@@ -14745,7 +14799,8 @@ const hasMultipleDistinctSites = (text: string): boolean => {
     
     // Bassin/Pelvis
     // 🆕 V3.3.287: Ajout anneau pelvien, fracture sacrum/coccyx, coccygodynie
-    if (/(?:fracture.*bassin|disjonction.*sacro|branche.*(?:ilio[\s-]?pub|ischio[\s-]?pub)|cadre.*obturateur|fracture.*(?:aileron|sacr[eé]|cotylo[ïi]de|ac[eé]tabulum|anneau.*pelvi|sacrum|coccyx)|anneau.*pelvi|coccygodynie)/i.test(t)) siteCount++;
+    // 🆕 V3.3.320: Ajout cotyle (peut être classé bassin OU hanche selon contexte)
+    if (/(?:fracture.*bassin|disjonction.*sacro|branche.*(?:ilio[\s-]?pub|ischio[\s-]?pub)|cadre.*obturateur|fracture.*(?:aileron|sacr[eé]|cotylo[ïi]de|cotyle|ac[eé]tabulum|anneau.*pelvi|sacrum|coccyx)|anneau.*pelvi|coccygodynie)/i.test(t)) siteCount++;
     
     // Crâne/Cérébral
     if (/(?:traumatisme.*cr[aâ]ni|contusion.*c[eé]r[eé]br|perte.*connaissance|syndrome.*post[\s-]?commotionnel|tc\b|commotion.*c[eé]r[eé]br|c[eé]phal[eé]e.*chronique|troubles?.*cognitif)/i.test(t)) siteCount++;
@@ -14765,6 +14820,15 @@ const hasMultipleDistinctSites = (text: string): boolean => {
     
     // 🆕 V3.3.286: Yeux/Ophtalmologie (glaucome, cécité, énucléation, phthisis, etc.)
     if (/(?:glaucome|c[eé]cit[eé]|[eé]nucl[eé]ation|phthisis|atrophie.*(?:globe|optique)|uv[eé]ite|cataracte.*traumat|d[eé]collement.*r[eé]tin|diplopie.*(?:permanente|irréductible)|scotome|h[eé]mianopsie|baisse.*(?:acuit[eé]|vision).*(?:s[eé]v[eè]re|importante|majeure))/i.test(t)) siteCount++;
+    
+    // 🆕 V3.3.320: Détection sous-segments intra-membre
+    // Quand 2+ fractures DISTINCTES touchent des os/articulations différents du MÊME membre,
+    // c'est un polytraumatisme nécessitant un cumul Balthazard (pas une lésion unique)
+    // 🔧 V3.3.320b: Analyse par CLAUSE (split sur ; et +) pour éviter les faux positifs
+    // Ex: "fracture humérus...limitation épaule" ne doit PAS compter épaule et humérus séparément
+    // 🔧 V3.3.320e: Désactivé — la détection sub-segment large cause des régressions
+    // car le chemin cumul extraction donne souvent des taux plus bas que le regroupement par système.
+    // À la place, on utilise des guards ciblés sur les handlers spécialisés (Pouteau-Colles, etc.)
     
     console.log(`🔍 [V3.3.280] hasMultipleDistinctSites: ${siteCount} sites détectés (seuil=2) → ${siteCount >= 2 ? 'MULTI-SITES' : 'site unique'}`);
     return siteCount >= 2;
@@ -14959,11 +15023,18 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
     // 🆕 V3.3.313: NE PAS intercepter si le texte est clairement une pathologie avant-bras (Galeazzi, Monteggia, fracture deux os, pseudarthrose, synostose, fracture isolée)
     const isAvantBrasSpecificPathology = /galeazzi|monteggia|synostose|pseudarthrose|deux\s+os.*avant[\s-]?bras|avant[\s-]?bras.*deux\s+os|fracture.*isol[eé]e.*(?:radius|cubitus)|fracture.*(?:diaphyse|diaphysaire).*radius/i.test(text);
     
+    // 🆕 V3.3.320f: NE PAS intercepter si le texte contient une AUTRE fracture distincte du membre supérieur
+    // Ex: "fracture humérus + fracture radius" → le handler Pouteau-Colles ne doit PAS ignorer l'humérus
+    const hasOtherFractureMS320 = /(?:fracture|luxation)[^;+]{0,40}hum[eé]r/i.test(text) ||
+        /(?:fracture|luxation)[^;+]{0,40}(?:clavicule|omoplate)/i.test(text) ||
+        /(?:fracture|luxation)[^;+]{0,40}(?:coude|ol[eé]cr[aâ]ne)/i.test(text) ||
+        /(?:fracture|luxation)[^;+]{0,40}(?:[eé]paule)/i.test(text);
+    
     // 🆕 V3.3.280: NE PAS court-circuiter si le texte décrit des lésions sur 2+ sites anatomiques distincts
     // Dans ce cas, laisser le flux cumul Balthazard gérer TOUTES les lésions ensemble
     const isMultiSitePolytrauma = hasMultipleDistinctSites(text);
     
-    if ((isPouteauColles || isFractureRadiusPoignet) && !isExactMatch && !isMultiSitePolytrauma && !isAvantBrasSpecificPathology) {
+    if ((isPouteauColles || isFractureRadiusPoignet) && !isExactMatch && !isMultiSitePolytrauma && !isAvantBrasSpecificPathology && !hasOtherFractureMS320) {
         console.log('🦴 [V3.3.216] FRACTURE POUTEAU-COLLES / RADIUS DISTAL détectée → Analyse spécialisée (site unique)');
         
         // Déterminer dominance
@@ -20221,6 +20292,21 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
         
         // Si on a réussi à extraire 2+ lésions distinctes, les analyser séparément
         if (individualLesions.length >= 2) {
+            // 🆕 V3.3.320c: Filtrer les segments NON-lésionnels (signes cliniques, séquelles isolées)
+            // Ex: "marche avec canne", "séquelles douloureuses", "tuteur externe" → pas des lésions
+            // 🆕 V3.3.321: Ajout traumatisme, cervicalgie, névralgie, commotionnel, hémorragie méningée
+            // 🆕 V3.3.322: Ajout stress post-traumatique, dépressif, gastrectomie, néphrectomie, colectomie, ectomie
+            const isLesionSegment320 = /fracture|luxation|rupture|entorse|arrachement|amputation|section|d[eé]chirure|hernie|tassement|contusion|plaie|br[uû]lure|l[eé]sion|coxarthrose|traumatisme|raideur.*(?:genou|cheville|[eé]paule|coude|hanche|poignet|rachis|cervical)|limitation.*(?:flexion|extension|abduction|rotation)|ankylose|gonarthrose|algodystrophie|syndrome.*(?:commotionnel|post.*traumat)|commotionnel|cervicalgie|dorsalgie|lombalgie|lombosciatalgie|cervicobrachialgie|n[eé]vralgie|h[eé]morragie.*m[eé]ning|d[eé]ficit.*(?:moteur|sensitif)|paralysie|surdit[eé]|acouph[eè]ne|ptsd|stress.*post.*traumat|d[eé]press[if]|proth[eè]se|spl[eé]nectomie|ectomie|gastrectomie|n[eé]phrectomie|colectomie|[eé]nucl[eé]ation/i;
+            const filteredLesions = individualLesions.filter(l => {
+                const passes = isLesionSegment320.test(l);
+                if (!passes) console.log(`⚠️ V3.3.320c: Segment NON-lésionnel exclu: "${l.substring(0, 80)}..."`);
+                return passes;
+            });
+            if (filteredLesions.length >= 2) {
+                console.log(`🔧 V3.3.320c: Filtré ${individualLesions.length} → ${filteredLesions.length} lésions (exclu segments non-lésionnels)`);
+                individualLesions = filteredLesions;
+            }
+            
             console.log('✅ Au moins 2 lésions → Analyse séparée');
             const lesionProposals: any[] = [];
             
@@ -20360,10 +20446,35 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
                     console.log(`   🔧 V3.3.281: Enrichissement ankylose coude: "${lesion}" → "${enrichedLesion}"`);
                 }
 
+                // 🆕 V3.3.320d: FRACTURE ÉPAULE avec raideur → Enrichir avec termes barème spécifiques
+                if (/fracture.*[eé]paule|[eé]paule.*fractur/i.test(lesion) && /raideur|limitation|blocage/i.test(lesion)) {
+                    enrichedLesion = lesion + ' fracture tete humerale epaule raideur importante limitation abduction elevation rotation membre superieur';
+                    console.log(`   🔧 V3.3.320d: Enrichissement fracture épaule avec raideur: "${lesion}" → "${enrichedLesion}"`);
+                }
+
+                // 🆕 V3.3.320d: FRACTURE COUDE avec raideur → Enrichir avec termes barème spécifiques
+                if (/fracture.*coude|coude.*fractur/i.test(lesion) && /raideur|limitation|flexion/i.test(lesion)) {
+                    enrichedLesion = lesion + ' fracture olecrane coude raideur flexion extension pronosupination limitation membre superieur';
+                    console.log(`   🔧 V3.3.320d: Enrichissement fracture coude avec raideur: "${lesion}" → "${enrichedLesion}"`);
+                }
+
                 // 🆕 V3.3.281: FRACTURE HUMÉRUS → Enrichir avec termes barème
                 if (/fracture.*hum[eé]r|hum[eé]r.*fractur/i.test(lesion)) {
                     enrichedLesion = lesion + ' fracture humerus diaphysaire cal vicieux deformation angulaire consolidation membre superieur bras';
                     console.log(`   🔧 V3.3.281: Enrichissement fracture humérus: "${lesion}" → "${enrichedLesion}"`);
+                }
+
+                // 🆕 V3.3.323: FRACTURE BASSIN / CADRE OBTURATEUR → Enrichir avec termes barème
+                // Note: cotyle/acétabulum = articulation HANCHE, PAS bassin → ne pas enrichir avec termes bassin
+                if (/fracture.*(?:bassin|cadre.*obturateur|branche.*pub|ilio.*pub|sacro.*iliaque)|bassin.*fractur/i.test(lesion) && !/cotyle|ac[eé]tabul|acetabul/i.test(lesion)) {
+                    enrichedLesion = lesion + ' fracture bassin cadre obturateur branche pubienne disjonction sacro-iliaque douleurs residuelles sequelles';
+                    console.log(`   🔧 V3.3.323: Enrichissement fracture bassin: "${lesion}" → "${enrichedLesion}"`);
+                }
+
+                // 🆕 V3.3.323: TASSEMENT VERTÉBRAL → Enrichir avec termes barème
+                if (/tassement.*vert[eé]br|tassement.*(?:l[1-5]|d[1-9]|c[1-7]|t[1-9])/i.test(lesion)) {
+                    enrichedLesion = lesion + ' fracture tassement vertebral lombaire dorsale consolidee cyphose kyphose raideur rachis douleurs';
+                    console.log(`   🔧 V3.3.323: Enrichissement tassement vertébral: "${lesion}" → "${enrichedLesion}"`);
                 }
 
                 // 🆕 V3.3.280: AMPUTATION TRANS-MÉTATARSIENNE / ORTEILS → Enrichir avec termes barème
@@ -20373,7 +20484,9 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
                 }
 
                 // 🆕 V3.3.280: FRACTURE BIMALLÉOLAIRE / CHEVILLE → Enrichir avec termes barème
-                if (/fracture.*(?:bimall[eé]ol|trimall[eé]ol|mall[eé]ol.*(?:interne|externe).*mall[eé]ol|cheville)/i.test(lesion)) {
+                // 🆕 V3.3.322b: Exclure UNIQUEMENT "deux os de la jambe" (ce n'est PAS une fracture malléolaire)
+                // Note: "diaphyse tibia + raideur cheville" reste enrichi car la cheville EST liée au tibia
+                if (/fracture.*(?:bimall[eé]ol|trimall[eé]ol|mall[eé]ol.*(?:interne|externe).*mall[eé]ol|cheville)/i.test(lesion) && !/deux\s+os/i.test(lesion)) {
                     enrichedLesion = lesion + ' fracture bimalleolaire cheville malleole interne externe tibio-tarsienne raideur';
                     console.log(`   🔧 V3.3.280: Enrichissement fracture bimalléolaire: "${lesion}" → "${enrichedLesion}"`);
                 }
@@ -20488,6 +20601,19 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
                     if (shouldExclude) {
                         console.log(`   ❌ V3.3.201M: EXCLUSION "${lesionName}" - ${exclusionReason}`);
                         continue; // Skip cette lésion, passer à la suivante
+                    }
+                    
+                    // 🆕 V3.3.321: CAP TC post-commotionnel en cumul polytraumatisme
+                    // Le "Syndrome subjectif" ou "Commotion cérébro-spinale" dans un cumul ne doit pas
+                    // dépasser 15% quand le TC ne présente QUE des signes subjectifs (céphalées, vertiges,
+                    // troubles concentration) sans déficit neurologique focal (hémiparésie, aphasie, etc.)
+                    const isTCSubjectifInCumul = /syndrome.*subjectif|subjectif.*blessure|commotion.*c[eé]r[eé]bro|c[eé]r[eé]bro.*spinale/i.test(lesionName);
+                    const hasOnlySubjectiveSigns = /c[eé]phal[eé]e|vertige|concentration|troubles.*humeur|post[\s-]?commotionnel/i.test(lesionContext);
+                    const hasNoFocalDeficit = !/h[eé]mipar[eé]sie|h[eé]mipl[eé]gie|aphasie|d[eé]ficit.*moteur|paralysie.*faciale|d[eé]ficit.*cognitif.*(?:majeur|s[eé]v[eè]re)|dysex[eé]cutif|[eé]pilepsie/i.test(lesionContext);
+                    if (isTCSubjectifInCumul && hasOnlySubjectiveSigns && hasNoFocalDeficit && lesionResult.rate > 15) {
+                        console.log(`   🔧 V3.3.321: CAP TC subjectif en cumul: ${lesionResult.rate}% → 15% (pas de déficit focal)`);
+                        lesionResult.rate = 15;
+                        lesionResult.injury.rate = 15;
                     }
                 }
                 
