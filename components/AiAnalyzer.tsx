@@ -5673,8 +5673,8 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
         [/(?:gauche|droit).{0,30}[oœ]eil.{0,30}c[eé]cit[eé]/gi, 'œil gauche cécité totale perte vision yeux'],
         [/[oœ]eil.{0,30}(?:gauche|droit).{0,30}(?:c[eé]cit[eé]|perdu|aveugle)/gi, 'œil gauche cécité totale perte vision yeux'],
         
-        // 🆕 V3.3.101: Fracture radius avec luxation radio-cubitale
-        [/fracture.*(?:m[eé]dio[\s-]?diaphysaire|diaphyse).*radius/gi, 'fracture diaphyse radius avant-bras os radius limitation supination pronation'],
+        // 🆕 V3.3.101: Fracture radius avec luxation radio-cubitale (V3.3.346: ajout "diaphysaire" simple)
+        [/fracture.*(?:m[eé]dio[\s-]?diaphysaire|diaphysaire|diaphyse).*radius|fracture.*radius.*(?:diaphysaire|diaphyse)/gi, 'fracture diaphyse radius avant-bras os radius limitation supination pronation'],
         [/luxation.*radio[\s-]?cubitale|radio[\s-]?cubitale.*luxation/gi, 'luxation radio-cubitale articulation radius cubitus limitation supination pronation'],
         
         // 🆕 V3.3.100: Rupture jambier postérieur
@@ -6675,12 +6675,13 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
         },
         
         // === 🆕 V3.3.313: FRACTURE ISOLÉE DU RADIUS (diaphyse, sans Monteggia/Galeazzi) ===
+        // 🔧 V3.3.346: Ajout "diaphysaire du radius" et "fracture du radius" simple
         {
-            pattern: /fracture.*isol[eé]e.*radius|fracture.*diaphyse.*radius|fracture.*radius.*(?:tiers|diaphys)/i,
-            context: /radius|avant[\s-]?bras|prono|supination|rotation|douleur/i,
+            pattern: /fracture.*isol[eé]e.*radius|fracture.*(?:diaphyse|diaphysaire).*radius|fracture.*radius.*(?:tiers|diaphys)|fracture.*(?:du\s+)?radius(?!.*(?:poignet|colles|pouteau|cupule|t[eê]te))/i,
+            context: /radius|avant[\s-]?bras|prono|supination|rotation|douleur|d[eé]placement|consolid/i,
             searchTerms: ["Fracture isolée du radius (Main Dominante)"],
             priority: 10500,
-            negativeContext: /cubitus|ulna|deux\s+os|extr[eé]mit[eé].*inf[eé]rieure|pouteau|colles|pseudarthrose|monteggia|galeazzi|cupule|t[eê]te.*radial/i
+            negativeContext: /cubitus|ulna|deux\s+os|extr[eé]mit[eé].*inf[eé]rieure|pouteau|colles|pseudarthrose|monteggia|galeazzi|cupule|t[eê]te.*radial|sans.*s[eé]quelle/i
         },
         
         // === 🆕 V3.3.89: RÈGLE CUPULE/TÊTE RADIALE ===
@@ -8935,9 +8936,10 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             priority: 12000,
             negativeContext: /deux\s+yeux|bilateral|les\s+yeux|maxillaire|machoire|\bdent\b|fracture.*maxillaire/i  // \b = word boundary
         },
-        // 🆕 V3.3.101: Fracture médio-diaphysaire radius avec limitation supination
+        // 🆕 V3.3.101: Fracture médio-diaphysaire / diaphysaire radius avec limitation supination
+        // 🔧 V3.3.346: Ajout "diaphysaire" simple (pas seulement "médio-diaphysaire")
         {
-            pattern: /fracture.*(?:m[eé]dio[\s-]?diaphysaire|diaphyse).*radius/i,
+            pattern: /fracture.*(?:m[eé]dio[\s-]?diaphysaire|diaphysaire|diaphyse).*radius|fracture.*radius.*(?:diaphysaire|diaphyse)/i,
             context: /supination.*limit[eé]|limitation.*supination|pronation.*limit[eé]|cal\s+(?:osseux|vicieux).*radius/i,
             searchTerms: ['Fracture isolée du radius - Avec cal vicieux modéré (Main Dominante)'],
             priority: 10900,
@@ -15069,7 +15071,7 @@ const hasMultipleDistinctSites = (text: string): boolean => {
  * @param isExactMatch - Si true, cherche une correspondance exacte par nom (pour résoudre ambiguïté)
  */
 export const localExpertAnalysis = (text: string, externalKeywords?: string[], isExactMatch: boolean = false): LocalAnalysisResult => {
-    console.log('🔧 localExpertAnalysis V3.3.345 - fracture/amputation type-mismatch guard in findInBareme');
+    console.log('🔧 localExpertAnalysis V3.3.346 - fracture/amputation type guard + sans séquelle bypass + diaphysaire radius patterns');
 
     // 🔴 V3.3.162: NETTOYAGE TEXTE - Supprime caractères invisibles (zero-width space, etc.)
     // Ces caractères peuvent casser les regex et empêcher la détection
@@ -19082,6 +19084,16 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
         } else if (hasTraumaticBrainInjury && hasNeurologicalSequelae && neuroSequelaCountFromText >= 2) {
             console.log('🧠 [V3.3.214] TC avec séquelles neurologiques multiples détecté → Laisser passer aux expert rules');
             // Ne pas retourner le dialogue, laisser l'analyse continuer avec les expert rules
+        }
+        // 🆕 V3.3.346: FRACTURE/TRAUMATISME "SANS SÉQUELLES" = Bypass vers expert rules
+        // Pattern: fracture/luxation/entorse + "sans séquelle(s)"/"examen normal"/"guérison complète"
+        // → La règle experte SANS_SEQUELLE (priority 10000) retourne 0% IPP correctement
+        // → NE DOIT JAMAIS entrer dans le regroupement par système qui donne un taux par défaut (12%)
+        // ⚠️ "consolid[eé].*sans" retiré — trop greedy ("consolidée...sans cannes" = faux positif)
+        else if (/(?:fracture|arrachement|luxation|entorse|traumatisme|lesion)/i.test(text) &&
+                 /(?:sans|pas\s+d[e']?|aucune?)\s*s[eé]quelles?|examen\s+(?:clinique\s+)?normal|gu[eé]rison\s+compl[eè]te|r[eé]cup[eé]ration\s+compl[eè]te|mobilit[eé]\s+(?:normale|conserv[eé]e)|consolidation\s+(?:parfaite|anatomique)|consolid[eé]e?\s+sans\s+s[eé]quelle/i.test(text)) {
+            console.log('✅ [V3.3.346] TRAUMATISME SANS SÉQUELLE détecté → Bypass vers expert rules (règle SANS_SEQUELLE)');
+            // Ne pas retourner, laisser l'analyse continuer vers comprehensiveSingleLesionAnalysis
         }
         // 🆕 V3.3.215: BRÛLURES PROFONDES MAINS/AVANT-BRAS = Bypass vers expert rules
         // Pattern: Brûlures + main/avant-bras + indicateurs de sévérité (profondes, greffe, raideur, 2e-3e degré)
