@@ -2299,7 +2299,7 @@ const synonymMap: { [key: string]: string } = {
     'pirogoff': 'amputation syme',
     'ricard': 'amputation inter-tibio-calcaneenne',
     'trans-metatarsienne': 'amputation trans-metatarsienne',
-    'metatarsienne': 'amputation avant-pied',
+    // 🆕 V3.3.341: Supprimé doublon 'metatarsienne' (déjà défini ligne ~1926 comme 'métatarsien')
     'perte avant-pied': 'amputation avant-pied',
     
     // 🦷 Synonymes dents
@@ -4770,8 +4770,8 @@ export const findCandidateInjuries = (text: string, externalKeywords?: string[])
     }
     
     const highImpactKeywords = [
-        'paralysie', 'cécité', 'surdité', 'amputation', 'ankylose', 'pseudarthrose', 
-        'ablation', 'perte', 'nécrose', 'désarticulation'
+        'paralysie', 'cecite', 'surdite', 'amputation', 'ankylose', 'pseudarthrose', 
+        'ablation', 'perte', 'necrose', 'desarticulation'
     ];
     const userMentionsHighImpactSequela = highImpactKeywords.some(kw => keywords.some(userKw => userKw.includes(kw)));
 
@@ -4935,6 +4935,14 @@ export const findCandidateInjuries = (text: string, externalKeywords?: string[])
                 const isAmputationOrDesarticulation = /(?:amputation|désarticulation|desarticulation)/i.test(normalizedInjuryName);
                 if (hasStiffnessIndicators && isAmputationOrDesarticulation) {
                     return; // Exclure les amputations si des mesures de raideur sont présentes
+                }
+                
+                // 🆕 V3.3.341: EXCLUSION ANTI-DÉSARTICULATION/AMPUTATION si fracture consolidée/mouvements libres
+                // "fracture du poignet bien consolidée, mouvements libres" ≠ "Désarticulation du poignet"
+                const hasFractureConsolideeContext = /(?:fracture|consolid[eé]|mouvements?\s+libres?|pas\s+de\s+douleur|sans\s+douleur|bonne\s+consolidation|bien\s+consolid)/i.test(normalizedText) &&
+                    !/(?:\bamputation\b|\bamput[eé]\b|\bmoignon\b|\bd[eé]sarticul)/i.test(normalizedText);
+                if (hasFractureConsolideeContext && isAmputationOrDesarticulation) {
+                    return; // Exclure désarticulations/amputations quand le contexte est une fracture consolidée
                 }
                 
                 // 🆕 V3.3.281: EXCLUSION AMPUTATION si contexte NEUROLOGIQUE pur (paralysie/nerf, PAS amputation chirurgicale)
@@ -5817,8 +5825,11 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
         // IMPORTANT: Si acouphènes invalidants détectés, laisser passer aux expert rules pour cumul
         const dbBilateralMatch = /(?:OD|oreille.*droite).*?(\d+)\s*(?:db|dB|d[eé]cibels?).*?(?:OG|oreille.*gauche).*?(\d+)\s*(?:db|dB|d[eé]cibels?)/is.exec(workingText);
         const dbBilateralMatch2 = /(?:OG|oreille.*gauche).*?(\d+)\s*(?:db|dB|d[eé]cibels?).*?(?:OD|oreille.*droite).*?(\d+)\s*(?:db|dB|d[eé]cibels?)/is.exec(workingText);
+        // 🆕 V3.3.343: Parser "X dB à droite...Y dB à gauche" sans préfixe OD/OG/oreille
+        const dbBilateralMatch3 = /(\d+)\s*(?:db|dB|d[eé]cibels?)\s*(?:[aà]\s+)?droite.*?(\d+)\s*(?:db|dB|d[eé]cibels?)\s*(?:[aà]\s+)?gauche/is.exec(workingText);
+        const dbBilateralMatch4 = /(\d+)\s*(?:db|dB|d[eé]cibels?)\s*(?:[aà]\s+)?gauche.*?(\d+)\s*(?:db|dB|d[eé]cibels?)\s*(?:[aà]\s+)?droite/is.exec(workingText);
         
-        if (dbBilateralMatch || dbBilateralMatch2) {
+        if (dbBilateralMatch || dbBilateralMatch2 || dbBilateralMatch3 || dbBilateralMatch4) {
             // Vérifier si acouphènes INVALIDANTS présents → Si oui, laisser expert rules gérer le cumul
             const hasAcouphenesInvalidants = /acouph[eè]nes.*invalidant|acouph[eè]nes.*s[eé]v[eè]re|sifflements.*aigus.*continus/i.test(workingText);
             const hasRetentissement = /isolement.*social|anxio.*d[eé]pressif|reconversion.*impossible/i.test(workingText);
@@ -5827,8 +5838,8 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
                 // Ne rien faire, laisser passer aux expert rules pour cumul complet
             } else {
                 // Cas simple : surdité bilatérale SANS acouphènes invalidants → Retour direct
-                const dbOD = dbBilateralMatch ? parseInt(dbBilateralMatch[1]) : parseInt(dbBilateralMatch2![2]);
-                const dbOG = dbBilateralMatch ? parseInt(dbBilateralMatch[2]) : parseInt(dbBilateralMatch2![1]);
+                const dbOD = dbBilateralMatch ? parseInt(dbBilateralMatch[1]) : dbBilateralMatch2 ? parseInt(dbBilateralMatch2![2]) : dbBilateralMatch3 ? parseInt(dbBilateralMatch3[1]) : parseInt(dbBilateralMatch4![2]);
+                const dbOG = dbBilateralMatch ? parseInt(dbBilateralMatch[2]) : dbBilateralMatch2 ? parseInt(dbBilateralMatch2![1]) : dbBilateralMatch3 ? parseInt(dbBilateralMatch3[2]) : parseInt(dbBilateralMatch4![1]);
                 const dbMoyenne = (dbOD + dbOG) / 2;
                 
                 const auditiveInjury = { name: "Diminution de l'acuité auditive", rate: [0, 70], path: "Neuro-Sensorielles > Oreilles - Diminution de l'Acuité Auditive (Surdité)" };
@@ -6277,7 +6288,7 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
         
         // 🆕 V3.3.140: PSEUDARTHROSE SEPTIQUE JAMBE/TIBIA (cas graves avec infection/fistule)
         {
-            pattern: /pseudarthrose.*(?:septique|infect[eé]|fistule|suppuration|pus).*(?:jambe|tibia|péroné|fibula|1\/4\s+inf[eé]rieur)/i,
+            pattern: /pseudarthrose.*(?:septique|infect[eéi]|fistule|suppuration|pus).*(?:jambe|tibia|péroné|fibula|1\/4\s+inf[eé]rieur)/i,
             context: /.*/i,
             searchTerms: ["Pseudarthrose des deux os de la jambe"],  // 40-60% (cas grave avec infection)
             priority: 13000,  // ULTRA PRIORITAIRE pour court-circuiter les faux positifs
@@ -6288,6 +6299,39 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             context: /(?:septique|infect|fistule|suppuration|pus)/i,
             searchTerms: ["Pseudarthrose des deux os de la jambe"],  // 40-60%
             priority: 13000,
+            negativeContext: /bassin|pubis|symphyse/i
+        },
+        // 🆕 V3.3.341: PSEUDARTHROSE JAMBE/TIBIA avec infection (ordre inversé: jambe...pseudarthrose...infection)
+        // Cas: "fracture ouverte de la jambe avec pseudarthrose et infection chronique"
+        {
+            pattern: /(?:jambe|p[eé]ron[eé]|fibula).*pseudarthrose.*(?:infect|septique|fistule|suppuration|chronique)/i,
+            context: /.*/i,
+            searchTerms: ["Pseudarthrose des deux os de la jambe"],
+            priority: 13000,
+            negativeContext: /bassin|pubis|symphyse/i
+        },
+        // 🆕 V3.3.342: PSEUDARTHROSE DU TIBIA SEUL avec infection (ordre inversé)
+        {
+            pattern: /tibia.*pseudarthrose.*(?:infect|septique|fistule|suppuration|chronique)/i,
+            context: /.*/i,
+            searchTerms: ["Pseudarthrose du tibia"],
+            priority: 13100,
+            negativeContext: /bassin|pubis|symphyse|deux.*os|p[eé]ron[eé]|fibula/i
+        },
+        // 🆕 V3.3.342: PSEUDARTHROSE DU TIBIA SEUL simple
+        {
+            pattern: /tibia.*pseudarthrose|pseudarthrose.*tibia/i,
+            context: /fracture|ouverte|consolid|infect|chronique|fistule|mobilit[eé]|douleur|boiterie|appareillage/i,
+            searchTerms: ["Pseudarthrose du tibia"],
+            priority: 12600,
+            negativeContext: /bassin|pubis|symphyse|deux.*os|p[eé]ron[eé]|fibula/i
+        },
+        // 🆕 V3.3.341: PSEUDARTHROSE JAMBE simple (sans infection explicite)
+        {
+            pattern: /jambe.*pseudarthrose|pseudarthrose.*jambe/i,
+            context: /fracture|ouverte|consolid|infect|chronique|fistule/i,
+            searchTerms: ["Pseudarthrose des deux os de la jambe"],
+            priority: 12500,
             negativeContext: /bassin|pubis|symphyse/i
         },
         
@@ -6862,6 +6906,19 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             context: /instabilit[eé]|laxit[eé]|d[ée]rob/i,
             searchTerms: ["Raideur + instabilité épaule"],
             priority: 10400
+        },
+        // V3.3.344: Hygroma chronique du coude — résolution directe (éviter ambiguïté avec instabilité)
+        {
+            pattern: /hygroma.*(?:coude|ol[eé]cr[aâ]n)|(?:coude|ol[eé]cr[aâ]n).*hygroma/i,
+            context: /gauche|non\s*dominante?/i,
+            searchTerms: ["Hygroma chronique du coude (Main Non Dominante)"],
+            priority: 104
+        },
+        {
+            pattern: /hygroma.*(?:coude|ol[eé]cr[aâ]n)|(?:coude|ol[eé]cr[aâ]n).*hygroma/i,
+            context: /hygroma/i,
+            searchTerms: ["Hygroma chronique du coude (Main Dominante)"],
+            priority: 103
         },
         // Raideur coude avec flexion 90-130°
         {
@@ -7812,6 +7869,28 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             priority: 1005
         },
         
+        // === 🆕 V3.3.343: ACUITÉ VISUELLE BINOCULAIRE GÉNÉRIQUE (NON-CATARACTE) ===
+        // Pour BAV post-traumatique, contusion globe, atrophie optique, etc. avec OD/OG chiffrés
+        // Réutilise le même handler __CATARACTE_AVEC_ACUITE__ (tableau vision binoculaire)
+        {
+            pattern: /(?:OD|od)\s*[:\sà]*\d+\s*\/\s*\d+/i,
+            context: /(?:OG|og)\s*[:\sà]*\d+\s*\/\s*\d+/i,
+            searchTerms: ['__CATARACTE_AVEC_ACUITE__'],
+            priority: 1004,
+            negativeContext: /cataracte/i
+        },
+        
+        // === 🆕 V3.3.343: DIPLOPIE (sans acuité visuelle chiffrée) ===
+        // Diplopie séquellaire post-fracture orbite, contusion globe, etc.
+        // Si OD/OG chiffrés présents → laisser le handler acuité visuelle gérer
+        {
+            pattern: /diplopie/i,
+            context: /[oœ]il|vision|traumat|regard|s[eé]quell|orbitaire|fracture|contusion/i,
+            searchTerms: ['Diplopie'],
+            priority: 96,
+            negativeContext: /(?:OD|od)\s*[:\sà]*\d+\s*\/\s*\d+.*(?:OG|og)\s*[:\sà]*\d+\s*\/\s*\d+/i
+        },
+        
         // === RÈGLE FRACTURE POUTEAU-COLLES (V3.3.111 - FORCER AMBIGUITÉ RADIUS) ===
         // Pouteau-Colles = fracture spécifique extrémité inférieure radius (poignet)
         // Retourner AMBIGUITÉ pour forcer choix séquelles radius uniquement
@@ -7820,6 +7899,17 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             context: /poignet|radius|chute|fracture/i,
             searchTerms: ['__POUTEAU_COLLES_AMBIGUITY__'],
             priority: 1005
+        },
+        
+        // === 🆕 V3.3.340: RÈGLE FRACTURE DU POIGNET GÉNÉRIQUE (FORCER AMBIGUITÉ RADIUS) ===
+        // "fracture du poignet" = fracture extrémité inférieure du radius
+        // Sans cette règle, "poignet" n'est pas reconnu comme os et la disambiguation ne se déclenche pas
+        {
+            pattern: /fracture.*poignet|poignet.*fractur[eé]/i,
+            context: /.*/i,
+            negativeContext: /Pouteau|d[eé]sarticulation|amputation|luxation|scapho[iï]de/i,
+            searchTerms: ['__POUTEAU_COLLES_AMBIGUITY__'],
+            priority: 1004
         },
         
         // === RÈGLES PLEXUS BRACHIAL SPÉCIFIQUES (V3.3.112 - FORCER RETOUR IMMÉDIAT) ===
@@ -8112,9 +8202,10 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
         // Contexte: TC grave Glasgow ≤8 + céphalées chroniques + troubles cognitifs (MMS 24/30) + épilepsie post-traumatique
         // Solution: Expert rule détectant TC grave + marker pour cumul Balthazard (céphalées + cognitif + épilepsie)
         // PRIORITÉ 1020 > 1001 (règle "Commotion cérébro-spinale prolongée" ligne 3751)
+        // 🆕 V3.3.343: Ajout embarrure comme marqueur de sévérité, comitial/antiépileptique comme marqueurs d'épilepsie
         {
-            pattern: /traumatisme.*cr[aâ]nien.*s[eé]v[eè]re|Glasgow.*[3-8]|h[eé]matome.*sous.*dural/i,
-            context: /c[eé]phal[eé]|m[eé]moire|cognitif|[eé]pilepsie|MMS/i,
+            pattern: /traumatisme.*cr[aâ]nien.*(?:s[eé]v[eè]re|grave|embarrure)|(?:TC|traumatisme.*cr[aâ]nien).*(?:[eé]pilepsie|comitial|convuls|anti[eé]pileptique|troubles?.*cognitif)|Glasgow.*[3-8]|h[eé]matome.*sous.*dural/i,
+            context: /c[eé]phal[eé]|m[eé]moire|cognitif|[eé]pilepsie|comitial|anti[eé]pileptique|MMS|troubles?.*cognitif|d[eé]ficit/i,
             searchTerms: ["__CUMUL_TC_GRAVE__"],  // Marker spécial pour traitement custom cumul
             priority: 1020,  // PRIORITÉ MAX (AVANT règle commotion ligne 3751 priorité 1001)
             negativeContext: /l[eé]ger|simple.*sans/i
@@ -10351,6 +10442,11 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
     const cleanNormalizedText = normalize(text);
     const sortedExpertRules = expertRules.sort((a, b) => (b.priority || 0) - (a.priority || 0));
     
+    // 🆕 V3.3.342: Flag pour détecter si une règle cumul spéciale a matché dans la 1ère boucle
+    // Si oui, skip les règles simples pour ne pas retourner un résultat partiel
+    // avant que le handler spécial (2ème boucle) ne traite le cumul complet
+    let matchedSpecialCumulRule: string | null = null;
+    
     for (const rule of sortedExpertRules) {
         // 🆕 V3.3.170: SKIP règles expertes simples si cumul détecté
         // Ne pas appliquer de règle experte simple (amputation isolée) si polyséquelles détectées
@@ -10364,6 +10460,7 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             term.includes("Commotion cérébro-spinale prolongée") ||  // 🆕 V3.3.213: TC prolongé = règle prioritaire
             term.includes("Brûlures des mains") ||  // 🆕 V3.3.215: Brûlures main = règle prioritaire
             term.includes("Pseudarthrose du tibia") ||  // 🆕 V3.3.290: Pseudarthrose tibia = prioritaire
+            term.includes("Pseudarthrose des deux os de la jambe") ||  // 🆕 V3.3.342: Pseudarthrose jambe = prioritaire
             term.includes("pilon tibial") ||  // 🆕 V3.3.290: Pilon tibial = prioritaire
             term.includes("Syndrome des loges") ||  // 🆕 V3.3.290: Syndrome loges = prioritaire
             term.includes("cal vicieux important") ||  // 🆕 V3.3.290: Bimalléolaire cal vicieux = prioritaire
@@ -10480,6 +10577,28 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
                 !rule.searchTerms.includes("__CUMUL_TIBIA_GUSTILO__") &&
                 !rule.searchTerms.includes("__DONNEES_INSUFFISANTES_CATARACTE__") &&
                 !rule.searchTerms.includes("__FRACTURE_CONSOLIDEE_SANS_SEQUELLE__")) {
+                
+                // 🆕 V3.3.342: Si __CUMUL_TC_GRAVE__ a matché, skip les règles simples TC-related
+                if (matchedSpecialCumulRule === "__CUMUL_TC_GRAVE__") {
+                    const isTcRelatedRule = rule.searchTerms.some(term => 
+                        /cognitif|[eé]pilepsie|commotion|c[eé]phal[eé]|syndrome.*subjectif|d[eé]ficit.*mn[eé]sique/i.test(term)
+                    );
+                    if (isTcRelatedRule) {
+                        console.log(`⏭️ [V3.3.342] Skip TC-related simple rule "${rule.searchTerms[0]}" (priority ${rule.priority}) car __CUMUL_TC_GRAVE__ détecté`);
+                        continue;
+                    }
+                }
+                
+                // 🆕 V3.3.343: Si __CUMUL_SURDITE_ACOUPHENES_INVALIDANTS__ a matché, skip les règles simples surdité/acouphènes
+                if (matchedSpecialCumulRule === "__CUMUL_SURDITE_ACOUPHENES_INVALIDANTS__") {
+                    const isSurditeRelatedRule = rule.searchTerms.some(term => 
+                        /surdit[eé]|acouph[eè]ne|auditi[fv]|perception.*bilat|perte.*aud/i.test(term)
+                    );
+                    if (isSurditeRelatedRule) {
+                        console.log(`⏭️ [V3.3.343] Skip surdité-related simple rule "${rule.searchTerms[0]}" (priority ${rule.priority}) car __CUMUL_SURDITE_ACOUPHENES_INVALIDANTS__ détecté`);
+                        continue;
+                    }
+                }
                 
                 // Recherche directe dans barème
                 let directMatches = allInjuriesWithPaths.filter(item => 
@@ -10807,6 +10926,16 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
                         injury: directMatch as Injury
                     };
                 }
+            } else {
+                // 🆕 V3.3.342: C'est une règle spéciale (cumul, ambiguïté) → marquer pour empêcher
+                // les règles simples de retourner un résultat partiel avant le handler spécialisé
+                if (rule.searchTerms.includes("__CUMUL_TC_GRAVE__")) {
+                    matchedSpecialCumulRule = "__CUMUL_TC_GRAVE__";
+                    console.log(`🔒 [V3.3.342] Règle spéciale TC grave détectée (priority ${rule.priority}) - sera traitée dans la 2ème boucle`);
+                } else if (rule.searchTerms.includes("__CUMUL_SURDITE_ACOUPHENES_INVALIDANTS__")) {
+                    matchedSpecialCumulRule = "__CUMUL_SURDITE_ACOUPHENES_INVALIDANTS__";
+                    console.log(`🔒 [V3.3.343] Règle spéciale surdité+acouphènes invalidants détectée (priority ${rule.priority}) - sera traitée dans la 2ème boucle`);
+                }
             }
         }
     }
@@ -10942,9 +11071,17 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
                         if (hasConduiteNocturne) { supplement += 2; complications.push("gêne conduite nocturne"); }
                         supplement = Math.min(supplement, 5); // Plafonner les suppléments
                         
-                        // Taux = max(tableau, minimum cataracte) + suppléments fonctionnels
-                        taux = Math.max(baseTaux, cataracteMin) + supplement;
-                        taux = Math.min(taux, cataracteMax); // Plafonner au maximum
+                        // 🆕 V3.3.343: Distinguer cataracte vs BAV générique
+                        const isCataracteCase = /cataracte/i.test(normalizedInputText);
+                        
+                        if (isCataracteCase) {
+                            // Taux = max(tableau, minimum cataracte) + suppléments fonctionnels
+                            taux = Math.max(baseTaux, cataracteMin) + supplement;
+                            taux = Math.min(taux, cataracteMax); // Plafonner au maximum
+                        } else {
+                            // BAV générique (contusion, atrophie, etc.) → taux direct du tableau
+                            taux = baseTaux + supplement;
+                        }
                         
                         // Niveau de sévérité
                         niveau = baseTaux <= 3 ? 'Légère' :
@@ -10961,14 +11098,19 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
                         }
                     }
                     
-                    const entryName = cataractLesion?.name ?? "Cataracte (selon acuité et complications)";
+                    const entryName = isCataracteCase 
+                        ? (cataractLesion?.name ?? "Cataracte (selon acuité et complications)")
+                        : "Baisse de l'acuité visuelle post-traumatique";
                     const entryPath = cataractLesion?.path ?? "Neuro-Sensorielles > Yeux";
+                    const titleLabel = isCataracteCase 
+                        ? `CATARACTE ${isBilateral ? 'BILATÉRALE ' : ''}AVEC ACUITÉ VISUELLE CHIFFRÉE`
+                        : `BAISSE ACUITÉ VISUELLE POST-TRAUMATIQUE`;
                     
                     return {
                         type: 'proposal',
                         name: entryName,
                         rate: taux,
-                        justification: `<strong>⚠️ CATARACTE ${isBilateral ? 'BILATÉRALE ' : ''}AVEC ACUITÉ VISUELLE CHIFFRÉE</strong><br><br>` +
+                        justification: `<strong>⚠️ ${titleLabel}</strong><br><br>` +
                             `📊 <strong>Acuité visuelle mesurée</strong> :<br>` +
                             `&nbsp;&nbsp;• OD : ${odNum}/${odDen} (${(odAcuity * 10).toFixed(0)}/10)<br>` +
                             `&nbsp;&nbsp;• OG : ${ogNum}/${ogDen} (${(ogAcuity * 10).toFixed(0)}/10)<br>` +
@@ -10976,7 +11118,7 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
                             `&nbsp;&nbsp;• Œil le plus atteint : ${(worstEye * 10).toFixed(0)}/10<br><br>` +
                             `📖 <strong>Référence barémique</strong> :<br>` +
                             `&nbsp;&nbsp;• Rubrique : "${entryPath}"<br>` +
-                            `&nbsp;&nbsp;• Fourchette cataracte : [${cataracteMin} - ${cataracteMax}%]<br>` +
+                            (isCataracteCase ? `&nbsp;&nbsp;• Fourchette cataracte : [${cataracteMin} - ${cataracteMax}%]<br>` : '') +
                             `&nbsp;&nbsp;• ${referenceDetails}<br>` +
                             (hasPseudophaquie ? `&nbsp;&nbsp;• Pseudophaquie (implant cristallinien) : évaluation sur acuité résiduelle<br>` : '') +
                             `&nbsp;&nbsp;• Sévérité : ${niveau}<br><br>` +
@@ -10999,23 +11141,60 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
                 }
             }
             
-            // 🎯 CAS SPÉCIAL: FRACTURE POUTEAU-COLLES (V3.3.111 - FIX AMBIGUITÉ)
-            // Forcer affichage UNIQUEMENT des séquelles du radius (éviter confusion avec clavicule)
+            // 🎯 CAS SPÉCIAL: FRACTURE POUTEAU-COLLES / FRACTURE POIGNET (V3.3.111 + V3.3.340 - FIX AMBIGUITÉ)
+            // Forcer affichage UNIQUEMENT des séquelles du radius (éviter confusion avec clavicule/désarticulation)
             if (rule.searchTerms.includes("__POUTEAU_COLLES_AMBIGUITY__")) {
                 const isDominante = /main.*dominante|droite?.*dominante|poignet.*droit/i.test(normalizedInputText);
+                const isNonDominante = /main.*non.*dominante|gauche|poignet.*gauche/i.test(normalizedInputText);
                 const radiusInjuries = allInjuriesWithPaths.filter(inj => 
                     /fracture.*extrem.*inf.*radius/i.test(normalize(inj.name))
                 );
                 
                 // Filtrer par latéralité si précisée
-                const filteredInjuries = isDominante 
-                    ? radiusInjuries.filter(inj => /main.*dominante/i.test(inj.name))
+                let filteredInjuries = isDominante 
+                    ? radiusInjuries.filter(inj => /main.*dominante/i.test(inj.name) && !/non.*dominante/i.test(inj.name))
+                    : isNonDominante
+                    ? radiusInjuries.filter(inj => /non.*dominante/i.test(inj.name))
                     : radiusInjuries;
+                
+                // 🆕 V3.3.340: AUTO-SÉLECTION si contexte clinique clair (mouvements libres / bien consolidée)
+                const hasFreeMovementPC = /mouvements?\s+(?:libres?|normaux?|conserv[eé]s?|comme\s+libres?)|mobilit[eé]\s+(?:libre|normale|conserv[eé]e)|amplitude\s+(?:normale|conserv[eé]e)|sans\s+raideur/i.test(text);
+                const hasBonneConsolidationPC = /bien\s+consolid[eé]e?|bonne\s+consolidation|consolidation\s+(?:parfaite|anatomique|satisfaisante)|sans\s+s[eé]quelle/i.test(text);
+                const hasNoPainPC = /pas\s+de\s+douleur|sans\s+douleur|indolore/i.test(text);
+                
+                if (hasFreeMovementPC || (hasBonneConsolidationPC && hasNoPainPC)) {
+                    // Contexte positif clair → filtrer vers "Consolidation parfaite" uniquement
+                    const perfectConsolidation = filteredInjuries.filter(inj => 
+                        /consolidation\s+parfaite/i.test(normalize(inj.name))
+                    );
+                    if (perfectConsolidation.length > 0) {
+                        filteredInjuries = perfectConsolidation;
+                        console.log(`✅ [V3.3.340] Fracture poignet + mouvements libres/bonne consolidation → auto-sélection "Consolidation parfaite"`);
+                    }
+                }
+                
+                // Si une seule option restante → proposition directe avec taux ajusté
+                if (filteredInjuries.length === 1) {
+                    const injury = filteredInjuries[0];
+                    const path = injury.path || 'Membres Supérieurs > Poignet - Fractures';
+                    
+                    if (Array.isArray(injury.rate)) {
+                        const adjustedRate = calculateAdjustedRate(injury as Injury, text);
+                        const justification = buildExpertJustification(text, injury as Injury, adjustedRate, path, 'bas', 
+                            ['✅ Mouvements libres', '✅ Bonne consolidation', '✅ Pas de douleur'], false);
+                        return { type: 'proposal', name: injury.name, rate: adjustedRate, justification, path, injury: injury as Injury };
+                    } else {
+                        const rate = injury.rate as number;
+                        const justification = buildExpertJustification(text, injury as Injury, rate, path, 'bas', 
+                            ['✅ Bonne consolidation sans séquelle'], false);
+                        return { type: 'proposal', name: injury.name, rate, justification, path, injury: injury as Injury };
+                    }
+                }
                 
                 if (filteredInjuries.length > 0) {
                     return {
                         type: 'ambiguity',
-                        text: `Votre description "<strong>${text.substring(0, 150)}...</strong>" correspond à une <strong>fracture de Pouteau-Colles</strong> (extrémité inférieure du radius/poignet).<br><br>Veuillez sélectionner la séquelle correspondant au mieux à l'état du patient :`,
+                        text: `Votre description "<strong>${text.substring(0, 150)}...</strong>" correspond à une <strong>fracture du poignet</strong> (extrémité inférieure du radius).<br><br>Veuillez sélectionner la séquelle correspondant au mieux à l'état du patient :`,
                         choices: filteredInjuries.map(inj => inj as Injury)
                     };
                 }
@@ -11292,15 +11471,27 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
                 
                 // Détection séquelles
                 const hasCephalees = /c[eé]phal[eé]es.*(?:chroniques|quotidiennes|invalidantes)|syndrome.*post.*commotionnel/i.test(normalizedInputText);
-                const hasCognitiveDeficit = mmsScore && mmsScore < 27; // Normal ≥27/30
-                const hasEpilepsy = /[eé]pilepsie.*post.*traumatique|crises.*[eé]pileptiques/i.test(normalizedInputText);
+                const hasCognitiveDeficit = mmsScore ? mmsScore < 27 : /troubles?.*cognitif|d[eé]ficit.*cognitif|troubles?.*m[eé]moire|d[eé]ficit.*mn[eé]sique|troubles?.*attention|troubles?.*concentration/i.test(normalizedInputText);
+                const hasEpilepsy = /[eé]pilepsie(?:.*post.*traumatique)?|crises?.*[eé]pileptiques?|crises?.*comitiales?/i.test(normalizedInputText);
                 const hasPsychiatric = /troubles?.*(?:humeur|d[eé]pression|anxi[eé]t[eé])|suivi.*psychiatrique/i.test(normalizedInputText);
                 
+                // 🆕 V3.3.342: Pour un TC grave, les céphalées post-commotionnelles sont quasi-systématiques
+                // Si le texte dit "TC grave" sans mentionner explicitement les céphalées, les inclure par défaut
+                const isTcGrave = /(?:TC|traumatisme.*cr[aâ]nien).*(?:grave|s[eé]v[eè]re)/i.test(normalizedInputText);
+                const hasCephaleesEffective = hasCephalees || (isTcGrave && (hasCognitiveDeficit || hasEpilepsy));
+                
                 // Calcul IPP individuel de chaque séquelle
-                const ippCephalees = hasCephalees ? 15 : 0;
-                const ippCognitif = hasCognitiveDeficit ? (mmsScore! <= 20 ? 40 : 30) : 0;
+                const ippCephalees = hasCephaleesEffective ? 15 : 0;
+                const ippCognitif = hasCognitiveDeficit ? (mmsScore && mmsScore <= 20 ? 40 : 30) : 0;
                 const ippEpilepsie = hasEpilepsy ? 25 : 0;
                 const ippPsychiatric = hasPsychiatric ? 10 : 0;
+                
+                // 🆕 V3.3.341: Si aucune séquelle spécifique détectée mais TC grave confirmé,
+                // attribuer au minimum un syndrome post-commotionnel sévère
+                if (ippCephalees === 0 && ippCognitif === 0 && ippEpilepsie === 0 && ippPsychiatric === 0) {
+                    // TC grave sans séquelles spécifiques détaillées → syndrome post-commotionnel sévère par défaut
+                    // Ce cas arrive quand l'utilisateur écrit juste 'TC grave avec épilepsie' sans détailler les céphalées
+                }
                 
                 // Formule Balthazard cumul progressif: IPP1 + IPP2×(100-IPP1)/100 + IPP3×(100-IPP1-IPP2×0.85)/100 + ...
                 let ippTotal = ippCephalees;
@@ -11327,12 +11518,19 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
                 if (ippCephalees > 0) {
                     justification += `<strong>${stepNum}️⃣ Céphalées chroniques post-traumatiques</strong> : <strong>${ippCephalees}%</strong><br>`;
                     justification += `&nbsp;&nbsp;• Rubrique : "Séquelles Neurologiques > Céphalées"<br>`;
+                    if (!hasCephalees && hasCephaleesEffective) {
+                        justification += `&nbsp;&nbsp;• <em>(incluses par défaut : TC grave implique quasi-systématiquement des céphalées post-commotionnelles)</em><br>`;
+                    }
                     stepNum++;
                 }
                 if (ippCognitif > 0) {
                     justification += `<strong>${stepNum}️⃣ Troubles cognitifs (déficit mémoire/attention)</strong> : <strong>${ippCognitif}%</strong><br>`;
                     justification += `&nbsp;&nbsp;• Rubrique : "Séquelles Neurologiques > Déficits cognitifs"<br>`;
-                    justification += `&nbsp;&nbsp;• MMS ${mmsScore}/30 → Déficit ${mmsScore! <= 20 ? 'SÉVÈRE' : 'MODÉRÉ'}<br>`;
+                    if (mmsScore) {
+                        justification += `&nbsp;&nbsp;• MMS ${mmsScore}/30 → Déficit ${mmsScore <= 20 ? 'SÉVÈRE' : 'MODÉRÉ'}<br>`;
+                    } else {
+                        justification += `&nbsp;&nbsp;• Troubles cognitifs post-traumatiques (sans score MMS fourni)<br>`;
+                    }
                     stepNum++;
                 }
                 if (ippEpilepsie > 0) {
@@ -11501,6 +11699,9 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
                 // Parser dB bilatéral (réutilise parser amélioré)
                 const dbBilateralMatch = /(?:OD|oreille.*droite).*?(\d+)\s*(?:db|dB|d[eé]cibels?).*?(?:OG|oreille.*gauche).*?(\d+)\s*(?:db|dB|d[eé]cibels?)/is.exec(normalizedInputText);
                 const dbBilateralMatch2 = /(?:OG|oreille.*gauche).*?(\d+)\s*(?:db|dB|d[eé]cibels?).*?(?:OD|oreille.*droite).*?(\d+)\s*(?:db|dB|d[eé]cibels?)/is.exec(normalizedInputText);
+                // 🆕 V3.3.343: Parser "X dB à droite...Y dB à gauche"
+                const dbBilateralMatch3 = /(\d+)\s*(?:db|dB|d[eé]cibels?)\s*(?:[aà]\s+)?droite.*?(\d+)\s*(?:db|dB|d[eé]cibels?)\s*(?:[aà]\s+)?gauche/is.exec(normalizedInputText);
+                const dbBilateralMatch4 = /(\d+)\s*(?:db|dB|d[eé]cibels?)\s*(?:[aà]\s+)?gauche.*?(\d+)\s*(?:db|dB|d[eé]cibels?)\s*(?:[aà]\s+)?droite/is.exec(normalizedInputText);
                 
                 let dbOD = 70, dbOG = 65, dbMoyenne = 67.5; // Valeurs par défaut
                 if (dbBilateralMatch) {
@@ -11511,6 +11712,23 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
                     dbOG = parseInt(dbBilateralMatch2[1]);
                     dbOD = parseInt(dbBilateralMatch2[2]);
                     dbMoyenne = (dbOD + dbOG) / 2;
+                } else if (dbBilateralMatch3) {
+                    dbOD = parseInt(dbBilateralMatch3[1]);
+                    dbOG = parseInt(dbBilateralMatch3[2]);
+                    dbMoyenne = (dbOD + dbOG) / 2;
+                } else if (dbBilateralMatch4) {
+                    dbOG = parseInt(dbBilateralMatch4[1]);
+                    dbOD = parseInt(dbBilateralMatch4[2]);
+                    dbMoyenne = (dbOD + dbOG) / 2;
+                } else {
+                    // 🆕 V3.3.343: Fallback — parser dB unique comme moyenne (ex: "40 dB")
+                    const dbSingleMatch = /(\d+)\s*(?:db|dB|d[eé]cibels?)/i.exec(normalizedInputText);
+                    if (dbSingleMatch) {
+                        const dbSingle = parseInt(dbSingleMatch[1]);
+                        if (dbSingle >= 10 && dbSingle <= 120) {
+                            dbOD = dbSingle; dbOG = dbSingle; dbMoyenne = dbSingle;
+                        }
+                    }
                 }
                 
                 // Calcul IPP surdité selon barème dB
@@ -12822,14 +13040,24 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             
             // 🆕 V3.3.322: Auto-résolution Main Dominante / Main Non Dominante
             // Si l'utilisateur spécifie explicitement la dominance, ne garder que la variante correspondante
-            const userSpecifiesMD_322 = /main\s+(?:dominante|dom\b)/i.test(normalizedInput) && !/(non\s+dominante|non\s+dom\b|mnd\b)/i.test(normalizedInput);
-            const userSpecifiesMND_322 = /(non\s+dominante|non\s+dom\b|mnd\b)/i.test(normalizedInput);
+            // V3.3.344: Étendu pour détecter "droit dominant", "dominante" (sans "non"), en plus de "main dominante"
+            const hasExplicitNonDominant = /(non\s+dominante?|non\s+dom\b|mnd\b)/i.test(normalizedInput);
+            const userSpecifiesMD_322 = (/main\s+(?:dominante|dom\b)|(?:droit|droite)\s+dominante?|\bdominante?\b/i.test(normalizedInput)) && !hasExplicitNonDominant;
+            const userSpecifiesMND_322 = hasExplicitNonDominant || (/\bgauche\b/i.test(normalizedInput) && !/\bdominante?\b/i.test(normalizedInput));
             if (userSpecifiesMD_322) {
                 const mdFiltered = choices.filter(c => /Main Dominante/i.test(c.name) && !/Non Dominante/i.test(c.name));
                 if (mdFiltered.length > 0) choices = mdFiltered;
             } else if (userSpecifiesMND_322) {
                 const mndFiltered = choices.filter(c => /Non Dominante/i.test(c.name));
                 if (mndFiltered.length > 0) choices = mndFiltered;
+            }
+            
+            // V3.3.344: Si filtré à 1 choix, mettre à jour finalCandidate pour le FINAL PROPOSAL
+            if (choices.length === 1) {
+                const resolvedInjury = allInjuriesWithPaths.find(inj => inj.name === choices[0].name);
+                if (resolvedInjury) {
+                    finalCandidate = { injury: resolvedInjury, score: finalCandidate.score, path: resolvedInjury.path };
+                }
             }
             
             if (choices.length > 1) {
@@ -17447,6 +17675,18 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
         }
     }
     
+    // 🆕 V3.3.341: ÉPILEPSIE POST-TRAUMATIQUE — détection comme séquelle distincte
+    if (/[eé]pilepsie(?:\s+post[\s-]?traumatique)?|crises?\s+[eé]pileptiques?|crises?\s+comitiales?/i.test(text)) {
+        const epilepsyContext = text.match(/[eé]pilepsie[^.;]*/i)?.[0] || text.match(/crises?\s+[eé]pileptiques?[^.;]*/i)?.[0] || '';
+        const isRare = /rares?|occasionnelles?|espac[eé]es?/i.test(epilepsyContext);
+        const isFrequent = /fr[eé]quentes?|quotidiennes?|hebdomadaires?|r[eé]p[eé]t[eé]es?|grand\s+mal/i.test(epilepsyContext);
+        detectedSequelae.push({
+            name: `Épilepsie post-traumatique${isFrequent ? ' (crises fréquentes)' : isRare ? ' (crises rares)' : ''}`,
+            keywords: ['épilepsie', 'crises', 'comitial', 'antiépileptique'],
+            context: epilepsyContext
+        });
+    }
+    
     // ========== 2. RACHIS ==========
     
     // 🔴 V3.3.200: CERVICALGIE/SYNDROME CERVICAL → INTÉGRÉ AU SSTC (NEUROLOGIQUE)
@@ -19051,6 +19291,24 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
                 } else if (/perforation.*tympan|acouph[èe]ne/i.test(seq.name)) {
                     system = 'ORL';
                     rate = 8; explanation = 'Séquelles ORL (perforation tympanique/acouphènes)';
+                }
+                // 🆕 V3.3.341: ÉPILEPSIE POST-TRAUMATIQUE — séquelle neurologique à part entière
+                else if (/[ée]pilepsie/i.test(seq.name)) {
+                    system = 'NEUROLOGIQUE';
+                    const isFrequent = /fr[eé]quentes?|quotidiennes?|grand\s+mal/i.test(seq.name) || /crises?.*fr[eé]quentes?|grand\s*mal/i.test(text);
+                    const isRare = /rares?|occasionnelles?|espac[eé]es?|contr[oô]l[eé]es?/i.test(seq.name) || /crises?.*rares?|bien.*contr[oô]l[eé]/i.test(text);
+                    const isOnTreatment = /traitement|anti[eé]pileptique|anticonvulsivant/i.test(text);
+                    
+                    if (isFrequent) {
+                        rate = 40;
+                        explanation = 'Épilepsie post-traumatique avec crises fréquentes (grand mal) → IPP 30-50% (barème 1967)';
+                    } else if (isRare && isOnTreatment) {
+                        rate = 15;
+                        explanation = 'Épilepsie post-traumatique avec crises rares sous traitement → IPP 10-20% (barème 1967)';
+                    } else {
+                        rate = 25;
+                        explanation = 'Épilepsie post-traumatique → IPP 20-30% (barème 1967)';
+                    }
                 }
                 // 🔴 V3.3.163: STEPPAGE (paralysie releveur du pied = atteinte nerf SPE ou L5)
                 else if (/steppage|pied.*tombant|paralysie.*releveur/i.test(seq.name)) {

@@ -48,6 +48,21 @@ ENTRAINEMENT_MASSIF_*.md
 .vercel
 .env*.local
 
+# Fichiers debug/test temporaires
+_debug_*.ts
+_debug_*.txt
+_out_*.txt
+_epaule_*.txt
+_test_*_output.txt
+_test_*_results*.txt
+_test_debug_*.ts
+_test_ia_output.txt
+_test_ia_results*.txt
+_test_poly*.txt
+_test_pt4s_results.txt
+_test_tc_grave_fix.ts
+_hygroma_*.txt
+
 # Temporary Claude Code working directories
 tmpclaude-*/
 tmpclaude-*
