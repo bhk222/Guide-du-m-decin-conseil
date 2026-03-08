@@ -15069,7 +15069,7 @@ const hasMultipleDistinctSites = (text: string): boolean => {
  * @param isExactMatch - Si true, cherche une correspondance exacte par nom (pour résoudre ambiguïté)
  */
 export const localExpertAnalysis = (text: string, externalKeywords?: string[], isExactMatch: boolean = false): LocalAnalysisResult => {
-    console.log('🔧 localExpertAnalysis V3.3.309 - multi-finger D-code disambiguation + visceral expert rules');
+    console.log('🔧 localExpertAnalysis V3.3.345 - fracture/amputation type-mismatch guard in findInBareme');
 
     // 🔴 V3.3.162: NETTOYAGE TEXTE - Supprime caractères invisibles (zero-width space, etc.)
     // Ces caractères peuvent casser les regex et empêcher la détection
@@ -18934,6 +18934,35 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
                         // Bonus si anatomie compatible
                         else if ((ctxIsMS && injIsMS) || (ctxIsMI && injIsMI)) {
                             score += 15; // FAVORISER le bon membre
+                        }
+                    }
+                    
+                    // 🛡️ V3.3.345: FILTRAGE TYPE LÉSION (fracture vs amputation/perte)
+                    // "Fracture de l'avant-bras" ne doit JAMAIS matcher "Amputation de l'avant-bras"
+                    // Les mots "fracture" et "amputation" sont des stopWords → l'algo ne les distingue plus
+                    // → Ajouter pénalité pour mismatch + bonus pour match de TYPE de lésion
+                    {
+                        const seqLower = sequellaName.toLowerCase();
+                        const injLower = injury.name.toLowerCase();
+                        const seqIsFracture = /\bfracture|cal\s+vicieux|pseudarthrose/i.test(seqLower);
+                        const seqIsAmputation = /\bamputation|\bperte\b|d[ée]sarticulation/i.test(seqLower);
+                        const injIsFracture = /\bfracture|cal\s+vicieux|pseudarthrose/i.test(injLower);
+                        const injIsAmputation = /\bamputation|\bperte\b|d[ée]sarticulation/i.test(injLower);
+                        
+                        // Fracture séquelle → amputation entry = MISMATCH
+                        if (seqIsFracture && !seqIsAmputation && injIsAmputation && !injIsFracture) {
+                            score -= 200; // ÉLIMINER — catastrophique (fracture → amputation = +60% d'erreur)
+                        }
+                        // Amputation séquelle → fracture entry = MISMATCH  
+                        if (seqIsAmputation && !seqIsFracture && injIsFracture && !injIsAmputation) {
+                            score -= 200;
+                        }
+                        // BONUS: même type de lésion → favoriser
+                        if (seqIsFracture && injIsFracture) {
+                            score += 25; // Fortement favoriser fracture→fracture
+                        }
+                        if (seqIsAmputation && injIsAmputation) {
+                            score += 25; // Fortement favoriser amputation→amputation
                         }
                     }
                     
