@@ -11,80 +11,111 @@ import { ReverseIppSearch } from './tools/ReverseIppSearch';
 import { NomenclatureGenerale } from './tools/NomenclatureGenerale';
 import { NGAPCalculateur } from './tools/NGAPCalculateur';
 
+// --- Modern gradient icon wrapper ---
+const IconBubble: React.FC<{ from: string; to: string; children: React.ReactNode }> = ({ from, to, children }) => (
+  <div className="w-14 h-14 rounded-2xl flex items-center justify-center shadow-lg" style={{ background: `linear-gradient(135deg, ${from}, ${to})` }}>
+    {children}
+  </div>
+);
+
+// --- SVG icons (white, 24x24) ---
 const InsulinIcon = () => (
-    <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-primary-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
-      <path strokeLinecap="round" strokeLinejoin="round" d="M12 6v12m-3-9l-3 3 3 3m6-6l3 3-3 3" />
-      <path strokeLinecap="round" strokeLinejoin="round" d="M8 8.5h8M8 15.5h8M4 5h16" />
-      <path strokeLinecap="round" strokeLinejoin="round" d="M7.05 2.39L6.5 4h11l-.55-1.61a2 2 0 00-1.9-1.39H8.94a2 2 0 00-1.89 1.39z" />
-      <path strokeLinecap="round" strokeLinejoin="round" d="M7.05 21.61L6.5 20h11l-.55 1.61a2 2 0 01-1.9 1.39H8.94a2 2 0 01-1.89-1.39z" />
+  <IconBubble from="#3B82F6" to="#1D4ED8">
+    <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M18 2l-2.5 2.5M7.5 14l-3 3M15.5 6.5l-8 8M18.5 9.5l-8 8M20 4l-2 2M4 20l2-2"/>
+      <path d="M9 11l-6 6 4 4 6-6"/>
+      <line x1="10" y1="7" x2="4" y2="1" strokeDasharray="2 2"/>
     </svg>
+  </IconBubble>
 );
 
 const HearingIcon = () => (
-    <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-primary-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
-        <path strokeLinecap="round" strokeLinejoin="round" d="M15.5 12a3.5 3.5 0 11-7 0 3.5 3.5 0 017 0z" />
-        <path strokeLinecap="round" strokeLinejoin="round" d="M15 8.5V7a5 5 0 00-10 0v1.5M10.5 12H12m-4.5 3.5A6.5 6.5 0 0012 22a6.5 6.5 0 004.5-6.5" />
+  <IconBubble from="#8B5CF6" to="#6D28D9">
+    <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M6 8.5c0-3.6 2.7-6.5 6-6.5s6 2.9 6 6.5c0 4.5-3 7-4 10-.5 1.5-1 2.5-2 3.5"/>
+      <path d="M6 8.5C6 11 7.5 13 9 15"/>
+      <path d="M20 5c.6.8 1 1.8 1 3"/>
+      <path d="M19.5 10.5c.3.5.5 1 .5 1.5"/>
     </svg>
+  </IconBubble>
 );
 
 const GrowthIcon = () => (
-    <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-primary-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
-      <path strokeLinecap="round" strokeLinejoin="round" d="M10.5 6h3m-3 3h3m-3 3h3m-3 3h3M4.5 21v-15a1.5 1.5 0 011.5-1.5h12a1.5 1.5 0 011.5 1.5v15M7.5 21a2 2 0 01-2-2v-2.5a2 2 0 012-2h9a2 2 0 012 2V19a2 2 0 01-2 2h-9z" />
+  <IconBubble from="#10B981" to="#047857">
+    <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M3 20h18"/>
+      <path d="M7 20V10"/>
+      <path d="M12 20V4"/>
+      <path d="M17 20v-6"/>
+      <circle cx="12" cy="4" r="0" fill="currentColor"/>
+      <path d="M4 17l4-7 4 4 4-8 4 6"/>
     </svg>
+  </IconBubble>
 );
 
 const KidneyIcon = () => (
-    <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-primary-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
-        <path strokeLinecap="round" strokeLinejoin="round" d="M12.984 2.52a9.993 9.993 0 00-11.41 10.45 9.993 9.993 0 0010.45 11.41 9.993 9.993 0 0011.41-10.45 9.993 9.993 0 00-10.45-11.41z"/>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M11 15a4 4 0 100-8 4 4 0 000 8z"/>
+  <IconBubble from="#EF4444" to="#B91C1C">
+    <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M4 10c0-4.4 2.5-8 6-8 2.5 0 4 2 4 4s-1 3-1 5c0 3 3 4 3 7 0 2.5-2 4-4 4-3.5 0-8-2.5-8-6"/>
+      <path d="M20 10c0-4.4-2.5-8-6-8"/>
+      <path d="M12 6c2.5 0 4 2 4 4s-1 3-1 5c0 3-3 4-3 7"/>
     </svg>
+  </IconBubble>
 );
 
 const AldIcon = () => (
-    <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-primary-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
-        <path strokeLinecap="round" strokeLinejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+  <IconBubble from="#F59E0B" to="#D97706">
+    <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2"/>
+      <rect x="9" y="2" width="6" height="4" rx="1"/>
+      <path d="M9 12l2 2 4-4"/>
+      <path d="M9 17h6"/>
     </svg>
+  </IconBubble>
 );
 
 const PillIcon = () => (
-     <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-primary-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={1.5}>
-        <path strokeLinecap="round" strokeLinejoin="round" d="M10.22 1.01l-7.21 7.21c-1.34 1.34-1.34 3.52 0 4.86l7.21 7.21c1.34 1.34 3.52 1.34 4.86 0l7.21-7.21c1.34-1.34-1.34 3.52 0-4.86l-7.21-7.21a3.44 3.44 0 00-4.86 0z" />
-        <path strokeLinecap="round" strokeLinejoin="round" d="M3.01 11.96l8.95 8.95" />
+  <IconBubble from="#EC4899" to="#BE185D">
+    <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M10.5 1.5l-8 8a4.95 4.95 0 007 7l8-8a4.95 4.95 0 00-7-7z"/>
+      <line x1="6.5" y1="12.5" x2="11.5" y2="7.5"/>
+      <path d="M18 14v8"/>
+      <path d="M14 18h8"/>
     </svg>
+  </IconBubble>
 );
 
 const TargetIcon = () => (
-    <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-primary-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
-      <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-      <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 12a7.5 7.5 0 11-15 0 7.5 7.5 0 0115 0z" />
+  <IconBubble from="#06B6D4" to="#0E7490">
+    <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="12" cy="12" r="10"/>
+      <circle cx="12" cy="12" r="6"/>
+      <circle cx="12" cy="12" r="2"/>
+      <line x1="12" y1="2" x2="12" y2="6"/>
+      <line x1="12" y1="18" x2="12" y2="22"/>
+      <line x1="2" y1="12" x2="6" y2="12"/>
+      <line x1="18" y1="12" x2="22" y2="12"/>
     </svg>
+  </IconBubble>
 );
 
-const AIIcon = () => (
-    <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-primary-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
-      <path strokeLinecap="round" strokeLinejoin="round" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-      <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v.01M8 8v.01M16 8v.01" />
+const NGAPIcon = () => (
+  <IconBubble from="#6366F1" to="#4338CA">
+    <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M4 19.5A2.5 2.5 0 016.5 17H20"/>
+      <path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/>
+      <circle cx="11" cy="11" r="3"/>
+      <path d="M13.5 13.5L16 16"/>
     </svg>
-);
-
-const BookIcon = () => (
-    <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-primary-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
-      <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-    </svg>
-);
-
-const CalculatorPlusIcon = () => (
-    <svg xmlns="http://www.w3.org/2000/svg" className="h-10 w-10 text-primary-500" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="1.5">
-      <path strokeLinecap="round" strokeLinejoin="round" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
-    </svg>
+  </IconBubble>
 );
 
 const tools = [
     {
         id: "ngap",
-        title: "📚 Nomenclature Générale",
+        title: "Nomenclature Générale",
         description: "Recherche sémantique d'actes médicaux pour trouver les codes NGAP. Ex: FNS → B30, consultation → C, injection → K2.",
-        icon: <CalculatorPlusIcon />,
+        icon: <NGAPIcon />,
         component: <NGAPCalculateur />
     },
     {
