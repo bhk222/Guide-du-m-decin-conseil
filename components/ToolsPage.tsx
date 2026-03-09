@@ -21,10 +21,19 @@ const IconBubble: React.FC<{ from: string; to: string; children: React.ReactNode
 // --- SVG icons (white, 24x24) ---
 const InsulinIcon = () => (
   <IconBubble from="#3B82F6" to="#1D4ED8">
-    <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M18 2l-2.5 2.5M7.5 14l-3 3M15.5 6.5l-8 8M18.5 9.5l-8 8M20 4l-2 2M4 20l2-2"/>
-      <path d="M9 11l-6 6 4 4 6-6"/>
-      <line x1="10" y1="7" x2="4" y2="1" strokeDasharray="2 2"/>
+    <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+      {/* Insulin vial */}
+      <rect x="3" y="6" width="8" height="14" rx="2" />
+      <path d="M5 6V4.5A1.5 1.5 0 016.5 3h1A1.5 1.5 0 019 4.5V6" />
+      <line x1="3" y1="10" x2="11" y2="10" />
+      <line x1="5" y1="13" x2="9" y2="13" opacity="0.6" />
+      <line x1="5" y1="16" x2="9" y2="16" opacity="0.6" />
+      {/* Syringe */}
+      <path d="M15 20l4-4" />
+      <rect x="16.5" y="8.5" width="3" height="9" rx="0.5" transform="rotate(-45 18 13)" />
+      <path d="M21.5 5.5l-3 3" />
+      <line x1="22" y1="5" x2="21" y2="4" />
+      <line x1="14" y1="14" x2="13" y2="15" />
     </svg>
   </IconBubble>
 );
@@ -42,13 +51,22 @@ const HearingIcon = () => (
 
 const GrowthIcon = () => (
   <IconBubble from="#10B981" to="#047857">
-    <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M3 20h18"/>
-      <path d="M7 20V10"/>
-      <path d="M12 20V4"/>
-      <path d="M17 20v-6"/>
-      <circle cx="12" cy="4" r="0" fill="currentColor"/>
-      <path d="M4 17l4-7 4 4 4-8 4 6"/>
+    <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+      {/* Height ruler */}
+      <path d="M4 3v18" />
+      <line x1="4" y1="5" x2="7" y2="5" />
+      <line x1="4" y1="8" x2="6" y2="8" />
+      <line x1="4" y1="11" x2="7" y2="11" />
+      <line x1="4" y1="14" x2="6" y2="14" />
+      <line x1="4" y1="17" x2="7" y2="17" />
+      {/* Child figure */}
+      <circle cx="15" cy="7" r="2.5" />
+      <path d="M15 9.5v5" />
+      <path d="M12 12.5l3 1 3-1" />
+      <path d="M13 19l2-4.5 2 4.5" />
+      {/* Growth arrow */}
+      <path d="M19 14V5" />
+      <path d="M17 7l2-2 2 2" />
     </svg>
   </IconBubble>
 );
