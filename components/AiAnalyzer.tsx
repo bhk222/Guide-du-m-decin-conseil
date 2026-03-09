@@ -13780,8 +13780,10 @@ export const detectMultipleLesions = (text: string): {
     const isFractureRadiusDistal = /fracture.*(?:extremite|distale?).*radius/i.test(normalized) ||
                                     (/fracture/i.test(normalized) && /radius/i.test(normalized) && /poignet/i.test(normalized));
     if (isPouteauCollesText || isFractureRadiusDistal) {
-        // Vérifier qu'il n'y a PAS d'autre lésion distincte (ex: fracture radius + fracture fémur)
-        const hasOtherDistinctLesion = /fracture.*(?:femur|tibia|humerus|clavicule|bassin|cote|vertebr|rotule|plateau)/i.test(normalized);
+        // Vérifier qu'il n'y a PAS d'autre lésion distincte (ex: fracture radius + fracture fémur/scaphoïde/métacarpien)
+        // 🆕 V3.3.350: Ajout scaphoïde, métacarpien, cubitus/ulna comme lésions distinctes du radius
+        const hasOtherDistinctLesion = /fracture.*(?:femur|tibia|humerus|clavicule|bassin|cote|vertebr|rotule|plateau|scapho[iï]de?|m[eé]tacarp|cubitus|ulna)/i.test(normalized) ||
+            /(?:section|rupture|l[eé]sion).*tendon/i.test(normalized);
         if (!hasOtherDistinctLesion) {
             console.log('🦴 [V3.3.216] Pouteau-Colles / Fracture radius distal → PAS de cumul (lésion unique)');
             return {
@@ -14223,6 +14225,7 @@ export const detectMultipleLesions = (text: string): {
     if (/amputation|perte.*(?:phalange|doigt|orteil)/i.test(normalized)) lesionTypes.push('amputation');
     if (/dechirure/i.test(normalized)) lesionTypes.push('dechirure');
     if (/elongation/i.test(normalized)) lesionTypes.push('elongation');
+    if (/(?:section|lesion).*tendon|(?:section|lesion).*tendineuse|section.*(?:flechisseur|extenseur)/i.test(normalized)) lesionTypes.push('section_tendon');
     if (/meniscectomie|lesion.*meniscale/i.test(normalized)) lesionTypes.push('meniscectomie');
     if (/instabilite|laxite/i.test(normalized)) lesionTypes.push('instabilite');
     if (/raideur|ankylose/i.test(normalized)) lesionTypes.push('raideur');
@@ -14240,9 +14243,9 @@ export const detectMultipleLesions = (text: string): {
     // Ex: "luxation hanche + fracture fémur" = cumul même membre
     const hasLuxationAndFracture = lesionTypes.includes('luxation') && lesionTypes.includes('fracture');
     
-    // 🆕 V3.3.120: Détection intelligente de lésions OS + LIGAMENT + MUSCLE (traumatologie)
+    // 🆕 V3.3.120/V3.3.350: Détection intelligente de lésions OS + LIGAMENT/TENDON + MUSCLE (traumatologie)
     const hasOsLesion = /fracture/i.test(normalized);
-    const hasLigamentLesion = /(?:dechirure|lesion|rupture).*(?:ligament|tendons?.*extenseurs?)|(?:ligament|tendons?.*extenseurs?).*(?:dechirure|lesion|rupture)/i.test(normalized);
+    const hasLigamentLesion = /(?:dechirure|lesion|rupture|section).*(?:ligament|tendon|tendineuse|fl[eé]chisseur|extenseur)|(?:ligament|tendon|tendineuse|fl[eé]chisseur|extenseur).*(?:dechirure|lesion|rupture|section)/i.test(normalized);
     // V3.3.201N: Pattern muscle amélioré - accepte "élongation musculaire de l'épaule" et "élongation musculaire du quadriceps"
     const hasMuscleLesion = /(?:elongation|dechirure|rupture).*(?:muscle|musculaire|epaule|quadriceps|triceps|biceps|deltoid|deltoide)|(?:muscle|musculaire|epaule|quadriceps).*(?:elongation|dechirure|rupture)/i.test(normalized);
     const hasTripleLesion = hasOsLesion && hasLigamentLesion && hasMuscleLesion;
@@ -15947,16 +15950,17 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
     // - Fallback erroné vers "Cicatrice pathologique" → MEMBRE_INFERIEUR
     const isAmputationDoigt = /amputation.*(?:index|pouce|m[eé]dius|majeur|annulaire|auriculaire|D[1-5]|doigt)|(?:index|pouce|m[eé]dius|annulaire|auriculaire).*amputation|perte.*(?:index|pouce|m[eé]dius|annulaire|auriculaire)|ablation.*(?:index|pouce|m[eé]dius|annulaire|auriculaire)/i.test(text);
     
-    // 🆕 V3.3.281: Détection lésions MULTIPLES sur le même membre supérieur
+    // 🆕 V3.3.281/V3.3.350: Détection lésions MULTIPLES sur le même membre supérieur
     // Si amputation doigt + ankylose coude + canal carpien → NE PAS court-circuiter avec le handler doigt seul
     // Laisser le flux cumul Balthazard gérer l'ensemble des lésions
     const msPathologyCount = [
         /amputation.*(?:doigt|phalange|index|pouce|m[eé]dius|majeur|annulaire|auriculaire|d[1-5])/i.test(text),
         /(?:ankylose|blocage).*(?:coude|poignet|[eé]paule)|(?:coude|poignet|[eé]paule).*(?:ankylose|blocag)/i.test(text),
-        /(?:canal\s+carpien|nerf\s+(?:m[eé]dian|cubital|radial)|syndrome.*carpien|paralysie.*(?:m[eé]dian|cubital|radial))/i.test(text),
-        /fracture.*(?:hum[eé]r|ol[eé]cran|radius|clavicule|scapho)/i.test(text),
+        /(?:canal\s+carpien|nerf\s+(?:m[eé]dian|cubital|radial)|syndrome.*carpien|paralysie.*(?:m[eé]dian|cubital|radial)|section.*nerf)/i.test(text),
+        /fracture.*(?:hum[eé]r|ol[eé]cran|radius|clavicule|scapho|m[eé]tacarp)/i.test(text),
         /luxation.*(?:[eé]paule|coude)/i.test(text),
-        /(?:coiffe|rotateurs?|sus[\s-]?[eé]pineux).*(?:rupture|d[eé]chirure|tendinopathie)/i.test(text) || /(?:rupture|d[eé]chirure).*(?:coiffe|sus[\s-]?[eé]pineux)/i.test(text)
+        /(?:coiffe|rotateurs?|sus[\s-]?[eé]pineux).*(?:rupture|d[eé]chirure|tendinopathie)/i.test(text) || /(?:rupture|d[eé]chirure).*(?:coiffe|sus[\s-]?[eé]pineux)/i.test(text),
+        /(?:section|rupture|l[eé]sion).*tendon|(?:section|rupture|l[eé]sion).*tendineuse/i.test(text)
     ].filter(Boolean).length;
     const hasMultipleMSPathologies = msPathologyCount >= 2;
     
@@ -15973,12 +15977,15 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
         else if (/auriculaire|D5/i.test(text)) { doigtNom = 'auriculaire'; doigtCode = 'D5'; }
         
         // Vérifier que ce n'est pas une amputation MULTIPLE (plusieurs doigts)
+        // 🆕 V3.3.350: Ne compter que les doigts en contexte d'amputation/perte/ablation
+        // Exclure les mentions fonctionnelles : "pince pouce-index", "opposition du pouce", "préhension pouce-index"
+        const amputContextText = text.replace(/pince\s+pouce[\s-]*index|opposition\s+(?:du\s+)?pouce|pr[eé]hension\s+pouce[\s-]*index|pincement\s+pouce[\s-]*index/gi, '');
         const doigtsDetectes: string[] = [];
-        if (/pouce|D1(?!\d)/i.test(text)) doigtsDetectes.push('pouce');
-        if (/index|D2(?!\d)/i.test(text)) doigtsDetectes.push('index');
-        if (/m[eé]dius|majeur|D3(?!\d)/i.test(text)) doigtsDetectes.push('médius');
-        if (/annulaire|D4(?!\d)/i.test(text)) doigtsDetectes.push('annulaire');
-        if (/auriculaire|D5(?!\d)/i.test(text)) doigtsDetectes.push('auriculaire');
+        if (/pouce|D1(?!\d)/i.test(amputContextText) && /(?:amputation|perte|ablation|section).*pouce|pouce.*(?:amputation|perte|ablation)/i.test(amputContextText)) doigtsDetectes.push('pouce');
+        if (/index|D2(?!\d)/i.test(amputContextText)) doigtsDetectes.push('index');
+        if (/m[eé]dius|majeur|D3(?!\d)/i.test(amputContextText)) doigtsDetectes.push('médius');
+        if (/annulaire|D4(?!\d)/i.test(amputContextText)) doigtsDetectes.push('annulaire');
+        if (/auriculaire|D5(?!\d)/i.test(amputContextText)) doigtsDetectes.push('auriculaire');
         
         // 🆕 V3.3.283: Handler multi-doigts (2+ doigts amputés) → recherche combo barémique
         if (doigtsDetectes.length >= 2) {
@@ -20794,10 +20801,17 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
                     console.log(`   🔧 V3.3.280: Enrichissement coiffe rotateurs: "${lesion}" → "${enrichedLesion}"`);
                 }
 
-                // 🆕 V3.3.280: NERF MÉDIAN / CANAL CARPIEN → Enrichir avec termes barème
+                // 🆕 V3.3.280/V3.3.350: NERF MÉDIAN — distinguer section traumatique vs canal carpien
                 if (/nerf.*m[eé]dian|canal.*carpien|syndrome.*canal.*carpien|compression.*m[eé]dian/i.test(lesion)) {
-                    enrichedLesion = lesion + ' lesion nerf median paralysie mediane canal carpien deficit sensitif moteur opposition pouce';
-                    console.log(`   🔧 V3.3.280: Enrichissement nerf médian: "${lesion}" → "${enrichedLesion}"`);
+                    // V3.3.350: Si section/plaie traumatique → NE PAS ajouter "canal carpien" (étiologie différente)
+                    const isSectionTraumatique = /section.*nerf|plaie.*nerf|l[eé]sion.*traumat.*nerf|nerf.*section|section.*partielle.*nerf|section.*m[eé]dian/i.test(lesion);
+                    if (isSectionTraumatique) {
+                        enrichedLesion = lesion + ' lesion nerf median paralysie mediane deficit sensitif moteur opposition pouce section traumatique';
+                        console.log(`   🔧 V3.3.350: Enrichissement nerf médian TRAUMATIQUE: "${lesion}" → "${enrichedLesion}"`);
+                    } else {
+                        enrichedLesion = lesion + ' lesion nerf median paralysie mediane canal carpien deficit sensitif moteur opposition pouce';
+                        console.log(`   🔧 V3.3.280: Enrichissement nerf médian: "${lesion}" → "${enrichedLesion}"`);
+                    }
                 }
 
                 // 🆕 V3.3.281: NERF RADIAL (paralysie, main tombante) → Enrichir avec termes barème
