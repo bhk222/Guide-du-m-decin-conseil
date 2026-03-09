@@ -140,7 +140,7 @@ export const SplashScreen: React.FC<SplashScreenProps> = ({ onFinished }) => {
       </div>
 
       {/* Progress bar */}
-      <div className="absolute bottom-20 sm:bottom-24 w-48 sm:w-56">
+      <div className="mt-10 w-48 sm:w-56">
         <div className="h-[3px] rounded-full bg-slate-200/60 overflow-hidden">
           <div
             className="h-full rounded-full transition-all ease-out"
