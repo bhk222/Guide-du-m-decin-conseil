@@ -55,10 +55,9 @@ const GrowthIcon = () => (
 
 const KidneyIcon = () => (
   <IconBubble from="#EF4444" to="#B91C1C">
-    <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M4 10c0-4.4 2.5-8 6-8 2.5 0 4 2 4 4s-1 3-1 5c0 3 3 4 3 7 0 2.5-2 4-4 4-3.5 0-8-2.5-8-6"/>
-      <path d="M20 10c0-4.4-2.5-8-6-8"/>
-      <path d="M12 6c2.5 0 4 2 4 4s-1 3-1 5c0 3-3 4-3 7"/>
+    <svg xmlns="http://www.w3.org/2000/svg" className="h-7 w-7 text-white" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M8.5 2C6 2 3.5 4.5 3.5 8c0 2 .8 3.5 1.5 5 .7 1.5 1 2.8 1 4.5C6 20 8 22 10.5 22c1.5 0 2.5-.8 2.5-2 0-1.5-1-2.5-1-4 0-2 1.5-3 1.5-5.5C13.5 7 12 2 8.5 2z"/>
+      <path d="M15.5 2C18 2 20.5 4.5 20.5 8c0 2-.8 3.5-1.5 5-.7 1.5-1 2.8-1 4.5C18 20 16 22 13.5 22c-1.5 0-2.5-.8-2.5-2 0-1.5 1-2.5 1-4 0-2-1.5-3-1.5-5.5C10.5 7 12 2 15.5 2z"/>
     </svg>
   </IconBubble>
 );
