@@ -50,17 +50,14 @@ const ToolsIcon: React.FC = () => (
     </svg>
 );
 
-// Appareillage — fauteuil roulant
+// Appareillage — chaussure orthopédique
 const AppareillageIcon: React.FC = () => (
     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-      <circle cx="9" cy="19" r="2.5" />
-      <circle cx="9" cy="19" r="0.5" fill="currentColor" />
-      <path d="M9 16.5V10h6l2 6.5" />
-      <circle cx="17" cy="19" r="2.5" />
-      <circle cx="17" cy="19" r="0.5" fill="currentColor" />
-      <path d="M9 10V7" />
-      <circle cx="9" cy="5.5" r="1.5" />
-      <path d="M5 12h4" />
+      <path d="M3 18h18v2H3z" />
+      <path d="M4 18v-4c0-1 .5-2 2-2.5l3-1V8a2 2 0 014 0v1l5 2c1.5.5 2 1.5 2 3v4" />
+      <path d="M9 10.5l4 1.5" />
+      <line x1="7" y1="20" x2="7" y2="18" />
+      <line x1="17" y1="20" x2="17" y2="18" />
     </svg>
 );
 
