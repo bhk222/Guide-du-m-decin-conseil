@@ -50,14 +50,23 @@ const ToolsIcon: React.FC = () => (
     </svg>
 );
 
-// Appareillage — chaussure orthopédique
+// Appareillage — chaussure réaliste (sneaker / basket de profil)
 const AppareillageIcon: React.FC = () => (
-    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M3 18h18v2H3z" />
-      <path d="M4 18v-4c0-1 .5-2 2-2.5l3-1V8a2 2 0 014 0v1l5 2c1.5.5 2 1.5 2 3v4" />
-      <path d="M9 10.5l4 1.5" />
-      <line x1="7" y1="20" x2="7" y2="18" />
-      <line x1="17" y1="20" x2="17" y2="18" />
+    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" strokeWidth="0.3">
+      {/* Semelle épaisse */}
+      <path d="M1 19.5c0-.8.4-1.4 1-1.5h18c.8.1 1.3.7 1.3 1.5s-.5 1.3-1.3 1.5H2c-.6-.1-1-.7-1-1.5z" fill="currentColor" opacity="0.85"/>
+      {/* Corps de la chaussure — forme sneaker */}
+      <path d="M3.5 18c0 0 .2-3 .8-4.5C5 11.8 6 10.5 7.5 10c1-.3 2-.5 3-.4.8.1 1.5.5 2 1l1.5 1.5c.8.7 2 1.2 3.2 1.3l2.8.2c1 .1 1.5.8 1.5 1.8V18H3.5z" opacity="0.7"/>
+      {/* Languette haute à l'arrière */}
+      <path d="M4.5 14.5C5 12.5 5.8 11 7 10.2c.8-.5 1.5-.7 2.2-.7V7c0-.8.5-1.5 1.3-1.5s1.3.7 1.3 1.5v3.5l-.3-.2" fill="currentColor" opacity="0.55"/>
+      {/* Bout avant renforcé */}
+      <path d="M17 14.4c1 .1 2.3.2 3 .4.7.2 1 .7 1 1.4V18h-5.5v-2.5c0-.5.5-1 1.5-1.1z" opacity="0.9"/>
+      {/* Lacets */}
+      <line x1="9.5" y1="8.5" x2="11" y2="9.8" strokeWidth="0.7" stroke="currentColor" opacity="0.5"/>
+      <line x1="9.2" y1="10" x2="11" y2="10.8" strokeWidth="0.7" stroke="currentColor" opacity="0.5"/>
+      <line x1="8.5" y1="11.2" x2="10.5" y2="11.8" strokeWidth="0.7" stroke="currentColor" opacity="0.5"/>
+      {/* Détail semelle — ligne de séparation */}
+      <line x1="2" y1="18.2" x2="21" y2="18.2" strokeWidth="0.6" stroke="currentColor" opacity="0.4"/>
     </svg>
 );
 
