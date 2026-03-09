@@ -8030,6 +8030,66 @@
       "codeNGAP": "B 25"
     },
     {
+      "code": "1504/1",
+      "libelle": "Dosage des protéines C et S",
+      "lettreCle": "B",
+      "coefficient": 60,
+      "tarif": 1800,
+      "categorie": "Biologie",
+      "codeNGAP": "B 60",
+      "acteProche": "1504 - Dosage différentiel facteurs complexe prothrombique (B25); 1621 - Dosage antigène/anticorps par immunodiffusion radiale (B40)"
+    },
+    {
+      "code": "1504/2",
+      "libelle": "Résistance à la protéine C activée (RPCa)",
+      "lettreCle": "B",
+      "coefficient": 60,
+      "tarif": 1800,
+      "categorie": "Biologie",
+      "codeNGAP": "B 60",
+      "acteProche": "1509 - Épreuve de génération de la thromboplasmine (B60)"
+    },
+    {
+      "code": "1504/3",
+      "libelle": "Recherche de la mutation du gène de la prothrombine (G20210A)",
+      "lettreCle": "B",
+      "coefficient": 80,
+      "tarif": 2400,
+      "categorie": "Biologie",
+      "codeNGAP": "B 80",
+      "acteProche": "1534 - Dosage spécifique facteurs antihémophiliques (B40); biologie moléculaire sans équivalent direct"
+    },
+    {
+      "code": "1504/4",
+      "libelle": "Dosage de l'antithrombine III (déficit en antithrombine)",
+      "lettreCle": "B",
+      "coefficient": 60,
+      "tarif": 1800,
+      "categorie": "Biologie",
+      "codeNGAP": "B 60",
+      "acteProche": "1504 - Dosage différentiel facteurs complexe prothrombique (B25)"
+    },
+    {
+      "code": "1504/5",
+      "libelle": "Recherche de la mutation du facteur V de Leiden",
+      "lettreCle": "B",
+      "coefficient": 80,
+      "tarif": 2400,
+      "categorie": "Biologie",
+      "codeNGAP": "B 80",
+      "acteProche": "1534 - Dosage spécifique facteurs antihémophiliques (B40); biologie moléculaire sans équivalent direct"
+    },
+    {
+      "code": "1504/6",
+      "libelle": "Recherche d'anticorps anti-phospholipides (APL)",
+      "lettreCle": "B",
+      "coefficient": 60,
+      "tarif": 1800,
+      "categorie": "Biologie",
+      "codeNGAP": "B 60",
+      "acteProche": "1681 - Anticorps microsomes (B40); 1654 - Anticorps réaginiques spécifiques (B75)"
+    },
+    {
       "coefficient": 45,
       "categorie": "Biologie",
       "tarif": 1350,
@@ -9975,7 +10035,7 @@
       "categorie": "Imagerie"
     }
   ],
-  "total": 1224,
+  "total": 1230,
   "categories": {
     "Imagerie": 103,
     "Biologie": 322,
