@@ -6,131 +6,185 @@ interface SplashScreenProps {
 }
 
 export const SplashScreen: React.FC<SplashScreenProps> = ({ onFinished }) => {
-  const [phase, setPhase] = useState<'logo' | 'title' | 'fadeOut'>('logo');
+  const [phase, setPhase] = useState(0);
+  // 0 = initial, 1 = logo appears, 2 = text slides in, 3 = bar fills, 4 = fade out
 
   useEffect(() => {
-    const t1 = setTimeout(() => setPhase('title'), 800);
-    const t2 = setTimeout(() => setPhase('fadeOut'), 2800);
-    const t3 = setTimeout(() => onFinished(), 3500);
-    return () => { clearTimeout(t1); clearTimeout(t2); clearTimeout(t3); };
+    const timers = [
+      setTimeout(() => setPhase(1), 100),
+      setTimeout(() => setPhase(2), 900),
+      setTimeout(() => setPhase(3), 1600),
+      setTimeout(() => setPhase(4), 3200),
+      setTimeout(() => onFinished(), 3900),
+    ];
+    return () => timers.forEach(clearTimeout);
   }, [onFinished]);
 
   return (
     <div
-      className={`fixed inset-0 z-[9999] flex flex-col items-center justify-center transition-opacity duration-700 ${
-        phase === 'fadeOut' ? 'opacity-0' : 'opacity-100'
+      className={`fixed inset-0 z-[9999] flex flex-col items-center justify-center transition-opacity duration-700 ease-out ${
+        phase >= 4 ? 'opacity-0 scale-105' : 'opacity-100 scale-100'
       }`}
-      style={{ background: 'linear-gradient(160deg, #0a1628 0%, #0d2847 40%, #0a1628 100%)' }}
+      style={{
+        background: 'linear-gradient(170deg, #ffffff 0%, #f0f7ff 30%, #e0f0ff 60%, #f0f7ff 100%)',
+        transition: 'opacity 0.7s ease-out, transform 0.7s ease-out',
+      }}
     >
-      {/* Subtle animated rings */}
-      <div className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden">
-        <div
-          className="absolute rounded-full border border-white/[0.04]"
-          style={{
-            width: '500px', height: '500px',
-            animation: 'splash-ring-pulse 3s ease-in-out infinite',
-          }}
-        />
-        <div
-          className="absolute rounded-full border border-white/[0.03]"
-          style={{
-            width: '700px', height: '700px',
-            animation: 'splash-ring-pulse 3s ease-in-out infinite 0.5s',
-          }}
-        />
-        <div
-          className="absolute rounded-full border border-white/[0.02]"
-          style={{
-            width: '900px', height: '900px',
-            animation: 'splash-ring-pulse 3s ease-in-out infinite 1s',
-          }}
-        />
+      {/* Background decorative elements */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        {/* Floating circles */}
+        <div className="absolute -top-20 -right-20 w-80 h-80 rounded-full opacity-[0.07]"
+             style={{ background: 'radial-gradient(circle, #006FB8, transparent 70%)', animation: 'splash-float 6s ease-in-out infinite' }} />
+        <div className="absolute -bottom-32 -left-20 w-96 h-96 rounded-full opacity-[0.05]"
+             style={{ background: 'radial-gradient(circle, #006FB8, transparent 70%)', animation: 'splash-float 6s ease-in-out infinite 2s' }} />
+        <div className="absolute top-1/4 right-10 w-40 h-40 rounded-full opacity-[0.04]"
+             style={{ background: 'radial-gradient(circle, #0ea5e9, transparent 70%)', animation: 'splash-float 5s ease-in-out infinite 1s' }} />
+        
+        {/* Grid pattern overlay */}
+        <div className="absolute inset-0 opacity-[0.02]"
+             style={{ backgroundImage: 'radial-gradient(#006FB8 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
       </div>
 
-      {/* Logo */}
-      <div
-        className={`relative transition-all duration-1000 ease-out ${
-          phase === 'logo' ? 'scale-90 opacity-0' : 'scale-100 opacity-100'
-        }`}
-        style={{ transitionDelay: phase === 'logo' ? '0ms' : '0ms' }}
-      >
-        <div className="relative">
-          {/* Glow behind logo */}
+      {/* Content container */}
+      <div className="relative flex flex-col items-center px-6">
+
+        {/* Logo with entrance animation */}
+        <div
+          className="transition-all duration-1000 ease-[cubic-bezier(0.34,1.56,0.64,1)]"
+          style={{
+            transform: phase >= 1 ? 'scale(1) translateY(0)' : 'scale(0.5) translateY(30px)',
+            opacity: phase >= 1 ? 1 : 0,
+          }}
+        >
+          {/* Shadow under logo */}
+          <div className="absolute -inset-4 rounded-full blur-2xl opacity-20"
+               style={{ background: 'radial-gradient(circle, #006FB8, transparent 70%)' }} />
+          <CnasLogo className="relative w-36 h-36 sm:w-44 sm:h-44 drop-shadow-lg" />
+        </div>
+
+        {/* Divider line */}
+        <div className="mt-8 overflow-hidden" style={{ height: '2px' }}>
           <div
-            className="absolute inset-0 rounded-full blur-3xl opacity-30"
-            style={{ background: 'radial-gradient(circle, rgba(0,111,184,0.6), transparent 70%)', transform: 'scale(1.5)' }}
+            className="h-full rounded-full transition-all duration-700 ease-out"
+            style={{
+              width: phase >= 2 ? '120px' : '0px',
+              background: 'linear-gradient(90deg, transparent, #006FB8, transparent)',
+            }}
           />
-          <CnasLogo
-            className="relative w-32 h-32 sm:w-40 sm:h-40 drop-shadow-2xl"
-            style={{ filter: 'drop-shadow(0 0 30px rgba(0,111,184,0.4))' }}
-          />
+        </div>
+
+        {/* Title block */}
+        <div className="mt-6 text-center">
+          {/* CNAS subtitle */}
+          <div
+            className="transition-all duration-600 ease-out"
+            style={{
+              transform: phase >= 2 ? 'translateY(0)' : 'translateY(20px)',
+              opacity: phase >= 2 ? 1 : 0,
+              transitionDelay: '0ms',
+            }}
+          >
+            <span className="text-[#006FB8]/60 text-[11px] sm:text-xs font-semibold tracking-[0.35em] uppercase">
+              Caisse Nationale des Assurances Sociales
+            </span>
+          </div>
+
+          {/* Main title */}
+          <div
+            className="mt-4 transition-all duration-700 ease-out"
+            style={{
+              transform: phase >= 2 ? 'translateY(0)' : 'translateY(25px)',
+              opacity: phase >= 2 ? 1 : 0,
+              transitionDelay: '150ms',
+            }}
+          >
+            <h1 className="text-[2rem] sm:text-4xl md:text-5xl font-extrabold tracking-tight leading-none"
+                style={{ color: '#1a2942' }}>
+              GUIDE DU
+            </h1>
+          </div>
+          <div
+            className="transition-all duration-700 ease-out"
+            style={{
+              transform: phase >= 2 ? 'translateY(0)' : 'translateY(25px)',
+              opacity: phase >= 2 ? 1 : 0,
+              transitionDelay: '300ms',
+            }}
+          >
+            <h1 className="text-[2rem] sm:text-4xl md:text-5xl font-extrabold tracking-tight leading-none"
+                style={{ 
+                  background: 'linear-gradient(135deg, #006FB8 0%, #0ea5e9 50%, #006FB8 100%)',
+                  backgroundSize: '200% auto',
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent',
+                  animation: phase >= 2 ? 'splash-shimmer 3s linear infinite' : 'none',
+                }}>
+              MÉDECIN CONSEIL
+            </h1>
+          </div>
+
+          {/* Subtitle */}
+          <div
+            className="transition-all duration-600 ease-out"
+            style={{
+              transform: phase >= 2 ? 'translateY(0)' : 'translateY(20px)',
+              opacity: phase >= 2 ? 1 : 0,
+              transitionDelay: '450ms',
+            }}
+          >
+            <p className="mt-5 text-slate-400 text-xs sm:text-sm font-normal tracking-wider">
+              Système Expert d'Aide à la Décision Médicale
+            </p>
+          </div>
         </div>
       </div>
 
-      {/* Title block */}
-      <div
-        className={`mt-10 text-center transition-all duration-700 ease-out ${
-          phase === 'title' || phase === 'fadeOut' ? 'translate-y-0 opacity-100' : 'translate-y-6 opacity-0'
-        }`}
-      >
-        {/* CNAS label */}
-        <div className="flex items-center justify-center gap-3 mb-4">
-          <div className="h-px w-10 bg-gradient-to-r from-transparent to-sky-400/50" />
-          <span className="text-sky-400/80 text-xs sm:text-sm font-medium tracking-[0.3em] uppercase">
-            Caisse Nationale des Assurances Sociales
-          </span>
-          <div className="h-px w-10 bg-gradient-to-l from-transparent to-sky-400/50" />
+      {/* Progress bar */}
+      <div className="absolute bottom-20 sm:bottom-24 w-48 sm:w-56">
+        <div className="h-[3px] rounded-full bg-slate-200/60 overflow-hidden">
+          <div
+            className="h-full rounded-full transition-all ease-out"
+            style={{
+              width: phase >= 3 ? '100%' : '0%',
+              transitionDuration: phase >= 3 ? '1500ms' : '0ms',
+              background: 'linear-gradient(90deg, #006FB8, #38bdf8, #006FB8)',
+              backgroundSize: '200% 100%',
+              animation: phase >= 3 ? 'splash-bar-shimmer 1.5s linear infinite' : 'none',
+            }}
+          />
         </div>
-
-        {/* Main title */}
-        <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white tracking-wide leading-tight">
-          GUIDE DU
-        </h1>
-        <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold tracking-wide leading-tight"
-            style={{ background: 'linear-gradient(135deg, #38bdf8, #0ea5e9, #0284c7)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
-          MÉDECIN CONSEIL
-        </h1>
-
-        {/* Decorative line */}
-        <div className="mt-5 mx-auto w-20 h-1 rounded-full" style={{ background: 'linear-gradient(90deg, transparent, #0ea5e9, transparent)' }} />
-
-        {/* Subtitle */}
-        <p className="mt-4 text-slate-400 text-sm sm:text-base font-light tracking-wider">
-          Système Expert d'Aide à la Décision Médicale
+        <p
+          className="mt-3 text-center text-[11px] text-slate-400 font-medium tracking-wider transition-opacity duration-500"
+          style={{ opacity: phase >= 3 ? 1 : 0 }}
+        >
+          Chargement...
         </p>
       </div>
 
-      {/* Loading indicator */}
+      {/* Version badge */}
       <div
-        className={`absolute bottom-16 flex flex-col items-center transition-all duration-500 ${
-          phase === 'title' || phase === 'fadeOut' ? 'opacity-100' : 'opacity-0'
-        }`}
+        className="absolute bottom-6 flex items-center gap-2 transition-opacity duration-500"
+        style={{ opacity: phase >= 2 ? 0.5 : 0 }}
       >
-        <div className="flex gap-1.5">
-          {[0, 1, 2].map((i) => (
-            <div
-              key={i}
-              className="w-1.5 h-1.5 rounded-full bg-sky-400/70"
-              style={{ animation: `splash-dot-bounce 1.2s ease-in-out ${i * 0.15}s infinite` }}
-            />
-          ))}
-        </div>
+        <div className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+        <span className="text-slate-400 text-[10px] font-medium tracking-widest uppercase">
+          v3.3 &mdash; CNAS Algérie
+        </span>
       </div>
 
-      {/* Version */}
-      <div className="absolute bottom-6 text-slate-600 text-xs tracking-wider">
-        v3.3 &mdash; CNAS Algérie
-      </div>
-
-      {/* Keyframe styles */}
+      {/* Keyframe animations */}
       <style>{`
-        @keyframes splash-ring-pulse {
-          0%, 100% { transform: scale(1); opacity: 1; }
-          50% { transform: scale(1.05); opacity: 0.5; }
+        @keyframes splash-float {
+          0%, 100% { transform: translateY(0px); }
+          50% { transform: translateY(-15px); }
         }
-        @keyframes splash-dot-bounce {
-          0%, 80%, 100% { transform: translateY(0); opacity: 0.4; }
-          40% { transform: translateY(-6px); opacity: 1; }
+        @keyframes splash-shimmer {
+          0% { background-position: 200% center; }
+          100% { background-position: -200% center; }
+        }
+        @keyframes splash-bar-shimmer {
+          0% { background-position: 200% 0; }
+          100% { background-position: -200% 0; }
         }
       `}</style>
     </div>

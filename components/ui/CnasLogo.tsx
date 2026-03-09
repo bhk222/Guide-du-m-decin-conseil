@@ -3,7 +3,8 @@ import React from 'react';
 interface CnasLogoProps extends React.SVGProps<SVGSVGElement> {}
 
 export const CnasLogo: React.FC<CnasLogoProps> = (props) => {
-  const blue = "rgb(0, 111, 184)";
+  const blue = "#006FB8";
+  const darkBlue = "#004A7C";
   return (
     <svg 
       viewBox="0 0 500 500" 
@@ -11,48 +12,81 @@ export const CnasLogo: React.FC<CnasLogoProps> = (props) => {
       {...props}
     >
       <defs>
-        {/* This path defines the curve for the Arabic text */}
+        <linearGradient id="cnasBlueGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+          <stop offset="0%" stopColor="#0080D0" />
+          <stop offset="100%" stopColor="#004A7C" />
+        </linearGradient>
+        {/* Arc paths for text */}
         <path 
-          id="CnasLogoArabicTextPath" 
+          id="CnasArabicArc" 
           fill="none" 
-          d="M 85, 250 a 165,165 0 1,1 330,0" 
+          d="M 75,250 a 175,175 0 1,1 350,0" 
+        />
+        <path 
+          id="CnasFrenchArc" 
+          fill="none" 
+          d="M 60,250 a 190,190 0 0,0 380,0" 
         />
       </defs>
 
-      {/* Background and Rings based on the provided image */}
-      <circle cx="250" cy="250" r="248" fill={blue} />
-      <circle cx="250" cy="250" r="238" fill="white" />
-      <circle cx="250" cy="250" r="185" fill="none" stroke={blue} strokeWidth="4" />
+      {/* Outer blue ring */}
+      <circle cx="250" cy="250" r="248" fill="url(#cnasBlueGrad)" />
+      {/* White fill */}
+      <circle cx="250" cy="250" r="232" fill="white" />
+      {/* Inner decorative ring */}
+      <circle cx="250" cy="250" r="178" fill="none" stroke={blue} strokeWidth="2.5" opacity="0.6" />
+      <circle cx="250" cy="250" r="174" fill="none" stroke={blue} strokeWidth="1" opacity="0.3" />
 
-      {/* Text Elements */}
-      <text style={{ fontSize: '38px', fill: blue, fontFamily: 'Arial, sans-serif', letterSpacing: '-0.5px' }} textAnchor="middle">
-        <textPath href="#CnasLogoArabicTextPath" startOffset="50%">
-          الصندوق الوطني للتأمينات الإجتماعية للعمال الأجراء
+      {/* Arabic text on upper arc */}
+      <text style={{ fontSize: '32px', fill: darkBlue, fontFamily: "'Noto Sans Arabic', 'Geeza Pro', 'Traditional Arabic', Arial, sans-serif", fontWeight: 600 }} textAnchor="middle">
+        <textPath href="#CnasArabicArc" startOffset="50%">
+          الصندوق الوطني للتأمينات الاجتماعية للعمال الأجراء
         </textPath>
       </text>
-      <text x="250" y="415" style={{ fontSize: '55px', fontWeight: 'bold', fill: blue, fontFamily: 'Arial, sans-serif' }} textAnchor="middle">
+
+      {/* French text on lower arc */}
+      <text style={{ fontSize: '16px', fill: darkBlue, fontFamily: 'Arial, Helvetica, sans-serif', letterSpacing: '1px', fontWeight: 600 }} textAnchor="middle">
+        <textPath href="#CnasFrenchArc" startOffset="50%">
+          CAISSE NATIONALE DES ASSURANCES SOCIALES
+        </textPath>
+      </text>
+
+      {/* Central pictogram: Family protected by hand */}
+      <g transform="translate(250, 220)">
+        {/* Large protective hand/arc */}
+        <path 
+          d="M -100,45 C -90,10 -60,-30 0,-45 C 60,-30 90,10 100,45" 
+          fill="none" stroke={blue} strokeWidth="8" strokeLinecap="round"
+        />
+        
+        {/* Adult figure (center-left) */}
+        <circle cx="-30" cy="-5" r="16" fill={blue} />
+        <path d="M -30,11 L -30,50 M -30,25 L -50,15 M -30,25 L -10,15 M -30,50 L -45,75 M -30,50 L -15,75" 
+              stroke={blue} strokeWidth="5" strokeLinecap="round" fill="none" />
+
+        {/* Adult figure (center-right) */}
+        <circle cx="30" cy="-5" r="16" fill={blue} />
+        <path d="M 30,11 L 30,50 M 30,25 L 10,15 M 30,25 L 50,15 M 30,50 L 15,75 M 30,50 L 45,75" 
+              stroke={blue} strokeWidth="5" strokeLinecap="round" fill="none" />
+
+        {/* Child figure (center) */}
+        <circle cx="0" cy="15" r="11" fill={blue} />
+        <path d="M 0,26 L 0,55 M 0,36 L -14,28 M 0,36 L 14,28 M 0,55 L -10,75 M 0,55 L 10,75" 
+              stroke={blue} strokeWidth="4" strokeLinecap="round" fill="none" />
+      </g>
+
+      {/* CNAS text */}
+      <text x="250" y="400" style={{ fontSize: '62px', fontWeight: 'bold', fill: blue, fontFamily: 'Arial, Helvetica, sans-serif', letterSpacing: '8px' }} textAnchor="middle">
         CNAS
       </text>
 
-      {/* Pictogram: Hand and Figures */}
-      <g fill={blue} transform="translate(0, 20)">
-        {/* Central Figure */}
-        <path d="M 250 145 A 35 35 0 1 1 249.9 145 Z M 210 180 h 80 v 20 a 40 40 0 0 1 -80 0 Z" />
+      {/* Decorative double line */}
+      <line x1="160" y1="410" x2="340" y2="410" stroke={blue} strokeWidth="2" opacity="0.4" />
+      <line x1="175" y1="416" x2="325" y2="416" stroke={blue} strokeWidth="1.5" opacity="0.25" />
 
-        {/* Left Figure */}
-        <path d="M 170 180 A 25 25 0 1 1 169.9 180 Z M 140 205 h 60 v 15 a 30 30 0 0 1 -60 0 Z" />
-        
-        {/* Right Figure */}
-        <path d="M 330 180 A 25 25 0 1 1 329.9 180 Z M 300 205 h 60 v 15 a 30 30 0 0 1 -60 0 Z" />
-
-        {/* Hand */}
-        <path d="M 90,300 C 100,285 150,260 250,260 C 350,260 400,285 410,300 C 370,340 130,340 90,300 Z" />
-      </g>
-      
-      {/* Bottom Wavy Lines */}
-      <path d="M120,440 C250,420 250,420 380,440" stroke={blue} strokeWidth="8" fill="none" strokeLinecap="round" />
-      <path d="M130,455 C250,435 250,435 370,455" stroke={blue} strokeWidth="8" fill="none" strokeLinecap="round" />
-
+      {/* Stars */}
+      <circle cx="165" cy="370" r="4" fill={blue} opacity="0.5" />
+      <circle cx="335" cy="370" r="4" fill={blue} opacity="0.5" />
     </svg>
   );
 };
