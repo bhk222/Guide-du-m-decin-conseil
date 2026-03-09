@@ -498,6 +498,13 @@ const preprocessMedicalText = (text: string): string => {
         [/\bquickdash\b/gi, 'score QuickDASH '],
         [/\bwomac\b/gi, 'score WOMAC '],
         
+        // === ABRÉVIATIONS FRACTURES ===
+        [/\bfx\b/gi, 'fracture '],  // fx → fracture (abréviation médecin)
+        [/\bbimall[eé]ol\b/gi, 'bimalléolaire cheville malléole '],  // bimalléol → bimalléolaire + contexte cheville
+        [/\blle\b/gi, 'ligament latéral externe '],  // LLE → ligament latéral externe
+        [/\blli\b/gi, 'ligament latéral interne '],  // LLI → ligament latéral interne
+        [/\bn[eé]fr[r]?ectomie\b/gi, 'néphrectomie '],  // nefrectomie/nefrrectomie → néphrectomie
+        
         // === INTERVENTIONS ===
         [/\bosteosynthese\b/gi, 'ostéosynthèse '],
         [/\bpth\b/gi, 'prothèse totale de hanche '],
@@ -5627,6 +5634,8 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
         
         // Raideur articulaire avec mesures d'amplitudes
         [/raideur.*[eé]paule.*abduction.*\d+.*degr[eé]s.*limitation.*s[eé]v[eè]re/gi, 'raideur épaule limitation abduction mobilité réduite séquelle orthopédique'],
+        // V3.3.347: "abduction limitée" = raideur d'épaule (important pour OCR sans accents)
+        [/abduction\s+limit[eé]e?/gi, 'abduction limitée raideur épaule '],
         [/limitation.*genou.*flexion.*\d+.*degr[eé]s.*extension.*\d+/gi, 'raideur genou limitation flexion extension mobilité réduite séquelle orthopédique'],
         [/ankylose.*coude.*flexion.*bloqu[eé]e.*\d+.*degr[eé]s/gi, 'ankylose coude blocage articulaire raideur complète séquelle orthopédique'],
         
@@ -6086,6 +6095,9 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
                 chosenPath = 'Séquelles Thoraciques, Abdominales, Pelviennes et Cardio-vasculaires > Thorax - Plèvre et Poumons';
                 const hasAdherences = /adh[eé]rence/i.test(workingText);
                 const hasRetraction = /r[eé]traction/i.test(workingText);
+                // V3.3.347: "séquelles restrictives" ou "douleurs thoraciques résiduelles" = au moins dyspnée level
+                const hasRestrictiveSeq = /s[eé]quelles?\s+restrictiv|restriction.*pulmonair/i.test(workingText);
+                const hasDouleursThoraciques = /douleur.*thorac|thoracalgie|douleur.*r[eé]siduel/i.test(workingText);
                 if (hasInsuffResp || isRestrictifSevere) {
                     chosenRate = 18;
                     severity = 'élevé';
@@ -6094,10 +6106,10 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
                     chosenRate = 12;
                     severity = 'moyen';
                     justificationDetails.push('Hémothorax avec adhérences pleurales et rétractions thoraciques');
-                } else if (hasDyspnee) {
+                } else if (hasDyspnee || hasRestrictiveSeq || hasDouleursThoraciques) {
                     chosenRate = 10;
                     severity = 'moyen';
-                    justificationDetails.push('Hémothorax avec dyspnée résiduelle');
+                    justificationDetails.push(hasDyspnee ? 'Hémothorax avec dyspnée résiduelle' : 'Hémothorax avec séquelles restrictives persistantes');
                 } else {
                     chosenRate = 8;
                     severity = 'faible';
@@ -6412,6 +6424,15 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             searchTerms: ["Instabilité chronique de la cheville (séquelle d'entorse)"],  
             priority: 12000,
             negativeContext: /ankylose.*cheville/i
+        },
+        // V3.3.347: "entorse LLE" sans contexte genou explicite → cheville par défaut
+        // En pratique médicale française, "entorse LLE" isolée = cheville (pas genou)
+        {
+            pattern: /entorse.*ligament\s+lat[eé]ral\s+externe|ligament\s+lat[eé]ral\s+externe.*entorse/i,
+            context: /.*/i,
+            searchTerms: ["Instabilité chronique de la cheville (séquelle d'entorse)"],
+            priority: 11500,
+            negativeContext: /genou|crois[eé]|m[eé]nisque|rotule/i
         },
         
         // Instabilité genou ISOLÉE (sans raideur mentionnée)
@@ -8074,7 +8095,7 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
         // Solution: Expert rule SDRC avec détection douleur sévère résistante + troubles trophiques objectifs
         {
             pattern: /SDRC|algodystrophie|algodystrophique|syndrome.*douloureux.*r[eé]gional.*complexe|dystrophie.*sympathique.*r[eé]flexe/i,
-            context: /(?:douleur.*(?:r[eé]sistant|permanente|chronique)|EVA.*[7-9]|troubles.*trophiques|œd[eè]me.*persistant|peau.*(?:fine|brillante)|reconversion|handicap)/i,
+            context: /(?:douleur.*(?:r[eé]sistant|permanente|chronique)|EVA.*[7-9]|troubles.*trophiques|œd[eè]me.*persistant|peau.*(?:fine|brillante)|reconversion|handicap|main|poignet|radius|bras|coude|doigt|[eé]paule|avant.?bras|membre.*sup)/i,
             searchTerms: ["Algodystrophie (SDRC de type I) - Forme majeure séquellaire du membre supérieur"],
             priority: 1008,  // HAUTE PRIORITÉ
             negativeContext: /r[eé]solu|gu[eé]ri|sans.*s[eé]quelle/i
@@ -8384,9 +8405,17 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             negativeContext: /incompl[eè]te|partiel|r[eé]cup[eé]r/i
         },
         {
+            pattern: /(?:quadripl[eé]gie|t[eé]trapl[eé]gie).*(?:compl[eè]te|totale)/i,
+            context: /traumat|fracture|vert[eé]br|cervical|m[eé]dullaire/i,
+            searchTerms: ['Tétraplégie totale'],
+            priority: 100,
+            negativeContext: /gu[eé]rison|incompl[eè]t/i
+        },
+        // V3.3.347: Tétraplégie/quadriplégie incomplète ou générique
+        {
             pattern: /quadripl[eé]gie|t[eé]trapl[eé]gie/i,
             context: /traumat|fracture|vert[eé]br|cervical|m[eé]dullaire/i,
-            searchTerms: ['Quadriplégie (tétraplégie)'],
+            searchTerms: ['Tétraplégie incomplète (marche possible)'],
             priority: 99,
             negativeContext: /gu[eé]rison/i
         },
@@ -9279,10 +9308,10 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             searchTerms: ['Amputation de l\'annulaire'],
             priority: 13000  // ULTRA PRIORITAIRE
         },
-        // Règles orteils
+        // Règles orteils — V3.3.347: context élargi
         {
             pattern: /amputation.*gros\s+orteil|gros\s+orteil.*amputation/i,
-            context: /pied|orteil|hallux/i,
+            context: /pied|orteil|hallux|[eé]crasement/i,
             searchTerms: ['Amputation du gros orteil'],
             priority: 95
         },
@@ -10980,8 +11009,22 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
                 // Parser acuités visuelles OD et OG
                 // V3.3.226: Utiliser cleanNormalizedText (texte original) car workingText peut avoir perdu OD/OG via synonym expansion
                 const acuitySourceText = cleanNormalizedText;
-                const odMatch = /od\s*[:\s]*(\d+)\s*\/\s*(\d+)/i.exec(acuitySourceText) || /od\s*[:\s]*(\d+)\s*\/\s*(\d+)/i.exec(normalizedInputText);
-                const ogMatch = /og\s*[:\s]*(\d+)\s*\/\s*(\d+)/i.exec(acuitySourceText) || /og\s*[:\s]*(\d+)\s*\/\s*(\d+)/i.exec(normalizedInputText);
+                let odMatch = /od\s*[:\s]*(\d+)\s*\/\s*(\d+)/i.exec(acuitySourceText) || /od\s*[:\s]*(\d+)\s*\/\s*(\d+)/i.exec(normalizedInputText);
+                let ogMatch = /og\s*[:\s]*(\d+)\s*\/\s*(\d+)/i.exec(acuitySourceText) || /og\s*[:\s]*(\d+)\s*\/\s*(\d+)/i.exec(normalizedInputText);
+                
+                // V3.3.347: Fallback — single acuity value with "oeil droit/gauche" context
+                if (!odMatch || !ogMatch) {
+                    const singleAcuity = /acuit[eé].*?(\d+)\s*\/\s*(\d+)/i.exec(acuitySourceText) || /(\d+)\s*\/\s*(\d+)/i.exec(acuitySourceText);
+                    if (singleAcuity) {
+                        const isOD = /oeil\s*droit|[oœ]il\s*droit/i.test(acuitySourceText);
+                        const isOG = /oeil\s*gauche|[oœ]il\s*gauche/i.test(acuitySourceText);
+                        const syntheticMatch = [null, singleAcuity[1], singleAcuity[2]] as unknown as RegExpExecArray;
+                        const normalEye = [null, '10', '10'] as unknown as RegExpExecArray;
+                        if (isOD && !odMatch) { odMatch = syntheticMatch; if (!ogMatch) ogMatch = normalEye; }
+                        else if (isOG && !ogMatch) { ogMatch = syntheticMatch; if (!odMatch) odMatch = normalEye; }
+                        else { odMatch = syntheticMatch; ogMatch = normalEye; } // Default: affected eye = given value, other = 10/10
+                    }
+                }
                 
                 if (odMatch && ogMatch) {
                     const odNum = parseInt(odMatch[1]);
@@ -11056,6 +11099,9 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
                     let niveau: string;
                     let referenceDetails: string;
                     
+                    // V3.3.347: Moved outside if/else to avoid scoping issue
+                    const isCataracteCase = /cataracte/i.test(normalizedInputText);
+                    
                     if (hasAphaquie) {
                         // Aphaquie → taux fixes du barème AT
                         taux = isBilateral ? 35 : 15;
@@ -11072,9 +11118,6 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
                         if (hasGenePrec) { supplement += 2; complications.push("gêne travaux de précision"); }
                         if (hasConduiteNocturne) { supplement += 2; complications.push("gêne conduite nocturne"); }
                         supplement = Math.min(supplement, 5); // Plafonner les suppléments
-                        
-                        // 🆕 V3.3.343: Distinguer cataracte vs BAV générique
-                        const isCataracteCase = /cataracte/i.test(normalizedInputText);
                         
                         if (isCataracteCase) {
                             // Taux = max(tableau, minimum cataracte) + suppléments fonctionnels
@@ -15071,7 +15114,7 @@ const hasMultipleDistinctSites = (text: string): boolean => {
  * @param isExactMatch - Si true, cherche une correspondance exacte par nom (pour résoudre ambiguïté)
  */
 export const localExpertAnalysis = (text: string, externalKeywords?: string[], isExactMatch: boolean = false): LocalAnalysisResult => {
-    console.log('🔧 localExpertAnalysis V3.3.346 - fracture/amputation type guard + sans séquelle bypass + diaphysaire radius patterns');
+    console.log('🔧 localExpertAnalysis V3.3.347 - semantic barème guard + LLE disambiguation + pseudarthrose naming + tétraplégie guard');
 
     // 🔴 V3.3.162: NETTOYAGE TEXTE - Supprime caractères invisibles (zero-width space, etc.)
     // Ces caractères peuvent casser les regex et empêcher la détection
@@ -16461,11 +16504,12 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
         let diagnosticNerf = '';
         
         if (isNerfCubital) {
-            const isAuCoude = /coude|gouttière|[eé]pitroch/i.test(text);
+            const isAuCoude = /coude|goutti[eè]re|[eé]pitroch/i.test(text);
             const isAuPoignet = /poignet|canal\s+de\s+guyon|section/i.test(text) || !isAuCoude;
-            const level = isAuCoude ? 'Au coude' : 'Au poignet';
+            // V3.3.347: "Au coude" = gouttière épitrochléenne → barème "Au bras" (pas d'entrée "Au coude")
+            const level = isAuCoude ? 'Au bras' : 'Au poignet';
             nerfType = `Paralysie du nerf cubital - ${level}`;
-            diagnosticNerf = `Paralysie du nerf cubital ${level.toLowerCase()}`;
+            diagnosticNerf = `Paralysie du nerf cubital ${isAuCoude ? 'au coude (gouttière épitrochléenne)' : 'au poignet'}`;
         } else if (isNerfRadial) {
             const isAbove = /au[\s-]*dessus.*triceps|aisselle|creux\s+axillaire/i.test(text);
             const level = isAbove ? 'Au-dessus du triceps' : 'Au-dessous du triceps';
@@ -16861,7 +16905,7 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
             const hasCalVicieuxFC = /cal\s*(?:vicieux|saillant|difforme)/i.test(text) && !hasPasCalVicieux;
             const hasCalDifforme = /cal\s*difforme|compression.*nerveuse/i.test(text);
             const hasPseudarthroseFC = /pseudarthrose/i.test(text);
-            const hasRaideurEpauleFC = /raideur.*[eé]paule|limitation.*(?:abduction|[eé]l[eé]vation|rotation|[eé]paule)/i.test(text) && 
+            const hasRaideurEpauleFC = /raideur.*[eé]paule|limitation.*(?:abduction|[eé]l[eé]vation|rotation|[eé]paule)|abduction\s+limit[eé]e|s[eé]quelle.*fonctionnelle.*[eé]paule.*abduction/i.test(text) && 
                                        !/(?:pas|sans|aucun).*(?:de\s+)?(?:raideur|limitation)/i.test(text);
             const hasMobiliteComplete = /mobilit[eé].*compl[eè]te|mobilit[eé].*normale|amplitudes.*compl[eè]tes|pas.*(?:de\s+)?raideur|sans.*raideur/i.test(text);
             const hasPasDouleur = /(?:pas|sans|aucun).*(?:de\s+)?douleur/i.test(text);
@@ -18075,10 +18119,14 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
             context: text.match(/fracture.*(?:trochant[ée]r|complexe.*trochant|per.*trochant)[^.;]*/i)?.[0] || ''
         });
     } else if (isColFemurFracture) {
+        // V3.3.347: Distinguer pseudarthrose du col du fémur vs fracture simple
+        const isPseudarthroseColFemur = /pseudarthrose.*col.*f[eé]m/i.test(text);
         detectedSequelae.push({
-            name: 'Fracture du col du fémur',
-            keywords: ['fracture', 'col', 'fémur', 'col fémoral', 'hanche'],
-            context: text.match(/fracture.*col.*f[ée]m[^.;]*/i)?.[0] || ''
+            name: isPseudarthroseColFemur ? 'Pseudarthrose du col du fémur' : 'Fracture du col du fémur',
+            keywords: isPseudarthroseColFemur 
+                ? ['pseudarthrose', 'col', 'fémur', 'col fémoral', 'hanche', 'non consolidée']
+                : ['fracture', 'col', 'fémur', 'col fémoral', 'hanche'],
+            context: text.match(/(?:pseudarthrose|fracture).*col.*f[eé]m[^.;]*/i)?.[0] || ''
         });
     } else if (/fracture.*(?:f[ée]mur|f[ée]moral|diaphyse.*f[ée]moral|diaphysaire.*f[ée]m)|f[ée]mur.*fractur|enclouage.*centro.*m[ée]dullaire|ost[ée]osynth[èe]se.*f[ée]mur/i.test(text)) {
         detectedSequelae.push({
@@ -18183,11 +18231,22 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
             context: text.match(/(?:ligament.*lat[eé]ral.*interne|LLI|LCM|collat[eé]ral.*m[eé]dial)[^.;]*/i)?.[0] || ''
         });
     } else if (isLLE) {
-        detectedSequelae.push({
-            name: 'Déchirure/rupture ligament latéral externe (LLE) - ligament collatéral latéral genou',
-            keywords: ['déchirure', 'ligament', 'latéral externe', 'LLE', 'collatéral latéral', 'genou'],
-            context: text.match(/(?:ligament.*lat[eé]ral.*externe|LLE|collat[eé]ral.*lat[eé]ral)[^.;]*/i)?.[0] || ''
-        });
+        // V3.3.347: LLE peut être genou OU cheville — contextualiser
+        const hasAnkleContextLLE = /mall[eé]ol|bimall[eé]ol|cheville|tibio.?tarsien/i.test(text);
+        const hasGenouContextLLE = /genou|crois[eé]|m[eé]nisque|rotule/i.test(text);
+        if (hasAnkleContextLLE && !hasGenouContextLLE) {
+            detectedSequelae.push({
+                name: "Instabilité chronique de la cheville (séquelle d'entorse)",
+                keywords: ['entorse', 'ligament', 'cheville', 'malléolaire', 'instabilité', 'LLE'],
+                context: text.match(/(?:ligament.*lat[eé]ral.*externe|LLE|entorse)[^.;]*/i)?.[0] || ''
+            });
+        } else {
+            detectedSequelae.push({
+                name: 'Déchirure/rupture ligament latéral externe (LLE) - ligament collatéral latéral genou',
+                keywords: ['déchirure', 'ligament', 'latéral externe', 'LLE', 'collatéral latéral', 'genou'],
+                context: text.match(/(?:ligament.*lat[eé]ral.*externe|LLE|collat[eé]ral.*lat[eé]ral)[^.;]*/i)?.[0] || ''
+            });
+        }
     } else if (isEntorseGraveGenou || /d[ée]chirure.*ligament.*genou/i.test(text)) {
         detectedSequelae.push({
             name: 'Laxité chronique du genou (séquelle d\'entorse)',
@@ -18216,9 +18275,11 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
     
     // 🔴 V3.3.163: STEPPAGE (pied tombant = paralysie du releveur du pied)
     // 🆕 V3.3.287: SKIP si queue de cheval ou paraplégie (le steppage est un SYMPTÔME, pas une lésion distincte)
+    // 🆕 V3.3.347: SKIP si SPE déjà détecté (pour éviter le doublon SPE + steppage)
     const isQueueDeCheval287 = /queue\s+de\s+cheval|syndrome.*queue.*cheval/i.test(text);
     const isParaplegie287 = /parapl[eé]gie|quadripl[eé]gie|t[eé]trapl[eé]gie/i.test(text);
-    if (!isQueueDeCheval287 && !isParaplegie287 && /steppage|pied.*tombant|marche.*avec.*steppage|d[ée]ficit.*releveur.*pied|paralysie.*releveur/i.test(text)) {
+    const speAlreadyDetected = steppageMatch && detectedSequelae.some(s => /SPE|sciatique.*poplit[eé].*externe/i.test(s.name));
+    if (!isQueueDeCheval287 && !isParaplegie287 && !speAlreadyDetected && /steppage|pied.*tombant|marche.*avec.*steppage|d[ée]ficit.*releveur.*pied|paralysie.*releveur/i.test(text)) {
         const lateralite = text.match(/(droit|gauche|bilat[ée]ral)/i)?.[1]?.toLowerCase() || '';
         const isBilateral = /bilat[ée]ral|deux.*pieds|02.*pieds/i.test(text);
         detectedSequelae.push({
@@ -19203,6 +19264,15 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
                  !(/fracture.*(?:hum[eé]rus|c[oô]tes?|radius|poignet|clavicule|tibia|f[eé]mur|cheville|rachis|vert[eé]br)|luxation.*(?:[eé]paule|genou)/i.test(text))) {
             console.log('🦴 [V3.3.318] FRACTURE COTYLE + COXARTHROSE/RACCOURCISSEMENT → Bypass vers expert rules (pathologie hanche unique)');
             // Ne pas retourner, laisser l'analyse continuer vers comprehensiveSingleLesionAnalysis
+        }
+        // 🆕 V3.3.347: TÉTRAPLÉGIE / PARAPLÉGIE / QUADRIPLÉGIE = Bypass vers expert rules
+        // La tétraplégie est la conséquence PRINCIPALE d'une fracture cervicale/médullaire
+        // → NE DOIT JAMAIS être regroupée en polytraumatisme avec la fracture causale
+        // → Doit atteindre comprehensiveSingleLesionAnalysis → expert rule "Tétraplégie incomplète"
+        // ⚠️ SAUF si polytraumatisme complexe (3+ séquelles = vrais sites multiples)
+        else if (/t[eé]trapl[eé]gie|quadripl[eé]gie|parapl[eé]gie/i.test(text) && detectedSequelae.length <= 2) {
+            console.log('🧠 [V3.3.347] TÉTRAPLÉGIE/PARAPLÉGIE détectée → Bypass vers expert rules (pathologie neurologique majeure)');
+            // Ne pas retourner, laisser l'analyse continuer vers comprehensiveSingleLesionAnalysis
         } else {
             // 🆕 V3.3.155: CALCUL AUTOMATIQUE IPP (polytraumatismes ET cas simples)
             const isPolytrauma = detectedSequelae.length > 1;
@@ -19845,7 +19915,16 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
                     
                     // 🎯 V3.3.171 ULTIME-FIX: UTILISER le taux du barème (min ou mid) si trouvé
                     const baremeTaux = baremeEntry.rate[0]; // Utiliser le minimum de la fourchette
-                    const tauxFinal = Math.max(rate, baremeTaux); // Prendre le MAX entre clinique et barème
+                    // 🔧 V3.3.347: Guard contre faux matches barème — vérifier la pertinence sémantique
+                    // Exclure mots génériques ET anatomiques pour ne comparer que les TERMES DE PATHOLOGIE
+                    const genericTerms = new Set(['paralysie','syndrome','fracture','sequelle','sequelles','post','traumatique','avec','sans','chronique','aigu','residuel','complication','atteinte','lesion','membre','inferieur','superieur','droit','droite','gauche','global','globale','du','de','la','le','les','des','et','ou','un','une','cuisse','jambe','bras','main','pied','cheville','genou','hanche','epaule','doigt','orteil','poignet','coude','clavicule','femur','tibia','perone','humerus','radius','cubitus','rachis','vertebre','crane','thorax','abdomen','bassin','tiers','moyen','nerf','compression','nerveuse']);
+                    const seqWords = normalize(seq.name).split(/\s+/).filter(w => w.length > 3 && !genericTerms.has(w));
+                    const baremeWords = normalize(baremeEntry.name).split(/\s+/).filter(w => w.length > 3 && !genericTerms.has(w));
+                    const isRelatedMatch = seqWords.some(w => baremeWords.some(bw => bw.includes(w) || w.includes(bw)));
+                    
+                    const tauxFinal = (rate > 0 && baremeTaux > rate * 3 && !isRelatedMatch) 
+                        ? rate  // Barème disproportionné ET non lié → faux match → garder le taux clinique
+                        : Math.max(rate, baremeTaux); // Sinon prendre le MAX entre clinique et barème
                     
                     if (tauxFinal > systemGroups[system].rate) {
                         systemGroups[system].rate = tauxFinal;
@@ -20780,6 +20859,12 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
                 if (/amputation.*trans[\s-]?m[eé]tatars|amputation.*(?:avant[\s-]?pied|m[eé]tatarse|orteil)/i.test(lesion)) {
                     enrichedLesion = lesion + ' amputation transmetatarsienne avant-pied orteils pied partielle prothese';
                     console.log(`   🔧 V3.3.280: Enrichissement amputation transmétatarsienne: "${lesion}" → "${enrichedLesion}"`);
+                }
+
+                // 🆕 V3.3.347: AMPUTATION GROS ORTEIL (sans précision phalange) → défaut = les deux phalanges
+                if (/amputation.*gros\s*orteil|gros\s*orteil.*amput/i.test(lesion) && !/phalange|m[eé]tatars/i.test(lesion)) {
+                    enrichedLesion = (enrichedLesion || lesion) + ' les deux phalanges';
+                    console.log(`   🔧 V3.3.347: Enrichissement amputation gros orteil → les deux phalanges`);
                 }
 
                 // 🆕 V3.3.280: FRACTURE BIMALLÉOLAIRE / CHEVILLE → Enrichir avec termes barème
