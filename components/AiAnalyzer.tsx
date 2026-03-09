@@ -5598,8 +5598,8 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
         [/opacit[eé].*corn[eé]e.*cicatrice.*vision.*floue/gi, 'taie cornéenne opacité cornée post-traumatique séquelle oculaire vision'],
         
         // Symptômes oculaires fonctionnels
-        [/g[eê]ne.*travaux.*pr[eé]cision.*[eé]blouissement.*impossibilit[eé].*conduite.*nocturne/gi, 'gêne fonctionnelle visuelle éblouissement photophobie troubles visuels séquelle oculaire'],
-        [/[eé]blouissement.*impossibilit[eé].*conduite.*nocturne/gi, 'éblouissement photophobie troubles vision nocturne séquelle oculaire'],
+        [/g[eê]ne.*travaux.*pr[eé]cision.*[eé]blouissement.*impossibilit[eé].*conduite.*nocturne/gi, 'gêne fonctionnelle visuelle éblouissement photophobie gêne travaux précision conduite nocturne troubles visuels séquelle oculaire'],
+        [/[eé]blouissement.*impossibilit[eé].*conduite.*nocturne/gi, 'éblouissement photophobie conduite nocturne troubles vision séquelle oculaire'],
         [/photophobie.*larmoiement.*douleur.*oculaire/gi, 'photophobie larmoiement douleur séquelle oculaire fonctionnelle'],
         
         // 🆕 V3.3.148: PATHOLOGIES AUDITIVES - Descriptions avec mesures
