@@ -30,14 +30,13 @@ const GuideIcon: React.FC = () => (
     </svg>
 );
 
-// Maladies professionnelles — poumon / santé au travail
+// Maladies professionnelles — dossier médical avec croix
 const DiseasesIcon: React.FC = () => (
     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-      <path d="M12 4v6" />
-      <path d="M8 10c-3 0-5 2.5-5 5s2 5 5 5h8c3 0 5-2 5-5s-2-5-5-5" />
-      <path d="M12 10c-1.5 0-3 1-3 3" />
-      <path d="M12 10c1.5 0 3 1 3 3" />
-      <path d="M9 4a3 3 0 016 0" />
+      <path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" />
+      <polyline points="14 2 14 8 20 8" />
+      <line x1="12" y1="12" x2="12" y2="18" />
+      <line x1="9" y1="15" x2="15" y2="15" />
     </svg>
 );
 
@@ -51,17 +50,17 @@ const ToolsIcon: React.FC = () => (
     </svg>
 );
 
-// Appareillage — prothèse / jambe mécanique
+// Appareillage — fauteuil roulant
 const AppareillageIcon: React.FC = () => (
     <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-      <circle cx="12" cy="4" r="2.5" />
-      <path d="M12 6.5v4" />
-      <path d="M9 8.5l3 2 3-2" />
-      <path d="M10.5 12l-2 5h3" />
-      <path d="M13.5 12l2 5h-3" />
-      <path d="M11.5 17v4" />
-      <path d="M12.5 17v4" />
-      <line x1="10" y1="21" x2="14" y2="21" />
+      <circle cx="9" cy="19" r="2.5" />
+      <circle cx="9" cy="19" r="0.5" fill="currentColor" />
+      <path d="M9 16.5V10h6l2 6.5" />
+      <circle cx="17" cy="19" r="2.5" />
+      <circle cx="17" cy="19" r="0.5" fill="currentColor" />
+      <path d="M9 10V7" />
+      <circle cx="9" cy="5.5" r="1.5" />
+      <path d="M5 12h4" />
     </svg>
 );
 
