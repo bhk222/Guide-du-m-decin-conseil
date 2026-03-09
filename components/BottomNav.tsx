@@ -2,36 +2,66 @@
 
 import React from 'react';
 
+// Calculateur IPP — calculatrice simple
 const CalculatorIcon: React.FC = () => (
-    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-      <path strokeLinecap="round" strokeLinejoin="round" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z" />
+    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+      <rect x="4" y="2" width="16" height="20" rx="2" />
+      <rect x="6" y="4" width="12" height="5" rx="1" />
+      <circle cx="8" cy="13" r="0.8" fill="currentColor" />
+      <circle cx="12" cy="13" r="0.8" fill="currentColor" />
+      <circle cx="16" cy="13" r="0.8" fill="currentColor" />
+      <circle cx="8" cy="17" r="0.8" fill="currentColor" />
+      <circle cx="12" cy="17" r="0.8" fill="currentColor" />
+      <rect x="14.5" y="15.5" width="3" height="3" rx="0.5" />
     </svg>
 );
 
+// Juridique — balance de la justice
 const GuideIcon: React.FC = () => (
-    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-        <path strokeLinecap="round" strokeLinejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+      <line x1="12" y1="3" x2="12" y2="19" />
+      <path d="M5 7l7-4 7 4" />
+      <path d="M5 7l-2 8h4z" />
+      <circle cx="5" cy="15" r="2" />
+      <path d="M19 7l-2 8h4z" />
+      <circle cx="19" cy="15" r="2" />
+      <line x1="8" y1="21" x2="16" y2="21" />
+      <line x1="12" y1="19" x2="12" y2="21" />
     </svg>
 );
 
+// Maladies professionnelles — poumon / santé au travail
 const DiseasesIcon: React.FC = () => (
-    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-      <path strokeLinecap="round" strokeLinejoin="round" d="M9 17v-2m3 2v-4m3 4v-6m2 10H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+      <path d="M12 4v6" />
+      <path d="M8 10c-3 0-5 2.5-5 5s2 5 5 5h8c3 0 5-2 5-5s-2-5-5-5" />
+      <path d="M12 10c-1.5 0-3 1-3 3" />
+      <path d="M12 10c1.5 0 3 1 3 3" />
+      <path d="M9 4a3 3 0 016 0" />
     </svg>
 );
 
+// Outils — boîte à outils médicale
 const ToolsIcon: React.FC = () => (
-    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-        <path strokeLinecap="round" strokeLinejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
-        <path strokeLinecap="round" strokeLinejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+      <rect x="2" y="9" width="20" height="12" rx="2" />
+      <path d="M16 9V6a4 4 0 00-8 0v3" />
+      <line x1="12" y1="13" x2="12" y2="17" />
+      <line x1="10" y1="15" x2="14" y2="15" />
     </svg>
 );
 
+// Appareillage — prothèse / jambe mécanique
 const AppareillageIcon: React.FC = () => (
-    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-        <path strokeLinecap="round" strokeLinejoin="round" d="M3 19c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2v-2H3v2z" />
-        <path strokeLinecap="round" strokeLinejoin="round" d="M3 17h18l-2-8c-.3-1.2-1.4-2-2.6-2H9.6c-1.2 0-2.3.8-2.6 2L5 17" />
-        <path strokeLinecap="round" strokeLinejoin="round" d="M7 7c0-2.2 1.8-4 4-4h2c2.2 0 4 1.8 4 4v0H7v0z" />
+    <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+      <circle cx="12" cy="4" r="2.5" />
+      <path d="M12 6.5v4" />
+      <path d="M9 8.5l3 2 3-2" />
+      <path d="M10.5 12l-2 5h3" />
+      <path d="M13.5 12l2 5h-3" />
+      <path d="M11.5 17v4" />
+      <path d="M12.5 17v4" />
+      <line x1="10" y1="21" x2="14" y2="21" />
     </svg>
 );
 
