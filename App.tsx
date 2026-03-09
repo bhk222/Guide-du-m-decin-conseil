@@ -12,6 +12,7 @@ import { Card } from './components/ui/Card';
 import { Login } from './components/Login';
 import { CalculatorPage } from './components/CalculatorPage';
 import { AppareillageSearch } from './components/AppareillageSearch';
+import { SplashScreen } from './components/SplashScreen';
 
 const tabTitles: { [key: string]: string } = {
     calculator: 'Calculateur IPP',
@@ -22,6 +23,7 @@ const tabTitles: { [key: string]: string } = {
 };
 
 export const App: React.FC = () => {
+    const [showSplash, setShowSplash] = useState(true);
     const [isAuthenticated, setIsAuthenticated] = useState(() => {
         const saved = localStorage.getItem('isAuthenticated');
         return saved === 'true';
@@ -271,6 +273,10 @@ export const App: React.FC = () => {
                 return null;
         }
     };
+
+    if (showSplash) {
+        return <SplashScreen onFinished={() => setShowSplash(false)} />;
+    }
 
     if (!isAuthenticated) {
         return <Login onLoginSuccess={() => {
