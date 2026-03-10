@@ -327,6 +327,159 @@ export const AnalogCalculator: React.FC<AnalogCalculatorProps> = ({ onAddInjury 
     
     const normalize = (str: string) => str.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 
+    // ═══════════════════════════════════════════════════════════
+    //  🆕 V3.3.354: RECHERCHE SÉMANTIQUE AMÉLIORÉE
+    //  Multi-token AND, synonymes médicaux, scoring de pertinence
+    // ═══════════════════════════════════════════════════════════
+
+    // Dictionnaire de synonymes médicaux bidirectionnels
+    const MEDICAL_SYNONYMS: Record<string, string[]> = useMemo(() => ({
+        // Anatomie membre supérieur
+        'epaule': ['scapulaire', 'gleno-humerale', 'omoplate', 'acromio', 'scapulo', 'coiffe', 'sus-epineux', 'sous-epineux', 'deltoide'],
+        'bras': ['humerus', 'humeral', 'diaphyse humerale', 'brachial'],
+        'coude': ['olecrane', 'epicondyle', 'epitrochlee', 'cubital', 'radial'],
+        'avant-bras': ['radius', 'cubitus', 'ulna', 'radio-cubital', 'prono-supination'],
+        'poignet': ['carpien', 'scaphoide', 'semi-lunaire', 'lunatum', 'radio-carpien'],
+        'main': ['metacarpien', 'metacarpe', 'paume', 'palmaire', 'prehension', 'doigt'],
+        'doigt': ['phalange', 'phalangien', 'interphalangien', 'index', 'medius', 'annulaire', 'auriculaire', 'pouce'],
+        'pouce': ['thenar', 'trapeze', 'metacarpien pouce', 'opposition'],
+        // Anatomie membre inférieur
+        'hanche': ['coxo-femoral', 'cotyle', 'acetabulum', 'coxarthrose', 'femoral', 'trochanter'],
+        'cuisse': ['femur', 'femoral', 'diaphyse femorale', 'quadriceps'],
+        'genou': ['gonalgie', 'rotule', 'patella', 'menisque', 'croise', 'lca', 'lcp', 'condyle', 'genu', 'gonarthrose', 'tibio-femoral'],
+        'jambe': ['tibia', 'perone', 'fibula', 'tibial', 'diaphyse tibiale', 'jambier'],
+        'cheville': ['malleole', 'bimalleolaire', 'trimalleolaire', 'astragale', 'talus', 'tibio-tarsien', 'talo-crural'],
+        'pied': ['calcaneum', 'metatarsien', 'orteil', 'tarse', 'lisfranc', 'chopart', 'plantaire', 'tarsien'],
+        // Rachis
+        'rachis': ['vertebre', 'vertebral', 'colonne', 'spinal', 'disc', 'intervertebral'],
+        'cervical': ['cervicale', 'cervicalgie', 'cervicarthrose', 'cervico', 'cou', 'nuque', 'atlas', 'axis'],
+        'dorsal': ['dorsale', 'dorsalgie', 'thoracique'],
+        'lombaire': ['lombalgie', 'lombosciatalgie', 'lombarthrose', 'lombo', 'lumbago'],
+        // Types de lésions
+        'fracture': ['fracturaire', 'cal vicieux', 'pseudarthrose', 'consolidation', 'trait de fracture', 'comminutive'],
+        'luxation': ['subluxation', 'dislocation', 'desarticulation', 'instabilite'],
+        'entorse': ['ligament', 'ligamentaire', 'laxite', 'croise', 'lateral', 'sprain'],
+        'rupture': ['dechirure', 'section', 'arrachement', 'lesion'],
+        'raideur': ['ankylose', 'limitation', 'enraidissement', 'flessum', 'blocage', 'arthrodese'],
+        'amputation': ['ablation', 'desarticulation', 'moignon', 'prothese'],
+        // Pathologies
+        'hernie': ['discale', 'protrusion', 'extrusion', 'discopathie'],
+        'sciatique': ['sciatalgie', 'radiculalgie', 'cruralgie', 'lombosciatalgie', 'radiculopathie'],
+        'algodystrophie': ['sdrc', 'sudeck', 'dystrophie', 'capsulite'],
+        'arthrose': ['gonarthrose', 'coxarthrose', 'cervicarthrose', 'lombarthrose', 'omarthrose', 'degeneratif'],
+        'paralysie': ['paresie', 'hemiplegie', 'paraplegie', 'tetraplegie', 'deficit moteur', 'plegie'],
+        'epilepsie': ['comitialite', 'crise comitiale', 'convulsion'],
+        'brulure': ['degre', 'greffe cutanee', 'cicatrice', 'escarres'],
+        'tendon': ['tendineuse', 'tendineux', 'flechisseur', 'extenseur', 'tendinopathie', 'tenosynovite'],
+        'nerf': ['nerveux', 'neuropathie', 'nevralgie', 'paresthesie', 'hypoesthesie', 'median', 'cubital', 'radial', 'sciatique poplite'],
+        // Séquelles
+        'douleur': ['algie', 'algique', 'douloureux', 'souffrance', 'syndrome douloureux'],
+        'boiterie': ['claudication', 'marche', 'deambulation', 'appui'],
+        'cicatrice': ['cicatriciel', 'cheloide', 'adherente', 'retractile', 'inesthetique', 'disgracieuse'],
+        // ORL / Ophtalmo
+        'surdite': ['hypoacousie', 'auditive', 'audiometrie', 'decibel', 'acouphene', 'oreille'],
+        'cecite': ['amaurose', 'vision', 'acuite visuelle', 'ophtalmologique', 'oeil'],
+        'nez': ['nasale', 'septum', 'deviation', 'anosmie', 'os propres'],
+        // Viscéral
+        'rate': ['splenectomie', 'spleen'],
+        'rein': ['nephrectomie', 'renale'],
+        'foie': ['hepatique', 'hepatectomie'],
+        'intestin': ['colectomie', 'gastrectomie', 'grele'],
+        // Abréviations courantes
+        'lca': ['ligament croise anterieur', 'croise anterieur', 'genou croise'],
+        'lcp': ['ligament croise posterieur', 'croise posterieur'],
+        'lle': ['ligament lateral externe'],
+        'lli': ['ligament lateral interne'],
+        'tc': ['traumatisme cranien', 'traumatisme craniocervical', 'cranien'],
+        'sdrc': ['algodystrophie', 'sudeck', 'syndrome douloureux regional complexe'],
+        'ptsd': ['stress post-traumatique', 'etat de stress', 'psychotraumatisme'],
+    }), []);
+
+    // Expand a search token with its medical synonyms
+    const expandWithSynonyms = useCallback((token: string): string[] => {
+        const results = [token];
+        const normToken = normalize(token);
+        
+        // Direct match: token is a key
+        if (MEDICAL_SYNONYMS[normToken]) {
+            results.push(...MEDICAL_SYNONYMS[normToken]);
+        }
+        
+        // Reverse match: token appears in a synonym list
+        for (const [key, synonyms] of Object.entries(MEDICAL_SYNONYMS)) {
+            if (synonyms.some(s => normalize(s) === normToken || normalize(s).includes(normToken) || normToken.includes(normalize(s)))) {
+                results.push(key);
+                results.push(...synonyms);
+            }
+        }
+        
+        // Partial key match (e.g., "cervic" matches "cervical")
+        for (const [key, synonyms] of Object.entries(MEDICAL_SYNONYMS)) {
+            if (normToken.length >= 3 && (key.includes(normToken) || normToken.includes(key))) {
+                results.push(key);
+                results.push(...synonyms);
+            }
+        }
+        
+        return [...new Set(results.map(r => normalize(r)))];
+    }, [MEDICAL_SYNONYMS]);
+
+    // Score an injury against search tokens
+    const scoreInjury = useCallback((injury: Injury, tokens: string[], expandedTokens: string[][]): number => {
+        const normName = normalize(injury.name);
+        const normDesc = normalize(injury.description || '');
+        const normSearchTerms = (injury.searchTerms || []).map(t => normalize(t)).join(' ');
+        const allText = `${normName} ${normDesc} ${normSearchTerms}`;
+        
+        let totalScore = 0;
+        let allTokensMatch = true;
+        
+        for (let i = 0; i < tokens.length; i++) {
+            const expanded = expandedTokens[i];
+            let tokenScore = 0;
+            let tokenMatches = false;
+            
+            for (const variant of expanded) {
+                // Exact word in name (highest priority)
+                if (normName.includes(variant)) {
+                    const bonus = variant === normalize(tokens[i]) ? 100 : 60; // direct vs synonym
+                    tokenScore = Math.max(tokenScore, bonus);
+                    tokenMatches = true;
+                }
+                // In description
+                if (normDesc.includes(variant)) {
+                    const bonus = variant === normalize(tokens[i]) ? 40 : 25;
+                    tokenScore = Math.max(tokenScore, bonus);
+                    tokenMatches = true;
+                }
+                // In searchTerms
+                if (normSearchTerms.includes(variant)) {
+                    const bonus = variant === normalize(tokens[i]) ? 50 : 30;
+                    tokenScore = Math.max(tokenScore, bonus);
+                    tokenMatches = true;
+                }
+            }
+            
+            if (!tokenMatches) {
+                allTokensMatch = false;
+                break;
+            }
+            totalScore += tokenScore;
+        }
+        
+        // All tokens must match (AND logic)
+        if (!allTokensMatch) return 0;
+        
+        // Bonus for exact phrase match in name
+        const fullQuery = tokens.join(' ');
+        if (normName.includes(normalize(fullQuery))) totalScore += 200;
+        
+        // Bonus for shorter names (more specific matches rank higher)
+        totalScore += Math.max(0, 50 - Math.floor(normName.length / 5));
+        
+        return totalScore;
+    }, []);
+
     // ─── Mapper les catégories dans les super-groupes ───
     const groupedData = useMemo(() => {
         const result: Record<string, InjuryCategory[]> = {};
@@ -373,31 +526,76 @@ export const AnalogCalculator: React.FC<AnalogCalculatorProps> = ({ onAddInjury 
         return { categories: disabilityData.length, injuries };
     }, []);
 
-    // ─── Résultats de recherche ───
+    // ─── Résultats de recherche sémantique (V3.3.354) ───
     const searchResults = useMemo(() => {
         if (!searchTerm.trim()) return null;
-        const lowercasedFilter = normalize(searchTerm.trim());
-        const filtered: InjuryCategory[] = [];
-
+        
+        // Tokenize search input (split on spaces, hyphens as separate tokens too)
+        const rawTokens = normalize(searchTerm.trim()).split(/\s+/).filter(t => t.length >= 2);
+        if (rawTokens.length === 0) return null;
+        
+        // Expand each token with synonyms
+        const expandedTokens = rawTokens.map(t => expandWithSynonyms(t));
+        
+        // Score all injuries
+        const scoredResults: Array<{ injury: Injury; category: InjuryCategory; subcategory: InjurySubcategory; score: number }> = [];
+        
         disabilityData.forEach(category => {
-            const matchingSubcategories: InjurySubcategory[] = [];
             category.subcategories.forEach(subcategory => {
-                const matchingInjuries = subcategory.injuries.filter(injury =>
-                    normalize(injury.name).includes(lowercasedFilter) ||
-                    normalize(injury.description || '').includes(lowercasedFilter) ||
-                    (injury.searchTerms && injury.searchTerms.some(t => normalize(t).includes(lowercasedFilter)))
-                );
-                if (matchingInjuries.length > 0) {
-                    matchingSubcategories.push({ ...subcategory, injuries: matchingInjuries });
-                }
+                subcategory.injuries.forEach(injury => {
+                    const score = scoreInjury(injury, rawTokens, expandedTokens);
+                    if (score > 0) {
+                        scoredResults.push({ injury, category, subcategory, score });
+                    }
+                });
             });
-            if (matchingSubcategories.length > 0 || normalize(category.name).includes(lowercasedFilter)) {
-                const subcategoriesToShow = matchingSubcategories.length > 0 ? matchingSubcategories : category.subcategories;
-                filtered.push({ ...category, subcategories: subcategoriesToShow });
+        });
+        
+        // Sort by score descending
+        scoredResults.sort((a, b) => b.score - a.score);
+        
+        // Rebuild category structure from scored results (preserving sort order)
+        const categoryMap = new Map<string, Map<string, Injury[]>>();
+        const categoryOrder: string[] = [];
+        
+        for (const { injury, category, subcategory } of scoredResults) {
+            if (!categoryMap.has(category.name)) {
+                categoryMap.set(category.name, new Map());
+                categoryOrder.push(category.name);
+            }
+            const subMap = categoryMap.get(category.name)!;
+            if (!subMap.has(subcategory.name)) {
+                subMap.set(subcategory.name, []);
+            }
+            subMap.get(subcategory.name)!.push(injury);
+        }
+        
+        // Convert back to InjuryCategory[]
+        const filtered: InjuryCategory[] = [];
+        for (const catName of categoryOrder) {
+            const originalCat = disabilityData.find(c => c.name === catName);
+            if (!originalCat) continue;
+            const subMap = categoryMap.get(catName)!;
+            const subcategories: InjurySubcategory[] = [];
+            for (const [subName, injuries] of subMap) {
+                const originalSub = originalCat.subcategories.find(s => s.name === subName);
+                if (originalSub) {
+                    subcategories.push({ ...originalSub, injuries });
+                }
+            }
+            filtered.push({ ...originalCat, subcategories });
+        }
+        
+        // Also include category-name matches
+        const lowercasedFilter = normalize(searchTerm.trim());
+        disabilityData.forEach(category => {
+            if (normalize(category.name).includes(lowercasedFilter) && !filtered.find(f => f.name === category.name)) {
+                filtered.push(category);
             }
         });
+        
         return filtered;
-    }, [searchTerm]);
+    }, [searchTerm, expandWithSynonyms, scoreInjury]);
 
     // ─── Compteur résultats de recherche ───
     const searchResultsCount = useMemo(() => {
@@ -458,6 +656,10 @@ export const AnalogCalculator: React.FC<AnalogCalculatorProps> = ({ onAddInjury 
         { label: 'Sciatique', term: 'sciatique' },
         { label: 'Épilepsie', term: 'épilepsie' },
         { label: 'Hémiplégie', term: 'hémiplégie' },
+        { label: 'Canal carpien', term: 'canal carpien' },
+        { label: 'Coiffe rotateurs', term: 'coiffe rotateurs' },
+        { label: 'Algodystrophie', term: 'algodystrophie' },
+        { label: 'Ménisque', term: 'ménisque' },
     ];
 
     // Resolve active group
@@ -645,7 +847,7 @@ export const AnalogCalculator: React.FC<AnalogCalculatorProps> = ({ onAddInjury 
                 </span>
                 <input
                     type="text"
-                    placeholder="Rechercher une lésion (ex: fracture, raideur, sciatique...)"
+                    placeholder="Recherche sémantique (ex: fracture genou, raideur épaule, hernie lombaire...)"
                     value={searchTerm}
                     onChange={e => { setSearchTerm(e.target.value); if (e.target.value) setActiveGroup(null); }}
                     className="w-full pl-10 pr-10 p-3 bg-white text-black placeholder:text-slate-400 border border-slate-300 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 transition-all shadow-sm"
@@ -846,7 +1048,7 @@ export const AnalogCalculator: React.FC<AnalogCalculatorProps> = ({ onAddInjury 
                 {searchTerm && searchResults && (
                     <>
                         {/* Statistiques de recherche */}
-                        <div className="flex items-center gap-2 text-xs mb-3 px-1">
+                        <div className="flex items-center gap-2 text-xs mb-3 px-1 flex-wrap">
                             <span className="inline-flex items-center gap-1.5 bg-primary-50 text-primary-700 px-2.5 py-1 rounded-full font-medium border border-primary-200">
                                 🔍 <strong>{searchResultsCount}</strong> résultat{searchResultsCount > 1 ? 's' : ''}
                             </span>
@@ -854,13 +1056,23 @@ export const AnalogCalculator: React.FC<AnalogCalculatorProps> = ({ onAddInjury 
                             <span className="inline-flex items-center gap-1.5 bg-slate-100 text-slate-600 px-2.5 py-1 rounded-full font-medium">
                                 <strong>{searchResults.length}</strong> catégorie{searchResults.length > 1 ? 's' : ''}
                             </span>
+                            {normalize(searchTerm.trim()).split(/\s+/).filter(t => t.length >= 2).some(t => {
+                                const normT = normalize(t);
+                                return Object.keys(MEDICAL_SYNONYMS).some(k => k === normT) ||
+                                    Object.values(MEDICAL_SYNONYMS).some(syns => syns.some(s => normalize(s) === normT || normalize(s).includes(normT)));
+                            }) && (
+                                <span className="inline-flex items-center gap-1 bg-amber-50 text-amber-700 px-2 py-0.5 rounded-full text-[10px] font-medium border border-amber-200">
+                                    🧠 Synonymes médicaux activés
+                                </span>
+                            )}
                         </div>
 
                         {searchResults.length === 0 ? (
                             <div className="text-center text-slate-500 py-10">
                                 <p className="text-4xl mb-3">🔍</p>
                                 <p className="text-base font-semibold mb-1">Aucun résultat trouvé</p>
-                                <p className="text-sm text-slate-400 mb-4">Essayez avec d'autres termes de recherche</p>
+                                <p className="text-sm text-slate-400 mb-2">Essayez avec d'autres termes de recherche</p>
+                                <p className="text-xs text-slate-400 mb-4">💡 Essayez des termes plus généraux comme « fracture », « raideur », « genou »</p>
                                 <button
                                     onClick={() => setSearchTerm('')}
                                     className="text-sm text-primary-600 hover:text-primary-800 font-medium underline underline-offset-2"
