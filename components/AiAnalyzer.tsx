@@ -16131,12 +16131,12 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
                         'Main Non Dominante': { name: "Ablation 3 phalanges du médius (Main Non Dominante)", rate: [7, 8], desc: "Amputation au niveau P1 — perte des 3 phalanges du médius." }
                     },
                     'MCP': { 
-                        'Main Dominante': { name: "Désarticulation métacarpo-phalangienne du médius (Main Dominante)", rate: 10, desc: "Amputation totale du médius au niveau MCP." },
-                        'Main Non Dominante': { name: "Désarticulation métacarpo-phalangienne du médius (Main Non Dominante)", rate: 8, desc: "Amputation totale du médius." }
+                        'Main Dominante': { name: "Désarticulation métacarpo-phalangienne du médius (Main Dominante)", rate: 12, desc: "Amputation totale du médius au niveau MCP. Barème officiel 1967." },
+                        'Main Non Dominante': { name: "Ablation 3 phalanges du médius (Main Non Dominante)", rate: 10, desc: "Amputation totale du médius. Barème officiel 1967." }
                     },
                     'total': { 
-                        'Main Dominante': { name: "Désarticulation métacarpo-phalangienne du médius (Main Dominante)", rate: 10, desc: "Amputation totale du médius." },
-                        'Main Non Dominante': { name: "Désarticulation métacarpo-phalangienne du médius (Main Non Dominante)", rate: 8, desc: "Amputation totale du médius." }
+                        'Main Dominante': { name: "Désarticulation métacarpo-phalangienne du médius (Main Dominante)", rate: 12, desc: "Amputation totale du médius. Barème officiel 1967." },
+                        'Main Non Dominante': { name: "Ablation 3 phalanges du médius (Main Non Dominante)", rate: 10, desc: "Amputation totale du médius. Barème officiel 1967." }
                     }
                 },
                 'annulaire': {
@@ -16153,12 +16153,12 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
                         'Main Non Dominante': { name: "Ablation 3 phalanges de l'annulaire (Main Non Dominante)", rate: [6, 7], desc: "Amputation au niveau P1 — perte des 3 phalanges de l'annulaire." }
                     },
                     'MCP': { 
-                        'Main Dominante': { name: "Désarticulation métacarpo-phalangienne de l'annulaire (Main Dominante)", rate: 9, desc: "Amputation totale de l'annulaire au niveau MCP." },
-                        'Main Non Dominante': { name: "Désarticulation métacarpo-phalangienne de l'annulaire (Main Non Dominante)", rate: 7, desc: "Amputation totale de l'annulaire." }
+                        'Main Dominante': { name: "Désarticulation métacarpo-phalangienne de l'annulaire (Main Dominante)", rate: 10, desc: "Amputation totale de l'annulaire au niveau MCP. Barème officiel 1967." },
+                        'Main Non Dominante': { name: "Désarticulation métacarpo-phalangienne de l'annulaire (Main Non Dominante)", rate: 10, desc: "Amputation totale de l'annulaire. Barème officiel 1967." }
                     },
                     'total': { 
-                        'Main Dominante': { name: "Désarticulation métacarpo-phalangienne de l'annulaire (Main Dominante)", rate: 9, desc: "Amputation totale de l'annulaire." },
-                        'Main Non Dominante': { name: "Désarticulation métacarpo-phalangienne de l'annulaire (Main Non Dominante)", rate: 7, desc: "Amputation totale de l'annulaire." }
+                        'Main Dominante': { name: "Désarticulation métacarpo-phalangienne de l'annulaire (Main Dominante)", rate: 10, desc: "Amputation totale de l'annulaire. Barème officiel 1967." },
+                        'Main Non Dominante': { name: "Désarticulation métacarpo-phalangienne de l'annulaire (Main Non Dominante)", rate: 10, desc: "Amputation totale de l'annulaire. Barème officiel 1967." }
                     }
                 },
                 'auriculaire': {
@@ -16175,12 +16175,12 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
                         'Main Non Dominante': { name: "Ablation 3 phalanges de l'auriculaire (Main Non Dominante)", rate: [5, 6], desc: "Amputation au niveau P1 — perte des 3 phalanges de l'auriculaire." }
                     },
                     'MCP': { 
-                        'Main Dominante': { name: "Désarticulation métacarpo-phalangienne de l'auriculaire (Main Dominante)", rate: 8, desc: "Amputation totale de l'auriculaire au niveau MCP." },
-                        'Main Non Dominante': { name: "Désarticulation métacarpo-phalangienne de l'auriculaire (Main Non Dominante)", rate: 6, desc: "Amputation totale de l'auriculaire." }
+                        'Main Dominante': { name: "Désarticulation métacarpo-phalangienne de l'auriculaire (Main Dominante)", rate: 8, desc: "Amputation totale de l'auriculaire au niveau MCP. Barème officiel 1967." },
+                        'Main Non Dominante': { name: "Désarticulation métacarpo-phalangienne de l'auriculaire (Main Non Dominante)", rate: 8, desc: "Amputation totale de l'auriculaire. Barème officiel 1967." }
                     },
                     'total': { 
-                        'Main Dominante': { name: "Désarticulation métacarpo-phalangienne de l'auriculaire (Main Dominante)", rate: 8, desc: "Amputation totale de l'auriculaire." },
-                        'Main Non Dominante': { name: "Désarticulation métacarpo-phalangienne de l'auriculaire (Main Non Dominante)", rate: 6, desc: "Amputation totale de l'auriculaire." }
+                        'Main Dominante': { name: "Désarticulation métacarpo-phalangienne de l'auriculaire (Main Dominante)", rate: 8, desc: "Amputation totale de l'auriculaire. Barème officiel 1967." },
+                        'Main Non Dominante': { name: "Désarticulation métacarpo-phalangienne de l'auriculaire (Main Non Dominante)", rate: 8, desc: "Amputation totale de l'auriculaire. Barème officiel 1967." }
                     }
                 }
             };
