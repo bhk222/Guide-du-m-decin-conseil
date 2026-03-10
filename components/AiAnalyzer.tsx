@@ -6856,7 +6856,8 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             pattern: /fracture.*m[eé]tacarp|m[eé]tacarp.*fractur/i,
             context: /raideur|s[eé]quelle|cal\s*vicieux|douleur|g[eêe]ne|limitation/i,
             searchTerms: ["Séquelles de fracture de métacarpien (cal vicieux, raideur) (Main Dominante)"],
-            priority: 10800
+            priority: 10800,
+            negativeContext: /l[eé]sion.*tendin|tendineu|section.*tendon|rupture.*tendon/i
         },
         // Fracture métacarpien sans séquelles spécifiées → même entrée barème (séquelles de fracture)
         {
@@ -6864,7 +6865,14 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             context: /main|doigt|poing|prise|pince|os/i,
             searchTerms: ["Séquelles de fracture de métacarpien (cal vicieux, raideur) (Main Dominante)"],
             priority: 10750,
-            negativeContext: /perte\s+(?:de\s+)?substance\s+osseuse|d[eé]viation\s+main/i
+            negativeContext: /perte\s+(?:de\s+)?substance\s+osseuse|d[eé]viation\s+main|l[eé]sion.*tendin|tendineu/i
+        },
+        // === 🆕 V3.3.354: RÈGLE LÉSIONS TENDINEUSES MAIN/DOIGTS ===
+        {
+            pattern: /l[eé]sion[s]?\s+tendineu/i,
+            context: /main|doigt|pr[eé]hension|m[eé]tacarp|phalang|force/i,
+            searchTerms: ["Section des tendons fléchisseurs doigt long"],
+            priority: 10600
         },
         
         // === RÈGLES FRACTURES DE PHALANGES ===
@@ -13950,7 +13958,7 @@ export const detectMultipleLesions = (text: string): {
     // NE PAS détecter comme cumul (raideur et séquelles sont des CONSÉQUENCES de la fracture, pas des lésions distinctes)
     const isMetacarpalFractureText = /fracture.*m[eé]tacarp|m[eé]tacarp.*fractur/i.test(normalized);
     if (isMetacarpalFractureText) {
-        const hasOtherDistinctLesionMC = /fracture.*(?:femur|tibia|humerus|clavicule|bassin|cote|rotule|plateau|radius|poignet|calcaneum|scaphoide|vertebr)|luxation.*(?:epaule|hanche|genou)|hernie.*discale|section.*tendon|rupture.*tendon|amputation/i.test(normalized);
+        const hasOtherDistinctLesionMC = /fracture.*(?:femur|tibia|humerus|clavicule|bassin|cote|rotule|plateau|radius|poignet|calcaneum|scaphoide|vertebr)|luxation.*(?:epaule|hanche|genou)|hernie.*discale|section.*tendon|rupture.*tendon|l[eé]sion.*tendin|tendineu|amputation/i.test(normalized);
         if (!hasOtherDistinctLesionMC) {
             console.log('🖐️ [V3.3.353] Fracture simple métacarpien(s) → PAS de cumul (lésion main unique)');
             return { isCumul: false, lesionCount: 1, keywords: [], hasAnteriorState: false, anteriorIPP: null };
@@ -20685,6 +20693,85 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
         console.log(`💡 IPP antérieur estimé: ${estimatedPreviousIPP}% pour "${preexisting[0]}"`);
         
         contextInfo = `<br><br><em>⚠️ <strong>État antérieur identifié</strong> (antécédents médicaux AVANT l'accident du travail) : ${preexisting.join(', ')}.<br>Ces antécédents ne sont PAS à évaluer comme nouvelles lésions. Ils seront pris en compte dans le calcul final selon l'Article 12 (méthode de la capacité restante).<br><strong>IPP antérieur estimé : ${estimatedPreviousIPP}%</strong></em>`;
+    }
+
+    // 🆕 V3.3.354: HANDLER PRIORITAIRE - FRACTURES MÉTACARPIENS + LÉSIONS TENDINEUSES MAIN
+    // Cas: "Fractures métacarpiens multiples Lésions tendineuses. Raideur importante Force préhension diminuée"
+    // Ce sont 2 lésions distinctes (os + tendon) → cumul légitime
+    // Mais le cumul standard hallucine scaphoïde/radius → handler dédié avec les bons barèmes
+    try {
+        const isMetacarpalFracture354 = /fracture.*m[eé]tacarp|m[eé]tacarp.*fractur/i.test(normalized);
+        const hasTendonLesion354 = /l[eé]sion.*tendin|tendineu|section.*tendon|rupture.*tendon/i.test(normalized);
+        const isHandContext354 = /main|doigt|poing|pr[eé]hension|m[eé]tacarp/i.test(normalized);
+        
+        if (isMetacarpalFracture354 && hasTendonLesion354 && isHandContext354 && isCumulDetected) {
+            console.log('🖐️ [V3.3.354] HANDLER PRIORITAIRE: Fractures métacarpiens + Lésions tendineuses');
+            
+            // Detect dominance
+            const isNonDom354 = /non[\s-]*dominant/i.test(text);
+            const domLabel354 = isNonDom354 ? 'Main Non Dominante' : 'Main Dominante';
+            
+            // Severity indicators
+            const isMultiple354 = /multiples?|plusieurs|plurifocale/i.test(normalized);
+            const isSevereStiffness354 = /raideur\s*important|important.*raideur|raideur\s*majeur|raideur\s*s[eé]v[eè]r/i.test(normalized);
+            const hasForceDeficit354 = /force.*diminu|pr[eé]hension.*diminu|perte.*force|d[eé]ficit.*force|pr[eé]hension.*r[eé]duite|force.*r[eé]duite/i.test(normalized);
+            const isCrush354 = /[eé]cras|broy|encastr|machine.*industriel/i.test(normalized);
+            
+            // Determine severity for metacarpal fracture [5-15%]
+            let metacarpalRate354 = 8;
+            if (isMultiple354 || isCrush354) metacarpalRate354 = 12;
+            if (isSevereStiffness354 || hasForceDeficit354) metacarpalRate354 = Math.min(metacarpalRate354 + 2, 15);
+            if (isMultiple354 && (isSevereStiffness354 || hasForceDeficit354)) metacarpalRate354 = 15;
+            
+            // Determine severity for tendon lesion [8-12%]
+            let tendonRate354 = 10;
+            if (hasForceDeficit354 || isCrush354) tendonRate354 = 12;
+            
+            // Balthazard cumul (higher first)
+            const rate1_354 = Math.max(metacarpalRate354, tendonRate354);
+            const rate2_354 = Math.min(metacarpalRate354, tendonRate354);
+            const contrib2_354 = Math.round(rate2_354 * (100 - rate1_354) / 100);
+            const ippTotal354 = rate1_354 + contrib2_354;
+            
+            // Barème references
+            const metacarpalEntry354 = isNonDom354
+                ? 'Fracture métacarpienne - Cal difforme, gêne motrice (Main Non Dominante)'
+                : 'Fracture métacarpienne - Cal plus ou moins difforme, saillant, gêne motrice doigts (Main Dominante)';
+            const tendonEntry354 = 'Section des tendons fléchisseurs doigt long';
+            
+            const severityDesc354 = [
+                isMultiple354 ? 'fractures multiples' : null,
+                isCrush354 ? 'écrasement industriel' : null,
+                isSevereStiffness354 ? 'raideur importante' : null,
+                hasForceDeficit354 ? 'force de préhension diminuée' : null
+            ].filter(Boolean).join(', ');
+            
+            const justification354 = `<div style="background: linear-gradient(135deg, #f0f9ff, #e8f4f8); border-left: 4px solid #0ea5e9; padding: 16px; border-radius: 12px; margin: 8px 0;">
+<strong>🔗 POLYTRAUMATISME MAIN - CUMUL 2 LÉSIONS</strong><br><br>
+<strong>📋 Lésions identifiées :</strong><br>
+• <strong>Lésion 1 :</strong> ${metacarpalEntry354} = <strong>${metacarpalRate354}%</strong><br>
+&nbsp;&nbsp;📖 Barème : Main - Métacarpe [5-15%] (${domLabel354})<br>
+• <strong>Lésion 2 :</strong> ${tendonEntry354} = <strong>${tendonRate354}%</strong><br>
+&nbsp;&nbsp;📖 Barème : Doigts - Lésions Tendineuses [8-12%]<br><br>
+<strong>💡 Formule de Balthazard (cumul) :</strong><br>
+IPP_total = IPP₁ + IPP₂ × (100 - IPP₁) / 100<br>
+IPP_total = ${rate1_354}% + ${rate2_354}% × (100 - ${rate1_354}) / 100 = ${rate1_354}% + ${contrib2_354}% = <strong>${ippTotal354}%</strong><br><br>
+${severityDesc354 ? `<strong>🔍 Indicateurs de sévérité :</strong> ${severityDesc354}<br><br>` : ''}
+<strong>📊 IPP TOTAL CUMULÉ = ${ippTotal354}%</strong><br><br>
+<em>⚖️ Base juridique : Article 12 du Code de la Sécurité Sociale (méthode de la capacité restante)</em>
+</div>${contextInfo}`;
+            
+            return {
+                type: 'proposal',
+                name: `${metacarpalEntry354} + ${tendonEntry354}`,
+                rate: ippTotal354,
+                justification: justification354,
+                path: 'Main > Métacarpe + Doigts - Lésions Tendineuses',
+                injury: undefined
+            } as any;
+        }
+    } catch (e) {
+        console.error('Erreur handler fractures métacarpiens + tendon:', e);
     }
 
     // 🆕 Étape 3B: SI CUMUL DÉTECTÉ → Analyser chaque lésion séparément (V3.3.52)
