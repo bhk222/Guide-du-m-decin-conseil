@@ -6851,6 +6851,22 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             priority: 9850
         },
         
+        // === 🆕 V3.3.353: RÈGLE FRACTURE MÉTACARPIEN(S) AVEC RAIDEUR/SÉQUELLES ===
+        {
+            pattern: /fracture.*m[eé]tacarp|m[eé]tacarp.*fractur/i,
+            context: /raideur|s[eé]quelle|cal\s*vicieux|douleur|g[eêe]ne|limitation/i,
+            searchTerms: ["Séquelles de fracture de métacarpien (cal vicieux, raideur) (Main Dominante)"],
+            priority: 10800
+        },
+        // Fracture métacarpien sans séquelles spécifiées → même entrée barème (séquelles de fracture)
+        {
+            pattern: /fracture[s]?\s+(?:\d+[eè](?:me)?(?:\s+et\s+\d+[eè](?:me)?)?\s+)?m[eé]tacarp/i,
+            context: /main|doigt|poing|prise|pince|os/i,
+            searchTerms: ["Séquelles de fracture de métacarpien (cal vicieux, raideur) (Main Dominante)"],
+            priority: 10750,
+            negativeContext: /perte\s+(?:de\s+)?substance\s+osseuse|d[eé]viation\s+main/i
+        },
+        
         // === RÈGLES FRACTURES DE PHALANGES ===
         // === RÈGLES DOIGTS SPÉCIFIQUES V3.3.133 ===
         {
@@ -13925,6 +13941,18 @@ export const detectMultipleLesions = (text: string): {
         const hasOtherDistinctLesionMT = /fracture.*(?:femur|tibia|humerus|clavicule|bassin|cote|rotule|plateau|radius|poignet|calcaneum|astragale|cheville|malleol|bimalleol|scaphoide|vertebr)|luxation.*(?:epaule|hanche|genou)|hernie.*discale/i.test(normalized);
         if (!hasOtherDistinctLesionMT) {
             console.log('🦶 [V3.3.317d] Fracture simple métatarsien(s) → PAS de cumul (lésion pied unique)');
+            return { isCumul: false, lesionCount: 1, keywords: [], hasAnteriorState: false, anteriorIPP: null };
+        }
+    }
+    
+    // 🆕 V3.3.353: EXCEPTION FRACTURE SIMPLE MÉTACARPIEN(S)
+    // Fracture(s) métacarpien(s) + raideur doigts + séquelles = UNE SEULE lésion de la main
+    // NE PAS détecter comme cumul (raideur et séquelles sont des CONSÉQUENCES de la fracture, pas des lésions distinctes)
+    const isMetacarpalFractureText = /fracture.*m[eé]tacarp|m[eé]tacarp.*fractur/i.test(normalized);
+    if (isMetacarpalFractureText) {
+        const hasOtherDistinctLesionMC = /fracture.*(?:femur|tibia|humerus|clavicule|bassin|cote|rotule|plateau|radius|poignet|calcaneum|scaphoide|vertebr)|luxation.*(?:epaule|hanche|genou)|hernie.*discale|section.*tendon|rupture.*tendon|amputation/i.test(normalized);
+        if (!hasOtherDistinctLesionMC) {
+            console.log('🖐️ [V3.3.353] Fracture simple métacarpien(s) → PAS de cumul (lésion main unique)');
             return { isCumul: false, lesionCount: 1, keywords: [], hasAnteriorState: false, anteriorIPP: null };
         }
     }
