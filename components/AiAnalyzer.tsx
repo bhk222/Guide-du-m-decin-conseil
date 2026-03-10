@@ -9937,9 +9937,10 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             searchTerms: ['Ankylose du coude en position vicieuse'],
             priority: 98
         },
+        // 🔧 V3.3.351: Accepter singulier "tendon fléchisseur"
         {
-            pattern: /section.*tendons.*fléchisseurs.*(?:médius|index|annulaire|doigt)/i,
-            context: /impossibilité.*flexion|flexion.*active|raideur/i,
+            pattern: /section.*tendons?.*fl[eé]chisseurs?.*(?:m[eé]dius|index|annulaire|auriculaire|doigt)/i,
+            context: /impossibilit[eé].*flexion|flexion.*active|raideur|tendon.*fl[eé]chisseur|section.*tendon/i,
             searchTerms: ["Section des tendons fléchisseurs doigt long"],
             priority: 100
         },
@@ -10097,31 +10098,35 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             negativeContext: /non.*dominante/i
         },
         // 🆕 RÈGLE EXACTE pour cas médius spécifique
+        // 🔧 V3.3.351: Accepter singulier + contexte élargi
         {
-            pattern: /section\s+tendons\s+fléchisseurs\s+médius/i,
-            context: /impossibilité\s+flexion\s+active/i,
+            pattern: /section\s+tendons?\s+fléchisseurs?\s+médius/i,
+            context: /impossibilité\s+flexion\s+active|tendon.*fléchisseur|section.*tendon/i,
             searchTerms: ["Section des tendons fléchisseurs d'un doigt long"],
             priority: 999,
             negativeContext: /extenseurs/i  // Simple et efficace
         },
+        // 🔧 V3.3.351: Accepter singulier + contexte élargi
         {
-            pattern: /section.*tendons.*(?:fléchisseurs|flexion).*(?:médius|doigt.*long)/i,
-            context: /impossibilité.*flexion|flexion.*active/i,
+            pattern: /section.*tendons?.*(?:fléchisseurs?|flexion).*(?:médius|doigt.*long)/i,
+            context: /impossibilité.*flexion|flexion.*active|tendon.*fléchisseur|section.*tendon/i,
             searchTerms: ["Section des tendons fléchisseurs d'un doigt long"],
             priority: 998,
             negativeContext: /extenseurs|amputation|ankylose/i
         },
         // 🆕 V3.3.129: RUPTURE FLÉCHISSEUR D'UN DOIGT (index, médius, annulaire, auriculaire)
+        // 🔧 V3.3.351: Préposition optionnelle + contexte élargi
         {
-            pattern: /(?:rupture|repture|section|l[eé]sion).*(?:du|des)?.*(?:tendon|tendons)?.*fl[eéè]chiss?eur.*(?:du|de\s+la|du\s+p[1-3]|de\s+p[1-3]).*(?:d[2-5]|index|m[eé]dius|annulaire|auriculaire)/i,
-            context: /doigt|main|phalange|flexion/i,
+            pattern: /(?:rupture|repture|section|l[eé]sion).*(?:du|des)?.*(?:tendon|tendons)?.*fl[eéè]chiss?eur.*(?:du|de\s+la|du\s+p[1-3]|de\s+p[1-3])?.*(?:d[2-5]|index|m[eé]dius|annulaire|auriculaire)/i,
+            context: /doigt|main|phalange|flexion|index|m[eé]dius|annulaire|auriculaire|tendon|fl[eé]chisseur/i,
             searchTerms: ["Section des tendons fléchisseurs doigt long"],
             priority: 999,
             negativeContext: /extenseur|pouce/i
         },
+        // 🔧 V3.3.351: Contexte élargi - inclure noms des doigts et termes tendon
         {
             pattern: /(?:rupture|repture|section|l[eé]sion).*(?:du|des)?.*fl[eéè]chiss?eur.*(?:d[2-5]|index|m[eé]dius|annulaire|auriculaire)/i,
-            context: /doigt|main|phalange|p[1-3]/i,
+            context: /doigt|main|phalange|p[1-3]|index|m[eé]dius|annulaire|auriculaire|tendon|fl[eé]chisseur/i,
             searchTerms: ["Section des tendons fléchisseurs doigt long"],
             priority: 998,
             negativeContext: /extenseur|pouce/i
@@ -10294,9 +10299,10 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             negativeContext: /sans.*complication/i
         },
         // 🆕 V3.3.130-P7: SECTION TENDONS FLÉCHISSEURS DOIGTS (PRIORITÉ ABSOLUE)
+        // 🔧 V3.3.351: Accepter singulier "tendon fléchisseur" + contexte élargi
         {
-            pattern: /section.*tendons.*fl[eé]chisseurs.*(?:m[eé]dius|index|annulaire|doigt|doigts)/i,
-            context: /impossibilit[eé].*flexion.*active|raideur.*doigt|impossibilit[eé].*flexion|perte.*fonction/i,
+            pattern: /section.*tendons?.*fl[eé]chisseurs?.*(?:m[eé]dius|index|annulaire|auriculaire|doigt|doigts)/i,
+            context: /impossibilit[eé].*flexion.*active|raideur.*doigt|impossibilit[eé].*flexion|perte.*fonction|tendon.*fl[eé]chisseur|section.*tendon|flexion.*partielle/i,
             searchTerms: ['Section des tendons fléchisseurs doigt long'],
             priority: 10500,
             negativeContext: /r[eé]paration.*r[eé]ussie|r[eé]cup[eé]ration.*compl[eè]te/i
