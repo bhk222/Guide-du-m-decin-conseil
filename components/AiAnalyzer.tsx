@@ -8215,11 +8215,14 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
         // Problème Cas 10: "commotion + syndrome dysexécutif" matchait "Commotion cérébro-spinale" (5-60%)
         // au lieu de "Syndrome dysexécutif post-traumatique" (20-50%)
         // PRIORITÉ 1034 > 1001 (Commotion prolongée)
+        // 🆕 V3.3.358: Ajout "syndrome frontal", "troubles des fonctions exécutives" comme synonymes
+        // + negativeContext pour TC graves (Glasgow ≤8, craniectomie, hématome sous-dural) → déférer au cumul TC grave
         {
-            pattern: /syndrome\s+dys[eé]x[eé]cutif|dys[eé]x[eé]cutif|troubles?\s+(?:de\s+)?(?:la\s+)?planification.*(?:inhibition|apathie)|d[eé]ficit.*fonctions?\s+ex[eé]cutiv/i,
-            context: /post.*traumatique|traumatisme|s[eé]quell|TC|cr[aâ]nien|commotion|inhibition|apathie|organisation|planification/i,
+            pattern: /syndrome\s+dys[eé]x[eé]cutif|dys[eé]x[eé]cutif|syndrome\s+frontal|troubles?\s+(?:des?\s+)?fonctions?\s+ex[eé]cutiv|troubles?\s+(?:de\s+)?(?:la\s+)?planification.*(?:inhibition|apathie)|d[eé]ficit.*fonctions?\s+ex[eé]cutiv/i,
+            context: /post.*traumatique|traumatisme|s[eé]quell|TC|cr[aâ]nien|commotion|inhibition|apathie|organisation|planification|comportement|m[eé]moire|attention/i,
             searchTerms: ["Syndrome dysexécutif post-traumatique (troubles de la planification, inhibition)"],
             priority: 1034,
+            negativeContext: /Glasgow.*[3-8]|craniectomie|h[eé]matome.*sous.*dural/i,
         },
         
         // === 🆕 V3.3.213: TC AVEC HÉMIPARÉSIE → CONTUSIONS CÉRÉBRALES (PRIORITÉ MAXIMALE) ===
@@ -8264,12 +8267,15 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
         // Solution: Expert rule détectant TC grave + marker pour cumul Balthazard (céphalées + cognitif + épilepsie)
         // PRIORITÉ 1020 > 1001 (règle "Commotion cérébro-spinale prolongée" ligne 3751)
         // 🆕 V3.3.343: Ajout embarrure comme marqueur de sévérité, comitial/antiépileptique comme marqueurs d'épilepsie
+        // 🆕 V3.3.358: negativeContext affiné - "légère" ne doit exclure que quand il qualifie le TC lui-même,
+        // pas un symptôme résiduel mineur (ex: "légère maladresse de l'hémicorps gauche" dans un Glasgow 7)
+        // + Ajout craniectomie et syndrome frontal comme marqueurs de sévérité dans le pattern
         {
-            pattern: /traumatisme.*cr[aâ]nien.*(?:s[eé]v[eè]re|grave|embarrure)|(?:TC|traumatisme.*cr[aâ]nien).*(?:[eé]pilepsie|comitial|convuls|anti[eé]pileptique|troubles?.*cognitif)|Glasgow.*[3-8]|h[eé]matome.*sous.*dural/i,
-            context: /c[eé]phal[eé]|m[eé]moire|cognitif|[eé]pilepsie|comitial|anti[eé]pileptique|MMS|troubles?.*cognitif|d[eé]ficit/i,
+            pattern: /traumatisme.*cr[aâ]nien.*(?:s[eé]v[eè]re|grave|embarrure)|(?:TC|traumatisme.*cr[aâ]nien).*(?:[eé]pilepsie|comitial|convuls|anti[eé]pileptique|troubles?.*cognitif)|Glasgow.*[3-8]|h[eé]matome.*sous.*dural|craniectomie/i,
+            context: /c[eé]phal[eé]|m[eé]moire|cognitif|[eé]pilepsie|comitial|anti[eé]pileptique|MMS|troubles?.*cognitif|d[eé]ficit|syndrome.*frontal|fonctions?.*ex[eé]cutiv|anosmie|comportement/i,
             searchTerms: ["__CUMUL_TC_GRAVE__"],  // Marker spécial pour traitement custom cumul
             priority: 1020,  // PRIORITÉ MAX (AVANT règle commotion ligne 3751 priorité 1001)
-            negativeContext: /l[eé]ger|simple.*sans/i
+            negativeContext: /(?:TC|traumatisme|commotion)[\s,]+l[eé]g[eè]re?|l[eé]g[eè]re?[\s,]+(?:TC|traumatisme|commotion|cr[aâ]nien)|simple.*sans/i
         },
         
         // === RÈGLE AMPUTATION MAIN COMPLÈTE (V3.3.36 - FIX CAS 14) ===
@@ -10664,14 +10670,12 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
                 !rule.searchTerms.includes("__RAIDEUR_MEDIUS_DOMINANTE__")) {
                 
                 // 🆕 V3.3.342: Si __CUMUL_TC_GRAVE__ a matché, skip les règles simples TC-related
+                // 🆕 V3.3.358: Étendu — quand TC grave cumul est détecté, TOUTES les règles simples
+                // de moindre priorité sont bloquées car le handler cumul (boucle 2) calcule le résultat
+                // complet. Sans ce guard, des règles parasites (ex: Whiplash via "céphalées") captent le cas.
                 if (matchedSpecialCumulRule === "__CUMUL_TC_GRAVE__") {
-                    const isTcRelatedRule = rule.searchTerms.some(term => 
-                        /cognitif|[eé]pilepsie|commotion|c[eé]phal[eé]|syndrome.*subjectif|d[eé]ficit.*mn[eé]sique/i.test(term)
-                    );
-                    if (isTcRelatedRule) {
-                        console.log(`⏭️ [V3.3.342] Skip TC-related simple rule "${rule.searchTerms[0]}" (priority ${rule.priority}) car __CUMUL_TC_GRAVE__ détecté`);
-                        continue;
-                    }
+                    console.log(`⏭️ [V3.3.358] Skip simple rule "${rule.searchTerms[0]}" (priority ${rule.priority}) car __CUMUL_TC_GRAVE__ détecté → sera traité en boucle 2`);
+                    continue;
                 }
                 
                 // 🆕 V3.3.343: Si __CUMUL_SURDITE_ACOUPHENES_INVALIDANTS__ a matché, skip les règles simples surdité/acouphènes
@@ -11574,34 +11578,66 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
                 const hasEpilepsy = /[eé]pilepsie(?:.*post.*traumatique)?|crises?.*[eé]pileptiques?|crises?.*comitiales?/i.test(normalizedInputText);
                 const hasPsychiatric = /troubles?.*(?:humeur|d[eé]pression|anxi[eé]t[eé])|suivi.*psychiatrique/i.test(normalizedInputText);
                 
+                // 🆕 V3.3.358: Détection syndrome frontal/dysexécutif (barème [20-50%] — plus spécifique que "troubles cognitifs" générique)
+                // Le syndrome frontal inclut: troubles exécutifs (planification, organisation) + troubles comportement (apathie, impulsivité)
+                // + troubles mémoire/attention. C'est un syndrome UNITAIRE qui remplace les "troubles cognitifs" génériques.
+                const hasSyndromeFrontal = /syndrome\s+(?:frontal|dys[eé]x[eé]cutif)|dys[eé]x[eé]cutif|troubles?\s+(?:des?\s+)?fonctions?\s+ex[eé]cutiv|difficult[eé].*planifier.*organiser/i.test(normalizedInputText);
+                const hasBehavioralChanges = /apathie|impulsivit[eé]|irritabilit[eé]|changement.*personnalit[eé]|troubles?.*comportement/i.test(normalizedInputText);
+                // 🆕 V3.3.358: Détection anosmie (lésion distincte — cisaillement nerfs olfactifs, barème [5-10%])
+                const hasAnosmie = /anosmie|perte.*(?:totale?\s+)?(?:de\s+)?(?:l[''])?odorat/i.test(normalizedInputText);
+                
                 // 🆕 V3.3.342: Pour un TC grave, les céphalées post-commotionnelles sont quasi-systématiques
                 // Si le texte dit "TC grave" sans mentionner explicitement les céphalées, les inclure par défaut
                 const isTcGrave = /(?:TC|traumatisme.*cr[aâ]nien).*(?:grave|s[eé]v[eè]re)/i.test(normalizedInputText);
-                const hasCephaleesEffective = hasCephalees || (isTcGrave && (hasCognitiveDeficit || hasEpilepsy));
+                const hasCraniectomie = /craniectomie|craniotomie|neurochirurgie/i.test(normalizedInputText);
+                const hasCephaleesEffective = hasCephalees || (isTcGrave && (hasCognitiveDeficit || hasEpilepsy)) || (glasgowScore !== null && glasgowScore <= 8 && hasCognitiveDeficit);
+                
+                // 🆕 V3.3.358: IPP syndrome frontal/dysexécutif (barème [20-50%])
+                // Si syndrome frontal + troubles comportement majeurs (apathie, impulsivité) → haut de fourchette
+                // Glasgow ≤8 ou craniectomie = sévérité maximale
+                let ippDysexecutif = 0;
+                if (hasSyndromeFrontal) {
+                    const isSevere = (glasgowScore !== null && glasgowScore <= 8) || hasCraniectomie;
+                    if (isSevere && hasBehavioralChanges) {
+                        ippDysexecutif = 45; // [20-50%] haut de fourchette: TC grave + syndrome frontal + troubles comportement
+                    } else if (hasBehavioralChanges) {
+                        ippDysexecutif = 38; // Syndrome frontal avec troubles comportement mais sans marqueur coma/chirurgie
+                    } else {
+                        ippDysexecutif = 30; // Syndrome frontal/dysexécutif isolé
+                    }
+                    console.log(`🧠 [V3.3.358] Syndrome frontal/dysexécutif détecté → IPP ${ippDysexecutif}% (severe: ${isSevere}, behavioral: ${hasBehavioralChanges})`);
+                }
                 
                 // Calcul IPP individuel de chaque séquelle
+                // 🆕 V3.3.358: Le syndrome frontal/dysexécutif REMPLACE le cognitif générique (les troubles
+                // mémoire/attention font PARTIE du syndrome frontal — pas d'addition)
                 const ippCephalees = hasCephaleesEffective ? 15 : 0;
-                const ippCognitif = hasCognitiveDeficit ? (mmsScore && mmsScore <= 20 ? 40 : 30) : 0;
+                const ippCognitif = ippDysexecutif > 0 ? 0 : (hasCognitiveDeficit ? (mmsScore && mmsScore <= 20 ? 40 : 30) : 0);
                 const ippEpilepsie = hasEpilepsy ? 25 : 0;
                 const ippPsychiatric = hasPsychiatric ? 10 : 0;
+                const ippAnosmie = hasAnosmie ? 8 : 0; // Barème [5-10%], anosmie totale post-traumatique → 8%
                 
                 // 🆕 V3.3.341: Si aucune séquelle spécifique détectée mais TC grave confirmé,
                 // attribuer au minimum un syndrome post-commotionnel sévère
-                if (ippCephalees === 0 && ippCognitif === 0 && ippEpilepsie === 0 && ippPsychiatric === 0) {
+                if (ippCephalees === 0 && ippCognitif === 0 && ippDysexecutif === 0 && ippEpilepsie === 0 && ippPsychiatric === 0) {
                     // TC grave sans séquelles spécifiques détaillées → syndrome post-commotionnel sévère par défaut
                     // Ce cas arrive quand l'utilisateur écrit juste 'TC grave avec épilepsie' sans détailler les céphalées
                 }
                 
-                // Formule Balthazard cumul progressif: IPP1 + IPP2×(100-IPP1)/100 + IPP3×(100-IPP1-IPP2×0.85)/100 + ...
-                let ippTotal = ippCephalees;
-                if (ippCognitif > 0) {
-                    ippTotal += ippCognitif * (100 - ippTotal) / 100;
-                }
-                if (ippEpilepsie > 0) {
-                    ippTotal += ippEpilepsie * (100 - ippTotal) / 100;
-                }
-                if (ippPsychiatric > 0) {
-                    ippTotal += ippPsychiatric * (100 - ippTotal) / 100;
+                // Formule Balthazard cumul progressif: IPP1 + IPP2×(100-IPP1)/100 + IPP3×(100-cumul)/100 + ...
+                // 🆕 V3.3.358: Ordre décroissant par IPP pour Balthazard correct
+                const cumulComponents = [
+                    { name: 'dysexecutif', ipp: ippDysexecutif },
+                    { name: 'cognitif', ipp: ippCognitif },
+                    { name: 'epilepsie', ipp: ippEpilepsie },
+                    { name: 'cephalees', ipp: ippCephalees },
+                    { name: 'psychiatric', ipp: ippPsychiatric },
+                    { name: 'anosmie', ipp: ippAnosmie },
+                ].filter(c => c.ipp > 0).sort((a, b) => b.ipp - a.ipp);
+                
+                let ippTotal = 0;
+                for (const comp of cumulComponents) {
+                    ippTotal += comp.ipp * (100 - ippTotal) / 100;
                 }
                 
                 const ippFinal = Math.round(ippTotal);
@@ -11610,10 +11646,18 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
                 let justification = `<strong>⚠️ TRAUMATISME CRÂNIEN GRAVE - CUMUL SÉQUELLES MULTIPLES</strong><br><br>`;
                 justification += `📊 <strong>Données cliniques initiales</strong> :<br>`;
                 if (glasgowScore) justification += `&nbsp;&nbsp;• Glasgow initial : <strong>${glasgowScore}/15</strong> (TC sévère si ≤8)<br>`;
+                if (hasCraniectomie) justification += `&nbsp;&nbsp;• Neurochirurgie : craniectomie/craniotomie<br>`;
                 if (mmsScore) justification += `&nbsp;&nbsp;• MMS (Mini Mental State) : <strong>${mmsScore}/30</strong> (normal ≥27)<br>`;
                 justification += `<br>💡 <strong>FORMULE DE BALTHAZARD - CUMUL SÉQUELLES INDÉPENDANTES</strong> :<br><br>`;
                 
                 let stepNum = 1;
+                if (ippDysexecutif > 0) {
+                    justification += `<strong>${stepNum}️⃣ Syndrome dysexécutif / frontal post-traumatique</strong> : <strong>${ippDysexecutif}%</strong><br>`;
+                    justification += `&nbsp;&nbsp;• Rubrique : "Séquelles Crâniennes > Syndrome dysexécutif post-traumatique" [20-50%]<br>`;
+                    if (hasBehavioralChanges) justification += `&nbsp;&nbsp;• Troubles du comportement associés (apathie, impulsivité, changement de personnalité)<br>`;
+                    justification += `&nbsp;&nbsp;• Troubles des fonctions exécutives, mémoire et attention inclus dans le syndrome<br>`;
+                    stepNum++;
+                }
                 if (ippCephalees > 0) {
                     justification += `<strong>${stepNum}️⃣ Céphalées chroniques post-traumatiques</strong> : <strong>${ippCephalees}%</strong><br>`;
                     justification += `&nbsp;&nbsp;• Rubrique : "Séquelles Neurologiques > Céphalées"<br>`;
@@ -11630,6 +11674,12 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
                     } else {
                         justification += `&nbsp;&nbsp;• Troubles cognitifs post-traumatiques (sans score MMS fourni)<br>`;
                     }
+                    stepNum++;
+                }
+                if (ippAnosmie > 0) {
+                    justification += `<strong>${stepNum}️⃣ Anosmie (perte de l'odorat)</strong> : <strong>${ippAnosmie}%</strong><br>`;
+                    justification += `&nbsp;&nbsp;• Rubrique : "Séquelles ORL > Anosmie" [5-10%]<br>`;
+                    justification += `&nbsp;&nbsp;• Lésion distincte : cisaillement des nerfs olfactifs (fréquent dans les chocs frontaux)<br>`;
                     stepNum++;
                 }
                 if (ippEpilepsie > 0) {
@@ -11650,9 +11700,18 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
                 justification += `<em>Fourchette attendue pour TC grave avec séquelles multiples : [50 - 70%]</em><br><br>`;
                 justification += `⚖️ <strong>Base juridique</strong> : Formule de Balthazard (cumul lésions neurologiques indépendantes)`;
                 
+                // 🆕 V3.3.358: Nom dynamique incluant les composantes réellement détectées
+                const nameComponents: string[] = [];
+                if (ippDysexecutif > 0) nameComponents.push('syndrome frontal');
+                if (ippCephalees > 0) nameComponents.push('céphalées');
+                if (ippCognitif > 0) nameComponents.push('cognitif');
+                if (ippAnosmie > 0) nameComponents.push('anosmie');
+                if (ippEpilepsie > 0) nameComponents.push('épilepsie');
+                if (ippPsychiatric > 0) nameComponents.push('psychiatrique');
+                
                 return {
                     type: 'proposal',
-                    name: 'Cumul : TC grave (céphalées + cognitif + épilepsie + psychiatrique)',
+                    name: `Cumul : TC grave (${nameComponents.join(' + ')})`,
                     rate: ippFinal,
                     justification,
                     path: 'Séquelles Neurologiques > Traumatisme Crânien Grave',
