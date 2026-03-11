@@ -7533,6 +7533,13 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             searchTerms: ["Fracture du tibia diaphysaire - Bonne consolidation (sujet jeune, travailleur manuel)"],  // ✅ V3.3.201: Match barème exact ligne 12%
             priority: 999999  // V3.3.202f: PRIORITÉ ABSOLUE pour écraser tout
         },
+        // 🆕 V3.3.355c: Rupture appareil extenseur du genou / tendon rotulien / tendon quadricipital
+        {
+            pattern: /rupture.*(?:appareil.*extenseur|tendon\s+(?:rotulien|quadricipital|quadriceps))|(?:appareil.*extenseur|tendon\s+(?:rotulien|quadricipital)).*(?:rupture|section|d[eé]chirure)|flexum.*(?:actif|r[eé]siduel).*genou|genou.*flexum/i,
+            context: /genou|rotulien|quadriceps|quadricipital|extenseur|flexum|verrouillage|d[eé]robement/i,
+            searchTerms: ["Rupture du tendon rotulien (ou du tendon quadricipital)"],
+            priority: 10500
+        },
         // Fracture de la rotule (genou)
         {
             pattern: /fracture.*(?:de\s+la\s+)?rotule|rotule.*fractur[eé]e?|fracture.*patella|fracture.*patellaire/i,
@@ -18930,6 +18937,17 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
         });
     }
     
+    // 🆕 V3.3.355: DÉDUPLICATION — supprimer les séquelles identiques (même nom)
+    // Ex: "cal vicieux" détecté 2× (bloc "déformation osseuse" + bloc "cal vicieux os longs") → 1 seule séquelle
+    const seenNames355 = new Set<string>();
+    for (let i = detectedSequelae.length - 1; i >= 0; i--) {
+        if (seenNames355.has(detectedSequelae[i].name)) {
+            detectedSequelae.splice(i, 1);
+        } else {
+            seenNames355.add(detectedSequelae[i].name);
+        }
+    }
+
     // 🆕 V3.3.155: CALCUL AUTOMATIQUE POUR TOUS LES CAS (polytraumatismes ET cas simples)
     console.log('🔍 [V3.3.155] Séquelles détectées:', detectedSequelae.length, detectedSequelae.map(s => s.name));
     
@@ -19312,6 +19330,16 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
                  (/coxarthrose|coxarthrie|arthrose.*(?:hanche|coxo)|raccourcissement|s[eé]quelle/i.test(text)) &&
                  !(/fracture.*(?:hum[eé]rus|c[oô]tes?|radius|poignet|clavicule|tibia|f[eé]mur|cheville|rachis|vert[eé]br)|luxation.*(?:[eé]paule|genou)/i.test(text))) {
             console.log('🦴 [V3.3.318] FRACTURE COTYLE + COXARTHROSE/RACCOURCISSEMENT → Bypass vers expert rules (pathologie hanche unique)');
+            // Ne pas retourner, laisser l'analyse continuer vers comprehensiveSingleLesionAnalysis
+        }
+        // 🆕 V3.3.355b: FRACTURE SIMPLE MÉTACARPIEN + CAL VICIEUX = Bypass vers expert rules
+        // "fracture 3ème métacarpien avec cal vicieux et raideur" = UNE SEULE PATHOLOGIE
+        // Le cal vicieux et la raideur sont des SÉQUELLES de la fracture, pas des lésions distinctes
+        // → NE DOIT JAMAIS être regroupé en polytraumatisme
+        else if (/fracture.*m[eé]tacarp|m[eé]tacarp.*fractur/i.test(text) &&
+                 /cal.*vicieux|raideur|consolidation.*vicieuse|d[eé]formation/i.test(text) &&
+                 !(/fracture.*(?:hum[eé]rus|clavicule|tibia|f[eé]mur|radius|bassin|c[oô]te|vert[eé]br|rotule|mall[eé]ol|hanche|trochant[eé]r|calcan[eé]um|astragale|plateau)/i.test(text))) {
+            console.log('🖐️ [V3.3.355b] FRACTURE MÉTACARPIEN + CAL VICIEUX → Bypass vers expert rules (pathologie main unique)');
             // Ne pas retourner, laisser l'analyse continuer vers comprehensiveSingleLesionAnalysis
         }
         // 🆕 V3.3.347: TÉTRAPLÉGIE / PARAPLÉGIE / QUADRIPLÉGIE = Bypass vers expert rules
@@ -20700,9 +20728,9 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
     // Ce sont 2 lésions distinctes (os + tendon) → cumul légitime
     // Mais le cumul standard hallucine scaphoïde/radius → handler dédié avec les bons barèmes
     try {
-        const isMetacarpalFracture354 = /fracture.*m[eé]tacarp|m[eé]tacarp.*fractur/i.test(normalized);
-        const hasTendonLesion354 = /l[eé]sion.*tendin|tendineu|section.*tendon|rupture.*tendon/i.test(normalized);
-        const isHandContext354 = /main|doigt|poing|pr[eé]hension|m[eé]tacarp/i.test(normalized);
+        const isMetacarpalFracture354 = /fracture.*m[eé]tacarp|m[eé]tacarp.*fractur/i.test(text);
+        const hasTendonLesion354 = /l[eé]sion.*tendin|tendineu|section.*tendon|rupture.*tendon/i.test(text);
+        const isHandContext354 = /main|doigt|poing|pr[eé]hension|m[eé]tacarp/i.test(text);
         
         if (isMetacarpalFracture354 && hasTendonLesion354 && isHandContext354 && isCumulDetected) {
             console.log('🖐️ [V3.3.354] HANDLER PRIORITAIRE: Fractures métacarpiens + Lésions tendineuses');
@@ -20712,10 +20740,10 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
             const domLabel354 = isNonDom354 ? 'Main Non Dominante' : 'Main Dominante';
             
             // Severity indicators
-            const isMultiple354 = /multiples?|plusieurs|plurifocale/i.test(normalized);
-            const isSevereStiffness354 = /raideur\s*important|important.*raideur|raideur\s*majeur|raideur\s*s[eé]v[eè]r/i.test(normalized);
-            const hasForceDeficit354 = /force.*diminu|pr[eé]hension.*diminu|perte.*force|d[eé]ficit.*force|pr[eé]hension.*r[eé]duite|force.*r[eé]duite/i.test(normalized);
-            const isCrush354 = /[eé]cras|broy|encastr|machine.*industriel/i.test(normalized);
+            const isMultiple354 = /multiples?|plusieurs|plurifocale/i.test(text);
+            const isSevereStiffness354 = /raideur\s*important|important.*raideur|raideur\s*majeur|raideur\s*s[eé]v[eè]r/i.test(text);
+            const hasForceDeficit354 = /force.*diminu|pr[eé]hension.*diminu|perte.*force|d[eé]ficit.*force|pr[eé]hension.*r[eé]duite|force.*r[eé]duite/i.test(text);
+            const isCrush354 = /[eé]cras|broy|encastr|machine.*industriel/i.test(text);
             
             // Determine severity for metacarpal fracture [5-15%]
             let metacarpalRate354 = 8;
