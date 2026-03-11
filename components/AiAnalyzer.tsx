@@ -10449,6 +10449,14 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
         },
         
         // 🆕 V3.3.288: FRACTURE DU CALCANÉUM
+        // 🆕 V3.3.357: Calcanéum + raideur/ankylose + troubles marche → cumul [26-36%]
+        {
+            pattern: /fracture.*calcan[ée]um|calcan[ée]um.*fractur/i,
+            context: /ankylose|blocage.*(?:sous[\s-]?astragal|articulat)|arthrose.*sous[\s-]?astragal|raideur.*(?:sous[\s-]?astragal|sous[\s-]?talien|important|s[eé]v[eè]r)|inversion.*impossible|[eé]version.*impossible/i,
+            searchTerms: ['Calcanéum + raideur + troubles marche (cumul)'],
+            priority: 1100,
+            negativeContext: /bilat[ée]ral/i
+        },
         {
             pattern: /fracture.*calcan[ée]um|calcan[ée]um.*fractur/i,
             context: /douleur|boiterie|appui|marche|pied|semelle|talonnade|tarse|chute/i,
