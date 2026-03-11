@@ -7432,6 +7432,14 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             searchTerms: ["Ablation phalange unguéale de l'index (Main Dominante)"],
             priority: 999998
         },
+        // 🆕 V3.3.356d: Raideur du majeur/médius → routage direct vers barème correct
+        {
+            pattern: /raideur.*(?:majeur|m[eé]dius|d3|3[eè]me\s*doigt)|(?:majeur|m[eé]dius).*raideur/i,
+            context: /flexion|extension|limitation|importante|ankylose|blocage|incapacit[eé]|mobilit[eé]/i,
+            searchTerms: ["__RAIDEUR_MEDIUS_DOMINANTE__"],
+            priority: 10450,
+            negativeContext: /amputation|ablation|perte.*(?:totale|complet)|d[eé]sarticulation/i
+        },
         {
             pattern: /amputation.*p1.*(?:d3|m[eé]dius)/i,
             context: /.*/i,
@@ -10644,7 +10652,8 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
                 !rule.searchTerms.includes("__CUMUL_GENOU_RAIDEUR_INSTABILITE__") &&
                 !rule.searchTerms.includes("__CUMUL_TIBIA_GUSTILO__") &&
                 !rule.searchTerms.includes("__DONNEES_INSUFFISANTES_CATARACTE__") &&
-                !rule.searchTerms.includes("__FRACTURE_CONSOLIDEE_SANS_SEQUELLE__")) {
+                !rule.searchTerms.includes("__FRACTURE_CONSOLIDEE_SANS_SEQUELLE__") &&
+                !rule.searchTerms.includes("__RAIDEUR_MEDIUS_DOMINANTE__")) {
                 
                 // 🆕 V3.3.342: Si __CUMUL_TC_GRAVE__ a matché, skip les règles simples TC-related
                 if (matchedSpecialCumulRule === "__CUMUL_TC_GRAVE__") {
@@ -11751,6 +11760,37 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
                     } as Injury,
                     isCumul: true
                 };
+            }
+            
+            // 🆕 V3.3.356d: Handler raideur du médius (majeur) - Main Dominante
+            if (rule.searchTerms.includes("__RAIDEUR_MEDIUS_DOMINANTE__")) {
+                const raideurEntry = allInjuriesWithPaths.find(inj => 
+                    normalize(inj.name).includes('raideur du medius') || 
+                    (normalize(inj.name).includes('raideur') && normalize(inj.name).includes('medius') && !normalize(inj.name).includes('articulation') && !normalize(inj.name).includes('metacarpo'))
+                );
+                if (raideurEntry) {
+                    const [minR, maxR] = Array.isArray(raideurEntry.rate) ? raideurEntry.rate : [raideurEntry.rate, raideurEntry.rate];
+                    // Détection sévérité spécifique pour raideur digitale
+                    const hasTresImportante = /tr[eè]s\s*important|majeure?|s[eé]v[eè]re|compl[eè]te|incapacit[eé]/i.test(workingText);
+                    const hasModerate = /mod[eé]r[eé]|moyenne|partielle/i.test(workingText);
+                    const coefficient = hasTresImportante ? 1.0 : hasModerate ? 0.5 : 0.35;
+                    const rateVal = Math.round(minR + (maxR - minR) * coefficient);
+                    console.log(`✅ [V3.3.356d RAIDEUR MÉDIUS] ${raideurEntry.name} = [${minR}-${maxR}] → ${rateVal}%`);
+                    return {
+                        type: 'proposal',
+                        name: raideurEntry.name,
+                        rate: rateVal,
+                        justification: `<strong>🎯 RÈGLE EXPERTE – RAIDEUR DU MÉDIUS</strong><br><br>` +
+                            `<strong>🔍 Analyse clinique :</strong><br>` +
+                            `Raideur du médius (3ème doigt) identifiée avec limitation fonctionnelle.<br><br>` +
+                            `<strong>📋 Référence barémique :</strong> ${raideurEntry.name}<br>` +
+                            `<strong>📖 Rubrique :</strong> ${raideurEntry.path}<br>` +
+                            `<strong>📊 Taux IPP retenu : ${rateVal}% [${minR}-${maxR}]</strong><br><br>` +
+                            `⚖️ <strong>Base juridique :</strong> Barème indicatif d'invalidité – Accidents du travail.`,
+                        path: raideurEntry.path,
+                        injury: raideurEntry as Injury
+                    };
+                }
             }
             
             // � V3.3.133: Handler amputation 3 orteils forcedRate
@@ -13062,7 +13102,7 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             // Détection des mots-clés anatomiques dans la description utilisateur
             const anatomicalKeywords = {
                 membreInf: /\b(cheville|pied|genou|jambe|cuisse|hanche|membre\s+inf|mi\b|orteil)/i,
-                membreSup: /\b(main|poignet|coude|avant[-\s]?bras|bras|epaule|membre\s+sup|ms\b|doigt)/i,
+                membreSup: /\b(main|poignet|coude|avant[-\s]?bras|bras|epaule|membre\s+sup|ms\b|doigt|majeur|m[eé]dius|index|pouce|annulaire|auriculaire)/i,
                 rachis: /\b(rachis|vertebr|dorsal|cervical|lombaire|dos|colonne)/i,
                 tete: /\b(crane|tete|visage|machoire|mandibul|maxillaire|facial)/i,
                 vision: /\b(oeil|vision|vue|retine|cataracte|aveugl|cecite)/i,
@@ -20830,8 +20870,22 @@ ${severityDesc354 ? `<strong>🔍 Indicateurs de sévérité :</strong> ${severi
             // Ex: "marche avec canne", "séquelles douloureuses", "tuteur externe" → pas des lésions
             // 🆕 V3.3.321: Ajout traumatisme, cervicalgie, névralgie, commotionnel, hémorragie méningée
             // 🆕 V3.3.322: Ajout stress post-traumatique, dépressif, gastrectomie, néphrectomie, colectomie, ectomie
-            const isLesionSegment320 = /fracture|luxation|rupture|entorse|arrachement|amputation|section|d[eé]chirure|hernie|tassement|contusion|plaie|br[uû]lure|l[eé]sion|coxarthrose|traumatisme|raideur.*(?:genou|cheville|[eé]paule|coude|hanche|poignet|rachis|cervical)|limitation.*(?:flexion|extension|abduction|rotation)|ankylose|gonarthrose|algodystrophie|syndrome.*(?:commotionnel|post.*traumat)|commotionnel|cervicalgie|dorsalgie|lombalgie|lombosciatalgie|cervicobrachialgie|n[eé]vralgie|h[eé]morragie.*m[eé]ning|d[eé]ficit.*(?:moteur|sensitif)|paralysie|surdit[eé]|acouph[eè]ne|ptsd|stress.*post.*traumat|d[eé]press[if]|proth[eè]se|spl[eé]nectomie|ectomie|gastrectomie|n[eé]phrectomie|colectomie|[eé]nucl[eé]ation/i;
+            // 🆕 V3.3.356: Ajout doigt/main/majeur/index/pouce/annulaire/auriculaire/médius après raideur
+            const isLesionSegment320 = /fracture|luxation|rupture|entorse|arrachement|amputation|section|d[eé]chirure|hernie|tassement|contusion|plaie|br[uû]lure|l[eé]sion|coxarthrose|traumatisme|raideur.*(?:genou|cheville|[eé]paule|coude|hanche|poignet|rachis|cervical|doigt|main|majeur|index|pouce|annulaire|auriculaire|m[eé]dius)|limitation.*(?:flexion|extension|abduction|rotation)|ankylose|gonarthrose|algodystrophie|syndrome.*(?:commotionnel|post.*traumat)|commotionnel|cervicalgie|dorsalgie|lombalgie|lombosciatalgie|cervicobrachialgie|n[eé]vralgie|h[eé]morragie.*m[eé]ning|d[eé]ficit.*(?:moteur|sensitif)|paralysie|surdit[eé]|acouph[eè]ne|ptsd|stress.*post.*traumat|d[eé]press[if]|proth[eè]se|spl[eé]nectomie|ectomie|gastrectomie|n[eé]phrectomie|colectomie|[eé]nucl[eé]ation/i;
+            // 🆕 V3.3.356b: Exclure les segments purement circonstanciels
+            // Ex: "sa main a été entraînée vers la lame provoquant un traumatisme ouvert grave" → circonstance
+            const isCircumstanceOnly = (seg: string): boolean => {
+                const lower = seg.toLowerCase();
+                const hasSpecificPathology = /fracture|luxation|rupture|entorse|amputation|d[eé]chirure|hernie|tassement|contusion|plaie|raideur|ankylose|pseudarthrose|paralysie|surdit[eé]|section.*tendon|n[eé]vralgie/i.test(lower);
+                const hasCircumstanceVerbs = /entra[iî]n[eé]|provoquant|rip[eé]|projet[eé]|percut[eé]|happ[eé]|heurt[eé]|[eé]cras[eé]|tomb[eé]|chute.*(?:depuis|de)|scie|lame|machine|meule|presse|outil|v[eé]hicule|voiture|moto|camion|pi[eé]ton|bless[eé]|accident.*(?:travail|route|voie)|circonstances/i.test(lower);
+                const matchesOnlyTraumatisme = /traumatisme/i.test(lower) && !hasSpecificPathology;
+                return matchesOnlyTraumatisme && hasCircumstanceVerbs;
+            };
             const filteredLesions = individualLesions.filter(l => {
+                if (isCircumstanceOnly(l)) {
+                    console.log(`⚠️ V3.3.356b: Segment circonstanciel exclu: "${l.substring(0, 80)}..."`);
+                    return false;
+                }
                 const passes = isLesionSegment320.test(l);
                 if (!passes) console.log(`⚠️ V3.3.320c: Segment NON-lésionnel exclu: "${l.substring(0, 80)}..."`);
                 return passes;
@@ -20839,6 +20893,77 @@ ${severityDesc354 ? `<strong>🔍 Indicateurs de sévérité :</strong> ${severi
             if (filteredLesions.length >= 2) {
                 console.log(`🔧 V3.3.320c: Filtré ${individualLesions.length} → ${filteredLesions.length} lésions (exclu segments non-lésionnels)`);
                 individualLesions = filteredLesions;
+            }
+            
+            // 🆕 V3.3.356c: Déduplication par pathologie + site anatomique
+            // Ex: 3 segments contenant tous "amputation" + "index" → garder le plus descriptif
+            const deduplicateBySitePathology = (lesions: string[]): string[] => {
+                const pathologyKeywords = ['amputation', 'fracture', 'rupture', 'luxation', 'entorse', 'raideur', 'ankylose', 'pseudarthrose', 'section', 'dechirure', 'hernie', 'contusion', 'tassement'];
+                const siteKeywords = ['index', 'majeur', 'pouce', 'annulaire', 'auriculaire', 'medius', 'genou', 'cheville', 'epaule', 'coude', 'hanche', 'poignet', 'femur', 'tibia', 'radius', 'rachis', 'cervical', 'lombaire', 'rotule', 'malleol', 'calcaneum', 'scaphoide', 'clavicule', 'humeral', 'pied', 'main', 'doigt'];
+                // V3.3.356e: qualifiers that distinguish different fracture locations on long bones
+                const fractureQualifiers = ['col', 'plateau', 'diaphyse', 'diaphysaire', 'pilon', 'trochanter', 'condyle', 'epiphyse', 'metaphyse', 'tete', 'massif'];
+                const longBones = ['femur', 'tibia', 'humerus', 'humeral', 'radius', 'ulna', 'cubitus'];
+                const norm = (s: string) => s.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+                const getSignature = (s: string): string => {
+                    const lower = norm(s);
+                    const pathology = pathologyKeywords.find(p => lower.includes(p)) || '';
+                    if (!pathology) return '';
+                    // V3.3.356e: find site closest to pathology keyword in text
+                    const pathIdx = lower.indexOf(pathology);
+                    let bestSite = '';
+                    let bestDist = Infinity;
+                    for (const sk of siteKeywords) {
+                        const skIdx = lower.indexOf(sk);
+                        if (skIdx >= 0) {
+                            const dist = Math.abs(skIdx - pathIdx);
+                            if (dist < bestDist) {
+                                bestDist = dist;
+                                bestSite = sk;
+                            }
+                        }
+                    }
+                    return bestSite ? `${pathology}:${bestSite}` : '';
+                };
+                const getFractureQualifier = (s: string, site: string): string => {
+                    // Only apply qualifier distinction for fractures on long bones
+                    if (!longBones.some(b => site.includes(b))) return '';
+                    const lower = norm(s);
+                    return fractureQualifiers.find(q => lower.includes(q)) || '';
+                };
+                const seen = new Map<string, { lesion: string; length: number; qualifier: string }>();
+                const result: string[] = [];
+                for (const l of lesions) {
+                    const sig = getSignature(l);
+                    if (sig) {
+                        const [pathology, site] = sig.split(':');
+                        const existing = seen.get(sig);
+                        if (existing) {
+                            const qNew = pathology === 'fracture' ? getFractureQualifier(l, site) : '';
+                            const qExisting = existing.qualifier;
+                            // V3.3.356e: different fracture qualifiers on long bones = different injuries
+                            if (qNew && qExisting && qNew !== qExisting) {
+                                console.log(`🔄 V3.3.356e: Même signature [${sig}] mais qualificateurs différents ("${qNew}" vs "${qExisting}") → PAS un doublon`);
+                                result.push(l);
+                                continue;
+                            }
+                            console.log(`🔄 V3.3.356c: Doublon détecté [${sig}]: "${l.substring(0, 60)}..." vs "${existing.lesion.substring(0, 60)}..."`);
+                            if (l.length > existing.length) {
+                                const idx = result.indexOf(existing.lesion);
+                                if (idx >= 0) result[idx] = l;
+                                seen.set(sig, { lesion: l, length: l.length, qualifier: qNew || qExisting });
+                            }
+                            continue;
+                        }
+                        const q = pathology === 'fracture' ? getFractureQualifier(l, site) : '';
+                        seen.set(sig, { lesion: l, length: l.length, qualifier: q });
+                    }
+                    result.push(l);
+                }
+                return result;
+            };
+            individualLesions = deduplicateBySitePathology(individualLesions);
+            if (individualLesions.length < 2) {
+                console.log('🔧 V3.3.356c: Après déduplication, < 2 lésions → analyse simple');
             }
             
             console.log('✅ Au moins 2 lésions → Analyse séparée');
