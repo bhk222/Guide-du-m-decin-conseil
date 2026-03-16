@@ -1,13 +1,16 @@
 /**
- * Dictionnaire médical français pour le correcteur d'orthographe
- * Construit à partir des données existantes : barème + synonymes médicaux
- * + vocabulaire français courant + carte de fautes courantes
+ * Dictionnaire français complet pour le correcteur d'orthographe
+ * Sources : barème + synonymes médicaux + vocabulaire courant + littéraire
+ *         + conjugaisons + carte de fautes courantes
+ * V2: Dictionnaire complet hors connexion (~15 000+ mots)
  */
 
 import { medicalSynonyms, normalize } from '../AiAnalyzer';
 import { disabilityData } from '../../data/disabilityRates';
 import { disabilityData as disabilityDataNew } from '../../data/disabilityRates.new';
 import { InjuryCategory } from '../../types';
+import { FRENCH_COMMON_WORDS, FRENCH_MEDICAL_WORDS, FRENCH_LITERARY_WORDS, EXTENDED_TYPOS } from '../../data/frenchDictionary';
+import { getAllConjugatedForms } from './conjugation';
 
 // Stop-words français étendus (ne pas signaler comme fautes)
 const FRENCH_STOP_WORDS = new Set([
@@ -298,6 +301,43 @@ export function getMedicalDictionary(): MedicalDictionary {
     // Source 5: Corrections des fautes courantes → ajouter les formes correctes
     for (const correctForm of COMMON_MEDICAL_TYPOS.values()) {
         addToDictionary(correctForm, correctForm, singleWords, originalForms);
+    }
+
+    // Source 6: Vocabulaire français courant (~2500 mots)
+    for (const word of FRENCH_COMMON_WORDS) {
+        addToDictionary(word, word, singleWords, originalForms);
+    }
+
+    // Source 7: Vocabulaire médical étendu (~1000+ termes)
+    for (const word of FRENCH_MEDICAL_WORDS) {
+        addToDictionary(word, word, singleWords, originalForms);
+    }
+
+    // Source 8: Vocabulaire littéraire et soutenu (~500 mots)
+    for (const word of FRENCH_LITERARY_WORDS) {
+        addToDictionary(word, word, singleWords, originalForms);
+    }
+
+    // Source 9: Formes conjuguées (~8000 formes de 200 verbes)
+    const conjugatedForms = getAllConjugatedForms();
+    for (const form of conjugatedForms) {
+        if (form.length >= 3) {
+            singleWords.add(form);
+            if (!originalForms.has(form)) {
+                originalForms.set(form, form);
+            }
+        }
+    }
+
+    // Source 10: Fautes étendues → ajouter les formes correctes
+    for (const correctForm of EXTENDED_TYPOS.values()) {
+        const normalized = normalize(correctForm);
+        if (normalized.length >= 3) {
+            singleWords.add(normalized);
+            if (!originalForms.has(normalized)) {
+                originalForms.set(normalized, correctForm);
+            }
+        }
     }
 
     cachedDictionary = { singleWords, originalForms };

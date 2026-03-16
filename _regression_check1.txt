@@ -1,0 +1,28 @@
+
+=== _test_jambe_cheville ===
+
+  ΓÜá∩╕Å ANOMALIE: Nom "Fracture mall├⌐olaire ou bi-mall├⌐olaire - Avec raideur mod├⌐r├⌐e" ne matche pas "instabilit[e├⌐].*chronique.*cheville|entorse|cheville.*instabilit[e├⌐]"
+
+
+=== _test_cheville_pied_30 ===
+
+  ΓÜá∩╕Å ANOMALIE: Nom "Fracture mall├⌐olaire ou bi-mall├⌐olaire - Avec raideur mod├⌐r├⌐e" ne matche pas "instabilit[e├⌐].*chronique.*cheville|cheville.*s├⌐quelle.*entorse|entorse.*cheville"
+  ΓÜá∩╕Å ANOMALIE: Nom "Fracture mall├⌐olaire ou bi-mall├⌐olaire - Avec raideur mod├⌐r├⌐e" ne matche pas "instabilit[e├⌐].*chronique.*cheville|entorse.*cheville|arthrose.*cheville" + Taux 18% hors fourchette 5-15%
+
+
+=== _test_rachis_20 ===
+
+  ΓÜá∩╕Å ANOMALIE: Taux 28% hors fourchette 5-15%
+  ΓÜá∩╕Å ANOMALIE: Taux 28% hors fourchette 5-15%
+  ΓÜá∩╕Å ANOMALIE: Taux 74% hors fourchette 10-55%
+
+
+=== _test_amputation_MS ===
+
+  ΓÜá∩╕Å ANOMALIE: Taux 28% hors fourchette 40-70%
+
+
+=== _test_polytrauma_4sieges ===
+
+  ΓÜá∩╕Å ANOMALIE: Taux 29% hors fourchette 40-85%
+

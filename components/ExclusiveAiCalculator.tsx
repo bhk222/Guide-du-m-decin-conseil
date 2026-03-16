@@ -213,6 +213,173 @@ export const ExclusiveAiCalculator: React.FC<ExclusiveAiCalculatorProps> = ({
     const [spellCheckDismissed, setSpellCheckDismissed] = useState(false);
     const analysisQueueRef = useRef<string[]>([]);
 
+    // 🎤 Dictaphone intelligent hors connexion
+    const [isListening, setIsListening] = useState(false);
+    const recognitionRef = useRef<any>(null);
+    const transcriptRef = useRef<string>('');
+
+    // 🎤 Effacer tout le texte
+    const handleClearAll = useCallback(() => {
+        setUserInput('');
+        transcriptRef.current = '';
+    }, []);
+
+    // 🎤 Effacer le dernier mot
+    const handleDeleteWord = useCallback(() => {
+        setUserInput(prev => {
+            const newValue = prev.replace(/\s*\S+\s*$/, '');
+            transcriptRef.current = newValue;
+            return newValue;
+        });
+    }, []);
+
+    // 🎤 Effacer N derniers mots
+    const handleDeleteWords = useCallback((count: number) => {
+        setUserInput(prev => {
+            let result = prev;
+            for (let i = 0; i < count; i++) {
+                result = result.replace(/\s*\S+\s*$/, '');
+            }
+            transcriptRef.current = result;
+            return result;
+        });
+    }, []);
+
+    // 🎤 Traitement des commandes vocales intelligentes
+    const processVoiceCommand = useCallback((transcript: string): { isCommand: boolean; processed?: string } => {
+        const lower = transcript.toLowerCase().trim();
+        
+        // Commandes d'effacement total
+        if (/^(efface(r|z)?\s+(le\s+)?tout|tout\s+effacer|supprime(r|z)?\s+(le\s+)?tout|tout\s+supprimer|vide(r|z)?\s+(le\s+)?tout)$/i.test(lower)) {
+            handleClearAll();
+            return { isCommand: true };
+        }
+        
+        // Commande: effacer N mots
+        const matchNMots = lower.match(/^efface(r|z)?\s+(un|deux|trois|quatre|cinq|six|sept|huit|neuf|dix|\d+)\s+mots?$/i);
+        if (matchNMots) {
+            const wordMap: Record<string, number> = { un: 1, deux: 2, trois: 3, quatre: 4, cinq: 5, six: 6, sept: 7, huit: 8, neuf: 9, dix: 10 };
+            const numStr = matchNMots[2].toLowerCase();
+            const count = wordMap[numStr] || parseInt(numStr) || 1;
+            handleDeleteWords(count);
+            return { isCommand: true };
+        }
+        
+        // Commande: effacer (un mot par défaut)
+        if (/^efface(r|z)?(\s+un\s+mot)?$/i.test(lower)) {
+            handleDeleteWord();
+            return { isCommand: true };
+        }
+
+        // Commande: supprimer le dernier mot
+        if (/^supprime(r|z)?\s+(le\s+)?dernier\s+mot$/i.test(lower)) {
+            handleDeleteWord();
+            return { isCommand: true };
+        }
+
+        // Commande: nouvelle ligne / retour à la ligne
+        if (/^(nouvelle\s+ligne|retour\s+(à\s+la\s+)?ligne|à\s+la\s+ligne|saut\s+de\s+ligne)$/i.test(lower)) {
+            return { isCommand: false, processed: '\n' };
+        }
+
+        // Remplacement ponctuation dans le texte
+        let processed = transcript;
+        processed = processed.replace(/\bpoint\b/gi, '.');
+        processed = processed.replace(/\bvirgule\b/gi, ',');
+        processed = processed.replace(/\bpoint\s+virgule\b/gi, ';');
+        processed = processed.replace(/\bdeux\s+points\b/gi, ':');
+        processed = processed.replace(/\bpoints?\s+d'exclamation\b/gi, '!');
+        processed = processed.replace(/\bpoints?\s+d'interrogation\b/gi, '?');
+        processed = processed.replace(/\btiret\b/gi, '-');
+        processed = processed.replace(/\bouvrante?\s+parenthèse|parenthèse\s+ouvrante?\b/gi, '(');
+        processed = processed.replace(/\bfermante?\s+parenthèse|parenthèse\s+fermante?\b/gi, ')');
+        processed = processed.replace(/\bà\s+la\s+ligne\b/gi, '\n');
+        processed = processed.replace(/\bnouvelle\s+ligne\b/gi, '\n');
+        
+        return { isCommand: false, processed };
+    }, [handleClearAll, handleDeleteWord, handleDeleteWords]);
+
+    // 🎤 Basculer le dictaphone on/off
+    const toggleDictaphone = useCallback(() => {
+        if (isListening) {
+            recognitionRef.current?.stop();
+            setIsListening(false);
+            return;
+        }
+        
+        const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
+        if (!SpeechRecognition) {
+            alert('La reconnaissance vocale n\'est pas supportée par votre navigateur. Utilisez Chrome ou Edge.');
+            return;
+        }
+        
+        if (!recognitionRef.current) {
+            recognitionRef.current = new SpeechRecognition();
+            recognitionRef.current.continuous = true;
+            recognitionRef.current.interimResults = true;
+            recognitionRef.current.lang = 'fr-FR';
+            
+            recognitionRef.current.onresult = (event: any) => {
+                let finalTranscript = '';
+                let interimTranscript = '';
+                
+                for (let i = event.resultIndex; i < event.results.length; i++) {
+                    const result = event.results[i];
+                    if (result.isFinal) {
+                        finalTranscript += result[0].transcript;
+                    } else {
+                        interimTranscript += result[0].transcript;
+                    }
+                }
+                
+                if (finalTranscript) {
+                    const { isCommand, processed } = processVoiceCommand(finalTranscript);
+                    if (!isCommand && processed) {
+                        setUserInput(prev => {
+                            // Ajouter espace si le texte ne se termine pas par un espace ou newline
+                            const separator = prev && !prev.endsWith(' ') && !prev.endsWith('\n') ? ' ' : '';
+                            const newValue = prev + separator + processed;
+                            transcriptRef.current = newValue;
+                            return newValue;
+                        });
+                    }
+                }
+            };
+            
+            recognitionRef.current.onerror = (event: any) => {
+                console.error('Erreur reconnaissance vocale:', event.error);
+                if (event.error !== 'no-speech') {
+                    setIsListening(false);
+                }
+            };
+            
+            recognitionRef.current.onend = () => {
+                // Redémarrer automatiquement si toujours actif
+                if (isListening) {
+                    try {
+                        recognitionRef.current?.start();
+                    } catch (e) {
+                        setIsListening(false);
+                    }
+                }
+            };
+        }
+        
+        // Mettre à jour le handler onend avec la valeur actuelle de isListening
+        recognitionRef.current.onend = () => {
+            setIsListening(prev => {
+                if (prev) {
+                    try { recognitionRef.current?.start(); } catch (e) { return false; }
+                }
+                return prev;
+            });
+        };
+        
+        transcriptRef.current = userInput;
+        recognitionRef.current.start();
+        setIsListening(true);
+    }, [isListening, userInput, processVoiceCommand]);
+
     // Correcteur d'orthographe médical
     const { results: spellCheckResults, applyCorrection, applyAllCorrections, ignoreWord, ignoreAll } = useMedicalSpellCheck(userInput);
 
@@ -741,13 +908,60 @@ export const ExclusiveAiCalculator: React.FC<ExclusiveAiCalculatorProps> = ({
                     <div ref={messagesEndRef}></div>
                 </div>
                 <div className="mt-4 pt-4 border-t border-slate-200">
+                    {/* 🎤 Barre dictaphone */}
+                    <div className="flex items-center gap-2 mb-2">
+                        <button
+                            onClick={toggleDictaphone}
+                            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
+                                isListening 
+                                    ? 'bg-red-500 text-white animate-pulse shadow-lg shadow-red-200' 
+                                    : 'bg-emerald-50 text-emerald-700 hover:bg-emerald-100 border border-emerald-200'
+                            }`}
+                            title={isListening ? 'Arrêter la dictée' : 'Démarrer la dictée vocale'}
+                        >
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M19 11a7 7 0 01-14 0m7 7v4m-4 0h8M12 1a3 3 0 00-3 3v7a3 3 0 006 0V4a3 3 0 00-3-3z" />
+                            </svg>
+                            {isListening ? 'Arrêter' : 'Dictée'}
+                        </button>
+                        <button
+                            onClick={handleDeleteWord}
+                            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-amber-50 text-amber-700 hover:bg-amber-100 border border-amber-200 transition-colors"
+                            title="Effacer le dernier mot"
+                            disabled={!userInput}
+                        >
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M12 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2M3 12l6.414-6.414a2 2 0 011.414-.586H19a2 2 0 012 2v10a2 2 0 01-2 2h-8.172a2 2 0 01-1.414-.586L3 12z" />
+                            </svg>
+                            Effacer mot
+                        </button>
+                        <button
+                            onClick={handleClearAll}
+                            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-red-50 text-red-700 hover:bg-red-100 border border-red-200 transition-colors"
+                            title="Effacer tout le texte"
+                            disabled={!userInput}
+                        >
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                            </svg>
+                            Tout effacer
+                        </button>
+                        {isListening && (
+                            <span className="ml-auto text-xs text-red-500 font-medium flex items-center gap-1">
+                                <span className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></span>
+                                Écoute en cours... Dites "point", "virgule", "nouvelle ligne", "effacer un mot"
+                            </span>
+                        )}
+                    </div>
                     <div className="flex items-start gap-2">
                         <textarea
                             value={userInput}
-                            onChange={(e) => { setUserInput(e.target.value); setSpellCheckDismissed(false); }}
+                            onChange={(e) => { setUserInput(e.target.value); transcriptRef.current = e.target.value; setSpellCheckDismissed(false); }}
                             onKeyPress={(e) => {if(e.key === 'Enter' && !e.shiftKey) {e.preventDefault(); handleSend(userInput);}}}
-                            placeholder="Décrivez les séquelles ou demandez le calcul..."
-                            className="flex-1 w-full p-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-primary-500/50 text-black placeholder:text-slate-400 bg-white resize-none"
+                            placeholder={isListening ? "🎤 Parlez maintenant... (dites 'point' pour un point, 'nouvelle ligne' pour retour)" : "Décrivez les séquelles ou demandez le calcul..."}
+                            className={`flex-1 w-full p-3 border rounded-lg focus:ring-2 focus:ring-primary-500/50 text-black placeholder:text-slate-400 bg-white resize-none ${
+                                isListening ? 'border-red-300 ring-2 ring-red-200' : 'border-slate-300'
+                            }`}
                             aria-label="Décrire les séquelles cliniques ou demander le calcul"
                             disabled={isLoading}
                             rows={3}

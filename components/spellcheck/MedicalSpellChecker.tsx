@@ -1,6 +1,6 @@
 /**
- * Composant UI du correcteur d'orthographe médical
- * V2: Panneau compact avec "Tout corriger", "Tout ignorer", badges auto-correct
+ * Composant UI du correcteur d'orthographe français complet
+ * V3: Dictionnaire complet hors connexion (~15 000+ mots)
  */
 
 import React from 'react';

@@ -1,12 +1,13 @@
 /**
- * Hook React pour le correcteur d'orthographe médical
+ * Hook React pour le correcteur d'orthographe français complet
  * Tokenize, vérifie et suggère des corrections avec debounce
- * V2: Auto-correction fautes courantes + fix multi-correction + "Tout corriger"
+ * V3: Dictionnaire complet hors connexion (~15 000+ mots)
  */
 
 import { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import { normalize } from '../AiAnalyzer';
 import { getMedicalDictionary, FRENCH_STOP_WORDS, COMMON_MEDICAL_TYPOS } from './medicalDictionary';
+import { EXTENDED_TYPOS } from '../../data/frenchDictionary';
 import { findClosestTerms } from './levenshtein';
 
 export interface SpellCheckResult {
@@ -69,8 +70,8 @@ export function useMedicalSpellCheck(text: string) {
                 if (/^\d+$/.test(token.word)) continue;
 
                 // 1. Vérifier la carte de fautes courantes (haute confiance)
-                const knownCorrection = COMMON_MEDICAL_TYPOS.get(normalized);
-                if (knownCorrection && knownCorrection !== normalized) {
+                const knownCorrection = COMMON_MEDICAL_TYPOS.get(normalized) || EXTENDED_TYPOS.get(normalized);
+                if (knownCorrection && normalize(knownCorrection) !== normalized) {
                     const displayForm = dictionary.originalForms.get(knownCorrection) || knownCorrection;
                     newResults.push({
                         word: token.word,
