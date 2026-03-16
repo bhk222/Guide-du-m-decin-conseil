@@ -80,8 +80,19 @@ for (const suite of suites) {
       console.log(`  ⚠️ ${suite.file.padEnd(38)} Parse error — could not read result`);
     }
   } catch (err: any) {
-    results.push({ name: suite.file, passed: 0, total: suite.expected, duration: Date.now() - start, error: err.message?.substring(0, 100) });
-    console.log(`  ❌ ${suite.file.padEnd(38)} CRASH — ${err.message?.substring(0, 80)}`);
+    // execSync throws on non-zero exit code — try to parse stdout for results
+    const errOutput = err.stdout?.toString() || '';
+    const errMatch = errOutput.match(/R[ÉE]SULTAT GLOBAL\s*:?\s*(\d+)\/(\d+)\s*trouv/i);
+    if (errMatch) {
+      const passed = parseInt(errMatch[1]);
+      const total = parseInt(errMatch[2]);
+      results.push({ name: suite.file, passed, total, duration: Date.now() - start });
+      const icon = passed === total ? '✅' : '❌';
+      console.log(`  ${icon} ${suite.file.padEnd(38)} ${String(passed).padStart(3)}/${String(total).padStart(3)}  (${Date.now() - start}ms)`);
+    } else {
+      results.push({ name: suite.file, passed: 0, total: suite.expected, duration: Date.now() - start, error: err.message?.substring(0, 100) });
+      console.log(`  ❌ ${suite.file.padEnd(38)} CRASH — ${err.message?.substring(0, 80)}`);
+    }
   }
 }
 

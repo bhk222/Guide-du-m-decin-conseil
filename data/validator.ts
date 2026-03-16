@@ -6,10 +6,11 @@
 import { localExpertAnalysis } from '../components/AiAnalyzer';
 import { trainingCases, TrainingCase, QualityMetrics, qualityThresholds } from './trainingCases';
 import { niveau1Simple, niveau2Moyen, niveau3Complexe } from './trainingCasesExtension';
+import { trainingCasesAT200 } from './trainingCasesAT200';
 import { normalize } from '../components/AiAnalyzer';
 
-// FUSION: Cas existants + extension niveau 1 + niveau 2 + niveau 3
-const allTrainingCases = [...trainingCases, ...niveau1Simple, ...niveau2Moyen, ...niveau3Complexe];
+// FUSION: Cas existants + extension niveau 1 + niveau 2 + niveau 3 + 200 cas AT
+const allTrainingCases = [...trainingCases, ...niveau1Simple, ...niveau2Moyen, ...niveau3Complexe, ...trainingCasesAT200];
 
 export interface ValidationResult {
   caseId: string;
