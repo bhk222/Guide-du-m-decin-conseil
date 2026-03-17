@@ -6,6 +6,7 @@ import { Button } from './ui/Button';
 import { HistoryModal, saveToHistory } from './HistoryModal';
 import { useMedicalSpellCheck } from './spellcheck/useMedicalSpellCheck';
 import { MedicalSpellChecker } from './spellcheck/MedicalSpellChecker';
+import { useDictaphone } from './useDictaphone';
 
 // --- TYPES ---
 interface Proposal {
@@ -213,172 +214,8 @@ export const ExclusiveAiCalculator: React.FC<ExclusiveAiCalculatorProps> = ({
     const [spellCheckDismissed, setSpellCheckDismissed] = useState(false);
     const analysisQueueRef = useRef<string[]>([]);
 
-    // 🎤 Dictaphone intelligent hors connexion
-    const [isListening, setIsListening] = useState(false);
-    const recognitionRef = useRef<any>(null);
-    const transcriptRef = useRef<string>('');
-
-    // 🎤 Effacer tout le texte
-    const handleClearAll = useCallback(() => {
-        setUserInput('');
-        transcriptRef.current = '';
-    }, []);
-
-    // 🎤 Effacer le dernier mot
-    const handleDeleteWord = useCallback(() => {
-        setUserInput(prev => {
-            const newValue = prev.replace(/\s*\S+\s*$/, '');
-            transcriptRef.current = newValue;
-            return newValue;
-        });
-    }, []);
-
-    // 🎤 Effacer N derniers mots
-    const handleDeleteWords = useCallback((count: number) => {
-        setUserInput(prev => {
-            let result = prev;
-            for (let i = 0; i < count; i++) {
-                result = result.replace(/\s*\S+\s*$/, '');
-            }
-            transcriptRef.current = result;
-            return result;
-        });
-    }, []);
-
-    // 🎤 Traitement des commandes vocales intelligentes
-    const processVoiceCommand = useCallback((transcript: string): { isCommand: boolean; processed?: string } => {
-        const lower = transcript.toLowerCase().trim();
-        
-        // Commandes d'effacement total
-        if (/^(efface(r|z)?\s+(le\s+)?tout|tout\s+effacer|supprime(r|z)?\s+(le\s+)?tout|tout\s+supprimer|vide(r|z)?\s+(le\s+)?tout)$/i.test(lower)) {
-            handleClearAll();
-            return { isCommand: true };
-        }
-        
-        // Commande: effacer N mots
-        const matchNMots = lower.match(/^efface(r|z)?\s+(un|deux|trois|quatre|cinq|six|sept|huit|neuf|dix|\d+)\s+mots?$/i);
-        if (matchNMots) {
-            const wordMap: Record<string, number> = { un: 1, deux: 2, trois: 3, quatre: 4, cinq: 5, six: 6, sept: 7, huit: 8, neuf: 9, dix: 10 };
-            const numStr = matchNMots[2].toLowerCase();
-            const count = wordMap[numStr] || parseInt(numStr) || 1;
-            handleDeleteWords(count);
-            return { isCommand: true };
-        }
-        
-        // Commande: effacer (un mot par défaut)
-        if (/^efface(r|z)?(\s+un\s+mot)?$/i.test(lower)) {
-            handleDeleteWord();
-            return { isCommand: true };
-        }
-
-        // Commande: supprimer le dernier mot
-        if (/^supprime(r|z)?\s+(le\s+)?dernier\s+mot$/i.test(lower)) {
-            handleDeleteWord();
-            return { isCommand: true };
-        }
-
-        // Commande: nouvelle ligne / retour à la ligne
-        if (/^(nouvelle\s+ligne|retour\s+(à\s+la\s+)?ligne|à\s+la\s+ligne|saut\s+de\s+ligne)$/i.test(lower)) {
-            return { isCommand: false, processed: '\n' };
-        }
-
-        // Remplacement ponctuation dans le texte
-        let processed = transcript;
-        processed = processed.replace(/\bpoint\b/gi, '.');
-        processed = processed.replace(/\bvirgule\b/gi, ',');
-        processed = processed.replace(/\bpoint\s+virgule\b/gi, ';');
-        processed = processed.replace(/\bdeux\s+points\b/gi, ':');
-        processed = processed.replace(/\bpoints?\s+d'exclamation\b/gi, '!');
-        processed = processed.replace(/\bpoints?\s+d'interrogation\b/gi, '?');
-        processed = processed.replace(/\btiret\b/gi, '-');
-        processed = processed.replace(/\bouvrante?\s+parenthèse|parenthèse\s+ouvrante?\b/gi, '(');
-        processed = processed.replace(/\bfermante?\s+parenthèse|parenthèse\s+fermante?\b/gi, ')');
-        processed = processed.replace(/\bà\s+la\s+ligne\b/gi, '\n');
-        processed = processed.replace(/\bnouvelle\s+ligne\b/gi, '\n');
-        
-        return { isCommand: false, processed };
-    }, [handleClearAll, handleDeleteWord, handleDeleteWords]);
-
-    // 🎤 Basculer le dictaphone on/off
-    const toggleDictaphone = useCallback(() => {
-        if (isListening) {
-            recognitionRef.current?.stop();
-            setIsListening(false);
-            return;
-        }
-        
-        const SpeechRecognition = (window as any).SpeechRecognition || (window as any).webkitSpeechRecognition;
-        if (!SpeechRecognition) {
-            alert('La reconnaissance vocale n\'est pas supportée par votre navigateur. Utilisez Chrome ou Edge.');
-            return;
-        }
-        
-        if (!recognitionRef.current) {
-            recognitionRef.current = new SpeechRecognition();
-            recognitionRef.current.continuous = true;
-            recognitionRef.current.interimResults = true;
-            recognitionRef.current.lang = 'fr-FR';
-            
-            recognitionRef.current.onresult = (event: any) => {
-                let finalTranscript = '';
-                let interimTranscript = '';
-                
-                for (let i = event.resultIndex; i < event.results.length; i++) {
-                    const result = event.results[i];
-                    if (result.isFinal) {
-                        finalTranscript += result[0].transcript;
-                    } else {
-                        interimTranscript += result[0].transcript;
-                    }
-                }
-                
-                if (finalTranscript) {
-                    const { isCommand, processed } = processVoiceCommand(finalTranscript);
-                    if (!isCommand && processed) {
-                        setUserInput(prev => {
-                            // Ajouter espace si le texte ne se termine pas par un espace ou newline
-                            const separator = prev && !prev.endsWith(' ') && !prev.endsWith('\n') ? ' ' : '';
-                            const newValue = prev + separator + processed;
-                            transcriptRef.current = newValue;
-                            return newValue;
-                        });
-                    }
-                }
-            };
-            
-            recognitionRef.current.onerror = (event: any) => {
-                console.error('Erreur reconnaissance vocale:', event.error);
-                if (event.error !== 'no-speech') {
-                    setIsListening(false);
-                }
-            };
-            
-            recognitionRef.current.onend = () => {
-                // Redémarrer automatiquement si toujours actif
-                if (isListening) {
-                    try {
-                        recognitionRef.current?.start();
-                    } catch (e) {
-                        setIsListening(false);
-                    }
-                }
-            };
-        }
-        
-        // Mettre à jour le handler onend avec la valeur actuelle de isListening
-        recognitionRef.current.onend = () => {
-            setIsListening(prev => {
-                if (prev) {
-                    try { recognitionRef.current?.start(); } catch (e) { return false; }
-                }
-                return prev;
-            });
-        };
-        
-        transcriptRef.current = userInput;
-        recognitionRef.current.start();
-        setIsListening(true);
-    }, [isListening, userInput, processVoiceCommand]);
+    // 🎤 Dictaphone professionnel hors connexion
+    const [dictState, dictActions] = useDictaphone(userInput, setUserInput);
 
     // Correcteur d'orthographe médical
     const { results: spellCheckResults, applyCorrection, applyAllCorrections, ignoreWord, ignoreAll } = useMedicalSpellCheck(userInput);
@@ -908,26 +745,35 @@ export const ExclusiveAiCalculator: React.FC<ExclusiveAiCalculatorProps> = ({
                     <div ref={messagesEndRef}></div>
                 </div>
                 <div className="mt-4 pt-4 border-t border-slate-200">
-                    {/* 🎤 Barre dictaphone */}
-                    <div className="flex items-center gap-2 mb-2">
+                    {/* 🎤 Barre dictaphone professionnelle */}
+                    <div className="flex flex-wrap items-center gap-2 mb-2">
+                        {/* Bouton Microphone */}
                         <button
-                            onClick={toggleDictaphone}
-                            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
-                                isListening 
-                                    ? 'bg-red-500 text-white animate-pulse shadow-lg shadow-red-200' 
-                                    : 'bg-emerald-50 text-emerald-700 hover:bg-emerald-100 border border-emerald-200'
+                            onClick={dictActions.toggle}
+                            className={`flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-semibold transition-all ${
+                                dictState.isListening 
+                                    ? 'bg-red-600 text-white shadow-lg shadow-red-300 ring-2 ring-red-400 ring-offset-1' 
+                                    : 'bg-emerald-600 text-white hover:bg-emerald-700 shadow-sm'
                             }`}
-                            title={isListening ? 'Arrêter la dictée' : 'Démarrer la dictée vocale'}
+                            title={dictState.isListening ? 'Arrêter la dictée (clic ou dites "effacer tout")' : 'Démarrer la dictée vocale'}
                         >
-                            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
-                                <path strokeLinecap="round" strokeLinejoin="round" d="M19 11a7 7 0 01-14 0m7 7v4m-4 0h8M12 1a3 3 0 00-3 3v7a3 3 0 006 0V4a3 3 0 00-3-3z" />
-                            </svg>
-                            {isListening ? 'Arrêter' : 'Dictée'}
+                            {dictState.isListening ? (
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 animate-pulse" fill="currentColor" viewBox="0 0 24 24">
+                                    <rect x="6" y="4" width="4" height="16" rx="1"/>
+                                    <rect x="14" y="4" width="4" height="16" rx="1"/>
+                                </svg>
+                            ) : (
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                    <path strokeLinecap="round" strokeLinejoin="round" d="M19 11a7 7 0 01-14 0m7 7v4m-4 0h8M12 1a3 3 0 00-3 3v7a3 3 0 006 0V4a3 3 0 00-3-3z" />
+                                </svg>
+                            )}
+                            {dictState.isListening ? 'Stop' : 'Dictée'}
                         </button>
+                        {/* Bouton Effacer mot */}
                         <button
-                            onClick={handleDeleteWord}
-                            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-amber-50 text-amber-700 hover:bg-amber-100 border border-amber-200 transition-colors"
-                            title="Effacer le dernier mot"
+                            onClick={dictActions.deleteWord}
+                            className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium bg-amber-50 text-amber-800 hover:bg-amber-100 border border-amber-300 transition-colors disabled:opacity-40"
+                            title="Effacer le dernier mot (ou dites 'effacer')"
                             disabled={!userInput}
                         >
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -935,10 +781,11 @@ export const ExclusiveAiCalculator: React.FC<ExclusiveAiCalculatorProps> = ({
                             </svg>
                             Effacer mot
                         </button>
+                        {/* Bouton Tout effacer */}
                         <button
-                            onClick={handleClearAll}
-                            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium bg-red-50 text-red-700 hover:bg-red-100 border border-red-200 transition-colors"
-                            title="Effacer tout le texte"
+                            onClick={dictActions.clearAll}
+                            className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium bg-red-50 text-red-800 hover:bg-red-100 border border-red-300 transition-colors disabled:opacity-40"
+                            title="Effacer tout le texte (ou dites 'effacer tout')"
                             disabled={!userInput}
                         >
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -946,21 +793,43 @@ export const ExclusiveAiCalculator: React.FC<ExclusiveAiCalculatorProps> = ({
                             </svg>
                             Tout effacer
                         </button>
-                        {isListening && (
-                            <span className="ml-auto text-xs text-red-500 font-medium flex items-center gap-1">
-                                <span className="w-2 h-2 bg-red-500 rounded-full animate-pulse"></span>
-                                Écoute en cours... Dites "point", "virgule", "nouvelle ligne", "effacer un mot"
-                            </span>
+                        {/* Statut en temps réel */}
+                        {dictState.isListening && (
+                            <div className="ml-auto flex items-center gap-2">
+                                <span className="text-xs font-mono text-slate-500">{Math.floor(dictState.listenDuration / 60)}:{String(dictState.listenDuration % 60).padStart(2, '0')}</span>
+                                <span className="flex items-center gap-1 text-xs font-medium text-red-600">
+                                    <span className="relative flex h-2.5 w-2.5">
+                                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                                        <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-red-500"></span>
+                                    </span>
+                                    {dictState.statusMessage || 'Écoute...'}
+                                </span>
+                            </div>
+                        )}
+                        {dictState.lastCommand && (
+                            <span className="ml-auto text-xs font-medium text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded">{dictState.lastCommand}</span>
                         )}
                     </div>
+                    {/* Guide commandes vocales (visible quand dictée active) */}
+                    {dictState.isListening && (
+                        <div className="mb-2 px-3 py-1.5 bg-blue-50 border border-blue-200 rounded-lg text-xs text-blue-700 leading-relaxed">
+                            <strong>Commandes :</strong> "point" → <b>.</b> | "virgule" → <b>,</b> | "nouvelle ligne" → retour | "effacer" → supprime 1 mot | "effacer trois mots" | "effacer tout"
+                        </div>
+                    )}
+                    {/* Preview interim */}
+                    {dictState.interimText && (
+                        <div className="mb-2 px-3 py-1.5 bg-yellow-50 border border-yellow-200 rounded-lg text-sm text-yellow-800 italic">
+                            🎤 {dictState.interimText}
+                        </div>
+                    )}
                     <div className="flex items-start gap-2">
                         <textarea
                             value={userInput}
-                            onChange={(e) => { setUserInput(e.target.value); transcriptRef.current = e.target.value; setSpellCheckDismissed(false); }}
+                            onChange={(e) => { setUserInput(e.target.value); setSpellCheckDismissed(false); }}
                             onKeyPress={(e) => {if(e.key === 'Enter' && !e.shiftKey) {e.preventDefault(); handleSend(userInput);}}}
-                            placeholder={isListening ? "🎤 Parlez maintenant... (dites 'point' pour un point, 'nouvelle ligne' pour retour)" : "Décrivez les séquelles ou demandez le calcul..."}
-                            className={`flex-1 w-full p-3 border rounded-lg focus:ring-2 focus:ring-primary-500/50 text-black placeholder:text-slate-400 bg-white resize-none ${
-                                isListening ? 'border-red-300 ring-2 ring-red-200' : 'border-slate-300'
+                            placeholder={dictState.isListening ? "🎤 Parlez maintenant..." : "Décrivez les séquelles ou demandez le calcul..."}
+                            className={`flex-1 w-full p-3 border rounded-lg focus:ring-2 focus:ring-primary-500/50 text-black placeholder:text-slate-400 bg-white resize-none transition-colors ${
+                                dictState.isListening ? 'border-red-400 ring-2 ring-red-100 bg-red-50/30' : 'border-slate-300'
                             }`}
                             aria-label="Décrire les séquelles cliniques ou demander le calcul"
                             disabled={isLoading}
