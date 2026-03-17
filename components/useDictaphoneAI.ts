@@ -1,6 +1,6 @@
 /**
  * 🎤 useDictaphoneAI — Dictaphone 100% autonome via Whisper IA (WebAssembly)
- * V3.3.377
+ * V3.3.378
  * 
  * ZÉRO dépendance externe :
  * - Pas de moteur Windows
@@ -8,10 +8,11 @@
  * - Pas de connexion internet (après 1er chargement du modèle)
  * 
  * Fonctionnement :
- * 1. Premier usage → télécharge le modèle Whisper (~50MB), cache dans le navigateur
+ * 1. Premier usage → télécharge le modèle Whisper BASE (~150MB), cache dans le navigateur
  * 2. Après → fonctionne 100% hors ligne, à vie
  * 3. Capture audio micro → détecte les silences → transcrit par Whisper WASM
- * 4. Commandes vocales intelligentes (ponctuation, effacement, navigation)
+ * 4. Correction médicale post-transcription automatique
+ * 5. Commandes vocales intelligentes (ponctuation, effacement, navigation)
  */
 
 import { useState, useRef, useCallback, useEffect } from 'react';
@@ -41,7 +42,185 @@ const WHISPER_HALLUCINATIONS = [
     /^\s*\.+\s*$/,
     /^merci\.?\s*$/i,
     /^vous\s*$/i,
+    /^\s*$/,
+    /^(\.|,|!|\?)+$/,
 ];
+
+// ═══════════════════════════════════════════════════════════════
+// CORRECTION MÉDICALE POST-TRANSCRIPTION
+// Corrige les erreurs courantes de Whisper dans un contexte médical
+// ═══════════════════════════════════════════════════════════════
+
+// Expressions entières mal transcrites (priorité haute, traitées en premier)
+const PHRASE_CORRECTIONS: [RegExp, string][] = [
+    // Erreurs spécifiques observées
+    [/\bune\s+facture\b/gi, 'une fracture'],
+    [/\bla\s+facture\b/gi, 'la fracture'],
+    [/\bdes\s+factures\b/gi, 'des fractures'],
+    [/\bqui\s+est\s+présente\b/gi, 'qui présente'],
+    [/\bde\s+de\s+2\s+autres\b/gi, 'des deux os de'],
+    [/\bde\s+de\s+deux\s+autres\b/gi, 'des deux os de'],
+    [/\b2\s+autres\s+l'avant[- ]?bras\b/gi, 'deux os de l\'avant-bras'],
+    [/\bd'eux\s+os\b/gi, 'deux os'],
+    [/\ble\s+bras\s+droit\b/gi, 'le bras droit'],
+    
+    // Anatomie - expressions courantes
+    [/\bavant[- ]?bras\b/gi, 'avant-bras'],
+    [/\bl'avant[- ]?bras\b/gi, 'l\'avant-bras'],
+    [/\bdes\s+deux\s+os\b/gi, 'des deux os'],
+    [/\ble\s+col\s+du\s+fémur\b/gi, 'le col du fémur'],
+    [/\bla\s+colonne\s+vertébrale\b/gi, 'la colonne vertébrale'],
+    [/\ble\s+membre\s+supérieur\b/gi, 'le membre supérieur'],
+    [/\ble\s+membre\s+inférieur\b/gi, 'le membre inférieur'],
+    [/\ble\s+canal\s+carpien\b/gi, 'le canal carpien'],
+    [/\bla\s+coupe\s+des\s+rotateurs\b/gi, 'la coiffe des rotateurs'],
+    [/\bcoupe\s+des\s+rotateurs\b/gi, 'coiffe des rotateurs'],
+    [/\ble\s+nerf\s+ci\s+atique\b/gi, 'le nerf sciatique'],
+    [/\bnerf\s+ci\s+atique\b/gi, 'nerf sciatique'],
+];
+
+// Mots individuels mal transcrits par Whisper (contexte médical)
+const WORD_CORRECTIONS: Record<string, string> = {
+    // Anatomie
+    'facture': 'fracture',
+    'factures': 'fractures',
+    'humus': 'humérus',
+    'humeras': 'humérus',
+    'radio': 'radius',
+    'cubitus': 'cubitus',
+    'péroné': 'péroné',
+    'calcanéon': 'calcanéum',
+    'calcanéen': 'calcanéum',
+    'clavicule': 'clavicule',
+    'omo': 'omoplate',
+    'scafoïde': 'scaphoïde',
+    'scafoide': 'scaphoïde',
+    'troçanter': 'trochanter',
+    'trocãnter': 'trochanter',
+    'trocenter': 'trochanter',
+    'malliol': 'malléole',
+    'malliole': 'malléole',
+    'malléol': 'malléole',
+    'acoémion': 'acromion',
+    'acromeon': 'acromion',
+    'glandule': 'glenoid',
+    'huille': 'huile',
+    'menisk': 'ménisque',
+    'menisque': 'ménisque',
+    
+    // Pathologies
+    'arthrose': 'arthrose',
+    'artrose': 'arthrose',
+    'algodestrôphie': 'algodystrophie',
+    'algo distrophie': 'algodystrophie',
+    'algodistrophie': 'algodystrophie',
+    'pseudo-artrose': 'pseudarthrose',
+    'pseudartrose': 'pseudarthrose',
+    'ostéophorose': 'ostéoporose',
+    'artérite': 'entérite',
+    'luxaction': 'luxation',
+    'lucsation': 'luxation',
+    'entors': 'entorse',
+    'antorse': 'entorse',
+    'tendinopathie': 'tendinopathie',
+    'tandinite': 'tendinite',
+    'tandinopathie': 'tendinopathie',
+    'ankyllose': 'ankylose',
+    'ankilose': 'ankylose',
+    'redeur': 'raideur',
+    'raideure': 'raideur',
+    'callosité': 'callosité',
+    'neuropatie': 'neuropathie',
+    'névropathie': 'neuropathie',
+    'para-sité': 'parasite',
+    'pare-sie': 'parésie',
+    'paresie': 'parésie',
+    'paralysie': 'paralysie',
+    'paralisie': 'paralysie',
+    'prosthèse': 'prothèse',
+    'protese': 'prothèse',
+    
+    // Chirurgie / procédures
+    'arthrodèse': 'arthrodèse',
+    'artérodèse': 'arthrodèse',
+    'arthrodaise': 'arthrodèse',
+    'ostéosynthèse': 'ostéosynthèse',
+    'ostéocenthaise': 'ostéosynthèse',
+    'ostéosynthaise': 'ostéosynthèse',
+    'ostéotomie': 'ostéotomie',
+    'arthroplatie': 'arthroplastie',
+    'arthrocene': 'arthroscopie',
+    'laminactomie': 'laminectomie',
+    
+    // Séquelles / mouvements
+    'dorsiflection': 'dorsiflexion',
+    'plantarflection': 'plantarflexion',
+    'palmarflection': 'palmarflexion',
+    'pronassion': 'pronation',
+    'suppination': 'supination',
+    'supinnation': 'supination',
+    'abduction': 'abduction',
+    'abdouction': 'abduction',
+    'addouction': 'adduction',
+    'retroflection': 'rétroflexion',
+    'antéflection': 'antéflexion',
+    'antépulsion': 'antépulsion',
+    'rétropulsion': 'rétropulsion',
+    
+    // Termes médico-légaux
+    'consolidé': 'consolidé',
+    'consolidassion': 'consolidation',
+    'inséquelles': 'séquelles',
+    'sequelles': 'séquelles',
+    'sequelle': 'séquelle',
+    'incapacité': 'incapacité',
+    'préjudisse': 'préjudice',
+    'préjudice': 'préjudice',
+    'barème': 'barème',
+    'bareime': 'barème',
+    'bare-M': 'barème',
+    
+    // Termes généraux fréquemment mal transcrits
+    'paciãn': 'patient',
+    'paciàn': 'patient',
+    'passien': 'patient',
+    'passiant': 'patient',
+    'prézente': 'présente',
+    'présante': 'présente',
+    'patiante': 'patiente',
+    'agé': 'âgé',
+    'agee': 'âgée',
+    'age': 'âgé',
+};
+
+/**
+ * Correction post-transcription médicale
+ * Applique d'abord les corrections de phrases, puis les corrections de mots
+ */
+function medicalPostCorrection(text: string): string {
+    let corrected = text;
+    
+    // 1. Corrections de phrases / expressions (priorité haute)
+    for (const [pattern, replacement] of PHRASE_CORRECTIONS) {
+        corrected = corrected.replace(pattern, replacement);
+    }
+    
+    // 2. Corrections mot par mot
+    corrected = corrected.replace(/\b[\wà-ÿÀ-ÿ'-]+\b/gi, (word) => {
+        const lower = word.toLowerCase();
+        const correction = WORD_CORRECTIONS[lower];
+        if (correction) {
+            // Préserver la casse du premier caractère
+            if (word[0] === word[0].toUpperCase()) {
+                return correction.charAt(0).toUpperCase() + correction.slice(1);
+            }
+            return correction;
+        }
+        return word;
+    });
+    
+    return corrected;
+}
 
 // ═══════════════════════════════════════════════════════════════
 // TRAITEMENT COMMANDES VOCALES
@@ -244,8 +423,10 @@ export function useDictaphoneAI(
                 return_timestamps: false,
             });
 
-            const text = result?.text?.trim();
-            if (text) {
+            const rawText = result?.text?.trim();
+            if (rawText) {
+                // Correction médicale post-transcription
+                const text = medicalPostCorrection(rawText);
                 const cmd = processVoiceInput(text);
                 switch (cmd.type) {
                     case 'clear_all':
@@ -286,14 +467,14 @@ export function useDictaphoneAI(
 
         setIsModelLoading(true);
         setModelProgress(0);
-        setStatusMessage('📦 Chargement du modèle Whisper (une seule fois)...');
+        setStatusMessage('📦 Chargement du modèle Whisper BASE (une seule fois, ~150MB)...');
 
         try {
             const { pipeline } = await import('@huggingface/transformers');
 
             transcriberRef.current = await pipeline(
                 'automatic-speech-recognition',
-                'onnx-community/whisper-tiny',
+                'onnx-community/whisper-base',
                 {
                     device: 'wasm',
                     progress_callback: (info: any) => {
