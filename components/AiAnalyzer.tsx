@@ -6693,6 +6693,24 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             negativeContext: /simple.*raideur/i
         },
         
+        // 🆕 V3.3.384: Entorse stade 1 / bénigne → Laxité chronique du pied (séquelle d'entorse bénigne)
+        // Stade 1 = simple distension ligamentaire, pas de rupture, pas d'instabilité chronique
+        // Taux bas: 0-3% (entorse bénigne) au lieu de 5-15% (instabilité chronique)
+        {
+            pattern: /entorse.*(?:stade\s*[1I]|grade\s*[1I]|b[eé]nigne|l[eé]g[eè]re|simple).*(?:cheville|ligament|lat[eé]ral)/i,
+            context: /.*/i,
+            searchTerms: ["Laxité chronique du pied — séquelle d'entorse bénigne"],
+            priority: 12100,  // Au-dessus de instabilité chronique (12000)
+            negativeContext: /grave|s[eé]v[eè]re|stade\s*[23]|grade\s*[23]|rupture|chirurgie|instabilit[eé]|laxit[eé]/i
+        },
+        {
+            pattern: /(?:cheville|ligament|lat[eé]ral).*entorse.*(?:stade\s*[1I]|grade\s*[1I]|b[eé]nigne|l[eé]g[eè]re|simple)/i,
+            context: /.*/i,
+            searchTerms: ["Laxité chronique du pied — séquelle d'entorse bénigne"],
+            priority: 12100,
+            negativeContext: /grave|s[eé]v[eè]re|stade\s*[23]|grade\s*[23]|rupture|chirurgie|instabilit[eé]|laxit[eé]/i
+        },
+
         // 🆕 V3.3.138: Instabilité/Laxité CHEVILLE (entorse, rupture ligamentaire)
         {
             pattern: /(?:cheville|cou.*de.*pied).*(?:instabilit[eé]|laxit[eé]|entorse|rupture.*ligament|ligament.*externe)/i,
@@ -7105,12 +7123,13 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
         },
         
         // === RÈGLE SPÉCIALE: CONSOLIDATION SANS SÉQUELLE = 0% IPP (V3.3.137 FIX) ===
+        // 🔧 V3.3.384: Priority 15000 (above entorse LLE 12000) + pattern élargi (plaie, contusion, brûlure, lumbago, chute)
         {
-            pattern: /(?:fracture|arrachement|luxation|entorse|traumatisme|lesion|trauma)/i,  // Détecte simplement un traumatisme
-            context: /(?:sans|pas\s+d[e']?|aucune?)\s*s[eé]quelles?|examen.*normal|clinique.*normal|normalit[eé]|consolidation.*(?:sans|parfaite)|gu[eé]rison.*compl[eè]te|r[eé]cup[eé]ration.*compl[eè]te|mobilit[eé]s?.*(?:normale|compl[eè]te)|strictement.*normal/i,
+            pattern: /(?:fracture|arrachement|luxation|entorse|traumatisme|lesion|trauma|plaie|contusion|br[uû]lure|lumbago|chute|glissade|corps\s+[eé]tranger)/i,
+            context: /(?:sans|pas\s+d[e']?|aucune?)\s*s[eé]quelles?|examen\s+(?:\w+\s+)?normal|clinique\s+normal|normalit[eé]|consolidation\s+(?:sans\s+s[eé]quelle|parfaite)|gu[eé]rison\s+compl[eè]te|mobilit[eé]s?\s+(?:normales?|compl[eè]tes?)|strictement\s+normal/i,
             searchTerms: ["__SANS_SEQUELLE__", "__FRACTURE_CONSOLIDEE_SANS_SEQUELLE__"],  // Marqueurs spéciaux
-            priority: 10000,  // Priorité maximale absolue
-            negativeContext: /(?:marche.*canne|canne|accroupissement.*difficile|difficult[eé]|trochanter|massif.*trochant|trochant[eé]ro|raideur|limitation|ankylose|raccourcissement|cal\s+vicieux|pseudarthrose|amputation)/i  // 🆕 NE PAS appliquer si aide technique ou gêne fonctionnelle ou séquelle réelle
+            priority: 15000,  // 🔧 V3.3.384: Priorité ABSOLUE — au-dessus de toutes les pathologies spécifiques
+            negativeContext: /(?:marche.*canne|canne|accroupissement.*difficile|difficult[eé]|trochanter|massif.*trochant|trochant[eé]ro|raideur|limitation|ankylose|raccourcissement|cal\s+vicieux|pseudarthrose|amputation|ost[eé]osynth|plaque|clou|broche|fixateur|deux\s+os.*avant|hum[eé]rus|clavicule|f[eé]mur|tibia|radius.*cubitus|cubitus.*radius)/i  // NE PAS appliquer si aide technique, gêne fonctionnelle, séquelle réelle, ou fracture spécifique nommée (a son propre barème)
         },
         // 🆕 V3.3.363: Discordance/amplification symptomatique → quasi sans séquelle (3-5%)
         {
@@ -7709,14 +7728,23 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
         },
         // Taie cornéenne — V3.3.365: route to acuité-specific entry when acuité specified
         {
-            pattern: /taie.*corn[eé]enne|taie.*corn[eé]e|corn[eé]e.*opaque|leucome\s+corn[eé]en/i,
+            pattern: /taie.*corn[eé]enne|taie.*corn[eé]e|corn[eé]e.*opaque|leucome\s+corn[eé]en|cicatrice.*corn[eé]enne|ulc[eè]re.*corn[eé]en/i,
             context: /acuit[eé]|\/10|dixi[eè]me|vision\s+\d/i,
             searchTerms: ["__TAIE_CORNEENNE_ACUITE__"],
             priority: 10300
         },
+        // 🆕 V3.3.384: Corps étranger cornéen / éclat métallique oeil → cicatrice cornéenne minime
+        // Si explicitement "pas de perte acuité" → taux très bas
+        {
+            pattern: /corps\s+[eé]tranger.*(?:corn[eé]|oeil)|[eé]clat.*(?:m[eé]tal|oeil)|ulc[eè]re.*corn[eé]en|cicatrice.*corn[eé]enne/i,
+            context: /cicatri|corn[eé]en|gu[eé]ri|oeil|ophtalmol/i,
+            searchTerms: ["Taies de cornée (selon gêne visuelle)"],
+            priority: 10301,  // Au-dessus de la taie cornéenne générique
+            negativeContext: /perte.*compl[eè]te.*vision|[eé]nucl[eé]ation|c[eé]cit[eé]|acuit[eé].*[12]\/10/i  // Ne pas router ici si perte complète avérée
+        },
         // Taie cornéenne sans acuité spécifique → barème générique
         {
-            pattern: /taie.*corn[eé]enne|taie.*corn[eé]e|corn[eé]e.*opaque|leucome\s+corn[eé]en/i,
+            pattern: /taie.*corn[eé]enne|taie.*corn[eé]e|corn[eé]e.*opaque|leucome\s+corn[eé]en|cicatrice.*corn[eé]enne|ulc[eè]re.*corn[eé]en/i,
             context: /.*/i,
             searchTerms: ["Taies de cornée (selon gêne visuelle)"],
             priority: 10299
@@ -8592,12 +8620,21 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             priority: 1004,  // TRÈS HAUTE - éviter "trouble grave"
             negativeContext: /trouble.*grave|pseudarthrose|infection/i  // V3.3.209: RETIRÉ "déplacée" du negativeContext car il matchait "non déplacée" → la règle ne se déclenchait JAMAIS
         },
+        // 🔧 V3.3.384: Brûlure main/doigt/poignet → Brûlures des mains (SANS avant-bras isolé)
         {
-            pattern: /br[uû]lures?.*(?:main|avant.*bras|poignet|doigt)|(?:main|avant.*bras|poignet).*br[uû]lures?/i,
+            pattern: /br[uû]lures?.*(?:main|poignet|doigt)|(?:main|poignet|doigt).*br[uû]lures?/i,
             context: /(?:profondes?|2.*3.*degr[eé]|circonf[eé]rentielle?|greffe|raideur.*doigt|cicatrice|trouble.*sensitif)/i,
             searchTerms: ["Brûlures des mains avec séquelles fonctionnelles (Main Dominante)"],
             priority: 1005,
             negativeContext: /non.*dominante|gauche.*droitier|main.*gauche.*droitier/i
+        },
+        // 🆕 V3.3.384: Brûlure AVANT-BRAS (sans main) → Brûlures cutanées légères (< 10% SC) ou étendues
+        {
+            pattern: /br[uû]lures?.*avant[\s-]*bras|avant[\s-]*bras.*br[uû]lures?/i,
+            context: /(?:profondes?|2.*3.*degr[eé]|cicatrice|r[eé]tractile|dyschromique|greffe|trouble.*sensitif)/i,
+            searchTerms: ["Brûlures cutanées légères - Moins de 10% de la surface corporelle"],
+            priority: 1004,
+            negativeContext: /main.*br[uû]l|br[uû]l.*main|visage|face|cou/i  // Si main aussi touchée, laisser la règle main prendre le relais
         },
         
         // === RÈGLE FRACTURE OUVERTE TIBIA GUSTILO IIIB (V3.3.35 - FIX CAS 11) ===
@@ -8929,12 +8966,13 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
         },
         // 🆕 V3.3.130: Sciatique/Cruralgie chronique (sans hernie discale explicite)
         // 🔧 V3.3.266: negativeContext ajouté pour exclure "sciatique poplité" (nom de nerf, pas radiculalgie)
+        // 🔧 V3.3.384: negativeContext ajouté pour "pas de sciatique" (négation explicite)
         {
             pattern: /(?:sciatique|cruralgie).*(?:chronique|persistante|r[eé]siduelle)/i,
             context: /lombaire|L\d|rachis|radiculalgie|douleur.*irradiante|membre.*inf[eé]rieur/i,
             searchTerms: ['Hernie discale lombaire post-traumatique - Avec radiculalgie (sciatique ou cruralgie)'],
             priority: 96,
-            negativeContext: /sans.*s[eé]quelle|gu[eé]rison|sciatique\s+poplit[eé]|SPI|SPE|nerf\s+sciatique\s+poplit[eé]/i
+            negativeContext: /sans.*s[eé]quelle|gu[eé]rison|sciatique\s+poplit[eé]|SPI|SPE|nerf\s+sciatique\s+poplit[eé]|pas\s+de\s+(?:signes?\s+(?:de\s+)?)?sciatique|sans\s+sciatique|aucune?\s+sciatique/i
         },
         // 🆕 V3.3.361: COMPRESSION MÉDULLAIRE (= paraplégie incomplète fonctionnelle)
         // 🔧 V3.3.374: Inclure syndrome de Brown-Séquard (hémicompression médullaire)
@@ -8957,21 +8995,22 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             pattern: /parapl[eé]gie\s+compl[eè]te|parapl[eé]gie(?!.*incompl)/i,
             context: /traumat|fracture|vert[eé]br|m[eé]dullaire|fauteuil|troubles?\s+sphinct/i,
             searchTerms: ['Paraplégie complète'],
-            priority: 12000,
+            priority: 12100,  // 🔧 V3.3.384: Au-dessus du générique (12000) pour que "complète" fire en premier
             negativeContext: /incompl[eè]te|partiel|r[eé]cup[eé]r/i
         },
+        // 🔧 V3.3.384: Tétraplégie complète/totale — priority 12100 pour primer sur le générique
         {
-            pattern: /(?:quadripl[eé]gie|t[eé]trapl[eé]gie).*(?:compl[eè]te|totale)/i,
-            context: /traumat|fracture|vert[eé]br|cervical|m[eé]dullaire/i,
-            searchTerms: ['Tétraplégie totale'],
-            priority: 12000,
+            pattern: /(?:quadripl[eé]gie|t[eé]trapl[eé]gie).*(?:compl[eè]te|totale)|(?:compl[eè]te|totale).*(?:quadripl[eé]gie|t[eé]trapl[eé]gie)/i,
+            context: /traumat|fracture|vert[eé]br|cervical|m[eé]dullaire|paralysie|fauteuil|d[eé]pendance|section.*moelle/i,
+            searchTerms: ['Quadriplégie complète (confinement au lit)'],
+            priority: 12100,  // 🔧 V3.3.384: Au-dessus du générique (12000)
             negativeContext: /gu[eé]rison|incompl[eè]t/i
         },
-        // V3.3.347: Tétraplégie/quadriplégie incomplète ou générique
+        // V3.3.347: Tétraplégie/quadriplégie incomplète ou générique (fallback)
         {
             pattern: /quadripl[eé]gie|t[eé]trapl[eé]gie/i,
             context: /traumat|fracture|vert[eé]br|cervical|m[eé]dullaire/i,
-            searchTerms: ['Tétraplégie incomplète (marche possible)'],
+            searchTerms: ['Quadriplégie incomplète (marche possible)'],
             priority: 12000,
             negativeContext: /gu[eé]rison/i
         },
@@ -11196,6 +11235,20 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
                 if (negMatchClean || negMatchWorking) {
                     continue;
                 }
+            }
+            
+            // 🔧 V3.3.384: SANS_SEQUELLE traité dans la PREMIÈRE boucle (priority 15000, la plus haute)
+            // Avant V3.3.384, SANS_SEQUELLE était exclu de la 1ère boucle et traité dans la 2ème.
+            // Mais les règles simples (entorse LLE 12000) retournaient avant d'atteindre la 2ème boucle.
+            if (rule.searchTerms.includes("__SANS_SEQUELLE__")) {
+                console.log('✅ [V3.3.384] SANS_SEQUELLE détecté dans 1ère boucle expert rules (priority 15000) → 0% IPP');
+                return {
+                    type: 'no_result',
+                    text: `✅ <strong>CONSOLIDATION SANS SÉQUELLE DÉTECTÉE</strong><br><br>` +
+                          `La lésion est consolidée <strong>sans séquelle résiduelle</strong>.<br><br>` +
+                          `📊 <strong>Taux IPP = 0%</strong> (guérison ad integrum)<br><br>` +
+                          `Aucune incapacité permanente partielle n'est à retenir.`
+                };
             }
             
             // Gérer UNIQUEMENT les règles simples ici (tassements, uvéite, etc.)
@@ -19294,8 +19347,11 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
     // Hernie discale + Sciatique
     // 🔴 V3.3.266: "sciatique poplité" (SPI/SPE) = nerf périphérique, PAS radiculalgie rachis
     // On ne push hernie discale QUE si: hernie explicite dans le texte OU sciatique SANS poplité OU cruralgie/radiculalgie
+    // 🔧 V3.3.384: NE PAS matcher sciatique si NIÉE dans le texte ("pas de sciatique", "sans sciatique", "aucune sciatique")
     const hasExplicitHernie = /hernie.*discale/i.test(text);
-    const hasSciatRadiculalgieOnly = /sciatique/i.test(text) && !/sciatique\s+poplit[eé]|\bSPI\b|\bSPE\b/i.test(text);
+    const hasSciatRaw = /sciatique/i.test(text) && !/sciatique\s+poplit[eé]|\bSPI\b|\bSPE\b/i.test(text);
+    const isSciatNegated = /(?:pas\s+de\s+(?:signes?\s+(?:de\s+)?)?|sans\s+|aucune?\s+|ni\s+|absence\s+(?:de\s+)?)sciatique/i.test(text);
+    const hasSciatRadiculalgieOnly = hasSciatRaw && !isSciatNegated;
     const hasCruralgieOrRadiculalgie = /cruralgie|radiculalgie/i.test(text);
     if (hasExplicitHernie || hasSciatRadiculalgieOnly || hasCruralgieOrRadiculalgie) {
         detectedSequelae.push({
@@ -20577,14 +20633,30 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
     if (detectedSequelae.length >= 1) {
         // 🆕 V3.3.201j: Si CUMUL détecté, SKIP le regroupement par système
         if (isCumulDetected) {
-            console.log('⚠️ V3.3.201j: CUMUL DÉTECTÉ → SKIP regroupement par système, passage direct à extraction lésions individuelles');
-            // Ne rien faire, laisser le code continuer jusqu'à l'extraction cumul (ligne ~13906)
-        } else {
+            // 🆕 V3.3.384: TC GRAVE + multi-sites → ANNULER cumul, forcer passage expert rules
+            // Le cumul split perd le contexte TC (hématome sous-dural filtré, boiterie=no_result)
+            // L'expert rule __CUMUL_TC_GRAVE__ dans comprehensiveSingleLesionAnalysis évalue correctement
+            // ⚠️ EXCEPTION: Si le texte contient d'AUTRES pathologies majeures distinctes (fémur, dépression, amputation),
+            // le cumul est LÉGITIME (vrai polytraumatisme multi-système) → NE PAS annuler
+            const hasTCGraveInCumul = /(?:traumatisme.*cr[aâ]ne?|TC|coma|perte.*connaissance)/i.test(text) &&
+                /(?:syndrome\s+frontal|troubles?.*m[eé]moire|apathie|h[eé]mipar[eé]sie|h[eé]mipl[eé]gie|troubles?.*cognitif|d[eé]mence|[eé]pilepsie|glasgow)/i.test(text);
+            const hasDistinctMajorInjury = /fracture.*(?:f[eé]mur|hum[eé]rus|diaphys|tibia|plateau|mall[eé]ol|bimall[eé]ol|calcan[eé]|rotule|bassin.*cadre|vert[eé]br|tassement|omoplate|scaphoide|ol[eé]crane)|amputation|syndrome\s+d[eé]pressif|d[eé]pression\s+(?:majeur|s[eé]v[eè]re|r[eé]actionnel)|surdit[eé]|acuit[eé].*visuelle|baisse.*acuit[eé]|BAV|entorse.*cervical|rachis/i.test(text);
+            if (hasTCGraveInCumul && !hasDistinctMajorInjury) {
+                console.log('🧠 [V3.3.384] TC GRAVE détecté dans cumul → ANNULER cumul, forcer passage aux expert rules');
+                isCumulDetected = false;
+                cumulDetection.isCumul = false;
+            } else {
+                console.log('⚠️ V3.3.201j: CUMUL DÉTECTÉ → SKIP regroupement par système, passage direct à extraction lésions individuelles');
+                // Ne rien faire, laisser le code continuer jusqu'à l'extraction cumul (ligne ~13906)
+            }
+        }
+        if (!isCumulDetected) {
         // 🆕 V3.3.158 + V3.3.214: EXCEPTION TC NEUROLOGIQUES
         // Pattern: Chute OU TC + perte connaissance/hospitalisation + troubles cognitifs/hémiparésie/vertiges/céphalées
         // → Laisser passer aux expert rules qui détecteront le bon barème automatiquement
         const hasTraumaticBrainInjury = /(?:chute|traumatisme.*cr[aâ]ne?|TC|perte.*connaissance|coma|hospitalisation.*neuro)/i.test(text);
-        const hasNeurologicalSequelae = /(?:troubles?.*cognitif|h[eé]mipar[eé]sie|vertige|c[eé]phal[eé]e)/i.test(text);
+        // 🔧 V3.3.384: Ajout syndrome frontal, troubles mémoire, apathie comme séquelles neurologiques
+        const hasNeurologicalSequelae = /(?:troubles?.*cognitif|h[eé]mipar[eé]sie|vertige|c[eé]phal[eé]e|syndrome\s+frontal|troubles?.*m[eé]moire|apathie|d[eé]mence)/i.test(text);
         
         // 🆕 V3.3.214: HÉMIPARÉSIE/HÉMIPLÉGIE = signe FOCAL de contusion cérébrale
         // C'est un signe de LOCALISATION cérébrale (lésion du cortex moteur ou capsule interne)
@@ -20604,6 +20676,9 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
         if (/[eé]pilepsie/i.test(text)) neuroSequelaCountFromText++;
         if (/irritabilit[eé]|troubles?.*humeur|troubles?.*caract[eè]re/i.test(text)) neuroSequelaCountFromText++; // 🆕 V3.3.222
         if (/troubles?.*concentration|d[eé]ficit.*attention/i.test(text)) neuroSequelaCountFromText++; // 🆕 V3.3.222
+        if (/syndrome\s+frontal|dys[eé]x[eé]cutif/i.test(text)) neuroSequelaCountFromText++; // 🆕 V3.3.384
+        if (/troubles?.*m[eé]moire|amn[eé]sie/i.test(text)) neuroSequelaCountFromText++; // 🆕 V3.3.384
+        if (/apathie|ad[eé]namie/i.test(text)) neuroSequelaCountFromText++; // 🆕 V3.3.384
         
         console.log(`🧠 [V3.3.214] TC check: hasTC=${hasTraumaticBrainInjury}, hasNeuro=${hasNeurologicalSequelae}, hasFocal=${hasFocalNeurologicalSign}, neuroCount=${neuroSequelaCountFromText}`);
     
@@ -20619,9 +20694,10 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
         // → La règle experte SANS_SEQUELLE (priority 10000) retourne 0% IPP correctement
         // → NE DOIT JAMAIS entrer dans le regroupement par système qui donne un taux par défaut (12%)
         // ⚠️ "consolid[eé].*sans" retiré — trop greedy ("consolidée...sans cannes" = faux positif)
-        else if (/(?:fracture|arrachement|luxation|entorse|traumatisme|lesion)/i.test(text) &&
-                 /(?:sans|pas\s+d[e']?|aucune?)\s*s[eé]quelles?|examen\s+(?:\w+\s+)*normal|gu[eé]rison\s+compl[eè]te|r[eé]cup[eé]ration\s+compl[eè]te|mobilit[eé]s?\s+(?:normale|conserv[eé]e|compl[eè]te)s?|consolidation\s+(?:parfaite|anatomique)|consolid[eé]e?\s+sans\s+s[eé]quelle|strictement\s+normal/i.test(text)) {
-            console.log('✅ [V3.3.346] TRAUMATISME SANS SÉQUELLE détecté → Bypass vers expert rules (règle SANS_SEQUELLE)');
+        // 🔧 V3.3.384: Pattern élargi en cohérence avec expert rule SANS_SEQUELLE
+        else if (/(?:fracture|arrachement|luxation|entorse|traumatisme|lesion|plaie|contusion|br[uû]lure|lumbago|chute|glissade|corps\s+[eé]tranger)/i.test(text) &&
+                 /(?:sans|pas\s+d[e']?|aucune?)\s*s[eé]quelles?|examen\s+(?:\w+\s+)*normal|gu[eé]rison\s+compl[eè]te|mobilit[eé]s?\s+(?:normale|conserv[eé]e|compl[eè]te)s?|consolidation\s+(?:parfaite|anatomique)|consolid[eé]e?\s+sans\s+s[eé]quelle|strictement\s+normal/i.test(text)) {
+            console.log('✅ [V3.3.384] TRAUMATISME SANS SÉQUELLE détecté → Bypass vers expert rules (règle SANS_SEQUELLE)');
             // Ne pas retourner, laisser l'analyse continuer vers comprehensiveSingleLesionAnalysis
         }
         // 🆕 V3.3.215: BRÛLURES PROFONDES MAINS/AVANT-BRAS = Bypass vers expert rules
@@ -20631,6 +20707,14 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
         else if (/br[uû]lures?/i.test(text) && /main|avant[\s-]*bras|poignet|doigt/i.test(text) && /profondes?|greffe|raideur|2.*3.*degr[eé]|circonf[eé]rentielle?|cicatrice/i.test(text)) {
             console.log('🔥 [V3.3.215] BRÛLURES PROFONDES MAIN/AVANT-BRAS détectées → Bypass DIRECT vers expert rules');
             // Ne pas retourner, laisser l'analyse continuer aux expert rules dans comprehensiveSingleLesionAnalysis
+        }
+        // 🆕 V3.3.384: ENTORSE STADE 1 / BÉNIGNE = Bypass vers expert rules
+        // Pattern: entorse + stade 1/bénigne/légère/simple + cheville/ligament
+        // → NE DOIT PAS passer par le regroupement systèmes (donne 12% "séquelles ligamentaires")
+        // → Doit atteindre l'expert rule "Entorse du genou (sans laxité)" [2-5%]
+        else if (/entorse/i.test(text) && /stade\s+[1I]|b[eé]nigne|l[eé]g[eè]re|simple/i.test(text) && !(/stade\s+[23]|grade\s+[23]|rupture|chirurgie/i.test(text))) {
+            console.log('🦶 [V3.3.384] ENTORSE STADE 1/BÉNIGNE détectée → Bypass vers expert rules');
+            // Ne pas retourner, laisser l'analyse continuer vers comprehensiveSingleLesionAnalysis
         }
         // 🆕 V3.3.228: ENTORSE GRAVE CHEVILLE = UNE SEULE PATHOLOGIE articulaire
         // Pattern: entorse grave/rupture ligamentaire cheville + instabilité/boiterie/gonflement
@@ -21731,7 +21815,7 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
                 }
             };
         }
-        } // 🆕 V3.3.201j: FIN du bloc else (if isCumulDetected)
+        } // 🆕 V3.3.201j: FIN du bloc if (!isCumulDetected) — bypass guards + regroupement systèmes
     }
     
     // Si une seule séquelle, continuer l'analyse normale
@@ -22969,6 +23053,28 @@ ${severityDesc354 ? `<strong>🔍 Indicateurs de sévérité :</strong> ${severi
                 if (/contusion.*cerebrale|cerebrale.*contusion/i.test(lesion)) {
                     enrichedLesion = lesion + ' syndrome subjectif commun blessures crane cephalee vertiges troubles humeur perte connaissance';
                     console.log(`   🔧 V3.3.209: Enrichissement contusion cérébrale: "${lesion}" → "${enrichedLesion}"`);
+                }
+
+                // 🆕 V3.3.384: HÉMATOME INTRACRÂNIEN / TC GRAVE → Enrichir avec contexte clinique du texte original
+                // Le nom de la séquelle ("Hématome sous-dural") ne contient pas les séquelles neuropsychologiques.
+                // On réinjecte les termes TC-pertinents du texte original pour que __CUMUL_TC_GRAVE__ matche.
+                if (/h[eé]matome.*(?:sous.*dural|extradural|[eé]pidural|intracr[aâ]nien|intrac[eé]r[eé]bral)|traumatisme.*cr[aâ]nien|TC\s+grave/i.test(lesion)) {
+                    const tcContext: string[] = [];
+                    if (/traumatisme.*cr[aâ]nien.*(?:grave|s[eé]v[eè]re)|TC.*grave/i.test(text)) tcContext.push('traumatisme cranien grave');
+                    if (/glasgow.*\d|coma/i.test(text)) tcContext.push(text.match(/glasgow\s*\d+|coma/i)?.[0] || 'coma');
+                    if (/syndrome\s+frontal/i.test(text)) tcContext.push('syndrome frontal');
+                    if (/troubles?.*m[eé]moire/i.test(text)) tcContext.push('troubles memoire');
+                    if (/apathie/i.test(text)) tcContext.push('apathie');
+                    if (/irritabilit[eé]/i.test(text)) tcContext.push('irritabilite');
+                    if (/c[eé]phal[eé]e/i.test(text)) tcContext.push('cephalee');
+                    if (/[eé]pilepsie|comitial/i.test(text)) tcContext.push('epilepsie');
+                    if (/troubles?.*cognitif/i.test(text)) tcContext.push('troubles cognitifs');
+                    if (/anosmie/i.test(text)) tcContext.push('anosmie');
+                    if (/impossible.*reprendre.*(?:activit[eé]|travail)|inaptitude/i.test(text)) tcContext.push('impossible reprendre activite professionnelle');
+                    if (tcContext.length > 0) {
+                        enrichedLesion = lesion + ' ' + tcContext.join(' ');
+                        console.log(`   🔧 V3.3.384: Enrichissement TC/hématome: "${lesion.substring(0, 50)}" → +${tcContext.length} termes TC`);
+                    }
                 }
 
                 // 🆕 V3.3.209: FRACTURE MANDIBULE NON DÉPLACÉE → Enrichir avec "consolidation trouble léger"
