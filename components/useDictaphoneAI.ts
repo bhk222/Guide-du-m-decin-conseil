@@ -1,6 +1,6 @@
 /**
  * 🎤 useDictaphoneAI — Dictaphone 100% autonome via Whisper IA (WebAssembly)
- * V3.3.378
+ * V3.3.379
  * 
  * ZÉRO dépendance externe :
  * - Pas de moteur Windows
@@ -8,10 +8,10 @@
  * - Pas de connexion internet (après 1er chargement du modèle)
  * 
  * Fonctionnement :
- * 1. Premier usage → télécharge le modèle Whisper BASE (~150MB), cache dans le navigateur
+ * 1. Premier usage → télécharge Whisper BASE quantifié (~75MB), cache navigateur
  * 2. Après → fonctionne 100% hors ligne, à vie
- * 3. Capture audio micro → détecte les silences → transcrit par Whisper WASM
- * 4. Correction médicale post-transcription automatique
+ * 3. Capture audio micro → détecte silences → transcrit Whisper WASM (quantifié = + rapide)
+ * 4. Correction médicale post-transcription automatique (~400 termes)
  * 5. Commandes vocales intelligentes (ponctuation, effacement, navigation)
  */
 
@@ -23,10 +23,10 @@ import { useState, useRef, useCallback, useEffect } from 'react';
 
 const SAMPLE_RATE = 16000;
 const SILENCE_THRESHOLD = 0.015;     // Seuil d'énergie RMS pour détecter le silence
-const SILENCE_DURATION_MS = 1800;    // Durée de silence avant traitement (ms)
-const MAX_CHUNK_SECONDS = 28;        // Whisper max = 30s, on coupe à 28s par sécurité
-const MIN_AUDIO_SECONDS = 0.6;       // Ignorer les segments < 0.6s (bruit)
-const SILENCE_CHECK_INTERVAL = 150;  // Intervalle vérification silence (ms)
+const SILENCE_DURATION_MS = 1200;    // Réduit 1800→1200 pour réactivité
+const MAX_CHUNK_SECONDS = 20;        // Chunks courts = transcription rapide
+const MIN_AUDIO_SECONDS = 0.4;       // Ignorer les segments < 0.4s (bruit)
+const SILENCE_CHECK_INTERVAL = 100;  // Vérification silence plus fréquente
 
 // Correspondance nombres français → chiffres
 const NOMBRE_FR: Record<string, number> = {
@@ -77,6 +77,47 @@ const PHRASE_CORRECTIONS: [RegExp, string][] = [
     [/\bcoupe\s+des\s+rotateurs\b/gi, 'coiffe des rotateurs'],
     [/\ble\s+nerf\s+ci\s+atique\b/gi, 'le nerf sciatique'],
     [/\bnerf\s+ci\s+atique\b/gi, 'nerf sciatique'],
+    
+    // Mots composés médicaux souvent coupés par Whisper
+    [/\bostéo\s+synthèse\b/gi, 'ostéosynthèse'],
+    [/\bostéo\s+cynthèse\b/gi, 'ostéosynthèse'],
+    [/\barthro\s+dèse\b/gi, 'arthrodèse'],
+    [/\barthro\s+scopie\b/gi, 'arthroscopie'],
+    [/\barthro\s+plastie\b/gi, 'arthroplastie'],
+    [/\bpseudo\s+arthrose\b/gi, 'pseudarthrose'],
+    [/\balgo\s+dystrophie\b/gi, 'algodystrophie'],
+    [/\balgo\s+distrophie\b/gi, 'algodystrophie'],
+    [/\btendino?\s+pathie\b/gi, 'tendinopathie'],
+    [/\bneuro?\s+pathie\b/gi, 'neuropathie'],
+    [/\bostéo\s+porose\b/gi, 'ostéoporose'],
+    [/\bostéo\s+nécrose\b/gi, 'ostéonécrose'],
+    [/\bostéo\s+tomie\b/gi, 'ostéotomie'],
+    [/\blamin[ae]?\s+ctomie\b/gi, 'laminectomie'],
+    [/\bdisc?e?\s+ctomie\b/gi, 'discectomie'],
+    [/\bligamento?\s+plastie\b/gi, 'ligamentoplastie'],
+    [/\bamy[io]?\s+trophie\b/gi, 'amyotrophie'],
+    [/\bhernie\s+dis\s+cale\b/gi, 'hernie discale'],
+    [/\bspondylo\s+listhésis\b/gi, 'spondylolisthésis'],
+    [/\bré\s+éducation\b/gi, 'rééducation'],
+    [/\bkinési?\s+thérapie\b/gi, 'kinésithérapie'],
+    
+    // Coiffe des rotateurs - variantes Whisper
+    [/\bla\s+coupe\s+de\s+rotateurs?\b/gi, 'la coiffe des rotateurs'],
+    [/\bla\s+quoi\s+des?\s+rotateurs?\b/gi, 'la coiffe des rotateurs'],
+    
+    // Mouvements composés souvent coupés
+    [/\bdorsi?\s+flexion\b/gi, 'dorsiflexion'],
+    [/\bplant(?:aire?)?\s+flexion\b/gi, 'plantarflexion'],
+    [/\bpalm(?:aire?)?\s+flexion\b/gi, 'palmarflexion'],
+    [/\bantée?\s+pulsion\b/gi, 'antépulsion'],
+    [/\brétro\s+pulsion\b/gi, 'rétropulsion'],
+    [/\bpro\s+nation\b/gi, 'pronation'],
+    [/\bsup(?:er?|hi)?\s+nation\b/gi, 'supination'],
+    
+    // Médico-légal / rapport
+    [/\ben\s+capacité\b/gi, 'incapacité'],
+    [/\ble\s+préju\s+dice\b/gi, 'le préjudice'],
+    [/\bles\s+sé?quell?e?s?\b/gi, 'les séquelles'],
 ];
 
 // Mots individuels mal transcrits par Whisper (contexte médical)
@@ -86,7 +127,6 @@ const WORD_CORRECTIONS: Record<string, string> = {
     'factures': 'fractures',
     'humus': 'humérus',
     'humeras': 'humérus',
-    'radio': 'radius',
     'cubitus': 'cubitus',
     'péroné': 'péroné',
     'calcanéon': 'calcanéum',
@@ -103,8 +143,6 @@ const WORD_CORRECTIONS: Record<string, string> = {
     'malléol': 'malléole',
     'acoémion': 'acromion',
     'acromeon': 'acromion',
-    'glandule': 'glenoid',
-    'huille': 'huile',
     'menisk': 'ménisque',
     'menisque': 'ménisque',
     
@@ -117,7 +155,6 @@ const WORD_CORRECTIONS: Record<string, string> = {
     'pseudo-artrose': 'pseudarthrose',
     'pseudartrose': 'pseudarthrose',
     'ostéophorose': 'ostéoporose',
-    'artérite': 'entérite',
     'luxaction': 'luxation',
     'lucsation': 'luxation',
     'entors': 'entorse',
@@ -191,6 +228,172 @@ const WORD_CORRECTIONS: Record<string, string> = {
     'agé': 'âgé',
     'agee': 'âgée',
     'age': 'âgé',
+    
+    // ── Anatomie étendue V3.3.379 ──
+    'humerus': 'humérus',
+    'umerus': 'humérus',
+    'fémore': 'fémur',
+    'femur': 'fémur',
+    'raduis': 'radius',
+    'claviculle': 'clavicule',
+    'olécrane': 'olécrâne',
+    'olaicrâne': 'olécrâne',
+    'épicondile': 'épicondyle',
+    'épicondale': 'épicondyle',
+    'épitrochée': 'épitrochlée',
+    'scapulla': 'scapula',
+    'omoplatte': 'omoplate',
+    'metacarpe': 'métacarpe',
+    'metacarpien': 'métacarpien',
+    'falange': 'phalange',
+    'falanges': 'phalanges',
+    'cottyle': 'cotyle',
+    'cotille': 'cotyle',
+    'patela': 'patella',
+    'pattella': 'patella',
+    'fubula': 'fibula',
+    'fibbula': 'fibula',
+    'calcanéome': 'calcanéum',
+    'calcane': 'calcanéum',
+    'calcagnon': 'calcanéum',
+    'astragal': 'astragale',
+    'tallus': 'talus',
+    'maléole': 'malléole',
+    'ménisqe': 'ménisque',
+    'trocanther': 'trochanter',
+    'trocanteur': 'trochanter',
+    'diafyse': 'diaphyse',
+    'epiphyse': 'épiphyse',
+    'metaphyse': 'métaphyse',
+    'métatarce': 'métatarse',
+    'metatarse': 'métatarse',
+    'rachi': 'rachis',
+    'rachie': 'rachis',
+    
+    // ── Rachis étendu ──
+    'cervicalle': 'cervicale',
+    'lonbaire': 'lombaire',
+    'lombère': 'lombaire',
+    'thorassique': 'thoracique',
+    'thorecique': 'thoracique',
+    'vertebre': 'vertèbre',
+    'coccix': 'coccyx',
+    'cocix': 'coccyx',
+    'coxyx': 'coccyx',
+    'scoliause': 'scoliose',
+    'cifose': 'cyphose',
+    'ciphose': 'cyphose',
+    'lordoze': 'lordose',
+    
+    // ── Pathologies étendues ──
+    'entorsse': 'entorse',
+    'luxassion': 'luxation',
+    'luksation': 'luxation',
+    'subluxassion': 'subluxation',
+    'contuzion': 'contusion',
+    'hematome': 'hématome',
+    'hémathome': 'hématome',
+    'éponchement': 'épanchement',
+    'epanchement': 'épanchement',
+    'synovitte': 'synovite',
+    'bourcite': 'bursite',
+    'capsulitte': 'capsulite',
+    'periarthrite': 'périarthrite',
+    'epicondylite': 'épicondylite',
+    'tenosynovite': 'ténosynovite',
+    'ruppture': 'rupture',
+    'dechirure': 'déchirure',
+    'arachement': 'arrachement',
+    'comotion': 'commotion',
+    'traumatize': 'traumatisme',
+    'spondylolistesis': 'spondylolisthésis',
+    'stenose': 'sténose',
+    'fibroze': 'fibrose',
+    'necrose': 'nécrose',
+    'osteite': 'ostéite',
+    'osteomyelite': 'ostéomyélite',
+    'sdrc': 'SDRC',
+    
+    // ── Chirurgie étendue ──
+    'ostéosyntèse': 'ostéosynthèse',
+    'osteosynthèse': 'ostéosynthèse',
+    'ostéosintèse': 'ostéosynthèse',
+    'artrodèse': 'arthrodèse',
+    'artrodaise': 'arthrodèse',
+    'artroscopie': 'arthroscopie',
+    'artroplastie': 'arthroplastie',
+    'enclowage': 'enclouage',
+    'enbrochage': 'embrochage',
+    'cerclaj': 'cerclage',
+    'prothaise': 'prothèse',
+    'imobilisation': 'immobilisation',
+    'osteotomie': 'ostéotomie',
+    'graffe': 'greffe',
+    'greffond': 'greffon',
+    'dissectomie': 'discectomie',
+    'ablacion': 'ablation',
+    'sutture': 'suture',
+    'ligamentoplasti': 'ligamentoplastie',
+    
+    // ── Mouvements / examen étendus ──
+    'dorsieflexion': 'dorsiflexion',
+    'plantiflexion': 'plantarflexion',
+    'palmairflexion': 'palmarflexion',
+    'pronacion': 'pronation',
+    'suphinassion': 'supination',
+    'antépultion': 'antépulsion',
+    'antepulsion': 'antépulsion',
+    'retropulsion': 'rétropulsion',
+    'elevation': 'élévation',
+    'flaisum': 'flessum',
+    'flexum': 'flessum',
+    'recuvatum': 'recurvatum',
+    'recurvetum': 'recurvatum',
+    'clodication': 'claudication',
+    'claudicassion': 'claudication',
+    'boitterie': 'boiterie',
+    'amiotrophie': 'amyotrophie',
+    'paresthezie': 'paresthésie',
+    'parestésie': 'paresthésie',
+    'hypoestesie': 'hypoesthésie',
+    'disesthésie': 'dysesthésie',
+    
+    // ── Médico-légal étendu ──
+    'consalidation': 'consolidation',
+    'consoledation': 'consolidation',
+    'sequélles': 'séquelles',
+    'séquèles': 'séquelles',
+    'incapacitée': 'incapacité',
+    'incapassité': 'incapacité',
+    'retantissement': 'retentissement',
+    'retentisement': 'retentissement',
+    'indamnisation': 'indemnisation',
+    'expertize': 'expertise',
+    'deficience': 'déficience',
+    'handycap': 'handicap',
+    'diminussion': 'diminution',
+    
+    // ── Termes généraux médicaux ──
+    'diagnostique': 'diagnostic',
+    'diagnostik': 'diagnostic',
+    'oedème': 'œdème',
+    'edème': 'œdème',
+    'cicalrice': 'cicatrice',
+    'sicatrice': 'cicatrice',
+    'adherence': 'adhérence',
+    'inflamation': 'inflammation',
+    'emorragie': 'hémorragie',
+    'attrophie': 'atrophie',
+    'reeducation': 'rééducation',
+    'kinesithérapie': 'kinésithérapie',
+    'fysiothérapie': 'physiothérapie',
+    'aparaillage': 'appareillage',
+    'bilateral': 'bilatéral',
+    'unilateral': 'unilatéral',
+    'homolateral': 'homolatéral',
+    'controlateral': 'controlatéral',
+    'croissé': 'croisé',
+    'croisés': 'croisés',
 };
 
 /**
@@ -421,6 +624,7 @@ export function useDictaphoneAI(
                 language: 'french',
                 task: 'transcribe',
                 return_timestamps: false,
+                max_new_tokens: 128,
             });
 
             const rawText = result?.text?.trim();
@@ -467,27 +671,38 @@ export function useDictaphoneAI(
 
         setIsModelLoading(true);
         setModelProgress(0);
-        setStatusMessage('📦 Chargement du modèle Whisper BASE (une seule fois, ~150MB)...');
+        setStatusMessage('📦 Chargement Whisper BASE (une seule fois)...');
 
         try {
             const { pipeline } = await import('@huggingface/transformers');
 
-            transcriberRef.current = await pipeline(
-                'automatic-speech-recognition',
-                'onnx-community/whisper-base',
-                {
-                    device: 'wasm',
-                    progress_callback: (info: any) => {
-                        if (info.status === 'progress' && info.progress != null) {
-                            const pct = Math.round(info.progress);
-                            setModelProgress(pct);
-                            setStatusMessage(`📦 Téléchargement: ${pct}%`);
-                        } else if (info.status === 'ready') {
-                            setModelProgress(100);
-                        }
-                    },
-                },
-            );
+            const progressCb = (info: any) => {
+                if (info.status === 'progress' && info.progress != null) {
+                    const pct = Math.round(info.progress);
+                    setModelProgress(pct);
+                    setStatusMessage(`📦 Téléchargement: ${pct}%`);
+                } else if (info.status === 'ready') {
+                    setModelProgress(100);
+                }
+            };
+
+            try {
+                // Quantifié q8 : ~75MB, plus rapide
+                transcriberRef.current = await pipeline(
+                    'automatic-speech-recognition',
+                    'onnx-community/whisper-base',
+                    { device: 'wasm', dtype: 'q8', progress_callback: progressCb },
+                );
+            } catch {
+                // Fallback standard fp32 si quantifié non disponible
+                setStatusMessage('📦 Chargement modèle standard...');
+                setModelProgress(0);
+                transcriberRef.current = await pipeline(
+                    'automatic-speech-recognition',
+                    'onnx-community/whisper-base',
+                    { device: 'wasm', progress_callback: progressCb },
+                );
+            }
 
             setIsModelLoaded(true);
             setIsModelLoading(false);
