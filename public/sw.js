@@ -1,5 +1,5 @@
-const CACHE_NAME = 'guide-medecin-conseil-v3-201r-muscle-fix';
-const DATA_CACHE_NAME = 'guide-medecin-conseil-data-v3-201r-muscle-fix';
+const CACHE_NAME = 'guide-medecin-conseil-v3-383-whisper';
+const DATA_CACHE_NAME = 'guide-medecin-conseil-data-v3-383-whisper';
 
 // Ressources essentielles à mettre en cache immédiatement
 const STATIC_CACHE_URLS = [
@@ -83,11 +83,14 @@ self.addEventListener('fetch', event => {
         return fetch(event.request.clone())
           .then(networkResponse => {
             // Vérifier si la réponse est valide
-            if (!networkResponse || networkResponse.status !== 200 || networkResponse.type === 'error') {
+            // IMPORTANT: les réponses opaque (cross-origin, ex: modèle Whisper HuggingFace) 
+            // ont status=0 mais sont valides — on les cache aussi
+            if (!networkResponse || networkResponse.type === 'error') {
               return networkResponse;
             }
             
             // Mettre en cache pour la prochaine fois
+            // Les réponses opaque (type='opaque') incluent les fichiers du modèle Whisper
             const responseToCache = networkResponse.clone();
             
             // Utiliser le cache approprié selon le type de ressource

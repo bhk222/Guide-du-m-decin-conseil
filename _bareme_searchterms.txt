@@ -1,0 +1,425 @@
+).", rateCriteria: { low: "Décollement partiel de l
+à 1 fois par semaine", searchTerms: ["crises jacksoniennes étendues jusqu
+à 1 fois par semaine", searchTerms: ["crises jacksoniennes limitées jusqu
+à 10 mm (compensé par talonnette)", searchTerms: ["cal vicieux fémur raccourcissement 10 mm talonnette", "raccourcissement fémur talonnette"], rate: 0, description: "Raccourcissement fémoral < 10 mm compensable par talonnette, pas d
+à 12 cm²)", searchTerms: ["brèche osseuse avec battements duremériens jusqu
+à 12 fois par an", searchTerms: ["crises jacksoniennes étendues jusqu
+à 12 fois par an", searchTerms: ["crises jacksoniennes limitées jusqu
+à conservée abduction l
+à duremériens battements avec osseuse brèche", "brèche osseuse battements duremériens jusqu
+à étendues jacksoniennes crises", "crises jacksoniennes", "jacksoniennes étendues", "étendues jusqu
+à limitées jacksoniennes crises", "crises jacksoniennes", "jacksoniennes limitées", "limitées jusqu
+abdomen", searchTerms: ["rupture isolée grand droit l
+abduction de l
+abduction et rotation (Main Dominante)", searchTerms: ["fracture trochiter avec limitation l
+abduction et rotation (Main Non Dominante)", searchTerms: ["fracture trochiter avec limitation l
+abduction rotation main dominante", "dominante main rotation l
+abduction rotation main non dominante", "dominante non main rotation l
+accommodation - Ophtalmoplégie interne totale bilatérale", searchTerms: ["paralysie l
+accommodation - Ophtalmoplégie interne totale unilatérale", searchTerms: ["paralysie l
+accommodation paralysie", "paralysie l
+Achille - Séquelles opératoires", searchTerms: ["rupture tendon achille séquelles", "tendon achille rupture", "rupture tendon d
+Achille post-traumatique chronique", searchTerms: ["tendinopathie achille post-traumatique", "tendinopathie achille chronique", "tendinite achille séquelles", "achille tendinopathie", "tendinopathie achille"], rate: [3, 8], description: "Tendinopathie chronique du tendon d
+action, mouvements brusques) après un traumatisme crânien ou périphérique.", rateCriteria: { low: "Mouvements discrets, intermittents, n
+acuité visuelle permanente.", high: "Poussées fréquentes avec complications (synéchies, cataracte, glaucome secondaire) et baisse d
+adaptation avec anxiété et/ou humeur dépressive chronique", searchTerms: ["trouble l
+adaptation trouble", "trouble l
+adaptation", "l
+addison secondaire", "secondaire d
+âge et le désir de maternité)", searchTerms: ["stérilité féminine post traumatique selon l
+âge selon testicules deux des destruction atrophie", "atrophie destruction deux testicules selon l
+âge)", searchTerms: ["atrophie destruction des deux testicules selon l
+aile pubienne branche d
+aine ou des organes génitaux, provenant d
+aisselle - Abduction conservée jusqu
+aisselle - Abduction limitée de 10° à 45° (droite)", searchTerms: ["cicatrices l
+aisselle - Abduction limitée de 10° à 45° (gauche)", searchTerms: ["cicatrices l
+aisselle - Abduction limitée de 45° à 90° (droite)", searchTerms: ["cicatrices l
+aisselle - Abduction limitée de 45° à 90° (gauche)", searchTerms: ["cicatrices l
+aisselle - Bras collé au corps (droite)", searchTerms: ["cicatrices l
+aisselle - Bras collé au corps (gauche)", searchTerms: ["cicatrices l
+aisselle abduction conservée jusqu
+aisselle cicatrices", "cicatrices l
+aisselle supérieur collé corps droite", "droite corps collé bras l
+aisselle supérieur collé corps gauche", "gauche corps collé bras l
+aisselle", "l
+aliments durs.", medium: "Douleurs fréquentes, limitation modérée de l
+amiante", "l
+anneau complexe fracture", "fracture complexe l
+anneau pelvien avec séquelles importantes (boiterie, douleurs)", searchTerms: ["fracture complexe l
+annulaire - Désarticulation métacarpo-phalangienne", searchTerms: ["amputation l
+annulaire (3 phalanges) (Main Dominante)", searchTerms: ["perte l
+annulaire (3 phalanges) (Main Non Dominante)", searchTerms: ["perte l
+annulaire (Main Dominante)", searchTerms: ["perte 3ème phalange l
+annulaire (Main Dominante)", searchTerms: ["perte des 2ème 3ème phalanges l
+annulaire (Main Non Dominante)", searchTerms: ["perte 3ème phalange l
+annulaire (Main Non Dominante)", searchTerms: ["perte des 2ème 3ème phalanges l
+annulaire (totalité) (Main Dominante)", searchTerms: ["ankylose l
+annulaire (totalité) (Main Non Dominante)", searchTerms: ["ankylose l
+annulaire amputation", "amputation l
+annulaire ankylose", "ankylose l
+annulaire articulation d
+annulaire main dominante", "dominante main l
+annulaire main non dominante", "dominante non main l
+annulaire phalanges main dominante", "dominante main phalanges l
+annulaire phalanges main non dominante", "dominante non main phalanges l
+annulaire", "l
+annulaire", searchTerms: ["amputation l
+annulaire", searchTerms: ["ankylose l
+annulaire", searchTerms: ["raideur l
+aorte (hors syphilis)", searchTerms: ["anévrisme l
+aorte anévrisme", "anévrisme l
+apnées hypopnées", "hypopnées sommeil"], rate: [10, 30], description: "Apparition ou aggravation d
+apnées syndrome", "syndrome d
+apnées-hypopnées du sommeil (SAHS) post-traumatique", searchTerms: ["syndrome d
+appareil dysfonctionnel algo syndrome", "syndrome algo", "algo dysfonctionnel", "dysfonctionnel l
+appareil extenseur du genou (tendon rotulien/quadricipital) - Flexum actif résiduel", searchTerms: ["rupture appareil extenseur genou tendon rotulien quadricipital flexum actif", "rupture tendon rotulien", "rupture appareil extenseur genou"], rate: [3, 8], description: "Flexum actif persistant après réparation d
+appareil manducateur (SADAM) post-traumatique", searchTerms: ["syndrome algo dysfonctionnel l
+arcade dentaire (mandibule)", searchTerms: ["perte substance partielle l
+arcade dentaire (sans trouble fonctionnel)", searchTerms: ["perte substance partielle l
+arcade dentaire mandibule", "mandibule dentaire l
+arcade dentaire sans trouble fonctionnel", "fonctionnel trouble sans dentaire l
+Arnold (Névralgie du grand occipital) post-traumatique", searchTerms: ["névralgie d
+arnold névralgie", "névralgie d
+arnold névralgie", "névralgie grand"], rate: [8, 20], description: "Céphalées unilatérales en casque, partant de la nuque et irradiant vers le sommet du crâne et l
+arthrodèse séquelles", "séquelles d
+arthrodèse vertébrale (fusion) avec raideur et douleurs résiduelles", searchTerms: ["séquelles d
+arthrodèse", "d
+articulation MCP d
+articulation métacarpo-phalangienne d
+articulé dentaire", searchTerms: ["consolidation vicieuse trouble léger l
+articulé dentaire", searchTerms: ["consolidation vicieuse troubles sérieux l
+articulé grave trouble avec vicieuse consolidation inférieur maxillaire fracture", "fracture maxillaire inférieur consolidation vicieuse trouble grave l
+articulé léger trouble avec vicieuse consolidation inférieur maxillaire fracture", "fracture maxillaire inférieur consolidation vicieuse trouble léger l
+articulé", searchTerms: ["fracture maxillaire inférieur consolidation vicieuse avec trouble grave l
+articulé", searchTerms: ["fracture maxillaire inférieur consolidation vicieuse avec trouble léger l
+astragale (Talus) - Avec cal vicieux", searchTerms: ["fracture l
+astragale fracture", "fracture l
+astragale", "l
+atteinte d
+auriculaire - Désarticulation métacarpo-phalangienne", searchTerms: ["amputation l
+auriculaire (3 phalanges) (Main Dominante)", searchTerms: ["perte l
+auriculaire (3 phalanges) (Main Non Dominante)", searchTerms: ["perte l
+auriculaire (Main Dominante)", searchTerms: ["ablation phalange unguéale l
+auriculaire (Main Dominante)", searchTerms: ["perte 3ème phalange l
+auriculaire (Main Dominante)", searchTerms: ["perte des 2ème 3ème phalanges l
+auriculaire (Main Non Dominante)", searchTerms: ["perte 3ème phalange l
+auriculaire (Main Non Dominante)", searchTerms: ["perte des 2ème 3ème phalanges l
+auriculaire (totalité) (Main Dominante)", searchTerms: ["ankylose l
+auriculaire (totalité) (Main Non Dominante)", searchTerms: ["ankylose l
+auriculaire amputation", "amputation l
+auriculaire ankylose", "ankylose l
+auriculaire articulation d
+auriculaire main dominante", "dominante main l
+auriculaire main non dominante", "dominante non main l
+auriculaire phalanges main dominante", "dominante main phalanges l
+auriculaire phalanges main non dominante", "dominante non main phalanges l
+auriculaire", "l
+auriculaire", searchTerms: ["amputation l
+auriculaire", searchTerms: ["ankylose l
+auriculaire", searchTerms: ["raideur l
+avant supérieur bonne consolidation sans trouble fonctionnel main dominante", "dominante main fonctionnel trouble sans consolidation bonne bras l
+avant supérieur bonne consolidation sans trouble fonctionnel main non dominante", "dominante non main fonctionnel trouble sans consolidation bonne bras l
+avant supérieur cal vicieux avec impotence troubles nerf main dominante", "dominante main nerveux troubles impotence avec vicieux cal bras l
+avant supérieur cal vicieux avec impotence troubles nerf main non dominante", "dominante non main nerveux troubles impotence avec vicieux cal bras l
+avant supérieur cal vicieux avec raideur prono supination main dominante", "dominante main supination prono limitation avec vicieux cal bras l
+avant supérieur cal vicieux avec raideur prono supination main non dominante", "dominante non main supination prono limitation avec vicieux cal bras l
+avant supérieur lâche main dominante", "dominante main lâche bras l
+avant supérieur lâche main non dominante", "dominante non main lâche bras l
+avant supérieur main dominante", "dominante main bras l
+avant supérieur main non dominante", "dominante non main bras l
+avant supérieur serrée main dominante", "dominante main serrée bras l
+avant supérieur serrée main non dominante", "dominante non main serrée bras l
+avant supérieur tiers inférieur", "inférieur tiers bras l
+avant supérieur tiers moyen", "moyen tiers bras l
+avant supérieur tiers supérieur", "supérieur tiers bras l
+avant-bras - Bonne consolidation sans trouble fonctionnel (Main Dominante)", searchTerms: ["fracture des deux l
+avant-bras - Bonne consolidation sans trouble fonctionnel (Main Non Dominante)", searchTerms: ["fracture des deux l
+avant-bras - Cal vicieux avec impotence et troubles nerveux (Main Dominante)", searchTerms: ["fracture des deux l
+avant-bras - Cal vicieux avec impotence et troubles nerveux (Main Non Dominante)", searchTerms: ["fracture des deux l
+avant-bras - Cal vicieux avec limitation de la prono-supination (Main Dominante)", searchTerms: ["fracture des deux l
+avant-bras - Cal vicieux avec limitation de la prono-supination (Main Non Dominante)", searchTerms: ["fracture des deux l
+avant-bras - lâche (Main Dominante)", searchTerms: ["pseudarthrose des deux l
+avant-bras - lâche (Main Non Dominante)", searchTerms: ["pseudarthrose des deux l
+avant-bras - serrée (Main Dominante)", searchTerms: ["pseudarthrose des deux l
+avant-bras - serrée (Main Non Dominante)", searchTerms: ["pseudarthrose des deux l
+avant-bras (Main Dominante)", searchTerms: ["amputation l
+avant-bras (Main Non Dominante)", searchTerms: ["amputation l
+avant-bras au tiers inférieur", searchTerms: ["amputation l
+avant-bras au tiers moyen", searchTerms: ["amputation l
+avant-bras au tiers supérieur", searchTerms: ["amputation l
+avant", "l
+douleurs thalamiques
+ébriété permanente)", searchTerms: ["syndrome otolithique sensation ébriété permanente", "syndrome otolithique", "sensation ébriété", "otolithique"], rate: [3, 5], description: "Sensation permanente d
+effort de la jambe", searchTerms: ["syndrome des loges chronique d
+effort inférieur", "jambe d
+effort intense, force conservée.", medium: "Déchirure partielle avec déficit de force modéré (faiblesse extension genou), douleurs à l
+effort jambe", "syndrome des"], rate: [10, 25], description: "Douleurs musculaires à l
+effort, mobilité quasi-normale.", medium: "Rupture transfixiante d
+élévation au-dessus de 90°.", high: "Décollement complet, perte de force majeure, limitation sévère de l
+élocution difficulté avec aphasie", "aphasie difficulté d
+élocution", searchTerms: ["aphasie avec difficulté d
+embolie graisseuse (souvent suite à une fracture d
+endophtalmie post traumatique infection intraoculaire", "intraoculaire infection traumatique post d
+endophtalmie", "d
+endormissement ou réveils nocturnes occasionnels, avec fatigue diurne modérée.", high: "Insomnie quasi-quotidienne avec retentissement majeur sur la vigilance, l
+entorse bénigne", searchTerms: ["laxité chronique pied séquelle entorse bénigne", "entorse bénigne séquelle laxité", "laxité pied entorse bénigne"], rate: [0, 3], description: "Séquelle d
+entorse", "d
+entorse)", searchTerms: ["instabilité chronique cheville séquelle d
+entorse)", searchTerms: ["laxité chronique genou séquelle d
+entraînant dents deux d
+entraînant pas d
+épaule - Abduction 60-90° + rotation", searchTerms: ["raideur l
+épaule - Abduction 60-90°", searchTerms: ["raideur l
+épaule - Élévation limitée", searchTerms: ["raideur l
+épaule - Limitation rotation", searchTerms: ["raideur l
+épaule (Main Dominante)", searchTerms: ["élongation musculaire épaule main dominante", "élongation épaule", "élongation musculaire épaule", "muscle épaule"], rate: [5, 12], description: "Élongation ou déchirure partielle des muscles de l
+épaule (Main Dominante)", searchTerms: ["fracture clavicule cal saillant avec raideur d
+épaule (Main Dominante)", searchTerms: ["fracture tête humérale avec raideur importante l
+épaule (Main Dominante)", searchTerms: ["luxation récidivante l
+épaule (Main Dominante)", searchTerms: ["séquelles prothèse totale d
+épaule (Main Non Dominante)", searchTerms: ["élongation musculaire épaule main non dominante", "élongation épaule", "élongation musculaire épaule", "muscle épaule"], rate: [4, 10], description: "Élongation ou déchirure partielle des muscles de l
+épaule (Main Non Dominante)", searchTerms: ["fracture clavicule cal saillant avec raideur d
+épaule (Main Non Dominante)", searchTerms: ["fracture tête humérale avec raideur importante l
+épaule (Main Non Dominante)", searchTerms: ["luxation récidivante l
+épaule (Main Non Dominante)", searchTerms: ["séquelles prothèse totale d
+épaule (propulsion, abduction, rotation) (Main Dominante)", searchTerms: ["raideur l
+épaule (propulsion, abduction, rotation) (Main Non Dominante)", searchTerms: ["raideur l
+épaule abduction", "abduction 90°"], rate: [10, 18], description: "Limitation modérée de l
+épaule abduction", "abduction 90°"], rate: [15, 25], description: "Limitation modérée de l
+épaule amputation", "amputation col"], rate: 80, description: "Amputation complète du membre supérieur au niveau de l
+épaule amputation", "amputation col"], rate: 90, description: "Amputation complète du membre supérieur au niveau de l
+épaule avec douleur", searchTerms: ["raideur l
+épaule avec fixation de l
+épaule avec fixation l
+épaule avec limitation fonctionnelle", searchTerms: ["raideur l
+épaule avec mobilité de l
+épaule avec mobilité l
+épaule avec raideur fonctionnelle", "fonctionnelle limitation avec l
+épaule désarticulation", "désarticulation l
+épaule élévation", "élévation limitée"], rate: [10, 20], description: "Limitation de l
+épaule fixation l
+épaule importante raideur avec humérale tête fracture", "fracture tête humérale raideur importante l
+épaule limitation fonctionnelle", "raideur l
+épaule main"], rate: [10, 30], rateCriteria: { low: "Luxations rares, peu d
+épaule mobilité l
+épaule ou amputation au col chirurgical (Main Dominante)", searchTerms: ["désarticulation l
+épaule ou amputation au col chirurgical (Main Non Dominante)", searchTerms: ["désarticulation l
+épaule raideur avec saillant cal clavicule fracture", "fracture clavicule cal saillant raideur d
+épaule raideur rotation", "rotation limitation l
+épaule raideur", "raideur l
+épaule récidivante luxation", "luxation récidivante", "récidivante l
+épaule totale prothèse séquelles", "séquelles prothèse", "prothèse totale", "totale d
+épaule", "d
+épaule", "l
+évitement et d
+excitation du sympathique cervical (Pourfour du Petit)", searchTerms: ["syndrome d
+excitation syndrome", "syndrome d
+extension - à 135°", searchTerms: ["cicatrices coude entravant l
+extension - à 45°", searchTerms: ["cicatrices coude entravant l
+extension - à 90°", searchTerms: ["cicatrices coude entravant l
+extension - en deçà de 45°", searchTerms: ["cicatrices coude entravant l
+extension < 45°.", high: "Déficit d
+extension coude main dominante", "dominante main coude l
+extension coude main non dominante", "dominante non main coude l
+extension d
+extension du coude (Main Dominante)", searchTerms: ["limitation l
+extension du coude (Main Non Dominante)", searchTerms: ["limitation l
+extension entravant coude cicatrices", "cicatrices coude", "coude entravant", "entravant l
+extension", "l
+extrémité fracture", "fracture l
+extrémité inférieure du fémur - Avec raideur du genou", searchTerms: ["fracture l
+extrémité inférieure du radius - Avec limitation des mouvements (Main Dominante)", searchTerms: ["fracture l
+extrémité inférieure du radius - Avec limitation des mouvements (Main Non Dominante)", searchTerms: ["fracture l
+extrémité inférieure du radius - Avec raideur, déformation et troubles nerveux (Main Dominante)", searchTerms: ["fracture l
+extrémité inférieure du radius - Avec raideur, déformation et troubles nerveux (Main Non Dominante)", searchTerms: ["fracture l
+extrémité inférieure du radius - Consolidation parfaite (Main Dominante)", searchTerms: ["fracture l
+extrémité inférieure du radius - Consolidation parfaite (Main Non Dominante)", searchTerms: ["fracture l
+extrémité inférieure radius avec raideur des mouvements main dominante", "dominante main mouvements des limitation avec radius inférieure l
+extrémité inférieure radius avec raideur des mouvements main non dominante", "dominante non main mouvements des limitation avec radius inférieure l
+extrémité inférieure radius avec raideur, déformation troubles nerf main dominante", "dominante main nerveux troubles déformation raideur, avec radius inférieure l
+extrémité inférieure radius avec raideur, déformation troubles nerf main non dominante", "dominante non main nerveux troubles déformation raideur, avec radius inférieure l
+extrémité inférieure radius limitation mouvements main dominante", "fracture l
+extrémité inférieure radius limitation mouvements main non dominante", "fracture l
+extrémité inférieure radius raideur, déformation troubles nerveux main dominante", "fracture l
+extrémité inférieure radius raideur, déformation troubles nerveux main non dominante", "fracture l
+extrémité", "l
+hépatectomie partielle post-traumatique", searchTerms: ["séquelles d
+hépatectomie partielle", "partielle post"], rate: [10, 40], description: "Séquelles après résection d
+hépatectomie séquelles", "séquelles d
+humérus - Partie moyenne (Main Dominante)", searchTerms: ["pseudarthrose l
+humérus - Partie moyenne (Main Non Dominante)", searchTerms: ["pseudarthrose l
+humérus avec déformation et atrophie (sans paralysie) (Main Dominante)", searchTerms: ["fracture l
+humérus avec déformation et atrophie (sans paralysie) (Main Non Dominante)", searchTerms: ["fracture l
+humérus fracture", "fracture l
+humérus normalement consolidée (Main Dominante)", searchTerms: ["fracture l
+humérus normalement consolidée (Main Non Dominante)", searchTerms: ["fracture l
+humérus normalement", "normalement consolidée"], rate: [3, 5], rateCriteria: { low: "Consolidation parfaite, sans gêne fonctionnelle.", medium: "Gêne douloureuse lors des efforts de force.", high: "Douleurs persistantes à l
+humérus normalement", "normalement consolidée"], rate: [4, 6], rateCriteria: { low: "Consolidation parfaite, sans aucune limitation de mobilité. Gêne très discrète et occasionnelle lors d
+humérus pseudarthrose", "pseudarthrose l
+humérus", "l
+humeur troubles vertiges, céphalée, crâne blessures des commun subjectif syndrome", "syndrome subjectif commun blessures crâne céphalée, vertiges, troubles l
+humeur)", searchTerms: ["syndrome subjectif commun des blessures crâne céphalée, vertiges, troubles l
+incapacité", "d
+incapacité)", searchTerms: ["perte d
+index - Désarticulation métacarpo-phalangienne", searchTerms: ["amputation l
+index (3 phalanges) (Main Dominante)", searchTerms: ["perte l
+index (3 phalanges) (Main Non Dominante)", searchTerms: ["perte l
+index (Main Dominante)", searchTerms: ["ablation phalanges l
+index (Main Dominante)", searchTerms: ["perte 3ème phalange l
+index (Main Dominante)", searchTerms: ["perte des 2ème 3ème phalanges l
+index (Main Non Dominante)", searchTerms: ["perte 3ème phalange l
+index (Main Non Dominante)", searchTerms: ["perte des 2ème 3ème phalanges l
+index (totalité) (Main Dominante)", searchTerms: ["ankylose l
+index (totalité) (Main Non Dominante)", searchTerms: ["ankylose l
+index amputation", "amputation l
+index ankylose", "ankylose l
+index articulation d
+index main dominante", "dominante main l
+index main non dominante", "dominante non main l
+index phalanges main dominante", "dominante main phalanges l
+index phalanges main non dominante", "dominante non main phalanges l
+index", "l
+index", searchTerms: ["amputation l
+index", searchTerms: ["ankylose l
+index", searchTerms: ["raideur l
+insuffisance cardiaque ou d
+intensité moyenne (gêne marche/travail)", searchTerms: ["névralgie sciatique d
+intensité moyenne gêne marche/travail", "marche/travail gêne moyenne d
+intestin irritable post-traumatique (SII-PT)", searchTerms: ["syndrome l
+intestin irritable", "irritable post"], rate: [10, 25], description: "Apparition d
+intestin syndrome", "syndrome l
+odeurs nauséabondes)", searchTerms: ["dysgueusie distorsion goût cacosmie perception d
+odeurs ou de saveurs désagréables, souvent avec un retentissement sur l
+odeurs perception cacosmie goût distorsion dysgueusie", "dysgueusie distorsion", "distorsion goût", "goût cacosmie"], rate: [5, 15], description: "Altération qualitative de l
+odorat", "l
+odorat)", searchTerms: ["anosmie perte l
+œil sans possibilité d
+œsophage cervical", "cervical l
+olécrane - Cal fibreux long, extension active faible (Main Dominante)", searchTerms: ["fracture l
+olécrane - Cal fibreux long, extension active faible (Main Non Dominante)", searchTerms: ["fracture l
+olécrane - Cal fibreux long, extension active nulle, atrophie (Main Dominante)", searchTerms: ["fracture l
+olécrane - Cal fibreux long, extension active nulle, atrophie (Main Non Dominante)", searchTerms: ["fracture l
+olécrane - Cal osseux court, bonne extension (Main Dominante)", searchTerms: ["fracture l
+olécrane - Cal osseux court, bonne extension (Main Non Dominante)", searchTerms: ["fracture l
+olécrane fracture", "fracture l
+omoplate (
+omoplate fixation avec d
+omoplate mobilité avec d
+orbite (Blow-out) avec séquelles", searchTerms: ["orbite fracture plancher l
+orbite plancher fracture orbite", "orbite fracture plancher l
+oreille externe", searchTerms: ["mutilations cicatrices vicieuses l
+oreille vicieuses cicatrices mutilations", "mutilations cicatrices", "cicatrices vicieuses", "vicieuses l
+organisation et de double-tâche, avec fatigabilité intellectuelle.", high: "Troubles majeurs du comportement (inhibition, apathie) avec perte d
+origine cérébrale)", searchTerms: ["déficits sensitifs isolés hémi-corporels origine cérébrale", "déficit sensitif hémicorporel", "hémi-anesthésie cérébrale", "troubles sensitifs hémicorporels"], rate: [5, 25], description: "Déficits sensitifs hémi-corporels isolés sans déficit moteur, d
+origine intermittente claudication", "claudication intermittente", "intermittente d
+origine médullaire avec douleurs", searchTerms: ["troubles sensibilité d
+origine médullaire", searchTerms: ["claudication intermittente d
+origine sensibilité troubles", "troubles sensibilité d
+os hyoïde", "hyoïde l
+os malaire zygomatique", "zygomatique malaire l
+os", "l
+ostéo séquelles", "séquelles d
+ostéo-arthrite vertébrale infectieuse", searchTerms: ["séquelles d
+ouverture buccale (< 20mm), retentissement sur l
+ulcère chronique (cicatrices, amaigrissement, douleurs)", searchTerms: ["séquelles d
+ulcère séquelles", "séquelles d
+un amputation", "amputation d
+un ankylose", "ankylose d
+un autre orteil", searchTerms: ["amputation d
+un complète atrophie", "atrophie complète", "complète d
+un destruction atrophie", "atrophie destruction", "destruction d
+un doigt long (Main Dominante)", searchTerms: ["raideur articulation P1-P2 doigt long main dominante", "raideur IPP doigt long dominante", "raideur P1 P2 doigt"], rate: 3, description: "Raideur de l
+un doigt long (Main Dominante)", searchTerms: ["raideur articulation P2-P3 doigt long main dominante", "raideur IPD doigt long dominante", "raideur P2 P3 doigt"], rate: 2, description: "Raideur de l
+un doigt long (Main Non Dominante)", searchTerms: ["raideur articulation P1-P2 doigt long main non dominante", "raideur IPP doigt long non dominante", "raideur P1 P2 doigt ND"], rate: 2, description: "Raideur IPP d
+un doigt long (Main Non Dominante)", searchTerms: ["raideur articulation P2-P3 doigt long main non dominante", "raideur IPD doigt long non dominante", "raideur P2 P3 doigt ND"], rate: 2, description: "Raideur IPD d
+un gros vaisseau (aorte, carotide) avec séquelles", searchTerms: ["dissection traumatique d
+un maxillaire inférieur", "inférieur maxillaire d
+un maxillaire inférieur", searchTerms: ["mutilation perte d
+un maxillaire supérieur avec amputation substance étendue", "étendue substance perte avec supérieur maxillaire d
+un maxillaire supérieur avec perte de substance étendue", searchTerms: ["mutilation perte d
+un maxillaire supérieur d
+un maxillaire supérieur et d
+un membre inférieur et d
+un membre inférieur", searchTerms: ["amputation d
+un membre inférieur", searchTerms: ["atrophie complète d
+un membre inférieur", searchTerms: ["paralysie totale d
+un membre inférieur", searchTerms: ["raccourcissement d
+un membre supérieur d
+un membre", searchTerms: ["artériopathie post traumatique d
+un membre", searchTerms: ["lymphœdème chronique post traumatique d
+un métatarsien", searchTerms: ["cal vicieux d
+un métatarsien"], rate: [3, 8], description: "Consolidation vicieuse d
+un oeil (l
+un oeil l
+un oeil sans difformité apparente", searchTerms: ["perte vision d
+un orteil (autre que gros orteil)", searchTerms: ["ankylose d
+un orteil (sauf gros orteil)", searchTerms: ["amputation d
+un orteil", "orteil autre"], rate: [2, 5], description: "Ankylose d
+un orteil", "orteil sauf"], rate: [1, 3], description: "Amputation d
+un orteil", searchTerms: ["ankylose d
+un orteil"], rate: [2, 5], description: "Ankylose d
+un ou deux axes hormonaux, bien substituée par traitement, avec peu de retentissement.", high: "Panhypopituitarisme nécessitant une poly-substitution hormonale (thyroïde, surrénale, gonadique), avec impact majeur sur l
+un ou plusieurs nerfs oculo-moteurs (voir diplopie)", searchTerms: ["orbite paralysie d
+un paralysie orbite", "orbite paralysie", "paralysie d
+un raccourcissement", "raccourcissement d
+un rein avec rein restant sain", "sain restant rein avec rein d
+un rein), avec rein restant sain", searchTerms: ["néphrectomie ablation d
+un seul maxillaire supérieur avec conservation mandibule", "mandibule conservation avec supérieur maxillaire seul d
+un seul maxillaire supérieur avec conservation mandibule", searchTerms: ["mutilation perte d
+un supérieur maxillaire d
+un supérieur membre d
+un tendon du biceps (souvent le long chef), avec déformation marquée (
+un tendon du biceps, avec déformation modérée (
+un testicule", searchTerms: ["atrophie destruction d
+un totale paralysie", "paralysie totale", "totale d
+un traumatique dissection", "dissection traumatique d
+un traumatique post artériopathie", "artériopathie post", "post traumatique", "traumatique d
+un traumatique post chronique lymphœdème", "lymphœdème chronique", "chronique post", "post traumatique"], rate: [10, 30], description: "Gonflement chronique d
+un vicieux cal", "cal vicieux", "vicieux d
+un", "d
+un"], rate: [40, 80], rateCriteria: { low: "Séquelles vasculaires localisées bien contrôlées par traitement.", high: "Séquelles neurologiques (AVC) ou ischémiques d
+une amputation d
+une ankylose", "ankylose d
+une articulation de l
+une articulation du médius (Main Dominante)", searchTerms: ["raideur d
+une articulation du médius (Main Non Dominante)", searchTerms: ["raideur d
+une articulation du pouce (Main Dominante)", searchTerms: ["raideur d
+une articulation du pouce (Main Non Dominante)", searchTerms: ["raideur d
+une articulation du tarse", searchTerms: ["ankylose d
+une articulation l
+une branche pubienne l
+une branche pubienne ou de l
+une centrales neurologiques séquelles", "séquelles neurologiques", "neurologiques centrales", "centrales d
+une deux dents n
+une embolie graisseuse post-traumatique", searchTerms: ["séquelles neurologiques centrales d
+une fracture du plancher orbitaire, telles que la diplopie (vision double), l
+une gêne mineure dans les activités.", medium: "Mouvements modérés et fréquents, contrôlés partiellement par le traitement, avec un retentissement sur les gestes fins ou la marche.", high: "Mouvements invalidants, permanents, rebelles au traitement, avec un retentissement majeur sur l
+une hydronéphrose antérieure", searchTerms: ["modification d
+une modification", "modification d
+une ou deux dents (n
+une prothèse de recouvrement.", high: "Atrophie majeure, déformation importante de l
+une raideur d
+une raideur et d
+une raideur", "raideur d
+une", "d
+uretère avec périnéphrose ou fistule", searchTerms: ["rupture d
+uretère rupture", "rupture d
+uretère", "d
+urètre antérieur difficilement dilatable", searchTerms: ["rétrécissement l
+urètre antérieur facilement dilatable", searchTerms: ["rétrécissement l
+urètre antérieur", searchTerms: ["destruction totale l
+urètre autre cutanée autoplastie", "autoplastie cutanée", "cutanée autre", "autre l
+urètre postérieur difficilement franchissable", searchTerms: ["rétrécissement l
+urètre postérieur facilement franchissable", searchTerms: ["rétrécissement l
+urètre postérieur infranchissable", searchTerms: ["rétrécissement l
+urètre rétrécissement", "rétrécissement l
+urètre totale destruction", "destruction totale l
+urètre", "l
+urètre", searchTerms: ["autoplastie cutanée autre l
+urine chronique et permanente (complète)", searchTerms: ["rétention d
+urine chronique et permanente (incomplète)", searchTerms: ["rétention d
+urine incontinence", "incontinence d
+urine rebelle ou permanente", searchTerms: ["incontinence d
+urine rétention", "rétention d
+usage permanent d

@@ -1,6 +1,6 @@
 /**
  * 🎤 useDictaphoneAI — Dictaphone 100% autonome via Whisper IA
- * V3.3.382
+ * V3.3.383
  * 
  * ZÉRO dépendance externe :
  * - Pas de moteur Windows
@@ -8,15 +8,20 @@
  * - Pas de connexion internet (après 1er chargement du modèle)
  * 
  * Fonctionnement :
- * 1. Premier usage → télécharge Whisper SMALL (~500MB), cache navigateur
- * 2. Après → fonctionne 100% hors ligne, à vie
+ * 1. Premier usage → télécharge Whisper SMALL (~500MB), installé à vie dans le navigateur
+ * 2. Après → fonctionne 100% hors ligne, à vie, sans re-téléchargement
  * 3. Essaie WebGPU (rapide) puis fallback WASM (universel)
  * 4. Capture audio micro → détecte silences → transcrit Whisper
- * 5. Correction médicale post-transcription automatique (~400+ termes)
+ * 5. Correction médicale post-transcription automatique (~700+ mots + ~200+ expressions)
  * 6. Commandes vocales intelligentes (ponctuation, effacement, navigation)
+ * 7. Dictionnaire complet du barème médical (anatomie, pathologies, chirurgie, médico-légal)
  */
 
 import { useState, useRef, useCallback, useEffect } from 'react';
+import {
+    PHRASE_CORRECTIONS,
+    WORD_CORRECTIONS,
+} from '../data/whisperMedicalDictionary';
 
 // ═══════════════════════════════════════════════════════════════
 // CONSTANTES
@@ -49,420 +54,10 @@ const WHISPER_HALLUCINATIONS = [
 
 // ═══════════════════════════════════════════════════════════════
 // CORRECTION MÉDICALE POST-TRANSCRIPTION
-// Corrige les erreurs courantes de Whisper dans un contexte médical
+// Dictionnaire complet importé de data/whisperMedicalDictionary.ts
+// ~200+ patterns de phrases + ~700+ corrections de mots
+// Couvre : anatomie, pathologies, chirurgie, mouvements, médico-légal
 // ═══════════════════════════════════════════════════════════════
-
-// Expressions entières mal transcrites (priorité haute, traitées en premier)
-const PHRASE_CORRECTIONS: [RegExp, string][] = [
-    // Erreurs spécifiques observées (priorité maximale)
-    [/\bune\s+facture\b/gi, 'une fracture'],
-    [/\bla\s+facture\b/gi, 'la fracture'],
-    [/\bdes\s+factures\b/gi, 'des fractures'],
-    [/\bqui\s+est\s+présente\b/gi, 'qui présente'],
-    [/\bde\s+de\s+2\s+autres\b/gi, 'des deux os de'],
-    [/\bde\s+de\s+deux\s+autres\b/gi, 'des deux os de'],
-    [/\b2\s+autres\s+l'avant[- ]?bras\b/gi, 'deux os de l\'avant-bras'],
-    [/\bd'eux\s+os\b/gi, 'deux os'],
-    [/\ble\s+bras\s+droit\b/gi, 'le bras droit'],
-    
-    // === ERREURS OBSERVÉES V3.3.380 ===
-    // "Ils présentent" → "Il présente" (Whisper met au pluriel)
-    [/\bils\s+présentent?\b/gi, 'il présente'],
-    [/\bils?\s+présentes?\b/gi, 'il présente'],
-    // "patient âge de" → "patient âgé de" (accent manquant)
-    [/\bpatient\s+âge\s+de\b/gi, 'patient âgé de'],
-    [/\bpatiente\s+âge\s+de\b/gi, 'patiente âgée de'],
-    [/\bpatient\s+age\s+de\b/gi, 'patient âgé de'],
-    [/\bpatiente\s+agee?\s+de\b/gi, 'patiente âgée de'],
-    // "la avant la vôme" / "de la avant" → "de l'avant-bras"
-    [/\bde\s+la\s+avant\s+la\s+vôme\b/gi, 'de l\'avant-bras'],
-    [/\bla\s+avant\s+la\s+vôme\b/gi, 'l\'avant-bras'],
-    [/\bla\s+avant\s+l'avant\s+bras\b/gi, 'l\'avant-bras'],
-    [/\bde\s+la\s+avant\b/gi, 'de l\'avant-'],
-    [/\bla\s+vôme\b/gi, 'l\'avant-bras'],
-    [/\ble\s+vôme\b/gi, 'l\'avant-bras'],
-    // "la vant bras" / "la vambras" variantes
-    [/\bla\s+vant\s*-?\s*bras\b/gi, 'l\'avant-bras'],
-    [/\bl'\s*avant\s+bras\b/gi, 'l\'avant-bras'],
-    [/\bde\s+l'\s*avant\s+bras\b/gi, 'de l\'avant-bras'],
-    // "il ma écrit" → "il m'a écrit" (apostrophe)
-    [/\bil\s+ma\s+/gi, 'il m\'a '],
-    [/\belle\s+ma\s+/gi, 'elle m\'a '],
-    
-    // === ERREURS OBSERVÉES V3.3.381 ===
-    // "la passion" → "le patient" / "un patient"
-    [/\bde\s+la\s+passion\b/gi, 'd\'un patient'],
-    [/\bla\s+passion\b/gi, 'le patient'],
-    // "qu'as-je de" → "âgé de"
-    [/\bqu'as[- ]je\s+de\b/gi, 'âgé de'],
-    [/\bcasse?-?j[eu]\s+de\b/gi, 'âgé de'],
-    // "Des autres de la Vendra" → "des os de l'avant-bras"
-    [/\bdes\s+autres\s+de\s+la\s+[Vv]endra\b/gi, 'des os de l\'avant-bras'],
-    [/\bla\s+[Vv]endra\b/gi, 'l\'avant-bras'],
-    [/\ble\s+[Vv]endra\b/gi, 'l\'avant-bras'],
-    // "il s'agit de la passion" → "il s'agit d'un patient"
-    [/\bil\s+s'agit\s+de\s+la\s+passion\b/gi, 'il s\'agit d\'un patient'],
-    
-    // === ERREURS OBSERVÉES V3.3.382 ===
-    // "c'est qu'elle" → "séquelle" (Whisper décompose le mot)
-    [/\bcomme\s+c'est\s+qu'elle\b/gi, 'comme séquelle'],
-    [/\bc'est\s+qu'elles?\b/gi, 'séquelle'],
-    [/\bces?\s+qu'elles?\b/gi, 'séquelle'],
-    [/\bsait?\s+qu'elles?\b/gi, 'séquelle'],
-    [/\bs[ea]?\s+qu'elles?\b/gi, 'séquelle'],
-    // "saud-arthroze" / "sod-arthrose" → "pseudarthrose"
-    [/\bsaud[- ]?arthroze?s?\b/gi, 'pseudarthrose'],
-    [/\bsod[- ]?arthroze?s?\b/gi, 'pseudarthrose'],
-    [/\bseau?d?[- ]?arthrose?s?\b/gi, 'pseudarthrose'],
-    [/\bsaudo?[- ]?arthrose?s?\b/gi, 'pseudarthrose'],
-    [/\bpseudo?[- ]?arthroze?s?\b/gi, 'pseudarthrose'],
-    [/\bps[eu]+do?[- ]arthros[ez]?s?\b/gi, 'pseudarthrose'],
-    
-    [/\bavant[- ]?bras\b/gi, 'avant-bras'],
-    [/\bl'avant[- ]?bras\b/gi, 'l\'avant-bras'],
-    [/\bdes\s+deux\s+os\b/gi, 'des deux os'],
-    [/\ble\s+col\s+du\s+fémur\b/gi, 'le col du fémur'],
-    [/\bla\s+colonne\s+vertébrale\b/gi, 'la colonne vertébrale'],
-    [/\ble\s+membre\s+supérieur\b/gi, 'le membre supérieur'],
-    [/\ble\s+membre\s+inférieur\b/gi, 'le membre inférieur'],
-    [/\ble\s+canal\s+carpien\b/gi, 'le canal carpien'],
-    [/\bla\s+coupe\s+des\s+rotateurs\b/gi, 'la coiffe des rotateurs'],
-    [/\bcoupe\s+des\s+rotateurs\b/gi, 'coiffe des rotateurs'],
-    [/\ble\s+nerf\s+ci\s+atique\b/gi, 'le nerf sciatique'],
-    [/\bnerf\s+ci\s+atique\b/gi, 'nerf sciatique'],
-    
-    // Mots composés médicaux souvent coupés par Whisper
-    [/\bostéo\s+synthèse\b/gi, 'ostéosynthèse'],
-    [/\bostéo\s+cynthèse\b/gi, 'ostéosynthèse'],
-    [/\barthro\s+dèse\b/gi, 'arthrodèse'],
-    [/\barthro\s+scopie\b/gi, 'arthroscopie'],
-    [/\barthro\s+plastie\b/gi, 'arthroplastie'],
-    [/\bpseudo\s+arthrose\b/gi, 'pseudarthrose'],
-    [/\balgo\s+dystrophie\b/gi, 'algodystrophie'],
-    [/\balgo\s+distrophie\b/gi, 'algodystrophie'],
-    [/\btendino?\s+pathie\b/gi, 'tendinopathie'],
-    [/\bneuro?\s+pathie\b/gi, 'neuropathie'],
-    [/\bostéo\s+porose\b/gi, 'ostéoporose'],
-    [/\bostéo\s+nécrose\b/gi, 'ostéonécrose'],
-    [/\bostéo\s+tomie\b/gi, 'ostéotomie'],
-    [/\blamin[ae]?\s+ctomie\b/gi, 'laminectomie'],
-    [/\bdisc?e?\s+ctomie\b/gi, 'discectomie'],
-    [/\bligamento?\s+plastie\b/gi, 'ligamentoplastie'],
-    [/\bamy[io]?\s+trophie\b/gi, 'amyotrophie'],
-    [/\bhernie\s+dis\s+cale\b/gi, 'hernie discale'],
-    [/\bspondylo\s+listhésis\b/gi, 'spondylolisthésis'],
-    [/\bré\s+éducation\b/gi, 'rééducation'],
-    [/\bkinési?\s+thérapie\b/gi, 'kinésithérapie'],
-    
-    // Coiffe des rotateurs - variantes Whisper
-    [/\bla\s+coupe\s+de\s+rotateurs?\b/gi, 'la coiffe des rotateurs'],
-    [/\bla\s+quoi\s+des?\s+rotateurs?\b/gi, 'la coiffe des rotateurs'],
-    
-    // Mouvements composés souvent coupés
-    [/\bdorsi?\s+flexion\b/gi, 'dorsiflexion'],
-    [/\bplant(?:aire?)?\s+flexion\b/gi, 'plantarflexion'],
-    [/\bpalm(?:aire?)?\s+flexion\b/gi, 'palmarflexion'],
-    [/\bantée?\s+pulsion\b/gi, 'antépulsion'],
-    [/\brétro\s+pulsion\b/gi, 'rétropulsion'],
-    [/\bpro\s+nation\b/gi, 'pronation'],
-    [/\bsup(?:er?|hi)?\s+nation\b/gi, 'supination'],
-    
-    // Médico-légal / rapport
-    [/\ben\s+capacité\b/gi, 'incapacité'],
-    [/\ble\s+préju\s+dice\b/gi, 'le préjudice'],
-    [/\bles\s+sé?quell?e?s?\b/gi, 'les séquelles'],
-    
-    // Conjugaison médicale courante
-    [/\bil\s+présentes?\b/gi, 'il présente'],
-    [/\belle\s+présentes?\b/gi, 'elle présente'],
-    [/\bqui\s+présentent\b/gi, 'qui présente'],
-    [/\bâgés?\s+de\b/gi, 'âgé de'],
-    [/\bâgées?\s+de\b/gi, 'âgée de'],
-];
-
-// Mots individuels mal transcrits par Whisper (contexte médical)
-const WORD_CORRECTIONS: Record<string, string> = {
-    // Anatomie
-    'facture': 'fracture',
-    'factures': 'fractures',
-    'humus': 'humérus',
-    'humeras': 'humérus',
-    'cubitus': 'cubitus',
-    'péroné': 'péroné',
-    'calcanéon': 'calcanéum',
-    'calcanéen': 'calcanéum',
-    'clavicule': 'clavicule',
-    'omo': 'omoplate',
-    'scafoïde': 'scaphoïde',
-    'scafoide': 'scaphoïde',
-    'troçanter': 'trochanter',
-    'trocãnter': 'trochanter',
-    'trocenter': 'trochanter',
-    'malliol': 'malléole',
-    'malliole': 'malléole',
-    'malléol': 'malléole',
-    'acoémion': 'acromion',
-    'acromeon': 'acromion',
-    'menisk': 'ménisque',
-    'menisque': 'ménisque',
-    
-    // Pathologies
-    'arthrose': 'arthrose',
-    'artrose': 'arthrose',
-    'algodestrôphie': 'algodystrophie',
-    'algo distrophie': 'algodystrophie',
-    'algodistrophie': 'algodystrophie',
-    'pseudo-artrose': 'pseudarthrose',
-    'pseudartrose': 'pseudarthrose',
-    'saud-arthroze': 'pseudarthrose',
-    'saudarthroze': 'pseudarthrose',
-    'sod-arthrose': 'pseudarthrose',
-    'saudarthrose': 'pseudarthrose',
-    'pseudoarthrose': 'pseudarthrose',
-    'pseudo-arthrose': 'pseudarthrose',
-    'ostéophorose': 'ostéoporose',
-    'luxaction': 'luxation',
-    'lucsation': 'luxation',
-    'entors': 'entorse',
-    'antorse': 'entorse',
-    'tendinopathie': 'tendinopathie',
-    'tandinite': 'tendinite',
-    'tandinopathie': 'tendinopathie',
-    'ankyllose': 'ankylose',
-    'ankilose': 'ankylose',
-    'redeur': 'raideur',
-    'raideure': 'raideur',
-    'callosité': 'callosité',
-    'neuropatie': 'neuropathie',
-    'névropathie': 'neuropathie',
-    'para-sité': 'parasite',
-    'pare-sie': 'parésie',
-    'paresie': 'parésie',
-    'paralysie': 'paralysie',
-    'paralisie': 'paralysie',
-    'prosthèse': 'prothèse',
-    'protese': 'prothèse',
-    
-    // Chirurgie / procédures
-    'arthrodèse': 'arthrodèse',
-    'artérodèse': 'arthrodèse',
-    'arthrodaise': 'arthrodèse',
-    'ostéosynthèse': 'ostéosynthèse',
-    'ostéocenthaise': 'ostéosynthèse',
-    'ostéosynthaise': 'ostéosynthèse',
-    'ostéotomie': 'ostéotomie',
-    'arthroplatie': 'arthroplastie',
-    'arthrocene': 'arthroscopie',
-    'laminactomie': 'laminectomie',
-    
-    // Séquelles / mouvements
-    'dorsiflection': 'dorsiflexion',
-    'plantarflection': 'plantarflexion',
-    'palmarflection': 'palmarflexion',
-    'pronassion': 'pronation',
-    'suppination': 'supination',
-    'supinnation': 'supination',
-    'abduction': 'abduction',
-    'abdouction': 'abduction',
-    'addouction': 'adduction',
-    'retroflection': 'rétroflexion',
-    'antéflection': 'antéflexion',
-    'antépulsion': 'antépulsion',
-    'rétropulsion': 'rétropulsion',
-    
-    // Termes médico-légaux
-    'consolidé': 'consolidé',
-    'consolidassion': 'consolidation',
-    'inséquelles': 'séquelles',
-    'sequelles': 'séquelles',
-    'sequelle': 'séquelle',
-    'incapacité': 'incapacité',
-    'préjudisse': 'préjudice',
-    'préjudice': 'préjudice',
-    'barème': 'barème',
-    'bareime': 'barème',
-    'bare-M': 'barème',
-    
-    // Termes généraux fréquemment mal transcrits
-    'paciãn': 'patient',
-    'paciàn': 'patient',
-    'passien': 'patient',
-    'passiant': 'patient',
-    'prézente': 'présente',
-    'présante': 'présente',
-    'patiante': 'patiente',
-    'agé': 'âgé',
-    'agee': 'âgée',
-    'age': 'âgé',
-    'passion': 'patient',
-    'vendra': 'avant-bras',
-    
-    // ── Anatomie étendue V3.3.379 ──
-    'humerus': 'humérus',
-    'umerus': 'humérus',
-    'fémore': 'fémur',
-    'femur': 'fémur',
-    'raduis': 'radius',
-    'claviculle': 'clavicule',
-    'olécrane': 'olécrâne',
-    'olaicrâne': 'olécrâne',
-    'épicondile': 'épicondyle',
-    'épicondale': 'épicondyle',
-    'épitrochée': 'épitrochlée',
-    'scapulla': 'scapula',
-    'omoplatte': 'omoplate',
-    'metacarpe': 'métacarpe',
-    'metacarpien': 'métacarpien',
-    'falange': 'phalange',
-    'falanges': 'phalanges',
-    'cottyle': 'cotyle',
-    'cotille': 'cotyle',
-    'patela': 'patella',
-    'pattella': 'patella',
-    'fubula': 'fibula',
-    'fibbula': 'fibula',
-    'calcanéome': 'calcanéum',
-    'calcane': 'calcanéum',
-    'calcagnon': 'calcanéum',
-    'astragal': 'astragale',
-    'tallus': 'talus',
-    'maléole': 'malléole',
-    'ménisqe': 'ménisque',
-    'trocanther': 'trochanter',
-    'trocanteur': 'trochanter',
-    'diafyse': 'diaphyse',
-    'epiphyse': 'épiphyse',
-    'metaphyse': 'métaphyse',
-    'métatarce': 'métatarse',
-    'metatarse': 'métatarse',
-    'rachi': 'rachis',
-    'rachie': 'rachis',
-    
-    // ── Rachis étendu ──
-    'cervicalle': 'cervicale',
-    'lonbaire': 'lombaire',
-    'lombère': 'lombaire',
-    'thorassique': 'thoracique',
-    'thorecique': 'thoracique',
-    'vertebre': 'vertèbre',
-    'coccix': 'coccyx',
-    'cocix': 'coccyx',
-    'coxyx': 'coccyx',
-    'scoliause': 'scoliose',
-    'cifose': 'cyphose',
-    'ciphose': 'cyphose',
-    'lordoze': 'lordose',
-    
-    // ── Pathologies étendues ──
-    'entorsse': 'entorse',
-    'luxassion': 'luxation',
-    'luksation': 'luxation',
-    'subluxassion': 'subluxation',
-    'contuzion': 'contusion',
-    'hematome': 'hématome',
-    'hémathome': 'hématome',
-    'éponchement': 'épanchement',
-    'epanchement': 'épanchement',
-    'synovitte': 'synovite',
-    'bourcite': 'bursite',
-    'capsulitte': 'capsulite',
-    'periarthrite': 'périarthrite',
-    'epicondylite': 'épicondylite',
-    'tenosynovite': 'ténosynovite',
-    'ruppture': 'rupture',
-    'dechirure': 'déchirure',
-    'arachement': 'arrachement',
-    'comotion': 'commotion',
-    'traumatize': 'traumatisme',
-    'spondylolistesis': 'spondylolisthésis',
-    'stenose': 'sténose',
-    'fibroze': 'fibrose',
-    'necrose': 'nécrose',
-    'osteite': 'ostéite',
-    'osteomyelite': 'ostéomyélite',
-    'sdrc': 'SDRC',
-    
-    // ── Chirurgie étendue ──
-    'ostéosyntèse': 'ostéosynthèse',
-    'osteosynthèse': 'ostéosynthèse',
-    'ostéosintèse': 'ostéosynthèse',
-    'artrodèse': 'arthrodèse',
-    'artrodaise': 'arthrodèse',
-    'artroscopie': 'arthroscopie',
-    'artroplastie': 'arthroplastie',
-    'enclowage': 'enclouage',
-    'enbrochage': 'embrochage',
-    'cerclaj': 'cerclage',
-    'prothaise': 'prothèse',
-    'imobilisation': 'immobilisation',
-    'osteotomie': 'ostéotomie',
-    'graffe': 'greffe',
-    'greffond': 'greffon',
-    'dissectomie': 'discectomie',
-    'ablacion': 'ablation',
-    'sutture': 'suture',
-    'ligamentoplasti': 'ligamentoplastie',
-    
-    // ── Mouvements / examen étendus ──
-    'dorsieflexion': 'dorsiflexion',
-    'plantiflexion': 'plantarflexion',
-    'palmairflexion': 'palmarflexion',
-    'pronacion': 'pronation',
-    'suphinassion': 'supination',
-    'antépultion': 'antépulsion',
-    'antepulsion': 'antépulsion',
-    'retropulsion': 'rétropulsion',
-    'elevation': 'élévation',
-    'flaisum': 'flessum',
-    'flexum': 'flessum',
-    'recuvatum': 'recurvatum',
-    'recurvetum': 'recurvatum',
-    'clodication': 'claudication',
-    'claudicassion': 'claudication',
-    'boitterie': 'boiterie',
-    'amiotrophie': 'amyotrophie',
-    'paresthezie': 'paresthésie',
-    'parestésie': 'paresthésie',
-    'hypoestesie': 'hypoesthésie',
-    'disesthésie': 'dysesthésie',
-    
-    // ── Médico-légal étendu ──
-    'consalidation': 'consolidation',
-    'consoledation': 'consolidation',
-    'sequélles': 'séquelles',
-    'séquèles': 'séquelles',
-    'incapacitée': 'incapacité',
-    'incapassité': 'incapacité',
-    'retantissement': 'retentissement',
-    'retentisement': 'retentissement',
-    'indamnisation': 'indemnisation',
-    'expertize': 'expertise',
-    'deficience': 'déficience',
-    'handycap': 'handicap',
-    'diminussion': 'diminution',
-    
-    // ── Termes généraux médicaux ──
-    'diagnostique': 'diagnostic',
-    'diagnostik': 'diagnostic',
-    'oedème': 'œdème',
-    'edème': 'œdème',
-    'cicalrice': 'cicatrice',
-    'sicatrice': 'cicatrice',
-    'adherence': 'adhérence',
-    'inflamation': 'inflammation',
-    'emorragie': 'hémorragie',
-    'attrophie': 'atrophie',
-    'reeducation': 'rééducation',
-    'kinesithérapie': 'kinésithérapie',
-    'fysiothérapie': 'physiothérapie',
-    'aparaillage': 'appareillage',
-    'bilateral': 'bilatéral',
-    'unilateral': 'unilatéral',
-    'homolateral': 'homolatéral',
-    'controlateral': 'controlatéral',
-    'croissé': 'croisé',
-    'croisés': 'croisés',
-};
 
 /**
  * Correction post-transcription médicale
@@ -739,7 +334,19 @@ export function useDictaphoneAI(
 
         setIsModelLoading(true);
         setModelProgress(0);
-        setStatusMessage('📦 Chargement Whisper SMALL (une seule fois, ~500MB)...');
+
+        // Vérifier si le modèle est déjà installé dans le cache du navigateur
+        let modelCached = false;
+        try {
+            const cache = await caches.open('transformers-cache');
+            const keys = await cache.keys();
+            modelCached = keys.some(k => k.url.includes('whisper-small'));
+        } catch { /* cache API non dispo, on continue */ }
+
+        setStatusMessage(modelCached
+            ? '⚡ Chargement Whisper SMALL (déjà installé)...'
+            : '📦 Installation Whisper SMALL (une seule fois, ~500MB)...'
+        );
 
         try {
             const { pipeline } = await import('@huggingface/transformers');
@@ -748,7 +355,10 @@ export function useDictaphoneAI(
                 if (info.status === 'progress' && info.progress != null) {
                     const pct = Math.round(info.progress);
                     setModelProgress(pct);
-                    setStatusMessage(`📦 Téléchargement: ${pct}%`);
+                    setStatusMessage(modelCached
+                        ? `⚡ Chargement: ${pct}%`
+                        : `📦 Installation: ${pct}%`
+                    );
                 } else if (info.status === 'ready') {
                     setModelProgress(100);
                 }
@@ -768,7 +378,10 @@ export function useDictaphoneAI(
                 // WebGPU non dispo, fallback WASM
             }
             if (!loaded) {
-                setStatusMessage('📦 Chargement Whisper SMALL (WASM)...');
+                setStatusMessage(modelCached
+                    ? '⚡ Chargement Whisper SMALL (WASM)...'
+                    : '📦 Installation Whisper SMALL (WASM)...'
+                );
                 setModelProgress(0);
                 transcriberRef.current = await pipeline(
                     'automatic-speech-recognition',
@@ -779,7 +392,7 @@ export function useDictaphoneAI(
 
             setIsModelLoaded(true);
             setIsModelLoading(false);
-            setStatusMessage('✅ Modèle prêt !');
+            setStatusMessage('✅ Modèle Whisper installé et prêt !');
             return true;
         } catch (err) {
             console.error('Erreur chargement modèle Whisper:', err);
