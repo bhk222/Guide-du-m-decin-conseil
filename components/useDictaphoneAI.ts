@@ -1,6 +1,6 @@
 /**
  * 🎤 useDictaphoneAI — Dictaphone 100% autonome via Whisper IA (WebAssembly)
- * V3.3.379
+ * V3.3.380
  * 
  * ZÉRO dépendance externe :
  * - Pas de moteur Windows
@@ -8,10 +8,10 @@
  * - Pas de connexion internet (après 1er chargement du modèle)
  * 
  * Fonctionnement :
- * 1. Premier usage → télécharge Whisper BASE quantifié (~75MB), cache navigateur
+ * 1. Premier usage → télécharge Whisper BASE fp32 (~150MB), cache navigateur
  * 2. Après → fonctionne 100% hors ligne, à vie
- * 3. Capture audio micro → détecte silences → transcrit Whisper WASM (quantifié = + rapide)
- * 4. Correction médicale post-transcription automatique (~400 termes)
+ * 3. Capture audio micro → détecte silences → transcrit Whisper WASM
+ * 4. Correction médicale post-transcription automatique (~400+ termes)
  * 5. Commandes vocales intelligentes (ponctuation, effacement, navigation)
  */
 
@@ -53,7 +53,7 @@ const WHISPER_HALLUCINATIONS = [
 
 // Expressions entières mal transcrites (priorité haute, traitées en premier)
 const PHRASE_CORRECTIONS: [RegExp, string][] = [
-    // Erreurs spécifiques observées
+    // Erreurs spécifiques observées (priorité maximale)
     [/\bune\s+facture\b/gi, 'une fracture'],
     [/\bla\s+facture\b/gi, 'la fracture'],
     [/\bdes\s+factures\b/gi, 'des fractures'],
@@ -64,7 +64,30 @@ const PHRASE_CORRECTIONS: [RegExp, string][] = [
     [/\bd'eux\s+os\b/gi, 'deux os'],
     [/\ble\s+bras\s+droit\b/gi, 'le bras droit'],
     
-    // Anatomie - expressions courantes
+    // === ERREURS OBSERVÉES V3.3.380 ===
+    // "Ils présentent" → "Il présente" (Whisper met au pluriel)
+    [/\bils\s+présentent?\b/gi, 'il présente'],
+    [/\bils?\s+présentes?\b/gi, 'il présente'],
+    // "patient âge de" → "patient âgé de" (accent manquant)
+    [/\bpatient\s+âge\s+de\b/gi, 'patient âgé de'],
+    [/\bpatiente\s+âge\s+de\b/gi, 'patiente âgée de'],
+    [/\bpatient\s+age\s+de\b/gi, 'patient âgé de'],
+    [/\bpatiente\s+agee?\s+de\b/gi, 'patiente âgée de'],
+    // "la avant la vôme" / "de la avant" → "de l'avant-bras"
+    [/\bde\s+la\s+avant\s+la\s+vôme\b/gi, 'de l\'avant-bras'],
+    [/\bla\s+avant\s+la\s+vôme\b/gi, 'l\'avant-bras'],
+    [/\bla\s+avant\s+l'avant\s+bras\b/gi, 'l\'avant-bras'],
+    [/\bde\s+la\s+avant\b/gi, 'de l\'avant-'],
+    [/\bla\s+vôme\b/gi, 'l\'avant-bras'],
+    [/\ble\s+vôme\b/gi, 'l\'avant-bras'],
+    // "la vant bras" / "la vambras" variantes
+    [/\bla\s+vant\s*-?\s*bras\b/gi, 'l\'avant-bras'],
+    [/\bl'\s*avant\s+bras\b/gi, 'l\'avant-bras'],
+    [/\bde\s+l'\s*avant\s+bras\b/gi, 'de l\'avant-bras'],
+    // "il ma écrit" → "il m'a écrit" (apostrophe)
+    [/\bil\s+ma\s+/gi, 'il m\'a '],
+    [/\belle\s+ma\s+/gi, 'elle m\'a '],
+    
     [/\bavant[- ]?bras\b/gi, 'avant-bras'],
     [/\bl'avant[- ]?bras\b/gi, 'l\'avant-bras'],
     [/\bdes\s+deux\s+os\b/gi, 'des deux os'],
@@ -118,6 +141,13 @@ const PHRASE_CORRECTIONS: [RegExp, string][] = [
     [/\ben\s+capacité\b/gi, 'incapacité'],
     [/\ble\s+préju\s+dice\b/gi, 'le préjudice'],
     [/\bles\s+sé?quell?e?s?\b/gi, 'les séquelles'],
+    
+    // Conjugaison médicale courante
+    [/\bil\s+présentes?\b/gi, 'il présente'],
+    [/\belle\s+présentes?\b/gi, 'elle présente'],
+    [/\bqui\s+présentent\b/gi, 'qui présente'],
+    [/\bâgés?\s+de\b/gi, 'âgé de'],
+    [/\bâgées?\s+de\b/gi, 'âgée de'],
 ];
 
 // Mots individuels mal transcrits par Whisper (contexte médical)
@@ -625,6 +655,7 @@ export function useDictaphoneAI(
                 task: 'transcribe',
                 return_timestamps: false,
                 max_new_tokens: 128,
+                num_beams: 3,
             });
 
             const rawText = result?.text?.trim();
@@ -671,7 +702,7 @@ export function useDictaphoneAI(
 
         setIsModelLoading(true);
         setModelProgress(0);
-        setStatusMessage('📦 Chargement Whisper BASE (une seule fois)...');
+        setStatusMessage('📦 Chargement Whisper BASE (une seule fois, ~150MB)...');
 
         try {
             const { pipeline } = await import('@huggingface/transformers');
@@ -686,23 +717,12 @@ export function useDictaphoneAI(
                 }
             };
 
-            try {
-                // Quantifié q8 : ~75MB, plus rapide
-                transcriberRef.current = await pipeline(
-                    'automatic-speech-recognition',
-                    'onnx-community/whisper-base',
-                    { device: 'wasm', dtype: 'q8', progress_callback: progressCb },
-                );
-            } catch {
-                // Fallback standard fp32 si quantifié non disponible
-                setStatusMessage('📦 Chargement modèle standard...');
-                setModelProgress(0);
-                transcriberRef.current = await pipeline(
-                    'automatic-speech-recognition',
-                    'onnx-community/whisper-base',
-                    { device: 'wasm', progress_callback: progressCb },
-                );
-            }
+            // fp32 = meilleure précision français (q8 détruit la qualité)
+            transcriberRef.current = await pipeline(
+                'automatic-speech-recognition',
+                'onnx-community/whisper-base',
+                { device: 'wasm', progress_callback: progressCb },
+            );
 
             setIsModelLoaded(true);
             setIsModelLoading(false);
