@@ -1,6 +1,6 @@
 /**
- * 🎤 useDictaphoneAI — Dictaphone 100% autonome via Whisper IA (WebAssembly)
- * V3.3.380
+ * 🎤 useDictaphoneAI — Dictaphone 100% autonome via Whisper IA
+ * V3.3.381
  * 
  * ZÉRO dépendance externe :
  * - Pas de moteur Windows
@@ -8,11 +8,12 @@
  * - Pas de connexion internet (après 1er chargement du modèle)
  * 
  * Fonctionnement :
- * 1. Premier usage → télécharge Whisper BASE fp32 (~150MB), cache navigateur
+ * 1. Premier usage → télécharge Whisper SMALL (~500MB), cache navigateur
  * 2. Après → fonctionne 100% hors ligne, à vie
- * 3. Capture audio micro → détecte silences → transcrit Whisper WASM
- * 4. Correction médicale post-transcription automatique (~400+ termes)
- * 5. Commandes vocales intelligentes (ponctuation, effacement, navigation)
+ * 3. Essaie WebGPU (rapide) puis fallback WASM (universel)
+ * 4. Capture audio micro → détecte silences → transcrit Whisper
+ * 5. Correction médicale post-transcription automatique (~400+ termes)
+ * 6. Commandes vocales intelligentes (ponctuation, effacement, navigation)
  */
 
 import { useState, useRef, useCallback, useEffect } from 'react';
@@ -23,10 +24,10 @@ import { useState, useRef, useCallback, useEffect } from 'react';
 
 const SAMPLE_RATE = 16000;
 const SILENCE_THRESHOLD = 0.015;     // Seuil d'énergie RMS pour détecter le silence
-const SILENCE_DURATION_MS = 1200;    // Réduit 1800→1200 pour réactivité
-const MAX_CHUNK_SECONDS = 20;        // Chunks courts = transcription rapide
-const MIN_AUDIO_SECONDS = 0.4;       // Ignorer les segments < 0.4s (bruit)
-const SILENCE_CHECK_INTERVAL = 100;  // Vérification silence plus fréquente
+const SILENCE_DURATION_MS = 1500;    // Plus de contexte pour meilleure transcription
+const MAX_CHUNK_SECONDS = 25;        // Chunks plus longs = meilleur contexte pour le modèle
+const MIN_AUDIO_SECONDS = 0.5;       // Ignorer les segments < 0.5s (bruit)
+const SILENCE_CHECK_INTERVAL = 100;  // Vérification silence fréquente
 
 // Correspondance nombres français → chiffres
 const NOMBRE_FR: Record<string, number> = {
@@ -87,6 +88,20 @@ const PHRASE_CORRECTIONS: [RegExp, string][] = [
     // "il ma écrit" → "il m'a écrit" (apostrophe)
     [/\bil\s+ma\s+/gi, 'il m\'a '],
     [/\belle\s+ma\s+/gi, 'elle m\'a '],
+    
+    // === ERREURS OBSERVÉES V3.3.381 ===
+    // "la passion" → "le patient" / "un patient"
+    [/\bde\s+la\s+passion\b/gi, 'd\'un patient'],
+    [/\bla\s+passion\b/gi, 'le patient'],
+    // "qu'as-je de" → "âgé de"
+    [/\bqu'as[- ]je\s+de\b/gi, 'âgé de'],
+    [/\bcasse?-?j[eu]\s+de\b/gi, 'âgé de'],
+    // "Des autres de la Vendra" → "des os de l'avant-bras"
+    [/\bdes\s+autres\s+de\s+la\s+[Vv]endra\b/gi, 'des os de l\'avant-bras'],
+    [/\bla\s+[Vv]endra\b/gi, 'l\'avant-bras'],
+    [/\ble\s+[Vv]endra\b/gi, 'l\'avant-bras'],
+    // "il s'agit de la passion" → "il s'agit d'un patient"
+    [/\bil\s+s'agit\s+de\s+la\s+passion\b/gi, 'il s\'agit d\'un patient'],
     
     [/\bavant[- ]?bras\b/gi, 'avant-bras'],
     [/\bl'avant[- ]?bras\b/gi, 'l\'avant-bras'],
@@ -258,6 +273,8 @@ const WORD_CORRECTIONS: Record<string, string> = {
     'agé': 'âgé',
     'agee': 'âgée',
     'age': 'âgé',
+    'passion': 'patient',
+    'vendra': 'avant-bras',
     
     // ── Anatomie étendue V3.3.379 ──
     'humerus': 'humérus',
@@ -655,7 +672,6 @@ export function useDictaphoneAI(
                 task: 'transcribe',
                 return_timestamps: false,
                 max_new_tokens: 128,
-                num_beams: 3,
             });
 
             const rawText = result?.text?.trim();
@@ -702,7 +718,7 @@ export function useDictaphoneAI(
 
         setIsModelLoading(true);
         setModelProgress(0);
-        setStatusMessage('📦 Chargement Whisper BASE (une seule fois, ~150MB)...');
+        setStatusMessage('📦 Chargement Whisper SMALL (une seule fois, ~500MB)...');
 
         try {
             const { pipeline } = await import('@huggingface/transformers');
@@ -717,12 +733,28 @@ export function useDictaphoneAI(
                 }
             };
 
-            // fp32 = meilleure précision français (q8 détruit la qualité)
-            transcriberRef.current = await pipeline(
-                'automatic-speech-recognition',
-                'onnx-community/whisper-base',
-                { device: 'wasm', progress_callback: progressCb },
-            );
+            // Whisper SMALL (244M params) = bien meilleur français que base (74M)
+            // Essai WebGPU d'abord (rapide si GPU dispo), sinon WASM
+            let loaded = false;
+            try {
+                transcriberRef.current = await pipeline(
+                    'automatic-speech-recognition',
+                    'onnx-community/whisper-small',
+                    { device: 'webgpu', progress_callback: progressCb },
+                );
+                loaded = true;
+            } catch {
+                // WebGPU non dispo, fallback WASM
+            }
+            if (!loaded) {
+                setStatusMessage('📦 Chargement Whisper SMALL (WASM)...');
+                setModelProgress(0);
+                transcriberRef.current = await pipeline(
+                    'automatic-speech-recognition',
+                    'onnx-community/whisper-small',
+                    { device: 'wasm', progress_callback: progressCb },
+                );
+            }
 
             setIsModelLoaded(true);
             setIsModelLoading(false);
