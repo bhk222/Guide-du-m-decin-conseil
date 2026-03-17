@@ -6,7 +6,7 @@ import { Button } from './ui/Button';
 import { HistoryModal, saveToHistory } from './HistoryModal';
 import { useMedicalSpellCheck } from './spellcheck/useMedicalSpellCheck';
 import { MedicalSpellChecker } from './spellcheck/MedicalSpellChecker';
-import { useDictaphone } from './useDictaphone';
+import { useDictaphoneAI } from './useDictaphoneAI';
 
 // --- TYPES ---
 interface Proposal {
@@ -214,8 +214,8 @@ export const ExclusiveAiCalculator: React.FC<ExclusiveAiCalculatorProps> = ({
     const [spellCheckDismissed, setSpellCheckDismissed] = useState(false);
     const analysisQueueRef = useRef<string[]>([]);
 
-    // 🎤 Dictaphone professionnel hors connexion
-    const [dictState, dictActions] = useDictaphone(userInput, setUserInput);
+    // 🎤 Dictaphone IA 100% autonome (Whisper WebAssembly)
+    const [dictState, dictActions] = useDictaphoneAI(userInput, setUserInput);
 
     // Correcteur d'orthographe médical
     const { results: spellCheckResults, applyCorrection, applyAllCorrections, ignoreWord, ignoreAll } = useMedicalSpellCheck(userInput);
@@ -745,17 +745,31 @@ export const ExclusiveAiCalculator: React.FC<ExclusiveAiCalculatorProps> = ({
                     <div ref={messagesEndRef}></div>
                 </div>
                 <div className="mt-4 pt-4 border-t border-slate-200">
-                    {/* 🎤 Barre dictaphone professionnelle */}
+                    {/* 🧠 Barre de chargement modèle IA (premier lancement uniquement) */}
+                    {dictState.isModelLoading && (
+                        <div className="mb-3 p-3 bg-indigo-50 border border-indigo-200 rounded-lg">
+                            <div className="flex items-center justify-between mb-1">
+                                <span className="text-xs font-semibold text-indigo-700">{dictState.statusMessage}</span>
+                                <span className="text-xs font-mono text-indigo-500">{dictState.modelProgress}%</span>
+                            </div>
+                            <div className="w-full bg-indigo-200 rounded-full h-2">
+                                <div className="bg-indigo-600 h-2 rounded-full transition-all duration-300" style={{width: `${dictState.modelProgress}%`}}></div>
+                            </div>
+                            <p className="mt-1 text-xs text-indigo-500">Téléchargement unique — ensuite 100% hors ligne</p>
+                        </div>
+                    )}
+                    {/* 🎤 Barre dictaphone IA */}
                     <div className="flex flex-wrap items-center gap-2 mb-2">
                         {/* Bouton Microphone */}
                         <button
                             onClick={dictActions.toggle}
-                            className={`flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-semibold transition-all ${
+                            disabled={dictState.isModelLoading}
+                            className={`flex items-center gap-1.5 px-4 py-2 rounded-lg text-sm font-semibold transition-all disabled:opacity-50 ${
                                 dictState.isListening 
                                     ? 'bg-red-600 text-white shadow-lg shadow-red-300 ring-2 ring-red-400 ring-offset-1' 
                                     : 'bg-emerald-600 text-white hover:bg-emerald-700 shadow-sm'
                             }`}
-                            title={dictState.isListening ? 'Arrêter la dictée (clic ou dites "effacer tout")' : 'Démarrer la dictée vocale'}
+                            title={dictState.isListening ? 'Arrêter la dictée' : 'Démarrer la dictée vocale IA (Whisper)'}
                         >
                             {dictState.isListening ? (
                                 <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 animate-pulse" fill="currentColor" viewBox="0 0 24 24">
@@ -767,13 +781,13 @@ export const ExclusiveAiCalculator: React.FC<ExclusiveAiCalculatorProps> = ({
                                     <path strokeLinecap="round" strokeLinejoin="round" d="M19 11a7 7 0 01-14 0m7 7v4m-4 0h8M12 1a3 3 0 00-3 3v7a3 3 0 006 0V4a3 3 0 00-3-3z" />
                                 </svg>
                             )}
-                            {dictState.isListening ? 'Stop' : 'Dictée'}
+                            {dictState.isListening ? 'Stop' : '🧠 Dictée IA'}
                         </button>
                         {/* Bouton Effacer mot */}
                         <button
                             onClick={dictActions.deleteWord}
                             className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium bg-amber-50 text-amber-800 hover:bg-amber-100 border border-amber-300 transition-colors disabled:opacity-40"
-                            title="Effacer le dernier mot (ou dites 'effacer')"
+                            title="Effacer le dernier mot"
                             disabled={!userInput}
                         >
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -785,7 +799,7 @@ export const ExclusiveAiCalculator: React.FC<ExclusiveAiCalculatorProps> = ({
                         <button
                             onClick={dictActions.clearAll}
                             className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium bg-red-50 text-red-800 hover:bg-red-100 border border-red-300 transition-colors disabled:opacity-40"
-                            title="Effacer tout le texte (ou dites 'effacer tout')"
+                            title="Effacer tout le texte"
                             disabled={!userInput}
                         >
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
@@ -793,33 +807,61 @@ export const ExclusiveAiCalculator: React.FC<ExclusiveAiCalculatorProps> = ({
                             </svg>
                             Tout effacer
                         </button>
-                        {/* Statut en temps réel */}
+                        {/* Statut + chrono + VU-mètre */}
                         {dictState.isListening && (
-                            <div className="ml-auto flex items-center gap-2">
+                            <div className="ml-auto flex items-center gap-3">
+                                {/* Chrono */}
                                 <span className="text-xs font-mono text-slate-500">{Math.floor(dictState.listenDuration / 60)}:{String(dictState.listenDuration % 60).padStart(2, '0')}</span>
+                                {/* VU-mètre audio */}
+                                <div className="flex items-end gap-0.5 h-4">
+                                    {[0, 15, 30, 45, 60].map((threshold) => (
+                                        <div key={threshold} className={`w-1 rounded-full transition-all duration-100 ${
+                                            dictState.audioLevel > threshold ? 'bg-emerald-500' : 'bg-slate-200'
+                                        }`} style={{ height: `${4 + threshold / 10}px` }} />
+                                    ))}
+                                </div>
+                                {/* Indicateur enregistrement */}
                                 <span className="flex items-center gap-1 text-xs font-medium text-red-600">
                                     <span className="relative flex h-2.5 w-2.5">
                                         <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
                                         <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-red-500"></span>
                                     </span>
-                                    {dictState.statusMessage || 'Écoute...'}
+                                    REC
                                 </span>
                             </div>
                         )}
-                        {dictState.lastCommand && (
+                        {/* Feedback commande */}
+                        {dictState.lastCommand && !dictState.isListening && (
                             <span className="ml-auto text-xs font-medium text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded">{dictState.lastCommand}</span>
                         )}
                     </div>
-                    {/* Guide commandes vocales (visible quand dictée active) */}
-                    {dictState.isListening && (
-                        <div className="mb-2 px-3 py-1.5 bg-blue-50 border border-blue-200 rounded-lg text-xs text-blue-700 leading-relaxed">
-                            <strong>Commandes :</strong> "point" → <b>.</b> | "virgule" → <b>,</b> | "nouvelle ligne" → retour | "effacer" → supprime 1 mot | "effacer trois mots" | "effacer tout"
+                    {/* Statut détaillé */}
+                    {(dictState.statusMessage && dictState.isListening) && (
+                        <div className={`mb-2 px-3 py-1.5 rounded-lg text-xs font-medium ${
+                            dictState.isProcessing 
+                                ? 'bg-purple-50 border border-purple-200 text-purple-700 animate-pulse'
+                                : 'bg-blue-50 border border-blue-200 text-blue-700'
+                        }`}>
+                            {dictState.statusMessage}
+                            {dictState.isProcessing && <span className="ml-2 inline-block">&#9473;&#9473;&#9473;</span>}
                         </div>
                     )}
-                    {/* Preview interim */}
+                    {/* Guide commandes vocales */}
+                    {dictState.isListening && !dictState.isProcessing && (
+                        <div className="mb-2 px-3 py-1.5 bg-slate-50 border border-slate-200 rounded-lg text-xs text-slate-600 leading-relaxed">
+                            <strong>Commandes vocales :</strong> "point" → <b>.</b> | "virgule" → <b>,</b> | "nouvelle ligne" → ↵ | "effacer" | "effacer trois mots" | "effacer tout"
+                        </div>
+                    )}
+                    {/* Preview interim (parole détectée) */}
                     {dictState.interimText && (
                         <div className="mb-2 px-3 py-1.5 bg-yellow-50 border border-yellow-200 rounded-lg text-sm text-yellow-800 italic">
-                            🎤 {dictState.interimText}
+                            {dictState.interimText}
+                        </div>
+                    )}
+                    {/* Feedback commande (visible pendant écoute aussi) */}
+                    {dictState.lastCommand && dictState.isListening && (
+                        <div className="mb-2 px-3 py-1.5 bg-emerald-50 border border-emerald-200 rounded-lg text-sm font-medium text-emerald-700">
+                            {dictState.lastCommand}
                         </div>
                     )}
                     <div className="flex items-start gap-2">
@@ -827,7 +869,7 @@ export const ExclusiveAiCalculator: React.FC<ExclusiveAiCalculatorProps> = ({
                             value={userInput}
                             onChange={(e) => { setUserInput(e.target.value); setSpellCheckDismissed(false); }}
                             onKeyPress={(e) => {if(e.key === 'Enter' && !e.shiftKey) {e.preventDefault(); handleSend(userInput);}}}
-                            placeholder={dictState.isListening ? "🎤 Parlez maintenant..." : "Décrivez les séquelles ou demandez le calcul..."}
+                            placeholder={dictState.isListening ? "🎤 Parlez maintenant — le texte apparaîtra après chaque pause..." : "Décrivez les séquelles ou demandez le calcul..."}
                             className={`flex-1 w-full p-3 border rounded-lg focus:ring-2 focus:ring-primary-500/50 text-black placeholder:text-slate-400 bg-white resize-none transition-colors ${
                                 dictState.isListening ? 'border-red-400 ring-2 ring-red-100 bg-red-50/30' : 'border-slate-300'
                             }`}
