@@ -1,6 +1,6 @@
 /**
  * 🎤 useDictaphoneAI — Dictaphone 100% autonome via Whisper IA
- * V3.3.381
+ * V3.3.382
  * 
  * ZÉRO dépendance externe :
  * - Pas de moteur Windows
@@ -103,6 +103,21 @@ const PHRASE_CORRECTIONS: [RegExp, string][] = [
     // "il s'agit de la passion" → "il s'agit d'un patient"
     [/\bil\s+s'agit\s+de\s+la\s+passion\b/gi, 'il s\'agit d\'un patient'],
     
+    // === ERREURS OBSERVÉES V3.3.382 ===
+    // "c'est qu'elle" → "séquelle" (Whisper décompose le mot)
+    [/\bcomme\s+c'est\s+qu'elle\b/gi, 'comme séquelle'],
+    [/\bc'est\s+qu'elles?\b/gi, 'séquelle'],
+    [/\bces?\s+qu'elles?\b/gi, 'séquelle'],
+    [/\bsait?\s+qu'elles?\b/gi, 'séquelle'],
+    [/\bs[ea]?\s+qu'elles?\b/gi, 'séquelle'],
+    // "saud-arthroze" / "sod-arthrose" → "pseudarthrose"
+    [/\bsaud[- ]?arthroze?s?\b/gi, 'pseudarthrose'],
+    [/\bsod[- ]?arthroze?s?\b/gi, 'pseudarthrose'],
+    [/\bseau?d?[- ]?arthrose?s?\b/gi, 'pseudarthrose'],
+    [/\bsaudo?[- ]?arthrose?s?\b/gi, 'pseudarthrose'],
+    [/\bpseudo?[- ]?arthroze?s?\b/gi, 'pseudarthrose'],
+    [/\bps[eu]+do?[- ]arthros[ez]?s?\b/gi, 'pseudarthrose'],
+    
     [/\bavant[- ]?bras\b/gi, 'avant-bras'],
     [/\bl'avant[- ]?bras\b/gi, 'l\'avant-bras'],
     [/\bdes\s+deux\s+os\b/gi, 'des deux os'],
@@ -199,6 +214,12 @@ const WORD_CORRECTIONS: Record<string, string> = {
     'algodistrophie': 'algodystrophie',
     'pseudo-artrose': 'pseudarthrose',
     'pseudartrose': 'pseudarthrose',
+    'saud-arthroze': 'pseudarthrose',
+    'saudarthroze': 'pseudarthrose',
+    'sod-arthrose': 'pseudarthrose',
+    'saudarthrose': 'pseudarthrose',
+    'pseudoarthrose': 'pseudarthrose',
+    'pseudo-arthrose': 'pseudarthrose',
     'ostéophorose': 'ostéoporose',
     'luxaction': 'luxation',
     'lucsation': 'luxation',
