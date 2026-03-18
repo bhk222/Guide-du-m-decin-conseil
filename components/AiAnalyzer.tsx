@@ -6257,13 +6257,68 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             const dyspneeEffort = /dyspn[eé]e.*(?:effort|marche|escalier)/i.test(workingText);
             const dyspneeRepos = /dyspn[eé]e.*repos|repos.*dyspn[eé]e/i.test(workingText);
 
+            // 🆕 V3.3.389: Détection VEMS dans le contexte thoracique
+            // En médecine légale, quand le VEMS est documenté, la SÉQUELLE FONCTIONNELLE (IRC)
+            // prime TOUJOURS sur la lésion structurelle initiale (volet costal, fractures, etc.)
+            // Le volet costal est le MÉCANISME LÉSIONNEL, l'IRC est la SÉQUELLE CONSOLIDÉE
+            const vemsMatch389 = workingText.match(/vems\s*(?:[àa=:<])\s*(\d{1,3})\s*(?:%|pour\s*cent)|vems\s*<?\s*(\d{1,3})\s*(?:%|pour\s*cent)/i);
+            const vemsVal389 = vemsMatch389 ? parseInt(vemsMatch389[1] || vemsMatch389[2]) : 0;
+
             let chosenBareme: string;
             let chosenRate: number;
             let chosenPath: string;
             let severity: string;
             let justificationDetails: string[] = [];
 
-            if (hasGrandFracas) {
+            // Exception: lobectomie/pneumonectomie = procédures chirurgicales spécifiques avec barème dédié
+            const isLobectomie389 = /lobectomie|ablation.*lobe.*poumon|r[eé]section.*lobe.*pulmonaire/i.test(workingText);
+            const isPneumonectomie389 = /pneumonectomie|pneumectomie|ablation.*poumon.*entier/i.test(workingText);
+
+            if (vemsVal389 > 0 && hasInsuffResp && !isLobectomie389 && !isPneumonectomie389) {
+                // 🆕 V3.3.389: PRIORITÉ FONCTIONNELLE — IRC basée sur VEMS
+                // Le barème fonctionnel IRC est le bon choix quand on a un VEMS objectif
+                // Le volet costal / grand fracas est le MÉCANISME, l'IRC est la SÉQUELLE
+                chosenBareme = 'Insuffisance respiratoire chronique post-traumatique';
+                chosenPath = 'Pneumologie > Insuffisance Respiratoire Chronique';
+
+                const hasOxygen389 = /oxyg[eé]noth[eé]rapie|oxyg[eè]ne|O2/i.test(workingText);
+                const isSevere389 = /s[eé]v[eè]re|majeur|grave|permanent/i.test(workingText);
+
+                if (vemsVal389 <= 30) chosenRate = 55;
+                else if (vemsVal389 <= 40) chosenRate = 45;
+                else if (vemsVal389 <= 50) chosenRate = isSevere389 ? 40 : 35;
+                else if (vemsVal389 <= 60) chosenRate = 25;
+                else if (vemsVal389 <= 70) chosenRate = 18;
+                else if (vemsVal389 <= 80) chosenRate = 12;
+                else chosenRate = 8;
+
+                if (hasOxygen389 && chosenRate < 45) chosenRate += 5;
+                if (hasDyspnee && chosenRate < 48) chosenRate += 3;
+
+                severity = vemsVal389 <= 50 ? 'élevé' : vemsVal389 <= 70 ? 'moyen' : 'faible';
+
+                // Contexte lésionnel initial dans la justification
+                const structuralCtx389: string[] = [];
+                if (hasVoletCostal) structuralCtx389.push('volet costal');
+                if (hasContusionPulmonaire) structuralCtx389.push('contusion pulmonaire');
+                if (hasGrandFracas) structuralCtx389.push('grand fracas thoracique');
+                if (hasFibrose) structuralCtx389.push('fibrose pulmonaire');
+                if (/h[eé]mopneumothorax|h[eé]mothorax|pneumothorax/i.test(workingText)) structuralCtx389.push('hémopneumothorax');
+                if (/SDRA|d[eé]tresse\s+respiratoire\s+aigu/i.test(workingText)) structuralCtx389.push('SDRA');
+
+                justificationDetails.push(`VEMS à ${vemsVal389}% → insuffisance respiratoire chronique restrictive ${isSevere389 ? 'sévère' : 'post-traumatique'}`);
+                if (structuralCtx389.length > 0) {
+                    justificationDetails.push(`Mécanisme lésionnel initial : ${structuralCtx389.join(', ')}`);
+                }
+                if (hasDyspnee) {
+                    const dyspneeDetail = dyspneeRepos ? 'Dyspnée de repos' : dyspneeEffort ? 'Dyspnée d\'effort invalidante' : 'Dyspnée';
+                    justificationDetails.push(dyspneeDetail);
+                }
+                if (hasOxygen389) justificationDetails.push('Oxygénothérapie au long cours');
+                if (hasSyndromeRestrictif) justificationDetails.push('Syndrome restrictif documenté');
+
+                console.log(`🫁 [V3.3.389] PRIORITÉ FONCTIONNELLE: IRC VEMS=${vemsVal389}% → ${chosenRate}% (lésion: ${structuralCtx389.join(', ')})`);
+            } else if (hasGrandFracas) {
                 // Grand fracas du thorax [30-50%]
                 chosenBareme = 'Grand fracas du thorax';
                 chosenPath = 'Séquelles Thoraciques, Abdominales, Pelviennes et Cardio-vasculaires > Thorax - Paroi Osseuse';

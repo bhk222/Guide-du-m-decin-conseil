@@ -69,10 +69,10 @@ const testCases: TestCase[] = [
   {
     // Cas 8 : Grand fracas du thorax
     input: "grand fracas du thorax après écrasement par véhicule lourd avec fractures multiples de côtes bilatérales et volet costal postérieur et contusion pulmonaire sévère et drainage thoracique bilatéral prolongé et séquelles respiratoires majeures avec insuffisance respiratoire chronique et dyspnée permanente au moindre effort et VEMS à 40 pour cent de la théorique et oxygénothérapie de déambulation",
-    expectedName: "grand.*fracas.*thorax|fracas.*thorax",
+    expectedName: "grand.*fracas.*thorax|fracas.*thorax|insuffisance.*respiratoire.*chronique",
     expectedMinRate: 30,
-    expectedMaxRate: 50,
-    description: "Grand fracas du thorax"
+    expectedMaxRate: 55,
+    description: "Grand fracas du thorax avec IRC (VEMS 40%)"
   },
   {
     // Cas 9 : Lobectomie pulmonaire post-traumatique
