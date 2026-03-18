@@ -20866,6 +20866,123 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
     }
     
     if (detectedSequelae.length >= 1) {
+        // 🆕 V3.3.390: POLYTRAUMATISME BASSIN/COTYLE + HANCHE + UROLOGIE
+        // Pattern: fracture bassin/cotyle + ankylose hanche + séquelles urologiques/raccourcissement
+        // Le cumul standard donne des barèmes FAUX (ankylose vertébrale, rupture abdomen)
+        // → Handler dédié avec évaluation correcte de chaque séquelle distincte
+        const hasBassinCotyle390 = /(?:fracture.*cotyle|cotyle.*fractur|disjonction.*symphys|fracture.*bassin|aileron.*sacr[eé])/i.test(text);
+        const hasAnkyloseHanche390 = /ankylose.*hanche|hanche.*ankylos|blocage.*hanche|hanche.*bloqu[eé]|raideur.*(?:majeur|s[eé]v[eè]r|important|serr[eé]).*hanche|hanche.*raideur.*(?:majeur|s[eé]v[eè]r|important|serr[eé])/i.test(text);
+        if (hasBassinCotyle390 && hasAnkyloseHanche390) {
+            console.log('🦴 [V3.3.390] POLYTRAUMATISME BASSIN/COTYLE + HANCHE → Cumul Balthazard séquelles distinctes');
+            
+            const bassinSeq: { name: string; baremeRef: string; rate: number; justif: string }[] = [];
+            
+            // 1. ANKYLOSE HANCHE (barème: "Ankylose complète de la hanche" 40% bonne position, 50% mauvaise)
+            // "Serrée" = sub-totale → même taux que complète bonne position (40%) même si mauvaise position
+            // Seule l'ankylose "complète" + "mauvaise position" justifie 50%
+            const isMauvaisePosition = /mauvaise\s*position|flexion.*rotation|rotation.*flexion|position.*(?:vici|d[eé]fectueuse|anormale)|adduction|flexum/i.test(text);
+            const isComplete = /ankylose\s+compl[eè]te|blocage\s+complet|immobilit[eé]\s+totale/i.test(text);
+            const hancheRate = (isComplete && isMauvaisePosition) ? 50 : 40;
+            bassinSeq.push({
+                name: `Ankylose ${isMauvaisePosition ? 'serrée ' : 'complète '}de la hanche${isMauvaisePosition ? ' en mauvaise position' : ''}`,
+                baremeRef: "Membres Inférieurs > Ankylose complète de la hanche",
+                rate: hancheRate,
+                justif: `Ankylose de la hanche ${isMauvaisePosition ? 'en mauvaise position (flexion/rotation)' : 'en bonne position'} → ${hancheRate}% [barème: 40% bonne position, 50% mauvaise position complète]`
+            });
+            
+            // 2. RACCOURCISSEMENT MI (barème: 5-25%)
+            const raccMatch390 = /raccourcissement.*?(\d+(?:[.,]\d+)?)\s*cm/i.exec(text);
+            if (raccMatch390) {
+                const raccCm = parseFloat(raccMatch390[1].replace(',', '.'));
+                let raccRate = 10;
+                if (raccCm >= 5) raccRate = 25;
+                else if (raccCm >= 4) raccRate = 20;
+                else if (raccCm >= 3) raccRate = 15;
+                else if (raccCm >= 2) raccRate = 10;
+                else raccRate = 5;
+                bassinSeq.push({
+                    name: `Raccourcissement du membre inférieur (${raccCm} cm)`,
+                    baremeRef: "Membres Inférieurs > Raccourcissement d'un membre inférieur",
+                    rate: raccRate,
+                    justif: `Raccourcissement ${raccCm} cm → ${raccRate}% [fourchette barémique 5-25%]`
+                });
+            }
+            
+            // 3. STÉNOSE URÉTRALE / SÉQUELLES UROLOGIQUES (barème: Rétrécissement urètre 5-30%)
+            const hasStenoseUretrale = /st[eé]nose.*ur[eé]tr|r[eé]tr[eé]cissement.*ur[eé]tr|ur[eé]tr.*st[eé]nose|rupture.*ur[eè]tr|ur[eè]tr.*rupture/i.test(text);
+            if (hasStenoseUretrale) {
+                const hasDilatations = /dilatation|calibrage|sondage/i.test(text);
+                const isInfranchissable = /infranchissable|impossible.*dilat|sonde.*permanent/i.test(text);
+                let uroRate = 10;
+                if (isInfranchissable) uroRate = 25;
+                else if (hasDilatations) uroRate = 15;
+                const uroLabel = isInfranchissable ? "infranchissable" : (hasDilatations ? "nécessitant des dilatations" : "");
+                bassinSeq.push({
+                    name: "Rétrécissement de l'urètre" + (uroLabel ? ` ${uroLabel}` : ""),
+                    baremeRef: "Appareil Génito-Urinaire > Rétrécissement de l'urètre",
+                    rate: uroRate,
+                    justif: `Sténose/rétrécissement urétral${uroLabel ? ` (${uroLabel})` : ''} → ${uroRate}% [fourchette barémique 5-30%]`
+                });
+            }
+            
+            // 4. DOULEURS SACRO-ILIAQUES (barème: séquelles fracture bassin 5-15%)
+            const hasDouleursSacro = /douleur.*sacro[\s-]*iliaque|sacro[\s-]*iliaque.*douleur|douleur.*pelvien|douleur.*bassin/i.test(text);
+            if (hasDouleursSacro) {
+                const isChronique = /chronique|permanent|persist/i.test(text);
+                const sacroRate = isChronique ? 8 : 5;
+                bassinSeq.push({
+                    name: "Douleurs sacro-iliaques résiduelles" + (isChronique ? " chroniques" : ""),
+                    baremeRef: "Bassin > Séquelles de fracture du bassin - Douleurs résiduelles",
+                    rate: sacroRate,
+                    justif: `Douleurs sacro-iliaques ${isChronique ? 'chroniques' : 'résiduelles'} post-fracture bassin → ${sacroRate}% [fourchette barémique 5-15%]`
+                });
+            }
+            
+            // Cumul Balthazard
+            if (bassinSeq.length >= 2) {
+                let ippGlobal = 0;
+                const sorted = [...bassinSeq].sort((a, b) => b.rate - a.rate);
+                const balthDetails: string[] = [];
+                
+                for (let i = 0; i < sorted.length; i++) {
+                    const seq = sorted[i];
+                    if (i === 0) {
+                        ippGlobal = seq.rate;
+                        balthDetails.push(`&nbsp;&nbsp;${i + 1}. <strong>${seq.name}</strong> → ${seq.rate}% (taux principal)`);
+                    } else {
+                        const contribution = Math.round(seq.rate * (100 - ippGlobal) / 100);
+                        balthDetails.push(`&nbsp;&nbsp;${i + 1}. <strong>${seq.name}</strong> → ${seq.rate}% × (100 - ${ippGlobal})% = +${contribution}%`);
+                        ippGlobal += contribution;
+                    }
+                }
+                
+                const justifBassin =
+                    `<strong>🦴 POLYTRAUMATISME BASSIN / HANCHE - CUMUL SÉQUELLES DISTINCTES</strong><br><br>` +
+                    `<strong>📋 Calcul IPP cumulé (Barème 1967 – Formule de Balthazard)</strong><br><br>` +
+                    `<strong>📊 ${bassinSeq.length} séquelles post-traumatiques identifiées :</strong><br>` +
+                    balthDetails.join('<br>') + '<br><br>' +
+                    `<strong>🧮 IPP GLOBAL CUMULÉ = ${ippGlobal}%</strong><br><br>` +
+                    `<strong>📖 Références barémiques :</strong><br>` +
+                    bassinSeq.map(s => `&nbsp;&nbsp;• ${s.name} : <em>${s.baremeRef}</em> → ${s.rate}%<br>&nbsp;&nbsp;&nbsp;&nbsp;${s.justif}`).join('<br>') +
+                    `<br><br>⚖️ <em>Base juridique : Barème indicatif d'invalidité — Accidents du travail (1967). Formule de Balthazard pour cumul de séquelles distinctes.</em>`;
+                
+                return {
+                    type: 'proposal' as const,
+                    name: `Polytraumatisme bassin/hanche - ${bassinSeq.length} séquelles - IPP global ${ippGlobal}%`,
+                    rate: ippGlobal,
+                    justification: justifBassin,
+                    path: 'Polytraumatisme > Bassin / Hanche / Cumul Séquelles',
+                    injury: {
+                        name: `Cumul séquelles fracture bassin/cotyle + ankylose hanche (${bassinSeq.length} composantes)`,
+                        rate: [40, 60],
+                        path: 'Polytraumatisme > Bassin / Hanche'
+                    } as Injury,
+                    isCumul: true
+                };
+            }
+            // Si < 2 séquelles → fall through to normal cumul path
+        }
+
         // 🆕 V3.3.201j: Si CUMUL détecté, SKIP le regroupement par système
         if (isCumulDetected) {
             // 🆕 V3.3.384: TC GRAVE + multi-sites → ANNULER cumul, forcer passage expert rules
@@ -23301,7 +23418,8 @@ ${severityDesc354 ? `<strong>🔍 Indicateurs de sévérité :</strong> ${severi
             // 🆕 V3.3.321: Ajout traumatisme, cervicalgie, névralgie, commotionnel, hémorragie méningée
             // 🆕 V3.3.322: Ajout stress post-traumatique, dépressif, gastrectomie, néphrectomie, colectomie, ectomie
             // 🆕 V3.3.356: Ajout doigt/main/majeur/index/pouce/annulaire/auriculaire/médius après raideur
-            const isLesionSegment320 = /fracture|luxation|rupture|entorse|arrachement|amputation|section|d[eé]chirure|hernie|tassement|contusion|plaie|br[uû]lure|l[eé]sion|coxarthrose|traumatisme|raideur.*(?:genou|cheville|[eé]paule|coude|hanche|poignet|rachis|cervical|doigt|main|majeur|index|pouce|annulaire|auriculaire|m[eé]dius)|limitation.*(?:flexion|extension|abduction|rotation)|ankylose|gonarthrose|algodystrophie|syndrome.*(?:commotionnel|post.*traumat|dysex[eé]cutif)|commotionnel|cervicalgie|dorsalgie|lombalgie|lombosciatalgie|cervicobrachialgie|n[eé]vralgie|h[eé]morragie.*m[eé]ning|d[eé]ficit.*(?:moteur|sensitif)|paralysie|surdit[eé]|acouph[eè]ne|ptsd|stress.*post.*traumat|d[eé]press[if]|proth[eè]se|spl[eé]nectomie|ectomie|gastrectomie|n[eé]phrectomie|colectomie|[eé]nucl[eé]ation|cataracte|perte.*vision|c[eé]cit[eé]|trouble.*(?:rythme|cardiaque)|cicatrice|cal\s+vicieux|raccourcissement|boiterie|tc\s+grave|coma|h[eé]mothorax|calcan[eé]um/i;
+            // 🆕 V3.3.390: Ajout sténose urétrale, douleurs sacro-iliaques, séquelles urologiques, ostéite, fistule
+            const isLesionSegment320 = /fracture|luxation|rupture|entorse|arrachement|amputation|section|d[eé]chirure|hernie|tassement|contusion|plaie|br[uû]lure|l[eé]sion|coxarthrose|traumatisme|raideur.*(?:genou|cheville|[eé]paule|coude|hanche|poignet|rachis|cervical|doigt|main|majeur|index|pouce|annulaire|auriculaire|m[eé]dius)|limitation.*(?:flexion|extension|abduction|rotation)|ankylose|gonarthrose|algodystrophie|syndrome.*(?:commotionnel|post.*traumat|dysex[eé]cutif)|commotionnel|cervicalgie|dorsalgie|lombalgie|lombosciatalgie|cervicobrachialgie|n[eé]vralgie|h[eé]morragie.*m[eé]ning|d[eé]ficit.*(?:moteur|sensitif)|paralysie|surdit[eé]|acouph[eè]ne|ptsd|stress.*post.*traumat|d[eé]press[if]|proth[eè]se|spl[eé]nectomie|ectomie|gastrectomie|n[eé]phrectomie|colectomie|[eé]nucl[eé]ation|cataracte|perte.*vision|c[eé]cit[eé]|trouble.*(?:rythme|cardiaque)|cicatrice|cal\s+vicieux|raccourcissement|boiterie|tc\s+grave|coma|h[eé]mothorax|calcan[eé]um|st[eé]nose.*ur[eé]tr|r[eé]tr[eé]cissement.*ur[eé]tr|s[eé]quelles?.*urolog|douleur.*sacro[\s-]*iliaque|ost[eé]ite|fistul|incontinence.*urinaire|dysurie/i;
             // 🆕 V3.3.356b: Exclure les segments purement circonstanciels
             // Ex: "sa main a été entraînée vers la lame provoquant un traumatisme ouvert grave" → circonstance
             const isCircumstanceOnly = (seg: string): boolean => {

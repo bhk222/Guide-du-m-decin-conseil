@@ -433,6 +433,30 @@ export function useDictaphoneAI(
             
             let loaded = await tryLoadModel('onnx-community/whisper-small', hasLocalModels ? 1 : 3);
             
+            // 🔧 V3.3.390: Cache-busting — si le modèle était "en cache" mais échoue, purger le cache corrompu
+            if (!loaded && modelCached && !hasLocalModels) {
+                console.warn('⚠️ [V3.3.390] Modèle en cache mais chargement échoué → purge du cache corrompu');
+                setStatusMessage('🔄 Cache corrompu détecté, nettoyage et re-téléchargement...');
+                try {
+                    const cacheNames = await caches.keys();
+                    for (const name of cacheNames) {
+                        const cache = await caches.open(name);
+                        const keys = await cache.keys();
+                        for (const key of keys) {
+                            if (key.url.includes('whisper-small') || key.url.includes('whisper-base') || key.url.includes('onnx')) {
+                                await cache.delete(key);
+                            }
+                        }
+                    }
+                    console.log('🗑️ Cache Whisper purgé, nouvelle tentative...');
+                    setStatusMessage('⏳ Re-téléchargement Whisper SMALL (~150MB)...');
+                    setModelProgress(0);
+                    loaded = await tryLoadModel('onnx-community/whisper-small', 2);
+                } catch (cacheErr) {
+                    console.warn('Erreur purge cache:', cacheErr);
+                }
+            }
+
             if (!loaded && !hasLocalModels) {
                 // Fallback: whisper-base (plus petit ~77MB, meilleure fiabilité)
                 console.warn('⚠️ Whisper SMALL échoué, fallback vers whisper-base');
