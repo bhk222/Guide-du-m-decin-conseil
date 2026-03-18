@@ -338,37 +338,31 @@ export function useDictaphoneAI(
     }, [getAccumulatedAudio, clearAll, deleteWords, setText]);
 
     // ── Charger le modèle Whisper ──
-    // V3.3.386: Modèle auto-hébergé — chargé depuis le CDN de l'app, zéro téléchargement externe
+    // V3.3.388: Retry logic + fallback whisper-base si whisper-small échoue
     const loadModel = useCallback(async (): Promise<boolean> => {
         if (transcriberRef.current) return true;
 
         setIsModelLoading(true);
         setModelProgress(0);
 
-        // Vérifier si le modèle est déjà en cache (service worker ou transformers-cache)
+        // Vérifier si le modèle est déjà en cache
         let modelCached = false;
         try {
             const cacheNames = await caches.keys();
             for (const name of cacheNames) {
                 const cache = await caches.open(name);
                 const keys = await cache.keys();
-                if (keys.some(k => k.url.includes('/models/onnx-community/whisper-small/') || k.url.includes('huggingface.co/onnx-community/whisper-small'))) {
+                if (keys.some(k => k.url.includes('whisper-small') || k.url.includes('whisper-base'))) {
                     modelCached = true;
                     break;
                 }
             }
-        } catch { /* cache API non dispo, on continue */ }
-
-        setStatusMessage(modelCached
-            ? '⚡ Chargement Whisper SMALL (en cache)...'
-            : '⏳ Chargement Whisper SMALL...'
-        );
+        } catch { /* cache API non dispo */ }
 
         try {
             const { pipeline, env } = await import('@huggingface/transformers');
 
-            // En dev local: modèles servis depuis public/models/ (rapide, pas de téléchargement)
-            // En production Vercel: téléchargement depuis HuggingFace CDN (auto-caché par le navigateur)
+            // Détecter si modèles locaux (dev) ou CDN (production)
             const hasLocalModels = await fetch('/models/onnx-community/whisper-small/config.json', { method: 'HEAD' })
                 .then(r => r.ok).catch(() => false);
             
@@ -376,76 +370,94 @@ export function useDictaphoneAI(
                 env.allowLocalModels = true;
                 env.localModelPath = '/models/';
                 env.allowRemoteModels = false;
-                console.log('📦 Whisper: modèles locaux détectés');
+                console.log('📦 Whisper: modèles locaux');
             } else {
                 env.allowLocalModels = false;
                 env.allowRemoteModels = true;
-                console.log('🌐 Whisper: téléchargement depuis HuggingFace CDN');
-                setStatusMessage('⏳ Téléchargement Whisper SMALL (~150MB, une seule fois)...');
+                console.log('🌐 Whisper: CDN HuggingFace');
             }
 
             const progressCb = (info: any) => {
                 if (info.status === 'progress' && info.progress != null) {
                     const pct = Math.round(info.progress);
                     setModelProgress(pct);
-                    const sizeInfo = hasLocalModels ? '' : ' (téléchargement une seule fois)';
-                    setStatusMessage(`⏳ Chargement: ${pct}%${sizeInfo}`);
+                    setStatusMessage(`⏳ Chargement: ${pct}%`);
                 } else if (info.status === 'ready') {
                     setModelProgress(100);
+                } else if (info.status === 'initiate') {
+                    console.log(`📥 Téléchargement: ${info.file || info.name || ''}`);
                 }
             };
 
-            // Stratégie de chargement:
-            // - Local (models disponibles): WebGPU fp16 d'abord (rapide), fallback WASM q8
-            // - CDN (HuggingFace): WASM q8 directement (plus petit ~150MB vs ~463MB fp16, plus fiable)
-            let loaded = false;
-            
-            if (hasLocalModels) {
-                // En local: tenter WebGPU d'abord (performances optimales)
-                try {
-                    transcriberRef.current = await pipeline(
-                        'automatic-speech-recognition',
-                        'onnx-community/whisper-small',
-                        { device: 'webgpu', dtype: 'fp16', progress_callback: progressCb },
-                    );
-                    loaded = true;
-                    console.log('✅ Whisper SMALL chargé via WebGPU (fp16)');
-                } catch (e) {
-                    console.warn('WebGPU non disponible, fallback WASM:', e);
+            // Helper: tenter de charger un modèle avec retry
+            const tryLoadModel = async (modelId: string, maxRetries: number): Promise<boolean> => {
+                for (let attempt = 1; attempt <= maxRetries; attempt++) {
+                    try {
+                        setModelProgress(0);
+                        
+                        // En local: tenter WebGPU d'abord
+                        if (hasLocalModels) {
+                            try {
+                                transcriberRef.current = await pipeline(
+                                    'automatic-speech-recognition', modelId,
+                                    { device: 'webgpu', dtype: 'fp16', progress_callback: progressCb },
+                                );
+                                console.log(`✅ ${modelId} chargé via WebGPU (fp16)`);
+                                return true;
+                            } catch { /* WebGPU non dispo, fallback WASM */ }
+                        }
+                        
+                        // WASM q8 (universel)
+                        transcriberRef.current = await pipeline(
+                            'automatic-speech-recognition', modelId,
+                            { device: 'wasm', dtype: 'q8', progress_callback: progressCb },
+                        );
+                        console.log(`✅ ${modelId} chargé via WASM (q8)`);
+                        return true;
+                    } catch (e) {
+                        console.warn(`❌ Tentative ${attempt}/${maxRetries} pour ${modelId}:`, e);
+                        if (attempt < maxRetries) {
+                            const delay = attempt * 2000; // 2s, 4s
+                            setStatusMessage(`⏳ Nouvelle tentative dans ${delay/1000}s... (${attempt}/${maxRetries})`);
+                            await new Promise(r => setTimeout(r, delay));
+                        }
+                    }
                 }
-            }
+                return false;
+            };
+
+            // Stratégie: whisper-small (3 tentatives) → whisper-base (2 tentatives)
+            setStatusMessage(modelCached 
+                ? '⚡ Chargement Whisper SMALL (en cache)...' 
+                : '⏳ Téléchargement Whisper SMALL (~150MB, une seule fois)...');
             
-            if (!loaded) {
-                // WASM q8 (universel, ~150MB quantized — fonctionne partout)
-                setStatusMessage(hasLocalModels 
-                    ? '⏳ Chargement Whisper SMALL (WASM)...'
-                    : '⏳ Téléchargement Whisper SMALL (~150MB, une seule fois)...');
+            let loaded = await tryLoadModel('onnx-community/whisper-small', hasLocalModels ? 1 : 3);
+            
+            if (!loaded && !hasLocalModels) {
+                // Fallback: whisper-base (plus petit ~77MB, meilleure fiabilité)
+                console.warn('⚠️ Whisper SMALL échoué, fallback vers whisper-base');
+                setStatusMessage('⏳ Téléchargement Whisper BASE (~77MB, plus léger)...');
                 setModelProgress(0);
-                transcriberRef.current = await pipeline(
-                    'automatic-speech-recognition',
-                    'onnx-community/whisper-small',
-                    { device: 'wasm', dtype: 'q8', progress_callback: progressCb },
-                );
-                console.log('✅ Whisper SMALL chargé via WASM (q8)');
+                loaded = await tryLoadModel('onnx-community/whisper-base', 2);
             }
 
-            setIsModelLoaded(true);
-            setIsModelLoading(false);
-            setStatusMessage('✅ Modèle Whisper prêt !');
-            return true;
+            if (loaded) {
+                setIsModelLoaded(true);
+                setIsModelLoading(false);
+                setStatusMessage('✅ Modèle Whisper prêt !');
+                return true;
+            }
+            
+            throw new Error('Tous les modèles ont échoué');
         } catch (err) {
             console.error('Erreur chargement modèle Whisper:', err);
             setIsModelLoading(false);
             setModelProgress(0);
             const errMsg = err instanceof Error ? err.message : String(err);
-            if (errMsg.includes('404') || errMsg.includes('Not Found')) {
-                setStatusMessage('❌ Fichiers du modèle introuvables. Lancez: npm run build:local');
-            } else if (errMsg.includes('network') || errMsg.includes('fetch') || errMsg.includes('abort') || errMsg.includes('timeout')) {
-                setStatusMessage('❌ Téléchargement interrompu. Vérifiez votre connexion et réessayez.');
-            } else if (errMsg.includes('SharedArrayBuffer')) {
-                setStatusMessage('❌ SharedArrayBuffer non disponible. Essayez Chrome ou Edge.');
+            if (errMsg.includes('SharedArrayBuffer')) {
+                setStatusMessage('❌ SharedArrayBuffer non disponible. Utilisez Chrome ou Edge.');
             } else {
-                setStatusMessage('❌ Erreur chargement Whisper. Rechargez la page pour réessayer.');
+                setStatusMessage('❌ Échec du téléchargement. Vérifiez votre connexion et rechargez la page.');
             }
             return false;
         }

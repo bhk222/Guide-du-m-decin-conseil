@@ -1,0 +1,3129 @@
+ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ
+  TEST : 40 cas traumatismes membre sup├⌐rieur (V3.3.299)
+ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ
+
+≡ƒöº localExpertAnalysis V3.3.347 - semantic bar├¿me guard + LLE disambiguation + pseudarthrose naming + t├⌐trapl├⌐gie guard
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): fracture de la clavicule droite main dominante bien consolid├⌐e sans cal saillant et sans raideur r├⌐siduelle de l'├⌐paule avec r├⌐cup├⌐ration fonctionnelle compl├¿te
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 1 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+≡ƒª┤ [V3.3.221] FRACTURE CLAVICULE d├⌐tect├⌐e ΓåÆ Analyse sp├⌐cialis├⌐e
+ΓöÇΓöÇΓöÇ Cas 1 ΓöÇΓöÇΓöÇ
+  Description: Fracture clavicule consolid├⌐e sans raideur
+  Input     : "fracture de la clavicule droite main dominante bien consolid├⌐e sans cal saillant et sans raideur r├⌐s..."
+  Attendu   : fracture.*clavicule.*consolid├⌐e|clavicule.*consolid├⌐e|clavic... (1-5%)
+  Obtenu    : Γ£à Fracture Clavicule - Cal saillant avec raideur d'├⌐paule (Main Dominante)
+  Taux      : 5%
+  Type      : proposal
+  Nom OK    : Γ£à | Taux OK: Γ£à
+  Path      : Membres Sup├⌐rieurs > Ceinture Scapulaire - Fractures et L├⌐sions Musculaires
+
+≡ƒöº localExpertAnalysis V3.3.347 - semantic bar├¿me guard + LLE disambiguation + pseudarthrose naming + t├⌐trapl├⌐gie guard
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): fracture de la clavicule gauche main non dominante avec cal saillant palpable et raideur mod├⌐r├⌐e de l'├⌐paule limitant l'abduction ├á 120 degr├⌐s
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 1 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+≡ƒª┤ [V3.3.221] FRACTURE CLAVICULE d├⌐tect├⌐e ΓåÆ Analyse sp├⌐cialis├⌐e
+ΓöÇΓöÇΓöÇ Cas 2 ΓöÇΓöÇΓöÇ
+  Description: Fracture clavicule cal saillant + raideur ├⌐paule ND
+  Input     : "fracture de la clavicule gauche main non dominante avec cal saillant palpable et raideur mod├⌐r├⌐e de ..."
+  Attendu   : fracture.*clavicule.*cal.*saillant|clavicule.*raideur|clavic... (4-15%)
+  Obtenu    : Γ£à Fracture Clavicule - Cal saillant avec raideur d'├⌐paule (Main Non Dominante)
+  Taux      : 8%
+  Type      : proposal
+  Nom OK    : Γ£à | Taux OK: Γ£à
+  Path      : Membres Sup├⌐rieurs > Ceinture Scapulaire - Fractures et L├⌐sions Musculaires
+
+≡ƒöº localExpertAnalysis V3.3.347 - semantic bar├¿me guard + LLE disambiguation + pseudarthrose naming + t├⌐trapl├⌐gie guard
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): luxation de la clavicule droite main dominante non r├⌐duite externe acromio-claviculaire avec douleur
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 1 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+≡ƒöì DEBUG STEPPAGE D├ëTAILL├ë:
+   - steppageMatch: false
+   - amyotrophieMIMatch: false
+   - fractureL1Match: false
+   - Texte analys├⌐: luxation de la clavicule droite main dominante non r├⌐duite externe acromio-claviculaire avec douleur
+Γ¥î STEPPAGE NON D├ëTECT├ë - Conditions non remplies
+≡ƒöì DEBUG D├ëVIATION:
+   - deviationMatch: false
+   - mainContext: true
+   - Recherche dans: diviation NON trouv├⌐
+≡ƒöì [V3.3.155] S├⌐quelles d├⌐tect├⌐es: 0 []
+≡ƒöì V3.3.201k: isCumulDetected = false , lesionCount = 1
+≡ƒöì DEBUG M├ëTACARPIENS - Texte normalis├⌐: luxation clavicule droite main dominante non reduite externe acromio claviculaire avec douleur deboitement deplacement articulaire dislocation luxation deplacement articulaire dislocation luxation deboitement dislocation luxation deboitement deplacement articulaire metacarpe chirurgicale main chirurgicale main metacarpe poignet articulation poignet $1 droit
+≡ƒöì DEBUG M├ëTACARPIENS - hasMetacarpienWord: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSingleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasMultipleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSpecificFingerEarly: false
+≡ƒöì DEBUG M├ëTACARPIENS - isMetacarpienSingleQueryEarly: false
+≡ƒöì V3.3.139: V├⌐rification cumul prioritaire...
+≡ƒöì Query words: luxation, clavicule, droite, main, dominante, non, reduite, externe, acromio, claviculaire
+≡ƒöì Cat├⌐gorie cumul trouv├⌐e: Cumuls de L├⌐sions et Polytraumatismes
+≡ƒöì Entr├⌐es avec searchTerms v├⌐rifi├⌐es: 51, meilleur score: 0.0%
+Γä╣∩╕Å Aucun cumul prioritaire trouv├⌐ (similarit├⌐ < 70%), continue avec analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒª╢ [V3.3.317] hasMTPLuxation: false hasMetaFracture: false hasTSLO: false hasFootContext: false
+≡ƒöì isCumulDetected: false lesionCount: 1
+≡ƒöì [M├ëTACARPIENS] Input brut: luxation de la clavicule droite main dominante non r├⌐duite externe acromio-claviculaire avec douleur
+≡ƒöì [M├ëTACARPIENS] hasMetaWord: false
+≡ƒöì [M├ëTACARPIENS] hasSingleOrPerte: false
+≡ƒöì [M├ëTACARPIENS] hasSpecificFinger: false
+≡ƒöì [M├ëTACARPIENS] hasCinq: false
+ΓÜá∩╕Å [M├ëTACARPIENS] Pas de dialogue - continuons analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì [EARLY] Ant├⌐c├⌐dents d├⌐tect├⌐s: 0 - 
+≡ƒöì [DEBUG EXPERT RULE - EARLY TEST]
+Pattern: /contusion.*cerebrale|traumatisme.*crani.*contusion/i
+Context: /perte.*connaissance|frontale|temporale|parietale|breve|courte|surveillance.*neurologique/i
+NegativeContext: /spondylo|listthesis|glissement.*vertebral/i
+CleanText: "luxation de la clavicule droite main dominante non reduite externe acromio claviculaire avec douleur"
+patternMatchClean: false, contextMatchClean: false
+negContextMatchClean: false, negContextMatchWorking: false
+matchClean: false, matchWorking: false
+Γ£à [EXPERT RULE MATCH - PRIORITY 1000] Luxation Clavicule non r├⌐duite - Externe (acromio-claviculaire) (Main Dominante) = [0-5] ΓåÆ 3% (coef: 0.50)
+ΓöÇΓöÇΓöÇ Cas 3 ΓöÇΓöÇΓöÇ
+  Description: Luxation acromio-claviculaire non r├⌐duite D
+  Input     : "luxation de la clavicule droite main dominante non r├⌐duite externe acromio-claviculaire avec douleur..."
+  Attendu   : luxation.*clavicule|acromio.*claviculaire|clavicule... (0-8%)
+  Obtenu    : Γ£à Luxation Clavicule non r├⌐duite - Externe (acromio-claviculaire) (Main Dominante)
+  Taux      : 3%
+  Type      : proposal
+  Nom OK    : Γ£à | Taux OK: Γ£à
+  Path      : Membres Sup├⌐rieurs > Ceinture Scapulaire - Fractures et L├⌐sions Musculaires
+
+≡ƒöº localExpertAnalysis V3.3.347 - semantic bar├¿me guard + LLE disambiguation + pseudarthrose naming + t├⌐trapl├⌐gie guard
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): fracture de la t├¬te hum├⌐rale droite main dominante avec raideur importante de l'├⌐paule limitant l'abduction ├á 60 degr├⌐s et la rotation externe ├á 10 degr├⌐s
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 1 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+≡ƒöì DEBUG STEPPAGE D├ëTAILL├ë:
+   - steppageMatch: false
+   - amyotrophieMIMatch: false
+   - fractureL1Match: false
+   - Texte analys├⌐: fracture de la t├¬te hum├⌐rale droite main dominante avec raideur importante de l'├⌐paule limitant l'abduction ├á 60 degr├⌐s et la rotation externe ├á 10 degr├⌐s
+Γ¥î STEPPAGE NON D├ëTECT├ë - Conditions non remplies
+≡ƒöì DEBUG D├ëVIATION:
+   - deviationMatch: false
+   - mainContext: true
+   - Recherche dans: diviation NON trouv├⌐
+≡ƒöì [V3.3.155] S├⌐quelles d├⌐tect├⌐es: 1 [ "Raideur/Limitation articulaire de l'├⌐paule" ]
+≡ƒöì V3.3.201k: isCumulDetected = false , lesionCount = 1
+≡ƒºá [V3.3.214] TC check: hasTC=false, hasNeuro=false, hasFocal=false, neuroCount=0
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 1 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+Γ£à CAS SIMPLE D├ëTECT├ë: 1 s├⌐quelle(s)
+≡ƒôÜ TROUV├ë DANS BAR├êME: "Raideur/Limitation articulaire de l'├⌐paule" ΓåÆ "Fracture Clavicule - Cal saillant avec raideur d'├⌐paule (Main Dominante)" (5-15%)
+   ≡ƒôè [V3.3.365] Severity-adjusted bar├¿me: [5-15] ├ù coef 0.50 = 10%
+≡ƒöä REGROUPEMENT PAR SYST├êME: [ 'MEMBRE_SUPERIEUR: 14%' ]
+≡ƒº« CALCUL BALTHAZAR (PAR SYST├êME): [ 'MEMBRE_SUPERIEUR: 14%' ]
+≡ƒôè IPP GLOBAL CUMUL├ë: 14%
+ΓöÇΓöÇΓöÇ Cas 4 ΓöÇΓöÇΓöÇ
+  Description: Fracture t├¬te hum├⌐rale raideur importante D
+  Input     : "fracture de la t├¬te hum├⌐rale droite main dominante avec raideur importante de l'├⌐paule limitant l'ab..."
+  Attendu   : fracture.*t[e├¬]te.*hum[e├⌐]rale.*raideur|hum[e├⌐]rale.*raideur... (15-35%)
+  Obtenu    : Γ£à Membre sup├⌐rieur DOMINANT : Raideur articulaire avec limitation fonctionnelle - Bar├¿me: "Fracture Clavicule - Cal saillant avec raideur d'├⌐paule (Main Dominante)" (5-15%) - IPP 14%
+  Taux      : 14%
+  Type      : proposal
+  Nom OK    : Γ£à | Taux OK: Γ£à
+  Path      : S├⌐quelle > Bar├¿me 1967
+
+≡ƒöº localExpertAnalysis V3.3.347 - semantic bar├¿me guard + LLE disambiguation + pseudarthrose naming + t├⌐trapl├⌐gie guard
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): rupture coiffe des rotateurs ├⌐paule droite main dominante avec limitation abduction ├á 80 degr├⌐s
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 1 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+≡ƒöì DEBUG STEPPAGE D├ëTAILL├ë:
+   - steppageMatch: false
+   - amyotrophieMIMatch: false
+   - fractureL1Match: false
+   - Texte analys├⌐: rupture coiffe des rotateurs ├⌐paule droite main dominante avec limitation abduction ├á 80 degr├⌐s
+Γ¥î STEPPAGE NON D├ëTECT├ë - Conditions non remplies
+≡ƒöì DEBUG D├ëVIATION:
+   - deviationMatch: false
+   - mainContext: true
+   - Recherche dans: diviation NON trouv├⌐
+≡ƒöì [V3.3.155] S├⌐quelles d├⌐tect├⌐es: 1 [ 'Rupture de la coiffe des rotateurs (sus-├⌐pineux)' ]
+≡ƒöì V3.3.201k: isCumulDetected = false , lesionCount = 1
+≡ƒºá [V3.3.214] TC check: hasTC=false, hasNeuro=false, hasFocal=false, neuroCount=0
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 1 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+≡ƒÆ¬ [V3.3.317] RUPTURE COIFFE/SUS-├ëPINEUX d├⌐tect├⌐e ΓåÆ Bypass vers expert rules (pathologie ├⌐paule unique)
+≡ƒöì DEBUG M├ëTACARPIENS - Texte normalis├⌐: rupture coiffe rotateurs epaule droite main dominante limitation abduction a 80 degres raideur restriction enraidissement raideur limitation enraidissement raideur limitation restriction metacarpe chirurgicale main chirurgicale main metacarpe coiffe rupture coiffe sus epineux coiffe rotateurs rupture coiffe sus epineux coiffe rotateurs coiffe sus epineux coiffe rotateurs coiffe rupture coiffe scapulo humeral gleno humeral articulation epaule epaule gleno humeral articulation epaule epaule scapulo humeral articulation epaule epaule scapulo humeral gleno humeral epaule scapulo humeral gleno humeral epaule scapulo humeral gleno humeral abduction epaule elevation laterale ecartement bras abduction elevation laterale ecartement bras abduction abduction epaule ecartement bras abduction abduction epaule elevation laterale poignet articulation poignet $1 droit
+≡ƒöì DEBUG M├ëTACARPIENS - hasMetacarpienWord: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSingleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasMultipleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSpecificFingerEarly: false
+≡ƒöì DEBUG M├ëTACARPIENS - isMetacarpienSingleQueryEarly: false
+≡ƒöì V3.3.139: V├⌐rification cumul prioritaire...
+≡ƒöì Query words: rupture, coiffe, des, rotateurs, epaule, droite, main, dominante, avec, limitation
+≡ƒöì Cat├⌐gorie cumul trouv├⌐e: Cumuls de L├⌐sions et Polytraumatismes
+≡ƒöì Entr├⌐es avec searchTerms v├⌐rifi├⌐es: 51, meilleur score: 0.0%
+Γä╣∩╕Å Aucun cumul prioritaire trouv├⌐ (similarit├⌐ < 70%), continue avec analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒª╢ [V3.3.317] hasMTPLuxation: false hasMetaFracture: false hasTSLO: false hasFootContext: false
+≡ƒöì isCumulDetected: false lesionCount: 1
+≡ƒöì [M├ëTACARPIENS] Input brut: rupture coiffe des rotateurs ├⌐paule droite main dominante avec limitation abduction ├á 80 degr├⌐s
+≡ƒöì [M├ëTACARPIENS] hasMetaWord: false
+≡ƒöì [M├ëTACARPIENS] hasSingleOrPerte: false
+≡ƒöì [M├ëTACARPIENS] hasSpecificFinger: false
+≡ƒöì [M├ëTACARPIENS] hasCinq: false
+ΓÜá∩╕Å [M├ëTACARPIENS] Pas de dialogue - continuons analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì [EARLY] Ant├⌐c├⌐dents d├⌐tect├⌐s: 0 - 
+Γ£à [EXPERT RULE MATCH - PRIORITY 11000] Rupture de la coiffe des rotateurs post-traumatique (supra-├⌐pineux, etc.) (Main Dominante) = [10-30] ΓåÆ 20% (coef: 0.50)
+ΓöÇΓöÇΓöÇ Cas 5 ΓöÇΓöÇΓöÇ
+  Description: Rupture coiffe des rotateurs D
+  Input     : "rupture coiffe des rotateurs ├⌐paule droite main dominante avec limitation abduction ├á 80 degr├⌐s..."
+  Attendu   : rupture.*coiffe.*rotateurs|coiffe.*rotateurs|periarthrite|├⌐p... (8-35%)
+  Obtenu    : Γ£à Rupture de la coiffe des rotateurs post-traumatique (supra-├⌐pineux, etc.) (Main Dominante)
+  Taux      : 20%
+  Type      : proposal
+  Nom OK    : Γ£à | Taux OK: Γ£à
+  Path      : Membres Sup├⌐rieurs > ├ëpaule - L├⌐sions Diverses
+
+≡ƒöº localExpertAnalysis V3.3.347 - semantic bar├¿me guard + LLE disambiguation + pseudarthrose naming + t├⌐trapl├⌐gie guard
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): luxation r├⌐cidivante de l'├⌐paule gauche main non dominante avec 4 ├⌐pisodes de luxation post-traumatique et instabilit├⌐ ant├⌐rieure chronique limitant les activit├⌐s
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 1 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+≡ƒöì DEBUG STEPPAGE D├ëTAILL├ë:
+   - steppageMatch: false
+   - amyotrophieMIMatch: false
+   - fractureL1Match: false
+   - Texte analys├⌐: luxation r├⌐cidivante de l'├⌐paule gauche main non dominante avec 4 ├⌐pisodes de luxation post-traumatique et instabilit├⌐ ant├⌐rieure chronique limitant les activit├⌐s
+Γ¥î STEPPAGE NON D├ëTECT├ë - Conditions non remplies
+≡ƒöì DEBUG D├ëVIATION:
+   - deviationMatch: false
+   - mainContext: true
+   - Recherche dans: diviation NON trouv├⌐
+≡ƒöì [V3.3.155] S├⌐quelles d├⌐tect├⌐es: 0 []
+≡ƒöì V3.3.201k: isCumulDetected = true , lesionCount = 2
+≡ƒöì DEBUG M├ëTACARPIENS - Texte normalis├⌐: luxation recidivante de l epaule gauche main non dominante avec 4 episodes de luxation post traumatique et instabilite anterieure chronique limitant activites deboitement deplacement articulaire dislocation luxation deplacement articulaire dislocation luxation deboitement dislocation luxation deboitement deplacement articulaire metacarpe chirurgicale main chirurgicale main metacarpe scapulo humeral gleno humeral articulation epaule epaule gleno humeral articulation epaule epaule scapulo humeral articulation epaule epaule scapulo humeral gleno humeral epaule scapulo humeral gleno humeral epaule scapulo humeral gleno humeral instabilite epaule derobement epaule apprehension instabilite epaule luxation recidivante apprehension instabilite epaule luxation recidivante derobement epaule poignet articulation poignet $1 droit etat anterieur etat anterieur antecedent
+≡ƒöì DEBUG M├ëTACARPIENS - hasMetacarpienWord: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSingleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasMultipleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSpecificFingerEarly: false
+≡ƒöì DEBUG M├ëTACARPIENS - isMetacarpienSingleQueryEarly: false
+≡ƒöì V3.3.139: V├⌐rification cumul prioritaire...
+≡ƒöì Query words: luxation, recidivante, epaule, gauche, main, non, dominante, avec, episodes, luxation
+≡ƒöì Cat├⌐gorie cumul trouv├⌐e: Cumuls de L├⌐sions et Polytraumatismes
+≡ƒöì Entr├⌐es avec searchTerms v├⌐rifi├⌐es: 51, meilleur score: 0.0%
+Γä╣∩╕Å Aucun cumul prioritaire trouv├⌐ (similarit├⌐ < 70%), continue avec analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒª╢ [V3.3.317] hasMTPLuxation: false hasMetaFracture: false hasTSLO: false hasFootContext: false
+≡ƒöì isCumulDetected: true lesionCount: 2
+≡ƒöì CUMUL D├ëTECT├ë - Extraction des l├⌐sions individuelles
+≡ƒô¥ text original: luxation r├⌐cidivante de l'├⌐paule gauche main non dominante avec 4 ├⌐pisodes de luxation post-traumatique et instabilit├⌐ ant├⌐rieure chronique limitant les activit├⌐s
+≡ƒô¥ finalCleanedText: luxation r├⌐cidivante de l'├⌐paule gauche main non dominante avec 4 ├⌐pisodes de luxation post-traumatique et instabilit├⌐ ant├⌐rieure chronique limitant les activit├⌐s
+≡ƒöº extractIndividualLesions V3.3.211 - avec Pattern 0C-ter + 0C-quater
+≡ƒöì extractIndividualLesions - texte d'entr├⌐e: luxation r├⌐cidivante de l'├⌐paule gauche main non dominante avec 4 ├⌐pisodes de luxation post-traumatique et instabilit├⌐ ant├⌐rieure chronique limitant les activit├⌐s
+≡ƒöì Pattern 0B - Extraction polytraumatisme membre (V3.3.201L):
+  fractureMatch: NULL
+  ligamentMatch: NULL
+  muscleMatch: NULL
+  raideurMatch: NULL
+  algiesMatch: NULL
+  deficitForceMatch: NULL
+  componentCount: 0
+  Condition activ├⌐e: false
+Γ¥î Pattern 0B NON ACTIV├ë: componentCount < 3
+Γ£à Pattern 5 (l├⌐sions mixtes narratif) d├⌐tect├⌐: [
+  'luxation recidivante de l epaule gauche main non dominante',
+  '4 episodes de luxation post traumatique'
+]
+≡ƒôï L├⌐sions extraites: [
+  'luxation recidivante de l epaule gauche main non dominante',
+  '4 episodes de luxation post traumatique'
+] Nombre: 2
+≡ƒöº V3.3.320c: Filtr├⌐ 2 ΓåÆ 2 l├⌐sions (exclu segments non-l├⌐sionnels)
+Γ£à Au moins 2 l├⌐sions ΓåÆ Analyse s├⌐par├⌐e
+   ≡ƒöº V3.3.281: Enrichissement luxation r├⌐cidivante ├⌐paule: "luxation recidivante de l epaule gauche main non dominante" ΓåÆ "luxation recidivante de l epaule gauche main non dominante luxation recidivante epaule instabilite chronique glenohum├⌐rale apprehension recentrage membre superieur"
+≡ƒöÄ Analyse l├⌐sion "luxation recidivante de l epaule gauche main non dominante" ΓåÆ enrichi: "luxation recidivante de l epaule gauche main non dominante luxation recidivante epaule instabilite chronique glenohum├⌐rale apprehension recentrage membre superieur" (processed: "luxation recidivante de l epaule gauche main non dominante luxation recidivante epaule instabilite chronique glenohum├⌐rale apprehension recentrage membre superieur")
+≡ƒöì [M├ëTACARPIENS] Input brut: luxation recidivante de l epaule gauche main non dominante luxation recidivante epaule instabilite chronique glenohum├⌐rale apprehension recentrage membre superieur
+≡ƒöì [M├ëTACARPIENS] hasMetaWord: false
+≡ƒöì [M├ëTACARPIENS] hasSingleOrPerte: false
+≡ƒöì [M├ëTACARPIENS] hasSpecificFinger: false
+≡ƒöì [M├ëTACARPIENS] hasCinq: false
+ΓÜá∩╕Å [M├ëTACARPIENS] Pas de dialogue - continuons analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì [EARLY] Ant├⌐c├⌐dents d├⌐tect├⌐s: 0 - 
+≡ƒöì [DEBUG EXPERT RULE - EARLY TEST]
+Pattern: /contusion.*cerebrale|traumatisme.*crani.*contusion/i
+Context: /perte.*connaissance|frontale|temporale|parietale|breve|courte|surveillance.*neurologique/i
+NegativeContext: /spondylo|listthesis|glissement.*vertebral/i
+CleanText: "luxation recidivante de l epaule gauche main non dominante luxation recidivante epaule instabilite chronique glenohumerale apprehension recentrage membre superieur"
+patternMatchClean: false, contextMatchClean: false
+negContextMatchClean: false, negContextMatchWorking: false
+matchClean: false, matchWorking: false
+   ≡ƒöä [V3.3.374] Laterality swap: MD ΓåÆ MND (Luxation r├⌐cidivante de l'├⌐paule (Main Non Dominante))
+Γ£à [EXPERT RULE MATCH - PRIORITY 999] Luxation r├⌐cidivante de l'├⌐paule (Main Non Dominante) = [8-25] ΓåÆ 8% (coef: 0.00)
+   ΓåÆ Type: proposal
+   ΓåÆ Injury: Luxation r├⌐cidivante de l'├⌐paule (Main Non Dominante)
+   ΓåÆ Rate calcul├⌐: 8
+≡ƒöÄ Analyse l├⌐sion "4 episodes de luxation post traumatique" ΓåÆ enrichi: "4 episodes de luxation post traumatique" (processed: "4 episodes de luxation post traumatique")
+≡ƒöì [M├ëTACARPIENS] Input brut: 4 episodes de luxation post traumatique
+≡ƒöì [M├ëTACARPIENS] hasMetaWord: false
+≡ƒöì [M├ëTACARPIENS] hasSingleOrPerte: false
+≡ƒöì [M├ëTACARPIENS] hasSpecificFinger: false
+≡ƒöì [M├ëTACARPIENS] hasCinq: false
+ΓÜá∩╕Å [M├ëTACARPIENS] Pas de dialogue - continuons analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì [EARLY] Ant├⌐c├⌐dents d├⌐tect├⌐s: 0 - 
+≡ƒöì [DEBUG EXPERT RULE - EARLY TEST]
+Pattern: /contusion.*cerebrale|traumatisme.*crani.*contusion/i
+Context: /perte.*connaissance|frontale|temporale|parietale|breve|courte|surveillance.*neurologique/i
+NegativeContext: /spondylo|listthesis|glissement.*vertebral/i
+CleanText: "4 episodes de luxation post traumatique"
+patternMatchClean: false, contextMatchClean: false
+negContextMatchClean: false, negContextMatchWorking: false
+matchClean: false, matchWorking: false
+≡ƒöì [DEBUG EXPERT RULE - EARLY TEST]
+Pattern: /spondylolisthesis|spondylo.*listhesis|listthesis|glissement\s+vertebral/i
+Context: /lombaire|L\d|S\d|rachis|traumatisme|post-traumatique/i
+NegativeContext: /contusion.*cerebrale|perte.*connaissance|mandibule|genou|polytraumatisme|chute.*echafaudage/i
+CleanText: "4 episodes de luxation post traumatique"
+patternMatchClean: false, contextMatchClean: false
+negContextMatchClean: false, negContextMatchWorking: false
+matchClean: false, matchWorking: false
+≡ƒÄ» TOP 50 R├ëSULTATS: [
+  {
+    name: 'Luxation hanche sur proth├¿se pr├⌐existante',
+    score: 252,
+    path: '├ëtats Ant├⌐rieurs et Aggravation de Pathologies Pr├⌐existantes > Aggravation Hanche et Membre Inf├⌐rieur sur ├ëtat Ant├⌐rieur'
+  },
+  {
+    name: 'Luxation irr├⌐ductible temporo-maxillaire',
+    score: 251,
+    path: 'S├⌐quelles Maxillo-Faciales, ORL et Ophtalmologiques > Face - M├óchoires'
+  },
+  {
+    name: 'Luxation r├⌐cidivante temporo-maxillaire',
+    score: 251,
+    path: 'S├⌐quelles Maxillo-Faciales, ORL et Ophtalmologiques > Face - M├óchoires'
+  },
+  {
+    name: 'Luxation Clavicule non r├⌐duite - Externe (acromio-claviculaire) (Main Dominante)',
+    score: 251,
+    path: 'Membres Sup├⌐rieurs > Ceinture Scapulaire - Fractures et L├⌐sions Musculaires'
+  },
+  {
+    name: 'Luxation Clavicule non r├⌐duite - Externe (acromio-claviculaire) (Main Non Dominante)',
+    score: 251,
+    path: 'Membres Sup├⌐rieurs > Ceinture Scapulaire - Fractures et L├⌐sions Musculaires'
+  },
+  {
+    name: 'Luxation Clavicule non r├⌐duite - Interne (sterno-claviculaire) (Main Dominante)',
+    score: 251,
+    path: 'Membres Sup├⌐rieurs > Ceinture Scapulaire - Fractures et L├⌐sions Musculaires'
+  },
+  {
+    name: 'Luxation Clavicule non r├⌐duite - Interne (sterno-claviculaire) (Main Non Dominante)',
+    score: 251,
+    path: 'Membres Sup├⌐rieurs > Ceinture Scapulaire - Fractures et L├⌐sions Musculaires'
+  },
+  {
+    name: "Luxation r├⌐cidivante de l'├⌐paule (Main Dominante)",
+    score: 251,
+    path: 'Membres Sup├⌐rieurs > ├ëpaule - L├⌐sions Diverses'
+  },
+  {
+    name: "Luxation r├⌐cidivante de l'├⌐paule (Main Non Dominante)",
+    score: 251,
+    path: 'Membres Sup├⌐rieurs > ├ëpaule - L├⌐sions Diverses'
+  },
+  {
+    name: 'Luxation + instabilit├⌐ + raideur ├⌐paule (cumul)',
+    score: 251,
+    path: 'Cumuls de L├⌐sions et Polytraumatismes > Cumuls Simples - M├¬me Membre'
+  },
+  {
+    name: 'Luxation ├⌐paule sur omarthrose pr├⌐existante',
+    score: 251,
+    path: '├ëtats Ant├⌐rieurs et Aggravation de Pathologies Pr├⌐existantes > Aggravation ├ëpaule sur ├ëtat Ant├⌐rieur'
+  },
+  {
+    name: 'Fracture du cotyle avec arthrose post-traumatique',
+    score: 62,
+    path: 'S├⌐quelles du Rachis, du Bassin et de la Moelle ├ëpini├¿re > Bassin - L├⌐sions Osseuses'
+  },
+  {
+    name: 'N├⌐vralgie pudendale post-traumatique (fracture du bassin)',
+    score: 62,
+    path: 'S├⌐quelles du Rachis, du Bassin et de la Moelle ├ëpini├¿re > Bassin - L├⌐sions Osseuses'
+  },
+  {
+    name: 'Fracture radius + lombalgie post-traumatique (cumul)',
+    score: 62,
+    path: 'Cumuls de L├⌐sions et Polytraumatismes > Polytraumatismes - Membres Multiples'
+  },
+  {
+    name: 'S├⌐quelles de fracture/luxation du rachis dorsal (sans l├⌐sion neurologique)',
+    score: 52.02,
+    path: 'S├⌐quelles du Rachis, du Bassin et de la Moelle ├ëpini├¿re > Rachis'
+  },
+  {
+    name: 'S├⌐quelles de fracture/luxation du rachis cervical (sans l├⌐sion neurologique)',
+    score: 52.01,
+    path: 'S├⌐quelles du Rachis, du Bassin et de la Moelle ├ëpini├¿re > Rachis'
+  },
+  {
+    name: 'S├⌐quelles de fracture/luxation du rachis lombaire (sans l├⌐sion neurologique)',
+    score: 52.01,
+    path: 'S├⌐quelles du Rachis, du Bassin et de la Moelle ├ëpini├¿re > Rachis'
+  },
+  {
+    name: 'Fracture des apophyses transverses',
+    score: 51,
+    path: 'S├⌐quelles du Rachis, du Bassin et de la Moelle ├ëpini├¿re > Rachis'
+  },
+  {
+    name: "Fracture isol├⌐e d'une branche pubienne ou de l'aile iliaque (sans d├⌐placement)",
+    score: 51,
+    path: 'S├⌐quelles du Rachis, du Bassin et de la Moelle ├ëpini├¿re > Bassin - L├⌐sions Osseuses'
+  },
+  {
+    name: 'Fracture du cotyle sans d├⌐placement, hanche congruente',
+    score: 51,
+    path: 'S├⌐quelles du Rachis, du Bassin et de la Moelle ├ëpini├¿re > Bassin - L├⌐sions Osseuses'
+  },
+  {
+    name: 'Fracture du sacrum ou du coccyx avec douleurs chroniques (coccygodynie)',
+    score: 51,
+    path: 'S├⌐quelles du Rachis, du Bassin et de la Moelle ├ëpini├¿re > Bassin - L├⌐sions Osseuses'
+  },
+  {
+    name: 'Fracture du sacrum avec troubles neurologiques (radiculalgie S1)',
+    score: 51,
+    path: 'S├⌐quelles du Rachis, du Bassin et de la Moelle ├ëpini├¿re > Bassin - L├⌐sions Osseuses'
+  },
+  {
+    name: "Fracture du maxillaire inf├⌐rieur - Consolidation vicieuse avec trouble grave de l'articul├⌐",
+    score: 51,
+    path: 'S├⌐quelles Maxillo-Faciales, ORL et Ophtalmologiques > Face - M├óchoires'
+  },
+  {
+    name: "Fracture du maxillaire inf├⌐rieur - Consolidation vicieuse avec trouble l├⌐ger de l'articul├⌐",
+    score: 51,
+    path: 'S├⌐quelles Maxillo-Faciales, ORL et Ophtalmologiques > Face - M├óchoires'
+  },
+  {
+    name: 'Fracture isol├⌐e du sternum - simple',
+    score: 51,
+    path: 'S├⌐quelles Thoraciques, Abdominales, Pelviennes et Cardio-vasculaires > Thorax - Paroi Osseuse'
+  },
+  {
+    name: 'Fracture isol├⌐e du sternum - avec enfoncement',
+    score: 51,
+    path: 'S├⌐quelles Thoraciques, Abdominales, Pelviennes et Cardio-vasculaires > Thorax - Paroi Osseuse'
+  },
+  {
+    name: 'Fracture de c├┤tes non compliqu├⌐e (selon g├¬ne et nombre)',
+    score: 51,
+    path: 'S├⌐quelles Thoraciques, Abdominales, Pelviennes et Cardio-vasculaires > Thorax - Paroi Osseuse'
+  },
+  {
+    name: 'Fracture Clavicule - Bien consolid├⌐e sans raideur (Main Dominante)',
+    score: 51,
+    path: 'Membres Sup├⌐rieurs > Ceinture Scapulaire - Fractures et L├⌐sions Musculaires'
+  },
+  {
+    name: 'Fracture Clavicule - Bien consolid├⌐e sans raideur (Main Non Dominante)',
+    score: 51,
+    path: 'Membres Sup├⌐rieurs > Ceinture Scapulaire - Fractures et L├⌐sions Musculaires'
+  },
+  {
+    name: "Fracture Clavicule - Cal saillant avec raideur d'├⌐paule (Main Dominante)",
+    score: 51,
+    path: 'Membres Sup├⌐rieurs > Ceinture Scapulaire - Fractures et L├⌐sions Musculaires'
+  },
+  {
+    name: "Fracture Clavicule - Cal saillant avec raideur d'├⌐paule (Main Non Dominante)",
+    score: 51,
+    path: 'Membres Sup├⌐rieurs > Ceinture Scapulaire - Fractures et L├⌐sions Musculaires'
+  },
+  {
+    name: 'Fracture Clavicule - Double, cals saillants, raideurs des ├⌐paules (Main Dominante)',
+    score: 51,
+    path: 'Membres Sup├⌐rieurs > Ceinture Scapulaire - Fractures et L├⌐sions Musculaires'
+  },
+  {
+    name: 'Fracture Clavicule - Double, cals saillants, raideurs des ├⌐paules (Main Non Dominante)',
+    score: 51,
+    path: 'Membres Sup├⌐rieurs > Ceinture Scapulaire - Fractures et L├⌐sions Musculaires'
+  },
+  {
+    name: 'Fracture Clavicule - Cal difforme avec compressions nerveuses (Main Dominante)',
+    score: 51,
+    path: 'Membres Sup├⌐rieurs > Ceinture Scapulaire - Fractures et L├⌐sions Musculaires'
+  },
+  {
+    name: 'Fracture Clavicule - Cal difforme avec compressions nerveuses (Main Non Dominante)',
+    score: 51,
+    path: 'Membres Sup├⌐rieurs > Ceinture Scapulaire - Fractures et L├⌐sions Musculaires'
+  },
+  {
+    name: 'Fracture Omoplate (selon vari├⌐t├⌐ et d├⌐sordres articulaires)',
+    score: 51,
+    path: 'Membres Sup├⌐rieurs > Ceinture Scapulaire - Fractures et L├⌐sions Musculaires'
+  },
+  {
+    name: "Fracture de la t├¬te hum├⌐rale avec raideur importante de l'├⌐paule (Main Dominante)",
+    score: 51,
+    path: "Membres Sup├⌐rieurs > ├ëpaule - Fractures de l'Extr├⌐mit├⌐ Sup├⌐rieure de l'Hum├⌐rus"
+  },
+  {
+    name: "Fracture de la t├¬te hum├⌐rale avec raideur importante de l'├⌐paule (Main Non Dominante)",
+    score: 51,
+    path: "Membres Sup├⌐rieurs > ├ëpaule - Fractures de l'Extr├⌐mit├⌐ Sup├⌐rieure de l'Hum├⌐rus"
+  },
+  {
+    name: 'Fracture du col chirurgical avec cal vicieux important et abduction limit├⌐e (Main Dominante)',
+    score: 51,
+    path: "Membres Sup├⌐rieurs > ├ëpaule - Fractures de l'Extr├⌐mit├⌐ Sup├⌐rieure de l'Hum├⌐rus"
+  },
+  {
+    name: 'Fracture du col chirurgical avec cal vicieux important et abduction limit├⌐e (Main Non Dominante)',
+    score: 51,
+    path: "Membres Sup├⌐rieurs > ├ëpaule - Fractures de l'Extr├⌐mit├⌐ Sup├⌐rieure de l'Hum├⌐rus"
+  },
+  {
+    name: 'Fracture du col chirurgical avec raccourcissement et g├¬ne mod├⌐r├⌐e (Main Dominante)',
+    score: 51,
+    path: "Membres Sup├⌐rieurs > ├ëpaule - Fractures de l'Extr├⌐mit├⌐ Sup├⌐rieure de l'Hum├⌐rus"
+  },
+  {
+    name: 'Fracture du col chirurgical avec raccourcissement et g├¬ne mod├⌐r├⌐e (Main Non Dominante)',
+    score: 51,
+    path: "Membres Sup├⌐rieurs > ├ëpaule - Fractures de l'Extr├⌐mit├⌐ Sup├⌐rieure de l'Hum├⌐rus"
+  },
+  {
+    name: "Fracture du trochiter avec limitation de l'abduction et rotation (Main Dominante)",
+    score: 51,
+    path: "Membres Sup├⌐rieurs > ├ëpaule - Fractures de l'Extr├⌐mit├⌐ Sup├⌐rieure de l'Hum├⌐rus"
+  },
+  {
+    name: "Fracture du trochiter avec limitation de l'abduction et rotation (Main Non Dominante)",
+    score: 51,
+    path: "Membres Sup├⌐rieurs > ├ëpaule - Fractures de l'Extr├⌐mit├⌐ Sup├⌐rieure de l'Hum├⌐rus"
+  },
+  {
+    name: 'Fracture du trochin avec limitation de la rotation interne (Main Dominante)',
+    score: 51,
+    path: "Membres Sup├⌐rieurs > ├ëpaule - Fractures de l'Extr├⌐mit├⌐ Sup├⌐rieure de l'Hum├⌐rus"
+  },
+  {
+    name: 'Fracture du trochin avec limitation de la rotation interne (Main Non Dominante)',
+    score: 51,
+    path: "Membres Sup├⌐rieurs > ├ëpaule - Fractures de l'Extr├⌐mit├⌐ Sup├⌐rieure de l'Hum├⌐rus"
+  },
+  {
+    name: "Fracture de l'hum├⌐rus normalement consolid├⌐e (Main Dominante)",
+    score: 51,
+    path: 'Membres Sup├⌐rieurs > Bras - Fractures et L├⌐sions Musculaires'
+  },
+  {
+    name: "Fracture de l'hum├⌐rus normalement consolid├⌐e (Main Non Dominante)",
+    score: 51,
+    path: 'Membres Sup├⌐rieurs > Bras - Fractures et L├⌐sions Musculaires'
+  },
+  {
+    name: "Fracture de l'extr├⌐mit├⌐ inf├⌐rieure du radius - Consolidation parfaite (Main Dominante)",
+    score: 51,
+    path: 'Membres Sup├⌐rieurs > Poignet - Fractures'
+  },
+  {
+    name: "Fracture de l'extr├⌐mit├⌐ inf├⌐rieure du radius - Consolidation parfaite (Main Non Dominante)",
+    score: 51,
+    path: 'Membres Sup├⌐rieurs > Poignet - Fractures'
+  }
+]
+≡ƒöì [detectRequestType] D├⌐but analyse...
+≡ƒôè [detectRequestType] R├⌐sultat: attribution
+≡ƒöì [determineSeverity] Text: 4 episodes de luxation post traumatique
+≡ƒöì [determineSeverity] Faible signs: []
+≡ƒöì [determineSeverity] High signs: []
+   ΓåÆ Type: proposal
+   ΓåÆ Injury: Luxation hanche sur proth├¿se pr├⌐existante
+   ΓåÆ Rate calcul├⌐: 31
+≡ƒôè TOTAL: 2 propositions g├⌐n├⌐r├⌐es sur 2 l├⌐sions
+Γ£à Calcul automatique cumul avec 2 l├⌐sion(s)
+   ≡ƒôÉ V3.3.369: Mod├⌐ration cumul l├⌐sion 1: 31% ΓåÆ 29% (mod├⌐ration progressive polytrauma)
+ΓöÇΓöÇΓöÇ Cas 6 ΓöÇΓöÇΓöÇ
+  Description: Luxation r├⌐cidivante ├⌐paule ND
+  Input     : "luxation r├⌐cidivante de l'├⌐paule gauche main non dominante avec 4 ├⌐pisodes de luxation post-traumati..."
+  Attendu   : luxation.*r[e├⌐]cidivante.*[e├⌐]paule|luxation.*├⌐paule|instabi... (8-30%)
+  Obtenu    : Γ£à Polytraumatisme (cumul 2 l├⌐sions)
+  Taux      : 35%
+  Type      : proposal
+  Nom OK    : Γ£à | Taux OK: Γ£à
+  Path      : Cumul Polytraumatisme
+
+≡ƒöº localExpertAnalysis V3.3.347 - semantic bar├¿me guard + LLE disambiguation + pseudarthrose naming + t├⌐trapl├⌐gie guard
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): capsulite r├⌐tractile post-traumatique de l'├⌐paule droite main dominante avec limitation s├⌐v├¿re de toutes les amplitudes articulaires et raideur globale de l'├⌐paule gel├⌐e
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 1 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+≡ƒöì DEBUG STEPPAGE D├ëTAILL├ë:
+   - steppageMatch: false
+   - amyotrophieMIMatch: false
+   - fractureL1Match: false
+   - Texte analys├⌐: capsulite r├⌐tractile post-traumatique de l'├⌐paule droite main dominante avec limitation s├⌐v├¿re de toutes les amplitudes articulaires et raideur globale de l'├⌐paule gel├⌐e
+Γ¥î STEPPAGE NON D├ëTECT├ë - Conditions non remplies
+≡ƒöì DEBUG D├ëVIATION:
+   - deviationMatch: false
+   - mainContext: true
+   - Recherche dans: diviation NON trouv├⌐
+≡ƒöì [V3.3.155] S├⌐quelles d├⌐tect├⌐es: 1 [ "Raideur/Limitation articulaire de l'├⌐paule" ]
+≡ƒöì V3.3.201k: isCumulDetected = false , lesionCount = 1
+≡ƒºá [V3.3.214] TC check: hasTC=false, hasNeuro=false, hasFocal=false, neuroCount=0
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 1 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+Γ£à CAS SIMPLE D├ëTECT├ë: 1 s├⌐quelle(s)
+≡ƒôÜ TROUV├ë DANS BAR├êME: "Raideur/Limitation articulaire de l'├⌐paule" ΓåÆ "Fracture Clavicule - Cal saillant avec raideur d'├⌐paule (Main Dominante)" (5-15%)
+   ≡ƒôè [V3.3.365] Severity-adjusted bar├¿me: [5-15] ├ù coef 0.50 = 10%
+≡ƒöä REGROUPEMENT PAR SYST├êME: [ 'MEMBRE_SUPERIEUR: 14%' ]
+≡ƒº« CALCUL BALTHAZAR (PAR SYST├êME): [ 'MEMBRE_SUPERIEUR: 14%' ]
+≡ƒôè IPP GLOBAL CUMUL├ë: 14%
+ΓöÇΓöÇΓöÇ Cas 7 ΓöÇΓöÇΓöÇ
+  Description: Capsulite r├⌐tractile ├⌐paule gel├⌐e D
+  Input     : "capsulite r├⌐tractile post-traumatique de l'├⌐paule droite main dominante avec limitation s├⌐v├¿re de to..."
+  Attendu   : capsulite.*r[e├⌐]tractile|├⌐paule.*gel[e├⌐]e|capsulite|├⌐paule|r... (12-35%)
+  Obtenu    : Γ£à Membre sup├⌐rieur DOMINANT : Raideur articulaire avec limitation fonctionnelle - Bar├¿me: "Fracture Clavicule - Cal saillant avec raideur d'├⌐paule (Main Dominante)" (5-15%) - IPP 14%
+  Taux      : 14%
+  Type      : proposal
+  Nom OK    : Γ£à | Taux OK: Γ£à
+  Path      : S├⌐quelle > Bar├¿me 1967
+
+≡ƒöº localExpertAnalysis V3.3.347 - semantic bar├¿me guard + LLE disambiguation + pseudarthrose naming + t├⌐trapl├⌐gie guard
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): ankylose compl├¿te de l'├⌐paule gauche main non dominante avec mobilit├⌐ conserv├⌐e de l'omoplate permettant une abduction compensatoire limit├⌐e
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 0 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+≡ƒöì DEBUG STEPPAGE D├ëTAILL├ë:
+   - steppageMatch: false
+   - amyotrophieMIMatch: false
+   - fractureL1Match: false
+   - Texte analys├⌐: ankylose compl├¿te de l'├⌐paule gauche main non dominante avec mobilit├⌐ conserv├⌐e de l'omoplate permettant une abduction compensatoire limit├⌐e
+Γ¥î STEPPAGE NON D├ëTECT├ë - Conditions non remplies
+≡ƒöì DEBUG D├ëVIATION:
+   - deviationMatch: false
+   - mainContext: true
+   - Recherche dans: diviation NON trouv├⌐
+≡ƒöì [V3.3.155] S├⌐quelles d├⌐tect├⌐es: 2 [
+  'Ankylose articulaire  ',
+  "Raideur/Limitation articulaire de l'├⌐paule"
+]
+≡ƒöì V3.3.201k: isCumulDetected = false , lesionCount = 1
+≡ƒºá [V3.3.214] TC check: hasTC=false, hasNeuro=false, hasFocal=false, neuroCount=0
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 0 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+ΓÜá∩╕Å POLYTRAUMATISME D├ëTECT├ë: 2 s├⌐quelle(s)
+≡ƒôÜ TROUV├ë DANS BAR├êME: "Ankylose articulaire  " ΓåÆ "Ankylose d'├⌐paule avec mobilit├⌐ de l'omoplate (Main Dominante)" (35-45%)
+   ≡ƒôè [V3.3.365] Severity-adjusted bar├¿me: [35-45] ├ù coef 0.00 = 35%
+≡ƒôÜ TROUV├ë DANS BAR├êME: "Raideur/Limitation articulaire de l'├⌐paule" ΓåÆ "Fracture Clavicule - Cal saillant avec raideur d'├⌐paule (Main Dominante)" (5-15%)
+   ≡ƒôè [V3.3.365] Severity-adjusted bar├¿me: [5-15] ├ù coef 0.00 = 5%
+≡ƒöä REGROUPEMENT PAR SYST├êME: [ 'MEMBRE_INFERIEUR: 35%', 'MEMBRE_SUPERIEUR: 14%' ]
+≡ƒº« CALCUL BALTHAZAR (PAR SYST├êME): [ 'MEMBRE_INFERIEUR: 35%', 'MEMBRE_SUPERIEUR: 14%' ]
+≡ƒôè IPP GLOBAL CUMUL├ë: 44%
+ΓöÇΓöÇΓöÇ Cas 8 ΓöÇΓöÇΓöÇ
+  Description: Ankylose ├⌐paule mobilit├⌐ omoplate ND
+  Input     : "ankylose compl├¿te de l'├⌐paule gauche main non dominante avec mobilit├⌐ conserv├⌐e de l'omoplate permet..."
+  Attendu   : ankylose.*[e├⌐]paule.*mobilit[e├⌐].*omoplate|ankylose.*[e├⌐]pau... (20-45%)
+  Obtenu    : Γ£à Polytraumatisme - 2 syst├¿mes atteints - IPP global 44%
+  Taux      : 44%
+  Type      : proposal
+  Nom OK    : Γ£à | Taux OK: Γ£à
+  Path      : Polytraumatisme > Bar├¿me 1967
+
+≡ƒöº localExpertAnalysis V3.3.347 - semantic bar├¿me guard + LLE disambiguation + pseudarthrose naming + t├⌐trapl├⌐gie guard
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): fracture de l'omoplate droite main dominante avec d├⌐sordres articulaires et raideur r├⌐siduelle de l'├⌐paule limitant les mouvements de rotation et d'abduction
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 1 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+≡ƒöì DEBUG STEPPAGE D├ëTAILL├ë:
+   - steppageMatch: false
+   - amyotrophieMIMatch: false
+   - fractureL1Match: false
+   - Texte analys├⌐: fracture de l'omoplate droite main dominante avec d├⌐sordres articulaires et raideur r├⌐siduelle de l'├⌐paule limitant les mouvements de rotation et d'abduction
+Γ¥î STEPPAGE NON D├ëTECT├ë - Conditions non remplies
+≡ƒöì DEBUG D├ëVIATION:
+   - deviationMatch: false
+   - mainContext: true
+   - Recherche dans: diviation NON trouv├⌐
+≡ƒöì [V3.3.155] S├⌐quelles d├⌐tect├⌐es: 2 [
+  "Fracture de l'hum├⌐rus/clavicule/omoplate",
+  "Raideur/Limitation articulaire de l'├⌐paule"
+]
+≡ƒöì V3.3.201k: isCumulDetected = false , lesionCount = 1
+≡ƒºá [V3.3.214] TC check: hasTC=false, hasNeuro=false, hasFocal=false, neuroCount=0
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 1 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+ΓÜá∩╕Å POLYTRAUMATISME D├ëTECT├ë: 2 s├⌐quelle(s)
+≡ƒôÜ TROUV├ë DANS BAR├êME: "Fracture de l'hum├⌐rus/clavicule/omoplate" ΓåÆ "Fracture Clavicule - Bien consolid├⌐e sans raideur (Main Dominante)" (2-3%)
+   ≡ƒôè [V3.3.365] Severity-adjusted bar├¿me: [2-3] ├ù coef 0.00 = 2%
+≡ƒôÜ TROUV├ë DANS BAR├êME: "Raideur/Limitation articulaire de l'├⌐paule" ΓåÆ "Fracture Clavicule - Cal saillant avec raideur d'├⌐paule (Main Dominante)" (5-15%)
+   ≡ƒôè [V3.3.365] Severity-adjusted bar├¿me: [5-15] ├ù coef 0.00 = 5%
+≡ƒöä REGROUPEMENT PAR SYST├êME: [ 'MEMBRE_SUPERIEUR: 14%' ]
+≡ƒöä [V3.3.357] Reclassification: d├⌐tectedSequelae multiples ΓåÆ M├èME syst├¿me ΓåÆ CAS SIMPLE
+≡ƒº« CALCUL BALTHAZAR (PAR SYST├êME): [ 'MEMBRE_SUPERIEUR: 14%' ]
+≡ƒôè IPP GLOBAL CUMUL├ë: 14%
+ΓöÇΓöÇΓöÇ Cas 9 ΓöÇΓöÇΓöÇ
+  Description: Fracture omoplate avec d├⌐sordres articulaires D
+  Input     : "fracture de l'omoplate droite main dominante avec d├⌐sordres articulaires et raideur r├⌐siduelle de l'..."
+  Attendu   : fracture.*omoplate|omoplate|scapula|├⌐paule|raideur... (8-50%)
+  Obtenu    : Γ£à Membre sup├⌐rieur DOMINANT : Raideur articulaire avec limitation fonctionnelle - Bar├¿me: "Fracture Clavicule - Bien consolid├⌐e sans raideur (Main Dominante)" (2-3%) - IPP 14%
+  Taux      : 14%
+  Type      : proposal
+  Nom OK    : Γ£à | Taux OK: Γ£à
+  Path      : S├⌐quelle > Bar├¿me 1967
+
+≡ƒöº localExpertAnalysis V3.3.347 - semantic bar├¿me guard + LLE disambiguation + pseudarthrose naming + t├⌐trapl├⌐gie guard
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): p├⌐riarthrite chronique douloureuse de l'├⌐paule gauche main non dominante avec limitation mod├⌐r├⌐e de l'abduction et de la rotation et douleurs nocturnes persistantes
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 0 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+≡ƒöì DEBUG STEPPAGE D├ëTAILL├ë:
+   - steppageMatch: false
+   - amyotrophieMIMatch: false
+   - fractureL1Match: false
+   - Texte analys├⌐: p├⌐riarthrite chronique douloureuse de l'├⌐paule gauche main non dominante avec limitation mod├⌐r├⌐e de l'abduction et de la rotation et douleurs nocturnes persistantes
+Γ¥î STEPPAGE NON D├ëTECT├ë - Conditions non remplies
+≡ƒöì DEBUG D├ëVIATION:
+   - deviationMatch: false
+   - mainContext: true
+   - Recherche dans: diviation NON trouv├⌐
+≡ƒöì [V3.3.155] S├⌐quelles d├⌐tect├⌐es: 1 [ "Raideur/Limitation articulaire de l'├⌐paule" ]
+≡ƒöì V3.3.201k: isCumulDetected = false , lesionCount = 1
+≡ƒºá [V3.3.214] TC check: hasTC=false, hasNeuro=false, hasFocal=false, neuroCount=0
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 0 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+Γ£à CAS SIMPLE D├ëTECT├ë: 1 s├⌐quelle(s)
+≡ƒôÜ TROUV├ë DANS BAR├êME: "Raideur/Limitation articulaire de l'├⌐paule" ΓåÆ "Fracture Clavicule - Cal saillant avec raideur d'├⌐paule (Main Dominante)" (5-15%)
+   ≡ƒôè [V3.3.365] Severity-adjusted bar├¿me: [5-15] ├ù coef 0.50 = 10%
+≡ƒöä REGROUPEMENT PAR SYST├êME: [ 'MEMBRE_SUPERIEUR: 14%' ]
+≡ƒº« CALCUL BALTHAZAR (PAR SYST├êME): [ 'MEMBRE_SUPERIEUR: 14%' ]
+≡ƒôè IPP GLOBAL CUMUL├ë: 14%
+ΓöÇΓöÇΓöÇ Cas 10 ΓöÇΓöÇΓöÇ
+  Description: P├⌐riarthrite chronique limitation mod├⌐r├⌐e ND
+  Input     : "p├⌐riarthrite chronique douloureuse de l'├⌐paule gauche main non dominante avec limitation mod├⌐r├⌐e de ..."
+  Attendu   : p[e├⌐]riarthrite.*chronique|p[e├⌐]riarthrite|├⌐paule|raideur... (4-25%)
+  Obtenu    : Γ£à Membre sup├⌐rieur DOMINANT : Raideur articulaire avec limitation fonctionnelle - Bar├¿me: "Fracture Clavicule - Cal saillant avec raideur d'├⌐paule (Main Dominante)" (5-15%) - IPP 14%
+  Taux      : 14%
+  Type      : proposal
+  Nom OK    : Γ£à | Taux OK: Γ£à
+  Path      : S├⌐quelle > Bar├¿me 1967
+
+≡ƒöº localExpertAnalysis V3.3.347 - semantic bar├¿me guard + LLE disambiguation + pseudarthrose naming + t├⌐trapl├⌐gie guard
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): fracture de la diaphyse hum├⌐rale droite main dominante normalement consolid├⌐e avec r├⌐cup├⌐ration fonctionnelle quasi compl├¿te et douleurs r├⌐siduelles minimes
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 1 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+≡ƒöì DEBUG STEPPAGE D├ëTAILL├ë:
+   - steppageMatch: false
+   - amyotrophieMIMatch: false
+   - fractureL1Match: false
+   - Texte analys├⌐: fracture de la diaphyse hum├⌐rale droite main dominante normalement consolid├⌐e avec r├⌐cup├⌐ration fonctionnelle quasi compl├¿te et douleurs r├⌐siduelles minimes
+Γ¥î STEPPAGE NON D├ëTECT├ë - Conditions non remplies
+≡ƒöì DEBUG D├ëVIATION:
+   - deviationMatch: false
+   - mainContext: true
+   - Recherche dans: diviation NON trouv├⌐
+≡ƒöì [V3.3.155] S├⌐quelles d├⌐tect├⌐es: 0 []
+≡ƒöì V3.3.201k: isCumulDetected = false , lesionCount = 1
+≡ƒöì DEBUG M├ëTACARPIENS - Texte normalis├⌐: fracture diaphyse humerale droite main dominante normalement consolidee avec recuperation fonctionnelle quasi complete et douleurs residuelles minimes cassure fissure bris fracture fissure bris fracture cassure bris fracture cassure fissure metacarpe chirurgicale main chirurgicale main metacarpe poignet articulation poignet $1 droit
+≡ƒöì DEBUG M├ëTACARPIENS - hasMetacarpienWord: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSingleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasMultipleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSpecificFingerEarly: false
+≡ƒöì DEBUG M├ëTACARPIENS - isMetacarpienSingleQueryEarly: false
+≡ƒöì V3.3.139: V├⌐rification cumul prioritaire...
+≡ƒöì Query words: fracture, diaphyse, humerale, droite, main, dominante, normalement, consolidee, avec, recuperation
+≡ƒöì Cat├⌐gorie cumul trouv├⌐e: Cumuls de L├⌐sions et Polytraumatismes
+≡ƒöì Entr├⌐es avec searchTerms v├⌐rifi├⌐es: 51, meilleur score: 0.0%
+Γä╣∩╕Å Aucun cumul prioritaire trouv├⌐ (similarit├⌐ < 70%), continue avec analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒª╢ [V3.3.317] hasMTPLuxation: false hasMetaFracture: false hasTSLO: false hasFootContext: false
+≡ƒöì isCumulDetected: false lesionCount: 1
+≡ƒöì [M├ëTACARPIENS] Input brut: fracture de la diaphyse hum├⌐rale droite main dominante normalement consolid├⌐e avec r├⌐cup├⌐ration fonctionnelle quasi compl├¿te et douleurs r├⌐siduelles minimes
+≡ƒöì [M├ëTACARPIENS] hasMetaWord: false
+≡ƒöì [M├ëTACARPIENS] hasSingleOrPerte: false
+≡ƒöì [M├ëTACARPIENS] hasSpecificFinger: false
+≡ƒöì [M├ëTACARPIENS] hasCinq: false
+ΓÜá∩╕Å [M├ëTACARPIENS] Pas de dialogue - continuons analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì [EARLY] Ant├⌐c├⌐dents d├⌐tect├⌐s: 0 - 
+Γ£à [V3.3.384] SANS_SEQUELLE d├⌐tect├⌐ dans 1├¿re boucle expert rules (priority 15000) ΓåÆ 0% IPP
+≡ƒöì [V3.3.300] No result from rule-based ΓåÆ Fuzzy matching fallback
+≡ƒöì [V3.3.300] Fuzzy: 5 matchs, best=44.6, threshold=suggest
+≡ƒÆí [V3.3.300] Fuzzy suggestions: 5 options
+ΓöÇΓöÇΓöÇ Cas 11 ΓöÇΓöÇΓöÇ
+  Description: Fracture hum├⌐rus consolid├⌐e normalement D
+  Input     : "fracture de la diaphyse hum├⌐rale droite main dominante normalement consolid├⌐e avec r├⌐cup├⌐ration fonc..."
+  Attendu   : fracture.*hum[e├⌐]rus.*consolid├⌐e|hum[e├⌐]rus.*consolid├⌐e|hum[... (3-10%)
+  Obtenu    : Γ¥î 
+  Taux      : 0%
+  Type      : fuzzy_suggestions
+  Nom OK    : Γ¥î | Taux OK: Γ£à
+  ΓÜá∩╕Å ANOMALIE: Nom "" ne matche pas "fracture.*hum[e├⌐]rus.*consolid├⌐e|hum[e├⌐]rus.*consolid├⌐e|hum[e├⌐]rus|fracture.*bras"
+
+≡ƒöº localExpertAnalysis V3.3.347 - semantic bar├¿me guard + LLE disambiguation + pseudarthrose naming + t├⌐trapl├⌐gie guard
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): fracture de l'hum├⌐rus gauche main non dominante avec cal vicieux en angulation de 15 degr├⌐s et atrophie musculaire du bras avec limitation de la flexion du coude associ├⌐e
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 1 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+≡ƒöì DEBUG STEPPAGE D├ëTAILL├ë:
+   - steppageMatch: false
+   - amyotrophieMIMatch: false
+   - fractureL1Match: false
+   - Texte analys├⌐: fracture de l'hum├⌐rus gauche main non dominante avec cal vicieux en angulation de 15 degr├⌐s et atrophie musculaire du bras avec limitation de la flexion du coude associ├⌐e
+Γ¥î STEPPAGE NON D├ëTECT├ë - Conditions non remplies
+≡ƒöì DEBUG D├ëVIATION:
+   - deviationMatch: false
+   - mainContext: true
+   - Recherche dans: diviation NON trouv├⌐
+≡ƒöì [V3.3.155] S├⌐quelles d├⌐tect├⌐es: 3 [
+  "Fracture de l'hum├⌐rus/clavicule/omoplate",
+  'D├⌐formation osseuse s├⌐quellaire (cal vicieux) (hum├⌐rus)',
+  'Raideur articulaire du coude'
+]
+≡ƒöì V3.3.201k: isCumulDetected = false , lesionCount = 1
+≡ƒºá [V3.3.214] TC check: hasTC=false, hasNeuro=false, hasFocal=false, neuroCount=0
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 1 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+ΓÜá∩╕Å POLYTRAUMATISME D├ëTECT├ë: 3 s├⌐quelle(s)
+≡ƒôÜ TROUV├ë DANS BAR├êME: "Fracture de l'hum├⌐rus/clavicule/omoplate" ΓåÆ "Fracture Clavicule - Bien consolid├⌐e sans raideur (Main Dominante)" (2-3%)
+   ≡ƒôè [V3.3.365] Severity-adjusted bar├¿me: [2-3] ├ù coef 0.50 = 3%
+≡ƒôÜ TROUV├ë DANS BAR├êME: "Raideur articulaire du coude" ΓåÆ "Fracture Clavicule - Bien consolid├⌐e sans raideur (Main Dominante)" (2-3%)
+   ≡ƒôè [V3.3.365] Severity-adjusted bar├¿me: [2-3] ├ù coef 0.50 = 3%
+≡ƒöä REGROUPEMENT PAR SYST├êME: [ 'MEMBRE_SUPERIEUR: 14%' ]
+≡ƒöä [V3.3.357] Reclassification: d├⌐tectedSequelae multiples ΓåÆ M├èME syst├¿me ΓåÆ CAS SIMPLE
+≡ƒº« CALCUL BALTHAZAR (PAR SYST├êME): [ 'MEMBRE_SUPERIEUR: 14%' ]
+≡ƒôè IPP GLOBAL CUMUL├ë: 14%
+ΓöÇΓöÇΓöÇ Cas 12 ΓöÇΓöÇΓöÇ
+  Description: Fracture hum├⌐rus cal vicieux d├⌐formation atrophie ND
+  Input     : "fracture de l'hum├⌐rus gauche main non dominante avec cal vicieux en angulation de 15 degr├⌐s et atrop..."
+  Attendu   : fracture.*hum[e├⌐]rus.*d[e├⌐]formation|hum[e├⌐]rus.*atrophie|hu... (5-30%)
+  Obtenu    : Γ£à Membre sup├⌐rieur DOMINANT : Raideur articulaire avec limitation fonctionnelle - Bar├¿me: "Fracture Clavicule - Bien consolid├⌐e sans raideur (Main Dominante)" (2-3%) - IPP 14%
+  Taux      : 14%
+  Type      : proposal
+  Nom OK    : Γ£à | Taux OK: Γ£à
+  Path      : S├⌐quelle > Bar├¿me 1967
+
+≡ƒöº localExpertAnalysis V3.3.347 - semantic bar├¿me guard + LLE disambiguation + pseudarthrose naming + t├⌐trapl├⌐gie guard
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): rupture totale du triceps droit main dominante avec perte de l'extension active du coude
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 1 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+≡ƒöì DEBUG STEPPAGE D├ëTAILL├ë:
+   - steppageMatch: false
+   - amyotrophieMIMatch: false
+   - fractureL1Match: false
+   - Texte analys├⌐: rupture totale du triceps droit main dominante avec perte de l'extension active du coude
+Γ¥î STEPPAGE NON D├ëTECT├ë - Conditions non remplies
+≡ƒöì DEBUG D├ëVIATION:
+   - deviationMatch: false
+   - mainContext: true
+   - Recherche dans: diviation NON trouv├⌐
+≡ƒöì [V3.3.155] S├⌐quelles d├⌐tect├⌐es: 0 []
+≡ƒöì V3.3.201k: isCumulDetected = false , lesionCount = 1
+≡ƒöì DEBUG M├ëTACARPIENS - Texte normalis├⌐: rupture totale triceps droit main dominante avec perte de l extension active coude amputation ablation section amputation ablation perte metacarpe chirurgicale main chirurgicale main metacarpe articulation coude $1 droit $1 gauche coude $1 droit $1 gauche coude articulation coude $1 gauche coude articulation coude $1 droit poignet articulation poignet $1 droit
+≡ƒöì DEBUG M├ëTACARPIENS - hasMetacarpienWord: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSingleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasMultipleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSpecificFingerEarly: false
+≡ƒöì DEBUG M├ëTACARPIENS - isMetacarpienSingleQueryEarly: false
+≡ƒöì V3.3.139: V├⌐rification cumul prioritaire...
+≡ƒöì Query words: rupture, totale, triceps, droit, main, dominante, avec, perte, extension, active
+≡ƒöì Cat├⌐gorie cumul trouv├⌐e: Cumuls de L├⌐sions et Polytraumatismes
+≡ƒöì Entr├⌐es avec searchTerms v├⌐rifi├⌐es: 51, meilleur score: 0.0%
+Γä╣∩╕Å Aucun cumul prioritaire trouv├⌐ (similarit├⌐ < 70%), continue avec analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒª╢ [V3.3.317] hasMTPLuxation: false hasMetaFracture: false hasTSLO: false hasFootContext: false
+≡ƒöì isCumulDetected: false lesionCount: 1
+≡ƒöì [M├ëTACARPIENS] Input brut: rupture totale du triceps droit main dominante avec perte de l extension active du coude
+≡ƒöì [M├ëTACARPIENS] hasMetaWord: false
+≡ƒöì [M├ëTACARPIENS] hasSingleOrPerte: true
+≡ƒöì [M├ëTACARPIENS] hasSpecificFinger: false
+≡ƒöì [M├ëTACARPIENS] hasCinq: false
+ΓÜá∩╕Å [M├ëTACARPIENS] Pas de dialogue - continuons analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì [EARLY] Ant├⌐c├⌐dents d├⌐tect├⌐s: 0 - 
+≡ƒöì [DEBUG EXPERT RULE - EARLY TEST]
+Pattern: /contusion.*cerebrale|traumatisme.*crani.*contusion/i
+Context: /perte.*connaissance|frontale|temporale|parietale|breve|courte|surveillance.*neurologique/i
+NegativeContext: /spondylo|listthesis|glissement.*vertebral/i
+CleanText: "rupture totale du triceps droit main dominante avec perte de l extension active du coude"
+patternMatchClean: false, contextMatchClean: false
+negContextMatchClean: false, negContextMatchWorking: false
+matchClean: false, matchWorking: false
+≡ƒöì [DEBUG EXPERT RULE - EARLY TEST]
+Pattern: /spondylolisthesis|spondylo.*listhesis|listthesis|glissement\s+vertebral/i
+Context: /lombaire|L\d|S\d|rachis|traumatisme|post-traumatique/i
+NegativeContext: /contusion.*cerebrale|perte.*connaissance|mandibule|genou|polytraumatisme|chute.*echafaudage/i
+CleanText: "rupture totale du triceps droit main dominante avec perte de l extension active du coude"
+patternMatchClean: false, contextMatchClean: false
+negContextMatchClean: false, negContextMatchWorking: false
+matchClean: false, matchWorking: false
+≡ƒÄ» TOP 50 R├ëSULTATS: [
+  {
+    name: "Limitation de l'extension du coude (Main Non Dominante)",
+    score: 2465,
+    path: 'Membres Sup├⌐rieurs > Coude - Raideurs et Ankyloses'
+  },
+  {
+    name: 'D├⌐sarticulation du coude (Main Non Dominante)',
+    score: 2454,
+    path: 'Membres Sup├⌐rieurs > Coude - D├⌐sarticulation'
+  },
+  {
+    name: 'Limitation de la flexion du coude (Main Non Dominante)',
+    score: 2454,
+    path: 'Membres Sup├⌐rieurs > Coude - Raideurs et Ankyloses'
+  },
+  {
+    name: "Limitation de l'extension du coude (Main Dominante)",
+    score: 2454,
+    path: 'Membres Sup├⌐rieurs > Coude - Raideurs et Ankyloses'
+  },
+  {
+    name: 'Instabilit├⌐ chronique du coude post-traumatique (Main Non Dominante)',
+    score: 2454,
+    path: 'Membres Sup├⌐rieurs > Coude - L├⌐sions Diverses'
+  },
+  {
+    name: 'D├⌐sarticulation du coude (Main Dominante)',
+    score: 2444,
+    path: 'Membres Sup├⌐rieurs > Coude - D├⌐sarticulation'
+  },
+  {
+    name: 'Arthrod├¿se du coude en pronation (Main Non Dominante)',
+    score: 2444,
+    path: 'Membres Sup├⌐rieurs > Coude - Raideurs et Ankyloses'
+  },
+  {
+    name: 'Arthrod├¿se du coude en position neutre (Main Non Dominante)',
+    score: 2444,
+    path: 'Membres Sup├⌐rieurs > Coude - Raideurs et Ankyloses'
+  },
+  {
+    name: 'Arthrod├¿se du coude en supination (Main Non Dominante)',
+    score: 2444,
+    path: 'Membres Sup├⌐rieurs > Coude - Raideurs et Ankyloses'
+  },
+  {
+    name: 'Limitation de la flexion du coude (Main Dominante)',
+    score: 2443,
+    path: 'Membres Sup├⌐rieurs > Coude - Raideurs et Ankyloses'
+  },
+  {
+    name: 'Instabilit├⌐ chronique du coude post-traumatique (Main Dominante)',
+    score: 2443,
+    path: 'Membres Sup├⌐rieurs > Coude - L├⌐sions Diverses'
+  },
+  {
+    name: 'Arthrod├¿se du coude en pronation (Main Dominante)',
+    score: 2433,
+    path: 'Membres Sup├⌐rieurs > Coude - Raideurs et Ankyloses'
+  },
+  {
+    name: 'Arthrod├¿se du coude en position neutre (Main Dominante)',
+    score: 2433,
+    path: 'Membres Sup├⌐rieurs > Coude - Raideurs et Ankyloses'
+  },
+  {
+    name: 'Arthrod├¿se du coude en supination (Main Dominante)',
+    score: 2433,
+    path: 'Membres Sup├⌐rieurs > Coude - Raideurs et Ankyloses'
+  },
+  {
+    name: 'Perte des cinq m├⌐tacarpiens (Main Non Dominante)',
+    score: 1453,
+    path: 'Membres Sup├⌐rieurs > Main - Amputations'
+  },
+  {
+    name: 'Perte des cinq m├⌐tacarpiens (Main Dominante)',
+    score: 1442,
+    path: 'Membres Sup├⌐rieurs > Main - Amputations'
+  },
+  {
+    name: 'Fracture du scapho├»de carpien - Avec raideur simple (Main Non Dominante)',
+    score: 1224,
+    path: 'Membres Sup├⌐rieurs > Poignet - Fractures'
+  },
+  {
+    name: 'Fracture du scapho├»de carpien - Avec raideur simple (Main Dominante)',
+    score: 1213,
+    path: 'Membres Sup├⌐rieurs > Poignet - Fractures'
+  },
+  {
+    name: 'Raideur trap├⌐zo-m├⌐tacarpienne du pouce (Main Non Dominante)',
+    score: 1179,
+    path: 'Membres Sup├⌐rieurs > Main - Raideurs et Ankyloses'
+  },
+  {
+    name: 'Raideur trap├⌐zo-m├⌐tacarpienne du pouce (Main Dominante)',
+    score: 1168,
+    path: 'Membres Sup├⌐rieurs > Main - Raideurs et Ankyloses'
+  },
+  {
+    name: 'Amputation de la main (Main Non Dominante)',
+    score: 1029,
+    path: 'Membres Sup├⌐rieurs > Main - Amputations'
+  },
+  {
+    name: 'Amputation de la main (Main Dominante)',
+    score: 1018,
+    path: 'Membres Sup├⌐rieurs > Main - Amputations'
+  },
+  {
+    name: 'Perte de la pr├⌐hension fine (atteinte motrice) (Main Non Dominante)',
+    score: 1004,
+    path: 'Membres Sup├⌐rieurs > Main - Raideurs et Ankyloses'
+  },
+  {
+    name: 'Perte de la prise sph├⌐rique (Main Non Dominante)',
+    score: 1004,
+    path: 'Membres Sup├⌐rieurs > Main - Raideurs et Ankyloses'
+  },
+  {
+    name: 'Perte de la pr├⌐hension grossi├¿re (Main Non Dominante)',
+    score: 1004,
+    path: 'Membres Sup├⌐rieurs > Main - Raideurs et Ankyloses'
+  },
+  {
+    name: 'Perte de la prise sph├⌐rique (Main Dominante)',
+    score: 993,
+    path: 'Membres Sup├⌐rieurs > Main - Raideurs et Ankyloses'
+  },
+  {
+    name: 'Perte de la pr├⌐hension grossi├¿re (Main Dominante)',
+    score: 993,
+    path: 'Membres Sup├⌐rieurs > Main - Raideurs et Ankyloses'
+  },
+  {
+    name: "Amputation de l'avant-bras (Main Non Dominante)",
+    score: 989,
+    path: 'Membres Sup├⌐rieurs > Avant-bras - Amputations'
+  },
+  {
+    name: 'Amputation du bras au tiers moyen ou inf├⌐rieur (Main Non Dominante)',
+    score: 979,
+    path: 'Membres Sup├⌐rieurs > Bras - Amputations'
+  },
+  {
+    name: 'Amputation du bras au tiers sup├⌐rieur (Main Non Dominante)',
+    score: 979,
+    path: 'Membres Sup├⌐rieurs > Bras - Amputations'
+  },
+  {
+    name: "Amputation de l'avant-bras (Main Dominante)",
+    score: 979,
+    path: 'Membres Sup├⌐rieurs > Avant-bras - Amputations'
+  },
+  {
+    name: 'Amputation du bras au tiers moyen ou inf├⌐rieur (Main Dominante)',
+    score: 969,
+    path: 'Membres Sup├⌐rieurs > Bras - Amputations'
+  },
+  {
+    name: 'Amputation du bras au tiers sup├⌐rieur (Main Dominante)',
+    score: 969,
+    path: 'Membres Sup├⌐rieurs > Bras - Amputations'
+  },
+  {
+    name: "Luxation r├⌐cidivante de l'├⌐paule (Main Non Dominante)",
+    score: 899,
+    path: 'Membres Sup├⌐rieurs > ├ëpaule - L├⌐sions Diverses'
+  },
+  {
+    name: "Luxation r├⌐cidivante de l'├⌐paule (Main Dominante)",
+    score: 888,
+    path: 'Membres Sup├⌐rieurs > ├ëpaule - L├⌐sions Diverses'
+  },
+  {
+    name: 'Rupture du biceps compl├¿te (Main Non Dominante)',
+    score: 884,
+    path: 'Membres Sup├⌐rieurs > Bras - Fractures et L├⌐sions Musculaires'
+  },
+  {
+    name: 'Rupture du biceps compl├¿te (Main Dominante)',
+    score: 874,
+    path: 'Membres Sup├⌐rieurs > Bras - Fractures et L├⌐sions Musculaires'
+  },
+  {
+    name: 'Limitation de la pronation (Main Non Dominante)',
+    score: 874,
+    path: 'Membres Sup├⌐rieurs > Coude - Raideurs et Ankyloses'
+  },
+  {
+    name: 'Limitation de la supination (Main Non Dominante)',
+    score: 874,
+    path: 'Membres Sup├⌐rieurs > Coude - Raideurs et Ankyloses'
+  },
+  {
+    name: 'Abolition de la prono-supination (Main Non Dominante)',
+    score: 874,
+    path: 'Membres Sup├⌐rieurs > Coude - Raideurs et Ankyloses'
+  },
+  {
+    name: 'Limitation de la pronation (Main Dominante)',
+    score: 863,
+    path: 'Membres Sup├⌐rieurs > Coude - Raideurs et Ankyloses'
+  },
+  {
+    name: 'Limitation de la supination (Main Dominante)',
+    score: 863,
+    path: 'Membres Sup├⌐rieurs > Coude - Raideurs et Ankyloses'
+  },
+  {
+    name: 'Abolition de la prono-supination (Main Dominante)',
+    score: 863,
+    path: 'Membres Sup├⌐rieurs > Coude - Raideurs et Ankyloses'
+  },
+  {
+    name: 'Perte du 4e m├⌐tacarpien (Annulaire)',
+    score: 862,
+    path: 'Membres Sup├⌐rieurs > Main - Amputations'
+  },
+  {
+    name: 'Perte du 5e m├⌐tacarpien (Auriculaire)',
+    score: 862,
+    path: 'Membres Sup├⌐rieurs > Main - Amputations'
+  },
+  {
+    name: 'Perte du 1er m├⌐tacarpien (Pouce)',
+    score: 851,
+    path: 'Membres Sup├⌐rieurs > Main - Amputations'
+  },
+  {
+    name: 'Perte du 2e m├⌐tacarpien (Index)',
+    score: 851,
+    path: 'Membres Sup├⌐rieurs > Main - Amputations'
+  },
+  {
+    name: 'Perte du 3e m├⌐tacarpien (Majeur)',
+    score: 851,
+    path: 'Membres Sup├⌐rieurs > Main - Amputations'
+  },
+  {
+    name: 'Troubles de la sensibilit├⌐ de la main ΓÇö g├¬ne mod├⌐r├⌐e (Main Non Dominante)',
+    score: 789,
+    path: 'Membres Sup├⌐rieurs > Main - Raideurs et Ankyloses'
+  },
+  {
+    name: 'Troubles de la sensibilit├⌐ de la main ΓÇö g├¬ne importante (Main Non Dominante)',
+    score: 789,
+    path: 'Membres Sup├⌐rieurs > Main - Raideurs et Ankyloses'
+  }
+]
+≡ƒöì [detectRequestType] D├⌐but analyse...
+≡ƒôè [detectRequestType] R├⌐sultat: attribution
+≡ƒöì [determineSeverity] Text: rupture totale du triceps droit main dominante avec perte de l'extension active du coude
+≡ƒöì [determineSeverity] Faible signs: []
+≡ƒöì [determineSeverity] High signs: [ 'totale' ]
+ΓöÇΓöÇΓöÇ Cas 13 ΓöÇΓöÇΓöÇ
+  Description: Rupture totale triceps D
+  Input     : "rupture totale du triceps droit main dominante avec perte de l'extension active du coude..."
+  Attendu   : rupture.*triceps|triceps|extension.*coude|coude|limitation... (5-35%)
+  Obtenu    : Γ£à Limitation de l'extension du coude (Main Non Dominante)
+  Taux      : 8%
+  Type      : proposal
+  Nom OK    : Γ£à | Taux OK: Γ£à
+  Path      : Membres Sup├⌐rieurs > Coude - Raideurs et Ankyloses
+
+≡ƒöº localExpertAnalysis V3.3.347 - semantic bar├¿me guard + LLE disambiguation + pseudarthrose naming + t├⌐trapl├⌐gie guard
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): rupture compl├¿te du tendon du biceps brachial de l'├⌐paule droite main dominante avec perte de force en flexion du coude et supination et d├⌐formation esth├⌐tique du relief musculaire du bras
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 1 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+≡ƒöì DEBUG STEPPAGE D├ëTAILL├ë:
+   - steppageMatch: false
+   - amyotrophieMIMatch: false
+   - fractureL1Match: false
+   - Texte analys├⌐: rupture compl├¿te du tendon du biceps brachial de l'├⌐paule droite main dominante avec perte de force en flexion du coude et supination et d├⌐formation esth├⌐tique du relief musculaire du bras
+Γ¥î STEPPAGE NON D├ëTECT├ë - Conditions non remplies
+≡ƒöì DEBUG D├ëVIATION:
+   - deviationMatch: false
+   - mainContext: true
+   - Recherche dans: diviation NON trouv├⌐
+≡ƒöì [V3.3.155] S├⌐quelles d├⌐tect├⌐es: 1 [ 'Limitation de la supination (rotation externe avant-bras)' ]
+≡ƒöì V3.3.201k: isCumulDetected = true , lesionCount = 2
+ΓÜá∩╕Å V3.3.201j: CUMUL D├ëTECT├ë ΓåÆ SKIP regroupement par syst├¿me, passage direct ├á extraction l├⌐sions individuelles
+≡ƒöì DEBUG M├ëTACARPIENS - Texte normalis├⌐: rupture complete tendon biceps brachial de l epaule droite main dominante avec perte de force en flexion coude et supination et deformation esthetique relief musculaire bras amputation ablation section amputation ablation perte metacarpe chirurgicale main chirurgicale main metacarpe scapulo humeral gleno humeral articulation epaule epaule gleno humeral articulation epaule epaule scapulo humeral articulation epaule epaule scapulo humeral gleno humeral epaule scapulo humeral gleno humeral epaule scapulo humeral gleno humeral articulation coude $1 droit $1 gauche coude $1 droit $1 gauche coude articulation coude $1 gauche coude articulation coude $1 droit flexion coude flechir coude plier coude flexion coude flexion coude plier coude flexion coude flexion coude flechir coude supination limitee supination reduite paume vers haut supination supination reduite paume vers haut supination supination limitee paume vers haut supination supination limitee supination reduite poignet articulation poignet $1 droit
+≡ƒöì DEBUG M├ëTACARPIENS - hasMetacarpienWord: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSingleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasMultipleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSpecificFingerEarly: false
+≡ƒöì DEBUG M├ëTACARPIENS - isMetacarpienSingleQueryEarly: false
+≡ƒöì V3.3.139: V├⌐rification cumul prioritaire...
+≡ƒöì Query words: rupture, complete, tendon, biceps, brachial, epaule, droite, main, dominante, avec
+≡ƒöì Cat├⌐gorie cumul trouv├⌐e: Cumuls de L├⌐sions et Polytraumatismes
+≡ƒöì Entr├⌐es avec searchTerms v├⌐rifi├⌐es: 51, meilleur score: 0.0%
+Γä╣∩╕Å Aucun cumul prioritaire trouv├⌐ (similarit├⌐ < 70%), continue avec analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒª╢ [V3.3.317] hasMTPLuxation: false hasMetaFracture: false hasTSLO: false hasFootContext: false
+≡ƒöì isCumulDetected: true lesionCount: 2
+≡ƒöì CUMUL D├ëTECT├ë - Extraction des l├⌐sions individuelles
+≡ƒô¥ text original: rupture compl├¿te du tendon du biceps brachial de l'├⌐paule droite main dominante avec perte de force en flexion du coude et supination et d├⌐formation esth├⌐tique du relief musculaire du bras
+≡ƒô¥ finalCleanedText: rupture compl├¿te du tendon du biceps brachial de l'├⌐paule droite main dominante avec perte de force en flexion du coude et supination et d├⌐formation esth├⌐tique du relief musculaire du bras
+≡ƒöº extractIndividualLesions V3.3.211 - avec Pattern 0C-ter + 0C-quater
+≡ƒöì extractIndividualLesions - texte d'entr├⌐e: rupture compl├¿te du tendon du biceps brachial de l'├⌐paule droite main dominante avec perte de force en flexion du coude et supination et d├⌐formation esth├⌐tique du relief musculaire du bras
+≡ƒöì Pattern 0B - Extraction polytraumatisme membre (V3.3.201L):
+  fractureMatch: NULL
+  ligamentMatch: NULL
+  muscleMatch: NULL
+  raideurMatch: NULL
+  algiesMatch: NULL
+  deficitForceMatch: NULL
+  componentCount: 0
+  Condition activ├⌐e: false
+Γ¥î Pattern 0B NON ACTIV├ë: componentCount < 3
+ΓÜá∩╕Å Aucun pattern de cumul d├⌐tect├⌐, retour texte original
+≡ƒôï L├⌐sions extraites: [
+  'rupture complete du tendon du biceps brachial de l epaule droite main dominante avec perte de force en flexion du coude et supination et deformation esthetique du relief musculaire du bras'
+] Nombre: 1
+≡ƒöì [M├ëTACARPIENS] Input brut: rupture compl├¿te du tendon du biceps brachial de l ├⌐paule droite main dominante avec perte de force en flexion du coude et supination et d├⌐formation esth├⌐tique du relief musculaire du bras
+≡ƒöì [M├ëTACARPIENS] hasMetaWord: false
+≡ƒöì [M├ëTACARPIENS] hasSingleOrPerte: true
+≡ƒöì [M├ëTACARPIENS] hasSpecificFinger: false
+≡ƒöì [M├ëTACARPIENS] hasCinq: false
+ΓÜá∩╕Å [M├ëTACARPIENS] Pas de dialogue - continuons analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì [EARLY] Ant├⌐c├⌐dents d├⌐tect├⌐s: 0 - 
+≡ƒöì [CUMUL D├ëTECT├ë EN AVANCE] 2 l├⌐sions - SKIP R├êGLES EXPERTES SIMPLES
+≡ƒÄ» TOP 50 R├ëSULTATS: [
+  {
+    name: 'Limitation de la flexion du coude (Main Non Dominante)',
+    score: 965,
+    path: 'Membres Sup├⌐rieurs > Coude - Raideurs et Ankyloses'
+  },
+  {
+    name: 'Limitation de la flexion du coude (Main Dominante)',
+    score: 955,
+    path: 'Membres Sup├⌐rieurs > Coude - Raideurs et Ankyloses'
+  },
+  {
+    name: 'Perte des cinq m├⌐tacarpiens (Main Non Dominante)',
+    score: 953,
+    path: 'Membres Sup├⌐rieurs > Main - Amputations'
+  },
+  {
+    name: 'Perte des cinq m├⌐tacarpiens (Main Dominante)',
+    score: 942,
+    path: 'Membres Sup├⌐rieurs > Main - Amputations'
+  },
+  {
+    name: 'Perte du 4e m├⌐tacarpien (Annulaire)',
+    score: 862,
+    path: 'Membres Sup├⌐rieurs > Main - Amputations'
+  },
+  {
+    name: 'Perte du 5e m├⌐tacarpien (Auriculaire)',
+    score: 862,
+    path: 'Membres Sup├⌐rieurs > Main - Amputations'
+  },
+  {
+    name: 'Perte du 1er m├⌐tacarpien (Pouce)',
+    score: 851,
+    path: 'Membres Sup├⌐rieurs > Main - Amputations'
+  },
+  {
+    name: 'Perte du 2e m├⌐tacarpien (Index)',
+    score: 851,
+    path: 'Membres Sup├⌐rieurs > Main - Amputations'
+  },
+  {
+    name: 'Perte du 3e m├⌐tacarpien (Majeur)',
+    score: 851,
+    path: 'Membres Sup├⌐rieurs > Main - Amputations'
+  },
+  {
+    name: "D├⌐sarticulation de l'├⌐paule ou amputation au col chirurgical (Main Non Dominante)",
+    score: 741,
+    path: 'Membres Sup├⌐rieurs > ├ëpaule - Amputation et D├⌐sarticulation'
+  },
+  {
+    name: "D├⌐sarticulation de l'├⌐paule ou amputation au col chirurgical (Main Dominante)",
+    score: 730,
+    path: 'Membres Sup├⌐rieurs > ├ëpaule - Amputation et D├⌐sarticulation'
+  },
+  {
+    name: 'Fracture du scapho├»de carpien - Avec raideur simple (Main Non Dominante)',
+    score: 724,
+    path: 'Membres Sup├⌐rieurs > Poignet - Fractures'
+  },
+  {
+    name: "Fracture de l'hum├⌐rus normalement consolid├⌐e (Main Dominante)",
+    score: 716,
+    path: 'Membres Sup├⌐rieurs > Bras - Fractures et L├⌐sions Musculaires'
+  },
+  {
+    name: "Fracture de l'hum├⌐rus avec d├⌐formation et atrophie (sans paralysie) (Main Dominante)",
+    score: 716,
+    path: 'Membres Sup├⌐rieurs > Bras - Fractures et L├⌐sions Musculaires'
+  },
+  {
+    name: 'Fracture du scapho├»de carpien - Avec raideur simple (Main Dominante)',
+    score: 713,
+    path: 'Membres Sup├⌐rieurs > Poignet - Fractures'
+  },
+  {
+    name: 'Raideur trap├⌐zo-m├⌐tacarpienne du pouce (Main Non Dominante)',
+    score: 679,
+    path: 'Membres Sup├⌐rieurs > Main - Raideurs et Ankyloses'
+  },
+  {
+    name: 'Raideur trap├⌐zo-m├⌐tacarpienne du pouce (Main Dominante)',
+    score: 668,
+    path: 'Membres Sup├⌐rieurs > Main - Raideurs et Ankyloses'
+  },
+  {
+    name: "Fracture de la t├¬te hum├⌐rale avec raideur importante de l'├⌐paule (Main Non Dominante)",
+    score: 661,
+    path: "Membres Sup├⌐rieurs > ├ëpaule - Fractures de l'Extr├⌐mit├⌐ Sup├⌐rieure de l'Hum├⌐rus"
+  },
+  {
+    name: 'Fracture du col chirurgical avec cal vicieux important et abduction limit├⌐e (Main Non Dominante)',
+    score: 651,
+    path: "Membres Sup├⌐rieurs > ├ëpaule - Fractures de l'Extr├⌐mit├⌐ Sup├⌐rieure de l'Hum├⌐rus"
+  },
+  {
+    name: "Fracture de la t├¬te hum├⌐rale avec raideur importante de l'├⌐paule (Main Dominante)",
+    score: 650,
+    path: "Membres Sup├⌐rieurs > ├ëpaule - Fractures de l'Extr├⌐mit├⌐ Sup├⌐rieure de l'Hum├⌐rus"
+  },
+  {
+    name: "Fracture de l'hum├⌐rus normalement consolid├⌐e (Main Non Dominante)",
+    score: 641,
+    path: 'Membres Sup├⌐rieurs > Bras - Fractures et L├⌐sions Musculaires'
+  },
+  {
+    name: "Fracture de l'hum├⌐rus avec d├⌐formation et atrophie (sans paralysie) (Main Non Dominante)",
+    score: 641,
+    path: 'Membres Sup├⌐rieurs > Bras - Fractures et L├⌐sions Musculaires'
+  },
+  {
+    name: 'Fracture du col chirurgical avec cal vicieux important et abduction limit├⌐e (Main Dominante)',
+    score: 640,
+    path: "Membres Sup├⌐rieurs > ├ëpaule - Fractures de l'Extr├⌐mit├⌐ Sup├⌐rieure de l'Hum├⌐rus"
+  },
+  {
+    name: 'Fracture du col chirurgical avec raccourcissement et g├¬ne mod├⌐r├⌐e (Main Non Dominante)',
+    score: 640,
+    path: "Membres Sup├⌐rieurs > ├ëpaule - Fractures de l'Extr├⌐mit├⌐ Sup├⌐rieure de l'Hum├⌐rus"
+  },
+  {
+    name: "Fracture du trochiter avec limitation de l'abduction et rotation (Main Non Dominante)",
+    score: 640,
+    path: "Membres Sup├⌐rieurs > ├ëpaule - Fractures de l'Extr├⌐mit├⌐ Sup├⌐rieure de l'Hum├⌐rus"
+  },
+  {
+    name: 'Fracture du trochin avec limitation de la rotation interne (Main Non Dominante)',
+    score: 640,
+    path: "Membres Sup├⌐rieurs > ├ëpaule - Fractures de l'Extr├⌐mit├⌐ Sup├⌐rieure de l'Hum├⌐rus"
+  },
+  {
+    name: 'Fracture du col chirurgical avec raccourcissement et g├¬ne mod├⌐r├⌐e (Main Dominante)',
+    score: 629,
+    path: "Membres Sup├⌐rieurs > ├ëpaule - Fractures de l'Extr├⌐mit├⌐ Sup├⌐rieure de l'Hum├⌐rus"
+  },
+  {
+    name: "Fracture du trochiter avec limitation de l'abduction et rotation (Main Dominante)",
+    score: 629,
+    path: "Membres Sup├⌐rieurs > ├ëpaule - Fractures de l'Extr├⌐mit├⌐ Sup├⌐rieure de l'Hum├⌐rus"
+  },
+  {
+    name: 'Fracture du trochin avec limitation de la rotation interne (Main Dominante)',
+    score: 629,
+    path: "Membres Sup├⌐rieurs > ├ëpaule - Fractures de l'Extr├⌐mit├⌐ Sup├⌐rieure de l'Hum├⌐rus"
+  },
+  {
+    name: 'Amputation du bras au tiers inf├⌐rieur',
+    score: 628,
+    path: 'Membres Sup├⌐rieurs > Bras - Amputations'
+  },
+  {
+    name: "Amputation de l'avant-bras (tiers sup├⌐rieur - Main Non Dominante)",
+    score: 626,
+    path: 'Membres Sup├⌐rieurs > ├ëpaule - Amputation et D├⌐sarticulation'
+  },
+  {
+    name: "Amputation de l'avant-bras (tiers inf├⌐rieur - Main Non Dominante)",
+    score: 626,
+    path: 'Membres Sup├⌐rieurs > ├ëpaule - Amputation et D├⌐sarticulation'
+  },
+  {
+    name: 'Amputation du bras (tiers inf├⌐rieur - Main Non Dominante)',
+    score: 616,
+    path: 'Membres Sup├⌐rieurs > ├ëpaule - Amputation et D├⌐sarticulation'
+  },
+  {
+    name: "Amputation de l'avant-bras (tiers sup├⌐rieur - Main Dominante)",
+    score: 615,
+    path: 'Membres Sup├⌐rieurs > ├ëpaule - Amputation et D├⌐sarticulation'
+  },
+  {
+    name: "Amputation de l'avant-bras (tiers inf├⌐rieur - Main Dominante)",
+    score: 615,
+    path: 'Membres Sup├⌐rieurs > ├ëpaule - Amputation et D├⌐sarticulation'
+  },
+  {
+    name: 'Amputation du bras (tiers inf├⌐rieur - Main Dominante)',
+    score: 605,
+    path: 'Membres Sup├⌐rieurs > ├ëpaule - Amputation et D├⌐sarticulation'
+  },
+  {
+    name: 'Fracture scapho├»de sur arthrose carpe',
+    score: 562,
+    path: '├ëtats Ant├⌐rieurs et Aggravation de Pathologies Pr├⌐existantes > Aggravation Main et Poignet sur ├ëtat Ant├⌐rieur'
+  },
+  {
+    name: 'S├⌐quelles de fracture de m├⌐tacarpien (cal vicieux, raideur) (Main Non Dominante)',
+    score: 552.89,
+    path: 'Membres Sup├⌐rieurs > Main - Raideurs et Ankyloses'
+  },
+  {
+    name: 'S├⌐quelles de fracture de m├⌐tacarpien (cal vicieux, raideur) (Main Dominante)',
+    score: 552.78,
+    path: 'Membres Sup├⌐rieurs > Main - Raideurs et Ankyloses'
+  },
+  {
+    name: 'Amputation du bras au tiers moyen',
+    score: 543,
+    path: 'Membres Sup├⌐rieurs > Bras - Amputations'
+  },
+  {
+    name: "Amputation de l'avant-bras (tiers moyen - Main Non Dominante)",
+    score: 541,
+    path: 'Membres Sup├⌐rieurs > ├ëpaule - Amputation et D├⌐sarticulation'
+  },
+  {
+    name: "Amputation de l'avant-bras (Main Non Dominante)",
+    score: 540,
+    path: 'Membres Sup├⌐rieurs > Avant-bras - Amputations'
+  },
+  {
+    name: 'Raideur main sur amputation ancienne',
+    score: 532,
+    path: '├ëtats Ant├⌐rieurs et Aggravation de Pathologies Pr├⌐existantes > Aggravation Main et Poignet sur ├ëtat Ant├⌐rieur'
+  },
+  {
+    name: 'Amputation du bras (tiers sup├⌐rieur - Main Non Dominante)',
+    score: 531,
+    path: 'Membres Sup├⌐rieurs > ├ëpaule - Amputation et D├⌐sarticulation'
+  },
+  {
+    name: 'Amputation du bras (tiers moyen - Main Non Dominante)',
+    score: 531,
+    path: 'Membres Sup├⌐rieurs > ├ëpaule - Amputation et D├⌐sarticulation'
+  },
+  {
+    name: "Amputation de l'avant-bras (tiers moyen - Main Dominante)",
+    score: 530,
+    path: 'Membres Sup├⌐rieurs > ├ëpaule - Amputation et D├⌐sarticulation'
+  },
+  {
+    name: 'Amputation du bras au tiers moyen ou inf├⌐rieur (Main Non Dominante)',
+    score: 530,
+    path: 'Membres Sup├⌐rieurs > Bras - Amputations'
+  },
+  {
+    name: 'Amputation du bras au tiers sup├⌐rieur (Main Non Dominante)',
+    score: 530,
+    path: 'Membres Sup├⌐rieurs > Bras - Amputations'
+  },
+  {
+    name: "Amputation de l'avant-bras (Main Dominante)",
+    score: 530,
+    path: 'Membres Sup├⌐rieurs > Avant-bras - Amputations'
+  },
+  {
+    name: 'Amputation de la main (Main Non Dominante)',
+    score: 529,
+    path: 'Membres Sup├⌐rieurs > Main - Amputations'
+  }
+]
+≡ƒöì [detectRequestType] D├⌐but analyse...
+≡ƒôè [detectRequestType] R├⌐sultat: attribution
+≡ƒöì [determineSeverity] Text: rupture compl├¿te du tendon du biceps brachial de l'├⌐paule droite main dominante avec perte de force 
+≡ƒöì [determineSeverity] Faible signs: []
+≡ƒöì [determineSeverity] High signs: []
+ΓöÇΓöÇΓöÇ Cas 14 ΓöÇΓöÇΓöÇ
+  Description: Rupture biceps compl├¿te D
+  Input     : "rupture compl├¿te du tendon du biceps brachial de l'├⌐paule droite main dominante avec perte de force ..."
+  Attendu   : rupture.*biceps.*compl[e├¿]te|biceps|rupture.*biceps|bras... (10-30%)
+  Obtenu    : Γ£à Limitation de la flexion du coude (Main Non Dominante)
+  Taux      : 11%
+  Type      : proposal
+  Nom OK    : Γ£à | Taux OK: Γ£à
+  Path      : Membres Sup├⌐rieurs > Coude - Raideurs et Ankyloses
+
+≡ƒöº localExpertAnalysis V3.3.347 - semantic bar├¿me guard + LLE disambiguation + pseudarthrose naming + t├⌐trapl├⌐gie guard
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): ├⌐longation musculaire de l'├⌐paule gauche main non dominante avec diminution de force r├⌐siduelle
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 0 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+≡ƒöì DEBUG STEPPAGE D├ëTAILL├ë:
+   - steppageMatch: false
+   - amyotrophieMIMatch: false
+   - fractureL1Match: false
+   - Texte analys├⌐: ├⌐longation musculaire de l'├⌐paule gauche main non dominante avec diminution de force r├⌐siduelle
+Γ¥î STEPPAGE NON D├ëTECT├ë - Conditions non remplies
+≡ƒöì DEBUG D├ëVIATION:
+   - deviationMatch: false
+   - mainContext: true
+   - Recherche dans: diviation NON trouv├⌐
+≡ƒöì [V3.3.155] S├⌐quelles d├⌐tect├⌐es: 0 []
+≡ƒöì V3.3.201k: isCumulDetected = false , lesionCount = 1
+≡ƒöì DEBUG M├ëTACARPIENS - Texte normalis├⌐: elongation musculaire de l epaule gauche main non dominante avec diminution de force residuelle metacarpe chirurgicale main chirurgicale main metacarpe scapulo humeral gleno humeral articulation epaule epaule gleno humeral articulation epaule epaule scapulo humeral articulation epaule epaule scapulo humeral gleno humeral epaule scapulo humeral gleno humeral epaule scapulo humeral gleno humeral poignet articulation poignet $1 droit
+≡ƒöì DEBUG M├ëTACARPIENS - hasMetacarpienWord: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSingleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasMultipleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSpecificFingerEarly: false
+≡ƒöì DEBUG M├ëTACARPIENS - isMetacarpienSingleQueryEarly: false
+≡ƒöì V3.3.139: V├⌐rification cumul prioritaire...
+≡ƒöì Query words: elongation, musculaire, epaule, gauche, main, non, dominante, avec, diminution, force
+≡ƒöì Cat├⌐gorie cumul trouv├⌐e: Cumuls de L├⌐sions et Polytraumatismes
+≡ƒöì Entr├⌐es avec searchTerms v├⌐rifi├⌐es: 51, meilleur score: 0.0%
+Γä╣∩╕Å Aucun cumul prioritaire trouv├⌐ (similarit├⌐ < 70%), continue avec analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒª╢ [V3.3.317] hasMTPLuxation: false hasMetaFracture: false hasTSLO: false hasFootContext: false
+≡ƒöì isCumulDetected: false lesionCount: 1
+≡ƒöì [M├ëTACARPIENS] Input brut: ├⌐longation musculaire de l ├⌐paule gauche main non dominante avec diminution de force r├⌐siduelle
+≡ƒöì [M├ëTACARPIENS] hasMetaWord: false
+≡ƒöì [M├ëTACARPIENS] hasSingleOrPerte: false
+≡ƒöì [M├ëTACARPIENS] hasSpecificFinger: false
+≡ƒöì [M├ëTACARPIENS] hasCinq: false
+ΓÜá∩╕Å [M├ëTACARPIENS] Pas de dialogue - continuons analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì [EARLY] Ant├⌐c├⌐dents d├⌐tect├⌐s: 0 - 
+   ≡ƒöä [V3.3.374] Laterality swap: MD ΓåÆ MND (├ëlongation musculaire de l'├⌐paule (Main Non Dominante))
+Γ£à [EXPERT RULE MATCH - PRIORITY 13600] ├ëlongation musculaire de l'├⌐paule (Main Non Dominante) = [4-10] ΓåÆ 4% (coef: 0.00)
+ΓöÇΓöÇΓöÇ Cas 15 ΓöÇΓöÇΓöÇ
+  Description: ├ëlongation musculaire ├⌐paule ND
+  Input     : "├⌐longation musculaire de l'├⌐paule gauche main non dominante avec diminution de force r├⌐siduelle..."
+  Attendu   : ├⌐longation.*musculaire.*├⌐paule|├⌐longation.*├⌐paule|├⌐paule|rai... (4-12%)
+  Obtenu    : Γ£à ├ëlongation musculaire de l'├⌐paule (Main Non Dominante)
+  Taux      : 4%
+  Type      : proposal
+  Nom OK    : Γ£à | Taux OK: Γ£à
+  Path      : Membres Sup├⌐rieurs > Bras - Fractures et L├⌐sions Musculaires
+
+≡ƒöº localExpertAnalysis V3.3.347 - semantic bar├¿me guard + LLE disambiguation + pseudarthrose naming + t├⌐trapl├⌐gie guard
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): amputation du bras droit main dominante au tiers moyen apr├¿s accident de machine avec moignon bien cicatris├⌐ appareill├⌐ par proth├¿se
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 1 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+≡ƒª┐ [V3.3.229] AMPUTATION MEMBRE D├ëTECT├ëE ΓåÆ Analyse sp├⌐cialis├⌐e (site unique)
+ΓöÇΓöÇΓöÇ Cas 16 ΓöÇΓöÇΓöÇ
+  Description: Amputation bras tiers moyen D
+  Input     : "amputation du bras droit main dominante au tiers moyen apr├¿s accident de machine avec moignon bien c..."
+  Attendu   : amputation.*bras.*tiers.*moyen|amputation.*bras|bras... (65-85%)
+  Obtenu    : Γ£à Amputation du bras (tiers moyen - Main Dominante)
+  Taux      : 77%
+  Type      : proposal
+  Nom OK    : Γ£à | Taux OK: Γ£à
+  Path      : Membres Sup├⌐rieurs > ├ëpaule - Amputation et D├⌐sarticulation
+
+≡ƒöº localExpertAnalysis V3.3.347 - semantic bar├¿me guard + LLE disambiguation + pseudarthrose naming + t├⌐trapl├⌐gie guard
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): fracture de l'ol├⌐crane droit main dominante avec cal osseux court et bonne extension active du coude r├⌐cup├⌐r├⌐e
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 1 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+≡ƒöì DEBUG STEPPAGE D├ëTAILL├ë:
+   - steppageMatch: false
+   - amyotrophieMIMatch: false
+   - fractureL1Match: false
+   - Texte analys├⌐: fracture de l'ol├⌐crane droit main dominante avec cal osseux court et bonne extension active du coude r├⌐cup├⌐r├⌐e
+Γ¥î STEPPAGE NON D├ëTECT├ë - Conditions non remplies
+≡ƒöì DEBUG D├ëVIATION:
+   - deviationMatch: false
+   - mainContext: true
+   - Recherche dans: diviation NON trouv├⌐
+≡ƒöì [V3.3.155] S├⌐quelles d├⌐tect├⌐es: 0 []
+≡ƒöì V3.3.201k: isCumulDetected = false , lesionCount = 1
+≡ƒöì DEBUG M├ëTACARPIENS - Texte normalis├⌐: fracture de l olecrane droit main dominante avec cal osseux court et bonne extension active coude recuperee cassure fissure bris fracture fissure bris fracture cassure bris fracture cassure fissure metacarpe chirurgicale main chirurgicale main metacarpe articulation coude $1 droit $1 gauche coude $1 droit $1 gauche coude articulation coude $1 gauche coude articulation coude $1 droit coude articulation coude $1 droit poignet articulation poignet $1 droit
+≡ƒöì DEBUG M├ëTACARPIENS - hasMetacarpienWord: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSingleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasMultipleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSpecificFingerEarly: false
+≡ƒöì DEBUG M├ëTACARPIENS - isMetacarpienSingleQueryEarly: false
+≡ƒöì V3.3.139: V├⌐rification cumul prioritaire...
+≡ƒöì Query words: fracture, olecrane, droit, main, dominante, avec, cal, osseux, court, bonne
+≡ƒöì Cat├⌐gorie cumul trouv├⌐e: Cumuls de L├⌐sions et Polytraumatismes
+≡ƒöì Entr├⌐es avec searchTerms v├⌐rifi├⌐es: 51, meilleur score: 0.0%
+Γä╣∩╕Å Aucun cumul prioritaire trouv├⌐ (similarit├⌐ < 70%), continue avec analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒª╢ [V3.3.317] hasMTPLuxation: false hasMetaFracture: false hasTSLO: false hasFootContext: false
+≡ƒöì isCumulDetected: false lesionCount: 1
+≡ƒöì [M├ëTACARPIENS] Input brut: fracture de l ol├⌐crane droit main dominante avec cal osseux court et bonne extension active du coude r├⌐cup├⌐r├⌐e
+≡ƒöì [M├ëTACARPIENS] hasMetaWord: false
+≡ƒöì [M├ëTACARPIENS] hasSingleOrPerte: false
+≡ƒöì [M├ëTACARPIENS] hasSpecificFinger: false
+≡ƒöì [M├ëTACARPIENS] hasCinq: false
+ΓÜá∩╕Å [M├ëTACARPIENS] Pas de dialogue - continuons analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì [EARLY] Ant├⌐c├⌐dents d├⌐tect├⌐s: 0 - 
+Γ£à [EXPERT RULE MATCH - PRIORITY 10500] Fracture de l'ol├⌐crane - Cal osseux court, bonne extension (Main Dominante) = [3-5] ΓåÆ 3% (coef: 0.00)
+ΓöÇΓöÇΓöÇ Cas 17 ΓöÇΓöÇΓöÇ
+  Description: Fracture ol├⌐crane cal osseux bonne extension D
+  Input     : "fracture de l'ol├⌐crane droit main dominante avec cal osseux court et bonne extension active du coude..."
+  Attendu   : fracture.*ol[e├⌐]crane.*cal.*osseux|ol[e├⌐]crane|coude... (2-8%)
+  Obtenu    : Γ£à Fracture de l'ol├⌐crane - Cal osseux court, bonne extension (Main Dominante)
+  Taux      : 3%
+  Type      : proposal
+  Nom OK    : Γ£à | Taux OK: Γ£à
+  Path      : Membres Sup├⌐rieurs > Coude - Fractures et Pseudarthroses
+
+≡ƒöº localExpertAnalysis V3.3.347 - semantic bar├¿me guard + LLE disambiguation + pseudarthrose naming + t├⌐trapl├⌐gie guard
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): fracture de l'ol├⌐crane gauche main non dominante avec cal fibreux long et perte totale de l'extension active du coude et atrophie musculaire du bras
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 1 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+≡ƒöì DEBUG STEPPAGE D├ëTAILL├ë:
+   - steppageMatch: false
+   - amyotrophieMIMatch: false
+   - fractureL1Match: false
+   - Texte analys├⌐: fracture de l'ol├⌐crane gauche main non dominante avec cal fibreux long et perte totale de l'extension active du coude et atrophie musculaire du bras
+Γ¥î STEPPAGE NON D├ëTECT├ë - Conditions non remplies
+≡ƒöì DEBUG D├ëVIATION:
+   - deviationMatch: false
+   - mainContext: true
+   - Recherche dans: diviation NON trouv├⌐
+≡ƒöì [V3.3.155] S├⌐quelles d├⌐tect├⌐es: 0 []
+≡ƒöì V3.3.201k: isCumulDetected = false , lesionCount = 1
+≡ƒöì DEBUG M├ëTACARPIENS - Texte normalis├⌐: fracture de l olecrane gauche main non dominante avec cal fibreux long et perte totale de l extension active coude et atrophie musculaire bras amputation ablation section amputation ablation perte cassure fissure bris fracture fissure bris fracture cassure bris fracture cassure fissure metacarpe chirurgicale main chirurgicale main metacarpe articulation coude $1 droit $1 gauche coude $1 droit $1 gauche coude articulation coude $1 gauche coude articulation coude $1 droit coude articulation coude $1 droit poignet articulation poignet $1 droit
+≡ƒöì DEBUG M├ëTACARPIENS - hasMetacarpienWord: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSingleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasMultipleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSpecificFingerEarly: false
+≡ƒöì DEBUG M├ëTACARPIENS - isMetacarpienSingleQueryEarly: false
+≡ƒöì V3.3.139: V├⌐rification cumul prioritaire...
+≡ƒöì Query words: fracture, olecrane, gauche, main, non, dominante, avec, cal, fibreux, long
+≡ƒöì Cat├⌐gorie cumul trouv├⌐e: Cumuls de L├⌐sions et Polytraumatismes
+≡ƒöì Entr├⌐es avec searchTerms v├⌐rifi├⌐es: 51, meilleur score: 0.0%
+Γä╣∩╕Å Aucun cumul prioritaire trouv├⌐ (similarit├⌐ < 70%), continue avec analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒª╢ [V3.3.317] hasMTPLuxation: false hasMetaFracture: false hasTSLO: false hasFootContext: false
+≡ƒöì isCumulDetected: false lesionCount: 1
+≡ƒöì [M├ëTACARPIENS] Input brut: fracture de l ol├⌐crane gauche main non dominante avec cal fibreux long et perte totale de l extension active du coude et atrophie musculaire du bras
+≡ƒöì [M├ëTACARPIENS] hasMetaWord: false
+≡ƒöì [M├ëTACARPIENS] hasSingleOrPerte: true
+≡ƒöì [M├ëTACARPIENS] hasSpecificFinger: false
+≡ƒöì [M├ëTACARPIENS] hasCinq: false
+ΓÜá∩╕Å [M├ëTACARPIENS] Pas de dialogue - continuons analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì [EARLY] Ant├⌐c├⌐dents d├⌐tect├⌐s: 0 - 
+   ≡ƒöä [V3.3.374] Laterality swap: MD ΓåÆ MND (Fracture de l'ol├⌐crane - Cal fibreux long, extension active faible (Main Non Dominante))
+Γ£à [EXPERT RULE MATCH - PRIORITY 10500] Fracture de l'ol├⌐crane - Cal fibreux long, extension active faible (Main Non Dominante) = [6-8] ΓåÆ 7% (coef: 0.50)
+ΓöÇΓöÇΓöÇ Cas 18 ΓöÇΓöÇΓöÇ
+  Description: Fracture ol├⌐crane cal fibreux extension nulle atrophie ND
+  Input     : "fracture de l'ol├⌐crane gauche main non dominante avec cal fibreux long et perte totale de l'extensio..."
+  Attendu   : fracture.*ol[e├⌐]crane.*cal.*fibreux|ol[e├⌐]crane.*atrophie|ol... (12-25%)
+  Obtenu    : Γ£à Fracture de l'ol├⌐crane - Cal fibreux long, extension active faible (Main Non Dominante)
+  Taux      : 7%
+  Type      : proposal
+  Nom OK    : Γ£à | Taux OK: Γ£à
+  Path      : Membres Sup├⌐rieurs > Coude - Fractures et Pseudarthroses
+
+≡ƒöº localExpertAnalysis V3.3.347 - semantic bar├¿me guard + LLE disambiguation + pseudarthrose naming + t├⌐trapl├⌐gie guard
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): limitation de la flexion du coude droit main dominante post-traumatique avec flexion active limit├⌐e ├á 90 degr├⌐s apr├¿s fracture de l'extr├⌐mit├⌐ inf├⌐rieure de l'hum├⌐rus
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 1 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+≡ƒöì DEBUG STEPPAGE D├ëTAILL├ë:
+   - steppageMatch: false
+   - amyotrophieMIMatch: false
+   - fractureL1Match: false
+   - Texte analys├⌐: limitation de la flexion du coude droit main dominante post-traumatique avec flexion active limit├⌐e ├á 90 degr├⌐s apr├¿s fracture de l'extr├⌐mit├⌐ inf├⌐rieure de l'hum├⌐rus
+Γ¥î STEPPAGE NON D├ëTECT├ë - Conditions non remplies
+≡ƒöì DEBUG D├ëVIATION:
+   - deviationMatch: false
+   - mainContext: true
+   - Recherche dans: diviation NON trouv├⌐
+≡ƒöì [V3.3.155] S├⌐quelles d├⌐tect├⌐es: 2 [
+  "Fracture de l'hum├⌐rus/clavicule/omoplate",
+  'Raideur articulaire du coude'
+]
+≡ƒöì V3.3.201k: isCumulDetected = false , lesionCount = 1
+≡ƒºá [V3.3.214] TC check: hasTC=false, hasNeuro=false, hasFocal=false, neuroCount=0
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 1 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+ΓÜá∩╕Å POLYTRAUMATISME D├ëTECT├ë: 2 s├⌐quelle(s)
+≡ƒôÜ TROUV├ë DANS BAR├êME: "Fracture de l'hum├⌐rus/clavicule/omoplate" ΓåÆ "Fracture Clavicule - Bien consolid├⌐e sans raideur (Main Dominante)" (2-3%)
+   ≡ƒôè [V3.3.365] Severity-adjusted bar├¿me: [2-3] ├ù coef 0.50 = 3%
+≡ƒôÜ TROUV├ë DANS BAR├êME: "Raideur articulaire du coude" ΓåÆ "Fracture Clavicule - Bien consolid├⌐e sans raideur (Main Dominante)" (2-3%)
+   ≡ƒôè [V3.3.365] Severity-adjusted bar├¿me: [2-3] ├ù coef 0.50 = 3%
+≡ƒöä REGROUPEMENT PAR SYST├êME: [ 'MEMBRE_SUPERIEUR: 14%' ]
+≡ƒöä [V3.3.357] Reclassification: d├⌐tectedSequelae multiples ΓåÆ M├èME syst├¿me ΓåÆ CAS SIMPLE
+≡ƒº« CALCUL BALTHAZAR (PAR SYST├êME): [ 'MEMBRE_SUPERIEUR: 14%' ]
+≡ƒôè IPP GLOBAL CUMUL├ë: 14%
+ΓöÇΓöÇΓöÇ Cas 19 ΓöÇΓöÇΓöÇ
+  Description: Limitation flexion coude post-fracture D
+  Input     : "limitation de la flexion du coude droit main dominante post-traumatique avec flexion active limit├⌐e ..."
+  Attendu   : limitation.*flexion.*coude|flexion.*coude|raideur.*coude|cou... (3-25%)
+  Obtenu    : Γ£à Membre sup├⌐rieur DOMINANT : Raideur articulaire avec limitation fonctionnelle - Bar├¿me: "Fracture Clavicule - Bien consolid├⌐e sans raideur (Main Dominante)" (2-3%) - IPP 14%
+  Taux      : 14%
+  Type      : proposal
+  Nom OK    : Γ£à | Taux OK: Γ£à
+  Path      : S├⌐quelle > Bar├¿me 1967
+
+≡ƒöº localExpertAnalysis V3.3.347 - semantic bar├¿me guard + LLE disambiguation + pseudarthrose naming + t├⌐trapl├⌐gie guard
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): ankylose du coude gauche main non dominante en pronation avec perte totale de la flexion et extension du coude
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 0 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+≡ƒöì DEBUG STEPPAGE D├ëTAILL├ë:
+   - steppageMatch: false
+   - amyotrophieMIMatch: false
+   - fractureL1Match: false
+   - Texte analys├⌐: ankylose du coude gauche main non dominante en pronation avec perte totale de la flexion et extension du coude
+Γ¥î STEPPAGE NON D├ëTECT├ë - Conditions non remplies
+≡ƒöì DEBUG D├ëVIATION:
+   - deviationMatch: false
+   - mainContext: true
+   - Recherche dans: diviation NON trouv├⌐
+≡ƒöì [V3.3.155] S├⌐quelles d├⌐tect├⌐es: 1 [ 'Ankylose articulaire  en flexion' ]
+≡ƒöì V3.3.201k: isCumulDetected = false , lesionCount = 1
+≡ƒºá [V3.3.214] TC check: hasTC=false, hasNeuro=false, hasFocal=false, neuroCount=0
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 0 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+Γ£à CAS SIMPLE D├ëTECT├ë: 1 s├⌐quelle(s)
+≡ƒôÜ TROUV├ë DANS BAR├êME: "Ankylose articulaire  en flexion" ΓåÆ "Ankylose du poignet - En flexion ou extension (Main Dominante)" (30-40%)
+   ≡ƒôè [V3.3.365] Severity-adjusted bar├¿me: [30-40] ├ù coef 0.50 = 35%
+≡ƒöä REGROUPEMENT PAR SYST├êME: [ 'MEMBRE_INFERIEUR: 35%' ]
+≡ƒº« CALCUL BALTHAZAR (PAR SYST├êME): [ 'MEMBRE_INFERIEUR: 35%' ]
+≡ƒôè IPP GLOBAL CUMUL├ë: 35%
+ΓöÇΓöÇΓöÇ Cas 20 ΓöÇΓöÇΓöÇ
+  Description: Ankylose compl├¿te coude pronation ND
+  Input     : "ankylose du coude gauche main non dominante en pronation avec perte totale de la flexion et extensio..."
+  Attendu   : ankylose.*coude.*pronation|ankylose.*compl[e├¿]te.*coude|anky... (25-50%)
+  Obtenu    : Γ£à Membre inf├⌐rieur (CUISSE/GENOU) : ANKYLOSE ARTICULAIRE (s├⌐quelle majeure invalidante) - ankylose genou (perte totale mobilit├⌐) ΓåÆ IPP 35% justifi├⌐e par perte totale mobilit├⌐ + retentissement fonctionnel global - Bar├¿me: "Ankylose du poignet - En flexion ou extension (Main Dominante)" (30-40%) - IPP 35%
+  Taux      : 35%
+  Type      : proposal
+  Nom OK    : Γ£à | Taux OK: Γ£à
+  Path      : S├⌐quelle > Bar├¿me 1967
+
+≡ƒöº localExpertAnalysis V3.3.347 - semantic bar├¿me guard + LLE disambiguation + pseudarthrose naming + t├⌐trapl├⌐gie guard
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): ├⌐picondylite chronique rebelle du coude droit main dominante r├⌐sistante au traitement conservateur avec douleurs persistantes ├á la pr├⌐hension et ├á l'extension du poignet
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 0 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+≡ƒöì DEBUG STEPPAGE D├ëTAILL├ë:
+   - steppageMatch: false
+   - amyotrophieMIMatch: false
+   - fractureL1Match: false
+   - Texte analys├⌐: ├⌐picondylite chronique rebelle du coude droit main dominante r├⌐sistante au traitement conservateur avec douleurs persistantes ├á la pr├⌐hension et ├á l'extension du poignet
+Γ¥î STEPPAGE NON D├ëTECT├ë - Conditions non remplies
+≡ƒöì DEBUG D├ëVIATION:
+   - deviationMatch: false
+   - mainContext: true
+   - Recherche dans: diviation NON trouv├⌐
+≡ƒöì [V3.3.155] S├⌐quelles d├⌐tect├⌐es: 0 []
+≡ƒöì V3.3.201k: isCumulDetected = false , lesionCount = 1
+≡ƒöì DEBUG M├ëTACARPIENS - Texte normalis├⌐: epicondylite chronique rebelle $1 droit main dominante resistante au traitement conservateur avec douleurs persistantes a prehension et a l extension poignet metacarpe chirurgicale main chirurgicale main metacarpe articulation coude $1 droit $1 gauche coude $1 droit $1 gauche coude articulation coude $1 gauche coude articulation coude $1 droit articulation poignet $1 droit $1 gauche poignet $1 droit $1 gauche poignet articulation poignet $1 gauche poignet articulation poignet $1 droit poignet articulation poignet $1 droit
+≡ƒöì DEBUG M├ëTACARPIENS - hasMetacarpienWord: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSingleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasMultipleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSpecificFingerEarly: false
+≡ƒöì DEBUG M├ëTACARPIENS - isMetacarpienSingleQueryEarly: false
+≡ƒöì V3.3.139: V├⌐rification cumul prioritaire...
+≡ƒöì Query words: epicondylite, chronique, rebelle, coude, droit, main, dominante, resistante, traitement, conservateur
+≡ƒöì Cat├⌐gorie cumul trouv├⌐e: Cumuls de L├⌐sions et Polytraumatismes
+≡ƒöì Entr├⌐es avec searchTerms v├⌐rifi├⌐es: 51, meilleur score: 0.0%
+Γä╣∩╕Å Aucun cumul prioritaire trouv├⌐ (similarit├⌐ < 70%), continue avec analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒª╢ [V3.3.317] hasMTPLuxation: false hasMetaFracture: false hasTSLO: false hasFootContext: false
+≡ƒöì isCumulDetected: false lesionCount: 1
+≡ƒöì [M├ëTACARPIENS] Input brut: ├⌐picondylite chronique rebelle du coude droit main dominante r├⌐sistante au traitement conservateur avec douleurs persistantes ├á la pr├⌐hension et ├á l extension du poignet
+≡ƒöì [M├ëTACARPIENS] hasMetaWord: false
+≡ƒöì [M├ëTACARPIENS] hasSingleOrPerte: false
+≡ƒöì [M├ëTACARPIENS] hasSpecificFinger: false
+≡ƒöì [M├ëTACARPIENS] hasCinq: false
+ΓÜá∩╕Å [M├ëTACARPIENS] Pas de dialogue - continuons analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì [EARLY] Ant├⌐c├⌐dents d├⌐tect├⌐s: 0 - 
+≡ƒöì [DEBUG EXPERT RULE - EARLY TEST]
+Pattern: /contusion.*cerebrale|traumatisme.*crani.*contusion/i
+Context: /perte.*connaissance|frontale|temporale|parietale|breve|courte|surveillance.*neurologique/i
+NegativeContext: /spondylo|listthesis|glissement.*vertebral/i
+CleanText: "epicondylite chronique rebelle du coude droit main dominante resistante au traitement conservateur avec douleurs persistantes a la prehension et a l extension du poignet"
+patternMatchClean: false, contextMatchClean: false
+negContextMatchClean: false, negContextMatchWorking: false
+matchClean: false, matchWorking: false
+≡ƒöì [DEBUG EXPERT RULE - EARLY TEST]
+Pattern: /spondylolisthesis|spondylo.*listhesis|listthesis|glissement\s+vertebral/i
+Context: /lombaire|L\d|S\d|rachis|traumatisme|post-traumatique/i
+NegativeContext: /contusion.*cerebrale|perte.*connaissance|mandibule|genou|polytraumatisme|chute.*echafaudage/i
+CleanText: "epicondylite chronique rebelle du coude droit main dominante resistante au traitement conservateur avec douleurs persistantes a la prehension et a l extension du poignet"
+patternMatchClean: false, contextMatchClean: false
+negContextMatchClean: false, negContextMatchWorking: false
+matchClean: false, matchWorking: false
+   ≡ƒôë V3.3.209: Mod├⌐ration expert rule "├ëpicondylite ou ├ëpitrochl├⌐ite chronique rebelle (Main Dominante)" - s├⌐v├⌐rit├⌐ LOW d├⌐tect├⌐e
+Γ£à [EXPERT RULE MATCH - PRIORITY 91] ├ëpicondylite ou ├ëpitrochl├⌐ite chronique rebelle (Main Dominante) = [5-15] ΓåÆ 9% (coef: 0.35, LOW)
+ΓöÇΓöÇΓöÇ Cas 21 ΓöÇΓöÇΓöÇ
+  Description: ├ëpicondylite chronique rebelle D
+  Input     : "├⌐picondylite chronique rebelle du coude droit main dominante r├⌐sistante au traitement conservateur a..."
+  Attendu   : [e├⌐]picondylite|[e├⌐]pitrochl[e├⌐]ite|coude... (4-18%)
+  Obtenu    : Γ£à ├ëpicondylite ou ├ëpitrochl├⌐ite chronique rebelle (Main Dominante)
+  Taux      : 9%
+  Type      : proposal
+  Nom OK    : Γ£à | Taux OK: Γ£à
+  Path      : Membres Sup├⌐rieurs > Coude - L├⌐sions Diverses
+
+≡ƒöº localExpertAnalysis V3.3.347 - semantic bar├¿me guard + LLE disambiguation + pseudarthrose naming + t├⌐trapl├⌐gie guard
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): pseudarthrose du coude droit main dominante coude ballant avec mobilit├⌐ anormale du coude
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 0 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+≡ƒöì DEBUG STEPPAGE D├ëTAILL├ë:
+   - steppageMatch: false
+   - amyotrophieMIMatch: false
+   - fractureL1Match: false
+   - Texte analys├⌐: pseudarthrose du coude droit main dominante coude ballant avec mobilit├⌐ anormale du coude
+Γ¥î STEPPAGE NON D├ëTECT├ë - Conditions non remplies
+≡ƒöì DEBUG D├ëVIATION:
+   - deviationMatch: false
+   - mainContext: true
+   - Recherche dans: diviation NON trouv├⌐
+≡ƒöì [V3.3.155] S├⌐quelles d├⌐tect├⌐es: 0 []
+≡ƒöì V3.3.201k: isCumulDetected = false , lesionCount = 1
+≡ƒöì DEBUG M├ëTACARPIENS - Texte normalis├⌐: pseudarthrose $1 droit main dominante coude ballant avec mobilite anormale coude fausse articulation non consolidation absence de consolidation pseudarthrose non consolidation absence de consolidation pseudarthrose fausse articulation absence de consolidation pseudarthrose fausse articulation non consolidation arthropathie degenerescence articulaire usure articulaire arthrose degenerescence articulaire usure articulaire arthrose arthropathie usure articulaire arthrose arthropathie degenerescence articulaire metacarpe chirurgicale main chirurgicale main metacarpe articulation coude $1 droit $1 gauche coude $1 droit $1 gauche coude articulation coude $1 gauche coude articulation coude $1 droit poignet articulation poignet $1 droit
+≡ƒöì DEBUG M├ëTACARPIENS - hasMetacarpienWord: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSingleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasMultipleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSpecificFingerEarly: false
+≡ƒöì DEBUG M├ëTACARPIENS - isMetacarpienSingleQueryEarly: false
+≡ƒöì V3.3.139: V├⌐rification cumul prioritaire...
+≡ƒöì Query words: pseudarthrose, coude, droit, main, dominante, coude, ballant, avec, mobilite, anormale
+≡ƒöì Cat├⌐gorie cumul trouv├⌐e: Cumuls de L├⌐sions et Polytraumatismes
+≡ƒöì Entr├⌐es avec searchTerms v├⌐rifi├⌐es: 51, meilleur score: 0.0%
+Γä╣∩╕Å Aucun cumul prioritaire trouv├⌐ (similarit├⌐ < 70%), continue avec analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒª╢ [V3.3.317] hasMTPLuxation: false hasMetaFracture: false hasTSLO: false hasFootContext: false
+≡ƒöì isCumulDetected: false lesionCount: 1
+≡ƒöì [M├ëTACARPIENS] Input brut: pseudarthrose du coude droit main dominante coude ballant avec mobilit├⌐ anormale du coude
+≡ƒöì [M├ëTACARPIENS] hasMetaWord: false
+≡ƒöì [M├ëTACARPIENS] hasSingleOrPerte: false
+≡ƒöì [M├ëTACARPIENS] hasSpecificFinger: false
+≡ƒöì [M├ëTACARPIENS] hasCinq: false
+ΓÜá∩╕Å [M├ëTACARPIENS] Pas de dialogue - continuons analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì [EARLY] Ant├⌐c├⌐dents d├⌐tect├⌐s: 0 - 
+≡ƒöì [DEBUG EXPERT RULE - EARLY TEST]
+Pattern: /contusion.*cerebrale|traumatisme.*crani.*contusion/i
+Context: /perte.*connaissance|frontale|temporale|parietale|breve|courte|surveillance.*neurologique/i
+NegativeContext: /spondylo|listthesis|glissement.*vertebral/i
+CleanText: "pseudarthrose du coude droit main dominante coude ballant avec mobilite anormale du coude"
+patternMatchClean: false, contextMatchClean: false
+negContextMatchClean: false, negContextMatchWorking: false
+matchClean: false, matchWorking: false
+≡ƒöì [DEBUG EXPERT RULE - EARLY TEST]
+Pattern: /spondylolisthesis|spondylo.*listhesis|listthesis|glissement\s+vertebral/i
+Context: /lombaire|L\d|S\d|rachis|traumatisme|post-traumatique/i
+NegativeContext: /contusion.*cerebrale|perte.*connaissance|mandibule|genou|polytraumatisme|chute.*echafaudage/i
+CleanText: "pseudarthrose du coude droit main dominante coude ballant avec mobilite anormale du coude"
+patternMatchClean: false, contextMatchClean: false
+negContextMatchClean: false, negContextMatchWorking: false
+matchClean: false, matchWorking: false
+≡ƒÄ» TOP 50 R├ëSULTATS: [
+  {
+    name: 'Pseudarthrose du scapho├»de carpien (Main Non Dominante)',
+    score: 1574,
+    path: 'Membres Sup├⌐rieurs > Poignet - Fractures'
+  },
+  {
+    name: 'Pseudarthrose coude - Mobile (coude ballant) (Main Non Dominante)',
+    score: 1454,
+    path: 'Membres Sup├⌐rieurs > Coude - Fractures et Pseudarthroses'
+  },
+  {
+    name: 'Pseudarthrose (├⌐paule ballante) (Main Non Dominante)',
+    score: 1249,
+    path: 'Membres Sup├⌐rieurs > ├ëpaule - L├⌐sions Diverses'
+  },
+  {
+    name: 'Pseudarthrose du scapho├»de carpien (Main Dominante)',
+    score: 1063,
+    path: 'Membres Sup├⌐rieurs > Poignet - Fractures'
+  },
+  {
+    name: 'Fracture scapho├»de sur arthrose carpe',
+    score: 1022,
+    path: '├ëtats Ant├⌐rieurs et Aggravation de Pathologies Pr├⌐existantes > Aggravation Main et Poignet sur ├ëtat Ant├⌐rieur'
+  },
+  {
+    name: 'Perte des cinq m├⌐tacarpiens (Main Non Dominante)',
+    score: 975.0999999999999,
+    path: 'Membres Sup├⌐rieurs > Main - Amputations'
+  },
+  {
+    name: 'Pseudarthrose coude - Mobile (coude ballant) (Main Dominante)',
+    score: 943,
+    path: 'Membres Sup├⌐rieurs > Coude - Fractures et Pseudarthroses'
+  },
+  {
+    name: 'Raideur trap├⌐zo-m├⌐tacarpienne du pouce (Main Non Dominante)',
+    score: 824.5999999999999,
+    path: 'Membres Sup├⌐rieurs > Main - Raideurs et Ankyloses'
+  },
+  {
+    name: 'Fracture du scapho├»de carpien - Avec raideur simple (Main Non Dominante)',
+    score: 814.0999999999999,
+    path: 'Membres Sup├⌐rieurs > Poignet - Fractures'
+  },
+  {
+    name: 'Pseudarthrose (├⌐paule ballante) (Main Dominante)',
+    score: 738,
+    path: 'Membres Sup├⌐rieurs > ├ëpaule - L├⌐sions Diverses'
+  },
+  {
+    name: 'Perte de la pr├⌐hension fine (atteinte motrice) (Main Non Dominante)',
+    score: 695.0999999999999,
+    path: 'Membres Sup├⌐rieurs > Main - Raideurs et Ankyloses'
+  },
+  {
+    name: 'Perte de la prise sph├⌐rique (Main Non Dominante)',
+    score: 695.0999999999999,
+    path: 'Membres Sup├⌐rieurs > Main - Raideurs et Ankyloses'
+  },
+  {
+    name: 'Perte de la pr├⌐hension grossi├¿re (Main Non Dominante)',
+    score: 695.0999999999999,
+    path: 'Membres Sup├⌐rieurs > Main - Raideurs et Ankyloses'
+  },
+  {
+    name: 'D├⌐sarticulation du coude (Main Non Dominante)',
+    score: 660.0999999999999,
+    path: 'Membres Sup├⌐rieurs > Coude - D├⌐sarticulation'
+  },
+  {
+    name: 'Limitation de la flexion du coude (Main Non Dominante)',
+    score: 660.0999999999999,
+    path: 'Membres Sup├⌐rieurs > Coude - Raideurs et Ankyloses'
+  },
+  {
+    name: "Limitation de l'extension du coude (Main Non Dominante)",
+    score: 660.0999999999999,
+    path: 'Membres Sup├⌐rieurs > Coude - Raideurs et Ankyloses'
+  },
+  {
+    name: 'Arthrod├¿se du coude en pronation (Main Non Dominante)',
+    score: 660.0999999999999,
+    path: 'Membres Sup├⌐rieurs > Coude - Raideurs et Ankyloses'
+  },
+  {
+    name: 'Arthrod├¿se du coude en position neutre (Main Non Dominante)',
+    score: 660.0999999999999,
+    path: 'Membres Sup├⌐rieurs > Coude - Raideurs et Ankyloses'
+  },
+  {
+    name: 'Arthrod├¿se du coude en supination (Main Non Dominante)',
+    score: 660.0999999999999,
+    path: 'Membres Sup├⌐rieurs > Coude - Raideurs et Ankyloses'
+  },
+  {
+    name: 'Instabilit├⌐ chronique du coude post-traumatique (Main Non Dominante)',
+    score: 660.0999999999999,
+    path: 'Membres Sup├⌐rieurs > Coude - L├⌐sions Diverses'
+  },
+  {
+    name: 'Perte des cinq m├⌐tacarpiens (Main Dominante)',
+    score: 617.4,
+    path: 'Membres Sup├⌐rieurs > Main - Amputations'
+  },
+  {
+    name: 'Limitation de la pronation (Main Non Dominante)',
+    score: 604.0999999999999,
+    path: 'Membres Sup├⌐rieurs > Coude - Raideurs et Ankyloses'
+  },
+  {
+    name: 'Limitation de la supination (Main Non Dominante)',
+    score: 604.0999999999999,
+    path: 'Membres Sup├⌐rieurs > Coude - Raideurs et Ankyloses'
+  },
+  {
+    name: 'Abolition de la prono-supination (Main Non Dominante)',
+    score: 604.0999999999999,
+    path: 'Membres Sup├⌐rieurs > Coude - Raideurs et Ankyloses'
+  },
+  {
+    name: 'Fracture du cotyle avec arthrose post-traumatique',
+    score: 600.12,
+    path: 'S├⌐quelles du Rachis, du Bassin et de la Moelle ├ëpini├¿re > Bassin - L├⌐sions Osseuses'
+  },
+  {
+    name: 'Luxation ├⌐paule sur omarthrose pr├⌐existante',
+    score: 600.12,
+    path: '├ëtats Ant├⌐rieurs et Aggravation de Pathologies Pr├⌐existantes > Aggravation ├ëpaule sur ├ëtat Ant├⌐rieur'
+  },
+  {
+    name: "Luxation r├⌐cidivante de l'├⌐paule (Main Non Dominante)",
+    score: 586.5999999999999,
+    path: 'Membres Sup├⌐rieurs > ├ëpaule - L├⌐sions Diverses'
+  },
+  {
+    name: 'Perte du 1er m├⌐tacarpien (Pouce)',
+    score: 553.6999999999999,
+    path: 'Membres Sup├⌐rieurs > Main - Amputations'
+  },
+  {
+    name: 'Perte du 2e m├⌐tacarpien (Index)',
+    score: 553.6999999999999,
+    path: 'Membres Sup├⌐rieurs > Main - Amputations'
+  },
+  {
+    name: 'Perte du 3e m├⌐tacarpien (Majeur)',
+    score: 553.6999999999999,
+    path: 'Membres Sup├⌐rieurs > Main - Amputations'
+  },
+  {
+    name: 'Perte du 4e m├⌐tacarpien (Annulaire)',
+    score: 553.6999999999999,
+    path: 'Membres Sup├⌐rieurs > Main - Amputations'
+  },
+  {
+    name: 'Perte du 5e m├⌐tacarpien (Auriculaire)',
+    score: 553.6999999999999,
+    path: 'Membres Sup├⌐rieurs > Main - Amputations'
+  },
+  {
+    name: 'Amputation de la main (Main Non Dominante)',
+    score: 544.5999999999999,
+    path: 'Membres Sup├⌐rieurs > Main - Amputations'
+  },
+  {
+    name: 'Main bote, creuse, etc. (Main Non Dominante)',
+    score: 544.5999999999999,
+    path: 'Membres Sup├⌐rieurs > Main - Raideurs et Ankyloses'
+  },
+  {
+    name: 'Troubles de la sensibilit├⌐ de la main ΓÇö g├¬ne mod├⌐r├⌐e (Main Non Dominante)',
+    score: 544.5999999999999,
+    path: 'Membres Sup├⌐rieurs > Main - Raideurs et Ankyloses'
+  },
+  {
+    name: 'Troubles de la sensibilit├⌐ de la main ΓÇö g├¬ne importante (Main Non Dominante)',
+    score: 544.5999999999999,
+    path: 'Membres Sup├⌐rieurs > Main - Raideurs et Ankyloses'
+  },
+  {
+    name: 'L├⌐sion SLAP (Superior Labrum from Anterior to Posterior) chronique (Main Non Dominante)',
+    score: 541.0999999999999,
+    path: 'Membres Sup├⌐rieurs > ├ëpaule - L├⌐sions Diverses'
+  },
+  {
+    name: 'Rupture du biceps compl├¿te (Main Non Dominante)',
+    score: 541.0999999999999,
+    path: 'Membres Sup├⌐rieurs > Bras - Fractures et L├⌐sions Musculaires'
+  },
+  {
+    name: "Raideur de l'├⌐paule (propulsion, abduction, rotation) (Main Non Dominante)",
+    score: 516.6,
+    path: 'Membres Sup├⌐rieurs > ├ëpaule - Raideurs et Ankyloses'
+  },
+  {
+    name: 'P├⌐riarthrite chronique douloureuse - limitation mod├⌐r├⌐e (Main Non Dominante)',
+    score: 516.6,
+    path: 'Membres Sup├⌐rieurs > ├ëpaule - L├⌐sions Diverses'
+  },
+  {
+    name: 'Amputation du bras au tiers moyen ou inf├⌐rieur (Main Non Dominante)',
+    score: 516.6,
+    path: 'Membres Sup├⌐rieurs > Bras - Amputations'
+  },
+  {
+    name: 'Amputation du bras au tiers sup├⌐rieur (Main Non Dominante)',
+    score: 516.6,
+    path: 'Membres Sup├⌐rieurs > Bras - Amputations'
+  },
+  {
+    name: "Amputation de l'avant-bras (Main Non Dominante)",
+    score: 516.6,
+    path: 'Membres Sup├⌐rieurs > Avant-bras - Amputations'
+  },
+  {
+    name: 'Pseudarthrose serr├⌐e de la branche ascendante',
+    score: 512,
+    path: 'S├⌐quelles Maxillo-Faciales, ORL et Ophtalmologiques > Face - M├óchoires'
+  },
+  {
+    name: 'Pseudarthrose l├óche de la branche ascendante',
+    score: 512,
+    path: 'S├⌐quelles Maxillo-Faciales, ORL et Ophtalmologiques > Face - M├óchoires'
+  },
+  {
+    name: 'Pseudarthrose serr├⌐e de la branche horizontale',
+    score: 512,
+    path: 'S├⌐quelles Maxillo-Faciales, ORL et Ophtalmologiques > Face - M├óchoires'
+  },
+  {
+    name: 'Pseudarthrose l├óche de la branche horizontale',
+    score: 512,
+    path: 'S├⌐quelles Maxillo-Faciales, ORL et Ophtalmologiques > Face - M├óchoires'
+  },
+  {
+    name: 'Pseudarthrose serr├⌐e de la r├⌐gion symphysaire',
+    score: 512,
+    path: 'S├⌐quelles Maxillo-Faciales, ORL et Ophtalmologiques > Face - M├óchoires'
+  },
+  {
+    name: 'Pseudarthrose coude - Avec ankylose (Main Non Dominante)',
+    score: 509.54,
+    path: 'Membres Sup├⌐rieurs > Coude - Fractures et Pseudarthroses'
+  },
+  {
+    name: 'Pseudarthrose coude - Avec ankylose (Main Dominante)',
+    score: 509.43,
+    path: 'Membres Sup├⌐rieurs > Coude - Fractures et Pseudarthroses'
+  }
+]
+≡ƒöì [detectRequestType] D├⌐but analyse...
+≡ƒôè [detectRequestType] R├⌐sultat: attribution
+≡ƒöì [determineSeverity] Text: pseudarthrose du coude droit main dominante coude ballant avec mobilit├⌐ anormale du coude
+≡ƒöì [determineSeverity] Faible signs: []
+≡ƒöì [determineSeverity] High signs: [ 'pseudarthrose' ]
+ΓöÇΓöÇΓöÇ Cas 22 ΓöÇΓöÇΓöÇ
+  Description: Pseudarthrose coude ballant D
+  Input     : "pseudarthrose du coude droit main dominante coude ballant avec mobilit├⌐ anormale du coude..."
+  Attendu   : pseudarthrose.*coude|coude.*ballant|coude|pseudarthrose|scap... (8-55%)
+  Obtenu    : Γ£à Pseudarthrose du scapho├»de carpien (Main Non Dominante)
+  Taux      : 15%
+  Type      : proposal
+  Nom OK    : Γ£à | Taux OK: Γ£à
+  Path      : Membres Sup├⌐rieurs > Poignet - Fractures
+
+≡ƒöº localExpertAnalysis V3.3.347 - semantic bar├¿me guard + LLE disambiguation + pseudarthrose naming + t├⌐trapl├⌐gie guard
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): cicatrices du coude droit main dominante entravant l'extension fix├⌐e ├á 90 degr├⌐s
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 0 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+≡ƒöì DEBUG STEPPAGE D├ëTAILL├ë:
+   - steppageMatch: false
+   - amyotrophieMIMatch: false
+   - fractureL1Match: false
+   - Texte analys├⌐: cicatrices du coude droit main dominante entravant l'extension fix├⌐e ├á 90 degr├⌐s
+Γ¥î STEPPAGE NON D├ëTECT├ë - Conditions non remplies
+≡ƒöì DEBUG D├ëVIATION:
+   - deviationMatch: false
+   - mainContext: true
+   - Recherche dans: diviation NON trouv├⌐
+≡ƒöì [V3.3.155] S├⌐quelles d├⌐tect├⌐es: 0 []
+≡ƒöì V3.3.201k: isCumulDetected = false , lesionCount = 1
+≡ƒöì DEBUG M├ëTACARPIENS - Texte normalis├⌐: cicatrices $1 droit main dominante entravant l extension fixee a 90 degres metacarpe chirurgicale main chirurgicale main metacarpe articulation coude $1 droit $1 gauche coude $1 droit $1 gauche coude articulation coude $1 gauche coude articulation coude $1 droit poignet articulation poignet $1 droit
+≡ƒöì DEBUG M├ëTACARPIENS - hasMetacarpienWord: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSingleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasMultipleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSpecificFingerEarly: false
+≡ƒöì DEBUG M├ëTACARPIENS - isMetacarpienSingleQueryEarly: false
+≡ƒöì V3.3.139: V├⌐rification cumul prioritaire...
+≡ƒöì Query words: cicatrices, coude, droit, main, dominante, entravant, extension, fixee, degres
+≡ƒöì Cat├⌐gorie cumul trouv├⌐e: Cumuls de L├⌐sions et Polytraumatismes
+≡ƒöì Entr├⌐es avec searchTerms v├⌐rifi├⌐es: 51, meilleur score: 0.0%
+Γä╣∩╕Å Aucun cumul prioritaire trouv├⌐ (similarit├⌐ < 70%), continue avec analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒª╢ [V3.3.317] hasMTPLuxation: false hasMetaFracture: false hasTSLO: false hasFootContext: false
+≡ƒöì isCumulDetected: false lesionCount: 1
+≡ƒöì [M├ëTACARPIENS] Input brut: cicatrices du coude droit main dominante entravant l extension fix├⌐e ├á 90 degr├⌐s
+≡ƒöì [M├ëTACARPIENS] hasMetaWord: false
+≡ƒöì [M├ëTACARPIENS] hasSingleOrPerte: false
+≡ƒöì [M├ëTACARPIENS] hasSpecificFinger: false
+≡ƒöì [M├ëTACARPIENS] hasCinq: false
+ΓÜá∩╕Å [M├ëTACARPIENS] Pas de dialogue - continuons analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì [EARLY] Ant├⌐c├⌐dents d├⌐tect├⌐s: 0 - 
+≡ƒöì [DEBUG EXPERT RULE - EARLY TEST]
+Pattern: /contusion.*cerebrale|traumatisme.*crani.*contusion/i
+Context: /perte.*connaissance|frontale|temporale|parietale|breve|courte|surveillance.*neurologique/i
+NegativeContext: /spondylo|listthesis|glissement.*vertebral/i
+CleanText: "cicatrices du coude droit main dominante entravant l extension fixee a 90 degres"
+patternMatchClean: false, contextMatchClean: false
+negContextMatchClean: false, negContextMatchWorking: false
+matchClean: false, matchWorking: false
+≡ƒöì [DEBUG EXPERT RULE - EARLY TEST]
+Pattern: /spondylolisthesis|spondylo.*listhesis|listthesis|glissement\s+vertebral/i
+Context: /lombaire|L\d|S\d|rachis|traumatisme|post-traumatique/i
+NegativeContext: /contusion.*cerebrale|perte.*connaissance|mandibule|genou|polytraumatisme|chute.*echafaudage/i
+CleanText: "cicatrices du coude droit main dominante entravant l extension fixee a 90 degres"
+patternMatchClean: false, contextMatchClean: false
+negContextMatchClean: false, negContextMatchWorking: false
+matchClean: false, matchWorking: false
+≡ƒÄ» TOP 50 R├ëSULTATS: [
+  {
+    name: 'Fracture du scapho├»de carpien - Avec raideur simple (Main Non Dominante)',
+    score: 2574,
+    path: 'Membres Sup├⌐rieurs > Poignet - Fractures'
+  },
+  {
+    name: 'Instabilit├⌐ chronique du coude post-traumatique (Main Non Dominante)',
+    score: 2454,
+    path: 'Membres Sup├⌐rieurs > Coude - L├⌐sions Diverses'
+  },
+  {
+    name: 'Hygroma chronique du coude (Main Non Dominante)',
+    score: 2444,
+    path: 'Membres Sup├⌐rieurs > Coude - L├⌐sions Diverses'
+  },
+  {
+    name: 'Instabilit├⌐ chronique du coude post-traumatique (Main Dominante)',
+    score: 2443,
+    path: 'Membres Sup├⌐rieurs > Coude - L├⌐sions Diverses'
+  },
+  {
+    name: 'Hygroma chronique du coude (Main Dominante)',
+    score: 2433,
+    path: 'Membres Sup├⌐rieurs > Coude - L├⌐sions Diverses'
+  },
+  {
+    name: 'Syndrome du canal carpien post-traumatique (Main Non Dominante)',
+    score: 2399,
+    path: 'S├⌐quelles des Nerfs Cr├óniens et P├⌐riph├⌐riques > Nerfs P├⌐riph├⌐riques - Membre Sup├⌐rieur'
+  },
+  {
+    name: 'P├⌐riarthrite chronique douloureuse - limitation mod├⌐r├⌐e (Main Non Dominante)',
+    score: 2249,
+    path: 'Membres Sup├⌐rieurs > ├ëpaule - L├⌐sions Diverses'
+  },
+  {
+    name: 'P├⌐riarthrite chronique douloureuse - abolition des mouvements et atrophie (Main Non Dominante)',
+    score: 2249,
+    path: 'Membres Sup├⌐rieurs > ├ëpaule - L├⌐sions Diverses'
+  },
+  {
+    name: "Luxation r├⌐cidivante de l'├⌐paule (Main Non Dominante)",
+    score: 2249,
+    path: 'Membres Sup├⌐rieurs > ├ëpaule - L├⌐sions Diverses'
+  },
+  {
+    name: 'Capsulite r├⌐tractile post-traumatique (├⌐paule gel├⌐e) (Main Non Dominante)',
+    score: 2249,
+    path: 'Membres Sup├⌐rieurs > ├ëpaule - L├⌐sions Diverses'
+  },
+  {
+    name: 'Rupture du triceps totale (Main Non Dominante)',
+    score: 2249,
+    path: 'Membres Sup├⌐rieurs > Bras - Fractures et L├⌐sions Musculaires'
+  },
+  {
+    name: 'Fracture du scapho├»de carpien - Avec raideur simple (Main Dominante)',
+    score: 1063,
+    path: 'Membres Sup├⌐rieurs > Poignet - Fractures'
+  },
+  {
+    name: 'Syndrome du canal carpien post-traumatique (Main Dominante)',
+    score: 888,
+    path: 'S├⌐quelles des Nerfs Cr├óniens et P├⌐riph├⌐riques > Nerfs P├⌐riph├⌐riques - Membre Sup├⌐rieur'
+  },
+  {
+    name: 'P├⌐riarthrite chronique douloureuse - limitation mod├⌐r├⌐e (Main Dominante)',
+    score: 738,
+    path: 'Membres Sup├⌐rieurs > ├ëpaule - L├⌐sions Diverses'
+  },
+  {
+    name: 'P├⌐riarthrite chronique douloureuse - abolition des mouvements et atrophie (Main Dominante)',
+    score: 738,
+    path: 'Membres Sup├⌐rieurs > ├ëpaule - L├⌐sions Diverses'
+  },
+  {
+    name: "Luxation r├⌐cidivante de l'├⌐paule (Main Dominante)",
+    score: 738,
+    path: 'Membres Sup├⌐rieurs > ├ëpaule - L├⌐sions Diverses'
+  },
+  {
+    name: 'Capsulite r├⌐tractile post-traumatique (├⌐paule gel├⌐e) (Main Dominante)',
+    score: 738,
+    path: 'Membres Sup├⌐rieurs > ├ëpaule - L├⌐sions Diverses'
+  },
+  {
+    name: 'Rupture du triceps totale (Main Dominante)',
+    score: 738,
+    path: 'Membres Sup├⌐rieurs > Bras - Fractures et L├⌐sions Musculaires'
+  },
+  {
+    name: 'Syndrome canal carpien sur t├⌐nosynovite ancienne',
+    score: 422,
+    path: '├ëtats Ant├⌐rieurs et Aggravation de Pathologies Pr├⌐existantes > Aggravation Main et Poignet sur ├ëtat Ant├⌐rieur'
+  },
+  {
+    name: 'Fracture scapho├»de sur arthrose carpe',
+    score: 412,
+    path: '├ëtats Ant├⌐rieurs et Aggravation de Pathologies Pr├⌐existantes > Aggravation Main et Poignet sur ├ëtat Ant├⌐rieur'
+  },
+  {
+    name: 'Syndrome du canal carpien professionnel bilat├⌐ral',
+    score: 297,
+    path: 'Maladies Professionnelles Indemnisables > Troubles Musculo-Squelettiques (TMS) Professionnels'
+  },
+  {
+    name: 'Polytraumatisme membre sup├⌐rieur gauche complet',
+    score: 267,
+    path: 'Cumuls de L├⌐sions et Polytraumatismes > Polytraumatismes - Membres Multiples'
+  },
+  {
+    name: 'Syndrome myofascial cervical post-traumatique (contractures chroniques)',
+    score: 212,
+    path: 'S├⌐quelles du Rachis, du Bassin et de la Moelle ├ëpini├¿re > Rachis'
+  },
+  {
+    name: 'My├⌐lopathie cervicarthrosique post-traumatique',
+    score: 212,
+    path: 'S├⌐quelles du Rachis, du Bassin et de la Moelle ├ëpini├¿re > Rachis'
+  },
+  {
+    name: 'Atteinte du Nerf spinal externe (XI) - Atrophie du trap├¿ze et sterno-cl├⌐ido-masto├»dien',
+    score: 212,
+    path: 'S├⌐quelles des Nerfs Cr├óniens et P├⌐riph├⌐riques > Nerfs Cr├óniens'
+  },
+  {
+    name: 'Algodystrophie (SDRC de type I) - Forme majeure s├⌐quellaire du membre sup├⌐rieur',
+    score: 182,
+    path: 'Algodystrophie et Syndromes Douloureux R├⌐gionaux Complexes > Syndrome Douloureux R├⌐gional Complexe (SDRC)'
+  },
+  {
+    name: 'Hernie inguinale r├⌐ductible bien maintenue',
+    score: 177,
+    path: 'S├⌐quelles Thoraciques, Abdominales, Pelviennes et Cardio-vasculaires > Abdomen - Paroi et Hernies'
+  },
+  {
+    name: 'Polytraumatisme main + 2 membres inf├⌐rieurs',
+    score: 177,
+    path: 'Cumuls de L├⌐sions et Polytraumatismes > Polytraumatismes - Membres Multiples'
+  },
+  {
+    name: 'Syndrome du gr├¬le court post-traumatique',
+    score: 97,
+    path: 'S├⌐quelles Thoraciques, Abdominales, Pelviennes et Cardio-vasculaires > Abdomen - Tube Digestif et Organes'
+  },
+  {
+    name: 'Algodystrophie (SDRC de type I) - Forme mineure r├⌐solutive',
+    score: 97,
+    path: 'Algodystrophie et Syndromes Douloureux R├⌐gionaux Complexes > Syndrome Douloureux R├⌐gional Complexe (SDRC)'
+  },
+  {
+    name: 'Ecz├⌐ma de contact professionnel chronique',
+    score: 97,
+    path: 'Maladies Professionnelles Indemnisables > Maladies Cutan├⌐es Professionnelles'
+  },
+  {
+    name: 'Vitiligo post-traumatique ├⌐tendu',
+    score: 97,
+    path: 'S├⌐quelles Dermatologiques ├ëtendues > Troubles Pigmentaires Post-Traumatiques'
+  },
+  {
+    name: 'Raideur poignet + fracture scapho├»de (cumul)',
+    score: 37.7,
+    path: 'Cumuls de L├⌐sions et Polytraumatismes > Cumuls Simples - M├¬me Membre'
+  }
+]
+≡ƒöì [detectRequestType] D├⌐but analyse...
+≡ƒôè [detectRequestType] R├⌐sultat: attribution
+≡ƒöì [determineSeverity] Text: cicatrices du coude droit main dominante entravant l'extension fix├⌐e ├á 90 degr├⌐s
+≡ƒöì [determineSeverity] Faible signs: []
+≡ƒöì [determineSeverity] High signs: []
+ΓöÇΓöÇΓöÇ Cas 23 ΓöÇΓöÇΓöÇ
+  Description: Cicatrices coude entravant extension ├á 90┬░ D
+  Input     : "cicatrices du coude droit main dominante entravant l'extension fix├⌐e ├á 90 degr├⌐s..."
+  Attendu   : cicatrices.*coude|coude.*extension|coude|extension... (10-25%)
+  Obtenu    : Γ£à Fracture du scapho├»de carpien - Avec raideur simple (Main Non Dominante)
+  Taux      : 6%
+  Type      : proposal
+  Nom OK    : Γ£à | Taux OK: Γ£à
+  Path      : Membres Sup├⌐rieurs > Poignet - Fractures
+
+≡ƒöº localExpertAnalysis V3.3.347 - semantic bar├¿me guard + LLE disambiguation + pseudarthrose naming + t├⌐trapl├⌐gie guard
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): s├⌐quelles de proth├¿se totale du coude droit main dominante avec raideur r├⌐siduelle limitation de la flexion ├á 100 degr├⌐s et douleurs m├⌐caniques persistantes
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 0 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+≡ƒöì DEBUG STEPPAGE D├ëTAILL├ë:
+   - steppageMatch: false
+   - amyotrophieMIMatch: false
+   - fractureL1Match: false
+   - Texte analys├⌐: s├⌐quelles de proth├¿se totale du coude droit main dominante avec raideur r├⌐siduelle limitation de la flexion ├á 100 degr├⌐s et douleurs m├⌐caniques persistantes
+Γ¥î STEPPAGE NON D├ëTECT├ë - Conditions non remplies
+≡ƒöì DEBUG D├ëVIATION:
+   - deviationMatch: false
+   - mainContext: true
+   - Recherche dans: diviation NON trouv├⌐
+≡ƒöì [V3.3.155] S├⌐quelles d├⌐tect├⌐es: 2 [
+  "Algies m├⌐caniques persistantes (├á l'effort)",
+  'Raideur articulaire du coude'
+]
+≡ƒöì V3.3.201k: isCumulDetected = false , lesionCount = 1
+≡ƒºá [V3.3.214] TC check: hasTC=false, hasNeuro=false, hasFocal=false, neuroCount=0
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 0 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+≡ƒª┤ [V3.3.374] Proth├¿se articulaire ΓåÆ Bypass vers expert rules
+≡ƒöì DEBUG M├ëTACARPIENS - Texte normalis├⌐: sequelles de prothese totale $1 droit main dominante raideur residuelle limitation flexion a 100 degres et douleurs mecaniques persistantes limitation restriction enraidissement raideur restriction enraidissement raideur limitation enraidissement raideur limitation restriction metacarpe chirurgicale main chirurgicale main metacarpe articulation coude $1 droit $1 gauche coude $1 droit $1 gauche coude articulation coude $1 gauche coude articulation coude $1 droit poignet articulation poignet $1 droit
+≡ƒöì DEBUG M├ëTACARPIENS - hasMetacarpienWord: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSingleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasMultipleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSpecificFingerEarly: false
+≡ƒöì DEBUG M├ëTACARPIENS - isMetacarpienSingleQueryEarly: false
+≡ƒöì V3.3.139: V├⌐rification cumul prioritaire...
+≡ƒöì Query words: sequelles, prothese, totale, coude, droit, main, dominante, avec, raideur, residuelle
+≡ƒöì Cat├⌐gorie cumul trouv├⌐e: Cumuls de L├⌐sions et Polytraumatismes
+≡ƒöì Entr├⌐es avec searchTerms v├⌐rifi├⌐es: 51, meilleur score: 0.0%
+Γä╣∩╕Å Aucun cumul prioritaire trouv├⌐ (similarit├⌐ < 70%), continue avec analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒª╢ [V3.3.317] hasMTPLuxation: false hasMetaFracture: false hasTSLO: false hasFootContext: false
+≡ƒöì isCumulDetected: false lesionCount: 1
+≡ƒöì [M├ëTACARPIENS] Input brut: s├⌐quelles de proth├¿se totale du coude droit main dominante avec raideur r├⌐siduelle limitation de la flexion ├á 100 degr├⌐s et douleurs m├⌐caniques persistantes
+≡ƒöì [M├ëTACARPIENS] hasMetaWord: false
+≡ƒöì [M├ëTACARPIENS] hasSingleOrPerte: false
+≡ƒöì [M├ëTACARPIENS] hasSpecificFinger: false
+≡ƒöì [M├ëTACARPIENS] hasCinq: false
+ΓÜá∩╕Å [M├ëTACARPIENS] Pas de dialogue - continuons analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì [EARLY] Ant├⌐c├⌐dents d├⌐tect├⌐s: 0 - 
+Γ£à [EXPERT RULE MATCH - PRIORITY 10700] S├⌐quelles de proth├¿se totale du coude (Main Dominante) = [25-50] ΓåÆ 38% (coef: 0.50)
+ΓöÇΓöÇΓöÇ Cas 24 ΓöÇΓöÇΓöÇ
+  Description: S├⌐quelles proth├¿se totale coude D
+  Input     : "s├⌐quelles de proth├¿se totale du coude droit main dominante avec raideur r├⌐siduelle limitation de la ..."
+  Attendu   : proth[e├¿]se.*totale.*coude|s[e├⌐]quelles.*proth[e├¿]se.*coude|... (20-55%)
+  Obtenu    : Γ£à S├⌐quelles de proth├¿se totale du coude (Main Dominante)
+  Taux      : 38%
+  Type      : proposal
+  Nom OK    : Γ£à | Taux OK: Γ£à
+  Path      : Membres Sup├⌐rieurs > Coude - L├⌐sions Diverses
+
+≡ƒöº localExpertAnalysis V3.3.347 - semantic bar├¿me guard + LLE disambiguation + pseudarthrose naming + t├⌐trapl├⌐gie guard
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): limitation de la pronation du coude droit main dominante apr├¿s fracture
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 0 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+≡ƒöì DEBUG STEPPAGE D├ëTAILL├ë:
+   - steppageMatch: false
+   - amyotrophieMIMatch: false
+   - fractureL1Match: false
+   - Texte analys├⌐: limitation de la pronation du coude droit main dominante apr├¿s fracture
+Γ¥î STEPPAGE NON D├ëTECT├ë - Conditions non remplies
+≡ƒöì DEBUG D├ëVIATION:
+   - deviationMatch: false
+   - mainContext: true
+   - Recherche dans: diviation NON trouv├⌐
+≡ƒöì [V3.3.155] S├⌐quelles d├⌐tect├⌐es: 1 [ 'Raideur articulaire du coude' ]
+≡ƒöì V3.3.201k: isCumulDetected = false , lesionCount = 1
+≡ƒºá [V3.3.214] TC check: hasTC=false, hasNeuro=false, hasFocal=false, neuroCount=0
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 0 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+Γ£à CAS SIMPLE D├ëTECT├ë: 1 s├⌐quelle(s)
+≡ƒôÜ TROUV├ë DANS BAR├êME: "Raideur articulaire du coude" ΓåÆ "Fracture Clavicule - Bien consolid├⌐e sans raideur (Main Dominante)" (2-3%)
+   ≡ƒôè [V3.3.365] Severity-adjusted bar├¿me: [2-3] ├ù coef 0.00 = 2%
+≡ƒöä REGROUPEMENT PAR SYST├êME: [ 'MEMBRE_SUPERIEUR: 14%' ]
+≡ƒº« CALCUL BALTHAZAR (PAR SYST├êME): [ 'MEMBRE_SUPERIEUR: 14%' ]
+≡ƒôè IPP GLOBAL CUMUL├ë: 14%
+ΓöÇΓöÇΓöÇ Cas 25 ΓöÇΓöÇΓöÇ
+  Description: Limitation pronation coude D
+  Input     : "limitation de la pronation du coude droit main dominante apr├¿s fracture..."
+  Attendu   : limitation.*pronation|pronation|coude... (2-12%)
+  Obtenu    : Γ£à Membre sup├⌐rieur DOMINANT : Raideur articulaire avec limitation fonctionnelle - Bar├¿me: "Fracture Clavicule - Bien consolid├⌐e sans raideur (Main Dominante)" (2-3%) - IPP 14%
+  Taux      : 14%
+  Type      : proposal
+  Nom OK    : Γ£à | Taux OK: Γ£à
+  Path      : S├⌐quelle > Bar├¿me 1967
+
+≡ƒöº localExpertAnalysis V3.3.347 - semantic bar├¿me guard + LLE disambiguation + pseudarthrose naming + t├⌐trapl├⌐gie guard
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): d├⌐chirure partielle des tendons extenseurs du poignet gauche main non dominante avec perte de force
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 0 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+≡ƒöì DEBUG STEPPAGE D├ëTAILL├ë:
+   - steppageMatch: false
+   - amyotrophieMIMatch: false
+   - fractureL1Match: false
+   - Texte analys├⌐: d├⌐chirure partielle des tendons extenseurs du poignet gauche main non dominante avec perte de force
+Γ¥î STEPPAGE NON D├ëTECT├ë - Conditions non remplies
+≡ƒöì DEBUG D├ëVIATION:
+   - deviationMatch: false
+   - mainContext: true
+   - Recherche dans: diviation NON trouv├⌐
+≡ƒöì [V3.3.155] S├⌐quelles d├⌐tect├⌐es: 0 []
+≡ƒöì V3.3.201k: isCumulDetected = false , lesionCount = 1
+≡ƒöì DEBUG M├ëTACARPIENS - Texte normalis├⌐: dechirure partielle tendons extenseurs $1 gauche main non dominante avec perte de force amputation ablation section amputation ablation perte metacarpe chirurgicale main chirurgicale main metacarpe articulation poignet $1 droit $1 gauche poignet $1 droit $1 gauche poignet articulation poignet $1 gauche poignet articulation poignet $1 droit poignet articulation poignet $1 droit
+≡ƒöì DEBUG M├ëTACARPIENS - hasMetacarpienWord: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSingleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasMultipleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSpecificFingerEarly: false
+≡ƒöì DEBUG M├ëTACARPIENS - isMetacarpienSingleQueryEarly: false
+≡ƒöì V3.3.139: V├⌐rification cumul prioritaire...
+≡ƒöì Query words: dechirure, partielle, des, tendons, extenseurs, poignet, gauche, main, non, dominante
+≡ƒöì Cat├⌐gorie cumul trouv├⌐e: Cumuls de L├⌐sions et Polytraumatismes
+≡ƒöì Entr├⌐es avec searchTerms v├⌐rifi├⌐es: 51, meilleur score: 0.0%
+Γä╣∩╕Å Aucun cumul prioritaire trouv├⌐ (similarit├⌐ < 70%), continue avec analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒª╢ [V3.3.317] hasMTPLuxation: false hasMetaFracture: false hasTSLO: false hasFootContext: false
+≡ƒöì isCumulDetected: false lesionCount: 1
+≡ƒöì [M├ëTACARPIENS] Input brut: d├⌐chirure partielle des tendons extenseurs du poignet gauche main non dominante avec perte de force
+≡ƒöì [M├ëTACARPIENS] hasMetaWord: false
+≡ƒöì [M├ëTACARPIENS] hasSingleOrPerte: true
+≡ƒöì [M├ëTACARPIENS] hasSpecificFinger: false
+≡ƒöì [M├ëTACARPIENS] hasCinq: false
+ΓÜá∩╕Å [M├ëTACARPIENS] Pas de dialogue - continuons analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì [EARLY] Ant├⌐c├⌐dents d├⌐tect├⌐s: 0 - 
+   ≡ƒöä [V3.3.374] Laterality swap: MD ΓåÆ MND (D├⌐chirure partielle des tendons extenseurs du poignet (Main Non Dominante))
+   ≡ƒôë V3.3.209: Mod├⌐ration expert rule "D├⌐chirure partielle des tendons extenseurs du poignet (Main Non Dominante)" - s├⌐v├⌐rit├⌐ LOW d├⌐tect├⌐e
+Γ£à [EXPERT RULE MATCH - PRIORITY 13600] D├⌐chirure partielle des tendons extenseurs du poignet (Main Non Dominante) = [6-12] ΓåÆ 6% (coef: 0.00, LOW)
+ΓöÇΓöÇΓöÇ Cas 26 ΓöÇΓöÇΓöÇ
+  Description: D├⌐chirure tendons extenseurs poignet ND
+  Input     : "d├⌐chirure partielle des tendons extenseurs du poignet gauche main non dominante avec perte de force..."
+  Attendu   : d[e├⌐]chirure.*tendons.*extenseurs|extenseurs.*poignet|poigne... (5-15%)
+  Obtenu    : Γ£à D├⌐chirure partielle des tendons extenseurs du poignet (Main Non Dominante)
+  Taux      : 6%
+  Type      : proposal
+  Nom OK    : Γ£à | Taux OK: Γ£à
+  Path      : Membres Sup├⌐rieurs > Bras - Fractures et L├⌐sions Musculaires
+
+≡ƒöº localExpertAnalysis V3.3.347 - semantic bar├¿me guard + LLE disambiguation + pseudarthrose naming + t├⌐trapl├⌐gie guard
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): pseudarthrose du radius et du cubitus droits main dominante l├óche avec mobilit├⌐ anormale
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 0 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+≡ƒÆ¬ [V3.3.313] Pseudarthrose avant-bras d├⌐tect├⌐ ΓåÆ Bypass cumul, analyse directe via comprehensiveSingleLesionAnalysis
+≡ƒöì [M├ëTACARPIENS] Input brut: pseudarthrose du radius et du cubitus droits main dominante l├óche avec mobilit├⌐ anormale
+≡ƒöì [M├ëTACARPIENS] hasMetaWord: false
+≡ƒöì [M├ëTACARPIENS] hasSingleOrPerte: false
+≡ƒöì [M├ëTACARPIENS] hasSpecificFinger: false
+≡ƒöì [M├ëTACARPIENS] hasCinq: false
+ΓÜá∩╕Å [M├ëTACARPIENS] Pas de dialogue - continuons analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì [EARLY] Ant├⌐c├⌐dents d├⌐tect├⌐s: 0 - 
+Γ£à [EXPERT RULE MATCH - PRIORITY 9600] Pseudarthrose des deux os de l'avant-bras - l├óche (Main Dominante) = [45-55] ΓåÆ 50% (coef: 0.50)
+ΓöÇΓöÇΓöÇ Cas 27 ΓöÇΓöÇΓöÇ
+  Description: Pseudarthrose deux os l├óche D
+  Input     : "pseudarthrose du radius et du cubitus droits main dominante l├óche avec mobilit├⌐ anormale..."
+  Attendu   : pseudarthrose.*deux.*os|pseudarthrose.*radius|pseudarthrose.... (15-60%)
+  Obtenu    : Γ£à Pseudarthrose des deux os de l'avant-bras - l├óche (Main Dominante)
+  Taux      : 50%
+  Type      : proposal
+  Nom OK    : Γ£à | Taux OK: Γ£à
+  Path      : Membres Sup├⌐rieurs > Avant-bras - Fractures et Pseudarthroses
+
+≡ƒöº localExpertAnalysis V3.3.347 - semantic bar├¿me guard + LLE disambiguation + pseudarthrose naming + t├⌐trapl├⌐gie guard
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): fracture du scapho├»de carpien gauche main non dominante avec raideur r├⌐siduelle du poignet
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 1 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+≡ƒöì DEBUG STEPPAGE D├ëTAILL├ë:
+   - steppageMatch: false
+   - amyotrophieMIMatch: false
+   - fractureL1Match: false
+   - Texte analys├⌐: fracture du scapho├»de carpien gauche main non dominante avec raideur r├⌐siduelle du poignet
+Γ¥î STEPPAGE NON D├ëTECT├ë - Conditions non remplies
+≡ƒöì DEBUG D├ëVIATION:
+   - deviationMatch: false
+   - mainContext: true
+   - Recherche dans: diviation NON trouv├⌐
+≡ƒöì [V3.3.155] S├⌐quelles d├⌐tect├⌐es: 0 []
+≡ƒöì V3.3.201k: isCumulDetected = false , lesionCount = 1
+≡ƒöì DEBUG M├ëTACARPIENS - Texte normalis├⌐: fracture scaphoide carpien gauche main non dominante raideur residuelle poignet limitation restriction enraidissement raideur restriction enraidissement raideur limitation enraidissement raideur limitation restriction cassure fissure bris fracture fissure bris fracture cassure bris fracture cassure fissure metacarpe chirurgicale main chirurgicale main metacarpe articulation poignet $1 droit $1 gauche poignet $1 droit $1 gauche poignet articulation poignet $1 gauche poignet articulation poignet $1 droit poignet articulation poignet $1 droit
+≡ƒöì DEBUG M├ëTACARPIENS - hasMetacarpienWord: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSingleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasMultipleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSpecificFingerEarly: false
+≡ƒöì DEBUG M├ëTACARPIENS - isMetacarpienSingleQueryEarly: false
+≡ƒöì V3.3.139: V├⌐rification cumul prioritaire...
+≡ƒöì Query words: fracture, scaphoide, carpien, gauche, main, non, dominante, avec, raideur, residuelle
+≡ƒöì Cat├⌐gorie cumul trouv├⌐e: Cumuls de L├⌐sions et Polytraumatismes
+≡ƒöì Entr├⌐es avec searchTerms v├⌐rifi├⌐es: 51, meilleur score: 0.0%
+Γä╣∩╕Å Aucun cumul prioritaire trouv├⌐ (similarit├⌐ < 70%), continue avec analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒª╢ [V3.3.317] hasMTPLuxation: false hasMetaFracture: false hasTSLO: false hasFootContext: false
+≡ƒöì isCumulDetected: false lesionCount: 1
+≡ƒöì [M├ëTACARPIENS] Input brut: fracture du scapho├»de carpien gauche main non dominante avec raideur r├⌐siduelle du poignet
+≡ƒöì [M├ëTACARPIENS] hasMetaWord: false
+≡ƒöì [M├ëTACARPIENS] hasSingleOrPerte: false
+≡ƒöì [M├ëTACARPIENS] hasSpecificFinger: false
+≡ƒöì [M├ëTACARPIENS] hasCinq: false
+ΓÜá∩╕Å [M├ëTACARPIENS] Pas de dialogue - continuons analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì [EARLY] Ant├⌐c├⌐dents d├⌐tect├⌐s: 0 - 
+   ≡ƒöä [V3.3.374] Laterality swap: MD ΓåÆ MND (Fracture du scapho├»de carpien - Avec raideur simple (Main Non Dominante))
+Γ£à [EXPERT RULE MATCH - PRIORITY 10250] Fracture du scapho├»de carpien - Avec raideur simple (Main Non Dominante) = [4-8] ΓåÆ 4% (coef: 0.00)
+ΓöÇΓöÇΓöÇ Cas 28 ΓöÇΓöÇΓöÇ
+  Description: Fracture scapho├»de carpien raideur simple ND
+  Input     : "fracture du scapho├»de carpien gauche main non dominante avec raideur r├⌐siduelle du poignet..."
+  Attendu   : fracture.*scapho[├»i]de|scapho[├»i]de.*carpien|poignet|raideur... (3-12%)
+  Obtenu    : Γ£à Fracture du scapho├»de carpien - Avec raideur simple (Main Non Dominante)
+  Taux      : 4%
+  Type      : proposal
+  Nom OK    : Γ£à | Taux OK: Γ£à
+  Path      : Membres Sup├⌐rieurs > Poignet - Fractures
+
+≡ƒöº localExpertAnalysis V3.3.347 - semantic bar├¿me guard + LLE disambiguation + pseudarthrose naming + t├⌐trapl├⌐gie guard
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): s├⌐quelles de fracture-luxation de Monteggia de l'avant-bras droit main dominante avec limitation de la prono-supination et raideur r├⌐siduelle du coude associ├⌐e
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 1 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+≡ƒÆ¬ [V3.3.313] Monteggia d├⌐tect├⌐ ΓåÆ Bypass cumul, analyse directe via comprehensiveSingleLesionAnalysis
+≡ƒöì [M├ëTACARPIENS] Input brut: s├⌐quelles de fracture-luxation de monteggia de l avant-bras droit main dominante avec limitation de la prono-supination et raideur r├⌐siduelle du coude associ├⌐e
+≡ƒöì [M├ëTACARPIENS] hasMetaWord: false
+≡ƒöì [M├ëTACARPIENS] hasSingleOrPerte: false
+≡ƒöì [M├ëTACARPIENS] hasSpecificFinger: false
+≡ƒöì [M├ëTACARPIENS] hasCinq: false
+ΓÜá∩╕Å [M├ëTACARPIENS] Pas de dialogue - continuons analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì [EARLY] Ant├⌐c├⌐dents d├⌐tect├⌐s: 0 - 
+Γ£à [EXPERT RULE MATCH - PRIORITY 10500] S├⌐quelles de fracture-luxation de Monteggia (Main Dominante) = [10-30] ΓåÆ 10% (coef: 0.00)
+ΓöÇΓöÇΓöÇ Cas 29 ΓöÇΓöÇΓöÇ
+  Description: S├⌐quelles fracture-luxation Monteggia D
+  Input     : "s├⌐quelles de fracture-luxation de Monteggia de l'avant-bras droit main dominante avec limitation de ..."
+  Attendu   : monteggia|fracture.*luxation.*monteggia|avant.*bras|coude... (8-35%)
+  Obtenu    : Γ£à S├⌐quelles de fracture-luxation de Monteggia (Main Dominante)
+  Taux      : 10%
+  Type      : proposal
+  Nom OK    : Γ£à | Taux OK: Γ£à
+  Path      : Membres Sup├⌐rieurs > Avant-bras - Fractures et Pseudarthroses
+
+≡ƒöº localExpertAnalysis V3.3.347 - semantic bar├¿me guard + LLE disambiguation + pseudarthrose naming + t├⌐trapl├⌐gie guard
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): arthrod├¿se du poignet gauche main non dominante en position rectiligne
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 0 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+≡ƒöì DEBUG STEPPAGE D├ëTAILL├ë:
+   - steppageMatch: false
+   - amyotrophieMIMatch: false
+   - fractureL1Match: false
+   - Texte analys├⌐: arthrod├¿se du poignet gauche main non dominante en position rectiligne
+Γ¥î STEPPAGE NON D├ëTECT├ë - Conditions non remplies
+≡ƒöì DEBUG D├ëVIATION:
+   - deviationMatch: false
+   - mainContext: true
+   - Recherche dans: diviation NON trouv├⌐
+≡ƒöì [V3.3.155] S├⌐quelles d├⌐tect├⌐es: 0 []
+≡ƒöì V3.3.201k: isCumulDetected = false , lesionCount = 1
+≡ƒöì DEBUG M├ëTACARPIENS - Texte normalis├⌐: arthrodese $1 gauche main non dominante en position rectiligne ankylose raideur complete blocage articulaire metacarpe chirurgicale main chirurgicale main metacarpe articulation poignet $1 droit $1 gauche poignet $1 droit $1 gauche poignet articulation poignet $1 gauche poignet articulation poignet $1 droit poignet articulation poignet $1 droit
+≡ƒöì DEBUG M├ëTACARPIENS - hasMetacarpienWord: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSingleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasMultipleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSpecificFingerEarly: false
+≡ƒöì DEBUG M├ëTACARPIENS - isMetacarpienSingleQueryEarly: false
+≡ƒöì V3.3.139: V├⌐rification cumul prioritaire...
+≡ƒöì Query words: arthrodese, poignet, gauche, main, non, dominante, position, rectiligne
+≡ƒöì Cat├⌐gorie cumul trouv├⌐e: Cumuls de L├⌐sions et Polytraumatismes
+≡ƒöì Entr├⌐es avec searchTerms v├⌐rifi├⌐es: 51, meilleur score: 0.0%
+Γä╣∩╕Å Aucun cumul prioritaire trouv├⌐ (similarit├⌐ < 70%), continue avec analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒª╢ [V3.3.317] hasMTPLuxation: false hasMetaFracture: false hasTSLO: false hasFootContext: false
+≡ƒöì isCumulDetected: false lesionCount: 1
+≡ƒöì [M├ëTACARPIENS] Input brut: arthrod├¿se du poignet gauche main non dominante en position rectiligne
+≡ƒöì [M├ëTACARPIENS] hasMetaWord: false
+≡ƒöì [M├ëTACARPIENS] hasSingleOrPerte: false
+≡ƒöì [M├ëTACARPIENS] hasSpecificFinger: false
+≡ƒöì [M├ëTACARPIENS] hasCinq: false
+ΓÜá∩╕Å [M├ëTACARPIENS] Pas de dialogue - continuons analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì [EARLY] Ant├⌐c├⌐dents d├⌐tect├⌐s: 0 - 
+≡ƒöì [DEBUG EXPERT RULE - EARLY TEST]
+Pattern: /contusion.*cerebrale|traumatisme.*crani.*contusion/i
+Context: /perte.*connaissance|frontale|temporale|parietale|breve|courte|surveillance.*neurologique/i
+NegativeContext: /spondylo|listthesis|glissement.*vertebral/i
+CleanText: "arthrodese du poignet gauche main non dominante en position rectiligne"
+patternMatchClean: false, contextMatchClean: false
+negContextMatchClean: false, negContextMatchWorking: false
+matchClean: false, matchWorking: false
+≡ƒöì [DEBUG EXPERT RULE - EARLY TEST]
+Pattern: /spondylolisthesis|spondylo.*listhesis|listthesis|glissement\s+vertebral/i
+Context: /lombaire|L\d|S\d|rachis|traumatisme|post-traumatique/i
+NegativeContext: /contusion.*cerebrale|perte.*connaissance|mandibule|genou|polytraumatisme|chute.*echafaudage/i
+CleanText: "arthrodese du poignet gauche main non dominante en position rectiligne"
+patternMatchClean: false, contextMatchClean: false
+negContextMatchClean: false, negContextMatchWorking: false
+matchClean: false, matchWorking: false
+≡ƒÄ» TOP 50 R├ëSULTATS: [
+  {
+    name: 'Ankylose du poignet - Rectiligne (Main Non Dominante)',
+    score: 7224,
+    path: 'Membres Sup├⌐rieurs > Poignet - Raideurs et Ankyloses'
+  },
+  {
+    name: 'Arthrod├¿se du poignet en position rectiligne (Main Non Dominante)',
+    score: 5557,
+    path: 'Membres Sup├⌐rieurs > Poignet - Raideurs et Ankyloses'
+  },
+  {
+    name: 'Ankylose carpo-m├⌐tacarpienne du pouce (Main Non Dominante)',
+    score: 4418,
+    path: 'Membres Sup├⌐rieurs > Doigts - Pouce (Main Non Dominante)'
+  },
+  {
+    name: 'Ankylose du poignet - Rectiligne (Main Dominante)',
+    score: 4213,
+    path: 'Membres Sup├⌐rieurs > Poignet - Raideurs et Ankyloses'
+  },
+  {
+    name: 'Ankylose du poignet - En flexion ou extension (Main Non Dominante)',
+    score: 4213,
+    path: 'Membres Sup├⌐rieurs > Poignet - Raideurs et Ankyloses'
+  },
+  {
+    name: 'Ankylose du poignet - En flexion ou extension (Main Dominante)',
+    score: 4202,
+    path: 'Membres Sup├⌐rieurs > Poignet - Raideurs et Ankyloses'
+  },
+  {
+    name: 'Raideur trap├⌐zo-m├⌐tacarpienne du pouce (Main Non Dominante)',
+    score: 2948,
+    path: 'Membres Sup├⌐rieurs > Main - Raideurs et Ankyloses'
+  },
+  {
+    name: 'Fracture du scapho├»de carpien - Avec raideur simple (Main Non Dominante)',
+    score: 2923,
+    path: 'Membres Sup├⌐rieurs > Poignet - Fractures'
+  },
+  {
+    name: 'Ankylose carpo-m├⌐tacarpienne du pouce (Main Dominante)',
+    score: 2907,
+    path: 'Membres Sup├⌐rieurs > Doigts - Pouce (Main Dominante)'
+  },
+  {
+    name: 'Raideur du poignet (Main Non Dominante)',
+    score: 2718,
+    path: 'Membres Sup├⌐rieurs > Poignet - Raideurs et Ankyloses'
+  },
+  {
+    name: 'Raideur du poignet (Main Dominante)',
+    score: 2707,
+    path: 'Membres Sup├⌐rieurs > Poignet - Raideurs et Ankyloses'
+  },
+  {
+    name: 'D├⌐sarticulation du poignet (Main Non Dominante)',
+    score: 2603,
+    path: 'Membres Sup├⌐rieurs > ├ëpaule - Amputation et D├⌐sarticulation'
+  },
+  {
+    name: 'D├⌐sarticulation du poignet (Main Dominante)',
+    score: 2593,
+    path: 'Membres Sup├⌐rieurs > ├ëpaule - Amputation et D├⌐sarticulation'
+  },
+  {
+    name: 'Arthrod├¿se du poignet en position rectiligne (Main Dominante)',
+    score: 2546,
+    path: 'Membres Sup├⌐rieurs > Poignet - Raideurs et Ankyloses'
+  },
+  {
+    name: 'Arthrod├¿se du poignet en position vicieuse (Main Non Dominante)',
+    score: 2545,
+    path: 'Membres Sup├⌐rieurs > Poignet - Raideurs et Ankyloses'
+  },
+  {
+    name: 'Arthrod├¿se du poignet en position vicieuse (Main Dominante)',
+    score: 2535,
+    path: 'Membres Sup├⌐rieurs > Poignet - Raideurs et Ankyloses'
+  },
+  {
+    name: "Raideur de l'├⌐paule (propulsion, abduction, rotation) (Main Non Dominante)",
+    score: 2513,
+    path: 'Membres Sup├⌐rieurs > ├ëpaule - Raideurs et Ankyloses'
+  },
+  {
+    name: 'Limitation de la pronation (Main Non Dominante)',
+    score: 2443,
+    path: 'Membres Sup├⌐rieurs > Coude - Raideurs et Ankyloses'
+  },
+  {
+    name: 'Limitation de la supination (Main Non Dominante)',
+    score: 2443,
+    path: 'Membres Sup├⌐rieurs > Coude - Raideurs et Ankyloses'
+  },
+  {
+    name: 'D├⌐sarticulation du poignet (Main Non Dominante)',
+    score: 2443,
+    path: 'Membres Sup├⌐rieurs > Poignet - D├⌐sarticulation'
+  },
+  {
+    name: 'D├⌐sarticulation du poignet (Main Dominante)',
+    score: 2432,
+    path: 'Membres Sup├⌐rieurs > Poignet - D├⌐sarticulation'
+  },
+  {
+    name: 'P├⌐riarthrite chronique douloureuse - limitation mod├⌐r├⌐e (Main Non Dominante)',
+    score: 2383,
+    path: 'Membres Sup├⌐rieurs > ├ëpaule - L├⌐sions Diverses'
+  },
+  {
+    name: 'Rupture du biceps compl├¿te (Main Non Dominante)',
+    score: 2249,
+    path: 'Membres Sup├⌐rieurs > Bras - Fractures et L├⌐sions Musculaires'
+  },
+  {
+    name: 'Raideur trap├⌐zo-m├⌐tacarpienne du pouce (Main Dominante)',
+    score: 1437,
+    path: 'Membres Sup├⌐rieurs > Main - Raideurs et Ankyloses'
+  },
+  {
+    name: 'Fracture du scapho├»de carpien - Avec raideur simple (Main Dominante)',
+    score: 1412,
+    path: 'Membres Sup├⌐rieurs > Poignet - Fractures'
+  },
+  {
+    name: 'Perte des cinq m├⌐tacarpiens (Main Non Dominante)',
+    score: 1178,
+    path: 'Membres Sup├⌐rieurs > Main - Amputations'
+  },
+  {
+    name: 'Perte des cinq m├⌐tacarpiens (Main Dominante)',
+    score: 1167,
+    path: 'Membres Sup├⌐rieurs > Main - Amputations'
+  },
+  {
+    name: 'Pseudarthrose du scapho├»de carpien (Main Non Dominante)',
+    score: 1063,
+    path: 'Membres Sup├⌐rieurs > Poignet - Fractures'
+  },
+  {
+    name: 'Pseudarthrose du scapho├»de carpien (Main Dominante)',
+    score: 1052,
+    path: 'Membres Sup├⌐rieurs > Poignet - Fractures'
+  },
+  {
+    name: "Raideur de l'├⌐paule (propulsion, abduction, rotation) (Main Dominante)",
+    score: 1002,
+    path: 'Membres Sup├⌐rieurs > ├ëpaule - Raideurs et Ankyloses'
+  },
+  {
+    name: 'Limitation de la pronation (Main Dominante)',
+    score: 932,
+    path: 'Membres Sup├⌐rieurs > Coude - Raideurs et Ankyloses'
+  },
+  {
+    name: 'Limitation de la supination (Main Dominante)',
+    score: 932,
+    path: 'Membres Sup├⌐rieurs > Coude - Raideurs et Ankyloses'
+  },
+  {
+    name: "Luxation r├⌐cidivante de l'├⌐paule (Main Non Dominante)",
+    score: 888,
+    path: 'Membres Sup├⌐rieurs > ├ëpaule - L├⌐sions Diverses'
+  },
+  {
+    name: "Luxation r├⌐cidivante de l'├⌐paule (Main Dominante)",
+    score: 877,
+    path: 'Membres Sup├⌐rieurs > ├ëpaule - L├⌐sions Diverses'
+  },
+  {
+    name: 'P├⌐riarthrite chronique douloureuse - limitation mod├⌐r├⌐e (Main Dominante)',
+    score: 872,
+    path: 'Membres Sup├⌐rieurs > ├ëpaule - L├⌐sions Diverses'
+  },
+  {
+    name: 'Main bote, creuse, etc. (Main Non Dominante)',
+    score: 868,
+    path: 'Membres Sup├⌐rieurs > Main - Raideurs et Ankyloses'
+  },
+  {
+    name: 'Perte de la pr├⌐hension fine (atteinte motrice) (Main Non Dominante)',
+    score: 868,
+    path: 'Membres Sup├⌐rieurs > Main - Raideurs et Ankyloses'
+  },
+  {
+    name: 'Perte de la prise sph├⌐rique (Main Non Dominante)',
+    score: 868,
+    path: 'Membres Sup├⌐rieurs > Main - Raideurs et Ankyloses'
+  },
+  {
+    name: 'Perte de la pr├⌐hension grossi├¿re (Main Non Dominante)',
+    score: 868,
+    path: 'Membres Sup├⌐rieurs > Main - Raideurs et Ankyloses'
+  },
+  {
+    name: 'Troubles de la sensibilit├⌐ de la main ΓÇö g├¬ne mod├⌐r├⌐e (Main Non Dominante)',
+    score: 868,
+    path: 'Membres Sup├⌐rieurs > Main - Raideurs et Ankyloses'
+  },
+  {
+    name: 'Troubles de la sensibilit├⌐ de la main ΓÇö g├¬ne importante (Main Non Dominante)',
+    score: 868,
+    path: 'Membres Sup├⌐rieurs > Main - Raideurs et Ankyloses'
+  },
+  {
+    name: 'Main bote, creuse, etc. (Main Dominante)',
+    score: 857,
+    path: 'Membres Sup├⌐rieurs > Main - Raideurs et Ankyloses'
+  },
+  {
+    name: 'Perte de la prise sph├⌐rique (Main Dominante)',
+    score: 857,
+    path: 'Membres Sup├⌐rieurs > Main - Raideurs et Ankyloses'
+  },
+  {
+    name: 'Perte de la pr├⌐hension grossi├¿re (Main Dominante)',
+    score: 857,
+    path: 'Membres Sup├⌐rieurs > Main - Raideurs et Ankyloses'
+  },
+  {
+    name: 'Troubles de la sensibilit├⌐ de la main ΓÇö g├¬ne mod├⌐r├⌐e (Main Dominante)',
+    score: 857,
+    path: 'Membres Sup├⌐rieurs > Main - Raideurs et Ankyloses'
+  },
+  {
+    name: 'Troubles de la sensibilit├⌐ de la main ΓÇö g├¬ne importante (Main Dominante)',
+    score: 857,
+    path: 'Membres Sup├⌐rieurs > Main - Raideurs et Ankyloses'
+  },
+  {
+    name: 'Abolition de la prono-supination (Main Non Dominante)',
+    score: 830,
+    path: 'Membres Sup├⌐rieurs > Coude - Raideurs et Ankyloses'
+  },
+  {
+    name: 'Abolition de la prono-supination (Main Dominante)',
+    score: 819,
+    path: 'Membres Sup├⌐rieurs > Coude - Raideurs et Ankyloses'
+  },
+  {
+    name: 'Amputation de la main (Main Non Dominante)',
+    score: 778,
+    path: 'Membres Sup├⌐rieurs > Main - Amputations'
+  },
+  {
+    name: 'Amputation de la main (Main Dominante)',
+    score: 767,
+    path: 'Membres Sup├⌐rieurs > Main - Amputations'
+  }
+]
+≡ƒöì [detectRequestType] D├⌐but analyse...
+≡ƒôè [detectRequestType] R├⌐sultat: attribution
+≡ƒöì [determineSeverity] Text: arthrod├¿se du poignet gauche main non dominante en position rectiligne
+≡ƒöì [determineSeverity] Faible signs: []
+≡ƒöì [determineSeverity] High signs: [ 'arthrod├¿se' ]
+ΓöÇΓöÇΓöÇ Cas 30 ΓöÇΓöÇΓöÇ
+  Description: Arthrod├¿se poignet position rectiligne ND
+  Input     : "arthrod├¿se du poignet gauche main non dominante en position rectiligne..."
+  Attendu   : arthrod[e├¿]se.*poignet|poignet.*rectiligne|poignet... (8-18%)
+  Obtenu    : Γ£à Ankylose du poignet - Rectiligne (Main Non Dominante)
+  Taux      : 25%
+  Type      : proposal
+  Nom OK    : Γ£à | Taux OK: Γ£à
+  Path      : Membres Sup├⌐rieurs > Poignet - Raideurs et Ankyloses
+
+≡ƒöº localExpertAnalysis V3.3.347 - semantic bar├¿me guard + LLE disambiguation + pseudarthrose naming + t├⌐trapl├⌐gie guard
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): fracture de l'extr├⌐mit├⌐ inf├⌐rieure du radius droit main dominante type Pouteau-Colles avec bonne consolidation et r├⌐cup├⌐ration fonctionnelle compl├¿te du poignet
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 1 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+≡ƒª┤ [V3.3.216] FRACTURE POUTEAU-COLLES / RADIUS DISTAL d├⌐tect├⌐e ΓåÆ Analyse sp├⌐cialis├⌐e (site unique)
+≡ƒª┤ [V3.3.216] Score s├⌐v├⌐rit├⌐ Pouteau-Colles: 0 | Dominance: dominante | Limitation: null% | EVA: null
+≡ƒª┤ [V3.3.216] S├⌐v├⌐rit├⌐: legeres | Fourchette: 5-10% | Taux final: 5%
+ΓöÇΓöÇΓöÇ Cas 31 ΓöÇΓöÇΓöÇ
+  Description: Fracture extr├⌐mit├⌐ inf radius consolidation parfaite D
+  Input     : "fracture de l'extr├⌐mit├⌐ inf├⌐rieure du radius droit main dominante type Pouteau-Colles avec bonne con..."
+  Attendu   : fracture.*ext.*inf.*radius.*consolidation|fracture.*radius.*... (2-8%)
+  Obtenu    : Γ£à Fracture de l'extr├⌐mit├⌐ inf├⌐rieure du radius - S├⌐quelles l├⌐g├¿res (Main Dominante)
+  Taux      : 5%
+  Type      : proposal
+  Nom OK    : Γ£à | Taux OK: Γ£à
+  Path      : Membres sup├⌐rieurs > Poignet - Fractures
+
+≡ƒöº localExpertAnalysis V3.3.347 - semantic bar├¿me guard + LLE disambiguation + pseudarthrose naming + t├⌐trapl├⌐gie guard
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): fracture de l'extr├⌐mit├⌐ inf├⌐rieure du radius gauche main non dominante avec cal vicieux en bascule post├⌐rieure et raideur importante du poignet et paresth├⌐sies dans le territoire du nerf m├⌐dian
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 1 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+≡ƒª┤ [V3.3.216] FRACTURE POUTEAU-COLLES / RADIUS DISTAL d├⌐tect├⌐e ΓåÆ Analyse sp├⌐cialis├⌐e (site unique)
+≡ƒª┤ [V3.3.216] Score s├⌐v├⌐rit├⌐ Pouteau-Colles: 3 | Dominance: non_dominante | Limitation: null% | EVA: null
+≡ƒª┤ [V3.3.216] S├⌐v├⌐rit├⌐: moyennes | Fourchette: 12-16% | Taux final: 15%
+ΓöÇΓöÇΓöÇ Cas 32 ΓöÇΓöÇΓöÇ
+  Description: Fracture radius raideur d├⌐formation troubles nerveux ND
+  Input     : "fracture de l'extr├⌐mit├⌐ inf├⌐rieure du radius gauche main non dominante avec cal vicieux en bascule p..."
+  Attendu   : fracture.*radius.*raideur.*d[e├⌐]formation|fracture.*radius.*... (10-30%)
+  Obtenu    : Γ£à Fracture de l'extr├⌐mit├⌐ inf├⌐rieure du radius - S├⌐quelles moyennes (Main Non Dominante)
+  Taux      : 15%
+  Type      : proposal
+  Nom OK    : Γ£à | Taux OK: Γ£à
+  Path      : Membres sup├⌐rieurs > Poignet - Fractures
+
+≡ƒöº localExpertAnalysis V3.3.347 - semantic bar├¿me guard + LLE disambiguation + pseudarthrose naming + t├⌐trapl├⌐gie guard
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): pseudarthrose du scapho├»de carpien droit main dominante avec douleur chronique et raideur du poignet limitant la flexion et l'extension
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 1 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+≡ƒöì DEBUG STEPPAGE D├ëTAILL├ë:
+   - steppageMatch: false
+   - amyotrophieMIMatch: false
+   - fractureL1Match: false
+   - Texte analys├⌐: pseudarthrose du scapho├»de carpien droit main dominante avec douleur chronique et raideur du poignet limitant la flexion et l'extension
+Γ¥î STEPPAGE NON D├ëTECT├ë - Conditions non remplies
+≡ƒöì DEBUG D├ëVIATION:
+   - deviationMatch: false
+   - mainContext: true
+   - Recherche dans: diviation NON trouv├⌐
+≡ƒöì [V3.3.155] S├⌐quelles d├⌐tect├⌐es: 0 []
+≡ƒöì V3.3.201k: isCumulDetected = true , lesionCount = 3
+≡ƒöì DEBUG M├ëTACARPIENS - Texte normalis├⌐: pseudarthrose scaphoide carpien droit main dominante avec douleur chronique et raideur poignet limitant flexion et l extension limitation restriction enraidissement raideur restriction enraidissement raideur limitation enraidissement raideur limitation restriction fausse articulation non consolidation absence de consolidation pseudarthrose non consolidation absence de consolidation pseudarthrose fausse articulation absence de consolidation pseudarthrose fausse articulation non consolidation arthropathie degenerescence articulaire usure articulaire arthrose degenerescence articulaire usure articulaire arthrose arthropathie usure articulaire arthrose arthropathie degenerescence articulaire metacarpe chirurgicale main chirurgicale main metacarpe articulation poignet $1 droit $1 gauche poignet $1 droit $1 gauche poignet articulation poignet $1 gauche poignet articulation poignet $1 droit poignet articulation poignet $1 droit
+≡ƒöì DEBUG M├ëTACARPIENS - hasMetacarpienWord: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSingleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasMultipleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSpecificFingerEarly: false
+≡ƒöì DEBUG M├ëTACARPIENS - isMetacarpienSingleQueryEarly: false
+≡ƒöì V3.3.139: V├⌐rification cumul prioritaire...
+≡ƒöì Query words: pseudarthrose, scaphoide, carpien, droit, main, dominante, avec, douleur, chronique, raideur
+≡ƒöì Cat├⌐gorie cumul trouv├⌐e: Cumuls de L├⌐sions et Polytraumatismes
+≡ƒöì Entr├⌐es avec searchTerms v├⌐rifi├⌐es: 51, meilleur score: 0.0%
+Γä╣∩╕Å Aucun cumul prioritaire trouv├⌐ (similarit├⌐ < 70%), continue avec analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒª╢ [V3.3.317] hasMTPLuxation: false hasMetaFracture: false hasTSLO: false hasFootContext: false
+≡ƒöì isCumulDetected: true lesionCount: 3
+≡ƒöì CUMUL D├ëTECT├ë - Extraction des l├⌐sions individuelles
+≡ƒô¥ text original: pseudarthrose du scapho├»de carpien droit main dominante avec douleur chronique et raideur du poignet limitant la flexion et l'extension
+≡ƒô¥ finalCleanedText: pseudarthrose du scapho├»de carpien droit main dominante avec douleur chronique et raideur du poignet limitant la flexion et l'extension
+≡ƒöº extractIndividualLesions V3.3.211 - avec Pattern 0C-ter + 0C-quater
+≡ƒöì extractIndividualLesions - texte d'entr├⌐e: pseudarthrose du scapho├»de carpien droit main dominante avec douleur chronique et raideur du poignet limitant la flexion et l'extension
+≡ƒöì Pattern 0B - Extraction polytraumatisme membre (V3.3.201L):
+  fractureMatch: NULL
+  ligamentMatch: NULL
+  muscleMatch: NULL
+  raideurMatch: raideur du poignet
+  algiesMatch: douleur chronique
+  deficitForceMatch: NULL
+  componentCount: 2
+  Condition activ├⌐e: false
+Γ¥î Pattern 0B NON ACTIV├ë: componentCount < 3
+ΓÜá∩╕Å Aucun pattern de cumul d├⌐tect├⌐, retour texte original
+≡ƒôï L├⌐sions extraites: [
+  'pseudarthrose du scaphoide carpien droit main dominante avec douleur chronique et raideur du poignet limitant la flexion et l extension'
+] Nombre: 1
+≡ƒöì [M├ëTACARPIENS] Input brut: pseudarthrose du scapho├»de carpien droit main dominante avec douleur chronique et raideur du poignet limitant la flexion et l extension
+≡ƒöì [M├ëTACARPIENS] hasMetaWord: false
+≡ƒöì [M├ëTACARPIENS] hasSingleOrPerte: false
+≡ƒöì [M├ëTACARPIENS] hasSpecificFinger: false
+≡ƒöì [M├ëTACARPIENS] hasCinq: false
+ΓÜá∩╕Å [M├ëTACARPIENS] Pas de dialogue - continuons analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì [EARLY] Ant├⌐c├⌐dents d├⌐tect├⌐s: 0 - 
+≡ƒöì [CUMUL D├ëTECT├ë EN AVANCE] 3 l├⌐sions - SKIP R├êGLES EXPERTES SIMPLES
+≡ƒöì [determineSeverity] Text: pseudarthrose du scaphoide carpien droit main dominante avec douleur chronique et raideur du poignet
+≡ƒöì [determineSeverity] Faible signs: []
+≡ƒöì [determineSeverity] High signs: [ 'pseudarthrose' ]
+ΓöÇΓöÇΓöÇ Cas 33 ΓöÇΓöÇΓöÇ
+  Description: Pseudarthrose scapho├»de carpien D
+  Input     : "pseudarthrose du scapho├»de carpien droit main dominante avec douleur chronique et raideur du poignet..."
+  Attendu   : pseudarthrose.*scapho[├»i]de|scapho[├»i]de|poignet... (8-25%)
+  Obtenu    : Γ£à Raideur du poignet - Flexion/extension limit├⌐e
+  Taux      : 14%
+  Type      : proposal
+  Nom OK    : Γ£à | Taux OK: Γ£à
+  Path      : Membres Sup├⌐rieurs > Poignet - Raideurs et Ankyloses
+
+≡ƒöº localExpertAnalysis V3.3.347 - semantic bar├¿me guard + LLE disambiguation + pseudarthrose naming + t├⌐trapl├⌐gie guard
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): ankylose du poignet gauche main non dominante en position de flexion apr├¿s fracture articulaire avec impossibilit├⌐ d'extension et de d├⌐viation radiale
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 0 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+≡ƒöì DEBUG STEPPAGE D├ëTAILL├ë:
+   - steppageMatch: false
+   - amyotrophieMIMatch: false
+   - fractureL1Match: false
+   - Texte analys├⌐: ankylose du poignet gauche main non dominante en position de flexion apr├¿s fracture articulaire avec impossibilit├⌐ d'extension et de d├⌐viation radiale
+Γ¥î STEPPAGE NON D├ëTECT├ë - Conditions non remplies
+≡ƒöì DEBUG D├ëVIATION:
+   - deviationMatch: false
+   - mainContext: true
+   - Recherche dans: diviation NON trouv├⌐
+≡ƒöì [V3.3.155] S├⌐quelles d├⌐tect├⌐es: 1 [ 'Ankylose articulaire  en flexion' ]
+≡ƒª┤ [V3.3.216] Pouteau-Colles / Fracture radius distal ΓåÆ PAS de cumul (l├⌐sion unique)
+≡ƒöì V3.3.201k: isCumulDetected = false , lesionCount = 1
+≡ƒºá [V3.3.214] TC check: hasTC=false, hasNeuro=false, hasFocal=false, neuroCount=0
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 0 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+Γ£à CAS SIMPLE D├ëTECT├ë: 1 s├⌐quelle(s)
+≡ƒôÜ TROUV├ë DANS BAR├êME: "Ankylose articulaire  en flexion" ΓåÆ "Ankylose du poignet - En flexion ou extension (Main Dominante)" (30-40%)
+   ≡ƒôè [V3.3.365] Severity-adjusted bar├¿me: [30-40] ├ù coef 0.50 = 35%
+≡ƒöä REGROUPEMENT PAR SYST├êME: [ 'MEMBRE_INFERIEUR: 35%' ]
+≡ƒº« CALCUL BALTHAZAR (PAR SYST├êME): [ 'MEMBRE_INFERIEUR: 35%' ]
+≡ƒôè IPP GLOBAL CUMUL├ë: 35%
+ΓöÇΓöÇΓöÇ Cas 34 ΓöÇΓöÇΓöÇ
+  Description: Ankylose poignet en flexion ND
+  Input     : "ankylose du poignet gauche main non dominante en position de flexion apr├¿s fracture articulaire avec..."
+  Attendu   : ankylose.*poignet.*flexion|ankylose.*poignet|poignet|ankylos... (20-40%)
+  Obtenu    : Γ£à Membre inf├⌐rieur (CUISSE/GENOU) : ANKYLOSE ARTICULAIRE (s├⌐quelle majeure invalidante) - ankylose genou (perte totale mobilit├⌐) ΓåÆ IPP 35% justifi├⌐e par perte totale mobilit├⌐ + retentissement fonctionnel global - Bar├¿me: "Ankylose du poignet - En flexion ou extension (Main Dominante)" (30-40%) - IPP 35%
+  Taux      : 35%
+  Type      : proposal
+  Nom OK    : Γ£à | Taux OK: Γ£à
+  Path      : S├⌐quelle > Bar├¿me 1967
+
+≡ƒöº localExpertAnalysis V3.3.347 - semantic bar├¿me guard + LLE disambiguation + pseudarthrose naming + t├⌐trapl├⌐gie guard
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): syndrome du canal carpien post-traumatique de la main droite dominante avec paresth├⌐sies nocturnes permanentes et d├⌐but d'amyotrophie de l'├⌐minence th├⌐nar
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 0 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+≡ƒºá [V3.3.281] PARALYSIE NERF P├ëRIPH├ëRIQUE MS d├⌐tect├⌐e ΓåÆ Analyse sp├⌐cialis├⌐e (site unique)
+ΓöÇΓöÇΓöÇ Cas 35 ΓöÇΓöÇΓöÇ
+  Description: Syndrome canal carpien post-traumatique D
+  Input     : "syndrome du canal carpien post-traumatique de la main droite dominante avec paresth├⌐sies nocturnes p..."
+  Attendu   : canal.*carpien|syndrome.*canal|carpien|n[e├¿]rf.*m[e├⌐]dian|po... (5-25%)
+  Obtenu    : Γ£à Paralysie du nerf m├⌐dian - Au poignet (droite)
+  Taux      : 18%
+  Type      : proposal
+  Nom OK    : Γ£à | Taux OK: Γ£à
+  Path      : S├⌐quelles des Nerfs Cr├óniens et P├⌐riph├⌐riques > Nerfs P├⌐riph├⌐riques - Membre Sup├⌐rieur
+
+≡ƒöº localExpertAnalysis V3.3.347 - semantic bar├¿me guard + LLE disambiguation + pseudarthrose naming + t├⌐trapl├⌐gie guard
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): amputation du pouce droit main dominante par d├⌐sarticulation m├⌐tacarpo-phalangienne
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 1 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+Γ£é∩╕Å [V3.3.219] AMPUTATION DOIGT d├⌐tect├⌐e ΓåÆ Analyse sp├⌐cialis├⌐e avec niveau (site unique)
+Γ£é∩╕Å [V3.3.219] Doigt: pouce (D1) | Niveau: MCP | Main Dominante | Position: 0 | Taux: 28%
+ΓöÇΓöÇΓöÇ Cas 36 ΓöÇΓöÇΓöÇ
+  Description: Amputation pouce d├⌐sarticulation MCP D
+  Input     : "amputation du pouce droit main dominante par d├⌐sarticulation m├⌐tacarpo-phalangienne..."
+  Attendu   : amputation.*pouce|d[e├⌐]sarticulation.*pouce|pouce|perte.*pou... (20-32%)
+  Obtenu    : Γ£à Amputation du pouce - D├⌐sarticulation m├⌐tacarpo-phalangienne (main dominante)
+  Taux      : 28%
+  Type      : proposal
+  Nom OK    : Γ£à | Taux OK: Γ£à
+  Path      : Membres Sup├⌐rieurs > Doigts - Pouce (Main Dominante)
+
+≡ƒöº localExpertAnalysis V3.3.347 - semantic bar├¿me guard + LLE disambiguation + pseudarthrose naming + t├⌐trapl├⌐gie guard
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): amputation de l'index droit main dominante avec perte des trois phalanges au niveau de l'articulation m├⌐tacarpo-phalangienne apr├¿s ├⌐crasement par machine
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 1 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+Γ£é∩╕Å [V3.3.219] AMPUTATION DOIGT d├⌐tect├⌐e ΓåÆ Analyse sp├⌐cialis├⌐e avec niveau (site unique)
+Γ£é∩╕Å [V3.3.219] Doigt: index (D2) | Niveau: MCP | Main Dominante | Position: 0 | Taux: 15%
+ΓöÇΓöÇΓöÇ Cas 37 ΓöÇΓöÇΓöÇ
+  Description: Amputation index 3 phalanges D
+  Input     : "amputation de l'index droit main dominante avec perte des trois phalanges au niveau de l'articulatio..."
+  Attendu   : amputation.*index|perte.*index|d[e├⌐]sarticulation.*index|ind... (10-20%)
+  Obtenu    : Γ£à D├⌐sarticulation m├⌐tacarpo-phalangienne de l'index (Main Dominante)
+  Taux      : 15%
+  Type      : proposal
+  Nom OK    : Γ£à | Taux OK: Γ£à
+  Path      : Membres Sup├⌐rieurs > Doigts - Index (Main Dominante)
+
+≡ƒöº localExpertAnalysis V3.3.347 - semantic bar├¿me guard + LLE disambiguation + pseudarthrose naming + t├⌐trapl├⌐gie guard
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): s├⌐quelles de fracture du 3├¿me m├⌐tacarpien de la main droite dominante avec cal vicieux et raideur de l'articulation m├⌐tacarpo-phalangienne du m├⌐dius
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 1 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+≡ƒöì DEBUG STEPPAGE D├ëTAILL├ë:
+   - steppageMatch: false
+   - amyotrophieMIMatch: false
+   - fractureL1Match: false
+   - Texte analys├⌐: s├⌐quelles de fracture du 3├¿me m├⌐tacarpien de la main droite dominante avec cal vicieux et raideur de l'articulation m├⌐tacarpo-phalangienne du m├⌐dius
+Γ¥î STEPPAGE NON D├ëTECT├ë - Conditions non remplies
+≡ƒöì DEBUG D├ëVIATION:
+   - deviationMatch: false
+   - mainContext: true
+   - Recherche dans: diviation NON trouv├⌐
+≡ƒöì [V3.3.155] S├⌐quelles d├⌐tect├⌐es: 1 [ 'D├⌐formation osseuse s├⌐quellaire (cal vicieux)' ]
+≡ƒûÉ∩╕Å [V3.3.353] Fracture simple m├⌐tacarpien(s) ΓåÆ PAS de cumul (l├⌐sion main unique)
+≡ƒöì V3.3.201k: isCumulDetected = false , lesionCount = 1
+≡ƒºá [V3.3.214] TC check: hasTC=false, hasNeuro=false, hasFocal=false, neuroCount=0
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 1 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+≡ƒûÉ∩╕Å [V3.3.355b] FRACTURE M├ëTACARPIEN + CAL VICIEUX ΓåÆ Bypass vers expert rules (pathologie main unique)
+≡ƒöì DEBUG M├ëTACARPIENS - Texte normalis├⌐: sequelles de fracture 3eme metacarpien $1 droit dominante avec cal vicieux et raideur de l articulation metacarpo phalangienne medius limitation restriction enraidissement raideur restriction enraidissement raideur limitation enraidissement raideur limitation restriction cassure fissure bris fracture fissure bris fracture cassure bris fracture cassure fissure consolidation vicieuse malunion defaut de consolidation cal vicieux malunion defaut de consolidation cal vicieux consolidation vicieuse defaut de consolidation cal vicieux consolidation vicieuse malunion metacarpe chirurgicale main chirurgicale main metacarpe majeur phalange distale p3 d3 vertebre dorsale d3 medius phalange distale p3 d3 vertebre dorsale d3 medius majeur d3 vertebre dorsale d3 medius majeur phalange distale p3 medius phalange distale p3 d3 vertebre dorsale d3 phalange phalanges phalange proximale p1 poignet articulation poignet $1 droit
+≡ƒöì DEBUG M├ëTACARPIENS - hasMetacarpienWord: true
+≡ƒöì DEBUG M├ëTACARPIENS - hasSingleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasMultipleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSpecificFingerEarly: true
+≡ƒöì DEBUG M├ëTACARPIENS - isMetacarpienSingleQueryEarly: false
+≡ƒöì V3.3.139: V├⌐rification cumul prioritaire...
+≡ƒöì Query words: sequelles, fracture, 3eme, metacarpien, main, droite, dominante, avec, cal, vicieux
+≡ƒöì Cat├⌐gorie cumul trouv├⌐e: Cumuls de L├⌐sions et Polytraumatismes
+≡ƒöì Entr├⌐es avec searchTerms v├⌐rifi├⌐es: 51, meilleur score: 0.0%
+Γä╣∩╕Å Aucun cumul prioritaire trouv├⌐ (similarit├⌐ < 70%), continue avec analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒª╢ [V3.3.317] hasMTPLuxation: false hasMetaFracture: false hasTSLO: false hasFootContext: false
+≡ƒöì isCumulDetected: false lesionCount: 1
+≡ƒöì [M├ëTACARPIENS] Input brut: s├⌐quelles de fracture du3├¿me m├⌐tacarpien de la main droite dominante avec cal vicieux et raideur de l articulation m├⌐tacarpo-phalangienne du m├⌐dius
+≡ƒöì [M├ëTACARPIENS] hasMetaWord: true
+≡ƒöì [M├ëTACARPIENS] hasSingleOrPerte: false
+≡ƒöì [M├ëTACARPIENS] hasSpecificFinger: false
+≡ƒöì [M├ëTACARPIENS] hasCinq: false
+ΓÜá∩╕Å [M├ëTACARPIENS] Pas de dialogue - continuons analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì [EARLY] Ant├⌐c├⌐dents d├⌐tect├⌐s: 0 - 
+≡ƒûÉ∩╕Å [V3.3.353] Fracture simple m├⌐tacarpien(s) ΓåÆ PAS de cumul (l├⌐sion main unique)
+Γ£à [EXPERT RULE MATCH - PRIORITY 10800] S├⌐quelles de fracture de m├⌐tacarpien (cal vicieux, raideur) (Main Dominante) = [3-10] ΓåÆ 3% (coef: 0.00)
+ΓöÇΓöÇΓöÇ Cas 38 ΓöÇΓöÇΓöÇ
+  Description: S├⌐quelles fracture m├⌐tacarpien D
+  Input     : "s├⌐quelles de fracture du 3├¿me m├⌐tacarpien de la main droite dominante avec cal vicieux et raideur de..."
+  Attendu   : fracture.*m[e├⌐]tacarpien|m[e├⌐]tacarpien|s[e├⌐]quelles.*fractu... (2-12%)
+  Obtenu    : Γ£à S├⌐quelles de fracture de m├⌐tacarpien (cal vicieux, raideur) (Main Dominante)
+  Taux      : 3%
+  Type      : proposal
+  Nom OK    : Γ£à | Taux OK: Γ£à
+  Path      : Membres Sup├⌐rieurs > Main - Raideurs et Ankyloses
+
+≡ƒöº localExpertAnalysis V3.3.347 - semantic bar├¿me guard + LLE disambiguation + pseudarthrose naming + t├⌐trapl├⌐gie guard
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): amputation de l'annulaire et de l'auriculaire de la main gauche non dominante avec perte des 3 phalanges de chaque doigt
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 1 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+Γ£é∩╕Å [V3.3.219] AMPUTATION DOIGT d├⌐tect├⌐e ΓåÆ Analyse sp├⌐cialis├⌐e avec niveau (site unique)
+Γ£é∩╕Å [V3.3.364] MULTI-DOIGTS: 2 doigts (Annulaire + Auriculaire) | Main Non Dominante | Taux: 10%
+ΓöÇΓöÇΓöÇ Cas 39 ΓöÇΓöÇΓöÇ
+  Description: Amputation annulaire + auriculaire ND
+  Input     : "amputation de l'annulaire et de l'auriculaire de la main gauche non dominante avec perte des 3 phala..."
+  Attendu   : annulaire.*auriculaire|perte.*annulaire|amputation.*annulair... (8-25%)
+  Obtenu    : Γ£à Perte Annulaire + Auriculaire (Main Non Dominante)
+  Taux      : 10%
+  Type      : proposal
+  Nom OK    : Γ£à | Taux OK: Γ£à
+  Path      : Membres Sup├⌐rieurs > Doigts - Amputations Multiples
+
+≡ƒöº localExpertAnalysis V3.3.347 - semantic bar├¿me guard + LLE disambiguation + pseudarthrose naming + t├⌐trapl├⌐gie guard
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): raideur du poignet droit main dominante avec limitation de la flexion et de l'extension et douleurs
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 1 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+≡ƒöì DEBUG STEPPAGE D├ëTAILL├ë:
+   - steppageMatch: false
+   - amyotrophieMIMatch: false
+   - fractureL1Match: false
+   - Texte analys├⌐: raideur du poignet droit main dominante avec limitation de la flexion et de l'extension et douleurs
+Γ¥î STEPPAGE NON D├ëTECT├ë - Conditions non remplies
+≡ƒöì DEBUG D├ëVIATION:
+   - deviationMatch: false
+   - mainContext: true
+   - Recherche dans: diviation NON trouv├⌐
+≡ƒöì [V3.3.155] S├⌐quelles d├⌐tect├⌐es: 0 []
+≡ƒöì V3.3.201k: isCumulDetected = false , lesionCount = 1
+≡ƒöì DEBUG M├ëTACARPIENS - Texte normalis├⌐: raideur $1 droit main dominante limitation flexion et de l extension et douleurs limitation restriction enraidissement raideur restriction enraidissement raideur limitation enraidissement raideur limitation restriction metacarpe chirurgicale main chirurgicale main metacarpe articulation poignet $1 droit $1 gauche poignet $1 droit $1 gauche poignet articulation poignet $1 gauche poignet articulation poignet $1 droit poignet articulation poignet $1 droit
+≡ƒöì DEBUG M├ëTACARPIENS - hasMetacarpienWord: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSingleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasMultipleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSpecificFingerEarly: false
+≡ƒöì DEBUG M├ëTACARPIENS - isMetacarpienSingleQueryEarly: false
+≡ƒöì V3.3.139: V├⌐rification cumul prioritaire...
+≡ƒöì Query words: raideur, poignet, droit, main, dominante, avec, limitation, flexion, extension, douleurs
+≡ƒöì Cat├⌐gorie cumul trouv├⌐e: Cumuls de L├⌐sions et Polytraumatismes
+≡ƒöì Entr├⌐es avec searchTerms v├⌐rifi├⌐es: 51, meilleur score: 0.0%
+Γä╣∩╕Å Aucun cumul prioritaire trouv├⌐ (similarit├⌐ < 70%), continue avec analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒª╢ [V3.3.317] hasMTPLuxation: false hasMetaFracture: false hasTSLO: false hasFootContext: false
+≡ƒöì isCumulDetected: false lesionCount: 1
+≡ƒöì [M├ëTACARPIENS] Input brut: raideur du poignet droit main dominante avec limitation de la flexion et de l extension et douleurs
+≡ƒöì [M├ëTACARPIENS] hasMetaWord: false
+≡ƒöì [M├ëTACARPIENS] hasSingleOrPerte: false
+≡ƒöì [M├ëTACARPIENS] hasSpecificFinger: false
+≡ƒöì [M├ëTACARPIENS] hasCinq: false
+ΓÜá∩╕Å [M├ëTACARPIENS] Pas de dialogue - continuons analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì [EARLY] Ant├⌐c├⌐dents d├⌐tect├⌐s: 0 - 
+Γ£à [EXPERT RULE MATCH - PRIORITY 10400] Raideur du poignet - Flexion/extension limit├⌐e = [8-14] ΓåÆ 11% (coef: 0.50)
+ΓöÇΓöÇΓöÇ Cas 40 ΓöÇΓöÇΓöÇ
+  Description: Raideur importante poignet avec douleurs D
+  Input     : "raideur du poignet droit main dominante avec limitation de la flexion et de l'extension et douleurs..."
+  Attendu   : raideur.*poignet|poignet|limitation... (5-25%)
+  Obtenu    : Γ£à Raideur du poignet - Flexion/extension limit├⌐e
+  Taux      : 11%
+  Type      : proposal
+  Nom OK    : Γ£à | Taux OK: Γ£à
+  Path      : Membres Sup├⌐rieurs > Poignet - Raideurs et Ankyloses
+
+ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ
+  R├ëSULTAT GLOBAL : 39/40 trouv├⌐s | 1/40 ├⌐chou├⌐s
+ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ

@@ -1,0 +1,471 @@
+≡ƒöº localExpertAnalysis V3.3.347 - semantic bar├¿me guard + LLE disambiguation + pseudarthrose naming + t├⌐trapl├⌐gie guard
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): employe banque 40 ans glissade escalier entorse ligament lateral externe stade 1 cheville droite attelle gla├ºage antalgiques
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 1 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+≡ƒöì DEBUG STEPPAGE D├ëTAILL├ë:
+   - steppageMatch: false
+   - amyotrophieMIMatch: false
+   - fractureL1Match: false
+   - Texte analys├⌐: employe banque 40 ans glissade escalier entorse ligament lateral externe stade 1 cheville droite attelle gla├ºage antalgiques
+Γ¥î STEPPAGE NON D├ëTECT├ë - Conditions non remplies
+≡ƒöì DEBUG D├ëVIATION:
+   - deviationMatch: false
+   - mainContext: false
+   - Recherche dans: diviation NON trouv├⌐
+≡ƒöì [V3.3.155] S├⌐quelles d├⌐tect├⌐es: 1 [ "Instabilit├⌐ chronique de la cheville (s├⌐quelle d'entorse)" ]
+≡ƒöì V3.3.201k: isCumulDetected = false , lesionCount = 1
+≡ƒºá [V3.3.214] TC check: hasTC=false, hasNeuro=false, hasFocal=false, neuroCount=0
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 1 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+Γ£à CAS SIMPLE D├ëTECT├ë: 1 s├⌐quelle(s)
+≡ƒôÜ TROUV├ë DANS BAR├êME: "Instabilit├⌐ chronique de la cheville (s├⌐quelle d'entorse)" ΓåÆ "Instabilit├⌐ chronique de la cheville (s├⌐quelle d'entorse)" (5-15%)
+   ≡ƒôè [V3.3.365] Severity-adjusted bar├¿me: [5-15] ├ù coef 0.50 = 10%
+≡ƒöä REGROUPEMENT PAR SYST├êME: [ 'MEMBRE_INFERIEUR: 12%' ]
+≡ƒº« CALCUL BALTHAZAR (PAR SYST├êME): [ 'MEMBRE_INFERIEUR: 12%' ]
+≡ƒôè IPP GLOBAL CUMUL├ë: 12%
+Γ¥î Case 1: Entorse stade 1 - sans detail sequelle (cas 1)
+   Rate=12% | Name="Membre inf├⌐rieur (CUISSE/GENOU) : S├⌐quelles ligamentaires/musculaires avec reten"
+   ERRORS: rate 12% > max 8%
+≡ƒöº localExpertAnalysis V3.3.347 - semantic bar├¿me guard + LLE disambiguation + pseudarthrose naming + t├⌐trapl├⌐gie guard
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): employe banque 40 ans entorse ligament lateral externe stade 1 cheville droite attelle arret travail 7 jours reprise sans douleur kinesitherapie aucune sequelle
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 1 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+≡ƒöì DEBUG STEPPAGE D├ëTAILL├ë:
+   - steppageMatch: false
+   - amyotrophieMIMatch: false
+   - fractureL1Match: false
+   - Texte analys├⌐: employe banque 40 ans entorse ligament lateral externe stade 1 cheville droite attelle arret travail 7 jours reprise sans douleur kinesitherapie aucune sequelle
+Γ¥î STEPPAGE NON D├ëTECT├ë - Conditions non remplies
+≡ƒöì DEBUG D├ëVIATION:
+   - deviationMatch: false
+   - mainContext: false
+   - Recherche dans: diviation NON trouv├⌐
+≡ƒöì [V3.3.155] S├⌐quelles d├⌐tect├⌐es: 1 [ "Instabilit├⌐ chronique de la cheville (s├⌐quelle d'entorse)" ]
+≡ƒöì V3.3.201k: isCumulDetected = false , lesionCount = 1
+≡ƒºá [V3.3.214] TC check: hasTC=false, hasNeuro=false, hasFocal=false, neuroCount=0
+Γ£à [V3.3.384] TRAUMATISME SANS S├ëQUELLE d├⌐tect├⌐ ΓåÆ Bypass vers expert rules (r├¿gle SANS_SEQUELLE)
+≡ƒöì DEBUG M├ëTACARPIENS - Texte normalis├⌐: employe banque 40 ans entorse ligament lateral externe stade 1 $1 droit attelle arret travail 7 jours reprise sans douleur kinesitherapie aucune sequelles distorsion foulure etirement ligamentaire entorse foulure etirement ligamentaire entorse distorsion etirement ligamentaire entorse distorsion foulure tibio tarsienne articulation cheville malleolaire cheville articulation cheville malleolaire cheville tibio tarsienne malleolaire cheville tibio tarsienne articulation cheville cheville tibio tarsienne articulation cheville
+≡ƒöì DEBUG M├ëTACARPIENS - hasMetacarpienWord: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSingleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasMultipleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSpecificFingerEarly: false
+≡ƒöì DEBUG M├ëTACARPIENS - isMetacarpienSingleQueryEarly: false
+≡ƒöì V3.3.139: V├⌐rification cumul prioritaire...
+≡ƒöì Query words: employe, banque, ans, entorse, ligament, lateral, externe, stade, cheville, droite
+≡ƒöì Cat├⌐gorie cumul trouv├⌐e: Cumuls de L├⌐sions et Polytraumatismes
+≡ƒöì Entr├⌐es avec searchTerms v├⌐rifi├⌐es: 51, meilleur score: 0.0%
+Γä╣∩╕Å Aucun cumul prioritaire trouv├⌐ (similarit├⌐ < 70%), continue avec analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒª╢ [V3.3.317] hasMTPLuxation: false hasMetaFracture: false hasTSLO: false hasFootContext: true
+≡ƒöì isCumulDetected: false lesionCount: 1
+≡ƒöì [M├ëTACARPIENS] Input brut: employe banque entorse ligament lateral externe stade1 cheville droite attelle arret travail7 jours reprise sans douleur kinesitherapie aucune sequelle
+≡ƒöì [M├ëTACARPIENS] hasMetaWord: false
+≡ƒöì [M├ëTACARPIENS] hasSingleOrPerte: false
+≡ƒöì [M├ëTACARPIENS] hasSpecificFinger: false
+≡ƒöì [M├ëTACARPIENS] hasCinq: false
+ΓÜá∩╕Å [M├ëTACARPIENS] Pas de dialogue - continuons analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì [EARLY] Ant├⌐c├⌐dents d├⌐tect├⌐s: 0 - 
+Γ£à [EXPERT RULE MATCH - PRIORITY 12000] Instabilit├⌐ chronique de la cheville (s├⌐quelle d'entorse) = [5-15] ΓåÆ 10% (coef: 0.50)
+Γ¥î Case 2: Entorse stade 1 - AUCUNE S├ëQUELLE (cas 2)
+   Rate=10% | Name="Instabilit├⌐ chronique de la cheville (s├⌐quelle d'entorse)"
+   ERRORS: rate 10% > max 0%
+≡ƒöº localExpertAnalysis V3.3.347 - semantic bar├¿me guard + LLE disambiguation + pseudarthrose naming + t├⌐trapl├⌐gie guard
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): commis cuisine 22 ans plaie 2cm index gauche peu profonde sans atteinte tendineuse ni nerveuse cicatrisation 7 jours aucune sequelle
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 0 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+≡ƒöì DEBUG STEPPAGE D├ëTAILL├ë:
+   - steppageMatch: false
+   - amyotrophieMIMatch: false
+   - fractureL1Match: false
+   - Texte analys├⌐: commis cuisine 22 ans plaie 2cm index gauche peu profonde sans atteinte tendineuse ni nerveuse cicatrisation 7 jours aucune sequelle
+Γ¥î STEPPAGE NON D├ëTECT├ë - Conditions non remplies
+≡ƒöì DEBUG D├ëVIATION:
+   - deviationMatch: false
+   - mainContext: false
+   - Recherche dans: diviation NON trouv├⌐
+≡ƒöì [V3.3.155] S├⌐quelles d├⌐tect├⌐es: 0 []
+≡ƒöì V3.3.201k: isCumulDetected = false , lesionCount = 1
+≡ƒöì DEBUG M├ëTACARPIENS - Texte normalis├⌐: commis cuisine 22 ans plaie 2cm index gauche peu profonde sans atteinte tendineuse ni nerveuse cicatrisation 7 jours aucune sequelles phalange moyenne p2 doigt index deuxieme doigt index doigt index deuxieme doigt index phalange moyenne p2 deuxieme doigt index phalange moyenne p2 d2 vertebre dorsale d2 phalange phalanges phalange proximale p1
+≡ƒöì DEBUG M├ëTACARPIENS - hasMetacarpienWord: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSingleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasMultipleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSpecificFingerEarly: true
+≡ƒöì DEBUG M├ëTACARPIENS - isMetacarpienSingleQueryEarly: false
+≡ƒöì V3.3.139: V├⌐rification cumul prioritaire...
+≡ƒöì Query words: commis, cuisine, ans, plaie, 2cm, index, gauche, peu, profonde, sans
+≡ƒöì Cat├⌐gorie cumul trouv├⌐e: Cumuls de L├⌐sions et Polytraumatismes
+≡ƒöì Entr├⌐es avec searchTerms v├⌐rifi├⌐es: 51, meilleur score: 0.0%
+Γä╣∩╕Å Aucun cumul prioritaire trouv├⌐ (similarit├⌐ < 70%), continue avec analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒª╢ [V3.3.317] hasMTPLuxation: false hasMetaFracture: false hasTSLO: false hasFootContext: false
+≡ƒöì isCumulDetected: false lesionCount: 1
+≡ƒöì [M├ëTACARPIENS] Input brut: commis cuisine plaie2cm index gauche peu profonde sans atteinte tendineuse ni nerveuse cicatrisation7 jours aucune sequelle
+≡ƒöì [M├ëTACARPIENS] hasMetaWord: false
+≡ƒöì [M├ëTACARPIENS] hasSingleOrPerte: false
+≡ƒöì [M├ëTACARPIENS] hasSpecificFinger: true
+≡ƒöì [M├ëTACARPIENS] hasCinq: false
+ΓÜá∩╕Å [M├ëTACARPIENS] Pas de dialogue - continuons analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì [EARLY] Ant├⌐c├⌐dents d├⌐tect├⌐s: 0 - 
+≡ƒöì [DEBUG EXPERT RULE - EARLY TEST]
+Pattern: /contusion.*cerebrale|traumatisme.*crani.*contusion/i
+Context: /perte.*connaissance|frontale|temporale|parietale|breve|courte|surveillance.*neurologique/i
+NegativeContext: /spondylo|listthesis|glissement.*vertebral/i
+CleanText: "commis cuisine plaie2cm index gauche peu profonde sans atteinte tendineuse ni nerveuse cicatrisation7 jours aucune sequelle"
+patternMatchClean: false, contextMatchClean: false
+negContextMatchClean: false, negContextMatchWorking: false
+matchClean: false, matchWorking: false
+≡ƒöì [DEBUG EXPERT RULE - EARLY TEST]
+Pattern: /spondylolisthesis|spondylo.*listhesis|listthesis|glissement\s+vertebral/i
+Context: /lombaire|L\d|S\d|rachis|traumatisme|post-traumatique/i
+NegativeContext: /contusion.*cerebrale|perte.*connaissance|mandibule|genou|polytraumatisme|chute.*echafaudage/i
+CleanText: "commis cuisine plaie2cm index gauche peu profonde sans atteinte tendineuse ni nerveuse cicatrisation7 jours aucune sequelle"
+patternMatchClean: false, contextMatchClean: false
+negContextMatchClean: false, negContextMatchWorking: false
+matchClean: false, matchWorking: false
+≡ƒöì [V3.3.300] No result from rule-based ΓåÆ Fuzzy matching fallback
+≡ƒöì [V3.3.300] Fuzzy: 5 matchs, best=23.3, threshold=none
+Γ£à Case 3: Plaie index - AUCUNE S├ëQUELLE (cas 3)
+   Rate=0% | Name="Γ£à <strong>CONSOLIDATION SANS S├ëQUELLE D├ëTECT├ëE</strong><br><br>La fracture est c"
+≡ƒöº localExpertAnalysis V3.3.347 - semantic bar├¿me guard + LLE disambiguation + pseudarthrose naming + t├⌐trapl├⌐gie guard
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): soudeur 35 ans eclat metal oeil droit ulcere corneen cicatrise 10 jours pas de perte acuite visuelle legere cicatrice corneenne
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 0 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+≡ƒöì DEBUG STEPPAGE D├ëTAILL├ë:
+   - steppageMatch: false
+   - amyotrophieMIMatch: false
+   - fractureL1Match: false
+   - Texte analys├⌐: soudeur 35 ans eclat metal oeil droit ulcere corneen cicatrise 10 jours pas de perte acuite visuelle legere cicatrice corneenne
+Γ¥î STEPPAGE NON D├ëTECT├ë - Conditions non remplies
+≡ƒöì DEBUG D├ëVIATION:
+   - deviationMatch: false
+   - mainContext: false
+   - Recherche dans: diviation NON trouv├⌐
+≡ƒöì [V3.3.155] S├⌐quelles d├⌐tect├⌐es: 0 []
+≡ƒöì V3.3.201k: isCumulDetected = false , lesionCount = 1
+≡ƒöì DEBUG M├ëTACARPIENS - Texte normalis├⌐: soudeur 35 ans eclat metal oeil droit ulcere corneen cicatrise 10 jours pas de perte acuite visuelle leger cicatrice corneenne amputation ablation section amputation ablation perte oeil oculaire ophtalmique oeil oeil ophtalmique oeil oeil oculaire oeil oeil oculaire vision vue acuite visuelle vision vue acuite visuelle av acuite visuelle vision de acuite acuite visuelle vision de acuite av vision de acuite av acuite visuelle
+≡ƒöì DEBUG M├ëTACARPIENS - hasMetacarpienWord: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSingleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasMultipleIndicator: true
+≡ƒöì DEBUG M├ëTACARPIENS - hasSpecificFingerEarly: false
+≡ƒöì DEBUG M├ëTACARPIENS - isMetacarpienSingleQueryEarly: false
+≡ƒöì V3.3.139: V├⌐rification cumul prioritaire...
+≡ƒöì Query words: soudeur, ans, eclat, metal, oeil, droit, ulcere, corneen, cicatrise, jours
+≡ƒöì Cat├⌐gorie cumul trouv├⌐e: Cumuls de L├⌐sions et Polytraumatismes
+≡ƒöì Entr├⌐es avec searchTerms v├⌐rifi├⌐es: 51, meilleur score: 0.0%
+Γä╣∩╕Å Aucun cumul prioritaire trouv├⌐ (similarit├⌐ < 70%), continue avec analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒª╢ [V3.3.317] hasMTPLuxation: false hasMetaFracture: false hasTSLO: false hasFootContext: false
+≡ƒöì isCumulDetected: false lesionCount: 1
+≡ƒöì [M├ëTACARPIENS] Input brut: eclat metal oeil droit ulcere corneen cicatrise10 jours pas de perte acuite visuelle legere cicatrice corneenne
+≡ƒöì [M├ëTACARPIENS] hasMetaWord: false
+≡ƒöì [M├ëTACARPIENS] hasSingleOrPerte: true
+≡ƒöì [M├ëTACARPIENS] hasSpecificFinger: false
+≡ƒöì [M├ëTACARPIENS] hasCinq: false
+ΓÜá∩╕Å [M├ëTACARPIENS] Pas de dialogue - continuons analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì [EARLY] Ant├⌐c├⌐dents d├⌐tect├⌐s: 0 - 
+   ≡ƒôë V3.3.209: Mod├⌐ration expert rule "Taies de corn├⌐e (selon g├¬ne visuelle)" - s├⌐v├⌐rit├⌐ LOW d├⌐tect├⌐e
+Γ£à [EXPERT RULE MATCH - PRIORITY 10301] Taies de corn├⌐e (selon g├¬ne visuelle) = [0-100] ΓåÆ 0% (coef: 0.00, LOW)
+Γ£à Case 4: Corps ├⌐tranger corn├⌐en - cicatrice corn├⌐enne (cas 4)
+   Rate=0% | Name="Taies de corn├⌐e (selon g├¬ne visuelle)"
+≡ƒöº localExpertAnalysis V3.3.347 - semantic bar├¿me guard + LLE disambiguation + pseudarthrose naming + t├⌐trapl├⌐gie guard
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): manutentionnaire 48 ans soulevement charge 30kg lumbago contracture musculaire lombaire pas de signes de sciatique arret travail 4 semaines kinesitherapie pas de sequelles invalidantes fragilite lomba
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 0 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+≡ƒöì DEBUG STEPPAGE D├ëTAILL├ë:
+   - steppageMatch: false
+   - amyotrophieMIMatch: false
+   - fractureL1Match: false
+   - Texte analys├⌐: manutentionnaire 48 ans soulevement charge 30kg lumbago contracture musculaire lombaire pas de signes de sciatique arret travail 4 semaines kinesitherapie pas de sequelles invalidantes fragilite lombaire persistante
+Γ¥î STEPPAGE NON D├ëTECT├ë - Conditions non remplies
+≡ƒöì DEBUG D├ëVIATION:
+   - deviationMatch: false
+   - mainContext: true
+   - Recherche dans: diviation NON trouv├⌐
+≡ƒöì [V3.3.155] S├⌐quelles d├⌐tect├⌐es: 0 []
+≡ƒöì V3.3.201k: isCumulDetected = false , lesionCount = 1
+≡ƒöì DEBUG M├ëTACARPIENS - Texte normalis├⌐: manutentionnaire 48 ans soulevement charge 30kg lumbago contracture musculaire lombaire pas de signes de sciatique arret travail 4 semaines kinesitherapie pas de sequelles invalidantes fragilite lombaire persistante metacarpe chirurgicale main chirurgicale main metacarpe poignet articulation poignet $1 droit
+≡ƒöì DEBUG M├ëTACARPIENS - hasMetacarpienWord: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSingleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasMultipleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSpecificFingerEarly: false
+≡ƒöì DEBUG M├ëTACARPIENS - isMetacarpienSingleQueryEarly: false
+≡ƒöì V3.3.139: V├⌐rification cumul prioritaire...
+≡ƒöì Query words: manutentionnaire, ans, soulevement, charge, 30kg, lumbago, contracture, musculaire, lombaire, pas
+≡ƒöì Cat├⌐gorie cumul trouv├⌐e: Cumuls de L├⌐sions et Polytraumatismes
+≡ƒöì Entr├⌐es avec searchTerms v├⌐rifi├⌐es: 51, meilleur score: 0.0%
+Γä╣∩╕Å Aucun cumul prioritaire trouv├⌐ (similarit├⌐ < 70%), continue avec analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒª╢ [V3.3.317] hasMTPLuxation: false hasMetaFracture: false hasTSLO: false hasFootContext: false
+≡ƒöì isCumulDetected: false lesionCount: 1
+≡ƒöì [M├ëTACARPIENS] Input brut: soulevement charge30kg lumbago contracture musculaire lombaire pas de signes de sciatique arret travail4 semaines kinesitherapie pas de sequelles invalidantes fragilite lombaire persistante
+≡ƒöì [M├ëTACARPIENS] hasMetaWord: false
+≡ƒöì [M├ëTACARPIENS] hasSingleOrPerte: false
+≡ƒöì [M├ëTACARPIENS] hasSpecificFinger: false
+≡ƒöì [M├ëTACARPIENS] hasCinq: false
+ΓÜá∩╕Å [M├ëTACARPIENS] Pas de dialogue - continuons analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì [EARLY] Ant├⌐c├⌐dents d├⌐tect├⌐s: 0 - 
+≡ƒöì [DEBUG EXPERT RULE - EARLY TEST]
+Pattern: /contusion.*cerebrale|traumatisme.*crani.*contusion/i
+Context: /perte.*connaissance|frontale|temporale|parietale|breve|courte|surveillance.*neurologique/i
+NegativeContext: /spondylo|listthesis|glissement.*vertebral/i
+CleanText: "soulevement charge30kg lumbago contracture musculaire lombaire pas de signes de sciatique arret travail4 semaines kinesitherapie pas de sequelles invalidantes fragilite lombaire persistante"
+patternMatchClean: false, contextMatchClean: false
+negContextMatchClean: false, negContextMatchWorking: false
+matchClean: false, matchWorking: false
+Γ£à [EXPERT RULE MATCH - PRIORITY 96] Hernie discale lombaire post-traumatique - Avec radiculalgie (sciatique ou cruralgie) = [15-35] ΓåÆ 15% (coef: 0.00)
+Γ¥î Case 5: Lumbago - fragilit├⌐ persistante, PAS hernie (cas 5)
+   Rate=15% | Name="Hernie discale lombaire post-traumatique - Avec radiculalgie (sciatique ou crura"
+   ERRORS: rate 15% > max 8%
+≡ƒöº localExpertAnalysis V3.3.347 - semantic bar├¿me guard + LLE disambiguation + pseudarthrose naming + t├⌐trapl├⌐gie guard
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): ouvrier metallurgie 29 ans brulure 2eme degre profond 10 pourcent avant-bras gauche cicatrice dyschromique legerement retractile
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 1 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+≡ƒöì DEBUG STEPPAGE D├ëTAILL├ë:
+   - steppageMatch: false
+   - amyotrophieMIMatch: false
+   - fractureL1Match: false
+   - Texte analys├⌐: ouvrier metallurgie 29 ans brulure 2eme degre profond 10 pourcent avant-bras gauche cicatrice dyschromique legerement retractile
+Γ¥î STEPPAGE NON D├ëTECT├ë - Conditions non remplies
+≡ƒöì DEBUG D├ëVIATION:
+   - deviationMatch: false
+   - mainContext: false
+   - Recherche dans: diviation NON trouv├⌐
+≡ƒöì [V3.3.155] S├⌐quelles d├⌐tect├⌐es: 1 [ 'Cicatrice pathologique (mauvaise qualit├⌐, adh├⌐rente)' ]
+≡ƒöì V3.3.201k: isCumulDetected = false , lesionCount = 1
+≡ƒºá [V3.3.214] TC check: hasTC=false, hasNeuro=false, hasFocal=false, neuroCount=0
+≡ƒöÑ [V3.3.215] BR├¢LURES PROFONDES MAIN/AVANT-BRAS d├⌐tect├⌐es ΓåÆ Bypass DIRECT vers expert rules
+≡ƒöì DEBUG M├ëTACARPIENS - Texte normalis├⌐: ouvrier metallurgie 29 ans brulure 2eme degre profond 10 pourcent avant $1 gauche cicatrice dyschromique legerement retractile
+≡ƒöì DEBUG M├ëTACARPIENS - hasMetacarpienWord: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSingleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasMultipleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSpecificFingerEarly: false
+≡ƒöì DEBUG M├ëTACARPIENS - isMetacarpienSingleQueryEarly: false
+≡ƒöì V3.3.139: V├⌐rification cumul prioritaire...
+≡ƒöì Query words: ouvrier, metallurgie, ans, brulure, 2eme, degre, profond, pourcent, avant, bras
+≡ƒöì Cat├⌐gorie cumul trouv├⌐e: Cumuls de L├⌐sions et Polytraumatismes
+≡ƒöì Entr├⌐es avec searchTerms v├⌐rifi├⌐es: 51, meilleur score: 0.0%
+Γä╣∩╕Å Aucun cumul prioritaire trouv├⌐ (similarit├⌐ < 70%), continue avec analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒª╢ [V3.3.317] hasMTPLuxation: false hasMetaFracture: false hasTSLO: false hasFootContext: false
+≡ƒöì isCumulDetected: false lesionCount: 1
+≡ƒöì [M├ëTACARPIENS] Input brut: metallurgie brulure2eme degre profond10 pourcent avant-bras gauche cicatrice dyschromique legerement retractile
+≡ƒöì [M├ëTACARPIENS] hasMetaWord: false
+≡ƒöì [M├ëTACARPIENS] hasSingleOrPerte: false
+≡ƒöì [M├ëTACARPIENS] hasSpecificFinger: false
+≡ƒöì [M├ëTACARPIENS] hasCinq: false
+ΓÜá∩╕Å [M├ëTACARPIENS] Pas de dialogue - continuons analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì [EARLY] Ant├⌐c├⌐dents d├⌐tect├⌐s: 0 - 
+≡ƒöì [DEBUG EXPERT RULE - EARLY TEST]
+Pattern: /contusion.*cerebrale|traumatisme.*crani.*contusion/i
+Context: /perte.*connaissance|frontale|temporale|parietale|breve|courte|surveillance.*neurologique/i
+NegativeContext: /spondylo|listthesis|glissement.*vertebral/i
+CleanText: "metallurgie brulure2eme degre profond10 pourcent avant bras gauche cicatrice dyschromique legerement retractile"
+patternMatchClean: false, contextMatchClean: false
+negContextMatchClean: false, negContextMatchWorking: false
+matchClean: false, matchWorking: false
+Γ£à [EXPERT RULE MATCH - PRIORITY 1004] Br├╗lures cutan├⌐es l├⌐g├¿res - Moins de 10% de la surface corporelle = 5%
+Γ£à Case 6: Br├╗lure avant-bras - cicatrice (cas 6)
+   Rate=5% | Name="Br├╗lures cutan├⌐es l├⌐g├¿res - Moins de 10% de la surface corporelle"
+≡ƒöº localExpertAnalysis V3.3.347 - semantic bar├¿me guard + LLE disambiguation + pseudarthrose naming + t├⌐trapl├⌐gie guard
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): charpentier 52 ans fracture comminutive extremite inferieure radius droit osteosynthese plaque legere perte amplitude flexion extension poignet douleurs main dominante
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 1 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+≡ƒª┤ [V3.3.216] FRACTURE POUTEAU-COLLES / RADIUS DISTAL d├⌐tect├⌐e ΓåÆ Analyse sp├⌐cialis├⌐e (site unique)
+≡ƒª┤ [V3.3.216] Score s├⌐v├⌐rit├⌐ Pouteau-Colles: 1 | Dominance: dominante | Limitation: null% | EVA: null
+≡ƒª┤ [V3.3.216] S├⌐v├⌐rit├⌐: legeres | Fourchette: 5-10% | Taux final: 9%
+Γ£à Case 7: Fracture Pouteau-Colles - s├⌐quelles l├⌐g├¿res (cas 7)
+   Rate=9% | Name="Fracture de l'extr├⌐mit├⌐ inf├⌐rieure du radius - S├⌐quelles l├⌐g├¿res (Main Dominante"
+≡ƒöº localExpertAnalysis V3.3.347 - semantic bar├¿me guard + LLE disambiguation + pseudarthrose naming + t├⌐trapl├⌐gie guard
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): operateur machine-outil 41 ans ecrasement pouce droit amputation phalange distale pouce droit perte pince fine inapte poste initial main dominante
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 1 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+Γ£é∩╕Å [V3.3.219] AMPUTATION DOIGT d├⌐tect├⌐e ΓåÆ Analyse sp├⌐cialis├⌐e avec niveau (site unique)
+Γ£é∩╕Å [V3.3.219] Doigt: pouce (D1) | Niveau: P3 | Main Dominante | Position: 2 | Taux: 9%
+Γ£à Case 8: Amputation P3 pouce SEUL (cas 8)
+   Rate=9% | Name="Ablation phalange ungu├⌐ale du pouce (Main Dominante)"
+≡ƒöº localExpertAnalysis V3.3.347 - semantic bar├¿me guard + LLE disambiguation + pseudarthrose naming + t├⌐trapl├⌐gie guard
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): magasinier cariste 33 ans fracture ouverte tibia perone jambe gauche syndrome des loges aponevrotomie fixateur externe greffes peau boiterie definitive fonte musculaire douleurs chroniques inaptitude 
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 1 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+≡ƒª┤ [V3.3.292] Syndrome des loges d├⌐tect├⌐ ΓåÆ Bypass cumul, analyse directe via comprehensiveSingleLesionAnalysis
+≡ƒöì [M├ëTACARPIENS] Input brut: magasinier cariste 33 ans fracture ouverte tibia perone jambe gauche syndrome des loges aponevrotomie fixateur externe greffes peau boiterie definitive fonte musculaire douleurs chroniques inaptitude travail debout
+≡ƒöì [M├ëTACARPIENS] hasMetaWord: false
+≡ƒöì [M├ëTACARPIENS] hasSingleOrPerte: false
+≡ƒöì [M├ëTACARPIENS] hasSpecificFinger: false
+≡ƒöì [M├ëTACARPIENS] hasCinq: false
+ΓÜá∩╕Å [M├ëTACARPIENS] Pas de dialogue - continuons analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì [EARLY] Ant├⌐c├⌐dents d├⌐tect├⌐s: 0 - 
+≡ƒöì [DEBUG EXPERT RULE - EARLY TEST]
+Pattern: /contusion.*cerebrale|traumatisme.*crani.*contusion/i
+Context: /perte.*connaissance|frontale|temporale|parietale|breve|courte|surveillance.*neurologique/i
+NegativeContext: /spondylo|listthesis|glissement.*vertebral/i
+CleanText: "magasinier cariste 33 ans fracture ouverte tibia perone jambe gauche syndrome des loges aponevrotomie fixateur externe greffes peau boiterie definitive fonte musculaire douleurs chroniques inaptitude travail debout"
+patternMatchClean: false, contextMatchClean: false
+negContextMatchClean: false, negContextMatchWorking: false
+matchClean: false, matchWorking: false
+Γ£à [EXPERT RULE MATCH - PRIORITY 1004] Syndrome des loges chronique d'effort de la jambe = [10-25] ΓåÆ 25% (coef: 1.00)
+Γ£à Case 9: Fracture ouverte tibia/p├⌐ron├⌐ + syndrome loges (cas 9)
+   Rate=25% | Name="Syndrome des loges chronique d'effort de la jambe"
+≡ƒöº localExpertAnalysis V3.3.347 - semantic bar├¿me guard + LLE disambiguation + pseudarthrose naming + t├⌐trapl├⌐gie guard
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): ouvrier travaux publics 27 ans traumatisme cranien grave coma glasgow 6 fracture bassin contusions pulmonaires hemorragie meningee hematome sous-dural syndrome frontal troubles graves memoire apathie 
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 2 sites d├⌐tect├⌐s (seuil=2) ΓåÆ MULTI-SITES
+≡ƒöì DEBUG STEPPAGE D├ëTAILL├ë:
+   - steppageMatch: false
+   - amyotrophieMIMatch: false
+   - fractureL1Match: false
+   - Texte analys├⌐: ouvrier travaux publics 27 ans traumatisme cranien grave coma glasgow 6 fracture bassin contusions pulmonaires hemorragie meningee hematome sous-dural syndrome frontal troubles graves memoire apathie irritabilite boiterie impossible reprendre activit
+Γ¥î STEPPAGE NON D├ëTECT├ë - Conditions non remplies
+≡ƒöì DEBUG D├ëVIATION:
+   - deviationMatch: false
+   - mainContext: false
+   - Recherche dans: diviation NON trouv├⌐
+≡ƒöì [V3.3.155] S├⌐quelles d├⌐tect├⌐es: 3 [
+  'hematome sous-dural ',
+  'Boiterie',
+  'Fracture du bassin (disjonction symphyse / aileron sacr├⌐)'
+]
+≡ƒöì V3.3.201k: isCumulDetected = false , lesionCount = 1
+≡ƒåò V3.3.280: OVERRIDE CUMUL - isMultiSitePolytrauma=true mais detectMultipleLesions=false ΓåÆ FORCE cumul
+ΓÜá∩╕Å V3.3.201j: CUMUL D├ëTECT├ë ΓåÆ SKIP regroupement par syst├¿me, passage direct ├á extraction l├⌐sions individuelles
+≡ƒöì DEBUG M├ëTACARPIENS - Texte normalis├⌐: ouvrier travaux publics 27 ans traumatisme cranien important coma glasgow 6 fracture bassin contusions pulmonaires hemorragie meningee hematome sous dural syndrome frontal troubles graves memoire apathie irritabilite boiterie impossible reprendre activite professionnelle cassure fissure bris fracture fissure bris fracture cassure bris fracture cassure fissure hanche coxo femorale articulation hanche claudication trouble marche demarche boitante claudication boiterie demarche boitante claudication boiterie trouble marche poumon lobectomie pneumonectomie poumon pulmonaire pneumonectomie poumon pulmonaire lobectomie
+≡ƒöì DEBUG M├ëTACARPIENS - hasMetacarpienWord: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSingleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasMultipleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSpecificFingerEarly: false
+≡ƒöì DEBUG M├ëTACARPIENS - isMetacarpienSingleQueryEarly: false
+≡ƒöì V3.3.139: V├⌐rification cumul prioritaire...
+≡ƒöì Query words: ouvrier, travaux, publics, ans, traumatisme, cranien, grave, coma, glasgow, fracture
+≡ƒöì Cat├⌐gorie cumul trouv├⌐e: Cumuls de L├⌐sions et Polytraumatismes
+≡ƒöì Entr├⌐es avec searchTerms v├⌐rifi├⌐es: 51, meilleur score: 0.0%
+Γä╣∩╕Å Aucun cumul prioritaire trouv├⌐ (similarit├⌐ < 70%), continue avec analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒª╢ [V3.3.317] hasMTPLuxation: false hasMetaFracture: false hasTSLO: false hasFootContext: false
+≡ƒöì isCumulDetected: true lesionCount: 2
+≡ƒöì CUMUL D├ëTECT├ë - Extraction des l├⌐sions individuelles
+≡ƒô¥ text original: ouvrier travaux publics 27 ans traumatisme cranien grave coma glasgow 6 fracture bassin contusions pulmonaires hemorragie meningee hematome sous-dural syndrome frontal troubles graves memoire apathie irritabilite boiterie impossible reprendre activite professionnelle
+≡ƒô¥ finalCleanedText: ouvrier travaux publics traumatisme cranien grave coma glasgow 6 fracture bassin contusions pulmonaires hemorragie meningee hematome sous-dural syndrome frontal troubles graves memoire apathie irritabilite boiterie impossible reprendre activite
+≡ƒöº extractIndividualLesions V3.3.211 - avec Pattern 0C-ter + 0C-quater
+≡ƒöì extractIndividualLesions - texte d'entr├⌐e: ouvrier travaux publics 27 ans traumatisme cranien grave coma glasgow 6 fracture bassin contusions pulmonaires hemorragie meningee hematome sous-dural syndrome frontal troubles graves memoire apathie irritabilite boiterie impossible reprendre activite professionnelle
+≡ƒöì Pattern 0B - Extraction polytraumatisme membre (V3.3.201L):
+  fractureMatch: NULL
+  ligamentMatch: NULL
+  muscleMatch: NULL
+  raideurMatch: NULL
+  algiesMatch: NULL
+  deficitForceMatch: NULL
+  componentCount: 0
+  Condition activ├⌐e: false
+Γ¥î Pattern 0B NON ACTIV├ë: componentCount < 3
+ΓÜá∩╕Å Aucun pattern de cumul d├⌐tect├⌐, retour texte original
+≡ƒôï L├⌐sions extraites: [
+  'ouvrier travaux publics 27 ans traumatisme cranien grave coma glasgow 6 fracture bassin contusions pulmonaires hemorragie meningee hematome sous dural syndrome frontal troubles graves memoire apathie irritabilite boiterie impossible reprendre activite professionnelle'
+] Nombre: 1
+≡ƒåò V3.3.286: FALLBACK extractIndividualLesions ΓåÆ utilisation detectedSequelae comme l├⌐sions individuelles
+   S├⌐quelles d├⌐tect├⌐es utilis├⌐es: [
+  'hematome sous-dural ',
+  'Boiterie',
+  'Fracture du bassin (disjonction symphyse / aileron sacr├⌐)'
+]
+ΓÜá∩╕Å V3.3.320c: Segment NON-l├⌐sionnel exclu: "hematome sous-dural ..."
+≡ƒöº V3.3.320c: Filtr├⌐ 3 ΓåÆ 2 l├⌐sions (exclu segments non-l├⌐sionnels)
+Γ£à Au moins 2 l├⌐sions ΓåÆ Analyse s├⌐par├⌐e
+≡ƒöÄ Analyse l├⌐sion "Boiterie" ΓåÆ enrichi: "Boiterie" (processed: "Boiterie")
+≡ƒöì [M├ëTACARPIENS] Input brut: boiterie
+≡ƒöì [M├ëTACARPIENS] hasMetaWord: false
+≡ƒöì [M├ëTACARPIENS] hasSingleOrPerte: false
+≡ƒöì [M├ëTACARPIENS] hasSpecificFinger: false
+≡ƒöì [M├ëTACARPIENS] hasCinq: false
+ΓÜá∩╕Å [M├ëTACARPIENS] Pas de dialogue - continuons analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì [EARLY] Ant├⌐c├⌐dents d├⌐tect├⌐s: 0 - 
+≡ƒöì [DEBUG EXPERT RULE - EARLY TEST]
+Pattern: /contusion.*cerebrale|traumatisme.*crani.*contusion/i
+Context: /perte.*connaissance|frontale|temporale|parietale|breve|courte|surveillance.*neurologique/i
+NegativeContext: /spondylo|listthesis|glissement.*vertebral/i
+CleanText: "boiterie"
+patternMatchClean: false, contextMatchClean: false
+negContextMatchClean: false, negContextMatchWorking: false
+matchClean: false, matchWorking: false
+≡ƒöì [DEBUG EXPERT RULE - EARLY TEST]
+Pattern: /spondylolisthesis|spondylo.*listhesis|listthesis|glissement\s+vertebral/i
+Context: /lombaire|L\d|S\d|rachis|traumatisme|post-traumatique/i
+NegativeContext: /contusion.*cerebrale|perte.*connaissance|mandibule|genou|polytraumatisme|chute.*echafaudage/i
+CleanText: "boiterie"
+patternMatchClean: false, contextMatchClean: false
+negContextMatchClean: false, negContextMatchWorking: false
+matchClean: false, matchWorking: false
+   ΓåÆ Type: no_result
+   ≡ƒöº V3.3.323: Enrichissement fracture bassin: "Fracture du bassin (disjonction symphyse / aileron sacr├⌐)" ΓåÆ "Fracture du bassin (disjonction symphyse / aileron sacr├⌐) fracture bassin cadre obturateur branche pubienne disjonction sacro-iliaque douleurs residuelles sequelles"
+≡ƒöÄ Analyse l├⌐sion "Fracture du bassin (disjonction symphyse / aileron sacr├⌐)" ΓåÆ enrichi: "Fracture du bassin (disjonction symphyse / aileron sacr├⌐) fracture bassin cadre obturateur branche pubienne disjonction sacro-iliaque douleurs residuelles sequelles" (processed: "Fracture du bassin (disjonction symphyse / aileron sacr├⌐) fracture bassin cadre obturateur branche pubienne disjonction sacro-iliaque douleurs residuelles sequelles")
+≡ƒöì [M├ëTACARPIENS] Input brut: fracture du bassin (disjonction symphyse / aileron sacr├⌐) fracture bassin cadre obturateur branche pubienne disjonction sacro-iliaque douleurs residuelles sequelles
+≡ƒöì [M├ëTACARPIENS] hasMetaWord: false
+≡ƒöì [M├ëTACARPIENS] hasSingleOrPerte: false
+≡ƒöì [M├ëTACARPIENS] hasSpecificFinger: false
+≡ƒöì [M├ëTACARPIENS] hasCinq: false
+ΓÜá∩╕Å [M├ëTACARPIENS] Pas de dialogue - continuons analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì [EARLY] Ant├⌐c├⌐dents d├⌐tect├⌐s: 0 - 
+≡ƒöì [DEBUG EXPERT RULE - EARLY TEST]
+Pattern: /contusion.*cerebrale|traumatisme.*crani.*contusion/i
+Context: /perte.*connaissance|frontale|temporale|parietale|breve|courte|surveillance.*neurologique/i
+NegativeContext: /spondylo|listthesis|glissement.*vertebral/i
+CleanText: "fracture du bassin (disjonction symphyse / aileron sacre) fracture bassin cadre obturateur branche pubienne disjonction sacro iliaque douleurs residuelles sequelles"
+patternMatchClean: false, contextMatchClean: false
+negContextMatchClean: false, negContextMatchWorking: false
+matchClean: false, matchWorking: false
+Γ£à [EXPERT RULE MATCH - PRIORITY 96] Fracture isol├⌐e d'une branche pubienne ou de l'aile iliaque (sans d├⌐placement) = [5-10] ΓåÆ 8% (coef: 0.50)
+   ΓåÆ Type: proposal
+   ΓåÆ Injury: Fracture isol├⌐e d'une branche pubienne ou de l'aile iliaque (sans d├⌐placement)
+   ΓåÆ Rate calcul├⌐: 8
+≡ƒôè TOTAL: 1 propositions g├⌐n├⌐r├⌐es sur 2 l├⌐sions
+Γ¥î Case 10: TC grave + fracture bassin (cas 10)
+   Rate=0% | Name="ΓÜá∩╕Å <strong>CUMUL DE L├ëSIONS D├ëTECT├ë - 2 l├⌐sions identifi├⌐es</strong><br><br>J'ai"
+   ERRORS: rate 0% < min 35%
+≡ƒöº localExpertAnalysis V3.3.347 - semantic bar├¿me guard + LLE disambiguation + pseudarthrose naming + t├⌐trapl├⌐gie guard
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): cordiste 38 ans chute 12 metres fracture comminutive vertebres cervicales C5 C6 section complete moelle epiniere tetraplegie complete paralysie 4 membres dependance totale fauteuil electrique tierce p
+≡ƒöì [V3.3.287] Parapl├⌐gie/Queue de cheval/Compression m├⌐dullaire ΓåÆ NOT multi-sites (pathologie neurologique unique)
+≡ƒöì DEBUG STEPPAGE D├ëTAILL├ë:
+   - steppageMatch: false
+   - amyotrophieMIMatch: false
+   - fractureL1Match: false
+   - Texte analys├⌐: cordiste 38 ans chute 12 metres fracture comminutive vertebres cervicales C5 C6 section complete moelle epiniere tetraplegie complete paralysie 4 membres dependance totale fauteuil electrique tierce personne 24h
+Γ¥î STEPPAGE NON D├ëTECT├ë - Conditions non remplies
+≡ƒöì DEBUG D├ëVIATION:
+   - deviationMatch: false
+   - mainContext: false
+   - Recherche dans: diviation NON trouv├⌐
+≡ƒöì [V3.3.155] S├⌐quelles d├⌐tect├⌐es: 2 [
+  'S├⌐quelles de fracture/luxation du rachis cervical C5 - Avec l├⌐sion neurologique',
+  'Quadripl├⌐gie compl├¿te post-traumatique'
+]
+≡ƒª┤ [V3.3.287] Parapl├⌐gie/Quadripl├⌐gie/Queue de cheval ΓåÆ PAS de cumul (pathologie neurologique unique)
+≡ƒöì V3.3.201k: isCumulDetected = false , lesionCount = 1
+≡ƒºá [V3.3.214] TC check: hasTC=true, hasNeuro=false, hasFocal=false, neuroCount=0
+≡ƒöì [V3.3.287] Parapl├⌐gie/Queue de cheval/Compression m├⌐dullaire ΓåÆ NOT multi-sites (pathologie neurologique unique)
+≡ƒºá [V3.3.347] T├ëTRAPL├ëGIE/PARAPL├ëGIE/COMPRESSION M├ëDULLAIRE d├⌐tect├⌐e ΓåÆ Bypass vers expert rules (pathologie neurologique majeure)
+≡ƒöì DEBUG M├ëTACARPIENS - Texte normalis├⌐: cordiste 38 ans chute 12 metres fracture comminutive vertebres cervicales c5 vertebre cervicale c5 c6 vertebre cervicale c6 section complete moelle epiniere tetraplegie complete paralysie 4 membres dependance totale fauteuil electrique tierce personne 24h amputation ablation perte cassure fissure bris fracture fissure bris fracture cassure bris fracture cassure fissure rachis cervical colonne cervicale nuque rachis cervical colonne cervicale cervicales colonne cervicale cervicales nuque rachis cervical cervicales nuque nerf nerveux neurologique
+≡ƒöì DEBUG M├ëTACARPIENS - hasMetacarpienWord: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSingleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasMultipleIndicator: true
+≡ƒöì DEBUG M├ëTACARPIENS - hasSpecificFingerEarly: false
+≡ƒöì DEBUG M├ëTACARPIENS - isMetacarpienSingleQueryEarly: false
+≡ƒöì V3.3.139: V├⌐rification cumul prioritaire...
+≡ƒöì Query words: cordiste, ans, chute, metres, fracture, comminutive, vertebres, cervicales, section, complete
+≡ƒöì Cat├⌐gorie cumul trouv├⌐e: Cumuls de L├⌐sions et Polytraumatismes
+≡ƒöì Entr├⌐es avec searchTerms v├⌐rifi├⌐es: 51, meilleur score: 0.0%
+Γä╣∩╕Å Aucun cumul prioritaire trouv├⌐ (similarit├⌐ < 70%), continue avec analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒª╢ [V3.3.317] hasMTPLuxation: false hasMetaFracture: false hasTSLO: false hasFootContext: false
+≡ƒöì isCumulDetected: false lesionCount: 1
+≡ƒöì [M├ëTACARPIENS] Input brut: cordiste chute12 metres fracture comminutive vertebres cervicales c5 c6 section complete moelle epiniere tetraplegie complete paralysie4 membres dependance totale fauteuil electrique tierce personne24h
+≡ƒöì [M├ëTACARPIENS] hasMetaWord: false
+≡ƒöì [M├ëTACARPIENS] hasSingleOrPerte: false
+≡ƒöì [M├ëTACARPIENS] hasSpecificFinger: false
+≡ƒöì [M├ëTACARPIENS] hasCinq: true
+ΓÜá∩╕Å [M├ëTACARPIENS] Pas de dialogue - continuons analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì [EARLY] Ant├⌐c├⌐dents d├⌐tect├⌐s: 0 - 
+≡ƒª┤ [V3.3.287] Parapl├⌐gie/Quadripl├⌐gie/Queue de cheval ΓåÆ PAS de cumul (pathologie neurologique unique)
+   ≡ƒôê V3.3.361: Parapl├⌐gie/t├⌐trapl├⌐gie ΓåÆ coefficient minimum 0.5
+Γ£à [EXPERT RULE MATCH - PRIORITY 12000] Quadripl├⌐gie incompl├¿te (marche possible) = [60-90] ΓåÆ 75% (coef: 0.50)
+Γ¥î Case 11: T├⌐trapl├⌐gie C5-C6 COMPL├êTE (cas 11)
+   Rate=75% | Name="Quadripl├⌐gie incompl├¿te (marche possible)"
+   ERRORS: rate 75% < min 80%, contains forbidden "incompl├¿te"
+
+ΓòÉΓòÉΓòÉ R├ëSULTAT: 6/11 OK, 5 FAILED ΓòÉΓòÉΓòÉ
