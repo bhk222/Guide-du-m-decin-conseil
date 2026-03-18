@@ -21077,6 +21077,19 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
         else if (/proth[eè]se.*(?:totale|partielle)?.*(?:coude|hanche|genou|[eé]paule)/i.test(text) && detectedSequelae.length <= 2) {
             console.log('🦴 [V3.3.374] Prothèse articulaire → Bypass vers expert rules');
             // Ne pas retourner, laisser l'analyse continuer vers comprehensiveSingleLesionAnalysis
+        }
+        // 🆕 V3.3.389: POLYTRAUMATISME CERVICO-CRANIO-FACIAL = Bypass vers handler CCF (pas de regroupement systèmes)
+        // Pattern: lésion oculaire (cécité/énucléation) + fracture faciale (Le Fort) + mastication/V2
+        // Le regroupement par système donne "AUTRE 28%" alors que le handler CCF V3.3.314 fait un vrai cumul Balthazard
+        else if (
+            (/c[eé]cit[eé]|[eé]nucl[eé]ation|[eé]clatement.*globe|perte.*vision|oeil.*perdu/i.test(text) ||
+             /strabisme|d[eé]viation.*oculaire/i.test(text)) &&
+            (/le\s*fort|fracture.*(?:facial|maxill|mandib|malaire|zygoma|pommette|plancher.*orbit)/i.test(text) ||
+             /mastication|articul[eé].*dentaire|difficult[eé].*m[aâ]ch/i.test(text) ||
+             /anesth[eé]sie.*(?:nerf|territoire|sous[\s-]*orbit|V2)|hypo[eé]sth[eé]sie.*(?:nerf|territoire|sous[\s-]*orbit|V2)/i.test(text))
+        ) {
+            console.log('🏥 [V3.3.389] POLYTRAUMATISME CERVICO-CRANIO-FACIAL détecté → Bypass vers handler CCF V3.3.314');
+            // Ne pas retourner, laisser l'analyse continuer vers le handler CCF (ligne ~22457)
         } else {
             // 🆕 V3.3.155: CALCUL AUTOMATIQUE IPP (polytraumatismes ET cas simples)
             const isPolytrauma = detectedSequelae.length > 1;
