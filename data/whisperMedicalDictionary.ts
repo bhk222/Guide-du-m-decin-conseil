@@ -27,6 +27,72 @@ export const PHRASE_CORRECTIONS: [RegExp, string][] = [
     [/\bils?\s+présentes?\b/gi, 'il présente'],
     [/\bpatient\s+[aâ]ge\s+de\b/gi, 'patient âgé de'],
     [/\bpatiente\s+[aâ]gee?\s+de\b/gi, 'patiente âgée de'],
+
+    // ─── V3.3.392: Erreurs whisper-base courantes (mots communs → médical) ───
+    [/\bun?\s+cas\s+vicieux\b/gi, 'un cal vicieux'],
+    [/\ble\s+cas\s+vicieux\b/gi, 'le cal vicieux'],
+    [/\bun?\s+cal?\s+vis[- ]?yeux\b/gi, 'un cal vicieux'],
+    [/\bla\s+raider?\b/gi, 'la raideur'],
+    [/\bune?\s+raider?\b/gi, 'une raideur'],
+    [/\bdes?\s+raiders?\b/gi, 'des raideurs'],
+    [/\bla\s+hanche?\s+loss\b/gi, 'la hanche'],
+    [/\bun\s+manisc\b/gi, 'un ménisque'],
+    [/\ble\s+manisc\b/gi, 'le ménisque'],
+    [/\bl'amputation\b/gi, 'l\'amputation'],
+    [/\bla\s+consolidations?\b/gi, 'la consolidation'],
+    [/\bla\s+consolation\b/gi, 'la consolidation'],
+    [/\bune?\s+consolation\b/gi, 'une consolidation'],
+    [/\bla\s+constellation\b/gi, 'la consolidation'],
+    [/\bune?\s+constellation\b/gi, 'une consolidation'],
+    [/\bla\s+prostate\b(.{0,10})\b(?:tibial|fémoral|rachis)/gi, 'la prothèse$1'],
+    [/\bune?\s+prostate\s+totale\b/gi, 'une prothèse totale'],
+    [/\bla\s+prostate\s+totale\b/gi, 'la prothèse totale'],
+    [/\bune?\s+prostate\s+de\b/gi, 'une prothèse de'],
+    [/\bla\s+prostate\s+de\b/gi, 'la prothèse de'],
+    [/\bun?\s+enceinte\s+de\b(?!\s*\d+\s*semaines)/gi, 'une entorse de'],
+    [/\bune?\s+autre\s+dose\b/gi, 'une arthrodèse'],
+    [/\bl'autre\s+dose\b/gi, 'l\'arthrodèse'],
+    [/\bune?\s+autre\s+rose\b/gi, 'une arthrose'],
+    [/\bl'autre\s+rose\b/gi, 'l\'arthrose'],
+    [/\bal\s+go\s+d[iy]strophie\b/gi, 'algodystrophie'],
+    [/\bau\s+go\s+d[iy]strophie\b/gi, 'algodystrophie'],
+    [/\bune?\s+inca\s+pacité\b/gi, 'une incapacité'],
+    [/\bl'inca\s+pacité\b/gi, 'l\'incapacité'],
+    [/\ble\s+bâtiment\s+67\b/gi, 'le barème 1967'],
+    [/\ble\s+bâtiment\b/gi, 'le barème'],
+    [/\bde\s+balance\s+art?\b/gi, 'de Balthazard'],
+    [/\bla\s+formation?\s+de\s+balance\s+art?\b/gi, 'la formule de Balthazard'],
+    [/\bune?\s+six\s+a\s+trice?\b/gi, 'une cicatrice'],
+    [/\bla\s+six\s+a\s+trice?\b/gi, 'la cicatrice'],
+    [/\bostéo\s+scintaise\b/gi, 'ostéosynthèse'],
+    [/\bostéo\s+cintaise\b/gi, 'ostéosynthèse'],
+    [/\bl'ostéo\s*scin\w*\b/gi, 'l\'ostéosynthèse'],
+    [/\bune?\s+n[eé]\s+croze?\b/gi, 'une nécrose'],
+    [/\bla\s+n[eé]\s+croze?\b/gi, 'la nécrose'],
+    [/\bune?\s+fissure?\s+du\b/gi, 'une fissure du'],
+    [/\ble\s+stéréo\s+nome?\b/gi, 'le sternum'],
+    [/\ble\s+sterne?\b/gi, 'le sternum'],
+    [/\bune\s+an\s+qui\s+los[eé]?\b/gi, 'une ankylose'],
+    [/\bl'an\s+qui\s+los[eé]?\b/gi, 'l\'ankylose'],
+    [/\bune\s+an\s+kilos[eé]?\b/gi, 'une ankylose'],
+    [/\bl'an\s+kilos[eé]?\b/gi, 'l\'ankylose'],
+    [/\ben\s+qui\s+los[eé]?\b/gi, 'ankylose'],
+    [/\bde\s+la\s+tête\s+du\s+femme\s+ur\b/gi, 'de la tête du fémur'],
+    [/\ble\s+femme\s+ur\b/gi, 'le fémur'],
+    [/\bdu\s+femme\s+ur\b/gi, 'du fémur'],
+    [/\bde\s+la\s+rotule?\b/gi, 'de la rotule'],
+    [/\bune?\s+luxure?\b(?!\s+et)/gi, 'une luxation'],
+    [/\bla\s+luxure?\b(?!\s+et)/gi, 'la luxation'],
+    [/\bune?\s+fracture\s+ou\s+verte?\b/gi, 'une fracture ouverte'],
+    [/\bl[ea]\s+sciatique?\b/gi, 'la sciatique'],
+    [/\bla\s+science\s+atique?\b/gi, 'la sciatique'],
+    [/\bdes?\s+à\s+cuisses?\b/gi, 'des séquelles'],
+    [/\bcomme?\s+à\s+cuisse?\b/gi, 'comme séquelle'],
+    [/\bune?\s+parraisse?\b/gi, 'une parésie'],
+    [/\bune?\s+para\s+lise?\b/gi, 'une paralysie'],
+    [/\bune?\s+para\s+plaise?\b/gi, 'une paraplégie'],
+    [/\bune?\s+hémie?\s+plaise?\b/gi, 'une hémiplégie'],
+    [/\bune?\s+tétrade?\s+plaise?\b/gi, 'une tétraplégie'],
     [/\bde\s+la\s+avant\s+la\s+vôme\b/gi, 'de l\'avant-bras'],
     [/\bla\s+avant\s+la\s+vôme\b/gi, 'l\'avant-bras'],
     [/\bla\s+avant\s+l'avant\s+bras\b/gi, 'l\'avant-bras'],
@@ -917,4 +983,225 @@ export const WORD_CORRECTIONS: Record<string, string> = {
     'diplegie': 'diplégie',
     'quadriplegie': 'quadriplégie',
     'quadriplegique': 'quadriplégique',
+
+    // ═══ V3.3.392: CORRECTIONS WHISPER-BASE (mots courants confondus) ═══
+    // Whisper-base confond souvent des termes médicaux avec des mots courants
+    'consolation': 'consolidation',
+    'constellation': 'consolidation',
+    'consolé': 'consolidé',
+    'prostate': 'prothèse',
+    'bâtiment': 'barème',
+    'batiment': 'barème',
+    'balance': 'Balthazard',
+    'balancer': 'Balthazard',
+    'séquestré': 'séquelle',
+    'sicatrise': 'cicatrice',
+    'sikatrice': 'cicatrice',
+    'cikatrice': 'cicatrice',
+    'sycatrice': 'cicatrice',
+    'cicatris': 'cicatrice',
+    'calcéum': 'calcanéum',
+    'calcanum': 'calcanéum',
+    'calcaniom': 'calcanéum',
+    'anquilose': 'ankylose',
+    'enquilose': 'ankylose',
+    'anchilose': 'ankylose',
+    'anqylose': 'ankylose',
+    'anchylose': 'ankylose',
+    'enchilose': 'ankylose',
+    'raider': 'raideur',
+    'raiders': 'raideurs',
+    'rédacteur': 'raideur',
+    'sciatik': 'sciatique',
+    'siatique': 'sciatique',
+    'ciatique': 'sciatique',
+    'luxure': 'luxation',
+    'lussation': 'luxation',
+    'loxation': 'luxation',
+    'fermer': 'fémur',
+    'umerale': 'humérale',
+    'huméralle': 'humérale',
+    'épaul': 'épaule',
+    'épole': 'épaule',
+    'genoue': 'genou',
+    'genoud': 'genou',
+    'genouil': 'genou',
+    'jambier': 'jambier',
+    'chevil': 'cheville',
+    'cheviye': 'cheville',
+    'poiné': 'poignet',
+    'poigner': 'poignet',
+    'poiniez': 'poignet',
+    'cuisen': 'cuisse',
+    'hanch': 'hanche',
+    'basint': 'bassin',
+    'basine': 'bassin',
+    'basen': 'bassin',
+    'rachisse': 'rachis',
+    'thoraxe': 'thorax',
+    'toraxe': 'thorax',
+    'torace': 'thorax',
+    'abdomaine': 'abdomen',
+    'abdomain': 'abdomen',
+    'hernis': 'hernie',
+    'herny': 'hernie',
+    'ernie': 'hernie',
+    'commossion': 'commotion',
+    'comossion': 'commotion',
+    'sekel': 'séquelle',
+    'sequèle': 'séquelle',
+    'sekelle': 'séquelle',
+    'sékel': 'séquelle',
+    'rotateur': 'rotateurs',
+    'rotator': 'rotateurs',
+    'scafulaire': 'scapulaire',
+    'scapulère': 'scapulaire',
+    'ménisk': 'ménisque',
+    'méniske': 'ménisque',
+    'meniske': 'ménisque',
+    'ligamentaire': 'ligamentaire',
+    'ligamenter': 'ligamentaire',
+    'tendinos': 'tendineux',
+    'tendineu': 'tendineux',
+    'articulère': 'articulaire',
+    'articulêre': 'articulaire',
+    'periarticulaire': 'périarticulaire',
+    'periarticulère': 'périarticulaire',
+    'sous-acromial': 'sous-acromial',
+    'sousacromial': 'sous-acromial',
+    'intercostal': 'intercostal',
+    'intercostale': 'intercostale',
+    'comminutif': 'comminutive',
+    'comminutives': 'comminutive',
+    'communitif': 'comminutive',
+    'diafisaire': 'diaphysaire',
+    'diaphisaire': 'diaphysaire',
+    'diaphysaire': 'diaphysaire',
+    'epifisaire': 'épiphysaire',
+    'épifisaire': 'épiphysaire',
+    'épiphysaire': 'épiphysaire',
+    'métafisaire': 'métaphysaire',
+    'metafisaire': 'métaphysaire',
+    'métaphysaire': 'métaphysaire',
+    'interligne': 'interligne',
+    'pincement': 'pincement',
+    'emboitement': 'emboîtement',
+    'déboîtement': 'déboîtement',
+    'deboitement': 'déboîtement',
 };
+
+// ═══════════════════════════════════════════════════════════════
+// V3.3.392: CORRECTION PHONÉTIQUE AUTOMATIQUE
+// Normalise les mots (sans accents, sans doublons) et cherche
+// dans un dictionnaire de ~400 termes médicaux du barème.
+// Attrape automatiquement : "osteosynthese" → "ostéosynthèse"
+// ═══════════════════════════════════════════════════════════════
+
+/** Normalise un mot : minuscules, sans accents, sans doubles consonnes */
+export function normalizePhonetic(word: string): string {
+    return word
+        .toLowerCase()
+        .normalize('NFD').replace(/[\u0300-\u036f]/g, '')  // strip accents
+        .replace(/(.)\1+/g, '$1')                          // double→single
+        .replace(/ph/g, 'f')                               // ph→f
+        .replace(/th/g, 't')                                // th→t
+        .replace(/y/g, 'i');                                // y→i
+}
+
+/**
+ * Termes médicaux cibles (forme correcte avec accents).
+ * La Map est construite : normalizePhonetic(terme) → terme correct.
+ */
+const MEDICAL_TERMS_TARGET: string[] = [
+    // ── Anatomie membre supérieur ──
+    'humérus','huméral','humérale','olécrâne','coronoïde','épicondyle','épitrochlée',
+    'trochiter','trochanter','radius','scaphoïde','clavicule','omoplate','acromion',
+    'coracoïde','glène','métacarpe','métacarpien','phalange','phalangette','phalangine',
+    // ── Anatomie membre inférieur ──
+    'fémur','fémoral','fémorale','cotyle','acétabulum','patella','fibula','péroné',
+    'malléole','bimalléolaire','trimalléolaire','calcanéum','astragale','talus',
+    'cuboïde','cunéiforme','métatarse','métatarsien','sésamoïde','ménisque',
+    // ── Anatomie rachis / bassin ──
+    'vertèbre','vertébral','vertébrale','cervicale','lombaire','thoracique','coccyx',
+    'sacrum','iliaque','ischion','odontoïde','rachis','apophyse',
+    // ── Anatomie thorax / crâne ──
+    'sternum','manubrium','xiphoïde','crânien','crânienne','maxillaire','mandibule',
+    'zygomatique','orbitaire','hyoïde',
+    // ── Organes ──
+    'splénique','rénal','rénale','hépatique','pancréatique','vésical','vésicale',
+    // ── Nerfs / muscles ──
+    'deltoïde','aponévrose','quadriceps',
+    // ── Œil / oreille ──
+    'rétine','rétinien','cornée','cristallin','uvée','uvéite','paupière','cochlée',
+    // ── Fractures ──
+    'fracture','fractures','comminutive','spiroïde','embarrure',
+    // ── Luxations / entorses ──
+    'luxation','subluxation','entorse','diastasis','laxité','instabilité',
+    // ── Amputations ──
+    'amputation','désarticulation','transmétatarsienne',
+    // ── Pathologies ──
+    'arthrose','gonarthrose','coxarthrose','omarthrose','rhizarthrose',
+    'algodystrophie','pseudarthrose','ostéoporose','ostéonécrose','ostéomyélite',
+    'ostéite','ankylose','raideur','tendinopathie','tendinite','neuropathie',
+    'parésie','paralysie','hémiplégie','paraplégie','tétraplégie','monoplégie',
+    'prothèse','contusion','hématome','épanchement','synovite','bursite',
+    'capsulite','périarthrite','épicondylite','ténosynovite','rupture','déchirure',
+    'arrachement','commotion','traumatisme','spondylolisthésis','spondylolyse',
+    'sténose','fibrose','nécrose','causalgie','fasciite','talalgie',
+    'métatarsalgie','dorsalgie','lombalgie','cervicalgie','rachialgie',
+    'brachialgie','cruralgie','névralgie','névrite','discopathie','protrusion',
+    // ── Pathologies spéciales ──
+    'épilepsie','épileptique','cataracte','glaucome','hémianopsie','scotome',
+    'diplopie','nystagmus','ptosis','amblyopie','amaurose','cécité','anosmie',
+    'agueusie','surdité','hypoacousie','cophose','acouphène','acouphènes',
+    'hémothorax','pneumothorax','pachypleurite','pleurésie','bronchectasie',
+    'éventration','fistule','adhérence','adhérences',
+    'dépression','dépressive','anxiété',
+    // ── Chirurgie ──
+    'arthrodèse','ostéosynthèse','ostéotomie','arthroplastie','arthroscopie',
+    'laminectomie','discectomie','enclouage','embrochage','cerclage',
+    'immobilisation','greffe','greffon','ablation','suture','ligamentoplastie',
+    'méniscectomie','synovectomie','capsulotomie','splénectomie','néphrectomie',
+    'hépatectomie','gastrectomie','pneumonectomie','lobectomie','colectomie',
+    'cholécystectomie','entérectomie','pancréatectomie','trachéotomie',
+    'colostomie','iléostomie','réimplantation',
+    // ── Mouvements / examen ──
+    'dorsiflexion','plantarflexion','palmarflexion','pronation','supination',
+    'abduction','adduction','rétroflexion','antéflexion','antépulsion',
+    'rétropulsion','élévation','flessum','recurvatum','claudication',
+    'boiterie','amyotrophie','paresthésie','hypoesthésie','dysesthésie',
+    'anesthésie','circumduction','préhension',
+    // ── Examens ──
+    'radiographie','échographie','scintigraphie','audiométrie','périmétrie',
+    // ── Médico-légal ──
+    'consolidation','séquelle','séquelles','incapacité','préjudice','barème',
+    'retentissement','indemnisation','expertise','déficience','handicap',
+    'invalidité','polytraumatisme',
+    // ── Neurologie ──
+    'cérébelleux','cérébelleuse','dysexécutif','myélopathie','hydrocéphalie',
+    'syringomyélie','médullaire','sphinctérien','sphinctériens',
+    'démence','névrose','névrotique','méralgie','diplégie','quadriplégie',
+    'otorrhée','rhinorrhée','antéhypophysaire','narcolepsie','cataplexie',
+    // ── Termes courants du barème ──
+    'rééducation','kinésithérapie','physiothérapie','appareillage',
+    'bilatéral','unilatéral','homolatéral','controlatéral','ipsilatéral',
+    'impotence','tuméfaction','crépitation','scoliose','cyphose','lordose',
+    'diaphyse','épiphyse','métaphyse','résiduel','résiduelle','séquellaire',
+    'définitif','cicatrice','chéloïde','rétractile','raccourcissement',
+    'inégalité','hémorragie','inflammation','atrophie','œdème',
+];
+
+/** Map : forme normalisée → terme correct avec accents */
+const _phoneticMap = new Map<string, string>();
+for (const term of MEDICAL_TERMS_TARGET) {
+    _phoneticMap.set(normalizePhonetic(term), term);
+}
+// Ajouter aussi les valeurs (cibles) de WORD_CORRECTIONS
+for (const correct of Object.values(WORD_CORRECTIONS)) {
+    const norm = normalizePhonetic(correct);
+    if (!_phoneticMap.has(norm)) {
+        _phoneticMap.set(norm, correct);
+    }
+}
+
+export const PHONETIC_MAP = _phoneticMap;

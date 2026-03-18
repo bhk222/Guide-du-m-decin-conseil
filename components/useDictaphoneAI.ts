@@ -22,6 +22,8 @@ import { useState, useRef, useCallback, useEffect } from 'react';
 import {
     PHRASE_CORRECTIONS,
     WORD_CORRECTIONS,
+    PHONETIC_MAP,
+    normalizePhonetic,
 } from '../data/whisperMedicalDictionary';
 
 // ═══════════════════════════════════════════════════════════════
@@ -62,7 +64,9 @@ const WHISPER_HALLUCINATIONS = [
 
 /**
  * Correction post-transcription médicale
- * Applique d'abord les corrections de phrases, puis les corrections de mots
+ * 1. Corrections de phrases (regex)
+ * 2. Corrections de mots (exact match)
+ * 3. V3.3.392: Correction phonétique (normalisation sans accents → terme médical correct)
  */
 function medicalPostCorrection(text: string): string {
     let corrected = text;
@@ -72,17 +76,31 @@ function medicalPostCorrection(text: string): string {
         corrected = corrected.replace(pattern, replacement);
     }
     
-    // 2. Corrections mot par mot
+    // 2. Corrections mot par mot (exact) + 3. Phonétique (fallback)
     corrected = corrected.replace(/\b[\wà-ÿÀ-ÿ'-]+\b/gi, (word) => {
         const lower = word.toLowerCase();
+        
+        // 2a. Exact match dans WORD_CORRECTIONS
         const correction = WORD_CORRECTIONS[lower];
         if (correction) {
-            // Préserver la casse du premier caractère
             if (word[0] === word[0].toUpperCase()) {
                 return correction.charAt(0).toUpperCase() + correction.slice(1);
             }
             return correction;
         }
+        
+        // 2b. V3.3.392: Phonetic match — normaliser et chercher dans PHONETIC_MAP
+        if (word.length >= 5) {
+            const norm = normalizePhonetic(word);
+            const phonetic = PHONETIC_MAP.get(norm);
+            if (phonetic && phonetic.toLowerCase() !== lower) {
+                if (word[0] === word[0].toUpperCase()) {
+                    return phonetic.charAt(0).toUpperCase() + phonetic.slice(1);
+                }
+                return phonetic;
+            }
+        }
+        
         return word;
     });
     
@@ -434,12 +452,13 @@ export function useDictaphoneAI(
                 return false;
             };
 
-            // Stratégie: whisper-small (3 tentatives) → whisper-base (2 tentatives)
+            // V3.3.392: Stratégie inversée — whisper-base D'ABORD (~77MB, rapide)
+            // puis whisper-small en fallback. Post-correction médicale compense la différence.
             setStatusMessage(modelCached 
-                ? '⚡ Chargement Whisper SMALL (en cache)...' 
-                : '⏳ Téléchargement Whisper SMALL (~150MB, une seule fois)...');
+                ? '⚡ Chargement Whisper (en cache)...' 
+                : '⏳ Téléchargement Whisper (~77MB, une seule fois)...');
             
-            let loaded = await tryLoadModel('onnx-community/whisper-small', hasLocalModels ? 1 : 3);
+            let loaded = await tryLoadModel('onnx-community/whisper-base', hasLocalModels ? 1 : 3);
             
             // 🔧 V3.3.390: Cache-busting — si le modèle était "en cache" mais échoue, purger le cache corrompu
             if (!loaded && modelCached && !hasLocalModels) {
@@ -457,20 +476,20 @@ export function useDictaphoneAI(
                         }
                     }
                     console.log('🗑️ Cache Whisper purgé, nouvelle tentative...');
-                    setStatusMessage('⏳ Re-téléchargement Whisper SMALL (~150MB)...');
+                    setStatusMessage('⏳ Re-téléchargement Whisper (~77MB)...');
                     setModelProgress(0);
-                    loaded = await tryLoadModel('onnx-community/whisper-small', 2);
+                    loaded = await tryLoadModel('onnx-community/whisper-base', 2);
                 } catch (cacheErr) {
                     console.warn('Erreur purge cache:', cacheErr);
                 }
             }
 
             if (!loaded && !hasLocalModels) {
-                // Fallback: whisper-base (plus petit ~77MB, meilleure fiabilité)
-                console.warn('⚠️ Whisper SMALL échoué, fallback vers whisper-base');
-                setStatusMessage('⏳ Téléchargement Whisper BASE (~77MB, plus léger)...');
+                // Fallback: whisper-small (plus gros ~150MB, meilleure qualité)
+                console.warn('⚠️ Whisper BASE échoué, fallback vers whisper-small');
+                setStatusMessage('⏳ Téléchargement Whisper SMALL (~150MB, alternative)...');
                 setModelProgress(0);
-                loaded = await tryLoadModel('onnx-community/whisper-base', 2);
+                loaded = await tryLoadModel('onnx-community/whisper-small', 2);
             }
 
             if (loaded) {

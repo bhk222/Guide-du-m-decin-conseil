@@ -755,7 +755,7 @@ export const ExclusiveAiCalculator: React.FC<ExclusiveAiCalculatorProps> = ({
                             <div className="w-full bg-indigo-200 rounded-full h-2">
                                 <div className="bg-indigo-600 h-2 rounded-full transition-all duration-300" style={{width: `${dictState.modelProgress}%`}}></div>
                             </div>
-                            <p className="mt-1 text-xs text-indigo-500">Installation unique (~500MB) — ensuite installé à vie dans votre navigateur, 100% hors ligne</p>
+                            <p className="mt-1 text-xs text-indigo-500">Installation unique (~77MB) — ensuite installé à vie dans votre navigateur, 100% hors ligne</p>
                         </div>
                     )}
                     {/* 🎤 Barre dictaphone IA */}
