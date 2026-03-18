@@ -3,14 +3,14 @@
  * V3.3.386
  * 
  * ZÉRO dépendance externe :
- * - Modèle Whisper SMALL intégré à l'application (auto-hébergé)
+ * - Modèle Whisper SMALL (auto-hébergé en local, HuggingFace CDN en production)
  * - Pas de téléchargement depuis HuggingFace
  * - Pas de moteur Windows
  * - Pas de serveur Google  
  * - 100% hors ligne après premier chargement
  * 
  * Fonctionnement :
- * 1. Modèle servi depuis le CDN de l'app (public/models/)
+ * 1. Modèle servi depuis public/models/ (local) ou HuggingFace CDN (production)
  * 2. WebGPU (fp16, rapide) avec fallback WASM (int8, universel)
  * 3. Capture audio micro → détecte silences → transcrit Whisper
  * 4. Correction médicale post-transcription automatique (~700+ mots + ~200+ expressions)
@@ -352,7 +352,7 @@ export function useDictaphoneAI(
             for (const name of cacheNames) {
                 const cache = await caches.open(name);
                 const keys = await cache.keys();
-                if (keys.some(k => k.url.includes('/models/onnx-community/whisper-small/'))) {
+                if (keys.some(k => k.url.includes('/models/onnx-community/whisper-small/') || k.url.includes('huggingface.co/onnx-community/whisper-small'))) {
                     modelCached = true;
                     break;
                 }
@@ -367,10 +367,22 @@ export function useDictaphoneAI(
         try {
             const { pipeline, env } = await import('@huggingface/transformers');
 
-            // Charger le modèle depuis les fichiers locaux (bundled avec l'app)
-            env.allowLocalModels = true;
-            env.localModelPath = '/models/';
-            env.allowRemoteModels = false; // Pas de téléchargement HuggingFace
+            // En dev local: modèles servis depuis public/models/ (rapide, pas de téléchargement)
+            // En production Vercel: téléchargement depuis HuggingFace CDN (auto-caché par le navigateur)
+            const hasLocalModels = await fetch('/models/onnx-community/whisper-small/config.json', { method: 'HEAD' })
+                .then(r => r.ok).catch(() => false);
+            
+            if (hasLocalModels) {
+                env.allowLocalModels = true;
+                env.localModelPath = '/models/';
+                env.allowRemoteModels = false;
+                console.log('📦 Whisper: modèles locaux détectés');
+            } else {
+                env.allowLocalModels = false;
+                env.allowRemoteModels = true;
+                console.log('🌐 Whisper: téléchargement depuis HuggingFace CDN');
+                setStatusMessage('⏳ Téléchargement Whisper SMALL (~150MB, une seule fois)...');
+            }
 
             const progressCb = (info: any) => {
                 if (info.status === 'progress' && info.progress != null) {
