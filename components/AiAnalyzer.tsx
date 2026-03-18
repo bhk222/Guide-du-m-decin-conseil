@@ -16375,7 +16375,7 @@ const hasMultipleDistinctSites = (text: string): boolean => {
  * @param isExactMatch - Si true, cherche une correspondance exacte par nom (pour résoudre ambiguïté)
  */
 export const localExpertAnalysis = (text: string, externalKeywords?: string[], isExactMatch: boolean = false): LocalAnalysisResult => {
-    console.log('🔧 localExpertAnalysis V3.3.401 - pseudarthrose handler dédié (humérus, fémur, tibia, coude, clavicule, avant-bras)');
+    console.log('🔧 localExpertAnalysis V3.3.402 - fix hernie discale cervicale (NCB + déficit moteur) cumul override + severity scoring');
 
     // 🔴 V3.3.162: NETTOYAGE TEXTE - Supprime caractères invisibles (zero-width space, etc.)
     // Ces caractères peuvent casser les regex et empêcher la détection
@@ -17205,7 +17205,12 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
     const hasOtherRachisLevelLA = (hernieRegionLA === 'lombaire' && (/raideur.*rachis.*cervical|syndrome.*cervical|cervicalgie|tassement.*(?:cervical|C\d)/i.test(text) || /tassement.*(?:dorsal|D\d)|cyphose.*(?:dorsal|r[eé]siduel)|raideur.*rachis.*dorsal/i.test(text))) ||
                                   (hernieRegionLA === 'cervicale' && (/tassement.*(?:dorsal|D\d|lombaire|L\d)|raideur.*rachis.*(?:dorsal|lombaire)/i.test(text))) ||
                                   (hernieRegionLA === 'autre' && (/raideur.*rachis.*cervical|tassement.*(?:dorsal|D\d)/i.test(text)));
-    if (isHernieDiscale && isHernieContext && !isExactMatch && !isMultiSitePolytrauma && !hasOtherRachisLevelLA) {
+    // 🔧 V3.3.402: Relax !isMultiSitePolytrauma guard — hernie discale cervicale mentioning "coude/poignet" as
+    // neurological deficit zones (NCB) triggers false multi-site. Allow if no real fracture on other site.
+    // Restriction CERVICALE uniquement : les hernies lombaires + autre site sont de vrais polytraumas
+    const hasOtherRealInjury402H = /fractur(?:e|es).*(?:c[oô]te|costal|bassin|pelvien|hum[eé]rus|tibia|f[eé]mur|radius|clavicule|rotule|mall[eé]ol|cr[aâ]ne)|volet.*costal|h[eé]mothorax|pneumothorax|spl[eé]nectomie|amputation|rupture.*(?:rate|foie)/i.test(text);
+    const isHernieAllowed402 = !isMultiSitePolytrauma || (/cervicale?|C[1-7]/i.test(text) && !hasOtherRealInjury402H);
+    if (isHernieDiscale && isHernieContext && !isExactMatch && isHernieAllowed402 && !hasOtherRachisLevelLA) {
         console.log('💿 [V3.3.217] HERNIE DISCALE LOMBAIRE/CERVICALE détectée → Analyse spécialisée (site unique)');
         
         // Déterminer cervicale vs lombaire
@@ -17240,7 +17245,7 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
         const hasSciatiqueBilaterale = /bilat[eé]rale?|deux.*(?:jambes?|membres?|c[oô]t[eé]s)/i.test(text) && hasSciatique;
         
         // Déficits neurologiques
-        const hasDeficitMoteur = /d[eé]ficit.*moteur|steppage|pied.*tombant|paralysie|par[eé]sie/i.test(text);
+        const hasDeficitMoteur = /d[eé]ficit.*moteur|d[eé]ficit.*(?:de\s+)?force|steppage|pied.*tombant|paralysie|par[eé]sie/i.test(text);
         const hasAmyotrophieHD = /amyotrophie|atrophie|fonte.*musculaire/i.test(text);
         const hasTroublesSphincteriens = /trouble.*sphinct[eé]rien|incontinence|r[eé]tention.*urinaire|queue.*cheval/i.test(text);
         const hasHypoesthesie = /hypoes?th[eé]sie|diminution.*sensibilit[eé]|trouble.*sensitif/i.test(text);
@@ -17252,7 +17257,7 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
         const hasClaudication = /claudication|boiterie|boite|p[eé]rim[eè]tre.*marche|marche.*limit[eé]e?|marche.*(?:après|apres).*\d+/i.test(text);
         const perimetreMatch = text.match(/(?:p[eé]rim[eè]tre|marche|apr[eè]s|après)\s*(?:de)?\s*(\d+)\s*(?:m(?:[eè]tres?)?|m\b)/i);
         const perimetreMarche = perimetreMatch ? parseInt(perimetreMatch[1]) : null;
-        const hasRaideurRachis = /raideur.*(?:rachis|lombaire|rachidienne)|enraidissement.*rachis/i.test(text);
+        const hasRaideurRachis = /raideur.*(?:rachis|lombaire|cervicale?|rachidienne)|enraidissement.*(?:rachis|cervical)/i.test(text);
         const hasLaseque = /las[eè]gue/i.test(text);
         const lasequePositif = /las[eè]gue.*positif|signe.*las[eè]gue/i.test(text);
         
@@ -17384,6 +17389,25 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
             aggravatingFactorsHD.push('profession physique (manutentionnaire) → retentissement professionnel majeur');
             positionScoreHD += 1;
         }
+        // 🆕 V3.3.402: Facteurs aggravants supplémentaires pour NCB cervicale
+        if (hasRaideurRachis && regionHD === 'cervicale') {
+            aggravatingFactorsHD.push('raideur cervicale objectivée');
+            positionScoreHD += 1;
+        }
+        const hasChronique402 = /chronique|permanent|rebelle|r[eé]cidivant/i.test(text);
+        if (hasChronique402 && (hasSciatique || /n[eé]vralgie.*cervico.*brachial|ncb|brachialgie/i.test(text))) {
+            aggravatingFactorsHD.push('radiculalgie chronique/rebelle');
+            positionScoreHD += 1;
+        }
+        const hasDouleursSeveres402 = /douleurs?.*(?:fulgurante|irradiant|insomniante|intense|permanente|incessante)|irradiation.*(?:doigt|main|bras)/i.test(text);
+        if (hasDouleursSeveres402) {
+            aggravatingFactorsHD.push('douleurs sévères (fulgurantes/irradiantes)');
+            positionScoreHD += 1;
+        }
+        if (hasImpactPro) {
+            aggravatingFactorsHD.push('inaptitude/reclassement professionnel');
+            positionScoreHD += 1;
+        }
         
         // Position dans la fourchette selon score
         if (positionScoreHD >= 6) rateFinalHD = rateMaxHD;
@@ -17446,7 +17470,7 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
             `</div><br>` +
             `<strong>⚖️ RÉFÉRENCE BARÈME :</strong><br>` +
             `<em>"${baremeNameHD}"</em><br>` +
-            `Catégorie : Rachis > Rachis lombaire - Hernie discale<br><br>` +
+            `Catégorie : Rachis > Rachis ${regionHD} - Hernie discale<br><br>` +
             `<strong>⚠️ NOTE IMPORTANTE :</strong> La hernie discale et ses conséquences (lombalgies, limitation flexion, claudication, limitation port de charges) constituent une <strong>pathologie UNIQUE</strong>. ` +
             `La claudication et les lombalgies sont des symptômes de la hernie discale et ne doivent PAS être comptabilisées comme des lésions séparées.`;
         
@@ -21307,7 +21331,13 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
     // 🆕 V3.3.369: NE PAS overrider le cumul pour PTH/coxarthrose/fracture acétabulum (pathologie hanche unique)
     // Le cotyle/acétabulum est à la jonction bassin-hanche → hasMultipleDistinctSites détecte 2 sites à tort
     const isPTHSinglePathology369 = /proth[eè]se.*(?:totale|hanche)|PTH|coxarthrose/i.test(text) && /(?:cotyle|ac[eé]tabul|hanche)/i.test(text);
-    if (!isCumulDetected && isMultiSitePolytrauma && !isSimpleMetaFracture280 && !isPTHSinglePathology369) {
+    // 🆕 V3.3.402: NE PAS overrider le cumul pour hernie discale CERVICALE (pathologie rachidienne unique)
+    // Le texte peut mentionner "coude", "poignet" comme zones de déficit neurologique (NCB) → faux multi-site
+    // Restriction CERVICALE uniquement : les hernies lombaires + autre site (côtes/bassin/etc.) sont de vrais polytraumas
+    const isHernieDiscaleCervicale402 = /hernie\s+discale/i.test(text) && /cervicale?|C[1-7][\s\-]C[1-7]/i.test(text);
+    const hasOtherRealInjury402 = /fractur(?:e|es).*(?:c[oô]te|costal|bassin|pelvien|hum[eé]rus|tibia|f[eé]mur|radius|clavicule|rotule|mall[eé]ol|cr[aâ]ne)|volet.*costal|h[eé]mothorax|pneumothorax|spl[eé]nectomie|amputation|rupture.*(?:rate|foie)/i.test(text);
+    const isHernieDiscaleSingle402 = isHernieDiscaleCervicale402 && !hasOtherRealInjury402;
+    if (!isCumulDetected && isMultiSitePolytrauma && !isSimpleMetaFracture280 && !isPTHSinglePathology369 && !isHernieDiscaleSingle402) {
         console.log('🆕 V3.3.280: OVERRIDE CUMUL - isMultiSitePolytrauma=true mais detectMultipleLesions=false → FORCE cumul');
         isCumulDetected = true;
         cumulDetection.isCumul = true;
