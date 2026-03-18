@@ -16375,7 +16375,7 @@ const hasMultipleDistinctSites = (text: string): boolean => {
  * @param isExactMatch - Si true, cherche une correspondance exacte par nom (pour résoudre ambiguïté)
  */
 export const localExpertAnalysis = (text: string, externalKeywords?: string[], isExactMatch: boolean = false): LocalAnalysisResult => {
-    console.log('🔧 localExpertAnalysis V3.3.400 - polytraumatisme abdominal handler (splénectomie + résection intestinale + éventration)');
+    console.log('🔧 localExpertAnalysis V3.3.401 - pseudarthrose handler dédié (humérus, fémur, tibia, coude, clavicule, avant-bras)');
 
     // 🔴 V3.3.162: NETTOYAGE TEXTE - Supprime caractères invisibles (zero-width space, etc.)
     // Ces caractères peuvent casser les regex et empêcher la détection
@@ -16428,14 +16428,194 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
         }
     }
 
-    // 🆕 V3.3.397: Réécriture "fracture X avec pseudarthrose" → "pseudarthrose du X"
-    // La pseudarthrose est la séquelle principale, elle doit être le terme de recherche prioritaire
+    // 🆕 V3.3.401: HANDLER PSEUDARTHROSE DÉDIÉ
+    // Détecte pseudarthrose + os spécifique (même dans un récit multi-phrases) et retourne directement le bon taux barème
+    // Remplace le rewrite V3.3.397 qui ne marchait que pour "fracture X avec pseudarthrose" contigu
     {
-        const pseudarthroseRewrite = text.match(/fracture\s+(?:(?:de\s+(?:la|l[''])?|du|des|d['']?)\s*)?(?:diaphysaire\s+(?:de\s+(?:la|l[''])?|du|des)?\s*)?([\wéèêëàâùûîïôö-]+)\s+avec\s+pseudarthrose/i);
-        if (pseudarthroseRewrite && !/;|\+/.test(text)) {
-            const bone = pseudarthroseRewrite[1];
-            text = `pseudarthrose du ${bone}`;
-            console.log('   - V3.3.397: Réécriture fracture+pseudarthrose →', text);
+        const hasPseudarthrose401 = /pseudarthrose|fausse\s+articulation/i.test(text);
+        // Synonymes élargis SEULEMENT si "non-consolidation" / "échec consolidation" + contexte fort (mobilité anormale, orthèse, etc.)
+        const hasNonConsolidation401 = /non[\s-]consolidation|absence\s+de\s+consolidation|[eé]chec\s+(?:de\s+)?(?:la\s+)?consolidation\s+osseuse/i.test(text) && /mobili[st][eé]\s+anormale|mobilit[eé]\s+anormale|orth[eè]se|ballant|force\s+(?:quasi\s+)?nulle|membre\s+inutile/i.test(text);
+        // Ne PAS trigger si séparateur explicite ";" indiquant des lésions distinctes
+        const hasExplicitSep401 = /;/.test(text);
+        
+        if ((hasPseudarthrose401 || hasNonConsolidation401) && !hasExplicitSep401) {
+            // Identifier l'os concerné
+            const isHumerus401 = /hum[eé]rus/i.test(text);
+            const isFemur401 = /f[eé]mur|f[eé]moral/i.test(text) && !/col\s+(?:du\s+)?f[eé]mur|col\s+f[eé]moral/i.test(text);
+            const isColFemur401 = /col\s+(?:du\s+)?f[eé]mur|col\s+f[eé]moral/i.test(text);
+            const isTibia401 = /tibia/i.test(text) && !/jambe/i.test(text);
+            const isJambe401 = /jambe|tibia.*p[eé]ron[eé]/i.test(text) && !/avant[\s-]bras/i.test(text);
+            const isCoude401 = /coude|ol[eé]crane/i.test(text);
+            const isClavicule401 = /clavicule/i.test(text);
+            const isRadius401 = /pseudarthrose\s+(?:du\s+)?radius|radius.*pseudarthrose/i.test(text) && !/cubitus/i.test(text);
+            const isCubitus401 = /pseudarthrose\s+(?:du\s+)?cubitus|cubitus.*pseudarthrose/i.test(text) && !/radius/i.test(text);
+            const isDeuxOsAvantBras401 = /(?:deux\s+os|les\s+deux)\s+(?:de\s+)?(?:l[''])?avant[\s-]bras/i.test(text) || (/radius/i.test(text) && /cubitus/i.test(text));
+            const isAvantBras401 = isDeuxOsAvantBras401 || isRadius401 || isCubitus401;
+            const isEpaule401 = /[eé]paule\s+ballant/i.test(text);
+            
+            // Sévérité - lâche vs serrée
+            const isLache401 = /l[aâ]che|ballant|(?<!sans\s)(?<!sans\s\w+\s)mobili[st][eé]\s+anormale|(?<!sans\s)(?<!sans\s\w+\s)mobilit[eé]\s+anormale|instabil|force\s+(?:quasi\s+)?nulle|membre\s+(?:quasi\s+)?inutile|orth[eè]se\s+(?:de\s+)?maintien\s+permanent/i.test(text);
+            const isSerree401 = /serr[eé]e|stable|peu\s+symptomatique/i.test(text);
+            
+            // Main dominante vs non dominante (pour MS)
+            const isDroit401 = /droit/i.test(text);
+            const isGauche401 = /gauche/i.test(text);
+            // Par défaut, droite = dominante (convention médicale)
+            const isDominante401 = isDroit401 || (!isGauche401);
+            
+            let pseudName401 = '';
+            let pseudRate401 = 0;
+            let pseudBareme401 = '';
+            let pseudPath401 = '';
+            
+            if (isHumerus401) {
+                // Pseudarthrose de l'humérus - Partie moyenne: MD [40-50], MND [30-40]
+                // Voisinage épaule/coude: [40-70]
+                const isVoisinage401 = /voisinage|[eé]paule|coude|ballant|extr[eé]mit[eé]/i.test(text) && !/partie\s+moyenne|tiers\s+moyen|diaphys/i.test(text);
+                if (isVoisinage401) {
+                    pseudName401 = "Pseudarthrose de l'humérus - Voisinage épaule ou coude (épaule/coude ballant)";
+                    pseudRate401 = isLache401 ? 60 : 45;
+                    pseudBareme401 = "Pseudarthrose de l'humérus - Voisinage épaule ou coude (40-70%)";
+                    pseudPath401 = 'Séquelles des Membres Supérieurs > Humérus';
+                } else if (isDominante401) {
+                    pseudName401 = "Pseudarthrose de l'humérus - Partie moyenne (Main Dominante)";
+                    pseudRate401 = isLache401 ? 50 : 40;
+                    pseudBareme401 = "Pseudarthrose de l'humérus - Partie moyenne (Main Dominante) (40-50%)";
+                    pseudPath401 = 'Séquelles des Membres Supérieurs > Humérus';
+                } else {
+                    pseudName401 = "Pseudarthrose de l'humérus - Partie moyenne (Main Non Dominante)";
+                    pseudRate401 = isLache401 ? 40 : 30;
+                    pseudBareme401 = "Pseudarthrose de l'humérus - Partie moyenne (Main Non Dominante) (30-40%)";
+                    pseudPath401 = 'Séquelles des Membres Supérieurs > Humérus';
+                }
+            } else if (isColFemur401) {
+                pseudName401 = "Pseudarthrose du col du fémur";
+                pseudRate401 = isLache401 ? 75 : 60;
+                pseudBareme401 = "Pseudarthrose du col du fémur (60-80%)";
+                pseudPath401 = 'Séquelles des Membres Inférieurs > Hanche et Fémur';
+            } else if (isFemur401) {
+                pseudName401 = "Pseudarthrose du fémur";
+                pseudRate401 = isLache401 ? 75 : 60;
+                pseudBareme401 = "Pseudarthrose du fémur (60-80%)";
+                pseudPath401 = 'Séquelles des Membres Inférieurs > Hanche et Fémur';
+            } else if (isJambe401) {
+                pseudName401 = "Pseudarthrose des deux os de la jambe";
+                pseudRate401 = isLache401 ? 55 : 40;
+                pseudBareme401 = "Pseudarthrose des deux os de la jambe (40-60%)";
+                pseudPath401 = 'Séquelles des Membres Inférieurs > Jambe';
+            } else if (isTibia401) {
+                pseudName401 = "Pseudarthrose du tibia";
+                pseudRate401 = isLache401 ? 45 : 30;
+                pseudBareme401 = "Pseudarthrose du tibia (30-50%)";
+                pseudPath401 = 'Séquelles des Membres Inférieurs > Jambe';
+            } else if (isCoude401) {
+                const isMobile401 = /ballant|mobil|l[aâ]che/i.test(text);
+                const isAnkylose401 = /ankylose/i.test(text);
+                if (isDominante401) {
+                    pseudName401 = isAnkylose401 ? "Pseudarthrose coude - Avec ankylose (Main Dominante)" : "Pseudarthrose coude - Mobile (coude ballant) (Main Dominante)";
+                    pseudRate401 = isAnkylose401 ? (isLache401 ? 42 : 32) : (isMobile401 ? 48 : 42);
+                    pseudBareme401 = isAnkylose401 ? "Pseudarthrose coude - Avec ankylose (Main Dominante) (30-45%)" : "Pseudarthrose coude - Mobile (coude ballant) (Main Dominante) (40-50%)";
+                } else {
+                    pseudName401 = isAnkylose401 ? "Pseudarthrose coude - Avec ankylose (Main Non Dominante)" : "Pseudarthrose coude - Mobile (coude ballant) (Main Non Dominante)";
+                    pseudRate401 = isAnkylose401 ? (isLache401 ? 33 : 27) : (isMobile401 ? 38 : 32);
+                    pseudBareme401 = isAnkylose401 ? "Pseudarthrose coude - Avec ankylose (Main Non Dominante) (25-35%)" : "Pseudarthrose coude - Mobile (coude ballant) (Main Non Dominante) (30-40%)";
+                }
+                pseudPath401 = 'Séquelles des Membres Supérieurs > Coude';
+            } else if (isClavicule401) {
+                if (isDominante401) {
+                    pseudName401 = "Pseudarthrose Clavicule (Main Dominante)";
+                    pseudRate401 = isLache401 ? 10 : 6;
+                    pseudBareme401 = "Pseudarthrose Clavicule (Main Dominante) (5-10%)";
+                } else {
+                    pseudName401 = "Pseudarthrose Clavicule (Main Non Dominante)";
+                    pseudRate401 = isLache401 ? 6 : 4;
+                    pseudBareme401 = "Pseudarthrose Clavicule (Main Non Dominante) (3-6%)";
+                }
+                pseudPath401 = 'Séquelles des Membres Supérieurs > Clavicule';
+            } else if (isRadius401) {
+                // Pseudarthrose du radius: MD [20-25], MND [15-20]
+                if (isDominante401) {
+                    pseudName401 = "Pseudarthrose du radius (Main Dominante)";
+                    pseudRate401 = isLache401 ? 25 : 22;
+                    pseudBareme401 = "Pseudarthrose du radius (Main Dominante) (20-25%)";
+                } else {
+                    pseudName401 = "Pseudarthrose du radius (Main Non Dominante)";
+                    pseudRate401 = isLache401 ? 20 : 16;
+                    pseudBareme401 = "Pseudarthrose du radius (Main Non Dominante) (15-20%)";
+                }
+                pseudPath401 = 'Séquelles des Membres Supérieurs > Avant-bras';
+            } else if (isCubitus401) {
+                // Pseudarthrose du cubitus: MD [15-20], MND [12-18]
+                if (isDominante401) {
+                    pseudName401 = "Pseudarthrose du cubitus (Main Dominante)";
+                    pseudRate401 = isLache401 ? 20 : 16;
+                    pseudBareme401 = "Pseudarthrose du cubitus (Main Dominante) (15-20%)";
+                } else {
+                    pseudName401 = "Pseudarthrose du cubitus (Main Non Dominante)";
+                    pseudRate401 = isLache401 ? 18 : 14;
+                    pseudBareme401 = "Pseudarthrose du cubitus (Main Non Dominante) (12-18%)";
+                }
+                pseudPath401 = 'Séquelles des Membres Supérieurs > Avant-bras';
+            } else if (isDeuxOsAvantBras401) {
+                // Pseudarthrose deux os avant-bras: serrée MD [25-35], MND [20-30] / lâche MD [45-55], MND [35-45]
+                if (isLache401) {
+                    if (isDominante401) {
+                        pseudName401 = "Pseudarthrose des deux os de l'avant-bras - lâche (Main Dominante)";
+                        pseudRate401 = 50;
+                        pseudBareme401 = "Pseudarthrose des deux os de l'avant-bras - lâche (Main Dominante) (45-55%)";
+                    } else {
+                        pseudName401 = "Pseudarthrose des deux os de l'avant-bras - lâche (Main Non Dominante)";
+                        pseudRate401 = 40;
+                        pseudBareme401 = "Pseudarthrose des deux os de l'avant-bras - lâche (Main Non Dominante) (35-45%)";
+                    }
+                } else {
+                    if (isDominante401) {
+                        pseudName401 = "Pseudarthrose des deux os de l'avant-bras - serrée (Main Dominante)";
+                        pseudRate401 = 30;
+                        pseudBareme401 = "Pseudarthrose des deux os de l'avant-bras - serrée (Main Dominante) (25-35%)";
+                    } else {
+                        pseudName401 = "Pseudarthrose des deux os de l'avant-bras - serrée (Main Non Dominante)";
+                        pseudRate401 = 25;
+                        pseudBareme401 = "Pseudarthrose des deux os de l'avant-bras - serrée (Main Non Dominante) (20-30%)";
+                    }
+                }
+                pseudPath401 = 'Séquelles des Membres Supérieurs > Avant-bras';
+            } else if (isAvantBras401) {
+                // Fallback avant-bras générique → deux os serrée
+                if (isDominante401) {
+                    pseudName401 = "Pseudarthrose des deux os de l'avant-bras - serrée (Main Dominante)";
+                    pseudRate401 = 30;
+                    pseudBareme401 = "Pseudarthrose des deux os de l'avant-bras - serrée (Main Dominante) (25-35%)";
+                } else {
+                    pseudName401 = "Pseudarthrose des deux os de l'avant-bras - serrée (Main Non Dominante)";
+                    pseudRate401 = 25;
+                    pseudBareme401 = "Pseudarthrose des deux os de l'avant-bras - serrée (Main Non Dominante) (20-30%)";
+                }
+                pseudPath401 = 'Séquelles des Membres Supérieurs > Avant-bras';
+            } else if (isEpaule401) {
+                if (isDominante401) {
+                    pseudName401 = "Pseudarthrose (épaule ballante) (Main Dominante)";
+                    pseudRate401 = isLache401 ? 68 : 62;
+                    pseudBareme401 = "Pseudarthrose (épaule ballante) (Main Dominante) (60-70%)";
+                } else {
+                    pseudName401 = "Pseudarthrose (épaule ballante) (Main Non Dominante)";
+                    pseudRate401 = isLache401 ? 57 : 48;
+                    pseudBareme401 = "Pseudarthrose (épaule ballante) (Main Non Dominante) (45-60%)";
+                }
+                pseudPath401 = 'Séquelles des Membres Supérieurs > Épaule';
+            }
+            
+            if (pseudName401) {
+                console.log(`🦴 [V3.3.401] HANDLER PSEUDARTHROSE: ${pseudName401} → ${pseudRate401}% (lâche=${isLache401})`);
+                return {
+                    type: 'proposal' as const,
+                    name: pseudName401,
+                    rate: pseudRate401,
+                    justification: `<strong>✅ ÉVALUATION PRÉCISE - CALCUL IPP (Barème 1967)</strong><br><br><strong>📋 1 séquelle post-traumatique identifiée :</strong><br><br><strong>PSEUDARTHROSE</strong> → <span style="color: #d32f2f; font-weight: bold;">${pseudRate401}% IPP</span><br>   ├ ${pseudName401}<br>   ├ Barème: "${pseudBareme401}"<br>   ├ Type: ${isLache401 ? 'Pseudarthrose lâche (instable, mobilité anormale)' : isSerree401 ? 'Pseudarthrose serrée (stable)' : 'Sévérité évaluée selon contexte clinique'}<br>   └ Localisation: ${pseudPath401}<br><br><strong>📊 RÉSULTAT FINAL :</strong><br><div style="background: #fff3e0; border-left: 4px solid #ff9800; padding: 12px; margin: 8px 0;"><strong style="font-size: 18px; color: #e65100;">IPP = ${pseudRate401}%</strong><br><span style="font-size: 14px; color: #666;">Taux d'Incapacité Permanente Partielle (Barème 1967)</span></div>`,
+                    path: pseudPath401,
+                    injury: { name: pseudName401, rate: pseudRate401 }
+                } as LocalProposal;
+            }
         }
     }
 
