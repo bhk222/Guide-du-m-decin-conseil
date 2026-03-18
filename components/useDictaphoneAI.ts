@@ -1,6 +1,6 @@
 /**
  * 🎤 useDictaphoneAI — Dictaphone 100% autonome via Whisper IA
- * V3.3.386
+ * V3.3.396 — Dictée instantanée
  * 
  * ZÉRO dépendance externe :
  * - Modèle Whisper SMALL (auto-hébergé en local, HuggingFace CDN en production)
@@ -32,10 +32,11 @@ import {
 
 const SAMPLE_RATE = 16000;
 const SILENCE_THRESHOLD = 0.015;     // Seuil d'énergie RMS pour détecter le silence
-const SILENCE_DURATION_MS = 1500;    // Plus de contexte pour meilleure transcription
-const MAX_CHUNK_SECONDS = 30;        // V3.3.395: 30s chunks = meilleur contexte médical pour le modèle
-const MIN_AUDIO_SECONDS = 0.5;       // Ignorer les segments < 0.5s (bruit)
-const SILENCE_CHECK_INTERVAL = 100;  // Vérification silence fréquente
+const SILENCE_DURATION_MS = 600;     // V3.3.396: 600ms → détection pause rapide, dictée quasi-instantanée
+const MAX_CHUNK_SECONDS = 7;         // V3.3.396: 7s chunks courts = transcription rapide
+const PROGRESSIVE_CHUNK_MS = 4000;   // V3.3.396: Forcer transcription toutes les 4s pendant parole continue
+const MIN_AUDIO_SECONDS = 0.3;       // V3.3.396: Segments courts acceptés (0.3s)
+const SILENCE_CHECK_INTERVAL = 80;   // V3.3.396: Vérification silence plus fréquente
 
 // Correspondance nombres français → chiffres
 const NOMBRE_FR: Record<string, number> = {
@@ -326,7 +327,7 @@ export function useDictaphoneAI(
                 language: 'french',
                 task: 'transcribe',
                 return_timestamps: false,
-                max_new_tokens: 256,  // V3.3.395: 256 tokens pour dictée médicale longue
+                max_new_tokens: 128,  // V3.3.396: 128 tokens suffisent pour chunks de 7s
             });
 
             const rawText = result?.text?.trim();
@@ -629,26 +630,37 @@ export function useDictaphoneAI(
                 processor.connect(ctx.destination);
             }
 
-            // Vérification périodique du silence
+            // V3.3.396: Vérification silence + transcription progressive pour dictée instantanée
             silenceIntervalRef.current = setInterval(() => {
                 if (!isListeningRef.current) return;
 
-                const sinceLastSpeech = Date.now() - lastSpeechRef.current;
-                const chunkDuration = Date.now() - chunkStartRef.current;
+                const now = Date.now();
+                const sinceLastSpeech = now - lastSpeechRef.current;
+                const chunkDuration = now - chunkStartRef.current;
+                const hasEnoughAudio = totalSamplesRef.current > SAMPLE_RATE * MIN_AUDIO_SECONDS;
 
-                // Si on a eu de la parole et maintenant silence → transcrire
-                if (hadSpeechRef.current && sinceLastSpeech > SILENCE_DURATION_MS && totalSamplesRef.current > SAMPLE_RATE * MIN_AUDIO_SECONDS) {
+                // 1. Pause détectée (600ms silence) → transcrire immédiatement
+                if (hadSpeechRef.current && sinceLastSpeech > SILENCE_DURATION_MS && hasEnoughAudio) {
                     hadSpeechRef.current = false;
                     setInterimText('');
-                    chunkStartRef.current = Date.now();
+                    chunkStartRef.current = now;
                     processAccumulatedAudio();
+                    return;
                 }
 
-                // Force-process si segment trop long
+                // 2. Parole continue sans pause → transcrire progressivement toutes les 4s
+                if (hadSpeechRef.current && chunkDuration > PROGRESSIVE_CHUNK_MS && hasEnoughAudio && !processingRef.current) {
+                    setInterimText('⏳ Transcription progressive...');
+                    chunkStartRef.current = now;
+                    processAccumulatedAudio();
+                    return;
+                }
+
+                // 3. Sécurité: force-process si segment atteint la durée max
                 if (chunkDuration > MAX_CHUNK_SECONDS * 1000 && totalSamplesRef.current > SAMPLE_RATE) {
                     hadSpeechRef.current = false;
                     setInterimText('');
-                    chunkStartRef.current = Date.now();
+                    chunkStartRef.current = now;
                     processAccumulatedAudio();
                 }
             }, SILENCE_CHECK_INTERVAL);
