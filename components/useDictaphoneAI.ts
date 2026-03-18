@@ -53,6 +53,16 @@ const WHISPER_HALLUCINATIONS = [
     /^vous\s*$/i,
     /^\s*$/,
     /^(\.|,|!|\?)+$/,
+    // V3.3.393: Hallucinations observées en production
+    /\[musique\]/i,
+    /\[Musique\]/,
+    /^je\s+vous\s+invite\s+[àa]/i,
+    /^n'hésitez\s+pas\s+[àa]/i,
+    /^abonnez[- ]?vous/i,
+    /^mettez\s+un\s+like/i,
+    /^merci\s+d'avoir\s+regardé/i,
+    /^à\s+bientôt/i,
+    /^\s*\[.*\]\s*$/,
 ];
 
 // ═══════════════════════════════════════════════════════════════
@@ -64,12 +74,19 @@ const WHISPER_HALLUCINATIONS = [
 
 /**
  * Correction post-transcription médicale
+ * 0. V3.3.393: Nettoyage hallucinations Whisper (segments parasites)
  * 1. Corrections de phrases (regex)
  * 2. Corrections de mots (exact match)
  * 3. V3.3.392: Correction phonétique (normalisation sans accents → terme médical correct)
  */
 function medicalPostCorrection(text: string): string {
     let corrected = text;
+    
+    // 0. V3.3.393: Supprimer les segments d'hallucination en fin de texte
+    // Whisper génère parfois "[Musique]", "Je vous invite à...", etc.
+    corrected = corrected.replace(/\s*\[(?:Musique|musique|Music|Applaudissements)\]\s*/g, ' ');
+    corrected = corrected.replace(/\.\s*(?:Je vous invite[^.]*|N'hésitez pas[^.]*|Abonnez-vous[^.]*|Merci d'avoir[^.]*|À bientôt[^.]*)\s*\.?\s*$/gi, '.');
+    corrected = corrected.trim();
     
     // 1. Corrections de phrases / expressions (priorité haute)
     for (const [pattern, replacement] of PHRASE_CORRECTIONS) {

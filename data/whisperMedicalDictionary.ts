@@ -28,6 +28,18 @@ export const PHRASE_CORRECTIONS: [RegExp, string][] = [
     [/\bpatient\s+[aâ]ge\s+de\b/gi, 'patient âgé de'],
     [/\bpatiente\s+[aâ]gee?\s+de\b/gi, 'patiente âgée de'],
 
+    // ─── V3.3.393: Erreurs observées en production (whisper-base) ───
+    [/\bpassions?\s+[àa]\s+jus\s+de\b/gi, 'patient âgé de'],
+    [/\bpassions?\s+[àa]\s+j[eu]\s+de\b/gi, 'patient âgé de'],
+    [/\bpassions?\s+âgée?\s+de\b/gi, 'patient âgé de'],
+    [/\bpassions?\s+a\s+[gj]\w*\s+de\b/gi, 'patient âgé de'],
+    [/\bl['']ombre\s+plate\b/gi, 'l\'omoplate'],
+    [/\bde\s+l['']ombre\s+plate\b/gi, 'de l\'omoplate'],
+    [/\bune?\s+ombre\s+plate\b/gi, 'une omoplate'],
+    [/\bl['']ombre\s+platte?\b/gi, 'l\'omoplate'],
+    [/\bombreplate\b/gi, 'omoplate'],
+    [/\bombre\s+plate\b/gi, 'omoplate'],
+
     // ─── V3.3.392: Erreurs whisper-base courantes (mots communs → médical) ───
     [/\bun?\s+cas\s+vicieux\b/gi, 'un cal vicieux'],
     [/\ble\s+cas\s+vicieux\b/gi, 'le cal vicieux'],
@@ -869,6 +881,7 @@ export const WORD_CORRECTIONS: Record<string, string> = {
     'passien': 'patient',
     'passiant': 'patient',
     'passion': 'patient',
+    'passions': 'patient',
     'prézente': 'présente',
     'présante': 'présente',
     'patiante': 'patiente',
