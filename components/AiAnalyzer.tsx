@@ -21090,6 +21090,129 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
         ) {
             console.log('🏥 [V3.3.389] POLYTRAUMATISME CERVICO-CRANIO-FACIAL détecté → Bypass vers handler CCF V3.3.314');
             // Ne pas retourner, laisser l'analyse continuer vers le handler CCF (ligne ~22457)
+        }
+        // 🆕 V3.3.390: FRACTURE OUVERTE TIBIA + OSTÉITE CHRONIQUE = Cumul Balthazard séquelles distinctes MI
+        // Le regroupement "MÊME système" fusionne tout en un seul taux alors que ostéite chronique (15-30%),
+        // cal vicieux (5-15%) et raideur cheville (5-20%) sont 3 pathologies DISTINCTES à cumuler
+        else if (
+            /fracture.*(?:ouverte|expos[eé]e).*(?:tibia|jambe)|(?:tibia|jambe).*fracture.*(?:ouverte|expos[eé]e)/i.test(text) &&
+            /ost[eé]ite|ost[eé]omyélite|infection.*osseuse.*chronique|fistul.*(?:os|tibia|jambe|chronique|p[eé]riodique)/i.test(text)
+        ) {
+            console.log('🦴 [V3.3.390] FRACTURE OUVERTE TIBIA + OSTÉITE CHRONIQUE → Cumul Balthazard séquelles distinctes');
+            
+            const miSeq: { name: string; baremeRef: string; rate: number; justif: string }[] = [];
+            
+            // 1. OSTÉITE CHRONIQUE (barème: "Ostéite chronique avec séquestres et fistules" 15-30%)
+            const hasFistulisation = /fistul/i.test(text);
+            const hasStaphylocoque = /staphylocoque|staphylo|SARM|m[eé]ticilline/i.test(text);
+            const hasMultipleCures = /it[eé]rati|r[eé]p[eé]t[eé]|plusieurs.*(?:cure|intervention)|cures.*antibiotiques/i.test(text);
+            let osteiteRate = 15;
+            if (hasFistulisation) osteiteRate += 5;
+            if (hasStaphylocoque || hasMultipleCures) osteiteRate += 5;
+            osteiteRate = Math.min(osteiteRate, 30);
+            miSeq.push({
+                name: "Ostéite chronique post-traumatique" + (hasFistulisation ? " avec fistulisation" : ""),
+                baremeRef: "Séquelles Osseuses > Ostéite chronique (avec séquestres et fistules)",
+                rate: osteiteRate,
+                justif: `Ostéite chronique${hasFistulisation ? ' avec fistulisation périodique' : ''}${hasStaphylocoque ? ' à staphylocoque' : ''} → ${osteiteRate}% [fourchette barémique 15-30%]`
+            });
+            
+            // 2. CAL VICIEUX (barème: "Cal vicieux de la jambe" 5-15%)
+            if (/cal\s*vicieux|d[eé]saxation|d[eé]formation.*(?:osseuse|tibial)/i.test(text)) {
+                const hasDesaxation = /d[eé]saxation|d[eé]viation.*axe|angulation/i.test(text);
+                const calRate = hasDesaxation ? 10 : 8;
+                miSeq.push({
+                    name: "Cal vicieux tibial" + (hasDesaxation ? " avec désaxation" : ""),
+                    baremeRef: "Membres Inférieurs > Cal vicieux de la jambe",
+                    rate: calRate,
+                    justif: `Cal vicieux tibial${hasDesaxation ? ' avec désaxation' : ''} → ${calRate}% [fourchette barémique 5-15%]`
+                });
+            }
+            
+            // 3. RAIDEUR CHEVILLE (barème: "Raideur de la cheville" 5-20%)
+            if (/raideur.*cheville|cheville.*raideur|ankylose.*cheville|cheville.*(?:bloqu[eé]|raide|enraidie)/i.test(text)) {
+                const isMajeure = /majeur|s[eé]v[eè]re|ankylose|quasi.*ankylose|important/i.test(text);
+                const chevilleRate = isMajeure ? 15 : 10;
+                miSeq.push({
+                    name: "Raideur" + (isMajeure ? " majeure" : "") + " de la cheville",
+                    baremeRef: "Membres Inférieurs > Raideur de la cheville (tibio-tarsienne)",
+                    rate: chevilleRate,
+                    justif: `Raideur ${isMajeure ? 'majeure ' : ''}de la cheville → ${chevilleRate}% [fourchette barémique 5-20%]`
+                });
+            }
+            
+            // 4. RACCOURCISSEMENT (barème: 5-25%)
+            const raccMatch = /raccourcissement.*?(\d+(?:[.,]\d+)?)\s*cm/i.exec(text);
+            if (raccMatch) {
+                const raccCm = parseFloat(raccMatch[1].replace(',', '.'));
+                let raccRate = 10;
+                if (raccCm >= 4) raccRate = 25;
+                else if (raccCm >= 3) raccRate = 20;
+                else if (raccCm >= 2) raccRate = 15;
+                else if (raccCm >= 1) raccRate = 10;
+                else raccRate = 5;
+                miSeq.push({
+                    name: `Raccourcissement du membre inférieur (${raccCm}cm)`,
+                    baremeRef: "Membres Inférieurs > Raccourcissement d'un membre inférieur",
+                    rate: raccRate,
+                    justif: `Raccourcissement ${raccCm}cm → ${raccRate}% [fourchette barémique 5-25%]`
+                });
+            }
+            
+            // 5. RAIDEUR GENOU (barème: 5-25%)
+            if (/raideur.*genou|genou.*raideur|flexion.*genou.*limit/i.test(text)) {
+                const genouRate = /s[eé]v[eè]re|majeur|90°|flexum/i.test(text) ? 15 : 10;
+                miSeq.push({
+                    name: "Raideur du genou post-traumatique",
+                    baremeRef: "Membres Inférieurs > Raideur du genou",
+                    rate: genouRate,
+                    justif: `Raideur du genou → ${genouRate}% [fourchette barémique 5-25%]`
+                });
+            }
+            
+            // Cumul Balthazard si >= 2 séquelles
+            if (miSeq.length >= 2) {
+                let ippGlobal = 0;
+                const sorted = [...miSeq].sort((a, b) => b.rate - a.rate);
+                const balthDetails: string[] = [];
+                
+                for (let i = 0; i < sorted.length; i++) {
+                    const seq = sorted[i];
+                    if (i === 0) {
+                        ippGlobal = seq.rate;
+                        balthDetails.push(`&nbsp;&nbsp;${i + 1}. <strong>${seq.name}</strong> → ${seq.rate}% (taux principal)`);
+                    } else {
+                        const contribution = Math.round(seq.rate * (100 - ippGlobal) / 100);
+                        balthDetails.push(`&nbsp;&nbsp;${i + 1}. <strong>${seq.name}</strong> → ${seq.rate}% × (100 - ${ippGlobal})% = +${contribution}%`);
+                        ippGlobal += contribution;
+                    }
+                }
+                
+                const justifMI =
+                    `<strong>🦴 FRACTURE OUVERTE TIBIA - CUMUL SÉQUELLES DISTINCTES</strong><br><br>` +
+                    `<strong>📋 Calcul IPP cumulé (Barème 1967 – Formule de Balthazard)</strong><br><br>` +
+                    `<strong>📊 ${miSeq.length} séquelles post-traumatiques identifiées :</strong><br>` +
+                    balthDetails.join('<br>') + '<br><br>' +
+                    `<strong>🧮 IPP GLOBAL CUMULÉ = ${ippGlobal}%</strong><br><br>` +
+                    `<strong>📖 Références barémiques :</strong><br>` +
+                    miSeq.map(s => `&nbsp;&nbsp;• ${s.name} : <em>${s.baremeRef}</em> → ${s.rate}%<br>&nbsp;&nbsp;&nbsp;&nbsp;${s.justif}`).join('<br>') +
+                    `<br><br>⚖️ <em>Base juridique : Barème indicatif d'invalidité — Accidents du travail (1967). Formule de Balthazard pour cumul de séquelles distinctes.</em>`;
+                
+                return {
+                    type: 'proposal' as const,
+                    name: `Fracture ouverte tibia avec complications - ${miSeq.length} séquelles - IPP global ${ippGlobal}%`,
+                    rate: ippGlobal,
+                    justification: justifMI,
+                    path: 'Membres Inférieurs > Fracture Ouverte Tibia > Cumul Séquelles',
+                    injury: {
+                        name: `Cumul séquelles fracture ouverte tibia (${miSeq.length} composantes)`,
+                        rate: [35, 50],
+                        path: 'Membres Inférieurs > Cumul Balthazard'
+                    } as Injury,
+                    isCumul: true
+                };
+            }
+            // Si < 2 séquelles qualifiées → fall through vers analyse normale
         } else {
             // 🆕 V3.3.155: CALCUL AUTOMATIQUE IPP (polytraumatismes ET cas simples)
             const isPolytrauma = detectedSequelae.length > 1;
