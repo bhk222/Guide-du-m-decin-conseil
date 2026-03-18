@@ -5909,7 +5909,24 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
         [/\bmal\s+(?:au\s+)?genou\b/gi, 'mal genou douleur fémorotibiale'],
         [/\bmal\s+(?:[aà]\s+)?la\s+cheville\b/gi, 'mal cheville douleur tibio-talienne'],
         [/\bmal\s+(?:au\s+)?poignet\b/gi, 'mal poignet douleur radio-carpienne'],
-        [/\bmal\s+(?:au\s+)?coude\b/gi, 'mal coude douleur huméro-cubitale']
+        [/\bmal\s+(?:au\s+)?coude\b/gi, 'mal coude douleur huméro-cubitale'],
+        
+        // 🆕 V3.3.398: PATHOLOGIES VASCULAIRES/LYMPHATIQUES/CUTANÉES
+        // Dégantage cutané = lésion des tissus mous avec destruction réseau vasculaire/lymphatique
+        [/l[eé]sion.*d[eé]gantage.*cutan[eé]/gi, 'dégantage cutané lésion tissu mou greffe peau cicatrice troubles trophiques lymphœdème chronique'],
+        [/d[eé]gantage.*(?:cutan[eé]|sous[- ]cutan|peau)/gi, 'dégantage cutané lésion tissu mou greffe peau cicatrice troubles trophiques'],
+        // Lymphœdème / éléphantiasis → barème "Lymphœdème chronique post-traumatique d'un membre"
+        [/lymph[oœŒ]e?d[eè]me|lymphoed[eè]me/gi, 'lymphœdème chronique post-traumatique membre'],
+        [/lymphoedeme/gi, 'lymphœdème chronique post-traumatique membre'],
+        [/[eé]l[eé]phantiasis/gi, 'lymphœdème chronique éléphantiasis troubles trophiques sévères'],
+        // Stase veineuse/lymphatique → troubles trophiques + œdème chronique
+        [/stase\s+(?:veineuse|lymphatique|veineuse\s+et\s+lymphatique)/gi, 'troubles trophiques œdème chronique insuffisance veineuse lymphatique'],
+        // Ulcères trophiques → "Ulcérations persistantes, troubles trophiques cutanés"
+        [/ulc[eè]res?\s+trophiques?/gi, 'ulcérations persistantes troubles trophiques cutanés'],
+        // Greffes de peau → cicatrices cutanées
+        [/greffes?\s+(?:de\s+)?peau/gi, 'greffes peau cicatrices cutanées séquelles cutanées'],
+        // Bas de contention classe IV → insuffisance veineuse/lymphatique sévère
+        [/bas\s+de\s+contention.*classe\s+IV/gi, 'bas de contention classe IV insuffisance veineuse lymphatique sévère']
     ];
     
     let enrichedText = text;
@@ -7227,6 +7244,27 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             context: /chronique|[oœ]d[eè]me|ulc[eè]re|variqueux|jambe|membre|syndrome/i,
             searchTerms: ['Syndrome post-thrombotique (maladie post-phlébitique)'],
             priority: 9800
+        },
+        // 🆕 V3.3.398: Lymphœdème chronique post-traumatique / éléphantiasis
+        {
+            pattern: /lymph[oœŒ]e?d[eè]me|lymphoed[eè]me|elephantiasis|destruction.*(?:r[eé]seau|syst[eè]me).*lymphatique/i,
+            context: /chronique|post.*traumatique|jambe|membre|contention|gonflement|[oœ]d[eè]me|stase/i,
+            searchTerms: ["Lymphœdème chronique post-traumatique d'un membre"],
+            priority: 10500
+        },
+        // 🆕 V3.3.398: Troubles trophiques / œdème chronique / ulcères trophiques (membre inférieur)
+        {
+            pattern: /troubles?\s+trophiques?|ulc[eè](?:re|ration)s?\s+(?:persistant|trophique|chronique|r[eé]cidivant)|[oœ]d[eè]me\s+chronique.*(?:jambe|membre)/i,
+            context: /jambe|membre|cheville|pied|inf[eé]rieur|varices?|veineu|veineuse|cutane|peau|cicatrice/i,
+            searchTerms: ['Troubles trophiques, œdème chronique, varices'],
+            priority: 10200
+        },
+        // 🆕 V3.3.398: Dégantage cutané avec séquelles vasculaires/lymphatiques
+        {
+            pattern: /d[eé]gantage\s+cutan[eé]/i,
+            context: /jambe|membre|greffe|peau|lymph|veineu|cicatrice|trophique/i,
+            searchTerms: ["Lymphœdème chronique post-traumatique d'un membre"],
+            priority: 10500
         },
         // 🆕 V3.3.364: PTH (prothèse totale hanche) / fracture acétabulum avec PTH
         {
@@ -16337,7 +16375,7 @@ const hasMultipleDistinctSites = (text: string): boolean => {
  * @param isExactMatch - Si true, cherche une correspondance exacte par nom (pour résoudre ambiguïté)
  */
 export const localExpertAnalysis = (text: string, externalKeywords?: string[], isExactMatch: boolean = false): LocalAnalysisResult => {
-    console.log('🔧 localExpertAnalysis V3.3.347 - semantic barème guard + LLE disambiguation + pseudarthrose naming + tétraplégie guard');
+    console.log('🔧 localExpertAnalysis V3.3.398 - dégantage/lymphœdème/troubles vasculaires-lymphatiques MI handler');
 
     // 🔴 V3.3.162: NETTOYAGE TEXTE - Supprime caractères invisibles (zero-width space, etc.)
     // Ces caractères peuvent casser les regex et empêcher la détection
@@ -16569,6 +16607,104 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
         }
     }
     
+    // 🆕 V3.3.398: HANDLER DÉGANTAGE / LYMPHŒDÈME / TROUBLES VASCULAIRES-LYMPHATIQUES MEMBRE INFÉRIEUR
+    // Détection prioritaire pour lésions cutanées/vasculaires/lymphatiques graves (dégantage, lymphœdème, etc.)
+    // Ces pathologies n'ont AUCUNE fracture — le système ne doit PAS matcher d'entrées fracturaires
+    {
+        const hasLymphoedeme398 = /lymph[oœŒ]e?d[eè]me|lymphoed[eè]me|elephantiasis/i.test(text);
+        const hasDegantage398 = /d[eé]gantage/i.test(text);
+        const hasStaseVeineuse398 = /stase\s+(?:veineuse|lymphatique)/i.test(text);
+        const hasTroublesTrophiques398 = /troubles?\s+trophiques?|ulc[eè]res?\s+trophiques?|ulc[eé]rations?\s+persistant/i.test(text);
+        const hasOedemeChroniqueVarices398 = /[oœ]ed[eè]me\s+chronique|varices/i.test(text);
+        const hasGreffesPeau398 = /greffes?\s+(?:de\s+)?peau/i.test(text);
+        const hasMembInf398 = /jambe|membre\s+inf|cheville|pied|tibia|p[eé]ron/i.test(text);
+        const hasAucuneFracture398 = /aucune\s+fracture|pas\s+(?:de\s+)?fracture|sans\s+fracture|absence\s+(?:de\s+)?fracture/i.test(text);
+        const hasFracture398 = /fracture|pseudarthrose|cal\s+vicieux|luxation|arthrod[eè]se/i.test(text);
+        // Lymphœdème/dégantage/stase = strong vascular indicators → always intercept
+        const hasStrongVascular398 = hasLymphoedeme398 || hasDegantage398 || hasStaseVeineuse398;
+        // Troubles trophiques/oedème alone = weak indicator → only intercept if NO fracture present
+        const hasWeakVascular398 = hasTroublesTrophiques398 || hasOedemeChroniqueVarices398;
+        const hasVascularLymphatic398 = hasStrongVascular398 || (hasWeakVascular398 && !hasFracture398);
+        
+        if (hasVascularLymphatic398 && hasMembInf398) {
+            console.log('🩸 [V3.3.398] HANDLER VASCULAIRE/LYMPHATIQUE MI détecté');
+            
+            // Déterminer les séquelles distinctes et construire le cumul
+            const lesions398: { name: string; rate: number; bareme: string }[] = [];
+            
+            // Séquelle 1: Lymphœdème chronique [10-30%]
+            if (hasLymphoedeme398 || (hasDegantage398 && hasStaseVeineuse398)) {
+                // Déterminer la sévérité du lymphœdème
+                const isSevere398 = /elephantiasis|classe\s+IV|majeure?|s[eé]v[eè]re|important/i.test(text);
+                const isModerate398 = /mod[eé]r[eé]|classe\s+(?:II|III)|contention|chronique/i.test(text) && !isSevere398;
+                const lymphRate398 = isSevere398 ? 28 : (isModerate398 ? 20 : 15);
+                lesions398.push({
+                    name: "Lymphœdème chronique post-traumatique d'un membre",
+                    rate: lymphRate398,
+                    bareme: "Lymphœdème chronique post-traumatique d'un membre (10-30%)"
+                });
+                console.log(`🩸 [V3.3.398] Lymphœdème: ${lymphRate398}% (${isSevere398 ? 'sévère' : isModerate398 ? 'modéré' : 'léger'})`);
+            }
+            
+            // Séquelle 2: Troubles trophiques / ulcères [5-20%]
+            if (hasTroublesTrophiques398) {
+                const isSevereTrophic398 = /r[eé]cidivant|chronique|persistant|majeur|ulc[eè]res?\s+trophiques?\s+r[eé]cidivant/i.test(text);
+                const trophicRate398 = isSevereTrophic398 ? 18 : 12;
+                lesions398.push({
+                    name: "Troubles trophiques, œdème chronique, varices",
+                    rate: trophicRate398,
+                    bareme: "Troubles trophiques, œdème chronique, varices (5-20%)"
+                });
+                console.log(`🩸 [V3.3.398] Troubles trophiques: ${trophicRate398}%`);
+            }
+            
+            if (lesions398.length === 0) {
+                // Fallback: au minimum dégantage = lymphœdème
+                lesions398.push({
+                    name: "Lymphœdème chronique post-traumatique d'un membre",
+                    rate: 20,
+                    bareme: "Lymphœdème chronique post-traumatique d'un membre (10-30%)"
+                });
+            }
+            
+            if (lesions398.length === 1) {
+                // Single lesion
+                const l = lesions398[0];
+                const side398 = /droit/i.test(text) ? ' droit' : /gauche/i.test(text) ? ' gauche' : '';
+                return {
+                    type: 'proposal' as const,
+                    name: l.name,
+                    rate: l.rate,
+                    justification: `<strong>✅ ÉVALUATION PRÉCISE - CALCUL IPP (Barème 1967)</strong><br><br><strong>📋 1 séquelle post-traumatique identifiée :</strong><br><br><strong>SYSTÈME VASCULAIRE/LYMPHATIQUE</strong> → <span style="color: #d32f2f; font-weight: bold;">${l.rate}% IPP</span><br>   ├ ${l.name}<br>   ├ Barème: "${l.bareme}"<br>   └ Localisation: membre inférieur${side398}<br><br><strong>📊 RÉSULTAT FINAL :</strong><br><div style="background: #fff3e0; border-left: 4px solid #ff9800; padding: 12px; margin: 8px 0;"><strong style="font-size: 18px; color: #e65100;">IPP = ${l.rate}%</strong><br><span style="font-size: 14px; color: #666;">Taux d'Incapacité Permanente Partielle (Barème 1967)</span></div>`,
+                    path: 'Appareil Cardiovasculaire > Vaisseaux Périphériques',
+                    injury: {
+                        name: l.name,
+                        rate: [l.rate, l.rate]
+                    }
+                } as LocalProposal;
+            } else {
+                // Cumul Balthazard (2 lesions)
+                const sorted398 = [...lesions398].sort((a, b) => b.rate - a.rate);
+                const ipp398 = calculateBalthazarIPP(sorted398.map(l => l.rate));
+                const side398 = /droit/i.test(text) ? ' droit' : /gauche/i.test(text) ? ' gauche' : '';
+                const detailLines398 = sorted398.map((l, i) => `   ${i + 1}. ${l.name} → ${l.rate}% (${l.bareme})`).join('<br>');
+                
+                return {
+                    type: 'proposal' as const,
+                    name: `Polytraumatisme vasculaire/lymphatique MI${side398} (cumul ${lesions398.length} lésions)`,
+                    rate: ipp398,
+                    justification: `<strong>✅ ÉVALUATION PRÉCISE - CALCUL IPP CUMULÉ (Barème 1967 + Balthazard)</strong><br><br><strong>📋 ${lesions398.length} séquelles post-traumatiques identifiées :</strong><br><br>${detailLines398}<br><br><strong>🧮 Formule de Balthazard :</strong><br>${sorted398.map(l => l.rate + '%').join(' + ')} → IPP cumulée = ${ipp398}%<br><br><strong>📊 RÉSULTAT FINAL :</strong><br><div style="background: #fff3e0; border-left: 4px solid #ff9800; padding: 12px; margin: 8px 0;"><strong style="font-size: 18px; color: #e65100;">IPP = ${ipp398}%</strong><br><span style="font-size: 14px; color: #666;">Taux d'Incapacité Permanente Partielle (Barème 1967 + Balthazard)</span></div>`,
+                    path: 'Appareil Cardiovasculaire > Vaisseaux Périphériques',
+                    injury: {
+                        name: `Polytraumatisme vasculaire/lymphatique (cumul ${lesions398.length} lésions)`,
+                        rate: ipp398
+                    },
+                    isCumul: true
+                } as LocalProposal;
+            }
+        }
+    }
+
     // 🆕 V3.3.216: FRACTURE POUTEAU-COLLES / EXTRÉMITÉ INFÉRIEURE DU RADIUS
     // Détection prioritaire AVANT detectedSequelae pour éviter faux cumul (fracture+raideur = UNE SEULE lésion)
     // Pouteau-Colles = fracture distale du radius avec ses séquelles articulaires → lésion UNIQUE
