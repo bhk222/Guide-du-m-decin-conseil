@@ -16375,7 +16375,7 @@ const hasMultipleDistinctSites = (text: string): boolean => {
  * @param isExactMatch - Si true, cherche une correspondance exacte par nom (pour résoudre ambiguïté)
  */
 export const localExpertAnalysis = (text: string, externalKeywords?: string[], isExactMatch: boolean = false): LocalAnalysisResult => {
-    console.log('🔧 localExpertAnalysis V3.3.398 - dégantage/lymphœdème/troubles vasculaires-lymphatiques MI handler');
+    console.log('🔧 localExpertAnalysis V3.3.400 - polytraumatisme abdominal handler (splénectomie + résection intestinale + éventration)');
 
     // 🔴 V3.3.162: NETTOYAGE TEXTE - Supprime caractères invisibles (zero-width space, etc.)
     // Ces caractères peuvent casser les regex et empêcher la détection
@@ -16607,6 +16607,104 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
         }
     }
     
+    // 🆕 V3.3.400: HANDLER POLYTRAUMATISME ABDOMINAL / VISCÉRAL
+    // Détecte les combinaisons de lésions abdominales (splénectomie, résection intestinale, éventration, etc.)
+    // et cumule avec Balthazard au lieu de ne retourner que la lésion max
+    {
+        const hasSpleno400 = /spl[eé]nectomie|ablation\s+(?:de\s+)?(?:la\s+)?rate|exer[eè]se\s+(?:de\s+)?(?:la\s+)?rate|rate\s+(?:enlev|retir)/i.test(text);
+        const hasResectionIntestin400 = /r[eé]section\s+(?:d['']?un\s+segment\s+)?(?:de\s+)?(?:l['']?)?(?:intestin|gr[eê]le|il[eé]on|j[eé]junum)|ent[eé]rectomie|gr[eê]le\s+court/i.test(text);
+        const hasTroublesTransit400 = /troubles?\s+(?:du\s+)?transit|diarrh[eé]es?\s+(?:motrices?|chroniques?|r[eé]siduelles?)|mal(?:absorption|digestion)/i.test(text);
+        const hasEventration400 = /[eé]ventration|hernie\s+(?:sur|post|de la)\s+(?:cicatrice|laparotomie)/i.test(text);
+        const hasLaparotomie400 = /laparotomie/i.test(text);
+        const hasContusionHepatique400 = /contusion\s+h[eé]patique|rupture\s+(?:du\s+)?foie|h[eé]patectomie/i.test(text);
+        const hasPerfoIntestin400 = /perforation\s+(?:de\s+)?(?:l['']?)?(?:intestin|gr[eê]le|c[oô]lon|estomac)/i.test(text);
+        const hasAbdomen400 = /abdomen|abdominal|h[eé]mop[eé]ritoine|p[eé]ritoine/i.test(text);
+        
+        // Compter les lésions abdominales distinctes
+        const abdomLesions400: { name: string; rate: number; bareme: string }[] = [];
+        
+        if (hasSpleno400) {
+            // Splénectomie [15-30%]: sévère si déficit immunitaire, vaccinations à vie
+            const isSevereSpleno400 = /d[eé]ficit\s+immunitaire|vaccinations?\s+(?:sp[eé]cifiques?\s+)?[àa]\s+vie|immunod[eé]pression|infections?\s+r[eé]cidivant/i.test(text);
+            const splenoRate400 = isSevereSpleno400 ? 25 : 20;
+            abdomLesions400.push({
+                name: "Splénectomie (Ablation de la rate)",
+                rate: splenoRate400,
+                bareme: "Splénectomie (Ablation de la rate) (15-30%)"
+            });
+        }
+        
+        if (hasResectionIntestin400 || (hasPerfoIntestin400 && hasTroublesTransit400)) {
+            // Résection intestinale grêle courte [10-20%] ou étendue [40-70%]
+            const isExtended400 = /[eé]tendue|massive|importante|syndrome\s+(?:du\s+)?gr[eê]le\s+court|(?:plus\s+de\s+|>\s*)?100\s*cm/i.test(text);
+            const isSevereTransit400 = /diarrh[eé]es?\s+(?:motrices?|chroniques?)|malabsorption/i.test(text);
+            const intestinRate400 = isExtended400 ? 50 : (isSevereTransit400 ? 15 : 10);
+            abdomLesions400.push({
+                name: isExtended400 ? "Résection intestinale grêle étendue (>100 cm)" : "Résection intestinale grêle courte (<50 cm)",
+                rate: intestinRate400,
+                bareme: isExtended400 ? "Résection intestinale grêle étendue (40-70%)" : "Résection intestinale grêle courte (10-20%)"
+            });
+        }
+        
+        if (hasEventration400 || (hasLaparotomie400 && /cicatrice/i.test(text))) {
+            // Éventration après laparotomie [15-50%]
+            const isSevereEvent400 = /importante|massive|irr[eé]ductible|r[eé]cidivante|appareillage/i.test(text);
+            const eventRate400 = isSevereEvent400 ? 25 : 15;
+            abdomLesions400.push({
+                name: "Cicatrice avec éventration après laparotomie (appareillage ou non)",
+                rate: eventRate400,
+                bareme: "Cicatrice avec éventration après laparotomie (15-50%)"
+            });
+        }
+        
+        if (hasContusionHepatique400) {
+            const hepatRate400 = /h[eé]patectomie/i.test(text) ? 25 : 12;
+            abdomLesions400.push({
+                name: /h[eé]patectomie/i.test(text) ? "Séquelles d'hépatectomie partielle post-traumatique" : "Séquelles de contusion hépatique (douleurs, troubles digestifs)",
+                rate: hepatRate400,
+                bareme: /h[eé]patectomie/i.test(text) ? "Séquelles d'hépatectomie partielle (10-40%)" : "Séquelles de contusion hépatique (5-20%)"
+            });
+        }
+        
+        // Ne trigger que si 2+ lésions abdominales distinctes détectées, OU 1 lésion abdo + contexte abdominal fort
+        if (abdomLesions400.length >= 2) {
+            console.log(`🏥 [V3.3.400] HANDLER POLYTRAUMATISME ABDOMINAL: ${abdomLesions400.length} lésions détectées`);
+            
+            if (abdomLesions400.length === 1) {
+                const l = abdomLesions400[0];
+                return {
+                    type: 'proposal' as const,
+                    name: l.name,
+                    rate: l.rate,
+                    justification: `<strong>✅ ÉVALUATION PRÉCISE - CALCUL IPP (Barème 1967)</strong><br><br><strong>📋 1 séquelle abdominale identifiée :</strong><br><br><strong>APPAREIL DIGESTIF</strong> → <span style="color: #d32f2f; font-weight: bold;">${l.rate}% IPP</span><br>   ├ ${l.name}<br>   ├ Barème: "${l.bareme}"<br>   └ Localisation: abdomen<br><br><strong>📊 RÉSULTAT FINAL :</strong><br><div style="background: #fff3e0; border-left: 4px solid #ff9800; padding: 12px; margin: 8px 0;"><strong style="font-size: 18px; color: #e65100;">IPP = ${l.rate}%</strong><br><span style="font-size: 14px; color: #666;">Taux d'Incapacité Permanente Partielle (Barème 1967)</span></div>`,
+                    path: 'Séquelles Thoraciques, Abdominales, Pelviennes > Abdomen',
+                    injury: { name: l.name, rate: [l.rate, l.rate] }
+                } as LocalProposal;
+            }
+            
+            // Cumul Balthazard pour 2+ lésions
+            const sorted400 = [...abdomLesions400].sort((a, b) => b.rate - a.rate);
+            const ipp400 = calculateBalthazarIPP(sorted400.map(l => l.rate));
+            const detailLines400 = sorted400.map((l, i) => `   ${i + 1}. ${l.name} → ${l.rate}% (${l.bareme})`).join('<br>');
+            const balthFormula400 = sorted400.map(l => l.rate + '%').join(' + ');
+            
+            console.log(`🏥 [V3.3.400] Cumul Balthazard: ${balthFormula400} → IPP = ${ipp400}%`);
+            
+            return {
+                type: 'proposal' as const,
+                name: `Polytraumatisme abdominal (cumul ${abdomLesions400.length} lésions)`,
+                rate: ipp400,
+                justification: `<strong>✅ ÉVALUATION PRÉCISE - CALCUL IPP CUMULÉ (Barème 1967 + Balthazard)</strong><br><br><strong>📋 ${abdomLesions400.length} séquelles abdominales post-traumatiques identifiées :</strong><br><br>${detailLines400}<br><br><strong>🧮 Formule de Balthazard :</strong><br>${balthFormula400} → IPP cumulée = ${ipp400}%<br><br><strong>📊 RÉSULTAT FINAL :</strong><br><div style="background: #fff3e0; border-left: 4px solid #ff9800; padding: 12px; margin: 8px 0;"><strong style="font-size: 18px; color: #e65100;">IPP = ${ipp400}%</strong><br><span style="font-size: 14px; color: #666;">Taux d'Incapacité Permanente Partielle (Barème 1967 + Balthazard)</span></div>`,
+                path: 'Séquelles Thoraciques, Abdominales, Pelviennes > Abdomen',
+                injury: {
+                    name: `Polytraumatisme abdominal (cumul ${abdomLesions400.length} lésions)`,
+                    rate: ipp400
+                },
+                isCumul: true
+            } as LocalProposal;
+        }
+    }
+
     // 🆕 V3.3.398: HANDLER DÉGANTAGE / LYMPHŒDÈME / TROUBLES VASCULAIRES-LYMPHATIQUES MEMBRE INFÉRIEUR
     // Détection prioritaire pour lésions cutanées/vasculaires/lymphatiques graves (dégantage, lymphœdème, etc.)
     // Ces pathologies n'ont AUCUNE fracture — le système ne doit PAS matcher d'entrées fracturaires
