@@ -702,6 +702,7 @@ export const WORD_CORRECTIONS: Record<string, string> = {
     'algodistrophie': 'algodystrophie',
     'pseudo-artrose': 'pseudarthrose',
     'pseudartrose': 'pseudarthrose',
+    'pseudarthroise': 'pseudarthrose',  // 🆕 V3.3.397: Typo fréquent clavier
     'saud-arthroze': 'pseudarthrose',
     'saudarthroze': 'pseudarthrose',
     'sod-arthrose': 'pseudarthrose',

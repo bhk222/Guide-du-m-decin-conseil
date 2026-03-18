@@ -530,6 +530,7 @@ const preprocessMedicalText = (text: string): string => {
         [/\bcons\b(?!\s*$)/gi, 'consolidation '],
         [/\bcal\s+vic\b/gi, 'cal vicieux '],
         [/\bpseudart\b/gi, 'pseudarthrose '],
+        [/\bpseudarthroise\b/gi, 'pseudarthrose '],  // 🆕 V3.3.397: Correction typo fréquent
         [/\bs[eé]quelle\s+douleureuse/gi, 'raideur avec douleur '],
         [/\bs[eé]quelles\s+douloureuses/gi, 'raideur avec douleur '],
         
@@ -15260,6 +15261,27 @@ export const detectMultipleLesions = (text: string): {
         }
     }
 
+    // 🆕 V3.3.397: EXCEPTION FRACTURE + PSEUDARTHROSE MÊME OS (sans séparateur explicite)
+    // "fracture fémur avec pseudarthrose" = UNE SEULE pathologie (pseudarthrose EST la séquelle de la fracture)
+    // La pseudarthrose est la non-consolidation de la fracture → c'est le même événement lésionnel
+    // SEUL cas de cumul: séparation explicite par ";" indiquant évaluation distincte
+    const isFracturePlusPseudarthrose397 = /fracture/i.test(normalized) && /pseudarthrose/i.test(normalized);
+    const hasExplicitSeparatorPseudo397 = /;[\s\w]*pseudarthrose|\s\+\s.*pseudarthrose/i.test(normalized);
+    if (isFracturePlusPseudarthrose397 && !hasExplicitSeparatorPseudo397) {
+        // Pas d'autre lésion distincte (luxation, amputation, etc.) → single
+        const hasOtherDistinctLesionPseudo397 = /luxation|amputation|rupture.*(?:ligament|tendon)|d[eé]chirure.*(?:ligament|tendon)|entorse|section.*(?:tendon|nerf)/i.test(normalized);
+        if (!hasOtherDistinctLesionPseudo397) {
+            console.log('🦴 [V3.3.397] Fracture + pseudarthrose même os (sans ";") → PAS de cumul (séquelle unique)');
+            return {
+                isCumul: false,
+                lesionCount: 1,
+                keywords: [],
+                hasAnteriorState: false,
+                anteriorIPP: null
+            };
+        }
+    }
+
     // 1. Keywords explicites de cumul - ENRICHIS V3.3.201c
     const cumulKeywords = [
         'polytraumatisme', 'plusieurs lesions', 'sequelles multiples',
@@ -16355,6 +16377,8 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
             [/\ble\s+do(?=\s)/gi, 'le dos '],
             [/\b[eé]pol(?=\s|$|[^a-zA-Zéèêëàâùûîïôö])/gi, 'épaule '],
             [/\bexplos[eé](?=\s|$|[^a-zA-Zéèêëàâùûîïôö])/gi, 'fracture comminutive '],
+            // 🆕 V3.3.397: Correction typo pseudarthroise → pseudarthrose
+            [/\bpseudarthroise\b/gi, 'pseudarthrose '],
         ];
         let smsProcessed = text;
         for (const [pattern, replacement] of smsRules) {
@@ -16363,6 +16387,17 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
         if (smsProcessed !== text) {
             text = smsProcessed;
             console.log('   - Texte après normalisation SMS:', text.substring(0, 200));
+        }
+    }
+
+    // 🆕 V3.3.397: Réécriture "fracture X avec pseudarthrose" → "pseudarthrose du X"
+    // La pseudarthrose est la séquelle principale, elle doit être le terme de recherche prioritaire
+    {
+        const pseudarthroseRewrite = text.match(/fracture\s+(?:(?:de\s+(?:la|l[''])?|du|des|d['']?)\s*)?(?:diaphysaire\s+(?:de\s+(?:la|l[''])?|du|des)?\s*)?([\wéèêëàâùûîïôö-]+)\s+avec\s+pseudarthrose/i);
+        if (pseudarthroseRewrite && !/;|\+/.test(text)) {
+            const bone = pseudarthroseRewrite[1];
+            text = `pseudarthrose du ${bone}`;
+            console.log('   - V3.3.397: Réécriture fracture+pseudarthrose →', text);
         }
     }
 
