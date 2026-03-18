@@ -388,30 +388,38 @@ export function useDictaphoneAI(
                 if (info.status === 'progress' && info.progress != null) {
                     const pct = Math.round(info.progress);
                     setModelProgress(pct);
-                    setStatusMessage(`⏳ Chargement: ${pct}%`);
+                    const sizeInfo = hasLocalModels ? '' : ' (téléchargement une seule fois)';
+                    setStatusMessage(`⏳ Chargement: ${pct}%${sizeInfo}`);
                 } else if (info.status === 'ready') {
                     setModelProgress(100);
                 }
             };
 
-            // Whisper SMALL (244M params) = bien meilleur français que base (74M)
-            // Essai WebGPU d'abord (fp16, rapide si GPU dispo), sinon WASM (quantized, universel)
+            // Stratégie de chargement:
+            // - Local (models disponibles): WebGPU fp16 d'abord (rapide), fallback WASM q8
+            // - CDN (HuggingFace): WASM q8 directement (plus petit ~150MB vs ~463MB fp16, plus fiable)
             let loaded = false;
-            let webgpuError: unknown = null;
-            try {
-                transcriberRef.current = await pipeline(
-                    'automatic-speech-recognition',
-                    'onnx-community/whisper-small',
-                    { device: 'webgpu', dtype: 'fp16', progress_callback: progressCb },
-                );
-                loaded = true;
-                console.log('✅ Whisper SMALL chargé via WebGPU (fp16)');
-            } catch (e) {
-                webgpuError = e;
-                console.warn('WebGPU non disponible, fallback WASM:', e);
+            
+            if (hasLocalModels) {
+                // En local: tenter WebGPU d'abord (performances optimales)
+                try {
+                    transcriberRef.current = await pipeline(
+                        'automatic-speech-recognition',
+                        'onnx-community/whisper-small',
+                        { device: 'webgpu', dtype: 'fp16', progress_callback: progressCb },
+                    );
+                    loaded = true;
+                    console.log('✅ Whisper SMALL chargé via WebGPU (fp16)');
+                } catch (e) {
+                    console.warn('WebGPU non disponible, fallback WASM:', e);
+                }
             }
+            
             if (!loaded) {
-                setStatusMessage('⏳ Chargement Whisper SMALL (WASM)...');
+                // WASM q8 (universel, ~150MB quantized — fonctionne partout)
+                setStatusMessage(hasLocalModels 
+                    ? '⏳ Chargement Whisper SMALL (WASM)...'
+                    : '⏳ Téléchargement Whisper SMALL (~150MB, une seule fois)...');
                 setModelProgress(0);
                 transcriberRef.current = await pipeline(
                     'automatic-speech-recognition',
@@ -431,9 +439,13 @@ export function useDictaphoneAI(
             setModelProgress(0);
             const errMsg = err instanceof Error ? err.message : String(err);
             if (errMsg.includes('404') || errMsg.includes('Not Found')) {
-                setStatusMessage('❌ Fichiers du modèle introuvables. Lancez: npm run setup');
+                setStatusMessage('❌ Fichiers du modèle introuvables. Lancez: npm run build:local');
+            } else if (errMsg.includes('network') || errMsg.includes('fetch') || errMsg.includes('abort') || errMsg.includes('timeout')) {
+                setStatusMessage('❌ Téléchargement interrompu. Vérifiez votre connexion et réessayez.');
+            } else if (errMsg.includes('SharedArrayBuffer')) {
+                setStatusMessage('❌ SharedArrayBuffer non disponible. Essayez Chrome ou Edge.');
             } else {
-                setStatusMessage('❌ Erreur chargement Whisper. Rechargez la page.');
+                setStatusMessage('❌ Erreur chargement Whisper. Rechargez la page pour réessayer.');
             }
             return false;
         }

@@ -8,7 +8,8 @@ export default defineConfig({
     host: '0.0.0.0',
     headers: {
       // Required for SharedArrayBuffer (WASM multi-threading) and WebGPU
-      'Cross-Origin-Embedder-Policy': 'require-corp',
+      // 'credentialless' allows cross-origin requests (HuggingFace CDN) unlike 'require-corp'
+      'Cross-Origin-Embedder-Policy': 'credentialless',
       'Cross-Origin-Opener-Policy': 'same-origin',
     },
   },
