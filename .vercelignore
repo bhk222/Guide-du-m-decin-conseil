@@ -25,6 +25,20 @@ scripts/
 # Node modules (déjà exclus par défaut mais pour clarté)
 node_modules/
 
+# Modèles Whisper (téléchargés localement, trop volumineux pour Vercel)
+public/models/
+
+# Build local
+dist/
+
+# Environnement Python
+.venv/
+
+# Fichiers de test output
+_test_*.txt
+_test_*.ts
+_debug_*.txt
+
 # Fichiers système
 .DS_Store
 Thumbs.db
