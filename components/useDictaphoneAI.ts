@@ -1,20 +1,21 @@
 /**
  * 🎤 useDictaphoneAI — Dictaphone 100% autonome via Whisper IA
- * V3.3.383
+ * V3.3.386
  * 
  * ZÉRO dépendance externe :
+ * - Modèle Whisper SMALL intégré à l'application (auto-hébergé)
+ * - Pas de téléchargement depuis HuggingFace
  * - Pas de moteur Windows
- * - Pas de serveur Google
- * - Pas de connexion internet (après 1er chargement du modèle)
+ * - Pas de serveur Google  
+ * - 100% hors ligne après premier chargement
  * 
  * Fonctionnement :
- * 1. Premier usage → télécharge Whisper SMALL (~500MB), installé à vie dans le navigateur
- * 2. Après → fonctionne 100% hors ligne, à vie, sans re-téléchargement
- * 3. Essaie WebGPU (rapide) puis fallback WASM (universel)
- * 4. Capture audio micro → détecte silences → transcrit Whisper
- * 5. Correction médicale post-transcription automatique (~700+ mots + ~200+ expressions)
- * 6. Commandes vocales intelligentes (ponctuation, effacement, navigation)
- * 7. Dictionnaire complet du barème médical (anatomie, pathologies, chirurgie, médico-légal)
+ * 1. Modèle servi depuis le CDN de l'app (public/models/)
+ * 2. WebGPU (fp16, rapide) avec fallback WASM (int8, universel)
+ * 3. Capture audio micro → détecte silences → transcrit Whisper
+ * 4. Correction médicale post-transcription automatique (~700+ mots + ~200+ expressions)
+ * 5. Commandes vocales intelligentes (ponctuation, effacement, navigation)
+ * 6. Dictionnaire complet du barème médical (anatomie, pathologies, chirurgie, médico-légal)
  */
 
 import { useState, useRef, useCallback, useEffect } from 'react';
@@ -205,7 +206,8 @@ export function useDictaphoneAI(
     const isListeningRef = useRef(false);
     const transcriberRef = useRef<any>(null);
     const audioCtxRef = useRef<AudioContext | null>(null);
-    const processorRef = useRef<ScriptProcessorNode | null>(null);
+    const workletNodeRef = useRef<AudioWorkletNode | null>(null);
+    const processorRef = useRef<ScriptProcessorNode | null>(null); // fallback
     const streamRef = useRef<MediaStream | null>(null);
     const audioSamplesRef = useRef<Float32Array[]>([]);
     const totalSamplesRef = useRef(0);
@@ -319,6 +321,13 @@ export function useDictaphoneAI(
             }
         } catch (e) {
             console.error('Erreur transcription Whisper:', e);
+            // Don't crash the recording — just skip this chunk
+            if (isListeningRef.current) {
+                setStatusMessage('⚠️ Segment ignoré — reparlez...');
+                setTimeout(() => {
+                    if (isListeningRef.current) setStatusMessage('🎤 Écoute...');
+                }, 2000);
+            }
         }
 
         processingRef.current = false;
@@ -329,80 +338,97 @@ export function useDictaphoneAI(
     }, [getAccumulatedAudio, clearAll, deleteWords, setText]);
 
     // ── Charger le modèle Whisper ──
+    // V3.3.386: Modèle auto-hébergé — chargé depuis le CDN de l'app, zéro téléchargement externe
     const loadModel = useCallback(async (): Promise<boolean> => {
         if (transcriberRef.current) return true;
 
         setIsModelLoading(true);
         setModelProgress(0);
 
-        // Vérifier si le modèle est déjà installé dans le cache du navigateur
+        // Vérifier si le modèle est déjà en cache (service worker ou transformers-cache)
         let modelCached = false;
         try {
-            const cache = await caches.open('transformers-cache');
-            const keys = await cache.keys();
-            modelCached = keys.some(k => k.url.includes('whisper-small'));
+            const cacheNames = await caches.keys();
+            for (const name of cacheNames) {
+                const cache = await caches.open(name);
+                const keys = await cache.keys();
+                if (keys.some(k => k.url.includes('/models/onnx-community/whisper-small/'))) {
+                    modelCached = true;
+                    break;
+                }
+            }
         } catch { /* cache API non dispo, on continue */ }
 
         setStatusMessage(modelCached
-            ? '⚡ Chargement Whisper SMALL (déjà installé)...'
-            : '📦 Installation Whisper SMALL (une seule fois, ~500MB)...'
+            ? '⚡ Chargement Whisper SMALL (en cache)...'
+            : '⏳ Chargement Whisper SMALL...'
         );
 
         try {
-            const { pipeline } = await import('@huggingface/transformers');
+            const { pipeline, env } = await import('@huggingface/transformers');
+
+            // Charger le modèle depuis les fichiers locaux (bundled avec l'app)
+            env.allowLocalModels = true;
+            env.localModelPath = '/models/';
+            env.allowRemoteModels = false; // Pas de téléchargement HuggingFace
 
             const progressCb = (info: any) => {
                 if (info.status === 'progress' && info.progress != null) {
                     const pct = Math.round(info.progress);
                     setModelProgress(pct);
-                    setStatusMessage(modelCached
-                        ? `⚡ Chargement: ${pct}%`
-                        : `📦 Installation: ${pct}%`
-                    );
+                    setStatusMessage(`⏳ Chargement: ${pct}%`);
                 } else if (info.status === 'ready') {
                     setModelProgress(100);
                 }
             };
 
             // Whisper SMALL (244M params) = bien meilleur français que base (74M)
-            // Essai WebGPU d'abord (rapide si GPU dispo), sinon WASM
+            // Essai WebGPU d'abord (fp16, rapide si GPU dispo), sinon WASM (quantized, universel)
             let loaded = false;
+            let webgpuError: unknown = null;
             try {
                 transcriberRef.current = await pipeline(
                     'automatic-speech-recognition',
                     'onnx-community/whisper-small',
-                    { device: 'webgpu', progress_callback: progressCb },
+                    { device: 'webgpu', dtype: 'fp16', progress_callback: progressCb },
                 );
                 loaded = true;
-            } catch {
-                // WebGPU non dispo, fallback WASM
+                console.log('✅ Whisper SMALL chargé via WebGPU (fp16)');
+            } catch (e) {
+                webgpuError = e;
+                console.warn('WebGPU non disponible, fallback WASM:', e);
             }
             if (!loaded) {
-                setStatusMessage(modelCached
-                    ? '⚡ Chargement Whisper SMALL (WASM)...'
-                    : '📦 Installation Whisper SMALL (WASM)...'
-                );
+                setStatusMessage('⏳ Chargement Whisper SMALL (WASM)...');
                 setModelProgress(0);
                 transcriberRef.current = await pipeline(
                     'automatic-speech-recognition',
                     'onnx-community/whisper-small',
-                    { device: 'wasm', progress_callback: progressCb },
+                    { device: 'wasm', dtype: 'q8', progress_callback: progressCb },
                 );
+                console.log('✅ Whisper SMALL chargé via WASM (q8)');
             }
 
             setIsModelLoaded(true);
             setIsModelLoading(false);
-            setStatusMessage('✅ Modèle Whisper installé et prêt !');
+            setStatusMessage('✅ Modèle Whisper prêt !');
             return true;
         } catch (err) {
             console.error('Erreur chargement modèle Whisper:', err);
             setIsModelLoading(false);
-            setStatusMessage('❌ Impossible de charger le modèle. Vérifiez votre connexion pour le premier chargement.');
+            setModelProgress(0);
+            const errMsg = err instanceof Error ? err.message : String(err);
+            if (errMsg.includes('404') || errMsg.includes('Not Found')) {
+                setStatusMessage('❌ Fichiers du modèle introuvables. Lancez: npm run setup');
+            } else {
+                setStatusMessage('❌ Erreur chargement Whisper. Rechargez la page.');
+            }
             return false;
         }
     }, []);
 
     // ── Démarrer l'enregistrement micro ──
+    // V3.3.386: AudioWorkletNode (modern, off-main-thread) with ScriptProcessorNode fallback
     const startRecording = useCallback(async (): Promise<boolean> => {
         try {
             const stream = await navigator.mediaDevices.getUserMedia({
@@ -417,10 +443,7 @@ export function useDictaphoneAI(
 
             const ctx = new AudioContext({ sampleRate: SAMPLE_RATE });
             audioCtxRef.current = ctx;
-
             const source = ctx.createMediaStreamSource(stream);
-            const processor = ctx.createScriptProcessor(4096, 1, 1);
-            processorRef.current = processor;
 
             // Reset accumulateur
             audioSamplesRef.current = [];
@@ -429,34 +452,76 @@ export function useDictaphoneAI(
             lastSpeechRef.current = Date.now();
             hadSpeechRef.current = false;
 
-            processor.onaudioprocess = (e: AudioProcessingEvent) => {
-                if (!isListeningRef.current) return;
+            // ── Try AudioWorkletNode (modern, non-blocking) ──
+            let useWorklet = false;
+            if (ctx.audioWorklet) {
+                try {
+                    await ctx.audioWorklet.addModule('/audio-processor.js');
+                    const workletNode = new AudioWorkletNode(ctx, 'audio-capture-processor');
+                    workletNodeRef.current = workletNode;
 
-                const data = e.inputBuffer.getChannelData(0);
+                    workletNode.port.onmessage = (e: MessageEvent) => {
+                        if (!isListeningRef.current) return;
+                        const { samples, rms } = e.data;
 
-                // Calculer niveau audio RMS
-                let sum = 0;
-                for (let i = 0; i < data.length; i++) sum += data[i] * data[i];
-                const rms = Math.sqrt(sum / data.length);
-                setAudioLevel(Math.min(100, Math.round(rms * 3000)));
+                        setAudioLevel(Math.min(100, Math.round(rms * 3000)));
 
-                if (rms > SILENCE_THRESHOLD) {
-                    lastSpeechRef.current = Date.now();
-                    if (!hadSpeechRef.current) {
-                        hadSpeechRef.current = true;
-                        setInterimText('🗣️ Parole détectée...');
-                    }
+                        if (rms > SILENCE_THRESHOLD) {
+                            lastSpeechRef.current = Date.now();
+                            if (!hadSpeechRef.current) {
+                                hadSpeechRef.current = true;
+                                setInterimText('🗣️ Parole détectée...');
+                            }
+                        }
+
+                        // Accumuler les samples
+                        const copy = new Float32Array(samples);
+                        audioSamplesRef.current.push(copy);
+                        totalSamplesRef.current += copy.length;
+                    };
+
+                    source.connect(workletNode);
+                    workletNode.connect(ctx.destination);
+                    useWorklet = true;
+                } catch {
+                    // AudioWorklet failed, fall through to ScriptProcessor
                 }
+            }
 
-                // Accumuler les samples
-                const copy = new Float32Array(data.length);
-                copy.set(data);
-                audioSamplesRef.current.push(copy);
-                totalSamplesRef.current += data.length;
-            };
+            // ── Fallback: ScriptProcessorNode (deprecated but universal) ──
+            if (!useWorklet) {
+                const processor = ctx.createScriptProcessor(4096, 1, 1);
+                processorRef.current = processor;
 
-            source.connect(processor);
-            processor.connect(ctx.destination);
+                processor.onaudioprocess = (e: AudioProcessingEvent) => {
+                    if (!isListeningRef.current) return;
+
+                    const data = e.inputBuffer.getChannelData(0);
+
+                    // Calculer niveau audio RMS
+                    let sum = 0;
+                    for (let i = 0; i < data.length; i++) sum += data[i] * data[i];
+                    const rms = Math.sqrt(sum / data.length);
+                    setAudioLevel(Math.min(100, Math.round(rms * 3000)));
+
+                    if (rms > SILENCE_THRESHOLD) {
+                        lastSpeechRef.current = Date.now();
+                        if (!hadSpeechRef.current) {
+                            hadSpeechRef.current = true;
+                            setInterimText('🗣️ Parole détectée...');
+                        }
+                    }
+
+                    // Accumuler les samples
+                    const copy = new Float32Array(data.length);
+                    copy.set(data);
+                    audioSamplesRef.current.push(copy);
+                    totalSamplesRef.current += data.length;
+                };
+
+                source.connect(processor);
+                processor.connect(ctx.destination);
+            }
 
             // Vérification périodique du silence
             silenceIntervalRef.current = setInterval(() => {
@@ -496,6 +561,13 @@ export function useDictaphoneAI(
             clearInterval(silenceIntervalRef.current);
             silenceIntervalRef.current = null;
         }
+        // Stop AudioWorklet
+        if (workletNodeRef.current) {
+            workletNodeRef.current.port.postMessage('stop');
+            workletNodeRef.current.disconnect();
+            workletNodeRef.current = null;
+        }
+        // Stop ScriptProcessor (fallback)
         if (processorRef.current) {
             processorRef.current.disconnect();
             processorRef.current = null;

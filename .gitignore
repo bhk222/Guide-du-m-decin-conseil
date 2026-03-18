@@ -80,3 +80,6 @@ test-output-ms2.txt
 
 # Temporary scripts
 new_acts.json
+
+# Whisper model files (downloaded during build via scripts/download-whisper.mjs)
+public/models/

@@ -247,6 +247,26 @@ export const PHRASE_CORRECTIONS: [RegExp, string][] = [
     [/\b[aâ]g[eé]es?\s+de\b/gi, 'âgée de'],
     [/\bil\s+s'?\s*agit\b/gi, 'il s\'agit'],
     [/\bavec\s+comme\s+s[eé]quell?e\b/gi, 'avec comme séquelle'],
+
+    // ─── Neurologie composée (V3.3.386) ───
+    [/\bsyndrome\s+c[eé]r[eé]belleux\b/gi, 'syndrome cérébelleux'],
+    [/\bataxie\s+c[eé]r[eé]belleuse\b/gi, 'ataxie cérébelleuse'],
+    [/\bsyndrome\s+dys[eé]x[eé]cutif\b/gi, 'syndrome dysexécutif'],
+    [/\bmy[eé]lo\s+pathie\b/gi, 'myélopathie'],
+    [/\bhydro\s+c[eé]phalie\b/gi, 'hydrocéphalie'],
+    [/\bsyringo\s+my[eé]lie\b/gi, 'syringomyélie'],
+    [/\bnarco\s+lepsie\b/gi, 'narcolepsie'],
+    [/\bcata\s+plexie\b/gi, 'cataplexie'],
+    [/\bsterno[- ]?cl[eé]ido[- ]?masto[iï]dien\b/gi, 'sterno-cléido-mastoïdien'],
+    [/\bd[eé]mence\s+post[- ]?traumatique\b/gi, 'démence post-traumatique'],
+    [/\bn[eé]vrose\s+post[- ]?traumatique\b/gi, 'névrose post-traumatique'],
+    [/\btroubles?\s+sphinct[eé]riens?\b/gi, 'troubles sphinctériens'],
+    [/\binsuffisance\s+ant[eé]\s*hypo\s*physaire\b/gi, 'insuffisance antéhypophysaire'],
+    [/\bm[eé]ralgie\s+par[eé]sth[eé]sique\b/gi, 'méralgie paresthésique'],
+    [/\bspondylose\s+rhizo\s*m[eé]lique\b/gi, 'spondylose rhizomélique'],
+    [/\botorr?h?[eé]e\b/gi, 'otorrhée'],
+    [/\brhinorr?h?[eé]e\b/gi, 'rhinorrhée'],
+    [/\bdipl[eé]gie\s+c[eé]r[eé]brale\b/gi, 'diplégie cérébrale'],
 ];
 
 // ═══════════════════════════════════════════════════════════════
@@ -847,4 +867,54 @@ export const WORD_CORRECTIONS: Record<string, string> = {
     'dms': 'DMS',
     'rom': 'ROM',
     'rot': 'ROT',
+
+    // ═══ NEUROLOGIE — BARÈME (V3.3.386) ═══
+    'cerebelleux': 'cérébelleux',
+    'cerebelleuse': 'cérébelleuse',
+    'dysexecutif': 'dysexécutif',
+    'dysexecutive': 'dysexécutive',
+    'myelopathie': 'myélopathie',
+    'hydrocephalie': 'hydrocéphalie',
+    'hydrocéfalie': 'hydrocéphalie',
+    'syringomyelie': 'syringomyélie',
+    'seringomyelie': 'syringomyélie',
+    'medullaire': 'médullaire',
+    'sphincterien': 'sphinctérien',
+    'sphincteriens': 'sphinctériens',
+    'sphincterienne': 'sphinctérienne',
+
+    // ═══ PSYCHIATRIE — BARÈME (V3.3.386) ═══
+    'demence': 'démence',
+    'démance': 'démence',
+    'nevrose': 'névrose',
+    'nevrotique': 'névrotique',
+    'psychasthenique': 'psychasthénique',
+    'psychogene': 'psychogène',
+
+    // ═══ NERFS CRÂNIENS — BARÈME (V3.3.386) ═══
+    'glossopharyngien': 'glosso-pharyngien',
+    'glossofaringien': 'glosso-pharyngien',
+    'hypoglosse': 'hypoglosse',
+    'hipoglosse': 'hypoglosse',
+    'pudendale': 'pudendale',
+    'meralgie': 'méralgie',
+    'poplite': 'poplité',
+
+    // ═══ RACHIS AVANCÉ — BARÈME (V3.3.386) ═══
+    'rhizomelique': 'rhizomélique',
+    'coccygodynie': 'coccygodynie',
+    'coccigodynie': 'coccygodynie',
+
+    // ═══ PATHOLOGIES SPÉCIALES — BARÈME (V3.3.386) ═══
+    'narcolepsie': 'narcolepsie',
+    'narcolexie': 'narcolepsie',
+    'cataplexie': 'cataplexie',
+    'otorrhee': 'otorrhée',
+    'otorée': 'otorrhée',
+    'rhinorrhee': 'rhinorrhée',
+    'rinorée': 'rhinorrhée',
+    'antehypophysaire': 'antéhypophysaire',
+    'diplegie': 'diplégie',
+    'quadriplegie': 'quadriplégie',
+    'quadriplegique': 'quadriplégique',
 };

@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "setup": "node scripts/download-whisper.mjs",
+    "build": "node scripts/download-whisper.mjs && vite build",
     "preview": "vite preview",
     "test": "tsx _test_all.ts",
     "test:validation": "tsx test-validation.ts"

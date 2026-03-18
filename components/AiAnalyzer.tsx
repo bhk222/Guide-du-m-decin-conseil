@@ -5892,6 +5892,9 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
         [/l[eé]sion\s+(?:du\s+)?plexus\s+brachial/gi, 'paralysie plexus brachial'],
         [/paralysie\s+(?:du\s+)?plexus\s+brachial/gi, 'paralysie complète plexus brachial'],
         [/paralysie\s+partielle\s+(?:du\s+)?membre\s+sup[eé]rieur/gi, 'paralysie radiculaire plexus brachial'],
+        // 🆕 V3.3.387: Avulsion plexus brachial C5-T1 → paralysie complète
+        [/avulsion\s+(?:du\s+)?plexus\s+brachial/gi, 'paralysie complète plexus brachial avulsion'],
+        [/avulsion\s+(?:radiculaire\s+)?C5[\s-]*T1/gi, 'paralysie complète plexus brachial avulsion C5 T1'],
         
         // Douleurs rachis → Pathologies détectables
         [/\bmal\s+(?:au\s+)?dos\b/gi, 'mal dos rachialgie traumatique vertèbre lombaire'],
@@ -8637,13 +8640,14 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             negativeContext: /main.*br[uû]l|br[uû]l.*main|visage|face|cou/i  // Si main aussi touchée, laisser la règle main prendre le relais
         },
         
-        // === RÈGLE FRACTURE OUVERTE TIBIA GUSTILO IIIB (V3.3.35 - FIX CAS 11) ===
+        // === RÈGLE FRACTURE OUVERTE TIBIA GUSTILO IIIB / CAUCHOIS-DUPARC (V3.3.35 - FIX CAS 11) ===
         // Problème CAS 11: Détecte "Raideur médius" (4%) au lieu de fracture tibia complexe (40-50%)
         // Contexte: Fracture ouverte Gustilo IIIB + ostéite chronique + raccourcissement 3.5cm + raideur genou+cheville
+        // 🔧 V3.3.387: Ajout classification Cauchois et Duparc (stade I/II/III) — équivalent Gustilo en France
         // Solution: Expert rule haute priorité avec marker spécial pour cumul complications
         {
-            pattern: /fracture.*(?:ouverte|expos[eé]e).*tibia.*(?:Gustilo|type.*III|IIIB)|(?:Gustilo|type.*III|IIIB).*tibia|fracture.*tibia.*(?:infection|ost[eé]ite)/i,
-            context: /(?:infection|ost[eé]ite|chronique|staphylocoque|raccourcissement|raideur.*(?:genou|cheville)|flexion.*(?:genou|cheville|dorsale)|boiterie)/i,
+            pattern: /fracture.*(?:ouverte|expos[eé]e).*tibia.*(?:Gustilo|type.*III|IIIB|Cauchois|Duparc)|(?:Gustilo|type.*III|IIIB|Cauchois.*Duparc).*tibia|fracture.*tibia.*(?:infection|ost[eé]ite)|fracture.*ouverte.*(?:stade|type).*(?:III|3|II|2).*(?:tibia|jambe)/i,
+            context: /(?:infection|ost[eé]ite|chronique|staphylocoque|raccourcissement|raideur.*(?:genou|cheville)|flexion.*(?:genou|cheville|dorsale)|boiterie|fistul|perte.*substance)/i,
             searchTerms: ["__CUMUL_TIBIA_GUSTILO__"],  // Marker spécial
             priority: 1012,  // TRÈS HAUTE PRIORITÉ
             negativeContext: /simple|sans.*complication|consolid[eé]e.*normale/i
@@ -8768,12 +8772,13 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
         // Problème: "hémiparésie gauche légère" = signe de LOCALISATION cérébrale objectif
         // Ce n'est PAS un "syndrome subjectif" mais une CONTUSION CÉRÉBRALE avec signes focaux
         // PRIORITÉ 1030 > autres règles TC (mais < 1036 hémiplégie complète)
+        // 🔧 V3.3.387: Si TC GRAVE avec séquelles multiples (syndrome frontal, épilepsie, cognitif) → déférer au cumul __CUMUL_TC_GRAVE__
         {
             pattern: /(?:chute|traumatisme.*cr[aâ]ne?|TC|perte.*connaissance|hospitalisation.*neuro)/i,
             context: /h[eé]mipar[eé]sie|h[eé]mipl[eé]gie|aphasie|d[eé]ficit.*moteur|paralysie.*faciale/i,
             searchTerms: ["Contusions cérébrales avec signes de localisation (hémiparésie, aphasie...)"],
             priority: 1030,
-            negativeContext: /sans.*s[eé]quelle|r[eé]cup[eé]ration.*compl[eè]te|h[eé]mipl[eé]gie\s+(?:\w+\s+)?compl[eè]te/i
+            negativeContext: /sans.*s[eé]quelle|r[eé]cup[eé]ration.*compl[eè]te|h[eé]mipl[eé]gie\s+(?:\w+\s+)?compl[eè]te|(?:Glasgow\s*(?:initial\s*)?\s*[3-8]\b|traumatisme.*cr[aâ]nien.*(?:grave|s[eé]v[eè]re)|TC.*(?:grave|s[eé]v[eè]re)|craniectomie|h[eé]matome.*sous.*dural).*(?:syndrome.*frontal|[eé]pilepsie|dys[eé]x[eé]cutif|d[eé]ficit.*cognitif|troubles?.*cognitif)/is
         },
         
         // === 🆕 V3.3.158: TC AVEC SÉQUELLES MULTIPLES (PRIORITÉ HAUTE) ===
@@ -8809,9 +8814,10 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
         // 🆕 V3.3.358: negativeContext affiné - "légère" ne doit exclure que quand il qualifie le TC lui-même,
         // pas un symptôme résiduel mineur (ex: "légère maladresse de l'hémicorps gauche" dans un Glasgow 7)
         // + Ajout craniectomie et syndrome frontal comme marqueurs de sévérité dans le pattern
+        // 🔧 V3.3.387: Ajout hémiparésie comme déclencheur quand TC grave (permet cumul avec syndrome frontal)
         {
-            pattern: /traumatisme.*cr[aâ]nien.*(?:s[eé]v[eè]re|grave|embarrure)|(?:TC|traumatisme.*cr[aâ]nien).*(?:[eé]pilepsie|comitial|convuls|anti[eé]pileptique|troubles?.*cognitif)|Glasgow.*[3-8]|h[eé]matome.*sous.*dural|craniectomie/i,
-            context: /c[eé]phal[eé]|m[eé]moire|cognitif|[eé]pilepsie|comitial|anti[eé]pileptique|MMS|troubles?.*cognitif|d[eé]ficit|syndrome.*frontal|fonctions?.*ex[eé]cutiv|anosmie|comportement/i,
+            pattern: /traumatisme.*cr[aâ]nien.*(?:s[eé]v[eè]re|grave|embarrure)|(?:TC|traumatisme.*cr[aâ]nien).*(?:[eé]pilepsie|comitial|convuls|anti[eé]pileptique|troubles?.*cognitif|h[eé]mipar[eé]sie)|Glasgow.*[3-8]|h[eé]matome.*sous.*dural|craniectomie/i,
+            context: /c[eé]phal[eé]|m[eé]moire|cognitif|[eé]pilepsie|comitial|anti[eé]pileptique|MMS|troubles?.*cognitif|d[eé]ficit|syndrome.*frontal|fonctions?.*ex[eé]cutiv|anosmie|comportement|h[eé]mipar[eé]sie/i,
             searchTerms: ["__CUMUL_TC_GRAVE__"],  // Marker spécial pour traitement custom cumul
             priority: 1020,  // PRIORITÉ MAX (AVANT règle commotion ligne 3751 priorité 1001)
             negativeContext: /(?:TC|traumatisme|commotion)[\s,]+l[eé]g[eè]re?|l[eé]g[eè]re?[\s,]+(?:TC|traumatisme|commotion|cr[aâ]nien)|simple.*sans/i
@@ -10083,6 +10089,14 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             context: /troubles?.*rythme|ECG|holter|extrasystol|tachycardie|fraction.*[eé]jection|insuffisance.*cardiaque|anti[\s-]?arythmi/i,
             searchTerms: ['Séquelles de contusion myocardique (troubles du rythme, insuffisance cardiaque)'],
             priority: 10600,
+        },
+        // 🆕 V3.3.387: Insuffisance cardiaque post-traumatique (NYHA / Fraction d'éjection)
+        // Standalone rule: ne nécessite PAS "contusion myocardique" — suffit d'avoir "insuffisance cardiaque" + séquelles
+        {
+            pattern: /insuffisance\s+cardiaque|cardiopathie\s+post[\s-]*traumatique|d[eé]faillance\s+cardiaque/i,
+            context: /NYHA|fraction.*[eé]jection|FE|dyspn[eé]e|[eé]lectr(?:ique|ocut|is[eé])|choc.*[eé]lectrique|foudroiement|troubles?.*rythme|cardiomyopathie/i,
+            searchTerms: ['Séquelles de contusion myocardique (troubles du rythme, insuffisance cardiaque)'],
+            priority: 10650,
         },
         // 🆕 V3.3.230: Context élargi pour fractures multiples côtes
         // Avant: ne matchait que "séquelles respiratoires|dyspnée|volet costal"
@@ -12348,6 +12362,11 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
                 // 🆕 V3.3.358: Détection anosmie (lésion distincte — cisaillement nerfs olfactifs, barème [5-10%])
                 const hasAnosmie = /anosmie|perte.*(?:totale?\s+)?(?:de\s+)?(?:l[''])?odorat/i.test(normalizedInputText);
                 
+                // 🆕 V3.3.387: Détection hémiparésie (signe de localisation, barème "Contusions cérébrales" [5-60%])
+                const hasHemiparesie = /h[eé]mipar[eé]sie|h[eé]mipl[eé]gie/i.test(normalizedInputText);
+                const hemiSevere = /h[eé]mi(?:par[eé]sie|pl[eé]gie).*(?:s[eé]v[eè]re|majeur|important|invalidant)|(?:s[eé]v[eè]re|majeur|important|invalidant).*h[eé]mi(?:par[eé]sie|pl[eé]gie)/i.test(normalizedInputText);
+                const hemiModerate = /h[eé]mi(?:par[eé]sie|pl[eé]gie).*mod[eé]r[eé]|mod[eé]r[eé].*h[eé]mi(?:par[eé]sie|pl[eé]gie)/i.test(normalizedInputText);
+                
                 // 🆕 V3.3.342: Pour un TC grave, les céphalées post-commotionnelles sont quasi-systématiques
                 // Si le texte dit "TC grave" sans mentionner explicitement les céphalées, les inclure par défaut
                 const isTcGrave = /(?:TC|traumatisme.*cr[aâ]nien).*(?:grave|s[eé]v[eè]re)/i.test(normalizedInputText);
@@ -12378,6 +12397,9 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
                 const ippEpilepsie = hasEpilepsy ? 25 : 0;
                 const ippPsychiatric = hasPsychiatric ? 10 : 0;
                 const ippAnosmie = hasAnosmie ? 8 : 0; // Barème [5-10%], anosmie totale post-traumatique → 8%
+                // 🆕 V3.3.387: Hémiparésie — barème "Contusions cérébrales avec signes de localisation" [5-60%]
+                // Sévère/invalidante → 40%, modérée → 30%, légère → 20%
+                const ippHemiparesie = hasHemiparesie ? (hemiSevere ? 40 : hemiModerate ? 30 : 20) : 0;
                 
                 // 🆕 V3.3.341: Si aucune séquelle spécifique détectée mais TC grave confirmé,
                 // attribuer au minimum un syndrome post-commotionnel sévère
@@ -12390,6 +12412,7 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
                 // 🆕 V3.3.358: Ordre décroissant par IPP pour Balthazard correct
                 const cumulComponents = [
                     { name: 'dysexecutif', ipp: ippDysexecutif },
+                    { name: 'hemiparesie', ipp: ippHemiparesie },
                     { name: 'cognitif', ipp: ippCognitif },
                     { name: 'epilepsie', ipp: ippEpilepsie },
                     { name: 'cephalees', ipp: ippCephalees },
@@ -12444,6 +12467,12 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
                     justification += `&nbsp;&nbsp;• Lésion distincte : cisaillement des nerfs olfactifs (fréquent dans les chocs frontaux)<br>`;
                     stepNum++;
                 }
+                if (ippHemiparesie > 0) {
+                    justification += `<strong>${stepNum}️⃣ Hémiparésie post-traumatique</strong> : <strong>${ippHemiparesie}%</strong><br>`;
+                    justification += `&nbsp;&nbsp;• Rubrique : "Contusions cérébrales avec signes de localisation (hémiparésie, aphasie...)" [5-60%]<br>`;
+                    justification += `&nbsp;&nbsp;• Signe de localisation neurologique distinct des troubles cognitifs/exécutifs<br>`;
+                    stepNum++;
+                }
                 if (ippEpilepsie > 0) {
                     justification += `<strong>${stepNum}️⃣ Épilepsie post-traumatique</strong> : <strong>${ippEpilepsie}%</strong><br>`;
                     justification += `&nbsp;&nbsp;• Rubrique : "Séquelles Neurologiques > Épilepsie"<br>`;
@@ -12465,6 +12494,7 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
                 // 🆕 V3.3.358: Nom dynamique incluant les composantes réellement détectées
                 const nameComponents: string[] = [];
                 if (ippDysexecutif > 0) nameComponents.push('syndrome frontal');
+                if (ippHemiparesie > 0) nameComponents.push('hémiparésie');
                 if (ippCephalees > 0) nameComponents.push('céphalées');
                 if (ippCognitif > 0) nameComponents.push('cognitif');
                 if (ippAnosmie > 0) nameComponents.push('anosmie');
@@ -17577,8 +17607,13 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
     const isTroncInferieur = /tronc\s+inf[eé]rieur/i.test(text);
     const isC5C6 = /c5[\s-]*c6|c6[\s-]*c5/i.test(text);
     const isC8T1 = /c8[\s-]*t1|t1[\s-]*c8/i.test(text);
+    // 🆕 V3.3.387: Élargi pour capter "paralysie sensitivo-motrice totale...membre supérieur",
+    // "avulsion C5-T1", "avulsion plexus brachial", "membre ballant"
     const isParalysieCompletePB = /paralysie\s+(?:compl[eè]te|totale).*(?:plexus|brachial|membre\s+sup[eé]rieur)/i.test(text) ||
-                                   /(?:plexus|brachial).*paralysie\s+(?:compl[eè]te|totale)/i.test(text);
+                                   /(?:plexus|brachial).*paralysie\s+(?:compl[eè]te|totale)/i.test(text) ||
+                                   /paralysie\s+sensitivo[\s-]*motrice\s+totale/i.test(text) ||
+                                   /avulsion.*(?:plexus|C5[\s-]*T1|C5[\s-]*C6[\s-]*C7[\s-]*C8)/i.test(text) ||
+                                   /membre\s+(?:sup[eé]rieur\s+)?ballant/i.test(text);
     
     // Signes neurologiques contextuels (renforcent le diagnostic)
     const hasDeficitMoteur = /d[eé]ficit\s+moteur/i.test(text);
@@ -17600,8 +17635,10 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
     
     const isPlexusBrachialDetected = isPlexusDuchenneErb || isPlexusKlumpke || isPlexusComplete;
     
-    if (isPlexusBrachialDetected && !isExactMatch && !isMultiSitePolytrauma) {
-        console.log('🧠 [V3.3.220] ATTEINTE PLEXUS BRACHIAL détectée → Analyse spécialisée (site unique)');
+    // 🔧 V3.3.387: Plexus brachial = pathologie neurologique unique → ne PAS bloquer par isMultiSitePolytrauma
+    // L'avulsion plexus C5-T1 avec "douleurs neuropathiques", "Claude Bernard-Horner" etc. est UNE seule pathologie
+    if (isPlexusBrachialDetected && !isExactMatch) {
+        console.log('🧠 [V3.3.387] ATTEINTE PLEXUS BRACHIAL détectée → Analyse spécialisée');
         
         // Déterminer latéralité
         const isDroitPB = /droit(?:e)?(?:\s|$|,|\.|;|\))/i.test(text) || /membre\s+sup[eé]rieur\s+droit/i.test(text);
@@ -18812,37 +18849,37 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
 
     // 🆕 V3.3.364e: BYPASS SÉQUELLES - IRC / SILICOSE / VEMS
     // Pathologie respiratoire pure avec VEMS → ne pas aller dans la séquelle detection
-    const vemsMatch364e = /vems\s*(?:=|:)?\s*(\d{1,3})\s*%/i.exec(text);
+    // 🔧 V3.3.387: Parse aussi "VEMS à N pour cent" + cumul volet costal + severity boost
+    // 🔧 V3.3.387: Guard pour ne PAS bypasser les cas thoraciques complexes (fibrose, grand fracas, lobectomie)
+    const vemsMatch364e = /vems\s*(?:[àa=:])\s*(\d{1,3})\s*(?:%|pour\s*cent)|vems\s*(\d{1,3})\s*(?:%|pour\s*cent)/i.exec(text);
+    const vemsVal364e = vemsMatch364e ? parseInt(vemsMatch364e[1] || vemsMatch364e[2]) : 0;
     const isIRC364e = /insuffisance\s+respiratoire|silicose|pneumoconiose|asbestose|asthme\s+professionnel/i.test(text);
     const noPlusSepar364e = !/\+/.test(text); // pas de cumul explicite
-    if (vemsMatch364e && isIRC364e && noPlusSepar364e) {
-        const vems = parseInt(vemsMatch364e[1]);
+    const isComplexThorax387 = /volet\s+costal|grand.*fracas|fracas.*thorax|contusion\s+pulmonaire|fibrose\s+pulmonaire|lobectomie|lac[eé]ration.*pulmonaire/i.test(text);
+    if (vemsMatch364e && vemsVal364e > 0 && isIRC364e && noPlusSepar364e && !isComplexThorax387) {
+        const vems = vemsVal364e;
         const hasOxygen = /oxyg[eé]noth[eé]rapie|oxyg[eè]ne|O2/i.test(text);
         const hasDyspnea = /dyspn[eé]e|essoufflement/i.test(text);
+        const isSevere387 = /s[eé]v[eè]re|majeur|grave|permanent/i.test(text);
         let ircRate = 10;
         if (vems <= 30) ircRate = 55;
         else if (vems <= 40) ircRate = 45;
-        else if (vems <= 50) ircRate = 35;
+        else if (vems <= 50) ircRate = isSevere387 ? 40 : 35;
         else if (vems <= 60) ircRate = 25;
         else if (vems <= 70) ircRate = 18;
         else if (vems <= 80) ircRate = 12;
         else ircRate = 8;
-        if (hasOxygen && ircRate < 40) ircRate += 5;
-        if (hasDyspnea && ircRate < 45) ircRate += 3;
+        if (hasOxygen && ircRate < 45) ircRate += 5;
+        if (hasDyspnea && ircRate < 48) ircRate += 3;
         
         const isSilicose = /silicose|pneumoconiose/i.test(text);
         const isAsthme = /asthme/i.test(text);
-        const isVoletCostal = /volet\s+costal/i.test(text);
         const stadeMatch = /stade\s*(\d)/i.exec(text);
         
         // Build descriptive name
         let ircName = 'Insuffisance respiratoire chronique post-traumatique';
         if (isSilicose) ircName = `Silicose professionnelle ${stadeMatch ? 'stade ' + stadeMatch[1] : ''} - IRC`;
         else if (isAsthme) ircName = 'Asthme professionnel sévère post-inhalation';
-        else if (isVoletCostal) ircName = 'Volet costal avec insuffisance respiratoire séquellaire';
-        
-        // Volet costal boost: rib fracture + respiratory = higher rate
-        if (isVoletCostal && ircRate < 22) ircRate = 22;
         
         console.log(`⚡ [V3.3.364e] BYPASS IRC: VEMS=${vems}%, O2=${hasOxygen} → rate=${ircRate}%`);
         return {
@@ -18852,6 +18889,52 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
             rate: ircRate,
             justification: `<strong>⚡ IRC - VEMS ${vems}%</strong><br>• <strong>Taux : ${ircRate}%</strong>`,
             path: 'Pneumologie > IRC'
+        } as any;
+    }
+
+    // 🆕 V3.3.387: BYPASS SÉQUELLES - INSUFFISANCE CARDIAQUE POST-TRAUMATIQUE
+    // Pathologie cardiaque avec NYHA ou Fraction d'Éjection → évaluation directe
+    // UNIQUEMENT si pas d'autres lésions distinctes (sinon → cumul Balthazard)
+    const isInsufCardiaque387 = /insuffisance\s+cardiaque|cardiopathie|d[eé]faillance\s+cardiaque/i.test(text);
+    const feMatch387 = /(?:fraction\s+d['']?[eé]jection|FE|FEVG)\s*(?:=|:|\s)?\s*(\d{1,3})\s*%/i.exec(text);
+    const nyhaMatch387 = /NYHA\s*(?:=|:|\s)?\s*(I{1,3}V?|[1-4])/i.exec(text);
+    const isCardiacTrauma387 = /choc\s*[eé]lectrique|[eé]lectr(?:ique|ocut|is[eé])|foudroiement|contusion\s*myocardique|traumatisme\s*(?:cardiaque|thorac)|br[uû]lure.*(?:[eé]lectrique|haute.*tension)/i.test(text);
+    const hasOtherDistinctInjury387 = /br[uû]lure.*(?:main|pied|profonde|2[eè]me|3[eè]me|degr[eé])|fracture|amputation|luxation|raideur.*(?:poignet|cheville|genou)|ost[eé]ite/i.test(text);
+    if (isInsufCardiaque387 && (feMatch387 || nyhaMatch387) && isCardiacTrauma387 && !hasOtherDistinctInjury387) {
+        let cardiacRate = 15;
+        // NYHA classification
+        const nyhaStr = nyhaMatch387?.[1] || '';
+        const nyhaLevel = nyhaStr === 'IV' || nyhaStr === '4' ? 4 : 
+                          nyhaStr === 'III' || nyhaStr === '3' ? 3 :
+                          nyhaStr === 'II' || nyhaStr === '2' ? 2 : 
+                          nyhaStr === 'I' || nyhaStr === '1' ? 1 : 0;
+        // FE grading
+        const fe = feMatch387 ? parseInt(feMatch387[1]) : 0;
+        
+        if (nyhaLevel >= 4 || fe <= 25) cardiacRate = 50;
+        else if (nyhaLevel >= 3 || (fe > 0 && fe <= 35)) cardiacRate = 35;
+        else if (nyhaLevel >= 2 || (fe > 0 && fe <= 45)) cardiacRate = 20;
+        else cardiacRate = 10;
+        
+        // Dyspnée bonus
+        if (/dyspn[eé]e.*(?:repos|permanente|stade.*IV)/i.test(text) && cardiacRate < 50) cardiacRate += 5;
+        if (/dyspn[eé]e.*(?:effort|invalidante)/i.test(text) && cardiacRate < 45) cardiacRate += 3;
+        
+        const cardiacName = isCardiacTrauma387 && /choc.*[eé]lectrique|[eé]lectr|br[uû]lure.*[eé]lectrique/i.test(text) 
+            ? 'Insuffisance cardiaque post-électrisation (séquelles cardiaques)'
+            : 'Séquelles de contusion myocardique (troubles du rythme, insuffisance cardiaque)';
+        
+        console.log(`⚡ [V3.3.387] BYPASS INSUFFISANCE CARDIAQUE: NYHA=${nyhaLevel}, FE=${fe}% → rate=${cardiacRate}%`);
+        return {
+            type: 'proposal',
+            description: cardiacName,
+            name: cardiacName,
+            rate: cardiacRate,
+            justification: `<strong>⚡ INSUFFISANCE CARDIAQUE POST-TRAUMATIQUE</strong><br>` +
+                (nyhaMatch387 ? `• Classification NYHA : stade ${nyhaStr}<br>` : '') +
+                (feMatch387 ? `• Fraction d'éjection : ${fe}%<br>` : '') +
+                `• <strong>Taux proposé : ${cardiacRate}%</strong>`,
+            path: 'Thorax > Séquelles cardiaques post-traumatiques'
         } as any;
     }
 
@@ -19189,7 +19272,10 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
     
     // Brachialgie / Névralgie cervico-brachiale → NEUROLOGIQUE (radiculalgie, pas rachis simple)
     // 🔴 V3.3.200: Brachialgie = atteinte NERVEUSE périphérique → Système NEUROLOGIQUE
-    if (/brachialgie|n[ée]vralgie.*cervico.*brachial|douleur.*irradiant.*bras|radiculalgie.*membre.*sup[ée]rieur|c5.*c6.*c7/i.test(text)) {
+    // 🔧 V3.3.387: EXCLURE plexus brachial / avulsion → ces cas sont gérés par le handler plexus brachial dédié
+    // Le pattern c5.*c6.*c7 captait faussement "C5-C6-C7-C8-T1" (avulsion complète plexus)
+    const isPlexusOrAvulsionContext = /plexus\s*brachial|avulsion|membre\s+(?:sup[eé]rieur\s+)?ballant|paralysie\s+sensitivo/i.test(text);
+    if (!isPlexusOrAvulsionContext && /brachialgie|n[ée]vralgie.*cervico.*brachial|douleur.*irradiant.*bras|radiculalgie.*membre.*sup[ée]rieur|c5.*c6.*c7/i.test(text)) {
         detectedSequelae.push({
             name: 'Brachialgie / Névralgie cervico-brachiale (radiculalgie)',
             keywords: ['brachialgie', 'névralgie', 'cervico-brachiale', 'radiculalgie', 'neurologique'],
@@ -19405,6 +19491,15 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
             name: 'Douleurs pariétales thoraciques chroniques',
             keywords: ['douleur pariétale', 'thoracique', 'névralgies intercostales'],
             context: text.match(/douleur.*pari[ée]tal[^.;]*/i)?.[0] || ''
+        });
+    }
+    
+    // 🆕 V3.3.387: Insuffisance cardiaque post-traumatique (choc électrique, contusion myocardique)
+    if (/insuffisance\s+cardiaque|cardiopathie\s+post[\s-]*traumatique|d[eé]faillance\s+cardiaque|contusion\s+myocardique/i.test(text)) {
+        detectedSequelae.push({
+            name: 'Séquelles de contusion myocardique (troubles du rythme, insuffisance cardiaque)',
+            keywords: ['insuffisance cardiaque', 'contusion myocardique', 'NYHA', 'fraction éjection', 'cardiaque'],
+            context: text.match(/insuffisance\s+cardiaque[^.;]*/i)?.[0] || text.match(/contusion\s+myocardique[^.;]*/i)?.[0] || ''
         });
     }
     
@@ -19777,12 +19872,17 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
         });
     }
     
-    // Ostéomyélite (complication infectieuse grave post-fracture ouverte)
-    if (/ost[ée]omy[ée]lite|infection.*osseuse|suppuration.*osseuse/i.test(text)) {
+    // Ostéomyélite / Ostéite chronique (complication infectieuse grave post-fracture ouverte)
+    // 🔧 V3.3.387: Ajout ostéite chronique + fistulisation
+    if (/ost[ée]omy[ée]lite|ost[eé]ite.*chronique|infection.*osseuse.*chronique|suppuration.*osseuse|fistul.*osseuse/i.test(text)) {
+        // 🔧 V3.3.387: Enrichir contexte avec site anatomique pour classification système correcte
+        let osteiteCtx = text.match(/ost[eé]ite.*chronique[^.;]*/i)?.[0] || text.match(/ost[ée]omy[ée]lite[^.;]*/i)?.[0] || '';
+        if (/tibia|p[ée]ron[ée]|jambe|f[ée]mur|genou|hanche|cheville|pied|calcan|membre.*inf/i.test(text)) osteiteCtx += ' tibia membre inférieur';
+        else if (/hum[ée]rus|radius|cubitus|coude|poignet|main|[ée]paule|membre.*sup/i.test(text)) osteiteCtx += ' membre supérieur';
         detectedSequelae.push({
-            name: 'Ostéomyélite (complication infectieuse osseuse)',
-            keywords: ['ostéomyélite', 'infection', 'osseuse'],
-            context: text.match(/ost[ée]omy[ée]lite[^.;]*/i)?.[0] || text.match(/compliqu[ée].*ost[ée]omy[ée]lite[^.;]*/i)?.[0] || ''
+            name: /ost[eé]ite.*chronique/i.test(text) ? 'Ostéite chronique post-traumatique' : 'Ostéomyélite (complication infectieuse osseuse)',
+            keywords: ['ostéomyélite', 'ostéite', 'infection', 'osseuse', 'chronique', 'fistulisation'],
+            context: osteiteCtx
         });
     }
     
@@ -19807,6 +19907,17 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
         });
     }
     
+    // 🆕 V3.3.387: Raccourcissement membre inférieur (séquelle fracture fémur/tibia)
+    if (/raccourcissement.*(?:\d+\s*cm|membre|in[ée]galit[ée])|in[ée]galit[ée].*(?:longueur|membre)/i.test(text)) {
+        const raccMatDS = text.match(/raccourcissement.*?(\d+(?:[.,]\d+)?)\s*cm/i);
+        const raccCmDS = raccMatDS ? parseFloat(raccMatDS[1].replace(',', '.')) : 0;
+        detectedSequelae.push({
+            name: `Raccourcissement du membre inférieur${raccCmDS > 0 ? ` (${raccCmDS}cm)` : ''}`,
+            keywords: ['raccourcissement', 'membre inférieur', 'inégalité', 'boiterie'],
+            context: text.match(/raccourcissement[^.;]*/i)?.[0] || ''
+        });
+    }
+
     // Amyotrophie quadricipitale / Amyotrophie globale membre inférieur
     // 🔧 V3.3.269: Ajout "amyotrophie.*cuisse" seul (la cuisse = quadriceps)
     if (/amyotrophie.*(?:quadricipital|cuisse|jambe|membre.*inf[ée]rieur)|atrophie.*(?:quadriceps|muscles?.*cuisse)|fonte.*musculaire.*(?:cuisse|jambe)/i.test(text)) {
@@ -20146,7 +20257,76 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
         });
     }
     
+    // ========== 6b. BRÛLURES ==========
+    
+    // 🆕 V3.3.387: Brûlures post-traumatiques (électriques, thermiques, chimiques)
+    // 🔧 V3.3.387b: Exclure les brûlures étendues (>20% surface corporelle) qui sont des cas autonomes
+    const isExtensiveBurn387 = /br[uû]lure.*(?:[eé]tendue|(?:[3-9]\d|100)\s*%\s*(?:surface|SC|corps)|surface.*corporelle)/i.test(text);
+    if (!isExtensiveBurn387 && /br[uû]lure.*(?:profonde|[2-3][eè]me\s+degr[eé]|main|pied|avant[\s-]*bras|face|membre)|br[uû]lure.*(?:[eé]lectrique|thermique|chimique)/i.test(text)) {
+        const brulureParts: string[] = [];
+        if (/br[uû]lure.*main|main.*br[uû]l[eé]/i.test(text)) brulureParts.push('mains');
+        if (/br[uû]lure.*pied|pied.*br[uû]l[eé]/i.test(text)) brulureParts.push('pieds');
+        if (/br[uû]lure.*avant[\s-]*bras/i.test(text)) brulureParts.push('avant-bras');
+        if (/br[uû]lure.*face|face.*br[uû]l[eé]/i.test(text)) brulureParts.push('face');
+        const locStr = brulureParts.length > 0 ? ` (${brulureParts.join(' + ')})` : '';
+        detectedSequelae.push({
+            name: `Brûlures profondes post-traumatiques${locStr}`,
+            keywords: ['brûlure', 'profonde', 'électrique', 'thermique', ...brulureParts],
+            context: text.match(/br[uû]lure[^.;]*/i)?.[0] || ''
+        });
+    }
+    
     // ========== 7. FACE / OPHTALMOLOGIE ==========
+
+    // 🆕 V3.3.387: CÉCITÉ / ÉNUCLÉATION / PERTE VISION — Détection dans séquelles polytraumatisme
+    // Indispensable pour le cumul Balthazard quand cécité coexiste avec d'autres lésions faciales
+    if (/[eé]nucl[eé]ation|ablation.*globe.*oculaire|[eé]clatement.*globe/i.test(text)) {
+        const hasProthese = /proth[eè]se/i.test(text);
+        detectedSequelae.push({
+            name: hasProthese ? 'Énucléation avec prothèse oculaire' : 'Énucléation sans prothèse',
+            keywords: ['énucléation', 'ablation', 'globe oculaire', 'prothèse', 'cécité'],
+            context: text.match(/[eé]nucl[eé]ation[^.;]*/i)?.[0] || text.match(/[eé]clatement.*globe[^.;]*/i)?.[0] || ''
+        });
+    } else if (/c[eé]cit[eé].*(?:totale|compl[eè]te|absolue)|perte.*(?:totale|compl[eè]te).*vision|aveugle/i.test(text)) {
+        const isUnilateral = /(?:un\s+)?[oœ]eil|unilatéral|(?:gauche|droit)/i.test(text) && !/(?:deux|les\s+deux|bilatéral|les\s+yeux)/i.test(text);
+        detectedSequelae.push({
+            name: isUnilateral ? "Perte complète de la vision d'un oeil (l'autre étant normal)" : 'Cécité complète bilatérale',
+            keywords: ['cécité', 'perte vision', 'aveugle', 'oeil'],
+            context: text.match(/c[eé]cit[eé][^.;]*/i)?.[0] || text.match(/perte.*vision[^.;]*/i)?.[0] || ''
+        });
+    }
+
+    // 🆕 V3.3.387: FRACTURES LE FORT (I, II, III) — Séquelles maxillo-faciales
+    if (/le\s*fort\s*(?:III|3)/i.test(text)) {
+        detectedSequelae.push({
+            name: 'Séquelles de fracture Le Fort III du massif facial',
+            keywords: ['Le Fort', 'fracture', 'massif facial', 'maxillo-faciale'],
+            context: text.match(/(?:le\s*fort|fracture.*massif.*facial)[^.;]*/i)?.[0] || ''
+        });
+    } else if (/le\s*fort\s*(?:II|2)/i.test(text)) {
+        detectedSequelae.push({
+            name: 'Séquelles de fracture Le Fort II',
+            keywords: ['Le Fort', 'fracture', 'maxillaire'],
+            context: text.match(/le\s*fort[^.;]*/i)?.[0] || ''
+        });
+    } else if (/le\s*fort\s*(?:I|1)\b/i.test(text)) {
+        detectedSequelae.push({
+            name: 'Séquelles de fracture Le Fort I',
+            keywords: ['Le Fort', 'fracture', 'maxillaire'],
+            context: text.match(/le\s*fort[^.;]*/i)?.[0] || ''
+        });
+    }
+
+    // 🆕 V3.3.387: TROUBLES DE LA MASTICATION — Séquelles maxillo-faciales
+    // 🔧 V3.3.387b: Guard — exclure le simple cas dentaire (perte dents + prothèse + mastication)
+    const hasFacialTraumaContext387 = /le\s*fort|fracture.*facial|fracture.*maxill|fracture.*mandib|disjonction|enfoncement.*face|panfaci|c[eé]cit[eé]|[eé]nucl[eé]ation/i.test(text);
+    if (/trouble.*mastication|difficult[eé].*mastication|g[eê]ne.*mastication|articul[eé].*dentaire/i.test(text) && hasFacialTraumaContext387) {
+        detectedSequelae.push({
+            name: 'Troubles de la mastication post-traumatiques',
+            keywords: ['mastication', 'articulé dentaire', 'mâchoire', 'trouble'],
+            context: text.match(/(?:trouble|difficult[eé]|g[eê]ne).*mastication[^.;]*/i)?.[0] || text.match(/articul[eé].*dentaire[^.;]*/i)?.[0] || ''
+        });
+    }
 
     // 🆕 V3.3.286: PHTHISIS BULBI / Atrophie du globe oculaire → pathologie spécifique prioritaire
     // Doit être détecté AVANT "fracture orbite" pour éviter que "fracture orbitaire" dans le contexte n'intercepte
@@ -22224,13 +22404,16 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
     // (strabisme, enfoncement pommette, anesthésie nerf sous-orbitaire, dysphagie, trouble mastication, cicatrice)
     // → Évaluation cumul Balthazard sur toutes les séquelles distinctes
     try {
-        const hasCCFVisionLoss = /(?:perte.*(?:subtotal|total|compl[eè]t).*vision|oeil.*(?:perdu|aveugle)|c[eé]cit[eé].*oeil|vision.*(?:perdu|nulle|abolie))/i.test(finalCleanedText);
-        const hasCCFOeilPerdu = /oeil.*(?:perdu|perte)|(?:perdu|perte).*oeil/i.test(finalCleanedText);
+        // 🔧 V3.3.387: Ajout "globe oculaire", "oculaire", "énucléation" pour capter "éclatement du globe oculaire droit avec cécité totale"
+        const hasCCFVisionLoss = /(?:perte.*(?:subtotal|total|compl[eè]t).*vision|oeil.*(?:perdu|aveugle)|c[eé]cit[eé].*(?:oeil|oculaire|total)|vision.*(?:perdu|nulle|abolie)|[eé]nucl[eé]ation|[eé]clatement.*globe)/i.test(finalCleanedText);
+        const hasCCFOeilPerdu = /oeil.*(?:perdu|perte)|(?:perdu|perte).*oeil|globe.*oculaire.*(?:perdu|[eé]clat|d[eé]truit)|[eé]nucl[eé]ation/i.test(finalCleanedText);
         const hasCCFStrabisme = /strabisme|d[eé]viation\s+oculaire/i.test(finalCleanedText);
         const hasCCFEnfoncementPommette = /enfoncement.*(?:pommette|malaire|zygoma)|(?:pommette|malaire|zygoma).*enfon/i.test(finalCleanedText);
         const hasCCFAnesthesieNerf = /anesth[eé]sie.*(?:nerf|territoire|sous[\s-]*orbit)|hypo[eé]sth[eé]sie.*(?:nerf|territoire|sous[\s-]*orbit)/i.test(finalCleanedText);
         const hasCCFDysphagie = /dysphagie|trouble.*d[eé]glutition|g[eê]ne.*d[eé]glutition/i.test(finalCleanedText);
-        const hasCCFMastication = /g[eê]ne.*mastication|trouble.*mastication|difficult[eé].*m[aâ]ch/i.test(finalCleanedText);
+        // 🔧 V3.3.387: Ajout "difficult.*mastication" + "le fort" + "fracture.*facial"
+        const hasCCFMastication = /g[eê]ne.*mastication|trouble.*mastication|difficult[eé].*mastication|difficult[eé].*m[aâ]ch/i.test(finalCleanedText);
+        const hasCCFFractureLeFort = /le\s*fort\s*(?:I{1,3}|[123])/i.test(finalCleanedText);
         const hasCCFCicatriceCervicale = /cicatrice.*cervical|plaie.*cervical/i.test(finalCleanedText);
         const hasCCFCicatriceCorneenne = /cicatrice.*corn[eé]en|taie.*corn[eé]en|opacit[eé].*corn[eé]/i.test(finalCleanedText);
         const hasCCFTraumatismeCervical = /traumatisme.*cervic|plaie.*cervical.*profond|cervico.*cranio|cranio.*facial/i.test(finalCleanedText);
@@ -22240,11 +22423,20 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
         const ccfSequelae: { name: string; baremeRef: string; rate: number; justif: string }[] = [];
         
         if (hasCCFVisionLoss || hasCCFOeilPerdu) {
+            // 🔧 V3.3.387: Distinguer énucléation vs simple cécité unilatérale
+            const isEnucleation = /[eé]nucl[eé]ation|ablation.*globe|[eé]clatement.*globe/i.test(finalCleanedText);
+            const hasProtheseCCF = /proth[eè]se/i.test(finalCleanedText);
+            const visionName = isEnucleation 
+                ? (hasProtheseCCF ? "Ablation ou altération du globe avec prothèse possible" : "Ablation ou altération du globe sans prothèse possible")
+                : "Perte complète de la vision d'un oeil (l'autre étant normal)";
+            const visionRate = isEnucleation ? (hasProtheseCCF ? 30 : 35) : 30;
             ccfSequelae.push({
-                name: "Perte complète de la vision d'un oeil (l'autre étant normal)",
+                name: visionName,
                 baremeRef: "Yeux - Cécité et Baisse de Vision",
-                rate: 30,
-                justif: "Perte totale de la vision d'un œil avec l'autre œil normal → taux fixe barémique 30%"
+                rate: visionRate,
+                justif: isEnucleation 
+                    ? `Énucléation ${hasProtheseCCF ? 'avec' : 'sans'} prothèse possible → ${visionRate}%`
+                    : "Perte totale de la vision d'un œil avec l'autre œil normal → taux fixe barémique 30%"
             });
         }
         if (hasCCFStrabisme) {
@@ -22313,6 +22505,19 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
             }
             // Si vision controlatérale normale → pas d'IPP (mentionné en note)
         }
+        // 🆕 V3.3.387: Fracture Le Fort (I, II, III) → séquelles maxillo-faciales
+        if (hasCCFFractureLeFort) {
+            const isLeFort3 = /le\s*fort\s*(?:III|3)/i.test(finalCleanedText);
+            const isLeFort2 = /le\s*fort\s*(?:II|2)/i.test(finalCleanedText);
+            const lefortRate = isLeFort3 ? 15 : (isLeFort2 ? 10 : 8);
+            const lefortType = isLeFort3 ? 'III' : (isLeFort2 ? 'II' : 'I');
+            ccfSequelae.push({
+                name: `Séquelles de fracture Le Fort ${lefortType} du massif facial`,
+                baremeRef: "Séquelles Maxillo-Faciales > Face - Mâchoires",
+                rate: lefortRate,
+                justif: `Fracture Le Fort ${lefortType} avec séquelles fonctionnelles → ${lefortRate}%`
+            });
+        }
 
         // Condition de déclenchement: au moins 3 séquelles cervico-cranio-faciales distinctes
         if (ccfSequelae.length >= 3) {
@@ -22379,8 +22584,9 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
     // Cela permet d'éviter que ces formulations soient classées en 'ambiguity' par le module général
     try {
         const unilateralBlindnessPattern = /\b(?:c[eé]cit[eé]|aveugle|perte(?: de)?\s+vision|perte(?: totale|compl[eè]te))\b.*\b(?:o[eœ]il)s?\b.*\b(gauche|droit)\b/i;
+        // 🔧 V3.3.387: Ajout "oculaire" et "globe" pour capter "globe oculaire droit" (pas seulement "oeil")
         const hasBlind = /\b(?:c[eé]cit[eé]|aveugle|perte(?: de)?\s+vision|perte(?: totale|compl[eè]te))\b/i.test(finalCleanedText);
-        const hasEye = /\b(?:o[eœ]il|œil|oeil)\b/i.test(finalCleanedText);
+        const hasEye = /\b(?:o[eœ]il|œil|oeil)\b|globe\s+oculaire|\boculaire\b/i.test(finalCleanedText);
         const hasSide = /\b(?:gauche|droit)\b/i.test(finalCleanedText);
 
         if (unilateralBlindnessPattern.test(finalCleanedText) || (hasBlind && hasEye && hasSide)) {
@@ -22744,30 +22950,34 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
 
     // 🆕 V3.3.364d: HANDLER - IRC / SILICOSE / VEMS
     // Insuffisance respiratoire chronique avec VEMS → barème spécifique
+    // 🔧 V3.3.387: Parse aussi "VEMS à N pour cent" + guard complex thorax
     try {
         const isIRC364d = /insuffisance\s+respiratoire|silicose|pneumoconiose|asbestose|vems/i.test(text);
-        const vemsMatch = /vems\s*(?:=|:)?\s*(\d{1,3})\s*%/i.exec(text);
-        if (isIRC364d && vemsMatch) {
-            const vems = parseInt(vemsMatch[1]);
+        const vemsMatch387d = /vems\s*(?:[àa=:])\s*(\d{1,3})\s*(?:%|pour\s*cent)|vems\s*(\d{1,3})\s*(?:%|pour\s*cent)/i.exec(text);
+        const isComplexThorax387d = /volet\s+costal|grand.*fracas|fracas.*thorax|contusion\s+pulmonaire|fibrose\s+pulmonaire|lobectomie|lac[eé]ration.*pulmonaire/i.test(text);
+        if (isIRC364d && vemsMatch387d && !isComplexThorax387d) {
+            const vems = parseInt(vemsMatch387d[1] || vemsMatch387d[2]);
             // IRC rating based on VEMS:
             // VEMS > 80% → IRC légère [5-10%]
             // VEMS 60-80% → IRC modérée [10-20%]
             // VEMS 40-60% → IRC moyen-sévère [20-40%]
             // VEMS < 40% → IRC sévère [40-60%]
+            // 🔧 V3.3.387: Severity boost for "sévère/majeur/grave"
             let ircRate = 10;
             const hasOxygen = /oxyg[eé]noth[eé]rapie|oxyg[eè]ne|O2/i.test(text);
             const hasDyspnea = /dyspn[eé]e|essoufflement/i.test(text);
+            const isSevere387d = /s[eé]v[eè]re|majeur|grave|permanent/i.test(text);
             
             if (vems <= 30) ircRate = 55;
             else if (vems <= 40) ircRate = 45;
-            else if (vems <= 50) ircRate = 35;
+            else if (vems <= 50) ircRate = isSevere387d ? 40 : 35;
             else if (vems <= 60) ircRate = 25;
             else if (vems <= 70) ircRate = 18;
             else if (vems <= 80) ircRate = 12;
             else ircRate = 8;
             
-            if (hasOxygen && ircRate < 40) ircRate += 5;
-            if (hasDyspnea && ircRate < 45) ircRate += 3;
+            if (hasOxygen && ircRate < 45) ircRate += 5;
+            if (hasDyspnea && ircRate < 48) ircRate += 3;
             
             const isSilicose = /silicose|pneumoconiose/i.test(text);
             const stadeMatch = /stade\s*(\d)/i.exec(text);
