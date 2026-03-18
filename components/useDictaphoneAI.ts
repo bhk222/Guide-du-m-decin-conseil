@@ -33,7 +33,7 @@ import {
 const SAMPLE_RATE = 16000;
 const SILENCE_THRESHOLD = 0.015;     // Seuil d'énergie RMS pour détecter le silence
 const SILENCE_DURATION_MS = 1500;    // Plus de contexte pour meilleure transcription
-const MAX_CHUNK_SECONDS = 25;        // Chunks plus longs = meilleur contexte pour le modèle
+const MAX_CHUNK_SECONDS = 30;        // V3.3.395: 30s chunks = meilleur contexte médical pour le modèle
 const MIN_AUDIO_SECONDS = 0.5;       // Ignorer les segments < 0.5s (bruit)
 const SILENCE_CHECK_INTERVAL = 100;  // Vérification silence fréquente
 
@@ -108,8 +108,8 @@ function medicalPostCorrection(text: string): string {
             return correction;
         }
         
-        // 2b. V3.3.392: Phonetic match — normaliser et chercher dans PHONETIC_MAP
-        if (word.length >= 5) {
+        // 2b. V3.3.395: Phonetic match — normaliser et chercher dans PHONETIC_MAP (1000+ termes)
+        if (word.length >= 4) {
             const norm = normalizePhonetic(word);
             const phonetic = PHONETIC_MAP.get(norm);
             if (phonetic && phonetic.toLowerCase() !== lower) {
@@ -326,7 +326,7 @@ export function useDictaphoneAI(
                 language: 'french',
                 task: 'transcribe',
                 return_timestamps: false,
-                max_new_tokens: 128,
+                max_new_tokens: 256,  // V3.3.395: 256 tokens pour dictée médicale longue
             });
 
             const rawText = result?.text?.trim();
