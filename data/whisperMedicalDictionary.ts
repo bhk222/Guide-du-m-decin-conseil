@@ -39,6 +39,10 @@ export const PHRASE_CORRECTIONS: [RegExp, string][] = [
     [/\bl['']ombre\s+platte?\b/gi, 'l\'omoplate'],
     [/\bombreplate\b/gi, 'omoplate'],
     [/\bombre\s+plate\b/gi, 'omoplate'],
+    [/\bl[''']homoplate\b/gi, 'l\'omoplate'],
+    [/\bde\s+l[''']homoplate\b/gi, 'de l\'omoplate'],
+    [/\bune?\s+homoplate\b/gi, 'une omoplate'],
+    [/\bhomoplate\b/gi, 'omoplate'],
 
     // ─── V3.3.392: Erreurs whisper-base courantes (mots communs → médical) ───
     [/\bun?\s+cas\s+vicieux\b/gi, 'un cal vicieux'],
@@ -136,6 +140,12 @@ export const PHRASE_CORRECTIONS: [RegExp, string][] = [
     [/\bsaudo?[- ]?arthrose?s?\b/gi, 'pseudarthrose'],
     [/\bpseudo?[- ]?arthroze?s?\b/gi, 'pseudarthrose'],
     [/\bps[eu]+do?[- ]arthros[ez]?s?\b/gi, 'pseudarthrose'],
+    // V3.3.394: Whisper-base coupe "pseudarthrose" en mots séparés
+    [/\bsaude?\s+d[''']?\s*artr[eo]u?se?\b/gi, 'pseudarthrose'],
+    [/\bsode?\s+d[''']?\s*artr[eo]u?se?\b/gi, 'pseudarthrose'],
+    [/\bpsaude?\s+d[''']?\s*artr[eo]u?se?\b/gi, 'pseudarthrose'],
+    [/\bsaude?\s+art\w*\b/gi, 'pseudarthrose'],
+    [/\bsoude?\s+d[''']?\s*artr[eo]u?se?\b/gi, 'pseudarthrose'],
 
     // ─── Anatomie composée ───
     [/\bl'\s*avant\s+bras\b/gi, 'l\'avant-bras'],
@@ -392,6 +402,8 @@ export const WORD_CORRECTIONS: Record<string, string> = {
     'claviculle': 'clavicule',
     'scapulla': 'scapula',
     'omoplatte': 'omoplate',
+    'homoplate': 'omoplate',
+    'homoplatte': 'omoplate',
     'acoémion': 'acromion',
     'acromeon': 'acromion',
     'coracoide': 'coracoïde',

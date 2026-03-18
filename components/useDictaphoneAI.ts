@@ -84,8 +84,10 @@ function medicalPostCorrection(text: string): string {
     
     // 0. V3.3.393: Supprimer les segments d'hallucination en fin de texte
     // Whisper génère parfois "[Musique]", "Je vous invite à...", etc.
-    corrected = corrected.replace(/\s*\[(?:Musique|musique|Music|Applaudissements)\]\s*/g, ' ');
-    corrected = corrected.replace(/\.\s*(?:Je vous invite[^.]*|N'hésitez pas[^.]*|Abonnez-vous[^.]*|Merci d'avoir[^.]*|À bientôt[^.]*)\s*\.?\s*$/gi, '.');
+    corrected = corrected.replace(/\s*[\[\(](?:Musique|musique|Music|Applaudissements|mouillage|Mouillage|bruit|Bruit|silence|Silence)[\]\)]\s*/gi, ' ');
+    corrected = corrected.replace(/\.\s*(?:Je vous invite[^.]*|N'hésitez pas[^.]*|Abonnez-vous[^.]*|Merci d'avoir[^.]*|À bientôt[^.]*|et de la premi[eè]re fois[^.]*)\s*\.?\s*$/gi, '.');
+    // V3.3.394: Supprimer les mots répétés consécutifs ("avec avec" → "avec")
+    corrected = corrected.replace(/\b(\w{2,})\s+\1\b/gi, '$1');
     corrected = corrected.trim();
     
     // 1. Corrections de phrases / expressions (priorité haute)
