@@ -846,6 +846,12 @@ export const ExclusiveAiCalculator: React.FC<ExclusiveAiCalculatorProps> = ({
                             {dictState.isProcessing && <span className="ml-2 inline-block">&#9473;&#9473;&#9473;</span>}
                         </div>
                     )}
+                    {/* V3.3.391: Erreur dictaphone visible même sans écoute */}
+                    {dictState.statusMessage && !dictState.isListening && !dictState.isModelLoading && dictState.statusMessage.startsWith('❌') && (
+                        <div className="mb-2 px-3 py-1.5 rounded-lg text-xs font-medium bg-red-50 border border-red-200 text-red-700">
+                            {dictState.statusMessage}
+                        </div>
+                    )}
                     {/* Guide commandes vocales */}
                     {dictState.isListening && !dictState.isProcessing && (
                         <div className="mb-2 px-3 py-1.5 bg-slate-50 border border-slate-200 rounded-lg text-xs text-slate-600 leading-relaxed">

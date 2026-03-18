@@ -363,8 +363,16 @@ export function useDictaphoneAI(
             const { pipeline, env } = await import('@huggingface/transformers');
 
             // Détecter si modèles locaux (dev) ou CDN (production)
-            const hasLocalModels = await fetch('/models/onnx-community/whisper-small/config.json', { method: 'HEAD' })
-                .then(r => r.ok).catch(() => false);
+            // V3.3.391: GET + Content-Type check — la SPA rewrite de Vercel retourne index.html (200 OK)
+            // pour toute URL inexistante, donc HEAD seul donne un faux positif
+            const hasLocalModels = await fetch('/models/onnx-community/whisper-small/config.json')
+                .then(async r => {
+                    if (!r.ok) return false;
+                    const ct = r.headers.get('content-type') || '';
+                    if (!ct.includes('json')) return false;
+                    try { await r.json(); return true; } catch { return false; }
+                })
+                .catch(() => false);
             
             if (hasLocalModels) {
                 env.allowLocalModels = true;
