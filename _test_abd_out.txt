@@ -1,0 +1,214 @@
+=== CUMUL ===
+{"isCumul":false,"lesionCount":1,"keywords":[],"hasAnteriorState":false,"anteriorIPP":null}
+
+=== ANALYSIS ===
+≡ƒöº localExpertAnalysis V3.3.398 - d├⌐gantage/lymph┼ôd├¿me/troubles vasculaires-lymphatiques MI handler
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): Cariste percut├⌐ au niveau de l'abdomen par les fourches d'un autre chariot ├⌐l├⌐vateur. Bilan initial : H├⌐mop├⌐ritoine massif. ├ëclatement de la rate et perforation de l'intestin gr├¬le. S├⌐quelles ├á la con
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 1 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+≡ƒöì DEBUG STEPPAGE D├ëTAILL├ë:
+   - steppageMatch: false
+   - amyotrophieMIMatch: false
+   - fractureL1Match: false
+   - Texte analys├⌐: Cariste percut├⌐ au niveau de l'abdomen par les fourches d'un autre chariot ├⌐l├⌐vateur. Bilan initial : H├⌐mop├⌐ritoine massif. ├ëclatement de la rate et perforation de l'intestin gr├¬le. S├⌐quelles ├á la consolidation (1 an) : Spl├⌐nectomie totale (ablation 
+Γ¥î STEPPAGE NON D├ëTECT├ë - Conditions non remplies
+≡ƒöì DEBUG D├ëVIATION:
+   - deviationMatch: false
+   - mainContext: false
+   - Recherche dans: diviation NON trouv├⌐
+≡ƒöì [V3.3.155] S├⌐quelles d├⌐tect├⌐es: 1 [ 'Spl├⌐nectomie (ablation de la rate)' ]
+≡ƒöì V3.3.201k: isCumulDetected = false , lesionCount = 1
+≡ƒºá [V3.3.214] TC check: hasTC=false, hasNeuro=false, hasFocal=false, neuroCount=0
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 1 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+Γ£à CAS SIMPLE D├ëTECT├ë: 1 s├⌐quelle(s)
+≡ƒôÜ TROUV├ë DANS BAR├êME: "Spl├⌐nectomie (ablation de la rate)" ΓåÆ "Spl├⌐nectomie (Ablation de la rate)" (15-30%)
+   ≡ƒôè [V3.3.365] Severity-adjusted bar├¿me: [15-30] ├ù coef 0.75 = 26%
+≡ƒöä REGROUPEMENT PAR SYST├êME: [ 'ABDOMEN: 26%' ]
+≡ƒº« CALCUL BALTHAZAR (PAR SYST├êME): [ 'ABDOMEN: 26%' ]
+≡ƒôè IPP GLOBAL CUMUL├ë: 26%
+type: proposal
+name: Abdomen : Spl├⌐nectomie (ablation de la rate) - Bar├¿me: "Spl├⌐nectomie (Ablation de la rate)" (15-30%) - IPP 26%
+rate: 26
+justification: <strong>Γ£à ├ëVALUATION PR├ëCISE - CALCUL IPP (Bar├¿me 1967)</strong><br><br><strong>≡ƒôï 1 s├⌐quelle post-traumatique identifi├⌐e :</strong><br><br><strong>SYST├êME ABDOMEN</strong> ΓåÆ <span style="color: #d32f
+
+=== INDIVIDUAL TESTS ===
+≡ƒöº localExpertAnalysis V3.3.398 - d├⌐gantage/lymph┼ôd├¿me/troubles vasculaires-lymphatiques MI handler
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): spl├⌐nectomie totale
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 1 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+≡ƒöì DEBUG STEPPAGE D├ëTAILL├ë:
+   - steppageMatch: false
+   - amyotrophieMIMatch: false
+   - fractureL1Match: false
+   - Texte analys├⌐: spl├⌐nectomie totale
+Γ¥î STEPPAGE NON D├ëTECT├ë - Conditions non remplies
+≡ƒöì DEBUG D├ëVIATION:
+   - deviationMatch: false
+   - mainContext: false
+   - Recherche dans: diviation NON trouv├⌐
+≡ƒöì [V3.3.155] S├⌐quelles d├⌐tect├⌐es: 1 [ 'Spl├⌐nectomie (ablation de la rate)' ]
+≡ƒöì V3.3.201k: isCumulDetected = false , lesionCount = 1
+≡ƒºá [V3.3.214] TC check: hasTC=false, hasNeuro=false, hasFocal=false, neuroCount=0
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 1 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+Γ£à CAS SIMPLE D├ëTECT├ë: 1 s├⌐quelle(s)
+≡ƒôÜ TROUV├ë DANS BAR├êME: "Spl├⌐nectomie (ablation de la rate)" ΓåÆ "Spl├⌐nectomie (Ablation de la rate)" (15-30%)
+   ≡ƒôè [V3.3.365] Severity-adjusted bar├¿me: [15-30] ├ù coef 0.50 = 23%
+≡ƒöä REGROUPEMENT PAR SYST├êME: [ 'ABDOMEN: 23%' ]
+≡ƒº« CALCUL BALTHAZAR (PAR SYST├êME): [ 'ABDOMEN: 23%' ]
+≡ƒôè IPP GLOBAL CUMUL├ë: 23%
+"spl├⌐nectomie totale" => proposal | Abdomen : Spl├⌐nectomie (ablation de la rate) - Bar├¿me: "Spl├⌐nectomie (Ablation de la rate)" (15-30%) - IPP 23%  | rate=23
+≡ƒöº localExpertAnalysis V3.3.398 - d├⌐gantage/lymph┼ôd├¿me/troubles vasculaires-lymphatiques MI handler
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): r├⌐section intestin gr├¬le avec troubles du transit
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 0 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+≡ƒöì DEBUG STEPPAGE D├ëTAILL├ë:
+   - steppageMatch: false
+   - amyotrophieMIMatch: false
+   - fractureL1Match: false
+   - Texte analys├⌐: r├⌐section intestin gr├¬le avec troubles du transit
+Γ¥î STEPPAGE NON D├ëTECT├ë - Conditions non remplies
+≡ƒöì DEBUG D├ëVIATION:
+   - deviationMatch: false
+   - mainContext: false
+   - Recherche dans: diviation NON trouv├⌐
+≡ƒöì [V3.3.155] S├⌐quelles d├⌐tect├⌐es: 0 []
+≡ƒöì V3.3.201k: isCumulDetected = false , lesionCount = 1
+≡ƒöì DEBUG M├ëTACARPIENS - Texte normalis├⌐: resection intestin greavec troubles transit amputation ablation perte intestinal greileon intestin greileon intestin intestinal ileon intestin intestinal greintestin intestinal grele
+≡ƒöì DEBUG M├ëTACARPIENS - hasMetacarpienWord: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSingleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasMultipleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSpecificFingerEarly: false
+≡ƒöì DEBUG M├ëTACARPIENS - isMetacarpienSingleQueryEarly: false
+≡ƒöì V3.3.139: V├⌐rification cumul prioritaire...
+≡ƒöì Query words: resection, intestin, grele, avec, troubles, transit
+≡ƒöì Cat├⌐gorie cumul trouv├⌐e: Cumuls de L├⌐sions et Polytraumatismes
+≡ƒöì Entr├⌐es avec searchTerms v├⌐rifi├⌐es: 51, meilleur score: 0.0%
+Γä╣∩╕Å Aucun cumul prioritaire trouv├⌐ (similarit├⌐ < 70%), continue avec analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒª╢ [V3.3.317] hasMTPLuxation: false hasMetaFracture: false hasTSLO: false hasFootContext: false
+≡ƒöì isCumulDetected: false lesionCount: 1
+≡ƒöì [M├ëTACARPIENS] Input brut: r├⌐section intestin gr├¬le avec troubles du transit
+≡ƒöì [M├ëTACARPIENS] hasMetaWord: false
+≡ƒöì [M├ëTACARPIENS] hasSingleOrPerte: false
+≡ƒöì [M├ëTACARPIENS] hasSpecificFinger: false
+≡ƒöì [M├ëTACARPIENS] hasCinq: false
+ΓÜá∩╕Å [M├ëTACARPIENS] Pas de dialogue - continuons analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì [EARLY] Ant├⌐c├⌐dents d├⌐tect├⌐s: 0 - 
+≡ƒöì [DEBUG EXPERT RULE - EARLY TEST]
+Pattern: /contusion.*cerebrale|traumatisme.*crani.*contusion/i
+Context: /perte.*connaissance|frontale|temporale|parietale|breve|courte|surveillance.*neurologique/i
+NegativeContext: /spondylo|listthesis|glissement.*vertebral/i
+CleanText: "resection intestin grele avec troubles du transit"
+patternMatchClean: false, contextMatchClean: false
+negContextMatchClean: false, negContextMatchWorking: false
+matchClean: false, matchWorking: false
+Γ£à [EXPERT RULE MATCH - PRIORITY 97] R├⌐section intestinale gr├¬le courte (<50 cm) = [10-20] ΓåÆ 10% (coef: 0.00)
+"r├⌐section intestin gr├¬le avec troubles du transit" => proposal | R├⌐section intestinale gr├¬le courte (<50 cm)  | rate=10
+≡ƒöº localExpertAnalysis V3.3.398 - d├⌐gantage/lymph┼ôd├¿me/troubles vasculaires-lymphatiques MI handler
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): ├⌐ventration sur cicatrice de laparotomie
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 1 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+≡ƒöì DEBUG STEPPAGE D├ëTAILL├ë:
+   - steppageMatch: false
+   - amyotrophieMIMatch: false
+   - fractureL1Match: false
+   - Texte analys├⌐: ├⌐ventration sur cicatrice de laparotomie
+Γ¥î STEPPAGE NON D├ëTECT├ë - Conditions non remplies
+≡ƒöì DEBUG D├ëVIATION:
+   - deviationMatch: false
+   - mainContext: false
+   - Recherche dans: diviation NON trouv├⌐
+≡ƒöì [V3.3.155] S├⌐quelles d├⌐tect├⌐es: 0 []
+≡ƒöì V3.3.201k: isCumulDetected = false , lesionCount = 1
+≡ƒöì DEBUG M├ëTACARPIENS - Texte normalis├⌐: eventration sur cicatrice de laparotomie hernie hernie paroi defect parietal eventration hernie paroi defect parietal eventration hernie defect parietal eventration hernie hernie paroi
+≡ƒöì DEBUG M├ëTACARPIENS - hasMetacarpienWord: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSingleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasMultipleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSpecificFingerEarly: false
+≡ƒöì DEBUG M├ëTACARPIENS - isMetacarpienSingleQueryEarly: false
+≡ƒöì V3.3.139: V├⌐rification cumul prioritaire...
+≡ƒöì Query words: eventration, sur, cicatrice, laparotomie
+≡ƒöì Cat├⌐gorie cumul trouv├⌐e: Cumuls de L├⌐sions et Polytraumatismes
+≡ƒöì Entr├⌐es avec searchTerms v├⌐rifi├⌐es: 51, meilleur score: 0.0%
+Γä╣∩╕Å Aucun cumul prioritaire trouv├⌐ (similarit├⌐ < 70%), continue avec analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒª╢ [V3.3.317] hasMTPLuxation: false hasMetaFracture: false hasTSLO: false hasFootContext: false
+≡ƒöì isCumulDetected: false lesionCount: 1
+≡ƒöì [M├ëTACARPIENS] Input brut: ├⌐ventration sur cicatrice de laparotomie
+≡ƒöì [M├ëTACARPIENS] hasMetaWord: false
+≡ƒöì [M├ëTACARPIENS] hasSingleOrPerte: false
+≡ƒöì [M├ëTACARPIENS] hasSpecificFinger: false
+≡ƒöì [M├ëTACARPIENS] hasCinq: false
+ΓÜá∩╕Å [M├ëTACARPIENS] Pas de dialogue - continuons analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì [EARLY] Ant├⌐c├⌐dents d├⌐tect├⌐s: 0 - 
+Γ£à [EXPERT RULE MATCH - PRIORITY 10300] Cicatrice avec ├⌐ventration apr├¿s laparotomie (appareillage ou non) = [15-50] ΓåÆ 15% (coef: 0.00)
+"├⌐ventration sur cicatrice de laparotomie" => proposal | Cicatrice avec ├⌐ventration apr├¿s laparotomie (appareillage ou non)  | rate=15
+≡ƒöº localExpertAnalysis V3.3.398 - d├⌐gantage/lymph┼ôd├¿me/troubles vasculaires-lymphatiques MI handler
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): spl├⌐nectomie avec d├⌐ficit immunitaire
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 1 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+≡ƒöì DEBUG STEPPAGE D├ëTAILL├ë:
+   - steppageMatch: false
+   - amyotrophieMIMatch: false
+   - fractureL1Match: false
+   - Texte analys├⌐: spl├⌐nectomie avec d├⌐ficit immunitaire
+Γ¥î STEPPAGE NON D├ëTECT├ë - Conditions non remplies
+≡ƒöì DEBUG D├ëVIATION:
+   - deviationMatch: false
+   - mainContext: false
+   - Recherche dans: diviation NON trouv├⌐
+≡ƒöì [V3.3.155] S├⌐quelles d├⌐tect├⌐es: 1 [ 'Spl├⌐nectomie (ablation de la rate)' ]
+≡ƒöì V3.3.201k: isCumulDetected = false , lesionCount = 1
+≡ƒºá [V3.3.214] TC check: hasTC=false, hasNeuro=false, hasFocal=false, neuroCount=0
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 1 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+Γ£à CAS SIMPLE D├ëTECT├ë: 1 s├⌐quelle(s)
+≡ƒôÜ TROUV├ë DANS BAR├êME: "Spl├⌐nectomie (ablation de la rate)" ΓåÆ "Spl├⌐nectomie (Ablation de la rate)" (15-30%)
+   ≡ƒôè [V3.3.365] Severity-adjusted bar├¿me: [15-30] ├ù coef 0.50 = 23%
+≡ƒöä REGROUPEMENT PAR SYST├êME: [ 'ABDOMEN: 23%' ]
+≡ƒº« CALCUL BALTHAZAR (PAR SYST├êME): [ 'ABDOMEN: 23%' ]
+≡ƒôè IPP GLOBAL CUMUL├ë: 23%
+"spl├⌐nectomie avec d├⌐ficit immunitaire" => proposal | Abdomen : Spl├⌐nectomie (ablation de la rate) - Bar├¿me: "Spl├⌐nectomie (Ablation de la rate)" (15-30%) - IPP 23%  | rate=23
+≡ƒöº localExpertAnalysis V3.3.398 - d├⌐gantage/lymph┼ôd├¿me/troubles vasculaires-lymphatiques MI handler
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): diarrh├⌐es motrices r├⌐siduelles apr├¿s r├⌐section intestin gr├¬le
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 0 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+≡ƒöì DEBUG STEPPAGE D├ëTAILL├ë:
+   - steppageMatch: false
+   - amyotrophieMIMatch: false
+   - fractureL1Match: false
+   - Texte analys├⌐: diarrh├⌐es motrices r├⌐siduelles apr├¿s r├⌐section intestin gr├¬le
+Γ¥î STEPPAGE NON D├ëTECT├ë - Conditions non remplies
+≡ƒöì DEBUG D├ëVIATION:
+   - deviationMatch: false
+   - mainContext: false
+   - Recherche dans: diviation NON trouv├⌐
+≡ƒöì [V3.3.155] S├⌐quelles d├⌐tect├⌐es: 0 []
+≡ƒöì V3.3.201k: isCumulDetected = false , lesionCount = 1
+≡ƒöì DEBUG M├ëTACARPIENS - Texte normalis├⌐: diarrhees motrices residuelles resection intestin greamputation ablation perte intestinal greileon intestin greileon intestin intestinal ileon intestin intestinal greintestin intestinal grele
+≡ƒöì DEBUG M├ëTACARPIENS - hasMetacarpienWord: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSingleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasMultipleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSpecificFingerEarly: false
+≡ƒöì DEBUG M├ëTACARPIENS - isMetacarpienSingleQueryEarly: false
+≡ƒöì V3.3.139: V├⌐rification cumul prioritaire...
+≡ƒöì Query words: diarrhees, motrices, residuelles, apres, resection, intestin, grele
+≡ƒöì Cat├⌐gorie cumul trouv├⌐e: Cumuls de L├⌐sions et Polytraumatismes
+≡ƒöì Entr├⌐es avec searchTerms v├⌐rifi├⌐es: 51, meilleur score: 0.0%
+Γä╣∩╕Å Aucun cumul prioritaire trouv├⌐ (similarit├⌐ < 70%), continue avec analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒª╢ [V3.3.317] hasMTPLuxation: false hasMetaFracture: false hasTSLO: false hasFootContext: false
+≡ƒöì isCumulDetected: false lesionCount: 1
+≡ƒöì [M├ëTACARPIENS] Input brut: diarrh├⌐es motrices r├⌐siduelles apr├¿s r├⌐section intestin gr├¬le
+≡ƒöì [M├ëTACARPIENS] hasMetaWord: false
+≡ƒöì [M├ëTACARPIENS] hasSingleOrPerte: false
+≡ƒöì [M├ëTACARPIENS] hasSpecificFinger: false
+≡ƒöì [M├ëTACARPIENS] hasCinq: false
+ΓÜá∩╕Å [M├ëTACARPIENS] Pas de dialogue - continuons analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì [EARLY] Ant├⌐c├⌐dents d├⌐tect├⌐s: 0 - 
+≡ƒöì [DEBUG EXPERT RULE - EARLY TEST]
+Pattern: /contusion.*cerebrale|traumatisme.*crani.*contusion/i
+Context: /perte.*connaissance|frontale|temporale|parietale|breve|courte|surveillance.*neurologique/i
+NegativeContext: /spondylo|listthesis|glissement.*vertebral/i
+CleanText: "diarrhees motrices residuelles apres resection intestin grele"
+patternMatchClean: false, contextMatchClean: false
+negContextMatchClean: false, negContextMatchWorking: false
+matchClean: false, matchWorking: false
+Γ£à [EXPERT RULE MATCH - PRIORITY 97] R├⌐section intestinale gr├¬le courte (<50 cm) = [10-20] ΓåÆ 10% (coef: 0.00)
+"diarrh├⌐es motrices r├⌐siduelles apr├¿s r├⌐section intestin gr├¬le" => proposal | R├⌐section intestinale gr├¬le courte (<50 cm)  | rate=10

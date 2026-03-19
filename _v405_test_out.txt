@@ -1,0 +1,33 @@
+ΓòöΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòù
+Γòæ  TEST RUNNER UNIFI├ë ΓÇö 30 suites, 658 cas attendus             Γòæ
+ΓòÜΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓò¥
+
+  Γ£à _test_amputation_main.ts                10/ 10  (4189ms)
+  Γ£à _test_bassin_rachis.ts                  10/ 10  (5282ms)
+  Γ£à _test_jambe_cheville.ts                 10/ 10  (2951ms)
+  Γ£à _test_jambe.ts                          10/ 10  (3401ms)
+  Γ£à _test_genou_femur.ts                     8/  8  (4701ms)
+  Γ£à _test_traumatisme_cranien.ts            10/ 10  (4232ms)
+  Γ£à _test_ophtalmo.ts                       10/ 10  (4375ms)
+  Γ£à _test_ophtalmo_facial.ts                10/ 10  (2895ms)
+  Γ£à _test_membres_inferieurs.ts             10/ 10  (3282ms)
+  Γ£à _test_polytraumatismes.ts               10/ 10  (3660ms)
+  Γ£à _test_polytrauma_4sieges.ts             20/ 20  (8143ms)
+  Γ£à _test_thorax.ts                         10/ 10  (3423ms)
+  Γ£à _test_visceral.ts                       10/ 10  (4374ms)
+  Γ£à _test_visceral_2.ts                     10/ 10  (3222ms)
+  Γ£à _test_thorax_rachis.ts                  10/ 10  (6019ms)
+  Γ£à _test_jambe_genou_cuisse.ts             30/ 30  (3943ms)
+  Γ£à _test_polytrauma_MI_complexe.ts         30/ 30  (8764ms)
+  Γ£à _test_membre_superieur.ts               40/ 40  (6645ms)
+  Γ£à _test_amputation_MS.ts                  30/ 30  (4387ms)
+  Γ£à _test_polytrauma_complexe_30.ts         30/ 30  (14182ms)
+  Γ£à _test_hanche_jambe.ts                   30/ 30  (9818ms)
+  Γ£à _test_sternum_clavicule_omoplate.ts     30/ 30  (12473ms)
+  Γ£à _test_rachis_20.ts                      20/ 20  (6029ms)
+  Γ¥î _test_epaule_bras_coude_avbras_poignet_70.ts CRASH ΓÇö Command failed: npx tsx _test_epaule_bras_coude_avbras_poignet_70.ts 2>&1
+  Γ¥î _test_main_traumatisme_20.ts           CRASH ΓÇö Command failed: npx tsx _test_main_traumatisme_20.ts 2>&1
+  Γ£à _test_pied_30.ts                        30/ 30  (9923ms)
+  Γ¥î _test_cheville_pied_30.ts              CRASH ΓÇö Command failed: npx tsx _test_cheville_pied_30.ts 2>&1
+  Γ£à _test_avant_bras_30.ts                  30/ 30  (34247ms)
+  Γ£à _test_polytrauma_40.ts                  40/ 40  (21651ms)

@@ -1,0 +1,36 @@
+=== TEST BR├¢LURE + C├ëCIT├ë ===
+≡ƒöº localExpertAnalysis V3.3.407 - fix br├╗lures faciales + c├⌐cit├⌐/atteinte corn├⌐enne = polytrauma (pas br├╗lure seule)
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): Technicien de laboratoire manipulant des r├⌐actifs sous pression. Explosion d'une fiole contenant un acide concentr├⌐, avec projection directe sur le visage. Bilan initial : Br├╗lures chimiques du 3├¿me d
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 1 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 1 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+≡ƒöì DEBUG STEPPAGE D├ëTAILL├ë:
+   - steppageMatch: false
+   - amyotrophieMIMatch: false
+   - fractureL1Match: false
+   - Texte analys├⌐: Technicien de laboratoire manipulant des r├⌐actifs sous pression. Explosion d'une fiole contenant un acide concentr├⌐, avec projection directe sur le visage. Bilan initial : Br├╗lures chimiques du 3├¿me degr├⌐ sur la face et le cou. Atteinte corn├⌐enne bil
+Γ¥î STEPPAGE NON D├ëTECT├ë - Conditions non remplies
+≡ƒöì DEBUG D├ëVIATION:
+   - deviationMatch: false
+   - mainContext: false
+   - Recherche dans: diviation NON trouv├⌐
+≡ƒöì [V3.3.155] S├⌐quelles d├⌐tect├⌐es: 3 [
+  'Cicatrice pathologique (mauvaise qualit├⌐, adh├⌐rente)',
+  'Br├╗lures profondes post-traumatiques (face)',
+  'C├⌐cit├⌐ compl├¿te bilat├⌐rale'
+]
+≡ƒöì V3.3.201k: isCumulDetected = false , lesionCount = 1
+≡ƒºá [V3.3.214] TC check: hasTC=false, hasNeuro=false, hasFocal=false, neuroCount=0
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 1 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+ΓÜá∩╕Å POLYTRAUMATISME D├ëTECT├ë: 3 s├⌐quelle(s)
+≡ƒôÜ TROUV├ë DANS BAR├êME: "Cicatrice pathologique (mauvaise qualit├⌐, adh├⌐rente)" ΓåÆ "Cicatrices (sans ├⌐ventration) tr├¿s larges et adh├⌐rentes" (10-30%)
+   ≡ƒôè [V3.3.365] Severity-adjusted bar├¿me: [10-30] ├ù coef 0.50 = 20%
+≡ƒôÜ TROUV├ë DANS BAR├êME: "Br├╗lures profondes post-traumatiques (face)" ΓåÆ "C├⌐phal├⌐es post-traumatiques chroniques" (5-20%)
+   ≡ƒôè [V3.3.365] Severity-adjusted bar├¿me: [5-20] ├ù coef 0.50 = 13%
+≡ƒôÜ TROUV├ë DANS BAR├êME: "C├⌐cit├⌐ compl├¿te bilat├⌐rale" ΓåÆ "C├⌐cit├⌐ compl├¿te" (100-100%)
+≡ƒöä REGROUPEMENT PAR SYST├êME: [ 'AUTRE: 100%', 'MEMBRE_INFERIEUR: 20%' ]
+≡ƒº« CALCUL BALTHAZAR (PAR SYST├êME): [ 'AUTRE: 100%', 'MEMBRE_INFERIEUR: 20%' ]
+≡ƒôè IPP GLOBAL CUMUL├ë: 100%
+TYPE: proposal
+NAME: Polytraumatisme - 2 syst├¿mes atteints - IPP global 100%
+RATE: 100
+JUSTIF: <strong>≡ƒÅÑ POLYTRAUMATISME - CALCUL IPP (Bar├¿me 1967)</strong><br><br><strong>≡ƒôï 3 s├⌐quelles post-traumatiques regroup├⌐es en 2 syst├¿mes anatomiques :</strong><br><br><strong>A. SYST├êME AUTRE</strong> ΓåÆ <span style="color: #d32f2f; font-weight: bold;">100% IPP</span><br>   Γöö S├⌐quelle post-traumatique (estimation conservatrice) - Bar├¿me: "C├⌐cit├⌐ compl├¿te" (100-100%)<br>   Γöö S├⌐quelles regroup├⌐es :<br>      ΓÇó Br├╗lures profondes post-traumatiques (face)<br>      ΓÇó C├⌐cit├⌐ compl├¿te bilat├⌐rale<br><br><strong>B. SYST├êME MEMBRE INFERIEUR</strong> ΓåÆ <span style="color: #d32f2f; font-weight: bold;">20% IP

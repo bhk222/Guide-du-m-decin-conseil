@@ -1,0 +1,591 @@
+
+ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ
+  TEST 30 CAS : TRAUMATISMES DE L'AVANT-BRAS (V3.3.313)
+ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ
+
+≡ƒöº localExpertAnalysis V3.3.401 - pseudarthrose handler d├⌐di├⌐ (hum├⌐rus, f├⌐mur, tibia, coude, clavicule, avant-bras)
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): fracture des deux os de l'avant-bras droit main dominante par chute de sa hauteur trait├⌐e par ost├⌐osynth├¿se par plaque sur le radius et le cubitus avec bonne consolidation radiologique obtenue ├á 10 se
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 1 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+≡ƒÆ¬ [V3.3.313] Fracture deux os avant-bras d├⌐tect├⌐ ΓåÆ Bypass cumul, analyse directe via comprehensiveSingleLesionAnalysis
+≡ƒöì [M├ëTACARPIENS] Input brut: fracture des deux os de l avant-bras droit main dominante par chute de sa hauteur trait├⌐e par ost├⌐osynth├¿se par plaque sur le radius et le cubitus avec bonne consolidation radiologique obtenue ├á 10 semaines et r├⌐cup├⌐ration compl├¿te des amplitudes articulaires du coude sans trouble fonctionnel r├⌐siduel et reprise de l activit├⌐ professionnelle
+≡ƒöì [M├ëTACARPIENS] hasMetaWord: false
+≡ƒöì [M├ëTACARPIENS] hasSingleOrPerte: false
+≡ƒöì [M├ëTACARPIENS] hasSpecificFinger: false
+≡ƒöì [M├ëTACARPIENS] hasCinq: false
+ΓÜá∩╕Å [M├ëTACARPIENS] Pas de dialogue - continuons analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì [EARLY] Ant├⌐c├⌐dents d├⌐tect├⌐s: 0 - 
+   ≡ƒôë V3.3.209: Mod├⌐ration expert rule "Fracture des deux os de l'avant-bras - Bonne consolidation sans trouble fonctionnel (Main Dominante)" - s├⌐v├⌐rit├⌐ LOW d├⌐tect├⌐e
+Γ£à [EXPERT RULE MATCH - PRIORITY 10500] Fracture des deux os de l'avant-bras - Bonne consolidation sans trouble fonctionnel (Main Dominante) = [3-6] ΓåÆ 3% (coef: 0.00, LOW)
+ΓöÇΓöÇΓöÇ Cas 1 ΓöÇΓöÇΓöÇ
+  Description: Fracture 2 os avant-bras - bonne consolidation MD
+  Input     : "fracture des deux os de l'avant-bras droit main dominante par chute de sa hauteur trait├⌐e par ost├⌐osynth├¿se par plaque s..."
+  Attendu   : fracture.*deux.*avant.bras.*bonne.*consolidation|fracture.*deux.*l.avant.*consolidation (3-6%)
+  Obtenu    : Γ£à Fracture des deux os de l'avant-bras - Bonne consolidation sans trouble fonctionnel (Main Dominante)
+  Taux      : 3%
+  Type      : proposal
+  Nom OK    : Γ£à | Taux OK: Γ£à
+  Path      : Membres Sup├⌐rieurs > Avant-bras - Fractures et Pseudarthroses
+
+≡ƒöº localExpertAnalysis V3.3.401 - pseudarthrose handler d├⌐di├⌐ (hum├⌐rus, f├⌐mur, tibia, coude, clavicule, avant-bras)
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): fracture diaphysaire des deux os de l'avant-bras gauche main non dominante suite ├á un accident de travail trait├⌐e orthop├⌐diquement par pl├ótre brachio-ant├⌐brachial pendant 8 semaines avec bonne consoli
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 1 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+≡ƒÆ¬ [V3.3.313] Fracture deux os avant-bras d├⌐tect├⌐ ΓåÆ Bypass cumul, analyse directe via comprehensiveSingleLesionAnalysis
+≡ƒöì [M├ëTACARPIENS] Input brut: fracture diaphysaire des deux os de l avant-bras gauche main non dominante suite ├á un accident de travail trait├⌐e orthop├⌐diquement par pl├ótre brachio-ant├⌐brachial pendant 8 semaines avec bonne consolidation sans cal vicieux et mobilit├⌐s normales du coude et r├⌐cup├⌐ration compl├¿te de la mobilit├⌐ de l avant-bras
+≡ƒöì [M├ëTACARPIENS] hasMetaWord: false
+≡ƒöì [M├ëTACARPIENS] hasSingleOrPerte: false
+≡ƒöì [M├ëTACARPIENS] hasSpecificFinger: false
+≡ƒöì [M├ëTACARPIENS] hasCinq: false
+ΓÜá∩╕Å [M├ëTACARPIENS] Pas de dialogue - continuons analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì [EARLY] Ant├⌐c├⌐dents d├⌐tect├⌐s: 0 - 
+Γ£à [EXPERT RULE MATCH - PRIORITY 10500] Fracture des deux os de l'avant-bras - Bonne consolidation sans trouble fonctionnel (Main Dominante) = [3-6] ΓåÆ 3% (coef: 0.00)
+ΓöÇΓöÇΓöÇ Cas 2 ΓöÇΓöÇΓöÇ
+  Description: Fracture 2 os avant-bras - bonne consolidation MND
+  Input     : "fracture diaphysaire des deux os de l'avant-bras gauche main non dominante suite ├á un accident de travail trait├⌐e orthop..."
+  Attendu   : fracture.*deux.*avant.bras.*bonne.*consolidation|fracture.*deux.*l.avant.*consolidation (2-5%)
+  Obtenu    : Γ£à Fracture des deux os de l'avant-bras - Bonne consolidation sans trouble fonctionnel (Main Dominante)
+  Taux      : 3%
+  Type      : proposal
+  Nom OK    : Γ£à | Taux OK: Γ£à
+  Path      : Membres Sup├⌐rieurs > Avant-bras - Fractures et Pseudarthroses
+
+≡ƒöº localExpertAnalysis V3.3.401 - pseudarthrose handler d├⌐di├⌐ (hum├⌐rus, f├⌐mur, tibia, coude, clavicule, avant-bras)
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): fracture des deux os de l'avant-bras droit main dominante consolid├⌐e avec cal vicieux angulaire du radius et limitation l├⌐g├¿re de la prono-supination avec pronation ├á 60 degr├⌐s au lieu de 80 et supina
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 1 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+≡ƒÆ¬ [V3.3.313] Fracture deux os avant-bras d├⌐tect├⌐ ΓåÆ Bypass cumul, analyse directe via comprehensiveSingleLesionAnalysis
+≡ƒöì [M├ëTACARPIENS] Input brut: fracture des deux os de l avant-bras droit main dominante consolid├⌐e avec cal vicieux angulaire du radius et limitation l├⌐g├¿re de la prono-supination avec pronation ├á 60 degr├⌐s au lieu de 80 et supination conserv├⌐e et g├¬ne fonctionnelle mod├⌐r├⌐e dans les gestes de rotation de l avant-bras comme tourner une cl├⌐ ou visser
+≡ƒöì [M├ëTACARPIENS] hasMetaWord: false
+≡ƒöì [M├ëTACARPIENS] hasSingleOrPerte: false
+≡ƒöì [M├ëTACARPIENS] hasSpecificFinger: false
+≡ƒöì [M├ëTACARPIENS] hasCinq: false
+ΓÜá∩╕Å [M├ëTACARPIENS] Pas de dialogue - continuons analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì [EARLY] Ant├⌐c├⌐dents d├⌐tect├⌐s: 0 - 
+Γ£à [EXPERT RULE MATCH - PRIORITY 10550] Fracture des deux os de l'avant-bras - Cal vicieux avec limitation de la prono-supination (Main Dominante) = [10-25] ΓåÆ 10% (coef: 0.00)
+ΓöÇΓöÇΓöÇ Cas 3 ΓöÇΓöÇΓöÇ
+  Description: Fracture 2 os - cal vicieux + limitation prono-supination l├⌐g├¿re MD
+  Input     : "fracture des deux os de l'avant-bras droit main dominante consolid├⌐e avec cal vicieux angulaire du radius et limitation ..."
+  Attendu   : fracture.*deux.*avant.bras.*cal.*vicieux.*prono|fracture.*deux.*l.avant.*cal.*vicieux|fracture.*deux.*limitation.*prono (10-25%)
+  Obtenu    : Γ£à Fracture des deux os de l'avant-bras - Cal vicieux avec limitation de la prono-supination (Main Dominante)
+  Taux      : 10%
+  Type      : proposal
+  Nom OK    : Γ£à | Taux OK: Γ£à
+  Path      : Membres Sup├⌐rieurs > Avant-bras - Fractures et Pseudarthroses
+
+≡ƒöº localExpertAnalysis V3.3.401 - pseudarthrose handler d├⌐di├⌐ (hum├⌐rus, f├⌐mur, tibia, coude, clavicule, avant-bras)
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): fracture des deux os de l'avant-bras gauche main non dominante avec consolidation en cal vicieux important et blocage quasi-complet de la prono-supination avec pronation limit├⌐e ├á 10 degr├⌐s et supinat
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 1 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+≡ƒÆ¬ [V3.3.313] Fracture deux os avant-bras d├⌐tect├⌐ ΓåÆ Bypass cumul, analyse directe via comprehensiveSingleLesionAnalysis
+≡ƒöì [M├ëTACARPIENS] Input brut: fracture des deux os de l avant-bras gauche main non dominante avec consolidation en cal vicieux important et blocage quasi-complet de la prono-supination avec pronation limit├⌐e ├á 10 degr├⌐s et supination ├á 20 degr├⌐s et douleurs chroniques ├á la mobilisation et impossibilit├⌐ de tourner la paume de la main vers le haut ou le bas et g├¬ne majeure dans les activit├⌐s quotidiennes
+≡ƒöì [M├ëTACARPIENS] hasMetaWord: false
+≡ƒöì [M├ëTACARPIENS] hasSingleOrPerte: false
+≡ƒöì [M├ëTACARPIENS] hasSpecificFinger: false
+≡ƒöì [M├ëTACARPIENS] hasCinq: false
+ΓÜá∩╕Å [M├ëTACARPIENS] Pas de dialogue - continuons analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì [EARLY] Ant├⌐c├⌐dents d├⌐tect├⌐s: 0 - 
+   ≡ƒöä [V3.3.374] Laterality swap: MD ΓåÆ MND (Fracture des deux os de l'avant-bras - Cal vicieux avec limitation de la prono-supination (Main Non Dominante))
+Γ£à [EXPERT RULE MATCH - PRIORITY 10550] Fracture des deux os de l'avant-bras - Cal vicieux avec limitation de la prono-supination (Main Non Dominante) = [8-20] ΓåÆ 14% (coef: 0.50)
+ΓöÇΓöÇΓöÇ Cas 4 ΓöÇΓöÇΓöÇ
+  Description: Fracture 2 os - cal vicieux + blocage prono-supination MND
+  Input     : "fracture des deux os de l'avant-bras gauche main non dominante avec consolidation en cal vicieux important et blocage qu..."
+  Attendu   : fracture.*deux.*avant.bras.*cal.*vicieux.*prono|fracture.*deux.*l.avant.*cal.*vicieux|fracture.*deux.*limitation.*prono (8-20%)
+  Obtenu    : Γ£à Fracture des deux os de l'avant-bras - Cal vicieux avec limitation de la prono-supination (Main Non Dominante)
+  Taux      : 14%
+  Type      : proposal
+  Nom OK    : Γ£à | Taux OK: Γ£à
+  Path      : Membres Sup├⌐rieurs > Avant-bras - Fractures et Pseudarthroses
+
+≡ƒöº localExpertAnalysis V3.3.401 - pseudarthrose handler d├⌐di├⌐ (hum├⌐rus, f├⌐mur, tibia, coude, clavicule, avant-bras)
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): fracture comminutive des deux os de l'avant-bras droit main dominante avec cal vicieux important et impotence fonctionnelle majeure et compression du nerf m├⌐dian au foyer de fracture avec troubles ner
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 1 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+≡ƒÆ¬ [V3.3.313] Fracture deux os avant-bras d├⌐tect├⌐ ΓåÆ Bypass cumul, analyse directe via comprehensiveSingleLesionAnalysis
+≡ƒöì [M├ëTACARPIENS] Input brut: fracture comminutive des deux os de l avant-bras droit main dominante avec cal vicieux important et impotence fonctionnelle majeure et compression du nerf m├⌐dian au foyer de fracture avec troubles nerveux sensitifs et moteurs ├á type de paresth├⌐sies des trois premiers doigts et d├⌐ficit de la flexion des doigts et amyotrophie de l ├⌐minence th├⌐nar et douleurs neuropathiques chroniques
+≡ƒöì [M├ëTACARPIENS] hasMetaWord: false
+≡ƒöì [M├ëTACARPIENS] hasSingleOrPerte: false
+≡ƒöì [M├ëTACARPIENS] hasSpecificFinger: false
+≡ƒöì [M├ëTACARPIENS] hasCinq: false
+ΓÜá∩╕Å [M├ëTACARPIENS] Pas de dialogue - continuons analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì [EARLY] Ant├⌐c├⌐dents d├⌐tect├⌐s: 0 - 
+Γ£à [EXPERT RULE MATCH - PRIORITY 10600] Fracture des deux os de l'avant-bras - Cal vicieux avec impotence et troubles nerveux (Main Dominante) = [30-45] ΓåÆ 38% (coef: 0.50)
+ΓöÇΓöÇΓöÇ Cas 5 ΓöÇΓöÇΓöÇ
+  Description: Fracture 2 os - cal vicieux + impotence + troubles nerveux MD
+  Input     : "fracture comminutive des deux os de l'avant-bras droit main dominante avec cal vicieux important et impotence fonctionne..."
+  Attendu   : fracture.*deux.*avant.bras.*cal.*vicieux.*impotence.*troubles.*nerveux|fracture.*deux.*l.avant.*impotence|fracture.*deux.*troubles.*nerveux (30-45%)
+  Obtenu    : Γ£à Fracture des deux os de l'avant-bras - Cal vicieux avec impotence et troubles nerveux (Main Dominante)
+  Taux      : 38%
+  Type      : proposal
+  Nom OK    : Γ£à | Taux OK: Γ£à
+  Path      : Membres Sup├⌐rieurs > Avant-bras - Fractures et Pseudarthroses
+
+≡ƒöº localExpertAnalysis V3.3.401 - pseudarthrose handler d├⌐di├⌐ (hum├⌐rus, f├⌐mur, tibia, coude, clavicule, avant-bras)
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): fracture ouverte des deux os de l'avant-bras gauche main non dominante type Gustilo II avec cal vicieux et impotence fonctionnelle et atteinte du nerf radial avec main tombante et impossibilit├⌐ d'exte
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 1 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+≡ƒÆ¬ [V3.3.313] Fracture deux os avant-bras d├⌐tect├⌐ ΓåÆ Bypass cumul, analyse directe via comprehensiveSingleLesionAnalysis
+≡ƒöì [M├ëTACARPIENS] Input brut: fracture ouverte des deux os de l avant-bras gauche main non dominante type gustilo ii avec cal vicieux et impotence fonctionnelle et atteinte du nerf radial avec main tombante et impossibilit├⌐ d extension du poignet et des doigts et troubles sensitifs du dos de la main et perte de force de pr├⌐hension importante et n├⌐cessit├⌐ de port d attelle de rel├¿vement
+≡ƒöì [M├ëTACARPIENS] hasMetaWord: false
+≡ƒöì [M├ëTACARPIENS] hasSingleOrPerte: true
+≡ƒöì [M├ëTACARPIENS] hasSpecificFinger: false
+≡ƒöì [M├ëTACARPIENS] hasCinq: false
+ΓÜá∩╕Å [M├ëTACARPIENS] Pas de dialogue - continuons analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì [EARLY] Ant├⌐c├⌐dents d├⌐tect├⌐s: 0 - 
+   ≡ƒöä [V3.3.374] Laterality swap: MD ΓåÆ MND (Fracture des deux os de l'avant-bras - Cal vicieux avec impotence et troubles nerveux (Main Non Dominante))
+Γ£à [EXPERT RULE MATCH - PRIORITY 10600] Fracture des deux os de l'avant-bras - Cal vicieux avec impotence et troubles nerveux (Main Non Dominante) = [25-35] ΓåÆ 30% (coef: 0.50)
+ΓöÇΓöÇΓöÇ Cas 6 ΓöÇΓöÇΓöÇ
+  Description: Fracture 2 os - cal vicieux + impotence + troubles nerveux MND
+  Input     : "fracture ouverte des deux os de l'avant-bras gauche main non dominante type Gustilo II avec cal vicieux et impotence fon..."
+  Attendu   : fracture.*deux.*avant.bras.*cal.*vicieux.*impotence.*troubles.*nerveux|fracture.*deux.*l.avant.*impotence|fracture.*deux.*troubles.*nerveux (25-35%)
+  Obtenu    : Γ£à Fracture des deux os de l'avant-bras - Cal vicieux avec impotence et troubles nerveux (Main Non Dominante)
+  Taux      : 30%
+  Type      : proposal
+  Nom OK    : Γ£à | Taux OK: Γ£à
+  Path      : Membres Sup├⌐rieurs > Avant-bras - Fractures et Pseudarthroses
+
+≡ƒöº localExpertAnalysis V3.3.401 - pseudarthrose handler d├⌐di├⌐ (hum├⌐rus, f├⌐mur, tibia, coude, clavicule, avant-bras)
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): fracture isol├⌐e de la diaphyse du radius droit main dominante par choc direct trait├⌐e par ost├⌐osynth├¿se par plaque viss├⌐e avec consolidation obtenue ├á 8 semaines et douleurs r├⌐siduelles mod├⌐r├⌐es ├á la 
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 1 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+≡ƒÆ¬ [V3.3.313] Fracture isol├⌐e radius/cubitus d├⌐tect├⌐ ΓåÆ Bypass cumul, analyse directe via comprehensiveSingleLesionAnalysis
+≡ƒöì [M├ëTACARPIENS] Input brut: fracture isol├⌐e de la diaphyse du radius droit main dominante par choc direct trait├⌐e par ost├⌐osynth├¿se par plaque viss├⌐e avec consolidation obtenue ├á 8 semaines et douleurs r├⌐siduelles mod├⌐r├⌐es ├á la rotation de l avant-bras et l├⌐g├¿re limitation de la supination et g├¬ne dans les gestes de la vie quotidienne
+≡ƒöì [M├ëTACARPIENS] hasMetaWord: false
+≡ƒöì [M├ëTACARPIENS] hasSingleOrPerte: false
+≡ƒöì [M├ëTACARPIENS] hasSpecificFinger: false
+≡ƒöì [M├ëTACARPIENS] hasCinq: false
+ΓÜá∩╕Å [M├ëTACARPIENS] Pas de dialogue - continuons analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì [EARLY] Ant├⌐c├⌐dents d├⌐tect├⌐s: 0 - 
+   ≡ƒôë V3.3.209: Mod├⌐ration expert rule "Fracture isol├⌐e du radius (Main Dominante)" - s├⌐v├⌐rit├⌐ LOW d├⌐tect├⌐e
+Γ£à [EXPERT RULE MATCH - PRIORITY 10500] Fracture isol├⌐e du radius (Main Dominante) = [4-8] ΓåÆ 5% (coef: 0.35, LOW)
+ΓöÇΓöÇΓöÇ Cas 7 ΓöÇΓöÇΓöÇ
+  Description: Fracture isol├⌐e du radius MD
+  Input     : "fracture isol├⌐e de la diaphyse du radius droit main dominante par choc direct trait├⌐e par ost├⌐osynth├¿se par plaque viss├⌐..."
+  Attendu   : fracture.*isol[e├⌐]e.*radius (4-8%)
+  Obtenu    : Γ£à Fracture isol├⌐e du radius (Main Dominante)
+  Taux      : 5%
+  Type      : proposal
+  Nom OK    : Γ£à | Taux OK: Γ£à
+  Path      : Membres Sup├⌐rieurs > Avant-bras - Fractures et Pseudarthroses
+
+≡ƒöº localExpertAnalysis V3.3.401 - pseudarthrose handler d├⌐di├⌐ (hum├⌐rus, f├⌐mur, tibia, coude, clavicule, avant-bras)
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): fracture isol├⌐e de la diaphyse du radius gauche main non dominante au tiers moyen trait├⌐e par pl├ótre pendant 6 semaines avec bonne consolidation et mobilit├⌐s conserv├⌐es du coude et douleurs minimes r├⌐
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 1 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+≡ƒÆ¬ [V3.3.313] Fracture isol├⌐e radius/cubitus d├⌐tect├⌐ ΓåÆ Bypass cumul, analyse directe via comprehensiveSingleLesionAnalysis
+≡ƒöì [M├ëTACARPIENS] Input brut: fracture isol├⌐e de la diaphyse du radius gauche main non dominante au tiers moyen trait├⌐e par pl├ótre pendant 6 semaines avec bonne consolidation et mobilit├⌐s conserv├⌐es du coude et douleurs minimes r├⌐siduelles ├á l effort
+≡ƒöì [M├ëTACARPIENS] hasMetaWord: false
+≡ƒöì [M├ëTACARPIENS] hasSingleOrPerte: false
+≡ƒöì [M├ëTACARPIENS] hasSpecificFinger: false
+≡ƒöì [M├ëTACARPIENS] hasCinq: false
+ΓÜá∩╕Å [M├ëTACARPIENS] Pas de dialogue - continuons analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì [EARLY] Ant├⌐c├⌐dents d├⌐tect├⌐s: 0 - 
+   ≡ƒöä [V3.3.374] Laterality swap: MD ΓåÆ MND (Fracture isol├⌐e du radius (Main Non Dominante))
+   ≡ƒôë V3.3.209: Mod├⌐ration expert rule "Fracture isol├⌐e du radius (Main Non Dominante)" - s├⌐v├⌐rit├⌐ LOW d├⌐tect├⌐e
+Γ£à [EXPERT RULE MATCH - PRIORITY 10500] Fracture isol├⌐e du radius (Main Non Dominante) = [3-6] ΓåÆ 4% (coef: 0.35, LOW)
+ΓöÇΓöÇΓöÇ Cas 8 ΓöÇΓöÇΓöÇ
+  Description: Fracture isol├⌐e du radius MND
+  Input     : "fracture isol├⌐e de la diaphyse du radius gauche main non dominante au tiers moyen trait├⌐e par pl├ótre pendant 6 semaines ..."
+  Attendu   : fracture.*isol[e├⌐]e.*radius (3-6%)
+  Obtenu    : Γ£à Fracture isol├⌐e du radius (Main Non Dominante)
+  Taux      : 4%
+  Type      : proposal
+  Nom OK    : Γ£à | Taux OK: Γ£à
+  Path      : Membres Sup├⌐rieurs > Avant-bras - Fractures et Pseudarthroses
+
+≡ƒöº localExpertAnalysis V3.3.401 - pseudarthrose handler d├⌐di├⌐ (hum├⌐rus, f├⌐mur, tibia, coude, clavicule, avant-bras)
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): fracture isol├⌐e du cubitus droit main dominante dite fracture du pare-choc par m├⌐canisme de d├⌐fense trait├⌐e par pl├ótre brachio-ant├⌐brachial pendant 6 semaines avec consolidation radiologique et douleu
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 1 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+≡ƒÆ¬ [V3.3.313] Fracture isol├⌐e radius/cubitus d├⌐tect├⌐ ΓåÆ Bypass cumul, analyse directe via comprehensiveSingleLesionAnalysis
+≡ƒöì [M├ëTACARPIENS] Input brut: fracture isol├⌐e du cubitus droit main dominante dite fracture du pare-choc par m├⌐canisme de d├⌐fense trait├⌐e par pl├ótre brachio-ant├⌐brachial pendant 6 semaines avec consolidation radiologique et douleurs r├⌐siduelles ├á la palpation du foyer et l├⌐g├¿re g├¬ne ├á l appui sur le coude
+≡ƒöì [M├ëTACARPIENS] hasMetaWord: false
+≡ƒöì [M├ëTACARPIENS] hasSingleOrPerte: false
+≡ƒöì [M├ëTACARPIENS] hasSpecificFinger: false
+≡ƒöì [M├ëTACARPIENS] hasCinq: false
+ΓÜá∩╕Å [M├ëTACARPIENS] Pas de dialogue - continuons analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì [EARLY] Ant├⌐c├⌐dents d├⌐tect├⌐s: 0 - 
+   ≡ƒôë V3.3.209: Mod├⌐ration expert rule "Fracture isol├⌐e du cubitus (Main Dominante)" - s├⌐v├⌐rit├⌐ LOW d├⌐tect├⌐e
+Γ£à [EXPERT RULE MATCH - PRIORITY 10500] Fracture isol├⌐e du cubitus (Main Dominante) = [3-6] ΓåÆ 4% (coef: 0.35, LOW)
+ΓöÇΓöÇΓöÇ Cas 9 ΓöÇΓöÇΓöÇ
+  Description: Fracture isol├⌐e du cubitus MD
+  Input     : "fracture isol├⌐e du cubitus droit main dominante dite fracture du pare-choc par m├⌐canisme de d├⌐fense trait├⌐e par pl├ótre b..."
+  Attendu   : fracture.*isol[e├⌐]e.*cubitus (3-6%)
+  Obtenu    : Γ£à Fracture isol├⌐e du cubitus (Main Dominante)
+  Taux      : 4%
+  Type      : proposal
+  Nom OK    : Γ£à | Taux OK: Γ£à
+  Path      : Membres Sup├⌐rieurs > Avant-bras - Fractures et Pseudarthroses
+
+≡ƒöº localExpertAnalysis V3.3.401 - pseudarthrose handler d├⌐di├⌐ (hum├⌐rus, f├⌐mur, tibia, coude, clavicule, avant-bras)
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): fracture isol├⌐e du cubitus gauche main non dominante au tiers moyen trait├⌐e orthop├⌐diquement avec consolidation sans d├⌐placement secondaire et mobilit├⌐s normales du coude et reprise des activit├⌐s sans
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 1 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+≡ƒÆ¬ [V3.3.313] Fracture isol├⌐e radius/cubitus d├⌐tect├⌐ ΓåÆ Bypass cumul, analyse directe via comprehensiveSingleLesionAnalysis
+≡ƒöì [M├ëTACARPIENS] Input brut: fracture isol├⌐e du cubitus gauche main non dominante au tiers moyen trait├⌐e orthop├⌐diquement avec consolidation sans d├⌐placement secondaire et mobilit├⌐s normales du coude et reprise des activit├⌐s sans limitation
+≡ƒöì [M├ëTACARPIENS] hasMetaWord: false
+≡ƒöì [M├ëTACARPIENS] hasSingleOrPerte: false
+≡ƒöì [M├ëTACARPIENS] hasSpecificFinger: false
+≡ƒöì [M├ëTACARPIENS] hasCinq: false
+ΓÜá∩╕Å [M├ëTACARPIENS] Pas de dialogue - continuons analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì [EARLY] Ant├⌐c├⌐dents d├⌐tect├⌐s: 0 - 
+   ≡ƒöä [V3.3.374] Laterality swap: MD ΓåÆ MND (Fracture isol├⌐e du cubitus (Main Non Dominante))
+Γ£à [EXPERT RULE MATCH - PRIORITY 10500] Fracture isol├⌐e du cubitus (Main Non Dominante) = [2-5] ΓåÆ 2% (coef: 0.00)
+ΓöÇΓöÇΓöÇ Cas 10 ΓöÇΓöÇΓöÇ
+  Description: Fracture isol├⌐e du cubitus MND
+  Input     : "fracture isol├⌐e du cubitus gauche main non dominante au tiers moyen trait├⌐e orthop├⌐diquement avec consolidation sans d├⌐p..."
+  Attendu   : fracture.*isol[e├⌐]e.*cubitus (2-5%)
+  Obtenu    : Γ£à Fracture isol├⌐e du cubitus (Main Non Dominante)
+  Taux      : 2%
+  Type      : proposal
+  Nom OK    : Γ£à | Taux OK: Γ£à
+  Path      : Membres Sup├⌐rieurs > Avant-bras - Fractures et Pseudarthroses
+
+≡ƒöº localExpertAnalysis V3.3.401 - pseudarthrose handler d├⌐di├⌐ (hum├⌐rus, f├⌐mur, tibia, coude, clavicule, avant-bras)
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): pseudarthrose serr├⌐e des deux os de l'avant-bras droit main dominante apr├¿s fracture diaphysaire bilat├⌐rale consolid├⌐e en pseudarthrose hypertrophique serr├⌐e sans mobilit├⌐ anormale mais avec douleurs 
+≡ƒª┤ [V3.3.401] HANDLER PSEUDARTHROSE: Pseudarthrose des deux os de l'avant-bras - serr├⌐e (Main Dominante) ΓåÆ 30% (l├óche=false)
+ΓöÇΓöÇΓöÇ Cas 11 ΓöÇΓöÇΓöÇ
+  Description: Pseudarthrose 2 os - serr├⌐e MD
+  Input     : "pseudarthrose serr├⌐e des deux os de l'avant-bras droit main dominante apr├¿s fracture diaphysaire bilat├⌐rale consolid├⌐e e..."
+  Attendu   : pseudarthrose.*deux.*avant.bras.*serr[e├⌐]e|pseudarthrose.*deux.*l.avant.*serr[e├⌐]e (25-35%)
+  Obtenu    : Γ£à Pseudarthrose des deux os de l'avant-bras - serr├⌐e (Main Dominante)
+  Taux      : 30%
+  Type      : proposal
+  Nom OK    : Γ£à | Taux OK: Γ£à
+  Path      : S├⌐quelles des Membres Sup├⌐rieurs > Avant-bras
+
+≡ƒöº localExpertAnalysis V3.3.401 - pseudarthrose handler d├⌐di├⌐ (hum├⌐rus, f├⌐mur, tibia, coude, clavicule, avant-bras)
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): pseudarthrose serr├⌐e des deux os de l'avant-bras gauche main non dominante avec foyer fibreux dense sans mobilit├⌐ pathologique et douleurs ├á l'effort et limitation fonctionnelle avec r├⌐duction de la f
+≡ƒª┤ [V3.3.401] HANDLER PSEUDARTHROSE: Pseudarthrose des deux os de l'avant-bras - serr├⌐e (Main Non Dominante) ΓåÆ 25% (l├óche=false)
+ΓöÇΓöÇΓöÇ Cas 12 ΓöÇΓöÇΓöÇ
+  Description: Pseudarthrose 2 os - serr├⌐e MND
+  Input     : "pseudarthrose serr├⌐e des deux os de l'avant-bras gauche main non dominante avec foyer fibreux dense sans mobilit├⌐ pathol..."
+  Attendu   : pseudarthrose.*deux.*avant.bras.*serr[e├⌐]e|pseudarthrose.*deux.*l.avant.*serr[e├⌐]e (20-30%)
+  Obtenu    : Γ£à Pseudarthrose des deux os de l'avant-bras - serr├⌐e (Main Non Dominante)
+  Taux      : 25%
+  Type      : proposal
+  Nom OK    : Γ£à | Taux OK: Γ£à
+  Path      : S├⌐quelles des Membres Sup├⌐rieurs > Avant-bras
+
+≡ƒöº localExpertAnalysis V3.3.401 - pseudarthrose handler d├⌐di├⌐ (hum├⌐rus, f├⌐mur, tibia, coude, clavicule, avant-bras)
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): pseudarthrose l├óche des deux os de l'avant-bras droit main dominante avec mobilit├⌐ anormale au foyer de fracture et instabilit├⌐ majeure de l'avant-bras et angulation possible au site de pseudarthrose 
+≡ƒª┤ [V3.3.401] HANDLER PSEUDARTHROSE: Pseudarthrose des deux os de l'avant-bras - l├óche (Main Dominante) ΓåÆ 50% (l├óche=true)
+ΓöÇΓöÇΓöÇ Cas 13 ΓöÇΓöÇΓöÇ
+  Description: Pseudarthrose 2 os - l├óche MD
+  Input     : "pseudarthrose l├óche des deux os de l'avant-bras droit main dominante avec mobilit├⌐ anormale au foyer de fracture et inst..."
+  Attendu   : pseudarthrose.*deux.*avant.bras.*l[a├ó]che|pseudarthrose.*deux.*l.avant.*l[a├ó]che (45-55%)
+  Obtenu    : Γ£à Pseudarthrose des deux os de l'avant-bras - l├óche (Main Dominante)
+  Taux      : 50%
+  Type      : proposal
+  Nom OK    : Γ£à | Taux OK: Γ£à
+  Path      : S├⌐quelles des Membres Sup├⌐rieurs > Avant-bras
+
+≡ƒöº localExpertAnalysis V3.3.401 - pseudarthrose handler d├⌐di├⌐ (hum├⌐rus, f├⌐mur, tibia, coude, clavicule, avant-bras)
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): pseudarthrose l├óche des deux os de l'avant-bras gauche main non dominante avec mobilit├⌐ anormale importante et bras de levier inefficace et impossibilit├⌐ de toute activit├⌐ de force avec l'avant-bras g
+≡ƒª┤ [V3.3.401] HANDLER PSEUDARTHROSE: Pseudarthrose des deux os de l'avant-bras - l├óche (Main Non Dominante) ΓåÆ 40% (l├óche=true)
+ΓöÇΓöÇΓöÇ Cas 14 ΓöÇΓöÇΓöÇ
+  Description: Pseudarthrose 2 os - l├óche MND
+  Input     : "pseudarthrose l├óche des deux os de l'avant-bras gauche main non dominante avec mobilit├⌐ anormale importante et bras de l..."
+  Attendu   : pseudarthrose.*deux.*avant.bras.*l[a├ó]che|pseudarthrose.*deux.*l.avant.*l[a├ó]che (35-55%)
+  Obtenu    : Γ£à Pseudarthrose des deux os de l'avant-bras - l├óche (Main Non Dominante)
+  Taux      : 40%
+  Type      : proposal
+  Nom OK    : Γ£à | Taux OK: Γ£à
+  Path      : S├⌐quelles des Membres Sup├⌐rieurs > Avant-bras
+
+≡ƒöº localExpertAnalysis V3.3.401 - pseudarthrose handler d├⌐di├⌐ (hum├⌐rus, f├⌐mur, tibia, coude, clavicule, avant-bras)
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): pseudarthrose du radius droit main dominante apr├¿s fracture diaphysaire mal consolid├⌐e avec foyer de pseudarthrose hypertrophique et douleurs chroniques ├á la rotation de l'avant-bras et limitation de 
+≡ƒª┤ [V3.3.401] HANDLER PSEUDARTHROSE: Pseudarthrose du radius (Main Dominante) ΓåÆ 22% (l├óche=false)
+ΓöÇΓöÇΓöÇ Cas 15 ΓöÇΓöÇΓöÇ
+  Description: Pseudarthrose du radius MD
+  Input     : "pseudarthrose du radius droit main dominante apr├¿s fracture diaphysaire mal consolid├⌐e avec foyer de pseudarthrose hyper..."
+  Attendu   : pseudarthrose.*radius (20-25%)
+  Obtenu    : Γ£à Pseudarthrose du radius (Main Dominante)
+  Taux      : 22%
+  Type      : proposal
+  Nom OK    : Γ£à | Taux OK: Γ£à
+  Path      : S├⌐quelles des Membres Sup├⌐rieurs > Avant-bras
+
+≡ƒöº localExpertAnalysis V3.3.401 - pseudarthrose handler d├⌐di├⌐ (hum├⌐rus, f├⌐mur, tibia, coude, clavicule, avant-bras)
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): pseudarthrose du cubitus gauche main non dominante apr├¿s fracture du tiers moyen du cubitus avec absence de consolidation apr├¿s 9 mois et douleurs ├á l'appui et g├¬ne fonctionnelle dans les mouvements d
+≡ƒª┤ [V3.3.401] HANDLER PSEUDARTHROSE: Pseudarthrose du cubitus (Main Non Dominante) ΓåÆ 14% (l├óche=false)
+ΓöÇΓöÇΓöÇ Cas 16 ΓöÇΓöÇΓöÇ
+  Description: Pseudarthrose du cubitus MND
+  Input     : "pseudarthrose du cubitus gauche main non dominante apr├¿s fracture du tiers moyen du cubitus avec absence de consolidatio..."
+  Attendu   : pseudarthrose.*cubitus (12-18%)
+  Obtenu    : Γ£à Pseudarthrose du cubitus (Main Non Dominante)
+  Taux      : 14%
+  Type      : proposal
+  Nom OK    : Γ£à | Taux OK: Γ£à
+  Path      : S├⌐quelles des Membres Sup├⌐rieurs > Avant-bras
+
+≡ƒöº localExpertAnalysis V3.3.401 - pseudarthrose handler d├⌐di├⌐ (hum├⌐rus, f├⌐mur, tibia, coude, clavicule, avant-bras)
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): s├⌐quelles de fracture-luxation de Monteggia du c├┤t├⌐ droit main dominante avec fracture du tiers sup├⌐rieur du cubitus et luxation de la t├¬te radiale trait├⌐e chirurgicalement par ost├⌐osynth├¿se du cubitu
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 1 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+≡ƒÆ¬ [V3.3.313] Monteggia d├⌐tect├⌐ ΓåÆ Bypass cumul, analyse directe via comprehensiveSingleLesionAnalysis
+≡ƒöì [M├ëTACARPIENS] Input brut: s├⌐quelles de fracture-luxation de monteggia du c├┤t├⌐ droit main dominante avec fracture du tiers sup├⌐rieur du cubitus et luxation de la t├¬te radiale trait├⌐e chirurgicalement par ost├⌐osynth├¿se du cubitus et r├⌐duction de la luxation avec consolidation obtenue et r├⌐cup├⌐ration satisfaisante avec douleurs r├⌐siduelles mod├⌐r├⌐es au coude et l├⌐g├¿re raideur en extension
+≡ƒöì [M├ëTACARPIENS] hasMetaWord: false
+≡ƒöì [M├ëTACARPIENS] hasSingleOrPerte: false
+≡ƒöì [M├ëTACARPIENS] hasSpecificFinger: false
+≡ƒöì [M├ëTACARPIENS] hasCinq: false
+ΓÜá∩╕Å [M├ëTACARPIENS] Pas de dialogue - continuons analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì [EARLY] Ant├⌐c├⌐dents d├⌐tect├⌐s: 0 - 
+   ≡ƒôë V3.3.209: Mod├⌐ration expert rule "S├⌐quelles de fracture-luxation de Monteggia (Main Dominante)" - s├⌐v├⌐rit├⌐ LOW d├⌐tect├⌐e
+Γ£à [EXPERT RULE MATCH - PRIORITY 10500] S├⌐quelles de fracture-luxation de Monteggia (Main Dominante) = [10-30] ΓåÆ 17% (coef: 0.35, LOW)
+ΓöÇΓöÇΓöÇ Cas 17 ΓöÇΓöÇΓöÇ
+  Description: Monteggia - s├⌐quelles l├⌐g├¿res MD
+  Input     : "s├⌐quelles de fracture-luxation de Monteggia du c├┤t├⌐ droit main dominante avec fracture du tiers sup├⌐rieur du cubitus et ..."
+  Attendu   : monteggia|Monteggia (10-30%)
+  Obtenu    : Γ£à S├⌐quelles de fracture-luxation de Monteggia (Main Dominante)
+  Taux      : 17%
+  Type      : proposal
+  Nom OK    : Γ£à | Taux OK: Γ£à
+  Path      : Membres Sup├⌐rieurs > Avant-bras - Fractures et Pseudarthroses
+
+≡ƒöº localExpertAnalysis V3.3.401 - pseudarthrose handler d├⌐di├⌐ (hum├⌐rus, f├⌐mur, tibia, coude, clavicule, avant-bras)
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): s├⌐quelles de fracture-luxation de Monteggia du c├┤t├⌐ gauche main non dominante avec raideur importante du coude et instabilit├⌐ r├⌐siduelle de la t├¬te radiale et limitation majeure de la prono-supination
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 1 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+≡ƒÆ¬ [V3.3.313] Monteggia d├⌐tect├⌐ ΓåÆ Bypass cumul, analyse directe via comprehensiveSingleLesionAnalysis
+≡ƒöì [M├ëTACARPIENS] Input brut: s├⌐quelles de fracture-luxation de monteggia du c├┤t├⌐ gauche main non dominante avec raideur importante du coude et instabilit├⌐ r├⌐siduelle de la t├¬te radiale et limitation majeure de la prono-supination et douleurs chroniques invalidantes et impossibilit├⌐ d extension compl├¿te du coude limit├⌐ ├á moins 30 degr├⌐s et flexion limit├⌐e ├á 100 degr├⌐s
+≡ƒöì [M├ëTACARPIENS] hasMetaWord: false
+≡ƒöì [M├ëTACARPIENS] hasSingleOrPerte: false
+≡ƒöì [M├ëTACARPIENS] hasSpecificFinger: false
+≡ƒöì [M├ëTACARPIENS] hasCinq: false
+ΓÜá∩╕Å [M├ëTACARPIENS] Pas de dialogue - continuons analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì [EARLY] Ant├⌐c├⌐dents d├⌐tect├⌐s: 0 - 
+   ≡ƒöä [V3.3.374] Laterality swap: MD ΓåÆ MND (S├⌐quelles de fracture-luxation de Monteggia (Main Non Dominante))
+Γ£à [EXPERT RULE MATCH - PRIORITY 10500] S├⌐quelles de fracture-luxation de Monteggia (Main Non Dominante) = [8-25] ΓåÆ 21% (coef: 0.75)
+ΓöÇΓöÇΓöÇ Cas 18 ΓöÇΓöÇΓöÇ
+  Description: Monteggia - s├⌐quelles s├⌐v├¿res MND
+  Input     : "s├⌐quelles de fracture-luxation de Monteggia du c├┤t├⌐ gauche main non dominante avec raideur importante du coude et instab..."
+  Attendu   : monteggia|Monteggia (8-25%)
+  Obtenu    : Γ£à S├⌐quelles de fracture-luxation de Monteggia (Main Non Dominante)
+  Taux      : 21%
+  Type      : proposal
+  Nom OK    : Γ£à | Taux OK: Γ£à
+  Path      : Membres Sup├⌐rieurs > Avant-bras - Fractures et Pseudarthroses
+
+≡ƒöº localExpertAnalysis V3.3.401 - pseudarthrose handler d├⌐di├⌐ (hum├⌐rus, f├⌐mur, tibia, coude, clavicule, avant-bras)
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): s├⌐quelles de fracture-luxation de Galeazzi du c├┤t├⌐ droit main dominante avec fracture du tiers inf├⌐rieur du radius et luxation radio-cubitale inf├⌐rieure trait├⌐e par ost├⌐osynth├¿se avec limitation mod├⌐r
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 1 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+≡ƒÆ¬ [V3.3.313] Galeazzi d├⌐tect├⌐ ΓåÆ Bypass cumul, analyse directe via comprehensiveSingleLesionAnalysis
+≡ƒöì [M├ëTACARPIENS] Input brut: s├⌐quelles de fracture-luxation de galeazzi du c├┤t├⌐ droit main dominante avec fracture du tiers inf├⌐rieur du radius et luxation radio-cubitale inf├⌐rieure trait├⌐e par ost├⌐osynth├¿se avec limitation mod├⌐r├⌐e de la prono-supination et douleurs lors des mouvements de rotation et instabilit├⌐ radio-cubitale inf├⌐rieure r├⌐siduelle
+≡ƒöì [M├ëTACARPIENS] hasMetaWord: false
+≡ƒöì [M├ëTACARPIENS] hasSingleOrPerte: false
+≡ƒöì [M├ëTACARPIENS] hasSpecificFinger: false
+≡ƒöì [M├ëTACARPIENS] hasCinq: false
+ΓÜá∩╕Å [M├ëTACARPIENS] Pas de dialogue - continuons analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì [EARLY] Ant├⌐c├⌐dents d├⌐tect├⌐s: 0 - 
+Γ£à [EXPERT RULE MATCH - PRIORITY 10500] S├⌐quelles de fracture-luxation de Galeazzi (Main Dominante) = [10-25] ΓåÆ 10% (coef: 0.00)
+ΓöÇΓöÇΓöÇ Cas 19 ΓöÇΓöÇΓöÇ
+  Description: Galeazzi - s├⌐quelles mod├⌐r├⌐es MD
+  Input     : "s├⌐quelles de fracture-luxation de Galeazzi du c├┤t├⌐ droit main dominante avec fracture du tiers inf├⌐rieur du radius et lu..."
+  Attendu   : galeazzi|Galeazzi (10-25%)
+  Obtenu    : Γ£à S├⌐quelles de fracture-luxation de Galeazzi (Main Dominante)
+  Taux      : 10%
+  Type      : proposal
+  Nom OK    : Γ£à | Taux OK: Γ£à
+  Path      : Membres Sup├⌐rieurs > Avant-bras - Fractures et Pseudarthroses
+
+≡ƒöº localExpertAnalysis V3.3.401 - pseudarthrose handler d├⌐di├⌐ (hum├⌐rus, f├⌐mur, tibia, coude, clavicule, avant-bras)
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): s├⌐quelles de fracture-luxation de Galeazzi du c├┤t├⌐ gauche main non dominante avec instabilit├⌐ radio-cubitale inf├⌐rieure chronique et limitation importante de la prono-supination avec supination bloqu├⌐
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 1 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+≡ƒÆ¬ [V3.3.313] Galeazzi d├⌐tect├⌐ ΓåÆ Bypass cumul, analyse directe via comprehensiveSingleLesionAnalysis
+≡ƒöì [M├ëTACARPIENS] Input brut: s├⌐quelles de fracture-luxation de galeazzi du c├┤t├⌐ gauche main non dominante avec instabilit├⌐ radio-cubitale inf├⌐rieure chronique et limitation importante de la prono-supination avec supination bloqu├⌐e ├á 30 degr├⌐s et douleurs chroniques au poignet et diminution de la force de serrage et g├¬ne fonctionnelle importante dans les activit├⌐s bimanuelles
+≡ƒöì [M├ëTACARPIENS] hasMetaWord: false
+≡ƒöì [M├ëTACARPIENS] hasSingleOrPerte: false
+≡ƒöì [M├ëTACARPIENS] hasSpecificFinger: false
+≡ƒöì [M├ëTACARPIENS] hasCinq: false
+ΓÜá∩╕Å [M├ëTACARPIENS] Pas de dialogue - continuons analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì [EARLY] Ant├⌐c├⌐dents d├⌐tect├⌐s: 0 - 
+Γ£à [EXPERT RULE MATCH - PRIORITY 10500] S├⌐quelles de fracture-luxation de Galeazzi (Main Dominante) = [10-25] ΓåÆ 18% (coef: 0.50)
+ΓöÇΓöÇΓöÇ Cas 20 ΓöÇΓöÇΓöÇ
+  Description: Galeazzi - s├⌐quelles s├⌐v├¿res MND
+  Input     : "s├⌐quelles de fracture-luxation de Galeazzi du c├┤t├⌐ gauche main non dominante avec instabilit├⌐ radio-cubitale inf├⌐rieure ..."
+  Attendu   : galeazzi|Galeazzi (8-20%)
+  Obtenu    : Γ£à S├⌐quelles de fracture-luxation de Galeazzi (Main Dominante)
+  Taux      : 18%
+  Type      : proposal
+  Nom OK    : Γ£à | Taux OK: Γ£à
+  Path      : Membres Sup├⌐rieurs > Avant-bras - Fractures et Pseudarthroses
+
+≡ƒöº localExpertAnalysis V3.3.401 - pseudarthrose handler d├⌐di├⌐ (hum├⌐rus, f├⌐mur, tibia, coude, clavicule, avant-bras)
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): synostose radio-cubitale post-traumatique de l'avant-bras droit main dominante suite ├á fracture des deux os avec fusion osseuse entre le radius et le cubitus au tiers moyen et blocage complet de la pr
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 1 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+≡ƒÆ¬ [V3.3.313] Synostose radio-cubitale d├⌐tect├⌐ ΓåÆ Bypass cumul, analyse directe via comprehensiveSingleLesionAnalysis
+≡ƒöì [M├ëTACARPIENS] Input brut: synostose radio-cubitale post-traumatique de l avant-bras droit main dominante suite ├á fracture des deux os avec fusion osseuse entre le radius et le cubitus au tiers moyen et blocage complet de la prono-supination en position neutre de fonction et impossibilit├⌐ totale de tourner la paume de la main vers le haut ou le bas et adaptation des gestes quotidiens par compensation au niveau de l ├⌐paule
+≡ƒöì [M├ëTACARPIENS] hasMetaWord: false
+≡ƒöì [M├ëTACARPIENS] hasSingleOrPerte: false
+≡ƒöì [M├ëTACARPIENS] hasSpecificFinger: false
+≡ƒöì [M├ëTACARPIENS] hasCinq: false
+ΓÜá∩╕Å [M├ëTACARPIENS] Pas de dialogue - continuons analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì [EARLY] Ant├⌐c├⌐dents d├⌐tect├⌐s: 0 - 
+Γ£à [EXPERT RULE MATCH - PRIORITY 10500] Synostose radio-cubitale post-traumatique (Main Dominante) = [15-25] ΓåÆ 15% (coef: 0.00)
+ΓöÇΓöÇΓöÇ Cas 21 ΓöÇΓöÇΓöÇ
+  Description: Synostose radio-cubitale - position neutre MD
+  Input     : "synostose radio-cubitale post-traumatique de l'avant-bras droit main dominante suite ├á fracture des deux os avec fusion ..."
+  Attendu   : synostose.*radio.cubitale|synostose (15-25%)
+  Obtenu    : Γ£à Synostose radio-cubitale post-traumatique (Main Dominante)
+  Taux      : 15%
+  Type      : proposal
+  Nom OK    : Γ£à | Taux OK: Γ£à
+  Path      : Membres Sup├⌐rieurs > Avant-bras - Fractures et Pseudarthroses
+
+≡ƒöº localExpertAnalysis V3.3.401 - pseudarthrose handler d├⌐di├⌐ (hum├⌐rus, f├⌐mur, tibia, coude, clavicule, avant-bras)
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): synostose radio-cubitale post-traumatique de l'avant-bras gauche main non dominante avec pont osseux entre radius et cubitus bloquant compl├¿tement la prono-supination en position de pronation et impos
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 0 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+≡ƒÆ¬ [V3.3.313] Synostose radio-cubitale d├⌐tect├⌐ ΓåÆ Bypass cumul, analyse directe via comprehensiveSingleLesionAnalysis
+≡ƒöì [M├ëTACARPIENS] Input brut: synostose radio-cubitale post-traumatique de l avant-bras gauche main non dominante avec pont osseux entre radius et cubitus bloquant compl├¿tement la prono-supination en position de pronation et impossibilit├⌐ de mettre la paume de la main vers le haut et g├¬ne fonctionnelle majeure pour les gestes n├⌐cessitant la supination
+≡ƒöì [M├ëTACARPIENS] hasMetaWord: false
+≡ƒöì [M├ëTACARPIENS] hasSingleOrPerte: false
+≡ƒöì [M├ëTACARPIENS] hasSpecificFinger: false
+≡ƒöì [M├ëTACARPIENS] hasCinq: false
+ΓÜá∩╕Å [M├ëTACARPIENS] Pas de dialogue - continuons analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì [EARLY] Ant├⌐c├⌐dents d├⌐tect├⌐s: 0 - 
+   ≡ƒöä [V3.3.374] Laterality swap: MD ΓåÆ MND (Synostose radio-cubitale post-traumatique (Main Non Dominante))
+Γ£à [EXPERT RULE MATCH - PRIORITY 10500] Synostose radio-cubitale post-traumatique (Main Non Dominante) = [12-20] ΓåÆ 12% (coef: 0.00)
+ΓöÇΓöÇΓöÇ Cas 22 ΓöÇΓöÇΓöÇ
+  Description: Synostose radio-cubitale - blocage pronation MND
+  Input     : "synostose radio-cubitale post-traumatique de l'avant-bras gauche main non dominante avec pont osseux entre radius et cub..."
+  Attendu   : synostose.*radio.cubitale|synostose (12-20%)
+  Obtenu    : Γ£à Synostose radio-cubitale post-traumatique (Main Non Dominante)
+  Taux      : 12%
+  Type      : proposal
+  Nom OK    : Γ£à | Taux OK: Γ£à
+  Path      : Membres Sup├⌐rieurs > Avant-bras - Fractures et Pseudarthroses
+
+≡ƒöº localExpertAnalysis V3.3.401 - pseudarthrose handler d├⌐di├⌐ (hum├⌐rus, f├⌐mur, tibia, coude, clavicule, avant-bras)
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): amputation de l'avant-bras droit main dominante au tiers sup├⌐rieur juste sous le coude suite ├á un accident de machine industrielle avec moignon court et proth├¿se fonctionnelle adapt├⌐e et douleurs du m
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 1 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+≡ƒª┐ [V3.3.229] AMPUTATION MEMBRE D├ëTECT├ëE ΓåÆ Analyse sp├⌐cialis├⌐e (site unique)
+ΓöÇΓöÇΓöÇ Cas 23 ΓöÇΓöÇΓöÇ
+  Description: Amputation avant-bras tiers sup├⌐rieur MD
+  Input     : "amputation de l'avant-bras droit main dominante au tiers sup├⌐rieur juste sous le coude suite ├á un accident de machine in..."
+  Attendu   : amputation.*avant.bras.*tiers.*sup[e├⌐]rieur|amputation.*l.avant.bras.*sup[e├⌐]rieur (65-70%)
+  Obtenu    : Γ£à Amputation de l'avant-bras (tiers sup├⌐rieur - Main Dominante)
+  Taux      : 70%
+  Type      : proposal
+  Nom OK    : Γ£à | Taux OK: Γ£à
+  Path      : Membres Sup├⌐rieurs > ├ëpaule - Amputation et D├⌐sarticulation
+
+≡ƒöº localExpertAnalysis V3.3.401 - pseudarthrose handler d├⌐di├⌐ (hum├⌐rus, f├⌐mur, tibia, coude, clavicule, avant-bras)
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): amputation de l'avant-bras gauche main non dominante au tiers moyen suite ├á un ├⌐crasement par machine agricole avec appareillage proth├⌐tique et adaptation satisfaisante et douleurs r├⌐siduelles du moig
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 1 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+≡ƒª┐ [V3.3.229] AMPUTATION MEMBRE D├ëTECT├ëE ΓåÆ Analyse sp├⌐cialis├⌐e (site unique)
+ΓöÇΓöÇΓöÇ Cas 24 ΓöÇΓöÇΓöÇ
+  Description: Amputation avant-bras tiers moyen MND
+  Input     : "amputation de l'avant-bras gauche main non dominante au tiers moyen suite ├á un ├⌐crasement par machine agricole avec appa..."
+  Attendu   : amputation.*avant.bras.*tiers.*moyen|amputation.*l.avant.bras.*moyen (50-55%)
+  Obtenu    : Γ£à Amputation de l'avant-bras (tiers moyen - Main Non Dominante)
+  Taux      : 53%
+  Type      : proposal
+  Nom OK    : Γ£à | Taux OK: Γ£à
+  Path      : Membres Sup├⌐rieurs > ├ëpaule - Amputation et D├⌐sarticulation
+
+≡ƒöº localExpertAnalysis V3.3.401 - pseudarthrose handler d├⌐di├⌐ (hum├⌐rus, f├⌐mur, tibia, coude, clavicule, avant-bras)
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): amputation de l'avant-bras droit main dominante au tiers inf├⌐rieur proche du poignet suite ├á un accident de la voie publique avec moignon long permettant un bon appareillage proth├⌐tique mais perte de 
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 1 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+≡ƒª┐ [V3.3.229] AMPUTATION MEMBRE D├ëTECT├ëE ΓåÆ Analyse sp├⌐cialis├⌐e (site unique)
+ΓöÇΓöÇΓöÇ Cas 25 ΓöÇΓöÇΓöÇ
+  Description: Amputation avant-bras tiers inf├⌐rieur MD
+  Input     : "amputation de l'avant-bras droit main dominante au tiers inf├⌐rieur proche du poignet suite ├á un accident de la voie publ..."
+  Attendu   : amputation.*avant.bras.*tiers.*inf[e├⌐]rieur|amputation.*l.avant.bras.*inf[e├⌐]rieur (55-60%)
+  Obtenu    : Γ£à Amputation de l'avant-bras (tiers inf├⌐rieur - Main Dominante)
+  Taux      : 58%
+  Type      : proposal
+  Nom OK    : Γ£à | Taux OK: Γ£à
+  Path      : Membres Sup├⌐rieurs > ├ëpaule - Amputation et D├⌐sarticulation
+
+≡ƒöº localExpertAnalysis V3.3.401 - pseudarthrose handler d├⌐di├⌐ (hum├⌐rus, f├⌐mur, tibia, coude, clavicule, avant-bras)
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): fracture de l'extr├⌐mit├⌐ inf├⌐rieure du radius droit main dominante type Pouteau-Colles par chute sur la paume de la main trait├⌐e par r├⌐duction et pl├ótre pendant 6 semaines avec consolidation parfaite s
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 1 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+≡ƒª┤ [V3.3.216] FRACTURE POUTEAU-COLLES / RADIUS DISTAL d├⌐tect├⌐e ΓåÆ Analyse sp├⌐cialis├⌐e (site unique)
+≡ƒª┤ [V3.3.216] Score s├⌐v├⌐rit├⌐ Pouteau-Colles: 0 | Dominance: dominante | Limitation: null% | EVA: null
+≡ƒª┤ [V3.3.216] S├⌐v├⌐rit├⌐: legeres | Fourchette: 5-10% | Taux final: 5%
+ΓöÇΓöÇΓöÇ Cas 26 ΓöÇΓöÇΓöÇ
+  Description: Fracture extr. inf. radius - consolidation parfaite MD
+  Input     : "fracture de l'extr├⌐mit├⌐ inf├⌐rieure du radius droit main dominante type Pouteau-Colles par chute sur la paume de la main ..."
+  Attendu   : fracture.*extr[e├⌐]mit[e├⌐].*inf[e├⌐]rieure.*radius.*S[e├⌐]quelles|Pouteau|fracture.*radius.*consolidation (3-10%)
+  Obtenu    : Γ£à Fracture de l'extr├⌐mit├⌐ inf├⌐rieure du radius - S├⌐quelles l├⌐g├¿res (Main Dominante)
+  Taux      : 5%
+  Type      : proposal
+  Nom OK    : Γ£à | Taux OK: Γ£à
+  Path      : Membres sup├⌐rieurs > Poignet - Fractures
+
+≡ƒöº localExpertAnalysis V3.3.401 - pseudarthrose handler d├⌐di├⌐ (hum├⌐rus, f├⌐mur, tibia, coude, clavicule, avant-bras)
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): fracture de l'extr├⌐mit├⌐ inf├⌐rieure du radius droit main dominante avec consolidation en l├⌐ger d├⌐placement et limitation des mouvements du poignet avec flexion palmaire ├á 40 degr├⌐s au lieu de 80 et ext
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 1 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+≡ƒª┤ [V3.3.216] FRACTURE POUTEAU-COLLES / RADIUS DISTAL d├⌐tect├⌐e ΓåÆ Analyse sp├⌐cialis├⌐e (site unique)
+≡ƒª┤ [V3.3.216] Score s├⌐v├⌐rit├⌐ Pouteau-Colles: 1 | Dominance: dominante | Limitation: null% | EVA: null
+≡ƒª┤ [V3.3.216] S├⌐v├⌐rit├⌐: legeres | Fourchette: 5-10% | Taux final: 9%
+ΓöÇΓöÇΓöÇ Cas 27 ΓöÇΓöÇΓöÇ
+  Description: Fracture extr. inf. radius - limitation mouvements MD
+  Input     : "fracture de l'extr├⌐mit├⌐ inf├⌐rieure du radius droit main dominante avec consolidation en l├⌐ger d├⌐placement et limitation ..."
+  Attendu   : fracture.*extr[e├⌐]mit[e├⌐].*inf[e├⌐]rieure.*radius.*S[e├⌐]quelles|fracture.*radius.*limitation|Pouteau (5-15%)
+  Obtenu    : Γ£à Fracture de l'extr├⌐mit├⌐ inf├⌐rieure du radius - S├⌐quelles l├⌐g├¿res (Main Dominante)
+  Taux      : 9%
+  Type      : proposal
+  Nom OK    : Γ£à | Taux OK: Γ£à
+  Path      : Membres sup├⌐rieurs > Poignet - Fractures
+
+≡ƒöº localExpertAnalysis V3.3.401 - pseudarthrose handler d├⌐di├⌐ (hum├⌐rus, f├⌐mur, tibia, coude, clavicule, avant-bras)
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): fracture de l'extr├⌐mit├⌐ inf├⌐rieure du radius gauche main non dominante type Pouteau-Colles avec consolidation en cal vicieux et d├⌐formation en dos de fourchette et raideur importante du poignet et syn
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 1 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+≡ƒª┤ [V3.3.216] FRACTURE POUTEAU-COLLES / RADIUS DISTAL d├⌐tect├⌐e ΓåÆ Analyse sp├⌐cialis├⌐e (site unique)
+≡ƒª┤ [V3.3.216] Score s├⌐v├⌐rit├⌐ Pouteau-Colles: 6 | Dominance: non_dominante | Limitation: null% | EVA: null
+≡ƒª┤ [V3.3.216] S├⌐v├⌐rit├⌐: graves | Fourchette: 18-25% | Taux final: 23%
+ΓöÇΓöÇΓöÇ Cas 28 ΓöÇΓöÇΓöÇ
+  Description: Fracture extr. inf. radius - raideur + d├⌐formation + troubles nerveux MND
+  Input     : "fracture de l'extr├⌐mit├⌐ inf├⌐rieure du radius gauche main non dominante type Pouteau-Colles avec consolidation en cal vic..."
+  Attendu   : fracture.*extr[e├⌐]mit[e├⌐].*inf[e├⌐]rieure.*radius.*S[e├⌐]quelles|fracture.*radius.*raideur|Pouteau (12-25%)
+  Obtenu    : Γ£à Fracture de l'extr├⌐mit├⌐ inf├⌐rieure du radius - S├⌐quelles graves (Main Non Dominante)
+  Taux      : 23%
+  Type      : proposal
+  Nom OK    : Γ£à | Taux OK: Γ£à
+  Path      : Membres sup├⌐rieurs > Poignet - Fractures
+
+≡ƒöº localExpertAnalysis V3.3.401 - pseudarthrose handler d├⌐di├⌐ (hum├⌐rus, f├⌐mur, tibia, coude, clavicule, avant-bras)
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): pseudarthrose du radius droit main dominante apr├¿s fracture diaphysaire avec absence de consolidation datant de plus d'un an et douleurs permanentes de l'avant-bras et limitation s├⌐v├¿re de la prono-su
+≡ƒª┤ [V3.3.401] HANDLER PSEUDARTHROSE: Pseudarthrose du radius (Main Dominante) ΓåÆ 22% (l├óche=false)
+ΓöÇΓöÇΓöÇ Cas 29 ΓöÇΓöÇΓöÇ
+  Description: Pseudarthrose du radius MD (variante: absence consolidation)
+  Input     : "pseudarthrose du radius droit main dominante apr├¿s fracture diaphysaire avec absence de consolidation datant de plus d'u..."
+  Attendu   : pseudarthrose.*radius (20-25%)
+  Obtenu    : Γ£à Pseudarthrose du radius (Main Dominante)
+  Taux      : 22%
+  Type      : proposal
+  Nom OK    : Γ£à | Taux OK: Γ£à
+  Path      : S├⌐quelles des Membres Sup├⌐rieurs > Avant-bras
+
+≡ƒöº localExpertAnalysis V3.3.401 - pseudarthrose handler d├⌐di├⌐ (hum├⌐rus, f├⌐mur, tibia, coude, clavicule, avant-bras)
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): s├⌐quelles graves de fracture-luxation de Monteggia du c├┤t├⌐ droit main dominante avec luxation inv├⌐t├⌐r├⌐e de la t├¬te radiale non r├⌐duite et raideur s├⌐v├¿re du coude en flexion limit├⌐e ├á 90 degr├⌐s et exte
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 1 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+≡ƒÆ¬ [V3.3.313] Monteggia d├⌐tect├⌐ ΓåÆ Bypass cumul, analyse directe via comprehensiveSingleLesionAnalysis
+≡ƒöì [M├ëTACARPIENS] Input brut: s├⌐quelles graves de fracture-luxation de monteggia du c├┤t├⌐ droit main dominante avec luxation inv├⌐t├⌐r├⌐e de la t├¬te radiale non r├⌐duite et raideur s├⌐v├¿re du coude en flexion limit├⌐e ├á 90 degr├⌐s et extension d├⌐ficitaire ├á moins 40 degr├⌐s et blocage complet de la prono-supination et instabilit├⌐ majeure et douleurs chroniques invalidantes et impossibilit├⌐ de port de charge
+≡ƒöì [M├ëTACARPIENS] hasMetaWord: false
+≡ƒöì [M├ëTACARPIENS] hasSingleOrPerte: false
+≡ƒöì [M├ëTACARPIENS] hasSpecificFinger: false
+≡ƒöì [M├ëTACARPIENS] hasCinq: false
+ΓÜá∩╕Å [M├ëTACARPIENS] Pas de dialogue - continuons analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì [EARLY] Ant├⌐c├⌐dents d├⌐tect├⌐s: 0 - 
+Γ£à [EXPERT RULE MATCH - PRIORITY 10500] S├⌐quelles de fracture-luxation de Monteggia (Main Dominante) = [10-30] ΓåÆ 20% (coef: 0.50)
+ΓöÇΓöÇΓöÇ Cas 30 ΓöÇΓöÇΓöÇ
+  Description: Monteggia - s├⌐quelles graves MD (haut du bar├¿me)
+  Input     : "s├⌐quelles graves de fracture-luxation de Monteggia du c├┤t├⌐ droit main dominante avec luxation inv├⌐t├⌐r├⌐e de la t├¬te radia..."
+  Attendu   : monteggia|Monteggia (10-30%)
+  Obtenu    : Γ£à S├⌐quelles de fracture-luxation de Monteggia (Main Dominante)
+  Taux      : 20%
+  Type      : proposal
+  Nom OK    : Γ£à | Taux OK: Γ£à
+  Path      : Membres Sup├⌐rieurs > Avant-bras - Fractures et Pseudarthroses
+
+ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ
+  R├ëSULTAT GLOBAL : 30/30 trouv├⌐s | 0/30 ├⌐chou├⌐s
+ΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉ

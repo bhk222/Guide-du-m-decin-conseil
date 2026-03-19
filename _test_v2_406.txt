@@ -1,0 +1,2550 @@
+ΓòöΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòù
+Γòæ  TEST D'INTELLIGENCE DE L'IA LOCALE V2 ΓÇö 42 cas cliniques    Γòæ
+ΓòÜΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓò¥
+
+≡ƒöº localExpertAnalysis V3.3.405 - fix blast auriculaire ORL (d├⌐chirure tympanique, cophose asym├⌐trique, acouph├¿nes invalidants)
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): fracture du radius consolid├⌐e avec l├⌐g├¿re raideur
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 1 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+≡ƒöì DEBUG STEPPAGE D├ëTAILL├ë:
+   - steppageMatch: false
+   - amyotrophieMIMatch: false
+   - fractureL1Match: false
+   - Texte analys├⌐: fracture du radius consolid├⌐e avec l├⌐g├¿re raideur
+Γ¥î STEPPAGE NON D├ëTECT├ë - Conditions non remplies
+≡ƒöì DEBUG D├ëVIATION:
+   - deviationMatch: false
+   - mainContext: false
+   - Recherche dans: diviation NON trouv├⌐
+≡ƒöì [V3.3.155] S├⌐quelles d├⌐tect├⌐es: 1 [ "Fracture de l'avant-bras (radius et/ou cubitus)" ]
+≡ƒöì V3.3.201k: isCumulDetected = false , lesionCount = 1
+≡ƒºá [V3.3.214] TC check: hasTC=false, hasNeuro=false, hasFocal=false, neuroCount=0
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 1 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+Γ£à CAS SIMPLE D├ëTECT├ë: 1 s├⌐quelle(s)
+≡ƒôÜ TROUV├ë DANS BAR├êME: "Fracture de l'avant-bras (radius et/ou cubitus)" ΓåÆ "Fracture des deux os de l'avant-bras - Bonne consolidation sans trouble fonctionnel (Main Dominante)" (3-6%)
+   ≡ƒôè [V3.3.365] Severity-adjusted bar├¿me: [3-6] ├ù coef 0.00 = 3%
+≡ƒöä REGROUPEMENT PAR SYST├êME: [ 'MEMBRE_SUPERIEUR: 12%' ]
+≡ƒº« CALCUL BALTHAZAR (PAR SYST├êME): [ 'MEMBRE_SUPERIEUR: 12%' ]
+≡ƒôè IPP GLOBAL CUMUL├ë: 12%
+  Γ£à # 1 Fracture simple en langage clair            ΓåÆ 12%  Membre sup├⌐rieur : Raideur articulaire avec limita
+≡ƒöº localExpertAnalysis V3.3.405 - fix blast auriculaire ORL (d├⌐chirure tympanique, cophose asym├⌐trique, acouph├¿nes invalidants)
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): rupture du ligament crois├⌐ ant├⌐rieur op├⌐r├⌐e avec instabilit├⌐ r├⌐siduelle
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 0 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+≡ƒöì DEBUG STEPPAGE D├ëTAILL├ë:
+   - steppageMatch: false
+   - amyotrophieMIMatch: false
+   - fractureL1Match: false
+   - Texte analys├⌐: rupture du ligament crois├⌐ ant├⌐rieur op├⌐r├⌐e avec instabilit├⌐ r├⌐siduelle
+Γ¥î STEPPAGE NON D├ëTECT├ë - Conditions non remplies
+≡ƒöì DEBUG D├ëVIATION:
+   - deviationMatch: false
+   - mainContext: false
+   - Recherche dans: diviation NON trouv├⌐
+≡ƒöì [V3.3.155] S├⌐quelles d├⌐tect├⌐es: 1 [ 'S├⌐quelles de rupture du ligament crois├⌐ ant├⌐rieur (LCA)' ]
+≡ƒöì V3.3.201k: isCumulDetected = true , lesionCount = 2
+ΓÜá∩╕Å V3.3.201j: CUMUL D├ëTECT├ë ΓåÆ SKIP regroupement par syst├¿me, passage direct ├á extraction l├⌐sions individuelles
+≡ƒöì DEBUG M├ëTACARPIENS - Texte normalis├⌐: rupture ligament croise anterieur avec instabilite residuelle lca croise anterieur pivot central lca ligament croise anterieur pivot central lca ligament croise anterieur croise anterieur etat anterieur etat anterieur antecedent
+≡ƒöì DEBUG M├ëTACARPIENS - hasMetacarpienWord: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSingleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasMultipleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSpecificFingerEarly: false
+≡ƒöì DEBUG M├ëTACARPIENS - isMetacarpienSingleQueryEarly: false
+≡ƒöì V3.3.139: V├⌐rification cumul prioritaire...
+≡ƒöì Query words: rupture, ligament, croise, anterieur, operee, avec, instabilite, residuelle
+≡ƒöì Cat├⌐gorie cumul trouv├⌐e: Cumuls de L├⌐sions et Polytraumatismes
+≡ƒöì Entr├⌐es avec searchTerms v├⌐rifi├⌐es: 51, meilleur score: 0.0%
+Γä╣∩╕Å Aucun cumul prioritaire trouv├⌐ (similarit├⌐ < 70%), continue avec analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒª╢ [V3.3.317] hasMTPLuxation: false hasMetaFracture: false hasTSLO: false hasFootContext: false
+≡ƒöì isCumulDetected: true lesionCount: 2
+≡ƒöì CUMUL D├ëTECT├ë - Extraction des l├⌐sions individuelles
+≡ƒô¥ text original: rupture du ligament crois├⌐ ant├⌐rieur op├⌐r├⌐e avec instabilit├⌐ r├⌐siduelle
+≡ƒô¥ finalCleanedText: rupture du ligament crois├⌐ ant├⌐rieur op├⌐r├⌐e avec instabilit├⌐ r├⌐siduelle
+≡ƒöº extractIndividualLesions V3.3.211 - avec Pattern 0C-ter + 0C-quater
+≡ƒöì extractIndividualLesions - texte d'entr├⌐e: rupture du ligament crois├⌐ ant├⌐rieur op├⌐r├⌐e avec instabilit├⌐ r├⌐siduelle
+≡ƒöì Pattern 0B - Extraction polytraumatisme membre (V3.3.201L):
+  fractureMatch: NULL
+  ligamentMatch: rupture du ligament croise anterieur 
+  muscleMatch: NULL
+  raideurMatch: NULL
+  algiesMatch: NULL
+  deficitForceMatch: NULL
+  componentCount: 1
+  Condition activ├⌐e: false
+Γ¥î Pattern 0B NON ACTIV├ë: componentCount < 3
+ΓÜá∩╕Å Aucun pattern de cumul d├⌐tect├⌐, retour texte original
+≡ƒôï L├⌐sions extraites: [
+  'rupture du ligament croise anterieur operee avec instabilite residuelle'
+] Nombre: 1
+≡ƒöì [M├ëTACARPIENS] Input brut: rupture du ligament crois├⌐ ant├⌐rieur op├⌐r├⌐e avec instabilit├⌐ r├⌐siduelle
+≡ƒöì [M├ëTACARPIENS] hasMetaWord: false
+≡ƒöì [M├ëTACARPIENS] hasSingleOrPerte: false
+≡ƒöì [M├ëTACARPIENS] hasSpecificFinger: false
+≡ƒöì [M├ëTACARPIENS] hasCinq: false
+ΓÜá∩╕Å [M├ëTACARPIENS] Pas de dialogue - continuons analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì [EARLY] Ant├⌐c├⌐dents d├⌐tect├⌐s: 0 - 
+≡ƒöì [CUMUL D├ëTECT├ë EN AVANCE] 2 l├⌐sions - SKIP R├êGLES EXPERTES SIMPLES
+≡ƒöì [determineSeverity] Text: rupture du ligament croise anterieur operee avec instabilite residuelle
+≡ƒöì [determineSeverity] Faible signs: []
+≡ƒöì [determineSeverity] High signs: [ 'instabilite', 'opere', 'operee' ]
+  Γ£à # 2 Rupture LCA op├⌐r├⌐e                          ΓåÆ 25%  S├⌐quelles de rupture du ligament crois├⌐ ant├⌐rieur 
+≡ƒöº localExpertAnalysis V3.3.405 - fix blast auriculaire ORL (d├⌐chirure tympanique, cophose asym├⌐trique, acouph├¿nes invalidants)
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): amputation du pouce de la main droite
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 1 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+Γ£é∩╕Å [V3.3.219] AMPUTATION DOIGT d├⌐tect├⌐e ΓåÆ Analyse sp├⌐cialis├⌐e avec niveau (site unique)
+Γ£é∩╕Å [V3.3.219] Doigt: pouce (D1) | Niveau: total | Main Dominante | Position: 0 | Taux: 20%
+  Γ£à # 3 Amputation d'un doigt - pouce               ΓåÆ 20%  Amputation du pouce (main dominante)
+≡ƒöº localExpertAnalysis V3.3.405 - fix blast auriculaire ORL (d├⌐chirure tympanique, cophose asym├⌐trique, acouph├¿nes invalidants)
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): j'ai le genou p├⌐t├⌐ suite ├á una chute
+   - Texte apr├¿s normalisation SMS: j'ai le genou fracture  suite ├á una chute
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 0 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+≡ƒöì DEBUG STEPPAGE D├ëTAILL├ë:
+   - steppageMatch: false
+   - amyotrophieMIMatch: false
+   - fractureL1Match: false
+   - Texte analys├⌐: j'ai le genou fracture  suite ├á una chute
+Γ¥î STEPPAGE NON D├ëTECT├ë - Conditions non remplies
+≡ƒöì DEBUG D├ëVIATION:
+   - deviationMatch: false
+   - mainContext: false
+   - Recherche dans: diviation NON trouv├⌐
+≡ƒöì [V3.3.155] S├⌐quelles d├⌐tect├⌐es: 0 []
+≡ƒöì V3.3.201k: isCumulDetected = false , lesionCount = 1
+≡ƒöì DEBUG M├ëTACARPIENS - Texte normalis├⌐: j ai genou fracture a chute cassure fissure bris fracture fissure bris fracture cassure bris fracture cassure fissure femoro tibiale femoro patellaire articulation genou genou femoro patellaire articulation genou genou femoro tibiale articulation genou genou femoro tibiale femoro patellaire
+≡ƒöì DEBUG M├ëTACARPIENS - hasMetacarpienWord: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSingleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasMultipleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSpecificFingerEarly: false
+≡ƒöì DEBUG M├ëTACARPIENS - isMetacarpienSingleQueryEarly: false
+≡ƒöì V3.3.139: V├⌐rification cumul prioritaire...
+≡ƒöì Query words: genou, fracture, suite, una, chute
+≡ƒöì Cat├⌐gorie cumul trouv├⌐e: Cumuls de L├⌐sions et Polytraumatismes
+≡ƒöì Entr├⌐es avec searchTerms v├⌐rifi├⌐es: 51, meilleur score: 0.0%
+Γä╣∩╕Å Aucun cumul prioritaire trouv├⌐ (similarit├⌐ < 70%), continue avec analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒª╢ [V3.3.317] hasMTPLuxation: false hasMetaFracture: false hasTSLO: false hasFootContext: false
+≡ƒöì isCumulDetected: false lesionCount: 1
+≡ƒöì [M├ëTACARPIENS] Input brut: j ai le genou fracture suite ├á una chute
+≡ƒöì [M├ëTACARPIENS] hasMetaWord: false
+≡ƒöì [M├ëTACARPIENS] hasSingleOrPerte: false
+≡ƒöì [M├ëTACARPIENS] hasSpecificFinger: false
+≡ƒöì [M├ëTACARPIENS] hasCinq: false
+ΓÜá∩╕Å [M├ëTACARPIENS] Pas de dialogue - continuons analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì [EARLY] Ant├⌐c├⌐dents d├⌐tect├⌐s: 0 - 
+≡ƒöì [DEBUG EXPERT RULE - EARLY TEST]
+Pattern: /contusion.*cerebrale|traumatisme.*crani.*contusion/i
+Context: /perte.*connaissance|frontale|temporale|parietale|breve|courte|surveillance.*neurologique/i
+NegativeContext: /spondylo|listthesis|glissement.*vertebral/i
+CleanText: "j ai le genou fracture suite a una chute"
+patternMatchClean: false, contextMatchClean: false
+negContextMatchClean: false, negContextMatchWorking: false
+matchClean: false, matchWorking: false
+≡ƒöì [DEBUG EXPERT RULE - EARLY TEST]
+Pattern: /spondylolisthesis|spondylo.*listhesis|listthesis|glissement\s+vertebral/i
+Context: /lombaire|L\d|S\d|rachis|traumatisme|post-traumatique/i
+NegativeContext: /contusion.*cerebrale|perte.*connaissance|mandibule|genou|polytraumatisme|chute.*echafaudage/i
+CleanText: "j ai le genou fracture suite a una chute"
+patternMatchClean: false, contextMatchClean: false
+negContextMatchClean: true, negContextMatchWorking: true
+matchClean: false, matchWorking: false
+≡ƒÄ» TOP 50 R├ëSULTATS: [
+  {
+    name: 'Fracture des plateaux tibiaux - Avec d├⌐viation et/ou raideur',
+    score: 827,
+    path: 'Membres Inf├⌐rieurs > Genou - L├⌐sions Osseuses et Articulaires'
+  },
+  {
+    name: 'Arthrose f├⌐moro-patellaire ou f├⌐moro-tibiale post-traumatique',
+    score: 799,
+    path: 'Membres Inf├⌐rieurs > Genou - L├⌐sions Osseuses et Articulaires'
+  },
+  {
+    name: 'Fracture isol├⌐e du tibia',
+    score: 717,
+    path: 'Membres Inf├⌐rieurs > Jambe - Fractures'
+  },
+  {
+    name: 'Fracture du pilon tibial',
+    score: 676,
+    path: 'Membres Inf├⌐rieurs > Cheville (Cou-de-pied) - Fractures'
+  },
+  {
+    name: 'Fracture de la rotule - Avec g├¬ne fonctionnelle',
+    score: 642,
+    path: 'Membres Inf├⌐rieurs > Genou - L├⌐sions Osseuses et Articulaires'
+  },
+  {
+    name: 'Plateaux tibiaux + raideur + arthrose (cumul)',
+    score: 507,
+    path: 'Cumuls de L├⌐sions et Polytraumatismes > Cumuls Simples - M├¬me Membre'
+  },
+  {
+    name: 'M├⌐niscectomie + chondropathie s├⌐v├¿re (cumul)',
+    score: 499,
+    path: 'Cumuls de L├⌐sions et Polytraumatismes > Cumuls Simples - M├¬me Membre'
+  },
+  {
+    name: 'Fracture genou sur gonarthrose pr├⌐existante',
+    score: 471,
+    path: '├ëtats Ant├⌐rieurs et Aggravation de Pathologies Pr├⌐existantes > Aggravation Genou sur ├ëtat Ant├⌐rieur'
+  },
+  {
+    name: 'Syndrome du tunnel tarsien (compression nerf tibial post├⌐rieur)',
+    score: 427,
+    path: 'Membres Inf├⌐rieurs > Pied - Pathologies des tissus mous'
+  },
+  {
+    name: "Laxit├⌐ chronique du genou (s├⌐quelle d'entorse)",
+    score: 273,
+    path: 'Membres Inf├⌐rieurs > Genou - L├⌐sions Ligamentaires et M├⌐niscales'
+  },
+  {
+    name: 'Hydarthrose chronique du genou',
+    score: 272,
+    path: 'Membres Inf├⌐rieurs > Genou - L├⌐sions Osseuses et Articulaires'
+  },
+  {
+    name: 'S├⌐quelles de proth├¿se totale de genou',
+    score: 272,
+    path: 'Membres Inf├⌐rieurs > Genou - L├⌐sions Osseuses et Articulaires'
+  },
+  {
+    name: 'D├⌐chirure/rupture ligament lat├⌐ral interne (LLI) - ligament collat├⌐ral m├⌐dial genou',
+    score: 272,
+    path: 'Membres Inf├⌐rieurs > Genou - L├⌐sions Ligamentaires et M├⌐niscales'
+  },
+  {
+    name: 'D├⌐chirure/rupture ligament lat├⌐ral externe (LLE) - ligament collat├⌐ral lat├⌐ral genou',
+    score: 272,
+    path: 'Membres Inf├⌐rieurs > Genou - L├⌐sions Ligamentaires et M├⌐niscales'
+  },
+  {
+    name: 'Raideur genou sur proth├¿se pr├⌐existante',
+    score: 232,
+    path: '├ëtats Ant├⌐rieurs et Aggravation de Pathologies Pr├⌐existantes > Aggravation Genou sur ├ëtat Ant├⌐rieur'
+  },
+  {
+    name: 'Chondropathie aggrav├⌐e sur arthrose genou',
+    score: 221,
+    path: '├ëtats Ant├⌐rieurs et Aggravation de Pathologies Pr├⌐existantes > Aggravation Genou sur ├ëtat Ant├⌐rieur'
+  },
+  {
+    name: 'S├⌐quelles de rupture du ligament crois├⌐ ant├⌐rieur (LCA)',
+    score: 192,
+    path: 'Membres Inf├⌐rieurs > Genou - L├⌐sions Ligamentaires et M├⌐niscales'
+  },
+  {
+    name: 'S├⌐quelles de rupture du ligament crois├⌐ post├⌐rieur (LCP)',
+    score: 192,
+    path: 'Membres Inf├⌐rieurs > Genou - L├⌐sions Ligamentaires et M├⌐niscales'
+  },
+  {
+    name: 'S├⌐quelles de m├⌐niscectomie (douleurs, hydarthrose)',
+    score: 192,
+    path: 'Membres Inf├⌐rieurs > Genou - L├⌐sions Ligamentaires et M├⌐niscales'
+  },
+  {
+    name: 'Raideur genou + instabilit├⌐ LCA (cumul)',
+    score: 192,
+    path: 'Cumuls de L├⌐sions et Polytraumatismes > Cumuls Simples - M├¬me Membre'
+  },
+  {
+    name: 'Raideur genou + d├⌐robements',
+    score: 192,
+    path: 'Cumuls de L├⌐sions et Polytraumatismes > Cumuls Simples - M├¬me Membre'
+  },
+  {
+    name: 'Destruction genou (polytraumatisme intra-articulaire)',
+    score: 192,
+    path: 'Cumuls de L├⌐sions et Polytraumatismes > Polytraumatismes - Membres Multiples'
+  },
+  {
+    name: 'Polytraumatisme vision + audition + genou',
+    score: 181,
+    path: 'Cumuls de L├⌐sions et Polytraumatismes > Polytraumatismes - Membres Multiples'
+  },
+  {
+    name: '├ëlongation/d├⌐chirure musculaire quadriceps - Tendinopathie quadricipitale (s├⌐quelles)',
+    score: 163,
+    path: 'Membres Inf├⌐rieurs > Cuisse - L├⌐sions Musculaires et Tendineuses'
+  },
+  {
+    name: 'Rupture du tendon quadricipital',
+    score: 152,
+    path: 'Membres Inf├⌐rieurs > Cuisse - L├⌐sions Musculaires et Tendineuses'
+  },
+  {
+    name: 'Entorse LCA sur m├⌐niscectomie ancienne',
+    score: 141,
+    path: '├ëtats Ant├⌐rieurs et Aggravation de Pathologies Pr├⌐existantes > Aggravation Genou sur ├ëtat Ant├⌐rieur'
+  },
+  {
+    name: "Syndrome des loges chronique d'effort de la jambe",
+    score: 123,
+    path: 'Membres Inf├⌐rieurs > Jambe - Fractures'
+  },
+  {
+    name: 'LCA + m├⌐niscectomie + instabilit├⌐ (cumul)',
+    score: 101,
+    path: 'Cumuls de L├⌐sions et Polytraumatismes > Cumuls Simples - M├¬me Membre'
+  },
+  {
+    name: 'Polytraumatisme membre inf├⌐rieur droit complet',
+    score: 101,
+    path: 'Cumuls de L├⌐sions et Polytraumatismes > Polytraumatismes - Membres Multiples'
+  },
+  {
+    name: 'S├⌐quelles de l├⌐sions musculaires majeures de la cuisse',
+    score: 73,
+    path: 'Membres Inf├⌐rieurs > Cuisse - L├⌐sions Musculaires et Tendineuses'
+  },
+  {
+    name: 'Apon├⌐vrosite plantaire (fasciite plantaire) chronique post-traumatique',
+    score: 63,
+    path: 'Membres Inf├⌐rieurs > Pied - Pathologies des tissus mous'
+  },
+  {
+    name: 'Luxation + instabilit├⌐ + raideur ├⌐paule (cumul)',
+    score: 62,
+    path: 'Cumuls de L├⌐sions et Polytraumatismes > Cumuls Simples - M├¬me Membre'
+  },
+  {
+    name: "Fracture de l'extr├⌐mit├⌐ inf├⌐rieure du f├⌐mur - Avec raideur du genou",
+    score: 59.42,
+    path: 'Membres Inf├⌐rieurs > Cuisse - Fractures'
+  },
+  {
+    name: 'Fracture des condyles f├⌐moraux - Avec d├⌐viation et/ou raideur',
+    score: 54.02,
+    path: 'Membres Inf├⌐rieurs > Genou - L├⌐sions Osseuses et Articulaires'
+  },
+  {
+    name: 'Fracture diaphysaire du f├⌐mur',
+    score: 53.63,
+    path: 'Membres Inf├⌐rieurs > Cuisse - Fractures'
+  },
+  {
+    name: 'Fracture du col du f├⌐mur - Consolidation avec raccourcissement et raideur',
+    score: 52.62,
+    path: 'Membres Inf├⌐rieurs > Hanche - Fractures'
+  },
+  {
+    name: 'Fracture du massif trochant├⌐rien - Cal vicieux et raideur',
+    score: 52.62,
+    path: 'Membres Inf├⌐rieurs > Hanche - Fractures'
+  },
+  {
+    name: 'Fracture du massif trochant├⌐rien - Bonne consolidation',
+    score: 52.52,
+    path: 'Membres Inf├⌐rieurs > Hanche - Fractures'
+  },
+  {
+    name: 'Fracture du calcan├⌐um bilat├⌐rale - Avec douleurs et boiterie',
+    score: 52.52,
+    path: 'Membres Inf├⌐rieurs > Pied - Fractures'
+  },
+  {
+    name: "Fracture de l'astragale (Talus) - Avec cal vicieux",
+    score: 52.51,
+    path: 'Membres Inf├⌐rieurs > Pied - Fractures'
+  },
+  {
+    name: 'Fracture du calcan├⌐um - Avec douleurs et boiterie',
+    score: 52.51,
+    path: 'Membres Inf├⌐rieurs > Pied - Fractures'
+  },
+  {
+    name: 'Fracture des m├⌐tatarsiens - Avec douleurs ├á la marche',
+    score: 52.51,
+    path: 'Membres Inf├⌐rieurs > Pied - Fractures'
+  },
+  {
+    name: 'S├⌐quelles de fracture/luxation du rachis lombaire (sans l├⌐sion neurologique)',
+    score: 52.12,
+    path: 'S├⌐quelles du Rachis, du Bassin et de la Moelle ├ëpini├¿re > Rachis'
+  },
+  {
+    name: "Fracture isol├⌐e d'une branche pubienne ou de l'aile iliaque (sans d├⌐placement)",
+    score: 52.12,
+    path: 'S├⌐quelles du Rachis, du Bassin et de la Moelle ├ëpini├¿re > Bassin - L├⌐sions Osseuses'
+  },
+  {
+    name: 'Fracture radius + raideur + d├⌐ficit force (cumul)',
+    score: 52.12,
+    path: 'Cumuls de L├⌐sions et Polytraumatismes > Cumuls Simples - M├¬me Membre'
+  },
+  {
+    name: 'Fracture radius + lombalgie post-traumatique (cumul)',
+    score: 52.03,
+    path: 'Cumuls de L├⌐sions et Polytraumatismes > Polytraumatismes - Membres Multiples'
+  },
+  {
+    name: 'S├⌐quelles de fracture/luxation du rachis cervical (sans l├⌐sion neurologique)',
+    score: 52.02,
+    path: 'S├⌐quelles du Rachis, du Bassin et de la Moelle ├ëpini├¿re > Rachis'
+  },
+  {
+    name: "Fracture complexe de l'anneau pelvien avec s├⌐quelles importantes (boiterie, douleurs)",
+    score: 52.02,
+    path: 'S├⌐quelles du Rachis, du Bassin et de la Moelle ├ëpini├¿re > Bassin - L├⌐sions Osseuses'
+  },
+  {
+    name: 'N├⌐vralgie pudendale post-traumatique (fracture du bassin)',
+    score: 52.02,
+    path: 'S├⌐quelles du Rachis, du Bassin et de la Moelle ├ëpini├¿re > Bassin - L├⌐sions Osseuses'
+  },
+  {
+    name: 'Fracture isol├⌐e du sternum - simple',
+    score: 52.02,
+    path: 'S├⌐quelles Thoraciques, Abdominales, Pelviennes et Cardio-vasculaires > Thorax - Paroi Osseuse'
+  }
+]
+≡ƒöì Contexte anatomique d├⌐tect├⌐: membreInf
+Γ£à Filtrage anatomique: 2 ΓåÆ 2 choix
+  Γ£à # 4 Langage familier - genou cass├⌐              ΓåÆ 20%  
+≡ƒöº localExpertAnalysis V3.3.405 - fix blast auriculaire ORL (d├⌐chirure tympanique, cophose asym├⌐trique, acouph├¿nes invalidants)
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): ├⌐paule d├⌐boit├⌐e qui revient pas bien en place
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 0 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+≡ƒöì DEBUG STEPPAGE D├ëTAILL├ë:
+   - steppageMatch: false
+   - amyotrophieMIMatch: false
+   - fractureL1Match: false
+   - Texte analys├⌐: ├⌐paule d├⌐boit├⌐e qui revient pas bien en place
+Γ¥î STEPPAGE NON D├ëTECT├ë - Conditions non remplies
+≡ƒöì DEBUG D├ëVIATION:
+   - deviationMatch: false
+   - mainContext: false
+   - Recherche dans: diviation NON trouv├⌐
+≡ƒöì [V3.3.155] S├⌐quelles d├⌐tect├⌐es: 0 []
+≡ƒöì V3.3.201k: isCumulDetected = false , lesionCount = 1
+≡ƒöì DEBUG M├ëTACARPIENS - Texte normalis├⌐: epaule deboitee qui revient pas bien en place scapulo humeral gleno humeral articulation epaule epaule gleno humeral articulation epaule epaule scapulo humeral articulation epaule epaule scapulo humeral gleno humeral epaule scapulo humeral gleno humeral
+≡ƒöì DEBUG M├ëTACARPIENS - hasMetacarpienWord: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSingleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasMultipleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSpecificFingerEarly: false
+≡ƒöì DEBUG M├ëTACARPIENS - isMetacarpienSingleQueryEarly: false
+≡ƒöì V3.3.139: V├⌐rification cumul prioritaire...
+≡ƒöì Query words: epaule, deboitee, qui, revient, pas, bien, place
+≡ƒöì Cat├⌐gorie cumul trouv├⌐e: Cumuls de L├⌐sions et Polytraumatismes
+≡ƒöì Entr├⌐es avec searchTerms v├⌐rifi├⌐es: 51, meilleur score: 0.0%
+Γä╣∩╕Å Aucun cumul prioritaire trouv├⌐ (similarit├⌐ < 70%), continue avec analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒª╢ [V3.3.317] hasMTPLuxation: false hasMetaFracture: false hasTSLO: false hasFootContext: false
+≡ƒöì isCumulDetected: false lesionCount: 1
+≡ƒöì [M├ëTACARPIENS] Input brut: ├⌐paule d├⌐boit├⌐e qui revient pas bien en place
+≡ƒöì [M├ëTACARPIENS] hasMetaWord: false
+≡ƒöì [M├ëTACARPIENS] hasSingleOrPerte: false
+≡ƒöì [M├ëTACARPIENS] hasSpecificFinger: false
+≡ƒöì [M├ëTACARPIENS] hasCinq: false
+ΓÜá∩╕Å [M├ëTACARPIENS] Pas de dialogue - continuons analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì [EARLY] Ant├⌐c├⌐dents d├⌐tect├⌐s: 0 - 
+≡ƒöì [DEBUG EXPERT RULE - EARLY TEST]
+Pattern: /contusion.*cerebrale|traumatisme.*crani.*contusion/i
+Context: /perte.*connaissance|frontale|temporale|parietale|breve|courte|surveillance.*neurologique/i
+NegativeContext: /spondylo|listthesis|glissement.*vertebral/i
+CleanText: "epaule deboitee qui revient pas bien en place"
+patternMatchClean: false, contextMatchClean: false
+negContextMatchClean: false, negContextMatchWorking: false
+matchClean: false, matchWorking: false
+≡ƒöì [DEBUG EXPERT RULE - EARLY TEST]
+Pattern: /spondylolisthesis|spondylo.*listhesis|listthesis|glissement\s+vertebral/i
+Context: /lombaire|L\d|S\d|rachis|traumatisme|post-traumatique/i
+NegativeContext: /contusion.*cerebrale|perte.*connaissance|mandibule|genou|polytraumatisme|chute.*echafaudage/i
+CleanText: "epaule deboitee qui revient pas bien en place"
+patternMatchClean: false, contextMatchClean: false
+negContextMatchClean: false, negContextMatchWorking: false
+matchClean: false, matchWorking: false
+≡ƒÄ» TOP 50 R├ëSULTATS: [
+  {
+    name: "Fracture de la t├¬te hum├⌐rale avec raideur importante de l'├⌐paule (Main Dominante)",
+    score: 263,
+    path: "Membres Sup├⌐rieurs > ├ëpaule - Fractures de l'Extr├⌐mit├⌐ Sup├⌐rieure de l'Hum├⌐rus"
+  },
+  {
+    name: "Fracture de la t├¬te hum├⌐rale avec raideur importante de l'├⌐paule (Main Non Dominante)",
+    score: 263,
+    path: "Membres Sup├⌐rieurs > ├ëpaule - Fractures de l'Extr├⌐mit├⌐ Sup├⌐rieure de l'Hum├⌐rus"
+  },
+  {
+    name: 'Luxation ├⌐paule sur omarthrose pr├⌐existante',
+    score: 254,
+    path: '├ëtats Ant├⌐rieurs et Aggravation de Pathologies Pr├⌐existantes > Aggravation ├ëpaule sur ├ëtat Ant├⌐rieur'
+  },
+  {
+    name: 'Fracture du col chirurgical avec cal vicieux important et abduction limit├⌐e (Main Dominante)',
+    score: 242,
+    path: "Membres Sup├⌐rieurs > ├ëpaule - Fractures de l'Extr├⌐mit├⌐ Sup├⌐rieure de l'Hum├⌐rus"
+  },
+  {
+    name: 'Fracture du col chirurgical avec cal vicieux important et abduction limit├⌐e (Main Non Dominante)',
+    score: 242,
+    path: "Membres Sup├⌐rieurs > ├ëpaule - Fractures de l'Extr├⌐mit├⌐ Sup├⌐rieure de l'Hum├⌐rus"
+  },
+  {
+    name: 'Fracture du col chirurgical avec raccourcissement et g├¬ne mod├⌐r├⌐e (Main Dominante)',
+    score: 242,
+    path: "Membres Sup├⌐rieurs > ├ëpaule - Fractures de l'Extr├⌐mit├⌐ Sup├⌐rieure de l'Hum├⌐rus"
+  },
+  {
+    name: 'Fracture du col chirurgical avec raccourcissement et g├¬ne mod├⌐r├⌐e (Main Non Dominante)',
+    score: 242,
+    path: "Membres Sup├⌐rieurs > ├ëpaule - Fractures de l'Extr├⌐mit├⌐ Sup├⌐rieure de l'Hum├⌐rus"
+  },
+  {
+    name: "Fracture du trochiter avec limitation de l'abduction et rotation (Main Dominante)",
+    score: 242,
+    path: "Membres Sup├⌐rieurs > ├ëpaule - Fractures de l'Extr├⌐mit├⌐ Sup├⌐rieure de l'Hum├⌐rus"
+  },
+  {
+    name: "Fracture du trochiter avec limitation de l'abduction et rotation (Main Non Dominante)",
+    score: 242,
+    path: "Membres Sup├⌐rieurs > ├ëpaule - Fractures de l'Extr├⌐mit├⌐ Sup├⌐rieure de l'Hum├⌐rus"
+  },
+  {
+    name: 'Fracture du trochin avec limitation de la rotation interne (Main Dominante)',
+    score: 242,
+    path: "Membres Sup├⌐rieurs > ├ëpaule - Fractures de l'Extr├⌐mit├⌐ Sup├⌐rieure de l'Hum├⌐rus"
+  },
+  {
+    name: 'Fracture du trochin avec limitation de la rotation interne (Main Non Dominante)',
+    score: 242,
+    path: "Membres Sup├⌐rieurs > ├ëpaule - Fractures de l'Extr├⌐mit├⌐ Sup├⌐rieure de l'Hum├⌐rus"
+  },
+  {
+    name: "Fracture de l'hum├⌐rus normalement consolid├⌐e (Main Dominante)",
+    score: 242,
+    path: 'Membres Sup├⌐rieurs > Bras - Fractures et L├⌐sions Musculaires'
+  },
+  {
+    name: "Fracture de l'hum├⌐rus normalement consolid├⌐e (Main Non Dominante)",
+    score: 241,
+    path: 'Membres Sup├⌐rieurs > Bras - Fractures et L├⌐sions Musculaires'
+  },
+  {
+    name: 'Fracture de la t├¬te hum├⌐rale avec blocage et impotence fonctionnelle quasi totale (Main Dominante)',
+    score: 200.53,
+    path: "Membres Sup├⌐rieurs > ├ëpaule - Fractures de l'Extr├⌐mit├⌐ Sup├⌐rieure de l'Hum├⌐rus"
+  },
+  {
+    name: 'Fracture de la t├¬te hum├⌐rale avec blocage et impotence fonctionnelle quasi totale (Main Non Dominante)',
+    score: 200.53,
+    path: "Membres Sup├⌐rieurs > ├ëpaule - Fractures de l'Extr├⌐mit├⌐ Sup├⌐rieure de l'Hum├⌐rus"
+  },
+  {
+    name: 'Capsulite r├⌐tractile post-traumatique (├⌐paule gel├⌐e) (Main Dominante)',
+    score: 53,
+    path: 'Membres Sup├⌐rieurs > ├ëpaule - L├⌐sions Diverses'
+  },
+  {
+    name: "Luxation r├⌐cidivante de l'├⌐paule (Main Dominante)",
+    score: 52,
+    path: 'Membres Sup├⌐rieurs > ├ëpaule - L├⌐sions Diverses'
+  },
+  {
+    name: "Luxation r├⌐cidivante de l'├⌐paule (Main Non Dominante)",
+    score: 52,
+    path: 'Membres Sup├⌐rieurs > ├ëpaule - L├⌐sions Diverses'
+  },
+  {
+    name: 'Capsulite r├⌐tractile post-traumatique (├⌐paule gel├⌐e) (Main Non Dominante)',
+    score: 52,
+    path: 'Membres Sup├⌐rieurs > ├ëpaule - L├⌐sions Diverses'
+  },
+  {
+    name: 'Fracture ├⌐paule sur rupture coiffe ancienne',
+    score: 52,
+    path: '├ëtats Ant├⌐rieurs et Aggravation de Pathologies Pr├⌐existantes > Aggravation ├ëpaule sur ├ëtat Ant├⌐rieur'
+  },
+  {
+    name: 'Raideur ├⌐paule sur proth├¿se pr├⌐existante',
+    score: 52,
+    path: '├ëtats Ant├⌐rieurs et Aggravation de Pathologies Pr├⌐existantes > Aggravation ├ëpaule sur ├ëtat Ant├⌐rieur'
+  },
+  {
+    name: 'P├⌐riarthrite chronique douloureuse - limitation mod├⌐r├⌐e (Main Dominante)',
+    score: 42,
+    path: 'Membres Sup├⌐rieurs > ├ëpaule - L├⌐sions Diverses'
+  },
+  {
+    name: 'P├⌐riarthrite chronique douloureuse - limitation mod├⌐r├⌐e (Main Non Dominante)',
+    score: 42,
+    path: 'Membres Sup├⌐rieurs > ├ëpaule - L├⌐sions Diverses'
+  },
+  {
+    name: 'P├⌐riarthrite chronique douloureuse - abolition des mouvements et atrophie (Main Dominante)',
+    score: 42,
+    path: 'Membres Sup├⌐rieurs > ├ëpaule - L├⌐sions Diverses'
+  },
+  {
+    name: 'P├⌐riarthrite chronique douloureuse - abolition des mouvements et atrophie (Main Non Dominante)',
+    score: 42,
+    path: 'Membres Sup├⌐rieurs > ├ëpaule - L├⌐sions Diverses'
+  },
+  {
+    name: 'Capsulite r├⌐tractile sur tendinopathie ancienne',
+    score: 42,
+    path: '├ëtats Ant├⌐rieurs et Aggravation de Pathologies Pr├⌐existantes > Aggravation ├ëpaule sur ├ëtat Ant├⌐rieur'
+  },
+  {
+    name: 'Rupture du triceps totale (Main Dominante)',
+    score: 41,
+    path: 'Membres Sup├⌐rieurs > Bras - Fractures et L├⌐sions Musculaires'
+  },
+  {
+    name: 'Rupture du triceps totale (Main Non Dominante)',
+    score: 41,
+    path: 'Membres Sup├⌐rieurs > Bras - Fractures et L├⌐sions Musculaires'
+  }
+]
+≡ƒöì [detectRequestType] D├⌐but analyse...
+≡ƒôè [detectRequestType] R├⌐sultat: attribution
+≡ƒöì [determineSeverity] Text: ├⌐paule d├⌐boit├⌐e qui revient pas bien en place
+≡ƒöì [determineSeverity] Faible signs: []
+≡ƒöì [determineSeverity] High signs: []
+  Γ£à # 5 Langage familier - ├⌐paule d├⌐bo├«t├⌐e          ΓåÆ 25%  Fracture de la t├¬te hum├⌐rale avec raideur importan
+≡ƒöº localExpertAnalysis V3.3.405 - fix blast auriculaire ORL (d├⌐chirure tympanique, cophose asym├⌐trique, acouph├¿nes invalidants)
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): rupture LCA genou droit avec m├⌐niscectomie interne
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 1 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+≡ƒöì DEBUG STEPPAGE D├ëTAILL├ë:
+   - steppageMatch: false
+   - amyotrophieMIMatch: false
+   - fractureL1Match: false
+   - Texte analys├⌐: rupture LCA genou droit avec m├⌐niscectomie interne
+Γ¥î STEPPAGE NON D├ëTECT├ë - Conditions non remplies
+≡ƒöì DEBUG D├ëVIATION:
+   - deviationMatch: false
+   - mainContext: false
+   - Recherche dans: diviation NON trouv├⌐
+≡ƒöì [V3.3.155] S├⌐quelles d├⌐tect├⌐es: 1 [ 'S├⌐quelles de rupture du ligament crois├⌐ ant├⌐rieur (LCA)' ]
+≡ƒª╡ [V3.3.227] Entorse grave genou LCA/m├⌐nisque ΓåÆ PAS de cumul (pathologie articulaire unique)
+≡ƒöì V3.3.201k: isCumulDetected = false , lesionCount = 1
+≡ƒºá [V3.3.214] TC check: hasTC=false, hasNeuro=false, hasFocal=false, neuroCount=0
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 1 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+Γ£à CAS SIMPLE D├ëTECT├ë: 1 s├⌐quelle(s)
+≡ƒôÜ TROUV├ë DANS BAR├êME: "S├⌐quelles de rupture du ligament crois├⌐ ant├⌐rieur (LCA)" ΓåÆ "S├⌐quelles de rupture du ligament crois├⌐ ant├⌐rieur (LCA)" (10-25%)
+   ≡ƒôè [V3.3.365] Severity-adjusted bar├¿me: [10-25] ├ù coef 0.50 = 18%
+≡ƒöä REGROUPEMENT PAR SYST├êME: [ 'MEMBRE_INFERIEUR: 18%' ]
+≡ƒº« CALCUL BALTHAZAR (PAR SYST├êME): [ 'MEMBRE_INFERIEUR: 18%' ]
+≡ƒôè IPP GLOBAL CUMUL├ë: 18%
+  Γ£à # 6 Abr├⌐viation LCA                             ΓåÆ 18%  Membre inf├⌐rieur : S├⌐quelles fonctionnelles (boite
+≡ƒöº localExpertAnalysis V3.3.405 - fix blast auriculaire ORL (d├⌐chirure tympanique, cophose asym├⌐trique, acouph├¿nes invalidants)
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): AT du 15/03/2024, fracture bimall├⌐olaire cheville gauche
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 1 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+≡ƒª┤ [V3.3.292] Fracture mall├⌐olaire/cheville d├⌐tect├⌐ ΓåÆ Bypass cumul, analyse directe via comprehensiveSingleLesionAnalysis
+≡ƒöì [M├ëTACARPIENS] Input brut: at du 15/03/2024, fracture bimall├⌐olaire cheville gauche
+≡ƒöì [M├ëTACARPIENS] hasMetaWord: false
+≡ƒöì [M├ëTACARPIENS] hasSingleOrPerte: false
+≡ƒöì [M├ëTACARPIENS] hasSpecificFinger: false
+≡ƒöì [M├ëTACARPIENS] hasCinq: true
+ΓÜá∩╕Å [M├ëTACARPIENS] Pas de dialogue - continuons analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì [EARLY] Ant├⌐c├⌐dents d├⌐tect├⌐s: 0 - 
+Γ£à [EXPERT RULE MATCH - PRIORITY 15000] Fracture mall├⌐olaire ou bi-mall├⌐olaire - Bonne consolidation = [3-8] ΓåÆ 3% (coef: 0.00)
+  Γ£à # 7 Abr├⌐viation AT + fracture                   ΓåÆ 3%  Fracture mall├⌐olaire ou bi-mall├⌐olaire - Bonne con
+≡ƒöº localExpertAnalysis V3.3.405 - fix blast auriculaire ORL (d├⌐chirure tympanique, cophose asym├⌐trique, acouph├¿nes invalidants)
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): fracture du f├⌐mur + fracture du radius + entorse grave du genou suite ├á un AVP
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 2 sites d├⌐tect├⌐s (seuil=2) ΓåÆ MULTI-SITES
+≡ƒöì DEBUG STEPPAGE D├ëTAILL├ë:
+   - steppageMatch: false
+   - amyotrophieMIMatch: false
+   - fractureL1Match: false
+   - Texte analys├⌐: fracture du f├⌐mur + fracture du radius + entorse grave du genou suite ├á un AVP
+Γ¥î STEPPAGE NON D├ëTECT├ë - Conditions non remplies
+≡ƒöì DEBUG D├ëVIATION:
+   - deviationMatch: false
+   - mainContext: false
+   - Recherche dans: diviation NON trouv├⌐
+≡ƒöì [V3.3.155] S├⌐quelles d├⌐tect├⌐es: 3 [
+  'Fracture diaphysaire du f├⌐mur',
+  "Laxit├⌐ chronique du genou (s├⌐quelle d'entorse)",
+  "Fracture de l'avant-bras (radius et/ou cubitus)"
+]
+≡ƒöì V3.3.201k: isCumulDetected = true , lesionCount = 3
+ΓÜá∩╕Å V3.3.201j: CUMUL D├ëTECT├ë ΓåÆ SKIP regroupement par syst├¿me, passage direct ├á extraction l├⌐sions individuelles
+≡ƒöì DEBUG M├ëTACARPIENS - Texte normalis├⌐: fracture femur + fracture radius + entorse important genou accident voie publique cassure fissure bris fracture fissure bris fracture cassure bris fracture cassure fissure distorsion foulure etirement ligamentaire entorse foulure etirement ligamentaire entorse distorsion etirement ligamentaire entorse distorsion foulure femoro tibiale femoro patellaire articulation genou genou femoro patellaire articulation genou genou femoro tibiale articulation genou genou femoro tibiale femoro patellaire
+≡ƒöì DEBUG M├ëTACARPIENS - hasMetacarpienWord: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSingleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasMultipleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSpecificFingerEarly: false
+≡ƒöì DEBUG M├ëTACARPIENS - isMetacarpienSingleQueryEarly: false
+≡ƒöì V3.3.139: V├⌐rification cumul prioritaire...
+≡ƒöì Query words: fracture, femur, fracture, radius, entorse, grave, genou, suite, avp
+≡ƒöì Cat├⌐gorie cumul trouv├⌐e: Cumuls de L├⌐sions et Polytraumatismes
+≡ƒöì Entr├⌐es avec searchTerms v├⌐rifi├⌐es: 51, meilleur score: 0.0%
+Γä╣∩╕Å Aucun cumul prioritaire trouv├⌐ (similarit├⌐ < 70%), continue avec analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒª╢ [V3.3.317] hasMTPLuxation: false hasMetaFracture: false hasTSLO: false hasFootContext: false
+≡ƒöì isCumulDetected: true lesionCount: 3
+≡ƒöì CUMUL D├ëTECT├ë - Extraction des l├⌐sions individuelles
+≡ƒô¥ text original: fracture du f├⌐mur + fracture du radius + entorse grave du genou suite ├á un AVP
+≡ƒô¥ finalCleanedText: fracture du f├⌐mur + fracture du radius + entorse grave du genou suite ├á un AVP
+≡ƒöº extractIndividualLesions V3.3.211 - avec Pattern 0C-ter + 0C-quater
+≡ƒöì extractIndividualLesions - texte d'entr├⌐e: fracture du f├⌐mur + fracture du radius + entorse grave du genou suite ├á un AVP
+Γ£à Pattern 0A (format X+Y+Z) d├⌐tect├⌐: [
+  'fracture du femur',
+  'fracture du radius',
+  'entorse grave du genou suite a un avp'
+]
+≡ƒôï L├⌐sions extraites: [
+  'fracture du femur',
+  'fracture du radius',
+  'entorse grave du genou suite a un avp'
+] Nombre: 3
+≡ƒöº V3.3.320c: Filtr├⌐ 3 ΓåÆ 3 l├⌐sions (exclu segments non-l├⌐sionnels)
+Γ£à Au moins 2 l├⌐sions ΓåÆ Analyse s├⌐par├⌐e
+≡ƒöÄ Analyse l├⌐sion "fracture du femur" ΓåÆ enrichi: "fracture du femur" (processed: "fracture du femur")
+≡ƒöì [M├ëTACARPIENS] Input brut: fracture du femur
+≡ƒöì [M├ëTACARPIENS] hasMetaWord: false
+≡ƒöì [M├ëTACARPIENS] hasSingleOrPerte: false
+≡ƒöì [M├ëTACARPIENS] hasSpecificFinger: false
+≡ƒöì [M├ëTACARPIENS] hasCinq: false
+ΓÜá∩╕Å [M├ëTACARPIENS] Pas de dialogue - continuons analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì [EARLY] Ant├⌐c├⌐dents d├⌐tect├⌐s: 0 - 
+Γ£à [EXPERT RULE MATCH - PRIORITY 10100] Fracture diaphysaire du f├⌐mur = [10-30] ΓåÆ 10% (coef: 0.00)
+   ΓåÆ Type: proposal
+   ΓåÆ Injury: Fracture diaphysaire du f├⌐mur
+   ΓåÆ Rate calcul├⌐: 10
+   ≡ƒöº V3.3.210: Enrichissement fracture radius: "fracture du radius" ΓåÆ "fracture du radius fracture extremite inferieure radius pouteau colles consolidation cal vicieux"
+≡ƒöÄ Analyse l├⌐sion "fracture du radius" ΓåÆ enrichi: "fracture du radius fracture extremite inferieure radius pouteau colles consolidation cal vicieux" (processed: "fracture du radius fracture extremite inferieure radius pouteau colles consolidation cal vicieux")
+≡ƒöì [M├ëTACARPIENS] Input brut: fracture du radius fracture extremite inferieure radius pouteau colles consolidation cal vicieux
+≡ƒöì [M├ëTACARPIENS] hasMetaWord: false
+≡ƒöì [M├ëTACARPIENS] hasSingleOrPerte: false
+≡ƒöì [M├ëTACARPIENS] hasSpecificFinger: false
+≡ƒöì [M├ëTACARPIENS] hasCinq: false
+ΓÜá∩╕Å [M├ëTACARPIENS] Pas de dialogue - continuons analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì [EARLY] Ant├⌐c├⌐dents d├⌐tect├⌐s: 0 - 
+≡ƒöì [DEBUG EXPERT RULE - EARLY TEST]
+Pattern: /contusion.*cerebrale|traumatisme.*crani.*contusion/i
+Context: /perte.*connaissance|frontale|temporale|parietale|breve|courte|surveillance.*neurologique/i
+NegativeContext: /spondylo|listthesis|glissement.*vertebral/i
+CleanText: "fracture du radius fracture extremite inferieure radius pouteau colles consolidation cal vicieux"
+patternMatchClean: false, contextMatchClean: false
+negContextMatchClean: false, negContextMatchWorking: false
+matchClean: false, matchWorking: false
+Γ£à [EXPERT RULE MATCH - PRIORITY 98] Fracture de l'extr├⌐mit├⌐ inf├⌐rieure du radius - Avec limitation des mouvements (Main Dominante) = [8-15] ΓåÆ 8% (coef: 0.00)
+   ΓåÆ Type: proposal
+   ΓåÆ Injury: Fracture de l'extr├⌐mit├⌐ inf├⌐rieure du radius - Avec limitation des mouvements (Main Dominante)
+   ΓåÆ Rate calcul├⌐: 8
+≡ƒöÄ Analyse l├⌐sion "entorse grave du genou suite a un avp" ΓåÆ enrichi: "entorse grave du genou suite a un avp" (processed: "entorse grave du genou suite a un avp")
+≡ƒöì [M├ëTACARPIENS] Input brut: entorse grave du genou suite a un avp
+≡ƒöì [M├ëTACARPIENS] hasMetaWord: false
+≡ƒöì [M├ëTACARPIENS] hasSingleOrPerte: false
+≡ƒöì [M├ëTACARPIENS] hasSpecificFinger: false
+≡ƒöì [M├ëTACARPIENS] hasCinq: false
+ΓÜá∩╕Å [M├ëTACARPIENS] Pas de dialogue - continuons analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì [EARLY] Ant├⌐c├⌐dents d├⌐tect├⌐s: 0 - 
+≡ƒöì [DEBUG EXPERT RULE - EARLY TEST]
+Pattern: /contusion.*cerebrale|traumatisme.*crani.*contusion/i
+Context: /perte.*connaissance|frontale|temporale|parietale|breve|courte|surveillance.*neurologique/i
+NegativeContext: /spondylo|listthesis|glissement.*vertebral/i
+CleanText: "entorse grave du genou suite a un avp"
+patternMatchClean: false, contextMatchClean: false
+negContextMatchClean: false, negContextMatchWorking: false
+matchClean: false, matchWorking: false
+≡ƒöì [DEBUG EXPERT RULE - EARLY TEST]
+Pattern: /spondylolisthesis|spondylo.*listhesis|listthesis|glissement\s+vertebral/i
+Context: /lombaire|L\d|S\d|rachis|traumatisme|post-traumatique/i
+NegativeContext: /contusion.*cerebrale|perte.*connaissance|mandibule|genou|polytraumatisme|chute.*echafaudage/i
+CleanText: "entorse grave du genou suite a un avp"
+patternMatchClean: false, contextMatchClean: false
+negContextMatchClean: true, negContextMatchWorking: true
+matchClean: false, matchWorking: false
+≡ƒÄ» TOP 50 R├ëSULTATS: [
+  {
+    name: "Laxit├⌐ chronique du genou (s├⌐quelle d'entorse)",
+    score: 882,
+    path: 'Membres Inf├⌐rieurs > Genou - L├⌐sions Ligamentaires et M├⌐niscales'
+  },
+  {
+    name: 'Arthrose f├⌐moro-patellaire ou f├⌐moro-tibiale post-traumatique',
+    score: 788,
+    path: 'Membres Inf├⌐rieurs > Genou - L├⌐sions Osseuses et Articulaires'
+  },
+  {
+    name: 'Fracture des plateaux tibiaux - Avec d├⌐viation et/ou raideur',
+    score: 566,
+    path: 'Membres Inf├⌐rieurs > Genou - L├⌐sions Osseuses et Articulaires'
+  },
+  {
+    name: 'M├⌐niscectomie + chondropathie s├⌐v├¿re (cumul)',
+    score: 498,
+    path: 'Cumuls de L├⌐sions et Polytraumatismes > Cumuls Simples - M├¬me Membre'
+  },
+  {
+    name: 'Plateaux tibiaux + raideur + arthrose (cumul)',
+    score: 476,
+    path: 'Cumuls de L├⌐sions et Polytraumatismes > Cumuls Simples - M├¬me Membre'
+  },
+  {
+    name: 'Fracture isol├⌐e du tibia',
+    score: 466,
+    path: 'Membres Inf├⌐rieurs > Jambe - Fractures'
+  },
+  {
+    name: 'Fracture du pilon tibial',
+    score: 426,
+    path: 'Membres Inf├⌐rieurs > Cheville (Cou-de-pied) - Fractures'
+  },
+  {
+    name: 'Syndrome du tunnel tarsien (compression nerf tibial post├⌐rieur)',
+    score: 426,
+    path: 'Membres Inf├⌐rieurs > Pied - Pathologies des tissus mous'
+  },
+  {
+    name: 'Fracture de la rotule - Avec g├¬ne fonctionnelle',
+    score: 391,
+    path: 'Membres Inf├⌐rieurs > Genou - L├⌐sions Osseuses et Articulaires'
+  },
+  {
+    name: 'D├⌐chirure/rupture ligament lat├⌐ral interne (LLI) - ligament collat├⌐ral m├⌐dial genou',
+    score: 272,
+    path: 'Membres Inf├⌐rieurs > Genou - L├⌐sions Ligamentaires et M├⌐niscales'
+  },
+  {
+    name: 'D├⌐chirure/rupture ligament lat├⌐ral externe (LLE) - ligament collat├⌐ral lat├⌐ral genou',
+    score: 272,
+    path: 'Membres Inf├⌐rieurs > Genou - L├⌐sions Ligamentaires et M├⌐niscales'
+  },
+  {
+    name: 'Hydarthrose chronique du genou',
+    score: 271,
+    path: 'Membres Inf├⌐rieurs > Genou - L├⌐sions Osseuses et Articulaires'
+  },
+  {
+    name: 'S├⌐quelles de proth├¿se totale de genou',
+    score: 271,
+    path: 'Membres Inf├⌐rieurs > Genou - L├⌐sions Osseuses et Articulaires'
+  },
+  {
+    name: 'Entorse LCA sur m├⌐niscectomie ancienne',
+    score: 251,
+    path: '├ëtats Ant├⌐rieurs et Aggravation de Pathologies Pr├⌐existantes > Aggravation Genou sur ├ëtat Ant├⌐rieur'
+  },
+  {
+    name: 'Chondropathie aggrav├⌐e sur arthrose genou',
+    score: 241,
+    path: '├ëtats Ant├⌐rieurs et Aggravation de Pathologies Pr├⌐existantes > Aggravation Genou sur ├ëtat Ant├⌐rieur'
+  },
+  {
+    name: 'Fracture genou sur gonarthrose pr├⌐existante',
+    score: 221,
+    path: '├ëtats Ant├⌐rieurs et Aggravation de Pathologies Pr├⌐existantes > Aggravation Genou sur ├ëtat Ant├⌐rieur'
+  },
+  {
+    name: 'Raideur genou sur proth├¿se pr├⌐existante',
+    score: 221,
+    path: '├ëtats Ant├⌐rieurs et Aggravation de Pathologies Pr├⌐existantes > Aggravation Genou sur ├ëtat Ant├⌐rieur'
+  },
+  {
+    name: 'S├⌐quelles de rupture du ligament crois├⌐ ant├⌐rieur (LCA)',
+    score: 192,
+    path: 'Membres Inf├⌐rieurs > Genou - L├⌐sions Ligamentaires et M├⌐niscales'
+  },
+  {
+    name: 'S├⌐quelles de rupture du ligament crois├⌐ post├⌐rieur (LCP)',
+    score: 192,
+    path: 'Membres Inf├⌐rieurs > Genou - L├⌐sions Ligamentaires et M├⌐niscales'
+  },
+  {
+    name: 'S├⌐quelles de m├⌐niscectomie (douleurs, hydarthrose)',
+    score: 192,
+    path: 'Membres Inf├⌐rieurs > Genou - L├⌐sions Ligamentaires et M├⌐niscales'
+  },
+  {
+    name: 'Destruction genou (polytraumatisme intra-articulaire)',
+    score: 182,
+    path: 'Cumuls de L├⌐sions et Polytraumatismes > Polytraumatismes - Membres Multiples'
+  },
+  {
+    name: 'Raideur genou + instabilit├⌐ LCA (cumul)',
+    score: 181,
+    path: 'Cumuls de L├⌐sions et Polytraumatismes > Cumuls Simples - M├¬me Membre'
+  },
+  {
+    name: 'Raideur genou + d├⌐robements',
+    score: 181,
+    path: 'Cumuls de L├⌐sions et Polytraumatismes > Cumuls Simples - M├¬me Membre'
+  },
+  {
+    name: 'Polytraumatisme vision + audition + genou',
+    score: 181,
+    path: 'Cumuls de L├⌐sions et Polytraumatismes > Polytraumatismes - Membres Multiples'
+  },
+  {
+    name: '├ëlongation/d├⌐chirure musculaire quadriceps - Tendinopathie quadricipitale (s├⌐quelles)',
+    score: 151,
+    path: 'Membres Inf├⌐rieurs > Cuisse - L├⌐sions Musculaires et Tendineuses'
+  },
+  {
+    name: 'Rupture du tendon quadricipital',
+    score: 151,
+    path: 'Membres Inf├⌐rieurs > Cuisse - L├⌐sions Musculaires et Tendineuses'
+  },
+  {
+    name: 'LCA + m├⌐niscectomie + instabilit├⌐ (cumul)',
+    score: 101,
+    path: 'Cumuls de L├⌐sions et Polytraumatismes > Cumuls Simples - M├¬me Membre'
+  },
+  {
+    name: 'Polytraumatisme membre inf├⌐rieur droit complet',
+    score: 101,
+    path: 'Cumuls de L├⌐sions et Polytraumatismes > Polytraumatismes - Membres Multiples'
+  },
+  {
+    name: "Syndrome des loges chronique d'effort de la jambe",
+    score: 91,
+    path: 'Membres Inf├⌐rieurs > Jambe - Fractures'
+  },
+  {
+    name: 'S├⌐quelles de l├⌐sions musculaires majeures de la cuisse',
+    score: 51,
+    path: 'Membres Inf├⌐rieurs > Cuisse - L├⌐sions Musculaires et Tendineuses'
+  },
+  {
+    name: "Tendinopathie d'Achille post-traumatique chronique",
+    score: 51,
+    path: 'Membres Inf├⌐rieurs > Pied - Tendons'
+  },
+  {
+    name: 'Apon├⌐vrosite plantaire (fasciite plantaire) chronique post-traumatique',
+    score: 51,
+    path: 'Membres Inf├⌐rieurs > Pied - Pathologies des tissus mous'
+  },
+  {
+    name: "Raccourcissement d'un membre inf├⌐rieur",
+    score: 51,
+    path: 'Membres Inf├⌐rieurs > Membre Inf├⌐rieur - L├⌐sions Diverses'
+  },
+  {
+    name: 'Troubles trophiques, ┼ôd├¿me chronique, varices',
+    score: 51,
+    path: 'Membres Inf├⌐rieurs > Membre Inf├⌐rieur - L├⌐sions Diverses'
+  },
+  {
+    name: 'Boiterie (sans raccourcissement)',
+    score: 51,
+    path: 'Membres Inf├⌐rieurs > Membre Inf├⌐rieur - L├⌐sions Diverses'
+  },
+  {
+    name: 'Pilon tibial + raideur cheville + hallux (cumul)',
+    score: 37.6,
+    path: 'Cumuls de L├⌐sions et Polytraumatismes > Cumuls Simples - M├¬me Membre'
+  },
+  {
+    name: 'Raideur cheville + s├⌐quelles fracture (cumul)',
+    score: 20.1,
+    path: 'Cumuls de L├⌐sions et Polytraumatismes > Cumuls Simples - M├¬me Membre'
+  }
+]
+≡ƒöì [detectRequestType] D├⌐but analyse...
+≡ƒôè [detectRequestType] R├⌐sultat: attribution
+≡ƒöì [determineSeverity] Text: entorse grave du genou suite a un avp
+≡ƒöì [determineSeverity] Faible signs: []
+≡ƒöì [determineSeverity] High signs: [ 'grave' ]
+   ΓåÆ Type: proposal
+   ΓåÆ Injury: Laxit├⌐ chronique du genou (s├⌐quelle d'entorse)
+   ΓåÆ Rate calcul├⌐: 20
+≡ƒôè TOTAL: 3 propositions g├⌐n├⌐r├⌐es sur 3 l├⌐sions
+Γ£à Calcul automatique cumul avec 3 l├⌐sion(s)
+  Γ£à # 8 Polytraumatisme - multi-l├⌐sions             ΓåÆ 34%  Polytraumatisme (cumul 3 l├⌐sions)
+≡ƒöº localExpertAnalysis V3.3.405 - fix blast auriculaire ORL (d├⌐chirure tympanique, cophose asym├⌐trique, acouph├¿nes invalidants)
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): fracture vert├⌐brale L1 avec parapl├⌐gie compl├¿te
+≡ƒöì [V3.3.287] Parapl├⌐gie/Queue de cheval/Compression m├⌐dullaire ΓåÆ NOT multi-sites (pathologie neurologique unique)
+≡ƒöì DEBUG STEPPAGE D├ëTAILL├ë:
+   - steppageMatch: false
+   - amyotrophieMIMatch: false
+   - fractureL1Match: true
+   - Texte analys├⌐: fracture vert├⌐brale L1 avec parapl├⌐gie compl├¿te
+Γ¥î STEPPAGE NON D├ëTECT├ë - Conditions non remplies
+≡ƒöì DEBUG D├ëVIATION:
+   - deviationMatch: false
+   - mainContext: false
+   - Recherche dans: diviation NON trouv├⌐
+≡ƒöì [V3.3.155] S├⌐quelles d├⌐tect├⌐es: 1 [ 'Parapl├⌐gie compl├¿te post-traumatique' ]
+≡ƒª┤ [V3.3.287] Parapl├⌐gie/Quadripl├⌐gie/Queue de cheval ΓåÆ PAS de cumul (pathologie neurologique unique)
+≡ƒöì V3.3.201k: isCumulDetected = false , lesionCount = 1
+≡ƒºá [V3.3.214] TC check: hasTC=false, hasNeuro=false, hasFocal=false, neuroCount=0
+≡ƒöì [V3.3.287] Parapl├⌐gie/Queue de cheval/Compression m├⌐dullaire ΓåÆ NOT multi-sites (pathologie neurologique unique)
+≡ƒºá [V3.3.347] T├ëTRAPL├ëGIE/PARAPL├ëGIE/COMPRESSION M├ëDULLAIRE d├⌐tect├⌐e ΓåÆ Bypass vers expert rules (pathologie neurologique majeure)
+≡ƒöì DEBUG M├ëTACARPIENS - Texte normalis├⌐: fracture vertebrale l1 vertebre lombaire l1 avec paraplegie complete cassure fissure bris fracture fissure bris fracture cassure bris fracture cassure fissure
+≡ƒöì DEBUG M├ëTACARPIENS - hasMetacarpienWord: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSingleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasMultipleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSpecificFingerEarly: false
+≡ƒöì DEBUG M├ëTACARPIENS - isMetacarpienSingleQueryEarly: false
+≡ƒöì V3.3.139: V├⌐rification cumul prioritaire...
+≡ƒöì Query words: fracture, vertebrale, avec, paraplegie, complete
+≡ƒöì Cat├⌐gorie cumul trouv├⌐e: Cumuls de L├⌐sions et Polytraumatismes
+≡ƒöì Entr├⌐es avec searchTerms v├⌐rifi├⌐es: 51, meilleur score: 0.0%
+Γä╣∩╕Å Aucun cumul prioritaire trouv├⌐ (similarit├⌐ < 70%), continue avec analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒª╢ [V3.3.317] hasMTPLuxation: false hasMetaFracture: false hasTSLO: false hasFootContext: false
+≡ƒöì isCumulDetected: false lesionCount: 1
+≡ƒöì [M├ëTACARPIENS] Input brut: fracture vert├⌐brale l1 avec parapl├⌐gie compl├¿te
+≡ƒöì [M├ëTACARPIENS] hasMetaWord: false
+≡ƒöì [M├ëTACARPIENS] hasSingleOrPerte: false
+≡ƒöì [M├ëTACARPIENS] hasSpecificFinger: false
+≡ƒöì [M├ëTACARPIENS] hasCinq: false
+ΓÜá∩╕Å [M├ëTACARPIENS] Pas de dialogue - continuons analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì [EARLY] Ant├⌐c├⌐dents d├⌐tect├⌐s: 0 - 
+≡ƒª┤ [V3.3.287] Parapl├⌐gie/Quadripl├⌐gie/Queue de cheval ΓåÆ PAS de cumul (pathologie neurologique unique)
+Γ£à [EXPERT RULE MATCH - PRIORITY 12100] Parapl├⌐gie compl├¿te = 100%
+  Γ£à # 9 Cas s├⌐v├¿re - parapl├⌐gie                     ΓåÆ 100%  Parapl├⌐gie compl├¿te
+≡ƒöº localExpertAnalysis V3.3.405 - fix blast auriculaire ORL (d├⌐chirure tympanique, cophose asym├⌐trique, acouph├¿nes invalidants)
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): traumatisme cr├ónien grave avec ├⌐pilepsie post-traumatique et troubles cognitifs
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 1 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+≡ƒöì DEBUG STEPPAGE D├ëTAILL├ë:
+   - steppageMatch: false
+   - amyotrophieMIMatch: false
+   - fractureL1Match: false
+   - Texte analys├⌐: traumatisme cr├ónien grave avec ├⌐pilepsie post-traumatique et troubles cognitifs
+Γ¥î STEPPAGE NON D├ëTECT├ë - Conditions non remplies
+≡ƒöì DEBUG D├ëVIATION:
+   - deviationMatch: false
+   - mainContext: false
+   - Recherche dans: diviation NON trouv├⌐
+≡ƒöì [V3.3.155] S├⌐quelles d├⌐tect├⌐es: 1 [ '├ëpilepsie post-traumatique' ]
+≡ƒöì V3.3.201k: isCumulDetected = false , lesionCount = 1
+≡ƒºá [V3.3.214] TC check: hasTC=true, hasNeuro=true, hasFocal=false, neuroCount=2
+≡ƒºá [V3.3.214] TC avec s├⌐quelles neurologiques multiples d├⌐tect├⌐ ΓåÆ Laisser passer aux expert rules
+≡ƒöì DEBUG M├ëTACARPIENS - Texte normalis├⌐: traumatisme cranien important avec epilepsie post traumatique et troubles cognitifs
+≡ƒöì DEBUG M├ëTACARPIENS - hasMetacarpienWord: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSingleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasMultipleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSpecificFingerEarly: false
+≡ƒöì DEBUG M├ëTACARPIENS - isMetacarpienSingleQueryEarly: false
+≡ƒöì V3.3.139: V├⌐rification cumul prioritaire...
+≡ƒöì Query words: traumatisme, cranien, grave, avec, epilepsie, post, traumatique, troubles, cognitifs
+≡ƒöì Cat├⌐gorie cumul trouv├⌐e: Cumuls de L├⌐sions et Polytraumatismes
+≡ƒöì Entr├⌐es avec searchTerms v├⌐rifi├⌐es: 51, meilleur score: 0.0%
+Γä╣∩╕Å Aucun cumul prioritaire trouv├⌐ (similarit├⌐ < 70%), continue avec analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒª╢ [V3.3.317] hasMTPLuxation: false hasMetaFracture: false hasTSLO: false hasFootContext: false
+≡ƒöì isCumulDetected: false lesionCount: 1
+≡ƒöì [M├ëTACARPIENS] Input brut: traumatisme cr├ónien grave avec ├⌐pilepsie post-traumatique et troubles cognitifs
+≡ƒöì [M├ëTACARPIENS] hasMetaWord: false
+≡ƒöì [M├ëTACARPIENS] hasSingleOrPerte: false
+≡ƒöì [M├ëTACARPIENS] hasSpecificFinger: false
+≡ƒöì [M├ëTACARPIENS] hasCinq: false
+ΓÜá∩╕Å [M├ëTACARPIENS] Pas de dialogue - continuons analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì [EARLY] Ant├⌐c├⌐dents d├⌐tect├⌐s: 0 - 
+≡ƒöÆ [V3.3.342] R├¿gle sp├⌐ciale TC grave d├⌐tect├⌐e (priority 1020) - sera trait├⌐e dans la 2├¿me boucle
+≡ƒöì [DEBUG EXPERT RULE - EARLY TEST]
+Pattern: /contusion.*cerebrale|traumatisme.*crani.*contusion/i
+Context: /perte.*connaissance|frontale|temporale|parietale|breve|courte|surveillance.*neurologique/i
+NegativeContext: /spondylo|listthesis|glissement.*vertebral/i
+CleanText: "traumatisme cranien grave avec epilepsie post traumatique et troubles cognitifs"
+patternMatchClean: false, contextMatchClean: false
+negContextMatchClean: false, negContextMatchWorking: false
+matchClean: false, matchWorking: false
+ΓÅ¡∩╕Å [V3.3.358] Skip simple rule "D├⌐ficits cognitifs post-traumatiques (m├⌐moire, attention, fonctions ex├⌐cutives)" (priority 999) car __CUMUL_TC_GRAVE__ d├⌐tect├⌐ ΓåÆ sera trait├⌐ en boucle 2
+≡ƒöì [DEBUG EXPERT RULE - EARLY TEST]
+Pattern: /spondylolisthesis|spondylo.*listhesis|listthesis|glissement\s+vertebral/i
+Context: /lombaire|L\d|S\d|rachis|traumatisme|post-traumatique/i
+NegativeContext: /contusion.*cerebrale|perte.*connaissance|mandibule|genou|polytraumatisme|chute.*echafaudage/i
+CleanText: "traumatisme cranien grave avec epilepsie post traumatique et troubles cognitifs"
+patternMatchClean: false, contextMatchClean: true
+negContextMatchClean: false, negContextMatchWorking: false
+matchClean: false, matchWorking: false
+  Γ£à #10 Traumatisme cr├ónien avec s├⌐quelles          ΓåÆ 55%  Cumul : TC grave (c├⌐phal├⌐es + cognitif + ├⌐pilepsie
+≡ƒöº localExpertAnalysis V3.3.405 - fix blast auriculaire ORL (d├⌐chirure tympanique, cophose asym├⌐trique, acouph├¿nes invalidants)
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): fracture du poignet bien consolid├⌐e, mouvements libres, pas de douleur
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 1 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+≡ƒöì DEBUG STEPPAGE D├ëTAILL├ë:
+   - steppageMatch: false
+   - amyotrophieMIMatch: false
+   - fractureL1Match: false
+   - Texte analys├⌐: fracture du poignet bien consolid├⌐e, mouvements libres, pas de douleur
+Γ¥î STEPPAGE NON D├ëTECT├ë - Conditions non remplies
+≡ƒöì DEBUG D├ëVIATION:
+   - deviationMatch: false
+   - mainContext: false
+   - Recherche dans: diviation NON trouv├⌐
+≡ƒöì [V3.3.155] S├⌐quelles d├⌐tect├⌐es: 0 []
+≡ƒª┤ [V3.3.216] Pouteau-Colles / Fracture radius distal ΓåÆ PAS de cumul (l├⌐sion unique)
+≡ƒöì V3.3.201k: isCumulDetected = false , lesionCount = 1
+≡ƒöì DEBUG M├ëTACARPIENS - Texte normalis├⌐: fracture poignet bien consolidee, mouvements libres, pas de douleur cassure fissure bris fracture fissure bris fracture cassure bris fracture cassure fissure articulation poignet $1 droit $1 gauche poignet $1 droit $1 gauche poignet articulation poignet $1 gauche poignet articulation poignet $1 droit
+≡ƒöì DEBUG M├ëTACARPIENS - hasMetacarpienWord: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSingleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasMultipleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSpecificFingerEarly: false
+≡ƒöì DEBUG M├ëTACARPIENS - isMetacarpienSingleQueryEarly: false
+≡ƒöì V3.3.139: V├⌐rification cumul prioritaire...
+≡ƒöì Query words: fracture, poignet, bien, consolidee,, mouvements, libres,, pas, douleur
+≡ƒöì Cat├⌐gorie cumul trouv├⌐e: Cumuls de L├⌐sions et Polytraumatismes
+≡ƒöì Entr├⌐es avec searchTerms v├⌐rifi├⌐es: 51, meilleur score: 0.0%
+Γä╣∩╕Å Aucun cumul prioritaire trouv├⌐ (similarit├⌐ < 70%), continue avec analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒª╢ [V3.3.317] hasMTPLuxation: false hasMetaFracture: false hasTSLO: false hasFootContext: false
+≡ƒöì isCumulDetected: false lesionCount: 1
+≡ƒöì [M├ëTACARPIENS] Input brut: fracture du poignet bien consolid├⌐e mouvements libres pas de douleur
+≡ƒöì [M├ëTACARPIENS] hasMetaWord: false
+≡ƒöì [M├ëTACARPIENS] hasSingleOrPerte: false
+≡ƒöì [M├ëTACARPIENS] hasSpecificFinger: false
+≡ƒöì [M├ëTACARPIENS] hasCinq: false
+ΓÜá∩╕Å [M├ëTACARPIENS] Pas de dialogue - continuons analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì [EARLY] Ant├⌐c├⌐dents d├⌐tect├⌐s: 0 - 
+≡ƒª┤ [V3.3.216] Pouteau-Colles / Fracture radius distal ΓåÆ PAS de cumul (l├⌐sion unique)
+≡ƒöì [DEBUG EXPERT RULE - EARLY TEST]
+Pattern: /contusion.*cerebrale|traumatisme.*crani.*contusion/i
+Context: /perte.*connaissance|frontale|temporale|parietale|breve|courte|surveillance.*neurologique/i
+NegativeContext: /spondylo|listthesis|glissement.*vertebral/i
+CleanText: "fracture du poignet bien consolidee mouvements libres pas de douleur"
+patternMatchClean: false, contextMatchClean: false
+negContextMatchClean: false, negContextMatchWorking: false
+matchClean: false, matchWorking: false
+≡ƒöì [DEBUG EXPERT RULE - EARLY TEST]
+Pattern: /spondylolisthesis|spondylo.*listhesis|listthesis|glissement\s+vertebral/i
+Context: /lombaire|L\d|S\d|rachis|traumatisme|post-traumatique/i
+NegativeContext: /contusion.*cerebrale|perte.*connaissance|mandibule|genou|polytraumatisme|chute.*echafaudage/i
+CleanText: "fracture du poignet bien consolidee mouvements libres pas de douleur"
+patternMatchClean: false, contextMatchClean: false
+negContextMatchClean: false, negContextMatchWorking: false
+matchClean: false, matchWorking: false
+Γ£à [V3.3.340] Fracture poignet + mouvements libres/bonne consolidation ΓåÆ auto-s├⌐lection "Consolidation parfaite"
+  Γ£à #11 Fracture avec bonne r├⌐cup├⌐ration            ΓåÆ 4%  
+≡ƒöº localExpertAnalysis V3.3.405 - fix blast auriculaire ORL (d├⌐chirure tympanique, cophose asym├⌐trique, acouph├¿nes invalidants)
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): fracture ouverte de la jambe avec pseudarthrose et infection chronique
+≡ƒª┤ [V3.3.401] HANDLER PSEUDARTHROSE: Pseudarthrose des deux os de la jambe ΓåÆ 40% (l├óche=false)
+  Γ£à #12 Fracture avec mauvaise ├⌐volution            ΓåÆ 40%  Pseudarthrose des deux os de la jambe
+≡ƒöº localExpertAnalysis V3.3.405 - fix blast auriculaire ORL (d├⌐chirure tympanique, cophose asym├⌐trique, acouph├¿nes invalidants)
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): surdit├⌐ professionnelle bilat├⌐rale avec perte auditive de 40 dB
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 1 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+≡ƒöì DEBUG STEPPAGE D├ëTAILL├ë:
+   - steppageMatch: false
+   - amyotrophieMIMatch: false
+   - fractureL1Match: false
+   - Texte analys├⌐: surdit├⌐ professionnelle bilat├⌐rale avec perte auditive de 40 dB
+Γ¥î STEPPAGE NON D├ëTECT├ë - Conditions non remplies
+≡ƒöì DEBUG D├ëVIATION:
+   - deviationMatch: false
+   - mainContext: false
+   - Recherche dans: diviation NON trouv├⌐
+≡ƒöì [V3.3.155] S├⌐quelles d├⌐tect├⌐es: 0 []
+≡ƒöì V3.3.201k: isCumulDetected = false , lesionCount = 1
+≡ƒöì DEBUG M├ëTACARPIENS - Texte normalis├⌐: surdite professionnelle bilateral erale avec perte auditive de 40 db amputation ablation section amputation ablation perte perte auditive hypoacousie cophose surdite hypoacousie cophose surdite perte auditive cophose surdite perte auditive hypoacousie diminution acuite auditive baisse audition perte partielle diminution acuite auditive baisse audition hypoacousie db decibels decibels surdite profonde perte profonde 85 db
+≡ƒöì DEBUG M├ëTACARPIENS - hasMetacarpienWord: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSingleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasMultipleIndicator: true
+≡ƒöì DEBUG M├ëTACARPIENS - hasSpecificFingerEarly: false
+≡ƒöì DEBUG M├ëTACARPIENS - isMetacarpienSingleQueryEarly: false
+≡ƒöì V3.3.139: V├⌐rification cumul prioritaire...
+≡ƒöì Query words: surdite, professionnelle, bilaterale, avec, perte, auditive
+≡ƒöì Cat├⌐gorie cumul trouv├⌐e: Cumuls de L├⌐sions et Polytraumatismes
+≡ƒöì Entr├⌐es avec searchTerms v├⌐rifi├⌐es: 51, meilleur score: 0.0%
+Γä╣∩╕Å Aucun cumul prioritaire trouv├⌐ (similarit├⌐ < 70%), continue avec analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒª╢ [V3.3.317] hasMTPLuxation: false hasMetaFracture: false hasTSLO: false hasFootContext: false
+≡ƒöì isCumulDetected: false lesionCount: 1
+≡ƒöì [M├ëTACARPIENS] Input brut: surdit├⌐ perte auditive de40 db
+≡ƒöì [M├ëTACARPIENS] hasMetaWord: false
+≡ƒöì [M├ëTACARPIENS] hasSingleOrPerte: true
+≡ƒöì [M├ëTACARPIENS] hasSpecificFinger: false
+≡ƒöì [M├ëTACARPIENS] hasCinq: false
+ΓÜá∩╕Å [M├ëTACARPIENS] Pas de dialogue - continuons analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì [EARLY] Ant├⌐c├⌐dents d├⌐tect├⌐s: 0 - 
+  Γ£à #13 Surdit├⌐ professionnelle                     ΓåÆ 8%  Diminution de l'acuit├⌐ auditive
+≡ƒöº localExpertAnalysis V3.3.405 - fix blast auriculaire ORL (d├⌐chirure tympanique, cophose asym├⌐trique, acouph├¿nes invalidants)
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): perte de la vision de l'oeil gauche suite ├á un traumatisme
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 0 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+≡ƒöì DEBUG STEPPAGE D├ëTAILL├ë:
+   - steppageMatch: false
+   - amyotrophieMIMatch: false
+   - fractureL1Match: false
+   - Texte analys├⌐: perte de la vision de l'oeil gauche suite ├á un traumatisme
+Γ¥î STEPPAGE NON D├ëTECT├ë - Conditions non remplies
+≡ƒöì DEBUG D├ëVIATION:
+   - deviationMatch: false
+   - mainContext: false
+   - Recherche dans: diviation NON trouv├⌐
+≡ƒöì [V3.3.155] S├⌐quelles d├⌐tect├⌐es: 0 []
+≡ƒöì V3.3.201k: isCumulDetected = false , lesionCount = 1
+≡ƒöì DEBUG M├ëTACARPIENS - Texte normalis├⌐: perte vision de l oeil gauche traumatisme amputation ablation section amputation ablation perte oeil oculaire ophtalmique oeil oeil ophtalmique oeil oeil oculaire vue acuite visuelle visuel vision acuite visuelle visuel vision vue visuel vision vue acuite visuelle vision vue acuite visuelle vision vue acuite visuelle av acuite visuelle vision de acuite acuite visuelle vision de acuite av vision de acuite av acuite visuelle
+≡ƒöì DEBUG M├ëTACARPIENS - hasMetacarpienWord: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSingleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasMultipleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSpecificFingerEarly: false
+≡ƒöì DEBUG M├ëTACARPIENS - isMetacarpienSingleQueryEarly: false
+≡ƒöì V3.3.139: V├⌐rification cumul prioritaire...
+≡ƒöì Query words: perte, vision, oeil, gauche, suite, traumatisme
+≡ƒöì Cat├⌐gorie cumul trouv├⌐e: Cumuls de L├⌐sions et Polytraumatismes
+≡ƒöì Entr├⌐es avec searchTerms v├⌐rifi├⌐es: 51, meilleur score: 0.0%
+Γä╣∩╕Å Aucun cumul prioritaire trouv├⌐ (similarit├⌐ < 70%), continue avec analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒª╢ [V3.3.317] hasMTPLuxation: false hasMetaFracture: false hasTSLO: false hasFootContext: false
+≡ƒöì isCumulDetected: false lesionCount: 1
+≡ƒöì [M├ëTACARPIENS] Input brut: perte de la vision de l oeil gauche suite ├á un traumatisme
+≡ƒöì [M├ëTACARPIENS] hasMetaWord: false
+≡ƒöì [M├ëTACARPIENS] hasSingleOrPerte: true
+≡ƒöì [M├ëTACARPIENS] hasSpecificFinger: false
+≡ƒöì [M├ëTACARPIENS] hasCinq: false
+ΓÜá∩╕Å [M├ëTACARPIENS] Pas de dialogue - continuons analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì [EARLY] Ant├⌐c├⌐dents d├⌐tect├⌐s: 0 - 
+Γ£à [EXPERT RULE MATCH - PRIORITY 12000] Perte compl├¿te de la vision d'un oeil (l'autre ├⌐tant normal) = 30%
+  Γ£à #14 Perte de vision d'un oeil                   ΓåÆ 30%  Perte compl├¿te de la vision d'un oeil (l'autre ├⌐ta
+≡ƒöº localExpertAnalysis V3.3.405 - fix blast auriculaire ORL (d├⌐chirure tympanique, cophose asym├⌐trique, acouph├¿nes invalidants)
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): spl├⌐nectomie suite ├á rupture traumatique de la rate
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 1 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+≡ƒöì DEBUG STEPPAGE D├ëTAILL├ë:
+   - steppageMatch: false
+   - amyotrophieMIMatch: false
+   - fractureL1Match: false
+   - Texte analys├⌐: spl├⌐nectomie suite ├á rupture traumatique de la rate
+Γ¥î STEPPAGE NON D├ëTECT├ë - Conditions non remplies
+≡ƒöì DEBUG D├ëVIATION:
+   - deviationMatch: false
+   - mainContext: false
+   - Recherche dans: diviation NON trouv├⌐
+≡ƒöì [V3.3.155] S├⌐quelles d├⌐tect├⌐es: 1 [ 'Spl├⌐nectomie (ablation de la rate)' ]
+≡ƒöì V3.3.201k: isCumulDetected = false , lesionCount = 1
+≡ƒºá [V3.3.214] TC check: hasTC=false, hasNeuro=false, hasFocal=false, neuroCount=0
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 1 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+Γ£à CAS SIMPLE D├ëTECT├ë: 1 s├⌐quelle(s)
+≡ƒôÜ TROUV├ë DANS BAR├êME: "Spl├⌐nectomie (ablation de la rate)" ΓåÆ "Spl├⌐nectomie (Ablation de la rate)" (15-30%)
+   ≡ƒôè [V3.3.365] Severity-adjusted bar├¿me: [15-30] ├ù coef 0.50 = 23%
+≡ƒöä REGROUPEMENT PAR SYST├êME: [ 'ABDOMEN: 23%' ]
+≡ƒº« CALCUL BALTHAZAR (PAR SYST├êME): [ 'ABDOMEN: 23%' ]
+≡ƒôè IPP GLOBAL CUMUL├ë: 23%
+  Γ£à #15 Spl├⌐nectomie                                ΓåÆ 23%  Abdomen : Spl├⌐nectomie (ablation de la rate) - Bar
+≡ƒöº localExpertAnalysis V3.3.405 - fix blast auriculaire ORL (d├⌐chirure tympanique, cophose asym├⌐trique, acouph├¿nes invalidants)
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): hernie discale L4-L5 op├⌐r├⌐e avec raideur lombaire r├⌐siduelle
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 1 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+≡ƒÆ┐ [V3.3.217] HERNIE DISCALE LOMBAIRE/CERVICALE d├⌐tect├⌐e ΓåÆ Analyse sp├⌐cialis├⌐e (site unique)
+≡ƒÆ┐ [V3.3.217] Score s├⌐v├⌐rit├⌐ hernie discale: 3 | R├⌐gion: lombaire | Niveau: L4-L5 | Op├⌐r├⌐e: true | EVA: null | Flexion: null┬░ | Sciatique: false
+≡ƒÆ┐ [V3.3.217] Bar├¿me: Lombo-sacralgie par l├⌐sion discale - S├⌐quelle de hernie discale op├⌐r├⌐e ou non | Fourchette: 15-30% | Position: 1 | Taux final: 15%
+  Γ£à #16 Hernie discale op├⌐r├⌐e                       ΓåÆ 15%  Lombo-sacralgie par l├⌐sion discale - S├⌐quelle de h
+≡ƒöº localExpertAnalysis V3.3.405 - fix blast auriculaire ORL (d├⌐chirure tympanique, cophose asym├⌐trique, acouph├¿nes invalidants)
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): Patient ma├ºon de 45 ans, victime d'un AT le 10/01/2024 par chute d'├⌐chafaudage de 3 m├¿tres. Fracture du calcan├⌐um droit trait├⌐e orthop├⌐diquement. ├Ç la consolidation : raideur de la sous-astragalienne,
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 1 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+≡ƒª┤ [V3.3.292] Fracture calcan├⌐um d├⌐tect├⌐ ΓåÆ Bypass cumul, analyse directe via comprehensiveSingleLesionAnalysis
+≡ƒöì [M├ëTACARPIENS] Input brut: patient ma├ºon de 45 ans, victime d un at le 10/01/2024 par chute d ├⌐chafaudage de 3 m├¿tres. fracture du calcan├⌐um droit trait├⌐e orthop├⌐diquement. ├á la consolidation : raideur de la sous-astragalienne, douleurs ├á la marche prolong├⌐e, port de semelles orthop├⌐diques.
+≡ƒöì [M├ëTACARPIENS] hasMetaWord: false
+≡ƒöì [M├ëTACARPIENS] hasSingleOrPerte: false
+≡ƒöì [M├ëTACARPIENS] hasSpecificFinger: false
+≡ƒöì [M├ëTACARPIENS] hasCinq: true
+ΓÜá∩╕Å [M├ëTACARPIENS] Pas de dialogue - continuons analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì [EARLY] Ant├⌐c├⌐dents d├⌐tect├⌐s: 0 - 
+≡ƒöì [DEBUG EXPERT RULE - EARLY TEST]
+Pattern: /contusion.*cerebrale|traumatisme.*crani.*contusion/i
+Context: /perte.*connaissance|frontale|temporale|parietale|breve|courte|surveillance.*neurologique/i
+NegativeContext: /spondylo|listthesis|glissement.*vertebral/i
+CleanText: "patient macon de 45 ans, victime d un at le 10/01/2024 par chute d echafaudage de 3 metres. fracture du calcaneum droit traitee orthopediquement. a la consolidation : raideur de la sous astragalienne, douleurs a la marche prolongee, port de semelles orthopediques."
+patternMatchClean: false, contextMatchClean: false
+negContextMatchClean: false, negContextMatchWorking: false
+matchClean: false, matchWorking: false
+Γ£à [EXPERT RULE MATCH - PRIORITY 999] Fracture du calcan├⌐um - Avec douleurs et boiterie = [10-30] ΓåÆ 20% (coef: 0.50)
+  Γ£à #17 Description narrative m├⌐dicale              ΓåÆ 20%  Fracture du calcan├⌐um - Avec douleurs et boiterie
+≡ƒöº localExpertAnalysis V3.3.405 - fix blast auriculaire ORL (d├⌐chirure tympanique, cophose asym├⌐trique, acouph├¿nes invalidants)
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): amputation avant-bras
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 1 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+≡ƒª┐ [V3.3.229] AMPUTATION MEMBRE D├ëTECT├ëE ΓåÆ Analyse sp├⌐cialis├⌐e (site unique)
+  Γ£à #18 Texte tr├¿s court                            ΓåÆ 62%  Amputation de l'avant-bras (tiers moyen - Main Dom
+≡ƒöº localExpertAnalysis V3.3.405 - fix blast auriculaire ORL (d├⌐chirure tympanique, cophose asym├⌐trique, acouph├¿nes invalidants)
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): PTH droite sur fracture col f├⌐moral avec boiterie r├⌐siduelle
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 0 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+≡ƒöì DEBUG STEPPAGE D├ëTAILL├ë:
+   - steppageMatch: false
+   - amyotrophieMIMatch: false
+   - fractureL1Match: false
+   - Texte analys├⌐: PTH droite sur fracture col f├⌐moral avec boiterie r├⌐siduelle
+Γ¥î STEPPAGE NON D├ëTECT├ë - Conditions non remplies
+≡ƒöì DEBUG D├ëVIATION:
+   - deviationMatch: false
+   - mainContext: false
+   - Recherche dans: diviation NON trouv├⌐
+≡ƒöì [V3.3.155] S├⌐quelles d├⌐tect├⌐es: 3 [
+  'S├⌐quelles de proth├¿se totale de hanche (avec s├⌐quelles fonctionnelles)',
+  'Fracture du col du f├⌐mur',
+  'Boiterie'
+]
+≡ƒª┤ [V3.3.288] Fracture col f├⌐mur + raideur hanche/raccourcissement ΓåÆ PAS de cumul
+≡ƒöì V3.3.201k: isCumulDetected = false , lesionCount = 1
+≡ƒºá [V3.3.214] TC check: hasTC=false, hasNeuro=false, hasFocal=false, neuroCount=0
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 0 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+ΓÜá∩╕Å POLYTRAUMATISME D├ëTECT├ë: 3 s├⌐quelle(s)
+≡ƒôÜ TROUV├ë DANS BAR├êME: "S├⌐quelles de proth├¿se totale de hanche (avec s├⌐quelles fonctionnelles)" ΓåÆ "S├⌐quelles de proth├¿se totale de hanche" (15-40%)
+   ≡ƒôè [V3.3.365] Severity-adjusted bar├¿me: [15-40] ├ù coef 0.50 = 28%
+≡ƒôÜ TROUV├ë DANS BAR├êME: "Fracture du col du f├⌐mur" ΓåÆ "Fracture du col du f├⌐mur - Consolidation avec raccourcissement et raideur" (30-60%)
+   ≡ƒôè [V3.3.365] Severity-adjusted bar├¿me: [30-60] ├ù coef 0.50 = 45%
+≡ƒª┤ [V3.3.365b] Fracture col f├⌐mur: system rate 30% pr├⌐cis ΓåÆ cap bar├¿me ├á 30%
+≡ƒöä REGROUPEMENT PAR SYST├êME: [ 'MEMBRE_INFERIEUR: 30%' ]
+≡ƒöä [V3.3.357] Reclassification: d├⌐tectedSequelae multiples ΓåÆ M├èME syst├¿me ΓåÆ CAS SIMPLE
+≡ƒº« CALCUL BALTHAZAR (PAR SYST├êME): [ 'MEMBRE_INFERIEUR: 30%' ]
+≡ƒôè IPP GLOBAL CUMUL├ë: 30%
+  Γ£à #19 Abr├⌐viation PTH (proth├¿se hanche)           ΓåÆ 30%  Membre inf├⌐rieur (HANCHE) : Fracture col f├⌐mur ave
+≡ƒöº localExpertAnalysis V3.3.405 - fix blast auriculaire ORL (d├⌐chirure tympanique, cophose asym├⌐trique, acouph├¿nes invalidants)
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): PTG gauche pour gonarthrose post-traumatique, flexion limit├⌐e ├á 90┬░
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 0 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+≡ƒöì DEBUG STEPPAGE D├ëTAILL├ë:
+   - steppageMatch: false
+   - amyotrophieMIMatch: false
+   - fractureL1Match: false
+   - Texte analys├⌐: PTG gauche pour gonarthrose post-traumatique, flexion limit├⌐e ├á 90┬░
+Γ¥î STEPPAGE NON D├ëTECT├ë - Conditions non remplies
+≡ƒöì DEBUG D├ëVIATION:
+   - deviationMatch: false
+   - mainContext: false
+   - Recherche dans: diviation NON trouv├⌐
+≡ƒöì [V3.3.155] S├⌐quelles d├⌐tect├⌐es: 0 []
+≡ƒöì V3.3.201k: isCumulDetected = false , lesionCount = 1
+≡ƒöì DEBUG M├ëTACARPIENS - Texte normalis├⌐: prothese totale de $1 gauche pour gonarthrose post traumatique, flexion limitee a 90┬░ arthropathie degenerescence articulaire usure articulaire arthrose degenerescence articulaire usure articulaire arthrose arthropathie usure articulaire arthrose arthropathie degenerescence articulaire flexion coude flexion coude flechir coude
+≡ƒöì DEBUG M├ëTACARPIENS - hasMetacarpienWord: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSingleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasMultipleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSpecificFingerEarly: false
+≡ƒöì DEBUG M├ëTACARPIENS - isMetacarpienSingleQueryEarly: false
+≡ƒöì V3.3.139: V├⌐rification cumul prioritaire...
+≡ƒöì Query words: ptg, gauche, pour, gonarthrose, post, traumatique,, flexion, limitee, 90┬░
+≡ƒöì Cat├⌐gorie cumul trouv├⌐e: Cumuls de L├⌐sions et Polytraumatismes
+≡ƒöì Entr├⌐es avec searchTerms v├⌐rifi├⌐es: 51, meilleur score: 0.0%
+Γä╣∩╕Å Aucun cumul prioritaire trouv├⌐ (similarit├⌐ < 70%), continue avec analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒª╢ [V3.3.317] hasMTPLuxation: false hasMetaFracture: false hasTSLO: false hasFootContext: false
+≡ƒöì isCumulDetected: false lesionCount: 1
+≡ƒöì [M├ëTACARPIENS] Input brut: ptg gauche pour gonarthrose post-traumatique flexion limit├⌐e ├á 90┬░
+≡ƒöì [M├ëTACARPIENS] hasMetaWord: false
+≡ƒöì [M├ëTACARPIENS] hasSingleOrPerte: false
+≡ƒöì [M├ëTACARPIENS] hasSpecificFinger: false
+≡ƒöì [M├ëTACARPIENS] hasCinq: false
+ΓÜá∩╕Å [M├ëTACARPIENS] Pas de dialogue - continuons analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì [EARLY] Ant├⌐c├⌐dents d├⌐tect├⌐s: 0 - 
+Γ£à [EXPERT RULE MATCH - PRIORITY 11000] Arthrose f├⌐moro-patellaire ou f├⌐moro-tibiale post-traumatique = [10-30] ΓåÆ 25% (coef: 0.75)
+  Γ£à #20 Abr├⌐viation PTG (proth├¿se genou)            ΓåÆ 25%  Arthrose f├⌐moro-patellaire ou f├⌐moro-tibiale post-
+≡ƒöº localExpertAnalysis V3.3.405 - fix blast auriculaire ORL (d├⌐chirure tympanique, cophose asym├⌐trique, acouph├¿nes invalidants)
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): SDRC de la main droite post-fracture du poignet
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 1 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+ΓÜí [V3.3.404] BYPASS SDRC I: severityCount=0, severeKw=false, MS=true, MI=false ΓåÆ rate=8%
+  Γ£à #21 Abr├⌐viation SDRC (algodystrophie)           ΓåÆ 8%  Algodystrophie (SDRC type I) - Forme mineure r├⌐sol
+≡ƒöº localExpertAnalysis V3.3.405 - fix blast auriculaire ORL (d├⌐chirure tympanique, cophose asym├⌐trique, acouph├¿nes invalidants)
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): paralysie du SPE droit avec steppage ├á la marche
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 0 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+≡ƒöì DEBUG STEPPAGE D├ëTAILL├ë:
+   - steppageMatch: true
+   - amyotrophieMIMatch: false
+   - fractureL1Match: false
+   - Texte analys├⌐: paralysie du SPE droit avec steppage ├á la marche
+Γ£à PARALYSIE SPE AVEC STEPPAGE D├ëTECT├ëE (PRIORIT├ë ABSOLUE)
+≡ƒöì DEBUG D├ëVIATION:
+   - deviationMatch: false
+   - mainContext: false
+   - Recherche dans: diviation NON trouv├⌐
+≡ƒöì [V3.3.155] S├⌐quelles d├⌐tect├⌐es: 1 [ 'Paralysie du nerf sciatique poplit├⌐ externe (SPE) avec steppage' ]
+≡ƒöì V3.3.201k: isCumulDetected = false , lesionCount = 1
+≡ƒºá [V3.3.214] TC check: hasTC=false, hasNeuro=false, hasFocal=false, neuroCount=0
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 0 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+Γ£à CAS SIMPLE D├ëTECT├ë: 1 s├⌐quelle(s)
+≡ƒôÜ TROUV├ë DANS BAR├êME: "Paralysie du nerf sciatique poplit├⌐ externe (SPE) avec steppage" ΓåÆ "Paralysie du nerf sciatique poplit├⌐ externe (SPE)" (15-25%)
+   ≡ƒôè [V3.3.365] Severity-adjusted bar├¿me: [15-25] ├ù coef 0.00 = 15%
+≡ƒöä REGROUPEMENT PAR SYST├êME: [ 'NEUROLOGIQUE: 15%' ]
+≡ƒº« CALCUL BALTHAZAR (PAR SYST├êME): [ 'NEUROLOGIQUE: 15%' ]
+≡ƒôè IPP GLOBAL CUMUL├ë: 15%
+  Γ£à #22 Abr├⌐viation SPE avec steppage               ΓåÆ 15%  Steppage unilat├⌐ral (pied tombant - paralysie rele
+≡ƒöº localExpertAnalysis V3.3.405 - fix blast auriculaire ORL (d├⌐chirure tympanique, cophose asym├⌐trique, acouph├¿nes invalidants)
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): je peux plus plier le genou, il se bloque quand je descends les escaliers et il gonfle d├¿s que je marche un peu
+   - Texte apr├¿s normalisation SMS: je peux plus plier le genou, il se bloque quand je descends les escaliers et il gonfle d├¿s que j'ai  marche un peu
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 0 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+≡ƒöì DEBUG STEPPAGE D├ëTAILL├ë:
+   - steppageMatch: false
+   - amyotrophieMIMatch: false
+   - fractureL1Match: false
+   - Texte analys├⌐: je peux plus plier le genou, il se bloque quand je descends les escaliers et il gonfle d├¿s que j'ai  marche un peu
+Γ¥î STEPPAGE NON D├ëTECT├ë - Conditions non remplies
+≡ƒöì DEBUG D├ëVIATION:
+   - deviationMatch: false
+   - mainContext: false
+   - Recherche dans: diviation NON trouv├⌐
+≡ƒöì [V3.3.155] S├⌐quelles d├⌐tect├⌐es: 0 []
+≡ƒöì V3.3.201k: isCumulDetected = false , lesionCount = 1
+≡ƒöì DEBUG M├ëTACARPIENS - Texte normalis├⌐: je peux plus plier genou, il se bloque quand je descends escaliers et il gonfle des que j ai marche leger femoro tibiale femoro patellaire articulation genou genou femoro patellaire articulation genou genou femoro tibiale articulation genou genou femoro tibiale femoro patellaire
+≡ƒöì DEBUG M├ëTACARPIENS - hasMetacarpienWord: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSingleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasMultipleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSpecificFingerEarly: false
+≡ƒöì DEBUG M├ëTACARPIENS - isMetacarpienSingleQueryEarly: false
+≡ƒöì V3.3.139: V├⌐rification cumul prioritaire...
+≡ƒöì Query words: peux, plus, plier, genou,, bloque, quand, descends, les, escaliers, gonfle
+≡ƒöì Cat├⌐gorie cumul trouv├⌐e: Cumuls de L├⌐sions et Polytraumatismes
+≡ƒöì Entr├⌐es avec searchTerms v├⌐rifi├⌐es: 51, meilleur score: 0.0%
+Γä╣∩╕Å Aucun cumul prioritaire trouv├⌐ (similarit├⌐ < 70%), continue avec analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒª╢ [V3.3.317] hasMTPLuxation: false hasMetaFracture: false hasTSLO: false hasFootContext: false
+≡ƒöì isCumulDetected: false lesionCount: 1
+≡ƒöì [M├ëTACARPIENS] Input brut: je peux plus plier le genou il se bloque quand je descends les escaliers et il gonfle d├¿s que j ai marche un peu
+≡ƒöì [M├ëTACARPIENS] hasMetaWord: false
+≡ƒöì [M├ëTACARPIENS] hasSingleOrPerte: false
+≡ƒöì [M├ëTACARPIENS] hasSpecificFinger: false
+≡ƒöì [M├ëTACARPIENS] hasCinq: false
+ΓÜá∩╕Å [M├ëTACARPIENS] Pas de dialogue - continuons analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì [EARLY] Ant├⌐c├⌐dents d├⌐tect├⌐s: 0 - 
+≡ƒöì [DEBUG EXPERT RULE - EARLY TEST]
+Pattern: /contusion.*cerebrale|traumatisme.*crani.*contusion/i
+Context: /perte.*connaissance|frontale|temporale|parietale|breve|courte|surveillance.*neurologique/i
+NegativeContext: /spondylo|listthesis|glissement.*vertebral/i
+CleanText: "je peux plus plier le genou il se bloque quand je descends les escaliers et il gonfle des que j ai marche un peu"
+patternMatchClean: false, contextMatchClean: false
+negContextMatchClean: false, negContextMatchWorking: false
+matchClean: false, matchWorking: false
+≡ƒöì [DEBUG EXPERT RULE - EARLY TEST]
+Pattern: /spondylolisthesis|spondylo.*listhesis|listthesis|glissement\s+vertebral/i
+Context: /lombaire|L\d|S\d|rachis|traumatisme|post-traumatique/i
+NegativeContext: /contusion.*cerebrale|perte.*connaissance|mandibule|genou|polytraumatisme|chute.*echafaudage/i
+CleanText: "je peux plus plier le genou il se bloque quand je descends les escaliers et il gonfle des que j ai marche un peu"
+patternMatchClean: false, contextMatchClean: false
+negContextMatchClean: true, negContextMatchWorking: true
+matchClean: false, matchWorking: false
+≡ƒÄ» TOP 50 R├ëSULTATS: [
+  {
+    name: 'Arthrose f├⌐moro-patellaire ou f├⌐moro-tibiale post-traumatique',
+    score: 821,
+    path: 'Membres Inf├⌐rieurs > Genou - L├⌐sions Osseuses et Articulaires'
+  },
+  {
+    name: 'Fracture des plateaux tibiaux - Avec d├⌐viation et/ou raideur',
+    score: 578,
+    path: 'Membres Inf├⌐rieurs > Genou - L├⌐sions Osseuses et Articulaires'
+  },
+  {
+    name: 'M├⌐niscectomie + chondropathie s├⌐v├¿re (cumul)',
+    score: 511,
+    path: 'Cumuls de L├⌐sions et Polytraumatismes > Cumuls Simples - M├¬me Membre'
+  },
+  {
+    name: 'Plateaux tibiaux + raideur + arthrose (cumul)',
+    score: 498,
+    path: 'Cumuls de L├⌐sions et Polytraumatismes > Cumuls Simples - M├¬me Membre'
+  },
+  {
+    name: 'Fracture isol├⌐e du tibia',
+    score: 467,
+    path: 'Membres Inf├⌐rieurs > Jambe - Fractures'
+  },
+  {
+    name: 'Fracture du pilon tibial',
+    score: 437,
+    path: 'Membres Inf├⌐rieurs > Cheville (Cou-de-pied) - Fractures'
+  },
+  {
+    name: 'Syndrome du tunnel tarsien (compression nerf tibial post├⌐rieur)',
+    score: 429,
+    path: 'Membres Inf├⌐rieurs > Pied - Pathologies des tissus mous'
+  },
+  {
+    name: 'Fracture de la rotule - Avec g├¬ne fonctionnelle',
+    score: 393,
+    path: 'Membres Inf├⌐rieurs > Genou - L├⌐sions Osseuses et Articulaires'
+  },
+  {
+    name: "Laxit├⌐ chronique du genou (s├⌐quelle d'entorse)",
+    score: 297,
+    path: 'Membres Inf├⌐rieurs > Genou - L├⌐sions Ligamentaires et M├⌐niscales'
+  },
+  {
+    name: 'S├⌐quelles de proth├¿se totale de genou',
+    score: 296,
+    path: 'Membres Inf├⌐rieurs > Genou - L├⌐sions Osseuses et Articulaires'
+  },
+  {
+    name: 'Hydarthrose chronique du genou',
+    score: 294,
+    path: 'Membres Inf├⌐rieurs > Genou - L├⌐sions Osseuses et Articulaires'
+  },
+  {
+    name: 'D├⌐chirure/rupture ligament lat├⌐ral interne (LLI) - ligament collat├⌐ral m├⌐dial genou',
+    score: 276,
+    path: 'Membres Inf├⌐rieurs > Genou - L├⌐sions Ligamentaires et M├⌐niscales'
+  },
+  {
+    name: 'D├⌐chirure/rupture ligament lat├⌐ral externe (LLE) - ligament collat├⌐ral lat├⌐ral genou',
+    score: 275,
+    path: 'Membres Inf├⌐rieurs > Genou - L├⌐sions Ligamentaires et M├⌐niscales'
+  },
+  {
+    name: 'Raideur genou sur proth├¿se pr├⌐existante',
+    score: 244,
+    path: '├ëtats Ant├⌐rieurs et Aggravation de Pathologies Pr├⌐existantes > Aggravation Genou sur ├ëtat Ant├⌐rieur'
+  },
+  {
+    name: 'Chondropathie aggrav├⌐e sur arthrose genou',
+    score: 233,
+    path: '├ëtats Ant├⌐rieurs et Aggravation de Pathologies Pr├⌐existantes > Aggravation Genou sur ├ëtat Ant├⌐rieur'
+  },
+  {
+    name: 'Fracture genou sur gonarthrose pr├⌐existante',
+    score: 232,
+    path: '├ëtats Ant├⌐rieurs et Aggravation de Pathologies Pr├⌐existantes > Aggravation Genou sur ├ëtat Ant├⌐rieur'
+  },
+  {
+    name: 'S├⌐quelles de rupture du ligament crois├⌐ ant├⌐rieur (LCA)',
+    score: 214,
+    path: 'Membres Inf├⌐rieurs > Genou - L├⌐sions Ligamentaires et M├⌐niscales'
+  },
+  {
+    name: 'S├⌐quelles de rupture du ligament crois├⌐ post├⌐rieur (LCP)',
+    score: 214,
+    path: 'Membres Inf├⌐rieurs > Genou - L├⌐sions Ligamentaires et M├⌐niscales'
+  },
+  {
+    name: 'S├⌐quelles de m├⌐niscectomie (douleurs, hydarthrose)',
+    score: 214,
+    path: 'Membres Inf├⌐rieurs > Genou - L├⌐sions Ligamentaires et M├⌐niscales'
+  },
+  {
+    name: 'Raideur genou + instabilit├⌐ LCA (cumul)',
+    score: 205,
+    path: 'Cumuls de L├⌐sions et Polytraumatismes > Cumuls Simples - M├¬me Membre'
+  },
+  {
+    name: 'Raideur genou + d├⌐robements',
+    score: 194,
+    path: 'Cumuls de L├⌐sions et Polytraumatismes > Cumuls Simples - M├¬me Membre'
+  },
+  {
+    name: 'Destruction genou (polytraumatisme intra-articulaire)',
+    score: 192,
+    path: 'Cumuls de L├⌐sions et Polytraumatismes > Polytraumatismes - Membres Multiples'
+  },
+  {
+    name: '├ëlongation/d├⌐chirure musculaire quadriceps - Tendinopathie quadricipitale (s├⌐quelles)',
+    score: 189,
+    path: 'Membres Inf├⌐rieurs > Cuisse - L├⌐sions Musculaires et Tendineuses'
+  },
+  {
+    name: 'Polytraumatisme vision + audition + genou',
+    score: 182,
+    path: 'Cumuls de L├⌐sions et Polytraumatismes > Polytraumatismes - Membres Multiples'
+  },
+  {
+    name: 'Rupture du tendon quadricipital',
+    score: 156,
+    path: 'Membres Inf├⌐rieurs > Cuisse - L├⌐sions Musculaires et Tendineuses'
+  },
+  {
+    name: 'Entorse LCA sur m├⌐niscectomie ancienne',
+    score: 152,
+    path: '├ëtats Ant├⌐rieurs et Aggravation de Pathologies Pr├⌐existantes > Aggravation Genou sur ├ëtat Ant├⌐rieur'
+  },
+  {
+    name: "Syndrome des loges chronique d'effort de la jambe",
+    score: 115,
+    path: 'Membres Inf├⌐rieurs > Jambe - Fractures'
+  },
+  {
+    name: 'LCA + m├⌐niscectomie + instabilit├⌐ (cumul)',
+    score: 113,
+    path: 'Cumuls de L├⌐sions et Polytraumatismes > Cumuls Simples - M├¬me Membre'
+  },
+  {
+    name: 'S├⌐quelles de l├⌐sions musculaires majeures de la cuisse',
+    score: 109,
+    path: 'Membres Inf├⌐rieurs > Cuisse - L├⌐sions Musculaires et Tendineuses'
+  },
+  {
+    name: 'Polytraumatisme membre inf├⌐rieur droit complet',
+    score: 102,
+    path: 'Cumuls de L├⌐sions et Polytraumatismes > Polytraumatismes - Membres Multiples'
+  },
+  {
+    name: 'Apon├⌐vrosite plantaire (fasciite plantaire) chronique post-traumatique',
+    score: 78,
+    path: 'Membres Inf├⌐rieurs > Pied - Pathologies des tissus mous'
+  },
+  {
+    name: "Tendinopathie d'Achille post-traumatique chronique",
+    score: 74,
+    path: 'Membres Inf├⌐rieurs > Pied - Tendons'
+  },
+  {
+    name: 'Troubles trophiques, ┼ôd├¿me chronique, varices',
+    score: 63,
+    path: 'Membres Inf├⌐rieurs > Membre Inf├⌐rieur - L├⌐sions Diverses'
+  },
+  {
+    name: "Raccourcissement d'un membre inf├⌐rieur",
+    score: 62,
+    path: 'Membres Inf├⌐rieurs > Membre Inf├⌐rieur - L├⌐sions Diverses'
+  },
+  {
+    name: 'Boiterie (sans raccourcissement)',
+    score: 62,
+    path: 'Membres Inf├⌐rieurs > Membre Inf├⌐rieur - L├⌐sions Diverses'
+  },
+  {
+    name: 'Algodystrophie (SDRC de type I) - Forme majeure s├⌐quellaire du membre sup├⌐rieur',
+    score: 58,
+    path: 'Algodystrophie et Syndromes Douloureux R├⌐gionaux Complexes > Syndrome Douloureux R├⌐gional Complexe (SDRC)'
+  },
+  {
+    name: 'Algodystrophie (SDRC de type I) - Forme majeure s├⌐quellaire du membre inf├⌐rieur',
+    score: 58,
+    path: 'Algodystrophie et Syndromes Douloureux R├⌐gionaux Complexes > Syndrome Douloureux R├⌐gional Complexe (SDRC)'
+  },
+  {
+    name: 'St├⌐nose biliaire post-traumatique',
+    score: 45,
+    path: 'S├⌐quelles Thoraciques, Abdominales, Pelviennes et Cardio-vasculaires > Abdomen - Tube Digestif et Organes'
+  },
+  {
+    name: 'Pilon tibial + raideur cheville + hallux (cumul)',
+    score: 40,
+    path: 'Cumuls de L├⌐sions et Polytraumatismes > Cumuls Simples - M├¬me Membre'
+  },
+  {
+    name: 'Dysfonction ├⌐rectile post-traumatique (origine non neurologique m├⌐dullaire)',
+    score: 37,
+    path: 'S├⌐quelles Thoraciques, Abdominales, Pelviennes et Cardio-vasculaires > Appareil G├⌐nito-Urinaire'
+  },
+  {
+    name: 'St├⌐nose ur├⌐trale ΓÇö plus de 10 dilatations par an',
+    score: 36,
+    path: 'S├⌐quelles Thoraciques, Abdominales, Pelviennes et Cardio-vasculaires > Appareil G├⌐nito-Urinaire'
+  },
+  {
+    name: 'Bronchectasies (dilatations des bronches) post-traumatiques ou post-infectieuses',
+    score: 36,
+    path: 'S├⌐quelles Respiratoires > Insuffisance Respiratoire Chronique'
+  },
+  {
+    name: 'D├⌐pression majeure post-traumatique chronique r├⌐sistante',
+    score: 36,
+    path: "S├⌐quelles Psychiatriques S├⌐v├¿res et Sp├⌐cifiques > D├⌐pression et Troubles de l'Humeur"
+  },
+  {
+    name: 'L├⌐sions des gros vaisseaux (hors aorte) avec troubles h├⌐modynamiques',
+    score: 35,
+    path: 'S├⌐quelles Thoraciques, Abdominales, Pelviennes et Cardio-vasculaires > Appareil Circulatoire'
+  },
+  {
+    name: "Dissection traumatique d'un gros vaisseau (aorte, carotide) avec s├⌐quelles",
+    score: 35,
+    path: 'S├⌐quelles Thoraciques, Abdominales, Pelviennes et Cardio-vasculaires > Appareil Circulatoire'
+  },
+  {
+    name: "St├⌐rilit├⌐ f├⌐minine post-traumatique (selon l'├óge et le d├⌐sir de maternit├⌐)",
+    score: 35,
+    path: 'S├⌐quelles Thoraciques, Abdominales, Pelviennes et Cardio-vasculaires > Appareil G├⌐nito-Urinaire'
+  },
+  {
+    name: 'Silicose pulmonaire',
+    score: 35,
+    path: 'Maladies Professionnelles Indemnisables > Maladies Pulmonaires Professionnelles'
+  },
+  {
+    name: 'Fibrose pulmonaire post-traumatique (hors pneumoconiose)',
+    score: 34,
+    path: 'S├⌐quelles Thoraciques, Abdominales, Pelviennes et Cardio-vasculaires > Thorax - Pl├¿vre et Poumons'
+  },
+  {
+    name: 'Tuberculose pulmonaire post-traumatique (si incapacit├⌐ permanente)',
+    score: 34,
+    path: 'S├⌐quelles Thoraciques, Abdominales, Pelviennes et Cardio-vasculaires > Thorax - Pl├¿vre et Poumons'
+  },
+  {
+    name: "S├⌐quelles d'ulc├¿re chronique (cicatrices, amaigrissement, douleurs)",
+    score: 34,
+    path: 'S├⌐quelles Thoraciques, Abdominales, Pelviennes et Cardio-vasculaires > Abdomen - Tube Digestif et Organes'
+  }
+]
+≡ƒöì [detectRequestType] D├⌐but analyse...
+≡ƒôè [detectRequestType] R├⌐sultat: attribution
+≡ƒöì [determineSeverity] Text: je peux plus plier le genou il se bloque quand je descends les escaliers et il gonfle d├¿s que j'ai m
+≡ƒöì [determineSeverity] Faible signs: [ 'peu' ]
+  Γ£à #23 Sympt├┤mes genou sans diagnostic             ΓåÆ 10%  Arthrose f├⌐moro-patellaire ou f├⌐moro-tibiale post-
+≡ƒöº localExpertAnalysis V3.3.405 - fix blast auriculaire ORL (d├⌐chirure tympanique, cophose asym├⌐trique, acouph├¿nes invalidants)
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): j'ai mal au dos en permanence, je peux plus me baisser pour ramasser quelque chose par terre et ├ºa me lance dans la jambe droite
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 0 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+≡ƒöì DEBUG STEPPAGE D├ëTAILL├ë:
+   - steppageMatch: false
+   - amyotrophieMIMatch: false
+   - fractureL1Match: false
+   - Texte analys├⌐: j'ai mal au dos en permanence, je peux plus me baisser pour ramasser quelque chose par terre et ├ºa me lance dans la jambe droite
+Γ¥î STEPPAGE NON D├ëTECT├ë - Conditions non remplies
+≡ƒöì DEBUG D├ëVIATION:
+   - deviationMatch: false
+   - mainContext: false
+   - Recherche dans: diviation NON trouv├⌐
+≡ƒöì [V3.3.155] S├⌐quelles d├⌐tect├⌐es: 0 []
+≡ƒöì V3.3.201k: isCumulDetected = false , lesionCount = 1
+≡ƒöì DEBUG M├ëTACARPIENS - Texte normalis├⌐: j ai rachialgie en permanence, je peux plus me baisser pour ramasser quelque chose par terre et ca me lance dans $1 droit
+≡ƒöì DEBUG M├ëTACARPIENS - hasMetacarpienWord: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSingleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasMultipleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSpecificFingerEarly: false
+≡ƒöì DEBUG M├ëTACARPIENS - isMetacarpienSingleQueryEarly: false
+≡ƒöì V3.3.139: V├⌐rification cumul prioritaire...
+≡ƒöì Query words: mal, dos, permanence,, peux, plus, baisser, pour, ramasser, quelque, chose
+≡ƒöì Cat├⌐gorie cumul trouv├⌐e: Cumuls de L├⌐sions et Polytraumatismes
+≡ƒöì Entr├⌐es avec searchTerms v├⌐rifi├⌐es: 51, meilleur score: 0.0%
+Γä╣∩╕Å Aucun cumul prioritaire trouv├⌐ (similarit├⌐ < 70%), continue avec analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒª╢ [V3.3.317] hasMTPLuxation: false hasMetaFracture: false hasTSLO: false hasFootContext: false
+≡ƒöì isCumulDetected: false lesionCount: 1
+≡ƒöì [M├ëTACARPIENS] Input brut: j ai mal au dos en permanence je peux plus me baisser pour ramasser quelque chose par terre et ├ºa me lance dans la jambe droite
+≡ƒöì [M├ëTACARPIENS] hasMetaWord: false
+≡ƒöì [M├ëTACARPIENS] hasSingleOrPerte: false
+≡ƒöì [M├ëTACARPIENS] hasSpecificFinger: false
+≡ƒöì [M├ëTACARPIENS] hasCinq: false
+ΓÜá∩╕Å [M├ëTACARPIENS] Pas de dialogue - continuons analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì [EARLY] Ant├⌐c├⌐dents d├⌐tect├⌐s: 0 - 
+≡ƒöì [DEBUG EXPERT RULE - EARLY TEST]
+Pattern: /contusion.*cerebrale|traumatisme.*crani.*contusion/i
+Context: /perte.*connaissance|frontale|temporale|parietale|breve|courte|surveillance.*neurologique/i
+NegativeContext: /spondylo|listthesis|glissement.*vertebral/i
+CleanText: "j ai mal au dos en permanence je peux plus me baisser pour ramasser quelque chose par terre et ca me lance dans la jambe droite"
+patternMatchClean: false, contextMatchClean: false
+negContextMatchClean: false, negContextMatchWorking: false
+matchClean: false, matchWorking: false
+≡ƒöì [DEBUG EXPERT RULE - EARLY TEST]
+Pattern: /spondylolisthesis|spondylo.*listhesis|listthesis|glissement\s+vertebral/i
+Context: /lombaire|L\d|S\d|rachis|traumatisme|post-traumatique/i
+NegativeContext: /contusion.*cerebrale|perte.*connaissance|mandibule|genou|polytraumatisme|chute.*echafaudage/i
+CleanText: "j ai mal au dos en permanence je peux plus me baisser pour ramasser quelque chose par terre et ca me lance dans la jambe droite"
+patternMatchClean: false, contextMatchClean: false
+negContextMatchClean: false, negContextMatchWorking: false
+matchClean: false, matchWorking: false
+≡ƒÄ» TOP 50 R├ëSULTATS: [
+  {
+    name: 'Hernie discale lombaire post-traumatique - Syndrome rachidien pur (lombalgies)',
+    score: 517,
+    path: 'S├⌐quelles du Rachis, du Bassin et de la Moelle ├ëpini├¿re > Rachis'
+  },
+  {
+    name: 'Entorse lombaire avec lombalgies m├⌐caniques',
+    score: 507,
+    path: 'S├⌐quelles du Rachis, du Bassin et de la Moelle ├ëpini├¿re > Rachis'
+  },
+  {
+    name: 'Fracture tassement vert├⌐bral lombaire non d├⌐plac├⌐e consolid├⌐e',
+    score: 506,
+    path: 'S├⌐quelles du Rachis, du Bassin et de la Moelle ├ëpini├¿re > Rachis'
+  },
+  {
+    name: 'Hernie discale lombaire post-traumatique - Avec radiculalgie (sciatique ou cruralgie)',
+    score: 504,
+    path: 'S├⌐quelles du Rachis, du Bassin et de la Moelle ├ëpini├¿re > Rachis'
+  },
+  {
+    name: 'Syndrome de Maigne (Syndrome de la charni├¿re thoraco-lombaire)',
+    score: 498,
+    path: 'S├⌐quelles du Rachis, du Bassin et de la Moelle ├ëpini├¿re > Rachis'
+  },
+  {
+    name: 'Spondylose rhizom├⌐lique (atteinte lombaire)',
+    score: 493,
+    path: 'S├⌐quelles du Rachis, du Bassin et de la Moelle ├ëpini├¿re > Rachis'
+  },
+  {
+    name: 'Sciatique sur arthrose lombaire pr├⌐existante',
+    score: 433,
+    path: '├ëtats Ant├⌐rieurs et Aggravation de Pathologies Pr├⌐existantes > Aggravation Rachis sur ├ëtat Ant├⌐rieur'
+  },
+  {
+    name: 'Hernie discale sur canal ├⌐troit pr├⌐existant',
+    score: 353,
+    path: '├ëtats Ant├⌐rieurs et Aggravation de Pathologies Pr├⌐existantes > Aggravation Rachis sur ├ëtat Ant├⌐rieur'
+  },
+  {
+    name: 'Rhumatisme vert├⌐bral (lombalgie, cervicalgie) avec raideur',
+    score: 335,
+    path: 'S├⌐quelles du Rachis, du Bassin et de la Moelle ├ëpini├¿re > Rachis'
+  },
+  {
+    name: 'Syndrome post-traumatique cervical chronique (Whiplash / Coup du lapin)',
+    score: 328,
+    path: 'S├⌐quelles du Rachis, du Bassin et de la Moelle ├ëpini├¿re > Rachis'
+  },
+  {
+    name: 'Syndrome myofascial cervical post-traumatique (contractures chroniques)',
+    score: 326,
+    path: 'S├⌐quelles du Rachis, du Bassin et de la Moelle ├ëpini├¿re > Rachis'
+  },
+  {
+    name: 'Fracture tassement vert├⌐bral cervical non d├⌐plac├⌐e consolid├⌐e',
+    score: 325,
+    path: 'S├⌐quelles du Rachis, du Bassin et de la Moelle ├ëpini├¿re > Rachis'
+  },
+  {
+    name: 'Hernie discale cervicale post-traumatique - Syndrome rachidien pur (cervicalgies)',
+    score: 325,
+    path: 'S├⌐quelles du Rachis, du Bassin et de la Moelle ├ëpini├¿re > Rachis'
+  },
+  {
+    name: 'Hernie discale cervicale post-traumatique - Avec n├⌐vralgie cervico-brachiale (NCB)',
+    score: 318,
+    path: 'S├⌐quelles du Rachis, du Bassin et de la Moelle ├ëpini├¿re > Rachis'
+  },
+  {
+    name: 'My├⌐lopathie cervicarthrosique post-traumatique',
+    score: 317,
+    path: 'S├⌐quelles du Rachis, du Bassin et de la Moelle ├ëpini├¿re > Rachis'
+  },
+  {
+    name: 'Fracture tassement vert├⌐bral dorsal non d├⌐plac├⌐e consolid├⌐e',
+    score: 315,
+    path: 'S├⌐quelles du Rachis, du Bassin et de la Moelle ├ëpini├¿re > Rachis'
+  },
+  {
+    name: 'Fracture radius + lombalgie post-traumatique (cumul)',
+    score: 315,
+    path: 'Cumuls de L├⌐sions et Polytraumatismes > Polytraumatismes - Membres Multiples'
+  },
+  {
+    name: 'Polytraumatisme rachis triple ├⌐tage',
+    score: 314,
+    path: 'Cumuls de L├⌐sions et Polytraumatismes > Polytraumatismes - Membres Multiples'
+  },
+  {
+    name: 'Spondylolisth├⌐sis modifi├⌐ par traumatisme',
+    score: 313,
+    path: 'S├⌐quelles du Rachis, du Bassin et de la Moelle ├ëpini├¿re > Rachis'
+  },
+  {
+    name: "N├⌐vralgie d'Arnold (N├⌐vralgie du grand occipital) post-traumatique",
+    score: 308,
+    path: 'S├⌐quelles du Rachis, du Bassin et de la Moelle ├ëpini├¿re > Rachis'
+  },
+  {
+    name: 'Fistule de liquide c├⌐phalo-rachidien (LCR) persistante (otorrh├⌐e ou rhinorrh├⌐e)',
+    score: 306,
+    path: 'S├⌐quelles Cr├óniennes, Neurologiques et Psychiatriques > Cr├óne - L├⌐sions Osseuses'
+  },
+  {
+    name: 'Scoliose ou cyphose douloureuse post-traumatique',
+    score: 304,
+    path: 'S├⌐quelles du Rachis, du Bassin et de la Moelle ├ëpini├¿re > Rachis'
+  },
+  {
+    name: 'Raideur rachidienne post-immobilisation, sans douleurs',
+    score: 302,
+    path: 'S├⌐quelles du Rachis, du Bassin et de la Moelle ├ëpini├¿re > Rachis'
+  },
+  {
+    name: 'Raideur rachidienne avec douleurs ost├⌐o-articulaires',
+    score: 302,
+    path: 'S├⌐quelles du Rachis, du Bassin et de la Moelle ├ëpini├¿re > Rachis'
+  },
+  {
+    name: 'Raideur rachidienne avec douleurs n├⌐vralgiques',
+    score: 302,
+    path: 'S├⌐quelles du Rachis, du Bassin et de la Moelle ├ëpini├¿re > Rachis'
+  },
+  {
+    name: 'Raideur rachidienne avec d├⌐viation tr├¿s prononc├⌐e',
+    score: 302,
+    path: 'S├⌐quelles du Rachis, du Bassin et de la Moelle ├ëpini├¿re > Rachis'
+  },
+  {
+    name: 'Spondylose rhizom├⌐lique (atteinte de tout le rachis et hanches)',
+    score: 302,
+    path: 'S├⌐quelles du Rachis, du Bassin et de la Moelle ├ëpini├¿re > Rachis'
+  },
+  {
+    name: 'Majoration pour douleurs radiculo-m├⌐dullaires',
+    score: 295,
+    path: "S├⌐quelles du Rachis, du Bassin et de la Moelle ├ëpini├¿re > Troubles Nerveux d'Origine M├⌐dullaire"
+  },
+  {
+    name: 'Fracture des apophyses transverses',
+    score: 291,
+    path: 'S├⌐quelles du Rachis, du Bassin et de la Moelle ├ëpini├¿re > Rachis'
+  },
+  {
+    name: "Claudication intermittente d'origine m├⌐dullaire",
+    score: 284,
+    path: "S├⌐quelles du Rachis, du Bassin et de la Moelle ├ëpini├¿re > Troubles Nerveux d'Origine M├⌐dullaire"
+  },
+  {
+    name: 'Atrophie musculaire m├⌐dullaire - ├ëpaule/Ceinture scapulaire (droite)',
+    score: 284,
+    path: "S├⌐quelles du Rachis, du Bassin et de la Moelle ├ëpini├¿re > Troubles Nerveux d'Origine M├⌐dullaire"
+  },
+  {
+    name: 'Atrophie musculaire m├⌐dullaire - ├ëpaule/Ceinture scapulaire (gauche)',
+    score: 284,
+    path: "S├⌐quelles du Rachis, du Bassin et de la Moelle ├ëpini├¿re > Troubles Nerveux d'Origine M├⌐dullaire"
+  },
+  {
+    name: 'Atrophie musculaire m├⌐dullaire - Jambe',
+    score: 284,
+    path: "S├⌐quelles du Rachis, du Bassin et de la Moelle ├ëpini├¿re > Troubles Nerveux d'Origine M├⌐dullaire"
+  },
+  {
+    name: 'Syndrome de la queue de cheval post-traumatique',
+    score: 278,
+    path: "S├⌐quelles du Rachis, du Bassin et de la Moelle ├ëpini├¿re > Troubles Nerveux d'Origine M├⌐dullaire"
+  },
+  {
+    name: "Fracture isol├⌐e d'une branche pubienne ou de l'aile iliaque (sans d├⌐placement)",
+    score: 273,
+    path: 'S├⌐quelles du Rachis, du Bassin et de la Moelle ├ëpini├¿re > Bassin - L├⌐sions Osseuses'
+  },
+  {
+    name: 'Atrophie musculaire m├⌐dullaire - Main (droite)',
+    score: 273,
+    path: "S├⌐quelles du Rachis, du Bassin et de la Moelle ├ëpini├¿re > Troubles Nerveux d'Origine M├⌐dullaire"
+  },
+  {
+    name: 'Atrophie musculaire m├⌐dullaire - Main (gauche)',
+    score: 273,
+    path: "S├⌐quelles du Rachis, du Bassin et de la Moelle ├ëpini├¿re > Troubles Nerveux d'Origine M├⌐dullaire"
+  },
+  {
+    name: 'Atrophie musculaire m├⌐dullaire - Avant-bras (droit)',
+    score: 273,
+    path: "S├⌐quelles du Rachis, du Bassin et de la Moelle ├ëpini├¿re > Troubles Nerveux d'Origine M├⌐dullaire"
+  },
+  {
+    name: 'Atrophie musculaire m├⌐dullaire - Avant-bras (gauche)',
+    score: 273,
+    path: "S├⌐quelles du Rachis, du Bassin et de la Moelle ├ëpini├¿re > Troubles Nerveux d'Origine M├⌐dullaire"
+  },
+  {
+    name: 'Atrophie musculaire m├⌐dullaire - Bras (droit)',
+    score: 273,
+    path: "S├⌐quelles du Rachis, du Bassin et de la Moelle ├ëpini├¿re > Troubles Nerveux d'Origine M├⌐dullaire"
+  },
+  {
+    name: 'Atrophie musculaire m├⌐dullaire - Bras (gauche)',
+    score: 273,
+    path: "S├⌐quelles du Rachis, du Bassin et de la Moelle ├ëpini├¿re > Troubles Nerveux d'Origine M├⌐dullaire"
+  },
+  {
+    name: 'Atrophie musculaire m├⌐dullaire - Pied',
+    score: 273,
+    path: "S├⌐quelles du Rachis, du Bassin et de la Moelle ├ëpini├¿re > Troubles Nerveux d'Origine M├⌐dullaire"
+  },
+  {
+    name: 'Atrophie musculaire m├⌐dullaire - Cuisse',
+    score: 273,
+    path: "S├⌐quelles du Rachis, du Bassin et de la Moelle ├ëpini├¿re > Troubles Nerveux d'Origine M├⌐dullaire"
+  },
+  {
+    name: 'Atrophie musculaire m├⌐dullaire - Ceinture pelvienne',
+    score: 273,
+    path: "S├⌐quelles du Rachis, du Bassin et de la Moelle ├ëpini├¿re > Troubles Nerveux d'Origine M├⌐dullaire"
+  },
+  {
+    name: "Troubles de la sensibilit├⌐ d'origine m├⌐dullaire avec douleurs",
+    score: 273,
+    path: "S├⌐quelles du Rachis, du Bassin et de la Moelle ├ëpini├¿re > Troubles Nerveux d'Origine M├⌐dullaire"
+  },
+  {
+    name: 'N├⌐vralgie pudendale post-traumatique (fracture du bassin)',
+    score: 265,
+    path: 'S├⌐quelles du Rachis, du Bassin et de la Moelle ├ëpini├¿re > Bassin - L├⌐sions Osseuses'
+  },
+  {
+    name: 'R├⌐tention f├⌐cale corrigible',
+    score: 264,
+    path: "S├⌐quelles du Rachis, du Bassin et de la Moelle ├ëpini├¿re > Troubles Nerveux d'Origine M├⌐dullaire"
+  },
+  {
+    name: 'Incontinence f├⌐cale incompl├¿te ou rare',
+    score: 264,
+    path: "S├⌐quelles du Rachis, du Bassin et de la Moelle ├ëpini├¿re > Troubles Nerveux d'Origine M├⌐dullaire"
+  },
+  {
+    name: 'Incontinence f├⌐cale compl├¿te et fr├⌐quente',
+    score: 264,
+    path: "S├⌐quelles du Rachis, du Bassin et de la Moelle ├ëpini├¿re > Troubles Nerveux d'Origine M├⌐dullaire"
+  },
+  {
+    name: 'Fracture du cotyle avec arthrose post-traumatique',
+    score: 263,
+    path: 'S├⌐quelles du Rachis, du Bassin et de la Moelle ├ëpini├¿re > Bassin - L├⌐sions Osseuses'
+  }
+]
+≡ƒöì Contexte anatomique d├⌐tect├⌐: membreInf
+ΓÜá∩╕Å Filtrage anatomique aurait tout supprim├⌐, on garde les choix originaux
+  Γ£à #24 Mal au dos irradiant (sciatique)            ΓåÆ 13%  
+≡ƒöº localExpertAnalysis V3.3.405 - fix blast auriculaire ORL (d├⌐chirure tympanique, cophose asym├⌐trique, acouph├¿nes invalidants)
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): coup du lapin suite accident auto, cervicalgies persistantes avec raideur cervicale et c├⌐phal├⌐es
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 1 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+≡ƒöì DEBUG STEPPAGE D├ëTAILL├ë:
+   - steppageMatch: false
+   - amyotrophieMIMatch: false
+   - fractureL1Match: false
+   - Texte analys├⌐: coup du lapin suite accident auto, cervicalgies persistantes avec raideur cervicale et c├⌐phal├⌐es
+Γ¥î STEPPAGE NON D├ëTECT├ë - Conditions non remplies
+≡ƒöì DEBUG D├ëVIATION:
+   - deviationMatch: false
+   - mainContext: false
+   - Recherche dans: diviation NON trouv├⌐
+≡ƒöì [V3.3.155] S├⌐quelles d├⌐tect├⌐es: 1 [ 'C├⌐phal├⌐es post-traumatiques chroniques' ]
+≡ƒöì V3.3.201k: isCumulDetected = false , lesionCount = 1
+≡ƒºá [V3.3.214] TC check: hasTC=false, hasNeuro=true, hasFocal=false, neuroCount=1
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 1 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+Γ£à CAS SIMPLE D├ëTECT├ë: 1 s├⌐quelle(s)
+≡ƒôÜ TROUV├ë DANS BAR├êME: "C├⌐phal├⌐es post-traumatiques chroniques" ΓåÆ "C├⌐phal├⌐es post-traumatiques chroniques" (5-20%)
+   ≡ƒôè [V3.3.365] Severity-adjusted bar├¿me: [5-20] ├ù coef 0.00 = 5%
+≡ƒöä REGROUPEMENT PAR SYST├êME: [ 'NEUROLOGIQUE: 12%' ]
+≡ƒº« CALCUL BALTHAZAR (PAR SYST├êME): [ 'NEUROLOGIQUE: 12%' ]
+≡ƒôè IPP GLOBAL CUMUL├ë: 12%
+  Γ£à #25 Coup du lapin classique                     ΓåÆ 12%  Syndrome post-commotionnel avec syndrome cervical 
+≡ƒöº localExpertAnalysis V3.3.405 - fix blast auriculaire ORL (d├⌐chirure tympanique, cophose asym├⌐trique, acouph├¿nes invalidants)
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): fracture de 5 c├┤tes gauches avec h├⌐mothorax drain├⌐, s├⌐quelles restrictives persistantes et douleurs thoraciques r├⌐siduelles
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 1 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+≡ƒ½ü [V3.3.293] Fracture c├┤tes d├⌐tect├⌐ ΓåÆ Bypass cumul, analyse directe via comprehensiveSingleLesionAnalysis
+≡ƒöì [M├ëTACARPIENS] Input brut: fracture de 5 c├┤tes gauches avec h├⌐mothorax drain├⌐, s├⌐quelles restrictives persistantes et douleurs thoraciques r├⌐siduelles
+≡ƒöì [M├ëTACARPIENS] hasMetaWord: false
+≡ƒöì [M├ëTACARPIENS] hasSingleOrPerte: false
+≡ƒöì [M├ëTACARPIENS] hasSpecificFinger: false
+≡ƒöì [M├ëTACARPIENS] hasCinq: true
+ΓÜá∩╕Å [M├ëTACARPIENS] Pas de dialogue - continuons analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì [EARLY] Ant├⌐c├⌐dents d├⌐tect├⌐s: 0 - 
+≡ƒ½ü [V3.3.230] TRAUMATISME THORACIQUE avec s├⌐quelles respiratoires d├⌐tect├⌐
+≡ƒ½ü [V3.3.230] ΓåÆ H├⌐mothorax, adh├⌐rences et r├⌐tractions thoraciques | IPP: 10% | S├⌐v├⌐rit├⌐: moyen
+  Γ£à #26 Fracture c├┤tes + h├⌐mothorax                 ΓåÆ 10%  H├⌐mothorax, adh├⌐rences et r├⌐tractions thoraciques
+≡ƒöº localExpertAnalysis V3.3.405 - fix blast auriculaire ORL (d├⌐chirure tympanique, cophose asym├⌐trique, acouph├¿nes invalidants)
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): griffe cubitale main gauche par section du nerf cubital au coude
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 0 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+≡ƒºá [V3.3.281] PARALYSIE NERF P├ëRIPH├ëRIQUE MS d├⌐tect├⌐e ΓåÆ Analyse sp├⌐cialis├⌐e (site unique)
+  Γ£à #27 Paralysie nerf cubital                      ΓåÆ 19%  Paralysie du nerf cubital - Au bras (gauche)
+≡ƒöº localExpertAnalysis V3.3.405 - fix blast auriculaire ORL (d├⌐chirure tympanique, cophose asym├⌐trique, acouph├¿nes invalidants)
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): fracture mandibulaire trait├⌐e par ost├⌐osynth├¿se avec limitation de l'ouverture buccale ├á 25 mm et troubles de l'articul├⌐ dentaire
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 0 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+≡ƒöì DEBUG STEPPAGE D├ëTAILL├ë:
+   - steppageMatch: false
+   - amyotrophieMIMatch: false
+   - fractureL1Match: false
+   - Texte analys├⌐: fracture mandibulaire trait├⌐e par ost├⌐osynth├¿se avec limitation de l'ouverture buccale ├á 25 mm et troubles de l'articul├⌐ dentaire
+Γ¥î STEPPAGE NON D├ëTECT├ë - Conditions non remplies
+≡ƒöì DEBUG D├ëVIATION:
+   - deviationMatch: false
+   - mainContext: false
+   - Recherche dans: diviation NON trouv├⌐
+≡ƒöì [V3.3.155] S├⌐quelles d├⌐tect├⌐es: 1 [ 'Troubles de la mastication post-traumatiques' ]
+≡ƒöì V3.3.201k: isCumulDetected = false , lesionCount = 1
+≡ƒºá [V3.3.214] TC check: hasTC=false, hasNeuro=false, hasFocal=false, neuroCount=0
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 0 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+Γ£à CAS SIMPLE D├ëTECT├ë: 1 s├⌐quelle(s)
+≡ƒôÜ TROUV├ë DANS BAR├êME: "Troubles de la mastication post-traumatiques" ΓåÆ "Troubles menstruels post-traumatiques graves et persistants" (5-15%)
+   ≡ƒôè [V3.3.365] Severity-adjusted bar├¿me: [5-15] ├ù coef 0.50 = 10%
+≡ƒöä REGROUPEMENT PAR SYST├êME: [ 'AUTRE: 10%' ]
+≡ƒº« CALCUL BALTHAZAR (PAR SYST├êME): [ 'AUTRE: 10%' ]
+≡ƒôè IPP GLOBAL CUMUL├ë: 10%
+  ΓÜá∩╕Å #28 Fracture mandibulaire                      [10%] Aucun mot-cl├⌐ trouv├⌐ parmi [mandib, m├óchoire]
+≡ƒöº localExpertAnalysis V3.3.405 - fix blast auriculaire ORL (d├⌐chirure tympanique, cophose asym├⌐trique, acouph├¿nes invalidants)
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): cataracte post-traumatique oeil droit op├⌐r├⌐e avec implant, acuit├⌐ visuelle corrig├⌐e 6/10
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 1 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+≡ƒöì DEBUG STEPPAGE D├ëTAILL├ë:
+   - steppageMatch: false
+   - amyotrophieMIMatch: false
+   - fractureL1Match: false
+   - Texte analys├⌐: cataracte post-traumatique oeil droit op├⌐r├⌐e avec implant, acuit├⌐ visuelle corrig├⌐e 6/10
+Γ¥î STEPPAGE NON D├ëTECT├ë - Conditions non remplies
+≡ƒöì DEBUG D├ëVIATION:
+   - deviationMatch: false
+   - mainContext: false
+   - Recherche dans: diviation NON trouv├⌐
+≡ƒöì [V3.3.155] S├⌐quelles d├⌐tect├⌐es: 0 []
+≡ƒöì V3.3.201k: isCumulDetected = false , lesionCount = 1
+≡ƒöì DEBUG M├ëTACARPIENS - Texte normalis├⌐: cataracte post traumatique oeil droit avec implant, acuite visuelle corrigee 6/10 oeil oculaire ophtalmique oeil oeil ophtalmique oeil oeil oculaire oeil oeil oculaire vision vue visuel vision vue acuite visuelle vision vue acuite visuelle opacite cristallin cristallin opaque trouble cristallin cataracte cristallin opaque trouble cristallin cataracte opacite cristallin trouble cristallin cataracte opacite cristallin cristallin opaque cataracte opacite cristallin cristallin opaque av acuite visuelle vision de acuite acuite visuelle vision de acuite av vision de acuite av acuite visuelle dixieme sur 10 10eme dixieme /10 10eme dixieme /10 sur 10 6 dixieme 6 dixieme vision 6 6/10 6 dixieme vision 6 6/10 6 dixieme vision 6 6/10 6 dixieme 6 dixieme
+≡ƒöì DEBUG M├ëTACARPIENS - hasMetacarpienWord: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSingleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasMultipleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSpecificFingerEarly: false
+≡ƒöì DEBUG M├ëTACARPIENS - isMetacarpienSingleQueryEarly: false
+≡ƒöì V3.3.139: V├⌐rification cumul prioritaire...
+≡ƒöì Query words: cataracte, post, traumatique, oeil, droit, operee, avec, implant,, acuite, visuelle
+≡ƒöì Cat├⌐gorie cumul trouv├⌐e: Cumuls de L├⌐sions et Polytraumatismes
+≡ƒöì Entr├⌐es avec searchTerms v├⌐rifi├⌐es: 51, meilleur score: 0.0%
+Γä╣∩╕Å Aucun cumul prioritaire trouv├⌐ (similarit├⌐ < 70%), continue avec analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒª╢ [V3.3.317] hasMTPLuxation: false hasMetaFracture: false hasTSLO: false hasFootContext: false
+≡ƒöì isCumulDetected: false lesionCount: 1
+≡ƒöì [M├ëTACARPIENS] Input brut: cataracte post-traumatique oeil droit op├⌐r├⌐e avec implant acuit├⌐ visuelle corrig├⌐e6/10
+≡ƒöì [M├ëTACARPIENS] hasMetaWord: false
+≡ƒöì [M├ëTACARPIENS] hasSingleOrPerte: false
+≡ƒöì [M├ëTACARPIENS] hasSpecificFinger: false
+≡ƒöì [M├ëTACARPIENS] hasCinq: false
+ΓÜá∩╕Å [M├ëTACARPIENS] Pas de dialogue - continuons analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì [EARLY] Ant├⌐c├⌐dents d├⌐tect├⌐s: 0 - 
+≡ƒöì [DEBUG EXPERT RULE - EARLY TEST]
+Pattern: /contusion.*cerebrale|traumatisme.*crani.*contusion/i
+Context: /perte.*connaissance|frontale|temporale|parietale|breve|courte|surveillance.*neurologique/i
+NegativeContext: /spondylo|listthesis|glissement.*vertebral/i
+CleanText: "cataracte post traumatique oeil droit operee avec implant acuite visuelle corrigee6/10"
+patternMatchClean: false, contextMatchClean: false
+negContextMatchClean: false, negContextMatchWorking: false
+matchClean: false, matchWorking: false
+≡ƒöì [DEBUG EXPERT RULE - EARLY TEST]
+Pattern: /spondylolisthesis|spondylo.*listhesis|listthesis|glissement\s+vertebral/i
+Context: /lombaire|L\d|S\d|rachis|traumatisme|post-traumatique/i
+NegativeContext: /contusion.*cerebrale|perte.*connaissance|mandibule|genou|polytraumatisme|chute.*echafaudage/i
+CleanText: "cataracte post traumatique oeil droit operee avec implant acuite visuelle corrigee6/10"
+patternMatchClean: false, contextMatchClean: false
+negContextMatchClean: false, negContextMatchWorking: false
+matchClean: false, matchWorking: false
+  Γ£à #29 Cataracte post-traumatique                  ΓåÆ 10%  Cataracte (selon acuit├⌐ et complications)
+≡ƒöº localExpertAnalysis V3.3.405 - fix blast auriculaire ORL (d├⌐chirure tympanique, cophose asym├⌐trique, acouph├¿nes invalidants)
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): fracture du col du f├⌐mur droit trait├⌐e par vissage avec n├⌐crose avasculaire de la t├¬te f├⌐morale
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 1 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+≡ƒöì DEBUG STEPPAGE D├ëTAILL├ë:
+   - steppageMatch: false
+   - amyotrophieMIMatch: false
+   - fractureL1Match: false
+   - Texte analys├⌐: fracture du col du f├⌐mur droit trait├⌐e par vissage avec n├⌐crose avasculaire de la t├¬te f├⌐morale
+Γ¥î STEPPAGE NON D├ëTECT├ë - Conditions non remplies
+≡ƒöì DEBUG D├ëVIATION:
+   - deviationMatch: false
+   - mainContext: false
+   - Recherche dans: diviation NON trouv├⌐
+≡ƒöì [V3.3.155] S├⌐quelles d├⌐tect├⌐es: 1 [ 'Fracture du col du f├⌐mur' ]
+≡ƒöì V3.3.201k: isCumulDetected = false , lesionCount = 1
+≡ƒºá [V3.3.214] TC check: hasTC=false, hasNeuro=false, hasFocal=false, neuroCount=0
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 1 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+Γ£à CAS SIMPLE D├ëTECT├ë: 1 s├⌐quelle(s)
+≡ƒôÜ TROUV├ë DANS BAR├êME: "Fracture du col du f├⌐mur" ΓåÆ "Fracture du col du f├⌐mur - Consolidation avec raccourcissement et raideur" (30-60%)
+   ≡ƒôè [V3.3.365] Severity-adjusted bar├¿me: [30-60] ├ù coef 0.00 = 30%
+≡ƒª┤ [V3.3.365b] Fracture col f├⌐mur: system rate 40% pr├⌐cis ΓåÆ cap bar├¿me ├á 30%
+≡ƒöä REGROUPEMENT PAR SYST├êME: [ 'MEMBRE_INFERIEUR: 40%' ]
+≡ƒº« CALCUL BALTHAZAR (PAR SYST├êME): [ 'MEMBRE_INFERIEUR: 40%' ]
+≡ƒôè IPP GLOBAL CUMUL├ë: 40%
+  Γ£à #30 Fracture col f├⌐moral + n├⌐crose              ΓåÆ 40%  Membre inf├⌐rieur (HANCHE) : Fracture col f├⌐mur ave
+≡ƒöº localExpertAnalysis V3.3.405 - fix blast auriculaire ORL (d├⌐chirure tympanique, cophose asym├⌐trique, acouph├¿nes invalidants)
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): entorse grave cheville droite avec rupture du ligament lat├⌐ral externe et instabilit├⌐ chronique
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 1 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+≡ƒöì DEBUG STEPPAGE D├ëTAILL├ë:
+   - steppageMatch: false
+   - amyotrophieMIMatch: false
+   - fractureL1Match: false
+   - Texte analys├⌐: entorse grave cheville droite avec rupture du ligament lat├⌐ral externe et instabilit├⌐ chronique
+Γ¥î STEPPAGE NON D├ëTECT├ë - Conditions non remplies
+≡ƒöì DEBUG D├ëVIATION:
+   - deviationMatch: false
+   - mainContext: false
+   - Recherche dans: diviation NON trouv├⌐
+≡ƒöì [V3.3.155] S├⌐quelles d├⌐tect├⌐es: 1 [ "Instabilit├⌐ chronique de la cheville (s├⌐quelle d'entorse)" ]
+≡ƒª╢ [V3.3.227] Entorse grave cheville + instabilit├⌐ chronique ΓåÆ PAS de cumul (pathologie articulaire unique)
+≡ƒöì V3.3.201k: isCumulDetected = false , lesionCount = 1
+≡ƒºá [V3.3.214] TC check: hasTC=false, hasNeuro=false, hasFocal=false, neuroCount=0
+≡ƒª╢ [V3.3.228] ENTORSE GRAVE CHEVILLE d├⌐tect├⌐e ΓåÆ Bypass vers expert rules (pathologie articulaire unique)
+≡ƒöì DEBUG M├ëTACARPIENS - Texte normalis├⌐: entorse important $1 droit avec rupture ligament lateral externe et instabilite chronique distorsion foulure etirement ligamentaire entorse foulure etirement ligamentaire entorse distorsion etirement ligamentaire entorse distorsion foulure tibio tarsienne articulation cheville malleolaire cheville articulation cheville malleolaire cheville tibio tarsienne malleolaire cheville tibio tarsienne articulation cheville cheville tibio tarsienne articulation cheville ligament lateral externe ligament lateral externe ligament lateral externe ligament lateral externe collateral lateral ligament lateral externe ligament lateral externe ligament lateral externe collateral lateral ligament lateral externe ligament lateral externe ligament lateral externe ligament lateral externe ligament lateral externe
+≡ƒöì DEBUG M├ëTACARPIENS - hasMetacarpienWord: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSingleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasMultipleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSpecificFingerEarly: false
+≡ƒöì DEBUG M├ëTACARPIENS - isMetacarpienSingleQueryEarly: false
+≡ƒöì V3.3.139: V├⌐rification cumul prioritaire...
+≡ƒöì Query words: entorse, grave, cheville, droite, avec, rupture, ligament, lateral, externe, instabilite
+≡ƒöì Cat├⌐gorie cumul trouv├⌐e: Cumuls de L├⌐sions et Polytraumatismes
+≡ƒöì Entr├⌐es avec searchTerms v├⌐rifi├⌐es: 51, meilleur score: 0.0%
+Γä╣∩╕Å Aucun cumul prioritaire trouv├⌐ (similarit├⌐ < 70%), continue avec analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒª╢ [V3.3.317] hasMTPLuxation: false hasMetaFracture: false hasTSLO: false hasFootContext: true
+≡ƒöì isCumulDetected: false lesionCount: 1
+≡ƒöì [M├ëTACARPIENS] Input brut: entorse grave cheville droite avec rupture du ligament lat├⌐ral externe et instabilit├⌐ chronique
+≡ƒöì [M├ëTACARPIENS] hasMetaWord: false
+≡ƒöì [M├ëTACARPIENS] hasSingleOrPerte: false
+≡ƒöì [M├ëTACARPIENS] hasSpecificFinger: false
+≡ƒöì [M├ëTACARPIENS] hasCinq: false
+ΓÜá∩╕Å [M├ëTACARPIENS] Pas de dialogue - continuons analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì [EARLY] Ant├⌐c├⌐dents d├⌐tect├⌐s: 0 - 
+≡ƒª╢ [V3.3.227] Entorse grave cheville + instabilit├⌐ chronique ΓåÆ PAS de cumul (pathologie articulaire unique)
+Γ£à [EXPERT RULE MATCH - PRIORITY 15005] Instabilit├⌐ chronique de la cheville (s├⌐quelle d'entorse) = [5-15] ΓåÆ 5% (coef: 0.00)
+  Γ£à #31 Entorse grave cheville + instabilit├⌐        ΓåÆ 5%  Instabilit├⌐ chronique de la cheville (s├⌐quelle d'e
+≡ƒöº localExpertAnalysis V3.3.405 - fix blast auriculaire ORL (d├⌐chirure tympanique, cophose asym├⌐trique, acouph├¿nes invalidants)
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): rupture du tendon d'Achille gauche sutur├⌐e avec perte de force en flexion plantaire
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 0 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+≡ƒª┤ [V3.3.292] Rupture tendon Achille d├⌐tect├⌐ ΓåÆ Bypass cumul, analyse directe via comprehensiveSingleLesionAnalysis
+≡ƒöì [M├ëTACARPIENS] Input brut: rupture du tendon d achille gauche sutur├⌐e avec perte de force en flexion plantaire
+≡ƒöì [M├ëTACARPIENS] hasMetaWord: false
+≡ƒöì [M├ëTACARPIENS] hasSingleOrPerte: true
+≡ƒöì [M├ëTACARPIENS] hasSpecificFinger: false
+≡ƒöì [M├ëTACARPIENS] hasCinq: false
+ΓÜá∩╕Å [M├ëTACARPIENS] Pas de dialogue - continuons analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì [EARLY] Ant├⌐c├⌐dents d├⌐tect├⌐s: 0 - 
+≡ƒöì [DEBUG EXPERT RULE - EARLY TEST]
+Pattern: /contusion.*cerebrale|traumatisme.*crani.*contusion/i
+Context: /perte.*connaissance|frontale|temporale|parietale|breve|courte|surveillance.*neurologique/i
+NegativeContext: /spondylo|listthesis|glissement.*vertebral/i
+CleanText: "rupture du tendon d achille gauche suturee avec perte de force en flexion plantaire"
+patternMatchClean: false, contextMatchClean: false
+negContextMatchClean: false, negContextMatchWorking: false
+matchClean: false, matchWorking: false
+Γ£à [EXPERT RULE MATCH - PRIORITY 999] Rupture du tendon d'Achille - S├⌐quelles op├⌐ratoires = [5-15] ΓåÆ 5% (coef: 0.00)
+  Γ£à #32 Rupture tendon d'Achille                    ΓåÆ 5%  Rupture du tendon d'Achille - S├⌐quelles op├⌐ratoire
+≡ƒöº localExpertAnalysis V3.3.405 - fix blast auriculaire ORL (d├⌐chirure tympanique, cophose asym├⌐trique, acouph├¿nes invalidants)
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): br├╗lures 2├¿me et 3├¿me degr├⌐ de l'avant-bras droit avec cicatrices r├⌐tractiles limitant la pronation-supination
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 1 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+≡ƒöì DEBUG STEPPAGE D├ëTAILL├ë:
+   - steppageMatch: false
+   - amyotrophieMIMatch: false
+   - fractureL1Match: false
+   - Texte analys├⌐: br├╗lures 2├¿me et 3├¿me degr├⌐ de l'avant-bras droit avec cicatrices r├⌐tractiles limitant la pronation-supination
+Γ¥î STEPPAGE NON D├ëTECT├ë - Conditions non remplies
+≡ƒöì DEBUG D├ëVIATION:
+   - deviationMatch: false
+   - mainContext: false
+   - Recherche dans: diviation NON trouv├⌐
+≡ƒöì [V3.3.155] S├⌐quelles d├⌐tect├⌐es: 2 [
+  'Cicatrice pathologique (mauvaise qualit├⌐, adh├⌐rente)',
+  'Br├╗lures profondes post-traumatiques (avant-bras)'
+]
+≡ƒöì V3.3.201k: isCumulDetected = false , lesionCount = 1
+≡ƒºá [V3.3.214] TC check: hasTC=false, hasNeuro=false, hasFocal=false, neuroCount=0
+≡ƒöÑ [V3.3.215] BR├¢LURES PROFONDES MAIN/AVANT-BRAS d├⌐tect├⌐es ΓåÆ Bypass DIRECT vers expert rules
+≡ƒöì DEBUG M├ëTACARPIENS - Texte normalis├⌐: brulures 2eme et 3eme degre de l avant $1 droit avec cicatrices retractiles limitant pronation supination prono supination pronosupination rotation avant bras pronation pronosupination rotation avant bras pronation prono supination rotation avant bras pronation prono supination pronosupination supination limitee supination reduite paume vers haut supination supination reduite paume vers haut supination supination limitee paume vers haut supination supination limitee supination reduite
+≡ƒöì DEBUG M├ëTACARPIENS - hasMetacarpienWord: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSingleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasMultipleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSpecificFingerEarly: false
+≡ƒöì DEBUG M├ëTACARPIENS - isMetacarpienSingleQueryEarly: false
+≡ƒöì V3.3.139: V├⌐rification cumul prioritaire...
+≡ƒöì Query words: brulures, 2eme, 3eme, degre, avant, bras, droit, avec, cicatrices, retractiles
+≡ƒöì Cat├⌐gorie cumul trouv├⌐e: Cumuls de L├⌐sions et Polytraumatismes
+≡ƒöì Entr├⌐es avec searchTerms v├⌐rifi├⌐es: 51, meilleur score: 0.0%
+Γä╣∩╕Å Aucun cumul prioritaire trouv├⌐ (similarit├⌐ < 70%), continue avec analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒª╢ [V3.3.317] hasMTPLuxation: false hasMetaFracture: false hasTSLO: false hasFootContext: false
+≡ƒöì isCumulDetected: false lesionCount: 1
+≡ƒöì [M├ëTACARPIENS] Input brut: br├╗lures2├¿me et3├¿me degr├⌐ de l avant-bras droit avec cicatrices r├⌐tractiles limitant la pronation-supination
+≡ƒöì [M├ëTACARPIENS] hasMetaWord: false
+≡ƒöì [M├ëTACARPIENS] hasSingleOrPerte: false
+≡ƒöì [M├ëTACARPIENS] hasSpecificFinger: false
+≡ƒöì [M├ëTACARPIENS] hasCinq: false
+ΓÜá∩╕Å [M├ëTACARPIENS] Pas de dialogue - continuons analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì [EARLY] Ant├⌐c├⌐dents d├⌐tect├⌐s: 0 - 
+≡ƒöì [DEBUG EXPERT RULE - EARLY TEST]
+Pattern: /contusion.*cerebrale|traumatisme.*crani.*contusion/i
+Context: /perte.*connaissance|frontale|temporale|parietale|breve|courte|surveillance.*neurologique/i
+NegativeContext: /spondylo|listthesis|glissement.*vertebral/i
+CleanText: "brulures2eme et3eme degre de l avant bras droit avec cicatrices retractiles limitant la pronation supination"
+patternMatchClean: false, contextMatchClean: false
+negContextMatchClean: false, negContextMatchWorking: false
+matchClean: false, matchWorking: false
+Γ£à [EXPERT RULE MATCH - PRIORITY 1004] Br├╗lures cutan├⌐es l├⌐g├¿res - Moins de 10% de la surface corporelle = 5%
+  Γ£à #33 Br├╗lures avec cicatrices r├⌐tractiles        ΓåÆ 5%  Br├╗lures cutan├⌐es l├⌐g├¿res - Moins de 10% de la sur
+≡ƒöº localExpertAnalysis V3.3.405 - fix blast auriculaire ORL (d├⌐chirure tympanique, cophose asym├⌐trique, acouph├¿nes invalidants)
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): fracture de la clavicule droite avec sequelles fonctionnelles de l'epaule, abduction limitee a 90 degres
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 1 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+≡ƒª┤ [V3.3.221] FRACTURE CLAVICULE d├⌐tect├⌐e ΓåÆ Analyse sp├⌐cialis├⌐e
+  Γ£à #34 Texte OCR sans accents                      ΓåÆ 10%  Fracture Clavicule - Cal saillant avec raideur d'├⌐
+≡ƒöº localExpertAnalysis V3.3.405 - fix blast auriculaire ORL (d├⌐chirure tympanique, cophose asym├⌐trique, acouph├¿nes invalidants)
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): nefrectomie gauche apres traumatisme abdominal avec rein unique fonctionel
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 0 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+≡ƒöì DEBUG STEPPAGE D├ëTAILL├ë:
+   - steppageMatch: false
+   - amyotrophieMIMatch: false
+   - fractureL1Match: false
+   - Texte analys├⌐: nefrectomie gauche apres traumatisme abdominal avec rein unique fonctionel
+Γ¥î STEPPAGE NON D├ëTECT├ë - Conditions non remplies
+≡ƒöì DEBUG D├ëVIATION:
+   - deviationMatch: false
+   - mainContext: false
+   - Recherche dans: diviation NON trouv├⌐
+≡ƒöì [V3.3.155] S├⌐quelles d├⌐tect├⌐es: 0 []
+≡ƒöì V3.3.201k: isCumulDetected = false , lesionCount = 1
+≡ƒöì DEBUG M├ëTACARPIENS - Texte normalis├⌐: nephrectomie gauche apres traumatisme abdominal avec rein unique fonctionel renal nephrectomie nephrologie rein nephrectomie nephrologie rein renal nephrologie rein renal nephrectomie rein renal nephrectomie
+≡ƒöì DEBUG M├ëTACARPIENS - hasMetacarpienWord: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSingleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasMultipleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSpecificFingerEarly: false
+≡ƒöì DEBUG M├ëTACARPIENS - isMetacarpienSingleQueryEarly: false
+≡ƒöì V3.3.139: V├⌐rification cumul prioritaire...
+≡ƒöì Query words: nefrectomie, gauche, apres, traumatisme, abdominal, avec, rein, unique, fonctionel
+≡ƒöì Cat├⌐gorie cumul trouv├⌐e: Cumuls de L├⌐sions et Polytraumatismes
+≡ƒöì Entr├⌐es avec searchTerms v├⌐rifi├⌐es: 51, meilleur score: 0.0%
+Γä╣∩╕Å Aucun cumul prioritaire trouv├⌐ (similarit├⌐ < 70%), continue avec analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒª╢ [V3.3.317] hasMTPLuxation: false hasMetaFracture: false hasTSLO: false hasFootContext: false
+≡ƒöì isCumulDetected: false lesionCount: 1
+≡ƒöì [M├ëTACARPIENS] Input brut: nefrectomie gauche apres traumatisme abdominal avec rein unique fonctionel
+≡ƒöì [M├ëTACARPIENS] hasMetaWord: false
+≡ƒöì [M├ëTACARPIENS] hasSingleOrPerte: false
+≡ƒöì [M├ëTACARPIENS] hasSpecificFinger: false
+≡ƒöì [M├ëTACARPIENS] hasCinq: false
+ΓÜá∩╕Å [M├ëTACARPIENS] Pas de dialogue - continuons analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì [EARLY] Ant├⌐c├⌐dents d├⌐tect├⌐s: 0 - 
+≡ƒöì [DEBUG EXPERT RULE - EARLY TEST]
+Pattern: /contusion.*cerebrale|traumatisme.*crani.*contusion/i
+Context: /perte.*connaissance|frontale|temporale|parietale|breve|courte|surveillance.*neurologique/i
+NegativeContext: /spondylo|listthesis|glissement.*vertebral/i
+CleanText: "nefrectomie gauche apres traumatisme abdominal avec rein unique fonctionel"
+patternMatchClean: false, contextMatchClean: false
+negContextMatchClean: false, negContextMatchWorking: false
+matchClean: false, matchWorking: false
+Γ£à [EXPERT RULE MATCH - PRIORITY 96] N├⌐phrectomie (ablation d'un rein), avec rein restant sain = 30%
+  Γ£à #35 Fautes d'orthographe m├⌐dical                ΓåÆ 30%  N├⌐phrectomie (ablation d'un rein), avec rein resta
+≡ƒöº localExpertAnalysis V3.3.405 - fix blast auriculaire ORL (d├⌐chirure tympanique, cophose asym├⌐trique, acouph├¿nes invalidants)
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): fx bimall├⌐ol G + entorse LLE
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 0 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+≡ƒöì DEBUG STEPPAGE D├ëTAILL├ë:
+   - steppageMatch: false
+   - amyotrophieMIMatch: false
+   - fractureL1Match: false
+   - Texte analys├⌐: fx bimall├⌐ol G + entorse LLE
+Γ¥î STEPPAGE NON D├ëTECT├ë - Conditions non remplies
+≡ƒöì DEBUG D├ëVIATION:
+   - deviationMatch: false
+   - mainContext: false
+   - Recherche dans: diviation NON trouv├⌐
+≡ƒöì [V3.3.155] S├⌐quelles d├⌐tect├⌐es: 1 [ "Instabilit├⌐ chronique de la cheville (s├⌐quelle d'entorse)" ]
+≡ƒöì V3.3.201k: isCumulDetected = false , lesionCount = 1
+≡ƒºá [V3.3.214] TC check: hasTC=false, hasNeuro=false, hasFocal=false, neuroCount=0
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 0 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+Γ£à CAS SIMPLE D├ëTECT├ë: 1 s├⌐quelle(s)
+≡ƒôÜ TROUV├ë DANS BAR├êME: "Instabilit├⌐ chronique de la cheville (s├⌐quelle d'entorse)" ΓåÆ "Instabilit├⌐ chronique de la cheville (s├⌐quelle d'entorse)" (5-15%)
+   ≡ƒôè [V3.3.365] Severity-adjusted bar├¿me: [5-15] ├ù coef 0.00 = 5%
+≡ƒöä REGROUPEMENT PAR SYST├êME: [ 'MEMBRE_INFERIEUR: 12%' ]
+≡ƒº« CALCUL BALTHAZAR (PAR SYST├êME): [ 'MEMBRE_INFERIEUR: 12%' ]
+≡ƒôè IPP GLOBAL CUMUL├ë: 12%
+  Γ£à #36 SMS m├⌐decin t├⌐l├⌐graphique                   ΓåÆ 12%  Membre inf├⌐rieur (CUISSE/GENOU) : S├⌐quelles ligame
+≡ƒöº localExpertAnalysis V3.3.405 - fix blast auriculaire ORL (d├⌐chirure tympanique, cophose asym├⌐trique, acouph├¿nes invalidants)
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): syndrome de stress post-traumatique apr├¿s accident de travail avec cauchemars r├⌐currents, hypervigilance et ├⌐vitement
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 1 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+≡ƒöì DEBUG STEPPAGE D├ëTAILL├ë:
+   - steppageMatch: false
+   - amyotrophieMIMatch: false
+   - fractureL1Match: false
+   - Texte analys├⌐: syndrome de stress post-traumatique apr├¿s accident de travail avec cauchemars r├⌐currents, hypervigilance et ├⌐vitement
+Γ¥î STEPPAGE NON D├ëTECT├ë - Conditions non remplies
+≡ƒöì DEBUG D├ëVIATION:
+   - deviationMatch: false
+   - mainContext: false
+   - Recherche dans: diviation NON trouv├⌐
+≡ƒöì [V3.3.155] S├⌐quelles d├⌐tect├⌐es: 1 [ '├ëtat de Stress Post-Traumatique (ESPT)' ]
+≡ƒöì V3.3.201k: isCumulDetected = false , lesionCount = 1
+≡ƒºá [V3.3.214] TC check: hasTC=false, hasNeuro=false, hasFocal=false, neuroCount=0
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 1 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+Γ£à CAS SIMPLE D├ëTECT├ë: 1 s├⌐quelle(s)
+≡ƒôÜ TROUV├ë DANS BAR├êME: "├ëtat de Stress Post-Traumatique (ESPT)" ΓåÆ "Trouble de stress post-traumatique (TSPT)" (10-50%)
+   ≡ƒôè [V3.3.365] Severity-adjusted bar├¿me: [10-50] ├ù coef 0.00 = 10%
+≡ƒöä REGROUPEMENT PAR SYST├êME: [ 'PSYCHIATRIE: 10%' ]
+≡ƒº« CALCUL BALTHAZAR (PAR SYST├êME): [ 'PSYCHIATRIE: 10%' ]
+≡ƒôè IPP GLOBAL CUMUL├ë: 10%
+  Γ£à #37 Stress post-traumatique / PTSD              ΓåÆ 10%  Psychiatrie : Troubles anxieux/sommeil post-trauma
+≡ƒöº localExpertAnalysis V3.3.405 - fix blast auriculaire ORL (d├⌐chirure tympanique, cophose asym├⌐trique, acouph├¿nes invalidants)
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): fracture C5-C6 avec t├⌐trapl├⌐gie incompl├¿te, r├⌐cup├⌐ration partielle des membres sup├⌐rieurs
+≡ƒöì [V3.3.287] Parapl├⌐gie/Queue de cheval/Compression m├⌐dullaire ΓåÆ NOT multi-sites (pathologie neurologique unique)
+≡ƒöì DEBUG STEPPAGE D├ëTAILL├ë:
+   - steppageMatch: false
+   - amyotrophieMIMatch: false
+   - fractureL1Match: false
+   - Texte analys├⌐: fracture C5-C6 avec t├⌐trapl├⌐gie incompl├¿te, r├⌐cup├⌐ration partielle des membres sup├⌐rieurs
+Γ¥î STEPPAGE NON D├ëTECT├ë - Conditions non remplies
+≡ƒöì DEBUG D├ëVIATION:
+   - deviationMatch: false
+   - mainContext: false
+   - Recherche dans: diviation NON trouv├⌐
+≡ƒöì [V3.3.155] S├⌐quelles d├⌐tect├⌐es: 2 [
+  'S├⌐quelles de fracture/luxation du rachis cervical C5-C6 - Avec l├⌐sion neurologique',
+  'Quadripl├⌐gie incompl├¿te post-traumatique'
+]
+≡ƒª┤ [V3.3.287] Parapl├⌐gie/Quadripl├⌐gie/Queue de cheval ΓåÆ PAS de cumul (pathologie neurologique unique)
+≡ƒöì V3.3.201k: isCumulDetected = false , lesionCount = 1
+≡ƒºá [V3.3.214] TC check: hasTC=false, hasNeuro=false, hasFocal=false, neuroCount=0
+≡ƒöì [V3.3.287] Parapl├⌐gie/Queue de cheval/Compression m├⌐dullaire ΓåÆ NOT multi-sites (pathologie neurologique unique)
+≡ƒºá [V3.3.347] T├ëTRAPL├ëGIE/PARAPL├ëGIE/COMPRESSION M├ëDULLAIRE d├⌐tect├⌐e ΓåÆ Bypass vers expert rules (pathologie neurologique majeure)
+≡ƒöì DEBUG M├ëTACARPIENS - Texte normalis├⌐: fracture c5 vertebre cervicale c5 c6 vertebre cervicale c6 avec tetraplegie incomplete, recuperation partielle membres superieurs cassure fissure bris fracture fissure bris fracture cassure bris fracture cassure fissure
+≡ƒöì DEBUG M├ëTACARPIENS - hasMetacarpienWord: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSingleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasMultipleIndicator: true
+≡ƒöì DEBUG M├ëTACARPIENS - hasSpecificFingerEarly: false
+≡ƒöì DEBUG M├ëTACARPIENS - isMetacarpienSingleQueryEarly: false
+≡ƒöì V3.3.139: V├⌐rification cumul prioritaire...
+≡ƒöì Query words: fracture, avec, tetraplegie, incomplete,, recuperation, partielle, des, membres, superieurs
+≡ƒöì Cat├⌐gorie cumul trouv├⌐e: Cumuls de L├⌐sions et Polytraumatismes
+≡ƒöì Entr├⌐es avec searchTerms v├⌐rifi├⌐es: 51, meilleur score: 0.0%
+Γä╣∩╕Å Aucun cumul prioritaire trouv├⌐ (similarit├⌐ < 70%), continue avec analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒª╢ [V3.3.317] hasMTPLuxation: false hasMetaFracture: false hasTSLO: false hasFootContext: false
+≡ƒöì isCumulDetected: false lesionCount: 1
+≡ƒöì [M├ëTACARPIENS] Input brut: fracture c5-c6 avec t├⌐trapl├⌐gie incompl├¿te r├⌐cup├⌐ration partielle des membres sup├⌐rieurs
+≡ƒöì [M├ëTACARPIENS] hasMetaWord: false
+≡ƒöì [M├ëTACARPIENS] hasSingleOrPerte: false
+≡ƒöì [M├ëTACARPIENS] hasSpecificFinger: false
+≡ƒöì [M├ëTACARPIENS] hasCinq: true
+ΓÜá∩╕Å [M├ëTACARPIENS] Pas de dialogue - continuons analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì [EARLY] Ant├⌐c├⌐dents d├⌐tect├⌐s: 0 - 
+≡ƒª┤ [V3.3.287] Parapl├⌐gie/Quadripl├⌐gie/Queue de cheval ΓåÆ PAS de cumul (pathologie neurologique unique)
+Γ£à [EXPERT RULE MATCH - PRIORITY 12000] Quadripl├⌐gie incompl├¿te (marche possible) = [60-90] ΓåÆ 75% (coef: 0.50)
+  Γ£à #38 T├⌐trapl├⌐gie incompl├¿te                      ΓåÆ 75%  Quadripl├⌐gie incompl├¿te (marche possible)
+≡ƒöº localExpertAnalysis V3.3.405 - fix blast auriculaire ORL (d├⌐chirure tympanique, cophose asym├⌐trique, acouph├¿nes invalidants)
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): syndrome du canal carpien bilat├⌐ral op├⌐r├⌐, persistance de paresth├⌐sies nocturnes et diminution de la force de pr├⌐hension
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 0 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+≡ƒºá [V3.3.281] PARALYSIE NERF P├ëRIPH├ëRIQUE MS d├⌐tect├⌐e ΓåÆ Analyse sp├⌐cialis├⌐e (site unique)
+  Γ£à #39 Canal carpien bilat├⌐ral op├⌐r├⌐               ΓåÆ 15%  Paralysie du nerf m├⌐dian - Au poignet (droite)
+≡ƒöº localExpertAnalysis V3.3.405 - fix blast auriculaire ORL (d├⌐chirure tympanique, cophose asym├⌐trique, acouph├¿nes invalidants)
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): amputation du gros orteil pied droit suite ├á un ├⌐crasement
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 1 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+≡ƒöì DEBUG STEPPAGE D├ëTAILL├ë:
+   - steppageMatch: false
+   - amyotrophieMIMatch: false
+   - fractureL1Match: false
+   - Texte analys├⌐: amputation du gros orteil pied droit suite ├á un ├⌐crasement
+Γ¥î STEPPAGE NON D├ëTECT├ë - Conditions non remplies
+≡ƒöì DEBUG D├ëVIATION:
+   - deviationMatch: false
+   - mainContext: false
+   - Recherche dans: diviation NON trouv├⌐
+≡ƒöì [V3.3.155] S├⌐quelles d├⌐tect├⌐es: 0 []
+≡ƒöì V3.3.201k: isCumulDetected = false , lesionCount = 1
+≡ƒöì DEBUG M├ëTACARPIENS - Texte normalis├⌐: amputation gros orteil $1 droit ecrasement ablation perte section amputation perte section amputation ablation section amputation ablation perte tarse metatarse pied metatarse pied tarse doigt de pied phalange pied orteils orteil phalange pied orteils orteil doigt de pied orteils orteil doigt de pied phalange pied orteil doigt de pied phalange pied hallux premier orteil 1er orteil gros orteil premier orteil 1er orteil gros orteil hallux 1er orteil gros orteil hallux premier orteil gros orteil premier orteil 1er orteil gros orteil hallux premier orteil
+≡ƒöì DEBUG M├ëTACARPIENS - hasMetacarpienWord: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSingleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasMultipleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSpecificFingerEarly: true
+≡ƒöì DEBUG M├ëTACARPIENS - isMetacarpienSingleQueryEarly: false
+≡ƒöì V3.3.139: V├⌐rification cumul prioritaire...
+≡ƒöì Query words: amputation, gros, orteil, pied, droit, suite, ecrasement
+≡ƒöì Cat├⌐gorie cumul trouv├⌐e: Cumuls de L├⌐sions et Polytraumatismes
+≡ƒöì Entr├⌐es avec searchTerms v├⌐rifi├⌐es: 51, meilleur score: 0.0%
+Γä╣∩╕Å Aucun cumul prioritaire trouv├⌐ (similarit├⌐ < 70%), continue avec analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒª╢ [V3.3.317] hasMTPLuxation: false hasMetaFracture: false hasTSLO: false hasFootContext: true
+≡ƒöì isCumulDetected: false lesionCount: 1
+≡ƒöì [M├ëTACARPIENS] Input brut: amputation du gros orteil pied droit suite ├á un ├⌐crasement
+≡ƒöì [M├ëTACARPIENS] hasMetaWord: false
+≡ƒöì [M├ëTACARPIENS] hasSingleOrPerte: false
+≡ƒöì [M├ëTACARPIENS] hasSpecificFinger: false
+≡ƒöì [M├ëTACARPIENS] hasCinq: false
+ΓÜá∩╕Å [M├ëTACARPIENS] Pas de dialogue - continuons analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì [EARLY] Ant├⌐c├⌐dents d├⌐tect├⌐s: 0 - 
+≡ƒöì [DEBUG EXPERT RULE - EARLY TEST]
+Pattern: /contusion.*cerebrale|traumatisme.*crani.*contusion/i
+Context: /perte.*connaissance|frontale|temporale|parietale|breve|courte|surveillance.*neurologique/i
+NegativeContext: /spondylo|listthesis|glissement.*vertebral/i
+CleanText: "amputation du gros orteil pied droit suite a un ecrasement"
+patternMatchClean: false, contextMatchClean: false
+negContextMatchClean: false, negContextMatchWorking: false
+matchClean: false, matchWorking: false
+Γ£à [EXPERT RULE MATCH - PRIORITY 95] Amputation du gros orteil = [5-8] ΓåÆ 5% (coef: 0.00)
+  Γ£à #40 Amputation gros orteil                      ΓåÆ 5%  Amputation du gros orteil
+≡ƒöº localExpertAnalysis V3.3.405 - fix blast auriculaire ORL (d├⌐chirure tympanique, cophose asym├⌐trique, acouph├¿nes invalidants)
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): Homme de 32 ans, menuisier, AT du 05/06/2023. Chute de 4m. Bilan initial aux urgences : fracture du plateau tibial droit (Schatzker V), trait├⌐e par ost├⌐osynth├¿se par plaque. Suites compliqu├⌐es d'une i
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 2 sites d├⌐tect├⌐s (seuil=2) ΓåÆ MULTI-SITES
+≡ƒöì DEBUG STEPPAGE D├ëTAILL├ë:
+   - steppageMatch: false
+   - amyotrophieMIMatch: true
+   - fractureL1Match: false
+   - Texte analys├⌐: Homme de 32 ans, menuisier, AT du 05/06/2023. Chute de 4m. Bilan initial aux urgences : fracture du plateau tibial droit (Schatzker V), trait├⌐e par ost├⌐osynth├¿se par plaque. Suites compliqu├⌐es d'une infection de site op├⌐ratoire trait├⌐e par antibioth├⌐
+Γ¥î STEPPAGE NON D├ëTECT├ë - Conditions non remplies
+≡ƒöì DEBUG D├ëVIATION:
+   - deviationMatch: false
+   - mainContext: true
+   - Recherche dans: diviation NON trouv├⌐
+≡ƒöì [V3.3.155] S├⌐quelles d├⌐tect├⌐es: 5 [
+  'Fracture plateau tibial (avec raideur)',
+  'Amyotrophie quadricipitale',
+  'Genou - Flexion possible de 0 ├á 110┬░',
+  'Raideur articulaire du genou',
+  'Boiterie / Marche avec aide technique (canne, b├⌐quille)'
+]
+≡ƒª┤ [V3.3.364] Fracture plateau tibial/genou isol├⌐e ΓåÆ PAS de cumul (l├⌐sion unique + s├⌐quelles)
+≡ƒöì V3.3.201k: isCumulDetected = false , lesionCount = 1
+≡ƒåò V3.3.280: OVERRIDE CUMUL - isMultiSitePolytrauma=true mais detectMultipleLesions=false ΓåÆ FORCE cumul
+ΓÜá∩╕Å V3.3.201j: CUMUL D├ëTECT├ë ΓåÆ SKIP regroupement par syst├¿me, passage direct ├á extraction l├⌐sions individuelles
+≡ƒöì DEBUG M├ëTACARPIENS - Texte normalis├⌐: homme de 32 ans, menuisier, accident de travail 05/06/2023. chute de 4m. bilan initial aux urgences : fracture plateau tibial droit (schatzker v), par osteosynthese par plaque. suites compliquees d infection de site operatoire par antibiotherapie iv 6 semaines. a l examen de consolidation : raideur genou en flexion extension (0 5 90┬░), laxite residuelle en valgus, amyotrophie quadricipitale de 3cm, claudication aide technique. limitation restriction enraidissement raideur restriction enraidissement raideur limitation enraidissement raideur limitation restriction cassure fissure bris fracture fissure bris fracture cassure bris fracture cassure fissure metacarpe chirurgicale main chirurgicale main metacarpe femoro tibiale femoro patellaire articulation genou genou femoro patellaire articulation genou genou femoro tibiale articulation genou genou femoro tibiale femoro patellaire genou femoro tibiale femoro patellaire poignet articulation poignet $1 droit
+≡ƒöì DEBUG M├ëTACARPIENS - hasMetacarpienWord: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasSingleIndicator: false
+≡ƒöì DEBUG M├ëTACARPIENS - hasMultipleIndicator: true
+≡ƒöì DEBUG M├ëTACARPIENS - hasSpecificFingerEarly: false
+≡ƒöì DEBUG M├ëTACARPIENS - isMetacarpienSingleQueryEarly: false
+≡ƒöì V3.3.139: V├⌐rification cumul prioritaire...
+≡ƒöì Query words: homme, ans,, menuisier,, 05/06/2023., chute, 4m., bilan, initial, aux, urgences
+≡ƒöì Cat├⌐gorie cumul trouv├⌐e: Cumuls de L├⌐sions et Polytraumatismes
+≡ƒöì Entr├⌐es avec searchTerms v├⌐rifi├⌐es: 51, meilleur score: 0.0%
+Γä╣∩╕Å Aucun cumul prioritaire trouv├⌐ (similarit├⌐ < 70%), continue avec analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒª╢ [V3.3.317] hasMTPLuxation: false hasMetaFracture: false hasTSLO: false hasFootContext: false
+≡ƒöì isCumulDetected: true lesionCount: 2
+≡ƒöì CUMUL D├ëTECT├ë - Extraction des l├⌐sions individuelles
+≡ƒô¥ text original: Homme de 32 ans, menuisier, AT du 05/06/2023. Chute de 4m. Bilan initial aux urgences : fracture du plateau tibial droit (Schatzker V), trait├⌐e par ost├⌐osynth├¿se par plaque. Suites compliqu├⌐es d'une infection de site op├⌐ratoire trait├⌐e par antibioth├⌐rapie IV 6 semaines. ├Ç l'examen de consolidation : raideur du genou en flexion-extension (0-5-90┬░), laxit├⌐ r├⌐siduelle en valgus, amyotrophie quadricipitale de 3cm, marche avec une canne.
+≡ƒô¥ finalCleanedText: Homme de AT du 05/06/2023. Chute de 4m. Bilan initial aux urgences : fracture du plateau tibial droit (Schatzker V) trait├⌐e par ost├⌐osynth├¿se par plaque. Suites compliqu├⌐es d'une infection de site op├⌐ratoire trait├⌐e par antibioth├⌐rapie IV 6 semaines. ├Ç l'examen de consolidation : raideur du genou en flexion-extension (0-5-90┬░) laxit├⌐ r├⌐siduelle en valgus amyotrophie quadricipitale de 3cm marche avec une canne.
+≡ƒöº extractIndividualLesions V3.3.211 - avec Pattern 0C-ter + 0C-quater
+≡ƒöì extractIndividualLesions - texte d'entr├⌐e: Homme de 32 ans, menuisier, AT du 05/06/2023. Chute de 4m. Bilan initial aux urgences : fracture du plateau tibial droit (Schatzker V), trait├⌐e par ost├⌐osynth├¿se par plaque. Suites compliqu├⌐es d'une infection de site op├⌐ratoire trait├⌐e par antibioth├⌐rapie IV 6 semaines. ├Ç l'examen de consolidation : raideur du genou en flexion-extension (0-5-90┬░), laxit├⌐ r├⌐siduelle en valgus, amyotrophie quadricipitale de 3cm, marche avec une canne.
+Γ£à Pattern PARAGRAPH-SENTENCE V3.3.280 (split phrases par point) d├⌐tect├⌐: [
+  'bilan initial aux urgences : fracture du plateau tibial droit (schatzker v), traitee par osteosynthese par plaque',
+  'a l examen de consolidation : raideur du genou en flexion extension (0 5 90┬░), laxite residuelle en valgus, amyotrophie quadricipitale de 3cm, marche avec une canne'
+]
+≡ƒôï L├⌐sions extraites: [
+  'bilan initial aux urgences : fracture du plateau tibial droit (schatzker v), traitee par osteosynthese par plaque',
+  'a l examen de consolidation : raideur du genou en flexion extension (0 5 90┬░), laxite residuelle en valgus, amyotrophie quadricipitale de 3cm, marche avec une canne'
+] Nombre: 2
+≡ƒöº V3.3.320c: Filtr├⌐ 2 ΓåÆ 2 l├⌐sions (exclu segments non-l├⌐sionnels)
+Γ£à Au moins 2 l├⌐sions ΓåÆ Analyse s├⌐par├⌐e
+≡ƒöÄ Analyse l├⌐sion "bilan initial aux urgences : fracture du plateau tibial droit (schatzker v), traitee par osteosynthese par plaque" ΓåÆ enrichi: "bilan initial aux urgences : fracture du plateau tibial droit (schatzker v), traitee par osteosynthese par plaque" (processed: "bilan initial aux urgences : fracture du plateau tibial droit (schatzker v), traitee par osteosynthese par plaque")
+≡ƒöì [M├ëTACARPIENS] Input brut: bilan initial aux urgences : fracture du plateau tibial droit (schatzker v), traitee par osteosynthese par plaque
+≡ƒöì [M├ëTACARPIENS] hasMetaWord: false
+≡ƒöì [M├ëTACARPIENS] hasSingleOrPerte: false
+≡ƒöì [M├ëTACARPIENS] hasSpecificFinger: false
+≡ƒöì [M├ëTACARPIENS] hasCinq: false
+ΓÜá∩╕Å [M├ëTACARPIENS] Pas de dialogue - continuons analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì [EARLY] Ant├⌐c├⌐dents d├⌐tect├⌐s: 0 - 
+Γ£à [EXPERT RULE MATCH - PRIORITY 10350] Fracture des plateaux tibiaux - Avec d├⌐viation et/ou raideur = [10-30] ΓåÆ 20% (coef: 0.50)
+   ΓåÆ Type: proposal
+   ΓåÆ Injury: Fracture des plateaux tibiaux - Avec d├⌐viation et/ou raideur
+   ΓåÆ Rate calcul├⌐: 20
+   ≡ƒöº V3.3.280: Enrichissement genou: "a l examen de consolidation : raideur du genou en flexion extension (0 5 90┬░), laxite residuelle en valgus, amyotrophie quadricipitale de 3cm, marche avec une canne" ΓåÆ "a l examen de consolidation : raideur du genou en flexion extension (0 5 90┬░), laxite residuelle en valgus, amyotrophie quadricipitale de 3cm, marche avec une canne raideur genou ankylose flexion extension goniometrie genu"
+≡ƒöÄ Analyse l├⌐sion "a l examen de consolidation : raideur du genou en flexion extension (0 5 90┬░), laxite residuelle en valgus, amyotrophie quadricipitale de 3cm, marche avec une canne" ΓåÆ enrichi: "a l examen de consolidation : raideur du genou en flexion extension (0 5 90┬░), laxite residuelle en valgus, amyotrophie quadricipitale de 3cm, marche avec une canne raideur genou ankylose flexion extension goniometrie genu" (processed: "a l examen de consolidation : raideur du genou en flexion extension (0 5 90┬░), laxite residuelle en valgus, amyotrophie quadricipitale de3cm, marche avec une canne raideur genou ankylose flexion extension goniometrie genu")
+≡ƒöì [M├ëTACARPIENS] Input brut: a l examen de consolidation : raideur du genou en flexion extension (0 5 90┬░), laxite residuelle en valgus, amyotrophie quadricipitale de3cm, marche avec une canne raideur genou ankylose flexion extension goniometrie genu
+≡ƒöì [M├ëTACARPIENS] hasMetaWord: false
+≡ƒöì [M├ëTACARPIENS] hasSingleOrPerte: false
+≡ƒöì [M├ëTACARPIENS] hasSpecificFinger: false
+≡ƒöì [M├ëTACARPIENS] hasCinq: true
+ΓÜá∩╕Å [M├ëTACARPIENS] Pas de dialogue - continuons analyse normale
+≡ƒôï Ant├⌐c├⌐dents extraits (0): []
+≡ƒöì [EARLY] Ant├⌐c├⌐dents d├⌐tect├⌐s: 0 - 
+Γ£à [EXPERT RULE MATCH - PRIORITY 10400] Raideur du genou = [5-25] ΓåÆ 25% (coef: 1.00)
+   ΓåÆ Type: proposal
+   ΓåÆ Injury: Raideur du genou
+   ΓåÆ Rate calcul├⌐: 25
+≡ƒôè TOTAL: 2 propositions g├⌐n├⌐r├⌐es sur 2 l├⌐sions
+Γ£à Calcul automatique cumul avec 2 l├⌐sion(s)
+   ≡ƒôÉ V3.3.369: Mod├⌐ration cumul l├⌐sion 1: 25% ΓåÆ 24% (mod├⌐ration progressive polytrauma)
+  Γ£à #41 Rapport expertise plateau tibial            ΓåÆ 39%  Polytraumatisme (cumul 2 l├⌐sions)
+≡ƒöº localExpertAnalysis V3.3.405 - fix blast auriculaire ORL (d├⌐chirure tympanique, cophose asym├⌐trique, acouph├¿nes invalidants)
+≡ƒöì [V3.3.162] TEXTE RE├çU (nettoy├⌐): il a eu un clou dans le f├⌐mur apr├¿s l'accident et maintenant la hanche elle tourne pas bien, il boite
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 0 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+≡ƒöì DEBUG STEPPAGE D├ëTAILL├ë:
+   - steppageMatch: false
+   - amyotrophieMIMatch: false
+   - fractureL1Match: false
+   - Texte analys├⌐: il a eu un clou dans le f├⌐mur apr├¿s l'accident et maintenant la hanche elle tourne pas bien, il boite
+Γ¥î STEPPAGE NON D├ëTECT├ë - Conditions non remplies
+≡ƒöì DEBUG D├ëVIATION:
+   - deviationMatch: false
+   - mainContext: true
+   - Recherche dans: diviation NON trouv├⌐
+≡ƒöì [V3.3.155] S├⌐quelles d├⌐tect├⌐es: 1 [ 'Boiterie' ]
+≡ƒöì V3.3.201k: isCumulDetected = false , lesionCount = 1
+≡ƒºá [V3.3.214] TC check: hasTC=false, hasNeuro=false, hasFocal=false, neuroCount=0
+≡ƒöì [V3.3.280] hasMultipleDistinctSites: 0 sites d├⌐tect├⌐s (seuil=2) ΓåÆ site unique
+Γ£à CAS SIMPLE D├ëTECT├ë: 1 s├⌐quelle(s)
+≡ƒöä REGROUPEMENT PAR SYST├êME: [ 'MEMBRE_INFERIEUR: 10%' ]
+≡ƒº« CALCUL BALTHAZAR (PAR SYST├êME): [ 'MEMBRE_INFERIEUR: 10%' ]
+≡ƒôè IPP GLOBAL CUMUL├ë: 10%
+  Γ£à #42 Langage populaire ost├⌐osynth├¿se f├⌐mur       ΓåÆ 10%  Membre inf├⌐rieur : S├⌐quelles fonctionnelles (boite
+
+ΓòöΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòù
+Γòæ  R├ëSULTAT: 41/42 tests pass├⌐s (98%)                        Γòæ
+ΓòÜΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓò¥
+
+--- ├ëchecs ---
+  ΓÇó #28 Fracture mandibulaire: Aucun mot-cl├⌐ trouv├⌐ parmi [mandib, m├óchoire]
+
+≡ƒºá Score d'intelligence IA V2: 41/42 ΓÇö ≡ƒƒó EXCELLENT

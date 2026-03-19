@@ -16417,7 +16417,7 @@ const hasMultipleDistinctSites = (text: string): boolean => {
  * @param isExactMatch - Si true, cherche une correspondance exacte par nom (pour résoudre ambiguïté)
  */
 export const localExpertAnalysis = (text: string, externalKeywords?: string[], isExactMatch: boolean = false): LocalAnalysisResult => {
-    console.log('🔧 localExpertAnalysis V3.3.406 - fix fracture mandibulaire / troubles articulé dentaire → barème maxillo-facial correct');
+    console.log('🔧 localExpertAnalysis V3.3.407 - fix brûlures faciales + cécité/atteinte cornéenne = polytrauma (pas brûlure seule)');
 
     // 🔴 V3.3.162: NETTOYAGE TEXTE - Supprime caractères invisibles (zero-width space, etc.)
     // Ces caractères peuvent casser les regex et empêcher la détection
@@ -17542,7 +17542,9 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
     // 🔧 V3.3.357: Guard contre faux positifs brûlures quand le texte parle d'amputation, fracture, surdité etc.
     // 🔧 V3.3.371: cataracte secondaire à brûlure → ne PAS bloquer le handler brûlures faciales
     const isCataracteSecondaryToBurn = /cataracte.*secondaire|cataracte.*post.*br[uû]l|br[uû]l.*cataracte/i.test(text);
-    const hasNonBurnPrimaryInjury = /amputation|amput[ée]|section.*tendon|fracture.*(?:bassin|f[ée]mur|tibia|hum[ée]rus|radius|clavicule|olecrane|rachis|vert[ée]br)|surdit[ée]|parapl[ée]gie|t[ée]trapl[ée]gie|dermatose|oreille.*perte|pavillon.*oreille/i.test(text) || (/cataracte/i.test(text) && !isCataracteSecondaryToBurn);
+    // 🔧 V3.3.407: Ajouter cécité/perte vision/AV réduite aux lésions distinctes (brûlure + atteinte oculaire = 2 systèmes)
+    const hasOcularInjury407 = /c[ée]cit[ée]|[ée]nucl[ée]ation|perte.*vision|perte.*vue|acuit[ée].*visuelle.*r[ée]duit|taie.*corn[ée]en|atteinte.*corn[ée]en|greffe.*corn[ée]e|corn[ée]en.*(?:opaque|vascularis)|stade\s*(?:III|IV|3|4)/i.test(text);
+    const hasNonBurnPrimaryInjury = /amputation|amput[ée]|section.*tendon|fracture.*(?:bassin|f[ée]mur|tibia|hum[ée]rus|radius|clavicule|olecrane|rachis|vert[ée]br)|surdit[ée]|parapl[ée]gie|t[ée]trapl[ée]gie|dermatose|oreille.*perte|pavillon.*oreille/i.test(text) || (/cataracte/i.test(text) && !isCataracteSecondaryToBurn) || hasOcularInjury407;
     
     // 🔧 V3.3.370: Guard brûlures étendues (>30% SC) — ne PAS traiter comme brûlure faciale locale
     const isExtensiveBurnLocal = /(?:\d{2,3}\s*%\s*(?:sc|surface|corporelle)|surface.*corporelle.*\d{2,3}|r[eé]animation|greffes?\s+multiples|br[uû]lure.*[eé]tendue)/i.test(text);
@@ -17713,6 +17715,133 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
                 description: baremeDescBF
             }
         };
+    }
+    
+    // 🆕 V3.3.407: BRÛLURES FACIALES + ATTEINTE OCULAIRE (cécité/AV réduite)
+    // Quand brûlures chimiques/thermiques du visage coexistent avec perte de vision,
+    // ce sont 2 systèmes distincts : CUTANÉ (cicatrices) + OPHTALMOLOGIQUE (vision)
+    // Le handler brûlures-seul ne s'applique pas (guard hasOcularInjury407)
+    // Le handler générique polytrauma détecte "Cécité bilatérale" à tort (le mot "bilatérale" = cornée, pas cécité)
+    // GUARD: si d'autres injuries majeures (surdité, amputation, fracture...) → laisser le handler polytrauma générique
+    const hasOtherMajorInjury407 = /surdit[eé]|hypoacousie|amputation|fractur|paraplegie|tetraplegie|paralys/i.test(text);
+    if ((isBrulureFaciale || (isCicatriceDefigurante && isContexteBrulureFace)) && hasOcularInjury407 && !hasOtherMajorInjury407 && !isExactMatch) {
+        console.log('👁️ [V3.3.407] BRÛLURES FACIALES + ATTEINTE OCULAIRE → Cumul multi-système');
+        
+        // === COMPOSANTE OCULAIRE ===
+        const components407: Array<{name: string; rate: number; justif: string}> = [];
+        
+        // Détecter cécité unilatérale vs bilatérale
+        const hasCeciteTotale407 = /c[eé]cit[eé].*(?:totale|compl[eè]te|absolue)|perte.*(?:totale|compl[eè]te).*vision|perte.*vision|perte.*vue|aveugle/i.test(text);
+        const hasEnucleation407 = /[eé]nucl[eé]ation|ablation.*globe/i.test(text);
+        // Vérifier si un œil a cécité et l'autre a AV réduite (= unilatéral, pas bilatéral)
+        const hasCeciteUnOeil407 = /c[eé]cit[eé].*(?:[oœ]eil|gauche|droit)|(?:[oœ]eil|gauche|droit).*c[eé]cit[eé]/i.test(text);
+        const hasAVAutreOeil407 = /acuit[eé].*visuelle.*(?:r[eé]duit|baiss|diminu)|(?:\d+)\s*\/\s*10/i.test(text);
+        const hasGreffeCorneenne407 = /greffe.*corn[eé]e|k[eé]ratoplastie|implant.*corn[eé]en/i.test(text);
+        
+        // Extraire AV en dixièmes
+        const avMatch407 = text.match(/(\d+)\s*\/\s*10/i);
+        const avDixiemes = avMatch407 ? parseInt(avMatch407[1]) : 0;
+        
+        if (hasEnucleation407) {
+            // Énucléation = 25% (avec prothèse) ou 30% (sans)
+            const hasProthese407 = /proth[eè]se/i.test(text);
+            const enucRate = hasProthese407 ? 25 : 30;
+            components407.push({
+                name: `Énucléation ${hasProthese407 ? 'avec prothèse oculaire' : 'sans prothèse'}`,
+                rate: enucRate,
+                justif: `Énucléation → ${enucRate}%`
+            });
+        } else if (hasCeciteTotale407 && hasCeciteUnOeil407 && hasAVAutreOeil407) {
+            // Cécité d'un œil + AV réduite de l'autre = DEUX composantes distinctes
+            // V3.3.407: Ne PAS confondre avec cécité bilatérale
+            components407.push({
+                name: "Perte complète de la vision d'un œil",
+                rate: 25,
+                justif: "Cécité totale unilatérale → 25% (barème 1967)"
+            });
+            // AV réduite de l'autre œil
+            let avRate = 0;
+            if (avDixiemes <= 1) avRate = 20;
+            else if (avDixiemes <= 2) avRate = 18;
+            else if (avDixiemes <= 3) avRate = 16;
+            else if (avDixiemes <= 4) avRate = 12;
+            else if (avDixiemes <= 5) avRate = 8;
+            else if (avDixiemes <= 6) avRate = 5;
+            else if (avDixiemes <= 7) avRate = 3;
+            else avRate = 2;
+            // Greffe de cornée = facteur aggravant (fragilité, rejet possible)
+            if (hasGreffeCorneenne407 && avRate < 15) avRate += 3;
+            components407.push({
+                name: `Baisse d'acuité visuelle de l'œil controlatéral (${avDixiemes}/10)${hasGreffeCorneenne407 ? ' après greffe de cornée' : ''}`,
+                rate: avRate,
+                justif: `AV réduite ${avDixiemes}/10${hasGreffeCorneenne407 ? ' (post-greffe cornée)' : ''} → ${avRate}%`
+            });
+        } else if (hasCeciteTotale407) {
+            // Cécité sans indication claire de latéralité
+            const isBilateral407 = /(?:deux|les\s+deux|bilatéral|les\s+yeux).*c[eé]cit|c[eé]cit.*(?:deux|les\s+deux|bilatéral|les\s+yeux)/i.test(text);
+            if (isBilateral407) {
+                components407.push({name: 'Cécité bilatérale', rate: 100, justif: 'Cécité complète bilatérale → 100%'});
+            } else {
+                components407.push({name: "Perte de la vision d'un œil", rate: 25, justif: "Cécité unilatérale → 25%"});
+            }
+        }
+        
+        // === COMPOSANTE CUTANÉE (cicatrices brûlures faciales) ===
+        const hasCheloide407 = /ch[eé]lo[ïi]de/i.test(text);
+        const hasRetraction407 = /r[eé]traction|r[eé]tractile|bride/i.test(text);
+        const hasDefiguration407 = /d[eé]figurant|d[eé]figuration|pr[eé]judice.*esth[eé]tique/i.test(text);
+        const hasDegreProfond407 = /3[eè]?\s*degr[eé]|profond/i.test(text);
+        
+        let cicatriceRate407 = 10;
+        if (hasCheloide407 && hasRetraction407) cicatriceRate407 = 15;
+        else if (hasCheloide407 || hasDefiguration407) cicatriceRate407 = 12;
+        else if (hasRetraction407) cicatriceRate407 = 12;
+        if (hasDegreProfond407 && cicatriceRate407 < 15) cicatriceRate407 += 3;
+        if (cicatriceRate407 > 20) cicatriceRate407 = 20;
+        
+        components407.push({
+            name: 'Cicatrices défigurantes du visage et du cou',
+            rate: cicatriceRate407,
+            justif: `Cicatrices faciales${hasCheloide407 ? ' chéloïdes' : ''}${hasRetraction407 ? ' rétractiles' : ''}${hasDegreProfond407 ? ' (3e degré)' : ''} → ${cicatriceRate407}%`
+        });
+        
+        // === CALCUL CUMUL BALTHAZARD ===
+        components407.sort((a, b) => b.rate - a.rate);
+        let ippCumul407 = 0;
+        for (const comp of components407) {
+            ippCumul407 = ippCumul407 + comp.rate * (1 - ippCumul407 / 100);
+        }
+        ippCumul407 = Math.round(ippCumul407);
+        
+        const balthFormula407 = components407.map(c => `${c.rate}%`).join(' ⊕ ');
+        
+        console.log(`👁️ [V3.3.407] Composantes: ${components407.map(c => `${c.name}(${c.rate}%)`).join(' + ')}`);
+        console.log(`👁️ [V3.3.407] Balthazard: ${balthFormula407} = IPP ${ippCumul407}%`);
+        
+        const justif407 = `<strong>🔥👁️ BRÛLURES FACIALES + ATTEINTE OCULAIRE</strong><br><br>` +
+            `<strong>📋 COMPOSANTES ÉVALUÉES :</strong><br>` +
+            components407.map((c, i) => `<strong>${i + 1}. ${c.name}</strong> → <span style="color: #d32f2f; font-weight: bold;">${c.rate}%</span><br>   <em>${c.justif}</em>`).join('<br>') + '<br><br>' +
+            `<strong>📊 CALCUL CUMUL BALTHAZARD :</strong><br>` +
+            `<div style="background: #e8f5e9; border-left: 4px solid #4caf50; padding: 12px; margin: 8px 0;">` +
+            `${balthFormula407} = <strong style="font-size: 18px; color: #e65100;">${ippCumul407}%</strong>` +
+            `</div><br>` +
+            `<strong>⚖️ RÉFÉRENCES BARÈME 1967 :</strong><br>` +
+            `• Ophtalmologie : Perte de vision / Cécité unilatérale<br>` +
+            `• Brûlures : Cicatrices défigurantes du visage et du cou [10-20%]<br><br>` +
+            `<strong>⚠️ NOTE :</strong> Les lésions oculaires (cécité, AV réduite) et les lésions cutanées (cicatrices) sont des systèmes anatomiques distincts → cumul Balthazard.`;
+        
+        return {
+            type: 'proposal' as const,
+            name: `Brûlures faciales avec atteinte oculaire sévère`,
+            rate: ippCumul407,
+            justification: justif407,
+            path: 'Brûlures + Ophtalmologie > Cumul multi-système',
+            injury: {
+                name: 'Brûlures faciales avec cécité/perte vision',
+                rate: [35, 55],
+                description: 'Cumul brûlures faciales défigurantes + atteinte oculaire sévère'
+            }
+        } as any;
     }
     
     // 🆕 V3.3.219: AMPUTATION DOIGT AVEC DÉTECTION NIVEAU (P1/P2/P3/TOTALE)
