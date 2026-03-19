@@ -6137,8 +6137,11 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
         }
         
         // Surdité complète unilatérale (anacousie = surdité totale)
-        if (/(?:surdit[eé].*(?:compl[eè]te|totale)|anacousie.*(?:compl[eè]te|totale)?|cophose).*(?:unilat[eé]rale|une\s+oreille|oreille\s+(?:droite|gauche))/.test(text) ||
-            /(?:unilat[eé]rale|une\s+oreille|oreille\s+(?:droite|gauche)).*(?:anacousie|cophose|surdit[eé].*(?:compl[eè]te|totale))/.test(text)) {
+        // 🔧 V3.3.405: NE PAS matcher si perte auditive asymétrique (cophose + hypoacousie → CUMUL handler)
+        const hasAsymmetricHearing405 = /cophose/i.test(text) && /hypoacousie/i.test(text);
+        if (!hasAsymmetricHearing405 && (
+            /(?:surdit[eé].*(?:compl[eè]te|totale)|anacousie.*(?:compl[eè]te|totale)?|cophose).*(?:unilat[eé]rale|une\s+oreille|oreille\s+(?:droite|gauche))/.test(text) ||
+            /(?:unilat[eé]rale|une\s+oreille|oreille\s+(?:droite|gauche)).*(?:anacousie|cophose|surdit[eé].*(?:compl[eè]te|totale))/.test(text))) {
             const auditiveInjury = { name: "Diminution de l'acuité auditive", rate: [0, 70], path: "Neuro-Sensorielles > Oreilles - Diminution de l'Acuité Auditive (Surdité)" };
             return {
                 type: 'proposal',
@@ -6176,23 +6179,41 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             };
         }
         
-        // 🆕 V3.3.357: CUMUL surdité + acouphènes (sans dB explicite)
-        // Cas: "surdité totale unilatérale + acouphènes", "surdité bilatérale + acouphènes + vertiges"
-        const hasSurdite = /surdit[eé]/i.test(text);
+        // 🆕 V3.3.357/V3.3.405: CUMUL surdité + acouphènes (sans dB explicite)
+        // V3.3.405: Élargi pour cophose/hypoacousie, blast auriculaire, perte auditive asymétrique
+        const hasSurdite = /surdit[eé]|cophose|hypoacousie|anacousie/i.test(text);
         const hasAcouphenes = /acouph[eè]nes?/i.test(text);
-        const hasVertiges = /vertige/i.test(text);
+        // 🔧 V3.3.405: Inclure syndrome vestibulaire et troubles de l'équilibre
+        const hasVertiges = /vertige|vestibulaire|troubles?\s+(?:de\s+l[''']\s*)?[eé]quilibre/i.test(text);
         if (hasSurdite && hasAcouphenes) {
             const isTotale = /(?:compl[eè]te|totale|profonde|cophose)/i.test(text);
             const isBilaterale = /bilat[eé]ral|deux\s+(?:oreilles|c[oô]t[eé]s)/i.test(text);
             const isUnilaterale = /unilat[eé]ral|une\s+oreille/i.test(text);
             const isProfessionnelle = /professionnel|bruit|exposition|travail/i.test(text);
             
+            // 🆕 V3.3.405: Détection perte auditive asymétrique (cophose un côté + hypoacousie autre)
+            const hasCophose = /cophose/i.test(text);
+            const hasHypoacousie = /hypoacousie/i.test(text);
+            const isAsymmetric = hasCophose && hasHypoacousie;
+            
             // Extraire dB range si présent (ex: "40-60dB")
             const dbRangeMatch = text.match(/(\d+)\s*[-–à]\s*(\d+)\s*(?:db|dB)/i);
             const dbSingleMatch = text.match(/(\d+)\s*(?:db|dB)/i);
             let surditeRate = 8;
             
-            if (dbRangeMatch) {
+            // 🆕 V3.3.405: Asymétrique = cophose un côté + hypoacousie autre côté
+            // Barème audiométrique: cophose (100dB+) + hypoacousie variable → grille asymétrique
+            if (isAsymmetric) {
+                const isHypoProfonde = /hypoacousie\s+(?:tr[eè]s\s+)?profonde/i.test(text);
+                const isHypoSevere = /hypoacousie\s+(?:tr[eè]s\s+)?s[eé]v[eè]re/i.test(text);
+                const isHypoMoyenne = /hypoacousie\s+moyenne/i.test(text);
+                const isHypoLegere = /hypoacousie\s+l[eé]g[eè]re/i.test(text);
+                if (isHypoProfonde) surditeRate = 50;
+                else if (isHypoSevere) surditeRate = 40;
+                else if (isHypoMoyenne) surditeRate = 30;
+                else if (isHypoLegere) surditeRate = 20;
+                else surditeRate = 25; // Cophose + hypoacousie non qualifiée
+            } else if (dbRangeMatch) {
                 const dbMoy = (parseInt(dbRangeMatch[1]) + parseInt(dbRangeMatch[2])) / 2;
                 if (dbMoy <= 40) surditeRate = 8;
                 else if (dbMoy <= 50) surditeRate = 25;
@@ -6213,17 +6234,19 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             } else if (isTotale && isUnilaterale) {
                 surditeRate = 15;
             } else if (isBilaterale && isProfessionnelle) {
-                surditeRate = 20; // Surdité pro modérée par défaut
+                surditeRate = 20;
             } else if (isBilaterale) {
                 surditeRate = 20;
             } else if (isUnilaterale) {
                 surditeRate = 10;
             }
             
-            // Acouphènes = +5%
-            const acoupheneRate = 5;
-            // Vertiges = +5%
-            const vertigeRate = hasVertiges ? 5 : 0;
+            // 🔧 V3.3.405: Acouphènes invalidants/intolérables → 8% (vs 5% standard)
+            const isAcoupheneInvalidant = /acouph[eè]nes?\s+(?:bilat[eé]raux\s+)?(?:permanents?\s+(?:et\s+)?)?(?:invalidants?|intol[eé]rables?|insupportables?|majeurs?)/i.test(text);
+            const acoupheneRate = isAcoupheneInvalidant ? 8 : 5;
+            // 🔧 V3.3.405: Syndrome vestibulaire chronique → 8% (vs 5% vertiges simples)
+            const isChroniqueVestibulaire = /vestibulaire\s+(?:p[eé]riph[eé]rique\s+)?chronique|vertiges?\s+(?:permanents?|chroniques?|invalidants?)/i.test(text);
+            const vertigeRate = hasVertiges ? (isChroniqueVestibulaire ? 8 : 5) : 0;
             
             // Cumul Balthazard
             let totalRate = surditeRate;
@@ -6237,7 +6260,7 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
                 type: 'proposal',
                 name: auditiveInjury.name,
                 rate: totalRate,
-                justification: `EXPERT AUDITION CUMUL: Surdité ${isTotale ? 'totale' : ''} ${isBilaterale ? 'bilatérale' : isUnilaterale ? 'unilatérale' : ''} (${surditeRate}%) + Acouphènes (${acoupheneRate}%)${hasVertiges ? ' + Vertiges (' + vertigeRate + '%)' : ''} → Balthazard = ${totalRate}%`,
+                justification: `EXPERT AUDITION CUMUL: ${isAsymmetric ? 'Cophose unilatérale + Hypoacousie controlatérale' : 'Surdité ' + (isTotale ? 'totale ' : '') + (isBilaterale ? 'bilatérale' : isUnilaterale ? 'unilatérale' : '')} (${surditeRate}%) + Acouphènes${isAcoupheneInvalidant ? ' invalidants' : ''} (${acoupheneRate}%)${hasVertiges ? ' + ' + (isChroniqueVestibulaire ? 'Syndrome vestibulaire chronique' : 'Vertiges') + ' (' + vertigeRate + '%)' : ''} → Balthazard = ${totalRate}%`,
                 path: auditiveInjury.path,
                 injury: auditiveInjury as any
             };
@@ -15288,17 +15311,22 @@ export const detectMultipleLesions = (text: string): {
         }
     }
     
-    // 🆕 V3.3.308: EXCEPTION ORL - Perforation tympanique + Surdité = MÊME pathologie ORL
-    // "perforation tympanique bilatérale ; avec surdité de perception profonde bilatérale" = UNE SEULE pathologie
-    // La perforation tympanique est la CAUSE de la surdité, pas une lésion distincte
-    const hasTympanPerforation = /perforation.*tympan|tympan.*perfor/i.test(normalized);
+    // 🆕 V3.3.308/V3.3.405: EXCEPTION ORL - Lésion tympanique/blast + Surdité = MÊME pathologie ORL
+    // V3.3.405: Élargi pour déchirure tympanique, blast auriculaire, déflagration, barotraumatisme
+    // + détection pure pathologie auditive (cophose + hypoacousie + acouphènes = ORL unique)
+    const hasTympanLesion = /perforation.*tympan|tympan.*perfor|d[eé]chirure.*tympan|tympan.*d[eé]chir|blast.*auriculaire|barotraumatisme|d[eé]flagration/i.test(normalized);
     const hasSurditeORL = /surdit[eé]|perte.*auditi|hypoacousie|cophose|anacousie/i.test(normalized);
     const hasAcouphenes = /acouph[eè]ne|bourdonnement|sifflement.*oreille|tinnitus/i.test(normalized);
-    const isORLOnly = hasTympanPerforation && (hasSurditeORL || hasAcouphenes);
+    const hasVertigesORL = /vertige|vestibulaire|equilibre/i.test(normalized);
+    // ORL si lésion tympanique + symptômes auditifs, OU pure pathologie auditive sans autre lésion
+    const isORLOnlyTympan = hasTympanLesion && (hasSurditeORL || hasAcouphenes);
+    const isPureAuditivePathology = hasSurditeORL && (hasAcouphenes || hasVertigesORL) &&
+        !(/fracture(?!.*tympan)|luxation|amputation|section.*(?:tendon|nerf)|brulure|contusion.*(?:myocardique|pulmonaire|splenique|cerebrale)|lobectomie|splenectomie|traumatisme.*(?:cranien|cervical|thorac|abdominal)|hernie.*discale/i.test(normalized));
+    const isORLOnly = isORLOnlyTympan || isPureAuditivePathology;
     if (isORLOnly) {
         const hasOtherDistinctLesionORL = /fracture.*(?:femur|tibia|humerus|bassin|cote|rotule|radius|poignet|clavicule|vertebr|mandibule)|luxation.*(?:epaule|hanche|genou)/i.test(normalized);
         if (!hasOtherDistinctLesionORL) {
-            console.log('👂 [V3.3.308] Perforation tympanique + surdité/acouphènes → PAS de cumul (même pathologie ORL)');
+            console.log('👂 [V3.3.405] Pathologie ORL unique (tympan/blast/surdité+acouphènes) → PAS de cumul');
             return {
                 isCumul: false,
                 lesionCount: 1,
@@ -15433,7 +15461,8 @@ export const detectMultipleLesions = (text: string): {
     if (/luxation/i.test(normalized)) lesionTypes.push('luxation');
     if (/pseudarthrose/i.test(normalized)) lesionTypes.push('pseudarthrose');
     if (/amputation|perte.*(?:phalange|doigt|orteil)/i.test(normalized)) lesionTypes.push('amputation');
-    if (/dechirure/i.test(normalized)) lesionTypes.push('dechirure');
+    // 🔧 V3.3.405: Exclure "déchirure tympanique" (pathologie ORL, pas lésion musculosquelettique distincte)
+    if (/dechirure/i.test(normalized) && !/dechirure.*tympan/i.test(normalized)) lesionTypes.push('dechirure');
     if (/elongation/i.test(normalized)) lesionTypes.push('elongation');
     if (/(?:section|lesion).*tendon|(?:section|lesion).*tendineuse|section.*(?:flechisseur|extenseur)/i.test(normalized)) lesionTypes.push('section_tendon');
     if (/meniscectomie|lesion.*meniscale/i.test(normalized)) lesionTypes.push('meniscectomie');
@@ -16388,7 +16417,7 @@ const hasMultipleDistinctSites = (text: string): boolean => {
  * @param isExactMatch - Si true, cherche une correspondance exacte par nom (pour résoudre ambiguïté)
  */
 export const localExpertAnalysis = (text: string, externalKeywords?: string[], isExactMatch: boolean = false): LocalAnalysisResult => {
-    console.log('🔧 localExpertAnalysis V3.3.404 - fix SDRC type I sévère (forme majeure MS/MI, comptage critères sévérité)');
+    console.log('🔧 localExpertAnalysis V3.3.406 - fix fracture mandibulaire / troubles articulé dentaire → barème maxillo-facial correct');
 
     // 🔴 V3.3.162: NETTOYAGE TEXTE - Supprime caractères invisibles (zero-width space, etc.)
     // Ces caractères peuvent casser les regex et empêcher la détection
@@ -19672,6 +19701,74 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
         } as any;
     }
 
+    // 🆕 V3.3.406: BYPASS FRACTURE MANDIBULAIRE / MAXILLAIRE INFÉRIEUR
+    // Le findInBareme confond "Troubles de la mastication" avec "Troubles menstruels"
+    // → Handler dédié pour router vers les bonnes entrées maxillo-faciales du barème
+    const isFractureMandib406 = /fracture.*(?:mandibul|mandibule|maxillaire.*inf[eé]rieur|m[âa]choire)|(?:mandibul|mandibule|maxillaire.*inf[eé]rieur|m[âa]choire).*fracture/i.test(text);
+    const hasTroubleArticule406 = /articul[eé].*dentaire|ouverture.*buccale|limitation.*buccale|trouble.*mastication|g[eê]ne.*mastication|difficult[eé].*mastication/i.test(text);
+    const noPlusSeparMandib406 = !/\+/.test(text) && !/;/.test(text);
+    const noMultiSiteMandib406 = !hasMultipleDistinctSites(text);
+    if (isFractureMandib406 && hasTroubleArticule406 && noPlusSeparMandib406 && noMultiSiteMandib406) {
+        // Déterminer la sévérité
+        const hasPseudarthrose406 = /pseudarthrose/i.test(text);
+        const hasOsteosynthese406 = /ost[eé]osynth[eè]se|plaque|vis|chirurgi|op[eé]r[eé]/i.test(text);
+        const hasGraveContext406 = /trouble.*grave|grave.*trouble|s[eé]rieux|important|majeur|s[eé]v[eè]re/i.test(text);
+        // Extraire limitation ouverture buccale (normal = 40-50mm)
+        const buccaleMatch406 = text.match(/ouverture.*buccale.*?(\d+)\s*mm|(\d+)\s*mm.*ouverture.*buccale/i);
+        const ouvertureMm406 = buccaleMatch406 ? parseInt(buccaleMatch406[1] || buccaleMatch406[2]) : 0;
+        const isLimitationSevere406 = ouvertureMm406 > 0 && ouvertureMm406 <= 25;
+        const isLimitationModeree406 = ouvertureMm406 > 25 && ouvertureMm406 <= 35;
+        
+        let mandibRate = 10;
+        let mandibName = 'Fracture mandibulaire - Consolidation vicieuse avec trouble de l\'articulé dentaire';
+        let mandibBareme = 'Séquelles Maxillo-Faciales > Face - Mâchoires';
+        const mandibDetails: string[] = [];
+        
+        if (hasPseudarthrose406) {
+            mandibRate = 20;
+            mandibName = 'Pseudarthrose mandibulaire avec troubles de l\'articulé dentaire';
+            mandibDetails.push('Pseudarthrose mandibulaire');
+        } else if (hasGraveContext406 || (hasOsteosynthese406 && isLimitationSevere406)) {
+            // Ostéosynthèse + limitation sévère OU trouble grave explicite → 15-20%
+            mandibRate = 18;
+            mandibName = 'Fracture mandibulaire - Consolidation vicieuse avec trouble grave de l\'articulé';
+            mandibBareme = 'Séquelles Maxillo-Faciales > Face - Mâchoires > Fracture maxillaire inférieur [15-20%]';
+        } else if (hasOsteosynthese406 || isLimitationSevere406) {
+            // Ostéosynthèse OU limitation sévère → milieu de fourchette 12-15%
+            mandibRate = 15;
+            mandibName = 'Fracture mandibulaire - Consolidation vicieuse avec trouble de l\'articulé dentaire';
+            mandibBareme = 'Séquelles Maxillo-Faciales > Face - Mâchoires > Fracture maxillaire inférieur [15-20%]';
+        } else if (isLimitationModeree406) {
+            // Limitation modérée sans ostéosynthèse → 8-10%
+            mandibRate = 8;
+            mandibName = 'Fracture mandibulaire - Consolidation avec trouble léger de l\'articulé dentaire';
+            mandibBareme = 'Séquelles Maxillo-Faciales > Face - Mâchoires > Fracture maxillaire inférieur [5-10%]';
+        } else {
+            // Trouble articulé sans autre indicateur → trouble léger 5-10%
+            mandibRate = 8;
+            mandibName = 'Fracture mandibulaire - Trouble léger de l\'articulé dentaire';
+            mandibBareme = 'Séquelles Maxillo-Faciales > Face - Mâchoires > Fracture maxillaire inférieur [5-10%]';
+        }
+        
+        // Collecter détails cliniques
+        if (hasOsteosynthese406) mandibDetails.push('Ostéosynthèse (traitement chirurgical)');
+        if (ouvertureMm406 > 0) mandibDetails.push(`Limitation ouverture buccale à ${ouvertureMm406} mm (normale 40-50 mm)`);
+        if (/articul[eé].*dentaire/i.test(text)) mandibDetails.push('Troubles de l\'articulé dentaire');
+        if (/mastication/i.test(text)) mandibDetails.push('Troubles de la mastication');
+        
+        console.log(`🦷 [V3.3.406] BYPASS FRACTURE MANDIBULAIRE: ostéo=${hasOsteosynthese406}, ouverture=${ouvertureMm406}mm, grave=${hasGraveContext406} → rate=${mandibRate}%`);
+        return {
+            type: 'proposal',
+            description: mandibName,
+            name: mandibName,
+            rate: mandibRate,
+            justification: `<strong>🦷 ${mandibName}</strong><br>` +
+                (mandibDetails.length > 0 ? mandibDetails.map(d => `• ${d}`).join('<br>') + '<br>' : '') +
+                `• <strong>Taux proposé : ${mandibRate}%</strong>`,
+            path: mandibBareme
+        } as any;
+    }
+
     // 🆕 V3.3.364e: HANDLER - SURDITÉ AGGRAVATION AVEC EA
     // Pattern: "surdité préexistante X% IPP + aggravation → Y dB bilatérale"
     // Le taux imputable = taux actuel - taux antérieur (méthode capacité restante)
@@ -21760,9 +21857,12 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
         // le sequelae handler ne sait pas calculer le bon taux (rate=8 au lieu de 60-70%)
         // → Bypass vers comprehensiveSingleLesionAnalysis où les expert rules V3.3.308 prennent le relais
         // V3.3.374o: NE PAS bypasser si multi-système (ex: surdité + vision + crâne + MI)
+        // 🔧 V3.3.405: Élargi pour blast auriculaire, déchirure tympanique, cophose asymétrique
         else if ((!hasMultipleDistinctSites(text)) && (/surdit[eé].*(?:profonde|s[eé]v[eè]re|compl[eè]te|totale|perception).*bilat[eé]ral|bilat[eé]ral.*surdit[eé].*(?:profonde|perception)/i.test(text) ||
-                 (/perforation.*tympan/i.test(text) && /surdit[eé]/i.test(text)))) {
-            console.log('👂 [V3.3.308] SURDITÉ BILATÉRALE PROFONDE / PERFORATION TYMPANIQUE détectée → Bypass vers expert rules ORL');
+                 (/(?:perforation|d[eé]chirure).*tympan/i.test(text) && /surdit[eé]|cophose|hypoacousie/i.test(text)) ||
+                 (/(?:blast|d[eé]flagration|barotraumatisme)/i.test(text) && /surdit[eé]|cophose|hypoacousie/i.test(text)) ||
+                 (/cophose/i.test(text) && /hypoacousie|acouph[eè]ne|vertige|vestibulaire/i.test(text)))) {
+            console.log('👂 [V3.3.405] PATHOLOGIE ORL (surdité/blast/cophose) détectée → Bypass vers expert rules ORL');
             // Ne pas retourner, laisser l'analyse continuer vers comprehensiveSingleLesionAnalysis
         }
         // 🆕 V3.3.310: FRACTURE TIBIA/PLATEAU TIBIAL + RAIDEUR GENOU + AMYOTROPHIE = UNE SEULE PATHOLOGIE
