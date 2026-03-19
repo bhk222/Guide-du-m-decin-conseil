@@ -14860,6 +14860,16 @@ export const detectMultipleLesions = (text: string): {
 } => {
     const normalized = normalize(text);
     
+    // 🆕 V3.3.403: EXCEPTION INHALATION TOXIQUE / ASTHME PROFESSIONNEL
+    // Inhalation gaz toxique + séquelles respiratoires = UNE SEULE pathologie respiratoire
+    // La "perte de connaissance" est une syncope toxique, PAS un TC → PAS de cumul respir+neuro
+    const isToxicInhalationCumul403 = /inhalation.*(?:toxique|massive|gaz|H2S|chlore|ammoniac|soufre|sulfure)|(?:H2S|sulfure.*hydrog[eè]ne|chlore|ammoniac).*inhal|intoxication.*(?:gaz|chimique)|OAP.*toxique|[oœ]d[eè]me.*pulmonaire.*toxique|gaz.*toxique/i.test(normalized);
+    const hasToxicRespSequelae403 = /RADS|asthme.*(?:professionnel|post)|hyperr[eé]activit[eé].*bronchique|dyspn[eé]e|insuffisance.*respiratoire|bronchite.*chronique|cortico[ïi]des?.*inhal[eé]/i.test(normalized);
+    if (isToxicInhalationCumul403 && hasToxicRespSequelae403) {
+        console.log('🫁 [V3.3.403] Inhalation toxique + séquelles respiratoires → PAS de cumul (pathologie respiratoire unique)');
+        return { isCumul: false, lesionCount: 1, keywords: [], hasAnteriorState: false, anteriorIPP: null };
+    }
+
     // 🆕 V3.3.133: Détection PRÉCOCE amputation + rupture/section tendon (AVANT normalisation complète)
     // Ex: "amputation P3 D5 avec rupture fléchisseur P2 D4" 
     // Teste sur texte original pour éviter confusion avec "vertebre dorsale D4" ajouté par normalisation
@@ -16337,7 +16347,10 @@ const hasMultipleDistinctSites = (text: string): boolean => {
     if (/(?:fracture.*bassin|disjonction.*sacro|branche.*(?:ilio[\s-]?pub|ischio[\s-]?pub)|cadre.*obturateur|fracture.*(?:aileron|sacr[eé]|cotylo[ïi]de|cotyle|ac[eé]tabulum|anneau.*pelvi|sacrum|coccyx)|anneau.*pelvi|coccygodynie)/i.test(t)) siteCount++;
     
     // Crâne/Cérébral
-    if (/(?:traumatisme.*cr[aâ]ni|contusion.*c[eé]r[eé]br|perte.*connaissance|syndrome.*post[\s-]?commotionnel|tc\b|commotion.*c[eé]r[eé]br|c[eé]phal[eé]e.*chronique|troubles?.*cognitif)/i.test(t)) siteCount++;
+    // Crâne/Cérébral
+    // 🔧 V3.3.403: Exclure inhalation toxique (perte de connaissance = syncope toxique, PAS un TC)
+    const isToxicInhalationMDS403 = /inhalation.*(?:toxique|massive|gaz|H2S|chlore|ammoniac)|H2S|sulfure.*hydrog[eè]ne|intoxication.*gaz|OAP.*toxique|gaz.*toxique/i.test(t);
+    if (!isToxicInhalationMDS403 && /(?:traumatisme.*cr[aâ]ni|contusion.*c[eé]r[eé]br|perte.*connaissance|syndrome.*post[\s-]?commotionnel|tc\b|commotion.*c[eé]r[eé]br|c[eé]phal[eé]e.*chronique|troubles?.*cognitif)/i.test(t)) siteCount++;
     
     // Audition (surdité, acouphènes)
     if (/(?:surdit[eé]|perte.*auditi|acouph[eè]ne|hypoacousie|blast.*auditif|barotraumatisme.*oreille)/i.test(t)) siteCount++;
@@ -16375,7 +16388,7 @@ const hasMultipleDistinctSites = (text: string): boolean => {
  * @param isExactMatch - Si true, cherche une correspondance exacte par nom (pour résoudre ambiguïté)
  */
 export const localExpertAnalysis = (text: string, externalKeywords?: string[], isExactMatch: boolean = false): LocalAnalysisResult => {
-    console.log('🔧 localExpertAnalysis V3.3.402 - fix hernie discale cervicale (NCB + déficit moteur) cumul override + severity scoring');
+    console.log('🔧 localExpertAnalysis V3.3.403 - fix inhalation toxique H2S/gaz (faux TC + faux polytrauma) → bypass respiratoire dédié');
 
     // 🔴 V3.3.162: NETTOYAGE TEXTE - Supprime caractères invisibles (zero-width space, etc.)
     // Ces caractères peuvent casser les regex et empêcher la détection
@@ -19466,6 +19479,90 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
         } as any;
     }
 
+    // 🆕 V3.3.403: BYPASS SÉQUELLES - INHALATION TOXIQUE / ASTHME PROFESSIONNEL / RADS
+    // Pattern: inhalation gaz toxique (H2S, chlore, ammoniac, fumées) + séquelles respiratoires
+    // La "perte de connaissance" est due à la syncope toxique, PAS un traumatisme crânien
+    // Les jours de réanimation sont pour l'OAP toxique, PAS un coma post-TC
+    const isToxicInhalation403 = /inhalation.*(?:toxique|massive|gaz|H2S|chlore|ammoniac|soufre|sulfure|isocyanate|fum[eé]e)|(?:H2S|sulfure.*hydrog[eè]ne|chlore|ammoniac|phosg[eè]ne|acide.*cyanhydrique).*inhal|intoxication.*(?:gaz|chimique|professionnelle)|OAP.*toxique|[oœ]d[eè]me.*(?:aigu\s+)?pulmonaire.*toxique|gaz.*toxique/i.test(text);
+    const hasRespiratorySequelae403 = /RADS|asthme|hyperr[eé]activit[eé].*bronchique|bronchospasme|insuffisance.*respiratoire|dyspn[eé]e|syndrome.*(?:obstructif|restrictif)|bronchite.*chronique|toux.*chronique|fibrose.*pulmonaire|cortico[ïi]des?.*inhal[eé]s?|bronchodilatateur|s[eé]quelles?.*respirat|corticoth[eé]rapie/i.test(text);
+    if (isToxicInhalation403 && hasRespiratorySequelae403) {
+        // Évaluation de la sévérité respiratoire
+        const hasCorticoides403 = /cortico[ïi]des?.*(?:permanent|inhal[eé]|quotidien|au\s+long\s+cours)|corticoth[eé]rapie.*(?:permanent|continu|au\s+long\s+cours)/i.test(text);
+        const hasBronchodilatateur403 = /bronchodilatateur|ventoline|salbutamol|b[eé]ta[\s-]?2/i.test(text);
+        const hasOxygen403 = /oxyg[eé]noth[eé]rapie|oxyg[eè]ne.*(?:permanent|domicile|long\s+cours)|O2/i.test(text);
+        const hasDyspneeRepos403 = /dyspn[eé]e.*repos|repos.*dyspn[eé]e/i.test(text);
+        const hasDyspneeEffort403 = /dyspn[eé]e.*(?:effort|marche|escalier|quotidien)/i.test(text);
+        const hasReanimation403 = /r[eé]animation|intub[eé].*ventil[eé]|ventilation.*m[eé]canique|intub[eé]/i.test(text);
+        const hasIRC403 = /insuffisance.*respiratoire.*chronique|IRC/i.test(text);
+        const isSevere403 = /s[eé]v[eè]re|grave|majeur|important/i.test(text);
+
+        let toxicRate = 15;
+        // Très sévère: oxygénothérapie permanente → IRC grave [50-80%]
+        if (hasOxygen403) {
+            toxicRate = hasDyspneeRepos403 ? 55 : 45;
+        }
+        // Sévère: corticoïdes permanents + dyspnée quotidienne = trouble fonctionnel majeur
+        else if (hasCorticoides403 && (hasDyspneeEffort403 || hasDyspneeRepos403)) {
+            toxicRate = isSevere403 ? 35 : 30;
+        }
+        // Modéré-sévère: traitement continu (corticoïdes/IRC) sans dyspnée précisée
+        else if (hasCorticoides403 || hasIRC403) {
+            toxicRate = 25;
+        }
+        // Modéré: dyspnée d'effort avec facteurs aggravants (sévérité documentée, bronchodilatateur)
+        else if (hasDyspneeEffort403 && (isSevere403 || hasBronchodilatateur403)) {
+            toxicRate = 20;
+        }
+        // Léger-modéré: dyspnée d'effort seule ou hyperréactivité documentée
+        else if (hasDyspneeEffort403 || /hyperr[eé]activit[eé]/i.test(text)) {
+            toxicRate = 15;
+        }
+        // Léger: bronchodilatateurs seuls
+        else if (hasBronchodilatateur403) {
+            toxicRate = 15;
+        }
+        // Minimal: séquelles légères
+        else {
+            toxicRate = 10;
+        }
+
+        // Bonus réanimation (séjour lourd = séquelles probablement plus importantes)
+        if (hasReanimation403 && toxicRate < 40) toxicRate += 5;
+
+        // Identifier le type de pathologie et l'agent toxique
+        const isRADS403 = /RADS|Reactive\s+Airways/i.test(text);
+        const isAsthme403 = /asthme/i.test(text);
+        const toxicAgent403 = text.match(/(?:H2S|sulfure\s+d['']?hydrog[eè]ne|chlore|ammoniac|phosg[eè]ne|isocyanate|acide\s+cyanhydrique)/i)?.[0] || 'gaz toxique';
+
+        const toxicName403 = isRADS403 ? `RADS post-inhalation ${toxicAgent403} (asthme professionnel avec hyperréactivité bronchique)` :
+                             isAsthme403 ? `Asthme professionnel sévère post-inhalation toxique (${toxicAgent403})` :
+                             `Séquelles respiratoires post-inhalation toxique (${toxicAgent403})`;
+
+        const justifParts403: string[] = [];
+        justifParts403.push(`Inhalation toxique : ${toxicAgent403}`);
+        if (hasReanimation403) justifParts403.push('Réanimation intubée-ventilée (OAP toxique)');
+        if (isRADS403) justifParts403.push('RADS chronique (hyperréactivité bronchique post-inhalation)');
+        if (hasCorticoides403) justifParts403.push('Corticoïdes inhalés permanents');
+        if (hasBronchodilatateur403) justifParts403.push('Bronchodilatateurs');
+        if (hasOxygen403) justifParts403.push('Oxygénothérapie au long cours');
+        if (hasDyspneeEffort403) justifParts403.push('Dyspnée d\'effort quotidienne');
+        if (hasDyspneeRepos403) justifParts403.push('Dyspnée de repos');
+        if (isSevere403) justifParts403.push('Hyperréactivité bronchique sévère documentée');
+
+        console.log(`🫁 [V3.3.403] BYPASS INHALATION TOXIQUE: ${toxicAgent403}, cortico=${hasCorticoides403}, O2=${hasOxygen403}, dyspnée=${hasDyspneeEffort403}, réa=${hasReanimation403} → rate=${toxicRate}%`);
+        return {
+            type: 'proposal',
+            description: toxicName403,
+            name: toxicName403,
+            rate: toxicRate,
+            justification: `<strong>🫁 SÉQUELLES RESPIRATOIRES POST-INHALATION TOXIQUE</strong><br>` +
+                justifParts403.map(p => `• ${p}`).join('<br>') +
+                `<br>• Barème : Fibrose pulmonaire post-traumatique / IRC [10-60%]<br>` +
+                `• <strong>Taux proposé : ${toxicRate}%</strong>`,
+            path: 'Séquelles Thoraciques > Plèvre et Poumons > Séquelles respiratoires post-inhalation toxique'
+        } as any;
+    }
+
     // 🆕 V3.3.364e: BYPASS SÉQUELLES - SDRC TYPE I isolé
     const isSDRC364e = /sdrc|algodystrophie|algon[eé]urodystrophie/i.test(text);
     const isNotCausalgie364e = !/causalgie|sdrc\s*(?:de\s+)?type\s*(?:ii|2)/i.test(text);
@@ -19717,7 +19814,8 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
     // Syndrome subjectif du crâne (céphalées + vertiges ensemble)
     const hasCephalees = /c[eé]phal[eé]e/i.test(text);
     const hasVertiges = /vertige|syndrome.*vestibulaire/i.test(text);
-    const hasTC = /traumatisme.*cr[aâ]n|perte.*connaissance|coma/i.test(text);
+    // 🔧 V3.3.403: Exclure les inhalations toxiques du TC (perte de connaissance = syncope toxique, PAS un TC)
+    const hasTC = !isToxicInhalation403 && /traumatisme.*cr[aâ]n|perte.*connaissance|coma/i.test(text);
     const tcDaysMatch = text.match(/(?:perte.*connaissance|coma|hospitalisation).*?(\d+)\s*(?:jour|j)/i);
     const tcDays = tcDaysMatch ? parseInt(tcDaysMatch[1]) : 0;
     
@@ -21485,7 +21583,8 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
         // 🆕 V3.3.158 + V3.3.214: EXCEPTION TC NEUROLOGIQUES
         // Pattern: Chute OU TC + perte connaissance/hospitalisation + troubles cognitifs/hémiparésie/vertiges/céphalées
         // → Laisser passer aux expert rules qui détecteront le bon barème automatiquement
-        const hasTraumaticBrainInjury = /(?:chute|traumatisme.*cr[aâ]ne?|TC|perte.*connaissance|coma|hospitalisation.*neuro)/i.test(text);
+        // 🔧 V3.3.403: Exclure inhalations toxiques (perte connaissance = syncope toxique)
+        const hasTraumaticBrainInjury = !isToxicInhalation403 && /(?:chute|traumatisme.*cr[aâ]ne?|TC|perte.*connaissance|coma|hospitalisation.*neuro)/i.test(text);
         // 🔧 V3.3.384: Ajout syndrome frontal, troubles mémoire, apathie comme séquelles neurologiques
         const hasNeurologicalSequelae = /(?:troubles?.*cognitif|h[eé]mipar[eé]sie|vertige|c[eé]phal[eé]e|syndrome\s+frontal|troubles?.*m[eé]moire|apathie|d[eé]mence)/i.test(text);
         
