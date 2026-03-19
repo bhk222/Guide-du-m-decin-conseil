@@ -1,6 +1,6 @@
 /**
  * 🎤 useDictaphoneAI — Dictaphone 100% autonome via Whisper IA
- * V3.3.410 — Orthographe médicale avancée + apostrophes + hallucinations
+ * V3.3.411 — Nombres avancés (cent/mille/ordinals) + mesures médicales + 2ème passe corrections
  * 
  * ZÉRO dépendance externe :
  * - Modèle Whisper SMALL (auto-hébergé en local, HuggingFace CDN en production)
@@ -56,6 +56,34 @@ const NOMBRES_TEXTE: Record<string, string> = {
 /** Convertit les nombres français composés en chiffres dans le texte */
 function convertFrenchNumbers(text: string): string {
     let result = text;
+
+    // V3.3.411: Milliers — "mille deux cents" → "1200", "deux mille" → "2000"
+    result = result.replace(/\b(\d+)\s+mille\s+(\d+)\b/gi, (_, th, rest) => String(Number(th) * 1000 + Number(rest)));
+    result = result.replace(/\b(deux|trois|quatre|cinq|six|sept|huit|neuf|dix)\s+mille\s+(deux|trois|quatre|cinq|six|sept|huit|neuf)\s+cents?\b/gi, (_, th, h) => {
+        const thV = NOMBRES_TEXTE[th.toLowerCase()] || '1';
+        const hV = NOMBRES_TEXTE[h.toLowerCase()] || '1';
+        return String(Number(thV) * 1000 + Number(hV) * 100);
+    });
+    result = result.replace(/\b(deux|trois|quatre|cinq|six|sept|huit|neuf|dix)\s+mille\b/gi, (_, th) => {
+        const v = NOMBRES_TEXTE[th.toLowerCase()] || '1';
+        return String(Number(v) * 1000);
+    });
+    result = result.replace(/\bmille\s+(\d+)\b/gi, (_, rest) => String(1000 + Number(rest)));
+    result = result.replace(/\bmille\b/gi, '1000');
+
+    // V3.3.411: Centaines — "deux cents" → "200", "cent cinquante" → "150"  
+    result = result.replace(/\b(deux|trois|quatre|cinq|six|sept|huit|neuf)\s+cents?\s+(\d+)\b/gi, (_, h, rest) => {
+        const hV = NOMBRES_TEXTE[h.toLowerCase()] || '1';
+        return String(Number(hV) * 100 + Number(rest));
+    });
+    result = result.replace(/\b(deux|trois|quatre|cinq|six|sept|huit|neuf)\s+cents?\b/gi, (_, h) => {
+        const v = NOMBRES_TEXTE[h.toLowerCase()] || '1';
+        return String(Number(v) * 100);
+    });
+    result = result.replace(/\bcent\s+(\d+)\b/gi, (_, rest) => String(100 + Number(rest)));
+    // "cent" seul seulement en contexte numérique (pas "cent pour cent" car déjà traité par pourcentage)
+    result = result.replace(/\bcent\b(?!\s*(?:pour|%|mètres?|grammes?))/gi, '100');
+
     // Patterns composés (soixante-dix, quatre-vingts, etc.)
     result = result.replace(/\bsoixante[- ]et[- ]onze\b/gi, '71');
     result = result.replace(/\bsoixante[- ](?:et[- ])?douze\b/gi, '72');
@@ -113,6 +141,29 @@ function convertFrenchNumbers(text: string): string {
     result = result.replace(/\b(zéro|un|une|deux|trois|quatre|cinq|six|sept|huit|neuf|dix|onze|douze|treize|quatorze|quinze|seize)\s*(?=\/\s*10|%|pour\s*cent|dixièmes?)\b/gi, (m, nb) => {
         return (NOMBRES_TEXTE[nb.toLowerCase()] || nb) + m.slice(nb.length);
     });
+
+    // V3.3.411: Ordinals — "premier" → "1er", "deuxième" → "2ème", etc.
+    result = result.replace(/\bpremière?\b/gi, '1er');
+    result = result.replace(/\bdeuxième\b/gi, '2ème');
+    result = result.replace(/\btroisième\b/gi, '3ème');
+    result = result.replace(/\bquatrième\b/gi, '4ème');
+    result = result.replace(/\bcinquième\b/gi, '5ème');
+    result = result.replace(/\bsixième\b/gi, '6ème');
+    result = result.replace(/\bseptième\b/gi, '7ème');
+    result = result.replace(/\bhuitième\b/gi, '8ème');
+    result = result.replace(/\bneuvième\b/gi, '9ème');
+    result = result.replace(/\bdixième\b/gi, '10ème');
+
+    // V3.3.411: Medical measurements — "X centimètres" → "X cm", etc.
+    result = result.replace(/\b(\d+)\s*centimètres?\b/gi, '$1 cm');
+    result = result.replace(/\b(\d+)\s*millimètres?\b/gi, '$1 mm');
+    result = result.replace(/\b(\d+)\s*kilogrammes?\b/gi, '$1 kg');
+    result = result.replace(/\b(\d+)\s*grammes?\b/gi, '$1 g');
+    result = result.replace(/\b(\d+)\s*mètres?\b(?!\s*(?:carrés?|cubes?))/gi, '$1 m');
+    // "X sur 10" → "X/10" (échelle de douleur, acuité)
+    result = result.replace(/\b(\d+)\s+sur\s+10\b/gi, '$1/10');
+    result = result.replace(/\b(\d+)\s+sur\s+20\b/gi, '$1/20');
+
     return result;
 }
 
@@ -180,9 +231,10 @@ const WHISPER_HALLUCINATIONS = [
  * Correction post-transcription médicale
  * 0. V3.3.393: Nettoyage hallucinations Whisper (segments parasites)
  * 0b. V3.3.410: Reconstruction apostrophes & contractions d'articles
- * 1. Corrections de phrases (regex)
+ * 1. Corrections de phrases (regex) — 1ère passe
  * 2. Corrections de mots (exact match)
  * 3. V3.3.392: Correction phonétique (normalisation sans accents → terme médical correct)
+ * 3b. V3.3.411: 2ème passe phrases (après correction mots, nouvelles expressions peuvent apparaître)
  * 4. V3.3.410: Post-nettoyage typographique
  */
 function medicalPostCorrection(text: string): string {
@@ -198,9 +250,12 @@ function medicalPostCorrection(text: string): string {
     
     // 0b. V3.3.410: Reconstruction d'apostrophes manquantes
     // Whisper omet souvent l'apostrophe: "l épaule" → "l'épaule", "d un" → "d'un"
-    corrected = corrected.replace(/\b([ldnsjcmtLDNSJCMT])\s+(?=[aeéèêëiïîoôuùûyhy])/g, '$1\'');
+    // V3.3.411: Fix — "h" seulement suivi de voyelle (h muet: hôpital, humérus, hémorragie)
+    corrected = corrected.replace(/\b([ldnsjcmtLDNSJCMT])\s+(?=[aeéèêëiïîoôuùûy])/g, '$1\'');
+    corrected = corrected.replace(/\b([ldnsjcmtLDNSJCMT])\s+(?=h[aeéèêëiïîoôuùûy])/gi, '$1\'');
     // "Qu il" → "Qu'il"
-    corrected = corrected.replace(/\b([Qq]u)\s+(?=[aeéèêëiïîoôuùûyhy])/g, '$1\'');
+    corrected = corrected.replace(/\b([Qq]u)\s+(?=[aeéèêëiïîoôuùûy])/g, '$1\'');
+    corrected = corrected.replace(/\b([Qq]u)\s+(?=h[aeéèêëiïîoôuùûy])/gi, '$1\'');
     
     // 1. Corrections de phrases / expressions (priorité haute)
     for (const [pattern, replacement] of PHRASE_CORRECTIONS) {
@@ -234,6 +289,12 @@ function medicalPostCorrection(text: string): string {
         
         return word;
     });
+    
+    // 3b. V3.3.411: 2ème passe phrases — après correction de mots, de nouvelles expressions
+    // médicales peuvent apparaître (ex: mots corrigés forment un pattern de phrase reconnu)
+    for (const [pattern, replacement] of PHRASE_CORRECTIONS) {
+        corrected = corrected.replace(pattern, replacement);
+    }
     
     // 4. V3.3.410: Post-nettoyage typographique
     // Espaces multiples
