@@ -120,8 +120,8 @@ export const PHRASE_CORRECTIONS: [RegExp, string][] = [
     [/\bde\s+balance\s+art?\b/gi, 'de Balthazard'],
     [/\bla\s+formation?\s+de\s+balance\s+art?\b/gi, 'la formule de Balthazard'],
     [/\bune?\s+six\s+a\s+trice?\b/gi, 'une cicatrice'],
-    // V3.3.409: fémur phonétique
-    [/\bph[eé]nom[iè]?[eè]?ne?\b(?=\s|$|[.,;])/gi, 'fémur'],
+    // V3.3.409: fémur phonétique (protège "phénomène de Raynaud")
+    [/\bph[eé]nom[iè]?[eè]?ne?\b(?!\s+de\s+[rR]aynaud)(?=\s|$|[.,;])/gi, 'fémur'],
     [/\bf[eé]moire?\b/gi, 'fémur'],
     [/\bla\s+six\s+a\s+trice?\b/gi, 'la cicatrice'],
     [/\bostéo\s+scintaise\b/gi, 'ostéosynthèse'],
@@ -532,6 +532,111 @@ export const PHRASE_CORRECTIONS: [RegExp, string][] = [
     [/\b(\d+)\s*pour\s*cents?\b/gi, '$1%'],
     [/\b(\d+)\s*pour\s*cent\b/gi, '$1%'],
     [/\btaux\s+de?\s+(\d+)\b/gi, 'taux de $1'],
+
+    // ═══ V3.3.410: ORTHOGRAPHE & VOCABULAIRE MÉDICAL AVANCÉ ═══
+
+    // ─── Contractions d'articles (Whisper sépare "du" → "de le", etc.) ───
+    [/\bde\s+le\s+(?=\w)/gi, 'du '],
+    [/\bde\s+les\s+(?=\w)/gi, 'des '],
+    [/\b[àa]\s+le\s+(?=\w)/gi, 'au '],
+    [/\b[àa]\s+les\s+(?=\w)/gi, 'aux '],
+
+    // ─── Apostrophes manquantes (Whisper omet souvent l'apostrophe) ───
+    [/\bl\s+(avant-bras|omoplate|épaule|humérus|articulation|acromion|olécrâne|amputation|arthrodèse|ostéosynthèse|ostéotomie|ankylose|arthrose|arrachement|abdomen|atrophie|incapacité|expertise|insuffisance|extension|abduction|état|intervention|opération|examen|œil|oreille|index|annulaire|auriculaire|accident)\b/gi, 'l\'$1'],
+    [/\bd\s+(un|une)\s+/gi, 'd\'$1 '],
+    [/\bs\s+(agit)\b/gi, 's\'$1'],
+    [/\bn\s+(a\s+pas|est\s+pas)\b/gi, 'n\'$1'],
+    [/\bqu\s+(il|elle|on)\b/gi, 'qu\'$1'],
+    [/\bc\s+(est)\b/gi, 'c\'$1'],
+
+    // ─── Introductions cliniques (phrases d'entrée de cas) ───
+    [/\bil\s+s[''']?agit\s+d[''']?une?\s+(?:homme|home)\b/gi, 'il s\'agit d\'un homme'],
+    [/\bil\s+s[''']?agit\s+d[''']?une?\s+(?:femme|fame)\b/gi, 'il s\'agit d\'une femme'],
+    [/\bil\s+a\s+[eé]t[eé]\s+victim[eé]?\s+d[''']?\s*/gi, 'il a été victime d\''],
+    [/\belle\s+a\s+[eé]t[eé]\s+victim[eé]?\s+d[''']?\s*/gi, 'elle a été victime d\''],
+    [/\bsuite?\s+[aà]\s+une?\s+accident\b/gi, 'suite à un accident'],
+    [/\b[aà]\s+la\s+suite\s+d[''']?une?\s+accident\b/gi, 'à la suite d\'un accident'],
+    [/\baccident\s+d[eu]\s+travaille?\b/gi, 'accident du travail'],
+    [/\baccident\s+de\s+la\s+travaille?\b/gi, 'accident du travail'],
+    [/\bmaladie\s+professionn?elle?\b/gi, 'maladie professionnelle'],
+    [/\bmaladie\s+profesionn?elle?\b/gi, 'maladie professionnelle'],
+
+    // ─── Genre patient (Whisper confond souvent le genre) ───
+    [/\bune?\s+patient\s+[aâ]g[eé]\s+de\b/gi, 'un patient âgé de'],
+    [/\bd[''']une?\s+patient\s+[aâ]g[eé]\b/gi, 'd\'un patient âgé'],
+    [/\bla?\s+patient\s+il\b/gi, 'le patient il'],
+    [/\bpatient\s+(?:âg[eé]e|agée)\s+de\b/gi, 'patient âgé de'],
+    [/\bpatiente\s+(?:âg[eé]|age)\s+de\b/gi, 'patiente âgée de'],
+
+    // ─── Anatomie — articles incorrects (Whisper met "de la" devant noms masculins) ───
+    [/\bau\s+niveaux?\s+d[eu]\b/gi, 'au niveau du'],
+    [/\bau\s+niveaux?\s+de\s+la\b/gi, 'au niveau de la'],
+    [/\bau\s+niveaux?\s+des?\b/gi, 'au niveau des'],
+    [/\bfracture\s+de\s+la\s+f[eé]mur\b/gi, 'fracture du fémur'],
+    [/\bfracture\s+de\s+la\s+tibia\b/gi, 'fracture du tibia'],
+    [/\bfracture\s+de\s+la\s+radius\b/gi, 'fracture du radius'],
+    [/\bfracture\s+de\s+la\s+cubitus\b/gi, 'fracture du cubitus'],
+    [/\bfracture\s+de\s+la\s+bassin\b/gi, 'fracture du bassin'],
+    [/\bfracture\s+de\s+la\s+rachis\b/gi, 'fracture du rachis'],
+    [/\bfracture\s+de\s+la\s+sternum\b/gi, 'fracture du sternum'],
+    [/\bfracture\s+de\s+la\s+hum[eé]rus\b/gi, 'fracture de l\'humérus'],
+    [/\bfracture\s+de\s+la\s+ol[eé]cr[aâ]ne\b/gi, 'fracture de l\'olécrâne'],
+    [/\ble\s+fermer\b/gi, 'le fémur'],
+    [/\bdu\s+fermer\b/gi, 'du fémur'],
+    [/\bla\s+r[eé]dacteur\b/gi, 'la raideur'],
+    [/\bune?\s+r[eé]dacteur\b/gi, 'une raideur'],
+
+    // ─── Médico-légal – expressions courantes ───
+    [/\ble\s+taux\s+d[''']?\s*in[ck]apa[cs]it[eé]\b/gi, 'le taux d\'incapacité'],
+    [/\bla?\s+date\s+de\s+consolid?[oa]tion\b/gi, 'la date de consolidation'],
+    [/\b[àa]\s+la\s+consolid?[oa]tion\b/gi, 'à la consolidation'],
+    [/\bapr[eè]s\s+consolid?[oa]tion\b/gi, 'après consolidation'],
+    [/\ben\s+appli[ck]assion\s+du\b/gi, 'en application du'],
+    [/\ble\s+bar[eè]me?\s+(?:indicatif\s+)?d[''']?invali?dit[eé]\b/gi, 'le barème indicatif d\'invalidité'],
+    [/\bbar[eè]me?\s+1967\b/gi, 'barème 1967'],
+    [/\bbar[eè]me?\s+alg[eé]rien\b/gi, 'barème algérien'],
+    [/\bla\s+formule?\s+de\s+balt[ah]?azar[dt]?\b/gi, 'la formule de Balthazard'],
+    [/\bde\s+balt[ah]?azar[dt]?\b/gi, 'de Balthazard'],
+    [/\bcumul?\s+de\s+balt[ah]?azar[dt]?\b/gi, 'cumul de Balthazard'],
+
+    // ─── Traitement & chirurgie — expressions ───
+    [/\btraitement?\s+chirurgicale?\b/gi, 'traitement chirurgical'],
+    [/\btraitement?\s+m[eé]dical[eé]?\b/gi, 'traitement médical'],
+    [/\btraitement?\s+conservateur\b/gi, 'traitement conservateur'],
+    [/\btraitement?\s+orthop[eé]dique\b/gi, 'traitement orthopédique'],
+    [/\bune?\s+intervention?\s+chirurgicale?\b/gi, 'une intervention chirurgicale'],
+    [/\br[eé]duction?\s+(?:et\s+)?content?[sc]ion\b/gi, 'réduction et contention'],
+    [/\bcontent?[sc]ion\s+pl[aâ]tr[eé]e?\b/gi, 'contention plâtrée'],
+    [/\br[eé]?[eé]ducation\s+fonctionnelle?\b/gi, 'rééducation fonctionnelle'],
+    [/\bmat[eé]riel\s+d[''']?ost[eé]osynth[eè]se\b/gi, 'matériel d\'ostéosynthèse'],
+    [/\bablation?\s+du?\s+mat[eé]riel\b/gi, 'ablation du matériel'],
+
+    // ─── Degrés et classifications ───
+    [/\bpremier\s+degr[eé]s?\b/gi, 'premier degré'],
+    [/\bdeuxi[eè]me\s+degr[eé]s?\b/gi, 'deuxième degré'],
+    [/\btroisi[eè]me\s+degr[eé]s?\b/gi, 'troisième degré'],
+    [/\bdu\s+(\d+)[eè]me?\s+degr[eé]\b/gi, 'du $1ème degré'],
+    [/\bstade\s+(\d+)\b/gi, 'stade $1'],
+
+    // ─── Expressions de taux / pourcentage ───
+    [/\bun\s+taux\s+(?:de?\s+)?(\d+)\s*pourcent\b/gi, 'un taux de $1%'],
+    [/\bestim[eé]e?\s+[àa]\s+(\d+)\s*pourcent\b/gi, 'estimé à $1%'],
+    [/\b[eé]valu[eé]e?\s+[àa]\s+(\d+)\s*pourcent\b/gi, 'évalué à $1%'],
+
+    // ─── Phénomène de Raynaud (protection contre correction fémur) ───
+    [/\bf[eé]mur\s+de\s+[rR]aynaud\b/gi, 'phénomène de Raynaud'],
+
+    // ─── Bilan & examen ───
+    [/\ble\s+bilans?\s+radiologiqu\w*\b/gi, 'le bilan radiologique'],
+    [/\ble\s+bilans?\s+clinique\b/gi, 'le bilan clinique'],
+    [/\bl[''']?examen?\s+clinique\b/gi, 'l\'examen clinique'],
+    [/\bl[''']?examen?\s+radiologiqu\w*\b/gi, 'l\'examen radiologique'],
+    [/\bl[''']?examen?\s+m[eé]dical\b/gi, 'l\'examen médical'],
+    [/\bl[''']?examen?\s+compl[eé]mentaire\b/gi, 'l\'examen complémentaire'],
+    [/\bles?\s+examens?\s+compl[eé]mentaires?\b/gi, 'les examens complémentaires'],
+
+    // ─── Nettoyage typographique ───
+    [/\s{2,}/g, ' '],
 ];
 
 // ═══════════════════════════════════════════════════════════════
@@ -542,10 +647,8 @@ export const PHRASE_CORRECTIONS: [RegExp, string][] = [
 export const WORD_CORRECTIONS: Record<string, string> = {
     // ═══ V3.3.409: ERREURS WHISPER FRÉQUENTES ═══
     'impassion': 'patient',
-    'passion': 'patient',  // dans contexte médical, Whisper dit "passion" pour "patient"
     'phénomien': 'fémur',
     'phénomiene': 'fémur',
-    'phénomène': 'fémur',  // Whisper confond fémur/phénomène
     'fémoire': 'fémur',
     'fémure': 'fémur',
     // ═══ ANATOMIE — MEMBRE SUPÉRIEUR ═══
@@ -1200,11 +1303,10 @@ export const WORD_CORRECTIONS: Record<string, string> = {
     'consolation': 'consolidation',
     'constellation': 'consolidation',
     'consolé': 'consolidé',
-    'prostate': 'prothèse',
+    // 'prostate' retiré V3.3.410: mot médical valide (→ géré par PHRASE_CORRECTIONS contextuels)
     'bâtiment': 'barème',
     'batiment': 'barème',
-    'balance': 'Balthazard',
-    'balancer': 'Balthazard',
+    // 'balance'/'balancer' retirés V3.3.410: mots courants (→ gérés par PHRASE_CORRECTIONS)
     'séquestré': 'séquelle',
     'sicatrise': 'cicatrice',
     'sikatrice': 'cicatrice',
@@ -1222,14 +1324,14 @@ export const WORD_CORRECTIONS: Record<string, string> = {
     'enchilose': 'ankylose',
     'raider': 'raideur',
     'raiders': 'raideurs',
-    'rédacteur': 'raideur',
+    // 'rédacteur' retiré V3.3.410: mot courant qui peut apparaître dans rapports médico-légaux
     'sciatik': 'sciatique',
     'siatique': 'sciatique',
     'ciatique': 'sciatique',
     'luxure': 'luxation',
     'lussation': 'luxation',
     'loxation': 'luxation',
-    'fermer': 'fémur',
+    // 'fermer' retiré V3.3.410: verbe courant (→ géré par PHRASE_CORRECTIONS contextuels)
     'umerale': 'humérale',
     'huméralle': 'humérale',
     'épaul': 'épaule',
@@ -1709,6 +1811,151 @@ export const WORD_CORRECTIONS: Record<string, string> = {
     'vasculèr': 'vasculaire',
     'vasculères': 'vasculaires',
     'ventilassion': 'ventilation',
+
+    // ═══ V3.3.410: VOCABULAIRE CLINIQUE ÉLARGI ═══
+    // ─── Termes cliniques courants souvent mal transcrits ───
+    'diagnostique': 'diagnostic',
+    'diagnostik': 'diagnostic',
+    'diagnose': 'diagnostic',
+    'diagnoztik': 'diagnostic',
+    'pronostique': 'pronostic',
+    'pronostik': 'pronostic',
+    'pronostic': 'pronostic',
+    'thérapeutik': 'thérapeutique',
+    'thérapeutique': 'thérapeutique',
+    'terapeutique': 'thérapeutique',
+    'chirurgicale': 'chirurgicale',
+    'chirurgicall': 'chirurgicale',
+    'chirurgik': 'chirurgical',
+    'orthopédik': 'orthopédique',
+    'orthopedique': 'orthopédique',
+    'clinik': 'clinique',
+    'clinike': 'clinique',
+    'chronik': 'chronique',
+    'anatomik': 'anatomique',
+    'anatomique': 'anatomique',
+    'fonctionelle': 'fonctionnelle',
+    'fonctionel': 'fonctionnel',
+    'fonctionnel': 'fonctionnel',
+
+    // ─── Traitement / médicaments ───
+    'traitement': 'traitement',
+    'traitment': 'traitement',
+    'traitemen': 'traitement',
+    'trétement': 'traitement',
+    'antalgik': 'antalgique',
+    'antalgique': 'antalgique',
+    'analgesique': 'analgésique',
+    'analgésik': 'analgésique',
+    'antiinflammatoire': 'anti-inflammatoire',
+    'anti-inflamatoire': 'anti-inflammatoire',
+    'anticoagulant': 'anticoagulant',
+    'anticoagulants': 'anticoagulants',
+    'corticoide': 'corticoïde',
+    'corticoïdes': 'corticoïdes',
+    'antibiotik': 'antibiotique',
+    'antibiotique': 'antibiotique',
+    'morphinique': 'morphinique',
+    'morfinique': 'morphinique',
+    'infiltrassion': 'infiltration',
+    'infiltrassions': 'infiltrations',
+
+    // ─── Examen clinique ───
+    'palpation': 'palpation',
+    'palpassion': 'palpation',
+    'inspection': 'inspection',
+    'inspeccien': 'inspection',
+    'auscultation': 'auscultation',
+    'auscultassion': 'auscultation',
+    'amplitude': 'amplitude',
+    'amplitudes': 'amplitudes',
+    'goniometrie': 'goniométrie',
+    'gonimétrie': 'goniométrie',
+    'périmètre': 'périmètre',
+    'perimetre': 'périmètre',
+    'bilatérale': 'bilatérale',
+    'bilatéralle': 'bilatérale',
+    'unilatérale': 'unilatérale',
+    'unilatéralle': 'unilatérale',
+    'antérieur': 'antérieur',
+    'antérieures': 'antérieures',
+    'antérieure': 'antérieure',
+    'postérieur': 'postérieur',
+    'postérieures': 'postérieures',
+    'postérieure': 'postérieure',
+    'supérieur': 'supérieur',
+    'supérieures': 'supérieures',
+    'supérieure': 'supérieure',
+    'inférieur': 'inférieur',
+    'inférieures': 'inférieures',
+    'inférieure': 'inférieure',
+    'proximal': 'proximal',
+    'proximale': 'proximale',
+    'distal': 'distal',
+    'distale': 'distale',
+
+    // ─── Termes de rapport médical ───
+    'consoliddation': 'consolidation',
+    'consalidassion': 'consolidation',
+    'consolider': 'consolidation',
+    'retantissement': 'retentissement',
+    'retentissemen': 'retentissement',
+    'rétentissement': 'retentissement',
+    'aggravassion': 'aggravation',
+    'agravassion': 'aggravation',
+    'amélioration': 'amélioration',
+    'ameliorassion': 'amélioration',
+    'cicatrisassion': 'cicatrisation',
+    'cicatrizassion': 'cicatrisation',
+    'indemnisassion': 'indemnisation',
+    'indemisassion': 'indemnisation',
+    'évaluassion': 'évaluation',
+    'evaluassion': 'évaluation',
+    'evaluation': 'évaluation',
+    'observassion': 'observation',
+    'constatassion': 'constatation',
+    'constatation': 'constatation',
+    'examiné': 'examiné',
+    'examinée': 'examinée',
+    'examiner': 'examiner',
+    'consollidé': 'consolidé',
+    'consollidée': 'consolidée',
+    'séquéllaire': 'séquellaire',
+
+    // ─── Parties du corps — variantes manquantes ───
+    'l\'épaule': 'l\'épaule',
+    'ceinture': 'ceinture',
+    'membraneux': 'membraneux',
+    'périnée': 'périnée',
+    'perinee': 'périnée',
+    'perinéal': 'périnéal',
+    'sphincter': 'sphincter',
+    'sphinctère': 'sphincter',
+    'prostate': 'prostate',
+    'prostatte': 'prostate',
+    'thyroide': 'thyroïde',
+    'tyroïde': 'thyroïde',
+
+    // ─── Verbes médicaux courants ───
+    'diagnostiquer': 'diagnostiquer',
+    'diagnostiqué': 'diagnostiqué',
+    'consolider': 'consolider',
+    'immobiliser': 'immobiliser',
+    'imobiliser': 'immobiliser',
+    'opérer': 'opérer',
+    'opéré': 'opéré',
+    'opérée': 'opérée',
+    'hospitaliser': 'hospitaliser',
+    'hospitalisé': 'hospitalisé',
+    'hospitalisée': 'hospitalisée',
+    'hospitalisassion': 'hospitalisation',
+    'hospitalisation': 'hospitalisation',
+    'rééduquer': 'rééduquer',
+    'reéduquer': 'rééduquer',
+    'rééduqué': 'rééduqué',
+    'appareiller': 'appareiller',
+    'appareillé': 'appareillé',
+    'appareillée': 'appareillée',
 };
 
 // ═══════════════════════════════════════════════════════════════
@@ -2024,6 +2271,18 @@ const MEDICAL_TERMS_TARGET: string[] = [
     'tuberculose','vascularite','vasculaire','vasculaires',
     'vascularisation','vasculo-nerveuse','vasomoteur',
     'ventilation','vitiligo',
+    // ═══ V3.3.410: TERMES CLINIQUES COURANTS ═══
+    'diagnostic','diagnostiquer','pronostic','thérapeutique',
+    'chirurgical','chirurgicale','orthopédique','clinique',
+    'traitement','antalgique','analgésique','anti-inflammatoire',
+    'anticoagulant','corticoïde','corticoïdes','antibiotique','morphinique',
+    'infiltration','infiltrations',
+    'palpation','inspection','auscultation','goniométrie',
+    'bilan','examen','observation','constatation',
+    'évaluation','hospitalisation',
+    'contention','réduction','immobilisation',
+    'prostate','thyroïde','sphincter','périnée',
+    'phénomène','phénomènes',
 ];
 
 /** Map : forme normalisée → terme correct avec accents */

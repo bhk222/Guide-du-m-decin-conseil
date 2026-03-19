@@ -1,6 +1,6 @@
 /**
  * 🎤 useDictaphoneAI — Dictaphone 100% autonome via Whisper IA
- * V3.3.409 — Corrections Whisper: patient, fémur, hallucinations
+ * V3.3.410 — Orthographe médicale avancée + apostrophes + hallucinations
  * 
  * ZÉRO dépendance externe :
  * - Modèle Whisper SMALL (auto-hébergé en local, HuggingFace CDN en production)
@@ -148,8 +148,26 @@ const WHISPER_HALLUCINATIONS = [
     /^de\s+la\s+premi[eè]re\s+fois\.?\s*$/i,
     /^et\s+de\s+la\s+premi[eè]re\s+fois/i,
     /^c[''']est\s+la\s+premi[eè]re\s+fois/i,
-    /^la\s+premi[eè]re\s+fois\.?$/i,
-];
+    /^la\s+premi[eè]re\s+fois\.?$/i,    // V3.3.410: Hallucinations supplémentaires observées
+    /^\s*1\s*$/,
+    /^\s*\.\s*$/,
+    /^\s*,\s*$/,
+    /^sous[- ]?titr/i,
+    /^\s*\.\.\.\.?\s*$/,
+    /^c[''']est\s+tout\s+pour/i,
+    /^\s*et\s+voil[aà]\.?\s*$/i,
+    /^\s*bon\.?\s*$/i,
+    /^\s*alors\.?\s*$/i,
+    /^\s*donc\.?\s*$/i,
+    /^\s*bien\.?\s*$/i,
+    /^\s*ok\.?\s*$/i,
+    /^\s*oui\.?\s*$/i,
+    /^\s*non\.?\s*$/i,
+    /^\s*ah\.?\s*$/i,
+    /^\s*oh\.?\s*$/i,
+    /^\s*hein\.?\s*$/i,
+    /^\s*euh\.?\s*$/i,
+    /^\s*hmm+\.?\s*$/i,];
 
 // ═══════════════════════════════════════════════════════════════
 // CORRECTION MÉDICALE POST-TRANSCRIPTION
@@ -161,9 +179,11 @@ const WHISPER_HALLUCINATIONS = [
 /**
  * Correction post-transcription médicale
  * 0. V3.3.393: Nettoyage hallucinations Whisper (segments parasites)
+ * 0b. V3.3.410: Reconstruction apostrophes & contractions d'articles
  * 1. Corrections de phrases (regex)
  * 2. Corrections de mots (exact match)
  * 3. V3.3.392: Correction phonétique (normalisation sans accents → terme médical correct)
+ * 4. V3.3.410: Post-nettoyage typographique
  */
 function medicalPostCorrection(text: string): string {
     let corrected = text;
@@ -175,6 +195,12 @@ function medicalPostCorrection(text: string): string {
     // V3.3.394: Supprimer les mots répétés consécutifs ("avec avec" → "avec")
     corrected = corrected.replace(/\b(\w{2,})\s+\1\b/gi, '$1');
     corrected = corrected.trim();
+    
+    // 0b. V3.3.410: Reconstruction d'apostrophes manquantes
+    // Whisper omet souvent l'apostrophe: "l épaule" → "l'épaule", "d un" → "d'un"
+    corrected = corrected.replace(/\b([ldnsjcmtLDNSJCMT])\s+(?=[aeéèêëiïîoôuùûyhy])/g, '$1\'');
+    // "Qu il" → "Qu'il"
+    corrected = corrected.replace(/\b([Qq]u)\s+(?=[aeéèêëiïîoôuùûyhy])/g, '$1\'');
     
     // 1. Corrections de phrases / expressions (priorité haute)
     for (const [pattern, replacement] of PHRASE_CORRECTIONS) {
@@ -208,6 +234,16 @@ function medicalPostCorrection(text: string): string {
         
         return word;
     });
+    
+    // 4. V3.3.410: Post-nettoyage typographique
+    // Espaces multiples
+    corrected = corrected.replace(/\s{2,}/g, ' ');
+    // Espace avant ponctuation
+    corrected = corrected.replace(/\s+([.,;:!?])/g, '$1');
+    // Pas d'espace après apostrophe
+    corrected = corrected.replace(/'\s+/g, '\'');
+    // Capitaliser première lettre du texte
+    corrected = corrected.replace(/^([a-zàâéèêëïîôùûüç])/, (_, l) => l.toUpperCase());
     
     return corrected;
 }
