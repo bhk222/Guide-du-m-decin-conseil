@@ -28,6 +28,33 @@ export const PHRASE_CORRECTIONS: [RegExp, string][] = [
     [/\bpatient\s+[aâ]ge\s+de\b/gi, 'patient âgé de'],
     [/\bpatiente\s+[aâ]gee?\s+de\b/gi, 'patiente âgée de'],
 
+    // 🆕 V3.3.409: Erreurs observées en production — "il s'agit d'un patient âgé de 25 ans qui présente une fracture du fémur"
+    // "N'en s'agit" / "Nan s'agit" / "Non s'agit" → "Il s'agit"
+    [/\b(?:n'en|nan|non|n'ans?)\s+s[''']?agit\b/gi, 'il s\'agit'],
+    [/\ben\s+s[''']?agit\b/gi, 'il s\'agit'],
+    // "d'impassion" / "d'un passion" / "d'une passion" → "d'un patient" (contexte médical)
+    [/\bd['''](?:im)?passions?\b/gi, 'd\'un patient'],
+    [/\bd[''']une?\s+passions?\b/gi, 'd\'un patient'],
+    [/\bune?\s+passions?\s+[aâ]g[eé]e?\b/gi, 'un patient âgé'],
+    [/\bim?passions?\s+[aâ]g[eé]e?\s+de\b/gi, 'patient âgé de'],
+    [/\bim?passions?\s+[aâ]g[eé]e?\b/gi, 'patient âgé'],
+    // "21 fracture" / "dix fracture" → "une fracture" (hallucination numérique Whisper)
+    [/\b(?:21|12|11)\s+fractures?\b/gi, 'une fracture'],
+    [/\bprésente\s+(?:21|12|11)\s+/gi, 'présente une '],
+    // "phénomi[eè]n" / "phénomène" → "fémur" (dans contexte fracture)
+    [/\bfracture\s+du\s+ph[eé]nom[iè]?[eè]?n[eé]?\b/gi, 'fracture du fémur'],
+    [/\bfracture\s+du\s+f[eé]mure?\b/gi, 'fracture du fémur'],
+    [/\bfracture\s+du\s+f[eé]moire?\b/gi, 'fracture du fémur'],
+    [/\bfracture\s+du\s+f[eé]mure?\b/gi, 'fracture du fémur'],
+    // "De la première fois" — hallucination fin de texte Whisper
+    [/\.?\s*(?:De|de)\s+la\s+premi[èe]re\s+fois\.?\s*$/gi, '.'],
+    [/\.?\s*et\s+de\s+la\s+premi[èe]re\s+fois[^.]*\.?\s*$/gi, '.'],
+    // "Qui présente 21" → "qui présente une" (hallucination chiffre)
+    [/\bqui\s+présente\s+(?:21|12|11)\b/gi, 'qui présente une'],
+    // "l'âgé de" / "âgée de" (Whisper met féminin pour patient masculin)
+    [/\bpatient\s+âgée\s+de\b/gi, 'patient âgé de'],
+    [/\bl[''']?âg[eé]e?\s+de\s+(\d)/gi, 'âgé de $1'],
+
     // ─── V3.3.393: Erreurs observées en production (whisper-base) ───
     [/\bpassions?\s+[àa]\s+jus\s+de\b/gi, 'patient âgé de'],
     [/\bpassions?\s+[àa]\s+j[eu]\s+de\b/gi, 'patient âgé de'],
@@ -93,6 +120,9 @@ export const PHRASE_CORRECTIONS: [RegExp, string][] = [
     [/\bde\s+balance\s+art?\b/gi, 'de Balthazard'],
     [/\bla\s+formation?\s+de\s+balance\s+art?\b/gi, 'la formule de Balthazard'],
     [/\bune?\s+six\s+a\s+trice?\b/gi, 'une cicatrice'],
+    // V3.3.409: fémur phonétique
+    [/\bph[eé]nom[iè]?[eè]?ne?\b(?=\s|$|[.,;])/gi, 'fémur'],
+    [/\bf[eé]moire?\b/gi, 'fémur'],
     [/\bla\s+six\s+a\s+trice?\b/gi, 'la cicatrice'],
     [/\bostéo\s+scintaise\b/gi, 'ostéosynthèse'],
     [/\bostéo\s+cintaise\b/gi, 'ostéosynthèse'],
@@ -510,6 +540,14 @@ export const PHRASE_CORRECTIONS: [RegExp, string][] = [
 // ═══════════════════════════════════════════════════════════════
 
 export const WORD_CORRECTIONS: Record<string, string> = {
+    // ═══ V3.3.409: ERREURS WHISPER FRÉQUENTES ═══
+    'impassion': 'patient',
+    'passion': 'patient',  // dans contexte médical, Whisper dit "passion" pour "patient"
+    'phénomien': 'fémur',
+    'phénomiene': 'fémur',
+    'phénomène': 'fémur',  // Whisper confond fémur/phénomène
+    'fémoire': 'fémur',
+    'fémure': 'fémur',
     // ═══ ANATOMIE — MEMBRE SUPÉRIEUR ═══
     'facture': 'fracture',
     'factures': 'fractures',

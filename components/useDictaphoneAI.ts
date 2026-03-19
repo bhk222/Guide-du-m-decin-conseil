@@ -1,6 +1,6 @@
 /**
  * 🎤 useDictaphoneAI — Dictaphone 100% autonome via Whisper IA
- * V3.3.408 — Dictaphone clinique professionnel
+ * V3.3.409 — Corrections Whisper: patient, fémur, hallucinations
  * 
  * ZÉRO dépendance externe :
  * - Modèle Whisper SMALL (auto-hébergé en local, HuggingFace CDN en production)
@@ -144,6 +144,11 @@ const WHISPER_HALLUCINATIONS = [
     /^merci\s+d'avoir\s+regardé/i,
     /^à\s+bientôt/i,
     /^\s*\[.*\]\s*$/,
+    // V3.3.409: Hallucinations observées supplémentaires
+    /^de\s+la\s+premi[eè]re\s+fois\.?\s*$/i,
+    /^et\s+de\s+la\s+premi[eè]re\s+fois/i,
+    /^c[''']est\s+la\s+premi[eè]re\s+fois/i,
+    /^la\s+premi[eè]re\s+fois\.?$/i,
 ];
 
 // ═══════════════════════════════════════════════════════════════
