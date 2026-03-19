@@ -744,6 +744,83 @@ export const PHRASE_CORRECTIONS: [RegExp, string][] = [
     [/\b[ée]s\s*p[eé]\s*[eé]s?\s*t[eé]?\b/gi, 'ESPT'],
     [/\b[ée]tat\s+de\s+stress\s+post[- ]?traumatique\b/gi, 'état de stress post-traumatique'],
 
+    // ═══ V3.3.412: CONFUSIONS WHISPER SUPPLÉMENTAIRES (BATCH 2) ═══
+
+    // ─── Barème / Balthazard — variantes phonétiques manquantes ───
+    [/\ble\s+batt?ement?\s+(?:de\s+)?(?:67|1967)\b/gi, 'le barème 1967'],
+    [/\ble\s+batt?ement?\b(?!\s+(?:de\s+)?cœur|\s+cardiaque)/gi, 'le barème'],
+    [/\bformule?\s+de\s+bal[lt]e?[- ]?t?ar[dt]?\b/gi, 'formule de Balthazard'],
+    [/\bformule?\s+de\s+balt?a\s+zar[dt]?\b/gi, 'formule de Balthazard'],
+    [/\bbal[lt]e?[- ]?t?ar[dt]?\b(?!\s+(?:park|hôtel))/gi, 'Balthazard'],
+    [/\bbar[eè]me?\s+indicatifs?\s+1967\b/gi, 'barème indicatif 1967'],
+    [/\bbar[eè]me?\s+de\s+1967\b/gi, 'barème de 1967'],
+    [/\bbar[eè]me?\s+officiel\b/gi, 'barème officiel'],
+    [/\bbar[eè]me?\s+d[''']?[eé]valuation\b/gi, 'barème d\'évaluation'],
+
+    // ─── Fractions anatomiques (tiers/quart) ───
+    [/\b(?:le\s+)?tiers?\s+(?:moyen|sup[eé]rieur|inf[eé]rieur|proximal|distal|externe|interne)\b/gi, (m) => m.replace(/tiers?/i, 'tiers')],
+    [/\bau\s+tiers?\s+(?:moyen|sup[eé]rieur|inf[eé]rieur|proximal|distal)\b/gi, (m) => m.replace(/tiers?/i, 'tiers')],
+    [/\bfracture\s+du\s+tiers?\s+(?:moyen|sup[eé]rieur|inf[eé]rieur|proximal|distal)\b/gi, (m) => m.replace(/tiers?/i, 'tiers')],
+
+    // ─── Résultats d'examen / mobilité ───
+    [/\bflexion\s+[àa]\s+(\d+)\s*°?\b/gi, 'flexion à $1°'],
+    [/\bextension\s+[àa]\s+(\d+)\s*°?\b/gi, 'extension à $1°'],
+    [/\babduction\s+[àa]\s+(\d+)\s*°?\b/gi, 'abduction à $1°'],
+    [/\badduction\s+[àa]\s+(\d+)\s*°?\b/gi, 'adduction à $1°'],
+    [/\brotation\s+(?:interne|externe)\s+[àa]\s+(\d+)\s*°?\b/gi, (m) => m.endsWith('°') ? m : m + '°'],
+    [/\b(\d+)\s*degr[eé]s?\s+de\s+(?:flexion|extension|abduction|adduction|rotation)/gi, (m) => m.replace(/degr[eé]s?/i, '°')],
+
+    // ─── Whisper confond "degré" et "degrés" avec d'autres mots ───
+    [/\bdes?\s+gr[eé]s?\s+de?\b/gi, 'degrés de'],
+    [/\b(\d+)\s*des?\s+gr[eé]s?\b/gi, '$1 degrés'],
+
+    // ─── Éponymes manquants ───
+    [/\bfracture\s+de?\s+Pout?eau?[- ]?Col?les?\b/gi, 'fracture de Pouteau-Colles'],
+    [/\bfracture\s+de?\s+Gal[eé]azz?i\b/gi, 'fracture de Galeazzi'],
+    [/\bfracture\s+de?\s+Mont[eé]ggi?a\b/gi, 'fracture de Monteggia'],
+    [/\bfracture\s+de?\s+Benn?et?t?\b/gi, 'fracture de Bennett'],
+    [/\bfracture\s+de?\s+Rol[la]ndo?\b/gi, 'fracture de Rolando'],
+    [/\bluxation\s+de?\s+Lis?franc?\b/gi, 'luxation de Lisfranc'],
+    [/\bluxation\s+de?\s+Cho?part?\b/gi, 'luxation de Chopart'],
+    [/\bsyndrome\s+de?\s+Brown[- ]?S[eé]quard?\b/gi, 'syndrome de Brown-Séquard'],
+    [/\bsyndrome\s+de?\s+Horn?ner?\b/gi, 'syndrome de Horner'],
+    [/\bparalysie\s+de?\s+Duche?nn?e?\b/gi, 'paralysie de Duchenne'],
+    [/\bparalysie\s+de?\s+Kl[uo]?mpk?e?\b/gi, 'paralysie de Klumpke'],
+    [/\bmaladie\s+de?\s+Parkinson\b/gi, 'maladie de Parkinson'],
+    [/\bsyndrome\s+de?\s+Raynaud?\b/gi, 'syndrome de Raynaud'],
+
+    // ─── Whisper confond des verbes avec d'autres ───
+    [/\bil\s+pr[eé]sante?\b/gi, 'il présente'],
+    [/\bqui\s+pr[eé]sante?\b/gi, 'qui présente'],
+    [/\bpr[eé]santan?t\b/gi, 'présentant'],
+    [/\bconsolidée?\s+(?:le|en|au|depuis)\b/gi, (m) => m.replace(/consolidée?/i, 'consolidé')],
+    [/\bnécessitante?\b/gi, 'nécessitant'],
+    [/\bentraînantan?t?\b/gi, 'entraînant'],
+    [/\boccasionnantan?t?\b/gi, 'occasionnant'],
+    [/\brésultante?\s+en\b/gi, 'résultant en'],
+
+    // ─── Whisper coupe "spécialités médicales" ───
+    [/\bortho\s+p[eé]die?\b/gi, 'orthopédie'],
+    [/\btraumato\s+logie?\b/gi, 'traumatologie'],
+    [/\brhumato\s+logie?\b/gi, 'rhumatologie'],
+    [/\bneurolo?\s+gie?\b/gi, 'neurologie'],
+    [/\boph?talmo?\s+logie?\b/gi, 'ophtalmologie'],
+    [/\bORL\b/g, 'ORL'],
+    [/\bpneumo?\s+logie?\b/gi, 'pneumologie'],
+    [/\bcardio?\s+logie?\b/gi, 'cardiologie'],
+    [/\bgastro[- ]?ent[eé]ro?\s+logie?\b/gi, 'gastro-entérologie'],
+    [/\buro?\s+logie?\b(?!\s*(?:de|du|d'))/gi, 'urologie'],
+
+    // ─── Contexte pourcent — "X pourcent" (après digits, non encore converti) ───
+    [/\b(\d+)\s*pourcents?\b/gi, '$1%'],
+    [/\b(\d+)\s*pour\s+cents?\b/gi, '$1%'],
+
+    // ─── Côté / latéralité ───
+    [/\bcôt[eé]\s+(?:droit|gauche)\b/gi, (m) => m.replace(/côt[eé]/i, 'côté')],
+    [/\bmembre?\s+(?:sup[eé]rieur|inf[eé]rieur)\s+(?:droit|gauche)\b/gi, (m) => m],
+    [/\b[àa]\s+(?:droite?|gauche)\b/gi, (m) => m],
+    [/\bdu\s+côt[eé]\s+(?:droit|gauche)\b/gi, (m) => m.replace(/côt[eé]/i, 'côté')],
+
     // ─── Nettoyage typographique ───
     [/\s{2,}/g, ' '],
 ];
@@ -2199,6 +2276,84 @@ export const WORD_CORRECTIONS: Record<string, string> = {
     'controlateral': 'controlatéral',
     'ipsilatéral': 'ipsilatéral',
     'ipsilateral': 'ipsilatéral',
+
+    // ═══ V3.3.412: CONFUSIONS WHISPER SUPPLÉMENTAIRES (BATCH 2) ═══
+
+    // ─── Spécialités médicales ───
+    'orthopédie': 'orthopédie',
+    'orthopedie': 'orthopédie',
+    'traumatologie': 'traumatologie',
+    'traumatoloji': 'traumatologie',
+    'rhumatologie': 'rhumatologie',
+    'rumatologie': 'rhumatologie',
+    'neurologie': 'neurologie',
+    'neuroloji': 'neurologie',
+    'ophtalmologie': 'ophtalmologie',
+    'ofthalmologie': 'ophtalmologie',
+    'pneumologie': 'pneumologie',
+    'cardiologie': 'cardiologie',
+    'urologie': 'urologie',
+
+    // ─── Termes de mobilité / examen physique ───
+    'goniomètre': 'goniomètre',
+    'goniometre': 'goniomètre',
+    'impotence': 'impotence',
+    'sidération': 'sidération',
+    'siderassion': 'sidération',
+    'spasticité': 'spasticité',
+    'spasticite': 'spasticité',
+    'hypotonie': 'hypotonie',
+    'hypertonie': 'hypertonie',
+    'contracture': 'contracture',
+    'contractur': 'contracture',
+    'rétraction': 'rétraction',
+    'retraction': 'rétraction',
+    'instabilité': 'instabilité',
+    'instabilite': 'instabilité',
+    'laxité': 'laxité',
+    'laxite': 'laxité',
+    'crépitation': 'crépitation',
+    'crepitation': 'crépitation',
+
+    // ─── Actes médicaux supplémentaires ───
+    'arthrolyse': 'arthrolyse',
+    'arthrolize': 'arthrolyse',
+    'neurolyse': 'neurolyse',
+    'neurolize': 'neurolyse',
+    'ténolyse': 'ténolyse',
+    'ténolize': 'ténolyse',
+    'capsulotomie': 'capsulotomie',
+    'capsulotomi': 'capsulotomie',
+    'fasciotomie': 'fasciotomie',
+    'fasciotomi': 'fasciotomie',
+    'aponévrotomie': 'aponévrotomie',
+    'aponevrotomie': 'aponévrotomie',
+    'ténotomie': 'ténotomie',
+    'tenotomie': 'ténotomie',
+    'myotomie': 'myotomie',
+    'ostéoclasie': 'ostéoclasie',
+    'osteoclasie': 'ostéoclasie',
+
+    // ─── Termes barème 1967 manquants ───
+    'déchéance': 'déchéance',
+    'decheance': 'déchéance',
+    'indemnité': 'indemnité',
+    'indemnite': 'indemnité',
+    'reclassement': 'reclassement',
+    'réinsertion': 'réinsertion',
+    'reinsertion': 'réinsertion',
+    'réadaptation': 'réadaptation',
+    'readaptation': 'réadaptation',
+    'reconversion': 'reconversion',
+    'préexistant': 'préexistant',
+    'preexistant': 'préexistant',
+    'préexistante': 'préexistante',
+    'préexistants': 'préexistants',
+    'surcotation': 'surcotation',
+    'sous-cotation': 'sous-cotation',
+    'barème': 'barème',
+    'bareme': 'barème',
+    'coefficiant': 'coefficient',
 };
 
 // ═══════════════════════════════════════════════════════════════
@@ -2542,6 +2697,18 @@ const MEDICAL_TERMS_TARGET: string[] = [
     'chondromalacie','chondrocalcinose','spondylolyse','spondylodiscite',
     'Lasègue','Tinel','Phalen',
     'dommage','rapport','expertise',
+    // ═══ V3.3.412: TERMES SUPPLÉMENTAIRES (BATCH 2) ═══
+    'orthopédie','traumatologie','rhumatologie','neurologie','ophtalmologie',
+    'pneumologie','cardiologie','urologie','gastro-entérologie','ORL',
+    'goniomètre','spasticité','hypotonie','hypertonie','contracture',
+    'rétraction','instabilité','laxité','crépitation','sidération',
+    'arthrolyse','neurolyse','ténolyse','fasciotomie','aponévrotomie',
+    'ténotomie','myotomie','ostéoclasie','capsulotomie',
+    'déchéance','indemnité','reclassement','réinsertion','réadaptation',
+    'reconversion','préexistant','préexistante','surcotation','sous-cotation',
+    'Pouteau-Colles','Galeazzi','Monteggia','Bennett','Rolando',
+    'Lisfranc','Chopart','Brown-Séquard','Horner','Duchenne','Klumpke',
+    'Parkinson','Raynaud',
 ];
 
 /** Map : forme normalisée → terme correct avec accents */

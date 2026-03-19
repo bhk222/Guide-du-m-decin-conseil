@@ -1,6 +1,6 @@
 /**
  * 🎤 useDictaphoneAI — Dictaphone 100% autonome via Whisper IA
- * V3.3.411 — Nombres avancés (cent/mille/ordinals) + mesures médicales + 2ème passe corrections
+ * V3.3.412 — Fractions + cent pour cent + ordinals contextuels + hallucinations + confusions Whisper
  * 
  * ZÉRO dépendance externe :
  * - Modèle Whisper SMALL (auto-hébergé en local, HuggingFace CDN en production)
@@ -81,8 +81,18 @@ function convertFrenchNumbers(text: string): string {
         return String(Number(v) * 100);
     });
     result = result.replace(/\bcent\s+(\d+)\b/gi, (_, rest) => String(100 + Number(rest)));
-    // "cent" seul seulement en contexte numérique (pas "cent pour cent" car déjà traité par pourcentage)
+    // "cent pour cent" → "100%"
+    result = result.replace(/\bcent\s+pour\s+cents?\b/gi, '100%');
+    // "cent" seul seulement en contexte numérique (pas composé avec pour/mètres/grammes)
     result = result.replace(/\bcent\b(?!\s*(?:pour|%|mètres?|grammes?))/gi, '100');
+
+    // V3.3.412: Fractions médicales — "un tiers" → "1/3", "deux tiers" → "2/3", etc.
+    result = result.replace(/\bun\s+tiers\b/gi, '1/3');
+    result = result.replace(/\bdeux\s+tiers\b/gi, '2/3');
+    result = result.replace(/\bun\s+quart\b/gi, '1/4');
+    result = result.replace(/\btrois\s+quarts?\b/gi, '3/4');
+    result = result.replace(/\bun\s+demi\b/gi, '1/2');
+    result = result.replace(/\bune\s+demie?\b/gi, '1/2');
 
     // Patterns composés (soixante-dix, quatre-vingts, etc.)
     result = result.replace(/\bsoixante[- ]et[- ]onze\b/gi, '71');
@@ -142,17 +152,18 @@ function convertFrenchNumbers(text: string): string {
         return (NOMBRES_TEXTE[nb.toLowerCase()] || nb) + m.slice(nb.length);
     });
 
-    // V3.3.411: Ordinals — "premier" → "1er", "deuxième" → "2ème", etc.
-    result = result.replace(/\bpremière?\b/gi, '1er');
-    result = result.replace(/\bdeuxième\b/gi, '2ème');
-    result = result.replace(/\btroisième\b/gi, '3ème');
-    result = result.replace(/\bquatrième\b/gi, '4ème');
-    result = result.replace(/\bcinquième\b/gi, '5ème');
-    result = result.replace(/\bsixième\b/gi, '6ème');
-    result = result.replace(/\bseptième\b/gi, '7ème');
-    result = result.replace(/\bhuitième\b/gi, '8ème');
-    result = result.replace(/\bneuvième\b/gi, '9ème');
-    result = result.replace(/\bdixième\b/gi, '10ème');
+    // V3.3.411: Ordinals — seulement dans contexte médical (degré, doigt, orteil, rayon, côte, vertèbre, métacarpe, métatarse, jour, mois, semaine)
+    // V3.3.412: Contextuels — ne pas convertir "premier ministre" etc.
+    const ordinalCtx = '(?=\\s+(?:degr[eé]|doigt|orteil|rayon|côte|vertèbre|jour|mois|semaine|métacarp|métatars|phalang|intention|temps))';
+    result = result.replace(new RegExp('\\bpremière?' + ordinalCtx, 'gi'), '1er');
+    result = result.replace(new RegExp('\\bdeuxième' + ordinalCtx, 'gi'), '2ème');
+    result = result.replace(new RegExp('\\btroisième' + ordinalCtx, 'gi'), '3ème');
+    result = result.replace(new RegExp('\\bquatrième' + ordinalCtx, 'gi'), '4ème');
+    result = result.replace(new RegExp('\\bcinquième' + ordinalCtx, 'gi'), '5ème');
+    // Toujours convertir dans "Xème degré" (très fréquent en barème)
+    result = result.replace(/\bpremière?\s+degr[eé]s?\b/gi, '1er degré');
+    result = result.replace(/\bdeuxième\s+degr[eé]s?\b/gi, '2ème degré');
+    result = result.replace(/\btroisième\s+degr[eé]s?\b/gi, '3ème degré');
 
     // V3.3.411: Medical measurements — "X centimètres" → "X cm", etc.
     result = result.replace(/\b(\d+)\s*centimètres?\b/gi, '$1 cm');
@@ -218,7 +229,25 @@ const WHISPER_HALLUCINATIONS = [
     /^\s*oh\.?\s*$/i,
     /^\s*hein\.?\s*$/i,
     /^\s*euh\.?\s*$/i,
-    /^\s*hmm+\.?\s*$/i,];
+    /^\s*hmm+\.?\s*$/i,
+    // V3.3.412: Hallucinations YouTube/podcast supplémentaires
+    /^cliquez\s+sur/i,
+    /^mettez\s+en\s+favoris/i,
+    /^partagez\s+cette/i,
+    /^laissez\s+un\s+commentaire/i,
+    /^comme\s+d[''']habitude/i,
+    /^je\s+recommande/i,
+    /^selon\s+mon\s+exp[eé]rience/i,
+    /^\s*voilà\.?\s*$/i,
+    /^\s*bref\.?\s*$/i,
+    /^\s*en\s+fait\.?\s*$/i,
+    /^\s*tu\s+sais\.?\s*$/i,
+    /^\s*vous\s+savez\.?\s*$/i,
+    /^\s*allez\.?\s*$/i,
+    /^\s*tiens\.?\s*$/i,
+    /^\d{1,2}\s*$/,
+    /^\s*…+\s*$/,
+];
 
 // ═══════════════════════════════════════════════════════════════
 // CORRECTION MÉDICALE POST-TRANSCRIPTION
