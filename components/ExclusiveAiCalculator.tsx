@@ -215,7 +215,12 @@ export const ExclusiveAiCalculator: React.FC<ExclusiveAiCalculatorProps> = ({
     const analysisQueueRef = useRef<string[]>([]);
 
     // 🎤 Dictaphone IA 100% autonome (Whisper WebAssembly)
-    const [dictState, dictActions] = useDictaphoneAI(userInput, setUserInput);
+    // V3.3.408: onSubmitRequest callback pour commande vocale "analyser"
+    const dictSubmitRef = useRef<(() => void) | null>(null);
+    const handleDictaphoneSubmit = useCallback(() => {
+        dictSubmitRef.current?.();
+    }, []);
+    const [dictState, dictActions] = useDictaphoneAI(userInput, setUserInput, handleDictaphoneSubmit);
 
     // Correcteur d'orthographe médical
     const { results: spellCheckResults, applyCorrection, applyAllCorrections, ignoreWord, ignoreAll } = useMedicalSpellCheck(userInput);
@@ -711,6 +716,13 @@ export const ExclusiveAiCalculator: React.FC<ExclusiveAiCalculatorProps> = ({
         }
     }, [isLoading, processAndDisplayAnalysis, selectedInjuries, totalRate, hasPreexisting, messages, onAddInjury, processQueueOrPrompt]);
     
+    // V3.3.408: Connecter dictaphone → handleSend pour commande vocale "analyser"
+    useEffect(() => {
+        dictSubmitRef.current = () => {
+            if (userInput.trim()) handleSend(userInput);
+        };
+    }, [userInput, handleSend]);
+    
     return (
         <>
             <Card className="flex flex-col h-full">
@@ -783,41 +795,60 @@ export const ExclusiveAiCalculator: React.FC<ExclusiveAiCalculatorProps> = ({
                             )}
                             {dictState.isListening ? 'Stop' : '🧠 Dictée IA'}
                         </button>
+                        {/* V3.3.408: Bouton Annuler dernière dictée */}
+                        <button
+                            onClick={dictActions.undo}
+                            className="flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-medium bg-indigo-50 text-indigo-700 hover:bg-indigo-100 border border-indigo-300 transition-colors disabled:opacity-40"
+                            title="Annuler la dernière dictée (Ctrl+Z vocal)"
+                            disabled={!dictState.canUndo}
+                        >
+                            <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+                                <path strokeLinecap="round" strokeLinejoin="round" d="M3 10h10a5 5 0 015 5v2M3 10l4-4m-4 4l4 4" />
+                            </svg>
+                            Annuler
+                        </button>
                         {/* Bouton Effacer mot */}
                         <button
                             onClick={dictActions.deleteWord}
-                            className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium bg-amber-50 text-amber-800 hover:bg-amber-100 border border-amber-300 transition-colors disabled:opacity-40"
+                            className="flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-medium bg-amber-50 text-amber-800 hover:bg-amber-100 border border-amber-300 transition-colors disabled:opacity-40"
                             title="Effacer le dernier mot"
                             disabled={!userInput}
                         >
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M12 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2M3 12l6.414-6.414a2 2 0 011.414-.586H19a2 2 0 012 2v10a2 2 0 01-2 2h-8.172a2 2 0 01-1.414-.586L3 12z" />
                             </svg>
-                            Effacer mot
+                            Mot
                         </button>
                         {/* Bouton Tout effacer */}
                         <button
                             onClick={dictActions.clearAll}
-                            className="flex items-center gap-1.5 px-3 py-2 rounded-lg text-sm font-medium bg-red-50 text-red-800 hover:bg-red-100 border border-red-300 transition-colors disabled:opacity-40"
+                            className="flex items-center gap-1 px-3 py-2 rounded-lg text-sm font-medium bg-red-50 text-red-800 hover:bg-red-100 border border-red-300 transition-colors disabled:opacity-40"
                             title="Effacer tout le texte"
                             disabled={!userInput}
                         >
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
                                 <path strokeLinecap="round" strokeLinejoin="round" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                             </svg>
-                            Tout effacer
+                            Tout
                         </button>
-                        {/* Statut + chrono + VU-mètre */}
+                        {/* Statut + chrono + compteurs + VU-mètre */}
                         {dictState.isListening && (
                             <div className="ml-auto flex items-center gap-3">
+                                {/* V3.3.408: Compteur mots/segments */}
+                                <span className="text-xs font-medium text-slate-500">
+                                    {dictState.wordCount > 0 && <>{dictState.wordCount} mot{dictState.wordCount > 1 ? 's' : ''}</>}
+                                    {dictState.segmentCount > 0 && <span className="text-slate-400 ml-1">({dictState.segmentCount} seg.)</span>}
+                                </span>
                                 {/* Chrono */}
                                 <span className="text-xs font-mono text-slate-500">{Math.floor(dictState.listenDuration / 60)}:{String(dictState.listenDuration % 60).padStart(2, '0')}</span>
                                 {/* VU-mètre audio */}
-                                <div className="flex items-end gap-0.5 h-4">
-                                    {[0, 15, 30, 45, 60].map((threshold) => (
-                                        <div key={threshold} className={`w-1 rounded-full transition-all duration-100 ${
-                                            dictState.audioLevel > threshold ? 'bg-emerald-500' : 'bg-slate-200'
-                                        }`} style={{ height: `${4 + threshold / 10}px` }} />
+                                <div className="flex items-end gap-0.5 h-5">
+                                    {[0, 12, 24, 36, 48, 60, 75].map((threshold) => (
+                                        <div key={threshold} className={`w-1 rounded-full transition-all duration-75 ${
+                                            dictState.audioLevel > threshold 
+                                                ? threshold > 60 ? 'bg-red-500' : threshold > 40 ? 'bg-yellow-500' : 'bg-emerald-500'
+                                                : 'bg-slate-200'
+                                        }`} style={{ height: `${3 + threshold / 8}px` }} />
                                     ))}
                                 </div>
                                 {/* Indicateur enregistrement */}
@@ -830,9 +861,13 @@ export const ExclusiveAiCalculator: React.FC<ExclusiveAiCalculatorProps> = ({
                                 </span>
                             </div>
                         )}
-                        {/* Feedback commande */}
+                        {/* Feedback commande (hors écoute) */}
                         {dictState.lastCommand && !dictState.isListening && (
                             <span className="ml-auto text-xs font-medium text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded">{dictState.lastCommand}</span>
+                        )}
+                        {/* V3.3.408: Compteur mots (quand pas en écoute) */}
+                        {!dictState.isListening && dictState.wordCount > 0 && !dictState.lastCommand && (
+                            <span className="ml-auto text-xs text-slate-400">{dictState.wordCount} mot{dictState.wordCount > 1 ? 's' : ''}</span>
                         )}
                     </div>
                     {/* Statut détaillé */}
@@ -852,10 +887,15 @@ export const ExclusiveAiCalculator: React.FC<ExclusiveAiCalculatorProps> = ({
                             {dictState.statusMessage}
                         </div>
                     )}
-                    {/* Guide commandes vocales */}
+                    {/* V3.3.408: Guide commandes vocales amélioré */}
                     {dictState.isListening && !dictState.isProcessing && (
-                        <div className="mb-2 px-3 py-1.5 bg-slate-50 border border-slate-200 rounded-lg text-xs text-slate-600 leading-relaxed">
-                            <strong>Commandes vocales :</strong> "point" → <b>.</b> | "virgule" → <b>,</b> | "nouvelle ligne" → ↵ | "effacer" | "effacer trois mots" | "effacer tout"
+                        <div className="mb-2 px-3 py-2 bg-slate-50 border border-slate-200 rounded-lg text-xs text-slate-600 leading-relaxed">
+                            <div className="flex flex-wrap gap-x-3 gap-y-1">
+                                <span><strong>Ponctuation :</strong> "point" <b>.</b> "virgule" <b>,</b> "deux points" <b>:</b></span>
+                                <span><strong>Mise en forme :</strong> "nouvelle ligne" ↵ "nouveau paragraphe" ¶</span>
+                                <span><strong>Édition :</strong> "effacer" "effacer 3 mots" "annuler" "effacer tout"</span>
+                                <span><strong>Action :</strong> "analyser" lance l'analyse du cas dicté</span>
+                            </div>
                         </div>
                     )}
                     {/* Preview interim (parole détectée) */}

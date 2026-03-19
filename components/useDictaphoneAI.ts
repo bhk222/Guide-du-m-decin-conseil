@@ -1,6 +1,6 @@
 /**
  * 🎤 useDictaphoneAI — Dictaphone 100% autonome via Whisper IA
- * V3.3.396 — Dictée instantanée
+ * V3.3.408 — Dictaphone clinique professionnel
  * 
  * ZÉRO dépendance externe :
  * - Modèle Whisper SMALL (auto-hébergé en local, HuggingFace CDN en production)
@@ -38,11 +38,91 @@ const PROGRESSIVE_CHUNK_MS = 4000;   // V3.3.396: Forcer transcription toutes le
 const MIN_AUDIO_SECONDS = 0.3;       // V3.3.396: Segments courts acceptés (0.3s)
 const SILENCE_CHECK_INTERVAL = 80;   // V3.3.396: Vérification silence plus fréquente
 
-// Correspondance nombres français → chiffres
+// Correspondance nombres français → chiffres (pour commandes vocales)
 const NOMBRE_FR: Record<string, number> = {
     'un': 1, 'une': 1, 'deux': 2, 'trois': 3, 'quatre': 4, 'cinq': 5,
     'six': 6, 'sept': 7, 'huit': 8, 'neuf': 9, 'dix': 10,
 };
+
+// V3.3.408: Conversion nombres français → chiffres (pour le texte dicté)
+const NOMBRES_TEXTE: Record<string, string> = {
+    'zéro': '0', 'un': '1', 'une': '1', 'deux': '2', 'trois': '3', 'quatre': '4',
+    'cinq': '5', 'six': '6', 'sept': '7', 'huit': '8', 'neuf': '9', 'dix': '10',
+    'onze': '11', 'douze': '12', 'treize': '13', 'quatorze': '14', 'quinze': '15',
+    'seize': '16', 'vingt': '20', 'trente': '30', 'quarante': '40', 'cinquante': '50',
+    'soixante': '60',
+};
+
+/** Convertit les nombres français composés en chiffres dans le texte */
+function convertFrenchNumbers(text: string): string {
+    let result = text;
+    // Patterns composés (soixante-dix, quatre-vingts, etc.)
+    result = result.replace(/\bsoixante[- ]et[- ]onze\b/gi, '71');
+    result = result.replace(/\bsoixante[- ](?:et[- ])?douze\b/gi, '72');
+    result = result.replace(/\bsoixante[- ](?:et[- ])?treize\b/gi, '73');
+    result = result.replace(/\bsoixante[- ](?:et[- ])?quatorze\b/gi, '74');
+    result = result.replace(/\bsoixante[- ](?:et[- ])?quinze\b/gi, '75');
+    result = result.replace(/\bsoixante[- ](?:et[- ])?seize\b/gi, '76');
+    result = result.replace(/\bsoixante[- ]dix[- ]sept\b/gi, '77');
+    result = result.replace(/\bsoixante[- ]dix[- ]huit\b/gi, '78');
+    result = result.replace(/\bsoixante[- ]dix[- ]neuf\b/gi, '79');
+    result = result.replace(/\bsoixante[- ]dix\b/gi, '70');
+    result = result.replace(/\bquatre[- ]vingt[s]?[- ](?:et[- ])?onze\b/gi, '91');
+    result = result.replace(/\bquatre[- ]vingt[s]?[- ](?:et[- ])?douze\b/gi, '92');
+    result = result.replace(/\bquatre[- ]vingt[s]?[- ](?:et[- ])?treize\b/gi, '93');
+    result = result.replace(/\bquatre[- ]vingt[s]?[- ](?:et[- ])?quatorze\b/gi, '94');
+    result = result.replace(/\bquatre[- ]vingt[s]?[- ](?:et[- ])?quinze\b/gi, '95');
+    result = result.replace(/\bquatre[- ]vingt[s]?[- ](?:et[- ])?seize\b/gi, '96');
+    result = result.replace(/\bquatre[- ]vingt[s]?[- ]dix[- ]sept\b/gi, '97');
+    result = result.replace(/\bquatre[- ]vingt[s]?[- ]dix[- ]huit\b/gi, '98');
+    result = result.replace(/\bquatre[- ]vingt[s]?[- ]dix[- ]neuf\b/gi, '99');
+    result = result.replace(/\bquatre[- ]vingt[s]?[- ]dix\b/gi, '90');
+    result = result.replace(/\bquatre[- ]vingt[s]?[- ]un\b/gi, '81');
+    result = result.replace(/\bquatre[- ]vingt[s]?[- ]deux\b/gi, '82');
+    result = result.replace(/\bquatre[- ]vingt[s]?[- ]trois\b/gi, '83');
+    result = result.replace(/\bquatre[- ]vingt[s]?[- ]quatre\b/gi, '84');
+    result = result.replace(/\bquatre[- ]vingt[s]?[- ]cinq\b/gi, '85');
+    result = result.replace(/\bquatre[- ]vingt[s]?[- ]six\b/gi, '86');
+    result = result.replace(/\bquatre[- ]vingt[s]?[- ]sept\b/gi, '87');
+    result = result.replace(/\bquatre[- ]vingt[s]?[- ]huit\b/gi, '88');
+    result = result.replace(/\bquatre[- ]vingt[s]?[- ]neuf\b/gi, '89');
+    result = result.replace(/\bquatre[- ]vingt[s]?\b/gi, '80');
+    // Dizaines composées simples: vingt-cinq, trente-trois, etc.
+    const dizaines: [RegExp, number][] = [
+        [/vingt/i, 20], [/trente/i, 30], [/quarante/i, 40],
+        [/cinquante/i, 50], [/soixante/i, 60],
+    ];
+    const unites: [RegExp, number][] = [
+        [/un|une/i, 1], [/deux/i, 2], [/trois/i, 3], [/quatre/i, 4], [/cinq/i, 5],
+        [/six/i, 6], [/sept/i, 7], [/huit/i, 8], [/neuf/i, 9],
+    ];
+    for (const [dRe, dVal] of dizaines) {
+        for (const [uRe, uVal] of unites) {
+            const pattern = new RegExp(`\\b${dRe.source}[- ](?:et[- ])?${uRe.source}\\b`, 'gi');
+            result = result.replace(pattern, String(dVal + uVal));
+        }
+    }
+    // Nombres simples (après composés pour ne pas casser "vingt-cinq" → "20-5")
+    // Seulement dans contexte numérique (âgé de X, X ans, X %, X/10, etc.)
+    result = result.replace(/\b(?:âgée?\s+de\s+)(vingt|trente|quarante|cinquante|soixante)\b/gi, (m, nb) => {
+        return m.replace(nb, NOMBRES_TEXTE[nb.toLowerCase()] || nb);
+    });
+    result = result.replace(/\b(vingt|trente|quarante|cinquante|soixante)\s+ans\b/gi, (m, nb) => {
+        return (NOMBRES_TEXTE[nb.toLowerCase()] || nb) + ' ans';
+    });
+    result = result.replace(/\b(zéro|un|une|deux|trois|quatre|cinq|six|sept|huit|neuf|dix|onze|douze|treize|quatorze|quinze|seize)\s*(?=\/\s*10|%|pour\s*cent|dixièmes?)\b/gi, (m, nb) => {
+        return (NOMBRES_TEXTE[nb.toLowerCase()] || nb) + m.slice(nb.length);
+    });
+    return result;
+}
+
+/** V3.3.408: Auto-capitalisation après ponctuation de fin de phrase */
+function autoCapitalize(text: string): string {
+    // Capitaliser après . ! ? suivi d'un espace
+    return text.replace(/([.!?])\s+([a-zàâéèêëïîôùûüç])/g, (_, punct, letter) => {
+        return punct + ' ' + letter.toUpperCase();
+    });
+}
 
 // Hallucinations Whisper courantes à filtrer
 const WHISPER_HALLUCINATIONS = [
@@ -135,6 +215,9 @@ type VoiceResult =
     | { type: 'clear_all' }
     | { type: 'delete_words'; count: number }
     | { type: 'text'; text: string }
+    | { type: 'submit' }
+    | { type: 'new_paragraph' }
+    | { type: 'undo' }
     | { type: 'empty' };
 
 function processVoiceInput(raw: string): VoiceResult {
@@ -169,6 +252,21 @@ function processVoiceInput(raw: string): VoiceResult {
         return { type: 'delete_words', count: 20 };
     }
 
+    // ── V3.3.408: Analyser / Envoyer (lance l'analyse) ──
+    if (/^(analyse[rz]?|envoye[rz]?|lance[rz]?\s+l[''']?analyse|valide[rz]?|c[''']?est\s+bon|go)$/i.test(lower)) {
+        return { type: 'submit' };
+    }
+
+    // ── V3.3.408: Nouveau paragraphe ──
+    if (/^(nouveau\s+paragraphe|paragraphe\s+suivant|prochain\s+paragraphe|alin[eé]a)$/i.test(lower)) {
+        return { type: 'new_paragraph' };
+    }
+
+    // ── V3.3.408: Annuler dernière dictée ──
+    if (/^(annule[rz]?|annule[rz]?\s+la\s+derni[eè]re|retour\s+en\s+arri[eè]re|undo)$/i.test(lower)) {
+        return { type: 'undo' };
+    }
+
     // ── Texte avec ponctuation ──
     let p = t;
     // Multi-mots d'abord
@@ -191,6 +289,10 @@ function processVoiceInput(raw: string): VoiceResult {
     p = p.replace(/\s+([.,;:!?\-)\]»])/g, '$1');
     p = p.replace(/([.,;:!?])([A-Za-zÀ-ÿ])/g, '$1 $2');
 
+    // V3.3.408: Convertir nombres français → chiffres
+    p = convertFrenchNumbers(p);
+    // V3.3.408: Auto-capitalisation après ponctuation
+    p = autoCapitalize(p);
     return { type: 'text', text: p };
 }
 
@@ -209,6 +311,9 @@ export interface DictaphoneAIState {
     statusMessage: string;
     lastCommand: string;
     audioLevel: number; // 0-100, niveau audio en temps réel
+    canUndo: boolean;
+    wordCount: number;
+    segmentCount: number;
 }
 
 export interface DictaphoneAIActions {
@@ -217,6 +322,8 @@ export interface DictaphoneAIActions {
     deleteWord: () => void;
     deleteWords: (count: number) => void;
     clearAll: () => void;
+    undo: () => void;
+    requestSubmit: () => void;
 }
 
 // ═══════════════════════════════════════════════════════════════
@@ -226,6 +333,7 @@ export interface DictaphoneAIActions {
 export function useDictaphoneAI(
     _text: string,
     setText: (updater: string | ((prev: string) => string)) => void,
+    onSubmitRequest?: () => void,
 ): [DictaphoneAIState, DictaphoneAIActions] {
 
     // ── État ──
@@ -239,6 +347,20 @@ export function useDictaphoneAI(
     const [statusMessage, setStatusMessage] = useState('');
     const [lastCommand, setLastCommand] = useState('');
     const [audioLevel, setAudioLevel] = useState(0);
+    const [canUndo, setCanUndo] = useState(false);
+    const [wordCount, setWordCount] = useState(0);
+    const [segmentCount, setSegmentCount] = useState(0);
+
+    // V3.3.408: Historique pour undo
+    const undoStackRef = useRef<string[]>([]);
+    const submitRequestRef = useRef(onSubmitRequest);
+    useEffect(() => { submitRequestRef.current = onSubmitRequest; }, [onSubmitRequest]);
+
+    // V3.3.408: Compter les mots
+    useEffect(() => {
+        const count = _text.trim() ? _text.trim().split(/\s+/).length : 0;
+        setWordCount(count);
+    }, [_text]);
 
     // ── Refs ──
     const isListeningRef = useRef(false);
@@ -276,19 +398,49 @@ export function useDictaphoneAI(
 
     // ── Actions d'édition ──
     const clearAll = useCallback(() => {
+        undoStackRef.current.push(_text);
+        setCanUndo(true);
         setText('');
         setLastCommand('✓ Tout effacé');
         setTimeout(() => setLastCommand(''), 2500);
+    }, [setText, _text]);
+
+    // V3.3.408: Annuler dernière action
+    const undo = useCallback(() => {
+        const prev = undoStackRef.current.pop();
+        if (prev !== undefined) {
+            setText(prev);
+            setLastCommand('↩️ Annulé');
+            setCanUndo(undoStackRef.current.length > 0);
+        } else {
+            setLastCommand('⚠️ Rien à annuler');
+        }
+        setTimeout(() => setLastCommand(''), 2500);
     }, [setText]);
 
+    // V3.3.408: Demander analyse
+    const requestSubmit = useCallback(() => {
+        if (submitRequestRef.current) {
+            setLastCommand('🚀 Analyse lancée...');
+            setTimeout(() => setLastCommand(''), 2500);
+            submitRequestRef.current();
+        }
+    }, []);
+
     const deleteWord = useCallback(() => {
-        setText((prev: string) => prev.replace(/\s*\S+\s*$/, ''));
+        setText((prev: string) => {
+            undoStackRef.current.push(prev);
+            setCanUndo(true);
+            return prev.replace(/\s*\S+\s*$/, '');
+        });
         setLastCommand('✓ Mot effacé');
         setTimeout(() => setLastCommand(''), 2500);
     }, [setText]);
 
     const deleteWords = useCallback((count: number) => {
         setText((prev: string) => {
+            undoStackRef.current.push(prev);
+            setCanUndo(true);
             let r = prev;
             for (let i = 0; i < count; i++) r = r.replace(/\s*\S+\s*$/, '');
             return r;
@@ -342,14 +494,38 @@ export function useDictaphoneAI(
                     case 'delete_words':
                         deleteWords(cmd.count);
                         break;
+                    case 'submit':
+                        requestSubmit();
+                        break;
+                    case 'new_paragraph':
+                        setText((prev: string) => prev + '\n\n');
+                        setLastCommand('✓ Nouveau paragraphe');
+                        setTimeout(() => setLastCommand(''), 2500);
+                        break;
+                    case 'undo':
+                        undo();
+                        break;
                     case 'text':
                         if (cmd.text) {
+                            // V3.3.408: Sauvegarder état pour undo avant chaque ajout
                             setText((prev: string) => {
-                                if (!prev) return cmd.text;
+                                undoStackRef.current.push(prev);
+                                if (undoStackRef.current.length > 30) undoStackRef.current.shift();
+                                setCanUndo(true);
+                                setSegmentCount(s => s + 1);
+                                if (!prev) {
+                                    // Premier segment : capitaliser la première lettre
+                                    return cmd.text.charAt(0).toUpperCase() + cmd.text.slice(1);
+                                }
                                 const startsWithPunct = /^[.,;:!?\-)\]\n»]/.test(cmd.text);
                                 const endsClean = /[\s\n]$/.test(prev);
                                 const sep = startsWithPunct || endsClean ? '' : ' ';
-                                return prev + sep + cmd.text;
+                                // Auto-capitaliser si le texte précédent se termine par . ! ?
+                                let newText = cmd.text;
+                                if (/[.!?]\s*$/.test(prev)) {
+                                    newText = newText.charAt(0).toUpperCase() + newText.slice(1);
+                                }
+                                return prev + sep + newText;
                             });
                         }
                         break;
@@ -748,7 +924,7 @@ export function useDictaphoneAI(
     }, [stopRecording]);
 
     return [
-        { isListening, isModelLoaded, isModelLoading, modelProgress, isProcessing, interimText, listenDuration, statusMessage, lastCommand, audioLevel },
-        { toggle, stop, deleteWord, deleteWords, clearAll },
+        { isListening, isModelLoaded, isModelLoading, modelProgress, isProcessing, interimText, listenDuration, statusMessage, lastCommand, audioLevel, canUndo, wordCount, segmentCount },
+        { toggle, stop, deleteWord, deleteWords, clearAll, undo, requestSubmit },
     ];
 }
