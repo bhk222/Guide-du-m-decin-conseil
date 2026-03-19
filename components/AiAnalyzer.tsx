@@ -16388,7 +16388,7 @@ const hasMultipleDistinctSites = (text: string): boolean => {
  * @param isExactMatch - Si true, cherche une correspondance exacte par nom (pour résoudre ambiguïté)
  */
 export const localExpertAnalysis = (text: string, externalKeywords?: string[], isExactMatch: boolean = false): LocalAnalysisResult => {
-    console.log('🔧 localExpertAnalysis V3.3.403 - fix inhalation toxique H2S/gaz (faux TC + faux polytrauma) → bypass respiratoire dédié');
+    console.log('🔧 localExpertAnalysis V3.3.404 - fix SDRC type I sévère (forme majeure MS/MI, comptage critères sévérité)');
 
     // 🔴 V3.3.162: NETTOYAGE TEXTE - Supprime caractères invisibles (zero-width space, etc.)
     // Ces caractères peuvent casser les regex et empêcher la détection
@@ -19564,36 +19564,111 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
     }
 
     // 🆕 V3.3.364e: BYPASS SÉQUELLES - SDRC TYPE I isolé
+    // 🔧 V3.3.404: Refonte complète — distinguer forme mineure/majeure, MS/MI, comptage critères sévérité
     const isSDRC364e = /sdrc|algodystrophie|algon[eé]urodystrophie/i.test(text);
     const isNotCausalgie364e = !/causalgie|sdrc\s*(?:de\s+)?type\s*(?:ii|2)/i.test(text);
     const noPlusSeparSDRC = !/\+/.test(text) && !/;/.test(text);
     if (isSDRC364e && isNotCausalgie364e && noPlusSeparSDRC) {
-        const isSevere = /s[eé]v[eè]re|majeur|grave|osteopor|capsul/i.test(text);
-        const isModerate = /mod[eé]r[eé]|raideur|limitation|douleur/i.test(text);
         const hasEA = /pr[eé]existant|terrain|anxio|imputab.*discut/i.test(text);
-        // 🆕 V3.3.365b: Compter critères de sévérité pour SDRC
-        let sdrcSeverityCount = 0;
-        if (/raideur.*global|global.*raideur/i.test(text)) sdrcSeverityCount++;
-        if (/(?:œd|oed|[œo]ed)[èeé]me.*chronique|chronique.*(?:œd|oed|[œo]ed)[èeé]me/i.test(text)) sdrcSeverityCount++;
-        if (/force.*nulle|pince.*nulle|pr[eé]hension.*nulle/i.test(text)) sdrcSeverityCount++;
-        if (/amyotrophie|atrophie.*musculaire/i.test(text)) sdrcSeverityCount++;
-        if (/hypersudation|cyanose|trouble.*trophique|trouble.*vasomoteur/i.test(text)) sdrcSeverityCount++;
-        const isVerySevere = isSevere || sdrcSeverityCount >= 2;
         
+        // Identifier le membre atteint
+        const isMembreSup404 = /main|poignet|doigt|[eé]paule|bras|coude|avant[\s-]?bras|phalange|m[eé]tacarp/i.test(text);
+        const isMembreInf404 = /pied|cheville|genou|hanche|jambe|cuisse|orteil|m[eé]tatars/i.test(text);
+        
+        // 🆕 V3.3.404: Comptage exhaustif des critères de sévérité SDRC
+        let sdrcSeverityCount404 = 0;
+        // Raideur sévère / articulation figée
+        if (/raideur.*(?:global|majeur|s[eé]v[eè]r|important)|global.*raideur|fig[eé]|enraidissement|griffe|main.*fig[eé]|pied.*fig[eé]/i.test(text)) sdrcSeverityCount404++;
+        // Œdème chronique/dur
+        if (/(?:œd|oed|[œo]ed)[èeé]me.*(?:chronique|dur|massif|permanent|induré)|chronique.*(?:œd|oed)[èeé]me/i.test(text)) sdrcSeverityCount404++;
+        // Perte fonctionnelle totale (préhension nulle, utilisation impossible)
+        if (/force.*nulle|pince.*nulle|pr[eé]hension.*nulle|utilisation.*impossible|totalement.*impossible|inutilisable|membre.*inutilisable|pseudo[\s-]?paralyt/i.test(text)) sdrcSeverityCount404++;
+        // Amyotrophie / atrophie musculaire
+        if (/amyotrophie|atrophie.*musculaire/i.test(text)) sdrcSeverityCount404++;
+        // Troubles trophiques cutanés (peau luisante, froide, dépilée, fine, cyanose)
+        if (/hypersudation|cyanose|trouble.*trophique|trouble.*vasomoteur|peau.*(?:luisante|froide|fine|d[eé]pil[eé]e|atrophi)|d[eé]pil[eé]|luisante/i.test(text)) sdrcSeverityCount404++;
+        // Allodynie / douleurs neuropathiques sévères / hyperesthésie
+        if (/allodynie|hyper(?:esth[eé]sie|alg[eé]sie|pathie)|douleur.*neuropathique|douleur.*(?:intense|rebelle|permanente|diffuse)|effleurement/i.test(text)) sdrcSeverityCount404++;
+        // Ostéoporose post-traumatique
+        if (/ost[eé]opor|d[eé]min[eé]ralis/i.test(text)) sdrcSeverityCount404++;
+        // Main dystonique / déformation
+        if (/dystonique|d[eé]formation|semi[\s-]?flexion|flexion.*doigt|flexum/i.test(text)) sdrcSeverityCount404++;
+        
+        // Mots-clés de sévérité directe
+        const hasSevereKeyword404 = /s[eé]v[eè]re|majeur|grave|massif|intense|rebelle|invalidant/i.test(text);
+        
+        // Déterminer forme et taux
         let sdrcRate = 10;
-        if (isVerySevere) sdrcRate = 25;
-        else if (isSevere) sdrcRate = 18;
-        else if (isModerate) sdrcRate = 12;
+        let sdrcFormeName = 'Algodystrophie (SDRC type I) - Séquelles';
+        let sdrcBaremePath = 'Algodystrophie > SDRC type I';
+        
+        if (sdrcSeverityCount404 >= 4 || (sdrcSeverityCount404 >= 3 && hasSevereKeyword404)) {
+            // FORME MAJEURE SÉVÈRE (pseudo-paralytique) → haut de fourchette
+            if (isMembreSup404) {
+                sdrcRate = sdrcSeverityCount404 >= 5 ? 45 : 40;
+                sdrcFormeName = 'Algodystrophie (SDRC type I) - Forme majeure séquellaire du membre supérieur';
+                sdrcBaremePath = 'Algodystrophie > SDRC type I > Forme majeure MS [20-50%]';
+            } else if (isMembreInf404) {
+                sdrcRate = sdrcSeverityCount404 >= 5 ? 38 : 35;
+                sdrcFormeName = 'Algodystrophie (SDRC type I) - Forme majeure séquellaire du membre inférieur';
+                sdrcBaremePath = 'Algodystrophie > SDRC type I > Forme majeure MI [15-40%]';
+            } else {
+                sdrcRate = 40;
+                sdrcFormeName = 'Algodystrophie (SDRC type I) - Forme majeure séquellaire';
+                sdrcBaremePath = 'Algodystrophie > SDRC type I > Forme majeure [20-50%]';
+            }
+        } else if (sdrcSeverityCount404 >= 2 || hasSevereKeyword404) {
+            // FORME MAJEURE MODÉRÉE → milieu de fourchette
+            if (isMembreSup404) {
+                sdrcRate = sdrcSeverityCount404 >= 3 ? 30 : 25;
+                sdrcFormeName = 'Algodystrophie (SDRC type I) - Forme majeure séquellaire du membre supérieur';
+                sdrcBaremePath = 'Algodystrophie > SDRC type I > Forme majeure MS [20-50%]';
+            } else if (isMembreInf404) {
+                sdrcRate = sdrcSeverityCount404 >= 3 ? 25 : 20;
+                sdrcFormeName = 'Algodystrophie (SDRC type I) - Forme majeure séquellaire du membre inférieur';
+                sdrcBaremePath = 'Algodystrophie > SDRC type I > Forme majeure MI [15-40%]';
+            } else {
+                sdrcRate = 25;
+                sdrcFormeName = 'Algodystrophie (SDRC type I) - Forme majeure séquellaire';
+                sdrcBaremePath = 'Algodystrophie > SDRC type I > Forme majeure [20-50%]';
+            }
+        } else if (/raideur|limitation|douleur|g[eê]ne/i.test(text)) {
+            // FORME MINEURE avec séquelles → [5-15%]
+            sdrcRate = 12;
+            sdrcFormeName = 'Algodystrophie (SDRC type I) - Forme mineure résolutive';
+            sdrcBaremePath = 'Algodystrophie > SDRC type I > Forme mineure [5-15%]';
+        } else {
+            // FORME MINEURE séquelles légères
+            sdrcRate = 8;
+            sdrcFormeName = 'Algodystrophie (SDRC type I) - Forme mineure résolutive';
+            sdrcBaremePath = 'Algodystrophie > SDRC type I > Forme mineure [5-15%]';
+        }
+        
         if (hasEA && sdrcRate > 8) sdrcRate = Math.max(sdrcRate - 3, 8);
         
-        console.log(`⚡ [V3.3.364e] BYPASS SDRC I: severe=${isSevere}, mod=${isModerate} → rate=${sdrcRate}%`);
+        // Justification détaillée
+        const sdrcCriteria404: string[] = [];
+        if (/fig[eé]|enraidissement|griffe|raideur.*(?:global|majeur|s[eé]v[eè]r)/i.test(text)) sdrcCriteria404.push('Raideur sévère / articulation figée');
+        if (/allodynie|hyper(?:esth[eé]sie|alg[eé]sie)|effleurement/i.test(text)) sdrcCriteria404.push('Allodynie / hyperesthésie');
+        if (/peau.*(?:luisante|froide|fine|d[eé]pil[eé]e)|trouble.*trophique|cyanose/i.test(text)) sdrcCriteria404.push('Troubles trophiques cutanés');
+        if (/utilisation.*impossible|inutilisable|pr[eé]hension.*nulle|force.*nulle/i.test(text)) sdrcCriteria404.push('Perte fonctionnelle totale');
+        if (/(?:œd|oed)[èeé]me.*(?:chronique|dur|massif)/i.test(text)) sdrcCriteria404.push('Œdème massif/chronique');
+        if (/douleur.*neuropathique|douleur.*(?:intense|rebelle)/i.test(text)) sdrcCriteria404.push('Douleurs neuropathiques sévères');
+        if (/semi[\s-]?flexion|dystonique|d[eé]formation/i.test(text)) sdrcCriteria404.push('Déformation positionnelle');
+        if (/ost[eé]opor|d[eé]min[eé]ralis/i.test(text)) sdrcCriteria404.push('Ostéoporose post-traumatique');
+        if (/amyotrophie|atrophie/i.test(text)) sdrcCriteria404.push('Amyotrophie');
+        
+        console.log(`⚡ [V3.3.404] BYPASS SDRC I: severityCount=${sdrcSeverityCount404}, severeKw=${hasSevereKeyword404}, MS=${isMembreSup404}, MI=${isMembreInf404} → rate=${sdrcRate}%`);
         return {
             type: 'proposal',
-            description: 'Algodystrophie (SDRC type I) - Séquelles',
-            name: 'Algodystrophie (SDRC type I) - Séquelles',
+            description: sdrcFormeName,
+            name: sdrcFormeName,
             rate: sdrcRate,
-            justification: `<strong>⚡ SDRC Type I</strong><br>• <strong>Taux : ${sdrcRate}%</strong>`,
-            path: 'Algodystrophie > SDRC type I'
+            justification: `<strong>⚡ ${sdrcFormeName}</strong><br>` +
+                (sdrcCriteria404.length > 0 ? sdrcCriteria404.map(c => `• ${c}`).join('<br>') + '<br>' : '') +
+                `• Critères de sévérité : ${sdrcSeverityCount404}/8<br>` +
+                `• <strong>Taux proposé : ${sdrcRate}%</strong>`,
+            path: sdrcBaremePath
         } as any;
     }
 
