@@ -16417,7 +16417,7 @@ const hasMultipleDistinctSites = (text: string): boolean => {
  * @param isExactMatch - Si true, cherche une correspondance exacte par nom (pour résoudre ambiguïté)
  */
 export const localExpertAnalysis = (text: string, externalKeywords?: string[], isExactMatch: boolean = false): LocalAnalysisResult => {
-    console.log('🔧 localExpertAnalysis V3.3.407 - fix brûlures faciales + cécité/atteinte cornéenne = polytrauma (pas brûlure seule)');
+    console.log('🔧 localExpertAnalysis V3.3.408 - fix faux positif amputation quand "amputation" est mentionnée en contexte négatif (sauver de l\'amputation)');
 
     // 🔴 V3.3.162: NETTOYAGE TEXTE - Supprime caractères invisibles (zero-width space, etc.)
     // Ces caractères peuvent casser les regex et empêcher la détection
@@ -18649,7 +18649,18 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
     const isOrteilOnlyAmputation = /(?:amputation|amput[eé]|perte).*orteil/i.test(text) &&
         !/(?:transm[eé]tatars|m[eé]diotars|chopart|lisfranc|d[eé]sarticulation.*cheville)/i.test(text);
     
-    if (isAmputationText && !isExactMatch && !isMultiSitePolytrauma && !isNerveLesionOnly && !hasMultipleMSPathologies && !isOrteilOnlyAmputation && !isBilateralFingerAmputation) {
+    // 🆕 V3.3.408: Exclusion des faux positifs quand "amputation" est mentionnée uniquement en contexte NÉGATIF
+    // "sauver les jambes de l'amputation" / "éviter l'amputation" / "risque d'amputation" ≠ amputation réelle
+    // Condition: (1) le mot "amputation" apparaît dans une tournure négative ET (2) aucun indicateur positif
+    // d'amputation réelle (amputé(e), moignon, prothèse de membre) n'est présent dans le texte
+    const hasNegatedAmputationContext = /(?:sauver|[eé]viter|pr[eé]venir|emp[eê]cher|risque|menace|crainte|peur)\s+(?:de\s+|d[e']\s*)?(?:l[a']\s*)?amputation|(?:sans|pas\s+d[e']?)\s*amputation/i.test(text);
+    const hasPositiveAmputationIndicator = /\bamput[eé]e?s?\b|\bmoignon\b|\bd[eé]sarticulation\b|proth[eè]se\s+(?:de\s+)?(?:membre|jambe|bras|tibial|f[eé]moral)/i.test(text);
+    const isNegatedAmputationOnly = hasNegatedAmputationContext && !hasPositiveAmputationIndicator;
+    if (isNegatedAmputationOnly) {
+        console.log('🚫 [V3.3.408] Amputation mentionnée en contexte négatif uniquement (sauver/éviter/risque) → PAS une amputation réelle');
+    }
+    
+    if (isAmputationText && !isExactMatch && !isMultiSitePolytrauma && !isNerveLesionOnly && !hasMultipleMSPathologies && !isOrteilOnlyAmputation && !isBilateralFingerAmputation && !isNegatedAmputationOnly) {
         console.log('🦿 [V3.3.229] AMPUTATION MEMBRE DÉTECTÉE → Analyse spécialisée (site unique)');
         
         // ═══════════════════════════════════════════════════════════════
