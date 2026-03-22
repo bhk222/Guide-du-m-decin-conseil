@@ -7332,11 +7332,11 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             searchTerms: ['Séquelles de prothèse totale de hanche'],
             priority: 9800
         },
-        // 🆕 V3.3.364b: TC anoxique / encéphalopathie anoxique
+        // 🆕 V3.3.364b / V3.3.409: TC anoxique / encéphalopathie anoxique / intoxication CO
         {
-            pattern: /tc\s+anoxique|enc[eé]phalopathie\s+anoxique|arr[eê]t\s+cardiaque.*(?:s[eé]quelle|cognitif|c[eé]r[eé]bral)|anoxie\s+c[eé]r[eé]bral/i,
-            context: /cognitif|ralentissement|attention|m[eé]moire|autonomie|s[eé]quelle/i,
-            searchTerms: ['Déficits cognitifs post-traumatiques (mémoire, attention, fonctions exécutives)'],
+            pattern: /tc\s+anoxique|enc[eé]phalopathie\s+(?:anoxique|toxique)|arr[eê]t\s+cardiaque.*(?:s[eé]quelle|cognitif|c[eé]r[eé]bral)|anoxie\s+c[eé]r[eé]bral|monoxyde\s+de\s+carbone|intoxication.*\bCO\b|post[\s-]?anoxique|noyaux\s+gris\s+centraux/i,
+            context: /cognitif|ralentissement|attention|m[eé]moire|autonomie|s[eé]quelle|parkinson|extrapyramidal|akin[eé]sie|noyaux.*gris|anoxique|monoxyde|\bCO\b/i,
+            searchTerms: ['Syndrome de Parkinson Post-Traumatique', 'Déficits cognitifs post-traumatiques (mémoire, attention, fonctions exécutives)'],
             priority: 9900
         },
 
@@ -14893,6 +14893,16 @@ export const detectMultipleLesions = (text: string): {
         return { isCumul: false, lesionCount: 1, keywords: [], hasAnteriorState: false, anteriorIPP: null };
     }
 
+    // 🆕 V3.3.409: EXCEPTION INTOXICATION CO / MONOXYDE DE CARBONE
+    // CO → anoxie cérébrale → syndrome parkinsonien + troubles cognitifs = UNE SEULE pathologie neurologique
+    // Les symptômes (Parkinson, cognitifs, perte d'autonomie) sont tous des manifestations de la même anoxie
+    const isCOIntoxCumul409 = /monoxyde\s+de\s+carbone|intoxication.*\bCO\b|\bCO\b.*intoxication|post[\s-]?anoxique|enc[eé]phalopathie.*(?:anoxique|toxique)/i.test(normalized);
+    const hasNeuroSequelaesCO409 = /parkinson|extrapyramidal|akin[eé]sie|cognitif|bradypsychie|d[eé]sorientation|noyaux\s+gris/i.test(normalized);
+    if (isCOIntoxCumul409 && hasNeuroSequelaesCO409) {
+        console.log('🧠 [V3.3.409] Intoxication CO + séquelles neurologiques → PAS de cumul (pathologie neurologique unique)');
+        return { isCumul: false, lesionCount: 1, keywords: [], hasAnteriorState: false, anteriorIPP: null };
+    }
+
     // 🆕 V3.3.133: Détection PRÉCOCE amputation + rupture/section tendon (AVANT normalisation complète)
     // Ex: "amputation P3 D5 avec rupture fléchisseur P2 D4" 
     // Teste sur texte original pour éviter confusion avec "vertebre dorsale D4" ajouté par normalisation
@@ -16350,6 +16360,16 @@ const hasMultipleDistinctSites = (text: string): boolean => {
         return false;
     }
     
+    // 🆕 V3.3.409: Intoxication CO / encéphalopathie anoxique → JAMAIS multi-sites
+    // CO → anoxie cérébrale → syndrome parkinsonien + troubles cognitifs + perte autonomie = MÊME pathologie
+    // Le coma, Glasgow, etc. sont des CONSÉQUENCES de l'intoxication, pas des lésions distinctes
+    const isCOAnoxicMDS409 = /monoxyde\s+de\s+carbone|intoxication.*\bco\b|post[\s-]?anoxique|enc[eé]phalopathie\s+(?:anoxique|toxique)|noyaux\s+gris\s+centraux/i.test(t);
+    const hasNeuroSeqCO409 = /parkinson|extrapyramidal|akin[eé]sie|cognitif|bradypsychie/i.test(t);
+    if (isCOAnoxicMDS409 && hasNeuroSeqCO409) {
+        console.log('🔍 [V3.3.409] Intoxication CO / encéphalopathie anoxique → NOT multi-sites (pathologie neurologique unique)');
+        return false;
+    }
+    
     // Membre supérieur (épaule, bras, avant-bras, coude, poignet, main, doigts, clavicule)
     // 🔧 V3.3.368: Ajout brûlure comme type de lésion reconnu
     if (/(?:fracture|luxation|rupture|l[eé]sion|entorse|raideur|br[uû]lure).*(?:[eé]paule|bras|avant[\s-]*bras|coude|poignet|main|radius|cubitus|ulna|hum[eé]r|clavicule|omoplate|scapho)/i.test(t) ||
@@ -16417,7 +16437,7 @@ const hasMultipleDistinctSites = (text: string): boolean => {
  * @param isExactMatch - Si true, cherche une correspondance exacte par nom (pour résoudre ambiguïté)
  */
 export const localExpertAnalysis = (text: string, externalKeywords?: string[], isExactMatch: boolean = false): LocalAnalysisResult => {
-    console.log('🔧 localExpertAnalysis V3.3.408 - fix faux positif amputation quand "amputation" est mentionnée en contexte négatif (sauver de l\'amputation)');
+    console.log('🔧 localExpertAnalysis V3.3.409 - fix intoxication CO / monoxyde de carbone → syndrome parkinsonien post-anoxique');
 
     // 🔴 V3.3.162: NETTOYAGE TEXTE - Supprime caractères invisibles (zero-width space, etc.)
     // Ces caractères peuvent casser les regex et empêcher la détection
@@ -23961,33 +23981,86 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
         console.error('Erreur handler causalgie:', e);
     }
 
-    // 🆕 V3.3.364c: HANDLER PRIORITAIRE - TC ANOXIQUE / ENCÉPHALOPATHIE ANOXIQUE
-    // Séquelles cognitives post-anoxie: "Déficits cognitifs post-traumatiques" [10, 40]
-    // Le texte contient des indicateurs de sévérité qui doivent pousser vers le haut du range
+    // 🆕 V3.3.409: HANDLER PRIORITAIRE - INTOXICATION CO / MONOXYDE DE CARBONE / ENCÉPHALOPATHIE ANOXIQUE
+    // Intoxication au CO → anoxie cérébrale → syndrome parkinsonien post-anoxique [10-100%]
+    // OU déficits cognitifs post-anoxiques [10-40%] si pas de syndrome extrapyramidal
+    // Pathologie neurologique UNIQUE (Parkinson + cognitif = même cause anoxique) → PAS de cumul
     try {
+        const isCOIntoxication409 = /monoxyde\s+de\s+carbone|intoxication.*\bCO\b|\bCO\b.*intoxication|post[\s-]?anoxique|anoxie|anoxique|noyaux\s+gris\s+centraux|enc[eé]phalopathie.*(?:anoxique|toxique|post[\s-]?anoxique)/i.test(text);
         const isTCAnoxique364c = /tc\s+anoxique|enc[eé]phalopathie\s+anoxique|arr[eê]t\s+cardiaque.*(?:s[eé]quelle|cognitif|c[eé]r[eé]bral)|anoxie\s+c[eé]r[eé]bral/i.test(text);
-        if (isTCAnoxique364c) {
-            const hasCognitiveDeficits = /cognitif|attention|m[eé]moire|ex[eé]cutif|dysex[eé]cutif|concentration|ralentissement/i.test(text);
+        
+        if (isCOIntoxication409 || isTCAnoxique364c) {
+            // Détection syndrome parkinsonien / extrapyramidal
+            const hasParkinsonSyndrome409 = /parkinson|extrapyramidal|akin[eé]sie|hypertonie.*(?:rigidit[eé]|musculaire)|rigidit[eé].*(?:musculaire|majeure)|tremblements?\s+(?:de\s+)?repos/i.test(text);
+            const hasCognitiveDeficits = /cognitif|attention|m[eé]moire|ex[eé]cutif|dysex[eé]cutif|concentration|ralentissement|bradypsychie|d[eé]sorientation/i.test(text);
+            
+            if (hasParkinsonSyndrome409) {
+                // Syndrome de Parkinson Post-Traumatique [10, 100]
+                // Severity scoring basé sur les indicateurs cliniques
+                const hasLossOfAutonomy409 = /perte.*autonomie|aide.*(?:toilette|habillage|repas)|d[eé]pendance|d[eé]ambulateur|fauteuil\s+roulant|tierce\s+personne/i.test(text);
+                const hasSevereMotor409 = /rigidit[eé]\s+(?:musculaire\s+)?majeure|hypertonie.*majeure?|akin[eé]sie|marche.*(?:impossible|tr[eè]s\s+courte)|grabataire/i.test(text);
+                const hasCognitiveSevere409 = /alt[eé]ration\s+s[eé]v[eè]re|d[eé]sorientation|bradypsychie|troubles?\s+cognitifs?.*s[eé]v[eè]re/i.test(text);
+                const hasModerateSymptoms409 = /tremblements?|rigidit[eé]|lenteur/i.test(text) && !hasSevereMotor409;
+                
+                let parkinsonRate = 50; // base
+                if (hasLossOfAutonomy409 && hasSevereMotor409 && hasCognitiveSevere409) parkinsonRate = 85;
+                else if (hasLossOfAutonomy409 && hasSevereMotor409) parkinsonRate = 80;
+                else if (hasLossOfAutonomy409) parkinsonRate = 70;
+                else if (hasSevereMotor409) parkinsonRate = 65;
+                else if (hasModerateSymptoms409 && hasCognitiveDeficits) parkinsonRate = 50;
+                else if (hasModerateSymptoms409) parkinsonRate = 40;
+                
+                const elementsHtml409: string[] = [];
+                if (isCOIntoxication409) elementsHtml409.push('Intoxication au monoxyde de carbone (CO)');
+                if (isTCAnoxique364c) elementsHtml409.push('Encéphalopathie anoxique');
+                elementsHtml409.push(`Syndrome parkinsonien post-anoxique${hasSevereMotor409 ? ' (sévère)' : ''}`);
+                if (hasCognitiveDeficits) elementsHtml409.push('Troubles cognitifs associés (bradypsychie, mémoire, désorientation)');
+                if (hasLossOfAutonomy409) elementsHtml409.push('Perte d\'autonomie (aide tierce personne)');
+                
+                console.log(`⚡ [V3.3.409] INTOX CO / PARKINSON: CO=${isCOIntoxication409}, parkinson=true, lossAutonomy=${hasLossOfAutonomy409}, severeMotor=${hasSevereMotor409}, cognitiveSevere=${hasCognitiveSevere409} → rate=${parkinsonRate}%`);
+                return {
+                    type: 'proposal',
+                    description: 'Syndrome de Parkinson Post-Traumatique',
+                    name: 'Syndrome de Parkinson Post-Traumatique',
+                    rate: parkinsonRate,
+                    justification: `<strong>⚡ Syndrome Parkinsonien Post-Anoxique</strong><br><br>` +
+                        `📋 <strong>Éléments cliniques retenus</strong> :<br>` +
+                        elementsHtml409.map(e => `&nbsp;&nbsp;• ${e}`).join('<br>') + `<br><br>` +
+                        `📖 <strong>Référence barémique</strong> :<br>` +
+                        `&nbsp;&nbsp;• Rubrique : Neurologie - Syndromes extrapyramidaux<br>` +
+                        `&nbsp;&nbsp;• Entrée : <em>"Syndrome de Parkinson Post-Traumatique"</em><br>` +
+                        `&nbsp;&nbsp;• Fourchette : [10% - 100%]<br><br>` +
+                        `💡 <strong>Taux proposé : ${parkinsonRate}%</strong> — ` +
+                        (parkinsonRate >= 80 ? 'Haut de fourchette (atteinte motrice sévère + perte d\'autonomie)' :
+                         parkinsonRate >= 60 ? 'Partie haute (dépendance partielle ou atteinte motrice majeure)' :
+                         parkinsonRate >= 40 ? 'Milieu de fourchette (atteinte modérée)' : 'Partie basse (atteinte légère)') + `<br><br>` +
+                        `⚠️ <strong>Important</strong> : Les troubles cognitifs et la perte d'autonomie font partie intégrante ` +
+                        `du syndrome parkinsonien post-anoxique. Ils ne constituent PAS des séquelles distinctes à évaluer séparément.` +
+                        (contextInfo ? contextInfo : ''),
+                    path: 'Neurologie > Syndrome de Parkinson Post-Traumatique'
+                } as any;
+            }
+            
             if (hasCognitiveDeficits) {
-                // Severity scoring: [10, 40]
+                // Déficits cognitifs post-traumatiques [10, 40] — sans Parkinson
                 const isSevere = /s[eé]v[eè]re|grave|d[eé]pendance|perte.*autonomie|majeur/i.test(text);
-                const isModerate = /mod[eé]r[eé]|ralentissement|troubles?\s+attention|partiell?e?/i.test(text);
+                const isModerate = /mod[eé]r[eé]|ralentissement|troubles?\s+attention|partiell?e?|bradypsychie/i.test(text);
                 const hasAutonomy = /autonomie\s+conserv[eé]e|autonome|ind[eé]pendant/i.test(text);
                 
-                let tcAnoxRate = 25; // base for cognitive deficits
+                let tcAnoxRate = 25;
                 if (isSevere) tcAnoxRate = 38;
                 else if (isModerate && !hasAutonomy) tcAnoxRate = 30;
                 else if (isModerate && hasAutonomy) tcAnoxRate = 25;
                 else if (!isModerate && !isSevere) tcAnoxRate = 18;
                 
-                console.log(`⚡ [V3.3.364c] TC ANOXIQUE: severe=${isSevere}, moderate=${isModerate}, autonomy=${hasAutonomy} → rate=${tcAnoxRate}%`);
+                console.log(`⚡ [V3.3.409] TC ANOXIQUE/CO: severe=${isSevere}, moderate=${isModerate}, autonomy=${hasAutonomy} → rate=${tcAnoxRate}%`);
                 return {
                     type: 'proposal',
                     description: 'Déficits cognitifs post-traumatiques (mémoire, attention, fonctions exécutives)',
                     name: 'Déficits cognitifs post-traumatiques (mémoire, attention, fonctions exécutives)',
                     rate: tcAnoxRate,
-                    justification: `<strong>⚡ TC Anoxique - Séquelles cognitives</strong><br>` +
-                        `• Encéphalopathie anoxique post-arrêt cardiaque<br>` +
+                    justification: `<strong>⚡ Encéphalopathie Anoxique - Séquelles cognitives</strong><br>` +
+                        `• ${isCOIntoxication409 ? 'Intoxication au monoxyde de carbone (CO)' : 'Encéphalopathie anoxique'}<br>` +
                         `• Fourchette barème : 10-40%<br>` +
                         `• ${isSevere ? 'Atteinte sévère (dépendance)' : isModerate ? 'Atteinte modérée (ralentissement, troubles attention)' : 'Atteinte légère'}<br>` +
                         `• ${hasAutonomy ? 'Autonomie conservée' : 'Autonomie réduite'}<br>` +
@@ -23998,7 +24071,7 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
             }
         }
     } catch (e) {
-        console.error('Erreur handler TC anoxique:', e);
+        console.error('Erreur handler TC anoxique / intox CO:', e);
     }
 
     // 🆕 V3.3.364c: HANDLER PRIORITAIRE - OSTÉONÉCROSE MULTIFOCALE
