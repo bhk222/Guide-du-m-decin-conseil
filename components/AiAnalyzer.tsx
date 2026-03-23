@@ -86,7 +86,9 @@ export const medicalSynonyms: { [key: string]: string[] } = {
   
   // Anatomie membre inférieur
   hanche: ['hanche', 'coxo-fémorale', 'articulation de la hanche', 'cotyle', 'hanche droite', 'hanche gauche', 'coxo fémorale', 'coxo fémorale', 'raideur hanche', 'limitation hanche', 'flexion hanche', 'abduction hanche', 'rotation hanche', 'claudication', 'boiterie', 'périmètre marche'],
-  genou: ['genou', 'fémoro-tibiale', 'fémoro-patellaire', 'articulation du genou', 'genou droit', 'genou gauche', 'femoro tibiale', 'femoro patellaire', 'raideur genou', 'limitation genou', 'flexion genou', 'extension genou', 'instabilité genou', 'laxite genou', 'laxite', 'laxité', 'genou instable', 'genou laxe', 'dérobements', 'dérobement genou', 'genou qui lâche', 'chondropathie', 'arthrose genou', 'épanchement'],
+  // 🔧 V3.3.410: Suppression termes génériques ('épanchement', 'laxité', 'laxite', 'chondropathie', 'dérobements')
+  // qui injectaient 'genou' dans des contextes non-genou (blast, thorax, etc.) via expandWithSynonyms
+  genou: ['genou', 'fémoro-tibiale', 'fémoro-patellaire', 'articulation du genou', 'genou droit', 'genou gauche', 'femoro tibiale', 'femoro patellaire', 'raideur genou', 'limitation genou', 'flexion genou', 'extension genou', 'instabilité genou', 'laxite genou', 'laxité genou', 'genou instable', 'genou laxe', 'dérobement genou', 'genou qui lâche', 'chondropathie genou', 'chondropathie rotulienne', 'chondropathie fémoro-patellaire', 'arthrose genou', 'épanchement genou', 'épanchement articulaire genou'],
   cheville: ['cheville', 'tibio-tarsienne', 'articulation de la cheville', 'malléolaire', 'cheville droite', 'cheville gauche', 'tibio tarsienne', 'raideur cheville', 'limitation cheville', 'dorsiflexion', 'flexion dorsale', 'flexion plantaire', 'equin', 'équin', 'instabilité cheville', 'cheville instable', 'sous-astragalienne', 'sous astragalienne', 'mortaise', 'mortaise tibiale', 'mortaise tibio-péronière', 'pilon tibial'],
   pied: ['pied', 'tarse', 'métatarse'],
   
@@ -16437,7 +16439,7 @@ const hasMultipleDistinctSites = (text: string): boolean => {
  * @param isExactMatch - Si true, cherche une correspondance exacte par nom (pour résoudre ambiguïté)
  */
 export const localExpertAnalysis = (text: string, externalKeywords?: string[], isExactMatch: boolean = false): LocalAnalysisResult => {
-    console.log('🔧 localExpertAnalysis V3.3.409 - fix intoxication CO / monoxyde de carbone → syndrome parkinsonien post-anoxique');
+    console.log('🔧 localExpertAnalysis V3.3.410 - fix blast polytrauma: genou faux positif, trachéostomie, vision dedup, édentement');
 
     // 🔴 V3.3.162: NETTOYAGE TEXTE - Supprime caractères invisibles (zero-width space, etc.)
     // Ces caractères peuvent casser les regex et empêcher la détection
@@ -20125,6 +20127,34 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
         }
     }
     
+    // 🆕 V3.3.410: COPHOSE sans dB explicite — cophose = surdité totale (>90 dB) par définition
+    // Si "cophose" apparaît dans le texte mais aucun dB n'a été capturé pour ce côté, ajouter comme séquelle
+    if (/cophose/i.test(text)) {
+        const cophoseSides = text.match(/cophose\s+(?:de\s+)?(?:l[''])?(?:oreille\s+)?(gauche|droite)/gi) || [];
+        const cophoseGeneric = /cophose/i.test(text) && cophoseSides.length === 0;
+        for (const cm of cophoseSides) {
+            const side = /gauche/i.test(cm) ? 'gauche' : 'droite';
+            const alreadyCaptured = detectedSequelae.some(s => /surdit[eé]/i.test(s.name) && new RegExp(side, 'i').test(s.name));
+            if (!alreadyCaptured) {
+                detectedSequelae.push({
+                    name: `Surdité ${side} (90 dB - cophose)`,
+                    keywords: ['surdité', 'cophose', side, '90', 'dB'],
+                    context: cm
+                });
+            }
+        }
+        if (cophoseGeneric && !detectedSequelae.some(s => /surdit[eé].*cophose/i.test(s.name))) {
+            const alreadyHasSurdite = detectedSequelae.some(s => /surdit[eé]/i.test(s.name));
+            if (!alreadyHasSurdite) {
+                detectedSequelae.push({
+                    name: 'Surdité complète (90 dB - cophose)',
+                    keywords: ['surdité', 'cophose', '90', 'dB'],
+                    context: text.match(/cophose[^.;]*/i)?.[0] || ''
+                });
+            }
+        }
+    }
+    
     // Perforation tympanique
     if (/perforation.*tympan|tympan.*perfor/i.test(text)) {
         detectedSequelae.push({
@@ -21277,12 +21307,30 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
 
     // 🆕 V3.3.387: TROUBLES DE LA MASTICATION — Séquelles maxillo-faciales
     // 🔧 V3.3.387b: Guard — exclure le simple cas dentaire (perte dents + prothèse + mastication)
-    const hasFacialTraumaContext387 = /le\s*fort|fracture.*facial|fracture.*maxill|fracture.*mandib|disjonction|enfoncement.*face|panfaci|c[eé]cit[eé]|[eé]nucl[eé]ation/i.test(text);
-    if (/trouble.*mastication|difficult[eé].*mastication|g[eê]ne.*mastication|articul[eé].*dentaire/i.test(text) && hasFacialTraumaContext387) {
+    // 🔧 V3.3.410: Ajout détection édentement total / perte dentaire étendue (alimentation liquide = sévère)
+    const hasFacialTraumaContext387 = /le\s*fort|fracture.*facial|fracture.*maxill|fracture.*mandib|disjonction|enfoncement.*face|panfaci|c[eé]cit[eé]|[eé]nucl[eé]ation|blast|explosion|d[eé]flagration/i.test(text);
+    if (/trouble.*mastication|difficult[eé].*mastication|g[eê]ne.*mastication|articul[eé].*dentaire|[eé]dentement.*(?:total|complet|subtotal)|perte.*(?:totale|compl[eè]te).*(?:dent|dentaire)|alimentation.*(?:liquide|semi.*liquide)|impossibilit[eé].*(?:m[aâ]cher|mastiquer)/i.test(text) && hasFacialTraumaContext387) {
+        const isEdentementTotal = /[eé]dentement.*(?:total|complet)|perte.*(?:totale|compl[eè]te).*(?:dent|dentaire)/i.test(text);
+        const isAlimentationLiquide = /alimentation.*(?:liquide|semi.*liquide)/i.test(text);
         detectedSequelae.push({
-            name: 'Troubles de la mastication post-traumatiques',
-            keywords: ['mastication', 'articulé dentaire', 'mâchoire', 'trouble'],
-            context: text.match(/(?:trouble|difficult[eé]|g[eê]ne).*mastication[^.;]*/i)?.[0] || text.match(/articul[eé].*dentaire[^.;]*/i)?.[0] || ''
+            name: isEdentementTotal ? (isAlimentationLiquide ? 'Édentement total avec alimentation liquide exclusive' : 'Édentement total post-traumatique') : 'Troubles de la mastication post-traumatiques',
+            keywords: ['mastication', 'articulé dentaire', 'mâchoire', 'trouble', 'édentement', 'perte dentaire', 'alimentation liquide'],
+            context: text.match(/[eé]dentement[^.;]*/i)?.[0] || text.match(/alimentation.*liquide[^.;]*/i)?.[0] || text.match(/(?:trouble|difficult[eé]|g[eê]ne).*mastication[^.;]*/i)?.[0] || text.match(/articul[eé].*dentaire[^.;]*/i)?.[0] || ''
+        });
+    }
+
+    // 🆕 V3.3.410: TRACHÉOSTOMIE / TRACHÉOTOMIE / STÉNOSE LARYNGO-TRACHÉALE
+    // Séquelle ORL/respiratoire gravissime — taux 100% si permanente, 20-100% si sténose
+    if (/trach[eé]ostomie|trach[eé]otomie|laryngostomie|canule\s+(?:permanente|d[eé]finitive|trach[eé]ale)|st[eé]nose\s+laryngo[\s-]*trach[eé]ale/i.test(text)) {
+        const isPermanente = /(?:d[eé]finitive|permanente|irr[eé]versible|port\s+permanent)/i.test(text);
+        const hasCanule = /canule/i.test(text);
+        const isStenose = /st[eé]nose\s+laryngo[\s-]*trach[eé]ale/i.test(text) && !isPermanente;
+        detectedSequelae.push({
+            name: isPermanente || hasCanule ? 'Trachéostomie définitive avec canule permanente' : 
+                  isStenose ? 'Sténose laryngo-trachéale post-traumatique' :
+                  'Trachéotomie post-traumatique',
+            keywords: ['trachéostomie', 'trachéotomie', 'laryngostomie', 'canule', 'sténose', 'laryngo-trachéale', 'dyspnée'],
+            context: text.match(/trach[eé](?:ostomie|otomie)[^.;]*/i)?.[0] || text.match(/canule[^.;]*/i)?.[0] || text.match(/st[eé]nose.*laryngo[^.;]*/i)?.[0] || ''
         });
     }
 
@@ -22462,6 +22510,53 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
                     }
                     }
                 }
+                // 🆕 V3.3.410: TRACHÉOSTOMIE / TRACHÉOTOMIE / STÉNOSE LARYNGO-TRACHÉALE
+                // Barème: "Laryngostomie ou trachéotomie" = 100% (FIXE), "Sténose laryngo-trachéale" = 20-100%
+                else if (/trach[eé](?:ostomie|otomie)|laryngostomie|canule.*(?:permanente|d[eé]finitive|trach[eé]ale)|st[eé]nose.*laryngo.*trach[eé]ale/i.test(seq.name)) {
+                    system = 'ORL';
+                    const isPermanente = /d[eé]finitive|permanente|irr[eé]versible/i.test(seq.name + ' ' + text);
+                    const hasCanule = /canule/i.test(seq.name + ' ' + text);
+                    const isStenoseOnly = /st[eé]nose.*laryngo/i.test(seq.name) && !isPermanente && !hasCanule;
+                    
+                    if (isPermanente || hasCanule) {
+                        rate = 100;
+                        explanation = 'ORL : Trachéostomie définitive avec canule permanente → IPP 100% (barème: "Laryngostomie ou trachéotomie" = taux fixe 100%)';
+                    } else if (isStenoseOnly) {
+                        // Sténose laryngo-trachéale: évaluer selon dyspnée
+                        const hasDyspneeRepos = /dyspn[eé]e.*repos|repos.*dyspn[eé]e|insuffisance.*respiratoire.*repos/i.test(text);
+                        const hasDyspneeEffort = /dyspn[eé]e.*effort|effort.*dyspn[eé]e/i.test(text);
+                        if (hasDyspneeRepos) {
+                            rate = 80; explanation = 'ORL : Sténose laryngo-trachéale avec dyspnée de repos → IPP 60-100% (barème 20-100%)';
+                        } else if (hasDyspneeEffort) {
+                            rate = 40; explanation = 'ORL : Sténose laryngo-trachéale avec dyspnée d\'effort → IPP 30-50% (barème 20-100%)';
+                        } else {
+                            rate = 25; explanation = 'ORL : Sténose laryngo-trachéale post-traumatique → IPP 20-30% (barème 20-100%)';
+                        }
+                    } else {
+                        rate = 60;
+                        explanation = 'ORL : Trachéotomie post-traumatique → IPP 40-80% (barème "Laryngostomie ou trachéotomie")';
+                    }
+                    console.log(`🫁 [V3.3.410] TRACHÉOSTOMIE détectée: permanent=${isPermanente}, canule=${hasCanule}, sténose=${isStenoseOnly} → rate=${rate}`);
+                }
+                // 🆕 V3.3.410: ÉDENTEMENT TOTAL / PERTE DENTAIRE ÉTENDUE
+                // Barème maxillo-facial: troubles mastication sévères, alimentation liquide
+                else if (/[eé]dentement|perte.*(?:totale|compl[eè]te).*dent|alimentation.*liquide/i.test(seq.name)) {
+                    system = 'FACE_OPHTALMOLOGIE';
+                    const isAlimentationLiquide = /alimentation.*(?:liquide|semi.*liquide)/i.test(seq.name + ' ' + text);
+                    const isEdentementTotal = /[eé]dentement.*(?:total|complet)/i.test(seq.name + ' ' + text);
+                    
+                    if (isEdentementTotal && isAlimentationLiquide) {
+                        rate = 30;
+                        explanation = 'Face/Mastication : Édentement total post-traumatique avec alimentation liquide exclusive → IPP 25-35% (perte fonctionnelle masticatoire complète)';
+                    } else if (isEdentementTotal) {
+                        rate = 20;
+                        explanation = 'Face/Mastication : Édentement total post-traumatique → IPP 15-25% (séquelle maxillo-faciale sévère)';
+                    } else {
+                        rate = 15;
+                        explanation = 'Face/Mastication : Troubles de la mastication post-traumatiques → IPP 10-20%';
+                    }
+                    console.log(`🦷 [V3.3.410] ÉDENTEMENT détecté: total=${isEdentementTotal}, alimentation liquide=${isAlimentationLiquide} → rate=${rate}`);
+                }
                 // 🆕 V3.3.341: ÉPILEPSIE POST-TRAUMATIQUE — séquelle neurologique à part entière
                 else if (/[ée]pilepsie/i.test(seq.name)) {
                     system = 'NEUROLOGIQUE';
@@ -22935,9 +23030,29 @@ export const localExpertAnalysis = (text: string, externalKeywords?: string[], i
                 }
                 
                 // FACE / OPHTALMOLOGIE (fracture orbite + enophtalmie + diplopie = 1 seul taux facial/oculaire)
-                else if (/fracture.*orbite|enophtalmie|diplopie/i.test(seq.name)) {
+                // 🔧 V3.3.410: Ajout énucléation, cécité, perte vision, ablation globe, phthisis bulbi, troubles mastication
+                else if (/fracture.*orbite|enophtalmie|diplopie|[eé]nucl[eé]ation|[eé]clatement.*globe|phthisis.*bulbi|atrophie.*globe|c[eé]cit[eé].*(?:compl[eè]te|totale|absolue)|perte.*(?:compl[eè]te|totale).*vision|ablation.*globe|trouble.*mastication/i.test(seq.name)) {
                     system = 'FACE_OPHTALMOLOGIE';
-                    if (/diplopie/i.test(seq.name)) {
+                    // 🆕 V3.3.410: Classification vision par sévérité
+                    if (/[eé]nucl[eé]ation|ablation.*globe|[eé]clatement.*globe/i.test(seq.name)) {
+                        const hasProthese = /proth[eè]se/i.test(seq.name + ' ' + text);
+                        if (hasProthese) {
+                            rate = 30; explanation = 'Face/Ophtalmologie : Énucléation avec prothèse oculaire → IPP 30% (barème: "Ablation ou altération du globe avec prothèse possible" 25-30%)';
+                        } else {
+                            rate = 35; explanation = 'Face/Ophtalmologie : Énucléation sans prothèse oculaire → IPP 35% (barème: "Ablation globe sans prothèse" 30-35%)';
+                        }
+                    } else if (/c[eé]cit[eé].*(?:compl[eè]te|totale|absolue)|perte.*(?:compl[eè]te|totale).*vision/i.test(seq.name)) {
+                        const isUnilateral = /un.*[oœ]eil|unilatéral|(?:gauche|droit)/i.test(seq.name + ' ' + text) && !/(?:deux|bilatéral|les\s+yeux)/i.test(seq.name);
+                        if (isUnilateral) {
+                            rate = 28; explanation = "Face/Ophtalmologie : Perte complète de la vision d'un oeil (l'autre étant normal) → IPP 28% (barème 25-30%)";
+                        } else {
+                            rate = 85; explanation = 'Face/Ophtalmologie : Cécité complète bilatérale → IPP 85% (barème 85%)';
+                        }
+                    } else if (/phthisis.*bulbi|atrophie.*globe/i.test(seq.name)) {
+                        rate = 30; explanation = 'Face/Ophtalmologie : Phthisis bulbi (atrophie du globe oculaire) → IPP 25-30%';
+                    } else if (/trouble.*mastication/i.test(seq.name)) {
+                        rate = 15; explanation = 'Face/Ophtalmologie : Troubles de la mastication post-traumatiques → IPP 10-20%';
+                    } else if (/diplopie/i.test(seq.name)) {
                         rate = 12; explanation = 'Face/Ophtalmologie : Diplopie persistante (vision double) post-fracture orbite';
                     } else {
                         rate = 10; explanation = 'Face/Ophtalmologie : Enophtalmie et fracture plancher orbite';

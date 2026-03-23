@@ -632,7 +632,8 @@ export const disabilityData: InjuryCategory[] = [
           { name: "Sténose laryngo-trachéale post-traumatique", searchTerms: ["sténose laryngo trachéale post traumatique", "traumatique post trachéale laryngo sténose", "sténose laryngo", "laryngo trachéale", "trachéale post"], rate: [20, 100], rateCriteria: { low: "Dyspnée d'effort modérée, voix conservée.", high: "Dyspnée de repos nécessitant une trachéotomie permanente." } },
           { name: "Syndrome d'apnées-hypopnées du sommeil (SAHS) post-traumatique", searchTerms: ["syndrome d'apnées hypopnées sommeil sahs post traumatique", "traumatique post sahs sommeil hypopnées d'apnées syndrome", "syndrome d'apnées", "d'apnées hypopnées", "hypopnées sommeil"], rate: [10, 30], description: "Apparition ou aggravation d'un SAHS après un traumatisme facial, mandibulaire ou crânien, confirmée par polysomnographie.", rateCriteria: { low: "SAHS modéré (IAH entre 15 et 30/h) avec somnolence diurne, bien contrôlé par orthèse d'avancée mandibulaire.", high: "SAHS sévère (IAH > 30/h) avec complications cardiovasculaires, nécessitant un traitement par Pression Positive Continue (PPC)." } },
           { name: "Troubles respiratoires (dyspnée laryngée)", searchTerms: ["troubles respiratoires dyspnée laryngée", "laryngée dyspnée respiratoires troubles", "troubles respiratoires", "respiratoires dyspnée", "dyspnée laryngée"], rate: [20, 100] },
-          { name: "Laryngostomie ou trachéotomie", searchTerms: ["laryngostomie trachéotomie"], rate: 100 },
+          // 🔧 V3.3.410: Expansion searchTerms — les anciens termes ne matchaient que le couple "laryngostomie trachéotomie"
+          { name: "Laryngostomie ou trachéotomie", searchTerms: ["laryngostomie trachéotomie", "laryngostomie", "trachéotomie", "trachéotomie permanente", "trachéostomie", "trachéostomie définitive", "canule permanente", "canule trachéale", "trachéotomie définitive"], rate: 100 },
         ]
       },
     ]
