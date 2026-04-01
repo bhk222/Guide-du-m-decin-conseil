@@ -8943,6 +8943,18 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             negativeContext: /(?:TC|traumatisme|commotion)[\s,]+l[eé]g[eè]re?|l[eé]g[eè]re?[\s,]+(?:TC|traumatisme|commotion|cr[aâ]nien)|simple.*sans/i
         },
         
+        // 🆕 V3.3.386: HÉMATOME INTRACRÂNIEN ISOLÉ (sous-dural/extradural/intracérébral)
+        // Problème: "hématome sous-dural chronique" sans contexte de séquelles (céphalées, cognitif, etc.)
+        // ne matchait aucune règle TC → tombait sur barème générique "chronique" → faux positif
+        // Solution: Expert rule dédiée avec handler __HEMATOME_INTRACRANIEN__
+        {
+            pattern: /h[eé]matome\s+(?:sous[\s-]*dural|extra[\s-]*dural|[eé]pidural|intrac[eé]r[eé]bral|intracr[aâ]nien|c[eé]r[eé]bral)/i,
+            context: /chronique|aigu|op[eé]r[eé]|drain[eé]|[eé]vacu[eé]|craniotomie|tr[eé]pan|post.*traumatique|traumatisme|s[eé]quelle|conservative?|traitement|r[eé]sorb|surveillance|hospitalisation|neuro|dure[\s-]*m[eè]re|h[eé]matome|sous[\s-]*dural|extra[\s-]*dural|intrac[eé]r[eé]bral/i,
+            searchTerms: ["__HEMATOME_INTRACRANIEN__"],
+            priority: 1019,
+            negativeContext: /(?:TC|traumatisme.*cr[aâ]nien).*(?:grave|s[eé]v[eè]re).*(?:[eé]pilepsie|syndrome.*frontal|dys[eé]x[eé]cutif|troubles?.*cognitif)/i
+        },
+        
         // === RÈGLE AMPUTATION MAIN COMPLÈTE (V3.3.36 - FIX CAS 14) ===
         // Problème CAS 14: Détecte doigts individuels (4-20%) au lieu d'amputation main complète (60%)
         // Contexte: Amputation traumatique main dominante niveau poignet + douleurs membre fantôme + dépression majeure
@@ -11406,7 +11418,8 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
                 !rule.searchTerms.includes("__MALLET_FINGER__") &&
                 !rule.searchTerms.includes("__DISCORDANCE_AMPLIFICATION__") &&
                 !rule.searchTerms.includes("__TAIE_CORNEENNE_ACUITE__") &&
-                !rule.searchTerms.includes("__CICATRICE_ISOLEE__")) {
+                !rule.searchTerms.includes("__CICATRICE_ISOLEE__") &&
+                !rule.searchTerms.includes("__HEMATOME_INTRACRANIEN__")) {
                 
                 // 🆕 V3.3.342: Si __CUMUL_TC_GRAVE__ a matché, skip les règles simples TC-related
                 // 🆕 V3.3.358: Étendu — quand TC grave cumul est détecté, TOUTES les règles simples
@@ -11843,6 +11856,58 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
                             name: `Fracture consolidée (${siteDisc}) - Discordance clinico-radiologique`,
                             rate: rateDisc,
                             path: 'Séquelles minimes'
+                        } as Injury
+                    };
+                }
+
+                // 🆕 V3.3.386: Hématome intracrânien isolé (sous-dural/extradural/intracérébral) → IPP 10-30%
+                if (rule.searchTerms.includes("__HEMATOME_INTRACRANIEN__")) {
+                    const opere = /op[eé]r[eé]|drain[eé]|[eé]vacu[eé]|craniotomie|tr[eé]pan/i.test(text);
+                    const isExtradural = /extradural|[eé]pidural/i.test(text);
+                    const isSousDural = /sous[\s-]*dural/i.test(text);
+                    const isChronique = /chronique/i.test(text);
+                    const hasDeficit = /h[eé]mipar[eé]sie|d[eé]ficit.*moteur|paralysie|aphasie/i.test(text);
+                    
+                    let rateHem: number;
+                    let explanationHem: string;
+                    
+                    if (hasDeficit) {
+                        rateHem = 35;
+                        explanationHem = 'Hématome intracrânien avec séquelles neurologiques déficitaires';
+                    } else if (opere) {
+                        rateHem = isExtradural ? 25 : 30;
+                        explanationHem = opere && isExtradural 
+                            ? 'Hématome extradural opéré (collection sang entre dure-mère et os)'
+                            : 'Hématome sous-dural/intracérébral opéré';
+                    } else if (isChronique && isSousDural) {
+                        rateHem = 15;
+                        explanationHem = 'Hématome sous-dural chronique (traitement conservateur)';
+                    } else {
+                        rateHem = 15;
+                        explanationHem = 'Hématome intracrânien (traitement conservateur)';
+                    }
+                    
+                    const typeHem = text.match(/h[eé]matome\s+(?:extradural|[eé]pidural|sous[\s-]*dural|intrac[eé]r[eé]bral|intracr[aâ]nien|c[eé]r[eé]bral)/i)?.[0] || 'Hématome intracrânien';
+                    console.log(`✅ [V3.3.386 HÉMATOME] ${typeHem} → ${rateHem}%${opere ? ' (opéré)' : ''}${isChronique ? ' (chronique)' : ''}`);
+                    return {
+                        type: 'proposal',
+                        name: `${typeHem}${opere ? ' (opéré/évacué)' : ''}${isChronique ? ' chronique' : ''}`,
+                        rate: rateHem,
+                        coefficient: 0,
+                        justification: 
+                            `<strong>🧠 HÉMATOME INTRACRÂNIEN</strong><br><br>` +
+                            `📋 <strong>Éléments retenus</strong> :<br>` +
+                            `&nbsp;&nbsp;• ${typeHem}<br>` +
+                            (isChronique ? `&nbsp;&nbsp;• Caractère chronique<br>` : '') +
+                            (opere ? `&nbsp;&nbsp;• Traitement chirurgical (opéré/évacué)<br>` : `&nbsp;&nbsp;• Traitement conservateur<br>`) +
+                            (hasDeficit ? `&nbsp;&nbsp;• Séquelles neurologiques déficitaires<br>` : '') +
+                            `<br><strong>📊 Taux IPP retenu : ${rateHem}%</strong><br><br>` +
+                            `⚖️ <strong>Référence</strong> : ${explanationHem} → IPP ${rateHem}%`,
+                        path: 'Traumatismes Crânio-Encéphaliques',
+                        injury: {
+                            name: `${typeHem}${opere ? ' (opéré/évacué)' : ''}${isChronique ? ' chronique' : ''}`,
+                            rate: rateHem,
+                            path: 'Traumatismes Crânio-Encéphaliques'
                         } as Injury
                     };
                 }
