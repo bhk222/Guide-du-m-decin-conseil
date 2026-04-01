@@ -7240,13 +7240,14 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
             priority: 10100  // Au-dessus de SANS_SEQUELLE pour ignorer les symptômes revendiqués
         },
         
-        // 🆕 V3.3.363: Cicatrice isolée (chéloïde, prurit, gêne esthétique) sans fracture/amputation = taux minime
+        // 🆕 V3.3.363: Cicatrice isolée (chéloïde, prurit, gêne esthétique, bonne/mauvaise qualité) sans fracture/amputation = taux minime
+        // 🆕 V3.3.385: Élargi context avec qualité + sites anatomiques pour capturer "cicatrice de bonne qualité de la jambe"
         {
             pattern: /cicatrice|ch[eé]lo[ïi]de|cicatriciel/i,
-            context: /prurit|g[eê]ne.*esth[eé]tique|inestht[eé]tique|ch[eé]lo[ïi]de|doulou|morsure|br[uû]lure|plaie/i,
+            context: /prurit|g[eê]ne.*esth[eé]tique|inestht[eé]tique|ch[eé]lo[ïi]de|doulou|morsure|br[uû]lure|plaie|qualit[eé]|jambe|cuisse|bras|avant[- ]bras|main|pied|cheville|thorax|abdomen|visage|face|dos|membre|genou|hanche|[eé]paule|tibia/i,
             searchTerms: ["__CICATRICE_ISOLEE__"],
             priority: 9900,
-            negativeContext: /fracture|amputation|raideur|ankylose|paralysie|section.*nerf|tendon|luxation|br[uû]lure.*(?:[eé]tendu|face|visage|cou|\d\s*[eè]me|degr[eé]|profond)|cataracte|\d{2,3}\s*%\s*(?:sc|surface|corporelle)|r[eé]animation|greffes?\s+multiples/i
+            negativeContext: /fracture|amputation|raideur|ankylose|paralysie|section.*nerf|tendon|luxation|br[uû]lure.*(?:[eé]tendu|face|visage|cou|\d\s*[eè]me|degr[eé]|profond)|cataracte|\d{2,3}\s*%\s*(?:sc|surface|corporelle)|r[eé]animation|greffes?\s+multiples|entrav|fix[eé]e?\s+[àa]\s*\d|limitation|limit[eé]e|degr[eé]s?\b/i
         },
 
         // 🆕 V3.3.364: Eczéma/dermatose professionnelle chronique
@@ -11848,14 +11849,30 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
 
                 // 🆕 V3.3.363: Cicatrice isolée → taux minime [0-5%]  
                 if (rule.searchTerms.includes("__CICATRICE_ISOLEE__")) {
-                    let rateCic = 2;
-                    if (/ch[eé]lo[ïi]de/i.test(text)) rateCic += 1;
-                    if (/prurit|d[eé]mangeaison/i.test(text)) rateCic += 1;
-                    if (/adh[eé]rent|r[eé]tractile|r[eé]traction/i.test(text)) rateCic += 2;
-                    if (/g[eê]ne.*fonctionnelle|limitation/i.test(text)) rateCic += 2;
+                    // 🆕 V3.3.385: "bonne qualité" = cicatrice bien cicatrisée → taux minimal
+                    const isBonneQualite = /bonne\s+qualit[eé]/i.test(text);
+                    let rateCic = isBonneQualite ? 1 : 2;
+                    if (!isBonneQualite) {
+                        if (/ch[eé]lo[ïi]de/i.test(text)) rateCic += 1;
+                        if (/prurit|d[eé]mangeaison/i.test(text)) rateCic += 1;
+                        if (/adh[eé]rent|r[eé]tractile|r[eé]traction/i.test(text)) rateCic += 2;
+                        if (/g[eê]ne.*fonctionnelle|limitation/i.test(text)) rateCic += 2;
+                    }
                     rateCic = Math.min(rateCic, 8);
-                    const siteCic = /jambe/i.test(text) ? 'jambe' : /cuisse/i.test(text) ? 'cuisse' : /bras/i.test(text) ? 'bras' : /main/i.test(text) ? 'main' : /visage|face/i.test(text) ? 'visage' : 'membre';
-                    console.log(`✅ [V3.3.363 CICATRICE] Cicatrice isolée ${siteCic} → ${rateCic}%`);
+                    // V3.3.385: Détection multi-sites (jambe + cuisse, etc.)
+                    const cicSites: string[] = [];
+                    if (/jambe/i.test(text)) cicSites.push('jambe');
+                    if (/cuisse/i.test(text)) cicSites.push('cuisse');
+                    if (/bras/i.test(text)) cicSites.push('bras');
+                    if (/main/i.test(text)) cicSites.push('main');
+                    if (/visage|face/i.test(text)) cicSites.push('visage');
+                    if (/genou/i.test(text)) cicSites.push('genou');
+                    if (/cheville/i.test(text)) cicSites.push('cheville');
+                    if (/pied/i.test(text)) cicSites.push('pied');
+                    if (/thorax/i.test(text)) cicSites.push('thorax');
+                    if (/abdomen/i.test(text)) cicSites.push('abdomen');
+                    const siteCic = cicSites.length > 0 ? cicSites.join(' et ') : 'membre';
+                    console.log(`✅ [V3.3.385 CICATRICE] Cicatrice isolée ${siteCic} → ${rateCic}%${isBonneQualite ? ' (bonne qualité)' : ''}`);
                     return {
                         type: 'proposal',
                         name: `Cicatrice séquellaire (${siteCic})`,
@@ -11865,6 +11882,7 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
                             `<strong>📊 CICATRICE SÉQUELLAIRE</strong><br><br>` +
                             `📋 <strong>Éléments retenus</strong> :<br>` +
                             `&nbsp;&nbsp;• Cicatrice post-traumatique<br>` +
+                            (isBonneQualite ? `&nbsp;&nbsp;• Cicatrice de bonne qualité (souple, non douloureuse, non adhérente)<br>` : '') +
                             ((/ch[eé]lo[ïi]de/i.test(text)) ? `&nbsp;&nbsp;• Caractère chéloïde<br>` : '') +
                             ((/prurit/i.test(text)) ? `&nbsp;&nbsp;• Prurit chronique<br>` : '') +
                             `<br><strong>📊 Taux IPP retenu : ${rateCic}%</strong>`,
