@@ -849,6 +849,161 @@ export const PHRASE_CORRECTIONS: [RegExp, string][] = [
 
     // ─── Nettoyage typographique ───
     [/\s{2,}/g, ' '],
+
+    // ═══════════════════════════════════════════════════════════════
+    // 🆕 V3.3.414: ENRICHISSEMENT MASSIF — confusions phonétiques Whisper
+    // ═══════════════════════════════════════════════════════════════
+
+    // ─── Arthropathies composées (Whisper split) ───
+    [/\bgon\s+arthrose\b/gi, 'gonarthrose'],
+    [/\bgone?\s+arthrose\b/gi, 'gonarthrose'],
+    [/\bcause?\s+arthrose\b/gi, 'coxarthrose'],
+    [/\bcoqs?\s+arthrose\b/gi, 'coxarthrose'],
+    [/\bcoque?\s+arthrose\b/gi, 'coxarthrose'],
+    [/\bcox\s+arthrose\b/gi, 'coxarthrose'],
+    [/\bau\s+marthrose\b/gi, 'omarthrose'],
+    [/\bhaut?\s+marthrose\b/gi, 'omarthrose'],
+    [/\bom\s+arthrose\b/gi, 'omarthrose'],
+    [/\brisa?\s+arthrose\b/gi, 'rhizarthrose'],
+    [/\brise?\s+arthrose\b/gi, 'rhizarthrose'],
+    [/\briz\s+arthrose\b/gi, 'rhizarthrose'],
+    [/\bspondil\s+arthrose\b/gi, 'spondylarthrose'],
+    [/\bspondyle?\s+arthrose\b/gi, 'spondylarthrose'],
+
+    // ─── Capsulite / Tendinite splits ───
+    [/\bcapsule?\s+it[eé]\s+r[eé]tractile\b/gi, 'capsulite rétractile'],
+    [/\bcapsule?\s+lite?\s+r[eé]tractile\b/gi, 'capsulite rétractile'],
+    [/\btend[io]n\s+it[eé]\b/gi, 'tendinite'],
+    [/\btend[io]n\s+ite?\b/gi, 'tendinite'],
+    [/\b[eé]pi\s+cond[iy]l\s+it[eé]\b/gi, 'épicondylite'],
+    [/\b[eé]pi\s+cond[iy]lite?\b/gi, 'épicondylite'],
+
+    // ─── Syndrome splits ───
+    [/\bsin\s+drome?\b/gi, 'syndrome'],
+    [/\bcin[eé]ma?\s+drome?\b/gi, 'syndrome'],
+    [/\bsyn\s+drome?\b/gi, 'syndrome'],
+    [/\bsyndrome?\s+canal\s+air[eé]?\b/gi, 'syndrome canalaire'],
+    [/\bsyndrome?\s+du\s+canal\s+carp[eé]?\s+yen\b/gi, 'syndrome du canal carpien'],
+
+    // ─── Pathologies splits fréquentes ───
+    [/\bpatho\s+logique\b/gi, 'pathologique'],
+    [/\bpatho\s+logie\b/gi, 'pathologie'],
+    [/\b[eé]pan\s+ch(?:e|eu)ment\b/gi, 'épanchement'],
+    [/\bet\s+panchement\b/gi, 'épanchement'],
+    [/\baimant?\s+chement\b/gi, 'épanchement'],
+    [/\baimant?\s+ch(?:e|eu)ment\b/gi, 'épanchement'],
+    [/\bin\s+filtr[ae]tion\b/gi, 'infiltration'],
+    [/\binfi\s+l['']?tration\b/gi, 'infiltration'],
+    [/\bkin[eé]si?\s+th[eé]rapie\b/gi, 'kinésithérapie'],
+    [/\bqui\s+naissez?\s+th[eé]rapie\b/gi, 'kinésithérapie'],
+    [/\bkin[eé]\s+si\s+th[eé]rapie\b/gi, 'kinésithérapie'],
+    [/\br[eé][eé]?\s+[eé]ducation\b/gi, 'rééducation'],
+    [/\bre\s+[eé]ducation\b/gi, 'rééducation'],
+
+    // ─── Hémarthrose / confusions "héma-" ───
+    [/\bil\s+m['']?a\s+dit\b(?=.*(?:genou|articul|ponction))/gi, 'hémarthrose'],
+    [/\bh[eé]m\s+arthrose\b/gi, 'hémarthrose'],
+    [/\b[eé]ma\s+arthrose\b/gi, 'hémarthrose'],
+    [/\bh[eé]m\s+artrose\b/gi, 'hémarthrose'],
+
+    // ─── Neurologie splits ───
+    [/\bn[eé]vr\s+algie\b/gi, 'névralgie'],
+    [/\bneuro\s+pathie\b/gi, 'neuropathie'],
+    [/\bneuro\s+logique\b/gi, 'neurologique'],
+    [/\benc[eé]phalo?\s+pathie\b/gi, 'encéphalopathie'],
+    [/\bmy[eé]lo?\s+pathie\b/gi, 'myélopathie'],
+    [/\brad[iy]culo?\s+pathie\b/gi, 'radiculopathie'],
+    [/\bpoly\s+neuro?\s+pathie\b/gi, 'polyneuropathie'],
+
+    // ─── Coude confusion "coup de" ───
+    [/\ble\s+coup\s+de\b(?=\s*(?:droit|gauche|blessé|fractur|opér|raide|ankylos))/gi, 'le coude'],
+    [/\bdu\s+coup\s+de\b(?=\s*(?:droit|gauche|blessé|fractur|opér|raide|ankylos))/gi, 'du coude'],
+    [/\bau\s+coup\s+de\b(?=\s*(?:droit|gauche|blessé|fractur|opér|raide|ankylos))/gi, 'au coude'],
+    [/\bfracture\s+du\s+coup\s+de\b/gi, 'fracture du coude'],
+
+    // ─── Infections / Inflammations ───
+    [/\bsepti\s+c[eé]mie\b/gi, 'septicémie'],
+    [/\bm[eé]ning\s+ite?\b/gi, 'méningite'],
+    [/\benc[eé]phal\s+ite?\b/gi, 'encéphalite'],
+    [/\bost[eé]o?\s+my[eé]l\s+ite?\b/gi, 'ostéomyélite'],
+    [/\barthr?\s+ite?\b/gi, 'arthrite'],
+    [/\bp[eé]ri?\s+arthr?\s+ite?\b/gi, 'périarthrite'],
+
+    // ─── Cardiologie ───
+    [/\bari?\s+thmie\b/gi, 'arythmie'],
+    [/\bfibri?\s+lation\b/gi, 'fibrillation'],
+    [/\bangio?\s+plastie\b/gi, 'angioplastie'],
+    [/\binfarc?\s+tus\b/gi, 'infarctus'],
+    [/\bp[eé]ri?\s+card\s+ite\b/gi, 'péricardite'],
+
+    // ─── Chirurgies composées ───
+    [/\bartro?\s+scopie\b/gi, 'arthroscopie'],
+    [/\bartro?\s+plastie\b/gi, 'arthroplastie'],
+    [/\bartro?\s+d[eè]se\b/gi, 'arthrodèse'],
+    [/\bost[eé]o?\s+tomie\b/gi, 'ostéotomie'],
+    [/\blast?\s+[eé]rectomie\b/gi, 'mastectomie'],
+    [/\bn[eé]fr?\s+ectomie\b/gi, 'néphrectomie'],
+    [/\bspl[eé]n?\s+ectomie\b/gi, 'splénectomie'],
+    [/\bhystère?\s+ectomie\b/gi, 'hystérectomie'],
+    [/\bprostate?\s+ectomie\b/gi, 'prostatectomie'],
+    [/\bcol[eé]c?\s+tomie\b/gi, 'colectomie'],
+    [/\blamin?\s+ectomie\b/gi, 'laminectomie'],
+    [/\bdiscec?\s+tomie\b/gi, 'discectomie'],
+    [/\bm[eé]nisc?\s+ectomie\b/gi, 'méniscectomie'],
+
+    // ─── Oncologie / Dermatologie ───
+    [/\btumeure?\b/gi, 'tumeur'],
+    [/\bm[eé]ta?\s+stase\b/gi, 'métastase'],
+    [/\bcarci?\s+nome?\b/gi, 'carcinome'],
+    [/\bsar?\s+come?\b/gi, 'sarcome'],
+    [/\blym?\s+phome?\b/gi, 'lymphome'],
+    [/\bbiop?\s+sie\b/gi, 'biopsie'],
+    [/\bpsori?\s+asis\b/gi, 'psoriasis'],
+    [/\bder?\s+matose\b/gi, 'dermatose'],
+    [/\bch[eé]lo[iï]de?\b/gi, 'chéloïde'],
+
+    // ─── Maxillo-facial / Dentaire ───
+    [/\balv[eé]ol\s+aire\b/gi, 'alvéolaire'],
+    [/\btemporo?\s+mandibul\s+aire\b/gi, 'temporo-mandibulaire'],
+    [/\bluxation\s+temporo?\s+mandibul\b/gi, 'luxation temporo-mandibulaire'],
+    [/\blocclusion\s+dent\s+air[eé]?\b/gi, 'l\'occlusion dentaire'],
+    [/\bocclusion\s+dent\s+air[eé]?\b/gi, 'occlusion dentaire'],
+    [/\bpro\s+gnathisme\b/gi, 'prognathisme'],
+    [/\br[eé]tro\s+gnathisme\b/gi, 'rétrognathisme'],
+
+    // ─── Ischion / Bassin ───
+    [/\bissue?\s+on\b(?=.*(?:bassin|assis|pubis|ischiat))/gi, 'ischion'],
+    [/\bishi?\s+on\b/gi, 'ischion'],
+    [/\bischion?\s+atique\b/gi, 'ischiatique'],
+
+    // ─── Péroné ───
+    [/\bparonn[eé]?\b/gi, 'péroné'],
+    [/\bper\s+hon[eé]?\b/gi, 'péroné'],
+    [/\bp[eé]ron[eé]e?\b/gi, 'péroné'],
+
+    // ─── Expressions rapport médical ───
+    [/\bcon\s+solide?\s+assion\b/gi, 'consolidation'],
+    [/\bim\s+put\s+abilit[eé]\b/gi, 'imputabilité'],
+    [/\bimp[uy]\s+tabilit[eé]\b/gi, 'imputabilité'],
+    [/\bpré\s+existant\b/gi, 'préexistant'],
+    [/\bpré\s+judice\b/gi, 'préjudice'],
+    [/\bin\s+d[eé]mnit[eé]\b/gi, 'indemnité'],
+    [/\bin\s+capacit[eé]\b/gi, 'incapacité'],
+    [/\bipp\b/gi, 'IPP'],
+    [/\bitt\b/gi, 'ITT'],
+    [/\baipp\b/gi, 'AIPP'],
+    [/\bdms\b/gi, 'DMS'],
+    [/\beva\b(?!\s+\d)/gi, 'EVA'],
+
+    // ─── Hallucinations supplémentaires ───
+    [/\bbonjour\s+[àa]\s+tous\b/gi, ''],
+    [/\bdans\s+cette\s+vid[eé]o\b/gi, ''],
+    [/\bcomme\s+vous\s+pouvez\s+le?\s+voir\b/gi, ''],
+    [/\bn['']oubliez?\s+pas\s+de\b/gi, ''],
+    [/\bsi\s+vous\s+(?:avez\s+)?aim[eé]\b/gi, ''],
+    [/\bactivez?\s+la\s+cloche\b/gi, ''],
+    [/\bje\s+vous\s+dis\s+[àa]\s+bient[oô]t\b/gi, ''],
+    [/\bprenez?\s+soin\s+de\s+vous\b/gi, ''],
 ];
 
 // ═══════════════════════════════════════════════════════════════
@@ -863,6 +1018,164 @@ export const WORD_CORRECTIONS: Record<string, string> = {
     'phénomiene': 'fémur',
     'fémoire': 'fémur',
     'fémure': 'fémur',
+
+    // ═══ V3.3.414: ENRICHISSEMENT MASSIF — mots manquants ═══
+    // ─── Cardiologie ───
+    'arythmie': 'arythmie',
+    'aritmie': 'arythmie',
+    'aritmi': 'arythmie',
+    'fibrilation': 'fibrillation',
+    'fibrilations': 'fibrillation',
+    'infractus': 'infarctus',
+    'infarctuce': 'infarctus',
+    'infartus': 'infarctus',
+    'angine': 'angine',
+    'coronarien': 'coronarien',
+    'coronarienne': 'coronarienne',
+    'angioplastie': 'angioplastie',
+    'angioplasti': 'angioplastie',
+    'pontage': 'pontage',
+    'stimulateur': 'stimulateur',
+    'défibrillateur': 'défibrillateur',
+    'defibrilateur': 'défibrillateur',
+    'péricardite': 'péricardite',
+    'pericardite': 'péricardite',
+    'endocardite': 'endocardite',
+    'myocardite': 'myocardite',
+    'tachycardie': 'tachycardie',
+    'bradycardie': 'bradycardie',
+    'cardiomyopathie': 'cardiomyopathie',
+    // ─── Infectiologie ───
+    'septicémie': 'septicémie',
+    'septicemie': 'septicémie',
+    'bactériémie': 'bactériémie',
+    'bacteriemie': 'bactériémie',
+    'méningite': 'méningite',
+    'meningite': 'méningite',
+    'encéphalite': 'encéphalite',
+    'encephalite': 'encéphalite',
+    'ostéomyélite': 'ostéomyélite',
+    'osteomyelite': 'ostéomyélite',
+    // ─── Oncologie ───
+    'tumeur': 'tumeur',
+    'tumeure': 'tumeur',
+    'tumeures': 'tumeurs',
+    'métastase': 'métastase',
+    'metastase': 'métastase',
+    'métastases': 'métastases',
+    'carcinome': 'carcinome',
+    'carcinôme': 'carcinome',
+    'sarcome': 'sarcome',
+    'sarcôme': 'sarcome',
+    'lymphome': 'lymphome',
+    'lymphôme': 'lymphome',
+    'biopsie': 'biopsie',
+    'biopsi': 'biopsie',
+    'mélanome': 'mélanome',
+    'melanome': 'mélanome',
+    // ─── Dermatologie ───
+    'dermite': 'dermite',
+    'dermites': 'dermites',
+    'urticaire': 'urticaire',
+    'urticères': 'urticaire',
+    'psoriasis': 'psoriasis',
+    'psoriazis': 'psoriasis',
+    'kératose': 'kératose',
+    'keratose': 'kératose',
+    'dermatose': 'dermatose',
+    'dermatoze': 'dermatose',
+    // ─── Endocrinologie ───
+    'insuline': 'insuline',
+    'glycémie': 'glycémie',
+    'glycemie': 'glycémie',
+    'hypoglycémie': 'hypoglycémie',
+    'hyperglycémie': 'hyperglycémie',
+    'goitre': 'goitre',
+    'goître': 'goitre',
+    'thyroïde': 'thyroïde',
+    'thyroide': 'thyroïde',
+    'diabète': 'diabète',
+    'diabete': 'diabète',
+    'diabétique': 'diabétique',
+    // ─── Gastro-entérologie ───
+    'colectomie': 'colectomie',
+    'colectomi': 'colectomie',
+    'gastrectomie': 'gastrectomie',
+    'cholécystectomie': 'cholécystectomie',
+    'cholecystectomie': 'cholécystectomie',
+    'appendicectomie': 'appendicectomie',
+    'appendicectomi': 'appendicectomie',
+    'péritonite': 'péritonite',
+    'peritonite': 'péritonite',
+    'occlusion': 'occlusion',
+    'éventration': 'éventration',
+    'eventration': 'éventration',
+    // ─── Maxillo-facial / Dentaire ───
+    'alvéolaire': 'alvéolaire',
+    'alveolaire': 'alvéolaire',
+    'prognathisme': 'prognathisme',
+    'rétrognathisme': 'rétrognathisme',
+    'retrognathisme': 'rétrognathisme',
+    'mandibulaire': 'mandibulaire',
+    'maxillaire': 'maxillaire',
+    'zygomatique': 'zygomatique',
+    'zigomatique': 'zygomatique',
+    'palatin': 'palatin',
+    'palatine': 'palatine',
+    'édentement': 'édentement',
+    'edentement': 'édentement',
+    // ─── Urologie / Gynécologie ───
+    'hystérectomie': 'hystérectomie',
+    'hysterectomie': 'hystérectomie',
+    'ovarienne': 'ovarienne',
+    'utérine': 'utérine',
+    'uterine': 'utérine',
+    'prostatectomie': 'prostatectomie',
+    'prostatectomi': 'prostatectomie',
+    'néphrostomie': 'néphrostomie',
+    'nephrostomie': 'néphrostomie',
+    'urostomie': 'urostomie',
+    'cystectomie': 'cystectomie',
+    // ─── Pneumologie ───
+    'pneumothorax': 'pneumothorax',
+    'pneumothoraxe': 'pneumothorax',
+    'hémothorax': 'hémothorax',
+    'hemothorax': 'hémothorax',
+    'pleurésie': 'pleurésie',
+    'pleuresie': 'pleurésie',
+    'emphysème': 'emphysème',
+    'emphyseme': 'emphysème',
+    'fibrose': 'fibrose',
+    'asbestose': 'asbestose',
+    'silicose': 'silicose',
+    'byssinose': 'byssinose',
+    'pneumoconiose': 'pneumoconiose',
+    // ─── Confusions fréquentes Whisper ───
+    'tora': 'thorax',
+    'torah': 'thorax',
+    'mattend': 'hématome',
+    'gonartrose': 'gonarthrose',
+    'coxartrose': 'coxarthrose',
+    'omartrose': 'omarthrose',
+    'rhizartrose': 'rhizarthrose',
+    'spondylartrose': 'spondylarthrose',
+    'capsulite': 'capsulite',
+    'capsulyte': 'capsulite',
+    'tendinitte': 'tendinite',
+    'tendonite': 'tendinite',
+    'tendonnite': 'tendinite',
+    'épicondilite': 'épicondylite',
+    'epicondylite': 'épicondylite',
+    'imputabilité': 'imputabilité',
+    'imputabilite': 'imputabilité',
+    'préjudice': 'préjudice',
+    'prejudice': 'préjudice',
+    'indemnité': 'indemnité',
+    'indemnite': 'indemnité',
+    'préexistant': 'préexistant',
+    'preexistant': 'préexistant',
+    'préexistante': 'préexistante',
+
     // ═══ ANATOMIE — MEMBRE SUPÉRIEUR ═══
     'facture': 'fracture',
     'factures': 'fractures',
@@ -2747,6 +3060,44 @@ const MEDICAL_TERMS_TARGET: string[] = [
     'Pouteau-Colles','Galeazzi','Monteggia','Bennett','Rolando',
     'Lisfranc','Chopart','Brown-Séquard','Horner','Duchenne','Klumpke',
     'Parkinson','Raynaud',
+    // ═══ V3.3.414: ENRICHISSEMENT MASSIF — termes phonétiques manquants ═══
+    // Cardiologie
+    'arythmie','fibrillation','infarctus','angioplastie','pontage',
+    'stimulateur','défibrillateur','tachycardie','bradycardie',
+    'cardiomyopathie','endocardite','myocardite',
+    // Infectiologie
+    'septicémie','bactériémie','méningite','encéphalite','ostéomyélite',
+    // Oncologie
+    'tumeur','tumeurs','métastase','métastases','carcinome','sarcome',
+    'lymphome','biopsie','mélanome',
+    // Dermatologie
+    'dermite','urticaire','psoriasis','kératose','dermatose',
+    // Endocrinologie
+    'insuline','glycémie','hypoglycémie','hyperglycémie','goitre','thyroïdectomie',
+    // Gastro
+    'gastrectomie','cholécystectomie','appendicectomie','péritonite',
+    'éventration',
+    // Maxillo-facial
+    'alvéolaire','prognathisme','rétrognathisme','temporo-mandibulaire',
+    'zygomatique','édentement','palatine',
+    // Urologie / Gynéco
+    'hystérectomie','ovarienne','utérine','prostatectomie',
+    'néphrostomie','urostomie','cystectomie',
+    // Pneumo
+    'pneumothorax','hémothorax','pleurésie','emphysème',
+    'asbestose','silicose','pneumoconiose','byssinose',
+    // Arthropathies composées
+    'gonarthrose','coxarthrose','omarthrose','rhizarthrose','spondylarthrose',
+    // Capsulite / Tendinite
+    'capsulite','tendinite','épicondylite','épitrochléite',
+    // Neurologie avancée
+    'radiculopathie','myélopathie','encéphalopathie','polyneuropathie',
+    // Médico-légal
+    'imputabilité','préjudice','indemnité','préexistant','préexistante',
+    'consolidation','séquellaire',
+    // Confusions connues
+    'hématome','sous-dural','extra-dural','sous-arachnoïdien',
+    'hémarthrose','épanchement','infiltration',
 ];
 
 /** Map : forme normalisée → terme correct avec accents */

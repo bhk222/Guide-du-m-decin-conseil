@@ -1,6 +1,6 @@
 /**
  * 🎤 useDictaphoneAI — Dictaphone 100% autonome via Whisper IA
- * V3.3.413 — Whisper SMALL prioritaire + anti-hallucination + meilleurs seuils audio
+ * V3.3.414 — Dictaphone complet : audio amélioré + commandes vocales étendues + anti-hallucination renforcé
  * 
  * ZÉRO dépendance externe :
  * - Modèle Whisper SMALL (auto-hébergé en local, HuggingFace CDN en production)
@@ -12,10 +12,11 @@
  * Fonctionnement :
  * 1. Modèle servi depuis public/models/ (local) ou HuggingFace CDN (production)
  * 2. WebGPU (fp16, rapide) avec fallback WASM (int8, universel)
- * 3. Capture audio micro → détecte silences → transcrit Whisper
- * 4. Correction médicale post-transcription automatique (~700+ mots + ~200+ expressions)
- * 5. Commandes vocales intelligentes (ponctuation, effacement, navigation)
+ * 3. Capture audio micro → filtre passe-haut 80Hz → détecte parole → transcrit Whisper
+ * 4. Correction médicale post-transcription automatique (~900+ mots + ~350+ expressions)
+ * 5. Commandes vocales intelligentes (ponctuation, effacement phrase/ligne/mots, navigation)
  * 6. Dictionnaire complet du barème médical (anatomie, pathologies, chirurgie, médico-légal)
+ * 7. Anti-hallucination renforcé (~70+ patterns filtrés)
  */
 
 import { useState, useRef, useCallback, useEffect } from 'react';
@@ -39,9 +40,13 @@ const MIN_AUDIO_SECONDS = 0.8;       // V3.3.413: Segments min 0.8s — évite h
 const SILENCE_CHECK_INTERVAL = 80;   // Vérification silence
 
 // Correspondance nombres français → chiffres (pour commandes vocales)
+// V3.3.414: Étendu jusqu'à 100 pour "effacer vingt mots", etc.
 const NOMBRE_FR: Record<string, number> = {
     'un': 1, 'une': 1, 'deux': 2, 'trois': 3, 'quatre': 4, 'cinq': 5,
     'six': 6, 'sept': 7, 'huit': 8, 'neuf': 9, 'dix': 10,
+    'onze': 11, 'douze': 12, 'treize': 13, 'quatorze': 14, 'quinze': 15,
+    'seize': 16, 'dix-sept': 17, 'dix-huit': 18, 'dix-neuf': 19, 'vingt': 20,
+    'trente': 30, 'quarante': 40, 'cinquante': 50,
 };
 
 // V3.3.408: Conversion nombres français → chiffres (pour le texte dicté)
@@ -247,6 +252,32 @@ const WHISPER_HALLUCINATIONS = [
     /^\s*tiens\.?\s*$/i,
     /^\d{1,2}\s*$/,
     /^\s*…+\s*$/,
+    // V3.3.414: Hallucinations Whisper observées supplémentaires (French medical context)
+    /^bonjour\s+[àa]\s+tous/i,
+    /^dans\s+cette\s+vid[eé]o/i,
+    /^bienvenue\s+sur/i,
+    /^bienvenue\s+dans/i,
+    /^aujourd[''']hui\s+(?:on|nous|je)\s+(?:va|allons|vais)/i,
+    /^salut\s+[àa]\s+tous/i,
+    /^hello\s+everyone/i,
+    /^thank\s+you\s+for\s+watching/i,
+    /^thanks\s+for\s+watching/i,
+    /^please\s+subscribe/i,
+    /^don[''']t\s+forget/i,
+    /^see\s+you\s+(?:next|in)/i,
+    /^\s*bye\.?\s*$/i,
+    /^\s*au\s+revoir\.?\s*$/i,
+    /^\s*bonne\s+journ[eé]e\.?\s*$/i,
+    /^\s*merci\s+beaucoup\.?\s*$/i,
+    /^\s*je\s+ne\s+sais\s+pas\.?\s*$/i,
+    /^\s*c[''']est\s+tout\.?\s*$/i,
+    /^\s*et\s+c[''']est\s+tout\.?\s*$/i,
+    /^sous[- ]titres?\s+r[eé]alis[eé]s?/i,
+    /^traduction/i,
+    /^\s*\.\.\.\s*$/,
+    /^\s*\*+\s*$/,
+    // Single repeated word/syllable (Whisper stuttering)
+    /^(\w{1,4})\s+\1\s+\1/i,
 ];
 
 // ═══════════════════════════════════════════════════════════════
@@ -273,8 +304,15 @@ function medicalPostCorrection(text: string): string {
     // Whisper génère parfois "[Musique]", "Je vous invite à...", etc.
     corrected = corrected.replace(/\s*[\[\(](?:Musique|musique|Music|Applaudissements|mouillage|Mouillage|bruit|Bruit|silence|Silence)[\]\)]\s*/gi, ' ');
     corrected = corrected.replace(/\.\s*(?:Je vous invite[^.]*|N'hésitez pas[^.]*|Abonnez-vous[^.]*|Merci d'avoir[^.]*|À bientôt[^.]*|et de la premi[eè]re fois[^.]*)\s*\.?\s*$/gi, '.');
-    // V3.3.394: Supprimer les mots répétés consécutifs ("avec avec" → "avec")
-    corrected = corrected.replace(/\b(\w{2,})\s+\1\b/gi, '$1');
+    // V3.3.414: Supprimer les mots répétés consécutifs SAUF nombres et termes médicaux courts
+    // "avec avec" → "avec", mais "trente trente" reste (pourrait être "30 30")
+    corrected = corrected.replace(/\b(\w{3,})\s+\1\b/gi, (match, word) => {
+        // Ne pas dédupliquer les nombres
+        if (/^\d+$/.test(word) || /^(un|une|deux|trois|quatre|cinq|six|sept|huit|neuf|dix|vingt|trente|cent)$/i.test(word)) {
+            return match;
+        }
+        return word;
+    });
     corrected = corrected.trim();
     
     // 0b. V3.3.410: Reconstruction d'apostrophes manquantes
@@ -345,6 +383,8 @@ function medicalPostCorrection(text: string): string {
 type VoiceResult =
     | { type: 'clear_all' }
     | { type: 'delete_words'; count: number }
+    | { type: 'delete_last_sentence' }
+    | { type: 'delete_last_line' }
     | { type: 'text'; text: string }
     | { type: 'submit' }
     | { type: 'new_paragraph' }
@@ -378,9 +418,14 @@ function processVoiceInput(raw: string): VoiceResult {
         return { type: 'delete_words', count: 1 };
     }
 
-    // ── Effacer dernière phrase ──
+    // ── Effacer dernière phrase ── V3.3.414: Trouve la vraie limite de phrase
     if (/^(efface[rz]?|supprime[rz]?)\s+(la\s+)?derni[eè]re\s+phrase$/.test(lower)) {
-        return { type: 'delete_words', count: 20 };
+        return { type: 'delete_last_sentence' };
+    }
+
+    // ── V3.3.414: Effacer dernière ligne ──
+    if (/^(efface[rz]?|supprime[rz]?)\s+(la\s+)?derni[eè]re\s+ligne$/.test(lower)) {
+        return { type: 'delete_last_line' };
     }
 
     // ── V3.3.408: Analyser / Envoyer (lance l'analyse) ──
@@ -549,6 +594,44 @@ export function useDictaphoneAI(
         setTimeout(() => setLastCommand(''), 2500);
     }, [setText]);
 
+    // V3.3.414: Effacer la dernière phrase (jusqu'au dernier point/!/?)
+    const deleteLastSentence = useCallback(() => {
+        setText((prev: string) => {
+            undoStackRef.current.push(prev);
+            setCanUndo(true);
+            // Trouver le dernier séparateur de phrase (. ! ?) avant le texte final
+            const trimmed = prev.trimEnd();
+            // Chercher le dernier . ! ? qui n'est pas le tout dernier caractère
+            const lastIdx = Math.max(
+                trimmed.lastIndexOf('.', trimmed.length - 2),
+                trimmed.lastIndexOf('!', trimmed.length - 2),
+                trimmed.lastIndexOf('?', trimmed.length - 2),
+            );
+            if (lastIdx > 0) {
+                return trimmed.slice(0, lastIdx + 1).trimEnd();
+            }
+            // Pas de ponctuation trouvée → effacer tout
+            return '';
+        });
+        setLastCommand('✓ Dernière phrase effacée');
+        setTimeout(() => setLastCommand(''), 2500);
+    }, [setText]);
+
+    // V3.3.414: Effacer la dernière ligne
+    const deleteLastLine = useCallback(() => {
+        setText((prev: string) => {
+            undoStackRef.current.push(prev);
+            setCanUndo(true);
+            const lastNewline = prev.lastIndexOf('\n');
+            if (lastNewline > 0) {
+                return prev.slice(0, lastNewline).trimEnd();
+            }
+            return '';
+        });
+        setLastCommand('✓ Dernière ligne effacée');
+        setTimeout(() => setLastCommand(''), 2500);
+    }, [setText]);
+
     // V3.3.408: Demander analyse
     const requestSubmit = useCallback(() => {
         if (submitRequestRef.current) {
@@ -629,6 +712,12 @@ export function useDictaphoneAI(
                     case 'delete_words':
                         deleteWords(cmd.count);
                         break;
+                    case 'delete_last_sentence':
+                        deleteLastSentence();
+                        break;
+                    case 'delete_last_line':
+                        deleteLastLine();
+                        break;
                     case 'submit':
                         requestSubmit();
                         break;
@@ -684,7 +773,7 @@ export function useDictaphoneAI(
         if (isListeningRef.current) {
             setStatusMessage('🎤 Écoute...');
         }
-    }, [getAccumulatedAudio, clearAll, deleteWords, setText]);
+    }, [getAccumulatedAudio, clearAll, deleteWords, deleteLastSentence, deleteLastLine, setText]);
 
     // ── Charger le modèle Whisper ──
     // V3.3.388: Retry logic + fallback whisper-base si whisper-small échoue
@@ -880,11 +969,13 @@ export function useDictaphoneAI(
 
                     workletNode.port.onmessage = (e: MessageEvent) => {
                         if (!isListeningRef.current) return;
-                        const { samples, rms } = e.data;
+                        const { samples, rms, isSpeechLikely } = e.data;
 
                         setAudioLevel(Math.min(100, Math.round(rms * 3000)));
 
-                        if (rms > SILENCE_THRESHOLD) {
+                        // V3.3.414: Use speech likelihood from improved audio processor
+                        // Combines RMS energy + zero-crossing rate + adaptive noise floor
+                        if (isSpeechLikely || rms > SILENCE_THRESHOLD) {
                             lastSpeechRef.current = Date.now();
                             if (!hadSpeechRef.current) {
                                 hadSpeechRef.current = true;
@@ -892,7 +983,7 @@ export function useDictaphoneAI(
                             }
                         }
 
-                        // Accumuler les samples
+                        // Accumuler les samples (already high-pass filtered by AudioWorklet)
                         const copy = new Float32Array(samples);
                         audioSamplesRef.current.push(copy);
                         totalSamplesRef.current += copy.length;
