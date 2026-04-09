@@ -55,6 +55,32 @@ export const PHRASE_CORRECTIONS: [RegExp, string][] = [
     [/\bpatient\s+âgée\s+de\b/gi, 'patient âgé de'],
     [/\bl[''']?âg[eé]e?\s+de\s+(\d)/gi, 'âgé de $1'],
 
+    // 🆕 V3.3.413: Erreurs observées en production — hématome, sous-dural, genre
+    // "il m'attend" / "il m'a tendu" → "hématome" (confusion phonétique Whisper très fréquente)
+    [/\bil\s+m['']?attend[s]?\b/gi, 'hématome'],
+    [/\bil\s+m['']?a\s+tendu\b/gi, 'hématome'],
+    [/\bun\s+il\s+m['']?attend\b/gi, 'un hématome'],
+    [/\bpr[eé]sente\s+un\s+il\s+m['']?attend\b/gi, 'présente un hématome'],
+    [/\bil\s+math[eé]matique\b/gi, 'hématome'],
+    [/\bil\s+m['']?a\s+tome?\b/gi, 'hématome'],
+    [/\b[eé]ma\s+tome?\b/gi, 'hématome'],
+    [/\bh?[eé]mat[ho]me?\b/gi, 'hématome'],
+    // "sous-dural" / "sous dural" / "extra-dural"
+    [/\bsous\s+dural[e]?\b/gi, 'sous-dural'],
+    [/\bsous\s*-?\s*dur[ae]le?\b/gi, 'sous-dural'],
+    [/\bh[eé]matome\s+sous\s+dural\b/gi, 'hématome sous-dural'],
+    [/\bh[eé]matome\s+extra\s+dural\b/gi, 'hématome extra-dural'],
+    [/\bextra\s+dural[e]?\b/gi, 'extra-dural'],
+    [/\bsous\s*-?\s*arachno[iï]dien(?:ne)?\b/gi, 'sous-arachnoïdien'],
+    // "d'21" / "d'1" → "d'un" (Whisper convertit l'article "un" en chiffre)
+    [/\bd['']21\s+patient/gi, 'd\'un patient'],
+    [/\bd['']1\s+patient/gi, 'd\'un patient'],
+    [/\bd['']21\s+/gi, 'd\'un '],
+    [/\bd['']1\s+(?!er|ère|re\b|\d)/gi, 'd\'un '],
+    // "patiente âgée" après "il s'agit d'un" = contexte masculin → corriger
+    [/\bil\s+s['']agit\s+d['']une?\s+patiente\s+âgée\s+de\b/gi, 'il s\'agit d\'un patient âgé de'],
+    [/\bd['']une?\s+patiente?\s+âgée?\s+de\s+(\d)/gi, 'd\'un patient âgé de $1'],
+
     // ─── V3.3.393: Erreurs observées en production (whisper-base) ───
     [/\bpassions?\s+[àa]\s+jus\s+de\b/gi, 'patient âgé de'],
     [/\bpassions?\s+[àa]\s+j[eu]\s+de\b/gi, 'patient âgé de'],
@@ -1079,6 +1105,18 @@ export const WORD_CORRECTIONS: Record<string, string> = {
     'contuzion': 'contusion',
     'hematome': 'hématome',
     'hémathome': 'hématome',
+    'hemathome': 'hématome',
+    'hematom': 'hématome',
+    'hématom': 'hématome',
+    'hematomme': 'hématome',
+    'hématomme': 'hématome',
+    'sous-durale': 'sous-dural',
+    'sousdural': 'sous-dural',
+    'sousdurale': 'sous-dural',
+    'extradurale': 'extra-dural',
+    'extradural': 'extra-dural',
+    'sous-arachnoïdien': 'sous-arachnoïdien',
+    'sousarachnoidien': 'sous-arachnoïdien',
     'éponchement': 'épanchement',
     'epanchement': 'épanchement',
     'synovitte': 'synovite',
