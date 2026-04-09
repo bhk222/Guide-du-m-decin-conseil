@@ -11860,35 +11860,58 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
                     };
                 }
 
-                // 🆕 V3.3.386: Hématome intracrânien isolé (sous-dural/extradural/intracérébral) → IPP 10-30%
+                // 🆕 V3.3.386 → V3.3.415: HÉMATOME INTRACRÂNIEN
+                // L'hématome sous-dural/extradural/intracérébral N'EST PAS une entrée de barème autonome.
+                // Il doit être évalué selon ses SÉQUELLES CLINIQUES réelles :
+                // - Sans déficit neurologique → "Syndrome subjectif commun des blessures du crâne" (Art. 31, Barème 1967) : 5-50%
+                // - Avec déficits → entrées spécifiques Art. 33 (hémiplégie, aphasie, etc.)
+                // - "Commotions cérébro-spinales prolongées" (Art. 31) : 5-60%
                 if (rule.searchTerms.includes("__HEMATOME_INTRACRANIEN__")) {
                     const opere = /op[eé]r[eé]|drain[eé]|[eé]vacu[eé]|craniotomie|tr[eé]pan/i.test(text);
-                    const isExtradural = /extradural|[eé]pidural/i.test(text);
-                    const isSousDural = /sous[\s-]*dural/i.test(text);
                     const isChronique = /chronique/i.test(text);
-                    const hasDeficit = /h[eé]mipar[eé]sie|d[eé]ficit.*moteur|paralysie|aphasie/i.test(text);
+                    const hasDeficit = /h[eé]mipar[eé]sie|h[eé]mipl[eé]gie|d[eé]ficit.*moteur|paralysie|aphasie|monopl[eé]gie/i.test(text);
+                    const hasCognitif = /troubles?\s+cognitif|m[eé]moire|concentration|d[eé]sorientation|confusion\s+persist/i.test(text);
+                    const hasEpilepsie = /[eé]pilepsie|comitial|convuls/i.test(text);
+                    const hasCephalees = /c[eé]phal[eé]e|maux?\s+de\s+t[eê]te|vertiges?|[eé]blouis/i.test(text);
                     
                     let rateHem: number;
-                    let explanationHem: string;
+                    let baremeRef: string;
+                    let baremeArticle: string;
                     
                     if (hasDeficit) {
-                        rateHem = 35;
-                        explanationHem = 'Hématome intracrânien avec séquelles neurologiques déficitaires';
-                    } else if (opere) {
-                        rateHem = isExtradural ? 25 : 30;
-                        explanationHem = opere && isExtradural 
-                            ? 'Hématome extradural opéré (collection sang entre dure-mère et os)'
-                            : 'Hématome sous-dural/intracérébral opéré';
-                    } else if (isChronique && isSousDural) {
-                        rateHem = 15;
-                        explanationHem = 'Hématome sous-dural chronique (traitement conservateur)';
+                        // Déficit neurologique → Art. 33 Encéphale : Hémiplégie incomplète 10-60% ou complète 70-100%
+                        const sevData = calculateSeverityAdjustment(text);
+                        const isGrave = /compl[eè]te|s[eé]v[eè]re|massif|majeur|total/i.test(text);
+                        rateHem = isGrave ? Math.round(40 + sevData.coefficient * 40) : Math.round(10 + sevData.coefficient * 30);
+                        baremeRef = 'Hémiplégie/Monoplégie organique (Art. 33 Encéphale, Barème 1967)';
+                        baremeArticle = 'Art. 33 — Encéphale';
+                    } else if (hasEpilepsie) {
+                        // Épilepsie post-traumatique → Art. 34 : 20-100%
+                        rateHem = 30;
+                        baremeRef = 'Épilepsie traumatique (Art. 34, Barème 1967) : 30-100%';
+                        baremeArticle = 'Art. 34 — Épilepsies';
+                    } else if (hasCognitif || opere) {
+                        // Troubles cognitifs ou chirurgie → "Commotions cérébro-spinales prolongées" (Art. 31) : 5-60%
+                        const sevData = calculateSeverityAdjustment(text);
+                        let coef = sevData.coefficient;
+                        if (coef > 0.5) coef = 0.5; // Cap pour fourchette large
+                        rateHem = Math.round(5 + 55 * coef);
+                        if (opere && rateHem < 15) rateHem = 15; // Min 15% si chirurgie crânienne
+                        baremeRef = 'Commotions cérébro-spinales prolongées (Art. 31 Crâne, Barème 1967) : 5-60%';
+                        baremeArticle = 'Art. 31 — Crâne';
                     } else {
-                        rateHem = 15;
-                        explanationHem = 'Hématome intracrânien (traitement conservateur)';
+                        // Hématome sans séquelle spécifique documentée → "Syndrome subjectif commun" (Art. 31) : 5-50%
+                        const sevData = calculateSeverityAdjustment(text);
+                        let coef = sevData.coefficient;
+                        if (coef > 0.5) coef = 0.5;
+                        rateHem = Math.round(5 + 45 * coef);
+                        if (isChronique && rateHem < 10) rateHem = 10; // Chronique = au moins modéré
+                        baremeRef = 'Syndrome subjectif commun des blessures du crâne (Art. 31 Crâne, Barème 1967) : 5-50%';
+                        baremeArticle = 'Art. 31 — Crâne';
                     }
                     
                     const typeHem = text.match(/h[eé]matome\s+(?:extradural|[eé]pidural|sous[\s-]*dural|intrac[eé]r[eé]bral|intracr[aâ]nien|c[eé]r[eé]bral)/i)?.[0] || 'Hématome intracrânien';
-                    console.log(`✅ [V3.3.386 HÉMATOME] ${typeHem} → ${rateHem}%${opere ? ' (opéré)' : ''}${isChronique ? ' (chronique)' : ''}`);
+                    console.log(`✅ [V3.3.415 HÉMATOME] ${typeHem} → ${rateHem}% — Réf: ${baremeArticle}`);
                     return {
                         type: 'proposal',
                         name: `${typeHem}${opere ? ' (opéré/évacué)' : ''}${isChronique ? ' chronique' : ''}`,
@@ -11901,13 +11924,17 @@ export const comprehensiveSingleLesionAnalysis = (text: string, externalKeywords
                             (isChronique ? `&nbsp;&nbsp;• Caractère chronique<br>` : '') +
                             (opere ? `&nbsp;&nbsp;• Traitement chirurgical (opéré/évacué)<br>` : `&nbsp;&nbsp;• Traitement conservateur<br>`) +
                             (hasDeficit ? `&nbsp;&nbsp;• Séquelles neurologiques déficitaires<br>` : '') +
+                            (hasCognitif ? `&nbsp;&nbsp;• Troubles cognitifs<br>` : '') +
+                            (hasEpilepsie ? `&nbsp;&nbsp;• Épilepsie post-traumatique<br>` : '') +
+                            (hasCephalees ? `&nbsp;&nbsp;• Céphalées/vertiges<br>` : '') +
                             `<br><strong>📊 Taux IPP retenu : ${rateHem}%</strong><br><br>` +
-                            `⚖️ <strong>Référence</strong> : ${explanationHem} → IPP ${rateHem}%`,
+                            `⚖️ <strong>Référence barème</strong> : ${baremeRef}`,
                         path: 'Traumatismes Crânio-Encéphaliques',
                         injury: {
                             name: `${typeHem}${opere ? ' (opéré/évacué)' : ''}${isChronique ? ' chronique' : ''}`,
                             rate: rateHem,
-                            path: 'Traumatismes Crânio-Encéphaliques'
+                            path: 'Traumatismes Crânio-Encéphaliques',
+                            article: baremeArticle
                         } as Injury
                     };
                 }
