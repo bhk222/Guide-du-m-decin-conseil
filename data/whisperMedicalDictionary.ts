@@ -146,8 +146,9 @@ export const PHRASE_CORRECTIONS: [RegExp, string][] = [
     [/\bde\s+balance\s+art?\b/gi, 'de Balthazard'],
     [/\bla\s+formation?\s+de\s+balance\s+art?\b/gi, 'la formule de Balthazard'],
     [/\bune?\s+six\s+a\s+trice?\b/gi, 'une cicatrice'],
-    // V3.3.409: fémur phonétique (protège "phénomène de Raynaud")
-    [/\bph[eé]nom[iè]?[eè]?ne?\b(?!\s+de\s+[rR]aynaud)(?=\s|$|[.,;])/gi, 'fémur'],
+    // V3.3.409: fémur phonetique
+    // V3.3.416: Supprimé remplacement blanket phénomène→fémur (détruisait le mot valide)
+    // Les contextes fracture sont gérés par les PHRASE_CORRECTIONS (lignes 44-48)
     [/\bf[eé]moire?\b/gi, 'fémur'],
     [/\bla\s+six\s+a\s+trice?\b/gi, 'la cicatrice'],
     [/\bostéo\s+scintaise\b/gi, 'ostéosynthèse'],
@@ -926,8 +927,8 @@ export const PHRASE_CORRECTIONS: [RegExp, string][] = [
     [/\bm[eé]ning\s+ite?\b/gi, 'méningite'],
     [/\benc[eé]phal\s+ite?\b/gi, 'encéphalite'],
     [/\bost[eé]o?\s+my[eé]l\s+ite?\b/gi, 'ostéomyélite'],
-    [/\barthr?\s+ite?\b/gi, 'arthrite'],
-    [/\bp[eé]ri?\s+arthr?\s+ite?\b/gi, 'périarthrite'],
+    [/\barthr\s+ite?\b/gi, 'arthrite'],
+    [/\bp[eé]ri\s+arthr\s+ite?\b/gi, 'périarthrite'],
 
     // ─── Cardiologie ───
     [/\bari?\s+thmie\b/gi, 'arythmie'],
@@ -955,7 +956,7 @@ export const PHRASE_CORRECTIONS: [RegExp, string][] = [
     [/\btumeure?\b/gi, 'tumeur'],
     [/\bm[eé]ta?\s+stase\b/gi, 'métastase'],
     [/\bcarci?\s+nome?\b/gi, 'carcinome'],
-    [/\bsar?\s+come?\b/gi, 'sarcome'],
+    [/\bsarc\s+ome?\b/gi, 'sarcome'],
     [/\blym?\s+phome?\b/gi, 'lymphome'],
     [/\bbiop?\s+sie\b/gi, 'biopsie'],
     [/\bpsori?\s+asis\b/gi, 'psoriasis'],
@@ -1177,7 +1178,8 @@ export const WORD_CORRECTIONS: Record<string, string> = {
     'préexistante': 'préexistante',
 
     // ═══ ANATOMIE — MEMBRE SUPÉRIEUR ═══
-    'facture': 'fracture',
+    // V3.3.416: Supprimé 'facture': 'fracture' ("facture" = mot valide français)
+    // Les contextes fracture sont gérés par PHRASE_CORRECTIONS
     'factures': 'fractures',
     'humus': 'humérus',
     'humeras': 'humérus',
@@ -2714,12 +2716,13 @@ export const WORD_CORRECTIONS: Record<string, string> = {
 // Attrape automatiquement : "osteosynthese" → "ostéosynthèse"
 // ═══════════════════════════════════════════════════════════════
 
-/** Normalise un mot : minuscules, sans accents, sans doubles consonnes */
+/** Normalise un mot : minuscules, sans accents, doubles consonnes spécifiques réduites */
 export function normalizePhonetic(word: string): string {
     return word
         .toLowerCase()
         .normalize('NFD').replace(/[\u0300-\u036f]/g, '')  // strip accents
-        .replace(/(.)\1+/g, '$1')                          // double→single
+        // V3.3.416: Collapse seulement doubles consonnes spécifiques (pas voyelles!)
+        .replace(/([lsnttrpfmc])\1+/g, '$1')
         .replace(/ph/g, 'f')                               // ph→f
         .replace(/th/g, 't')                                // th→t
         .replace(/y/g, 'i');                                // y→i

@@ -36,7 +36,7 @@ const SILENCE_THRESHOLD = 0.025;     // V3.3.413: Seuil RMS relevé (0.015→0.0
 const SILENCE_DURATION_MS = 900;     // V3.3.413: 900ms — laisse le temps de réfléchir sans couper la phrase
 const MAX_CHUNK_SECONDS = 10;        // V3.3.413: 10s chunks — plus de contexte pour Whisper
 const PROGRESSIVE_CHUNK_MS = 6000;   // V3.3.413: Transcription progressive toutes les 6s (pas 4s)
-const MIN_AUDIO_SECONDS = 0.8;       // V3.3.413: Segments min 0.8s — évite hallucinations sur micro-segments
+const MIN_AUDIO_SECONDS = 0.5;       // V3.3.416: 0.8→0.5s — ne pas perdre mots courts ("IRM", "point")
 const SILENCE_CHECK_INTERVAL = 80;   // Vérification silence
 
 // Correspondance nombres français → chiffres (pour commandes vocales)
@@ -191,6 +191,26 @@ function autoCapitalize(text: string): string {
     });
 }
 
+// V3.3.416: Mots français courants qui collisionnent phonétiquement avec des termes médicaux
+// Exclure du matching phonétique pour éviter corrections erronées
+const COMMON_FRENCH_SKIP = new Set([
+    'fille', 'basse', 'elle', 'taille', 'balle', 'belle', 'celle',
+    'pelle', 'folle', 'bulle', 'colle', 'molle', 'nulle', 'salle',
+    'ville', 'mille', 'grille', 'brille', 'famille', 'feuille',
+    'aiguille', 'rouille', 'souille', 'touille', 'bouille',
+    'passe', 'masse', 'classe', 'tasse', 'chasse', 'grasse',
+    'caisse', 'baisse', 'laisse', 'graisse',
+    'terre', 'guerre', 'pierre', 'tonnerre', 'verre',
+    'femme', 'comme', 'somme', 'pomme', 'homme', 'gomme',
+    'bonne', 'donne', 'sonne', 'tonne', 'couronne', 'personne',
+    'cette', 'nette', 'dette', 'palette', 'tablette',
+    'effet', 'sujet', 'objet', 'projet', 'trajet',
+    'entre', 'contre', 'notre', 'votre', 'autre',
+    'facture', 'nature', 'culture', 'structure', 'posture',
+    'partie', 'sortie', 'suite', 'route', 'toute',
+    'chose', 'cause', 'pause', 'phase',
+]);
+
 // Hallucinations Whisper courantes à filtrer
 const WHISPER_HALLUCINATIONS = [
     /^merci\s+(d'avoir|de)\s+(regard|écoute|suivi)/i,
@@ -278,6 +298,19 @@ const WHISPER_HALLUCINATIONS = [
     /^\s*\*+\s*$/,
     // Single repeated word/syllable (Whisper stuttering)
     /^(\w{1,4})\s+\1\s+\1/i,
+    // V3.3.416: Hallucinations supplémentaires identifiées par audit
+    /^je\s+vous\s+remercie/i,
+    /^pour\s+plus\s+d['''e]\s*informations/i,
+    /^retrouvez[- ]moi\s+sur/i,
+    /^la\s+suite\s+dans/i,
+    /^rendez[- ]vous\s+dans/i,
+    /^\s*ouais\.?\s*$/i,
+    /^\s*quoi\.?\s*$/i,
+    /^\s*mouais\.?\s*$/i,
+    /^\s*enfin\.?\s*$/i,
+    /^\s*genre\.?\s*$/i,
+    // Double stutter (plus souple que triple)
+    /^(\w{1,3})\s+\1\s*[.!?]?\s*$/i,
 ];
 
 // ═══════════════════════════════════════════════════════════════
@@ -304,9 +337,9 @@ function medicalPostCorrection(text: string): string {
     // Whisper génère parfois "[Musique]", "Je vous invite à...", etc.
     corrected = corrected.replace(/\s*[\[\(](?:Musique|musique|Music|Applaudissements|mouillage|Mouillage|bruit|Bruit|silence|Silence)[\]\)]\s*/gi, ' ');
     corrected = corrected.replace(/\.\s*(?:Je vous invite[^.]*|N'hésitez pas[^.]*|Abonnez-vous[^.]*|Merci d'avoir[^.]*|À bientôt[^.]*|et de la premi[eè]re fois[^.]*)\s*\.?\s*$/gi, '.');
-    // V3.3.414: Supprimer les mots répétés consécutifs SAUF nombres et termes médicaux courts
-    // "avec avec" → "avec", mais "trente trente" reste (pourrait être "30 30")
-    corrected = corrected.replace(/\b(\w{3,})\s+\1\b/gi, (match, word) => {
+    // V3.3.416: Supprimer les mots répétés consécutifs (Unicode-aware pour accents français)
+    // "avec avec" → "avec", "douleur douleur" → "douleur", mais nombres préservés
+    corrected = corrected.replace(/([\wà-ÿÀ-ÿ'-]{3,})\s+\1(?=\s|$|[.,;:!?])/gi, (match, word) => {
         // Ne pas dédupliquer les nombres
         if (/^\d+$/.test(word) || /^(un|une|deux|trois|quatre|cinq|six|sept|huit|neuf|dix|vingt|trente|cent)$/i.test(word)) {
             return match;
@@ -317,9 +350,9 @@ function medicalPostCorrection(text: string): string {
     
     // 0b. V3.3.410: Reconstruction d'apostrophes manquantes
     // Whisper omet souvent l'apostrophe: "l épaule" → "l'épaule", "d un" → "d'un"
-    // V3.3.411: Fix — "h" seulement suivi de voyelle (h muet: hôpital, humérus, hémorragie)
-    corrected = corrected.replace(/\b([ldnsjcmtLDNSJCMT])\s+(?=[aeéèêëiïîoôuùûy])/g, '$1\'');
-    corrected = corrected.replace(/\b([ldnsjcmtLDNSJCMT])\s+(?=h[aeéèêëiïîoôuùûy])/gi, '$1\'');
+    // V3.3.416: Lookbehind (?<=^|\s) — ne matche qu'après espace/début, pas après ponctuation
+    corrected = corrected.replace(/(?<=^|\s)([ldnsjcmtLDNSJCMT])\s+(?=[aeéèêëiïîoôuùûy])/g, '$1\'');
+    corrected = corrected.replace(/(?<=^|\s)([ldnsjcmtLDNSJCMT])\s+(?=h[aeéèêëiïîoôuùûy])/gi, '$1\'');
     // "Qu il" → "Qu'il"
     corrected = corrected.replace(/\b([Qq]u)\s+(?=[aeéèêëiïîoôuùûy])/g, '$1\'');
     corrected = corrected.replace(/\b([Qq]u)\s+(?=h[aeéèêëiïîoôuùûy])/gi, '$1\'');
@@ -342,8 +375,10 @@ function medicalPostCorrection(text: string): string {
             return correction;
         }
         
-        // 2b. V3.3.395: Phonetic match — normaliser et chercher dans PHONETIC_MAP (1000+ termes)
-        if (word.length >= 4) {
+        // 2b. V3.3.416: Phonetic match — normaliser et chercher dans PHONETIC_MAP (1000+ termes)
+        // Min 5 caractères pour éviter collisions sur mots courts
+        // Exclure mots français courants qui collisionnent avec termes médicaux
+        if (word.length >= 5 && !COMMON_FRENCH_SKIP.has(lower)) {
             const norm = normalizePhonetic(word);
             const phonetic = PHONETIC_MAP.get(norm);
             if (phonetic && phonetic.toLowerCase() !== lower) {
@@ -368,8 +403,8 @@ function medicalPostCorrection(text: string): string {
     corrected = corrected.replace(/\s{2,}/g, ' ');
     // Espace avant ponctuation
     corrected = corrected.replace(/\s+([.,;:!?])/g, '$1');
-    // Pas d'espace après apostrophe
-    corrected = corrected.replace(/'\s+/g, '\'');
+    // V3.3.416: Seulement après lettres de contraction connues (pas blanket)
+    corrected = corrected.replace(/([ldnsjcmtqu])'\s+/gi, '$1\'');
     // Capitaliser première lettre du texte
     corrected = corrected.replace(/^([a-zàâéèêëïîôùûüç])/, (_, l) => l.toUpperCase());
     
@@ -695,9 +730,9 @@ export function useDictaphoneAI(
                 return_timestamps: true,    // V3.3.413: Active le VAD interne Whisper — filtre le silence
                 max_new_tokens: 256,        // V3.3.413: 256 tokens pour chunks de 10s
                 // V3.3.413: Paramètres anti-hallucination critiques
-                no_speech_threshold: 0.35,              // Seuil agressif — supprime segments sans parole
+                no_speech_threshold: 0.5,               // V3.3.416: 0.35→0.5 — moins agressif pour parole douce
                 compression_ratio_threshold: 2.0,       // Filtre les répétitions hallucinées
-                logprob_threshold: -0.8,                // Rejette transcriptions peu confiantes
+                logprob_threshold: -1.0,                // V3.3.416: -0.8→-1.0 — termes médicaux ont logprob bas
             });
 
             const rawText = result?.text?.trim();
