@@ -1,6 +1,6 @@
 /**
  * 🎤 useDictaphoneAI — Dictaphone 100% autonome via Whisper IA
- * V3.3.412 — Fractions + cent pour cent + ordinals contextuels + hallucinations + confusions Whisper
+ * V3.3.413 — Whisper SMALL prioritaire + anti-hallucination + meilleurs seuils audio
  * 
  * ZÉRO dépendance externe :
  * - Modèle Whisper SMALL (auto-hébergé en local, HuggingFace CDN en production)
@@ -31,12 +31,12 @@ import {
 // ═══════════════════════════════════════════════════════════════
 
 const SAMPLE_RATE = 16000;
-const SILENCE_THRESHOLD = 0.015;     // Seuil d'énergie RMS pour détecter le silence
-const SILENCE_DURATION_MS = 600;     // V3.3.396: 600ms → détection pause rapide, dictée quasi-instantanée
-const MAX_CHUNK_SECONDS = 7;         // V3.3.396: 7s chunks courts = transcription rapide
-const PROGRESSIVE_CHUNK_MS = 4000;   // V3.3.396: Forcer transcription toutes les 4s pendant parole continue
-const MIN_AUDIO_SECONDS = 0.3;       // V3.3.396: Segments courts acceptés (0.3s)
-const SILENCE_CHECK_INTERVAL = 80;   // V3.3.396: Vérification silence plus fréquente
+const SILENCE_THRESHOLD = 0.025;     // V3.3.413: Seuil RMS relevé (0.015→0.025) — réduit faux positifs bruit ambiant
+const SILENCE_DURATION_MS = 900;     // V3.3.413: 900ms — laisse le temps de réfléchir sans couper la phrase
+const MAX_CHUNK_SECONDS = 10;        // V3.3.413: 10s chunks — plus de contexte pour Whisper
+const PROGRESSIVE_CHUNK_MS = 6000;   // V3.3.413: Transcription progressive toutes les 6s (pas 4s)
+const MIN_AUDIO_SECONDS = 0.8;       // V3.3.413: Segments min 0.8s — évite hallucinations sur micro-segments
+const SILENCE_CHECK_INTERVAL = 80;   // Vérification silence
 
 // Correspondance nombres français → chiffres (pour commandes vocales)
 const NOMBRE_FR: Record<string, number> = {
@@ -609,8 +609,12 @@ export function useDictaphoneAI(
             const result = await transcriberRef.current(audio, {
                 language: 'french',
                 task: 'transcribe',
-                return_timestamps: false,
-                max_new_tokens: 128,  // V3.3.396: 128 tokens suffisent pour chunks de 7s
+                return_timestamps: true,    // V3.3.413: Active le VAD interne Whisper — filtre le silence
+                max_new_tokens: 256,        // V3.3.413: 256 tokens pour chunks de 10s
+                // V3.3.413: Paramètres anti-hallucination critiques
+                no_speech_threshold: 0.35,              // Seuil agressif — supprime segments sans parole
+                compression_ratio_threshold: 2.0,       // Filtre les répétitions hallucinées
+                logprob_threshold: -0.8,                // Rejette transcriptions peu confiantes
             });
 
             const rawText = result?.text?.trim();
@@ -779,13 +783,13 @@ export function useDictaphoneAI(
                 return false;
             };
 
-            // V3.3.392: Stratégie inversée — whisper-base D'ABORD (~77MB, rapide)
-            // puis whisper-small en fallback. Post-correction médicale compense la différence.
+            // V3.3.413: Whisper SMALL d'abord (~150MB, 244M params, bien meilleur pour le médical français)
+            // Fallback vers whisper-base uniquement si SMALL échoue
             setStatusMessage(modelCached 
                 ? '⚡ Chargement Whisper (en cache)...' 
-                : '⏳ Téléchargement Whisper (~77MB, une seule fois)...');
+                : '⏳ Téléchargement Whisper SMALL (~150MB, une seule fois)...');
             
-            let loaded = await tryLoadModel('onnx-community/whisper-base', hasLocalModels ? 1 : 3);
+            let loaded = await tryLoadModel('onnx-community/whisper-small', hasLocalModels ? 1 : 3);
             
             // 🔧 V3.3.390: Cache-busting — si le modèle était "en cache" mais échoue, purger le cache corrompu
             if (!loaded && modelCached && !hasLocalModels) {
@@ -803,20 +807,20 @@ export function useDictaphoneAI(
                         }
                     }
                     console.log('🗑️ Cache Whisper purgé, nouvelle tentative...');
-                    setStatusMessage('⏳ Re-téléchargement Whisper (~77MB)...');
+                    setStatusMessage('⏳ Re-téléchargement Whisper SMALL (~150MB)...');
                     setModelProgress(0);
-                    loaded = await tryLoadModel('onnx-community/whisper-base', 2);
+                    loaded = await tryLoadModel('onnx-community/whisper-small', 2);
                 } catch (cacheErr) {
                     console.warn('Erreur purge cache:', cacheErr);
                 }
             }
 
-            if (!loaded && !hasLocalModels) {
-                // Fallback: whisper-small (plus gros ~150MB, meilleure qualité)
-                console.warn('⚠️ Whisper BASE échoué, fallback vers whisper-small');
-                setStatusMessage('⏳ Téléchargement Whisper SMALL (~150MB, alternative)...');
+            if (!loaded) {
+                // Fallback: whisper-base (plus petit ~77MB, qualité inférieure)
+                console.warn('⚠️ Whisper SMALL échoué, fallback vers whisper-base');
+                setStatusMessage('⏳ Téléchargement Whisper BASE (~77MB, alternative)...');
                 setModelProgress(0);
-                loaded = await tryLoadModel('onnx-community/whisper-small', 2);
+                loaded = await tryLoadModel('onnx-community/whisper-base', hasLocalModels ? 1 : 2);
             }
 
             if (loaded) {

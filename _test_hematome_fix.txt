@@ -1,0 +1,39 @@
+ΓòöΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòù
+Γòæ  TEST RUNNER UNIFI├ë ΓÇö 30 suites, 658 cas attendus             Γòæ
+ΓòÜΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓò¥
+
+  Γ£à _test_amputation_main.ts                10/ 10  (3238ms)
+  Γ£à _test_bassin_rachis.ts                  10/ 10  (3730ms)
+  Γ£à _test_jambe_cheville.ts                 10/ 10  (2067ms)
+  Γ£à _test_jambe.ts                          10/ 10  (1915ms)
+  Γ£à _test_genou_femur.ts                     8/  8  (2512ms)
+  Γ£à _test_traumatisme_cranien.ts            10/ 10  (2931ms)
+  Γ£à _test_ophtalmo.ts                       10/ 10  (2201ms)
+  Γ£à _test_ophtalmo_facial.ts                10/ 10  (2173ms)
+  Γ£à _test_membres_inferieurs.ts             10/ 10  (2085ms)
+  Γ£à _test_polytraumatismes.ts               10/ 10  (2675ms)
+  Γ£à _test_polytrauma_4sieges.ts             20/ 20  (6278ms)
+  Γ£à _test_thorax.ts                         10/ 10  (2188ms)
+  Γ£à _test_visceral.ts                       10/ 10  (2080ms)
+  Γ£à _test_visceral_2.ts                     10/ 10  (2515ms)
+  Γ£à _test_thorax_rachis.ts                  10/ 10  (5291ms)
+  Γ£à _test_jambe_genou_cuisse.ts             30/ 30  (2899ms)
+  Γ£à _test_polytrauma_MI_complexe.ts         30/ 30  (5386ms)
+  Γ£à _test_membre_superieur.ts               40/ 40  (4325ms)
+  Γ£à _test_amputation_MS.ts                  30/ 30  (2193ms)
+  Γ£à _test_polytrauma_complexe_30.ts         30/ 30  (7772ms)
+  Γ£à _test_hanche_jambe.ts                   30/ 30  (5077ms)
+  Γ£à _test_sternum_clavicule_omoplate.ts     30/ 30  (5595ms)
+  Γ£à _test_rachis_20.ts                      20/ 20  (2682ms)
+  Γ£à _test_epaule_bras_coude_avbras_poignet_70.ts  70/ 70  (5952ms)
+  Γ£à _test_main_traumatisme_20.ts            20/ 20  (4033ms)
+  Γ£à _test_pied_30.ts                        30/ 30  (3169ms)
+  Γ£à _test_cheville_pied_30.ts               30/ 30  (2170ms)
+  Γ£à _test_avant_bras_30.ts                  30/ 30  (1947ms)
+  Γ£à _test_polytrauma_40.ts                  40/ 40  (9221ms)
+  Γ£à _test_main_40.ts                        40/ 40  (5204ms)
+
+ΓòöΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòù
+Γòæ  Γ£à TOUS LES TESTS PASSENT : 658/658 (30 suites)             Γòæ
+Γòæ  Dur├⌐e totale : 111.5s                                     Γòæ
+ΓòÜΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓòÉΓò¥
