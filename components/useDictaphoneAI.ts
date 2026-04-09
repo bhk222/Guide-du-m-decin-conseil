@@ -850,16 +850,35 @@ export function useDictaphoneAI(
                                 );
                                 console.log(`✅ ${modelId} chargé via WebGPU (fp16)`);
                                 return true;
-                            } catch { /* WebGPU non dispo, fallback WASM */ }
+                            } catch (wgpuErr) {
+                                console.warn(`WebGPU échoué pour ${modelId}:`, wgpuErr);
+                            }
                         }
                         
-                        // WASM q8 (universel)
-                        transcriberRef.current = await pipeline(
-                            'automatic-speech-recognition', modelId,
-                            { device: 'wasm', dtype: 'q8', progress_callback: progressCb },
-                        );
-                        console.log(`✅ ${modelId} chargé via WASM (q8)`);
-                        return true;
+                        // WASM q8 (universel, compact)
+                        try {
+                            transcriberRef.current = await pipeline(
+                                'automatic-speech-recognition', modelId,
+                                { device: 'wasm', dtype: 'q8', progress_callback: progressCb },
+                            );
+                            console.log(`✅ ${modelId} chargé via WASM (q8)`);
+                            return true;
+                        } catch (q8Err) {
+                            console.warn(`WASM q8 échoué pour ${modelId}:`, q8Err);
+                            // V3.3.415: Fallback fp32 — certains navigateurs/versions n'ont pas les opérations q8
+                            try {
+                                setStatusMessage(`⏳ Tentative alternative (fp32)...`);
+                                transcriberRef.current = await pipeline(
+                                    'automatic-speech-recognition', modelId,
+                                    { device: 'wasm', progress_callback: progressCb },
+                                );
+                                console.log(`✅ ${modelId} chargé via WASM (fp32 default)`);
+                                return true;
+                            } catch (fp32Err) {
+                                console.warn(`WASM fp32 aussi échoué pour ${modelId}:`, fp32Err);
+                                throw fp32Err; // Re-throw pour le retry loop
+                            }
+                        }
                     } catch (e) {
                         console.warn(`❌ Tentative ${attempt}/${maxRetries} pour ${modelId}:`, e);
                         if (attempt < maxRetries) {
@@ -927,8 +946,14 @@ export function useDictaphoneAI(
             const errMsg = err instanceof Error ? err.message : String(err);
             if (errMsg.includes('SharedArrayBuffer')) {
                 setStatusMessage('❌ SharedArrayBuffer non disponible. Utilisez Chrome ou Edge.');
+            } else if (errMsg.includes('Failed to fetch') || errMsg.includes('NetworkError') || errMsg.includes('net::')) {
+                setStatusMessage('❌ Erreur réseau — vérifiez votre connexion internet et rechargez la page.');
+            } else if (errMsg.includes('WebAssembly') || errMsg.includes('wasm')) {
+                setStatusMessage('❌ WebAssembly non supporté par votre navigateur. Utilisez Chrome ou Edge récent.');
+            } else if (errMsg.includes('memory') || errMsg.includes('OOM') || errMsg.includes('allocation')) {
+                setStatusMessage('❌ Mémoire insuffisante — fermez d\'autres onglets et réessayez.');
             } else {
-                setStatusMessage('❌ Échec du téléchargement. Vérifiez votre connexion et rechargez la page.');
+                setStatusMessage(`❌ Échec du chargement Whisper: ${errMsg.slice(0, 100)}. Rechargez la page.`);
             }
             return false;
         }
